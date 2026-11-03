@@ -4,7 +4,7 @@
 
 | Turn | Claims | Marked | Mark spread |
 |---|---|---|---|
-| **1 (current)**: TB then silicosis, how each changes the other | 7 | 2 | 1 wrong as stated, 1 needs a check |
+| **1 (current)**: TB then silicosis, how each changes the other | 7 | 3 | 1 holds, 1 wrong as stated, 1 needs a check |
 | 2: where AI fails, and what the label should be | 18 | 0 | all open |
 | 3: public-data pairs with the same three regimes | 15 | 0 | all open |
 | 4: pairs that genuinely interact | 11 | 0 | all open |
@@ -12,7 +12,7 @@
 | 6: multi-label LoRA on cats and dogs | 9 | 9 | routed, not walked here |
 | 7: is there a mechanism or a context for cats and dogs | 12 | 0 | all open |
 | 8: does inclusive training generalise across seeds and pairs | 12 | 0 | all open |
-| **total** | **105** | **11** | |
+| **total** | **105** | **12** | |
 
 Load-bearing: claim 5.7, that a composition which divides out the base image distribution equals
 the true joint whenever the two labels are conditionally independent given the whole image. Every
@@ -47,12 +47,12 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.2, round 1. Claim 1.1 is marked wrong as stated and repaired into 1.7; turn 6 is
-routed elsewhere.
+Turn 1, claim 1.3, round 1. Claim 1.1 is marked wrong as stated and repaired into 1.7, 1.2 holds
+with a disjunction consequence carried to turns 5 and 7; turn 6 is routed elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 10 of 105 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 12 of 105 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -81,13 +81,25 @@ The saved answer text for this turn is empty: only the question and three screen
 claims are therefore the question's own premises plus what the three images assert.
 
 - [x] 1.1 contracting silicosis after TB changes how the silicosis presents on a radiograph — **wrong as stated**
-- [ ] 1.2 the combined condition is properly called silicotuberculosis
+- [x] 1.2 the combined condition is properly called silicotuberculosis — **holds**, and the label behind the name is a disjunction
 - [ ] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other
 - [ ] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`)
 - [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`)
 - [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
-- [ ] 1.2 the combined condition is properly called silicotuberculosis  ← current
+- [ ] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other  ← current
+
+**1.2, settled.** Mark: holds, as the name of the condition. Three fetched sources use the term
+and the Cureus title is *Silico-Tuberculosis Mimicking Malignancy*. The consequence is the round's
+real content and it is carried to claims 5.12 and 7.5, not marked here: claim 2.12 spells the label
+out as silicosis AND (active TB OR old TB damage), so one word stands for two different-looking
+chests. A product of two experts is the operator for "both", and the operator for "either" is a
+mixture, which nobody in the conversation reaches for. The three operators are already in print as
+a calculus (Du, Li and Mordatch, NeurIPS 2020, `arXiv:2004.06030`): conjunction is the sum of the
+energies (their equations 4 and 5), disjunction is the log of the sum of their exponentials (7 and
+8), negation is one energy minus a scaled other (9). Disjunction is the expensive one, because
+equation 6 needs each concept's partition function and equation 7 only works by assuming they are
+all equal, which the authors state is "not guaranteed to hold in general".
 
 **1.7, settled.** Mark: needs a check, on the asymmetry ratio in Checks outstanding. The axis is
 real (9,167 of 13,302 repeat-film patients change label) and the conversation's own pair is not
@@ -168,7 +180,7 @@ second time point per patient as an axis nobody had named.
 - [ ] 5.9 that factor measures conditional statistical dependence between the labels, not biological interaction: it can be 1 while the diseases genuinely interact, because the interaction is already inside the image distribution
 - [ ] 5.10 noising a product is not the product of the noised pieces, and the interaction factor can be nontrivial at a noisy step even when it is exactly 1 on clean images
 - [ ] 5.11 the correction to the user's Stable Diffusion account: the autoencoder makes the latent, the denoiser cross-attends to text, and the objective is noise prediction rather than per-word matching
-- [ ] 5.12 "a photo of silicoTB" and "a photo of silicosis and TB" are not guaranteed to be the same conditional, and a general-domain text encoder may represent the compound term poorly
+- [ ] 5.12 *(carries 1.2's disjunction: the label is silicosis AND (active TB OR old TB damage), and the "either" operator is a mixture, not a product)* "a photo of silicoTB" and "a photo of silicosis and TB" are not guaranteed to be the same conditional, and a general-domain text encoder may represent the compound term poorly
 - [ ] 5.13 captions that are mutually exclusive teach the model the distribution of TB-only films, not the distribution of films from patients who have TB
 - [ ] 5.14 including combined films under each single condition and dropping condition components at random fixes that, and it needs combined examples to exist
 - [ ] 5.15 two single-label probabilities of 0.5 each leave the joint anywhere from 0 to 0.5, so the relationship between the conditions is unidentified from the experts alone: an information limit, not a capacity limit
@@ -201,7 +213,7 @@ checkout, so the mark is provisional on the route file being found or rewritten.
 - [ ] 7.2 a mechanism and a context can still be defined there: spatial arrangement, occlusion or coupled poses, against scene context, positions, scale and view
 - [ ] 7.3 two things being in one image is the joint event, not an interaction mechanism
 - [ ] 7.4 captions that name only what is there and nothing else teach the model that naming a cat implies no dog
-- [ ] 7.5 sampling a subset of the true labels teaches the single conditional to include combined images, while the combined caption separately teaches the joint
+- [ ] 7.5 *(carries 1.2's disjunction, same as 5.12)* sampling a subset of the true labels teaches the single conditional to include combined images, while the combined caption separately teaches the joint
 - [ ] 7.6 that subset sampling does not make the single-concept conditional equal to the joint conditional, and should not
 - [ ] 7.7 the dropout probabilities have to match the intended dataset distribution or the learned conditionals come out distorted
 - [ ] 7.8 if both conditionals have learned that the concepts coexist and both are identifiable from the image, the base-divided composition recovers the joint, so subset-sampled conditioning may remove the need for a learned correction entirely
@@ -245,6 +257,7 @@ Navigation: ⬅️ [What the words are](#what-the-words-are) | 📋 [TOC](#table
 | Claim | What is unresolved | What would settle it |
 |---|---|---|
 | 6.1 to 6.9 | marked routed, but `plans/route-inclusive-captions-pilot.md` is in neither checkout | finding that route file under another name, or rewriting it |
+| 1.2's consequence | the conversation only ever composes by multiplying, and the condition's label contains an "either". Whether the mixture operator can be sampled here is undecided, because its own authors assume every concept's partition function is equal and say that assumption is "not guaranteed to hold in general" | answered in print: the exact calculus (`arXiv:2602.05549`, Proposition 3.1) needs the two branches of the "either" to be mutually exclusive or conditionally independent given the noisy image, and both of its disjunction rules weight each branch's score by that branch's posterior probability, so the price is a classifier over noisy images. What is still open is whether active tuberculosis and old tuberculous damage are mutually exclusive on one film. Lands in claims 5.12 and 7.5 |
 
 ## Dead ends
 
@@ -299,12 +312,16 @@ are listed so a later round does not re-fetch them blind.
 | Elango et al., *Cureus* 16(7):e65411 (2024), DOI 10.7759/cureus.65411 | the definition as plain coexistence, and the posteroanterior reference radiograph saved beside the walk under CC BY 4.0 | confident, article read in full |
 | the [NIOH short guide](https://www.nioh.ac.za/teaching-training/training-and-learning-repository-of-materials-on-the-radiology-of-silicotuberculosis/short-guide-on-the-radiologic-features-of-silicosis-and-silicotuberculosis-combined-disease/) to the radiology of the combined disease | the list of features that favour tuberculosis over silicosis, and the statement that order of onset is not discussed while change over time is | likely but verify: the fetched page carried unrelated advertising and a 404 fragment, so the host may be serving injected content |
 | Ehrlich et al., *Silicotuberculosis: a critical narrative review*, Eur Respir Rev 33(174):240168 | the definition covering all temporal sequences and including post-tuberculous lung disease | can name the source only: both the publisher and PubMed Central refused the fetch, so this is the search engine's summary of it, unread |
+| Du, Li and Mordatch, *Compositional Visual Generation with Energy Based Models*, NeurIPS 2020, `arXiv:2004.06030` | the three logical operators as a calculus over energies: conjunction at equations 4 and 5, disjunction at 6 to 8, negation at 9, with the equal-partition-function assumption the disjunction needs | confident, section 3 read as extracted text |
+| Alesiani, Warrell, Bien, Christiansen, Ferraz and Niepert, *Logical Guidance for the Exact Composition of Diffusion Models*, `arXiv:2602.05549` (v2, 23 March 2026) | the exact Boolean calculus for diffusion guidance, and its sufficient condition: conjunctions over conditionally independent subformulas, disjunctions over subformulas that are conditionally independent or mutually exclusive | confident, abstract and sections 2 to 3 read as extracted text |
+| Gaudi, Sreekumar and Boddeti, *CoInD: Enabling Logical Compositions in Diffusion Models*, `arXiv:2503.01145` | trains the conditional-independence violation down rather than assuming it, which is the precondition the exact calculus needs | confident, already in this repo's literature notes |
 | the ILO 2022 classification standard radiographs, `ilo.org/radiographs` | free standard films for profusion scoring, named by the NIOH guide as the comparison set | likely but verify, not yet fetched |
 
 ## Next step
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 1.2, round 1: whether the combined condition is properly called silicotuberculosis. Three
-fetched sources already use the term, so the round is about what the term commits a label to
-rather than about whether it exists.
+Claim 1.3, round 1: whether the posteroanterior film shows scarring on one side and progressive
+massive fibrosis on the other. The saved screenshot is gone, so the round is about whether the
+claim is checkable at all against the Cureus radiograph beside the walk, which shows both patterns
+in the same chest rather than one per side.
