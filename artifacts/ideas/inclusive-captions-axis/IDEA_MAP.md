@@ -7,7 +7,7 @@
 | 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | two reads, both live again: the dog-present render count under A against B, scored by the CLIP crop call rather than by a detector query, and the held-out denoising loss on 8 unseen both-animal photos. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
 | 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
-| **4 (current). LoRA C, as written, is a distinct ablation** | **wrong as stated** | **repaired: C fixes one caption per both-animal photo for the whole run at B's shares, so C against B isolates resampling per draw from the share of dog-present draws** |
+| **4 (current). LoRA C, as written, is a distinct ablation** | **wrong as stated, no clean repair** | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
 | 5. The LoRA with no both-animal photos is rung 11b's share-zero point | open | |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
 
@@ -283,13 +283,25 @@ the idea actually claims. If B and C match, the gain is the share of dog-present
 the resampling is bookkeeping, which is a cheaper recipe and a weaker story. A null here does not
 touch claim 1 or claim 2; it narrows the explanation.
 
-**What it costs.** C's 200 photos are split once, so a single unlucky split can land the easiest
-both-animal photos in the cat group. The split is seeded and recorded with the arm, and the risk
-scales down if the pilot ever runs C twice on two splits.
+**The repair does not hold either, and this is the finding.** Fixing one caption per photo
+matches B's number of cat-captioned dog-present draws, and it cannot match how many different
+photos those draws come from. Over a run, B shows the cat condition all 200 both-animal photos,
+each one occasionally. C shows it the same 50 photos over and over. So C against B is still two
+things at once: whether a photo is ever seen under two names, and whether the cat condition meets
+200 dog-present scenes or 50. The two cannot be separated by any assignment rule, because matching
+the variety means captioning every photo "cat" at some point, which is the resampling the arm
+exists to remove.
 
-**What this does not settle.** Whether C is worth a quarter of the GPU budget at all. It is the
-only arm that tests the mechanism rather than the effect, and it is also the only arm the pilot
-could drop and still answer claims 1 and 2. That call belongs to claim 6.
+**What is left, and the recommendation.** Three options. Keep C and state the confound, which buys
+a result about fixed captioning as a whole rather than about multi-naming. Keep C and match
+variety instead of draws by giving all 200 photos a fixed caption, which changes the shares and so
+breaks the comparison in the other direction. Or drop C and spend its quarter of the budget on a
+second training seed for A and B, which buys the run-to-run band that claim 3's amplification
+argument says the comparison needs. The third is the recommendation: a confounded third arm is
+worth less than knowing how big the noise is on the two arms that carry the claims.
+
+**Where the decision belongs.** Claim 6, with the seed counts. The design table keeps C's row so
+the option stays costed, marked as the arm the pilot may drop.
 
 ### 5. ⬜ The LoRA with no both-animal photos is rung 11b's share-zero point
 
@@ -311,7 +323,7 @@ it.
 | base SDXL | none | none | none | none | 0 | tbd (claim 6) |
 | A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | tbd (claim 6) |
 | B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | tbd (claim 6) |
-| C | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty | 10% | 2,000 | tbd (claim 6) |
+| C (droppable, see claim 4) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | tbd (claim 6) |
 | no-both | same 300 | same 300 | none | 10% | 2,000 | tbd (claim 6) |
 
 ## What the words are
