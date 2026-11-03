@@ -8,8 +8,8 @@
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
 | 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
 | 4. LoRA C, as written, is a distinct ablation | wrong as stated, settled | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
-| **5 (current). The LoRA with no both-animal photos is rung 11b's share-zero point** | **wrong as stated** | **repaired: 200 photos holding neither animal replace the removed both-animal photos, so every arm trains on 800 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
-| 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
+| 5. The LoRA with no both-animal photos is rung 11b's share-zero point | wrong as stated, settled | **repaired: 200 photos holding neither animal replace the removed both-animal photos, so every arm trains on 800 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
+| **6 (current). The pilot runs as specified on COCO, the scorer and one day of GPU** | **wrong as stated** | **repaired: about 9 GPU hours once the pieces exist, but the trainer the pilot needs is not in this repo and writing it is the real cost. Seeds fixed at 128 for A and B, 48 for the rest** |
 
 Load-bearing: claim 1. The idea dies without it. Claim 2 is what makes it worth a paragraph in the
 paper.
@@ -42,7 +42,7 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 5. Claims 1 to 4 carry marks; claim 6 is open.
+Claim 6, the last one. Claims 1 to 5 carry marks.
 
 **What compile would produce today**
 
@@ -303,7 +303,7 @@ worth less than knowing how big the noise is on the two arms that carry the clai
 **Where the decision belongs.** Claim 6, with the seed counts. The design table keeps C's row so
 the option stays costed, marked as the arm the pilot may drop.
 
-### 5. ❌ The LoRA with no both-animal photos is rung 11b's share-zero point  ← current
+### 5. ❌ The LoRA with no both-animal photos is rung 11b's share-zero point
 
 Mark: wrong as stated. Repaired below by a control the source proposed and the design table had
 dropped. One limitation survives the repair and belongs in how the pilot is written up.
@@ -344,9 +344,59 @@ apart, which is the failure-kind read 11b asks for. What the pilot does not matc
 scene-complexity control: two-animal photos are busier than single-animal ones, and nothing in the
 design table matches them for size and clutter. That one is recorded, not solved.
 
-### 6. ⬜ The pilot runs as specified on COCO, the scorer and one day of GPU
+### 6. ❌ The pilot runs as specified on COCO, the scorer and one day of GPU  ← current
 
-Mark: open.
+Mark: wrong as stated. The GPU arithmetic is roughly right and it is not the cost that matters.
+
+**Said plainly.** The source costs the pilot as one day of GPU on COCO with this project's
+existing scorer. If that is true the idea is cheap enough to try before deciding whether it is
+right.
+
+**Why it fails as written.** Three of the five pieces do not exist here.
+
+The trainer is the blocker. This repo's LoRA trainer
+(`poe_repair/experiments/one_pair_one_seed/trainer.py`) learns from cached noise tensors toward a
+residual target: no images, no VAE encode, no captions, no text encoder in the loop. The pilot
+needs an ordinary text-to-image denoising trainer, which is a different program. Adapting the
+diffusers SDXL LoRA example is the cheap route and still means a caption sampler, the data
+pipeline below, and a first run that is debugged rather than trusted.
+
+The data build does not exist: selecting the cat-only, dog-only, both-animal and neither-animal
+sets from COCO's annotations, auditing the both-animal ones by hand because annotations miss
+animals, and recording each photo's assignment so claim 4's fixed-caption arm is reproducible.
+
+The caption sampler does not exist: the per-draw die roll for arm B, the once-and-for-all
+assignment for arm C, and the shared 10% empty rate claim 3 pinned.
+
+What does exist is the scoring end: the instance count for how many animals, and now the CLIP
+crop call for which animal, both already run on this project's renders.
+
+**The GPU arithmetic, with the seed counts it forces.** Two numbers set everything else. Training
+2,000 steps at 512 square, rank 8, is roughly an hour a run on one of the 48 GB cards. Rendering
+one image at 1024 square, 50 steps, measured on this project's own base-rate run, is 20 seconds.
+
+The seed count comes from the size of the move worth seeing. Comparing two rates at 80% power and
+the usual 5% two-sided test, 48 seeds an arm resolves a move of about 20 points (5% against 25%)
+and 128 seeds an arm resolves about 10 points (5% against 15%). A 14% caption share is not
+expected to move the compose rate 20 points, so the two arms carrying claims 1 and 2 get 128 and
+the rest get 48.
+
+| Piece | Cost |
+|---|---|
+| training, 4 arms plus a second seed for A and B | about 6 hours |
+| rendering, 128 seeds each for A and B, 48 for base, C and no-both | about 2.5 hours |
+| scoring, detector plus CLIP crop call on roughly 500 renders | under 1 hour |
+| **total GPU** | **about 9 hours, which is one day** |
+
+**The repair.** The one-day figure stands for GPU and is wrong for the pilot. Written honestly:
+one day of GPU after two or three days of writing the trainer, the data build and the caption
+sampler, with the first training run treated as a debug run rather than an arm.
+
+**What that changes about whether to run it.** The pilot stops being a cheap side bet and becomes
+a week. The cheapest thing that still tests claim 1 is a single pair of runs, A and B, at 128
+seeds, with C dropped per claim 4 and the no-both arm deferred: roughly 3 GPU hours and the same
+trainer. That is the version to build first, and the rest of the table follows only if A and B
+separate.
 
 ## Design table
 
@@ -357,11 +407,11 @@ it.
 
 | Arm | Cat-only photos | Dog-only photos | Both-animal photos, captions per draw | Empty-caption rate, all photos | Steps | Seeds rendered |
 |---|---|---|---|---|---|---|
-| base SDXL | none | none | none | none | 0 | tbd (claim 6) |
-| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | tbd (claim 6) |
-| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | tbd (claim 6) |
-| C (droppable, see claim 4) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | tbd (claim 6) |
-| no-both | same 300 | same 300 | none; 200 photos holding neither animal take their place, so every arm trains on 800 | 10% | 2,000 | tbd (claim 6) |
+| base SDXL | none | none | none | none | 0 | 48 |
+| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | 128 |
+| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | 128 |
+| C (droppable, see claim 4) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | 48 |
+| no-both | same 300 | same 300 | none; 200 photos holding neither animal take their place, so every arm trains on 800 | 10% | 2,000 | 48 |
 
 ## What the words are
 
@@ -446,5 +496,5 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 5 is delivered and unsettled. `settle` fixes it and opens claim 6, the last one, which
-decides the seed counts and whether arm C is bought at all.
+Claim 6 is delivered and unsettled. Settling it closes the walk: every claim carries a mark and
+the design table has no `tbd` cell, so `compile` is the next move.
