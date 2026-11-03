@@ -4,10 +4,10 @@
 
 | Claim | Mark | Settled by |
 |---|---|---|
-| 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | the held-out denoising loss of "a photo of a cat" on 8 unseen both-animal photos under A against B, now the primary read: the base rate came back at 0 of 64 by eye (a clean floor) and the per-class detector read is unusable. Plus the real dog-present share from COCO's own counts |
+| 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | two reads, both live again: the dog-present render count under A against B, scored by the CLIP crop call rather than by a detector query, and the held-out denoising loss on 8 unseen both-animal photos. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
-| **3 (current). LoRA A against LoRA B changes one variable** | **wrong as stated, settled** | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
-| 4. LoRA C, as written, is a distinct ablation | open | |
+| 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
+| **4 (current). LoRA C, as written, is a distinct ablation** | **wrong as stated** | **repaired: C fixes one caption per both-animal photo for the whole run at B's shares, so C against B isolates resampling per draw from the share of dog-present draws** |
 | 5. The LoRA with no both-animal photos is rung 11b's share-zero point | open | |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
 
@@ -42,12 +42,12 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 3, settled. Claims 1, 2 and 3 carry marks; claims 4, 5 and 6 are open.
+Claim 4. Claims 1 to 3 carry marks; claims 5 and 6 are open.
 
 **What compile would produce today**
 
 Destination A, with claims 1 and 2 needing checks the pilot itself runs. The design table's
-empty-caption column is now fixed; claims 4 and 6 fill the cells that remain.
+empty-caption column and LoRA C's row are now fixed; claim 6 fills the seed counts that remain.
 
 **Bar and time box**
 
@@ -122,9 +122,11 @@ Reading the third row as a null would retire the idea for the wrong reason.
    and any rise under B is attributable to the captioning. By detector, all 64 report one dog:
    GroundingDINO grounds "dog" on a cat at a median confidence of 0.889 against 0.943 for "cat",
    the median margin is 0.054, 54 of 64 sit under a 0.10 margin, and the sign flips on 3. No
-   threshold or margin rule separates the classes, so the render-and-count check is dead as
-   designed and read 3 below becomes the primary one. Any future class read needs a classifier on
-   the cropped box rather than a second detector query. Card and sheet at
+   threshold or margin rule separates the classes. Naming the animal was then handed to a
+   classifier on the cropped box, and that works: zero-shot CLIP ViT-B/32 calls cat on 64 of 64
+   crops with a probability margin from 0.982 to 0.995. So the render-and-count check stands, with
+   the count read through the CLIP crop call and the detector kept only for how many animals a
+   render holds. Card and both sheets at
    `artifacts/results/does-the-cat-prompt-already-draw-dogs/`.
 
    The original specification, kept because the three outcomes it names are still the right ones
@@ -185,7 +187,7 @@ dog at sheet scale.
 without reaching pair, that is a result about where the added mass goes. Folded into a two-category
 score it reads as a null and is lost.
 
-### 3. ❌ LoRA A against LoRA B changes one variable  ← current
+### 3. ❌ LoRA A against LoRA B changes one variable
 
 Mark: wrong as stated, settled. Repaired below, and the repair fills the design table's
 empty-caption column. The repair was then attacked on its own terms and survived; see the last
@@ -247,9 +249,47 @@ fit. Training it on 10% of draws is the lesser of the two. The only design that 
 detaches the adapter on the unconditional pass, which is a sampler change rather than a training
 one, and this repo has already paid for forgetting that an attached adapter runs on every pass.
 
-### 4. ⬜ LoRA C, as written, is a distinct ablation
+### 4. ❌ LoRA C, as written, is a distinct ablation  ← current
 
-Mark: open.
+Mark: wrong as stated. Repaired below, and the repair fills the design table's last caption cell.
+
+**Said plainly.** The source gives three training schemes and calls C an ablation: inclusive
+captioning "without dropping individual conditions". A third arm is worth a third of the GPU
+budget only if it isolates something A and B do not already isolate between them.
+
+**Why it fails as written.** The phrase is never defined, and both natural readings confound.
+
+Read as *never dropping a single name*, every both-animal photo is trained under cat and dog and
+joint on every pass instead of one sampled caption per draw. The both-animal photos then
+contribute three times as many draws as they do in A and B, so C against B changes the caption
+assignment and the effective amount of both-animal data at once.
+
+Read as *no dropout*, the empty caption goes to zero and the shares become cat, dog and joint at a
+third each. That moves the unconditional branch's training share, which is precisely the cell
+claim 3 found confounding and fixed at 10% for every arm.
+
+Either way C is not a distinct ablation; it is a second variable bolted to the one B already
+tests.
+
+**The repair.** C keeps B's shares and B's 10% empty rate, and assigns each both-animal photo one
+caption once, fixed for the whole run, rather than resampling a caption each time the photo is
+drawn. Across the 200 photos the assignment is drawn so the pool-level shares match B's exactly:
+50 photos fixed at "cat", 50 at "dog", 80 at joint, 20 at empty.
+
+**What C then isolates.** B and C put the same number of dog-present draws into the cat condition
+from the same photos. They differ in whether a single photo is ever seen under more than one name.
+If B beats C, the gain comes from one image being bound to two conditions, which is the mechanism
+the idea actually claims. If B and C match, the gain is the share of dog-present draws alone and
+the resampling is bookkeeping, which is a cheaper recipe and a weaker story. A null here does not
+touch claim 1 or claim 2; it narrows the explanation.
+
+**What it costs.** C's 200 photos are split once, so a single unlucky split can land the easiest
+both-animal photos in the cat group. The split is seeded and recorded with the arm, and the risk
+scales down if the pilot ever runs C twice on two splits.
+
+**What this does not settle.** Whether C is worth a quarter of the GPU budget at all. It is the
+only arm that tests the mechanism rather than the effect, and it is also the only arm the pilot
+could drop and still answer claims 1 and 2. That call belongs to claim 6.
 
 ### 5. ⬜ The LoRA with no both-animal photos is rung 11b's share-zero point
 
@@ -271,7 +311,7 @@ it.
 | base SDXL | none | none | none | none | 0 | tbd (claim 6) |
 | A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | tbd (claim 6) |
 | B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | tbd (claim 6) |
-| C | same 300 | same 300 | tbd (claim 4) | 10% | 2,000 | tbd (claim 6) |
+| C | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty | 10% | 2,000 | tbd (claim 6) |
 | no-both | same 300 | same 300 | none | 10% | 2,000 | tbd (claim 6) |
 
 ## What the words are
@@ -304,10 +344,12 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 
 **Claim 1, the base rate.** Done. 0 of 64 by eye, 64 of 64 by detector; see Runs.
 
-**The instrument.** Whether a classifier on the cropped box (CLIP zero-shot, or an ImageNet
-classifier) separates cat from dog on these 64 renders well enough to measure claim 1 and to score
-claim 2's three categories. Nothing in the repo does this yet, and every class-level read in the
-pilot now depends on it.
+**The instrument.** Answered for one animal in a frame: zero-shot CLIP on the cropped box calls
+cat on 64 of 64, margins 0.982 to 0.995, and
+[the script](../../../scripts/census/crop_classifier_cat_vs_dog.py) is in the repo. Still open for
+two animals in a frame, where the boxes overlap and the earlier detector reads failed. Claim 2's
+three-category score cannot be trusted until a both-animal frame has been put through it, and the
+first real pair renders the pilot produces are the natural place to check.
 
 **Claim 1, the real dog-present share.** Not started. Needs COCO's annotations on the cluster and
 the pilot's filtering rule, which claim 6 has to fix first.
@@ -321,6 +363,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 | # | What | Where | State |
 |---|---|---|---|
 | 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `artifacts/results/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
+| 2 | the same 64 renders, cropped to the detector's animal box and classified cat against dog by zero-shot CLIP ViT-B/32, to test the instrument run 1 killed | mscluster106 device 1, outside Slurm | done 2026-11-03, 41s. 64 of 64 called cat, none uncertain, margin 0.982 to 0.995 against a bar of 0.50. The uncropped image gives the same calls, so cropping is unproven rather than useless; the two-animal case is untested |
 
 ## Routes
 
@@ -354,5 +397,5 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 3 is settled. `next` opens claim 4, where LoRA C's both-animal row gets written or the arm
-gets dropped.
+Claim 4 is delivered and unsettled. `settle` fixes it and opens claim 5, the one claim that
+reaches outside this pilot into rung 11b.
