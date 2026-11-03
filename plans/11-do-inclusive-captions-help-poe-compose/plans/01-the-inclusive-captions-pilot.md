@@ -183,7 +183,7 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 🧪 Write the criterion before anything runs
 
-- [ ] **1.1** Fill the review file's question section with all six parts, each carrying a number:
+- [x] ✅ **1.1** Fill the review file's question section with all six parts, each carrying a number:
       the comparison, what counts as support, what counts as a null, the inconclusive band, the
       seed counts and what would surprise.
   - Output: [the review file](../review/01-does-captioning-widen-the-cat-condition.md)
@@ -199,17 +199,22 @@ code is written.
 ◀ **Needs: [instruction 7](#7--read-the-criterion-and-approve-it)** done, so the criterion is
 fixed and cannot be shaped by anything the build reveals.
 
-- [ ] **2.1** Read `captions_train2017.json` in the pool script and write one caption per photo
+- [x] ✅ **2.1** Read `captions_train2017.json` in the pool script and write one caption per photo
       into the manifest, so the neither-animal filler photos carry their own caption rather than
       an empty string.
   - Edits: [the pool script](../../../scripts/census/inclusive_captions_pool.py)
   - Check: every row of `manifest.json` has a non-empty `caption` field.
-- [ ] **2.2** Open every path in the manifest and report any that does not resolve.
+  - ✅ verified 2026-11-03, `dae7c3c9`: `missing_caption: 0` of 862 chosen photos.
+- [x] ✅ **2.2** Open every path in the manifest and report any that does not resolve.
   - Check: 731 of 731 open.
-- [ ] **2.3** Re-run the caption sampler's check against the real manifest rather than
+  - ✅ verified 2026-11-03, `dae7c3c9`: `missing_file: 0` of 862 chosen photos (862 because the
+    no-both run's 131 filler photos are picked alongside the 731 the other runs use).
+- [x] ✅ **2.3** Re-run the caption sampler's check against the real manifest rather than
       placeholders, so the shares are measured on the photos that will actually train.
   - Command: `python3 -m poe_repair.experiments.inclusive_captions.captions --check`
   - What you want: `PASSED`, and the dog-present share of run B's cat draws at 0.163.
+  - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.163, every caption
+    share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
 ▶ **Next: [instruction 8](#8--audit-the-131-both-animal-photos)**, the eye audit, which only you
 can do.
