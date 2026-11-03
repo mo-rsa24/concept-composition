@@ -357,9 +357,11 @@ right.
 The trainer is the blocker. This repo's LoRA trainer
 (`poe_repair/experiments/one_pair_one_seed/trainer.py`) learns from cached noise tensors toward a
 residual target: no images, no VAE encode, no captions, no text encoder in the loop. The pilot
-needs an ordinary text-to-image denoising trainer, which is a different program. Adapting the
-diffusers SDXL LoRA example is the cheap route and still means a caption sampler, the data
-pipeline below, and a first run that is debugged rather than trusted.
+needs an ordinary text-to-image denoising trainer, which is a different program. The libraries
+for one are installed on the cluster (diffusers 0.29.2, peft 0.19.1, accelerate 1.13.0) and no
+copy of the diffusers SDXL LoRA example is on disk, so the example is fetched and adapted rather
+than written from nothing. That still means a caption sampler, the data pipeline below, and a
+first run that is debugged rather than trusted.
 
 The data build does not exist: selecting the cat-only, dog-only, both-animal and neither-animal
 sets from COCO's annotations, auditing the both-animal ones by hand because annotations miss
