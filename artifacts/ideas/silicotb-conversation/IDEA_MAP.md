@@ -4,7 +4,7 @@
 
 | Turn | Claims | Marked | Mark spread |
 |---|---|---|---|
-| **1 (current)**: TB then silicosis, how each changes the other | 8 | 4 | 1 holds, 2 wrong as stated, 1 needs a check |
+| **1 (current)**: TB then silicosis, how each changes the other | 9 | 5 | 1 holds, 3 wrong as stated, 1 needs a check |
 | 2: where AI fails, and what the label should be | 18 | 0 | all open |
 | 3: public-data pairs with the same three regimes | 15 | 0 | all open |
 | 4: pairs that genuinely interact | 11 | 0 | all open |
@@ -12,7 +12,7 @@
 | 6: multi-label LoRA on cats and dogs | 9 | 9 | routed, not walked here |
 | 7: is there a mechanism or a context for cats and dogs | 12 | 0 | all open |
 | 8: does inclusive training generalise across seeds and pairs | 12 | 0 | all open |
-| **total** | **106** | **13** | |
+| **total** | **107** | **14** | |
 
 Load-bearing: claim 5.7, that a composition which divides out the base image distribution equals
 the true joint whenever the two labels are conditionally independent given the whole image. Every
@@ -47,12 +47,13 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.4, round 1. Claims 1.1 and 1.3 are wrong as stated and repaired into 1.7 and 1.8,
-1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6 is routed elsewhere.
+Turn 1, claim 1.5, round 1. Claims 1.1, 1.3 and 1.4 are wrong as stated and repaired into 1.7, 1.8
+and 1.9; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6 is routed
+elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 13 of 106 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 14 of 107 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -83,12 +84,23 @@ claims are therefore the question's own premises plus what the three images asse
 - [x] 1.1 contracting silicosis after TB changes how the silicosis presents on a radiograph — **wrong as stated**
 - [x] 1.2 the combined condition is properly called silicotuberculosis — **holds**, and the label behind the name is a disjunction
 - [x] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other — **wrong as stated**, it is a question and never an assertion; repaired into 1.8
-- [ ] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`)
+- [x] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`) — **wrong as stated**, the four are the atoms the condition is built from, not four looks of the condition; repaired into 1.9
 - [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`)
 - [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
+- [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one *(appended round 4, the repair of 1.4)*
 - [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
-- [ ] 1.4 CT separates the combined condition into four distinguishable patterns  ← current
+- [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation  ← current
+
+**1.4, settled.** Mark: wrong as stated. The four panels are A simple silicosis, B complicated
+silicosis (progressive massive fibrosis), C active pulmonary tuberculosis and D post-tuberculous
+lung disease. Two are silicosis with no tuberculosis and two are tuberculosis with no silicosis, so
+none of the four is the combined condition and CT is not shown separating it into anything. What the
+figure is instead is the atom list for the Boolean formula, drawn: it names the four predicates the
+condition is a formula over. The repair is 1.9. Panel B's own picture settles one of the two
+disjunction nodes against exclusivity as well, because it draws conglomerate masses with small
+nodules still around them, so complicated silicosis contains simple silicosis rather than excluding
+it.
 
 **1.3, settled.** Mark: wrong as stated, because it is not a claim. Turn 1's text is the user's own
 question, "Is it scarring on the left, progressive massive fibrosis on the right for a PA x-ray?",
