@@ -47,7 +47,7 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.7, round 1. Claim 1.1 is marked wrong as stated and repaired into 1.7; turn 6 is
+Turn 1, claim 1.7, round 2. Claim 1.1 is marked wrong as stated and repaired into 1.7; turn 6 is
 routed elsewhere.
 
 **What compile would produce today**
@@ -247,6 +247,7 @@ Navigation: ⬅️ [Held claims](#held-claims) | 📋 [TOC](#table-of-contents) 
 | Claim | The workaround | Why it failed |
 |---|---|---|
 | 1.1, 1.3 | take the reference radiographs from Radiopaedia, which has the best-labelled silicosis and progressive massive fibrosis cases | its licence is CC-NC-BY-SA 3.0, non-commercial only, and non-commercial machine-learning use needs an application and a 250 USD fee, so nothing from there can enter a paper figure or a training set here |
+| 1.7 | use NIH's gained labels as the stand-in for the radiology criterion the NIOH guide names, a rapid rise in profusion | profusion is an ILO score and no public set on disk carries it; NIH's labels are binary presence, so the measurable thing is not the thing the criterion names |
 | 1.1 | read the ERS critical narrative review directly for its definition | both the publisher and PubMed Central refuse an automated fetch (403, and a browser check), so the definition is taken from the Cureus case report and the search summary instead, and the review stays unread |
 
 ## Checks outstanding
@@ -255,7 +256,7 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 
 | Claim | The check | What each outcome means |
 |---|---|---|
-| 1.7 | count NIH patients holding two or more films whose finding labels differ between them, from `Patient ID` and `Follow-up #` in `/datasets/mmolefe/data/nih/Data_Entry_2017.csv` (columns confirmed on the cluster 2026-11-03) | a few hundred such patients makes the change-over-time axis real and testable on data already here; a handful makes 1.7 true of medicine and unreachable in this repo, and it is then held rather than routed |
+| 1.7 | the asymmetry ratio, cell(A then B) over cell(B then A), with a binomial confidence interval, on the pairs whose counts can carry one, starting with effusion and atelectasis at 247 against 124 | an interval excluding 1 on a pair with a documented physical mechanism says the labels do track a sequence; an interval covering 1 says the matrix's asymmetry is prevalence and the ordering axis is not readable from report-derived labels |
 
 ## Runs
 
@@ -263,6 +264,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | Anchor | What it executed | State | Finding |
 |---|---|---|---|---|
+| 1 | 1.7 | `count_arrival_order.py` over NIH's metadata on mscluster, every ordered pair of findings counted over patients with two or more films | returned 2026-11-03 | 9,167 of 13,302 repeat-film patients changed label, so the axis exists; fibrosis then pneumonia is 12 patients and pneumonia then fibrosis is 8, so the conversation's own pair cannot be scored. [The matrix and its card](../../results/which-findings-arrive-after-which/README.md) |
 
 ## Routes
 
@@ -295,6 +297,5 @@ are listed so a later round does not re-fetch them blind.
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 1.7, round 1: whether the change-over-time axis that replaces the ordering claim is reachable
-in the data on disk. `run` the NIH serial-film count named in Checks outstanding, then mark 1.7 and
-move to 1.2.
+Claim 1.7, round 2: `settle` it as needs a check, on the asymmetry ratio named in Checks
+outstanding, then move to claim 1.2.
