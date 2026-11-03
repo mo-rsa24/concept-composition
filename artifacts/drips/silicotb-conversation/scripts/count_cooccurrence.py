@@ -92,7 +92,7 @@ lines = "\n".join(
 )
 ax.text(
     1.045, 0.99,
-    "the four pairs the conversation names, boxed in the matrix\n" + lines,
+    "the four pairs the conversation names,\nboxed in the matrix\n" + lines,
     transform=ax.transAxes,
     fontsize=9.6, color="#1452c0", ha="left", va="top",
     bbox=dict(boxstyle="round,pad=0.45", fc="white", ec="#1452c0", lw=1.3),
