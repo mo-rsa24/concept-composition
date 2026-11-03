@@ -176,14 +176,14 @@ def build_photos(run: str, *, manifest: dict | None = None, seed: int = 0) -> li
     return photos
 
 
-def realised_shares(run: str, *, draws: int, seed: int = 0) -> dict:
+def realised_shares(run: str, *, draws: int, seed: int = 0, manifest: dict | None = None) -> dict:
     """Draw `draws` photos uniformly, caption each, and count what actually came out.
 
     Returns the caption counts over all draws, the counts over the both-animal photos alone, and
     the one number the pilot turns on: of the draws captioned "a photo of a cat", the fraction
     whose photo also held a dog.
     """
-    photos = build_photos(run, seed=seed)
+    photos = build_photos(run, manifest=manifest, seed=seed)
     rule = CaptionRule(run=run, rng=random.Random(seed + 1))
     picker = random.Random(seed + 2)
 
@@ -221,12 +221,14 @@ def realised_shares(run: str, *, draws: int, seed: int = 0) -> dict:
     }
 
 
-def check(draws: int, seed: int) -> int:
+def check(draws: int, seed: int, manifest: dict | None = None) -> int:
     """Draw every run's captions, print what came out, and judge it against the three bars."""
-    results = {run: realised_shares(run, draws=draws, seed=seed) for run in RUNS}
+    results = {run: realised_shares(run, draws=draws, seed=seed, manifest=manifest) for run in RUNS}
     failures: list[str] = []
 
-    print(f"{draws} draws per run, seed {seed}, {PHOTOS_PER_RUN} photos per run\n")
+    source = "the real manifest" if manifest else "placeholder photos"
+    print(f"{draws} draws per run, seed {seed}, {PHOTOS_PER_RUN} photos per run, "
+          f"from {source}\n")
     label = {CAT: "cat", DOG: "dog", JOINT: "joint", BLANK: "blank", "<coco caption>": "coco"}
     print(f"{'run':8} {'cat':>7} {'dog':>7} {'joint':>7} {'blank':>7} {'coco':>7}   "
           f"{'blank rate':>10}  {'dog-present share of cat draws':>32}")
@@ -283,16 +285,21 @@ def main() -> int:
                     help="draws per run for the check; large so the shares are not read through "
                          "sampling noise. The real runs take 2,000 steps")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--manifest", type=Path,
+                    help="the pool script's manifest.json, so the shares are measured on the "
+                         "photos that will actually train rather than on placeholders")
     ap.add_argument("--json", type=Path, help="also write the realised counts here")
     args = ap.parse_args()
 
     if not args.check:
         ap.error("nothing to do; pass --check")
 
-    code = check(args.draws, args.seed)
+    manifest = json.loads(args.manifest.read_text()) if args.manifest else None
+    code = check(args.draws, args.seed, manifest)
     if args.json:
         args.json.write_text(json.dumps(
-            {run: realised_shares(run, draws=args.draws, seed=args.seed) for run in RUNS}, indent=2))
+            {run: realised_shares(run, draws=args.draws, seed=args.seed, manifest=manifest)
+             for run in RUNS}, indent=2))
         print(f"wrote {args.json}")
     return code
 

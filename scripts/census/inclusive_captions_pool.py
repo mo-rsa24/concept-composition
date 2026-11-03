@@ -91,7 +91,10 @@ CAT_ID, DOG_ID = 17, 18
 # The same line the compose scorer draws, so training photos and scored renders agree about what
 # counts as an animal being present.
 MIN_BOX_FRACTION = 0.25
-WANT = {"cat_only": 300, "dog_only": 300, "both": 200, "neither": 200}
+# The design's own set sizes, which the caption sampler reads back from SET_SIZES. The
+# both-animal count is 131 because that is how many exist: COCO holds 208 and 131 clear the size
+# filter. The filler set matches it so the no-both run trains on the same 731 photos as the rest.
+WANT = {"cat_only": 300, "dog_only": 300, "both": 131, "neither": 131}
 SEED = 0
 TILES_PER_SHEET = 48
 
