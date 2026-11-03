@@ -276,16 +276,16 @@ def main() -> None:
         for f in missing_caption[:3]:
             print(f"  {f}", flush=True)
 
-    verdict_n = len(pools["both"])
-    if verdict_n >= 200:
-        counts["verdict"] = "the design stands as written: 200 usable both-animal photos exist"
-    elif verdict_n >= 120:
-        counts["verdict"] = (f"{verdict_n} usable both-animal photos: the design stands with the "
-                             f"both-animal set at {verdict_n}, and the share of cat-captioned "
-                             f"dog-present draws is recomputed from it")
+    verdict_n = counts.get("both_surviving_the_audit", len(pools["both"]))
+    if verdict_n >= 120:
+        counts["verdict"] = (f"{verdict_n} both-animal photos hold one live cat and one live dog: "
+                             f"the design stands with the both-animal set at {verdict_n}, and the "
+                             f"share of cat-captioned dog-present draws is recomputed from it")
     else:
-        counts["verdict"] = (f"only {verdict_n} usable both-animal photos: the effect size is "
-                             f"about half what the design assumed. Loosen the size filter and say "
+        counts["verdict"] = (f"only {verdict_n} both-animal photos survive: the share of "
+                             f"cat-captioned dog-present draws is "
+                             f"{verdict_n * 0.40 / (WANT['cat_only'] * 0.90 + verdict_n * 0.40):.3f}. "
+                             f"Cut the single-animal sets further, loosen the size filter and say "
                              f"so, or move the pilot to a pair that co-occurs more often")
 
     (out_dir / "manifest.json").write_text(json.dumps(
@@ -319,7 +319,7 @@ def main() -> None:
             plt.close(fig)
             print(f"wrote both_sheet_{page:02d}.png ({len(rows)} tiles)", flush=True)
 
-    print(f"\n{verdict_n} usable both-animal photos. {counts['verdict']}", flush=True)
+    print(f"\n{counts['verdict']}", flush=True)
     print(f"done in {time.time() - started:.0f}s", flush=True)
 
 
