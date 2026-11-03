@@ -6,7 +6,7 @@
 |---|---|---|
 | 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | the held-out denoising loss of "a photo of a cat" on 8 unseen both-animal photos under A against B, now the primary read: the base rate came back at 0 of 64 by eye (a clean floor) and the per-class detector read is unusable. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
-| **3 (current). LoRA A against LoRA B changes one variable** | **wrong as stated** | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs** |
+| **3 (current). LoRA A against LoRA B changes one variable** | **wrong as stated, settled** | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
 | 4. LoRA C, as written, is a distinct ablation | open | |
 | 5. The LoRA with no both-animal photos is rung 11b's share-zero point | open | |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
@@ -42,7 +42,7 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 3. Claims 1 and 2 settled.
+Claim 3, settled. Claims 1, 2 and 3 carry marks; claims 4, 5 and 6 are open.
 
 **What compile would produce today**
 
@@ -187,7 +187,9 @@ score it reads as a null and is lost.
 
 ### 3. ❌ LoRA A against LoRA B changes one variable  ← current
 
-Mark: wrong as stated. Repaired below, and the repair fills the design table's empty-caption column.
+Mark: wrong as stated, settled. Repaired below, and the repair fills the design table's
+empty-caption column. The repair was then attacked on its own terms and survived; see the last
+block.
 
 **Said plainly.** A and B were meant to differ only in how the 200 both-animal photos are
 captioned, so any difference between them is attributable to the caption assignment alone.
@@ -221,6 +223,29 @@ carries the zero-both-animal-photos case, so nothing is lost by it.
 unconditional draws, which may be too few to hold the unconditional branch steady against the base
 model's own. That is a risk shared identically by every arm, so it cannot confound A against B; it
 can only weaken all four together. Worth recording, not worth a design change.
+
+**The argument that would reopen the repair, and why it does not.** PoE subtracts the
+unconditional prediction twice. In `eps_uncond + g (eps_a + eps_b - 2 eps_uncond)` the
+unconditional term carries the coefficient `1 - 2g`, which at guidance 7.5 is -14, against -6.5
+in an ordinary one-condition render. So any movement in the unconditional branch is amplified
+fourteenfold in a PoE sample, and a design that shares the empty-caption rate across arms is not
+the same thing as a design where the unconditional branch is identical across arms.
+
+It does not reopen the repair, because the empty-caption draws come from the same photo pool at
+the same rate in every arm, so the unconditional branch's training distribution is identical by
+construction. What differs between A and B is the realised draws, not the distribution they come
+from. The amplification therefore does not create a cause; it sets a noise floor. The cost is
+real and belongs in claim 6: an A-against-B difference in PoE compose rate has to clear a
+run-to-run term that enters at -14, which argues for matched training seeds across arms and for
+reading the single-expert renders beside the PoE ones, since the single-expert read carries the
+same drift at -6.5 and so separates drift from composition.
+
+**Why 0% dropout is not the cleaner variant.** Dropping the empty caption entirely would leave
+the unconditional branch untrained, but the adapter is still attached during the unconditional
+forward pass at sampling time, so `eps_uncond` moves anyway and moves without ever having been
+fit. Training it on 10% of draws is the lesser of the two. The only design that truly freezes it
+detaches the adapter on the unconditional pass, which is a sampler change rather than a training
+one, and this repo has already paid for forgetting that an attached adapter runs on every pass.
 
 ### 4. ⬜ LoRA C, as written, is a distinct ablation
 
@@ -329,4 +354,5 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Walk claim 3.
+Claim 3 is settled. `next` opens claim 4, where LoRA C's both-animal row gets written or the arm
+gets dropped.
