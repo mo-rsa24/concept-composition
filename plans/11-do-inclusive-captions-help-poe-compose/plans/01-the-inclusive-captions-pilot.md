@@ -61,9 +61,10 @@ three lines beside it and exactly one of them ticked.
 
 The design predicts run B's product composes more often because 16.3% of its cat-captioned
 training draws hold a dog against 0% of run A's. At a rate near 0.5 on 128 seeds per run, two
-standard errors of the difference are about 12.5 points. So a real but modest effect lands inside
-the band where the answer is "could not tell", and the band has to be written down before the
-numbers exist rather than argued about afterwards.
+standard errors of the difference are about 12.5 points, and about 7.5 if the rates come in near
+0.1 instead. So a real but modest effect lands inside the band where the answer is "could not
+tell", and the band's formula has to be written down before the numbers exist rather than argued
+about afterwards.
 
 **One cell makes the comparison readable.**
 
@@ -163,9 +164,10 @@ latents that do not match the sampling path.
 128 shared seeds, and the held-out denoising loss on unseen both-animal photos is lower under B.
 The caption assignment has an effect and composition follows it.
 
-**Null.** The rates match within the band and the losses match. The captioning does not widen the
-condition at the scale a LoRA on 2,000 steps can reach. The idea moves to the from-scratch model,
-which has no inherited support to erode.
+**No support.** Run B's rate is at or below run A's, and the losses match. The captioning did not
+widen the condition by an amount this experiment could detect, and the idea moves to the
+from-scratch model, which has no inherited support to erode. This is not reported as a null: 128
+seeds cannot tell a true zero from a true gain of 6 points that measured below zero.
 
 **Inconclusive.** The difference falls inside the band. The seeds were not enough to resolve the
 move, and the cost of resolving it is stated rather than the result being reported as either of
@@ -294,7 +296,8 @@ For you to follow manually. Do these yourself.
 its question section.
 
 7.2 **Check each of the six parts carries a number**, not a word. "B beats A by more than the
-band" is not a criterion; "B exceeds A by more than 12.5 points on 128 seeds each" is.
+band" is not a criterion; "B exceeds A by more than two standard errors of the difference,
+computed from the measured rates by the formula in the review file" is.
 
 7.3 **Say which of the three lines you would be willing to publish.** If you would argue with any
 of them after seeing a result, say so now, because that is the only moment the argument is free.

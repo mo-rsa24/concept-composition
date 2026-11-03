@@ -38,9 +38,19 @@ the dog prompt as `b`, and guidance 7.5.
 dog, with neither animal a hybrid of the two. Counted by GroundingDINO, named by the CLIP crop
 classifier, judged off 1,024-square tiles at full resolution.
 
-**The band.** Two standard errors of the difference between two compose rates at 128 seeds each,
-which is 12.5 percentage points at a rate near 0.5. Any difference smaller than the band is a
-difference this experiment cannot see.
+**The band.** Two standard errors of the difference between the two measured compose rates:
+
+    band = 2 * sqrt( pA*(1-pA)/128 + pB*(1-pB)/128 ) * 100   percentage points
+
+where `pA` and `pB` are the rates the renders actually produce. The formula is fixed here and the
+number is not, because the number depends on where the rates land: it is 12.5 points at rates
+near 0.5, 7.5 at rates near 0.1, and 12.5 is the widest it can ever be. Fixing 12.5 outright
+would be the most conservative choice and also the wrong one, since plain product composition on
+this pair has come in near 0.1 before, and a band nearly twice as wide as the data warrants
+pushes a real effect into the inconclusive region. What a fixed formula and a free number cannot
+do is move after the answer is seen, which is the property that matters.
+
+Any difference smaller than the band is a difference this experiment cannot see.
 
 ## Run kind
 
@@ -62,20 +72,21 @@ step count, the sampler, the guidance scale and the 128 scoring seeds.
 128 seeds, same sampler, 50 DDIM steps, guidance 7.5, 1,024 square. Base SDXL's rate on 48 seeds
 is the reference row and is not part of the comparison.
 
-**What counts as support.** Run B's compose rate exceeds run A's by **12.5 percentage points or
-more**. At 128 seeds per run and a rate near 0.5, one standard error per run is 4.4 points and
-the standard error of the difference is 6.25, so 12.5 points is two standard errors of the
-difference. Secondary, reported apart and not part of the bar: run B's held-out denoising loss on
-8 unseen both-animal photos is lower than run A's.
+**What counts as support.** Run B's compose rate exceeds run A's by **the band or more**, the
+band computed from the measured rates by the formula above. Secondary, reported apart and not
+part of the bar: run B's held-out denoising loss on 8 unseen both-animal photos is lower than run
+A's.
 
-**What counts as a null.** Run B's compose rate is **at or below** run A's. The captioning did
-not widen the condition in the direction the design predicted, at the scale a LoRA on 2,000 steps
-can reach.
+**What counts as no support.** Run B's compose rate is **at or below** run A's. Reported as no
+support rather than as a null, because 128 seeds cannot tell a true zero from a true gain of 6
+points that happened to measure below zero. The claim this outcome licenses is that the
+captioning did not widen the condition by an amount this experiment could detect, and nothing
+stronger.
 
-**The inconclusive band.** Run B's rate is above run A's by **more than 0 and less than 12.5
-points**. The direction is right and the experiment cannot see it. This outcome is reported as
-inconclusive with the cost of resolving it stated: 500 seeds per run would bring the band to
-about 6.3 points, which is roughly 10 further GPU hours of rendering.
+**The inconclusive band.** Run B's rate is above run A's by **more than 0 and less than the
+band**. The direction is right and the experiment cannot see it. This outcome is reported as
+inconclusive with the cost of resolving it stated: quadrupling the seeds to 512 per run halves
+the band, which is roughly 8 further GPU hours of rendering.
 
 **The counts.** 128 product renders per run for A and B, on the same 128 seeds. 48 for base SDXL.
 8 held-out both-animal photos for the secondary loss read, none of them in the 731.
@@ -95,7 +106,7 @@ the from-scratch model rather than being retired.
 
 | Question | Written before | The answer |
 |---|---|---|
-| Does run B's product compose more often than run A's? | support at ≥ 12.5 points, null at ≤ 0, inconclusive between | to be filled |
+| Does run B's product compose more often than run A's? | support at a gap of the band or more, no support at a gap of 0 or less, inconclusive between | to be filled |
 | Is run B's held-out denoising loss on unseen both-animal photos lower? | reported apart from the bar | to be filled |
 | How many of run B's renders did the classifier call uncertain? | unknown; it has never been read on two animals in one frame | to be filled |
 | At which checkpoint can the two runs be told apart by eye? | unknown | to be filled |
