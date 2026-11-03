@@ -527,6 +527,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-The walk is closed. Every claim carries a mark, the design table has no blank cell, and the
-watching sheets and the W&B project are written into claim 6. `compile` writes the walk up and
-fills the route file's step 2 prompt with the claim it hands over.
+The walk is closed and compiled to [the standing write-up](COMPILED.md). Claim 2 goes to the
+route file's step 2, the falsification criterion, because the comparison that step names is the
+product's compose rate for B against A, which is claim 2's check. Claim 1's two reads run beside
+it as the mechanism question and do not set the bar.
