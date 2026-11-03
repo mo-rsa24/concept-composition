@@ -74,7 +74,7 @@ summary = {
 }
 (OUT / "arrival_order.json").write_text(json.dumps(summary, indent=2))
 
-fig, ax = plt.subplots(figsize=(13.0, 10.4))
+fig, ax = plt.subplots(figsize=(15.2, 10.8))
 shown = np.ma.masked_where(counts == 0, counts)
 im = ax.imshow(shown, cmap="YlOrRd", norm=LogNorm(vmin=1, vmax=max(counts.max(), 2)))
 
@@ -104,32 +104,62 @@ for (r, c), colour in (((idx[TARGET[0]], idx[TARGET[1]]), "#1452c0"),
 
 fp = counts[idx["Fibrosis"], idx["Pneumonia"]]
 pf = counts[idx["Pneumonia"], idx["Fibrosis"]]
-ax.annotate(
-    f"fibrosis first, then pneumonia: {fp} patients\n"
-    f"pneumonia first, then fibrosis: {pf} patients\n"
-    "the pair the conversation picks, in both orders",
-    xy=(idx[TARGET[1]] + 0.45, idx[TARGET[0]] - 0.45),
-    xytext=(n - 0.2, -1.9), fontsize=9.5, color="#1452c0",
-    ha="right", va="top",
-    bbox=dict(boxstyle="round,pad=0.45", fc="white", ec="#1452c0", lw=1.2),
-    arrowprops=dict(arrowstyle="-", color="#1452c0", lw=1.2),
-)
-ax.set_xlabel("gained on a later film, absent from the first", fontsize=11, labelpad=10)
+
+ax.set_xlabel("gained on a later film, absent from the first", fontsize=11, labelpad=12)
 ax.set_ylabel("present on the patient's first film", fontsize=11)
-ax.set_title(
-    "Which NIH finding arrives after which\n"
-    f"{summary['patients_whose_labels_change']:,} of "
-    f"{summary['patients_with_two_or_more_films']:,} patients with two or more films changed label; "
-    f"{patients_total:,} patients, {len(d):,} films",
-    fontsize=12.5, pad=16,
+ax.set_title("Which NIH finding arrives after which", fontsize=14, pad=14)
+
+cb = fig.colorbar(im, ax=ax, fraction=0.030, pad=0.045, shrink=0.52, anchor=(0.0, 0.0))
+cb.set_label("patients, log scale\n(every cell prints its true count)", fontsize=8.5)
+
+ax.annotate(
+    f"the pair the conversation picks\n"
+    f"fibrosis first, then pneumonia:  {fp}\n"
+    f"pneumonia first, then fibrosis:  {pf}\n"
+    "too few either way to score",
+    xy=(idx[TARGET[1]] + 0.5, idx[TARGET[0]]),
+    xycoords="data",
+    xytext=(1.045, 0.995), textcoords="axes fraction",
+    fontsize=9.5, color="#1452c0", ha="left", va="top",
+    bbox=dict(boxstyle="round,pad=0.45", fc="white", ec="#1452c0", lw=1.3),
+    arrowprops=dict(arrowstyle="-", color="#1452c0", lw=1.2,
+                    connectionstyle="arc3,rad=-0.12"),
 )
-cb = fig.colorbar(im, ax=ax, fraction=0.035, pad=0.02)
-cb.set_label("patients (log scale; every cell prints its true count, 0 shown grey)", fontsize=9)
-ax.text(0, n + 0.95,
-        "one patient, one count: their first film's findings against everything they gained later. "
-        "The matrix is asymmetric on purpose, so A-then-B and B-then-A are separate cells.",
-        fontsize=8.6, color="#444", transform=ax.transData)
-fig.tight_layout()
-fig.savefig(OUT / "which-findings-arrive-after-which.png", dpi=170, bbox_inches="tight")
+
+busiest = np.unravel_index(np.argmax(counts), counts.shape)
+ax.annotate(
+    f"busiest cell: {findings[busiest[0]].lower()} first,\n"
+    f"then {findings[busiest[1]].lower()}, {counts[busiest]} patients",
+    xy=(busiest[1], busiest[0] + 0.5), xycoords="data",
+    xytext=(1.045, 0.60), textcoords="axes fraction",
+    fontsize=9.0, color="#7a3d00", ha="left", va="top",
+    bbox=dict(boxstyle="round,pad=0.4", fc="#fff6e8", ec="#c97a1f", lw=1.1),
+    arrowprops=dict(arrowstyle="-", color="#c97a1f", lw=1.1,
+                    connectionstyle="arc3,rad=0.14"),
+)
+
+ax.annotate(
+    "the diagonal is blank by construction:\n"
+    "a finding cannot be gained after itself",
+    xy=(idx["Hernia"], idx["Hernia"]), xycoords="data",
+    xytext=(1.045, 0.34), textcoords="axes fraction",
+    fontsize=9.0, color="#555", ha="left", va="top",
+    bbox=dict(boxstyle="round,pad=0.4", fc="#f4f4f4", ec="#999", lw=1.0),
+    arrowprops=dict(arrowstyle="-", color="#999", lw=1.0,
+                    connectionstyle="arc3,rad=0.1"),
+)
+
+fig.text(
+    0.5, 0.055,
+    f"{summary['patients_whose_labels_change']:,} of {summary['patients_with_two_or_more_films']:,} "
+    f"patients with two or more films changed label, out of {patients_total:,} patients and {len(d):,} films. "
+    "One patient counts once: their first film's findings against everything they gained later.\n"
+    "The matrix is asymmetric on purpose, so A-then-B and B-then-A are separate cells. "
+    "The labels are report-derived and noisy, and a gained label can mean a new finding or a different reader.",
+    ha="center", va="top", fontsize=9.0, color="#444",
+)
+
+fig.subplots_adjust(left=0.13, right=0.78, top=0.94, bottom=0.21)
+fig.savefig(OUT / "which-findings-arrive-after-which.png", dpi=170)
 print(json.dumps(summary["target_pair"], indent=2))
 print("patients with 2+ films:", patients_multi, "changed:", patients_changed)
