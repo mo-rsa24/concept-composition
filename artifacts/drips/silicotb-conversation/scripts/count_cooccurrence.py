@@ -90,13 +90,12 @@ lines = "\n".join(
     f"{a.lower()} + {b.lower()}:  {all_views[idx[a], idx[b]]:,} films  ({pa_only[idx[a], idx[b]]:,} PA)"
     for a, b in NAMED
 )
-ax.annotate(
-    "the four pairs the conversation names\n" + lines,
-    xy=(idx["Fibrosis"] + 0.5, idx["Pneumonia"]), xycoords="data",
-    xytext=(1.045, 0.99), textcoords="axes fraction",
+ax.text(
+    1.045, 0.99,
+    "the four pairs the conversation names, boxed in the matrix\n" + lines,
+    transform=ax.transAxes,
     fontsize=9.6, color="#1452c0", ha="left", va="top",
     bbox=dict(boxstyle="round,pad=0.45", fc="white", ec="#1452c0", lw=1.3),
-    arrowprops=dict(arrowstyle="-", color="#1452c0", lw=1.2),
 )
 
 ax.set_title("How often two NIH findings are labelled on the same film", fontsize=14, pad=14)
