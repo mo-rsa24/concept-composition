@@ -288,6 +288,7 @@ Navigation: ⬅️ [Held claims](#held-claims) | 📋 [TOC](#table-of-contents) 
 |---|---|---|
 | 1.1, 1.3 | take the reference radiographs from Radiopaedia, which has the best-labelled silicosis and progressive massive fibrosis cases | its licence is CC-NC-BY-SA 3.0, non-commercial only, and non-commercial machine-learning use needs an application and a 250 USD fee, so nothing from there can enter a paper figure or a training set here |
 | 1.7 | use NIH's gained labels as the stand-in for the radiology criterion the NIOH guide names, a rapid rise in profusion | profusion is an ILO score and no public set on disk carries it; NIH's labels are binary presence, so the measurable thing is not the thing the criterion names |
+| 1.5 | express the hidden-disease regime with the negation operator, score(x,A) minus a weight times score(x,B), which is the one operator in [Product, Mixture And Negation](/home/molef/Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/Composition/Product,%20Mixture%20And%20Negation.md) that removes evidence | it gives the right picture under the wrong label. Negation samples from "A and not B", whose images are the ones where B is genuinely absent. A masked film is one where B is present and unreadable. The two sets of images overlap almost exactly, which is the whole clinical problem, but the conditioning differs, so a model trained this way can never be asked for "both present, one hidden" and cannot be scored for whether it got the hidden disease right. The negation weight is also a free scalar chosen by hand with no quantity in the data to set it against |
 | 1.1 | read the ERS critical narrative review directly for its definition | both the publisher and PubMed Central refuse an automated fetch (403, and a browser check), so the definition is taken from the Cureus case report and the search summary instead, and the review stays unread |
 
 ## Checks outstanding
@@ -317,6 +318,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#sour
 | # | Anchor | The ask | Return line | State |
 |---|---|---|---|---|
 | 1 | 1.7 | `/drip-idea --hypothesis` on the asymmetry ratio, to write the support, null and inconclusive bands before the ratio is computed | bring back `HYPOTHESIS_arrival_order.md` and the band that the measured ratio falls in | emitted, not yet run |
+| 2 | 1.5 | [an annotated radiograph for every overlap regime](routes/01-annotated-radiographs-for-each-regime.prompt.md): build twelve annotated real films, three per regime across three disease pairs, with the hidden-disease regime as the one that decides success | bring back `01-annotated-radiographs-for-each-regime.return.md`, the picture count per regime, and which licences are still unresolved | written, not yet run |
 
 ## Sources
 
