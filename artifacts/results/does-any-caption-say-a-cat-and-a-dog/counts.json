@@ -1,0 +1,35 @@
+{
+  "files": 128,
+  "captions_naming_both": 1102469,
+  "words_median": 14,
+  "words_p10": 7,
+  "words_p90": 27,
+  "share_by_form": {
+    "short": 0.38408,
+    "mid": 0.53365,
+    "long": 0.07777,
+    "bare": 0.00451
+  },
+  "count_by_form": {
+    "short": 423432,
+    "mid": 588332,
+    "long": 85734,
+    "bare": 4971
+  },
+  "adjacent_pair_captions": 821378,
+  "joiner_between_adjacent_animals": {
+    "(none)": 368780,
+    "and": 261475,
+    "&": 99367,
+    ",": 52126,
+    "or": 32695,
+    "vs": 2422,
+    "with": 2094,
+    "vs.": 1362,
+    "+": 893,
+    "versus": 136,
+    "x": 18,
+    "plus": 10
+  },
+  "words_note": "word counts above 60 are folded into 60"
+}

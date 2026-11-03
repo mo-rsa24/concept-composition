@@ -1,0 +1,1698 @@
+{
+ "seen": {
+  "bare": 4971,
+  "short": 423432,
+  "random": 1102469,
+  "long": 85734
+ },
+ "pools": {
+  "bare": [
+   {
+    "url": "https://thumb9.shutterstock.com/image-photo/stock-vector-silhouette-of-a-cat-and-dog-for-your-design-450w-218990146.jpg",
+    "caption": "cats and dogs",
+    "words": 3,
+    "file": "00117",
+    "class": "bare"
+   },
+   {
+    "url": "https://di7dud5r8j0ls.cloudfront.net/fit-in/646x349/wordpress/wp-content/uploads/2016/06/cat-and-dog-1-e1466589962248.jpg",
+    "caption": "cat-and-dog-1",
+    "words": 1,
+    "file": "00057",
+    "class": "bare"
+   },
+   {
+    "url": "https://pre-tend.com/wp-content/uploads/2021/09/cat-and-dog.jpg",
+    "caption": "cat and dog",
+    "words": 3,
+    "file": "00071",
+    "class": "bare"
+   },
+   {
+    "url": "https://thumb1.shutterstock.com/image-photo/stock-photo-cat-and-dog-450w-119617003.jpg",
+    "caption": "Cat and Dog",
+    "words": 3,
+    "file": "00029",
+    "class": "bare"
+   },
+   {
+    "url": "https://img.artpal.com/76675/9-0-58t.jpg",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00044",
+    "class": "bare"
+   },
+   {
+    "url": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c6de0fe4-a668-489b-a17d-5fb6780d50e4/d2oqk68-b7d76be8-34a7-4e37-9b72-4ee08c26fa50.jpg/v1/fill/w_533,h_750,q_75,strp/dog_and_cat_by_tajus_d2oqk68-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD03NTAiLCJwYXRoIjoiXC9mXC9jNmRlMGZlNC1hNjY4LTQ4OWItYTE3ZC01ZmI2NzgwZDUwZTRcL2Qyb3FrNjgtYjdkNzZiZTgtMzRhNy00ZTM3LTliNzItNGVlMDhjMjZmYTUwLmpwZyIsIndpZHRoIjoiPD01MzMifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.6TAIUgECxEaeCU5YQtnASFdd2qPf08uKlyhKpYp3CBM",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00124",
+    "class": "bare"
+   },
+   {
+    "url": "https://highglosshomemakers.ca/wp-content/uploads/elementor/thumbs/dog-and-cat-pa2nqio7nm8gv5a9k831nzafm8z54bb3jl2669tfog.jpg",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00071",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.iotforall.com/wp-content/uploads/2018/12/12.07.18-The-Internet-of-Pet-Things-265x198.jpg",
+    "caption": "Image of two cats and two dogs",
+    "words": 7,
+    "file": "00063",
+    "class": "bare"
+   },
+   {
+    "url": "https://stjeans.com/wp-content/uploads/elementor/thumbs/Cat-and-dog-p72jr9e5w23458f5k5l66af9jecktpohs2uz7brlgy.jpg",
+    "caption": "Cat-and-dog",
+    "words": 1,
+    "file": "00080",
+    "class": "bare"
+   },
+   {
+    "url": "http://www.ci.taylor.tx.us/ModuleFiles/Pages/Page/610/8.jpg",
+    "caption": "Kitten and puppy",
+    "words": 3,
+    "file": "00059",
+    "class": "bare"
+   },
+   {
+    "url": "https://greatpaper.s3.amazonaws.com/cat-dog.jpg",
+    "caption": "Cat and Dog",
+    "words": 3,
+    "file": "00122",
+    "class": "bare"
+   },
+   {
+    "url": "https://static2.bigstockphoto.com/5/5/1/large2/15575837.jpg",
+    "caption": "Dog And Cat",
+    "words": 3,
+    "file": "00069",
+    "class": "bare"
+   },
+   {
+    "url": "https://vethelpdirect.com/wordpress/wp-content/uploads/2020/06/dog-2059668_1920-1024x685.jpg",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00103",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.argospetinsurance.co.uk/assets/uploads/2015/06/23472069_S1.jpg",
+    "caption": "A dog and a cat",
+    "words": 5,
+    "file": "00071",
+    "class": "bare"
+   },
+   {
+    "url": "https://img.pog.com/cloud/y8-thumbs/43219/big.jpg",
+    "caption": "Cute Cat And Dog",
+    "words": 4,
+    "file": "00014",
+    "class": "bare"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/x/cat-dog-2412981.jpg",
+    "caption": "Cat and dog",
+    "words": 3,
+    "file": "00092",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.petfriendlyhouse.com/wp-content/uploads/2021/03/vet-questions-dog.jpg",
+    "caption": "Picture of dogs and cats",
+    "words": 5,
+    "file": "00022",
+    "class": "bare"
+   },
+   {
+    "url": "https://the-hollywood-gossip-res.cloudinary.com/iu/s--F6lqc2WH--/t_xlarge_l/cs_srgb,f_auto,fl_strip_profile.lossy,q_auto:420/v1388076638/cat-and-puppy.jpg",
+    "caption": "Cat and Puppy",
+    "words": 3,
+    "file": "00040",
+    "class": "bare"
+   },
+   {
+    "url": "https://st.depositphotos.com/1724437/4621/v/600/depositphotos_46216647-stock-video-dog-and-cat.jpg",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00023",
+    "class": "bare"
+   },
+   {
+    "url": "https://paularenee.files.wordpress.com/2013/05/dogcat.jpg?w=656",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00016",
+    "class": "bare"
+   },
+   {
+    "url": "http://www.schier-cdn.com/img_products/NL_Gaming_Games/20200913880850001599957388.jpg",
+    "caption": "Cats & Dogs 3",
+    "words": 4,
+    "file": "00042",
+    "class": "bare"
+   },
+   {
+    "url": "https://images.hawaiianplanner.com/internal/other-mammals-992637094-1038.jpg",
+    "caption": "Dog and Cat",
+    "words": 3,
+    "file": "00100",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.publicdomainpictures.net/pictures/10000/velka/1377-1244933977c4kR.jpg",
+    "caption": "Cat And Dog",
+    "words": 3,
+    "file": "00021",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.traditionsvetcenters.com/sites/default/files/styles/portfolio_item/public/dog-3883112__340.jpg?itok=9C5kL2Bw",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00033",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.earthtokathy.com/wp-content/uploads/dog-and-cat.jpg",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00000",
+    "class": "bare"
+   },
+   {
+    "url": "https://obchod.valka.cz/images/products_small/535/akydz022.jpg?c=1556188076",
+    "caption": "1-24-Cats-and-Dogs",
+    "words": 1,
+    "file": "00087",
+    "class": "bare"
+   },
+   {
+    "url": "http://images.crestock.com/2820000-2829999/2828780-xs.jpg",
+    "caption": "cat and dog",
+    "words": 3,
+    "file": "00056",
+    "class": "bare"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/x/dog-cat-27959127.jpg",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00069",
+    "class": "bare"
+   },
+   {
+    "url": "https://m1.healio.com/~/media/slack-news/stock-images/fm_im/d/dog_cat_adobe.jpg",
+    "caption": "Dog and Cat",
+    "words": 3,
+    "file": "00120",
+    "class": "bare"
+   },
+   {
+    "url": "https://i1.wp.com/readok.info/wp-content/uploads/2016/02/cats-and-dogs-01.jpg?resize=780%2C518",
+    "caption": "cats-and-dogs-01",
+    "words": 1,
+    "file": "00009",
+    "class": "bare"
+   },
+   {
+    "url": "https://logo.cafepress.com/9/15010277.8218799.jpg",
+    "caption": "cats & dogs",
+    "words": 3,
+    "file": "00003",
+    "class": "bare"
+   },
+   {
+    "url": "https://static.wixstatic.com/media/c78067f077e047bdb49b916d6a9a470e.jpg/v1/fill/w_277,h_163,al_c,q_80,usm_0.66_1.00_0.01/Cat%20and%20Dog.jpg",
+    "caption": "Cat and Dog",
+    "words": 3,
+    "file": "00119",
+    "class": "bare"
+   },
+   {
+    "url": "http://tse2.mm.bing.net/th?id=OIP.Ma04190fa0599b515db1d1e67dc119b27o0&w=207&h=164&c=7&rs=1&qlt=90&o=4&pid=1.1",
+    "caption": "Cute Cats and Dogs",
+    "words": 4,
+    "file": "00106",
+    "class": "bare"
+   },
+   {
+    "url": "https://static1.bigstockphoto.com/7/9/7/large2/7979599.jpg",
+    "caption": "Dog And Cat",
+    "words": 3,
+    "file": "00096",
+    "class": "bare"
+   },
+   {
+    "url": "https://bloximages.chicago2.vip.townnews.com/cumberlink.com/content/tncms/assets/v3/editorial/b/d9/bd9b7aa0-883e-52ef-81ca-00f27d38e07e/5a14596dc7e66.image.jpg?resize=400%2C267",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00013",
+    "class": "bare"
+   },
+   {
+    "url": "http://wallart-direct.co.uk/small/products/artmurals/Printed-Art%20Mural-11907-Cute%20Kitten%20And%20Puppy-Wild%20Life-Vinyl-C.jpg",
+    "caption": "Cute Kitten And Puppy",
+    "words": 4,
+    "file": "00021",
+    "class": "bare"
+   },
+   {
+    "url": "https://static.wixstatic.com/media/43dbb6_809c9095134045f589e9763a1aa3912b~mv2.jpeg/v1/fill/w_485,h_485,q_90/43dbb6_809c9095134045f589e9763a1aa3912b~mv2.jpeg",
+    "caption": "Cats and Dogs",
+    "words": 3,
+    "file": "00107",
+    "class": "bare"
+   },
+   {
+    "url": "https://icon2.cleanpng.com/20180409/xcw/kisspng-german-shepherd-miniature-schnauzer-golden-retriev-shepherd-5acb427fcbd516.6465918615232702718349.jpg",
+    "caption": "Dog And Cat",
+    "words": 3,
+    "file": "00064",
+    "class": "bare"
+   },
+   {
+    "url": "https://thumb1.shutterstock.com/image-photo/stock-photo-cute-cat-and-dog-isolated-on-white-450w-340153970.jpg",
+    "caption": "cat and dog",
+    "words": 3,
+    "file": "00110",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.thoughtrot.com/wp-content/uploads/2014/01/cats-and-dogs-9.jpg",
+    "caption": "cats-and-dogs (9)",
+    "words": 2,
+    "file": "00098",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.giraffesocialmedia.co.uk/wp-content/uploads/2021/01/Untitled-design-19-300x300.png",
+    "caption": "Cat and dog",
+    "words": 3,
+    "file": "00111",
+    "class": "bare"
+   },
+   {
+    "url": "https://static.thebark.com/sites/default/files/styles/feature/public/content/blog/full/opy-cats-louis-philippe-poitras-sjgucumcake-unsplash.jpg?itok=GtUPl1eX",
+    "caption": "cat and dog",
+    "words": 3,
+    "file": "00051",
+    "class": "bare"
+   },
+   {
+    "url": "https://firstclasskennels.net/dev/wp-content/uploads/2019/02/catdogfaq.jpg",
+    "caption": "Cat and Dog",
+    "words": 3,
+    "file": "00108",
+    "class": "bare"
+   },
+   {
+    "url": "https://images.unicartapp.com/image/petsmanic/image/data/21U58PICtzy_1024.jpg",
+    "caption": "Puppy and Kitten",
+    "words": 3,
+    "file": "00016",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.sleepdex.org/images/dogcat.jpg",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00125",
+    "class": "bare"
+   },
+   {
+    "url": "https://mymoleskine.moleskine.com/community/wp-content/uploads/2021/07/P1250240-scaled-270x210.jpg",
+    "caption": "Cats & Dogs",
+    "words": 3,
+    "file": "00126",
+    "class": "bare"
+   },
+   {
+    "url": "https://s1.thcdn.com/productimg/600/600/67254-2144324891803282.jpg",
+    "caption": "Cats & Dogs",
+    "words": 3,
+    "file": "00035",
+    "class": "bare"
+   },
+   {
+    "url": "https://nanahood.com/wp-content/uploads/2016/09/FB_IMG_1472303463345.jpg",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00017",
+    "class": "bare"
+   },
+   {
+    "url": "http://is5.mzstatic.com/image/thumb/Publication6/v4/a4/fe/2e/a4fe2e0f-0dc5-1201-3ec1-7084af1a13aa/source/100x150bb.jpg",
+    "caption": "Dogs And Cats",
+    "words": 3,
+    "file": "00030",
+    "class": "bare"
+   },
+   {
+    "url": "https://cdn.webshopapp.com/shops/267803/files/362188101/700x1000x1/299-cats-and-a-dog.jpg",
+    "caption": "299 Cats ( and a dog) -",
+    "words": 7,
+    "file": "00102",
+    "class": "bare"
+   },
+   {
+    "url": "http://www.trendzified.net/wp-content/uploads/2016/09/dog-and-cat-370x297.png",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00034",
+    "class": "bare"
+   },
+   {
+    "url": "https://wtw-prod.s3.amazonaws.com/users/avatars/000/029/071/0bc9af103a92ae9a6f154dc7149d2e0f76b37e48/thumb/Dog-and-Kittens.jpg?1543097678",
+    "caption": "Dog and kittens",
+    "words": 3,
+    "file": "00098",
+    "class": "bare"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/x/cat-dog-4668378.jpg",
+    "caption": "Cat and Dog",
+    "words": 3,
+    "file": "00098",
+    "class": "bare"
+   },
+   {
+    "url": "https://humanepro.org/sites/default/files/styles/square/public/images/hero/JBBA6G_467616.JPG?h=46ec9e48&itok=X4KfLjA2",
+    "caption": "Dog and Cat",
+    "words": 3,
+    "file": "00104",
+    "class": "bare"
+   },
+   {
+    "url": "https://envato-shoebox-0.imgix.net/eab8/2a6a-bce4-4b33-8702-284f98859f9f/131003-114139.JPG?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=700&s=87f9807fe87d06cdf2c9dae7595f79f1",
+    "caption": "dog and cat",
+    "words": 3,
+    "file": "00005",
+    "class": "bare"
+   },
+   {
+    "url": "https://cdn.xxl.thumbs.canstockphoto.com/cat-and-dog-stock-image_csp21948562.jpg",
+    "caption": "cat and dog",
+    "words": 3,
+    "file": "00072",
+    "class": "bare"
+   },
+   {
+    "url": "https://mir-s3-cdn-cf.behance.net/projects/202/363104.543c205de8640.jpg",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00120",
+    "class": "bare"
+   },
+   {
+    "url": "https://www.leafscience.com/wp-content/uploads/2017/09/PetsImage3.jpg",
+    "caption": "Photo of a cat and dog .",
+    "words": 7,
+    "file": "00072",
+    "class": "bare"
+   },
+   {
+    "url": "https://pixfeeds.com/images/topic/2880/640-2880-basset-hounds-photo3.jpg",
+    "caption": "Dog and cat",
+    "words": 3,
+    "file": "00118",
+    "class": "bare"
+   },
+   {
+    "url": "https://cache.desktopnexus.com/thumbseg/1980/1980036-thumbnail.jpg",
+    "caption": "Cute Puppy and Kitten",
+    "words": 4,
+    "file": "00030",
+    "class": "bare"
+   }
+  ],
+  "short": [
+   {
+    "url": "https://my.americanservicepets.com/wp-content/uploads/2021/04/Cat-vs.-Dog-Cover.png",
+    "caption": "Cats vs Dogs: Which is the Right Emotional Support Animal for You?",
+    "words": 12,
+    "file": "00112",
+    "class": "short"
+   },
+   {
+    "url": "https://s3fs.bestfriends.org/s3fs-public/partners/Alachua%20County%20Humane%20Society%20logo.png",
+    "caption": "Alachua County Humane Society logo of cats and dogs",
+    "words": 9,
+    "file": "00120",
+    "class": "short"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/aa/5a/43/aa5a43261a8a8f02586945dc8a64a89f.jpg",
+    "caption": "Cats Who Simply Cannot Deny Their Affection For Dogs",
+    "words": 9,
+    "file": "00058",
+    "class": "short"
+   },
+   {
+    "url": "https://i3.cpcache.com/product/54229959/Cute_Pets_Paw_Cat_Dog_Adopt_Re_Woven_Throw_Pillow_300x300.jpg?height=300&amp;width=300&amp;qv=90&amp;side=front&amp;Filters=[%7B&quot;name&quot;:&quot;background&quot;,&quot;value&quot;:&quot;ddddde&quot;,&quot;sequence&quot;:2%7D]",
+    "caption": "Cute Pets Paw Cat Dog Adopt Re Woven Throw Pillow",
+    "words": 10,
+    "file": "00100",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn1.fishpond.co.nz/0109/057/221/245750706/5.jpeg",
+    "caption": "My Dogs Are Going to Heaven, They're Not Sure about the Cat",
+    "words": 12,
+    "file": "00117",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.xxl.thumbs.canstockphoto.com/bright-seamless-pattern-with-funny-cat-and-dog-vector-illustration-eps-vectors_csp14469039.jpg",
+    "caption": "bright seamless pattern with funny cat and dog",
+    "words": 8,
+    "file": "00047",
+    "class": "short"
+   },
+   {
+    "url": "https://apollo-singapore.akamaized.net:443/v1/files/1b0qia3tpuhd2-IN/image;s=272x0",
+    "caption": "Dog and cat cage Available @ Pet Shop",
+    "words": 8,
+    "file": "00057",
+    "class": "short"
+   },
+   {
+    "url": "http://cdn.vectorstock.com/i/thumbs/88/21/4198821.jpg",
+    "caption": "Hamster parrot cat and dog vector",
+    "words": 6,
+    "file": "00044",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0023/2341/5087/products/030cb6c1f3b8815ccb860566a5e95890_100x.jpg?v=1525175414",
+    "caption": "Soft Protection Salon Mini Flea Comb for Cats or Dogs",
+    "words": 10,
+    "file": "00116",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0025/5675/6079/products/EDSG-Collar-charm_300x300.jpg?v=1590651026",
+    "caption": "Personalised Bling Dog Cat Collars with Name UK - EDSG",
+    "words": 10,
+    "file": "00055",
+    "class": "short"
+   },
+   {
+    "url": "https://di262mgurvkjm.cloudfront.net/05e641dc-5f65-4c69-8b33-204f1ae052ab/2013_225_011_190_P_medium.jpg",
+    "caption": "Kitten and dog sitting together and looking at the camera",
+    "words": 10,
+    "file": "00114",
+    "class": "short"
+   },
+   {
+    "url": "https://www.kroger.com/product/images/large/left/0694132710110",
+    "caption": "Glitzhome Wooden/Metal Cat & Dog Stocking Holder with class design Perspective: left",
+    "words": 12,
+    "file": "00009",
+    "class": "short"
+   },
+   {
+    "url": "https://whoof-whoof.com/wp-content/uploads/2021/07/41IkpKx2PGL-300x375.jpg",
+    "caption": "Basil Absorbent Towel for Dogs and Cats",
+    "words": 7,
+    "file": "00120",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/1075/9186/products/New-Pet-Call-Bell-Toy-for-Dog-Interactive-Pet-Training-Bell-Toys-Cat-Kitten-Puppy-Food_large.jpg?v=1566971152",
+    "caption": "Interactive Pet Call Bell Toy for Dogs or Cats",
+    "words": 9,
+    "file": "00024",
+    "class": "short"
+   },
+   {
+    "url": "https://rlv.zcache.co.uk/cats_rule_dogs_drool-rca7dfecf5c484fbcb751ec9a8b8e0d78_v9waf_8byvr_152.jpg",
+    "caption": "CATS RULE DOGS DROOL",
+    "words": 4,
+    "file": "00050",
+    "class": "short"
+   },
+   {
+    "url": "https://media.apnarm.net.au/local_classifieds/2020/05/11/products6380495394058-ivgbf6dob3ogvgnbbu2_t620.jpg",
+    "caption": "Fuzzyard Bowtie for Cats or Dogs - Christmas Blues - Small",
+    "words": 11,
+    "file": "00013",
+    "class": "short"
+   },
+   {
+    "url": "https://lucymonkman.com/wp-content/uploads/2017/05/063-LMNW.jpg",
+    "caption": "cats dogs dots greeting card any occasion",
+    "words": 7,
+    "file": "00093",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0979/5896/products/chicken_3_orig_200x.jpg?v=1506975285",
+    "caption": "Ketogenic\u2122 Chicken and PureAll All-In-One Dog and Cat Supplement Bundle",
+    "words": 10,
+    "file": "00099",
+    "class": "short"
+   },
+   {
+    "url": "http://t0.gstatic.com/images?q=tbn:ANd9GcT6Z84hrenrfDf3jy0KSjL5CtJDlgARiNSSs3Uf78xboz1Kh6xN",
+    "caption": "Covered Dog Bed Cat Bed Etsy",
+    "words": 6,
+    "file": "00052",
+    "class": "short"
+   },
+   {
+    "url": "https://media.istockphoto.com/photos/beautiful-cat-and-dog-picture-id184395824?b=1&k=6&m=184395824&s=612x612&h=i6CKulHwDJDn7wxzcJLGgrfA2ygE8dDamMXHH2AzyFM=",
+    "caption": "Beautiful cat and dog picture id184395824?b=1&k=6&m=184395824&s=612x612&h=i6ckulhwdjdn7wxzcjlggrfa2yge8ddammxhh2azyfm=",
+    "words": 6,
+    "file": "00027",
+    "class": "short"
+   },
+   {
+    "url": "https://s3fs.bestfriends.org/uploadedImages/Content/News_And_Features/How_to_Subscribe/Overlooked-senior-shy-dog-adopted-cat.jpg",
+    "caption": "Labrador mix dog Honey cuddling with one of the cats",
+    "words": 10,
+    "file": "00042",
+    "class": "short"
+   },
+   {
+    "url": "https://static2.bigstockphoto.com/thumbs/1/0/1/large2/101019854.jpg",
+    "caption": "Happy Havanese Dog And A Young Persian Cat Lying Together",
+    "words": 10,
+    "file": "00048",
+    "class": "short"
+   },
+   {
+    "url": "https://triviabliss.com/wp-content/uploads/2021/06/25604651855_dc60a266bb_c.jpg",
+    "caption": "Two cats and a dog as contestants on Jeopardy!",
+    "words": 9,
+    "file": "00052",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0542/9300/4483/products/coastal-pet-bergan-carrier-airline-compliant-backpack_250x250@2x.jpg?v=1614896043",
+    "caption": "Coastal Pet bergan carrier airline compliant backpack for dogs and cats",
+    "words": 11,
+    "file": "00024",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0009/9975/1741/products/product-image-583064368_300x300.jpg?v=1571709783",
+    "caption": "Color Printed Cat/Dog Bed",
+    "words": 4,
+    "file": "00104",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn3.vectorstock.com/i/thumb-large/45/02/cat-and-dog-paw-print-with-claws-vector-14444502.jpg",
+    "caption": "Cat and dog paw print with claws vector",
+    "words": 8,
+    "file": "00060",
+    "class": "short"
+   },
+   {
+    "url": "https://img.chewy.com/is/image/catalog/111582_MAIN._AC_SS190_V1490188636_.jpg",
+    "caption": "Pets First New England Patriots Mesh Dog & Cat Jersey, Small",
+    "words": 11,
+    "file": "00068",
+    "class": "short"
+   },
+   {
+    "url": "https://api.dabl.com/sites/default/files/styles/640x640/public/images/2020-12/cat-and-dog-under-a-christmas-tree-picture-id889086832.jpg?h=69f2b9d0",
+    "caption": "Cat and dog in front of Christmas tree",
+    "words": 8,
+    "file": "00118",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.etailpet.com/media/public/products/image_15339.jpg",
+    "caption": "Primal Treats Turkey Liver Munchies Freeze-Dried Dog & Cat Treats, 2-oz bag",
+    "words": 12,
+    "file": "00041",
+    "class": "short"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/m/golden-retriever-puppy-dog-british-cat-sleeping-together-isolated-white-55866789.jpg",
+    "caption": "Golden retriever puppy dog and british cat sleeping together. isolated",
+    "words": 10,
+    "file": "00107",
+    "class": "short"
+   },
+   {
+    "url": "https://image.shutterstock.com/image-photo/stock-photo-spitz-puppy-and-kitten-breeds-maine-coon-cat-and-dog-450w-179907521.jpg",
+    "caption": "Spitz puppy and kitten breeds Maine Coon, Cat and dog",
+    "words": 10,
+    "file": "00123",
+    "class": "short"
+   },
+   {
+    "url": "https://img.livraddict.com/covers/134/134768/couv74798680.jpg",
+    "caption": "Meaning Of It Raining Cats And Dogs",
+    "words": 7,
+    "file": "00043",
+    "class": "short"
+   },
+   {
+    "url": "https://i.pinimg.com/originals/66/72/98/667298aa31c4f6e1478bd0bdefa89ee0.jpg",
+    "caption": "Z O O Dog Cat Pictures Kittens Cutest Baby Kittens",
+    "words": 10,
+    "file": "00087",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0120/2061/3178/products/Cats-Dogs_large.jpg?v=1584047785",
+    "caption": "Supporting Cats & Dogs Rack Card",
+    "words": 6,
+    "file": "00021",
+    "class": "short"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51x5%2BTV0RGL.jpg",
+    "caption": "Pawhut Four Wheel Cat/ Dog Pet Stroller - Red",
+    "words": 9,
+    "file": "00033",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0064/6591/2943/products/product-image-791921877_160x160.jpg?v=1562937300",
+    "caption": "Pirate Fancy Dress Outfit For Cats & Small Dogs",
+    "words": 9,
+    "file": "00011",
+    "class": "short"
+   },
+   {
+    "url": "http://t0.gstatic.com/images?q=tbn:ANd9GcSGJjnZGVsACunPvKRt9enk0ccxHUyR5PDFVzPHkxHmc-jjlK9F",
+    "caption": "Cat Fight Meme - funny dog and cat fighting picture",
+    "words": 10,
+    "file": "00022",
+    "class": "short"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/J0wAAOSwW~lhTNq3/s-l300.jpg",
+    "caption": "Schleich 42293 Feed For Dogs And Cats (Farm Life Accessories) Plastic Figure",
+    "words": 12,
+    "file": "00116",
+    "class": "short"
+   },
+   {
+    "url": "http://rlv.zcache.com/dog_and_cat_by_eric_ginsburg_cards-r591c8ef9fcc34f60a22341570562ae27_xvuat_8byvr_152.jpg",
+    "caption": "dog and cat by eric ginsburg cards",
+    "words": 7,
+    "file": "00070",
+    "class": "short"
+   },
+   {
+    "url": "https://i0.wp.com/portraitsofanimals.net/wp-content/uploads/2016/10/PeaceOnEarth-front.jpg?w=585&",
+    "caption": "\"\"\"A Cat Named Peace, A Dog Named Earth\"\", holiday card\"",
+    "words": 10,
+    "file": "00044",
+    "class": "short"
+   },
+   {
+    "url": "https://nuvet.com/images/nuvet-pet-dogs-cats-supplemets-immune-support-phone19.jpg",
+    "caption": "nuvet-pet-dogs-cats-supplemets-immune-support",
+    "words": 1,
+    "file": "00034",
+    "class": "short"
+   },
+   {
+    "url": "https://www.veryvintagedesigns.com/wp-content/uploads/2021/03/Orchid-Rain_w-247x185.jpg",
+    "caption": "purple yellow green plaid collar for a dog or cat",
+    "words": 10,
+    "file": "00074",
+    "class": "short"
+   },
+   {
+    "url": "https://www.nametagwizard.com/media/catalog/product/d/o/dog-and-cat-heads-veterinary-name-tag.png",
+    "caption": "Dog and Cat Heads Veterinary Name Tag",
+    "words": 7,
+    "file": "00077",
+    "class": "short"
+   },
+   {
+    "url": "https://dogstreats.co.uk/wp-content/uploads/2020/07/Logic-Oral-Hygiene-Gel-Enzymatic-Dog-amp-Cat-Toothpaste-70g-300x300.png",
+    "caption": "Logic Oral Hygiene Gel Enzymatic Dog & Cat Toothpaste 70g",
+    "words": 10,
+    "file": "00050",
+    "class": "short"
+   },
+   {
+    "url": "https://www.mytinyworld.co.uk/images/giant/130408_19.jpg",
+    "caption": "Dolls House Miniature Beige Cat and Dog Bowl Set",
+    "words": 9,
+    "file": "00103",
+    "class": "short"
+   },
+   {
+    "url": "https://www.kriso.lt/covers/medium/978149/9781498741477.jpg",
+    "caption": "Obesity in the Dog and Cat",
+    "words": 6,
+    "file": "00126",
+    "class": "short"
+   },
+   {
+    "url": "https://i.ebayimg.com/images/a/T2eC16NHJGkE9no8gF1HBQJu-sD!gw~~/s-l300.jpg",
+    "caption": "Portable Pro Round Quot Lazy Susan Quot Rotating Dog Cat Grooming",
+    "words": 11,
+    "file": "00098",
+    "class": "short"
+   },
+   {
+    "url": "https://t2.ftcdn.net/jpg/00/75/90/95/1000_F_75909570_WfycAnmS50n2qf77I3FP6jphtysG5iXS.jpg",
+    "caption": "Dog and cats together",
+    "words": 4,
+    "file": "00111",
+    "class": "short"
+   },
+   {
+    "url": "http://cdn.shopify.com/s/files/1/2409/4679/products/product-image-357116128_580x.jpg?v=1507005174",
+    "caption": "Indoor Cozy Shark House for Cats and Dogs",
+    "words": 8,
+    "file": "00034",
+    "class": "short"
+   },
+   {
+    "url": "http://ep.yimg.com/ay/entirelypets/resvantage-for-dogs-and-cats-16.jpg",
+    "caption": "Resvantage for Dogs and Cats",
+    "words": 5,
+    "file": "00074",
+    "class": "short"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51py1fLHMSL._AC_UL250_SR250,250_.jpg",
+    "caption": "VALUE PACK Pet Grooming Glove for Dog Cat + 2 Lint Rollers",
+    "words": 12,
+    "file": "00085",
+    "class": "short"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/4p0AAOSwzcpbPemh/s-l225.jpg",
+    "caption": "SnuggleSafe Cool Pad coolpad for dogs and cats",
+    "words": 8,
+    "file": "00056",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0379/5923/7764/products/chicken_fillet_2_1024x1024.jpg?v=1607266369",
+    "caption": "Kakato - Chicken Fillet (Dogs & Cats) canned",
+    "words": 8,
+    "file": "00096",
+    "class": "short"
+   },
+   {
+    "url": "https://t3.gstatic.com/images?q=tbn:ANd9GcRMfHjuH07wRxr2ZnX9tNJfJRYZDh_q-5WJVcMEXWf2fgEl3XXs",
+    "caption": "Evanger's Grain Free Dog & Cat Food - Wild Salmon",
+    "words": 10,
+    "file": "00025",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/1247/1481/products/Four_Paws_-_Ear_Wash_for_Cats_and_Dogs_large.jpg?v=1492744698",
+    "caption": "Four Paws - Ear Wash for Cats and Dogs",
+    "words": 9,
+    "file": "00085",
+    "class": "short"
+   },
+   {
+    "url": "http://cdn.vectorstock.com/i/thumbs/67/08/966708.jpg",
+    "caption": "Cute cat and dog silhouette vector",
+    "words": 6,
+    "file": "00003",
+    "class": "short"
+   },
+   {
+    "url": "https://images.toyscat.net/l-m/pet-cat-dogs-chew-catnip-cleaning-teeth.jpg",
+    "caption": "pet cat dogs chew catnip cleaning teeth",
+    "words": 7,
+    "file": "00116",
+    "class": "short"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0354/2381/3771/products/product-image-1295559565_300x300.jpg?v=1583978702",
+    "caption": "2020 HOT  Box Mini GPS Pet Tracker Dog Cat",
+    "words": 9,
+    "file": "00106",
+    "class": "short"
+   },
+   {
+    "url": "https://vannesspets.com/wp-content/uploads/2018/04/cat-dog-beds-1000x700-667x467.png",
+    "caption": "cat-dog-beds-1000x700",
+    "words": 1,
+    "file": "00092",
+    "class": "short"
+   },
+   {
+    "url": "https://tse4.mm.bing.net/th?id=OIP.mu8J_zF2vohTAKlb93raEQEsC7",
+    "caption": "pictures of cats and dogs cats and wallpaper high definition wallpapers high",
+    "words": 12,
+    "file": "00105",
+    "class": "short"
+   }
+  ],
+  "random": [
+   {
+    "url": "https://i.pinimg.com/236x/43/e7/0b/43e70b74d66c3b81e7cd6b9e368b4c79--art-thou-cat-paintings.jpg",
+    "caption": "\"\"\"\"\"\"\"Sunlit Kitty - Sweet Kitty\"\"\"\" par Marcia Baldwin and like OMG! get some yourself some pawtastic adorable cat apparel! Watercolor Cat, Watercolor Paintings, Artist Portfolio, Cat Drawing, Animal Paintings, Beautiful Cats, Dog Art, Pet Portraits, Oeuvre D'art\"\"\"",
+    "words": 37,
+    "file": "00109",
+    "class": "random"
+   },
+   {
+    "url": "https://www.globalanimal.org/wp-content/uploads/2013/10/adopt-a-pet-cat-banner-logo-445x450.png",
+    "caption": "Adopt a pet search, rescue a cat, dog, puppy or kitten",
+    "words": 11,
+    "file": "00089",
+    "class": "random"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/61Vdvl-MorL._SL1200_.jpg",
+    "caption": "Fishagelo Pet Dog Exercise Kennel Cat Portable Foldable Pen Dog Kennel House Travel Tent Pet Supplies Fishagelo",
+    "words": 17,
+    "file": "00001",
+    "class": "random"
+   },
+   {
+    "url": "https://d2hg8ctx8thzji.cloudfront.net/healthpanda.net/wp-content/uploads/2019/10/Here_are_the_top_6_food_allergies_in_cats_and_dogs-472x354.jpg",
+    "caption": "Here are the top 6 food allergies in cats and dogs",
+    "words": 11,
+    "file": "00121",
+    "class": "random"
+   },
+   {
+    "url": "https://www.jmelvinrealestate.com/uploaded_images/t26585-aquaculture-floating-fish-food-feed-pellet-mill-making-machine-poultry-dog-cat-pet-extruder-machine-line-agriculture-equipment.jpg",
+    "caption": "Aquaculture Floating Fish Food Feed Pellet Mill Making Machine Poultry Dog Cat Pet Extruder Machine Line Agriculture Equipment",
+    "words": 18,
+    "file": "00102",
+    "class": "random"
+   },
+   {
+    "url": "https://img.etsystatic.com/il/77563f/1207856478/il_340x270.1207856478_joeo.jpg?version=0",
+    "caption": "Dog Tag - Pastel Universe - Collar Tag - Pet Name Tags - Dog Tags - Cat ID Tags",
+    "words": 19,
+    "file": "00108",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/2618/4860/products/51tNBOkSOfL_195x195@2x.jpg?v=1543793675",
+    "caption": "Pure Freeze Dried Salmon Filet Treats for Dogs & Cats - With Raw & Wild Caught Pacific Sockeye Salmon Fish - Omega 3 EPA + DHA Fatty Acids for Joint & Immune Support + Skin & Coat Health - 4.5 OZ",
+    "words": 41,
+    "file": "00058",
+    "class": "random"
+   },
+   {
+    "url": "https://i.ebayimg.com/00/s/NjAwWDgwMA==/z/kkEAAOSwXedZwWhH/$_35.JPG",
+    "caption": "Pet Carrier Small Dog or Cat",
+    "words": 6,
+    "file": "00049",
+    "class": "random"
+   },
+   {
+    "url": "https://bagalio.cz/pub/media/catalog/product/cache/777a95946d179b26dbdcc779e555023a/m/1/m1_io4062_pic1.jpg",
+    "caption": "Reisenthel Toiletbag S Kids Cats and dogs mint",
+    "words": 8,
+    "file": "00056",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0074/1959/2793/products/product-image-309496492_400x.jpg?v=1572414545",
+    "caption": "Pet Paw Footprint Necklaces Cute foot Dog Cat Love Heart Pendant Necklace",
+    "words": 12,
+    "file": "00105",
+    "class": "random"
+   },
+   {
+    "url": "https://us.123rf.com/450wm/irynakhomenko/irynakhomenko1806/irynakhomenko180600023/104075578-logo-for-pet-hair-salon-pet-styling-and-grooming-shop-store-for-dog-and-cats-vector-illustration.jpg?ver=6",
+    "caption": "Logo for pet hair salon, pet styling and grooming shop, store for dog and cats. Vector illustration Stock Illustratie",
+    "words": 19,
+    "file": "00012",
+    "class": "random"
+   },
+   {
+    "url": "https://img.youtube.com/vi/DXTxOXNL2-8/mqdefault.jpg",
+    "caption": "African Cheetah Cub Versus Jack Russell Terrier - Cat & Dog Fight Battle of Will - Cheetah Thug Life",
+    "words": 19,
+    "file": "00000",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.bestreviews.com/images/v4desktop/image-full-page-cb/flying-pig-grooming-high-velocity-dog-and-cat-grooming-dryer-820151.jpg",
+    "caption": "Flying Pig Grooming's High-Velocity Dog and Cat Grooming Dryer",
+    "words": 9,
+    "file": "00050",
+    "class": "random"
+   },
+   {
+    "url": "http://www.lepetco.com/wp-content/uploads/2015/07/577.jpg",
+    "caption": "Wholesale Washable Cat Bed Dog Beds Luxury Large Pet Dog Bed",
+    "words": 11,
+    "file": "00084",
+    "class": "random"
+   },
+   {
+    "url": "https://top13.net/wp-content/uploads/2017/09/cats-and-dogs-funny-comics-cover-360x200.jpg",
+    "caption": "13 Funny Comics That Show The Differences Between Dogs And Cats",
+    "words": 11,
+    "file": "00065",
+    "class": "random"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/6170DU6ub1L.jpg",
+    "caption": "ONETKM Pet Memorial Stones For Dog or Cat,Cute Tombstone Engraved With Sympathy Poem & Paw In Hand Design,Garden Decoration Stone With Footprint,Meaning Gift For Indoor Or Outdoor",
+    "words": 27,
+    "file": "00008",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0429/4964/0346/products/17292_1024x.jpg?v=1605189503",
+    "caption": "Turtledove Legging Cats & Dogs Honey",
+    "words": 6,
+    "file": "00008",
+    "class": "random"
+   },
+   {
+    "url": "https://ae01.alicdn.com/kf/HLB1TahRaPDuK1RjSszdq6xGLpXax/50pcs-Pet-Disposable-Diaper-Dog-font-b-Cat-b-font-font-b-Deodorant-b-font-Super.jpg",
+    "caption": "50pcs Pet Disposable Diaper Dog Cat Deodorant Super Absorption Pee Training Dog Tray Accessories For Adult Child/Pets Absorbent",
+    "words": 18,
+    "file": "00045",
+    "class": "random"
+   },
+   {
+    "url": "https://thumbs3.ebaystatic.com/pict/3723292422224040_1.jpg",
+    "caption": "Portable Dog Car Seat Belt Booster Travel Carrier Folding Bag for Pet Cat Puppy",
+    "words": 14,
+    "file": "00024",
+    "class": "random"
+   },
+   {
+    "url": "https://www.k9-watch.com/3328-medium_default/yellow-smiley-identity-medals-cat-and-dog-tag-medaillon-iron-engraved-smile.jpg",
+    "caption": "Yellow Smiley Identity Medals, cat and dog",
+    "words": 7,
+    "file": "00021",
+    "class": "random"
+   },
+   {
+    "url": "https://i3.cpcache.com/product/1128538761/Dogs_and_Cats_Queen_Duvet_300x300.jpg?height=300&amp;width=300&amp;qv=90&amp;side=front&amp;Filters=[%7B&quot;name&quot;:&quot;background&quot;,&quot;value&quot;:&quot;ddddde&quot;,&quot;sequence&quot;:2%7D]",
+    "caption": "Dogs and Cats Queen Duvet",
+    "words": 5,
+    "file": "00031",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0291/8871/8651/products/9dede9f5e6a294663882339fd91e91fd_300x300.jpg?v=1579028122",
+    "caption": "Transer Pet Supply 1pc Plush Banana Shape Dog Squeak Sound Toys Fruit Interactive Cat Dog Toy 80406",
+    "words": 17,
+    "file": "00088",
+    "class": "random"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/t/dog-cat-silhouette-electrocardiogram-47885749.jpg",
+    "caption": "Dog and cat silhouette with Electrocardiogram Royalty Free Stock Images",
+    "words": 10,
+    "file": "00067",
+    "class": "random"
+   },
+   {
+    "url": "http://i00.i.aliimg.com/photo/v0/1105383958/16oz_454g_pet_disposable_food_packaging_bags.jpg_220x220.jpg",
+    "caption": "16oz 454g pet disposable food packaging bags/Pet Food Packaging for dogs or cats/stand up pouches for pet food",
+    "words": 18,
+    "file": "00118",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn4.vectorstock.com/i/thumb-large/45/28/cats-and-dogs-vector-5114528.jpg",
+    "caption": "Cats and dogs vector",
+    "words": 4,
+    "file": "00013",
+    "class": "random"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/ef/5d/cc/ef5dccae3626eaf7e33caf3ad1e10721.jpg",
+    "caption": "skunks & bambi #Animals #cats #cute #animals #deer #dogs #kittens #lions #Photography #Pictures #puppies #squirrels #tigers #wolves",
+    "words": 17,
+    "file": "00016",
+    "class": "random"
+   },
+   {
+    "url": "http://img0061.popscreencdn.com/122458475_fashion-hot-random-color-new-dog-cat-pet-collar-.jpg",
+    "caption": "Fashion Hot Random Color New Dog Cat Pet Collar Accessory Bow Tie",
+    "words": 12,
+    "file": "00104",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn2.shopify.com/s/files/1/2448/8767/products/product-image-280496327_200x200.jpg?v=1520551213",
+    "caption": "2 Sides Cat & Dog Paw Shape Tag",
+    "words": 8,
+    "file": "00031",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/1055/6308/products/pp2-doorwire-2_compact.jpg?v=1448023096",
+    "caption": "Precision Pet ProValue 2-Door Wire Pet Cat Dog Crates Carriers",
+    "words": 10,
+    "file": "00059",
+    "class": "random"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/jycAAOSw175b5ZBS/s-l225.jpg",
+    "caption": "Flea Collar for dog and cat [8 months] safe tick treatment, spot protection",
+    "words": 13,
+    "file": "00097",
+    "class": "random"
+   },
+   {
+    "url": "http://ihavecat.com/wp-content/uploads/2016/10/Screen-Shot-2016-10-05-at-10.11.05-PM.png",
+    "caption": "dog who reads, dog loves cats",
+    "words": 6,
+    "file": "00069",
+    "class": "random"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/XZcAAOSwRQlXf6Zx/s-l225.jpg",
+    "caption": "Personalised Pet Treat Glass Kilner Jar - Engraved Message Food Storage Cat Dog",
+    "words": 13,
+    "file": "00096",
+    "class": "random"
+   },
+   {
+    "url": "https://www.seyhanbaskiliposet.com/uploaded_images/t31138-dry-dog-food-processing-machine-pet-food-extruder-cat-food-production-line.jpg",
+    "caption": "Dry Dog Food Processing Machine Pet Food Extruder Cat Food Production Line",
+    "words": 12,
+    "file": "00024",
+    "class": "random"
+   },
+   {
+    "url": "https://i28.onbuy.com/product/00f9476d99b0457db944c4fccd2ca947-m3687560.jpg",
+    "caption": "New Design Dog And Cat Nest Lightweight Soft Pet Beds",
+    "words": 10,
+    "file": "00116",
+    "class": "random"
+   },
+   {
+    "url": "https://ae01.alicdn.com/kf/HTB1NltAXjnD8KJjSspbq6zbEXXaA/-font-b-Pet-b-font-font-b-Supplies-b-font-Portable-Dog-Cat-Nail-Clipper.jpg_220x220.jpg",
+    "caption": "Pet Supplies Portable Dog Cat Nail Clipper + File Kit Stainless Steel Toe Care Dogs Claw Nails Cutter Scissor Grooming J",
+    "words": 21,
+    "file": "00065",
+    "class": "random"
+   },
+   {
+    "url": "https://photos.offerup.com/N2dgdCY6RMRlHJscqQud_djY6TU=/333x250/559b/559b46108c4147c293f846d5849de10c.jpg",
+    "caption": "Pet couch for Cat or Dog leopard print for Sale in East Los Angeles,  CA",
+    "words": 15,
+    "file": "00055",
+    "class": "random"
+   },
+   {
+    "url": "http://www.myshared.ru/thumbs/17/1051934/big_thumb.jpg",
+    "caption": "Humans best friend. Many people are fond of pets. They keep different animals and birds as pets. More often they are dogs, cats, hamsters, guinea-pigs,",
+    "words": 25,
+    "file": "00081",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn1.vectorstock.com/i/thumb-large/38/59/dogs-and-cats-pets-friendly-vector-20063859.jpg",
+    "caption": "dogs and cats pets friendly vector image",
+    "words": 7,
+    "file": "00009",
+    "class": "random"
+   },
+   {
+    "url": "https://static1.bigstockphoto.com/7/3/5/large2/53797816.jpg",
+    "caption": "Vector Pet Icons Set: Cat, Dog, Pawprint, Mouse, Collar, Kennel, Bowls, Cage",
+    "words": 12,
+    "file": "00039",
+    "class": "random"
+   },
+   {
+    "url": "https://www.dhresource.com/0x0s/f2-albu-g5-M00-3B-33-rBVaI1l68gaAV9F1AAIHMAl-ehI422.jpg/mixed-colorful-50pcs-hc357-pretty-enamel.jpg",
+    "caption": "Mixed Colorful HC357 Pretty Enamel Cat Dog/Bear Paw Prints hang pendant fit Rotating Key Chain Keyrings bag Jewelry Making",
+    "words": 19,
+    "file": "00073",
+    "class": "random"
+   },
+   {
+    "url": "https://rlv.zcache.co.uk/falling_cats_and_dogs_playing_cards-r98b0defdab0348d9b3411129d9a6968c_zaeo3_324.jpg?rlvnet=1",
+    "caption": "Falling Cats And Dogs Playing Cards",
+    "words": 6,
+    "file": "00014",
+    "class": "random"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/ff/59/61/ff5961381e2a7e5c0e05daa6b273a8b0--google-https-cat-supplies.jpg",
+    "caption": "Cats Kittens Video Compilation 2015 NEW The Most Popular and Fun ! ?     MORE KITTENS HERE  http://www.youtube.com/user/TheFederic777?sub_confirmation=1  FACEBOOK:  https://www.facebook.com/KittensLoveForever/  GOOGLE +: https://plus.google.com/u/0/115624639852623703105/posts  BLOG:  http://look-how-cute-kittens-2.blogspot.com/  BLOG:  http://make-dogs-be-happy.blogspot.com/  #KittensCatsMeowing #KittensCatVideo   #KittensCatsFunny #KittensCatCompilation",
+    "words": 30,
+    "file": "00063",
+    "class": "random"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/fHcAAOSwZVlXqhDF/s-l200.jpg",
+    "caption": "Washable Soft Warm Pet Dog Puppy Cat Cushion Kennel Cage Pad Bed Fleece Mat Nest",
+    "words": 15,
+    "file": "00035",
+    "class": "random"
+   },
+   {
+    "url": "https://media.apnarm.net.au/local_classifieds/2020/06/05/products50288118968920-hiepj65mlg4s561cgu2_t620.jpg",
+    "caption": "la doggie vita bed plush donut charcoal  small | La Doggie Vita cat dog | pet supplies| Product...",
+    "words": 18,
+    "file": "00100",
+    "class": "random"
+   },
+   {
+    "url": "http://render.fineartamerica.com/images/rendered/search/framed-print/images-medium-5/playful-dog-and-cat-laying-together-susan-schmitz.jpg",
+    "caption": "Playful Dog And Cat Laying Together Framed Print by Susan  Schmitz",
+    "words": 11,
+    "file": "00114",
+    "class": "random"
+   },
+   {
+    "url": "http://timg.china.cn/0/1_150_60200_750_750.jpg",
+    "caption": "Hot selling cat dog interactive feeder pet silicone slow feeder bowl",
+    "words": 11,
+    "file": "00041",
+    "class": "random"
+   },
+   {
+    "url": "https://weltbild.scene7.com/asset/vgw/e-commerce-law-in-germany-119262934.jpg",
+    "caption": "Ecommerce Law In Germany Buch Portofrei Bei Weltbildde. Volkswagen Dealer Denver Cheap Usb Microscope. How To Create A Sales Website. Warehouse Racking Solutions Solar Power Az. Security Code On Mastercard Cat Pu Surgery. Atrial Fibrillation In Dogs Top Mba Program. Methadone Addiction Symptoms Web Based Erp. School For Laser Hair Removal. Huntington College Of Health Sciences",
+    "words": 56,
+    "file": "00123",
+    "class": "random"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/41egkyuN6UL.jpg",
+    "caption": "Pet Scarf Dog Bandana Bibs Triangle Head Scarfs Paris Building Accessories for Cats Baby Puppy",
+    "words": 15,
+    "file": "00058",
+    "class": "random"
+   },
+   {
+    "url": "https://puplifetoday.com/wp-content/uploads/2019/04/Capstar-blue-11.4mg-min.jpg",
+    "caption": "Capstar Oral Flea Treatment for Dogs and Cats, 6 Ct",
+    "words": 10,
+    "file": "00112",
+    "class": "random"
+   },
+   {
+    "url": "http://halloweencostumesbest.com/wp-content/uploads/2017/10/PET-SHOW-Cats-Dogs-Pumpkin-Warm-Adjustable-Costumes-Set-with-Hat-for-Pet-Halloween-Party-Cosplay-Accessories-Outfits-Apparel-Headwear-Pack-of-1-0-5-270x324.jpg",
+    "caption": "PET-SHOW-Cats-Dogs-Pumpkin-Warm-Adjustable-Costumes-Set-with-Hat-for-Pet-Halloween-Party-Cosplay-Accessories-Outfits-Apparel-Headwear-Pack-of-1-0-5",
+    "words": 1,
+    "file": "00061",
+    "class": "random"
+   },
+   {
+    "url": "https://us.123rf.com/450wm/simply/simply1209/simply120900041/15275628-orange-golden-retriever-dog-and-baby-cat-outdoor-on-green-grass.jpg?ver=6",
+    "caption": "tolerance: orange golden retriever dog and baby cat outdoor on green grass",
+    "words": 12,
+    "file": "00047",
+    "class": "random"
+   },
+   {
+    "url": "http://i.ebayimg.com/thumbs/images/g/E9sAAOSwB-1Yt~nu/s-l225.jpg",
+    "caption": "Animal Crossing Let's Go to the City Wii + Boxed Wii Speak = pets cat dog zoo",
+    "words": 17,
+    "file": "00077",
+    "class": "random"
+   },
+   {
+    "url": "https://thumbs.ebaystatic.com/images/g/ZPAAAOSwSHZWf0~c/s-l140.jpg",
+    "caption": "Unisex Pet Winter Clothes Puppy Dog Cat Vest T Shirt Coat Dress Sweater Apparel",
+    "words": 14,
+    "file": "00079",
+    "class": "random"
+   },
+   {
+    "url": "https://m.media-amazon.com/images/I/51kTF7jik-L._AC_UL320_ML3_.jpg",
+    "caption": "The Cats Who Fell Out of the Car: Two Angry Dogs Part 4 (Follifoot Farm Series 2)",
+    "words": 17,
+    "file": "00003",
+    "class": "random"
+   },
+   {
+    "url": "https://i.ebayimg.com/thumbs/images/g/GE8AAOSw~HBej58Y/s-l225.jpg",
+    "caption": "Magic Pets Dog Cat Baby Safety Gate Mesh Fence Portable Guard Net Stairs Doors",
+    "words": 14,
+    "file": "00013",
+    "class": "random"
+   },
+   {
+    "url": "https://assets.listia.com/photos/43b1d4b491d93d79fa0d/original.png?s=320x320m&sig=9377ee47aa6d8608&ts=1561992852",
+    "caption": "Puppy Cat Ball Teeth Toy PVC Chew Sound Dogs Play Fetching Squeak Toys Pet Supplies329686683670",
+    "words": 15,
+    "file": "00101",
+    "class": "random"
+   },
+   {
+    "url": "https://us.123rf.com/450wm/nataliyaart/nataliyaart1507/nataliyaart150700008/43608802-kitten-and-puppy-friendship-kitten-and-puppy-sitting-close-to-cats-and-dogs-food-heart-on-the-backgr.jpg?ver=6",
+    "caption": "kitten cartoon: Kitten and puppy friendship. Kitten and puppy sitting close to cats and dogs food. Heart on the background",
+    "words": 20,
+    "file": "00092",
+    "class": "random"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0276/0074/8578/products/3_7dba2140-858d-4caf-b177-32e5111de8d1_110x110@2x.jpg?v=1574304216",
+    "caption": "\"Load image into Gallery viewer, OWNPETS Lockable Pet Screen Door ( Large: 16.54\"\" x 0.4\"\" x 14.57\"\" ) with Magnetic Flap Door for Small Dogs and Cats\"",
+    "words": 27,
+    "file": "00061",
+    "class": "random"
+   },
+   {
+    "url": "https://pic.pimg.tw/ming2262/1320115378-3753121279_s.jpg",
+    "caption": "Halloween -cats and dogs (2).jpg",
+    "words": 5,
+    "file": "00018",
+    "class": "random"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/61ocj7m5l8L._SL3000_.jpg",
+    "caption": "PETBABA Cat Cone Collar in Recovery, Clear Elizabethan Not Block Vision, Soft Padded E-Collar Protect Neck, Suitable Kitten Puppy Dog Pet in Surgery Remedy Grooming - S in Rose by PETBABA",
+    "words": 31,
+    "file": "00072",
+    "class": "random"
+   }
+  ],
+  "long": [
+   {
+    "url": "https://images.squarespace-cdn.com/content/v1/599e2fb2d7bdce0e4307cca2/1503586566823-PWSL322CJ0JXA6758QYL/ke17ZwdGBToddI8pDm48kM2bIIk7tZvET7F0i0R9Xu5Zw-zPPgdn4jUwVcJE1ZvWhcwhEtWJXoshNdA9f1qD7Xj1nVWs2aaTtWBneO2WM-vJ08utClELsKMzPArjDYIeY5iSy2Oce0WN-ml5sGamsg/Dee.jpg",
+    "caption": "Dee - Dee has worked for the Presque Isle Animal Hospital since 1994. She and her family live in Mars Hill with an assortment of dogs, cats, horses, cattle, sheep and poultry. Dee enjoys gardening, knitting, and herding with her dog,",
+    "words": 41,
+    "file": "00011",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/41t89gMXpVL.jpg",
+    "caption": "Replacement Tray for Dog Crate Pans - Medium 24 Inch Plastic Bottom Pan Floor Liners for Pet Cages Crates Kennels Dogs Cat Rabbit Ferret Critter Nation Folding Metal Wire Training Cage Liner Trays",
+    "words": 33,
+    "file": "00076",
+    "class": "long"
+   },
+   {
+    "url": "https://ssl.c.photoshelter.com/img-get2/I00007469dg0U344/fill=/fit=250x250/I00007469dg0U344.jpg",
+    "caption": "PAUL O'GRADY and AMANDA HOLDEN with a Battersea dog at Battersea Dogs & Cats Home's Collars & Coats Gala Ball held at Battersea Evolution, Battersea Park, London on30th October 2014.",
+    "words": 30,
+    "file": "00084",
+    "class": "long"
+   },
+   {
+    "url": "https://ae01.alicdn.com/kf/HTB1pndUdeuSBuNjSsplq6ze8pXaO/JIQI-Household-dust-Mites-Collector-Vacuum-Cleaner-for-Home-Bed-Effectively-Removes-Dust-Mite-Bacteria-Viruses.jpg",
+    "caption": "JIQI Household dust Mites Collector Vacuum Cleaner for Home Bed Effectively Removes Dust Mite Bacteria, Viruses jiqi vacuum cleaner household small strong divide mite handheld pusher dog and cat pet hair carpet suction machine",
+    "words": 34,
+    "file": "00060",
+    "class": "long"
+   },
+   {
+    "url": "https://www.gannett-cdn.com/presto/2018/12/04/PMUN/602677d0-1069-440e-94da-e0dcca6cd2a0-MNI_1203_AdoptionEvent4130.jpg?crop=5184,3839,x344,y0&amp;width=80&amp;height=60&amp;fit=bounds",
+    "caption": "Cats wait to be adopted on the adoption floor of the Muncie Animal Shelter Tuesday afternoon. The shelter will have a 24 hour adoption event starting Friday at midnight where all dogs will be $5 to adopt, while all cats and kittens will be $1 to adopt.",
+    "words": 47,
+    "file": "00015",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/a4/05/3f/a4053fef25fd8bd2b3e3ff238f42d706--thankful-quotes-losing-a-pet.jpg",
+    "caption": "Losing a pet means losing a best friend dont want to think when my Sally will leave me Pass Away Quotes, Pet Poems, Dog Passed Away, Pet Loss Grief, Pet Remembrance, Losing A Pet, Losing A Cat Quote, Pet Memorials, Animal Quotes",
+    "words": 42,
+    "file": "00079",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/36/34/2f/36342f539c7ee0fed3a5d83feb658ded.jpg",
+    "caption": "Print advertisement created by Propeg, Brazil for Dr. Dog, within the category: Pets. Dog Treat Packaging, Ad Of The World, Seal Pup, Japanese Cat, Behance, Dog Shampoo, Advertising Photography, Ad Design, Branding Design",
+    "words": 33,
+    "file": "00101",
+    "class": "long"
+   },
+   {
+    "url": "https://m.media-amazon.com/images/I/41uDFcNTM3L.jpg",
+    "caption": "AB Pet Grooming Glove with Brush, Hair Remover Comb Gentle Deshedding Efficient Pet Mitt Pet Massage Gloves Draw Dogs Cats Horses Long Short Fur Removing Tangles and Knots Tool (Blue)",
+    "words": 30,
+    "file": "00036",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/71vTpVJiFlL._AC_SL300_.jpg",
+    "caption": "Ruff 'n Ruffus Portable Foldable Pet Playpen + Carrying Case & Collapsible Travel Bowl | Indoor / Outdoor use | Water resistant | Removable shade cover | Dogs / Cats / Rabbit | Available In 3 Sizes",
+    "words": 37,
+    "file": "00016",
+    "class": "long"
+   },
+   {
+    "url": "https://tangand.co.uk/wp-content/uploads/2018/01/1413-1-525x394.png",
+    "caption": "Treat your cat or dog to this Antique style Cast Iron Dog/Cat Dish Set with practical stainless steel removable bowls for easy cleaning. Stunning black scrolled stand. Buy online at Tang & Co. Home",
+    "words": 34,
+    "file": "00029",
+    "class": "long"
+   },
+   {
+    "url": "https://m.psecn.photoshelter.com/img-get2/I0000KwGykcS5Dto/fit=250x250/fill=/g=G0000x2.1z3li8bo/I0000KwGykcS5Dto.jpg",
+    "caption": "\"\"\"EXCLUSIVE: A Great Dane who didn't like cats has stopped a kitten going blind by donating blood used in sight-saving eye drops. Huge dog Harlie, who weighs around nine stone, put her best paw forward to give blood used to treat Zephyr the rescued kitten. Vets treated eight-week-old Zephyr with serum drops which used elements of Harlie's blood after it has been separated using a centrifuge. The liquid part of the blood is made into drops which help the surface of the eye to heal and stop the tissue breaking down. Rescuers feared the worst for Zephyr but her sight has now been saved thanks to her huge donor friend Harlie. Steph Taylor, from charity Rescue Me Animal Sanctuary, said Zephyr was found with three siblings under a shed in Liverpool, England. She said: \"\"\"\"They were all full of flu which had led to secondary pneumonia, horrific conjunctivitis with ulcerated eyes, ticks, severe flea infestation leading to anaemia and dehydration. \"\"\"\"The serum from Harlie was fairly unusual for us to use and we have never done it before, there are several types of conventional medicated drops and we used these first but as Zephyr was not responding to these, our vet suggested it. \"\"\"\"We had heard of it once before when another rescue spoke about it and they had amazing results. \"\"\"\"We have four dogs at our HQ but sadly none were suitable blood donors due to their size, age or health problems so we had to turn to the public for help\u2026 and along came Harlie.\"\"\"\" Harlie's owner Jess said she wanted to help but at first she feared Harlie wasn't used to cats and it might not be a good idea for her to meet Zephyr in person. Jess, 30, a foster carer from Liverpool, England, said meeting Zephyr was the first time her huge hound had met a feline in person. Jess, who has three other dogs, a Staffordshire bull terrier, and two shih tzu Yorkshire terriers, said she wanted to help after seeing an appeal for blood donors to produce the serum used for the eye drops. She said: \"\"\"\"We were\"\"\"",
+    "words": 355,
+    "file": "00052",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/af/c6/ea/afc6ea2172f9d41a3aac99c4d01b0aa8--lawyer-humor-legal-humor.jpg",
+    "caption": "New meme Lawyer Dog is taking over the Internet one piece of litigation at a time, but Business Cat has taken offense. Social Media is just amazing! Business Cat, Strategy Business, Serious Business, Animal Memes, Funny Animals, Cute Animals, Funniest Animals, Animal Funnies, Clever Animals",
+    "words": 45,
+    "file": "00097",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/61WOJwrimJL._SR200,200_.jpg",
+    "caption": "Tapee Paws Hemp Oil for Dogs and Cats 250 mg - Pain Relief, Calming, Fights Cancer, Remedies - Arthritis, Stress, Seizures, Separation Anxiety, Itching & Skin Allergies (Natural, 250mg 1oz)",
+    "words": 30,
+    "file": "00020",
+    "class": "long"
+   },
+   {
+    "url": "https://m.media-amazon.com/images/I/61FQrPco8ZL.jpg",
+    "caption": "Natural Omega 3 Fish Oil for Dogs & Cats Soft Chew Supplement (Small & Medium Dogs/Cats, 60 CT) w/ Omega-3 Fatty Acids, EPA, DHA, Vitamin E for Healthy Skin, Coat, Joints & Brain Function, Made in USA",
+    "words": 37,
+    "file": "00064",
+    "class": "long"
+   },
+   {
+    "url": "http://www.belidan.com/wp-content/uploads/2018/02/AR1-1-584x430.jpg",
+    "caption": "Animal Repeller and Bird Repellent \u2013 Animal Repellent Ultrasonic Outdoor \u2013 Deterrent for Dogs, Cats, Deer, Birds, Bats, Raccoons, Skunk, Mice, Rats, Squirrel, Badgers and Martens. Solar Powered Animal Repeller with Motion Sensor, LED light and Alarm",
+    "words": 37,
+    "file": "00074",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/41ocBQboY5L.jpg",
+    "caption": "Cute Hat Pet Cap Birthday Party Hat With Happy Birthday Candles For Dogs Cats Pet Hat Birthday Party Christmas Entertainment Prop Baby's Birthday Party, Theme Party,Fancy Dress Ball (Blue, One Size)",
+    "words": 31,
+    "file": "00106",
+    "class": "long"
+   },
+   {
+    "url": "http://barkpost.com/wp-content/uploads/2015/07/sherpa.jpg",
+    "caption": "sedating a small dog for travel Here are the most commonly applied indications in cat and dog medicine: as an oral sedative for travel a small dose of acepromazine makes sedating pets.",
+    "words": 32,
+    "file": "00079",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/70/a2/64/70a2640b5b1e05a95161343222ede55b.jpg",
+    "caption": "\"\"\"Visit our internet site for more relevant information on \"\"\"\"corgi puppies:. It is actually an exceptional area to get more information. Cute Corgi Puppy, Corgi Dog, Pet Puppy, Cute Puppies, Cute Dogs, Dogs And Puppies, Dog Cat, Teacup Puppies, Pomeranian Puppy\"\"\"",
+    "words": 41,
+    "file": "00110",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/1a/b2/6c/1ab26cc7eeefae6dc879a3ba7e485241--crochet-dog-sweater-crochet-pet.jpg",
+    "caption": "Pet and Dog Tutu Dress Wedding Crochet Dog Fancy Dresses myknitt Crochet Dog Clothes, Crochet Dog Sweater, Dog Sweater Pattern, Dog Pattern, Chat Crochet, Dog Tutu, Dog Clothes Patterns, Cat Sweaters, Dog Blanket",
+    "words": 33,
+    "file": "00093",
+    "class": "long"
+   },
+   {
+    "url": "https://ssl.c.photoshelter.com/img-get2/I0000wd2sf9a2KzU/fit=1000x750/061-GHOSTS-OF-THE-PRAIRIE-SWIFT-FOX.jpg",
+    "caption": "Swift Fox- Nebraska Panhandle.  Two swift fox pups play tag at twilight near their den site in the shortgrass prairie of the Nebraska panhandle. Plains Indians sometimes referred to Swift foxes as ghosts of the prairie. Their fleetness is second to no other canine on the continent and their ability to disappear and blend into the prairie grasses is amazing. Often they appear to disappear into thin air. Much smaller than the coyote and red fox, the swift fox is about the size of a house cat, and is almost feline in its movements. Their diminished numbers is a cause of great concern for conservationists and land managers as the prairie dog towns they often anchor to and rely on for food are severely altered or destroyed. Today, the swift fox is listed as endangered in several states and is a candidate for federal listing.",
+    "words": 145,
+    "file": "00020",
+    "class": "long"
+   },
+   {
+    "url": "https://images1.bestpetsonline.us/nlthumb/labradoodle_200_20362649.jpg",
+    "caption": "9 week old female labradoodle for sale, first generation. She is doing great on housetraining, gets along well with other dogs and cat. Mom is chocolate lab, dad is apricot standard poodle. For more info call 814-623-5552. Thanks",
+    "words": 38,
+    "file": "00120",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/712uEZm%2BcBL._AC_SL300_.jpg",
+    "caption": "Dog Puzzle Toys Puppy Puzzle Game Toy for Beginner Treat Dispenser for Dogs Training Slow Feeder Interactive Dog Puzzles Food-Dispensing IQ Toys Cat Treat Dispenser Dog Treat Puzzle Games for Dogs",
+    "words": 31,
+    "file": "00110",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/55/c9/f7/55c9f712260d0cb428685f3d76eeff7d--rolling-carts-ikea-rolling-cart.jpg",
+    "caption": "Desk Storage: Bart Cart - by theeverygirl.com. This would also work as a portable stand for craft projects. Then I could roll it into a closet to protect my work from the cats and the dog.",
+    "words": 36,
+    "file": "00105",
+    "class": "long"
+   },
+   {
+    "url": "https://1fdj2e2egv3mhacyt2xo9f01-wpengine.netdna-ssl.com/wp-content/uploads/2021/01/23795215_web1_201230-NBU-top-10-animal-stories-1_1.jpg",
+    "caption": "The News Bulletin's top 10 most-memorable animal stories of 2020 include articles about the recovery of accidentally poisoned eagles, clockwise from top left, two dogs that survived a cougar attack, a disabled cat that teaches foster kittens 'how to cat,' and a store's horse mascot dressed up as Dr. Bonnie Henry. (News Bulletin and submitted photos)",
+    "words": 56,
+    "file": "00036",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/fa/a6/f8/faa6f8489cf4c9b4c6c61804fff4d92b.jpg",
+    "caption": "How to Keep Cats Warm Outside: 4 Steps to Keep Outdoor Cats Warm This Winter Cat Shelters For Winter, Dog Igloo, Shelter Design, Winter Cat, Dry Cat Food, Cat Bag, Alley Cat, Outdoor Cats",
+    "words": 34,
+    "file": "00071",
+    "class": "long"
+   },
+   {
+    "url": "https://images.squarespace-cdn.com/content/534d9c0fe4b0f8abe339c695/1399500065059-8ZCOQUV29EP133PCY9Q8/?content-type=image%2Fjpeg",
+    "caption": "We needed photos of my father and his service dog. Brady came out with Jerry and joined us at the dog park. The images he captured of my dad and Gunner showed not just what is visible on the outside but also the wonder of their personalities. Brady made us feel comfortable and a part of the family. When my dad passed away Brady was one of the first few I contacted knowing how much my father respected him and his work. Thanks to Brady, we had a beautiful memorial picture to show the happiness my dad had especially that day. Cat",
+    "words": 102,
+    "file": "00042",
+    "class": "long"
+   },
+   {
+    "url": "https://photos.smugmug.com/News-JournalPhotos/1996/LNJ-1996-October/i-km5XgfT/0/f4926ca3/Ti/Blessing-Ti.jpg",
+    "caption": "\"Father Stephen Butts, pastor of St. Paul's Episcopal Church in Kilgore stands with his cocker spaniel \"\"Bo\"\" the Bishop before beginning the Blessing of the Animals in observance of St. Francis Day.  Church members brought their dogs, cats and even fish to be blessed then competed in a pet parade.  Lester Phipps, Jr.\"",
+    "words": 53,
+    "file": "00023",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/eb/36/a0/eb36a08cb9e0b940f070866c9782e427--animal-boarding-dog-boarding.jpg",
+    "caption": "DriDek Dog and Cat Kennel Cage Liner Veterinarian or Groomer Flooring Interlocking Tiles Yellow >>> Find out more about the great product at the image link. (This is an affiliate link) Puppy Kennel, Diy Dog Kennel, Kennel Ideas, Whelping Puppies, Dog Kennels, Dog Kennel Flooring, Dog Boarding Kennels, Dog Yard, Dog Pen",
+    "words": 52,
+    "file": "00017",
+    "class": "long"
+   },
+   {
+    "url": "http://media.gettyimages.com/photos/the-prince-and-princess-michael-of-kent-attend-the-annual-collars-and-picture-id187294964",
+    "caption": "The Prince and <a gi-track='captionPersonalityLinkClicked' href=/galleries/search?phrase=Princess+Michael+of+Kent&family=editorial&specificpeople=160260 ng-click='$event.stopPropagation()'>Princess Michael of Kent</a> attend the annual Collars and Coats gala ball in aid of Battersea Dogs & Cats home at Battersea Evolution on November 7, 2013 in London, England.",
+    "words": 36,
+    "file": "00069",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51uIWO8R2vL._SL160_.jpg",
+    "caption": "Cheap Pet Carrier for Dogs & Cats \u2013 Airline Approved Expandable waterproof Soft Animal Carriers -Portable Soft-Sided Air Travel Bag- Eco-friendly material Roomy With a Side Pocket and a Fleece Bed",
+    "words": 31,
+    "file": "00018",
+    "class": "long"
+   },
+   {
+    "url": "https://ruinmyweek.com/wp-content/uploads/2018/04/fotos-divertidas-funny-stick-figure-comics-i-dont-draw-good-cark-kent-job-interview.png",
+    "caption": "funny comic, web comic, funny web comic, funny webcomics, clark kent funny, superman funny, funny superman, funny clark kent, superman comic, superman webcomic, best funny pictures, funny pics, funny photos, funny pictures, funny vids, the best funny pictures, really funny photos, funny photos of animals, funny photos 2016, funny photos 2017, funny photos 2018, funny photos 2019, funny pics 2016, funny pics 2017, funny pics 2018, funny pics 2019, funny pictures 2016, funny pictures 2017, funny pictures 2018, funny pictures 2019, funniest pics 2016, funniest pics 2017, funniest pics 2018, funniest pics 2019, funniest pictures 2016, funniest pictures 2017, funniest pictures 2018, funniest pictures 2019, funniest photos 2016, funniest photos 2017, funniest photos 2018, funniest photos 2019, where to find funny pictures, funny pictures which made everyone laugh, where funny pictures, where to download funny pictures, where to find funny pictures with captions, where to get funny pictures for instagram, where to find funny pictures to share, where to find funny pictures to share on facebook, where to see funny pictures, funny pictures for instagram, funny pictures for facebook, funny pictures for memes, funny pictures for wallpaper, funny pictures for him, funny pictures for her, funny pictures for friends, funny pictures for snapchat, funny pictures like uberhumor, funny pictures like 9gag, funny pictures like facebook, funny pictures like, funny pictures like ifunny, funny stuff like pictures, funny pictures to text, funny pictures to photoshop, funny pictures to send, funny pictures to caption, funny pictures to post, funny pictures to make someone feel better, funny pictures to put on facebook, funny pictures to make you laugh, funny pictures to make you smile, funny pictures to brighten your day, funny pictures to brighten someone's day, funny pictures with words, funny pictures with no words, funny pictures without captions, funny pictures with jokes, funny pictures with dogs, funny pictures with cats, funny pictures without words, funny pictures without text, where can I find funny photos, best photos ever, best photo ever, silly photos, silly pictures, silly pics,",
+    "words": 334,
+    "file": "00116",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/45/2b/5d/452b5dc1050edd7117cc3e33730df430.jpg",
+    "caption": "\"\"\"Crochet Snuggle Pet Blanket ~ BEGINNER level ~ for your cat or dog ~ cat's measures 30\"\"\"\" square; dog's measures 40\"\"\"\" square ~ keep your pet happy & let him/her snuggle up with their own blankie ~ FREE - CROCHET\"\"\"",
+    "words": 40,
+    "file": "00116",
+    "class": "long"
+   },
+   {
+    "url": "https://s.hdnux.com/photos/01/16/21/42/20519095/3/1200x0.jpg",
+    "caption": "In this Dec. 6, 2012, file photo, minks look out of a cage at a fur farm in the village of Litusovo, northeast of Minsk, Belarus.\u00a0 Domesticated animals, including dogs and cats, have tested positive for the coronavirus. Mink farms in the United States and Europe have become death camps, thousands upon thousands of animals have died from the disease, and millions more culled out of fear. A wild mink was found in December to have the virus, caught (not surprisingly) near an infected Utah mink farm. That single mink is the only known case of a COVID-positive wild animal, Runstadler and Sawatzki wrote:",
+    "words": 104,
+    "file": "00039",
+    "class": "long"
+   },
+   {
+    "url": "https://i.dailymail.co.uk/i/pix/2015/01/15/24B7C5F900000578-2911381-The_researchers_conducted_a_web_based_survey_of_more_than_1_000_-a-9_1421318970825.jpg",
+    "caption": "The researchers conducted a web-based survey of more than 1,000 pet owners nationwide (stock image shown) to analyse the key personality traits and nurturing styles of people who identified as a 'cat person,' a 'dog person,' 'both' or 'neither' in order to make their findings",
+    "words": 45,
+    "file": "00022",
+    "class": "long"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0384/0176/9516/products/nc-1250__juneau_orca_new_530x@2x.jpg?v=1595421875",
+    "caption": "Juneau Orca decal from Oval Envy.  Great price for a durable vinyl decal.  We've got animals, beaches, dogs, cats and more!  Search our catalog for your next Euro Oval Decal.",
+    "words": 30,
+    "file": "00034",
+    "class": "long"
+   },
+   {
+    "url": "https://media.londolozi.com/wp-content/uploads/2014/11/11131513/IMG_8932.jpg",
+    "caption": "A wild dog grabs a recently caught Impala by its muzzle. Despite appearances, wild dog kills are in fact rather 'humane'. The pack tears at the stomach of the impala and it dies from shock and blood loss and because the pack eats so quickly, the process is much faster than the suffocation technique used by the big cats.",
+    "words": 59,
+    "file": "00077",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/736x/97/d6/40/97d64021d60bc821d009a1380b2560b8.jpg",
+    "caption": "Pets Corner Market Dog Cat Puppy Plush Toys Interactive Pet Puppy Chew Squeaker Squeaky Dog Toy Sound Duck Frog Bear Pig Dog 5 Designs (Bear, Small) ** Click image to review more details. (This is an affiliate link) #DogSqueakToys #interactivecattoysdesign",
+    "words": 40,
+    "file": "00007",
+    "class": "long"
+   },
+   {
+    "url": "https://m.media-amazon.com/images/I/61yeKMhLAvL._AC_UL320_.jpg",
+    "caption": "Dr. Mercola Antarctic Krill Oil Liquid Pump for Pets - 1.6 Fl Oz. 100 Mg - Rich in Omega-3-6 Fatty Acids and Astaxanthin - Supports Normal Brain and Nerve Function for Cats and Dogs",
+    "words": 34,
+    "file": "00107",
+    "class": "long"
+   },
+   {
+    "url": "https://s.hdnux.com/photos/64/30/70/13733409/3/920x920.jpg",
+    "caption": "January 31, 2014 - Callie, a 5-year-old calico female. Needs home without dogs or children. Call CATALES, Inc. at 860-344-9043. CATALES, Inc. is a non-profit no-kill organization consisting of volunteers dedicated to improving and enriching the lives of homeless cats and kittens. http://www.catales.org/callie-p-653.html (Catherine Avalone/The Middletown Press) Photo: Journal Register Co. / TheMiddletownPress",
+    "words": 53,
+    "file": "00035",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51U26CyfAwL._AC_.jpg",
+    "caption": "Loc8tor Pet Tracker | Tracking Cat Collar | Pet Tracking System | RF Tracking & Activity Monitor | No Monthly Fees | Cat & Dog Pet Finder | Includes 2 ...",
+    "words": 31,
+    "file": "00018",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/87/8d/02/878d02b4cba9e66c74c92ebfe386eeda--video-fun.jpg",
+    "caption": "It's plain to see how much this dog loves the great outdoors as he bounces through over a field of waist-high wheat field. Dog Lover Quotes, Dog Quotes, Dog Lovers, Happy Animals, Funny Animals, Cute Animals, Dog Show, Grumpy Cat, Look At You",
+    "words": 43,
+    "file": "00125",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/61OachNtK4L.01_SL200_.jpg",
+    "caption": "Waterproof Clip-on Dog & Cat Collar LED Lights, IN HAND Safety Weather Resistant Light up Dog Collar with 3 Flashing Modes, Designed for Night Walking, Battery Included (Pack of 7)",
+    "words": 30,
+    "file": "00102",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/e5/90/18/e59018038ec63d655e542cad895d9224.jpg",
+    "caption": "Diy dog \u200b\u200bbed - mid century style pet bed - with a touch of Star Trek Diy Pet, Diy Dog Bed, Large Dog Bed Diy, Pet Beds Diy, Pet Beds For Dogs, Homemade Dog Beds For Large Dogs, Cute Dog Beds, Pets 3, Cat Beds",
+    "words": 45,
+    "file": "00031",
+    "class": "long"
+   },
+   {
+    "url": "https://ae01.alicdn.com/kf/HTB1iX58PRLoK1RjSZFuq6xn0XXaf/Pet-Carriers-Dog-Car-Seat-Cover-Trunk-Mat-Cover-Protector-Carrying-For-Cats-Dogs-transportin-perro.jpg",
+    "caption": "Pet Carriers Dog Car Seat Cover Trunk Mat Cover Protector Carrying For Cats Dogs transportin perro autostoel hondPet Carriers Dog Car Seat Cover Trunk Mat Cover Protector Carrying For Cats Dogs transportin perro autostoel hond",
+    "words": 35,
+    "file": "00049",
+    "class": "long"
+   },
+   {
+    "url": "https://fsd.kopilkaurokov.ru/uploads/user_file_546f829996806/img_user_file_546f829996806_27.jpg",
+    "caption": "Dynamic break Who has got a sister \u2013 clap your hands! Who has got a cousin \u2013 stamp your feet! Who has got a twin-brother \u2013 jump three times! Who has got a cat \u2013 run like a dog! Who has got a dog \u2013 wink, wink, wink! Who likes his family \u2013 wave your hand  and smile!!!!!!!!!!!!!!!!!!!!!",
+    "words": 58,
+    "file": "00071",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/736x/df/7e/06/df7e068e9bc4caec4df3feb82f2635a3.jpg",
+    "caption": "Meilinxu - Pet Funeral Urns for Dogs Ashes - Cremation Urns for Cats Ashes - Hand Made in Brass - Attractive Display Burial Urn - Pet Memorial Baby Urn - Cremated Remains (Large Urn) -- You can get more details here : Dog Memorials",
+    "words": 44,
+    "file": "00067",
+    "class": "long"
+   },
+   {
+    "url": "https://m.media-amazon.com/images/I/51lruHPFnlL._AC_UL320_ML3_.jpg",
+    "caption": "Bodhi Dog Bitter Lemon Spray Or Hot Spot Spray | Stop Biting and Chewing for Puppies Older Dogs and Cats | Anti Chew Spray Puppy Kitten Training Treatment | 100% Non Toxic | Made in USA",
+    "words": 36,
+    "file": "00021",
+    "class": "long"
+   },
+   {
+    "url": "https://pics.esmemes.com/jackson-kookie-taetae-with-cat--q-what-14929611.png",
+    "caption": "Kookie: @jackson kookie Taetae with cat \ud83d\ude0d\ud83d\udc95 __________________ Q : what is ur fav animal ? Me : dog \ud83d\ude07 Admin Vicky @vkookid __________________ \u2764tag ur friends\u2764 bts bangtan jackson_kookie jungkookstudio army jungkook taehyung jimin suga rapmon namjoon jin jhope vkook",
+    "words": 41,
+    "file": "00070",
+    "class": "long"
+   },
+   {
+    "url": "https://pics.onsizzle.com/the-difference-between-cats-and-dogs-6896534.png",
+    "caption": "the similarities and differences of dogs and cats Though dogs and cats are different species that appeal to different types of people, they are similar animals cats and dogs are both mammals, but their ancestors diverged from the ancestral lineages millions of years ago cats and dogs are both predatory mammals that have relatively similar biology .",
+    "words": 57,
+    "file": "00112",
+    "class": "long"
+   },
+   {
+    "url": "https://cdn2.eyeem.com/thumb/2f23acca263f7775ba59598be63b8d53f56688c4-1530519337994/w/700",
+    "caption": "Border collie puppies Bow Dogs Love Animal Animal Themes Animals Beautiful Woman Bed Black Blackandwhite Blanket Cat Cozy Dog Domestic Domestic Animals Domestic Cat Eyes Closed  Feline Furniture Indoor Indoors  Lying Down Mammal Newborn One Animal One Person Pets Pixel Puppies Puppy Relaxation Sleeping Softness Studio Shot Sweets Towel White Background",
+    "words": 51,
+    "file": "00071",
+    "class": "long"
+   },
+   {
+    "url": "https://thumbs.dreamstime.com/z/apricot-poodle-puppy-2626600.jpg",
+    "caption": "Watch further Stock Photo Yorkshire Terrier Dog Fancy Clothes Image23747500 as well 518054763363402982 together with 26697 Red Toy Poodle Dog And Ragdoll Cross Kitten as well Ruby The Silky Terrier 2010 12 05. on cute poodles",
+    "words": 36,
+    "file": "00045",
+    "class": "long"
+   },
+   {
+    "url": "https://www.allivet.com/images/product/large/8645.jpg",
+    "caption": "Universal Medicated Shampoo for Dogs and Cats may be used as adjunctive therapy for most dermatological conditions. This shampoo has deep cleansing action. It removes scales and crusts. It is antibacterial and antifungal, deodorizing and is gentle enough for routine use. Available in 16 oz bottle or gallon container.",
+    "words": 49,
+    "file": "00089",
+    "class": "long"
+   },
+   {
+    "url": "https://cdn.shopify.com/s/files/1/0384/0176/9516/products/nc-134__arizona_golf_ball_new_530x@2x.jpg?v=1595422594",
+    "caption": "Arizona Golf decal from Oval Envy.  Great price for a durable vinyl decal.  We've got animals, beaches, dogs, cats and more!  Search our catalog for your next Euro Oval Decal.",
+    "words": 30,
+    "file": "00081",
+    "class": "long"
+   },
+   {
+    "url": "https://image1.jdomni.in/product/18072020/2F/3F/9C/5F4928794093DE8C31DFE901A2_1595066694002.jpg",
+    "caption": "Pets Empire Wrought Iron Dog Bowl Stand Collection Rustic Bone Diner For Dogs And Cats Stainless Steel Food And Water Bowls With Iron Stand,Pack Of 1 (Medium (450 ML X 2 Bowl ))",
+    "words": 33,
+    "file": "00087",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51xKjM%2BvKHL._SL160_.jpg",
+    "caption": "Amazing Pet 4 Pack of Latex Sport Ball Squeak Toys for Dogs and Cats 1 2.5 inch Soccer Ball 1 3 inch Volley Ball 1 3 inch Basketball and 1 2.5 inch Rainbow Basketball",
+    "words": 34,
+    "file": "00029",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51NpTNJlt6L.jpg",
+    "caption": "OMEGA 3 Fish Oil For Dogs & Cats -Dog Food Supplement With Alaskan Salmon Oil Icelandic Fish & Organic Borage Oil -GLA & Vitamin E + DHA & EPA For Healthier Coat & Joint Health (8 oz) - Oil Dog",
+    "words": 40,
+    "file": "00061",
+    "class": "long"
+   },
+   {
+    "url": "https://www.dogbreedinfo.com/images24/SpencerAmericanPitBullTerrierBlueNose29WeeksBikeChasing3.jpg",
+    "caption": "A blonde-haired girl is walking a blue-nose brindle Pit Bull Terrier puppy around a grass circle. Following behind them is a brown brindle Boxer. Across from them is a girl riding a bike and an orange cat is watching all of it happen.",
+    "words": 43,
+    "file": "00032",
+    "class": "long"
+   },
+   {
+    "url": "http://media.gettyimages.com/photos/camilla-duchess-of-cornwall-holds-up-her-9-week-old-jack-russell-as-picture-id158248408",
+    "caption": "Camilla, Duchess of Cornwall holds up her 9 week old Jack Russell Terrier Bluebell as she visits Battersea Dog and Cats Home on December 12, 2012 in London, England. The Duchess of Cornwall as patron of Battersea Dog and Cats home visited with her two Jack Russell terriers Beth, a 3 month old who came to Battersea as an unwanted puppy in August 2011 and Bluebell a nine week old stray who was found wandering in a London Park in September 2012.",
+    "words": 82,
+    "file": "00095",
+    "class": "long"
+   },
+   {
+    "url": "https://images-na.ssl-images-amazon.com/images/I/51iwkvmTOVL._SL160_.jpg",
+    "caption": "4 Way Expandable Soft Sided Airline Approved Pet Carrier for Cats and Dogs | Folding for Easy Transport | For Air or Car Travel, Meets Most Under Seat Requirements | Large Size by Smiling Paws Pets",
+    "words": 36,
+    "file": "00036",
+    "class": "long"
+   },
+   {
+    "url": "https://i.pinimg.com/236x/90/09/fe/9009fe93cfbf4bb2a4aa051c2692e60f.jpg",
+    "caption": "Keeley is an adorable little pitbull mix girl. She is about 8 weeks old currently. She is good with other dogs, kids, and cats. This fun loving puppy is always on the move. She is used to being crated when her foster family leaves for the day and at...",
+    "words": 49,
+    "file": "00042",
+    "class": "long"
+   }
+  ]
+ }
+}
