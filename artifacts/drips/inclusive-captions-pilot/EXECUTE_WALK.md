@@ -5,7 +5,8 @@ with `/drip-execute-plan --request`. Branch `exec/inclusive-captions-pilot`.
 
 ## Where the walk is
 
-Piece 2 of 6, the data build. Task 2.1 done, task 2.2 and 2.3 waiting on the cluster run below.
+Piece 2 of 6 is done. Waiting on instruction 8, the eye audit of the 131 both-animal photos,
+which only the user can do. Piece 3, the trainer, is next after it.
 
 ## The stop point
 
@@ -29,7 +30,9 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 |---|---|---|
 | 1.1 the criterion | six parts, each carrying a number; the band as a formula rather than a number | `4b394f1a`, amended by `5f3a1c06` |
 | 7 approve the criterion | the user delegated the judgment ("you tell me"); two lines changed, veto offered and not taken | `5f3a1c06` |
-| 2.1 captions into the manifest | `read_captions()` takes the shortest of each photo's five COCO captions; every row carries one | `f778597b` |
+| 2.1 captions into the manifest | `read_captions()` takes the shortest of each photo's five COCO captions; `missing_caption: 0` of 862 | `f778597b`, `dae7c3c9` |
+| 2.2 every path opens | `missing_file: 0` of 862 chosen photos | `dae7c3c9` |
+| 2.3 the shares on the real photos | PASSED on the real manifest: share 0.163, every caption share within 0.002 of design, blank rates spread 0.001 | `dae7c3c9` |
 
 ## Decisions
 
@@ -49,11 +52,16 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 **The band and the no-support line**, swept through the plan file as well as the review file, so
 no copy of the flat 12.5 bar survives. Verified with a grep.
 
+**The pool script's wanted counts** were still the design's assumed 200 both-animal and 200
+filler photos, so `counts.json` recorded a shortfall of 69 against a number nobody wants any
+more. They now read the 131 that exist, and `chosen_total` is 862: the 731 every run trains on
+plus the no-both run's 131 filler photos.
+
 ## Out of the session
 
 | What | Id | Serves | State |
 |---|---|---|---|
-| the pool rebuild with captions | background `bsxomuld7`, log `/home-mscluster/mmolefe/logs/inclusive-pool-captions-2026-11-03.log` | tasks 2.2 and 2.3 | in flight |
+| the pool rebuild with captions | background `bsxomuld7` | tasks 2.2 and 2.3 | landed, folded in, exit 0 |
 
 Launched as:
 
