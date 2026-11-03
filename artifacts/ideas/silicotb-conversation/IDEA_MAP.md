@@ -47,13 +47,13 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.5, round 1. Claims 1.1, 1.3 and 1.4 are wrong as stated and repaired into 1.7, 1.8
-and 1.9; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6 is routed
-elsewhere.
+Turn 1, claim 1.6, round 1. Claims 1.1, 1.3, 1.4 and 1.5 are wrong as stated and repaired into
+1.7, 1.8, 1.9 and 1.10; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6
+is routed elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 14 of 107 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 15 of 108 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -85,12 +85,14 @@ claims are therefore the question's own premises plus what the three images asse
 - [x] 1.2 the combined condition is properly called silicotuberculosis — **holds**, and the label behind the name is a disjunction
 - [x] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other — **wrong as stated**, it is a question and never an assertion; repaired into 1.8
 - [x] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`) — **wrong as stated**, the four are the atoms the condition is built from, not four looks of the condition; repaired into 1.9
-- [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`)
+- [x] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`) — **wrong as stated**, the three are real but not all of them and they are kinds of region rather than kinds of patient; repaired into 1.10
 - [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
+- [ ] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film *(appended round 5, the repair of 1.5)*
 - [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one *(appended round 4, the repair of 1.4)*
 - [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
-- [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation  ← current
+- [ ] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film: both diseases in separate places, both in the same place and both readable, a lesion neither builds alone, and one disease present and unreadable because the other has destroyed or buried the lung it would show in *(appended round 5, the repair of 1.5)*
+- [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`)  ← current
 
 **1.4, settled.** Mark: wrong as stated. The four panels are A simple silicosis, B complicated
 silicosis (progressive massive fibrosis), C active pulmonary tuberculosis and D post-tuberculous
@@ -300,6 +302,8 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 | 1.7 | the asymmetry ratio, cell(A then B) over cell(B then A), with a binomial confidence interval, on the pairs whose counts can carry one, starting with effusion and atelectasis at 247 against 124 | an interval excluding 1 on a pair with a documented physical mechanism says the labels do track a sequence; an interval covering 1 says the matrix's asymmetry is prevalence and the ordering axis is not readable from report-derived labels |
 | the three regimes against the three operators | the conversation's regime figure has three panels and [the composition terms](../poe-overlap-dial/composition-terms.md) has three matching operators, but nothing has checked the mapping panel by panel, and regime 2 has two candidate operators rather than one | reading each regime's caption against the operator's "what it is" and "failure" lines, and saying for regime 2 whether both diseases stay recognisable (intersection with contention as the failure) or merge (the equal-density blend, where fusion is the target). Feeds claim 1.8 |
 | 1.5, the regimes against the review's effects | the conversation cuts the overlap three ways by **where** the lesions sit (separate, same region, merged). [Ehrlich et al. 2024](https://doi.org/10.1183/16000617.0168-2024) cuts it three ways by **what the overlap does** (each disease can hide the other, each can distort the other's pattern, together they build a lesion neither builds alone), quoted in [the composition terms](../poe-overlap-dial/composition-terms.md). The two threes are different cuts and nothing has reconciled them: masking has no regime, and separate-lesion co-occurrence is not one of the effects | laying the two lists side by side and saying, for each of the review's three effects, which regime it falls in. An effect with no regime means the three regimes are not exhaustive and the figure needs a fourth panel. If masking lands in regime 1, the regimes stop being a difficulty ordering, because a hidden disease is harder than two separate lesions, not easier |
+| 1.10 | whether the hidden-disease regime is a failure of the composition operator or a failure of each expert's own conditional. The Bayes form's interaction factor is p(A,B\|x) / (p(A\|x) p(B\|x)). On a masked film, A is read with near-certainty and the posterior on B is some small e, so p(A,B\|x) is about e and the denominator is about e, and the factor is near 1. By that arithmetic masking is not something the interaction term has to supply. What is wrong instead is p(x\|B): a B expert trained only on films where B is visible puts almost no density on a film where B is present and unreadable, because no such film ever appeared under the B label | computing the factor numerically on a trained pair rather than by hand, and separately measuring the B expert's likelihood on masked films against unmasked ones. If the factor is near 1 and the likelihood collapses, the fix is inclusive captioning, not a new operator, and the whole hidden-disease regime lands in the pilot already routed at [the inclusive-captions plan](../../../plans/route-inclusive-captions-pilot.md) rather than in the interaction term |
+| 1.10 | whether readability of the hidden disease falls with the extent of the hiding disease. NIOH radiographs 3 and 4 are the same pair and the same two labels, and the reader called silicosis on 3 and "doubtful" on 4; the visible difference is how much lung the previous tuberculosis left intact | scoring the ten NIOH films for the fraction of lung destroyed and plotting the reader's confidence in the second disease against it. A falling curve makes masking a dose effect of the first disease with a measurable axis, which is what a regime needs before it can be imposed deliberately in a synthetic set |
 | the proxy pair | no pair has been chosen. Effusion with atelectasis is named a candidate in [the route](../../../plans/route-every-silicotb-chat-claim.md) and in claim 3.4, and nothing marks it | counting how many of the three regimes the candidate shows. On the NIH counts, effusion with atelectasis has 3,275 films both and a documented mechanism, pneumonia with emphysema has a documented appearance change but only 23 films, and cardiomegaly with effusion has 1,063 films and no third pattern. Feeds claims 3.4 and 3.12 |
 
 ## Runs
