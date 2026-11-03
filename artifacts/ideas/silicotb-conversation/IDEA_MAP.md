@@ -4,7 +4,7 @@
 
 | Turn | Claims | Marked | Mark spread |
 |---|---|---|---|
-| **1 (current)**: TB then silicosis, how each changes the other | 7 | 3 | 1 holds, 1 wrong as stated, 1 needs a check |
+| **1 (current)**: TB then silicosis, how each changes the other | 8 | 4 | 1 holds, 2 wrong as stated, 1 needs a check |
 | 2: where AI fails, and what the label should be | 18 | 0 | all open |
 | 3: public-data pairs with the same three regimes | 15 | 0 | all open |
 | 4: pairs that genuinely interact | 11 | 0 | all open |
@@ -12,7 +12,7 @@
 | 6: multi-label LoRA on cats and dogs | 9 | 9 | routed, not walked here |
 | 7: is there a mechanism or a context for cats and dogs | 12 | 0 | all open |
 | 8: does inclusive training generalise across seeds and pairs | 12 | 0 | all open |
-| **total** | **105** | **12** | |
+| **total** | **106** | **13** | |
 
 Load-bearing: claim 5.7, that a composition which divides out the base image distribution equals
 the true joint whenever the two labels are conditionally independent given the whole image. Every
@@ -47,12 +47,12 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.3, round 1. Claim 1.1 is marked wrong as stated and repaired into 1.7, 1.2 holds
-with a disjunction consequence carried to turns 5 and 7; turn 6 is routed elsewhere.
+Turn 1, claim 1.4, round 1. Claims 1.1 and 1.3 are wrong as stated and repaired into 1.7 and 1.8,
+1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6 is routed elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 12 of 105 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 13 of 106 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -82,12 +82,22 @@ claims are therefore the question's own premises plus what the three images asse
 
 - [x] 1.1 contracting silicosis after TB changes how the silicosis presents on a radiograph — **wrong as stated**
 - [x] 1.2 the combined condition is properly called silicotuberculosis — **holds**, and the label behind the name is a disjunction
-- [ ] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other
+- [x] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other — **wrong as stated**, it is a question and never an assertion; repaired into 1.8
 - [ ] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`)
 - [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`)
 - [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
+- [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
-- [ ] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other  ← current
+- [ ] 1.4 CT separates the combined condition into four distinguishable patterns  ← current
+
+**1.3, settled.** Mark: wrong as stated, because it is not a claim. Turn 1's text is the user's own
+question, "Is it scarring on the left, progressive massive fibrosis on the right for a PA x-ray?",
+and the answer that would have made it an assertion is the empty one. No screenshot shows such a
+film either: the three saved images are the four CT patterns, the three overlap regimes and the
+fibrosis-with-emphysema CT, and none is a posteroanterior radiograph. The repair is 1.8: the
+separated arrangement the question guesses at is regime 1 of the conversation's own three-regime
+figure, and that figure maps onto three operators this repo has already defined in
+[the composition terms](../poe-overlap-dial/composition-terms.md).
 
 **1.2, settled.** Mark: holds, as the name of the condition. Three fetched sources use the term
 and the Cureus title is *Silico-Tuberculosis Mimicking Malignancy*. The consequence is the round's
@@ -256,8 +266,7 @@ Navigation: ⬅️ [What the words are](#what-the-words-are) | 📋 [TOC](#table
 
 | Claim | What is unresolved | What would settle it |
 |---|---|---|
-| 6.1 to 6.9 | marked routed, but `plans/route-inclusive-captions-pilot.md` is in neither checkout | finding that route file under another name, or rewriting it |
-| 1.2's consequence | the conversation only ever composes by multiplying, and the condition's label contains an "either". Whether the mixture operator can be sampled here is undecided, because its own authors assume every concept's partition function is equal and say that assumption is "not guaranteed to hold in general" | answered in print: the exact calculus (`arXiv:2602.05549`, Proposition 3.1) needs the two branches of the "either" to be mutually exclusive or conditionally independent given the noisy image, and both of its disjunction rules weight each branch's score by that branch's posterior probability, so the price is a classifier over noisy images. What is still open is whether active tuberculosis and old tuberculous damage are mutually exclusive on one film. Lands in claims 5.12 and 7.5 |
+| 1.2's consequence | the conversation only ever composes by multiplying, and the condition's label contains an "either". Whether the mixture operator can be sampled here is undecided, because its own authors assume every concept's partition function is equal and say that assumption is "not guaranteed to hold in general" | answered in print: the exact calculus (`arXiv:2602.05549`, Proposition 3.1) needs the two branches of the "either" to be mutually exclusive or conditionally independent given the noisy image, and both of its disjunction rules weight each branch's score by that branch's posterior probability, so the price is a classifier over noisy images. Answered against the hope: Ehrlich et al. define the condition as "the combination of silicosis and active TB and/or post-tuberculous lung disease" (Definitions, quoted in [route 2 of the overlap-dial walk](../poe-overlap-dial/routes/02-findings-and-diagnoses-literature.return.md)). "And/or" means a patient can carry both branches, so they are not mutually exclusive and the OR node must fall back on conditional independence, the same condition the AND node needs. The whole formula therefore reduces to claim 5.7. Lands in claims 5.12 and 7.5 |
 
 ## Dead ends
 
@@ -276,6 +285,9 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 | Claim | The check | What each outcome means |
 |---|---|---|
 | 1.7 | the asymmetry ratio, cell(A then B) over cell(B then A), with a binomial confidence interval, on the pairs whose counts can carry one, starting with effusion and atelectasis at 247 against 124 | an interval excluding 1 on a pair with a documented physical mechanism says the labels do track a sequence; an interval covering 1 says the matrix's asymmetry is prevalence and the ordering axis is not readable from report-derived labels |
+
+| the three regimes against the three operators | the conversation's regime figure has three panels and [the composition terms](../poe-overlap-dial/composition-terms.md) has three matching operators, but nothing has checked the mapping panel by panel, and regime 2 has two candidate operators rather than one | reading each regime's caption against the operator's "what it is" and "failure" lines, and saying for regime 2 whether both diseases stay recognisable (intersection with contention as the failure) or merge (the equal-density blend, where fusion is the target). Feeds claim 1.8 |
+| the proxy pair | no pair has been chosen. Effusion with atelectasis is named a candidate in [the route](../../../plans/route-every-silicotb-chat-claim.md) and in claim 3.4, and nothing marks it | counting how many of the three regimes the candidate shows. On the NIH counts, effusion with atelectasis has 3,275 films both and a documented mechanism, pneumonia with emphysema has a documented appearance change but only 23 films, and cardiomegaly with effusion has 1,063 films and no third pattern. Feeds claims 3.4 and 3.12 |
 
 ## Runs
 
