@@ -4,7 +4,7 @@
 
 | Claim | Mark | Settled by |
 |---|---|---|
-| 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | three reads, in order: the base rate of dogs under "a photo of a cat" (running, mscluster106 device 1); the real dog-present share from COCO's own counts; the held-out denoising loss of "a photo of a cat" on 8 unseen both-animal photos under A against B |
+| 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | the held-out denoising loss of "a photo of a cat" on 8 unseen both-animal photos under A against B, now the primary read: the base rate came back at 0 of 64 by eye (a clean floor) and the per-class detector read is unusable. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
 | **3 (current). LoRA A against LoRA B changes one variable** | **wrong as stated** | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs** |
 | 4. LoRA C, as written, is a distinct ablation | open | |
@@ -117,7 +117,18 @@ Reading the third row as a null would retire the idea for the wrong reason.
 
 **The three reads that settle it, in order.**
 
-1. **The base rate, running now.** "a photo of a cat" from base SDXL on 64 seeds at 50 DDIM steps
+1. **The base rate, done 2026-11-03, and it answered two questions.** By eye, all 64 renders of
+   "a photo of a cat" from base SDXL are a single cat and none holds a dog, so the floor is clean
+   and any rise under B is attributable to the captioning. By detector, all 64 report one dog:
+   GroundingDINO grounds "dog" on a cat at a median confidence of 0.889 against 0.943 for "cat",
+   the median margin is 0.054, 54 of 64 sit under a 0.10 margin, and the sign flips on 3. No
+   threshold or margin rule separates the classes, so the render-and-count check is dead as
+   designed and read 3 below becomes the primary one. Any future class read needs a classifier on
+   the cropped box rather than a second detector query. Card and sheet at
+   `artifacts/results/does-the-cat-prompt-already-draw-dogs/`.
+
+   The original specification, kept because the three outcomes it names are still the right ones
+   for a working instrument: "a photo of a cat" from base SDXL on 64 seeds at 50 DDIM steps
    and guidance 7.5, with per-class detector counts for "dog" and "cat" read apart, since the
    compose scorer's generic `"animal"` query cannot tell them apart.
    [The script](../../../scripts/census/cat_condition_dog_rate.py) carries the three outcomes and
@@ -266,10 +277,12 @@ None yet.
 
 Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 
-**Claim 1, the base rate.** Running since 2026-11-03 on mscluster106 device 1, pid 1946628,
-log at `/datasets/mmolefe/poe_repair_min/outputs/cat_condition_dog_rate/logs/base-sdxl.log`,
-results at `.../cat_condition_dog_rate/base-sdxl/summary.json`. Harvest with `pgrep`, not
-`squeue`: it runs outside Slurm.
+**Claim 1, the base rate.** Done. 0 of 64 by eye, 64 of 64 by detector; see Runs.
+
+**The instrument.** Whether a classifier on the cropped box (CLIP zero-shot, or an ImageNet
+classifier) separates cat from dog on these 64 renders well enough to measure claim 1 and to score
+claim 2's three categories. Nothing in the repo does this yet, and every class-level read in the
+pilot now depends on it.
 
 **Claim 1, the real dog-present share.** Not started. Needs COCO's annotations on the cluster and
 the pilot's filtering rule, which claim 6 has to fix first.
@@ -282,7 +295,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | What | Where | State |
 |---|---|---|---|
-| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm, pid 1946628 | launched 2026-11-03 |
+| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `artifacts/results/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
 
 ## Routes
 
