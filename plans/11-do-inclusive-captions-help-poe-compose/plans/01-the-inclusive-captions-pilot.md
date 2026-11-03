@@ -42,7 +42,7 @@ draws one cat and one dog.
 
 **What already exists**
 
-The 731 photos, measured and carded. The caption sampler, committed and checked off 200,000
+The 491 photos, measured, audited and carded. The caption sampler, committed and checked off 200,000
 draws. The instrument that counts animals and names them.
 
 **What does not**
@@ -109,10 +109,10 @@ sweep is not worth building.
 ## What happens
 
 ```
-731 COCO photos  ──┬──> run A: both-animal photos captioned jointly        ──> LoRA A
-  300 cat-only     │
-  300 dog-only     └──> run B: 40% cat, 40% dog, 10% joint, per draw       ──> LoRA B
-  131 both-animal
+491 COCO photos  ──┬──> run A: both-animal photos captioned jointly        ──> LoRA A
+  200 cat-only     │
+  200 dog-only     └──> run B: 40% cat, 40% dog, 10% joint, per draw       ──> LoRA B
+   91 both-animal
                         both: blank 10% on every photo
 
 LoRA A, LoRA B  ──> 128 shared seeds, product of cat and dog  ──> count and name the animals
@@ -123,7 +123,7 @@ LoRA A, LoRA B  ──> 128 shared seeds, product of cat and dog  ──> count 
 ## Description
 
 Piece 1 writes the criterion into the review file. Piece 2 finishes the data build: COCO captions
-into the manifest, every path checked, and the 131 both-animal photos audited by eye. Piece 3
+into the manifest, every path checked, and the both-animal photos audited by eye. Piece 3
 builds the trainer against this repo's own SDXL loader and proves it on a 20-step smoke run.
 Piece 4 adds the four-column sheet, including the product column, which is renderable at step 0
 because combining two conditions happens at sampling time. Piece 5 trains the two runs. Piece 6
@@ -206,22 +206,22 @@ fixed and cannot be shaped by anything the build reveals.
   - Check: every row of `manifest.json` has a non-empty `caption` field.
   - ✅ verified 2026-11-03, `dae7c3c9`: `missing_caption: 0` of 862 chosen photos.
 - [x] ✅ **2.2** Open every path in the manifest and report any that does not resolve.
-  - Check: 731 of 731 open.
+  - Check: every chosen photo opens.
   - ✅ verified 2026-11-03, `dae7c3c9`: `missing_file: 0` of 862 chosen photos (862 because the
-    no-both run's 131 filler photos are picked alongside the 731 the other runs use).
+    no-both run's filler photos are picked alongside the ones the other runs use).
 - [x] ✅ **2.3** Re-run the caption sampler's check against the real manifest rather than
       placeholders, so the shares are measured on the photos that will actually train.
   - Command: `python3 -m poe_repair.experiments.inclusive_captions.captions --check`
-  - What you want: `PASSED`, and the dog-present share of run B's cat draws at 0.163.
-  - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.163, every caption
+  - What you want: `PASSED`, and the dog-present share of run B's cat draws at 0.169.
+  - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.169, every caption
     share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
-▶ **Next: [instruction 8](#8--audit-the-131-both-animal-photos)**, the eye audit, which only you
+▶ **Next: [instruction 8](#8--audit-the-both-animal-photos)**, the eye audit, which only you
 can do.
 
 ### 3. 🔧 Build the trainer
 
-◀ **Needs: [instruction 8](#8--audit-the-131-both-animal-photos)** done, so the photo count the
+◀ **Needs: [instruction 8](#8--audit-the-both-animal-photos)** done, so the photo count the
 trainer reads is the audited one.
 
 - [ ] **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
@@ -311,14 +311,16 @@ of them after seeing a result, say so now, because that is the only moment the a
 
 ▶ **Next: [task 2.1](#2--finish-the-data-build)**.
 
-### 8. 👁️ Audit the 131 both-animal photos
+### 8. 👁️ Audit the both-animal photos
 
 ◀ **Needs: [tasks 2.1 to 2.3](#2--finish-the-data-build)** done.
 
-8.1 **Open the three audit sheets** at
-`/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/both_sheet_00.png` and the two
-numbered after it. Each tile's title is its number, each animal's box as a fraction of the
-image's longer side, and how much the two boxes overlap.
+8.1 **Open the nine audit pages** at
+`/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/audit_page_00.png` and the eight
+numbered after it, written by
+[the audit render](../../../scripts/census/audit_both_animal_photos.py) at 16 tiles a page and 448
+pixels a tile. The 48-tile sheets beside them are too small to name a species off, which this
+project has already been caught doing.
 
 8.2 **For each tile, decide whether it really holds one live cat and one live dog.** Reject a
 drawing, a statue, a plush toy, a photo where the second animal is barely visible, and a photo
@@ -326,7 +328,13 @@ where the annotation is simply wrong.
 
 8.3 **Write the rejected tile numbers down**, with one word each for why.
 
-✅ What you want: a count of how many of the 131 survive, and the reasons the rest did not.
+✅ Done 2026-11-03, judged by Claude at the user's request: 91 of 131 survive, 33 rejected and 7
+uncertain, with the reason for each in
+[the audit verdicts](../../../artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json).
+Ten rejections are a cat beside a depiction of a dog. The failure branch below fired, and the
+single-animal sets dropped from 300 to 200 to restore the effect size.
+
+What you wanted: a count of how many of the 131 survive, and the reasons the rest did not.
 What failure looks like: more than about 20 rejections. That moves the dog-present share of run
 B's cat draws below what 128 seeds can resolve, and the single-name caption shares have to rise
 again before anything trains.

@@ -28,7 +28,7 @@ table, scored on the same 128 seeds against a criterion written before either ra
 
 ## Depends on
 
-**The photo pool, which exists.** 300 cat-only, 300 dog-only and 131 both-animal COCO photos,
+**The photo pool, which exists.** 200 cat-only, 200 dog-only and 91 both-animal COCO photos, the 91 chosen by looking at all 131 that clear the size filter,
 measured rather than assumed, carded at
 [the photo pool](../../artifacts/results/the-inclusive-captions-photo-pool/README.md).
 
@@ -62,7 +62,7 @@ own SDXL loader, reporting to Weights and Biases with a four-column sample sheet
 checkpoints: "a photo of a dog", "a photo of a cat", the joint prompt, and the product of the cat
 and dog conditions on the same eight seeds throughout.
 
-**Train the two runs and read them.** 2,000 steps each on the same 731 photos, then 128 seeds of
+**Train the two runs and read them.** 2,000 steps each on the same 491 photos, then 128 seeds of
 product renders each, scored in three categories and read against the criterion.
 
 ## Goals
@@ -70,7 +70,7 @@ product renders each, scored in three categories and read against the criterion.
 | Goal | What it produces | How it is judged |
 |---|---|---|
 | The criterion, pre-registered | the review file's question section, filled before any training | every one of its six parts carries a number |
-| The data build finished | the manifest carrying COCO captions, and the 131 both-animal photos audited by eye | every photo in the manifest opens; the audit names how many were rejected and why |
+| The data build finished | the manifest carrying COCO captions, and the both-animal photos audited by eye | every photo in the manifest opens; the audit names how many were rejected and why |
 | The trainer | an SDXL LoRA trained on photographs and captions, 20-step smoke run green | the smoke run writes a checkpoint and a sheet, and the loss is finite |
 | The watching sheet | one four-column image per checkpoint in W&B, eight fixed seeds | the product column is present at step 0, before any training |
 | The two runs | run A and run B, 2,000 steps, one W&B run each | both reach step 2,000 and save a final checkpoint |
@@ -88,7 +88,7 @@ the same size, so the inconclusive band is the most likely single outcome.
 - [ ] The review file's question section is filled, with a number on each of its six parts, and it
       was committed before the first training step of run A or run B.
 - [ ] The manifest carries a caption for every photo, and every path in it opens.
-- [ ] The 131 both-animal photos have been looked at, and the count rejected is written down with
+- [x] ✅ The 131 both-animal photos have been looked at, and the count rejected is written down with
       the reason.
 - [ ] The trainer runs 2,000 steps on a 3090 without running out of memory, and its 20-step smoke
       run is green.
@@ -130,7 +130,7 @@ the fp16 upcast rule.
 dog conditions as this repo computes it at
 [`training_cache.py:11`](../../poe_repair/training_cache.py).
 
-**Run A and run B.** Two LoRAs trained on the same 731 photos. A captions every both-animal photo
+**Run A and run B.** Two LoRAs trained on the same 491 photos. A captions every both-animal photo
 jointly. B captions it "a photo of a cat" 40% of the time, "a photo of a dog" 40%, jointly 10%,
 resampled on every draw. Both leave the caption blank 10% of the time, on every photo.
 

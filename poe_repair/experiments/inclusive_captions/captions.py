@@ -59,8 +59,8 @@ BLANK = ""
 # The photo sets, and how many of each every run trains on. The both-animal count is measured,
 # not chosen: COCO train2017 holds 208 photos with both animals and 131 survive the 0.25
 # box-fraction floor the compose scorer uses (artifacts/results/the-inclusive-captions-photo-pool).
-SET_SIZES = {"cat_only": 300, "dog_only": 300, "both": 131, "neither": 131}
-PHOTOS_PER_RUN = 731
+SET_SIZES = {"cat_only": 200, "dog_only": 200, "both": 91, "neither": 91}
+PHOTOS_PER_RUN = 491
 
 BLANK_RATE = 0.10
 
@@ -75,9 +75,9 @@ BOTH_SHARES = {
 # only. The design wrote it as 52 cat, 52 dog, 13 joint and 14 blank, which double-counts: the
 # 10% blank roll every photo already goes through would fire on top of those 14, putting C's
 # blank rate at 11.6% against A's and B's 10.0% and pulling its cat and dog shares down to 36%.
-# The blank share comes from the shared roll, so the 131 photos split over the named captions in
-# B's own 4 : 4 : 1 ratio, and 58/131 × 0.90 = 0.399 lands on B's 0.40. 58 + 58 + 15 = 131.
-C_ASSIGNMENT = {CAT: 58, DOG: 58, JOINT: 15}
+# The blank share comes from the shared roll, so the 91 photos split over the named captions in
+# B's own 4 : 4 : 1 ratio, and 40/91 × 0.90 = 0.396 lands on B's 0.40. 40 + 40 + 11 = 91.
+C_ASSIGNMENT = {CAT: 40, DOG: 40, JOINT: 11}
 
 MAX_SHARE_ERROR = 0.03
 MIN_DOG_PRESENT = 0.13

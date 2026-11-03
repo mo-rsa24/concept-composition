@@ -91,10 +91,33 @@ CAT_ID, DOG_ID = 17, 18
 # The same line the compose scorer draws, so training photos and scored renders agree about what
 # counts as an animal being present.
 MIN_BOX_FRACTION = 0.25
-# The design's own set sizes, which the caption sampler reads back from SET_SIZES. The
-# both-animal count is 131 because that is how many exist: COCO holds 208 and 131 clear the size
-# filter. The filler set matches it so the no-both run trains on the same 731 photos as the rest.
-WANT = {"cat_only": 300, "dog_only": 300, "both": 131, "neither": 131}
+# The design's own set sizes, which the caption sampler reads back from SET_SIZES.
+#
+# The both-animal count is 91: COCO holds 208 photos labelled with both animals, 131 clear the
+# size filter, and 91 of those survive looking at every one of them. The 40 that do not are
+# EXCLUDED_BOTH below.
+#
+# The single-animal sets are 200 rather than 300 because the quantity the pilot moves is a ratio:
+# the fraction of run B's cat-captioned draws that hold a dog is 91*0.40 / (N*0.90 + 91*0.40),
+# so the cat-only count is its denominator. At N = 300 that fraction is 0.119, under what 128
+# seeds can resolve; at N = 200 it is 0.168. The cut applies to run A and run B identically, so
+# the comparison still differs in one thing.
+WANT = {"cat_only": 200, "dog_only": 200, "both": 91, "neither": 91}
+
+# Indices into the shuffled both-animal list that looking at the photographs rejected. Thirty-three
+# do not hold one live cat and one live dog: ten are a cat beside a depiction of a dog (a painting,
+# an illustration, an artwork of printed neckties, etched mugs, a painted van, a book cover, a
+# monitor, a laptop screen, a ceramic figurine), five are collages of separate photographs, six put
+# both labels on a single animal, and twelve have no second animal in the frame. Seven more are
+# ones a careful look could not call either way, and they go out with the rest because a photo
+# nobody can name is a photo that teaches the condition something unknown.
+#
+# The reasons per index are in artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json.
+# The indices are stable: the shuffle's sequence depends on each pool's length, not on WANT.
+EXCLUDED_BOTH = frozenset({
+    0, 2, 9, 15, 16, 17, 24, 26, 27, 28, 40, 48, 57, 58, 61, 65, 69, 72, 74, 76, 77, 82, 84, 85,
+    86, 89, 90, 92, 93, 94, 98, 100, 103, 104, 105, 108, 113, 117, 120, 122,
+})
 SEED = 0
 TILES_PER_SHEET = 48
 
@@ -224,6 +247,10 @@ def main() -> None:
     for name, want in WANT.items():
         pool = sorted(pools[name], key=lambda r: r["image_id"])
         rng.shuffle(pool)
+        if name == "both":
+            pool = [r for i, r in enumerate(pool) if i not in EXCLUDED_BOTH]
+            counts["both_rejected_by_eye"] = len(EXCLUDED_BOTH)
+            counts["both_surviving_the_audit"] = len(pool)
         manifest[name] = pool[:want]
 
     # Every chosen photo has to carry a caption and have a file on disk. A manifest naming a

@@ -24,10 +24,10 @@ sections after it are filled from the result.
 
 ## Words this file uses
 
-**Run A.** A LoRA trained on 731 COCO photos, where every photo holding both a cat and a dog is
+**Run A.** A LoRA trained on 491 COCO photos, where every photo holding both a cat and a dog is
 captioned "a photo of a cat and a dog".
 
-**Run B.** The same LoRA on the same 731 photos, where a both-animal photo is captioned "a photo
+**Run B.** The same LoRA on the same 491 photos, where a both-animal photo is captioned "a photo
 of a cat" 40% of the time, "a photo of a dog" 40%, jointly 10%, redrawn every time the photo is
 seen. Both runs leave the caption blank 10% of the time, on every photo in every set.
 
@@ -60,7 +60,7 @@ step count, the sampler, the guidance scale and the 128 scoring seeds.
 
 ## Runs
 
-| Run | W&B id | Captions on the 131 both-animal photos | Steps | Scoring seeds |
+| Run | W&B id | Captions on the 91 both-animal photos | Steps | Scoring seeds |
 |---|---|---|---|---|
 | base SDXL | none | none, untrained | 0 | 48 |
 | A | to be filled | joint 90%, blank 10% | 2,000 | 128 |
@@ -89,7 +89,7 @@ inconclusive with the cost of resolving it stated: quadrupling the seeds to 512 
 the band, which is roughly 8 further GPU hours of rendering.
 
 **The counts.** 128 product renders per run for A and B, on the same 128 seeds. 48 for base SDXL.
-8 held-out both-animal photos for the secondary loss read, none of them in the 731.
+8 held-out both-animal photos for the secondary loss read, none of them in the 491.
 
 **What would surprise.** Run B's joint-prompt compose rate moves while its product rate does not.
 That would mean the captioning changed what the model can draw when asked for both animals
@@ -109,6 +109,7 @@ the from-scratch model rather than being retired.
 | Does run B's product compose more often than run A's? | support at a gap of the band or more, no support at a gap of 0 or less, inconclusive between | to be filled |
 | Is run B's held-out denoising loss on unseen both-animal photos lower? | reported apart from the bar | to be filled |
 | How many of run B's renders did the classifier call uncertain? | unknown; it has never been read on two animals in one frame | to be filled |
+| How many of the 131 both-animal photos really hold both animals? | unknown before looking | 91 clear, 33 rejected, 7 uncertain |
 | At which checkpoint can the two runs be told apart by eye? | unknown | to be filled |
 
 ## Asked after the result
@@ -124,9 +125,19 @@ sampler's own check, which measures the realised shares off 200,000 draws agains
 as constants in its source. It already caught one real bug: run C's blank caption was counted
 twice, putting its blank rate 1.6 points off A's and B's.
 
-**The photos do not hold what COCO says they hold.** COCO labels drawings and statues as animals
-and misses animals that are present. Ruled out by looking at all 131 both-animal photos by eye
-and writing down the rejections, which is instruction 8 of the plan.
+**The photos do not hold what COCO says they hold.** This one fired. All 131 both-animal photos
+were looked at and 40 went out: 33 that plainly do not hold one live cat and one live dog, and 7
+nobody could call either way. Ten of the 33 are a cat beside a depiction of a dog, which is the
+failure worth naming, because COCO's annotation does not distinguish a dog from a picture of a
+dog. The 91 that survive are the training set, and the per-photo reasons are in
+`artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json`.
+
+The cut moved the effect size, so the design moved with it. At 91 both-animal photos against 300
+cat-only, the dog-present share of run B's cat draws falls to 0.119, under what 128 seeds can
+resolve. The single-animal sets are therefore 200 rather than 300, which is the denominator of
+that ratio, putting the share at 0.169. The cut applies to run A and run B identically, so the
+comparison still differs in one thing. What it costs is a weaker fine-tune in both runs, which
+makes a no-support result harder to attribute.
 
 **The scorer cannot tell a cat from a dog in a frame holding both.** Not ruled out. The
 GroundingDINO per-class read is known dead here: it called a dog in 64 of 64 single-cat renders
