@@ -77,6 +77,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 |---|---|---|---|
 | COCO train2017: 3,906 cat-only, 4,177 dog-only, 208 both, 169 of those with exactly one cat and one dog | found | `json` count over `instances_train2017.json`, 2026-11-03 | steps 1, 3 |
 | COCO val2017: 172 cat-only, 165 dog-only, 12 both, 9 with one of each | found | same count | no held-out real pairs; evaluation is by generation only |
+| In the 169 one-cat-one-dog train2017 photos, the smaller animal's segmentation area is a median 4.7% of the frame; it is under 5% in 90 photos (53%), under 2% in 42 (25%) and under 1% in 21 (12%) | found | `area` summed per category over `instances_train2017.json`, divided by width×height, 2026-11-03 | steps 1 and 3: half of what the inclusive arm captions under a single name is a photo in which that animal is a few percent of the frame |
 | The project's PoE is `ε_uncond + gs·(ε_A + ε_B − 2ε_uncond)`; at gs 1 that equals the source's "corrected" `s_C + s_D − s_0` | found | `poe_repair/training_cache.py:11` | step 1: only the raw arm is new |
 | The project's interaction residual is `gs·(ε_J − ε_A − ε_B + ε_uncond)` | found | `poe_repair/training_cache.py:13` | later: the per-LoRA residual read |
 | The compose scorer counts GroundingDINO instances ≥ 2 and cannot tell a cat and a dog from two dogs | found | memory "FK steering baseline"; [compose-score validation](../artifacts/results/can-we-trust-the-compose-score/README.md) | step 3, piece 6: score per class |
@@ -189,13 +190,20 @@ Settled facts:
 - layer 5's toy: fine-tuning erased inherited A-and-B support within 30 to 100 steps
   (artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)
 - the compose scorer cannot tell a cat and a dog from two dogs (memory: FK steering baseline)
+- in 53% of the 169 both-animal photos the smaller animal is under 5% of the frame (area count,
+  What we know): captioning those under that animal's name is what teaches its condition to put
+  density on images where it is barely visible, which is the effect this axis is testing and the
+  one a both-visible scorer discards
 - rung 11b's design: hold the single-animal sets fixed, freeze the text encoder, label one
   animal / two animals / hybrid separately, report PoE and joint-prompt arms apart
 Claims to walk, at least: (1) A against B differs in one variable only once every arm shares one
 empty-caption rate; (2) LoRA C, defined or dropped; (3) 300/300/200 is reachable and the
 single-animal sets stay identical across arms; (4) the no-both LoRA is rung 11b's share-zero
 point, where the two axes meet; (5) the raw arm is worth its render cost; (6) 2,000 steps at rank
-8 and 512 px is enough for LoRA A to show the layer-5 erosion; (7) the scorer reads per class.
+8 and 512 px is enough for LoRA A to show the layer-5 erosion; (7) the scorer reads per class; (8) a success
+category that requires both animals plainly visible throws away the outcome inclusive captioning
+most changes, a photo where one animal is a few percent of the frame, so the per-class read needs
+a third outcome between both-visible and one-absent.
 When something is missing: a claim that needs a number not on disk gets "needs a check" and the
 command that would print it, not a guess.
 Outputs: IDEA_MAP.md in that folder with every claim marked, and a design table: arm, captions
@@ -282,14 +290,20 @@ Settled facts:
   a dog from two dogs
 Pieces, in order:
 1. subset manifest: image ids per group, identical single-animal sets in every arm, counts
-   printed; a contact sheet of 12 both-animal photos for me to look at by hand
+   printed; each both-animal photo's per-animal area share recorded in the manifest, and the
+   contact sheet of 12 both-animal photos chosen to span that range rather than at random, so
+   what the inclusive caption is actually teaching is visible by hand
 2. caption sampler per arm, with the counts each caption is drawn per image group over the step
    budget printed per arm before training
 3. trainer, 50-step smoke run that saves a LoRA and prints its step time
 4. five trainings (A, B, C or none, no-both, plus the step-time line), launched outside Slurm,
    harvested with pgrep and the log tails
 5. renderer: base SDXL and each LoRA under cat, dog, joint, PoE raw, PoE corrected, 128 seeds
-6. per-class scorer, the scores CSV with arm, caption rates, steps, seed beside every row
+6. per-class scorer with three outcomes, not two: both animals plainly present; one plainly
+   present and the other present but small or occluded; one absent. The middle outcome is scored
+   on full-resolution tiles, never on a downscaled sheet, and the scores CSV carries arm, caption
+   rates, steps, seed and all three counts beside every row. Reading only the top outcome would
+   show the inclusive arm as worse precisely when it is working
 When something is missing: a node or card that is not free, ask; a training that diverges, stop
 it and show the loss tail before relaunching
 Outputs: the results folder above with scores.csv, renders/, manifest.json, captions-per-arm.txt
