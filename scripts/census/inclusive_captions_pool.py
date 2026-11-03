@@ -68,7 +68,22 @@ from poe_repair import paths  # noqa: E402
 
 COCO_ROOT = Path("/datasets/mmolefe/coco2017")
 ANNOTATIONS = COCO_ROOT / "annotations_trainval2017/annotations/instances_train2017.json"
-IMAGES = COCO_ROOT / "train2017"
+
+
+def _images_dir() -> Path:
+    """The folder holding the train2017 jpegs.
+
+    The download on this cluster nests them one level deeper than the archive layout, so both
+    spellings are checked and the one that actually holds a jpeg wins. Guessing wrong produces a
+    manifest of paths that do not exist, which only surfaces when something opens one.
+    """
+    for candidate in (COCO_ROOT / "train2017" / "train2017", COCO_ROOT / "train2017"):
+        if candidate.is_dir() and next(candidate.glob("*.jpg"), None) is not None:
+            return candidate
+    raise SystemExit(f"no train2017 jpegs under {COCO_ROOT / 'train2017'}")
+
+
+IMAGES = _images_dir()
 FAMILY = "outputs/inclusive_captions_pool"
 
 CAT_ID, DOG_ID = 17, 18
