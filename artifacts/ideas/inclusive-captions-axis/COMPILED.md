@@ -113,6 +113,20 @@ blurred or carrying a second indistinct animal shape. That is the condition abso
 dog-present draws as an average rather than as a second mode, and reading it as a plain null
 would retire the idea for the wrong reason.
 
+## Where this sits in the literature
+
+Bradley et al. 2502.04549 state the condition under which adding two experts' scores is exact:
+the two conditions are independent given the image. CoInD (2503.01145) attacks that condition
+from the training side with a loss term that penalises the divergence between a model's joint
+conditional and the product of its single-concept conditionals. This idea attacks the same
+quantity from the data side, with captions instead of a loss, which is cheaper and weaker. Their
+divergence is also a measurement, not only a loss, so computing it under A and under B is a third
+read of claim 1 that neither the render count nor the held-out loss gives.
+
+FactorDiff (2607.11758) routes the product's weighting per factor instead of one global scalar,
+in discrete diffusion. It is an inference-time weighting scheme and this pilot changes training
+data, so it bears on the discussion rather than on the design.
+
 ## What the pilot does not settle
 
 Whether the product's failure is about co-occurrence at all, which is the question the planned

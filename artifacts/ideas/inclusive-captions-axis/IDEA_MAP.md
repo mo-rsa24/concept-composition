@@ -486,6 +486,16 @@ the pilot's filtering rule, which claim 6 has to fix first.
 
 **Claim 1, the held-out denoising loss.** Blocked on the missing image-denoising LoRA trainer.
 
+**Claim 1, the conditional-independence divergence.** Bradley et al. 2502.04549 give the condition
+under which adding two experts' scores is exact: the two conditions are independent given the
+image, their "Factorized Conditionals". CoInD (2503.01145) turns that into a number, the
+divergence between a model's joint conditional and the product of its single-concept conditionals,
+and reports it on colored MNIST as a JSD of 0.16 under full support against 2.75 under partial
+support. Measuring the same divergence under A and under B would say whether inclusive captioning
+moves the quantity the exactness condition is about, which the render count and the held-out loss
+do not. It needs the trained adapters, so it is blocked behind the same trainer, and it is a
+read of the models rather than another run.
+
 ## Runs
 
 Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table-of-contents) | [Next](#routes) ➡️
