@@ -9,7 +9,7 @@
 | 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
 | 4. LoRA C, as written, is a distinct ablation | wrong as stated, settled | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
 | 5. The LoRA with no both-animal photos is rung 11b's share-zero point | wrong as stated, settled | **repaired: 200 photos holding neither animal replace the removed both-animal photos, so every arm trains on 800 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
-| **6 (current). The pilot runs as specified on COCO, the scorer and one day of GPU** | **wrong as stated** | **repaired: about 9 GPU hours once the pieces exist, but the trainer the pilot needs is not in this repo and writing it is the real cost. Seeds fixed at 128 for A and B, 48 for the rest** |
+| 6. The pilot runs as specified on COCO, the scorer and one day of GPU | wrong as stated, settled | **repaired: about 9 GPU hours once the pieces exist, but the trainer the pilot needs is not in this repo and writing it is the real cost. Seeds fixed at 128 for A and B, 48 for the rest** |
 
 Load-bearing: claim 1. The idea dies without it. Claim 2 is what makes it worth a paragraph in the
 paper.
@@ -42,7 +42,8 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 6, the last one. Claims 1 to 5 carry marks.
+Closed. All six claims carry a mark and the design table has no blank cell. `compile` is the
+next move.
 
 **What compile would produce today**
 
@@ -344,7 +345,7 @@ apart, which is the failure-kind read 11b asks for. What the pilot does not matc
 scene-complexity control: two-animal photos are busier than single-animal ones, and nothing in the
 design table matches them for size and clutter. That one is recorded, not solved.
 
-### 6. ❌ The pilot runs as specified on COCO, the scorer and one day of GPU  ← current
+### 6. ❌ The pilot runs as specified on COCO, the scorer and one day of GPU  ← current (settled)
 
 Mark: wrong as stated. The GPU arithmetic is roughly right and it is not the cost that matters.
 
@@ -386,9 +387,37 @@ the rest get 48.
 | Piece | Cost |
 |---|---|
 | training, 4 arms plus a second seed for A and B | about 6 hours |
+| the watching sheets during training, see below | about 1 hour |
 | rendering, 128 seeds each for A and B, 48 for base, C and no-both | about 2.5 hours |
 | scoring, detector plus CLIP crop call on roughly 500 renders | under 1 hour |
-| **total GPU** | **about 9 hours, which is one day** |
+| **total GPU** | **about 10 hours, which is one day** |
+
+**What the run shows while it is training.** Every run reports to Weights and Biases, project
+`prime_lab/poe-repair-inclusive-captions`, one W&B run per arm, grouped so the arms line up on
+one axis. Per optimiser step: the loss, the learning rate and the gradient norm. At steps 0, 250,
+500, 1,000 and 2,000 the run pauses and renders a sheet.
+
+The sheet is eight fixed seeds down the rows and four columns across: "a photo of a dog", "a photo
+of a cat", "a photo of a cat and a dog", and the product of the cat and dog conditions. The same
+eight seeds at every checkpoint and in every arm, so the sheets stack into a film of one picture
+changing as training proceeds, and the arms are comparable tile for tile.
+
+The product column costs nothing extra to train, because combining two conditions happens at
+sampling time and needs no training of its own: three predictions per step (cat, dog, empty)
+against two for an ordinary render. That is why it can sit beside the three prompt columns from
+step 0 onward, and it is the column the idea lives or dies on.
+
+The sheets render at the training resolution of 512 square with 25 sampling steps, roughly four
+seconds a tile, which is why an hour covers every checkpoint of every arm. The scored renders
+stay at 1,024 square with 50 steps, because the composition calls are made on those and this
+project has already been caught calling pairs off downscaled sheets.
+
+**What the sheets may and may not be used for.** Eight seeds is a picture, not a rate. The sheet
+says whether anything is happening and when, for instance whether the product column changes by
+step 250 or only by step 2,000, which is free information about how fast the caption share bites.
+The compose rate that answers claims 1 and 2 comes from the 128-seed renders at the end and from
+nowhere else. A sheet that looks good at step 500 is not a result and must not be reported as
+one.
 
 **The repair.** The one-day figure stands for GPU and is wrong for the pilot. Written honestly:
 one day of GPU after two or three days of writing the trainer, the data build and the caption
@@ -498,5 +527,6 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 6 is delivered and unsettled. Settling it closes the walk: every claim carries a mark and
-the design table has no `tbd` cell, so `compile` is the next move.
+The walk is closed. Every claim carries a mark, the design table has no blank cell, and the
+watching sheets and the W&B project are written into claim 6. `compile` writes the walk up and
+fills the route file's step 2 prompt with the claim it hands over.
