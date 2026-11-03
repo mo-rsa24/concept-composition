@@ -47,13 +47,13 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.6, round 1. Claims 1.1, 1.3, 1.4 and 1.5 are wrong as stated and repaired into
-1.7, 1.8, 1.9 and 1.10; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6
+Turn 1, claim 1.10, round 1. Claims 1.1, 1.3, 1.4 and 1.5 are wrong as stated and repaired into
+1.7, 1.8, 1.9 and 1.10; 1.6 holds and shows only the first regime; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6
 is routed elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 15 of 108 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 16 of 108 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -86,13 +86,13 @@ claims are therefore the question's own premises plus what the three images asse
 - [x] 1.3 the posteroanterior film shows scarring on one side and progressive massive fibrosis on the other — **wrong as stated**, it is a question and never an assertion; repaired into 1.8
 - [x] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`) — **wrong as stated**, the four are the atoms the condition is built from, not four looks of the condition; repaired into 1.9
 - [x] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`) — **wrong as stated**, the three are real but not all of them and they are kinds of region rather than kinds of patient; repaired into 1.10
-- [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
+- [x] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's — **holds**, and the figure shows only the separate-places regime; its own paper names the hidden-disease regime in prose and pictures none of it
 - [ ] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film *(appended round 5, the repair of 1.5)*
 - [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one *(appended round 4, the repair of 1.4)*
 - [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
 - [ ] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film: both diseases in separate places, both in the same place and both readable, a lesion neither builds alone, and one disease present and unreadable because the other has destroyed or buried the lung it would show in *(appended round 5, the repair of 1.5)*
-- [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`)  ← current
+- [ ] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film  ← current
 
 **1.4, settled.** Mark: wrong as stated. The four panels are A simple silicosis, B complicated
 silicosis (progressive massive fibrosis), C active pulmonary tuberculosis and D post-tuberculous
@@ -338,6 +338,7 @@ are listed so a later round does not re-fetch them blind.
 | pmc.ncbi.nlm.nih.gov/articles/PMC12904126/ | the 2026 Southern African miners study behind claim 2.5 | link saved, content unverified |
 | arxiv.org/abs/2302.11552 | Du et al., the sampling result behind claims 5.4 and 5.10 | confident, already cited in this repo |
 | [Martins et al. 2010, the cavitated conglomerate mass](https://pmc.ncbi.nlm.nih.gov/articles/PMC2929613/) | one silicotuberculosis patient carrying a cavity inside a conglomerate mass with small nodules elsewhere on the same CT, plus a 44-patient series where 8 masses cavitated and 6 of those 8 had tuberculosis | confident, already cited in [the composition terms](../poe-overlap-dial/composition-terms.md) |
+| [Zeng, Liang and Ou 2025, the CPFE narrative review](https://pmc.ncbi.nlm.nih.gov/articles/PMC12711510/) | the source of the conversation's own CPFE screenshot, uncropped and CC BY, filed at [the regime set](../../results/overlap-regimes-on-real-films/README.md). Its conclusion names "mutual masking of the imaging characteristics of pulmonary emphysema and early pulmonary fibrosis" while its figure shows only the separate-places regime | confident, quoted |
 | [Fatal CPFE with fibrosis unseen on CT](https://pmc.ncbi.nlm.nih.gov/articles/PMC4585953) | an autopsy case where upper-zone lung read as plain emphysema on CT held dense usual-interstitial-pneumonia fibrosis, so the overlap showed fewer findings than either disease alone | confident on the finding, one case |
 | this repo's [report index](../../../report/00-INDEX.md) | the measured findings that mark turns 5, 7 and 8 | confident, this project's own verdicts |
 | the [disjoint-support idea map](../disjoint-marginal-support-and-poe-chimeras/IDEA_MAP.md) | claim 5.3 is already an idea here, with a two-stage design | confident |
