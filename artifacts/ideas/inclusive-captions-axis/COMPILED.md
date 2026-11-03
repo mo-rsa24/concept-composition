@@ -16,19 +16,26 @@ conditions is high where both are high, so it should hold more pictures containi
 
 ## What the five training runs are
 
-Every run trains on the same 800 photos: 300 cat-only, 300 dog-only, 200 holding both. The only
+Every run trains on the same 731 photos: 300 cat-only, 300 dog-only, 131 holding both. COCO train2017 holds 208 both-animal photos and 131 of them survive the 0.25 box-fraction floor the compose scorer uses; the single-animal pools are ten times what is needed (3,335 and 2,708). Counts and the audit sheets are at `artifacts/results/the-inclusive-captions-photo-pool/`. The only
 thing that changes is the caption each both-animal photo is trained under. Every run shares one
 10% blank-caption rate on every photo, which is what makes the comparison one-variable.
 
 | Run | Cat-only | Dog-only | Both-animal, captions per draw | Blank rate | Steps | Seeds scored |
 |---|---|---|---|---|---|---|
 | base SDXL | none | none | none | none | 0 | 48 |
-| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, blank 10% | 10% | 2,000 | 128 |
-| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, blank 10% | 10% | 2,000 | 128 |
-| C (droppable) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 blank | 10% | 2,000 | 48 |
-| no-both | same 300 | same 300 | none; 200 photos holding neither animal take their place | 10% | 2,000 | 48 |
+| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 131: joint 90%, blank 10% | 10% | 2,000 | 128 |
+| B | same 300 | same 300 | same 131: cat 25%, dog 25%, joint 40%, blank 10% | 10% | 2,000 | 128 |
+| C (droppable) | same 300 | same 300 | same 131, one caption fixed per photo for the whole run, at B's shares | 10% | 2,000 | 48 |
+| no-both | same 300 | same 300 | none; 131 photos holding neither animal take their place | 10% | 2,000 | 48 |
 
 B against A is the experiment. Everything else is a control or an anchor.
+
+**The share this produces, and the change it argues for.** With 131 both-animal photos captioned
+"cat" a quarter of the time, about 11% of B's "a photo of a cat" training draws hold a dog,
+against the 15% the design assumed at 200 photos. Raising the single-name shares to 40% each
+(cat 40%, dog 40%, joint 10%, blank 10%) brings it back to about 16%. It costs nothing, because
+the blank rate stays at 10% in every arm and that is the cell the one-variable comparison rests
+on. Recommended, and not yet applied to the table above.
 
 ## Where each claim landed
 
