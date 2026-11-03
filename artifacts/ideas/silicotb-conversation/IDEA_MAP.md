@@ -4,7 +4,7 @@
 
 | Turn | Claims | Marked | Mark spread |
 |---|---|---|---|
-| **1 (current)**: TB then silicosis, how each changes the other | 7 | 1 | 1 wrong as stated |
+| **1 (current)**: TB then silicosis, how each changes the other | 7 | 2 | 1 wrong as stated, 1 needs a check |
 | 2: where AI fails, and what the label should be | 18 | 0 | all open |
 | 3: public-data pairs with the same three regimes | 15 | 0 | all open |
 | 4: pairs that genuinely interact | 11 | 0 | all open |
@@ -12,7 +12,7 @@
 | 6: multi-label LoRA on cats and dogs | 9 | 9 | routed, not walked here |
 | 7: is there a mechanism or a context for cats and dogs | 12 | 0 | all open |
 | 8: does inclusive training generalise across seeds and pairs | 12 | 0 | all open |
-| **total** | **105** | **10** | |
+| **total** | **105** | **11** | |
 
 Load-bearing: claim 5.7, that a composition which divides out the base image distribution equals
 the true joint whenever the two labels are conditionally independent given the whole image. Every
@@ -47,7 +47,7 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.7, round 2. Claim 1.1 is marked wrong as stated and repaired into 1.7; turn 6 is
+Turn 1, claim 1.2, round 1. Claim 1.1 is marked wrong as stated and repaired into 1.7; turn 6 is
 routed elsewhere.
 
 **What compile would produce today**
@@ -86,7 +86,13 @@ claims are therefore the question's own premises plus what the three images asse
 - [ ] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`)
 - [ ] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`)
 - [ ] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's
-- [ ] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis  ← current  *(appended round 2, the repair of 1.1)*
+- [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
+- [ ] 1.2 the combined condition is properly called silicotuberculosis  ← current
+
+**1.7, settled.** Mark: needs a check, on the asymmetry ratio in Checks outstanding. The axis is
+real (9,167 of 13,302 repeat-film patients change label) and the conversation's own pair is not
+(12 patients one way, 8 the other). Nothing downstream depends on it: every design in turns 2 to 8
+treats the pair as symmetric, so 1.7 is an axis the conversation could gain, never one it needs.
 
 **1.1, settled.** Mark: wrong as stated. Every source found defines the combined condition by
 coexistence in any sequence, and includes old tuberculosis damage, so the ordering the claim turns
@@ -264,6 +270,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | Anchor | What it executed | State | Finding |
 |---|---|---|---|---|
+| 2 | 3.8, 4.6 | `count_cooccurrence.py` over the same CSV, every pair of findings counted over films | returned 2026-11-03 | all four named pairs reproduce the route's facts table exactly: 11, 36, 1,063 and 3,275 films. [The matrix and its card](../../results/which-findings-arrive-after-which/README.md) |
 | 1 | 1.7 | `count_arrival_order.py` over NIH's metadata on mscluster, every ordered pair of findings counted over patients with two or more films | returned 2026-11-03 | 9,167 of 13,302 repeat-film patients changed label, so the axis exists; fibrosis then pneumonia is 12 patients and pneumonia then fibrosis is 8, so the conversation's own pair cannot be scored. [The matrix and its card](../../results/which-findings-arrive-after-which/README.md) |
 
 ## Routes
@@ -272,6 +279,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#sour
 
 | # | Anchor | The ask | Return line | State |
 |---|---|---|---|---|
+| 1 | 1.7 | `/drip-idea --hypothesis` on the asymmetry ratio, to write the support, null and inconclusive bands before the ratio is computed | bring back `HYPOTHESIS_arrival_order.md` and the band that the measured ratio falls in | emitted, not yet run |
 
 ## Sources
 
@@ -297,5 +305,6 @@ are listed so a later round does not re-fetch them blind.
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 1.7, round 2: `settle` it as needs a check, on the asymmetry ratio named in Checks
-outstanding, then move to claim 1.2.
+Claim 1.2, round 1: whether the combined condition is properly called silicotuberculosis. Three
+fetched sources already use the term, so the round is about what the term commits a label to
+rather than about whether it exists.
