@@ -127,35 +127,16 @@ ax.annotate(
 )
 
 busiest = np.unravel_index(np.argmax(counts), counts.shape)
-ax.annotate(
-    f"busiest cell: {findings[busiest[0]].lower()} first,\n"
-    f"then {findings[busiest[1]].lower()}, {counts[busiest]} patients",
-    xy=(busiest[1], busiest[0] + 0.5), xycoords="data",
-    xytext=(1.045, 0.60), textcoords="axes fraction",
-    fontsize=9.0, color="#7a3d00", ha="left", va="top",
-    bbox=dict(boxstyle="round,pad=0.4", fc="#fff6e8", ec="#c97a1f", lw=1.1),
-    arrowprops=dict(arrowstyle="-", color="#c97a1f", lw=1.1,
-                    connectionstyle="arc3,rad=0.14"),
-)
-
-ax.annotate(
-    "the diagonal is blank by construction:\n"
-    "a finding cannot be gained after itself",
-    xy=(idx["Hernia"], idx["Hernia"]), xycoords="data",
-    xytext=(1.045, 0.34), textcoords="axes fraction",
-    fontsize=9.0, color="#555", ha="left", va="top",
-    bbox=dict(boxstyle="round,pad=0.4", fc="#f4f4f4", ec="#999", lw=1.0),
-    arrowprops=dict(arrowstyle="-", color="#999", lw=1.0,
-                    connectionstyle="arc3,rad=0.1"),
-)
 
 fig.text(
     0.5, 0.055,
     f"{summary['patients_whose_labels_change']:,} of {summary['patients_with_two_or_more_films']:,} "
     f"patients with two or more films changed label, out of {patients_total:,} patients and {len(d):,} films. "
     "One patient counts once: their first film's findings against everything they gained later.\n"
-    "The matrix is asymmetric on purpose, so A-then-B and B-then-A are separate cells. "
-    "The labels are report-derived and noisy, and a gained label can mean a new finding or a different reader.",
+    "The matrix is asymmetric on purpose, so A-then-B and B-then-A are separate cells, and the diagonal is blank "
+    f"because a finding cannot be gained after itself. The busiest cell is {findings[busiest[0]].lower()} first then "
+    f"{findings[busiest[1]].lower()}, {counts[busiest]} patients.\n"
+    "The labels are report-derived and noisy, so a gained label can mean a new finding or a different reader.",
     ha="center", va="top", fontsize=9.0, color="#444",
 )
 

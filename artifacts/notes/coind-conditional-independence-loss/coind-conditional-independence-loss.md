@@ -547,3 +547,7 @@ training, which is the opposite of retaining it and asking what structure it has
 The two approximations noted above (pairwise instead of mutual, and the Shapes3D switch to
 $C_i \perp C_{-i} \mid X$) are also the closest thing in the literature to a statement about how
 the term behaves across attribute pairs.
+
+## Cross-references
+
+- The mention of **CoInD: Enabling Logical Compositions in Diffusion Models** (the paper's reference entry) in [the write-up on what PoE loses when it composes](../../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#12-references).

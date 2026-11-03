@@ -133,7 +133,7 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
 
 ### 7. 🔧 A rank-32 LoRA on every variant, 30,000 updates (AI, about 8 h of training, unattended)
 
-The pooled LoRA that already composes 7 of 8 held-out cat × dog seeds was best between 30,000 and
+The [pooled LoRA](../../context/world/lora-corrector.md#what-the-lora-corrector-is) that already composes 7 of 8 held-out cat × dog seeds was best between 30,000 and
 90,000 updates at rank 32, learning rate 1e-4, weight decay 0, where plain PoE composes 0 of 8
 ([the checkpoint finding](../../report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)).
 The rank-8 runs here stopped at 8,000 updates, so this step gives each variant that recipe, with the
@@ -173,7 +173,7 @@ with the reward's gradient taken over the late steps. This step points that mach
 expert's parameters, starting from the last checkpoint of run9a, with the fidelity term on and an
 anchor to the starting parameters so the picture quality cannot be spent on the reward.
 
-**Written before the run.** Supported if the instance-count scorer reads two animals on at least 4 of
+**Written before the run.** Supported if the [instance-count scorer](../../context/world/compose-rate.md#words-this-file-uses) reads two animals on at least 4 of
 8 held-out cat × dog seeds where plain PoE reads two on none, and by eye at least 4 of those are a cat
 and a dog, with reward fidelity no more than 0.05 below the start. Null otherwise. The scorer cannot
 tell a cat and a dog from two dogs, so the eye read counts.

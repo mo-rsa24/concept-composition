@@ -117,3 +117,5 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 ## Cross-references
 
 - The mention of **the softness of the corrected render** (what the adapter costs in fidelity, and two attempts to remove it) in [can a corrector or a clean tail sharpen the adapter's renders](../../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match).
+- The mention of **adapter** in [the write-up on what PoE loses when it composes](../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#35-the-interaction-term).
+- The mention of **pooled LoRA**, the rank-32 checkpoint the third-expert runs are given the recipe of, in [the plan that fits a learned "and" token](../../plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).

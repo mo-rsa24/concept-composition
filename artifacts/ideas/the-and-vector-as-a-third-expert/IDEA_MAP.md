@@ -8,12 +8,13 @@ product matches the joint prompt, on a curated co-occurrence dataset.
 
 | Claim | Kind | Mark | Settled by |
 |---|---|---|---|
-| **1 (current)**: x = E("cat and dog") − E("cat") − E("dog") is a usable conditioning | premise | **wrong as stated** | **run 1: x_raw carries the start token at −1× (norm 1190 against about 15 for a word); x_fix zeroes it, but its pads keep 0.77 (CLIP ViT-L) and 0.49 (bigG) of the joint prompt's pad norm against a pass mark of 0.1, and its content positions are larger than the joint prompt's own** |
-| 2. PoE("dog", "cat", x) draws a cat and a dog together | aim | **null for arithmetic x** (Claude's calls, open to your veto) | run 2's sheet: 7 counted seeds; PoE(d, c, x_fix) shows one cat and one dog on at most 1 (seed 3), PoE(d, c, x_aff) on 0, PoE(d, c, x_raw) is a blank grey tile on all 8 |
-| 3. the LoRA's target is f("dog and cat") | aim | **wrong as stated, repaired** | the target is f(joint) only on seeds whose joint render shows one of each, kept by eye; the project already did this for the pooled LoRA (`target_quality.json` and `--exclude-cells` in `train_pooled.py`); "dog and cat" keeps 7 of 8, "a cat and a dog" 6 of 17 |
+| 1. x = E("cat and dog") − E("cat") − E("dog") is a usable conditioning | premise | **wrong as stated** | **run 1: x_raw carries the start token at −1× (norm 1190 against about 15 for a word); x_fix zeroes it, but its pads keep 0.77 (CLIP ViT-L) and 0.49 (bigG) of the joint prompt's pad norm against a pass mark of 0.1, and its content positions are larger than the joint prompt's own** |
+| 2. PoE("dog", "cat", x) draws a cat and a dog together | aim | **null for every third expert tried** | runs 2, 4 and 5 with your calls: 0 clear pairs of 7 for x_raw, x_fix, x_aff, seven phrases and the joint prompt itself as the third expert; two hybrids on 4 to 5 of 7 for the phrases naming both animals; lower weights of x return PoE's hybrid |
+| 3. the LoRA's target is f("dog and cat") | aim | **wrong as stated, repaired** | the LoRA trains on the by-eye curated pool, `artifacts/_shared/cross_pair_pool_configs/cells_v58.json` (182 cells over 48 pairs, every joint render judged good by eye), with cat × dog held out for evaluation; no new cat × dog curation is needed |
 | 4. a curated co-occurrence dataset supplies that target | means | needs a check | captions are plentiful (17,396 of 32,776,409 in the 2-file slice name both); whether the pictures show both is unknown: a sample of 200 pictures called by eye, or the repo's GroundingDINO instance count, settles it |
-| 5. both are simple and need compute | limit | open | |
+| **5 (current)**: both are simple and need compute | limit | **wrong as stated** | measured: piece 1 took six runs, about 1.5 GPU-hours, two script changes, and arithmetic did not work; piece 2 is a new training target and a rank-32 run reached its best at 30k steps, 0.7 s/step on an A6000 (about 6 h) before the extra third-expert pass |
 | 6. `/skill-route` is the right first stop, with the two as separate work | means | open | |
+| 7. piece 2's x has a job the LoRA does not already do | aim | **wrong as stated** (appended in claim 5's break) | a fixed x is off-distribution and the LoRA must first undo it; a learned x trained with the LoRA is not separable from it; and the LoRA alone already composes on 7 of 8 cat × dog seeds, so 8 seeds leave one seed of room to show x helping. Repaired: gate piece 2 on route 3 (the learned token alone) removing at least 10% of the correction on held-out cat × dog |
 
 Load-bearing: claim 2. The second piece only earns x as an input if x moves the picture.
 
@@ -29,7 +30,7 @@ so the three-expert product matches the joint prompt.
 
 **Where the walk is**
 
-Claim 1, round 1.
+Claim 5, round 1. Claims 1 to 4 carry marks.
 
 **What compile would produce today**
 
@@ -211,19 +212,26 @@ the LoRA's share on the same seeds.
 
 Mark: wrong as stated, repaired.
 
-The joint prompt fails on some seeds (1 of 8 for "dog and cat", 11 of 17 for "a cat and a dog"),
-and a LoRA trained to match it learns those failures too. Repaired wording: **the target is the
-joint prompt's prediction on seeds whose joint render shows one cat and one dog, selected by eye
-before training.** The project has done this curation once: the pooled LoRA's targets were read
-into `/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/target_quality.json`
-(field `both_present`, confirmed by eye) and dropped with `--exclude-cells` in
-`poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`
-([scope 08's master plan](../../../plans/08-improve-the-rank-32-pooled-adapter/MASTER_PLAN.md)).
+The joint prompt fails on some seeds, and a LoRA trained to match it learns those failures too.
+The project has already solved this, by eye, at scale: every candidate pair's joint render was
+judged seed by seed, and only the good cells enter training. The verdicts are
+`artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json` on the
+cluster checkout (`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/`; `artifacts/results/` is
+gitignored, so the laptop has no copy), turned into cell lists by
+`scripts/showcase/build_pool_from_verdicts.py`. The newest list,
+`artifacts/_shared/cross_pair_pool_configs/cells_v58.json`, holds 182 cells over 48 pairs and is
+read by the trainer's `--cells` switch. Cat × dog is in none of the lists on purpose: it is the
+held-out evaluation pair, and seeds 9 to 16 are never trained on because the cached starting noise
+is shared across pairs.
 
-What the repair commits to. Selection keeps the noises on which the joint prompt composes easily,
-so the LoRA learns the correction only there; evaluation has to include held-out seeds of both
-kinds and judge the render itself, not its distance to the joint render. At 7 of 8 kept, 32
-rendered seeds give about 28 training seeds for "dog and cat".
+Repaired wording: **the LoRA's target is the joint prompt's prediction on the curated cells of
+`cells_v58.json`, and cat × dog is judged held out.** The automatic check in
+`/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/target_quality.json` is the one
+the by-eye pass replaced because it over-flags; it is not the curated set.
+
+The 32 "dog and cat" seeds rendered in run 6 (`joint-seed-calls.json`: 28 pass, 2 fail, 2
+undecided) are only needed for a LoRA trained on cat × dog itself, which would give up the held-out
+test.
 
 ### 4. ⬜ A curated co-occurrence dataset supplies that target
 
@@ -250,6 +258,32 @@ Mark: open.
 ### 6. ⬜ `/skill-route` is the right first stop, with the two as separate work
 
 Mark: open.
+
+### 7. ⬜ Piece 2's x has a job the LoRA does not already do
+
+Mark: wrong as stated. Appended in claim 5's break, not part of the opening cut.
+
+The sheets show a third expert, even the joint prompt itself, cannot stop the "dog" and "cat"
+experts fusing. In f(m) = f′(d)·f′(c)·f′(x) the only part that can stop it is the LoRA's change to
+f′(d) and f′(c). Then x is one of three things. A fixed arithmetic x is a vector larger than any
+prompt that draws texture (runs 1, 2 and 5), so the LoRA spends capacity undoing it. A learned x
+trained alongside the LoRA cannot be told apart from the LoRA's own change, since either can absorb
+what the other does. And the LoRA without x already composes on 7 of 8 cat × dog seeds in the
+write-up's remedies table, so on 8 seeds x has one seed in which to show it helps.
+
+Repaired wording: **x earns a place in piece 2 only if, alone, it carries part of the correction.**
+Route 3 (the learned token with every weight frozen) measures exactly that. Gate piece 2 on route 3
+removing at least 10% of ‖ε_J + ε_∅ − ε_A − ε_B‖ on held-out cat × dog, and judge piece 2 against
+the pooled LoRA without x on more than 8 held-out seeds, or on a measure with room above 7 of 8.
+
+**Ways to get piece 2's goal if route 3 fails, strongest first.** (a) Drop x: piece 2 becomes the
+pooled LoRA retrained on `cells_v58.json`, f(m) = f′(d)·f′(c); one run, about 6 h on an A6000; gives
+up the third-factor reading. (b) Give x to the correction as an input rather than as a factor: the
+repo's direct correction student (`poe_repair/students/direct_eps.py`) already takes the prompts'
+pooled vectors; add x's pooled vector and test whether it lowers held-out error; small network,
+hours; the language probes' null on the additivity gap is evidence it will not. (c) Train on photos
+(claim 4) so the target is co-occurrence in real pictures rather than SDXL's joint prompt; the only
+option that could beat the joint prompt; costs the dataset build.
 
 ## What the words are
 
@@ -304,8 +338,8 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#sour
 | # | Route | Why | State |
 |---|---|---|---|
 | 1 | `/submerge` journey on why text-embedding arithmetic fails to compose in SDXL | the walk measured the failure (runs 1 and 2) but the theory behind it (a causal text encoder's start token and padding, the UNet's non-affine response through cross-attention, the guided sum's amplification) is not built anywhere in the learning tree | emitted 2026-10-28, not run |
-| 2 | `/drip-execute-plan --request`: separation steering on mscluster109 | the attention-side test of whether anything that names no animal pair separates the identities | done 2026-10-28, folded in as run 7 |
-| 3 | `/drip-execute-plan --request`: a learned third condition, `<and>` | the condition-side test: can a token that names neither animal turn PoE's two hybrids into a clear pair, when the joint prompt itself as a third expert cannot | emitted 2026-10-28, not run |
+| 2 | `/drip-execute-plan --request`: separation steering on mscluster109 | the attention-side test of whether anything that names no animal pair separates the identities | **returned, null**: 0 clear pairs of 7 at small, medium and large step sizes against a mark of 4; small steps keep the hybrid, larger ones turn the picture into flat blocks ([results card](../../results/what-the-and-vector-is-made-of/README.md), separation-steering section) |
+| 3 | `/drip-execute-plan --request`: a learned third condition, `<and>` | the condition-side test: can one token that names no animal, fitted across the curated pool (`cells_v58.json`), turn PoE's two hybrids into a clear pair on held-out cat × dog, when the joint prompt itself as a third expert cannot | reissued 2026-10-28 with the curated pool as training cells, not run |
 
 ## Sources
 
