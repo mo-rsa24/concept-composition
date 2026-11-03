@@ -7,8 +7,8 @@
 | 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | two reads, both live again: the dog-present render count under A against B, scored by the CLIP crop call rather than by a detector query, and the held-out denoising loss on 8 unseen both-animal photos. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
 | 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
-| 4. LoRA C, as written, is a distinct ablation | wrong as stated, settled | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
-| 5. The LoRA with no both-animal photos is rung 11b's share-zero point | wrong as stated, settled | **repaired: 200 photos holding neither animal replace the removed both-animal photos, so every arm trains on 800 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
+| 4. LoRA C, as written, is a distinct ablation | wrong as stated, settled | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 52 photos against B's 131. Recommendation is to drop C and buy a second training seed for A and B** |
+| 5. The LoRA with no both-animal photos is rung 11b's share-zero point | wrong as stated, settled | **repaired: 131 photos holding neither animal replace the removed both-animal photos, so every arm trains on 731 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | wrong as stated, settled | **repaired: about 9 GPU hours once the pieces exist, but the trainer the pilot needs is not in this repo and writing it is the real cost. Seeds fixed at 128 for A and B, 48 for the rest** |
 
 Load-bearing: claim 1. The idea dies without it. Claim 2 is what makes it worth a paragraph in the
@@ -76,15 +76,17 @@ Navigation: ⬅️ [The idea](#the-idea-as-it-stands) | 📋 [TOC](#table-of-con
 
 Mark: needs a check, with three reads named below.
 
-**Said plainly.** With 300 cat-only photos and 200 both-animal photos drawn under "cat" 25% of
-the time, about `50 / (300 + 50) = 14%` of LoRA B's "a photo of a cat" training draws hold a dog.
-In LoRA A the share is 0%.
+**Said plainly.** With 300 cat-only photos and 131 both-animal photos drawn under "cat" 40% of
+the time, about `52 / (300 + 52) = 15%` of LoRA B's "a photo of a cat" training draws hold a dog.
+In LoRA A the share is 0%. The 131 is COCO's real count after the pilot's size filter
+(`artifacts/results/the-inclusive-captions-photo-pool/`), and the 40% is what holds the share
+near 15% at that count; at the source's 25% it would be 11%.
 
 **What it commits the idea to.** Base SDXL's "a photo of a cat" rarely draws a dog, so most of the
 effect has to come from B adding dog-present mass, with little from A removing it. In layer 5's
-terms this is an overlap dial at about 14%; that toy put `0.30` of the product's mass deep in the
+terms this is an overlap dial at about 15%; that toy put `0.30` of the product's mass deep in the
 overlap at 5%. It also commits a rank-8 LoRA to learning from about
-`2,000 × 200/800 × 0.25 ≈ 125` cat-captioned dog-present draws. Okawa's onset near 10 images says
+`2,000 × 131/731 × 0.40 ≈ 143` cat-captioned dog-present draws. Okawa's onset near 10 images says
 that may be enough; it is not shown at this scale.
 
 **Where the field already measured this, with the sign flipped.** The customization literature
@@ -101,16 +103,16 @@ the effect, because in every setting where it was measured it was a bug.
 **The strongest argument against it, and what it changes.** The denoising objective under a fixed
 prompt is minimised by the conditional mean of its targets given the noisy latent and the time
 step. At high noise the latent carries almost nothing about layout, so the "cat" condition's best
-prediction there averages its 86% cat-only draws with its 14% dog-present ones, and that average
+prediction there averages its 85% cat-only draws with its 15% dog-present ones, and that average
 is one animal with a smeared second region rather than a choice between two modes. The
 disambiguating signal arrives late, and this project's own early-window result puts the composition
 decision in the first ten steps. A trained diffusion model is a sampler rather than a regressor, so
-14% of the mass should appear as 14% of renders, but that is not guaranteed. The argument does not
+15% of the mass should appear as 15% of renders, but that is not guaranteed. The argument does not
 kill the claim; it adds a third outcome to the check:
 
 | What the renders show | What it means |
 |---|---|
-| base and A near zero, B rising toward 14% | the condition widened; claim 1 holds |
+| base and A near zero, B rising toward 15% | the condition widened; claim 1 holds |
 | all three near zero, B's cats look like A's cats | the condition did not widen; a clean null |
 | all three near zero, B's cats visibly worse than A's, blurred or carrying a second indistinct animal shape | the condition absorbed the dog-present draws as averaging; go after mode selection, not the caption share |
 
@@ -138,10 +140,13 @@ Reading the third row as a null would retire the idea for the wrong reason.
    their meanings in its own docstring. Zero or one hit in 64 gives claim 1 a clean floor; five or
    more means the base already leaks dogs into "cat", 64 seeds is too few, and the read below
    replaces the render count.
-2. **The real dog-present share, no GPU, about 2 minutes.** The 14% comes from the illustrative
-   300 and 200. Compute it from COCO's own counts after the pilot's filtering of the 169
-   one-of-each photos. A usable both-animal count near 100 rather than 200 halves the share to
-   about 7% and halves the effect size with it.
+2. **The real dog-present share. Done 2026-11-03.** COCO train2017 holds 208 both-animal photos
+   and 131 survive the 0.25 box-fraction floor the compose scorer uses, against the 200 the
+   source assumed; the single-animal pools hold 3,335 and 2,708, ten times what is needed. At the
+   source's 25% single-name share that gives 11% of cat draws holding a dog, so the shares were
+   raised to 40% each, which puts it back at 15%. Counts, the audit sheets for all 131 photos and
+   the manifest the trainer reads are at
+   `artifacts/results/the-inclusive-captions-photo-pool/`.
 3. **The held-out denoising loss, minutes on one GPU.** Hold 8 both-animal photos out, then
    compare the loss of "a photo of a cat" on them under A and under B. Lower under B says the
    condition widened even where renders hide it, and it reads the density rather than the samples,
@@ -194,7 +199,7 @@ Mark: wrong as stated, settled. Repaired below, and the repair fills the design 
 empty-caption column. The repair was then attacked on its own terms and survived; see the last
 block.
 
-**Said plainly.** A and B were meant to differ only in how the 200 both-animal photos are
+**Said plainly.** A and B were meant to differ only in how the 131 both-animal photos are
 captioned, so any difference between them is attributable to the caption assignment alone.
 
 **Why it fails as written.** The source design gives LoRA B a 10% non-specific caption and says
@@ -211,7 +216,7 @@ caption split then absorbs the whole difference:
 | Arm | Both-animal photos, captions per draw |
 |---|---|
 | A | joint 90%, empty 10% |
-| B | cat 25%, dog 25%, joint 40%, empty 10% |
+| B | cat 40%, dog 40%, joint 10%, empty 10% |
 
 Cat-only and dog-only photos carry their own name 90% of the time and an empty caption 10% in
 every arm. Every arm's shares sum to 1, every arm's unconditional share is identical, and the
@@ -274,8 +279,8 @@ tests.
 
 **The repair.** C keeps B's shares and B's 10% empty rate, and assigns each both-animal photo one
 caption once, fixed for the whole run, rather than resampling a caption each time the photo is
-drawn. Across the 200 photos the assignment is drawn so the pool-level shares match B's exactly:
-50 photos fixed at "cat", 50 at "dog", 80 at joint, 20 at empty.
+drawn. Across the 131 photos the assignment is drawn so the pool-level shares match B's exactly:
+52 photos fixed at "cat", 52 at "dog", 13 at joint, 14 at empty.
 
 **What C then isolates.** B and C put the same number of dog-present draws into the cat condition
 from the same photos. They differ in whether a single photo is ever seen under more than one name.
@@ -286,16 +291,16 @@ touch claim 1 or claim 2; it narrows the explanation.
 
 **The repair does not hold either, and this is the finding.** Fixing one caption per photo
 matches B's number of cat-captioned dog-present draws, and it cannot match how many different
-photos those draws come from. Over a run, B shows the cat condition all 200 both-animal photos,
-each one occasionally. C shows it the same 50 photos over and over. So C against B is still two
+photos those draws come from. Over a run, B shows the cat condition all 131 both-animal photos,
+each one occasionally. C shows it the same 52 photos over and over. So C against B is still two
 things at once: whether a photo is ever seen under two names, and whether the cat condition meets
-200 dog-present scenes or 50. The two cannot be separated by any assignment rule, because matching
+131 dog-present scenes or 52. The two cannot be separated by any assignment rule, because matching
 the variety means captioning every photo "cat" at some point, which is the resampling the arm
 exists to remove.
 
 **What is left, and the recommendation.** Three options. Keep C and state the confound, which buys
 a result about fixed captioning as a whole rather than about multi-naming. Keep C and match
-variety instead of draws by giving all 200 photos a fixed caption, which changes the shares and so
+variety instead of draws by giving all 131 photos a fixed caption, which changes the shares and so
 breaks the comparison in the other direction. Or drop C and spend its quarter of the budget on a
 second training seed for A and B, which buys the run-to-run band that claim 3's amplification
 argument says the comparison needs. The third is the recommendation: a confounded third arm is
@@ -319,13 +324,13 @@ experiment's sweep without being retrained, which is what makes the pilot cheap 
 rather than a detour.
 
 **Why it fails as written.** Rung 11b's rule is that the single-concept photos stay identical
-while only the both-animal set moves. Removing 200 photos from a pool of 800 and training the same
-2,000 steps breaks that: each cat-only photo is drawn a third more often in the no-both arm than
+while only the both-animal set moves. Removing 131 photos from a pool of 731 and training the same
+2,000 steps breaks that: each cat-only photo is drawn a fifth more often in the no-both arm than
 in A, B or C, so the arm differs in the both-animal share and in how hard the cat-only photos are
 trained. A lower compose rate then has two causes.
 
-**The repair.** Put 200 photos holding neither a cat nor a dog in the removed photos' place, so
-every arm trains on 800 photos for 2,000 steps and every cat-only photo is drawn equally often in
+**The repair.** Put 131 photos holding neither a cat nor a dog in the removed photos' place, so
+every arm trains on 731 photos for 2,000 steps and every cat-only photo is drawn equally often in
 all five. The source already proposed a background set of 100 to 200 neither-animal photos and the
 design table had dropped it; this is where it earns its place. The cost is that the no-both arm now
 also learns from scenes with no animal in them, which widens nothing about cats and dogs and is
@@ -334,7 +339,7 @@ of holding the draw counts equal.
 
 **The limitation the repair does not remove.** Rung 11b wants shares at 0, 1 in 1,000, 1 in 100,
 1 in 20 and 1 in 5, spaced that way because Okawa's onset near 10 images and Liang's percolation
-threshold both put the bend at small counts. The pilot gives two points, 0 and 200 in 800, and the
+threshold both put the bend at small counts. The pilot gives two points, 0 and 131 in 731, and the
 second sits just above 11b's densest point. So the pilot anchors the sweep's ends and says nothing
 about where the curve bends, which is the question 11b exists to answer. Written up as "the zero
 anchor, measured" it is honest; written up as "11b's share axis, started" it is not.
@@ -380,7 +385,7 @@ one image at 1024 square, 50 steps, measured on this project's own base-rate run
 
 The seed count comes from the size of the move worth seeing. Comparing two rates at 80% power and
 the usual 5% two-sided test, 48 seeds an arm resolves a move of about 20 points (5% against 25%)
-and 128 seeds an arm resolves about 10 points (5% against 15%). A 14% caption share is not
+and 128 seeds an arm resolves about 10 points (5% against 15%). A 15% caption share is not
 expected to move the compose rate 20 points, so the two arms carrying claims 1 and 2 get 128 and
 the rest get 48.
 
@@ -439,10 +444,10 @@ it.
 | Arm | Cat-only photos | Dog-only photos | Both-animal photos, captions per draw | Empty-caption rate, all photos | Steps | Seeds rendered |
 |---|---|---|---|---|---|---|
 | base SDXL | none | none | none | none | 0 | 48 |
-| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | 128 |
-| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | 128 |
-| C (droppable, see claim 4) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | 48 |
-| no-both | same 300 | same 300 | none; 200 photos holding neither animal take their place, so every arm trains on 800 | 10% | 2,000 | 48 |
+| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 131: joint 90%, empty 10% | 10% | 2,000 | 128 |
+| B | same 300 | same 300 | same 131: cat 40%, dog 40%, joint 10%, empty 10% | 10% | 2,000 | 128 |
+| C (droppable, see claim 4) | same 300 | same 300 | same 131, one caption fixed per photo for the whole run: 52 cat, 52 dog, 13 joint, 14 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | 48 |
+| no-both | same 300 | same 300 | none; 131 photos holding neither animal take their place, so every arm trains on 731 | 10% | 2,000 | 48 |
 
 ## What the words are
 

@@ -24,18 +24,19 @@ thing that changes is the caption each both-animal photo is trained under. Every
 |---|---|---|---|---|---|---|
 | base SDXL | none | none | none | none | 0 | 48 |
 | A | 300, "a photo of a cat" | 300, "a photo of a dog" | 131: joint 90%, blank 10% | 10% | 2,000 | 128 |
-| B | same 300 | same 300 | same 131: cat 25%, dog 25%, joint 40%, blank 10% | 10% | 2,000 | 128 |
+| B | same 300 | same 300 | same 131: cat 40%, dog 40%, joint 10%, blank 10% | 10% | 2,000 | 128 |
 | C (droppable) | same 300 | same 300 | same 131, one caption fixed per photo for the whole run, at B's shares | 10% | 2,000 | 48 |
 | no-both | same 300 | same 300 | none; 131 photos holding neither animal take their place | 10% | 2,000 | 48 |
 
 B against A is the experiment. Everything else is a control or an anchor.
 
-**The share this produces, and the change it argues for.** With 131 both-animal photos captioned
-"cat" a quarter of the time, about 11% of B's "a photo of a cat" training draws hold a dog,
-against the 15% the design assumed at 200 photos. Raising the single-name shares to 40% each
-(cat 40%, dog 40%, joint 10%, blank 10%) brings it back to about 16%. It costs nothing, because
-the blank rate stays at 10% in every arm and that is the cell the one-variable comparison rests
-on. Recommended, and not yet applied to the table above.
+**The share, and why the single-name rates are 40% rather than the source's 25%.** The effect
+size is the fraction of B's "a photo of a cat" training draws that hold a dog. At 131 both-animal
+photos and a 25% cat share that fraction is 11%, below the 15% the design assumed at 200 photos
+and no larger than the move 128 seeds can resolve. At 40% it is 15% again. The change costs
+nothing, because the blank rate stays at 10% in every arm and that is the only cell the
+one-variable comparison depends on; it only moves how often a both-animal photo is called by one
+animal's name rather than by both.
 
 ## Where each claim landed
 
