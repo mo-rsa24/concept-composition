@@ -46,7 +46,7 @@ animal's name rather than by both.
 | 2. The wider condition makes the product compose more often | needs a check | the product's compose rate under A against B on 128 shared seeds, scored in three categories: pair, hybrid, single animal |
 | 3. A against B changes one variable | wrong as stated, repaired | the source gave only B a blank caption; one shared 10% rate across every run fixes it, and the repair survived the argument that the product's double subtraction of the unconditional amplifies any residual drift |
 | 4. C is a distinct third run | wrong as stated, no clean repair | matching B's draw counts leaves the cat condition seeing 50 photos against B's 200; drop C and buy a second training seed for A and B instead |
-| 5. The no-both run is the share-zero point of the planned share sweep | wrong as stated, repaired | 200 neither-animal photos replace the removed ones, so every run trains on 800 and every cat photo is drawn equally often. It is still one anchor, not the sweep |
+| 5. The no-both run is the share-zero point of the planned share sweep | wrong as stated, repaired | 131 neither-animal photos replace the removed ones, so every run trains on 731 and every cat photo is drawn equally often. It is still one anchor, not the sweep |
 | 6. One day of GPU | wrong as stated | about ten GPU hours, after two or three days building the trainer, the COCO data build and the caption machinery |
 
 ## What does not exist yet, and is the real cost
