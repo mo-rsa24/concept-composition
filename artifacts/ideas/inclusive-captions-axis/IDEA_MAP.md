@@ -7,8 +7,8 @@
 | 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | two reads, both live again: the dog-present render count under A against B, scored by the CLIP crop call rather than by a detector query, and the held-out denoising loss on 8 unseen both-animal photos. Plus the real dog-present share from COCO's own counts |
 | 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
 | 3. LoRA A against LoRA B changes one variable | wrong as stated, settled | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs. The repair held under the drift argument; what it leaves is a noise floor, not a confound** |
-| **4 (current). LoRA C, as written, is a distinct ablation** | **wrong as stated, no clean repair** | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
-| 5. The LoRA with no both-animal photos is rung 11b's share-zero point | open | |
+| 4. LoRA C, as written, is a distinct ablation | wrong as stated, settled | **no assignment rule makes C differ from B in one thing: matching the draw counts leaves the cat condition seeing 50 photos against B's 200. Recommendation is to drop C and buy a second training seed for A and B** |
+| **5 (current). The LoRA with no both-animal photos is rung 11b's share-zero point** | **wrong as stated** | **repaired: 200 photos holding neither animal replace the removed both-animal photos, so every arm trains on 800 and the cat-only photos are seen equally often. Even repaired it is one anchor, not the sweep** |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
 
 Load-bearing: claim 1. The idea dies without it. Claim 2 is what makes it worth a paragraph in the
@@ -42,7 +42,7 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 4. Claims 1 to 3 carry marks; claims 5 and 6 are open.
+Claim 5. Claims 1 to 4 carry marks; claim 6 is open.
 
 **What compile would produce today**
 
@@ -249,7 +249,7 @@ fit. Training it on 10% of draws is the lesser of the two. The only design that 
 detaches the adapter on the unconditional pass, which is a sampler change rather than a training
 one, and this repo has already paid for forgetting that an attached adapter runs on every pass.
 
-### 4. ❌ LoRA C, as written, is a distinct ablation  ← current
+### 4. ❌ LoRA C, as written, is a distinct ablation
 
 Mark: wrong as stated. Repaired below, and the repair fills the design table's last caption cell.
 
@@ -303,9 +303,46 @@ worth less than knowing how big the noise is on the two arms that carry the clai
 **Where the decision belongs.** Claim 6, with the seed counts. The design table keeps C's row so
 the option stays costed, marked as the arm the pilot may drop.
 
-### 5. ⬜ The LoRA with no both-animal photos is rung 11b's share-zero point
+### 5. ❌ The LoRA with no both-animal photos is rung 11b's share-zero point  ← current
 
-Mark: open.
+Mark: wrong as stated. Repaired below by a control the source proposed and the design table had
+dropped. One limitation survives the repair and belongs in how the pilot is written up.
+
+**Said plainly.** The source's phase B trains on the cat-only and dog-only photos with the
+both-animal photos removed. Rung 11b sweeps the share of both-animal photos in the training set
+from zero upward and reads the compose rate along it. If the two are the same configuration, the
+pilot pays for 11b's leftmost point while answering its own question.
+
+**What it commits the idea to.** That one of this pilot's arms can be lifted into a different
+experiment's sweep without being retrained, which is what makes the pilot cheap for the paper
+rather than a detour.
+
+**Why it fails as written.** Rung 11b's rule is that the single-concept photos stay identical
+while only the both-animal set moves. Removing 200 photos from a pool of 800 and training the same
+2,000 steps breaks that: each cat-only photo is drawn a third more often in the no-both arm than
+in A, B or C, so the arm differs in the both-animal share and in how hard the cat-only photos are
+trained. A lower compose rate then has two causes.
+
+**The repair.** Put 200 photos holding neither a cat nor a dog in the removed photos' place, so
+every arm trains on 800 photos for 2,000 steps and every cat-only photo is drawn equally often in
+all five. The source already proposed a background set of 100 to 200 neither-animal photos and the
+design table had dropped it; this is where it earns its place. The cost is that the no-both arm now
+also learns from scenes with no animal in them, which widens nothing about cats and dogs and is
+shared by no other arm. That is a smaller asymmetry than the one it removes, and it is the price
+of holding the draw counts equal.
+
+**The limitation the repair does not remove.** Rung 11b wants shares at 0, 1 in 1,000, 1 in 100,
+1 in 20 and 1 in 5, spaced that way because Okawa's onset near 10 images and Liang's percolation
+threshold both put the bend at small counts. The pilot gives two points, 0 and 200 in 800, and the
+second sits just above 11b's densest point. So the pilot anchors the sweep's ends and says nothing
+about where the curve bends, which is the question 11b exists to answer. Written up as "the zero
+anchor, measured" it is honest; written up as "11b's share axis, started" it is not.
+
+**What rung 11b asks for that the pilot already does.** The text encoders stay frozen, so the
+encoder is not a second variable. The scorer now labels one animal, two animals and a hybrid
+apart, which is the failure-kind read 11b asks for. What the pilot does not match is 11b's
+scene-complexity control: two-animal photos are busier than single-animal ones, and nothing in the
+design table matches them for size and clutter. That one is recorded, not solved.
 
 ### 6. ⬜ The pilot runs as specified on COCO, the scorer and one day of GPU
 
@@ -324,7 +361,7 @@ it.
 | A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | tbd (claim 6) |
 | B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | tbd (claim 6) |
 | C (droppable, see claim 4) | same 300 | same 300 | same 200, one caption fixed per photo for the whole run: 50 cat, 50 dog, 80 joint, 20 empty. Matches B's draw counts, not B's photo variety | 10% | 2,000 | tbd (claim 6) |
-| no-both | same 300 | same 300 | none | 10% | 2,000 | tbd (claim 6) |
+| no-both | same 300 | same 300 | none; 200 photos holding neither animal take their place, so every arm trains on 800 | 10% | 2,000 | tbd (claim 6) |
 
 ## What the words are
 
@@ -409,5 +446,5 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Claim 4 is delivered and unsettled. `settle` fixes it and opens claim 5, the one claim that
-reaches outside this pilot into rung 11b.
+Claim 5 is delivered and unsettled. `settle` fixes it and opens claim 6, the last one, which
+decides the seed counts and whether arm C is bought at all.
