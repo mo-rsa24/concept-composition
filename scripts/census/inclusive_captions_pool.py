@@ -68,6 +68,7 @@ from poe_repair import paths  # noqa: E402
 
 COCO_ROOT = Path("/datasets/mmolefe/coco2017")
 ANNOTATIONS = COCO_ROOT / "annotations_trainval2017/annotations/instances_train2017.json"
+CAPTIONS = COCO_ROOT / "annotations_trainval2017/annotations/captions_train2017.json"
 
 
 def _images_dir() -> Path:
@@ -93,6 +94,25 @@ MIN_BOX_FRACTION = 0.25
 WANT = {"cat_only": 300, "dog_only": 300, "both": 200, "neither": 200}
 SEED = 0
 TILES_PER_SHEET = 48
+
+
+def read_captions() -> dict[int, str]:
+    """One COCO caption per image, the shortest of the five each photo carries.
+
+    The neither-animal filler photos in the no-both run are trained under their own caption. Any
+    single invented caption would be a third condition that runs A and B do not have, and an
+    empty string is the blank caption, which would put that run's blank rate at 26% against the
+    other runs' 10%. COCO gives each photo about five human captions; the shortest is taken
+    because the long ones run to twenty words and CLIP's 77-token limit truncates them unevenly.
+    """
+    data = json.loads(CAPTIONS.read_text())
+    best: dict[int, str] = {}
+    for a in data["annotations"]:
+        text = a["caption"].strip()
+        current = best.get(a["image_id"])
+        if current is None or len(text) < len(current):
+            best[a["image_id"]] = text
+    return best
 
 
 def box_side_fraction(box, width: int, height: int) -> float:
@@ -128,6 +148,9 @@ def main() -> None:
     print(f"{len(images)} images, {len(data['annotations'])} annotations "
           f"({time.time() - started:.0f}s)", flush=True)
 
+    captions = read_captions()
+    print(f"{len(captions)} captioned images ({time.time() - started:.0f}s)", flush=True)
+
     # Per image, the cat and dog boxes that are real instances rather than crowds.
     per_image: dict[int, dict[str, list]] = defaultdict(lambda: {"cat": [], "dog": []})
     for a in data["annotations"]:
@@ -151,7 +174,8 @@ def main() -> None:
         big_dogs = [b for b in dogs if box_side_fraction(b, w, h) >= args.min_box_fraction]
 
         row = {"image_id": image_id, "file": str(IMAGES / im["file_name"]),
-               "width": w, "height": h, "n_cat": len(cats), "n_dog": len(dogs)}
+               "width": w, "height": h, "n_cat": len(cats), "n_dog": len(dogs),
+               "caption": captions.get(image_id, "")}
 
         if cats and not dogs:
             raw["cat_only"] += 1
@@ -180,9 +204,11 @@ def main() -> None:
     annotated = {a["image_id"] for a in data["annotations"]}
     neither_ids = [i for i in annotated if i not in per_image]
     raw["neither"] = len(neither_ids)
+    # A filler photo with no caption is unusable, since an empty caption is the blank caption.
     pools["neither"] = [{"image_id": i, "file": str(IMAGES / images[i]["file_name"]),
                          "width": images[i]["width"], "height": images[i]["height"],
-                         "n_cat": 0, "n_dog": 0} for i in neither_ids]
+                         "n_cat": 0, "n_dog": 0, "caption": captions[i]}
+                        for i in neither_ids if captions.get(i)]
 
     counts["raw_by_category"] = raw
     counts["after_size_filter"] = {k: len(v) for k, v in pools.items()}
@@ -196,6 +222,29 @@ def main() -> None:
         pool = sorted(pools[name], key=lambda r: r["image_id"])
         rng.shuffle(pool)
         manifest[name] = pool[:want]
+
+    # Every chosen photo has to carry a caption and have a file on disk. A manifest naming a
+    # path that does not open only surfaces when the trainer opens it, by which point a run has
+    # already started, and an uncaptioned photo would train under the blank caption instead.
+    missing_file: list[str] = []
+    missing_caption: list[str] = []
+    for name, rows in manifest.items():
+        for r in rows:
+            if not Path(r["file"]).is_file():
+                missing_file.append(r["file"])
+            if not r.get("caption"):
+                missing_caption.append(r["file"])
+    counts["chosen_total"] = sum(len(v) for v in manifest.values())
+    counts["missing_file"] = len(missing_file)
+    counts["missing_caption"] = len(missing_caption)
+    if missing_file:
+        print(f"\n{len(missing_file)} chosen photos have no file on disk, first 3:", flush=True)
+        for f in missing_file[:3]:
+            print(f"  {f}", flush=True)
+    if missing_caption:
+        print(f"\n{len(missing_caption)} chosen photos have no caption, first 3:", flush=True)
+        for f in missing_caption[:3]:
+            print(f"  {f}", flush=True)
 
     verdict_n = len(pools["both"])
     if verdict_n >= 200:
