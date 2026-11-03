@@ -5,8 +5,8 @@
 | Claim | Mark | Settled by |
 |---|---|---|
 | 1. ⭐ Training both-animal photos under each single name makes "a photo of a cat" cover dog-present images | needs a check | three reads, in order: the base rate of dogs under "a photo of a cat" (running, mscluster106 device 1); the real dog-present share from COCO's own counts; the held-out denoising loss of "a photo of a cat" on 8 unseen both-animal photos under A against B |
-| **2 (current). That wider cat condition makes PoE compose a cat and a dog more often** | **open** | |
-| 3. LoRA A against LoRA B changes one variable | open | |
+| 2. That wider cat condition makes PoE compose a cat and a dog more often | needs a check | PoE compose rate under A against B on the same seeds, scored in three categories, pair against chimera against single animal, from full-resolution tiles |
+| **3 (current). LoRA A against LoRA B changes one variable** | **wrong as stated** | **repaired: every arm gets the same 10% empty-caption rate on every photo, so the both-animal caption split is the only cell that differs** |
 | 4. LoRA C, as written, is a distinct ablation | open | |
 | 5. The LoRA with no both-animal photos is rung 11b's share-zero point | open | |
 | 6. The pilot runs as specified on COCO, the scorer and one day of GPU | open | |
@@ -42,12 +42,12 @@ cat-only, and the product of the two conditions then holds more pictures with bo
 
 **Where the walk is**
 
-Claim 2, opening. Claim 1 settled after two rounds.
+Claim 3. Claims 1 and 2 settled.
 
 **What compile would produce today**
 
-Destination A, with claims 1 and 2 needing checks the pilot itself runs. The design table below is
-not complete yet: claims 3, 4 and 6 fill its open cells.
+Destination A, with claims 1 and 2 needing checks the pilot itself runs. The design table's
+empty-caption column is now fixed; claims 4 and 6 fill the cells that remain.
 
 **Bar and time box**
 
@@ -145,13 +145,71 @@ thing setting the condition's support: weeks rather than days.
 **What blocks the rest.** Every A-against-B read needs an image-denoising LoRA trainer, and none
 exists in this repo. That is a claim-6 problem and it is the pilot's critical path.
 
-### 2. 🔍 That wider cat condition makes PoE compose a cat and a dog more often  ← current
+### 2. ✅ That wider cat condition makes PoE compose a cat and a dog more often
 
-Mark: open.
+Mark: needs a check, by the PoE compose rate under A against B, scored in three categories.
 
-### 3. ⬜ LoRA A against LoRA B changes one variable
+**Said plainly.** If the cat condition's support includes dog-present images and the dog
+condition's includes cat-present ones, their product has more mass where both animals appear, so
+PoE sampling under B composes more often than under A.
 
-Mark: open.
+**What it commits the idea to.** That the added mass lands on co-occurrence rather than on blends.
+A chimera is the argmax of the product in this project's own finding, because a blended cat-dog
+animal scores high under both conditions at once. Widening both conditions adds mass and the
+captioning scheme says nothing about where it lands, so B could compose no more often than A and
+produce better-looking chimeras instead.
+
+**Why it survives.** COCO's 169 one-of-each photos are photographs of a cat and a dog in one
+frame. They are co-occurrence images and hold no hybrids, so the mass B adds is co-occurrence mass
+by construction. The condition attached is about the scoring rather than the training: a chimera
+and a genuine pair both satisfy "a cat is present and a dog is present" at the whole-image level,
+so the instance count has to be read per class, since it cannot tell a cat and a dog from two dogs.
+
+**The check.** PoE compose rate under A against B, same seeds, same guidance, scored in three
+categories rather than two: pair, chimera, single animal. Calls come from full-resolution tiles,
+because composition calls overcall on downscaled sheets, where two hybrids read as a clear cat and
+dog at sheet scale.
+
+**Why the third category is not optional.** If B moves renders from single animal to chimera
+without reaching pair, that is a result about where the added mass goes. Folded into a two-category
+score it reads as a null and is lost.
+
+### 3. ❌ LoRA A against LoRA B changes one variable  ← current
+
+Mark: wrong as stated. Repaired below, and the repair fills the design table's empty-caption column.
+
+**Said plainly.** A and B were meant to differ only in how the 200 both-animal photos are
+captioned, so any difference between them is attributable to the caption assignment alone.
+
+**Why it fails as written.** The source design gives LoRA B a 10% non-specific caption and says
+nothing about one for A. So A and B differ in two things at once: the both-animal caption split,
+and the share of training draws that carry an empty caption. The empty-caption share is the
+unconditional branch's training share, which is what classifier-free guidance subtracts at every
+step, in every condition, for every prompt. Moving it moves the guidance behaviour of the whole
+model rather than the cat condition alone. A difference between A and B then has two candidate
+causes and the comparison cannot separate them.
+
+**The repair.** One empty-caption rate, 10%, applied to every photo in every arm. The both-animal
+caption split then absorbs the whole difference:
+
+| Arm | Both-animal photos, captions per draw |
+|---|---|
+| A | joint 90%, empty 10% |
+| B | cat 25%, dog 25%, joint 40%, empty 10% |
+
+Cat-only and dog-only photos carry their own name 90% of the time and an empty caption 10% in
+every arm. Every arm's shares sum to 1, every arm's unconditional share is identical, and the
+only cell that differs between A and B is the both-animal split. That is the one-variable
+comparison the claim wanted.
+
+**What the repair costs.** A's joint share drops from 100% to 90% of its both-animal draws, so A
+is no longer the pure "joint caption only" arm the source described. The no-both arm is what
+carries the zero-both-animal-photos case, so nothing is lost by it.
+
+**The risk the repair does not remove.** A 10% empty-caption rate on a 2,000-step run is about 200
+unconditional draws, which may be too few to hold the unconditional branch steady against the base
+model's own. That is a risk shared identically by every arm, so it cannot confound A against B; it
+can only weaken all four together. Worth recording, not worth a design change.
 
 ### 4. ⬜ LoRA C, as written, is a distinct ablation
 
@@ -175,10 +233,10 @@ it.
 | Arm | Cat-only photos | Dog-only photos | Both-animal photos, captions per draw | Empty-caption rate, all photos | Steps | Seeds rendered |
 |---|---|---|---|---|---|---|
 | base SDXL | none | none | none | none | 0 | tbd (claim 6) |
-| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200, joint only | tbd (claim 3) | 2,000 | tbd (claim 6) |
-| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | tbd (claim 3) | 2,000 | tbd (claim 6) |
-| C | same 300 | same 300 | tbd (claim 4) | tbd (claim 3) | 2,000 | tbd (claim 6) |
-| no-both | same 300 | same 300 | none | tbd (claim 3) | 2,000 | tbd (claim 6) |
+| A | 300, "a photo of a cat" | 300, "a photo of a dog" | 200: joint 90%, empty 10% | 10% | 2,000 | tbd (claim 6) |
+| B | same 300 | same 300 | same 200: cat 25%, dog 25%, joint 40%, empty 10% | 10% | 2,000 | tbd (claim 6) |
+| C | same 300 | same 300 | tbd (claim 4) | 10% | 2,000 | tbd (claim 6) |
+| no-both | same 300 | same 300 | none | 10% | 2,000 | tbd (claim 6) |
 
 ## What the words are
 
@@ -258,4 +316,4 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 Navigation: ⬅️ [Sources](#sources) | 📋 [TOC](#table-of-contents)
 
-Walk claim 2.
+Walk claim 3.
