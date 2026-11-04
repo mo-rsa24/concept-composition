@@ -52,7 +52,7 @@ tensors toward a correction target, with no photographs and no text encoder in t
 
 **What you will hold at the end**
 
-One figure: the compose rate for run A beside run B on 128 shared seeds, with the criterion's
+One figure: the [compose rate](../../../context/world/compose-rate.md) for run A beside run B on 128 shared seeds, with the criterion's
 three lines beside it and exactly one of them ticked.
 
 ## Considerations
@@ -246,14 +246,14 @@ trainer reads is the audited one.
 ◀ **Needs: [instruction 9](#9--run-the-smoke-test-yourself)** done, so the loop is known to run
 before anything is built on top of it.
 
-- [ ] **4.1** Render a sheet of eight fixed seeds down the rows and four columns across: "a photo
+- [x] ✅ **4.1** Render a sheet of eight fixed seeds down the rows and four columns across: "a photo
       of a dog", "a photo of a cat", "a photo of a cat and a dog", and the product of the cat and
       dog conditions. 512 square at 25 steps. Log it to W&B as one image per checkpoint.
   - Output: `poe_repair/experiments/inclusive_captions/sheets.py`
   - The product column is rendered at step 0 as well, before any training, because combining two
     conditions is a sampling-time operation and needs no trained weights.
   - Seeds 0 to 7, the same eight at every checkpoint and in every run.
-- [ ] **4.2** Prove the sheet on the smoke run's checkpoint and report the W&B link.
+- [x] ✅ **4.2** Prove the sheet on the smoke run's checkpoint and report the W&B link.
 
 ▶ **Next: [instruction 10](#10--look-at-the-step-0-sheet)**, you judge whether the four columns
 show what they claim to.
@@ -262,12 +262,15 @@ show what they claim to.
 
 ◀ **Needs: [instruction 10](#10--look-at-the-step-0-sheet)** done.
 
-- [ ] **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
+- [x] ✅ **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
       and sheets at 0, 250, 500, 1,000 and 2,000.
   - W&B: `prime_lab/poe-repair-inclusive-captions`, one run, grouped with B.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
-    one job per user.
-- [ ] **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
+    one job per user. `scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
+    refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
+    the trainer's own W&B run as it lands. Run A is on `mscluster106` device 1, run B on
+    `mscluster107` device 1, both Quadro RTX 8000.
+- [x] ✅ **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
 - [ ] **5.3** Harvest both: the queue, `pgrep` on the session node, the output count against what
       this plan expected, and the tail of each log.
 
@@ -442,7 +445,7 @@ entry, and `sync-plan-tree` reconciles the scope.
 |---|---|
 | the compose-rate figure | compose rate on y, a 0-to-1 scale, one bar per model (base SDXL, run A, run B) on x, each split into one cat and one dog, a hybrid, and a single animal, with the criterion's band drawn across it. Numbers from the sidecar json beside it, 128 seeds per arm for A and B. |
 | the four-column watching sheet | eight fixed seeds down the rows, four prompts across (dog, cat, joint, product), one image per checkpoint per run, logged to W&B. Not a rate: eight seeds is a picture. |
-| [the pilot's high-level design](../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg) | not a plot. Twelve boxes read left to right, from COCO train2017 through the pool builder, the by-eye audit, the caption rule and the two trainers to the compose-rate figure. The one difference between the two runs sits on the two arrows out of the caption rule. Three boxes are dashed as not yet built: the watching sheet, the scoring pass and the figure. Every box names the file and line it comes from. |
+| [the pilot's high-level design](../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg) <a href="../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer-light.png"><img src="../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer-light.png" width="200" alt="Twelve boxes left to right from COCO train2017 through the pool builder, the by-eye audit and the caption rule to the two trainers and the compose-rate figure, three of them dashed"></a> | not a plot. Twelve boxes read left to right, from COCO train2017 through the pool builder, the by-eye audit, the caption rule and the two trainers to the compose-rate figure. The one difference between the two runs sits on the two arrows out of the caption rule. Three boxes are dashed as not yet built: the watching sheet, the scoring pass and the figure. Every box names the file and line it comes from. The [published page](https://claude.ai/artifact/Uhp9tJfqpgHYHnQCfVaDNc) opens each box on that file and line, and carries nine photographs the SVG does not, five of them labelled with the neighbouring experiment they came from. |
 
 ## Error Matrix
 

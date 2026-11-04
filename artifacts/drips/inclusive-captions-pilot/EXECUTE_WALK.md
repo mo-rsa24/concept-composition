@@ -5,8 +5,10 @@ with `/drip-execute-plan --request`. Branch `exec/inclusive-captions-pilot`.
 
 ## Where the walk is
 
-Piece 3 of 6 is done: the trainer is written and its smoke run is green. Instruction 9, the
-user's own run of it, is next.
+Piece 5 of 6 is running: run A trains on `mscluster106` device 1 and run B on `mscluster107`
+device 1, 2,000 steps each, sheets rendering into their own W&B runs as each checkpoint lands.
+Instruction 11, watching the four columns move, is next. Piece 6 starts when both reach step
+2,000.
 
 ## The stop point
 
@@ -34,6 +36,10 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 | 2.2 every path opens | `missing_file: 0` of 582 chosen photos | `dae7c3c9` |
 | 3.1 the trainer | `trainer.py`, 220 lines on this repo's SDXL loader; 46,448,640 trainable parameters at rank 32 on the four attention projections | `075bbdf1` |
 | 3.2 the smoke run | 20 finite losses, `step_00000` on disk before any training, exit 0 in 225s on `mscluster111` | `075bbdf1` |
+| 4.1 the watching sheet | `sheets.py`, four columns from one shared init latent, nine UNet forwards a step batched into one | `4a54bd6c`, `a2fdae38` |
+| 4.2 the sheet proved | rendered off run B's `step_00000`; columns 3 and 4 differ on every one of the eight seeds | `a2fdae38` |
+| 5.1 run A launched | `mscluster106` device 1, Quadro RTX 8000, 38 GB in use, W&B `inclusive-captions-run-A` | `96a28ad8` |
+| 5.2 run B launched | `mscluster107` device 1, same card, W&B `inclusive-captions-run-B` | `96a28ad8` |
 | 2.3 the shares on the real photos | PASSED on the real manifest: dog-present share of run B's cat draws 0.169, every caption share within 0.002 of design, blank rates spread 0.000 | `dae7c3c9` |
 
 ## Decisions
@@ -101,3 +107,14 @@ branches the run could have hit.
 - The finding to `report/`, the figure filed with its card entry.
 - `sync-plan-tree` from the scope root, and scope 11 entered into the root running order.
 - The scope has no `diagram-prompts.md`; one is owed if any piece earns a picture.
+
+## Lessons
+
+**A sheet rendered beside the trainer fits on one card.** Training at 1,024 square with rank 32
+and gradient checkpointing holds about 30 GB, and a 512-square sampling process beside it brings
+the total to 39 GB of the Quadro RTX 8000's 48. Both arms run as one process tree each, so the
+sheets arrive while the loss curve is still moving rather than at the end.
+
+**Pin the free card rather than waiting for a free node.** `mscluster106` device 0 was at 100%
+under another user and device 1 was untouched. `biggpu`'s one-job-per-user limit is a Slurm
+limit, and a `nohup` launch pinned with `CUDA_VISIBLE_DEVICES` is not subject to it.
