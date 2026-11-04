@@ -12,12 +12,15 @@ set -u
 RUN="${1:?arm: A or B}"
 DEVICE="${2:?cuda device index, e.g. 1}"
 STEPS="${3:-2000}"
+# A tag keeps one attempt's checkpoints, sheets and W&B run apart from another's. Resuming a run
+# id whose history is ahead of you makes Weights and Biases drop every step you log, silently.
+TAG="${4:-v2}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 # The repo this script was launched from, so a second clone of the checkout runs its own code.
 REPO=$(cd "$(dirname "$0")/.." && pwd)
-OUT=/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/$RUN
-WANDB_ID=inclusive-captions-run-$RUN
+OUT=/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/$TAG-$RUN
+WANDB_ID=inclusive-captions-$TAG-run-$RUN
 
 cd "$REPO" || exit 1
 export CUDA_VISIBLE_DEVICES="$DEVICE"
@@ -33,7 +36,7 @@ print('device:', torch.cuda.get_device_name(0), flush=True)
 " || exit 1
 
 "$PY" -m poe_repair.experiments.inclusive_captions.trainer \
-  --run "$RUN" --steps "$STEPS" --wandb-id "$WANDB_ID" &
+  --run "$RUN" --steps "$STEPS" --wandb-id "$WANDB_ID" --out-dir "$OUT" &
 TRAINER=$!
 echo "trainer pid $TRAINER" >&2
 
@@ -53,7 +56,7 @@ while :; do
         step="${ckpt##*step_}"
         echo "sheet for step $step" >&2
         "$PY" -m poe_repair.experiments.inclusive_captions.sheets \
-          --adapter "$ckpt" --label "run $RUN, step $((10#$step))" \
+          --adapter "$ckpt" --label "$TAG run $RUN, step $((10#$step))" \
           --wandb-id "$WANDB_ID"
         drawn="$drawn $ckpt"
     done
