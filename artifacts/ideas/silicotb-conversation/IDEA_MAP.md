@@ -327,6 +327,8 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#sour
 |---|---|---|---|---|
 | 1 | 1.7 | `/drip-idea --hypothesis` on the asymmetry ratio, to write the support, null and inconclusive bands before the ratio is computed | bring back `HYPOTHESIS_arrival_order.md` and the band that the measured ratio falls in | emitted, not yet run |
 | 2 | 1.5 | [an annotated radiograph for every overlap regime](routes/01-annotated-radiographs-for-each-regime.prompt.md): build twelve annotated real films, three per regime across three disease pairs, with the hidden-disease regime as the one that decides success | bring back `01-annotated-radiographs-for-each-regime.return.md`, the picture count per regime, and which licences are still unresolved | written, not yet run |
+| 3 | the gap lines | [four journeys for the words this walk had no teacher for](routes/03-submerge-the-gap-words.prompt.md): `/submerge` on what two diseases do to each other on a film, on where a finding is and how much two share, and on scoring a classifier when the test set is biased, plus `/submerge --over ai-engineering/chance-corrected-agreement` for three readers instead of two | bring back each journey's row in `JOURNEYS.md` and its hand-computed check against the code | written, not yet run |
+| 4 | 1.10 | [the chain from six composition papers to a classifier scorecard](../../../plans/route-compose-x-rays-and-score-them.md): read one idea across six papers, pick the construction, reproduce one figure, then compose films for the picked VinDr pair and score a classifier across the rare-cell dial | bring back the operator table with the pick, then the AUROC-against-dial scorecard with counts per cell | written, step 0 not yet run |
 
 ## Sources
 
