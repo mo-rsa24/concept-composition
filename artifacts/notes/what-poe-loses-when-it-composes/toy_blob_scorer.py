@@ -28,10 +28,23 @@ MIN_PX, MIN_GAP, MAX_DIST = 12, 6.0, 0.35
 CATS = ["red and blue apart", "red only", "blue only", "purple or overlaid", "nothing readable"]
 
 
-def read(x):
-    """x is (n, H*W*3) in roughly 0 to 1. Returns one category per picture and the per-picture details."""
+def _box3(img):
+    pad = np.pad(img, ((0, 0), (1, 1), (1, 1), (0, 0)), mode="edge")
+    return sum(pad[:, i:i + t.H, j:j + t.W] for i in range(3) for j in range(3)) / 9
+
+
+def read(x, bg=None, smooth=False, purple=True):
+    """x is (n, H*W*3) in roughly 0 to 1. Returns one category per picture and the per-picture details.
+    bg is the background colour, white unless given. smooth averages each pixel with its 3 x 3
+    neighbours first. purple=False drops the purple reference, which a grey background needs: there
+    purple sits 0.24 from the background, so noise and soft red edges both get called purple."""
     img = np.asarray(x).reshape(-1, t.H, t.W, 3)
-    d = ((img[..., None, :] - PALETTE) ** 2).sum(-1) ** 0.5          # n, H, W, 4
+    if smooth:
+        img = _box3(img)
+    pal = PALETTE if bg is None else np.stack([np.asarray(bg, float), t.RED, t.BLUE, PURPLE])
+    if not purple:
+        pal = pal[:3]
+    d = ((img[..., None, :] - pal) ** 2).sum(-1) ** 0.5               # n, H, W, 4
     near = d.argmin(-1)
     near[d.min(-1) > MAX_DIST] = -1
     xs = np.arange(t.W)[None, None, :] + 0.5

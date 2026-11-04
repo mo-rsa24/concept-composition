@@ -1,0 +1,186 @@
+{
+ "what": "circle x square / background on the exact toy, white and grey backgrounds, against a joint caption trained on two layouts",
+ "verdict": "support",
+ "bar": "support: exact composition on grey puts >= 100 of 300 on the four unseen apart layouts and the joint caption 0; null: under 10",
+ "draws": 300,
+ "results": {
+  "scorer check": {
+   "white": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square centre": 1.0,
+    "circle left, square right": 1.0,
+    "circle centre, square left": 1.0,
+    "circle centre, square right": 1.0,
+    "circle right, square left": 1.0,
+    "circle right, square centre": 1.0,
+    "overlaid centre": 1.0
+   },
+   "grey": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square centre": 1.0,
+    "circle left, square right": 1.0,
+    "circle centre, square left": 1.0,
+    "circle centre, square right": 1.0,
+    "circle right, square left": 1.0,
+    "circle right, square centre": 1.0,
+    "overlaid centre": 1.0
+   }
+  },
+  "white": {
+   "pairing weights": {
+    "circle left, square left": 0.3333333333333333,
+    "circle left, square centre": 0.0,
+    "circle left, square right": 0.0,
+    "circle centre, square left": 0.0,
+    "circle centre, square centre": 0.3333333333333333,
+    "circle centre, square right": 0.0,
+    "circle right, square left": 0.0,
+    "circle right, square centre": 0.0,
+    "circle right, square right": 0.3333333333333333
+   },
+   "joint caption": {
+    "unseen layouts": 0,
+    "trained layouts": 300,
+    "overlaid or unreadable": 0,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 0,
+     "circle left, square right": 146,
+     "circle centre, square left": 0,
+     "circle centre, square right": 0,
+     "circle right, square left": 154,
+     "circle right, square centre": 0
+    }
+   },
+   "exact composition, read by the scorer": {
+    "unseen layouts": 0,
+    "trained layouts": 0,
+    "overlaid or unreadable": 300,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 0,
+     "circle left, square right": 0,
+     "circle centre, square left": 0,
+     "circle centre, square right": 0,
+     "circle right, square left": 0,
+     "circle right, square centre": 0
+    }
+   },
+   "exact composition, by the pairing drawn": {
+    "unseen layouts": 0,
+    "same-position pairings": 300
+   },
+   "reverse diffusion, summed noised scores": {
+    "unseen layouts": 9,
+    "trained layouts": 5,
+    "overlaid or unreadable": 286,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 1,
+     "circle left, square right": 2,
+     "circle centre, square left": 4,
+     "circle centre, square right": 3,
+     "circle right, square left": 3,
+     "circle right, square centre": 1
+    }
+   },
+   "reverse diffusion, true noised-composition score": {
+    "unseen layouts": 0,
+    "trained layouts": 0,
+    "overlaid or unreadable": 300,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 0,
+     "circle left, square right": 0,
+     "circle centre, square left": 0,
+     "circle centre, square right": 0,
+     "circle right, square left": 0,
+     "circle right, square centre": 0
+    }
+   }
+  },
+  "grey": {
+   "pairing weights": {
+    "circle left, square left": 1.1294448142074276e-276,
+    "circle left, square centre": 0.16666666666666666,
+    "circle left, square right": 0.16666666666666666,
+    "circle centre, square left": 0.16666666666666666,
+    "circle centre, square centre": 1.1294448142074276e-276,
+    "circle centre, square right": 0.16666666666666666,
+    "circle right, square left": 0.16666666666666666,
+    "circle right, square centre": 0.16666666666666666,
+    "circle right, square right": 1.1294448142074276e-276
+   },
+   "joint caption": {
+    "unseen layouts": 0,
+    "trained layouts": 300,
+    "overlaid or unreadable": 0,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 0,
+     "circle left, square right": 152,
+     "circle centre, square left": 0,
+     "circle centre, square right": 0,
+     "circle right, square left": 148,
+     "circle right, square centre": 0
+    }
+   },
+   "exact composition, read by the scorer": {
+    "unseen layouts": 202,
+    "trained layouts": 98,
+    "overlaid or unreadable": 0,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 62,
+     "circle left, square right": 50,
+     "circle centre, square left": 32,
+     "circle centre, square right": 48,
+     "circle right, square left": 48,
+     "circle right, square centre": 60
+    }
+   },
+   "exact composition, by the pairing drawn": {
+    "unseen layouts": 202,
+    "same-position pairings": 0
+   },
+   "reverse diffusion, summed noised scores": {
+    "unseen layouts": 210,
+    "trained layouts": 88,
+    "overlaid or unreadable": 2,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 58,
+     "circle left, square right": 47,
+     "circle centre, square left": 37,
+     "circle centre, square right": 61,
+     "circle right, square left": 41,
+     "circle right, square centre": 54
+    }
+   },
+   "reverse diffusion, true noised-composition score": {
+    "unseen layouts": 197,
+    "trained layouts": 103,
+    "overlaid or unreadable": 0,
+    "one shape": 0,
+    "per layout": {
+     "circle left, square centre": 52,
+     "circle left, square right": 50,
+     "circle centre, square left": 50,
+     "circle centre, square right": 52,
+     "circle right, square left": 53,
+     "circle right, square centre": 43
+    }
+   }
+  }
+ }
+}

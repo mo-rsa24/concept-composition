@@ -46,6 +46,8 @@ about three orders of magnitude in that weight.
 | `what-the-caption-model-draws.png` | one VAE plus one caption-conditional latent model trained per dial setting (0, 0.1, 0.3, 0.6, 1: how often a both-shapes picture is also captioned with each single name), four rows per setting (each single caption, the two single captions multiplied, the joint caption), eight draws each titled with the colour-blob scorer's call and the 300-draw counts beside them |
 | `toy-caption-dial-ldm.json` | those counts from both scorers, each setting's VAE reconstruction error, and the colour-blob scorer's hit rate on that VAE's reconstructions of every known picture |
 | `toy-trained-experts.json` | two separately trained score networks combined by summed scores, crisp pairs and single-shape purity out of 300 at six shared-picture fractions |
+| `can-the-product-draw-a-layout-nobody-trained-on.png` | white background (top four rows) and grey background (bottom four): the joint caption trained on two layouts, then circle x square / background drawn exactly, by reverse diffusion with its true noised score, and by reverse diffusion with summed noised scores; eight draws per row titled with their layout, NEW marking the four layouts no training picture holds, and counts of 300 |
+| `toy-factorized.json` | those counts per layout, the composition's pairing weights on each background, and the scorer's hit rate on known pictures on each background |
 | `summed-scores-against-the-true-noised-product.png` | left: the share of the mixture on the pair image paired with itself (y, 0 to 1) against the reverse-diffusion step (x, 200 at pure noise to 0 at the clean picture), one blue curve per pair weight for the summed noised expert scores and one green line for the true noised product; right: eight reverse-diffusion draws per pair weight with each score, and the crisp-pair count of 300 |
 | `toy-noised-product.json` | those shares by step and the five category counts for both scores at pair weights 0.001, 0.01, 0.1 and 0.3 |
 | `caption-model-across-guidance.png` | the two single captions multiplied in the caption model, dial setting down (0 to 1) and guidance strength across (1, 2, 3, 5, 7), four draws per cell titled with the colour-blob scorer's call, the cell's crisp-pair count out of 300 and the lower of the two single captions' purity counts |
@@ -190,6 +192,30 @@ distance. At pure noise that distance penalty vanishes, so the pair image's self
 the mixture (0.0001 at w = 0.01) where the true noised product holds 1.000 at every step. The summed
 score reaches 1.000 only after step 95 to 160, depending on w, by which time the draw has already
 committed to one position and lands on a single purple hybrid there.
+
+## A layout nobody trained on
+
+**Divided by the background, the product composes with no co-occurrence at all, but only on grey.**
+Here the experts are a circle at any of three positions, a square at any of three, and the plain
+background, with no both-shapes picture in any of them. Composed as circle x square / background,
+which is e_circle + e_square − e_background at guidance 1, the step-0 target is a mixture over
+pairings with mean m_circle + m_square − m_background and weight exp(⟨m_circle − m_b, m_square − m_b⟩ / σ²).
+Shapes at different positions share no pixel, so that dot product is zero and all six apart layouts
+weigh the same.
+
+On a grey background the exact draws land on the four layouts no training picture holds 202 of 300
+times, against 0 of 300 for a joint caption trained on the other two. Reverse diffusion gives 197 of
+300 with the true noised score and 210 of 300 with plain summed noised scores, so here the sampler
+loses nothing. This meets the bar written before the run.
+
+On white, red and blue are both darker than the background in every channel, so the dot product on
+the 36 overlapping pixels is positive and the same-position pairing takes the whole mixture. Every
+exact draw is the two shapes stacked and subtracted to near-black, 0 of 300 on unseen layouts.
+
+The summed scores lose nothing on grey because the noise only rescales a pairing's weight
+exponent by abar / (abar σ² + 1 − abar), and a weight exponent of zero stays zero. In the
+co-occurrence sweep the exponents were large and negative at step 0 and the noise flattened them
+toward zero, which is where the pair image's share fell to w².
 
 ## Trained models
 
