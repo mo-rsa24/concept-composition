@@ -129,3 +129,19 @@ through `scripts/census/audit_both_animal_photos.py --set cat_only`.
 **A bad photo cannot make the two arms differ.** Both train on the identical 491 photographs in
 the identical order from the identical seed. Pool noise lowers both conditions together and
 shrinks the gap the caption rule produces; it cannot invent one.
+
+**SD 3.5 medium fails the two-animal prompt the same way SDXL does.** Asked for "a photo of a cat
+and a dog" at 1,024 square, 28 steps, guidance 4.5, the first three seeds gave one clean cat and
+dog, one single animal with a cat's ears and whiskers on a dog's muzzle, and one frame holding
+three animals where the middle one is a hybrid. The fidelity is far above COCO's and the
+composition is no better, which is the project's own premise showing up in a second model family.
+Every generated photo is screened before it enters the pool.
+
+**The RTX 8000 is Turing, so bf16 is emulated.** One 1,024-square SD 3.5 image took over seven
+minutes in bf16 and 20.6 seconds in fp16 on the same card. Turing has fp16 tensor cores and no
+bf16 ones. Any generation script on `biggpu`'s 106, 107 and 108 uses fp16.
+
+**SD 3.5 needs its own environment here.** `co3` and `co3_bw` both carry diffusers 0.29.2, which
+predates the dual attention layers `stable-diffusion-3.5-medium` uses, so the transformer loads
+with a shape mismatch. `~/envs-sd35` is a venv over `co3` with diffusers 0.32.2, the newest that
+works with torch 2.5.1, and `huggingface-hub` held below 1.0.
