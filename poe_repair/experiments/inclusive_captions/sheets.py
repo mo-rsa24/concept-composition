@@ -36,6 +36,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -131,23 +132,23 @@ def render_seed(
 def draw_sheet(rows: list[list[np.ndarray]], *, seeds: tuple[int, ...], label: str,
                target: Path) -> None:
     fig, axes = plt.subplots(len(rows), len(COLUMNS),
-                             figsize=(len(COLUMNS) * 3.2, len(rows) * 3.3), squeeze=False)
+                             figsize=(len(COLUMNS) * 3.2, len(rows) * 3.3 + 0.9), squeeze=False)
     for r, images in enumerate(rows):
         for c, image in enumerate(images):
             ax = axes[r][c]
             ax.imshow(image)
             ax.axis("off")
             if r == 0:
-                ax.set_title(COLUMNS[c], fontsize=11)
+                # The column title is the prompt itself, wrapped, because a legend below the
+                # grid would make the reader look away from the picture to find out what it is.
+                ax.set_title(textwrap.fill(COLUMNS[c], 26), fontsize=11)
             if c == 0:
                 ax.text(-0.06, 0.5, f"seed {seeds[r]}", transform=ax.transAxes,
                         rotation=90, va="center", ha="center", fontsize=10)
-    fig.suptitle(
-        f"{label}. Each row is one seed, the same eight in every run and at every checkpoint. "
-        f"Columns 1 to 3 are ordinary renders of one prompt. Column 4 combines the cat and dog "
-        f"conditions at sampling time and needs no trained weights, so it exists at step 0.",
-        fontsize=12)
-    fig.tight_layout()
+    # One short line, and the space for it reserved before tight_layout runs. A long suptitle
+    # lands on top of the column titles and makes both unreadable.
+    fig.suptitle(label, fontsize=15, fontweight="bold", y=0.995)
+    fig.tight_layout(rect=(0, 0, 1, 0.985))
     fig.savefig(target, dpi=100)
     plt.close(fig)
 
