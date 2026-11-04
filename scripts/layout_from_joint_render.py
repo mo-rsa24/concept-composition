@@ -75,6 +75,8 @@ SHEET_COLS, SHEET_ROWS, SHEET_TILE, SHEET_LABEL = 8, 4, 320, 28
 HELD_OUT = tuple(range(9, 17))
 TOP_UP = tuple(range(17, 33))
 WANTED = 8
+MAX_BOX_FRACTION = 0.70  # a box larger than this is the picture, not a region
+MAX_CONTAINMENT = 0.50   # above this the two boxes are not two regions
 
 LATENT = 128          # SDXL's latent grid for a 1024 px render
 DETECTOR_QUERY = "animal"
@@ -163,40 +165,130 @@ def to_cells(box, image_side: int) -> list[int]:
     return [x0, y0, max(x0 + 1, x1), max(y0 + 1, y1)]
 
 
-def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, module, device) -> dict:
-    """Detect and name both animals on one seed. Never raises on an unjudgeable seed."""
+def area(box) -> float:
+    x0, y0, x1, y1 = box
+    return max(0.0, x1 - x0) * max(0.0, y1 - y0)
+
+
+def containment(inner, outer) -> float:
+    """How much of the smaller box sits inside the larger one, as a fraction of the smaller."""
+    ix0, iy0 = max(inner[0], outer[0]), max(inner[1], outer[1])
+    ix1, iy1 = min(inner[2], outer[2]), min(inner[3], outer[3])
+    overlap = max(0.0, ix1 - ix0) * max(0.0, iy1 - iy0)
+    smaller = min(area(inner), area(outer))
+    return overlap / smaller if smaller > 0 else 0.0
+
+
+def geometry_reason(boxes, side: int, max_box_fraction: float,
+                    max_containment: float) -> str | None:
+    """Why this box pair cannot serve as a partition, or None if it can.
+
+    Two ways a pair fails as a layout, both independent of what the boxes are called. A box
+    covering most of the frame hands its expert nearly every cell and leaves the other a sliver.
+    A box that swallows the other means the two regions are not disjoint in any useful sense, so
+    there is no partition to hand the product.
+    """
+    frame = float(side * side)
+    for b in boxes:
+        fraction = area(b["box_pixels"]) / frame
+        if fraction > max_box_fraction:
+            return (f"the {b['call']} box covers {fraction:.0%} of the frame, over the "
+                    f"{max_box_fraction:.0%} limit, so it is not a region")
+    held = containment(boxes[0]["box_pixels"], boxes[1]["box_pixels"])
+    if held > max_containment:
+        return (f"{held:.0%} of the smaller box sits inside the larger, over the "
+                f"{max_containment:.0%} limit, so the two regions are not disjoint")
+    return None
+
+
+def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, module, device, *,
+              max_box_fraction: float, max_containment: float,
+              hand_names: dict | None = None) -> dict:
+    """Detect and name both animals on one seed. Never raises on an unjudgeable seed.
+
+    Three gates in order, each reported by name so a rejected seed says which one stopped it:
+    the detector must keep exactly two boxes, the two boxes must form a usable partition, and
+    the two boxes must be named one cat and one dog. ``hand_names`` overrides the classifier's
+    species for a seed, keeping the classifier's own call beside it so the two can be compared.
+    """
     render, source = source_for(seed, sheet_path, work_dir)
     n_boxes, kept = count_instances(render, query=DETECTOR_QUERY, device=device)
     with Image.open(render) as im:
         image = im.convert("RGB")
         side = max(image.size)
+        frame = float(side * side)
         boxes = []
         for i, det in enumerate(kept):
             call = clf(module.crop(image, det["box"]))
-            boxes.append({
+            record = {
                 "box_index": i,
                 "box_pixels": [float(v) for v in det["box"]],
                 "box_cells": to_cells(det["box"], side),
                 "detector_confidence": float(det["confidence"]),
+                "frame_fraction": area(det["box"]) / frame,
+                "clip_call": call["call"],
+                "clip_margin": call["margin"],
                 **call,
-            })
-    calls = sorted(b["call"] for b in boxes)
+            }
+            by_hand = (hand_names or {}).get(str(seed), {}).get(str(i))
+            if by_hand is not None:
+                record["call"] = by_hand
+                record["named_by"] = "hand"
+            else:
+                record["named_by"] = "clip"
+            boxes.append(record)
+
     if n_boxes != 2:
         reason = f"the detector kept {n_boxes} animal box(es), not 2"
-    elif calls != ["cat", "dog"]:
-        reason = f"the two boxes were called {calls[0]} and {calls[1]}, not one cat and one dog"
     else:
-        reason = None
+        reason = geometry_reason(boxes, side, max_box_fraction, max_containment)
+        if reason is None:
+            calls = sorted(b["call"] for b in boxes)
+            if calls != ["cat", "dog"]:
+                reason = (f"the two boxes were named {calls[0]} and {calls[1]}, not one cat and "
+                          f"one dog")
     return {
         "seed": seed,
         "render_path": str(render),
         "source": source,
         "image_side_px": side,
         "n_animal_boxes": n_boxes,
+        "containment": containment(boxes[0]["box_pixels"], boxes[1]["box_pixels"])
+                       if len(boxes) == 2 else None,
         "boxes": boxes,
         "judgeable": reason is None,
         "rejected_because": reason,
     }
+
+
+def draw_crops(records: list[dict], module, out_path: Path) -> None:
+    """Every candidate box's crop with the name it was given: what the classifier was handed.
+
+    The crop classifier scored 64 of 64 on single-cat renders and then named both boxes the same
+    species on two-animal renders that plainly hold one of each. This sheet is what separates a
+    bad box from a bad call, because the crop is the only thing CLIP ever sees.
+    """
+    crops = [(r, b) for r in records for b in r["boxes"]]
+    cols = 8
+    rows = (len(crops) + cols - 1) // cols
+    fig, axes = plt.subplots(rows, cols, figsize=(1.7 * cols, 2.0 * rows), squeeze=False)
+    for ax, (rec, b) in zip(axes.ravel(), crops):
+        with Image.open(rec["render_path"]) as im:
+            ax.imshow(module.crop(im.convert("RGB"), b["box_pixels"]).resize((160, 160)))
+        colour = {"cat": "#1f77b4", "dog": "#d62728"}.get(b["clip_call"], "darkorange")
+        ax.set_title(f"seed {rec['seed']}  box {b['box_index']}\n{b['clip_call']} "
+                     f"{b['clip_margin']:+.2f}  ({b['frame_fraction']:.0%} of frame)",
+                     fontsize=7, color=colour)
+        ax.axis("off")
+    for ax in axes.ravel()[len(crops):]:
+        ax.axis("off")
+    fig.suptitle("every candidate box, cropped exactly as the classifier received it, with the "
+                 "name CLIP gave it\n"
+                 "blue cat, red dog, orange uncertain; the margin is p_cat - p_dog and the "
+                 "percentage is the box's share of the frame", fontsize=11)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=120)
+    plt.close(fig)
 
 
 def draw_panels(records: list[dict], out_path: Path) -> None:
@@ -241,6 +333,16 @@ def main() -> int:
                     default=REPO / "artifacts/results/is-the-layout-the-missing-piece",
                     help="where boxes.json and detected-layouts.png are written")
     ap.add_argument("--wanted", type=int, default=WANTED, help="how many judgeable seeds to select")
+    ap.add_argument("--max-box-fraction", type=float, default=MAX_BOX_FRACTION,
+                    help="reject a seed where either box covers more than this share of the "
+                         "frame; such a box is not a region")
+    ap.add_argument("--max-containment", type=float, default=MAX_CONTAINMENT,
+                    help="reject a seed where this much of the smaller box sits inside the "
+                         "larger; the two regions are then not disjoint")
+    ap.add_argument("--names", type=Path, default=None,
+                    help="JSON of hand-given species, {\"<seed>\": {\"<box index>\": "
+                         "\"cat\"|\"dog\"}}, overriding the classifier. The classifier's own "
+                         "call is kept beside it in boxes.json either way.")
     ap.add_argument("--max-foreign-mib", type=int, default=MAX_FOREIGN_MIB,
                     help="how much GPU memory another process may already hold. The default "
                          "refuses a shared device; raise it to share one deliberately, which the "
@@ -262,25 +364,35 @@ def main() -> int:
           f"side >= {MIN_BOX_FRACTION:g} of the image; species margin floor "
           f"{module.MIN_MARGIN}", flush=True)
 
-    records, selected = [], 0
+    hand_names = json.loads(args.names.read_text()) if args.names else None
+    if hand_names:
+        print(f"hand names given for seeds {sorted(hand_names)}; the classifier's call is kept "
+              f"beside each one", flush=True)
+
+    # Every candidate is read, never stopping at the first eight, so the crop sheet covers the
+    # rejected seeds too. Rejection reasons are only readable against the seeds that passed.
+    records = []
     for seed in HELD_OUT + TOP_UP:
-        if seed in TOP_UP and selected >= args.wanted:
-            break
         if seed in TOP_UP and not args.sheet.exists():
             print(f"seed {seed:2d}  no 1024 px render and no sheet at {args.sheet}; stopping the "
                   f"top-up", flush=True)
             break
-        rec = read_seed(seed, args.sheet, work_dir, clf, module, device)
-        if rec["judgeable"] and selected < args.wanted:
-            rec["selected"] = True
-            selected += 1
-        else:
-            rec["selected"] = False
+        rec = read_seed(seed, args.sheet, work_dir, clf, module, device,
+                        max_box_fraction=args.max_box_fraction,
+                        max_containment=args.max_containment,
+                        hand_names=hand_names)
         records.append(rec)
-        shown = "  ".join(f"{b['call']} {b['margin']:+.2f}" for b in rec["boxes"]) or "no box"
-        mark = "selected" if rec["selected"] else (rec["rejected_because"] or "not needed")
-        print(f"seed {seed:2d}  {rec['source']:15s}  {rec['n_animal_boxes']} box(es)  "
-              f"{shown:28s}  {mark}", flush=True)
+        shown = "  ".join(f"{b['call']}({b['named_by'][0]}) {b['clip_margin']:+.2f}"
+                          for b in rec["boxes"]) or "no box"
+        held = "" if rec["containment"] is None else f"held {rec['containment']:.0%}"
+        mark = "judgeable" if rec["judgeable"] else rec["rejected_because"]
+        print(f"seed {seed:2d}  {rec['source']:15s}  {rec['n_animal_boxes']} box  "
+              f"{shown:34s}  {held:9s}  {mark}", flush=True)
+
+    selected = 0
+    for rec in records:
+        rec["selected"] = rec["judgeable"] and selected < args.wanted
+        selected += int(rec["selected"])
 
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "boxes.json").write_text(json.dumps({
@@ -291,6 +403,9 @@ def main() -> int:
         "classifier": f"{module.CLIP_ID}, cat against dog over {len(module.TEMPLATES)} templates, "
                       f"box pad {module.BOX_PAD}, margin floor {module.MIN_MARGIN}",
         "latent_grid": LATENT,
+        "geometry_gate": {"max_box_fraction": args.max_box_fraction,
+                          "max_containment": args.max_containment},
+        "hand_named_seeds": sorted(hand_names) if hand_names else [],
         "held_out_seeds": list(HELD_OUT),
         "wanted": args.wanted,
         "n_selected": selected,
@@ -299,11 +414,12 @@ def main() -> int:
         "seeds": records,
     }, indent=2))
 
+    draw_crops(records, module, args.out / "candidate-crops.png")
     if selected:
         draw_panels(records, args.out / "detected-layouts.png")
     print(f"\n{selected} of {args.wanted} judgeable seeds selected: "
           f"{[r['seed'] for r in records if r['selected']]}", flush=True)
-    print(f"wrote {args.out / 'boxes.json'}"
+    print(f"wrote {args.out / 'boxes.json'} and {args.out / 'candidate-crops.png'}"
           + (f" and {args.out / 'detected-layouts.png'}" if selected else ""), flush=True)
     return 0 if selected == args.wanted else 1
 
