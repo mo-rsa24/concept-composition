@@ -68,8 +68,8 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| The weights fetch, `PixArt-alpha/PixArt-XL-2-1024-MS` onto `/datasets` | setup | 2026-11-04, from mscluster84 | 21.8 GB | `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS` | ◑ in flight |
-| The single-prompt identity check, "a cat" at seed 1 through the pipeline and through the script | gates the claim | not yet | 2 renders | the two images and the largest absolute pixel difference between them | ⚠️ not started |
+| The weights fetch, `PixArt-alpha/PixArt-XL-2-1024-MS` onto `/datasets` | setup | 2026-11-04, from mscluster84 | 21.8 GB | `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS` | ✅ 21 GB on disk |
+| The single-prompt identity check, "a cat" at seed 1 through the pipeline and through the script | gates the claim | 2026-11-04, mscluster84 | 2 renders, 6 minutes including a 2m45 load | the two images and the largest absolute pixel difference between them | ✅ 0 grey levels, byte-identical |
 | The four columns on eight seeds | Tests the claim | not yet | 32 renders at 1024², 20 steps each | tiles and sidecars under `artifacts/results/does-a-clip-free-model-hybridise/`, sheet `pixart-cat-dog-sheet.png` | ⚠️ not started |
 
 ## The question written before the run
@@ -103,11 +103,17 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
 
-- [ ] **Does the script reproduce the released pipeline's plain output?** The largest absolute
+- [x] **Does the script reproduce the released pipeline's plain output?** The largest absolute
       difference between the two "a cat" renders, in 0-to-255 pixel values, and the fraction of
       pixels that differ at all. A largest difference of 0 means the two paths are the same
       computation. Above about 2 grey levels is a plumbing fault, and the product renders do not
       run until it is fixed rather than tolerated.
+
+      **Answered: 0.** Largest absolute difference 0 of 255 grey levels, 0.0 of pixels differing,
+      and the two PNGs are byte-identical (md5 `d9c08c28048b8da98124be0246099b07`). The summed
+      guidance path and `PixArtAlphaPipeline` as released are the same computation at one condition,
+      so a hybrid in the product column is the arithmetic rather than the plumbing. Record in
+      `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/identity-check.json`.
 - [ ] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture, so a disagreement later is about a named
       tile rather than about a count.

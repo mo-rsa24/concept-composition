@@ -19,14 +19,14 @@ both use it, so the two paths' numbers check each other.
 
 ## Position
 
-On piece 3 of 5, the identity check. Pieces 1 and 2 are done.
+On piece 4 of 5, the renders. Pieces 1 to 3 are done, and piece 4 waits on the user's yes.
 
 | Piece | What it is | State |
 |---|---|---|
 | 1 | the composition script, `scripts/pixart_multi_poe.py` | ✅ compiles, formulas matched |
 | 2 | the weights on disk and the tokenizer loading | ✅ 21 GB at `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`, sentencepiece 0.2.2 |
-| 3 | the single-prompt identity check | ⚠️ next, and the stop the request asked for |
-| 4 | the 32 renders and the four-column sheet | ⚠️ |
+| 3 | the single-prompt identity check | ✅ 0 grey levels, the two PNGs byte-identical |
+| 4 | the 32 renders and the four-column sheet | ⚠️ next, held for the user's yes on piece 3 |
 | 5 | the calls by eye, `calls.json`, the card | ⚠️ |
 
 ## Ticked this session
@@ -34,6 +34,9 @@ On piece 3 of 5, the identity check. Pieces 1 and 2 are done.
 - Plan task 1.1, the script. `python3 -m py_compile` clean, and the guidance line reads as the same
   arithmetic as `concept_multi_poe.py:66` and `sd35_and_vector_render.py:103`.
 - Plan task 1.2, the weights. 21 GB on `/datasets`, fetched with a disk guard on that mount.
+- Plan task 2.1, the identity check. Largest absolute difference 0 of 255 grey levels, 0.0 of pixels
+  differing, the two PNGs byte-identical (md5 `d9c08c28048b8da98124be0246099b07`), answered in the
+  review file.
 
 ## Decisions
 
@@ -53,6 +56,7 @@ On piece 3 of 5, the identity check. Pieces 1 and 2 are done.
 |---|---|---|---|---|
 | 1 | background run, the weights fetch | piece 2 | `bozmy3vtv` | ✅ returned, exit 0 |
 | 2 | route, `/submerge` on the three new things | the reader, not the plan | emitted, not yet run | ⚠️ out |
+| 3 | cluster run, the identity check | piece 3 | `bichtb1ge` | ✅ returned, exit 0 |
 
 ## How to approach this next time
 
@@ -60,5 +64,9 @@ On piece 3 of 5, the identity check. Pieces 1 and 2 are done.
   change only the line you came for. Every pipeline carries conditioning the maths does not mention,
   and here that was three things: a learned sigma on half the output channels, an attention mask on
   the text sequence, and resolution conditioning the 1024 model wants.
+- **Piece 3.** One branch cannot be checked out in two worktrees, so `scripts/cluster.sh run` fails
+  its sync whenever another session already has this branch out on the cluster. Give the walk its own
+  cluster worktree (`git worktree add`) and launch with `CLUSTER_DIR` pointed at it, rather than
+  switching a shared checkout's branch underneath whoever is using it.
 - **Piece 2.** A download is the long pole, so it goes in the background before the code is written,
   with its disk guard reading the mount it resolves to rather than an assumed one.
