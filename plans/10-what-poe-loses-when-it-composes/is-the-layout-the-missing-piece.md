@@ -255,8 +255,14 @@ before anything runs off it.
     [the plain product composer](../../poe_repair/composers/poe.py), which is not modified.
   - Takes the two masks and the condition name, and writes its summary JSON naming the condition,
     the overlap reading and the mask provenance.
+  - Carries a bootstrapping switch, default off, after MultiDiffusion (arXiv 2302.08113): for the
+    first `n` steps each region is denoised against a constant-colour background so an object forms
+    inside a small box rather than the box filling with background. The switch exists because
+    fusing per-region predictions is MultiDiffusion's own operator and this is the one part of it
+    the plain fusion leaves out.
   - **Done when:** masks of 0.5 everywhere reproduce the average of the two experts' differences,
-    checked against a hand-computed tensor, to within fp16 noise.
+    checked against a hand-computed tensor, to within fp16 noise, and the switch off reproduces
+    the run with no bootstrapping byte for byte.
 
 - [ ] **3.2 Render both overlap readings on two seeds.**
   - Produces: `artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png`, two seeds ×
@@ -399,7 +405,12 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | 
 - **The verdict, written before the run.**
   - **Support:** the oracle layout reaches 4 or more clear pairs of 8, and the random-box control
     reaches fewer.
-  - **Null:** the oracle layout reaches 1 or 0.
+  - **Null:** the oracle layout reaches 1 or 0. A null is not reported until MultiDiffusion's own
+    implementation has been reproduced and run on the same eight layouts, because a null from a
+    composer written for this plan cannot separate "a partition is not enough" from "the composer
+    is wrong". The route is
+    `/drip-execute-plan --reproduce 2302.11552`-shaped, pointed at arXiv 2302.08113, and the
+    bootstrapping switch is turned on first since it is the cheaper of the two checks.
   - **Inconclusive:** the oracle layout reaches 2 or 3.
   - **Layout content irrelevant:** the oracle layout reaches 4 or more and the random-box control
     reaches within 1 of it. The masking breaks the fusion; the layout does not.
