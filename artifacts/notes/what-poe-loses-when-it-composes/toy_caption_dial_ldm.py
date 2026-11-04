@@ -158,7 +158,7 @@ def train_denoiser(z, c, seed):
 
 
 @torch.no_grad()
-def draw(net, vae, caps, d, n=N):
+def draw(net, vae, caps, d, n=N, g=GUIDE):
     """caps is a list of caption ids combined as summed classifier-free guidance."""
     z = torch.randn(n, d, device=DEV)
     nullc = torch.full((n,), NULL, device=DEV, dtype=torch.long)
@@ -170,7 +170,7 @@ def draw(net, vae, caps, d, n=N):
         e = e_null.clone()
         for c in caps:
             cc = torch.full((n,), c, device=DEV, dtype=torch.long)
-            e = e + GUIDE * ((z - a_t.sqrt() * net(z, kk, cc)) / (1 - a_t).sqrt() - e_null)
+            e = e + g * ((z - a_t.sqrt() * net(z, kk, cc)) / (1 - a_t).sqrt() - e_null)
         mean = (z - be / (1 - a_t).sqrt() * e) / al.sqrt()
         z = mean + ((be * (1 - a_p) / (1 - a_t)).sqrt() if k > 1 else 0.0) * torch.randn_like(z)
     img = vae.dec(z.reshape(n, 4, 4, 8)).permute(0, 2, 3, 1).reshape(n, -1).cpu().numpy()
@@ -237,5 +237,45 @@ def main():
     print("wrote", OUT / "toy-caption-dial-ldm.json")
 
 
+def guidance_sweep(guides):
+    """Train once per dial setting, then draw every caption at each guidance strength in `guides`."""
+    print(f"device {DEV}, dial {DIAL}, guidance {guides}", flush=True)
+    res, sheets = {}, {}
+    for dial in DIAL:
+        t0 = time.time()
+        rng = np.random.default_rng(SEED)
+        x, c = corpus(dial, rng)
+        vae, rec, tries = train_vae(x, SEED)
+        with torch.no_grad():
+            z = vae.encode(x)[0].reshape(len(x), -1)
+        net, _ = train_denoiser(z, c, SEED)
+        res[f"{dial:g}"] = {"vae reconstruction mse": round(rec, 5)}
+        for g in guides:
+            out = {}
+            for name, caps in (("the two single captions multiplied", [CIRCLE, SQUARE]),
+                               ("a red circle alone", [CIRCLE]), ("a blue square alone", [SQUARE]),
+                               ("the joint caption", [BOTH])):
+                cnt, tiles = draw(net, vae, caps, z.shape[1], g=g)
+                out[name] = cnt["blob scorer"]
+                if name == "the two single captions multiplied":
+                    sheets[f"{dial:g}_{g:g}"] = tiles
+            res[f"{dial:g}"][f"{g:g}"] = out
+            p_, c_, q_ = (out[k] for k in ("the two single captions multiplied", "a red circle alone",
+                                           "a blue square alone"))
+            print(f"dial {dial:g} guidance {g:g}: product apart {p_['red and blue apart']}, purple "
+                  f"{p_['purple or overlaid']}, none {p_['nothing readable']} | circle red only "
+                  f"{c_['red only']}, square blue only {q_['blue only']}", flush=True)
+        print(f"  dial {dial:g} took {time.time() - t0:.0f}s, vae mse {rec:.5f}", flush=True)
+    np.savez_compressed(OUT / "toy-caption-dial-ldm-guidance-samples.npz", **sheets)
+    json.dump({"what": "the caption-dial latent model drawn at several guidance strengths; one "
+                       "training per dial setting shared across strengths; counts from toy_blob_scorer",
+               "guidance": guides, "draws_per_cell": N, "results": res},
+              open(OUT / "toy-caption-dial-ldm-guidance.json", "w"), indent=1)
+    print("wrote", OUT / "toy-caption-dial-ldm-guidance.json")
+
+
 if __name__ == "__main__":
-    main()
+    if "--guidance" in sys.argv:
+        guidance_sweep([float(v) for v in sys.argv[sys.argv.index("--guidance") + 1].split(",")])
+    else:
+        main()

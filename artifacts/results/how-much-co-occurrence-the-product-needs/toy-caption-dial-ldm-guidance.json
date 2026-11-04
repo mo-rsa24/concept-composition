@@ -1,0 +1,778 @@
+{
+ "what": "the caption-dial latent model drawn at several guidance strengths; one training per dial setting shared across strengths; counts from toy_blob_scorer",
+ "guidance": [
+  1.0,
+  2.0,
+  3.0,
+  5.0,
+  7.0
+ ],
+ "draws_per_cell": 300,
+ "results": {
+  "0": {
+   "vae reconstruction mse": 0.01009,
+   "1": {
+    "the two single captions multiplied": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "2": {
+    "the two single captions multiplied": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 49,
+     "nothing readable": 251
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "3": {
+    "the two single captions multiplied": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 4,
+     "purple or overlaid": 21,
+     "nothing readable": 275
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "5": {
+    "the two single captions multiplied": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 297,
+     "nothing readable": 3
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 299,
+     "purple or overlaid": 0,
+     "nothing readable": 1
+    },
+    "the joint caption": {
+     "red and blue apart": 298,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 2,
+     "nothing readable": 0
+    }
+   },
+   "7": {
+    "the two single captions multiplied": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 274,
+     "nothing readable": 25
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 296,
+     "purple or overlaid": 0,
+     "nothing readable": 4
+    },
+    "the joint caption": {
+     "red and blue apart": 191,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 109,
+     "nothing readable": 0
+    }
+   }
+  },
+  "0.1": {
+   "vae reconstruction mse": 0.01008,
+   "1": {
+    "the two single captions multiplied": {
+     "red and blue apart": 179,
+     "red only": 11,
+     "blue only": 0,
+     "purple or overlaid": 110,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 26,
+     "red only": 274,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 13,
+     "red only": 0,
+     "blue only": 287,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "2": {
+    "the two single captions multiplied": {
+     "red and blue apart": 135,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 161,
+     "nothing readable": 4
+    },
+    "a red circle alone": {
+     "red and blue apart": 1,
+     "red only": 299,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "3": {
+    "the two single captions multiplied": {
+     "red and blue apart": 149,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 142,
+     "nothing readable": 9
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "5": {
+    "the two single captions multiplied": {
+     "red and blue apart": 42,
+     "red only": 9,
+     "blue only": 0,
+     "purple or overlaid": 249,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 299,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 299,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    }
+   },
+   "7": {
+    "the two single captions multiplied": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 299,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 293,
+     "purple or overlaid": 7,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 292,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 8,
+     "nothing readable": 0
+    }
+   }
+  },
+  "0.3": {
+   "vae reconstruction mse": 0.01007,
+   "1": {
+    "the two single captions multiplied": {
+     "red and blue apart": 162,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 115,
+     "nothing readable": 23
+    },
+    "a red circle alone": {
+     "red and blue apart": 60,
+     "red only": 240,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 80,
+     "red only": 0,
+     "blue only": 219,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "2": {
+    "the two single captions multiplied": {
+     "red and blue apart": 85,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 74,
+     "nothing readable": 141
+    },
+    "a red circle alone": {
+     "red and blue apart": 16,
+     "red only": 284,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 13,
+     "red only": 0,
+     "blue only": 287,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 299,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    }
+   },
+   "3": {
+    "the two single captions multiplied": {
+     "red and blue apart": 98,
+     "red only": 0,
+     "blue only": 11,
+     "purple or overlaid": 174,
+     "nothing readable": 17
+    },
+    "a red circle alone": {
+     "red and blue apart": 4,
+     "red only": 296,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 3,
+     "red only": 0,
+     "blue only": 296,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "5": {
+    "the two single captions multiplied": {
+     "red and blue apart": 127,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 173,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 291,
+     "purple or overlaid": 8,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "7": {
+    "the two single captions multiplied": {
+     "red and blue apart": 180,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 120,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 5,
+     "red only": 0,
+     "blue only": 271,
+     "purple or overlaid": 22,
+     "nothing readable": 2
+    },
+    "the joint caption": {
+     "red and blue apart": 289,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 11,
+     "nothing readable": 0
+    }
+   }
+  },
+  "0.6": {
+   "vae reconstruction mse": 0.01009,
+   "1": {
+    "the two single captions multiplied": {
+     "red and blue apart": 190,
+     "red only": 3,
+     "blue only": 0,
+     "purple or overlaid": 5,
+     "nothing readable": 102
+    },
+    "a red circle alone": {
+     "red and blue apart": 95,
+     "red only": 205,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 104,
+     "red only": 0,
+     "blue only": 196,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "2": {
+    "the two single captions multiplied": {
+     "red and blue apart": 122,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 63,
+     "nothing readable": 115
+    },
+    "a red circle alone": {
+     "red and blue apart": 34,
+     "red only": 266,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 32,
+     "red only": 0,
+     "blue only": 268,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "3": {
+    "the two single captions multiplied": {
+     "red and blue apart": 65,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 192,
+     "nothing readable": 43
+    },
+    "a red circle alone": {
+     "red and blue apart": 14,
+     "red only": 286,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 12,
+     "red only": 0,
+     "blue only": 288,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "5": {
+    "the two single captions multiplied": {
+     "red and blue apart": 31,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 255,
+     "nothing readable": 14
+    },
+    "a red circle alone": {
+     "red and blue apart": 4,
+     "red only": 296,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 299,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 299,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    }
+   },
+   "7": {
+    "the two single captions multiplied": {
+     "red and blue apart": 12,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 79,
+     "nothing readable": 209
+    },
+    "a red circle alone": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 299,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 298,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 2,
+     "nothing readable": 0
+    }
+   }
+  },
+  "1": {
+   "vae reconstruction mse": 0.0103,
+   "1": {
+    "the two single captions multiplied": {
+     "red and blue apart": 264,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 36,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 173,
+     "red only": 127,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 176,
+     "red only": 0,
+     "blue only": 124,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "2": {
+    "the two single captions multiplied": {
+     "red and blue apart": 250,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 49,
+     "nothing readable": 1
+    },
+    "a red circle alone": {
+     "red and blue apart": 100,
+     "red only": 200,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 104,
+     "red only": 0,
+     "blue only": 196,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 299,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    }
+   },
+   "3": {
+    "the two single captions multiplied": {
+     "red and blue apart": 226,
+     "red only": 0,
+     "blue only": 1,
+     "purple or overlaid": 55,
+     "nothing readable": 18
+    },
+    "a red circle alone": {
+     "red and blue apart": 61,
+     "red only": 239,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 63,
+     "red only": 0,
+     "blue only": 237,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "5": {
+    "the two single captions multiplied": {
+     "red and blue apart": 128,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 170,
+     "nothing readable": 2
+    },
+    "a red circle alone": {
+     "red and blue apart": 24,
+     "red only": 276,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 26,
+     "red only": 0,
+     "blue only": 274,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 297,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 3,
+     "nothing readable": 0
+    }
+   },
+   "7": {
+    "the two single captions multiplied": {
+     "red and blue apart": 171,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 129,
+     "nothing readable": 0
+    },
+    "a red circle alone": {
+     "red and blue apart": 7,
+     "red only": 293,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "a blue square alone": {
+     "red and blue apart": 10,
+     "red only": 0,
+     "blue only": 290,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "the joint caption": {
+     "red and blue apart": 278,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 22,
+     "nothing readable": 0
+    }
+   }
+  }
+ }
+}

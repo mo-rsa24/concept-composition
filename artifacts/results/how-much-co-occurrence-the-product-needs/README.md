@@ -46,6 +46,8 @@ about three orders of magnitude in that weight.
 | `what-the-caption-model-draws.png` | one VAE plus one caption-conditional latent model trained per dial setting (0, 0.1, 0.3, 0.6, 1: how often a both-shapes picture is also captioned with each single name), four rows per setting (each single caption, the two single captions multiplied, the joint caption), eight draws each titled with the colour-blob scorer's call and the 300-draw counts beside them |
 | `toy-caption-dial-ldm.json` | those counts from both scorers, each setting's VAE reconstruction error, and the colour-blob scorer's hit rate on that VAE's reconstructions of every known picture |
 | `toy-trained-experts.json` | two separately trained score networks combined by summed scores, crisp pairs and single-shape purity out of 300 at six shared-picture fractions |
+| `caption-model-across-guidance.png` | the two single captions multiplied in the caption model, dial setting down (0 to 1) and guidance strength across (1, 2, 3, 5, 7), four draws per cell titled with the colour-blob scorer's call, the cell's crisp-pair count out of 300 and the lower of the two single captions' purity counts |
+| `toy-caption-dial-ldm-guidance.json` | those counts for every caption at every dial and guidance strength, one training per dial shared across strengths |
 
 ## The sweep, weight by weight
 
@@ -210,6 +212,20 @@ it. The script prints "inconclusive" for anything between support and null. Ever
 at a mean squared error of 0.010 to 0.0103 and the scorer reads that VAE's reconstructions of every
 known picture right 100 times in 100. The template library's counts are kept beside the scorer's in
 the JSON and are not used, because it calls the joint caption's crisp pairs "two faint objects".
+
+**Guidance strength does not rescue dial 0, and it moves the rest around without a trend.** The same
+models drawn at guidance 1, 2, 3, 5 and 7: at dial 0 the product gives at most 1 crisp pair of 300 at
+any strength, a single purple blob at guidance 1, 5 and 7 and a faint smear at 2 and 3. At every
+non-zero dial it gives between 1 and 264 of 300, with no strength best across dials. Two cells reach
+150 of 300 with both captions above 240 (dial 0.1 at guidance 1: 179, purity 274; dial 0.3 at
+guidance 7: 180, purity 271), but they were found by scanning 25 cells under a bar written for
+guidance 3 alone, and retraining the same dial 0.1 model at guidance 3 gave 118 in one run and 149
+in the next, so a single cell moves by about 30 of 300 between trainings.
+
+**The "purple or overlaid" call covers two different pictures.** At dial 0 it is one purple blob at
+one position, a true hybrid. At non-zero dials it is mostly a bluish square beside a reddish circle,
+two separate shapes whose colours have drifted toward each other. The scorer counts the second kind
+as not composed, so the crisp counts understate how often two things sit in frame.
 
 ## What this cannot claim
 
