@@ -7,6 +7,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import toy_sampler_hybrids as t
+import toy_hmc as h
 OUT = HERE.parents[1] / "results" / "how-much-co-occurrence-the-product-needs"
 SEED = 20261022
 GOOD, BAD, INK, FAINT = "#1a7f37", "#9b2226", "#1b1b1b", "#7a7a7a"
@@ -22,19 +23,36 @@ COLS = [
          setup=lambda: t.caption_experts(2)[0]),
 ]
 ROWS = [("exact", "What the maths says"),
-        ("reverse diffusion", "What a sampler draws")]
+        ("reverse diffusion", "Plain reverse diffusion"),
+        ("annealed MALA", "With a Langevin corrector"),
+        ("annealed HMC", "With a Hamiltonian corrector")]
 
-cells = {}
-for c in COLS:
+import os, pickle
+CACHE = "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/notes/what-poe-loses-when-it-composes/.grid-cache.pkl"
+cells, ACC = {}, {}
+if os.path.exists(CACHE):
+    cells, ACC = pickle.load(open(CACHE, "rb"))
+    print("loaded cached draws from", CACHE)
+for c in COLS if not cells else []:
     t.RNG = np.random.default_rng(SEED)
     kind, A, B = c["setup"]()
     lp, sc = t.composed(kind, A, B)
     runs = {"exact": t.exact_samples(kind, A, B), "reverse diffusion": t.reverse(sc)}
+    t.ACCEPT.clear()
+    runs["annealed MALA"] = t.reverse(sc, lp, mala=True)
+    acc_mala = float(np.mean(t.ACCEPT)); t.ACCEPT.clear()
+    h.ACCEPT_HMC.clear()
+    runs["annealed HMC"] = h.reverse_hmc(sc, lp, hmc_k=1, hmc_l=20, eps_frac=0.1)
+    acc_hmc = float(np.mean(h.ACCEPT_HMC)); h.ACCEPT_HMC.clear()
+    ACC[c["head"]] = {"annealed MALA": round(acc_mala, 3), "annealed HMC": round(acc_hmc, 3)}
     for m, x in runs.items():
         labs = t.label(x)
         top = max(t.CATS, key=labs.count)
         cells[(c["head"], m)] = (np.clip(x[:4], 0, 1), labs.count("two objects, crisp"), top, labs.count(top))
     print("done", c["head"], flush=True)
+
+if not os.path.exists(CACHE):
+    pickle.dump((cells, ACC), open(CACHE, "wb"))
 
 NC, NR = len(COLS), len(ROWS)
 fig = plt.figure(figsize=(4.3 * NC, 2.05 * NR + 2.3))
@@ -49,7 +67,7 @@ for j, c in enumerate(COLS):
 
 for i, (m, label) in enumerate(ROWS):
     lax = fig.add_subplot(gs[i * 2:i * 2 + 2, 0]); lax.axis("off")
-    lax.text(0.5, (0.62, 0.38)[i], label, rotation=90, va="center", ha="center", fontsize=12.5,
+    lax.text(0.5, 0.5, label, rotation=90, va="center", ha="center", fontsize=12.5,
              fontweight="bold", color=INK, transform=lax.transAxes)
     for j, c in enumerate(COLS):
         imgs, crisp, top, topn = cells[(c["head"], m)]
@@ -58,8 +76,11 @@ for i, (m, label) in enumerate(ROWS):
         ax.add_patch(FancyBboxPatch((0.02, 0.08), 0.96, 0.80, transform=ax.transAxes,
                                     boxstyle="round,pad=0.01",
                                     facecolor="#eaf4ec" if ok else "#fbeceb", edgecolor="none"))
-        ax.text(0.5, 0.48, f"{top}  ·  {topn} of 300", ha="center", va="center", fontsize=11.5,
-                fontweight="bold", color=GOOD if ok else BAD, transform=ax.transAxes)
+        extra = ""
+        if m in ACC.get(c["head"], {}):
+            extra = f"      accepted {ACC[c['head']][m]:.0%} of its moves"
+        ax.text(0.5, 0.48, f"{top}  ·  {topn} of 300{extra}", ha="center", va="center",
+                fontsize=11.5, fontweight="bold", color=GOOD if ok else BAD, transform=ax.transAxes)
         sub = gs[i * 2 + 1, 1 + j * 2:3 + j * 2].subgridspec(1, 4, wspace=0.06)
         for k in range(4):
             a = fig.add_subplot(sub[0, k])
@@ -67,20 +88,20 @@ for i, (m, label) in enumerate(ROWS):
 
 ax = fig.add_subplot(gs[-1, 1:]); ax.axis("off")
 verdicts = [
-    "Nothing to find.\nThe maths itself says\none merged shape.",
-    "The maths is already\nright. The sampler is\nnot even close.",
-    "The maths is still right.\nThe sampler finds it\n10 times in 300.",
-    "The maths is now wrong\ntoo: it prefers one shape,\nand the sampler agrees.",
+    "Nothing to find.\nThe maths itself says one merged shape,\nso no corrector can help.",
+    "The maths is already right.\nAll three samplers miss it,\nbetter correctors included.",
+    "The maths is still right.\nMomentum roughly triples the hit rate\nand still leaves 5 in 6 wrong.",
+    "The maths is now wrong too:\nit prefers one shape,\nand every sampler agrees.",
 ]
 for j, v in enumerate(verdicts):
     ax.text((j + 0.5) / NC, 0.80, v, ha="center", va="top", fontsize=10.5, color=INK,
             transform=ax.transAxes, linespacing=1.6)
-ax.text(0.5, 0.06, "Every cell: 4 of 300 draws, with the label most of the 300 were given. "
-                   "Green means most draws are a clean circle-and-square pair; red means they are not.",
+ax.text(0.5, 0.02, "Every cell: 4 of 300 draws, with the label most of the 300 were given. Green means most draws are a clean circle-and-square pair; red means they are not. "
+                   "Per reverse step the Langevin corrector spends 5 gradient evaluations and the Hamiltonian one 20, so the bottom row is the most expensive by a factor of four.",
         ha="center", fontsize=9.5, color=FAINT, transform=ax.transAxes)
 
-fig.suptitle("Turning up how often the two shapes appear together, and asking two questions of each setting",
+fig.suptitle("Turning up how often the two shapes appear together, and asking four samplers to draw it",
              fontsize=15.5, y=0.972)
 OUT.mkdir(parents=True, exist_ok=True)
-fig.savefig(OUT / "what-changes-as-overlap-rises.png", dpi=110, facecolor="white")
-print("wrote", OUT / "what-changes-as-overlap-rises.png")
+fig.savefig(OUT / "four-samplers-across-the-overlap-dial.png", dpi=110, facecolor="white")
+print("wrote", OUT / "four-samplers-across-the-overlap-dial.png")
