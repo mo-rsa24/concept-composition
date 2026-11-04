@@ -14,7 +14,8 @@ DEVICE="${2:?cuda device index, e.g. 1}"
 STEPS="${3:-2000}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+# The repo this script was launched from, so a second clone of the checkout runs its own code.
+REPO=$(cd "$(dirname "$0")/.." && pwd)
 OUT=/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/$RUN
 WANDB_ID=inclusive-captions-run-$RUN
 
