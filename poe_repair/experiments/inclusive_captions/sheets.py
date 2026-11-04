@@ -158,7 +158,12 @@ def main() -> int:
     ap.add_argument("--adapter", default=None, help="a saved LoRA directory; omit for base SDXL")
     ap.add_argument("--label", required=True, help="what this sheet is, e.g. 'run B, step 0'")
     ap.add_argument("--seeds", default=",".join(str(s) for s in SEEDS))
-    ap.add_argument("--resolution", type=int, default=512)
+    # 1,024 square, which is what SDXL was trained at and what the composition calls in piece 6
+    # are made on. At 512 half the seeds render as tiled pattern, flat illustration or a laptop
+    # at every checkpoint including step 0, so half the sheet showed the resolution rather than
+    # the run. The eight seeds stay as they are: picking the four that looked good at 512 would
+    # be choosing the seeds that flatter the model.
+    ap.add_argument("--resolution", type=int, default=1024)
     ap.add_argument("--steps", type=int, default=25)
     ap.add_argument("--guidance", type=float, default=7.5)
     ap.add_argument("--model-id", default=DEFAULT_MODEL_ID)

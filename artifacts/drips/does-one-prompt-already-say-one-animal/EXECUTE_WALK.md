@@ -5,8 +5,11 @@ Mode: `--request`. Plan:
 
 ## Where the walk is
 
-Piece 1 of 5, build done and committed, encoder pass not yet run. Waiting for the shared worktree
-to go clean so `scripts/cluster.sh run` will sync.
+Piece 1 of 5, build done and committed, encoder pass not yet run. The worktree went clean and the
+launch still failed: the cluster checkout sits on `af849a2e` of another branch and holds 11 untracked
+`artifacts/drips/` folders whose paths are tracked on this branch, so `git checkout` there refuses to
+overwrite them. That is a repo-level divergence between the two checkouts, not a condition of this
+walk, and `/reconcile-machines` owns it.
 
 Branch `exec/does-one-prompt-already-say-one-animal`, first commit `46026ce4`.
 
@@ -53,7 +56,7 @@ ratio, which has not run.
 
 | Kind | Id | What it serves | State |
 |---|---|---|---|
-| background watch | `b9g4vfwzd` | waits up to 45 minutes for the worktree to go clean, then task 1's launch proceeds | in flight |
+| background watch | `b9g4vfwzd` | waited for the worktree to go clean | returned clean on the first check |
 
 ## Closing pass still owed
 

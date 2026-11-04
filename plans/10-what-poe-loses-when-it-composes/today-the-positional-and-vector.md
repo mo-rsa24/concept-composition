@@ -146,23 +146,23 @@ For Claude to execute. Ask Claude to do these.
 
 ### 2. 🔧 Render the two new columns (GPU, ~4 min)
 
-- [ ] **2.1** Render `x_pos` alone and `PoE(dog, cat, x_pos)` on seeds 1 to 8, asserting CUDA is
-  available before the first pass, on a `biggpu` node.
+- [x] ✅ **2.1** Render `x_pos` alone and `PoE(dog, cat, x_pos)` on seeds 1 to 8, asserting CUDA is
+  available before the first pass, on a `biggpu` node. ✓ verified 2026-11-04: mscluster108 device 0, pid 464573, `SET=positional`, 09:22 to 09:31 cluster time, exit clean on `=== done`
   - 16 tiles. Every other column is already on disk and is skipped.
-- [ ] **2.2** Check all 16 landed and are photographs, not grey or black squares.
+- [x] ✅ **2.2** Check all 16 landed and are photographs, not grey or black squares. ✓ verified 2026-11-04: 8 `x_pos.png` and 8 `poe_x_pos.png`, each 1.2 to 1.5 MB, which a flat tile cannot be
 
 ◀ **Needs: [instruction 4](#4--say-whether-to-spend-the-gpu)**, so the build is known good.
 ▶ **Next: [task 3](#3--the-sheets-the-figure-and-the-card)**.
 
 ### 3. 🔧 The sheets, the figure and the card
 
-- [ ] **3.1** Build the cat-by-dog `x_pos` sheet and call every tile from the full-resolution files,
-  writing the calls per seed with the counted seeds marked.
-- [ ] **3.2** Rebuild sheets 1, 3 and 4 under `supervisor-meeting/1-inference-only/` with the `x_pos`
-  column added, every earlier column kept.
-- [ ] **3.3** Write `artifacts/results/the-positional-and-vector/token-norms-x-pos.png` and the card
-  beside it, naming the axes, the four sequences and what the numbers mean.
-- [ ] **3.4** Add the `x_pos` row to `supervisor-meeting/README.md` section 1 with its clear-pair count.
+- [x] ✅ **3.1** Build the cat-by-dog `x_pos` sheet and call every tile from the full-resolution files,
+  writing the calls per seed with the counted seeds marked. ✓ confirmed by hand 2026-11-04: "accept", after three calls were queried and each was re-checked against the joint prompt's own cat on the same seed. `artifacts/results/the-positional-and-vector/calls.json`
+- [x] ✅ **3.2** Rebuild sheets 1, 3 and 4 under `supervisor-meeting/1-inference-only/` with the `x_pos`
+  column added, every earlier column kept. ✓ verified 2026-11-04: sheet 1 now 8 columns, sheet 3 now 14, sheet 4 now 10; the 6-column sheet 1 is kept as `supervisor-sheet-1-before-x-pos.png`; two figures added, `2c-token-norms-with-x-pos.png` and `7-how-the-third-expert-changed.png`
+- [x] ✅ **3.3** Write `artifacts/results/the-positional-and-vector/token-norms-x-pos.png` and the card
+  beside it, naming the axes, the four sequences and what the numbers mean. ✓ verified 2026-11-04: figure and card written, plus the per-seed comparisons and the series strip
+- [x] ✅ **3.4** Add the `x_pos` row to `supervisor-meeting/README.md` section 1 with its clear-pair count. ✓ verified 2026-11-04: the row reads 0 clear pairs of 7, and a second table beside it carries the plurality count across the whole series
 
 ▶ **Next: [instruction 5](#5--veto-the-calls)**.
 

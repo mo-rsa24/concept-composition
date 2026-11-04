@@ -22,9 +22,15 @@ instead of one pass per region, which is why it is written this way here.
 **Bootstrapping, default off.** The one piece of MultiDiffusion the plain fusion leaves out. For
 the first ``bootstrap_steps`` steps, each expert sees its own region composited over a constant
 colour rather than over the other animal, so an object forms inside a small box instead of the
-box filling with background. It costs the batched pass its sharing, since the two conditional
-branches then run on different inputs. Off by default, because turning it on is a change to the
-operator and the plan records when it was turned on and why.
+box filling with background.
+
+**Inside that window the epsilons may not be added.** The equivalence above holds only while
+every branch sees the same ``x_t``. Bootstrapping gives each region a different input, so the two
+epsilons estimate the noise in two different latents and summing them is meaningless: the first
+attempt did exactly that and rendered flat grey with confetti at the mask boundary. So within the
+window the full DDIM step is taken per region and the resulting *latents* are fused, which is
+MultiDiffusion's own form, at four UNet branches per step instead of three. Outside the window
+the cheaper epsilon fusion resumes, because there the two forms agree.
 """
 
 from __future__ import annotations
@@ -85,34 +91,66 @@ def run_cfg_poe_regional(
             height=height, width=width, batch_size=3, device=device, dtype=dtype,
         ),
     }
+    pe_boot = torch.cat([seq_a, seq_b, seq_e, seq_e], dim=0) if bootstrap_steps else None
+    cond_boot = None
+    if bootstrap_steps:
+        cond_boot = {
+            "text_embeds": torch.cat([pool_a, pool_b, pool_e, pool_e], dim=0),
+            "time_ids": add_time_ids(
+                height=height, width=width, batch_size=4, device=device, dtype=dtype,
+            ),
+        }
     unet = models["unet"]
+    bg_noise = None
+    if bootstrap_steps:
+        # One noise draw, reused at every bootstrapping step, so the flat background does not
+        # flicker from step to step and the window is reproducible from the cell's seed.
+        bg_noise = torch.randn(bootstrap_latent.shape, device=device, dtype=dtype)
+
     for step_index, timestep in enumerate(scheduler.timesteps):
+        alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(
+            device=device, dtype=dtype)
+
         if step_index < bootstrap_steps:
-            # Each expert sees its own region over a constant colour, noised to this timestep,
-            # so a small box forms an object rather than filling with what is around it.
-            alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(
-                device=device, dtype=dtype)
-            noise = torch.randn(bootstrap_latent.shape, device=device, dtype=dtype,
-                                generator=None)
-            bg = alpha_bar.sqrt() * bootstrap_latent + (1 - alpha_bar).sqrt() * noise
-            batch = torch.cat([
-                m_a * latents + (1 - m_a) * bg,
-                m_b * latents + (1 - m_b) * bg,
-                latents,
-            ], dim=0)
-        else:
-            batch = latents.repeat(3, 1, 1, 1)
-        latent_input = scheduler.scale_model_input(batch, timestep)
+            # Each region is denoised on its own input, so the epsilons are estimates of the
+            # noise in two *different* latents and cannot be added. The step is taken per region
+            # and the resulting latents are fused instead, which is MultiDiffusion's own form.
+            bg = alpha_bar_t.sqrt() * bootstrap_latent + (1 - alpha_bar_t).sqrt() * bg_noise
+            x_a = m_a * latents + (1 - m_a) * bg
+            x_b = m_b * latents + (1 - m_b) * bg
+            batch = torch.cat([x_a, x_b, x_a, x_b], dim=0)
+            noise_pred = unet(
+                scheduler.scale_model_input(batch, timestep), timestep,
+                encoder_hidden_states=pe_boot, added_cond_kwargs=cond_boot,
+                timestep_cond=None,
+            ).sample
+            eps_a_raw, eps_b_raw, eps_u_a, eps_u_b = noise_pred.chunk(4)
+            eps_a = eps_u_a + guidance_scale * (eps_a_raw - eps_u_a)
+            eps_b = eps_u_b + guidance_scale * (eps_b_raw - eps_u_b)
+            prev_a = ddim_prev_from_x0_eps(
+                scheduler=scheduler, timestep=timestep, step_index=step_index,
+                x0=tweedie_mean(x_a, alpha_bar_t, eps_a), eps=eps_a)
+            prev_b = ddim_prev_from_x0_eps(
+                scheduler=scheduler, timestep=timestep, step_index=step_index,
+                x0=tweedie_mean(x_b, alpha_bar_t, eps_b), eps=eps_b)
+            eps_r = m_a * eps_a + m_b * eps_b     # recorded only, not used for the step
+            tracker.store_step(
+                step_index, latents, eps_r,
+                float(step_index) / float(num_inference_steps),
+                int(timestep.item()),
+            )
+            latents = m_a * prev_a + m_b * prev_b
+            continue
+
+        batch = latents.repeat(3, 1, 1, 1)
         noise_pred = unet(
-            latent_input, timestep, encoder_hidden_states=pe,
-            added_cond_kwargs=cond, timestep_cond=None,
+            scheduler.scale_model_input(batch, timestep), timestep,
+            encoder_hidden_states=pe, added_cond_kwargs=cond, timestep_cond=None,
         ).sample
         eps_a_raw, eps_b_raw, eps_uncond = noise_pred.chunk(3)
         d_a = eps_a_raw - eps_uncond
         d_b = eps_b_raw - eps_uncond
         eps_r = eps_uncond + guidance_scale * (m_a * d_a + m_b * d_b)
-        alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(
-            device=device, dtype=dtype)
         x0 = tweedie_mean(latents, alpha_bar_t, eps_r)
         tracker.store_step(
             step_index, latents, eps_r,

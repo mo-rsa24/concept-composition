@@ -71,6 +71,9 @@ JOINT_1024 = Path("/datasets/mmolefe/poe_repair_min/outputs/learned_and_token/or
 SHEET_DEFAULT = Path("/datasets/mmolefe/poe_repair_min/outputs/is_the_layout_the_missing_piece/"
                      "0-reference-where-the-joint-prompt-succeeds.png")
 SHEET_COLS, SHEET_ROWS, SHEET_TILE, SHEET_LABEL = 8, 4, 320, 28
+# Rendered by scripts/render_joint_references.py, from the same cached noise the
+# sweep uses, so the layout and the sweep's picture are the same picture.
+JOINT_OURS = Path("/datasets/mmolefe/poe_repair_min/outputs/is_the_layout_the_missing_piece/joint")
 
 HELD_OUT = tuple(range(9, 17))
 TOP_UP = tuple(range(17, 33))
@@ -147,8 +150,18 @@ def tile_from_sheet(sheet_path: Path, seed: int) -> Image.Image:
         return sheet.convert("RGB").crop((x0, y0, x0 + SHEET_TILE, y0 + SHEET_TILE))
 
 
-def source_for(seed: int, sheet_path: Path, work_dir: Path) -> tuple[Path, str]:
-    """Return the render to read for ``seed``, preferring the 1024 px original."""
+def source_for(seed: int, sheet_path: Path, work_dir: Path,
+               joint_dir: Path | None = None) -> tuple[Path, str]:
+    """Return the render to read for ``seed``.
+
+    Our own joint render first, because the layout has to belong to the picture the sweep will
+    produce. A tile cropped from the old contact sheet is a different image from the same seed
+    number (26.47 of 255 apart on seed 19), so it is the last resort and it is reported as such.
+    """
+    if joint_dir is not None:
+        ours = joint_dir / f"seed{seed:02d}.png"
+        if ours.exists():
+            return ours, "joint-ours-1024"
     original = JOINT_1024 / f"seed{seed:02d}.png"
     if original.exists():
         return original, "joint-1024"
@@ -203,7 +216,7 @@ def geometry_reason(boxes, side: int, max_box_fraction: float,
 
 def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, module, device, *,
               max_box_fraction: float, max_containment: float,
-              hand_names: dict | None = None) -> dict:
+              hand_names: dict | None = None, joint_dir: Path | None = None) -> dict:
     """Detect and name both animals on one seed. Never raises on an unjudgeable seed.
 
     Three gates in order, each reported by name so a rejected seed says which one stopped it:
@@ -211,7 +224,7 @@ def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, module, device, 
     the two boxes must be named one cat and one dog. ``hand_names`` overrides the classifier's
     species for a seed, keeping the classifier's own call beside it so the two can be compared.
     """
-    render, source = source_for(seed, sheet_path, work_dir)
+    render, source = source_for(seed, sheet_path, work_dir, joint_dir)
     n_boxes, kept = count_instances(render, query=DETECTOR_QUERY, device=device)
     with Image.open(render) as im:
         image = im.convert("RGB")
@@ -333,6 +346,9 @@ def main() -> int:
                     default=REPO / "artifacts/results/is-the-layout-the-missing-piece",
                     help="where boxes.json and detected-layouts.png are written")
     ap.add_argument("--wanted", type=int, default=WANTED, help="how many judgeable seeds to select")
+    ap.add_argument("--joint-dir", type=Path, default=JOINT_OURS,
+                    help="joint renders made by this repo from the cached noise; the layout "
+                         "is detected on these so it belongs to the picture the sweep draws")
     ap.add_argument("--max-box-fraction", type=float, default=MAX_BOX_FRACTION,
                     help="reject a seed where either box covers more than this share of the "
                          "frame; such a box is not a region")
@@ -380,7 +396,7 @@ def main() -> int:
         rec = read_seed(seed, args.sheet, work_dir, clf, module, device,
                         max_box_fraction=args.max_box_fraction,
                         max_containment=args.max_containment,
-                        hand_names=hand_names)
+                        hand_names=hand_names, joint_dir=args.joint_dir)
         records.append(rec)
         shown = "  ".join(f"{b['call']}({b['named_by'][0]}) {b['clip_margin']:+.2f}"
                           for b in rec["boxes"]) or "no box"

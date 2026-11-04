@@ -193,14 +193,37 @@ hidden regime can be scored at all.
 |---|---|---|
 | aortic enlargement + cardiomegaly | 1,972 in VinDr, 98% separate places | the control: two findings that do not interact, so a product over a partition should be enough |
 | lung opacity + pulmonary fibrosis | 489 in VinDr after the double-label drop, 201 same region | the shared-region case, and the only honest one our own measurement found |
-| pulmonary fibrosis + emphysema | none in VinDr; both are labels in NIH ChestX-ray14, count not yet taken | the pair with the published evidence, including the one measured combination-specific lesion |
-| pleural effusion + atelectasis | both are labels in VinDr and in ChestX-ray14 | the pair whose shared region is documented and whose hidden case is prose-supported |
+| pulmonary fibrosis + emphysema | 36 of 112,120 films in NIH ChestX-ray14, and neither class has boxes | the pair with the published evidence, and too rare in our data to train or test on |
+| pleural effusion + atelectasis | 3,275 in ChestX-ray14 (20 with boxes for both); 90 in VinDr, 78 after the double-label drop, 68 of those separate | the most populated pair we hold, and a cause-and-consequence pair rather than two diseases |
+| lung opacity + pleural effusion | 504 in VinDr after the drop, 154 same region at a floor of 0.25 | a second shared-region pair, to stop the shared-region claim resting on one pair |
 | silicosis + tuberculosis | none in any dataset we hold | the pair the work names, reachable only by argument from a proxy |
 
-**The first count to take before this decision closes.** How many films in NIH ChestX-ray14 carry
-both Emphysema and Fibrosis, and how many carry both Effusion and Atelectasis. Both label pairs
-exist in that dataset's fourteen classes, and the counts decide whether the best-evidenced pair in
-the literature is also a pair we can train on. Neither count has been taken.
+**The count is in, and it forces the decision rather than easing it.** Combined pulmonary fibrosis
+and emphysema appears on 36 of ChestX-ray14's 112,120 films, against 2,516 films with emphysema
+alone and 1,686 with fibrosis alone. Thirty-six is below the roughly hundred per class the
+confidence interval needs and far below what the composition could train on, and neither class
+appears in the 984 boxes that dataset provides, so even those 36 films cannot be split into regimes.
+The pair with the best literature is not a pair we can measure.
+
+**And the pair we can measure is not two diseases.** Pleural effusion with atelectasis is the
+second-largest co-occurrence in ChestX-ray14 at 3,275 films, and the literature's account of it is
+that pleural fluid compresses adjacent lung and produces the collapse, so it is cause and
+consequence (Bankier et al. 2024, https://pmc.ncbi.nlm.nih.gov/articles/PMC10902601/). Our own boxes
+say the same thing differently: of the 78 VinDr films carrying both after the double-label drop, 68
+are separate at any floor and the median best overlap is 0.000, because the fluid and the collapsed
+lung sit in different anatomical compartments.
+
+**That exposes a hole in the separate-places regime, on the most populated pair we have.** Our
+definition requires each disease to leave the other's appearance unchanged. Here one caused the
+other. So the boxes call it separate places while the clinical account calls it interaction, and the
+measure cannot see the difference. This is the same shape as the exclusion-and-redistribution
+failure the report found in chronic emboli sparing lung from oedema: interaction whose result is
+spatial separation.
+
+**Three other pairs came back in the same run.** Atelectasis with consolidation has the highest
+median overlap of any pair measured, 0.465, but only 57 films carry both and 27 of those are one box
+labelled twice, leaving 30. Pleural effusion with consolidation is 190 films after the drop, 50 of
+them shared-region. Pleural effusion with infiltration is 222 films, 24 shared-region, median 0.000.
 
 **The decision this forces.** The pair the paper names has no films anywhere we hold, and the pairs
 with films are not it. Either the paper is explicitly about proxy pairs and says so in its title, or

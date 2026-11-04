@@ -24,6 +24,7 @@ The third expert x is built by arithmetic or by a phrase and added at sampling t
 | [real phrases](1-inference-only/3-real-phrases-as-the-third-expert.png) | seven phrases, including "dog and cat" itself | best phrase: 0 clear pairs, 4 to 5 seeds of two hybrids |
 | [x at rising weight](1-inference-only/4-x-at-rising-weight.png) | x scaled from 0.1 to 1 | nothing helps; high weights turn seeds into wallpaper |
 | [latent steering](1-inference-only/5-latent-steering.png) | nudge the starting noise so the two experts attend to different pixels | 0 of 7 at every step size |
+| [x subtracted in place](1-inference-only/1-arithmetic-vector-x.png) | x_pos = the joint prompt's own sequence with each animal's word subtracted only at the position holding that word; the start token, "and", the end token and all 72 pads left as the joint prompt has them | **0 clear pairs of 7**; but two separate animals on 7 of 8 seeds and no wallpaper on any, the best count in the table |
 
 **Why x_raw fails, the token matrix.** Each bar is one text token position of "a cat and a dog"
 (top panel one text encoder, bottom panel the other). Red is x_raw, blue is x_fix, grey is the joint
@@ -38,6 +39,32 @@ handed.
 The same comparison as a token matrix, with each prompt's token at each position beside the norms:
 
 ![token alignment matrix](1-inference-only/2b-token-alignment-matrix-x-raw-x-fix.png)
+
+**What subtracting in place does instead.** x_pos keeps the joint prompt's numbers everywhere except
+the two positions holding the animals' words, so position 0, the end token and all 72 pads match the
+joint prompt exactly rather than at 0.57. The green bars sit on the grey ones:
+
+![token norms with x_pos](1-inference-only/2c-token-norms-with-x-pos.png)
+
+**The whole series in one picture**, every third expert in the order tried, three seeds down, the same
+starting noise along each row. Left to right: a grey tile, then wallpaper or one hybrid, then two
+animals on some seeds, then two animals on seven of eight. No column after the first gives one whole
+cat beside one whole dog. At this size the picture shows the trajectory; identity was called from the
+full-resolution tiles, not from here.
+
+![how the third expert changed](1-inference-only/7-how-the-third-expert-changed.png)
+
+**What the series adds up to on two separate axes.** Plurality, meaning two animals rather than one
+fused one, is recoverable from a fixed text-space condition and improves steadily across the series.
+Identity, meaning each animal being one whole species, never moves.
+
+| Third expert | Tiles with two separate animals, of 8 | Tiles that went to wallpaper, texture or grey | Clear pairs, of 7 |
+|---|---|---|---|
+| none, plain PoE | 0 | 0 | 0 |
+| x_raw | 0 | 8 | 0 |
+| x_fix | 1 | 3 | 1 |
+| best phrase naming both animals | 5 | 0 | 0 |
+| x_pos | 7 | 0 | 0 |
 
 **Reference:** [where the joint prompt succeeds](1-inference-only/0-reference-where-the-joint-prompt-succeeds.png)
 (7 of 8 seeds), so the pass marks use only those seeds.

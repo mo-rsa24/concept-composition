@@ -64,7 +64,9 @@ MANIFEST = paths.MOUNT_ROOT / "outputs/inclusive_captions_pool_v2/manifest.json"
 # this repo sits, so a result here is comparable with the rest of the project.
 LORA_TARGETS = ["to_q", "to_k", "to_v", "to_out.0"]
 
-CHECKPOINT_STEPS = (0, 250, 500, 1000, 2000)
+# Three, not five. Each sheet costs four times what it did at 512 square, and the
+# checkpoints that carry the argument are the untrained one, one early and the end.
+CHECKPOINT_STEPS = (0, 500, 2000)
 
 
 def _disk_guard(root: Path) -> None:
@@ -125,7 +127,13 @@ def main() -> int:
     ap.add_argument("--resolution", type=int, default=1024)
     ap.add_argument("--rank", type=int, default=32)
     ap.add_argument("--alpha", type=int, default=32)
-    ap.add_argument("--lr", type=float, default=1e-4)
+    # 3e-5, measured over three rates on the same 550 photos at the same 250 steps. At 1e-4 the
+    # renders lose fur texture and photographic lighting and come back as smeared pastel shapes.
+    # At 1e-5 the texture returns but four of the eight sheet seeds still draw tiled pattern, a
+    # laptop or a picture frame, as the untrained model does at 512 square. At 3e-5 all eight
+    # seeds draw animals and the joint prompt draws a cat beside a dog on most of them, which is
+    # the model having learnt what these photographs look like rather than only how they are lit.
+    ap.add_argument("--lr", type=float, default=3e-5)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--photos", type=int, default=0,
                     help="train on only N photos, taken one per set in turn so every caption branch "

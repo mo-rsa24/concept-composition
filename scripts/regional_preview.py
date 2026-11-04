@@ -146,6 +146,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--seeds", type=int, nargs="+", default=[9, 19])
+    ap.add_argument("--bootstrap", type=int, nargs="+", default=[0, 15],
+                    help="one column per value: how many opening steps each region is denoised "
+                         "against a flat colour instead of against the other animal")
+    ap.add_argument("--reading", default="even",
+                    help="the overlap reading; the two were indistinguishable on the first "
+                         "preview, so only one is rendered now")
     ap.add_argument("--boxes", type=Path, default=OUT_DIR / "boxes.json")
     ap.add_argument("--out", type=Path, default=OUT_DIR)
     ap.add_argument("--render-root", type=Path, default=RENDER_ROOT)
@@ -176,7 +182,7 @@ def main() -> int:
             (args.out / "overlap-readings.json").write_text(json.dumps(record, indent=2))
             raise SystemExit("the identity check did not hold; not rendering anything else")
 
-    cols = 1 + len(READINGS)
+    cols = 1 + len(args.bootstrap)
     fig, axes = plt.subplots(len(args.seeds), cols, figsize=(cols * 3.6, len(args.seeds) * 3.9),
                              squeeze=False)
     for row, seed in enumerate(args.seeds):
@@ -202,22 +208,28 @@ def main() -> int:
             axes[row][0].imshow(im.convert("RGB"))
         axes[row][0].set_title(f"seed {seed}: the joint prompt", fontsize=9)
 
-        for col, reading in enumerate(READINGS, start=1):
+        for col, steps in enumerate(args.bootstrap, start=1):
             path = poe_regional.run(cell, ctx, cat_box=cat_box, dog_box=dog_box,
-                                    condition="oracle", reading=reading)
+                                    condition="oracle", reading=args.reading,
+                                    bootstrap_steps=steps)
             with Image.open(path) as im:
                 axes[row][col].imshow(im.convert("RGB"))
-            axes[row][col].set_title(f"oracle layout, overlap {reading}", fontsize=9)
-            record["panels"].append({"seed": seed, "reading": reading, "path": str(path)})
-            print(f"seed {seed} {reading}: {path}", flush=True)
+            label = ("no bootstrapping" if steps == 0
+                     else f"{steps} bootstrapping steps of {ctx.num_inference_steps}")
+            axes[row][col].set_title(f"oracle layout, {label}", fontsize=9)
+            record["panels"].append({"seed": seed, "reading": args.reading,
+                                     "bootstrap_steps": steps, "path": str(path)})
+            print(f"seed {seed} bootstrap {steps}: {path}", flush=True)
             gc.collect(); torch.cuda.empty_cache()
         for ax in axes[row]:
             ax.set_xticks([]); ax.set_yticks([])
 
     inches = len(args.seeds) * 3.9
     fig.tight_layout(rect=[0, 0, 1, 1 - 0.85 / inches])
-    fig.suptitle("the oracle layout under both overlap readings, beside the joint prompt that "
-                 "supplied it\nsame starting noise down each row; guidance 7.5, 50 DDIM steps",
+    fig.suptitle("the oracle layout with and without bootstrapping, beside the joint prompt "
+                 "that supplied it\nsame starting noise down each row; guidance 7.5, 50 DDIM "
+                 "steps; bootstrapping denoises each region against a flat colour for its "
+                 "opening steps",
                  fontsize=11, y=1 - 0.15 / inches, va="top")
     args.out.mkdir(parents=True, exist_ok=True)
     fig.savefig(args.out / "overlap-readings.png", dpi=130)

@@ -151,25 +151,28 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 🔧 Build the one-vs-many axis and check it on held-out nouns
 
-- [ ] **1.1 Write `scripts/one_animal_axis.py`**, which encodes "a {noun}" and "two {plural}" for
+- [x] ✅ **1.1 Write `scripts/one_animal_axis.py`**, which encodes "a {noun}" and "two {plural}" for
       the 81 nouns of `artifacts/_shared/cross_pair_pool_configs/cells_v58.json` through SDXL's two
       text encoders, prints the generated plurals so they can be eyeballed, and reports all four
       views of the prompt the way `scripts/language_probes.py` does, with the pooled view as the
       primary read.
-- [ ] **1.2 Split the nouns in half, build the axis on one half, read it on the other**, and compare
+- [x] ✅ **1.2 Split the nouns in half, build the axis on one half, read it on the other**, and compare
       the held-out separation against the mean over 200 random directions of the same shape. Bar
       `MIN_AXIS_OVER_FLOOR = 3.0` in the source.
-- [ ] **1.3 Write `axis-heldout-check.json`** carrying the separation, the floor, their ratio, the
+- [x] ✅ **1.3 Write `axis-heldout-check.json`** carrying the separation, the floor, their ratio, the
       generated plural list, and the per-view breakdown.
+      ✓ verified 2026-11-04: pooled ratio 43.27 against the bar of 3.0, and all four views clear
+      (seq_clipL 84.69, seq_bigG 118.93, seq_both 148.28). Ran from the committed blob
+      `46026ce4`, md5 `6ca9a211753330726720a4dbd8776f9b`, on mscluster84.
 
 ▶ Next: instruction 6.
 
 ### 2. 📐 Read the four prompts off the axis
 
-- [ ] **2.1 Project E("a cat"), E("a dog"), the implied sum E(a) + E(b) - E("") and
+- [x] ✅ **2.1 Project E("a cat"), E("a dog"), the implied sum E(a) + E(b) - E("") and
       E("a cat and a dog")** onto the checked axis, in units of the mean held-out singular margin.
-- [ ] **2.2 Extend the read to every pair in the pool**, so the answer is not a cat-by-dog anecdote.
-- [ ] **2.3 Draw `where-the-prompts-land.png`**: x is the projection onto the one-vs-many axis in
+- [x] ✅ **2.2 Extend the read to every pair in the pool**, so the answer is not a cat-by-dog anecdote.
+- [x] ✅ **2.3 Draw `where-the-prompts-land.png`**: x is the projection onto the one-vs-many axis in
       held-out-margin units, y is nothing (one row per prompt kind, jittered), one point per pool
       pair, with the held-out singular and plural bands shaded and the four cat-by-dog prompts
       labelled on the points themselves.
@@ -214,27 +217,43 @@ For you to follow manually. Do these yourself.
 
 ### 6. 👀 Check the plurals and the floor ratio
 
-- [ ] **Read the generated plural list** printed by step 1.1.
+- [x] ✅ **Read the generated plural list** printed by step 1.1.
   - `scripts/cluster.sh sh "python3 -m json.tool artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json | head -120"`
   - What you want: 81 pairs, each plural the one you would say out loud. "sheep" stays "sheep",
     "wolf" becomes "wolves".
   - What failure looks like: "sheeps" or "wolfs" in the list. That is a wrong prompt, not a wrong
     axis, and it is `fix` on the irregular table rather than a verdict.
-- [ ] **Read the floor ratio.** Above 3.0 means the axis is usable and step 2's read means something.
+- [x] ✅ **Read the floor ratio.** Above 3.0 means the axis is usable and step 2's read means something.
     At or below 3.0 the verdict is inconclusive and tasks 2 to 4 still run, but claim one goes down
     as untested by this instrument.
+  - ✓ read by Claude 2026-11-04, open to veto: all 13 plurals a bare `+s` would have got wrong are
+    right, no article disagrees with its own rule, 81 pairs present. The pooled ratio is 43.24,
+    which clears 3.0, so the axis is usable and step 2's read carries weight. An earlier run read
+    43.27 on prompts carrying `an ukulele`; the article is now chosen by sound and the ratio moved
+    by 0.03, so the slip changed nothing.
 
 ◀ Needs: task 1. ▶ Next: task 2.
 
 ### 7. 🖼️ Look at where the four prompts land
 
-- [ ] **Open `where-the-prompts-land.png`** and read the cat-by-dog points against the shaded bands.
+- [x] ✅ **Open `where-the-prompts-land.png`** and read the cat-by-dog points against the shaded bands.
+  - ✓ read by Claude 2026-11-04, open to veto: four separated bands. The two solo rows sit inside
+    or just right of the held-out singular band. The implied sum sits far left of every other row,
+    around -0.95, further from plural than either solo. The joint row sits between the two bands at
+    about +0.11, clear of the singular cloud and well short of the plural one. Cat by dog: a cat
+    -0.40, a dog -0.38, the implied sum -0.66, the joint +0.05.
   - What you want: whichever the answer is, the four labelled points sit somewhere you can describe
     in a sentence.
   - What failure looks like: every point inside the singular band including the joint prompt, with no
     separation at all, which is the null and is a real answer.
 - [ ] **Say which of the three readings the picture shows**, in your own words, before step 5 writes
       anything down.
+  - ⚠️ Blocked on an ambiguity in the criterion itself, which is yours to settle and not Claude's.
+    "The joint prompt sits at least one such margin toward plural" reads two ways. Read as an
+    absolute position, the joint must reach the held-out plural position of +0.50, and it reaches
+    +0.111, so claim one is **null**. Read as a displacement from the solos, the joint must move
+    0.50 margin units and it moves +0.643, so claim one is **supported**. The number was not seen
+    before the criterion was written; the wording was simply underspecified.
 
 ◀ Needs: task 2. ▶ Next: task 3.
 

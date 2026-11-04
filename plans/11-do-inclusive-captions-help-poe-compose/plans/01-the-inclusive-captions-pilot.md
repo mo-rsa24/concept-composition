@@ -280,7 +280,8 @@ before anything is built on top of it.
 
 - [x] ✅ **4.1** Render a sheet of eight fixed seeds down the rows and four columns across: "a photo
       of a dog", "a photo of a cat", "a photo of a cat and a dog", and the product of the cat and
-      dog conditions. 512 square at 25 steps. Log it to W&B as one image per checkpoint.
+      dog conditions. 1,024 square at 25 steps, which is the resolution SDXL was trained at and
+      the one piece 6's composition calls are made on. Log it to W&B as one image per checkpoint.
   - Output: `poe_repair/experiments/inclusive_captions/sheets.py`
   - The product column is rendered at step 0 as well, before any training, because combining two
     conditions is a sampling-time operation and needs no trained weights.
@@ -294,9 +295,13 @@ show what they claim to.
 
 ◀ **Needs: [instruction 10](#10--look-at-the-step-0-sheet)** done.
 
-- [x] ✅ **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
-      and sheets at 0, 250, 500, 1,000 and 2,000.
+- [ ] **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
+      and sheets at 0, 500 and 2,000, at a learning rate of 1e-5.
   - W&B: `prime_lab/poe-repair-inclusive-captions`, one run, grouped with B.
+  - The learning rate is measured, not assumed. At 1e-4 the renders lose fur texture and
+    photographic lighting by step 250 and come back as smeared pastel shapes; at 1e-5 on the same
+    550 photos and the same 250 steps they do not.
+  - Three checkpoints rather than five, because each sheet costs four times what it did at 512.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
     one job per user. `scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
     refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
@@ -316,7 +321,7 @@ while the runs train.
 ◀ **Needs: [instruction 11](#11--watch-the-sheets-fill-in-wb)** done and both runs at step 2,000.
 
 - [ ] **6.1** Render 128 product seeds per arm at 1,024 square, 50 steps. Composition calls are
-      made on these, never on the 512-square watching sheets.
+      made on these, at the same resolution the watching sheet now uses.
 - [ ] **6.2** Score each render in three categories: one cat and one dog, a hybrid, or a single
       animal. GroundingDINO counts the animals and the crop classifier names them.
   - Report the count the classifier called uncertain, since it has never been tested on a frame

@@ -226,10 +226,12 @@ def main() -> int:
         ax.set_ylabel("norm at this position")
         ax.set_title(title, loc="left", fontsize=10)
     axes[0].legend(loc="upper right", fontsize=8)
-    labels = [t.replace("</w>", "") for t in tok[args.joint][:pad_start + 1]] + [""] * (77 - pad_start - 1)
+    short = {"<|startoftext|>": "<start>", "<|endoftext|>": "<end>"}
+    labels = [short.get(t, t.replace("</w>", "")) for t in tok[args.joint][:pad_start]] \
+        + [""] * (77 - pad_start)
     axes[1].set_xticks(pos)
-    axes[1].set_xticklabels([f"{i}\n{l}" if i <= pad_start else (str(i) if i % 10 == 0 else "")
-                             for i, l in enumerate(labels)], fontsize=6)
+    axes[1].set_xticklabels([f"{i}\n{l}" if i < pad_start else (str(i) if i % 10 == 0 else "")
+                             for i, l in enumerate(labels)], fontsize=7, rotation=45, ha="right")
     axes[1].set_xlabel(f'token position in "{args.joint}" (0 to 76)')
     fig.suptitle(f'Where the "and" vector\'s size sits, one bar per token position: '
                  f'x_raw = E(joint) - E(a) - E(b), x_fix = x_raw + E(""), '

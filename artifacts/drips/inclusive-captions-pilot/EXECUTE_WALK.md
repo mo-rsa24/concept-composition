@@ -190,3 +190,22 @@ The effect the design predicts is larger on this pool than on the first one.
 `inclusive-captions-run-A`, whose history was already at step 516 from the killed attempt, and
 every new step logged was refused with "steps must be monotonically increasing". Each attempt now
 takes a tag that names its checkpoints, its sheets and its W&B run together.
+
+**The rebuilt pool made the renders worse, not better, and that rules the pool out as the whole
+cause.** Run A at step 250 on the 550-photo pool draws washed-out, smeared, cartoon-like animals
+with coloured fringing, where the same step on the cluttered first pool still drew photographs.
+Two things could do that and they are separable: the learning rate of 1e-4 at rank 32 with
+batch size 1 may simply be too strong for 250 steps, or the half of the pool that SD 3.5 drew is
+teaching SDXL to look generated. The first is tested by two 250-step runs at 1e-5 and 3e-5 on the
+same pool, which cost twenty minutes each against the three hours a full pair costs.
+
+**The learning rate was the cause, not the generated half of the pool.** Same 550 photos, same 250
+steps, 1e-5 instead of 1e-4: the animals come back with fur texture and photographic lighting on
+seeds 0 to 3, where 1e-4 gave smeared pastel shapes. So training on SD 3.5 output is not what
+flattened the renders, and the pool stands.
+
+**Two separate kinds of strangeness in the watching sheet, and only one is the model.** Seeds 4
+to 7 render as flat illustration, tiled pattern, a laptop and a picture frame at every checkpoint
+including step 0, before any training. That is SDXL being asked for 512 square when it was
+trained at 1024. The washed-out look on seeds 0 to 3 is the adapter. Judging anything off seeds 4
+to 7 reads the sheet's resolution as a result.
