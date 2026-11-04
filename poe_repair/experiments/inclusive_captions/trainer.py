@@ -125,8 +125,12 @@ def main() -> int:
     ap.add_argument("--run", choices=cap.RUNS, required=True)
     ap.add_argument("--steps", type=int, default=2000)
     ap.add_argument("--resolution", type=int, default=1024)
-    ap.add_argument("--rank", type=int, default=32)
-    ap.add_argument("--alpha", type=int, default=32)
+    # Rank 16, with alpha matched to it so the adapter's scale stays 1. Halving the rank saves
+    # 0.37 GB of the run's 29.8, because almost all of that is activations at 1,024 square rather
+    # than adapter state, so this is a choice about the size of the correction being learnt and
+    # not a way to fit on a smaller card.
+    ap.add_argument("--rank", type=int, default=16)
+    ap.add_argument("--alpha", type=int, default=16)
     # 3e-5, measured over three rates on the same 550 photos at the same 250 steps. At 1e-4 the
     # renders lose fur texture and photographic lighting and come back as smeared pastel shapes.
     # At 1e-5 the texture returns but four of the eight sheet seeds still draw tiled pattern, a

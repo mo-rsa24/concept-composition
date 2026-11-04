@@ -238,3 +238,13 @@ which drew one cat beside one dog on all eight seeds before training, now draws 
 1 and 6 and a third animal on seeds 2 and 3. The control is learning that these photographs hold
 two animals without holding which two, which is a result about the pool worth watching at step
 2,000 and worth comparing against run B.
+
+**Rank 16, and the memory it saves is 0.46 GB measured.** The pair restarted at rank 16 with alpha
+matched to it, so the adapter's scale stays 1. The trainer reports 23,224,320 trainable parameters
+against 46,448,640, and the process holds 29.38 GB against 29.84. Almost all of a 1,024-square run
+is activations, which the rank does not touch, so halving it is a choice about the size of the
+correction being learnt and never a way onto a smaller card. `bigbatch`'s 24 GB RTX 3090s remain
+out of reach at either rank, and it had no idle node in any case.
+
+**Both arms now launch from `scripts/inclusive_captions_both.sh`**, a file rather than an inline
+string, after the inline form lost a newline and dropped run B.
