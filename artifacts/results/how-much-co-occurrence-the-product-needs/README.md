@@ -43,6 +43,9 @@ about three orders of magnitude in that weight.
 | `competing-captions.png` | eight draws per sampler for both competing-caption forms and for the hand-weighted condition re-run at each form's implied weight, twelve rows with counts |
 | `../../notes/what-poe-loses-when-it-composes/toy-sampler-cooccurrence-sweep.json` | the five category counts per weight per sampler, the MALA acceptance rate per weight, and the closed-form category shares over the 400-point grid |
 | `toy-caption-competition.json` | the same counts for the four competing-caption conditions, both forms' implied pair weights, and each form's implied weight as a function of its softmax temperature |
+| `what-the-caption-model-draws.png` | one VAE plus one caption-conditional latent model trained per dial setting (0, 0.1, 0.3, 0.6, 1: how often a both-shapes picture is also captioned with each single name), four rows per setting (each single caption, the two single captions multiplied, the joint caption), eight draws each titled with the colour-blob scorer's call and the 300-draw counts beside them |
+| `toy-caption-dial-ldm.json` | those counts from both scorers, each setting's VAE reconstruction error, and the colour-blob scorer's hit rate on that VAE's reconstructions of every known picture |
+| `toy-trained-experts.json` | two separately trained score networks combined by summed scores, crisp pairs and single-shape purity out of 300 at six shared-picture fractions |
 
 ## The sweep, weight by weight
 
@@ -169,6 +172,44 @@ why that condition produces single objects.
 **What it means for a real model.** A text-conditioned "a cat" expert assigns non-zero probability to
 pictures of dogs. The question this dial poses is whether that quantity is above or below the toy's
 threshold, which is a measurement on the real model with its reading written in advance.
+
+## Trained models
+
+**Two separately trained networks never compose.** Each is a small network trained on its own shapes,
+with a shared fraction of both-shapes pictures in both training sets, combined by summing their
+scores and drawn by reverse diffusion. Crisp pairs are 0 of 300 at every fraction from 0 to 0.5, and
+the networks blur into each other first: single-shape purity falls from 300 of 300 to 151 of 300 at a
+fraction of 0.5. Numbers in `toy-trained-experts.json`.
+
+**One caption-conditional latent model, built the way SDXL is, composes partly once pair pictures
+carry the single captions.** A VAE compresses each 16 × 32 picture to 128 numbers, one network
+denoises those under a caption, and the two single captions are combined as summed
+classifier-free guidance at 3.0 and drawn by reverse diffusion. Counts are the colour-blob scorer's
+"red and blue apart" out of 300, for the two single captions multiplied:
+
+| Dial (pair pictures also under each single name) | 0 | 0.1 | 0.3 | 0.6 | 1 |
+|---|---|---|---|---|---|
+| red circle and blue square apart | 0 | 118 | 114 | 55 | 174 |
+| purple or overlaid | 22 | 146 | 186 | 230 | 122 |
+| nothing readable (a faint smear) | 278 | 36 | 0 | 15 | 4 |
+| "a red circle" alone draws only red | 300 | 300 | 299 | 285 | 250 |
+| "a blue square" alone draws only blue | 300 | 300 | 298 | 295 | 234 |
+| the joint caption draws the pair apart | 299 | 300 | 300 | 300 | 300 |
+
+At dial 0 the product draws a faint grey-blue smear over all three positions, the purple-hybrid
+failure seen on SDXL. Any overlap at all moves it up: at 0.1, 118 of 300 draws are a crisp circle
+beside a crisp square, and most of the rest are two purple blobs at the two pair positions, two
+things in frame with their colours mixed. The rate does not climb with the dial between 0.1 and 0.6,
+and at 1 the square caption itself draws the pair on 66 of 300, so its purity fails the 240 test.
+
+**The result falls between the bar's outcomes.** Support needed 150 of 300 apart while both
+captions still pass 240 of 300; the best such setting reaches 118. Null needed under 30 everywhere
+those captions pass; three settings exceed it. The written inconclusive case was a rise only where
+purity had already fallen, and this rise happens where purity holds, so none of the three describes
+it. The script prints "inconclusive" for anything between support and null. Every setting's VAE reconstructs
+at a mean squared error of 0.010 to 0.0103 and the scorer reads that VAE's reconstructions of every
+known picture right 100 times in 100. The template library's counts are kept beside the scorer's in
+the JSON and are not used, because it calls the joint caption's crisp pairs "two faint objects".
 
 ## What this cannot claim
 
