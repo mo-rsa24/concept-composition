@@ -193,8 +193,8 @@ Attack the four ways. What we want is the case they cannot describe.
 - A documented pair of chest diseases that fits none of the four.
 - A case where the four are the wrong question, because the two diseases interact through something
   other than the image (treatment, timing, the patient's immune state).
-- Any published scheme that divides the combined case differently, with its divisions and its source,
-  whether from radiology, pathology, or machine learning on chest X-rays.
+- Any published scheme that divides the combined case differently, with its divisions and its
+  source, whether from radiology, pathology, or machine learning on chest X-rays.
 - Whether the machine-learning literature on multi-label chest X-ray classification has its own
   account of why co-occurring findings are hard, with the papers and any measured drop in accuracy
   when two labels appear together rather than alone.
