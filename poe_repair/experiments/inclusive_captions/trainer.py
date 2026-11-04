@@ -58,7 +58,7 @@ from poe_repair.config import DEFAULT_MODEL_ID
 from poe_repair.experiments.inclusive_captions import captions as cap
 
 FAMILY = "outputs/inclusive_captions"
-MANIFEST = paths.MOUNT_ROOT / "outputs/inclusive_captions_pool/manifest.json"
+MANIFEST = paths.MOUNT_ROOT / "outputs/inclusive_captions_pool_v2/manifest.json"
 
 # The LoRA sits on the UNet's attention projections only, which is where every other adapter in
 # this repo sits, so a result here is comparable with the rest of the project.
@@ -141,6 +141,7 @@ def main() -> int:
     ap.add_argument("--wandb-id", default=None,
                     help="a fixed run id, so the sheet renderer logs into the same run")
     ap.add_argument("--no-wandb", action="store_true")
+    ap.add_argument("--manifest", default=str(MANIFEST))
     ap.add_argument("--out-dir", default=None)
     args = ap.parse_args()
 
@@ -148,9 +149,10 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     _disk_guard(out_dir)
 
-    manifest = json.loads(MANIFEST.read_text()) if MANIFEST.exists() else None
-    if manifest is None:
-        raise SystemExit(f"no photo manifest at {MANIFEST}; run scripts/census/inclusive_captions_pool.py")
+    manifest_path = Path(args.manifest)
+    if not manifest_path.is_file():
+        raise SystemExit(f"no photo manifest at {manifest_path}; run scripts/census/inclusive_captions_pool_v2.py")
+    manifest = json.loads(manifest_path.read_text())
     photos = cap.build_photos(args.run, manifest=manifest, seed=args.seed)
     if args.photos:
         # Round-robin across the sets rather than the first N, because the first N are all
