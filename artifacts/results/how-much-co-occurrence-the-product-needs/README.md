@@ -46,6 +46,8 @@ about three orders of magnitude in that weight.
 | `what-the-caption-model-draws.png` | one VAE plus one caption-conditional latent model trained per dial setting (0, 0.1, 0.3, 0.6, 1: how often a both-shapes picture is also captioned with each single name), four rows per setting (each single caption, the two single captions multiplied, the joint caption), eight draws each titled with the colour-blob scorer's call and the 300-draw counts beside them |
 | `toy-caption-dial-ldm.json` | those counts from both scorers, each setting's VAE reconstruction error, and the colour-blob scorer's hit rate on that VAE's reconstructions of every known picture |
 | `toy-trained-experts.json` | two separately trained score networks combined by summed scores, crisp pairs and single-shape purity out of 300 at six shared-picture fractions |
+| `summed-scores-against-the-true-noised-product.png` | left: the share of the mixture on the pair image paired with itself (y, 0 to 1) against the reverse-diffusion step (x, 200 at pure noise to 0 at the clean picture), one blue curve per pair weight for the summed noised expert scores and one green line for the true noised product; right: eight reverse-diffusion draws per pair weight with each score, and the crisp-pair count of 300 |
+| `toy-noised-product.json` | those shares by step and the five category counts for both scores at pair weights 0.001, 0.01, 0.1 and 0.3 |
 | `caption-model-across-guidance.png` | the two single captions multiplied in the caption model, dial setting down (0 to 1) and guidance strength across (1, 2, 3, 5, 7), four draws per cell titled with the colour-blob scorer's call, the cell's crisp-pair count out of 300 and the lower of the two single captions' purity counts |
 | `toy-caption-dial-ldm-guidance.json` | those counts for every caption at every dial and guidance strength, one training per dial shared across strengths |
 
@@ -174,6 +176,20 @@ why that condition produces single objects.
 **What it means for a real model.** A text-conditioned "a cat" expert assigns non-zero probability to
 pictures of dogs. The question this dial poses is whether that quantity is above or below the toy's
 threshold, which is a measurement on the real model with its reading written in advance.
+
+## Where the samplers lose the pair
+
+**The loss is in adding noised scores, and reverse diffusion itself is fine.** On condition D the
+product at step 0 is a Gaussian mixture over pairings, so the true score of the noised product has a
+closed form at every step. Reverse diffusion with that true score draws 300 crisp pairs of 300 at pair
+weights 0.001, 0.01, 0.1 and 0.3. The same sampler with the two experts' noised scores added draws 0,
+0, 15 and 109 of 300.
+
+The sum is the score of the product of the two noised experts, whose pairing weights use the noised
+distance. At pure noise that distance penalty vanishes, so the pair image's self-pairing holds w² of
+the mixture (0.0001 at w = 0.01) where the true noised product holds 1.000 at every step. The summed
+score reaches 1.000 only after step 95 to 160, depending on w, by which time the draw has already
+committed to one position and lands on a single purple hybrid there.
 
 ## Trained models
 
