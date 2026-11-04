@@ -296,3 +296,11 @@ full-size render measured exactly 128 of 255. The map is the same affine squeeze
 a composition call made across sheets still stands, and any read about contrast or washing does
 not. `sheets.py` and `product_renders.py` now clamp to [0, 1] and nothing else. Run A's 128 scoring
 renders were 52 seeds in when this was found and were discarded rather than kept.
+
+**The before-and-after sheet, `compare_sheet.py`.** Four columns from one shared starting noise:
+the cat condition on plain SDXL, the cat condition trained, the product on plain SDXL, the product
+trained. It answers what the watching sheet cannot, which is what the adapter changed, and it
+keeps the product beside the condition it was built from. The two halves are rendered by separate
+processes and the plain one never loads an adapter, because turning a PEFT adapter off inside a
+live process has silently failed here before. The plain half is seed-shared across both arms and
+every checkpoint, so it is rendered once.
