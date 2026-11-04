@@ -255,3 +255,21 @@ the same way at both: it drew one cat beside one dog on all eight seeds before t
 draws two cats on three seeds at rank 16 against two seeds at rank 32. Halving the correction the
 adapter can carry changed neither the failure nor the drift, so the drift is about what 550
 domestic animal photographs teach and not about how much capacity there is to learn it.
+
+**Run A at step 2,000: the joint prompt recovers, the product does not.** Column 3 draws one cat
+beside one dog on all eight seeds, so the two-cats drift seen at step 500 is a mid-training phase
+and not where the control lands. Column 4 puts one animal in frame on all eight seeds, three of
+them reading as a fused head rather than either animal. Zero of eight compose at the end of
+training, against zero of eight at step 500 and zero of eight before it. All four columns also sit
+at lower contrast than the untrained sheet, the single-animal columns most of all.
+
+**Run B's step-0 sheet was lost to a full card and is not worth re-rendering.** Another session's
+`experiments/attention_bleed.py` holds 13 GB on the same device, which left the launcher's own
+render 18 GB where it needs about 10 on top of the trainer's 29.4. Step 0 is the base model with a
+zero adapter, so run A's step-0 sheet already shows it. Run B's step-500 and step-2,000 sheets are
+rendered on the node's other device instead, out of the trainer's way.
+
+**The render loop marks a checkpoint drawn whether or not the render succeeded.** A sheet lost to a
+transient failure never comes back. Marking on exit status, and retrying on the next pass, is the
+repair when this script is next idle; it cannot be edited while it runs, because bash reads a
+running script by byte offset.
