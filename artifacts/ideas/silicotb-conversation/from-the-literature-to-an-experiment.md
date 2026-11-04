@@ -54,6 +54,53 @@ scorecard built on fewer than about a hundred films per class cannot separate tw
 differ by less than 0.1, and the cell counts decide what the experiment can conclude before anything
 is trained.
 
+## What route 05's report settled
+
+The six files are in [the return folder](routes/05-return/). Sixteen pairs, sixty-four regime
+verdicts, twenty-five candidate figures, twenty of them with a verified reuse licence.
+
+**The merged regime has no verified example on any modality.** Every one of the seven candidates is
+the report's own inference from a caption that describes an altered appearance without establishing
+that neither disease can be named. No chest radiograph caption establishes it at all. So the regime
+our work treats as the interesting case may not be a documented phenomenon.
+
+**The separate-places regime is almost never established either**, because our own definition
+requires each disease to look exactly as it would alone, and no paper tests that counterfactual.
+Two of sixteen pairs reach "documented", both on CT.
+
+**There is a fifth state, and our four cannot hold it.** Both diseases confirmed, neither visible on
+the film. Yoo et al. 2011 report four of fifty-four HIV-positive patients with normal radiographs
+carrying two simultaneous respiratory infections, tuberculosis with cryptococcosis in two and
+tuberculosis with aspergillosis in two (https://pmc.ncbi.nlm.nih.gov/articles/PMC3126910/). All four
+of our regimes require at least one disease to be visible.
+
+**There is also a sixth failure, of a different kind: one disease changes where the other can
+appear.** Jackson et al. 1986 report lung segments occluded by chronic emboli being spared from
+pulmonary oedema (https://pubmed.ncbi.nlm.nih.gov/3948563/). The two end up in separate places
+because they interacted, which is exactly what the separate-places regime says does not happen.
+
+**HIV with tuberculosis is not a disease pair in our sense.** HIV has no lesion on a chest
+radiograph, so the object is one disease plus a systemic modifier. The modifier is strong: normal
+radiographs in culture-confirmed tuberculosis occurred in 52 of 323 patients with CD4 at or below
+150 cells per microlitre, 19 of 525 above 150, and 26 of 1,085 HIV-negative patients (Chamie et al.
+2010, https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/). A second study did not reproduce the
+normal-film contrast at its own CD4 split, p = 0.44.
+
+**Nobody has published the four regimes, or three of them.** The closest is the official statement on
+combined pulmonary fibrosis and emphysema, which distinguishes separated from intermingled
+distributions, matching our first two without their readability requirement (Cottin et al. 2022,
+Table 10, https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/). No textbook chapter on how to read a
+film carrying two diseases exists; radiology teaching is organised one disease at a time.
+
+**The best-evidenced pair is not silicosis with tuberculosis.** Combined pulmonary fibrosis and
+emphysema has a named syndrome with an official statement, serial CT showing isolated emphysema
+becoming admixed with fibrosis over two years, both arrangements present in one examination, and a
+combination-specific lesion with a real comparison behind it: thick-walled cystic lesions in 16 of
+22 patients with the combination, 0 of 8 with fibrosis alone, 0 of 17 with emphysema alone (Inomata
+et al. 2014, https://link.springer.com/article/10.1186/1471-2466-14-104). That 16 against 0 and 0 is
+the only published number in the whole report that measures a pair doing something neither disease
+does alone.
+
 ## Decision 1: what the paper claims
 
 **The question.** Is the four-regime account a general property of chest disease pairs, a property
@@ -144,14 +191,23 @@ hidden regime can be scored at all.
 
 | Pair | Films we hold | What it is for |
 |---|---|---|
-| aortic enlargement + cardiomegaly | 1,972, 98% separate places | the control: two findings that do not interact, so a product over a partition should be enough |
-| lung opacity + pulmonary fibrosis | 489 after the double-label drop, 201 same region | the shared-region case, and the only honest one we found |
-| silicosis + tuberculosis | none in any dataset we hold | the pair the work is about, reachable only by argument from a proxy |
-| HIV + tuberculosis | none | the hidden regime, if the report confirms that advanced HIV changes tuberculosis from an upper-zone cavitating disease into something that shows little |
+| aortic enlargement + cardiomegaly | 1,972 in VinDr, 98% separate places | the control: two findings that do not interact, so a product over a partition should be enough |
+| lung opacity + pulmonary fibrosis | 489 in VinDr after the double-label drop, 201 same region | the shared-region case, and the only honest one our own measurement found |
+| pulmonary fibrosis + emphysema | none in VinDr; both are labels in NIH ChestX-ray14, count not yet taken | the pair with the published evidence, including the one measured combination-specific lesion |
+| pleural effusion + atelectasis | both are labels in VinDr and in ChestX-ray14 | the pair whose shared region is documented and whose hidden case is prose-supported |
+| silicosis + tuberculosis | none in any dataset we hold | the pair the work names, reachable only by argument from a proxy |
 
-**The decision this forces.** The pair the paper is about has no films, and the pairs with films are
-not it. Either the paper is explicitly about proxy pairs and says so in its title, or a tuberculosis
-dataset joins the work and the pairing is constructed rather than found.
+**The first count to take before this decision closes.** How many films in NIH ChestX-ray14 carry
+both Emphysema and Fibrosis, and how many carry both Effusion and Atelectasis. Both label pairs
+exist in that dataset's fourteen classes, and the counts decide whether the best-evidenced pair in
+the literature is also a pair we can train on. Neither count has been taken.
+
+**The decision this forces.** The pair the paper names has no films anywhere we hold, and the pairs
+with films are not it. Either the paper is explicitly about proxy pairs and says so in its title, or
+a tuberculosis dataset joins the work and the pairing is constructed rather than found. The report
+adds a third way out: make combined pulmonary fibrosis and emphysema the pair, since it is the one
+with both published evidence and a plausible dataset, and carry silicotuberculosis as the motivating
+case rather than the measured one.
 
 **What this produces.** The chosen pairs with their film counts, and for each one the sentence
 carrying it to silicotuberculosis.
