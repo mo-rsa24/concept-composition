@@ -222,11 +222,15 @@ fixed and cannot be shaped by anything the build reveals.
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/`.
   - A different model family from the one being fine-tuned, so the co-occurrence the pool adds is
     not SDXL's own belief fed back into it.
-- [ ] **2.5** Validate the vision-language judge before it screens anything: 48 generated
+- [x] ✅ **2.5** Validate the vision-language judge before it screens anything: 48 generated
       cat-and-dog images called by eye first, then by the judge, and the two compared.
   - Output: `scripts/census/inclusive_captions_judge.py`, the eye's calls in
     `artifacts/drips/inclusive-captions-pilot/checks/eye-labels-first-48.json`.
   - The bar is agreement on 44 of the 48. Below it the judge does not screen the pool.
+  - ✅ PASSED at 45 of 48, on the third of four wordings measured against the same labels. The
+    other three reached 20, 44 and 21. All three of the winner's disagreements keep a marginal
+    picture a person rejected and none reject one a person kept. Written up in
+    [the judge's validation](../../../artifacts/drips/inclusive-captions-pilot/checks/judge-validation.md).
 - [ ] **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
   - Output: `scripts/census/inclusive_captions_pool_v2.py`, the manifest under
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool_v2/`.
