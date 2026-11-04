@@ -112,9 +112,23 @@ def main() -> int:
         images = images[:args.limit]
     print(f"{len(images)} images to judge in {directory}", flush=True)
 
-    judge = Judge()
+    # One row written per image, as it is judged, because a node going down mid-pass should
+    # cost the images it had left rather than every image it had already looked at.
+    target = Path(args.out) if args.out else directory / "judged.json"
+    partial = target.with_suffix(".jsonl")
+    done = {}
+    if partial.exists():
+        for line in partial.read_text().splitlines():
+            if line.strip():
+                row = json.loads(line)
+                done[row["file"]] = row
+        print(f"{len(done)} already judged, resuming", flush=True)
+    images = [p for p in images if str(p) not in done]
+
+    judge = Judge() if images else None
     wanted = WANTED_COUNT[args.kind]
-    rows, kept = [], 0
+    rows, kept = list(done.values()), sum(r["verdict"] == "keep" for r in done.values())
+    log = partial.open("a")
     for i, path in enumerate(images):
         with Image.open(path) as im:
             rgb = im.convert("RGB")
@@ -124,11 +138,14 @@ def main() -> int:
                                                  for k in ("pair", "clean", "distinct"))
                    else "reject")
         kept += verdict == "keep"
-        rows.append({"file": str(path), "n_animals": n, "answers": answers, "verdict": verdict})
+        row = {"file": str(path), "n_animals": n, "answers": answers, "verdict": verdict}
+        rows.append(row)
+        log.write(json.dumps(row) + "\n")
+        log.flush()
         if (i + 1) % 10 == 0:
             print(f"{i + 1} judged, {kept} kept", flush=True)
 
-    target = Path(args.out) if args.out else directory / "judged.json"
+    log.close()
     target.write_text(json.dumps(
         {"kind": args.kind, "model": MODEL_ID, "n": len(rows), "kept": kept, "rows": rows},
         indent=2))
