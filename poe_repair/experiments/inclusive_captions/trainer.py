@@ -138,6 +138,8 @@ def main() -> int:
                     action="store_false")
     ap.add_argument("--wandb-project", default="poe-repair-inclusive-captions")
     ap.add_argument("--wandb-entity", default="prime_lab")
+    ap.add_argument("--wandb-id", default=None,
+                    help="a fixed run id, so the sheet renderer logs into the same run")
     ap.add_argument("--no-wandb", action="store_true")
     ap.add_argument("--out-dir", default=None)
     args = ap.parse_args()
@@ -195,6 +197,7 @@ def main() -> int:
     if not args.no_wandb:
         import wandb
         wandb_run = wandb.init(project=args.wandb_project, entity=args.wandb_entity,
+                               id=args.wandb_id, resume="allow",
                                name=f"run-{args.run}", config=vars(args))
 
     loss_log = (out_dir / "loss.jsonl").open("a")
