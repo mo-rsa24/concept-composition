@@ -1,0 +1,14 @@
+flowchart LR
+  cell1(["1 · Two questions, no sampler"])
+  cell2["2 · The grid and four helpers"]
+  cell3(["3 · The loss has no label in it"])
+  cell1 --> cell2
+  cell2 --> cell3
+  ideal_expert[["ideal_expert(data, sigma)"]]
+  cell2 -. defines .-> ideal_expert
+  density[["density(logp)"]]
+  cell2 -. defines .-> density
+  mass[["mass(p, region)"]]
+  cell2 -. defines .-> mass
+  show[["show(ax, p, title, pts, region)"]]
+  cell2 -. defines .-> show

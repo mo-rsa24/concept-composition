@@ -1,0 +1,418 @@
+{
+  "title": "The inclusive-captions pilot: high-level design",
+  "page_title": "The Inclusive-Captions Pilot",
+  "subtitle": "Two SDXL LoRAs on the same 491 COCO photos, differing in one cell of a caption table, read on 128 shared seeds. Drawn 2026-11-04 from the plan and the code.",
+  "lede": "Follow the spine left to right. Everything up to the caption rule is shared, and the two training lanes are the same part run twice on the same photographs. The only thing that differs is the caption rule each lane is handed, which is written on the two arrows into them. The lanes meet again at one scoring pass, which is what makes the two compose rates comparable.",
+  "version_line": "Version 2, 2026-11-04: 12 boxes, 15 arrows, 9 pictures on 8 boxes. Read from the pilot plan, the walk map and the code.",
+  "look": "explainer",
+  "col_w": 460,
+  "row_h": 238,
+  "nodes": [
+    {
+      "id": "coco",
+      "kind": "files",
+      "eyebrow": "photo source",
+      "label": "COCO train2017",
+      "sub": "/datasets/mmolefe/coco2017:\nimages, instances, captions",
+      "col": 0,
+      "row": 1.6,
+      "output": [
+        {
+          "image": "page-images/both-sheet-00.jpg",
+          "caption": "48 of the real COCO train2017 photographs that hold both a cat and a dog, which is the rarest of the four sets the pilot draws from.",
+          "alt": "A grid of 48 domestic photographs of cats and dogs together, each tile titled with a number and the fraction of the longer side each animal's box covers.",
+          "kind": "table",
+          "title": "Both-animal photos, page 1 of 3"
+        }
+      ]
+    },
+    {
+      "id": "pool",
+      "kind": "worker",
+      "label": "Pool builder",
+      "sub": "inclusive_captions_pool.py:\nfilter by box size, caption, count",
+      "col": 1,
+      "row": 1.6,
+      "output": [
+        {
+          "image": "page-images/both-sheet-00.jpg",
+          "caption": "Page 1 of the contact sheets the pool script writes. Each title carries the box fraction the 0.25 size floor is tested against, so the filter's numbers sit on the photographs they came from.",
+          "alt": "A grid of 48 cat-and-dog photographs, each labelled with a cat box fraction, a dog box fraction and the overlap between the two boxes.",
+          "kind": "table",
+          "title": "Both-animal photos, page 1 of 3"
+        },
+        {
+          "image": "page-images/both-sheet-02.jpg",
+          "caption": "The tail of the same run, tiles 96 to 130, where the 131 that clear the size filter end.",
+          "alt": "A grid of 35 cat-and-dog photographs numbered 96 to 130, each with its two box fractions and their overlap, including a pair of printed mugs and a van livery.",
+          "kind": "table",
+          "title": "Both-animal photos, page 3 of 3"
+        }
+      ]
+    },
+    {
+      "id": "audit",
+      "kind": "worker",
+      "eyebrow": "worker + a person",
+      "label": "Photo audit, by eye",
+      "sub": "audit_both_animal_photos.py:\n9 pages, 16 tiles at 448 px",
+      "col": 1,
+      "row": 3.35,
+      "input": [
+        {
+          "image": "page-images/audit-page-00.jpg",
+          "caption": "Page 1 of the nine pages the judging was actually done on, 16 tiles at 448 pixels. At this size a drawn dog and a live one can be told apart; on the 198-pixel contact sheet they cannot.",
+          "alt": "Four rows of four cat-and-dog photographs at 448 pixels, each titled with its tile number and its two box fractions.",
+          "kind": "table",
+          "title": "Audit page 1 of 9, at 448 pixels"
+        },
+        {
+          "image": "page-images/both-sheet-00.jpg",
+          "caption": "The numbered tiles the 40 rejections key on. Tile 2 is a real cat beside a dog drawn in an open book, which is one of the ten struck off for being a depiction rather than an animal.",
+          "alt": "A grid of 48 numbered photographs of cats and dogs; some tiles hold a drawing, a figurine or only one live animal.",
+          "kind": "table",
+          "title": "Both-animal photos, page 1 of 3"
+        }
+      ]
+    },
+    {
+      "id": "manifest",
+      "kind": "store",
+      "label": "Photo manifest",
+      "sub": "manifest.json: 200 cat-only, 200 dog-only,\n91 both-animal, 91 filler",
+      "col": 2,
+      "row": 1.6,
+      "example": [
+        {
+          "image": "page-images/both-sheet-00.jpg",
+          "caption": "What one row of the manifest is: a real photograph with the box measurements the 0.25 size filter was applied to. These 48 are the first of the 131 the both-animal set is drawn from.",
+          "alt": "A grid of 48 domestic photographs holding a cat and a dog, each with a tile number, a cat box fraction, a dog box fraction and the overlap between the two boxes.",
+          "kind": "table",
+          "title": "Both-animal photos, page 1 of 3"
+        },
+        {
+          "image": "page-images/both-sheet-02.jpg",
+          "caption": "Tiles 96 to 130, the last of the 131, on the same labels.",
+          "alt": "A grid of 35 photographs holding a cat and a dog with tile numbers 96 to 130, each labelled with both box fractions and their overlap.",
+          "kind": "table",
+          "title": "Both-animal photos, page 3 of 3"
+        }
+      ]
+    },
+    {
+      "id": "captions",
+      "kind": "service",
+      "eyebrow": "the one cell that differs",
+      "label": "Caption rule, per draw",
+      "sub": "captions.py: blank 10% on every photo,\nin both runs",
+      "col": 3,
+      "row": 1.6,
+      "output": [
+        {
+          "image": "page-images/training-photo-and-its-captions.jpg",
+          "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+          "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+          "kind": "table",
+          "title": "One photo, and the caption each run draws"
+        }
+      ]
+    },
+    {
+      "id": "runa",
+      "kind": "worker",
+      "eyebrow": "trainer",
+      "label": "Run A: SDXL LoRA",
+      "sub": "trainer.py on this repo's SDXL loader;\nrank 32, 46,448,640 trainable weights",
+      "col": 4,
+      "row": 0.4,
+      "input": [
+        {
+          "image": "page-images/training-photo-and-its-captions.jpg",
+          "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+          "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+          "kind": "table",
+          "title": "One photo, and the caption each run draws"
+        }
+      ]
+    },
+    {
+      "id": "runb",
+      "kind": "worker",
+      "eyebrow": "trainer",
+      "label": "Run B: SDXL LoRA",
+      "sub": "trainer.py on this repo's SDXL loader;\nrank 32, 46,448,640 trainable weights",
+      "col": 4,
+      "row": 2.8,
+      "input": [
+        {
+          "image": "page-images/training-photo-and-its-captions.jpg",
+          "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+          "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+          "kind": "table",
+          "title": "One photo, and the caption each run draws"
+        }
+      ]
+    },
+    {
+      "id": "ckpt",
+      "kind": "store",
+      "label": "LoRA adapters",
+      "sub": "/datasets/.../inclusive_captions/<run>/:\nstep_0, 250, 500, 1000, 2000",
+      "col": 5,
+      "row": 1.6
+    },
+    {
+      "id": "sheets",
+      "kind": "worker",
+      "dashed": true,
+      "eyebrow": "written, not run yet",
+      "label": "Watching sheet",
+      "sub": "sheets.py: 8 fixed seeds by 4 columns\n(dog, cat, joint, product)",
+      "col": 5,
+      "row": 0.0,
+      "example": [
+        {
+          "image": "page-images/borrowed-cats-and-dogs-sheet.jpg",
+          "caption": "The shape the watching sheet will have, borrowed from another experiment in this repo: seeds down the rows, one condition per column, on base SDXL with no adapter attached. The label on the picture says where it came from; nothing in it is this pilot's output.",
+          "alt": "A large grid of SDXL renders, seeds down the rows and prompt conditions across, with a dark banner across the top naming the experiment it came from.",
+          "kind": "model",
+          "title": "The sheet's shape, from another experiment"
+        }
+      ]
+    },
+    {
+      "id": "wandb",
+      "kind": "external",
+      "label": "Weights & Biases",
+      "sub": "prime_lab/poe-repair-inclusive-captions:\nthe loss, and the sheets",
+      "logo": "weightsandbiases",
+      "col": 3.1,
+      "row": 3.5,
+      "example": [
+        {
+          "image": "page-images/illustration-wandb-run-page.png",
+          "caption": "An illustration of the run page, not a screenshot: this project holds no runs yet, so there is nothing to photograph. It shows where the loss, the watching sheet and the two runs side by side will land. Nothing in it is measured.",
+          "alt": "A drawing of a Weights & Biases workspace: a run list with run A and run B, a train/loss panel, a sheet panel and a run-comparison panel, all empty, under a banner reading illustration, not a screenshot.",
+          "kind": "abstract",
+          "title": "The run page, drawn (no runs logged yet)"
+        }
+      ]
+    },
+    {
+      "id": "score",
+      "kind": "worker",
+      "dashed": true,
+      "eyebrow": "planned",
+      "label": "Scoring pass",
+      "sub": "128 product seeds per run at 1024 square;\nGroundingDINO counts, CLIP names",
+      "col": 6,
+      "row": 0.85,
+      "input": [
+        {
+          "image": "page-images/borrowed-contact-sheet.jpg",
+          "caption": "What the counting half of the pass reads, borrowed from another experiment in this repo: 64 base-SDXL renders of “a photo of a cat” with GroundingDINO's counts on each tile, every one reporting a dog the eye cannot find.",
+          "alt": "A grid of 64 square renders of single cats, each titled with its seed, dog count 1 and cat count 1, under a banner naming the experiment it came from.",
+          "kind": "model",
+          "title": "What the counter reads, from another experiment"
+        }
+      ],
+      "example": [
+        {
+          "image": "page-images/borrowed-poe-seed02.jpg",
+          "caption": "One render the pass has to make a call on, borrowed from the same experiment: the product of the cat and dog conditions on base SDXL, where the count says one animal and the classifier has to name what that animal is.",
+          "alt": "A single square render of one animal with both cat and dog features, under a banner naming the experiment it came from.",
+          "kind": "model",
+          "title": "One render to call, from another experiment"
+        }
+      ],
+      "output": [
+        {
+          "image": "page-images/borrowed-crop-classifier-sheet.jpg",
+          "caption": "What the naming half returns, from the same experiment: the 64 renders cropped to the detected box and named by zero-shot CLIP, 64 of 64 called cat with a margin near 0.99.",
+          "alt": "A grid of 64 cropped animal boxes, each titled with its seed, the call cat, and the probability margin between cat and dog, under a banner naming the experiment it came from.",
+          "kind": "model",
+          "title": "What the classifier returns, from another experiment"
+        }
+      ]
+    },
+    {
+      "id": "figure",
+      "kind": "files",
+      "dashed": true,
+      "eyebrow": "planned",
+      "label": "Compose-rate figure",
+      "sub": "run A beside run B on the shared seeds,\nwith the criterion's band drawn on it",
+      "col": 6,
+      "row": 2.5
+    }
+  ],
+  "groups": [
+    {
+      "label": "RUN A",
+      "members": [
+        "runa"
+      ]
+    },
+    {
+      "label": "RUN B",
+      "members": [
+        "runb"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "coco",
+      "to": "pool",
+      "label": "boxes and captions",
+      "style": "sync"
+    },
+    {
+      "from": "pool",
+      "to": "manifest",
+      "style": "sync"
+    },
+    {
+      "from": "manifest",
+      "to": "audit",
+      "label": "the 131 that\nclear the size filter",
+      "style": "sync",
+      "sides": "bt",
+      "label_dy": 18
+    },
+    {
+      "from": "audit",
+      "to": "pool",
+      "label": "40 rejected indices,\nheld in the pool script",
+      "style": "async",
+      "sides": "lt",
+      "bend": 0.5
+    },
+    {
+      "from": "manifest",
+      "to": "captions",
+      "label": "491 photos per run",
+      "style": "sync"
+    },
+    {
+      "from": "captions",
+      "to": "runa",
+      "label": "run A: every both-animal\nphoto captioned jointly",
+      "style": "sync"
+    },
+    {
+      "from": "captions",
+      "to": "runb",
+      "label": "run B: 40% cat, 40% dog,\n10% joint, resampled per draw",
+      "style": "sync"
+    },
+    {
+      "from": "runa",
+      "to": "ckpt",
+      "style": "sync"
+    },
+    {
+      "from": "runb",
+      "to": "ckpt",
+      "style": "sync"
+    },
+    {
+      "from": "runa",
+      "to": "wandb",
+      "style": "async",
+      "sides": "lt",
+      "bend": 0.5
+    },
+    {
+      "from": "runb",
+      "to": "wandb",
+      "style": "async",
+      "sides": "lr",
+      "bend": 0.5
+    },
+    {
+      "from": "ckpt",
+      "to": "sheets",
+      "label": "each checkpoint,\nboth runs",
+      "style": "sync",
+      "sides": "tb"
+    },
+    {
+      "from": "sheets",
+      "to": "wandb",
+      "style": "async",
+      "sides": "lr",
+      "bend": 0.18
+    },
+    {
+      "from": "ckpt",
+      "to": "score",
+      "label": "step 2000, both runs",
+      "style": "sync"
+    },
+    {
+      "from": "score",
+      "to": "figure",
+      "style": "sync",
+      "sides": "bt"
+    }
+  ],
+  "details": [
+    {
+      "heading": "Where each box comes from",
+      "lines": [
+        "<strong>COCO train2017</strong>: <code>scripts/census/inclusive_captions_pool.py:69-71</code> reads <code>instances_train2017.json</code> and <code>captions_train2017.json</code> under <code>/datasets/mmolefe/coco2017</code>, with the images found at <code>:81</code>.",
+        "<strong>Pool builder</strong>: <code>scripts/census/inclusive_captions_pool.py</code>. The wanted counts are <code>WANT</code> at <code>:105</code>; the caption per photo is the shortest of each photo's five, at <code>read_captions()</code>, <code>:128</code>.",
+        "<strong>Photo audit, by eye</strong>: <code>scripts/census/audit_both_animal_photos.py</code>, 16 tiles a page at 448 pixels, nine pages for the 131. Its verdicts are committed at <code>artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json</code>. The plan's instruction 8 owns the judging.",
+        "<strong>Photo manifest</strong>: <code>/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/manifest.json</code>, written at <code>inclusive_captions_pool.py:291</code>. The four set sizes are the audited ones.",
+        "<strong>Caption rule, per draw</strong>: <code>poe_repair/experiments/inclusive_captions/captions.py</code>. The four caption strings are at <code>:54-57</code>, the 10% blank rate at <code>:65</code>, and the per-run shares on the both-animal photos at <code>BOTH_SHARES</code>, <code>:69</code>.",
+        "<strong>Run A and Run B</strong>: one part, <code>poe_repair/experiments/inclusive_captions/trainer.py</code>, run twice. It builds on <code>poe_repair/_sdxl/runtime.py</code> (<code>load_sdxl_models</code>, <code>encode_prompt_sdxl</code>, <code>load_ddim_scheduler</code>, <code>decode_latents</code>), puts the low-rank weights on with peft at <code>build_lora()</code>, <code>trainer.py:107</code>, and keeps the checkpoint steps at <code>:67</code>. It trains 46,448,640 weights at rank 32 on the four attention projections, and its 20-step smoke run finished green on <code>mscluster111</code> in 225 seconds, writing <code>step_00000</code> before any training (the plan's task 3.2).",
+        "<strong>LoRA adapters</strong>: <code>trainer.py:60</code> and <code>:188-189</code> write <code>step_&lt;n&gt;/</code> under <code>/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/&lt;run&gt;/</code>, loadable with <code>PeftModel.from_pretrained</code>.",
+        "<strong>Weights &amp; Biases</strong>: <code>trainer.py:138-139</code> and <code>:179-181</code>, project <code>prime_lab/poe-repair-inclusive-captions</code>. The project was chosen new rather than as a group inside the animals-compose sweeps, per the walk map's decision table.",
+        "<strong>Watching sheet</strong>, written but not run: <code>poe_repair/experiments/inclusive_captions/sheets.py</code> exists, 221 lines, eight fixed seeds (0 to 7) down the rows and four columns across at 512 square and 25 steps, nine UNet forwards a step batched into one. The plan's tasks 4.1 and 4.2 are both open: it has not been run against a checkpoint, so it stays dashed.",
+        "<strong>Scoring pass</strong>, planned: the plan's tasks 6.1 and 6.2. The instrument already exists, GroundingDINO for the count and <code>scripts/census/crop_classifier_cat_vs_dog.py</code> for the names; the render-and-score pass over 128 product seeds per run does not.",
+        "<strong>Compose-rate figure</strong>, planned: the plan's task 6.3, filed under <code>artifacts/results/do-inclusive-captions-help-poe-compose/</code> with its sidecar."
+      ]
+    },
+    {
+      "heading": "How to read the lines",
+      "lines": [
+        "A solid arrow is a read or a write that the step waits on; a dashed arrow is logging, which the step does not wait on.",
+        "The three dashed boxes are the parts that are not finished: the watching sheet (written, never run), the scoring pass and the figure.",
+        "The two arrows out of the caption rule carry the entire difference between the runs. Everything else about the two lanes, including the words on the boxes, is identical on purpose: the photos, the trainer, the blank-caption rate, the step count, the checkpoint steps and the seeds.",
+        "The one dashed arrow pointing left is the audit feeding back: the 40 rejected tile numbers are held as <code>EXCLUDED_BOTH</code> in the pool script, so the pool is re-run and the both-animal set drops from 131 to 91.",
+        "The caption rule is drawn as a service rather than a library because it is consulted on every draw, not once per run: run B resamples each both-animal photo's caption every time the photo comes up.",
+        "The dog-present share of run B's cat-captioned draws is 0.169, measured off 200,000 draws against the real manifest (the plan's task 2.3). Run A's is 0, which is what the comparison rests on.",
+        "A badge in a box's corner opens a picture: <em>in</em> for what goes into the box, <em>out</em> for what comes out, <em>e.g.</em> for one worked example of it. Any picture that is not this pilot's own output carries a label across the top saying where it came from, and the Weights &amp; Biases panel is a drawing of the interface rather than a screenshot, because the project holds no runs yet."
+      ]
+    },
+    {
+      "heading": "What is not drawn",
+      "lines": [
+        "<strong>The compute.</strong> The two runs are started with <code>nohup</code> outside Slurm on a pinned free <code>biggpu</code> device reached over SSH, because <code>biggpu</code> allows one job per user, and they are harvested with <code>pgrep</code> rather than <code>squeue</code>. That is a fact about where the trainer boxes run, not a part of its own, so it stays in words.",
+        "<strong>The SDXL base model as a box.</strong> <code>poe_repair/_sdxl/runtime.py</code> supplies both text encoders, the VAE in fp32 and the UNet in fp16 inside the trainer's own process. It is a library in that box, not a separate running part, so it is named on the box instead. The fp16 upcast rule lives with it: a trainer that re-casts the VAE produces latents that do not match the sampling path.",
+        "<strong>The two runs the caption sampler also knows.</strong> <code>captions.py:86</code> defines four runs, A, B, C and no-both. Only A and B are trained here: C was dropped and no-both is not in this plan, so neither gets a box.",
+        "<strong>The 48-tile contact sheets</strong> the pool script writes alongside the audit pages. They were too small to name a species off, which is why the audit render exists, so drawing both would show a path nobody uses.",
+        "<strong>The criterion.</strong> The review file holds the three outcomes and the band's formula, and the verdict is ticked by hand against the figure. It is a document and a judgment, not a running part.",
+        "<strong>The base-SDXL anchor</strong> named in the plan's task 6.3 figure. It is a third bar on the figure rather than a training run, so it has no lane.",
+        "<strong>Nothing is marked assumed.</strong> Every box and arrow here is named by the plan, the walk map or the code, with the file and line above.",
+        "<strong>The nine audit pages beyond the first.</strong> Page 1 is on the box; the other eight are the same thing for tiles 16 to 130 and would say nothing new."
+      ]
+    }
+  ],
+  "box_w": 340,
+  "box_h": 86,
+  "static": true,
+  "levels": {},
+  "crumb": "The inclusive-captions pilot",
+  "opening": {
+    "kicker": "The pilot, end to end",
+    "title": "One difference, and everything else held still",
+    "paragraphs": [
+      "Two SDXL LoRAs train on the same 491 COCO photographs. The only thing that differs is how the 91 both-animal photos are captioned, and that difference is written on the two arrows out of the caption rule in the middle.",
+      "Click any box to read what it is, where it comes from, and the pictures of what goes into it and what comes out. Eight of the twelve boxes carry one. Three boxes are drawn dashed: those parts are not finished yet."
+    ]
+  },
+  "how_to_read": "A solid arrow is a read or a write the step waits on. A dashed arrow is logging, which it does not. A dashed box is a part that is not finished yet.",
+  "sources_note": "Every box here is named by the pilot plan, the walk map or the code, with its file and line below. Nothing is drawn that one of those does not name."
+}

@@ -1,0 +1,22 @@
+flowchart LR
+  cell9(["9 · Co-occurrence and intersection"])
+  cell10["10 · Products of two experts"]
+  cell11(["11 · Contention: where chimeras come from"])
+  cell12["12 · Centred against position-varied"]
+  cell13(["13 · Interaction: the wet dog"])
+  cell14["14 · Overlap teaches the wet dog"]
+  cell15(["15 · What this cannot show"])
+  cell9 --> cell10
+  cell10 --> cell11
+  cell11 --> cell12
+  cell12 --> cell13
+  cell13 --> cell14
+  cell14 --> cell15
+  obj[["obj(v, n, varied)"]]
+  cell12 -. defines .-> obj
+  interaction_sets[["interaction_sets(f, n)"]]
+  cell14 -. defines .-> interaction_sets
+  from_sec1[/"from section 1: density, ideal_expert, mass, show"/]
+  cell10 -. uses .-> from_sec1
+  cell12 -. uses .-> from_sec1
+  cell14 -. uses .-> from_sec1

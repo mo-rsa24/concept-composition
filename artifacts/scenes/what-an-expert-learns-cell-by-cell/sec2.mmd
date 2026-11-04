@@ -1,0 +1,10 @@
+flowchart LR
+  cell3(["3 · The loss has no label in it"])
+  cell4["4 · One gradient, two labellings"]
+  cell5(["5 · Same gradient; now a conditional model"])
+  cell3 --> cell4
+  cell4 --> cell5
+  one_step_grads[["one_step_grads(x0)"]]
+  cell4 -. defines .-> one_step_grads
+  from_sec1[/"from section 1: density, ideal_expert, mass, show"/]
+  cell4 -. uses .-> from_sec1

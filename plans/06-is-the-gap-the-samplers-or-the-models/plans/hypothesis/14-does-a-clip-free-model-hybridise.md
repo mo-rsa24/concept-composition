@@ -133,8 +133,8 @@ seeds, and CLIP is therefore not necessary for the fusion.
 
 ⬅️ [Previous](#the-claim) | 📋 [TOC](#table-of-contents) | [Next](#description-what-to-build) ➡️
 
-A reviewer reading the paper's central failure asks what in the model causes it, and the text
-encoder is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
+A reviewer reading the paper's central failure asks what in the model causes it, and the [text
+encoder](../../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
 one vector, asked to carry two subjects. If that suspicion is right, the paper's correction is a
 patch on a text-embedding problem and the right fix is a better encoder. If the fusion survives on
 a model with no CLIP anywhere, that reading is closed off and the failure sits in the arithmetic or
