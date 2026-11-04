@@ -78,7 +78,8 @@ WANTED = 8
 
 LATENT = 128          # SDXL's latent grid for a 1024 px render
 DETECTOR_QUERY = "animal"
-MAX_FOREIGN_MIB = 1024
+MAX_FOREIGN_MIB = 1024    # the default: refuse a device another process is already on
+NEEDED_MIB = 4096         # GroundingDINO-Tiny plus CLIP ViT-B/32, measured with headroom
 MIN_FREE_DISK_FRACTION = 0.10
 
 
@@ -91,16 +92,29 @@ def load_classifier_module():
     return module
 
 
-def guard_device() -> torch.device:
-    """Refuse to start on a busy, faulted or absent GPU."""
+def guard_device(max_foreign_mib: int, needed_mib: int = NEEDED_MIB) -> torch.device:
+    """Refuse to start on a faulted or absent GPU, or on one too full to finish.
+
+    Two separate checks. A foreign process over ``max_foreign_mib`` means the device is shared,
+    which the execution protocol allows for a small job but not for a training run, so the limit
+    is a flag rather than a constant. Free memory under ``needed_mib`` means the job cannot
+    finish whoever owns the rest, and that is never waived.
+    """
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch.cuda.is_available() is False; co3 on a Blackwell node "
                          "produces no CUDA output at all, so this would run silently on the CPU")
     free_b, total_b = torch.cuda.mem_get_info(0)
     used_mib = (total_b - free_b) / 1024 ** 2
-    if used_mib > MAX_FOREIGN_MIB:
+    free_mib = free_b / 1024 ** 2
+    if free_mib < needed_mib:
+        raise SystemExit(f"guard: only {free_mib:.0f} MiB free, under the {needed_mib} MiB this "
+                         f"job needs for GroundingDINO-Tiny and CLIP ViT-B/32")
+    if used_mib > max_foreign_mib:
         raise SystemExit(f"guard: visible device holds {used_mib:.0f} MiB, over the "
-                         f"{MAX_FOREIGN_MIB} MiB foreign-process limit")
+                         f"{max_foreign_mib} MiB foreign-process limit; pass "
+                         f"--max-foreign-mib to share the device deliberately")
+    print(f"gpu guard: {used_mib:.0f} MiB held by other processes, {free_mib:.0f} MiB free, "
+          f"{needed_mib} MiB needed", flush=True)
     return torch.device("cuda")
 
 
@@ -227,12 +241,17 @@ def main() -> int:
                     default=REPO / "artifacts/results/is-the-layout-the-missing-piece",
                     help="where boxes.json and detected-layouts.png are written")
     ap.add_argument("--wanted", type=int, default=WANTED, help="how many judgeable seeds to select")
+    ap.add_argument("--max-foreign-mib", type=int, default=MAX_FOREIGN_MIB,
+                    help="how much GPU memory another process may already hold. The default "
+                         "refuses a shared device; raise it to share one deliberately, which the "
+                         "execution protocol allows for a small job. The separate free-memory "
+                         "check cannot be waived.")
     args = ap.parse_args()
 
     print(f"node {socket.gethostname()}  CUDA_VISIBLE_DEVICES="
           f"{os.environ.get('CUDA_VISIBLE_DEVICES', 'unset')}  pid {os.getpid()}", flush=True)
     guard_disk(args.out)
-    device = guard_device()
+    device = guard_device(args.max_foreign_mib)
     print(f"device: {torch.cuda.get_device_name(0)}", flush=True)
 
     work_dir = args.out / "source-tiles"
