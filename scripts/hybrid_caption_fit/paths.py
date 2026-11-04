@@ -17,6 +17,7 @@ SETS = OUT / "sets.json"
 SIMILARITIES = OUT / "similarities.json"
 SUMMARY = OUT / "summary.json"
 PLANE = OUT / "cat-dog-similarity-plane.png"
+COLUMNS = OUT / "cat-dog-caption-fit.png"
 PHOTO_THUMBS = OUT / "photo-thumbs"
 
 # Sources already on disk here.
