@@ -222,18 +222,31 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 🔬 The labelled set, and the rule in the source
 
-- [ ] **1.1** Write the labelling rule as named constants and the labeller that applies them:
-      both labels 1 needs two separate animal boxes each named confidently, and a single box the
-      species classifier cannot call confidently is a hybrid, labelled neither.
-  - Output: `poe_repair/experiments/presence_head/labelling.py`
+- [x] ✅ **1.1** Write the labelling rule as named constants and the labeller that applies them:
+      both labels 1 needs two separate animal boxes, each carrying one species on its own, and a
+      single box carrying both is a fused animal, labelled neither.
+  - Output: [the labelling module](../../../../poe_repair/experiments/presence_head/labelling.py)
   - The rule is constants in source, never prose, so changing it after seeing the renders shows
     up in a diff.
-- [ ] **1.2** Mine hybrid negatives from existing product renders across every animal pair
-      available, excluding the eight held-out cat-by-dog seeds, and report the count and which
-      cells they came from.
-  - The negatives come from the model being corrected. Name that circularity in the card.
-- [ ] **1.3** Build the labelled set, cache its latents, and render one sheet per label group.
+  - ✅ verified 2026-11-04: seven cases run, a fused animal labels (0, 0) and only two separately
+    named boxes label (1, 1).
+  - The first rule compared the two species against each other, so it had to pick one and named a
+    confident species on 32 of 33 fused renders. Each species is now read on its own as a raw
+    cosine similarity with no softmax, calibrated on 400 photographs COCO annotated: at a floor
+    of 0.245 a photograph passes its own species 0.925 of the time and the other 0.070.
+- [x] ✅ **1.2** Mine fused-animal negatives from existing product renders across every animal
+      pair available, excluding the eight held-out cat-by-dog seeds, and report the count and
+      which cells they came from.
+  - The negatives come from the model being corrected. Named as a circularity in
+    [the card](../../../../artifacts/results/can-a-classifier-supply-the-missing-term/README.md).
+  - ✅ verified 2026-11-04: 50 fused animals across 13 pairs, led by cat × dog and tiger × dog at
+    9 each, from 446 distinct renders. 481 paths were 438 images before a second mining pass, so
+    de-duplication is by file content, never by path.
+- [x] ✅ **1.3** Build the labelled set and render one sheet per label group. The latent cache is
+      built by the trainer, once, on first run.
   - Output: `/datasets/mmolefe/poe_repair_min/outputs/presence_head/labelled_set/`
+  - ✅ verified 2026-11-04: 1,028 pictures. 200 cat-only, 200 dog-only and 91 both-animal
+    photographs, 93 pictures holding a real pair, 264 holding no animal, and 50 fused animals.
 
 ▶ **Next: [instruction 5](#5--look-at-the-labelled-set)**, you check the hybrids really are
 hybrids before anything trains on them.
@@ -242,18 +255,23 @@ hybrids before anything trains on them.
 
 ◀ **Needs: [instruction 5](#5--look-at-the-labelled-set)** done.
 
-- [ ] **2.1** Write the sampler: the unconditional prediction plus the guidance-scaled sum of the
-      two experts' differences plus the weighted gradient of the head's log probability for both
-      labels, normalised per step against the product prediction's own norm.
-  - Output: `poe_repair/methods/_classifier_guided.py`
+- [x] ✅ **2.1** Write the sampler: the unconditional prediction plus the guidance-scaled sum of
+      the two experts' differences plus the weighted gradient of the head's log probability for
+      both labels, normalised per step against the product prediction's own norm.
+  - Output: [the sampler](../../../../poe_repair/methods/_classifier_guided.py)
   - The gradient is taken with respect to the noisy latent the head already reads, so no decode
     through the VAE is needed.
-- [ ] **2.2** Write the composer wrapper, following
+  - ✅ verified 2026-11-04: the gradient reaches the latent and is finite on an untrained head.
+- [x] ✅ **2.2** Write the composer wrapper, following
       [the Langevin composer's](../../../../poe_repair/composers/poe_langevin.py) shape.
-  - Output: `poe_repair/composers/poe_classifier_guided.py`
-- [ ] **2.3** Prove the canary: at weight 0 the render is byte-identical to plain product on the
-      toy seed.
+  - Output: [the composer](../../../../poe_repair/composers/poe_classifier_guided.py)
+- [x] ✅ **2.3** Prove the canary: at weight 0 the render is byte-identical to plain product on
+      the toy seed, both with no head attached and with an untrained head attached, since the
+      sweep passes a head.
+  - Command: `python scripts/presence_head_canary.py`
   - What you want: identical bytes, not a small difference.
+  - ✅ verified 2026-11-04 on mscluster108: all three renders share checksum `c291b259`, largest
+    absolute pixel difference 0 of 255, zero pixels differing.
 
 ▶ **Next: [instruction 6](#6--run-the-canary-yourself)**.
 
@@ -262,10 +280,14 @@ hybrids before anything trains on them.
 ◀ **Needs: [instruction 6](#6--run-the-canary-yourself)** done, so the composer is known to leave
 plain product alone before a trained head is pushed through it.
 
-- [ ] **3.1** Write the trainer: two sigmoid outputs on the twist head's FiLM conv body, SDXL
+- [x] ✅ **3.1** Write the trainer: two sigmoid outputs on the twist head's FiLM conv body, SDXL
       frozen, timesteps drawn from the 50 the sampler actually visits.
-  - Output: `scripts/train_presence_head.py`, with the labelling rule imported, not restated.
+  - Output: [the trainer](../../../../scripts/train_presence_head.py) and
+    [the head](../../../../poe_repair/experiments/presence_head/head.py), with the labelling rule
+    imported, not restated.
   - Disk guard reads `/datasets`, which is where the checkpoints land.
+  - The 50 fused animals are 5% of the pile, so they are oversampled to a quarter of every batch.
+    That share is a constant in the source for the same reason the rule's constants are.
 - [ ] **3.2** Add the probe: every 250 steps, render two held-out seeds at two weights through the
       composer, and log the sheet, the compose count and balanced accuracy per label to W&B.
   - W&B: `prime_lab/poe-repair-animals-compose`.
@@ -307,16 +329,17 @@ animals is a mislabel, and it poisons the "neither" class.
 
 ▶ **Next: [tasks 2.1 to 2.3](#2--the-composer-and-its-zero-weight-canary)**.
 
-### 6. 🔨 Run the canary yourself
+### 6. 👁️ Read the canary's verdict
 
-◀ **Needs: [tasks 2.1 and 2.2](#2--the-composer-and-its-zero-weight-canary)** done.
+◀ **Needs: [task 2.3](#2--the-composer-and-its-zero-weight-canary)** done.
 
-6.1 **Run the zero-weight render** with the command task 2.3 reports, on the toy seed.
+6.1 **Open `canary.json`** under `/datasets/mmolefe/poe_repair_min/outputs/presence_head/canary/`.
 
-6.2 **Compare its checksum** against the plain product render of the same seed.
+6.2 **Check the three checksums are one value** and the largest absolute pixel difference is 0.
+The comparison is a checksum rather than a judgment, so the run makes it and you read it.
 
-✅ What you want: the same checksum. Anything else means the composer changed the baseline, and
-every later comparison would be against a moved reference.
+✅ What you want: one checksum across all three. Anything else means the composer changed the
+baseline, and every later comparison would be against a moved reference.
 
 ▶ **Next: [tasks 3.1 to 3.3](#3--train-the-head-and-probe-it-while-it-trains)**.
 
