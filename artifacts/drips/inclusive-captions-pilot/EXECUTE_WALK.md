@@ -5,10 +5,10 @@ with `/drip-execute-plan --request`. Branch `exec/inclusive-captions-pilot`.
 
 ## Where the walk is
 
-Piece 5 of 6 is running: run A trains on `mscluster106` device 1 and run B on `mscluster107`
-device 1, 2,000 steps each, sheets rendering into their own W&B runs as each checkpoint lands.
-Instruction 11, watching the four columns move, is next. Piece 6 starts when both reach step
-2,000.
+Piece 5 is back to its pool. The first pair of runs was killed at steps 500 and 400 because the
+training photos were too cluttered and the renders were drifting with them. The pool is being
+rebuilt from COCO at tighter floors plus SD 3.5 images, every candidate passing a
+vision-language judge, and the two arms relaunch on it. Tasks 2.4 to 2.7 carry the rebuild.
 
 ## The stop point
 
@@ -145,3 +145,15 @@ bf16 ones. Any generation script on `biggpu`'s 106, 107 and 108 uses fp16.
 predates the dual attention layers `stable-diffusion-3.5-medium` uses, so the transformer loads
 with a shape mismatch. `~/envs-sd35` is a venv over `co3` with diffusers 0.32.2, the newest that
 works with torch 2.5.1, and `huggingface-hub` held below 1.0.
+
+
+**A question that names the failure gets the failure back.** Asked "is each one an ordinary cat or
+dog, with no features of the other species mixed into it", LLaVA answered no on 39 of 48 images,
+including a clean cat beside a clean dog, where it said "the image shows a cat with a dog's head".
+Its other three questions were right: the count said two on 44 of 48 and caught the three-animal
+and single-animal frames. Wordings are measured against hand labels rather than chosen by how
+careful they sound, which is what `inclusive_captions_judge_calibrate.py` does.
+
+**Pushing to GitHub broke mid-session.** `origin` became an SSH URL this session has no key for,
+and the HTTPS URL returns 403. Work continues by copying files straight to the cluster clone with
+rsync. Everything is committed locally on `exec/can-a-classifier-supply-the-missing-term`.

@@ -216,6 +216,25 @@ fixed and cannot be shaped by anything the build reveals.
   - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.169, every caption
     share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
+- [ ] **2.4** Draw the extra training photos with SD 3.5 medium: 350 "a photo of a cat and a
+      dog", 130 "a photo of a cat", 130 "a photo of a dog", at 1,024 square in fp16.
+  - Output: `scripts/census/inclusive_captions_generate.py`, images under
+    `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/`.
+  - A different model family from the one being fine-tuned, so the co-occurrence the pool adds is
+    not SDXL's own belief fed back into it.
+- [ ] **2.5** Validate the vision-language judge before it screens anything: 48 generated
+      cat-and-dog images called by eye first, then by the judge, and the two compared.
+  - Output: `scripts/census/inclusive_captions_judge.py`, the eye's calls in
+    `artifacts/drips/inclusive-captions-pilot/checks/eye-labels-first-48.json`.
+  - The bar is agreement on 44 of the 48. Below it the judge does not screen the pool.
+- [ ] **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
+  - Output: `scripts/census/inclusive_captions_pool_v2.py`, the manifest under
+    `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool_v2/`.
+  - COCO at a 0.50 box-fraction floor for the single-animal sets and 0.40 for both-animal. Every
+    row carries the source it came from, identical in both arms.
+- [ ] **2.7** Re-run the caption sampler's check against the new manifest, so the dog-present
+      share of run B's cat draws is measured on what will actually be trained.
+
 ▶ **Next: [instruction 8](#8--audit-the-training-photos)**, the eye audit, which only you
 can do.
 
@@ -262,7 +281,7 @@ show what they claim to.
 
 ◀ **Needs: [instruction 10](#10--look-at-the-step-0-sheet)** done.
 
-- [x] ✅ **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
+- [ ] **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
       and sheets at 0, 250, 500, 1,000 and 2,000.
   - W&B: `prime_lab/poe-repair-inclusive-captions`, one run, grouped with B.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
@@ -270,7 +289,7 @@ show what they claim to.
     refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
     the trainer's own W&B run as it lands. Run A is on `mscluster106` device 1, run B on
     `mscluster107` device 1, both Quadro RTX 8000.
-- [x] ✅ **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
+- [ ] **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
 - [ ] **5.3** Harvest both: the queue, `pgrep` on the session node, the output count against what
       this plan expected, and the tail of each log.
 
