@@ -37,7 +37,7 @@ from presence_head_calibrate_species import (  # noqa: E402
 )
 
 SET_DIR = paths.MOUNT_ROOT / "outputs/presence_head/labelled_set"
-CAL_PATH = paths.MOUNT_ROOT / "outputs/presence_head/species_calibration/calibration.json"
+CAL_PATH = paths.MOUNT_ROOT / "outputs/presence_head/species_calibration/cosine/calibration.json"
 FAMILY = "outputs/presence_head/hybrid_check"
 
 
@@ -64,7 +64,7 @@ def main() -> None:
     device = guard_device()
     from poe_repair.experiments.compose_scorer_validation.detection_scorer import count_instances
 
-    presence = SpeciesPresence(device)
+    presence = SpeciesPresence(device, mode=calibration["score_mode"])
     rows = json.loads((SET_DIR / "rows.json").read_text())
     picked, seen = [], set()
     for r in rows:

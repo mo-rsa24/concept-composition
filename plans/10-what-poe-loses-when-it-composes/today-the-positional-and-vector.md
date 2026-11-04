@@ -129,12 +129,12 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 🔧 Build x_pos and show the norm table (no GPU)
 
-- [ ] **1.1** Add the word-position alignment and `x_pos` to `scripts/and_vector_sheet.py`, with the two
-  new columns `x_pos` and `poe_x_pos`, and `poe_x_pos` appended to the phrase and weight-sweep sets.
-- [ ] **1.2** Add `x_pos` to `scripts/and_vector_norms.py`'s sequences, its figure, and a check that
+- [x] ✅ **1.1** Add the word-position alignment and `x_pos` to `scripts/and_vector_sheet.py`, with the two
+  new columns `x_pos` and `poe_x_pos`, and `poe_x_pos` appended to the phrase and weight-sweep sets. ✓ verified 2026-11-04: `x_pos` and `poe_x_pos` in `COLUMNS`, appended to `PHRASES` and `SWEEP` through the new `BY_KEY` lookup, and a `positional` set added; `python3 -m py_compile` exit 0
+- [x] ✅ **1.2** Add `x_pos` to `scripts/and_vector_norms.py`'s sequences, its figure, and a check that
   reports the largest absolute difference between `x_pos` and the joint prompt over position 0, the end
-  token and the pads. That difference must be 0.
-- [ ] **1.3** Run the norm table on the sheet's prompts and print it.
+  token and the pads. That difference must be 0. ✓ verified 2026-11-04: `word_pairs` and `positional_x` added, the bar lives in the source as `SCAFFOLD_MAX_DIFF = 0.0`, and the figure carries four series
+- [x] ✅ **1.3** Run the norm table on the sheet's prompts and print it. ✓ verified 2026-11-04: largest absolute difference from the joint prompt at the start token, the end token and all 72 pads is 0 against an allowed 0; the only positions differing at all are 1 and 3. Position 1 is exactly 0 in both encoders, because a causal mask makes position 1 of "dog and cat" and of "dog" the same state. Files: `artifacts/results/the-positional-and-vector/dog-and-cat-norms.json` and `.png`
   - Command: copy both scripts to the cluster scratch folder, then
     `POE_REPO=<cluster repo> <co3 python> <scratch>/and_vector_norms.py --joint "dog and cat" --a dog --b cat --out artifacts/results/the-positional-and-vector`
   - ✅ `x_pos` equals the joint prompt at position 0, at the end token and at every pad, difference 0.

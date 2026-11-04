@@ -88,6 +88,7 @@ def load_classifier_module():
     path = REPO / "scripts" / "census" / "crop_classifier_cat_vs_dog.py"
     spec = importlib.util.spec_from_file_location("crop_classifier_cat_vs_dog", path)
     module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
     spec.loader.exec_module(module)
     return module
 
@@ -162,9 +163,8 @@ def to_cells(box, image_side: int) -> list[int]:
     return [x0, y0, max(x0 + 1, x1), max(y0 + 1, y1)]
 
 
-def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, device) -> dict:
+def read_seed(seed: int, sheet_path: Path, work_dir: Path, clf, module, device) -> dict:
     """Detect and name both animals on one seed. Never raises on an unjudgeable seed."""
-    module = sys.modules["crop_classifier_cat_vs_dog"]
     render, source = source_for(seed, sheet_path, work_dir)
     n_boxes, kept = count_instances(render, query=DETECTOR_QUERY, device=device)
     with Image.open(render) as im:
@@ -270,7 +270,7 @@ def main() -> int:
             print(f"seed {seed:2d}  no 1024 px render and no sheet at {args.sheet}; stopping the "
                   f"top-up", flush=True)
             break
-        rec = read_seed(seed, args.sheet, work_dir, clf, device)
+        rec = read_seed(seed, args.sheet, work_dir, clf, module, device)
         if rec["judgeable"] and selected < args.wanted:
             rec["selected"] = True
             selected += 1

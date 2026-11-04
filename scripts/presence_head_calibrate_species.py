@@ -62,7 +62,9 @@ DISTRACTORS = ("bird", "horse", "car", "tree", "person", "chair", "landscape", "
 # The bar, in source so it cannot move after the answer is seen.
 MIN_TRUE_PASS = 0.90   # a cat-only photo must pass the cat test this often
 MAX_FALSE_PASS = 0.10  # a dog-only photo must pass the cat test no more often than this
-FLOOR_GRID = tuple(round(0.05 * i, 2) for i in range(1, 20))  # 0.05 to 0.95
+FLOOR_GRID = tuple(round(0.05 * i, 2) for i in range(1, 20))  # 0.05 to 0.95, for probabilities
+# Raw cosine lives in a narrow band, so it needs its own grid.
+COSINE_FLOOR_GRID = tuple(round(0.15 + 0.005 * i, 4) for i in range(31))  # 0.150 to 0.300
 
 BOX_PAD = 0.08
 N_PER_SPECIES = 200
@@ -93,11 +95,12 @@ def guard_device() -> torch.device:
 class SpeciesPresence:
     """One independent presence probability per species, each with its own broad negative set."""
 
-    def __init__(self, device: torch.device, species=("cat", "dog")) -> None:
+    def __init__(self, device: torch.device, species=("cat", "dog"), mode: str = "cosine") -> None:
         from transformers import CLIPModel, CLIPProcessor
 
         self.device = device
         self.species = tuple(species)
+        self.mode = mode
         self.model = CLIPModel.from_pretrained(CLIP_ID).to(device).eval()
         self.processor = CLIPProcessor.from_pretrained(CLIP_ID)
         self.directions = {}
@@ -123,9 +126,16 @@ class SpeciesPresence:
         feat = feat / feat.norm(dim=-1, keepdim=True)
         out = {}
         for s, text in self.directions.items():
-            logits = self.model.logit_scale.exp() * feat @ text.T
-            # Index 0 is the species itself; the rest are its negatives.
-            out[s] = float(logits.softmax(dim=-1)[0, 0].item())
+            if self.mode == "cosine":
+                # No softmax at all. Index 0 is the species itself, and its similarity is read
+                # on its own, so a fused animal can be close to two species at once. A softmax
+                # over the subjects cannot express that: measured on 14 fused cat x dog renders,
+                # raw cosine reads 0.2618 to cat and 0.2683 to dog, and the softmax turns that
+                # 0.0065 gap into 0.003 against 0.979.
+                out[s] = float((feat @ text.T)[0, 0].item())
+            else:
+                logits = self.model.logit_scale.exp() * feat @ text.T
+                out[s] = float(logits.softmax(dim=-1)[0, 0].item())
         return out
 
 
@@ -155,6 +165,9 @@ def best_box_scores(path, presence, count_instances, device) -> dict | None:
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--n", type=int, default=N_PER_SPECIES)
+    ap.add_argument("--score", choices=("cosine", "softmax"), default="cosine",
+                    help="cosine reads each species similarity on its own; softmax makes the "
+                         "species compete, which cannot represent a fused animal")
     args = ap.parse_args()
 
     out_dir = paths.MOUNT_ROOT / FAMILY
@@ -166,7 +179,7 @@ def main() -> None:
 
     from poe_repair.experiments.compose_scorer_validation.detection_scorer import count_instances
 
-    presence = SpeciesPresence(device)
+    presence = SpeciesPresence(device, mode=args.score)
     manifest = json.loads(MANIFEST.read_text())
     started = time.time()
 
@@ -183,7 +196,8 @@ def main() -> None:
           flush=True)
 
     sweep = []
-    for floor in FLOOR_GRID:
+    grid = COSINE_FLOOR_GRID if args.score == 'cosine' else FLOOR_GRID
+    for floor in grid:
         row = {"floor": floor}
         for truth in ("cat", "dog"):
             for asked in ("cat", "dog"):
@@ -227,7 +241,8 @@ def main() -> None:
     ax.set_title("calibrating the per-species presence test on photographs COCO annotated")
     ax.legend(fontsize=7)
     fig.tight_layout()
-    fig.savefig(out_dir / "sweep.png", dpi=110)
+    (out_dir / args.score).mkdir(parents=True, exist_ok=True)
+    fig.savefig(out_dir / args.score / "sweep.png", dpi=110)
     plt.close(fig)
 
     calibration = {
@@ -235,6 +250,7 @@ def main() -> None:
                               "from dog on photographs whose species COCO annotated",
         "why_not_the_margin": "a two-way softmax must spend its mass on one species, so it named "
                               "a confident species on 32 of 33 fused cat x dog renders",
+        "score_mode": args.score,
         "clip_id": CLIP_ID, "templates": list(TEMPLATES), "distractors": list(DISTRACTORS),
         "bars": {"MIN_TRUE_PASS": MIN_TRUE_PASS, "MAX_FALSE_PASS": MAX_FALSE_PASS},
         "n_cat_only": len(scores["cat"]), "n_dog_only": len(scores["dog"]),
@@ -242,6 +258,8 @@ def main() -> None:
         "instrument_usable": passes, "verdict": verdict,
         "node": socket.gethostname(), "elapsed_seconds": round(time.time() - started, 1),
     }
+    out_dir = out_dir / args.score
+    out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "sweep.json").write_text(json.dumps(sweep, indent=2))
     (out_dir / "calibration.json").write_text(json.dumps(calibration, indent=2))
     print(json.dumps(calibration, indent=2), flush=True)
