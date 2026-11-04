@@ -1,5 +1,6 @@
 """The scorer: a ResNet-18 from scratch on all of CelebA's train split, blond men included, with two
-outputs (male, blond). It is accepted only if, on the test split's 180 blond men, it calls male right
+outputs (male, blond). Batches are drawn with the four groups (blond or not, man or woman) equally
+likely, because with blond faces 94% women an unbalanced network reads "woman" as "blond". It is accepted only if, on the test split's 180 blond men, it calls male right
 on at least 90% and blond right on at least 90%.
 
     python classifier.py
@@ -51,10 +52,12 @@ def main(epochs=4, bs=256):
     opt = torch.optim.AdamW(m.parameters(), 1e-3, weight_decay=1e-4)
     steps = epochs * (len(x) // bs); sched = torch.optim.lr_scheduler.OneCycleLR(opt, 2e-3, total_steps=steps)
     t0, s = time.time(), 0
+    grp = torch.from_numpy(tr["male"].astype(np.int64) * 2 + tr["blond"].astype(np.int64))
+    w = (1.0 / torch.bincount(grp, minlength=4).double())[grp]
     for ep in range(epochs):
-        perm = torch.randperm(len(x))
+        draws = torch.multinomial(w, len(x), replacement=True)
         for i in range(0, len(x) - bs + 1, bs):
-            idx = perm[i:i + bs]
+            idx = draws[i:i + bs]
             xb = x[idx].permute(0, 3, 1, 2).float().div(127.5).sub(1).to(DEV)
             if torch.rand(()) < 0.5:
                 xb = xb.flip(3)
@@ -76,7 +79,8 @@ def main(epochs=4, bs=256):
     (ROOT / "classifier").mkdir(exist_ok=True)
     torch.save(m.state_dict(), ROOT / "classifier" / "resnet18.pt")
     json.dump({"gate": f"blond men in test: male right and blond right both >= {GATE}", "passed": ok,
-               "groups": groups, "epochs": epochs}, open(ROOT / "classifier" / "accuracy.json", "w"), indent=1)
+               "groups": groups, "epochs": epochs,
+               "sampling": "the four male-by-blond groups equally likely in every batch"}, open(ROOT / "classifier" / "accuracy.json", "w"), indent=1)
     print("GATE", "PASSED" if ok else "FAILED")
 
 
