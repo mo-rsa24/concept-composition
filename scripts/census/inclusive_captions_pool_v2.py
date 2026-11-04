@@ -123,6 +123,11 @@ def generated_candidates(kind: str, judged: Path) -> list[dict]:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out-dir", required=True)
+    ap.add_argument("--dump-candidates", default=None,
+                    help="write candidates_<set>.json here and stop, so the judge can be pointed "
+                         "at the COCO shortlists before the pool is built")
+    ap.add_argument("--shortlist", type=int, default=150,
+                    help="how many COCO candidates per single-animal set to put up for judging")
     ap.add_argument("--coco-judged-dir", default=None,
                     help="where the judge's verdicts on the COCO candidates live, one "
                          "judged_<set>.json per set; without it every COCO candidate is taken")
@@ -134,6 +139,20 @@ def main() -> int:
     pools = coco_candidates()
     counts = {"coco_after_floor": {k: len(v) for k, v in pools.items()},
               "floor_single": FLOOR_SINGLE, "floor_both": FLOOR_BOTH}
+
+    if args.dump_candidates:
+        where = Path(args.dump_candidates)
+        where.mkdir(parents=True, exist_ok=True)
+        rng = random.Random(SEED)
+        for name, rows in pools.items():
+            chosen = sorted(rows, key=lambda r: r["image_id"])
+            rng.shuffle(chosen)
+            limit = len(chosen) if name == "both" else args.shortlist
+            (where / f"candidates_{name}.json").write_text(
+                json.dumps([r["file"] for r in chosen[:limit]], indent=2))
+            print(f"{name}: {min(limit, len(chosen))} candidates of {len(chosen)}", flush=True)
+        (where / "counts_candidates.json").write_text(json.dumps(counts, indent=2))
+        return 0
 
     if args.coco_judged_dir:
         judged_dir = Path(args.coco_judged_dir)

@@ -109,13 +109,20 @@ def number(answer: str) -> int | None:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--kind", choices=sorted(QUESTIONS), required=True)
-    ap.add_argument("--dir", required=True)
+    ap.add_argument("--dir", default=None, help="a folder of png images")
+    ap.add_argument("--files", default=None,
+                    help="a json list of image paths, for the COCO candidates, which live in one "
+                         "huge folder rather than a set of their own")
     ap.add_argument("--limit", type=int, default=0, help="judge only the first N, for validation")
     ap.add_argument("--out", default=None, help="where judged.json goes; defaults beside the images")
     args = ap.parse_args()
 
-    directory = Path(args.dir)
-    images = sorted(directory.glob("*.png"))
+    if args.files:
+        images = [Path(f) for f in json.loads(Path(args.files).read_text())]
+        directory = Path(args.out).parent if args.out else Path(args.files).parent
+    else:
+        directory = Path(args.dir)
+        images = sorted(directory.glob("*.png"))
     if args.limit:
         images = images[:args.limit]
     print(f"{len(images)} images to judge in {directory}", flush=True)
