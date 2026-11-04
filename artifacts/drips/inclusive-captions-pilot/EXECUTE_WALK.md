@@ -209,3 +209,24 @@ to 7 render as flat illustration, tiled pattern, a laptop and a picture frame at
 including step 0, before any training. That is SDXL being asked for 512 square when it was
 trained at 1024. The washed-out look on seeds 0 to 3 is the adapter. Judging anything off seeds 4
 to 7 reads the sheet's resolution as a result.
+
+**3e-5 is the rate, and it fixed more than the texture.** Three rates on the same 550 photos at
+the same 250 steps. At 1e-4 the renders are smeared pastel shapes. At 1e-5 the texture returns
+but four of the eight sheet seeds still draw tiled pattern, a laptop or a picture frame, which is
+what the untrained model does at 512 square. At 3e-5 all eight seeds draw animals, the 512
+artefacts are gone, and the joint prompt draws a cat beside a dog on six of the eight seeds. The
+model has learnt what these photographs look like rather than only how they are lit.
+
+**A shell chain written as one `bash -c` string lost its newline and silently dropped the second
+run.** The two launcher lines arrived as one command, so run A was started with run B's whole
+command line as trailing arguments it ignores, and run B would never have started. The launcher
+takes four positional arguments and does not complain about a fifth. A chain of launcher calls
+goes in a script file, never in an inline string.
+
+**At 1,024 square the untrained baseline is clean, and the premise is visible without any
+confound.** Run A's step-0 sheet, drawn before a single training step: all eight seeds are
+photographic, the joint prompt puts a cat and a dog in frame on eight seeds of eight, and the
+product of the cat and dog conditions puts one animal in frame on eight of eight, several of them
+a single face carrying both species' markings. Every strange tile the 512-square sheets showed,
+the tiled wallpaper, the laptops, the picture frames, is gone. The sheet is now measuring the
+model rather than the resolution it was asked for.
