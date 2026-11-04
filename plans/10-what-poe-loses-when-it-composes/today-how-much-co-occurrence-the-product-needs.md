@@ -103,9 +103,11 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 1. 🔧 The hand-weighted condition, with w as a flag (AI, ~15 min)
 
-- [x] **Add condition D** ✅ verified (`--pair-weight`, 2026-11-04) to the toy script: the pair image inside both experts at weight w, the
+- [x] **Add condition D** to the toy script: the pair image inside both experts at weight w, the
   remaining 1 − w split equally across that expert's three single shapes. `--pair-weight` sets w.
-- [x] **Handle w = 0** ✅ verified (the pair component is dropped, 2026-11-04) by dropping the pair component rather than taking `log(0)`.
+  ✅ verified (`toy_sampler_hybrids.py:hand_weighted`, 2026-11-04)
+- [x] **Handle w = 0** by dropping the pair component rather than taking `log(0)`.
+  ✅ verified (the run at w = 0 completes with no warning, 2026-11-04)
 - [x] **📸 You should see** at w = 0 the same counts condition A already holds: 300 hybrids from the
   exact sampler, 298 from reverse diffusion, 300 from annealed MALA, give or take the draw.
   ✅ verified (byte-identical to A, 2026-11-04; D at 0.1 is B's density exactly, and the exact
