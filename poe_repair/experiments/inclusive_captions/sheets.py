@@ -125,7 +125,9 @@ def render_seed(
     images = []
     for latents in trajectories:
         decoded = decode_latents(models, latents)[0].float().cpu()
-        images.append(((decoded.clamp(-1, 1) + 1) / 2).permute(1, 2, 0).numpy())
+        # decode_latents already returns [0, 1]. Mapping it as if it were [-1, 1] folds every
+        # picture into the top half of the range, which is a washed-out sheet and not a result.
+        images.append(decoded.clamp(0, 1).permute(1, 2, 0).numpy())
     return images
 
 

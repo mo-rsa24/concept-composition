@@ -108,7 +108,8 @@ def render_product(
         latents = scheduler.step(eps, timestep, latents).prev_sample
 
     decoded = decode_latents(models, latents)[0].float().cpu()
-    return ((decoded.clamp(-1, 1) + 1) / 2).permute(1, 2, 0).numpy()
+    # decode_latents already returns [0, 1]; treating it as [-1, 1] halves the contrast.
+    return decoded.clamp(0, 1).permute(1, 2, 0).numpy()
 
 
 def draw_contact(paths_in: list[Path], *, label: str, target: Path) -> None:

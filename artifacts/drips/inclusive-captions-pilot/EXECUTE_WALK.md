@@ -260,8 +260,7 @@ domestic animal photographs teach and not about how much capacity there is to le
 beside one dog on all eight seeds, so the two-cats drift seen at step 500 is a mid-training phase
 and not where the control lands. Column 4 puts one animal in frame on all eight seeds, three of
 them reading as a fused head rather than either animal. Zero of eight compose at the end of
-training, against zero of eight at step 500 and zero of eight before it. All four columns also sit
-at lower contrast than the untrained sheet, the single-animal columns most of all.
+training, against zero of eight at step 500 and zero of eight before it.
 
 **Run B's step-0 sheet was lost to a full card and is not worth re-rendering.** Another session's
 `experiments/attention_bleed.py` holds 13 GB on the same device, which left the launcher's own
@@ -273,3 +272,27 @@ rendered on the node's other device instead, out of the trainer's way.
 transient failure never comes back. Marking on exit status, and retrying on the next pass, is the
 repair when this script is next idle; it cannot be edited while it runs, because bash reads a
 running script by byte offset.
+
+**Run B at step 500 looks like run A at step 500.** Same eight seeds, same starting noise, side by
+side: the product puts one animal in frame on all eight seeds in both arms, and the two
+single-animal columns are close enough that seed 0's dog column is nearly the same picture. The
+one difference worth naming is in the joint prompt, where run A drew a third cat on seed 7 and run
+B drew one cat and one dog. Seed 0's dog column holds two dogs in both arms, so that is the pool
+and not the captioning: a claim that run B's conditions have widened cannot be made off it.
+
+500 steps on an adapter this small, with the caption rule touching 150 of the 550 photographs, is
+early. The arms are compared at step 2,000 on 128 seeds each, not here.
+
+**Run B's Weights and Biases run holds the loss curves and no sheets, and the backfill is owed.**
+Its step-0 sheet died out of memory on the shared card, and its step-500 and step-2,000 sheets are
+rendered on the node's other device with logging off, because two writers on one run id fight over
+the step counter and the trainer owns it while it is alive. Both sheets go up once run B's trainer
+exits, with run A's step-0 sheet standing in for B's, which is the same picture.
+
+**Every sheet in this experiment was rendered half a stop too light, and the cause is one line.**
+`decode_latents` returns a picture already in [0, 1] and both renderers mapped it again as if it
+were in [-1, 1], so every image was folded into the top half of the range: the darkest pixel in a
+full-size render measured exactly 128 of 255. The map is the same affine squeeze on every sheet, so
+a composition call made across sheets still stands, and any read about contrast or washing does
+not. `sheets.py` and `product_renders.py` now clamp to [0, 1] and nothing else. Run A's 128 scoring
+renders were 52 seeds in when this was found and were discarded rather than kept.
