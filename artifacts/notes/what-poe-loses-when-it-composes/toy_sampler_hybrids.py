@@ -9,6 +9,10 @@ Gaussians stays one, so every diffused density and score is exact.
   C  mixture (OR)                    Du's bottom row: circle or square
   D  product, pair at weight w        as B, but the pair image's weight inside both conditions is --pair-weight,
                                       the rest split equally over that condition's three single shapes
+  E  product, competing captions       three captions score every image, softmax over captions gives p(caption|image),
+                                      Bayes against a uniform image prior gives each caption's condition, and the two
+                                      single-caption conditions are multiplied. --caption-form picks how a caption
+                                      scores an image, --caption-tau its softmax temperature
 
 For each, three ways to sample:
   exact            draw from the composed density at t = 0 directly (closed form)
@@ -235,11 +239,65 @@ def hand_weighted(w):
             Mixture(list(SQUARES.values()) + [PAIR], ws))
 
 
-def main(only=None, tag="", pair_weight=0.1):
+CAPTIONS = ["a circle", "a square", "a circle and a square"]
+CAPTION_SHAPES = {"a circle": {"circle"},
+                  "a square": {"square"},
+                  "a circle and a square": {"circle", "square"}}
+CAPTION_IMAGES = {"a circle": list(CIRCLES.values()),
+                  "a square": list(SQUARES.values()),
+                  "a circle and a square": [PAIR]}
+IMAGE_BANK = list(CIRCLES.values()) + list(SQUARES.values()) + [PAIR]
+IMAGE_SHAPES = [{"circle"}] * 3 + [{"square"}] * 3 + [{"circle", "square"}]
+
+
+def _lse(a, axis=None):
+    m = np.max(a, axis=axis, keepdims=True)
+    return (m + np.log(np.exp(a - m).sum(axis=axis, keepdims=True))).squeeze(axis)
+
+
+def caption_match(form, tau):
+    """match(caption, image) for all three captions over the seven-image bank.
+
+    Form 1 scores an image by how close it is to the images the caption describes, so an extra
+    object costs its pixels. Form 2 counts named shapes present, named shapes missing and present
+    shapes the caption does not name, so an extra object costs one unit.
+    """
+    m = np.zeros((len(CAPTIONS), len(IMAGE_BANK)))
+    for i, c in enumerate(CAPTIONS):
+        for j, x in enumerate(IMAGE_BANK):
+            if form == 1:
+                d = np.array([((x - mu) ** 2).sum() for mu in CAPTION_IMAGES[c]])
+                m[i, j] = _lse(-d / (2 * tau ** 2))
+            else:
+                named, present = CAPTION_SHAPES[c], IMAGE_SHAPES[j]
+                m[i, j] = (len(named & present) - len(named - present) - len(present - named)) / tau
+    return m
+
+
+def caption_experts(form=1, tau=None):
+    """Condition E: the product of the two single-caption conditions, with the third caption competing."""
+    tau = (5.0 if form == 1 else 1.0) if tau is None else tau
+    m = caption_match(form, tau)
+    w = np.exp(m - _lse(m, axis=0)[None])          # p(caption | image), softmax over the three captions
+    w = w / w.sum(axis=1, keepdims=True)           # Bayes with a uniform image prior: p(image | caption)
+    setup = ("product", Mixture(IMAGE_BANK, list(w[0])), Mixture(IMAGE_BANK, list(w[1])))
+    report = {"form": form, "tau": tau,
+              "implied_pair_weight_in_circle": float(w[0, -1]),
+              "implied_pair_weight_in_square": float(w[1, -1]),
+              "p_caption_given_pair_image": {c: float(v) for c, v in
+                                             zip(CAPTIONS, np.exp(m[:, -1] - _lse(m[:, -1])))}}
+    return setup, report
+
+
+def main(only=None, tag="", pair_weight=0.1, caption_form=1, caption_tau=None):
     results, shown, acc_rate = {}, {}, {}
     setups = {k: v for k, v in SETUPS.items() if only is None or k[0] in only}
     if only is not None and "D" in only:
         setups[f"D: product, pair at weight {pair_weight:g} in both"] = hand_weighted(pair_weight)
+    if only is not None and "E" in only:
+        setup, rep = caption_experts(caption_form, caption_tau)
+        setups[f"E: product, competing captions, form {rep['form']}, tau {rep['tau']:g}"] = setup
+        print("condition E:", json.dumps(rep, indent=1))
     for name, (kind, A, B) in setups.items():
         lp, sc = composed(kind, A, B)
         runs = {"exact": exact_samples(kind, A, B),
@@ -289,6 +347,10 @@ if __name__ == "__main__":
     ap.add_argument("--tag", default="")
     ap.add_argument("--pair-weight", type=float, default=0.1,
                     help="condition D: the pair image's weight inside each condition")
+    ap.add_argument("--caption-form", type=int, default=1, choices=(1, 2),
+                    help="condition E: 1 scores an image by distance, 2 by which shapes it got right")
+    ap.add_argument("--caption-tau", type=float, default=None,
+                    help="condition E: the softmax temperature; 5 for form 1, 1 for form 2")
     a = ap.parse_args()
     MALA_K, MALA_STEP = a.mala_k, a.mala_step
-    main(a.only, a.tag, a.pair_weight)
+    main(a.only, a.tag, a.pair_weight, a.caption_form, a.caption_tau)
