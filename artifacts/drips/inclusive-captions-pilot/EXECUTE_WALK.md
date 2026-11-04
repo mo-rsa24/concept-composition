@@ -5,8 +5,8 @@ with `/drip-execute-plan --request`. Branch `exec/inclusive-captions-pilot`.
 
 ## Where the walk is
 
-Piece 2 of 6 is done. Waiting on instruction 8, the eye audit of the 131 both-animal photos,
-which only the user can do. Piece 3, the trainer, is next after it.
+Piece 3 of 6 is done: the trainer is written and its smoke run is green. Instruction 9, the
+user's own run of it, is next.
 
 ## The stop point
 
@@ -30,9 +30,11 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 |---|---|---|
 | 1.1 the criterion | six parts, each carrying a number; the band as a formula rather than a number | `4b394f1a`, amended by `5f3a1c06` |
 | 7 approve the criterion | the user delegated the judgment ("you tell me"); two lines changed, veto offered and not taken | `5f3a1c06` |
-| 2.1 captions into the manifest | `read_captions()` takes the shortest of each photo's five COCO captions; `missing_caption: 0` of 862 | `f778597b`, `dae7c3c9` |
-| 2.2 every path opens | `missing_file: 0` of 862 chosen photos | `dae7c3c9` |
-| 2.3 the shares on the real photos | PASSED on the real manifest: share 0.163, every caption share within 0.002 of design, blank rates spread 0.001 | `dae7c3c9` |
+| 2.1 captions into the manifest | `read_captions()` takes the shortest of each photo's five COCO captions; `missing_caption: 0` of 582 | `f778597b`, `dae7c3c9` |
+| 2.2 every path opens | `missing_file: 0` of 582 chosen photos | `dae7c3c9` |
+| 3.1 the trainer | `trainer.py`, 220 lines on this repo's SDXL loader; 46,448,640 trainable parameters at rank 32 on the four attention projections | `075bbdf1` |
+| 3.2 the smoke run | 20 finite losses, `step_00000` on disk before any training, exit 0 in 225s on `mscluster111` | `075bbdf1` |
+| 2.3 the shares on the real photos | PASSED on the real manifest: dog-present share of run B's cat draws 0.169, every caption share within 0.002 of design, blank rates spread 0.000 | `dae7c3c9` |
 
 ## Decisions
 
@@ -47,6 +49,15 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 | the averaging trigger | 5 of 8 sheet seeds, judged by eye | that, or a sharpness measure | Claude, flagged as the weakest line and left | Laplacian variance picked drawn texture over sharpness here once, and the detector called a dog in 64 of 64 single-cat renders; an eyeball read with an arbitrary threshold beats a precise measure of the wrong thing |
 | the filler photos' caption | the shortest of each photo's five COCO captions | that, a single invented caption, or always blank | Claude, during 2.1 | an invented caption is a third condition A and B do not have, and blank would put the no-both run's rate at 26% against 10% |
 
+## The design picture
+
+[The pilot's high-level design](../../scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg),
+also published at https://claude.ai/artifact/Uhp9tJfqpgHYHnQCfVaDNc. Twelve boxes, the two runs
+identical except for the two arrows out of the caption rule, three boxes dashed as not yet built.
+Its Figure Catalog row is in the plan. It is filed under `artifacts/scenes/` rather than
+`artifacts/results/` because `.gitignore:40` ignores `results/`, so a card filed there would exist
+on one machine only.
+
 ## Repairs made to the plan
 
 **The band and the no-support line**, swept through the plan file as well as the review file, so
@@ -54,8 +65,8 @@ no copy of the flat 12.5 bar survives. Verified with a grep.
 
 **The pool script's wanted counts** were still the design's assumed 200 both-animal and 200
 filler photos, so `counts.json` recorded a shortfall of 69 against a number nobody wants any
-more. They now read the 131 that exist, and `chosen_total` is 862: the 731 every run trains on
-plus the no-both run's 131 filler photos.
+more. They now read the counts that exist after the audit, and `chosen_total` is 582: the 491
+every run trains on plus the no-both run's 91 filler photos.
 
 ## Out of the session
 
@@ -78,6 +89,10 @@ formula, not the number, wherever the number depends on where the data lands.
 
 **Piece 2.** An empty string is never a missing value when the field is a caption, because the
 blank caption is a real training condition.
+
+**Piece 3.** A smoke run on the first N rows of a manifest exercises whichever set sorts first.
+Take the toy one per set in turn, and print the composition at startup so the log says which
+branches the run could have hit.
 
 ## Owed by the closing pass
 

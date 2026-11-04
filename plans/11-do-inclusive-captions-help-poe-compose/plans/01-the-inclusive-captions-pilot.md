@@ -224,7 +224,7 @@ can do.
 ◀ **Needs: [instruction 8](#8--audit-the-both-animal-photos)** done, so the photo count the
 trainer reads is the audited one.
 
-- [ ] **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
+- [x] ✅ **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
       `load_sdxl_models`, `encode_prompt_sdxl`, `load_ddim_scheduler` and `decode_latents` from
       [the SDXL runtime](../../../poe_repair/_sdxl/runtime.py). Do not fetch the diffusers SDXL
       LoRA example; building against the loader keeps the training path identical to the sampling
@@ -232,9 +232,12 @@ trainer reads is the audited one.
   - Output: `poe_repair/experiments/inclusive_captions/trainer.py`
   - The LoRA goes on through peft 0.19.1, already installed in `co3`.
   - Disk guard checks `/datasets`, which is where the checkpoints land.
-- [ ] **3.2** Run the 20-step smoke run on the three toy photos and report the loss curve and the
+- [x] ✅ **3.2** Run the 20-step smoke run on the toy photos and report the loss curve and the
       checkpoint it wrote.
-  - What you want: finite loss, a checkpoint on disk, exit 0, under a minute.
+  - What you want: finite loss, a checkpoint on disk, exit 0, under five minutes.
+  - ✅ 20 finite losses, `step_00000` written before any training, exit 0 in 225s on `mscluster111`.
+  - The toy photos are taken one per set in turn. The first N off the manifest are all cat-only, so
+    a smoke run on those never draws a both-animal photo and proves nothing about the caption rule.
 
 ▶ **Next: [instruction 9](#9--run-the-smoke-test-yourself)**, you run it and see it work.
 
@@ -439,6 +442,7 @@ entry, and `sync-plan-tree` reconciles the scope.
 |---|---|
 | the compose-rate figure | compose rate on y, a 0-to-1 scale, one bar per model (base SDXL, run A, run B) on x, each split into one cat and one dog, a hybrid, and a single animal, with the criterion's band drawn across it. Numbers from the sidecar json beside it, 128 seeds per arm for A and B. |
 | the four-column watching sheet | eight fixed seeds down the rows, four prompts across (dog, cat, joint, product), one image per checkpoint per run, logged to W&B. Not a rate: eight seeds is a picture. |
+| [the pilot's high-level design](../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg) | not a plot. Twelve boxes read left to right, from COCO train2017 through the pool builder, the by-eye audit, the caption rule and the two trainers to the compose-rate figure. The one difference between the two runs sits on the two arrows out of the caption rule. Three boxes are dashed as not yet built: the watching sheet, the scoring pass and the figure. Every box names the file and line it comes from. |
 
 ## Error Matrix
 
