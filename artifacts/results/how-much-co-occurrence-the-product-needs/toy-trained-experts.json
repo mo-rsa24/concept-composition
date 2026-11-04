@@ -1,0 +1,210 @@
+{
+ "what": "two score networks trained separately on overlapping picture sets, then multiplied",
+ "bar": {
+  "support": "crisp >= 150 of 300 while both experts still pass 240 of 300 on their own shape",
+  "null": "crisp < 30 of 300 at every fraction where both experts still pass 240 of 300",
+  "inconclusive": "crisp rises only where expert purity has already fallen"
+ },
+ "verdict": "null",
+ "fractions_meeting_support": [],
+ "device": "cuda",
+ "train_images_per_expert": 4000,
+ "train_steps": 6000,
+ "batch": 256,
+ "lr": 0.0002,
+ "sigma0": 0.1,
+ "reverse_steps": 200,
+ "draws_per_cell": 300,
+ "shared_pair_layouts": [
+  "circle left square right",
+  "square left circle right"
+ ],
+ "results": {
+  "0": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   },
+   "circle expert alone": {
+    "one circle": 300,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 0,
+    "one square": 300,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 300,
+   "square expert draws a square": 300,
+   "still distinct by the 240 of 300 test": true,
+   "final training loss": [
+    0.01287,
+    0.01218
+   ],
+   "seconds": 73.2
+  },
+  "0.001": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   },
+   "circle expert alone": {
+    "one circle": 300,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 0,
+    "one square": 300,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 300,
+   "square expert draws a square": 300,
+   "still distinct by the 240 of 300 test": true,
+   "final training loss": [
+    0.01287,
+    0.01219
+   ],
+   "seconds": 56.2
+  },
+  "0.01": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 1,
+    "hybrid: overlaid": 299
+   },
+   "circle expert alone": {
+    "one circle": 298,
+    "one square": 2,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 3,
+    "one square": 297,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 298,
+   "square expert draws a square": 297,
+   "still distinct by the 240 of 300 test": true,
+   "final training loss": [
+    0.01298,
+    0.0122
+   ],
+   "seconds": 26.9
+  },
+  "0.1": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 41,
+    "hybrid: overlaid": 259
+   },
+   "circle expert alone": {
+    "one circle": 266,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 34,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 0,
+    "one square": 279,
+    "two objects, crisp": 0,
+    "two faint objects": 21,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 266,
+   "square expert draws a square": 279,
+   "still distinct by the 240 of 300 test": true,
+   "final training loss": [
+    0.01328,
+    0.01284
+   ],
+   "seconds": 27.0
+  },
+  "0.3": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 170,
+    "hybrid: overlaid": 130
+   },
+   "circle expert alone": {
+    "one circle": 208,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 92,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 0,
+    "one square": 213,
+    "two objects, crisp": 0,
+    "two faint objects": 87,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 208,
+   "square expert draws a square": 213,
+   "still distinct by the 240 of 300 test": false,
+   "final training loss": [
+    0.01365,
+    0.01316
+   ],
+   "seconds": 27.4
+  },
+  "0.5": {
+   "product": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 249,
+    "hybrid: overlaid": 51
+   },
+   "circle expert alone": {
+    "one circle": 151,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 149,
+    "hybrid: overlaid": 0
+   },
+   "square expert alone": {
+    "one circle": 0,
+    "one square": 158,
+    "two objects, crisp": 0,
+    "two faint objects": 142,
+    "hybrid: overlaid": 0
+   },
+   "circle expert draws a circle": 151,
+   "square expert draws a square": 158,
+   "still distinct by the 240 of 300 test": false,
+   "final training loss": [
+    0.01349,
+    0.0135
+   ],
+   "seconds": 27.1
+  }
+ }
+}

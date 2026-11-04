@@ -1,0 +1,36 @@
+{
+ "what": "a circle-only expert at three step budgets, 300 draws each",
+ "budgets": [
+  6000,
+  20000,
+  60000
+ ],
+ "counts": {
+  "6000": {
+   "one circle": 169,
+   "one square": 83,
+   "two objects, crisp": 45,
+   "two faint objects": 2,
+   "hybrid: overlaid": 1
+  },
+  "20000": {
+   "one circle": 164,
+   "one square": 72,
+   "two objects, crisp": 61,
+   "two faint objects": 3,
+   "hybrid: overlaid": 0
+  },
+  "60000": {
+   "one circle": 165,
+   "one square": 71,
+   "two objects, crisp": 62,
+   "two faint objects": 1,
+   "hybrid: overlaid": 1
+  }
+ },
+ "final_loss": {
+  "6000": 0.58087,
+  "20000": 0.50987,
+  "60000": 0.46869
+ }
+}

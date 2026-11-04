@@ -1,0 +1,189 @@
+{
+ "what": "a VAE plus one caption-conditional latent model; the dial is how often a both-shapes picture is also trained under each single caption",
+ "inference": "summed classifier-free guidance over the two single captions",
+ "guidance": 3.0,
+ "bar": {
+  "support": "compose >= 150 of 300 with both captions still passing 240 of 300",
+  "null": "compose < 30 of 300 wherever both still pass"
+ },
+ "verdict": "null",
+ "settings_meeting_support": [],
+ "device": "cuda",
+ "images": 6000,
+ "vae_steps": 4000,
+ "denoiser_steps": 8000,
+ "latent": "4 x 4 x 8, 128 numbers",
+ "draws_per_cell": 300,
+ "results": {
+  "0": {
+   "the two single captions multiplied": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "a red circle alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "a blue square alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "the joint caption": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "still distinct by the 240 of 300 test": false,
+   "vae reconstruction mse": 0.04743,
+   "denoiser loss": 0.04708,
+   "seconds": 24.3
+  },
+  "0.1": {
+   "the two single captions multiplied": {
+    "one circle": 78,
+    "one square": 103,
+    "two objects, crisp": 0,
+    "two faint objects": 7,
+    "hybrid: overlaid": 112
+   },
+   "a red circle alone": {
+    "one circle": 300,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "a blue square alone": {
+    "one circle": 0,
+    "one square": 300,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "the joint caption": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "still distinct by the 240 of 300 test": true,
+   "vae reconstruction mse": 0.00962,
+   "denoiser loss": 0.05786,
+   "seconds": 23.7
+  },
+  "0.3": {
+   "the two single captions multiplied": {
+    "one circle": 21,
+    "one square": 26,
+    "two objects, crisp": 0,
+    "two faint objects": 170,
+    "hybrid: overlaid": 83
+   },
+   "a red circle alone": {
+    "one circle": 297,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 3,
+    "hybrid: overlaid": 0
+   },
+   "a blue square alone": {
+    "one circle": 0,
+    "one square": 298,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 0
+   },
+   "the joint caption": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "still distinct by the 240 of 300 test": true,
+   "vae reconstruction mse": 0.00967,
+   "denoiser loss": 0.05316,
+   "seconds": 23.4
+  },
+  "0.6": {
+   "the two single captions multiplied": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 160,
+    "hybrid: overlaid": 140
+   },
+   "a red circle alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 126,
+    "hybrid: overlaid": 174
+   },
+   "a blue square alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 127,
+    "hybrid: overlaid": 173
+   },
+   "the joint caption": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "still distinct by the 240 of 300 test": false,
+   "vae reconstruction mse": 0.03117,
+   "denoiser loss": 0.03341,
+   "seconds": 25.1
+  },
+  "1": {
+   "the two single captions multiplied": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 3,
+    "hybrid: overlaid": 297
+   },
+   "a red circle alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 33,
+    "hybrid: overlaid": 267
+   },
+   "a blue square alone": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 52,
+    "hybrid: overlaid": 248
+   },
+   "the joint caption": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 300,
+    "hybrid: overlaid": 0
+   },
+   "still distinct by the 240 of 300 test": false,
+   "vae reconstruction mse": 0.02528,
+   "denoiser loss": 0.05444,
+   "seconds": 24.2
+  }
+ }
+}
