@@ -137,3 +137,20 @@ def label_from_detections(detections, image_size) -> Label:
         f"both species named across {len(kept)} kept box(es), which the margin rule cannot "
         "produce; the detection rows are malformed"
     )
+
+def label_from_manifest_row(row) -> Label:
+    """Label a photograph from the pool manifest, which already carries both box fractions.
+
+    The pool script measured ``largest_cat_fraction`` and ``largest_dog_fraction`` against the
+    same floor this rule uses, so the species never has to be guessed: COCO annotated it.
+    """
+    cat = int(row.get("largest_cat_fraction", 0.0) >= MIN_BOX_FRACTION)
+    dog = int(row.get("largest_dog_fraction", 0.0) >= MIN_BOX_FRACTION)
+    n_boxes = int(row.get("n_cat", 0)) + int(row.get("n_dog", 0))
+    if cat and dog:
+        reason = "annotated cat and dog, both above the size floor"
+    elif cat or dog:
+        reason = f"annotated {'cat' if cat else 'dog'} above the size floor"
+    else:
+        reason = "no annotated cat or dog above the size floor"
+    return Label(cat, dog, reason, n_boxes_kept=n_boxes)

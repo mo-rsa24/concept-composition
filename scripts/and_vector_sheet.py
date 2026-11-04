@@ -6,6 +6,12 @@
     x_aff = E(joint) - E(a) - E(b) + 2 E("")  coefficients summing to 1: if the UNet were affine in its
                                               condition, its prediction under x_aff would be exactly
                                               eps_J - eps_A - eps_B + 2 eps_empty, the term PoE lacks
+    x_pos                                     the positional version: E(joint) with each single prompt's
+                                              word subtracted only at the joint position holding that
+                                              same word. The start token, the end token and every pad
+                                              stay the joint prompt's, so unlike x_raw and x_fix the
+                                              scaffolding SDXL reads is a real prompt's. Words are matched
+                                              on the token itself, per encoder, by and_vector_norms.py
 
 Every column is the repo's plain guided sum over N conditions (scripts/concept_multi_poe.py,
 eps = eps_empty + w * sum_i (eps_i - eps_empty)); one condition is ordinary classifier-free guidance.
@@ -31,7 +37,11 @@ from pathlib import Path
 REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
+# This file's own directory wins, so a copy run from outside the repo uses its own siblings rather than
+# the checkout's older ones.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from and_vector_norms import positional_x  # noqa: E402
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 # Column key, header lines, and the conditions it sums: "a", "b", "joint" name prompts, "x_raw",
@@ -48,12 +58,16 @@ COLUMNS = [
     ("poe_x_fix", ["PoE", "{a}, {b}, x_fix"], ["a", "b", "x_fix"]),
     ("x_aff", ["x_aff alone", 'x_raw + 2E("")'], ["x_aff"]),
     ("poe_x_aff", ["PoE", "{a}, {b}, x_aff"], ["a", "b", "x_aff"]),
+    ("x_pos", ["x_pos alone", "E(joint), words subtracted in place"], ["x_pos"]),
+    ("poe_x_pos", ["PoE", "{a}, {b}, x_pos"], ["a", "b", "x_pos"]),
     ("poe_single", ["PoE", '{a}, {b}, "single animal"'], ["a", "b", "single animal"]),
     ("poe_two", ["PoE", '{a}, {b}, "two animals"'], ["a", "b", "two animals"]),
 ]
+# By key, so a set below names the column it wants rather than its index in the list above.
+BY_KEY = {col[0]: col for col in COLUMNS}
 
 # The phrase search: real phrases as the third expert, and x_fix turned down, beside the references.
-PHRASES = COLUMNS[:4] + [COLUMNS[11]] + [
+PHRASES = COLUMNS[:4] + [BY_KEY["poe_two"]] + [
     ("poe_pair", ["PoE", '{a}, {b}, "a pair of animals"'], ["a", "b", "a pair of animals"]),
     ("poe_side", ["PoE", '{a}, {b}, "side by side"'], ["a", "b", "side by side"]),
     ("poe_together", ["PoE", '{a}, {b}, "together"'], ["a", "b", "together"]),
@@ -62,7 +76,7 @@ PHRASES = COLUMNS[:4] + [COLUMNS[11]] + [
     ("poe_joint", ["PoE", '{a}, {b}, {joint}'], ["a", "b", "joint"]),
     ("poe_x_fix_half", ["PoE", "{a}, {b}, 0.5 x_fix"], ["a", "b", "x_fix*0.5"]),
     ("poe_x_fix_quarter", ["PoE", "{a}, {b}, 0.25 x_fix"], ["a", "b", "x_fix*0.25"]),
-]
+] + [BY_KEY["poe_x_pos"]]
 # One vector at rising weight: PoE of a, b and lam * x_fix, lam from 0.1 to 1 (1 is COLUMNS' poe_x_fix).
 SWEEP = COLUMNS[:4] + [
     ("poe_x_fix_tenth", ["lam = 0.1", "PoE {a}, {b}, lam x_fix"], ["a", "b", "x_fix*0.1"]),
@@ -70,11 +84,14 @@ SWEEP = COLUMNS[:4] + [
     ("poe_x_fix_half", ["lam = 0.5", "PoE {a}, {b}, lam x_fix"], ["a", "b", "x_fix*0.5"]),
     ("poe_x_fix_three_quarters", ["lam = 0.75", "PoE {a}, {b}, lam x_fix"], ["a", "b", "x_fix*0.75"]),
     ("poe_x_fix", ["lam = 1", "PoE {a}, {b}, lam x_fix"], ["a", "b", "x_fix"]),
-]
+] + [BY_KEY["poe_x_pos"]]
+# The positional build beside the references and the global build it is meant to improve on.
+POSITIONAL = COLUMNS[:4] + [BY_KEY[k] for k in ("x_fix", "poe_x_fix", "x_pos", "poe_x_pos")]
 SETS = {"vectors": (COLUMNS, 'An "and" vector as a third expert'),
         "phrases": (PHRASES, "A phrase as the third expert"),
         "sweep": (SWEEP, "x_fix as the third expert, at rising weight"),
-        "curate": ([COLUMNS[2]], "The joint prompt, one tile per seed, to pass by eye")}
+        "positional": (POSITIONAL, 'The "and" vector built position by position, beside the global build'),
+        "curate": ([BY_KEY["joint"]], "The joint prompt, one tile per seed, to pass by eye")}
 
 
 def split(cond: str) -> tuple[str, float]:
@@ -105,6 +122,9 @@ def render(columns: list, a: str, b: str, joint: str, seeds: list[int]) -> None:
     e["x_raw"] = tuple(m - p - q for m, p, q in zip(e["joint"], e["a"], e["b"]))
     e["x_fix"] = tuple(x + z for x, z in zip(e["x_raw"], e0))
     e["x_aff"] = tuple(x + 2 * z for x, z in zip(e["x_raw"], e0))
+    # x_pos keeps the joint prompt's pooled vector: it carries no token positions to align.
+    e["x_pos"] = (positional_x(e["joint"][0], {"a": e["a"][0], "b": e["b"][0]}, ctx.models, joint,
+                               [("a", a), ("b", b)]), e["joint"][1])
     for _, _, conds in columns:
         for c, _ in map(split, conds):
             if c not in e:

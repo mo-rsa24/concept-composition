@@ -183,14 +183,23 @@ def main() -> int:
 
     for half in ("clip_l", "bigg"):
         s = summary[half]
-        print(f"\n{half}: position 0  x_raw {s['position_0']['x_raw']:.3f}  x_fix {s['position_0']['x_fix']:.3f}"
-              f"  joint {s['position_0']['joint']:.3f}")
+        print(f"\n{half}: position 0  " + "  ".join(f"{k} {v:.3f}" for k, v in s["position_0"].items()))
         print("  position  " + "  ".join(f"{i:>7d}" for i in range(1, pad_start)))
+        print("  token     " + "  ".join(f"{t.replace('</w>', ''):>7.7}"
+                                         for t in tok[args.joint][1:pad_start]))
         for k in norms:
             print(f"  {k:<8}  " + "  ".join(f"{v:7.2f}" for v in s["content_positions"][k]))
         print(f"  pads {pad_start}-76 median: " + "  ".join(f"{k} {v:.3f}" for k, v in s["pad_median"].items())
               + f"   x_fix/joint {s['x_fix_over_joint_pad_median']:.3f} -> repair works: {s['repair_works']}")
     print("\npooled norms: " + "  ".join(f"{k} {v:.3f}" for k, v in summary["pooled"].items()))
+
+    sc = summary["x_pos_scaffolding"]
+    print(f"\nx_pos build check: largest absolute difference from the joint prompt at the start token, "
+          f"the end token (position {sc['positions_checked']['end_token']}) and the pads: "
+          f"{sc['max_abs_difference_from_joint']:.6g}, allowed {sc['allowed']:.6g} "
+          f"-> build is right: {sc['build_is_right']}")
+    print(f"  positions where x_pos differs from the joint prompt at all: "
+          f"{sc['positions_that_differ_at_all']}")
 
     import matplotlib
     matplotlib.use("Agg")
@@ -199,15 +208,17 @@ def main() -> int:
 
     pos = np.arange(77)
     fig, axes = plt.subplots(2, 1, figsize=(15, 7), sharex=True)
-    colors = {"x_raw": "#c0392b", "x_fix": "#2471a3", "joint": "#7f8c8d"}
+    colors = {"x_raw": "#c0392b", "x_fix": "#2471a3", "x_pos": "#1e8449", "joint": "#7f8c8d"}
+    bar_w = 0.8 / len(norms)
     for ax, half, title in zip(axes, ("clip_l", "bigg"), ("CLIP ViT-L slice (768 wide)", "OpenCLIP bigG slice (1280 wide)")):
         rest_max = max(max(norms[k][half][1:]) for k in norms)
         cap = 1.15 * rest_max
         for j, k in enumerate(norms):
             vals = np.array(norms[k][half])
-            ax.bar(pos + (j - 1) * 0.28, np.minimum(vals, cap), width=0.28, color=colors[k], label=k)
+            off = (j - (len(norms) - 1) / 2) * bar_w
+            ax.bar(pos + off, np.minimum(vals, cap), width=bar_w, color=colors[k], label=k)
             if vals[0] > cap:
-                ax.annotate(f"{vals[0]:.0f}, off scale", (0 + (j - 1) * 0.28, cap), fontsize=7,
+                ax.annotate(f"{vals[0]:.0f}, off scale", (0 + off, cap), fontsize=7,
                             rotation=90, va="top", ha="center", color="white")
         ax.axvline(pad_start - 0.5, color="k", ls=":", lw=1)
         ax.text(pad_start, cap * 0.95, "padding from here", fontsize=8, va="top")
@@ -220,8 +231,10 @@ def main() -> int:
     axes[1].set_xticklabels([f"{i}\n{l}" if i <= pad_start else (str(i) if i % 10 == 0 else "")
                              for i, l in enumerate(labels)], fontsize=6)
     axes[1].set_xlabel(f'token position in "{args.joint}" (0 to 76)')
-    fig.suptitle(f'Where the "and" vector\'s size sits: x_raw = E(joint) - E(a) - E(b), '
-                 f'x_fix = x_raw + E(""), beside E(joint)', fontsize=11)
+    fig.suptitle(f'Where the "and" vector\'s size sits, one bar per token position: '
+                 f'x_raw = E(joint) - E(a) - E(b), x_fix = x_raw + E(""), '
+                 f'x_pos = E(joint) with each word subtracted only where that word sits, '
+                 f'beside E(joint) itself', fontsize=10)
     fig.tight_layout()
     fig.savefig(args.out / f"{slug}-norms.png", dpi=150)
     print(f"\nwrote {args.out / f'{slug}-norms.json'} and .png")
