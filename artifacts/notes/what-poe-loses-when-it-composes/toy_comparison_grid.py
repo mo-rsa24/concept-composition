@@ -22,10 +22,10 @@ COLS = [
     dict(head="Captions decide the overlap", sub="three captions compete, giving about 1 in 22",
          setup=lambda: t.caption_experts(2)[0]),
 ]
-ROWS = [("exact", "What the maths says"),
-        ("reverse diffusion", "Plain reverse diffusion"),
-        ("annealed MALA", "With a Langevin corrector"),
-        ("annealed HMC", "With a Hamiltonian corrector")]
+ROWS = [("exact", "The maths"),
+        ("reverse diffusion", "Plain"),
+        ("annealed MALA", "Langevin"),
+        ("annealed HMC", "Hamiltonian")]
 
 import os, pickle
 CACHE = "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/notes/what-poe-loses-when-it-composes/.grid-cache.pkl"
@@ -55,10 +55,10 @@ if not os.path.exists(CACHE):
     pickle.dump((cells, ACC), open(CACHE, "wb"))
 
 NC, NR = len(COLS), len(ROWS)
-fig = plt.figure(figsize=(4.3 * NC, 2.05 * NR + 2.3))
-gs = fig.add_gridspec(NR * 2 + 1, NC * 2 + 1, height_ratios=[0.40, 1] * NR + [0.80],
-                      width_ratios=[0.30] + [1] * (NC * 2),
-                      hspace=0.20, wspace=0.08, left=0.012, right=0.985, top=0.835, bottom=0.025)
+fig = plt.figure(figsize=(4.3 * NC, 2.25 * NR + 2.3))
+gs = fig.add_gridspec(NR * 2 + 1, NC * 2 + 1, height_ratios=[0.52, 1] * NR + [1.15],
+                      width_ratios=[0.22] + [1] * (NC * 2),
+                      hspace=0.20, wspace=0.08, left=0.012, right=0.985, top=0.835, bottom=0.075)
 
 for j, c in enumerate(COLS):
     fig.text(0.075 + (0.908 / NC) * (j + 0.5), 0.905, c["head"], ha="center", fontsize=13.5,
@@ -67,7 +67,7 @@ for j, c in enumerate(COLS):
 
 for i, (m, label) in enumerate(ROWS):
     lax = fig.add_subplot(gs[i * 2:i * 2 + 2, 0]); lax.axis("off")
-    lax.text(0.5, 0.5, label, rotation=90, va="center", ha="center", fontsize=12.5,
+    lax.text(0.5, 0.5, label, rotation=90, va="center", ha="center", fontsize=11.5,
              fontweight="bold", color=INK, transform=lax.transAxes)
     for j, c in enumerate(COLS):
         imgs, crisp, top, topn = cells[(c["head"], m)]
@@ -76,11 +76,13 @@ for i, (m, label) in enumerate(ROWS):
         ax.add_patch(FancyBboxPatch((0.02, 0.08), 0.96, 0.80, transform=ax.transAxes,
                                     boxstyle="round,pad=0.01",
                                     facecolor="#eaf4ec" if ok else "#fbeceb", edgecolor="none"))
-        extra = ""
-        if m in ACC.get(c["head"], {}):
-            extra = f"      accepted {ACC[c['head']][m]:.0%} of its moves"
-        ax.text(0.5, 0.48, f"{top}  ·  {topn} of 300{extra}", ha="center", va="center",
+        ax.text(0.5, 0.62, f"{top}  ·  {topn} of 300", ha="center", va="center",
                 fontsize=11.5, fontweight="bold", color=GOOD if ok else BAD, transform=ax.transAxes)
+        sub2 = f"crisp pairs {cells[(c['head'], m)][1]} of 300"
+        if m in ACC.get(c["head"], {}):
+            sub2 += f"   ·   accepted {ACC[c['head']][m]:.0%} of its moves"
+        ax.text(0.5, 0.28, sub2, ha="center", va="center", fontsize=8.5, color="#6b6b6b",
+                transform=ax.transAxes)
         sub = gs[i * 2 + 1, 1 + j * 2:3 + j * 2].subgridspec(1, 4, wspace=0.06)
         for k in range(4):
             a = fig.add_subplot(sub[0, k])
@@ -90,14 +92,15 @@ ax = fig.add_subplot(gs[-1, 1:]); ax.axis("off")
 verdicts = [
     "Nothing to find.\nThe maths itself says one merged shape,\nso no corrector can help.",
     "The maths is already right.\nAll three samplers miss it,\nbetter correctors included.",
-    "The maths is still right.\nMomentum roughly triples the hit rate\nand still leaves 5 in 6 wrong.",
+    "The maths is still right.\nBoth correctors treble the plain rate,\nto 30 and 31 of 300. Momentum buys\nnothing over Langevin at four times\nthe cost, and 9 in 10 are still wrong.",
     "The maths is now wrong too:\nit prefers one shape,\nand every sampler agrees.",
 ]
 for j, v in enumerate(verdicts):
-    ax.text((j + 0.5) / NC, 0.80, v, ha="center", va="top", fontsize=10.5, color=INK,
+    ax.text((j + 0.5) / NC, 0.95, v, ha="center", va="top", fontsize=10.5, color=INK,
             transform=ax.transAxes, linespacing=1.6)
-ax.text(0.5, 0.02, "Every cell: 4 of 300 draws, with the label most of the 300 were given. Green means most draws are a clean circle-and-square pair; red means they are not. "
-                   "Per reverse step the Langevin corrector spends 5 gradient evaluations and the Hamiltonian one 20, so the bottom row is the most expensive by a factor of four.",
+ax.text(0.5, -0.12, "Every cell: 4 of 300 draws, the label most of the 300 were given, and the crisp-pair count beneath it. Green means most draws are a clean circle-and-square pair.",
+        ha="center", fontsize=9.5, color=FAINT, transform=ax.transAxes)
+ax.text(0.5, -0.26, "Per reverse step the Langevin corrector spends 5 gradient evaluations and the Hamiltonian one 20, so the bottom row costs four times the one above it.",
         ha="center", fontsize=9.5, color=FAINT, transform=ax.transAxes)
 
 fig.suptitle("Turning up how often the two shapes appear together, and asking four samplers to draw it",

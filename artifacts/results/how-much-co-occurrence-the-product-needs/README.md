@@ -33,6 +33,9 @@ about three orders of magnitude in that weight.
 | File | What it shows |
 |---|---|
 | `the-leak-dial.png` | the second dial: each expert's weight on each one of the other's three shapes (x, log scale, 1e-4 to 0.2) against the share of the exact product that is a clean pair and the share that is a single shape (y, 0 to 1), with the four sampled settings as markers and the half-share crossing at 0.00567 marked. The pair image's weight is held at 0.1 throughout |
+| `four-samplers-across-the-overlap-dial.png` | the same four situations, now with four rows: the exact product, plain reverse diffusion, the Langevin corrector and a Hamiltonian corrector, each with its crisp-pair count and the corrector's acceptance rate |
+| `can-it-make-a-third-arrangement.png` | both experts hold two pair layouts (circle left and circle right, each at half the pair weight of 0.1); the counts say which of four layouts each draw lands nearest, two of them trained on and two never seen |
+| `the-leak-dial.png` | the share of the exact product that is a clean pair against how much weight each expert puts on each one of the other's three shapes, log x, with the point where that share drops below half |
 | `what-changes-as-overlap-rises.png` | four situations across (no overlap, one picture in a thousand, one in ten, and the overlap three competing captions imply), two rows down (what the exact product calls most likely, and what reverse diffusion draws). Each cell carries four draws, the label most of its 300 were given, and a green or red tint for whether that label is a clean pair |
 | `the-chain-of-results.png` | the four earlier results in date order ending on this sweep, one row each: the year and the claim, the paper's own figure where one is on disk, what it showed and what it left open. Liu et al. 2022 and Bradley 2025b have no figure fetched, so their panels state the result in words rather than standing in a picture |
 | `weight-sweep.png` | the fraction of 300 draws labelled a crisp pair (y, 0 to 1) against the pair image's weight inside each expert (x, log scale, 0.001 to 0.5), one curve per sampler, with condition B's weight of 0.1 marked and the grid's floor at 0.001 labelled as a floor |
@@ -150,6 +153,19 @@ threshold, which is a measurement on the real model with its reading written in 
 
 ## What this cannot claim
 
+**The product returns arrangements it was trained on and no others.** With two pair layouts inside
+both experts, the circle on the left in one and on the right in the other, each at half the pair
+weight of 0.1, the exact product splits 145 and 155 of 300 between those two and puts 0 of 300 within
+a squared distance of 30 of either of two layouts nobody trained on. An exact draw sits about 7.6
+from its own layout, so 0 is not a thresholding artefact. The sweep measures when the product prefers
+a two-object picture; it does not show the product arranging two objects.
+
+**Momentum does not rescue the sampler.** At a pair weight of 0.1 the plain sampler gives 10 crisp
+pairs of 300, the Langevin corrector 30 and a Hamiltonian corrector 31, the last at four times the
+gradient cost and with 93% of its moves accepted against the Langevin corrector's 38%. A corrector
+treble the plain rate and leaves nine draws in ten wrong. A single tuning run at 100 draws read 17,
+which scaled to 51 of 300 and was wrong; the 300-draw figure is 31.
+
 **Every crisp pair is the one picture both experts were given, not a new arrangement.** The
 side-by-side pair holds the circle on the left at x = 10 and the square on the right at x = 22, and
 that is the only two-object picture in either expert. Of 300 exact draws at a pair weight of 0.001
@@ -191,7 +207,10 @@ cd /home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/notes/what-poe-loses-wh
 /home/molef/miniconda3/bin/python3 -I toy_cooccurrence_sheet.py    # draws-across-weights.png
 /home/molef/miniconda3/bin/python3 -I toy_caption_competition.py   # competing-captions.png
 /home/molef/miniconda3/bin/python3 -I toy_chain_of_results.py      # the-chain-of-results.png
-/home/molef/miniconda3/bin/python3 -I toy_comparison_grid.py       # what-changes-as-overlap-rises.png
+/home/molef/miniconda3/bin/python3 -I toy_comparison_grid.py       # four-samplers-across-the-overlap-dial.png
+/home/molef/miniconda3/bin/python3 -I toy_leak_sweep.py            # toy-leak-sweep.json, about 1 minute
+/home/molef/miniconda3/bin/python3 -I toy_leak_figure.py           # the-leak-dial.png
+/home/molef/miniconda3/bin/python3 -I toy_layout_generalisation.py # can-it-make-a-third-arrangement.png
 /home/molef/miniconda3/bin/python3 -I toy_leak_sweep.py            # toy-leak-sweep.json, about 40 seconds
 /home/molef/miniconda3/bin/python3 -I toy_leak_figure.py           # the-leak-dial.png
 ```
