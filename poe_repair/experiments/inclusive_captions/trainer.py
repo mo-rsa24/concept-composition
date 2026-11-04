@@ -128,7 +128,8 @@ def main() -> int:
     ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--photos", type=int, default=0,
-                    help="train on only the first N photos; 0 means all of them. For the smoke run.")
+                    help="train on only N photos, taken one per set in turn so every caption branch "
+                         "of the rule gets exercised; 0 means all of them. For the smoke run.")
     ap.add_argument("--model-id", default=DEFAULT_MODEL_ID)
     ap.add_argument("--device", default=None)
     ap.add_argument("--dtype", default="bf16")
@@ -150,7 +151,22 @@ def main() -> int:
         raise SystemExit(f"no photo manifest at {MANIFEST}; run scripts/census/inclusive_captions_pool.py")
     photos = cap.build_photos(args.run, manifest=manifest, seed=args.seed)
     if args.photos:
-        photos = photos[: args.photos]
+        # Round-robin across the sets rather than the first N, because the first N are all
+        # cat-only and the both-animal branch is the one cell the two runs differ in. A smoke run
+        # that never draws a both-animal photo proves the loop runs and nothing about the rule.
+        by_set: dict[str, list[cap.Photo]] = {}
+        for photo in photos:
+            by_set.setdefault(photo.photo_set, []).append(photo)
+        queues = list(by_set.values())
+        picked: list[cap.Photo] = []
+        while len(picked) < args.photos and any(queues):
+            for queue in queues:
+                if queue and len(picked) < args.photos:
+                    picked.append(queue.pop(0))
+        photos = picked
+    print("photos by set: " + ", ".join(
+        f"{s} {sum(1 for p in photos if p.photo_set == s)}"
+        for s in dict.fromkeys(p.photo_set for p in photos)), flush=True)
     print(f"run {args.run}: {len(photos)} photos, {args.steps} steps at {args.resolution} square",
           flush=True)
 
