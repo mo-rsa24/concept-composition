@@ -34,6 +34,7 @@ import sys
 import time
 from pathlib import Path
 
+import numpy as np
 import torch
 import torch.nn.functional as F
 import matplotlib
@@ -89,9 +90,7 @@ def load_picture(path: str, resolution: int) -> torch.Tensor:
         left, top = (w - side) // 2, (h - side) // 2
         im = im.crop((left, top, left + side, top + side)).resize(
             (resolution, resolution), Image.BICUBIC)
-        x = torch.from_numpy(
-            (torch.frombuffer(im.tobytes(), dtype=torch.uint8)
-             .reshape(resolution, resolution, 3).numpy())).float()
+        x = torch.from_numpy(np.asarray(im, dtype=np.uint8).copy()).float()
     return (x.permute(2, 0, 1) / 127.5 - 1.0).unsqueeze(0)
 
 
