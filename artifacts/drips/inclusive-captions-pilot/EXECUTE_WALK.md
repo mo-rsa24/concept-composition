@@ -118,3 +118,14 @@ sheets arrive while the loss curve is still moving rather than at the end.
 **Pin the free card rather than waiting for a free node.** `mscluster106` device 0 was at 100%
 under another user and device 1 was untouched. `biggpu`'s one-job-per-user limit is a Slurm
 limit, and a `nohup` launch pinned with `CUDA_VISIBLE_DEVICES` is not subject to it.
+
+**Size is not species.** The pool's only screen on the 400 single-animal photos is a 0.25 floor on
+the animal's box as a fraction of the image's longer side. That floor was chosen to match the
+compose scorer, and it measures how much of the frame the animal takes. It cannot tell a live cat
+from a cat on a television, a statue or a plush toy, which is exactly what the both-animal audit
+rejected 33 photos for. The single-animal sets now get the same 448-pixel audit pages, 16 a page,
+through `scripts/census/audit_both_animal_photos.py --set cat_only`.
+
+**A bad photo cannot make the two arms differ.** Both train on the identical 491 photographs in
+the identical order from the identical seed. Pool noise lowers both conditions together and
+shrinks the gap the caption rule produces; it cannot invent one.

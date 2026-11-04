@@ -216,12 +216,12 @@ fixed and cannot be shaped by anything the build reveals.
   - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.169, every caption
     share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
-▶ **Next: [instruction 8](#8--audit-the-both-animal-photos)**, the eye audit, which only you
+▶ **Next: [instruction 8](#8--audit-the-training-photos)**, the eye audit, which only you
 can do.
 
 ### 3. 🔧 Build the trainer
 
-◀ **Needs: [instruction 8](#8--audit-the-both-animal-photos)** done, so the photo count the
+◀ **Needs: [instruction 8](#8--audit-the-training-photos)** done, so the photo count the
 trainer reads is the audited one.
 
 - [x] ✅ **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
@@ -317,7 +317,7 @@ of them after seeing a result, say so now, because that is the only moment the a
 
 ▶ **Next: [task 2.1](#2--finish-the-data-build)**.
 
-### 8. 👁️ Audit the both-animal photos
+### 8. 👁️ Audit the training photos
 
 ◀ **Needs: [tasks 2.1 to 2.3](#2--finish-the-data-build)** done.
 
@@ -344,6 +344,23 @@ What you wanted: a count of how many of the 131 survive, and the reasons the res
 What failure looks like: more than about 20 rejections. That moves the dog-present share of run
 B's cat draws below what 128 seeds can resolve, and the single-name caption shares have to rise
 again before anything trains.
+
+8.4 **Open the 26 single-animal audit pages** at
+`/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/audit_cat_only_page_00.png`
+through `_12`, and `audit_dog_only_page_00.png` through `_12`, written by the same renderer with
+`--set cat_only` and `--set dog_only`. The only screen on these 400 photos is the 0.25
+box-fraction floor, which measures how much of the longer side the animal spans and says nothing
+about whether the thing in the box is a live animal.
+
+8.5 **Reject the same four kinds the both-animal pass rejected**: a drawing, a statue or plush
+toy, an animal shown on a screen, and a photo where the annotation names an animal that is not
+findable in the frame.
+
+8.6 **Write the rejected tile numbers down** per set, with one word each for why.
+
+What you wanted: a rejection count per set. What failure looks like: more than about 20 in either.
+Both arms train on the identical 491 photos, so a bad photo cannot make A and B differ; it makes
+both conditions weaker and shrinks whatever gap the caption rule produces.
 
 ▶ **Next: [task 3.1](#3--build-the-trainer)**.
 
