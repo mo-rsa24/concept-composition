@@ -9,8 +9,10 @@ Every reply in this walk ended on a `gap:` line naming field words that no note,
 chapter in the learning tree teaches. Fourteen words accumulated:
 
 masking, mimicry, occlusion, profusion, the ILO classification, pleural thickening, consolidation,
-infiltration, intersection over union, DICOM, interobserver agreement, AUROC, joint conditioning,
-prevalence recalibration.
+infiltration, intersection over union, DICOM, windowing, MONOCHROME1, interobserver agreement,
+Fleiss' kappa, AUROC, joint conditioning, prevalence recalibration.
+
+Seventeen words.
 
 They are not fourteen subjects. They are four, and the grouping is what one sitting can learn at
 once:
@@ -18,9 +20,9 @@ once:
 | Journey | The words it covers | Why these belong together |
 |---|---|---|
 | A: what two diseases do to each other on one film | masking, mimicry, occlusion, profusion, the ILO classification, pleural thickening, consolidation, infiltration | all eight are things a reader says about a radiograph, and the first four are the overlap regimes this walk's claim 1.10 rests on |
-| B: where a finding is, and how much two findings share | intersection over union, DICOM, bounding box, box fraction, boolean mask | the box and the pixels it sits on. Run 5 of this walk turned on an IoU floor and the answer changed, so this is the measure the regimes are read with |
+| B: where a finding is, and how much two findings share | intersection over union, DICOM, windowing, MONOCHROME1, bounding box, box fraction, boolean mask | the box and the pixels it sits on. Run 5 of this walk turned on an IoU floor and the answer changed, so this is the measure the regimes are read with |
 | C: scoring a classifier when the test set is biased | AUROC, joint conditioning, prevalence recalibration, AUROC by subgroup, hidden stratification, shortcut learning, confidence interval, binomial bound, Clopper-Pearson, McNemar's test | the whole chain in [the composition route](../../../../plans/route-compose-x-rays-and-score-them.md) ends in an AUROC table with an interval per cell, and none of the measures in it is taught anywhere yet |
-| D: agreement between three readers | interobserver agreement | `ai-engineering/chance-corrected-agreement` already teaches percent agreement through Cohen's κ for two raters. VinDr has three, which that journey does not reach, so this is `--over` and not a new journey |
+| D: agreement between three readers | interobserver agreement, Fleiss' kappa | `ai-engineering/chance-corrected-agreement` already teaches percent agreement through Cohen's κ for two raters. VinDr has three, which that journey does not reach, so this is `--over` and not a new journey |
 
 The register of every word a walk has ever left uncovered is
 `~/goal-setting/learning/artifacts/notes/words-to-learn/WORDS.md`, most-seen first. Journey C picks

@@ -47,13 +47,13 @@ for. This walk marks every claim in it as holding, needing a named check, wrong 
 
 **Where the walk is**
 
-Turn 1, claim 1.10, round 1. Claims 1.1, 1.3, 1.4 and 1.5 are wrong as stated and repaired into
-1.7, 1.8, 1.9 and 1.10; 1.6 holds and shows only the first regime; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6
+Turn 1, claim 1.9. Claims 1.1, 1.3, 1.4 and 1.5 are wrong as stated and repaired into
+1.7, 1.8, 1.9 and 1.10; 1.6 holds and shows only the first regime; 1.10 holds with a VinDr query for three of its four regimes; 1.2 holds with a disjunction consequence carried to turns 5 and 7; turn 6
 is routed elsewhere.
 
 **What compile would produce today**
 
-Nothing worth producing: 16 of 108 claims carry a mark, and nine of them are the routed turn.
+Nothing worth producing: 17 of 108 claims carry a mark, and nine of them are the routed turn.
 
 ## The idea, as it stands
 
@@ -88,7 +88,7 @@ claims are therefore the question's own premises plus what the three images asse
 - [x] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`) — **wrong as stated**, the three are real but not all of them and they are kinds of region rather than kinds of patient; repaired into 1.10
 - [x] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's — **holds**, and the figure shows only the separate-places regime; its own paper names the hidden-disease regime in prose and pictures none of it
 - [x] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film — **holds** *(appended round 5, the repair of 1.5)*
-- [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one *(appended round 4, the repair of 1.4)*
+- [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one  ← current *(appended round 4, the repair of 1.4)*
 - [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
 - [x] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film: both diseases in separate places, both in the same place and both readable, a lesion neither builds alone, and one disease present and unreadable because the other has destroyed or buried the lung it would show in — **holds**, measured per pair on VinDr-CXR, with one named pair for each of the first two regimes and a kappa-based selection for the fourth *(appended round 5, the repair of 1.5)*
