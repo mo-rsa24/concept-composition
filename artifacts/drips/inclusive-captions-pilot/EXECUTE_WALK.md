@@ -157,3 +157,11 @@ careful they sound, which is what `inclusive_captions_judge_calibrate.py` does.
 **Pushing to GitHub broke mid-session.** `origin` became an SSH URL this session has no key for,
 and the HTTPS URL returns 403. Work continues by copying files straight to the cluster clone with
 rsync. Everything is committed locally on `exec/can-a-classifier-supply-the-missing-term`.
+
+**`mscluster107` went down at 09:48 on 2026-11-04 and took two jobs with it.** It stopped
+answering ssh and `sinfo` moved it from the live list to `down*`. The calibration pass was 40 of
+48 images in and wrote nothing, because it only wrote at the end; the generator had written 131
+of its 175 images, and those survive because each is saved as it is drawn. Of `biggpu`'s seven
+nodes, `107`, `108`, `110` and `112` are down, `109` is draining and `111` is the Blackwell `co3`
+cannot drive, so `mscluster106` is the only usable node and everything queues on its one free
+card. Any pass over hundreds of images writes a row at a time from here on.
