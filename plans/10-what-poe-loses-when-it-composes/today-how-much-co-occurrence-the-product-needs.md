@@ -106,8 +106,10 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 - [x] **Add condition D** ✅ verified (`--pair-weight`, 2026-11-04) to the toy script: the pair image inside both experts at weight w, the
   remaining 1 − w split equally across that expert's three single shapes. `--pair-weight` sets w.
 - [x] **Handle w = 0** ✅ verified (the pair component is dropped, 2026-11-04) by dropping the pair component rather than taking `log(0)`.
-- [x] **📸 You should see** at w = 0 the same counts condition A already holds ✅ verified (byte-identical to A: 300 / 2 + 298 / 300, and D at 0.1 is B's density exactly, 2026-11-04). You should see at w = 0 the same counts condition A already holds: 300 hybrids from the
+- [x] **📸 You should see** at w = 0 the same counts condition A already holds: 300 hybrids from the
   exact sampler, 298 from reverse diffusion, 300 from annealed MALA, give or take the draw.
+  ✅ verified (byte-identical to A, 2026-11-04; D at 0.1 is B's density exactly, and the exact
+  sampler agrees at 300 of 300 while the two sampled ones differ by draw alone)
 
 ▶ Next: step 2.
 
