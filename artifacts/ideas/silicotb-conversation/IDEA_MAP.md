@@ -4,7 +4,7 @@
 
 | Turn | Claims | Marked | Mark spread |
 |---|---|---|---|
-| **1 (current)**: TB then silicosis, how each changes the other | 9 | 5 | 1 holds, 3 wrong as stated, 1 needs a check |
+| **1 (current)**: TB then silicosis, how each changes the other | 10 | 8 | 3 holds, 4 wrong as stated, 1 needs a check |
 | 2: where AI fails, and what the label should be | 18 | 0 | all open |
 | 3: public-data pairs with the same three regimes | 15 | 0 | all open |
 | 4: pairs that genuinely interact | 11 | 0 | all open |
@@ -12,7 +12,7 @@
 | 6: multi-label LoRA on cats and dogs | 9 | 9 | routed, not walked here |
 | 7: is there a mechanism or a context for cats and dogs | 12 | 0 | all open |
 | 8: does inclusive training generalise across seeds and pairs | 12 | 0 | all open |
-| **total** | **107** | **14** | |
+| **total** | **108** | **17** | |
 
 Load-bearing: claim 5.7, that a composition which divides out the base image distribution equals
 the true joint whenever the two labels are conditionally independent given the whole image. Every
@@ -87,12 +87,40 @@ claims are therefore the question's own premises plus what the three images asse
 - [x] 1.4 CT separates the combined condition into four distinguishable patterns (`source/screenshots/four-ct-patterns.png`) — **wrong as stated**, the four are the atoms the condition is built from, not four looks of the condition; repaired into 1.9
 - [x] 1.5 the three overlap regimes are as drawn: separate lesions, same-region lesions, merged presentation (`source/screenshots/three-overlap-regimes.png`) — **wrong as stated**, the three are real but not all of them and they are kinds of region rather than kinds of patient; repaired into 1.10
 - [x] 1.6 combined fibrosis and emphysema has the CT appearance shown (`source/screenshots/cpfe-ct-example.png`), which belongs to turn 4's content, not turn 1's — **holds**, and the figure shows only the separate-places regime; its own paper names the hidden-disease regime in prose and pictures none of it
-- [x] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film — **holds** *(appended round 5, the repair of 1.5)*
 - [ ] 1.9 the four CT patterns are the four atomic predicates of the condition's Boolean formula, (simple silicosis OR complicated silicosis) AND (active tuberculosis OR post-tuberculous lung disease), so the formula has four atoms and two disjunction nodes rather than three atoms and one  ← current *(appended round 4, the repair of 1.4)*
 - [ ] 1.8 the three regimes in `source/screenshots/three-overlap-regimes.png` are the project's co-occurrence, intersection and interaction, in that order *(appended round 3, the repair of 1.3)*
 - [x] 1.7 what the order of onset was supposed to carry is carried instead by two films of the same patient at different times: a rapid rise in how many opacities there are, in their size, or a new cavity, is what favours tuberculosis — **needs a check** *(appended round 2, the repair of 1.1)*
 - [x] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film: both diseases in separate places, both in the same place and both readable, a lesion neither builds alone, and one disease present and unreadable because the other has destroyed or buried the lung it would show in — **holds**, measured per pair on VinDr-CXR, with one named pair for each of the first two regimes and a kappa-based selection for the fourth *(appended round 5, the repair of 1.5)*
-- [x] 1.10 the overlap has four regimes, not three, and they apply to a region of a lung rather than to a whole film — **holds**
+
+**1.9, what attacking it found.** No mark yet. Four things break, and the first two are visible in
+the figure the claim is built from.
+
+**The silicosis pair is not two atoms.** Panel B draws conglomerate masses with small nodules still
+scattered around them, which is what complicated silicosis is: the large-opacity grade of the ILO
+classification is defined as sitting on a background of small opacities. So complicated silicosis
+contains simple silicosis, `B` implies `A`, and `A OR B` reduces to `A`. One graded predicate, how
+much silicosis, not two Boolean ones.
+
+**The tuberculosis pair is a clock, not a disjunction.** Active tuberculosis and post-tuberculous
+lung disease are the same disease at two times, and a patient can carry both at once (healed
+scarring in one lobe from an earlier episode, active disease in another). An ordering over time
+cannot be a node in a formula whose atoms are simultaneous.
+
+**The formula is over a patient and 1.10 settled that the unit is a region.** A patient-level
+conjunction says both diseases are present and says nothing about where, so it cannot carry the four
+regimes. Read per region it fails differently: the hidden regime and the merged regime are both
+cases where the conjunction is true and the film shows one finding or neither. Presence and
+readability are different predicates, and the formula only has the first.
+
+**The atoms are three-reader votes, not facts.** Run 6's Fleiss' kappa is 0.355 for consolidation
+and 0.365 for atelectasis. For the findings that matter to the hidden regime, the atom's own truth
+value is a chance-corrected agreement of about a third, so a Boolean formula over them is a formula
+over calls that two of three readers do not make.
+
+**The direction a repair would take.** Per region, one graded silicosis extent and one
+tuberculosis state with a time on it, plus a separate readability predicate that the four regimes of
+1.10 are the values of. That is two graded predicates and a visibility term, not four Booleans, and
+it is what `fix` would write as 1.11.
 
 **1.10, settled.** Mark: holds. The four regimes are a per-pair property that can be read off
 annotation boxes, and three of the four now have a query over VinDr-CXR that selects their films.
