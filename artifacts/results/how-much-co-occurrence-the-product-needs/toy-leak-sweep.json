@@ -1,0 +1,1776 @@
+{
+ "what": "each expert's weight on each of the other's three single shapes, with the pair image held at 0.1",
+ "pair_weight_held_at": 0.1,
+ "samples_per_cell": 300,
+ "rng_seed_per_cell": 20261022,
+ "closed_form_leak_where_crisp_share_drops_below_half": 0.005671664888148553,
+ "sampled_counts": {
+  "0": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 10,
+    "two faint objects": 2,
+    "hybrid: overlaid": 288
+   }
+  },
+  "0.003": {
+   "exact": {
+    "one circle": 59,
+    "one square": 40,
+    "two objects, crisp": 201,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 142,
+    "one square": 149,
+    "two objects, crisp": 9,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  },
+  "0.01": {
+   "exact": {
+    "one circle": 94,
+    "one square": 93,
+    "two objects, crisp": 113,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 143,
+    "one square": 148,
+    "two objects, crisp": 9,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  },
+  "0.1": {
+   "exact": {
+    "one circle": 135,
+    "one square": 145,
+    "two objects, crisp": 20,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 131,
+    "one square": 161,
+    "two objects, crisp": 8,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  }
+ },
+ "closed_form_curve": {
+  "1e-05": {
+   "one circle": 0.0008983530184679396,
+   "one square": 0.0008983530184679396,
+   "two objects, crisp": 0.9982032939630642,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.04408e-05": {
+   "one circle": 0.0009378744982319155,
+   "one square": 0.0009378744982319155,
+   "two objects, crisp": 0.9981242510035361,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.0901e-05": {
+   "one circle": 0.0009791311826046864,
+   "one square": 0.0009791311826046864,
+   "two objects, crisp": 0.9980417376347905,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.13815e-05": {
+   "one circle": 0.001022198944020351,
+   "one square": 0.001022198944020351,
+   "two objects, crisp": 0.9979556021119592,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.18831e-05": {
+   "one circle": 0.0010671569443866252,
+   "one square": 0.0010671569443866252,
+   "two objects, crisp": 0.9978656861112267,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.24069e-05": {
+   "one circle": 0.0011140877751754474,
+   "one square": 0.0011140877751754474,
+   "two objects, crisp": 0.9977718244496492,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.29538e-05": {
+   "one circle": 0.0011630776032517374,
+   "one square": 0.0011630776032517374,
+   "two objects, crisp": 0.9976738447934966,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.35247e-05": {
+   "one circle": 0.001214216322654531,
+   "one square": 0.001214216322654531,
+   "two objects, crisp": 0.9975715673546909,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.41209e-05": {
+   "one circle": 0.0012675977125508253,
+   "one square": 0.0012675977125508253,
+   "two objects, crisp": 0.9974648045748985,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.47433e-05": {
+   "one circle": 0.001323319601588421,
+   "one square": 0.001323319601588421,
+   "two objects, crisp": 0.997353360796823,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.53931e-05": {
+   "one circle": 0.0013814840388800664,
+   "one square": 0.0013814840388800664,
+   "two objects, crisp": 0.9972370319222398,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.60716e-05": {
+   "one circle": 0.001442197471857093,
+   "one square": 0.001442197471857093,
+   "two objects, crisp": 0.9971156050562859,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.678e-05": {
+   "one circle": 0.0015055709312365034,
+   "one square": 0.0015055709312365034,
+   "two objects, crisp": 0.9969888581375269,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.75196e-05": {
+   "one circle": 0.0015717202233510605,
+   "one square": 0.0015717202233510605,
+   "two objects, crisp": 0.9968565595532978,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.82919e-05": {
+   "one circle": 0.0016407661300974672,
+   "one square": 0.0016407661300974672,
+   "two objects, crisp": 0.9967184677398051,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.90981e-05": {
+   "one circle": 0.0017128346167627818,
+   "one square": 0.0017128346167627818,
+   "two objects, crisp": 0.9965743307664745,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "1.99399e-05": {
+   "one circle": 0.0017880570479942644,
+   "one square": 0.0017880570479942644,
+   "two objects, crisp": 0.9964238859040114,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.08188e-05": {
+   "one circle": 0.0018665704121822906,
+   "one square": 0.0018665704121822906,
+   "two objects, crisp": 0.9962668591756354,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.17365e-05": {
+   "one circle": 0.0019485175545303763,
+   "one square": 0.0019485175545303763,
+   "two objects, crisp": 0.9961029648909392,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.26946e-05": {
+   "one circle": 0.002034047419089681,
+   "one square": 0.002034047419089681,
+   "two objects, crisp": 0.9959319051618207,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.36949e-05": {
+   "one circle": 0.002123315300038964,
+   "one square": 0.002123315300038964,
+   "two objects, crisp": 0.9957533693999221,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.47393e-05": {
+   "one circle": 0.0022164831024932296,
+   "one square": 0.0022164831024932296,
+   "two objects, crisp": 0.9955670337950134,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.58297e-05": {
+   "one circle": 0.0023137196131261884,
+   "one square": 0.0023137196131261884,
+   "two objects, crisp": 0.9953725607737476,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.69682e-05": {
+   "one circle": 0.0024152007808928024,
+   "one square": 0.0024152007808928024,
+   "two objects, crisp": 0.9951695984382144,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.81569e-05": {
+   "one circle": 0.002521110008138159,
+   "one square": 0.002521110008138159,
+   "two objects, crisp": 0.9949577799837236,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "2.9398e-05": {
+   "one circle": 0.0026316384523782216,
+   "one square": 0.0026316384523782216,
+   "two objects, crisp": 0.9947367230952435,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.06938e-05": {
+   "one circle": 0.002746985339035676,
+   "one square": 0.002746985339035676,
+   "two objects, crisp": 0.9945060293219286,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.20467e-05": {
+   "one circle": 0.002867358285411012,
+   "one square": 0.002867358285411012,
+   "two objects, crisp": 0.9942652834291781,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.34593e-05": {
+   "one circle": 0.0029929736361641113,
+   "one square": 0.0029929736361641113,
+   "two objects, crisp": 0.9940140527276718,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.49341e-05": {
+   "one circle": 0.0031240568105751687,
+   "one square": 0.0031240568105751687,
+   "two objects, crisp": 0.9937518863788498,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.64739e-05": {
+   "one circle": 0.0032608426618457413,
+   "one square": 0.0032608426618457413,
+   "two objects, crisp": 0.9934783146763085,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.80815e-05": {
+   "one circle": 0.0034035758486905196,
+   "one square": 0.0034035758486905196,
+   "two objects, crisp": 0.9931928483026191,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "3.97601e-05": {
+   "one circle": 0.003552511219458288,
+   "one square": 0.003552511219458288,
+   "two objects, crisp": 0.9928949775610834,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "4.15126e-05": {
+   "one circle": 0.0037079142090056224,
+   "one square": 0.0037079142090056224,
+   "two objects, crisp": 0.9925841715819888,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "4.33424e-05": {
+   "one circle": 0.0038700612485298544,
+   "one square": 0.0038700612485298544,
+   "two objects, crisp": 0.9922598775029403,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "4.52528e-05": {
+   "one circle": 0.0040392401885475495,
+   "one square": 0.0040392401885475495,
+   "two objects, crisp": 0.9919215196229049,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "4.72474e-05": {
+   "one circle": 0.004215750735181316,
+   "one square": 0.004215750735181316,
+   "two objects, crisp": 0.9915684985296374,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "4.933e-05": {
+   "one circle": 0.0043999048998911204,
+   "one square": 0.0043999048998911204,
+   "two objects, crisp": 0.9912001902002178,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "5.15043e-05": {
+   "one circle": 0.004592027462755653,
+   "one square": 0.004592027462755653,
+   "two objects, crisp": 0.9908159450744888,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "5.37745e-05": {
+   "one circle": 0.0047924564493747185,
+   "one square": 0.0047924564493747185,
+   "two objects, crisp": 0.9904150871012505,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "5.61447e-05": {
+   "one circle": 0.005001543621424217,
+   "one square": 0.005001543621424217,
+   "two objects, crisp": 0.9899969127571515,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "5.86194e-05": {
+   "one circle": 0.005219654980851586,
+   "one square": 0.005219654980851586,
+   "two objects, crisp": 0.9895606900382969,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "6.12032e-05": {
+   "one circle": 0.005447171287650078,
+   "one square": 0.005447171287650078,
+   "two objects, crisp": 0.9891056574246998,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "6.39009e-05": {
+   "one circle": 0.005684488591095493,
+   "one square": 0.005684488591095493,
+   "two objects, crisp": 0.9886310228178089,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "6.67175e-05": {
+   "one circle": 0.00593201877426725,
+   "one square": 0.00593201877426725,
+   "two objects, crisp": 0.9881359624514655,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "6.96583e-05": {
+   "one circle": 0.006190190111609022,
+   "one square": 0.006190190111609022,
+   "two objects, crisp": 0.9876196197767818,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "7.27286e-05": {
+   "one circle": 0.006459447839207636,
+   "one square": 0.006459447839207636,
+   "two objects, crisp": 0.9870811043215848,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "7.59343e-05": {
+   "one circle": 0.006740254737387635,
+   "one square": 0.006740254737387635,
+   "two objects, crisp": 0.9865194905252248,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "7.92813e-05": {
+   "one circle": 0.007033091725127206,
+   "one square": 0.007033091725127206,
+   "two objects, crisp": 0.9859338165497457,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "8.27758e-05": {
+   "one circle": 0.007338458465701412,
+   "one square": 0.007338458465701412,
+   "two objects, crisp": 0.9853230830685971,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "8.64244e-05": {
+   "one circle": 0.007656873982849586,
+   "one square": 0.007656873982849586,
+   "two objects, crisp": 0.9846862520343008,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "9.02337e-05": {
+   "one circle": 0.007988877286644129,
+   "one square": 0.007988877286644129,
+   "two objects, crisp": 0.9840222454267118,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "9.4211e-05": {
+   "one circle": 0.008335028008107943,
+   "one square": 0.008335028008107943,
+   "two objects, crisp": 0.983329943983784,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "9.83636e-05": {
+   "one circle": 0.008695907041485979,
+   "one square": 0.008695907041485979,
+   "two objects, crisp": 0.982608185917028,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000102699": {
+   "one circle": 0.00907211719292256,
+   "one square": 0.00907211719292256,
+   "two objects, crisp": 0.9818557656141548,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000107226": {
+   "one circle": 0.00946428383412999,
+   "one square": 0.00946428383412999,
+   "two objects, crisp": 0.98107143233174,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000111952": {
+   "one circle": 0.009873055559453376,
+   "one square": 0.009873055559453376,
+   "two objects, crisp": 0.9802538888810932,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000116887": {
+   "one circle": 0.010299104844542377,
+   "one square": 0.010299104844542377,
+   "two objects, crisp": 0.9794017903109151,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000122039": {
+   "one circle": 0.010743128704632208,
+   "one square": 0.010743128704632208,
+   "two objects, crisp": 0.9785137425907356,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000127418": {
+   "one circle": 0.01120584935020997,
+   "one square": 0.01120584935020997,
+   "two objects, crisp": 0.97758830129958,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000133034": {
+   "one circle": 0.011688014837603091,
+   "one square": 0.011688014837603091,
+   "two objects, crisp": 0.9766239703247938,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000138898": {
+   "one circle": 0.012190399711767677,
+   "one square": 0.012190399711767677,
+   "two objects, crisp": 0.9756192005764648,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00014502": {
+   "one circle": 0.012713805638280135,
+   "one square": 0.012713805638280135,
+   "two objects, crisp": 0.9745723887234397,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000151412": {
+   "one circle": 0.013259062021242654,
+   "one square": 0.013259062021242654,
+   "two objects, crisp": 0.9734818759575148,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000158086": {
+   "one circle": 0.013827026603501245,
+   "one square": 0.013827026603501245,
+   "two objects, crisp": 0.9723459467929975,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000165054": {
+   "one circle": 0.014418586045246613,
+   "one square": 0.014418586045246613,
+   "two objects, crisp": 0.9711628279095067,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00017233": {
+   "one circle": 0.015034656476719161,
+   "one square": 0.015034656476719161,
+   "two objects, crisp": 0.9699306870465617,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000179925": {
+   "one circle": 0.01567618402037293,
+   "one square": 0.01567618402037293,
+   "two objects, crisp": 0.9686476319592541,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000187856": {
+   "one circle": 0.016344145277467893,
+   "one square": 0.016344145277467893,
+   "two objects, crisp": 0.9673117094450642,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000196136": {
+   "one circle": 0.017039547773657147,
+   "one square": 0.017039547773657147,
+   "two objects, crisp": 0.9659209044526857,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000204782": {
+   "one circle": 0.017763430357714455,
+   "one square": 0.017763430357714455,
+   "two objects, crisp": 0.964473139284571,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000213808": {
+   "one circle": 0.01851686354711009,
+   "one square": 0.01851686354711009,
+   "two objects, crisp": 0.96296627290578,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000223232": {
+   "one circle": 0.019300949813691785,
+   "one square": 0.019300949813691785,
+   "two objects, crisp": 0.9613981003726164,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000233071": {
+   "one circle": 0.020116823802260164,
+   "one square": 0.020116823802260164,
+   "two objects, crisp": 0.9597663523954796,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000243345": {
+   "one circle": 0.020965652474349936,
+   "one square": 0.020965652474349936,
+   "two objects, crisp": 0.9580686950513002,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000254071": {
+   "one circle": 0.021848635169043115,
+   "one square": 0.021848635169043115,
+   "two objects, crisp": 0.9563027296619137,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000265269": {
+   "one circle": 0.0227670035721445,
+   "one square": 0.0227670035721445,
+   "two objects, crisp": 0.9544659928557111,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000276962": {
+   "one circle": 0.023722021584555116,
+   "one square": 0.023722021584555116,
+   "two objects, crisp": 0.9525559568308897,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00028917": {
+   "one circle": 0.024714985080183258,
+   "one square": 0.024714985080183258,
+   "two objects, crisp": 0.9505700298396335,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000301915": {
+   "one circle": 0.025747221543244648,
+   "one square": 0.025747221543244648,
+   "two objects, crisp": 0.9485055569135107,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000315223": {
+   "one circle": 0.026820089574324038,
+   "one square": 0.026820089574324038,
+   "two objects, crisp": 0.946359820851352,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000329117": {
+   "one circle": 0.027934978254111408,
+   "one square": 0.027934978254111408,
+   "two objects, crisp": 0.9441300434917772,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000343624": {
+   "one circle": 0.029093306353290292,
+   "one square": 0.029093306353290292,
+   "two objects, crisp": 0.9418133872934195,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00035877": {
+   "one circle": 0.03029652137665071,
+   "one square": 0.03029652137665071,
+   "two objects, crisp": 0.9394069572466986,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000374584": {
+   "one circle": 0.03154609842913929,
+   "one square": 0.03154609842913929,
+   "two objects, crisp": 0.9369078031417213,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000391094": {
+   "one circle": 0.0328435388912448,
+   "one square": 0.0328435388912448,
+   "two objects, crisp": 0.9343129222175104,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000408333": {
+   "one circle": 0.03419036889086905,
+   "one square": 0.03419036889086905,
+   "two objects, crisp": 0.931619262218262,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000426331": {
+   "one circle": 0.03558813755865321,
+   "one square": 0.03558813755865321,
+   "two objects, crisp": 0.9288237248826935,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000445123": {
+   "one circle": 0.03703841505363771,
+   "one square": 0.03703841505363771,
+   "two objects, crisp": 0.9259231698927246,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000464743": {
+   "one circle": 0.038542790346139694,
+   "one square": 0.038542790346139694,
+   "two objects, crisp": 0.9229144193077207,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000485227": {
+   "one circle": 0.040102868744848766,
+   "one square": 0.040102868744848766,
+   "two objects, crisp": 0.9197942625103025,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000506615": {
+   "one circle": 0.04172026915538856,
+   "one square": 0.04172026915538856,
+   "two objects, crisp": 0.9165594616892229,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000528945": {
+   "one circle": 0.04339662105797833,
+   "one square": 0.04339662105797833,
+   "two objects, crisp": 0.9132067578840434,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00055226": {
+   "one circle": 0.04513356119238009,
+   "one square": 0.04513356119238009,
+   "two objects, crisp": 0.9097328776152399,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000576602": {
+   "one circle": 0.04693272993903522,
+   "one square": 0.04693272993903522,
+   "two objects, crisp": 0.9061345401219295,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000602017": {
+   "one circle": 0.04879576738621485,
+   "one square": 0.04879576738621485,
+   "two objects, crisp": 0.9024084652275703,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000628553": {
+   "one circle": 0.05072430907413191,
+   "one square": 0.05072430907413191,
+   "two objects, crisp": 0.8985513818517362,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000656258": {
+   "one circle": 0.05271998140831178,
+   "one square": 0.05271998140831178,
+   "two objects, crisp": 0.8945600371833765,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000685184": {
+   "one circle": 0.05478439673611058,
+   "one square": 0.05478439673611058,
+   "two objects, crisp": 0.8904312065277789,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000715385": {
+   "one circle": 0.05691914808211702,
+   "one square": 0.05691914808211702,
+   "two objects, crisp": 0.886161703835766,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000746917": {
+   "one circle": 0.059125803540283406,
+   "one square": 0.059125803540283406,
+   "two objects, crisp": 0.8817483929194331,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000779839": {
+   "one circle": 0.06140590032302924,
+   "one square": 0.06140590032302924,
+   "two objects, crisp": 0.8771881993539414,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000814213": {
+   "one circle": 0.06376093847023157,
+   "one square": 0.06376093847023157,
+   "two objects, crisp": 0.8724781230595369,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000850101": {
+   "one circle": 0.06619237422399253,
+   "one square": 0.06619237422399253,
+   "two objects, crisp": 0.8676152515520149,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000887572": {
+   "one circle": 0.06870161307833095,
+   "one square": 0.06870161307833095,
+   "two objects, crisp": 0.862596773843338,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.000926693": {
+   "one circle": 0.07129000251649537,
+   "one square": 0.07129000251649537,
+   "two objects, crisp": 0.8574199949670093,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00096754": {
+   "one circle": 0.0739588244524284,
+   "one square": 0.0739588244524284,
+   "two objects, crisp": 0.8520823510951432,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00101019": {
+   "one circle": 0.07670928739700472,
+   "one square": 0.07670928739700472,
+   "two objects, crisp": 0.8465814252059907,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00105471": {
+   "one circle": 0.07954251837400478,
+   "one square": 0.07954251837400478,
+   "two objects, crisp": 0.8409149632519904,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0011012": {
+   "one circle": 0.08245955461535051,
+   "one square": 0.08245955461535051,
+   "two objects, crisp": 0.835080890769299,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00114974": {
+   "one circle": 0.08546133506985953,
+   "one square": 0.08546133506985953,
+   "two objects, crisp": 0.8290773298602809,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00120042": {
+   "one circle": 0.08854869176466532,
+   "one square": 0.08854869176466532,
+   "two objects, crisp": 0.8229026164706694,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00125333": {
+   "one circle": 0.09172234106340885,
+   "one square": 0.09172234106340885,
+   "two objects, crisp": 0.8165553178731824,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00130857": {
+   "one circle": 0.09498287487031282,
+   "one square": 0.09498287487031282,
+   "two objects, crisp": 0.8100342502593745,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00136625": {
+   "one circle": 0.0983307518342025,
+   "one square": 0.0983307518342025,
+   "two objects, crisp": 0.8033384963315949,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00142647": {
+   "one circle": 0.1017662886113859,
+   "one square": 0.1017662886113859,
+   "two objects, crisp": 0.7964674227772282,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00148935": {
+   "one circle": 0.10528965125095119,
+   "one square": 0.10528965125095119,
+   "two objects, crisp": 0.7894206974980976,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00155499": {
+   "one circle": 0.1089008467704,
+   "one square": 0.1089008467704,
+   "two objects, crisp": 0.7821983064591999,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00162353": {
+   "one circle": 0.11259971499351484,
+   "one square": 0.11259971499351484,
+   "two objects, crisp": 0.7748005700129703,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0016951": {
+   "one circle": 0.11638592072585072,
+   "one square": 0.11638592072585072,
+   "two objects, crisp": 0.7672281585482985,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00176981": {
+   "one circle": 0.12025894634615208,
+   "one square": 0.12025894634615208,
+   "two objects, crisp": 0.7594821073076958,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00184782": {
+   "one circle": 0.12421808489421896,
+   "one square": 0.12421808489421896,
+   "two objects, crisp": 0.751563830211562,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00192927": {
+   "one circle": 0.12826243373716956,
+   "one square": 0.12826243373716956,
+   "two objects, crisp": 0.7434751325256608,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0020143": {
+   "one circle": 0.13239088889659467,
+   "one square": 0.13239088889659467,
+   "two objects, crisp": 0.7352182222068107,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00210309": {
+   "one circle": 0.1366021401186507,
+   "one square": 0.1366021401186507,
+   "two objects, crisp": 0.7267957197626985,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00219579": {
+   "one circle": 0.14089466676764018,
+   "one square": 0.14089466676764018,
+   "two objects, crisp": 0.7182106664647195,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00229257": {
+   "one circle": 0.1452667346209869,
+   "one square": 0.1452667346209869,
+   "two objects, crisp": 0.7094665307580261,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00239362": {
+   "one circle": 0.1497163936396927,
+   "one square": 0.1497163936396927,
+   "two objects, crisp": 0.7005672127206146,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00249913": {
+   "one circle": 0.15424147678331082,
+   "one square": 0.15424147678331082,
+   "two objects, crisp": 0.6915170464333784,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00260928": {
+   "one circle": 0.15883959993218455,
+   "one square": 0.15883959993218455,
+   "two objects, crisp": 0.6823208001356309,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0027243": {
+   "one circle": 0.16350816297218246,
+   "one square": 0.16350816297218246,
+   "two objects, crisp": 0.6729836740556352,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00284438": {
+   "one circle": 0.16824435208843963,
+   "one square": 0.16824435208843963,
+   "two objects, crisp": 0.6635112958231206,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00296975": {
+   "one circle": 0.1730451433047578,
+   "one square": 0.1730451433047578,
+   "two objects, crisp": 0.6539097133904844,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.003": {
+   "one circle": 0.1741821973152613,
+   "one square": 0.1741821973152613,
+   "two objects, crisp": 0.6516356053694775,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00310065": {
+   "one circle": 0.17790730729440768,
+   "one square": 0.17790730729440768,
+   "two objects, crisp": 0.6441853854111846,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00323732": {
+   "one circle": 0.1828274154762243,
+   "one square": 0.1828274154762243,
+   "two objects, crisp": 0.6343451690475513,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00338001": {
+   "one circle": 0.18780184739723804,
+   "one square": 0.18780184739723804,
+   "two objects, crisp": 0.624396305205524,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00352899": {
+   "one circle": 0.19282679938980418,
+   "one square": 0.19282679938980418,
+   "two objects, crisp": 0.6143464012203916,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00368454": {
+   "one circle": 0.1978982944774667,
+   "one square": 0.1978982944774667,
+   "two objects, crisp": 0.6042034110450666,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00384695": {
+   "one circle": 0.20301219348983207,
+   "one square": 0.20301219348983207,
+   "two objects, crisp": 0.5939756130203359,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00401651": {
+   "one circle": 0.20816420733275715,
+   "one square": 0.20816420733275715,
+   "two objects, crisp": 0.5836715853344857,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00419355": {
+   "one circle": 0.21334991034640552,
+   "one square": 0.21334991034640552,
+   "two objects, crisp": 0.5733001793071889,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00437839": {
+   "one circle": 0.2185647546704361,
+   "one square": 0.2185647546704361,
+   "two objects, crisp": 0.5628704906591279,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00457138": {
+   "one circle": 0.22380408552301434,
+   "one square": 0.22380408552301434,
+   "two objects, crisp": 0.5523918289539712,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00477287": {
+   "one circle": 0.22906315728868393,
+   "one square": 0.22906315728868393,
+   "two objects, crisp": 0.5418736854226321,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00498325": {
+   "one circle": 0.23433715029965474,
+   "one square": 0.23433715029965474,
+   "two objects, crisp": 0.5313256994006905,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0052029": {
+   "one circle": 0.23962118818595218,
+   "one square": 0.23962118818595218,
+   "two objects, crisp": 0.5207576236280955,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00543223": {
+   "one circle": 0.24491035566228395,
+   "one square": 0.24491035566228395,
+   "two objects, crisp": 0.5101792886754322,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00567166": {
+   "one circle": 0.2501997166136215,
+   "one square": 0.2501997166136215,
+   "two objects, crisp": 0.4996005667727571,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00592166": {
+   "one circle": 0.255484332337425,
+   "one square": 0.255484332337425,
+   "two objects, crisp": 0.48903133532515014,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00618267": {
+   "one circle": 0.26075927979827984,
+   "one square": 0.26075927979827984,
+   "two objects, crisp": 0.47848144040344015,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00645519": {
+   "one circle": 0.26601966975050645,
+   "one square": 0.26601966975050645,
+   "two objects, crisp": 0.467960660498987,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00673971": {
+   "one circle": 0.27126066458602643,
+   "one square": 0.27126066458602643,
+   "two objects, crisp": 0.4574786708279473,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00703678": {
+   "one circle": 0.27647749576842096,
+   "one square": 0.27647749576842096,
+   "two objects, crisp": 0.4470450084631581,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00734695": {
+   "one circle": 0.28166548071958963,
+   "one square": 0.28166548071958963,
+   "two objects, crisp": 0.43666903856082073,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00767078": {
+   "one circle": 0.286820039032626,
+   "one square": 0.286820039032626,
+   "two objects, crisp": 0.42635992193474803,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00800889": {
+   "one circle": 0.2919367078933057,
+   "one square": 0.2919367078933057,
+   "two objects, crisp": 0.41612658421338855,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0083619": {
+   "one circle": 0.2970111566027659,
+   "one square": 0.2970111566027659,
+   "two objects, crisp": 0.40597768679446805,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00873047": {
+   "one circle": 0.30203920010534085,
+   "one square": 0.30203920010534085,
+   "two objects, crisp": 0.39592159978931823,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00911529": {
+   "one circle": 0.30701681143788406,
+   "one square": 0.30701681143788406,
+   "two objects, crisp": 0.3859663771242317,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00951707": {
+   "one circle": 0.3119401330300295,
+   "one square": 0.3119401330300295,
+   "two objects, crisp": 0.3761197339399409,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.00993656": {
+   "one circle": 0.31680548679846143,
+   "one square": 0.31680548679846143,
+   "two objects, crisp": 0.3663890264030773,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.01": {
+   "one circle": 0.3175182481751825,
+   "one square": 0.3175182481751825,
+   "two objects, crisp": 0.36496350364963503,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0103745": {
+   "one circle": 0.32160938299216557,
+   "one square": 0.32160938299216557,
+   "two objects, crisp": 0.3567812340156688,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0108318": {
+   "one circle": 0.3263485277595548,
+   "one square": 0.3263485277595548,
+   "two objects, crisp": 0.3473029444808903,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0113093": {
+   "one circle": 0.3310198294220858,
+   "one square": 0.3310198294220858,
+   "two objects, crisp": 0.33796034115582846,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0118077": {
+   "one circle": 0.3356204034523128,
+   "one square": 0.3356204034523128,
+   "two objects, crisp": 0.3287591930953745,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0123282": {
+   "one circle": 0.3401475761670289,
+   "one square": 0.3401475761670289,
+   "two objects, crisp": 0.3197048476659422,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0128716": {
+   "one circle": 0.3445988871580923,
+   "one square": 0.3445988871580923,
+   "two objects, crisp": 0.31080222568381544,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0134389": {
+   "one circle": 0.3489720904945502,
+   "one square": 0.3489720904945502,
+   "two objects, crisp": 0.3020558190108996,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0140313": {
+   "one circle": 0.3532651547396489,
+   "one square": 0.3532651547396489,
+   "two objects, crisp": 0.29346969052070215,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0146498": {
+   "one circle": 0.3574762618351565,
+   "one square": 0.3574762618351565,
+   "two objects, crisp": 0.28504747632968697,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0152955": {
+   "one circle": 0.361603804913054,
+   "one square": 0.361603804913054,
+   "two objects, crisp": 0.27679239017389196,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0159697": {
+   "one circle": 0.36564638510104736,
+   "one square": 0.36564638510104736,
+   "two objects, crisp": 0.26870722979790523,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0166736": {
+   "one circle": 0.3696028073934732,
+   "one square": 0.3696028073934732,
+   "two objects, crisp": 0.2607943852130536,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0174085": {
+   "one circle": 0.3734720756630544,
+   "one square": 0.3734720756630544,
+   "two objects, crisp": 0.2530558486738912,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0181758": {
+   "one circle": 0.3772533868916164,
+   "one square": 0.3772533868916164,
+   "two objects, crisp": 0.24549322621676742,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.018977": {
+   "one circle": 0.3809461246993471,
+   "one square": 0.3809461246993471,
+   "two objects, crisp": 0.2381077506013057,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0198134": {
+   "one circle": 0.38454985225255744,
+   "one square": 0.38454985225255744,
+   "two objects, crisp": 0.23090029549488508,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0206868": {
+   "one circle": 0.38806430462921304,
+   "one square": 0.38806430462921304,
+   "two objects, crisp": 0.2238713907415741,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0215986": {
+   "one circle": 0.3914893807198831,
+   "one square": 0.3914893807198831,
+   "two objects, crisp": 0.21702123856023386,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0225506": {
+   "one circle": 0.39482513473925007,
+   "one square": 0.39482513473925007,
+   "two objects, crisp": 0.21034973052149972,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0235446": {
+   "one circle": 0.3980717674200438,
+   "one square": 0.3980717674200438,
+   "two objects, crisp": 0.20385646515991235,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0245823": {
+   "one circle": 0.40122961695731263,
+   "one square": 0.40122961695731263,
+   "two objects, crisp": 0.19754076608537466,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0256659": {
+   "one circle": 0.40429914976638326,
+   "one square": 0.40429914976638326,
+   "two objects, crisp": 0.1914017004672336,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0267972": {
+   "one circle": 0.40728095111280516,
+   "one square": 0.40728095111280516,
+   "two objects, crisp": 0.1854380977743896,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0279783": {
+   "one circle": 0.4101757156670807,
+   "one square": 0.4101757156670807,
+   "two objects, crisp": 0.17964856866583861,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0292115": {
+   "one circle": 0.41298423803112155,
+   "one square": 0.41298423803112155,
+   "two objects, crisp": 0.17403152393775695,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0304991": {
+   "one circle": 0.41570740327721756,
+   "one square": 0.41570740327721756,
+   "two objects, crisp": 0.1685851934455648,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0318434": {
+   "one circle": 0.41834617753386977,
+   "one square": 0.41834617753386977,
+   "two objects, crisp": 0.16330764493226027,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.033247": {
+   "one circle": 0.4209015986461846,
+   "one square": 0.4209015986461846,
+   "two objects, crisp": 0.15819680270763062,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0347124": {
+   "one circle": 0.42337476693164133,
+   "one square": 0.42337476693164133,
+   "two objects, crisp": 0.15325046613671736,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0362425": {
+   "one circle": 0.4257668360449297,
+   "one square": 0.4257668360449297,
+   "two objects, crisp": 0.1484663279101405,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0378399": {
+   "one circle": 0.4280790039581842,
+   "one square": 0.4280790039581842,
+   "two objects, crisp": 0.14384199208363152,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0395078": {
+   "one circle": 0.4303125040552443,
+   "one square": 0.4303125040552443,
+   "two objects, crisp": 0.1393749918895114,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0412492": {
+   "one circle": 0.43246859633048435,
+   "one square": 0.43246859633048435,
+   "two objects, crisp": 0.13506280733903117,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0430674": {
+   "one circle": 0.4345485586741446,
+   "one square": 0.4345485586741446,
+   "two objects, crisp": 0.1309028826517108,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0449657": {
+   "one circle": 0.4365536782168026,
+   "one square": 0.4365536782168026,
+   "two objects, crisp": 0.12689264356639487,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0469477": {
+   "one circle": 0.4384852426954483,
+   "one square": 0.4384852426954483,
+   "two objects, crisp": 0.12302951460910343,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.049017": {
+   "one circle": 0.44034453179227795,
+   "one square": 0.44034453179227795,
+   "two objects, crisp": 0.11931093641544424,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0511776": {
+   "one circle": 0.4421328083844638,
+   "one square": 0.4421328083844638,
+   "two objects, crisp": 0.11573438323107238,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0534333": {
+   "one circle": 0.4438513096283343,
+   "one square": 0.4438513096283343,
+   "two objects, crisp": 0.11229738074333137,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0557885": {
+   "one circle": 0.4455012377840227,
+   "one square": 0.4455012377840227,
+   "two objects, crisp": 0.10899752443195451,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0582476": {
+   "one circle": 0.4470837506659876,
+   "one square": 0.4470837506659876,
+   "two objects, crisp": 0.10583249866802479,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.060815": {
+   "one circle": 0.44859995157988647,
+   "one square": 0.44859995157988647,
+   "two objects, crisp": 0.10280009684022706,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0634955": {
+   "one circle": 0.4500508785758631,
+   "one square": 0.4500508785758631,
+   "two objects, crisp": 0.09989824284827367,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0662943": {
+   "one circle": 0.4514374928107361,
+   "one square": 0.4514374928107361,
+   "two objects, crisp": 0.09712501437852794,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0692163": {
+   "one circle": 0.4527606657646972,
+   "one square": 0.4527606657646972,
+   "two objects, crisp": 0.09447866847060563,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0722672": {
+   "one circle": 0.4540211649990842,
+   "one square": 0.4540211649990842,
+   "two objects, crisp": 0.0919576700018316,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0754526": {
+   "one circle": 0.4552196380667334,
+   "one square": 0.4552196380667334,
+   "two objects, crisp": 0.08956072386653324,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0787783": {
+   "one circle": 0.45635659409020435,
+   "one square": 0.45635659409020435,
+   "two objects, crisp": 0.08728681181959143,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0822507": {
+   "one circle": 0.45743238239874295,
+   "one square": 0.45743238239874295,
+   "two objects, crisp": 0.08513523520251397,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0858761": {
+   "one circle": 0.45844716745258285,
+   "one square": 0.45844716745258285,
+   "two objects, crisp": 0.08310566509483425,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0896613": {
+   "one circle": 0.4594008990696796,
+   "one square": 0.4594008990696796,
+   "two objects, crisp": 0.08119820186064068,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0936133": {
+   "one circle": 0.4602932766865063,
+   "one square": 0.4602932766865063,
+   "two objects, crisp": 0.07941344662698734,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.0977396": {
+   "one circle": 0.46112370600454866,
+   "one square": 0.46112370600454866,
+   "two objects, crisp": 0.07775258799090272,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.1": {
+   "one circle": 0.46153846153846156,
+   "one square": 0.46153846153846156,
+   "two objects, crisp": 0.07692307692307696,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.102048": {
+   "one circle": 0.4618912458596336,
+   "one square": 0.4618912458596336,
+   "two objects, crisp": 0.07621750828073298,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.106546": {
+   "one circle": 0.46259454244704995,
+   "one square": 0.46259454244704995,
+   "two objects, crisp": 0.07481091510590006,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.111242": {
+   "one circle": 0.4632317470605569,
+   "one square": 0.4632317470605569,
+   "two objects, crisp": 0.07353650587888616,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.116145": {
+   "one circle": 0.4638004121370372,
+   "one square": 0.4638004121370372,
+   "two objects, crisp": 0.07239917572592558,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.121265": {
+   "one circle": 0.46429735845793874,
+   "one square": 0.46429735845793874,
+   "two objects, crisp": 0.07140528308412247,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.12661": {
+   "one circle": 0.46471850356246014,
+   "one square": 0.46471850356246014,
+   "two objects, crisp": 0.07056299287507978,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.13219": {
+   "one circle": 0.4650586373350534,
+   "one square": 0.4650586373350534,
+   "two objects, crisp": 0.06988272532989304,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.138017": {
+   "one circle": 0.4653111246374513,
+   "one square": 0.4653111246374513,
+   "two objects, crisp": 0.06937775072509743,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.1441": {
+   "one circle": 0.4654675056148164,
+   "one square": 0.4654675056148164,
+   "two objects, crisp": 0.06906498877036721,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.150452": {
+   "one circle": 0.46551694999920007,
+   "one square": 0.46551694999920007,
+   "two objects, crisp": 0.06896610000159985,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.157083": {
+   "one circle": 0.4654454990755797,
+   "one square": 0.4654454990755797,
+   "two objects, crisp": 0.06910900184884067,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.164007": {
+   "one circle": 0.4652349921738832,
+   "one square": 0.4652349921738832,
+   "two objects, crisp": 0.06953001565223367,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.171236": {
+   "one circle": 0.46486151306345386,
+   "one square": 0.46486151306345386,
+   "two objects, crisp": 0.07027697387309217,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.178784": {
+   "one circle": 0.4642930855756934,
+   "one square": 0.4642930855756934,
+   "two objects, crisp": 0.07141382884861315,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.186664": {
+   "one circle": 0.46348615813631655,
+   "one square": 0.46348615813631655,
+   "two objects, crisp": 0.07302768372736688,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.194892": {
+   "one circle": 0.46238006341019644,
+   "one square": 0.46238006341019644,
+   "two objects, crisp": 0.07523987317960722,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.203482": {
+   "one circle": 0.4608879479882637,
+   "one square": 0.4608879479882637,
+   "two objects, crisp": 0.07822410402347264,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.212451": {
+   "one circle": 0.45888123669410397,
+   "one square": 0.45888123669410397,
+   "two objects, crisp": 0.082237526611792,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.221816": {
+   "one circle": 0.45616153030948003,
+   "one square": 0.45616153030948003,
+   "two objects, crisp": 0.0876769393810399,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.231593": {
+   "one circle": 0.45240623025947024,
+   "one square": 0.45240623025947024,
+   "two objects, crisp": 0.0951875394810595,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.241801": {
+   "one circle": 0.4470539449174543,
+   "one square": 0.4470539449174543,
+   "two objects, crisp": 0.10589211016509133,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.252459": {
+   "one circle": 0.4390342630566414,
+   "one square": 0.4390342630566414,
+   "two objects, crisp": 0.12193147388671723,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.263586": {
+   "one circle": 0.42602314918772843,
+   "one square": 0.42602314918772843,
+   "two objects, crisp": 0.14795370162454302,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.275205": {
+   "one circle": 0.4018505842532393,
+   "one square": 0.4018505842532393,
+   "two objects, crisp": 0.19629883149352154,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.287335": {
+   "one circle": 0.3429381230546652,
+   "one square": 0.3429381230546652,
+   "two objects, crisp": 0.31412375389066954,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  },
+  "0.3": {
+   "one circle": 3.3306690738754657e-15,
+   "one square": 3.3306690738754657e-15,
+   "two objects, crisp": 0.9999999999999933,
+   "two faint objects": 0.0,
+   "hybrid: overlaid": 0.0
+  }
+ }
+}

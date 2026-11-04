@@ -1,0 +1,189 @@
+{
+ "what": "condition E: three captions compete; each expert is read off p(caption|image) by Bayes with a uniform image prior",
+ "samples_per_cell": 300,
+ "rng_seed_per_condition": 20261022,
+ "forms": {
+  "1": "a caption scores an image by distance to the images it describes",
+  "2": "a caption scores an image by named shapes present, named shapes missing and unnamed shapes present"
+ },
+ "reports": {
+  "form 1": {
+   "form": 1,
+   "tau": 5.0,
+   "implied_pair_weight_in_circle": 0.046108614782387314,
+   "implied_pair_weight_in_square": 0.052173853265882704,
+   "p_caption_given_pair_image": {
+    "a circle": 0.13478486824309135,
+    "a square": 0.16502996702017564,
+    "a circle and a square": 0.7001851647367331
+   }
+  },
+  "form 2": {
+   "form": 2,
+   "tau": 1.0,
+   "implied_pair_weight_in_circle": 0.04575007466251308,
+   "implied_pair_weight_in_square": 0.04575007466251307,
+   "p_caption_given_pair_image": {
+    "a circle": 0.10650697891920075,
+    "a square": 0.10650697891920075,
+    "a circle and a square": 0.7869860421615984
+   }
+  }
+ },
+ "counts": {
+  "E: competing captions, form 1, tau 5": {
+   "exact": {
+    "one circle": 146,
+    "one square": 150,
+    "two objects, crisp": 4,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 144,
+    "one square": 154,
+    "two objects, crisp": 2,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 143,
+    "one square": 155,
+    "two objects, crisp": 2,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  },
+  "E: competing captions, form 2, tau 1": {
+   "exact": {
+    "one circle": 137,
+    "one square": 144,
+    "two objects, crisp": 19,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 148,
+    "one square": 150,
+    "two objects, crisp": 2,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 149,
+    "one square": 150,
+    "two objects, crisp": 1,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  },
+  "D: hand-weighted at form 1's implied w = 0.0461": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 2,
+    "two faint objects": 2,
+    "hybrid: overlaid": 296
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 4,
+    "two faint objects": 0,
+    "hybrid: overlaid": 296
+   }
+  },
+  "D: hand-weighted at form 2's implied w = 0.0458": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 2,
+    "two faint objects": 2,
+    "hybrid: overlaid": 296
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 4,
+    "two faint objects": 0,
+    "hybrid: overlaid": 296
+   }
+  }
+ },
+ "mala_acceptance": {
+  "E: competing captions, form 1, tau 5": 0.37684333333333336,
+  "E: competing captions, form 2, tau 1": 0.37710333333333335,
+  "D: hand-weighted at form 1's implied w = 0.0461": 0.37648333333333334,
+  "D: hand-weighted at form 2's implied w = 0.0458": 0.37649
+ },
+ "implied_pair_weight_vs_tau": {
+  "form 1": {
+   "0.25": 0.0,
+   "0.3001": 5.0891117984220864e-294,
+   "0.3602": 1.9282121643210024e-204,
+   "0.4323": 2.8824188733443224e-142,
+   "0.5189": 4.110257315131398e-99,
+   "0.6229": 3.683409505080492e-69,
+   "0.7477": 2.2676772804982508e-48,
+   "0.8974": 6.0957717589551715e-34,
+   "1.077": 6.313095860839169e-24,
+   "1.293": 5.651503283719724e-17,
+   "1.552": 3.814254240155149e-12,
+   "1.863": 8.863074980150642e-09,
+   "2.236": 2.052226413736953e-06,
+   "2.684": 9.716289091631021e-05,
+   "3.222": 0.001496612633831103,
+   "3.867": 0.009933161109429411,
+   "4.642": 0.03320573446437738,
+   "5.571": 0.0653035817666006,
+   "6.687": 0.09252367245500327,
+   "8.027": 0.11077760074860175,
+   "9.635": 0.12218259508794488,
+   "11.56": 0.12929970530232301,
+   "13.88": 0.13382787443710364,
+   "16.66": 0.1367712284046944,
+   "20": 0.13871913983387615
+  },
+  "form 2": {
+   "0.1": 6.870823962516356e-10,
+   "0.1212": 2.2574701029960114e-08,
+   "0.1468": 4.0339176810231477e-07,
+   "0.1778": 4.365126131480774e-06,
+   "0.2154": 3.128377368595824e-05,
+   "0.261": 0.00015995244695028106,
+   "0.3162": 0.0006199262217123461,
+   "0.3831": 0.0019099595766916392,
+   "0.4642": 0.004847355818831351,
+   "0.5623": 0.010402197165671102,
+   "0.6813": 0.01926446601481225,
+   "0.8254": 0.03136535557125574,
+   "1": 0.04575007466251308,
+   "1.212": 0.060947579071516926,
+   "1.468": 0.0755444450344079,
+   "1.778": 0.08857666615665165,
+   "2.154": 0.09961056348232547,
+   "2.61": 0.10861939037339974,
+   "3.162": 0.11580709583966067,
+   "3.831": 0.12146703499282925,
+   "4.642": 0.12589713282858775,
+   "5.623": 0.12936037931490693,
+   "6.813": 0.13207279586353213,
+   "8.254": 0.13420495035758362,
+   "10": 0.1358886868183639
+  }
+ }
+}
