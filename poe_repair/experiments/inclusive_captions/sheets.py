@@ -128,7 +128,8 @@ def render_seed(
     return images
 
 
-def draw_sheet(rows: list[list[np.ndarray]], *, label: str, target: Path) -> None:
+def draw_sheet(rows: list[list[np.ndarray]], *, seeds: tuple[int, ...], label: str,
+               target: Path) -> None:
     fig, axes = plt.subplots(len(rows), len(COLUMNS),
                              figsize=(len(COLUMNS) * 3.2, len(rows) * 3.3), squeeze=False)
     for r, images in enumerate(rows):
@@ -139,7 +140,7 @@ def draw_sheet(rows: list[list[np.ndarray]], *, label: str, target: Path) -> Non
             if r == 0:
                 ax.set_title(COLUMNS[c], fontsize=11)
             if c == 0:
-                ax.text(-0.06, 0.5, f"seed {SEEDS[r]}", transform=ax.transAxes,
+                ax.text(-0.06, 0.5, f"seed {seeds[r]}", transform=ax.transAxes,
                         rotation=90, va="center", ha="center", fontsize=10)
     fig.suptitle(
         f"{label}. Each row is one seed, the same eight in every run and at every checkpoint. "
@@ -169,8 +170,7 @@ def main() -> int:
     ap.add_argument("--no-wandb", action="store_true")
     args = ap.parse_args()
 
-    global SEEDS
-    SEEDS = tuple(int(s) for s in args.seeds.split(","))
+    seeds = tuple(int(s) for s in args.seeds.split(","))
 
     out_dir = Path(args.out_dir) if args.out_dir else paths.MOUNT_ROOT / FAMILY
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -193,7 +193,7 @@ def main() -> int:
     }
 
     rows = []
-    for seed in SEEDS:
+    for seed in seeds:
         rows.append(render_seed(models=models, scheduler=scheduler, embeddings=embeddings,
                                 seed=seed, resolution=args.resolution, steps=args.steps,
                                 guidance=args.guidance, device=device, dtype=dtype))
@@ -201,7 +201,7 @@ def main() -> int:
 
     slug = args.label.lower().replace(" ", "-").replace(",", "")
     target = out_dir / f"sheet_{slug}.png"
-    draw_sheet(rows, label=args.label, target=target)
+    draw_sheet(rows, seeds=seeds, label=args.label, target=target)
     print(f"wrote {target}", flush=True)
 
     if not args.no_wandb:
