@@ -40,7 +40,8 @@ what the adapter can express, and the two should cross-reference rather than ove
    idea. Do not start planning until the integration picture matches what I say I imagined.
 3. Cover the maths strand at full weight, not as a garnish. Rank is the journey's floor and I want
    it derived, not asserted: the column space, why the row rank equals the column rank, and what a
-   rank-deficient matrix loses.
+   rank-deficient matrix loses. Then why truncating the SVD at r is the best rank-r approximation
+   there is, which is the result that turns "low-rank" from a saving into a claim.
 4. Take every name apart in the gate's "Names on this map" table, each read back in words. "Rank",
    "low-rank", "adaptation", "adapter", "parameter-efficient". A name I cannot read aloud as a
    sentence is a name I have not learnt.
@@ -79,6 +80,18 @@ what the adapter can express, and the two should cross-reference rather than ove
 - The neighbouring corridor journey measured 420 adapted modules and 35,799,040 trainable
   parameters on a different checkpoint. Source: its JOURNEYS.md row. The two numbers differ and
   working out why is a legitimate rung, not a discrepancy to hide.
+- Part of this already exists and must be linked rather than rebuilt. The plan at
+  /home/molef/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/08-lora-update.md,
+  "The low-rank update, B times A", already derives the parameter count r(in + out). The LoRA card
+  at /home/molef/Obsidian/Artificial Intelligence/Large Language Models/LoRA.md already cites two
+  textbook passages that work the saving with numbers (a 9 by 9 matrix of 81 parameters against a
+  9 by 1 and a 1 by 9 factor of 18; a 10 by 10 rebuilt from 20 weights) and two lecture segments
+  that work it at d = 1000, r = 10. So the parameter-count rung is covered: this journey reads that
+  plan and those passages instead of writing a third version, and spends its own weight on what
+  they do not cover, which is the rank itself, why the truncation is the best approximation, and
+  what the constrained update cannot express.
+- The term index has no card for "rank". Source: the lookup run on 2026-11-04. Minting it is the
+  journey's first durable output.
 - My linear algebra is uneven. I can do a matrix product, a dot product, a projection onto a unit
   vector and a norm by hand. I have met the SVD and can say what U, S and V are, but I have never
   used it to build a best rank-r approximation, and I have never worked out why the truncation is
