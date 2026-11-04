@@ -71,13 +71,13 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
-| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders | tiles and sheet under `artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ⚠️ not started |
+| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders, 13 minutes | tiles and sheet under `artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ✅ product 0 of 8, joint two animals 8 of 8 |
 
 ## The question written before the run
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-- [ ] **Does the product of "a cat" and "a dog" on SDXL hold two clear animals when SDXL is sampled
+- [x] **Does the product of "a cat" and "a dog" on SDXL hold two clear animals when SDXL is sampled
       at 20 steps of DPM-Solver++ and guidance 4.5?** Held-out seeds 9 to 16, the same cached
       starting latents every other SDXL result uses, with the joint prompt on the same seeds and
       the same settings as the reference column. Every call by eye from the full-resolution tile,
@@ -100,6 +100,15 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       and against PixArt's 0 of 8 product and 7 of 8 joint, from
       [does a clip-free model hybridise](../../../report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md).
 
+      **Verdict: SUPPORT.** At DPM-Solver++ order 2, 20 steps and guidance 4.5 the product holds
+      two clear animals on **0 of 8** seeds: seven tiles are one hybrid animal and the eighth, seed
+      16, holds two bodies whose species are both unclear and is counted as neither. The joint
+      column holds two separate animals on **8 of 8**, above the bar, and a clear cat beside a
+      clear dog on 6 of 8. The sampler, the step count and the guidance scale are removed as the
+      carrier of the fusion. Counts and per-tile sentences in
+      [the calls](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json),
+      card in [the same folder](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md).
+
 ## Written before the run, answered after
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
@@ -113,15 +122,22 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       a clear cat beside a clear dog on 5 of 8 (seeds 9, 11, 12, 15, 16); seeds 10 and 13 draw two
       dogs and seed 14 two cats. Tiles and sheet under
       `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/`.
-- [ ] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
+- [x] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture.
+
+      **Answered.** Hybrids on seeds 9 to 15 at both settings; seed 16 is one body with two heads
+      at the control's settings and two bodies of unclear species at the matched settings.
 
 ## Asked after the result
 
 Navigation: ⬅️ [Written before the run, answered after](#written-before-the-run-answered-after) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️
 
-Nothing yet. Questions that occur to anyone after seeing the sheet go here, marked as post-hoc, and
-they do not move the bar above.
+**Post-hoc: seed 16 moves from one body with two heads to two bodies.** The only seed where the two
+settings differ in kind rather than in style. One tile is not a result, and nothing is claimed from
+it.
+
+**Post-hoc: 20 steps does not look thinner than 50 here.** The single-prompt columns are as sharp
+at the matched settings, so the hybrid calls are not being made on vague renders.
 
 ## Could the answer be an artefact
 

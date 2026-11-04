@@ -232,11 +232,14 @@ from the owning finding.
 
 ◀ **Needs: [task 1.1](#1--the-settings-free-composition-script)**, the script.
 
-- [ ] **2.1** Run the script at `--sampler ddim --steps 50 --guidance 7.5` on seeds 9 to 16, all
+- [x] **2.1** Run the script at `--sampler ddim --steps 50 --guidance 7.5` on seeds 9 to 16, all
       four columns.
   - **Done when:** the product column reads 0 of 8 and the joint column 8 of 8, matching the
     published counts. Anything else means the new code path differs from the one those numbers came
     from, and the matched run does not start.
+  - ✅ Product 0 of 8, joint two separate animals 8 of 8, run 2026-11-04 on mscluster84. The joint
+    column holds a clear cat beside a clear dog on 5 of 8; the column is read as two separate
+    animals, which is the instrument the published counts used.
 
 ▶ **Next: [instruction 3.1](#3--pass-the-control-run)**.
 
@@ -244,15 +247,17 @@ from the owning finding.
 
 ◀ **Needs: [instruction 3.1](#3--pass-the-control-run)**, your yes on the control.
 
-- [ ] **4.1** Run the script at `--sampler dpmpp --steps 20 --guidance 4.5` on the same seeds 9 to
+- [x] **4.1** Run the script at `--sampler dpmpp --steps 20 --guidance 4.5` on the same seeds 9 to
       16, all four columns.
   - **Done when:** 32 tiles exist and every sidecar names DPM-Solver++, 20 steps and guidance 4.5.
-- [ ] **4.2** Build the sheet at
+  - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/sdxl_matched/matched/`.
+- [x] **4.2** Build the sheet at
       `artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - The tile root needs the `and_vector/<slug>/seedNN/` layout that helper reads.
   - **Done when:** the sheet is on disk with its JSON record beside it.
+  - ✅ `artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png`.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
 
@@ -260,24 +265,27 @@ from the owning finding.
 
 ◀ **Needs: [task 4.2](#4--the-matched-run-at-pixarts-settings)**, the tiles and the sheet.
 
-- [ ] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
+- [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
       tile to `artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json` with its seed,
       its category and one sentence saying what is in the picture. Read the joint column the same
       way.
   - **Done when:** eight records exist and the three counts sum to eight.
-- [ ] **5.2** Write the card at
+  - ✅ 0 two clear animals, 7 hybrids, 1 holding two animals of unclear species, in `calls.json`,
+    with both runs' joint columns recorded two ways.
+- [x] **5.2** Write the card at
       `artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md`: the settings of both
       runs, the three counts out of eight for each, the PixArt counts quoted from
       [its finding](../../../../report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md),
       and what the one-axis comparison settles.
   - **Done when:** the card answers the definition of done above.
+  - ✅ `artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md`.
 
 ▶ **Next: [the close out](#close-out--record-what-this-plan-taught)**.
 
 ### Close out. 🔄 Record what this plan taught
 
-- [ ] **6.1** Answer the review file against the bar written in it, and write the finding under
+- [x] **6.1** Answer the review file against the bar written in it, and write the finding under
       `report/is-the-gap-the-samplers-or-the-models/`.
 - [ ] **6.2** File the sheet, the calls and the card under `artifacts/results/` with the card entry
       and one reference line in this plan's Figure Catalog.
@@ -293,12 +301,13 @@ them.
 
 ◀ **Needs: [task 2.1](#2--the-control-run-at-sdxls-own-settings)**, the control counts.
 
-- [ ] **3.1** Look at the control run's product column beside the published renders of the same
+- [x] **3.1** Look at the control run's product column beside the published renders of the same
       seeds.
   - Expected result: one animal on all eight, the same eight pictures as before.
   - ❌ If they differ, the new script is not the old code path and the matched run would measure
     the script rather than the settings. Say stop.
   - ✅ Say `done` with what you saw, which is what releases task 4.
+  - ✅ Passed 2026-11-04 with the reference column's instrument settled as two separate animals.
 
 ▶ **Next: [task 4.1](#4--the-matched-run-at-pixarts-settings)**.
 
