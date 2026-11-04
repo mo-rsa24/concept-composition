@@ -19,15 +19,15 @@ both use it, so the two paths' numbers check each other.
 
 ## Position
 
-On piece 4 of 5, the renders. Pieces 1 to 3 are done, and piece 4 waits on the user's yes.
+All five pieces are done. The bar is met: the card states the counts, and the review file reads SUPPORT.
 
 | Piece | What it is | State |
 |---|---|---|
 | 1 | the composition script, `scripts/pixart_multi_poe.py` | ✅ compiles, formulas matched |
 | 2 | the weights on disk and the tokenizer loading | ✅ 21 GB at `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`, sentencepiece 0.2.2 |
 | 3 | the single-prompt identity check | ✅ 0 grey levels, the two PNGs byte-identical |
-| 4 | the 32 renders and the four-column sheet | ⚠️ next, held for the user's yes on piece 3 |
-| 5 | the calls by eye, `calls.json`, the card | ⚠️ |
+| 4 | the 32 renders and the four-column sheet | ✅ 32 tiles, sheet at artifacts/results/does-a-clip-free-model-hybridise/ |
+| 5 | the calls by eye, `calls.json`, the card | ✅ 0 two clear animals, 6 hybrids, 2 single cats; joint 7 of 8 |
 
 ## Ticked this session
 
@@ -37,6 +37,11 @@ On piece 4 of 5, the renders. Pieces 1 to 3 are done, and piece 4 waits on the u
 - Plan task 2.1, the identity check. Largest absolute difference 0 of 255 grey levels, 0.0 of pixels
   differing, the two PNGs byte-identical (md5 `d9c08c28048b8da98124be0246099b07`), answered in the
   review file.
+- Plan instruction 3.1, the gate. Passed on `go`.
+- Plan tasks 4.1, 4.2, 5.1 and 5.2. The 32 tiles, the sheet, the eight calls and the card.
+- Close-out 6.1. The review file reads SUPPORT, and the finding is
+  `report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md` with its two
+  rows in `report/00-INDEX.md`.
 
 ## Decisions
 
@@ -57,6 +62,7 @@ On piece 4 of 5, the renders. Pieces 1 to 3 are done, and piece 4 waits on the u
 | 1 | background run, the weights fetch | piece 2 | `bozmy3vtv` | ✅ returned, exit 0 |
 | 2 | route, `/submerge` on the three new things | the reader, not the plan | emitted, not yet run | ⚠️ out |
 | 3 | cluster run, the identity check | piece 3 | `bichtb1ge` | ✅ returned, exit 0 |
+| 4 | cluster run, the 32 renders | piece 4 | `bt0mnxsza` | ✅ returned, exit 0, 22 minutes |
 
 ## How to approach this next time
 
@@ -64,6 +70,9 @@ On piece 4 of 5, the renders. Pieces 1 to 3 are done, and piece 4 waits on the u
   change only the line you came for. Every pipeline carries conditioning the maths does not mention,
   and here that was three things: a learned sigma on half the output channels, an attention mask on
   the text sequence, and resolution conditioning the 1024 model wants.
+- **Piece 5.** The sheet builder reads tiles from `<root>/and_vector/<slug>/seedNN/<column>.png`,
+  which is not where the renderer writes them. A symlink into that layout is enough; the alternative
+  is passing a root that already has the `and_vector` level.
 - **Piece 3.** One branch cannot be checked out in two worktrees, so `scripts/cluster.sh run` fails
   its sync whenever another session already has this branch out on the cluster. Give the walk its own
   cluster worktree (`git worktree add`) and launch with `CLUSTER_DIR` pointed at it, rather than
