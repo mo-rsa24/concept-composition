@@ -216,12 +216,14 @@ fixed and cannot be shaped by anything the build reveals.
   - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.169, every caption
     share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
-- [ ] **2.4** Draw the extra training photos with SD 3.5 medium: 350 "a photo of a cat and a
+- [x] ✅ **2.4** Draw the extra training photos with SD 3.5 medium: 350 "a photo of a cat and a
       dog", 130 "a photo of a cat", 130 "a photo of a dog", at 1,024 square in fp16.
   - Output: `scripts/census/inclusive_captions_generate.py`, images under
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/`.
   - A different model family from the one being fine-tuned, so the co-occurrence the pool adds is
     not SDXL's own belief fed back into it.
+  - ✅ 306 cat-and-dog, 130 cat and 130 dog drawn at 20.6s each in fp16. bf16 takes seven minutes
+    an image on these Turing cards, which have no bf16 tensor cores.
 - [x] ✅ **2.5** Validate the vision-language judge before it screens anything: 48 generated
       cat-and-dog images called by eye first, then by the judge, and the two compared.
   - Output: `scripts/census/inclusive_captions_judge.py`, the eye's calls in
@@ -231,13 +233,20 @@ fixed and cannot be shaped by anything the build reveals.
     other three reached 20, 44 and 21. All three of the winner's disagreements keep a marginal
     picture a person rejected and none reject one a person kept. Written up in
     [the judge's validation](../../../artifacts/drips/inclusive-captions-pilot/checks/judge-validation.md).
-- [ ] **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
+- [x] ✅ **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
   - Output: `scripts/census/inclusive_captions_pool_v2.py`, the manifest under
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool_v2/`.
   - COCO at a 0.50 box-fraction floor for the single-animal sets and 0.40 for both-animal. Every
     row carries the source it came from, identical in both arms.
-- [ ] **2.7** Re-run the caption sampler's check against the new manifest, so the dog-present
+  - ✅ 930 candidates judged. Kept: 243 of 306 generated cat-and-dog, 130 of 130 generated cat,
+    128 of 130 generated dog, 38 of 64 COCO cat-and-dog, 120 of 150 COCO cat, 104 of 150 COCO dog.
+    The pool is 200 cat (100 COCO, 100 generated), 200 dog (100, 100) and 150 cat-and-dog
+    (38, 112), 550 photos, every path opening.
+- [x] ✅ **2.7** Re-run the caption sampler's check against the new manifest, so the dog-present
       share of run B's cat draws is measured on what will actually be trained.
+  - ✅ PASSED. Run B's cat-captioned draws hold a dog 25.1% of the time against run A's 0%, up
+    from 16.9% on the first pool because the both-animal set grew from 91 to 150. Every caption
+    share is within 0.003 of its design value and all four runs share one 9.9% blank rate.
 
 ▶ **Next: [instruction 8](#8--audit-the-training-photos)**, the eye audit, which only you
 can do.
@@ -285,14 +294,16 @@ show what they claim to.
 
 ◀ **Needs: [instruction 10](#10--look-at-the-step-0-sheet)** done.
 
-- [ ] **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
+- [x] ✅ **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
       and sheets at 0, 250, 500, 1,000 and 2,000.
   - W&B: `prime_lab/poe-repair-inclusive-captions`, one run, grouped with B.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
     one job per user. `scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
     refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
-    the trainer's own W&B run as it lands. Run A is on `mscluster106` device 1, run B on
-    `mscluster107` device 1, both Quadro RTX 8000.
+    the trainer's own W&B run as it lands. Both run on `mscluster106` device 1, one after the
+    other, because `mscluster107` went down and it is the only usable `biggpu` node left. Each
+    attempt takes a tag, so its checkpoints, sheets and W&B run cannot be confused with an
+    earlier attempt's.
 - [ ] **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
 - [ ] **5.3** Harvest both: the queue, `pgrep` on the session node, the output count against what
       this plan expected, and the tail of each log.

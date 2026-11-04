@@ -5,10 +5,10 @@ with `/drip-execute-plan --request`. Branch `exec/inclusive-captions-pilot`.
 
 ## Where the walk is
 
-Piece 5 is back to its pool. The first pair of runs was killed at steps 500 and 400 because the
-training photos were too cluttered and the renders were drifting with them. The pool is being
-rebuilt from COCO at tighter floors plus SD 3.5 images, every candidate passing a
-vision-language judge, and the two arms relaunch on it. Tasks 2.4 to 2.7 carry the rebuild.
+Piece 5 is running again on the rebuilt pool: 550 photographs, 200 cat, 200 dog and 150
+cat-and-dog, every one of them read by a judge that was itself validated against hand labels
+first. Run A trains now on `mscluster106` device 1 and run B follows it on the same card, because
+that is the only usable `biggpu` node left. Piece 6 starts when both reach step 2,000.
 
 ## The stop point
 
@@ -165,3 +165,28 @@ of its 175 images, and those survive because each is saved as it is drawn. Of `b
 nodes, `107`, `108`, `110` and `112` are down, `109` is draining and `111` is the Blackwell `co3`
 cannot drive, so `mscluster106` is the only usable node and everything queues on its one free
 card. Any pass over hundreds of images writes a row at a time from here on.
+
+
+**The pool as it was rebuilt.** 930 candidates judged, 763 kept.
+
+| Set | Candidates | Kept | Into the pool |
+|---|---|---|---|
+| generated cat-and-dog | 306 | 243 | 112 |
+| generated cat | 130 | 130 | 100 |
+| generated dog | 130 | 128 | 100 |
+| COCO cat-and-dog, floor 0.40 | 64 | 38 | 38 |
+| COCO cat, floor 0.50 | 150 | 120 | 100 |
+| COCO dog, floor 0.50 | 150 | 104 | 100 |
+
+Nearly a third of the COCO dog photographs and a fifth of the cat ones fail a judge that only
+asks whether the animal is a normal animal, clearly visible, and the only one there. That set had
+never been audited, and a floor on box size was the only thing screening it.
+
+**The quantity the pilot turns on went from 0.169 to 0.251.** Run B's cat-captioned draws now hold
+a dog a quarter of the time against run A's zero, because the both-animal set grew from 91 to 150.
+The effect the design predicts is larger on this pool than on the first one.
+
+**A resumed W&B run id silently drops everything you log.** The relaunch reused
+`inclusive-captions-run-A`, whose history was already at step 516 from the killed attempt, and
+every new step logged was refused with "steps must be monotonically increasing". Each attempt now
+takes a tag that names its checkpoints, its sheets and its W&B run together.
