@@ -68,8 +68,8 @@ Navigation: ⬅️ [2. At PixArt's settings the product still fuses](#2-at-pixar
 
 At the matched settings the joint prompt holds two separate animals on 8 of 8, which closes the
 weak-guidance escape: at guidance 4.5 this model still renders two subjects from one sentence. Read
-for species it holds a clear cat beside a clear dog on 6 of 8, failing on seeds 14 and 15, which
-draw two cats. The control's figures are 8 of 8 and 5 of 8.
+for species it holds a clear cat beside a clear dog on 5 of 8, failing on seeds 14 and 15, which
+draw two cats, and seed 16, which draws two dogs. The control's figures are 8 of 8 and 5 of 8.
 
 ## What this cannot tell you
 
@@ -78,7 +78,7 @@ Navigation: ⬅️ [3. The reference column, read two ways](#3-the-reference-col
 **Three settings moved together.** The run names the group, not a member of it. Whether 20 steps
 alone, or guidance 4.5 alone, changes anything is untested.
 
-**The joint prompt is unreliable on these seeds.** Two to three of eight draw two animals of the
+**The joint prompt is unreliable on these seeds.** Three of eight draw two animals of the
 same species, so the reference column shows that two subjects can be rendered, not that this model
 separates these two species reliably here.
 

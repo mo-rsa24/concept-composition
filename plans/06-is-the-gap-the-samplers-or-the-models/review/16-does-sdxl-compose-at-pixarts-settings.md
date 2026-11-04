@@ -104,7 +104,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       two clear animals on **0 of 8** seeds: seven tiles are one hybrid animal and the eighth, seed
       16, holds two bodies whose species are both unclear and is counted as neither. The joint
       column holds two separate animals on **8 of 8**, above the bar, and a clear cat beside a
-      clear dog on 6 of 8. The sampler, the step count and the guidance scale are removed as the
+      clear dog on 5 of 8 (failing at seeds 14 and 15, two cats, and seed 16, two dogs). The sampler, the step count and the guidance scale are removed as the
       carrier of the fusion. Counts and per-tile sentences in
       [the calls](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json),
       card in [the same folder](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md).
