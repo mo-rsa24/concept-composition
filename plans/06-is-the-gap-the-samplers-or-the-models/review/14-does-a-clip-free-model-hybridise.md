@@ -70,13 +70,13 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 |---|---|---|---|---|---|
 | The weights fetch, `PixArt-alpha/PixArt-XL-2-1024-MS` onto `/datasets` | setup | 2026-11-04, from mscluster84 | 21.8 GB | `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS` | ✅ 21 GB on disk |
 | The single-prompt identity check, "a cat" at seed 1 through the pipeline and through the script | gates the claim | 2026-11-04, mscluster84 | 2 renders, 6 minutes including a 2m45 load | the two images and the largest absolute pixel difference between them | ✅ 0 grey levels, byte-identical |
-| The four columns on eight seeds | Tests the claim | not yet | 32 renders at 1024², 20 steps each | tiles and sidecars under `artifacts/results/does-a-clip-free-model-hybridise/`, sheet `pixart-cat-dog-sheet.png` | ⚠️ not started |
+| The four columns on eight seeds | Tests the claim | 2026-11-04, mscluster84 | 32 renders at 1024², 20 steps each, 22 minutes | tiles and sidecars under `artifacts/results/does-a-clip-free-model-hybridise/`, sheet `pixart-cat-dog-sheet.png` | ✅ 0 of 8 product, 7 of 8 joint |
 
 ## The question written before the run
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-- [ ] **Does the product of "a cat" and "a dog" on PixArt-alpha hold two clear animals, or one?**
+- [x] **Does the product of "a cat" and "a dog" on PixArt-alpha hold two clear animals, or one?**
       Eight seeds, 1 to 8, at PixArt-alpha's own defaults of 20 steps and guidance 4.5, with the
       joint prompt "a cat and a dog" on the same eight seeds as the reference column. Every call is
       made by eye from the full-resolution tile, in the three categories named above, because the
@@ -99,6 +99,15 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       joint prompt 8 of 8, plain product 0 of 8, held-out seeds 9 to 16, counted by the validated
       instance count rather than by eye.
 
+      **Verdict: SUPPORT.** The product holds two clear animals on **0 of 8** seeds: six tiles are
+      one hybrid animal and two are one single animal, both of those cats. The joint-prompt column
+      holds a clear cat and a clear dog on **7 of 8**, above the 6-of-8 the bar demanded, so the
+      model can draw the pair at this guidance scale and the weak-guidance escape is closed. The
+      eighth joint tile, seed 2, holds two cats and counts as neither. CLIP is removed as a
+      necessary cause of the fusion. Counts and per-tile sentences in
+      [the calls](../../../artifacts/results/does-a-clip-free-model-hybridise/calls.json), sheet and
+      card in [the same folder](../../../artifacts/results/does-a-clip-free-model-hybridise/README.md).
+
 ## Written before the run, answered after
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
@@ -114,16 +123,23 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       guidance path and `PixArtAlphaPipeline` as released are the same computation at one condition,
       so a hybrid in the product column is the arithmetic rather than the plumbing. Record in
       `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/identity-check.json`.
-- [ ] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
+- [x] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture, so a disagreement later is about a named
       tile rather than about a count.
+
+      **Answered.** Hybrids on seeds 1, 4, 5, 6, 7 and 8; a single cat on seeds 2 and 3. The joint
+      column's one failure is seed 2, which draws two cats.
 
 ## Asked after the result
 
 Navigation: ⬅️ [Written before the run, answered after](#written-before-the-run-answered-after) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️
 
-Nothing yet. Questions that occur to anyone after seeing the sheet go here, marked as post-hoc,
-and they do not move the bar above.
+**Post-hoc: does the product ever drop a prompt rather than average it?** Two of the eight tiles are
+a single clean cat with no canine feature, which is a different failure from a hybrid. Whether "a
+dog" is being dropped or being out-voted is not answerable from eight pictures and is not planned.
+
+**Post-hoc: the two single-animal tiles are both cats, never dogs.** With two tiles this is what a
+coin would do, so it is recorded and not read.
 
 ## Could the answer be an artefact
 
@@ -166,8 +182,10 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
-Nothing waits on this file. On support, the finding lands under
-`report/is-the-gap-the-samplers-or-the-models/` and the scope's own index gains a row.
+The finding is [does a clip-free model hybridise](../../../report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md),
+and the scope's index carries its row. The question this opens, and does not answer, is which of the
+five differences carries the failure; the cheapest next cut is SDXL re-run at PixArt's own 20 steps,
+DPM-Solver++ and guidance 4.5, which removes four of the five in one run.
 
 ## Cross-references
 

@@ -269,14 +269,18 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ◀ **Needs: [instruction 3.1](#3--pass-the-identity-check)**, your yes on the identity check.
 
-- [ ] **4.1** Render all four columns on seeds 1 to 8, 32 tiles at 1024², keeping the
+- [x] **4.1** Render all four columns on seeds 1 to 8, 32 tiles at 1024², keeping the
       full-resolution PNGs and a sidecar each.
   - **Done when:** 32 tiles exist and every sidecar names the same 20 steps and guidance 4.5.
-- [ ] **4.2** Build the four-column sheet at
+  - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/a_cat__x__a_dog/`,
+    all 32 sidecars reading 20 steps, guidance 4.5, 1024².
+- [x] **4.2** Build the four-column sheet at
       `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - **Done when:** the sheet is on disk and its own JSON record names every tile it drew.
+  - ✅ `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
+    record beside it.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
 
@@ -284,14 +288,16 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ◀ **Needs: [task 4.2](#4--the-four-columns-on-eight-seeds)**, the tiles and the sheet.
 
-- [ ] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
+- [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
       tile to `artifacts/results/does-a-clip-free-model-hybridise/calls.json` with its seed, its
       category and one sentence saying what is in the picture.
   - A hybrid is its own category, not a failed version of either other one. Do not call a clear pair
     from the sheet.
   - **Done when:** eight records exist and the three counts sum to eight.
-- [ ] **5.2** Write the card at
+  - ✅ 0 two clear animals, 6 one hybrid animal, 2 one single animal, in `calls.json`, with the
+    joint column read the same way at 7 of 8.
+- [x] **5.2** Write the card at
       `artifacts/results/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
       the guidance scale and step count used and that they are PixArt-alpha's own defaults rather
       than SDXL's, the three counts out of eight, the SDXL counts quoted from
