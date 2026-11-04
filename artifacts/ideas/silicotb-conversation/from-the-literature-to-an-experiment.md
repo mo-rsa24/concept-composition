@@ -76,8 +76,8 @@ image does not count toward generality.
 
 ## Decision 2: what we are actually doing
 
-**The question.** Are we synthesising films for a disease pair nobody has films of, or measuring what
-a product of two experts drops on pairs we do have?
+**The question.** Are we synthesising films for a disease pair nobody has films of, or measuring
+what a product of two experts drops on pairs we do have?
 
 **Answered by** `candidate-figures.md`, for whether a real test set exists at all, and
 `pairs-and-their-regimes.md` for whether a published reader error gives us something to predict.
@@ -160,8 +160,9 @@ carrying it to silicotuberculosis.
 
 **The question.** What gets run, in what order, and what result would change the paper's mind?
 
-**Answered by** every file, and by [the composition chain already written](../../../plans/route-compose-x-rays-and-score-them.md),
-whose first step reads one idea across six papers and picks the operator.
+**Answered by** every file, and by
+[the composition chain already written](../../../plans/route-compose-x-rays-and-score-them.md), whose
+first step reads one idea across six papers and picks the operator.
 
 **The candidates, with the one axis each varies.**
 
