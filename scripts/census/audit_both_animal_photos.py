@@ -58,12 +58,19 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--tiles-per-page", type=int, default=TILES_PER_PAGE)
     ap.add_argument("--tile-px", type=int, default=TILE_PX)
+    ap.add_argument("--set", default="both", choices=("both", "cat_only", "dog_only"),
+                    help="which manifest set to lay out; the single-animal sets are screened "
+                         "only by the box-fraction floor, which measures size and not whether "
+                         "the thing in the box is a live animal")
     args = ap.parse_args()
 
     out_dir = paths.MOUNT_ROOT / FAMILY
     manifest = json.loads((out_dir / "manifest.json").read_text())
-    both = manifest["sets"]["both"]
-    print(f"{len(both)} both-animal photos to audit", flush=True)
+    both = manifest["sets"][args.set]
+    subject = {"both": "holding both a cat and a dog", "cat_only": "holding one cat",
+               "dog_only": "holding one dog"}[args.set]
+    prefix = "audit_page" if args.set == "both" else f"audit_{args.set}_page"
+    print(f"{len(both)} photos to audit in {args.set}", flush=True)
 
     per_page = args.tiles_per_page
     rows_per_page = (per_page + COLS - 1) // COLS
@@ -78,20 +85,24 @@ def main() -> None:
         for index, (ax, r) in enumerate(zip(axes.ravel(), rows)):
             with Image.open(r["file"]) as im:
                 ax.imshow(im.convert("RGB").resize((args.tile_px, args.tile_px)))
-            ax.set_title(
-                f"{page * per_page + index}   cat {r['largest_cat_fraction']:.2f}  "
-                f"dog {r['largest_dog_fraction']:.2f}  overlap {r['cat_dog_box_iou']:.2f}",
-                fontsize=11)
+            if args.set == "both":
+                title = (f"{page * per_page + index}   cat {r['largest_cat_fraction']:.2f}  "
+                         f"dog {r['largest_dog_fraction']:.2f}  "
+                         f"overlap {r['cat_dog_box_iou']:.2f}")
+            else:
+                animal = "cat" if args.set == "cat_only" else "dog"
+                title = (f"{page * per_page + index}   {animal} "
+                         f"{r[f'largest_{animal}_fraction']:.2f}")
+            ax.set_title(title, fontsize=11)
             ax.axis("off")
         for ax in axes.ravel()[len(rows):]:
             ax.axis("off")
         fig.suptitle(
-            f"COCO train2017, the training photos holding both a cat and a dog, page {page + 1} "
-            f"of {pages}. Each title is the tile's number in manifest.json's both list, each "
-            f"animal's box as a fraction of the image's longer side, and how much the two boxes "
-            f"overlap.", fontsize=13)
+            f"COCO train2017, the training photos {subject}, page {page + 1} of {pages}. Each "
+            f"title is the tile's number in manifest.json's {args.set} list and each animal's "
+            f"box as a fraction of the image's longer side.", fontsize=13)
         fig.tight_layout()
-        target = out_dir / f"audit_page_{page:02d}.png"
+        target = out_dir / f"{prefix}_{page:02d}.png"
         fig.savefig(target, dpi=100)
         plt.close(fig)
         print(f"wrote {target.name} ({len(rows)} tiles)", flush=True)
