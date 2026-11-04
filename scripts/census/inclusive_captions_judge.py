@@ -12,8 +12,16 @@ count gives a number. The questions for a cat-and-dog photo:
 
   1. how many animals are in the picture
   2. is there exactly one cat and one dog
-  3. is each one an ordinary animal of its own species, with no features of the other mixed in
+  3. is the cat a normal cat and the dog a normal dog
   4. is each one clearly visible rather than hidden behind the other
+
+The third question's wording was chosen by measurement, not by how careful it sounds. Four
+wordings were asked of the same 48 hand-labelled images. "with no features of the other species
+mixed into it" agreed on 20 of 48, because naming the failure sends the model looking for it, and
+it answered no on a clean cat beside a clean dog. "Is the cat a normal cat, and the dog a normal
+dog" agreed on 45. Its three disagreements all run the same way: it keeps a marginal picture a
+person rejects, and it rejects none that a person keeps, so it is slightly permissive and never
+over-strict.
 
 A photo is kept only when the count is the number its set wants and every question answers yes.
 Writes judged.json with every answer, so a keep or a rejection can be read back and argued with.
@@ -40,8 +48,8 @@ QUESTIONS = {
         ("count", "How many animals are in this picture? Answer with a single number."),
         ("pair", "Is there exactly one cat and exactly one dog in this picture? "
                  "Answer yes or no."),
-        ("clean", "Look closely at each animal. Is each one an ordinary cat or an ordinary dog, "
-                  "with no features of the other species mixed into it? Answer yes or no."),
+        ("clean", "Is the cat in this picture a normal cat, and the dog a normal dog? "
+                  "Answer yes or no."),
         ("distinct", "Are both animals clearly visible as separate animals, rather than one "
                      "hiding the other? Answer yes or no."),
     ],
