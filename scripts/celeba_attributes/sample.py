@@ -55,7 +55,9 @@ def main():
     ap.add_argument("--batch", type=int, default=250); ap.add_argument("--guidance", default="1,3")
     a = ap.parse_args()
     run = Path(a.run) if Path(a.run).is_absolute() else RUNS / a.run
-    net = AttrUNet().to(DEV); net.load_state_dict(torch.load(run / "ema.pt", map_location=DEV)["ema"]); net.eval()
+    ch = json.load(open(run / "data.json")).get("channels", "128,256,256,256")
+    net = AttrUNet([int(c) for c in ch.split(",")]).to(DEV)
+    net.load_state_dict(torch.load(run / "ema.pt", map_location=DEV)["ema"]); net.eval()
     clf = classifier.load()
     res, tiles = {}, {}
     for g in [float(v) for v in a.guidance.split(",")]:

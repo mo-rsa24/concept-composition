@@ -17,14 +17,14 @@ DEV = "cuda"
 
 
 class AttrUNet(nn.Module):
-    def __init__(self):
+    def __init__(self, channels=(128, 256, 256, 256)):
         super().__init__()
         self.unet = UNet2DModel(sample_size=RES, in_channels=3, out_channels=3, layers_per_block=2,
-                                block_out_channels=(128, 256, 256, 256),
+                                block_out_channels=tuple(channels),
                                 down_block_types=("DownBlock2D", "DownBlock2D", "AttnDownBlock2D", "DownBlock2D"),
                                 up_block_types=("UpBlock2D", "AttnUpBlock2D", "UpBlock2D", "UpBlock2D"),
                                 class_embed_type="identity")
-        self.male = nn.Embedding(3, 512); self.blond = nn.Embedding(3, 512)
+        self.male = nn.Embedding(3, 4 * channels[0]); self.blond = nn.Embedding(3, 4 * channels[0])
 
     def forward(self, x, t, attrs):
         return self.unet(x, t, class_labels=self.male(attrs[:, 0]) + self.blond(attrs[:, 1])).sample
@@ -44,6 +44,7 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", required=True)
     ap.add_argument("--save-every", type=int, default=25000)
+    ap.add_argument("--channels", default="128,256,256,256")
     a = ap.parse_args()
     out = Path(a.out) if Path(a.out).is_absolute() else RUNS / a.out
     out.mkdir(parents=True, exist_ok=True)
@@ -63,7 +64,7 @@ def main():
     json.dump(info, open(out / "data.json", "w"), indent=1)
     print(json.dumps(info), flush=True)
 
-    net = AttrUNet().to(DEV); ema = copy.deepcopy(net).eval().requires_grad_(False)
+    net = AttrUNet([int(c) for c in a.channels.split(",")]).to(DEV); ema = copy.deepcopy(net).eval().requires_grad_(False)
     print(f"parameters {sum(p.numel() for p in net.parameters()) / 1e6:.1f}M", flush=True)
     opt = torch.optim.AdamW(net.parameters(), a.lr, weight_decay=0.0)
     sch = scheduler(); abar = sch.alphas_cumprod.to(DEV)
