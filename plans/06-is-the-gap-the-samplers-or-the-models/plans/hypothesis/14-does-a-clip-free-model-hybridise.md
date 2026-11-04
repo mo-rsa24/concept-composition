@@ -319,12 +319,13 @@ them.
 
 ◀ **Needs: [task 2.1](#2--the-single-prompt-identity-check)**, the two numbers.
 
-- [ ] **3.1** Look at the two "a cat" renders side by side and at the two numbers beneath them.
+- [x] **3.1** Look at the two "a cat" renders side by side and at the two numbers beneath them.
   - Expected result: one picture, printed twice, and a largest difference of 0 grey levels.
   - ❌ If the pictures differ anywhere a person can see, the composition path is not the pipeline's
     path and the product renders would measure the difference rather than the composition. Say stop
     rather than accepting a close-enough match.
   - ✅ Say `done` with what you saw, which is what releases task 4.
+  - ✅ Passed 2026-11-04: the pair read as one picture, and the two files are byte-identical.
 
 ▶ **Next: [task 4.1](#4--the-four-columns-on-eight-seeds)**.
 
