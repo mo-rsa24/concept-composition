@@ -32,10 +32,10 @@ about three orders of magnitude in that weight.
 
 | File | What it shows |
 |---|---|
+| `how-far-the-dial-has-to-go.png` | the first dial over its whole range, 0.001 to 0.99 (x, log scale), against the fraction of 300 draws labelled a crisp pair (y), one curve per sampler, with the band past 0.5 where each expert keeps less than half its mass on its own shapes and the weight at which both samplers first reach 300 of 300 |
 | `the-leak-dial.png` | the second dial: each expert's weight on each one of the other's three shapes (x, log scale, 1e-4 to 0.2) against the share of the exact product that is a clean pair and the share that is a single shape (y, 0 to 1), with the four sampled settings as markers and the half-share crossing at 0.00567 marked. The pair image's weight is held at 0.1 throughout |
 | `four-samplers-across-the-overlap-dial.png` | the same four situations, now with four rows: the exact product, plain reverse diffusion, the Langevin corrector and a Hamiltonian corrector, each with its crisp-pair count and the corrector's acceptance rate |
 | `can-it-make-a-third-arrangement.png` | both experts hold two pair layouts (circle left and circle right, each at half the pair weight of 0.1); the counts say which of four layouts each draw lands nearest, two of them trained on and two never seen |
-| `the-leak-dial.png` | the share of the exact product that is a clean pair against how much weight each expert puts on each one of the other's three shapes, log x, with the point where that share drops below half |
 | `what-changes-as-overlap-rises.png` | four situations across (no overlap, one picture in a thousand, one in ten, and the overlap three competing captions imply), two rows down (what the exact product calls most likely, and what reverse diffusion draws). Each cell carries four draws, the label most of its 300 were given, and a green or red tint for whether that label is a clean pair |
 | `the-chain-of-results.png` | the four earlier results in date order ending on this sweep, one row each: the year and the claim, the paper's own figure where one is on disk, what it showed and what it left open. Liu et al. 2022 and Bradley 2025b have no figure fetched, so their panels state the result in words rather than standing in a picture |
 | `weight-sweep.png` | the fraction of 300 draws labelled a crisp pair (y, 0 to 1) against the pair image's weight inside each expert (x, log scale, 0.001 to 0.5), one curve per sampler, with condition B's weight of 0.1 marked and the grid's floor at 0.001 labelled as a floor |
@@ -68,6 +68,25 @@ of 10, 14 and 30 across three runs, so the sampled curves carry draw noise of ab
 the threshold is read off the exact curve.
 
 Annealing buys 140 against 122 at `w = 0.3`, and 30 against 10 at `w = 0.1`.
+
+## How far the dial has to go
+
+Carried past 0.5, crisp pairs out of 300:
+
+| w | mass each expert keeps on its own shapes | exact | reverse diffusion | annealed MALA |
+|---|---|---|---|---|
+| 0.5 | 0.50 | 300 | 238 | 249 |
+| 0.65 | 0.35 | 300 | 281 | 286 |
+| 0.8 | 0.20 | 300 | 298 | 299 |
+| 0.9 | 0.10 | 300 | 300 | 300 |
+| 0.95 | 0.05 | 300 | 300 | 300 |
+| 0.99 | 0.01 | 300 | 300 | 300 |
+
+**Both samplers reach 300 of 300 at a pair weight of 0.9, where each expert has a tenth of its mass
+left on its own single shapes.** The weight that makes the sampler reliable is the weight at which
+the two experts have stopped being a circle expert and a square expert and have become two copies of
+the same thing. As a recipe that reads: a product of experts draws the composition dependably once
+the experts are no longer distinct, which is the point at which there is nothing left to compose.
 
 ## Competing captions
 
@@ -211,8 +230,8 @@ cd /home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/notes/what-poe-loses-wh
 /home/molef/miniconda3/bin/python3 -I toy_leak_sweep.py            # toy-leak-sweep.json, about 1 minute
 /home/molef/miniconda3/bin/python3 -I toy_leak_figure.py           # the-leak-dial.png
 /home/molef/miniconda3/bin/python3 -I toy_layout_generalisation.py # can-it-make-a-third-arrangement.png
-/home/molef/miniconda3/bin/python3 -I toy_leak_sweep.py            # toy-leak-sweep.json, about 40 seconds
-/home/molef/miniconda3/bin/python3 -I toy_leak_figure.py           # the-leak-dial.png
+/home/molef/miniconda3/bin/python3 -I toy_high_overlap.py          # toy-high-overlap-sweep.json, about 6 minutes
+/home/molef/miniconda3/bin/python3 -I toy_full_range_figure.py     # how-far-the-dial-has-to-go.png
 ```
 
 One condition on its own, at a chosen weight or caption form:
