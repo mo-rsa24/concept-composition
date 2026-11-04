@@ -154,3 +154,41 @@ def label_from_manifest_row(row) -> Label:
     else:
         reason = "no annotated cat or dog above the size floor"
     return Label(cat, dog, reason, n_boxes_kept=n_boxes)
+
+# ---------------------------------------------------------------------------
+# The presence rule, which replaced the margin rule.
+# ---------------------------------------------------------------------------
+# A margin is one signed number, so it has to choose a species and cannot say "both". Measured on
+# 14 distinct fused cat x dog renders it chose one, confidently, on 13. Each species is now read
+# on its own as a raw cosine similarity with no softmax anywhere, so both can clear the floor at
+# once. The floor comes from the calibration run, not from this file, because it is a property of
+# the instrument rather than of the rule.
+
+
+def label_from_presence(per_box_scores, floor: float) -> Label:
+    """Label an image from one independent per-species score per animal box.
+
+    ``per_box_scores`` is a list, one entry per kept box, each a mapping from species name to its
+    own similarity. ``floor`` is the calibrated value each similarity must clear.
+    """
+    if not per_box_scores:
+        return Label(0, 0, "no animal above the size floor", 0, 0)
+
+    box_species = [{s for s, v in box.items() if v >= floor} for box in per_box_scores]
+    cat_boxes = sum(1 for b in box_species if "cat" in b)
+    dog_boxes = sum(1 for b in box_species if "dog" in b)
+    both_on_one = any({"cat", "dog"} <= b for b in box_species)
+    n_unnamed = sum(1 for b in box_species if not b)
+    n = len(per_box_scores)
+
+    if both_on_one and n < MIN_INSTANCES_FOR_BOTH:
+        return Label(0, 0, "one box carries both species: a fused animal", n, n_unnamed)
+    if cat_boxes and dog_boxes and n >= MIN_INSTANCES_FOR_BOTH and not both_on_one:
+        return Label(1, 1, "two boxes, one cat and one dog, neither carrying both", n, n_unnamed)
+    if both_on_one:
+        return Label(0, 0, "a box carrying both species beside others: a fused animal", n, n_unnamed)
+    if cat_boxes and not dog_boxes:
+        return Label(1, 0, "every named box is a cat alone", n, n_unnamed)
+    if dog_boxes and not cat_boxes:
+        return Label(0, 1, "every named box is a dog alone", n, n_unnamed)
+    return Label(0, 0, "no box clears the floor for either species", n, n_unnamed)

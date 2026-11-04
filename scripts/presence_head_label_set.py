@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import collections
+import hashlib
 import json
 import os
 import re
@@ -53,6 +54,7 @@ from poe_repair import paths  # noqa: E402
 from poe_repair.experiments.presence_head import labelling as L  # noqa: E402
 
 FAMILY = "outputs/presence_head/labelled_set"
+CALIBRATION = paths.MOUNT_ROOT / "outputs/presence_head/species_calibration/cosine/calibration.json"
 MANIFEST = paths.MOUNT_ROOT / "outputs/inclusive_captions_pool/manifest.json"
 
 # The eight seeds the final sweep renders. Nothing from them may train the head.
@@ -120,15 +122,27 @@ def find_renders() -> list[Path]:
     for pattern in RENDER_PATTERNS:
         for p in paths.MOUNT_ROOT.glob(pattern):
             seen.setdefault(p, None)
-    kept, skipped_held_out = [], 0
-    for p in seen:
+    kept, skipped_held_out, skipped_duplicate = [], 0, 0
+    by_content: set[str] = set()
+    for p in sorted(seen):
         if pair_of(p) == HELD_OUT_PAIR and seed_of(p) in HELD_OUT_SEEDS:
             skipped_held_out += 1
             continue
+        # The same render is reachable under several output families, so de-duplicate by content
+        # rather than by path: 481 paths were 438 images, with one render appearing eleven times.
+        try:
+            digest = hashlib.md5(p.read_bytes()).hexdigest()
+        except OSError:
+            continue
+        if digest in by_content:
+            skipped_duplicate += 1
+            continue
+        by_content.add(digest)
         kept.append(p)
-    print(f"renders: {len(seen)} found, {skipped_held_out} excluded as held-out "
-          f"{HELD_OUT_PAIR} seeds, {len(kept)} kept", flush=True)
-    return sorted(kept)
+    print(f"renders: {len(seen)} paths found, {skipped_held_out} excluded as held-out "
+          f"{HELD_OUT_PAIR} seeds, {skipped_duplicate} dropped as duplicate images, "
+          f"{len(kept)} kept", flush=True)
+    return kept
 
 
 def sheet(rows: list[dict], out_path: Path, title: str, thumb: int = 180) -> None:
@@ -182,13 +196,17 @@ def main() -> None:
         device = guard_device()
         print(f"device: {torch.cuda.get_device_name(0)}", flush=True)
 
-        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts" / "census"))
-        from crop_classifier_cat_vs_dog import ZeroShot, crop  # the same instrument, not a copy
+        from presence_head_calibrate_species import SpeciesPresence, crop
         from poe_repair.experiments.compose_scorer_validation.detection_scorer import (
             count_instances,
         )
 
-        clf = ZeroShot(device)
+        calibration = json.loads(CALIBRATION.read_text())
+        if not calibration["instrument_usable"]:
+            raise SystemExit(f"the calibration says the instrument fails: {calibration['verdict']}")
+        floor = float(calibration["chosen_floor"])
+        print(f"species floor {floor} ({calibration['score_mode']}) from {CALIBRATION}", flush=True)
+        presence = SpeciesPresence(device, mode=calibration["score_mode"])
         renders = find_renders()
         for i, render in enumerate(renders):
             try:
@@ -196,20 +214,21 @@ def main() -> None:
                 with Image.open(render) as im:
                     rgb = im.convert("RGB")
                     size = rgb.size
-                    dets = []
+                    per_box, kept_scores = [], []
                     for b in boxes:
-                        call = clf(crop(rgb, b["box"]))
-                        dets.append({"box": [float(v) for v in b["box"]],
-                                     "margin": float(call["margin"]),
-                                     "detector_confidence": float(b["confidence"])})
-                label = L.label_from_detections(dets, size)
+                        if L.box_fraction(b["box"], size) < L.MIN_BOX_FRACTION:
+                            continue
+                        scores = presence(crop(rgb, b["box"]))
+                        kept_scores.append({k: round(v, 4) for k, v in scores.items()})
+                        per_box.append(scores)
+                label = L.label_from_presence(per_box, floor)
             except Exception as exc:
                 print(f"  [{i:3d}] {render}: {type(exc).__name__}: {exc}", flush=True)
                 continue
             rows.append({"source": "render", "set": "product", "path": str(render),
                          "pair": pair_of(render), "seed": seed_of(render),
                          "n_animal_boxes": int(n_animal),
-                         "margins": [round(d["margin"], 4) for d in dets],
+                         "per_box_scores": kept_scores,
                          "short": f"{pair_of(render)[:18]} s{seed_of(render)}  {label.as_tuple()}",
                          **label.as_row()})
             if i % 25 == 0:
@@ -220,9 +239,13 @@ def main() -> None:
     by_label = collections.Counter((r["cat_present"], r["dog_present"]) for r in rows)
     by_source_label = collections.Counter(
         (r["source"], r["cat_present"], r["dog_present"]) for r in rows)
-    hybrid_pairs = collections.Counter(
+    fused_pairs = collections.Counter(
         r["pair"] for r in rows
-        if r["source"] == "render" and (r["cat_present"], r["dog_present"]) == (0, 0))
+        if r["source"] == "render" and "fused animal" in r["reason"])
+    no_animal_pairs = collections.Counter(
+        r["pair"] for r in rows
+        if r["source"] == "render" and (r["cat_present"], r["dog_present"]) == (0, 0)
+        and "fused animal" not in r["reason"])
     render_rows = [r for r in rows if r["source"] == "render"]
 
     for key, group in GROUPS.items():
@@ -241,8 +264,14 @@ def main() -> None:
         "counts_by_label": {f"cat={k[0]},dog={k[1]}": v for k, v in sorted(by_label.items())},
         "counts_by_source_and_label": {f"{k[0]}:cat={k[1]},dog={k[2]}": v
                                        for k, v in sorted(by_source_label.items())},
-        "hybrid_negatives_by_pair": dict(hybrid_pairs.most_common()),
-        "n_hybrid_negatives": sum(hybrid_pairs.values()),
+        "fused_animal_negatives_by_pair": dict(fused_pairs.most_common()),
+        "n_fused_animal_negatives": sum(fused_pairs.values()),
+        "n_no_animal_negatives": sum(no_animal_pairs.values()),
+        "why_the_two_are_counted_apart": "a render where one box carries both species is a fused "
+                                         "animal and is the class this experiment needs; a render "
+                                         "with no animal that clears the floor is an easy "
+                                         "negative, and counting them together hid how few fused "
+                                         "ones there were",
         "n_renders_with_unnamed_boxes": sum(1 for r in render_rows if r["n_boxes_unnamed"]),
         "held_out_excluded": {"pair": HELD_OUT_PAIR, "seeds": list(HELD_OUT_SEEDS)},
         "circularity": "every hybrid negative is a render from the model this experiment corrects, "

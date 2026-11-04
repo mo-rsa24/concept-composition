@@ -360,3 +360,1189 @@ web search: "Chronic pulmonary aspergillosis after pulmonary tuberculosis" CMAJ 
 web search: 
 web search: https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/
 web search: 
+web search: "PMC7615200" "Figure 4" "Figure 2" ...
+web search: 
+web search: https://pubmed.ncbi.nlm.nih.gov/36865932/
+codex
+The search supports an important distinction: a disease can change another disease’s appearance, remain radiographically invisible, or be visible but misidentified, and those are different findings. I also found a 2018 radiograph caption explicitly linking a net-like appearance to pneumonia in emphysematous lung; it documents a changed appearance, but does not establish the stronger claim that neither disease alone could produce it.
+web search: 
+web search: "PMC3033769" "323" "525" "Normal" ...
+web search: 
+web search: "Rheumatoid pneumoconiosis" "2009" "Figure 1" "masses" ...
+web search: 
+web search: "PMC3033769" "52 (16)" "19 (4)" ...
+web search: 
+web search: pleural effusion atelectasis chest radiograph obscured CT figure caption ...
+web search: 
+web search: "9780323074445" Herring 2012 2011 ...
+web search: 
+web search: "PMC3033769" "Table 3" "Normal" "150" ...
+web search: 
+web search: "PMC6589445" "101" "235" ...
+web search: 
+web search: "PMC2929613" "Figure 2" "cavitation" ...
+web search: 
+web search: "Asymptomatic stage I sarcoidosis complicated by pulmonary tuberculosis" figure ...
+codex
+# Pairs and their regimes
+
+**Scope:** the 15 requested pairs, plus rheumatoid pneumoconiosis, searched through 4 November 2026.
+
+**Our classification rules:** the four regimes belong to this project, and every assignment below is our mapping of published evidence rather than a classification used by the cited authors.
+
+- **1 — Separate:** separately identifiable manifestations in different regions.
+- **2 — Overlapping but readable:** both components identifiable in the same region.
+- **3 — Merged:** a jointly produced appearance that cannot be decomposed into the two diseases.
+- **4 — Concealed:** independently established disease that cannot be identified on the image.
+
+**Our qualification:** regime 1 additionally requires evidence that appearances remain unchanged, regime 3 requires evidence that neither disease produces the appearance alone, and the original regime 4 requires structural concealment rather than merely a diagnostic mistake.
+
+**Evidence labels:** **documented** identifies what a caption or study directly establishes; **inferred** identifies our interpretation; **candidate** identifies evidence that falls short of a defining condition; and **not documented** means not established in the sources examined, not proved absent from the literature.
+
+**Quotation convention:** quotation marks contain exact excerpts, sometimes shorter than the complete caption or sentence, with a locator linking to the surrounding passage.
+
+## 1. Silicosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Silicosis produces numerous small rounded white spots, usually most prominent in the upper lungs, which can join into large masses in complicated disease. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+- Post-primary pulmonary tuberculosis commonly produces upper-lung patches of opacity and cavities, although this is not its only radiographic presentation. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+Tuberculosis can alter the distribution and shape of silicotic abnormalities, contribute to conglomerate lesions, and make underlying silicosis difficult to recognise. [Ehrlich et al., 2024, *European Respiratory Review*, radiological diagnosis section and Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Documented spatial separation on radiograph:** the Case 2 caption identifies “large opacities (B) in the left upper zone” and a “cavity (cv) in right upper zone,” although unchanged appearance relative to either disease alone is not demonstrated. [Pyana Kitenge et al., 2025, *IJTLD Open*, Figure, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC11827670/) |
+| **2 — Overlapping but readable** | **Inferred from CT and microbiology:** “the left conglomerate mass presented with a cavitation” places a cavity inside progressive massive fibrosis in a culture-positive case, but the authors acknowledge that ischaemic necrosis can also cavitate a silicotic mass. [Martins et al., 2010, *Case Reports in Medicine*, Figure 2 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC2929613/) |
+| **3 — Merged** | **Prose-supported candidate:** the statement that tuberculosis “contributes to conglomeration of discrete silicotic nodules” supports joint lesion formation, but does not establish a radiographic appearance impossible in silicosis alone. [Ehrlich et al., 2024, *European Respiratory Review*, discussion of conglomerate lesions](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/) |
+| **4 — Concealed** | **Inferred from prose:** “silicosis may be missed” in tuberculous abnormalities supports concealment, but the review does not supply an independently verified before-and-after figure demonstrating that mechanism. [Ehrlich et al., 2024, *European Respiratory Review*, radiological diagnosis section](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/) |
+
+**Reader error**
+
+The Case 2 report describes previously unrecognised probable silicosis in **1/1 illustrated silico-TB case**, with tuberculosis established by GeneXpert and silicosis inferred from occupational exposure and imaging rather than biopsy. [Pyana Kitenge et al., 2025, *IJTLD Open*, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC11827670/)
+
+Our reading is that these sources support several mechanisms within the pair, but do not validate all four strict regimes with independently confirmed figures. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1 and radiological diagnosis section](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+
+## 2. HIV + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- In the principal study, HIV was established by antibody testing rather than by a separately identifiable chest opacity, making this a systemic modifier–lung disease pair in our classification. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods: “HIV testing/CD4 analysis”](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+- The familiar adult post-primary tuberculosis appearance includes upper-lung opacities and cavities. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+**Yes: the central claim is supported**, because decreasing CD4 count was associated with fewer cavities and upper-lung abnormalities and with more normal radiographs, lymph-node enlargement, miliary disease and pleural effusions. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Results: “Influence of level of immune suppression on chest X-ray findings,” Figures 3–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+Among culture-confirmed pulmonary tuberculosis cases, normal radiographs occurred in **52/323** HIV-positive patients with CD4 ≤150 cells/µL, **19/525** with CD4 >150 cells/µL, and **26/1,085** HIV-negative patients. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+The authors describe the relationship as “significant, continuous trends,” rather than an abrupt switch at one CD4 threshold. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Abstract: Conclusion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** the study does not identify a separate HIV lesion and tuberculosis lesion. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/) |
+| **2 — Overlapping but readable** | **Not documented:** its radiographic categories describe tuberculosis presentation, not two independently readable tissue components. [Kisembo et al., 2012, *British Journal of Radiology*, Tables 3–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/) |
+| **3 — Merged** | **Not documented:** altered distributions and reduced cavitation do not establish a novel, inseparable lesion unique to the pair. [Kisembo et al., 2012, *British Journal of Radiology*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/) |
+| **4 — Concealed** | **Nonvisibility documented; expanded regime 4 inferred by us:** Figure 4 and Table 3 establish culture-positive tuberculosis with normal radiographs, but neither a visible HIV lesion nor structural burial is required. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Figure 4 and Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/) |
+
+**Reader error and disagreement between studies**
+
+A second study found cavities in **25/186** HIV-positive versus **13/27** HIV-negative tuberculosis cases. [Kisembo et al., 2012, *British Journal of Radiology*, Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/)
+
+However, its normal-radiograph frequencies were **14/102** at CD4 ≤50 versus **8/80** at CD4 >50 cells/µL, a nonsignificant difference (*p*=0.44), so it did not reproduce a significant normal-film contrast using that division. [Kisembo et al., 2012, *British Journal of Radiology*, Table 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/)
+
+Our interpretation is that a normal film in confirmed disease measures radiographic nonvisibility, not necessarily reader error, and that immune-associated non-expression is an extension of the original structurally defined fourth regime. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+## 3. Pneumonia + emphysema
+
+**Each disease on a chest radiograph alone**
+
+- Pneumonia can produce a white patch or a more extensive white region, sometimes containing visible dark, air-filled bronchi. [Nambu et al., 2014, *World Journal of Radiology*, “Consolidation-predominant pattern”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+- Emphysema can produce overexpanded lungs, flattened diaphragms, sparse vessels and large dark airspaces called bullae. [Wise, updated 2026, *Merck Manual Professional Edition*, “Chronic Obstructive Pulmonary Disease,” Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+
+**What changes together**
+
+Pneumonic opacity can surround pre-existing emphysematous airspaces, creating apparent cavities or a honeycomb-like pattern rather than uniform consolidation. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22 and accompanying discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the selected figures:** Figures 21–22 illustrate pneumonia within emphysematous lung rather than an unaffected, spatially separate pair. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **2 — Overlapping but readable** | **Documented on CT:** Figure 21 identifies consolidation containing small airspaces corresponding to pre-existing low-attenuation areas, supporting our regional-overlap assignment. [Nambu et al., 2014, *World Journal of Radiology*, Figure 21](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **3 — Merged** | **Strong radiograph candidate, not strict proof:** the caption states, “The reticular or reticulo-nodular opacities in both lower lungs on chest radiograph correspond to pneumonic consolidation with underlying emphysema on CT.” [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2A–B](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview) |
+| **4 — Concealed** | **Not documented strictly:** the illustrated diagnostic problem is distorted appearance and mimicry, not independently confirmed pneumonia rendered invisible by emphysema. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+
+Our interpretation is that Park’s Figure 2 directly documents altered combined morphology on a **plain radiograph**, but does not establish that neither disease alone could generate a similar pattern or that readers cannot decompose it. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2A–B](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview)
+
+**Reader error**
+
+The review labels an illustrated CT appearance “Pseudohoneycombing,” but provides no reader-error numerator or denominator for that example. [Nambu et al., 2014, *World Journal of Radiology*, Figure 22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+The Park evidence above comes from its published English caption, not from a translation of the Korean clinical prose. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview)
+
+## 4. Pleural effusion + atelectasis
+
+**Each condition on a chest radiograph alone**
+
+- Pleural fluid can blunt the lower outer corner of the chest and form a curved upper border above a white basal opacity. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, “Pleural effusion,” Figure 5-137](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+- Atelectasis makes part of the lung whiter and smaller, potentially drawing fissures, the diaphragm or mediastinal structures toward the collapsed region. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Atelectasis”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/)
+
+**What changes together**
+
+Pleural fluid can compress adjacent lung and produce atelectasis, making this a cause-and-consequence combination rather than necessarily two independent diseases. [Bankier et al., 2024, *Radiology*, “Atelectasis,” Figures 30–40](https://pmc.ncbi.nlm.nih.gov/articles/PMC10902601/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the causal example:** the effusion and dependent collapse are adjacent and mechanically related. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-152](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **2 — Overlapping but readable** | **Documented adjacent components on CT; regional assignment inferred:** the caption attributes denser dependent lung to “compressive atelectasis from the adjacent pleural effusions,” but the two abnormalities occupy different anatomical compartments rather than identical tissue. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-152A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **3 — Merged** | **Not documented:** an opaque hemithorax does not establish an appearance unique to effusion plus collapse. [Herring, 2012 copyright edition, *Learning Radiology*, 2nd edition, Chapter 6, “Opacified Hemithorax”](https://elsevier-elibrary.com/contents/fullcontent/58848/epubcontent_v2/OEBPS/B9780323074445000068.htm) |
+| **4 — Concealed** | **Prose-supported candidate on radiography:** large effusions can “mask whatever disease may be present in the lung enveloped by them,” but this general statement does not independently prove concealed atelectasis in a particular illustrated patient. [Herring, 2012 copyright edition, *Learning Radiology*, 2nd edition, Chapter 6, “Opacified Hemithorax,” Figure 6-10](https://elsevier-elibrary.com/contents/fullcontent/58848/epubcontent_v2/OEBPS/B9780323074445000068.htm) |
+
+**Reader error**
+
+No reader-error rate is reported for the illustrated effusion–atelectasis combination. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figures 5-139–5-140 and 5-152](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+## 5. Pulmonary fibrosis + emphysema
+
+**Each disease on a chest radiograph alone**
+
+- Pulmonary fibrosis can produce a network of white lines, especially near the bases and outer lung, with reduced lung volume. [Meltzer and Noble, 2008, *Orphanet Journal of Rare Diseases*, “Radiographic findings,” Figure 1](https://link.springer.com/article/10.1186/1750-1172-3-8)
+- Emphysema can produce overexpanded lungs, flattened diaphragms and dark bullous spaces. [Wise, updated 2026, *Merck Manual Professional Edition*, Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+
+**What changes together**
+
+Combined pulmonary fibrosis and emphysema, or CPFE, can appear on radiographs as unusually dark upper lungs together with a basal and peripheral network of white lines. [Dias et al., 2014, *Jornal Brasileiro de Pneumologia*, “Imaging studies in CPFE”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4109203/)
+
+Where the processes overlap, fibrosis can deform emphysematous spaces and create thick-walled cysts that complicate distinction from honeycombing. [Cottin et al., 2022, *American Journal of Respiratory and Critical Care Medicine*, Imaging section](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Documented on CT:** Figure 1 explicitly names a “separate emphysema and fibrosis pattern,” with upper-lobe emphysema and lower-lobe fibrosis, although complete absence of interaction is not tested. [Cottin et al., 2022, *AJRCCM*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **2 — Overlapping but readable** | **Documented on serial CT:** the Figure 4 caption says isolated emphysema “becomes admixed with fibrosis over time,” while identifying both components over a two-year interval. [Cottin et al., 2022, *AJRCCM*, Figure 4A–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **3 — Merged** | **Strong candidate:** Figure 6 names “thick-walled large cysts,” but the imaging discussion explicitly leaves their specificity for CPFE unresolved. [Cottin et al., 2022, *AJRCCM*, Figure 6 and Imaging section](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **4 — Concealed** | **Not documented strictly:** difficulty distinguishing emphysema from honeycombing does not itself demonstrate one independently confirmed disease made invisible by the other. [Cottin et al., 2022, *AJRCCM*, “Quantification of HRCT abnormalities”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+
+**Reader error**
+
+The statement reports difficulty and interobserver variation in identifying and quantifying overlapping components, but supplies no single reader-error denominator applicable to these figures. [Cottin et al., 2022, *AJRCCM*, “Quantification of HRCT abnormalities”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+**Qualification within the source:** its histopathology discussion describes certain thick-walled cysts as distinctive, whereas its imaging discussion remains uncertain about their specificity, so those passages do not justify an unqualified claim of radiographic uniqueness. [Cottin et al., 2022, *AJRCCM*, Imaging and Histopathology sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+## 6. Pulmonary fibrosis + lung cancer
+
+**Each disease on a chest radiograph alone**
+
+- Fibrosis produces coarse or fine net-like white markings and may contract the lungs. [Meltzer and Noble, 2008, *Orphanet Journal of Rare Diseases*, “Radiographic findings”](https://link.springer.com/article/10.1186/1750-1172-3-8)
+- Lung cancer may appear as a focal nodule or mass, or indirectly through obstruction and collapse. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, discussion of pulmonary masses and postobstructive abnormalities](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+**What changes together**
+
+In a CT series containing **66 cancers in 63 patients** with idiopathic interstitial pneumonia, **35/66** cancers lay at the interface between fibrotic cysts and normal lung and **21/66** lay within fibrotic cystic regions. [Oh et al., 2015, *American Journal of Roentgenology*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+Cancer in fibrotic lung can resemble consolidation rather than a conspicuous separate mass. [Abu Qubo et al., published online 2023, *Breathe*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly in the selected figures:** peripheral tumour location alone does not establish spatial separation from fibrosis and unchanged appearance. [Abu Qubo et al., 2023, *Breathe*, Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/) |
+| **2 — Overlapping but readable** | **Inferred from series prose:** cancers occurred “in the midst of fibrotic cysts,” establishing shared regions, although the accessible abstract provides no corresponding caption proving both components are independently readable. [Oh et al., 2015, *AJR*, Abstract: Conclusion](https://pubmed.ncbi.nlm.nih.gov/26001227/) |
+| **3 — Merged** | **Not documented strictly:** “The cancer looks like consolidation” establishes mimicry, not an appearance that neither cancer nor fibrosis can produce alone. [Abu Qubo et al., 2023, *Breathe*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/) |
+| **4 — Concealed** | **Documented diagnostic miss; regime assignment inferred:** a nodule at the diseased–normal lung boundary “was not reported on the first CT scan,” but the caption attributes the problem to satisfaction of search rather than proving structural burial. [Du Pasquier et al., 2019, *BJR Open*, Figure 15](https://pmc.ncbi.nlm.nih.gov/articles/PMC7592491/) |
+
+**Reader error**
+
+Figure 15 documents a missed cancer in **1/1 illustrated patient**, with enlargement on CT **five months later** and subsequent histological confirmation. [Du Pasquier et al., 2019, *BJR Open*, Figure 15](https://pmc.ncbi.nlm.nih.gov/articles/PMC7592491/)
+
+The series of **66 cancers in 63 patients**, assessed across **193 CT examinations**, reported a median diagnostic delay of **46 days**, ranging from **8 to 760 days**, and interobserver agreement exceeding **κ=0.77** for the evaluated tumour characteristics. [Oh et al., 2015, *AJR*, Abstract: Methods and Results](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+Our qualification is that the accessible abstract does not give a separate denominator for the delay calculation, so the cohort denominator should not be mistaken for a verified count of delayed diagnoses. [Oh et al., 2015, *AJR*, Abstract](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+## 7. Old tuberculosis + aspergilloma
+
+**Each condition on a chest radiograph alone**
+
+- Healed pulmonary tuberculosis can leave scars, volume loss and persistent cavities after the active infection has resolved. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Imaging of post-treatment sequelae”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+- An aspergilloma is a fungal ball within a pre-existing cavity, potentially appearing as a rounded opacity with surrounding air, so its “alone” appearance already presupposes a structural substrate. [Maheshwari et al., 2011, *BMJ Case Reports*, Background and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3094787/)
+
+**What changes together**
+
+One report shows an empty post-tuberculous cavity on radiography and a mass inside the same cavity on CT one year later, with Aspergillus established by tissue examination and culture. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, case description and Figure 1A–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in this example:** the fungal lesion occupies the pre-existing cavity rather than a different region. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **2 — Overlapping but readable** | **Documented on CT:** the caption identifies the same cavity “with an irregular spongiform mass suggestive of a forming aspergilloma.” [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **3 — Merged** | **Not documented:** the caption explicitly separates the cavity from the intracavitary mass. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **4 — Concealed** | **Not documented strictly:** the fungal lesion was identifiable on CT and independently confirmed, rather than shown to be structurally hidden. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+
+**Reader error**
+
+A separate report describes presumed tuberculosis reactivation before CT and histology established aspergilloma in **1/1 reported patient**, but does not provide a blinded radiologist-error rate. [Maheshwari et al., 2011, *BMJ Case Reports*, Case presentation and Investigations](https://pmc.ncbi.nlm.nih.gov/articles/PMC3094787/)
+
+Our qualification is that this pair concerns a persistent tuberculosis sequela plus fungal disease, not necessarily two simultaneously active infections. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, case description](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/)
+
+## 8. Heart failure + pneumonia
+
+**Each disease on a chest radiograph alone**
+
+- Heart failure with pulmonary oedema can produce enlarged vessels, short peripheral lines, central white airspace opacities, pleural effusions and an enlarged heart. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Pulmonary edema”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/)
+- Pneumonia can produce patchy or confluent white airspace opacities, sometimes with air bronchograms. [Nambu et al., 2014, *World Journal of Radiology*, “Consolidation-predominant pattern”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+**What changes together**
+
+The BACH study identifies diagnosing pneumonia during acute heart failure as difficult because the clinical presentation and chest-radiograph abnormalities can overlap. [Maisel et al., 2012, *European Journal of Heart Failure*, Introduction](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+Of **155 patients with pneumonia**, **29 also had acute heart failure** in the study’s **1,641-patient** dyspnoea cohort. [Maisel et al., 2012, *European Journal of Heart Failure*, Results: study population](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** BACH establishes coexistence but does not provide an annotated figure separating the two abnormalities. [Maisel et al., 2012, *European Journal of Heart Failure*, Results and figures](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+| **2 — Overlapping but readable** | **Not documented:** the study does not demonstrate independently readable oedema and infection within one labelled region. [Maisel et al., 2012, *European Journal of Heart Failure*, Results and figures](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+| **3 — Merged** | **Not documented:** shared airspace opacity is not evidence of a new morphology unique to the combined diseases. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Pneumonia”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/) |
+| **4 — Concealed** | **Not documented strictly:** diagnostic uncertainty in concurrent heart failure does not establish that oedema physically concealed independently confirmed pneumonia on a particular film. [Maisel et al., 2012, *European Journal of Heart Failure*, Introduction and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+
+**Reader error**
+
+No pneumonia-specific radiographic miss fraction for the **29 concurrent heart-failure cases** is provided, so the study’s overall diagnostic-performance estimates should not be presented as a pair-specific error rate. [Maisel et al., 2012, *European Journal of Heart Failure*, Results: chest radiography and diagnostic performance](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+## 9. COPD + pneumonia
+
+**Each disease on a chest radiograph alone**
+
+- COPD includes airway-predominant and emphysematous disease, with possible radiographic hyperinflation and bullae, but confirmation of airflow obstruction depends on pulmonary function testing. [Wise, updated 2026, *Merck Manual Professional Edition*, “Diagnosis of COPD” and Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+- Pneumonia commonly produces a new focal or patchy white opacity. [Nambu et al., 2014, *World Journal of Radiology*, radiological patterns of community-acquired pneumonia](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+**What changes together**
+
+Pneumonia and COPD exacerbation can have similar clinical presentations, and radiographic consolidation may be present without a discharge diagnosis of pneumonia. [Finney et al., 2019, *ERJ Open Research*, Abstract and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC6589445/)
+
+Among **100 selected patients** admitted with COPD exacerbation whose radiographs had excluded pneumonia, **24/100** had additional low-dose CT abnormalities considered suggestive of pneumonia. [Prins et al., 2022, *ERJ Open Research*, Results and Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly:** an illustrated pneumococcal pneumonia in a patient with COPD does not establish a second, separately localised COPD lesion. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-71](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **2 — Overlapping but readable** | **Documented for the emphysema phenotype, not COPD generally:** the CT example in section 3 identifies pneumonic consolidation and pre-existing emphysematous spaces within the same region. [Nambu et al., 2014, *World Journal of Radiology*, Figure 21](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **3 — Merged** | **Candidate only for the emphysema phenotype:** the caption quoted in section 3 connects radiographic reticular opacities to pneumonia with underlying emphysema, without establishing a unique COPD–pneumonia morphology. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview) |
+| **4 — Concealed** | **Modality-dependent nonvisibility documented; structural regime 4 unproved:** Figure 2 contrasts a “Conventional chest radiograph without evidence of radiological abnormalities” with CT showing right-upper-lobe consolidation. [Prins et al., 2022, *ERJ Open Research*, Figure 2A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/) |
+
+**Reader error**
+
+Across **941 admissions in 621 patients**, **235 admissions** had radiographic consolidation, but only **42.9% of those 235 admissions** received a discharge diagnosis of pneumonia, which measures diagnostic coding discordance rather than a blinded reader miss rate. [Finney et al., 2019, *ERJ Open Research*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/31249841/)
+
+For the **100 low-dose CT examinations**, agreement between two radiologists was **κ=0.562**, with a **95% confidence interval of 0.371–0.752**. [Prins et al., 2022, *ERJ Open Research*, “Interobserver variation”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+Our qualification is that CT abnormalities suggestive of pneumonia do not independently establish infectious pneumonia in every one of the **24/100** patients or prove that COPD caused the radiographic nonvisibility. [Prins et al., 2022, *ERJ Open Research*, Tables 2–3 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+## 10. Diabetes + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- In the principal study, diabetes was defined clinically and biochemically rather than through a chest-radiograph lesion, making it another systemic modifier in our classification. [Chiang et al., 2014, *PLOS ONE*, Methods: definitions of diabetes and glycaemic control](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+- Post-primary pulmonary tuberculosis commonly produces upper-lung opacity and cavitation. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+A study of **1,209 culture-positive patients**, comprising **581 with diabetes** and **628 without**, associated diabetes and poorer glycaemic control with more extensive disease, lower-field involvement and cavitation. [Chiang et al., 2014, *PLOS ONE*, Results and radiographic comparison tables](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+
+Another study reported isolated lower-field disease in **23.5% of 187 diabetic patients** versus **2.4% of 505 non-diabetic patients**, with cavitation in **50.8%** and **39.0%** of those respective groups. [Shaikh et al., 2003, *Saudi Medical Journal*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/12704504/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented and not directly applicable:** diabetes was not represented by its own spatially localised radiographic abnormality. [Chiang et al., 2014, *PLOS ONE*, Methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+| **2 — Overlapping but readable** | **Not documented:** the study compares tuberculosis appearances between metabolic groups rather than two readable lung lesions. [Chiang et al., 2014, *PLOS ONE*, Methods and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+| **3 — Merged** | **Not documented:** altered frequency and distribution of tuberculosis findings do not establish a unique joint lesion. [Shaikh et al., 2003, *Saudi Medical Journal*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/12704504/) |
+| **4 — Concealed** | **Not documented:** these studies do not demonstrate diabetes structurally concealing independently confirmed tuberculosis. [Chiang et al., 2014, *PLOS ONE*, Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+
+**Reader error and disagreement**
+
+No reader-error rate or diagnostic-delay denominator was identified in the selected radiographic comparison studies. [Chiang et al., 2014, *PLOS ONE*, Methods and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+
+The broader review literature reports inconsistent findings about whether diabetes changes tuberculosis location, so the lower-field association should not be stated as universal. [Dooley and Chaisson, 2009, *Lancet Infectious Diseases*, discussion of clinical presentation and radiographic findings](https://pmc.ncbi.nlm.nih.gov/articles/PMC2945809/)
+
+## 11. Silicosis + lung cancer
+
+**Each disease on a chest radiograph alone**
+
+- Silicosis produces small rounded opacities and, in complicated disease, large conglomerate masses. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+- Lung cancer may produce a focal nodule or mass, although obstruction can produce secondary opacity or collapse. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, pulmonary masses discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+**What changes together**
+
+A reported case had a recognised dominant lung cancer but diffuse nodules initially interpreted as silicosis, with surgery demonstrating additional adenocarcinoma deposits. [Wang et al., 2023, *Cell Cycle*, Case presentation, Figures 1–3](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+After three months of targeted treatment, some nodules regressed while others remained unchanged and were considered silicotic, so the evidence for the two components was unequal: sampled cancer was histologically established, whereas the remaining silicotic nodules were inferred. [Wang et al., 2023, *Cell Cycle*, Case presentation and Figure 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Candidate, not confirmed:** the prose describes “a left upper lung nodule with bilateral silicosis,” but the later discovery of metastases prevents treating all background nodules as independently verified silicosis. [Wang et al., 2023, *Cell Cycle*, Abstract and Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **2 — Overlapping but readable** | **Not documented:** the captions do not establish a single region in which silicotic tissue and tumour are both separately identifiable. [Wang et al., 2023, *Cell Cycle*, Figures 1–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **3 — Merged** | **Not documented:** similar-looking silicotic and metastatic nodules do not establish a jointly produced new morphology. [Wang et al., 2023, *Cell Cycle*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** the authors conclude that “metastasis and silicosis coexisted,” but this is misattribution of visible nodules rather than demonstrated physical burial. [Wang et al., 2023, *Cell Cycle*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+
+**Reader error**
+
+Preoperative assessment failed to identify the full metastatic extent in **1/1 reported patient**, although the dominant cancer itself was recognised. [Wang et al., 2023, *Cell Cycle*, Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+## 12. Asbestosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Asbestosis can produce basal irregular interstitial opacities and indistinct cardiac or diaphragmatic borders, while pleural plaques are a separate asbestos-associated finding rather than proof of asbestosis. [ATSDR, publication year not confirmed, *Asbestos Toxicity: Clinical Assessment—Tests*, chest-radiograph findings table](https://archive.cdc.gov/www_atsdr_cdc_gov/csem/asbestos/clinical_assessment-tests.html)
+- Pulmonary tuberculosis can produce upper-lung opacities, cavities or residual scarring. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, post-primary disease and sequelae sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+An occupational study examined **2,846 radiographs**, including **257 people classified with asbestosis**, but principally compared residual tuberculosis appearances and found only **one active tuberculosis case in the whole cohort**. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/)
+
+A later cohort reported previous pulmonary tuberculosis in **45/124 patients with asbestosis**, which establishes a history of both conditions but not the appearance of simultaneous active disease. [Tse et al., 2012, *Public Health*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/23164612/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** the occupational study’s accessible report does not supply a labelled combined-case figure. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/) |
+| **2 — Overlapping but readable** | **Not documented:** historical coexistence in the later cohort does not localise both processes within a shared region. [Tse et al., 2012, *Public Health*, Abstract](https://pubmed.ncbi.nlm.nih.gov/23164612/) |
+| **3 — Merged** | **Not documented:** neither a joint morphology nor an inseparable lesion is established in the accessible occupational study. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/) |
+| **4 — Concealed** | **Not documented:** the retrieved cohort evidence does not establish one independently confirmed disease hidden by the other. [Tse et al., 2012, *Public Health*, Abstract](https://pubmed.ncbi.nlm.nih.gov/23164612/) |
+
+**Reader error**
+
+No combined-case reader-error rate was available in the retrieved occupational study. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/)
+
+A related illustrated report concerns **asbestos-related pleural disease with tuberculous pleurisy**, not proven parenchymal asbestosis, so it should not be substituted for this pair. [Zantah and Datta, 2017, *Respiratory Medicine Case Reports*, case description and Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC5413209/)
+
+## 13. Coal workers’ pneumoconiosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Coal workers’ pneumoconiosis can produce small pulmonary opacities and, when complicated, large masses of progressive massive fibrosis. [Shah et al., 2012, *RadioGraphics*, “AIRP Best Cases in Radiologic-Pathologic Correlation: Coal Workers’ Pneumoconiosis,” radiological discussion](https://pubs.rsna.org/doi/10.1148/rg.327115137)
+- Post-primary tuberculosis commonly produces upper-lung opacities and cavities. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+The classical cavitation study distinguishes tuberculosis-associated cavitation from non-tuberculous cavitation within massive pneumoconiotic lesions, showing why a cavity does not uniquely identify the infection. [Kilpatrick, Heppleston and Fletcher, 1954, *Thorax*, pp. 260–272](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the selected cavitation study:** its main question concerns cavities within massive fibrosis rather than separately labelled disease territories. [Kilpatrick et al., 1954, *Thorax*, Introduction and radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **2 — Overlapping but readable** | **Candidate only:** a mass and cavity can both be visible, but recognising those structures does not establish that tuberculosis itself is separately readable. [Kilpatrick et al., 1954, *Thorax*, radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **3 — Merged** | **Not documented strictly:** the authors state, “The two main types of cavity in P.M.F. cannot be differentiated radiologically,” undermining any claim that the combined appearance is unique to tuberculosis. [Kilpatrick et al., 1954, *Thorax*, p. 265](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **4 — Concealed** | **Etiological-masking candidate, not structural proof:** radiographic inability to distinguish infected from non-infected cavitation leaves tuberculosis unidentifiable, but does not demonstrate that destroyed lung erased a separate tuberculosis lesion. [Kilpatrick et al., 1954, *Thorax*, radiological examination and pathological discussion](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+
+**Reader error**
+
+The study’s bacteriological and pathological comparisons should not be converted into a reader-error rate because it does not report a blinded reader confusion matrix for the disease pair. [Kilpatrick et al., 1954, *Thorax*, Methods and radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf)
+
+## 14. COVID-19 + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- COVID-19 pneumonia commonly produces bilateral patchy or confluent white opacities with lower-zone and peripheral predominance. [Wong et al., 2020, *Radiology*, Results and Conclusion](https://pmc.ncbi.nlm.nih.gov/articles/PMC7233401/)
+- Pulmonary tuberculosis may produce upper-lung cavities and nodules, although other distributions occur. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+A microbiologically confirmed coinfection report describes an upper-lobe cavity with adjacent micronodules together with more widespread subpleural and peribronchovascular consolidations. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Case Report and Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/)
+
+A separate series shows ground-glass abnormalities resolving while nodular abnormalities persist, allowing the authors to distinguish components using serial CT rather than a single examination. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 1 and Figure 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Inferred from CT caption and microbiology:** after describing the cavity, the caption places consolidations “In the rest of the parenchyma,” supporting different territories but not proving unaffected solo appearances. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/) |
+| **2 — Overlapping but readable** | **Inferred at regional scale:** the caption describes “ground-glass changes in both upper lobes with associated nodular changes bilaterally,” with subsequent differential resolution supporting two components. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Figure 2 and Case 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/) |
+| **3 — Merged** | **Not documented:** these reports do not establish a unique inseparable appearance produced only by coinfection. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** delayed tuberculosis confirmation in Case 2 does not prove that COVID-19 physically concealed its radiographic manifestations. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2 and Figure 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/) |
+
+**Reader error**
+
+In **1/3 patients** in the Nyanti series, tuberculosis culture became positive approximately **seven weeks after collection**, after the patient’s death, despite initially negative sputum smears. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+Our qualification is that this is delayed microbiological recognition within a small clinical series, not a measured radiologist miss rate. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+## 15. Sarcoidosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Sarcoidosis may produce enlargement of lymph nodes at both lung roots, pulmonary nodules and, in advanced disease, fibrosis with volume loss. [Ungprasert, Ryu and Matteson, 2019, *Mayo Clinic Proceedings: Innovations, Quality & Outcomes*, pulmonary manifestations, Table 1 and Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC6713839/)
+- Tuberculosis can produce cavities, lymph-node enlargement or widespread small nodules, depending on its form. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, primary, post-primary and miliary tuberculosis sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+One case combined longstanding, biopsy-supported sarcoid lymphadenopathy with new lung opacities and culture-confirmed tuberculosis, with the opacities clearing while the lymphadenopathy persisted. [Papaetis et al., 2008, *Journal of Medical Case Reports*, Case presentation and Figures 1–3](https://pmc.ncbi.nlm.nih.gov/articles/PMC2474644/)
+
+Another report initially attributed a diffuse nodular presentation to tuberculosis and added sarcoidosis after recurrent symptoms and further investigation. [Mandal et al., 2014, *BMJ Case Reports*, Abstract and Outcome and follow-up](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Inferred from radiograph, history and follow-up:** the caption identifies “bilateral hilar lymphadenopathy together with lower bilateral interstitial lung densities,” while the case description assigns persistent nodes to sarcoidosis and reversible lung disease to tuberculosis. [Papaetis et al., 2008, *Journal of Medical Case Reports*, Figure 1 and Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC2474644/) |
+| **2 — Overlapping but readable** | **Not documented in the diffuse case:** its captions describe shared interstitial or nodular abnormalities without separately identifying each disease within one region. [Mandal et al., 2014, *BMJ Case Reports*, Figures 1–3 and 6](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+| **3 — Merged** | **Not documented strictly:** “bilateral coarse lung markings with miliary mottling” describes a nonspecific pattern rather than a morphology unique to the combination. [Mandal et al., 2014, *BMJ Case Reports*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** the authors describe difficulty diagnosing both diseases individually, but do not establish physical concealment of independently verified sarcoid lesions by tuberculosis. [Mandal et al., 2014, *BMJ Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+
+**Reader error and diagnostic certainty**
+
+In **1/1 patient** in the Mandal report, the initial working diagnosis was tuberculosis alone before sarcoidosis was added, but no separate radiologist-error measurement was reported. [Mandal et al., 2014, *BMJ Case Reports*, Treatment and Outcome and follow-up](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+The authors themselves note that non-necrotising granulomas can occur in tuberculosis and necrotising granulomas in sarcoidosis, so histological appearance alone cannot independently settle both diagnoses. [Mandal et al., 2014, *BMJ Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+## 16. Additional named combination: rheumatoid arthritis + pneumoconiosis — Caplan syndrome
+
+**Each disease on a chest radiograph alone**
+
+- Rheumatoid lung disease can produce rounded pulmonary nodules, including cavitating nodules, as illustrated on plain radiographs. [Sidhu et al., 2011, *Journal of Clinical Imaging Science*, “Pulmonary nodules,” Figures 4 and 6](https://pmc.ncbi.nlm.nih.gov/articles/PMC3177462/)
+- Pneumoconiosis can produce small rounded opacities or large masses of progressive massive fibrosis. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Introduction](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+**What changes together**
+
+Caplan syndrome is a named rheumatoid pneumoconiosis characterised by peripheral pulmonary nodules, with mineral dust incorporated into rheumatoid-type nodules on pathological examination. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/)
+
+The reported classical case showed bilateral peripheral rounded opacities on radiography and a biopsied rheumatoid nodule containing refracting particles. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report, Figures 1b and 3](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly:** the named syndrome does not require a separate visible background pneumoconiosis pattern alongside the nodules. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Introduction and Discussion](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf) |
+| **2 — Overlapping but readable** | **Not documented on imaging:** pathological identification of dust within a rheumatoid nodule does not make both components separately readable on the radiograph. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/) |
+| **3 — Merged** | **Pathology-supported candidate with radiographic examples:** “Biopsy reveals inorganic dust within the necrotic nodule,” but Figures 8–9 labelled Caplan syndrome do not establish a radiographic appearance impossible in rheumatoid disease alone. [Sidhu et al., 2011, *Journal of Clinical Imaging Science*, “Caplan’s syndrome,” Figures 8–9](https://pmc.ncbi.nlm.nih.gov/articles/PMC3177462/) |
+| **4 — Concealed** | **Not documented:** the case does not demonstrate independently confirmed disease made radiographically invisible by the other component. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf) |
+
+**Reader error**
+
+No reader-error rate or diagnostic-delay denominator is reported for the classical illustrated case. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report and Discussion](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+Our interpretation is that Caplan syndrome is a useful joint-lesion candidate, but pathological combination should not be promoted into proof of an undecomposable radiographic regime. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/)
+
+## Self-audit
+
+| File | Number asked for | Number reached | What remained unconfirmed and what was searched |
+|---|---:|---:|---|
+| `pairs-and-their-regimes.md` | 15 pairs, each with four verdicts | **16 pairs; 64 explicit regime verdicts** | No pair was established in all four strict regimes; searches combined each pair’s names with radiograph, CT, figure, cavitation, masking, occult disease, misdiagnosis and reader agreement across PubMed/PMC, journal sites and teaching sources, with the principal gaps being caption-supported asbestosis–TB cases, unique regime-3 morphology, and proof distinguishing structural concealment from mimicry, reader error or modality limitations. |
+tokens used
+393,396
+# Pairs and their regimes
+
+**Scope:** the 15 requested pairs, plus rheumatoid pneumoconiosis, searched through 4 November 2026.
+
+**Our classification rules:** the four regimes belong to this project, and every assignment below is our mapping of published evidence rather than a classification used by the cited authors.
+
+- **1 — Separate:** separately identifiable manifestations in different regions.
+- **2 — Overlapping but readable:** both components identifiable in the same region.
+- **3 — Merged:** a jointly produced appearance that cannot be decomposed into the two diseases.
+- **4 — Concealed:** independently established disease that cannot be identified on the image.
+
+**Our qualification:** regime 1 additionally requires evidence that appearances remain unchanged, regime 3 requires evidence that neither disease produces the appearance alone, and the original regime 4 requires structural concealment rather than merely a diagnostic mistake.
+
+**Evidence labels:** **documented** identifies what a caption or study directly establishes; **inferred** identifies our interpretation; **candidate** identifies evidence that falls short of a defining condition; and **not documented** means not established in the sources examined, not proved absent from the literature.
+
+**Quotation convention:** quotation marks contain exact excerpts, sometimes shorter than the complete caption or sentence, with a locator linking to the surrounding passage.
+
+## 1. Silicosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Silicosis produces numerous small rounded white spots, usually most prominent in the upper lungs, which can join into large masses in complicated disease. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+- Post-primary pulmonary tuberculosis commonly produces upper-lung patches of opacity and cavities, although this is not its only radiographic presentation. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+Tuberculosis can alter the distribution and shape of silicotic abnormalities, contribute to conglomerate lesions, and make underlying silicosis difficult to recognise. [Ehrlich et al., 2024, *European Respiratory Review*, radiological diagnosis section and Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Documented spatial separation on radiograph:** the Case 2 caption identifies “large opacities (B) in the left upper zone” and a “cavity (cv) in right upper zone,” although unchanged appearance relative to either disease alone is not demonstrated. [Pyana Kitenge et al., 2025, *IJTLD Open*, Figure, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC11827670/) |
+| **2 — Overlapping but readable** | **Inferred from CT and microbiology:** “the left conglomerate mass presented with a cavitation” places a cavity inside progressive massive fibrosis in a culture-positive case, but the authors acknowledge that ischaemic necrosis can also cavitate a silicotic mass. [Martins et al., 2010, *Case Reports in Medicine*, Figure 2 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC2929613/) |
+| **3 — Merged** | **Prose-supported candidate:** the statement that tuberculosis “contributes to conglomeration of discrete silicotic nodules” supports joint lesion formation, but does not establish a radiographic appearance impossible in silicosis alone. [Ehrlich et al., 2024, *European Respiratory Review*, discussion of conglomerate lesions](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/) |
+| **4 — Concealed** | **Inferred from prose:** “silicosis may be missed” in tuberculous abnormalities supports concealment, but the review does not supply an independently verified before-and-after figure demonstrating that mechanism. [Ehrlich et al., 2024, *European Respiratory Review*, radiological diagnosis section](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/) |
+
+**Reader error**
+
+The Case 2 report describes previously unrecognised probable silicosis in **1/1 illustrated silico-TB case**, with tuberculosis established by GeneXpert and silicosis inferred from occupational exposure and imaging rather than biopsy. [Pyana Kitenge et al., 2025, *IJTLD Open*, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC11827670/)
+
+Our reading is that these sources support several mechanisms within the pair, but do not validate all four strict regimes with independently confirmed figures. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1 and radiological diagnosis section](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+
+## 2. HIV + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- In the principal study, HIV was established by antibody testing rather than by a separately identifiable chest opacity, making this a systemic modifier–lung disease pair in our classification. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods: “HIV testing/CD4 analysis”](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+- The familiar adult post-primary tuberculosis appearance includes upper-lung opacities and cavities. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+**Yes: the central claim is supported**, because decreasing CD4 count was associated with fewer cavities and upper-lung abnormalities and with more normal radiographs, lymph-node enlargement, miliary disease and pleural effusions. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Results: “Influence of level of immune suppression on chest X-ray findings,” Figures 3–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+Among culture-confirmed pulmonary tuberculosis cases, normal radiographs occurred in **52/323** HIV-positive patients with CD4 ≤150 cells/µL, **19/525** with CD4 >150 cells/µL, and **26/1,085** HIV-negative patients. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+The authors describe the relationship as “significant, continuous trends,” rather than an abrupt switch at one CD4 threshold. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Abstract: Conclusion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** the study does not identify a separate HIV lesion and tuberculosis lesion. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/) |
+| **2 — Overlapping but readable** | **Not documented:** its radiographic categories describe tuberculosis presentation, not two independently readable tissue components. [Kisembo et al., 2012, *British Journal of Radiology*, Tables 3–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/) |
+| **3 — Merged** | **Not documented:** altered distributions and reduced cavitation do not establish a novel, inseparable lesion unique to the pair. [Kisembo et al., 2012, *British Journal of Radiology*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/) |
+| **4 — Concealed** | **Nonvisibility documented; expanded regime 4 inferred by us:** Figure 4 and Table 3 establish culture-positive tuberculosis with normal radiographs, but neither a visible HIV lesion nor structural burial is required. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Figure 4 and Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/) |
+
+**Reader error and disagreement between studies**
+
+A second study found cavities in **25/186** HIV-positive versus **13/27** HIV-negative tuberculosis cases. [Kisembo et al., 2012, *British Journal of Radiology*, Table 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/)
+
+However, its normal-radiograph frequencies were **14/102** at CD4 ≤50 versus **8/80** at CD4 >50 cells/µL, a nonsignificant difference (*p*=0.44), so it did not reproduce a significant normal-film contrast using that division. [Kisembo et al., 2012, *British Journal of Radiology*, Table 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC3474111/)
+
+Our interpretation is that a normal film in confirmed disease measures radiographic nonvisibility, not necessarily reader error, and that immune-associated non-expression is an extension of the original structurally defined fourth regime. [Chamie et al., 2010, *International Journal of Tuberculosis and Lung Disease*, Methods and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3033769/)
+
+## 3. Pneumonia + emphysema
+
+**Each disease on a chest radiograph alone**
+
+- Pneumonia can produce a white patch or a more extensive white region, sometimes containing visible dark, air-filled bronchi. [Nambu et al., 2014, *World Journal of Radiology*, “Consolidation-predominant pattern”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+- Emphysema can produce overexpanded lungs, flattened diaphragms, sparse vessels and large dark airspaces called bullae. [Wise, updated 2026, *Merck Manual Professional Edition*, “Chronic Obstructive Pulmonary Disease,” Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+
+**What changes together**
+
+Pneumonic opacity can surround pre-existing emphysematous airspaces, creating apparent cavities or a honeycomb-like pattern rather than uniform consolidation. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22 and accompanying discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the selected figures:** Figures 21–22 illustrate pneumonia within emphysematous lung rather than an unaffected, spatially separate pair. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **2 — Overlapping but readable** | **Documented on CT:** Figure 21 identifies consolidation containing small airspaces corresponding to pre-existing low-attenuation areas, supporting our regional-overlap assignment. [Nambu et al., 2014, *World Journal of Radiology*, Figure 21](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **3 — Merged** | **Strong radiograph candidate, not strict proof:** the caption states, “The reticular or reticulo-nodular opacities in both lower lungs on chest radiograph correspond to pneumonic consolidation with underlying emphysema on CT.” [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2A–B](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview) |
+| **4 — Concealed** | **Not documented strictly:** the illustrated diagnostic problem is distorted appearance and mimicry, not independently confirmed pneumonia rendered invisible by emphysema. [Nambu et al., 2014, *World Journal of Radiology*, Figures 21–22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+
+Our interpretation is that Park’s Figure 2 directly documents altered combined morphology on a **plain radiograph**, but does not establish that neither disease alone could generate a similar pattern or that readers cannot decompose it. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2A–B](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview)
+
+**Reader error**
+
+The review labels an illustrated CT appearance “Pseudohoneycombing,” but provides no reader-error numerator or denominator for that example. [Nambu et al., 2014, *World Journal of Radiology*, Figure 22](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+The Park evidence above comes from its published English caption, not from a translation of the Korean clinical prose. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview)
+
+## 4. Pleural effusion + atelectasis
+
+**Each condition on a chest radiograph alone**
+
+- Pleural fluid can blunt the lower outer corner of the chest and form a curved upper border above a white basal opacity. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, “Pleural effusion,” Figure 5-137](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+- Atelectasis makes part of the lung whiter and smaller, potentially drawing fissures, the diaphragm or mediastinal structures toward the collapsed region. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Atelectasis”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/)
+
+**What changes together**
+
+Pleural fluid can compress adjacent lung and produce atelectasis, making this a cause-and-consequence combination rather than necessarily two independent diseases. [Bankier et al., 2024, *Radiology*, “Atelectasis,” Figures 30–40](https://pmc.ncbi.nlm.nih.gov/articles/PMC10902601/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the causal example:** the effusion and dependent collapse are adjacent and mechanically related. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-152](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **2 — Overlapping but readable** | **Documented adjacent components on CT; regional assignment inferred:** the caption attributes denser dependent lung to “compressive atelectasis from the adjacent pleural effusions,” but the two abnormalities occupy different anatomical compartments rather than identical tissue. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-152A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **3 — Merged** | **Not documented:** an opaque hemithorax does not establish an appearance unique to effusion plus collapse. [Herring, 2012 copyright edition, *Learning Radiology*, 2nd edition, Chapter 6, “Opacified Hemithorax”](https://elsevier-elibrary.com/contents/fullcontent/58848/epubcontent_v2/OEBPS/B9780323074445000068.htm) |
+| **4 — Concealed** | **Prose-supported candidate on radiography:** large effusions can “mask whatever disease may be present in the lung enveloped by them,” but this general statement does not independently prove concealed atelectasis in a particular illustrated patient. [Herring, 2012 copyright edition, *Learning Radiology*, 2nd edition, Chapter 6, “Opacified Hemithorax,” Figure 6-10](https://elsevier-elibrary.com/contents/fullcontent/58848/epubcontent_v2/OEBPS/B9780323074445000068.htm) |
+
+**Reader error**
+
+No reader-error rate is reported for the illustrated effusion–atelectasis combination. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figures 5-139–5-140 and 5-152](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+## 5. Pulmonary fibrosis + emphysema
+
+**Each disease on a chest radiograph alone**
+
+- Pulmonary fibrosis can produce a network of white lines, especially near the bases and outer lung, with reduced lung volume. [Meltzer and Noble, 2008, *Orphanet Journal of Rare Diseases*, “Radiographic findings,” Figure 1](https://link.springer.com/article/10.1186/1750-1172-3-8)
+- Emphysema can produce overexpanded lungs, flattened diaphragms and dark bullous spaces. [Wise, updated 2026, *Merck Manual Professional Edition*, Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+
+**What changes together**
+
+Combined pulmonary fibrosis and emphysema, or CPFE, can appear on radiographs as unusually dark upper lungs together with a basal and peripheral network of white lines. [Dias et al., 2014, *Jornal Brasileiro de Pneumologia*, “Imaging studies in CPFE”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4109203/)
+
+Where the processes overlap, fibrosis can deform emphysematous spaces and create thick-walled cysts that complicate distinction from honeycombing. [Cottin et al., 2022, *American Journal of Respiratory and Critical Care Medicine*, Imaging section](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Documented on CT:** Figure 1 explicitly names a “separate emphysema and fibrosis pattern,” with upper-lobe emphysema and lower-lobe fibrosis, although complete absence of interaction is not tested. [Cottin et al., 2022, *AJRCCM*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **2 — Overlapping but readable** | **Documented on serial CT:** the Figure 4 caption says isolated emphysema “becomes admixed with fibrosis over time,” while identifying both components over a two-year interval. [Cottin et al., 2022, *AJRCCM*, Figure 4A–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **3 — Merged** | **Strong candidate:** Figure 6 names “thick-walled large cysts,” but the imaging discussion explicitly leaves their specificity for CPFE unresolved. [Cottin et al., 2022, *AJRCCM*, Figure 6 and Imaging section](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+| **4 — Concealed** | **Not documented strictly:** difficulty distinguishing emphysema from honeycombing does not itself demonstrate one independently confirmed disease made invisible by the other. [Cottin et al., 2022, *AJRCCM*, “Quantification of HRCT abnormalities”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/) |
+
+**Reader error**
+
+The statement reports difficulty and interobserver variation in identifying and quantifying overlapping components, but supplies no single reader-error denominator applicable to these figures. [Cottin et al., 2022, *AJRCCM*, “Quantification of HRCT abnormalities”](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+**Qualification within the source:** its histopathology discussion describes certain thick-walled cysts as distinctive, whereas its imaging discussion remains uncertain about their specificity, so those passages do not justify an unqualified claim of radiographic uniqueness. [Cottin et al., 2022, *AJRCCM*, Imaging and Histopathology sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC7615200/)
+
+## 6. Pulmonary fibrosis + lung cancer
+
+**Each disease on a chest radiograph alone**
+
+- Fibrosis produces coarse or fine net-like white markings and may contract the lungs. [Meltzer and Noble, 2008, *Orphanet Journal of Rare Diseases*, “Radiographic findings”](https://link.springer.com/article/10.1186/1750-1172-3-8)
+- Lung cancer may appear as a focal nodule or mass, or indirectly through obstruction and collapse. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, discussion of pulmonary masses and postobstructive abnormalities](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+**What changes together**
+
+In a CT series containing **66 cancers in 63 patients** with idiopathic interstitial pneumonia, **35/66** cancers lay at the interface between fibrotic cysts and normal lung and **21/66** lay within fibrotic cystic regions. [Oh et al., 2015, *American Journal of Roentgenology*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+Cancer in fibrotic lung can resemble consolidation rather than a conspicuous separate mass. [Abu Qubo et al., published online 2023, *Breathe*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly in the selected figures:** peripheral tumour location alone does not establish spatial separation from fibrosis and unchanged appearance. [Abu Qubo et al., 2023, *Breathe*, Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/) |
+| **2 — Overlapping but readable** | **Inferred from series prose:** cancers occurred “in the midst of fibrotic cysts,” establishing shared regions, although the accessible abstract provides no corresponding caption proving both components are independently readable. [Oh et al., 2015, *AJR*, Abstract: Conclusion](https://pubmed.ncbi.nlm.nih.gov/26001227/) |
+| **3 — Merged** | **Not documented strictly:** “The cancer looks like consolidation” establishes mimicry, not an appearance that neither cancer nor fibrosis can produce alone. [Abu Qubo et al., 2023, *Breathe*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9973524/) |
+| **4 — Concealed** | **Documented diagnostic miss; regime assignment inferred:** a nodule at the diseased–normal lung boundary “was not reported on the first CT scan,” but the caption attributes the problem to satisfaction of search rather than proving structural burial. [Du Pasquier et al., 2019, *BJR Open*, Figure 15](https://pmc.ncbi.nlm.nih.gov/articles/PMC7592491/) |
+
+**Reader error**
+
+Figure 15 documents a missed cancer in **1/1 illustrated patient**, with enlargement on CT **five months later** and subsequent histological confirmation. [Du Pasquier et al., 2019, *BJR Open*, Figure 15](https://pmc.ncbi.nlm.nih.gov/articles/PMC7592491/)
+
+The series of **66 cancers in 63 patients**, assessed across **193 CT examinations**, reported a median diagnostic delay of **46 days**, ranging from **8 to 760 days**, and interobserver agreement exceeding **κ=0.77** for the evaluated tumour characteristics. [Oh et al., 2015, *AJR*, Abstract: Methods and Results](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+Our qualification is that the accessible abstract does not give a separate denominator for the delay calculation, so the cohort denominator should not be mistaken for a verified count of delayed diagnoses. [Oh et al., 2015, *AJR*, Abstract](https://pubmed.ncbi.nlm.nih.gov/26001227/)
+
+## 7. Old tuberculosis + aspergilloma
+
+**Each condition on a chest radiograph alone**
+
+- Healed pulmonary tuberculosis can leave scars, volume loss and persistent cavities after the active infection has resolved. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Imaging of post-treatment sequelae”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+- An aspergilloma is a fungal ball within a pre-existing cavity, potentially appearing as a rounded opacity with surrounding air, so its “alone” appearance already presupposes a structural substrate. [Maheshwari et al., 2011, *BMJ Case Reports*, Background and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3094787/)
+
+**What changes together**
+
+One report shows an empty post-tuberculous cavity on radiography and a mass inside the same cavity on CT one year later, with Aspergillus established by tissue examination and culture. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, case description and Figure 1A–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in this example:** the fungal lesion occupies the pre-existing cavity rather than a different region. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **2 — Overlapping but readable** | **Documented on CT:** the caption identifies the same cavity “with an irregular spongiform mass suggestive of a forming aspergilloma.” [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **3 — Merged** | **Not documented:** the caption explicitly separates the cavity from the intracavitary mass. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+| **4 — Concealed** | **Not documented strictly:** the fungal lesion was identifiable on CT and independently confirmed, rather than shown to be structurally hidden. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, Figure 1B–D](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/) |
+
+**Reader error**
+
+A separate report describes presumed tuberculosis reactivation before CT and histology established aspergilloma in **1/1 reported patient**, but does not provide a blinded radiologist-error rate. [Maheshwari et al., 2011, *BMJ Case Reports*, Case presentation and Investigations](https://pmc.ncbi.nlm.nih.gov/articles/PMC3094787/)
+
+Our qualification is that this pair concerns a persistent tuberculosis sequela plus fungal disease, not necessarily two simultaneously active infections. [Ortiz-Brizuela and Ponce-de-León, 2018, *CMAJ*, case description](https://pmc.ncbi.nlm.nih.gov/articles/PMC6167218/)
+
+## 8. Heart failure + pneumonia
+
+**Each disease on a chest radiograph alone**
+
+- Heart failure with pulmonary oedema can produce enlarged vessels, short peripheral lines, central white airspace opacities, pleural effusions and an enlarged heart. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Pulmonary edema”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/)
+- Pneumonia can produce patchy or confluent white airspace opacities, sometimes with air bronchograms. [Nambu et al., 2014, *World Journal of Radiology*, “Consolidation-predominant pattern”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+**What changes together**
+
+The BACH study identifies diagnosing pneumonia during acute heart failure as difficult because the clinical presentation and chest-radiograph abnormalities can overlap. [Maisel et al., 2012, *European Journal of Heart Failure*, Introduction](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+Of **155 patients with pneumonia**, **29 also had acute heart failure** in the study’s **1,641-patient** dyspnoea cohort. [Maisel et al., 2012, *European Journal of Heart Failure*, Results: study population](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** BACH establishes coexistence but does not provide an annotated figure separating the two abnormalities. [Maisel et al., 2012, *European Journal of Heart Failure*, Results and figures](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+| **2 — Overlapping but readable** | **Not documented:** the study does not demonstrate independently readable oedema and infection within one labelled region. [Maisel et al., 2012, *European Journal of Heart Failure*, Results and figures](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+| **3 — Merged** | **Not documented:** shared airspace opacity is not evidence of a new morphology unique to the combined diseases. [Khan et al., 2009, *Annals of Thoracic Medicine*, “Pneumonia”](https://pmc.ncbi.nlm.nih.gov/articles/PMC2714572/) |
+| **4 — Concealed** | **Not documented strictly:** diagnostic uncertainty in concurrent heart failure does not establish that oedema physically concealed independently confirmed pneumonia on a particular film. [Maisel et al., 2012, *European Journal of Heart Failure*, Introduction and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/) |
+
+**Reader error**
+
+No pneumonia-specific radiographic miss fraction for the **29 concurrent heart-failure cases** is provided, so the study’s overall diagnostic-performance estimates should not be presented as a pair-specific error rate. [Maisel et al., 2012, *European Journal of Heart Failure*, Results: chest radiography and diagnostic performance](https://pmc.ncbi.nlm.nih.gov/articles/PMC3284113/)
+
+## 9. COPD + pneumonia
+
+**Each disease on a chest radiograph alone**
+
+- COPD includes airway-predominant and emphysematous disease, with possible radiographic hyperinflation and bullae, but confirmation of airflow obstruction depends on pulmonary function testing. [Wise, updated 2026, *Merck Manual Professional Edition*, “Diagnosis of COPD” and Imaging tests](https://www.merckmanuals.com/professional/pulmonary-disorders/chronic-obstructive-pulmonary-disease-and-related-disorders/chronic-obstructive-pulmonary-disease-copd)
+- Pneumonia commonly produces a new focal or patchy white opacity. [Nambu et al., 2014, *World Journal of Radiology*, radiological patterns of community-acquired pneumonia](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/)
+
+**What changes together**
+
+Pneumonia and COPD exacerbation can have similar clinical presentations, and radiographic consolidation may be present without a discharge diagnosis of pneumonia. [Finney et al., 2019, *ERJ Open Research*, Abstract and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC6589445/)
+
+Among **100 selected patients** admitted with COPD exacerbation whose radiographs had excluded pneumonia, **24/100** had additional low-dose CT abnormalities considered suggestive of pneumonia. [Prins et al., 2022, *ERJ Open Research*, Results and Table 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly:** an illustrated pneumococcal pneumonia in a patient with COPD does not establish a second, separately localised COPD lesion. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Figure 5-71](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/) |
+| **2 — Overlapping but readable** | **Documented for the emphysema phenotype, not COPD generally:** the CT example in section 3 identifies pneumonic consolidation and pre-existing emphysematous spaces within the same region. [Nambu et al., 2014, *World Journal of Radiology*, Figure 21](https://pmc.ncbi.nlm.nih.gov/articles/PMC4209424/) |
+| **3 — Merged** | **Candidate only for the emphysema phenotype:** the caption quoted in section 3 connects radiographic reticular opacities to pneumonia with underlying emphysema, without establishing a unique COPD–pneumonia morphology. [Park et al., 2018, *Journal of the Korean Society of Radiology*, Figure 2](https://jksronline.org/search.php?code=2016JKSR&id=10.3348%2Fjksr.2018.79.3.139&vmode=PUBREADER&where=aview) |
+| **4 — Concealed** | **Modality-dependent nonvisibility documented; structural regime 4 unproved:** Figure 2 contrasts a “Conventional chest radiograph without evidence of radiological abnormalities” with CT showing right-upper-lobe consolidation. [Prins et al., 2022, *ERJ Open Research*, Figure 2A–B](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/) |
+
+**Reader error**
+
+Across **941 admissions in 621 patients**, **235 admissions** had radiographic consolidation, but only **42.9% of those 235 admissions** received a discharge diagnosis of pneumonia, which measures diagnostic coding discordance rather than a blinded reader miss rate. [Finney et al., 2019, *ERJ Open Research*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/31249841/)
+
+For the **100 low-dose CT examinations**, agreement between two radiologists was **κ=0.562**, with a **95% confidence interval of 0.371–0.752**. [Prins et al., 2022, *ERJ Open Research*, “Interobserver variation”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+Our qualification is that CT abnormalities suggestive of pneumonia do not independently establish infectious pneumonia in every one of the **24/100** patients or prove that COPD caused the radiographic nonvisibility. [Prins et al., 2022, *ERJ Open Research*, Tables 2–3 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC9209851/)
+
+## 10. Diabetes + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- In the principal study, diabetes was defined clinically and biochemically rather than through a chest-radiograph lesion, making it another systemic modifier in our classification. [Chiang et al., 2014, *PLOS ONE*, Methods: definitions of diabetes and glycaemic control](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+- Post-primary pulmonary tuberculosis commonly produces upper-lung opacity and cavitation. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+A study of **1,209 culture-positive patients**, comprising **581 with diabetes** and **628 without**, associated diabetes and poorer glycaemic control with more extensive disease, lower-field involvement and cavitation. [Chiang et al., 2014, *PLOS ONE*, Results and radiographic comparison tables](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+
+Another study reported isolated lower-field disease in **23.5% of 187 diabetic patients** versus **2.4% of 505 non-diabetic patients**, with cavitation in **50.8%** and **39.0%** of those respective groups. [Shaikh et al., 2003, *Saudi Medical Journal*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/12704504/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented and not directly applicable:** diabetes was not represented by its own spatially localised radiographic abnormality. [Chiang et al., 2014, *PLOS ONE*, Methods](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+| **2 — Overlapping but readable** | **Not documented:** the study compares tuberculosis appearances between metabolic groups rather than two readable lung lesions. [Chiang et al., 2014, *PLOS ONE*, Methods and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+| **3 — Merged** | **Not documented:** altered frequency and distribution of tuberculosis findings do not establish a unique joint lesion. [Shaikh et al., 2003, *Saudi Medical Journal*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/12704504/) |
+| **4 — Concealed** | **Not documented:** these studies do not demonstrate diabetes structurally concealing independently confirmed tuberculosis. [Chiang et al., 2014, *PLOS ONE*, Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/) |
+
+**Reader error and disagreement**
+
+No reader-error rate or diagnostic-delay denominator was identified in the selected radiographic comparison studies. [Chiang et al., 2014, *PLOS ONE*, Methods and Results](https://pmc.ncbi.nlm.nih.gov/articles/PMC3974751/)
+
+The broader review literature reports inconsistent findings about whether diabetes changes tuberculosis location, so the lower-field association should not be stated as universal. [Dooley and Chaisson, 2009, *Lancet Infectious Diseases*, discussion of clinical presentation and radiographic findings](https://pmc.ncbi.nlm.nih.gov/articles/PMC2945809/)
+
+## 11. Silicosis + lung cancer
+
+**Each disease on a chest radiograph alone**
+
+- Silicosis produces small rounded opacities and, in complicated disease, large conglomerate masses. [Ehrlich et al., 2024, *European Respiratory Review*, Table 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC11668511/)
+- Lung cancer may produce a focal nodule or mass, although obstruction can produce secondary opacity or collapse. [Broder, 2011, *Diagnostic Imaging for the Emergency Physician*, Chapter 5, pulmonary masses discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC8139021/)
+
+**What changes together**
+
+A reported case had a recognised dominant lung cancer but diffuse nodules initially interpreted as silicosis, with surgery demonstrating additional adenocarcinoma deposits. [Wang et al., 2023, *Cell Cycle*, Case presentation, Figures 1–3](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+After three months of targeted treatment, some nodules regressed while others remained unchanged and were considered silicotic, so the evidence for the two components was unequal: sampled cancer was histologically established, whereas the remaining silicotic nodules were inferred. [Wang et al., 2023, *Cell Cycle*, Case presentation and Figure 4](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Candidate, not confirmed:** the prose describes “a left upper lung nodule with bilateral silicosis,” but the later discovery of metastases prevents treating all background nodules as independently verified silicosis. [Wang et al., 2023, *Cell Cycle*, Abstract and Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **2 — Overlapping but readable** | **Not documented:** the captions do not establish a single region in which silicotic tissue and tumour are both separately identifiable. [Wang et al., 2023, *Cell Cycle*, Figures 1–4](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **3 — Merged** | **Not documented:** similar-looking silicotic and metastatic nodules do not establish a jointly produced new morphology. [Wang et al., 2023, *Cell Cycle*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** the authors conclude that “metastasis and silicosis coexisted,” but this is misattribution of visible nodules rather than demonstrated physical burial. [Wang et al., 2023, *Cell Cycle*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/) |
+
+**Reader error**
+
+Preoperative assessment failed to identify the full metastatic extent in **1/1 reported patient**, although the dominant cancer itself was recognised. [Wang et al., 2023, *Cell Cycle*, Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC10732644/)
+
+## 12. Asbestosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Asbestosis can produce basal irregular interstitial opacities and indistinct cardiac or diaphragmatic borders, while pleural plaques are a separate asbestos-associated finding rather than proof of asbestosis. [ATSDR, publication year not confirmed, *Asbestos Toxicity: Clinical Assessment—Tests*, chest-radiograph findings table](https://archive.cdc.gov/www_atsdr_cdc_gov/csem/asbestos/clinical_assessment-tests.html)
+- Pulmonary tuberculosis can produce upper-lung opacities, cavities or residual scarring. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, post-primary disease and sequelae sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+An occupational study examined **2,846 radiographs**, including **257 people classified with asbestosis**, but principally compared residual tuberculosis appearances and found only **one active tuberculosis case in the whole cohort**. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/)
+
+A later cohort reported previous pulmonary tuberculosis in **45/124 patients with asbestosis**, which establishes a history of both conditions but not the appearance of simultaneous active disease. [Tse et al., 2012, *Public Health*, Abstract: Results](https://pubmed.ncbi.nlm.nih.gov/23164612/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented:** the occupational study’s accessible report does not supply a labelled combined-case figure. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/) |
+| **2 — Overlapping but readable** | **Not documented:** historical coexistence in the later cohort does not localise both processes within a shared region. [Tse et al., 2012, *Public Health*, Abstract](https://pubmed.ncbi.nlm.nih.gov/23164612/) |
+| **3 — Merged** | **Not documented:** neither a joint morphology nor an inseparable lesion is established in the accessible occupational study. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/) |
+| **4 — Concealed** | **Not documented:** the retrieved cohort evidence does not establish one independently confirmed disease hidden by the other. [Tse et al., 2012, *Public Health*, Abstract](https://pubmed.ncbi.nlm.nih.gov/23164612/) |
+
+**Reader error**
+
+No combined-case reader-error rate was available in the retrieved occupational study. [Segarra-Obiol et al., 1983, *American Journal of Industrial Medicine*, Abstract](https://pubmed.ncbi.nlm.nih.gov/6606358/)
+
+A related illustrated report concerns **asbestos-related pleural disease with tuberculous pleurisy**, not proven parenchymal asbestosis, so it should not be substituted for this pair. [Zantah and Datta, 2017, *Respiratory Medicine Case Reports*, case description and Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC5413209/)
+
+## 13. Coal workers’ pneumoconiosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Coal workers’ pneumoconiosis can produce small pulmonary opacities and, when complicated, large masses of progressive massive fibrosis. [Shah et al., 2012, *RadioGraphics*, “AIRP Best Cases in Radiologic-Pathologic Correlation: Coal Workers’ Pneumoconiosis,” radiological discussion](https://pubs.rsna.org/doi/10.1148/rg.327115137)
+- Post-primary tuberculosis commonly produces upper-lung opacities and cavities. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+The classical cavitation study distinguishes tuberculosis-associated cavitation from non-tuberculous cavitation within massive pneumoconiotic lesions, showing why a cavity does not uniquely identify the infection. [Kilpatrick, Heppleston and Fletcher, 1954, *Thorax*, pp. 260–272](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented in the selected cavitation study:** its main question concerns cavities within massive fibrosis rather than separately labelled disease territories. [Kilpatrick et al., 1954, *Thorax*, Introduction and radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **2 — Overlapping but readable** | **Candidate only:** a mass and cavity can both be visible, but recognising those structures does not establish that tuberculosis itself is separately readable. [Kilpatrick et al., 1954, *Thorax*, radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **3 — Merged** | **Not documented strictly:** the authors state, “The two main types of cavity in P.M.F. cannot be differentiated radiologically,” undermining any claim that the combined appearance is unique to tuberculosis. [Kilpatrick et al., 1954, *Thorax*, p. 265](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+| **4 — Concealed** | **Etiological-masking candidate, not structural proof:** radiographic inability to distinguish infected from non-infected cavitation leaves tuberculosis unidentifiable, but does not demonstrate that destroyed lung erased a separate tuberculosis lesion. [Kilpatrick et al., 1954, *Thorax*, radiological examination and pathological discussion](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf) |
+
+**Reader error**
+
+The study’s bacteriological and pathological comparisons should not be converted into a reader-error rate because it does not report a blinded reader confusion matrix for the disease pair. [Kilpatrick et al., 1954, *Thorax*, Methods and radiological examination section](https://thorax.bmj.com/content/thoraxjnl/9/4/260.full.pdf)
+
+## 14. COVID-19 + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- COVID-19 pneumonia commonly produces bilateral patchy or confluent white opacities with lower-zone and peripheral predominance. [Wong et al., 2020, *Radiology*, Results and Conclusion](https://pmc.ncbi.nlm.nih.gov/articles/PMC7233401/)
+- Pulmonary tuberculosis may produce upper-lung cavities and nodules, although other distributions occur. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, “Post-primary TB”](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+A microbiologically confirmed coinfection report describes an upper-lobe cavity with adjacent micronodules together with more widespread subpleural and peribronchovascular consolidations. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Case Report and Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/)
+
+A separate series shows ground-glass abnormalities resolving while nodular abnormalities persist, allowing the authors to distinguish components using serial CT rather than a single examination. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 1 and Figure 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Inferred from CT caption and microbiology:** after describing the cavity, the caption places consolidations “In the rest of the parenchyma,” supporting different territories but not proving unaffected solo appearances. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/) |
+| **2 — Overlapping but readable** | **Inferred at regional scale:** the caption describes “ground-glass changes in both upper lobes with associated nodular changes bilaterally,” with subsequent differential resolution supporting two components. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Figure 2 and Case 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/) |
+| **3 — Merged** | **Not documented:** these reports do not establish a unique inseparable appearance produced only by coinfection. [Martínez Orozco et al., 2020, *American Journal of Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC7649741/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** delayed tuberculosis confirmation in Case 2 does not prove that COVID-19 physically concealed its radiographic manifestations. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2 and Figure 3](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/) |
+
+**Reader error**
+
+In **1/3 patients** in the Nyanti series, tuberculosis culture became positive approximately **seven weeks after collection**, after the patient’s death, despite initially negative sputum smears. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+Our qualification is that this is delayed microbiological recognition within a small clinical series, not a measured radiologist miss rate. [Nyanti et al., 2022, *Respiratory Medicine Case Reports*, Case 2 and Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC9022463/)
+
+## 15. Sarcoidosis + tuberculosis
+
+**Each disease on a chest radiograph alone**
+
+- Sarcoidosis may produce enlargement of lymph nodes at both lung roots, pulmonary nodules and, in advanced disease, fibrosis with volume loss. [Ungprasert, Ryu and Matteson, 2019, *Mayo Clinic Proceedings: Innovations, Quality & Outcomes*, pulmonary manifestations, Table 1 and Figures 1–2](https://pmc.ncbi.nlm.nih.gov/articles/PMC6713839/)
+- Tuberculosis can produce cavities, lymph-node enlargement or widespread small nodules, depending on its form. [Bhalla et al., 2015, *Indian Journal of Radiology and Imaging*, primary, post-primary and miliary tuberculosis sections](https://pmc.ncbi.nlm.nih.gov/articles/PMC4531444/)
+
+**What changes together**
+
+One case combined longstanding, biopsy-supported sarcoid lymphadenopathy with new lung opacities and culture-confirmed tuberculosis, with the opacities clearing while the lymphadenopathy persisted. [Papaetis et al., 2008, *Journal of Medical Case Reports*, Case presentation and Figures 1–3](https://pmc.ncbi.nlm.nih.gov/articles/PMC2474644/)
+
+Another report initially attributed a diffuse nodular presentation to tuberculosis and added sarcoidosis after recurrent symptoms and further investigation. [Mandal et al., 2014, *BMJ Case Reports*, Abstract and Outcome and follow-up](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Inferred from radiograph, history and follow-up:** the caption identifies “bilateral hilar lymphadenopathy together with lower bilateral interstitial lung densities,” while the case description assigns persistent nodes to sarcoidosis and reversible lung disease to tuberculosis. [Papaetis et al., 2008, *Journal of Medical Case Reports*, Figure 1 and Case presentation](https://pmc.ncbi.nlm.nih.gov/articles/PMC2474644/) |
+| **2 — Overlapping but readable** | **Not documented in the diffuse case:** its captions describe shared interstitial or nodular abnormalities without separately identifying each disease within one region. [Mandal et al., 2014, *BMJ Case Reports*, Figures 1–3 and 6](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+| **3 — Merged** | **Not documented strictly:** “bilateral coarse lung markings with miliary mottling” describes a nonspecific pattern rather than a morphology unique to the combination. [Mandal et al., 2014, *BMJ Case Reports*, Figure 1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+| **4 — Concealed** | **Diagnostic-masking candidate:** the authors describe difficulty diagnosing both diseases individually, but do not establish physical concealment of independently verified sarcoid lesions by tuberculosis. [Mandal et al., 2014, *BMJ Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/) |
+
+**Reader error and diagnostic certainty**
+
+In **1/1 patient** in the Mandal report, the initial working diagnosis was tuberculosis alone before sarcoidosis was added, but no separate radiologist-error measurement was reported. [Mandal et al., 2014, *BMJ Case Reports*, Treatment and Outcome and follow-up](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+The authors themselves note that non-necrotising granulomas can occur in tuberculosis and necrotising granulomas in sarcoidosis, so histological appearance alone cannot independently settle both diagnoses. [Mandal et al., 2014, *BMJ Case Reports*, Discussion](https://pmc.ncbi.nlm.nih.gov/articles/PMC4275725/)
+
+## 16. Additional named combination: rheumatoid arthritis + pneumoconiosis — Caplan syndrome
+
+**Each disease on a chest radiograph alone**
+
+- Rheumatoid lung disease can produce rounded pulmonary nodules, including cavitating nodules, as illustrated on plain radiographs. [Sidhu et al., 2011, *Journal of Clinical Imaging Science*, “Pulmonary nodules,” Figures 4 and 6](https://pmc.ncbi.nlm.nih.gov/articles/PMC3177462/)
+- Pneumoconiosis can produce small rounded opacities or large masses of progressive massive fibrosis. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Introduction](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+**What changes together**
+
+Caplan syndrome is a named rheumatoid pneumoconiosis characterised by peripheral pulmonary nodules, with mineral dust incorporated into rheumatoid-type nodules on pathological examination. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/)
+
+The reported classical case showed bilateral peripheral rounded opacities on radiography and a biopsied rheumatoid nodule containing refracting particles. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report, Figures 1b and 3](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+| Regime | Verdict and evidence |
+|---|---|
+| **1 — Separate** | **Not documented strictly:** the named syndrome does not require a separate visible background pneumoconiosis pattern alongside the nodules. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Introduction and Discussion](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf) |
+| **2 — Overlapping but readable** | **Not documented on imaging:** pathological identification of dust within a rheumatoid nodule does not make both components separately readable on the radiograph. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/) |
+| **3 — Merged** | **Pathology-supported candidate with radiographic examples:** “Biopsy reveals inorganic dust within the necrotic nodule,” but Figures 8–9 labelled Caplan syndrome do not establish a radiographic appearance impossible in rheumatoid disease alone. [Sidhu et al., 2011, *Journal of Clinical Imaging Science*, “Caplan’s syndrome,” Figures 8–9](https://pmc.ncbi.nlm.nih.gov/articles/PMC3177462/) |
+| **4 — Concealed** | **Not documented:** the case does not demonstrate independently confirmed disease made radiographically invisible by the other component. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf) |
+
+**Reader error**
+
+No reader-error rate or diagnostic-delay denominator is reported for the classical illustrated case. [De Capitani et al., 2009, *Jornal Brasileiro de Pneumologia*, Case report and Discussion](https://www.jornaldepneumologia.com.br/Content/imagebank/pdf/2009_35_9_17_english.pdf)
+
+Our interpretation is that Caplan syndrome is a useful joint-lesion candidate, but pathological combination should not be promoted into proof of an undecomposable radiographic regime. [Shaw et al., 2015, *European Respiratory Review*, “Pulmonary nodules”](https://pmc.ncbi.nlm.nih.gov/articles/PMC9487778/)
+
+## Self-audit
+
+| File | Number asked for | Number reached | What remained unconfirmed and what was searched |
+|---|---:|---:|---|
+| `pairs-and-their-regimes.md` | 15 pairs, each with four verdicts | **16 pairs; 64 explicit regime verdicts** | No pair was established in all four strict regimes; searches combined each pair’s names with radiograph, CT, figure, cavitation, masking, occult disease, misdiagnosis and reader agreement across PubMed/PMC, journal sites and teaching sources, with the principal gaps being caption-supported asbestosis–TB cases, unique regime-3 morphology, and proof distinguishing structural concealment from mimicry, reader error or modality limitations. |
+=== 2026-11-04T11:53:20+02:00 file 1 exit 0, 54265 bytes into pairs-and-their-regimes.md
+=== 2026-11-04T11:53:20+02:00 starting file 2: the-words-the-field-uses.md
+OpenAI Codex v0.164.0-alpha.11.1
+--------
+workdir: /home/molef/PhD/poe_repair_min-dog-and-rain
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a1a5fa-360d-7ca2-b9db-0a304b3b5c3d
+--------
+user
+# Route 05: what the literature knows about two chest diseases in one chest
+
+Paste this whole file into ChatGPT with deep research turned on. It is written for a researcher who
+has none of our files.
+
+---
+
+## The task
+
+Find out what the medical and radiology literature already knows about two chest diseases occurring
+together in one patient, and in particular whether the four ways they can sit relative to each other
+(set out below) are documented for disease pairs other than silicosis with tuberculosis.
+
+Return six markdown files. Their contents will be read one claim at a time and argued over, so every
+claim is one sentence carrying one source, and a claim nobody published is marked as ours rather
+than written as if it were established.
+
+## Why this exists
+
+We are building generative models that synthesise a chest image showing two diseases at once, for
+disease pairs too rare for anyone to have collected films of. To judge a synthesised image we need
+to know what a real image of that pair looks like, and we have found that "two diseases in one
+chest" is not one thing. Silicosis with tuberculosis gave us four ways it can go. Whether those four
+are a property of that pair or of disease pairs in general decides whether our model has one target
+or many, and nothing we have read answers it.
+
+## The four ways two diseases can sit in one chest
+
+These are ours, built from one review paper and nine published figures. They describe a region of
+lung, not a whole patient: one chest can hold more than one of them at once.
+
+1. **Separate places.** Each disease sits in its own part of the chest and looks exactly as it would
+   alone. A reader names both, and neither changes the other's appearance. Example: a tuberculous
+   cavity in the right upper zone and a large silicotic opacity in the left.
+
+2. **Same region, both still readable.** Both diseases affect the same tissue and a reader can still
+   name both. Example: a fungus ball growing inside a cavity that healed tuberculosis left behind.
+   The cavity and the ball occupy one place and both are separately identifiable.
+
+3. **Merged, neither nameable alone.** The two together produce an appearance neither produces
+   alone, and a reader cannot decompose it. Example: tuberculosis making discrete silicotic nodules
+   conglomerate into a mass, where the mass belongs to both diseases and to neither.
+
+4. **One disease present and unreadable.** Both diseases are there, confirmed by something other
+   than the image (culture, biopsy, a later film), and the image shows only one of them, because the
+   other has destroyed or buried the lung that would have shown it. Example: a cancer growing inside
+   honeycombed fibrosis, read as pneumonia until biopsy.
+
+## What we already hold, so you need not re-find it
+
+Each of these is already read and quoted in our own files. Finding them again is not useful; finding
+what they do not cover is.
+
+| What it gives us | Source |
+|---|---|
+| three effects of tuberculosis on a silicotic chest in prose (each hides the other, each distorts the other's pattern, together they build a lesion neither builds alone), with no figure for the hiding effect | Ehrlich et al. 2024, *European Respiratory Review*, https://doi.org/10.1183/16000617.0168-2024 |
+| a mineworker's radiograph with a silicotic mass and a tuberculous cavity circled by the authors, GeneXpert positive | Pyana Kitenge et al. 2025, *IJTLD Open*, https://doi.org/10.5588/ijtldopen.24.0564, Fig. 1 Case 2 |
+| chronic silicosis with conglomerate masses on radiograph, cavitation visible only on CT, culture positive, and the warning that a cavity in a conglomerate mass can also be ischaemic necrosis without infection | Martins et al. 2010, https://pmc.ncbi.nlm.nih.gov/articles/PMC2929613/ |
+| tuberculosis risk in silicosis 2.8 to 39 times higher than in controls | Martins et al. 2010, Discussion |
+| a fungus ball appearing in an old tuberculous cavity five years later, radiograph and CT | Pattamapaspong et al. 2024, *BJR Open*, https://doi.org/10.1093/bjro/tzae031, Fig. 2 |
+| pneumonia in an emphysematous lobe, consolidation as a net of strands around black holes rather than a solid patch | Ragnoli et al. 2026, *Diagnostics*, https://doi.org/10.3390/diagnostics16091329, Fig. 2A |
+| squamous cell carcinoma grown within honeycombed fibrosis, read as pneumonia by the first reader | Kim et al. 2026, *Journal of Clinical Medicine*, https://doi.org/10.3390/jcm15176863, Fig. 2a |
+| an acute exacerbation laid over pulmonary fibrosis, before-and-after CT, infection clinically excluded | Hobbs et al. 2021, *Radiology: Cardiothoracic Imaging*, https://doi.org/10.1148/ryct.2021200279, Figs. 17a and 17b |
+| COPD with an old calcified granuloma, two diagnoses with no shared cause | Ibraheem et al. 2024, *Cureus* 16(2):e54343, https://doi.org/10.7759/cureus.54343, Fig. 1 |
+| a four-panel CT figure naming simple silicosis, complicated silicosis, active tuberculosis and post-tuberculous lung disease as four separate appearances | unattributed figure from a saved conversation; finding its real source is task 7 below |
+
+We also hold annotation data, not literature: VinDr-CXR, 15,000 chest radiographs each read by three
+radiologists with boxes. From it we measured that aortic enlargement with cardiomegaly is in
+separate places on 98% of the 1,972 films carrying both, and that lung opacity with pulmonary
+fibrosis shares a region on 41% of 489 films at an intersection-over-union of 0.25 or more. So the
+first two ways above are measurable on annotation boxes and the last two are not.
+
+## The six files to return
+
+### 1. `pairs-and-their-regimes.md`
+
+One section per disease pair. For each pair, in this order:
+
+- **What each disease looks like on a chest radiograph alone**, in plain words a non-radiologist can
+  follow, with the source that says so.
+- **What changes when both are present**, again in plain words, with the source.
+- **Which of the four ways above is documented for this pair**, each one either supported by a named
+  figure and its own caption, or marked "not documented". A regime you infer from prose rather than
+  from a figure is marked as inferred, with the sentence you inferred it from quoted.
+- **Whether a reader error is reported**, and if a number is published (missed-diagnosis rate, delay
+  in months, reader agreement), the number with its denominator.
+
+Cover at least these pairs, and add any others the literature treats as a named combination:
+
+silicosis + tuberculosis · HIV + tuberculosis · pneumonia + emphysema · pleural effusion +
+atelectasis · pulmonary fibrosis + emphysema · pulmonary fibrosis + lung cancer · old tuberculosis +
+aspergilloma · heart failure + pneumonia · COPD + pneumonia · diabetes + tuberculosis · silicosis +
+lung cancer · asbestosis + tuberculosis · coal workers' pneumoconiosis + tuberculosis · COVID-19 +
+tuberculosis · sarcoidosis + tuberculosis
+
+HIV with tuberculosis matters most of the four named in our own question, because the published
+claim is that advanced HIV changes tuberculosis from an upper-zone cavitating disease into something
+that looks different or shows nothing at all. If that is right it is the fourth way above, happening
+through immune state rather than through destroyed lung, and it is a second mechanism for the same
+regime. Say whether it is right, with the study and its numbers.
+
+### 2. `the-words-the-field-uses.md`
+
+Our four ways, and our own vocabulary below, mapped onto terms that already exist.
+
+For each of the four, give every term the literature uses for it, with the specialty that uses it
+(chest radiology, occupational medicine, infectious disease, machine learning on chest X-rays) and
+one source per term. Then say whether any single source names all four, or three, or two, and which.
+If nobody has named the fourth, say so plainly; that is a useful answer.
+
+Our vocabulary, for the same treatment:
+
+- **Comorbidity**, for us: two diagnoses on one film with no shared cause and no effect on each
+  other's appearance.
+- **Superimposed disease**, for us: two diseases acting on the same tissue so each changes how the
+  other looks.
+- **Co-occurrence**: both diseases present, each in its own region.
+- **Intersection**: both diseases claiming the same pixels.
+- **Interaction**: the pair producing something neither produces alone.
+
+For each, say whether the term is standard, whether it means something else in standard use, and
+what the field's own word is. We already know "comorbidity" is Feinstein's 1970 term and is broader
+than our use of it, and that "compound disease" is not a radiology term.
+
+### 3. `the-textbook-shelf.md`
+
+Radiology textbooks, teaching websites and review articles that teach two diseases on one film as a
+topic in its own right, rather than one disease at a time.
+
+One row per source: title, edition, year, chapter title, page numbers, and one sentence saying what
+it teaches about the combined case. Include teaching collections with annotated films (Radiology
+Masterclass, Radiopaedia, STATdx, Learning Radiology, the Royal College collections) and say for
+each whether its images can be reused and under what terms.
+
+At least six books with chapter and page numbers. A book you cannot confirm a page number for is
+listed with "page not confirmed" rather than a guess.
+
+Also answer directly: is there a textbook chapter anywhere on how to read a film when two diseases
+are present? If the answer is that radiology teaching is organised one disease at a time, say that,
+with what you searched to establish it.
+
+### 4. `one-pair-many-regimes.md`
+
+The question that prompted this: can one disease pair show different ways at different times, or in
+different parts of one chest, in the same patient?
+
+Silicosis with tuberculosis is the test case, because tuberculosis has two states. Active
+tuberculosis builds a cavity, which sits in silicotic lung and is a shared region. Healed
+tuberculosis leaves scarring and distortion, which may be in a different place and may be
+indistinguishable from the silicosis around it. So the same named disease pair may be in the second
+way while the tuberculosis is active and in the fourth once it has healed.
+
+Find out whether anyone has documented that, and whether the same happens for other pairs. What we
+want back:
+
+- Published cases where one patient's film shows two or more of the four ways at once, in different
+  parts of the chest, with the figure and the authors' description of each part.
+- Published series of the same patient over time where the way the two diseases sit changes between
+  films, with the interval and what changed.
+- Whether disease stage is what does it (active against healed tuberculosis, acute against chronic
+  anything), or whether it is where in the lung the two happen to land.
+- Any pair where all four ways are documented, which would be the single best example to build our
+  work around.
+
+### 5. `candidate-figures.md`
+
+A table of published figures we could annotate and reuse. One row each:
+
+| column | what goes in it |
+|---|---|
+| figure | the paper, the figure number, the panel |
+| link | a direct URL to the article or the figure |
+| licence | the exact licence string (CC BY 4.0, CC BY-NC-SA 3.0, "all rights reserved", or "could not determine") |
+| pair | the two diseases |
+| way | which of the four, and whether the authors' own caption supports it |
+| author marks | whether the authors drew arrows, circles or letters on the image, and what they point at |
+| proof | what establishes the second disease: culture, biopsy, a later film, or the image alone |
+| modality | chest radiograph or CT |
+
+At least 25 rows, weighted toward the third and fourth ways, which is where we have almost nothing.
+Open-licensed figures only for anything we would reuse; a paywalled figure may appear in the table
+marked as look-only.
+
+One thing to watch for, because it changes what we can claim: our own set found that the first two
+ways appear on plain radiographs and the third and fourth appear only on CT. If that holds in your
+search, say so; if you find a radiograph whose own caption describes a merged appearance, that
+single figure is the most valuable thing this whole report can return.
+
+### 6. `where-the-four-regimes-fail.md`
+
+Attack the four ways. What we want is the case they cannot describe.
+
+- A documented pair of chest diseases that fits none of the four.
+- A case where the four are the wrong question, because the two diseases interact through something
+  other than the image (treatment, timing, the patient's immune state).
+- Any published scheme that divides the combined case differently, with its divisions and its
+  source, whether from radiology, pathology, or machine learning on chest X-rays.
+- Whether the machine-learning literature on multi-label chest X-ray classification has its own
+  account of why co-occurring findings are hard, with the papers and any measured drop in accuracy
+  when two labels appear together rather than alone.
+
+A fifth way, if you find one, is the single most useful finding in this file. Say what it is, what
+documents it, and why the four do not cover it.
+
+## What right looks like, and what wrong looks like
+
+**A claim with no source is wrong.** Every sentence that asserts something about a disease, a film
+or a reader carries a citation with enough detail to find the exact passage: author, year, journal
+or book, and the figure number, page number or section heading.
+
+**A regime assignment is supported by what the authors wrote, not by what the image looks like to
+you.** Where you assign a regime from prose, the sentence is quoted. Where you assign it from a
+caption, the caption is quoted. Where you assign it by eye, say so and mark it as unsupported.
+
+**"Not documented" is a finding and gets written.** An empty cell in the pairs table is more useful
+than a plausible guess, because we will go and look for it.
+
+**A number carries its denominator.** Not "readers often miss it" but "the first reader called it
+pneumonia in 1 of 1 cases" or "missed in 34 of 211 films".
+
+**Two diseases present is not the same as two diseases visible.** Keep them apart everywhere. The
+fourth way exists only because they come apart.
+
+## How much is enough
+
+| File | Enough |
+|---|---|
+| `pairs-and-their-regimes.md` | 15 pairs, each with a verdict in all four cells |
+| `the-words-the-field-uses.md` | every one of the four and the five vocabulary entries mapped or declared unmapped |
+| `the-textbook-shelf.md` | 6 books with chapter and page, plus a direct answer on whether the chapter exists |
+| `one-pair-many-regimes.md` | 3 documented cases of one pair showing two or more ways |
+| `candidate-figures.md` | 25 rows, at least 6 of them in the third or fourth way |
+| `where-the-four-regimes-fail.md` | a direct yes or no on a fifth way, with what you searched |
+
+Close the report with a self-audit table: one row per file, the number above, the number you
+reached, and one line on what you could not find and what you searched for it.
+
+## Limits
+
+- No patient-identifying material of any kind, and nothing from a source that looks like it was
+  published without consent.
+- Do not reproduce a paywalled figure. Link it and describe it.
+- Never invent a DOI, a page number or a figure number. "Could not confirm" everywhere you cannot.
+- Do not translate a non-English source's clinical claim without saying it is translated.
+- Where two sources disagree, write both and say they disagree. Do not pick one.
+
+## One more thing to settle
+
+**Task 7: find the real source of the four-panel CT figure.** We hold a four-panel CT figure whose
+panels are labelled simple silicosis, complicated silicosis with progressive massive fibrosis,
+active pulmonary tuberculosis, and post-tuberculous lung disease. It came from a conversation with
+no citation. Find where it is from, and say whether its four panels are as we read them: two of
+silicosis without tuberculosis and two of tuberculosis without silicosis, so that none of the four
+panels shows the combined disease. If the original figure is making a different point, say what it
+is.
+
+---
+
+## Which of the six files to produce now
+
+Produce only file 2, `the-words-the-field-uses.md`. Ignore the other five; another run is doing each of them.
+Use web search extensively: this is a literature search, not a recall task.
+Output the finished markdown for `the-words-the-field-uses.md` and nothing else. No preamble, no commentary,
+no fenced wrapper around the whole file. Start with the file's own top-level heading.
+Reach the number set for this file in the "How much is enough" table, and end with the
+self-audit row for this one file: the number asked for, the number reached, and one line
+on what you could not find and what you searched for it.
+
+codex
+I’ll search the literature for established terms for each regime and compare them with your five vocabulary definitions.
+
+web search: 
+web search: silicotuberculosis radiology masking modifying combined lesions Ehrlich 2024 ...
+web search: 
+web search: combined pulmonary fibrosis emphysema admixed progressive transition thick walled cysts ATS ERS statement 2022 ...
+web search: 
+web search: comorbidity multimorbidity definitions Valderas 2009 conceptual framework ...
+web search: 
+web search: "Silicotuberculosis: a critical narrative review" PMC ...
+web search: 
+web search: "radiographically occult" "tuberculosis" HIV study ...
+codex
+The strongest match so far is the fibrosis–emphysema literature, which explicitly names separate and admixed patterns. “Masking” and “radiographically occult” are relevant to the fourth regime, but they describe different reasons a disease may go unseen.
+
+web search: 
+web search: "radiographically occult" "tuberculosis" ...

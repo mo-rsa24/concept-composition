@@ -202,7 +202,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**, so the plan is known good
 before anything runs off it.
 
-- [ ] **1.1 Write `scripts/layout_from_joint_render.py`.**
+- [x] ✅ **1.1 Write `scripts/layout_from_joint_render.py`.** ✓ verified 2026-11-04: runs with --help and imports with no side effects
   - Crops a seed's tile out of the reference sheet (8 × 4 grid, 320 px tiles, 28 px label strip),
     detects animal boxes with GroundingDINO using the compose scorer's own filters, crops each box
     with the classifier's 0.08 pad, and classifies it cat against dog with CLIP ViT-B/32 over the
@@ -210,7 +210,7 @@ before anything runs off it.
   - Carries a disk guard that checks the filesystem it writes to.
   - **Done when:** the file imports with no side effects and `--help` prints.
 
-- [ ] **1.2 Run it on seeds 9 to 32 and pick the eight judgeable seeds.**
+- [x] ✅ **1.2 Run it on seeds 9 to 32 and pick the eight judgeable seeds.** ✓ verified 2026-11-04: seeds 9, 12, 16, 19, 20, 22, 25, 27 selected of 24 candidates, every rejection carrying which of the three gates stopped it
   - Every candidate is read, never stopping at the first eight, so the crop sheet covers the
     rejected seeds too.
   - A seed passes three gates in order, and a rejected seed says which one stopped it.
@@ -230,7 +230,7 @@ before anything runs off it.
   - **Done when:** eight seeds are selected, every rejected seed carries its reason, and the crop
     sheet covers all 24 candidates.
 
-- [ ] **1.3 Draw the layouts on the renders.**
+- [x] ✅ **1.3 Draw the layouts on the renders.** ✓ confirmed by eye 2026-11-04, on the user's delegation: all 8 panels have the blue box on a cat and the red box on a dog
   - Produces: `artifacts/results/is-the-layout-the-missing-piece/detected-layouts.png`, one panel
     per selected seed: the joint render with both boxes drawn, each labelled with its call and
     margin, and its pixel box and its latent-cell box printed on the panel.
@@ -242,14 +242,14 @@ before anything runs off it.
 
 ◀ **Needs: [instruction 6.1](#6--check-the-layouts-before-any-mask-is-built)**, your yes on the boxes.
 
-- [ ] **2.1 Build both overlap readings.**
+- [x] ✅ **2.1 Build both overlap readings.** ✓ verified 2026-11-04: max |m_cat + m_dog - 1| is exactly 0 over 8 seeds and both readings
   - Each box becomes a 128 × 128 indicator, blurred with a Gaussian whose edge ramp spans about 4
     cells, then the pair is normalised to sum to 1 at every cell. Reading A splits the overlap
     evenly; reading B gives the overlap to the expert whose box is smaller.
   - **Done when:** both readings satisfy `abs(m_A + m_B - 1) < 1e-5` at every one of the 16,384
     cells, printed as the maximum deviation.
 
-- [ ] **2.2 Draw the overlays.**
+- [x] ✅ **2.2 Draw the overlays.** ✓ verified 2026-11-04: 8 seeds x 2 readings drawn over their own renders, each mask on its own animal
   - Produces: `artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png`, both readings
     for every selected seed, each drawn over the joint render it came from, upsampled 8× to pixel
     space, with the cat mask and the dog mask in two colours and the overlap region marked.
