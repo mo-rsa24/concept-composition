@@ -1,0 +1,40 @@
+{
+ "sigma0": 0.1,
+ "steps": 200,
+ "samples": 300,
+ "mala_steps": 25,
+ "mala_step_fraction": 0.3,
+ "mala_acceptance": {
+  "B: product, pair also captioned with each name": 0.002559333333333333
+ },
+ "image": [
+  16,
+  32,
+  3
+ ],
+ "counts": {
+  "B: product, pair also captioned with each name": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 10,
+    "two faint objects": 2,
+    "hybrid: overlaid": 288
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 16,
+    "two faint objects": 3,
+    "hybrid: overlaid": 281
+   }
+  }
+ }
+}

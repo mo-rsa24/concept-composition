@@ -1,0 +1,4 @@
+B: product, pair also captioned with each name   exact              two objects, crisp: 300
+B: product, pair also captioned with each name   reverse diffusion  two objects, crisp: 10  two faint objects: 2  hybrid: overlaid: 288
+B: product, pair also captioned with each name   annealed MALA      two objects, crisp: 16  two faint objects: 3  hybrid: overlaid: 281
+MALA acceptance: {'B: product, pair also captioned with each name': 0.002559333333333333}

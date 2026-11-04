@@ -1,0 +1,11 @@
+A: product, singles only                         exact              hybrid: overlaid: 300
+A: product, singles only                         reverse diffusion  two faint objects: 2  hybrid: overlaid: 298
+A: product, singles only                         annealed MALA      hybrid: overlaid: 300
+B: product, pair also captioned with each name   exact              two objects, crisp: 300
+B: product, pair also captioned with each name   reverse diffusion  two objects, crisp: 14  two faint objects: 5  hybrid: overlaid: 281
+B: product, pair also captioned with each name   annealed MALA      two objects, crisp: 14  hybrid: overlaid: 286
+C: mixture (OR), Du's bottom row                 exact              one circle: 145  one square: 155
+C: mixture (OR), Du's bottom row                 reverse diffusion  one circle: 140  one square: 160
+C: mixture (OR), Du's bottom row                 annealed MALA      one circle: 133  one square: 167
+MALA acceptance: {'A: product, singles only': 0.37659, 'B: product, pair also captioned with each name': 0.37668666666666667, "C: mixture (OR), Du's bottom row": 0.8757033333333334}
+done
