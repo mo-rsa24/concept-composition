@@ -230,3 +230,11 @@ product of the cat and dog conditions puts one animal in frame on eight of eight
 a single face carrying both species' markings. Every strange tile the 512-square sheets showed,
 the tiled wallpaper, the laptops, the picture frames, is gone. The sheet is now measuring the
 model rather than the resolution it was asked for.
+
+**Run A at step 500 moves the product not at all, and costs the joint prompt something.** The
+product of the cat and dog conditions puts one animal in frame on eight seeds of eight, the same
+as step 0, most of them a single face carrying both species' markings. Meanwhile the joint prompt,
+which drew one cat beside one dog on all eight seeds before training, now draws two cats on seeds
+1 and 6 and a third animal on seeds 2 and 3. The control is learning that these photographs hold
+two animals without holding which two, which is a result about the pool worth watching at step
+2,000 and worth comparing against run B.
