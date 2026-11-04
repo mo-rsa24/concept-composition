@@ -1,0 +1,3076 @@
+{
+ "what": "condition D: the pair image inside both experts at weight w, 1-w split over that expert's three singles",
+ "samples_per_cell": 300,
+ "sigma0": 0.1,
+ "steps": 200,
+ "mala_steps": 5,
+ "mala_step_fraction": 0.05,
+ "rng_seed_per_weight": 20261022,
+ "note_on_seeding": "the stream is reset to the same seed at every weight, so sampler noise is shared across the curve and w=0 reproduces condition A exactly",
+ "weights": [
+  "0",
+  "0.001",
+  "0.003",
+  "0.01",
+  "0.03",
+  "0.1",
+  "0.3",
+  "0.5"
+ ],
+ "seconds_per_weight": {
+  "0": 51.9,
+  "0.001": 67.7,
+  "0.003": 69.0,
+  "0.01": 77.9,
+  "0.03": 75.5,
+  "0.1": 73.8,
+  "0.3": 80.1,
+  "0.5": 75.0
+ },
+ "counts": {
+  "0": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 298
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   }
+  },
+  "0.001": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 298
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   }
+  },
+  "0.003": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 3,
+    "hybrid: overlaid": 297
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   }
+  },
+  "0.01": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 3,
+    "hybrid: overlaid": 297
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   }
+  },
+  "0.03": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 1,
+    "two faint objects": 2,
+    "hybrid: overlaid": 297
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 1,
+    "two faint objects": 0,
+    "hybrid: overlaid": 299
+   }
+  },
+  "0.1": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 10,
+    "two faint objects": 2,
+    "hybrid: overlaid": 288
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 30,
+    "two faint objects": 0,
+    "hybrid: overlaid": 270
+   }
+  },
+  "0.3": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 122,
+    "two faint objects": 0,
+    "hybrid: overlaid": 178
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 140,
+    "two faint objects": 0,
+    "hybrid: overlaid": 160
+   }
+  },
+  "0.5": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 238,
+    "two faint objects": 0,
+    "hybrid: overlaid": 62
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 249,
+    "two faint objects": 0,
+    "hybrid: overlaid": 51
+   }
+  }
+ },
+ "mala_acceptance": {
+  "0": 0.37659,
+  "0.001": 0.37659,
+  "0.003": 0.37664,
+  "0.01": 0.37668,
+  "0.03": 0.3765933333333333,
+  "0.1": 0.3768933333333333,
+  "0.3": 0.37697,
+  "0.5": 0.3767233333333333
+ },
+ "condition_b_pair_weight": 0.1,
+ "grid_threshold_exact_crisp_over_half": "0.001",
+ "closed_form": {
+  "what": "share of the exact product's mixture mass whose pairing mean falls in each category, noise ignored",
+  "crossing_crisp_over_half": 1e-05,
+  "curve": {
+   "1e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.02749e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.05573e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.08475e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.11457e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.14521e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.17669e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.20903e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.24227e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.27641e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.3115e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.34755e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.38459e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.42265e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.46176e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.50194e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.54323e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.58565e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.62923e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.67402e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.72004e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.76732e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.8159e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.86581e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.9171e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "1.9698e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.02394e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.07958e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.13674e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.19548e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.25583e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.31784e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.38155e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.44701e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.51428e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.58339e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.65441e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.72737e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.80234e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.87937e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "2.95852e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.03985e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.12341e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.20926e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.29748e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.38812e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.48126e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.57695e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.67527e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.7763e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.8801e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "3.98676e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.09635e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.20895e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.32465e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.44353e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.56567e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.69117e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.82012e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "4.95262e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.08876e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.22864e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.37237e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.52005e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.67178e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.82769e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "5.98788e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "6.15248e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "6.3216e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "6.49537e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "6.67392e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "6.85737e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "7.04587e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "7.23955e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "7.43855e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "7.64302e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "7.85311e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "8.06898e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "8.29078e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "8.51868e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "8.75285e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "8.99345e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "9.24066e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "9.49467e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "9.75566e-05": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000100238": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000102994": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000105825": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000108734": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000111723": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000114794": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000117949": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000121191": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000124523": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000127946": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000131463": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000135076": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000138789": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000142604": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000146524": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000150552": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00015469": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000158943": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000163312": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000167801": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000172413": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000177153": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000182022": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000187026": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000192167": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000197449": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000202877": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000208453": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000214183": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000220071": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00022612": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000232336": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000238723": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000245285": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000252027": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000258955": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000266073": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000273387": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000280902": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000288623": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000296557": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000304709": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000313085": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000321691": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000330534": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00033962": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000348955": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000358547": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000368403": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00037853": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000388935": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000399626": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000410611": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000421898": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000433495": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000445411": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000457655": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000470235": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000483161": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000496442": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000510089": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00052411": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000538517": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00055332": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00056853": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000584158": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000600215": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000616714": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000633666": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000651085": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000668982": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000687371": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000706266": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00072568": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000745627": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000766123": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000787183": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000808821": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000831054": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000853898": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000877371": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000901488": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000926268": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00095173": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.000977891": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.001": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00100477": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00103239": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00106077": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00108993": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00111989": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00115067": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0011823": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0012148": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00124819": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00128251": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00131776": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00135398": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0013912": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00142944": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00146874": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00150911": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00155059": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00159321": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00163701": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00168201": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00172824": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00177575": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00182456": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00187472": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00192625": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0019792": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0020336": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0020895": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00214694": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00220595": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00226659": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0023289": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00239291": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00245869": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00252628": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00259572": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00266707": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00274038": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00281571": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00289311": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00297264": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.003": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00305435": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00313831": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00322458": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00331321": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00340429": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00349787": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00359402": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00369281": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00379432": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00389862": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00400579": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0041159": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00422904": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00434528": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00446473": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00458746": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00471356": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00484313": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00497625": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00511304": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00525359": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.005398": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00554639": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00569885": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0058555": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00601645": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00618184": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00635176": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00652636": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00670576": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00689009": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00707949": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00727409": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00747404": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00767949": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00789059": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00810749": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00833035": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00855933": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00879461": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00903636": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00928476": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00953998": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.00980222": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.01": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0100717": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0103485": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.010633": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0109253": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0112256": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0115341": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0118512": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.012177": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0125117": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0128556": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.013209": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0135721": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0139452": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0143285": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0147224": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.015127": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0155429": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0159701": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0164091": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0168602": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0173236": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0177998": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0182891": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0187918": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0193084": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0198391": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0203845": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0209448": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0215206": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0221121": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0227199": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0233445": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0239862": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0246455": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.025323": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0260191": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0267343": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0274691": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0282242": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0290001": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0297972": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.03": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0306163": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0314579": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0323226": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0332111": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.034124": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.035062": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0360258": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0370161": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0380336": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0390791": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0401533": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0412571": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0423911": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0435564": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0447537": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0459839": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0472479": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0485467": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0498811": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0512523": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0526611": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0541087": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.055596": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0571243": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0586945": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0603079": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0619657": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.063669": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0654192": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0672174": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0690651": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0709636": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0729143": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0749185": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0769779": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0790939": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0812681": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.083502": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0857973": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0881557": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.090579": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0930688": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0956271": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.0982557": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.1": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.100957": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.103732": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.106583": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.109513": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.112523": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.115616": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.118794": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.12206": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.125415": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.128863": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.132405": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.136044": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.139784": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.143626": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.147574": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.151631": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.155799": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.160082": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.164482": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.169003": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.173649": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.178422": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.183327": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.188366": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.193544": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.198864": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.204331": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.209947": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.215718": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.221648": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.227741": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.234001": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.240433": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.247042": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.253833": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.260811": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.26798": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.275346": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.282915": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.290692": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.298682": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.3": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.306893": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.315329": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.323996": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.332902": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.342053": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.351456": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.361117": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.371043": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.381243": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.391722": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.40249": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.413554": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.424922": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.436602": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.448603": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.460935": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.473605": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.486624": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   },
+   "0.5": {
+    "one circle": 0.0,
+    "one square": 0.0,
+    "two objects, crisp": 1.0,
+    "two faint objects": 0.0,
+    "hybrid: overlaid": 0.0
+   }
+  }
+ }
+}

@@ -117,22 +117,34 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 2. 🔧 The sweep, and the closed-form crossing (AI, ~15 min)
 
-- [ ] **Run D at all eight weights** for all three samplers, 300 draws each, writing the five counts per
+- [x] **Run D at all eight weights** for all three samplers, 300 draws each, writing the five counts per
   weight per sampler to `toy-sampler-cooccurrence-sweep.json`.
-- [ ] **Compute the closed-form crossing** from the exact product's component weights, over a fine grid,
+  ✅ verified (8 weights, 51 to 80 s each; the stream is reset to seed 20261022 at every weight, so
+  w = 0 reproduces condition A exactly, 2026-11-04)
+- [x] **Compute the closed-form crossing** from the exact product's component weights, over a fine grid,
   and write it into the same file.
-- [ ] **📸 You should see** the exact sampler's crisp count rising with w and the two sampled ones
+  ✅ verified (400 points from 1e-5 to 0.5; the crisp share is already above one half at 1e-5, so the
+  grid reports its own floor rather than a crossing, 2026-11-04)
+- [x] **📸 You should see** the exact sampler's crisp count rising with w and the two sampled ones
   staying low, matching B's split at w = 0.1.
+  ✅ the second half holds and the first does not: the exact sampler does not rise, it steps from 0
+  crisp at w = 0 to 300 of 300 at w = 0.001 and stays there. A pairing that disagrees is penalised by
+  exp(−2610), so no weight a grid can reach lets one win. At w = 0.1 the two sampled ones give 10 and
+  30 of 300 against B's 14, which is draw noise on the same density (2026-11-04)
 
 ◀ Needs: step 1. ▶ Next: step 3.
 
 ### 3. 🔧 The figure and the threshold (AI, ~15 min)
 
-- [ ] **Draw the sweep** as `weight-sweep.png`: w on a log x axis, the fraction of 300 draws called
+- [x] **Draw the sweep** as `weight-sweep.png`: w on a log x axis, the fraction of 300 draws called
   `two objects, crisp` on y, one curve per sampler, condition B's pair weight marked at 0.1, and a
   vertical line at the grid threshold with the closed-form crossing beside it.
-- [ ] **Build a sample sheet** showing eight draws per sampler at three weights, so the counts can be
+  ✅ verified (the line at 0.001 is labelled on the figure as the grid's floor rather than a crossing,
+  since the exact curve is flat at 1.0 across every non-zero weight, 2026-11-04)
+- [x] **Build a sample sheet** showing eight draws per sampler at three weights, so the counts can be
   checked against the pictures.
+  ✅ verified (`draws-across-weights.png`, five weights rather than three: 0.003, 0.03, 0.1, 0.3, 0.5,
+  2026-11-04)
 
 ◀ Needs: step 2. ▶ Next: instruction 4.
 
