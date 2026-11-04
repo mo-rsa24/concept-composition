@@ -158,26 +158,40 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 5. 🔧 The competing-caption condition, both forms (AI, ~25 min)
 
-- [ ] **Add condition E**: three captions, a softmax over each caption's fit to each image, each expert
+- [x] **Add condition E**: three captions, a softmax over each caption's fit to each image, each expert
   read off the posterior by Bayes against a uniform image prior, then the product of the two
   single-caption experts. Both scoring forms, the softmax temperature a flag.
-- [ ] **Report the five counts** for all three samplers, and the pair weight each form implies inside
+  ✅ verified (`toy_sampler_hybrids.py:caption_experts`, `--caption-form` and `--caption-tau`;
+  form 1 scores by distance at tau 5, form 2 by shape counting at tau 1, 2026-11-04)
+- [x] **Report the five counts** for all three samplers, and the pair weight each form implies inside
   each expert.
-- [ ] **Run D at each form's implied weight** so the comparison holds the weight fixed and changes only
+  ✅ verified (implied weight 0.0461 for form 1 and 0.0458 for form 2; counts in
+  `artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json`, 2026-11-04)
+- [x] **Run D at each form's implied weight** so the comparison holds the weight fixed and changes only
   whether the captions competed.
-- [ ] **📸 You should see** two count sets, and for each one the implied weight placed on the sweep
+  ✅ verified (both controls give 300 of 300 crisp from the exact sampler and 296 overlays from each
+  sampled one, 2026-11-04)
+- [x] **📸 You should see** two count sets, and for each one the implied weight placed on the sweep
   figure's x axis.
+  ✅ the counts came out unlike the hand-weighted condition at the same weight rather than like it:
+  about 296 single objects of 300 from every sampler including the exact one, and no overlay. Both
+  experts spread over the same seven-picture bank, so each picture paired with itself survives and
+  the single shapes outweigh the pair. The failure sits in the target, not the sampler (2026-11-04)
 
 ◀ Needs: instruction 4. ▶ Next: step 6.
 
 ### 6. ✍️ The card, the idea-map line and the filing (AI with you, ~20 min)
 
-- [ ] **Write the card** at `artifacts/results/how-much-co-occurrence-the-product-needs/README.md`:
+- [x] **Write the card** at `artifacts/results/how-much-co-occurrence-the-product-needs/README.md`:
   both axes named, the data behind each curve, the threshold as a number, the competing-caption counts
   out of 300 per sampler, and what the toy cannot say about SDXL.
-- [ ] **Append one line** under [the idea map's Runs](../../artifacts/ideas/is-poe-ill-posed-for-composition/IDEA_MAP.md#runs)
+  ✅ verified (156 lines, four caveats, both count tables and the run commands, 2026-11-04)
+- [x] **Append one line** under [the idea map's Runs](../../artifacts/ideas/is-poe-ill-posed-for-composition/IDEA_MAP.md#runs)
   giving the threshold and whether the competing-caption version hybridises.
-- [ ] **Add the new figures** to the note's own README table.
+  ✅ verified (2026-11-04)
+- [x] **Add the new figures** to the note's own README table.
+  ✅ verified (four rows added, plus `the-chain-of-results.png`, which places the four earlier
+  results in date order ending on this sweep, 2026-11-04)
 
 ◀ Needs: step 5.
 

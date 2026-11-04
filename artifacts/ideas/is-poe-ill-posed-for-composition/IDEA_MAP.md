@@ -167,7 +167,14 @@ None yet.
 
 Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table-of-contents) | [Next](#routes) ➡️
 
-None yet.
+**How much co-occurrence the product needs** (2026-11-04, exact mixture-of-Gaussians toy, 300 draws
+per cell). The exact product needs no measurable co-occurrence: 0 crisp pairs of 300 at zero, 300 of
+300 at a pair-image weight of 0.001, which is the sweep's smallest non-zero point, while its two
+samplers cross half of 300 only between 0.3 and 0.5. Deriving the two experts from competing captions
+instead gives the same implied weight of 0.046 and a different failure: about 296 single objects of
+300 from every sampler including the exact one, no overlay, because both experts then spread over the
+same picture bank and the surviving components are the single shapes. Counts, figures and the caveats
+are in [the co-occurrence card](../../results/how-much-co-occurrence-the-product-needs/README.md).
 
 ## Routes
 

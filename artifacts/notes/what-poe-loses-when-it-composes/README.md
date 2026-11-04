@@ -53,6 +53,16 @@ The figures, scripts and checked references behind the
 | `fig-toy-du-layout.png` | Du et al.'s product and sum rows redone on red circles and blue squares, with the pair-captioned product between them |
 | `fig-toy-sampler-hybrids.png` | the same runs, eight samples per row with counts |
 | `fig-toy-sampler-hybrids-B-strong-mala.png` | setup B with a stronger corrector |
+| `fig-toy-sampler-hybrids-D-w0.png`, `-D-w0.1.png` | condition D at pair weights 0 and 0.1, the two checks against conditions A and B |
+
+**Computed by [`toy_cooccurrence_sweep.py`](toy_cooccurrence_sweep.py), [`toy_cooccurrence_figure.py`](toy_cooccurrence_figure.py), [`toy_cooccurrence_sheet.py`](toy_cooccurrence_sheet.py) and [`toy_caption_competition.py`](toy_caption_competition.py),** filed with their counts and caveats in
+[the co-occurrence card](../../results/how-much-co-occurrence-the-product-needs/README.md).
+
+| File | What it shows |
+|---|---|
+| `../../results/how-much-co-occurrence-the-product-needs/weight-sweep.png` | the crisp-pair fraction of 300 draws against the pair image's weight inside each expert, log x, one curve per sampler |
+| `../../results/how-much-co-occurrence-the-product-needs/draws-across-weights.png` | eight draws per sampler at five pair weights, with counts |
+| `../../results/how-much-co-occurrence-the-product-needs/competing-captions.png` | both competing-caption forms against the hand-weighted condition at the same implied weight |
 
 **How it was made.** Each condition is an exact expert: a Gaussian mixture of spread 0.1 around its
 training images, 16 × 32 RGB. Under the variance-preserving forward process every diffused density and
