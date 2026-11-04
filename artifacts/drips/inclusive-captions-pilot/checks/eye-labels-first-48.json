@@ -1,0 +1,20 @@
+{
+  "what": "one call per generated cat-and-dog image, made by eye off 448-pixel tiles before the vision-language judge was run on the same 48",
+  "set": "/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/both, seeds 0 to 47",
+  "rule": "keep means exactly one ordinary cat and one ordinary dog, both recognisable and neither carrying the other's features; anything else is a reject",
+  "keep": 37,
+  "reject": 11,
+  "rejects": {
+    "0": "three animals, the middle one a cat's body with a dog's nose",
+    "1": "one animal, a cat's ears and whiskers on a dog's muzzle",
+    "7": "the second animal is a hybrid puppy with a cat's face",
+    "11": "the dog is one ear at the frame edge, not a visible animal",
+    "20": "two cats, no dog",
+    "27": "three animals, a second dog behind the first",
+    "34": "one animal, a cat, no dog",
+    "36": "the centre animal is a cat-dog hybrid",
+    "38": "the right animal has a dog's muzzle and a cat's pointed ears",
+    "42": "the second animal is a kitten, not a dog",
+    "43": "one animal, a long-haired cat"
+  }
+}
