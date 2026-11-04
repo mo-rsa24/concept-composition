@@ -106,3 +106,17 @@ by the user, recorded here so neither session re-litigates it:
   folder, not the scope.
 - The shipped-artifact identity is `phase1_r8_100k` (animals-compose); the cross-seed run
   `pueuo7bl` is a replication datum only. Decided twice, independently, and merged.
+
+## 2026-11-04 — the joint column's instrument in hypothesis-16
+
+- The pre-registered bar in `plans/06-is-the-gap-the-samplers-or-the-models/review/16-does-sdxl-compose-at-pixarts-settings.md`
+  asked the joint-prompt control column for a clear cat beside a clear dog on 6 or more of 8 seeds.
+  The control run showed that on held-out seeds 9 to 16 the joint prompt itself draws two animals of
+  the same species on 3 of 8 (two dogs at seeds 10 and 13, two cats at seed 14), so that bar was
+  unreachable regardless of what the matched run produced.
+- Changed before the matched run, by the user's decision: the joint column is now read as **two
+  separate animals of any species**, which is the instrument every published SDXL count in this
+  project was measured with. The product column's bar, which is the claim under test, is unchanged
+  at 2 or fewer of 8 holding two clear animals.
+- The finding states both readings of the joint column, 8 of 8 for two animals and 5 of 8 for a cat
+  beside a dog.

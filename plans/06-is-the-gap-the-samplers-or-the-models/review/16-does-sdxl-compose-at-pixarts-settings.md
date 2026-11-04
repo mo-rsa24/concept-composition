@@ -42,7 +42,13 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 - **PixArt's settings**: 20 steps of DPM-Solver++ order 2 at guidance 4.5, that model's released
   defaults.
 - **Two clear animals**: a cat that reads as a cat and a dog that reads as a dog, both whole, in
-  one picture, judged at full resolution.
+  one picture, judged at full resolution. This is the product column's category.
+- **Two separate animals**: two whole animals of any species, which is what the instance-count
+  scorer measures and what every published SDXL count in this project was measured with. This is
+  the joint column's category, because on held-out seeds 9 to 16 the joint prompt draws two animals
+  of the same species on about half the seeds, so a species-aware reading of that column would sit
+  below any reachable bar before the run started. The question the column has to answer is whether
+  the configuration renders two separate subjects at all.
 - **One hybrid animal**: a single animal carrying features of both. Its own category.
 - **One single animal**: one animal of one species, with no feature of the other.
 
@@ -64,8 +70,8 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | not yet | 32 renders | tiles under `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ⚠️ not started |
-| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | not yet | 32 renders | tiles and sheet under `artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ⚠️ not started |
+| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
+| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders | tiles and sheet under `artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ⚠️ not started |
 
 ## The question written before the run
 
@@ -78,14 +84,15 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       because the instance-count scorer counts animals without naming them.
 
       **Support** if 2 or fewer of 8 product renders hold two clear animals while the joint-prompt
-      column holds two on 6 or more of 8. The sampler, the step count and the guidance scale are
+      column holds two separate animals on 6 or more of 8. The sampler, the step count and the guidance scale are
       removed as the carrier of the fusion, leaving the text encoder and the denoiser.
 
       **Null** if 6 or more of 8 product renders hold two clear animals. One of those three
       settings carries the failure, which would mean the published 0 of 8 describes a
       configuration rather than the arithmetic.
 
-      **Inconclusive** at 3 to 5 of 8, or whenever the joint column falls below 6 of 8.
+      **Inconclusive** at 3 to 5 of 8, or whenever the joint column holds two separate animals on
+      fewer than 6 of 8.
 
       The comparison is against this project's own published SDXL counts: joint prompt 8 of 8,
       plain product 0 of 8, from
@@ -97,9 +104,15 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
 
-- [ ] **Does the new script reproduce the published renders at SDXL's own settings?** The control
-      run's product column must read 0 of 8 and its joint column 8 of 8. Anything else and the
-      matched run does not start.
+- [x] **Does the new script reproduce the published renders at SDXL's own settings?** The control
+      run's product column must read 0 of 8 and its joint column two separate animals on 8 of 8.
+
+      **Answered: yes.** DDIM, 50 steps, guidance 7.5, seeds 9 to 16, run 2026-11-04 on mscluster84:
+      the product column holds one animal on 8 of 8, including seed 16, which is one body carrying
+      two heads rather than two animals. The joint column holds two separate animals on 8 of 8, and
+      a clear cat beside a clear dog on 5 of 8 (seeds 9, 11, 12, 15, 16); seeds 10 and 13 draw two
+      dogs and seed 14 two cats. Tiles and sheet under
+      `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/`.
 - [ ] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture.
 
@@ -122,6 +135,11 @@ weak-guidance artefact. The joint column at the same 4.5 is the control for it.
 **Twenty steps is fewer steps.** A thinner render could read as a hybrid by being vague rather than
 by fusing. The single-prompt columns at the same 20 steps show what a clean cat and a clean dog look
 like at this budget, which is what the hybrid call is made against.
+
+**The joint prompt is unreliable on these seeds.** It draws two animals of the same species on 3 of
+8, so the column is read as two separate animals rather than as a cat and a dog. That is what the
+published SDXL counts measured, and it is the right control for whether the configuration renders
+two subjects, but it does not show the model can tell these two species apart at these settings.
 
 **The by-eye call.** One reader's judgment on eight pictures. The sheet is published so the call can
 be disagreed with per seed, and instruction 7.2 is where that rewrites the counts.
