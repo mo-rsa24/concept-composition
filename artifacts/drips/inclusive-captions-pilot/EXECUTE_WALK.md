@@ -248,3 +248,10 @@ out of reach at either rank, and it had no idle node in any case.
 
 **Both arms now launch from `scripts/inclusive_captions_both.sh`**, a file rather than an inline
 string, after the inline form lost a newline and dropped run B.
+
+**Rank 16 and rank 32 do the same thing at step 500, which rules the adapter's size out.** Run A's
+product puts one animal in frame on eight seeds of eight at both ranks, and the joint prompt drifts
+the same way at both: it drew one cat beside one dog on all eight seeds before training and now
+draws two cats on three seeds at rank 16 against two seeds at rank 32. Halving the correction the
+adapter can carry changed neither the failure nor the drift, so the drift is about what 550
+domestic animal photographs teach and not about how much capacity there is to learn it.
