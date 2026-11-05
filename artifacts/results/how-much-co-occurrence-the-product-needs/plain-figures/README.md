@@ -376,6 +376,16 @@ both-shapes pictures the single captions: 0%, 10%, 30%, 60% and 100%, which is a
 1,200 and 2,000 pictures. The four columns ask the same model in four ways. Each row's counts come
 from one model only; the grid above shows how much a second or third run can differ.
 
+<a href="07-every-caption-side-by-side_b.png"><img src="07-every-caption-side-by-side_b.png" width="1000" alt="the same five rows with a PoE plus corrector column: 0 of 300 at 0 relabelled, 300 of 300 in every relabelled row"></a>
+
+The same five settings with one more column: PoE sampled with 20 Langevin corrector steps at
+every noise level (the corrector is described under "Adding a corrector to the sampler" below).
+These five models were retrained for this figure, and every column in a row comes from the same
+retrained model, so the counts differ slightly from the grid above.
+
+**With the corrector, every relabelled row reaches 300 of 300, and the 0 row stays at 0.** Plain
+PoE in the same models gives 0, 110, 103, 51 and 205 of 300.
+
 **A stronger guidance does not rescue the 0% model.** Drawn at guidance strengths 1, 2, 3, 5 and 7,
 it gives at most 1 of 300 separate pairs ([the 0% model across guidance](../caption-model-across-guidance.png)).
 
