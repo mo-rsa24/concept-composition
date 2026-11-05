@@ -302,6 +302,20 @@ has the circle on the far left and the square on the far right, or the other way
 training picture also gets a little random pixel noise (standard deviation 0.1 on a 0-to-1 scale),
 so no two training pictures are exactly alike.
 
+**How few distinct pictures there are.** "A red circle" has only three distinct pictures: the
+circle on the left, in the centre, or on the right. Its 2,000 training pictures are about 650
+noisy copies of each. "A blue square" is the same, and the both-shapes pictures come in two layouts
+with about 1,000 copies each. This is the shape of the toys in Du et al. (2023): each expert is a
+few centres with many jittered samples around each, the training-data version of the Gaussian bumps
+in model 1.
+
+<a href="05c-what-each-caption-holds.png"><img src="05c-what-each-caption-holds.png" width="1000" alt="each caption's distinct pictures, each with five real noisy copies and its count: about 650 per single-shape position, about 1,000 per both-shapes layout"></a>
+
+**Why 2,000 per caption.** The number has no special meaning. The three captions get equal
+pools so that nothing differs between them except the relabelling, and 2,000 copies are enough for
+the denoiser to learn each pool's pictures and its noise. A single clean copy per position would
+not work: the model would memorise the exact picture instead of learning a spread around it.
+
 **The captions.** Before any relabelling, the 6,000 training pictures are:
 
 | Caption | Pictures under it | What they show |
@@ -338,6 +352,11 @@ and under it the pool's true counts:
 
 So relabelling changes one thing about each single caption: how often a picture filed under it
 also holds the other shape. The joint caption's pool stays the same 2,000 pictures throughout.
+
+The relabelled counts were a sweep to find where PoE starts drawing the pair, and "2,000
+relabelled" simply means all of them. What carries the meaning is the share of a single caption's
+pool that holds both shapes: 1 relabelled picture is 0.05% of the "a red circle" pool, 200 is 9%,
+and 2,000 is 50%.
 
 We tried 0, 1, 5, 20, 50, 200, 600, 1,200 and all 2,000 relabelled. Each number was trained three
 times with different random seeds, so 27 models in all.
@@ -526,6 +545,12 @@ that small change in exposure.
 
 **The count misses some samples with two shapes.** Many uncounted PoE samples are a reddish circle
 beside a bluish square. That is two shapes in frame with their colours mixed.
+
+**A toy caption varies far less than a real one.** Every "a red circle" picture is one of three
+pictures plus pixel noise. A real "a cat" pool varies in breed, pose, lighting and background. So
+the toy shows how the share of both-thing pictures under a single caption changes PoE, but it does
+not say what share a real caption needs. The SDXL pilot measures that share directly: 16.9% of its
+cat-captioned training draws hold a dog in the inclusive-caption run.
 
 **The toy has two shapes, three positions and one picture size.** It does not say how many
 both-animal photos SDXL would need, or how much probability SDXL's "a cat" gives to dogs.

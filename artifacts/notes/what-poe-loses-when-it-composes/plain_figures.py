@@ -369,7 +369,41 @@ def fig_all_captions_corrector():
          marks=[(i, j) for i in range(5) for j in (2, 3)], w=20.5, left=0.1)
 
 
+def fig_distribution():
+    """Each caption's training pool split by its underlying picture: the distinct pictures, how many
+    noisy copies of each the pool holds (counted from the corpus at 0 relabelled), and real copies."""
+    import toy_caption_dial_ldm as m
+    import toy_caption_threshold as th
+    x, c = th.corpus_k(0, np.random.default_rng(20261022))
+    x = x.permute(0, 2, 3, 1).reshape(len(x), -1).cpu().numpy(); c = c.cpu().numpy()
+    banks = [('"a red circle"', m.CIRCLE, list(t.CIRCLES.values()), ["left", "centre", "right"]),
+             ('"a blue square"', m.SQUARE, list(t.SQUARES.values()), ["left", "centre", "right"]),
+             ('"a red circle and\na blue square"', m.BOTH, list(m.PAIRS), ["circle left", "circle right"])]
+    pick = np.random.default_rng(3)
+    cells = {}
+    for i, (_, cid, bank, names) in enumerate(banks):
+        pool = np.flatnonzero(c == cid)
+        B = np.stack(bank).reshape(len(bank), -1)
+        near = ((x[pool, None, :] - B[None]) ** 2).sum(-1).argmin(1)    # which underlying picture each copy is
+        for j in range(3):
+            if j >= len(bank):
+                cells[i, j] = (np.ones((0, t.D)), "")
+                continue
+            mine = pool[near == j]
+            cells[i, j] = (np.concatenate([B[j:j + 1], x[pick.choice(mine, 5, replace=False)]]),
+                           f"{names[j]}: {len(mine):,} noisy copies")
+    def cell(i, j):
+        return cells[i, j][0], cells[i, j][1], np.array([True] + [False] * 5) if len(cells[i, j][0]) else np.zeros(0, bool)
+    grid("05c-what-each-caption-holds.png",
+         "Each caption is a few pictures, repeated about 650 to 1,000 times with pixel noise",
+         "Rows: captions, before any relabelling. Columns: the distinct pictures under that caption. Each cell: the "
+         "clean picture (outlined) and five of its real noisy training copies, with how many copies the training set "
+         "holds. Every copy carries its own random pixel noise of standard deviation 0.1.",
+         "the counts: 2,000 pictures per caption come from only 3 (or 2) distinct pictures",
+         [b[0] for b in banks], ["picture 1", "picture 2", "picture 3"], cell, n=6, w=16, rowh=1.1, left=0.12)
+
+
 if __name__ == "__main__":
-    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_what_poe_draws,
+    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_distribution, fig_what_poe_draws,
               fig_all_captions, fig_all_captions_corrector, fig_corrector, fig_factorized, fig_pilot):
         f()
