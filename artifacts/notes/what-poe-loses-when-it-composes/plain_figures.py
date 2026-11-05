@@ -280,7 +280,36 @@ def fig_samples_side_by_side():
     save(fig, "0b-poe-samples-side-by-side.png")
 
 
+def fig_corrector():
+    files = [("toy-caption-corrector.json", "toy-caption-corrector-samples.npz"),
+             ("toy-caption-corrector-no-single-captions.json", "toy-caption-corrector-no-single-captions-samples.npz")]
+    rows, npz = [], {}
+    for fj, fn in files:
+        if (R / fj).exists():
+            rows += json.load(open(R / fj))["results"]; npz.update(dict(np.load(R / fn)))
+    if not rows: return
+    rows.sort(key=lambda r: (r["pictures"], r["seed"]))
+    cols = [("plain", "plain sampling"), ("main", "5 corrector steps per level"), ("stronger", "20 corrector steps per level")]
+    fig, axs = plt.subplots(len(rows), 3, figsize=(14, 1.25 * len(rows) + 0.8))
+    for i, r in enumerate(rows):
+        for j, (key, title) in enumerate(cols):
+            ax = axs[i, j]; strip(ax, npz[f"{r['pictures']}_{r['seed']}_{key}"][:4])
+            n = r[key]["product"]["red and blue apart"]
+            ax.set_xlabel(f"{n} of 300 separate", fontsize=10.5, fontweight="bold")
+            if i == 0: ax.set_title(title, fontsize=11.5)
+        axs[i, 0].set_ylabel(f"{r['pictures']:,} pictures,\nmodel {SEEDS_SHORT[r['seed']]}", rotation=0,
+                             ha="right", va="center", fontsize=10.5)
+        axs[i, 0].yaxis.set_label_coords(-0.04, 0.5)
+    fig.suptitle('PoE "a red circle" × "a blue square" in the caption model, with and without a Langevin corrector\n'
+                 "(rows: how many both-shapes pictures also carry the single captions)", fontsize=12.5, y=1.0)
+    fig.subplots_adjust(hspace=0.75, wspace=0.08, left=0.13)
+    save(fig, "11-the-corrector.png")
+
+
+SEEDS_SHORT = {20261022: "A", 20261023: "B", 20261024: "C"}
+
+
 if __name__ == "__main__":
     for f in (fig_problem, fig_training, fig_main, fig_exact, fig_leak, fig_sampler,
-              fig_factorized, fig_pilot, fig_what_poe_draws, fig_samples_side_by_side):
+              fig_factorized, fig_pilot, fig_what_poe_draws, fig_samples_side_by_side, fig_corrector):
         f()

@@ -1,234 +1,468 @@
 # What PoE needs from training to draw two things at once
 
-This write-up follows one question from SDXL down to a small model we can control completely, and
-back up again. Every figure in this folder is drawn by
-`artifacts/notes/what-poe-loses-when-it-composes/plain_figures.py` from the saved samples and counts
-in the folder above, and the fuller record of each result is that folder's [results card](../README.md).
+Every figure here is drawn by `artifacts/notes/what-poe-loses-when-it-composes/plain_figures.py`
+from saved samples and counts. The fuller record of each result is the
+[results card](../README.md) one folder up.
 
 ## The question
 
-PoE on SDXL fails: asked for "a cat" × "a dog", it draws one fused animal. Is part of the reason
-how the training pictures that show both things are captioned? A photo of a cat and a dog is
-usually captioned "a cat and a dog", almost never just "a cat" or just "a dog". So the "a cat"
-expert may never have learned that a picture holding a dog can still be "a cat".
-
-## The answer in a small model
-
-**Yes, in a small model built like SDXL.** When the training pictures holding both shapes carry
-only the joint caption, PoE of "a red circle" × "a blue square" draws a purple hybrid, and it
-never draws the two shapes separately. When enough of those pictures are also captioned with each
-single name, PoE starts drawing a separate red circle and blue square, in up to 252 of 300 samples.
-It does not do so on every training, and never in all 300 samples.
-
-<a href="0-what-poe-draws-as-the-captions-change.png"><img src="0-what-poe-draws-as-the-captions-change.png" width="1000" alt="stacked bars, three trainings per number of relabelled pictures: purple hybrids at 0 to 50, blue separate-shape segments appearing from 200 and largest at 2,000"></a>
-
-Each bar is one trained model and its 300 PoE samples, split by what each sample shows. The x-axis
-is how many of the 2,000 both-shapes training pictures were also captioned "a red circle" and
-"a blue square". Each number was trained three times with different random seeds, 27 trainings in
-all.
-
-**From 0 to 50 pictures, PoE draws no separate pair.** In all 15 trainings, at most 3 of 300
-samples are a separate red circle and blue square. Most samples are a purple hybrid, the two shapes
-merged into one blob; the rest are a single shape, and one training draws a faint smear instead.
-
-**From 200 pictures up, a separate pair appears.** The median count over three trainings rises
-from 1 of 300 at 200 pictures to 134 at 600, 57 at 1,200 and 238 at 2,000. The trainings at each
-number disagree a lot (153, 1 and 0 at 200; 157, 17 and 134 at 600; 183, 29 and 57 at 1,200;
-252, 74 and 238 at 2,000), so the rise is clear across the whole range but not between neighbouring
-numbers.
-
-<a href="0b-poe-samples-side-by-side.png"><img src="0b-poe-samples-side-by-side.png" width="1000" alt="PoE samples at 0, 200 and 2,000 relabelled pictures: purple blobs, then red and blue apart"></a>
-
-What those bars look like. At 0 pictures, the samples are purple blobs. At 200 and 2,000 (the
-best of each number's three trainings), they are a red circle beside a blue square.
-
-**The model can draw the pair; PoE is the part that fails.** In every one of the 27 trainings, the
-joint caption "a red circle and a blue square" drew both shapes in at least 267 of 300 samples.
-
-**The single captions still mean one shape.** Up to 600 pictures, "a red circle" alone drew only
-red in at least 290 of 300 samples, and "a blue square" alone only blue in at least 294. At 2,000
-these slip to between 223 and 264, because with every both-shapes picture under the single
-captions, each single caption sometimes draws the pair itself.
-
-## The problem we started from
-
 <a href="1-the-problem-on-sdxl.png"><img src="1-the-problem-on-sdxl.png" width="900" alt="SDXL: four one-prompt renders of a cat and a dog above four PoE renders of a single fused cat-dog on the same seed numbers"></a>
 
-SDXL is given the one prompt "a cat and a dog" (top row) and draws both animals. Asked instead
-for PoE of "a cat" and "a dog" (bottom row), where each prompt guides the sampler on its own and
-the two pushes are added, it draws one animal carrying parts of both: a cat's ears over a dog's
-muzzle. The question all of the work below asks is what PoE needs from the model's training to
-draw two animals instead of one.
+SDXL can be asked for a picture in two ways.
 
-SDXL is too large to change its training freely, so we built a small model where we can.
+The first way is one prompt, "a cat and a dog" (top row). SDXL draws both animals.
 
-## Words this uses
+The second way is PoE: one prompt "a cat", one prompt "a dog", and the two combined (bottom row).
+SDXL draws one animal with parts of both, such as a cat's ears over a dog's muzzle.
 
-**PoE (product of experts).** Each caption defines an expert, a probability over pictures. PoE
-multiplies the two experts, so it favours pictures both experts like. In a diffusion model this is
-done at every denoising step by adding each caption's push to the empty-caption estimate:
-estimate = empty + 3 × [("a red circle" − empty) + ("a blue square" − empty)], where 3 is the
-classifier-free guidance strength.
+We ask whether part of the reason PoE fails is how the training pictures that show both animals
+are captioned. A photo of a cat beside a dog is usually captioned "a cat and a dog". It is almost
+never captioned just "a cat" or just "a dog". So the part of SDXL that answers "a cat" may never
+have learned that a picture can contain a cat and also a dog.
 
-**Both-shapes picture.** A training picture holding a red circle and a blue square side by side.
+SDXL is too large to retrain freely, so we built small models where we control every training
+picture and every caption.
 
-**Separate red circle and blue square.** How a sample is scored. Each pixel is assigned to the
-nearest of four colours: background, red, blue, or purple (red and blue mixed). A sample counts
-when it has a red region and a blue region of at least 12 pixels each, apart from each other. This
-rule read 100 of 100 of the model's own reconstructions of known pictures correctly.
+## The answer, in short
 
-**Out of 300.** Every count is 300 samples from one trained model with one setting.
+In a small model built like SDXL, yes.
 
-## The model
+1. **Without the single captions, PoE draws a purple hybrid.** When the pictures holding both
+   shapes are captioned only "a red circle and a blue square", PoE of "a red circle" × "a blue
+   square" draws a separate circle and square in 0 to 3 of 300 samples (15 models).
+2. **With them, it starts drawing both shapes.** When 200 or more of those 2,000 pictures are also
+   captioned "a red circle" and "a blue square", PoE draws a separate circle and square in up to
+   252 of 300 samples. It is uneven from model to model.
+3. **A corrector in the sampler completes it.** Adding Langevin corrector steps to the sampler
+   raises those models to 300 of 300. The same corrector leaves the models without the single
+   captions at 0 of 300.
 
-**The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers, then decodes those
-numbers back into a picture, the same kind of compression SDXL's VAE does at a larger size.
+So the captions decide whether PoE can find the pair at all, and the sampler decides how often it
+does. The sections below build this up one model at a time.
 
-**The denoiser** takes three inputs: a noisy version of those 128 numbers, how much noise is in it,
-and one of four captions ("a red circle", "a blue square", "a red circle and a blue square", or an
-empty caption). It outputs its estimate of the clean 128 numbers, from which the noise estimate
-follows.
+## What PoE does
 
-**Sampling** starts from pure noise, removes it step by step under a caption (or under the PoE sum
-above), and the VAE decodes the result into a picture.
+**An expert is a probability over pictures.** The "a cat" expert gives high probability to
+pictures of cats and low probability to everything else.
 
-## What the model is trained on
+**PoE multiplies two experts.** A picture scores high under PoE only if both experts give it
+some probability. A picture that one expert gives zero gets zero, however much the other likes it.
 
-<a href="2-the-training-pictures.png"><img src="2-the-training-pictures.png" width="900" alt="training pictures under each caption: on the left both-shapes pictures appear only under the joint caption, on the right one is also under each single caption, outlined in green"></a>
+$$
+\underbrace{p_{\text{PoE}}(x)}_{\text{PoE's probability of picture }x}
+\;\propto\;
+\underbrace{p_{\text{cat}}(x)}_{\text{"a cat" expert}}
+\times
+\underbrace{p_{\text{dog}}(x)}_{\text{"a dog" expert}}
+$$
 
-6,000 pictures: 2,000 of a single red circle (at one of three positions), 2,000 of a single blue
-square, and 2,000 holding both, each with the caption "a red circle and a blue square". That is the
-left half. The one thing we change between trainings is on the right: a chosen share of the
-both-shapes pictures is added a second time under "a red circle" and a third time under "a blue
-square" (outlined in green). We trained five models, at shares of 0%, 10%, 30%, 60% and 100%. At
-10% that is about 200 extra pictures under each single caption.
+The sign $\propto$ means "proportional to": the product is rescaled afterwards so that its
+probabilities add up to 1.
 
-## Every caption, one training per share
+**In a diffusion model, PoE is applied at every denoising step.** A diffusion model makes a picture
+by starting from pure noise and removing a little noise at a time. At each step, the model
+estimates which noise to remove. Under PoE, that estimate is built from three estimates of the same
+model, one with each prompt and one with an empty prompt:
 
-<a href="3-the-main-result.png"><img src="3-the-main-result.png" width="1000" alt="grid: five rows for five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
+$$
+\underbrace{\hat\epsilon_{\text{PoE}}(x_t)}_{\text{noise to remove at step }t}
+=
+\underbrace{\hat\epsilon(x_t,\varnothing)}_{\text{empty prompt}}
++\;
+\underbrace{3}_{\text{guidance}}
+\Big[
+\underbrace{\hat\epsilon(x_t,\text{cat})-\hat\epsilon(x_t,\varnothing)}_{\text{push of "a cat"}}
++
+\underbrace{\hat\epsilon(x_t,\text{dog})-\hat\epsilon(x_t,\varnothing)}_{\text{push of "a dog"}}
+\Big]
+$$
 
-One trained model per row, from an earlier run that relabelled a random share of the both-shapes
-pictures (0%, 10%, 30%, 60%, 100%: about 0, 200, 600, 1,200 and 2,000 pictures). Each column is one
-way of asking the same model. This shows all four captions side by side; the counts in each row are
-from one training, and the bars above show how much a second or third training can differ.
+Here $x_t$ is the noisy picture at step $t$, and $\hat\epsilon(x_t, c)$ is the model's estimate of
+its noise when given the prompt $c$. Each bracket is the push one prompt adds on top of the empty
+prompt, and the two pushes are added. The 3 is the classifier-free guidance strength.
 
-**Guidance strength does not rescue 0 pictures.** The 0% model drawn at guidance strengths 1, 2,
-3, 5 and 7 gives at most 1 of 300 separate pairs. Figure: [the caption model across guidance](../caption-model-across-guidance.png).
+## The four models we built
 
-## Why not every sample
+| Model | What it is | What PoE multiplies | What it is for |
+|---|---|---|---|
+| 1. Formula experts | two probability distributions written by hand, no training and no captions | a distribution over red-circle pictures × a distribution over blue-square pictures | the exact PoE answer can be computed, so we can see what PoE wants apart from how a sampler finds it |
+| 2. Two trained networks | one small denoiser trained only on circle pictures, one only on square pictures | the circle network × the square network | the first step from formulas to learned experts |
+| 3. One caption model | a VAE plus one denoiser that reads a caption, trained on circles, squares and both, the way SDXL is built | "a red circle" × "a blue square" inside the same network | the model the main result rests on |
+| 4. Formula experts with a background | circle, square and empty-background distributions, written by hand | circle × square ÷ background | whether PoE can compose with no both-shapes picture at all |
 
-Even the best training leaves 48 of 300 samples as something other than a separate pair, and the
-others leave far more. Du et al. (2023) point to one reason: PoE samplers add the two experts' noise
-estimates at every step, and at high noise that sum is not the noise estimate of the product the
-experts define. Step 3 below shows this directly on experts written as formulas, where the correct
-estimate can be computed: adding the estimates gave 15 of 300 pairs, and the correct estimate gave
-300 of 300 with the same sampler.
+All four work on the same pictures: 16 pixels high, 32 wide, in colour, on a white background
+unless stated. A red circle or a blue square sits at one of three positions (left, centre, right).
+The **both-shapes picture** has a red circle on the left and a blue square on the right.
 
-In the trained model the correct estimate cannot be computed, so this is a likely reason, not a
-measured one. The test Du et al. propose is a corrector: extra Langevin steps at each noise level
-that pull the sample toward the product before moving on. On the formula experts a Langevin
-corrector raised the pair count from 10 to 30 of 300 at one setting. Whether it helps the trained
-model has not been run.
+Every count below is out of **300 samples**, which means 300 pictures drawn from one model with
+one setting.
 
-## How we got to that model
+## Model 1: experts written as formulas
 
-The model above is the fifth thing we built. The four before it explain why the result looks the
-way it does.
+### What the two experts are
 
-### 1. Experts written as exact formulas
+There are no captions and no training here. Each expert is a probability distribution over
+pictures that we write down directly.
+
+**The circle expert** puts its probability around three pictures: a red circle on the left, in the
+centre, and on the right. "Around" means it likes those exact pictures most, and pictures very
+close to them a little less. The spread is 0.1 on a 0-to-1 scale for each pixel colour.
+
+**The square expert** does the same for the three blue-square pictures.
+
+**Each expert also gives a small share of its probability to the both-shapes picture.** We call
+that share the expert's weight on the both-shapes picture, $w$, and we vary it.
+
+Written out, the circle expert is a mixture of four Gaussian bumps:
+
+$$
+\underbrace{p_{\text{circle}}(x)}_{\text{circle expert}}
+=
+\underbrace{\frac{1-w}{3}\sum_{i\in\{\text{L},\text{C},\text{R}\}}\mathcal N\big(x;\,c_i,\,\sigma^2 I\big)}_{\text{a bump on each single-circle picture}}
++
+\underbrace{w\,\mathcal N\big(x;\,m,\,\sigma^2 I\big)}_{\text{a small bump on the both-shapes picture}}
+$$
+
+Here $x$ is a picture written as its 1,536 numbers (16 × 32 pixels × 3 colours), $c_i$ is the
+picture of a red circle at position $i$, $m$ is the both-shapes picture, and $\sigma = 0.1$ is the
+width of each bump. $\mathcal N(x; c, \sigma^2 I)$ is a Gaussian centred on picture $c$: it is
+highest at $c$ and falls off with the distance from $c$. The square expert is the same with the
+three single-square pictures $s_i$ in place of $c_i$.
+
+**PoE multiplies the circle distribution by the square distribution.** Because both are formulas,
+the product is a formula too, and we can compute exactly which pictures it prefers. No sampler is
+involved in that answer.
+
+### What the product prefers
+
+Multiplying two mixtures gives a mixture over every pairing of one bump from each side. One
+Gaussian identity does all the work:
+
+$$
+\mathcal N(x;\,a,\,\sigma^2 I)\;\mathcal N(x;\,b,\,\sigma^2 I)
+=
+\underbrace{\exp\!\Big(-\frac{\lVert a-b\rVert^2}{4\sigma^2}\Big)}_{\text{penalty for how far apart }a\text{ and }b\text{ are}}
+\times
+\underbrace{\mathcal N\big(x;\,\tfrac{a+b}{2},\,\tfrac{\sigma^2}{2} I\big)}_{\text{a bump halfway between them}}
+\times\text{constant}
+$$
+
+So pairing a circle bump at $a$ with a square bump at $b$ produces a bump halfway between the two
+pictures, weighted down by how far apart they are.
+
+A red-circle picture and a blue-square picture are far apart: $\lVert a-b\rVert^2 \approx 104$,
+so with $\sigma = 0.1$ the penalty is $\exp(-2610)$, which is zero for every practical purpose.
+The square expert gives a red-circle picture almost no probability, and the circle expert gives a
+blue-square picture almost none.
+
+**With no weight on the both-shapes picture**, no picture is liked by both experts. The product
+then peaks halfway between a circle picture and a square picture: a faint overlay of the two, which
+is purple where they overlap. This is the hybrid.
+
+**With some weight on the both-shapes picture**, that picture is the one place both experts give
+probability. Its bump paired with itself has $a = b = m$, so it pays no penalty at all and carries
+weight $w \times w$. Every other pairing carries the $\exp(-2610)$ penalty. The product puts
+nearly all its probability on the both-shapes picture.
 
 <table><tr>
 <td><a href="5-formula-experts-answer-against-sampler.png"><img src="5-formula-experts-answer-against-sampler.png" width="440" alt="exact answer at 300 of 300 from 0.1% upward; sampler near 0 until 10% and 300 only at 90%"></a></td>
 <td>
 
-We first wrote each expert as a formula: a circle expert that puts most of its probability on
-three single-circle pictures and a little on the both-shapes picture, and the same for squares.
-With formulas, PoE's answer can be computed exactly, with no training and no sampler.
+The green line is the exact answer. Once each expert gives the both-shapes picture **0.1%** of its
+probability, 300 of 300 exact samples are the both-shapes picture.
 
-**The exact answer is the both-shapes picture once each expert gives it even 0.1%** (green, 300 of
-300). The step-by-step sampler (blue) only finds it reliably when each expert gives it about 30% to
-90%, by which point the two experts are close to the same expert.
+The blue line is a diffusion sampler aiming at the same product step by step. It finds the
+both-shapes picture in 10 of 300 samples at a weight of 10%, 122 at 30%, and 300 only at 90%.
+
+So PoE itself needs very little shared probability. The sampler needs a lot.
 
 </td></tr></table>
 
-### 2. Experts that also give a little probability to the other shape
+### When each expert also likes the other shape a little
 
 <table><tr>
 <td><a href="6-experts-that-also-score-the-other-shape.png"><img src="6-experts-that-also-score-the-other-shape.png" width="440" alt="exact count falling from 300 to 20 as each expert gives more probability to the other expert's single shapes"></a></td>
 <td>
 
-A real text-conditioned "a cat" expert also gives some probability to pictures of dogs. Here
-each expert keeps 10% on the both-shapes picture and also gives a little to each of the other
-expert's single shapes.
+A real "a cat" expert gives some probability to pictures of dogs. Here we copy that. Each expert
+keeps 10% on the both-shapes picture, and also gives a small amount to each of the other expert's
+single-shape pictures.
 
-**At 1% per shape, PoE's exact answer is the both-shapes picture only 113 times in 300**, and at
-10% only 20; the rest are a single shape. Probability on the other shape works against composing.
+Now a lone square is liked by both experts too, and it competes with the both-shapes picture.
+
+At 1% on each of the other shapes, the exact answer is the both-shapes picture in 113 of 300
+samples. At 10%, in 20. The rest are one shape on its own.
 
 </td></tr></table>
 
-### 3. Why the sampler misses what the formula finds
+### Where the sampler loses the pair
 
 <a href="7-where-the-sampler-loses-the-pair.png"><img src="7-where-the-sampler-loses-the-pair.png" width="900" alt="left: summed estimates give mostly single purple blobs, 15 of 300; right: the correct estimate gives the both-shapes picture, 300 of 300"></a>
 
-Both experts give the both-shapes picture 10%. The step-by-step sampler normally adds the two
-experts' noise estimates (left). At high noise that sum is not the noise estimate of the product.
-With the correct estimate for the product (right), which the formulas let us compute, the same
-sampler gives 300 of 300. **The sampler loses the pair at the point where the two estimates are
-added**, not anywhere else in the sampler. The six samples shown on the left are the first six
-drawn; two of them happen to be pairs, against 15 of 300 overall.
+Both experts give the both-shapes picture 10%. The exact answer is the both-shapes picture every
+time. The sampler gets it 15 times in 300. Why?
 
-### 4. Two separately trained networks
+At each step the sampler needs the noise estimate for the product. The usual way, as in SDXL, is
+to add the two experts' noise estimates. That sum is the noise estimate of a different
+distribution: the product of the two *noisy* experts, where the correct target is the *noisy
+version of the product*. Du et al. (2023) made this point.
 
-We then trained two small denoisers, one on circle pictures and one on square pictures, each with
-the same share of both-shapes pictures, and added their estimates. PoE gave 0 of 300 at every share
-from 0% to 50%, and the two networks drifted toward each other before it changed: at 50% the circle
-network gave only red in 151 of 300. Numbers: `../toy-trained-experts.json`. SDXL is one network that
-reads captions, not two networks, which is why step 5 is the model the finding rests on.
+$$
+\underbrace{\big(p_{\text{circle}}\,p_{\text{square}}\big)_t}_{\text{noisy version of the product: what we want}}
+\;\neq\;
+\underbrace{p_{\text{circle},t}\;p_{\text{square},t}}_{\text{product of noisy experts: what adding the estimates gives}}
+$$
 
-### 5. One caption-conditioned latent diffusion model
+The difference is easy to see in the penalty above. At noise level $t$, a pairing's penalty in
+the added-estimate version becomes
 
-The answer at the top.
+$$
+\exp\!\Big(-\frac{\lVert a-b\rVert^2}{4}\cdot\frac{\bar\alpha_t}{\bar\alpha_t\sigma^2+1-\bar\alpha_t}\Big),
+$$
 
-### 6. A different kind of expert: circle × square ÷ empty background
+where $\bar\alpha_t$ is the share of the clean picture left in the noisy one: 1 at the clean end,
+near 0 at pure noise. Near pure noise the penalty disappears, so every circle-square pairing counts
+as much as the both-shapes picture, and the both-shapes picture's share of the mixture falls to
+about $w^2$. The sample commits to a position early, while the penalty is still missing, and it
+lands on a single purple blob there.
+
+With formulas we can compute the correct noise estimate for the product at every step. The same
+sampler, using the correct estimate (right), gives 300 of 300. Using the added estimates (left), it
+gives 15 of 300. So the loss happens where the two estimates are added. The six samples shown on the
+left are the first six drawn; two happen to be pairs, against 15 of 300 overall.
+
+## Model 2: two separately trained networks
+
+We trained two small denoisers. One saw only circle pictures, the other only square pictures, and
+each also saw the same share of both-shapes pictures. PoE added their noise estimates.
+
+PoE drew a separate circle and square in 0 of 300 samples at every share from 0% to 50%. Before
+anything changed, the two networks started to resemble each other: at 50% the circle network on its
+own drew only red in 151 of 300 samples. Counts: `../toy-trained-experts.json`.
+
+SDXL is one network that reads a caption, not two networks, so model 3 is the closer copy.
+
+## Model 3: one caption model built like SDXL
+
+### What the model is
+
+**The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers. It can turn those
+128 numbers back into the picture. SDXL's VAE does the same job at a larger size.
+
+**The denoiser** works on those 128 numbers. It takes three inputs:
+
+1. a noisy version of the 128 numbers,
+2. how much noise is in them,
+3. one of four captions: "a red circle", "a blue square", "a red circle and a blue square", or an
+   empty caption.
+
+Its output is its estimate of the clean 128 numbers, which gives the noise estimate.
+
+**Making a picture** starts from pure noise in the 128 numbers. The denoiser removes noise step by
+step, 200 steps, guided by a caption. The VAE then turns the result into a picture.
+
+**PoE here** uses the formula from the top, with the two captions:
+
+$$
+\hat\epsilon_{\text{PoE}}
+=
+\hat\epsilon(z_t,\varnothing)
++3\Big[\big(\hat\epsilon(z_t,\text{"a red circle"})-\hat\epsilon(z_t,\varnothing)\big)
++\big(\hat\epsilon(z_t,\text{"a blue square"})-\hat\epsilon(z_t,\varnothing)\big)\Big]
+$$
+
+where $z_t$ is the noisy version of the 128 numbers at step $t$.
+
+### What it is trained on
+
+<a href="2-the-training-pictures.png"><img src="2-the-training-pictures.png" width="900" alt="training pictures under each caption: on the left both-shapes pictures appear only under the joint caption, on the right one is also under each single caption, outlined in green"></a>
+
+The training set has 6,000 pictures:
+
+- 2,000 of a red circle, captioned "a red circle";
+- 2,000 of a blue square, captioned "a blue square";
+- 2,000 holding both, captioned "a red circle and a blue square".
+
+That is the left half of the figure.
+
+The one thing we change is on the right. We take some of the 2,000 both-shapes pictures and add
+each of them twice more: once captioned "a red circle" and once captioned "a blue square" (outlined
+in green). We call this giving them the **single captions**. We tried 0, 1, 5, 20, 50, 200, 600,
+1,200 and all 2,000 of them. Each number was trained three times with different random seeds, so
+27 models in all.
+
+### How a sample is scored
+
+Each pixel is given the nearest of four colours: background, red, blue, or purple (red and blue
+mixed). A sample counts as a **separate red circle and blue square** when it has a red patch and a
+blue patch of at least 12 pixels each, apart from each other. On the VAE's own copies of the known
+training pictures, this rule was right 100 times out of 100.
+
+### What PoE draws
+
+<a href="0-what-poe-draws-as-the-captions-change.png"><img src="0-what-poe-draws-as-the-captions-change.png" width="1000" alt="stacked bars, three trainings per number: purple hybrids at 0 to 50, blue separate-shape segments appearing from 200 and largest at 2,000"></a>
+
+Each bar is one trained model. It splits that model's 300 PoE samples by what they show. The bars
+are grouped by how many both-shapes pictures were also given the single captions.
+
+**With 0 to 50 of them, PoE draws a purple hybrid.** Across these 15 models, at most 3 of 300
+samples are a separate red circle and blue square. Most samples are one purple blob. The rest are a
+single shape, and one model draws a faint smear.
+
+**With 200 or more, PoE starts drawing both shapes.** The middle of the three counts at each
+number is 1 of 300 at 200, 134 at 600, 57 at 1,200, and 238 at 2,000. The three models at one number
+can disagree a lot: 153, 1 and 0 at 200, and 252, 74 and 238 at 2,000.
+
+<a href="0b-poe-samples-side-by-side.png"><img src="0b-poe-samples-side-by-side.png" width="1000" alt="PoE samples at 0, 200 and 2,000: purple blobs, then red and blue apart"></a>
+
+This is what those bars look like. At 0, the samples are purple blobs. At 200 and 2,000, the best
+of each number's three models draws a red circle beside a blue square.
+
+**The model can draw both shapes. PoE is the part that fails.** In all 27 models, the one caption
+"a red circle and a blue square" drew a separate red circle and blue square in at least 267 of 300
+samples.
+
+**The single captions still mean one shape.** With up to 600 relabelled pictures, "a red circle" on
+its own drew only red in at least 290 of 300 samples, and "a blue square" on its own only blue in at
+least 294. With all 2,000, these fall to between 223 and 264, because each single caption then
+sometimes draws both shapes by itself.
+
+### Every caption side by side
+
+<a href="3-the-main-result.png"><img src="3-the-main-result.png" width="1000" alt="grid: five rows for five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
+
+This grid is from an earlier run with one model per row. Each row gave a random share of the
+both-shapes pictures the single captions: 0%, 10%, 30%, 60% and 100%, which is about 0, 200, 600,
+1,200 and 2,000 pictures. The four columns ask the same model in four ways. Each row's counts come
+from one model only; the bars above show how much a second or third model can differ.
+
+**A stronger guidance does not rescue the 0% model.** Drawn at guidance strengths 1, 2, 3, 5 and 7,
+it gives at most 1 of 300 separate pairs ([the 0% model across guidance](../caption-model-across-guidance.png)).
+
+### Adding a corrector to the sampler
+
+Model 1 showed that adding the two noise estimates loses the pair at high noise. A **Langevin
+corrector** is the standard remedy (Du et al. 2023). After each normal denoising step, the sampler
+stays at the same noise level and takes a few extra small steps that pull the sample toward
+pictures the PoE estimate rates more likely, with a little fresh noise each time:
+
+$$
+\underbrace{z}_{\text{sample after}}
+\;\leftarrow\;
+\underbrace{z}_{\text{sample before}}
++\;
+\underbrace{\eta\, s(z)}_{\text{move toward higher PoE probability}}
++\;
+\underbrace{\sqrt{2\eta}\;\xi}_{\text{a little fresh noise}},
+\qquad
+s(z) = -\frac{\hat\epsilon_{\text{PoE}}(z)}{\sqrt{1-\bar\alpha_t}},
+\quad
+\eta = 0.05\,(1-\bar\alpha_t)
+$$
+
+Here $s(z)$ is the direction in which PoE's probability rises fastest, read off the same PoE noise
+estimate as before. $\xi$ is fresh Gaussian noise, and $\eta$ is the step size, larger at high
+noise. We tried 5 and 20 such steps at every noise level.
+
+The rule for reading it was written before the run. The corrector helps if the middle count of
+four models rises by at least 30 of 300, while "a red circle" and "a blue square" on their own
+still draw at least 240 of 300 of their own colour. The four models were three trained with all
+2,000 both-shapes pictures under the single captions, and one trained with 200.
+
+<a href="11-the-corrector.png"><img src="11-the-corrector.png" width="1000" alt="rows of PoE samples: 0 and 50 picture models stay purple under the corrector, 200 and 2,000 picture models reach 300 of 300 separate"></a>
+
+Each row is one model, retrained for this test. Each column is one way of sampling it, from the
+same starting noise.
+
+**With the single captions in training, the corrector completes the pair.** The middle count of
+the four models rose from 260.5 of 300 with plain sampling to 300 with 5 corrector steps. With 20
+steps, all four models drew a separate red circle and blue square in 300 of 300 samples. The
+single captions on their own stayed at 271 or more of their own colour. This meets the rule.
+
+**Without them, the corrector does nothing for the pair.** We added this check after seeing the
+result above: three models with 0 relabelled pictures and one with 50, sampled the same way. All
+four stayed at 0 of 300 separate, with 5 and with 20 corrector steps. The corrector tidied their
+samples into a purple hybrid, 299 or 300 of 300. The 50-picture model draws two blobs in two
+places, but both are purple, so the scorer does not count them.
+
+So the two pieces do different jobs. **The single captions make the pair something PoE can find.**
+**The corrector removes the shortfall the plain sampler leaves.** Neither one alone draws the pair
+every time.
+
+The models here were retrained with the same seeds as before. Training on a GPU does not repeat
+exactly, so the plain counts differ from the first trainings (269 against 153 for the 200-picture
+model, for example). Each comparison is between samples from the same retrained model. Counts:
+`../toy-caption-corrector.json` and `../toy-caption-corrector-no-single-captions.json`.
+
+## Model 4: formula experts with a background
 
 <a href="8-composing-with-no-both-shapes-pictures.png"><img src="8-composing-with-no-both-shapes-pictures.png" width="900" alt="grey background: circle and square in new layouts, 202 and 210 of 300; white background: a single black blob, 0 and 9 of 300"></a>
 
-Here there is no both-shapes picture in training at all. The experts are a circle at any of three
-positions, a square at any of three positions, and an empty background, and PoE is circle × square ÷
-background. **On a grey background it draws a circle and a square in layouts no training picture
-holds**, 202 of 300 exactly and 210 of 300 with the step-by-step sampler. On a white background it
-draws one near-black blob (0 and 9 of 300): red and blue are both darker than white, so the formula
-prefers stacking both shapes in the same place and subtracting the background.
+This model has no both-shapes picture anywhere. There are three distributions, written by hand:
+a red circle at one of three positions, a blue square at one of three positions, and the empty
+background. PoE here is circle × square ÷ background:
 
-So the answer at the top holds for the model SDXL resembles, a caption-conditioned model whose
-experts come from captions. It is not a rule for every way of building experts.
+$$
+p(x)\;\propto\;\frac{p_{\text{circle}}(x)\;p_{\text{square}}(x)}{p_{\text{background}}(x)}
+$$
+
+Each expert describes a whole picture, background included. Multiplying the two counts the
+background twice, and dividing by the background expert removes one copy. With Gaussian bumps of
+equal width, the circle-at-$i$, square-at-$j$ pairing lands on the picture
+$c_i + s_j - b$ (circle picture plus square picture minus the empty picture), with weight
+
+$$
+\exp\!\Big(\frac{\langle c_i-b,\;s_j-b\rangle}{\sigma^2}\Big),
+$$
+
+where $\langle\cdot,\cdot\rangle$ multiplies the two pictures' differences from the background
+pixel by pixel and adds them up.
+
+**On a grey background, it draws a circle and a square in layouts no training picture holds.** A
+circle and a square at different positions share no pixel, so that weight is $\exp(0) = 1$ for
+every apart layout, and each is as likely as any other. The exact answer lands on one of the four
+layouts no training picture holds in 202 of 300 samples, and the sampler in 210.
+
+**On a white background, it draws one near-black blob** (0 and 9 of 300). Red and blue are both
+darker than white in every colour channel, so where the two shapes overlap the two differences
+point the same way and the weight is far above 1. The same-position pairing takes nearly all the
+mixture, and $c_i + s_i - b$ is the two shapes stacked and the white subtracted, which is near
+black.
+
+So composing without any both-shapes picture is possible for experts built this way. The answer
+about captions holds for the kind of model SDXL is, where each expert comes from a caption.
 
 ## Back to SDXL
 
 <a href="10-sdxl-inclusive-captions-pilot.png"><img src="10-sdxl-inclusive-captions-pilot.png" width="900" alt="SDXL PoE of a cat and a dog on six seeds: plain SDXL, trained with joint captions only, trained with cat or dog captions on both-animal photos; one animal in every picture"></a>
 
-The toy says to give SDXL's both-animal training photos the single captions too. A pilot does that
-with a LoRA fine-tune on 550 photos (200 of a cat, 200 of a dog, 150 of both). In one training
-(middle row), the both-animal photos are captioned only jointly. In the other (bottom row), each
-time a both-animal photo is used it is captioned "cat" 40% of the time, "dog" 40%, jointly 10% and
-left blank 10%. The plain SDXL row is the starting point.
+The small model says to give SDXL's both-animal photos the single captions too. A pilot does this
+with a LoRA fine-tune of SDXL on 550 photos: 200 of a cat, 200 of a dog, 150 of both.
 
-**On these six seeds, PoE of "a cat" and "a dog" still draws one animal in every picture, in both
-trainings.** What changes is the kind of animal: with joint captions only, several are fused
-cat-dogs; with the single captions added, most are a clean cat or a clean dog. That matches step 2
-above, where giving each expert probability on the other's pictures turns PoE's answer into a
-single shape. The pilot's real test is 128 seeds per training, which has not been run; eight seeds
-cannot carry a finding. The pilot's own record is
-[the inclusive-captions walk](../../../drips/inclusive-captions-pilot/EXECUTE_WALK.md).
+- **Middle row:** the both-animal photos are captioned only "a cat and a dog".
+- **Bottom row:** each time a both-animal photo is used in training, it is captioned "cat" 40% of
+  the time, "dog" 40%, "a cat and a dog" 10%, and left blank 10%.
+- **Top row:** plain SDXL, before any training.
+
+On these six seeds, PoE of "a cat" × "a dog" still draws one animal in every picture, in both
+trainings. What changes is the animal. With joint captions only, several are fused cat-dogs. With
+the single captions added, most are a clean cat or a clean dog. That matches model 1, where an
+expert that likes the other's pictures turns PoE's answer into a single shape.
+
+Six or eight seeds cannot carry a finding. The pilot's planned test is 128 seeds per training,
+which has not been run. Its record is [the inclusive-captions walk](../../../drips/inclusive-captions-pilot/EXECUTE_WALK.md).
 
 ## What this does not show
 
-**Three trainings per number is few.** The trainings at one number can differ by 150 of 300, so
-the median between neighbouring numbers (600 against 1,200) is not ordered reliably; the rise from
-0-50 pictures to 600-2,000 pictures is.
+**Three models per number is few.** Models at the same number can differ by 150 of 300. So the
+order between neighbouring numbers, 600 against 1,200, is not reliable. The rise from 0 to 50
+pictures up to 600 to 2,000 pictures is.
 
-**The count understates two shapes in frame.** Many uncounted PoE samples are a reddish circle
-beside a bluish square, which is two things in frame with their colours mixed.
+**The corrector settings were not tuned.** Only 5 and 20 steps at one step size were tried. A
+weaker corrector might leave a gap, and the 0-picture check covers only those two settings.
 
-**The toy has two shapes, three positions and one picture size.** Nothing here says where SDXL's
-equivalent of the share sits, or how much probability its "a cat" gives to dogs.
+**The count misses some samples with two shapes.** Many uncounted PoE samples are a reddish circle
+beside a bluish square. That is two shapes in frame with their colours mixed.
+
+**The toy has two shapes, three positions and one picture size.** It does not say how many
+both-animal photos SDXL would need, or how much probability SDXL's "a cat" gives to dogs.

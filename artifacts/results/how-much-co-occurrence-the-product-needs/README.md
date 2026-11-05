@@ -54,6 +54,8 @@ about three orders of magnitude in that weight.
 | `toy-caption-dial-ldm-guidance.json` | those counts for every caption at every dial and guidance strength, one training per dial shared across strengths |
 | `toy-caption-threshold.json` | the caption model trained with exactly 0, 1, 5, 20, 50 or 200 both-shapes pictures also given each single caption, three trainings each: PoE's separate-shapes count of 300, both single captions' own-colour counts and the joint caption's count per training, with the rule written before the run. Up to 50 no training draws the pair; at 200 one of three does (153, 1 and 0) |
 | `toy-caption-threshold-600-1200-2000.json` | the same exact-count sweep at 600, 1,200 and 2,000 pictures, three trainings each: separate-pair counts 157, 17 and 134; 183, 29 and 57; 252, 74 and 238 of 300 |
+| `toy-caption-corrector.json` | a Langevin corrector (5 or 20 steps per noise level, step 0.05 of the noise variance) on PoE in four retrained caption models with the single captions (2,000 pictures at three seeds, 200 at one): median separate-pair count 260.5 of 300 plain, 300 with 5 steps, 300 with 20; the rule written before the run is met |
+| `toy-caption-corrector-no-single-captions.json` | the same corrector on three 0-picture models and one 50-picture model, added after the first result: 0 of 300 separate in every case, the samples tidied into purple hybrids |
 | `plain-figures/` | the supervisor write-up (its `README.md`) and its ten simple figures, drawn by `plain_figures.py` from the counts and samples in this folder |
 
 ## The sweep, weight by weight

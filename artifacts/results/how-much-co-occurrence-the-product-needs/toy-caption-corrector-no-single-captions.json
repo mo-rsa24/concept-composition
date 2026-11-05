@@ -1,0 +1,325 @@
+{
+ "what": "Langevin corrector on PoE in the trained caption model, four retrained models",
+ "bar": "- Judged on the main setting (CORR_STEPS 5, CORR_SIZE 0.05, the setting the formula toy used).\n  - Support for \"the sampler limits the count\": the median over the four trainings of the\n    separate-pair count rises by at least 30 of 300 with the corrector, while \"a red circle\" and\n    \"a blue square\" alone, under the corrector, each give at least 240 of 300 of their own colour.\n  - Null: the median moves by less than 30 either way.\n  - A fall of 30 or more is reported as the corrector hurting.\n  - One stronger setting (CORR_STEPS 20, same size) is run and reported beside it, not judged.",
+ "settings": {
+  "plain": [
+   0,
+   0.0
+  ],
+  "main": [
+   5,
+   0.05
+  ],
+  "stronger": [
+   20,
+   0.05
+  ]
+ },
+ "median plain": 0.0,
+ "median main": 0.0,
+ "median stronger": 0.0,
+ "single captions pure under main": true,
+ "verdict": "null",
+ "results": [
+  {
+   "pictures": 0,
+   "seed": 20261022,
+   "vae mse": 0.01006,
+   "plain": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 27,
+     "nothing readable": 273
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "main": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "stronger": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "seconds": 40.0
+  },
+  {
+   "pictures": 0,
+   "seed": 20261023,
+   "vae mse": 0.01017,
+   "plain": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 21,
+     "blue only": 16,
+     "purple or overlaid": 263,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "main": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "stronger": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 299,
+     "nothing readable": 1
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "seconds": 41.5
+  },
+  {
+   "pictures": 0,
+   "seed": 20261024,
+   "vae mse": 0.01012,
+   "plain": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 18,
+     "blue only": 14,
+     "purple or overlaid": 256,
+     "nothing readable": 12
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "main": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "stronger": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "seconds": 40.6
+  },
+  {
+   "pictures": 50,
+   "seed": 20261022,
+   "vae mse": 0.01003,
+   "plain": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "main": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "stronger": {
+    "product": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 300,
+     "nothing readable": 0
+    },
+    "circle": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "square": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    }
+   },
+   "seconds": 40.0
+  }
+ ]
+}
