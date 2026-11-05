@@ -52,6 +52,8 @@ about three orders of magnitude in that weight.
 | `toy-noised-product.json` | those shares by step and the five category counts for both scores at pair weights 0.001, 0.01, 0.1 and 0.3 |
 | `caption-model-across-guidance.png` | the two single captions multiplied in the caption model, dial setting down (0 to 1) and guidance strength across (1, 2, 3, 5, 7), four draws per cell titled with the colour-blob scorer's call, the cell's crisp-pair count out of 300 and the lower of the two single captions' purity counts |
 | `toy-caption-dial-ldm-guidance.json` | those counts for every caption at every dial and guidance strength, one training per dial shared across strengths |
+| `toy-caption-threshold.json` | the caption model trained with exactly 0, 1, 5, 20, 50 or 200 both-shapes pictures also given each single caption, three trainings each: PoE's separate-shapes count of 300, both single captions' own-colour counts and the joint caption's count per training, with the rule written before the run. Up to 50 no training draws the pair; at 200 one of three does (153, 1 and 0) |
+| `plain-figures/` | the supervisor write-up (its `README.md`) and its ten simple figures, drawn by `plain_figures.py` from the counts and samples in this folder |
 
 ## The sweep, weight by weight
 
