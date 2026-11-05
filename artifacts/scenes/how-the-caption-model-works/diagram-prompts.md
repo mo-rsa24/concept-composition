@@ -4,7 +4,7 @@ How model 3 is trained, how it tells its captions apart, how PoE samples from it
 relabelling does, with one worked example per picture. Facts are from
 `artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py`.
 
-8 prompts · 5 rendered · 3 waiting
+8 prompts · 8 rendered · 0 waiting
 
 ## Table of contents
 
@@ -200,7 +200,7 @@ names label numbers, the SDXL panel names words.
 
 Navigation: ⬅️ [Previous](#prompt-4-subject-relabelling-toy-and-sdxl) | 📋 [TOC](#table-of-contents) | [Next](#prompt-6-subject-one-training-step-in-numbers) ➡️
 
-[built] ⏳ not rendered
+[built] 🖼️ rendered 2026-11-05 `diagrams/caption-model-06-how-the-label-table-is-built.png`
 Save as: `diagrams/caption-model-06-how-the-label-table-is-built.png`
 
 Visual thesis: the label table starts as four rows of random numbers and barely changes; the MLP
@@ -228,7 +228,7 @@ caption tags are labels on the rows, not inputs.
 
 Navigation: ⬅️ [Previous](#prompt-5-subject-how-the-label-table-is-built) | 📋 [TOC](#table-of-contents) | [Next](#prompt-7-subject-one-poe-step-in-numbers) ➡️
 
-[built] ⏳ not rendered
+[built] 🖼️ rendered 2026-11-05 `diagrams/caption-model-07-one-training-step-in-numbers.png`
 Save as: `diagrams/caption-model-07-one-training-step-in-numbers.png`
 
 Visual thesis: one training step is arithmetic on short rows of numbers: mix noise into the clean
@@ -255,7 +255,7 @@ the clean latent, not with the noise.
 
 Navigation: ⬅️ [Previous](#prompt-6-subject-one-training-step-in-numbers) | 📋 [TOC](#table-of-contents) | [Next](#subject-capstone-the-caption-model-end-to-end) ➡️
 
-[built] ⏳ not rendered
+[built] 🖼️ rendered 2026-11-05 `diagrams/caption-model-08-one-poe-step-in-numbers.png`
 Save as: `diagrams/caption-model-08-one-poe-step-in-numbers.png`
 
 Visual thesis: at one sampling step PoE asks the same MLP three times and combines the answers with

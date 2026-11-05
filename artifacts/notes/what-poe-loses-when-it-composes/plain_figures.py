@@ -431,7 +431,22 @@ def fig_caption_table():
     print("wrote", OUT / "05d-the-caption-table.png")
 
 
+def fig_latent_midpoint():
+    S = np.load(R / "toy-latent-midpoint.npz")
+    rows = ["same_position", "different_positions"]
+    cols = [("circle", "a red circle"), ("square", "a blue square"),
+            ("pixel_mid", "halfway in pixels"), ("latent_mid", "halfway in the latent, decoded")]
+    def cell(i, j):
+        return [S[f"{rows[i]}_{cols[j][0]}"]], ""
+    grid("05e-why-the-hybrid-is-purple.png",
+         "Halfway between a red circle and a blue square decodes to purple",
+         "Each row: one circle picture and one square picture. Third column: their pixel-by-pixel average. Fourth "
+         "column: the VAE's latents of the two averaged, then decoded back to pixels by the same VAE.",
+         "same position: both halfways are purple; different positions: the latent halfway already turns the circle purple",
+         ["same position", "different positions"], [c[1] for c in cols], cell, n=1, w=13, rowh=1.4, left=0.14)
+
+
 if __name__ == "__main__":
-    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_distribution, fig_caption_table, fig_what_poe_draws,
+    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_distribution, fig_caption_table, fig_latent_midpoint, fig_what_poe_draws,
               fig_all_captions, fig_all_captions_corrector, fig_corrector, fig_factorized, fig_pilot):
         f()
