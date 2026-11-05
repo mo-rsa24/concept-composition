@@ -346,7 +346,30 @@ def fig_dataset():
     print("tiles with both shapes per cell:", {f"{caps[i][0][:14]}|{ks[j]}": int(cells[i, j][1].sum()) for (i, j) in cells})
 
 
+def fig_all_captions_corrector():
+    d = json.load(open(R / "toy-caption-dial-corrector.json"))["results"]
+    S = np.load(R / "toy-caption-dial-corrector-samples.npz")
+    shares = ["0", "0.1", "0.3", "0.6", "1"]
+    pics = {"0": "0", "0.1": "about 200", "0.3": "about 600", "0.6": "about 1,200", "1": "2,000"}
+    cols = [('"a red circle"', "circle", "red only", "only red"),
+            ('"a blue square"', "square", "blue only", "only blue"),
+            ('PoE: "a red circle" × "a blue square"', "poe", "red and blue apart", "separate"),
+            ("PoE + 20 corrector steps per noise level", "poe_corrector20", "red and blue apart", "separate"),
+            ('one prompt: "a red circle and a blue square"', "joint", "red and blue apart", "separate")]
+    def cell(i, j):
+        _, key, cat, word = cols[j]
+        return S[f"{shares[i]}_{key}"], f"{d[shares[i]][key][cat]} of 300 {word}"
+    grid("07-every-caption-side-by-side_b.png",
+         "Model 3, one training run per row: the corrector completes PoE only where pictures were relabelled",
+         "Rows: how many of the 2,000 both-shapes pictures were also given the single captions. Columns: five ways "
+         "of asking the same trained model. These five models were retrained for this figure, so their counts "
+         "differ slightly from figure 07.",
+         "the two PoE columns: with the corrector every relabelled row reaches 300 of 300, and the 0 row stays at 0",
+         [f"{pics[s]} relabelled" for s in shares], [c[0] for c in cols], cell,
+         marks=[(i, j) for i in range(5) for j in (2, 3)], w=20.5, left=0.1)
+
+
 if __name__ == "__main__":
     for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_what_poe_draws,
-              fig_all_captions, fig_corrector, fig_factorized, fig_pilot):
+              fig_all_captions, fig_all_captions_corrector, fig_corrector, fig_factorized, fig_pilot):
         f()

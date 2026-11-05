@@ -243,6 +243,12 @@ SDXL is one network that reads a caption, not two networks, so model 3 is the cl
 
 ### What the model is
 
+<a href="../../../scenes/how-the-caption-model-works/the-caption-model-high-level-design-explainer.svg"><img src="../../../scenes/how-the-caption-model-works/the-caption-model-high-level-design-explainer.svg" width="1000" alt="the caption model in four lanes: training pictures and captions, the VAE, the denoiser with its caption lookup table, and PoE sampling"></a>
+
+The whole model on one page, as [a diagram of the caption model](https://claude.ai/artifact/4AJAhtvrZyut1uvvbKb2nq):
+the training pictures, the VAE, the denoiser and how PoE samples from it. The paragraphs below
+take each part in turn.
+
 **The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers. It can turn those
 128 numbers back into the picture. SDXL's VAE does the same job at a larger size.
 

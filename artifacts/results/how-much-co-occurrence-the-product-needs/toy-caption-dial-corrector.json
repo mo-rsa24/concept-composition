@@ -1,0 +1,195 @@
+{
+ "what": "Figure 07b's data: the five share-of-pictures models of toy_caption_dial_ldm.py (0%, 10%, 30%,\n60%, 100% of both-shapes pictures relabelled at random, seed 20261022), retrained, each drawn five\nways from the same retrained model: \"a red circle\", \"a blue square\", plain PoE, PoE with 20\nLangevin corrector steps per noise level (step 0.05 of the noise variance, as in\ntoy_caption_corrector.py), and the joint caption. 300 samples each, colour-blob scorer.\nThe models are retrained, so counts differ from toy-caption-dial-ldm.json; every column of a row\ncomes from one model.",
+ "results": {
+  "0": {
+   "vae mse": 0.01008,
+   "circle": {
+    "red and blue apart": 0,
+    "red only": 300,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "square": {
+    "red and blue apart": 0,
+    "red only": 0,
+    "blue only": 300,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "poe": {
+    "red and blue apart": 0,
+    "red only": 0,
+    "blue only": 1,
+    "purple or overlaid": 13,
+    "nothing readable": 286
+   },
+   "poe_corrector20": {
+    "red and blue apart": 0,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 300,
+    "nothing readable": 0
+   },
+   "joint": {
+    "red and blue apart": 296,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 4,
+    "nothing readable": 0
+   }
+  },
+  "0.1": {
+   "vae mse": 0.01008,
+   "circle": {
+    "red and blue apart": 0,
+    "red only": 300,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "square": {
+    "red and blue apart": 0,
+    "red only": 0,
+    "blue only": 300,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "poe": {
+    "red and blue apart": 110,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 161,
+    "nothing readable": 29
+   },
+   "poe_corrector20": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "joint": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   }
+  },
+  "0.3": {
+   "vae mse": 0.01008,
+   "circle": {
+    "red and blue apart": 2,
+    "red only": 298,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "square": {
+    "red and blue apart": 7,
+    "red only": 0,
+    "blue only": 292,
+    "purple or overlaid": 1,
+    "nothing readable": 0
+   },
+   "poe": {
+    "red and blue apart": 103,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 197,
+    "nothing readable": 0
+   },
+   "poe_corrector20": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "joint": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   }
+  },
+  "0.6": {
+   "vae mse": 0.01009,
+   "circle": {
+    "red and blue apart": 13,
+    "red only": 287,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "square": {
+    "red and blue apart": 13,
+    "red only": 0,
+    "blue only": 287,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "poe": {
+    "red and blue apart": 51,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 182,
+    "nothing readable": 67
+   },
+   "poe_corrector20": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "joint": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   }
+  },
+  "1": {
+   "vae mse": 0.0103,
+   "circle": {
+    "red and blue apart": 56,
+    "red only": 244,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "square": {
+    "red and blue apart": 61,
+    "red only": 0,
+    "blue only": 239,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "poe": {
+    "red and blue apart": 205,
+    "red only": 1,
+    "blue only": 3,
+    "purple or overlaid": 77,
+    "nothing readable": 14
+   },
+   "poe_corrector20": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   },
+   "joint": {
+    "red and blue apart": 300,
+    "red only": 0,
+    "blue only": 0,
+    "purple or overlaid": 0,
+    "nothing readable": 0
+   }
+  }
+ }
+}
