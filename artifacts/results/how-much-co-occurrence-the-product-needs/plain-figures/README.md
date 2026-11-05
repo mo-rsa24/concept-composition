@@ -249,6 +249,11 @@ The whole model on one page, as [a diagram of the caption model](https://claude.
 the training pictures, the VAE, the denoiser and how PoE samples from it. The paragraphs below
 take each part in turn.
 
+To step through the model one part at a time, open [the interactive tour of the caption model](https://claude.ai/artifact/GUr6NB6iSGAmTzgSbMCaAn).
+Its [caption screen](https://claude.ai/artifact/GUr6NB6iSGAmTzgSbMCaAn#caption-is-a-label) shows the
+caption as a row number in a learned table, beside how SDXL turns the same words into vectors
+with its two CLIP encoders.
+
 **The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers. It can turn those
 128 numbers back into the picture. SDXL's VAE does the same job at a larger size.
 

@@ -1,0 +1,4 @@
+trace 45707 2493824
+vae mse 0.0100 after 1 tries, 113s
+denoiser loss 0.0516, 260s
+wrote /home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/scenes/how-the-caption-model-works/scene_data.json 261s

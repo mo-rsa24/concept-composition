@@ -1,0 +1,442 @@
+{
+ "title": "Model 3, the caption model: high-level design",
+ "page_title": "The Caption Model",
+ "subtitle": "A small caption-conditioned latent diffusion model, read from its code on 2026-11-05.",
+ "lede": "Read it top to bottom. Pictures with caption ids train a VAE that squeezes each picture into 128 numbers, a denoiser learns to clean noisy versions of those 128 numbers given a caption id, and PoE sampling calls that one denoiser three times per step to draw a picture for two captions at once.",
+ "version_line": "Version 1, 2026-11-05: 23 parts, 21 arrows, in four lanes. Read from the model 3 code in artifacts/notes/what-poe-loses-when-it-composes/.",
+ "look": "deep-learning",
+ "box_w": 260,
+ "box_h": 104,
+ "col_w": 370,
+ "row_h": 150,
+ "static": true,
+ "crumb": "The caption model",
+ "how_to_read": "Solid arrows carry data the next part waits on. The dotted two-headed arrow is the Langevin corrector, which only runs when it is switched on. Tapers narrow where the VAE compresses and widen where it expands; grids are tensors, with their real shape written beneath.",
+ "sources_note": "Every box is named by the model 3 code, with its file and line below. Nothing is drawn that the code does not run.",
+ "lanes": [
+  {
+   "label": "1  TRAINING PICTURES AND CAPTIONS",
+   "members": [
+    "circles",
+    "squares",
+    "both",
+    "relabel",
+    "trainset"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "2  VAE: PICTURE TO 128 NUMBERS AND BACK, 45,707 PARAMETERS, NO CAPTIONS",
+   "members": [
+    "pic",
+    "enc",
+    "latent",
+    "dec",
+    "recon"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "3  DENOISER: 2,493,824 PARAMETERS (SDXL'S UNET IS ABOUT 2.6 BILLION)",
+   "members": [
+    "noise",
+    "capid",
+    "lookup",
+    "mlp",
+    "est",
+    "loss"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "4  SAMPLING WITH POE: THE TRAINED DENOISER, 3 CALLS PER STEP",
+   "members": [
+    "start",
+    "calls",
+    "combine",
+    "step",
+    "corr",
+    "dec2",
+    "scorer"
+   ],
+   "pad": 36
+  }
+ ],
+ "groups": [
+  {
+   "label": "REPEATED 200 TIMES, NOISE LEVEL 200 DOWN TO 1",
+   "members": [
+    "calls",
+    "combine",
+    "step"
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "circles",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 red circles",
+   "sub": "caption id 0: \"a red circle\"\nat the left, centre or right",
+   "col": 1,
+   "row": 1.15
+  },
+  {
+   "id": "squares",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 blue squares",
+   "sub": "caption id 1: \"a blue square\"\nat the left, centre or right",
+   "col": 1,
+   "row": 2.0
+  },
+  {
+   "id": "both",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 both shapes",
+   "sub": "caption id 2: \"a red circle and\na blue square\"; circle left and\nsquare right, or the mirror",
+   "col": 0,
+   "row": 0.3
+  },
+  {
+   "id": "relabel",
+   "kind": "op",
+   "label": "Relabel k pictures",
+   "sub": "copy k both-shapes pictures\nonce under id 0, once under id 1\n(k from 0 to 2,000)",
+   "col": 1,
+   "row": 0.3,
+   "h": 165
+  },
+  {
+   "id": "trainset",
+   "kind": "store",
+   "eyebrow": "training set",
+   "label": "6,000 + 2k pictures",
+   "sub": "each 16 x 32 x 3, with a caption id,\nplus pixel noise of sd 0.1",
+   "col": 2,
+   "row": 1.15
+  },
+  {
+   "id": "pic",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Picture: 16 x 32 x 3 = 1,536 numbers",
+   "cells": "8x4",
+   "col": 0,
+   "row": 3.35
+  },
+  {
+   "id": "enc",
+   "kind": "encoder",
+   "label": "VAE encoder",
+   "sub": "3 convolutions, 24,008 parameters",
+   "col": 1,
+   "row": 3.35
+  },
+  {
+   "id": "latent",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Latent: 128 numbers (4 x 4 x 8)",
+   "cells": "8x4",
+   "col": 2,
+   "row": 3.35
+  },
+  {
+   "id": "dec",
+   "kind": "decoder",
+   "label": "VAE decoder",
+   "sub": "21,699 parameters",
+   "col": 3,
+   "row": 3.35
+  },
+  {
+   "id": "recon",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Picture again: 16 x 32 x 3",
+   "cells": "8x4",
+   "col": 4,
+   "row": 3.35
+  },
+  {
+   "id": "noise",
+   "kind": "op",
+   "label": "Add noise at level k",
+   "sub": "k from 1 to 200, cosine schedule;\nk also goes in as 64 sines, cosines",
+   "col": 2,
+   "row": 4.85,
+   "h": 135
+  },
+  {
+   "id": "capid",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Caption id: one of 0, 1, 2, 3",
+   "cells": "4x1",
+   "col": 2,
+   "row": 5.75
+  },
+  {
+   "id": "lookup",
+   "kind": "block",
+   "eyebrow": "lookup table",
+   "label": "Caption vector",
+   "sub": "4 ids x 64 numbers, 256 parameters;\nno CLIP, no text encoder\n(SDXL uses two CLIP text encoders)",
+   "col": 3,
+   "row": 5.75
+  },
+  {
+   "id": "mlp",
+   "kind": "block",
+   "eyebrow": "MLP",
+   "label": "Denoiser",
+   "sub": "256 numbers in, 3 layers of 1,024,\n128 out; 2,493,568 parameters",
+   "col": 3,
+   "row": 4.85
+  },
+  {
+   "id": "est",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Clean-latent estimate: 128 numbers",
+   "cells": "8x4",
+   "col": 4,
+   "row": 4.85
+  },
+  {
+   "id": "loss",
+   "kind": "loss",
+   "label": "Squared error",
+   "sub": "against the clean 128 numbers;\nAdam, 8,000 steps of 256",
+   "col": 5,
+   "row": 4.85
+  },
+  {
+   "id": "start",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Random start: 128 numbers",
+   "cells": "8x4",
+   "col": 0,
+   "row": 7.25
+  },
+  {
+   "id": "calls",
+   "kind": "op",
+   "label": "3 denoiser calls",
+   "sub": "captions: empty, \"a red circle\",\n\"a blue square\"",
+   "col": 1,
+   "row": 7.25,
+   "h": 135
+  },
+  {
+   "id": "combine",
+   "kind": "op",
+   "label": "PoE combine",
+   "sub": "e_empty + 3 [ (e_circle − e_empty)\n+ (e_square − e_empty) ]",
+   "col": 2,
+   "row": 7.25,
+   "h": 135
+  },
+  {
+   "id": "step",
+   "kind": "op",
+   "label": "One reverse step",
+   "sub": "ancestral (DDPM),\nlevel k to level k − 1",
+   "col": 3,
+   "row": 7.25,
+   "h": 135
+  },
+  {
+   "id": "corr",
+   "kind": "op",
+   "eyebrow": "optional",
+   "label": "Langevin corrector",
+   "sub": "5 or 20 extra moves at this level\nalong the same PoE estimate",
+   "col": 3,
+   "row": 8.55,
+   "h": 135
+  },
+  {
+   "id": "dec2",
+   "kind": "decoder",
+   "label": "VAE decoder",
+   "sub": "the same trained decoder",
+   "col": 4,
+   "row": 7.25
+  },
+  {
+   "id": "scorer",
+   "kind": "service",
+   "eyebrow": "colour scorer",
+   "label": "Count the shapes",
+   "sub": "each pixel: background, red,\nblue or purple; red and blue\npatches of 12+ pixels, apart",
+   "col": 5,
+   "row": 7.25
+  }
+ ],
+ "edges": [
+  {
+   "from": "both",
+   "to": "relabel",
+   "style": "sync",
+   "label": "k of them"
+  },
+  {
+   "from": "relabel",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "circles",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "squares",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "trainset",
+   "to": "pic",
+   "style": "sync",
+   "sides": "bt",
+   "bend": 0.88,
+   "label": "each picture"
+  },
+  {
+   "from": "pic",
+   "to": "enc",
+   "style": "sync"
+  },
+  {
+   "from": "enc",
+   "to": "latent",
+   "style": "sync",
+   "label": "squeeze"
+  },
+  {
+   "from": "latent",
+   "to": "dec",
+   "style": "sync"
+  },
+  {
+   "from": "dec",
+   "to": "recon",
+   "style": "sync",
+   "label": "expand"
+  },
+  {
+   "from": "latent",
+   "to": "noise",
+   "style": "sync",
+   "sides": "bt",
+   "label": "clean latent"
+  },
+  {
+   "from": "noise",
+   "to": "mlp",
+   "style": "sync",
+   "label": "noisy latent"
+  },
+  {
+   "from": "capid",
+   "to": "lookup",
+   "style": "sync"
+  },
+  {
+   "from": "lookup",
+   "to": "mlp",
+   "style": "sync",
+   "sides": "tb",
+   "label": "64 numbers"
+  },
+  {
+   "from": "mlp",
+   "to": "est",
+   "style": "sync"
+  },
+  {
+   "from": "est",
+   "to": "loss",
+   "style": "sync"
+  },
+  {
+   "from": "start",
+   "to": "calls",
+   "style": "sync"
+  },
+  {
+   "from": "calls",
+   "to": "combine",
+   "style": "sync",
+   "label": "3 noise\nestimates"
+  },
+  {
+   "from": "combine",
+   "to": "step",
+   "style": "sync"
+  },
+  {
+   "from": "step",
+   "to": "corr",
+   "style": "optional",
+   "both": true,
+   "sides": "bt",
+   "label": "if switched on"
+  },
+  {
+   "from": "step",
+   "to": "dec2",
+   "style": "sync",
+   "label": "after the\nlast step"
+  },
+  {
+   "from": "dec2",
+   "to": "scorer",
+   "style": "sync",
+   "label": "picture"
+  }
+ ],
+ "details": [
+  {
+   "heading": "Where each box comes from",
+   "lines": [
+    "All paths are under <code>artifacts/notes/what-poe-loses-when-it-composes/</code>.",
+    "<strong>The three piles of pictures</strong>: <code>toy_caption_dial_ldm.py:44-48</code> (single circles and squares at x = 6, 16 or 26; the two both-shapes layouts) and <code>toy_sampler_hybrids.py:38-62</code> (16 x 32 pixels, red RGB 0.85, 0.18, 0.15, blue RGB 0.16, 0.35, 0.80). 2,000 of each: <code>IMAGES // 3</code> with <code>IMAGES = 6000</code>, <code>toy_caption_dial_ldm.py:39</code>.",
+    "<strong>Relabel k pictures</strong>: <code>corpus_k</code>, <code>toy_caption_threshold.py:30-42</code>. Exactly k of the 2,000 both-shapes pictures are added twice more, under id 0 and under id 1. The counts run were 0, 1, 5, 20, 50, 200, 600, 1,200 and 2,000, each trained three times (seeds 20261022 to 20261024).",
+    "<strong>Training set</strong>: pixel noise of sd 0.1 (<code>SIGMA0</code>, <code>toy_sampler_hybrids.py:39</code>) added at <code>toy_caption_threshold.py:40</code>.",
+    "<strong>VAE</strong>: <code>class VAE</code>, <code>toy_caption_dial_ldm.py:69-86</code>. Encoder 3 to 32 to 64 to 8 channels, the 8 split into a mean and a log-variance of 4 each on a 4 x 8 grid. Parameters counted from the layer shapes: encoder 24,008, decoder 21,699, total 45,707. Trained by <code>train_vae</code>, lines 102-128: 4,000 steps, Adam at 0.001 with a cosine schedule, restarted on a new seed up to 5 times until reconstruction error is at most 0.012.",
+    "<strong>Add noise at level k</strong> and <strong>Squared error</strong>: <code>train_denoiser</code>, <code>toy_caption_dial_ldm.py:144-157</code>. The loss compares the output with the clean latent, so the denoiser predicts the clean latent, never the noise. 8,000 steps, batch 256, Adam at 0.0002. Cosine schedule over 200 levels: <code>toy_sampler_hybrids.py:40, 66-70</code>.",
+    "<strong>Caption id, empty 10% of the time</strong>: <code>toy_caption_dial_ldm.py:152</code>; id 3 is the empty caption (line 42).",
+    "<strong>Caption vector</strong>: <code>nn.Embedding(4, 64)</code>, <code>toy_caption_dial_ldm.py:92</code>, a learned table with one row of 64 numbers per caption id. No text is read anywhere in the model.",
+    "<strong>Denoiser</strong>: <code>class Denoiser</code>, <code>toy_caption_dial_ldm.py:89-99</code>. Input is 128 noisy latent numbers, 32 sines and 32 cosines of the level k, and the 64-number caption vector, 256 in all; three hidden layers of 1,024 with SiLU; 128 out. 2,493,568 parameters in the layers plus 256 in the caption table = 2,493,824.",
+    "<strong>Sampling with PoE</strong>: <code>draw</code>, <code>toy_caption_dial_ldm.py:161-178</code>. Each step turns each of the three clean-latent estimates into a noise estimate, e = (z − sqrt(abar) x estimate) / sqrt(1 − abar), sums guidance 3 over the two single captions, and takes one ancestral step. Guidance 3 is <code>GUIDE</code>, line 40.",
+    "<strong>Langevin corrector</strong>: <code>toy_caption_corrector.py:37-63</code>. After each step at level j: z moves by eta x s plus noise of size sqrt(2 eta), with s = −e / sqrt(1 − abar_j) and eta = 0.05 (1 − abar_j). 5 moves is the judged setting, 20 the stronger one.",
+    "<strong>Count the shapes</strong>: <code>toy_blob_scorer.py:1-73</code>. A sample is a separate red circle and blue square when it has at least 12 red and 12 blue pixels, centroids at least 6 pixels apart along x, and fewer than 12 purple pixels.",
+    "<strong>SDXL comparison</strong>: SDXL's UNet has about 2.6 billion parameters and reads its prompt through two CLIP text encoders (arXiv 2307.01952, section 2.1). This model's denoiser is about 1,000 times smaller and reads a caption as a row of a 4-row table."
+   ]
+  },
+  {
+   "heading": "How to read the lines",
+   "lines": [
+    "Solid: data the next part waits on. Dotted with two heads under the reverse step: the optional Langevin corrector, which takes the latent and hands it back. The denoiser in lane 4 is the one trained in lane 3, called three times per step.",
+    "Lanes 1 to 3 are training; lane 4 is drawing a new picture once training is done. One full training of the VAE and the denoiser takes about 25 seconds on a laptop GPU."
+   ]
+  },
+  {
+   "heading": "What is not drawn",
+   "lines": [
+    "The one-caption sampler (guidance 3 on a single caption, e = e_empty + 3 (e_caption − e_empty)) is the same loop with two denoiser calls; it is described here, not drawn.",
+    "The template-library scorer in <code>toy_sampler_hybrids.py</code> is computed by <code>draw</code> but the write-up's counts use the colour scorer, so only the colour scorer is drawn.",
+    "The earlier relabelling by a random share (<code>corpus</code>, the dial 0 to 1) is replaced in the write-up by exact counts k, so only the exact-count relabelling is drawn.",
+    "The VAE's KL term (weight 0.0001) and the log-variance clamp are inside the VAE box and not drawn as parts.",
+    "No pictures sit behind the boxes in this version; the write-up's sample grids are linked from its own folder."
+   ]
+  }
+ ]
+}
