@@ -277,6 +277,45 @@ numbers each, one per caption. The table is trained together with the rest of th
 instead turns the words of a prompt into vectors with two CLIP text encoders. So "relabelling"
 below changes which label a training picture is filed under; nothing reads the words.
 
+**How the table is built, and what it is for.** The table starts as four rows of 64 random
+numbers (PyTorch's `nn.Embedding(4, 64)`, filled from a standard normal distribution). Its only
+job is to hand the MLP four different vectors, one per caption, so the MLP has something to tell
+them apart by. Four random rows of 64 numbers point in nearly unrelated directions (their cosine
+similarity is 0.05 to 0.21 in the model below), so they are easy to tell apart. Training could
+reshape the rows, but in practice it barely does: across 8,000 steps each number moves by 0.018 on
+average, against a typical size of 0.77. What training changes is the MLP: it learns that row 0
+arriving at its input goes with circle pictures, row 1 with squares, row 2 with both.
+
+<a href="05d-the-caption-table.png"><img src="05d-the-caption-table.png" width="1000" alt="the 4 by 64 caption table before and after training looks the same; the same noisy latent with rows 0 to 3 gives a circle, a square, both, and both"></a>
+
+The bottom row shows what that learning does. One noisy latent (a both-shapes picture at noise
+level 150 of 200) goes through the trained MLP four times, changing only the row. With row 0 the
+MLP's guess of the clean picture is a red circle; with row 1 a blue square; with row 2 both
+shapes; with the empty row it keeps both shapes, because with no caption the guess follows
+whatever the noisy input already holds. Numbers: `../toy-caption-table-example.json`.
+
+**One training step, in numbers** (the first four of each 128 or 64 numbers, from the same model):
+
+| Step | Values |
+|---|---|
+| clean latent of a red circle on the left, label 0 | −1.128, −1.288, −1.364, −1.296, … |
+| random noise | 0.310, 1.216, 0.774, 1.670, … |
+| noisy latent at noise level 120 of 200: 0.58 × clean + 0.81 × noise | −0.407, 0.236, −0.168, 0.600, … |
+| table row 0, attached to the input (128 + 64 + 64 = 256 numbers) | −1.375, 1.091, 0.272, 0.603, … |
+| the MLP's guess of the clean latent | −1.024, −1.344, −1.356, −1.301, … |
+| squared error between guess and clean latent, which training reduces | 0.005 |
+
+**One PoE step, in numbers** (noise level 150 of 200, first four of 128):
+
+| The MLP asked with | Noise estimate |
+|---|---|
+| the empty row | 1.197, −0.616, 1.522, −1.173, … |
+| row 0, "a red circle" | 1.196, −0.627, 1.511, −1.171, … |
+| row 1, "a blue square" | 1.261, −0.667, 1.399, −1.204, … |
+| PoE: empty + 3 × [(row 0 − empty) + (row 1 − empty)] | 1.385, −0.800, 1.123, −1.261, … |
+
+The first PoE number is 1.197 + 3 × ((1.196 − 1.197) + (1.261 − 1.197)) = 1.385.
+
 Its output is its estimate of the clean 128 numbers, which gives the noise estimate.
 
 **Making a picture** starts from pure noise in the 128 numbers. The denoiser removes noise step by

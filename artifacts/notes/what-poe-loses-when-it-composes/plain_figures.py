@@ -403,7 +403,35 @@ def fig_distribution():
          [b[0] for b in banks], ["picture 1", "picture 2", "picture 3"], cell, n=6, w=16, rowh=1.1, left=0.12)
 
 
+def fig_caption_table():
+    d = json.load(open(R / "toy-caption-table-example.json")); S = np.load(R / "toy-caption-table-example.npz")
+    fig = plt.figure(figsize=(17, 7.6))
+    gs = fig.add_gridspec(2, 5, height_ratios=[1.15, 1], hspace=0.55, wspace=0.12, top=0.83, bottom=0.1, left=0.2, right=0.98)
+    names = ['0: "a red circle"', '1: "a blue square"', '2: "a red circle and a blue square"', "3: empty"]
+    vmax = 3
+    for j, (key, title) in enumerate((("table_before", "Before training (random start)"), ("table_after", "After training"))):
+        ax = fig.add_subplot(gs[0, (0 if j == 0 else 3):(2 if j == 0 else 5)])
+        ax.imshow(S[key], cmap="RdBu_r", vmin=-vmax, vmax=vmax, aspect="auto", interpolation="nearest")
+        ax.set_yticks(range(4), names if j == 0 else [""] * 4, fontsize=10)
+        ax.set_xticks([0, 63], ["1", "64"]); ax.set_xlabel("the row's 64 numbers")
+        ax.set_title(title, fontsize=12)
+    axm = fig.add_subplot(gs[0, 2]); axm.axis("off")
+    axm.text(0.5, 0.5, "8,000 training steps\n\neach number moves\n0.018 on average\n(values average 0.77)", ha="center", va="center", fontsize=11, color=MUTE)
+    tiles = [("noisy input", "the same noisy input\n(noise level 150 of 200)"), ("row_0", "guess with row 0"), ("row_1", "guess with row 1"),
+             ("row_2", "guess with row 2"), ("row_3", "guess with row 3 (empty)")]
+    for j, (key, title) in enumerate(tiles):
+        ax = fig.add_subplot(gs[1, j]); strip(ax, [S[key.replace(" ", "_")]], slots=1); ax.set_title(title, fontsize=10.5)
+    frame(fig, "The caption table: four random rows of 64 numbers, and the MLP learns what each means",
+          "Top: the 4 x 64 table of one trained model (0 relabelled, seed 20261022), colour = value. Bottom: one noisy "
+          "latent passed through the trained MLP four times, changing only the row; each guess of the clean picture "
+          "decoded by the VAE.",
+          "the two tables look the same, yet the four guesses differ: the MLP, not the table, learned the meaning",
+          7.6)
+    fig.savefig(OUT / "05d-the-caption-table.png", dpi=200, facecolor="white"); plt.close(fig)
+    print("wrote", OUT / "05d-the-caption-table.png")
+
+
 if __name__ == "__main__":
-    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_distribution, fig_what_poe_draws,
+    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_distribution, fig_caption_table, fig_what_poe_draws,
               fig_all_captions, fig_all_captions_corrector, fig_corrector, fig_factorized, fig_pilot):
         f()
