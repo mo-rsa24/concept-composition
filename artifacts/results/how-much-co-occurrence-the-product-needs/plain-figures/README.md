@@ -313,8 +313,15 @@ in model 1.
 
 **Why 2,000 per caption.** The number has no special meaning. The three captions get equal
 pools so that nothing differs between them except the relabelling, and 2,000 copies are enough for
-the denoiser to learn each pool's pictures and its noise. A single clean copy per position would
-not work: the model would memorise the exact picture instead of learning a spread around it.
+the denoiser to learn each pool's pictures and its noise. What matters for the result is each
+picture's share of a caption's pool, not the number of copies: 200 both-shapes copies among 2,200
+under "a red circle" carry the same 9% weight as one both-shapes picture shown once for every ten
+draws.
+
+**What the pixel noise is for.** It gives each caption's pictures a small spread around each clean
+picture, of the same width (0.1) as the Gaussian bumps in model 1, so the trained model aims at the
+same distribution as the formula model. Without it the target would be the exact clean pictures
+alone. Whether the result changes without the noise has not been tested.
 
 **The captions.** Before any relabelling, the 6,000 training pictures are:
 
