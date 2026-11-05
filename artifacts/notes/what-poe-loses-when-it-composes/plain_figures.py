@@ -206,7 +206,7 @@ def fig_pilot():
 def fig_threshold():
     p = R / "toy-caption-threshold.json"
     if not p.exists(): return
-    d = json.load(open(p))["results"]
+    d = _threshold_rows()
     ks = [int(k) for k in d]
     fig, ax = plt.subplots(figsize=(7, 4))
     xs = np.arange(len(ks))
@@ -217,11 +217,70 @@ def fig_threshold():
     ax.set_xticks(xs, [str(k) for k in ks]); ax.set_ylim(-10, 330)
     ax.set_xlabel("number of both-shapes pictures also given each single caption (of 2,000)")
     ax.set_ylabel("PoE samples with a separate red circle\nand blue square (of 300)")
-    ax.set_title("Each dot is one training, the line their median: up to 50 pictures never draws the pair,\nat 200 one training in three does", fontsize=11.5)
+    ax.set_title("Each dot is one training, the line their median", fontsize=11.5)
     save(fig, "9-how-many-pictures-it-takes.png")
 
 
+def _threshold_rows():
+    rows = {}
+    for f in ("toy-caption-threshold.json", "toy-caption-threshold-600-1200-2000.json"):
+        if (R / f).exists():
+            rows.update(json.load(open(R / f))["results"])
+    return dict(sorted(rows.items(), key=lambda kv: int(kv[0])))
+
+
+def fig_what_poe_draws():
+    rows = _threshold_rows()
+    if not rows: return
+    cats = [("red and blue apart", "separate red circle and blue square", "#2f6fbf"),
+            ("purple or overlaid", "purple hybrid", "#8e4fa8"),
+            ("single", "one shape only", "#bdbdbd"),
+            ("nothing readable", "faint smear", "#ece6f0")]
+    fig, ax = plt.subplots(figsize=(12, 4.6))
+    x, ticks, labels = 0, [], []
+    for k, trainings in rows.items():
+        xs = []
+        for r in trainings:
+            c = dict(r["counts"]["product"]); c["single"] = c["red only"] + c["blue only"]
+            bottom = 0
+            for key, name, col in cats:
+                ax.bar(x, c[key], 0.8, bottom=bottom, color=col, edgecolor="white", lw=0.5,
+                       label=name if x == 0 else None)
+                bottom += c[key]
+            xs.append(x); x += 1
+        ticks.append(np.mean(xs)); labels.append(k); x += 1.2
+    ax.set_xticks(ticks, labels); ax.set_ylim(0, 300); ax.set_yticks([0, 100, 200, 300])
+    ax.set_xlabel("number of the 2,000 both-shapes training pictures also captioned \"a red circle\" and \"a blue square\"\n(three trainings at each number, one bar each)")
+    ax.set_ylabel("what PoE draws\n(300 samples per bar)")
+    ax.legend(frameon=False, ncol=4, loc="upper center", bbox_to_anchor=(0.5, 1.13), fontsize=10)
+    ax.set_title("Without the single captions PoE draws a purple hybrid; with enough of them it starts drawing both shapes",
+                 fontsize=12.5, pad=34)
+    save(fig, "0-what-poe-draws-as-the-captions-change.png")
+
+
+def fig_samples_side_by_side():
+    npz = {}
+    for f in ("toy-caption-threshold-samples.npz", "toy-caption-threshold-600-1200-2000-samples.npz"):
+        if (R / f).exists():
+            npz.update(dict(np.load(R / f)))
+    rows = _threshold_rows()
+    picks = [("0", 20261023), ("200", 20261023), ("2000", None)]
+    if "2000" not in rows: return
+    best = max(rows["2000"], key=lambda r: r["apart"])["seed"]
+    picks[2] = ("2000", best)
+    fig, axs = plt.subplots(1, 3, figsize=(15, 1.9))
+    for ax, (k, sd) in zip(axs, picks):
+        strip(ax, npz[f"{k}_{sd}_product"][:4])
+        r = next(r for r in rows[k] if r["seed"] == sd)
+        best = "" if k == "0" else ", the best of its three trainings"
+        ax.set_title(f"{int(k):,} pictures{best}", fontsize=11)
+        ax.set_xlabel(f"{r['apart']} of 300 separate, {r['counts']['product']['purple or overlaid']} of 300 purple",
+                      fontsize=10.5)
+    fig.suptitle('PoE "a red circle" × "a blue square": first four samples, by how many both-shapes pictures\nalso carry the single captions', fontsize=12.5, y=1.1)
+    save(fig, "0b-poe-samples-side-by-side.png")
+
+
 if __name__ == "__main__":
-    for f in (fig_problem, fig_training, fig_main, fig_bars, fig_exact, fig_leak, fig_sampler,
-              fig_factorized, fig_pilot, fig_threshold):
+    for f in (fig_problem, fig_training, fig_main, fig_exact, fig_leak, fig_sampler,
+              fig_factorized, fig_pilot, fig_what_poe_draws, fig_samples_side_by_side):
         f()

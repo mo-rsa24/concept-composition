@@ -5,24 +5,50 @@ back up again. Every figure in this folder is drawn by
 `artifacts/notes/what-poe-loses-when-it-composes/plain_figures.py` from the saved samples and counts
 in the folder above, and the fuller record of each result is that folder's [results card](../README.md).
 
-## The finding
+## The question
 
-We trained a text-conditioned latent diffusion model, built like SDXL, on pictures of red circles,
-blue squares and pictures holding both, then combined "a red circle" and "a blue square" by PoE.
+PoE on SDXL fails: asked for "a cat" × "a dog", it draws one fused animal. Is part of the reason
+how the training pictures that show both things are captioned? A photo of a cat and a dog is
+usually captioned "a cat and a dog", almost never just "a cat" or just "a dog". So the "a cat"
+expert may never have learned that a picture holding a dog can still be "a cat".
 
-**When the both-shapes training pictures carry only the joint caption, PoE never draws the two
-shapes apart.** Across 4 trainings it gave 0 of 300 samples with a separate red circle and blue
-square, while the same models given the joint caption "a red circle and a blue square" drew both
-shapes in 299 or 300 of 300.
+## The answer in a small model
 
-**Giving some both-shapes pictures the single captions as well makes it possible, but not
-reliable.** With 1, 5, 20 or 50 such pictures (out of 2,000), all 12 trainings stayed at 0 to 3
-of 300. With about 200, five trainings gave 118, 149, 153, 1 and 0 of 300: three drew the pair
-and two did not. Single trainings at higher shares (600, 1,200 and 2,000 pictures) gave 114, 55 and
-174 of 300, each from one training only.
+**Yes, in a small model built like SDXL.** When the training pictures holding both shapes carry
+only the joint caption, PoE of "a red circle" × "a blue square" draws a purple hybrid, and it
+never draws the two shapes separately. When enough of those pictures are also captioned with each
+single name, PoE starts drawing a separate red circle and blue square, in up to 252 of 300 samples.
+It does not do so on every training, and never in all 300 samples.
 
-So the toy shows that the single captions on both-shapes pictures are necessary for PoE to draw
-both shapes in this model, and that even 10% of them is not sufficient on every training.
+<a href="0-what-poe-draws-as-the-captions-change.png"><img src="0-what-poe-draws-as-the-captions-change.png" width="1000" alt="stacked bars, three trainings per number of relabelled pictures: purple hybrids at 0 to 50, blue separate-shape segments appearing from 200 and largest at 2,000"></a>
+
+Each bar is one trained model and its 300 PoE samples, split by what each sample shows. The x-axis
+is how many of the 2,000 both-shapes training pictures were also captioned "a red circle" and
+"a blue square". Each number was trained three times with different random seeds, 27 trainings in
+all.
+
+**From 0 to 50 pictures, PoE draws no separate pair.** In all 15 trainings, at most 3 of 300
+samples are a separate red circle and blue square. Most samples are a purple hybrid, the two shapes
+merged into one blob; the rest are a single shape, and one training draws a faint smear instead.
+
+**From 200 pictures up, a separate pair appears.** The median count over three trainings rises
+from 1 of 300 at 200 pictures to 134 at 600, 57 at 1,200 and 238 at 2,000. The trainings at each
+number disagree a lot (153, 1 and 0 at 200; 157, 17 and 134 at 600; 183, 29 and 57 at 1,200;
+252, 74 and 238 at 2,000), so the rise is clear across the whole range but not between neighbouring
+numbers.
+
+<a href="0b-poe-samples-side-by-side.png"><img src="0b-poe-samples-side-by-side.png" width="1000" alt="PoE samples at 0, 200 and 2,000 relabelled pictures: purple blobs, then red and blue apart"></a>
+
+What those bars look like. At 0 pictures, the samples are purple blobs. At 200 and 2,000 (the
+best of each number's three trainings), they are a red circle beside a blue square.
+
+**The model can draw the pair; PoE is the part that fails.** In every one of the 27 trainings, the
+joint caption "a red circle and a blue square" drew both shapes in at least 267 of 300 samples.
+
+**The single captions still mean one shape.** Up to 600 pictures, "a red circle" alone drew only
+red in at least 290 of 300 samples, and "a blue square" alone only blue in at least 294. At 2,000
+these slip to between 223 and 264, because with every both-shapes picture under the single
+captions, each single caption sometimes draws the pair itself.
 
 ## The problem we started from
 
@@ -77,62 +103,32 @@ both-shapes pictures is added a second time under "a red circle" and a third tim
 square" (outlined in green). We trained five models, at shares of 0%, 10%, 30%, 60% and 100%. At
 10% that is about 200 extra pictures under each single caption.
 
-## The main result
+## Every caption, one training per share
 
-<a href="3-the-main-result.png"><img src="3-the-main-result.png" width="1000" alt="grid: five rows for the five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
+<a href="3-the-main-result.png"><img src="3-the-main-result.png" width="1000" alt="grid: five rows for five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
 
-Each row is one trained model, each column one way of asking it, and each cell shows four samples
-with the count out of 300 under them.
+One trained model per row, from an earlier run that relabelled a random share of the both-shapes
+pictures (0%, 10%, 30%, 60%, 100%: about 0, 200, 600, 1,200 and 2,000 pictures). Each column is one
+way of asking the same model. This shows all four captions side by side; the counts in each row are
+from one training, and the bars above show how much a second or third training can differ.
 
-**At 0%, PoE fails** (third column, top row). 0 of 300 samples are a separate circle and square;
-the samples are faint purple smears spread over the positions. That is the same fused-animal
-failure as SDXL's, in shapes. The model is not broken: the same model, asked with the joint caption
-(fourth column), draws both shapes 299 of 300 times.
+**Guidance strength does not rescue 0 pictures.** The 0% model drawn at guidance strengths 1, 2,
+3, 5 and 7 gives at most 1 of 300 separate pairs. Figure: [the caption model across guidance](../caption-model-across-guidance.png).
 
-**At 10% and above, these single trainings drew both shapes part of the time**: 118, 114, 55
-and 174 of 300. Most of the remaining samples are two shapes whose colours have drifted toward
-purple, which the scorer does not count. Each row here is one training, and the next section shows
-that a 10% training does not always come out this way.
+## Why not every sample
 
-**The single captions still mean one shape** up to 60%: "a red circle" alone gives only red in at
-least 285 of 300, and "a blue square" only blue in at least 295. At 100% they slip to 250 and 234,
-because the square caption itself starts drawing the pair.
+Even the best training leaves 48 of 300 samples as something other than a separate pair, and the
+others leave far more. Du et al. (2023) point to one reason: PoE samplers add the two experts' noise
+estimates at every step, and at high noise that sum is not the noise estimate of the product the
+experts define. Step 3 below shows this directly on experts written as formulas, where the correct
+estimate can be computed: adding the estimates gave 15 of 300 pairs, and the correct estimate gave
+300 of 300 with the same sampler.
 
-<table><tr>
-<td><a href="4-the-count-by-share.png"><img src="4-the-count-by-share.png" width="440" alt="bars: PoE count of separate shapes against the share, next to the joint caption's count"></a></td>
-<td>
-
-**The count does not climb with the share.** Grey bars are the joint caption, near 300 in every
-model. Blue bars are PoE: zero at 0%, then between 55 and 174 with no upward trend. Each bar is one
-training, and the next section shows how much one training can differ from another.
-
-</td></tr></table>
-
-## How many relabelled pictures it takes
-
-<table><tr>
-<td><a href="9-how-many-pictures-it-takes.png"><img src="9-how-many-pictures-it-takes.png" width="460" alt="dots at zero for 0, 1, 5, 20 and 50 pictures; at 200 one dot at 153 and two near zero"></a></td>
-<td>
-
-The same model, trained with an exact number of both-shapes pictures also given each single
-caption: 0, 1, 5, 20, 50 or 200 out of 2,000. Each number was trained three times with different
-random seeds, 18 trainings in all, each scored on 300 PoE samples.
-
-**Up to 50 pictures, no training draws the pair** (0 to 3 of 300 in all 15). **At 200, one training
-of three does** (153 of 300), and the other two give 1 and 0. In every training the single captions
-stayed pure (300 of 300 of their own colour) and the joint caption drew both shapes in at least 267
-of 300.
-
-The rule for reading this was written before the run: a training draws the pair at 30 or more of
-300 with both single captions at 240 or more, and the threshold is the smallest number at which all
-three trainings do. No number met it. "One relabelled picture is enough" is contradicted: all three
-trainings at 1 gave 0. Counts: `../toy-caption-threshold.json`; script:
-`artifacts/notes/what-poe-loses-when-it-composes/toy_caption_threshold.py`.
-
-</td></tr></table>
-
-**Guidance strength does not rescue 0%.** The same 0% model drawn at guidance strengths 1, 2, 3, 5
-and 7 gives at most 1 of 300. Figure: [caption model across guidance](../caption-model-across-guidance.png).
+In the trained model the correct estimate cannot be computed, so this is a likely reason, not a
+measured one. The test Du et al. propose is a corrector: extra Langevin steps at each noise level
+that pull the sample toward the product before moving on. On the formula experts a Langevin
+corrector raised the pair count from 10 to 30 of 300 at one setting. Whether it helps the trained
+model has not been run.
 
 ## How we got to that model
 
@@ -191,7 +187,7 @@ reads captions, not two networks, which is why step 5 is the model the finding r
 
 ### 5. One caption-conditioned latent diffusion model
 
-The finding at the top.
+The answer at the top.
 
 ### 6. A different kind of expert: circle × square ÷ empty background
 
@@ -204,7 +200,7 @@ holds**, 202 of 300 exactly and 210 of 300 with the step-by-step sampler. On a w
 draws one near-black blob (0 and 9 of 300): red and blue are both darker than white, so the formula
 prefers stacking both shapes in the same place and subtracting the background.
 
-So the finding at the top holds for the model SDXL resembles, a caption-conditioned model whose
+So the answer at the top holds for the model SDXL resembles, a caption-conditioned model whose
 experts come from captions. It is not a rule for every way of building experts.
 
 ## Back to SDXL
@@ -227,9 +223,9 @@ cannot carry a finding. The pilot's own record is
 
 ## What this does not show
 
-**The 10% to 100% shares were trained once each.** At 200 pictures, three trainings gave 153, 1
-and 0, so a single training at those shares can land anywhere in that range. Three trainings per
-share would settle whether higher shares are reliable.
+**Three trainings per number is few.** The trainings at one number can differ by 150 of 300, so
+the median between neighbouring numbers (600 against 1,200) is not ordered reliably; the rise from
+0-50 pictures to 600-2,000 pictures is.
 
 **The count understates two shapes in frame.** Many uncounted PoE samples are a reddish circle
 beside a bluish square, which is two things in frame with their colours mixed.

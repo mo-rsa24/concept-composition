@@ -21,6 +21,7 @@ import numpy as np, torch
 import toy_caption_dial_ldm as m
 
 COUNTS = [0, 1, 5, 20, 50, 200]
+TAG = ""
 SEEDS = [20261022, 20261023, 20261024]
 
 
@@ -70,18 +71,21 @@ def main():
                   f"| vae {rec:.4f} | {row['seconds']}s", flush=True)
     meets = [k for k in COUNTS if all(r["draws the pair"] for r in res[str(k)])]
     thr = meets[0] if meets else None
-    one = res["1"]
-    one_verdict = ("supported" if all(r["draws the pair"] for r in one) else
+    one = res.get("1", [])
+    one_verdict = ("not run" if not one else "supported" if all(r["draws the pair"] for r in one) else
                    "contradicted" if all(r["apart"] < 30 for r in one) else "mixed")
     print("THRESHOLD:", thr, "| one relabelled picture is enough:", one_verdict, flush=True)
-    np.savez_compressed(m.OUT / "toy-caption-threshold-samples.npz", **sheets)
+    np.savez_compressed(m.OUT / f"toy-caption-threshold{TAG}-samples.npz", **sheets)
     json.dump({"what": "exactly k both-shapes pictures also captioned with each single shape; three "
                        "trainings per k; PoE at guidance 3; colour-blob scorer; 300 samples each",
                "bar": __doc__.split("Written before the first run:")[1].strip(),
                "threshold": thr, "one picture is enough": one_verdict, "results": res},
-              open(m.OUT / "toy-caption-threshold.json", "w"), indent=1)
-    print("wrote", m.OUT / "toy-caption-threshold.json")
+              open(m.OUT / f"toy-caption-threshold{TAG}.json", "w"), indent=1)
+    print("wrote", m.OUT / f"toy-caption-threshold{TAG}.json")
 
 
 if __name__ == "__main__":
+    if "--counts" in sys.argv:          # extend the sweep; written to its own file
+        COUNTS = [int(v) for v in sys.argv[sys.argv.index("--counts") + 1].split(",")]
+        TAG = "-" + "-".join(map(str, COUNTS))
     main()
