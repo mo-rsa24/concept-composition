@@ -6,7 +6,7 @@ from saved samples and counts. The fuller record of each result is the
 
 ## The question
 
-<a href="1-the-problem-on-sdxl.png"><img src="1-the-problem-on-sdxl.png" width="900" alt="SDXL: four one-prompt renders of a cat and a dog above four PoE renders of a single fused cat-dog on the same seed numbers"></a>
+<a href="01-the-problem-on-sdxl.png"><img src="01-the-problem-on-sdxl.png" width="900" alt="SDXL: four one-prompt renders of a cat and a dog above four PoE renders of a single fused cat-dog on the same seed numbers"></a>
 
 SDXL can be asked for a picture in two ways.
 
@@ -86,8 +86,8 @@ prompt, and the two pushes are added. The 3 is the classifier-free guidance stre
 | Model | What it is | What PoE multiplies | What it is for |
 |---|---|---|---|
 | 1. Formula experts | two probability distributions written by hand, no training and no captions | a distribution over red-circle pictures × a distribution over blue-square pictures | the exact PoE answer can be computed, so we can see what PoE wants apart from how a sampler finds it |
-| 2. Two trained networks | one small denoiser trained only on circle pictures, one only on square pictures | the circle network × the square network | the first step from formulas to learned experts |
-| 3. One caption model | a VAE plus one denoiser that reads a caption, trained on circles, squares and both, the way SDXL is built | "a red circle" × "a blue square" inside the same network | the model the main result rests on |
+| 2. Two trained networks | two denoisers of 5.3 million parameters each, working on the pixels directly; one trained only on circle pictures, one only on square pictures | the circle network × the square network | the first step from formulas to learned experts |
+| 3. One caption model | a VAE (45,707 parameters) plus one denoiser that reads a caption (2.49 million parameters), trained on circles, squares and both, the way SDXL is built | "a red circle" × "a blue square" inside the same network | the model the main result rests on |
 | 4. Formula experts with a background | circle, square and empty-background distributions, written by hand | circle × square ÷ background | whether PoE can compose with no both-shapes picture at all |
 
 All four work on the same pictures: 16 pixels high, 32 wide, in colour, on a white background
@@ -96,6 +96,10 @@ The **both-shapes picture** has a red circle on the left and a blue square on th
 
 Every count below is out of **300 samples**, which means 300 pictures drawn from one model with
 one setting.
+
+**A training run** is one model trained from scratch. Runs 1, 2 and 3 use the same training
+pictures and differ only in their random seed, which sets the starting weights and the order the
+pictures are seen in. Comparing runs shows how much a result depends on chance in training.
 
 ## Model 1: experts written as formulas
 
@@ -164,43 +168,37 @@ probability. Its bump paired with itself has $a = b = m$, so it pays no penalty 
 weight $w \times w$. Every other pairing carries the $\exp(-2610)$ penalty. The product puts
 nearly all its probability on the both-shapes picture.
 
-<table><tr>
-<td><a href="5-formula-experts-answer-against-sampler.png"><img src="5-formula-experts-answer-against-sampler.png" width="440" alt="exact answer at 300 of 300 from 0.1% upward; sampler near 0 until 10% and 300 only at 90%"></a></td>
-<td>
+<a href="02-formula-experts-what-poe-wants.png"><img src="02-formula-experts-what-poe-wants.png" width="1000" alt="six rows of weights on the both-shapes picture; exact answer is the pair from 0.1% up, the sampler only at 30% partly and 90% fully"></a>
 
-The green line is the exact answer. Once each expert gives the both-shapes picture **0.1%** of its
-probability, 300 of 300 exact samples are the both-shapes picture.
+Each row gives both experts a different share on the both-shapes picture. The left column is the
+exact PoE answer from the formula; the right is a diffusion sampler aiming at the same PoE.
 
-The blue line is a diffusion sampler aiming at the same product step by step. It finds the
-both-shapes picture in 10 of 300 samples at a weight of 10%, 122 at 30%, and 300 only at 90%.
+**With 0%, both columns are a purple overlay.** No picture is liked by both experts.
+
+**From 0.1% up, the exact answer is the both-shapes picture in 300 of 300 samples.** The sampler
+draws it 0 times at 0.1% and 1%, 10 times at 10%, 122 times at 30%, and 300 times only at 90%.
 
 So PoE itself needs very little shared probability. The sampler needs a lot.
 
-</td></tr></table>
-
 ### When each expert also likes the other shape a little
 
-<table><tr>
-<td><a href="6-experts-that-also-score-the-other-shape.png"><img src="6-experts-that-also-score-the-other-shape.png" width="440" alt="exact count falling from 300 to 20 as each expert gives more probability to the other expert's single shapes"></a></td>
-<td>
+<a href="03-formula-experts-that-like-the-other-shape.png"><img src="03-formula-experts-that-like-the-other-shape.png" width="760" alt="exact answer: the pair falls from 300 to 20 of 300 as each expert gives more to the other's single shapes"></a>
 
 A real "a cat" expert gives some probability to pictures of dogs. Here we copy that. Each expert
-keeps 10% on the both-shapes picture, and also gives a small amount to each of the other expert's
-single-shape pictures.
+keeps 10% on the both-shapes picture, and each row gives a little more to each of the other
+expert's single-shape pictures.
 
-Now a lone square is liked by both experts too, and it competes with the both-shapes picture.
-
-At 1% on each of the other shapes, the exact answer is the both-shapes picture in 113 of 300
-samples. At 10%, in 20. The rest are one shape on its own.
-
-</td></tr></table>
+Now a lone square is liked by both experts too, and it competes with the both-shapes picture. At
+0.3% on each of the other shapes, the exact answer is the pair in 201 of 300 samples; at 1%, in
+113; at 10%, in 20. The rest are one shape on its own.
 
 ### Where the sampler loses the pair
 
-<a href="7-where-the-sampler-loses-the-pair.png"><img src="7-where-the-sampler-loses-the-pair.png" width="900" alt="left: summed estimates give mostly single purple blobs, 15 of 300; right: the correct estimate gives the both-shapes picture, 300 of 300"></a>
+<a href="04-where-the-sampler-loses-the-pair.png"><img src="04-where-the-sampler-loses-the-pair.png" width="900" alt="left: summed estimates give mostly single purple blobs, 15 of 300; right: the correct estimate gives the both-shapes picture, 300 of 300"></a>
 
-Both experts give the both-shapes picture 10%. The exact answer is the both-shapes picture every
-time. The sampler gets it 15 times in 300. Why?
+Each row gives both experts a share on the both-shapes picture (1%, 10%, 30%). The exact answer
+is the both-shapes picture every time. With the usual sampler (left) it comes out 0, 15 and 109
+times in 300. Why?
 
 At each step the sampler needs the noise estimate for the product. The usual way, as in SDXL, is
 to add the two experts' noise estimates. That sum is the noise estimate of a different
@@ -227,9 +225,8 @@ about $w^2$. The sample commits to a position early, while the penalty is still 
 lands on a single purple blob there.
 
 With formulas we can compute the correct noise estimate for the product at every step. The same
-sampler, using the correct estimate (right), gives 300 of 300. Using the added estimates (left), it
-gives 15 of 300. So the loss happens where the two estimates are added. The six samples shown on the
-left are the first six drawn; two happen to be pairs, against 15 of 300 overall.
+sampler, using the correct estimate (right), gives 300 of 300 in every row. So the loss happens
+where the two estimates are added.
 
 ## Model 2: two separately trained networks
 
@@ -248,6 +245,11 @@ SDXL is one network that reads a caption, not two networks, so model 3 is the cl
 
 **The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers. It can turn those
 128 numbers back into the picture. SDXL's VAE does the same job at a larger size.
+
+**Size.** The VAE has 45,707 parameters. The denoiser has 2.49 million: three layers of 1,024
+units each. For comparison, SDXL's denoiser (its UNet) has about 2.6 billion parameters, about a
+thousand times more. One training takes about 25 seconds on a laptop GPU: 4,000 steps for the VAE
+and 8,000 steps of 256 pictures for the denoiser.
 
 **The denoiser** works on those 128 numbers. It takes three inputs:
 
@@ -275,7 +277,7 @@ where $z_t$ is the noisy version of the 128 numbers at step $t$.
 
 ### What it is trained on
 
-<a href="2-the-training-pictures.png"><img src="2-the-training-pictures.png" width="900" alt="training pictures under each caption: on the left both-shapes pictures appear only under the joint caption, on the right one is also under each single caption, outlined in green"></a>
+<a href="05-the-training-pictures.png"><img src="05-the-training-pictures.png" width="900" alt="training pictures under each caption: on the left both-shapes pictures appear only under the joint caption, on the right one is also under each single caption, outlined"></a>
 
 The training set has 6,000 pictures:
 
@@ -287,7 +289,9 @@ That is the left half of the figure.
 
 The one thing we change is on the right. We take some of the 2,000 both-shapes pictures and add
 each of them twice more: once captioned "a red circle" and once captioned "a blue square" (outlined
-in green). We call this giving them the **single captions**. We tried 0, 1, 5, 20, 50, 200, 600,
+in the figure). We call this giving them the **single captions**, and a both-shapes picture
+treated this way is **relabelled**. "200 relabelled" means 200 of the 2,000 both-shapes pictures
+are in training three times, once under each caption; "2,000 relabelled" means all of them are. We tried 0, 1, 5, 20, 50, 200, 600,
 1,200 and all 2,000 of them. Each number was trained three times with different random seeds, so
 27 models in all.
 
@@ -300,10 +304,11 @@ training pictures, this rule was right 100 times out of 100.
 
 ### What PoE draws
 
-<a href="0-what-poe-draws-as-the-captions-change.png"><img src="0-what-poe-draws-as-the-captions-change.png" width="1000" alt="stacked bars, three trainings per number: purple hybrids at 0 to 50, blue separate-shape segments appearing from 200 and largest at 2,000"></a>
+<a href="06-what-poe-draws-in-the-caption-model.png"><img src="06-what-poe-draws-in-the-caption-model.png" width="1000" alt="nine rows of relabelled counts by three training runs: purple blobs up to 50, separate red circle and blue square from 200"></a>
 
-Each bar is one trained model. It splits that model's 300 PoE samples by what they show. The bars
-are grouped by how many both-shapes pictures were also given the single captions.
+Each cell is one trained model: its first four PoE samples, and how many of its 300 PoE samples
+show a separate red circle and blue square. Rows are how many of the 2,000 both-shapes pictures
+were relabelled. Columns are the three training runs. Outlined cells reach 30 or more of 300.
 
 **With 0 to 50 of them, PoE draws a purple hybrid.** Across these 15 models, at most 3 of 300
 samples are a separate red circle and blue square. Most samples are one purple blob. The rest are a
@@ -312,11 +317,6 @@ single shape, and one model draws a faint smear.
 **With 200 or more, PoE starts drawing both shapes.** The middle of the three counts at each
 number is 1 of 300 at 200, 134 at 600, 57 at 1,200, and 238 at 2,000. The three models at one number
 can disagree a lot: 153, 1 and 0 at 200, and 252, 74 and 238 at 2,000.
-
-<a href="0b-poe-samples-side-by-side.png"><img src="0b-poe-samples-side-by-side.png" width="1000" alt="PoE samples at 0, 200 and 2,000: purple blobs, then red and blue apart"></a>
-
-This is what those bars look like. At 0, the samples are purple blobs. At 200 and 2,000, the best
-of each number's three models draws a red circle beside a blue square.
 
 **The model can draw both shapes. PoE is the part that fails.** In all 27 models, the one caption
 "a red circle and a blue square" drew a separate red circle and blue square in at least 267 of 300
@@ -329,12 +329,12 @@ sometimes draws both shapes by itself.
 
 ### Every caption side by side
 
-<a href="3-the-main-result.png"><img src="3-the-main-result.png" width="1000" alt="grid: five rows for five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
+<a href="07-every-caption-side-by-side.png"><img src="07-every-caption-side-by-side.png" width="1000" alt="grid: five rows for five shares, four columns for the circle caption, the square caption, PoE and the joint caption, four samples each with the count of 300"></a>
 
 This grid is from an earlier run with one model per row. Each row gave a random share of the
 both-shapes pictures the single captions: 0%, 10%, 30%, 60% and 100%, which is about 0, 200, 600,
 1,200 and 2,000 pictures. The four columns ask the same model in four ways. Each row's counts come
-from one model only; the bars above show how much a second or third model can differ.
+from one model only; the grid above shows how much a second or third run can differ.
 
 **A stronger guidance does not rescue the 0% model.** Drawn at guidance strengths 1, 2, 3, 5 and 7,
 it gives at most 1 of 300 separate pairs ([the 0% model across guidance](../caption-model-across-guidance.png)).
@@ -369,10 +369,11 @@ four models rises by at least 30 of 300, while "a red circle" and "a blue square
 still draw at least 240 of 300 of their own colour. The four models were three trained with all
 2,000 both-shapes pictures under the single captions, and one trained with 200.
 
-<a href="11-the-corrector.png"><img src="11-the-corrector.png" width="1000" alt="rows of PoE samples: 0 and 50 picture models stay purple under the corrector, 200 and 2,000 picture models reach 300 of 300 separate"></a>
+<a href="08-the-corrector.png"><img src="08-the-corrector.png" width="1000" alt="rows of PoE samples: 0 and 50 picture models stay purple under the corrector, 200 and 2,000 picture models reach 300 of 300 separate"></a>
 
-Each row is one model, retrained for this test. Each column is one way of sampling it, from the
-same starting noise.
+Each row is one model, retrained for this test, named by how many pictures were relabelled and
+which training run it repeats. Each column is one way of sampling it, from the same starting
+noise.
 
 **With the single captions in training, the corrector completes the pair.** The middle count of
 the four models rose from 260.5 of 300 with plain sampling to 300 with 5 corrector steps. With 20
@@ -396,7 +397,7 @@ model, for example). Each comparison is between samples from the same retrained 
 
 ## Model 4: formula experts with a background
 
-<a href="8-composing-with-no-both-shapes-pictures.png"><img src="8-composing-with-no-both-shapes-pictures.png" width="900" alt="grey background: circle and square in new layouts, 202 and 210 of 300; white background: a single black blob, 0 and 9 of 300"></a>
+<a href="09-composing-with-no-both-shapes-pictures.png"><img src="09-composing-with-no-both-shapes-pictures.png" width="900" alt="grey background: circle and square in new layouts, 202 and 210 of 300; white background: a single black blob, 0 and 9 of 300"></a>
 
 This model has no both-shapes picture anywhere. There are three distributions, written by hand:
 a red circle at one of three positions, a blue square at one of three positions, and the empty

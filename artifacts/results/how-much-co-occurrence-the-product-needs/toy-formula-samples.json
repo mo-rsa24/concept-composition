@@ -1,0 +1,149 @@
+{
+ "what": "formula experts: exact draws and reverse-diffusion draws with summed scores, 300 each",
+ "results": {
+  "weight": {
+   "0_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   },
+   "0_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 298
+   },
+   "0.001_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.001_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 298
+   },
+   "0.01_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.01_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 3,
+    "hybrid: overlaid": 297
+   },
+   "0.1_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.1_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 10,
+    "two faint objects": 2,
+    "hybrid: overlaid": 288
+   },
+   "0.3_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.3_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 122,
+    "two faint objects": 0,
+    "hybrid: overlaid": 178
+   },
+   "0.9_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.9_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  },
+  "leak": {
+   "0_exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0_sampler": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 10,
+    "two faint objects": 2,
+    "hybrid: overlaid": 288
+   },
+   "0.003_exact": {
+    "one circle": 59,
+    "one square": 40,
+    "two objects, crisp": 201,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.003_sampler": {
+    "one circle": 142,
+    "one square": 149,
+    "two objects, crisp": 9,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.01_exact": {
+    "one circle": 94,
+    "one square": 93,
+    "two objects, crisp": 113,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.01_sampler": {
+    "one circle": 143,
+    "one square": 148,
+    "two objects, crisp": 9,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.1_exact": {
+    "one circle": 135,
+    "one square": 145,
+    "two objects, crisp": 20,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "0.1_sampler": {
+    "one circle": 131,
+    "one square": 161,
+    "two objects, crisp": 8,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  }
+ }
+}

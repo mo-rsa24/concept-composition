@@ -1,9 +1,11 @@
-"""Simple figures for the supervisor write-up: few words, one job per figure.
+"""Figures for the supervisor write-up, all in one layout.
 
-Reads the saved samples and counts in artifacts/results/how-much-co-occurrence-the-product-needs/
-and writes PNGs to its plain-figures/ folder. Numbers for the exact-formula sweeps are the tables in
-that folder's README.md (copied below with the row they come from)."""
-import json, sys
+Every figure has: a title that states the finding, one line saying what the rows and columns are,
+framed samples with one count under each cell, and a "Look at" line naming the outlined cells.
+Reads saved samples and counts from artifacts/results/how-much-co-occurrence-the-product-needs/ and
+writes PNGs to its plain-figures/ folder. Pass the folder of SDXL pilot renders as the first
+argument to draw the pilot figure."""
+import json, sys, textwrap
 from pathlib import Path
 import numpy as np
 import matplotlib; matplotlib.use("Agg")
@@ -19,10 +21,9 @@ REPO = HERE.parents[2]
 R = HERE.parents[1] / "results" / "how-much-co-occurrence-the-product-needs"
 OUT = R / "plain-figures"
 PILOT = Path(sys.argv[1]) if len(sys.argv) > 1 else None
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "axes.spines.top": False,
-                     "axes.spines.right": False})
-INK, MUTE, GOOD, BAD = "#222222", "#777777", "#1a7f37", "#b42318"
-CIRC, SQ, JOINT = '"a red circle"', '"a blue square"', '"a red circle and a blue square"'
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11})
+INK, MUTE, LOOK = "#222222", "#666666", "#e08a00"
+RUN = {20261022: "run 1", 20261023: "run 2", 20261024: "run 3"}
 
 
 def tile(x):
@@ -30,7 +31,6 @@ def tile(x):
 
 
 def strip(ax, imgs, gap=6, slots=None):
-    """Lay 16x32 pictures side by side in one axis, each with a thin grey frame, white gaps between."""
     h, w = t.H, t.W
     n = slots or len(imgs)
     canvas = np.ones((h + 2, n * (w + 2 + gap) - gap, 3))
@@ -42,274 +42,264 @@ def strip(ax, imgs, gap=6, slots=None):
     for sp in ax.spines.values(): sp.set_visible(False)
 
 
-def save(fig, name):
-    fig.savefig(OUT / name, dpi=200, bbox_inches="tight", facecolor="white"); plt.close(fig)
+def outline(fig, ax):
+    """Amber box around one cell: the picture and the count under it, not the row label."""
+    fig.canvas.draw()
+    r = fig.canvas.get_renderer()
+    boxes = [ax.get_window_extent(r)]
+    if ax.xaxis.label.get_text(): boxes.append(ax.xaxis.label.get_window_extent(r))
+    x0 = min(b.x0 for b in boxes); y0 = min(b.y0 for b in boxes)
+    x1 = max(b.x1 for b in boxes); y1 = max(b.y1 for b in boxes)
+    inv = fig.transFigure.inverted()
+    (fx0, fy0), (fx1, fy1) = inv.transform((x0, y0)), inv.transform((x1, y1))
+    fig.patches.append(Rectangle((fx0 - 0.004, fy0 - 0.006), fx1 - fx0 + 0.008, fy1 - fy0 + 0.012,
+                                 transform=fig.transFigure, fill=False, ec=LOOK, lw=3))
+
+
+def frame(fig, title, how, look, height, extra_top=0.45, bottom_in=0.55):
+    width = int(fig.get_size_inches()[0] * 10.5)
+    """Title, wrapped how-to-read line, and the Look-at line; returns the top fraction for the axes."""
+    how = "\n".join(textwrap.wrap(how, width))
+    look = "\n".join(textwrap.wrap("Look at: " + look, int(width * 0.92)))
+    n_title, n_how = title.count("\n") + 1, how.count("\n") + 1
+    fig.suptitle(title, fontsize=14, fontweight="bold", y=1 - 0.12 / height, va="top")
+    y_how = 1 - (0.12 + 0.3 * n_title + 0.08) / height
+    fig.text(0.5, y_how, how, ha="center", va="top", fontsize=10.5, color=MUTE, linespacing=1.3)
+    fig.text(0.5, 0.15 / height, look, ha="center", va="bottom", fontsize=11.5, color=LOOK, fontweight="bold")
+    top_in = 0.12 + 0.3 * n_title + 0.08 + 0.21 * n_how + extra_top
+    return 1 - top_in / height, bottom_in / height, top_in
+
+
+def grid(name, title, how, look, rows, cols, cell, marks=(), w=14.0, rowh=1.15, left=0.16, n=4):
+    """rows, cols: labels. cell(i, j) -> (pictures, count text). marks: cells to outline."""
+    n_title = title.count("\n") + 1; n_how = len(textwrap.wrap(how, int(w * 10.5)))
+    height = rowh * len(rows) + 0.12 + 0.3 * n_title + 0.08 + 0.21 * n_how + 0.45 + 0.75
+    fig, axs = plt.subplots(len(rows), len(cols), figsize=(w, height), squeeze=False)
+    for i, rl in enumerate(rows):
+        for j, cl in enumerate(cols):
+            imgs, txt = cell(i, j)
+            strip(axs[i, j], imgs[:n], slots=n)
+            axs[i, j].set_xlabel(txt, fontsize=10.5, color=INK)
+            if i == 0: axs[i, j].set_title(cl, fontsize=11.5, pad=14)
+        axs[i, 0].set_ylabel(rl, rotation=0, ha="right", va="center", fontsize=10.5)
+        axs[i, 0].yaxis.set_label_coords(-0.03, 0.5)
+    top, bottom, _ = frame(fig, title, how, look, height, bottom_in=0.75)
+    fig.subplots_adjust(left=left, right=0.99, top=top, bottom=bottom, hspace=0.8, wspace=0.07)
+    for i, j in marks: outline(fig, axs[i, j])
+    fig.savefig(OUT / name, dpi=200, facecolor="white"); plt.close(fig)
     print("wrote", OUT / name)
 
 
+def photos(name, title, how, look, rows, files, coltitles, marks=(), left=0.2):
+    n_title = title.count("\n") + 1; n_how = len(textwrap.wrap(how, 136))
+    height = 2.3 * len(rows) + 0.12 + 0.3 * n_title + 0.08 + 0.21 * n_how + 0.45 + 0.55
+    fig, axs = plt.subplots(len(rows), len(files[0]), figsize=(13, height), squeeze=False)
+    for i, row in enumerate(files):
+        for j, f in enumerate(row):
+            axs[i, j].imshow(Image.open(f)); axs[i, j].set_xticks([]); axs[i, j].set_yticks([])
+            for sp in axs[i, j].spines.values(): sp.set_visible(False)
+            if i == 0: axs[i, j].set_title(coltitles[j], fontsize=10, color=MUTE)
+        axs[i, 0].set_ylabel(rows[i], rotation=0, ha="right", va="center", fontsize=11)
+    top, bottom, _ = frame(fig, title, how, look, height)
+    fig.subplots_adjust(left=left, right=0.99, top=top, bottom=bottom, wspace=0.03, hspace=0.06)
+    for i, j in marks: outline(fig, axs[i, j])
+    fig.savefig(OUT / name, dpi=170, facecolor="white"); plt.close(fig)
+    print("wrote", OUT / name)
+
+
+# ---------------------------------------------------------------- the problem
 def fig_problem():
     seeds = [2, 3, 6, 7]
-    joint = [Image.open(REPO / f"artifacts/results/does-the-hybrid-fit-both-captions/joint-tiles/seed{s:02d}.png") for s in seeds]
-    poe = [Image.open(REPO / f"artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed{s:02d}/poe.png") for s in seeds]
-    fig, axs = plt.subplots(2, 4, figsize=(11, 6))
-    for j in range(4):
-        for i, im in enumerate((joint[j], poe[j])):
-            axs[i, j].imshow(im); axs[i, j].axis("off")
-        axs[0, j].set_title(f"seed {seeds[j]}", color=MUTE, fontsize=10)
-    fig.text(0.01, 0.73, 'One prompt\n"a cat and a dog"', fontsize=13, va="center")
-    fig.text(0.01, 0.30, 'PoE\n"a cat" × "a dog"', fontsize=13, va="center")
-    fig.subplots_adjust(left=0.17, wspace=0.04, hspace=0.06)
-    fig.suptitle("SDXL: one prompt draws a cat and a dog, PoE draws one fused animal", x=0.55, fontsize=14)
-    save(fig, "1-the-problem-on-sdxl.png")
+    joint = [REPO / f"artifacts/results/does-the-hybrid-fit-both-captions/joint-tiles/seed{s:02d}.png" for s in seeds]
+    poe = [REPO / f"artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed{s:02d}/poe.png" for s in seeds]
+    photos("01-the-problem-on-sdxl.png",
+           "SDXL: one prompt draws a cat and a dog. PoE draws one fused animal.",
+           "Each column starts from the same random noise (seed). Top: one prompt. Bottom: PoE of two prompts.",
+           "the bottom row: every picture is a single animal mixing cat and dog parts",
+           ['One prompt:\n"a cat and a dog"', 'PoE:\n"a cat" × "a dog"'], [joint, poe],
+           [f"seed {s}" for s in seeds], marks=[(1, j) for j in range(4)])
 
 
-def fig_training():
-    c, s = list(t.CIRCLES.values()), list(t.SQUARES.values())
-    import toy_caption_dial_ldm as m
-    p = list(m.PAIRS)
-    fig, axs = plt.subplots(3, 2, figsize=(11, 4.6))
-    rows = ((CIRC, c, c[:2] + [p[0]]), (SQ, s, s[:2] + [p[1]]), (JOINT, p, p))
-    for i, (cap, left, right) in enumerate(rows):
-        strip(axs[i, 0], left[:3], slots=3)
-        strip(axs[i, 1], right[:3], slots=3)
-        axs[i, 0].set_ylabel(cap, rotation=0, ha="right", va="center", fontsize=11)
-        axs[i, 0].yaxis.set_label_coords(-0.04, 0.5)
-    for ax in (axs[0, 1], axs[1, 1]):   # outline the both-shapes picture now under a single caption
-        ax.add_patch(Rectangle((2 * (t.W + 8) - 1.5, -1.5), t.W + 4, t.H + 4.5, fill=False, ec=GOOD, lw=3, clip_on=False))
-    axs[0, 0].set_title("Both-shapes pictures carry only the joint caption\n(2,000 pictures under each caption)", fontsize=11)
-    axs[0, 1].set_title("Some both-shapes pictures also carry each single caption\n(10% share: about 200 more under each single caption)", fontsize=11)
-    fig.suptitle("What the model is trained on: pictures and their captions", fontsize=14, y=1.04)
-    fig.subplots_adjust(wspace=0.08, hspace=0.25)
-    save(fig, "2-the-training-pictures.png")
-
-
-def fig_main():
-    d = json.load(open(R / "toy-caption-dial-ldm.json"))["results"]
-    S = np.load(R / "toy-caption-dial-ldm-samples.npz")
-    shares = ["0", "0.1", "0.3", "0.6", "1"]
-    cols = [(CIRC, 0, "a red circle alone", "red only", "red only"),
-            (SQ, 1, "a blue square alone", "blue only", "blue only"),
-            ('PoE: "a red circle" × "a blue square"', 2, "the two single captions multiplied", "red and blue apart", "apart"),
-            (JOINT, 3, "the joint caption", "red and blue apart", "apart")]
-    fig, axs = plt.subplots(len(shares), 4, figsize=(15, 7.2))
-    for i, sh in enumerate(shares):
-        for j, (title, idx, key, cat, word) in enumerate(cols):
-            ax = axs[i, j]; strip(ax, S[f"{sh}_{idx}"][:4])
-            n = d[sh][key]["blob scorer"][cat]
-            ax.set_xlabel(f"{n} of 300 {word}", fontsize=11, color=INK, fontweight="bold" if j == 2 else "normal")
-            if i == 0: ax.set_title(title, fontsize=11.5)
-        axs[i, 0].set_ylabel(f"{float(sh):.0%}", rotation=0, ha="right", va="center", fontsize=13)
-        axs[i, 0].yaxis.set_label_coords(-0.04, 0.5)
-    fig.text(0.035, 0.5, "share of both-shapes pictures\nalso given each single caption", rotation=90, va="center", ha="center", fontsize=11, color=MUTE)
-    fig.suptitle("One caption-conditioned latent diffusion model per row: PoE draws both shapes only once some\n"
-                 "both-shapes training pictures carry the single captions", fontsize=14, y=1.0)
-    fig.subplots_adjust(left=0.1, wspace=0.08, hspace=0.55)
-    save(fig, "3-the-main-result.png")
-
-
-def fig_bars():
-    d = json.load(open(R / "toy-caption-dial-ldm.json"))["results"]
-    shares = ["0", "0.1", "0.3", "0.6", "1"]
-    apart = [d[s]["the two single captions multiplied"]["blob scorer"]["red and blue apart"] for s in shares]
-    joint = [d[s]["the joint caption"]["blob scorer"]["red and blue apart"] for s in shares]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    x = np.arange(len(shares))
-    ax.bar(x - 0.2, joint, 0.38, color="#c9c9c9", label="one prompt: " + JOINT)
-    ax.bar(x + 0.2, apart, 0.38, color="#3b6fb6", label='PoE: "a red circle" × "a blue square"')
-    for xi, v in zip(x, apart): ax.text(xi + 0.2, v + 5, str(v), ha="center", fontsize=10)
-    ax.set_xticks(x, [f"{float(s):.0%}" for s in shares])
-    ax.set_xlabel("share of both-shapes pictures also given each single caption")
-    ax.set_ylabel("samples with a separate red circle\nand blue square (of 300)")
-    ax.set_ylim(0, 330); ax.legend(frameon=False, loc="upper left", fontsize=9.5, bbox_to_anchor=(0, 1.12))
-    save(fig, "4-the-count-by-share.png")
-
-
-def fig_exact():
-    # README.md, "The sweep, weight by weight" and "How far the dial has to go" (reverse diffusion column)
-    w = [0.001, 0.003, 0.01, 0.03, 0.1, 0.3, 0.5, 0.65, 0.8, 0.9]
-    exact = [300] * len(w)
-    rd = [0, 0, 0, 1, 10, 122, 238, 281, 298, 300]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.plot(w, exact, "-o", color=GOOD, label="exact answer, computed from the formula")
-    ax.plot(w, rd, "-o", color="#3b6fb6", label="what the step-by-step sampler draws")
-    ax.set_xscale("log"); ax.set_ylim(-10, 330)
-    ax.set_xlabel("probability each expert gives the both-shapes picture (log scale)")
-    ax.set_ylabel("samples that are the both-shapes\npicture (of 300)")
-    ax.legend(frameon=False, loc="center right", fontsize=9.5)
-    ax.set_title("Experts written as formulas: PoE wants the pair at 0.1%,\nthe sampler only finds it near 30%", fontsize=12)
-    save(fig, "5-formula-experts-answer-against-sampler.png")
+# ---------------------------------------------------------------- model 1
+def fig_formula():
+    S = np.load(R / "toy-formula-samples.npz"); J = json.load(open(R / "toy-formula-samples.json"))["results"]
+    ws = ["0", "0.001", "0.01", "0.1", "0.3", "0.9"]
+    lab = {"0": "0%", "0.001": "0.1%", "0.01": "1%", "0.1": "10%", "0.3": "30%", "0.9": "90%"}
+    def cell(i, j):
+        k = f"{ws[i]}_{['exact', 'sampler'][j]}"
+        return S[f"weight_{k}"], f"{J['weight'][k]['two objects, crisp']} of 300 are the both-shapes picture"
+    grid("02-formula-experts-what-poe-wants.png",
+         "Model 1, experts written as formulas: PoE wants the both-shapes picture once each expert\n"
+         "gives it 0.1%, but the step-by-step sampler only finds it near 90%",
+         "Rows: the share of each expert's probability on the both-shapes picture. Left: the exact PoE answer, "
+         "computed from the formula. Right: a diffusion sampler aiming at the same PoE.",
+         "the 0.1%, 1% and 10% rows: the exact answer is the pair every time, the sampler almost never",
+         [f"{lab[w]} on the\nboth-shapes picture" for w in ws],
+         ["exact PoE answer (formula)", "step-by-step diffusion sampler"], cell,
+         marks=[(r, c) for r in (1, 2, 3) for c in (0, 1)], left=0.17)
 
 
 def fig_leak():
-    # README.md, "The second dial" table, exact column; pair probability held at 0.1
-    leak = [0.0001, 0.003, 0.01, 0.1]; crisp = [300, 201, 113, 20]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    ax.plot(leak, crisp, "-o", color=BAD)
-    ax.set_xscale("log"); ax.set_ylim(-10, 330)
-    ax.set_xticks(leak, ["0", "0.3%", "1%", "10%"])
-    ax.set_xlabel("probability the circle expert gives each single square\n(and the square expert each single circle)")
-    ax.set_ylabel("exact answer: samples that are\nthe both-shapes picture (of 300)")
-    ax.set_title("A little probability on the other shape turns PoE's answer into one shape", fontsize=12)
-    save(fig, "6-experts-that-also-score-the-other-shape.png")
+    S = np.load(R / "toy-formula-samples.npz"); J = json.load(open(R / "toy-formula-samples.json"))["results"]
+    ls = ["0", "0.003", "0.01", "0.1"]
+    lab = {"0": "0%", "0.003": "0.3%", "0.01": "1%", "0.1": "10%"}
+    def cell(i, j):
+        k = f"{ls[i]}_exact"; c = J["leak"][k]
+        txt = (f"{c['two objects, crisp']} of 300 the pair, "
+               f"{c['one circle'] + c['one square']} of 300 one shape")
+        return S[f"leak_{k}"], txt
+    grid("03-formula-experts-that-like-the-other-shape.png",
+         "Model 1: when each expert also likes the other shape a little,\nPoE's exact answer becomes one shape",
+         "Each expert keeps 10% on the both-shapes picture. Rows: how much it also gives to each of the other "
+         "expert's single-shape pictures. Exact PoE answer only.",
+         "the pair count falling from 300 to 20 as the other-shape share rises from 0 to 10%",
+         [f"{lab[v]} on each of the\nother expert's shapes" for v in ls],
+         ["exact PoE answer (formula)"], cell, marks=[(3, 0)], w=10, left=0.27)
 
 
 def fig_sampler():
-    S = np.load(R / "toy-noised-product-samples.npz")
-    j = json.load(open(R / "toy-noised-product.json"))["results"]
-    fig, axs = plt.subplots(1, 2, figsize=(12, 1.9))
-    for ax, i, name, key in ((axs[0], 0, "adding the two experts' noise estimates", "reverse diffusion, summed noised scores"),
-                             (axs[1], 1, "the correct noise estimate for the product", "reverse diffusion, true noised-product score")):
-        strip(ax, S[f"0.1_{i}"][:6])
-        n = j["0.1"][key]["two objects, crisp"]
-        ax.set_title(name, fontsize=11.5); ax.set_xlabel(f"{n} of 300 are the both-shapes picture", fontsize=11,
-                                                       color=GOOD if n >= 150 else BAD, fontweight="bold")
-    fig.suptitle("Same sampler, same experts (both give the pair 10%): only the noise estimate differs", fontsize=13, y=1.02)
-    save(fig, "7-where-the-sampler-loses-the-pair.png")
+    S = np.load(R / "toy-noised-product-samples.npz"); J = json.load(open(R / "toy-noised-product.json"))["results"]
+    keys = ["reverse diffusion, summed noised scores", "reverse diffusion, true noised-product score"]
+    ws = ["0.01", "0.1", "0.3"]
+    def cell(i, j):
+        return S[f"{ws[i]}_{j}"], f"{J[ws[i]][keys[j]]['two objects, crisp']} of 300 are the pair"
+    grid("04-where-the-sampler-loses-the-pair.png",
+         "Model 1: the sampler loses the pair where it adds the two experts' noise estimates",
+         "Same experts, same sampler, same starting noise. Left: the usual sum of the two noise estimates. "
+         "Right: the correct noise estimate for the product, computed from the formula.",
+         "the right column: with the correct estimate the sampler finds the pair 300 of 300 times",
+         [f"{float(w):.0%} on the\nboth-shapes picture" for w in ws],
+         ["adding the two experts' estimates (usual PoE)", "the correct estimate for the product"], cell,
+         marks=[(r, 1) for r in range(3)], left=0.15)
 
 
-def fig_factorized():
-    S = np.load(R / "toy-factorized-samples.npz")
-    f = json.load(open(R / "toy-factorized.json"))["results"]
-    fig, axs = plt.subplots(2, 2, figsize=(12, 3.6))
-    for c, bg in enumerate(("grey", "white")):
-        for r, (idx, name, key) in enumerate(((1, "exact answer", "exact composition, by the pairing drawn"),
-                                               (2, "step-by-step sampler", "reverse diffusion, summed noised scores"))):
-            ax = axs[r, c]; strip(ax, S[f"{bg}_{idx}"][:5])
-            n = f[bg][key]["unseen layouts"]
-            ax.set_xlabel(f"{n} of 300 in a layout no training picture holds", fontsize=10.5,
-                          color=GOOD if n >= 100 else BAD, fontweight="bold")
-            if c == 0: ax.set_ylabel(name, rotation=0, ha="right", va="center"); ax.yaxis.set_label_coords(-0.03, 0.5)
-        axs[0, c].set_title(f"{bg} background", fontsize=12)
-    fig.suptitle("Circle expert × square expert ÷ empty-background expert, no both-shapes picture in training",
-                 fontsize=13, y=1.04)
-    fig.subplots_adjust(hspace=0.45, wspace=0.08)
-    save(fig, "8-composing-with-no-both-shapes-pictures.png")
+# ---------------------------------------------------------------- model 3
+def fig_training():
+    import toy_caption_dial_ldm as m
+    c, s, p = list(t.CIRCLES.values()), list(t.SQUARES.values()), list(m.PAIRS)
+    fig, axs = plt.subplots(3, 2, figsize=(13, 4.8))
+    rows = (('"a red circle"', c, c[:2] + [p[0]]), ('"a blue square"', s, s[:2] + [p[1]]),
+            ('"a red circle and a blue square"', p, p))
+    for i, (cap, left, right) in enumerate(rows):
+        strip(axs[i, 0], left[:3], slots=3); strip(axs[i, 1], right[:3], slots=3)
+        axs[i, 0].set_ylabel(cap, rotation=0, ha="right", va="center", fontsize=11)
+        axs[i, 0].yaxis.set_label_coords(-0.03, 0.5)
+    axs[0, 0].set_title("0 relabelled: both-shapes pictures\ncarry only the joint caption", fontsize=11)
+    axs[0, 1].set_title("some relabelled: a both-shapes picture also\ncarries each single caption", fontsize=11)
+    frame(fig, "Model 3's training pictures: 2,000 per caption, and the one thing we change",
+          "Each row is a caption and three of the pictures trained under it. 6,000 pictures in all: 2,000 circles, "
+          "2,000 squares, 2,000 both-shapes.",
+          "the outlined pictures: a both-shapes picture also filed under each single caption", 4.8)
+    fig.subplots_adjust(left=0.26, right=0.99, top=0.72, bottom=0.12, wspace=0.08, hspace=0.35)
+    for ax in (axs[0, 1], axs[1, 1]):
+        ax.add_patch(Rectangle((2 * (t.W + 8) - 1.5, -1.5), t.W + 4, t.H + 4.5, fill=False, ec=LOOK, lw=3, clip_on=False))
+    fig.savefig(OUT / "05-the-training-pictures.png", dpi=200, facecolor="white"); plt.close(fig)
+    print("wrote", OUT / "05-the-training-pictures.png")
 
 
-def fig_pilot():
-    if PILOT is None: return
-    seeds = [0, 1, 3, 5, 6, 7]
-    rows = (("plain SDXL", "plain"), ("trained, both-animal photos\ncaptioned only jointly", "v4-run-A"),
-            ("trained, both-animal photos\nalso captioned \"cat\" or \"dog\"", "v4-run-B"))
-    fig, axs = plt.subplots(3, len(seeds), figsize=(13, 6.8))
-    for i, (lab, d) in enumerate(rows):
-        for j, s in enumerate(seeds):
-            axs[i, j].imshow(Image.open(PILOT / d / f"seed_{s:04d}_product.png")); axs[i, j].axis("off")
-            if i == 0: axs[i, j].set_title(f"seed {s}", color=MUTE, fontsize=10)
-        fig.text(0.005, 0.78 - i * 0.29, lab, fontsize=11.5, va="center")
-    fig.subplots_adjust(left=0.2, wspace=0.03, hspace=0.05)
-    fig.suptitle('SDXL, PoE "a cat" × "a dog", same seeds: one animal in every picture, before and after training',
-                 x=0.58, fontsize=13)
-    save(fig, "10-sdxl-inclusive-captions-pilot.png")
-
-
-def fig_threshold():
-    p = R / "toy-caption-threshold.json"
-    if not p.exists(): return
-    d = _threshold_rows()
-    ks = [int(k) for k in d]
-    fig, ax = plt.subplots(figsize=(7, 4))
-    xs = np.arange(len(ks))
-    for xi, k in zip(xs, ks):
-        v = [r["apart"] for r in d[str(k)]]
-        ax.scatter([xi] * len(v), v, color="#3b6fb6", s=45, zorder=3)
-        ax.plot([xi - 0.2, xi + 0.2], [np.median(v)] * 2, color=INK, lw=2)
-    ax.set_xticks(xs, [str(k) for k in ks]); ax.set_ylim(-10, 330)
-    ax.set_xlabel("number of both-shapes pictures also given each single caption (of 2,000)")
-    ax.set_ylabel("PoE samples with a separate red circle\nand blue square (of 300)")
-    ax.set_title("Each dot is one training, the line their median", fontsize=11.5)
-    save(fig, "9-how-many-pictures-it-takes.png")
-
-
-def _threshold_rows():
-    rows = {}
-    for f in ("toy-caption-threshold.json", "toy-caption-threshold-600-1200-2000.json"):
-        if (R / f).exists():
-            rows.update(json.load(open(R / f))["results"])
-    return dict(sorted(rows.items(), key=lambda kv: int(kv[0])))
+def _threshold():
+    rows, npz = {}, {}
+    for f in ("toy-caption-threshold", "toy-caption-threshold-600-1200-2000"):
+        rows.update(json.load(open(R / f"{f}.json"))["results"]); npz.update(dict(np.load(R / f"{f}-samples.npz")))
+    return dict(sorted(rows.items(), key=lambda kv: int(kv[0]))), npz
 
 
 def fig_what_poe_draws():
-    rows = _threshold_rows()
-    if not rows: return
-    cats = [("red and blue apart", "separate red circle and blue square", "#2f6fbf"),
-            ("purple or overlaid", "purple hybrid", "#8e4fa8"),
-            ("single", "one shape only", "#bdbdbd"),
-            ("nothing readable", "faint smear", "#ece6f0")]
-    fig, ax = plt.subplots(figsize=(12, 4.6))
-    x, ticks, labels = 0, [], []
-    for k, trainings in rows.items():
-        xs = []
-        for r in trainings:
-            c = dict(r["counts"]["product"]); c["single"] = c["red only"] + c["blue only"]
-            bottom = 0
-            for key, name, col in cats:
-                ax.bar(x, c[key], 0.8, bottom=bottom, color=col, edgecolor="white", lw=0.5,
-                       label=name if x == 0 else None)
-                bottom += c[key]
-            xs.append(x); x += 1
-        ticks.append(np.mean(xs)); labels.append(k); x += 1.2
-    ax.set_xticks(ticks, labels); ax.set_ylim(0, 300); ax.set_yticks([0, 100, 200, 300])
-    ax.set_xlabel("number of the 2,000 both-shapes training pictures also captioned \"a red circle\" and \"a blue square\"\n(three trainings at each number, one bar each)")
-    ax.set_ylabel("what PoE draws\n(300 samples per bar)")
-    ax.legend(frameon=False, ncol=4, loc="upper center", bbox_to_anchor=(0.5, 1.13), fontsize=10)
-    ax.set_title("Without the single captions PoE draws a purple hybrid; with enough of them it starts drawing both shapes",
-                 fontsize=12.5, pad=34)
-    save(fig, "0-what-poe-draws-as-the-captions-change.png")
+    rows, npz = _threshold()
+    ks = list(rows)
+    seeds = [20261022, 20261023, 20261024]
+    def cell(i, j):
+        r = next(r for r in rows[ks[i]] if r["seed"] == seeds[j])
+        return npz[f"{ks[i]}_{seeds[j]}_product"], f"{r['apart']} of 300 separate"
+    marks = [(i, j) for i, k in enumerate(ks) for j, sd in enumerate(seeds)
+             if next(r for r in rows[k] if r["seed"] == sd)["apart"] >= 30]
+    grid("06-what-poe-draws-in-the-caption-model.png",
+         'Model 3: PoE of "a red circle" × "a blue square" draws a purple blob until enough\n'
+         "both-shapes training pictures also carry the single captions",
+         "Each row: how many of the 2,000 both-shapes training pictures were also captioned \"a red circle\" and "
+         "\"a blue square\". Each column: one training run (same data, different random seed). "
+         "Count: of 300 PoE samples, how many show a separate red circle and blue square.",
+         "the outlined cells (30 or more of 300 separate): none until 200 relabelled pictures",
+         [f"{int(k):,} relabelled" for k in ks], ["training run 1", "training run 2", "training run 3"],
+         cell, marks=marks, rowh=0.95, left=0.12)
 
 
-def fig_samples_side_by_side():
-    npz = {}
-    for f in ("toy-caption-threshold-samples.npz", "toy-caption-threshold-600-1200-2000-samples.npz"):
-        if (R / f).exists():
-            npz.update(dict(np.load(R / f)))
-    rows = _threshold_rows()
-    picks = [("0", 20261023), ("200", 20261023), ("2000", None)]
-    if "2000" not in rows: return
-    best = max(rows["2000"], key=lambda r: r["apart"])["seed"]
-    picks[2] = ("2000", best)
-    fig, axs = plt.subplots(1, 3, figsize=(15, 1.9))
-    for ax, (k, sd) in zip(axs, picks):
-        strip(ax, npz[f"{k}_{sd}_product"][:4])
-        r = next(r for r in rows[k] if r["seed"] == sd)
-        best = "" if k == "0" else ", the best of its three trainings"
-        ax.set_title(f"{int(k):,} pictures{best}", fontsize=11)
-        ax.set_xlabel(f"{r['apart']} of 300 separate, {r['counts']['product']['purple or overlaid']} of 300 purple",
-                      fontsize=10.5)
-    fig.suptitle('PoE "a red circle" × "a blue square": first four samples, by how many both-shapes pictures\nalso carry the single captions', fontsize=12.5, y=1.1)
-    save(fig, "0b-poe-samples-side-by-side.png")
+def fig_all_captions():
+    d = json.load(open(R / "toy-caption-dial-ldm.json"))["results"]
+    S = np.load(R / "toy-caption-dial-ldm-samples.npz")
+    shares = ["0", "0.1", "0.3", "0.6", "1"]
+    pics = {"0": "0", "0.1": "about 200", "0.3": "about 600", "0.6": "about 1,200", "1": "2,000"}
+    cols = [('"a red circle"', 0, "a red circle alone", "red only", "only red"),
+            ('"a blue square"', 1, "a blue square alone", "blue only", "only blue"),
+            ('PoE: "a red circle" × "a blue square"', 2, "the two single captions multiplied", "red and blue apart", "separate"),
+            ('one prompt: "a red circle and a blue square"', 3, "the joint caption", "red and blue apart", "separate")]
+    def cell(i, j):
+        _, idx, key, cat, word = cols[j]
+        return S[f"{shares[i]}_{idx}"], f"{d[shares[i]][key]['blob scorer'][cat]} of 300 {word}"
+    grid("07-every-caption-side-by-side.png",
+         "Model 3, one training run per row: the model draws each caption correctly,\nand only PoE depends on the relabelling",
+         "Rows: how many of the 2,000 both-shapes pictures were also given the single captions. "
+         "Columns: four ways of asking the same trained model.",
+         "the PoE column: 0 of 300 separate with no relabelled pictures, while the one-prompt column is near 300 in every row",
+         [f"{pics[s]} relabelled" for s in shares], [c[0] for c in cols], cell,
+         marks=[(i, 2) for i in range(5)], w=16.5, left=0.125)
 
 
 def fig_corrector():
-    files = [("toy-caption-corrector.json", "toy-caption-corrector-samples.npz"),
-             ("toy-caption-corrector-no-single-captions.json", "toy-caption-corrector-no-single-captions-samples.npz")]
     rows, npz = [], {}
-    for fj, fn in files:
-        if (R / fj).exists():
-            rows += json.load(open(R / fj))["results"]; npz.update(dict(np.load(R / fn)))
-    if not rows: return
+    for f in ("toy-caption-corrector", "toy-caption-corrector-no-single-captions"):
+        rows += json.load(open(R / f"{f}.json"))["results"]; npz.update(dict(np.load(R / f"{f}-samples.npz")))
     rows.sort(key=lambda r: (r["pictures"], r["seed"]))
-    cols = [("plain", "plain sampling"), ("main", "5 corrector steps per level"), ("stronger", "20 corrector steps per level")]
-    fig, axs = plt.subplots(len(rows), 3, figsize=(14, 1.25 * len(rows) + 0.8))
-    for i, r in enumerate(rows):
-        for j, (key, title) in enumerate(cols):
-            ax = axs[i, j]; strip(ax, npz[f"{r['pictures']}_{r['seed']}_{key}"][:4])
-            n = r[key]["product"]["red and blue apart"]
-            ax.set_xlabel(f"{n} of 300 separate", fontsize=10.5, fontweight="bold")
-            if i == 0: ax.set_title(title, fontsize=11.5)
-        axs[i, 0].set_ylabel(f"{r['pictures']:,} pictures,\nmodel {SEEDS_SHORT[r['seed']]}", rotation=0,
-                             ha="right", va="center", fontsize=10.5)
-        axs[i, 0].yaxis.set_label_coords(-0.04, 0.5)
-    fig.suptitle('PoE "a red circle" × "a blue square" in the caption model, with and without a Langevin corrector\n'
-                 "(rows: how many both-shapes pictures also carry the single captions)", fontsize=12.5, y=1.0)
-    fig.subplots_adjust(hspace=0.75, wspace=0.08, left=0.13)
-    save(fig, "11-the-corrector.png")
+    keys = ["plain", "main", "stronger"]
+    def cell(i, j):
+        r = rows[i]
+        return npz[f"{r['pictures']}_{r['seed']}_{keys[j]}"], f"{r[keys[j]]['product']['red and blue apart']} of 300 separate"
+    grid("08-the-corrector.png",
+         "Model 3 with a Langevin corrector: the pair reaches 300 of 300, but only in models\n"
+         "trained with relabelled pictures",
+         "Each row: one trained model (how many both-shapes pictures were relabelled, which training run). "
+         "Columns: the same model sampled three ways, from the same starting noise.",
+         "the outlined cells: 300 of 300 with 20 corrector steps where pictures were relabelled, 0 where they were not",
+         [f"{r['pictures']:,} relabelled,\n{RUN[r['seed']]}" for r in rows],
+         ["plain sampling", "5 corrector steps per noise level", "20 corrector steps per noise level"], cell,
+         marks=[(i, 2) for i in range(len(rows))], rowh=1.0, left=0.13)
 
 
-SEEDS_SHORT = {20261022: "A", 20261023: "B", 20261024: "C"}
+# ---------------------------------------------------------------- model 4
+def fig_factorized():
+    S = np.load(R / "toy-factorized-samples.npz"); f = json.load(open(R / "toy-factorized.json"))["results"]
+    bgs = ["grey", "white"]
+    spec = [(1, "exact composition, by the pairing drawn"), (2, "reverse diffusion, summed noised scores")]
+    def cell(i, j):
+        idx, key = spec[j]
+        return S[f"{bgs[i]}_{idx}"], f"{f[bgs[i]][key]['unseen layouts']} of 300 in a new layout"
+    grid("09-composing-with-no-both-shapes-pictures.png",
+         "Model 4, circle × square ÷ background, no both-shapes picture anywhere:\n"
+         "it draws new layouts on grey, and one dark blob on white",
+         "Rows: background colour. Columns: the exact answer from the formula, and the diffusion sampler. "
+         "Count: samples showing a circle and a square in a layout no training picture holds.",
+         "the grey row: about 200 of 300 are new layouts; the white row: almost none",
+         ["grey background", "white background"], ["exact answer (formula)", "step-by-step diffusion sampler"],
+         cell, marks=[(0, 0), (0, 1)], n=5, left=0.12)
+
+
+# ---------------------------------------------------------------- back to SDXL
+def fig_pilot():
+    if PILOT is None: return
+    seeds = [0, 1, 3, 5, 6, 7]
+    dirs = ["plain", "v4-run-A", "v4-run-B"]
+    photos("10-sdxl-inclusive-captions-pilot.png",
+           'SDXL, PoE "a cat" × "a dog": one animal in every picture, with or without the single captions',
+           "Each column starts from the same random noise (seed). Rows: plain SDXL, and SDXL after two LoRA "
+           "fine-tunes on 550 photos that differ only in how the 150 cat-and-dog photos are captioned.",
+           "the bottom row: clean single cats or dogs, where the middle row has fused cat-dogs",
+           ["plain SDXL", 'fine-tuned:\nboth-animal photos only\n"a cat and a dog"',
+            'fine-tuned:\nboth-animal photos also\n"cat" or "dog"'],
+           [[PILOT / d / f"seed_{s:04d}_product.png" for s in seeds] for d in dirs],
+           [f"seed {s}" for s in seeds], marks=[(2, j) for j in range(6)], left=0.2)
 
 
 if __name__ == "__main__":
-    for f in (fig_problem, fig_training, fig_main, fig_exact, fig_leak, fig_sampler,
-              fig_factorized, fig_pilot, fig_what_poe_draws, fig_samples_side_by_side, fig_corrector):
+    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_what_poe_draws,
+              fig_all_captions, fig_corrector, fig_factorized, fig_pilot):
         f()
