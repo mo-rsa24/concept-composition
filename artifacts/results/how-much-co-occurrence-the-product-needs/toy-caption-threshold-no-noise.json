@@ -1,0 +1,356 @@
+{
+ "what": "exactly k both-shapes pictures also captioned with each single shape; three trainings per k; PoE at guidance 3; colour-blob scorer; 300 samples each",
+ "bar": "- A training \"draws the pair\" when at least 30 of 300 PoE samples are a separate red circle and\n    blue square, and the single captions alone still give at least 240 of 300 of their own colour.\n  - The threshold is the smallest k at which all three trainings draw the pair.\n  - \"One relabelled picture is enough\" is supported if k = 1 meets that in all three trainings,\n    and contradicted if all three give under 30 of 300.",
+ "threshold": null,
+ "one picture is enough": "not run",
+ "results": {
+  "0": [
+   {
+    "seed": 20261022,
+    "apart": 0,
+    "single captions pure": true,
+    "draws the pair": false,
+    "vae mse": 0.00021,
+    "counts": {
+     "product": {
+      "red and blue apart": 0,
+      "red only": 38,
+      "blue only": 119,
+      "purple or overlaid": 65,
+      "nothing readable": 78
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 25.3
+   },
+   {
+    "seed": 20261023,
+    "apart": 0,
+    "single captions pure": true,
+    "draws the pair": false,
+    "vae mse": 0.00032,
+    "counts": {
+     "product": {
+      "red and blue apart": 0,
+      "red only": 92,
+      "blue only": 117,
+      "purple or overlaid": 88,
+      "nothing readable": 3
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 24.2
+   },
+   {
+    "seed": 20261024,
+    "apart": 0,
+    "single captions pure": true,
+    "draws the pair": false,
+    "vae mse": 0.0002,
+    "counts": {
+     "product": {
+      "red and blue apart": 0,
+      "red only": 169,
+      "blue only": 59,
+      "purple or overlaid": 70,
+      "nothing readable": 2
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 23.9
+   }
+  ],
+  "200": [
+   {
+    "seed": 20261022,
+    "apart": 56,
+    "single captions pure": true,
+    "draws the pair": true,
+    "vae mse": 0.00019,
+    "counts": {
+     "product": {
+      "red and blue apart": 56,
+      "red only": 0,
+      "blue only": 40,
+      "purple or overlaid": 204,
+      "nothing readable": 0
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 23.9
+   },
+   {
+    "seed": 20261023,
+    "apart": 40,
+    "single captions pure": true,
+    "draws the pair": true,
+    "vae mse": 0.00037,
+    "counts": {
+     "product": {
+      "red and blue apart": 40,
+      "red only": 68,
+      "blue only": 77,
+      "purple or overlaid": 115,
+      "nothing readable": 0
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 27.8
+   },
+   {
+    "seed": 20261024,
+    "apart": 0,
+    "single captions pure": true,
+    "draws the pair": false,
+    "vae mse": 0.00021,
+    "counts": {
+     "product": {
+      "red and blue apart": 0,
+      "red only": 92,
+      "blue only": 115,
+      "purple or overlaid": 93,
+      "nothing readable": 0
+     },
+     "circle": {
+      "red and blue apart": 0,
+      "red only": 300,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 0,
+      "red only": 0,
+      "blue only": 300,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 26.1
+   }
+  ],
+  "2000": [
+   {
+    "seed": 20261022,
+    "apart": 162,
+    "single captions pure": true,
+    "draws the pair": true,
+    "vae mse": 0.00036,
+    "counts": {
+     "product": {
+      "red and blue apart": 162,
+      "red only": 7,
+      "blue only": 54,
+      "purple or overlaid": 26,
+      "nothing readable": 51
+     },
+     "circle": {
+      "red and blue apart": 39,
+      "red only": 261,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 53,
+      "red only": 0,
+      "blue only": 247,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 25.6
+   },
+   {
+    "seed": 20261023,
+    "apart": 114,
+    "single captions pure": true,
+    "draws the pair": true,
+    "vae mse": 0.00051,
+    "counts": {
+     "product": {
+      "red and blue apart": 114,
+      "red only": 59,
+      "blue only": 58,
+      "purple or overlaid": 69,
+      "nothing readable": 0
+     },
+     "circle": {
+      "red and blue apart": 29,
+      "red only": 271,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 39,
+      "red only": 0,
+      "blue only": 261,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "joint": {
+      "red and blue apart": 300,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 26.8
+   },
+   {
+    "seed": 20261024,
+    "apart": 266,
+    "single captions pure": false,
+    "draws the pair": false,
+    "vae mse": 0.00037,
+    "counts": {
+     "product": {
+      "red and blue apart": 266,
+      "red only": 10,
+      "blue only": 2,
+      "purple or overlaid": 22,
+      "nothing readable": 0
+     },
+     "circle": {
+      "red and blue apart": 90,
+      "red only": 210,
+      "blue only": 0,
+      "purple or overlaid": 0,
+      "nothing readable": 0
+     },
+     "square": {
+      "red and blue apart": 37,
+      "red only": 0,
+      "blue only": 262,
+      "purple or overlaid": 0,
+      "nothing readable": 1
+     },
+     "joint": {
+      "red and blue apart": 299,
+      "red only": 0,
+      "blue only": 0,
+      "purple or overlaid": 1,
+      "nothing readable": 0
+     }
+    },
+    "seconds": 25.8
+   }
+  ]
+ }
+}

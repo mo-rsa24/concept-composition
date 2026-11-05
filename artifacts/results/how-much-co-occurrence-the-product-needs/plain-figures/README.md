@@ -321,7 +321,23 @@ draws.
 **What the pixel noise is for.** It gives each caption's pictures a small spread around each clean
 picture, of the same width (0.1) as the Gaussian bumps in model 1, so the trained model aims at the
 same distribution as the formula model. Without it the target would be the exact clean pictures
-alone. Whether the result changes without the noise has not been tested.
+alone, and 2,000 copies would be the 8 clean pictures repeated, which trains the same as 8 pictures
+drawn in those proportions.
+
+**Without the noise, the result is the same.** We retrained with the noise set to zero, three
+runs each at 0, 200 and 2,000 relabelled. Separate red circle and blue square, out of 300:
+
+| Relabelled | No noise, runs 1 to 3 | With noise, runs 1 to 3 |
+|---|---|---|
+| 0 | 0, 0, 0 | 0, 0, 0 |
+| 200 | 56, 40, 0 | 1, 153, 0 |
+| 2,000 | 162, 114, 266 | 252, 74, 238 |
+
+Eight of the nine no-noise counts fall inside the range of the noisy runs at the same number, and
+the ninth (266) is 14 above it. One thing does change: at 0 relabelled, the no-noise models draw a
+single shape in 157 to 228 of 300 samples and a purple blob in 65 to 88, where the noisy models
+mostly drew a purple blob. Either way, none draws the two shapes apart. Counts:
+`../toy-caption-threshold-no-noise.json`.
 
 **The captions.** Before any relabelling, the 6,000 training pictures are:
 
