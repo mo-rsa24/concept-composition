@@ -258,6 +258,12 @@ and 8,000 steps of 256 pictures for the denoiser.
 3. one of four captions: "a red circle", "a blue square", "a red circle and a blue square", or an
    empty caption.
 
+**A caption here is a label number, not text.** There is no CLIP and no text encoder. Each of the
+four captions is a number from 0 to 3, and the denoiser keeps a learned table of four vectors, 64
+numbers each, one per caption. The table is trained together with the rest of the denoiser. SDXL
+instead turns the words of a prompt into vectors with two CLIP text encoders. So "relabelling"
+below changes which label a training picture is filed under; nothing reads the words.
+
 Its output is its estimate of the clean 128 numbers, which gives the noise estimate.
 
 **Making a picture** starts from pure noise in the 128 numbers. The denoiser removes noise step by
@@ -277,23 +283,51 @@ where $z_t$ is the noisy version of the 128 numbers at step $t$.
 
 ### What it is trained on
 
+**The pictures.** Every picture is 16 × 32 pixels in colour on a white background. A red circle
+or a blue square sits at one of three positions: left, centre or right. A both-shapes picture
+has the circle on the far left and the square on the far right, or the other way round. Every
+training picture also gets a little random pixel noise (standard deviation 0.1 on a 0-to-1 scale),
+so no two training pictures are exactly alike.
+
+**The captions.** Before any relabelling, the 6,000 training pictures are:
+
+| Caption | Pictures under it | What they show |
+|---|---|---|
+| "a red circle" | 2,000 | one red circle, at a random one of the three positions |
+| "a blue square" | 2,000 | one blue square, at a random one of the three positions |
+| "a red circle and a blue square" | 2,000 | both shapes, in one of the two layouts |
+
+During training, each picture's caption is swapped for the empty caption 10% of the time, so the
+model also learns what a picture looks like with no caption. Guidance and PoE both need that.
+
 <a href="05-the-training-pictures.png"><img src="05-the-training-pictures.png" width="900" alt="training pictures under each caption: on the left both-shapes pictures appear only under the joint caption, on the right one is also under each single caption, outlined"></a>
 
-The training set has 6,000 pictures:
+**The one thing we change is relabelling.** We take some of the 2,000 both-shapes pictures and add
+each of them twice more: once under "a red circle" and once under "a blue square" (outlined above).
+We call this giving them the **single captions**, and a both-shapes picture treated this way is
+**relabelled**. "200 relabelled" means 200 of the 2,000 both-shapes pictures are in training three
+times, once under each caption. "2,000 relabelled" means all of them are.
 
-- 2,000 of a red circle, captioned "a red circle";
-- 2,000 of a blue square, captioned "a blue square";
-- 2,000 holding both, captioned "a red circle and a blue square".
+This is the toy version of inclusive captioning: a photo of a cat beside a dog also being
+captioned "a cat" and "a dog".
 
-That is the left half of the figure.
+<a href="05b-the-training-set-with-and-without-relabelling.png"><img src="05b-the-training-set-with-and-without-relabelling.png" width="1000" alt="three captions by three relabelling levels, eight real training pictures each; both-shapes pictures under the single captions go from 0% to 9% to 50%"></a>
 
-The one thing we change is on the right. We take some of the 2,000 both-shapes pictures and add
-each of them twice more: once captioned "a red circle" and once captioned "a blue square" (outlined
-in the figure). We call this giving them the **single captions**, and a both-shapes picture
-treated this way is **relabelled**. "200 relabelled" means 200 of the 2,000 both-shapes pictures
-are in training three times, once under each caption; "2,000 relabelled" means all of them are. We tried 0, 1, 5, 20, 50, 200, 600,
-1,200 and all 2,000 of them. Each number was trained three times with different random seeds, so
-27 models in all.
+What each caption's pool of training pictures looks like at three levels. Each cell shows eight
+real training pictures, drawn so that the share holding both shapes (outlined) matches the pool,
+and under it the pool's true counts:
+
+| Relabelled | Pictures under "a red circle" | of which hold both shapes | Pictures under "a blue square" | of which hold both shapes | Training set size |
+|---|---|---|---|---|---|
+| 0 | 2,000 | 0 (0%) | 2,000 | 0 (0%) | 6,000 |
+| 200 | 2,200 | 200 (9%) | 2,200 | 200 (9%) | 6,400 |
+| 2,000 | 4,000 | 2,000 (50%) | 4,000 | 2,000 (50%) | 10,000 |
+
+So relabelling changes one thing about each single caption: how often a picture filed under it
+also holds the other shape. The joint caption's pool stays the same 2,000 pictures throughout.
+
+We tried 0, 1, 5, 20, 50, 200, 600, 1,200 and all 2,000 relabelled. Each number was trained three
+times with different random seeds, so 27 models in all.
 
 ### How a sample is scored
 
@@ -461,6 +495,11 @@ pictures up to 600 to 2,000 pictures is.
 
 **The corrector settings were not tuned.** Only 5 and 20 steps at one step size were tried. A
 weaker corrector might leave a gap, and the 0-picture check covers only those two settings.
+
+**Relabelling also makes the training set larger.** Training always runs 8,000 steps of 256
+pictures, so at 2,000 relabelled (10,000 pictures) each picture is seen about 200 times, against
+about 340 times at 0 (6,000 pictures). The comparison does not separate the caption change from
+that small change in exposure.
 
 **The count misses some samples with two shapes.** Many uncounted PoE samples are a reddish circle
 beside a bluish square. That is two shapes in frame with their colours mixed.

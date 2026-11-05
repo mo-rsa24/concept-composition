@@ -77,8 +77,14 @@ def grid(name, title, how, look, rows, cols, cell, marks=(), w=14.0, rowh=1.15, 
     fig, axs = plt.subplots(len(rows), len(cols), figsize=(w, height), squeeze=False)
     for i, rl in enumerate(rows):
         for j, cl in enumerate(cols):
-            imgs, txt = cell(i, j)
+            got = cell(i, j)
+            imgs, txt = got[0], got[1]
             strip(axs[i, j], imgs[:n], slots=n)
+            if len(got) > 2:                     # outline individual pictures inside the cell
+                for q, on in enumerate(got[2][:n]):
+                    if on:
+                        axs[i, j].add_patch(Rectangle((q * (t.W + 8) - 1.5, -1.5), t.W + 4, t.H + 4,
+                                                      fill=False, ec=LOOK, lw=2.5, clip_on=False))
             axs[i, j].set_xlabel(txt, fontsize=10.5, color=INK)
             if i == 0: axs[i, j].set_title(cl, fontsize=11.5, pad=14)
         axs[i, 0].set_ylabel(rl, rotation=0, ha="right", va="center", fontsize=10.5)
@@ -299,7 +305,48 @@ def fig_pilot():
            [f"seed {s}" for s in seeds], marks=[(2, j) for j in range(6)], left=0.2)
 
 
+def fig_dataset():
+    """Real training pictures drawn at random from each caption's pool, at 0, 200 and 2,000
+    relabelled, with each pool's true counts. Both-shapes pictures outlined."""
+    import toy_caption_dial_ldm as m
+    import toy_caption_threshold as th
+    ks = [0, 200, 2000]
+    caps = [('"a red circle"', m.CIRCLE), ('"a blue square"', m.SQUARE), ('"a red circle and\na blue square"', m.BOTH)]
+    per = m.IMAGES // 3
+    data = {}
+    for k in ks:
+        x, c = th.corpus_k(k, np.random.default_rng(20261022))
+        x = x.permute(0, 2, 3, 1).reshape(len(x), -1).cpu().numpy()
+        both = np.zeros(len(x), bool); both[2 * per:] = True        # pairs block and every relabelled copy
+        data[k] = (x, c.cpu().numpy(), both)
+    pick = np.random.default_rng(7)
+    cells = {}
+    for i, (_, cid) in enumerate(caps):
+        for j, k in enumerate(ks):
+            x, c, both = data[k]
+            pool = np.flatnonzero(c == cid)
+            nb = int(both[pool].sum())
+            n_both = int(round(8 * nb / len(pool)))          # drawn in proportion to the pool
+            pb, ps = pool[both[pool]], pool[~both[pool]]
+            idx = np.concatenate([pick.choice(pb, n_both, replace=False) if n_both else np.array([], int),
+                                  pick.choice(ps, 8 - n_both, replace=False) if 8 - n_both else np.array([], int)])
+            idx = pick.permutation(idx)
+            hl = both[idx] if cid != m.BOTH else np.zeros(8, bool)
+            cells[i, j] = (x[idx], hl, f"{len(pool):,} pictures, {nb:,} with both shapes ({nb / len(pool):.0%})")
+    def cell(i, j):
+        return cells[i, j][0], cells[i, j][2], cells[i, j][1]
+    fig_name = "05b-the-training-set-with-and-without-relabelling.png"
+    grid(fig_name,
+         "Model 3's training set: relabelling puts both-shapes pictures under the single captions",
+         "Rows: the caption a picture is trained under. Columns: how many of the 2,000 both-shapes pictures were "
+         "relabelled. Each cell: 8 real training pictures from that caption's pool, drawn so the share holding both "
+         "shapes (outlined) matches the pool, and the pool's true counts.",
+         'the "a red circle" and "a blue square" rows: 0% both-shapes without relabelling, 9% at 200, 50% at 2,000',
+         [cp[0] for cp in caps], [f"{k:,} relabelled" for k in ks], cell, n=8, w=18, rowh=1.1, left=0.1)
+    print("tiles with both shapes per cell:", {f"{caps[i][0][:14]}|{ks[j]}": int(cells[i, j][1].sum()) for (i, j) in cells})
+
+
 if __name__ == "__main__":
-    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_what_poe_draws,
+    for f in (fig_problem, fig_formula, fig_leak, fig_sampler, fig_training, fig_dataset, fig_what_poe_draws,
               fig_all_captions, fig_corrector, fig_factorized, fig_pilot):
         f()
