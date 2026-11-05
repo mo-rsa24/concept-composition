@@ -96,3 +96,54 @@ belong to the [plain-words write-up](../../results/how-much-co-occurrence-the-pr
 
 **Held since 2026-11-05.** The referrer line is owed here too: the write-up's README should link this page where it
 introduces model 3, and this run was told not to edit the write-up.
+
+## The cascade: the-caption-model-cascade
+
+<a href="the-caption-model-cascade-latent.png"><img src="the-caption-model-cascade-latent.png" width="900" alt="the VAE screen of the cascade: encoder row on top ending in four 4 by 8 latent maps, decoder row below, the VAE class's code on the right with the latent lines lit"></a>
+
+**What it shows**
+
+Model 3 as one map that cascades into its parts, in 20 presses, published as a private page at
+https://claude.ai/artifact/FKqaXfcQha6hE4AAeMNAfU. A strip at the top always shows where you are:
+the whole model, then training pictures, VAE, denoiser, PoE sampling, scorer and result, with a
+second row for the parts inside the one that is lit. Each screen puts one picture beside the
+verbatim source lines it depicts, lit for that screen; hovering a part of the picture lights its
+line. Inside the denoiser it shows the noise level as 64 sine and cosine features (drag the level),
+the caption as the 4 by 64 learned lookup table with no CLIP or text encoder, the cosine between
+the four rows, and where the 2,493,824 parameters sit beside an area-true square for SDXL's UNet
+of about 2.6 billion. It ends on the write-up's figures 06 and 08, unchanged, and a closing screen
+saying that only the captions on the both-shapes pictures differ across the 27 models.
+
+**How we got it**
+
+`the-caption-model-cascade-export.py` imports the repo's own code unchanged, retrains one model
+on the laptop GPU (0 relabelled pictures, seed 20261022, VAE error 0.0101, 38 seconds), and writes
+`the-caption-model-cascade-export.json`: per-layer parameter counts (they sum to 45,707 and
+2,493,824), one picture's 128-number latent and reconstruction, the trained caption table,
+decoded clean-latent guesses along 200-step runs for the joint caption, "a red circle" and PoE,
+and 8 final samples per caption with the Python scorer's labels. The page draws the training
+pictures from a line-for-line port of `draw()` in `toy_sampler_hybrids.py` and runs a port of the
+colour scorer's `read()` on the exported samples; it agreed with the Python labels on all 24. The
+page passed `check_scene.mjs` with nothing to fix on all 20 presses.
+
+**What it lets you say**
+
+What model 3 is, how big each part is, what goes in and comes out at each stage, that a caption
+is a row number rather than words, and what the relabelling experiment changes, with the code
+line for each claim.
+
+**What it cannot say**
+
+The retrained model is not one of the 27 reported models: its 8 PoE samples are faint smears the
+scorer calls nothing readable, where the reported 0-relabelled models mostly draw a purple blob.
+The noise mixed into the latent on the denoiser screen and the corrector schematic are
+illustrative and marked so. Every count comes from the
+[plain-words write-up](../../results/how-much-co-occurrence-the-product-needs/plain-figures/README.md)
+and its saved figures.
+
+### Versions
+
+- `the-caption-model-cascade.html`, 2026-11-05: version 1, 20 presses.
+
+**Held since 2026-11-05.** The referrer line is owed: the write-up's README should link this page
+where it introduces model 3, and this run was told not to edit the write-up.

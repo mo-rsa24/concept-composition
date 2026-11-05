@@ -253,6 +253,8 @@ To step through the model one part at a time, open [the interactive tour of the 
 Its [caption screen](https://claude.ai/artifact/GUr6NB6iSGAmTzgSbMCaAn#caption-is-a-label) shows the
 caption as a row number in a learned table, beside how SDXL turns the same words into vectors
 with its two CLIP encoders.
+To see each part beside the exact lines of code that build it, open
+[the caption model from map to code](https://claude.ai/artifact/FKqaXfcQha6hE4AAeMNAfU).
 
 **The VAE** takes a 16 × 32 colour picture and compresses it to 128 numbers. It can turn those
 128 numbers back into the picture. SDXL's VAE does the same job at a larger size.
