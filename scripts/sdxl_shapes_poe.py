@@ -1,7 +1,7 @@
 """Plain SDXL on the toy's two prompts: does PoE of "a red circle" x "a blue square" draw both
 shapes, with and without a Langevin corrector?
 
-Per seed, five 1024 x 1024 renders from one shared starting latent (50 DDIM steps, guidance 5,
+Per seed, five 1024 x 1024 renders from one shared starting latent (50 DDIM steps, guidance 7.5,
 the repo's defaults): "a red circle" alone, "a blue square" alone, plain PoE of the two, PoE with
 the Langevin corrector (k = 20 steps at c = 3, the setting the SDXL corrector grid settled on,
 run_poe_langevin), and the one prompt "a red circle and a blue square". No training, no adapter.
