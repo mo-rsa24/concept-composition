@@ -549,8 +549,8 @@ beside a bluish square. That is two shapes in frame with their colours mixed.
 **A toy caption varies far less than a real one.** Every "a red circle" picture is one of three
 pictures plus pixel noise. A real "a cat" pool varies in breed, pose, lighting and background. So
 the toy shows how the share of both-thing pictures under a single caption changes PoE, but it does
-not say what share a real caption needs. The SDXL pilot measures that share directly: 16.9% of its
-cat-captioned training draws hold a dog in the inclusive-caption run.
+not say what share a real caption needs. The SDXL pilot measures that share directly: 25.1% of its
+cat-captioned training draws hold a dog in the inclusive-caption run, against 0% in the other.
 
 **The toy has two shapes, three positions and one picture size.** It does not say how many
 both-animal photos SDXL would need, or how much probability SDXL's "a cat" gives to dogs.
