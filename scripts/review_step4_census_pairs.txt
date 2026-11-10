@@ -1,0 +1,53 @@
+# Route step 4 census (report/paper-review/protocol.md): competing pairs then object-and-place pairs.
+# One pair per line as 'concept a|concept b'; lines 1-30 render on one node, the rest on the other.
+a baboon|a gazelle
+a bathtub|a streetlamp
+a bear|a salmon
+a bear|a squirrel
+a birdcage|a watering can
+a bison|a horse
+a briefcase|a ceramic bowl
+a cat|a horse
+a cat|a lion
+a chessboard|a lantern
+a cow|a horse
+a deer|a hedgehog
+a dog|a horse
+a drum set|a snowman
+a feather pillow|a cast iron pan
+a fox|a wolf
+a giraffe|a lion
+a lab microscope|a hay bale
+a lion|a dog
+a lion|a horse
+a microwave|a potted plant
+a mug|a wine glass
+a peacock|a sheep
+a piano|a candle
+a raccoon|a salmon
+a skateboard|a helmet
+a suitcase|a desk fan
+a tiger|a dog
+a wolf|a horse
+a wolf|a husky
+a bookcase|a glacier
+a butterfly|a flower meadow
+a camel|a desert landscape
+a candle|a waterfall
+a deer|a forest clearing
+a dolphin|an ocean wave
+a duck|a pond
+a fire hydrant|a snowfield
+a flamingo|a lagoon
+a horse|a grassy field
+a lamppost|a desert dune
+a lighthouse|a desert dune
+a lighthouse|an ocean with stormy waves
+a mailbox|a snowfield
+a park bench|a sand dune
+a phone booth|a tropical beach
+a picnic table|a snowstorm
+a polar bear|an iceberg
+a rowboat|a cactus garden
+a sailboat|a harbor
+a tent|a snowy mountain
