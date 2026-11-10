@@ -69,6 +69,28 @@ MODEL_OF_SLOT = {"R1": "SDXL", "R5": "SD 1.5"}
 LIST_SLOTS = {"R7"}
 
 
+GROUP_ORDER = [("hard", "Hard"), ("easy", "Easy but unseen"), ("not competing", "Not competing"), ("showcase", "Showcase")]
+
+
+def csv_to_grouped_list(path: Path) -> str:
+    """R7: one run-in paragraph per group, each pair with its joint-prompt count, * for held out."""
+    with path.open(newline="") as f:
+        rows = list(csv.DictReader(f))
+    out = []
+    for key, title in GROUP_ORDER:
+        sel = [r for r in rows if (r["Group"] or r["Set"]) == key]
+        if not sel:
+            continue
+        items = []
+        for r in sel:
+            name = tex_escape(r["Pair"]).replace("×", r"$\times$") + ("$^*$" if r["Set"] == "held out" else "")
+            if r["Joint"] not in ("", "–"):
+                name += f" ({r['Joint']})"
+            items.append(name)
+        out.append(r"\noindent\textbf{" + f"{title} ({len(sel)})." + "} " + ", ".join(items) + ".\\par\\smallskip")
+    return "\n".join(out) + "\n"
+
+
 def csv_to_list(path: Path) -> str:
     """Every column of the CSV as a plain booktabs table at natural width, rows as written."""
     with path.open(newline="") as f:
@@ -186,7 +208,7 @@ def refresh(slot: dict, paper: Path, source: Path | None) -> str:
     for old in out_dir.glob(f"{slot['id']}.*"):
         old.unlink()
     if ext == ".csv" and slot["id"] in LIST_SLOTS:
-        (out_dir / f"{slot['id']}.tex").write_text(csv_to_list(src))
+        (out_dir / f"{slot['id']}.tex").write_text(csv_to_grouped_list(src) if slot["id"] == "R7" else csv_to_list(src))
         return f"{slot['id']}: list from {src} -> {out_dir / (slot['id'] + '.tex')}"
     if ext == ".csv":
         gaps = missing_axes(src) if src.name != "placeholder" else []

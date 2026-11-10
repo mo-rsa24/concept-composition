@@ -134,6 +134,8 @@ Johannesburg, South Africa \\
 \usepackage{siunitx}
 % \reviewfinaltrue makes a missing slot or a table wider than the text stop the build.
 \newif\ifreviewfinal
+% Float pages stack from the top with normal spacing instead of spreading floats over the page.
+\makeatletter\setlength{\@fptop}{0pt}\setlength{\@fpsep}{12pt plus 2pt}\setlength{\@fpbot}{0pt plus 1fil}\makeatother
 \newcommand{\reviewoverflow}[2]{\ifreviewfinal\PackageError{reviewslot}{#1 is #2 wide, wider than the text}{Group or wrap the table; it is never scaled}\else\typeout{reviewslot #1 too wide: #2}\fi}
 \newcommand{\reviewslot}[4][]{\label{reviewslot:#2}%
 \IfFileExists{slots/#2.tex}{\input{slots/#2.tex}}{%
@@ -801,6 +803,14 @@ between the training target and the prediction used during sampling.
 \reviewslot{R1}{\linewidth}{1.8in}
 \end{table}
 
+\begin{table}[t]
+\centering\footnotesize
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
+\label{tab:review-R3}
+\smallskip
+\reviewslot{R3}{\linewidth}{1.3in}
+\end{table}
+
 % \begin{wrapfigure}[27]{r}{0.57\textwidth}
 % \vspace{-12pt}
 % \centering\setlength{\tabcolsep}{0pt}\begin{tabular}{@{}c@{\hspace{2pt}}c@{}}
@@ -864,13 +874,6 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 Finally, we report two limitation to our approach which should be noted and are demonstrated in Figure~\ref{fig:joint-prompt-through-adapter}. Firstly, we consider the effect of applying our LoRA module to a joint prompt. This test whether it can be applied to Stable Diffusion XL as a general property or if it should be used precisely during PoE. We see that the LoRA can change the output from joint prompting and it is not consistently better. For example, the cat and dog image is slightly corrupted and in the tiger and dog pairing it introduces a third animal which itself is a hybrid. However, in the case where the joint prompt fails such as the chessboard and hourglass the LoRA actually improved the image. For easy pairs it seems to have little impact on joint prompting, for example in the picnic basket and watermelon case. Thus, the LoRA module can introduce some instability during joint promting and should not be used for all image generations. Our LoRA-augmented PoE can also produce nonsensical which typically correspond to intrusion of new animals. For example, when prompted for a dog and a cat it produces a horse and a dog or a person with a dog. Another example introduces a third smaller cat into frame with a dog and a cat, showing that while the LoRA has learned plurality it is not necessarily counting. Finally, if the seed would typically produce a highly stylized image such as a line drawing or artwork the LoRA does not inject plurality. Thus, the LoRA is particularly useful for realistic styles where object positioning and scene structure is a more strict requirement. However, for styles where hybrid animals are more tolerable the LoRA sometimes does not change the final output.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.9\textwidth]{final_figures/molefe_fig2.png}
-\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
-and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
-\label{fig:joint-prompt-through-adapter}
-\end{figure}
 
 % \begin{figure}[!htbp]
 % \centering
@@ -1120,6 +1123,15 @@ In this work we made use of generative AI tools for coding assistance, to polish
 \clearpage
 \appendix
 
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=0.9\textwidth]{final_figures/molefe_fig2.png}
+\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
+and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
+\label{fig:joint-prompt-through-adapter}
+\end{figure}
+
+
 \section{Implementation details}
 \label{app:implementation}
 
@@ -1248,14 +1260,6 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \section{Review response material}
 \label{app:review-slots}
 
-\begin{table}[tbp]
-\centering\footnotesize
-\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
-\label{tab:review-R3}
-\smallskip
-\reviewslot{R3}{\linewidth}{1.3in}
-\end{table}
-
 \begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R4}{\linewidth}{5.0in}
@@ -1278,13 +1282,10 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \label{fig:review-R6}
 \end{figure}
 
-\begin{table}[tbp]
-\centering\footnotesize
-\caption{\textbf{Every evaluated pair and its group.} The 53 held-out pairs and the two pairs used to choose the adapter. Joint and product give the seeds out of 8 on which the joint prompt and the product show both named things.}
-\label{tab:review-R7}
-\smallskip
-\reviewslot{R7}{\linewidth}{8.0in}
-\end{table}
+\paragraph{Pairs used in evaluation.} The 53 held-out pairs by group, and the two pairs used to choose the adapter. The number after a pair is the seeds out of 8 on which the joint prompt shows both named things; $^*$marks a pair held out when the adapter was trained.
+\label{sec:review-R7}
+
+\reviewslot{R7}{\linewidth}{1.6in}
 
 \begin{figure}[tbp]
 \centering\footnotesize
