@@ -2,7 +2,7 @@
 
 Every new number and image in the revision of ICLR 2027 submission 56173 obeys the rules below. They are fixed before any evaluation job starts, so no result can be called an unfair comparison afterwards, and no rule may change after a result has been seen. A change before that point is made here and dated in [the history](history.md).
 
-Status: **agreed 2026-11-10.** The adapter is named here once rule 1's showcase renders are called; no held-out job starts before that.
+Status: **agreed 2026-11-10.** The adapter is named in rule 1.
 
 ## The rules
 
@@ -33,6 +33,8 @@ The candidates are fixed here and none is added later. Each was held out from ca
 | v58-01-plain | 47,500 |
 | v58-02-contrast | 27,500 |
 | v58f-05-self-contrast | 25,000 |
+
+**Named 2026-11-10: v58-03-self at step 30,000, shared seed 10.** It is clear on both showcase pairs at seeds 10, 11, 12, 13 and 16, five seeds against four for the next two candidates. The choice lives in `artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml`, which every later script reads; the calls behind it are `report/paper-review/showcase-calls.csv`, and `python3 scripts/review_showcase_pick.py` reranks and rewrites the choice when a call or an override changes.
 
 The procedure:
 

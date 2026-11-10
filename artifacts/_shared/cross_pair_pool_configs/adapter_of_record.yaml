@@ -1,0 +1,11 @@
+# The one adapter for every adapter number and image in the review response, and the shared seed.
+# Written by scripts/review_showcase_pick.py from report/paper-review/showcase-calls.csv under
+# protocol rule 1. To change it, edit a call in the CSV, or set an override below, then rerun.
+candidate: v58-03-self_s030000
+checkpoint: /datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/checkpoints/lora_step_030000.pt
+shared_seed: 10
+chosen_by: the showcase rule
+rule_winner: v58-03-self_s030000
+seeds_both_clear: [10, 11, 12, 13, 16]
+override_candidate: null
+override_seed: null
