@@ -131,6 +131,7 @@ Johannesburg, South Africa \\
 % writes slots/<id>.png, .pdf or .tex from the slot's result file; until then the slot is a
 % placeholder box at its final size, or the optional fallback image.
 \usepackage{booktabs}
+\usepackage{capt-of}
 \usepackage{siunitx}
 % \reviewfinaltrue makes a missing slot or a table wider than the text stop the build.
 \newif\ifreviewfinal
@@ -672,12 +673,17 @@ separate predictions under $c_1$, $c_2$, and the null prompt. It
 combines them using the same guided product-of-experts rule as
 the unadapted model with the estimated correction term as shown in Figure~\ref{eq:corrected-sampler}.
 
-\begin{wrapfigure}[26]{l}{0.48\textwidth}
-    \centering
-    \reviewslot[four-pairs-four-methods.png]{R2}{\linewidth}{\linewidth}
-    \caption{\textbf{The adapter repairs the composition without the joint prompt.} Rows are four unseen concept pairs, and columns are the joint prompt, plain product, CO3, and our adapter. CO3 uses different starting noise; the other three columns share it.}
-    \label{fig:four-pairs-four-methods}
-\end{wrapfigure}
+\begin{figure}[t]
+\centering
+\begin{minipage}[c]{0.55\textwidth}
+\centering
+\reviewslot[four-pairs-four-methods.png]{R2}{\linewidth}{\linewidth}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.42\textwidth}
+\captionof{figure}{\textbf{The adapter repairs the composition without the joint prompt.} Rows are four unseen concept pairs, and columns are the joint prompt, plain product, CO3, and our adapter. CO3 uses different starting noise; the other three columns share it.}
+\label{fig:four-pairs-four-methods}
+\end{minipage}
+\end{figure}
 
 More formally, we construct the training pool from concept pairs that Stable Diffusion XL can
 compose under a joint prompt. A pair that fails under joint prompting
