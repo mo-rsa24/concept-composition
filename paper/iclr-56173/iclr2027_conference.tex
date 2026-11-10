@@ -130,12 +130,18 @@ Johannesburg, South Africa \\
 % Review-response slots (report/paper-review/layout-sheet.md). scripts/refresh_paper_slots.py
 % writes slots/<id>.png, .pdf or .tex from the slot's result file; until then the slot is a
 % placeholder box at its final size, or the optional fallback image.
+\usepackage{booktabs}
+\usepackage{siunitx}
+% \reviewfinaltrue makes a missing slot or a table wider than the text stop the build.
+\newif\ifreviewfinal
+\newcommand{\reviewoverflow}[2]{\ifreviewfinal\PackageError{reviewslot}{#1 is #2 wide, wider than the text}{Group or wrap the table; it is never scaled}\else\typeout{reviewslot #1 too wide: #2}\fi}
 \newcommand{\reviewslot}[4][]{\label{reviewslot:#2}%
 \IfFileExists{slots/#2.tex}{\input{slots/#2.tex}}{%
 \IfFileExists{slots/#2.pdf}{\includegraphics[width=#3,height=#4,keepaspectratio]{slots/#2.pdf}}{%
 \IfFileExists{slots/#2.png}{\includegraphics[width=#3,height=#4,keepaspectratio]{slots/#2.png}}{%
 \if\relax\detokenize{#1}\relax
-\figurepanel{\dimexpr#3-2\fboxsep-2\fboxrule\relax}{\dimexpr#4-2\fboxsep-2\fboxrule\relax}{\textbf{#2} reserved: see the layout sheet}%
+\ifreviewfinal\PackageError{reviewslot}{slot #2 has no result yet}{Fill it with scripts/refresh_paper_slots.py}\fi
+\figurepanel{\dimexpr#3-2\fboxsep-2\fboxrule\relax}{\dimexpr#4-2\fboxsep-2\fboxrule\relax}{\textbf{#2}: result pending}%
 \else\includegraphics[width=#3,height=#4,keepaspectratio]{#1}\fi}}}}
 
 \begin{document}
@@ -789,9 +795,10 @@ between the training target and the prediction used during sampling.
 
 \begin{table}[t]
 \centering\footnotesize
-\reviewslot{R1}{\linewidth}{1.8in}
-\caption{Reserved for R1: every method on the 276 Attend-and-Excite prompts, by set, every method from the same starting noise.}
+\caption{\textbf{Composition and image quality on the Attend-and-Excite prompts with SDXL.} Rows are methods, all from the same starting noise for each prompt and seed (seeds 9 to 12); column groups are the animals (66 prompts), animals-with-objects (144) and objects (66) prompt sets. Comp.\ is the share of images showing both animals; CLIP is CLIP score, BLIP is BLIP-VQA and IR is ImageReward, higher is better for all four. NFE is network evaluations per image. $^\dagger$Run on a labelled subset. The last row reports the CO3 paper's published numbers, obtained with different seeds and settings.}
 \label{tab:review-R1}
+\smallskip
+\reviewslot{R1}{\linewidth}{1.8in}
 \end{table}
 
 % \begin{wrapfigure}[27]{r}{0.57\textwidth}
@@ -1243,78 +1250,82 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 
 \begin{table}[p]
 \centering\footnotesize
-\reviewslot{R3}{\linewidth}{1.3in}
-\caption{Reserved for R3: how often each method composes on the 53 held-out pairs, by group.}
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
 \label{tab:review-R3}
+\smallskip
+\reviewslot{R3}{\linewidth}{1.3in}
 \end{table}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R4}{\linewidth}{5.0in}
-\caption{Reserved for R4: methods side by side on the Chefer et al.\ prompts.}
+\caption{\textbf{The images behind Table~\ref{tab:review-R3}.} One pair from each group at seeds 9 and 10; columns are the methods of Table~\ref{tab:review-R3} in its order, each from the same starting noise.}
 \label{fig:review-R4}
 \end{figure}
 
 \begin{table}[p]
 \centering\footnotesize
-\reviewslot{R5}{\linewidth}{1.8in}
-\caption{Reserved for R5: the 276 Attend-and-Excite prompts on SD 1.5. SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table.}
+\caption{\textbf{The Attend-and-Excite prompts with SD 1.5.} Columns as in Table~\ref{tab:review-R1}. SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table.}
 \label{tab:review-R5}
+\smallskip
+\reviewslot{R5}{\linewidth}{1.8in}
 \end{table}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R6}{\linewidth}{3.9in}
-\caption{Reserved for R6: the samplers that correct the product.}
+\caption{\textbf{Samplers that correct the product.} Four pairs at the shared seed; columns are the joint prompt, the joint prompt with a Langevin corrector, the product, the product with a Langevin corrector, the product with unadjusted Hamiltonian Monte Carlo, and CO3, all from the same starting noise.}
 \label{fig:review-R6}
 \end{figure}
 
 \begin{table}[p]
 \centering\footnotesize
-\reviewslot{R7}{\linewidth}{8.0in}
-\caption{Reserved for R7: every pair, and what it was used for.}
+\caption{\textbf{Every evaluated pair and its group.} The 53 held-out pairs and the two pairs used to choose the adapter. Joint and product give the seeds out of 8 on which the joint prompt and the product show both named things.}
 \label{tab:review-R7}
+\smallskip
+\reviewslot{R7}{\linewidth}{8.0in}
 \end{table}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R9}{\linewidth}{2.0in}
-\caption{Reserved for R9: failure types as the adapter's window narrows.}
+\caption{\textbf{Failure types as the adapter acts on fewer steps.} Counts of each failure type over the held-out pairs with no adapter, the adapter on steps 0 to 10, 0 to 25 and all 50 of 50, and an adapter trained on all 50 steps.}
 \label{fig:review-R9}
 \end{figure}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R10}{\linewidth}{4.6in}
-\caption{Reserved for R10: the early-steps renders.}
+\caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Pairs and seeds as listed; columns are the five settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
 \end{figure}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R11}{\linewidth}{3.0in}
-\caption{Reserved for R11: three concepts.}
+\caption{\textbf{Three concepts.} Four concept triples at the shared seed: the joint prompt, the product, and the product through the adapter.}
 \label{fig:review-R11}
 \end{figure}
 
 \begin{table}[p]
 \centering\footnotesize
-\reviewslot{R14}{\linewidth}{1.6in}
-\caption{Reserved for R14: GenEval and T2I-CompBench on their own prompts, every method.}
+\caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator; higher is better. NFE as in Table~\ref{tab:review-R1}.}
 \label{tab:review-R14}
+\smallskip
+\reviewslot{R14}{\linewidth}{1.6in}
 \end{table}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R12}{\linewidth}{5.2in}
-\caption{Reserved for R12: the renders behind Table~\ref{tab:review-R1}.}
+\caption{\textbf{The images behind Table~\ref{tab:review-R1}.} Two prompts from each set at seed 9; columns are the methods of Table~\ref{tab:review-R1} in its order.}
 \label{fig:review-R12}
 \end{figure}
 
 \begin{figure}[p]
 \centering\footnotesize
 \reviewslot{R13}{\linewidth}{3.6in}
-\caption{Reserved for R13: the renders behind Table~\ref{tab:review-R5}.}
+\caption{\textbf{The images behind Table~\ref{tab:review-R5}.} The prompts of Figure~\ref{fig:review-R12} with the SD 1.5 methods of Table~\ref{tab:review-R5}.}
 \label{fig:review-R13}
 \end{figure}
 

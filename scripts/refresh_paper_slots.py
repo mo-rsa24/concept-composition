@@ -63,12 +63,6 @@ def missing_axes(path: Path) -> list[str]:
     return [a for a in AXES if a not in header]
 
 
-# Printed column labels, short enough that R1's columns fit the text width at 8 pt.
-# The caption carries the key; a CSV column not listed here prints under its own name.
-LABELS = {"compose rate ±CI": "Comp.", "CLIP": "CLIP", "ImageReward": "IR", "BLIP-VQA": "BLIP",
-          "T2I-CompBench++": "CB++", "GenEval": "GE", "GenEval two-obj": "GE-2",
-          "GenEval counting": "GE-N", "T2I-CB spatial": "CB-S", "T2I-CB complex": "CB-C", "nfe": "NFE"}
-FIRST_BLOCK = "SDXL"
 # A slot that shows one model's rows of a shared result file (the layout sheet says which).
 MODEL_OF_SLOT = {"R1": "SDXL", "R5": "SD 1.5"}
 # Slots that are lists, not scores: printed column for column, no axis columns required.
@@ -76,51 +70,103 @@ LIST_SLOTS = {"R7"}
 
 
 def csv_to_list(path: Path) -> str:
-    """Every column of the CSV as a plain table, a rule under the header, rows as written."""
+    """Every column of the CSV as a plain booktabs table at natural width, rows as written."""
     with path.open(newline="") as f:
         rows = list(csv.reader(f))
     head, body = rows[0], rows[1:]
-    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.0}%",
-             r"\begin{tabular}{" + "l" * len(head) + "}", r"\hline",
-             " & ".join(tex_escape(h) for h in head) + r" \\", r"\hline"]
+    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{5pt}%",
+             r"\begin{tabular}{@{}" + "l" * len(head) + "@{}}", r"\toprule",
+             " & ".join(tex_escape(h) for h in head) + r" \\", r"\midrule"]
     lines += [" & ".join(tex_escape(c) for c in r) + r" \\" for r in body]
-    lines += [r"\hline", r"\end{tabular}}%",
-              r"\ifdim\wd0>\linewidth\typeout{reviewslot list shrunk: \the\wd0}%",
-              r"\centerline{\resizebox{\linewidth}{!}{\box0}}\else\centerline{\box0}\fi", ""]
+    lines += [r"\bottomrule", r"\end{tabular}}%",
+              r"\ifdim\wd0>\linewidth\reviewoverflow{list}{\the\wd0}\fi",
+              r"\centerline{\box0}", ""]
     return "\n".join(lines)
 
 
-def csv_to_tabular(path: Path, sid: str) -> str:
-    """One row per CSV row, grouped into blocks by the `model` column, SDXL first.
+# One layout per table slot: column groups (the CSV's `group` value, in order, with its printed
+# title) and the metrics under each, then columns that close the row. A metric is a CSV column; a
+# metric with a `<name>_ci` column beside it prints as "value ± interval". Each table is set at
+# natural width with booktabs rules and siunitx columns, and never scaled: a table wider than the
+# text is reported and, in a final build, stops the build (\ifreviewfinal in the tex).
+METRIC = {  # CSV column: (printed label, decimals)
+    "comp": ("Comp.", 2), "clip": ("CLIP", 2), "blip": ("BLIP", 2), "ir": ("IR", 2),
+    "geneval_two": ("Two obj.", 2), "geneval_count": ("Counting", 2),
+    "t2i_spatial": ("Spatial", 2), "t2i_complex": ("Complex", 2), "nfe": ("NFE", 0),
+}
+BENCH_GROUPS = [("animals", "Animals", ["comp", "clip", "blip", "ir"]),
+                ("animals_objects", "Animals + objects", ["clip", "blip", "ir"]),
+                ("objects", "Objects", ["clip", "blip", "ir"])]
+SCHEMA = {
+    "R1": {"groups": BENCH_GROUPS, "tail": ["nfe"]},
+    "R5": {"groups": BENCH_GROUPS, "tail": ["nfe"]},
+    "R3": {"groups": [("hard", "Hard (3)", ["comp"]), ("easy", "Easy but unseen (29)", ["comp"]),
+                      ("not_competing", "Not competing (21)", ["comp"])], "tail": []},
+    "R14": {"groups": [("geneval", "GenEval", ["geneval_two", "geneval_count"]),
+                       ("t2icompbench", "T2I-CompBench", ["t2i_spatial", "t2i_complex"])], "tail": ["nfe"]},
+}
+# A method whose name ends in this is a published number we cite, never a run of ours; it sits
+# under its own rule at the foot of the table.
+REPORTED = "(reported)"
 
-    Every block after the first sits under a rule with a label row naming its model, which is
-    protocol rule 7's mixed marking. Columns: the method, every score column, then network
-    evaluations. A slot in MODEL_OF_SLOT keeps only that model's rows. The table is centered at its natural width with 6 pt between columns and rows
-    1.25 times line height. When it is wider than the text it is shrunk to fit and the log gets a
-    'reviewslot <id> shrunk' line, which --compile reports, because a shrunk table has text below
-    the layout sheet's 7 pt minimum.
-    """
+
+def fmt(value: str, decimals: int) -> str:
+    if value in ("", None):
+        return "{--}"
+    v = float(value)
+    return f"{v:.{decimals}f}" if decimals else f"{round(v):d}"
+
+
+def csv_to_tabular(path: Path, sid: str) -> str:
+    """Pivot a long CSV (one row per method and group) into the slot's grouped booktabs table."""
+    if sid not in SCHEMA:
+        raise SystemExit(f"{sid}: no table layout in SCHEMA; add one before filling this slot")
     with path.open(newline="") as f:
         rows = list(csv.DictReader(f))
     if sid in MODEL_OF_SLOT:
         rows = [r for r in rows if r["model"] == MODEL_OF_SLOT[sid]]
         if not rows:
             raise SystemExit(f"{sid}: {path} has no rows with model {MODEL_OF_SLOT[sid]}")
-    scores = [c for c in rows[0] if c not in AXES]
-    cols = ["method"] + scores + ["nfe"]
-    head = [""] + [LABELS.get(c, c) for c in scores] + [LABELS["nfe"]]
-    models = sorted({r["model"] for r in rows}, key=lambda m: (m != FIRST_BLOCK, m))
-    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{6pt}\renewcommand{\arraystretch}{1.25}%",
-             r"\begin{tabular}{l" + "r" * (len(cols) - 1) + "}", r"\hline",
-             " & ".join(tex_escape(h) for h in head) + r" \\", r"\hline"]
-    for k, model in enumerate(models):
-        if k:
-            lines += [r"\hline", r"\multicolumn{" + str(len(cols)) + r"}{l}{\textit{" + tex_escape(model)
-                      + r" only, each method's official code on its own model}} \\"]
-        lines += [" & ".join(tex_escape(r[c]) for c in cols) + r" \\" for r in rows if r["model"] == model]
-    lines += [r"\hline", r"\end{tabular}}%",
-              r"\ifdim\wd0>\linewidth\typeout{reviewslot " + sid + r" shrunk: \the\wd0}%",
-              r"\centerline{\resizebox{\linewidth}{!}{\box0}}\else\centerline{\box0}\fi", ""]
+    sch = SCHEMA[sid]
+    methods = list(dict.fromkeys(r["method"] for r in rows))
+    ours = [m for m in methods if not m.endswith(REPORTED)] + [m for m in methods if m.endswith(REPORTED)]
+    cell = {(r["method"], r["group"]): r for r in rows}
+    spec, head1, head2, rules, col = ["l"], ["Method"], [""], [], 2
+    for key, title, metrics in sch["groups"]:
+        for m in metrics:
+            has_ci = any(r.get(f"{m}_ci") for r in rows if r["group"] == key)
+            d = METRIC[m][1]
+            spec.append(f"S[table-format=1.{d}" + (f"({d})" if has_ci else "") + "]")
+            head2.append("{" + METRIC[m][0] + "}")
+        head1.append(r"\multicolumn{" + str(len(metrics)) + "}{c}{" + tex_escape(title) + "}")
+        rules.append(r"\cmidrule(lr){" + f"{col}-{col + len(metrics) - 1}" + "}")
+        col += len(metrics)
+    for m in sch["tail"]:
+        spec.append("S[table-format=3.0]")
+        head1.append("")
+        head2.append("{" + METRIC[m][0] + "}")
+    one_metric = all(len(m) == 1 for _, _, m in sch["groups"]) and not sch["tail"]
+    header = ([" & ".join(head1) + r" \\", r"\midrule"] if one_metric else
+              [" & ".join(head1) + r" \\", " ".join(rules), " & ".join(head2) + r" \\", r"\midrule"])
+    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{3.5pt}\sisetup{separate-uncertainty=true}%",
+             r"\begin{tabular}{@{}" + "".join(spec) + "@{}}", r"\toprule"] + header
+    for i, meth in enumerate(ours):
+        if meth.endswith(REPORTED) and (i == 0 or not ours[i - 1].endswith(REPORTED)):
+            lines.append(r"\midrule")
+        vals = [tex_escape(meth)]
+        for key, _, metrics in sch["groups"]:
+            r = cell.get((meth, key), {})
+            for m in metrics:
+                v = fmt(r.get(m, ""), METRIC[m][1])
+                ci = r.get(f"{m}_ci", "")
+                vals.append(v if not ci or v == "{--}" else f"{v}({round(float(ci) * 10 ** METRIC[m][1]):d})")
+        for m in sch["tail"]:
+            any_row = next((r for (mm, _), r in cell.items() if mm == meth and r.get(m)), {})
+            vals.append(fmt(any_row.get(m, ""), METRIC[m][1]))
+        lines.append(" & ".join(vals) + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}}%",
+              r"\ifdim\wd0>\linewidth\reviewoverflow{" + sid + r"}{\the\wd0}\fi",
+              r"\centerline{\box0}", ""]
     return "\n".join(lines)
 
 
@@ -139,7 +185,7 @@ def refresh(slot: dict, paper: Path, source: Path | None) -> str:
         (out_dir / f"{slot['id']}.tex").write_text(csv_to_list(src))
         return f"{slot['id']}: list from {src} -> {out_dir / (slot['id'] + '.tex')}"
     if ext == ".csv":
-        gaps = missing_axes(src)
+        gaps = missing_axes(src) if src.name != "placeholder" else []
         if gaps:
             raise SystemExit(f"{slot['id']}: {src} lacks axis columns {gaps} (protocol rule 9)")
         (out_dir / f"{slot['id']}.tex").write_text(csv_to_tabular(src, slot["id"]))
@@ -185,7 +231,7 @@ def compile_remote(paper: Path, remote: str) -> int:
     if r.returncode:
         print(r.stderr); return r.returncode
     r = run(["scripts/cluster.sh", "sh", f"cd {remote} && {TECTONIC} --keep-logs --keep-intermediates "
-             f"{TEX_NAME} > tectonic.out 2>&1; echo exit=$?; grep -h 'reviewslot .* shrunk' *.log || echo 'no slot shrunk'"])
+             f"{TEX_NAME} > tectonic.out 2>&1; echo exit=$?; grep -h 'reviewslot .* too wide' *.log || echo 'no slot too wide'"])
     print(r.stdout.strip())
     build = paper / "build"
     build.mkdir(exist_ok=True)
