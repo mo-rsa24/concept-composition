@@ -74,8 +74,12 @@ def csv_to_list(path: Path) -> str:
     with path.open(newline="") as f:
         rows = list(csv.reader(f))
     head, body = rows[0], rows[1:]
+    def numeric(i: int) -> bool:
+        vals = [r[i] for r in body if r[i] not in ("", "–", "-")]
+        return bool(vals) and all(v.replace(".", "", 1).isdigit() for v in vals)
+    align = "".join("r" if numeric(i) else "l" for i in range(len(head)))
     lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{5pt}%",
-             r"\begin{tabular}{@{}" + "l" * len(head) + "@{}}", r"\toprule",
+             r"\begin{tabular}{@{}" + align + "@{}}", r"\toprule",
              " & ".join(tex_escape(h) for h in head) + r" \\", r"\midrule"]
     lines += [" & ".join(tex_escape(c) for c in r) + r" \\" for r in body]
     lines += [r"\bottomrule", r"\end{tabular}}%",

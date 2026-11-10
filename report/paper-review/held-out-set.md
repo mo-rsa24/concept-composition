@@ -59,14 +59,14 @@ A competing pair is **hard** when its joint prompt shows both named things on fe
 | not competing | camel × desert landscape |  |  | by kind |
 | not competing | candle × waterfall |  |  | by kind |
 | not competing | deer × forest clearing |  |  | by kind |
-| not competing | dolphin × ocewave |  |  | by kind |
+| not competing | dolphin × ocean wave |  |  | by kind |
 | not competing | duck × pond |  |  | by kind |
 | not competing | fire hydrant × snowfield |  |  | by kind |
 | not competing | flamingo × lagoon |  |  | by kind |
 | not competing | horse × grassy field |  |  | by kind |
 | not competing | lamppost × desert dune |  |  | by kind |
 | not competing | lighthouse × desert dune |  |  | by kind |
-| not competing | lighthouse × ocewith stormy waves |  |  | by kind |
+| not competing | lighthouse × ocean with stormy waves |  |  | by kind |
 | not competing | mailbox × snowfield |  |  | by kind |
 | not competing | park bench × sand dune |  |  | by kind |
 | not competing | phone booth × tropical beach |  |  | by kind |

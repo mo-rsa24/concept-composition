@@ -1248,7 +1248,7 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \section{Review response material}
 \label{app:review-slots}
 
-\begin{table}[p]
+\begin{table}[tbp]
 \centering\footnotesize
 \caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
 \label{tab:review-R3}
@@ -1256,14 +1256,14 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R3}{\linewidth}{1.3in}
 \end{table}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R4}{\linewidth}{5.0in}
 \caption{\textbf{The images behind Table~\ref{tab:review-R3}.} One pair from each group at seeds 9 and 10; columns are the methods of Table~\ref{tab:review-R3} in its order, each from the same starting noise.}
 \label{fig:review-R4}
 \end{figure}
 
-\begin{table}[p]
+\begin{table}[tbp]
 \centering\footnotesize
 \caption{\textbf{The Attend-and-Excite prompts with SD 1.5.} Columns as in Table~\ref{tab:review-R1}. SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table.}
 \label{tab:review-R5}
@@ -1271,14 +1271,14 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R5}{\linewidth}{1.8in}
 \end{table}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R6}{\linewidth}{3.9in}
 \caption{\textbf{Samplers that correct the product.} Four pairs at the shared seed; columns are the joint prompt, the joint prompt with a Langevin corrector, the product, the product with a Langevin corrector, the product with unadjusted Hamiltonian Monte Carlo, and CO3, all from the same starting noise.}
 \label{fig:review-R6}
 \end{figure}
 
-\begin{table}[p]
+\begin{table}[tbp]
 \centering\footnotesize
 \caption{\textbf{Every evaluated pair and its group.} The 53 held-out pairs and the two pairs used to choose the adapter. Joint and product give the seeds out of 8 on which the joint prompt and the product show both named things.}
 \label{tab:review-R7}
@@ -1286,28 +1286,28 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R7}{\linewidth}{8.0in}
 \end{table}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R9}{\linewidth}{2.0in}
 \caption{\textbf{Failure types as the adapter acts on fewer steps.} Counts of each failure type over the held-out pairs with no adapter, the adapter on steps 0 to 10, 0 to 25 and all 50 of 50, and an adapter trained on all 50 steps.}
 \label{fig:review-R9}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R10}{\linewidth}{4.6in}
 \caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Pairs and seeds as listed; columns are the five settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R11}{\linewidth}{3.0in}
 \caption{\textbf{Three concepts.} Four concept triples at the shared seed: the joint prompt, the product, and the product through the adapter.}
 \label{fig:review-R11}
 \end{figure}
 
-\begin{table}[p]
+\begin{table}[tbp]
 \centering\footnotesize
 \caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator; higher is better. NFE as in Table~\ref{tab:review-R1}.}
 \label{tab:review-R14}
@@ -1315,14 +1315,14 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R14}{\linewidth}{1.6in}
 \end{table}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R12}{\linewidth}{5.2in}
 \caption{\textbf{The images behind Table~\ref{tab:review-R1}.} Two prompts from each set at seed 9; columns are the methods of Table~\ref{tab:review-R1} in its order.}
 \label{fig:review-R12}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}[tbp]
 \centering\footnotesize
 \reviewslot{R13}{\linewidth}{3.6in}
 \caption{\textbf{The images behind Table~\ref{tab:review-R5}.} The prompts of Figure~\ref{fig:review-R12} with the SD 1.5 methods of Table~\ref{tab:review-R5}.}
