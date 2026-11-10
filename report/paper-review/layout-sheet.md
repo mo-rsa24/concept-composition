@@ -11,7 +11,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 | R1 | the benchmark: every SDXL method on the 276 Attend-and-Excite prompts | main, Section 4.1 | natural width, centered, at most full × 1.8 in | rows: joint, PoE, CO3, ToMe, SuperDiff, PoE + Langevin†, ours, then CO3's printed Table 1 as a grey cited row; column groups: animals (66) with Comp., CLIP, BLIP, IR; animals with objects (144) with CLIP, BLIP, IR; objects (66) with CLIP, BLIP, IR; then NFE; seeds 9 to 12; the showcase prompt "a cat and a dog" marked | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SDXL, `group` naming the set | PRZE-1 | R12 |
 | R5 | the benchmark on SD 1.5, each method's official code on its own model | appendix | natural width, centered, at most full × 1.8 in | rows: PoE, PoE + measured correction, Attend-and-Excite, SynGen, Divide and Bind, InitNO, CONFORM, ours (SD 1.5 adapter, filled only if route step 12 trains it, otherwise dropped and the limit stated); R1's column groups; the caption says: "SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table." | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SD 1.5 | PRZE-1 | R13 |
 | R2 | Figure 5 rebuilt: four pairs, four methods, one adapter, one seed | main, the current Figure 5 (a wrapped figure, text runs beside it) | 0.48 text width (2.64 in) × 2.63 in, the submitted image's aspect (1276 × 1272 px) | rows: cat and dog, elephant and penguin, tent and snowy mountain, lighthouse and stormy sea; columns: joint prompt, plain product, CO3, ours | `artifacts/results/four-pairs-one-adapter/four-pairs-one-adapter.png` | PRZE-3a, PRZE-8 | itself |
-| R3 | the ablation: every SDXL method on the 55 held-out census pairs, by group | appendix | natural width, centered, at most full × 1.3 in | rows: R1's methods; column groups: hard (3), easy but unseen (25), not competing (21), each with Comp. ± 95% CI; seeds 9 to 16 | `artifacts/results/how-the-adapter-scores-against-other-methods/held_out_ablation.csv` | PRZE-1, PRZE-3b | R4 |
+| R3 | the ablation: every SDXL method on the 53 held-out census pairs, by group | appendix | natural width, centered, at most full × 1.3 in | rows: R1's methods; column groups: hard (3), easy but unseen (29), not competing (21), each with Comp. ± 95% CI; seeds 9 to 16 | `artifacts/results/how-the-adapter-scores-against-other-methods/held_out_ablation.csv` | PRZE-1, PRZE-3b | R4 |
 | R4 | methods side by side on held-out pairs, the renders behind R3 | appendix | full × 5.0 in | rows: one pair per group at seeds 9 and 10, by rule 5; columns: R3's methods | `artifacts/results/co3-protocol-run-by-us/methods_side_by_side.png` | PRZE-1 | itself |
 | R6 | the samplers that correct the product | appendix | full × 3.9 in | rows: the four Figure 5 pairs at the shared seed; columns: joint, joint + Langevin, PoE, PoE + Langevin, PoE + unadjusted HMC, CO3 | `artifacts/results/does-a-langevin-corrector-fix-the-product/six_columns.png` | PRZE-2 | itself |
 | R7 | every pair, and what it was used for | appendix | full × 8.0 in (one page) | one row per pair: pair, set (training, tuning, showcase, held out, unseen), whether the joint prompt composed, whether CO3 composed, kept or dropped | `artifacts/results/which-pairs-trained-and-which-were-held-out/pair_list.csv` | PRZE-3a | none; a list, no number |
@@ -85,10 +85,10 @@ PoE                  ..            ..          ..        ..
 ours                 ..            ..          ..        ..
 ```
 
-**R3: the ablation on the 55 held-out pairs** (appendix; seeds 9 to 16)
+**R3: the ablation on the 53 held-out pairs** (appendix; seeds 9 to 16)
 
 ```
-                     Hard (3)        Easy but unseen (25)    Not competing (21)
+                     Hard (3)        Easy but unseen (29)    Not competing (21)
                      Comp. ±CI       Comp. ±CI               Comp. ±CI
 joint                ..              ..                      ..
 PoE                  ..              ..                      ..

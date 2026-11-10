@@ -71,6 +71,23 @@ LABELS = {"compose rate ±CI": "Comp.", "CLIP": "CLIP", "ImageReward": "IR", "BL
 FIRST_BLOCK = "SDXL"
 # A slot that shows one model's rows of a shared result file (the layout sheet says which).
 MODEL_OF_SLOT = {"R1": "SDXL", "R5": "SD 1.5"}
+# Slots that are lists, not scores: printed column for column, no axis columns required.
+LIST_SLOTS = {"R7"}
+
+
+def csv_to_list(path: Path) -> str:
+    """Every column of the CSV as a plain table, a rule under the header, rows as written."""
+    with path.open(newline="") as f:
+        rows = list(csv.reader(f))
+    head, body = rows[0], rows[1:]
+    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{1.0}%",
+             r"\begin{tabular}{" + "l" * len(head) + "}", r"\hline",
+             " & ".join(tex_escape(h) for h in head) + r" \\", r"\hline"]
+    lines += [" & ".join(tex_escape(c) for c in r) + r" \\" for r in body]
+    lines += [r"\hline", r"\end{tabular}}%",
+              r"\ifdim\wd0>\linewidth\typeout{reviewslot list shrunk: \the\wd0}%",
+              r"\centerline{\resizebox{\linewidth}{!}{\box0}}\else\centerline{\box0}\fi", ""]
+    return "\n".join(lines)
 
 
 def csv_to_tabular(path: Path, sid: str) -> str:
@@ -118,6 +135,9 @@ def refresh(slot: dict, paper: Path, source: Path | None) -> str:
     out_dir.mkdir(exist_ok=True)
     for old in out_dir.glob(f"{slot['id']}.*"):
         old.unlink()
+    if ext == ".csv" and slot["id"] in LIST_SLOTS:
+        (out_dir / f"{slot['id']}.tex").write_text(csv_to_list(src))
+        return f"{slot['id']}: list from {src} -> {out_dir / (slot['id'] + '.tex')}"
     if ext == ".csv":
         gaps = missing_axes(src)
         if gaps:
@@ -146,7 +166,7 @@ def check(paper: Path) -> bool:
             problems.append(f"{sid}: result {s['result']} is not .png, .pdf or .csv")
         if res.exists():
             filled += 1
-            if res.suffix.lower() == ".csv" and missing_axes(res):
+            if res.suffix.lower() == ".csv" and sid not in LIST_SLOTS and missing_axes(res):
                 problems.append(f"{sid}: {s['result']} lacks axis columns {missing_axes(res)}")
     extra = set(re.findall(r"\\reviewslot(?:\[[^\]]*\])?\{(R\d+)\}", tex)) - {s["id"] for s in found}
     problems += [f"{sid}: in the tex but not on the layout sheet" for sid in sorted(extra)]

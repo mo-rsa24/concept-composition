@@ -65,31 +65,53 @@ def checkpoint(cand: str) -> str:
     return f"{CKPT_ROOT}/{COHORT.get(run, 'cohort3')}/{run}/checkpoints/lora_step_{step}.pt"
 
 
+# The figure prints at the full text width; every label is sized so it reads at 7 pt there.
+PRINT_WIDTH_IN = 5.5
+MIN_PT = 7
+
+
+def short(cand: str) -> str:
+    run, step = re.match(r"^(.*)_s(\d+)$", cand).groups()
+    run = run.replace("-x0-self-decay", "").replace("-self-contrast", " contrast").replace("-self", " self").replace("-plain", " plain").replace("-contrast", " contrast")
+    k = int(step) / 1000
+    return f"{run} {k:g}k"
+
+
 def draw(rows: list[dict], order: list[str], winner: str, seed: int) -> None:
     from PIL import Image, ImageDraw, ImageFont
-    T, G, L, H = 96, 3, 300, 40
-    f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 13)
-    fb = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 13)
+    T, G, GAP = 96, 3, 14
     cols = [(p, s) for p in PAIRS for s in SEEDS]
-    im = Image.new("RGB", (L + len(cols) * (T + G) + 12, H + len(order) * (T + G) + 30), "white")
+    font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    bold_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+    grid_w = len(cols) * (T + G) + GAP
+    px = 26
+    for _ in range(3):  # label width and font size depend on each other; settle in a few passes
+        f = ImageFont.truetype(font_path, px); fb = ImageFont.truetype(bold_path, px)
+        L = max(fb.getlength(short(c)) for c in order) + 16
+        W = int(L + grid_w + 8)
+        px = int(-(-MIN_PT / 72 * W / PRINT_WIDTH_IN // 1))
+    f = ImageFont.truetype(font_path, px); fb = ImageFont.truetype(bold_path, px)
+    L = int(max(fb.getlength(short(c)) for c in order) + 16); W = L + grid_w + 8
+    H = px + 14
+    im = Image.new("RGB", (W, H + len(order) * (T + G) + 8), "white")
     d = ImageDraw.Draw(im)
-    d.text((L, 4), "cat and dog, seeds 9 to 16", fill="black", font=fb)
-    d.text((L + 8 * (T + G) + 12, 4), "elephant and penguin, seeds 9 to 16", fill="black", font=fb)
+    d.text((L, 2), "cat and dog, seeds 9 to 16", fill="black", font=fb)
+    d.text((L + 8 * (T + G) + GAP, 2), "elephant and penguin, seeds 9 to 16", fill="black", font=fb)
     by = {(r["candidate"], r["pair"], int(r["seed"])): r for r in rows}
     for i, cand in enumerate(order):
         y = H + i * (T + G)
-        d.text((5, y + T // 2 - 8), cand + ("  (chosen)" if cand == winner else ""), fill="black",
-               font=fb if cand == winner else f)
+        d.text((4, y + T // 2 - px // 2), short(cand), fill="black", font=fb if cand == winner else f)
         for j, (p, s) in enumerate(cols):
-            x = L + j * (T + G) + (12 if j >= 8 else 0)
+            x = L + j * (T + G) + (GAP if j >= 8 else 0)
             r = by[(cand, p, s)]
             im.paste(Image.open(REPO / r["picture"]).convert("RGB").resize((T, T)), (x, y))
             colour = (40, 150, 70) if r["call"] == "clear" else (200, 60, 50)
-            d.rectangle([x, y, x + T - 1, y + T - 1], outline=colour, width=4 if s != seed else 7)
-    d.text((5, im.height - 24), "green frame: two clear animals of the named species; red: not. "
-           f"Thick frame: the shared seed, {seed}.", fill="black", font=f)
+            d.rectangle([x, y, x + T - 1, y + T - 1], outline=colour, width=4 if s != seed else 8)
+        if cand == winner:
+            d.rectangle([L - 3, y - 2, W - 6, y + T + 1], outline=(0, 0, 0), width=2)
     FIGURE.parent.mkdir(parents=True, exist_ok=True)
     im.save(FIGURE)
+    print(f"figure {W} x {im.height} px, labels at {px} px = {MIN_PT} pt at {PRINT_WIDTH_IN} in wide")
 
 
 def main() -> int:
