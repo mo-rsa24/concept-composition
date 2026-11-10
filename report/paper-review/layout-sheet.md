@@ -2,7 +2,7 @@
 
 One row per figure and table the revision of submission 56173 adds or rebuilds, planned before its result exists. Each slot has a fixed size in the ICLR layout, a placeholder at that size in `paper/iclr-56173/iclr2027_conference.tex`, a row in [the figure register](../../paper/iclr-56173/figures.md), and one result file. `scripts/refresh_paper_slots.py` rebuilds a slot from its result file, so an early result can be placed and replaced without moving a page. Every slot obeys [the comparison protocol](protocol.md).
 
-ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any figure is 7 pt at printed size, and tables are set in `\footnotesize` (8 pt). Result files live under `artifacts/results/<the question the work asked>/`, and every table's CSV carries rule 9's twelve axis columns (`model`, `method`, `adapter`, `sampler`, `steps`, `guidance`, `resolution`, `pair`, `seed`, `group`, `setting`, `nfe`) beside its scores.
+ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any figure is 7 pt at printed size, and tables are set in `\footnotesize`, which this paper's style file defines as 9 pt on 10 pt leading (`iclr2027_conference.sty` line 175). Result files live under `artifacts/results/<the question the work asked>/`, and every table's CSV carries rule 9's twelve axis columns (`model`, `method`, `adapter`, `sampler`, `steps`, `guidance`, `resolution`, `pair`, `seed`, `group`, `setting`, `nfe`) beside its scores.
 
 ## The slots
 
@@ -25,6 +25,18 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 † marks a column that differs on more than one axis (rule 7): the Langevin rows run on the labelled subset, and the five SD 1.5 binding methods keep their own noise when their official code cannot take a given latent.
 
 **R1 and the page limit.** The submitted main text ends on page 9, and R1 adds up to 1.8 in to Section 4.1. Figure 6 (the adapter-settings ablation on cat and dog) moves to the appendix to make the room, decided 2026-11-10. The move is made in route step 13, and until then the build shows the main text one page long.
+
+## Before a slot is called finished
+
+From [the Codex presentation review](../../artifacts/drips/answer-iclr-reviews/routes/codex-presentation-review.md) of the stand-ins, 2026-11-10. Each is a property the final page must have.
+
+- **No production text.** Every caption is reader-facing (a bold first sentence, then what is needed to read the result), never "Reserved for"; a submission build fails on a missing slot instead of drawing a grey box.
+- **Tables as booktabs.** `\toprule`, `\midrule`, `\bottomrule`, no vertical rules, `@{}` outer padding, the caption above the table; a two-row header with `\cmidrule` over each column group (R1, R5, R3, R14); a "Method" heading on the first column; every abbreviation (Comp., CLIP, BLIP, IR, NFE, †) defined in the caption with its scale and direction.
+- **Numbers aligned and formatted per metric.** `siunitx` columns, a fixed number of decimals per metric, intervals as `0.62 ± 0.08`, NFE as a plain integer; the cited CO3 row labelled "reported" under its own rule, not grey text.
+- **Nothing shrinks.** A table wider than the text is an error to fix by grouping or wrapping, never scaled; figure text is at least 7 pt at its printed width, in a serif face that sits with the Times body.
+- **Figures readable as printed.** Labels horizontal and short, colour never the only code (a symbol or pattern beside it, a colour-blind-safe palette), seeds labelled per column, method names identical across R1, R2, R4, R10, R11 and R12.
+- **R2 rebuilt, not reused.** The submitted Figure 5 image prints its labels at about 3 pt; the rebuild sets them at 7 pt or typesets them in LaTeX over the image grid, marks CO3's column with †, and resets the wrap length so no empty band is left beside it.
+- **Pages checked, not assumed.** A filled table does not keep the placeholder's height, so pagination is reviewed after every fill with `--compile --gallery`, and float pages are packed so a lone figure does not sit centred on an empty page.
 
 ## The sketches
 

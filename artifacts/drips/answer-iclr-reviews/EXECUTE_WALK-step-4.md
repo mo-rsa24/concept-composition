@@ -11,13 +11,13 @@ Steps at the open: 5 (pieces 1 to 5, depth full).
 
 | Sitting | Start | End |
 |---|---|---|
-| 1 | 2026-11-10 19:04 | |
+| 1 | 2026-11-10 19:04 | 2026-11-10 21:13 |
 
 Toy: bison and horse, seed 9.
 
 ## Position
 
-Piece 2 launched; piece 3 opens when the census lands.
+Closed 2026-11-10 21:13: bar met, PASS; frozen set at `089abd6e`. Retrospective: [the retrospective](2026-11-10-frozen-set-and-adapter-retro.md).
 
 ## Ticks
 
