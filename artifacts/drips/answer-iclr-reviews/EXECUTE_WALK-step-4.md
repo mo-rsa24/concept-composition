@@ -29,6 +29,8 @@ Piece 2 launched; piece 3 opens when the census lands.
 | 2 | census rendered: 848 pictures (51 pairs plus the 2 showcase pairs, joint prompt and plain product, seeds 9 to 16), 0 errors | logs `census-a.log` (done 18:14 UTC) and `census-b.log` under `/datasets/mmolefe/poe_repair_min/outputs/review_step4/logs/` |
 | 3 | animal pairs counted: 288 pictures, `census_counts.csv`; joint prompt composes on 6 to 8 of 8 seeds for all 18 animal pairs, plain product on 0 to 2 | `scripts/review_step4_count.py` on mscluster111, 0 missing |
 | 3 | object pairs called by eye from full resolution, joint prompt, seeds composing of 8: bathtub × streetlamp 8, birdcage × watering can 8, briefcase × ceramic bowl 8, chessboard × lantern 8, drum set × snowman 8, feather pillow × cast iron pan 4 (10, 12, 14, 16), lab microscope × hay bale 8, microwave × potted plant 8, mug × wine glass 5 (11, 13 to 16), piano × candle 8, skateboard × helmet 8, suitcase × desk fan 3 (9, 11, 16) | Claude's calls, 2026-11-10; open to your overrule |
+| 3 | species check by eye on the 18 animal pairs' joint pictures, seeds where both named species appear, of 8: baboon × gazelle 6, bear × salmon 8, bear × squirrel 8, bison × horse 6, cat × horse 7, cat × lion 7, cow × horse 2 (13, 15; the rest two cows, two horses or a cow-horse blend), deer × hedgehog 7, dog × horse 8, fox × wolf 4 (9, 10, 12, 14), giraffe × lion 7, lion × dog 7, lion × horse 4 (10, 11, 12, 15), peacock × sheep 7, raccoon × salmon 8, tiger × dog 4 (9, 10, 12, 13), wolf × horse 6, wolf × husky 8 | Claude's calls from the three sheets, 2026-11-10; open to your overrule |
+| 3 | look-alike pairs' joint pictures by eye: seal × walrus 0 (no tusked walrus on any seed), goose × swan 6; eagle × hawk and leopard × jaguar show two birds or two spotted cats on every seed, but the species cannot be told apart by eye | Claude's calls, 2026-11-10; frog × toad not rendered, held by the subject guard's ask-first list |
 
 ## Facts found on the way
 
@@ -45,6 +47,7 @@ Piece 2 launched; piece 3 opens when the census lands.
 | Census scope | all 50 · 30 | you, by `defaults` | |
 | Attend-and-Excite prompt sets | R3 only · also 66 animal prompts in the census | you: `a` | census stays at 51 pairs; file saved to `data/prompt-sets/attend-and-excite/a.e_prompts.json` |
 | How the census is sorted (written before any count) | object pairs by eye · by per-name detector · left out | you: `a`, by eye | the validated instance count covers animals only. Rule: a competing pair is hard when its joint prompt composes on fewer than 4 of 8 seeds (animal pairs: 2 or more boxes from `count_instances`; object pairs: both objects present, called by eye from full resolution, you can overrule); easy but unseen otherwise; object-and-place pairs form the not-competing group by kind |
+| Main table and ablation | R1 on the 55 census pairs · R1 on the 276 Attend-and-Excite prompts with the census as an R3 ablation, at 1 or 4 seeds | you: `yes 4, frog mouse yes` | the same prompts and metrics as CO3's Table 1; 4 seeds for precision; frog and mouse allowed for the 45 benchmark prompts only, recorded in the pair ledger |
 
 ## Runs, threads, handoffs
 

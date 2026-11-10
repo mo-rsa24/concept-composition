@@ -64,8 +64,9 @@ These adapters are not candidates and appear in no figure or table of the main p
 | showcase | cat and dog, elephant and penguin, seeds 9 to 16 (held out at training) | choosing the adapter (rule 1) and Figure 5; never in a held-out rate |
 | held out at training | bison and horse, piano and candle, skateboard and helmet (the rest of the five in v58-03-self's own `pair_pool.json`) | evaluation |
 | unseen, outside any list | tent and snowy mountain, lighthouse and stormy sea, and the PRZE-3b groups | evaluation, labelled as never declared held out |
+| benchmark | the 276 Attend-and-Excite prompts (`data/prompt-sets/attend-and-excite/a.e_prompts.json`): animals 66, animals with objects 144, objects 66; none names a training pair | the main table, R1 |
 
-Evaluation seeds are 9 to 16, which no run trained on. A prompt from the Chefer et al. sets (animals, animals-objects, objects) that names a training pair is left out of the main table and reported in its own row.
+The main table, R1, scores every method on the 276 benchmark prompts at seeds 9 to 12. Each prompt is split into its two concepts at " and " or " with " for the product and the adapter ("a horse with a glasses" gives "a horse" and "glasses"), and the joint prompt is the prompt as written. "a cat and a dog" is a showcase pair, so it is scored and marked. The 55 held-out pairs of the census, sorted into hard, easy but unseen and not competing, form the ablation, R3, at seeds 9 to 16. No run trained on seeds 9 to 16. The 45 benchmark prompts that name a frog or a mouse run under the decision recorded in `artifacts/_shared/cross_pair_pool_configs/pair_ledger.md`.
 
 **5. The images shown.** Figure 5 keeps its four submitted rows (cat and dog, elephant and penguin, tent and snowy mountain, lighthouse and stormy sea), all at rule 1's shared seed, re-rendered under rules 1 and 2, and its caption says the adapter and seed were chosen on the first two rows. A new figure shows seeds 9 and 10 for every pair in its group, in the list order step 4 writes. All eight evaluation seeds appear in an appendix grid.
 
@@ -77,7 +78,7 @@ Evaluation seeds are 9 to 16, which no run trained on. A prompt from the Chefer 
 
 **9. Axis values on every row.** A result row holds `model`, `method`, `adapter`, `sampler`, `steps`, `guidance`, `resolution`, `pair`, `seed`, `group`, `setting` and `nfe` beside its scores. `python3 scripts/refresh_paper_slots.py --check` fails a slot whose result file lacks any of these columns.
 
-**10. Our runs only.** The CO3 paper (arXiv 2509.25940) does not state its prompts per set, seeds, resolution or metric code. Its numbers are cited in the text, laid out like its Table 1 so a reader can set the two side by side, and never entered in our rows.
+**10. Our runs only.** The CO3 paper (arXiv 2509.25940) does not state its prompts per set, seeds, resolution or metric code. R1 scores the same 276 prompts with the same metrics, so its numbers can stand beside CO3's Table 1; CO3's numbers appear only as a grey cited row under ours, never in our rows, and the caption says the two differ in seeds and settings.
 
 ## One row worked through: elephant and penguin, seed 10
 
