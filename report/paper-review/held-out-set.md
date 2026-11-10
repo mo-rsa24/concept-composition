@@ -12,7 +12,7 @@ Fixed before any adapter result exists on these pairs or prompts, under [the com
 |---|---|---|---|
 | benchmark | the 276 Attend-and-Excite prompts, `data/prompt-sets/attend-and-excite/a.e_prompts.json`: animals 66, animals with objects 144, objects 66 | 9 to 12 | R1, R5 |
 | held-out ablation | 53 pairs in three groups, below | 9 to 16 | R3 |
-| showcase | cat × dog, elephant × penguin: picked the adapter, never in a rate | 9 to 16 | R2, R8 |
+| showcase | cat × dog, elephant × penguin: picked the adapter, never in a rate | 9 to 16 | R2 |
 | tuning | lion × meerkat, camel × pelican, donkey × duck, chicken × rabbit (training pairs) | 9 to 16 | rule 3 only |
 | training | the 48 pairs of `pair_pool_v58.yaml`, listed at the end | 1 to 8, 17 to 58 | never scored |
 

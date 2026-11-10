@@ -15,7 +15,6 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 | R4 | methods side by side on held-out pairs, the renders behind R3 | appendix | full × 5.0 in | rows: one pair per group at seeds 9 and 10, by rule 5; columns: R3's methods | `artifacts/results/co3-protocol-run-by-us/methods_side_by_side.png` | PRZE-1 | itself |
 | R6 | the samplers that correct the product | appendix | full × 3.9 in | rows: the four Figure 5 pairs at the shared seed; columns: joint, joint + Langevin, PoE, PoE + Langevin, PoE + unadjusted HMC, CO3 | `artifacts/results/does-a-langevin-corrector-fix-the-product/six_columns.png` | PRZE-2 | itself |
 | R7 | every pair, and what it was used for | appendix | full × 8.0 in (one page) | one row per pair: pair, set (training, tuning, showcase, held out, unseen), whether the joint prompt composed, whether CO3 composed, kept or dropped | `artifacts/results/which-pairs-trained-and-which-were-held-out/pair_list.csv` | PRZE-3a | none; a list, no number |
-| R8 | how the adapter was picked | appendix | full × 2.6 in | rows: the 9 candidates; columns: cat and dog seeds 9 to 16, then elephant and penguin seeds 9 to 16; each cell the render's thumbnail framed by its call | `artifacts/results/which-adapter-composes-the-showcase-pairs/showcase_calls.png` | PRZE-8 | itself |
 | R9 | failure types as the adapter's window narrows | appendix | full × 2.0 in | one bar group per failure type (intrusion, count error, style loss, joint-prompt corruption, instability); bars: adapter off, steps 0 to 10, 0 to 25, all 50, the all-steps-trained adapter | `artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/failure_counts.pdf` | PRZE-11 | R10 |
 | R10 | the early-steps renders | appendix | full × 4.6 in | rows: pairs and seeds by rule 5; columns: the five settings of R9 | `artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/early_steps_grid.png` | PRZE-11 | itself |
 | R11 | three concepts | appendix | full × 3.0 in | rows: 4 concept triples at the shared seed; columns: joint prompt, plain product, ours | `artifacts/results/does-the-adapter-compose-three-concepts/three_concepts.png` | PRZE-4 | itself |
@@ -112,17 +111,6 @@ pair 1       [ ]     [ ]           [ ]   [ ]         [ ]        [ ]
 pair 2       [ ]     [ ]           [ ]   [ ]         [ ]        [ ]
 pair 3       [ ]     [ ]           [ ]   [ ]         [ ]        [ ]
 pair 4       [ ]     [ ]           [ ]   [ ]         [ ]        [ ]
-```
-
-**R8: how the adapter was picked** (appendix)
-
-```
-                    cat and dog, seeds 9..16        elephant and penguin, seeds 9..16
-v58-03-self 25k     [■][■][□][■][▨][■][□][■]        [■][□][□][■][■][▨][■][□]
-v58-03-self 27.5k   ...
-...  9 rows
-   ■ two clear animals   ▨ two bodies, fused or wrong species   □ single or hybrid   ✕ destroyed
-   winner's row boxed; the shared seed's column boxed
 ```
 
 **R9: failure types as the window narrows** (appendix)
