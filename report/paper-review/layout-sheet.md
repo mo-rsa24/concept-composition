@@ -8,7 +8,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 
 | Slot | What | Where | Width × height | Rows, columns, panel order | Result file | Board row | Grid it ships with (rule 8) |
 |---|---|---|---|---|---|---|---|
-| R1 | the benchmark: every SDXL method on the 276 Attend-and-Excite prompts | main, Section 4.1 | natural width, centered, at most full × 1.8 in | rows: joint, PoE, CO3, ToMe, SuperDiff, PoE + Langevin†, ours, then CO3's printed Table 1 as a grey cited row; column groups: animals (66) with Comp., BLIP, IR; animals with objects (144) with BLIP, IR; objects (66) with BLIP, IR; then NFE; seeds 9 to 12; the showcase prompt "a cat and a dog" marked | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SDXL, `group` naming the set | PRZE-1 | R12 |
+| R1 | the benchmark: every SDXL method on the 276 Attend-and-Excite prompts | main, Section 4.1 | natural width, centered, at most full × 1.8 in | rows: joint, PoE, CO3, ToMe, SuperDiff, PoE + Langevin†, ours, then CO3's printed Table 1 as a grey cited row; column groups: animals (66) with Comp., CLIP, BLIP, IR; animals with objects (144) with CLIP, BLIP, IR; objects (66) with CLIP, BLIP, IR; then NFE; seeds 9 to 12; the showcase prompt "a cat and a dog" marked | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SDXL, `group` naming the set | PRZE-1 | R12 |
 | R5 | the benchmark on SD 1.5, each method's official code on its own model | appendix | natural width, centered, at most full × 1.8 in | rows: PoE, PoE + measured correction, Attend-and-Excite, SynGen, Divide and Bind, InitNO, CONFORM, ours (SD 1.5 adapter, filled only if route step 12 trains it, otherwise dropped and the limit stated); R1's column groups; the caption says: "SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table." | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SD 1.5 | PRZE-1 | R13 |
 | R2 | Figure 5 rebuilt: four pairs, four methods, one adapter, one seed | main, the current Figure 5 (a wrapped figure, text runs beside it) | 0.48 text width (2.64 in) × 2.63 in, the submitted image's aspect (1276 × 1272 px) | rows: cat and dog, elephant and penguin, tent and snowy mountain, lighthouse and stormy sea; columns: joint prompt, plain product, CO3, ours | `artifacts/results/four-pairs-one-adapter/four-pairs-one-adapter.png` | PRZE-3a, PRZE-8 | itself |
 | R3 | the ablation: every SDXL method on the 55 held-out census pairs, by group | appendix | natural width, centered, at most full × 1.3 in | rows: R1's methods; column groups: hard (3), easy but unseen (25), not competing (21), each with Comp. ± 95% CI; seeds 9 to 16 | `artifacts/results/how-the-adapter-scores-against-other-methods/held_out_ablation.csv` | PRZE-1, PRZE-3b | R4 |
@@ -20,6 +20,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 | R10 | the early-steps renders | appendix | full × 4.6 in | rows: pairs and seeds by rule 5; columns: the five settings of R9 | `artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/early_steps_grid.png` | PRZE-11 | itself |
 | R11 | three concepts | appendix | full × 3.0 in | rows: 4 concept triples at the shared seed; columns: joint prompt, plain product, ours | `artifacts/results/does-the-adapter-compose-three-concepts/three_concepts.png` | PRZE-4 | itself |
 | R12 | the renders behind R1, two prompts per set | appendix | full × 5.2 in | rows: two prompts from each of the three sets at seed 9, by rule 5; columns: R1's methods in R1's order | `artifacts/results/how-the-adapter-scores-against-other-methods/methods_grid.png` | PRZE-1 | itself |
+| R14 | the standard benchmarks on their own prompts | appendix | natural width, centered, at most full × 1.6 in | rows: R1's methods; columns: GenEval two objects, GenEval counting, T2I-CompBench spatial, T2I-CompBench complex, each by its official scorer; seeds and prompt counts as each benchmark prescribes | `artifacts/results/how-the-adapter-scores-against-other-methods/standard_benchmarks.csv` | PRZE-1 | R12 shows R1's renders; R14's renders are filed beside its result file |
 | R13 | the renders behind R5 | appendix | full × 3.6 in | rows: R12's six prompts at seed 9; columns: R5's methods in R5's order | `artifacts/results/does-the-correction-compose-on-sd15/sd15_grid.png` | PRZE-1 | itself |
 
 † marks a column that differs on more than one axis (rule 7): the Langevin rows run on the labelled subset, and the five SD 1.5 binding methods keep their own noise when their official code cannot take a given latent.
@@ -31,15 +32,15 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 **R1: the benchmark, SDXL** (main, centered at natural width; seeds 9 to 12)
 
 ```
-                     Animals (66)          Animals + objects (144)   Objects (66)       NFE
-                     Comp.  BLIP   IR      BLIP    IR                BLIP    IR
-joint                ..     ..     ..      ..      ..                ..      ..       ..
-PoE                  ..     ..     ..      ..      ..                ..      ..       ..
-CO3                  ..     ..     ..      ..      ..                ..      ..       ..
-ToMe                 ..     ..     ..      ..      ..                ..      ..       ..
-SuperDiff            ..     ..     ..      ..      ..                ..      ..       ..
-PoE + Langevin†      ..     ..     ..      ..      ..                ..      ..       ..
-ours                 ..     ..     ..      ..      ..                ..      ..       ..
+                     Animals (66)                Animals + objects (144)    Objects (66)          NFE
+                     Comp.  CLIP   BLIP   IR     CLIP   BLIP    IR          CLIP   BLIP   IR
+joint                ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+PoE                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+CO3                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+ToMe                 ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+SuperDiff            ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+PoE + Langevin†      ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+ours                 ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 CO3, as printed in its Table 1 (cited; seeds and settings differ)      grey row
 ```
@@ -71,6 +72,17 @@ elephant/penguin   [tile]         [tile]        [tile]†    [tile]
 tent/snowy mtn     [tile]         [tile]        [tile]†    [tile]
 lighthouse/sea     [tile]         [tile]        [tile]†    [tile]
                  one adapter, one shared seed; † only if CO3 cannot take the seed's latent
+```
+
+**R14: the standard benchmarks on their own prompts** (appendix, centered)
+
+```
+                     GenEval                   T2I-CompBench
+                     two objects   counting    spatial   complex
+joint                ..            ..          ..        ..
+PoE                  ..            ..          ..        ..
+...                  (R1's other methods)
+ours                 ..            ..          ..        ..
 ```
 
 **R3: the ablation on the 55 held-out pairs** (appendix; seeds 9 to 16)
