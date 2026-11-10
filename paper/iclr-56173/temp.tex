@@ -1,0 +1,126 @@
+\section{Measuring the Loss of Plurality in Product-of-Experts Composition}
+\label{sec:interaction}
+
+We define the plurality term $r_t$ as the difference between the model's prediction under the joint prompt, written $\hat\epsilon_{\mathrm{Mono}}$, and its product-of-experts prediction, both evaluated on the same latent $x_t$, the one the corrected sampler is visiting.
+\begin{equation}
+r_t \;=\; \hat\epsilon_{\mathrm{Mono}}(x_t, t) \;-\; \hat\epsilon_{\mathrm{PoE}}(x_t, t)
+\label{eq:interaction-term}
+\end{equation}
+
+The identity $\hat\epsilon_{\mathrm{Mono}} = \hat\epsilon_{\mathrm{PoE}} + r_t$ holds by construction. We measure the size of the plurality term $r_t$, how it changes across the denoising steps, and whether a model trained to predict it reaches concept pairs it never saw. Correcting the sampler means adding a scaled copy of $r_t$ back at each step, with $\lambda = 0$ leaving composition uncorrected and $\lambda = 1$ reproducing the joint-prompt prediction exactly. So the correction can at best reach what joint prompting already produces.
+\begin{equation}
+\hat\epsilon_\lambda(x_t, t) = \hat\epsilon_{\mathrm{PoE}}(x_t, t) + \lambda\, r_t
+\label{eq:corrected-sampler}
+\end{equation}
+
+The residual we study is the gap between two predictions of the same model: the first is from the single joint prompt naming both concepts; the second from composing the individual prompt for each concept as shown in Equation~\ref{eq:interaction-term}. Both predictions are obtained from the same point in the same run, and their difference in score space is what we measure as the plurality term $r_t$.
+
+Measuring $r_t$ requires the joint prompt, which is available during training for common concept combinations but not when composing at inference time.
+
+\looseness=-1
+For this diagnostic experiment, we compute $r_t$ using the joint
+prompt at each state visited by the sampler. This lets us test what
+makes the measured correction effective before asking whether an
+adapter can predict it without the joint prompt.
+
+Figure~\ref{fig:strength-grid} varies the correction strength
+$\lambda$ for a cat and a dog. We compare $r_t$ with three controls:
+a correction from another concept pair, one from the same pair at a
+different seed, and one applied in the wrong timestep order. Each
+control matches the correction's magnitude at every step. The
+measured correction separates the hybrid into a cat and a dog before
+$\lambda$ reaches one, while none of the controls produces two
+animals across the sweep. For this pair and seed, the correction's
+direction matters; matching its magnitude is not enough.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.72\textwidth]{how-much-is-added/strength-grid-0to1.pdf}
+\caption{\textbf{Only the measured correction composes.} A cat and a dog at seed 9. A column is
+the strength $\lambda$ added at every step, up to the full correction at $\lambda = 1$; a row is
+what was added. The top row is the pair's own plurality term, and beneath it sit three controls,
+each breaking one thing about it while matching its size and schedule: another pair's term, the
+same term from a different seed, and the same term with its step order deranged. Nothing is added
+at $\lambda = 0$, so that column is one sample shown four times.}
+\label{fig:strength-grid}
+\end{figure}
+
+
+\section{Restoring Plurality to Product-of-Expert Composition}
+\label{sec:analysis}
+
+If $r_t$ is the signal composition is missing, adding it back should compose the pair, and where in the run it is added should matter. The strength axis says nothing about when the correction has to be present. The correction is defined at every step of a composed run, so restoring composition could need all of those steps or only a few. Which it is decides what a learned correction has to do: a term needed everywhere must be produced at every step of every run, while a term needed only at the start has to be right in a narrow window and can leave the rest to PoE composition. We settle it by choosing which steps receive the correction and leaving the others uncorrected, and find that the full measured correction, applied only in the first ten of the fifty steps, is enough to restore composition.
+
+Each row of Figure~\ref{fig:when-the-correction-arrives} is the same pair from the same starting noise, corrected over one stretch of the run and left to plain composition everywhere else, and the finished picture of a row is the one at its right-hand edge. The first grid starts the corrected stretch at the beginning and extends it further down each row; the second starts it later down each row and runs it to the end. Ten corrected steps at the start are already enough to finish with a cat beside a dog, and the rows that correct twenty, thirty or forty steps end on the same picture. A window that starts at step twenty corrects thirty steps, three times as many, and still ends on one blended animal; the row above it, starting at step ten, is the last one that composes. So the ten steps that decide the outcome are the first ten, and a run that misses them does not recover by correcting more of what is left. Both grids are one pair at one seed, and whether the boundary sits in the same place for other pairs is what the sweep below measures.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{when-the-correction-arrives/when-the-correction-arrives.pdf}
+\caption{\textbf{Ten corrected steps already reach the outcome, and no late start recovers it.}
+A cat and a dog at seed 12, corrected over one stretch of each run and left to plain composition
+elsewhere: from the beginning outward in \textbf{(a)}, from a later start through to the end in
+\textbf{(b)}. Along any row the five pictures are that run decoded after 10, 20, 30, 40 and 50 steps,
+a green frame marks a decode taken while the correction was active, and the row marked \emph{off}
+never corrects. The finished picture of a row is the one at its right-hand edge: down that edge (a)
+never changes, while (b) changes once, at the row that starts at step twenty.}
+\label{fig:when-the-correction-arrives}
+\end{figure}
+
+The same boundary appears when the correction is slid across the run rather than anchored to one end. We restrict it to a ten-step window, leave the remaining forty steps uncorrected, and move the window in strides of five, keeping it narrow so timing can be separated from coverage, since a window spanning most of the run would contain the early steps at every position. A generated image counts as composed when an object detector finds two distinct animals in it, and all counts were manually verified. Three of the four seeds compose when the window starts at step 0, three again when it starts at step 5, one when it starts at step 10 and the same one at step 15, and none from step 20 onward (Figure~\ref{fig:where-the-correction-lands}).
+
+The correction is therefore not needed for most of the run. Once the early steps have settled which scene the trajectory is in, plain product-of-experts composition carries the image to the end without it. Why the earliest steps are decisive is open, and what we can show is that the correction they need is learnable. Every result above used the joint prompt, which composition is not allowed to have, and the next section removes that need.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{where-the-correction-lands.pdf}
+\caption{\textbf{Composition survives only while the correction window starts early.} A cat and a
+dog at seeds 9 to 12, as the ten-step window slides across the run. A column is the window's first
+and last step, and everything outside it runs plain composition, so a row varies only in where the
+correction sat. A green frame marks the runs where the detector found both animals, a cat box and a
+dog box with little overlap. The frames thin out from left to right and stop entirely from step 20
+on, with one break: seed 11 composes at 5--15 but not at 0--10.}
+\label{fig:where-the-correction-lands}
+\end{figure}
+
+\section{Learning the Plurality Term}
+\label{sec:method}
+\looseness=-1
+In the previous section we measured the plurality term along composed runs and showed that adding a small amount of it back, early in the run, restores composition. In this section we learn it. We train an adapter inside the model so that its own composed prediction from the current latent and the two concept prompts carries the correction at each step. During training the joint prompt supplies the target the adapter learns from; at inference it is withheld, and the corrected run does not need it.
+
+We construct the training pool from concept pairs that the model can compose under a joint prompt, since a pair that fails even under joint prompting provides no useful target for the adapter to imitate. For each candidate pair, we generate one image using plain joint prompting and one using CO3 \citep{dutta2026steer}, and retain the pair if either image contains both concepts. This filtering leaves \trainpairs{} training pairs, with the remaining pairs reserved for evaluation. Neither concept in a held-out pair appears in any pair used to train the adapter. The starting noise used for evaluation is also excluded from training.
+
+We train a LoRA adapter \citep{hu2022lora} on the query, key, and value projections of every cross-attention layer while keeping the base model frozen, giving the adapted network $\epsilon_{\theta,\psi}$. These projections mediate the interaction between the image representation and the prompt: queries are computed from the latent, while keys and values are computed from the prompt tokens. Each forward pass takes a latent $x_t$, its timestep $t$, and a single prompt, and returns the corresponding noise prediction.
+
+The adapted composition $\hat\epsilon^{\psi}_{\mathrm{PoE}}$ uses three separate predictions,
+conditioned on $c_1$, $c_2$, and the null token $\emptyset$, with the same guidance and PoE composition
+rule as the frozen model. Appendix~\ref{app:training-inference} gives the full construction.
+
+During training, we select \statesperrun{} states from each uncorrected product-of-experts trajectory for every training pair and seed. At each selected $(x_t,t)$, these three adapted passes are evaluated, and their product-of-experts composition is matched to the classifier-free guided prediction of the frozen base model under the joint prompt $c_{12}$,
+\begin{equation}
+\hat\epsilon_{\mathrm{Mono}} = \epsilon_\theta(x_t, t \mid \emptyset)
+  + w\left[ \epsilon_\theta(x_t, t \mid c_{12}) - \epsilon_\theta(x_t, t \mid \emptyset) \right].
+\label{eq:mono-target}
+\end{equation}
+
+Only the LoRA parameters $\psi$ are updated. Training matches the adapted product-of-experts prediction to the frozen joint-prompt target at each selected state. Since the joint-prompt target differs from the frozen composition by $r_t$, this trains the adapter to supply the missing plurality term. At inference,
+only the two concept prompts and the null token are evaluated. Writing the learned correction as
+$\hat r_\psi = \hat\epsilon^{\psi}_{\mathrm{PoE}} - \hat\epsilon_{\mathrm{PoE}}$ gives the learned
+analogue of \eqref{eq:corrected-sampler}, with $\hat r_\psi$ in place of $r_t$:
+\begin{equation}
+    \hat\epsilon_\lambda
+    =
+    \hat\epsilon_{\mathrm{PoE}}
+    +
+    \lambda \hat r_\psi
+    =
+    \hat\epsilon_{\mathrm{PoE}}
+    +
+    \lambda
+    \left(
+    \hat\epsilon^{\psi}_{\mathrm{PoE}}
+    -
+    \hat\epsilon_{\mathrm{PoE}}
+    \right).
+    \label{eq:corrected-sampler-learned}
+\end{equation}
+Training and sampling details are given in Appendix~\ref{app:implementation} and Appendix~\ref{app:training-inference} derives the training and inference relation.

@@ -1,0 +1,81 @@
+p7	changed	0.80	4 We train a LoRA module (Hu et al., 2022) on the query, key, and value projections of every cross-attention of layer of Stable Diffusion XL (Podell e
+p7	absent	0.48	This LoRA module is denoted by ϵθ,ψ with ψ as the LoRA parameters.
+p7	absent	0.46	The module is trained to output the plurality correction for a given latent representation.
+p7	absent	0.43	If the module successfully learns the abstract notion of plurality, then it can be included during inference time with the usual PoE denoising step su
+p7	changed	0.81	Each network evaluation takes a latent xt , its timestep t, and one prompt, and returns the predicted correction defined in Equation 9.
+p7	changed	0.72	It combines them using the same guided product-of-experts rule as the unadapted model with the estimated correction term as shown in Figure 10.
+p7	changed	0.61	L EARNING THE P LURALITY T ERM Figure 5: The adapter repairs the composition without the joint prompt.
+p7	absent	0.47	Rows are four unseen concept pairs, and columns are the joint prompt, plain product, CO3, and our adapter.
+p7	absent	0.55	CO3 uses different starting noise; the other three columns share it.
+p7	changed	0.85	More formally, we construct the training pool from concept pairs that Stable Diffusion XL can compose under a joint prompt.
+p7	absent	0.54	This filtering leaves 48 concept pairs which demonstrate plurality from joint prompting.
+p7	absent	0.45	Remaining concept pair where joint prompting cannot even produce an image with plurality are left for evaluation of the generalisability of our LoRA m
+p7	changed	0.76	At each selected (xt , t), we match the adapted composition to the frozen model’s guided prediction under the joint prompt c12 : [︁ ϵ̂Mono = ϵθ (xt , 
+p7	changed	0.84	We denote it by r̂ψ = ϵ̂ψ PoE − ϵ̂PoE and apply it in the same form as the measured correction: ϵ̂λ = ϵ̂PoE + λr̂ψ (︂ )︂ = ϵ̂PoE + λ ϵ̂ψ PoE − ϵ̂PoE .
+p7	changed	0.60	Appendix B derives the relation between the training target and the prediction used during sampling. 4.1 R ESULTS Figure 5 shows the results of our me
+p7	absent	0.46	Importantly, for inference using our LoRA module the joint prompt is never evaluated, and inference still requires only three predictions per denoisin
+p7	absent	0.46	As expected, joint prompting and CO3 show good performance for common pairs such as the lighthouse and sea which are likely 7
+p8	absent	0.44	to be explicitly in the Stable Diffusion XL training set.
+p8	absent	0.46	For uncommon pairs, even joint prompting can fail by including multiple legs on the penguin for example.
+p8	absent	0.40	CO3 correctly depicts a penguin and elephant separately, however completely changes the style to be a cartoon to accommodate this uncommon pairing.
+p8	absent	0.45	Importantly, all examples are generated from the same initial seeds.
+p8	absent	0.50	The second column shows the corresponding product-of-experts samples.
+p8	absent	0.45	In each case, the two concepts are not preserved as distinct entities: the animals fuse, the tent and mountain collapse into one cone-like shape.
+p8	absent	0.43	The lighthouse and sea appears structurally correct but the lighthouse itself is reduced to a distant object in the background.
+p8	absent	0.38	This reproduces the results of Bradley et al. (2025) which show that PoE will combine objects when they compete for the same position in an image and 
+p8	absent	0.43	Finally, the LoRA module trained to restore plurality accurately does so across a range of different concepts.
+p8	absent	0.42	For the cat and dog it almost perfectly recovers the joint prompt (once again without ever having access to this joint prompt, where the consistency i
+p8	absent	0.42	For the uncommon pairing of the penguin and elephant it also accurately separate the objects.
+p8	absent	0.39	It is important to note that this pairing is a novel combination that the LoRA was not trained on as there are insufficient examples of a good joint p
+p8	absent	0.43	Thus, our LoRA module successful generalises and produces a structurally sound scene which composes distinct object at inference time.
+p8	absent	0.46	We also conduct a sensitivity analysis on the one hyper-parameter our method introduces, which is the rank of our LoRA module.
+p8	changed	0.68	Thus, we trained LoRA modules at different ranks to examine whether adapter capacity affects the recovery of two distinct animals.
+p8	absent	0.43	Figure 6 shows this comparison for ranks 8, 16, and 32.
+p8	absent	0.51	Each row uses the same sampled noise and seed.
+p8	absent	0.54	The rank-8 run produces heavily degraded images in which the cat and dog are largely lost in visual noise, while rank-16 and rank-32 runs produce two 
+p8	absent	0.45	Thus, recovering plurality does require sufficient rank of the LoRA but beyond sufficient dimensionality performance remains consistent.
+p8	absent	0.44	Figure 6: Effect of adapter settings on composing a cat and a dog Each row uses one held-out seed and the same starting noise across columns.
+p8	absent	0.60	The left group compares the uncorrected product with adapters of rank 8, 16, and 32.
+p8	absent	0.51	The right group compares correction during the first 10, first 25, or all 50 denoising steps.
+p8	absent	0.48	After the adapter stops, the PoE completes the remaining steps.
+p8	absent	0.47	Therefore, the first column of the right groups shows the adapter acting on the 10 steps followed by 40 steps of uncorrected composition.
+p8	absent	0.41	Finally, we report two limitation to our approach which should be noted and are demonstrated in Figure 7.
+p8	absent	0.54	Firstly, we consider the effect of applying our LoRA module to a joint prompt.
+p8	absent	0.41	This test whether it can be applied to Stable Diffusion XL as a general property or if it should be used precisely during PoE.
+p8	absent	0.46	We see that the LoRA can change the output from joint prompting and it is not consistently better.
+p8	absent	0.46	For example, the cat and dog image is slightly corrupted and in the tiger and dog pairing it introduces a third animal which itself is a hybrid.
+p8	absent	0.47	However, in the case where the joint prompt fails such as the chessboard and hourglass the LoRA actually improved the image.
+p8	absent	0.47	For easy pairs it seems to have little impact on joint prompting, for example in the picnic basket and watermelon case.
+p8	absent	0.44	Thus, the LoRA module can introduce some instability during joint promting 8
+p9	absent	0.44	and should not be used for all image generations.
+p9	absent	0.39	Our LoRA-augmented PoE can also produce nonsensical which typically correspond to intrusion of new animals.
+p9	absent	0.49	For example, when prompted for a dog and a cat it produces a horse and a dog or a person with a dog.
+p9	absent	0.41	Another example introduces a third smaller cat into frame with a dog and a cat, showing that while the LoRA has learned plurality it is not necessaril
+p9	absent	0.40	Finally, if the seed would typically produce a highly stylized image such as a line drawing or artwork the LoRA does not inject plurality.
+p9	absent	0.42	Thus, the LoRA is particularly useful for realistic styles where object positioning and scene structure is a more strict requirement.
+p9	absent	0.47	However, for styles where hybrid animals are more tolerable the LoRA sometimes does not change the final output.
+p9	absent	0.52	Figure 7: Limitations of the Plurality LoRA: a) The adapter can change the render under joint prompting and is inconsistently useful in this case.
+p9	absent	0.52	Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample.
+p9	absent	0.36	While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog, and a tiger and a dog. b) We show five 
+p9	absent	0.31	The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom mid
+p9	absent	0.53	We show that PoE and similar compositional diffusion methods are unable to create images with plurality, inside create hybrid objects that combine the
+p9	changed	0.61	We show that plurality can be restored during early denoising with PoE and train a LoRA module to supply this correction while keeping a base Stable D
+p9	changed	0.89	Crucially, the adapter restores composition on concept pairs unseen during training, using only the separate concept prompts and the null token at inf
+p9	absent	0.45	Consequently, by using a finite set of easily obtained examples where joint prompting demonstrates plurality we can train a LoRA to apply the concept 
+p9	absent	0.47	Thus, our method is able to achieve the coherent image generation of joint prompting without the need for large quantities of data and exhaustive exam
+p9	absent	0.39	This work identifies a more general principle: the fact that written text often has implied information which can be learned and encoded by text-to-im
+p9	absent	0.42	Fundamentally, this is the core result of Section 3 which shows that a joint prompt such as “a cat and a dog” not only encodes the objects which are d
+p9	absent	0.41	When a compositional diffusion method is used to separate the prompt into “a cat” and “a dog” neither individual prompt contains the same implication 
+p9	absent	0.43	The fact that abstract concepts can be encoded and measured in a latent space is not new to diffusion models or this work.
+p9	absent	0.40	Indeed, it is foundational to machine learning, stretching back to seminal work such as Word2Vec (Mikolov et al., 2013).
+p9	absent	0.44	While we have focused on plurality in this work, it is plausible that many more joint prompts can be identified with new examples of implied concepts.
+p9	absent	0.42	Our work here provides a framework for measuring and distilling these concepts into a module which can then be used to augment compositional diffusion
+p9	absent	0.44	Thus, we take a step towards diffusion which can efficiently compose objects and abstract concepts at inference time. 9
+p12	absent	0.40	A Every run samples with 50 DDIM steps at guidance weight 7.5, at 1024 × 1024 resolution, in fp16.
+p12	absent	0.48	I MPLEMENTATION DETAILS Figure 8 shows how these runs are trained.
+p12	absent	0.52	A cached frozen joint-prompt target supervises the adapted product-of-experts prediction; only the LoRA weights are updated.
+p12	absent	0.52	The frozen network supplies the cached target; the adapted network produces the composition matched to it.
+p12	changed	0.80	We use c1 = “a cat” and c2 = “a dog” as an example, write c12 = “a cat and a dog” for the joint prompt, and denote the null token by ∅.
+p12	changed	0.81	It receives c1 , c2 , and ∅ in three separate forward passes, producing aψ = ϵθ,ψ (xt , t | c1 ), bψ = ϵθ,ψ (xt , t | c2 ), uψ = ϵθ,ψ (xt , t | ∅). (1
+p12	changed	0.72	Adding the two guided predictions counts the shared null prediction twice, so one copy is subtracted: ϵ̂ψ PoE = g1 + g2 − uψ = uψ + w(aψ − uψ ) + w(bψ
+p12	absent	0.39	At w = 1, this is aψ + bψ − uψ ; the runs in this paper use w = 7.5. 12 (14)

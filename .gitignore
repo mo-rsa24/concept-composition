@@ -62,3 +62,11 @@ temp/
 # transfer point between paper/iclr and Overleaf, not a second workspace, and
 # it carries a history the project repo must not nest inside its own.
 # paper/overleaf-iclr/
+
+# The ICLR 56173 Overleaf export: source tracked, figures, builds and PDFs kept out (Overleaf holds them)
+paper/iclr-56173/figures/
+paper/iclr-56173/final_figures/
+paper/iclr-56173/ablation/
+paper/iclr-56173/superdiff stuff/
+paper/iclr-56173/build/
+paper/iclr-56173/**/*.pdf

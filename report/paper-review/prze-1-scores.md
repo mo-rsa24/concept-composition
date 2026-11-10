@@ -1,0 +1,14 @@
+# PRZE-1: quantitative scores and the other methods
+
+Answers PrzE's first weakness and question 1, and UHz6's request for [Attend-and-Excite](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/06-attend-and-excite-bringing-a-missing-subject-back.md) and [CONFORM](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/07-conform-pulling-look-alike-subjects-apart.md).
+
+## Outcomes
+
+- [ ] 💻 code ran: [CLIP score](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/01-clip-score-and-what-it-cannot-tell-apart.md), [ImageReward](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/02-imagereward-the-preference-number.md), [GenEval](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/05-geneval-a-detector-checks-the-objects.md) (two-object and counting prompts) and [T2I-CompBench](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/04-t2i-compbench-a-fixed-prompt-set-per-category.md) (spatial and complex prompts) for joint, PoE, CO3, the Langevin corrector, Feynman-Kac steering, SuperDiff and the adapter, on the PRZE-3b held-out set
+- [ ] 💻 code ran: the CO3 paper's own protocol, run by us: the three prompt sets from Chefer et al. (animals, animals-objects, objects), [BLIP-VQA](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/03-blip-vqa-asking-a-question-per-phrase.md) and ImageReward, with rows for every method we run, laid out like Table 1 of arXiv 2509.25940 so a reader can set the two tables side by side; their published numbers are cited, never copied into our rows, because their prompt count, seeds and hardware are not stated
+- [ ] ✅ check passed: which prompts in those sets overlap the 48 training pairs, and the main table reports the non-overlapping prompts, with the overlapping ones shown separately
+- [ ] 🖼️ screenshot: a multi-method qualitative table in the layout of that paper's Figure 3, one prompt per row and one method per column, with every method from one starting noise
+- [ ] 💻 code ran: an SD 1.5 set with the official Attend-and-Excite and CONFORM code unmodified, plus joint, PoE, PoE with the measured correction and CO3 on the same weights, starting noise and seeds
+- [ ] ✅ check passed: the measured correction composes on SD 1.5 over the PRZE-3b pairs, against a bar written first; this decides whether an SD 1.5 adapter is trained
+- [ ] 🖼️ screenshot: the all-methods ablation grid, rows held-out pairs at fixed seeds, columns methods, mixed columns marked
+- [ ] 📝 markdown created: a one-page plain note on what each score measures and where it sits in the paper
