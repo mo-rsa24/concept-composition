@@ -35,8 +35,9 @@ self-contained engine: it needs no TeX installation and fetches packages and fon
 into `~/.cache/Tectonic`. The FIRST build on a node therefore needs network access. Later builds
 are offline and fast.
 
-**Reading the output.** The build writes `iclr2027_conference.pdf` next to the `.tex`. `*.pdf`
-is gitignored (`.gitignore:31`), so the PDF is never committed: the paper is read by building
+**Reading the output.** The build writes `iclr2027_conference.pdf` next to the `.tex`. The
+repository-wide `*.pdf` rule in `.gitignore` is commented out, so a PDF is kept out only by a path
+rule: `paper/iclr-56173/**/*.pdf` covers the export. The paper is read by building
 it, either through the VS Code PDF viewer or from a laptop over the same SSH tunnel the LoRA
 Inspector is reached through.
 

@@ -43,7 +43,7 @@ action and is actually a several-step decision.
    on 2026-08-19 (`known-failures.md`, entry `poe-launch-001`). The launch script does
    `cd "$REPO"` internally, so the caller needs no working directory at all:
    ```bash
-   ssh <node> 'GPU=<idx> nohup bash /abs/path/to/launch.sh > /abs/path/to/logs/<name>.log 2>&1 &'
+   timeout 30 ssh <node> 'GPU=<idx> nohup bash /abs/path/to/launch.sh > /abs/path/to/logs/<name>.log 2>&1 < /dev/null & disown'
    ```
    Verify the launch in the same SSH call: `sleep 5; pgrep -af "train"` plus `tail` of the
    absolute log path.

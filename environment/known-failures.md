@@ -522,6 +522,62 @@ solutions above are owned by
 
 ---
 
+### Syncing the cluster checkout and launching on a node
+
+#### Entry ID: poe-sync-001
+**Name:** Files copied into the cluster checkout block every later sync
+
+**Symptom:** `scripts/cluster.sh run` stops with "cluster could not fast-forward to
+origin/<branch> (diverged or dirty)", and `git merge --ff-only` in the cluster checkout lists
+"untracked working tree files would be overwritten by merge". Each further attempt writes some of
+the incoming files before aborting, so the checkout drifts into a half-merged state.
+
+**Root cause:** `rsync` copied a folder (`paper/iclr-56173/`) straight into the cluster checkout
+before that folder was committed. Once the laptop committed it, the cluster held untracked copies
+of the same paths, and git refuses to overwrite untracked files during a fast-forward.
+
+**Solution:** Copy anything that is built or run on the cluster to a folder outside the checkout
+(`scripts/refresh_paper_slots.py` builds the paper in
+`/datasets/mmolefe/poe_repair_min/outputs/paper-build/iclr-56173/`). Where a checkout is already
+stuck, move each file the merge names aside, stash any tracked change, compare what remains with
+the target commit (`git diff --quiet origin/<branch> -- <file>`), then `git reset --hard <commit>`
+with the user's yes.
+
+**First discovered:** route step 4 of the ICLR 56173 review response, 2026-11-10; the moved files
+are under `/datasets/mmolefe/poe_repair_min/outputs/rsync-backup-iclr-56173-20261110/` and the
+`.gitignore` leftover in the cluster checkout's `stash@{0}`
+
+**Affects steps:** any step that rsyncs into `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`
+
+**Category:** 🟠 blocks the launch path
+
+**Environment reference:** [hpc/execution-protocol.md](hpc/execution-protocol.md)
+
+#### Entry ID: poe-launch-003
+**Name:** An SSH launch with `nohup` never returns
+
+**Symptom:** `ssh <node> 'nohup bash launch.sh > log 2>&1 &'` launches the job but the SSH call
+itself hangs until the caller's timeout, and anything chained after it in the same command (a
+second node's launch) never runs.
+
+**Root cause:** the backgrounded process keeps the SSH session's standard input open, so SSH waits
+for it to close.
+
+**Solution:** close standard input and detach: `ssh <node> 'nohup bash launch.sh > log 2>&1 < /dev/null & disown'`,
+and wrap the call in `timeout`. Check the launch afterwards with `head` of the log and `pgrep` on
+the node, never by waiting on the launching SSH call.
+
+**First discovered:** route step 4 of the ICLR 56173 review response, 2026-11-10 (mscluster111
+launched, the chained mscluster112 launch did not)
+
+**Affects steps:** every shared-device launch on a `biggpu` node
+
+**Category:** 🟡 recoverable
+
+**Environment reference:** [hpc/execution-protocol.md](hpc/execution-protocol.md)
+
+---
+
 ## Cross-references
 
 - The instrument finding in [the corrector's step-size review](../plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md): a Langevin step size can pass both numeric divergence guards while its renders are texture noise, because the latent norm cannot rise until the Euler step stops contracting. The picture is rung 3 of [the finding](../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).

@@ -31,7 +31,9 @@ SHEET = REPO / "report/paper-review/layout-sheet.md"
 PAPER = REPO / "paper/iclr-56173"
 TEX_NAME = "iclr2027_conference.tex"
 REGISTER_NAME = "figures.md"
-REMOTE = "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr-56173"
+# Built outside the cluster checkout: copying the paper into the checkout leaves untracked copies
+# of tracked files there, and the next scripts/cluster.sh sync cannot fast-forward past them.
+REMOTE = "/datasets/mmolefe/poe_repair_min/outputs/paper-build/iclr-56173"
 TECTONIC = "/home-mscluster/mmolefe/.local/bin/tectonic"
 AXES = ["model", "method", "adapter", "sampler", "steps", "guidance", "resolution",
         "pair", "seed", "group", "setting", "nfe"]

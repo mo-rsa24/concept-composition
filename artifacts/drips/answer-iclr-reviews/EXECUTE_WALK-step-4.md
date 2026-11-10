@@ -17,7 +17,7 @@ Toy: bison and horse, seed 9.
 
 ## Position
 
-Piece 2: launch script `scripts/review_step4_renders.sh` and pair list `scripts/review_step4_census_pairs.txt` written, uncommitted; waiting on your yes to commit, sync and launch on mscluster111 and 112.
+Piece 2 launched; piece 3 opens when the census lands.
 
 ## Ticks
 
@@ -41,7 +41,11 @@ Piece 2: launch script `scripts/review_step4_renders.sh` and pair list `scripts/
 | Style pairs | leave out · a fourth group | you, by `defaults` | they fit none of PRZE-3b's groups |
 | Census scope | all 50 · 30 | you, by `defaults` | |
 | Attend-and-Excite prompt sets | R3 only · also 66 animal prompts in the census | you: `a` | census stays at 51 pairs; file saved to `data/prompt-sets/attend-and-excite/a.e_prompts.json` |
+| How the census is sorted (written before any count) | object pairs by eye · by per-name detector · left out | you: `a`, by eye | the validated instance count covers animals only. Rule: a competing pair is hard when its joint prompt composes on fewer than 4 of 8 seeds (animal pairs: 2 or more boxes from `count_instances`; object pairs: both objects present, called by eye from full resolution, you can overrule); easy but unseen otherwise; object-and-place pairs form the not-competing group by kind |
 
 ## Runs, threads, handoffs
 
-None.
+| Id | Serves | Command | State |
+|---|---|---|---|
+| census-a | piece 3 | `ROLE=census-a GPU=0 nohup bash scripts/review_step4_renders.sh` on mscluster111, PID 25435, commit `6a070f84`, log `/datasets/mmolefe/poe_repair_min/outputs/review_step4/logs/census-a.log` | running since 17:30 UTC, 480 tiles, 38 written by 17:37 |
+| census-b | pieces 3 and 4 | `ROLE=census-b GPU=0 nohup bash scripts/review_step4_renders.sh` on mscluster112, PID 31439, commit `6a070f84`, log `.../logs/census-b.log` | running since 17:35 UTC, 368 census tiles then 144 showcase tiles |
