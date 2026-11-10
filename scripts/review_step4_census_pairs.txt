@@ -1,5 +1,6 @@
 # Route step 4 census (report/paper-review/protocol.md): competing pairs then object-and-place pairs.
 # One pair per line as 'concept a|concept b'; lines 1-30 render on one node, the rest on the other.
+# The last five are look-alike species pairs, added to look for pairs whose joint prompt fails.
 a baboon|a gazelle
 a bathtub|a streetlamp
 a bear|a salmon
@@ -51,3 +52,8 @@ a polar bear|an iceberg
 a rowboat|a cactus garden
 a sailboat|a harbor
 a tent|a snowy mountain
+an eagle|a hawk
+a leopard|a jaguar
+a frog|a toad
+a goose|a swan
+a seal|a walrus

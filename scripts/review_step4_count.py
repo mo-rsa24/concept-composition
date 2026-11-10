@@ -27,6 +27,8 @@ ANIMAL_PAIRS = [
     "a_dog__x__a_horse", "a_fox__x__a_wolf", "a_giraffe__x__a_lion", "a_lion__x__a_dog",
     "a_lion__x__a_horse", "a_peacock__x__a_sheep", "a_raccoon__x__a_salmon", "a_tiger__x__a_dog",
     "a_wolf__x__a_horse", "a_wolf__x__a_husky",
+    "an_eagle__x__a_hawk", "a_leopard__x__a_jaguar", "a_frog__x__a_toad", "a_goose__x__a_swan",
+    "a_seal__x__a_walrus",
 ]
 SEEDS = range(9, 17)
 

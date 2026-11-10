@@ -26,6 +26,9 @@ Piece 2 launched; piece 3 opens when the census lands.
 | 0 | steps 1 and 2 committed so the cluster checkout carries the protocol and the refill script | commit `084ad92e`, 47 files, no PDF, nothing under `figures/` or `build/`; the repo's only remote is GitHub |
 | 1 | 62 candidates outside the 48 training pairs sorted by kind: 30 competing (3 held out), 20 object and place, 10 style, 2 showcase; tent and snowy mountain added to object and place from Figure 5 | pair_prompts*.yaml and pair_pool_v58.yaml read 2026-11-10 |
 | 1 | Attend-and-Excite prompt sets fetched from the attachment the repository's README links: animals 66, animals_objects 144, objects 66; none names a training pair | `a.e_prompts.txt`, 10,146 bytes, in scratch |
+| 2 | census rendered: 848 pictures (51 pairs plus the 2 showcase pairs, joint prompt and plain product, seeds 9 to 16), 0 errors | logs `census-a.log` (done 18:14 UTC) and `census-b.log` under `/datasets/mmolefe/poe_repair_min/outputs/review_step4/logs/` |
+| 3 | animal pairs counted: 288 pictures, `census_counts.csv`; joint prompt composes on 6 to 8 of 8 seeds for all 18 animal pairs, plain product on 0 to 2 | `scripts/review_step4_count.py` on mscluster111, 0 missing |
+| 3 | object pairs called by eye from full resolution, joint prompt, seeds composing of 8: bathtub × streetlamp 8, birdcage × watering can 8, briefcase × ceramic bowl 8, chessboard × lantern 8, drum set × snowman 8, feather pillow × cast iron pan 4 (10, 12, 14, 16), lab microscope × hay bale 8, microwave × potted plant 8, mug × wine glass 5 (11, 13 to 16), piano × candle 8, skateboard × helmet 8, suitcase × desk fan 3 (9, 11, 16) | Claude's calls, 2026-11-10; open to your overrule |
 
 ## Facts found on the way
 
