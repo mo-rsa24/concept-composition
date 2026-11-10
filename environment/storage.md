@@ -64,3 +64,4 @@ exists to catch this, and is a standing recurring plan rather than a finished on
 ## Cross-references
 
 - The mention of **disk guard** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md), task 5.1.
+- The mention of **disk guard** in [the PRZE-10 compute plan](../report/paper-review/prze-10-compute.md), fourth outcome.

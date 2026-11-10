@@ -230,3 +230,7 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 | The deleting-direction warning in §3 | `git status --short` in the clone: 18 deletions and 9 untracked files | 2026-09-21 |
 | Overleaf names every editor session `Update on Overleaf.` | The clone's own log | 2026-09-21 |
 | §3's push and §4's bundle | Transcribed, not run this sitting: §3 from the clone's remote, §4 from the handoff note | 2026-09-21 |
+
+## Cross-references
+
+- The mention of **Overleaf clone**, one of the two older local copies that must not be edited, in [the PRZE-5 page on revising the paper](../report/paper-review/prze-5-paper-revised.md), first outcome.
