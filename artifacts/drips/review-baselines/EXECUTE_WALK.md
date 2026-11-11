@@ -50,3 +50,4 @@ Lion and meerkat at seed 9, SDXL, 1024 by 1024.
 | Slurm 84597 | SuperDiff shard 2 | task 3 | cancelled 10:43 by the step 9 walk |
 | Slurm 84757, 84759, 84760, 84761 | `METHOD=co3 SHARD=2..5 NSHARDS=6`, launched by the step 9 walk | task 3, CO3 | running since 10:43 |
 | mscluster85 nohup, pid 20830 | `GPU=0 nohup bash launchers/review_baselines_fig5.sh`, log `outputs/paper_review/logs/fig5_baselines.log` | task 3, R2 Figure 5 tiles for CO3 and SuperDiff | done 09:02, 8 of 8 (CO3 38 to 43 s, SuperDiff 84 to 87 s per image) |
+| mscluster108 nohup, pids 127193 and 127483 | `GPU=0,1 CODE_COMMIT=cdd58a18 CELLS=logs/cells_co3_tail2way_{0,1}.txt nohup bash launchers/review_baselines_co3_tail.sh` | task 3, CO3's last 154 cells (54 R1, 100 R3), whole pairs from the end of the list | started 13:18 on your yes; 79 and 75 cells |
