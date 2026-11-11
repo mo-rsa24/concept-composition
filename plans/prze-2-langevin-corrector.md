@@ -23,7 +23,7 @@ For Claude to execute.
 
 ### 2. 🔁 The order difference
 
-- [ ] **Anneal the same toy over noise levels with the corrector before each step and after it, and print each order's final mean and variance against N(−0.2308, 0.3077)**
+- [x] **Anneal the same toy over noise levels with the corrector before each step and after it, and print each order's final mean and variance against N(−0.2308, 0.3077)** ✓ verified 2026-11-11: `python3 scripts/check_langevin_order.py`, 13 s, exit 0; at c = 3, k = 20 the KL divergence to the product is 0.00309 corrector first and 0.00171 step first, against 2.25 for plain PoE
   - ◀ Needs: instruction 1
   - ▶ Next: instruction 2
 
@@ -52,7 +52,7 @@ For you to follow.
 
 ### 1. ✅ Run the check
 
-- [ ] **In the VS Code terminal at the repo root, run `python3 scripts/check_langevin_two_gaussians.py`**
+- [x] **In the VS Code terminal at the repo root, run `python3 scripts/check_langevin_two_gaussians.py`** ✓ confirmed 2026-11-11: you read the printed table in chat (four PASS rows; bias 0.0272 at δ = 0.05, 0.0597 at δ = 0.1) and said "done"
   - What you should see: a table of four rows, each ending in PASS, and the last line `PASS: all four step sizes`.
   - What failure looks like: a row ending in MISS, with its var column away from its exact column.
   - ◀ Needs: task 1
