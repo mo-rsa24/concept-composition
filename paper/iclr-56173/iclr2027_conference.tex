@@ -7,6 +7,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{placeins}
+\usepackage{needspace}
 
 % TODO
 % Fix the figure 3 green squares
@@ -25,7 +26,6 @@
 \setcounter{totalnumber}{2}
 \usepackage{xcolor}
 \usepackage{hyperref}
-\usepackage{placeins}
 \usepackage{url}
 \usepackage{wrapfig}
 \usepackage[most]{tcolorbox}
@@ -1272,7 +1272,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 % \section{The strength sweep and its controls}
 % \label{app:strength-sweep}
 
-\clearpage
+% room for this section's first float, so its heading never sits alone at a page foot
+\Needspace{6.4in}
 \section{Review response material}
 \label{app:review-slots}
 
@@ -1295,6 +1296,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \end{table}
 \FloatBarrier
 
+% room for this subsection's first float, so its heading never sits alone at a page foot
+\Needspace{5.8in}
 \subsection{The held-out pairs}
 \label{app:review-held-out}
 
@@ -1311,6 +1314,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R7}{\linewidth}{1.6in}
 \FloatBarrier
 
+% room for this subsection's first float, so its heading never sits alone at a page foot
+\Needspace{2.8in}
 \subsection{Stable Diffusion 1.5}
 \label{app:review-sd15}
 
@@ -1330,6 +1335,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \end{figure}
 \FloatBarrier
 
+% room for this subsection's first float, so its heading never sits alone at a page foot
+\Needspace{4.8in}
 \subsection{Samplers that correct the product}
 \label{app:review-samplers}
 
@@ -1341,6 +1348,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \end{figure}
 \FloatBarrier
 
+% room for this subsection's first float, so its heading never sits alone at a page foot
+\Needspace{4.4in}
 \subsection{How the adapter behaves}
 \label{app:review-adapter}
 
@@ -1374,6 +1383,8 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 \FloatBarrier
 
+% C.5's last figure fills its page, so C.6 starts on a fresh one
+\clearpage
 \subsection{Three concepts}
 \label{app:review-three}
 
