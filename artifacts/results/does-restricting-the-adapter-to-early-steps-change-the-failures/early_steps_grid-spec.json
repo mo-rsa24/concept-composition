@@ -75,5 +75,6 @@
   }
  ],
  "pending": "not trained",
- "footnote": "v58-03-self at step 30,000."
+ "footnote": "v58-03-self at step 30,000.",
+ "rotate_labels": true
 }

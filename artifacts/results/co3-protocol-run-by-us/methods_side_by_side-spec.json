@@ -75,5 +75,6 @@
   }
  ],
  "pending": "not rendered",
- "footnote": "\u2020 PoE + Langevin runs on a subset."
+ "footnote": "\u2020 PoE + Langevin runs on a subset.",
+ "rotate_labels": true
 }

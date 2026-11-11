@@ -15,7 +15,7 @@ The spec:
      "pending": "result pending",                                             labelled grey tile
      "panel": "(a)",   optional panel letter, 9 pt bold, top left
      "footnote": "..."}  optional 8 pt line under the grid
-A column label may hold "\n" for two lines; a row may carry "notes", one per tile, set under it,
+"rotate_labels": true sets row labels vertically in a one-line column. A column label may hold "\n" for two lines; a row may carry "notes", one per tile, set under it,
 and "borders", one colour or null per tile, drawn as a frame inside the tile.
 """
 from __future__ import annotations
@@ -47,7 +47,11 @@ def main() -> int:
     plt.rcParams.update({"font.family": "serif", "font.serif": [FONT], "pdf.fonttype": 42})
     groups, rows = spec["groups"], spec["rows"]
     ncol = sum(len(g["columns"]) for g in groups)
-    label_w = max(len(line) for r in rows for line in r["label"].split("\n")) * LABEL_PT * 0.42 / 72 + 0.06
+    rotate = bool(spec.get("rotate_labels"))  # row labels set vertically, so the column is one text line wide
+    if rotate:
+        label_w = max(r["label"].count("\n") + 1 for r in rows) * LABEL_PT * 1.15 / 72 + 0.08
+    else:
+        label_w = max(len(line) for r in rows for line in r["label"].split("\n")) * LABEL_PT * 0.42 / 72 + 0.06
     usable = spec["width_in"] - label_w - TILE_GAP_IN * (ncol - len(groups)) - GROUP_GAP_IN * (len(groups) - 1)
     tile = usable / ncol
     has_titles = any(g["title"] for g in groups)
@@ -89,8 +93,12 @@ def main() -> int:
             if n:
                 fig.text((col_x[j] + tile / 2) / W, 1 - (y + tile + 0.03) / H, n, ha="center", va="top",
                          fontsize=LABEL_PT, linespacing=1.05)
-        fig.text(0.0, 1 - (y + tile / 2) / H, r["label"], ha="left", va="center", fontsize=LABEL_PT,
-                 linespacing=1.1)
+        if rotate:
+            fig.text((label_w - 0.04) / 2 / W, 1 - (y + tile / 2) / H, r["label"], ha="center", va="center",
+                     fontsize=LABEL_PT, linespacing=1.1, rotation=90, multialignment="center")
+        else:
+            fig.text(0.0, 1 - (y + tile / 2) / H, r["label"], ha="left", va="center", fontsize=LABEL_PT,
+                     linespacing=1.1)
         for j, t in enumerate(r["tiles"]):
             ax = ax_at(col_x[j], y, tile, tile)
             ax.set_axis_off()

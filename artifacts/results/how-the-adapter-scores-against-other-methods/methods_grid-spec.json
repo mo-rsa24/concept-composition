@@ -75,5 +75,6 @@
   }
  ],
  "pending": "not in subset",
- "footnote": "\u2020 PoE + Langevin runs on the animals set only."
+ "footnote": "\u2020 PoE + Langevin runs on the animals set only.",
+ "rotate_labels": true
 }
