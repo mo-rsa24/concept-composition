@@ -49,6 +49,10 @@ Piece 2 of 5 closed (bar committed `3c65c634`); piece 3 waits on `r1_ours`, whic
 |---|---|---|---|
 | r1-ours on 111 (forward) and 112 (backward) | render | R1 `ours` column | not running: blocked by the render script's share guard; relaunch needs `FIGURE_CANDIDATES_MAXUSED_GB=30`, left to the user |
 
+## Parked
+
+- Figure 15 (R12), the image grid behind Table 1: parked on the author's word, Tables 1 and 2 come first. Protocol rule 8 asks for a grid beside every table, so it is owed rather than dropped. The seed 9 preview with 16 of 18 tiles is `artifacts/results/how-the-adapter-scores-against-other-methods/methods-grid-preview-seed9.png`; it needs the two object-row Ours tiles and a CO3 column.
+
 ## Owed
 
 - Baseline rows (step 8), SD 1.5 rows (step 10), R3 adapter renders (`r3_ours`, not started at the open).
