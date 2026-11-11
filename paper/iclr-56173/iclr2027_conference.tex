@@ -680,7 +680,7 @@ The experiments above obtain $r_t$ from the joint prompt. We now consider whethe
 
 \begin{table}[t]
 \centering\footnotesize
-\caption{\textbf{Composition and image quality on the Attend-and-Excite prompts with SDXL.} Rows are methods, all from the same starting noise for each prompt and seed (seeds 9 to 12); column groups are the animals (66 prompts), animals-with-objects (144) and objects (66) prompt sets. Each method has 1{,}104 images (276 prompts, 4 seeds each). Comp.\ is the share of animal-prompt images in which a detector counts two or more animals; CLIP is CLIP score (0 to 100), BLIP is BLIP-VQA (0 to 1) and IR is ImageReward; higher is better for all four.}
+\caption{\textbf{Composition and image quality on the Attend-and-Excite prompts with SDXL.} Rows are methods, all from the same starting noise for each prompt and seed (seeds 9 to 12); column groups are the animals (66 prompts), animals-with-objects (144) and objects (66) prompt sets. Each method has 1{,}104 images (276 prompts, 4 seeds each). Comp.\ is the share of animal-prompt images in which a detector counts two or more animals; CLIP is CLIP score (0 to 100), BLIP is BLIP-VQA (0 to 1) and IR is ImageReward; higher is better for all four. The joint prompt and CO3 evaluate the joint prompt at every step and sit above the rule as references; bold marks the best of the methods below it, which never evaluate the joint prompt.}
 \label{tab:review-R1}
 \smallskip
 \reviewslot{R1}{\linewidth}{1.8in}
@@ -816,7 +816,7 @@ between the training target and the prediction used during sampling.
 
 \subsection{Results}
 \label{sec:results}
-We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Table~\ref{tab:review-R1} and Table~\ref{tab:review-R3} (Appendix~\ref{app:review-held-out}) score every image, and the appendix shows the renders behind them. On the 53 held-out pairs of Table~\ref{tab:review-R3}, the adapter raises the product's BLIP-VQA on the pairs that are easy for the joint prompt but unseen in training, leaves the pairs that do not compete unchanged, and the three hard pairs are too few to separate the methods.
+We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Table~\ref{tab:review-R1} and Table~\ref{tab:review-R3} (Appendix~\ref{app:review-held-out}) score every image, and the appendix shows the renders behind them. On the 53 held-out pairs of Table~\ref{tab:review-R3}, the adapter raises the product's BLIP-VQA on the pairs that are easy for the joint prompt but unseen in training, leaves the pairs that do not compete unchanged, and the three hard pairs are too few to separate the methods. CO3 evaluates the joint prompt at every step and scores above our adapter on most columns of both tables; our adapter, which never evaluates it, draws two animals most often on the animal prompts and scores highest on the object prompts.
 
 
 
@@ -1312,7 +1312,7 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 
 \begin{table}[htbp]
 \centering\footnotesize
-\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide.}
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide. As in Table~\ref{tab:review-R1}, the joint prompt and CO3 are references above the rule, and bold marks the highest mean below it.}
 \label{tab:review-R3}
 \smallskip
 \reviewslot{R3}{\linewidth}{1.3in}
