@@ -1,10 +1,10 @@
 # Does a Langevin corrector fix the product?
 
-Appendix figure R6 of the ICLR 56173 revision, for reviewer PrzE's request for an MCMC corrector baseline. The plan is [PRZE-2](../../../plans/prze-2-langevin-corrector.md); the slot is R6 in [the layout sheet](../../../report/paper-review/layout-sheet.md).
+The Langevin corrector beside the joint prompt, PoE and CO3 on Figure 5's four pairs, for reviewer PrzE's request for an MCMC corrector baseline. Its PoE + Langevin and CO3 tiles feed Figure 5 (slot R2). The plan is [PRZE-2](../../../plans/prze-2-langevin-corrector.md), and the slot it feeds is R2 in [the layout sheet](../../../report/paper-review/layout-sheet.md).
 
 ## five_columns.png
 
-<a href="five_columns.png"><img src="five_columns.png" width="200" alt="R6: four pairs by five samplers at seed 10; PoE plus Langevin keeps one of the two things on three rows"></a>
+<a href="five_columns.png"><img src="five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10; PoE plus Langevin keeps one of the two things on three rows"></a>
 
 **What it shows.** Rows are cat × dog, elephant × penguin, tent × snowy mountain and lighthouse × stormy sea at seed 10; columns are the joint prompt, joint + Langevin, PoE, PoE + Langevin (c = 3, k = 20 over all 50 levels) and CO3 at its published default. On the first three rows PoE fuses the two things, PoE + Langevin keeps one of them (one dog, one elephant, a mountain with no tent), and joint + Langevin and CO3 show both. The lighthouse row shows both things in every column. One seed, called by eye. `seen`
 

@@ -1,4 +1,4 @@
-"""Appendix figure R6: the samplers that correct the product, on the four Figure 5 pairs at seed 10.
+"""The Langevin corrector on the four Figure 5 pairs at seed 10: tiles for Figure 5 (slot R2) and a contact sheet.
 
 Four columns are rendered here from one starting latent per row, the one protocol rule 2 names
 (``load_shared_latents`` for ``a_cat__x__a_dog`` at the seed): the joint prompt, joint + Langevin,
@@ -115,7 +115,7 @@ def sheet() -> None:
         font = ImageFont.truetype("DejaVuSans.ttf", 26)
     except OSError:
         font = ImageFont.load_default()
-    record = {"slot": "R6", "seed": SEED, "setting": {"c": C, "k": K, "levels": "all 50"},
+    record = {"feeds_slot": "R2", "seed": SEED, "setting": {"c": C, "k": K, "levels": "all 50"},
               "noise": f"{NOISE_PAIR} seed {SEED}, protocol rule 2; CO3 starts from the same latent, "
                        "its later resampling noise from the seed number", "rows": [], "columns": [c[1] for c in COLUMNS]}
     missing = []

@@ -1,8 +1,8 @@
-# 🧪 PRZE-2: prove the Langevin corrector and render the five-column figure
+# 🧪 PRZE-2: prove the Langevin corrector and render its tiles for Figure 5
 
 **Goal:** reviewer PrzE gets the MCMC corrector baseline they asked for, built on an update shown correct on a toy with a known answer.
-**Objective:** the corrector's update passes a check against the exact stationary mean and variance at four step sizes; the joint-prompt Langevin and unadjusted HMC drivers match the plain sampler at zero corrector steps; the Langevin setting (c = 3, k = 20) is written into the protocol before any review image; appendix figure R6 is built at that setting.
-**Definition of done:** `python3 scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; R6 sits at `artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with a sidecar listing seeds, noise and settings.
+**Objective:** the corrector's update passes a check against the exact stationary mean and variance at four step sizes; the joint-prompt Langevin and unadjusted HMC drivers match the plain sampler at zero corrector steps; the Langevin setting (c = 3, k = 20) is written into the protocol before any review image; the PoE + Langevin and CO3 tiles for Figure 5 (R2) are rendered at that setting from one starting latent.
+**Definition of done:** `python3 scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; the tiles and their five-column contact sheet sit at `artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with a sidecar listing seeds, noise and settings.
 **Route:** [answer the ICLR reviews](route-answer-the-iclr-reviews.md), step 8, outcome PRZE-2.
 
 ## Environment Facts This Plan Depends On
@@ -41,9 +41,9 @@ For Claude to execute.
   - ◀ Needs: 3
   - ▶ Next: 5
 
-### 5. 🖼️ The five-column figure
+### 5. 🖼️ The tiles for Figure 5
 
-- [x] **Render R6 at c = 3, k = 20 and seed 10: joint, joint + Langevin, PoE and PoE + Langevin from the rule 2 starting latent, CO3 from its own noise; write its sidecar; add the rows to the route's "What we know so far" and redraw the board with `--step 8`** ✓ verified 2026-11-11: mscluster107 card 0, log `paper_review/logs/prze2-r6-107.out` ends `render exit 0  co3 exit 0  sheet exit 0  tiles 20`; every row's starting latent matches `latents/seed10.pt`
+- [x] **Render the four Figure 5 pairs at c = 3, k = 20 and seed 10: joint, joint + Langevin, PoE and PoE + Langevin from the rule 2 starting latent, CO3 from the same latent; write the contact sheet and its sidecar; add the rows to the route's "What we know so far" and redraw the board with `--step 8`** ✓ verified 2026-11-11: mscluster107 card 0, log `paper_review/logs/prze2-r6-107.out` ends `render exit 0  co3 exit 0  sheet exit 0  tiles 20`; every row's starting latent matches `latents/seed10.pt`
   - ◀ Needs: 4
   - Command: `sbatch --export=ALL,REPO=<checkout> <checkout>/scripts/review_r6_renders.sbatch` (16 tiles from `scripts/review_r6_renders.py --render`, 4 CO3 tiles from `scripts/review_baseline_cell.py --method co3 --group r6`, then `--sheet`); the log ends `sheet exit 0  tiles 20`.
   - ▶ Next: instruction 4
@@ -71,5 +71,5 @@ For you to follow.
 
 ### 4. 👀 Judge the figure
 
-- [ ] **Open R6 and its sidecar, and say PASS or MISS against the definition of done**
+- [ ] **Open the contact sheet and its sidecar, and say PASS or MISS against the definition of done**
   - ◀ Needs: task 5

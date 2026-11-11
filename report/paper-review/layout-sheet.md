@@ -13,7 +13,6 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 | R2 | Figure 5 rebuilt: four pairs, every SDXL method, one adapter, one seed | main, the current Figure 5, full width, caption below | full × 3.1 in, drawn at 5.5 in wide by `scripts/paper_tile_figure.py` | rows: cat and dog, elephant and penguin, tent and snowy mountain, lighthouse and stormy sea at the shared seed; columns: joint, PoE (Composable Diffusion), CO3, PoE + Langevin†, ours; labels 8 pt | `artifacts/results/four-pairs-one-adapter/four-pairs-one-adapter.pdf` | PRZE-3a, PRZE-8, PRZE-1 | itself |
 | R3 | the ablation: every SDXL method on the 53 held-out census pairs, by group | appendix | natural width, centered, at most full × 1.3 in | rows: R1's methods; column groups: hard (3), easy but unseen (29), not competing (21), each with Comp. ± 95% CI; seeds 9 to 16 | `artifacts/results/how-the-adapter-scores-against-other-methods/held_out_ablation.csv` | PRZE-1, PRZE-3b | R4 |
 | R4 | methods side by side on held-out pairs, the renders behind R3 | appendix | full × 5.0 in | rows: one pair per group at seeds 9 and 10, by rule 5; columns: R3's methods | `artifacts/results/co3-protocol-run-by-us/methods_side_by_side.png` | PRZE-1 | itself |
-| R6 | the samplers that correct the product | appendix | full × 3.9 in | rows: the four Figure 5 pairs at the shared seed; columns: joint, joint + Langevin, PoE, PoE + Langevin, CO3 | `artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` | PRZE-2 | itself |
 | R7 | every pair, and what it was used for | appendix | full × 8.0 in (one page) | one row per pair: pair, set (training, tuning, showcase, held out, unseen), whether the joint prompt composed, whether CO3 composed, kept or dropped | `artifacts/results/which-pairs-trained-and-which-were-held-out/pair_list.csv` | PRZE-3a | none; a list, no number |
 | R9 | failure types as the adapter's window narrows | appendix | full × 2.0 in | one bar group per failure type (intrusion, count error, style loss, joint-prompt corruption, instability); bars: adapter off, steps 0 to 10, 0 to 25, all 50, the all-steps-trained adapter | `artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/failure_counts.pdf` | PRZE-11 | R10 |
 | R10 | the early-steps renders | appendix | full × 4.6 in | rows: pairs and seeds by rule 5; columns: the five settings of R9 | `artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/early_steps_grid.png` | PRZE-11 | itself |
@@ -112,16 +111,6 @@ ours                 ..              ..                      ..
               method 1   method 2   method 3   ...   ours
 prompt/pair   [tile]     [tile]     [tile]           [tile]
   ...  (rows by rule 5; all tiles in a row share the starting noise unless marked †)
-```
-
-**R6: the samplers that correct the product** (appendix)
-
-```
-             joint   joint+Lang.   PoE   PoE+Lang.   CO3
-pair 1       [ ]     [ ]           [ ]   [ ]         [ ]
-pair 2       [ ]     [ ]           [ ]   [ ]         [ ]
-pair 3       [ ]     [ ]           [ ]   [ ]         [ ]
-pair 4       [ ]     [ ]           [ ]   [ ]         [ ]
 ```
 
 **R9: failure types as the window narrows** (appendix)
