@@ -22,7 +22,7 @@ For Claude to execute.
 
 ### 2. 💻 Close the launcher gaps
 
-- [ ] **Joint text as written, and the ledger's frog and mouse allowance, in the render scripts; one wave 1 launcher beside `scripts/review_step4_renders.sh`**
+- [x] **Joint text as written, and the ledger's frog and mouse allowance, in the render scripts; one wave 1 launcher beside `scripts/review_step4_renders.sh`** ✓ verified 2026-11-11: commits `56debc5e`, `62554919`, `0c2babc1`; the first joint sidecar reads "a horse with a glasses"
   - The 36 benchmark prompts that read "with" get `--joint-template "{a} with {b}"`; the other 240 keep `"{a} and {b}"`.
   - The 45 prompts naming a frog or a mouse pass `allow_ask_first`, per the 2026-11-10 row of `artifacts/_shared/cross_pair_pool_configs/pair_ledger.md`.
   - Shown as a diff before anything runs.
@@ -30,13 +30,13 @@ For Claude to execute.
 
 ### 3. 🚀 Predict and launch
 
-- [ ] **For each wave 1 job: an 80% interval for runtime and memory, the exact command, a yes, the launch, the first tiles**
+- [x] **For each wave 1 job: an 80% interval for runtime and memory, the exact command, a yes, the launch, the first tiles** ✓ verified 2026-11-11: every launch after your yes, log headers name node, card and PID; logs in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/`
   - ◀ Needs: 2
   - ▶ Next: 4
 
 ### 4. ✅ Poll and count
 
-- [ ] **Count each job's outputs on the launch node against the table, and add the results to the route's "What we know so far"**
+- [x] **Count each job's outputs on the launch node against the table, and add the results to the route's "What we know so far"** ✓ verified 2026-11-11 11:14 on mscluster112: 3, 848, 424, 1,104, 1,104, 1,104, matching the definition of done
   - ◀ Needs: 3
 
 ## Instructions
@@ -50,7 +50,7 @@ For you to follow.
 
 ### 2. 👀 Look at the smoke tiles
 
-- [ ] **Open the six Figure 5 tiles job 1 writes, and say whether each shows what its column claims**
+- [ ] **Open the three Figure 5 tiles job 1 writes, and say whether each shows what its column claims**
   - ◀ Needs: task 3
 
 ### 3. 👀 Judge PASS or MISS

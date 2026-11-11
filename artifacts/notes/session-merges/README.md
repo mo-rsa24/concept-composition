@@ -13,3 +13,7 @@ Starting prompts built by `/merge-sessions` from finished sessions, each with it
 **PRZE-2: the Langevin corrector as the MCMC baseline**
 
 [2026-11-11-prze-2-langevin-corrector-retro.md](2026-11-11-prze-2-langevin-corrector-retro.md). The retrospective of the 2026-11-11 walk over the PRZE-2 plan, session `afd3106a-798a-4f57-a01b-e7ee95e53231`: the two-Gaussian check, the order measurement, the two drivers, the no-grid setting and the tiles folded into Figure 5.
+
+**PRZE-10: every review job priced, and wave 1 rendered**
+
+[2026-11-11-prze-10-wave-1-renders-retro.md](2026-11-11-prze-10-wave-1-renders-retro.md). The retrospective of the 2026-11-11 walk over the PRZE-10 plan, session `a4d17e2c-8fab-4c9c-b8c3-c17cc665b327`: the jobs table with measured rates, the joint-prompt and subject-ledger fixes, wave 1's six jobs to a PASS at 11:14, and the corrector subset handed on.
