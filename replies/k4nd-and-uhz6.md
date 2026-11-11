@@ -101,7 +101,7 @@ Pending, with W3. The numbers come from route steps 5, 9 and 12.
 We have addressed this in Section 4. Every training target is the frozen model's joint-prompt
 prediction, and no CO3 picture is a target; CO3 served only as a second view when screening some
 candidates. Pairs were kept when the joint prompt drew both named things as separate objects
-(Figure 8 shows a kept pair and a pair left out).
+(Figure 8 shows the joint prompt beside CO3 for five candidate pairs, with the picture judged clearest at each seed).
 
 ### Q4: the objective in the main text, and the inconsistencies
 
@@ -121,7 +121,7 @@ resolved as described under W4. Baseline starting noise: pending, with W5.
 
 We have addressed this in Section 4. Every training target is the frozen model's joint-prompt
 prediction, and pairs were kept when the joint prompt drew both named things as separate objects
-(Figure 8). CO3 served only as a second view when screening some candidates, and no CO3 picture
+(Figure 8 shows the joint prompt beside CO3 during screening). CO3 served only as a second view when screening some candidates, and no CO3 picture
 is a target.
 
 ### Presentation issues

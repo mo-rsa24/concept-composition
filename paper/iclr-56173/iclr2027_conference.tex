@@ -1159,8 +1159,8 @@ Every run samples with 50 DDIM steps at guidance weight 7.5, at $1024\times1024$
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{ablation/how-training-targets-are-chosen.pdf}
-\caption{\textbf{How training pairs were chosen.} The joint prompt's picture for two candidate pairs. Horse and pig was kept: the joint prompt draws the two animals as separate animals. Cheetah and cougar was left out: the two animals are too alike to judge.}
+\includegraphics[width=\textwidth]{ablation/joint-prompt-screening.pdf}
+\caption{\textbf{Screening candidate pairs with the joint prompt and CO3.} Each seed shows the joint prompt's picture (left) and CO3's (right). A green frame marks, for each seed, the picture that shows the two named animals as separate animals most clearly. Crow and raven was dropped because the two birds are hard to tell apart (red frames). Training targets are always the joint prompt's picture, and only the pairs labelled ``in training set'' are among the \trainpairs{} training pairs.}
 \label{fig:training-choice}
 \end{figure}
 
