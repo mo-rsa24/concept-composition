@@ -8,7 +8,10 @@ under co3's transformers 4.44.1, which lacks Qwen2-VL).
 
 Usage:
   python scripts/review_score_clip_ir.py --images a.png b.png --prompts "p" "p" --out probe.csv
+  python scripts/review_score_clip_ir.py --in rows.csv --out scores.csv   (columns image,prompt;
+      rows already in --out are skipped and new rows appended, so a stopped run resumes)
 """
+import os
 from __future__ import annotations
 
 import argparse
@@ -44,23 +47,37 @@ class ClipScore:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--images", nargs="+", required=True)
-    ap.add_argument("--prompts", nargs="+", required=True)
+    ap.add_argument("--images", nargs="+")
+    ap.add_argument("--prompts", nargs="+")
+    ap.add_argument("--in", dest="inp")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
-    assert len(a.images) == len(a.prompts)
+    if a.inp:
+        pairs = [(r["image"], r["prompt"]) for r in csv.DictReader(open(a.inp))]
+    else:
+        assert a.images and len(a.images) == len(a.prompts)
+        pairs = list(zip(a.images, a.prompts))
+    done = set()
+    if os.path.exists(a.out):
+        done = {r["image"] for r in csv.DictReader(open(a.out))}
+    todo = [p for p in pairs if p[0] not in done]
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    imgs = [Image.open(p).convert("RGB") for p in a.images]
-    clip = ClipScore(dev).score(imgs, a.prompts)
+    clip_m = ClipScore(dev)
     rm = RM.load("ImageReward-v1.0", device=dev)
-    with torch.no_grad():
-        ir = [float(rm.score(t, i)) for t, i in zip(a.prompts, imgs)]
-    with open(a.out, "w", newline="") as f:
+    new = not os.path.exists(a.out)
+    with open(a.out, "a", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["image", "prompt", "clip_score", "image_reward"])
-        for row in zip(a.images, a.prompts, clip, ir):
-            w.writerow([row[0], row[1], f"{row[2]:.4f}", f"{row[3]:.4f}"])
-    print(open(a.out).read())
+        if new:
+            w.writerow(["image", "prompt", "clip_score", "image_reward"])
+        for n, (path, prompt) in enumerate(todo):
+            img = Image.open(path).convert("RGB")
+            c = clip_m.score([img], [prompt])[0]
+            with torch.no_grad():
+                r = float(rm.score(prompt, img))
+            w.writerow([path, prompt, f"{c:.4f}", f"{r:.4f}"])
+            if n % 100 == 0:
+                f.flush(); print(f"{n + 1}/{len(todo)}", flush=True)
+    print(f"done: {len(todo)} scored, {len(done)} already in {a.out}")
 
 
 if __name__ == "__main__":
