@@ -74,7 +74,7 @@ The submission said that no held-out concept appears in training; that was too s
 now says the held-out pairs are unseen as pairs.
 
 The failure types the reviewer names (substituted identities, additional objects, style-dependent
-loss) are counted per setting in the appendix [TODO: slot R9].
+loss) are counted per setting in Figure 11 (Appendix C.4).
 
 ### W4: method details poorly presented and sometimes inconsistent
 
@@ -140,7 +140,7 @@ Answered under W1 above.
 > style-dependent failures?"
 
 Answered under k4nd W3: Tables 1 and 3 [TODO: slots R1 and R3]. The identity errors, additional
-objects and style-dependent failures are counted per setting in the appendix [TODO: slot R9].
+objects and style-dependent failures are counted per setting in Figure 11 (Appendix C.4).
 
 ### Q3: pairs retained when only CO3 succeeds
 
@@ -256,7 +256,7 @@ short for the learned correction: on baboon and gazelle the second animal appear
 on, although the measured correction needs only the first ten (Section 3). The species substitution
 on cow and horse, where two cows appear and no horse, persists at every window, so the failure modes
 of the submitted Fig. 7 (Figure 13 in the revision) do not come from the late steps. The counts per
-failure type across all 53 held-out pairs and eight seeds are in Figure 11 [TODO: slot R9].
+failure type across all 53 held-out pairs and eight seeds are in Figure 11.
 
 ### Q4: pairs that do not compete for the same region
 

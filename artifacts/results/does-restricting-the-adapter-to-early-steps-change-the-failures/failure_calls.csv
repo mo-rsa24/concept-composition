@@ -1,0 +1,1697 @@
+pair,seed,group,setting,label,style_loss,note,id
+a_baboon__x__a_gazelle,9,easy but unseen,off,hybrid,no,baboon with gazelle ears and horn,t5488
+a_baboon__x__a_gazelle,9,easy but unseen,steps 0-10,hybrid,no,baboon with gazelle legs and horns on its back,t2732
+a_baboon__x__a_gazelle,9,easy but unseen,steps 0-25,hybrid,no,baboon beside monkey-bodied creature with gazelle horns,t4027
+a_baboon__x__a_gazelle,9,easy but unseen,all 50,hybrid,no,baboons with gazelle horns and gazelle-like body,t8555
+a_baboon__x__a_gazelle,10,easy but unseen,off,hybrid,no,baboon with gazelle horns,t3800
+a_baboon__x__a_gazelle,10,easy but unseen,steps 0-10,hybrid,no,baboon with gazelle horns,t9565
+a_baboon__x__a_gazelle,10,easy but unseen,steps 0-25,hybrid,no,baboon with gazelle horn; extra monkey and stick creature,t5112
+a_baboon__x__a_gazelle,10,easy but unseen,all 50,hybrid,no,gazelle head on baboon body; extra monkey,t2115
+a_baboon__x__a_gazelle,11,easy but unseen,off,hybrid,no,baboon with horn,t8419
+a_baboon__x__a_gazelle,11,easy but unseen,steps 0-10,hybrid,no,baboon with horns,t3976
+a_baboon__x__a_gazelle,11,easy but unseen,steps 0-25,hybrid,no,baboon plus small monkey-gazelle fusion,t7295
+a_baboon__x__a_gazelle,11,easy but unseen,all 50,hybrid,no,gazelle body with baboon head; blurred baboon,t5571
+a_baboon__x__a_gazelle,12,easy but unseen,off,hybrid,no,baboon with gazelle horns and legs,t5611
+a_baboon__x__a_gazelle,12,easy but unseen,steps 0-10,hybrid,no,baboon beside upright gazelle-baboon,t9945
+a_baboon__x__a_gazelle,12,easy but unseen,steps 0-25,hybrid,no,"gazelle upright with monkey body, floating horn; extra small monkey",t2758
+a_baboon__x__a_gazelle,12,easy but unseen,all 50,hybrid,no,"gazelle upright with monkey body, floating horn; extra small monkey",t8083
+a_baboon__x__a_gazelle,13,easy but unseen,off,hybrid,no,baboon with gazelle horns floating above,t9212
+a_baboon__x__a_gazelle,13,easy but unseen,steps 0-10,hybrid,no,baboon with gazelle horns floating above,t7450
+a_baboon__x__a_gazelle,13,easy but unseen,steps 0-25,hybrid,no,distorted upright gazelle fused; baboon and extra small monkey,t3959
+a_baboon__x__a_gazelle,13,easy but unseen,all 50,hybrid,no,maned baboon-like beast; gazelle fused into lying animal; extra monkey,t5458
+a_baboon__x__a_gazelle,14,easy but unseen,off,hybrid,no,baboon with gazelle horns,t6419
+a_baboon__x__a_gazelle,14,easy but unseen,steps 0-10,two,no,baboon and gazelle-like animal; species unclear,t5400
+a_baboon__x__a_gazelle,14,easy but unseen,steps 0-25,hybrid,no,baboon with gazelle legs and horn beside fawn,t4915
+a_baboon__x__a_gazelle,14,easy but unseen,all 50,hybrid,no,gazelle with baboon features; extra baboon-like shape,t9661
+a_baboon__x__a_gazelle,15,easy but unseen,off,hybrid,no,baboon with horns,t4969
+a_baboon__x__a_gazelle,15,easy but unseen,steps 0-10,hybrid,yes,monkey body with gazelle legs and tail; painting,t4563
+a_baboon__x__a_gazelle,15,easy but unseen,steps 0-25,hybrid,yes,baboon with tusk beside a monkey; no gazelle; painting,t6340
+a_baboon__x__a_gazelle,15,easy but unseen,all 50,hybrid,yes,baboon with tusk-like trunk beside gazelle; painting,t1605
+a_baboon__x__a_gazelle,16,easy but unseen,off,one,no,baboon only,t6983
+a_baboon__x__a_gazelle,16,easy but unseen,steps 0-10,hybrid,yes,baboon head on long gazelle-like body; painting,t1719
+a_baboon__x__a_gazelle,16,easy but unseen,steps 0-25,hybrid,yes,baboon with gazelle horns beside monkey-gazelle; painting,t4035
+a_baboon__x__a_gazelle,16,easy but unseen,all 50,hybrid,yes,"gazelle with monkey face; upright horned figure, sitting baboon; painting",t4687
+a_bathtub__x__a_streetlamp,9,easy but unseen,off,two,no,"black and white; wall lamp and small lamp post, indoor tub",t7678
+a_bathtub__x__a_streetlamp,9,easy but unseen,steps 0-10,two,no,bathtub on street under lamps,t9547
+a_bathtub__x__a_streetlamp,9,easy but unseen,steps 0-25,intrusion,no,unrequested furry blob figures,t1471
+a_bathtub__x__a_streetlamp,9,easy but unseen,all 50,intrusion,no,unrequested cat-like furry figure,t5638
+a_bathtub__x__a_streetlamp,10,easy but unseen,off,one,no,lantern only; no bathtub,t3696
+a_bathtub__x__a_streetlamp,10,easy but unseen,steps 0-10,two,no,black and white,t9183
+a_bathtub__x__a_streetlamp,10,easy but unseen,steps 0-25,two,no,black and white,t9595
+a_bathtub__x__a_streetlamp,10,easy but unseen,all 50,two,no,black and white; tub under streetlamp,t2125
+a_bathtub__x__a_streetlamp,11,easy but unseen,off,hybrid,no,streetlamp shaped like shower fixture; no tub,t7360
+a_bathtub__x__a_streetlamp,11,easy but unseen,steps 0-10,hybrid,no,streetlamp post fitted with bath tap beside tub,t6029
+a_bathtub__x__a_streetlamp,11,easy but unseen,steps 0-25,hybrid,no,streetlamp post fitted with bath taps beside tub,t5180
+a_bathtub__x__a_streetlamp,11,easy but unseen,all 50,hybrid,no,streetlamp post fitted with bath taps beside tub,t5081
+a_bathtub__x__a_streetlamp,12,easy but unseen,off,one,no,bathtub with ornate faucet; no streetlamp,t1375
+a_bathtub__x__a_streetlamp,12,easy but unseen,steps 0-10,two,no,,t9392
+a_bathtub__x__a_streetlamp,12,easy but unseen,steps 0-25,two,no,,t1454
+a_bathtub__x__a_streetlamp,12,easy but unseen,all 50,two,no,,t4752
+a_bathtub__x__a_streetlamp,13,easy but unseen,off,intrusion,no,extra small lamp fixture by bathtub,t4667
+a_bathtub__x__a_streetlamp,13,easy but unseen,steps 0-10,intrusion,no,extra blurred person; bathtub faint,t2375
+a_bathtub__x__a_streetlamp,13,easy but unseen,steps 0-25,intrusion,no,extra person walking,t6550
+a_bathtub__x__a_streetlamp,13,easy but unseen,all 50,intrusion,no,extra person walking,t8531
+a_bathtub__x__a_streetlamp,14,easy but unseen,off,two,no,"black and white photo, tub behind lamp with tap-like arms",t4615
+a_bathtub__x__a_streetlamp,14,easy but unseen,steps 0-10,one,no,lamp only; blurred shape not a clear tub,t4453
+a_bathtub__x__a_streetlamp,14,easy but unseen,steps 0-25,two,no,,t5034
+a_bathtub__x__a_streetlamp,14,easy but unseen,all 50,two,no,tub beside lamp,t6188
+a_bathtub__x__a_streetlamp,15,easy but unseen,off,hybrid,no,streetlamp with bathtub inside lamp glass; old photo look,t3505
+a_bathtub__x__a_streetlamp,15,easy but unseen,steps 0-10,hybrid,no,streetlamp growing out of bathtub rim,t9008
+a_bathtub__x__a_streetlamp,15,easy but unseen,steps 0-25,two,no,,t7033
+a_bathtub__x__a_streetlamp,15,easy but unseen,all 50,two,no,,t9190
+a_bathtub__x__a_streetlamp,16,easy but unseen,off,two,yes,flat illustration,t6918
+a_bathtub__x__a_streetlamp,16,easy but unseen,steps 0-10,two,no,,t9638
+a_bathtub__x__a_streetlamp,16,easy but unseen,steps 0-25,two,no,,t6929
+a_bathtub__x__a_streetlamp,16,easy but unseen,all 50,two,no,,t3649
+a_bear__x__a_salmon,9,easy but unseen,off,hybrid,yes,salmon with bear legs; illustration,t9370
+a_bear__x__a_salmon,9,easy but unseen,steps 0-10,hybrid,yes,bear with salmon body plus salmon; illustration,t3705
+a_bear__x__a_salmon,9,easy but unseen,steps 0-25,intrusion,yes,extra canoes; bear head partly fish-like; illustration,t8249
+a_bear__x__a_salmon,9,easy but unseen,all 50,intrusion,yes,extra canoes; illustration,t1027
+a_bear__x__a_salmon,10,easy but unseen,off,hybrid,yes,fish with bear fur and ear in a cap; line drawing,t7180
+a_bear__x__a_salmon,10,easy but unseen,steps 0-10,hybrid,yes,bear with fish head; illustration,t5808
+a_bear__x__a_salmon,10,easy but unseen,steps 0-25,hybrid,yes,bear with salmon-skin back; illustration,t8213
+a_bear__x__a_salmon,10,easy but unseen,all 50,hybrid,yes,bear with salmon-skin back; illustration,t1357
+a_bear__x__a_salmon,11,easy but unseen,off,hybrid,yes,salmon set inside bear head outline; illustration,t5540
+a_bear__x__a_salmon,11,easy but unseen,steps 0-10,intrusion,yes,extra salmon; illustration,t5019
+a_bear__x__a_salmon,11,easy but unseen,steps 0-25,intrusion,yes,extra salmon; illustration,t1388
+a_bear__x__a_salmon,11,easy but unseen,all 50,intrusion,yes,extra salmon; illustration,t4868
+a_bear__x__a_salmon,12,easy but unseen,off,hybrid,no,bear with salmon-pink skin,t5093
+a_bear__x__a_salmon,12,easy but unseen,steps 0-10,two,no,,t9884
+a_bear__x__a_salmon,12,easy but unseen,steps 0-25,two,no,,t9812
+a_bear__x__a_salmon,12,easy but unseen,all 50,two,no,,t5936
+a_bear__x__a_salmon,13,easy but unseen,off,hybrid,yes,salmon on a fur-textured rock body; pencil drawing,t1670
+a_bear__x__a_salmon,13,easy but unseen,steps 0-10,two,yes,bear holding salmon; illustration,t6296
+a_bear__x__a_salmon,13,easy but unseen,steps 0-25,two,yes,illustration,t9865
+a_bear__x__a_salmon,13,easy but unseen,all 50,two,yes,illustration,t1400
+a_bear__x__a_salmon,14,easy but unseen,off,one,yes,bear only; drawing,t6974
+a_bear__x__a_salmon,14,easy but unseen,steps 0-10,count error,yes,"two bears, no salmon; illustration",t3779
+a_bear__x__a_salmon,14,easy but unseen,steps 0-25,count error,yes,"two bears, no salmon; tiny figure; illustration",t5060
+a_bear__x__a_salmon,14,easy but unseen,all 50,count error,yes,"two bears, no salmon; tiny figure; illustration",t7487
+a_bear__x__a_salmon,15,easy but unseen,off,one,yes,bear face only; drawing,t3454
+a_bear__x__a_salmon,15,easy but unseen,steps 0-10,hybrid,yes,bear body with salmon head; drawing,t3942
+a_bear__x__a_salmon,15,easy but unseen,steps 0-25,hybrid,yes,bear with fish-like head plus salmon; drawing,t2987
+a_bear__x__a_salmon,15,easy but unseen,all 50,hybrid,yes,bear with fish-like head plus salmon; drawing,t6265
+a_bear__x__a_salmon,16,easy but unseen,off,hybrid,yes,salmon head on bear body; illustration,t8958
+a_bear__x__a_salmon,16,easy but unseen,steps 0-10,two,yes,illustration,t4736
+a_bear__x__a_salmon,16,easy but unseen,steps 0-25,hybrid,yes,salmon with bear-like body plus bear; illustration,t3993
+a_bear__x__a_salmon,16,easy but unseen,all 50,hybrid,yes,salmon with bear-like body plus bear; illustration,t4317
+a_bear__x__a_squirrel,9,easy but unseen,off,one,yes,squirrel only; illustration,t8256
+a_bear__x__a_squirrel,9,easy but unseen,steps 0-10,one,no,squirrel only; distorted face,t4428
+a_bear__x__a_squirrel,9,easy but unseen,steps 0-25,hybrid,yes,squirrel-headed bear plus bear with squirrel tail,t5341
+a_bear__x__a_squirrel,9,easy but unseen,all 50,count error,yes,two bears no squirrel; drawing,t2501
+a_bear__x__a_squirrel,10,easy but unseen,off,hybrid,no,squirrel head on bear body,t5427
+a_bear__x__a_squirrel,10,easy but unseen,steps 0-10,hybrid,no,bear head fused with squirrel head; black and white photo,t3811
+a_bear__x__a_squirrel,10,easy but unseen,steps 0-25,hybrid,no,bear-sized squirrel over bear-squirrel mix; black and white photo,t7394
+a_bear__x__a_squirrel,10,easy but unseen,all 50,hybrid,no,bear beside creature with bear and squirrel heads,t1633
+a_bear__x__a_squirrel,11,easy but unseen,off,one,no,squirrel only,t5063
+a_bear__x__a_squirrel,11,easy but unseen,steps 0-10,one,yes,squirrel only; illustration,t1776
+a_bear__x__a_squirrel,11,easy but unseen,steps 0-25,two,yes,"small animal species unclear, marten-like squirrel; illustration",t4354
+a_bear__x__a_squirrel,11,easy but unseen,all 50,two,yes,"small animal species unclear, marten-like squirrel; loose tail; illustration",t7014
+a_bear__x__a_squirrel,12,easy but unseen,off,hybrid,no,squirrel with bear face and body,t6702
+a_bear__x__a_squirrel,12,easy but unseen,steps 0-10,hybrid,no,bear with squirrel face beside squirrel,t4215
+a_bear__x__a_squirrel,12,easy but unseen,steps 0-25,hybrid,no,bear with squirrel eye and snout beside squirrel,t7459
+a_bear__x__a_squirrel,12,easy but unseen,all 50,two,no,,t1744
+a_bear__x__a_squirrel,13,easy but unseen,off,hybrid,no,bear body with squirrel head,t8578
+a_bear__x__a_squirrel,13,easy but unseen,steps 0-10,hybrid,no,both animals mix bear and squirrel,t8210
+a_bear__x__a_squirrel,13,easy but unseen,steps 0-25,intrusion,no,extra small black animal,t5566
+a_bear__x__a_squirrel,13,easy but unseen,all 50,intrusion,no,extra tiny bear,t6464
+a_bear__x__a_squirrel,14,easy but unseen,off,hybrid,no,squirrel with bear face,t9288
+a_bear__x__a_squirrel,14,easy but unseen,steps 0-10,hybrid,yes,squirrel-headed bear beside squirrel; engraving,t1906
+a_bear__x__a_squirrel,14,easy but unseen,steps 0-25,hybrid,yes,squirrel-headed bear beside squirrel; engraving,t2484
+a_bear__x__a_squirrel,14,easy but unseen,all 50,hybrid,yes,bear-headed squirrel plus bear with whiskers and extra small animal,t6583
+a_bear__x__a_squirrel,15,easy but unseen,off,one,yes,squirrel only; ink drawing,t4522
+a_bear__x__a_squirrel,15,easy but unseen,steps 0-10,one,yes,squirrel only; drawing,t2418
+a_bear__x__a_squirrel,15,easy but unseen,steps 0-25,hybrid,yes,bear-sized squirrel with bear body beside small squirrel; drawing,t9329
+a_bear__x__a_squirrel,15,easy but unseen,all 50,two,yes,pencil drawing,t6387
+a_bear__x__a_squirrel,16,easy but unseen,off,one,no,"squirrel only, unclear brown fur mass below",t4154
+a_bear__x__a_squirrel,16,easy but unseen,steps 0-10,hybrid,no,bear body with squirrel head,t5228
+a_bear__x__a_squirrel,16,easy but unseen,steps 0-25,hybrid,yes,bear with squirrel face; painting,t3905
+a_bear__x__a_squirrel,16,easy but unseen,all 50,hybrid,yes,bear beside bear-cub with squirrel tail; painting,t6525
+a_birdcage__x__a_watering_can,9,easy but unseen,off,hybrid,no,watering can built as birdcage,t4966
+a_birdcage__x__a_watering_can,9,easy but unseen,steps 0-10,hybrid,no,watering can with birdcage hook and wires; small extra can,t4455
+a_birdcage__x__a_watering_can,9,easy but unseen,steps 0-25,one,no,birdcage with bird and flowers; no watering can,t4020
+a_birdcage__x__a_watering_can,9,easy but unseen,all 50,one,no,birdcage with bird and flowers; no watering can,t8792
+a_birdcage__x__a_watering_can,10,easy but unseen,off,hybrid,no,birdcage that is a watering can with bird inside,t8239
+a_birdcage__x__a_watering_can,10,easy but unseen,steps 0-10,intrusion,no,extra bird and pot,t5702
+a_birdcage__x__a_watering_can,10,easy but unseen,steps 0-25,intrusion,no,extra bird and potted plant,t8608
+a_birdcage__x__a_watering_can,10,easy but unseen,all 50,intrusion,no,extra animal and potted plant,t5162
+a_birdcage__x__a_watering_can,11,easy but unseen,off,hybrid,yes,watering can body formed as cage; illustration,t4601
+a_birdcage__x__a_watering_can,11,easy but unseen,steps 0-10,hybrid,yes,cage-shaped watering can; illustration,t9662
+a_birdcage__x__a_watering_can,11,easy but unseen,steps 0-25,hybrid,yes,watering can fused into cage base; extra bird; illustration,t4879
+a_birdcage__x__a_watering_can,11,easy but unseen,all 50,hybrid,yes,watering can fused into cage base; extra bird; illustration,t6018
+a_birdcage__x__a_watering_can,12,easy but unseen,off,one,no,watering can only; arched cage-like handle,t9891
+a_birdcage__x__a_watering_can,12,easy but unseen,steps 0-10,two,no,,t2587
+a_birdcage__x__a_watering_can,12,easy but unseen,steps 0-25,intrusion,no,extra birds in and on cage,t2191
+a_birdcage__x__a_watering_can,12,easy but unseen,all 50,intrusion,no,extra birds in and on cage,t4206
+a_birdcage__x__a_watering_can,13,easy but unseen,off,hybrid,yes,watering can whose body is a birdcage; 3D render,t3311
+a_birdcage__x__a_watering_can,13,easy but unseen,steps 0-10,two,no,watering can beside birdcage; pail inside cage,t9049
+a_birdcage__x__a_watering_can,13,easy but unseen,steps 0-25,hybrid,no,"birdcage with watering-can handle and pail inside, plus fluffy bird creature",t8472
+a_birdcage__x__a_watering_can,13,easy but unseen,all 50,hybrid,no,"birdcage with watering-can handle and pail inside, plus fluffy creature",t8478
+a_birdcage__x__a_watering_can,14,easy but unseen,off,hybrid,no,"watering can with cage-bar body and loop handles, plus bird",t6784
+a_birdcage__x__a_watering_can,14,easy but unseen,steps 0-10,hybrid,no,watering can whose body is a birdcage,t7746
+a_birdcage__x__a_watering_can,14,easy but unseen,steps 0-25,hybrid,no,"birdcage with watering-can spout, plus parrot, bird, potted plant",t2525
+a_birdcage__x__a_watering_can,14,easy but unseen,all 50,hybrid,no,"birdcage with watering-can spout, plus parrot, bird, potted plant",t4075
+a_birdcage__x__a_watering_can,15,easy but unseen,off,hybrid,yes,watering can with cage bars; ink drawing,t5470
+a_birdcage__x__a_watering_can,15,easy but unseen,steps 0-10,hybrid,yes,birdcage with watering-can spout; illustration,t6014
+a_birdcage__x__a_watering_can,15,easy but unseen,steps 0-25,hybrid,yes,birdcage with watering-can handle beside watering can; illustration,t6828
+a_birdcage__x__a_watering_can,15,easy but unseen,all 50,hybrid,yes,birdcage with watering-can handle beside watering can; illustration,t7437
+a_birdcage__x__a_watering_can,16,easy but unseen,off,hybrid,yes,birdcage with watering-can rose on top; illustration,t6449
+a_birdcage__x__a_watering_can,16,easy but unseen,steps 0-10,two,no,,t7807
+a_birdcage__x__a_watering_can,16,easy but unseen,steps 0-25,intrusion,no,extra small watering can inside cage,t3104
+a_birdcage__x__a_watering_can,16,easy but unseen,all 50,intrusion,no,extra small watering can inside cage,t9073
+a_bison__x__a_horse,9,easy but unseen,off,one,no,bison head only,t1866
+a_bison__x__a_horse,9,easy but unseen,steps 0-10,count error,no,bison no horse; ghost bison behind,t8183
+a_bison__x__a_horse,9,easy but unseen,steps 0-25,count error,no,two bison no horse,t6717
+a_bison__x__a_horse,9,easy but unseen,all 50,count error,no,two bison no horse,t5880
+a_bison__x__a_horse,10,easy but unseen,off,hybrid,no,bison head wearing horse bridle,t9470
+a_bison__x__a_horse,10,easy but unseen,steps 0-10,hybrid,no,bison with horse muzzle,t1841
+a_bison__x__a_horse,10,easy but unseen,steps 0-25,count error,no,"three bison, no horse",t4130
+a_bison__x__a_horse,10,easy but unseen,all 50,count error,no,"three bison, no horse",t5262
+a_bison__x__a_horse,11,easy but unseen,off,hybrid,no,bison front on horse legs and rump,t6903
+a_bison__x__a_horse,11,easy but unseen,steps 0-10,count error,no,bison and bison calf no horse,t9243
+a_bison__x__a_horse,11,easy but unseen,steps 0-25,count error,no,bison and bison calf no horse,t1080
+a_bison__x__a_horse,11,easy but unseen,all 50,count error,no,bison and bison calf no horse,t2414
+a_bison__x__a_horse,12,easy but unseen,off,one,no,bison only with harness,t2187
+a_bison__x__a_horse,12,easy but unseen,steps 0-10,hybrid,no,bison face fused with bridle; foal-like calf,t8343
+a_bison__x__a_horse,12,easy but unseen,steps 0-25,count error,no,"bison and horned calf, no horse",t8404
+a_bison__x__a_horse,12,easy but unseen,all 50,count error,no,"bison and horned calf, no horse",t3382
+a_bison__x__a_horse,13,easy but unseen,off,one,no,bison only,t9068
+a_bison__x__a_horse,13,easy but unseen,steps 0-10,count error,no,"two bison, no horse",t5858
+a_bison__x__a_horse,13,easy but unseen,steps 0-25,count error,no,"two bison, no horse",t3374
+a_bison__x__a_horse,13,easy but unseen,all 50,count error,no,"bison and lying bison calf, no horse",t9150
+a_bison__x__a_horse,14,easy but unseen,off,one,no,bison only,t4556
+a_bison__x__a_horse,14,easy but unseen,steps 0-10,count error,no,"two bison, no horse",t8353
+a_bison__x__a_horse,14,easy but unseen,steps 0-25,count error,no,"bison and bison calf, no horse",t3072
+a_bison__x__a_horse,14,easy but unseen,all 50,count error,no,"bison and bison calf, no horse",t9445
+a_bison__x__a_horse,15,easy but unseen,off,one,no,single bison head wearing halter,t5941
+a_bison__x__a_horse,15,easy but unseen,steps 0-10,hybrid,no,bridled bison; blurred horse-bison behind,t9197
+a_bison__x__a_horse,15,easy but unseen,steps 0-25,count error,no,two bison no horse,t8600
+a_bison__x__a_horse,15,easy but unseen,all 50,count error,no,two bison no horse,t8246
+a_bison__x__a_horse,16,easy but unseen,off,hybrid,no,bison front on horse hindquarters; black and white,t9874
+a_bison__x__a_horse,16,easy but unseen,steps 0-10,one,no,single bison,t5929
+a_bison__x__a_horse,16,easy but unseen,steps 0-25,hybrid,no,horse body with bison front; extra small animals,t8842
+a_bison__x__a_horse,16,easy but unseen,all 50,hybrid,no,horse body with bison front; extra small animals,t7281
+a_briefcase__x__a_ceramic_bowl,9,easy but unseen,off,hybrid,no,ceramic bowl with briefcase lid and handle,t8056
+a_briefcase__x__a_ceramic_bowl,9,easy but unseen,steps 0-10,hybrid,no,leather bag shaped as a bowl; extra cups,t1642
+a_briefcase__x__a_ceramic_bowl,9,easy but unseen,steps 0-25,intrusion,no,"briefcase and stacked bowls; extra bear toy, bottle, leather tray",t6434
+a_briefcase__x__a_ceramic_bowl,9,easy but unseen,all 50,intrusion,no,"briefcase and stacked bowls; extra bear toy, bottle, leather tray",t3463
+a_briefcase__x__a_ceramic_bowl,10,easy but unseen,off,hybrid,no,warped briefcase lined with ceramic pieces,t9772
+a_briefcase__x__a_ceramic_bowl,10,easy but unseen,steps 0-10,two,no,ceramic bowl inside open case,t1917
+a_briefcase__x__a_ceramic_bowl,10,easy but unseen,steps 0-25,one,no,suitcase with box inside; no bowl,t9034
+a_briefcase__x__a_ceramic_bowl,10,easy but unseen,all 50,one,no,suitcase with box inside; no bowl,t5061
+a_briefcase__x__a_ceramic_bowl,11,easy but unseen,off,hybrid,no,round bowl-shaped leather case,t2975
+a_briefcase__x__a_ceramic_bowl,11,easy but unseen,steps 0-10,two,yes,ceramic bowls inside open briefcase; illustration,t4424
+a_briefcase__x__a_ceramic_bowl,11,easy but unseen,steps 0-25,one,yes,"briefcase with contents, no clear bowl; illustration",t9429
+a_briefcase__x__a_ceramic_bowl,11,easy but unseen,all 50,one,yes,"briefcase with contents, no clear bowl; illustration",t2269
+a_briefcase__x__a_ceramic_bowl,12,easy but unseen,off,hybrid,no,ceramic bowl with briefcase handle,t1281
+a_briefcase__x__a_ceramic_bowl,12,easy but unseen,steps 0-10,intrusion,no,extra open case holding a device,t1621
+a_briefcase__x__a_ceramic_bowl,12,easy but unseen,steps 0-25,intrusion,no,extra open case holding a device,t4053
+a_briefcase__x__a_ceramic_bowl,12,easy but unseen,all 50,intrusion,no,extra open case holding a device,t3254
+a_briefcase__x__a_ceramic_bowl,13,easy but unseen,off,hybrid,no,bowl fused with briefcase straps,t6475
+a_briefcase__x__a_ceramic_bowl,13,easy but unseen,steps 0-10,hybrid,no,"bowl shaped like briefcase, extra vase",t8682
+a_briefcase__x__a_ceramic_bowl,13,easy but unseen,steps 0-25,one,no,"briefcase and ceramic vase with plant, no bowl",t7186
+a_briefcase__x__a_ceramic_bowl,13,easy but unseen,all 50,one,no,"briefcase and ceramic vase with plant, no bowl",t1393
+a_briefcase__x__a_ceramic_bowl,14,easy but unseen,off,hybrid,no,ceramic bowl with briefcase handle,t7543
+a_briefcase__x__a_ceramic_bowl,14,easy but unseen,steps 0-10,hybrid,no,ceramic-glazed bag in open case; extra dishes,t2963
+a_briefcase__x__a_ceramic_bowl,14,easy but unseen,steps 0-25,intrusion,no,"bowls in open case plus plant, jars and plates",t2136
+a_briefcase__x__a_ceramic_bowl,14,easy but unseen,all 50,intrusion,no,"bowls in open case plus plant, jars and plates",t7907
+a_briefcase__x__a_ceramic_bowl,15,easy but unseen,off,hybrid,no,briefcase made of ceramic bowl,t8096
+a_briefcase__x__a_ceramic_bowl,15,easy but unseen,steps 0-10,intrusion,no,stacked extra bowls in briefcase,t1166
+a_briefcase__x__a_ceramic_bowl,15,easy but unseen,steps 0-25,intrusion,no,cards and pencils inside bowl in briefcase,t7525
+a_briefcase__x__a_ceramic_bowl,15,easy but unseen,all 50,intrusion,no,cards and pencils inside bowl in briefcase,t1050
+a_briefcase__x__a_ceramic_bowl,16,easy but unseen,off,hybrid,no,ceramic bowl with briefcase straps and handle,t5429
+a_briefcase__x__a_ceramic_bowl,16,easy but unseen,steps 0-10,hybrid,no,glazed bowl shaped like a briefcase,t2340
+a_briefcase__x__a_ceramic_bowl,16,easy but unseen,steps 0-25,hybrid,no,leather bag fused with planter bowl holding cactus and fruit,t9013
+a_briefcase__x__a_ceramic_bowl,16,easy but unseen,all 50,hybrid,no,leather bag fused with planter bowl holding cactus and fruit,t7013
+a_cat__x__a_horse,9,easy but unseen,off,broken,no,smeared disintegrating cat,t3396
+a_cat__x__a_horse,9,easy but unseen,steps 0-10,hybrid,no,horse with cat head,t4725
+a_cat__x__a_horse,9,easy but unseen,steps 0-25,hybrid,no,horse with cat head; extra small cat-horse and cat,t7726
+a_cat__x__a_horse,9,easy but unseen,all 50,hybrid,no,horse with cat head; extra small cat-horse and cat,t3281
+a_cat__x__a_horse,10,easy but unseen,off,hybrid,yes,horse head with cat whiskers; line drawing,t1986
+a_cat__x__a_horse,10,easy but unseen,steps 0-10,hybrid,no,horse body with cat legs and paws,t7776
+a_cat__x__a_horse,10,easy but unseen,steps 0-25,hybrid,no,white pony with cat-like head; horse and two extra cats,t5710
+a_cat__x__a_horse,10,easy but unseen,all 50,hybrid,no,white pony with cat-like head; horse and two extra cats,t2281
+a_cat__x__a_horse,11,easy but unseen,off,hybrid,yes,horse with cat face; ink wash,t9060
+a_cat__x__a_horse,11,easy but unseen,steps 0-10,hybrid,yes,horse with cat head; painting,t6568
+a_cat__x__a_horse,11,easy but unseen,steps 0-25,intrusion,no,extra ghostly second cat,t2082
+a_cat__x__a_horse,11,easy but unseen,all 50,one,no,horse beside malformed plush cat-like blob,t3185
+a_cat__x__a_horse,12,easy but unseen,off,hybrid,no,horse-dog head fusion,t7356
+a_cat__x__a_horse,12,easy but unseen,steps 0-10,hybrid,no,horse with tabby cat head,t1261
+a_cat__x__a_horse,12,easy but unseen,steps 0-25,hybrid,no,faces fused; pony with cat whiskers,t2929
+a_cat__x__a_horse,12,easy but unseen,all 50,two,no,,t5483
+a_cat__x__a_horse,13,easy but unseen,off,hybrid,yes,horse body with cat head; illustration,t4400
+a_cat__x__a_horse,13,easy but unseen,steps 0-10,hybrid,no,orange horse-cat and white cat with horse face,t7307
+a_cat__x__a_horse,13,easy but unseen,steps 0-25,hybrid,no,pony with cat face beside Siamese cat,t5992
+a_cat__x__a_horse,13,easy but unseen,all 50,hybrid,no,"pony with cat face, white cat-horse, plus small cat",t5701
+a_cat__x__a_horse,14,easy but unseen,off,hybrid,yes,cat with horse head; drawing,t6111
+a_cat__x__a_horse,14,easy but unseen,steps 0-10,one,no,black cat; horse a headless blob,t4986
+a_cat__x__a_horse,14,easy but unseen,steps 0-25,two,no,horse body malformed,t7335
+a_cat__x__a_horse,14,easy but unseen,all 50,intrusion,no,extra small kitten,t4216
+a_cat__x__a_horse,15,easy but unseen,off,hybrid,yes,horse head with cat face; pencil drawing,t5729
+a_cat__x__a_horse,15,easy but unseen,steps 0-10,hybrid,yes,cat fused with horse; illustration,t4348
+a_cat__x__a_horse,15,easy but unseen,steps 0-25,intrusion,yes,extra cat; painting,t7294
+a_cat__x__a_horse,15,easy but unseen,all 50,intrusion,yes,extra cat; painting,t9657
+a_cat__x__a_horse,16,easy but unseen,off,hybrid,yes,cat body with horse head; illustration,t9693
+a_cat__x__a_horse,16,easy but unseen,steps 0-10,hybrid,yes,"horse with cat eye, orange cat-like blob; painting",t2707
+a_cat__x__a_horse,16,easy but unseen,steps 0-25,two,yes,painting,t3009
+a_cat__x__a_horse,16,easy but unseen,all 50,two,yes,"horse has pig-like face, separate cat; painting",t9782
+a_cat__x__a_lion,9,easy but unseen,off,hybrid,yes,cat-lion face; drawing,t9836
+a_cat__x__a_lion,9,easy but unseen,steps 0-10,one,no,lion only,t7891
+a_cat__x__a_lion,9,easy but unseen,steps 0-25,two,no,,t4513
+a_cat__x__a_lion,9,easy but unseen,all 50,two,no,,t7347
+a_cat__x__a_lion,10,easy but unseen,off,one,no,lion face only,t6045
+a_cat__x__a_lion,10,easy but unseen,steps 0-10,count error,no,"lion and lion cub, no clear cat",t8708
+a_cat__x__a_lion,10,easy but unseen,steps 0-25,count error,no,"lion and lion cub, no clear cat",t2822
+a_cat__x__a_lion,10,easy but unseen,all 50,count error,no,"lion and blue-eyed cub, no clear cat; cub could be a kitten",t6865
+a_cat__x__a_lion,11,easy but unseen,off,one,yes,lion head only; pencil drawing,t6308
+a_cat__x__a_lion,11,easy but unseen,steps 0-10,two,yes,"small animal species unclear, lioness or cat; illustration",t8316
+a_cat__x__a_lion,11,easy but unseen,steps 0-25,two,yes,"small animal species unclear, kitten face on cub; illustration",t6820
+a_cat__x__a_lion,11,easy but unseen,all 50,two,yes,"small animal species unclear, kitten face on cub; illustration",t9859
+a_cat__x__a_lion,12,easy but unseen,off,hybrid,no,fused cat-lion face,t9844
+a_cat__x__a_lion,12,easy but unseen,steps 0-10,count error,no,lion and lion cub; no clear cat,t7480
+a_cat__x__a_lion,12,easy but unseen,steps 0-25,count error,no,lion and lion cub (tail tuft); no clear cat,t3455
+a_cat__x__a_lion,12,easy but unseen,all 50,count error,no,lion and lion cub; no clear cat,t5665
+a_cat__x__a_lion,13,easy but unseen,off,one,yes,lion head only; pencil sketch,t8233
+a_cat__x__a_lion,13,easy but unseen,steps 0-10,one,no,lion only,t1263
+a_cat__x__a_lion,13,easy but unseen,steps 0-25,two,no,"second animal species unclear, cub or cat; paper bag on lion",t4157
+a_cat__x__a_lion,13,easy but unseen,all 50,two,no,"second animal species unclear, cub or cat; paper bag on lion",t2775
+a_cat__x__a_lion,14,easy but unseen,off,one,yes,cat only; painterly,t1580
+a_cat__x__a_lion,14,easy but unseen,steps 0-10,hybrid,no,lion with cat face,t3682
+a_cat__x__a_lion,14,easy but unseen,steps 0-25,intrusion,no,extra cat beside kitten and lion,t8253
+a_cat__x__a_lion,14,easy but unseen,all 50,intrusion,no,extra headless sack-like animal; small one cat or lion cub,t1735
+a_cat__x__a_lion,15,easy but unseen,off,hybrid,yes,cat face with lion mane; line art,t9147
+a_cat__x__a_lion,15,easy but unseen,steps 0-10,one,yes,lion only; sepia drawing,t5354
+a_cat__x__a_lion,15,easy but unseen,steps 0-25,two,yes,"small cat, possibly cub; sepia drawing",t1087
+a_cat__x__a_lion,15,easy but unseen,all 50,two,yes,sepia drawing,t8393
+a_cat__x__a_lion,16,easy but unseen,off,hybrid,yes,lion-cat face; drawing,t1349
+a_cat__x__a_lion,16,easy but unseen,steps 0-10,hybrid,yes,lion with cat face; painting,t7677
+a_cat__x__a_lion,16,easy but unseen,steps 0-25,count error,yes,"lion and lioness, no cat; painting",t5613
+a_cat__x__a_lion,16,easy but unseen,all 50,count error,yes,"lion and lioness, no cat; painting",t1293
+a_chessboard__x__a_lantern,9,easy but unseen,off,one,yes,chessboard only; print illustration,t5294
+a_chessboard__x__a_lantern,9,easy but unseen,steps 0-10,hybrid,no,lanterns shaped as chess pieces on chessboard,t1010
+a_chessboard__x__a_lantern,9,easy but unseen,steps 0-25,intrusion,no,cat and second lantern,t8737
+a_chessboard__x__a_lantern,9,easy but unseen,all 50,intrusion,no,cat and second lantern,t9014
+a_chessboard__x__a_lantern,10,easy but unseen,off,one,yes,"abstract board with pieces, no lantern",t9878
+a_chessboard__x__a_lantern,10,easy but unseen,steps 0-10,hybrid,no,chessboard turned into checkered floor under lantern,t1229
+a_chessboard__x__a_lantern,10,easy but unseen,steps 0-25,hybrid,no,"chess pieces inside lantern, board is checkered floor",t7258
+a_chessboard__x__a_lantern,10,easy but unseen,all 50,hybrid,no,"chess pieces inside lantern, board is checkered floor",t3712
+a_chessboard__x__a_lantern,11,easy but unseen,off,hybrid,yes,chess pieces shaped like lanterns,t2277
+a_chessboard__x__a_lantern,11,easy but unseen,steps 0-10,one,yes,chessboard only; no clear lantern; print style,t3727
+a_chessboard__x__a_lantern,11,easy but unseen,steps 0-25,two,yes,hanging lanterns over chessboard; print style,t3394
+a_chessboard__x__a_lantern,11,easy but unseen,all 50,two,yes,hanging lanterns over chessboard; print style,t6253
+a_chessboard__x__a_lantern,12,easy but unseen,off,one,no,chessboard and pieces only,t7213
+a_chessboard__x__a_lantern,12,easy but unseen,steps 0-10,two,no,small lantern-like cubes on board,t6088
+a_chessboard__x__a_lantern,12,easy but unseen,steps 0-25,two,no,,t5462
+a_chessboard__x__a_lantern,12,easy but unseen,all 50,two,no,,t4187
+a_chessboard__x__a_lantern,13,easy but unseen,off,two,no,lantern on chessboard with chess pieces,t7172
+a_chessboard__x__a_lantern,13,easy but unseen,steps 0-10,hybrid,no,lanterns shaped like chess pieces on chessboard,t1333
+a_chessboard__x__a_lantern,13,easy but unseen,steps 0-25,hybrid,no,lantern plus lantern-shaped chess piece on chessboard,t6080
+a_chessboard__x__a_lantern,13,easy but unseen,all 50,hybrid,no,lantern plus lantern-shaped chess piece on chessboard,t2076
+a_chessboard__x__a_lantern,14,easy but unseen,off,two,yes,warped checkerboard behind lantern; illustration,t7074
+a_chessboard__x__a_lantern,14,easy but unseen,steps 0-10,two,no,,t9845
+a_chessboard__x__a_lantern,14,easy but unseen,steps 0-25,two,no,chess pieces inside lantern,t9226
+a_chessboard__x__a_lantern,14,easy but unseen,all 50,two,no,chess pieces inside lantern,t2845
+a_chessboard__x__a_lantern,15,easy but unseen,off,hybrid,yes,lantern made of chessboard pattern; illustration,t3594
+a_chessboard__x__a_lantern,15,easy but unseen,steps 0-10,hybrid,yes,lantern with chess-piece top and chessboard globe; illustration,t1433
+a_chessboard__x__a_lantern,15,easy but unseen,steps 0-25,hybrid,yes,"lantern with chessboard-pattern globe, plus extra cat creature; illustration",t1935
+a_chessboard__x__a_lantern,15,easy but unseen,all 50,hybrid,yes,"lantern with chessboard-pattern globe, plus extra cat creature; illustration",t6767
+a_chessboard__x__a_lantern,16,easy but unseen,off,two,no,lanterns on chessboard; black and white,t2088
+a_chessboard__x__a_lantern,16,easy but unseen,steps 0-10,one,no,chessboard only; no lantern,t2688
+a_chessboard__x__a_lantern,16,easy but unseen,steps 0-25,two,no,domed lantern on board; candle-like pieces,t6533
+a_chessboard__x__a_lantern,16,easy but unseen,all 50,two,no,domed lantern on board; candle-like pieces,t5744
+a_deer__x__a_hedgehog,9,easy but unseen,off,hybrid,no,hedgehog with antlers,t3892
+a_deer__x__a_hedgehog,9,easy but unseen,steps 0-10,hybrid,yes,hedgehog with deer ear and face; illustration,t7599
+a_deer__x__a_hedgehog,9,easy but unseen,steps 0-25,count error,yes,"two hedgehogs, no deer; illustration",t8088
+a_deer__x__a_hedgehog,9,easy but unseen,all 50,count error,yes,"two hedgehogs, no deer; illustration",t8152
+a_deer__x__a_hedgehog,10,easy but unseen,off,hybrid,no,hedgehog with antler spines,t6497
+a_deer__x__a_hedgehog,10,easy but unseen,steps 0-10,hybrid,no,hedgehog with deer face,t7030
+a_deer__x__a_hedgehog,10,easy but unseen,steps 0-25,hybrid,no,hedgehogs with antlers,t5167
+a_deer__x__a_hedgehog,10,easy but unseen,all 50,count error,no,hedgehogs no deer,t7477
+a_deer__x__a_hedgehog,11,easy but unseen,off,hybrid,yes,hedgehog with deer face; illustration,t9886
+a_deer__x__a_hedgehog,11,easy but unseen,steps 0-10,hybrid,yes,hedgehog with antlers and deer legs; illustration,t2350
+a_deer__x__a_hedgehog,11,easy but unseen,steps 0-25,hybrid,yes,hedgehogs on deer legs; illustration,t3266
+a_deer__x__a_hedgehog,11,easy but unseen,all 50,hybrid,yes,hedgehogs on deer legs; illustration,t3765
+a_deer__x__a_hedgehog,12,easy but unseen,off,hybrid,no,hedgehog with deer-like face and ears,t7517
+a_deer__x__a_hedgehog,12,easy but unseen,steps 0-10,hybrid,no,hedgehogs on thin deer legs; no deer,t5234
+a_deer__x__a_hedgehog,12,easy but unseen,steps 0-25,hybrid,no,hedgehogs on thin deer legs; no deer,t3216
+a_deer__x__a_hedgehog,12,easy but unseen,all 50,hybrid,no,two hedgehogs on thin deer legs; no deer,t6364
+a_deer__x__a_hedgehog,13,easy but unseen,off,one,no,hedgehog only,t3841
+a_deer__x__a_hedgehog,13,easy but unseen,steps 0-10,hybrid,no,hedgehog with branch antlers beside hedgehog,t7920
+a_deer__x__a_hedgehog,13,easy but unseen,steps 0-25,hybrid,no,"hedgehog with deer legs, hedgehog with antlers",t2807
+a_deer__x__a_hedgehog,13,easy but unseen,all 50,hybrid,no,"hedgehog with deer legs, hedgehog with antlers",t9729
+a_deer__x__a_hedgehog,14,easy but unseen,off,hybrid,yes,hedgehog with antlers and deer legs; pencil drawing,t7107
+a_deer__x__a_hedgehog,14,easy but unseen,steps 0-10,hybrid,yes,hedgehog with deer antlers; illustration,t3213
+a_deer__x__a_hedgehog,14,easy but unseen,steps 0-25,hybrid,yes,hedgehog with deer antlers; illustration,t4964
+a_deer__x__a_hedgehog,14,easy but unseen,all 50,hybrid,yes,"hedgehog with antlers, plus small fawn; illustration",t8527
+a_deer__x__a_hedgehog,15,easy but unseen,off,hybrid,yes,hedgehog with antlers and deer face; ink drawing,t4297
+a_deer__x__a_hedgehog,15,easy but unseen,steps 0-10,hybrid,yes,hedgehog with antlers; illustration,t7352
+a_deer__x__a_hedgehog,15,easy but unseen,steps 0-25,hybrid,yes,hedgehog with antlers beside small deer; illustration,t9225
+a_deer__x__a_hedgehog,15,easy but unseen,all 50,hybrid,yes,hedgehog with antlers beside small deer; illustration,t5114
+a_deer__x__a_hedgehog,16,easy but unseen,off,one,yes,hedgehog only; illustration,t2761
+a_deer__x__a_hedgehog,16,easy but unseen,steps 0-10,hybrid,no,"two hedgehogs with long deer legs, no deer",t7392
+a_deer__x__a_hedgehog,16,easy but unseen,steps 0-25,hybrid,yes,hedgehog with antlers beside hedgehog; painting,t3829
+a_deer__x__a_hedgehog,16,easy but unseen,all 50,hybrid,yes,"hedgehog with antlers beside hedgehog, plus tiny creature; painting",t7104
+a_dog__x__a_horse,9,easy but unseen,off,hybrid,no,horse-dog fusion; black and white,t6383
+a_dog__x__a_horse,9,easy but unseen,steps 0-10,hybrid,no,dalmatian-horse fusion plus small dog,t3014
+a_dog__x__a_horse,9,easy but unseen,steps 0-25,hybrid,no,horse with dog head plus small dog,t8207
+a_dog__x__a_horse,9,easy but unseen,all 50,hybrid,no,horse with dog head plus small dog,t3039
+a_dog__x__a_horse,10,easy but unseen,off,one,yes,horse head only; drawing,t4576
+a_dog__x__a_horse,10,easy but unseen,steps 0-10,hybrid,no,horse body with dog-horse head,t9682
+a_dog__x__a_horse,10,easy but unseen,steps 0-25,two,no,horse head hidden behind dog,t7608
+a_dog__x__a_horse,10,easy but unseen,all 50,hybrid,no,dog with horse tail and hooves beside headless horse,t3252
+a_dog__x__a_horse,11,easy but unseen,off,one,yes,dog only; pencil drawing,t4778
+a_dog__x__a_horse,11,easy but unseen,steps 0-10,hybrid,no,horse with dog face plus pony-dog,t2314
+a_dog__x__a_horse,11,easy but unseen,steps 0-25,hybrid,no,horse with puppy-foal mix,t1703
+a_dog__x__a_horse,11,easy but unseen,all 50,hybrid,no,horse with puppy-foal mix,t4339
+a_dog__x__a_horse,12,easy but unseen,off,hybrid,no,dog-horse fused head with halter,t6476
+a_dog__x__a_horse,12,easy but unseen,steps 0-10,hybrid,no,horse with greyhound face; haltered white dog,t9058
+a_dog__x__a_horse,12,easy but unseen,steps 0-25,hybrid,no,fluffy dog body with horse face; puppy; horse,t4751
+a_dog__x__a_horse,12,easy but unseen,all 50,hybrid,no,fluffy dog body with horse face; lamb-dog; horse,t6505
+a_dog__x__a_horse,13,easy but unseen,off,hybrid,no,dog body with horse head,t3847
+a_dog__x__a_horse,13,easy but unseen,steps 0-10,hybrid,no,horse with dog face; dog with horse muzzle,t1449
+a_dog__x__a_horse,13,easy but unseen,steps 0-25,hybrid,no,dog with horse head plus horse and toy dog,t1623
+a_dog__x__a_horse,13,easy but unseen,all 50,hybrid,no,dog with horse head plus horse and toy dog,t8035
+a_dog__x__a_horse,14,easy but unseen,off,one,yes,dog only; pencil drawing,t4264
+a_dog__x__a_horse,14,easy but unseen,steps 0-10,two,no,,t6378
+a_dog__x__a_horse,14,easy but unseen,steps 0-25,hybrid,no,"dog with horse tail and legs beside horse, plus extra white dog",t9943
+a_dog__x__a_horse,14,easy but unseen,all 50,hybrid,no,"dog with horse tail and legs beside horse, plus extra white lamb",t8164
+a_dog__x__a_horse,15,easy but unseen,off,hybrid,yes,dog head with horse bridle; pencil drawing,t8335
+a_dog__x__a_horse,15,easy but unseen,steps 0-10,hybrid,no,dog beside small dog-horse fusion,t1550
+a_dog__x__a_horse,15,easy but unseen,steps 0-25,intrusion,no,extra pony/foal beside horse and dog,t3553
+a_dog__x__a_horse,15,easy but unseen,all 50,intrusion,no,extra pony/foal beside horse and dog,t4711
+a_dog__x__a_horse,16,easy but unseen,off,hybrid,yes,dog-horse single animal; ink wash,t5283
+a_dog__x__a_horse,16,easy but unseen,steps 0-10,hybrid,no,dog-horse mixes; no clean horse,t6465
+a_dog__x__a_horse,16,easy but unseen,steps 0-25,hybrid,no,horse with dog paws and face; headless dog,t1051
+a_dog__x__a_horse,16,easy but unseen,all 50,two,no,dog face garbled,t1023
+a_drum_set__x__a_snowman,9,easy but unseen,off,hybrid,yes,drum with snowman face; cartoon,t6251
+a_drum_set__x__a_snowman,9,easy but unseen,steps 0-10,hybrid,no,snowman body is the bass drum,t4170
+a_drum_set__x__a_snowman,9,easy but unseen,steps 0-25,hybrid,no,snowman body is the bass drum,t9206
+a_drum_set__x__a_snowman,9,easy but unseen,all 50,hybrid,no,snowman body is the bass drum,t8086
+a_drum_set__x__a_snowman,10,easy but unseen,off,two,no,snowman in front of kit; drum as hat,t4164
+a_drum_set__x__a_snowman,10,easy but unseen,steps 0-10,hybrid,no,snowman body is bass drum,t4085
+a_drum_set__x__a_snowman,10,easy but unseen,steps 0-25,two,no,snowman behind snow-covered drum kit,t1510
+a_drum_set__x__a_snowman,10,easy but unseen,all 50,two,no,snowman behind snow-covered drum kit,t2393
+a_drum_set__x__a_snowman,11,easy but unseen,off,one,yes,"snowman only, no drums; illustration",t3280
+a_drum_set__x__a_snowman,11,easy but unseen,steps 0-10,two,yes,snowman standing in drum kit; illustration,t2032
+a_drum_set__x__a_snowman,11,easy but unseen,steps 0-25,hybrid,yes,snowman with drum on face and DRUM written on body; illustration,t6050
+a_drum_set__x__a_snowman,11,easy but unseen,all 50,hybrid,yes,snowman with drum on face and DRUM written on body; illustration,t4587
+a_drum_set__x__a_snowman,12,easy but unseen,off,hybrid,no,snowman built into drum kit with bass drum as body,t7935
+a_drum_set__x__a_snowman,12,easy but unseen,steps 0-10,hybrid,no,snowman head on bass drum body,t4819
+a_drum_set__x__a_snowman,12,easy but unseen,steps 0-25,intrusion,no,extra snowman,t5886
+a_drum_set__x__a_snowman,12,easy but unseen,all 50,intrusion,no,"extra snowman, small teddy bear",t4279
+a_drum_set__x__a_snowman,13,easy but unseen,off,hybrid,no,snowman fused into drum kit,t1091
+a_drum_set__x__a_snowman,13,easy but unseen,steps 0-10,hybrid,no,snowman body merged with drum kit,t4069
+a_drum_set__x__a_snowman,13,easy but unseen,steps 0-25,hybrid,no,tiny snowman emerging from drum,t5848
+a_drum_set__x__a_snowman,13,easy but unseen,all 50,hybrid,no,tiny snowman emerging from drum,t5454
+a_drum_set__x__a_snowman,14,easy but unseen,off,hybrid,no,snowman body is a bass drum,t1014
+a_drum_set__x__a_snowman,14,easy but unseen,steps 0-10,two,no,,t7114
+a_drum_set__x__a_snowman,14,easy but unseen,steps 0-25,two,no,snowman in front of odd drum kit,t9825
+a_drum_set__x__a_snowman,14,easy but unseen,all 50,two,no,snowman in front of odd drum kit,t8628
+a_drum_set__x__a_snowman,15,easy but unseen,off,hybrid,yes,snowman with bass-drum body on drum stands; illustration,t1040
+a_drum_set__x__a_snowman,15,easy but unseen,steps 0-10,intrusion,yes,extra snowman; drum as top hat; illustration,t3279
+a_drum_set__x__a_snowman,15,easy but unseen,steps 0-25,hybrid,yes,drum set with snowman faces on drums; illustration,t2844
+a_drum_set__x__a_snowman,15,easy but unseen,all 50,hybrid,yes,drum set with snowman faces on drums; illustration,t9820
+a_drum_set__x__a_snowman,16,easy but unseen,off,hybrid,yes,snowman whose body is a drum; illustration,t8768
+a_drum_set__x__a_snowman,16,easy but unseen,steps 0-10,two,no,snowman at drum kit; bass drum has eye-like dots,t4376
+a_drum_set__x__a_snowman,16,easy but unseen,steps 0-25,intrusion,no,extra small dog,t7079
+a_drum_set__x__a_snowman,16,easy but unseen,all 50,intrusion,no,extra small dog,t2111
+a_feather_pillow__x__a_cast_iron_pan,9,easy but unseen,off,hybrid,no,feather-shaped pillow lying in pan,t1174
+a_feather_pillow__x__a_cast_iron_pan,9,easy but unseen,steps 0-10,one,no,"loose feathers in pan, no pillow",t3336
+a_feather_pillow__x__a_cast_iron_pan,9,easy but unseen,steps 0-25,one,no,"loose feathers in pan, no pillow",t1495
+a_feather_pillow__x__a_cast_iron_pan,9,easy but unseen,all 50,one,no,"loose feathers in pan, no pillow",t2119
+a_feather_pillow__x__a_cast_iron_pan,10,easy but unseen,off,hybrid,no,pan lined with feather pillow,t7144
+a_feather_pillow__x__a_cast_iron_pan,10,easy but unseen,steps 0-10,intrusion,no,round cushion in pan; extra bowl of seeds and feather,t4773
+a_feather_pillow__x__a_cast_iron_pan,10,easy but unseen,steps 0-25,intrusion,no,round cushion in pan; extra bowl of seeds and feather,t4243
+a_feather_pillow__x__a_cast_iron_pan,10,easy but unseen,all 50,intrusion,no,round cushion in pan; extra bowl of seeds and feather,t1227
+a_feather_pillow__x__a_cast_iron_pan,11,easy but unseen,off,two,no,pan resting on pillow; feather in pan,t9493
+a_feather_pillow__x__a_cast_iron_pan,11,easy but unseen,steps 0-10,two,no,pan resting on cushion; feather imprinted in pan,t9062
+a_feather_pillow__x__a_cast_iron_pan,11,easy but unseen,steps 0-25,intrusion,no,feathers in cloth sack as pillow; extra chicken pieces in pan,t6788
+a_feather_pillow__x__a_cast_iron_pan,11,easy but unseen,all 50,intrusion,no,feathers in cloth sack as pillow; extra chicken pieces in pan,t6422
+a_feather_pillow__x__a_cast_iron_pan,12,easy but unseen,off,hybrid,no,"pan with pillow-padded surface, feather on it",t6721
+a_feather_pillow__x__a_cast_iron_pan,12,easy but unseen,steps 0-10,one,no,"pan with loose feathers and cloth, no pillow",t5686
+a_feather_pillow__x__a_cast_iron_pan,12,easy but unseen,steps 0-25,one,no,"pan with straw hat and loose feathers, no pillow",t6010
+a_feather_pillow__x__a_cast_iron_pan,12,easy but unseen,all 50,one,no,"pan with straw hat and loose feathers, no pillow",t4584
+a_feather_pillow__x__a_cast_iron_pan,13,easy but unseen,off,hybrid,no,"pan shaped as pillow, separate feathers",t5267
+a_feather_pillow__x__a_cast_iron_pan,13,easy but unseen,steps 0-10,intrusion,no,"pillow in pan, extra pan and food",t9986
+a_feather_pillow__x__a_cast_iron_pan,13,easy but unseen,steps 0-25,intrusion,no,"extra pan, peppers; pillow is a big feather and dark cushion",t2296
+a_feather_pillow__x__a_cast_iron_pan,13,easy but unseen,all 50,intrusion,no,"extra pan, peppers; pillow is a big feather and dark cushion",t8433
+a_feather_pillow__x__a_cast_iron_pan,14,easy but unseen,off,two,no,pan resting on pillow; feather motif in pan,t8590
+a_feather_pillow__x__a_cast_iron_pan,14,easy but unseen,steps 0-10,hybrid,no,pan filled with pillow and feathers,t5302
+a_feather_pillow__x__a_cast_iron_pan,14,easy but unseen,steps 0-25,intrusion,no,extra pans and pots; leaf-print cushion,t4705
+a_feather_pillow__x__a_cast_iron_pan,14,easy but unseen,all 50,intrusion,no,extra pans and pots; leaf-print cushion,t4643
+a_feather_pillow__x__a_cast_iron_pan,15,easy but unseen,off,two,no,pan resting on cushion; feathers imprinted in pan,t3010
+a_feather_pillow__x__a_cast_iron_pan,15,easy but unseen,steps 0-10,one,no,pan with feather inside; no pillow,t6744
+a_feather_pillow__x__a_cast_iron_pan,15,easy but unseen,steps 0-25,one,no,pan with loose feathers; no pillow,t1597
+a_feather_pillow__x__a_cast_iron_pan,15,easy but unseen,all 50,one,no,pan with loose feathers; no pillow,t2708
+a_feather_pillow__x__a_cast_iron_pan,16,easy but unseen,off,one,no,"pan with a single feather, no pillow",t3285
+a_feather_pillow__x__a_cast_iron_pan,16,easy but unseen,steps 0-10,two,no,"round tufted cushion inside pan, reads close to bread",t3877
+a_feather_pillow__x__a_cast_iron_pan,16,easy but unseen,steps 0-25,two,no,"round tufted cushion inside pan, reads close to bread",t2883
+a_feather_pillow__x__a_cast_iron_pan,16,easy but unseen,all 50,two,no,"round tufted cushion inside pan, reads close to bread",t8980
+a_fox__x__a_wolf,9,easy but unseen,off,one,yes,fox head only; illustration,t5392
+a_fox__x__a_wolf,9,easy but unseen,steps 0-10,hybrid,yes,fox head on grey wolf body; illustration,t2214
+a_fox__x__a_wolf,9,easy but unseen,steps 0-25,hybrid,yes,"wolf with fox eyes, fox and fox-wolf cub curled together; illustration",t5800
+a_fox__x__a_wolf,9,easy but unseen,all 50,hybrid,yes,"wolf with fox eyes, fox and fox-wolf cub curled together; illustration",t4858
+a_fox__x__a_wolf,10,easy but unseen,off,one,no,fox only,t7073
+a_fox__x__a_wolf,10,easy but unseen,steps 0-10,two,yes,"grey fox under wolf; black and white, drawing-like",t8525
+a_fox__x__a_wolf,10,easy but unseen,steps 0-25,hybrid,yes,wolf paw fused onto fox face; drawing-like,t8228
+a_fox__x__a_wolf,10,easy but unseen,all 50,intrusion,yes,extra small fox head; drawing-like,t6961
+a_fox__x__a_wolf,11,easy but unseen,off,hybrid,yes,fox face with wolf mane; illustration,t5850
+a_fox__x__a_wolf,11,easy but unseen,steps 0-10,one,yes,single fox; illustration,t9158
+a_fox__x__a_wolf,11,easy but unseen,steps 0-25,count error,yes,"three foxes, no wolf; illustration",t3282
+a_fox__x__a_wolf,11,easy but unseen,all 50,count error,yes,"three fox-like canids, no clear wolf; illustration",t3033
+a_fox__x__a_wolf,12,easy but unseen,off,hybrid,no,fox face on wolf-like head and body,t6682
+a_fox__x__a_wolf,12,easy but unseen,steps 0-10,hybrid,no,fox head on wolf body,t6306
+a_fox__x__a_wolf,12,easy but unseen,steps 0-25,hybrid,no,fox head on wolf body beside small fox,t3936
+a_fox__x__a_wolf,12,easy but unseen,all 50,hybrid,no,fox head on wolf body beside small fox; extra canine behind,t9412
+a_fox__x__a_wolf,13,easy but unseen,off,one,no,single fox,t1635
+a_fox__x__a_wolf,13,easy but unseen,steps 0-10,one,no,single fox,t4350
+a_fox__x__a_wolf,13,easy but unseen,steps 0-25,count error,no,two foxes no wolf,t1840
+a_fox__x__a_wolf,13,easy but unseen,all 50,count error,no,"foxes, no wolf; malformed shaggy animal",t9215
+a_fox__x__a_wolf,14,easy but unseen,off,hybrid,no,fox with wolf ruff and snarl; animal lying behind,t2641
+a_fox__x__a_wolf,14,easy but unseen,steps 0-10,one,yes,fox only; painterly texture,t5942
+a_fox__x__a_wolf,14,easy but unseen,steps 0-25,two,yes,fox and grey wolf; painterly texture,t1775
+a_fox__x__a_wolf,14,easy but unseen,all 50,one,yes,fox beside formless grey statue-like shape,t3822
+a_fox__x__a_wolf,15,easy but unseen,off,hybrid,yes,fox-shaped face with wolf grey coat; illustration,t7605
+a_fox__x__a_wolf,15,easy but unseen,steps 0-10,hybrid,yes,grey fox-wolf face; illustration,t1803
+a_fox__x__a_wolf,15,easy but unseen,steps 0-25,one,yes,wolf only; illustration,t4578
+a_fox__x__a_wolf,15,easy but unseen,all 50,count error,yes,"two fragmented wolves, no fox; illustration",t3182
+a_fox__x__a_wolf,16,easy but unseen,off,one,yes,fox head portrait; painting,t5776
+a_fox__x__a_wolf,16,easy but unseen,steps 0-10,one,yes,single fox; painterly,t4486
+a_fox__x__a_wolf,16,easy but unseen,steps 0-25,two,yes,"painting; large canid species unclear, fox cub",t7781
+a_fox__x__a_wolf,16,easy but unseen,all 50,hybrid,yes,fused distorted canids; painting,t9004
+a_giraffe__x__a_lion,9,easy but unseen,off,one,yes,giraffe head only; illustration,t1554
+a_giraffe__x__a_lion,9,easy but unseen,steps 0-10,hybrid,no,giraffe with lion body and tail,t1069
+a_giraffe__x__a_lion,9,easy but unseen,steps 0-25,hybrid,no,"giraffe body with lion mane, giraffe with lion tail",t4249
+a_giraffe__x__a_lion,9,easy but unseen,all 50,hybrid,no,"giraffe body with lion mane, giraffe with lion tail",t3338
+a_giraffe__x__a_lion,10,easy but unseen,off,hybrid,no,giraffe head with lion-maned chin and distorted face,t5409
+a_giraffe__x__a_lion,10,easy but unseen,steps 0-10,hybrid,no,lion with giraffe ossicones and face; giraffe head merged into it,t7257
+a_giraffe__x__a_lion,10,easy but unseen,steps 0-25,hybrid,no,lion with giraffe-patterned face; heads merged,t7587
+a_giraffe__x__a_lion,10,easy but unseen,all 50,intrusion,no,extra small cub beside lion and young giraffe,t5560
+a_giraffe__x__a_lion,11,easy but unseen,off,one,yes,giraffe head only; illustration,t1157
+a_giraffe__x__a_lion,11,easy but unseen,steps 0-10,hybrid,yes,lion with giraffe-patterned body; digital painting,t4210
+a_giraffe__x__a_lion,11,easy but unseen,steps 0-25,hybrid,yes,lion face torn into giraffe pattern; digital painting,t7991
+a_giraffe__x__a_lion,11,easy but unseen,all 50,intrusion,yes,extra spotted head and lying cub; digital painting,t5961
+a_giraffe__x__a_lion,12,easy but unseen,off,one,no,giraffe only,t9629
+a_giraffe__x__a_lion,12,easy but unseen,steps 0-10,hybrid,no,lion body with giraffe pattern and neck,t9618
+a_giraffe__x__a_lion,12,easy but unseen,steps 0-25,hybrid,no,lion with giraffe-spotted body beside giraffe,t4874
+a_giraffe__x__a_lion,12,easy but unseen,all 50,two,no,lion legs elongated,t8471
+a_giraffe__x__a_lion,13,easy but unseen,off,one,yes,giraffe head only; monochrome illustration,t2130
+a_giraffe__x__a_lion,13,easy but unseen,steps 0-10,hybrid,no,lion with giraffe patches beside giraffe,t4904
+a_giraffe__x__a_lion,13,easy but unseen,steps 0-25,two,no,"both malformed: giraffe a neck on a lump, lion face garbled",t6984
+a_giraffe__x__a_lion,13,easy but unseen,all 50,two,no,giraffe sitting oddly,t8196
+a_giraffe__x__a_lion,14,easy but unseen,off,hybrid,yes,giraffe head with lion mane; monochrome graphic,t4119
+a_giraffe__x__a_lion,14,easy but unseen,steps 0-10,hybrid,no,lion with giraffe coat,t5870
+a_giraffe__x__a_lion,14,easy but unseen,steps 0-25,hybrid,no,lion with giraffe-patterned face beside giraffe,t9907
+a_giraffe__x__a_lion,14,easy but unseen,all 50,hybrid,no,lion with giraffe-marked face and hooves; zebra-striped giraffe,t7398
+a_giraffe__x__a_lion,15,easy but unseen,off,hybrid,yes,giraffe head with lion muzzle; black and white stylised,t1098
+a_giraffe__x__a_lion,15,easy but unseen,steps 0-10,hybrid,yes,lion-maned tree with giraffe head beside giraffe; painting,t6074
+a_giraffe__x__a_lion,15,easy but unseen,steps 0-25,hybrid,yes,lion with giraffe-like face plus giraffe; painting,t2857
+a_giraffe__x__a_lion,15,easy but unseen,all 50,hybrid,yes,lion with giraffe-like face plus zebra-striped giraffe; painting,t8874
+a_giraffe__x__a_lion,16,easy but unseen,off,hybrid,yes,giraffe head with lion features; illustration,t6792
+a_giraffe__x__a_lion,16,easy but unseen,steps 0-10,hybrid,yes,giraffe with lion tail and face; painting,t3435
+a_giraffe__x__a_lion,16,easy but unseen,steps 0-25,hybrid,yes,"giraffes with lion bodies, plus baby giraffe; painting",t9822
+a_giraffe__x__a_lion,16,easy but unseen,all 50,hybrid,yes,"giraffes with lion bodies and tail tufts, plus lion cub; painting",t7540
+a_goose__x__a_swan,9,easy but unseen,off,one,no,single swan,t1097
+a_goose__x__a_swan,9,easy but unseen,steps 0-10,count error,no,two swans stacked no goose,t3443
+a_goose__x__a_swan,9,easy but unseen,steps 0-25,hybrid,no,goose head on mammal body; swan; small goose,t9326
+a_goose__x__a_swan,9,easy but unseen,all 50,intrusion,no,"unrequested capybara-like animal, malformed swan, small goose",t1007
+a_goose__x__a_swan,10,easy but unseen,off,one,no,swan only,t8927
+a_goose__x__a_swan,10,easy but unseen,steps 0-10,one,no,swan only,t4560
+a_goose__x__a_swan,10,easy but unseen,steps 0-25,two,no,swan and Canada goose; sepia,t1331
+a_goose__x__a_swan,10,easy but unseen,all 50,intrusion,no,unrequested white lamb and ghost animal; swan only tiny in distance,t7414
+a_goose__x__a_swan,11,easy but unseen,off,hybrid,no,swan with brown goose neck,t8177
+a_goose__x__a_swan,11,easy but unseen,steps 0-10,count error,no,"two swans, no goose; small one has grey back",t5000
+a_goose__x__a_swan,11,easy but unseen,steps 0-25,intrusion,no,several grey geese and extra small swan,t5146
+a_goose__x__a_swan,11,easy but unseen,all 50,hybrid,no,swan with llama head; bear-like extra,t9182
+a_goose__x__a_swan,12,easy but unseen,off,hybrid,no,swan with goose-coloured head and neck,t6482
+a_goose__x__a_swan,12,easy but unseen,steps 0-10,hybrid,no,swan body with goose neck and head,t2260
+a_goose__x__a_swan,12,easy but unseen,steps 0-25,hybrid,no,swan body with goose head beside a goose; flock behind,t4251
+a_goose__x__a_swan,12,easy but unseen,all 50,hybrid,no,fused white blob and llama-like goose,t7612
+a_goose__x__a_swan,13,easy but unseen,off,hybrid,no,Canada goose head on swan body,t8206
+a_goose__x__a_swan,13,easy but unseen,steps 0-10,hybrid,no,swan head on goose body beside swan from behind,t7657
+a_goose__x__a_swan,13,easy but unseen,steps 0-25,intrusion,no,goose and two swans plus gosling and background swan,t6528
+a_goose__x__a_swan,13,easy but unseen,all 50,hybrid,no,llama-like goose creature; swans and gosling,t4878
+a_goose__x__a_swan,14,easy but unseen,off,hybrid,no,single bird with swan body and goose head,t9442
+a_goose__x__a_swan,14,easy but unseen,steps 0-10,two,no,swan body malformed but separate from goose,t1749
+a_goose__x__a_swan,14,easy but unseen,steps 0-25,intrusion,no,extra swan and gosling,t7152
+a_goose__x__a_swan,14,easy but unseen,all 50,intrusion,no,extra llama and horse-like animal; goose small,t9330
+a_goose__x__a_swan,15,easy but unseen,off,one,yes,swan only; drawing,t7260
+a_goose__x__a_swan,15,easy but unseen,steps 0-10,one,yes,swan only; painterly,t1116
+a_goose__x__a_swan,15,easy but unseen,steps 0-25,count error,yes,four-legged swan with extra head and cygnets; no goose; painting,t9525
+a_goose__x__a_swan,15,easy but unseen,all 50,hybrid,yes,fused fluffy swan mass with dog-like face; painting,t8592
+a_goose__x__a_swan,16,easy but unseen,off,hybrid,no,goose head on swan body,t1483
+a_goose__x__a_swan,16,easy but unseen,steps 0-10,one,no,swan only,t3943
+a_goose__x__a_swan,16,easy but unseen,steps 0-25,two,no,swan head malformed with stacked heads,t1445
+a_goose__x__a_swan,16,easy but unseen,all 50,hybrid,no,"llama head on swan-fluff body, goose and cygnet",t1005
+a_lab_microscope__x__a_hay_bale,9,easy but unseen,off,hybrid,no,microscope built from hay and wood,t7189
+a_lab_microscope__x__a_hay_bale,9,easy but unseen,steps 0-10,intrusion,no,"extra instrument and bottles, small hay bundle",t7128
+a_lab_microscope__x__a_hay_bale,9,easy but unseen,steps 0-25,intrusion,no,"extra instrument and bottles, loose hay",t4269
+a_lab_microscope__x__a_hay_bale,9,easy but unseen,all 50,intrusion,no,"extra instrument and bottles, loose hay",t2896
+a_lab_microscope__x__a_hay_bale,10,easy but unseen,off,two,no,"small hay block, hay bales blurred behind",t2467
+a_lab_microscope__x__a_hay_bale,10,easy but unseen,steps 0-10,one,no,"microscope only, no hay",t7999
+a_lab_microscope__x__a_hay_bale,10,easy but unseen,steps 0-25,two,no,hay strewn around microscope,t7899
+a_lab_microscope__x__a_hay_bale,10,easy but unseen,all 50,two,no,hay strewn around microscope,t8857
+a_lab_microscope__x__a_hay_bale,11,easy but unseen,off,two,no,,t7467
+a_lab_microscope__x__a_hay_bale,11,easy but unseen,steps 0-10,two,no,,t7824
+a_lab_microscope__x__a_hay_bale,11,easy but unseen,steps 0-25,two,no,hay as loose tied bundle,t1907
+a_lab_microscope__x__a_hay_bale,11,easy but unseen,all 50,two,no,hay as loose tied bundle,t5754
+a_lab_microscope__x__a_hay_bale,12,easy but unseen,off,two,no,hay bales in background field,t2046
+a_lab_microscope__x__a_hay_bale,12,easy but unseen,steps 0-10,intrusion,no,"second microscope, person",t2829
+a_lab_microscope__x__a_hay_bale,12,easy but unseen,steps 0-25,intrusion,no,"second microscope, flask, person; hay loose",t3563
+a_lab_microscope__x__a_hay_bale,12,easy but unseen,all 50,intrusion,no,"second microscope, flask",t9374
+a_lab_microscope__x__a_hay_bale,13,easy but unseen,off,two,no,,t9798
+a_lab_microscope__x__a_hay_bale,13,easy but unseen,steps 0-10,intrusion,no,extra microscope; small hay bale,t8602
+a_lab_microscope__x__a_hay_bale,13,easy but unseen,steps 0-25,count error,no,"two microscopes, grey pad instead of hay bale",t5352
+a_lab_microscope__x__a_hay_bale,13,easy but unseen,all 50,count error,no,"two microscopes, grey pad instead of hay bale",t2480
+a_lab_microscope__x__a_hay_bale,14,easy but unseen,off,two,no,,t6448
+a_lab_microscope__x__a_hay_bale,14,easy but unseen,steps 0-10,two,no,,t7534
+a_lab_microscope__x__a_hay_bale,14,easy but unseen,steps 0-25,two,no,small hay bale beside microscope,t3730
+a_lab_microscope__x__a_hay_bale,14,easy but unseen,all 50,two,no,small hay bale beside microscope,t8944
+a_lab_microscope__x__a_hay_bale,15,easy but unseen,off,two,no,microscope in front of round bale,t3510
+a_lab_microscope__x__a_hay_bale,15,easy but unseen,steps 0-10,two,no,,t3110
+a_lab_microscope__x__a_hay_bale,15,easy but unseen,steps 0-25,one,no,loose hay tuft; no bale,t4341
+a_lab_microscope__x__a_hay_bale,15,easy but unseen,all 50,one,no,hay in a basket; no bale,t1085
+a_lab_microscope__x__a_hay_bale,16,easy but unseen,off,hybrid,no,hay bale fused into microscope body,t1756
+a_lab_microscope__x__a_hay_bale,16,easy but unseen,steps 0-10,two,yes,cartoon,t3668
+a_lab_microscope__x__a_hay_bale,16,easy but unseen,steps 0-25,intrusion,no,two hay bales plus bottle and magnifier,t1236
+a_lab_microscope__x__a_hay_bale,16,easy but unseen,all 50,intrusion,no,two hay bales plus bottle and magnifier,t7126
+a_lion__x__a_dog,9,easy but unseen,off,hybrid,yes,lion-dog face; painterly,t4191
+a_lion__x__a_dog,9,easy but unseen,steps 0-10,hybrid,no,lion body with dog face,t8814
+a_lion__x__a_dog,9,easy but unseen,steps 0-25,hybrid,no,lion with dog face beside cub-dog with collar,t9596
+a_lion__x__a_dog,9,easy but unseen,all 50,intrusion,no,"lion, extra pug, cub-like dog",t8637
+a_lion__x__a_dog,10,easy but unseen,off,hybrid,no,lion-dog face,t4469
+a_lion__x__a_dog,10,easy but unseen,steps 0-10,hybrid,no,lion with dog face beside dog,t6617
+a_lion__x__a_dog,10,easy but unseen,steps 0-25,hybrid,no,"lion with dog face, dog, extra cub",t9909
+a_lion__x__a_dog,10,easy but unseen,all 50,hybrid,no,"lion with floppy dog ears, lion-dog face, extra cub",t1695
+a_lion__x__a_dog,11,easy but unseen,off,hybrid,yes,lion-dog face; illustration,t6333
+a_lion__x__a_dog,11,easy but unseen,steps 0-10,hybrid,no,lion with dog face,t2764
+a_lion__x__a_dog,11,easy but unseen,steps 0-25,hybrid,no,"lion with dog face, dog lying beside",t7549
+a_lion__x__a_dog,11,easy but unseen,all 50,two,no,dog body lion-coloured but dog face,t5576
+a_lion__x__a_dog,12,easy but unseen,off,hybrid,no,lion with dog face,t6962
+a_lion__x__a_dog,12,easy but unseen,steps 0-10,hybrid,no,two lions with dog faces,t8174
+a_lion__x__a_dog,12,easy but unseen,steps 0-25,hybrid,no,lions with dog faces,t9033
+a_lion__x__a_dog,12,easy but unseen,all 50,hybrid,no,lions with dog faces,t7460
+a_lion__x__a_dog,13,easy but unseen,off,hybrid,yes,lion-dog head; pencil drawing,t8417
+a_lion__x__a_dog,13,easy but unseen,steps 0-10,hybrid,no,lion with dog face,t6289
+a_lion__x__a_dog,13,easy but unseen,steps 0-25,hybrid,no,"lion with dog muzzle, and lion-cub-dog with collar",t2367
+a_lion__x__a_dog,13,easy but unseen,all 50,hybrid,no,"lion with dog head, and lion-cub-dog",t2006
+a_lion__x__a_dog,14,easy but unseen,off,one,yes,lion only; drawing,t5684
+a_lion__x__a_dog,14,easy but unseen,steps 0-10,hybrid,no,lion with dog muzzle wearing dog vest,t4217
+a_lion__x__a_dog,14,easy but unseen,steps 0-25,count error,no,"lion and cub on leash, no clear dog; cub looks part puppy",t6594
+a_lion__x__a_dog,14,easy but unseen,all 50,count error,no,"lion and lion cub, no dog",t3720
+a_lion__x__a_dog,15,easy but unseen,off,hybrid,yes,lion-dog head; illustration,t1507
+a_lion__x__a_dog,15,easy but unseen,steps 0-10,hybrid,yes,lion with dog ears and face; sepia painting,t2247
+a_lion__x__a_dog,15,easy but unseen,steps 0-25,two,yes,lion and puppy; lion face slightly dog-like; sepia drawing,t8034
+a_lion__x__a_dog,15,easy but unseen,all 50,two,yes,lion and puppy; lion face slightly dog-like; sepia drawing,t1031
+a_lion__x__a_dog,16,easy but unseen,off,one,no,lion face only; black and white,t1208
+a_lion__x__a_dog,16,easy but unseen,steps 0-10,hybrid,no,dog with lion mane,t6854
+a_lion__x__a_dog,16,easy but unseen,steps 0-25,hybrid,no,lion with dog face and tongue; dog-faced lioness,t9098
+a_lion__x__a_dog,16,easy but unseen,all 50,hybrid,no,dog-faced lioness beside dog-faced lion,t4962
+a_lion__x__a_horse,9,easy but unseen,off,hybrid,yes,horse face inside lion mane; illustration,t2394
+a_lion__x__a_horse,9,easy but unseen,steps 0-10,hybrid,no,lion with horse-like body and ear,t5622
+a_lion__x__a_horse,9,easy but unseen,steps 0-25,hybrid,no,two animals with horse faces and lion manes,t1548
+a_lion__x__a_horse,9,easy but unseen,all 50,hybrid,no,lion and lioness with horse muzzles,t4492
+a_lion__x__a_horse,10,easy but unseen,off,hybrid,no,horse head with lion mane; black and white,t5329
+a_lion__x__a_horse,10,easy but unseen,steps 0-10,hybrid,no,lion with bridle and horse face,t2195
+a_lion__x__a_horse,10,easy but unseen,steps 0-25,hybrid,no,lion with horse head plus fluffy calf,t4579
+a_lion__x__a_horse,10,easy but unseen,all 50,hybrid,no,lion with horse body plus fluffy calf,t3381
+a_lion__x__a_horse,11,easy but unseen,off,one,yes,lion only; sketch,t1251
+a_lion__x__a_horse,11,easy but unseen,steps 0-10,hybrid,yes,lion head on horse-like body; painterly,t3808
+a_lion__x__a_horse,11,easy but unseen,steps 0-25,hybrid,no,horse with lion head plus foal,t2691
+a_lion__x__a_horse,11,easy but unseen,all 50,hybrid,no,horse with lion head plus foal,t5687
+a_lion__x__a_horse,12,easy but unseen,off,hybrid,no,lion-horse head,t7498
+a_lion__x__a_horse,12,easy but unseen,steps 0-10,hybrid,no,lion with horse muzzle,t5152
+a_lion__x__a_horse,12,easy but unseen,steps 0-25,hybrid,no,lion with horse muzzle; foal-lion cub,t7937
+a_lion__x__a_horse,12,easy but unseen,all 50,hybrid,no,lion with horse muzzle; foal-lion cub,t8731
+a_lion__x__a_horse,13,easy but unseen,off,one,yes,horse head only; sketch,t6137
+a_lion__x__a_horse,13,easy but unseen,steps 0-10,hybrid,no,horse head on lion body,t3694
+a_lion__x__a_horse,13,easy but unseen,steps 0-25,count error,no,"lion and lion cub, no horse",t6231
+a_lion__x__a_horse,13,easy but unseen,all 50,count error,no,"lion and lion cub, no horse; bird on cub",t2938
+a_lion__x__a_horse,14,easy but unseen,off,hybrid,yes,lion head on horse body; drawing,t8312
+a_lion__x__a_horse,14,easy but unseen,steps 0-10,hybrid,no,lion head on horse body,t4155
+a_lion__x__a_horse,14,easy but unseen,steps 0-25,hybrid,no,lion with horse face beside cub-like foal,t7742
+a_lion__x__a_horse,14,easy but unseen,all 50,hybrid,no,lion with horse face and legs beside cub-like foal,t7218
+a_lion__x__a_horse,15,easy but unseen,off,hybrid,yes,horse head with lion mane; sketch,t8855
+a_lion__x__a_horse,15,easy but unseen,steps 0-10,hybrid,no,blurred lion-horse fusion,t7273
+a_lion__x__a_horse,15,easy but unseen,steps 0-25,hybrid,no,lion fused with horse body plus small horse,t2902
+a_lion__x__a_horse,15,easy but unseen,all 50,hybrid,no,lion with horse head plus small horse,t6046
+a_lion__x__a_horse,16,easy but unseen,off,hybrid,no,lion head on horse body; black and white,t3746
+a_lion__x__a_horse,16,easy but unseen,steps 0-10,hybrid,no,lion with horse face,t3345
+a_lion__x__a_horse,16,easy but unseen,steps 0-25,hybrid,no,lion with horse face plus lioness,t8157
+a_lion__x__a_horse,16,easy but unseen,all 50,hybrid,no,lion with horse face plus pony-lioness,t1092
+a_microwave__x__a_potted_plant,9,easy but unseen,off,hybrid,no,"plant growing through microwave, small pots beside",t9050
+a_microwave__x__a_potted_plant,9,easy but unseen,steps 0-10,intrusion,no,extra potted plants,t3384
+a_microwave__x__a_potted_plant,9,easy but unseen,steps 0-25,intrusion,no,extra potted plants,t7560
+a_microwave__x__a_potted_plant,9,easy but unseen,all 50,intrusion,no,extra potted plants,t5591
+a_microwave__x__a_potted_plant,10,easy but unseen,off,count error,yes,"two stacked microwaves, no plant; illustration",t5885
+a_microwave__x__a_potted_plant,10,easy but unseen,steps 0-10,intrusion,no,two plants,t7301
+a_microwave__x__a_potted_plant,10,easy but unseen,steps 0-25,intrusion,no,several plants,t2790
+a_microwave__x__a_potted_plant,10,easy but unseen,all 50,intrusion,no,several plants,t4630
+a_microwave__x__a_potted_plant,11,easy but unseen,off,hybrid,yes,microwave set inside a plant pot; illustration,t9381
+a_microwave__x__a_potted_plant,11,easy but unseen,steps 0-10,intrusion,no,extra potted plant,t8299
+a_microwave__x__a_potted_plant,11,easy but unseen,steps 0-25,intrusion,no,extra potted plants,t4114
+a_microwave__x__a_potted_plant,11,easy but unseen,all 50,intrusion,no,extra potted plants,t3140
+a_microwave__x__a_potted_plant,12,easy but unseen,off,hybrid,no,plant growing out of microwave,t4786
+a_microwave__x__a_potted_plant,12,easy but unseen,steps 0-10,one,no,microwave only,t2043
+a_microwave__x__a_potted_plant,12,easy but unseen,steps 0-25,one,no,"fridge with plant on top, no microwave",t1813
+a_microwave__x__a_potted_plant,12,easy but unseen,all 50,one,no,"fridge with plant on top, no microwave",t4693
+a_microwave__x__a_potted_plant,13,easy but unseen,off,hybrid,yes,plant growing out of microwave; illustration,t4542
+a_microwave__x__a_potted_plant,13,easy but unseen,steps 0-10,intrusion,no,second microwave,t4816
+a_microwave__x__a_potted_plant,13,easy but unseen,steps 0-25,intrusion,no,second microwave,t4242
+a_microwave__x__a_potted_plant,13,easy but unseen,all 50,intrusion,no,second microwave,t4672
+a_microwave__x__a_potted_plant,14,easy but unseen,off,hybrid,no,microwave on plant pot that is also an appliance,t8506
+a_microwave__x__a_potted_plant,14,easy but unseen,steps 0-10,intrusion,yes,extra potted plants; painted,t5570
+a_microwave__x__a_potted_plant,14,easy but unseen,steps 0-25,intrusion,yes,extra potted plants; painted,t2388
+a_microwave__x__a_potted_plant,14,easy but unseen,all 50,intrusion,yes,extra potted plants; painted,t5637
+a_microwave__x__a_potted_plant,15,easy but unseen,off,two,yes,leaves behind microwave no visible pot; illustration,t4081
+a_microwave__x__a_potted_plant,15,easy but unseen,steps 0-10,intrusion,no,"several plants, plate of food",t2383
+a_microwave__x__a_potted_plant,15,easy but unseen,steps 0-25,intrusion,no,"several plants, plate of food",t9939
+a_microwave__x__a_potted_plant,15,easy but unseen,all 50,intrusion,no,"several plants, plate of food",t2536
+a_microwave__x__a_potted_plant,16,easy but unseen,off,two,yes,illustration,t7280
+a_microwave__x__a_potted_plant,16,easy but unseen,steps 0-10,intrusion,yes,extra plant; illustration,t8448
+a_microwave__x__a_potted_plant,16,easy but unseen,steps 0-25,intrusion,yes,"several plants, mug, extra appliance; illustration",t3204
+a_microwave__x__a_potted_plant,16,easy but unseen,all 50,intrusion,yes,"several plants, mug, extra appliance; illustration",t3250
+a_mug__x__a_wine_glass,9,easy but unseen,off,one,no,wine glass only,t3446
+a_mug__x__a_wine_glass,9,easy but unseen,steps 0-10,intrusion,no,extra stone vase,t9700
+a_mug__x__a_wine_glass,9,easy but unseen,steps 0-25,intrusion,no,extra cat,t3780
+a_mug__x__a_wine_glass,9,easy but unseen,all 50,intrusion,no,extra cat,t9284
+a_mug__x__a_wine_glass,10,easy but unseen,off,hybrid,no,wine glass inside a glass mug with handle,t6501
+a_mug__x__a_wine_glass,10,easy but unseen,steps 0-10,hybrid,no,wine glass with gold handle; extra ornaments,t1726
+a_mug__x__a_wine_glass,10,easy but unseen,steps 0-25,one,no,"wine glass, no mug; teapot and horse figurine extras",t8565
+a_mug__x__a_wine_glass,10,easy but unseen,all 50,one,no,"wine glass, no mug; teapot and horse figurine extras",t1156
+a_mug__x__a_wine_glass,11,easy but unseen,off,one,no,wine glass only,t8462
+a_mug__x__a_wine_glass,11,easy but unseen,steps 0-10,hybrid,no,wine glass with mug handle; extra carafe,t5471
+a_mug__x__a_wine_glass,11,easy but unseen,steps 0-25,hybrid,no,wine glass with mug handle; extra carafe,t2142
+a_mug__x__a_wine_glass,11,easy but unseen,all 50,hybrid,no,wine glass with mug handle; extra carafe,t1518
+a_mug__x__a_wine_glass,12,easy but unseen,off,one,no,wine glass only,t3298
+a_mug__x__a_wine_glass,12,easy but unseen,steps 0-10,intrusion,no,extra wine glass and book; mug wrapped round a bottle,t1929
+a_mug__x__a_wine_glass,12,easy but unseen,steps 0-25,hybrid,no,wine glass merged with mug sleeve round a bottle; extra book,t2608
+a_mug__x__a_wine_glass,12,easy but unseen,all 50,hybrid,no,wine glass merged with mug sleeve round a bottle; extra book,t6121
+a_mug__x__a_wine_glass,13,easy but unseen,off,one,no,wine glass only,t1304
+a_mug__x__a_wine_glass,13,easy but unseen,steps 0-10,hybrid,no,"second vessel is a glass tumbler, mug and glass blended",t2815
+a_mug__x__a_wine_glass,13,easy but unseen,steps 0-25,two,no,,t9240
+a_mug__x__a_wine_glass,13,easy but unseen,all 50,two,no,,t1212
+a_mug__x__a_wine_glass,14,easy but unseen,off,hybrid,no,white mug with wine glass merged into it,t4954
+a_mug__x__a_wine_glass,14,easy but unseen,steps 0-10,hybrid,no,wine glass with mug handle,t5144
+a_mug__x__a_wine_glass,14,easy but unseen,steps 0-25,hybrid,no,wine glass embedded inside glass mug,t2766
+a_mug__x__a_wine_glass,14,easy but unseen,all 50,hybrid,no,wine glass embedded inside glass mug,t6288
+a_mug__x__a_wine_glass,15,easy but unseen,off,hybrid,yes,wine glass inside a mug-jug; illustration,t1984
+a_mug__x__a_wine_glass,15,easy but unseen,steps 0-10,one,yes,"teacup, glass jug and bottle, no wine glass; illustration",t6264
+a_mug__x__a_wine_glass,15,easy but unseen,steps 0-25,one,yes,"wine glass, jug not mug, extra bottle and grapes; illustration",t4701
+a_mug__x__a_wine_glass,15,easy but unseen,all 50,one,yes,"wine glass, jug not mug, extra bottle and grapes; illustration",t3886
+a_mug__x__a_wine_glass,16,easy but unseen,off,one,no,wine glass only,t5316
+a_mug__x__a_wine_glass,16,easy but unseen,steps 0-10,intrusion,no,extra glass,t4227
+a_mug__x__a_wine_glass,16,easy but unseen,steps 0-25,intrusion,no,extra glass and carafe,t7123
+a_mug__x__a_wine_glass,16,easy but unseen,all 50,intrusion,no,extra glass and carafe,t7434
+a_peacock__x__a_sheep,9,easy but unseen,off,hybrid,no,peacock with fleece body,t4036
+a_peacock__x__a_sheep,9,easy but unseen,steps 0-10,hybrid,no,sheep body with peacock head and tail,t1090
+a_peacock__x__a_sheep,9,easy but unseen,steps 0-25,hybrid,no,sheep with peacock tail plus lamb and peacock,t1723
+a_peacock__x__a_sheep,9,easy but unseen,all 50,hybrid,no,sheep with peacock tail plus lamb and peacock,t4933
+a_peacock__x__a_sheep,10,easy but unseen,off,hybrid,yes,sheep face with peacock feathers; illustration,t7734
+a_peacock__x__a_sheep,10,easy but unseen,steps 0-10,hybrid,no,peacock fused with sheep body,t1432
+a_peacock__x__a_sheep,10,easy but unseen,steps 0-25,hybrid,no,sheep with peacock-eye face; peacock with sheep head,t1460
+a_peacock__x__a_sheep,10,easy but unseen,all 50,intrusion,no,extra llama-like sheep head behind,t4089
+a_peacock__x__a_sheep,11,easy but unseen,off,one,no,peacock only,t6825
+a_peacock__x__a_sheep,11,easy but unseen,steps 0-10,hybrid,no,peacock plus sheep with peacock head and feathers,t8562
+a_peacock__x__a_sheep,11,easy but unseen,steps 0-25,hybrid,no,"peacock, sheep with peacock face, sheep with peacock head at its feet",t3928
+a_peacock__x__a_sheep,11,easy but unseen,all 50,hybrid,no,"peacock, sheep with peacock features, extra sheep",t1282
+a_peacock__x__a_sheep,12,easy but unseen,off,hybrid,no,peacock with sheep fleece body,t9233
+a_peacock__x__a_sheep,12,easy but unseen,steps 0-10,hybrid,no,sheep fleece with peacock eyespots beside peacock,t1541
+a_peacock__x__a_sheep,12,easy but unseen,steps 0-25,hybrid,no,sheep with bird legs beside peacock,t8619
+a_peacock__x__a_sheep,12,easy but unseen,all 50,hybrid,no,sheep with peacock crest beside peacock,t9208
+a_peacock__x__a_sheep,13,easy but unseen,off,hybrid,no,sheep body with peacock neck and tail,t7934
+a_peacock__x__a_sheep,13,easy but unseen,steps 0-10,hybrid,no,sheep with peacock plumage beside peacock,t6787
+a_peacock__x__a_sheep,13,easy but unseen,steps 0-25,intrusion,no,extra sheep,t3321
+a_peacock__x__a_sheep,13,easy but unseen,all 50,intrusion,no,extra sheep,t2841
+a_peacock__x__a_sheep,14,easy but unseen,off,hybrid,no,sheep head on peacock body,t3723
+a_peacock__x__a_sheep,14,easy but unseen,steps 0-10,hybrid,no,woolly peacock and sheep with peacock feathers,t7526
+a_peacock__x__a_sheep,14,easy but unseen,steps 0-25,hybrid,no,peacock with wool back; sheep legs merged,t6596
+a_peacock__x__a_sheep,14,easy but unseen,all 50,hybrid,no,sheep beside peacock with wool-textured back,t5584
+a_peacock__x__a_sheep,15,easy but unseen,off,hybrid,yes,sheep face inside peacock tail; painting,t4581
+a_peacock__x__a_sheep,15,easy but unseen,steps 0-10,hybrid,yes,peacock with sheep face; painting,t2632
+a_peacock__x__a_sheep,15,easy but unseen,steps 0-25,hybrid,yes,peacock with hooved sheep legs beside wool-pile sheep; painting,t4140
+a_peacock__x__a_sheep,15,easy but unseen,all 50,intrusion,yes,extra sheep in background; painting,t1947
+a_peacock__x__a_sheep,16,easy but unseen,off,one,yes,peacock only; painting,t6853
+a_peacock__x__a_sheep,16,easy but unseen,steps 0-10,two,no,"peacock body a blue triangle, sheep has stick legs",t7397
+a_peacock__x__a_sheep,16,easy but unseen,steps 0-25,hybrid,no,"sheep face in peacock chest, plus sheep",t8091
+a_peacock__x__a_sheep,16,easy but unseen,all 50,hybrid,no,"sheep wool on peacock chest, plus sheep",t4277
+a_piano__x__a_candle,9,easy but unseen,off,hybrid,yes,piano body is a candle; illustration,t6955
+a_piano__x__a_candle,9,easy but unseen,steps 0-10,intrusion,no,extra small candles,t3719
+a_piano__x__a_candle,9,easy but unseen,steps 0-25,intrusion,no,"extra teddy-like figure, flasks and small candles",t2075
+a_piano__x__a_candle,9,easy but unseen,all 50,intrusion,no,"extra teddy bear, flasks and small candles",t6443
+a_piano__x__a_candle,10,easy but unseen,off,two,yes,candle on piano; line drawing,t7582
+a_piano__x__a_candle,10,easy but unseen,steps 0-10,intrusion,no,about a dozen candles; extra stool,t3881
+a_piano__x__a_candle,10,easy but unseen,steps 0-25,intrusion,no,cat and other animals; several candles,t8443
+a_piano__x__a_candle,10,easy but unseen,all 50,intrusion,no,cat and other animals; several candles,t6035
+a_piano__x__a_candle,11,easy but unseen,off,hybrid,yes,candle holder with piano keys; ink drawing,t1704
+a_piano__x__a_candle,11,easy but unseen,steps 0-10,hybrid,yes,candle wrapped in piano-like wood; illustration,t8520
+a_piano__x__a_candle,11,easy but unseen,steps 0-25,two,yes,candle on piano; illustration,t8532
+a_piano__x__a_candle,11,easy but unseen,all 50,two,yes,candle on piano; illustration,t3955
+a_piano__x__a_candle,12,easy but unseen,off,one,no,candle jar only,t5473
+a_piano__x__a_candle,12,easy but unseen,steps 0-10,one,no,"candle and sheet music, no piano",t9157
+a_piano__x__a_candle,12,easy but unseen,steps 0-25,one,no,"candle, sheet music, small black box not a piano",t9577
+a_piano__x__a_candle,12,easy but unseen,all 50,one,no,"candle, sheet music, small black box not a piano",t9509
+a_piano__x__a_candle,13,easy but unseen,off,two,no,,t7581
+a_piano__x__a_candle,13,easy but unseen,steps 0-10,hybrid,no,piano body filled with candle wax beside house-shaped candle,t3090
+a_piano__x__a_candle,13,easy but unseen,steps 0-25,hybrid,no,piano body filled with candle wax beside a candle,t4824
+a_piano__x__a_candle,13,easy but unseen,all 50,two,no,teddy-bear-shaped candle beside piano,t5414
+a_piano__x__a_candle,14,easy but unseen,off,one,yes,candle on ornate stand no piano; line drawing,t2472
+a_piano__x__a_candle,14,easy but unseen,steps 0-10,intrusion,no,extra candles,t2741
+a_piano__x__a_candle,14,easy but unseen,steps 0-25,intrusion,no,extra candles,t3899
+a_piano__x__a_candle,14,easy but unseen,all 50,intrusion,no,"extra candles, teddy bear and candlestick",t6592
+a_piano__x__a_candle,15,easy but unseen,off,intrusion,yes,extra small candle; drawing,t5269
+a_piano__x__a_candle,15,easy but unseen,steps 0-10,intrusion,no,five candles,t5132
+a_piano__x__a_candle,15,easy but unseen,steps 0-25,intrusion,no,"three candles, extra stool and pots",t5021
+a_piano__x__a_candle,15,easy but unseen,all 50,intrusion,no,"three candles, extra stool and pots",t1919
+a_piano__x__a_candle,16,easy but unseen,off,hybrid,yes,piano body is a candle; cartoon,t7890
+a_piano__x__a_candle,16,easy but unseen,steps 0-10,intrusion,no,extra grand piano,t9868
+a_piano__x__a_candle,16,easy but unseen,steps 0-25,intrusion,no,extra candles and props,t2283
+a_piano__x__a_candle,16,easy but unseen,all 50,intrusion,no,extra candles and props,t5243
+a_raccoon__x__a_salmon,9,easy but unseen,off,two,yes,raccoon head and salmon separate; illustration,t6800
+a_raccoon__x__a_salmon,9,easy but unseen,steps 0-10,hybrid,yes,salmon fused into raccoon face; illustration,t5054
+a_raccoon__x__a_salmon,9,easy but unseen,steps 0-25,hybrid,yes,fish head with raccoon nose; illustration,t9979
+a_raccoon__x__a_salmon,9,easy but unseen,all 50,hybrid,yes,raccoon head on fish body; illustration,t1486
+a_raccoon__x__a_salmon,10,easy but unseen,off,one,no,raccoon only,t6665
+a_raccoon__x__a_salmon,10,easy but unseen,steps 0-10,hybrid,no,raccoon with fish-scale body,t7283
+a_raccoon__x__a_salmon,10,easy but unseen,steps 0-25,hybrid,no,fish-snouted raccoon hugging a raccoon,t9438
+a_raccoon__x__a_salmon,10,easy but unseen,all 50,hybrid,no,fish-snouted raccoon hugging a raccoon,t8858
+a_raccoon__x__a_salmon,11,easy but unseen,off,one,yes,raccoon only; drawing,t4952
+a_raccoon__x__a_salmon,11,easy but unseen,steps 0-10,intrusion,yes,extra salmon; illustration,t8918
+a_raccoon__x__a_salmon,11,easy but unseen,steps 0-25,intrusion,yes,extra salmon; bear-like raccoon; illustration,t3977
+a_raccoon__x__a_salmon,11,easy but unseen,all 50,intrusion,yes,extra salmon; raccoon looks like bear; illustration,t2101
+a_raccoon__x__a_salmon,12,easy but unseen,off,hybrid,no,raccoon with salmon body and fins,t8468
+a_raccoon__x__a_salmon,12,easy but unseen,steps 0-10,one,no,raccoon and man; no salmon,t1682
+a_raccoon__x__a_salmon,12,easy but unseen,steps 0-25,intrusion,no,human holding salmon beside raccoon,t1888
+a_raccoon__x__a_salmon,12,easy but unseen,all 50,intrusion,no,extra raccoon and human holding salmon,t7235
+a_raccoon__x__a_salmon,13,easy but unseen,off,hybrid,yes,two raccoon-fish bodies; drawing,t1766
+a_raccoon__x__a_salmon,13,easy but unseen,steps 0-10,hybrid,no,"raccoon in salmon-skin body, extra raccoon and fish",t4564
+a_raccoon__x__a_salmon,13,easy but unseen,steps 0-25,hybrid,no,"salmon-headed creature, raccoon with fish tail",t9096
+a_raccoon__x__a_salmon,13,easy but unseen,all 50,hybrid,no,"salmon-headed creature, raccoon, extra fish",t4801
+a_raccoon__x__a_salmon,14,easy but unseen,off,one,yes,raccoon only; painterly,t2798
+a_raccoon__x__a_salmon,14,easy but unseen,steps 0-10,hybrid,yes,raccoon with fish body plus small raccoon; painterly,t9151
+a_raccoon__x__a_salmon,14,easy but unseen,steps 0-25,hybrid,yes,raccoon with salmon body plus small raccoon; painterly,t6345
+a_raccoon__x__a_salmon,14,easy but unseen,all 50,hybrid,yes,raccoon with salmon body plus small raccoon and tiny fish; painterly,t8156
+a_raccoon__x__a_salmon,15,easy but unseen,off,one,yes,raccoon face only; drawing,t8750
+a_raccoon__x__a_salmon,15,easy but unseen,steps 0-10,hybrid,yes,raccoon body with salmon head; drawing,t3080
+a_raccoon__x__a_salmon,15,easy but unseen,steps 0-25,hybrid,yes,raccoon fused with salmon; drawing,t1663
+a_raccoon__x__a_salmon,15,easy but unseen,all 50,hybrid,yes,raccoon fused with salmon; drawing,t3568
+a_raccoon__x__a_salmon,16,easy but unseen,off,one,yes,raccoon only; drawing,t4980
+a_raccoon__x__a_salmon,16,easy but unseen,steps 0-10,hybrid,yes,raccoon head on fish-shaped body; illustration,t5954
+a_raccoon__x__a_salmon,16,easy but unseen,steps 0-25,intrusion,yes,extra salmon; illustration,t1365
+a_raccoon__x__a_salmon,16,easy but unseen,all 50,intrusion,yes,extra salmon; illustration,t6868
+a_skateboard__x__a_helmet,9,easy but unseen,off,count error,yes,"three skateboards, no helmet; illustration",t5024
+a_skateboard__x__a_helmet,9,easy but unseen,steps 0-10,intrusion,no,extra helmet and skateboard,t7263
+a_skateboard__x__a_helmet,9,easy but unseen,steps 0-25,hybrid,no,"skateboard fused with trike, helmet on robot, extra teddy bear",t3404
+a_skateboard__x__a_helmet,9,easy but unseen,all 50,hybrid,no,"skateboard fused with trike, helmet on robot, extra teddy bear",t4951
+a_skateboard__x__a_helmet,10,easy but unseen,off,hybrid,no,helmet with skateboard-deck brim; extra decks,t1025
+a_skateboard__x__a_helmet,10,easy but unseen,steps 0-10,two,no,helmeted rider on odd big-wheeled board,t1812
+a_skateboard__x__a_helmet,10,easy but unseen,steps 0-25,one,no,"helmeted man on a scooter, no skateboard",t5315
+a_skateboard__x__a_helmet,10,easy but unseen,all 50,one,no,"helmeted man on a scooter, no skateboard",t6900
+a_skateboard__x__a_helmet,11,easy but unseen,off,one,yes,skateboard only; illustration,t6283
+a_skateboard__x__a_helmet,11,easy but unseen,steps 0-10,intrusion,yes,extra rider wearing the helmet on skateboard; illustration,t5361
+a_skateboard__x__a_helmet,11,easy but unseen,steps 0-25,one,yes,helmeted rider on kart-like vehicle; no skateboard; illustration,t1627
+a_skateboard__x__a_helmet,11,easy but unseen,all 50,one,yes,helmeted rider on kart-like vehicle; no skateboard; illustration,t3651
+a_skateboard__x__a_helmet,12,easy but unseen,off,one,no,"skateboard only, no helmet",t3653
+a_skateboard__x__a_helmet,12,easy but unseen,steps 0-10,one,no,"skateboard and orange car, no helmet",t1903
+a_skateboard__x__a_helmet,12,easy but unseen,steps 0-25,intrusion,no,"child wearing helmet, skateboards, extra orange car",t4991
+a_skateboard__x__a_helmet,12,easy but unseen,all 50,intrusion,no,"child wearing helmet, skateboards, extra orange car",t8407
+a_skateboard__x__a_helmet,13,easy but unseen,off,hybrid,no,helmet with skateboard wheels,t8346
+a_skateboard__x__a_helmet,13,easy but unseen,steps 0-10,two,no,,t3861
+a_skateboard__x__a_helmet,13,easy but unseen,steps 0-25,two,no,,t7271
+a_skateboard__x__a_helmet,13,easy but unseen,all 50,two,no,,t3761
+a_skateboard__x__a_helmet,14,easy but unseen,off,one,no,skateboard with helmet graphic printed on deck; no real helmet,t7606
+a_skateboard__x__a_helmet,14,easy but unseen,steps 0-10,count error,no,"two skateboards, helmet only as printed graphic",t8323
+a_skateboard__x__a_helmet,14,easy but unseen,steps 0-25,count error,no,"two skateboards, helmet only as printed graphic",t5722
+a_skateboard__x__a_helmet,14,easy but unseen,all 50,count error,no,"two skateboards, helmet only as printed graphic",t2425
+a_skateboard__x__a_helmet,15,easy but unseen,off,count error,yes,"many skateboards, no helmet; illustration",t8938
+a_skateboard__x__a_helmet,15,easy but unseen,steps 0-10,two,yes,helmet resting on skateboard; illustration,t7413
+a_skateboard__x__a_helmet,15,easy but unseen,steps 0-25,intrusion,yes,"helmet on skateboard, plus extra bird, plants, figurine; illustration",t2944
+a_skateboard__x__a_helmet,15,easy but unseen,all 50,intrusion,yes,"helmet on skateboard, plus extra bird, plants, figurine; illustration",t6622
+a_skateboard__x__a_helmet,16,easy but unseen,off,intrusion,yes,pattern of many helmets and skateboards; illustration,t1064
+a_skateboard__x__a_helmet,16,easy but unseen,steps 0-10,hybrid,yes,"a car, skateboard-like deck on roof and dome underneath; illustration",t7598
+a_skateboard__x__a_helmet,16,easy but unseen,steps 0-25,hybrid,yes,"a car, skateboard-like deck on roof and dome underneath; illustration",t8307
+a_skateboard__x__a_helmet,16,easy but unseen,all 50,hybrid,yes,"a car, skateboard-like deck on roof and dome underneath; illustration",t9494
+a_tiger__x__a_dog,9,easy but unseen,off,hybrid,yes,tiger with dog face; painting,t6523
+a_tiger__x__a_dog,9,easy but unseen,steps 0-10,hybrid,yes,tiger body with dog head; painting,t3552
+a_tiger__x__a_dog,9,easy but unseen,steps 0-25,hybrid,yes,tiger with dog face beside shaggy dog; extra winged creature; painting,t4456
+a_tiger__x__a_dog,9,easy but unseen,all 50,intrusion,yes,extra winged creature; dog has lion-like mane; painting,t8260
+a_tiger__x__a_dog,10,easy but unseen,off,hybrid,no,tiger-dog face; black and white,t7637
+a_tiger__x__a_dog,10,easy but unseen,steps 0-10,hybrid,no,dog face with tiger stripes,t8993
+a_tiger__x__a_dog,10,easy but unseen,steps 0-25,hybrid,no,two dogs with tiger stripes,t1811
+a_tiger__x__a_dog,10,easy but unseen,all 50,hybrid,no,two dogs with tiger stripes,t2752
+a_tiger__x__a_dog,11,easy but unseen,off,hybrid,yes,dog head with tiger colouring; painting,t3430
+a_tiger__x__a_dog,11,easy but unseen,steps 0-10,hybrid,yes,two dogs with tiger stripes; illustration,t6103
+a_tiger__x__a_dog,11,easy but unseen,steps 0-25,hybrid,yes,tiger-striped dog and tiger with dog ears; illustration,t1458
+a_tiger__x__a_dog,11,easy but unseen,all 50,hybrid,yes,tiger-striped dog and tiger with dog ears; illustration,t9228
+a_tiger__x__a_dog,12,easy but unseen,off,hybrid,no,tiger body with dog face,t3436
+a_tiger__x__a_dog,12,easy but unseen,steps 0-10,one,no,tiger with garbled face; no dog,t6972
+a_tiger__x__a_dog,12,easy but unseen,steps 0-25,hybrid,no,shaggy dog beside dog-headed tiger,t4718
+a_tiger__x__a_dog,12,easy but unseen,all 50,hybrid,no,shaggy dog beside dog-headed tiger,t1573
+a_tiger__x__a_dog,13,easy but unseen,off,hybrid,no,dog face with tiger stripes,t2040
+a_tiger__x__a_dog,13,easy but unseen,steps 0-10,hybrid,no,tiger body with dog face,t4985
+a_tiger__x__a_dog,13,easy but unseen,steps 0-25,hybrid,no,tiger with dog head beside striped dog,t8828
+a_tiger__x__a_dog,13,easy but unseen,all 50,hybrid,no,tiger-dog mix beside striped dog with tiger face; extra cub,t1921
+a_tiger__x__a_dog,14,easy but unseen,off,one,no,tiger only,t1413
+a_tiger__x__a_dog,14,easy but unseen,steps 0-10,hybrid,no,dog with tiger stripes and tiger face,t3130
+a_tiger__x__a_dog,14,easy but unseen,steps 0-25,intrusion,no,man holding tiger with garbled masked face; saddled animal,t6661
+a_tiger__x__a_dog,14,easy but unseen,all 50,intrusion,no,man holding tiger; saddled dog-like animal,t8540
+a_tiger__x__a_dog,15,easy but unseen,off,hybrid,yes,dog face on tiger; painterly,t8888
+a_tiger__x__a_dog,15,easy but unseen,steps 0-10,hybrid,yes,tiger with dog muzzle; painterly,t6360
+a_tiger__x__a_dog,15,easy but unseen,steps 0-25,hybrid,yes,dog face on tiger body plus tiger-striped bulldog; painterly,t6860
+a_tiger__x__a_dog,15,easy but unseen,all 50,hybrid,yes,striped dog-tiger and tiger-striped bulldog; painterly,t5904
+a_tiger__x__a_dog,16,easy but unseen,off,hybrid,yes,dog head on tiger body; painterly,t3931
+a_tiger__x__a_dog,16,easy but unseen,steps 0-10,hybrid,yes,tiger body with dog face; painterly,t4527
+a_tiger__x__a_dog,16,easy but unseen,steps 0-25,hybrid,yes,two tiger-dog mixes; painterly,t5396
+a_tiger__x__a_dog,16,easy but unseen,all 50,hybrid,yes,two tiger-dog mixes plus small animal; painterly,t4306
+a_wolf__x__a_horse,9,easy but unseen,off,hybrid,yes,wolf and horse heads merged; sketch,t8806
+a_wolf__x__a_horse,9,easy but unseen,steps 0-10,hybrid,no,wolf-horse fusion,t7234
+a_wolf__x__a_horse,9,easy but unseen,steps 0-25,hybrid,no,horse with wolf head plus small white horse,t4086
+a_wolf__x__a_horse,9,easy but unseen,all 50,hybrid,no,wolf-eared horse plus small horse-wolf,t5984
+a_wolf__x__a_horse,10,easy but unseen,off,one,yes,horse head only; sketch,t9080
+a_wolf__x__a_horse,10,easy but unseen,steps 0-10,hybrid,no,wolf head on horse body,t3742
+a_wolf__x__a_horse,10,easy but unseen,steps 0-25,hybrid,no,large wolf-horse; white foal with wolf face; extra husky,t7839
+a_wolf__x__a_horse,10,easy but unseen,all 50,hybrid,no,horned horse; white wolf-faced foal; dark wolf,t8303
+a_wolf__x__a_horse,11,easy but unseen,off,one,yes,wolf only; drawing,t3351
+a_wolf__x__a_horse,11,easy but unseen,steps 0-10,two,yes,wolf wearing horse bridle beside foal; illustration,t3868
+a_wolf__x__a_horse,11,easy but unseen,steps 0-25,hybrid,yes,horse with wolf ears beside foal; illustration,t5770
+a_wolf__x__a_horse,11,easy but unseen,all 50,hybrid,yes,horse with wolf ears and eyes beside foal; illustration,t7627
+a_wolf__x__a_horse,12,easy but unseen,off,hybrid,yes,wolf-horse head; fragmented illustration,t9632
+a_wolf__x__a_horse,12,easy but unseen,steps 0-10,hybrid,no,"wolf with horse mane, ghosted white head",t2552
+a_wolf__x__a_horse,12,easy but unseen,steps 0-25,hybrid,no,"wolf head on horse body, white blob",t6872
+a_wolf__x__a_horse,12,easy but unseen,all 50,one,no,"horse with white furry blob and small creature, no clear wolf",t2920
+a_wolf__x__a_horse,13,easy but unseen,off,hybrid,yes,wolf-horse head; drawing,t7655
+a_wolf__x__a_horse,13,easy but unseen,steps 0-10,one,no,wolf only,t1822
+a_wolf__x__a_horse,13,easy but unseen,steps 0-25,hybrid,no,"horse with wolf face, pony-like second animal",t8398
+a_wolf__x__a_horse,13,easy but unseen,all 50,intrusion,no,extra small dark canine; white animal species unclear,t8011
+a_wolf__x__a_horse,14,easy but unseen,off,one,yes,wolf only; pencil drawing,t2516
+a_wolf__x__a_horse,14,easy but unseen,steps 0-10,hybrid,yes,both animals wolf-horse mixes; stylised,t2180
+a_wolf__x__a_horse,14,easy but unseen,steps 0-25,two,no,horse from behind with wolf-like fur; ink blot,t8880
+a_wolf__x__a_horse,14,easy but unseen,all 50,hybrid,no,left animal wolf with horse hooves; small extra animal,t5762
+a_wolf__x__a_horse,15,easy but unseen,off,hybrid,yes,horse-wolf face; illustration,t7873
+a_wolf__x__a_horse,15,easy but unseen,steps 0-10,hybrid,yes,wolf head and mane on white horse-like body; illustration,t4825
+a_wolf__x__a_horse,15,easy but unseen,steps 0-25,hybrid,yes,"wolf head on horse body, extra small wolf; illustration",t6585
+a_wolf__x__a_horse,15,easy but unseen,all 50,hybrid,yes,"horse with wolf ears, extra small wolf; illustration",t9488
+a_wolf__x__a_horse,16,easy but unseen,off,hybrid,yes,horse with wolf coat; sketch,t7951
+a_wolf__x__a_horse,16,easy but unseen,steps 0-10,hybrid,yes,wolf with horse head overlapping; illustration,t1970
+a_wolf__x__a_horse,16,easy but unseen,steps 0-25,hybrid,yes,one horse-wolf head on two bodies; painterly,t2365
+a_wolf__x__a_horse,16,easy but unseen,all 50,two,yes,"white horse and furry animal, species unclear; painterly texture",t7762
+a_wolf__x__a_husky,9,easy but unseen,off,one,yes,husky only; digital painting,t2059
+a_wolf__x__a_husky,9,easy but unseen,steps 0-10,one,yes,single husky-wolf face; illustration,t4321
+a_wolf__x__a_husky,9,easy but unseen,steps 0-25,intrusion,yes,wolf plus several extra wolves and huskies; illustration,t9176
+a_wolf__x__a_husky,9,easy but unseen,all 50,intrusion,yes,wolf plus several extra canines; illustration,t6696
+a_wolf__x__a_husky,10,easy but unseen,off,one,no,single husky,t6041
+a_wolf__x__a_husky,10,easy but unseen,steps 0-10,count error,no,two blue-eyed huskies; no clear wolf,t7944
+a_wolf__x__a_husky,10,easy but unseen,steps 0-25,count error,no,two blue-eyed huskies; no clear wolf,t6863
+a_wolf__x__a_husky,10,easy but unseen,all 50,count error,no,two blue-eyed huskies; no clear wolf,t6228
+a_wolf__x__a_husky,11,easy but unseen,off,one,yes,husky head only; illustration,t8052
+a_wolf__x__a_husky,11,easy but unseen,steps 0-10,count error,yes,"husky-marked animal plus ghost husky face, no clear wolf; illustration",t7783
+a_wolf__x__a_husky,11,easy but unseen,steps 0-25,intrusion,yes,"grey wolf and husky, plus faint extra wolf silhouette; illustration",t3305
+a_wolf__x__a_husky,11,easy but unseen,all 50,intrusion,yes,wolf and husky plus faint extra wolf silhouette; illustration,t3152
+a_wolf__x__a_husky,12,easy but unseen,off,one,no,husky only,t5758
+a_wolf__x__a_husky,12,easy but unseen,steps 0-10,count error,no,"two huskies, no clear wolf",t8204
+a_wolf__x__a_husky,12,easy but unseen,steps 0-25,two,no,wolf-like grey dog and husky; species unclear,t4876
+a_wolf__x__a_husky,12,easy but unseen,all 50,intrusion,no,wolf-like and husky plus metal mask object,t8659
+a_wolf__x__a_husky,13,easy but unseen,off,one,no,single wolf-husky face,t8184
+a_wolf__x__a_husky,13,easy but unseen,steps 0-10,one,no,husky beside fur blob,t8263
+a_wolf__x__a_husky,13,easy but unseen,steps 0-25,count error,no,"two huskies, no clear wolf; third canine behind",t4487
+a_wolf__x__a_husky,13,easy but unseen,all 50,count error,no,"huskies only, no clear wolf; extra pup and canine",t4101
+a_wolf__x__a_husky,14,easy but unseen,off,one,no,husky only,t5809
+a_wolf__x__a_husky,14,easy but unseen,steps 0-10,one,no,single husky-marked wolf,t3040
+a_wolf__x__a_husky,14,easy but unseen,steps 0-25,two,no,"dark wolf-like dog and husky-faced animal, species unclear",t4175
+a_wolf__x__a_husky,14,easy but unseen,all 50,two,no,"dark wolf-like dog and husky-faced animal, species unclear; right one malformed with extra small head",t2721
+a_wolf__x__a_husky,15,easy but unseen,off,one,yes,single husky head; illustration,t4537
+a_wolf__x__a_husky,15,easy but unseen,steps 0-10,one,yes,single wolf-husky head; illustration,t9500
+a_wolf__x__a_husky,15,easy but unseen,steps 0-25,hybrid,yes,wolf and husky heads merged; illustration,t4436
+a_wolf__x__a_husky,15,easy but unseen,all 50,hybrid,yes,wolf and husky heads merged; illustration,t4208
+a_wolf__x__a_husky,16,easy but unseen,off,one,no,husky-wolf face only,t1543
+a_wolf__x__a_husky,16,easy but unseen,steps 0-10,one,no,single husky-marked wolf,t8158
+a_wolf__x__a_husky,16,easy but unseen,steps 0-25,two,no,"husky and pale wolf-like dog, species unclear",t7317
+a_wolf__x__a_husky,16,easy but unseen,all 50,two,no,"husky and pale wolf-like dog, species unclear",t1121
+a_cow__x__a_horse,9,hard,off,one,yes,single cow; ink drawing,t8281
+a_cow__x__a_horse,9,hard,steps 0-10,count error,no,cow and calf no horse,t5388
+a_cow__x__a_horse,9,hard,steps 0-25,count error,no,cow and calf no horse; people in background,t6659
+a_cow__x__a_horse,9,hard,all 50,count error,no,cows no horse,t3564
+a_cow__x__a_horse,10,hard,off,hybrid,yes,cow head with horse halter and mane; drawing,t8508
+a_cow__x__a_horse,10,hard,steps 0-10,count error,no,two cows no horse,t6143
+a_cow__x__a_horse,10,hard,steps 0-25,count error,no,two cows no horse,t2811
+a_cow__x__a_horse,10,hard,all 50,count error,no,two cows no horse,t3974
+a_cow__x__a_horse,11,hard,off,hybrid,yes,cow with horse mane; pencil drawing,t2209
+a_cow__x__a_horse,11,hard,steps 0-10,count error,no,two cows no horse,t1702
+a_cow__x__a_horse,11,hard,steps 0-25,count error,no,two cows no horse,t8771
+a_cow__x__a_horse,11,hard,all 50,count error,no,two cows no horse,t8825
+a_cow__x__a_horse,12,hard,off,hybrid,no,cow head with horse mane,t5105
+a_cow__x__a_horse,12,hard,steps 0-10,count error,no,"two cows, no horse; brown has horse-like forelock",t3318
+a_cow__x__a_horse,12,hard,steps 0-25,hybrid,no,brown cow with horse mane beside white calf,t5711
+a_cow__x__a_horse,12,hard,all 50,hybrid,no,brown cow with horse mane beside white calf,t6936
+a_cow__x__a_horse,13,hard,off,hybrid,yes,cow head with horse mane; illustration,t2917
+a_cow__x__a_horse,13,hard,steps 0-10,count error,no,"two cows, no horse",t5459
+a_cow__x__a_horse,13,hard,steps 0-25,count error,no,"two cows, no horse",t4204
+a_cow__x__a_horse,13,hard,all 50,count error,no,"two cows, no horse",t2238
+a_cow__x__a_horse,14,hard,off,one,yes,upside-down horse; drawing,t4263
+a_cow__x__a_horse,14,hard,steps 0-10,count error,no,"bull and calf, no horse",t2325
+a_cow__x__a_horse,14,hard,steps 0-25,count error,no,"cow and black calf, no horse",t1848
+a_cow__x__a_horse,14,hard,all 50,count error,no,"cow and black calf, no horse; tiny goat and butterfly",t8712
+a_cow__x__a_horse,15,hard,off,one,yes,cow head only; drawing,t6169
+a_cow__x__a_horse,15,hard,steps 0-10,hybrid,no,"cow with horse mane and tail, distant cow",t2426
+a_cow__x__a_horse,15,hard,steps 0-25,count error,no,two cows no horse,t2803
+a_cow__x__a_horse,15,hard,all 50,count error,no,"two cows and a calf, no horse",t6942
+a_cow__x__a_horse,16,hard,off,one,yes,cow only; ink drawing,t7963
+a_cow__x__a_horse,16,hard,steps 0-10,two,no,cow with horse forelock; pony head down,t4890
+a_cow__x__a_horse,16,hard,steps 0-25,count error,no,"cow and calf, no horse",t5107
+a_cow__x__a_horse,16,hard,all 50,count error,no,"cow and calf, no horse",t5977
+a_seal__x__a_walrus,9,hard,off,one,yes,seal face only; ink drawing,t8947
+a_seal__x__a_walrus,9,hard,steps 0-10,one,yes,single seal on rock; illustration,t8675
+a_seal__x__a_walrus,9,hard,steps 0-25,two,yes,"seal and tuskless walrus-like animal, species unclear; illustration",t8630
+a_seal__x__a_walrus,9,hard,all 50,intrusion,yes,"extra flying bird; big animal has no tusks, species unclear",t3175
+a_seal__x__a_walrus,10,hard,off,hybrid,no,seal face with walrus whiskers,t4318
+a_seal__x__a_walrus,10,hard,steps 0-10,hybrid,no,seal face with walrus whiskers and wrinkles,t3735
+a_seal__x__a_walrus,10,hard,steps 0-25,hybrid,no,"seal head growing out of walrus-like body, no tusks",t3726
+a_seal__x__a_walrus,10,hard,all 50,hybrid,no,"seal head growing out of walrus-like body, no tusks",t7808
+a_seal__x__a_walrus,11,hard,off,one,yes,single seal; illustration,t6811
+a_seal__x__a_walrus,11,hard,steps 0-10,one,yes,single walrus-like seal; illustration,t4057
+a_seal__x__a_walrus,11,hard,steps 0-25,intrusion,yes,extra seal pup; walrus lacks clear tusks; illustration,t8735
+a_seal__x__a_walrus,11,hard,all 50,intrusion,yes,extra seal pup; walrus lacks clear tusks; illustration,t9046
+a_seal__x__a_walrus,12,hard,off,one,no,walrus only,t4125
+a_seal__x__a_walrus,12,hard,steps 0-10,two,no,"seal pup and walrus-like animal, no tusks visible",t7743
+a_seal__x__a_walrus,12,hard,steps 0-25,intrusion,no,extra seal; walrus-like animal has no tusks,t5688
+a_seal__x__a_walrus,12,hard,all 50,intrusion,no,extra seal; walrus-like animal has no tusks,t1569
+a_seal__x__a_walrus,13,hard,off,one,yes,single seal; illustration,t3261
+a_seal__x__a_walrus,13,hard,steps 0-10,count error,no,"two seals, no walrus; big one walrus-like without tusks",t5410
+a_seal__x__a_walrus,13,hard,steps 0-25,count error,no,"two seals, no walrus; big one walrus-like without tusks",t8365
+a_seal__x__a_walrus,13,hard,all 50,count error,no,"two seals, no walrus; big one walrus-like without tusks",t7596
+a_seal__x__a_walrus,14,hard,off,hybrid,yes,seal with heavy walrus whiskers; drawing,t3370
+a_seal__x__a_walrus,14,hard,steps 0-10,count error,yes,"two seals, no walrus; illustration",t3019
+a_seal__x__a_walrus,14,hard,steps 0-25,count error,yes,"sea lion and seal with floppy ear flaps, no tusks, no walrus; illustration",t5378
+a_seal__x__a_walrus,14,hard,all 50,count error,yes,"sea lion and seal with floppy ear flaps, no tusks, no walrus; illustration",t1497
+a_seal__x__a_walrus,15,hard,off,one,yes,single seal face; engraving,t7488
+a_seal__x__a_walrus,15,hard,steps 0-10,one,yes,single seal; engraving,t7228
+a_seal__x__a_walrus,15,hard,steps 0-25,hybrid,yes,seal head emerging from walrus body; engraving,t2085
+a_seal__x__a_walrus,15,hard,all 50,hybrid,yes,seal head merged into tusked walrus body; engraving,t6455
+a_seal__x__a_walrus,16,hard,off,one,no,seal only,t9911
+a_seal__x__a_walrus,16,hard,steps 0-10,one,yes,seal only; painting,t4497
+a_seal__x__a_walrus,16,hard,steps 0-25,two,yes,"seal and tuskless walrus-like animal, species unclear; illustration",t9088
+a_seal__x__a_walrus,16,hard,all 50,two,yes,seal and walrus with tusk; illustration,t4189
+a_suitcase__x__a_desk_fan,9,hard,off,hybrid,no,fan built into suitcase,t8296
+a_suitcase__x__a_desk_fan,9,hard,steps 0-10,intrusion,no,extra case and potted plant,t6645
+a_suitcase__x__a_desk_fan,9,hard,steps 0-25,intrusion,no,extra suitcase and flower pot,t9188
+a_suitcase__x__a_desk_fan,9,hard,all 50,intrusion,no,extra suitcase and flower pot,t7779
+a_suitcase__x__a_desk_fan,10,hard,off,hybrid,no,fan with suitcase handles and shell,t5676
+a_suitcase__x__a_desk_fan,10,hard,steps 0-10,hybrid,no,fan built into a suitcase body,t4611
+a_suitcase__x__a_desk_fan,10,hard,steps 0-25,hybrid,no,fan built into a suitcase; extra figurine and cacti,t1269
+a_suitcase__x__a_desk_fan,10,hard,all 50,hybrid,no,fan built into a suitcase; extra figurine and cacti,t5068
+a_suitcase__x__a_desk_fan,11,hard,off,hybrid,yes,fan built as wheeled suitcase; illustration,t6670
+a_suitcase__x__a_desk_fan,11,hard,steps 0-10,intrusion,yes,fan in suitcase plus extra books and items; illustration,t9898
+a_suitcase__x__a_desk_fan,11,hard,steps 0-25,intrusion,yes,fan in suitcase plus extra bag books and plant; illustration,t8839
+a_suitcase__x__a_desk_fan,11,hard,all 50,intrusion,yes,fan in suitcase plus extra bag books and plant; illustration,t5399
+a_suitcase__x__a_desk_fan,12,hard,off,hybrid,no,suitcase with fan built into its face,t1117
+a_suitcase__x__a_desk_fan,12,hard,steps 0-10,intrusion,no,extra suitcase and succulent,t4418
+a_suitcase__x__a_desk_fan,12,hard,steps 0-25,intrusion,no,"extra suitcase, cactus and plant",t3573
+a_suitcase__x__a_desk_fan,12,hard,all 50,intrusion,no,"extra suitcase, cactus and plant",t7647
+a_suitcase__x__a_desk_fan,13,hard,off,hybrid,no,suitcase that is a fan,t3911
+a_suitcase__x__a_desk_fan,13,hard,steps 0-10,hybrid,no,"fan built into suitcase, plus extra suitcases",t9376
+a_suitcase__x__a_desk_fan,13,hard,steps 0-25,hybrid,no,"fan built into suitcase, plus extra suitcases",t5993
+a_suitcase__x__a_desk_fan,13,hard,all 50,hybrid,no,"fan built into suitcase, plus extra suitcases",t2912
+a_suitcase__x__a_desk_fan,14,hard,off,hybrid,no,suitcase that is a fan,t7216
+a_suitcase__x__a_desk_fan,14,hard,steps 0-10,hybrid,no,"fan with suitcase handle and wheels, plus cactus pot",t5209
+a_suitcase__x__a_desk_fan,14,hard,steps 0-25,hybrid,no,"fan with suitcase handle and wheels, plus cactus pot",t5651
+a_suitcase__x__a_desk_fan,14,hard,all 50,hybrid,no,"fan with suitcase handle and wheels, plus cactus pot",t9084
+a_suitcase__x__a_desk_fan,15,hard,off,hybrid,no,suitcase that is a fan,t8002
+a_suitcase__x__a_desk_fan,15,hard,steps 0-10,two,no,fan on suitcase,t1955
+a_suitcase__x__a_desk_fan,15,hard,steps 0-25,intrusion,no,extra potted plant,t2237
+a_suitcase__x__a_desk_fan,15,hard,all 50,intrusion,no,extra potted plant,t2577
+a_suitcase__x__a_desk_fan,16,hard,off,one,no,fan on table; no suitcase,t6729
+a_suitcase__x__a_desk_fan,16,hard,steps 0-10,two,yes,illustration,t9579
+a_suitcase__x__a_desk_fan,16,hard,steps 0-25,two,yes,illustration,t1360
+a_suitcase__x__a_desk_fan,16,hard,all 50,two,yes,illustration,t2955
+a_bookcase__x__a_glacier,9,not competing,off,hybrid,no,bookcase filled with glacier ice,t7059
+a_bookcase__x__a_glacier,9,not competing,steps 0-10,two,no,glacier only as wall art in bedroom,t1430
+a_bookcase__x__a_glacier,9,not competing,steps 0-25,two,no,glacier only as wall art in bedroom,t6842
+a_bookcase__x__a_glacier,9,not competing,all 50,two,no,glacier only as wall sculpture in bedroom,t1284
+a_bookcase__x__a_glacier,10,not competing,off,one,no,ice sculpture not glacier; armchair added,t9316
+a_bookcase__x__a_glacier,10,not competing,steps 0-10,two,no,,t7548
+a_bookcase__x__a_glacier,10,not competing,steps 0-25,intrusion,no,"extra chair, vase and bag",t8512
+a_bookcase__x__a_glacier,10,not competing,all 50,intrusion,no,"extra chair, vase and bag",t6998
+a_bookcase__x__a_glacier,11,not competing,off,hybrid,no,glacier wall made of bookshelves,t4225
+a_bookcase__x__a_glacier,11,not competing,steps 0-10,hybrid,no,bookcase frosted over with glacier ice,t9290
+a_bookcase__x__a_glacier,11,not competing,steps 0-25,one,no,"bookcase only, no glacier",t4592
+a_bookcase__x__a_glacier,11,not competing,all 50,one,no,"bookcase only, no glacier",t6420
+a_bookcase__x__a_glacier,12,not competing,off,hybrid,no,ice flowing through the bookcase shelves,t2736
+a_bookcase__x__a_glacier,12,not competing,steps 0-10,hybrid,no,bookcase built into the glacier face,t2029
+a_bookcase__x__a_glacier,12,not competing,steps 0-25,two,no,glacier wall beside bookcase,t7619
+a_bookcase__x__a_glacier,12,not competing,all 50,two,no,glacier wall beside bookcase,t8591
+a_bookcase__x__a_glacier,13,not competing,off,hybrid,no,bookcase shelves filled with glacier ice,t9336
+a_bookcase__x__a_glacier,13,not competing,steps 0-10,hybrid,no,bookcase shelves filled with glacier ice,t4188
+a_bookcase__x__a_glacier,13,not competing,steps 0-25,one,no,"bookcase only, no glacier",t8192
+a_bookcase__x__a_glacier,13,not competing,all 50,one,no,"bookcase only, no glacier",t9658
+a_bookcase__x__a_glacier,14,not competing,off,hybrid,yes,bookcase filled with glacier ice; illustration,t8441
+a_bookcase__x__a_glacier,14,not competing,steps 0-10,one,no,bookcase with plant and chair; no glacier,t4591
+a_bookcase__x__a_glacier,14,not competing,steps 0-25,one,no,bookcase with plant and chair; no glacier,t4981
+a_bookcase__x__a_glacier,14,not competing,all 50,one,no,bookcase with plant and chair; no glacier,t2052
+a_bookcase__x__a_glacier,15,not competing,off,two,no,bookcase wall with glacier ice shaped like a sofa,t3738
+a_bookcase__x__a_glacier,15,not competing,steps 0-10,two,no,glacier ice inside room by bookcases,t3591
+a_bookcase__x__a_glacier,15,not competing,steps 0-25,one,no,bookcase; only a snowy mountain through window,t8998
+a_bookcase__x__a_glacier,15,not competing,all 50,one,no,bookcase; only a snowy mountain through window,t2931
+a_bookcase__x__a_glacier,16,not competing,off,hybrid,no,glacier ice built as bookshelves,t3191
+a_bookcase__x__a_glacier,16,not competing,steps 0-10,intrusion,no,second bookcase and armchair beside glacier chunk,t8442
+a_bookcase__x__a_glacier,16,not competing,steps 0-25,intrusion,no,second bookcase and armchair beside glacier chunk,t5148
+a_bookcase__x__a_glacier,16,not competing,all 50,intrusion,no,second bookcase and armchair beside glacier chunk,t4963
+a_butterfly__x__a_flower_meadow,9,not competing,off,two,no,,t4955
+a_butterfly__x__a_flower_meadow,9,not competing,steps 0-10,two,no,,t2178
+a_butterfly__x__a_flower_meadow,9,not competing,steps 0-25,intrusion,no,extra cat and butterflies,t9514
+a_butterfly__x__a_flower_meadow,9,not competing,all 50,intrusion,no,extra cat and butterflies,t1715
+a_butterfly__x__a_flower_meadow,10,not competing,off,two,yes,painterly,t6893
+a_butterfly__x__a_flower_meadow,10,not competing,steps 0-10,two,yes,painterly,t3733
+a_butterfly__x__a_flower_meadow,10,not competing,steps 0-25,intrusion,yes,extra child; painterly,t1876
+a_butterfly__x__a_flower_meadow,10,not competing,all 50,intrusion,yes,extra child; painterly,t9707
+a_butterfly__x__a_flower_meadow,11,not competing,off,two,no,,t4958
+a_butterfly__x__a_flower_meadow,11,not competing,steps 0-10,two,no,,t1178
+a_butterfly__x__a_flower_meadow,11,not competing,steps 0-25,two,no,large malformed butterfly,t2687
+a_butterfly__x__a_flower_meadow,11,not competing,all 50,intrusion,no,two furry mammals tangled with butterflies,t3939
+a_butterfly__x__a_flower_meadow,12,not competing,off,two,no,,t1838
+a_butterfly__x__a_flower_meadow,12,not competing,steps 0-10,two,no,,t3659
+a_butterfly__x__a_flower_meadow,12,not competing,steps 0-25,two,no,butterfly faint among flowers,t5897
+a_butterfly__x__a_flower_meadow,12,not competing,all 50,intrusion,no,extra butterfly,t1563
+a_butterfly__x__a_flower_meadow,13,not competing,off,two,no,,t9520
+a_butterfly__x__a_flower_meadow,13,not competing,steps 0-10,intrusion,no,extra butterfly,t2133
+a_butterfly__x__a_flower_meadow,13,not competing,steps 0-25,one,no,meadow only; tiny specks not a clear butterfly,t8945
+a_butterfly__x__a_flower_meadow,13,not competing,all 50,one,no,meadow with odd small creature and shell; no butterfly,t3609
+a_butterfly__x__a_flower_meadow,14,not competing,off,intrusion,yes,extra small butterflies; illustration,t6170
+a_butterfly__x__a_flower_meadow,14,not competing,steps 0-10,two,no,,t2166
+a_butterfly__x__a_flower_meadow,14,not competing,steps 0-25,intrusion,no,peacock-like bird and llama-like creature; extra butterflies,t4507
+a_butterfly__x__a_flower_meadow,14,not competing,all 50,intrusion,no,peacock-like bird and llama-like creature; extra butterflies,t6633
+a_butterfly__x__a_flower_meadow,15,not competing,off,two,no,,t2336
+a_butterfly__x__a_flower_meadow,15,not competing,steps 0-10,two,no,,t7765
+a_butterfly__x__a_flower_meadow,15,not competing,steps 0-25,intrusion,no,extra butterfly,t1484
+a_butterfly__x__a_flower_meadow,15,not competing,all 50,intrusion,no,butterfly plus odd grey and purple shapes,t1482
+a_butterfly__x__a_flower_meadow,16,not competing,off,two,no,,t6242
+a_butterfly__x__a_flower_meadow,16,not competing,steps 0-10,two,yes,painterly,t3154
+a_butterfly__x__a_flower_meadow,16,not competing,steps 0-25,two,yes,painterly,t9534
+a_butterfly__x__a_flower_meadow,16,not competing,all 50,intrusion,yes,butterfly on extra small wooden bench; painterly,t4471
+a_camel__x__a_desert_landscape,9,not competing,off,two,yes,illustration,t7644
+a_camel__x__a_desert_landscape,9,not competing,steps 0-10,two,yes,illustration,t6351
+a_camel__x__a_desert_landscape,9,not competing,steps 0-25,two,yes,illustration,t5419
+a_camel__x__a_desert_landscape,9,not competing,all 50,two,yes,illustration,t9542
+a_camel__x__a_desert_landscape,10,not competing,off,two,no,camel face close-up in desert,t6626
+a_camel__x__a_desert_landscape,10,not competing,steps 0-10,two,no,,t7679
+a_camel__x__a_desert_landscape,10,not competing,steps 0-25,intrusion,no,extra camel,t9105
+a_camel__x__a_desert_landscape,10,not competing,all 50,intrusion,no,extra camel,t1132
+a_camel__x__a_desert_landscape,11,not competing,off,two,yes,illustration,t5938
+a_camel__x__a_desert_landscape,11,not competing,steps 0-10,two,yes,illustration,t7418
+a_camel__x__a_desert_landscape,11,not competing,steps 0-25,intrusion,yes,extra small camel; illustration,t5979
+a_camel__x__a_desert_landscape,11,not competing,all 50,intrusion,yes,extra small camel; illustration,t5002
+a_camel__x__a_desert_landscape,12,not competing,off,two,yes,cartoon illustration,t4519
+a_camel__x__a_desert_landscape,12,not competing,steps 0-10,intrusion,no,extra camel,t1905
+a_camel__x__a_desert_landscape,12,not competing,steps 0-25,intrusion,no,extra camel,t9003
+a_camel__x__a_desert_landscape,12,not competing,all 50,intrusion,no,extra camel,t4989
+a_camel__x__a_desert_landscape,13,not competing,off,two,no,,t7939
+a_camel__x__a_desert_landscape,13,not competing,steps 0-10,two,no,,t7367
+a_camel__x__a_desert_landscape,13,not competing,steps 0-25,two,no,,t2357
+a_camel__x__a_desert_landscape,13,not competing,all 50,intrusion,no,extra lying camel,t4882
+a_camel__x__a_desert_landscape,14,not competing,off,two,no,,t6382
+a_camel__x__a_desert_landscape,14,not competing,steps 0-10,intrusion,no,extra camel,t7060
+a_camel__x__a_desert_landscape,14,not competing,steps 0-25,intrusion,no,extra camels,t6759
+a_camel__x__a_desert_landscape,14,not competing,all 50,intrusion,no,"extra camels, tiny person",t8022
+a_camel__x__a_desert_landscape,15,not competing,off,two,yes,illustration,t5058
+a_camel__x__a_desert_landscape,15,not competing,steps 0-10,two,yes,illustration,t1996
+a_camel__x__a_desert_landscape,15,not competing,steps 0-25,intrusion,yes,extra camel; illustration,t1072
+a_camel__x__a_desert_landscape,15,not competing,all 50,intrusion,yes,extra camel; illustration,t3743
+a_camel__x__a_desert_landscape,16,not competing,off,two,yes,cactus stuck to camel side; illustration,t1999
+a_camel__x__a_desert_landscape,16,not competing,steps 0-10,two,yes,illustration,t1672
+a_camel__x__a_desert_landscape,16,not competing,steps 0-25,two,yes,camel neck bends into a cart; illustration,t6969
+a_camel__x__a_desert_landscape,16,not competing,all 50,two,yes,camel neck bends into a cart; illustration,t6036
+a_candle__x__a_waterfall,9,not competing,off,one,yes,candle only no waterfall; painterly,t4712
+a_candle__x__a_waterfall,9,not competing,steps 0-10,one,yes,candle only no waterfall; painterly,t1777
+a_candle__x__a_waterfall,9,not competing,steps 0-25,one,yes,candle only no waterfall; painterly,t9467
+a_candle__x__a_waterfall,9,not competing,all 50,one,yes,"candle, no waterfall; extra teddy bear and jug",t5949
+a_candle__x__a_waterfall,10,not competing,off,hybrid,yes,candle that is a fountain; drawing,t3571
+a_candle__x__a_waterfall,10,not competing,steps 0-10,intrusion,yes,several candles; painterly,t8852
+a_candle__x__a_waterfall,10,not competing,steps 0-25,two,yes,painterly,t8809
+a_candle__x__a_waterfall,10,not competing,all 50,intrusion,yes,several candles; painterly,t5575
+a_candle__x__a_waterfall,11,not competing,off,hybrid,yes,candle standing on waterfall fountain; illustration,t9175
+a_candle__x__a_waterfall,11,not competing,steps 0-10,intrusion,yes,extra glass jar beside candle; faint waterfall; painting,t6093
+a_candle__x__a_waterfall,11,not competing,steps 0-25,hybrid,yes,candles forming the waterfall ledges; painting,t8403
+a_candle__x__a_waterfall,11,not competing,all 50,two,yes,soft painting,t1667
+a_candle__x__a_waterfall,12,not competing,off,hybrid,no,candle made of falling water,t4761
+a_candle__x__a_waterfall,12,not competing,steps 0-10,hybrid,no,candle melting into the waterfall,t7834
+a_candle__x__a_waterfall,12,not competing,steps 0-25,two,no,,t1473
+a_candle__x__a_waterfall,12,not competing,all 50,hybrid,no,waterfall pouring through the candle,t8474
+a_candle__x__a_waterfall,13,not competing,off,one,no,candle under light streak; no waterfall,t5182
+a_candle__x__a_waterfall,13,not competing,steps 0-10,count error,no,"two candles, light streak not a waterfall",t8791
+a_candle__x__a_waterfall,13,not competing,steps 0-25,count error,no,"candle and candle in glass, no waterfall",t2918
+a_candle__x__a_waterfall,13,not competing,all 50,count error,no,"candle and candle in glass, no waterfall",t4245
+a_candle__x__a_waterfall,14,not competing,off,hybrid,no,candle wax streaked like falling water,t5721
+a_candle__x__a_waterfall,14,not competing,steps 0-10,count error,no,several candles no waterfall,t4738
+a_candle__x__a_waterfall,14,not competing,steps 0-25,count error,no,several candles no waterfall,t9605
+a_candle__x__a_waterfall,14,not competing,all 50,count error,no,several candles and glassy drip; no waterfall,t1493
+a_candle__x__a_waterfall,15,not competing,off,hybrid,yes,candles standing on waterfall-like roots; drawing,t6104
+a_candle__x__a_waterfall,15,not competing,steps 0-10,hybrid,yes,candle melting into waterfall; painting,t3287
+a_candle__x__a_waterfall,15,not competing,steps 0-25,hybrid,yes,waterfall pouring from candle; extra pitcher and candles; painting,t1382
+a_candle__x__a_waterfall,15,not competing,all 50,intrusion,yes,extra pitcher and candlestick beside candle and waterfall; painting,t6652
+a_candle__x__a_waterfall,16,not competing,off,one,no,single candle; waterfall only a faint blur,t6916
+a_candle__x__a_waterfall,16,not competing,steps 0-10,count error,no,several candles no waterfall,t6186
+a_candle__x__a_waterfall,16,not competing,steps 0-25,count error,no,several candles; waterfall only a faint streak,t7532
+a_candle__x__a_waterfall,16,not competing,all 50,intrusion,no,extra candles and candle jar,t4515
+a_deer__x__a_forest_clearing,9,not competing,off,two,yes,painting,t2979
+a_deer__x__a_forest_clearing,9,not competing,steps 0-10,two,yes,painting,t6467
+a_deer__x__a_forest_clearing,9,not competing,steps 0-25,intrusion,yes,extra deer; painting,t7958
+a_deer__x__a_forest_clearing,9,not competing,all 50,intrusion,yes,extra deer; painting,t1709
+a_deer__x__a_forest_clearing,10,not competing,off,two,yes,deer with deformed extra legs; painting,t3718
+a_deer__x__a_forest_clearing,10,not competing,steps 0-10,two,yes,painting,t6144
+a_deer__x__a_forest_clearing,10,not competing,steps 0-25,intrusion,yes,extra deer; painting,t1544
+a_deer__x__a_forest_clearing,10,not competing,all 50,intrusion,yes,two extra deer; painting,t9163
+a_deer__x__a_forest_clearing,11,not competing,off,two,yes,painterly,t9598
+a_deer__x__a_forest_clearing,11,not competing,steps 0-10,two,yes,painterly,t8934
+a_deer__x__a_forest_clearing,11,not competing,steps 0-25,intrusion,yes,extra lying deer; painterly,t7784
+a_deer__x__a_forest_clearing,11,not competing,all 50,intrusion,yes,extra lying deer; painterly,t2506
+a_deer__x__a_forest_clearing,12,not competing,off,two,yes,painting,t6614
+a_deer__x__a_forest_clearing,12,not competing,steps 0-10,two,yes,painting,t9255
+a_deer__x__a_forest_clearing,12,not competing,steps 0-25,intrusion,yes,extra fawn; painting,t9455
+a_deer__x__a_forest_clearing,12,not competing,all 50,intrusion,yes,extra fawn and small creature; painting,t1488
+a_deer__x__a_forest_clearing,13,not competing,off,intrusion,yes,extra deer; painting,t6950
+a_deer__x__a_forest_clearing,13,not competing,steps 0-10,two,yes,painting,t9363
+a_deer__x__a_forest_clearing,13,not competing,steps 0-25,two,yes,painting,t5975
+a_deer__x__a_forest_clearing,13,not competing,all 50,intrusion,yes,two extra deer; painting,t4290
+a_deer__x__a_forest_clearing,14,not competing,off,hybrid,no,deer with mossy forest-floor body,t1599
+a_deer__x__a_forest_clearing,14,not competing,steps 0-10,two,yes,painterly,t6692
+a_deer__x__a_forest_clearing,14,not competing,steps 0-25,intrusion,yes,extra deer; painterly,t5859
+a_deer__x__a_forest_clearing,14,not competing,all 50,intrusion,yes,extra deer; painterly,t2579
+a_deer__x__a_forest_clearing,15,not competing,off,two,yes,painterly,t7444
+a_deer__x__a_forest_clearing,15,not competing,steps 0-10,two,yes,painterly,t9839
+a_deer__x__a_forest_clearing,15,not competing,steps 0-25,intrusion,yes,extra deer; painterly,t6722
+a_deer__x__a_forest_clearing,15,not competing,all 50,intrusion,yes,extra deer; painterly,t8818
+a_deer__x__a_forest_clearing,16,not competing,off,two,yes,oil painting,t1609
+a_deer__x__a_forest_clearing,16,not competing,steps 0-10,two,yes,oil painting,t4893
+a_deer__x__a_forest_clearing,16,not competing,steps 0-25,intrusion,yes,extra deer; oil painting,t5823
+a_deer__x__a_forest_clearing,16,not competing,all 50,intrusion,yes,two extra deer; oil painting,t4812
+a_dolphin__x__an_ocean_wave,9,not competing,off,two,no,dolphin leaping from ocean swell,t4033
+a_dolphin__x__an_ocean_wave,9,not competing,steps 0-10,two,no,,t9279
+a_dolphin__x__an_ocean_wave,9,not competing,steps 0-25,hybrid,no,dolphin formed from wave water,t3102
+a_dolphin__x__an_ocean_wave,9,not competing,all 50,hybrid,no,dolphin formed from wave water,t6109
+a_dolphin__x__an_ocean_wave,10,not competing,off,two,no,,t2379
+a_dolphin__x__an_ocean_wave,10,not competing,steps 0-10,hybrid,no,dolphin body made of wave,t3784
+a_dolphin__x__an_ocean_wave,10,not competing,steps 0-25,hybrid,no,dolphin made of wave plus extra small dolphin,t9344
+a_dolphin__x__an_ocean_wave,10,not competing,all 50,hybrid,no,dolphin made of wave plus extra small dolphin,t2416
+a_dolphin__x__an_ocean_wave,11,not competing,off,one,yes,dolphin over flat sea no wave; painting on canvas,t7388
+a_dolphin__x__an_ocean_wave,11,not competing,steps 0-10,two,no,splash ring as wave,t1529
+a_dolphin__x__an_ocean_wave,11,not competing,steps 0-25,two,no,,t1453
+a_dolphin__x__an_ocean_wave,11,not competing,all 50,intrusion,no,extra dolphin,t9317
+a_dolphin__x__an_ocean_wave,12,not competing,off,two,no,,t7151
+a_dolphin__x__an_ocean_wave,12,not competing,steps 0-10,two,yes,illustration,t6200
+a_dolphin__x__an_ocean_wave,12,not competing,steps 0-25,two,yes,illustration,t9437
+a_dolphin__x__an_ocean_wave,12,not competing,all 50,intrusion,yes,extra dolphins; illustration,t1579
+a_dolphin__x__an_ocean_wave,13,not competing,off,two,yes,painting; stray fin below,t9263
+a_dolphin__x__an_ocean_wave,13,not competing,steps 0-10,two,yes,painterly,t4285
+a_dolphin__x__an_ocean_wave,13,not competing,steps 0-25,two,yes,painterly,t2830
+a_dolphin__x__an_ocean_wave,13,not competing,all 50,intrusion,yes,extra dolphin; painterly,t2684
+a_dolphin__x__an_ocean_wave,14,not competing,off,two,yes,stylised digital art,t3276
+a_dolphin__x__an_ocean_wave,14,not competing,steps 0-10,two,yes,stylised digital art,t5307
+a_dolphin__x__an_ocean_wave,14,not competing,steps 0-25,intrusion,yes,extra small dolphin; digital art,t5536
+a_dolphin__x__an_ocean_wave,14,not competing,all 50,intrusion,yes,extra dolphins; digital art,t5601
+a_dolphin__x__an_ocean_wave,15,not competing,off,two,yes,illustration,t7338
+a_dolphin__x__an_ocean_wave,15,not competing,steps 0-10,two,yes,painting,t2838
+a_dolphin__x__an_ocean_wave,15,not competing,steps 0-25,intrusion,yes,extra dolphin in water; painting,t6155
+a_dolphin__x__an_ocean_wave,15,not competing,all 50,intrusion,yes,extra dolphins; painting,t6381
+a_dolphin__x__an_ocean_wave,16,not competing,off,hybrid,yes,dolphin body merging into wave; painterly,t1676
+a_dolphin__x__an_ocean_wave,16,not competing,steps 0-10,hybrid,yes,dolphin made of water; painterly,t2697
+a_dolphin__x__an_ocean_wave,16,not competing,steps 0-25,two,yes,painterly,t8059
+a_dolphin__x__an_ocean_wave,16,not competing,all 50,intrusion,yes,extra sea creature; painterly,t5953
+a_duck__x__a_pond,9,not competing,off,two,no,,t7661
+a_duck__x__a_pond,9,not competing,steps 0-10,two,no,duck body malformed with extra legs,t2419
+a_duck__x__a_pond,9,not competing,steps 0-25,intrusion,no,extra ducks; blurry,t2141
+a_duck__x__a_pond,9,not competing,all 50,intrusion,no,extra furry animal and ducks; blurry,t6542
+a_duck__x__a_pond,10,not competing,off,two,no,duck close-up on water with reeds,t1075
+a_duck__x__a_pond,10,not competing,steps 0-10,two,no,,t8984
+a_duck__x__a_pond,10,not competing,steps 0-25,intrusion,no,two ducks in pond plus distant third,t6965
+a_duck__x__a_pond,10,not competing,all 50,broken,no,smeared shapes in pond; no readable duck,t8973
+a_duck__x__a_pond,11,not competing,off,two,no,duck on open water; pond implied,t4421
+a_duck__x__a_pond,11,not competing,steps 0-10,two,yes,illustration,t1077
+a_duck__x__a_pond,11,not competing,steps 0-25,intrusion,no,long-legged duck-goose plus ducklings,t9017
+a_duck__x__a_pond,11,not competing,all 50,intrusion,no,ghostly brown mammal shape plus ducks,t1961
+a_duck__x__a_pond,12,not competing,off,two,no,,t7694
+a_duck__x__a_pond,12,not competing,steps 0-10,two,no,,t2412
+a_duck__x__a_pond,12,not competing,steps 0-25,intrusion,no,extra ducks,t5861
+a_duck__x__a_pond,12,not competing,all 50,intrusion,no,"extra ducks, cat and white blob",t7246
+a_duck__x__a_pond,13,not competing,off,two,yes,stylised render,t1846
+a_duck__x__a_pond,13,not competing,steps 0-10,two,no,,t6739
+a_duck__x__a_pond,13,not competing,steps 0-25,intrusion,no,extra duckling,t5221
+a_duck__x__a_pond,13,not competing,all 50,intrusion,no,"unrequested furry animals, small duck",t3388
+a_duck__x__a_pond,14,not competing,off,two,no,,t7874
+a_duck__x__a_pond,14,not competing,steps 0-10,intrusion,no,extra duck,t5465
+a_duck__x__a_pond,14,not competing,steps 0-25,intrusion,no,extra duck,t5572
+a_duck__x__a_pond,14,not competing,all 50,intrusion,no,"two extra deer-like animals, ducks only tiny yellow ducklings",t9094
+a_duck__x__a_pond,15,not competing,off,two,yes,painting,t2407
+a_duck__x__a_pond,15,not competing,steps 0-10,two,yes,painting,t4334
+a_duck__x__a_pond,15,not competing,steps 0-25,intrusion,yes,extra duck in pond; painting,t7374
+a_duck__x__a_pond,15,not competing,all 50,intrusion,yes,"extra donkey and zebra-like animals, small bird in water; painting",t9275
+a_duck__x__a_pond,16,not competing,off,two,yes,stylised render,t9391
+a_duck__x__a_pond,16,not competing,steps 0-10,two,yes,illustration,t2415
+a_duck__x__a_pond,16,not competing,steps 0-25,two,yes,painterly,t6839
+a_duck__x__a_pond,16,not competing,all 50,intrusion,yes,extra white goat-like animal; tiny duckling; painterly,t4733
+a_fire_hydrant__x__a_snowfield,9,not competing,off,two,no,,t2155
+a_fire_hydrant__x__a_snowfield,9,not competing,steps 0-10,two,no,black and white photo,t9140
+a_fire_hydrant__x__a_snowfield,9,not competing,steps 0-25,two,no,snow spray plume beside hydrant,t6038
+a_fire_hydrant__x__a_snowfield,9,not competing,all 50,intrusion,no,snow plume shaped like an animal,t3109
+a_fire_hydrant__x__a_snowfield,10,not competing,off,two,no,,t1065
+a_fire_hydrant__x__a_snowfield,10,not competing,steps 0-10,two,no,,t7953
+a_fire_hydrant__x__a_snowfield,10,not competing,steps 0-25,intrusion,no,extra hydrant half buried,t8873
+a_fire_hydrant__x__a_snowfield,10,not competing,all 50,intrusion,no,extra hydrant half buried,t6269
+a_fire_hydrant__x__a_snowfield,11,not competing,off,two,no,,t5383
+a_fire_hydrant__x__a_snowfield,11,not competing,steps 0-10,two,no,,t8408
+a_fire_hydrant__x__a_snowfield,11,not competing,steps 0-25,two,no,,t2285
+a_fire_hydrant__x__a_snowfield,11,not competing,all 50,two,no,,t2273
+a_fire_hydrant__x__a_snowfield,12,not competing,off,two,no,,t4061
+a_fire_hydrant__x__a_snowfield,12,not competing,steps 0-10,intrusion,no,extra small hydrant,t3870
+a_fire_hydrant__x__a_snowfield,12,not competing,steps 0-25,intrusion,no,"extra person in red jacket, boot in snow",t4699
+a_fire_hydrant__x__a_snowfield,12,not competing,all 50,intrusion,no,"extra person in red jacket, boot in snow",t2937
+a_fire_hydrant__x__a_snowfield,13,not competing,off,two,no,,t6730
+a_fire_hydrant__x__a_snowfield,13,not competing,steps 0-10,two,no,snowy street,t7961
+a_fire_hydrant__x__a_snowfield,13,not competing,steps 0-25,two,no,,t1447
+a_fire_hydrant__x__a_snowfield,13,not competing,all 50,intrusion,no,extra small white animal,t5661
+a_fire_hydrant__x__a_snowfield,14,not competing,off,two,no,,t9753
+a_fire_hydrant__x__a_snowfield,14,not competing,steps 0-10,two,no,,t8718
+a_fire_hydrant__x__a_snowfield,14,not competing,steps 0-25,intrusion,no,extra small red hydrant,t2185
+a_fire_hydrant__x__a_snowfield,14,not competing,all 50,intrusion,no,extra small red hydrant,t7001
+a_fire_hydrant__x__a_snowfield,15,not competing,off,two,no,,t2927
+a_fire_hydrant__x__a_snowfield,15,not competing,steps 0-10,two,no,,t5333
+a_fire_hydrant__x__a_snowfield,15,not competing,steps 0-25,one,no,hydrant spraying on snowy city street; no snowfield,t2095
+a_fire_hydrant__x__a_snowfield,15,not competing,all 50,one,no,hydrant spraying on snowy city street; no snowfield,t6349
+a_fire_hydrant__x__a_snowfield,16,not competing,off,two,no,,t9582
+a_fire_hydrant__x__a_snowfield,16,not competing,steps 0-10,two,no,,t8989
+a_fire_hydrant__x__a_snowfield,16,not competing,steps 0-25,two,no,,t5126
+a_fire_hydrant__x__a_snowfield,16,not competing,all 50,intrusion,no,extra cats by hydrant,t2409
+a_flamingo__x__a_lagoon,9,not competing,off,two,no,flamingo in open water,t5952
+a_flamingo__x__a_lagoon,9,not competing,steps 0-10,intrusion,no,extra flamingos,t9368
+a_flamingo__x__a_lagoon,9,not competing,steps 0-25,intrusion,no,extra flamingos and pink fluffy shapes,t4429
+a_flamingo__x__a_lagoon,9,not competing,all 50,intrusion,no,extra deformed flamingos and furry creature,t7405
+a_flamingo__x__a_lagoon,10,not competing,off,one,no,flamingo on plain backdrop; no lagoon,t8430
+a_flamingo__x__a_lagoon,10,not competing,steps 0-10,two,no,,t1409
+a_flamingo__x__a_lagoon,10,not competing,steps 0-25,intrusion,no,extra flamingo,t2767
+a_flamingo__x__a_lagoon,10,not competing,all 50,intrusion,no,extra deformed four-legged flamingo,t9268
+a_flamingo__x__a_lagoon,11,not competing,off,two,no,,t9365
+a_flamingo__x__a_lagoon,11,not competing,steps 0-10,intrusion,no,extra flamingo,t5595
+a_flamingo__x__a_lagoon,11,not competing,steps 0-25,intrusion,no,extra flamingos,t5164
+a_flamingo__x__a_lagoon,11,not competing,all 50,intrusion,no,extra flamingos,t8580
+a_flamingo__x__a_lagoon,12,not competing,off,intrusion,no,extra flamingos at frame edges,t8604
+a_flamingo__x__a_lagoon,12,not competing,steps 0-10,intrusion,no,extra flamingos,t7345
+a_flamingo__x__a_lagoon,12,not competing,steps 0-25,intrusion,no,extra flamingos and chick,t6039
+a_flamingo__x__a_lagoon,12,not competing,all 50,intrusion,no,extra flamingos and fluffy llama-like creature,t5976
+a_flamingo__x__a_lagoon,13,not competing,off,two,no,,t9721
+a_flamingo__x__a_lagoon,13,not competing,steps 0-10,intrusion,no,extra flamingo,t9417
+a_flamingo__x__a_lagoon,13,not competing,steps 0-25,intrusion,no,extra flamingo with ruffled feathers,t1405
+a_flamingo__x__a_lagoon,13,not competing,all 50,hybrid,no,llama-like flamingo beside flamingo,t4202
+a_flamingo__x__a_lagoon,14,not competing,off,two,no,,t6535
+a_flamingo__x__a_lagoon,14,not competing,steps 0-10,intrusion,no,extra flamingos,t5558
+a_flamingo__x__a_lagoon,14,not competing,steps 0-25,intrusion,yes,"extra flamingos, fluffy blue tree; illustration",t4108
+a_flamingo__x__a_lagoon,14,not competing,all 50,intrusion,yes,"extra flamingos, fluffy blue tree; illustration",t6219
+a_flamingo__x__a_lagoon,15,not competing,off,two,yes,painterly,t9747
+a_flamingo__x__a_lagoon,15,not competing,steps 0-10,intrusion,yes,extra small flamingos; vintage illustration,t1214
+a_flamingo__x__a_lagoon,15,not competing,steps 0-25,intrusion,yes,extra flamingos; vintage illustration,t7341
+a_flamingo__x__a_lagoon,15,not competing,all 50,intrusion,yes,extra flamingos; vintage illustration,t7568
+a_flamingo__x__a_lagoon,16,not competing,off,two,yes,painterly,t7252
+a_flamingo__x__a_lagoon,16,not competing,steps 0-10,intrusion,yes,extra flamingo; painterly,t2410
+a_flamingo__x__a_lagoon,16,not competing,steps 0-25,intrusion,yes,extra flamingos; painterly,t2550
+a_flamingo__x__a_lagoon,16,not competing,all 50,intrusion,yes,extra flamingos and pink blob; painterly,t2788
+a_horse__x__a_grassy_field,9,not competing,off,two,no,,t5278
+a_horse__x__a_grassy_field,9,not competing,steps 0-10,two,no,,t2562
+a_horse__x__a_grassy_field,9,not competing,steps 0-25,intrusion,no,small extra pony-dog animal,t5625
+a_horse__x__a_grassy_field,9,not competing,all 50,intrusion,no,small extra dog-like animal,t2150
+a_horse__x__a_grassy_field,10,not competing,off,two,no,,t7206
+a_horse__x__a_grassy_field,10,not competing,steps 0-10,two,no,,t2556
+a_horse__x__a_grassy_field,10,not competing,steps 0-25,intrusion,no,extra pony; left horse head malformed,t7621
+a_horse__x__a_grassy_field,10,not competing,all 50,intrusion,no,extra pony,t3131
+a_horse__x__a_grassy_field,11,not competing,off,two,no,,t6060
+a_horse__x__a_grassy_field,11,not competing,steps 0-10,two,no,,t3627
+a_horse__x__a_grassy_field,11,not competing,steps 0-25,intrusion,no,extra white foal,t2216
+a_horse__x__a_grassy_field,11,not competing,all 50,intrusion,no,extra lamb-like animal,t2524
+a_horse__x__a_grassy_field,12,not competing,off,two,no,,t9555
+a_horse__x__a_grassy_field,12,not competing,steps 0-10,intrusion,no,extra white horse,t9273
+a_horse__x__a_grassy_field,12,not competing,steps 0-25,intrusion,no,extra white horse,t2096
+a_horse__x__a_grassy_field,12,not competing,all 50,intrusion,no,extra white horse,t7175
+a_horse__x__a_grassy_field,13,not competing,off,two,no,,t5066
+a_horse__x__a_grassy_field,13,not competing,steps 0-10,two,no,,t9745
+a_horse__x__a_grassy_field,13,not competing,steps 0-25,intrusion,no,extra horse,t4654
+a_horse__x__a_grassy_field,13,not competing,all 50,intrusion,no,extra horse,t5872
+a_horse__x__a_grassy_field,14,not competing,off,two,no,,t6325
+a_horse__x__a_grassy_field,14,not competing,steps 0-10,two,no,,t7092
+a_horse__x__a_grassy_field,14,not competing,steps 0-25,intrusion,no,extra foal,t8594
+a_horse__x__a_grassy_field,14,not competing,all 50,intrusion,no,extra foal,t3570
+a_horse__x__a_grassy_field,15,not competing,off,two,no,,t4905
+a_horse__x__a_grassy_field,15,not competing,steps 0-10,two,no,,t2025
+a_horse__x__a_grassy_field,15,not competing,steps 0-25,intrusion,no,extra white horse,t9912
+a_horse__x__a_grassy_field,15,not competing,all 50,intrusion,no,extra white horse,t5716
+a_horse__x__a_grassy_field,16,not competing,off,two,no,,t7849
+a_horse__x__a_grassy_field,16,not competing,steps 0-10,two,no,,t1154
+a_horse__x__a_grassy_field,16,not competing,steps 0-25,two,no,odd dress-shaped board in field,t1871
+a_horse__x__a_grassy_field,16,not competing,all 50,intrusion,no,extra small pale animal,t3843
+a_lamppost__x__a_desert_dune,9,not competing,off,two,no,black and white,t3536
+a_lamppost__x__a_desert_dune,9,not competing,steps 0-10,intrusion,no,Joshua tree-like plants,t8886
+a_lamppost__x__a_desert_dune,9,not competing,steps 0-25,intrusion,no,Joshua tree-like plant,t7238
+a_lamppost__x__a_desert_dune,9,not competing,all 50,intrusion,no,Joshua tree-like plant,t5103
+a_lamppost__x__a_desert_dune,10,not competing,off,one,no,dune only no lamppost,t9367
+a_lamppost__x__a_desert_dune,10,not competing,steps 0-10,two,no,,t3440
+a_lamppost__x__a_desert_dune,10,not competing,steps 0-25,two,no,,t5505
+a_lamppost__x__a_desert_dune,10,not competing,all 50,two,no,,t5475
+a_lamppost__x__a_desert_dune,11,not competing,off,two,no,black and white photo,t4288
+a_lamppost__x__a_desert_dune,11,not competing,steps 0-10,two,no,,t1266
+a_lamppost__x__a_desert_dune,11,not competing,steps 0-25,two,no,,t7423
+a_lamppost__x__a_desert_dune,11,not competing,all 50,two,no,,t6017
+a_lamppost__x__a_desert_dune,12,not competing,off,hybrid,no,lamppost pole merged into a sand wall,t4650
+a_lamppost__x__a_desert_dune,12,not competing,steps 0-10,two,no,,t3123
+a_lamppost__x__a_desert_dune,12,not competing,steps 0-25,two,no,warped lamppost; smeared grass artefacts,t6794
+a_lamppost__x__a_desert_dune,12,not competing,all 50,two,no,warped lamppost; smeared grass artefacts,t3838
+a_lamppost__x__a_desert_dune,13,not competing,off,two,no,,t7193
+a_lamppost__x__a_desert_dune,13,not competing,steps 0-10,intrusion,no,fence and extra short post,t7564
+a_lamppost__x__a_desert_dune,13,not competing,steps 0-25,intrusion,no,fence and extra short post,t4167
+a_lamppost__x__a_desert_dune,13,not competing,all 50,intrusion,no,fence and extra short post,t9869
+a_lamppost__x__a_desert_dune,14,not competing,off,two,no,,t7840
+a_lamppost__x__a_desert_dune,14,not competing,steps 0-10,two,no,small lamppost among dead trees,t7365
+a_lamppost__x__a_desert_dune,14,not competing,steps 0-25,intrusion,no,extra stone pillar with plant,t3821
+a_lamppost__x__a_desert_dune,14,not competing,all 50,intrusion,no,extra stone pillar with plant,t3045
+a_lamppost__x__a_desert_dune,15,not competing,off,two,no,black and white,t2547
+a_lamppost__x__a_desert_dune,15,not competing,steps 0-10,intrusion,yes,Joshua tree and second lamppost; painterly,t6869
+a_lamppost__x__a_desert_dune,15,not competing,steps 0-25,intrusion,yes,Joshua tree and second lamppost with flag; painterly,t5045
+a_lamppost__x__a_desert_dune,15,not competing,all 50,intrusion,yes,Joshua tree and second lamppost with bird; painterly,t2446
+a_lamppost__x__a_desert_dune,16,not competing,off,two,no,,t9398
+a_lamppost__x__a_desert_dune,16,not competing,steps 0-10,two,no,,t9597
+a_lamppost__x__a_desert_dune,16,not competing,steps 0-25,intrusion,no,extra bin at lamppost base,t9947
+a_lamppost__x__a_desert_dune,16,not competing,all 50,intrusion,no,extra bin at lamppost base,t7942
+a_lighthouse__x__a_desert_dune,9,not competing,off,two,no,lighthouse on dark dune by misty water,t1056
+a_lighthouse__x__a_desert_dune,9,not competing,steps 0-10,two,no,faint blurred lighthouse on dune,t6193
+a_lighthouse__x__a_desert_dune,9,not competing,steps 0-25,two,no,,t2806
+a_lighthouse__x__a_desert_dune,9,not competing,all 50,two,no,,t8593
+a_lighthouse__x__a_desert_dune,10,not competing,off,intrusion,no,extra lighthouse,t1892
+a_lighthouse__x__a_desert_dune,10,not competing,steps 0-10,two,no,,t6470
+a_lighthouse__x__a_desert_dune,10,not competing,steps 0-25,two,no,,t7040
+a_lighthouse__x__a_desert_dune,10,not competing,all 50,two,no,,t7760
+a_lighthouse__x__a_desert_dune,11,not competing,off,one,no,lighthouse on dark jetty in water; no dune,t7795
+a_lighthouse__x__a_desert_dune,11,not competing,steps 0-10,two,no,thin tower on sand dune by water,t4256
+a_lighthouse__x__a_desert_dune,11,not competing,steps 0-25,two,no,"lighthouse on ridged sand spit; sand reads as dune, coastal",t8629
+a_lighthouse__x__a_desert_dune,11,not competing,all 50,two,no,"lighthouse on ridged sand spit; sand reads as dune, coastal",t6260
+a_lighthouse__x__a_desert_dune,12,not competing,off,two,no,small lighthouse on dune,t5827
+a_lighthouse__x__a_desert_dune,12,not competing,steps 0-10,two,no,,t2153
+a_lighthouse__x__a_desert_dune,12,not competing,steps 0-25,one,no,dune only; lighthouse a sliver behind grass trunk,t3963
+a_lighthouse__x__a_desert_dune,12,not competing,all 50,two,no,,t4025
+a_lighthouse__x__a_desert_dune,13,not competing,off,hybrid,no,dune band wraps into lighthouse body,t9184
+a_lighthouse__x__a_desert_dune,13,not competing,steps 0-10,two,no,,t1631
+a_lighthouse__x__a_desert_dune,13,not competing,steps 0-25,two,no,lighthouse on coastal dune,t4770
+a_lighthouse__x__a_desert_dune,13,not competing,all 50,two,no,lighthouse on coastal dune,t2384
+a_lighthouse__x__a_desert_dune,14,not competing,off,one,no,distant building not clearly a lighthouse,t1003
+a_lighthouse__x__a_desert_dune,14,not competing,steps 0-10,two,no,lighthouse with spire top,t4975
+a_lighthouse__x__a_desert_dune,14,not competing,steps 0-25,two,no,,t1625
+a_lighthouse__x__a_desert_dune,14,not competing,all 50,two,no,,t8473
+a_lighthouse__x__a_desert_dune,15,not competing,off,two,no,,t8564
+a_lighthouse__x__a_desert_dune,15,not competing,steps 0-10,two,no,,t9189
+a_lighthouse__x__a_desert_dune,15,not competing,steps 0-25,intrusion,no,extra small lighthouse and gull,t3141
+a_lighthouse__x__a_desert_dune,15,not competing,all 50,intrusion,no,extra small lighthouse and gull,t7556
+a_lighthouse__x__a_desert_dune,16,not competing,off,two,no,,t2219
+a_lighthouse__x__a_desert_dune,16,not competing,steps 0-10,two,no,,t7994
+a_lighthouse__x__a_desert_dune,16,not competing,steps 0-25,intrusion,no,extra lighthouse,t7756
+a_lighthouse__x__a_desert_dune,16,not competing,all 50,intrusion,no,extra lighthouse,t7481
+a_lighthouse__x__an_ocean_with_stormy_waves,9,not competing,off,two,no,,t3646
+a_lighthouse__x__an_ocean_with_stormy_waves,9,not competing,steps 0-10,two,no,small distant lighthouse,t7275
+a_lighthouse__x__an_ocean_with_stormy_waves,9,not competing,steps 0-25,two,no,,t8966
+a_lighthouse__x__an_ocean_with_stormy_waves,9,not competing,all 50,two,no,,t9109
+a_lighthouse__x__an_ocean_with_stormy_waves,10,not competing,off,two,no,,t5327
+a_lighthouse__x__an_ocean_with_stormy_waves,10,not competing,steps 0-10,two,no,,t4174
+a_lighthouse__x__an_ocean_with_stormy_waves,10,not competing,steps 0-25,two,no,,t6877
+a_lighthouse__x__an_ocean_with_stormy_waves,10,not competing,all 50,two,no,,t5748
+a_lighthouse__x__an_ocean_with_stormy_waves,11,not competing,off,two,no,,t3272
+a_lighthouse__x__an_ocean_with_stormy_waves,11,not competing,steps 0-10,two,no,,t6302
+a_lighthouse__x__an_ocean_with_stormy_waves,11,not competing,steps 0-25,two,no,,t4759
+a_lighthouse__x__an_ocean_with_stormy_waves,11,not competing,all 50,two,no,,t7704
+a_lighthouse__x__an_ocean_with_stormy_waves,12,not competing,off,two,no,,t6135
+a_lighthouse__x__an_ocean_with_stormy_waves,12,not competing,steps 0-10,two,no,,t8586
+a_lighthouse__x__an_ocean_with_stormy_waves,12,not competing,steps 0-25,two,no,,t4845
+a_lighthouse__x__an_ocean_with_stormy_waves,12,not competing,all 50,intrusion,no,tiny second lighthouse at left,t4945
+a_lighthouse__x__an_ocean_with_stormy_waves,13,not competing,off,two,no,,t1926
+a_lighthouse__x__an_ocean_with_stormy_waves,13,not competing,steps 0-10,two,no,,t4470
+a_lighthouse__x__an_ocean_with_stormy_waves,13,not competing,steps 0-25,two,no,,t4323
+a_lighthouse__x__an_ocean_with_stormy_waves,13,not competing,all 50,two,no,,t8826
+a_lighthouse__x__an_ocean_with_stormy_waves,14,not competing,off,two,no,,t8805
+a_lighthouse__x__an_ocean_with_stormy_waves,14,not competing,steps 0-10,two,no,,t3915
+a_lighthouse__x__an_ocean_with_stormy_waves,14,not competing,steps 0-25,two,no,,t2120
+a_lighthouse__x__an_ocean_with_stormy_waves,14,not competing,all 50,two,no,,t9866
+a_lighthouse__x__an_ocean_with_stormy_waves,15,not competing,off,two,yes,framed digital painting,t1889
+a_lighthouse__x__an_ocean_with_stormy_waves,15,not competing,steps 0-10,two,yes,framed digital painting,t6136
+a_lighthouse__x__an_ocean_with_stormy_waves,15,not competing,steps 0-25,two,yes,framed digital painting,t6543
+a_lighthouse__x__an_ocean_with_stormy_waves,15,not competing,all 50,two,yes,framed digital painting,t9919
+a_lighthouse__x__an_ocean_with_stormy_waves,16,not competing,off,two,no,,t9842
+a_lighthouse__x__an_ocean_with_stormy_waves,16,not competing,steps 0-10,two,no,,t1347
+a_lighthouse__x__an_ocean_with_stormy_waves,16,not competing,steps 0-25,two,no,,t7422
+a_lighthouse__x__an_ocean_with_stormy_waves,16,not competing,all 50,two,no,,t7330
+a_mailbox__x__a_snowfield,9,not competing,off,two,no,,t9817
+a_mailbox__x__a_snowfield,9,not competing,steps 0-10,two,no,,t2458
+a_mailbox__x__a_snowfield,9,not competing,steps 0-25,two,no,,t1028
+a_mailbox__x__a_snowfield,9,not competing,all 50,two,no,,t4092
+a_mailbox__x__a_snowfield,10,not competing,off,two,no,,t5418
+a_mailbox__x__a_snowfield,10,not competing,steps 0-10,two,no,,t6883
+a_mailbox__x__a_snowfield,10,not competing,steps 0-25,intrusion,no,extra mailbox,t7420
+a_mailbox__x__a_snowfield,10,not competing,all 50,intrusion,no,extra mailbox,t1990
+a_mailbox__x__a_snowfield,11,not competing,off,two,no,,t4645
+a_mailbox__x__a_snowfield,11,not competing,steps 0-10,two,no,,t1217
+a_mailbox__x__a_snowfield,11,not competing,steps 0-25,two,no,,t8744
+a_mailbox__x__a_snowfield,11,not competing,all 50,two,no,,t8205
+a_mailbox__x__a_snowfield,12,not competing,off,two,no,,t4774
+a_mailbox__x__a_snowfield,12,not competing,steps 0-10,two,no,,t4894
+a_mailbox__x__a_snowfield,12,not competing,steps 0-25,intrusion,no,extra mailbox,t3828
+a_mailbox__x__a_snowfield,12,not competing,all 50,intrusion,no,extra mailbox,t5580
+a_mailbox__x__a_snowfield,13,not competing,off,two,no,,t5855
+a_mailbox__x__a_snowfield,13,not competing,steps 0-10,intrusion,no,extra mailbox,t8018
+a_mailbox__x__a_snowfield,13,not competing,steps 0-25,intrusion,no,extra mailbox,t1752
+a_mailbox__x__a_snowfield,13,not competing,all 50,intrusion,no,extra mailbox,t8614
+a_mailbox__x__a_snowfield,14,not competing,off,two,no,,t4374
+a_mailbox__x__a_snowfield,14,not competing,steps 0-10,two,no,,t9852
+a_mailbox__x__a_snowfield,14,not competing,steps 0-25,two,no,,t5682
+a_mailbox__x__a_snowfield,14,not competing,all 50,two,no,,t3600
+a_mailbox__x__a_snowfield,15,not competing,off,two,no,,t3533
+a_mailbox__x__a_snowfield,15,not competing,steps 0-10,two,no,,t8832
+a_mailbox__x__a_snowfield,15,not competing,steps 0-25,two,no,,t9124
+a_mailbox__x__a_snowfield,15,not competing,all 50,two,no,,t4084
+a_mailbox__x__a_snowfield,16,not competing,off,two,no,,t2966
+a_mailbox__x__a_snowfield,16,not competing,steps 0-10,two,no,,t3395
+a_mailbox__x__a_snowfield,16,not competing,steps 0-25,intrusion,no,extra white post box pillar,t2679
+a_mailbox__x__a_snowfield,16,not competing,all 50,intrusion,no,extra white post box pillar,t4367
+a_park_bench__x__a_sand_dune,9,not competing,off,one,no,"bench on flat sand, no dune",t9620
+a_park_bench__x__a_sand_dune,9,not competing,steps 0-10,one,no,"bench on flat sand, no dune",t8775
+a_park_bench__x__a_sand_dune,9,not competing,steps 0-25,two,no,,t3166
+a_park_bench__x__a_sand_dune,9,not competing,all 50,one,no,"dunes only, no bench; small furry blob",t2548
+a_park_bench__x__a_sand_dune,10,not competing,off,two,no,"bench on grass, dune behind",t9469
+a_park_bench__x__a_sand_dune,10,not competing,steps 0-10,two,no,,t1537
+a_park_bench__x__a_sand_dune,10,not competing,steps 0-25,two,no,,t5498
+a_park_bench__x__a_sand_dune,10,not competing,all 50,two,no,,t3514
+a_park_bench__x__a_sand_dune,11,not competing,off,hybrid,no,bench backrest fused into dune ridge,t1934
+a_park_bench__x__a_sand_dune,11,not competing,steps 0-10,two,no,sepia,t5568
+a_park_bench__x__a_sand_dune,11,not competing,steps 0-25,two,no,,t7763
+a_park_bench__x__a_sand_dune,11,not competing,all 50,two,no,bench crumpled but present,t6047
+a_park_bench__x__a_sand_dune,12,not competing,off,hybrid,no,bench made of rippled sand,t8691
+a_park_bench__x__a_sand_dune,12,not competing,steps 0-10,one,no,bench only; grass and bunker no dune,t9444
+a_park_bench__x__a_sand_dune,12,not competing,steps 0-25,hybrid,no,bench fused with sand,t9306
+a_park_bench__x__a_sand_dune,12,not competing,all 50,hybrid,no,bench fused with sand,t4715
+a_park_bench__x__a_sand_dune,13,not competing,off,two,no,,t9992
+a_park_bench__x__a_sand_dune,13,not competing,steps 0-10,two,no,,t9299
+a_park_bench__x__a_sand_dune,13,not competing,steps 0-25,intrusion,no,two people on bench,t9453
+a_park_bench__x__a_sand_dune,13,not competing,all 50,intrusion,no,two people on bench,t3830
+a_park_bench__x__a_sand_dune,14,not competing,off,two,no,,t5910
+a_park_bench__x__a_sand_dune,14,not competing,steps 0-10,two,no,,t9716
+a_park_bench__x__a_sand_dune,14,not competing,steps 0-25,two,no,bench ends shaped like figures,t3631
+a_park_bench__x__a_sand_dune,14,not competing,all 50,two,no,bench ends shaped like figures,t1568
+a_park_bench__x__a_sand_dune,15,not competing,off,hybrid,no,bench slab melting into dune,t6191
+a_park_bench__x__a_sand_dune,15,not competing,steps 0-10,two,no,small bench in distance; black and white,t1722
+a_park_bench__x__a_sand_dune,15,not competing,steps 0-25,one,no,dune with lamppost; no bench,t8615
+a_park_bench__x__a_sand_dune,15,not competing,all 50,one,no,dune with cloth heap and lamppost; no bench,t4783
+a_park_bench__x__a_sand_dune,16,not competing,off,two,no,,t8148
+a_park_bench__x__a_sand_dune,16,not competing,steps 0-10,two,no,,t2397
+a_park_bench__x__a_sand_dune,16,not competing,steps 0-25,two,no,,t9814
+a_park_bench__x__a_sand_dune,16,not competing,all 50,two,no,,t6858
+a_phone_booth__x__a_tropical_beach,9,not competing,off,two,yes,illustration,t6126
+a_phone_booth__x__a_tropical_beach,9,not competing,steps 0-10,two,yes,illustration,t1291
+a_phone_booth__x__a_tropical_beach,9,not competing,steps 0-25,two,yes,illustration,t7718
+a_phone_booth__x__a_tropical_beach,9,not competing,all 50,two,yes,illustration,t2900
+a_phone_booth__x__a_tropical_beach,10,not competing,off,two,no,,t8264
+a_phone_booth__x__a_tropical_beach,10,not competing,steps 0-10,two,no,,t1274
+a_phone_booth__x__a_tropical_beach,10,not competing,steps 0-25,two,no,,t6555
+a_phone_booth__x__a_tropical_beach,10,not competing,all 50,two,no,,t2010
+a_phone_booth__x__a_tropical_beach,11,not competing,off,two,yes,illustration,t7538
+a_phone_booth__x__a_tropical_beach,11,not competing,steps 0-10,two,no,,t5119
+a_phone_booth__x__a_tropical_beach,11,not competing,steps 0-25,two,no,,t7289
+a_phone_booth__x__a_tropical_beach,11,not competing,all 50,two,no,,t8978
+a_phone_booth__x__a_tropical_beach,12,not competing,off,two,yes,painting,t3129
+a_phone_booth__x__a_tropical_beach,12,not competing,steps 0-10,two,yes,painting,t3548
+a_phone_booth__x__a_tropical_beach,12,not competing,steps 0-25,two,yes,painting,t8974
+a_phone_booth__x__a_tropical_beach,12,not competing,all 50,two,yes,painting,t9270
+a_phone_booth__x__a_tropical_beach,13,not competing,off,intrusion,no,extra phone booth on beach,t5755
+a_phone_booth__x__a_tropical_beach,13,not competing,steps 0-10,one,yes,phone booth by palms and building; no beach; flat illustration,t2864
+a_phone_booth__x__a_tropical_beach,13,not competing,steps 0-25,one,no,phone booth by palms and building; no beach,t3671
+a_phone_booth__x__a_tropical_beach,13,not competing,all 50,one,no,phone booth by palms and building; no beach,t8715
+a_phone_booth__x__a_tropical_beach,14,not competing,off,intrusion,yes,streetlamp and pier; illustration,t4608
+a_phone_booth__x__a_tropical_beach,14,not competing,steps 0-10,intrusion,yes,beach umbrella; illustration,t4984
+a_phone_booth__x__a_tropical_beach,14,not competing,steps 0-25,intrusion,yes,extra red car; second booth inside booth; illustration,t1408
+a_phone_booth__x__a_tropical_beach,14,not competing,all 50,intrusion,yes,extra red car; second booth inside booth; illustration,t7411
+a_phone_booth__x__a_tropical_beach,15,not competing,off,two,no,,t5630
+a_phone_booth__x__a_tropical_beach,15,not competing,steps 0-10,two,yes,illustration,t6318
+a_phone_booth__x__a_tropical_beach,15,not competing,steps 0-25,two,yes,illustration,t3296
+a_phone_booth__x__a_tropical_beach,15,not competing,all 50,two,yes,illustration,t5206
+a_phone_booth__x__a_tropical_beach,16,not competing,off,intrusion,yes,extra small red booth; illustration,t7076
+a_phone_booth__x__a_tropical_beach,16,not competing,steps 0-10,intrusion,yes,extra shelter and kiosk; illustration,t4702
+a_phone_booth__x__a_tropical_beach,16,not competing,steps 0-25,intrusion,yes,"extra shelter, plant and bags; illustration",t5094
+a_phone_booth__x__a_tropical_beach,16,not competing,all 50,intrusion,yes,"extra shelter, plant and bags; illustration",t6299
+a_picnic_table__x__a_snowstorm,9,not competing,off,two,no,,t8123
+a_picnic_table__x__a_snowstorm,9,not competing,steps 0-10,two,no,,t6911
+a_picnic_table__x__a_snowstorm,9,not competing,steps 0-25,intrusion,no,dog and food on table,t4719
+a_picnic_table__x__a_snowstorm,9,not competing,all 50,intrusion,no,dog and food on table,t8499
+a_picnic_table__x__a_snowstorm,10,not competing,off,two,no,,t3331
+a_picnic_table__x__a_snowstorm,10,not competing,steps 0-10,two,no,snowy haze reads as storm,t1287
+a_picnic_table__x__a_snowstorm,10,not competing,steps 0-25,two,no,snowy haze reads as storm,t3392
+a_picnic_table__x__a_snowstorm,10,not competing,all 50,two,no,snowy haze reads as storm,t6777
+a_picnic_table__x__a_snowstorm,11,not competing,off,two,no,,t9421
+a_picnic_table__x__a_snowstorm,11,not competing,steps 0-10,two,no,,t3797
+a_picnic_table__x__a_snowstorm,11,not competing,steps 0-25,two,no,,t9550
+a_picnic_table__x__a_snowstorm,11,not competing,all 50,two,no,,t2771
+a_picnic_table__x__a_snowstorm,12,not competing,off,two,no,,t1164
+a_picnic_table__x__a_snowstorm,12,not competing,steps 0-10,two,no,snow-covered table in falling snow,t1151
+a_picnic_table__x__a_snowstorm,12,not competing,steps 0-25,two,no,picnic food on snowy table,t3000
+a_picnic_table__x__a_snowstorm,12,not competing,all 50,two,no,picnic food on snowy table,t5053
+a_picnic_table__x__a_snowstorm,13,not competing,off,intrusion,no,extra picnic tables behind,t9641
+a_picnic_table__x__a_snowstorm,13,not competing,steps 0-10,intrusion,no,extra picnic tables behind,t8840
+a_picnic_table__x__a_snowstorm,13,not competing,steps 0-25,two,no,light snowfall only,t7403
+a_picnic_table__x__a_snowstorm,13,not competing,all 50,two,no,light snowfall only,t8142
+a_picnic_table__x__a_snowstorm,14,not competing,off,two,no,,t9302
+a_picnic_table__x__a_snowstorm,14,not competing,steps 0-10,two,no,,t3173
+a_picnic_table__x__a_snowstorm,14,not competing,steps 0-25,two,no,,t7504
+a_picnic_table__x__a_snowstorm,14,not competing,all 50,two,no,,t2017
+a_picnic_table__x__a_snowstorm,15,not competing,off,two,no,,t7522
+a_picnic_table__x__a_snowstorm,15,not competing,steps 0-10,two,no,,t2824
+a_picnic_table__x__a_snowstorm,15,not competing,steps 0-25,two,no,,t1363
+a_picnic_table__x__a_snowstorm,15,not competing,all 50,two,no,,t6227
+a_picnic_table__x__a_snowstorm,16,not competing,off,two,no,,t4583
+a_picnic_table__x__a_snowstorm,16,not competing,steps 0-10,intrusion,no,extra picnic table,t1885
+a_picnic_table__x__a_snowstorm,16,not competing,steps 0-25,two,no,,t2279
+a_picnic_table__x__a_snowstorm,16,not competing,all 50,two,no,extra wine bottle on table,t9331
+a_polar_bear__x__an_iceberg,9,not competing,off,one,no,flat ice floe no iceberg,t8606
+a_polar_bear__x__an_iceberg,9,not competing,steps 0-10,two,no,small ice chunk as iceberg,t3183
+a_polar_bear__x__an_iceberg,9,not competing,steps 0-25,intrusion,no,extra polar bear,t3547
+a_polar_bear__x__an_iceberg,9,not competing,all 50,intrusion,no,two extra polar bears,t1658
+a_polar_bear__x__an_iceberg,10,not competing,off,two,no,close-up bear with ice chunks behind,t4912
+a_polar_bear__x__an_iceberg,10,not competing,steps 0-10,two,no,,t9935
+a_polar_bear__x__an_iceberg,10,not competing,steps 0-25,intrusion,no,extra polar bear cub,t3867
+a_polar_bear__x__an_iceberg,10,not competing,all 50,intrusion,no,extra polar bear cub,t5353
+a_polar_bear__x__an_iceberg,11,not competing,off,two,no,small ice chunk as iceberg,t6716
+a_polar_bear__x__an_iceberg,11,not competing,steps 0-10,two,no,,t1487
+a_polar_bear__x__an_iceberg,11,not competing,steps 0-25,two,no,,t7888
+a_polar_bear__x__an_iceberg,11,not competing,all 50,two,no,,t5457
+a_polar_bear__x__an_iceberg,12,not competing,off,two,no,,t4948
+a_polar_bear__x__an_iceberg,12,not competing,steps 0-10,hybrid,no,bear body made of iceberg,t3888
+a_polar_bear__x__an_iceberg,12,not competing,steps 0-25,hybrid,no,bear fused into iceberg plus small bear in ice,t8459
+a_polar_bear__x__an_iceberg,12,not competing,all 50,intrusion,no,extra polar bear,t1202
+a_polar_bear__x__an_iceberg,13,not competing,off,hybrid,no,bear body made of iceberg,t9788
+a_polar_bear__x__an_iceberg,13,not competing,steps 0-10,two,no,bear slightly icy; iceberg behind,t2560
+a_polar_bear__x__an_iceberg,13,not competing,steps 0-25,hybrid,no,bear made of iceberg plus small bear,t9016
+a_polar_bear__x__an_iceberg,13,not competing,all 50,intrusion,no,extra small polar bear,t5423
+a_polar_bear__x__an_iceberg,14,not competing,off,hybrid,no,bear body made of iceberg,t2820
+a_polar_bear__x__an_iceberg,14,not competing,steps 0-10,hybrid,no,bear body made of iceberg,t9262
+a_polar_bear__x__an_iceberg,14,not competing,steps 0-25,intrusion,no,"small ice chunk as iceberg, extra ship",t3022
+a_polar_bear__x__an_iceberg,14,not competing,all 50,intrusion,no,extra polar bear cub and ship,t8971
+a_polar_bear__x__an_iceberg,15,not competing,off,hybrid,yes,polar bear made of faceted ice; illustration,t1688
+a_polar_bear__x__an_iceberg,15,not competing,steps 0-10,two,yes,illustration,t7877
+a_polar_bear__x__an_iceberg,15,not competing,steps 0-25,two,yes,"bear among iceberg, ice block overlaps chest; illustration",t6840
+a_polar_bear__x__an_iceberg,15,not competing,all 50,intrusion,yes,extra polar bear; illustration,t4870
+a_polar_bear__x__an_iceberg,16,not competing,off,one,no,polar bear on flat ice floe; no iceberg,t3362
+a_polar_bear__x__an_iceberg,16,not competing,steps 0-10,two,no,,t4096
+a_polar_bear__x__an_iceberg,16,not competing,steps 0-25,intrusion,no,extra polar bear cub,t5282
+a_polar_bear__x__an_iceberg,16,not competing,all 50,intrusion,no,extra polar bear cub,t7109
+a_rowboat__x__a_cactus_garden,9,not competing,off,two,yes,boat planted with cacti; painterly,t9767
+a_rowboat__x__a_cactus_garden,9,not competing,steps 0-10,two,yes,boat planted with cacti; painting,t4731
+a_rowboat__x__a_cactus_garden,9,not competing,steps 0-25,two,yes,painting,t4884
+a_rowboat__x__a_cactus_garden,9,not competing,all 50,two,yes,smeared painting,t4495
+a_rowboat__x__a_cactus_garden,10,not competing,off,two,no,,t6021
+a_rowboat__x__a_cactus_garden,10,not competing,steps 0-10,two,no,,t1555
+a_rowboat__x__a_cactus_garden,10,not competing,steps 0-25,two,no,,t7973
+a_rowboat__x__a_cactus_garden,10,not competing,all 50,two,no,,t8724
+a_rowboat__x__a_cactus_garden,11,not competing,off,two,yes,boat planted with cacti; illustration,t8449
+a_rowboat__x__a_cactus_garden,11,not competing,steps 0-10,two,yes,illustration,t2499
+a_rowboat__x__a_cactus_garden,11,not competing,steps 0-25,two,yes,painting,t7631
+a_rowboat__x__a_cactus_garden,11,not competing,all 50,two,yes,painting,t2791
+a_rowboat__x__a_cactus_garden,12,not competing,off,two,yes,boat half hidden among cacti; painting,t8133
+a_rowboat__x__a_cactus_garden,12,not competing,steps 0-10,two,yes,illustration,t6413
+a_rowboat__x__a_cactus_garden,12,not competing,steps 0-25,two,yes,illustration,t7633
+a_rowboat__x__a_cactus_garden,12,not competing,all 50,two,yes,smeared painting,t2131
+a_rowboat__x__a_cactus_garden,13,not competing,off,hybrid,yes,boat woven from cactus stems; painting,t6742
+a_rowboat__x__a_cactus_garden,13,not competing,steps 0-10,two,yes,boat planted with cacti; painting,t5504
+a_rowboat__x__a_cactus_garden,13,not competing,steps 0-25,two,yes,boat planted with cacti; painting,t2787
+a_rowboat__x__a_cactus_garden,13,not competing,all 50,two,yes,smeared painting,t9748
+a_rowboat__x__a_cactus_garden,14,not competing,off,two,yes,boat with cacti in water; illustration,t6270
+a_rowboat__x__a_cactus_garden,14,not competing,steps 0-10,two,yes,painting,t8094
+a_rowboat__x__a_cactus_garden,14,not competing,steps 0-25,two,yes,painting,t9295
+a_rowboat__x__a_cactus_garden,14,not competing,all 50,two,yes,smeared painting,t1608
+a_rowboat__x__a_cactus_garden,15,not competing,off,two,no,,t7124
+a_rowboat__x__a_cactus_garden,15,not competing,steps 0-10,two,yes,boat-shaped planters; illustration,t1972
+a_rowboat__x__a_cactus_garden,15,not competing,steps 0-25,intrusion,yes,extra small boats; painting,t4443
+a_rowboat__x__a_cactus_garden,15,not competing,all 50,intrusion,yes,extra small boats; painting,t4416
+a_rowboat__x__a_cactus_garden,16,not competing,off,intrusion,no,extra pointing human hand,t4407
+a_rowboat__x__a_cactus_garden,16,not competing,steps 0-10,two,yes,boat planted with cacti; painting,t2063
+a_rowboat__x__a_cactus_garden,16,not competing,steps 0-25,two,yes,painting,t6226
+a_rowboat__x__a_cactus_garden,16,not competing,all 50,two,yes,boat among cacti; painting,t1042
+a_sailboat__x__a_harbor,9,not competing,off,one,yes,"sailboat on open water, no harbor; painting",t1102
+a_sailboat__x__a_harbor,9,not competing,steps 0-10,two,yes,painting,t2825
+a_sailboat__x__a_harbor,9,not competing,steps 0-25,two,yes,painting,t8836
+a_sailboat__x__a_harbor,9,not competing,all 50,two,yes,painting,t5229
+a_sailboat__x__a_harbor,10,not competing,off,two,no,,t7665
+a_sailboat__x__a_harbor,10,not competing,steps 0-10,two,yes,painting,t3909
+a_sailboat__x__a_harbor,10,not competing,steps 0-25,two,yes,painting,t1369
+a_sailboat__x__a_harbor,10,not competing,all 50,two,yes,painting,t7333
+a_sailboat__x__a_harbor,11,not competing,off,two,no,,t1617
+a_sailboat__x__a_harbor,11,not competing,steps 0-10,two,yes,painterly,t5623
+a_sailboat__x__a_harbor,11,not competing,steps 0-25,two,yes,painterly,t4488
+a_sailboat__x__a_harbor,11,not competing,all 50,two,yes,painterly,t7592
+a_sailboat__x__a_harbor,12,not competing,off,two,yes,painterly,t1297
+a_sailboat__x__a_harbor,12,not competing,steps 0-10,two,yes,painting,t1276
+a_sailboat__x__a_harbor,12,not competing,steps 0-25,two,yes,painting,t5402
+a_sailboat__x__a_harbor,12,not competing,all 50,two,yes,harbor with many boats; painting,t7038
+a_sailboat__x__a_harbor,13,not competing,off,two,no,,t3426
+a_sailboat__x__a_harbor,13,not competing,steps 0-10,two,yes,painting,t2332
+a_sailboat__x__a_harbor,13,not competing,steps 0-25,two,yes,painting; lighthouse in harbor,t8040
+a_sailboat__x__a_harbor,13,not competing,all 50,two,yes,painting; lighthouse in harbor,t1207
+a_sailboat__x__a_harbor,14,not competing,off,two,no,,t4093
+a_sailboat__x__a_harbor,14,not competing,steps 0-10,two,yes,painting,t1148
+a_sailboat__x__a_harbor,14,not competing,steps 0-25,two,yes,painting,t9422
+a_sailboat__x__a_harbor,14,not competing,all 50,two,yes,painting; boats ghosted,t7680
+a_sailboat__x__a_harbor,15,not competing,off,two,yes,painting,t6009
+a_sailboat__x__a_harbor,15,not competing,steps 0-10,two,yes,painting,t8062
+a_sailboat__x__a_harbor,15,not competing,steps 0-25,two,yes,painting,t5943
+a_sailboat__x__a_harbor,15,not competing,all 50,two,yes,smeared painting,t1713
+a_sailboat__x__a_harbor,16,not competing,off,two,no,,t1681
+a_sailboat__x__a_harbor,16,not competing,steps 0-10,two,yes,oil painting,t9025
+a_sailboat__x__a_harbor,16,not competing,steps 0-25,two,yes,oil painting,t3126
+a_sailboat__x__a_harbor,16,not competing,all 50,two,yes,oil painting,t3673
+a_tent__x__a_snowy_mountain,9,not competing,off,hybrid,no,tent forming the mountain peak,t3912
+a_tent__x__a_snowy_mountain,9,not competing,steps 0-10,intrusion,no,extra tent,t4454
+a_tent__x__a_snowy_mountain,9,not competing,steps 0-25,intrusion,no,extra tents,t3744
+a_tent__x__a_snowy_mountain,9,not competing,all 50,intrusion,no,extra tents,t3755
+a_tent__x__a_snowy_mountain,10,not competing,off,hybrid,no,tent shaped as snowy mountain,t4362
+a_tent__x__a_snowy_mountain,10,not competing,steps 0-10,two,no,,t3393
+a_tent__x__a_snowy_mountain,10,not competing,steps 0-25,two,no,,t6554
+a_tent__x__a_snowy_mountain,10,not competing,all 50,two,no,,t3940
+a_tent__x__a_snowy_mountain,11,not competing,off,hybrid,yes,tent forming the mountain; illustration,t6948
+a_tent__x__a_snowy_mountain,11,not competing,steps 0-10,two,no,,t9913
+a_tent__x__a_snowy_mountain,11,not competing,steps 0-25,intrusion,no,extra person and house,t5530
+a_tent__x__a_snowy_mountain,11,not competing,all 50,intrusion,no,extra person and house,t4387
+a_tent__x__a_snowy_mountain,12,not competing,off,two,no,small snowy peaks behind tent,t9079
+a_tent__x__a_snowy_mountain,12,not competing,steps 0-10,two,no,,t7875
+a_tent__x__a_snowy_mountain,12,not competing,steps 0-25,two,no,small side table prop,t6507
+a_tent__x__a_snowy_mountain,12,not competing,all 50,two,no,small side table prop,t2364
+a_tent__x__a_snowy_mountain,13,not competing,off,one,no,tent on snow; no mountain,t3900
+a_tent__x__a_snowy_mountain,13,not competing,steps 0-10,two,no,tent before snowy slopes,t2471
+a_tent__x__a_snowy_mountain,13,not competing,steps 0-25,intrusion,no,people huddled by tent below snowy peaks,t4993
+a_tent__x__a_snowy_mountain,13,not competing,all 50,intrusion,no,people huddled by tent below snowy peaks,t6087
+a_tent__x__a_snowy_mountain,14,not competing,off,hybrid,no,tent shaped as snowy mountain,t5824
+a_tent__x__a_snowy_mountain,14,not competing,steps 0-10,hybrid,no,tent shaped as snowy mountain,t5033
+a_tent__x__a_snowy_mountain,14,not competing,steps 0-25,intrusion,no,two people in tent on snowy summit,t4241
+a_tent__x__a_snowy_mountain,14,not competing,all 50,intrusion,no,two people in tent on snowy summit,t9047
+a_tent__x__a_snowy_mountain,15,not competing,off,two,no,,t2145
+a_tent__x__a_snowy_mountain,15,not competing,steps 0-10,two,no,,t8701
+a_tent__x__a_snowy_mountain,15,not competing,steps 0-25,two,no,,t8964
+a_tent__x__a_snowy_mountain,15,not competing,all 50,two,no,,t1239
+a_tent__x__a_snowy_mountain,16,not competing,off,hybrid,yes,tent shaped as snowy mountain; flat illustration,t6775
+a_tent__x__a_snowy_mountain,16,not competing,steps 0-10,two,yes,illustration,t1491
+a_tent__x__a_snowy_mountain,16,not competing,steps 0-25,intrusion,yes,people at tent; illustration,t8328
+a_tent__x__a_snowy_mountain,16,not competing,all 50,intrusion,yes,people at tent; illustration,t1603

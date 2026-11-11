@@ -25,3 +25,21 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (report/paper
 **What it shows.** The early-steps renders on R4's rows (rule 5: per held-out group, ours' highest- and lowest-BLIP-VQA cell). Columns are the LoRA off (plain PoE), v58-03-self at step 30,000 on steps 0 to 10, on steps 0 to 25 and on all 50 steps; the fifth, a LoRA trained on all steps, is grey because gated training job 12 has not run. By eye, steps 0 to 10 already carry most of the change from PoE to the all-steps picture, on the working rows and the failing rows alike. `seen`
 
 **How it was made.** Window tiles from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/` (wave 1's job 2), PoE from `review_step4/census/`, all-steps from `paper_review/r3_ours/`; resized to 512 px into `tiles-rule5/` and drawn at 5.5 in by `scripts/paper_tile_figure.py` from `early_steps_grid-spec.json`, 2026-11-11. The PNG is a 110 dpi preview of the PDF.
+
+## failure_counts.pdf (slot R9), failure_calls.csv and failure_calls_key.csv
+
+<a href="failure_counts.png"><img src="failure_counts.png" width="200" alt="Bar groups for hybrid, one concept, intrusion, count error and style loss; four bars each for adapter off, steps 0 to 10, 0 to 25 and all 50"></a>
+
+**What it shows.** One bar group per failure type (hybrid, one concept, intrusion, count error, style loss), one bar per setting: the adapter off (plain PoE), v58-03-self at step 30,000 on steps 0 to 10, on steps 0 to 25 and on all 50. The y axis is the share of that setting's 424 images (53 held-out pairs × seeds 9 to 16), with the true count above each bar. As the window widens, one-concept and hybrid images fall and intrusion and count error rise; most of the drop in one-concept images is already there at steps 0 to 10. Style loss is a second flag on any image, so a style-loss image is also counted under its main label. Joint-prompt corruption and instability from the layout row are left out because these renders cannot show them, and the all-steps-trained adapter is left out because it was never trained. `seen`
+
+**How it was made.** All 1,696 images exist (424 per setting): PoE from `review_step4/census/<pair>/seedNN/poe.png`, the windows from `paper_review/early_steps/`, all 50 from `paper_review/r3_ours/`. Each image got one label (two, hybrid, one, intrusion, count error, broken) and a style-loss yes or no, called by eye by Claude in six blind batches on 2026-11-11 from 106 contact sheets at 360 px a tile, with the full-resolution image opened for borderline tiles. An extra copy of a named concept beside both concepts (two polar bears and an iceberg) was called intrusion. `failure_calls.csv` holds one row per image (pair, seed, group, setting, label, style_loss, note, id); the CSV lists every column the figure reads.
+
+**Blinding.** Each sheet row held the four settings of one pair and seed in shuffled order, labelled only by a random id (shuffle seed 20261111). The id-to-setting key, `failure_calls_key.csv`, was kept apart and joined only after every call was made. The calls lean on judgement where species are close (wolf and husky, seal and walrus without tusks, lion cub against cat) and where extra props count as intrusion; they have not yet been checked by a person.
+
+## failure_calls_sample.png
+
+<a href="failure_calls_sample.png"><img src="failure_calls_sample.png" width="200" alt="Forty random tiles with the call printed under each"></a>
+
+**What it shows.** 40 calls drawn at random from `failure_calls.csv` (Python `random.Random(20261111).sample`), each tile at 384 px with its call, prompt, seed, setting, id and note printed beneath, for a person to check the calls against the pictures. `seen`
+
+**How it was made.** Drawn from the full-resolution renders after the key was joined, 2026-11-11.
