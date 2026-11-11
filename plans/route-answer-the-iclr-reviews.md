@@ -1235,9 +1235,9 @@ What is already known
   "a)" and "b)" where the redrawn figures use "(a)"; panel b's pictures print about 0.3 in wide.
   The fix is the re-lettering recipe in runbook/making-the-papers-figures/.
 - Figure 7 (final_figures/molefe_fig2.png) has its text baked in at 1.3 to 1.8 pt in a sans face;
-  its note "Adapter trained for 1,000 epochs" counts in epochs where the paper counts steps, and
-  its renders must be checked against the adapter of record (v58-03-self, step 30,000, protocol
-  rule 1); the red zoom boxes in panel b are coloured frames, and the top-right box runs off the
+  its note "Adapter trained for 1,000 epochs" is step 50,000 by Appendix A's 50 steps per epoch,
+  so its renders come from a later checkpoint than the adapter of record (v58-03-self, step 30,000,
+  protocol rule 1) and are rendered again from it; the red zoom boxes in panel b are coloured frames, and the top-right box runs off the
   picture's edge; it prints at 0.9 of the text width, leaving white space at the sides.
 - The paper builds with Tectonic, not pdfLaTeX (environment/paper.md).
 - Closed gates are reported with the number that closed them. Mixed comparisons are marked mixed.
