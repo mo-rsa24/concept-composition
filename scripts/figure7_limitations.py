@@ -125,7 +125,7 @@ def stacked(tiles: Path, out: Path) -> None:
 
     text(0, 0.0, "(a)", size=LETTER_PT, weight="bold", ha="left", va="top")
     for c, name in enumerate(PAIRS):
-        text(ROW_LABELS + c * (a + GAP) + a / 2, top_a - 0.03, name.replace("\n", " "), ha="center", va="bottom")
+        text(ROW_LABELS + c * (a + GAP) + a / 2, top_a - 0.03, name if len(name) > 26 else name.replace("\n", " "), ha="center", va="bottom")
     for r, label in enumerate(ROWS):
         y = top_a + r * (a + GAP)
         text(ROW_LABELS / 2, y + a / 2, label, ha="center", va="center", rotation=90)
