@@ -116,7 +116,7 @@ def csv_to_list(path: Path) -> str:
 # natural width with booktabs rules and siunitx columns, and never scaled: a table wider than the
 # text is reported and, in a final build, stops the build (\ifreviewfinal in the tex).
 METRIC = {  # CSV column: (printed label, decimals)
-    "comp": ("Comp.", 2), "clip": ("CLIP", 2), "blip": ("BLIP", 2), "ir": ("IR", 2),
+    "comp": ("Comp.", 2), "clip": ("CLIP", 1), "blip": ("BLIP", 2), "ir": ("IR", 2),
     "geneval_two": ("Two obj.", 2), "geneval_count": ("Counting", 2),
     "t2i_spatial": ("Spatial", 2), "t2i_complex": ("Complex", 2), "nfe": ("NFE", 0),
 }
@@ -124,10 +124,10 @@ BENCH_GROUPS = [("animals", "Animals", ["comp", "clip", "blip", "ir"]),
                 ("animals_objects", "Animals + objects", ["clip", "blip", "ir"]),
                 ("objects", "Objects", ["clip", "blip", "ir"])]
 SCHEMA = {
-    "R1": {"groups": BENCH_GROUPS, "tail": ["nfe"]},
-    "R5": {"groups": BENCH_GROUPS, "tail": ["nfe"]},
-    "R3": {"groups": [("hard", "Hard (3)", ["comp"]), ("easy", "Easy but unseen (29)", ["comp"]),
-                      ("not_competing", "Not competing (21)", ["comp"])], "tail": []},
+    "R1": {"groups": BENCH_GROUPS, "tail": []},
+    "R5": {"groups": BENCH_GROUPS, "tail": []},
+    "R3": {"groups": [("hard", "Hard (3)", ["blip"]), ("easy", "Easy but unseen (29)", ["blip"]),
+                      ("not_competing", "Not competing (21)", ["blip"])], "tail": []},
     "R14": {"groups": [("geneval", "GenEval", ["geneval_two", "geneval_count"]),
                        ("t2icompbench", "T2I-CompBench", ["t2i_spatial", "t2i_complex"])], "tail": ["nfe"]},
 }
@@ -162,7 +162,9 @@ def csv_to_tabular(path: Path, sid: str) -> str:
         for m in metrics:
             has_ci = any(r.get(f"{m}_ci") for r in rows if r["group"] == key)
             d = METRIC[m][1]
-            spec.append(f"S[table-format=1.{d}" + (f"({d})" if has_ci else "") + "]")
+            whole = 2 if m == "clip" else 1
+            sign = "-" if m == "ir" else ""
+            spec.append(f"S[table-format={sign}{whole}.{d}" + (f"({d})" if has_ci else "") + "]")
             head2.append("{" + METRIC[m][0] + "}")
         head1.append(r"\multicolumn{" + str(len(metrics)) + "}{c}{" + tex_escape(title) + "}")
         rules.append(r"\cmidrule(lr){" + f"{col}-{col + len(metrics) - 1}" + "}")
