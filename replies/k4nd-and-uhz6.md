@@ -49,8 +49,8 @@ We agree that fusion under composition was identified before (Bradley et al., 20
 as such. What we add is a measurement of the missing term during sampling: it is specific to the pair
 and seed, and concentrated in the first ten of 50 steps (Figures 2 to 4).
 
-Tables 1 and 3 compare the adapter with PoE, CO3 and a Langevin corrector on the same seeds [TODO,
-slots R1 and R3]. The ablation the reviewer describes, the same joint-prompt supervision on pairs
+Tables 1 and 3 compare the adapter with PoE and CO3 on the same seeds, and Figure 5 adds a Langevin
+corrector. The ablation the reviewer describes, the same joint-prompt supervision on pairs
 the product does not fuse, would separate the effect of the supervision from that of the plurality
 pairs; we have not run it and name it as future work.
 
@@ -183,8 +183,8 @@ C.5 shows three concepts.
 > objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are
 > not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals."
 
-Tables 1 and 3 now compare quantitatively with CO3 and a Langevin corrector on the same seeds [TODO:
-slots R1, R3]. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
+Tables 1 and 3 now compare quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin
+corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
 cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
 Table 4 runs the methods released for Stable Diffusion 1.x from their official code [TODO: slot R5].
 Beyond pairs of animals, Table 1 covers objects and Appendix C.6 three concepts.

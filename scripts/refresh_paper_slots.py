@@ -137,6 +137,8 @@ REPORTED = "(reported)"
 # Methods that evaluate the joint prompt at every step. They sit above a rule as references; bold
 # marks the best value in each column over every row.
 REFERENCE = ("Joint prompt", "CO3")
+# Methods kept out of the tables: the Langevin corrector appears in Figure 5 only.
+EXCLUDED = ("PoE + Langevin",)
 
 
 def fmt(value: str, decimals: int) -> str:
@@ -157,6 +159,7 @@ def csv_to_tabular(path: Path, sid: str) -> str:
         if not rows:
             raise SystemExit(f"{sid}: {path} has no rows with model {MODEL_OF_SLOT[sid]}")
     sch = SCHEMA[sid]
+    rows = [r for r in rows if r["method"] not in EXCLUDED]
     methods = list(dict.fromkeys(r["method"] for r in rows))
     run = [m for m in methods if not m.endswith(REPORTED)]
     refs = [m for m in REFERENCE if m in run]
