@@ -217,7 +217,14 @@ Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3].
 > "Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure
 > modes in Fig. 7?"
 
-Pending (slot R9).
+We tested this directly. Figure 14 switches the adapter on for the first 10, the first 25 or all 50
+of the 50 steps, on the first pair of each held-out group at seeds 9 and 10. Restricting it to the
+first 25 steps gives essentially the same pictures as all 50. Restricting it to the first 10 is too
+short for the learned correction: on baboon and gazelle the second animal appears only from 25 steps
+on, although the measured correction needs only the first ten (Section 3). The species substitution
+on cow and horse, where two cows appear and no horse, persists at every window, so the failure modes
+of the submitted Fig. 7 (Figure 6 in the revision) do not come from the late steps. The counts per
+failure type across all 53 held-out pairs and eight seeds are in Figure 13 [TODO: slot R9].
 
 ### Q4: pairs that do not compete for the same region
 
