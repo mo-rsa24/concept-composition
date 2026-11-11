@@ -8,6 +8,10 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 
 - Section 3 says $r_t$ is the whole interaction the product drops and scopes the paper to plurality; the three contribution bullets claim only what the experiments show.
 
+## k4nd W2: novelty
+
+- Section 2 says prior corrections keep the product as the target while we change the target, and that plurality emerges on unseen pairs from this simple objective; the reply names the supervision-versus-pairs ablation as future work.
+
 ## k4nd W4: method details
 
 - Section 4 states the training loss as Equation 12, with its per-step weight (`8ef00a17`).

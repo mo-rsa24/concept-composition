@@ -37,7 +37,22 @@ this scope explicitly, and the contributions are rewritten to claim only what th
 
 > "The methodological novelty is insufficiently established."
 
-Pending.
+The method is deliberately simple: a standard adapter trained by prediction matching. Its
+contribution is the target. Existing corrections of product-of-experts sampling keep the product as
+the target and change how it is sampled (Du et al., 2023; Skreta et al., 2024, 2025; Dutta et al.,
+2026). We instead adapt the experts so that their product reproduces the joint prompt's prediction,
+and the joint prompt is never evaluated at inference. With this simple objective, plurality emerges on
+concept pairs the adapter never trained on (Section 4.1, Figure 5). Section 2 now states this
+distinction.
+
+We agree that fusion under composition was identified before (Bradley et al., 2025), and we cite it
+as such. What we add is a measurement of the missing term during sampling: it is specific to the pair
+and seed, and concentrated in the first ten of 50 steps (Figures 2 to 4).
+
+Tables 1 and 2 compare the adapter with PoE, CO3 and a Langevin corrector on the same seeds [TODO,
+slots R1 and R3]. The ablation the reviewer describes, the same joint-prompt supervision on pairs
+the product does not fuse, would separate the effect of the supervision from that of the plurality
+pairs; we have not run it and name it as future work.
 
 ### W3: no systematic quantitative evaluation of the adapter
 
