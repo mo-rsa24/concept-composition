@@ -902,6 +902,7 @@ Finally, we report two limitation to our approach which should be noted and are 
 % underneath.
 
 % \FloatBarrier
+\FloatBarrier
 \section{Discussion}
 \label{sec:conclusion}
 In this work we introduce the concept of plurality: the notion that distinct objects in a prompts should become distinct objects in a generated image. We show that PoE and similar compositional diffusion methods are unable to create images with plurality, inside create hybrid objects that combine the individual objects being prompted for. We show that plurality can be restored during early denoising with PoE and train a LoRA module to supply this correction while keeping a base Stable Diffusion XL model frozen. Crucially, the adapter restores composition on concept pairs unseen during training, using only the separate concept prompts and the null token at inference which are needed for PoE. Consequently, by using a finite set of easily obtained examples where joint prompting demonstrates plurality we can train a LoRA to apply the concept more broadly. Thus, our method is able to achieve the coherent image generation of joint prompting without the need for large quantities of data and exhaustive examples of concept pairs.
@@ -925,7 +926,6 @@ In this work we made use of generative AI tools for coding assistance, to polish
 
 % This anonymous placeholder contains no acknowledgments for submission. Replace this paragraph or remove the section for the initial blind review version if needed.
 
-\FloatBarrier
 \bibliography{iclr2027_conference}
 \bibliographystyle{iclr2027_conference}
 
