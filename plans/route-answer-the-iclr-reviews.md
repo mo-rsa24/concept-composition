@@ -186,7 +186,7 @@ You judge from the ground-check file.
 ```
 
 - `added:` the checkpoint-identity check (from PRZE-3a) · `added:` which ten steps the training states come from (from PRZE-11) · `dropped:` the paper-reading, diagram and corrector asks (why: later steps)
-- [ ] **Gate:** you answer the Overleaf question (token, or a zip exported from Overleaf) before step 2 edits the paper.
+- [x] **Gate:** you answer the Overleaf question (token, or a zip exported from Overleaf) before step 2 edits the paper.
 - **Leaves:** `artifacts/drips/answer-iclr-reviews/ground-check.md`
 - **Learning path:** gloss only, [LoRA](/home/molef/Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this); no rung is required before this step.
 
@@ -272,7 +272,7 @@ opening the compiled PDF.
 ```
 
 - `added:` the CO3-style table shape, the overlap rule and the multi-method grid (from your CO3 screenshots) · `added:` the Tectonic build fact (from `environment/paper.md`) · `dropped:` Overleaf push (why: needs your token, and the refill works locally first)
-- [ ] **Gate:** you read `protocol.md` and say yes before any evaluation job starts.
+- [x] **Gate:** you read `protocol.md` and say yes before any evaluation job starts.
 - **Leaves:** `report/paper-review/protocol.md` and `layout-sheet.md`
 - **Learning path:** none needed; the step is design.
 
@@ -476,7 +476,7 @@ adapter is named by the showcase rule, and no adapter result exists on the evalu
 ```
 
 - `added:` the single-checkpoint rule and the tuning set (from the Figure 5 finding) · `added:` the commit as proof of order (from your fairness rule) · `dropped:` nothing from your message
-- [ ] **Gate:** you agree the three groups and the showcase calls before the frozen file is committed.
+- [x] **Gate:** you agree the three groups and the showcase calls before the frozen file is committed.
 - **Leaves:** `report/paper-review/held-out-set.md`
 - **Learning path:** none needed.
 
