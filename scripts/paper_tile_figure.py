@@ -15,7 +15,8 @@ The spec:
      "pending": "result pending",                                             labelled grey tile
      "panel": "(a)",   optional panel letter, 9 pt bold, top left
      "footnote": "..."}  optional 8 pt line under the grid
-A column label may hold "\n" for two lines; a row may carry "notes", one per tile, set under it.
+A column label may hold "\n" for two lines; a row may carry "notes", one per tile, set under it,
+and "borders", one colour or null per tile, drawn as a frame inside the tile.
 """
 from __future__ import annotations
 
@@ -99,6 +100,10 @@ def main() -> int:
                 ax.add_patch(plt.Rectangle((0, 0), 1, 1, color="0.93", transform=ax.transAxes))
                 ax.text(0.5, 0.5, spec.get("pending", "pending"), ha="center", va="center",
                         fontsize=LABEL_PT, color="0.35", transform=ax.transAxes)
+            border = (r.get("borders") or [None] * len(r["tiles"]))[j]
+            if border:  # a frame drawn inside the tile, so the grid's spacing does not move
+                ax.add_patch(plt.Rectangle((0.012, 0.012), 0.976, 0.976, fill=False, edgecolor=border,
+                                           linewidth=2.2, transform=ax.transAxes))
     if spec.get("footnote"):
         fig.text(label_w / W, (0.03) / H, spec["footnote"], ha="left", va="bottom", fontsize=LABEL_PT, color="0.3")
     out.parent.mkdir(parents=True, exist_ok=True)
