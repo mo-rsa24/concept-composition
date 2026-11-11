@@ -9,7 +9,7 @@ to PRZE-10 are the working rules and plumbing the other rows depend on.
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
 | [PRZE-1](prze-1-scores.md) | the adapter and every SDXL method have scores on the same pairs and seeds, and an SD 1.5 set runs the official Attend-and-Excite and CONFORM code | todo |  | 3, 7, 9, 10, 12 |
-| [PRZE-2](prze-2-baselines.md) | the Langevin corrector is proved on two Gaussians, and a five-column figure compares joint, PoE and the Langevin corrector on the same starting noise | todo |  | 8 |
+| [PRZE-2](prze-2-baselines.md) | the Langevin corrector is proved on two Gaussians, and a five-column figure compares joint, PoE and the Langevin corrector on the same starting noise | in progress | the check's PASS, Slurm 84583, [R6](../../artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png) | 8 |
 | [PRZE-3a](prze-3a-pair-lists.md) | the training and held-out pairs are listed exactly, match the checkpoint the paper used, and say which test each pair passed | in progress | adapter of record v58-03-self step 50,000; its 48 training pairs equal the pool file's, its held-out list has a fifth pair the file dropped; Figure 5 mixes three runs ([the pair lists page](prze-3a-pair-lists.md#the-adapter-behind-the-paper)) | 1, 4 |
 | [PRZE-3b](prze-3b-held-out-set.md) | a held-out set of three groups at seeds 9 to 16 exists, with rates and uncertainty | in progress | [the frozen set](held-out-set.md), commit `089abd6e`: hard 3, easy 29, not competing 21; rates wait on step 9 | 4, 9 |
 | [PRZE-4](prze-4-three-concepts.md) | a three-concept test with a bar written first exists, and the paper states the limit | todo |  | 11 |

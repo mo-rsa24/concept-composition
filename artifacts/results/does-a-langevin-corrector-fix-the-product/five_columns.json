@@ -1,0 +1,60 @@
+{
+  "slot": "R6",
+  "seed": 10,
+  "setting": {
+    "c": 3.0,
+    "k": 20,
+    "levels": "all 50"
+  },
+  "noise": "a_cat__x__a_dog seed 10, protocol rule 2; CO3 starts from the same latent, its later resampling noise from the seed number",
+  "rows": [
+    {
+      "pair": "a_cat__x__a_dog",
+      "tiles": {
+        "mono": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_cat__x__a_dog/seed10/mono.png",
+        "mono_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_cat__x__a_dog/seed10/mono_langevin.png",
+        "poe": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_cat__x__a_dog/seed10/poe.png",
+        "poe_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_cat__x__a_dog/seed10/poe_langevin.png",
+        "co3": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/r6/a_cat__x__a_dog/seed10/co3.png"
+      }
+    },
+    {
+      "pair": "an_elephant__x__a_penguin",
+      "tiles": {
+        "mono": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/an_elephant__x__a_penguin/seed10/mono.png",
+        "mono_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/an_elephant__x__a_penguin/seed10/mono_langevin.png",
+        "poe": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/an_elephant__x__a_penguin/seed10/poe.png",
+        "poe_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/an_elephant__x__a_penguin/seed10/poe_langevin.png",
+        "co3": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/r6/an_elephant__x__a_penguin/seed10/co3.png"
+      }
+    },
+    {
+      "pair": "a_tent__x__a_snowy_mountain",
+      "tiles": {
+        "mono": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_tent__x__a_snowy_mountain/seed10/mono.png",
+        "mono_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_tent__x__a_snowy_mountain/seed10/mono_langevin.png",
+        "poe": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_tent__x__a_snowy_mountain/seed10/poe.png",
+        "poe_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_tent__x__a_snowy_mountain/seed10/poe_langevin.png",
+        "co3": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/r6/a_tent__x__a_snowy_mountain/seed10/co3.png"
+      }
+    },
+    {
+      "pair": "a_lighthouse__x__a_stormy_sea",
+      "tiles": {
+        "mono": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_lighthouse__x__a_stormy_sea/seed10/mono.png",
+        "mono_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_lighthouse__x__a_stormy_sea/seed10/mono_langevin.png",
+        "poe": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_lighthouse__x__a_stormy_sea/seed10/poe.png",
+        "poe_langevin": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/r6_correctors/a_lighthouse__x__a_stormy_sea/seed10/poe_langevin.png",
+        "co3": "/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/r6/a_lighthouse__x__a_stormy_sea/seed10/co3.png"
+      }
+    }
+  ],
+  "columns": [
+    "joint prompt",
+    "joint + Langevin",
+    "PoE",
+    "PoE + Langevin",
+    "CO3"
+  ],
+  "missing": []
+}
