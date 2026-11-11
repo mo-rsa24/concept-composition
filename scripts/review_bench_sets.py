@@ -12,8 +12,8 @@ the shared latent of an integer seed instead. Seeds 9 to 12 (GenEval) and 9 to 1
 is in the adapter's training cache.
 
 A prompt naming a subject of scripts/showcase/disallowed_subjects.py is dropped and counted, never
-rendered: BLOCKED always, ASK_FIRST because the pair ledger's frog and mouse decision covers R1 and
-R5 only. Each prompt keeps its index in the benchmark file, so a dropped prompt leaves a gap.
+rendered: BLOCKED always, ASK_FIRST unless the pair ledger allows that word for the set: frog and mouse for R1 and R5, frog for
+the two T2I-CompBench sets (a set's "allow" below). Each prompt keeps its index in the benchmark file, so a dropped prompt leaves a gap.
 
 PoE, ours and CO3 run on geneval_two only (the user's decision of 2026-11-11, job 13's row of
 report/paper-review/prze-10-compute.md). Its prompts split at " and " into the two concepts, the
@@ -32,15 +32,17 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
-from disallowed_subjects import is_allowed  # noqa: E402
+from disallowed_subjects import ASK_FIRST, is_allowed, words  # noqa: E402
 
 GENEVAL = REPO / "data/prompt-sets/geneval/evaluation_metadata.jsonl"
 T2I = REPO / "data/prompt-sets/t2i-compbench"
 SETS = {
     "geneval_two": {"bench": "geneval", "tag": "two_object", "seeds": [9, 10, 11, 12]},
     "geneval_count": {"bench": "geneval", "tag": "counting", "seeds": [9, 10, 11, 12]},
-    "t2i_spatial": {"bench": "t2icompbench", "file": "spatial_val.txt", "seeds": list(range(9, 17)) + [59, 60]},
-    "t2i_complex": {"bench": "t2icompbench", "file": "complex_val.txt", "seeds": list(range(9, 17)) + [59, 60]},
+    "t2i_spatial": {"bench": "t2icompbench", "file": "spatial_val.txt", "seeds": list(range(9, 17)) + [59, 60],
+                    "allow": {"frog", "frogs"}},
+    "t2i_complex": {"bench": "t2icompbench", "file": "complex_val.txt", "seeds": list(range(9, 17)) + [59, 60],
+                    "allow": {"frog", "frogs"}},
 }
 PAIRED = {"geneval_two"}  # the only set PoE, ours and CO3 render
 
@@ -54,8 +56,15 @@ def load(name: str) -> tuple[list[dict], list[dict]]:
     else:
         lines = (T2I / s["file"]).read_text().splitlines()
         items = [{"idx": i, "prompt": p.strip(), "meta": None} for i, p in enumerate(lines) if p.strip()]
-    kept = [x for x in items if is_allowed(x["prompt"])]
-    dropped = [x for x in items if not is_allowed(x["prompt"])]
+    allow = s.get("allow", set())  # ask-first words the pair ledger allows for this set
+
+    def ok(prompt: str) -> bool:
+        if is_allowed(prompt):
+            return True
+        return is_allowed(prompt, allow_ask_first=True) and (words(prompt) & ASK_FIRST) <= allow
+
+    kept = [x for x in items if ok(x["prompt"])]
+    dropped = [x for x in items if not ok(x["prompt"])]
     return kept, dropped
 
 

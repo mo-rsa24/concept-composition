@@ -8,3 +8,4 @@ for the prompts a row below covers. A row never lifts `BLOCKED`.
 |---|---|---|---|---|---|
 | 2026-11-10 | frog, mouse | the 45 prompts of the Attend-and-Excite sets that name them (21 of 66 animals, 24 of 144 animals with objects), in `data/prompt-sets/attend-and-excite/a.e_prompts.json`, for the review response's R1 and R5 only | allowed | the user | keeps the three sets at the 66, 144 and 66 prompts the CO3 paper scores, so the two tables can be set side by side |
 | 2026-11-10 | frog, toad | frog and toad, the look-alike census pair | not rendered | held | outside the decision above |
+| 2026-11-12 | frog | the 21 T2I-CompBench prompts that name a frog (20 of 300 spatial, 1 of 300 complex), in `data/prompt-sets/t2i-compbench/`, for the review response's R14 only; mouse stays dropped there | allowed | the user | keeps the spatial set at 284 of 300 prompts rather than 264 |
