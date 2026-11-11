@@ -12,7 +12,10 @@ The pipeline keeps SDXL's own scheduler, so the sampler differs from rule 2's DD
 
     python scripts/review_tome_cell.py --setting default --pairs "a lion|a meerkat" --seeds 9
 
-Writes <OUT>/tome_<setting>/<pair slug>/seedNN/tome.png and .json with protocol rule 9's columns.
+    python scripts/review_tome_cell.py --setting default --cells cells.txt
+
+Writes <OUT>/tome_<setting>/<pair slug>/seedNN/tome.png, or with --cells <OUT>/tome_<setting>/<group>/<pair slug>/seedNN/,
+and a .json with protocol rule 9's columns.
 """
 
 from __future__ import annotations
@@ -81,11 +84,24 @@ def main() -> None:
     p.add_argument("--setting", required=True)
     p.add_argument("--config", default="RunConfig1", choices=["RunConfig1", "RunConfig2"])
     p.add_argument("--knobs", default="{}", help="JSON overrides of the RunConfig fields")
-    p.add_argument("--pairs", nargs="+", required=True)
-    p.add_argument("--seeds", nargs="+", type=int, required=True)
+    p.add_argument("--pairs", nargs="+")
+    p.add_argument("--seeds", nargs="+", type=int)
     p.add_argument("--joiner", default="and")
     p.add_argument("--group", default="tuning")
+    p.add_argument("--cells", help="a file of 'group|concept a|concept b|joiner|seed' lines, in place of --pairs and "
+                   "--seeds; tiles go to tome_<setting>/<group>/<pair>/seedNN/, the layout of co3_default/r1/")
     args = p.parse_args()
+    if args.cells:
+        cells = [(g, a, b, j, int(s)) for g, a, b, j, s in
+                 (ln.strip().split("|") for ln in Path(args.cells).read_text().splitlines() if ln.strip())]
+    else:
+        cells = [(None, *(x.strip() for x in pr.split("|")), args.joiner, sd) for pr in args.pairs for sd in args.seeds]
+    print(f"{len(cells)} cells", flush=True)
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "showcase"))
+    from disallowed_subjects import check
+    for group, a, b, _, _ in cells:  # the pair ledger's frog and mouse decision covers R1 only
+        check(a, allow_ask_first=group == "r1")
+        check(b, allow_ask_first=group == "r1")
 
     sys.path.insert(0, str(TOME_DIR))
     from configs import demo_config
@@ -104,11 +120,10 @@ def main() -> None:
              if k not in {"prompt", "token_indices", "prompt_anchor", "prompt_merged", "prompt_length", "seeds",
                           "output_path"}}
 
-    for pair in args.pairs:
-        a, b = (x.strip() for x in pair.split("|"))
-        prompt, groups, length = token_groups(pipe.tokenizer, a, b, args.joiner)
-        for seed in args.seeds:
-            png = OUT / f"tome_{args.setting}" / slug(a, b) / f"seed{seed:02d}" / "tome.png"
+    for group, a, b, joiner, seed in cells:
+            prompt, groups, length = token_groups(pipe.tokenizer, a, b, joiner)
+            root = OUT / f"tome_{args.setting}" / (group or "")
+            png = root / slug(a, b) / f"seed{seed:02d}" / "tome.png"
             if png.exists():
                 print(f"{slug(a, b)} seed {seed}: already rendered", flush=True)
                 continue
@@ -131,7 +146,7 @@ def main() -> None:
             image.save(png)
             rec = {"model": "SDXL", "method": "tome", "adapter": "none", "sampler": sampler,
                    "steps": cfg.n_inference_steps, "guidance": cfg.guidance_scale, "resolution": 1024,
-                   "pair": slug(a, b), "seed": seed, "group": args.group, "setting": args.setting,
+                   "pair": slug(a, b), "seed": seed, "group": group or args.group, "setting": args.setting,
                    "nfe": counter.rows, "unet_calls": counter.calls, "prompt": prompt, "token_groups": groups,
                    "prompt_length": length, "config": args.config, "knobs": knobs,
                    "noise": f"cached x_T {LATENTS / f'seed{seed:02d}.pt'}", "tome_commit": "f256a49a",
