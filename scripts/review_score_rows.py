@@ -4,13 +4,15 @@ Walks the run folders under the paper-review output root, reads each tile's JSON
 writes rows.csv for the scorers: image, the full prompt the image is scored against (the
 benchmark prompt as written, "{a} and {b}" or "{a} with {b}"; "{a} and {b}" for held-out
 pairs), then model, method, adapter, sampler, steps, guidance, resolution, pair, seed, group,
-setting, nfe. nfe is left empty: rule 6 has it counted during a run, and these sidecars carry
-no count. Rows whose image is already in --skip (a scores file) are left out, so a later call
-picks up only new tiles.
+setting, nfe. nfe is left empty for the wave 1 sidecars, which carry no count; the baseline
+sidecars written by scripts/review_baseline_cell.py carry their method, sampler, steps, guidance,
+setting and counted nfe, and those values are kept. Rows whose image is already in --skip (a scores
+file) are left out, so a later call picks up only new tiles.
 
 Usage (any python3 on the cluster):
   python3 scripts/review_score_rows.py --root <paper_review dir> --census <review_step4/census>
       --repo <repo> --folders r1_joint r1_poe early_steps --out rows.csv [--skip scores_long.csv]
+  Baseline folders name their set as a subfolder: --folders co3_default/r1 co3_default/r3 superdiff_default/r1 ...
 """
 from __future__ import annotations
 
@@ -80,7 +82,7 @@ def main():
                 continue
             m = json.load(open(js))
             pair = m["pair"]
-            if folder.startswith("r1_"):
+            if folder.startswith("r1_") or folder.endswith("/r1"):
                 if pair not in bench:
                     unknown.add(pair); continue
                 prompt, group = bench[pair]
@@ -89,6 +91,13 @@ def main():
                     unknown.add(pair); continue
                 prompt, group = held[pair]
             col = m.get("column")
+            if col is None:  # a baseline sidecar from scripts/review_baseline_cell.py
+                rows.append({"image": img, "prompt": prompt, "run": folder, "model": m["model"],
+                             "method": m["method"], "adapter": m["adapter"], "sampler": m["sampler"],
+                             "steps": m["steps"], "guidance": m["guidance"],
+                             "resolution": f"{m['resolution']}x{m['resolution']}", "pair": pair,
+                             "seed": m["seed"], "group": group, "setting": m["setting"], "nfe": m["nfe"]})
+                continue
             method = {"mono": "joint", "poe": "poe", "ours": "ours"}[col]
             adapter = m.get("tag", "-") if col == "ours" else "-"
             setting = f"adapter_steps={m['adapter_steps']}" if col == "ours" and "adapter_steps" in m else "-"
