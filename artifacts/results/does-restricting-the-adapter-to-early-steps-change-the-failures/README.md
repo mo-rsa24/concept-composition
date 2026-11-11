@@ -17,3 +17,11 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (report/paper
 **What it shows.** The hard pair cow and horse at seeds 9 to 12: PoE draws one animal on every seed, the 10-step adapter draws two on all four, and none of the four shows a clear horse. `seen`
 
 **How it was made.** The first 10-step tiles of the early-steps job beside step 4's census joint and PoE, drawn on mscluster84 on 2026-11-11.
+
+## early_steps_grid.pdf (slot R10)
+
+<a href="early_steps_grid.png"><img src="early_steps_grid.png" width="200" alt="Six held-out rows by the LoRA's window: off, steps 0 to 10, 0 to 25, all 50, and a grey column for the all-steps-trained LoRA"></a>
+
+**What it shows.** The early-steps renders, on R4's rows: the first pair of each held-out group (cow and horse, baboon and gazelle, bookcase and glacier) at seeds 9 and 10, by protocol rule 5. Columns are the LoRA off (plain PoE), v58-03-self at step 30,000 on steps 0 to 10, on steps 0 to 25, and on all 50 steps; the fifth, a LoRA trained on all steps, is grey because gated training job 12 has not run. By eye, steps 0 to 10 already carry most of the change from PoE to the all-steps picture on all three pairs. One window per column, two seeds. `seen`
+
+**How it was made.** Window tiles from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/` (wave 1's job 2), the off and all-steps tiles reused from `../co3-protocol-run-by-us/tiles-r4/`; resized to 512 px and drawn at 5.5 in by `scripts/paper_tile_figure.py` from `early_steps_grid-spec.json`, 2026-11-11. The PNG is a 110 dpi preview of the PDF.

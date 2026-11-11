@@ -1,0 +1,79 @@
+{
+ "width_in": 5.5,
+ "groups": [
+  {
+   "title": "",
+   "columns": [
+    "Joint",
+    "PoE",
+    "CO3",
+    "PoE +\nLangevin\u2020",
+    "Ours"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "label": "elephant and rabbit",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_elephant__x__a_rabbit__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_elephant__x__a_rabbit__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_elephant__x__a_rabbit__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_elephant__x__a_rabbit__langevin.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_elephant__x__a_rabbit__ours.png"
+   ]
+  },
+  {
+   "label": "dog and frog",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_dog__x__a_frog__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_dog__x__a_frog__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_dog__x__a_frog__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_dog__x__a_frog__langevin.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_dog__x__a_frog__ours.png"
+   ]
+  },
+  {
+   "label": "horse with glasses",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_horse__x__a_glasses__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_horse__x__a_glasses__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_horse__x__a_glasses__co3.png",
+    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_horse__x__a_glasses__ours.png"
+   ]
+  },
+  {
+   "label": "bear with glasses",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_bear__x__a_glasses__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_bear__x__a_glasses__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_bear__x__a_glasses__co3.png",
+    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_bear__x__a_glasses__ours.png"
+   ]
+  },
+  {
+   "label": "pink crown and\npurple bow",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_pink_crown__x__a_purple_bow__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_pink_crown__x__a_purple_bow__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_pink_crown__x__a_purple_bow__co3.png",
+    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_pink_crown__x__a_purple_bow__ours.png"
+   ]
+  },
+  {
+   "label": "blue clock and\nblue apple",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_blue_clock__x__a_blue_apple__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_blue_clock__x__a_blue_apple__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_blue_clock__x__a_blue_apple__co3.png",
+    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-r12/a_blue_clock__x__a_blue_apple__ours.png"
+   ]
+  }
+ ],
+ "pending": "not in subset",
+ "footnote": "Rule 5: first two prompts per set, seed 9. \u2020 on the animals set only."
+}

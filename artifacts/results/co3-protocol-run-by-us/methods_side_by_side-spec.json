@@ -1,0 +1,79 @@
+{
+ "width_in": 5.5,
+ "groups": [
+  {
+   "title": "",
+   "columns": [
+    "Joint",
+    "PoE",
+    "CO3",
+    "PoE +\nLangevin\u2020",
+    "Ours"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "label": "cow, horse\nseed 9",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__ours.png"
+   ]
+  },
+  {
+   "label": "cow, horse\nseed 10",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__ours.png"
+   ]
+  },
+  {
+   "label": "baboon, gazelle\nseed 9",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__ours.png"
+   ]
+  },
+  {
+   "label": "baboon, gazelle\nseed 10",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__ours.png"
+   ]
+  },
+  {
+   "label": "bookcase, glacier\nseed 9",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__ours.png"
+   ]
+  },
+  {
+   "label": "bookcase, glacier\nseed 10",
+   "tiles": [
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__joint.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__poe.png",
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__co3.png",
+    null,
+    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__ours.png"
+   ]
+  }
+ ],
+ "pending": "pending",
+ "footnote": "Rule 5: first pair per group, seeds 9 and 10. \u2020 on the hard group only."
+}
