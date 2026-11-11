@@ -66,7 +66,7 @@ For you to follow.
 
 ### 3. ✅ Read the zero-step identity
 
-- [ ] **Read the identity check's printed maximum difference for each driver; you want 0**
+- [x] **Read the identity check's printed maximum difference for each driver; you want 0** ✓ confirmed 2026-11-11: you read the Slurm 84583 log in chat (both lines `max |diff| = 0.000e+00 PASS`) and said "done"
   - ◀ Needs: task 3
 
 ### 4. 👀 Judge the tuning contact sheet
