@@ -1230,6 +1230,15 @@ What is already known
   Figure 8), and Section 5 has a broken sentence (reviewers UHz6 and k4nd).
 - The training loss is only in an appendix diagram and must be an equation in Section 4 (k4nd).
 - Figure 5's caption says CO3 used different starting noise while Section 4.1 says the same (k4nd).
+- Figure 1 (final_figures/molefe_fig1.png) has its text baked into the pixels, printing at 3 to
+  4 pt against the 8 pt rule, in two faces (serif in panel a, sans in panel b), with panel letters
+  "a)" and "b)" where the redrawn figures use "(a)"; panel b's pictures print about 0.3 in wide.
+  The fix is the re-lettering recipe in runbook/making-the-papers-figures/.
+- Figure 7 (final_figures/molefe_fig2.png) has its text baked in at 1.3 to 1.8 pt in a sans face;
+  its note "Adapter trained for 1,000 epochs" counts in epochs where the paper counts steps, and
+  its renders must be checked against the adapter of record (v58-03-self, step 30,000, protocol
+  rule 1); the red zoom boxes in panel b are coloured frames, and the top-right box runs off the
+  picture's edge; it prints at 0.9 of the text width, leaving white space at the sides.
 - The paper builds with Tectonic, not pdfLaTeX (environment/paper.md).
 - Closed gates are reported with the number that closed them. Mixed comparisons are marked mixed.
 - Draft to supervisors Thursday 12 or Friday 13 November; OpenReview closes Wednesday 18.

@@ -48,9 +48,9 @@ FIG_DIR = Path("paper/iclr/figures/when-the-correction-arrives")
 FIG_NAME = "when-the-correction-arrives"
 
 TEXT_WIDTH = 5.50
-EDGE = 0.22           # an arrow and its rotated label, on each outer edge
-ROW_NUMS = 0.24       # the shared row numbers, against the left grid only
-GAP = 0.28            # between panels; also holds panel (b)'s one "off" label
+EDGE = 0.17           # an arrow and its rotated label, on each outer edge
+ROW_NUMS = 0.18       # the shared row numbers, against the left grid only
+GAP = 0.20            # between panels; also holds panel (b)'s one "off" label
 TOP_PAD = 0.06
 CAPTION_BAND = 0.22
 LEGEND_BAND = 0.20
@@ -133,8 +133,8 @@ def main() -> int:
 
     # one arrow per outer edge, pointing the way that panel's coverage grows
     for x_arrow, x_text, tip, tail in (
-            (EDGE - 0.07, 0.07, y0 + 0.05, top - 0.05),          # (a): downward
-            (fig_w - EDGE + 0.07, fig_w - 0.07, top - 0.05, y0 + 0.05)):  # (b): upward
+            (EDGE - 0.035, 0.06, y0 + 0.05, top - 0.05),          # (a): downward
+            (fig_w - EDGE + 0.035, fig_w - 0.06, top - 0.05, y0 + 0.05)):  # (b): upward
         fig.add_artist(FancyArrowPatch(
             (x_arrow / fig_w, tail / fig_h), (x_arrow / fig_w, tip / fig_h),
             transform=fig.transFigure, arrowstyle="-|>", mutation_scale=7,
