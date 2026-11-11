@@ -7,7 +7,8 @@ environment, through SynGen's own code: `SynGenDiffusionPipeline._extract_attrib
 `doc`, `include_entities`, `tokenizer` and `_align_indices` from the pipeline, so they are bound to a small object that
 carries those four, and the U-Net is never loaded.
 
-Writes data/prompt-sets/attend-and-excite/syngen_indices_sdxl.json keyed by pair slug. SD 1.5 and SDXL's first tokenizer
+Writes data/prompt-sets/attend-and-excite/syngen_indices_sdxl.json keyed by pair slug, for the 276 prompts and
+Figure 5's two rows outside them (tent and snowy mountain, lighthouse and stormy sea). SD 1.5 and SDXL's first tokenizer
 share CLIP's vocabulary, so these indices must equal the ones SynGen found itself on SD 1.5; that is asserted for every
 prompt Plan 1's smoke run rendered (their sidecars record `syngen_indices`).
 
@@ -34,6 +35,8 @@ SYNGEN_DIR = Path("/datasets/mmolefe/repos/Linguistic-Binding-in-Diffusion-Model
 SDXL = sorted(glob.glob("/home-mscluster/mmolefe/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0"
                         "/snapshots/*/tokenizer"))
 PAIRS = REPO / "scripts" / "review_benchmark_pairs.txt"
+# Figure 5's two rows outside the benchmark (group r6, as CO3's tiles for the same rows).
+EXTRA = ("a tent|a snowy mountain|and|r6", "a lighthouse|a stormy sea|and|r6")
 OUT = REPO / "data" / "prompt-sets" / "attend-and-excite" / "syngen_indices_sdxl.json"
 SD15_SIDECARS = Path("/datasets/mmolefe/poe_repair_min/outputs/paper_review/sd15/syngen_default/r1")
 
@@ -51,7 +54,7 @@ def main() -> None:
     parser._align_indices = types.MethodType(P._align_indices, parser)
 
     table = {}
-    for ln in PAIRS.read_text().splitlines():
+    for ln in PAIRS.read_text().splitlines() + list(EXTRA):
         if not ln.strip() or ln.startswith("#"):
             continue
         a, b, joiner, group = ln.strip().split("|")

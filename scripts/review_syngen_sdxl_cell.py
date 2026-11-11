@@ -9,7 +9,8 @@ data/prompt-sets/attend-and-excite/syngen_indices_sdxl.json (scripts/review_syng
     python scripts/review_syngen_sdxl_cell.py --shard 0/2      # production, every 2nd cell from the first
     python scripts/review_syngen_sdxl_cell.py --smoke          # the identity check, the loss check, the contact sheet
 
-Production writes <OUT>/syngen-sdxl_default/r1/<pair slug>/seedNN/syngen-sdxl.png and .json, skipping any cell whose PNG
+Production writes <OUT>/syngen-sdxl_default/r1/<pair slug>/seedNN/syngen-sdxl.png and .json (shard 0 adds Figure 5's two
+rows outside R1 under r6/ instead of r1/), skipping any cell whose PNG
 and JSON both exist. A cell whose gradient goes non-finite writes no tile and is listed in aborted_<i>of<n>.json. The smoke
 run writes under <OUT>/syngen-sdxl_smoke/ only.
 """
@@ -41,6 +42,8 @@ NOISE_PAIR = "a_cat__x__a_dog"
 SEEDS = (9, 10, 11, 12)
 METHOD = "syngen-sdxl"
 SAMPLER = "DDIM with SynGen latent update (port)"
+# Figure 5's two rows outside R1, rendered by shard 0 after its R1 cells, under group r6 as CO3's tiles for them are.
+FIG5_EXTRA = (("a tent", "a snowy mountain", "and", 10), ("a lighthouse", "a stormy sea", "and", 10))
 SMOKE_IDENTITY = ("a cat", "a dog", "and", 9)
 SMOKE_LOSS = (("a pink crown", "a purple bow", "and", 9), ("a monkey", "a red car", "and", 9))
 MAX_GREY_DIFF = 3.0  # grey levels, the fp16-against-fp32 gap measured on SDXL, used only if the bytes differ
@@ -75,7 +78,7 @@ class Port:
         i1, i2 = t1(prompt)["input_ids"], t2(prompt)["input_ids"]
         assert i1 == i2, f"tokenizer and tokenizer_2 differ on {prompt!r}: {i1} {i2}"
 
-    def draw(self, a, b, joiner, seed, step_size):
+    def draw(self, a, b, joiner, seed, step_size, group="r1"):
         from poe_repair._sdxl.runtime import encode_prompt_sdxl
         from poe_repair.composers._helpers import init_latents_for_cell
         from poe_repair.experiments.interaction_term.cell import cell_from_slug
@@ -104,7 +107,7 @@ class Port:
                  "num_intervention_steps": self.sx.NUM_INTERVENTION_STEPS, "include_entities": False,
                  "parser": "en_core_web_trf", "precision": "U-Net fp16, maps, loss and latent update fp32"}
         rec = row(METHOD, SAMPLER, ctx.num_inference_steps, ctx.guidance_scale, a, b, seed, "default", self.counter,
-                  f"seed latent {LATENTS / f'seed{seed:02d}.pt'} md5 {md5(self.saved[seed])}", knobs, secs, "r1", joint)
+                  f"seed latent {LATENTS / f'seed{seed:02d}.pt'} md5 {md5(self.saved[seed])}", knobs, secs, group, joint)
         rec.update({"syngen_indices": idx, "loss_per_step": losses, "peak_gb": round(torch.cuda.max_memory_allocated()
                     / 2 ** 30, 2), "commit": self.sx.SYNGEN_COMMIT, "device": torch.cuda.get_device_name(0),
                     "python": sys.executable, "torch": torch.__version__})
@@ -121,17 +124,19 @@ def write(image, rec, png: Path) -> None:
 def produce(shard: str, step_size: float) -> None:
     from poe_repair.baselines.syngen_sdxl import SynGenNonFinite
     i, n = (int(x) for x in shard.split("/"))
-    cells = [(a, b, j, s) for a, b, j in benchmark() for s in SEEDS][i::n]
+    cells = [("r1", a, b, j, s) for a, b, j in benchmark() for s in SEEDS][i::n]
+    if i == 0:
+        cells += [("r6", *c) for c in FIG5_EXTRA]
     port, aborted = Port(), []
     root = OUT / f"{METHOD}_default"
     print(f"{len(cells)} cells, shard {shard}, {torch.cuda.get_device_name(0)}", flush=True)
-    for a, b, joiner, seed in cells:
-        png = tile(root, "r1", a, b, seed, METHOD)
+    for group, a, b, joiner, seed in cells:
+        png = tile(root, group, a, b, seed, METHOD)
         if png.exists() and png.with_suffix(".json").exists():
             print(f"{slug(a, b)} seed {seed}: already rendered", flush=True)
             continue
         try:
-            image, rec = port.draw(a, b, joiner, seed, step_size)
+            image, rec = port.draw(a, b, joiner, seed, step_size, group)
         except SynGenNonFinite as e:
             aborted.append({"pair": slug(a, b), "seed": seed, "error": str(e)})
             print(f"{slug(a, b)} seed {seed}: ABORTED {e}", flush=True)
