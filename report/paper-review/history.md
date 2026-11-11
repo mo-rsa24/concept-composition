@@ -12,6 +12,7 @@
 | 2026-11-10 | 2 | 0 | 7 | 5 | 0 | 0 | [board](board-2026-11-10-step-2.png) |
 | 2026-11-10 | 4 | 0 | 6 | 6 | 0 | 0 | [board](board-2026-11-10-step-4.png) |
 | 2026-11-11 | 8 | 0 | 5 | 7 | 0 | 0 | [board](board-2026-11-11-step-8.png) |
+| 2026-11-11 | 8 | 0 | 5 | 7 | 0 | 0 | [board](board-2026-11-11-step-8.png) |
 
 ## Row changes
 
@@ -32,3 +33,4 @@
 | 2026-11-11 | 3 | CO3 and SuperDiff run at their published defaults only; their tuning grids and winning rule removed | your call, to spend the compute on the evaluation rather than on tuning; the reply to PrzE says these baselines ran at their authors' settings; decided before any tuning or evaluation image |
 | 2026-11-11 | 6, and the R1 bar | no table carries an NFE column; the ours-minus-PoE line is not printed in R1 (the bar is still computed and its verdict reported in the finding) | your call: reviewers will not look for either in the tables; decided before any R1 table was built |
 | 2026-11-11 | 2, 3 | SuperDiff removed from every table and figure | your call: it does not claim to fix hybrids, so it is not a baseline for composition; decided before any SuperDiff image was scored |
+| 2026-11-11 | the scorers, R3 | R3 (Table 2) reports BLIP-VQA ± 95% interval per held-out group instead of the instance-count rate | your call: the count is validated on animals only, and the held-out groups hold object and place pairs (the not-competing group has no animal pair); decided before any R3 table was built |
