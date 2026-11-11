@@ -70,6 +70,9 @@ Pending.
 
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
+Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
+seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and images
+picked by rule (Tables 1 and 2).
 
 ### W5: the qualitative baseline comparison and its starting noise
 

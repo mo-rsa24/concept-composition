@@ -827,6 +827,8 @@ between the training target and the prediction used during sampling.
 
 \subsection{Results}
 \label{sec:results}
+We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3's released code draws its own starting noise from that seed, and its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. The images shown are picked by a fixed rule, never by looking.
+
 
 
 
