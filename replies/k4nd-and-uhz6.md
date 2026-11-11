@@ -203,4 +203,8 @@ Pending (slot R9).
 > "Does the adapter degrade PoE on pairs that do not compete for the same region, such as
 > foreground/background pairs like lighthouse and sea?"
 
-Pending (slot R3, the not-competing group of 21 pairs).
+No. Table 2's not-competing group holds 21 held-out pairs whose concepts do not contend for one
+region, including lighthouse and a stormy sea (Appendix C.2). On these, the adapter scores
+0.73 ± 0.08 against the product's 0.74 ± 0.10 (BLIP-VQA, seeds 9 to 16, 95% intervals from
+resampling pairs). The intervals overlap, so on pairs the product already composes, the adapter
+neither helps nor harms on this measure. [TODO: CO3's row, slot R3.]
