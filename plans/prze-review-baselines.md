@@ -41,7 +41,8 @@ For Claude to execute.
 
 ### 3. 🚀 Launch the evaluations
 
-- [ ] **For each method at its published default: an 80% interval for runtime and memory, the exact command, your yes, the launch, the first tiles**
+- [x] **For each method at its published default: an 80% interval for runtime and memory, the exact command, your yes, the launch, the first tiles**
+  - ✓ verified 2026-11-11 14:10: CO3 complete, R1 1,104 of 1,104 and R3 424 of 424 tiles with 1,528 sidecars under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/`, counted from mscluster107 (mscluster84's view undercounted by 35); Slurm 84590, 84591, 84757, 84759, 84760, 84761 and two mscluster108 helpers (`cdd58a18`)
   - Launcher: `scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last. CO3 runs as two `NSHARDS=2` jobs and four `NSHARDS=6` jobs (shards 2 to 5); a tile that exists is skipped, so they meet without repeating work.
   - ◀ Needs: 2
   - ▶ Next: 4

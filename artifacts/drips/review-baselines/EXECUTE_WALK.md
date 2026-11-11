@@ -1,7 +1,7 @@
 # Walk map: CO3, ToMe and SuperDiff baselines
 
 **Plan:** [the baselines plan](../../../plans/prze-review-baselines.md) · mode `--request --depth objective`
-**On:** piece 3, launch the evaluations
+**On:** piece 4, count, file and record
 
 ## Stop point
 
@@ -36,6 +36,8 @@ Lion and meerkat at seed 9, SDXL, 1024 by 1024.
 - Task 2, 08:45: grids, rule and ToMe removal committed as `028d9d69`, before any tuning image.
 
 - Protocol rule 3 rewritten to defaults only, 08:55; the grid launcher `scripts/review_baselines_grid.sh` stays committed and unused.
+
+- Task 3, 14:10: CO3 complete, 1,104 R1 and 424 R3 tiles, counted from mscluster107; mscluster84's NFS view showed 35 missing that three other nodes see.
 
 ## Out in runs, threads and handoffs
 
