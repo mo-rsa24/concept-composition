@@ -9,7 +9,9 @@ Panel (b): six cat-and-dog renders from the product, a name under each.
 Drawn at the printed width (5.5 in) so nothing is scaled: labels 8 pt, panel letters 9 pt bold,
 Liberation Serif. Tiles are centre-cropped to squares so every picture prints the same size.
 
-    python3 scripts/figure7_limitations.py <tiles dir> <out.pdf>
+    python3 scripts/figure7_limitations.py <tiles dir> <out.pdf> [--stacked]
+
+--stacked sets (a) above (b), each the full width, with (b) as one row of six.
 
 The tiles dir holds joint-r{0,1}-c{0..3}.png and fail-r{0,1}-c{0..2}.png.
 """
@@ -53,6 +55,9 @@ def square(path: Path) -> Image.Image:
 
 def main() -> int:
     tiles, out = Path(sys.argv[1]), Path(sys.argv[2])
+    if "--stacked" in sys.argv:
+        stacked(tiles, out)
+        return 0
     use_paper_font()
     # Equal panel heights: HEAD + 2a + GAP + FOOT = 2b + GAP + 2 NOTE, so a = b + (2 NOTE - HEAD - FOOT) / 2.
     d = (2 * NOTE - HEAD - FOOT) / 2
@@ -96,6 +101,52 @@ def main() -> int:
     fig.savefig(out, dpi=300)
     print(f"{out}: {WIDTH:.2f} x {H:.2f} in, panel (a) tiles {a:.2f} in, panel (b) tiles {b:.2f} in")
     return 0
+
+
+def stacked(tiles: Path, out: Path) -> None:
+    """Panel (a) above panel (b), each the full width: (a) four pairs by two rows, (b) six renders in one row."""
+    use_paper_font()
+    letter_w = 0.0
+    a = (WIDTH - ROW_LABELS - 3 * GAP) / 4
+    b = (WIDTH - 5 * GAP) / 6
+    note2 = 2 * LINE + 0.05
+    ya = LETTER_PT * 1.4 / 72              # (a)'s letter line, pair names sit under it
+    top_a = ya + HEAD
+    yb = top_a + 2 * a + GAP + FOOT + 0.10  # (b)'s letter line
+    top_b = yb + LETTER_PT * 1.4 / 72
+    H = top_b + b + note2
+    fig = plt.figure(figsize=(WIDTH, H))
+
+    def ax_at(x, y, w, h):
+        ax = fig.add_axes([x / WIDTH, 1 - (y + h) / H, w / WIDTH, h / H]); ax.set_axis_off(); return ax
+
+    def text(x, y, s, **kw):
+        fig.text(x / WIDTH, 1 - y / H, s, fontsize=kw.pop("size", LABEL_PT), linespacing=1.05, **kw)
+
+    text(0, 0.0, "(a)", size=LETTER_PT, weight="bold", ha="left", va="top")
+    for c, name in enumerate(PAIRS):
+        text(ROW_LABELS + c * (a + GAP) + a / 2, top_a - 0.03, name.replace("\n", " "), ha="center", va="bottom")
+    for r, label in enumerate(ROWS):
+        y = top_a + r * (a + GAP)
+        text(ROW_LABELS / 2, y + a / 2, label, ha="center", va="center", rotation=90)
+        for c in range(4):
+            ax_at(ROW_LABELS + c * (a + GAP), y, a, a).imshow(square(tiles / f"joint-r{r}-c{c}.png"), interpolation="lanczos")
+    text(ROW_LABELS, top_a + 2 * a + GAP + 0.03, NOTE_TEXT, ha="left", va="top", color="0.3")
+    text(0, yb, "(b)", size=LETTER_PT, weight="bold", ha="left", va="top")
+    flat = [(r, c) for r in range(2) for c in range(3)]
+    for k, (r, c) in enumerate(flat):
+        x = k * (b + GAP)
+        ax_at(x, top_b, b, b).imshow(square(tiles / f"fail-r{r}-c{c}.png"), interpolation="lanczos")
+        name = OUTCOMES[r][c].replace("\n", " ")
+        words, lines, cur = name.split(), [], ""
+        for w in words:  # rewrap to the wider tile
+            if len(cur) + len(w) + 1 > 17 and cur: lines.append(cur); cur = w
+            else: cur = (cur + " " + w).strip()
+        lines.append(cur)
+        text(x + b / 2, top_b + b + 0.03, "\n".join(lines), ha="center", va="top")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(out, dpi=300)
+    print(f"{out}: {WIDTH:.2f} x {H:.2f} in, panel (a) tiles {a:.2f} in, panel (b) tiles {b:.2f} in")
 
 
 if __name__ == "__main__":
