@@ -14,7 +14,7 @@
  ],
  "rows": [
   {
-   "label": "dog, frog\nseed 10, highest\nBLIP-VQA 0.97",
+   "label": "dog, frog\nseed 10",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__poe.png",
@@ -24,7 +24,7 @@
    ]
   },
   {
-   "label": "horse, frog\nseed 10, lowest\nBLIP-VQA 0.00",
+   "label": "horse, frog\nseed 10",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_horse__x__a_frog__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_horse__x__a_frog__s10__poe.png",
@@ -34,7 +34,7 @@
    ]
   },
   {
-   "label": "frog, red suitcase\nseed 12, highest\nBLIP-VQA 0.99",
+   "label": "frog, red suitcase\nseed 12",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__poe.png",
@@ -44,7 +44,7 @@
    ]
   },
   {
-   "label": "dog, glasses\nseed 9, lowest\nBLIP-VQA 0.00",
+   "label": "dog, glasses\nseed 9",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_glasses__s09__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_glasses__s09__poe.png",
@@ -54,7 +54,7 @@
    ]
   },
   {
-   "label": "yellow bow, pink bowl\nseed 10, highest\nBLIP-VQA 0.98",
+   "label": "yellow bow, pink bowl\nseed 10",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__poe.png",
@@ -64,7 +64,7 @@
    ]
   },
   {
-   "label": "black backpack, green bow\nseed 10, lowest\nBLIP-VQA 0.00",
+   "label": "black backpack, green bow\nseed 10",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_black_backpack__x__a_green_bow__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_black_backpack__x__a_green_bow__s10__poe.png",
@@ -75,5 +75,5 @@
   }
  ],
  "pending": "not in subset",
- "footnote": "Rule 5: per benchmark set, ours' highest and lowest BLIP-VQA cell. \u2020 animals only."
+ "footnote": "\u2020 PoE + Langevin runs on the animals set only."
 }

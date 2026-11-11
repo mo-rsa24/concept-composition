@@ -14,7 +14,7 @@
  ],
  "rows": [
   {
-   "label": "seal, walrus\nseed 11, highest\nBLIP-VQA 0.95",
+   "label": "seal, walrus\nseed 11",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__poe.png",
@@ -24,7 +24,7 @@
    ]
   },
   {
-   "label": "cow, horse\nseed 13, lowest\nBLIP-VQA 0.01",
+   "label": "cow, horse\nseed 13",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_cow__x__a_horse__s13__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_cow__x__a_horse__s13__poe.png",
@@ -34,7 +34,7 @@
    ]
   },
   {
-   "label": "drum set, snowman\nseed 13, highest\nBLIP-VQA 0.98",
+   "label": "drum set, snowman\nseed 13",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__poe.png",
@@ -44,7 +44,7 @@
    ]
   },
   {
-   "label": "briefcase, ceramic bowl\nseed 10, lowest\nBLIP-VQA 0.00",
+   "label": "briefcase, ceramic bowl\nseed 10",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__poe.png",
@@ -54,7 +54,7 @@
    ]
   },
   {
-   "label": "tent, snowy mountain\nseed 16, highest\nBLIP-VQA 0.98",
+   "label": "tent, snowy mountain\nseed 16",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
@@ -64,7 +64,7 @@
    ]
   },
   {
-   "label": "bookcase, glacier\nseed 11, lowest\nBLIP-VQA 0.01",
+   "label": "bookcase, glacier\nseed 11",
    "tiles": [
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_bookcase__x__a_glacier__s11__joint.png",
     "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_bookcase__x__a_glacier__s11__poe.png",
@@ -75,5 +75,5 @@
   }
  ],
  "pending": "not rendered",
- "footnote": "Rule 5: per held-out group, ours' highest and lowest BLIP-VQA cell. \u2020 a subset."
+ "footnote": "\u2020 PoE + Langevin runs on a subset."
 }
