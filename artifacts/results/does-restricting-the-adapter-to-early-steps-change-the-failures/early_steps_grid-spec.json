@@ -14,66 +14,66 @@
  ],
  "rows": [
   {
-   "label": "cow, horse\nseed 9",
+   "label": "seal, walrus\nseed 11, highest\nBLIP-VQA 0.95",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s09__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s09__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s09__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__ours.png",
     null
    ]
   },
   {
-   "label": "cow, horse\nseed 10",
+   "label": "cow, horse\nseed 13, lowest\nBLIP-VQA 0.01",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s10__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s10__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_cow__x__a_horse__s10__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__ours.png",
     null
    ]
   },
   {
-   "label": "baboon, gazelle\nseed 9",
+   "label": "drum set, snowman\nseed 13, highest\nBLIP-VQA 0.98",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s09__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s09__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s09__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__ours.png",
     null
    ]
   },
   {
-   "label": "baboon, gazelle\nseed 10",
+   "label": "briefcase, ceramic bowl\nseed 10, lowest\nBLIP-VQA 0.00",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s10__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s10__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_baboon__x__a_gazelle__s10__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__ours.png",
     null
    ]
   },
   {
-   "label": "bookcase, glacier\nseed 9",
+   "label": "tent, snowy mountain\nseed 16, highest\nBLIP-VQA 0.98",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s09__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s09__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s09__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png",
     null
    ]
   },
   {
-   "label": "bookcase, glacier\nseed 10",
+   "label": "bookcase, glacier\nseed 11, lowest\nBLIP-VQA 0.01",
    "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s10__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s10__w25.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-r4/a_bookcase__x__a_glacier__s10__ours.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__ours.png",
     null
    ]
   }
  ],
  "pending": "not trained",
- "footnote": "Rule 5: first pair per held-out group, seeds 9 and 10; v58-03-self, step 30,000."
+ "footnote": "Rule 5: R4's rows; v58-03-self at step 30,000."
 }
