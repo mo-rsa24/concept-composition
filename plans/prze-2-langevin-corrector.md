@@ -30,6 +30,8 @@ For Claude to execute.
 ### 3. 💻 The two drivers
 
 - [ ] **A joint-prompt Langevin driver and an unadjusted HMC driver beside `run_poe_langevin`, each byte-identical to the plain sampler at k = 0 on one SDXL cell**
+  - Code: `poe_repair/methods/_corrector_drivers.py`, composers `poe_repair/composers/joint_langevin.py` and `poe_uhmc.py`; HMC's k counts iterations of L = 5 leapfrog steps, so a level costs 5k + 2 UNet calls.
+  - Check: `pytest tests/test_corrector_drivers_identity.py` (stand-in UNet, CPU), then `python scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10` on a GPU, which prints `PASS: both drivers at k = 0`.
   - ◀ Needs: instruction 2
   - ▶ Next: instruction 3
 
@@ -59,7 +61,7 @@ For you to follow.
 
 ### 2. ✅ Read the order measurement
 
-- [ ] **Run the order measurement and say which order lands nearer the product**
+- [x] **Run the order measurement and say which order lands nearer the product** ✓ confirmed 2026-11-11: you read the table in chat (step first 0.00171 against corrector first 0.00309 at c = 3, k = 20) and said "done", keeping our order
   - ◀ Needs: task 2
 
 ### 3. ✅ Read the zero-step identity
