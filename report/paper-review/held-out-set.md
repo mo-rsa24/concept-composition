@@ -87,3 +87,8 @@ Counts: hard 3, easy but unseen 29, not competing 21. The hard group is under th
 ## The 48 training pairs
 
 badger × magpie, bear × boar, bear × heron, beaver × raccoon, beaver × woodpecker, bicycle × birdhouse, birdcage × hay bale, bison × weasel, buffalo × hippo, bull × rooster, cactus × cooler box, camel × pelican, chicken × rabbit, coat rack × potted plant, deer × heron, deer × wolf, donkey × duck, donkey × rooster, giraffe × hyena, giraffe × zebra, giraffe × ostrich, gorilla × chimpanzee, guitar × traffic cone, hamster × carrot, hay bale × ukulele, hedgehog × robin, horse × pig, horse × sheep, langur × peacock, lighthouse × sailboat, lion × meerkat, lion × oryx, mailbox × pumpkin, microscope × test tube, moose × chipmunk, peacock × pig, pony × red barn, rocking chair × cactus, snail × lantern, soccer ball × park bench, suitcase × globe, teddy bear × birthday cake, telescope × beach ball, typewriter × cactus, windmill × tractor, accordion × scarecrow, emu × koala, impal× a jackal.
+
+## Cross-references
+
+- The mention of **48 training pairs** in [the plan for answering the ICLR reviews](../../plans/route-answer-the-iclr-reviews.md#quick-context-where-you-are).
+- The mention of **held-out groups** in [the plan for answering the ICLR reviews, step 15](../../plans/route-answer-the-iclr-reviews.md#15--explain-it-back).
