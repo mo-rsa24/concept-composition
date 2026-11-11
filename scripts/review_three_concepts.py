@@ -37,9 +37,9 @@ R11 = OUT / "three_concepts"
 NOISE_PAIR = "a_cat__x__a_dog"
 SEED = 10
 CHECKPOINT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/checkpoints/lora_step_030000.pt")
-TRIPLES = [  # (kind slug, column label, three concept prompts)
+TRIPLES = [  # (kind slug, column label, three concept prompts); no concept is in a training pair (pair_pool_v58.yaml)
     ("animal-animal-animal", "animal, animal, animal", ("a cat", "a dog", "a penguin")),
-    ("animal-object-animal", "animal, object, animal", ("a dog", "a bicycle", "a cat")),
+    ("animal-object-animal", "animal, object, animal", ("a dog", "a chair", "a cat")),
     ("object-object-object", "object, object, object", ("a teapot", "a lamp", "a book")),
     ("animal-animal-object", "animal, animal, object", ("a cat", "a dog", "an umbrella")),
 ]
