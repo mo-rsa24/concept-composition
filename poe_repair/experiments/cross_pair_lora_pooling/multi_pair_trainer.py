@@ -159,6 +159,8 @@ def train_epoch_multi_pair(
                 # charged on it. Logged every step so a collapsed projection is visible at once.
                 "train/orth_weight": info.get("orth_weight", 1.0),
                 "train/orth_frac": info.get("orth_frac", float("nan")),
+                "train/in_place_weight": info.get("in_place_weight", 1.0),
+                "train/in_place_frac": info.get("in_place_frac", float("nan")),
                 # The null branch's drift from its frozen counterpart, and the anchor that
                 # penalises it. Logged at mu = 0 too, because the drift is what the sampler
                 # amplifies by (w - 1): an unanchored run still needs to show it.

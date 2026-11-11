@@ -245,6 +245,10 @@ def build_argparser() -> argparse.ArgumentParser:
                     help="Huber on the fit term with this elbow, in units of the noise-prediction "
                          "error; quadratic below it, linear above. 0 keeps the squared error, which "
                          "is every run before 2026-09-24.")
+    ap.add_argument("--in-place-weight", type=float, default=1.0,
+                    help="multiplier on the part of the error that a per-place (4x4 latent block) "
+                         "re-weighting of the two experts could supply. 1.0 is the plain loss and "
+                         "every run before 2026-11-11.")
     ap.add_argument("--out-of-span-only", type=float, default=0.0,
                     help="1 trains on the part of the correction no re-weighting of the two "
                          "experts could supply, leaving the damping to be applied at sampling "
@@ -360,6 +364,7 @@ def main(argv: list[str] | None = None) -> int:
     cfg.optim.weight_decay = float(args.weight_decay)
     cfg.huber_delta = float(args.huber_delta)
     cfg.out_of_span_only = float(args.out_of_span_only)
+    cfg.in_place_weight = float(args.in_place_weight)
     cfg.schedule.total_epochs = int(args.total_epochs)
     cfg.schedule.epoch_size = int(args.epoch_size)
     cfg.orth_weight = float(args.orth_weight)
@@ -453,6 +458,7 @@ def main(argv: list[str] | None = None) -> int:
         "train_step_range": (list(args.train_step_range)
                              if args.train_step_range is not None else None),
         "orth_weight": float(getattr(cfg, "orth_weight", 1.0)),
+        "in_place_weight": float(getattr(cfg, "in_place_weight", 1.0)),
         # There is no --exclude-cells flag: exclusion is expressed by which cells the
         # --cells file names, so the file itself is what identifies the training set.
         "cells_file": args.cells,

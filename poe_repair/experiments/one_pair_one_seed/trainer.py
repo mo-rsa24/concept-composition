@@ -126,6 +126,34 @@ def _bucket(step_index: int, *, commit_window: tuple[int, int]) -> str:
     return "late"
 
 
+def _in_place_energy(err, eps_a, eps_b, eps_u, block: int = 4):
+    """Per-sample squared size of the error's per-place re-weighting part.
+
+    Each ``block`` x ``block`` place on the latent grid gets its own two-direction frame, the
+    lion and partner directions there (d_a = eps_a - eps_u, d_b = eps_b - eps_u over that place's
+    4 * block * block numbers), orthonormalised. The error's projection onto that frame is the
+    part a per-place re-weighting of the two experts could have supplied. A place where the two
+    directions are parallel keeps only the first, so the frame never divides by a vanishing norm.
+    Returns (K,) sums of squares, the same units as ``(err ** 2).sum(dim=(1, 2, 3))``.
+    """
+    K, C, H, W = err.shape
+
+    def blocks(t):
+        t = t.float().reshape(K, C, H // block, block, W // block, block)
+        return t.permute(0, 2, 4, 1, 3, 5).reshape(K, H // block, W // block, C * block * block)
+
+    e, a, b = blocks(err), blocks(eps_a - eps_u), blocks(eps_b - eps_u)
+    na = a.norm(dim=-1, keepdim=True)
+    u1 = a / na.clamp_min(1e-12)
+    bp = b - (b * u1).sum(-1, keepdim=True) * u1
+    nbp = bp.norm(dim=-1, keepdim=True)
+    keep2 = (nbp > 1e-4 * b.norm(dim=-1, keepdim=True).clamp_min(1e-12)).float()
+    u2 = keep2 * bp / nbp.clamp_min(1e-12)
+    c1 = (e * u1).sum(-1)
+    c2 = (e * u2).sum(-1)
+    return (c1 ** 2 + c2 ** 2).sum(dim=(1, 2))
+
+
 def _loss_weights(
     timesteps: list[int],
     alphas_cumprod: torch.Tensor,
@@ -619,6 +647,21 @@ def _train_one_step(
         with torch.no_grad():
             tot = (in_span ** 2).sum() + (out_span ** 2).sum()
             orth_frac = float(((out_span ** 2).sum() / tot.clamp_min(1e-12)).item())
+    # The part of the error that a per-place re-weighting of the two experts could supply, charged
+    # in_place_w times instead of once. On the species-fidelity live split, that part of the true
+    # correction alone bound the species where the same amounts as one weight per step, or moved
+    # to shuffled places, did not (artifacts/drips/second-animal-species/idea2-per-place-weight-
+    # loss.md). 1.0 adds nothing and is every run before this flag existed.
+    in_place_w = float(getattr(cfg, "in_place_weight", 1.0))
+    in_place_frac = float("nan")
+    if in_place_w != 1.0:
+        if huber > 0.0:
+            raise ValueError("--in-place-weight is defined on the squared error; set --huber-delta 0")
+        D_all = float(err[0].numel())
+        e_in = _in_place_energy(err, eps_a_frozen, eps_b_frozen, eps_uncond_frozen)
+        per_sample = per_sample + (in_place_w - 1.0) * e_in / D_all
+        with torch.no_grad():
+            in_place_frac = float((e_in.sum() / (err.float() ** 2).sum().clamp_min(1e-12)).item())
     weights = _loss_weights(
         timestep_per_sample, scheduler.alphas_cumprod,
         loss_space=str(getattr(cfg, "loss_space", "eps")),
@@ -718,6 +761,8 @@ def _train_one_step(
         # end of a run: a flag whose target group is empty is a silent no-op.
         "orth_weight": orth_w,
         "orth_frac": orth_frac,
+        "in_place_weight": in_place_w,
+        "in_place_frac": in_place_frac,
         "delta_target_norm": float(sum(delta_target_norms) / K),
         "delta_hat_norm": float(
             (eps_poe_lora - eps_poe_frozen.float()).norm().item() / K
