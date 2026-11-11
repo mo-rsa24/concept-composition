@@ -32,6 +32,6 @@ These go in no reply.
 - The adapter trains the query, key and value projections of the self-attention and cross-attention layers, 35.8 M parameters; the submission said cross-attention only and 19.8 M (`b871c89e`).
 - Appendix A names the checkpoint used: step 30,000 (600 epochs) of a 50,000-step cosine schedule; the submission said 50,000 steps and 1,000 epochs.
 
-## Open
+## Three concepts (k4nd limitations; PrzE's three-concept question)
 
-- Slot R11, three concepts: rendering as job 84832; four kinds of triple by joint prompt, plain product and ours at seed 10.
+- Slot R11, Appendix C.5, Figure 15: one triple of each kind by joint prompt, plain product and ours at seed 10 (job 84832); the caption names where the product fuses and where the adapter stops at two animals, and a Discussion paragraph discusses it.

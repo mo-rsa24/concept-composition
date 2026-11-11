@@ -60,6 +60,8 @@ itself. The reference that printed as "Figure 10" is removed.
 
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
+Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
+including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and images
 picked by rule (Tables 1 and 2).

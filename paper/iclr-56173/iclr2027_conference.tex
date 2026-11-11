@@ -923,6 +923,8 @@ Finally, we report two limitation to our approach which should be noted and are 
 \label{sec:conclusion}
 In this work we introduce the concept of plurality: the notion that distinct objects in a prompts should become distinct objects in a generated image. We show that PoE and similar compositional diffusion methods are unable to create images with plurality, and instead create hybrid objects that combine the individual objects being prompted for. We show that plurality can be restored during early denoising with PoE and train a LoRA module to supply this correction while keeping a base Stable Diffusion XL model frozen. Crucially, the adapter restores composition on concept pairs unseen during training, using only the separate concept prompts and the null token at inference which are needed for PoE. Consequently, by using a finite set of easily obtained examples where joint prompting demonstrates plurality we can train a LoRA to apply the concept more broadly. Thus, our method is able to achieve the coherent image generation of joint prompting without the need for large quantities of data and exhaustive examples of concept pairs.
 
+The adapter is trained on pairs, yet it carries some of its effect to three concepts (Figure~\ref{fig:review-R11}). On one triple of each kind, the plain product draws a single fused object, while the adapter separates the concepts in every case and draws all three named things when the triple includes objects. When the triple has two or three animals it stops at two, which suggests that what it learned is closer to ``two separate things'' than to a count. Whether this holds across seeds, and whether training on triples would close the gap, are open questions.
+
 \looseness=-1
 This work identifies a more general principle: the fact that written text often has implied information which can be learned and encoded by text-to-image generation models. Fundamentally, this is the core result of Section~\ref{Measuring} which shows that a joint prompt such as ``a cat and a dog'' not only encodes the objects which are desire (the cat and the dog independently) but implies a spatial relation between them. When a compositional diffusion method is used to separate the prompt into ``a cat'' and ``a dog'' neither individual prompt contains the same implication -- neither prompt encodes a restriction on the positioning of the object as, from the perspective of each prompt, there is only one object. While we have focused on plurality in this work, it is plausible that many more joint prompts can be identified with new examples of implied concepts. Our work here provides a framework for measuring and distilling these concepts into a module which can then be used to augment compositional diffusion in a principled manner. Thus, we take a step towards diffusion which can efficiently compose objects at inference time.
 
@@ -1406,12 +1408,12 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 \subsection{Three concepts}
 \label{app:review-three}
 
-The adapter is trained on pairs only. Figure~\ref{fig:review-R11} asks whether it carries to three concepts: four concept triples at the shared seed under the joint prompt, the product, and the product through the adapter.
+The adapter is trained on pairs only. Figure~\ref{fig:review-R11} asks whether it carries to three concepts: one triple of each kind at the shared seed under the joint prompt, the product, and the product through the adapter.
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\reviewslot{R11}{\linewidth}{3.0in}
-\caption{\textbf{Three concepts.} Four concept triples at the shared seed: the joint prompt, the product, and the product through the adapter.}
+\reviewslot{R11}{\linewidth}{3.8in}
+\caption{\textbf{Three concepts.} One triple of each kind at the shared seed, all from the same starting latent; the adapter is trained on pairs only. The plain product fuses the three concepts into one object (a penguin with a dog's face, a toy-like dog, a teapot that is also a lamp) or drops one (the dog under the umbrella). The adapter separates them in every column, and draws all three named things for teapot, lamp and book and for cat, dog and umbrella, the latter with an extra small animal. With two or three animals it draws only two: the penguin is missing, and for dog, chair and cat it draws two dogs, without the cat or the chair.}
 \label{fig:review-R11}
 \end{figure}
 \FloatBarrier
