@@ -113,7 +113,7 @@ The question is whether the adapter composes more often than the plain product o
 
 The thresholds are constants in the paired-differences script, so a change to them shows in a diff.
 
-Every score in one table runs on one GPU model, since one cell read 0.153, 0.169 and 0.180 on three models. The T2I-CompBench and GenEval environments do not run on the Blackwell cards, so all four scores run on the RTX 3090 `bigbatch` nodes.
+Every score in one table runs on one GPU model, since one cell read 0.153, 0.169 and 0.180 on three models. CLIP score and ImageReward run on CPU, on the `batch` partition, for every row of every table. BLIP-VQA and GenEval run on the RTX 3090 `bigbatch` nodes for every row, since their environments do not run on the Blackwell cards and T2I-CompBench's script places its scores on a GPU itself.
 
 ## One row worked through: elephant and penguin, seed 10
 
