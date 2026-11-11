@@ -18,7 +18,7 @@
 % queued for pages. These let a figure take most of a page top or bottom.
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.85}
-\renewcommand{\textfraction}{0.25}
+\renewcommand{\textfraction}{0.20}
 \renewcommand{\floatpagefraction}{0.70}
 \setcounter{topnumber}{2}
 \setcounter{bottomnumber}{0}
@@ -693,22 +693,19 @@ The experiments above obtain $r_t$ from the joint prompt. We now consider whethe
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\textwidth]{ablation/adapters-cat-dog-rank-and-steps.pdf}
-\caption{\textbf{Effect of adapter settings on composing a cat and a dog}
-Each row uses one held-out seed and the same starting noise across
+\includegraphics[width=0.95\textwidth]{ablation/adapters-cat-dog-rank-and-steps.pdf}\\[1pt]
+{\footnotesize (a) adapter settings}\\[3pt]
+\includegraphics[width=0.95\textwidth]{final_figures/molefe_fig2.png}\\[1pt]
+{\footnotesize (b) limitations}
+\caption{\textbf{How the adapter behaves.} (a) Effect of adapter settings on composing a cat and a dog. Each row uses one held-out seed and the same starting noise across
 columns. The left group compares the uncorrected product with adapters
 of rank 8, 16, and 32. The right group compares correction during the
-first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE completes the remaining steps. Therefore, the first column of the right groups shows the adapter acting on the 10 steps followed by 40 steps of uncorrected composition.}
-\label{fig:adapter-rank}
+first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE completes the remaining steps. Therefore, the first column of the right groups shows the adapter acting on the 10 steps followed by 40 steps of uncorrected composition. (b) Limitations of the Plurality LoRA. a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
+and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
+\label{fig:adapter-rank}\label{fig:joint-prompt-through-adapter}
 \end{figure}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.9\textwidth]{final_figures/molefe_fig2.png}
-\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
-and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
-\label{fig:joint-prompt-through-adapter}
-\end{figure}
+
 
 \label{sec:method}
 \looseness=-1
