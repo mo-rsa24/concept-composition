@@ -32,13 +32,14 @@ For Claude to execute.
 
 ### 2. 📝 Grids and the winning rule
 
-- [ ] **Write each method's grid of at most six settings over its main knob, and the numeric rule that picks the winner, into `report/paper-review/protocol.md`, with a dated line in `report/paper-review/history.md`**
+- [x] **Write each method's grid of at most six settings over its main knob, and the numeric rule that picks the winner, into `report/paper-review/protocol.md`, with a dated line in `report/paper-review/history.md`**
+  - ✓ verified 2026-11-11: commit `028d9d69`, rule 3's table and rule in [the protocol](../report/paper-review/protocol.md), the 2026-11-11 row in [the history](../report/paper-review/history.md); no tuning folder existed on `/datasets` at the commit (`ls` count 0)
   - ◀ Needs: 1
   - ▶ Next: 3
 
 ### 3. 🚀 Run the grids and freeze the winners
 
-- [ ] **Run each grid on lion and meerkat, camel and pelican, donkey and duck, chicken and rabbit at seeds 9 to 16, score with the instance count, build one contact sheet per method, and freeze the winner by the written rule**
+- [ ] **Run each grid on lion and meerkat, camel and pelican, donkey and duck, chicken and rabbit at seeds 9 to 12, score with the instance count, build one contact sheet per method, and freeze the winner by the written rule**
   - ◀ Needs: 2, and your yes to each launch command
   - ▶ Next: 4
 
