@@ -31,12 +31,14 @@ def includes(tex: Path) -> list[tuple[str, float]]:
     for line in tex.read_text().splitlines():
         if line.lstrip().startswith("%"):
             continue
-        w = re.search(r"\\begin\{wrapfigure\}(?:\[[^\]]*\])?\{[a-z]\}\{([0-9.]+)\\textwidth\}", line)
+        w = re.search(r"\\begin\{(?:wrapfigure\}(?:\[[^\]]*\])?\{[a-z]\}|minipage\}(?:\[[^\]]*\])?)\{([0-9.]+)\\textwidth\}", line)
         if w:
             wrap = float(w.group(1))
-        r = re.search(r"\\reviewslot\[([^\]]+)\]", line)
-        if r:  # a slot still showing its submitted image, inside a wrapped figure
-            out.append((r.group(1), wrap or 1.0))
+        r = re.search(r"\\reviewslot(?:\[([^\]]+)\])?\{(R\d+)\}\{\\linewidth\}", line)
+        if r and (r.group(1) or wrap):  # a slot inside a box: its filled file if any, else its fallback
+            filled = [f"slots/{r.group(2)}{e}" for e in (".pdf", ".png") if (tex.parent / f"slots/{r.group(2)}{e}").exists()]
+            if filled or r.group(1):
+                out.append(((filled or [r.group(1)])[0], wrap or 1.0))
             continue
         if "\\includegraphics" not in line or "#" in line:
             continue
