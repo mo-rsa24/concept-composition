@@ -1,7 +1,7 @@
 # Walk map: CO3, ToMe and SuperDiff baselines
 
 **Plan:** [the baselines plan](../../../plans/prze-review-baselines.md) · mode `--request --depth objective`
-**On:** piece 3, the tuning grids
+**On:** piece 3, launch the evaluations
 
 ## Stop point
 
@@ -23,6 +23,7 @@ Lion and meerkat at seed 9, SDXL, 1024 by 1024.
 | ToMe | dropped | one more attempt with `huggingface_hub<0.26` · drop | you, 08:24 | `drop tome`, after it missed the 30-minute limit on an import error |
 | Tuning cells | 16 (seeds 9 to 12) | 32 · 16 | you, 08:40 | halves the grid's cost; separates gaps of about 35 points instead of 25 |
 | SuperDiff knob | step count × κ clamp | mixing rule (not in our code) | you, 08:40, with the 16-cell change | our SuperDiff has only AND |
+| Tuning grid | none; published defaults only | 32-cell grid · 16-cell grid · none | you, 08:50 | spend the compute on the evaluation, not on tuning |
 | Where piece 1 runs before 09:30 | `bigbatch` RTX 3090, sbatch shown first | bigbatch · wait for 111 | default you accepted | CO3 already ran there; no biggpu card free at 07:25 |
 
 ## Ticks
@@ -30,6 +31,8 @@ Lion and meerkat at seed 9, SDXL, 1024 by 1024.
 - Task 1, 08:25: CO3 default (two clear animals, by my call) and SuperDiff default (one hybrid) rendered lion and meerkat seed 9; ToMe dropped on an import error. Seeds 9 to 16 start from a seeded fp16 CPU draw, since the cache has no entry for them; identical bytes under torch 2.5.1 and 2.11.
 
 - Task 2, 08:45: grids, rule and ToMe removal committed as `028d9d69`, before any tuning image.
+
+- Protocol rule 3 rewritten to defaults only, 08:55; the grid launcher `scripts/review_baselines_grid.sh` stays committed and unused.
 
 ## Out in runs, threads and handoffs
 
