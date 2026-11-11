@@ -811,6 +811,25 @@ between the training target and the prediction used during sampling.
 \reviewslot{R3}{\linewidth}{1.3in}
 \end{table}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{ablation/adapters-cat-dog-rank-and-steps.pdf}
+\caption{\textbf{Effect of adapter settings on composing a cat and a dog}
+Each row uses one held-out seed and the same starting noise across
+columns. The left group compares the uncorrected product with adapters
+of rank 8, 16, and 32. The right group compares correction during the
+first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE completes the remaining steps. Therefore, the first column of the right groups shows the adapter acting on the 10 steps followed by 40 steps of uncorrected composition.}
+\label{fig:adapter-rank}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{final_figures/molefe_fig2.png}
+\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
+and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
+\label{fig:joint-prompt-through-adapter}
+\end{figure}
+
 % \begin{wrapfigure}[27]{r}{0.57\textwidth}
 % \vspace{-12pt}
 % \centering\setlength{\tabcolsep}{0pt}\begin{tabular}{@{}c@{\hspace{2pt}}c@{}}
@@ -849,16 +868,7 @@ We also conduct a sensitivity analysis on the one hyper-parameter our method int
 % \label{fig:adapter-rank}
 % \end{figure}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.9\textwidth]{ablation/adapters-cat-dog-rank-and-steps.pdf}
-\caption{\textbf{Effect of adapter settings on composing a cat and a dog}
-Each row uses one held-out seed and the same starting noise across
-columns. The left group compares the uncorrected product with adapters
-of rank 8, 16, and 32. The right group compares correction during the
-first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE completes the remaining steps. Therefore, the first column of the right groups shows the adapter acting on the 10 steps followed by 40 steps of uncorrected composition.}
-\label{fig:adapter-rank}
-\end{figure}
+
 
 % \begin{figure}[!htbp]
 % \centering
@@ -1123,14 +1133,10 @@ In this work we made use of generative AI tools for coding assistance, to polish
 % Keep the appendix separate from the bibliography and earlier floats.
 \clearpage
 \appendix
+% The appendix holds stacks of tables and image grids; let a page carry several of them.
+\setcounter{topnumber}{3}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{4}\renewcommand{\textfraction}{0.07}
 
-\begin{figure}[tbp]
-\centering
-\includegraphics[width=0.9\textwidth]{final_figures/molefe_fig2.png}
-\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
-and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
-\label{fig:joint-prompt-through-adapter}
-\end{figure}
+
 
 
 \section{Implementation details}
@@ -1261,14 +1267,45 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \section{Review response material}
 \label{app:review-slots}
 
-\begin{figure}[tbp]
+\subsection{The benchmark prompts}
+\label{app:review-benchmarks}
+
+\begin{figure}[htbp]
+\centering\footnotesize
+\reviewslot{R12}{\linewidth}{5.2in}
+\caption{\textbf{The images behind Table~\ref{tab:review-R1}.} Two prompts from each set at seed 9; columns are the methods of Table~\ref{tab:review-R1} in its order.}
+\label{fig:review-R12}
+\end{figure}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator; higher is better. NFE as in Table~\ref{tab:review-R1}.}
+\label{tab:review-R14}
+\smallskip
+\reviewslot{R14}{\linewidth}{1.6in}
+\end{table}
+\FloatBarrier
+
+\subsection{The held-out pairs}
+\label{app:review-held-out}
+
+\begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R4}{\linewidth}{5.0in}
 \caption{\textbf{The images behind Table~\ref{tab:review-R3}.} One pair from each group at seeds 9 and 10; columns are the methods of Table~\ref{tab:review-R3} in its order, each from the same starting noise.}
 \label{fig:review-R4}
 \end{figure}
 
-\begin{table}[tbp]
+\paragraph{Pairs used in evaluation.} The 53 held-out pairs by group, and the two pairs used to choose the adapter. The number after a pair is the seeds out of 8 on which the joint prompt shows both named things; $^*$marks a pair held out when the adapter was trained.
+\label{sec:review-R7}
+
+\reviewslot{R7}{\linewidth}{1.6in}
+\FloatBarrier
+
+\subsection{Stable Diffusion 1.5}
+\label{app:review-sd15}
+
+\begin{table}[htbp]
 \centering\footnotesize
 \caption{\textbf{The Attend-and-Excite prompts with SD 1.5.} Columns as in Table~\ref{tab:review-R1}. SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table.}
 \label{tab:review-R5}
@@ -1276,59 +1313,56 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \reviewslot{R5}{\linewidth}{1.8in}
 \end{table}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
+\centering\footnotesize
+\reviewslot{R13}{\linewidth}{3.6in}
+\caption{\textbf{The images behind Table~\ref{tab:review-R5}.} The prompts of Figure~\ref{fig:review-R12} with the SD 1.5 methods of Table~\ref{tab:review-R5}.}
+\label{fig:review-R13}
+\end{figure}
+\FloatBarrier
+
+\subsection{Samplers that correct the product}
+\label{app:review-samplers}
+
+\begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R6}{\linewidth}{3.9in}
 \caption{\textbf{Samplers that correct the product.} Four pairs at the shared seed; columns are the joint prompt, the joint prompt with a Langevin corrector, the product, the product with a Langevin corrector, the product with unadjusted Hamiltonian Monte Carlo, and CO3, all from the same starting noise.}
 \label{fig:review-R6}
 \end{figure}
+\FloatBarrier
 
-\paragraph{Pairs used in evaluation.} The 53 held-out pairs by group, and the two pairs used to choose the adapter. The number after a pair is the seeds out of 8 on which the joint prompt shows both named things; $^*$marks a pair held out when the adapter was trained.
-\label{sec:review-R7}
+\subsection{How the adapter behaves}
+\label{app:review-adapter}
 
-\reviewslot{R7}{\linewidth}{1.6in}
 
-\begin{figure}[tbp]
+
+\begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R9}{\linewidth}{2.0in}
 \caption{\textbf{Failure types as the adapter acts on fewer steps.} Counts of each failure type over the held-out pairs with no adapter, the adapter on steps 0 to 10, 0 to 25 and all 50 of 50, and an adapter trained on all 50 steps.}
 \label{fig:review-R9}
 \end{figure}
 
-\begin{figure}[tbp]
+\begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R10}{\linewidth}{4.6in}
 \caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Pairs and seeds as listed; columns are the five settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
 \end{figure}
 
-\begin{figure}[tbp]
+
+\FloatBarrier
+
+\subsection{Three concepts}
+\label{app:review-three}
+
+\begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R11}{\linewidth}{3.0in}
 \caption{\textbf{Three concepts.} Four concept triples at the shared seed: the joint prompt, the product, and the product through the adapter.}
 \label{fig:review-R11}
 \end{figure}
-
-\begin{table}[tbp]
-\centering\footnotesize
-\caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator; higher is better. NFE as in Table~\ref{tab:review-R1}.}
-\label{tab:review-R14}
-\smallskip
-\reviewslot{R14}{\linewidth}{1.6in}
-\end{table}
-
-\begin{figure}[tbp]
-\centering\footnotesize
-\reviewslot{R12}{\linewidth}{5.2in}
-\caption{\textbf{The images behind Table~\ref{tab:review-R1}.} Two prompts from each set at seed 9; columns are the methods of Table~\ref{tab:review-R1} in its order.}
-\label{fig:review-R12}
-\end{figure}
-
-\begin{figure}[tbp]
-\centering\footnotesize
-\reviewslot{R13}{\linewidth}{3.6in}
-\caption{\textbf{The images behind Table~\ref{tab:review-R5}.} The prompts of Figure~\ref{fig:review-R12} with the SD 1.5 methods of Table~\ref{tab:review-R5}.}
-\label{fig:review-R13}
-\end{figure}
+\FloatBarrier
 
 \end{document}
