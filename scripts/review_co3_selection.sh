@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 # CO3 on three training pairs at seeds 1 to 3, for appendix A's joint-prompt-beside-CO3 figure.
 # The same sample_co3.py call and settings as scripts/showcase/run_co3_targets.sh (CO3 vendored
-# unmodified under composition/debottam_co3), run with the Blackwell environment co3_bw.
+# unmodified under composition/debottam_co3), run with the co3 environment on a bigbatch RTX 3090.
 #
-#   nohup bash review_co3_selection.sh > run.log 2>&1 < /dev/null & disown     (on mscluster112)
+#   sbatch --partition=bigbatch ... --wrap 'bash review_co3_selection.sh'   (one bigbatch RTX 3090)
 #
 # Writes OUT/<pair>/algo-co3-hybrid_/<joint prompt>/seed-<n>/*.png, 9 pictures in all.
 set -uo pipefail
 
 REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 CO3=$REPO/composition/debottam_co3
-PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
+# co3 (with xformers) on the bigbatch RTX 3090s, where every earlier CO3 render ran; co3_bw has no
+# xformers, and CO3 switches it on, so the Blackwell fails at model load (2026-11-11).
+PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_selection
 SEEDLIST="[1,2,3]"
 GPU=0
@@ -19,7 +21,7 @@ PAIRS=("a_horse__x__a_pig|a horse|a pig|a horse and a pig"
        "a_donkey__x__a_duck|a donkey|a duck|a donkey and a duck")
 
 echo "=== node $(hostname)  start $(date -Is)  PID $$"
-[ -x "$PY" ] || { echo "ABORT: co3_bw python not found at $PY" >&2; exit 2; }
+[ -x "$PY" ] || { echo "ABORT: python not found at $PY" >&2; exit 2; }
 mkdir -p "$OUT"
 USEPCT=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
 [ "$USEPCT" -ge 90 ] && { echo "ABORT: /datasets is ${USEPCT}% full" >&2; exit 3; }
@@ -27,7 +29,7 @@ read -r USED UTIL < <(nvidia-smi -i "$GPU" --query-gpu=memory.used,utilization.g
 case "$UTIL" in ''|*[!0-9]*) echo "ABORT: gpu $GPU faulted" >&2; exit 4;; esac
 [ "$USED" -gt 1024 ] && { echo "ABORT: gpu $GPU has ${USED} MiB in use" >&2; exit 5; }
 CUDA_VISIBLE_DEVICES=$GPU "$PY" -c "import torch, sys; sys.exit(0 if torch.cuda.is_available() else 6)" \
-  || { echo "ABORT: torch sees no CUDA device under co3_bw" >&2; exit 6; }
+  || { echo "ABORT: torch sees no CUDA device under $PY" >&2; exit 6; }
 echo "=== disk ${USEPCT}%  gpu ${USED} MiB ${UTIL}%"
 
 cd "$CO3" || exit 7
