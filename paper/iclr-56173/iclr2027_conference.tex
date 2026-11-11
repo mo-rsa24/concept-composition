@@ -704,7 +704,7 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{ablation/adapter-limitations-stand-in.pdf}
+\includegraphics[width=\textwidth]{ablation/adapter-limitations-two-panels.pdf}
 \caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
 and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
 \label{fig:joint-prompt-through-adapter}
