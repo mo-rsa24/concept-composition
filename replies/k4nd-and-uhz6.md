@@ -49,7 +49,7 @@ We agree that fusion under composition was identified before (Bradley et al., 20
 as such. What we add is a measurement of the missing term during sampling: it is specific to the pair
 and seed, and concentrated in the first ten of 50 steps (Figures 2 to 4).
 
-Tables 1 and 2 compare the adapter with PoE, CO3 and a Langevin corrector on the same seeds [TODO,
+Tables 1 and 3 compare the adapter with PoE, CO3 and a Langevin corrector on the same seeds [TODO,
 slots R1 and R3]. The ablation the reviewer describes, the same joint-prompt supervision on pairs
 the product does not fuse, would separate the effect of the supervision from that of the plurality
 pairs; we have not run it and name it as future work.
@@ -65,7 +65,7 @@ Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pair
 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
 image quality by CLIP score and ImageReward [TODO: slot R1].
 
-Table 2 scores the 53 held-out pairs described in Appendix C.2, grouped as hard, easy but unseen, and
+Table 3 scores the 53 held-out pairs described in Appendix C.2, grouped as hard, easy but unseen, and
 not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO: slot R3].
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
@@ -82,7 +82,7 @@ loss) are counted per setting in the appendix [TODO: slot R9].
 
 > "Section 4 describes target matching and provides the teacher prediction and sampling rule, but
 > it does not explicitly formulate the training loss. The squared-error objective appears in the
-> training diagram in Appendix A, Figure 8."
+> training diagram in Appendix A, Figure 7."
 
 Section 4 now states the training loss as Equation 12: the squared error between the adapted
 composition and the joint-prompt prediction, over the cached states of every training pair and
@@ -94,7 +94,7 @@ is removed, since Equation 12 now states the objective in the main text.
 
 > "The main text describes individual adapted network evaluations as returning the correction,
 > whereas Appendix B defines them as adapted denoising predictions whose composition induces the
-> correction. Section 4 refers to 'Figure 10,' although the actual training diagram is Figure 8."
+> correction. Section 4 refers to 'Figure 10,' although the actual training diagram is Figure 7."
 
 Section 4 now says each adapted evaluation returns a noise prediction, as Appendix B derives. At
 inference the sampler uses the adapted composition directly (Equation 15): three predictions per
@@ -109,12 +109,12 @@ itself. The reference that printed as "Figure 10" is removed.
 
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
-Section 4 now describes the training data and how pairs were chosen (Figure 8).
-Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
+Section 4 now describes the training data and how pairs were chosen (Figure 7).
+Appendix C.6 (Figure 14) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
-behind both tables in the appendix (Tables 1 and 2).
+behind both tables in the appendix (Tables 1 and 3).
 
 ### W5: the qualitative baseline comparison and its starting noise
 
@@ -123,7 +123,7 @@ behind both tables in the appendix (Tables 1 and 2).
 
 Every method now uses the same seed for each prompt, with every column of a row in Figure 5
 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
-seed, as in its released code. Tables 1 and 2 make the comparison over 4 and 8 seeds, with the
+seed, as in its released code. Tables 1 and 3 make the comparison over 4 and 8 seeds, with the
 images behind them in the appendix.
 
 ### Q1: evidence that the residual measures plurality
@@ -139,7 +139,7 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3]. The identity errors, additional
+Answered under k4nd W3: Tables 1 and 3 [TODO: slots R1 and R3]. The identity errors, additional
 objects and style-dependent failures are counted per setting in the appendix [TODO: slot R9].
 
 ### Q3: pairs retained when only CO3 succeeds
@@ -147,12 +147,12 @@ objects and style-dependent failures are counted per setting in the appendix [TO
 > "Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes
 > from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?"
 
-We have addressed this in Section 4 and Figure 8. Every training target is the frozen model's
+We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's
 joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair
-entered the training set when the joint prompt drew both named things as separate objects. Figure 8
+entered the training set when the joint prompt drew both named things as separate objects. Figure 7
 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped
 because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed
-(seed 3 in Figure 8), that seed's target is still the joint prompt's picture.
+(seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
 
 ### Q4: the objective in the main text, and the inconsistencies
 
@@ -172,7 +172,7 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
 benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
-held-out pairs in three groups (Table 2). Table 3 reports GenEval's two-object and counting tasks and
+held-out pairs in three groups (Table 3). Table 2 reports GenEval's two-object and counting tasks and
 T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
 C.5 shows three concepts.
 
@@ -183,11 +183,11 @@ C.5 shows three concepts.
 > objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are
 > not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals."
 
-Tables 1 and 2 now compare quantitatively with CO3 and a Langevin corrector on the same seeds [TODO:
+Tables 1 and 3 now compare quantitatively with CO3 and a Langevin corrector on the same seeds [TODO:
 slots R1, R3]. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
 cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
 Table 4 runs the methods released for Stable Diffusion 1.x from their official code [TODO: slot R5].
-Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
+Beyond pairs of animals, Table 1 covers objects and Appendix C.6 three concepts.
 
 ### The training filter
 
@@ -195,12 +195,12 @@ Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
 > the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore
 > supervise toward a target without plurality."
 
-We have addressed this in Section 4 and Figure 8. Every training target is the frozen model's
+We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's
 joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair
-entered the training set when the joint prompt drew both named things as separate objects. Figure 8
+entered the training set when the joint prompt drew both named things as separate objects. Figure 7
 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped
 because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed
-(seed 3 in Figure 8), that seed's target is still the joint prompt's picture.
+(seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
 
 ### Presentation issues
 
@@ -217,7 +217,7 @@ The reference that printed as "Figure 10" in Section 4 is removed, and the Discu
 
 The training set is defined by a criterion, not by the particular pairs. A pair is kept when the
 frozen model's joint prompt draws both named concepts as separate objects, and dropped when the two
-concepts cannot be told apart (Section 4, Figure 8). The same criterion applies whether it yields 48
+concepts cannot be told apart (Section 4, Figure 7). The same criterion applies whether it yields 48
 pairs or a thousand, and 48 is where we stopped collecting. The method relies on the criterion, not on
 any specific pair.
 
@@ -242,28 +242,28 @@ They are also released with the code as the configuration file the trainer reads
 > "What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and
 > multiple seeds?"
 
-Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3].
+Answered under k4nd W3: Tables 1 and 3 [TODO: slots R1 and R3].
 
 ### Q3: restricting the adapter to the early steps
 
 > "Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure
 > modes in Fig. 7?"
 
-We tested this directly. Figure 14 switches the adapter on for the first 10, the first 25 or all 50
+We tested this directly. Figure 12 switches the adapter on for the first 10, the first 25 or all 50
 of the 50 steps, on the first pair of each held-out group at seeds 9 and 10. Restricting it to the
 first 25 steps gives essentially the same pictures as all 50. Restricting it to the first 10 is too
 short for the learned correction: on baboon and gazelle the second animal appears only from 25 steps
 on, although the measured correction needs only the first ten (Section 3). The species substitution
 on cow and horse, where two cows appear and no horse, persists at every window, so the failure modes
-of the submitted Fig. 7 (Figure 6 in the revision) do not come from the late steps. The counts per
-failure type across all 53 held-out pairs and eight seeds are in Figure 13 [TODO: slot R9].
+of the submitted Fig. 7 (Figure 13 in the revision) do not come from the late steps. The counts per
+failure type across all 53 held-out pairs and eight seeds are in Figure 11 [TODO: slot R9].
 
 ### Q4: pairs that do not compete for the same region
 
 > "Does the adapter degrade PoE on pairs that do not compete for the same region, such as
 > foreground/background pairs like lighthouse and sea?"
 
-No. Table 2's not-competing group holds 21 held-out pairs whose concepts do not contend for one
+No. Table 3's not-competing group holds 21 held-out pairs whose concepts do not contend for one
 region, including lighthouse and a stormy sea (Appendix C.2). On these, the adapter scores
 0.73 ± 0.08 against the product's 0.74 ± 0.10 (BLIP-VQA, seeds 9 to 16, 95% intervals from
 resampling pairs). The intervals overlap, so on pairs the product already composes, the adapter

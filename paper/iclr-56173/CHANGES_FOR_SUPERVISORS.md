@@ -15,7 +15,7 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 ## k4nd W4: method details
 
 - Section 4 states the training loss as Equation 12, with its per-step weight (`8ef00a17`).
-- The training diagram (old Figure 8) is hidden until its notation matches Equation 12 (`2e9af75c`).
+- The training diagram (old Figure 7) is hidden until its notation matches Equation 12 (`2e9af75c`).
 - Section 4 says each adapted evaluation returns a noise prediction, and inference uses the adapted composition directly; the "Figure 10" reference is gone (`88f02a45`).
 - The abstract-concept sentences are cut from Sections 3 and 4 and the Discussion (`06a9cf98`).
 - Section 4.1 opens with the evaluation protocol (`508d2647`).
@@ -23,7 +23,7 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 ## k4nd Q3 and UHz6's training filter
 
 - Section 4 describes the training set, with CO3 as a second view during screening only (`14a457e3`).
-- Figure 8 is now the joint prompt beside CO3 on five candidate pairs, one green pick per seed (`c2178737`, `fcaff3b3`).
+- Figure 7 is now the joint prompt beside CO3 on five candidate pairs, one green pick per seed (`c2178737`, `fcaff3b3`).
 
 ## UHz6 presentation
 
@@ -42,4 +42,4 @@ These go in no reply.
 
 ## Three concepts (k4nd limitations; PrzE's three-concept question)
 
-- Slot R11, Appendix C.5, Figure 15: one triple of each kind by joint prompt, plain product and ours at seed 10 (job 84832); the caption names where the product fuses and where the adapter stops at two animals, and a Discussion paragraph discusses it.
+- Slot R11, Appendix C.6, Figure 14: one triple of each kind by joint prompt, plain product and ours at seed 10 (job 84832); the caption names where the product fuses and where the adapter stops at two animals, and a Discussion paragraph discusses it.
