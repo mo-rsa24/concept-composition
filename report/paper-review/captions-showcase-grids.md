@@ -16,7 +16,7 @@ Files: `how-the-adapter-scores-against-other-methods/worst-cases-held-out.pdf` a
 
 > **Figure B.** Where our method fails. Rows are the two pairs per held-out group and benchmark set on which our method scored lowest under the same check, each at its worst seed. Our method drops one of the two things or draws the wrong species (two cows for "a cow and a horse"); CO3 keeps both on most of these rows.
 
-Pointing sentence for the main text: *Appendix Figure B shows where the adapter fails: on these pairs it loses one object or substitutes a species, and CO3, which spends 260 network evaluations per image against our 150, often keeps both.*
+Pointing sentence for the main text: *Appendix Figure B shows where the adapter fails: on these pairs it loses one object or substitutes a species, and CO3 often keeps both.*
 
 ## The render grids behind the tables
 
@@ -28,5 +28,5 @@ Pointing sentence for the main text: *Appendix Figure B shows where the adapter 
 
 ## Still to settle
 
-- The NFE figure in Figure B's pointing sentence: 150 for ours is inferred from 50 steps with three U-Net rows per step, not counted; CO3's 260 is counted. Count ours before quoting it, or drop the clause.
+- Network evaluations per image, counted with a counter on the U-Net (protocol rule 6): ours 300 rows in 100 calls as rendered (`scripts/review_count_ours_nfe.py`, seal and walrus at seed 11, log `logs/count_ours_nfe.log`), CO3 260 rows in 90 calls. The renderer appears to evaluate the plain product and the adapter each step and mix them by λ, so at λ = 1 half its rows are weighted by zero; the method alone would need 150. That is inferred, not checked in the code. Settle it before any sentence compares cost, and before the reply to UHz6, whose review credits the adapter with needing no extra evaluations.
 - PoE + Langevin's column in Figures A and B fills as `langevin_extra/` and the subset finish; a cell it never reaches stays grey and needs the dagger.
