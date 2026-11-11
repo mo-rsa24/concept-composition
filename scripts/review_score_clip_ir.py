@@ -11,8 +11,9 @@ Usage:
   python scripts/review_score_clip_ir.py --in rows.csv --out scores.csv   (columns image,prompt;
       rows already in --out are skipped and new rows appended, so a stopped run resumes)
 """
-import os
 from __future__ import annotations
+
+import os
 
 import argparse
 import csv
