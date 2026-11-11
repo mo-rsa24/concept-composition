@@ -756,7 +756,12 @@ w\bigl[
 \end{aligned}
 \label{eq:mono-target}
 \end{equation}
-Only the adapter parameters $\psi$ are updated. At the selected
+Only the adapter parameters $\psi$ are trained, by minimising
+\begin{equation}
+\mathcal L(\psi)=\mathbb E_{x_t,t}\,\bigl\|\hat\epsilon^{\psi}_{\mathrm{PoE}}(x_t,t)-\hat\epsilon_{\mathrm{Mono}}(x_t,t)\bigr\|^2
+\label{eq:adapter-loss}
+\end{equation}
+over the cached states of every training pair and seed at the first ten of the 50 sampling steps. Each step's term is weighted by $(1-\bar\alpha_t)/\bar\alpha_t$, divided by its mean over the 50-step grid, so the earliest and noisiest steps carry the most weight. At the selected
 states, the target differs from the unadapted composition by $r_t$,
 so matching it trains the adapter to supply that difference. During sampling, the learned correction is the change that the
 adapter makes to the composed prediction. We denote it by
