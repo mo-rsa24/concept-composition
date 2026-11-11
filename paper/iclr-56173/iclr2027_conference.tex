@@ -1176,14 +1176,15 @@ Every run samples with 50 DDIM steps at guidance weight 7.5, at $1024\times1024$
 % \label{fig:training-selection}
 % \end{figure}
 
-Figure~\ref{fig:adapter-training} shows how these runs are trained. Frozen SDXL first supplies the joint-prompt target on states cached from a plain product-of-experts trajectory. At each selected state, the adapted network evaluates the two concept prompts and the null token separately; their composed prediction is compared with that target. The loss updates only the LoRA weights. The diagram separates the one-time target cache from the three adapted predictions and the loss used to update the LoRA weights.
+% Hidden until the diagram uses the paper's notation (Equation 12, \hat\epsilon, c_1).
+% Figure~\ref{fig:adapter-training} shows how these runs are trained. Frozen SDXL first supplies the joint-prompt target on states cached from a plain product-of-experts trajectory. At each selected state, the adapted network evaluates the two concept prompts and the null token separately; their composed prediction is compared with that target. The loss updates only the LoRA weights. The diagram separates the one-time target cache from the three adapted predictions and the loss used to update the LoRA weights.
 
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=\textwidth,trim=10bp 110bp 10bp 85bp,clip]{training-the-compositional-adapter.jpg}
-\caption{\textbf{Training the compositional adapter.} A cached frozen joint-prompt target supervises the adapted product-of-experts prediction; only the LoRA weights are updated. The frozen network supplies the cached target; the adapted network produces the composition matched to it.}
-\label{fig:adapter-training}
-\end{figure}
+% \begin{figure}[!htbp]
+% \centering
+% \includegraphics[width=\textwidth,trim=10bp 110bp 10bp 85bp,clip]{training-the-compositional-adapter.jpg}
+% \caption{\textbf{Training the compositional adapter.} A cached frozen joint-prompt target supervises the adapted product-of-experts prediction; only the LoRA weights are updated. The frozen network supplies the cached target; the adapted network produces the composition matched to it.}
+% \label{fig:adapter-training}
+% \end{figure}
 \FloatBarrier
 
 % Retained for later revision; excluded from the current paper.
