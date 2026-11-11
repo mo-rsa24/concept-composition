@@ -18,13 +18,14 @@
 % queued for pages. These let a figure take most of a page top or bottom.
 \renewcommand{\topfraction}{0.92}
 \renewcommand{\bottomfraction}{0.85}
-\renewcommand{\textfraction}{0.07}
+\renewcommand{\textfraction}{0.25}
 \renewcommand{\floatpagefraction}{0.70}
-\setcounter{topnumber}{3}
-\setcounter{bottomnumber}{2}
-\setcounter{totalnumber}{4}
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{0}
+\setcounter{totalnumber}{1}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{placeins}
 \usepackage{url}
 \usepackage{wrapfig}
 \usepackage[most]{tcolorbox}
@@ -563,7 +564,7 @@ Figure~\ref{fig:strength-grid} shows the effect of sampling with Equation~\ref{e
 1) a correction term computed using two different concept pair and added back to the original PoE prediction, 2) a correction term computed using the same concept pair from a different generation seed and added back to the original PoE prediction and 3) a correction term computed using the same concept pair and seed but at a diffferent time index and added to the original PoE prediction. Each control matches the measured correction's magnitude at
 every step. None of the controls produces two animals across the sweep. Consequently, the correction is highly coupled to the state of the image being denoised, but there is a region of the latent space which encapsulates the abstract notion of plurality. This region appears to be distant from the stable point of the original PoE diffusion process.
 
-\begin{figure}[!htbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/how-much-is-added/strength-grid-full-width.pdf}
 \caption{\textbf{Only the measured correction composes.} A cat and a dog at seed 9. A column is
@@ -615,7 +616,7 @@ that starts at step twenty runs for thirty steps yet finishes with one
 blended animal. For this pair and seed, adding more correction later
 does not recover the outcome lost at the start.
 
-\begin{figure}[!htbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{when-the-correction-arrives/when-the-correction-arrives.pdf}
 \caption{\textbf{Ten corrected steps already reach the outcome, and no late start recovers it.}
@@ -648,7 +649,7 @@ when the window starts at step 10 or 15. None composes when it starts
 at step 20 or later. Taken together, these results show that a correction term exists and that a correction during the early steps of denoising is sufficient to guide product-of-experts composition to an image demonstrating plurality.
 The experiments above obtain $r_t$ from the joint prompt. We now consider whether this correction can be learned by a LoRA network module \citep{hu2022lora} such that it that can be used without that prompt during sampling.
 
-\begin{figure}[h!]
+\begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{where-the-correction-lands.pdf}
 \caption{\textbf{Composition survives only while the correction window starts early.} A cat and a
@@ -802,10 +803,8 @@ between the training target and the prediction used during sampling.
 \label{tab:review-R1}
 \smallskip
 \reviewslot{R1}{\linewidth}{1.8in}
-\end{table}
 
-\begin{table}[t]
-\centering\footnotesize
+\medskip
 \caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
 \label{tab:review-R3}
 \smallskip
@@ -850,7 +849,7 @@ We also conduct a sensitivity analysis on the one hyper-parameter our method int
 % \label{fig:adapter-rank}
 % \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{ablation/adapters-cat-dog-rank-and-steps.pdf}
 \caption{\textbf{Effect of adapter settings on composing a cat and a dog}
@@ -926,6 +925,7 @@ In this work we made use of generative AI tools for coding assistance, to polish
 
 % This anonymous placeholder contains no acknowledgments for submission. Replace this paragraph or remove the section for the initial blind review version if needed.
 
+\FloatBarrier
 \bibliography{iclr2027_conference}
 \bibliographystyle{iclr2027_conference}
 
