@@ -17,3 +17,7 @@ Starting prompts built by `/merge-sessions` from finished sessions, each with it
 **PRZE-10: every review job priced, and wave 1 rendered**
 
 [2026-11-11-prze-10-wave-1-renders-retro.md](2026-11-11-prze-10-wave-1-renders-retro.md). The retrospective of the 2026-11-11 walk over the PRZE-10 plan, session `a4d17e2c-8fab-4c9c-b8c3-c17cc665b327`: the jobs table with measured rates, the joint-prompt and subject-ledger fixes, wave 1's six jobs to a PASS at 11:14, and the corrector subset handed on.
+
+**Route step 9: every image scored, Tables 1 and 2 built**
+
+[2026-11-11-route-step-9-retro.md](2026-11-11-route-step-9-retro.md). The retrospective of the 2026-11-11 walk over route step 9, session `47281f64-fc21-4b71-b0fd-3b968913d9b3`: four scorers installed and proved, 4,584 images scored, both tables filled in the paper, the R1 bar SUPPORTS, the CO3 row owed to step 8.
