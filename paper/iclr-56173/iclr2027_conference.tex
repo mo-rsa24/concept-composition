@@ -1155,7 +1155,7 @@ Every run samples with 50 DDIM steps at guidance weight 7.5, at $1024\times1024$
 
 \paragraph{Training pairs.} The adapter trains on \trainpairs{} pairs. Each training cell is one pair at one seed, and its target is the picture the joint prompt draws on that seed, never CO3's. Pairs were admitted over several rounds in which a person judged whether the joint prompt draws both named things; not every kept seed was checked on its own, and a few targets show only one of the two. Twenty-eight pairs are two animals (giraffe and zebra, lion and meerkat, donkey and duck), three are an animal and an object (hamster and carrot, pony and red barn, snail and lantern), and seventeen are two objects (lighthouse and sailboat, microscope and test tube, windmill and tractor). Training uses 182 cells over 23 seeds, seeds 1 to 8 and 17 upward; seeds 9 to 16 are never trained on, because the cached starting noise is shared across pairs and they are the evaluation seeds. Figure~\ref{fig:training-examples} shows the target for nine of them, three of each kind. The full list is released with the code as the configuration file it reads.
 
-\begin{figure}[t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{ablation/training-target-examples.pdf}
 \caption{\textbf{Examples of training targets.} The joint prompt's picture for nine of the \trainpairs{} training pairs, one kept seed each, grouped by the kind of pair. The adapter learns to reproduce these pictures from the separate concept prompts.}
