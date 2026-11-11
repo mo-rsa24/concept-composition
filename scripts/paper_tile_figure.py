@@ -13,7 +13,9 @@ The spec:
      "groups": [{"title": "Rank", "columns": ["rank 8", "rank 16"]}, ...],   title may be ""
      "rows": [{"label": "seed 9", "tiles": ["path.png", null, ...]}, ...],   null draws a
      "pending": "result pending",                                             labelled grey tile
-     "panel": "(a)"}   optional panel letter, 9 pt bold, top left
+     "panel": "(a)",   optional panel letter, 9 pt bold, top left
+     "footnote": "..."}  optional 8 pt line under the grid
+A column label may hold "\n" for two lines; a row may carry "notes", one per tile, set under it.
 """
 from __future__ import annotations
 
@@ -48,8 +50,13 @@ def main() -> int:
     usable = spec["width_in"] - label_w - TILE_GAP_IN * (ncol - len(groups)) - GROUP_GAP_IN * (len(groups) - 1)
     tile = usable / ncol
     has_titles = any(g["title"] for g in groups)
-    head = (TITLE_PT * 1.5 / 72 if has_titles else 0) + LABEL_PT * 1.6 / 72
-    height = head + len(rows) * tile + (len(rows) - 1) * TILE_GAP_IN
+    col_lines = max(c.count("\n") + 1 for g in groups for c in g["columns"])
+    head = (TITLE_PT * 1.5 / 72 if has_titles else 0) + LABEL_PT * (0.6 + 1.15 * col_lines) / 72
+    line_in = LABEL_PT * 1.15 / 72
+    note_h = [(max(n.count("\n") + 1 for n in r["notes"] if n) * line_in + 0.05) if any(r.get("notes") or []) else 0
+              for r in rows]  # a band under a row whose tiles carry notes
+    foot = line_in + 0.06 if spec.get("footnote") else 0
+    height = head + len(rows) * tile + (len(rows) - 1) * TILE_GAP_IN + sum(note_h) + foot
     fig = plt.figure(figsize=(spec["width_in"], height))
     W, H = spec["width_in"], height
 
@@ -62,8 +69,8 @@ def main() -> int:
         x0 = x
         for c in g["columns"]:
             col_x.append(x)
-            fig.text((x + tile / 2) / W, 1 - (head - LABEL_PT * 0.45 / 72) / H, c,
-                     ha="center", va="center", fontsize=LABEL_PT)
+            fig.text((x + tile / 2) / W, 1 - (head - 0.04) / H, c,
+                     ha="center", va="bottom", fontsize=LABEL_PT, linespacing=1.05)
             x += tile + TILE_GAP_IN
         x1 = x - TILE_GAP_IN
         if g["title"]:
@@ -76,7 +83,11 @@ def main() -> int:
         fig.text(0.0, 1 - TITLE_PT * 0.7 / 72 / H, spec["panel"], ha="left", va="center",
                  fontsize=TITLE_PT, weight="bold")
     for i, r in enumerate(rows):
-        y = head + i * (tile + TILE_GAP_IN)
+        y = head + i * (tile + TILE_GAP_IN) + sum(note_h[:i])
+        for j, n in enumerate(r.get("notes") or []):
+            if n:
+                fig.text((col_x[j] + tile / 2) / W, 1 - (y + tile + 0.03) / H, n, ha="center", va="top",
+                         fontsize=LABEL_PT, linespacing=1.05)
         fig.text(0.0, 1 - (y + tile / 2) / H, r["label"], ha="left", va="center", fontsize=LABEL_PT,
                  linespacing=1.1)
         for j, t in enumerate(r["tiles"]):
@@ -88,6 +99,8 @@ def main() -> int:
                 ax.add_patch(plt.Rectangle((0, 0), 1, 1, color="0.93", transform=ax.transAxes))
                 ax.text(0.5, 0.5, spec.get("pending", "pending"), ha="center", va="center",
                         fontsize=LABEL_PT, color="0.35", transform=ax.transAxes)
+    if spec.get("footnote"):
+        fig.text(label_w / W, (0.03) / H, spec["footnote"], ha="left", va="bottom", fontsize=LABEL_PT, color="0.3")
     out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out, dpi=300)
     print(f"{out}: {W:.2f} x {H:.2f} in, tiles {tile:.2f} in, labels {LABEL_PT} pt, titles {TITLE_PT} pt, {FONT}")
