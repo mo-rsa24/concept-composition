@@ -26,9 +26,9 @@ Objectives
    from their official repositories, all unmodified at their defaults, on the 276 Attend-and-Excite
    prompts at seeds 9 to 12, 512 x 512, from the same starting noise (layout-sheet.md R5;
    protocol rule 2).
+4. Write the ceiling bar into the protocol, run the test, and report PASS or MISS.
 5. Build the picture grid R13 beside Table 4 from the same result file: R12's six prompts at seed
    9, columns R5's methods in R5's order, drawn with scripts/paper_tile_figure.py at 5.5 in.
-4. Write the ceiling bar into the protocol, run the test, and report PASS or MISS.
 
 What to read
 - composition/aae/: the official Attend-and-Excite code (README, run.py, the pipeline).
