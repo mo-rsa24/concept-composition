@@ -49,7 +49,8 @@ For Claude to execute.
 
 ### 4. ✅ Count, file and record
 
-- [ ] **Count each job's outputs on its launch node against 1,104 and 424; fill rows 7 and 8 of the jobs table with measured rates and cards; add the route step and its rows to "What we know so far"**
+- [x] **Count each job's outputs on its launch node against 1,104 and 424; fill rows 7 and 8 of the jobs table with measured rates and cards; add the route step and its rows to "What we know so far"**
+  - ✓ verified 2026-11-11: 1,104 and 424 counted from mscluster107; rows 7 and 8 in [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs); route step 8b and five rows in [the route](route-answer-the-iclr-reviews.md#what-we-know-so-far)
   - ◀ Needs: 3
 
 ## Instructions

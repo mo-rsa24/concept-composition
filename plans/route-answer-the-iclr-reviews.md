@@ -74,6 +74,11 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | Tables 1 and 2 hold joint prompt, PoE and ours on all 276 benchmark prompts at seeds 9 to 12 and all 53 held-out pairs at seeds 9 to 16; 5 of 4,584 scored images were unreadable from mscluster108 and are listed, not imputed; the R1 bar (ours minus PoE in BLIP-VQA, above 0 in all three sets) reads SUPPORTS | measured | [the tables' sidecar](../report/paper-review/tables-1-and-2-sidecar.json), [Table 1](../report/paper-review/table-1-r1-benchmark.csv), [Table 2](../report/paper-review/table-2-r3-held-out.csv), commit `56b968b6` | PRZE-1, PRZE-3b, step 13 |
 | The four scorers run from pinned envs: CLIP score and ImageReward in `co3` on CPU, BLIP-VQA through T2I-CompBench's own script in `/datasets/mmolefe/envs/t2icomp`, GenEval's evaluator in `/datasets/mmolefe/envs/geneval` (torch 1.12.1 needs its executable-stack flag cleared); BLIP-VQA with 3 question passes equals the default 8 here, since no prompt has more than 3 noun phrases | verified | the protocol's scorer section, [the probe figure](../artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png) | PRZE-1, PRZE-8 |
 | mscluster108's view of `/datasets` misses whole folders every other node sees (two R1 tile folders on 2026-11-11), and re-reading the parent does not refresh it; check a job's inputs from the node before trusting 108 | verified | `scores/rows_*_hidden_on_108.txt` under the paper-review output root | PRZE-10 |
+| CO3 at its published default (its `run_sample_co3.sh`: 6 timesteps corrected, 5 corrector steps, 3 resampling steps, λ 0.8, CFG++ 0.8) has rendered all 1,104 R1 cells, all 424 R3 cells and Figure 5's four pairs at seed 10, each from the same seed latent as the joint prompt, PoE and ours | verified | count from mscluster107, 2026-11-11 14:10; [the baselines plan](prze-review-baselines.md) | PRZE-1, step 9 |
+| Seeds 9 to 16 have no cache entry, so every review render starts from a CPU draw seeded with the seed number in fp16, byte-identical under torch 2.5.1 and 2.11; the tensors are saved under `outputs/paper_review/latents/` | verified | `scripts/review_seed_latents.py`, one md5 per seed in both environments, 2026-11-11 | protocol rule 2 |
+| ToMe's official code (github.com/hutaihang/ToMe, commit `f256a49a`) does not import: its requirements leave `huggingface_hub` unpinned, and diffusers 0.28 fails against 0.36; ToMe is dropped and the paper states the limit | verified | Slurm 84580's log, 2026-11-11 | PRZE-1 |
+| CO3 takes 39 to 42 s per image on an RTX 3090 and 44 to 64 s on an RTX 8000; it does not load under `co3_bw` because that environment has no xformers | measured | `eval_eval-co3-*.log` and `co3_tail2way_*.log` under `outputs/paper_review/logs/` | PRZE-10 |
+| mscluster84's view of `/datasets` also lags: it counted 35 CO3 tiles missing that mscluster48, 107 and 108 all see; count outputs from a node that did not write them | verified | `ls` of `co3_default/r1/a_elephant__x__a_brown_car/seed09` from four nodes, 2026-11-11 14:08 | every count |
 
 ## What you will achieve
 
@@ -95,7 +100,7 @@ Navigation: ⬅️ [Previous](#what-we-know-so-far) | 📋 [TOC](#table-of-conte
 
 Navigation: ⬅️ [Previous](#what-you-will-achieve) | 📋 [TOC](#table-of-contents) | [Next](#schedule) ➡️
 
-▶ **Proposed (no curated flow fits; steps 2 to 13 settle one per round):** `1 check the ground → 2 write the protocol and the layout sheet → 3 submerge the eleven gap words (the diagram gate now, the journey builds in the background) → 4 choose the held-out set → 5 the compute plan and the first GPU jobs ‖ 6 draw the evaluation pipeline → 7 read the benchmark papers together → 8 corrector proof and six-column figure → 9 scores → 10 SD 1.5 set and its ceiling test → 11 three-concept test → 12 gated trainings → 13 revise the paper and fill the slots → 14 draft the replies → 15 explain it back` (steps 6 and 7 are walks, so they run one after the other while the GPU jobs from step 5 work)
+▶ **Proposed (no curated flow fits; steps 2 to 13 settle one per round):** `1 check the ground → 2 write the protocol and the layout sheet → 3 submerge the eleven gap words (the diagram gate now, the journey builds in the background) → 4 choose the held-out set → 5 the compute plan and the first GPU jobs ‖ 6 draw the evaluation pipeline → 7 read the benchmark papers together → 8 corrector proof and six-column figure → 8b the CO3 baseline renders → 9 scores → 10 SD 1.5 set and its ceiling test → 11 three-concept test → 12 gated trainings → 13 revise the paper and fill the slots → 14 draft the replies → 15 explain it back` (steps 6 and 7 are walks, so they run one after the other while the GPU jobs from step 5 work)
 
 ## Schedule
 
@@ -850,6 +855,18 @@ from the frozen settings. You judge from the table and the figure.
 - [ ] **Gate:** you see the Gaussian check's pass or miss line before the drivers are built.
 - **Leaves:** the six-column figure and the chosen c and k
 - **Learning path:** gloss only, [Langevin](/home/molef/Obsidian/Mathematics/Statistics/Markov%20Chain%20Monte%20Carlo/Langevin%20Dynamics.md#where-to-learn-this).
+
+### 8b. 🧪 Render the CO3 baseline on R1, R3 and Figure 5
+
+You ~90 min (measured) · AI ~4 h of rendering on eight cards (measured) · Opus, medium · moves: PRZE-1
+
+**Objective:** CO3 at its published default renders every R1 and R3 cell and Figure 5's four pairs from the same seed latent as the other methods; ToMe and SuperDiff are tried and left out with their reasons recorded.
+**Outcome:** 1,104 R1 and 424 R3 CO3 tiles with rule 9 sidecars under `outputs/paper_review/co3_default/`, rows 7 and 8 of [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs), and the row builder that step 9 reads them with.
+**Serves:** the CO3 row of R1 and R3 and the CO3 column of Figure 5.
+**Plan:** [the baselines plan](prze-review-baselines.md) · **Walk map:** `artifacts/drips/review-baselines/EXECUTE_WALK.md`
+
+- [x] **Gate:** you say yes to each launch command. ✓ confirmed by hand 2026-11-11: every launch in the walk map followed a yes
+- **Leaves:** the CO3 tiles and logs, `scripts/review_baseline_cell.py`, `scripts/review_baselines_eval.sh`, `scripts/review_baselines_co3_tail.sh`
 
 ### 9. 🧪 Score every image and build the tables
 
