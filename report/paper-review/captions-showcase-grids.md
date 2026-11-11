@@ -1,0 +1,32 @@
+# Captions for the appendix render grids
+
+Draft captions and the sentences that point to them, for route step 13 to place in the paper. Every grid starts each row from the same noise for all methods except where marked, and each caption says how its rows were chosen (protocol rule 5). The figures live in `artifacts/results/`; the BLIP-VQA values behind the choices are in `scores/scores_long.csv` and stay out of the figures.
+
+## Where our method does best (two figures)
+
+Files: `how-the-adapter-scores-against-other-methods/best-cases-held-out.pdf` and `best-cases-benchmark.pdf`.
+
+> **Figure A.** Where our method does best. Rows are the two pairs in each held-out group (left: hard, easy but unseen, not competing) and each benchmark set (right: animals, animals with objects, objects) on which our method scored highest under an automatic two-object check, each at its best seed. None of these pairs was trained on. Columns start from the same noise.
+
+Pointing sentence for the main text: *Appendix Figure A shows the held-out and benchmark pairs on which the adapter does best; on these it draws both named things where the plain product drops or fuses one.*
+
+## Where our method fails (two figures)
+
+Files: `how-the-adapter-scores-against-other-methods/worst-cases-held-out.pdf` and `worst-cases-benchmark.pdf`.
+
+> **Figure B.** Where our method fails. Rows are the two pairs per held-out group and benchmark set on which our method scored lowest under the same check, each at its worst seed. Our method drops one of the two things or draws the wrong species (two cows for "a cow and a horse"); CO3 keeps both on most of these rows.
+
+Pointing sentence for the main text: *Appendix Figure B shows where the adapter fails: on these pairs it loses one object or substitutes a species, and CO3, which spends 260 network evaluations per image against our 150, often keeps both.*
+
+## The render grids behind the tables
+
+> **R4.** Every SDXL method on the held-out pairs. For each held-out group, the pair and seed where our method scored highest under the two-object check and the one where it scored lowest. † PoE + Langevin runs on a labelled subset.
+
+> **R12.** Every SDXL method on the benchmark prompts. For each benchmark set, the prompt and seed where our method scored highest and the one where it scored lowest. † PoE + Langevin runs on the animals set only.
+
+> **R10.** The adapter's window. R4's rows with the adapter off (the plain product), applied on steps 0 to 10, on steps 0 to 25 and on all 50 steps.
+
+## Still to settle
+
+- The NFE figure in Figure B's pointing sentence: 150 for ours is inferred from 50 steps with three U-Net rows per step, not counted; CO3's 260 is counted. Count ours before quoting it, or drop the clause.
+- PoE + Langevin's column in Figures A and B fills as `langevin_extra/` and the subset finish; a cell it never reaches stays grey and needs the dagger.
