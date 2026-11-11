@@ -11,6 +11,7 @@
 | 2026-11-10 | 1 | 0 | 9 | 3 | 0 | 0 | [board](board-2026-11-10-step-1.png) |
 | 2026-11-10 | 2 | 0 | 7 | 5 | 0 | 0 | [board](board-2026-11-10-step-2.png) |
 | 2026-11-10 | 4 | 0 | 6 | 6 | 0 | 0 | [board](board-2026-11-10-step-4.png) |
+| 2026-11-11 | 8 | 0 | 5 | 7 | 0 | 0 | [board](board-2026-11-11-step-8.png) |
 
 ## Row changes
 
@@ -30,3 +31,4 @@
 | 2026-11-11 | 2, 3 | ToMe dropped from SDXL; the starting latent for seeds 9 to 16 named as the seeded CPU draw wave 1 used; CO3 and SuperDiff grids, the winning rule and the tuning seeds 9 to 12 written; SuperDiff's knob changed from its mixing rule to step count and κ clamp | ToMe's official code did not import within its 30 minutes (your call, `drop tome`); the cache has no entry for seeds 9 to 16; our SuperDiff has only AND; 16 cells by your call to halve the grid's cost; written before any tuning image |
 | 2026-11-11 | 3 | CO3 and SuperDiff run at their published defaults only; their tuning grids and winning rule removed | your call, to spend the compute on the evaluation rather than on tuning; the reply to PrzE says these baselines ran at their authors' settings; decided before any tuning or evaluation image |
 | 2026-11-11 | 6, and the R1 bar | no table carries an NFE column; the ours-minus-PoE line is not printed in R1 (the bar is still computed and its verdict reported in the finding) | your call: reviewers will not look for either in the tables; decided before any R1 table was built |
+| 2026-11-11 | 2, 3 | SuperDiff removed from every table and figure | your call: it does not claim to fix hybrids, so it is not a baseline for composition; decided before any SuperDiff image was scored |
