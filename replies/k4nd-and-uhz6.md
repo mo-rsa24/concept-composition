@@ -68,6 +68,10 @@ image quality by CLIP score and ImageReward [TODO: slot R1].
 Table 2 scores the 53 held-out pairs listed in Appendix C.2, grouped as hard, easy but unseen, and
 not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO: slot R3].
 
+The held-out pairs are listed in Appendix C.2 and the training pairs in our reply to Reviewer UHz6.
+The submission said that no held-out concept appears in training; that holds for the four pairs of
+Figure 5, and Section 4 now says the held-out pairs are unseen as pairs.
+
 The failure types the reviewer names (substituted identities, additional objects, style-dependent
 loss) are counted per setting in the appendix [TODO: slot R9].
 
@@ -83,7 +87,7 @@ Section 4 now states the training loss as Equation 12: the squared error between
 composition and the joint-prompt prediction, over the cached states of every training pair and
 seed at the first ten of the 50 sampling steps, with each step's term weighted by
 $(1-\bar\alpha_t)/\bar\alpha_t$ divided by its mean over the 50-step grid. The training diagram
-is removed until its notation matches Equation 12.
+is removed, since Equation 12 now states the objective in the main text.
 
 **Evaluations described as returning the correction**
 
@@ -104,6 +108,7 @@ itself. The reference that printed as "Figure 10" is removed.
 
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
+Section 4 now describes the training data and how pairs were chosen (Figure 8).
 Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
@@ -117,7 +122,8 @@ picked by rule (Tables 1 and 2).
 
 Every column of Figure 5 now starts from the same latent at the same seed, and the caption and
 Section 4.1 say so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
-seed, as in its released code.
+seed, as in its released code. Tables 1 and 2 make the comparison over 4 and 8 seeds, with the
+images behind them in the appendix.
 
 ### Q1: evidence that the residual measures plurality
 
@@ -132,7 +138,8 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3].
+Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3]. The identity errors, additional
+objects and style-dependent failures are counted per setting in the appendix [TODO: slot R9].
 
 ### Q3: pairs retained when only CO3 succeeds
 
