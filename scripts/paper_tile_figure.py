@@ -12,7 +12,8 @@ The spec:
     {"width_in": 4.95,
      "groups": [{"title": "Rank", "columns": ["rank 8", "rank 16"]}, ...],   title may be ""
      "rows": [{"label": "seed 9", "tiles": ["path.png", null, ...]}, ...],   null draws a
-     "pending": "result pending"}                                             labelled grey tile
+     "pending": "result pending",                                             labelled grey tile
+     "panel": "(a)"}   optional panel letter, 9 pt bold, top left
 """
 from __future__ import annotations
 
@@ -71,6 +72,9 @@ def main() -> int:
             fig.add_artist(plt.Line2D([x0 / W, x1 / W], [1 - TITLE_PT * 1.35 / 72 / H] * 2,
                                       color="0.35", linewidth=0.5))
         x += GROUP_GAP_IN - TILE_GAP_IN
+    if spec.get("panel"):  # a panel letter, top left, in the header band
+        fig.text(0.0, 1 - TITLE_PT * 0.7 / 72 / H, spec["panel"], ha="left", va="center",
+                 fontsize=TITLE_PT, weight="bold")
     for i, r in enumerate(rows):
         y = head + i * (tile + TILE_GAP_IN)
         fig.text(0.0, 1 - (y + tile / 2) / H, r["label"], ha="left", va="center", fontsize=LABEL_PT,
