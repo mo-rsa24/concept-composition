@@ -710,10 +710,7 @@ value projections of every cross-attention of layer of Stable Diffusion XL \cite
 model's existing weights frozen. This LoRA module is denoted by $\epsilon_{\theta,\psi}$ with $\psi$ as the LoRA parameters. In these layers, queries are computed from
 the latent, while keys and values are computed from the prompt
 tokens. The module is trained to output the plurality correction for a given latent representation. If the module successfully learns the abstract notion of plurality, then it can be included during inference time with the usual PoE denoising step such that a joint prompt is not needed. During training, the joint prompt provides the target. Each network evaluation takes a latent $x_t$, its timestep
-$t$, and one prompt, and returns the predicted correction defined in Equation~\ref{eq:interaction-term}. The adapted composition $\hat\epsilon^\psi_{\mathrm{PoE}}$ uses
-separate predictions under $c_1$, $c_2$, and the null prompt. It
-combines them using the same guided product-of-experts rule as
-the unadapted model with the estimated correction term as shown in Figure~\ref{eq:corrected-sampler}.
+$t$ and one prompt, and returns a noise prediction, as the frozen model does. At inference the sampler uses the adapted composition $\hat\epsilon^\psi_{\mathrm{PoE}}$ directly, combining the three adapted predictions under $c_1$, $c_2$ and the null prompt with the same guided product-of-experts rule (Equation~\ref{eq:adapted-poe}), so it needs three predictions per step and never the joint prompt. The correction is implicit: it is the difference from the unadapted composition, written $\hat r_\psi$ in Equation~\ref{eq:corrected-sampler-learned} so it can be compared with $r_t$, and Equation~\ref{eq:corrected-sampler-learned} at $\lambda=1$ is the adapted composition itself.
 
 
 
