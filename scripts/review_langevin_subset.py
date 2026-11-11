@@ -36,6 +36,23 @@ C, K = 3.0, 20
 HARD = [("a cow", "a horse"), ("a seal", "a walrus"), ("a suitcase", "a desk fan")]
 
 
+def make_dir(d: Path, tries: int = 10) -> None:
+    """mkdir that survives two cards creating one folder at once over NFS.
+
+    A node's cached view can say "File exists" and "No such file" for the same folder for a while;
+    waiting and re-reading the parent refreshes it.
+    """
+    for i in range(tries):
+        try:
+            d.mkdir(parents=True, exist_ok=True)
+            return
+        except (FileExistsError, FileNotFoundError) as e:
+            print(f"{d}: {type(e).__name__} on try {i + 1}, waiting 15 s", flush=True)
+            time.sleep(15)
+            os.listdir(d.parent.parent)
+    d.mkdir(parents=True, exist_ok=True)
+
+
 def cells() -> list[tuple[str, str, int, str]]:
     rows = [l.strip().split("|") for l in open(HERE / "review_benchmark_pairs.txt")
             if l.strip() and not l.startswith("#")]
@@ -85,7 +102,7 @@ def main() -> int:
                                scheduler=ctx.scheduler, guidance_scale=ctx.guidance_scale,
                                num_inference_steps=n, height=cell.height, width=cell.width,
                                euler_init_noise_sigma=sigma, device=ctx.device, dtype=ctx.dtype)
-        out.parent.mkdir(parents=True, exist_ok=True)
+        make_dir(out.parent)
         write_decoded_image(res.image, out)
         out.with_suffix(".json").write_text(json.dumps({
             "model": "SDXL", "method": "poe_langevin", "adapter": None, "sampler": "DDIM", "steps": n,
