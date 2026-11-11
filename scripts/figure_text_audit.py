@@ -59,13 +59,23 @@ def resolve(root: Path, name: str) -> Path | None:
 
 
 def pdf_sizes(p: Path, printed_pt: float) -> list[float]:
-    html = subprocess.run(["pdftotext", "-bbox", str(p), "-"], capture_output=True, text=True).stdout
+    """One size per word: the height of its line's box. A line whose longest word (three or
+    more letters) has a box much taller than wide is set on its side, so its size is the line box's width."""
+    html = subprocess.run(["pdftotext", "-bbox-layout", str(p), "-"], capture_output=True, text=True).stdout
     page = re.search(r'<page width="([0-9.]+)"', html)
     if not page:
         return []
     scale = printed_pt / float(page.group(1))
-    return [(float(y2) - float(y1)) * scale
-            for y1, y2 in re.findall(r'<word xMin="[0-9.]+" yMin="([0-9.]+)" xMax="[0-9.]+" yMax="([0-9.]+)">', html)]
+    num = r'"([0-9.]+)"'
+    sizes = []
+    for x1, y1, x2, y2, body in re.findall(rf'<line xMin={num} yMin={num} xMax={num} yMax={num}>(.*?)</line>', html, re.S):
+        w, h = float(x2) - float(x1), float(y2) - float(y1)
+        words = [(float(a) - float(b), float(c) - float(d), t) for b, d, a, c, t in
+                 re.findall(rf'<word xMin={num} yMin={num} xMax={num} yMax={num}>([^<]*)</word>', body)]
+        long = [wd for wd in words if len(wd[2]) >= 3]  # a digit is taller than wide upright too
+        on_side = bool(long) and max(long, key=lambda wd: len(wd[2]))[1] > 1.5 * max(long, key=lambda wd: len(wd[2]))[0]
+        sizes += [(w if on_side else h) * scale] * len(words)
+    return sizes
 
 
 def raster_sizes(p: Path, printed_pt: float) -> list[float]:

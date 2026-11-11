@@ -39,6 +39,9 @@ from matplotlib.patches import FancyArrowPatch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import later_start_grid as g
+from paper_font import use_paper_font
+
+use_paper_font()
 from poe_repair.experiments.interaction_term import window_grid as wg
 
 FIG_DIR = Path("paper/iclr/figures/when-the-correction-arrives")

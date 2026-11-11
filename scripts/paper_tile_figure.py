@@ -43,7 +43,7 @@ def main() -> int:
     plt.rcParams.update({"font.family": "serif", "font.serif": [FONT], "pdf.fonttype": 42})
     groups, rows = spec["groups"], spec["rows"]
     ncol = sum(len(g["columns"]) for g in groups)
-    label_w = max(len(r["label"].split("\n")[0]) for r in rows) * LABEL_PT * 0.42 / 72 + 0.06
+    label_w = max(len(line) for r in rows for line in r["label"].split("\n")) * LABEL_PT * 0.42 / 72 + 0.06
     usable = spec["width_in"] - label_w - TILE_GAP_IN * (ncol - len(groups)) - GROUP_GAP_IN * (len(groups) - 1)
     tile = usable / ncol
     has_titles = any(g["title"] for g in groups)

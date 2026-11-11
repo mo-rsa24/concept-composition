@@ -36,6 +36,9 @@ from poe_repair import paths
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import later_start_grid as g
+from paper_font import use_paper_font
+
+use_paper_font()
 
 FIG_DIR = Path("paper/iclr/figures")
 FIG_NAME = "where-the-correction-lands"
@@ -54,7 +57,7 @@ NUM_BAND = 0.14       # the window ranges over (a)
 CAPTION_BAND = 0.20
 LEGEND_BAND = 0.17
 BOTTOM_PAD = 0.04
-FONT, TICK = 8, 6.5
+FONT, TICK = 8, 8
 INK = g.INK
 
 
