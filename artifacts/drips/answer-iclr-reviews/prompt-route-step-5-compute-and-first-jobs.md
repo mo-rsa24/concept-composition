@@ -70,6 +70,9 @@ Wave 1 (no gate blocks these)
 1. Ours on R1: 1,104 images. Joint and PoE on R1: 1,104 each.
 2. Ours on R3: 424 images (joint and PoE already exist from the census).
 3. Ours, joint and PoE on Figure 5's four rows at seed 10 where not already rendered.
+4. Ours over steps 0 to 10 and over steps 0 to 25 only (the product alone after that) on the 53
+   held-out pairs at seeds 9 to 16: 424 images each, 848 in all. This is the early-steps test that
+   feeds the failure-type figure R9 and opens or closes step 12's early-only training.
 Later waves: baselines after their code and tuning grid (steps 6 and 7), the samplers after the
 two-Gaussian proof (step 8), SD 1.5 (step 10), three concepts (step 11), gated trainings (step 12).
 
@@ -96,7 +99,7 @@ What to hand back
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md.
 - Proof: for each wave 1 job, pgrep on the node shows it running, nvidia-smi shows its memory, and
   the output count matches the plan's expected count by the time it finishes (1,104, 1,104, 1,104,
-  424, and Figure 5's missing tiles).
+  424, Figure 5's missing tiles, and 848 for the early-steps test).
 
 What you will see
 Along the way: the plan table, then each job's prediction and launch command, then each job's first
@@ -106,4 +109,5 @@ finished with its output count matching the plan. You judge from the table and t
 ```
 
 - `added:` the main-table and ablation image counts (from `protocol.md` rule 4 and `layout-sheet.md` R1 and R3) · `added:` the census renders to reuse (from the step 4 retro) · `added:` the adapter of record (from `adapter_of_record.yaml`) · `added:` the allocation's end time (from `squeue`, 2026-11-11) · `added:` protocol rule 9's columns
+- `added:` the early-steps test as wave 1 job 4 (the route's job 2; step 12's gate reads it)
 - `dropped:` the old job 1 of 960 images and the SD 1.5, sampler and three-concept rows from wave 1 (why: each waits on a later step's gate; they stay in the compute plan as later waves)
