@@ -685,22 +685,10 @@ The experiments above obtain $r_t$ from the joint prompt. We now consider whethe
 \smallskip
 \reviewslot{R1}{\linewidth}{1.8in}
 
-\medskip
-\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide.}
-\label{tab:review-R3}
-\smallskip
-\reviewslot{R3}{\linewidth}{1.3in}
 \end{table}
 
 
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{ablation/adapter-limitations-stacked.pdf}
-\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
-and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
-\label{fig:joint-prompt-through-adapter}
-\end{figure}
 
 
 
@@ -828,7 +816,7 @@ between the training target and the prediction used during sampling.
 
 \subsection{Results}
 \label{sec:results}
-We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Tables~\ref{tab:review-R1} and~\ref{tab:review-R3} score every image, and the appendix shows the renders behind them.
+We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Table~\ref{tab:review-R1} and Table~\ref{tab:review-R3} (Appendix~\ref{app:review-held-out}) score every image, and the appendix shows the renders behind them. On the 53 held-out pairs of Table~\ref{tab:review-R3}, the adapter raises the product's BLIP-VQA on the pairs that are easy for the joint prompt but unseen in training, leaves the pairs that do not compete unchanged, and the three hard pairs are too few to separate the methods.
 
 
 
@@ -889,7 +877,7 @@ We also conduct a sensitivity analysis on the one hyper-parameter our method int
 % \end{figure}
 
 
-Finally, we report two limitation to our approach which should be noted and are demonstrated in Figure~\ref{fig:joint-prompt-through-adapter}. Firstly, we consider the effect of applying our LoRA module to a joint prompt. This test whether it can be applied to Stable Diffusion XL as a general property or if it should be used precisely during PoE. We see that the LoRA can change the output from joint prompting and it is not consistently better. For example, the cat and dog image is slightly corrupted and in the tiger and dog pairing it introduces a third animal which itself is a hybrid. However, in the case where the joint prompt fails such as the chessboard and hourglass the LoRA actually improved the image. For easy pairs it seems to have little impact on joint prompting, for example in the picnic basket and watermelon case. Thus, the LoRA module can introduce some instability during joint promting and should not be used for all image generations. Our LoRA-augmented PoE can also produce nonsensical which typically correspond to intrusion of new animals. For example, when prompted for a dog and a cat it produces a horse and a dog or a person with a dog. Another example introduces a third smaller cat into frame with a dog and a cat, showing that while the LoRA has learned plurality it is not necessarily counting. Finally, if the seed would typically produce a highly stylized image such as a line drawing or artwork the LoRA does not inject plurality. Thus, the LoRA is particularly useful for realistic styles where object positioning and scene structure is a more strict requirement. However, for styles where hybrid animals are more tolerable the LoRA sometimes does not change the final output.
+Finally, we report two limitation to our approach which should be noted and are demonstrated in Figure~\ref{fig:joint-prompt-through-adapter} (Appendix~\ref{app:limitations}). Firstly, we consider the effect of applying our LoRA module to a joint prompt. This test whether it can be applied to Stable Diffusion XL as a general property or if it should be used precisely during PoE. We see that the LoRA can change the output from joint prompting and it is not consistently better. For example, the cat and dog image is slightly corrupted and in the tiger and dog pairing it introduces a third animal which itself is a hybrid. However, in the case where the joint prompt fails such as the chessboard and hourglass the LoRA actually improved the image. For easy pairs it seems to have little impact on joint prompting, for example in the picnic basket and watermelon case. Thus, the LoRA module can introduce some instability during joint promting and should not be used for all image generations. Our LoRA-augmented PoE can also produce nonsensical which typically correspond to intrusion of new animals. For example, when prompted for a dog and a cat it produces a horse and a dog or a person with a dog. Another example introduces a third smaller cat into frame with a dog and a cat, showing that while the LoRA has learned plurality it is not necessarily counting. Finally, if the seed would typically produce a highly stylized image such as a line drawing or artwork the LoRA does not inject plurality. Thus, the LoRA is particularly useful for realistic styles where object positioning and scene structure is a more strict requirement. However, for styles where hybrid animals are more tolerable the LoRA sometimes does not change the final output.
 
 
 % \begin{figure}[!htbp]
@@ -1324,6 +1312,14 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 \subsection{The held-out pairs}
 \label{app:review-held-out}
 
+\begin{table}[htbp]
+\centering\footnotesize
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide.}
+\label{tab:review-R3}
+\smallskip
+\reviewslot{R3}{\linewidth}{1.3in}
+\end{table}
+
 Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prompt composes them: hard, easy but unseen, and not competing. None of these pairs was trained on as a pair, but 30 of the 53 share a concept with a training pair (cow and horse shares the horse of horse and pig), and 6 share both concepts, each with a different training pair. Figure~\ref{fig:review-R4} shows one pair per group at seeds 9 and 10, and the list below names every pair. The full list of pairs, with the joint prompt's result on each seed, is released with the code.
 
 \begin{figure}[htbp]
@@ -1391,6 +1387,18 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 
 % C.5's last figure fills its page, so C.6 starts on a fresh one
+\subsection{Limitations}
+\label{app:limitations}
+Figure~\ref{fig:joint-prompt-through-adapter} shows the limitations discussed in Section~\ref{sec:results}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{ablation/adapter-limitations-stacked.pdf}
+\caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
+and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
+\label{fig:joint-prompt-through-adapter}
+\end{figure}
+
 \subsection{Three concepts}
 \label{app:review-three}
 
