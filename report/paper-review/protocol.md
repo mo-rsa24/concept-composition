@@ -13,7 +13,7 @@ Status: **agreed 2026-11-10.** The adapter is named in rule 1.
 | 3 | Baselines run at their published defaults, plus one tuning grid of the same size per method, tuned only on the tuning set | PrzE weakness 2 |
 | 4 | No pair the adapter trained on, no pair any tuning touched, and no pair used to choose the adapter is ever counted in a held-out rate | PrzE question 2; UHz6 on held-out pairs |
 | 5 | The images shown are picked by a rule fixed here, never by looking | UHz6 on cherry-picking |
-| 6 | Network evaluations per image are a column in every table | PrzE on cost; the Langevin corrector's price |
+| 6 | Network evaluations per image are counted on the corrector subset and stated in its caption; no table carries a column for them | the Langevin corrector's price |
 | 7 | A comparison that differs on more than one axis is marked mixed | UHz6 on CO3's own noise |
 | 8 | Every number ships with a qualitative grid from the same run | PrzE weakness 1 |
 | 9 | Every result row carries the axis values that produced it | being unable to attribute a number later |

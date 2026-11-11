@@ -8,7 +8,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 
 | Slot | What | Where | Width × height | Rows, columns, panel order | Result file | Board row | Grid it ships with (rule 8) |
 |---|---|---|---|---|---|---|---|
-| R1 | the benchmark: every SDXL method on the 276 Attend-and-Excite prompts | main, Section 4.1 | natural width, centered, at most full × 1.8 in | rows: joint, PoE, CO3, SuperDiff, PoE + Langevin†, ours, then one line, ours minus PoE in BLIP-VQA per set with its 95% interval (the protocol's bar for R1), then CO3's printed Table 1 as a grey cited row; column groups: animals (66) with Comp., CLIP, BLIP, IR; animals with objects (144) with CLIP, BLIP, IR; objects (66) with CLIP, BLIP, IR; then NFE; seeds 9 to 12; the showcase prompt "a cat and a dog" marked | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SDXL, `group` naming the set | PRZE-1 | R12 |
+| R1 | the benchmark: every SDXL method on the 276 Attend-and-Excite prompts | main, Section 4.1 | natural width, centered, at most full × 1.8 in | rows: joint, PoE, CO3, SuperDiff, PoE + Langevin†, ours, then CO3's printed Table 1 as a grey cited row; column groups: animals (66) with Comp., CLIP, BLIP, IR; animals with objects (144) with CLIP, BLIP, IR; objects (66) with CLIP, BLIP, IR; seeds 9 to 12; the showcase prompt "a cat and a dog" marked | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SDXL, `group` naming the set | PRZE-1 | R12 |
 | R5 | the benchmark on SD 1.5, each method's official code on its own model | appendix | natural width, centered, at most full × 1.8 in | rows: PoE, PoE + measured correction, [Attend-and-Excite](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/06-attend-and-excite-bringing-a-missing-subject-back.md), [SynGen](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/09-syngen-binding-by-the-prompts-grammar.md), [Divide and Bind](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/10-divide-and-bind-attendance-plus-binding.md), [InitNO](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/11-initno-choosing-the-starting-noise.md), [CONFORM](../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/07-conform-pulling-look-alike-subjects-apart.md), ours (SD 1.5 adapter, filled only if route step 12 trains it, otherwise dropped and the limit stated); R1's column groups; the caption says: "SD 1.5 methods run from their official code, which targets SD 1.x; a number compares only within its table." | `artifacts/results/how-the-adapter-scores-against-other-methods/main_table.csv`, its rows with `model` SD 1.5 | PRZE-1 | R13 |
 | R2 | Figure 5 rebuilt: four pairs, every SDXL method, one adapter, one seed | main, the current Figure 5, full width, caption below | full × 3.1 in, drawn at 5.5 in wide by `scripts/paper_tile_figure.py` | rows: cat and dog, elephant and penguin, tent and snowy mountain, lighthouse and stormy sea at the shared seed; columns: joint, PoE (Composable Diffusion), CO3, SuperDiff†, PoE + Langevin†, ours; labels 8 pt | `artifacts/results/four-pairs-one-adapter/four-pairs-one-adapter.pdf` | PRZE-3a, PRZE-8, PRZE-1 | itself |
 | R3 | the ablation: every SDXL method on the 53 held-out census pairs, by group | appendix | natural width, centered, at most full × 1.3 in | rows: R1's methods; column groups: hard (3), easy but unseen (29), not competing (21), each with Comp. ± 95% CI; seeds 9 to 16 | `artifacts/results/how-the-adapter-scores-against-other-methods/held_out_ablation.csv` | PRZE-1, PRZE-3b | R4 |
@@ -31,8 +31,8 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 From [the Codex presentation review](../../artifacts/drips/answer-iclr-reviews/routes/codex-presentation-review.md) of the stand-ins, 2026-11-10. Each is a property the final page must have.
 
 - **No production text.** Every caption is reader-facing (a bold first sentence, then what is needed to read the result), never "Reserved for"; a submission build fails on a missing slot instead of drawing a grey box.
-- **Tables as booktabs.** `\toprule`, `\midrule`, `\bottomrule`, no vertical rules, `@{}` outer padding, the caption above the table; a two-row header with `\cmidrule` over each column group (R1, R5, R3, R14); a "Method" heading on the first column; every abbreviation (Comp., CLIP, BLIP, IR, NFE, †) defined in the caption with its scale and direction.
-- **Numbers aligned and formatted per metric.** `siunitx` columns, a fixed number of decimals per metric, intervals as `0.62 ± 0.08`, NFE as a plain integer; the cited CO3 row labelled "reported" under its own rule, not grey text.
+- **Tables as booktabs.** `\toprule`, `\midrule`, `\bottomrule`, no vertical rules, `@{}` outer padding, the caption above the table; a two-row header with `\cmidrule` over each column group (R1, R5, R3, R14); a "Method" heading on the first column; every abbreviation (Comp., CLIP, BLIP, IR, †) defined in the caption with its scale and direction.
+- **Numbers aligned and formatted per metric.** `siunitx` columns, a fixed number of decimals per metric, intervals as `0.62 ± 0.08`; the cited CO3 row labelled "reported" under its own rule, not grey text.
 - **Nothing shrinks.** A table wider than the text is an error to fix by grouping or wrapping, never scaled; figure text is at least 7 pt at its printed width, in a serif face that sits with the Times body.
 - **One lettering for every figure, old and new.** All figure text, in Figures 1 to 8 as well as the new slots, prints at 8 pt for labels and 9 pt for panel titles at its printed width (never under 7 pt), in a serif face that matches the Times body (Liberation Serif or Nimbus Roman when drawn in Python), with the same names for the same methods. A figure is drawn at its final width with `figsize` in inches equal to its printed width, never drawn large and shrunk.
 - **Figures readable as printed.** Labels horizontal and short, colour never the only code (a symbol or pattern beside it, a colour-blind-safe palette), seeds labelled per column, method names identical across R1, R2, R4, R10, R11 and R12.
@@ -44,14 +44,14 @@ From [the Codex presentation review](../../artifacts/drips/answer-iclr-reviews/r
 **R1: the benchmark, SDXL** (main, centered at natural width; seeds 9 to 12)
 
 ```
-                     Animals (66)                Animals + objects (144)    Objects (66)          NFE
+                     Animals (66)                Animals + objects (144)    Objects (66)
                      Comp.  CLIP   BLIP   IR     CLIP   BLIP    IR          CLIP   BLIP   IR
-joint                ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
-PoE                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
-CO3                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
-SuperDiff            ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
-PoE + Langevin†      ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
-ours                 ..     ..     ..     ..     ..     ..      ..          ..     ..     ..     ..
+joint                ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
+PoE                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
+CO3                  ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
+SuperDiff            ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
+PoE + Langevin†      ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
+ours                 ..     ..     ..     ..     ..     ..      ..          ..     ..     ..
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 CO3, as printed in its Table 1 (cited; seeds and settings differ)      grey row
 ```
@@ -61,15 +61,15 @@ Comp. is the share of pictures showing both animals, by the validated instance c
 **R5: the benchmark, SD 1.5** (appendix, R1's columns, centered)
 
 ```
-                       Animals (66)          Animals + objects (144)   Objects (66)       NFE
-PoE                    ..                    ..                        ..                 ..
-PoE + measured corr.   ..                    ..                        ..                 ..
-Attend-and-Excite      ..                    ..                        ..                 ..
-SynGen                 ..                    ..                        ..                 ..
-Divide and Bind        ..                    ..                        ..                 ..
-InitNO                 ..                    ..                        ..                 ..
-CONFORM                ..                    ..                        ..                 ..
-ours (SD 1.5 adapter)  ..                    ..                        ..                 ..
+                       Animals (66)          Animals + objects (144)   Objects (66)
+PoE                    ..                    ..                        ..
+PoE + measured corr.   ..                    ..                        ..
+Attend-and-Excite      ..                    ..                        ..
+SynGen                 ..                    ..                        ..
+Divide and Bind        ..                    ..                        ..
+InitNO                 ..                    ..                        ..
+CONFORM                ..                    ..                        ..
+ours (SD 1.5 adapter)  ..                    ..                        ..
 ```
 
 R1 and R5 read one result file and share columns, but a number compares only within its own table, since the two run on different models (rule 7).
