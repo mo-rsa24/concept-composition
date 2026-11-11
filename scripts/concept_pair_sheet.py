@@ -46,11 +46,11 @@ NOISE_PAIR = "a_cat__x__a_dog"          # whose cached starting latent every see
 COLUMNS = ("single", "mono", "poe", "superdiff")
 
 
-def parse_pair(s: str) -> tuple[str, str]:
+def parse_pair(s: str, allow_ask_first: bool = False) -> tuple[str, str]:
     a, b = (p.strip() for p in s.split("|"))
     from disallowed_subjects import check
-    check(a)
-    check(b)
+    check(a, allow_ask_first=allow_ask_first)
+    check(b, allow_ask_first=allow_ask_first)
     return a, b
 
 
@@ -70,7 +70,8 @@ def write_sidecar(png: Path, record: dict) -> None:
     png.with_suffix(".json").write_text(json.dumps(record, indent=1))
 
 
-def render(column: str, pairs: list[tuple[str, str]], seeds: list[int], superdiff_steps: int = 200) -> None:
+def render(column: str, pairs: list[tuple[str, str]], seeds: list[int], superdiff_steps: int = 200,
+           joint_template: str | None = None) -> None:
     import torch
 
     from poe_repair.composers._helpers import encode_pair, get_joint_embeds, init_latents_for_cell
@@ -108,7 +109,7 @@ def render(column: str, pairs: list[tuple[str, str]], seeds: list[int], superdif
                 print(f"{cell.pair_slug} seed {seed} superdiff: wrote {out}", flush=True)
         return
 
-    ctx = make_ctx()
+    ctx = make_ctx(joint_template=joint_template) if joint_template else make_ctx()
     common = dict(models=ctx.models, scheduler=ctx.scheduler, guidance_scale=ctx.guidance_scale,
                   num_inference_steps=ctx.num_inference_steps, device=ctx.device, dtype=ctx.dtype)
     for a, b in pairs:
@@ -209,15 +210,19 @@ def main() -> None:
     ap.add_argument("--superdiff-steps", type=int, default=200)
     ap.add_argument("--sheet", nargs=2, type=Path, metavar=("TILES", "OUT_DIR"))
     ap.add_argument("--direct-sheet", nargs=2, type=Path, metavar=("TILES", "OUT_PNG"))
+    ap.add_argument("--joint-template", help='mono only: how the joint prompt joins the two concepts, '
+                    'e.g. "{a} with {b}" so a benchmark prompt is drawn as written (default "{a} and {b}")')
+    ap.add_argument("--allow-ask-first", action="store_true",
+                    help="pass only for subjects the pair ledger has an explicit decision for")
     args = ap.parse_args()
-    pairs = [parse_pair(p) for p in args.pairs]
+    pairs = [parse_pair(p, args.allow_ask_first) for p in args.pairs]
     if args.sheet:
         return sheet(*args.sheet, pairs, args.seeds)
     if args.direct_sheet:
         return direct_sheet(*args.direct_sheet, pairs, args.seeds)
     if not args.column:
         ap.error("give --column or --sheet")
-    render(args.column, pairs, args.seeds, args.superdiff_steps)
+    render(args.column, pairs, args.seeds, args.superdiff_steps, args.joint_template)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,278 @@
+# The 276 Attend-and-Excite prompts of data/prompt-sets/attend-and-excite/a.e_prompts.json, split at
+# ' and ' or ' with ' under protocol rule 4. One per line: concept a|concept b|connector|set.
+a elephant|a rabbit|and|animals
+a dog|a frog|and|animals
+a bird|a mouse|and|animals
+a monkey|a frog|and|animals
+a horse|a monkey|and|animals
+a bird|a turtle|and|animals
+a bird|a lion|and|animals
+a lion|a monkey|and|animals
+a horse|a turtle|and|animals
+a bird|a monkey|and|animals
+a bear|a frog|and|animals
+a bear|a turtle|and|animals
+a dog|a elephant|and|animals
+a dog|a horse|and|animals
+a turtle|a mouse|and|animals
+a cat|a turtle|and|animals
+a dog|a mouse|and|animals
+a cat|a elephant|and|animals
+a cat|a bird|and|animals
+a dog|a monkey|and|animals
+a lion|a mouse|and|animals
+a bear|a lion|and|animals
+a bird|a elephant|and|animals
+a lion|a turtle|and|animals
+a dog|a bird|and|animals
+a bird|a rabbit|and|animals
+a elephant|a turtle|and|animals
+a lion|a elephant|and|animals
+a cat|a rabbit|and|animals
+a dog|a bear|and|animals
+a dog|a rabbit|and|animals
+a cat|a bear|and|animals
+a bird|a horse|and|animals
+a rabbit|a mouse|and|animals
+a bird|a bear|and|animals
+a bear|a monkey|and|animals
+a horse|a frog|and|animals
+a cat|a horse|and|animals
+a frog|a rabbit|and|animals
+a bear|a mouse|and|animals
+a monkey|a rabbit|and|animals
+a cat|a dog|and|animals
+a lion|a frog|and|animals
+a frog|a mouse|and|animals
+a dog|a lion|and|animals
+a lion|a rabbit|and|animals
+a elephant|a frog|and|animals
+a frog|a turtle|and|animals
+a cat|a lion|and|animals
+a horse|a rabbit|and|animals
+a cat|a monkey|and|animals
+a bear|a rabbit|and|animals
+a turtle|a rabbit|and|animals
+a elephant|a monkey|and|animals
+a bird|a frog|and|animals
+a lion|a horse|and|animals
+a bear|a horse|and|animals
+a bear|a elephant|and|animals
+a horse|a mouse|and|animals
+a dog|a turtle|and|animals
+a monkey|a mouse|and|animals
+a cat|a frog|and|animals
+a monkey|a turtle|and|animals
+a horse|a elephant|and|animals
+a cat|a mouse|and|animals
+a elephant|a mouse|and|animals
+a horse|a glasses|with|animals_objects
+a bear|a glasses|with|animals_objects
+a monkey|a red car|and|animals_objects
+a elephant|a bow|with|animals_objects
+a frog|a purple balloon|and|animals_objects
+a mouse|a bow|with|animals_objects
+a bird|a crown|with|animals_objects
+a turtle|a yellow bowl|and|animals_objects
+a rabbit|a gray chair|and|animals_objects
+a dog|a black apple|and|animals_objects
+a rabbit|a white bench|and|animals_objects
+a lion|a yellow clock|and|animals_objects
+a turtle|a gray backpack|and|animals_objects
+a elephant|a green balloon|and|animals_objects
+a monkey|a orange apple|and|animals_objects
+a lion|a red car|and|animals_objects
+a lion|a crown|with|animals_objects
+a bird|a purple bench|and|animals_objects
+a rabbit|a orange backpack|and|animals_objects
+a rabbit|a orange apple|and|animals_objects
+a monkey|a green bowl|and|animals_objects
+a frog|a red suitcase|and|animals_objects
+a monkey|a green balloon|and|animals_objects
+a cat|a glasses|with|animals_objects
+a bear|a blue clock|and|animals_objects
+a cat|a gray bench|and|animals_objects
+a bear|a crown|with|animals_objects
+a lion|a bow|with|animals_objects
+a bear|a red balloon|and|animals_objects
+a bird|a black backpack|and|animals_objects
+a horse|a pink balloon|and|animals_objects
+a turtle|a yellow car|and|animals_objects
+a lion|a glasses|with|animals_objects
+a cat|a yellow balloon|and|animals_objects
+a horse|a yellow clock|and|animals_objects
+a dog|a glasses|with|animals_objects
+a horse|a blue backpack|and|animals_objects
+a frog|a bow|with|animals_objects
+a elephant|a glasses|with|animals_objects
+a mouse|a red bench|and|animals_objects
+a bird|a brown balloon|and|animals_objects
+a monkey|a yellow backpack|and|animals_objects
+a turtle|a pink balloon|and|animals_objects
+a cat|a red apple|and|animals_objects
+a monkey|a brown bench|and|animals_objects
+a rabbit|a glasses|with|animals_objects
+a bear|a gray bench|and|animals_objects
+a turtle|a blue clock|and|animals_objects
+a monkey|a blue chair|and|animals_objects
+a turtle|a blue chair|and|animals_objects
+a dog|a bow|with|animals_objects
+a elephant|a black chair|and|animals_objects
+a mouse|a purple chair|and|animals_objects
+a bear|a white car|and|animals_objects
+a lion|a black backpack|and|animals_objects
+a dog|a crown|with|animals_objects
+a horse|a green apple|and|animals_objects
+a dog|a gray clock|and|animals_objects
+a dog|a purple car|and|animals_objects
+a dog|a gray bowl|and|animals_objects
+a monkey|a bow|with|animals_objects
+a mouse|a blue clock|and|animals_objects
+a bird|a black bowl|and|animals_objects
+a horse|a white car|and|animals_objects
+a mouse|a pink apple|and|animals_objects
+a bear|a orange backpack|and|animals_objects
+a elephant|a yellow clock|and|animals_objects
+a bird|a green chair|and|animals_objects
+a mouse|a black balloon|and|animals_objects
+a turtle|a white bench|and|animals_objects
+a bird|a bow|with|animals_objects
+a turtle|a crown|with|animals_objects
+a bird|a yellow car|and|animals_objects
+a frog|a orange car|and|animals_objects
+a dog|a pink bench|and|animals_objects
+a frog|a crown|with|animals_objects
+a frog|a green bowl|and|animals_objects
+a frog|a pink bench|and|animals_objects
+a horse|a bow|with|animals_objects
+a bird|a yellow apple|and|animals_objects
+a monkey|a crown|with|animals_objects
+a cat|a blue backpack|and|animals_objects
+a turtle|a pink apple|and|animals_objects
+a dog|a orange chair|and|animals_objects
+a horse|a green suitcase|and|animals_objects
+a elephant|a crown|with|animals_objects
+a monkey|a orange suitcase|and|animals_objects
+a turtle|a orange suitcase|and|animals_objects
+a lion|a gray apple|and|animals_objects
+a mouse|a crown|with|animals_objects
+a mouse|a glasses|with|animals_objects
+a horse|a brown bowl|and|animals_objects
+a monkey|a yellow clock|and|animals_objects
+a turtle|a bow|with|animals_objects
+a dog|a brown backpack|and|animals_objects
+a cat|a purple bowl|and|animals_objects
+a lion|a white bench|and|animals_objects
+a rabbit|a blue bowl|and|animals_objects
+a lion|a brown balloon|and|animals_objects
+a horse|a pink chair|and|animals_objects
+a elephant|a green bench|and|animals_objects
+a rabbit|a white balloon|and|animals_objects
+a elephant|a pink backpack|and|animals_objects
+a lion|a orange suitcase|and|animals_objects
+a elephant|a orange apple|and|animals_objects
+a elephant|a green suitcase|and|animals_objects
+a horse|a crown|with|animals_objects
+a bear|a bow|with|animals_objects
+a rabbit|a yellow suitcase|and|animals_objects
+a horse|a blue bench|and|animals_objects
+a dog|a green suitcase|and|animals_objects
+a mouse|a red car|and|animals_objects
+a cat|a black chair|and|animals_objects
+a bear|a red suitcase|and|animals_objects
+a rabbit|a gray clock|and|animals_objects
+a bear|a pink apple|and|animals_objects
+a lion|a white chair|and|animals_objects
+a rabbit|a crown|with|animals_objects
+a mouse|a purple bowl|and|animals_objects
+a frog|a black apple|and|animals_objects
+a rabbit|a bow|with|animals_objects
+a mouse|a pink suitcase|and|animals_objects
+a lion|a pink bowl|and|animals_objects
+a frog|a black chair|and|animals_objects
+a frog|a green clock|and|animals_objects
+a bear|a white chair|and|animals_objects
+a elephant|a brown car|and|animals_objects
+a turtle|a glasses|with|animals_objects
+a cat|a black suitcase|and|animals_objects
+a cat|a yellow car|and|animals_objects
+a frog|a yellow backpack|and|animals_objects
+a bird|a black suitcase|and|animals_objects
+a cat|a crown|with|animals_objects
+a rabbit|a yellow car|and|animals_objects
+a cat|a bow|with|animals_objects
+a bird|a white clock|and|animals_objects
+a cat|a green clock|and|animals_objects
+a bear|a purple bowl|and|animals_objects
+a monkey|a glasses|with|animals_objects
+a frog|a glasses|with|animals_objects
+a elephant|a green bowl|and|animals_objects
+a bird|a glasses|with|animals_objects
+a dog|a blue balloon|and|animals_objects
+a mouse|a brown backpack|and|animals_objects
+a pink crown|a purple bow|and|objects
+a blue clock|a blue apple|and|objects
+a blue balloon|a orange bench|and|objects
+a pink crown|a red chair|and|objects
+a orange chair|a blue clock|and|objects
+a purple bowl|a black bench|and|objects
+a green glasses|a black crown|and|objects
+a purple chair|a red bow|and|objects
+a yellow glasses|a black car|and|objects
+a orange backpack|a purple car|and|objects
+a white balloon|a white apple|and|objects
+a brown suitcase|a black clock|and|objects
+a yellow backpack|a purple chair|and|objects
+a gray backpack|a green clock|and|objects
+a blue crown|a red balloon|and|objects
+a gray suitcase|a black bowl|and|objects
+a brown balloon|a pink car|and|objects
+a black backpack|a green bow|and|objects
+a blue balloon|a blue bow|and|objects
+a white bow|a white car|and|objects
+a orange bowl|a purple apple|and|objects
+a brown chair|a white bench|and|objects
+a purple crown|a blue suitcase|and|objects
+a yellow bow|a orange bench|and|objects
+a yellow glasses|a brown bow|and|objects
+a red glasses|a red suitcase|and|objects
+a pink bow|a gray apple|and|objects
+a gray crown|a white clock|and|objects
+a black car|a white clock|and|objects
+a brown bowl|a green clock|and|objects
+a green backpack|a yellow crown|and|objects
+a orange glasses|a pink clock|and|objects
+a purple chair|a orange bowl|and|objects
+a orange suitcase|a brown bench|and|objects
+a white glasses|a orange balloon|and|objects
+a yellow backpack|a gray apple|and|objects
+a green bench|a red apple|and|objects
+a gray backpack|a yellow glasses|and|objects
+a green glasses|a yellow chair|and|objects
+a white glasses|a gray apple|and|objects
+a gray suitcase|a brown bow|and|objects
+a white car|a black bowl|and|objects
+a purple car|a pink apple|and|objects
+a gray crown|a purple apple|and|objects
+a orange car|a red bench|and|objects
+a red suitcase|a blue apple|and|objects
+a red backpack|a yellow bowl|and|objects
+a red bench|a yellow clock|and|objects
+a black backpack|a pink balloon|and|objects
+a blue suitcase|a gray balloon|and|objects
+a yellow glasses|a gray bowl|and|objects
+a white suitcase|a white chair|and|objects
+a purple crown|a blue bench|and|objects
+a yellow bow|a pink bowl|and|objects
+a green backpack|a brown suitcase|and|objects
+a green glasses|a black bench|and|objects
+a white bow|a black clock|and|objects
+a red crown|a black bowl|and|objects
+a green chair|a purple car|and|objects
+a white chair|a gray balloon|and|objects
+a pink chair|a gray apple|and|objects
+a yellow suitcase|a yellow car|and|objects
+a green backpack|a purple bench|and|objects
+a black crown|a red car|and|objects
+a green balloon|a pink bowl|and|objects
+a purple balloon|a white clock|and|objects

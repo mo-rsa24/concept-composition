@@ -43,13 +43,13 @@ LABELS = {"mono": "joint prompt", "poe": "plain product", "ours": "ours",
           "monolora": "joint prompt through the adapter"}
 
 
-def parse_pair(s: str) -> tuple[str, str]:
+def parse_pair(s: str, allow_ask_first: bool = False) -> tuple[str, str]:
     a, b = (p.strip() for p in s.split("|"))
     # The subject lists are a hard constraint of this project, and a render path that skips the
     # check is how a refused subject reaches a sheet anyway.
     from disallowed_subjects import check
-    check(a)
-    check(b)
+    check(a, allow_ask_first=allow_ask_first)
+    check(b, allow_ask_first=allow_ask_first)
     return a, b
 
 
@@ -262,8 +262,10 @@ if __name__ == "__main__":
     ap.add_argument("--guidance-window", type=int, nargs=2, default=(0, 12), metavar=("LO", "HI"),
                     help="the steps the guidance runs over; composition is decided early")
     ap.add_argument("--sheet", action="store_true")
+    ap.add_argument("--allow-ask-first", action="store_true",
+                    help="pass only for subjects the pair ledger has an explicit decision for")
     a = ap.parse_args()
-    pairs = [parse_pair(p) for p in a.pairs]
+    pairs = [parse_pair(p, a.allow_ask_first) for p in a.pairs]
     if a.sheet:
         sheet(pairs, a.seeds)
     elif a.column:
