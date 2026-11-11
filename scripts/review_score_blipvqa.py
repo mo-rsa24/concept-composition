@@ -6,6 +6,9 @@ into spaCy noun phrases, asks BLIP base VQA (model_base_vqa_capfilt_large, 480 p
 images under the file names that script expects (<prompt>_<n>.png), runs it in the
 t2icomp env, and maps the per-image answers back to the input rows.
 
+Passes beyond a prompt's noun-phrase count ask an empty question that the script scores as 1, so
+--np-num 3 equals the default 8 on the paper-review prompts (323 have 2 noun phrases, one has 1, one 3).
+
 Usage (t2icomp env, non-Blackwell GPU):
   python scripts/review_score_blipvqa.py --in rows.csv --out scores.csv --work <dir>
 rows.csv has columns image,prompt.
@@ -28,6 +31,8 @@ def main():
     ap.add_argument("--in", dest="inp", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--work", required=True)
+    ap.add_argument("--np-num", type=int, default=8,
+                    help="question passes; any value at least the most noun phrases in a prompt gives the same scores")
     a = ap.parse_args()
 
     rows = list(csv.DictReader(open(a.inp)))
@@ -39,7 +44,7 @@ def main():
         assert "_" not in r["prompt"], r["prompt"]  # the script splits the file name on "_"
         os.symlink(os.path.abspath(r["image"]), os.path.join(work, "samples", f"{r['prompt']}_{n}.png"))
 
-    subprocess.run([sys.executable, "BLIP_vqa.py", "--out_dir", work, "--np_num", "8"],
+    subprocess.run([sys.executable, "BLIP_vqa.py", "--out_dir", work, "--np_num", str(a.np_num)],
                    cwd=os.path.join(T2I, "BLIPvqa_eval"), check=True)
 
     # The script sorts samples by the trailing index, so question_id n is row n.
