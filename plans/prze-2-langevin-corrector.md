@@ -29,7 +29,7 @@ For Claude to execute.
 
 ### 3. 💻 The two drivers
 
-- [ ] **A joint-prompt Langevin driver and an unadjusted HMC driver beside `run_poe_langevin`, each byte-identical to the plain sampler at k = 0 on one SDXL cell**
+- [x] **A joint-prompt Langevin driver and an unadjusted HMC driver beside `run_poe_langevin`, each byte-identical to the plain sampler at k = 0 on one SDXL cell** ✓ verified 2026-11-11: Slurm 84583 on mscluster48, `4 passed`, both SDXL lines `max |diff| = 0.000e+00 PASS`, `PASS: both drivers at k = 0`
   - Code: `poe_repair/methods/_corrector_drivers.py`, composers `poe_repair/composers/joint_langevin.py` and `poe_uhmc.py`; HMC's k counts iterations of L = 5 leapfrog steps, so a level costs 5k + 2 UNet calls.
   - Check: `pytest tests/test_corrector_drivers_identity.py` (stand-in UNet, CPU), then `python scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10` on a GPU, which prints `PASS: both drivers at k = 0`.
   - ◀ Needs: instruction 2
