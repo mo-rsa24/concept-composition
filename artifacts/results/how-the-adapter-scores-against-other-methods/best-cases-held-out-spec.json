@@ -19,7 +19,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_seal__x__a_walrus__s11__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_seal__x__a_walrus__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_seal__x__a_walrus__s11__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_seal__x__a_walrus__s11__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_seal__x__a_walrus__s11__ours.png"
    ]
   },
@@ -29,7 +29,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_suitcase__x__a_desk_fan__s11__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_suitcase__x__a_desk_fan__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_suitcase__x__a_desk_fan__s11__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_suitcase__x__a_desk_fan__s11__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_suitcase__x__a_desk_fan__s11__ours.png"
    ]
   },
@@ -39,7 +39,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_drum_set__x__a_snowman__s13__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_drum_set__x__a_snowman__s13__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_drum_set__x__a_snowman__s13__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_drum_set__x__a_snowman__s13__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_drum_set__x__a_snowman__s13__ours.png"
    ]
   },
@@ -49,7 +49,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_giraffe__x__a_lion__s13__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_giraffe__x__a_lion__s13__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_giraffe__x__a_lion__s13__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_giraffe__x__a_lion__s13__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_giraffe__x__a_lion__s13__ours.png"
    ]
   },
@@ -59,7 +59,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_tent__x__a_snowy_mountain__s16__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_tent__x__a_snowy_mountain__s16__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_tent__x__a_snowy_mountain__s16__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_tent__x__a_snowy_mountain__s16__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_tent__x__a_snowy_mountain__s16__ours.png"
    ]
   },
@@ -69,10 +69,10 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_horse__x__a_grassy_field__s16__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_horse__x__a_grassy_field__s16__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_horse__x__a_grassy_field__s16__co3.png",
-    null,
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_horse__x__a_grassy_field__s16__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_horse__x__a_grassy_field__s16__ours.png"
    ]
   }
  ],
- "pending": "not in subset"
+ "pending": "rendering"
 }
