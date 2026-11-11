@@ -55,7 +55,9 @@ itself. The reference that printed as "Figure 10" is removed.
 
 **The layers the adapter modifies, and its size**
 
-Pending.
+The method text, abstract and parameter count now describe the adapter as trained: 35.8 M
+parameters on the query, key and value projections of both the self-attention and cross-attention
+layers. The submission said cross-attention only and 19.8 M.
 
 **The training schedule**
 
