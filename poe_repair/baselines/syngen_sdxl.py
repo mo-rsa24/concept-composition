@@ -26,6 +26,7 @@ What is adapted for SDXL, and why:
 
 from __future__ import annotations
 
+import importlib
 import sys
 import types
 from pathlib import Path
@@ -49,6 +50,14 @@ def import_syngen():
         import spacy  # noqa: F401
     except ImportError:
         sys.modules["spacy"] = types.ModuleType("spacy")
+    # SynGen imports Attend-and-Excite from diffusers' pre-0.20 path; newer diffusers keeps the same
+    # classes in their own package, so the old name points at it.
+    old = "diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion_attend_and_excite"
+    try:
+        importlib.import_module(old)
+    except ModuleNotFoundError:
+        sys.modules[old] = importlib.import_module(
+            "diffusers.pipelines.stable_diffusion_attend_and_excite.pipeline_stable_diffusion_attend_and_excite")
     import syngen_diffusion_pipeline as sgp
     return sgp
 
