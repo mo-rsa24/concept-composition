@@ -1,8 +1,8 @@
-# 🧪 PRZE-1: CO3 and SuperDiff as baselines on R1 and R3
+# 🧪 PRZE-1: CO3 as a baseline on R1 and R3
 
-**Goal:** reviewer PrzE sees the adapter beside two standard composition baselines, each run at its authors' published settings and from our starting noise wherever its code accepts it.
-**Objective:** each method renders one tuning cell, its published default is written into [the protocol](../report/paper-review/protocol.md), and it is launched at that default on R1 (276 prompts, seeds 9 to 12) and R3 (53 held-out pairs, seeds 9 to 16).
-**Definition of done:** every evaluation job is running or finished, with each method's output count heading to 1,104 for R1 and 424 for R3.
+**Goal:** reviewer PrzE sees the adapter beside CO3, run at its authors' published settings and from our starting noise.
+**Objective:** CO3 renders one tuning cell, its published default is written into [the protocol](../report/paper-review/protocol.md), and it is launched at that default on R1 (276 prompts, seeds 9 to 12) and R3 (53 held-out pairs, seeds 9 to 16).
+**Definition of done:** every CO3 evaluation job is running or finished, with the output count heading to 1,104 for R1 and 424 for R3.
 **Route:** [answer the ICLR reviews](route-answer-the-iclr-reviews.md), between steps 8 and 9; outcome PRZE-1, compute jobs 7 and 8 of [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs).
 
 ## Environment Facts This Plan Depends On
@@ -19,8 +19,8 @@
 |---|---|---|
 | CO3's starting noise | a wrapper outside `composition/debottam_co3/` calls its `sample_loop` with our seed latent; the vendored code is not edited | its own noise from the seed number, marked mixed |
 | ToMe | dropped from the SDXL table: its official code (commit `f256a49a`) did not import within the 30-minute limit, because its requirements leave `huggingface_hub` unpinned and diffusers 0.28 fails against 0.36; the paper states the limit | one more attempt with the hub library pinned |
-| SuperDiff's starting noise | its own, from the seed number; its stochastic sampler differs on two axes anyway, so its column is mixed | |
-| Tuning | none: CO3 and SuperDiff run at their published defaults only | a grid of six settings on the tuning pairs |
+| SuperDiff | out of every table and figure: it does not claim to fix hybrids, so it is no composition baseline (`ef5494c9`); its tiles under `superdiff_default/` stay unused | a mixed column with its own noise and sampler |
+| Tuning | none: CO3 runs at its published default only | a grid of six settings on the tuning pairs |
 
 ## Tasks
 
@@ -42,7 +42,7 @@ For Claude to execute.
 ### 3. 🚀 Launch the evaluations
 
 - [ ] **For each method at its published default: an 80% interval for runtime and memory, the exact command, your yes, the launch, the first tiles**
-  - Launcher: `scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last.
+  - Launcher: `scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last. CO3 runs as two `NSHARDS=2` jobs and four `NSHARDS=6` jobs (shards 2 to 5); a tile that exists is skipped, so they meet without repeating work.
   - ◀ Needs: 2
   - ▶ Next: 4
 
