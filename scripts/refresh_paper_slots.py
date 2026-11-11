@@ -134,8 +134,8 @@ SCHEMA = {
 # A method whose name ends in this is a published number we cite, never a run of ours; it sits
 # under its own rule at the foot of the table.
 REPORTED = "(reported)"
-# Methods that evaluate the joint prompt at every step. They sit above a rule as references, and
-# bold marks the best of the rows below it, the methods that never evaluate the joint prompt.
+# Methods that evaluate the joint prompt at every step. They sit above a rule as references; bold
+# marks the best value in each column over every row.
 REFERENCE = ("Joint prompt", "CO3")
 
 
@@ -163,11 +163,11 @@ def csv_to_tabular(path: Path, sid: str) -> str:
     rest = [m for m in run if m not in refs]
     ours = refs + rest + [m for m in methods if m.endswith(REPORTED)]
     cell = {(r["method"], r["group"]): r for r in rows}
-    best = {}  # (group, metric) -> highest value among the rows below the reference rule
-    if refs:
+    best = {}  # (group, metric) -> highest value over every row; all metrics here are higher-is-better
+    if rows:
         for key, _, metrics in sch["groups"]:
             for m in metrics:
-                vals = [float(cell[(x, key)][m]) for x in rest if cell.get((x, key), {}).get(m) not in ("", None)]
+                vals = [float(cell[(x, key)][m]) for x in refs + rest if cell.get((x, key), {}).get(m) not in ("", None)]
                 if vals:
                     best[(key, m)] = max(vals)
     spec, head1, head2, rules, col = ["l"], ["Method"], [""], [], 2
@@ -178,8 +178,8 @@ def csv_to_tabular(path: Path, sid: str) -> str:
             whole = 2 if m == "clip" else 1
             sign = "-" if m == "ir" else ""
             spec.append(f"S[table-format={sign}{whole}.{d}" + (f"({d})" if has_ci else "") + "]")
-            head2.append("{" + METRIC[m][0] + "}")
-        head1.append(r"\multicolumn{" + str(len(metrics)) + "}{c}{" + tex_escape(title) + "}")
+            head2.append("{" + METRIC[m][0] + r" $\uparrow$}")
+        head1.append(r"\multicolumn{" + str(len(metrics)) + "}{c}{" + tex_escape(title) + (r" $\uparrow$" if len(metrics) == 1 else "") + "}")
         rules.append(r"\cmidrule(lr){" + f"{col}-{col + len(metrics) - 1}" + "}")
         col += len(metrics)
     for m in sch["tail"]:
@@ -189,7 +189,7 @@ def csv_to_tabular(path: Path, sid: str) -> str:
     one_metric = all(len(m) == 1 for _, _, m in sch["groups"]) and not sch["tail"]
     header = ([" & ".join(head1) + r" \\", r"\midrule"] if one_metric else
               [" & ".join(head1) + r" \\", " ".join(rules), " & ".join(head2) + r" \\", r"\midrule"])
-    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{3.5pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%",
+    lines = [r"\setbox0=\hbox{\setlength{\tabcolsep}{2.1pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%",
              r"\begin{tabular}{@{}" + "".join(spec) + "@{}}", r"\toprule"] + header
     for i, meth in enumerate(ours):
         if meth.endswith(REPORTED) and (i == 0 or not ours[i - 1].endswith(REPORTED)):
@@ -203,7 +203,7 @@ def csv_to_tabular(path: Path, sid: str) -> str:
                 v = fmt(r.get(m, ""), METRIC[m][1])
                 ci = r.get(f"{m}_ci", "")
                 txt = v if not ci or v == "{--}" else f"{v}({round(float(ci) * 10 ** METRIC[m][1]):d})"
-                if meth in rest and v != "{--}" and (key, m) in best and abs(float(r[m]) - best[(key, m)]) < 1e-12:
+                if v != "{--}" and (key, m) in best and abs(float(r[m]) - best[(key, m)]) < 1e-12:
                     d = METRIC[m][1]
                     txt = ("{\\boldmath$" + v + (r"\pm" + f"{float(ci):.{d}f}" if ci else "") + "$}")
                 vals.append(txt)

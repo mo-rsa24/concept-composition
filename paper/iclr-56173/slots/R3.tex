@@ -1,14 +1,14 @@
-\setbox0=\hbox{\setlength{\tabcolsep}{3.5pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%
+\setbox0=\hbox{\setlength{\tabcolsep}{2.1pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%
 \begin{tabular}{@{}lS[table-format=1.2(2)]S[table-format=1.2(2)]S[table-format=1.2(2)]@{}}
 \toprule
-Method & \multicolumn{1}{c}{Hard (3)} & \multicolumn{1}{c}{Easy but unseen (29)} & \multicolumn{1}{c}{Not competing (21)} \\
+Method & \multicolumn{1}{c}{Hard (3) $\uparrow$} & \multicolumn{1}{c}{Easy but unseen (29) $\uparrow$} & \multicolumn{1}{c}{Not competing (21) $\uparrow$} \\
 \midrule
-Joint prompt & 0.46(40) & 0.74(8) & 0.85(6) \\
-CO3 & 0.59(27) & 0.77(6) & 0.81(8) \\
+Joint prompt & 0.46(40) & 0.74(8) & {\boldmath$0.85\pm0.06$} \\
+CO3 & {\boldmath$0.59\pm0.27$} & {\boldmath$0.77\pm0.06$} & 0.81(8) \\
 \midrule
-PoE & 0.33(39) & 0.38(9) & {\boldmath$0.74\pm0.10$} \\
+PoE & 0.33(39) & 0.38(9) & 0.74(10) \\
 PoE + Langevin & 0.38(36) & {--} & {--} \\
-Ours & {\boldmath$0.45\pm0.42$} & {\boldmath$0.58\pm0.09$} & 0.73(8) \\
+Ours & 0.45(42) & 0.58(9) & 0.73(8) \\
 \bottomrule
 \end{tabular}}%
 \ifdim\wd0>\linewidth\reviewoverflow{R3}{\the\wd0}\fi

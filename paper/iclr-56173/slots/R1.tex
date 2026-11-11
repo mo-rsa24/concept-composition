@@ -1,16 +1,16 @@
-\setbox0=\hbox{\setlength{\tabcolsep}{3.5pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%
+\setbox0=\hbox{\setlength{\tabcolsep}{2.1pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%
 \begin{tabular}{@{}lS[table-format=1.2]S[table-format=2.1]S[table-format=1.2]S[table-format=-1.2]S[table-format=2.1]S[table-format=1.2]S[table-format=-1.2]S[table-format=2.1]S[table-format=1.2]S[table-format=-1.2]@{}}
 \toprule
 Method & \multicolumn{4}{c}{Animals} & \multicolumn{3}{c}{Animals + objects} & \multicolumn{3}{c}{Objects} \\
 \cmidrule(lr){2-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11}
- & {Comp.} & {CLIP} & {BLIP} & {IR} & {CLIP} & {BLIP} & {IR} & {CLIP} & {BLIP} & {IR} \\
+ & {Comp. $\uparrow$} & {CLIP $\uparrow$} & {BLIP $\uparrow$} & {IR $\uparrow$} & {CLIP $\uparrow$} & {BLIP $\uparrow$} & {IR $\uparrow$} & {CLIP $\uparrow$} & {BLIP $\uparrow$} & {IR $\uparrow$} \\
 \midrule
-Joint prompt & 0.89 & 27.0 & 0.71 & 0.89 & 30.0 & 0.88 & 1.60 & 31.1 & 0.48 & 0.77 \\
-CO3 & 0.94 & 27.4 & 0.74 & 1.27 & 29.9 & 0.87 & 1.69 & 31.5 & 0.42 & 0.95 \\
+Joint prompt & 0.89 & 27.0 & 0.71 & 0.89 & {\boldmath$30.0$} & {\boldmath$0.88$} & 1.60 & 31.1 & 0.48 & 0.77 \\
+CO3 & 0.94 & {\boldmath$27.4$} & {\boldmath$0.74$} & {\boldmath$1.27$} & 29.9 & 0.87 & {\boldmath$1.69$} & {\boldmath$31.5$} & 0.42 & {\boldmath$0.95$} \\
 \midrule
-PoE & 0.02 & 21.6 & 0.23 & -1.31 & {\boldmath$27.2$} & 0.55 & -0.25 & {\boldmath$29.5$} & 0.45 & -0.22 \\
+PoE & 0.02 & 21.6 & 0.23 & -1.31 & 27.2 & 0.55 & -0.25 & 29.5 & 0.45 & -0.22 \\
 PoE + Langevin & 0.05 & 21.4 & 0.28 & -1.43 & {--} & {--} & {--} & {--} & {--} & {--} \\
-Ours & {\boldmath$0.97$} & {\boldmath$24.6$} & {\boldmath$0.50$} & {\boldmath$0.16$} & 27.1 & {\boldmath$0.68$} & {\boldmath$0.42$} & 28.7 & {\boldmath$0.55$} & {\boldmath$0.19$} \\
+Ours & {\boldmath$0.97$} & 24.6 & 0.50 & 0.16 & 27.1 & 0.68 & 0.42 & 28.7 & {\boldmath$0.55$} & 0.19 \\
 \bottomrule
 \end{tabular}}%
 \ifdim\wd0>\linewidth\reviewoverflow{R1}{\the\wd0}\fi
