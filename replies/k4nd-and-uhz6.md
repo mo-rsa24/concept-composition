@@ -69,7 +69,9 @@ picked by rule (Tables 1 and 2).
 > "The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states
 > that all examples use the same initial seeds."
 
-Pending.
+Every column of Figure 5 now starts from the same latent at the same seed, and the caption and
+Section 4.1 say so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
+seed, as in its released code.
 
 ### Q1: evidence that the residual measures plurality
 
@@ -104,7 +106,7 @@ because the two birds are hard to tell apart. Where CO3 drew a kept pair more cl
 > inconsistencies concerning network outputs, figure references, and baseline starting noise?"
 
 The objective is Equation 12 in Section 4. The network outputs and the figure reference are
-resolved as described under W4. Baseline starting noise: pending, with W5.
+resolved as described under W4. Baseline starting noise is resolved as described under W5.
 
 ## Reviewer UHz6
 

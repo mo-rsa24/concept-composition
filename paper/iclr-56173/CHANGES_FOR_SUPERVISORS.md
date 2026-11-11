@@ -21,6 +21,10 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 
 - "inside create hybrid objects" reads "and instead create hybrid objects" in the Discussion.
 
+## k4nd W5: starting noise
+
+- Figure 5's caption and Section 4.1 say every column starts from the same latent; CO3's dagger marks its resampling noise.
+
 ## Corrections no reviewer raised
 
 These go in no reply.
