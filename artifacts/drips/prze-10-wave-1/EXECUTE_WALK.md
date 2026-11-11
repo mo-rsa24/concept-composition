@@ -23,6 +23,7 @@ On: piece 4, polling and counting; every wave 1 job is launched or queued.
 | Order on 112 | Figure 5 first, then early-steps, R3, R1; R1 first | Figure 5 first | default you accepted | a 2 minute launch check, then the jobs Thursday's draft reads |
 | Stop a training for cards | both on 107; one; none | none | you ("keep all") | the CO3 selection run had already finished, freeing both of 108's cards |
 | How PoE and ours run R14's counting and spatial prompts | two-object only; split with a mark; one prompt as both | two-object only | you | only two-object prompts split into two concepts |
+| Pause the three species-fidelity trainings for the review | stop all three; stop v58-08 only | all three, v58-06 after its next save | you (yes) | the review is the priority and every run resumes from its checkpoint |
 | Where R1 ours runs | 111 after its training; 112 after jobs 1 to 3 | 112 | you (yes) | 112 measured at 6.7 s per image and frees about 09:05, before 111 |
 
 ## Ticks
@@ -43,3 +44,7 @@ On: piece 4, polling and counting; every wave 1 job is launched or queued.
 | 112 pid 37731 | waits on 36785, then R1 ours, log `paper_review/logs/112-r1-ours.log` | pieces 3, 4 | queued |
 | 108 pid 59533 | R1 joint, log `paper_review/logs/108-r1-joint.log` | pieces 3, 4 | running |
 | 108 pid 59822 | R1 PoE, log `paper_review/logs/108-r1-poe.log` | pieces 3, 4 | running |
+| 111 pid 43532 | R1 PoE backwards, log `paper_review/logs/111-r1-poe-rev.log` | pieces 3, 4 | running |
+| 107 pid 204772 | R1 joint backwards on card 1, log `paper_review/logs/107-r1-joint-rev.log` | pieces 3, 4 | running |
+| 107 waiting loop | stops `v58-06-bound-w40` (pid 97741) after its step 12,500 save; resume commands in `/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/RESUME-2026-11-11.md` | freeing 107 card 0 | waiting |
+| watch b63zvk9q4 | tile counts every 5 min until a job finishes, fails or stalls | piece 4 | running |
