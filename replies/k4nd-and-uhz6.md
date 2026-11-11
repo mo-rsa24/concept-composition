@@ -68,7 +68,8 @@ Pending.
 > "The repetitive claims about learning an abstract concept occupy space that could instead
 > clarify the objective, training data, evaluation protocol, and limitations."
 
-Pending.
+We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
+Discussion. The introduction now states what the correction is and what it restores (see W1).
 
 ### W5: the qualitative baseline comparison and its starting noise
 
