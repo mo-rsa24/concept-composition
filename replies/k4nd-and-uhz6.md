@@ -164,6 +164,31 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 ## Reviewer UHz6
 
+### W1: the adapter is evaluated only qualitatively
+
+> "The trained adapter, which serves as the main contribution of the paper is only evaluated
+> qualitatively. … In addition to the examples being limited to similar entities (cat, dog), there
+> are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting."
+
+The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
+benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
+held-out pairs in three groups (Table 2). Table 3 reports GenEval's two-object and counting tasks and
+T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
+C.5 shows three concepts.
+
+### W3: comparisons with samplers and attention-based methods, and scope
+
+> "There are no quantitative comparisons with the compositional samplers discussed in Sec. 2.2, and
+> CO3 appears only as one qualitative column. Attention-based methods that address missing or merged
+> objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are
+> not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals."
+
+Tables 1 and 2 now compare quantitatively with CO3 and a Langevin corrector on the same seeds [TODO:
+slots R1, R3]. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
+cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
+Table 4 runs the methods released for Stable Diffusion 1.x from their official code [TODO: slot R5].
+Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
+
 ### The training filter
 
 > "In addition, the training filter keeps a pair if either the joint prompt or CO3 succeeds, but
