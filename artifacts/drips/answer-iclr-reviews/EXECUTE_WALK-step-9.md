@@ -11,7 +11,7 @@ Steps at the open: 5 (pieces 1 to 5, depth objective).
 
 | Sitting | Start | End |
 |---|---|---|
-| 1 | 2026-11-11 | |
+| 1 | 2026-11-11 05:20 | 2026-11-11 13:30 |
 
 Toy: `a cat and a dog` and one animal-with-object R1 prompt, seed 9, joint, PoE and ours where they exist. Scorer probe images: mug and wine glass, seed 11, joint render (both objects, step 4 call) and plain product render, from the step 4 census.
 
@@ -34,7 +34,7 @@ Toy: `a cat and a dog` and one animal-with-object R1 prompt, seed 9, joint, PoE 
 
 ## Position
 
-Piece 2 of 5 closed (bar committed `3c65c634`); piece 3 waits on `r1_ours`, which has not started.
+Closed 2026-11-11 13:30: Tables 1 and 2 filled for joint, PoE and ours, the paper builds (22 pages), `--check` PASS; the R1 bar reads SUPPORTS. The CO3 row is owed to step 8's renders. Retrospective: [the retrospective](../../notes/session-merges/2026-11-11-route-step-9-retro.md).
 
 ## Ticks
 
@@ -42,6 +42,9 @@ Piece 2 of 5 closed (bar committed `3c65c634`); piece 3 waits on `r1_ours`, whic
 |---|---|---|
 | 1 | four scorers installed and run on the mug and wine glass probe, seed 11: all four rank the joint render (both objects) above the product render (mug missing) | `artifacts/results/what-each-scorer-says-about-two-objects/` (three CSVs and the figure); jobs 84587, 84588 |
 | 2 | scorer section and R1 bar written into the protocol before any evaluation score | commit `3c65c634` |
+| 3 | 4,584 images scored on CLIP score, ImageReward and BLIP-VQA, animal prompts counted; 5 images unreadable from mscluster108 listed in `scores/rows_hidden.csv` | `scores/scores_long.csv` on `/datasets`; jobs 84640, 84737, 84788, 84779, 84790; BLIP on 108 |
+| 4 | Tables 1 and 2 built; bar SUPPORTS on all three sets | `report/paper-review/tables-1-and-2-sidecar.json` |
+| 5 | slots R1 and R3 filled, captions rewritten to match, paper builds | commit `56b968b6`; `--check` PASS; 22 pages, no slot too wide |
 
 ## Out of the session
 

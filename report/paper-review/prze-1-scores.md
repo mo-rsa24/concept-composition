@@ -12,3 +12,5 @@ Answers PrzE's first weakness and question 1, and UHz6's request for [Attend-and
 - [ ] ✅ check passed: the measured correction composes on SD 1.5 over the PRZE-3b pairs, against a bar written first; this decides whether an SD 1.5 adapter is trained
 - [ ] 🖼️ screenshot: the all-methods ablation grid, rows held-out pairs at fixed seeds, columns methods, mixed columns marked
 - [ ] 📝 markdown created: a one-page plain note on what each score measures and where it sits in the paper
+
+In progress, route step 9 (commit `56b968b6`): joint prompt, PoE and ours have CLIP score, BLIP-VQA and ImageReward on all 276 benchmark prompts at seeds 9 to 12, and Comp. on the animals set, in [Table 1](table-1-r1-benchmark.csv); SuperDiff is out of every table; CO3, the Langevin corrector and Feynman-Kac rows render under step 8; GenEval and T2I-CompBench are installed and probed, and their own prompt sets are not rendered yet (R14).

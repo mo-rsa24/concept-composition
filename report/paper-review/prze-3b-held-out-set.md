@@ -8,3 +8,5 @@ Four held-out pairs cannot carry a success rate. Answers PrzE's question 1 and U
 - [x] ✅ check passed: none of the held-out pairs appears in the training pool, checked against the 48 ✓ verified 2026-11-10: every candidate was drawn from the pair files minus the 48 of `pair_pool_v58.yaml`; the frozen set lists the 48 apart
 - [ ] ✅ check passed: the cat and dog joint prompt is judged per seed, since it is wrong on 4 of 8 held-out seeds per earlier notes, and unjudgeable seeds are excluded and counted Open: cat and dog is now a showcase pair and counts in no rate; the per-seed judging applies to the showcase calls, which judged it per seed
 - [ ] 💻 code ran: every method sampled on every held-out pair at seeds 9 to 16, with compose rate and an interval per group
+
+In progress, route step 9 (commit `56b968b6`): joint prompt, PoE and ours are scored on all 53 held-out pairs at seeds 9 to 16, with BLIP-VQA and a 95% interval per group in [Table 2](table-2-r3-held-out.csv); the CO3 row renders under step 8.
