@@ -58,7 +58,18 @@ pairs; we have not run it and name it as future work.
 
 > "The learned adapter lacks systematic quantitative evaluation."
 
-Pending.
+We agree, and the revision adds this evaluation. The adapter, the seeds and the success bar were
+all fixed before any held-out score was read (Section 4.1).
+
+Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pairs, 144
+animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
+image quality by CLIP score and ImageReward [TODO: slot R1].
+
+Table 2 scores the 53 held-out pairs listed in Appendix C.2, grouped as hard, easy but unseen, and
+not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO: slot R3].
+
+The failure types the reviewer names (substituted identities, additional objects, style-dependent
+loss) are counted per setting in the appendix [TODO: slot R9].
 
 ### W4: method details poorly presented and sometimes inconsistent
 
@@ -121,7 +132,7 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Pending, with W3. The numbers come from route steps 5, 9 and 12.
+Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3].
 
 ### Q3: pairs retained when only CO3 succeeds
 
@@ -178,7 +189,7 @@ Pending.
 > "What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and
 > multiple seeds?"
 
-Pending. The numbers come from route steps 5, 9 and 12.
+Answered under k4nd W3: Tables 1 and 2 [TODO: slots R1 and R3].
 
 ### Q3: restricting the adapter to the early steps
 
