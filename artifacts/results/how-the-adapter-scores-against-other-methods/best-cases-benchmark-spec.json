@@ -7,6 +7,7 @@
     "Joint",
     "PoE",
     "CO3",
+    "PoE +\nLangevin",
     "Ours"
    ]
   }
@@ -18,6 +19,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_dog__x__a_frog__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_dog__x__a_frog__s10__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_dog__x__a_frog__s10__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_dog__x__a_frog__s10__langevin.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_dog__x__a_frog__s10__ours.png"
    ]
   },
@@ -27,6 +29,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_turtle__s11__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_turtle__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_turtle__s11__co3.png",
+    null,
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_turtle__s11__ours.png"
    ]
   },
@@ -36,6 +39,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_red_suitcase__s12__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_red_suitcase__s12__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_red_suitcase__s12__co3.png",
+    null,
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_frog__x__a_red_suitcase__s12__ours.png"
    ]
   },
@@ -45,6 +49,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_monkey__x__a_orange_suitcase__s12__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_monkey__x__a_orange_suitcase__s12__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_monkey__x__a_orange_suitcase__s12__co3.png",
+    null,
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_monkey__x__a_orange_suitcase__s12__ours.png"
    ]
   },
@@ -54,6 +59,7 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_yellow_bow__x__a_pink_bowl__s10__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_yellow_bow__x__a_pink_bowl__s10__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_yellow_bow__x__a_pink_bowl__s10__co3.png",
+    null,
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_yellow_bow__x__a_pink_bowl__s10__ours.png"
    ]
   },
@@ -63,9 +69,10 @@
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_blue_balloon__x__a_orange_bench__s11__joint.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_blue_balloon__x__a_orange_bench__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_blue_balloon__x__a_orange_bench__s11__co3.png",
+    null,
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-best-worst/a_blue_balloon__x__a_orange_bench__s11__ours.png"
    ]
   }
  ],
- "pending": "not run"
+ "pending": "not in subset"
 }
