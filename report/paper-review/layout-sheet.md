@@ -24,7 +24,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 
 † marks a column that differs on more than one axis (rule 7): the Langevin rows run on the labelled subset, and the five SD 1.5 binding methods keep their own noise when their official code cannot take a given latent.
 
-**R1 and the page limit.** The submitted main text ends on page 9, and R1 adds up to 1.8 in to Section 4.1. Figure 6 (the adapter-settings ablation on cat and dog) moves to the appendix to make the room, decided 2026-11-10. The move is made in route step 13, and until then the build shows the main text one page long.
+**R1 and the page limit.** The submitted main text ends on page 9, and R1 adds up to 1.8 in to Section 4.1. The adapter-settings ablation on cat and dog sits in appendix C.5, cited from Section 4.1, which makes the room.
 
 ## Before a slot is called finished
 
