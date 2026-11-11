@@ -87,6 +87,34 @@ The main table, R1, scores every method on the 276 benchmark prompts at seeds 9 
 
 **10. Our runs only.** The CO3 paper (arXiv 2509.25940) does not state its prompts per set, seeds, resolution or metric code. R1 scores the same 276 prompts with the same metrics, so its numbers can stand beside CO3's Table 1; CO3's numbers appear only as a grey cited row under ours, never in our rows, and the caption says the two differ in seeds and settings.
 
+## The scorers
+
+Each score is computed by the code named here and nothing else; a column carries a scorer's name only when this row produced it. All four rank a two-object render above a render missing one object on the step 7 probe pair (mug and wine glass, seed 11, step 4 census): [the four-scorer probe figure](../../artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), numbers in the three probe CSVs beside it.
+
+| Score | Code and settings | Environment | Feeds |
+|---|---|---|---|
+| CLIP score | `openai/clip-vit-large-patch14`, 100 × max(cosine(image, full prompt), 0), the torchmetrics CLIPScore definition; `scripts/review_score_clip_ir.py` | `co3` | R1, R3, R5 |
+| ImageReward | `ImageReward-v1.0` (image-reward 1.5), `score(prompt, image)`; `scripts/review_score_clip_ir.py` | `co3` | R1, R5 |
+| BLIP-VQA | T2I-CompBench `BLIPvqa_eval/BLIP_vqa.py` at commit `4aa4042`, unchanged: spaCy `en_core_web_sm` noun phrases of the full prompt, BLIP base VQA `model_base_vqa_capfilt_large` at 480 px asked "<phrase>?", the product of the yes-probabilities; `scripts/review_score_blipvqa.py` only stages file names | `/datasets/mmolefe/envs/t2icomp`: torch 2.0.1, transformers 4.30.2, timm 0.4.12, spaCy 3.5.3, ruamel.yaml 0.17.32, opencv-python 4.7.0.72 | R1, R5 |
+| GenEval two-object | `djghosh13/geneval` `evaluation/evaluate_images.py`, unchanged, tag `two_object`, Mask2Former Swin-S on COCO, confidence 0.3; each concept named by its COCO class (a mug is `cup`); `scripts/review_score_geneval.py` only lays files out | `/datasets/mmolefe/envs/geneval`: torch 1.12.1+cu113 with the executable-stack flag cleared, mmcv-full 1.7.1, mmdet 2.28.2, open-clip-torch 2.20.0 | R14 only, on GenEval's own prompts |
+| Comp. | the GroundingDINO instance count of the earlier notes: two or more animals counted | `co3` | R1 animals, R3 |
+
+## The bar for R1, fixed before any evaluation image is scored
+
+The question is whether the adapter composes more often than the plain product on benchmark prompts it never trained on. It is read from paired differences on R1, where ours and PoE share the prompt, the seed and the starting noise.
+
+| | |
+|---|---|
+| Measure | Δ BLIP-VQA = ours − PoE per prompt and seed, averaged over seeds 9 to 12 per prompt, then over the prompts of each set (animals 66, animals with objects 144, objects 66); 95% interval by resampling prompts, then seeds within each prompt, 10,000 draws |
+| SUPPORTS | the interval sits above 0 in all three sets |
+| NULL | the interval covers 0 in all three sets, or sits below 0 in any set |
+| INCONCLUSIVE | anything between: above 0 in one or two sets and covering 0 in the rest; or more than 10% of R1's cells missing for either method |
+| Reported as is, no verdict | CLIP score, ImageReward, Comp., the joint row, the early-steps renders, and "a cat and a dog", which chose the adapter and is shown and marked but never counted |
+
+The thresholds are constants in the paired-differences script, so a change to them shows in a diff.
+
+Every score in one table runs on one GPU model, since one cell read 0.153, 0.169 and 0.180 on three models. The T2I-CompBench and GenEval environments do not run on the Blackwell cards, so all four scores run on the RTX 3090 `bigbatch` nodes.
+
 ## One row worked through: elephant and penguin, seed 10
 
 The submitted Figure 5 row against the same row under this protocol.
