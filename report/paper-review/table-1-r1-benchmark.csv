@@ -1,0 +1,10 @@
+model,method,adapter,sampler,steps,guidance,resolution,pair,seed,group,setting,nfe,clip,blip,ir,comp
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-12,animals,-,,27.0126,0.7067,0.8882,0.8902
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-12,animals_objects,-,,30.0075,0.8789,1.5982,
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-12,objects,-,,31.1156,0.4806,0.7686,
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-12,animals,-,,21.5545,0.2251,-1.3056,0.0189
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-12,animals_objects,-,,27.1646,0.5453,-0.2532,
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-12,objects,-,,29.5058,0.4524,-0.2162,
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-12,animals,-,,24.6207,0.5031,0.1555,0.9659
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-12,animals_objects,-,,27.1153,0.6753,0.4217,
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-12,objects,-,,28.6646,0.5451,0.1919,

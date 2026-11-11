@@ -1,0 +1,10 @@
+model,method,adapter,sampler,steps,guidance,resolution,pair,seed,group,setting,nfe,blip,blip_ci
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-16,hard,-,,0.4585,0.3984
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-16,easy,-,,0.7367,0.0769
+SDXL,Joint prompt,-,DDIM,50,7.5,1024x1024,all,9-16,not_competing,-,,0.8492,0.0602
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-16,hard,-,,0.3301,0.3854
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-16,easy,-,,0.3783,0.0865
+SDXL,PoE,-,DDIM,50,7.5,1024x1024,all,9-16,not_competing,-,,0.7395,0.0977
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-16,hard,-,,0.4543,0.4189
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-16,easy,-,,0.5755,0.0939
+SDXL,Ours,v58-03-self_s030000,DDIM,50,7.5,1024x1024,all,9-16,not_competing,-,,0.7319,0.0840

@@ -679,13 +679,13 @@ The experiments above obtain $r_t$ from the joint prompt. We now consider whethe
 
 \begin{table}[t]
 \centering\footnotesize
-\caption{\textbf{Composition and image quality on the Attend-and-Excite prompts with SDXL.} Rows are methods, all from the same starting noise for each prompt and seed (seeds 9 to 12); column groups are the animals (66 prompts), animals-with-objects (144) and objects (66) prompt sets. Comp.\ is the share of images showing both animals; CLIP is CLIP score, BLIP is BLIP-VQA and IR is ImageReward, higher is better for all four. NFE is network evaluations per image. $^\dagger$Run on a labelled subset. The last row reports the CO3 paper's published numbers, obtained with different seeds and settings.}
+\caption{\textbf{Composition and image quality on the Attend-and-Excite prompts with SDXL.} Rows are methods, all from the same starting noise for each prompt and seed (seeds 9 to 12); column groups are the animals (66 prompts), animals-with-objects (144) and objects (66) prompt sets. Each method has 1{,}104 images (276 prompts, 4 seeds each). Comp.\ is the share of animal-prompt images in which a detector counts two or more animals; CLIP is CLIP score (0 to 100), BLIP is BLIP-VQA (0 to 1) and IR is ImageReward; higher is better for all four.}
 \label{tab:review-R1}
 \smallskip
 \reviewslot{R1}{\linewidth}{1.8in}
 
 \medskip
-\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Comp.\ is the share of images showing both named things over seeds 9 to 16, with a 95\% confidence interval.}
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide.}
 \label{tab:review-R3}
 \smallskip
 \reviewslot{R3}{\linewidth}{1.3in}

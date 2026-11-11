@@ -1,0 +1,178 @@
+{
+ "r1": {
+  "Joint prompt / animals": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264,
+    "comp": 264
+   },
+   "partial": false
+  },
+  "Joint prompt / animals_objects": {
+   "expected": 576,
+   "scored": {
+    "clip": 576,
+    "blip": 575,
+    "ir": 576
+   },
+   "partial": true
+  },
+  "Joint prompt / objects": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264
+   },
+   "partial": false
+  },
+  "PoE / animals": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264,
+    "comp": 264
+   },
+   "partial": false
+  },
+  "PoE / animals_objects": {
+   "expected": 576,
+   "scored": {
+    "clip": 576,
+    "blip": 572,
+    "ir": 576
+   },
+   "partial": true
+  },
+  "PoE / objects": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264
+   },
+   "partial": false
+  },
+  "Ours / animals": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264,
+    "comp": 264
+   },
+   "partial": false
+  },
+  "Ours / animals_objects": {
+   "expected": 576,
+   "scored": {
+    "clip": 576,
+    "blip": 576,
+    "ir": 576
+   },
+   "partial": false
+  },
+  "Ours / objects": {
+   "expected": 264,
+   "scored": {
+    "clip": 264,
+    "blip": 264,
+    "ir": 264
+   },
+   "partial": false
+  }
+ },
+ "r3": {
+  "Joint prompt / hard": {
+   "expected": 24,
+   "scored": 24,
+   "pairs": 3,
+   "partial": false
+  },
+  "Joint prompt / easy but unseen": {
+   "expected": 232,
+   "scored": 232,
+   "pairs": 29,
+   "partial": false
+  },
+  "Joint prompt / not competing": {
+   "expected": 168,
+   "scored": 168,
+   "pairs": 21,
+   "partial": false
+  },
+  "PoE / hard": {
+   "expected": 24,
+   "scored": 24,
+   "pairs": 3,
+   "partial": false
+  },
+  "PoE / easy but unseen": {
+   "expected": 232,
+   "scored": 232,
+   "pairs": 29,
+   "partial": false
+  },
+  "PoE / not competing": {
+   "expected": 168,
+   "scored": 168,
+   "pairs": 21,
+   "partial": false
+  },
+  "Ours / hard": {
+   "expected": 24,
+   "scored": 24,
+   "pairs": 3,
+   "partial": false
+  },
+  "Ours / easy but unseen": {
+   "expected": 232,
+   "scored": 232,
+   "pairs": 29,
+   "partial": false
+  },
+  "Ours / not competing": {
+   "expected": 168,
+   "scored": 168,
+   "pairs": 21,
+   "partial": false
+  }
+ },
+ "bar": {
+  "animals": {
+   "mean_diff": 0.278,
+   "ci": [
+    0.2005,
+    0.352
+   ],
+   "paired_images": 264,
+   "expected": 264,
+   "missing_share": 0.0
+  },
+  "animals_objects": {
+   "mean_diff": 0.1299,
+   "ci": [
+    0.0709,
+    0.1869
+   ],
+   "paired_images": 572,
+   "expected": 576,
+   "missing_share": 0.0069
+  },
+  "objects": {
+   "mean_diff": 0.0927,
+   "ci": [
+    0.0273,
+    0.1579
+   ],
+   "paired_images": 264,
+   "expected": 264,
+   "missing_share": 0.0
+  },
+  "verdict": "SUPPORTS"
+ },
+ "draws": 10000
+}

@@ -1,0 +1,12 @@
+\setbox0=\hbox{\setlength{\tabcolsep}{3.5pt}\sisetup{separate-uncertainty=true}%
+\begin{tabular}{@{}lS[table-format=1.2(2)]S[table-format=1.2(2)]S[table-format=1.2(2)]@{}}
+\toprule
+Method & \multicolumn{1}{c}{Hard (3)} & \multicolumn{1}{c}{Easy but unseen (29)} & \multicolumn{1}{c}{Not competing (21)} \\
+\midrule
+Joint prompt & 0.46(40) & 0.74(8) & 0.85(6) \\
+PoE & 0.33(39) & 0.38(9) & 0.74(10) \\
+Ours & 0.45(42) & 0.58(9) & 0.73(8) \\
+\bottomrule
+\end{tabular}}%
+\ifdim\wd0>\linewidth\reviewoverflow{R3}{\the\wd0}\fi
+\centerline{\box0}
