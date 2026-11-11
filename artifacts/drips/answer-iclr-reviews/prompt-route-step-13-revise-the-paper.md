@@ -43,8 +43,8 @@ What is already known
   (Figure 7 in the working copy). Section 5 has a broken sentence (reviewers UHz6 and k4nd).
 - The adapter of record is v58-03-self at step 30,000, which is 600 epochs of 50 steps. The tex
   sets \adepochs to 1,000 and \adsteps to 50,000 (lines 42 and 43 of iclr2027_conference.tex);
-  change those two macros, and every mention follows. \adgpu and \adhours still print "[GPU]" and
-  "[N]": fill them from environment/hpc/throughput.md or the training run, or cut the sentence.
+  change those two macros, and every mention follows. (\adgpu and \adhours are defined as
+  placeholders but used nowhere, so nothing prints them.)
 - Figure 5 (slot R2) has seven columns: joint, PoE, CO3, ToMe, SuperDiff, PoE with Langevin, ours.
   Its caption still describes four; it must name all seven, credit PoE as Composable Diffusion
   (Liu et al., 2022), and say what each dagger marks (CO3 on its own noise if its code cannot take
@@ -107,5 +107,5 @@ what was done with paths, PASS or MISS against compiling inside the page limit, 
 most one question. You judge by opening the compiled PDF.
 ```
 
-- `added:` the true cause of the "Figure 10" reference · `added:` the step-count macros and the two unfilled ones · `added:` Figure 5's caption, the appendix pointer, the limitations figure, the two figures to re-letter, link colours, and the layout rules with the tidy pass (all from the presentation retro, `artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md`)
+- `added:` the true cause of the "Figure 10" reference · `added:` the step-count macros · `added:` Figure 5's caption, the appendix pointer, the limitations figure, the two figures to re-letter, link colours, and the layout rules with the tidy pass (all from the presentation retro, `artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md`)
 - `dropped:` "it is Figure 8" (why: the numbering changed; the reference is fixed by its label, not a number)
