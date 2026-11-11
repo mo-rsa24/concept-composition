@@ -65,10 +65,11 @@ Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pair
 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
 image quality by CLIP score and ImageReward [TODO: slot R1].
 
-Table 2 scores the 53 held-out pairs listed in Appendix C.2, grouped as hard, easy but unseen, and
+Table 2 scores the 53 held-out pairs described in Appendix C.2, grouped as hard, easy but unseen, and
 not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO: slot R3].
 
-The held-out pairs are listed in Appendix C.2 and the training pairs in our reply to Reviewer UHz6.
+The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
+link]; Appendix C.2 describes the held-out groups.
 The submission said that no held-out concept appears in training; that holds for the four pairs of
 Figure 5, and Section 4 now says the held-out pairs are unseen as pairs.
 
@@ -196,7 +197,7 @@ pairs or a thousand, and 48 is where we stopped collecting. The method relies on
 any specific pair.
 
 Cat and dog is not in the training set. It is held out, and no training pair contains a cat or a dog.
-The held-out pairs are listed with their groups in Appendix C.2, and the four pairs in Figure 5 share
+The held-out pairs and their groups are released with the code (Appendix C.2 describes the groups), and the four pairs in Figure 5 share
 no concept with any training pair.
 
 For reproducibility, the 48 training pairs are: (two animals, 28) badger and magpie, bear and boar,

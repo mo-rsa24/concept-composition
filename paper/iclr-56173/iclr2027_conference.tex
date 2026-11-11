@@ -1329,7 +1329,7 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 \subsection{The held-out pairs}
 \label{app:review-held-out}
 
-Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prompt composes them: hard, easy but unseen, and not competing. None of these pairs was trained on as a pair, but 30 of the 53 share a concept with a training pair (cow and horse shares the horse of horse and pig), and 6 share both concepts, each with a different training pair. Figure~\ref{fig:review-R4} shows one pair per group at seeds 9 and 10, and the list below names every pair.
+Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prompt composes them: hard, easy but unseen, and not competing. None of these pairs was trained on as a pair, but 30 of the 53 share a concept with a training pair (cow and horse shares the horse of horse and pig), and 6 share both concepts, each with a different training pair. Figure~\ref{fig:review-R4} shows one pair per group at seeds 9 and 10, and the list below names every pair. The full list of pairs, with the joint prompt's result on each seed, is released with the code.
 
 \begin{figure}[htbp]
 \centering\footnotesize
@@ -1338,10 +1338,6 @@ Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prom
 \label{fig:review-R4}
 \end{figure}
 
-\paragraph{Pairs used in evaluation.} The 53 held-out pairs by group, and the two pairs used to choose the adapter. The number after a pair is the seeds out of 8 on which the joint prompt shows both named things; $^*$marks a pair held out when the adapter was trained.
-\label{sec:review-R7}
-
-\reviewslot{R7}{\linewidth}{1.6in}
 \FloatBarrier
 
 % room for this subsection's first float, so its heading never sits alone at a page foot
