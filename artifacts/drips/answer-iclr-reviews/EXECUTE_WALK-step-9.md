@@ -34,17 +34,20 @@ Toy: `a cat and a dog` and one animal-with-object R1 prompt, seed 9, joint, PoE 
 
 ## Position
 
-Piece 1 of 5.
+Piece 2 of 5 closed (bar committed `3c65c634`); piece 3 waits on `r1_ours`, which has not started.
 
 ## Ticks
 
 | Piece | What | Evidence |
 |---|---|---|
+| 1 | four scorers installed and run on the mug and wine glass probe, seed 11: all four rank the joint render (both objects) above the product render (mug missing) | `artifacts/results/what-each-scorer-says-about-two-objects/` (three CSVs and the figure); jobs 84587, 84588 |
+| 2 | scorer section and R1 bar written into the protocol before any evaluation score | commit `3c65c634` |
 
 ## Out of the session
 
 | Id | Kind | Serves | State |
 |---|---|---|---|
+| r1-ours on 111 (forward) and 112 (backward) | render | R1 `ours` column | not running: blocked by the render script's share guard; relaunch needs `FIGURE_CANDIDATES_MAXUSED_GB=30`, left to the user |
 
 ## Owed
 
