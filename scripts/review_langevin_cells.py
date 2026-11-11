@@ -3,7 +3,8 @@ worst-cases grids (report/paper-review/protocol.md, rule 5).
 
 The same call as scripts/review_langevin_subset.py: c = 3, k = 20 over all 50 levels, from the starting latent
 every other method used for that seed (rule 2). Tiles go to <OUT>/langevin_extra/<pair>/seedNN/poe_langevin.png,
-apart from the subset, so the subset's rows in R1 and R3 stay exactly what rule 6 says.
+apart from the subset, so the subset's rows in R1 and R3 stay exactly what rule 6 says. With
+LANGEVIN_TILES=langevin_subset it fills the subset's own missing cells instead, skipping any that exist.
 
     python scripts/review_langevin_cells.py --cells <file of 'concept a|concept b|seed' lines>
 """
@@ -21,7 +22,7 @@ REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 OUT = Path(os.environ.get("REVIEW_BASELINE_OUT", "/datasets/mmolefe/poe_repair_min/outputs/paper_review"))
-TILES = OUT / "langevin_extra"
+TILES = OUT / os.environ.get("LANGEVIN_TILES", "langevin_extra")   # "langevin_subset" for the subset's own cells
 NOISE_PAIR = "a_cat__x__a_dog"
 C, K = 3.0, 20
 
@@ -74,7 +75,7 @@ def main() -> int:
         out.with_suffix(".json").write_text(json.dumps({
             "model": "SDXL", "method": "poe_langevin", "adapter": None, "sampler": "DDIM", "steps": n,
             "guidance": ctx.guidance_scale, "resolution": cell.width, "pair": cell.pair_slug,
-            "prompt_a": a, "prompt_b": b, "seed": seed, "group": "best-worst grids", "setting": f"c={C:g},k={K}",
+            "prompt_a": a, "prompt_b": b, "seed": seed, "group": os.environ.get("LANGEVIN_GROUP", "best-worst grids"), "setting": f"c={C:g},k={K}",
             "nfe": None, "unet_calls_per_branch_set": n * (K + 1), "noise_from": f"{NOISE_PAIR} seed {seed} (protocol rule 2)",
             "corrector_noise_seed": seed, "seconds": round(time.time() - t0, 1)}, indent=2))
         del res
