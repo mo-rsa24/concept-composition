@@ -45,6 +45,7 @@ For Claude to execute.
 
 - [ ] **Render R6 at c = 3, k = 20 and seed 10: joint, joint + Langevin, PoE and PoE + Langevin from the rule 2 starting latent, CO3 from its own noise; write its sidecar; add the rows to the route's "What we know so far" and redraw the board with `--step 8`**
   - ◀ Needs: 4
+  - Command: `sbatch --export=ALL,REPO=<checkout> <checkout>/scripts/review_r6_renders.sbatch` (16 tiles from `scripts/review_r6_renders.py --render`, 4 CO3 tiles from `scripts/review_baseline_cell.py --method co3 --group r6`, then `--sheet`); the log ends `sheet exit 0  tiles 20`.
   - ▶ Next: instruction 4
 
 ## Instructions
