@@ -1,0 +1,69 @@
+{
+ "width_in": 5.0,
+ "groups": [
+  {
+   "title": "strength λ of the correction added at every step",
+   "columns": [
+    "0",
+    "0.25",
+    "0.5",
+    "0.6",
+    "0.65",
+    "0.75",
+    "1"
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "label": "real\ncorrection",
+   "tiles": [
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam000/teacher_residual_const_lam000.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam025/teacher_residual_const_lam025.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam050/teacher_residual_const_lam050.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam060/teacher_residual_const_lam060.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam065/teacher_residual_const_lam065.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam075/teacher_residual_const_lam075.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam100/teacher_residual_const_lam100.png"
+   ]
+  },
+  {
+   "label": "wrong\npair",
+   "tiles": [
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam000/teacher_residual_const_lam000.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam025_wrong_pair/teacher_residual_const_lam025_wrong_pair.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam050_wrong_pair/teacher_residual_const_lam050_wrong_pair.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam060_wrong_pair/teacher_residual_const_lam060_wrong_pair.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam065_wrong_pair/teacher_residual_const_lam065_wrong_pair.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam075_wrong_pair/teacher_residual_const_lam075_wrong_pair.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam100_wrong_pair/teacher_residual_const_lam100_wrong_pair.png"
+   ]
+  },
+  {
+   "label": "wrong\nseed",
+   "tiles": [
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam000/teacher_residual_const_lam000.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam025_wrong_seed/teacher_residual_const_lam025_wrong_seed.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam050_wrong_seed/teacher_residual_const_lam050_wrong_seed.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam060_wrong_seed/teacher_residual_const_lam060_wrong_seed.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam065_wrong_seed/teacher_residual_const_lam065_wrong_seed.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam075_wrong_seed/teacher_residual_const_lam075_wrong_seed.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam100_wrong_seed/teacher_residual_const_lam100_wrong_seed.png"
+   ]
+  },
+  {
+   "label": "wrong\norder",
+   "tiles": [
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam000/teacher_residual_const_lam000.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam025_wrong_step/teacher_residual_const_lam025_wrong_step.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam050_wrong_step/teacher_residual_const_lam050_wrong_step.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam060_wrong_step/teacher_residual_const_lam060_wrong_step.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam065_wrong_step/teacher_residual_const_lam065_wrong_step.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam075_wrong_step/teacher_residual_const_lam075_wrong_step.png",
+    "outputs/interaction_term/dose/pairs/a_cat__x__a_dog/seed_9/teacher_residual_const_lam100_wrong_step/teacher_residual_const_lam100_wrong_step.png"
+   ]
+  }
+ ],
+ "pending": "pending",
+ "rotate_labels": true
+}
