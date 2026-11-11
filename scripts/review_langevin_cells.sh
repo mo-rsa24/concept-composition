@@ -5,7 +5,7 @@ set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
 export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
-PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
+PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"   # co3_bw on a Blackwell card
 : "${GPU:=0}" "${CELLS:?set CELLS}" "${CODE_COMMIT:=unknown}"
 export CUDA_VISIBLE_DEVICES="$GPU"
 echo "=== langevin cells  code $CODE_COMMIT  node $(hostname -s)  device $GPU  pid $$  cells $(wc -l < "$CELLS")  $(date -Is)"
