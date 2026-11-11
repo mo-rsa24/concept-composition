@@ -1280,6 +1280,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \subsection{The benchmark prompts}
 \label{app:review-benchmarks}
 
+Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite prompts (66 animal pairs, 144 animal-object pairs, 66 object pairs) at seeds 9 to 12. Figure~\ref{fig:review-R12} shows two prompts from each set at seed 9, every method from the same starting noise. Table~\ref{tab:review-R14} adds GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator on its own prompts.
+
 \begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R12}{\linewidth}{5.2in}
@@ -1301,6 +1303,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \subsection{The held-out pairs}
 \label{app:review-held-out}
 
+Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prompt composes them: hard, easy but unseen, and not competing. Neither concept of a held-out pair appears in any training pair. Figure~\ref{fig:review-R4} shows one pair per group at seeds 9 and 10, and the list below names every pair.
+
 \begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R4}{\linewidth}{5.0in}
@@ -1318,6 +1322,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \Needspace{2.8in}
 \subsection{Stable Diffusion 1.5}
 \label{app:review-sd15}
+
+Attend-and-Excite, SynGen and Divide-and-Bind are released for Stable Diffusion 1.x only, so Table~\ref{tab:review-R5} runs them from their official code on the same prompts. Its numbers compare only within the table, because the base model differs from Table~\ref{tab:review-R1}'s. Figure~\ref{fig:review-R13} shows the prompts of Figure~\ref{fig:review-R12} under these methods.
 
 \begin{table}[htbp]
 \centering\footnotesize
@@ -1340,6 +1346,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \subsection{Samplers that correct the product}
 \label{app:review-samplers}
 
+A product of experts can also be corrected while sampling, with no training. Figure~\ref{fig:review-R6} compares the joint prompt and the product, each with and without a Langevin corrector, the product with unadjusted Hamiltonian Monte Carlo, and CO3, on four pairs from the same starting noise.
+
 \begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R6}{\linewidth}{3.9in}
@@ -1352,6 +1360,8 @@ three prompt evaluations per step as ordinary product-of-experts composition.
 \Needspace{4.4in}
 \subsection{How the adapter behaves}
 \label{app:review-adapter}
+
+Figure~\ref{fig:adapter-rank} varies the adapter's rank and the number of denoising steps it acts on, for a cat and a dog at three held-out seeds; Section~\ref{sec:results} discusses it. Figure~\ref{fig:review-R9} counts each failure type over the held-out pairs as the adapter acts on fewer steps, and Figure~\ref{fig:review-R10} shows the images behind those counts.
 
 \begin{figure}[htbp]
 \centering
@@ -1387,6 +1397,8 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 \clearpage
 \subsection{Three concepts}
 \label{app:review-three}
+
+The adapter is trained on pairs only. Figure~\ref{fig:review-R11} asks whether it carries to three concepts: four concept triples at the shared seed under the joint prompt, the product, and the product through the adapter.
 
 \begin{figure}[htbp]
 \centering\footnotesize
