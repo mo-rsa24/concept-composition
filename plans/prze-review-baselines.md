@@ -42,7 +42,7 @@ For Claude to execute.
 ### 3. 🚀 Launch the evaluations
 
 - [ ] **For each method at its published default: an 80% interval for runtime and memory, the exact command, your yes, the launch, the first tiles**
-  - Launcher: `scripts/review_baselines_eval.sh`, one interleaved shard of the 1,528 R1 and R3 cells per job.
+  - Launcher: `scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last.
   - ◀ Needs: 2
   - ▶ Next: 4
 
