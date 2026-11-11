@@ -182,7 +182,28 @@ The reference that printed as "Figure 10" in Section 4 is removed, and the Discu
 > "Could the authors list the 48 training pairs and the held-out pairs, and clarify whether
 > cat/dog is in the training set?"
 
-Pending.
+The training set is defined by a criterion, not by the particular pairs. A pair is kept when the
+frozen model's joint prompt draws both named concepts as separate objects, and dropped when the two
+concepts cannot be told apart (Section 4, Figure 8). The same criterion applies whether it yields 48
+pairs or a thousand, and 48 is where we stopped collecting. The method relies on the criterion, not on
+any specific pair.
+
+Cat and dog is not in the training set. It is held out, and no training pair contains a cat or a dog.
+The held-out pairs are listed with their groups in Appendix C.2, and the four pairs in Figure 5 share
+no concept with any training pair.
+
+For reproducibility, the 48 training pairs are: (two animals, 28) badger and magpie, bear and boar,
+bear and heron, beaver and raccoon, beaver and woodpecker, bison and weasel, buffalo and hippo, bull
+and rooster, camel and pelican, chicken and rabbit, deer and heron, deer and wolf, donkey and duck,
+donkey and rooster, emu and koala, giraffe and hyena, giraffe and ostrich, giraffe and zebra, gorilla
+and chimpanzee, hedgehog and robin, horse and pig, horse and sheep, impala and jackal, langur and
+peacock, lion and meerkat, lion and oryx, moose and chipmunk, peacock and pig; (an animal and an
+object, 3) hamster and carrot, pony and red barn, snail and lantern; (two objects, 17) accordion and
+scarecrow, bicycle and birdhouse, birdcage and hay bale, cactus and cooler box, coat rack and potted
+plant, guitar and traffic cone, hay bale and ukulele, lighthouse and sailboat, mailbox and pumpkin,
+microscope and test tube, rocking chair and cactus, soccer ball and park bench, suitcase and globe,
+teddy bear and birthday cake, telescope and beach ball, typewriter and cactus, windmill and tractor.
+They are also released with the code as the configuration file the trainer reads.
 
 ### Q2: success rate against PoE and CO3 over all held-out pairs and seeds
 
