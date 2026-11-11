@@ -47,6 +47,19 @@ def slug(a: str, b: str) -> str:
     return f"{s(a)}__x__{s(b)}"
 
 
+def make_dir(d: Path, tries: int = 10) -> None:
+    """mkdir that survives two cards creating one folder at once over NFS (as in review_langevin_subset.py)."""
+    for i in range(tries):
+        try:
+            d.mkdir(parents=True, exist_ok=True)
+            return
+        except (FileExistsError, FileNotFoundError) as e:
+            print(f"{d}: {type(e).__name__} on try {i + 1}, waiting 15 s", flush=True)
+            time.sleep(15)
+            os.listdir(d.parent.parent)
+    d.mkdir(parents=True, exist_ok=True)
+
+
 def tile(out_root: Path, group: str, a: str, b: str, seed: int, method: str) -> Path:
     return out_root / group / slug(a, b) / f"seed{seed:02d}" / f"{method}.png"
 
@@ -99,7 +112,7 @@ def run_co3(cells, setting, knobs):
         if png.exists():
             print(f"{group} {slug(a, b)} seed {seed}: already rendered", flush=True)
             continue
-        png.parent.mkdir(parents=True, exist_ok=True)
+        make_dir(png.parent)
         joint = f"{a} {joiner} {b}"
         cfg.prompt, cfg.prompt_orig, cfg.seed = f"{a}+{b}+{joint}", joint, seed
         seed_everything(seed)
@@ -141,7 +154,7 @@ def run_superdiff(cells, setting, knobs):
         if png.exists():
             print(f"{group} {slug(a, b)} seed {seed}: already rendered", flush=True)
             continue
-        png.parent.mkdir(parents=True, exist_ok=True)
+        make_dir(png.parent)
         counter.reset()
         t0 = time.perf_counter()
         raw = superdiff.run(cell_for(a, b, seed), ctx, exp_name="review", overwrite=True,
