@@ -58,9 +58,11 @@ What is already known
   object, 17 two objects; 182 cells over 23 seeds, none from 9 to 16). Section 4 still says a pair is
   kept if the joint prompt's or CO3's image shows both concepts; for the adapter of record that is
   wrong. All 182 training cells take their target from the joint prompt (meta.json of every cell in
-  the training cache, checked 2026-11-11), each kept seed judged by a person to show both
-  (artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json on the
-  cluster checkout). Reword Section 4's filter sentence to match appendix A; CO3 contributes no
+  the training cache, checked 2026-11-11). Pairs were admitted over rounds v54 to v58 by a person's
+  judgment (verdicts.json and pair-ledger.md in
+  artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/ on the cluster checkout),
+  but not every kept seed was checked: giraffe x zebra is kept on seeds 1 to 8 in cells_v58.json
+  while the ledger kept it on seeds 1 and 2, and its seed 8 target is a single zebra head. Reword Section 4's filter sentence to match appendix A; CO3 contributes no
   training target, which also answers UHz6's question about pairs kept only because CO3 composed.
 - The rank and steps ablation is in appendix C.5 and cited from Section 4.1 as "Figure 12 shows";
   name the appendix there ("Figure 12, Appendix C.5").
