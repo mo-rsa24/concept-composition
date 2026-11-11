@@ -13,7 +13,25 @@ UHz6's is page 3. A reply marked pending has not been agreed yet.
 > does not establish that it specifically measures whether the named concepts appear as distinct
 > objects."
 
-Pending.
+We agree that $r_t$ in Equation 9 is the entire difference between the joint-prompt and
+product-of-experts predictions, and that adding it in full recovers the joint prompt by
+construction. We do not claim that $r_t$ represents plurality alone. A product of experts drops the
+interaction the joint prompt carries, and that interaction can hold several kinds of meaning: a
+relation between the concepts ("a dog on a cat"), an effect of one on the other ("a camel in the
+rain" should be wet), and the layout and style of the scene.
+
+Our study concerns one part of this interaction: plurality, whether two named concepts appear as two
+objects rather than one hybrid. The training pairs were chosen for it, as pairs the product fuses
+into a hybrid.
+
+Within that scope, the evidence is that the correction is specific and early, not generic. A pair's
+own $r_t$ restores the second object, while another pair's, another seed's, or a time-reordered one
+does not (Figure 2). The first ten of 50 steps are enough (Figures 3 and 4). At partial strength
+($\lambda$ of 0.6 to 0.65 in Figure 2) the second object appears while the layout and style still
+look like the product's render.
+
+We agree this does not separate plurality from everything else $r_t$ carries. Section 3 now states
+this scope explicitly, and the contributions are rewritten to claim only what the experiments show.
 
 ### W2: methodological novelty
 
@@ -80,7 +98,7 @@ seed, as in its released code.
 > "What evidence establishes that the residual in Equation (9) specifically measures plurality
 > rather than the broader difference between joint and separate conditioning?"
 
-Pending, with W1.
+Answered under W1 above.
 
 ### Q2: aggregate results over held-out concepts and seeds
 

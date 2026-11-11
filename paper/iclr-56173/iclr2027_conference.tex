@@ -218,9 +218,9 @@ The property of a prompt and image pair where each named concept in the prompt i
 \end{definitionbox}
 We show that plurality can be learned by an adapter network layer with a finite set of examples from conflicting concept pairs. Further, the learned concept of plurality within the latent space generalises to novel concept pairs. Thus, our method is able to induce plurality zero-shot for concept combinations that cannot be found in the training data and that joint prompting is unlikely to generalise to. We make three primary contributions:
 \begin{itemize}
-    \item We measure the abstract concept of plurality which is already present in the latent space of a pretrained LDM such as Stable Diffusion XL.
-    \item We show that adding a plurality term to PoE restores composition and that this plurality term is learnable by an adapter network layer, alleviating the need for joint prompting at inference time
-    \item \looseness=-1 We show that the learned concept of plurality can be generalised to novel concept pairs at inference time, providing PoE with the capacity to generate coherent, multi-object scenes through compositional generalisation of individual objects and the abstract notion of plurality.
+    \item We measure, at every denoising step, the difference between SDXL's joint-prompt prediction and its product-of-experts prediction, and show that a pair's own correction over the first ten of 50 steps restores plurality.
+    \item We train an adapter so that the product of the separate prompts reproduces the joint-prompt prediction, removing the joint prompt at inference.
+    \item We show that the adapter restores plurality on concept pairs it never trained on.
 \end{itemize}
 
 \section{Background and Related Work}
@@ -584,6 +584,7 @@ r_t
 \hat\epsilon_{\mathrm{PoE}}(x_t,t).
 \label{eq:interaction-term}
 \end{equation}
+The term $r_t$ is the whole interaction that the product drops: everything the joint prompt implies beyond its separate concepts. That can include a relation between the concepts (a dog on a cat), an effect of one on the other (a camel in the rain is wet), and the layout and style of the scene. This paper studies one part of it, plurality: whether two named concepts appear as two objects rather than one hybrid. The training pairs are pairs the product fuses into a hybrid, and Figures~\ref{fig:strength-grid} to~\ref{fig:where-the-correction-lands} show that a pair's own correction over the first ten of 50 steps is what returns the second object.
 Measuring $r_t$ requires a model which is able to produce a reasonable image conditioned on the joint prompt. This is likely to only be true for common concept combinations and places the burden on data and training, rather than inference, which is counter to the purpose of compositional diffusion. To begin our exploration, we add the measured plurality term to the product-of-experts and control the strength of the correction with $\lambda$:
 \begin{equation}
 \hat\epsilon_\lambda(x_t,t)
