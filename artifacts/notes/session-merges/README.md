@@ -21,3 +21,7 @@ Starting prompts built by `/merge-sessions` from finished sessions, each with it
 **Route step 9: every image scored, Tables 1 and 2 built**
 
 [2026-11-11-route-step-9-retro.md](2026-11-11-route-step-9-retro.md). The retrospective of the 2026-11-11 walk over route step 9, session `47281f64-fc21-4b71-b0fd-3b968913d9b3`: four scorers installed and proved, 4,584 images scored, both tables filled in the paper, the R1 bar SUPPORTS, the CO3 row owed to step 8.
+
+**Route step 8b: the CO3 baseline rendered on R1, R3 and Figure 5**
+
+[2026-11-11-prze-review-baselines-retro.md](2026-11-11-prze-review-baselines-retro.md). The retrospective of the 2026-11-11 walk over route step 8b, session `ece09d30-6979-43e8-9fcc-84e4db760176`: CO3 at its published default from the shared seed latent, all 1,104 R1 and 424 R3 cells; ToMe dropped on an import failure; tuning and SuperDiff dropped by your calls.
