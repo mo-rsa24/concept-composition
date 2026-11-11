@@ -625,7 +625,7 @@ What to read
 
 What is already known
 - No page of this pipeline exists in the registry (18 pages, checked 2026-11-10).
-- Methods on SDXL: joint prompt, PoE, PoE + Langevin, PoE + unadjusted HMC, CO3, the frozen adapter,
+- Methods on SDXL: joint prompt, PoE, PoE + Langevin, CO3, the frozen adapter,
   Feynman-Kac steering. On SD 1.5: Attend-and-Excite and CONFORM with official code, unmodified.
 - Adjusted MALA and HMC cannot run on SDXL, which outputs a noise prediction and no energy.
 - The scorers: GroundingDINO instance count, CLIP score, ImageReward, BLIP-VQA, GenEval and

@@ -1,8 +1,8 @@
-# 🧪 PRZE-2: prove the Langevin corrector and render the six-column figure
+# 🧪 PRZE-2: prove the Langevin corrector and render the five-column figure
 
 **Goal:** reviewer PrzE gets the MCMC corrector baseline they asked for, built on an update shown correct on a toy with a known answer.
-**Objective:** the corrector's update passes a check against the exact stationary mean and variance at four step sizes; the joint-prompt Langevin and unadjusted HMC drivers match the plain sampler at zero corrector steps; c and k are chosen on the tuning pairs by a rule written into the protocol first; appendix figure R6 is built from the frozen settings.
-**Definition of done:** `python3 scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; R6 sits at `artifacts/results/does-a-langevin-corrector-fix-the-product/six_columns.png` with a sidecar listing seeds, noise and settings.
+**Objective:** the corrector's update passes a check against the exact stationary mean and variance at four step sizes; the joint-prompt Langevin and unadjusted HMC drivers match the plain sampler at zero corrector steps; the Langevin setting (c = 3, k = 20) is written into the protocol before any review image; appendix figure R6 is built at that setting.
+**Definition of done:** `python3 scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; R6 sits at `artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with a sidecar listing seeds, noise and settings.
 **Route:** [answer the ICLR reviews](route-answer-the-iclr-reviews.md), step 8, outcome PRZE-2.
 
 ## Environment Facts This Plan Depends On
@@ -35,18 +35,17 @@ For Claude to execute.
   - ◀ Needs: instruction 2
   - ▶ Next: instruction 3
 
-### 4. 🎛️ Tuning
+### 4. 🎛️ The setting
 
-- [ ] **Write the tuning rule into the protocol: grid c ∈ {1, 3, 10} × k ∈ {10, 20} for Langevin, the same with 5 leapfrog steps for HMC; the setting with the most of 32 tuning cells showing two or more animals by the validated instance count and not called destroyed from the full-resolution tile wins, a tie to the lower k**
+- [x] **Write the Langevin setting into protocol rule 3: c = 3, k = 20 over all 50 levels, no tuning grid; joint + Langevin at the same setting; unadjusted HMC not a baseline** ✓ verified 2026-11-11: rule 3 and its history row, written before any review corrector image
   - ◀ Needs: 3
-- [ ] **Run the grid on the tuning pairs after a yes, save one image per cell and a contact sheet, and freeze the chosen c and k**
+  - ▶ Next: 5
+
+### 5. 🖼️ The five-column figure
+
+- [ ] **Render R6 at c = 3, k = 20 and seed 10: joint, joint + Langevin, PoE and PoE + Langevin from the rule 2 starting latent, CO3 from its own noise; write its sidecar; add the rows to the route's "What we know so far" and redraw the board with `--step 8`**
+  - ◀ Needs: 4
   - ▶ Next: instruction 4
-
-### 5. 🖼️ The six-column figure
-
-- [ ] **Render R6 from the frozen settings at seed 10, one starting latent per row for every column but CO3, and write its sidecar; add the rows to the route's "What we know so far" and redraw the board with `--step 8`**
-  - ◀ Needs: instruction 4
-  - ▶ Next: instruction 5
 
 ## Instructions
 
@@ -69,12 +68,7 @@ For you to follow.
 - [x] **Read the identity check's printed maximum difference for each driver; you want 0** ✓ confirmed 2026-11-11: you read the Slurm 84583 log in chat (both lines `max |diff| = 0.000e+00 PASS`) and said "done"
   - ◀ Needs: task 3
 
-### 4. 👀 Judge the tuning contact sheet
-
-- [ ] **Open the contact sheet, overrule any destroyed call you disagree with, and confirm the chosen c and k**
-  - ◀ Needs: task 4
-
-### 5. 👀 Judge the figure
+### 4. 👀 Judge the figure
 
 - [ ] **Open R6 and its sidecar, and say PASS or MISS against the definition of done**
   - ◀ Needs: task 5
