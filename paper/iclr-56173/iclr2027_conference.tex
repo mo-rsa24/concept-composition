@@ -673,8 +673,8 @@ The experiments above obtain $r_t$ from the joint prompt. We now consider whethe
 
 \begin{figure}[t]
 \centering
-\reviewslot[four-pairs-four-methods.png]{R2}{\textwidth}{3.8in}
-\caption{\textbf{The adapter repairs the composition without the joint prompt.} Rows are four unseen concept pairs at seed 10, and columns are the joint prompt, the plain product, CO3, the product with a Langevin corrector, and our adapter. Every column starts from the same latent; CO3 draws its later resampling noise from the seed (Section~\ref{sec:results}).}
+\reviewslot[four-pairs-four-methods.png]{R2}{\textwidth}{4.4in}
+\caption{\textbf{The adapter repairs the composition without the joint prompt.} Rows are four unseen concept pairs, and columns are the joint prompt, the plain product, CO3, the product with a Langevin corrector, and our adapter.}
 \label{fig:four-pairs-four-methods}
 \end{figure}
 
@@ -715,7 +715,7 @@ $t$ and one prompt, and returns a noise prediction, as the frozen model does. At
 
 
 
-We train on concept pairs that Stable Diffusion XL composes under the joint prompt, since a pair the joint prompt fails on gives no target with both concepts. The training set has \trainpairs{} pairs (28 of two animals, 3 of an animal and an object, 17 of two objects) at 182 pair-and-seed cells over 23 seeds, and every target is the frozen model's joint-prompt prediction. Pairs were kept when the joint prompt drew both named things as separate objects, and left out when the two concepts could not be told apart (Figure~\ref{fig:training-choice}; the full list is in Appendix~\ref{app:implementation}). Candidates were screened with the joint prompt and, for some, with CO3 \citep{dutta2026steer} as a second view; no CO3 picture is a training target. The held-out pairs are unseen as pairs (Appendix~\ref{app:review-held-out}), and the four pairs in Figure~\ref{fig:four-pairs-four-methods} share no concept with any training pair. Seeds 9 to 16 are never trained on.
+We train on concept pairs that Stable Diffusion XL composes under the joint prompt, since a pair the joint prompt fails on gives no target with both concepts. The training set has \trainpairs{} pairs (28 of two animals, 3 of an animal and an object, 17 of two objects) at 182 pair-and-seed cells over 23 seeds, and every target is the frozen model's joint-prompt prediction. Pairs were kept when the joint prompt drew both named things as separate objects, and left out when the two concepts could not be told apart (Figure~\ref{fig:training-choice}; the full list is in Appendix~\ref{app:implementation}). Candidates were screened with the joint prompt and, for some, with CO3 \citep{dutta2026steer} as a second view; no CO3 picture is a training target. The held-out pairs are unseen as pairs (Appendix~\ref{app:review-held-out}), and no pair in Figure~\ref{fig:four-pairs-four-methods} was trained on. Seeds 9 to 16 are never trained on.
 For every training pair and seed, we select \statesperrun{} states
 from an uncorrected product-of-experts trajectory. At each selected
 $(x_t,t)$, we match the adapted composition to the frozen model's
@@ -828,7 +828,7 @@ between the training target and the prediction used during sampling.
 
 \subsection{Results}
 \label{sec:results}
-We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. The images shown are picked by a fixed rule, never by looking.
+We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Tables~\ref{tab:review-R1} and~\ref{tab:review-R3} score every image, and the appendix shows the renders behind them.
 
 
 

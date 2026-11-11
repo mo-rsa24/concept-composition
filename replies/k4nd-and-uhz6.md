@@ -70,8 +70,8 @@ not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO:
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
 link]; Appendix C.2 describes the held-out groups.
-The submission said that no held-out concept appears in training; that holds for the four pairs of
-Figure 5, and Section 4 now says the held-out pairs are unseen as pairs.
+The submission said that no held-out concept appears in training; that was too strong, and Section 4
+now says the held-out pairs are unseen as pairs.
 
 The failure types the reviewer names (substituted identities, additional objects, style-dependent
 loss) are counted per setting in the appendix [TODO: slot R9].
@@ -113,16 +113,16 @@ Section 4 now describes the training data and how pairs were chosen (Figure 8).
 Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
-seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and images
-picked by rule (Tables 1 and 2).
+seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
+behind both tables in the appendix (Tables 1 and 2).
 
 ### W5: the qualitative baseline comparison and its starting noise
 
 > "The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states
 > that all examples use the same initial seeds."
 
-Every column of Figure 5 now starts from the same latent at the same seed, and the caption and
-Section 4.1 say so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
+Every method now uses the same seed for each prompt, with every column of a row in Figure 5
+starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
 seed, as in its released code. Tables 1 and 2 make the comparison over 4 and 8 seeds, with the
 images behind them in the appendix.
 
@@ -222,8 +222,7 @@ pairs or a thousand, and 48 is where we stopped collecting. The method relies on
 any specific pair.
 
 Cat and dog is not in the training set. It is held out, and no training pair contains a cat or a dog.
-The held-out pairs and their groups are released with the code (Appendix C.2 describes the groups), and the four pairs in Figure 5 share
-no concept with any training pair.
+The held-out pairs and their groups are released with the code (Appendix C.2 describes the groups), and no pair in Figure 5 was trained on.
 
 For reproducibility, the 48 training pairs are: (two animals, 28) badger and magpie, bear and boar,
 bear and heron, beaver and raccoon, beaver and woodpecker, bison and weasel, buffalo and hippo, bull
