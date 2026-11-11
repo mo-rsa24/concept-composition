@@ -98,10 +98,12 @@ Pending, with W3. The numbers come from route steps 5, 9 and 12.
 > "Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes
 > from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?"
 
-We have addressed this in Section 4. Every training target is the frozen model's joint-prompt
-prediction, and no CO3 picture is a target; CO3 served only as a second view when screening some
-candidates. Pairs were kept when the joint prompt drew both named things as separate objects
-(Figure 8 shows the joint prompt beside CO3 for five candidate pairs, with the picture judged clearest at each seed).
+We have addressed this in Section 4 and Figure 8. Every training target is the frozen model's
+joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair
+entered the training set when the joint prompt drew both named things as separate objects. Figure 8
+shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped
+because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed
+(seed 3 in Figure 8), that seed's target is still the joint prompt's picture.
 
 ### Q4: the objective in the main text, and the inconsistencies
 
@@ -119,10 +121,12 @@ resolved as described under W4. Baseline starting noise: pending, with W5.
 > the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore
 > supervise toward a target without plurality."
 
-We have addressed this in Section 4. Every training target is the frozen model's joint-prompt
-prediction, and pairs were kept when the joint prompt drew both named things as separate objects
-(Figure 8 shows the joint prompt beside CO3 during screening). CO3 served only as a second view when screening some candidates, and no CO3 picture
-is a target.
+We have addressed this in Section 4 and Figure 8. Every training target is the frozen model's
+joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair
+entered the training set when the joint prompt drew both named things as separate objects. Figure 8
+shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped
+because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed
+(seed 3 in Figure 8), that seed's target is still the joint prompt's picture.
 
 ### Presentation issues
 
