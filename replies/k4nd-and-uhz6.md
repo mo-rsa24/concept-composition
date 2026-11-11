@@ -53,16 +53,6 @@ step, and never the joint prompt. The correction $\hat r_\psi$ is the implicit d
 unadapted composition (Equation 13), and Equation 13 at $\lambda = 1$ is the adapted composition
 itself. The reference that printed as "Figure 10" is removed.
 
-**The layers the adapter modifies, and its size**
-
-The method text, abstract and parameter count now describe the adapter as trained: 35.8 M
-parameters on the query, key and value projections of both the self-attention and cross-attention
-layers. The submission said cross-attention only and 19.8 M.
-
-**The training schedule**
-
-Pending.
-
 **Repetitive claims about learning an abstract concept**
 
 > "The repetitive claims about learning an abstract concept occupy space that could instead
@@ -136,7 +126,8 @@ because the two birds are hard to tell apart. Where CO3 drew a kept pair more cl
 > "There are presentation issues: Sec. 4 refers to a Figure 10 that does not exist, and several
 > sentences are broken (e.g., "inside create hybrid objects" in Sec. 5)."
 
-The reference that printed as "Figure 10" in Section 4 is removed. "inside create": pending.
+The reference that printed as "Figure 10" in Section 4 is removed, and the Discussion now reads
+"and instead create hybrid objects".
 
 ### Q1: the 48 training pairs, the held-out pairs, and whether cat and dog is trained on
 
