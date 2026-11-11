@@ -55,15 +55,13 @@ What is already known
   and 6 share both. Reword it to say the 53 are unseen as pairs, and say so wherever the text
   calls them unseen; appendix C.2 already says it.
 - Appendix A now has a "Training pairs" paragraph (48 pairs: 28 two animals, 3 an animal and an
-  object, 17 two objects; 182 cells over 23 seeds, none from 9 to 16). Section 4 still says a pair is
-  kept if the joint prompt's or CO3's image shows both concepts; for the adapter of record that is
-  wrong. All 182 training cells take their target from the joint prompt (meta.json of every cell in
-  the training cache, checked 2026-11-11). Pairs were admitted over rounds v54 to v58 by a person's
-  judgment (verdicts.json and pair-ledger.md in
-  artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/ on the cluster checkout),
-  but not every kept seed was checked: giraffe x zebra is kept on seeds 1 to 8 in cells_v58.json
-  while the ledger kept it on seeds 1 and 2, and its seed 8 target is a single zebra head. Reword Section 4's filter sentence to match appendix A; CO3 contributes no
-  training target, which also answers UHz6's question about pairs kept only because CO3 composed.
+  object, 17 two objects; 182 cells over 23 seeds, none from 9 to 16). Section 4 says a pair is kept if the joint prompt's or CO3's image
+  shows both concepts; appendix A says only the joint prompt was judged, and the verdict files hold
+  joint-prompt calls only (no record shows a pair kept by CO3 alone). Settle which is true and make
+  both say it. Every target is the joint prompt's prediction (render_teacher false in the
+  v58-03-self config), never a CO3 picture. Then restore the hidden joint-beside-CO3 figure in
+  appendix A (commented out, label fig:training-selection, drawn from
+  artifacts/results/how-the-training-pairs-were-chosen/joint-vs-co3-spec.json).
 - The rank and steps ablation is in appendix C.5 and cited from Section 4.1 as "Figure 12 shows";
   name the appendix there ("Figure 12, Appendix C.5").
 - The limitations figure (Figure 6) uses pictures cropped from the step-50,000 checkpoint, and its
