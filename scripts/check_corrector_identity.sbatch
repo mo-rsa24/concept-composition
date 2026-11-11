@@ -12,8 +12,9 @@
 # torch.equal. Writes nothing but this log. The plan is plans/prze-2-langevin-corrector.md.
 #
 #   scripts/cluster.sh run "sbatch scripts/check_corrector_identity.sbatch"
+#   sbatch --export=ALL,REPO=<a worktree> <that worktree>/scripts/check_corrector_identity.sbatch
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 
 echo "=== node $(hostname)  job ${SLURM_JOB_ID:-none}  start $(date -Is)"
