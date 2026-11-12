@@ -30,6 +30,9 @@ from matplotlib.patches import Patch  # noqa: E402
 sys.path.insert(0, os.path.dirname(__file__))
 from review_window_figure import COLOURS, GROUPS, SETTINGS, cell, load  # noqa: E402
 
+# a plain hyphen: the plot font draws the en dash low, like an underscore
+SETTINGS = [(k, lab.replace("\u2013", "-")) for k, lab in SETTINGS]
+
 JUDGE_SETTING = {"off": "off", "steps 0-10": "10", "steps 0-25": "25", "all 50": "50"}
 TYPES = [("hybrid", "hybrid"), ("one", "one\nconcept"), ("intrusion", "intrusion"),
          ("count error", "count\nerror")]
@@ -40,7 +43,7 @@ def legend_strip(out):
     """One legend for the whole grid, saved on its own so the four panels keep the same size."""
     fig = plt.figure(figsize=(6.9, 0.25))
     fig.legend(handles=[Patch(color=COLOURS[s], label=lab) for s, lab in SETTINGS], frameon=False,
-               ncol=4, fontsize=7, loc="center", title=None)
+               ncol=4, fontsize=9, loc="center", title=None)
     for ext in ("pdf", "png"):
         fig.savefig(os.path.join(out, f"panel_legend.{ext}"), dpi=300, bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
@@ -75,7 +78,7 @@ def main() -> None:
     ap.add_argument("--out", required=True)
     ap.add_argument("--draws", type=int, default=10_000)
     a = ap.parse_args()
-    plt.rcParams.update({"font.size": 7, "font.family": "serif"})
+    plt.rcParams.update({"font.size": 9, "font.family": "serif"})
     rng = random.Random(0)
 
     # a: judge labels
@@ -96,7 +99,7 @@ def main() -> None:
         w.writerow(["setting", "images", *[t for t, _ in TYPES], "two", "broken", "style_loss"])
         for s in per:
             w.writerow([s, n[s], *[per[s][t] for t, _ in TYPES], per[s]["two"], per[s]["broken"], per[s]["style"]])
-    fig, ax = plt.subplots(figsize=(3.3, 1.9))
+    fig, ax = plt.subplots(figsize=(6.9, 2.0))
     bars(ax, [t for t, _ in TYPES], lambda t, s: shares.get((t, s)))
     ax.set_xticks(range(len(TYPES)), [lab for _, lab in TYPES])
     ax.set_ylabel("images (of 424)")
@@ -117,16 +120,16 @@ def main() -> None:
     save(fig, a.out, "panel_b_blip")
 
     # c and d: one bar per setting
-    for name, k, ylab in (("panel_c_two_animals", "comp", "images with two animals (of 160)"),
+    for name, k, ylab in (("panel_c_two_animals", "comp", "two animals (of 160)"),
                           ("panel_d_imagereward", "ir", "ImageReward")):
-        fig, ax = plt.subplots(figsize=(3.3, 1.9))
+        fig, ax = plt.subplots(figsize=(3.4, 2.2))
         for si, (s, lab) in enumerate(SETTINGS):
             v = cell([r for r in rows if r["win"] == s], k, rng, a.draws)
             if k == "comp":  # a count of the animal-pair images, every setting has the same 160
                 v = {**v, **{q: v[q] * v["images"] for q in ("mean", "lo", "hi")}}
             ax.bar(si, v["mean"], 0.7, color=COLOURS[s])
             ax.errorbar(si, v["mean"], yerr=[[v["mean"] - v["lo"]], [v["hi"] - v["mean"]]], color="k", lw=0.6, capsize=1.5)
-        ax.set_xticks(range(len(SETTINGS)), [lab.replace(" for ", "\n") for _, lab in SETTINGS], fontsize=6)
+        ax.set_xticks(range(len(SETTINGS)), [lab.replace(" for ", "\n") for _, lab in SETTINGS], fontsize=8)
         ax.set_ylabel(ylab)
         if k == "comp":
             ax.set_ylim(0, 160)

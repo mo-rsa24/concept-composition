@@ -1325,16 +1325,16 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\includegraphics[width=0.6\linewidth]{figures/failure-window/panel_legend.pdf}\\[2pt]
-\begin{subfigure}[t]{0.325\linewidth}\centering
+\includegraphics[width=0.75\linewidth]{figures/failure-window/panel_legend.pdf}\\[2pt]
+\begin{subfigure}[t]{\linewidth}\centering
 \includegraphics[width=\linewidth]{figures/failure-window/panel_a_failure_types.pdf}
 \caption{Failure types. Each image is labelled by Claude Opus 5.5 (\texttt{claude-opus-5-5}) with the prompt in Appendix~\ref{app:review-adapter}, one call per image, without being told the setting; bars count how many of each setting's 424 images received each label.}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.325\linewidth}\centering
+\end{subfigure}\\[6pt]
+\begin{subfigure}[t]{0.49\linewidth}\centering
 \includegraphics[width=\linewidth]{figures/failure-window/panel_c_two_animals.pdf}
 \caption{Images of the 20 animal pairs (160 per setting) in which an open-vocabulary detector finds two or more animals.}
 \end{subfigure}\hfill
-\begin{subfigure}[t]{0.325\linewidth}\centering
+\begin{subfigure}[t]{0.49\linewidth}\centering
 \includegraphics[width=\linewidth]{figures/failure-window/panel_d_imagereward.pdf}
 \caption{ImageReward over all 424 images per setting.}
 \end{subfigure}
