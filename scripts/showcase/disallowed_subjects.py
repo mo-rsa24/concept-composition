@@ -48,13 +48,18 @@ def words(text: str) -> set[str]:
     return {w for w in re.split(r"[^a-z]+", text.lower()) if w}
 
 
+# Objects that share a word with a listed creature, set aside before matching so the creature word
+# alone stays caught (pair ledger, 2026-11-12, the user's decision). Spider and web are never here.
+OBJECT_PHRASES = re.compile(r"computer[^a-z]+mouse|baseball[^a-z]+bats?", re.I)
+
+
 def check(text: str, *, allow_ask_first: bool = False) -> None:
     """Raise on a disallowed subject. ``text`` is a pair slug or a prompt.
 
     ``allow_ask_first`` is passed only by a caller that has an explicit recorded decision for that
     subject in the pair ledger. It never lifts ``BLOCKED``.
     """
-    w = words(text)
+    w = words(OBJECT_PHRASES.sub(" ", text))
     hit = sorted(w & BLOCKED)
     if hit:
         raise ValueError(
