@@ -20,7 +20,6 @@ REPO = HERE.parents[2]
 sys.path.insert(0, str(HERE))
 from figure_specs import SPECS  # noqa: E402
 
-PENDING = "Table 2 (GenEval and T2I-CompBench) is still being scored and prints a placeholder."
 
 # What changed in the revision, per reply heading (the text before the colon), per reviewer.
 CHANGES = {
@@ -33,7 +32,7 @@ CHANGES = {
     ("k4nd", "Q2"): "Table 1, and Figures 11 and 12 on the held-out pairs.",
     ("k4nd", "Q3"): "Section 4 describes the training set; Figure 7 shows the joint prompt beside CO3 during screening. No CO3 picture is a training target.",
     ("k4nd", "Q4"): "As for W4 and W5.",
-    ("UHz6", "W1"): "Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench. " + PENDING,
+    ("UHz6", "W1"): "Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench.",
     ("UHz6", "W3"): "Figure 5 adds ToMe and a Langevin corrector; Table 1 compares with CO3 and ToMe; Section 2 discusses Attend-and-Excite and CONFORM; Appendix C.4 shows three concepts.",
     ("UHz6", "The training filter"): "As for k4nd Q3.",
     ("UHz6", "Presentation issues"): "The ``Figure 10'' reference is removed, and the Discussion reads ``and instead create hybrid objects''.",
@@ -41,7 +40,7 @@ CHANGES = {
     ("UHz6", "Q2"): "Table 1, and Figures 11 and 12 on the held-out pairs.",
     ("UHz6", "Q3"): "Figures 11, 12 and 13 show the adapter switched on for the first 10, the first 25 or all 50 steps.",
     ("UHz6", "Q4"): "No change to the paper; the reply answers from the held-out pairs.",
-    ("PrzE", "W1"): "Table 1 adds BLIP-VQA, CLIP score and ImageReward on 276 prompts; Table 2 adds GenEval and T2I-CompBench. " + PENDING,
+    ("PrzE", "W1"): "Table 1 adds BLIP-VQA, CLIP score and ImageReward on 276 prompts; Table 2 adds GenEval and T2I-CompBench.",
     ("PrzE", "W2"): "Figure 5 adds ToMe and a Langevin corrector; Table 1 adds ToMe; Section 4 describes the training set.",
     ("PrzE", "Q1"): "As for W1 and W2.",
     ("PrzE", "Q2"): "Appendix C.4 and a Discussion paragraph show the adapter on three concepts.",

@@ -66,8 +66,7 @@ animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measure
 image quality by CLIP score and ImageReward.
 
 
-The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
-link].
+The training and held-out pairs, with every seed, are released with the code.
 
 Hybrids, missing concepts and additional objects are counted per setting in Figure 11 (Appendix C.2).
 
@@ -166,8 +165,8 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
 benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
-held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object and counting tasks and
-T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
+held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object, attribute-binding and position tasks and
+T2I-CompBench's colour and shape sets, scored by their official evaluators. Appendix
 C.5 shows three concepts.
 
 ### W3: comparisons with samplers and attention-based methods, and scope

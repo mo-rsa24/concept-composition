@@ -2,8 +2,7 @@
 
 Submission 56173. One section per reviewer point: the reviewer's words quoted, then the reply.
 Equation, section and figure numbers refer to the revised paper
-(`paper/iclr-56173/iclr2027_conference.tex`). PrzE's review is page 2 of `Reviews.pdf`. A
-bracketed TODO names the slot whose result fills it; no number is estimated.
+(`paper/iclr-56173/iclr2027_conference.tex`). PrzE's review is page 2 of `Reviews.pdf`.
 
 ### W1: lack of quantitative benchmarks
 
@@ -12,8 +11,8 @@ bracketed TODO names the slot whose result fills it; no number is estimated.
 > empirical results and a few qualitative results are insufficient for the claim in this paper."
 
 The revision adds quantitative evaluation. Table 1 scores every method on the 276 Attend-and-Excite
-prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object and counting tasks
-and T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14].
+prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object, attribute-binding and position tasks
+and T2I-CompBench's colour and shape sets, scored by their official evaluators.
 
 ### W2: narrow baselines and missing details
 

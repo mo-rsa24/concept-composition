@@ -41,11 +41,11 @@ We agree, and the revision adds this evaluation. The adapter, the seeds and the 
 
 Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pairs, 144 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and image quality by CLIP score and ImageReward.
 
-The training and held-out pairs, with every seed, are released with the code [TODO: anonymous link].
+The training and held-out pairs, with every seed, are released with the code.
 
-Hybrids, missing concepts and additional objects are counted per setting in Figure 10 (Appendix C.3).
+Hybrids, missing concepts and additional objects are counted per setting in Figure 11 (Appendix C.2).
 
-\changed{Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA, CLIP score and ImageReward. Figures 10 and 11 score 53 held-out pairs as the adapter acts on fewer steps. Section 4.1 opens with the evaluation protocol.}
+\changed{Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA, CLIP score and ImageReward. Figures 11 and 12 score 53 held-out pairs as the adapter acts on fewer steps. Section 4.1 opens with the evaluation protocol.}
 \subsection*{W4: method details poorly presented and sometimes inconsistent}
 \begin{reviewer}``Section 4 describes target matching and provides the teacher prediction and sampling rule, but it does not explicitly formulate the training loss. The squared-error objective appears in the training diagram in Appendix A, Figure 7.'' ``The main text describes individual adapted network evaluations as returning the correction, whereas Appendix B defines them as adapted denoising predictions whose composition induces the correction. Section 4 refers to 'Figure 10,' although the actual training diagram is Figure 7.'' ``The repetitive claims about learning an abstract concept occupy space that could instead clarify the objective, training data, evaluation protocol, and limitations.''\end{reviewer}
 \textbf{The training loss is not stated in Section 4}
@@ -58,12 +58,12 @@ Section 4 now says each adapted evaluation returns a noise prediction, as Append
 
 \textbf{Repetitive claims about learning an abstract concept}
 
-We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the Discussion. The introduction now states what the correction is and what it restores (see W1). Section 4 now describes the training data and how pairs were chosen (Figure 7). Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts, including where it fails: it separates the concepts in every case but stops at two animals. Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders behind Table 1 in the appendix.
+We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the Discussion. The introduction now states what the correction is and what it restores (see W1). Section 4 now describes the training data and how pairs were chosen (Figure 7). Appendix C.4 (Figure 16) and a new Discussion paragraph show the adapter on three concepts, including where it fails: it separates the concepts in every case but stops at two animals. Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders behind Table 1 in the appendix.
 
 \changed{Section 4 states the training loss as Equation 12 and says each adapted evaluation returns a noise prediction; inference is the usual product-of-experts step with the adapter switched on. The training diagram and the ``Figure 10'' reference are gone, and the repeated abstract-concept claims are cut.}
 \subsection*{W5: the qualitative baseline comparison and its starting noise}
 \begin{reviewer}``The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states that all examples use the same initial seeds.''\end{reviewer}
-Every method now uses the same seed for each prompt, with every column of a row in Figure 5 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 10 and 11 over 8, with the images behind them in the appendix.
+Every method now uses the same seed for each prompt, with every column of a row in Figure 5 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 11 and 12 over 8, with the images behind them in the appendix.
 
 \changed{Figure 5's caption and Section 4.1 say every column starts from the same latent; CO3 is marked with a dagger for its later resampling noise.}
 \subsection*{Q1: evidence that the residual measures plurality}
@@ -73,9 +73,9 @@ Answered under W1 above.
 \changed{As for W1.}
 \subsection*{Q2: aggregate results over held-out concepts and seeds}
 \begin{reviewer}``Can the authors provide aggregate results for the learned adapter and baselines over documented held-out concepts and multiple seeds, including identity errors, additional objects, and style-dependent failures?''\end{reviewer}
-Answered under k4nd W3: Table 1, and Figure 10, which counts the failure types the reviewer names.
+Answered under k4nd W3: Table 1, and Figure 11, which counts the failure types the reviewer names.
 
-\changed{Table 1, and Figures 10 and 11 on the held-out pairs.}
+\changed{Table 1, and Figures 11 and 12 on the held-out pairs.}
 \subsection*{Q3: pairs retained when only CO3 succeeds}
 \begin{reviewer}``Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?''\end{reviewer}
 We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair entered the training set when the joint prompt drew both named things as separate objects. Figure 7 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed (seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
@@ -89,14 +89,14 @@ The objective is Equation 12 in Section 4. The network outputs and the figure re
 \section*{Reviewer UHz6}
 \subsection*{W1: the adapter is evaluated only qualitatively}
 \begin{reviewer}``The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. … In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.''\end{reviewer}
-The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53 held-out pairs as the adapter acts on fewer steps (Figures 10 and 11). Table 2 reports GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix C.5 shows three concepts.
+The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53 held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object, attribute-binding and position tasks and T2I-CompBench's colour and shape sets, scored by their official evaluators. Appendix C.5 shows three concepts.
 
-\changed{Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench. Table 2 (GenEval and T2I-CompBench) is still being scored and prints a placeholder.}
+\changed{Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench.}
 \subsection*{W3: comparisons with samplers and attention-based methods, and scope}
 \begin{reviewer}``There are no quantitative comparisons with the compositional samplers discussed in Sec. 2.2, and CO3 appears only as one qualitative column. Attention-based methods that address missing or merged objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals.''\end{reviewer}
-Table 1 now compares quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust cross-attention under a single joint prompt, while our setting has no joint prompt at inference. Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
+Table 1 now compares quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust cross-attention under a single joint prompt, while our setting has no joint prompt at inference. Beyond pairs of animals, Table 1 covers objects and Appendix C.4 three concepts.
 
-\changed{Figure 5 adds ToMe and a Langevin corrector; Table 1 compares with CO3 and ToMe; Section 2 discusses Attend-and-Excite and CONFORM; Appendix C.5 shows three concepts.}
+\changed{Figure 5 adds ToMe and a Langevin corrector; Table 1 compares with CO3 and ToMe; Section 2 discusses Attend-and-Excite and CONFORM; Appendix C.4 shows three concepts.}
 \subsection*{The training filter}
 \begin{reviewer}``In addition, the training filter keeps a pair if either the joint prompt or CO3 succeeds, but the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore supervise toward a target without plurality.''\end{reviewer}
 We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair entered the training set when the joint prompt drew both named things as separate objects. Figure 7 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed (seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
@@ -118,14 +118,14 @@ For reproducibility, the 48 training pairs are: (two animals, 28) badger and mag
 \changed{Section 4 describes the training set by kind; the 48 pairs are listed in the reply and released with the code.}
 \subsection*{Q2: success rate against PoE and CO3 over all held-out pairs and seeds}
 \begin{reviewer}``What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and multiple seeds?''\end{reviewer}
-Answered under k4nd W3: Table 1, and Figures 10 and 11 for the held-out pairs at eight seeds.
+Answered under k4nd W3: Table 1, and Figures 11 and 12 for the held-out pairs at eight seeds.
 
-\changed{Table 1, and Figures 10 and 11 on the held-out pairs.}
+\changed{Table 1, and Figures 11 and 12 on the held-out pairs.}
 \subsection*{Q3: restricting the adapter to the early steps}
 \begin{reviewer}``Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure modes in Fig. 7?''\end{reviewer}
-We tested this directly. Figure 10 counts each failure type on the 53 held-out pairs at seeds 9 to 16 with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 12 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the detector finds two animals far less often (Figure 11a). The cow and horse row of Figure 12 shows that the species substitution of the submitted Fig. 7 (Figure 14 in the revision) persists at every window, so it does not come from the late steps.
+We tested this directly. Figure 11 counts each failure type on the 53 held-out pairs at seeds 9 to 16 with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 13 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the detector finds two animals far less often (Figure 12a). The cow and horse row of Figure 13 shows that the species substitution of the submitted Fig. 7 (Figure 15 in the revision) persists at every window, so it does not come from the late steps.
 
-\changed{Figures 10, 11 and 12 show the adapter switched on for the first 10, the first 25 or all 50 steps.}
+\changed{Figures 11, 12 and 13 show the adapter switched on for the first 10, the first 25 or all 50 steps.}
 \subsection*{Q4: pairs that do not compete for the same region}
 \begin{reviewer}``Does the adapter degrade PoE on pairs that do not compete for the same region, such as foreground/background pairs like lighthouse and sea?''\end{reviewer}
 No. Among our held-out pairs, 21 have concepts that do not contend for one region, including lighthouse and a stormy sea. On these pairs the adapter scores the same as the plain product within the 95\% intervals (BLIP-VQA, seeds 9 to 16), so on pairs the product already composes it neither helps nor harms.
@@ -134,12 +134,12 @@ No. Among our held-out pairs, 21 have concepts that do not contend for one regio
 \section*{Reviewer PrzE}
 \subsection*{W1: lack of quantitative benchmarks}
 \begin{reviewer}``The paper does not report a single quantitative metric. Standard benchmarks such as T2I-Compench, GenEval and standard metrics such as CLIP, Imagereward are completely absent in this paper. The empirical results and a few qualitative results are insufficient for the claim in this paper.''\end{reviewer}
-The revision adds quantitative evaluation. Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14].
+The revision adds quantitative evaluation. Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object, attribute-binding and position tasks and T2I-CompBench's colour and shape sets, scored by their official evaluators.
 
-\changed{Table 1 adds BLIP-VQA, CLIP score and ImageReward on 276 prompts; Table 2 adds GenEval and T2I-CompBench. Table 2 (GenEval and T2I-CompBench) is still being scored and prints a placeholder.}
+\changed{Table 1 adds BLIP-VQA, CLIP score and ImageReward on 276 prompts; Table 2 adds GenEval and T2I-CompBench.}
 \subsection*{W2: narrow baselines and missing details}
 \begin{reviewer}``There is only CO3 baseline compared, the paper doesn't provide other corrected methods such as MCMC corrector. The paper only compares the baseline CO3 without the corrector they mention. The 48 concept pairs are not listed so it's impossible to see what the adapter is trained on.''\end{reviewer}
-Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC correction the paper discusses, run at its published setting from the same starting latent, beside CO3, ToMe and our adapter. Table 1 compares with CO3 on every image. Table 1 adds ToMe, run on SDXL from the same starting latents [TODO: its row of Table 1]. Section 4 now describes the training set and how pairs were chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
+Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC correction the paper discusses, run at its published setting from the same starting latent, beside CO3, ToMe and our adapter. Table 1 compares with CO3 on every image. Table 1 adds ToMe, run on SDXL from the same starting latents. Section 4 now describes the training set and how pairs were chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 
 \changed{Figure 5 adds ToMe and a Langevin corrector; Table 1 adds ToMe; Section 4 describes the training set.}
 \subsection*{Q1: quantitative benchmark}
@@ -149,7 +149,7 @@ Answered under W1 and W2: Tables 1 and 2.
 \changed{As for W1 and W2.}
 \subsection*{Q2: multiple concepts}
 \begin{reviewer}``How does your method perform when composing more than two concepts? Can you show some results for more than two concepts?''\end{reviewer}
-Appendix C.5 (Figure 15) shows one triple of each kind. The plain product fuses the three concepts or drops one; the adapter, trained only on pairs, separates them in every case and draws all three named things when the triple includes objects, but with two or three animals it draws only two. The Discussion now addresses this.
+Appendix C.4 (Figure 16) shows one triple of each kind. The plain product fuses the three concepts or drops one; the adapter, trained only on pairs, separates them in every case and draws all three named things when the triple includes objects, but with two or three animals it draws only two. The Discussion now addresses this.
 
-\changed{Appendix C.5 and a Discussion paragraph show the adapter on three concepts.}
+\changed{Appendix C.4 and a Discussion paragraph show the adapter on three concepts.}
 \end{document}
