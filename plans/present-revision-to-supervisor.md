@@ -81,6 +81,12 @@ For Claude to execute. Ask Claude to do these.
   - ✓ verified 2026-11-12: 12 figures as PNG and PDF, 12 cards, contact sheet; every panel prints its source and page
   - ◀ Needs: 4.2
 
+- [ ] **2.3 Rebuild Figure 10 (slot R9) from the scorers Tables 1 and 3 use, in place of the by-eye failure labels**
+  - Images: the 848 window renders (adapter on steps 0 to 10 and 0 to 25) scored by `scripts/review_score_blipvqa.py`, `review_score_clip_ir.py` and `review_score_comp.py` from `rows_windows.csv` (`scripts/review_window_rows.py`); adapter off and all 50 are Table 3's PoE and ours rows, already scored.
+  - The figure: x axis the four settings (off, steps 0 to 10, 0 to 25, all 50 of 50), 424 images each (53 held-out pairs, seeds 9 to 16, the same starting latent per seed); BLIP-VQA mean per held-out group with a 95% interval from resampling pairs then seeds; Comp. on the animal pairs; CLIP score and ImageReward.
+  - Reading, written before any window score exists: steps 0 to 25 and all 50 overlap on BLIP-VQA in every group, so the UHz6 Q3 reply says the first 25 steps give the same result; steps 0 to 10 below both in a group, so the reply says ten steps are too short for the learned correction there; any other outcome is reported as it lands and the reply changes to match.
+  - Caption, reply wording and figure go to Molefe before the paper or a reply changes.
+
 ### 3. 📦 The Overleaf bundle and the supervisor document
 
 - [ ] **3.1 Build `overleaf-bundle/revision/` with the renamed tex, every included file and the bibliography, plus a zip**
