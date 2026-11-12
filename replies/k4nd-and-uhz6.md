@@ -69,7 +69,7 @@ image quality by CLIP score and ImageReward.
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
 link].
 
-Hybrids, missing concepts and additional objects are counted per setting in Figure 10 (Appendix C.3).
+Hybrids, missing concepts and additional objects are counted per setting in Figure 11 (Appendix C.2).
 
 ### W4: method details poorly presented and sometimes inconsistent
 
@@ -104,7 +104,7 @@ to add $r_t$. At inference, switching the adapter on adds it. The reference that
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
 Section 4 now describes the training data and how pairs were chosen (Figure 7).
-Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
+Appendix C.4 (Figure 16) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
@@ -117,7 +117,7 @@ behind Table 1 in the appendix.
 
 Every method now uses the same seed for each prompt, with every column of a row in Figure 5
 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
-seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 10 and 11 over 8, with the
+seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 11 and 12 over 8, with the
 images behind them in the appendix.
 
 ### Q1: evidence that the residual measures plurality
@@ -133,7 +133,7 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Table 1, and Figure 10, which counts the failure types the reviewer
+Answered under k4nd W3: Table 1, and Figure 11, which counts the failure types the reviewer
 names.
 
 ### Q3: pairs retained when only CO3 succeeds
@@ -166,7 +166,7 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
 benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
-held-out pairs as the adapter acts on fewer steps (Figures 10 and 11). Table 2 reports GenEval's two-object and counting tasks and
+held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object and counting tasks and
 T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
 C.5 shows three concepts.
 
@@ -180,7 +180,7 @@ C.5 shows three concepts.
 Table 1 now compares quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin
 corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
 cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
-Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
+Beyond pairs of animals, Table 1 covers objects and Appendix C.4 three concepts.
 
 ### The training filter
 
@@ -235,18 +235,18 @@ They are also released with the code as the configuration file the trainer reads
 > "What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and
 > multiple seeds?"
 
-Answered under k4nd W3: Table 1, and Figures 10 and 11 for the held-out pairs at eight seeds.
+Answered under k4nd W3: Table 1, and Figures 11 and 12 for the held-out pairs at eight seeds.
 
 ### Q3: restricting the adapter to the early steps
 
 > "Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure
 > modes in Fig. 7?"
 
-We tested this directly. Figure 10 counts each failure type on the 53 held-out pairs at seeds 9 to 16
-with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 12
+We tested this directly. Figure 11 counts each failure type on the 53 held-out pairs at seeds 9 to 16
+with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 13
 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the
-detector finds two animals far less often (Figure 11a). The cow and horse row of Figure 12 shows that
-the species substitution of the submitted Fig. 7 (Figure 14 in the revision) persists at every window,
+detector finds two animals far less often (Figure 12a). The cow and horse row of Figure 13 shows that
+the species substitution of the submitted Fig. 7 (Figure 15 in the revision) persists at every window,
 so it does not come from the late steps.
 
 ### Q4: pairs that do not compete for the same region
