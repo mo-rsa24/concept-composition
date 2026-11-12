@@ -70,8 +70,6 @@ not competing, at seeds 9 to 16, with 95% intervals from resampling pairs.
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
 link]; Appendix C.2 describes the held-out groups.
-The submission said that no held-out concept appears in training; that was too strong, and Section 4
-now says the held-out pairs are unseen as pairs.
 
 The failure types the reviewer names (substituted identities, additional objects, style-dependent
 loss) are counted per setting in Figure 10 (Appendix C.3).
