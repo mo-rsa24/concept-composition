@@ -1294,12 +1294,6 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 
 Figure~\ref{fig:adapter-rank} varies the adapter's rank and the number of denoising steps it acts on, for a cat and a dog at three held-out seeds; Section~\ref{sec:results} discusses it. Figure~\ref{fig:review-R9} counts each failure type over the held-out pairs as the adapter acts on fewer steps, Figure~\ref{fig:review-window-scores} scores the same images, and Figure~\ref{fig:review-R10} shows the images behind them.
 
-\paragraph{The failure-type judge.} Each image of Figure~\ref{fig:review-R9} was sent once, with its pair's two concepts in place of X and Y, to \texttt{claude-opus-5-5}, whose prompt defined the labels as follows, the answer constrained to one of them:
-\begin{quote}\small
-You see one image generated for the prompt ``a X and a Y''. [\ldots] label is exactly one of, checked in this order: ``hybrid'' if a single creature or object combines features of X and Y; ``count error'' if a named thing appears more than once while the other is missing or miscounted; ``one'' if only one of X or Y is drawn; ``intrusion'' if both are drawn and an unrequested object, creature or extra copy is prominent; ``two'' if both are drawn as separate, recognisable things; ``broken'' if no subject can be read.
-\end{quote}
-The judge was not told which setting produced an image; ``two'' and ``broken'' are not plotted. Figure~\ref{fig:judge-sample} shows forty of its labels.
-
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{ablation/adapter-settings-full-width.pdf}
@@ -1322,6 +1316,12 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 \end{figure}
 
 Figure~\ref{fig:review-R9} counts each failure type as the adapter acts on more steps. Hybrids fall with every step added, while unrequested extra objects beside both concepts rise, and with the adapter on for all 50 steps they are the most common failure. Images that show only one of the two concepts roughly halve once the adapter is on, whichever window it covers.
+
+\paragraph{The failure-type judge.} Each image of Figure~\ref{fig:review-R9} was sent once, with its pair's two concepts in place of X and Y, to \texttt{claude-opus-5-5}, whose prompt defined the labels as follows, the answer constrained to one of them:
+\begin{quote}\small
+You see one image generated for the prompt ``a X and a Y''. [\ldots] label is exactly one of, checked in this order: ``hybrid'' if a single creature or object combines features of X and Y; ``count error'' if a named thing appears more than once while the other is missing or miscounted; ``one'' if only one of X or Y is drawn; ``intrusion'' if both are drawn and an unrequested object, creature or extra copy is prominent; ``two'' if both are drawn as separate, recognisable things; ``broken'' if no subject can be read.
+\end{quote}
+The judge was not told which setting produced an image; ``two'' and ``broken'' are not plotted. Figure~\ref{fig:judge-sample} shows forty of its labels.
 
 \begin{figure}[H]
 \centering\footnotesize
