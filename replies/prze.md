@@ -24,7 +24,7 @@ and T2I-CompBench's spatial and complex tasks with their official evaluators [TO
 Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC
 correction the paper discusses, run at its published setting from the same starting latent, beside CO3,
 ToMe and our adapter. Table 1 compares with CO3 on every image. Table 1 adds ToMe, run on SDXL from
-the same starting latents [TODO: its row of Table 1]. Section 4 now describes the training set and how pairs were
+the same starting latents. Section 4 now describes the training set and how pairs were
 chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 
 ### Q1: quantitative benchmark
