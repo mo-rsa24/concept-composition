@@ -9,12 +9,13 @@
 \definecolor{rev}{HTML}{C0392B}\definecolor{chg}{HTML}{1E8449}
 \setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
 
-% --- switches: set to false to hide the reviewers' text without deleting anything ---
-\newif\ifshowfullreviews \showfullreviewstrue   % each reviewer's whole review, in a box
-\newif\ifshowquotes      \showquotestrue        % the red quote above each reply
+% --- what to show: put % in front of a line to hide that text everywhere, remove it to show it ---
+\def\showfullreviews{}   % every reviewer's whole review, in a box
+\def\showquotes{}        % the red quote above each reply
+% To hide one review or one quote only, put % in front of its \fullreview or \reviewquote line below.
 
-\newcommand{\fullreview}[1]{\ifshowfullreviews\csname fullreview-#1\endcsname\fi}
-\newcommand{\reviewquote}[2]{\ifshowquotes\begin{quote}\color{rev}\itshape\csname quote-#1-#2\endcsname\end{quote}\fi}
+\newcommand{\fullreview}[1]{\ifdefined\showfullreviews\csname fullreview-#1\endcsname\fi}
+\newcommand{\reviewquote}[2]{\ifdefined\showquotes\begin{quote}\color{rev}\itshape\csname quote-#1-#2\endcsname\end{quote}\fi}
 \newcommand{\changed}[1]{\par{\color{chg}\textbf{What changed in the revision.}} #1\par}
 \input{review-text}
 

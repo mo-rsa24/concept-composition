@@ -73,8 +73,9 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    [src] `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/review-text.tex` → [dest] `/review-text.tex`
    `review.tex` holds our replies and what changed, and is the file you and the supervisor edit. The
    reviewers' words live in `review-text.tex`, which nobody needs to open: `review.tex` calls them by
-   name. Two switches near its top hide them without deleting anything: `\showfullreviewsfalse` hides
-   the full reviews, `\showquotesfalse` the red quote above each reply. Like the revision, it compiles only when it is the
+   name. To hide the reviewers' text, put `%` in front of a line in `review.tex`: in front of
+   `\def\showfullreviews{}` or `\def\showquotes{}` near the top to hide every full review or every
+   quote, or in front of one `\fullreview{...}` or `\reviewquote{...}{...}` line to hide just that one. Like the revision, it compiles only when it is the
    main document (step 6 with `review.tex` selected); a correct build is 13 pages, or 6 with both
    switches off.
 
