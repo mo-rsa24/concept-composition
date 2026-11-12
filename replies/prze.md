@@ -39,7 +39,7 @@ Answered under W1 and W2: Tables 1 and 2.
 > "How does your method perform when composing more than two concepts? Can you show some results for
 > more than two concepts?"
 
-Appendix C.5 (Figure 14) shows one triple of each kind. The plain product fuses the three concepts or
+Appendix C.5 (Figure 15) shows one triple of each kind. The plain product fuses the three concepts or
 drops one; the adapter, trained only on pairs, separates them in every case and draws all three named
 things when the triple includes objects, but with two or three animals it draws only two. The
 Discussion now addresses this.

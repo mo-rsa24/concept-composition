@@ -104,7 +104,7 @@ to add $r_t$. At inference, switching the adapter on adds it. The reference that
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
 Section 4 now describes the training data and how pairs were chosen (Figure 7).
-Appendix C.5 (Figure 14) and a new Discussion paragraph show the adapter on three concepts,
+Appendix C.5 (Figure 15) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
@@ -246,7 +246,7 @@ We tested this directly. Figure 10 counts each failure type on the 53 held-out p
 with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 12
 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the
 detector finds two animals far less often (Figure 11a). The cow and horse row of Figure 12 shows that
-the species substitution of the submitted Fig. 7 (Figure 13 in the revision) persists at every window,
+the species substitution of the submitted Fig. 7 (Figure 14 in the revision) persists at every window,
 so it does not come from the late steps.
 
 ### Q4: pairs that do not compete for the same region

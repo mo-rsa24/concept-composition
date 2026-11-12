@@ -1296,7 +1296,7 @@ Figure~\ref{fig:adapter-rank} varies the adapter's rank and the number of denois
 \begin{quote}\small
 You see one image generated for the prompt ``a X and a Y''. [\ldots] label is exactly one of, checked in this order: ``hybrid'' if a single creature or object combines features of X and Y; ``count error'' if a named thing appears more than once while the other is missing or miscounted; ``one'' if only one of X or Y is drawn; ``intrusion'' if both are drawn and an unrequested object, creature or extra copy is prominent; ``two'' if both are drawn as separate, recognisable things; ``broken'' if no subject can be read.
 \end{quote}
-The judge was not told which setting produced an image; ``two'' and ``broken'' are not plotted.
+The judge was not told which setting produced an image; ``two'' and ``broken'' are not plotted. Figure~\ref{fig:judge-sample} shows forty of its labels.
 
 \begin{figure}[htbp]
 \centering
@@ -1344,6 +1344,13 @@ Figure~\ref{fig:review-window-scores} scores the same images with an open-vocabu
 \reviewslot{R10}{\linewidth}{4.5in}
 \caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Seven held-out pairs, each at the seed where our adapter on all 50 steps scores highest on BLIP-VQA; columns are the four settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering\footnotesize
+\includegraphics[width=\linewidth]{figures/failure-window/judge_sample_40.png}
+\caption{\textbf{Forty of the judge's labels.} Images drawn at random from the 1,696 behind Figure~\ref{fig:review-R9}, each with its prompt and the label the judge gave it.}
+\label{fig:judge-sample}
 \end{figure}
 
 
