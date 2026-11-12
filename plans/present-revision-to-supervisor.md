@@ -72,11 +72,13 @@ For Claude to execute. Ask Claude to do these.
 
 ### 2. 🖼️ The figures
 
-- [ ] **2.1 Build the figure for the toy group (the training loss and what the adapter returns) end to end**
+- [x] ✅ **2.1 Build the figure for the toy group (the training loss and what the adapter returns) end to end**
   - Renders at 200 dpi with pdftoppm, crops in `artifacts/drips/present-revision-to-supervisor/crops/`, drawing script and figure in `artifacts/scenes/iclr-review-response/`
   - Check: the PNG and PDF exist, and every panel prints its source file and page under it.
+  - ✓ verified 2026-11-12: g07 PNG 5890×3166 and PDF written, seven panels each with source and page (commit b2f7abde)
   - ◀ Needs: 4.1 · ▶ Next: 4.2
-- [ ] **2.2 Build the remaining group figures, a README card per figure, and a contact sheet**
+- [x] ✅ **2.2 Build the remaining group figures, a README card per figure, and a contact sheet**
+  - ✓ verified 2026-11-12: 12 figures as PNG and PDF, 12 cards, contact sheet; every panel prints its source and page
   - ◀ Needs: 4.2
 
 ### 3. 📦 The Overleaf bundle and the supervisor document
@@ -100,7 +102,8 @@ For you to follow manually. Do these yourself.
 - [x] ✅ **4.1 Read the claim table** and say yes, or name the rows to change
   - ✓ confirmed by hand 2026-11-12: "done. Happy with the claim table"
   - ◀ Needs: 1 · ▶ Next: 2.1
-- [ ] **4.2 Look at the first figure** and say yes, or name what to change
+- [x] ✅ **4.2 Look at the first figure** and say yes, or name what to change
+  - ✓ confirmed by hand 2026-11-12: "done and happy"
   - ◀ Needs: 2.1 · ▶ Next: 2.2
 - [ ] **4.3 Read the bundle's file list** before uploading
   - ◀ Needs: 3.1

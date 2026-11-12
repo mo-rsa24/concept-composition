@@ -61,7 +61,7 @@ GREY = "#6b7280"
 PANEL_EDGE = "#9aa0aa"
 
 COL_W = {"review": 2050, "submitted": 1560, "revised": 1560}  # canvas px = 200 dpi px
-GUTTER = 300          # strip beside each crop holding the mark labels, on the side the arrows use
+GUTTER = 400          # strip beside each crop holding the mark labels, on the side the arrows use
 GAP = 300             # gap between columns, where the arrows run
 MARGIN = 60
 TITLE_H = 210
@@ -177,6 +177,29 @@ def line_boxes(run: list[dict]) -> list[tuple[float, float, float, float]]:
 
 # ---------------------------------------------------------------- crops
 
+def _figure_top(img: Image.Image, y_caption: int, fx: tuple[int, int], gap: int) -> int:
+    """Walk up from a caption through the figure above it, stopping at the first white band at
+    least `gap` px tall once the figure has started. Only the body columns fx are read, so the
+    line numbers in the margin do not count as content."""
+    import numpy as np
+    s = img.width / 1700.0  # fx is given for a 200 dpi page, 1700 px wide
+    grey = np.asarray(img.convert("L"))[:, int(fx[0] * s):int(fx[1] * s)]
+    ink = (grey < 230).any(axis=1)
+    y = y_caption - 1
+    while y > 0 and not ink[y]:      # the space between caption and figure
+        y -= 1
+    top, white = y, 0
+    while y > 0:
+        if ink[y]:
+            top, white = y, 0
+        else:
+            white += 1
+            if white >= gap:
+                break
+        y -= 1
+    return max(0, top - 10)
+
+
 def build_crop(panel: dict) -> dict:
     """Cut the panel's crop and place its marks in crop coordinates."""
     img, words, src_label = source_image(panel["src"])
@@ -198,8 +221,10 @@ def build_crop(panel: dict) -> dict:
                       if y0 <= (w["box"][1] + w["box"][3]) / 2 <= y1]
             x0 = min(b[0] for b in inside) - pad
             x1 = max(b[2] for b in inside) + pad
+        if c.get("figure_above"):
+            y0 = _figure_top(img, int(y0), c.get("fx", (290, 1420)), c.get("gap", 28))
         y0 = c.get("y0", y0)
-        y1 = c.get("y1", y1)
+        y1 = c.get("y1", y1) + c.get("extend_down", 0)
     x0, y0 = max(0, int(x0)), max(0, int(y0))
     x1, y1 = min(img.width, int(x1)), min(img.height, int(y1))
     crop = img.crop((x0, y0, x1, y1))
@@ -216,7 +241,9 @@ def build_crop(panel: dict) -> dict:
                     [(min(a[0], b[0]), a[1], max(a[2], b[2]), b[3])]
         else:
             boxes = line_boxes(find_phrase(words, m["phrase"], after_y=y0, nth=m.get("nth", 0)))
-        local = [(bx0 - x0, by0 - y0, bx1 - x0, by1 - y0) for bx0, by0, bx1, by1 in boxes]
+        W, H = x1 - x0, y1 - y0
+        local = [(max(4, bx0 - x0), max(2, by0 - y0), min(W - 4, bx1 - x0), min(H - 2, by1 - y0))
+                 for bx0, by0, bx1, by1 in boxes]
         marks.append({**m, "boxes": local})
 
     CROPS.mkdir(parents=True, exist_ok=True)
@@ -439,7 +466,7 @@ def draw_figure(spec: dict) -> Path:
             ymid = (min(y[0] for y in ys) + max(y[1] for y in ys)) / 2
             m["_ymid"], m["_ys"], m["_col"] = ymid, ys, col
         placed = []
-        for m in sorted(b["marks"], key=lambda m: m["_ymid"]):
+        for m in sorted(b["marks"], key=lambda m: (round(m["_ymid"] / 12), min(y[2] for y in m["_ys"]))):
             ly = m["_ymid"]
             for prev in placed:
                 if abs(ly - prev) < 52:
