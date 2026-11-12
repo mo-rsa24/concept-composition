@@ -49,7 +49,7 @@ We agree that fusion under composition was identified before (Bradley et al., 20
 as such. What we add is a measurement of the missing term during sampling: it is specific to the pair
 and seed, and concentrated in the first ten of 50 steps (Figures 2 to 4).
 
-Tables 1 and 3 compare the adapter with PoE and CO3 on the same seeds, and Figure 5 adds a Langevin
+Table 1 compares the adapter with PoE and CO3 on the same seeds, and Figure 5 adds a Langevin
 corrector. The ablation the reviewer describes, the same joint-prompt supervision on pairs
 the product does not fuse, would separate the effect of the supervision from that of the plurality
 pairs; we have not run it and name it as future work.
@@ -65,7 +65,6 @@ Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pair
 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
 image quality by CLIP score and ImageReward.
 
-Table 3 scores 53 held-out pairs at seeds 9 to 16, with 95% intervals from resampling pairs.
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
 link].
@@ -109,7 +108,7 @@ Appendix C.5 (Figure 14) and a new Discussion paragraph show the adapter on thre
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
-behind both tables in the appendix (Tables 1 and 3).
+behind Table 1 in the appendix.
 
 ### W5: the qualitative baseline comparison and its starting noise
 
@@ -118,7 +117,7 @@ behind both tables in the appendix (Tables 1 and 3).
 
 Every method now uses the same seed for each prompt, with every column of a row in Figure 5
 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the
-seed, as in its released code. Tables 1 and 3 make the comparison over 4 and 8 seeds, with the
+seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 10 and 11 over 8, with the
 images behind them in the appendix.
 
 ### Q1: evidence that the residual measures plurality
@@ -134,7 +133,7 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Tables 1 and 3, and Figure 10, which counts the failure types the reviewer
+Answered under k4nd W3: Table 1, and Figure 10, which counts the failure types the reviewer
 names.
 
 ### Q3: pairs retained when only CO3 succeeds
@@ -167,7 +166,7 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
 benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
-held-out pairs (Table 3). Table 2 reports GenEval's two-object and counting tasks and
+held-out pairs as the adapter acts on fewer steps (Figures 10 and 11). Table 2 reports GenEval's two-object and counting tasks and
 T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
 C.5 shows three concepts.
 
@@ -178,7 +177,7 @@ C.5 shows three concepts.
 > objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are
 > not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals."
 
-Tables 1 and 3 now compare quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin
+Table 1 now compares quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin
 corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
 cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
 Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
@@ -216,7 +215,7 @@ pairs or a thousand, and 48 is where we stopped collecting. The method relies on
 any specific pair.
 
 Cat and dog is not in the training set. It is held out, and no training pair contains a cat or a dog.
-The held-out pairs and their groups are released with the code (Appendix C.2 describes the groups), and no pair in Figure 5 was trained on.
+The held-out pairs are released with the code, and no pair in Figure 5 was trained on.
 
 For reproducibility, the 48 training pairs are: (two animals, 28) badger and magpie, bear and boar,
 bear and heron, beaver and raccoon, beaver and woodpecker, bison and weasel, buffalo and hippo, bull
@@ -236,7 +235,7 @@ They are also released with the code as the configuration file the trainer reads
 > "What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and
 > multiple seeds?"
 
-Answered under k4nd W3: Tables 1 and 3.
+Answered under k4nd W3: Table 1, and Figures 10 and 11 for the held-out pairs at eight seeds.
 
 ### Q3: restricting the adapter to the early steps
 
@@ -255,7 +254,7 @@ so it does not come from the late steps.
 > "Does the adapter degrade PoE on pairs that do not compete for the same region, such as
 > foreground/background pairs like lighthouse and sea?"
 
-No. Among the held-out pairs of Table 3, 21 have concepts that do not contend for one region,
+No. Among our held-out pairs, 21 have concepts that do not contend for one region,
 including lighthouse and a stormy sea. On these pairs the adapter scores the same as the plain product
-within the 95% intervals (BLIP-VQA on Table 3's images, seeds 9 to 16), so on pairs the product
+within the 95% intervals (BLIP-VQA, seeds 9 to 16), so on pairs the product
 already composes it neither helps nor harms.

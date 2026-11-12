@@ -12,8 +12,7 @@ bracketed TODO names the slot whose result fills it; no number is estimated.
 > empirical results and a few qualitative results are insufficient for the claim in this paper."
 
 The revision adds quantitative evaluation. Table 1 scores every method on the 276 Attend-and-Excite
-prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 3
-scores 53 held-out pairs with 95% intervals. Table 2 reports GenEval's two-object and counting tasks
+prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object and counting tasks
 and T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14].
 
 ### W2: narrow baselines and missing details
@@ -24,7 +23,7 @@ and T2I-CompBench's spatial and complex tasks with their official evaluators [TO
 
 Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC
 correction the paper discusses, run at its published setting from the same starting latent, beside CO3,
-ToMe and our adapter. Tables 1 and 3 compare with CO3 on every image. Table 1 adds ToMe, run on SDXL from
+ToMe and our adapter. Table 1 compares with CO3 on every image. Table 1 adds ToMe, run on SDXL from
 the same starting latents [TODO: its row of Table 1]. Section 4 now describes the training set and how pairs were
 chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 
@@ -33,7 +32,7 @@ chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and rel
 > "What are the evaluation scores for the proposed method? Can you show the results on some
 > benchmarks and compare your method with other standard baselines?"
 
-Answered under W1 and W2: Tables 1 to 4.
+Answered under W1 and W2: Tables 1 and 2.
 
 ### Q2: multiple concepts
 
