@@ -33,8 +33,8 @@ import matplotlib.pyplot as plt  # noqa: E402
 sys.path.insert(0, os.path.dirname(__file__))
 from review_build_tables import two_level  # noqa: E402
 
-SETTINGS = [("off", "off\n(PoE)"), ("10", "steps\n0–10"), ("25", "steps\n0–25"), ("50", "all 50")]
-GROUPS = [("hard", "hard (3)"), ("easy but unseen", "easy (29)"), ("not competing", "not competing (21)")]
+SETTINGS = [("off", "off (plain PoE)"), ("10", "on for steps 0–10"), ("25", "on for steps 0–25"), ("50", "on for all 50")]
+GROUPS = [("hard", "hard\n(3 pairs)"), ("easy but unseen", "easy\n(29 pairs)"), ("not competing", "not competing\n(21 pairs)")]
 COLOURS = {"off": "#9aa0a6", "10": "#9ecae1", "25": "#4292c6", "50": "#08519c"}
 
 
@@ -106,7 +106,7 @@ def main() -> None:
                         "hi": f"{r['hi']:.4f}", "pairs": r["pairs"], "images": r["images"]})
 
     plt.rcParams.update({"font.size": 7, "font.family": "serif"})
-    fig, axs = plt.subplots(1, 4, figsize=(6.9, 2.0), gridspec_kw={"width_ratios": [2.2, 1, 1, 1]})
+    fig, axs = plt.subplots(1, 4, figsize=(6.9, 2.3), gridspec_kw={"width_ratios": [2.2, 1, 1, 1]})
     get = {(r["setting"], r["group"], r["measure"]): r for r in res}
     width = 0.2
     for gi, (g, glabel) in enumerate(GROUPS):
@@ -115,14 +115,17 @@ def main() -> None:
             if not r:
                 continue
             x = gi + (si - 1.5) * width
-            axs[0].bar(x, r["mean"], width, color=COLOURS[s], label=SETTINGS[si][1].replace("\n", " ") if gi == 0 else None)
+            axs[0].bar(x, r["mean"], width, color=COLOURS[s])
             axs[0].errorbar(x, r["mean"], yerr=[[r["mean"] - r["lo"]], [r["hi"] - r["mean"]]], color="k", lw=0.6, capsize=1.5)
     axs[0].set_xticks(range(len(GROUPS)), [g[1] for g in GROUPS])
     axs[0].set_ylabel("BLIP-VQA (0 to 1)")
     axs[0].set_ylim(0, 1)
-    axs[0].set_title("a  composition, per held-out group", loc="left")
-    axs[0].legend(frameon=False, fontsize=6, ncol=2, loc="upper left")
-    for ax, (m, title, ylab) in zip(axs[1:], [("comp", "b  two animals found", "share of images"),
+    axs[0].set_title("a  BLIP-VQA, per held-out group", loc="left")
+    from matplotlib.patches import Patch
+    fig.legend(handles=[Patch(color=COLOURS[s], label=lab.replace("\n", " ")) for s, lab in SETTINGS],
+               frameon=False, ncol=4, loc="upper center", bbox_to_anchor=(0.5, 1.0), fontsize=7,
+               title="adapter, out of 50 sampling steps", title_fontsize=7)
+    for ax, (m, title, ylab) in zip(axs[1:], [("comp", "b  two animals found", "share (animal pairs)"),
                                               ("clip", "c  CLIP score", "CLIP score"),
                                               ("ir", "d  ImageReward", "ImageReward")]):
         for si, (s, slabel) in enumerate(SETTINGS):
@@ -131,7 +134,7 @@ def main() -> None:
                 continue
             ax.bar(si, r["mean"], 0.7, color=COLOURS[s])
             ax.errorbar(si, r["mean"], yerr=[[r["mean"] - r["lo"]], [r["hi"] - r["mean"]]], color="k", lw=0.6, capsize=1.5)
-        ax.set_xticks(range(len(SETTINGS)), [s[1] for s in SETTINGS], fontsize=5.5)
+        ax.set_xticks([])
         ax.set_title(title, loc="left")
         ax.set_ylabel(ylab)
         if m == "comp":
@@ -139,9 +142,9 @@ def main() -> None:
         ax.axhline(0, color="k", lw=0.4)
     for ax in axs:
         ax.spines[["top", "right"]].set_visible(False)
-    fig.tight_layout(pad=0.4)
+    fig.tight_layout(pad=0.4, rect=(0, 0, 1, 0.80))
     for ext in ("pdf", "png"):
-        fig.savefig(os.path.join(a.out, f"window_scores.{ext}"), dpi=300)
+        fig.savefig(os.path.join(a.out, f"window_scores.{ext}"), dpi=300, bbox_inches="tight", pad_inches=0.02)
     for r in res:
         print(r["setting"], r["group"], r["measure"], {k: (round(v, 4) if isinstance(v, float) else v) for k, v in r.items() if k in ("mean", "lo", "hi", "pairs", "images")})
 
