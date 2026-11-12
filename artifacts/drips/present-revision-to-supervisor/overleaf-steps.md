@@ -4,10 +4,20 @@ You do every step here by hand in the browser; nothing is pushed by git. The rev
 supervisor's existing project beside the original: one new `.tex` at the project root and every file
 it reads in a new `revision/` folder. No file of the original is replaced.
 
-The files come from `artifacts/drips/present-revision-to-supervisor/overleaf-bundle/` on the laptop:
+The files come from the bundle folder on the laptop (paste a path into the file manager's address
+bar with Ctrl+L):
 
-- `iclr2027_conference_revision.tex` (the root of the bundle)
-- the 26 files inside `overleaf-bundle/revision/` (about 71 MB together, the largest 19.8 MB)
+| What | Path |
+|---|---|
+| the bundle folder | `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/` |
+| the main file, uploaded at the project root (step 5) | `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/iclr2027_conference_revision.tex` |
+| the 26 files uploaded into `revision/` (step 4), about 71 MB, the largest 19.8 MB | `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/revision/` |
+| the local build to compare against (step 9) | `/home/molef/PhD/poe_repair_min/paper/iclr-56173/build/iclr2027_conference.pdf` |
+| the walk-through PDF for the supervisor (step 11) | `/home/molef/PhD/poe_repair_min/artifacts/scenes/iclr-review-response/supervisor-review-response.pdf` |
+
+On Windows through WSL, the same folders open from File Explorer as
+`\\wsl$\<your distribution>\home\molef\PhD\poe_repair_min\...`, or run `explorer.exe .` inside the
+folder from a WSL terminal.
 
 Upload the files themselves, never `overleaf-bundle.zip`: the zip is 71 MB, above Overleaf's 50 MB
 limit for one upload, and Overleaf does not unpack a zip into an existing project.
