@@ -13,12 +13,12 @@
  ],
  "rows": [
   {
-   "label": "dog and frog",
+   "label": "elephant and\nturtle",
    "tiles": [
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__joint.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__poe.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__co3.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_dog__x__a_frog__s10__ours.png"
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__ours.png"
    ]
   },
   {
@@ -31,12 +31,12 @@
    ]
   },
   {
-   "label": "yellow bow and\npink bowl",
+   "label": "blue balloon and\norange bench",
    "tiles": [
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__joint.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__poe.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__co3.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__ours.png"
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__ours.png"
    ]
   },
   {
