@@ -1,0 +1,62 @@
+{
+ "width_in": 4.2,
+ "groups": [
+  {
+   "title": "",
+   "columns": [
+    "Joint",
+    "CO3",
+    "PoE",
+    "Ours"
+   ]
+  }
+ ],
+ "rotate_labels": true,
+ "rows": [
+  {
+   "label": "book,\nbaseball bat",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_two__140__s11__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_two__140__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_two__140__s11__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_two__140__s11__ours.png"
+   ]
+  },
+  {
+   "label": "black car,\ngreen meter",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_colorattr__540__s11__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_colorattr__540__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_colorattr__540__s11__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_colorattr__540__s11__ours.png"
+   ]
+  },
+  {
+   "label": "bench\nleft of bear",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__ours.png"
+   ]
+  },
+  {
+   "label": "green apple,\nred train",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_color__77__s9__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_color__77__s9__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_color__77__s9__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_color__77__s9__ours.png"
+   ]
+  },
+  {
+   "label": "round light,\ntriangle shelf",
+   "tiles": [
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_shape__112__s9__joint.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_shape__112__s9__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_shape__112__s9__poe.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-table2/t2i_shape__112__s9__ours.png"
+   ]
+  }
+ ]
+}
