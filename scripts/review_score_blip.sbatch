@@ -5,7 +5,7 @@
 #SBATCH -N 1
 #SBATCH -t 06:00:00
 #SBATCH -J score-blip
-#SBATCH --exclude=mscluster88,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster59,mscluster62,mscluster65,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster83
+#SBATCH --exclude=mscluster68,mscluster88,mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster59,mscluster62,mscluster65,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster83
 #SBATCH -o /datasets/mmolefe/poe_repair_min/outputs/paper_review/scores/logs/score_%x_%j.log
 set -euo pipefail
 S=/datasets/mmolefe/poe_repair_min/outputs/paper_review/scores
