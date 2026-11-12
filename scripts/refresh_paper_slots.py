@@ -130,7 +130,7 @@ SCHEMA = {
     "R5": {"groups": BENCH_GROUPS, "tail": []},
     "R3": {"groups": [("all", "53 held-out pairs", ["blip"])], "tail": []},
     "R14": {"groups": [("geneval", "GenEval", ["geneval_two", "geneval_colorattr", "geneval_position"]),
-                       ("t2icompbench", "T2I-CompBench", ["t2i_color", "t2i_shape", "t2i_texture"])], "tail": []},
+                       ("t2icompbench", "T2I-CompBench", ["t2i_color", "t2i_shape"])], "tail": []},
 }
 # A method whose name ends in this is a published number we cite, never a run of ours; it sits
 # under its own rule at the foot of the table.

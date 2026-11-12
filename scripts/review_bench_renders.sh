@@ -38,9 +38,9 @@ cd "$REPO" || exit 7
 echo "=== disk ${USE}%  adapter $TAG $CKPT"
 
 mapfile -t ALL < <("$PY" "$HERE/review_bench_sets.py" --pairs geneval_two)
-[ "${#ALL[@]}" -eq 90 ] || { echo "ABORT: ${#ALL[@]} two-object pairs, not 90" >&2; exit 2; }
+[ "${#ALL[@]}" -eq 99 ] || { echo "ABORT: ${#ALL[@]} two-object pairs, not 99" >&2; exit 2; }
 PAIRS=(); for i in "${!ALL[@]}"; do [ $(( i % N )) -eq "$K" ] && PAIRS+=("${ALL[$i]}"); done
-echo "=== shard $SHARD: ${#PAIRS[@]} of 90 two-object pairs for PoE and ours"
+echo "=== shard $SHARD: ${#PAIRS[@]} of 99 two-object pairs for PoE and ours"
 SEEDS="9 10 11 12"
 
 echo "=== joint geneval_two $(date -Is)";   "$PY" "$HERE/review_bench_joint.py" --set geneval_two   --shard "$SHARD" || echo "joint geneval_two FAILED"
@@ -54,5 +54,5 @@ FIGURE_CANDIDATES_OUT="$OUT/bench_ours/geneval_two" "$PY" scripts/figure_candida
 for SET in t2i_spatial t2i_complex; do
   echo "=== joint $SET $(date -Is)"; "$PY" "$HERE/review_bench_joint.py" --set $SET --shard "$SHARD" || echo "joint $SET FAILED"
 done
-echo "=== done $(date -Is)  t2i joint $(find "$OUT/bench_joint/t2i_spatial" "$OUT/bench_joint/t2i_complex" -name joint.png | wc -l) of 5600  joint $(find "$OUT/bench_joint/geneval_two" "$OUT/bench_joint/geneval_count" -name joint.png | wc -l) of 676" \
-     " poe $(find "$OUT/bench_poe/geneval_two" -name poe.png | wc -l) of 360  ours $(find "$OUT/bench_ours/geneval_two" -name 'ours_*.png' | wc -l) of 360"
+echo "=== done $(date -Is)  t2i joint $(find "$OUT/bench_joint/t2i_spatial" "$OUT/bench_joint/t2i_complex" -name joint.png | wc -l) of 5970  joint $(find "$OUT/bench_joint/geneval_two" "$OUT/bench_joint/geneval_count" -name joint.png | wc -l) of 716" \
+     " poe $(find "$OUT/bench_poe/geneval_two" -name poe.png | wc -l) of 396  ours $(find "$OUT/bench_ours/geneval_two" -name 'ours_*.png' | wc -l) of 396"

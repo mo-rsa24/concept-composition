@@ -1278,7 +1278,7 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 
 \begin{table}[htbp]
 \centering\footnotesize
-\caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object and counting tasks and T2I-CompBench's spatial and complex tasks, each scored by its official evaluator; higher is better.}
+\caption{\textbf{Standard benchmarks on their own prompts with SDXL.} GenEval's two-object, attribute-binding and position tasks, scored by GenEval's detector at its standard four images per prompt. T2I-CompBench's colour and shape attribute-binding sets, scored by its BLIP-VQA on 100 two-concept prompts each (a fixed random draw), at two images per prompt instead of ten. Images use seeds 9 to 12 in place of the benchmarks' own seeds, since no run trained on them, and every method starts from the same latent for each seed. The joint prompt and CO3 evaluate the joint prompt at every step and sit above the rule as references; ToMe is compared in Table~\ref{tab:review-R1}. Bold marks the best value in each column, and higher is better.}
 \label{tab:review-R14}
 \smallskip
 \reviewslot{R14}{\linewidth}{1.6in}

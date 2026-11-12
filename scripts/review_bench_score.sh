@@ -1,14 +1,14 @@
 #!/bin/bash
-# Compute job 13, slot R14: score the renders with each benchmark's own evaluator once they exist, then
-# write the table. GenEval first (1,756 images: joint 676, PoE 360, ours 360, CO3 360), then
-# T2I-CompBench spatial (2,640 joint) and complex (2,960 joint). Runs on one non-Blackwell card, since
-# the geneval (torch 1.12) and t2icomp (torch 2.0.1) envs have no Blackwell kernels.
+# Slot R14 (Table 2): score each named set with its benchmark's own evaluator as soon as all four
+# methods (joint, PoE, ours, CO3) hold every image, whichever set completes first, then rebuild the table. GenEval sets go through
+# review_bench_geneval.py (geneval env), T2I-CompBench sets through review_bench_t2i.py (t2icomp env).
+# Runs on one card that must be empty; never shares one.
 #
-#   timeout 30 ssh mscluster108 'GPU=1 nohup bash <copy>/scripts/review_bench_score.sh > <OUT>/logs/bench13-score.log 2>&1 < /dev/null & disown'
+#   ssh <node> 'GPU=0 setsid nohup bash <copy>/scripts/review_bench_score.sh geneval_two geneval_colorattr \
+#       > <OUT>/logs/table2-score-<node>.log 2>&1 < /dev/null &'
 #
-# Writes <OUT>/bench_scores/{geneval_images.csv, t2i_spatial_images.csv, t2i_complex_images.csv,
-# standard_benchmarks.csv}. standard_benchmarks.csv is written after GenEval with the T2I-CompBench
-# cells empty, and again once both T2I-CompBench sets are scored.
+# Writes <OUT>/bench_scores/<set>_images.csv (one row per image) and, after every set,
+# <OUT>/bench_scores/standard_benchmarks.csv from every <set>_images.csv present.
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
@@ -16,45 +16,62 @@ S="$OUT/bench_scores"
 GE=/datasets/mmolefe/envs/geneval/bin/python
 T2=/datasets/mmolefe/envs/t2icomp/bin/python
 : "${GPU:?set GPU to the device index}"
+[ $# -ge 1 ] || { echo "usage: GPU=n $0 <set> [<set> ...]" >&2; exit 2; }
 export CUDA_VISIBLE_DEVICES="$GPU" REVIEW_BASELINE_OUT="$OUT"
 mkdir -p "$S" || exit 2
-echo "=== bench-score  node $(hostname -s)  device $GPU  pid $$  $(date -Is)"
+echo "=== table2-score  node $(hostname -s)  device $GPU  pid $$  sets $*  $(date -Is)"
 USE=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
 [ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $OUT is ${USE:-unknown}% full" >&2; exit 3; }
 
-count() { find "$@" -name '*.png' 2>/dev/null | wc -l; }
-wait_for() {  # wait_for <label> <target> <dirs...>: until the count reaches the target, 16 h at most
-  local label=$1 target=$2; shift 2
-  for _ in $(seq 1 960); do
-    local n; n=$(count "$@"); [ "$n" -ge "$target" ] && { echo "=== $label: $n of $target $(date -Is)"; return 0; }
-    sleep 60
-  done
-  echo "ABORT: $label reached $(count "$@") of $target in 16 h" >&2; return 1
+expected() { "$GE" -c "import sys; sys.path.insert(0, '$HERE'); from review_bench_sets import SETS, load; print(len(load('$1')[0]) * len(SETS['$1']['seeds']))"; }
+counts() {  # non-empty renders per method, "joint poe ours co3"
+  local s=$1
+  echo "$(find "$OUT/bench_joint/$s" -name joint.png -size +0 2>/dev/null | wc -l)" \
+       "$(find "$OUT/bench_poe/$s" -name poe.png -size +0 2>/dev/null | wc -l)" \
+       "$(find "$OUT/bench_ours/$s" -name 'ours_*_w50.png' -size +0 2>/dev/null | wc -l)" \
+       "$(find "$OUT/co3_default/$s" -name co3.png -size +0 2>/dev/null | wc -l)"
 }
-card_free() {  # never share a card: wait until this device holds under 1 GB
-  for _ in $(seq 1 240); do
+complete() {  # 0 when every method holds the expected count of non-empty renders
+  local s=$1 n c; n=$(expected "$s"); c=$(counts "$s")
+  if [ "$(echo $c | tr ' ' '\n' | awk -v n=$n '$1 >= n' | wc -l)" -eq 4 ]; then
+    echo "=== $s complete: joint poe ours co3 = $c of $n each $(date -Is)"; return 0
+  fi
+  [ "${TICK:-0}" -eq 0 ] && echo "... $s: joint poe ours co3 = $c of $n $(date -Is)"
+  return 1
+}
+card_free() {  # never share a card: this device must hold under 1 GB
+  for _ in $(seq 1 60); do
     read -r USED UTIL < <(nvidia-smi -i "$GPU" --query-gpu=memory.used,utilization.gpu --format=csv,noheader,nounits | tr -d ',')
     case "$UTIL" in ''|*[!0-9]*) echo "ABORT: device $GPU faulted ($UTIL)" >&2; return 1;; esac
     [ "$USED" -lt 1024 ] && return 0
-    sleep 60
+    echo "... device $GPU holds $USED MiB; waiting"; sleep 60
   done
-  echo "ABORT: device $GPU stayed busy for 4 h" >&2; return 1
+  echo "ABORT: device $GPU stayed busy for 1 h" >&2; return 1
 }
 
-wait_for "GenEval renders" 1756 "$OUT/bench_joint/geneval_two" "$OUT/bench_joint/geneval_count" \
-  "$OUT/bench_poe/geneval_two" "$OUT/bench_ours/geneval_two" "$OUT/co3_default/geneval_two" || exit 5
-card_free || exit 4
-rm -rf "$S/geneval_work"
-"$GE" "$HERE/review_bench_geneval.py" --work "$S/geneval_work" --out "$S/geneval_images.csv" || { echo "GenEval FAILED"; exit 6; }
-python3 "$HERE/review_bench_table.py" --geneval "$S/geneval_images.csv" --out "$S/standard_benchmarks.csv"
-
-for SET in t2i_spatial t2i_complex; do
-  N=$([ $SET = t2i_spatial ] && echo 2640 || echo 2960)
-  wait_for "$SET renders" $N "$OUT/bench_joint/$SET" || exit 5
+score() {
+  local SET=$1
   card_free || exit 4
   rm -rf "$S/${SET}_work"
-  "$T2" "$HERE/review_bench_t2i.py" --set $SET --work "$S/${SET}_work" --out "$S/${SET}_images.csv" || echo "$SET FAILED"
+  case "$SET" in
+    geneval_*) "$GE" "$HERE/review_bench_geneval.py" --set "$SET" --work "$S/${SET}_work" --out "$S/${SET}_images.csv" ;;
+    t2i_*) "$T2" "$HERE/review_bench_t2i.py" --set "$SET" --work "$S/${SET}_work" --out "$S/${SET}_images.csv" ;;
+  esac || { echo "$SET FAILED $(date -Is)"; return 1; }
+  IMAGES=$(ls "$S"/{geneval_two,geneval_colorattr,geneval_position,t2i_color,t2i_shape,t2i_texture}_images.csv 2>/dev/null)
+  "$GE" "$HERE/review_bench_table.py" --images $IMAGES --out "$S/standard_benchmarks.csv"
+  echo "=== $SET scored $(date -Is)"
+}
+
+# Score whichever pending set completes first, in the order given; poll every minute for 8 h at most.
+PENDING=("$@")
+for i in $(seq 0 479); do
+  TICK=$((i % 10)) LEFT=()
+  for SET in "${PENDING[@]}"; do
+    if complete "$SET"; then score "$SET"; else LEFT+=("$SET"); fi
+  done
+  PENDING=("${LEFT[@]}")
+  [ ${#PENDING[@]} -eq 0 ] && break
+  sleep 60
 done
-python3 "$HERE/review_bench_table.py" --geneval "$S/geneval_images.csv" \
-  --t2i $(ls "$S"/t2i_*_images.csv 2>/dev/null) --out "$S/standard_benchmarks.csv"
+[ ${#PENDING[@]} -gt 0 ] && echo "ABORT: still incomplete after 8 h: ${PENDING[*]}" >&2
 echo "=== done $(date -Is) -> $S/standard_benchmarks.csv"

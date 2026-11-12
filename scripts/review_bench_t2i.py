@@ -1,19 +1,25 @@
-"""T2I-CompBench's own evaluators on the slot R14 joint renders (compute job 13): spatial and complex.
+"""T2I-CompBench's own BLIP-VQA attribute-binding evaluator on one Table 2 set (slot R14), all four methods.
 
-spatial  UniDet_eval/2D_spatial_eval.py, unchanged: UniDet (RS200) finds the two objects and scores
-         their left/right/top/bottom/near relation; one score per image.
-complex  3_in_1_eval/3_in_1.py, unchanged, over BLIPvqa_eval/BLIP_vqa.py (attributes),
-         UniDet_eval/2D_spatial_eval.py --complex (spatial) and CLIPScore_eval/CLIP_similarity.py
-         --complex (actions): per prompt, the mean of the scores its kind of relation calls for.
+Sets: t2i_color, t2i_shape, t2i_texture (100 two-concept prompts each by the fixed draw in
+scripts/review_bench_sets.py, seeds 9 and 10). BLIPvqa_eval/BLIP_vqa.py runs unchanged at its
+defaults: it splits each prompt into noun phrases with spaCy, asks BLIP-VQA "<noun phrase>?" for each,
+and scores an image by the product of the yes-probabilities. The benchmark's score for the category is
+the mean over images.
 
-Every scorer reads <work>/samples/<prompt>_<n>.png and orders its results by n, and 3-in-1 takes
-images 10*i to 10*i+9 as prompt i of complex_val.txt. So the images are linked in as n = 10 * (the
-prompt's position among the kept prompts) + (the seed's position), and 3-in-1 reads a copy of the
-prompt lists holding only the kept prompts, in the benchmark's order.
+BLIP_vqa.py reads <work>/samples/<prompt>_<n>.png, takes the prompt from the text before the first
+underscore, and numbers its answers by the files' rank when sorted by n. So each method gets its own
+work folder and n runs 0, 1, 2, ... over that method's images, which makes the answer's question_id
+equal to n.
 
-Usage (t2icomp env, an RTX 3090 or RTX 8000):
-  python scripts/review_bench_t2i.py --set t2i_spatial --work <fresh dir> --out t2i_spatial_images.csv
-  python scripts/review_bench_t2i.py --set t2i_complex --work <fresh dir> --out t2i_complex_images.csv
+Renders, matched to their benchmark line by the concepts in their sidecar (PoE, ours, CO3) or by the
+index (joint). A 0-byte file is a relay placeholder and is skipped and counted:
+    joint  <OUT>/bench_joint/<set>/<idx>/seedNN/joint.png
+    poe    <OUT>/bench_poe/<set>/<pair>/seedNN/poe.png
+    ours   <OUT>/bench_ours/<set>/<pair>/seedNN/ours_<tag>_w50.png
+    co3    <OUT>/co3_default/<set>/<pair>/seedNN/co3.png
+
+Usage (t2icomp env, one free card):
+  python scripts/review_bench_t2i.py --set t2i_color --work <fresh dir> --out t2i_color_images.csv
 """
 from __future__ import annotations
 
@@ -23,78 +29,59 @@ import json
 import os
 import subprocess
 import sys
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from review_bench_sets import SETS, T2I as PROMPTS, load  # noqa: E402
+from review_bench_geneval import METHODS, renders  # noqa: E402
+from review_bench_sets import SETS, load  # noqa: E402
 
 T2I = os.environ.get("T2I_COMPBENCH", "/datasets/mmolefe/repos/T2I-CompBench")
-OUT = os.environ.get("REVIEW_BASELINE_OUT", "/datasets/mmolefe/poe_repair_min/outputs/paper_review")
-
-
-def run(args, cwd):
-    print("+", " ".join(args), f"(in {cwd})", flush=True)
-    subprocess.run([sys.executable] + args, cwd=cwd, check=True)
+BLIP_SETS = ["t2i_color", "t2i_shape", "t2i_texture"]
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--set", required=True, choices=["t2i_spatial", "t2i_complex"])
+    ap.add_argument("--set", required=True, choices=BLIP_SETS)
     ap.add_argument("--work", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--methods", nargs="+", default=METHODS, choices=METHODS)
     a = ap.parse_args()
     work = os.path.abspath(a.work)
     if os.path.exists(work):
         sys.exit(f"{work} exists; give a fresh --work folder")
-    samples = os.path.join(work, "samples")
-    os.makedirs(samples)
-
     kept, _ = load(a.set)
-    seeds = sorted(SETS[a.set]["seeds"])
-    images, missing = {}, []
-    for pos, item in enumerate(kept):
-        assert "_" not in item["prompt"] and "/" not in item["prompt"], item["prompt"]
-        for k, seed in enumerate(seeds):
-            png = os.path.join(OUT, "bench_joint", a.set, f"{item['idx']:04d}", f"seed{seed:02d}", "joint.png")
-            if not os.path.exists(png):
-                missing.append(png)
-                continue
-            n = 10 * pos + k
-            os.symlink(png, os.path.join(samples, f"{item['prompt']}_{n:06d}.png"))
-            images[n] = (png, item["prompt"], seed)
-    if missing:
-        sys.exit(f"{len(missing)} renders missing, e.g. {missing[0]}; every prompt needs all {len(seeds)} images")
+    expected = len(kept) * len(SETS[a.set]["seeds"])
 
-    unidet = os.path.join(T2I, "UniDet_eval")
-    if a.set == "t2i_spatial":
-        run(["2D_spatial_eval.py", "--outpath", work], unidet)
-        res = os.path.join(work, "labels", "annotation_obj_detection_2d", "vqa_result.json")
-    else:
-        data = os.path.join(work, "dataset")
-        os.makedirs(data)
-        keep = {x["prompt"] for x in kept}
-        for name in ("complex_val.txt", "complex_val_spatial.txt", "complex_val_action.txt"):
-            src = os.path.join(T2I, "examples", "dataset", name)
-            lines = [ln for ln in open(src).read().splitlines() if ln.strip()]
-            if name == "complex_val.txt":
-                lines = [ln for ln in lines if ln.strip() in keep]
-                assert len(lines) == len(kept), (len(lines), len(kept))
-            open(os.path.join(data, name), "w").write("\n".join(lines) + "\n")
-        run(["BLIP_vqa.py", "--out_dir", work], os.path.join(T2I, "BLIPvqa_eval"))
-        run(["2D_spatial_eval.py", "--outpath", work, "--complex", "True"], unidet)
-        run(["CLIPScore_eval/CLIP_similarity.py", "--outpath", work, "--complex", "True"], T2I)
-        run(["3_in_1.py", "--outpath", work, "--data_path", data], os.path.join(T2I, "3_in_1_eval"))
-        res = os.path.join(work, "annotation_3_in_1", "vqa_result.json")
+    rows = []
+    for method in a.methods:
+        found, empty = renders(a.set, method, kept)
+        print(f"{method}: {len(found)} of {expected} images ({empty} skipped: empty or no sidecar)", flush=True)
+        if not found:
+            continue
+        mdir = os.path.join(work, method)
+        os.makedirs(os.path.join(mdir, "samples"))
+        found.sort(key=lambda t: (t[0]["idx"], t[1]))
+        for n, (item, seed, png) in enumerate(found):
+            assert "_" not in item["prompt"] and "/" not in item["prompt"], item["prompt"]
+            os.symlink(png, os.path.join(mdir, "samples", f"{item['prompt']}_{n:06d}.png"))
+        t0 = time.time()
+        print("+ BLIP_vqa.py --out_dir", mdir, flush=True)
+        subprocess.run([sys.executable, "BLIP_vqa.py", "--out_dir", mdir], cwd=os.path.join(T2I, "BLIPvqa_eval"), check=True)
+        sec = time.time() - t0
+        res = json.load(open(os.path.join(mdir, "annotation_blip", "vqa_result.json")))
+        by_id = {int(x["question_id"]): float(x["answer"]) for x in res}
+        assert sorted(by_id) == list(range(len(found))), (len(by_id), len(found))
+        for n, (item, seed, png) in enumerate(found):
+            rows.append({"method": method, "set": a.set, "idx": item["idx"], "prompt": item["prompt"],
+                         "seed": seed, "image": png, "score": f"{by_id[n]:.4f}"})
+        v = [by_id[n] for n in range(len(found))]
+        print(f"{a.set} {method:6s} {sum(v) / len(v):.4f}  ({len(v)} images; {sec:.0f} s incl. model load, "
+              f"{sec / len(v):.2f} s/image)", flush=True)
 
-    by_id = {int(x["question_id"]): float(x["answer"]) for x in json.load(open(res))}
-    assert len(by_id) == len(images), (len(by_id), len(images))
     with open(a.out, "w", newline="") as f:
-        w = csv.writer(f)
-        w.writerow(["method", "set", "idx", "prompt", "seed", "image", "score"])
-        for n in sorted(images):
-            png, prompt, seed = images[n]
-            w.writerow(["joint", a.set, png.split("/")[-3], prompt, seed, png, f"{by_id[n]:.4f}"])
-    vals = list(by_id.values())
-    print(f"{a.set}: mean {sum(vals) / len(vals):.4f} over {len(vals)} images -> {a.out}")
+        w = csv.DictWriter(f, fieldnames=["method", "set", "idx", "prompt", "seed", "image", "score"])
+        w.writeheader()
+        w.writerows(rows)
 
 
 if __name__ == "__main__":
