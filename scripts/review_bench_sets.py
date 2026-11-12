@@ -50,7 +50,7 @@ SETS = {
     "geneval_position": {"bench": "geneval", "tag": "position", "seeds": [9, 10, 11, 12], "objects": True},
     "t2i_color": {"bench": "t2icompbench", "file": "color_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
     "t2i_shape": {"bench": "t2icompbench", "file": "shape_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
-    "t2i_texture": {"bench": "t2icompbench", "file": "texture_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
+    "t2i_texture": {"bench": "t2icompbench", "file": "texture_val.txt", "seeds": [9, 10], "objects": True, "sample": 100, "off": True},
 }
 PAIRED = {"geneval_two", "geneval_colorattr", "geneval_position", "t2i_color", "t2i_shape", "t2i_texture"}
 SAMPLE_SEED = 20261112  # the fixed draw of 100 two-concept prompts per T2I-CompBench subset
@@ -80,6 +80,8 @@ def load(name: str) -> tuple[list[dict], list[dict]]:
 
     kept = [x for x in items if ok(x["prompt"])]
     dropped = [x for x in items if not ok(x["prompt"])]
+    if s.get("off"):  # dropped from Table 2 on 2026-11-12, by the user
+        return [], items
     if s.get("sample"):  # only prompts naming exactly two things, then a fixed random draw kept in file order
         two = [x for x in kept if x["prompt"].count(" and ") == 1]
         pick = set(x["idx"] for x in random.Random(SAMPLE_SEED).sample(two, s["sample"]))
