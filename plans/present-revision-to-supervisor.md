@@ -86,7 +86,10 @@ For Claude to execute. Ask Claude to do these.
   - ▶ Next: 4.3
 - [ ] **3.2 Write `overleaf-steps.md`**
   - ▶ Next: 4.4
-- [ ] **3.3 Combine the claim table and the figures into `artifacts/scenes/iclr-review-response/supervisor-review-response.pdf`**
+- [ ] **3.3 Write `review.tex`: the claim groups in order, each quoting the reviewers' weaknesses and questions, then what the revision did, then the reply we plan to send, with the group's figure**
+  - Output: `artifacts/scenes/iclr-review-response/review.tex`, built with Tectonic on mscluster
+  - Check: every one of the 35 claims in the claim table is quoted once
+- [ ] **3.4 Combine the claim table and the figures into `artifacts/scenes/iclr-review-response/supervisor-review-response.pdf`**
 
 ## Instructions
 

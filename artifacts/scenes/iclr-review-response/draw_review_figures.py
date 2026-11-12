@@ -87,7 +87,9 @@ def render_page(source: str, page: int) -> Path:
     from_existing = sorted(out_dir.glob(f"{source}-*{page}.png"))
     for f in from_existing:
         if int(re.search(r"-(\d+)\.png$", f.name).group(1)) == page:
-            return f
+            if f.stat().st_mtime >= pdf.stat().st_mtime:
+                return f
+            f.unlink()  # the PDF was rebuilt after this render
     subprocess.run(["pdftoppm", "-r", str(SOURCE_DPI.get(source, DPI)), "-png", "-f", str(page), "-l", str(page),
                     str(pdf), str(out_dir / source)], check=True)
     return render_page(source, page)
