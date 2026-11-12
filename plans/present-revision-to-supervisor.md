@@ -89,11 +89,11 @@ For Claude to execute. Ask Claude to do these.
 
 ### 3. 📦 The Overleaf bundle and the supervisor document
 
-- [ ] **3.1 Build `overleaf-bundle/revision/` with the renamed tex, every included file and the bibliography, plus a zip**
+- [x] ✅ **3.1 Build `overleaf-bundle/revision/` with the renamed tex, every included file and the bibliography, plus a zip**
   - Check: a Tectonic build of the bundle on the cluster gives the same pages as the repo build, the main text ends on page 10, 0 undefined references.
   - Builder: `python3 artifacts/drips/present-revision-to-supervisor/make_overleaf_bundle.py`; rerun once Table 2 (slot R14) lands.
   - ▶ Next: 4.3
-- [ ] **3.2 Write `overleaf-steps.md`**
+- [x] ✅ **3.2 Write `overleaf-steps.md`**
   - ▶ Next: 4.4
 - [ ] **3.3 Write `review.tex`: the claim groups in order, each quoting the reviewers' weaknesses and questions, then what the revision did, then the reply we plan to send, with the group's figure**
   - Output: `artifacts/scenes/iclr-review-response/review.tex`, built with Tectonic on mscluster
@@ -112,7 +112,7 @@ For you to follow manually. Do these yourself.
 - [x] ✅ **4.2 Look at the first figure** and say yes, or name what to change
   - ✓ confirmed by hand 2026-11-12: "done and happy"
   - ◀ Needs: 2.1 · ▶ Next: 2.2
-- [ ] **4.3 Read the bundle's file list** before uploading
+- [x] ✅ **4.3 Read the bundle's file list** before uploading
   - ◀ Needs: 3.1
 - [ ] **4.4 Follow the Overleaf steps**: drag the `revision/` folder into the project, set the main file, and compile
   - What you should see: a 20-page PDF whose main text ends on page 10, with every figure and table showing
