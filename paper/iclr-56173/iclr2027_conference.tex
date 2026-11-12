@@ -740,7 +740,7 @@ Only the adapter parameters $\psi$ are trained, by minimising
 \mathcal L(\psi)=\mathbb E_{x_t,t}\,\bigl\|\hat\epsilon^{\psi}_{\mathrm{PoE}}(x_t,t)-\hat\epsilon_{\mathrm{Mono}}(x_t,t)\bigr\|^2
 \label{eq:adapter-loss}
 \end{equation}
-over the cached states of every training pair and seed at the first ten of the 50 sampling steps. The adapter is trained to reproduce the joint prompt's prediction, not the correction. It learns $r_t$ only implicitly: on the training states, the change it makes to the composition, $\hat\epsilon^\psi_{\mathrm{PoE}}-\hat\epsilon_{\mathrm{PoE}}$, approximates $r_t$ (Appendix~\ref{app:training-inference}).
+over the cached states of every training pair and seed at the first ten of the 50 sampling steps. The joint prompt's prediction is the product's prediction plus $r_t$. Equation~\ref{eq:adapter-loss} therefore trains the adapter to add $r_t$ to the product. At inference, switching the adapter on adds it.
 Appendix~\ref{app:implementation} gives the training and sampling
 details. Appendix~\ref{app:training-inference} derives the relation
 between the training target and the prediction used during sampling.

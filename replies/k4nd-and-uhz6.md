@@ -97,9 +97,9 @@ states the objective in the main text.
 
 Section 4 now says each adapted evaluation returns a noise prediction, as Appendix B derives. At
 inference we run the usual product-of-experts step on $c_1$, $c_2$ and the null prompt with the
-adapter switched on: three predictions per step, and never the joint prompt. The adapter is trained
-to reproduce the joint prompt's prediction, so it learns the correction $r_t$ only implicitly, as the
-change it makes to the composition (Appendix B). The reference that printed as "Figure 10" is removed.
+adapter switched on: three predictions per step, and never the joint prompt. The joint prompt's
+prediction is the product's prediction plus the correction $r_t$, so matching it trains the adapter
+to add $r_t$. At inference, switching the adapter on adds it. The reference that printed as "Figure 10" is removed.
 
 **Repetitive claims about learning an abstract concept**
 
