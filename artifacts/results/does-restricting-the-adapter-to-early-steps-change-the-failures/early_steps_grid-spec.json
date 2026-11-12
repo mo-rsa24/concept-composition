@@ -1,80 +1,71 @@
 {
- "width_in": 5.5,
+ "width_in": 5.0,
  "groups": [
   {
    "title": "",
    "columns": [
-    "LoRA off\n(PoE)",
+    "adapter off\n(PoE)",
     "steps\n0 to 10",
     "steps\n0 to 25",
-    "all 50\nsteps",
-    "trained on\nall steps"
+    "all 50\nsteps"
    ]
   }
  ],
+ "rotate_labels": true,
  "rows": [
   {
-   "label": "seal, walrus\nseed 11",
+   "label": "giraffe and lion",
+   "tiles": [
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__ours.png"
+   ]
+  },
+  {
+   "label": "mug and\nwine glass",
+   "tiles": [
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__ours.png"
+   ]
+  },
+  {
+   "label": "seal and walrus",
    "tiles": [
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__poe.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w10.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__ours.png",
-    null
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__ours.png"
    ]
   },
   {
-   "label": "cow, horse\nseed 13",
+   "label": "suitcase and\ndesk fan",
    "tiles": [
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__ours.png",
-    null
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__ours.png"
    ]
   },
   {
-   "label": "drum set, snowman\nseed 13",
-   "tiles": [
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__ours.png",
-    null
-   ]
-  },
-  {
-   "label": "briefcase, ceramic bowl\nseed 10",
-   "tiles": [
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__ours.png",
-    null
-   ]
-  },
-  {
-   "label": "tent, snowy mountain\nseed 16",
+   "label": "tent and\nsnowy mountain",
    "tiles": [
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w10.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png",
-    null
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png"
    ]
   },
   {
-   "label": "bookcase, glacier\nseed 11",
+   "label": "camel and\ndesert",
    "tiles": [
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__poe.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w10.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w25.png",
-    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__ours.png",
-    null
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__ours.png"
    ]
   }
- ],
- "pending": "not trained",
- "footnote": "v58-03-self at step 30,000.",
- "rotate_labels": true
+ ]
 }
