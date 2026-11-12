@@ -24,8 +24,8 @@ and T2I-CompBench's spatial and complex tasks with their official evaluators [TO
 
 Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC
 correction the paper discusses, run at its published setting from the same starting latent, beside CO3,
-ToMe and our adapter. Tables 1 and 3 compare with CO3 on every image. Table 4 adds Attend-and-Excite, SynGen and Divide-and-Bind on
-Stable Diffusion 1.5 [TODO: slot R5]. Section 4 now describes the training set and how pairs were
+ToMe and our adapter. Tables 1 and 3 compare with CO3 on every image. Table 1 adds ToMe and SynGen,
+both run on SDXL from the same starting latents [TODO: their rows of Table 1]. Section 4 now describes the training set and how pairs were
 chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 
 ### Q1: quantitative benchmark
@@ -40,7 +40,7 @@ Answered under W1 and W2: Tables 1 to 4.
 > "How does your method perform when composing more than two concepts? Can you show some results for
 > more than two concepts?"
 
-Appendix C.6 (Figure 14) shows one triple of each kind. The plain product fuses the three concepts or
+Appendix C.5 (Figure 13) shows one triple of each kind. The plain product fuses the three concepts or
 drops one; the adapter, trained only on pairs, separates them in every case and draws all three named
 things when the triple includes objects, but with two or three animals it draws only two. The
 Discussion now addresses this.

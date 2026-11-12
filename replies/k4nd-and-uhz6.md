@@ -74,7 +74,7 @@ The submission said that no held-out concept appears in training; that was too s
 now says the held-out pairs are unseen as pairs.
 
 The failure types the reviewer names (substituted identities, additional objects, style-dependent
-loss) are counted per setting in Figure 11 (Appendix C.4).
+loss) are counted per setting in Figure 10 (Appendix C.3).
 
 ### W4: method details poorly presented and sometimes inconsistent
 
@@ -110,7 +110,7 @@ itself. The reference that printed as "Figure 10" is removed.
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the
 Discussion. The introduction now states what the correction is and what it restores (see W1).
 Section 4 now describes the training data and how pairs were chosen (Figure 7).
-Appendix C.6 (Figure 14) and a new Discussion paragraph show the adapter on three concepts,
+Appendix C.5 (Figure 13) and a new Discussion paragraph show the adapter on three concepts,
 including where it fails: it separates the concepts in every case but stops at two animals.
 Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same
 seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders
@@ -140,7 +140,7 @@ Answered under W1 above.
 > style-dependent failures?"
 
 Answered under k4nd W3: Tables 1 and 3. The identity errors, additional
-objects and style-dependent failures are counted per setting in Figure 11 (Appendix C.4).
+objects and style-dependent failures are counted per setting in Figure 10 (Appendix C.3).
 
 ### Q3: pairs retained when only CO3 succeeds
 
@@ -186,8 +186,7 @@ C.5 shows three concepts.
 Tables 1 and 3 now compare quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin
 corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust
 cross-attention under a single joint prompt, while our setting has no joint prompt at inference.
-Table 4 runs the methods released for Stable Diffusion 1.x from their official code [TODO: slot R5].
-Beyond pairs of animals, Table 1 covers objects and Appendix C.6 three concepts.
+Beyond pairs of animals, Table 1 covers objects and Appendix C.5 three concepts.
 
 ### The training filter
 
@@ -249,12 +248,12 @@ Answered under k4nd W3: Tables 1 and 3.
 > "Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure
 > modes in Fig. 7?"
 
-We tested this directly. Figure 12 switches the adapter on for the first 10, the first 25 or all 50
+We tested this directly. Figure 11 switches the adapter on for the first 10, the first 25 or all 50
 of the 50 steps. Compare its last two columns: the first 25 steps give essentially the same pictures
 as all 50. The giraffe and lion row shows that the first 10 are too short for the learned correction,
 although the measured correction needs only those ten (Section 3). The cow and horse row shows that
-the species substitution of the submitted Fig. 7 (Figure 13 in the revision) persists at every
-window, so it does not come from the late steps. Figure 11 counts each failure type across all 53
+the species substitution of the submitted Fig. 7 (Figure 12 in the revision) persists at every
+window, so it does not come from the late steps. Figure 10 counts each failure type across all 53
 held-out pairs and eight seeds.
 
 ### Q4: pairs that do not compete for the same region

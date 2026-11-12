@@ -42,4 +42,4 @@ These go in no reply.
 
 ## Three concepts (k4nd limitations; PrzE's three-concept question)
 
-- Slot R11, Appendix C.6, Figure 14: one triple of each kind by joint prompt, plain product and ours at seed 10 (job 84832); the caption names where the product fuses and where the adapter stops at two animals, and a Discussion paragraph discusses it.
+- Slot R11, Appendix C.5, Figure 13: one triple of each kind by joint prompt, plain product and ours at seed 10 (job 84832); the caption names where the product fuses and where the adapter stops at two animals, and a Discussion paragraph discusses it.
