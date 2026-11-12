@@ -145,6 +145,33 @@ def main() -> None:
     fig.tight_layout(pad=0.4, rect=(0, 0, 1, 0.80))
     for ext in ("pdf", "png"):
         fig.savefig(os.path.join(a.out, f"window_scores.{ext}"), dpi=300, bbox_inches="tight", pad_inches=0.02)
+    # The one-panel version: BLIP-VQA only, bar groups for all pairs and each held-out group.
+    allrows = {}
+    for w, _ in SETTINGS:
+        c = cell([r for r in rows if r["win"] == w], "blip", rng, a.draws)
+        if c:
+            allrows[w] = c
+    fig2, ax = plt.subplots(figsize=(6.9, 2.0))
+    groups = [("all", "all 53 pairs")] + GROUPS
+    for gi, (g, glabel) in enumerate(groups):
+        for si, (s, _) in enumerate(SETTINGS):
+            r = allrows.get(s) if g == "all" else get.get((s, g, "blip"))
+            if not r:
+                continue
+            x = gi + (si - 1.5) * width
+            ax.bar(x, r["mean"], width, color=COLOURS[s])
+            ax.errorbar(x, r["mean"], yerr=[[r["mean"] - r["lo"]], [r["hi"] - r["mean"]]], color="k", lw=0.6, capsize=1.5)
+    ax.set_xticks(range(len(groups)), [g[1].replace("\n", " ") for g in groups])
+    ax.set_ylabel("BLIP-VQA (0 to 1)")
+    ax.set_ylim(0, 1)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.legend(handles=[Patch(color=COLOURS[s], label=lab) for s, lab in SETTINGS], frameon=False, ncol=4,
+              loc="lower center", bbox_to_anchor=(0.5, 1.0), fontsize=7)
+    fig2.tight_layout(pad=0.4)
+    for ext in ("pdf", "png"):
+        fig2.savefig(os.path.join(a.out, f"window_blip.{ext}"), dpi=300, bbox_inches="tight", pad_inches=0.02)
+    for w, c in allrows.items():
+        print(w, "all blip", {k: round(v, 4) if isinstance(v, float) else v for k, v in c.items()})
     for r in res:
         print(r["setting"], r["group"], r["measure"], {k: (round(v, 4) if isinstance(v, float) else v) for k, v in r.items() if k in ("mean", "lo", "hi", "pairs", "images")})
 
