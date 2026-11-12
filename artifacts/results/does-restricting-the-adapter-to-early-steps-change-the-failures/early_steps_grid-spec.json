@@ -1,5 +1,5 @@
 {
- "width_in": 5.0,
+ "width_in": 4.3,
  "groups": [
   {
    "title": "",
@@ -47,6 +47,15 @@
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w10.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w25.png",
     "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__ours.png"
+   ]
+  },
+  {
+   "label": "cow and horse",
+   "tiles": [
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__poe.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__w10.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__w25.png",
+    "artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__ours.png"
    ]
   },
   {
