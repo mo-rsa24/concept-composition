@@ -1,7 +1,7 @@
 """The four panels of Figure 10 (slot R9), one PDF and PNG each, for subfigures with their own captions.
 
-  a  failure types from the fixed-prompt judge (scripts/review_judge_failures.py): the share of each
-     setting's 424 images given each label, and the share flagged for style loss
+  a  failure types from the fixed-prompt judge (scripts/review_judge_failures.py): how many of each
+     setting's 424 images got each label (style loss is kept in judge_shares.csv, not plotted)
   b  BLIP-VQA per held-out group, 95% intervals from resampling pairs then seeds
   c  share of the animal-pair images where the detector finds two or more animals
   d  ImageReward over all 424 images per setting
@@ -32,7 +32,7 @@ from review_window_figure import COLOURS, GROUPS, SETTINGS, cell, load  # noqa: 
 
 JUDGE_SETTING = {"off": "off", "steps 0-10": "10", "steps 0-25": "25", "all 50": "50"}
 TYPES = [("hybrid", "hybrid"), ("one", "one\nconcept"), ("intrusion", "intrusion"),
-         ("count error", "count\nerror"), ("style", "style\nloss")]
+         ("count error", "count\nerror")]
 GROUP_TICKS = ["hard\n(3 pairs)", "easy\n(29 pairs)", "not competing\n(21 pairs)"]
 
 
@@ -90,16 +90,16 @@ def main() -> None:
         n[s] += 1
         per[s][r["label"]] += 1
         per[s]["style"] += r["style_loss"] == "yes"
-    shares = {(t, s): {"mean": per[s][t] / n[s]} for t, _ in TYPES for s in per if n[s]}
+    shares = {(t, s): {"mean": per[s][t]} for t, _ in TYPES for s in per if n[s]}
     with open(os.path.join(a.out, "judge_shares.csv"), "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["setting", "images", *[t for t, _ in TYPES], "two", "broken"])
+        w.writerow(["setting", "images", *[t for t, _ in TYPES], "two", "broken", "style_loss"])
         for s in per:
-            w.writerow([s, n[s], *[per[s][t] for t, _ in TYPES], per[s]["two"], per[s]["broken"]])
+            w.writerow([s, n[s], *[per[s][t] for t, _ in TYPES], per[s]["two"], per[s]["broken"], per[s]["style"]])
     fig, ax = plt.subplots(figsize=(3.3, 1.9))
     bars(ax, [t for t, _ in TYPES], lambda t, s: shares.get((t, s)))
     ax.set_xticks(range(len(TYPES)), [lab for _, lab in TYPES])
-    ax.set_ylabel("share of images")
+    ax.set_ylabel("images (of 424)")
     save(fig, a.out, "panel_a_failure_types")
 
     legend_strip(a.out)
