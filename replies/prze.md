@@ -23,8 +23,8 @@ and T2I-CompBench's spatial and complex tasks with their official evaluators [TO
 > concept pairs are not listed so it's impossible to see what the adapter is trained on."
 
 Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC
-correction the paper discusses, run at its published setting from the same starting latent, beside CO3
-and our adapter. Tables 1 and 3 compare with CO3 on every image. Table 4 adds Attend-and-Excite, SynGen and Divide-and-Bind on
+correction the paper discusses, run at its published setting from the same starting latent, beside CO3,
+ToMe and our adapter. Tables 1 and 3 compare with CO3 on every image. Table 4 adds Attend-and-Excite, SynGen and Divide-and-Bind on
 Stable Diffusion 1.5 [TODO: slot R5]. Section 4 now describes the training set and how pairs were
 chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 

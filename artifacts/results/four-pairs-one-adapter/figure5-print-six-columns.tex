@@ -1,0 +1,13 @@
+\documentclass{standalone}
+\usepackage{graphicx,array}
+\usepackage{times}
+\newlength\tw\setlength\tw{0.88in}
+\begin{document}\footnotesize\setlength\tabcolsep{0.8pt}\renewcommand\arraystretch{0.8}
+\begin{tabular}{c*{6}{c}}
+ & joint prompt & PoE & CO3 & ToMe & PoE + Langevin & ours\\[1pt]
+\rotatebox{90}{\parbox{\tw}{\centering elephant and turtle}} & \includegraphics[width=\tw]{elturtle_joint.png} & \includegraphics[width=\tw]{elturtle_poe.png} & \includegraphics[width=\tw]{elturtle_co3.png} & \includegraphics[width=\tw]{elturtle_tome.png} & \includegraphics[width=\tw]{elturtle_langevin.png} & \includegraphics[width=\tw]{elturtle_ours.png}\\[0.5pt]
+\rotatebox{90}{\parbox{\tw}{\centering cat and lion}} & \includegraphics[width=\tw]{catlion_joint.png} & \includegraphics[width=\tw]{catlion_poe.png} & \includegraphics[width=\tw]{catlion_co3.png} & \includegraphics[width=\tw]{catlion_tome.png} & \includegraphics[width=\tw]{catlion_langevin.png} & \includegraphics[width=\tw]{catlion_ours.png}\\[0.5pt]
+\rotatebox{90}{\parbox{\tw}{\centering tent and mountain}} & \includegraphics[width=\tw]{tent_joint.png} & \includegraphics[width=\tw]{tent_poe.png} & \includegraphics[width=\tw]{tent_co3.png} & \includegraphics[width=\tw]{tent_tome.png} & \includegraphics[width=\tw]{tent_langevin.png} & \includegraphics[width=\tw]{tent_ours.png}\\[0.5pt]
+\rotatebox{90}{\parbox{\tw}{\centering lighthouse and sea}} & \includegraphics[width=\tw]{lighthouse_joint.png} & \includegraphics[width=\tw]{lighthouse_poe.png} & \includegraphics[width=\tw]{lighthouse_co3.png} & \includegraphics[width=\tw]{lighthouse_tome.png} & \includegraphics[width=\tw]{lighthouse_langevin.png} & \includegraphics[width=\tw]{lighthouse_ours.png}\\[0.5pt]
+\end{tabular}
+\end{document}
