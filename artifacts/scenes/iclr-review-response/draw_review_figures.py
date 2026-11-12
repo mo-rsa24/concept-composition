@@ -200,8 +200,38 @@ def _figure_top(img: Image.Image, y_caption: int, fx: tuple[int, int], gap: int)
     return max(0, top - 10)
 
 
+def _locate_page(panel: dict) -> None:
+    """If the crop's first words are not on the named page, find the page that holds them.
+
+    Pages move as the revision is edited; the passage, not the page number, is what the spec means.
+    """
+    src = panel["src"]
+    if src["kind"] not in ("pdf", "ocr") or "box" in panel["crop"]:
+        return
+    first = panel["crop"]["from"]
+    words = pdf_words(src["source"], src["page"]) if src["kind"] == "pdf" else None
+    try:
+        if words is not None:
+            find_phrase(words, first)
+            return
+    except LookupError:
+        pass
+    if src["kind"] != "pdf":
+        return
+    n = int(re.search(r"Pages:\s+(\d+)", subprocess.run(["pdfinfo", str(SOURCES[src["source"]])],
+            capture_output=True, text=True).stdout).group(1))
+    for page in range(1, n + 1):
+        try:
+            find_phrase(pdf_words(src["source"], page), first)
+            src["page"] = page
+            return
+        except LookupError:
+            continue
+
+
 def build_crop(panel: dict) -> dict:
     """Cut the panel's crop and place its marks in crop coordinates."""
+    _locate_page(panel)
     img, words, src_label = source_image(panel["src"])
     c = panel["crop"]
     pad = c.get("pad", 8)
