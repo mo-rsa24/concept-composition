@@ -29,7 +29,7 @@ ANIMAL_PAIRS = {
 
 
 def wanted(r: dict) -> bool:
-    if r["run"].startswith("r1_"):
+    if r["run"].startswith("r1_") or r["run"].endswith("/r1"):  # baseline folders name their set as a subfolder
         return r["group"] == "animals"
     return r["pair"] in ANIMAL_PAIRS
 
