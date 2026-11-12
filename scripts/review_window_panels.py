@@ -117,17 +117,19 @@ def main() -> None:
     save(fig, a.out, "panel_b_blip")
 
     # c and d: one bar per setting
-    for name, k, ylab in (("panel_c_two_animals", "comp", "share of animal-pair images"),
+    for name, k, ylab in (("panel_c_two_animals", "comp", "images with two animals (of 160)"),
                           ("panel_d_imagereward", "ir", "ImageReward")):
         fig, ax = plt.subplots(figsize=(3.3, 1.9))
         for si, (s, lab) in enumerate(SETTINGS):
             v = cell([r for r in rows if r["win"] == s], k, rng, a.draws)
+            if k == "comp":  # a count of the animal-pair images, every setting has the same 160
+                v = {**v, **{q: v[q] * v["images"] for q in ("mean", "lo", "hi")}}
             ax.bar(si, v["mean"], 0.7, color=COLOURS[s])
             ax.errorbar(si, v["mean"], yerr=[[v["mean"] - v["lo"]], [v["hi"] - v["mean"]]], color="k", lw=0.6, capsize=1.5)
         ax.set_xticks(range(len(SETTINGS)), [lab.replace(" for ", "\n") for _, lab in SETTINGS], fontsize=6)
         ax.set_ylabel(ylab)
         if k == "comp":
-            ax.set_ylim(0, 1)
+            ax.set_ylim(0, 160)
         ax.axhline(0, color="k", lw=0.4)
         ax.spines[["top", "right"]].set_visible(False)
         save(fig, a.out, name)
