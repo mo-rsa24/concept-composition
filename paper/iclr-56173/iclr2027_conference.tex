@@ -133,6 +133,7 @@ Johannesburg, South Africa \\
 % placeholder box at its final size, or the optional fallback image.
 \usepackage{booktabs}
 \usepackage{capt-of}
+\usepackage{subcaption}
 \usepackage{siunitx}
 % \reviewfinaltrue makes a missing slot or a table wider than the text stop the build.
 \newif\ifreviewfinal
@@ -791,7 +792,7 @@ between the training target and the prediction used during sampling.
 
 \subsection{Results}
 \label{sec:results}
-We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Table~\ref{tab:review-R1} and Table~\ref{tab:review-R3} (Appendix~\ref{app:review-held-out}) score every image, and the appendix shows the renders behind them. On the 53 held-out pairs of Table~\ref{tab:review-R3}, the adapter raises the product's BLIP-VQA on the pairs that are easy for the joint prompt but unseen in training, leaves the pairs that do not compete unchanged, and the three hard pairs are too few to separate the methods. CO3 evaluates the joint prompt at every step and scores above our adapter on most columns of both tables; our adapter, which never evaluates it, draws two animals most often on the animal prompts and scores highest on the object prompts.
+We evaluate one adapter, chosen once by a fixed rule before any held-out score was read, against joint prompting, PoE and CO3. Every method uses the same seed for each prompt, with 50 DDIM steps at guidance 7.5; CO3 starts from the same latent but draws its later resampling noise from the seed, so its column is marked~$\dagger$. Table~\ref{tab:review-R1} scores the Attend-and-Excite prompts (276 prompts, seeds 9 to 12) and Table~\ref{tab:review-R3} the 53 held-out pairs (seeds 9 to 16, none trained on). BLIP-VQA measures composition, and CLIP score and ImageReward measure image quality. Table~\ref{tab:review-R1} and Table~\ref{tab:review-R3} (Appendix~\ref{app:review-held-out}) score every image, and the appendix shows the renders behind them. On the 53 held-out pairs of Table~\ref{tab:review-R3}, the adapter raises the product's BLIP-VQA on the same seeds, by 0.11 (95\% interval 0.05 to 0.18). CO3 evaluates the joint prompt at every step and scores above our adapter on most columns of both tables; our adapter, which never evaluates it, draws two animals most often on the animal prompts and scores highest on the object prompts.
 
 
 
@@ -1269,7 +1270,7 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 \begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R12}{\linewidth}{6.8in}
-\caption{\textbf{The images behind Tables~\ref{tab:review-R1} and~\ref{tab:review-R3}.} The first three rows are one prompt from each set of Table~\ref{tab:review-R1} (two animals, an animal and an object, two objects); the last three are one pair from each group of Table~\ref{tab:review-R3} (hard, easy but unseen, not competing). Each row is one of the six prompts and seeds where our adapter scores highest on BLIP-VQA in its set or group. Columns are the methods of both tables, each row from one starting latent.}
+\caption{\textbf{The images behind Tables~\ref{tab:review-R1} and~\ref{tab:review-R3}.} The first three rows are one prompt from each set of Table~\ref{tab:review-R1} (two animals, an animal and an object, two objects); the last three are held-out pairs of Table~\ref{tab:review-R3}. Each row is one of the six prompts and seeds where our adapter scores highest on BLIP-VQA in its set or among the held-out pairs. Columns are the methods of both tables, each row from one starting latent.}
 \label{fig:review-R12}
 \end{figure}
 
@@ -1287,13 +1288,13 @@ Table~\ref{tab:review-R1} scores every method on the 276 Attend-and-Excite promp
 
 \begin{table}[htbp]
 \centering\footnotesize
-\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, grouped by whether the joint prompt itself composes them: hard (it fails on most seeds), easy but unseen, and not competing (an object and a place). Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the group's images at seeds 9 to 16, with a 95\% interval from resampling pairs and then seeds within each pair; the hard group has three pairs, so its intervals are wide. As in Table~\ref{tab:review-R1}, the joint prompt and CO3 are references above the rule, and bold marks the highest mean in each column.}
+\caption{\textbf{How often each method composes on 53 held-out pairs.} Pairs never trained on, at seeds 9 to 16. Each cell is the mean BLIP-VQA score (0 to 1, higher is better) over the 424 images, with a 95\% interval from resampling pairs and then seeds within each pair. As in Table~\ref{tab:review-R1}, the joint prompt and CO3 are references above the rule.}
 \label{tab:review-R3}
 \smallskip
 \reviewslot{R3}{\linewidth}{1.3in}
 \end{table}
 
-Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prompt composes them: hard, easy but unseen, and not competing. None of these pairs was trained on as a pair, but 30 of the 53 share a concept with a training pair (cow and horse shares the horse of horse and pig), and 6 share both concepts, each with a different training pair. Figure~\ref{fig:review-R12} shows one pair from each group under every method. The full list of pairs, with the joint prompt's result on each seed, is released with the code.
+None of the 53 held-out pairs of Table~\ref{tab:review-R3} was trained on as a pair, but 30 of the 53 share a concept with a training pair (cow and horse shares the horse of horse and pig), and 6 share both concepts, each with a different training pair. Figure~\ref{fig:review-R12} shows three of them under every method. The full list of pairs is released with the code.
 
 
 
@@ -1301,7 +1302,13 @@ Table~\ref{tab:review-R3} groups the 53 held-out pairs by whether the joint prom
 \subsection{How the adapter behaves}
 \label{app:review-adapter}
 
-Figure~\ref{fig:adapter-rank} varies the adapter's rank and the number of denoising steps it acts on, for a cat and a dog at three held-out seeds; Section~\ref{sec:results} discusses it. Figure~\ref{fig:review-R9} counts each failure type over the held-out pairs as the adapter acts on fewer steps, and Figure~\ref{fig:review-R10} shows the images behind those counts.
+Figure~\ref{fig:adapter-rank} varies the adapter's rank and the number of denoising steps it acts on, for a cat and a dog at three held-out seeds; Section~\ref{sec:results} discusses it. Figure~\ref{fig:review-R9} counts each failure type over the held-out pairs as the adapter acts on fewer steps, and Figure~\ref{fig:review-R10} shows the images behind those counts. Switching the adapter on lowers the number of hybrids and raises the number of images in which the detector finds two animals (Figure~\ref{fig:review-R9}a,b). The first 25 steps give the same result as all 50 on both counts and on image quality (Figure~\ref{fig:review-R9}a--c); with the first 10 only, the detector finds two animals far less often (Figure~\ref{fig:review-R9}b). At all 50 steps, an unrequested extra object beside both concepts is the most common failure (Figure~\ref{fig:review-R9}a).
+
+\paragraph{The failure-type judge.} Each image of Figure~\ref{fig:review-R9}a was sent once, with its pair's two concepts in place of X and Y, to \texttt{claude-opus-5-5} with this prompt, the answer constrained to the two named fields:
+\begin{quote}\small
+You see one image generated for the prompt ``a X and a Y''. Reply with JSON \{``label'': \ldots, ``style\_loss'': \ldots\}. label is exactly one of, checked in this order: ``hybrid'' if a single creature or object combines features of X and Y; ``count error'' if a named thing appears more than once while the other is missing or miscounted; ``one'' if only one of X or Y is drawn; ``intrusion'' if both are drawn and an unrequested object, creature or extra copy is prominent; ``two'' if both are drawn as separate, recognisable things; ``broken'' if no subject can be read. style\_loss is ``yes'' if the image is a painting, drawing or illustration rather than a photograph, else ``no''.
+\end{quote}
+The judge was not told which setting produced an image; ``two'' and ``broken'' are not plotted, and the style field is not used.
 
 \begin{figure}[htbp]
 \centering
@@ -1318,15 +1325,27 @@ first 10, first 25, or all 50 denoising steps. After the adapter stops, the PoE 
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\reviewslot{R9}{\linewidth}{2.0in}
-\caption{\textbf{Failure types as the adapter acts on fewer steps.} Counts of each failure type over the held-out pairs with no adapter and with the adapter on steps 0 to 10, 0 to 25 and all 50 of 50.}
+\includegraphics[width=0.6\linewidth]{figures/failure-window/panel_legend.pdf}\\[2pt]
+\begin{subfigure}[t]{0.325\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/failure-window/panel_a_failure_types.pdf}
+\caption{Failure types. Each image is labelled by Claude Opus 5.5 (\texttt{claude-opus-5-5}) with the prompt in Appendix~\ref{app:review-adapter}, one call per image, without being told the setting; bars count how many of each setting's 424 images received each label.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.325\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/failure-window/panel_c_two_animals.pdf}
+\caption{Images of the 20 animal pairs (160 per setting) in which an open-vocabulary detector finds two or more animals.}
+\end{subfigure}\hfill
+\begin{subfigure}[t]{0.325\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/failure-window/panel_d_imagereward.pdf}
+\caption{ImageReward over all 424 images per setting.}
+\end{subfigure}
+\caption{\textbf{Failures and image quality as the adapter acts on fewer steps.} Every panel scores the same 424 images: the 53 held-out pairs of Table~\ref{tab:review-R3} at seeds 9 to 16, each seed starting from the same latent in every setting. Each image is sampled by product-of-experts composition of the two concept prompts and the null prompt; the settings differ only in when the adapter is switched on: never, for steps 0 to 10, for steps 0 to 25, or for all 50 of 50.}
 \label{fig:review-R9}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering\footnotesize
 \reviewslot{R10}{\linewidth}{6.8in}
-\caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Held-out pairs from each group (two easy but unseen, three hard, two not competing), each at the seed where our adapter on all 50 steps scores highest on BLIP-VQA; columns are the four settings of Figure~\ref{fig:review-R9}.}
+\caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Seven held-out pairs, each at the seed where our adapter on all 50 steps scores highest on BLIP-VQA; columns are the four settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
 \end{figure}
 

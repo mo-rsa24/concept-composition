@@ -33,6 +33,12 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 
 - Figure 5's caption and Section 4.1 say every column starts from the same latent; CO3's dagger marks its resampling noise.
 
+## k4nd W3 and Q2, UHz6 W1, Q2, Q3 and Q4: the held-out evaluation
+
+- Table 3 reports the 53 held-out pairs as one column per method, without the hard, easy and not-competing groups; Section 4.1 gives the adapter's gain over the plain product on them.
+- Figure 10 counts failure types (labelled by a fixed-prompt Claude judge, prompt in Appendix C.3), images with two animals, and ImageReward as the adapter acts on the first 10, 25 or all 50 steps; it replaces the by-eye failure counts.
+- PoE with a Langevin corrector leaves Table 3 (it ran only on the former hard group) and stays in Figure 5.
+
 ## Corrections no reviewer raised
 
 These go in no reply.

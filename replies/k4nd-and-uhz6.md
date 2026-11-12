@@ -65,14 +65,12 @@ Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pair
 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
 image quality by CLIP score and ImageReward.
 
-Table 3 scores the 53 held-out pairs described in Appendix C.2, grouped as hard, easy but unseen, and
-not competing, at seeds 9 to 16, with 95% intervals from resampling pairs.
+Table 3 scores 53 held-out pairs at seeds 9 to 16, with 95% intervals from resampling pairs.
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
-link]; Appendix C.2 describes the held-out groups.
+link].
 
-The failure types the reviewer names (substituted identities, additional objects, style-dependent
-loss) are counted per setting in Figure 10 (Appendix C.3).
+Hybrids, missing concepts and additional objects are counted per setting in Figure 10 (Appendix C.3).
 
 ### W4: method details poorly presented and sometimes inconsistent
 
@@ -136,8 +134,8 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Tables 1 and 3. The identity errors, additional
-objects and style-dependent failures are counted per setting in Figure 10 (Appendix C.3).
+Answered under k4nd W3: Tables 1 and 3, and Figure 10, which counts the failure types the reviewer
+names.
 
 ### Q3: pairs retained when only CO3 succeeds
 
@@ -169,7 +167,7 @@ resolved as described under W4. Baseline starting noise is resolved as described
 
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite
 benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53
-held-out pairs in three groups (Table 3). Table 2 reports GenEval's two-object and counting tasks and
+held-out pairs (Table 3). Table 2 reports GenEval's two-object and counting tasks and
 T2I-CompBench's spatial and complex tasks with their official evaluators [TODO: slot R14]. Appendix
 C.5 shows three concepts.
 
@@ -245,21 +243,19 @@ Answered under k4nd W3: Tables 1 and 3.
 > "Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure
 > modes in Fig. 7?"
 
-We tested this directly. Figure 11 switches the adapter on for the first 10, the first 25 or all 50
-of the 50 steps. Compare its last two columns: the first 25 steps give essentially the same pictures
-as all 50. The giraffe and lion row shows that the first 10 are too short for the learned correction,
-although the measured correction needs only those ten (Section 3). The cow and horse row shows that
-the species substitution of the submitted Fig. 7 (Figure 12 in the revision) persists at every
-window, so it does not come from the late steps. Figure 10 counts each failure type across all 53
-held-out pairs and eight seeds.
+We tested this directly. Figure 10 counts each failure type on the 53 held-out pairs at seeds 9 to 16
+with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 11
+shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the
+detector finds two animals far less often (Figure 10b). The cow and horse row of Figure 11 shows that
+the species substitution of the submitted Fig. 7 (Figure 12 in the revision) persists at every window,
+so it does not come from the late steps.
 
 ### Q4: pairs that do not compete for the same region
 
 > "Does the adapter degrade PoE on pairs that do not compete for the same region, such as
 > foreground/background pairs like lighthouse and sea?"
 
-No. Table 3's not-competing group holds 21 held-out pairs whose concepts do not contend for one
-region, including lighthouse and a stormy sea (Appendix C.2). On these, the adapter scores
-0.73 ± 0.08 against the product's 0.74 ± 0.10 (BLIP-VQA, seeds 9 to 16, 95% intervals from
-resampling pairs). The intervals overlap, so on pairs the product already composes, the adapter
-neither helps nor harms on this measure. [TODO: CO3's row, slot R3.]
+No. Among the held-out pairs of Table 3, 21 have concepts that do not contend for one region,
+including lighthouse and a stormy sea. On these pairs the adapter scores the same as the plain product
+within the 95% intervals (BLIP-VQA on Table 3's images, seeds 9 to 16), so on pairs the product
+already composes it neither helps nor harms.

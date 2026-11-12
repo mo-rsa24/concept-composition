@@ -118,6 +118,8 @@ def csv_to_list(path: Path) -> str:
 METRIC = {  # CSV column: (printed label, decimals)
     "comp": ("Comp.", 2), "clip": ("CLIP", 1), "blip": ("BLIP", 2), "ir": ("IR", 2),
     "geneval_two": ("Two obj.", 2), "geneval_count": ("Counting", 2),
+    "geneval_colorattr": ("Attr. bind.", 2), "geneval_position": ("Position", 2),
+    "t2i_color": ("Colour", 2), "t2i_shape": ("Shape", 2), "t2i_texture": ("Texture", 2),
     "t2i_spatial": ("Spatial", 2), "t2i_complex": ("Complex", 2), "nfe": ("NFE", 0),
 }
 BENCH_GROUPS = [("animals", "Animals", ["comp", "clip", "blip", "ir"]),
@@ -126,10 +128,9 @@ BENCH_GROUPS = [("animals", "Animals", ["comp", "clip", "blip", "ir"]),
 SCHEMA = {
     "R1": {"groups": BENCH_GROUPS, "tail": []},
     "R5": {"groups": BENCH_GROUPS, "tail": []},
-    "R3": {"groups": [("hard", "Hard (3)", ["blip"]), ("easy", "Easy but unseen (29)", ["blip"]),
-                      ("not_competing", "Not competing (21)", ["blip"])], "tail": []},
-    "R14": {"groups": [("geneval", "GenEval", ["geneval_two", "geneval_count"]),
-                       ("t2icompbench", "T2I-CompBench", ["t2i_spatial", "t2i_complex"])], "tail": ["nfe"]},
+    "R3": {"groups": [("all", "53 held-out pairs", ["blip"])], "tail": []},
+    "R14": {"groups": [("geneval", "GenEval", ["geneval_two", "geneval_colorattr", "geneval_position"]),
+                       ("t2icompbench", "T2I-CompBench", ["t2i_color", "t2i_shape", "t2i_texture"])], "tail": []},
 }
 # A method whose name ends in this is a published number we cite, never a run of ours; it sits
 # under its own rule at the foot of the table.
