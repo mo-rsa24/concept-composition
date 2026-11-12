@@ -41,12 +41,12 @@ SOURCE_DPI = {"reviews": 300}   # Reviews.pdf is drawn as vector shapes, so a fi
 
 SOURCES = {
     "submitted": REPO / "56173_Restoring_plurality_in_c.pdf",
-    "revised": REPO / "paper/iclr-56173/iclr2027_conference.pdf",
+    "revised": REPO / "paper/iclr-56173/build/iclr2027_conference.pdf",
     "reviews": REPO / "Reviews.pdf",
 }
 SOURCE_NAMES = {
     "submitted": "56173_Restoring_plurality_in_c.pdf (submitted)",
-    "revised": "paper/iclr-56173/iclr2027_conference.pdf (revised)",
+    "revised": "paper/iclr-56173/build/iclr2027_conference.pdf (revised)",
     "reviews": "Reviews.pdf",
 }
 
@@ -209,6 +209,7 @@ def build_crop(panel: dict) -> dict:
         elif "lines_from" in m:
             a = line_boxes(find_phrase(words, m["lines_from"], after_y=y0))[0]
             b = line_boxes(find_phrase(words, m["lines_to"], after_y=a[1]))[-1]
+            b = (b[0], b[1], b[2], b[3] + m.get("pad_bottom", 0))
             boxes = [(x0 + 8, a[1], x1 - 8, b[3])] if m.get("full") else \
                     [(min(a[0], b[0]), a[1], max(a[2], b[2]), b[3])]
         else:

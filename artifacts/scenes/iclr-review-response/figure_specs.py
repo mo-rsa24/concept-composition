@@ -63,6 +63,8 @@ G7 = {
                 "marks": [
                     {"key": "noloss", "phrase": "Only the adapter parameters ψ are updated.",
                      "label": "no loss written"},
+                    {"key": "lam", "lines_from": "pling, the learned correction is", "lines_to": "(12)",
+                     "full": True, "pad_bottom": 40, "label": "applied as a correction at strength λ"},
                 ],
             },
             {
@@ -81,23 +83,27 @@ G7 = {
             {
                 "id": "r1", "title": "Section 4, opening paragraph",
                 "src": {"kind": "pdf", "source": "revised", "page": 7},
-                "crop": {"from": "Once trained, the module is used at inference",
-                         "to": "the adapted composition itself."},
+                "crop": {"from": "Once trained, the module is used at",
+                         "to": "and never the joint prompt."},
                 "crop_name": "revised-p7-k4nd-W4b",
                 "marks": [
                     {"key": "noise", "phrase": "returns a noise prediction, as the frozen model does.",
                      "label": "returns a noise prediction"},
+                    {"key": "inf", "phrase": "we run the usual product-of-experts step on",
+                     "label": "inference: PoE, adapter on"},
                 ],
             },
             {
                 "id": "r2", "title": "Section 4, Equation 12",
                 "src": {"kind": "pdf", "source": "revised", "page": 8},
-                "crop": {"from": "uncorrected product-of-experts trajectory. At each selected",
-                         "to": "so the earliest and noisiest steps carry the most weight."},
+                "crop": {"from": "Only the adapter parameters",
+                         "to": "(Appendix B). Appendix A gives the training and sampling"},
                 "crop_name": "revised-p8-k4nd-W4a-Q4",
                 "marks": [
                     {"key": "eq12", "lines_from": "Only the adapter parameters", "lines_to": "(12)",
                      "full": True, "label": "Equation 12, the training loss"},
+                    {"key": "impl", "phrase": "The adapter is trained to reproduce the joint prompt’s prediction, not the correction.",
+                     "label": "learns the joint prompt"},
                 ],
             },
         ],
@@ -107,6 +113,7 @@ G7 = {
         {"from": ("v1", "loss"), "to": ("s2", "noloss"), "label": "no loss here", "role": "review"},
         {"from": ("v1", "sq"), "to": ("s3", "diag"), "label": "the diagram", "role": "review"},
         {"from": ("s1", "ret"), "to": ("r1", "noise"), "label": "now reads"},
+        {"from": ("s2", "lam"), "to": ("r1", "inf"), "label": "replaced by"},
         {"from": ("s2", "noloss"), "to": ("r2", "eq12"), "label": "Equation 12 added"},
         {"from": ("s3", "diag"), "to": ("r2", "eq12"), "label": "stated in Section 4 instead"},
     ],
@@ -122,7 +129,7 @@ G7 = {
         "status_color": "#1e8449",
     },
     "footer": [
-        "Changes behind this page: 8ef00a17 Section 4 states the training loss as Equation 12  ·  88f02a45 each adapted evaluation returns a noise prediction  ·  2e9af75c the training diagram is hidden.",
+        "Changes behind this page: 8ef00a17 Section 4 states the training loss as Equation 12  ·  88f02a45 and ead813ab each adapted evaluation returns a noise prediction and inference is the usual PoE step with the adapter on  ·  2e9af75c the training diagram is hidden.",
         "Question 4 also asks about figure references and starting noise; those are shown on the G9 and G8 pages. The reviewer's quotations are left out of the reply panel because the left column shows them.",
     ],
 }
