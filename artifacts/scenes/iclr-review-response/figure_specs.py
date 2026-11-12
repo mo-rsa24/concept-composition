@@ -527,7 +527,7 @@ G11 = spec(
      {"from": ("s1", "f7"), "to": ("r1", "f10"), "label": "counted per window"},
      {"from": ("s1", "f7"), "to": ("r2", "f11"), "label": "shown per window"}],
     ("The reply we plan to send (replies/k4nd-and-uhz6.md: UHz6 Q3)", K4ND_REPLY, ["Q3: restricting the adapter"]),
-    ["The submitted Figure 7 is Figure 15 in the revision. " + SOURCES_LINE],
+    ["The submitted Figure 7 is Figure 14 in the revision. " + SOURCES_LINE],
 )
 
 G12 = spec(

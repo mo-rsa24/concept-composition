@@ -245,7 +245,7 @@ We tested this directly. Figure 11 counts each failure type on the 53 held-out p
 with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 13
 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the
 detector finds two animals far less often (Figure 12a). The cow and horse row of Figure 13 shows that
-the species substitution of the submitted Fig. 7 (Figure 15 in the revision) persists at every window,
+the species substitution of the submitted Fig. 7 (Figure 14 in the revision) persists at every window,
 so it does not come from the late steps.
 
 ### Q4: pairs that do not compete for the same region

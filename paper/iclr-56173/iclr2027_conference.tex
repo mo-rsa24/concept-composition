@@ -1355,26 +1355,24 @@ Figure~\ref{fig:review-window-scores} scores the same images with an open-vocabu
 \label{fig:review-R10}
 \end{figure}
 
-\begin{figure}[htbp]
-\centering\footnotesize
-\includegraphics[width=\linewidth]{figures/failure-window/judge_sample_40.png}
-\caption{\textbf{Forty of the judge's labels.} Images drawn at random from the 1,696 behind Figure~\ref{fig:review-R9}, each with its prompt and the label the judge gave it.}
-\label{fig:judge-sample}
-\end{figure}
-
-
-
 % C.5's last figure fills its page, so C.6 starts on a fresh one
 \subsection{Limitations}
 \label{app:limitations}
 Figure~\ref{fig:joint-prompt-through-adapter} shows the limitations discussed in Section~\ref{sec:results}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{ablation/adapter-limitations-stacked.pdf}
+\includegraphics[width=0.6\textwidth]{ablation/adapter-limitations-stacked.pdf}
 \caption{\textbf{Limitations of the Plurality LoRA:} a) The adapter can change the render under joint prompting and is inconsistently useful in this case. Each row compares the model conditioned on the joint prompt with and without the LoRA applied from the same noise sample. While the LoRA improves the render for a chessboard and hourglass, it disrupts the render for a cat and a dog,
 and a tiger and a dog. b) We show five examples of how a corrected cat--dog render can lead to inconsistent or unexpected results. The uncorrected hybrid (top left) is followed by five corrected failures showing intrusions (top middle and bottom right), counting errors (bottom middle), style-dependent loss of plurality (bottom left) or instability (top right).}
 \label{fig:joint-prompt-through-adapter}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering\footnotesize
+\includegraphics[width=0.92\linewidth]{figures/failure-window/judge_sample_40.png}
+\caption{\textbf{Forty of the judge's labels.} Images drawn at random from the 1,696 behind Figure~\ref{fig:review-R9}, each with its prompt and the label the judge gave it.}
+\label{fig:judge-sample}
 \end{figure}
 
 \subsection{Three concepts}
@@ -1384,7 +1382,7 @@ The adapter is trained on pairs only. Figure~\ref{fig:review-R11} asks whether i
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\reviewslot{R11}{\linewidth}{4.4in}
+\reviewslot{R11}{\linewidth}{3.0in}
 \caption{\textbf{Three concepts.} One triple of each kind at the shared seed, all from the same starting latent; the adapter is trained on pairs only. The plain product fuses the three concepts into one object (a penguin with a dog's face, a toy-like dog, a teapot that is also a lamp) or drops one (the dog under the umbrella). The adapter separates them in every column, and draws all three named things for teapot, lamp and book and for cat, dog and umbrella, the latter with an extra small animal. With two or three animals it draws only two: the penguin is missing, and for dog, chair and cat it draws two dogs, without the cat or the chair.}
 \label{fig:review-R11}
 \end{figure}
