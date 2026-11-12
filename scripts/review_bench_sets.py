@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import re
 import sys
 from pathlib import Path
@@ -44,8 +45,15 @@ SETS = {
                     "allow": {"frog", "frogs", "mouse"}, "objects": True},
     "t2i_complex": {"bench": "t2icompbench", "file": "complex_val.txt", "seeds": list(range(9, 17)) + [59, 60],
                     "allow": {"frog", "frogs"}},
+    # Table 2 as decided on 2026-11-12: every set names two things, so all four methods run on it.
+    "geneval_colorattr": {"bench": "geneval", "tag": "color_attr", "seeds": [9, 10, 11, 12], "objects": True},
+    "geneval_position": {"bench": "geneval", "tag": "position", "seeds": [9, 10, 11, 12], "objects": True},
+    "t2i_color": {"bench": "t2icompbench", "file": "color_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
+    "t2i_shape": {"bench": "t2icompbench", "file": "shape_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
+    "t2i_texture": {"bench": "t2icompbench", "file": "texture_val.txt", "seeds": [9, 10], "objects": True, "sample": 100},
 }
-PAIRED = {"geneval_two"}
+PAIRED = {"geneval_two", "geneval_colorattr", "geneval_position", "t2i_color", "t2i_shape", "t2i_texture"}
+SAMPLE_SEED = 20261112  # the fixed draw of 100 two-concept prompts per T2I-CompBench subset
 # Objects that share a word with a listed creature. In a set marked "objects" the phrase is set aside
 # before the subject check (pair ledger, 2026-11-12), so the creature word stays blocked on its own;
 # spider and web are never set aside.
@@ -72,12 +80,23 @@ def load(name: str) -> tuple[list[dict], list[dict]]:
 
     kept = [x for x in items if ok(x["prompt"])]
     dropped = [x for x in items if not ok(x["prompt"])]
+    if s.get("sample"):  # only prompts naming exactly two things, then a fixed random draw kept in file order
+        two = [x for x in kept if x["prompt"].count(" and ") == 1]
+        pick = set(x["idx"] for x in random.Random(SAMPLE_SEED).sample(two, s["sample"]))
+        kept = [x for x in two if x["idx"] in pick]
     return kept, dropped
 
 
-def split(prompt: str) -> tuple[str, str]:
-    a, b = prompt.split(" and ")
-    return a.strip(), b.strip()
+def split(item: dict) -> tuple[str, str, str]:
+    """(concept a, concept b, joiner) with f"{a} {joiner} {b}" equal to the benchmark prompt."""
+    m = item["meta"]
+    if m and m.get("tag") == "position":  # "a photo of a dog right of a teddy bear"
+        rel = m["include"][1]["position"][0]
+        a, b = item["prompt"].split(f" {rel} ", 1)
+        assert f"{a} {rel} {b}" == item["prompt"], item["prompt"]
+        return a, b, rel
+    a, b = item["prompt"].split(" and ")
+    return a.strip(), b.strip(), "and"
 
 
 def main() -> None:
@@ -97,12 +116,12 @@ def main() -> None:
     name = a.pairs or a.co3_cells
     kept, _ = load(name)
     for x in kept:
-        pa, pb = split(x["prompt"])
+        pa, pb, joiner = split(x)
         if a.pairs:
             print(f"{pa}|{pb}")
         else:
             for seed in SETS[name]["seeds"]:
-                print(f"{name}|{pa}|{pb}|and|{seed}")
+                print(f"{name}|{pa}|{pb}|{joiner}|{seed}")
 
 
 if __name__ == "__main__":
