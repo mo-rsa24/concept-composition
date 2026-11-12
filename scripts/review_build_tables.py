@@ -31,8 +31,8 @@ from statistics import mean
 
 AXES = ["model", "method", "adapter", "sampler", "steps", "guidance", "resolution",
         "pair", "seed", "group", "setting", "nfe"]
-NAME = {"joint": "Joint prompt", "poe": "PoE", "co3": "CO3", "langevin": "PoE + Langevin", "ours": "Ours"}
-ORDER = ["joint", "poe", "co3", "langevin", "ours"]
+NAME = {"joint": "Joint prompt", "poe": "PoE", "co3": "CO3", "tome": "ToMe", "langevin": "PoE + Langevin", "ours": "Ours"}
+ORDER = ["joint", "poe", "co3", "tome", "langevin", "ours"]
 SETS = {"animals": 66, "animals_objects": 144, "objects": 66}
 GROUPS = {"hard": ("hard", 3), "easy but unseen": ("easy", 29), "not competing": ("not_competing", 21)}
 DRAWS = 10_000
@@ -89,7 +89,7 @@ def main():
         rec["ir"] = clip.get(img, {}).get("image_reward", "")
         rec["blip"] = blip.get(img, {}).get("blip_vqa", "")
         rec["comp"] = comp.get(img, {}).get("comp", "")
-        rec["table"] = "R1" if r["run"].startswith("r1") else "R3"
+        rec["table"] = "R1" if r["run"].startswith("r1") or r["run"].endswith("/r1") else "R3"
         long.append(rec)
     os.makedirs(a.out, exist_ok=True)
     cols = ["image", "prompt", "run", "table"] + AXES + ["clip", "blip", "ir", "comp"]

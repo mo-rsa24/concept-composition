@@ -137,7 +137,7 @@ SCHEMA = {
 REPORTED = "(reported)"
 # Methods that evaluate the joint prompt at every step. They sit above a rule as references; bold
 # marks the best value in each column over every row.
-REFERENCE = ("Joint prompt", "CO3")
+REFERENCE = ("Joint prompt", "CO3", "ToMe")
 # Methods kept out of the tables: the Langevin corrector appears in Figure 5 only.
 EXCLUDED = ("PoE + Langevin",)
 

@@ -816,7 +816,7 @@ We evaluate one adapter, chosen once by a fixed rule before any held-out score w
 % \vspace{-10pt}
 % \end{wrapfigure}
 
-Figure~\ref{fig:four-pairs-four-methods} compares our adapter with joint prompting, PoE, CO3, which still evaluates the joint prompt, and a Langevin corrector. Our adapter never evaluates the joint prompt and needs three predictions per step, one per concept and one for the null prompt. The plain product fuses the two concepts whenever they compete for the same region: a turtle with an elephant's body, a lion with a cat's face, a tent that becomes the mountain. The lighthouse and sea, a foreground and a background, survive the product, as \citet{bradley2025mechanisms} predict. The Langevin corrector does not separate the two animal pairs. Our adapter draws both concepts as separate objects in every row, on pairs it was never trained on.
+Figure~\ref{fig:four-pairs-four-methods} compares our adapter with joint prompting, PoE, CO3 and ToMe, which still evaluate the joint prompt, and a Langevin corrector. Our adapter never evaluates the joint prompt and needs three predictions per step, one per concept and one for the null prompt. The plain product fuses the two concepts whenever they compete for the same region: a turtle with an elephant's body, a lion with a cat's face, a tent that becomes the mountain. The lighthouse and sea, a foreground and a background, survive the product, as \citet{bradley2025mechanisms} predict. The Langevin corrector does not separate the two animal pairs. Our adapter draws both concepts as separate objects in every row, on pairs it was never trained on.
 % \begin{figure}[!htbp]
 % \centering
 % \includegraphics[width=0.72\textwidth]{four-pairs-four-methods.png}

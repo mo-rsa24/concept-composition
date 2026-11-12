@@ -5,8 +5,9 @@
    "title": "",
    "columns": [
     "Joint",
-    "PoE",
     "CO3",
+    "ToMe",
+    "PoE",
     "Ours"
    ]
   }
@@ -16,8 +17,9 @@
    "label": "elephant and\nturtle",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__joint.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__tome.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__ours.png"
    ]
   },
@@ -25,8 +27,9 @@
    "label": "frog and\nred suitcase",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__joint.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__tome.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_frog__x__a_red_suitcase__s12__ours.png"
    ]
   },
@@ -34,36 +37,10 @@
    "label": "blue balloon and\norange bench",
    "tiles": [
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__joint.png",
-    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__co3.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__tome.png",
+    "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__poe.png",
     "artifacts/results/how-the-adapter-scores-against-other-methods/tiles-rule5/a_blue_balloon__x__a_orange_bench__s11__ours.png"
-   ]
-  },
-  {
-   "label": "seal and walrus",
-   "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__joint.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__poe.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__co3.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_seal__x__a_walrus__s11__ours.png"
-   ]
-  },
-  {
-   "label": "drum set and\nsnowman",
-   "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__joint.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__poe.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__co3.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_drum_set__x__a_snowman__s13__ours.png"
-   ]
-  },
-  {
-   "label": "tent and snowy\nmountain",
-   "tiles": [
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__joint.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__co3.png",
-    "artifacts/results/co3-protocol-run-by-us/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png"
    ]
   }
  ],
