@@ -1,0 +1,141 @@
+# The three reviews of ICLR 2027 submission 56173, transcribed
+
+Transcribed from `Reviews.pdf` (OpenReview, printed 11/9/26), which has no text layer, by OCR of its
+pages and a check against the OpenReview screenshots in `review-screenshots/`. The reviewers' own
+spelling is kept as written ("T2I-Compench", "throuugh", "promp"); only OCR misreadings are corrected.
+`make_review_tex.py` reads this file for the full reviews in `review.pdf`.
+
+## PrzE
+
+Page: 2
+Posted: 22 Oct 2026, 08:44 (modified: 06 Nov 2026, 14:39)
+
+### Paper Summary
+
+This paper studies the failure cases of compositional diffusion models when there are two concepts competing for the same spatial region in the generated image, leading the model to fuse the two concepts into a single one. The authors define plurality vector as the residual between the joint promp and its guided product-of-experts prediction. They show that adding the scaled version of the residual vector during the early stage of the can help separate the objects empirically. The authors train a low-rank adapter on the cross-attention layer of stable diffusion XL so that the adapter PoE output matches the joint-prompt target. They train this on 48 concepts pairs that compose well. During the inference, the adapter modifies the separate forward pass for each concept, trying to recover the multi-object scenes.
+
+### Scores
+
+- Presentation: 3: Clear and easy to follow.
+- Informativeness: 2: I learned something interesting or useful.
+- Soundness: 3: I have no substantive concerns about the paper's soundness.
+
+### Critical Strengths
+
+The paper provides a clear demonstration of empirical ablation(Figure 3 and Figure 4) indicating that steering the latent during the early stage of inference is more effective than the late corrections. The paper gives a concrete quantity between joint prompt and PoE that we can compute, making the vague hybrid objects failure cases become something that can be intervened.
+
+### Critical Weaknesses
+
+- Lack of quantitative benchmarks: The paper does not report a single quantitative metric. Standard benchmarks such as T2I-Compench, GenEval and standard metrics such as CLIP, Imagereward are completely absent in this paper. The empirical results and a few qualitative results are insufficient for the claim in this paper.
+- Narrow baselines and Missing details: There is only CO3 baseline compared, the paper doesn't provide other corrected methods such as MCMC corrector. The paper only compares the baseline CO3 without the corrector they mention. The 48 concept pairs are not listed so it's impossible to see what the adapter is trained on.
+
+### Questions For Authors
+
+1. Quantitative Benchmark: what are the evaluation scores for the proposed method? Can you show the results on some benchmarks and compare your method with other standard baselines?
+2. Multiple concepts: How does your method perform when composing more than two concepts? Can you show some results for more than two concepts?
+
+### Rating
+
+- Flag For Ethics Review: No
+- Rating: 1: Clear rejection
+- Confidence: 4: I have substantial direct research experience on this topic.
+
+## UHz6
+
+Page: 3
+Posted: 22 Oct 2026, 05:55 (modified: 06 Nov 2026, 14:39)
+
+### Paper Summary
+
+This paper investigates the problem of two individual concepts that are intended to be composed collapsing into a single object, which is associated with the failure of the product-of-experts approach. This missing property is labeled as plurality in the paper, and authors define plurality as a term in the form of a per-step residual between the joint prompt prediction and product-of-experts prediction. As shown qualitatively in the paper, adding this residual term restores distinct objects. Following this observation, the authors propose training a LoRA adapter on cross-attention layers with the corrected residuals, so that the adapted PoE prediction matches the joint-prompt target. The effectiveness of the method is shown with qualitative results throuugh the paper.
+
+### Scores
+
+- Presentation: 2: Generally understandable, but requires substantial effort in places.
+- Informativeness: 2: I learned something interesting or useful.
+- Soundness: 2: I have minor or fixable concerns about the paper's soundness.
+
+### Critical Strengths
+
+- The paper defines plurality as a measurable quantity which links inference-time composition to joint prompting, and the problem definition is made clear in terms of the plurality problem.
+- The paper presents analyses on the timesteps that decides on the plurality property of the generated samples and direct to early timesteps, this is a useful observation for compositional generation literature.
+- The proposed correction step requires no additional NFEs, and thus can be considered as an efficient intervention to the generation process.
+
+### Critical Weaknesses
+
+- The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. In Fig. 5 and 6, the authors provide examples from the trained adapter but the results are not enough to claim the effectiveness of the method as it is difficult to evaluate its generalization. In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.
+- For reproducibility concerns, the training set used for adapter training is not provided in sufficient detail. The authors specify the prompts used for training as the concepts that can be generated by Stable Diffusion XL and where joint prompting fails in Sec. 4. In addition, the training filter keeps a pair if either the joint prompt or CO3 succeeds, but the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore supervise toward a target without plurality.
+- There are no quantitative comparisons with the compositional samplers discussed in Sec. 2.2, and CO3 appears only as one qualitative column. Attention-based methods that address missing or merged objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals.
+- There are presentation issues: Sec. 4 refers to a Figure 10 that does not exist, and several sentences are broken (e.g., "inside create hybrid objects" in Sec. 5).
+
+### Questions For Authors
+
+- Could the authors list the 48 training pairs and the held-out pairs, and clarify whether cat/dog is in the training set?
+- What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and multiple seeds?
+- Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure modes in Fig. 7?
+- Does the adapter degrade PoE on pairs that do not compete for the same region, such as foreground/background pairs like lighthouse and sea?
+
+### Rating
+
+- Flag For Ethics Review: No
+- Details Of Ethics Concerns: The paper targets the general problem of compositionality, where the contents of the paper does not require additional ethics review.
+- Rating: 2: Weak rejection
+- Confidence: 4: I have substantial direct research experience on this topic.
+
+## k4nd
+
+Pages: 4 and 5
+Posted: 19 Oct 2026, 13:28 (modified: 06 Nov 2026, 14:39)
+
+### Paper Summary
+
+This paper studies object fusion in compositional diffusion and introduces "plurality" as the property that separately named concepts appear as distinct objects. It defines a correction as the difference between joint-prompt and product-of-experts guided predictions, then trains a LoRA adapter to approximate this correction without evaluating the joint prompt during inference. My main concerns are the unsupported semantic interpretation of this residual, insufficiently established methodological novelty, inadequate quantitative evaluation, and unclear presentation of essential method details.
+
+### Scores
+
+- Presentation: 1: Difficult to follow despite careful reading.
+- Informativeness: 1: I learned little or nothing new from this paper.
+- Soundness: 1: I have significant concerns about the paper's soundness that do not appear easy to address.
+
+### Critical Strengths
+
+I did not identify a major technical or empirical strength that is convincingly established in the current submission.
+
+### Critical Weaknesses
+
+1. **The proposed residual does not establish a distinct representation of plurality.** Definition 1.1 describes a semantic property of the generated image. However, Equation (9) defines the "plurality term" as the entire difference between joint-prompt and PoE guided predictions. This residual can contain differences in object identity, appearance, layout, style, and other interactions between the prompts. The paper does not establish that it specifically measures whether the named concepts appear as distinct objects.
+
+   Moreover, substituting Equation (9) into Equation (10) gives $(1 - \lambda)\hat\epsilon_{\mathrm{PoE}} + \lambda\hat\epsilon_{\mathrm{Mono}}$. Consequently, the full correction recovers the joint-prompt prediction by construction, as the authors acknowledge. The partial-strength and early-step experiments provide empirical observations, but they do not resolve whether the residual isolates plurality. The stronger claims about measuring and learning an abstract concept therefore exceed the evidence.
+
+2. **The methodological novelty is insufficiently established.** The implemented method matches a LoRA-adapted PoE prediction to a frozen joint-prompt teacher on cached latent states. The paper does not clearly establish what methodological contribution this provides beyond supervised prediction matching with a standard adapter.
+
+   The central observation that compositional sampling can fuse competing objects is already attributed to prior work in the manuscript. Introducing a new name for this failure and its correction does not, by itself, establish a substantive contribution. Stronger comparisons and ablations are needed to identify which benefits arise from joint-prompt supervision and which require the proposed plurality formulation.
+
+3. **The learned adapter lacks systematic quantitative evaluation.** The principal results in Section 4.1 are qualitative. Figure 5 presents four concept pairs, while Figures 6 and 7 provide selected ablations and failure examples. There are no aggregate benchmark results establishing how frequently the learned adapter improves composition relative to joint prompting, PoE, or CO3.
+
+   The paper does include detector-based counts, manually verified, in Figure 4. However, these concern an oracle correction derived from the joint prompt for one cat-dog pair and four seeds. They do not establish the effectiveness or generalization of the learned adapter.
+
+   This omission is particularly serious given the reported substitutions, additional objects, and style-dependent failures. Such examples do not themselves disprove generalization, but their prevalence must be measured. The paper needs aggregate success and failure rates across a sufficiently large, documented test set and multiple seeds, together with uncertainty estimates and image-quality evaluation.
+
+   The manuscript states that evaluation concepts and starting noise are excluded from adapter training. However, the complete splits and aggregate results needed to assess this claim are missing. A few successful held-out examples cannot substantiate the broad claim that the adapter learns a general, transferable concept of plurality. Likewise, one failed joint-prompt image does not establish that a concept combination is poorly represented in pretraining or generally beyond joint prompting.
+
+4. **Essential method details are poorly presented and sometimes inconsistent.** Section 4 describes target matching and provides the teacher prediction and sampling rule, but it does not explicitly formulate the training loss. The squared-error objective appears in the training diagram in Appendix A, Figure 8. Essential information about the optimization should be stated clearly in the main method section.
+
+   There are also substantive ambiguities. The main text describes individual adapted network evaluations as returning the correction, whereas Appendix B defines them as adapted denoising predictions whose composition induces the correction. Section 4 refers to "Figure 10," although the actual training diagram is Figure 8.
+
+   The repetitive claims about learning an abstract concept occupy space that could instead clarify the objective, training data, evaluation protocol, and limitations. These presentation problems make the method unnecessarily difficult to assess.
+
+5. **The qualitative baseline comparison contains a protocol inconsistency.** The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states that all examples use the same initial seeds. This discrepancy matters because the text attributes changes in visual style to CO3. With different initial noise, the displayed comparison cannot isolate that effect. A clearly specified comparison over multiple seeds is necessary.
+
+### Questions For Authors
+
+- What evidence establishes that the residual in Equation (9) specifically measures plurality rather than the broader difference between joint and separate conditioning?
+- Can the authors provide aggregate results for the learned adapter and baselines over documented held-out concepts and multiple seeds, including identity errors, additional objects, and style-dependent failures?
+- Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?
+- Can the authors state the optimization objective explicitly in the main text and resolve the inconsistencies concerning network outputs, figure references, and baseline starting noise?
+
+### Rating
+
+- Flag For Ethics Review: No
+- Rating: 1: Clear rejection
+- Confidence: 3: I am familiar with this topic and its relevant literature.

@@ -291,7 +291,7 @@ G3 = spec(
 
 G4 = spec(
     "G4", "g04-standard-benchmarks-and-metrics", "G4: Standard benchmarks and metrics",
-    "PrzE weakness 1 and question 1, UHz6 weakness 1  ·  status: pending (Table 2 is rendering)",
+    "PrzE weakness 1 and question 1, UHz6 weakness 1  ·  status: answered",
     [panel("v1", "PrzE, weakness 1", "reviews", 2,
            "Lack of quantitative benchmarks:", "insufficient for the claim in this paper.",
            "reviews-p2-prze-W1", [mk("w1", "P-W1", "The paper does not report a single quantitative metric.")]),
@@ -307,17 +307,17 @@ G4 = spec(
     [panel("r1", "Table 1, Attend-and-Excite prompts", "revised", 9,
            "Table 1: Composition and image quality", "Ours",
            "revised-p9-prze-W1", [mk("t1", "CLIP, BLIP-VQA, ImageReward", lines_from="Table 1: Composition and image quality", lines_to="Table 1: Composition and image quality")]),
-     panel("r2", "Table 2, GenEval and T2I-CompBench", "revised", 16,
-           "Table 2: Standard benchmarks on their own prompts", "R14: result pending",
-           "revised-p16-prze-W1-pending", [mk("t2", "pending: slot R14", "R14: result pending")], extend_down=150)],
+     panel("r2", "Table 2, GenEval and T2I-CompBench", "revised", 15,
+           "Table 2: Standard benchmarks on their own prompts", "Ours",
+           "revised-prze-W1-table2", [mk("t2", "GenEval, T2I-CompBench", lines_from="Table 2: Standard benchmarks on their own prompts", lines_to="Table 2: Standard benchmarks on their own prompts")])],
     [{"from": ("v1", "w1"), "to": ("s1", "grid"), "label": "no metric", "role": "review"},
      {"from": ("s1", "grid"), "to": ("r1", "t1"), "label": "scored"},
-     {"from": ("s1", "grid"), "to": ("r2", "t2"), "label": "benchmarks, pending", "role": "submitted"}],
+     {"from": ("s1", "grid"), "to": ("r2", "t2"), "label": "benchmarks"}],
     ("The reply we plan to send (replies/prze.md: W1 and Q1)", PRZE_REPLY,
      ["W1: lack of quantitative benchmarks", "Q1: quantitative benchmark"]),
-    ["Table 2 (slot R14) is rendering on the RunPod pod; the page shows its placeholder until it lands. No number is estimated.",
+    ["Table 2 scores GenEval two-object, attribute binding and position, and T2I-CompBench colour and shape, each with its official evaluator.",
      "The PrzE Q1 reply says \"Tables 1 to 4\"; the revision has three tables. UHz6's reply to weakness 1 is on the G3 page. " + SOURCES_LINE],
-    status="pending: Table 2", status_color=AMBER,
+    
 )
 
 G5 = spec(

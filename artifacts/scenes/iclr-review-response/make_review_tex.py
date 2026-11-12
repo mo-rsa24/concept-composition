@@ -47,6 +47,54 @@ CHANGES = {
 }
 
 
+TRANSCRIBED = REPO / "artifacts/drips/present-revision-to-supervisor/reviews-transcribed.md"
+
+
+def full_review(name: str) -> str:
+    """The reviewer's whole review, from the checked transcription, as a framed block."""
+    md = TRANSCRIBED.read_text()
+    start = md.index(f"\n## {name}\n")
+    nxt = md.find("\n## ", start + 4)
+    block = md[start: nxt if nxt != -1 else len(md)].split("\n")[2:]
+    out, mode = [], None
+
+    def close():
+        nonlocal mode
+        if mode:
+            out.append(f"\\end{{{mode}}}")
+        mode = None
+
+    para = []
+
+    def flush():
+        if para:
+            out.append(tex(" ".join(para)) + "\n")
+            para.clear()
+
+    for line in block:
+        st = line.strip()
+        if st.startswith("Page") or st.startswith("Posted"):
+            flush(); out.append("{\\small\\color{gray}" + tex(st) + "}\\par"); continue
+        if st.startswith("### "):
+            flush(); close(); out.append("\\paragraph{" + tex(st[4:]) + "}"); continue
+        m = __import__("re").match(r"^(- |\d+\. )(.*)", st)
+        if m:
+            flush()
+            want = "enumerate" if m.group(1)[0].isdigit() else "itemize"
+            if mode != want:
+                close(); out.append(f"\\begin{{{want}}}"); mode = want
+            out.append("\\item " + tex(m.group(2)))
+            continue
+        if not st:
+            flush(); continue
+        if mode and line.startswith("   "):
+            out.append("\\par " + tex(st)); continue
+        close(); para.append(st)
+    flush(); close()
+    return ("\\begin{tcolorbox}[breakable,colback=red!3,colframe=red!45!black,title={The review by " + name
+            + ", as posted on OpenReview}]\n" + "\n".join(out) + "\n\\end{tcolorbox}\n")
+
+
 def tex(text: str) -> str:
     """Escape LaTeX specials outside $...$, and turn markdown emphasis into LaTeX."""
     parts = re.split(r"(\$[^$]*\$)", text)
@@ -96,8 +144,8 @@ def main() -> None:
 \usepackage[margin=2.2cm]{geometry}
 \usepackage{fontspec}
 \usepackage{graphicx}
-\usepackage{pdflscape}
 \usepackage{xcolor}
+\usepackage[most]{tcolorbox}
 \usepackage[hidelinks]{hyperref}
 \definecolor{rev}{HTML}{C0392B}\definecolor{chg}{HTML}{1E8449}
 \setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
@@ -107,13 +155,15 @@ def main() -> None:
 \date{}
 \begin{document}
 \maketitle
-Each point quotes the reviewer (in red, from Reviews.pdf), then gives the reply we plan to send, then says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. After this document come twelve figures, one per group of claims, each showing the reviewer's words, the submitted passage and the revised passage side by side.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. After this document come twelve figures, one per group of claims, each showing the reviewer's words, the submitted passage and the revised passage side by side.
 """]
     for name, md in (("k4nd", k), ("UHz6", k), ("PrzE", p)):
         out.append(f"\\section*{{Reviewer {name}}}\n")
+        out.append(full_review(name))
+        out.append("\\subsection*{Our replies, point by point}\n")
         for pt in sections(md, name):
             key = pt["head"].split(":")[0].strip()
-            out.append(f"\\subsection*{{{tex(pt['head'])}}}\n")
+            out.append(f"\\subsubsection*{{{tex(pt['head'])}}}\n")
             if pt["quote"]:
                 out.append("\\begin{reviewer}" + tex(pt["quote"]) + "\\end{reviewer}\n")
             for para in pt["reply"]:
