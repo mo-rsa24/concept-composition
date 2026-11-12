@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -37,14 +38,18 @@ from disallowed_subjects import ASK_FIRST, is_allowed, words  # noqa: E402
 GENEVAL = REPO / "data/prompt-sets/geneval/evaluation_metadata.jsonl"
 T2I = REPO / "data/prompt-sets/t2i-compbench"
 SETS = {
-    "geneval_two": {"bench": "geneval", "tag": "two_object", "seeds": [9, 10, 11, 12]},
-    "geneval_count": {"bench": "geneval", "tag": "counting", "seeds": [9, 10, 11, 12]},
+    "geneval_two": {"bench": "geneval", "tag": "two_object", "seeds": [9, 10, 11, 12], "objects": True},
+    "geneval_count": {"bench": "geneval", "tag": "counting", "seeds": [9, 10, 11, 12], "objects": True},
     "t2i_spatial": {"bench": "t2icompbench", "file": "spatial_val.txt", "seeds": list(range(9, 17)) + [59, 60],
-                    "allow": {"frog", "frogs"}},
+                    "allow": {"frog", "frogs", "mouse"}, "objects": True},
     "t2i_complex": {"bench": "t2icompbench", "file": "complex_val.txt", "seeds": list(range(9, 17)) + [59, 60],
                     "allow": {"frog", "frogs"}},
 }
-PAIRED = {"geneval_two"}  # the only set PoE, ours and CO3 render
+PAIRED = {"geneval_two"}
+# Objects that share a word with a listed creature. In a set marked "objects" the phrase is set aside
+# before the subject check (pair ledger, 2026-11-12), so the creature word stays blocked on its own;
+# spider and web are never set aside.
+OBJECT_PHRASES = re.compile(r"\b(computer mouse|baseball bats?)\b", re.I)  # the only set PoE, ours and CO3 render
 
 
 def load(name: str) -> tuple[list[dict], list[dict]]:
@@ -59,6 +64,8 @@ def load(name: str) -> tuple[list[dict], list[dict]]:
     allow = s.get("allow", set())  # ask-first words the pair ledger allows for this set
 
     def ok(prompt: str) -> bool:
+        if s.get("objects"):
+            prompt = OBJECT_PHRASES.sub(" object ", prompt)
         if is_allowed(prompt):
             return True
         return is_allowed(prompt, allow_ask_first=True) and (words(prompt) & ASK_FIRST) <= allow
