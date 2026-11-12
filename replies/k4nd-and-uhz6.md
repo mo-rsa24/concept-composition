@@ -63,10 +63,10 @@ all fixed before any held-out score was read (Section 4.1).
 
 Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pairs, 144
 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and
-image quality by CLIP score and ImageReward [TODO: slot R1].
+image quality by CLIP score and ImageReward.
 
 Table 3 scores the 53 held-out pairs described in Appendix C.2, grouped as hard, easy but unseen, and
-not competing, at seeds 9 to 16, with 95% intervals from resampling pairs [TODO: slot R3].
+not competing, at seeds 9 to 16, with 95% intervals from resampling pairs.
 
 The training and held-out pairs, with every seed, are released with the code [TODO: anonymous
 link]; Appendix C.2 describes the held-out groups.
@@ -139,7 +139,7 @@ Answered under W1 above.
 > held-out concepts and multiple seeds, including identity errors, additional objects, and
 > style-dependent failures?"
 
-Answered under k4nd W3: Tables 1 and 3 [TODO: slots R1 and R3]. The identity errors, additional
+Answered under k4nd W3: Tables 1 and 3. The identity errors, additional
 objects and style-dependent failures are counted per setting in Figure 11 (Appendix C.4).
 
 ### Q3: pairs retained when only CO3 succeeds
@@ -242,7 +242,7 @@ They are also released with the code as the configuration file the trainer reads
 > "What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and
 > multiple seeds?"
 
-Answered under k4nd W3: Tables 1 and 3 [TODO: slots R1 and R3].
+Answered under k4nd W3: Tables 1 and 3.
 
 ### Q3: restricting the adapter to the early steps
 
