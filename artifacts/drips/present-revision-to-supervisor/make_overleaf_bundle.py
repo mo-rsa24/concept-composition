@@ -73,8 +73,13 @@ def rewrite(tex: str, found: dict[str, Path]) -> str:
     tex = tex.replace("{slots/#2.pdf}", "{revision/#2.pdf}").replace("{slots/#2.png}", "{revision/#2.png}")
     tex = tex.replace("{slots/#2.tex}", "{revision/#2.tex}")
     tex = tex.replace(r"\graphicspath{{figures/}}", r"\graphicspath{{revision/}}")
+    # The template RequirePackages fancyhdr and natbib by name, which outside the paper folder finds
+    # the system copies, and the newer fancyhdr drops the running header. Load the paper's own copies
+    # from revision/ and mark them loaded, so those RequirePackage lines are no-ops.
     tex = tex.replace(r"\usepackage{iclr2027_conference,times}",
-                      r"\usepackage{revision/iclr2027_conference}" + "\n" + r"\usepackage{times}")
+                      r"\usepackage{revision/fancyhdr}\usepackage{revision/natbib}" + "\n"
+                      + r"\makeatletter\@namedef{ver@fancyhdr.sty}{}\@namedef{ver@natbib.sty}{}\makeatother" + "\n"
+                      + r"\usepackage{revision/iclr2027_conference}" + "\n" + r"\usepackage{times}")
     tex = tex.replace(r"\input{math_commands.tex}", r"\input{revision/math_commands.tex}")
     tex = tex.replace(r"\bibliography{iclr2027_conference}", r"\bibliography{revision/iclr2027_conference}")
     tex = tex.replace(r"\bibliographystyle{iclr2027_conference}", r"\bibliographystyle{revision/iclr2027_conference}")

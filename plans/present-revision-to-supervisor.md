@@ -90,7 +90,8 @@ For Claude to execute. Ask Claude to do these.
 ### 3. 📦 The Overleaf bundle and the supervisor document
 
 - [ ] **3.1 Build `overleaf-bundle/revision/` with the renamed tex, every included file and the bibliography, plus a zip**
-  - Check: a Tectonic build of the bundle on the cluster gives 20 pages, the main text ends on page 10, 0 undefined references.
+  - Check: a Tectonic build of the bundle on the cluster gives the same pages as the repo build, the main text ends on page 10, 0 undefined references.
+  - Builder: `python3 artifacts/drips/present-revision-to-supervisor/make_overleaf_bundle.py`; rerun once Table 2 (slot R14) lands.
   - ▶ Next: 4.3
 - [ ] **3.2 Write `overleaf-steps.md`**
   - ▶ Next: 4.4
