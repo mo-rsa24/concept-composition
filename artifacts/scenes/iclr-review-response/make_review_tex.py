@@ -3,8 +3,8 @@
 One section per reviewer (k4nd, UHz6, PrzE). Under each point: the reviewer's words as quoted in
 the reply files, the reply itself, and a note on what changed in the revision (CHANGES below).
 The reviewer quotes and replies are read from replies/k4nd-and-uhz6.md and replies/prze.md, so the
-document follows the replies whenever they change. After the reviews, the twelve claim-group
-figures, one per landscape page. Build with Tectonic: `tectonic review.tex` in this folder.
+document follows the replies whenever they change. The twelve claim-group figures are joined after
+it with pdfunite into supervisor-review-response.pdf. Build with Tectonic: `tectonic review.tex` in this folder.
 
 Usage, from the repo root:
   python3 artifacts/scenes/iclr-review-response/make_review_tex.py
@@ -108,7 +108,7 @@ def main() -> None:
 \date{}
 \begin{document}
 \maketitle
-Each point quotes the reviewer (in red, from Reviews.pdf), then gives the reply we plan to send, then says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. The last pages show each group of claims as one annotated figure: the reviewer's words, the submitted passage and the revised passage, side by side.
+Each point quotes the reviewer (in red, from Reviews.pdf), then gives the reply we plan to send, then says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. After this document come twelve figures, one per group of claims, each showing the reviewer's words, the submitted passage and the revised passage side by side.
 """]
     for name, md in (("k4nd", k), ("UHz6", k), ("PrzE", p)):
         out.append(f"\\section*{{Reviewer {name}}}\n")
@@ -121,11 +121,6 @@ Each point quotes the reviewer (in red, from Reviews.pdf), then gives the reply 
                 out.append(tex(para) + "\n\n")
             if (name, key) in CHANGES:
                 out.append("\\changed{" + CHANGES[(name, key)] + "}\n")
-    out.append("\\clearpage\n\\section*{The claims, one figure per group}\n")
-    for s in SPECS:
-        out.append("\\begin{landscape}\n\\centering\n"
-                   f"\\includegraphics[width=\\linewidth,height=0.82\\textwidth,keepaspectratio]{{{s['file']}.pdf}}\n"
-                   "\\end{landscape}\n")
     out.append("\\end{document}\n")
     (HERE / "review.tex").write_text("".join(out))
     print(HERE / "review.tex")
