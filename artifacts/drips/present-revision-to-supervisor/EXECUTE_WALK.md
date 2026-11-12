@@ -25,7 +25,9 @@ Group G7, the training loss and what the adapter returns (k4nd W4a, W4b, Q4), ca
 
 ## Ticks
 
-- (none yet; piece 1 waits on the claim-table stop)
+- Task 1, claim table: 35 claims, 12 groups (commit 8ce63cce). Instruction 4.1: "done. Happy with the claim table".
+- Task 2.1 built, waiting on stop 2: G7 figure, review crops from Reviews.pdf at 300 dpi located by OCR (screenshots kept as the record).
+- Open for the close: the k4nd W4 misquote (Figure 7 for Figure 8) and PrzE Q1's "Tables 1 to 4"; Molefe has not said whether to fix them.
 
 ## Out of session
 

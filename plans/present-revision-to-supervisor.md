@@ -64,9 +64,10 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 📋 The claim table
 
-- [ ] **Split the three reviews into single claims, group them, and map each one to the submitted page and the revised tex line**
+- [x] ✅ **Split the three reviews into single claims, group them, and map each one to the submitted page and the revised tex line**
   - Output: `artifacts/drips/present-revision-to-supervisor/claims.md`
   - Check: every bullet and numbered point of the three reviews appears as one row, each with its Reviews.pdf page.
+  - ✓ verified 2026-11-12: 35 claims in 12 groups, PrzE 5, UHz6 13, k4nd 17
   - ▶ Next: 4.1
 
 ### 2. 🖼️ The figures
@@ -93,7 +94,8 @@ For you to follow manually. Do these yourself.
 
 ### 4. ✅ Read and approve each stop
 
-- [ ] **4.1 Read the claim table** and say yes, or name the rows to change
+- [x] ✅ **4.1 Read the claim table** and say yes, or name the rows to change
+  - ✓ confirmed by hand 2026-11-12: "done. Happy with the claim table"
   - ◀ Needs: 1 · ▶ Next: 2.1
 - [ ] **4.2 Look at the first figure** and say yes, or name what to change
   - ◀ Needs: 2.1 · ▶ Next: 2.2
