@@ -106,6 +106,7 @@ def main() -> None:
         raise SystemExit("paths not rewritten:\n" + "\n".join(left))
     # The editable reviews-and-replies document: needs no file from revision/, sits at the root.
     shutil.copy2(REPO / "artifacts/scenes/iclr-review-response/review.tex", OUT / "review.tex")
+    shutil.copy2(REPO / "artifacts/scenes/iclr-review-response/review-text.tex", OUT / "review-text.tex")
     zpath = OUT.parent / "overleaf-bundle.zip"
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(OUT.rglob("*")):

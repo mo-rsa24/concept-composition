@@ -19,8 +19,8 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    [dest] overleaf.com → sign in → the supervisor's ICLR 56173 project. The file tree is on the left.
 
 2. **Check nothing will be overwritten.**
-   [dest] `/` (the top level of the file tree). If `/iclr2027_conference_revision.tex`, `/review.tex` or a
-   folder `/revision` already exists, stop and tell Claude.
+   [dest] `/` (the top level of the file tree). If `/iclr2027_conference_revision.tex`, `/review.tex`,
+   `/review-text.tex` or a folder `/revision` already exists, stop and tell Claude.
 
 3. **Create the folder.**
    [dest] `/revision`: click the **New folder** icon at the top of the file tree, type `revision`,
@@ -68,12 +68,15 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    not inside `/revision/`: Overleaf compiles from the root and every path in the file starts with
    `revision/`.
 
-5b. **Upload the reviews document at the project root.**
-   [src] `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/review.tex`
-   [dest] `/review.tex`
-   The three reviews as posted, each followed by our replies and what changed. It needs no other file,
-   and it is the one you and the supervisor edit. Like the revision, it compiles only when it is the
-   main document (step 6 with `review.tex` selected); a correct build is 13 pages.
+5b. **Upload the reviews document and its reviewer text at the project root.**
+   [src] `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/review.tex` → [dest] `/review.tex`
+   [src] `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/review-text.tex` → [dest] `/review-text.tex`
+   `review.tex` holds our replies and what changed, and is the file you and the supervisor edit. The
+   reviewers' words live in `review-text.tex`, which nobody needs to open: `review.tex` calls them by
+   name. Two switches near its top hide them without deleting anything: `\showfullreviewsfalse` hides
+   the full reviews, `\showquotesfalse` the red quote above each reply. Like the revision, it compiles only when it is the
+   main document (step 6 with `review.tex` selected); a correct build is 13 pages, or 6 with both
+   switches off.
 
 6. **Make it the main document.**
    [dest] **Menu** (top left) → **Settings** → **Main document** → `iclr2027_conference_revision.tex`.

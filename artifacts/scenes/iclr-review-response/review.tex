@@ -8,61 +8,30 @@
 \usepackage[hidelinks]{hyperref}
 \definecolor{rev}{HTML}{C0392B}\definecolor{chg}{HTML}{1E8449}
 \setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
-\newenvironment{reviewer}{\begin{quote}\color{rev}\itshape}{\end{quote}}
+
+% --- switches: set to false to hide the reviewers' text without deleting anything ---
+\newif\ifshowfullreviews \showfullreviewstrue   % each reviewer's whole review, in a box
+\newif\ifshowquotes      \showquotestrue        % the red quote above each reply
+
+\newcommand{\fullreview}[1]{\ifshowfullreviews\csname fullreview-#1\endcsname\fi}
+\newcommand{\reviewquote}[2]{\ifshowquotes\begin{quote}\color{rev}\itshape\csname quote-#1-#2\endcsname\end{quote}\fi}
 \newcommand{\changed}[1]{\par{\color{chg}\textbf{What changed in the revision.}} #1\par}
+\input{review-text}
+
 \title{ICLR 2027 submission 56173: the reviews, our replies and the revision}
 \date{}
 \begin{document}
 \maketitle
-Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. This document holds the reviews and our replies only; it compiles with pdfLaTeX or XeLaTeX and is meant to be edited.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. The reviewers' text lives in \texttt{review-text.tex}; this file holds our replies.
+
 \section*{Reviewer k4nd}
-\begin{tcolorbox}[breakable,colback=red!3,colframe=red!45!black,title={The review by k4nd, as posted on OpenReview}]
-{\small\color{gray}Pages: 4 and 5}\par
-{\small\color{gray}Posted: 19 Oct 2026, 13:28 (modified: 06 Nov 2026, 14:39)}\par
-\paragraph{Paper Summary}
-This paper studies object fusion in compositional diffusion and introduces ``plurality'' as the property that separately named concepts appear as distinct objects. It defines a correction as the difference between joint-prompt and product-of-experts guided predictions, then trains a LoRA adapter to approximate this correction without evaluating the joint prompt during inference. My main concerns are the unsupported semantic interpretation of this residual, insufficiently established methodological novelty, inadequate quantitative evaluation, and unclear presentation of essential method details.
+\fullreview{k4nd}
 
-\paragraph{Scores}
-\begin{itemize}
-\item Presentation: 1: Difficult to follow despite careful reading.
-\item Informativeness: 1: I learned little or nothing new from this paper.
-\item Soundness: 1: I have significant concerns about the paper's soundness that do not appear easy to address.
-\end{itemize}
-\paragraph{Critical Strengths}
-I did not identify a major technical or empirical strength that is convincingly established in the current submission.
-
-\paragraph{Critical Weaknesses}
-\begin{enumerate}
-\item \textbf{The proposed residual does not establish a distinct representation of plurality.} Definition 1.1 describes a semantic property of the generated image. However, Equation (9) defines the ``plurality term'' as the entire difference between joint-prompt and PoE guided predictions. This residual can contain differences in object identity, appearance, layout, style, and other interactions between the prompts. The paper does not establish that it specifically measures whether the named concepts appear as distinct objects.
-\par Moreover, substituting Equation (9) into Equation (10) gives $(1 - \lambda)\hat\epsilon_{\mathrm{PoE}} + \lambda\hat\epsilon_{\mathrm{Mono}}$. Consequently, the full correction recovers the joint-prompt prediction by construction, as the authors acknowledge. The partial-strength and early-step experiments provide empirical observations, but they do not resolve whether the residual isolates plurality. The stronger claims about measuring and learning an abstract concept therefore exceed the evidence.
-\item \textbf{The methodological novelty is insufficiently established.} The implemented method matches a LoRA-adapted PoE prediction to a frozen joint-prompt teacher on cached latent states. The paper does not clearly establish what methodological contribution this provides beyond supervised prediction matching with a standard adapter.
-\par The central observation that compositional sampling can fuse competing objects is already attributed to prior work in the manuscript. Introducing a new name for this failure and its correction does not, by itself, establish a substantive contribution. Stronger comparisons and ablations are needed to identify which benefits arise from joint-prompt supervision and which require the proposed plurality formulation.
-\item \textbf{The learned adapter lacks systematic quantitative evaluation.} The principal results in Section 4.1 are qualitative. Figure 5 presents four concept pairs, while Figures 6 and 7 provide selected ablations and failure examples. There are no aggregate benchmark results establishing how frequently the learned adapter improves composition relative to joint prompting, PoE, or CO3.
-\par The paper does include detector-based counts, manually verified, in Figure 4. However, these concern an oracle correction derived from the joint prompt for one cat-dog pair and four seeds. They do not establish the effectiveness or generalization of the learned adapter.
-\par This omission is particularly serious given the reported substitutions, additional objects, and style-dependent failures. Such examples do not themselves disprove generalization, but their prevalence must be measured. The paper needs aggregate success and failure rates across a sufficiently large, documented test set and multiple seeds, together with uncertainty estimates and image-quality evaluation.
-\par The manuscript states that evaluation concepts and starting noise are excluded from adapter training. However, the complete splits and aggregate results needed to assess this claim are missing. A few successful held-out examples cannot substantiate the broad claim that the adapter learns a general, transferable concept of plurality. Likewise, one failed joint-prompt image does not establish that a concept combination is poorly represented in pretraining or generally beyond joint prompting.
-\item \textbf{Essential method details are poorly presented and sometimes inconsistent.} Section 4 describes target matching and provides the teacher prediction and sampling rule, but it does not explicitly formulate the training loss. The squared-error objective appears in the training diagram in Appendix A, Figure 8. Essential information about the optimization should be stated clearly in the main method section.
-\par There are also substantive ambiguities. The main text describes individual adapted network evaluations as returning the correction, whereas Appendix B defines them as adapted denoising predictions whose composition induces the correction. Section 4 refers to ``Figure 10,'' although the actual training diagram is Figure 8.
-\par The repetitive claims about learning an abstract concept occupy space that could instead clarify the objective, training data, evaluation protocol, and limitations. These presentation problems make the method unnecessarily difficult to assess.
-\item \textbf{The qualitative baseline comparison contains a protocol inconsistency.} The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states that all examples use the same initial seeds. This discrepancy matters because the text attributes changes in visual style to CO3. With different initial noise, the displayed comparison cannot isolate that effect. A clearly specified comparison over multiple seeds is necessary.
-\end{enumerate}
-\paragraph{Questions For Authors}
-\begin{itemize}
-\item What evidence establishes that the residual in Equation (9) specifically measures plurality rather than the broader difference between joint and separate conditioning?
-\item Can the authors provide aggregate results for the learned adapter and baselines over documented held-out concepts and multiple seeds, including identity errors, additional objects, and style-dependent failures?
-\item Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?
-\item Can the authors state the optimization objective explicitly in the main text and resolve the inconsistencies concerning network outputs, figure references, and baseline starting noise?
-\end{itemize}
-\paragraph{Rating}
-\begin{itemize}
-\item Flag For Ethics Review: No
-\item Rating: 1: Clear rejection
-\item Confidence: 3: I am familiar with this topic and its relevant literature.
-\end{itemize}
-\end{tcolorbox}
 \subsection*{Our replies, point by point}
+
 \subsubsection*{W1: the residual does not establish a distinct representation of plurality}
-\begin{reviewer}``The proposed residual does not establish a distinct representation of plurality. \ldots{} The paper does not establish that it specifically measures whether the named concepts appear as distinct objects.''\end{reviewer}
+\reviewquote{k4nd}{W1}
+
 We agree that $r_t$ in Equation 9 is the entire difference between the joint-prompt and product-of-experts predictions, and that adding it in full recovers the joint prompt by construction. We do not claim that $r_t$ represents plurality alone. A product of experts drops the interaction the joint prompt carries, and that interaction can hold several kinds of meaning: a relation between the concepts (``a dog on a cat''), an effect of one on the other (``a camel in the rain'' should be wet), and the layout and style of the scene.
 
 Our study concerns one part of this interaction: plurality, whether two named concepts appear as two objects rather than one hybrid. The training pairs were chosen for it, as pairs the product fuses into a hybrid.
@@ -72,8 +41,10 @@ Within that scope, the evidence is that the correction is specific and early, no
 We agree this does not separate plurality from everything else $r_t$ carries. Section 3 now states this scope explicitly, and the contributions are rewritten to claim only what the experiments show.
 
 \changed{Section 3 now says $r_t$ is the whole interaction the product drops and scopes the paper to plurality; the contributions claim only what the experiments show.}
+
 \subsubsection*{W2: methodological novelty}
-\begin{reviewer}``The methodological novelty is insufficiently established.''\end{reviewer}
+\reviewquote{k4nd}{W2}
+
 The method is deliberately simple: a standard adapter trained by prediction matching. Its contribution is the target. Existing corrections of product-of-experts sampling keep the product as the target and change how it is sampled (Du et al., 2023; Skreta et al., 2024, 2025; Dutta et al., 2026). We instead adapt the experts so that their product reproduces the joint prompt's prediction, and the joint prompt is never evaluated at inference. With this simple objective, plurality emerges on concept pairs the adapter never trained on (Section 4.1, Figure 5). Section 2 now states this distinction.
 
 We agree that fusion under composition was identified before (Bradley et al., 2025), and we cite it as such. What we add is a measurement of the missing term during sampling: it is specific to the pair and seed, and concentrated in the first ten of 50 steps (Figures 2 to 4).
@@ -81,8 +52,10 @@ We agree that fusion under composition was identified before (Bradley et al., 20
 Table 1 compares the adapter with PoE and CO3 on the same seeds, and Figure 5 adds a Langevin corrector. The ablation the reviewer describes, the same joint-prompt supervision on pairs the product does not fuse, would separate the effect of the supervision from that of the plurality pairs; we have not run it and name it as future work.
 
 \changed{Section 2 now says prior corrections keep the product as the target while this paper changes the target. The ablation separating joint-prompt supervision from the choice of pairs is left as future work.}
+
 \subsubsection*{W3: no systematic quantitative evaluation of the adapter}
-\begin{reviewer}``The learned adapter lacks systematic quantitative evaluation.''\end{reviewer}
+\reviewquote{k4nd}{W3}
+
 We agree, and the revision adds this evaluation. The adapter, the seeds and the success bar were all fixed before any held-out score was read (Section 4.1).
 
 Table 1 scores every method on the 276 Attend-and-Excite prompts (66 animal pairs, 144 animal-object pairs, 66 object pairs) at seeds 9 to 12, with composition measured by BLIP-VQA and image quality by CLIP score and ImageReward.
@@ -92,8 +65,10 @@ The training and held-out pairs, with every seed, are released with the code.
 Hybrids, missing concepts and additional objects are counted per setting in Figure 11 (Appendix C.2).
 
 \changed{Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA, CLIP score and ImageReward. Figures 11 and 12 score 53 held-out pairs as the adapter acts on fewer steps. Section 4.1 opens with the evaluation protocol.}
+
 \subsubsection*{W4: method details poorly presented and sometimes inconsistent}
-\begin{reviewer}``Section 4 describes target matching and provides the teacher prediction and sampling rule, but it does not explicitly formulate the training loss. The squared-error objective appears in the training diagram in Appendix A, Figure 7.'' ``The main text describes individual adapted network evaluations as returning the correction, whereas Appendix B defines them as adapted denoising predictions whose composition induces the correction. Section 4 refers to 'Figure 10,' although the actual training diagram is Figure 7.'' ``The repetitive claims about learning an abstract concept occupy space that could instead clarify the objective, training data, evaluation protocol, and limitations.''\end{reviewer}
+\reviewquote{k4nd}{W4}
+
 \textbf{The training loss is not stated in Section 4}
 
 Section 4 now states the training loss as Equation 12: the squared error between the adapted composition and the joint-prompt prediction, over the cached states of every training pair and seed at the first ten of the 50 sampling steps. The training diagram is removed, since Equation 12 now states the objective in the main text.
@@ -107,95 +82,78 @@ Section 4 now says each adapted evaluation returns a noise prediction, as Append
 We removed the repeated claims about learning an abstract concept from Sections 3 and 4 and the Discussion. The introduction now states what the correction is and what it restores (see W1). Section 4 now describes the training data and how pairs were chosen (Figure 7). Appendix C.4 (Figure 16) and a new Discussion paragraph show the adapter on three concepts, including where it fails: it separates the concepts in every case but stops at two animals. Section 4.1 now opens with the evaluation protocol: one adapter chosen by a fixed rule, the same seed for every method, the prompt sets and held-out pairs with their seeds, the scorers, and the renders behind Table 1 in the appendix.
 
 \changed{Section 4 states the training loss as Equation 12 and says each adapted evaluation returns a noise prediction; inference is the usual product-of-experts step with the adapter switched on. The training diagram and the ``Figure 10'' reference are gone, and the repeated abstract-concept claims are cut.}
+
 \subsubsection*{W5: the qualitative baseline comparison and its starting noise}
-\begin{reviewer}``The Figure 5 caption states that CO3 uses different starting noise, while Section 4.1 states that all examples use the same initial seeds.''\end{reviewer}
+\reviewquote{k4nd}{W5}
+
 Every method now uses the same seed for each prompt, with every column of a row in Figure 5 starting from the same latent, and Section 4.1 says so. CO3's column is marked $\dagger$ because its later resampling noise comes from the seed, as in its released code. Table 1 makes the comparison over 4 seeds, and Figures 11 and 12 over 8, with the images behind them in the appendix.
 
 \changed{Figure 5's caption and Section 4.1 say every column starts from the same latent; CO3 is marked with a dagger for its later resampling noise.}
+
 \subsubsection*{Q1: evidence that the residual measures plurality}
-\begin{reviewer}``What evidence establishes that the residual in Equation (9) specifically measures plurality rather than the broader difference between joint and separate conditioning?''\end{reviewer}
+\reviewquote{k4nd}{Q1}
+
 Answered under W1 above.
 
 \changed{As for W1.}
+
 \subsubsection*{Q2: aggregate results over held-out concepts and seeds}
-\begin{reviewer}``Can the authors provide aggregate results for the learned adapter and baselines over documented held-out concepts and multiple seeds, including identity errors, additional objects, and style-dependent failures?''\end{reviewer}
+\reviewquote{k4nd}{Q2}
+
 Answered under k4nd W3: Table 1, and Figure 11, which counts the failure types the reviewer names.
 
 \changed{Table 1, and Figures 11 and 12 on the held-out pairs.}
+
 \subsubsection*{Q3: pairs retained when only CO3 succeeds}
-\begin{reviewer}``Training pairs are retained when either joint prompting or CO3 succeeds, but supervision comes from the frozen joint-prompt prediction. How are pairs handled when only CO3 succeeds?''\end{reviewer}
+\reviewquote{k4nd}{Q3}
+
 We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair entered the training set when the joint prompt drew both named things as separate objects. Figure 7 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed (seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
 
 \changed{Section 4 describes the training set; Figure 7 shows the joint prompt beside CO3 during screening. No CO3 picture is a training target.}
+
 \subsubsection*{Q4: the objective in the main text, and the inconsistencies}
-\begin{reviewer}``Can the authors state the optimization objective explicitly in the main text and resolve the inconsistencies concerning network outputs, figure references, and baseline starting noise?''\end{reviewer}
+\reviewquote{k4nd}{Q4}
+
 The objective is Equation 12 in Section 4. The network outputs and the figure reference are resolved as described under W4. Baseline starting noise is resolved as described under W5.
 
 \changed{As for W4 and W5.}
-\section*{Reviewer UHz6}
-\begin{tcolorbox}[breakable,colback=red!3,colframe=red!45!black,title={The review by UHz6, as posted on OpenReview}]
-{\small\color{gray}Page: 3}\par
-{\small\color{gray}Posted: 22 Oct 2026, 05:55 (modified: 06 Nov 2026, 14:39)}\par
-\paragraph{Paper Summary}
-This paper investigates the problem of two individual concepts that are intended to be composed collapsing into a single object, which is associated with the failure of the product-of-experts approach. This missing property is labeled as plurality in the paper, and authors define plurality as a term in the form of a per-step residual between the joint prompt prediction and product-of-experts prediction. As shown qualitatively in the paper, adding this residual term restores distinct objects. Following this observation, the authors propose training a LoRA adapter on cross-attention layers with the corrected residuals, so that the adapted PoE prediction matches the joint-prompt target. The effectiveness of the method is shown with qualitative results throuugh the paper.
 
-\paragraph{Scores}
-\begin{itemize}
-\item Presentation: 2: Generally understandable, but requires substantial effort in places.
-\item Informativeness: 2: I learned something interesting or useful.
-\item Soundness: 2: I have minor or fixable concerns about the paper's soundness.
-\end{itemize}
-\paragraph{Critical Strengths}
-\begin{itemize}
-\item The paper defines plurality as a measurable quantity which links inference-time composition to joint prompting, and the problem definition is made clear in terms of the plurality problem.
-\item The paper presents analyses on the timesteps that decides on the plurality property of the generated samples and direct to early timesteps, this is a useful observation for compositional generation literature.
-\item The proposed correction step requires no additional NFEs, and thus can be considered as an efficient intervention to the generation process.
-\end{itemize}
-\paragraph{Critical Weaknesses}
-\begin{itemize}
-\item The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. In Fig. 5 and 6, the authors provide examples from the trained adapter but the results are not enough to claim the effectiveness of the method as it is difficult to evaluate its generalization. In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.
-\item For reproducibility concerns, the training set used for adapter training is not provided in sufficient detail. The authors specify the prompts used for training as the concepts that can be generated by Stable Diffusion XL and where joint prompting fails in Sec. 4. In addition, the training filter keeps a pair if either the joint prompt or CO3 succeeds, but the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore supervise toward a target without plurality.
-\item There are no quantitative comparisons with the compositional samplers discussed in Sec. 2.2, and CO3 appears only as one qualitative column. Attention-based methods that address missing or merged objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals.
-\item There are presentation issues: Sec. 4 refers to a Figure 10 that does not exist, and several sentences are broken (e.g., ``inside create hybrid objects'' in Sec. 5).
-\end{itemize}
-\paragraph{Questions For Authors}
-\begin{itemize}
-\item Could the authors list the 48 training pairs and the held-out pairs, and clarify whether cat/dog is in the training set?
-\item What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and multiple seeds?
-\item Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure modes in Fig. 7?
-\item Does the adapter degrade PoE on pairs that do not compete for the same region, such as foreground/background pairs like lighthouse and sea?
-\end{itemize}
-\paragraph{Rating}
-\begin{itemize}
-\item Flag For Ethics Review: No
-\item Details Of Ethics Concerns: The paper targets the general problem of compositionality, where the contents of the paper does not require additional ethics review.
-\item Rating: 2: Weak rejection
-\item Confidence: 4: I have substantial direct research experience on this topic.
-\end{itemize}
-\end{tcolorbox}
+\section*{Reviewer UHz6}
+\fullreview{UHz6}
+
 \subsection*{Our replies, point by point}
+
 \subsubsection*{W1: the adapter is evaluated only qualitatively}
-\begin{reviewer}``The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. \ldots{} In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.''\end{reviewer}
+\reviewquote{UHz6}{W1}
+
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53 held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object, attribute-binding and position tasks and T2I-CompBench's colour and shape sets, scored by their official evaluators. Appendix C.5 shows three concepts.
 
 \changed{Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench.}
+
 \subsubsection*{W3: comparisons with samplers and attention-based methods, and scope}
-\begin{reviewer}``There are no quantitative comparisons with the compositional samplers discussed in Sec. 2.2, and CO3 appears only as one qualitative column. Attention-based methods that address missing or merged objects under joint prompts (e.g., Attend-and-Excite, CONFORM) target the same failure mode and are not discussed. The study is also limited to SDXL and to pairs of two concepts, mostly animals.''\end{reviewer}
+\reviewquote{UHz6}{W3}
+
 Table 1 now compares quantitatively with CO3 on the same seeds, and Figure 5 adds a Langevin corrector. Attend-and-Excite and CONFORM are now discussed in Section 2: they adjust cross-attention under a single joint prompt, while our setting has no joint prompt at inference. Beyond pairs of animals, Table 1 covers objects and Appendix C.4 three concepts.
 
 \changed{Figure 5 adds ToMe and a Langevin corrector; Table 1 compares with CO3 and ToMe; Section 2 discusses Attend-and-Excite and CONFORM; Appendix C.4 shows three concepts.}
+
 \subsubsection*{The training filter}
-\begin{reviewer}``In addition, the training filter keeps a pair if either the joint prompt or CO3 succeeds, but the target is always the joint prompt (Eq. 11). Pairs that pass only through CO3 would therefore supervise toward a target without plurality.''\end{reviewer}
+\reviewquote{UHz6}{The training filter}
+
 We have addressed this in Section 4 and Figure 7. Every training target is the frozen model's joint-prompt prediction; no CO3 picture is a target. CO3 was a second view during screening: a pair entered the training set when the joint prompt drew both named things as separate objects. Figure 7 shows the joint prompt beside CO3 for five candidate pairs, including crow and raven, dropped because the two birds are hard to tell apart. Where CO3 drew a kept pair more clearly on a seed (seed 3 in Figure 7), that seed's target is still the joint prompt's picture.
 
 \changed{As for k4nd Q3.}
+
 \subsubsection*{Presentation issues}
-\begin{reviewer}``There are presentation issues: Sec. 4 refers to a Figure 10 that does not exist, and several sentences are broken (e.g., ''inside create hybrid objects`` in Sec. 5).''\end{reviewer}
+\reviewquote{UHz6}{Presentation issues}
+
 The reference that printed as ``Figure 10'' in Section 4 is removed, and the Discussion now reads ``and instead create hybrid objects''.
 
 \changed{The ``Figure 10'' reference is removed, and the Discussion reads ``and instead create hybrid objects''.}
+
 \subsubsection*{Q1: the 48 training pairs, the held-out pairs, and whether cat and dog is trained on}
-\begin{reviewer}``Could the authors list the 48 training pairs and the held-out pairs, and clarify whether cat/dog is in the training set?''\end{reviewer}
+\reviewquote{UHz6}{Q1}
+
 The training set is defined by a criterion, not by the particular pairs. A pair is kept when the frozen model's joint prompt draws both named concepts as separate objects, and dropped when the two concepts cannot be told apart (Section 4, Figure 7). The same criterion applies whether it yields 48 pairs or a thousand, and 48 is where we stopped collecting. The method relies on the criterion, not on any specific pair.
 
 Cat and dog is not in the training set. It is held out, and no training pair contains a cat or a dog. The held-out pairs are released with the code, and no pair in Figure 5 was trained on.
@@ -203,73 +161,59 @@ Cat and dog is not in the training set. It is held out, and no training pair con
 For reproducibility, the 48 training pairs are: (two animals, 28) badger and magpie, bear and boar, bear and heron, beaver and raccoon, beaver and woodpecker, bison and weasel, buffalo and hippo, bull and rooster, camel and pelican, chicken and rabbit, deer and heron, deer and wolf, donkey and duck, donkey and rooster, emu and koala, giraffe and hyena, giraffe and ostrich, giraffe and zebra, gorilla and chimpanzee, hedgehog and robin, horse and pig, horse and sheep, impala and jackal, langur and peacock, lion and meerkat, lion and oryx, moose and chipmunk, peacock and pig; (an animal and an object, 3) hamster and carrot, pony and red barn, snail and lantern; (two objects, 17) accordion and scarecrow, bicycle and birdhouse, birdcage and hay bale, cactus and cooler box, coat rack and potted plant, guitar and traffic cone, hay bale and ukulele, lighthouse and sailboat, mailbox and pumpkin, microscope and test tube, rocking chair and cactus, soccer ball and park bench, suitcase and globe, teddy bear and birthday cake, telescope and beach ball, typewriter and cactus, windmill and tractor. They are also released with the code as the configuration file the trainer reads.
 
 \changed{Section 4 describes the training set by kind; the 48 pairs are listed in the reply and released with the code.}
+
 \subsubsection*{Q2: success rate against PoE and CO3 over all held-out pairs and seeds}
-\begin{reviewer}``What is the success rate of the adapter compared with PoE and CO3 over all held-out pairs and multiple seeds?''\end{reviewer}
+\reviewquote{UHz6}{Q2}
+
 Answered under k4nd W3: Table 1, and Figures 11 and 12 for the held-out pairs at eight seeds.
 
 \changed{Table 1, and Figures 11 and 12 on the held-out pairs.}
+
 \subsubsection*{Q3: restricting the adapter to the early steps}
-\begin{reviewer}``Given the finding in Sec. 3, does restricting the adapter to the early steps change the failure modes in Fig. 7?''\end{reviewer}
+\reviewquote{UHz6}{Q3}
+
 We tested this directly. Figure 11 counts each failure type on the 53 held-out pairs at seeds 9 to 16 with the adapter switched on for the first 10, the first 25 or all 50 of the 50 steps, and Figure 13 shows the images. The first 25 steps give the same result as all 50. With the first 10 only, the detector finds two animals far less often (Figure 12a). The cow and horse row of Figure 13 shows that the species substitution of the submitted Fig. 7 (Figure 14 in the revision) persists at every window, so it does not come from the late steps.
 
 \changed{Figures 11, 12 and 13 show the adapter switched on for the first 10, the first 25 or all 50 steps.}
+
 \subsubsection*{Q4: pairs that do not compete for the same region}
-\begin{reviewer}``Does the adapter degrade PoE on pairs that do not compete for the same region, such as foreground/background pairs like lighthouse and sea?''\end{reviewer}
+\reviewquote{UHz6}{Q4}
+
 No. Among our held-out pairs, 21 have concepts that do not contend for one region, including lighthouse and a stormy sea. On these pairs the adapter scores the same as the plain product within the 95\% intervals (BLIP-VQA, seeds 9 to 16), so on pairs the product already composes it neither helps nor harms.
 
 \changed{No change to the paper; the reply answers from the held-out pairs.}
+
 \section*{Reviewer PrzE}
-\begin{tcolorbox}[breakable,colback=red!3,colframe=red!45!black,title={The review by PrzE, as posted on OpenReview}]
-{\small\color{gray}Page: 2}\par
-{\small\color{gray}Posted: 22 Oct 2026, 08:44 (modified: 06 Nov 2026, 14:39)}\par
-\paragraph{Paper Summary}
-This paper studies the failure cases of compositional diffusion models when there are two concepts competing for the same spatial region in the generated image, leading the model to fuse the two concepts into a single one. The authors define plurality vector as the residual between the joint promp and its guided product-of-experts prediction. They show that adding the scaled version of the residual vector during the early stage of the can help separate the objects empirically. The authors train a low-rank adapter on the cross-attention layer of stable diffusion XL so that the adapter PoE output matches the joint-prompt target. They train this on 48 concepts pairs that compose well. During the inference, the adapter modifies the separate forward pass for each concept, trying to recover the multi-object scenes.
+\fullreview{PrzE}
 
-\paragraph{Scores}
-\begin{itemize}
-\item Presentation: 3: Clear and easy to follow.
-\item Informativeness: 2: I learned something interesting or useful.
-\item Soundness: 3: I have no substantive concerns about the paper's soundness.
-\end{itemize}
-\paragraph{Critical Strengths}
-The paper provides a clear demonstration of empirical ablation(Figure 3 and Figure 4) indicating that steering the latent during the early stage of inference is more effective than the late corrections. The paper gives a concrete quantity between joint prompt and PoE that we can compute, making the vague hybrid objects failure cases become something that can be intervened.
-
-\paragraph{Critical Weaknesses}
-\begin{itemize}
-\item Lack of quantitative benchmarks: The paper does not report a single quantitative metric. Standard benchmarks such as T2I-Compench, GenEval and standard metrics such as CLIP, Imagereward are completely absent in this paper. The empirical results and a few qualitative results are insufficient for the claim in this paper.
-\item Narrow baselines and Missing details: There is only CO3 baseline compared, the paper doesn't provide other corrected methods such as MCMC corrector. The paper only compares the baseline CO3 without the corrector they mention. The 48 concept pairs are not listed so it's impossible to see what the adapter is trained on.
-\end{itemize}
-\paragraph{Questions For Authors}
-\begin{enumerate}
-\item Quantitative Benchmark: what are the evaluation scores for the proposed method? Can you show the results on some benchmarks and compare your method with other standard baselines?
-\item Multiple concepts: How does your method perform when composing more than two concepts? Can you show some results for more than two concepts?
-\end{enumerate}
-\paragraph{Rating}
-\begin{itemize}
-\item Flag For Ethics Review: No
-\item Rating: 1: Clear rejection
-\item Confidence: 4: I have substantial direct research experience on this topic.
-\end{itemize}
-\end{tcolorbox}
 \subsection*{Our replies, point by point}
+
 \subsubsection*{W1: lack of quantitative benchmarks}
-\begin{reviewer}``The paper does not report a single quantitative metric. Standard benchmarks such as T2I-Compench, GenEval and standard metrics such as CLIP, Imagereward are completely absent in this paper. The empirical results and a few qualitative results are insufficient for the claim in this paper.''\end{reviewer}
+\reviewquote{PrzE}{W1}
+
 The revision adds quantitative evaluation. Table 1 scores every method on the 276 Attend-and-Excite prompts with BLIP-VQA (the T2I-CompBench composition metric), CLIP score and ImageReward. Table 2 reports GenEval's two-object, attribute-binding and position tasks and T2I-CompBench's colour and shape sets, scored by their official evaluators.
 
 \changed{Table 1 adds BLIP-VQA, CLIP score and ImageReward on 276 prompts; Table 2 adds GenEval and T2I-CompBench.}
+
 \subsubsection*{W2: narrow baselines and missing details}
-\begin{reviewer}``There is only CO3 baseline compared, the paper doesn't provide other corrected methods such as MCMC corrector. The paper only compares the baseline CO3 without the corrector they mention. The 48 concept pairs are not listed so it's impossible to see what the adapter is trained on.''\end{reviewer}
+\reviewquote{PrzE}{W2}
+
 Figure 5 now includes a product of experts with a Langevin corrector (Du et al., 2023), the MCMC correction the paper discusses, run at its published setting from the same starting latent, beside CO3, ToMe and our adapter. Table 1 compares with CO3 on every image. Table 1 adds ToMe, run on SDXL from the same starting latents. Section 4 now describes the training set and how pairs were chosen (Figure 7); the 48 pairs are listed in our reply to Reviewer UHz6 and released with the code.
 
 \changed{Figure 5 adds ToMe and a Langevin corrector; Table 1 adds ToMe; Section 4 describes the training set.}
+
 \subsubsection*{Q1: quantitative benchmark}
-\begin{reviewer}``What are the evaluation scores for the proposed method? Can you show the results on some benchmarks and compare your method with other standard baselines?''\end{reviewer}
+\reviewquote{PrzE}{Q1}
+
 Answered under W1 and W2: Tables 1 and 2.
 
 \changed{As for W1 and W2.}
+
 \subsubsection*{Q2: multiple concepts}
-\begin{reviewer}``How does your method perform when composing more than two concepts? Can you show some results for more than two concepts?''\end{reviewer}
+\reviewquote{PrzE}{Q2}
+
 Appendix C.4 (Figure 16) shows one triple of each kind. The plain product fuses the three concepts or drops one; the adapter, trained only on pairs, separates them in every case and draws all three named things when the triple includes objects, but with two or three animals it draws only two. The Discussion now addresses this.
 
 \changed{Appendix C.4 and a Discussion paragraph show the adapter on three concepts.}
+
 \end{document}

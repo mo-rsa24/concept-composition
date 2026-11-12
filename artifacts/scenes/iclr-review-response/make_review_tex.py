@@ -141,6 +141,12 @@ def sections(md: str, reviewer: str) -> list[dict]:
 def main() -> None:
     k = (REPO / "replies/k4nd-and-uhz6.md").read_text()
     p = (REPO / "replies/prze.md").read_text()
+    # review-text.tex: everything the reviewers wrote, stored under names; nobody edits it.
+    store = [r"""% The reviewers' own words, stored under names that review.tex calls.
+% \fullreview{k4nd} prints k4nd's whole review; \reviewquote{k4nd}{W1} prints the part of it
+% that the reply to W1 answers. Generated from Reviews.pdf (transcribed) and the reply files.
+"""]
+    # review.tex: our replies and the changes; this is the file to edit.
     out = [r"""\documentclass[11pt]{article}
 \usepackage[margin=2.2cm]{geometry}
 \usepackage[T1]{fontenc}
@@ -151,31 +157,40 @@ def main() -> None:
 \usepackage[hidelinks]{hyperref}
 \definecolor{rev}{HTML}{C0392B}\definecolor{chg}{HTML}{1E8449}
 \setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
-\newenvironment{reviewer}{\begin{quote}\color{rev}\itshape}{\end{quote}}
+
+% --- switches: set to false to hide the reviewers' text without deleting anything ---
+\newif\ifshowfullreviews \showfullreviewstrue   % each reviewer's whole review, in a box
+\newif\ifshowquotes      \showquotestrue        % the red quote above each reply
+
+\newcommand{\fullreview}[1]{\ifshowfullreviews\csname fullreview-#1\endcsname\fi}
+\newcommand{\reviewquote}[2]{\ifshowquotes\begin{quote}\color{rev}\itshape\csname quote-#1-#2\endcsname\end{quote}\fi}
 \newcommand{\changed}[1]{\par{\color{chg}\textbf{What changed in the revision.}} #1\par}
+\input{review-text}
+
 \title{ICLR 2027 submission 56173: the reviews, our replies and the revision}
 \date{}
 \begin{document}
 \maketitle
-Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. This document holds the reviews and our replies only; it compiles with pdfLaTeX or XeLaTeX and is meant to be edited.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. The reviewers' text lives in \texttt{review-text.tex}; this file holds our replies.
 """]
     for name, md in (("k4nd", k), ("UHz6", k), ("PrzE", p)):
-        out.append(f"\\section*{{Reviewer {name}}}\n")
-        out.append(full_review(name))
-        out.append("\\subsection*{Our replies, point by point}\n")
+        store.append(f"\n% ===== {name} =====\n\\expandafter\\long\\expandafter\\def\\csname fullreview-{name}\\endcsname{{%\n"
+                     + full_review(name) + "}\n")
+        out.append(f"\n\\section*{{Reviewer {name}}}\n\\fullreview{{{name}}}\n\n\\subsection*{{Our replies, point by point}}\n")
         for pt in sections(md, name):
             key = pt["head"].split(":")[0].strip()
-            out.append(f"\\subsubsection*{{{tex(pt['head'])}}}\n")
+            out.append(f"\n\\subsubsection*{{{tex(pt['head'])}}}\n")
             if pt["quote"]:
-                out.append("\\begin{reviewer}" + tex(pt["quote"]) + "\\end{reviewer}\n")
+                store.append(f"\\expandafter\\long\\expandafter\\def\\csname quote-{name}-{key}\\endcsname{{{tex(pt['quote'])}}}\n")
+                out.append(f"\\reviewquote{{{name}}}{{{key}}}\n\n")
             for para in pt["reply"]:
                 out.append(tex(para) + "\n\n")
             if (name, key) in CHANGES:
                 out.append("\\changed{" + CHANGES[(name, key)] + "}\n")
-    out.append("\\end{document}\n")
+    out.append("\n\\end{document}\n")
+    (HERE / "review-text.tex").write_text("".join(store))
     (HERE / "review.tex").write_text("".join(out))
-    print(HERE / "review.tex")
-
+    print(HERE / "review.tex", HERE / "review-text.tex")
 
 if __name__ == "__main__":
     main()
