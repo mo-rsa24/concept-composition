@@ -104,6 +104,8 @@ def main() -> None:
     left = [l for l in live_tex(new).splitlines() if re.search(r"\{(slots|ablation|figures|final_figures)/", l)]
     if left:
         raise SystemExit("paths not rewritten:\n" + "\n".join(left))
+    # The editable reviews-and-replies document: needs no file from revision/, sits at the root.
+    shutil.copy2(REPO / "artifacts/scenes/iclr-review-response/review.tex", OUT / "review.tex")
     zpath = OUT.parent / "overleaf-bundle.zip"
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(OUT.rglob("*")):

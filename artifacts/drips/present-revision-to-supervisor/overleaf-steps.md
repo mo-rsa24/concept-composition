@@ -19,8 +19,8 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    [dest] overleaf.com → sign in → the supervisor's ICLR 56173 project. The file tree is on the left.
 
 2. **Check nothing will be overwritten.**
-   [dest] `/` (the top level of the file tree). If `/iclr2027_conference_revision.tex` or a folder
-   `/revision` already exists, stop and tell Claude.
+   [dest] `/` (the top level of the file tree). If `/iclr2027_conference_revision.tex`, `/review.tex` or a
+   folder `/revision` already exists, stop and tell Claude.
 
 3. **Create the folder.**
    [dest] `/revision`: click the **New folder** icon at the top of the file tree, type `revision`,
@@ -68,6 +68,13 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    not inside `/revision/`: Overleaf compiles from the root and every path in the file starts with
    `revision/`.
 
+5b. **Upload the reviews document at the project root.**
+   [src] `/home/molef/PhD/poe_repair_min/artifacts/drips/present-revision-to-supervisor/overleaf-bundle/review.tex`
+   [dest] `/review.tex`
+   The three reviews as posted, each followed by our replies and what changed. It needs no other file,
+   and it is the one you and the supervisor edit. Like the revision, it compiles only when it is the
+   main document (step 6 with `review.tex` selected); a correct build is 13 pages.
+
 6. **Make it the main document.**
    [dest] **Menu** (top left) → **Settings** → **Main document** → `iclr2027_conference_revision.tex`.
    Leave **Compiler** as it is for now. This setting is shared with the original, so the project shows
@@ -100,7 +107,7 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
     was, if you changed it in step 8). The revision stays in the project; switching the main document
     is all it takes to view either one.
 
-11. **Send the supervisor the walk-through.**
-    [src] `/home/molef/PhD/poe_repair_min/artifacts/scenes/iclr-review-response/supervisor-review-response.pdf`
-    with one line: the revision is `/iclr2027_conference_revision.tex` with its files in `/revision/`;
-    set it as the main document to compile it.
+11. **Send the supervisor the claim figures.** They are not uploaded to Overleaf.
+    [src] `/home/molef/PhD/poe_repair_min/artifacts/scenes/iclr-review-response/claim-figures.pdf`
+    with one line: the revision is `/iclr2027_conference_revision.tex` with its files in `/revision/`,
+    and the reviews with our replies are `/review.tex`; set either as the main document to compile it.

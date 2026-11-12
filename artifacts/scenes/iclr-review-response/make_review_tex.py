@@ -3,8 +3,8 @@
 One section per reviewer (k4nd, UHz6, PrzE). Under each point: the reviewer's words as quoted in
 the reply files, the reply itself, and a note on what changed in the revision (CHANGES below).
 The reviewer quotes and replies are read from replies/k4nd-and-uhz6.md and replies/prze.md, so the
-document follows the replies whenever they change. The twelve claim-group figures are joined after
-it with pdfunite into supervisor-review-response.pdf. Build with Tectonic: `tectonic review.tex` in this folder.
+document follows the replies whenever they change. The twelve claim-group figures are a separate PDF,
+claim-figures.pdf, joined with pdfunite. Build with Tectonic: `tectonic review.tex` in this folder.
 
 Usage, from the repo root:
   python3 artifacts/scenes/iclr-review-response/make_review_tex.py
@@ -106,6 +106,7 @@ def tex(text: str) -> str:
         p = p.replace("\\", r"\textbackslash{}")
         for a, b in (("&", r"\&"), ("%", r"\%"), ("#", r"\#"), ("_", r"\_"), ("{", r"\{"), ("}", r"\}")):
             p = p.replace(a, b)
+        p = p.replace("\u2026", r"\ldots{}")
         p = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", p)
         p = re.sub(r"`([^`]+)`", r"\\texttt{\1}", p)
         p = re.sub(r'"([^"]+)"', r"``\1''", p)
@@ -142,8 +143,9 @@ def main() -> None:
     p = (REPO / "replies/prze.md").read_text()
     out = [r"""\documentclass[11pt]{article}
 \usepackage[margin=2.2cm]{geometry}
-\usepackage{fontspec}
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage[hidelinks]{hyperref}
@@ -155,7 +157,7 @@ def main() -> None:
 \date{}
 \begin{document}
 \maketitle
-Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. After this document come twelve figures, one per group of claims, each showing the reviewer's words, the submitted passage and the revised passage side by side.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. This document holds the reviews and our replies only; it compiles with pdfLaTeX or XeLaTeX and is meant to be edited.
 """]
     for name, md in (("k4nd", k), ("UHz6", k), ("PrzE", p)):
         out.append(f"\\section*{{Reviewer {name}}}\n")

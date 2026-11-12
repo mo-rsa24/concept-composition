@@ -1,7 +1,8 @@
 \documentclass[11pt]{article}
 \usepackage[margin=2.2cm]{geometry}
-\usepackage{fontspec}
-\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
 \usepackage[hidelinks]{hyperref}
@@ -13,7 +14,7 @@
 \date{}
 \begin{document}
 \maketitle
-Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. After this document come twelve figures, one per group of claims, each showing the reviewer's words, the submitted passage and the revised passage side by side.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. This document holds the reviews and our replies only; it compiles with pdfLaTeX or XeLaTeX and is meant to be edited.
 \section*{Reviewer k4nd}
 \begin{tcolorbox}[breakable,colback=red!3,colframe=red!45!black,title={The review by k4nd, as posted on OpenReview}]
 {\small\color{gray}Pages: 4 and 5}\par
@@ -61,7 +62,7 @@ I did not identify a major technical or empirical strength that is convincingly 
 \end{tcolorbox}
 \subsection*{Our replies, point by point}
 \subsubsection*{W1: the residual does not establish a distinct representation of plurality}
-\begin{reviewer}``The proposed residual does not establish a distinct representation of plurality. … The paper does not establish that it specifically measures whether the named concepts appear as distinct objects.''\end{reviewer}
+\begin{reviewer}``The proposed residual does not establish a distinct representation of plurality. \ldots{} The paper does not establish that it specifically measures whether the named concepts appear as distinct objects.''\end{reviewer}
 We agree that $r_t$ in Equation 9 is the entire difference between the joint-prompt and product-of-experts predictions, and that adding it in full recovers the joint prompt by construction. We do not claim that $r_t$ represents plurality alone. A product of experts drops the interaction the joint prompt carries, and that interaction can hold several kinds of meaning: a relation between the concepts (``a dog on a cat''), an effect of one on the other (``a camel in the rain'' should be wet), and the layout and style of the scene.
 
 Our study concerns one part of this interaction: plurality, whether two named concepts appear as two objects rather than one hybrid. The training pairs were chosen for it, as pairs the product fuses into a hybrid.
@@ -174,7 +175,7 @@ This paper investigates the problem of two individual concepts that are intended
 \end{tcolorbox}
 \subsection*{Our replies, point by point}
 \subsubsection*{W1: the adapter is evaluated only qualitatively}
-\begin{reviewer}``The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. … In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.''\end{reviewer}
+\begin{reviewer}``The trained adapter, which serves as the main contribution of the paper is only evaluated qualitatively. \ldots{} In addition to the examples being limited to similar entities (cat, dog), there are no standardized benchmark evaluations such as T2I-CompBench or GenEval counting.''\end{reviewer}
 The revision evaluates the adapter quantitatively on the 276 prompts of the Attend-and-Excite benchmark, which cover animal pairs, animal-object pairs and object pairs (Table 1), and on 53 held-out pairs as the adapter acts on fewer steps (Figures 11 and 12). Table 2 reports GenEval's two-object, attribute-binding and position tasks and T2I-CompBench's colour and shape sets, scored by their official evaluators. Appendix C.5 shows three concepts.
 
 \changed{Table 1 adds three scorers on 276 prompts; Table 2 adds GenEval and T2I-CompBench.}
