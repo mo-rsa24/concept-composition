@@ -1102,6 +1102,8 @@ In this work we made use of generative AI tools for coding assistance, to polish
 
 % Keep the appendix separate from the bibliography and earlier floats.
 \appendix
+% appendix only: let large figures share a page, so the appendix has no half-empty pages
+\renewcommand{\topfraction}{0.95}\renewcommand{\bottomfraction}{0.9}\renewcommand{\textfraction}{0.05}\renewcommand{\floatpagefraction}{0.85}\setcounter{totalnumber}{4}\setcounter{topnumber}{3}
 % The appendix holds stacks of tables and image grids; let a page carry several of them.
 \setcounter{topnumber}{3}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{4}\renewcommand{\textfraction}{0.07}
 
@@ -1341,14 +1343,14 @@ Figure~\ref{fig:review-window-scores} scores the same images with an open-vocabu
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\reviewslot{R10}{\linewidth}{4.5in}
+\reviewslot{R10}{\linewidth}{4.0in}
 \caption{\textbf{The images behind Figure~\ref{fig:review-R9}.} Seven held-out pairs, each at the seed where our adapter on all 50 steps scores highest on BLIP-VQA; columns are the four settings of Figure~\ref{fig:review-R9}.}
 \label{fig:review-R10}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering\footnotesize
-\includegraphics[width=\linewidth]{figures/failure-window/judge_sample_40.png}
+\includegraphics[width=0.8\linewidth]{figures/failure-window/judge_sample_40.png}
 \caption{\textbf{Forty of the judge's labels.} Images drawn at random from the 1,696 behind Figure~\ref{fig:review-R9}, each with its prompt and the label the judge gave it.}
 \label{fig:judge-sample}
 \end{figure}
