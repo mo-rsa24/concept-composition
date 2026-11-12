@@ -14,9 +14,9 @@ One line per change to the paper, grouped by the reviewer point it answers. Comm
 
 ## k4nd W4: method details
 
-- Section 4 states the training loss as Equation 12, with its per-step weight (`8ef00a17`).
+- Section 4 states the training loss as Equation 12 (`8ef00a17`).
 - The training diagram (old Figure 7) is hidden until its notation matches Equation 12 (`2e9af75c`).
-- Section 4 says each adapted evaluation returns a noise prediction, and inference uses the adapted composition directly; the "Figure 10" reference is gone (`88f02a45`).
+- Section 4 says each adapted evaluation returns a noise prediction, and inference is the usual product-of-experts step with the adapter switched on; the learned-correction equation with its strength $\lambda$ is gone, and so is the "Figure 10" reference (`88f02a45`).
 - The abstract-concept sentences are cut from Sections 3 and 4 and the Discussion (`06a9cf98`).
 - Section 4.1 opens with the evaluation protocol (`508d2647`).
 

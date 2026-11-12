@@ -85,10 +85,9 @@ loss) are counted per setting in Figure 10 (Appendix C.3).
 > training diagram in Appendix A, Figure 7."
 
 Section 4 now states the training loss as Equation 12: the squared error between the adapted
-composition and the joint-prompt prediction, over the cached states of every training pair and
-seed at the first ten of the 50 sampling steps, with each step's term weighted by
-$(1-\bar\alpha_t)/\bar\alpha_t$ divided by its mean over the 50-step grid. The training diagram
-is removed, since Equation 12 now states the objective in the main text.
+composition and the joint-prompt prediction, over the cached states of every training pair and seed
+at the first ten of the 50 sampling steps. The training diagram is removed, since Equation 12 now
+states the objective in the main text.
 
 **Evaluations described as returning the correction**
 
@@ -97,10 +96,10 @@ is removed, since Equation 12 now states the objective in the main text.
 > correction. Section 4 refers to 'Figure 10,' although the actual training diagram is Figure 7."
 
 Section 4 now says each adapted evaluation returns a noise prediction, as Appendix B derives. At
-inference the sampler uses the adapted composition directly (Equation 15): three predictions per
-step, and never the joint prompt. The correction $\hat r_\psi$ is the implicit difference from the
-unadapted composition (Equation 13), and Equation 13 at $\lambda = 1$ is the adapted composition
-itself. The reference that printed as "Figure 10" is removed.
+inference we run the usual product-of-experts step on $c_1$, $c_2$ and the null prompt with the
+adapter switched on: three predictions per step, and never the joint prompt. The adapter is trained
+to reproduce the joint prompt's prediction, so it learns the correction $r_t$ only implicitly, as the
+change it makes to the composition (Appendix B). The reference that printed as "Figure 10" is removed.
 
 **Repetitive claims about learning an abstract concept**
 

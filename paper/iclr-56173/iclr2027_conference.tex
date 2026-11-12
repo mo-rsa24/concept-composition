@@ -699,7 +699,7 @@ value projections of every self-attention and cross-attention layer of Stable Di
 model's existing weights frozen. This LoRA module is denoted by $\epsilon_{\theta,\psi}$ with $\psi$ as the LoRA parameters. In the cross-attention layers, queries are computed from
 the latent, while keys and values are computed from the prompt
 tokens; in the self-attention layers, all three are computed from the latent. Once trained, the module is used at inference with the usual PoE step, so a joint prompt is not needed. During training, the joint prompt provides the target. Each network evaluation takes a latent $x_t$, its timestep
-$t$ and one prompt, and returns a noise prediction, as the frozen model does. At inference the sampler uses the adapted composition $\hat\epsilon^\psi_{\mathrm{PoE}}$ directly, combining the three adapted predictions under $c_1$, $c_2$ and the null prompt with the same guided product-of-experts rule (Equation~\ref{eq:adapted-poe}), so it needs three predictions per step and never the joint prompt. The correction is implicit: it is the difference from the unadapted composition, written $\hat r_\psi$ in Equation~\ref{eq:corrected-sampler-learned} so it can be compared with $r_t$, and Equation~\ref{eq:corrected-sampler-learned} at $\lambda=1$ is the adapted composition itself.
+$t$ and one prompt, and returns a noise prediction, as the frozen model does. At inference we run the usual product-of-experts step on $c_1$, $c_2$ and the null prompt with the adapter switched on (Equation~\ref{eq:adapted-poe}): three predictions per step, and never the joint prompt.
 
 
 
@@ -740,32 +740,7 @@ Only the adapter parameters $\psi$ are trained, by minimising
 \mathcal L(\psi)=\mathbb E_{x_t,t}\,\bigl\|\hat\epsilon^{\psi}_{\mathrm{PoE}}(x_t,t)-\hat\epsilon_{\mathrm{Mono}}(x_t,t)\bigr\|^2
 \label{eq:adapter-loss}
 \end{equation}
-over the cached states of every training pair and seed at the first ten of the 50 sampling steps. Each step's term is weighted by $(1-\bar\alpha_t)/\bar\alpha_t$, divided by its mean over the 50-step grid, so the earliest and noisiest steps carry the most weight. At the selected
-states, the target differs from the unadapted composition by $r_t$,
-so matching it trains the adapter to supply that difference. During sampling, the learned correction is the change that the
-adapter makes to the composed prediction. We denote it by
-$\hat r_\psi
-=\hat\epsilon^\psi_{\mathrm{PoE}}
--\hat\epsilon_{\mathrm{PoE}}$ and apply it in the same form as the
-measured correction:
-\begin{equation}
-\begin{aligned}
-\hat\epsilon_\lambda
-&=
-\hat\epsilon_{\mathrm{PoE}}
-+
-\lambda\hat r_\psi\\
-&=
-\hat\epsilon_{\mathrm{PoE}}
-+
-\lambda\left(
-\hat\epsilon^\psi_{\mathrm{PoE}}
--
-\hat\epsilon_{\mathrm{PoE}}
-\right).
-\end{aligned}
-\label{eq:corrected-sampler-learned}
-\end{equation}
+over the cached states of every training pair and seed at the first ten of the 50 sampling steps. The adapter is trained to reproduce the joint prompt's prediction, not the correction. It learns $r_t$ only implicitly: on the training states, the change it makes to the composition, $\hat\epsilon^\psi_{\mathrm{PoE}}-\hat\epsilon_{\mathrm{PoE}}$, approximates $r_t$ (Appendix~\ref{app:training-inference}).
 Appendix~\ref{app:implementation} gives the training and sampling
 details. Appendix~\ref{app:training-inference} derives the relation
 between the training target and the prediction used during sampling.
