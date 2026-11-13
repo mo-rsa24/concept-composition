@@ -62,6 +62,8 @@ clearly as a dog, so it is counted as neither category rather than rounded into 
 Per-tile sentences for both runs are in
 [the calls](../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/calls.json).
 
+The same comparison with PixArt-alpha itself as a third setup, four seeds each, is [one summary grid](../../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/summary-grid.png): one sentence draws two animals in every setup, and the sum of two prompts fuses them in every setup.
+
 ## 3. The reference column, read two ways
 
 Navigation: ⬅️ [2. At PixArt's settings the product still fuses](#2-at-pixarts-settings-the-product-still-fuses) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️

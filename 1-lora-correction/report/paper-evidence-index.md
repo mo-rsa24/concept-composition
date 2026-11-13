@@ -31,6 +31,8 @@ caption or writeup has to be rewritten fresh and plain before the paper may use 
 | `1-lora-correction/report/decision-timeline.md`, `1-lora-correction/report/results-summary.md` | the running record; RESULTS_SUMMARY defers to the review files where they disagree |
 | the regeneration code for F6/F8, now merged beside each figure's evidence folder under `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/` | the throwaway code that produced `F6`'s and `F8`'s images; regeneration path, never cited |
 | `artifacts/plans/parked/artifact-reconciliation/inventory/` | the artifact-reconciliation scope's four output documents |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/` | the limitations figure (figures 6 and 7: the adapter's settings on cat and dog, zoomed hybrid faces); the paper's limitations appendix is commented out, so it feeds nothing until that appendix returns |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/` | every adapter and method across ten seeds, one grid per pair for seven pairs; the answer to a reviewer asking whether a result holds beyond one seed |
 
 ## Not paper material
 

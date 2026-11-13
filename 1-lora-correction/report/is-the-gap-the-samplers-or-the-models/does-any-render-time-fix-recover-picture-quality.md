@@ -89,6 +89,8 @@ Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-c
 *The explicit re-weighting, column six, is the only column where both animals stop being animals.*
 📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md#figure-1-tiger-and-dog-seed-9).
 
+The same kind of comparison on cat and dog, with three adapters in rows (v58 plain, contrast and self-attention) and seven columns (joint prompt, plain product, adapter alone, clean tail from step 20, Langevin on the tail, the CO3 corrector, best of 8): [seed 9](../../artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed09.png) and [seed 10](../../artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed10.png). The CO3 column is the only one that turns the pair into drawings.
+
 **What the eye reads across all eight cells.** The two repaint passes and the 20-step handover draw
 the adapter's picture again, with the same layout and the same subjects. The explicit re-weighting
 smears both subjects on every cell and invents a wolf statue on chess board and hourglass at seed 9,
