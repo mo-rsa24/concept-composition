@@ -1,4 +1,4 @@
-/drip-repo ~/PhD/reduce-reuse-recycle
+/drip-repo ~/PhD/replications/reduce-reuse-recycle
 
 Resume the walk that gets the authors' code for Du et al. 2023, "Reduce, Reuse, Recycle" (arXiv 2302.11552,
 github.com/yilundu/reduce_reuse_recycle), running on the cluster so I can follow along in the code: the 2D
@@ -45,7 +45,7 @@ mkdir -p $R/uv-cache $R/venvs
 export UV_CACHE_DIR=$R/uv-cache
 uv venv --python 3.12 $R/venvs/rrr-jax
 uv pip install --python $R/venvs/rrr-jax/bin/python "jax[cuda12]==0.11.2" dm-haiku optax distrax chex matplotlib ipykernel
-ln -s $R/venvs/rrr-jax ~/PhD/reduce-reuse-recycle/.venv
+ln -s $R/venvs/rrr-jax ~/PhD/replications/reduce-reuse-recycle/.venv
 ```
 
 Success is `jax.devices()` printing a CUDA device, not a CPU one. Then tell me how to pick `.venv` as the

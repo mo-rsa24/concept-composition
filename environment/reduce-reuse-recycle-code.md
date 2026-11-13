@@ -3,7 +3,7 @@
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md)
 
 What is true about running the authors' code for Du et al. 2023 (arXiv 2302.11552) on the laptop.
-The clone is `/home/molef/PhD/reduce-reuse-recycle`, local branch `walk` at upstream commit
+The clone is `/home/molef/PhD/replications/reduce-reuse-recycle`, local branch `walk` at upstream commit
 `81177d9`. It has two halves with separate environments: a JAX notebook for the 2D results, and a
 PyTorch script for the CLEVR results. Where the code differs from the paper is not an environment
 fact; that audit is
@@ -19,7 +19,7 @@ at the first `hk.multi_transform(...)` call, not in the trainer cell itself. Cha
 `min=` and rerun the trainer cell. It is the only `a_min` or `a_max` in the notebook.
 (verified 2026-10-13)
 
-**Its environment is `/home/molef/PhD/reduce-reuse-recycle/.venv-2d`**, Python 3.12, with jax
+**Its environment is `/home/molef/PhD/replications/reduce-reuse-recycle/.venv-2d`**, Python 3.12, with jax
 0.11.2 on CPU, dm-haiku, optax, distrax and chex from PyPI unpinned. jax prints "a CUDA-enabled
 jaxlib is not installed. Falling back to cpu" on first use; that is expected, and the notebook's
 models are small enough for CPU. (verified 2026-10-13)

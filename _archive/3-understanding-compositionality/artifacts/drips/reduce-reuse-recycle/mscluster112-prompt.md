@@ -1,4 +1,4 @@
-/drip-repo ~/PhD/reduce-reuse-recycle
+/drip-repo ~/PhD/replications/reduce-reuse-recycle
 
 Get the authors' code for Du et al. 2023, "Reduce, Reuse, Recycle" (arXiv 2302.11552,
 github.com/yilundu/reduce_reuse_recycle), running on mscluster112 so I can follow along in the
@@ -9,7 +9,7 @@ was learned there, so do not rediscover it.
 
 ## The open, already answered
 
-- Clone: `~/PhD/reduce-reuse-recycle` (that is `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle`).
+- Clone: `~/PhD/replications/reduce-reuse-recycle` (that is `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle`).
   If it does not exist, clone it and `git checkout -b walk 81177d9`. That commit is the one every
   fact below refers to.
 - Fact folders: the cluster checkout of concept-composition,

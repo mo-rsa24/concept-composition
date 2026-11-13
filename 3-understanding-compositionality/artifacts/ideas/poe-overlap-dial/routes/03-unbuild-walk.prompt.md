@@ -1,4 +1,4 @@
-/unbuild --walk ~/PhD/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
+/unbuild --walk ~/PhD/replications/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
 
 Rebuild the JAX/Haiku reference notebook in PyTorch, layer by layer, then extend it past the notebook into the composition testbed this project's idea walk settled on. Python, NumPy and PyTorch only, no JAX. Run Python with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python. GPU work follows the GPU guard in /home-mscluster/mmolefe/Playground/PhD/concept-composition/environment/hpc/execution-protocol.md (use a card with under 1 GB in use, else CPU).
 

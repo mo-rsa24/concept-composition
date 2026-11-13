@@ -50,7 +50,7 @@ git checkout -b walk 81177d9
 Navigation: ⬅️ [1. Clone](#1-clone-at-the-commit-the-walk-uses) | 📋 [TOC](#table-of-contents) | [Next](#3-make-the-notebook-run-on-current-jax) ➡️
 
 ```bash
-cd ~/PhD/reduce-reuse-recycle
+cd ~/PhD/replications/reduce-reuse-recycle
 uv venv .venv-2d --python 3.12
 UV_HTTP_TIMEOUT=600 uv pip install --python .venv-2d/bin/python \
     jax dm-haiku optax distrax chex matplotlib ipykernel
@@ -68,7 +68,7 @@ Navigation: ⬅️ [2. The 2D environment](#2-build-the-2d-notebooks-environment
 
 ```bash
 python3 ~/PhD/concept-composition/scripts/fix_reduce_reuse_recycle_notebook.py \
-    ~/PhD/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
+    ~/PhD/replications/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
 ```
 
 ✅ **`47 cells; fixes applied`**. It drops the `!pip` cell and the unused TensorFlow and pandas
@@ -91,7 +91,7 @@ Google Drive answers a file this size with a virus-scan page, so the download ha
 page's confirmation.
 
 ```bash
-cd ~/PhD/reduce-reuse-recycle
+cd ~/PhD/replications/reduce-reuse-recycle
 curl -sSL "https://drive.google.com/uc?export=download&id=19ay4bLVCQho8_aXtODWbDCpu6L2l58YB" -o /tmp/gd.html
 UUID=$(grep -oP 'name="uuid" value="\K[^"]+' /tmp/gd.html)
 curl -sSL -C - --retry 5 -o ebm-49x1874.pt \
@@ -111,7 +111,7 @@ This borrows the CUDA torch already installed for `my-eye-my-brain`, read-only, 
 matplotlib inside the clone.
 
 ```bash
-cd ~/PhD/reduce-reuse-recycle
+cd ~/PhD/replications/reduce-reuse-recycle
 uv pip install --target .clevr-extras matplotlib
 PYTHONPATH=$PWD/.clevr-extras ~/playground/deep-learning/my-eye-my-brain/.venv/bin/python \
   -c "import torch, matplotlib; print(torch.__version__, torch.cuda.is_available())"
@@ -130,7 +130,7 @@ Build a CUDA torch in the clone instead (about 2.5 GB):
 Navigation: ⬅️ [5. CLEVR torch](#5-give-the-clevr-script-a-cuda-torch) | 📋 [TOC](#table-of-contents) | [Next](#7-build-the-2d-notebooks-environment-on-the-cluster) ➡️
 
 ```bash
-cd ~/PhD/reduce-reuse-recycle
+cd ~/PhD/replications/reduce-reuse-recycle
 UV_HTTP_TIMEOUT=600 uv pip install --python .venv-2d/bin/python "jax[cuda13]==0.11.2"
 .venv-2d/bin/python -c "import jax; print(jax.devices())"
 ```
@@ -143,7 +143,7 @@ the notebook's kernel and rerun from the top.
 Navigation: ⬅️ [6. GPU notebook](#6-run-the-notebook-on-the-gpu-instead) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 On a GPU node (the walk used `mscluster88`), with the clone from recipe 1 at
-`~/PhD/reduce-reuse-recycle`. Check the card first, because `bigbatch` cards fault between checks:
+`~/PhD/replications/reduce-reuse-recycle`. Check the card first, because `bigbatch` cards fault between checks:
 
 ```bash
 nvidia-smi -L
@@ -158,8 +158,8 @@ mkdir -p $R/uv-cache $R/venvs
 export UV_CACHE_DIR=$R/uv-cache
 ~/.local/bin/uv venv --python 3.12 $R/venvs/rrr-jax
 ~/.local/bin/uv pip install --python $R/venvs/rrr-jax/bin/python "jax[cuda12]==0.11.2" dm-haiku optax distrax chex matplotlib ipykernel
-ln -sfn $R/venvs/rrr-jax ~/PhD/reduce-reuse-recycle/.venv
-~/PhD/reduce-reuse-recycle/.venv/bin/python -c "import jax; print(jax.devices())"
+ln -sfn $R/venvs/rrr-jax ~/PhD/replications/reduce-reuse-recycle/.venv
+~/PhD/replications/reduce-reuse-recycle/.venv/bin/python -c "import jax; print(jax.devices())"
 ```
 
 ✅ **`[CudaDevice(id=0)]`.** The install takes about 5 minutes. ❌ **`[CpuDevice(id=0)]`**: the
@@ -174,6 +174,6 @@ interpreter path** and paste `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle/.
 Navigation: ⬅️ [7. Cluster environment](#7-build-the-2d-notebooks-environment-on-the-cluster) | 📋 [TOC](#table-of-contents)
 
 **The drip-repo walk of 2026-10-13**, whose working file is
-`/home/molef/PhD/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle/REPO_WALK.md`. Every recipe marked `ran` was run that day
+`/home/molef/PhD/replications/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle/REPO_WALK.md`. Every recipe marked `ran` was run that day
 on the laptop, except recipe 7, run on `mscluster88` from the walk file
-`/home/molef/PhD/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
+`/home/molef/PhD/replications/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.

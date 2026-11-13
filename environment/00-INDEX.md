@@ -27,7 +27,7 @@ to touch.
 |---|---|---|
 | [hpc/](hpc) | the cluster: partitions, nodes, GPUs, the launch protocol, measured throughput | 3 |
 | [storage.md](storage.md) | the two filesystems, sizes, and the disk-guard rule | 1 (flat, no second leaf yet) |
-| [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the authors' code for Du et al. 2023, cloned at `~/PhD/reduce-reuse-recycle` | 1 (flat, no second leaf yet) |
+| [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the authors' code for Du et al. 2023, cloned at `~/PhD/replications/reduce-reuse-recycle` | 1 (flat, no second leaf yet) |
 | [paper.md](paper.md) | the LaTeX build for `paper/iclr/` | 1 (flat, no second leaf yet) |
 
 How every fact here was established is in [provenance.md](provenance.md). The project failure
