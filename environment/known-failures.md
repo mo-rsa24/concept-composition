@@ -83,25 +83,29 @@ images; not yet written)
 ---
 
 #### Entry ID: poe-score-003
-**Name:** Compose rates scored before 2026-08-10 are higher than the current scorer gives
+**Name:** Compose rate counts the trainer's comparison strips as renders
 
-**Symptom:** rescoring an old run's saved samples gives a lower compose rate than the
-`compose_rate.json` it already has, by about 0.1 on training pairs and 0.2 on held-out pairs.
+**Symptom:** a pooled run's compose rate from step 20000 on carries n twice the number of
+pair-and-seed renders (176 and 128 where 88 and 64 were rendered), and changes sharply when the
+size filter is switched on or off.
 
-**Root cause:** the instance-count scorer gained a size filter on 2026-08-10
-(`MIN_BOX_FRACTION = 0.25` in `poe_repair/experiments/compose_scorer_validation/detection_scorer.py`):
-a box must span a quarter of the image's long side to count as an animal. Scores written before
-that date counted small boxes, such as a shadow beside one fused animal, as a second animal.
-Shown on `phase1_r8_100k` step 60000: 0.960 and 0.961 without the filter, 0.847 and 0.742 with it,
-on the same 304 images (jobs 86565 and 86587, 2026-11-13).
+**Root cause:** from step 20000 the trainer saves every render twice in
+`samples/per_epoch/epoch_*_step_*/`: `<quadrant>__<pair>__seedNN.png` and
+`<quadrant>__<pair>__seedNN__cmp.png`, a 992×384 three-panel strip (joint-prompt target, plain
+PoE, adapter). `compose_rate.py` used to split names on `__seed` and so scored the strips too. The
+target panel always holds two animals, so a strip scores as a compose whatever the adapter drew;
+with the 25% size filter on, the strip's small animals are dropped and it scores as fused instead.
+Shown on `phase1_r8_100k` step 60000, held-out: 0.961 with strips and no filter, 0.742 with strips
+and the filter, 0.906 from renders alone (jobs 86565, 86587, 86591, 2026-11-13).
 
-**Solution:** rescore before citing any compose rate whose JSON predates 2026-08-10: rerun
-`poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir <run>` and keep
-the old file beside the new one for comparison.
+**Solution:** fixed in `compose_rate.py` (commit 0811f029): only names matching `<pair>__seed<digits>`
+are scored. Rescore any `compose_rate.json` written before 2026-11-13 before citing it, with
+`1-lora-correction/scripts/animals_compose_transfer/score_compose_rate.sbatch` as the pattern, and
+keep the old file beside the new one.
 
 **First discovered:** step 10 of the running order, 2026-11-13
 
-**Affects steps:** any step quoting a compose rate from runs trained in late July or early August
+**Affects steps:** any step quoting a compose rate from a pooled run's saved samples (steps 10 to 14)
 
 **Category:** 🔴 critical
 
@@ -120,7 +124,7 @@ MultiScaleDeformableAttention.so: cannot open shared object`.
 extension cache, so it falls back to the plain-PyTorch version of the same layer.
 
 **Solution:** none needed. The fallback gives the same counts: on `phase1_r8_100k` step 60000 the
-rescoring matched to the third decimal (0.847 and 0.742 both ways). It is slower, about 42 minutes
+rescoring matched to the third decimal. It is slower, about 42 minutes
 for 3,050 images on an RTX 8000.
 
 **First discovered:** step 10 of the running order, 2026-11-13 (job 86565)

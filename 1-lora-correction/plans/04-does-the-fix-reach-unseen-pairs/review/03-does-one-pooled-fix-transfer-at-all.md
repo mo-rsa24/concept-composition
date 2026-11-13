@@ -1,13 +1,14 @@
 # 🧪 Review: does one pooled adapter transfer at all?
 
-**Being rescored (job 86591): every rate below from step 20000 on mixes the renders with their three-panel comparison strips, whose target panel always holds two animals, so none of those numbers is citable until the rescore lands.** This file judges
+**Answered yes: held-out 0.906 at step 60000 (n=64), level with the 0.909 on training pairs, where plain PoE composes near zero.** This file judges
 [the plan that trains one pooled adapter](../plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md).
 It exists to answer one cheap question before fifteen expensive runs are paid for: does the fix
 reach unseen pairs at all? It does, so the fifteen runs are warranted.
 
-Every checkpoint is scored with the current instance-count scorer, size filter included. The go-ahead for the fifteen runs is given below. One thing is still owed: the direction
-measures were wired after this run finished. The paper's draft and figure F8a still carry the 0.96 this run gave before the size
-filter existed; see [What the write-up owes](#what-the-write-up-owes).
+Every checkpoint is scored from the renders alone with the current instance-count scorer. The
+go-ahead for the fifteen runs is given below. One thing is still owed: the direction measures were
+wired after this run finished. The paper's draft and figure F8a still carry 0.96; see
+[What the write-up owes](#what-the-write-up-owes).
 
 ## Recommended prompt (to finish the read)
 
@@ -69,16 +70,23 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [x] ✅ Does held-out [compose rate](../../../../context/world/compose-rate.md) beat the level plain
-      PoE reaches with no fix at all? Yes, at step 60000, scored with the current instance-count
-      scorer (two or more animal boxes, each spanning at least 25% of the image's long side):
-      in-distribution 0.847 (n=176), held-out 0.742 (n=128). Per held-out pair: leopard×jaguar
-      0.938, seal×walrus 0.812, eagle×hawk 0.812, elephant×penguin (control) 0.812, cow×buffalo
-      0.750, cat×dog 0.625, frog×toad 0.625, goose×swan 0.562. Every pair is above plain PoE's
-      near-zero level. Scored 2026-11-13 (job 86565); numbers in the run folder's `compose_rate.json`.
-      **The size filter matters here.** Without it (`min_box_fraction` 0) the same step-60000 images
-      read 0.960 in-distribution and 0.961 held-out (job 86587), which is what this run was first
-      scored at, before the filter was added on 2026-08-10. The filter exists because the detector
-      counted small boxes such as a shadow beside one fused animal as a second animal.
+      PoE reaches with no fix at all? Yes. At step 60000, scored from the renders alone with the
+      instance-count scorer (two or more animal boxes, each spanning at least 25% of the image's
+      long side): in-distribution 0.909 (80 of 88), held-out 0.906 (58 of 64). Per held-out pair, 8
+      seeds each: cow×buffalo, goose×swan, leopard×jaguar and elephant×penguin (control) 1.0,
+      seal×walrus and eagle×hawk 0.875, cat×dog and frog×toad 0.75. Plain PoE composes near zero.
+      Scored 2026-11-13 (job 86591); numbers in the run folder's `compose_rate.json`.
+      **How the number was cleaned.** From step 20000 on, the trainer saves each render twice: as
+      itself and as a three-panel comparison strip (`__cmp`: joint-prompt target, plain PoE,
+      adapter). The scorer used to count the strips as renders, and their target panel always holds
+      two animals. The first scoring (0.961 held-out at step 60000) included them; so did a rescore
+      with the size filter (0.742), because the filter drops the strips' small animals. Scored
+      from renders alone, the filter changes 1 call in 64 (frog×toad seed 15, a speck it rightly
+      drops). The held-out grids with every box drawn are in the run folder's
+      `filter-calls-step-060000/` (job 86592).
+      **Read by eye, cat×dog is weaker than 0.75.** Of its 8 held-out seeds, 3 show a clear cat
+      beside a clear dog (9, 12, 16), seed 13 shows two cats, seeds 11 and 15 are layered sketches,
+      and seeds 10 and 14 hold one animal. The scorer counts animals and cannot tell a cat from a dog.
 
 ## Written before the run, answered after
 
@@ -93,9 +101,10 @@ Navigation: ⬅️ [Written before the run](#written-before-the-run-answered-aft
 Questions the result itself raised. **Nothing here may ever become the question above**, because it was
 written with the answer already visible.
 
-- [x] ✅ Do steps 70000 to 100000 change the read? No. Held-out reads 0.742, 0.734, 0.719 and
-      0.734 at steps 70000 to 100000, and in-distribution 0.864, 0.858, 0.869 and 0.852. Both have
-      been flat since step 20000 (held-out 0.727 there).
+- [x] ✅ Do steps 70000 to 100000 change the read? No. Held-out reads 0.88, 0.89, 0.83 and 0.91
+      at steps 70000 to 100000 (n=64 each), in-distribution 0.92 to 0.94 (n=88). From step 20000
+      on, held-out moves between 0.83 and 0.91 with no trend; one seed per pair is 0.016, so these
+      swings are a few seeds.
 - [ ] ⚠️ Does the direction axis agree? The two direction metrics (plan 02) were wired after this
       run's eval; a pair sitting at the no-fix level cannot yet be split delivery-null vs
       no-transfer.
@@ -122,18 +131,19 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 | What the paper says | What it owes alongside it |
 |---|---|
-| held-out compose rate 0.742 (n=128) at step 60000 where plain PoE composes near zero | the step, the scorer with its size filter, and that the in-distribution rate is 0.847 at the same step. `paper/iclr/DRAFT_MAP.md` and figure F8a still use the pre-filter 0.96, and F8a's claim that the adapter composes unseen pairs "at the rate it manages on pairs it did" has a gap of about 0.1 under this scorer |
+| held-out compose rate 0.906 (n=64) at step 60000, level with 0.909 on training pairs, where plain PoE composes near zero | the step; that the scorer counts animals and cannot tell a cat from a dog (cat×dog reads 0.75 by the scorer, 3 of 8 clean by eye); and that `paper/iclr/DRAFT_MAP.md` and F8a still carry the 0.96 that counted the comparison strips |
 | the pooled fix transfers to unseen pairs | that this is one pooled run, not a rate. The rate comes from the fifteen runs, and the sentence must not read as though this run supplied it |
 
 ## Go-ahead for the fifteen runs
 
 Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**On hold until the rescore lands (job 86591).** The number below includes the comparison strips. The backing number as first written: one pooled rank-8 adapter
-composes 0.742 of held-out renders at step 60000 (n=128, 8 unseen pairs, every pair at 0.562 or
-above), scored by the instance-count scorer with its 25% size filter, where plain PoE composes near
-zero. The rate is flat from step 20000 to 100000, so training length is not what the fifteen runs
-need to vary. Decided 2026-11-13.
+**Go.** Step 11's fifteen training runs may launch. The backing number: one pooled rank-8 adapter
+composes 0.906 of held-out renders at step 60000 (58 of 64, 8 unseen pairs, every pair at 0.75 or
+above), level with 0.909 on its training pairs, where plain PoE composes near zero. Scored from the
+renders alone by the instance-count scorer with its 25% size filter. Held-out stays between 0.83
+and 0.91 from step 20000 to 100000, so training length is not what the fifteen runs need to vary.
+Decided 2026-11-13.
 
 One condition before launch, carried from [the live-curves review](02-three-live-curves-while-training.md#asked-after-the-result):
 anchor images exist for only 2 of the 19 sampled pairs, so the in-training compose-rate curve
@@ -152,5 +162,5 @@ Navigation: ⬅️ [Go-ahead](#go-ahead-for-the-fifteen-runs) | 📋 [TOC](#tabl
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Rewrite F8a's claim and DRAFT_MAP's number to the post-filter rates, then re-read the pairs that
-came out no better than plain PoE on the two direction measures.
+Update F8a's numbers and DRAFT_MAP's to the renders-only rates (F8a's claim itself holds), then
+re-read the pairs that came out no better than plain PoE on the two direction measures.
