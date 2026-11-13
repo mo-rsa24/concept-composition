@@ -26,7 +26,7 @@ the model to copy. The core `RENAMES.md` lists every old path.
 - [ ] **Wait for `41c11448` to close, or give it the new paths**, before compositionality moves,
       because it writes the toy card and scope 10.
 - [ ] **Bring the rest of branch `exec/can-a-classifier-supply-the-missing-term` into the core
-      repo:** the regional composer for plan 10's layout question, the silicotb route files, an
+      repo:** the [regional composer](10-what-poe-loses-when-it-composes/is-the-layout-the-missing-piece.md#3--the-regional-composer) for plan 10's layout question, the silicotb route files, an
       `environment/hpc/nodes.md` edit and two walk maps.
 - [ ] **Create the GitHub remote and the cluster checkout** for whatever the classifier work
       becomes, after a yes. The real import check runs there, because the laptop's Python has no

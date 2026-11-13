@@ -504,3 +504,7 @@ Navigation: ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents)
 #### From project catalog
 
 </details>
+
+## Cross-references
+
+- The mention of **the regional composer** in [the plan for regrouping the core repo into project folders](../split-into-idea-repos.md#before-the-next-move).
