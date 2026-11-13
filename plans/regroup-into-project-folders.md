@@ -98,14 +98,18 @@ correction to the move.
 
 ### 3. 📁 Create the project folders and move the items
 
-- [ ] **3.1 Create the five project folders**, each with `README.md`, `plans/`, `report/`,
+- [x] **3.1 Create the five project folders**, each with `README.md`, `plans/`, `report/`,
       `artifacts/` and `src/`.
-- [ ] **3.2 Move every row of the inventory to its project**, with `git mv` for tracked items and
+- [x] **3.2 Move every row of the inventory to its project**, with `git mv` for tracked items and
       `mv` for ignored ones. Scope 10's plan `today-a-lora-on-the-text-encoders.md` goes to the
       text embedding, not with the rest of scope 10.
-- [ ] **3.3 Move the archive list into `_archive/`**, keeping the same sub-paths.
+- [x] **3.3 Move the archive list into `_archive/`**, keeping the same sub-paths.
   - Check: a script lists every path in the inventory and finds each one at its new home and
     nowhere else.
+  - ✅ 2026-11-13, commit `a47275b6`: 450 items moved by `scripts/regroup/move.py`, 0 left at an
+    old path, 0 missing at a new one; every move is in `scripts/regroup/moves.tsv`. The 18
+    experiment packages stay inside `poe_repair` for now, because scripts import them by name. The
+    tag `pre-regroup-move` undoes the whole step.
 
 ### 4. 🔧 Repair what the move broke
 
