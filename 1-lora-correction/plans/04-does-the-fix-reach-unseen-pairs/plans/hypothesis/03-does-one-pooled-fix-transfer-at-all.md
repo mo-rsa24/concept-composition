@@ -76,7 +76,7 @@ go/no-go call on Phase-2, the leave-one-pair-out set in plan 03.
 - [ ] Re-read the pairs that came out no better than plain PoE on the two direction
       measures, once `instrument-02-three-live-curves-while-training`'s first short run is
       green, so each such pair can be told apart by which of the two causes above it is.
-- [ ] Write the go/no-go note for the fifteen training runs into the review file, with the
+- [x] Write the go/no-go note for the fifteen training runs into the review file, with the
       number and step backing it. `verdict.json` says only that training finished
       without error; it is not this call.
 

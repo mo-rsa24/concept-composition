@@ -5,9 +5,8 @@
 It exists to answer one cheap question before fifteen expensive runs are paid for: does the fix
 reach unseen pairs at all? It does, so the fifteen runs are warranted.
 
-Every checkpoint is scored with the current instance-count scorer, size filter included. Two things
-are still owed: the direction measures were wired after this run finished, and the go-ahead note is
-unwritten. The paper's draft and figure F8a still carry the 0.96 this run gave before the size
+Every checkpoint is scored with the current instance-count scorer, size filter included. The go-ahead for the fifteen runs is given below. One thing is still owed: the direction
+measures were wired after this run finished. The paper's draft and figure F8a still carry the 0.96 this run gave before the size
 filter existed; see [What the write-up owes](#what-the-write-up-owes).
 
 ## Recommended prompt (to finish the read)
@@ -34,6 +33,7 @@ filter existed; see [What the write-up owes](#what-the-write-up-owes).
 - [Asked after the result](#asked-after-the-result)
 - [Could the answer be an artefact](#could-the-answer-be-an-artefact)
 - [What the write-up owes](#what-the-write-up-owes)
+- [Go-ahead for the fifteen runs](#go-ahead-for-the-fifteen-runs)
 - [Still open](#still-open)
 - [Next step](#next-step)
 
@@ -118,25 +118,39 @@ Navigation: ⬅️ [Asked after the result](#asked-after-the-result) | 📋 [TOC
 
 ## What the write-up owes
 
-Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-artefact) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
+Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-artefact) | 📋 [TOC](#table-of-contents) | [Next](#go-ahead-for-the-fifteen-runs) ➡️
 
 | What the paper says | What it owes alongside it |
 |---|---|
 | held-out compose rate 0.742 (n=128) at step 60000 where plain PoE composes near zero | the step, the scorer with its size filter, and that the in-distribution rate is 0.847 at the same step. `paper/iclr/DRAFT_MAP.md` and figure F8a still use the pre-filter 0.96, and F8a's claim that the adapter composes unseen pairs "at the rate it manages on pairs it did" has a gap of about 0.1 under this scorer |
 | the pooled fix transfers to unseen pairs | that this is one pooled run, not a rate. The rate comes from the fifteen runs, and the sentence must not read as though this run supplied it |
 
+## Go-ahead for the fifteen runs
+
+Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
+
+**Go.** Step 11's fifteen training runs may launch. The backing number: one pooled rank-8 adapter
+composes 0.742 of held-out renders at step 60000 (n=128, 8 unseen pairs, every pair at 0.562 or
+above), scored by the instance-count scorer with its 25% size filter, where plain PoE composes near
+zero. The rate is flat from step 20000 to 100000, so training length is not what the fifteen runs
+need to vary. Decided 2026-11-13.
+
+One condition before launch, carried from [the live-curves review](02-three-live-curves-while-training.md#asked-after-the-result):
+anchor images exist for only 2 of the 19 sampled pairs, so the in-training compose-rate curve
+averages over those 2. Generate anchors for the other 17 first, or read the fifteen runs' compose
+rate from a scoring pass like this one rather than from the live curve.
+
 ## Still open
 
-Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
+Navigation: ⬅️ [Go-ahead](#go-ahead-for-the-fifteen-runs) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
 | whether the direction axis agrees | re-running eval with the two direction metrics from plan 02 wired in | telling a delivery-null pair apart from a no-transfer pair |
-| the go/no-go note for the fifteen runs | writing it, with the number and step backing it | nothing technically, but those runs are being launched on an undocumented call. `verdict.json` is a run-health marker, not this call |
 
 ## Next step
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Decide what the paper does with the post-filter number (DRAFT_MAP and F8a), then write the go-ahead
-note for the fifteen runs naming 0.742 at step 60000 and the scorer it came from.
+Rewrite F8a's claim and DRAFT_MAP's number to the post-filter rates, then re-read the pairs that
+came out no better than plain PoE on the two direction measures.
