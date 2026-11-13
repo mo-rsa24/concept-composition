@@ -21,8 +21,8 @@ All five views at one step come from the same x_t, so any difference between
 them is the prompt and nothing else.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/decode_expert_frames.py
-    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/decode_expert_frames.py --stride 2
+    CUDA_VISIBLE_DEVICES=0 python scripts/decode_expert_frames.py
+    CUDA_VISIBLE_DEVICES=0 python scripts/decode_expert_frames.py --stride 2
 """
 
 from __future__ import annotations

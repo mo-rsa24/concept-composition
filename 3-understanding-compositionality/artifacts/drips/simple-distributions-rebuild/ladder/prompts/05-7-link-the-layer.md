@@ -33,7 +33,7 @@ What to read
   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md.
 - Claims 2 and 4 of 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, which this layer rests on.
 - Claims 2 (with 2a to 2c), 3 and 5 and runs 1 and 2 of
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, which this layer rests on.
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, which this layer rests on.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

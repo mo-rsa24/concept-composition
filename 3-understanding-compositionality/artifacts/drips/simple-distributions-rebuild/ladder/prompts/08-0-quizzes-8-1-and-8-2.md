@@ -59,7 +59,7 @@ What is already known
   label is a fixed function of the image the term is exactly zero, so the wet dog is a data
   condition (does either expert's data hold A as it looks under B), and the shift was found at 20%
   overlap and missed at 0% (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run 1;
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
 - With report-mined labels a label term survives: on claim 7.4's quadrant labels (A read with
   probability 0.9 when true, B read inside A∩B only when A was read) it is +0.105 nats for (A,B)
   inside A∩B, strongly negative for (¬A,B) there, and zero elsewhere, and +0.105 is −ln 0.9

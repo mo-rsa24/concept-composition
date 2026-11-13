@@ -5,12 +5,12 @@ writes rows.csv for the scorers: image, the full prompt the image is scored agai
 benchmark prompt as written, "{a} and {b}" or "{a} with {b}"; "{a} and {b}" for held-out
 pairs), then model, method, adapter, sampler, steps, guidance, resolution, pair, seed, group,
 setting, nfe. nfe is left empty for the wave 1 sidecars, which carry no count; the baseline
-sidecars written by 1-lora-correction/scripts/review_baseline_cell.py carry their method, sampler, steps, guidance,
+sidecars written by scripts/review_baseline_cell.py carry their method, sampler, steps, guidance,
 setting and counted nfe, and those values are kept. Rows whose image is already in --skip (a scores
 file) are left out, so a later call picks up only new tiles.
 
 Usage (any python3 on the cluster):
-  python3 1-lora-correction/scripts/review_score_rows.py --root <paper_review dir> --census <review_step4/census>
+  python3 scripts/review_score_rows.py --root <paper_review dir> --census <review_step4/census>
       --repo <repo> --folders r1_joint r1_poe early_steps --out rows.csv [--skip scores_long.csv]
   Baseline folders name their set as a subfolder: --folders co3_default/r1 co3_default/r3 superdiff_default/r1 ...
 """
@@ -33,7 +33,7 @@ def slug(c: str) -> str:
 
 def benchmark(repo):
     out = {}
-    for line in open(os.path.join(repo, "1-lora-correction/scripts/review_benchmark_pairs.txt")):
+    for line in open(os.path.join(repo, "scripts/review_benchmark_pairs.txt")):
         if line.startswith("#") or not line.strip():
             continue
         a, b, conn, group = line.strip().split("|")
@@ -44,7 +44,7 @@ def benchmark(repo):
 def held_out(repo):
     """Concepts with their articles from scripts/review_held_out_pairs.txt; group from held-out-set.md."""
     groups = {}
-    text = open(os.path.join(repo, "1-lora-correction/report/paper-review/held-out-set.md")).read()
+    text = open(os.path.join(repo, "report/paper-review/held-out-set.md")).read()
     for g, pair in re.findall(r"^\| (hard|easy but unseen|not competing) \| ([^|]+?) \|", text, re.M):
         pair = re.sub(r"\s*\(.*\)$", "", pair)
         groups[tuple(p.strip() for p in pair.split("×"))] = g
@@ -91,7 +91,7 @@ def main():
                     unknown.add(pair); continue
                 prompt, group = held[pair]
             col = m.get("column")
-            if col is None:  # a baseline sidecar from 1-lora-correction/scripts/review_baseline_cell.py
+            if col is None:  # a baseline sidecar from scripts/review_baseline_cell.py
                 rows.append({"image": img, "prompt": prompt, "run": folder, "model": m["model"],
                              "method": m["method"], "adapter": m["adapter"], "sampler": m["sampler"],
                              "steps": m["steps"], "guidance": m["guidance"],

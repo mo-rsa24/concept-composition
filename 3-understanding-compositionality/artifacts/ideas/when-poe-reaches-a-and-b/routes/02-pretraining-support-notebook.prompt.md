@@ -2,7 +2,7 @@ I want a polished teaching notebook that runs one small experiment and explains 
 
 ## Where this comes from
 
-Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. I am walking an idea in artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md: when does a product of two diffusion experts (composition by adding their scores) generate samples that are both A and B? The medical reason: a pneumothorax classifier leans on chest drains, and the films I want to generate are pneumothorax without a drain, which are rare in NIH data.
+Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. I am walking an idea in 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md: when does a product of two diffusion experts (composition by adding their scores) generate samples that are both A and B? The medical reason: a pneumothorax classifier leans on chest drains, and the films I want to generate are pneumothorax without a drain, which are rare in NIH data.
 
 What the walk has settled so far:
 - An expert trained on A's data learns the density of its training set; when experts are composed separately (score_A + score_B), the label never enters the loss.
@@ -34,13 +34,13 @@ Every number in a markdown cell is printed by a code cell above it, and the math
 ## Where it runs and lands
 
 - Conda environment `co3` (`co3_bw` on the Blackwell GPU nodes). One GPU is plenty; CPU also works at this size.
-- Notebook: artifacts/ideas/when-poe-reaches-a-and-b/pretraining-support-on-four-quadrants.ipynb, executed top to bottom with outputs saved.
+- Notebook: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/pretraining-support-on-four-quadrants.ipynb, executed top to bottom with outputs saved.
 - Figures also saved as PNGs to artifacts/results/does-pretraining-support-reach-a-and-b/, with a README.md card saying what each figure shows and how it was made, and a results.json whose every row carries N, seed, construction, r and the quadrant shares.
 
 ## Return
 
-Close with a fenced return package, and also write it to artifacts/ideas/when-poe-reaches-a-and-b/routes/02-pretraining-support-notebook.return.md:
-  origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2, child 2a · route 2
+Close with a fenced return package, and also write it to 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/02-pretraining-support-notebook.return.md:
+  origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2, child 2a · route 2
   ask: the pretraining-support check as a labelled teaching notebook
   deliverable: the notebook path, the results folder, the top-right share at N = 0, 300 and 10000 (mean ± sd), and construction (1)'s share at r = 0.05 and r = 0
   changes for the walk: one line on whether pretraining support alone can choose A∩B

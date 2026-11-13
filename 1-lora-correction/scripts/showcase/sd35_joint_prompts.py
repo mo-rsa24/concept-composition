@@ -10,7 +10,6 @@ import argparse, json, os, sys
 import torch
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import check as check_subject
 
 MODEL = "stabilityai/stable-diffusion-3.5-medium"

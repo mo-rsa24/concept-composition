@@ -1,7 +1,7 @@
 """Task 8.2: where does softness live? Sweep the step at which the adapter hands off to the
 frozen model, rendering the switch points the clean-tail grid did not (20 and 30 exist).
 
-Same machinery, constants and checkpoint as `1-lora-correction/scripts/corrector_window_sweep.py --clean-tail`
+Same machinery, constants and checkpoint as `scripts/corrector_window_sweep.py --clean-tail`
 (rank 32 @ 30050, lambda 1.2, k=0 so no corrector, cat x dog seeds 9 to 16), so the new renders
 sit beside the old ones in `clean_tail/<pair>/seed_N/` under the same filename pattern and every
 downstream read treats them alike. Scores each render with the compose count and the DINOv2
@@ -27,7 +27,6 @@ OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/crispness")
 
 
 def main() -> None:
-    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     from poe_repair.methods._poe_langevin import run_lora_langevin_windowed_poe
     cws._disk_guard(cws.OUT)

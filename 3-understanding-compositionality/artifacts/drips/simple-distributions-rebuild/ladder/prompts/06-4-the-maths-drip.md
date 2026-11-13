@@ -26,7 +26,7 @@ What to read
 - Quiz 6.1's results: the misses that become first rungs.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
   line: the journey plans, vault notes, textbook and video for this layer.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md: the toy and its
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md: the toy and its
   w = 1 numbers.
 
 What is already known
@@ -37,13 +37,13 @@ What is already known
   Gaussians).
 - By Bayes' rule p(A|x) = p(x|A)p(A)/p(x), so p(x)·p(A|x)^w·p(B|x)^w is
   p(x)^(1 − 2w)·p(x|A)^w·p(x|B)^w up to a constant, and at w = 1 it is construction (1),
-  p(x|A)·p(x|B)/p(x) (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
+  p(x|A)·p(x|B)/p(x) (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - SDXL composes two prompts at w = 7.5 as ε_∅ + w(ε_A − ε_∅) + w(ε_B − ε_∅), and the 2D work
   measured only w = 1 (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - The quadrant toy here is the four-quadrant answer-key toy, blobs at (±0.5, ±0.5), std 0.15, A is
   x1 > 0 and B is x2 > 0, and at w = 1 with "contains" labels and an A∩B share r it puts 0.989
   within 3 std of (0.5, 0.5) for every r from 0.25 to 0.001, with Z = r
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
 - 0.989 is 1 − e^(−9/2), the mass one blob holds within 3 std (when-poe-reaches-a-and-b idea map,
   run 4).
 - p(A|x) and p(B|x) are at most 1, so the guided target never exceeds p(x) (Bayes' rule).

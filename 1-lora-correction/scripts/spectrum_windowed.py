@@ -36,7 +36,7 @@ happen to have a larger correction norm overall.
 Cache-only, no GPU.
 
 Usage:
-    python 1-lora-correction/scripts/spectrum_windowed.py --pool outputs/animals_compose_transfer/pair_pool.yaml
+    python scripts/spectrum_windowed.py --pool outputs/animals_compose_transfer/pair_pool.yaml
 """
 
 from __future__ import annotations

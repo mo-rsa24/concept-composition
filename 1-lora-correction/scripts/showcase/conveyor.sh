@@ -69,7 +69,7 @@ for r in $(seq 1 "$ROUNDS"); do
   # Tell a crashed generator apart from an exhausted one. Round 2 of the first run on this card hit
   # a NameError introduced while the belt was live, produced no output, and the belt read that as
   # "no candidates left" and stopped clean. Those two look identical unless the exit code is checked.
-  PROP=$(XFORMERS_DISABLED=1 python3 "1-lora-correction/scripts/showcase/$PROPOSER" "$PER" 2>&1)
+  PROP=$(XFORMERS_DISABLED=1 python3 "scripts/showcase/$PROPOSER" "$PER" 2>&1)
   if [ $? -ne 0 ]; then
     echo "=== round $r: the generator failed, belt stops. Its error:"
     echo "$PROP" | tail -5
@@ -95,7 +95,7 @@ for r in $(seq 1 "$ROUNDS"); do
   # target on the left, what PoE does without the adapter on the right. SHEETDIR keeps each belt's
   # output in its own folder so a judging pass is one directory rather than a mixed pile.
   SHEETNAME="${SHEETPREFIX:-belt}-$(date +%H%M%S)-r$r"
-  HALF="${SHEETHALF:-210}"   python3 1-lora-correction/scripts/showcase/mono_poe_grids.py --pairs $SLUGS ${MONOONLY:+--mono-only} \
+  HALF="${SHEETHALF:-210}"   python3 scripts/showcase/mono_poe_grids.py --pairs $SLUGS ${MONOONLY:+--mono-only} \
       --label "${SHEETLABEL:-belt} round $r, seeds $ROUND_SEEDS" \
       --pairs-per-figure "${SHEETROWS:-5}" --max-seeds "${SHEETCOLS:-8}" \
       --prefix "$SHEETNAME" --out "$G/$SHEETDIR" > /tmp/conv_sheet_$$.log 2>&1

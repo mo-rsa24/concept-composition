@@ -19,7 +19,7 @@ The evidence column cites files by these short names, with a line number after t
 | `walk05` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md` |
 | `ladder02`, `ladder04`, `ladder10`, `ladder11` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md`, `04-the-parts-world.md`, `10-latent-space-and-vaes.md`, `11-the-text-conditioned-testbed.md` |
 | `overlap-map`, `overlap-compiled` | `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md`, `COMPILED.md` |
-| `a-and-b-map` | `artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md` |
+| `a-and-b-map` | `3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md` |
 | `testbed-map` | `3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md` |
 | `out/` | `toy/rebuild/out/` |
 

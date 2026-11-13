@@ -23,8 +23,8 @@ compared against the eps actually stepped with, and scaled by ||r_t||.
 See tests/test_interaction_term_canaries.py for the full argument.
 
 Usage:
-    python 1-lora-correction/scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0 --check-canary
-    python 1-lora-correction/scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0.5
+    python scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0 --check-canary
+    python scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0.5
 """
 
 from __future__ import annotations

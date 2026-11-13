@@ -202,7 +202,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 | Liu et al. 2022, *Compositional Visual Generation with Composable Diffusion Models* | the AND and NOT operators built from conditional and unconditional scores | confident |
 | `notebooks/simple_distributions.ipynb` | the JAX reference: `ProductEBMDiffusionModel` (cell 6) adds two separately trained energies, which is construction (2); `NegationEBMDiffusionModel` (cell 8); the 2D datasets (cells 14 to 20) | read in this session |
 | `anneal_samplers.py` | the PyTorch annealed MALA, CHA, UHA and ULA samplers to reuse | read in this session, two MALA bugs under Checks outstanding |
-| [the earlier walk on this idea](../../../3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md) | runs on ideal and trained 2D experts: trained MLP experts within `0.04` nats of ideal ones; UHA within `0.02` total variation of the perfect-sampler floor on five composition kinds; reverse diffusion off on every kind but disjunction | its own runs, read in this session |
+| [the earlier walk on this idea](../poe-overlap-dial/IDEA_MAP.md) | runs on ideal and trained 2D experts: trained MLP experts within `0.04` nats of ideal ones; UHA within `0.02` total variation of the perfect-sampler floor on five composition kinds; reverse diffusion off on every kind but disjunction | its own runs, read in this session |
 
 ## Next step
 

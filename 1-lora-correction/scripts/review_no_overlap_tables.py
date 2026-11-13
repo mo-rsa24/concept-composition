@@ -1,13 +1,13 @@
 """Tables 1 and 3 restricted to prompts and pairs that share no concept with the training pairs.
 
-Reads the same per-image file as 1-lora-correction/scripts/review_build_tables.py (scores_long.csv) and the training
+Reads the same per-image file as scripts/review_build_tables.py (scores_long.csv) and the training
 pool (pair_pool_v58.yaml). A concept is a noun phrase of the prompt with its article and colour word
 removed ("a red car" -> "car"). An image is kept when neither of its two concepts appears in any
 training pair. The full-set means are printed first, so the numbers can be checked against
 main_table.csv and held_out_ablation.csv before the subset is read.
 
 Usage:
-  python3 1-lora-correction/scripts/review_no_overlap_tables.py --scores <scores_long.csv> --out <results dir>
+  python3 scripts/review_no_overlap_tables.py --scores <scores_long.csv> --out <results dir>
 """
 from __future__ import annotations
 

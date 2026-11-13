@@ -37,7 +37,7 @@ What to read
 - toy/rebuild/phase5_dial.py and toy/rebuild/phase5_finetune.py: the reference.
 - toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by
   python -m rebuild.phase5_tables.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/, its README and
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/, its README and
   answer_key.json: the answer key.
 - The layer 5 maths drip's dispatch.md: my notation.
 
@@ -103,7 +103,7 @@ What is already known
 - The answer key is a second toy: one Gaussian blob of std 0.15 per quadrant at (±0.5, ±0.5), A is
   x1 > 0, B is x2 > 0, A∩B the top-right blob, shares counted within 3 std of a blob's centre on a
   441 × 441 grid over [−1.1, 1.1]² (answer-key-quadrants README, in
-  artifacts/ideas/when-poe-reaches-a-and-b/runs/).
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/).
 - The answer key's A is the right half where the dial's is the left, so its A∩B is top-right where
   the dial's is top-left (ladder file 05, step 4).
 - Construction (1), p(x|A)·p(x|B)/p(x) with "contains" labels, holds 0.9886 at r = 0.001 (0.989

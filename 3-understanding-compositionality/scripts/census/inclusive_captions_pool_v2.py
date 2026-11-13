@@ -22,7 +22,7 @@ same in both arms, so it cannot separate them, and it is there so a result can b
 afterwards.
 
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      3-understanding-compositionality/scripts/census/inclusive_captions_pool_v2.py --out-dir <where the manifest goes>
+      scripts/census/inclusive_captions_pool_v2.py --out-dir <where the manifest goes>
 """
 from __future__ import annotations
 

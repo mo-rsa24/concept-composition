@@ -22,7 +22,7 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The text-conditioned testbed"
   row of the Bricks table.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 7 and 12.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 7 and 12.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md: the
   label route.
 

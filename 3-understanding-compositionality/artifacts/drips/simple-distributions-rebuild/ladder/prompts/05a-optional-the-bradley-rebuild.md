@@ -59,12 +59,12 @@ What is already known
   the simple product's vary by 17.0000 (checks/reparam.out).
 - On the four-quadrant answer key, experts that model only their own coordinate reach 0.9999
   (plain) and 0.989 (background-divided) in the top-right blob with no A∩B data
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/answer_key.json).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/answer_key.json).
 - The parts world with a loose half (variance 1.0) puts A∩B weight 1.000 at 0% overlap, and with an
   empty half 0.000 (step file 05, step 6).
 - Across an invertible warp of the four-quadrant toy, construction (1) changes by 4e-17 and the
   plain product by 0.035, 0.080 and 0.126 at area stretches 2.6, 9 and 49
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md).
 - Layer 10's latent brick, rebuild/latent.py, is not built yet, and the learned invertible feature
   space is its first piece (REBUILD_WALK.md, brick "Composing in a latent space").
 

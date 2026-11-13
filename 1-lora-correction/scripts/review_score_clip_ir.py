@@ -7,8 +7,8 @@ composition/focus/eval_metrics.py's ImageRewardScorer makes (that file does not 
 under co3's transformers 4.44.1, which lacks Qwen2-VL).
 
 Usage:
-  python 1-lora-correction/scripts/review_score_clip_ir.py --images a.png b.png --prompts "p" "p" --out probe.csv
-  python 1-lora-correction/scripts/review_score_clip_ir.py --in rows.csv --out scores.csv   (columns image,prompt;
+  python scripts/review_score_clip_ir.py --images a.png b.png --prompts "p" "p" --out probe.csv
+  python scripts/review_score_clip_ir.py --in rows.csv --out scores.csv   (columns image,prompt;
       rows already in --out are skipped and new rows appended, so a stopped run resumes)
 """
 from __future__ import annotations

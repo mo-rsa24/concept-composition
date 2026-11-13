@@ -21,11 +21,11 @@ baseline reuses that cell's own cached poe.png rather than re-rendering it. Eval
 seeds are phase1_r8_100k's own held-out seed pool, 9-16 (seed_pool.json).
 
 Usage:
-    python 1-lora-correction/scripts/showcase/transfer_matrix.py --census
-    python 1-lora-correction/scripts/showcase/transfer_matrix.py --fill [--pairs a_leopard__x__a_jaguar,...]
-    python 1-lora-correction/scripts/showcase/transfer_matrix.py --score
-    python 1-lora-correction/scripts/showcase/transfer_matrix.py --render
-    python 1-lora-correction/scripts/showcase/transfer_matrix.py --strip
+    python scripts/showcase/transfer_matrix.py --census
+    python scripts/showcase/transfer_matrix.py --fill [--pairs a_leopard__x__a_jaguar,...]
+    python scripts/showcase/transfer_matrix.py --score
+    python scripts/showcase/transfer_matrix.py --render
+    python scripts/showcase/transfer_matrix.py --strip
 """
 
 from __future__ import annotations
@@ -47,7 +47,7 @@ from poe_repair.methods._sampling import run_lora_residual_inject_masked, write_
 from poe_repair.run import make_ctx
 from poe_repair.training_cache import DEFAULT_CACHE_ROOT
 
-POOLED_LORA_ROOT = Path("1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora")
+POOLED_LORA_ROOT = Path("artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora")
 DEFAULT_CHECKPOINT_RUN = "phase1_r8_100k"
 
 
@@ -59,7 +59,7 @@ def resolve_checkpoint(run_name: str) -> tuple[Path, Path]:
     not the path recorded in checkpoints/latest.json: phase1_r8_100k's latest.json
     still records the pre-archival absolute path
     (outputs/animals_compose_transfer/pooled_lora/...), from before the run was
-    archived to 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/; the
+    archived to artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/; the
     file itself lives beside latest.json, latest.json just wasn't updated when the
     run moved. What's on disk here is ground truth; a recorded path elsewhere may not be.
     """

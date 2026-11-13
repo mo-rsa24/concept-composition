@@ -13,10 +13,10 @@ plain-product and adapter columns attach the same checkpoint and differ only in 
 adapter is switched on for (none of the fifty steps, or all of them), and each render checks the
 window it actually got.
 
-    python 1-lora-correction/scripts/figure_candidates.py --column mono --pairs "a horse|an owl" --seeds 9 10
-    python 1-lora-correction/scripts/figure_candidates.py --column poe  --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
-    python 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
-    python 1-lora-correction/scripts/figure_candidates.py --sheet --pairs "a horse|an owl" --seeds 9 10
+    python scripts/figure_candidates.py --column mono --pairs "a horse|an owl" --seeds 9 10
+    python scripts/figure_candidates.py --column poe  --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
+    python scripts/figure_candidates.py --column ours --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
+    python scripts/figure_candidates.py --sheet --pairs "a horse|an owl" --seeds 9 10
 """
 from __future__ import annotations
 
@@ -47,7 +47,6 @@ def parse_pair(s: str, allow_ask_first: bool = False) -> tuple[str, str]:
     a, b = (p.strip() for p in s.split("|"))
     # The subject lists are a hard constraint of this project, and a render path that skips the
     # check is how a refused subject reaches a sheet anyway.
-    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     check(a, allow_ask_first=allow_ask_first)
     check(b, allow_ask_first=allow_ask_first)

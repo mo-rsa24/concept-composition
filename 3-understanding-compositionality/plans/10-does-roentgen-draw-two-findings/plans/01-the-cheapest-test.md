@@ -60,7 +60,7 @@ For Claude to execute. Ask Claude to do these.
 ### 1. 📊 Build the pair table
 
 - [x] **1.1** Download the NIH ChestX-ray14 label file to `data/nih_cxr14/Data_Entry_2017_v2020.csv` (112,120 rows, 9 MB, not committed). ✓ verified (112,121 lines including the header, 2026-10-06)
-- [x] **1.2** Write `3-understanding-compositionality/scripts/medical_pair_table.py`: per finding, the count of images; per pair, the count with both, the count expected if the two were independent, and the ratio of observed to expected. Writes `artifacts/results/does-roentgen-draw-two-findings/pair-table.csv`. ✓ verified (14 findings printed, Pneumothorax 5,302, 91 pair rows written, 2026-10-06)
+- [x] **1.2** Write `3-understanding-compositionality/scripts/medical_pair_table.py`: per finding, the count of images; per pair, the count with both, the count expected if the two were independent, and the ratio of observed to expected. Writes `/home/molef/PhD/medical-imaging/compositional_diffusion/a-two-findings-in-one-film/a1-does-roentgen-draw-two-findings/artifacts/results/does-roentgen-draw-two-findings/from-poe-repair-min/pair-table.csv`. ✓ verified (14 findings printed, Pneumothorax 5,302, 91 pair rows written, 2026-10-06)
   - Verify: the script prints 14 findings and their counts, and Pneumothorax is 5,302.
 
 ▶ **Next: [instruction 2.1](#2--pick-the-pair-and-approve-the-bar)** (you pick the pair from the table).
@@ -115,7 +115,7 @@ For you to follow manually. Do these yourself.
 
 ## Outputs
 
-- `artifacts/results/does-roentgen-draw-two-findings/pair-table.csv`
+- `/home/molef/PhD/medical-imaging/compositional_diffusion/a-two-findings-in-one-film/a1-does-roentgen-draw-two-findings/artifacts/results/does-roentgen-draw-two-findings/from-poe-repair-min/pair-table.csv`
 - contact sheets and the both-rate table, filed with a card entry per `ARTIFACT_TREE_FORMAT.md`.
 
 ## Environment facts this plan depends on

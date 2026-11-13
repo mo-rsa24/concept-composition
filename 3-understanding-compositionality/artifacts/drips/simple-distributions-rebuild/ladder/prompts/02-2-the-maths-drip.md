@@ -42,10 +42,10 @@ What is already known
   independent given x (step file 02, step 1).
 - Construction (2) targets a·b (step file 02, step 1).
 - The two differ by the factor 1/r, so after normalising they agree only where r is constant on the
-  region where a·b > 0 (step file 02, step 1; artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
+  region where a·b > 0 (step file 02, step 1; 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
   claim 3; 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
 - The idea maps write (1) as p(x|A)p(x|B)/p(x) with p(x) the background, while the step file's p(x)
-  is the composed product (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3;
+  is the composed product (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3;
   3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
 - The product of two Gaussians: N(0, 1)·N(2, 1) is N(1, 0.5) with log Z = log N(0; 2, 2) = -2.2655,
   the p2.prod_mean, p2.prod_var and p2.prod_logZ keys (step file 02, step 1;
@@ -65,7 +65,7 @@ What is already known
   the count that landed inside the canvas, so the result is a windowed histogram diagnostic and not
   the full-space TV (toy/rebuild/ideal.py, tv; the kinds notebook, cell 1).
 - Step 5's answer key uses 60 × 60 bins on [−1.5, 1.5]² and counts samples outside that box as
-  error (artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
+  error (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
   total_variation).
 - The MALA proposal has variance 2·ss, so its log-density divides by 4·ss; the repository's code
   divided by 2·ss² (step file 02, step 6).
@@ -76,9 +76,9 @@ What is already known
 - With 2·ss² it gives -0.18, -0.72, log α -0.36 and accept probability 0.6977 (step file 02, step 6;
   the p2.mala_* keys).
 - Every composition reports three numbers together: the A∩B share, the total variation to the exact
-  target and the normaliser Z (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5).
+  target and the normaliser Z (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5).
 - Reverse diffusion's share of 0.983 against the exact 0.989 hid a total variation 0.049 above the
-  floor (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5 and run 5).
+  floor (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5 and run 5).
 - The four outcome sentences are: construction (1) is construction (2) divided by a background
   expert; summed scores miss the product; for a fixed MALA step the accept step makes the target a
   stationary law of the chain, which removes the proposal's step-size bias, while a finite run can

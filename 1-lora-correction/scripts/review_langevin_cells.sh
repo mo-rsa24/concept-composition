@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PoE + Langevin on a named cell list for the best- and worst-cases grids (1-lora-correction/scripts/review_langevin_cells.py).
+# PoE + Langevin on a named cell list for the best- and worst-cases grids (scripts/review_langevin_cells.py).
 #   sbatch --partition=bigbatch ... or ssh <node> 'GPU=<i> CELLS=<file> CODE_COMMIT=<sha> nohup bash <launchers>/review_langevin_cells.sh > <log> 2>&1 < /dev/null & disown'
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers

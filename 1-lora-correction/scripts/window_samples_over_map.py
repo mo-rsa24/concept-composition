@@ -15,7 +15,7 @@ animal boxed twice); the caption carries that sentence.
 Reads images and the scored grid only; it does not sample and it does not
 score, so this figure and the window curves can never disagree.
 
-    python 1-lora-correction/scripts/window_samples_over_map.py
+    python scripts/window_samples_over_map.py
 """
 
 from __future__ import annotations

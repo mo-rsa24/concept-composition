@@ -12,7 +12,7 @@ words instead.
 
 Directories are read as ``<adapter>-<checkpoint>-<fix>``, which is the convention these runs write.
 
-  python3 1-lora-correction/scripts/mechanism_study/fix_grid.py --adapter orth3-20k --seeds 9 10 \
+  python3 scripts/mechanism_study/fix_grid.py --adapter orth3-20k --seeds 9 10 \
       --fix "no fix=no-fix" --fix "cat boost 50=cat-boost-50" \
       --out artifacts/results/<question> --prefix every-fix-orth3-20k
 """

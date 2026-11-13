@@ -26,7 +26,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
   row of the Bricks table.
 - 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 5.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 5.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

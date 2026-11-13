@@ -5,7 +5,7 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-idea resume artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md at claim 11: whether a
+/drip-idea resume 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md at claim 11: whether a
 beta-VAE, beta-TCVAE or FactorVAE on the 2D toy shows what happens inside Stable Diffusion's latent,
 read against Theorem 6.1 of arXiv 2502.04549, and what the smallest check is
 
@@ -25,7 +25,7 @@ Objectives
 4. If a check is chosen, add a Checks outstanding row naming the check and what each outcome means.
 
 What to read
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md: claims 10 and 11, the Held claims row, the
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md: claims 10 and 11, the Held claims row, the
   Runs table (run 6), the Routes table (route 7) and Checks outstanding (claim 2a).
 - The route 7 prompt in that map's routes/ folder: Theorem 6.1 and Lemma 6.2.
 - walk10.py in ~/Playground/PhD/simple-distributions-walk/ and the layer 10 maths drip's
@@ -68,7 +68,7 @@ What to hand back
 - Claim 11's rows in the Position table and Held claims, with the mark.
 - If a check is chosen, its Checks outstanding row with what each outcome means.
 - Claim 11's row is what step 7's cross-links read.
-- The proof: grep -n "^| 11\." artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md prints the
+- The proof: grep -n "^| 11\." 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md prints the
   claim's new mark.
 
 What you will see

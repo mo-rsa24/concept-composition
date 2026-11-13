@@ -34,7 +34,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
   row of the Bricks table: material for quiz 6.2.
 - 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1, and
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1: material for quiz 6.2.
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1: material for quiz 6.2.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
@@ -58,7 +58,7 @@ What is already known
   (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), and on the four-quadrant toy with
   "contains" labels it puts 0.989 within 3 std of the top-right blob for every A∩B share r from 0.25
-  to 0.001, with Z = r (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1).
+  to 0.001, with Z = r (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1).
 - Numbers for w > 1 come from the p6. keys of python -m rebuild.walk_numbers and from
   rebuild/out/phase6/phase6.json once step 1's reference has run, so before then a question asks for
   the derivation, never an invented number (layer 6, step 1).

@@ -6,7 +6,7 @@ plain PoE for 11-50, row 2 corrects 0-20 then plain PoE for 21-50, and so on
 to row 5, which corrects the whole run. Each row pairs the real sampled
 image with a track of the 50 denoising steps: green where the correction was
 on, grey where it was plain PoE. The track is the same drawing
-1-lora-correction/scripts/window_strip.py already uses for F4a's sliding window, so a reader
+scripts/window_strip.py already uses for F4a's sliding window, so a reader
 who has seen one has seen the vocabulary for both.
 
 The point of drawing it this way rather than as a seed x cutoff grid (an

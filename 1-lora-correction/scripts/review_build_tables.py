@@ -16,7 +16,7 @@ A cell is marked partial in the sidecar when fewer images were scored than the d
 (R1: 4 seeds per prompt; R3: 8 seeds per pair). Nothing is imputed.
 
 Usage:
-  python3 1-lora-correction/scripts/review_build_tables.py --scores <scores dir> --out <results dir>
+  python3 scripts/review_build_tables.py --scores <scores dir> --out <results dir>
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ ORDER = ["joint", "poe", "co3", "tome", "langevin", "ours"]
 SETS = {"animals": 66, "animals_objects": 144, "objects": 66}
 GROUPS = {"hard": ("hard", 3), "easy but unseen": ("easy", 29), "not competing": ("not_competing", 21)}
 DRAWS = 10_000
-# The bar for R1, as committed in 1-lora-correction/report/paper-review/protocol.md before any score: the interval on
+# The bar for R1, as committed in report/paper-review/protocol.md before any score: the interval on
 # ours minus PoE in BLIP-VQA, per set. Constants here so a change shows in a diff.
 BAR_LEVEL = 0.95
 BAR_ZERO = 0.0

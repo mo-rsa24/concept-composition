@@ -36,7 +36,7 @@ What to read
 - The compiled plan step 1 names: the steps, their order and the bars.
 - 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md: the candidate causes, signatures, parser
   categories and Checks outstanding.
-- artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md: the
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md: the
   route 8 return.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/11-the-text-conditioned-testbed.md, "Three
   builds, one variable each": the three stages.

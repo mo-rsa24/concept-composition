@@ -159,7 +159,7 @@ def main() -> int:
         "cells": rows,
     }, indent=2))
     print(f"\nwrote {OUT_DIR / 'slice_manifest.json'}")
-    print("score with: python 1-lora-correction/scripts/plot_dose_curves.py is NOT right here; "
+    print("score with: python scripts/plot_dose_curves.py is NOT right here; "
           "use the scorer directly over the manifest paths")
     return 0
 

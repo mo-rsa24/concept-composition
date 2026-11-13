@@ -1,11 +1,11 @@
 """The "and" vector sheet with only the references and x (the vector the repo's code calls x_fix) as the third expert.
 
-The positional build x_pos has its own sheet, written by 5-text-embedding-third-expert/scripts/and_vector_sheet.py --set positional,
+The positional build x_pos has its own sheet, written by scripts/and_vector_sheet.py --set positional,
 so this one stays the six-column comparison it has always been.
 
-Reuses the tiles 5-text-embedding-third-expert/scripts/and_vector_sheet.py rendered; only the columns and their labels change.
+Reuses the tiles scripts/and_vector_sheet.py rendered; only the columns and their labels change.
 
-    python3 5-text-embedding-third-expert/scripts/and_vector_x_sheet.py <tiles_dir> <out.png>
+    python3 scripts/and_vector_x_sheet.py <tiles_dir> <out.png>
 """
 import sys
 from pathlib import Path

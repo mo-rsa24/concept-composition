@@ -111,9 +111,9 @@ What is already known
   exact").
 - The project's own version of Table 1 crosses exact or trained experts with reverse diffusion or
   annealed MALA, with interactions of +0.054 ± 0.016 total variation at r = 0.05 and +0.232 ± 0.046
-  at r = 0.001 (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4 and run 7).
+  at r = 0.001 (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4 and run 7).
 - In that run, trained MALA reaches the right top-right share 0.989 at the wrong place, total
-  variation 0.391 (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4 and run 7).
+  variation 0.391 (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4 and run 7).
 
 Rules
 - Change nothing in the step files, rebuild/ or plan 26.

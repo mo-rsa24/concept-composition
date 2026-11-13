@@ -10,8 +10,8 @@
 #   wrong_pair  another pair's r_t, norm-matched, token-disjoint donor
 # Support means the oracle rises while both controls stay flat.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh
-#   CUDA_VISIBLE_DEVICES=1 bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh
+#   bash scripts/mechanism_study/run_dose_sweep.sh
+#   CUDA_VISIBLE_DEVICES=1 bash scripts/mechanism_study/run_dose_sweep.sh
 #
 # ~35s per cell, so about 4.5 hours. Resumable: a cell whose image exists is
 # skipped, so Ctrl-C and re-run continues.
@@ -65,7 +65,7 @@ for pair in "${PAIRS[@]}"; do
           skip_n=$((skip_n+1)); continue
         fi
         echo "[$(date -u +%H:%M:%S)] ($i/$TOTAL) $pair seed $seed lam $lam $row"
-        if $PY 1-lora-correction/scripts/interaction_term_inject.py \
+        if $PY scripts/interaction_term_inject.py \
              --pair "$pair" --seed "$seed" --lambda "$lam" --row "$row" \
              --exp-name "$EXP" >/dev/null 2>&1; then
           done_n=$((done_n+1))
@@ -83,4 +83,4 @@ echo "finished: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "generated $done_n, skipped $skip_n, failed $fail_n"
 echo
 echo "=== scoring ==="
-$PY 1-lora-correction/scripts/plot_dose_curves.py --root "$OUT"
+$PY scripts/plot_dose_curves.py --root "$OUT"

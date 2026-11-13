@@ -17,7 +17,7 @@ Related work I already have: Bradley et al. 2025a, Mechanisms of Projective Comp
 3. Verdict: known, a small new observation worth a paragraph, or wrong? And what would make it matter in practice for Stable Diffusion, whose decoder is not invertible?
 
 Return. Close with a fenced return package, and also write it to /home-mscluster/mmolefe/PhD/reduce-reuse-recycle/artifacts/ideas/when-poe-reaches-a-and-b/routes/07-exponent-sum-invariance.return.md:
-  origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 10 · route 7
+  origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 10 · route 7
   ask: is exponent-sum invariance under reparameterisation known, and does it matter for latent diffusion
   deliverable: the verdict, where it is stated if anywhere, and confidence flags
   changes for the walk: one line on how claim 10 should be worded

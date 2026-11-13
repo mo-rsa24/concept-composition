@@ -23,8 +23,8 @@ Reads frames only, no sampling and no VAE. Cost is the two embedding models
 over ~50 frames per arm per cell.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/trajectory_divergence.py
-    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/trajectory_divergence.py \
+    CUDA_VISIBLE_DEVICES=1 python scripts/trajectory_divergence.py
+    CUDA_VISIBLE_DEVICES=1 python scripts/trajectory_divergence.py \
         --cells 'a_cat__x__a_dog/*'
 """
 
@@ -86,7 +86,7 @@ _dino = None
 
 def dino_embed_paths(paths: list[Path]) -> np.ndarray:
     """L2-normalised CLS embeddings under DINOv2 ViT-S/14, same recipe as
-    1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py."""
+    scripts/cross_seed_lora_pooling/smoke_dino_distance.py."""
     import torch
     from PIL import Image
     from torchvision import transforms

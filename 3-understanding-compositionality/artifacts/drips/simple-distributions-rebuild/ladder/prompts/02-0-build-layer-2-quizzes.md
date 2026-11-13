@@ -73,7 +73,7 @@ What is already known
   p2.product_of_noised_mean 0.2326, and p2.mala_fixed_log_alpha 0.045 against
   p2.mala_old_log_alpha -0.36 (toy/rebuild/out/walk-numbers.json).
 - The three numbers every composition reports are the share in A∩B, the total variation to the
-  exact composed density and the normaliser Z (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
+  exact composed density and the normaliser Z (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
   claim 5).
 
 Rules

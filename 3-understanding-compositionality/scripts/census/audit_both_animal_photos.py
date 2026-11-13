@@ -30,7 +30,7 @@ Writes, under MOUNT_ROOT/outputs/inclusive_captions_pool/:
 
 Run it on a compute node; no GPU:
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      3-understanding-compositionality/scripts/census/audit_both_animal_photos.py
+      scripts/census/audit_both_animal_photos.py
 """
 from __future__ import annotations
 

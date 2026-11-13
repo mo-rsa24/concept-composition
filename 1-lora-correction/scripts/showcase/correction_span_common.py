@@ -14,7 +14,7 @@ The statistic: mean over seeds of the per-seed mean, over EARLY_STEPS, of the or
 of ||r_t||^2, where r_t = eps~_j - eps_PoE is projected onto span{eps_a - eps_u, eps_b - eps_u,
 eps_u} at the same cached state.
 
-The rule the cache used (3-understanding-compositionality/scripts/build_training_cache.py, poe_repair/_sdxl/metrics.py):
+The rule the cache used (scripts/build_training_cache.py, poe_repair/_sdxl/metrics.py):
     eps~_k  = eps_u + g (eps_k - eps_u),  g = 7.5
     eps_PoE = eps~_a + eps~_b - eps_u
     r_t     = eps~_j - eps_PoE = g (eps_j - eps_a - eps_b + eps_u)
@@ -131,7 +131,7 @@ def verdict(early_ortho_mean: float) -> str:
 def bar_block() -> dict:
     return {"ORTHO_SHARE_REWEIGHT_IMPOSSIBLE": ORTHO_SHARE_REWEIGHT_IMPOSSIBLE,
             "ORTHO_SHARE_REWEIGHT_CANDIDATE": ORTHO_SHARE_REWEIGHT_CANDIDATE,
-            "EARLY_STEPS": list(EARLY_STEPS), "source": "1-lora-correction/scripts/showcase/correction_span_common.py"}
+            "EARLY_STEPS": list(EARLY_STEPS), "source": "scripts/showcase/correction_span_common.py"}
 
 
 def write_json(path: Path, data) -> None:

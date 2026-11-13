@@ -1,6 +1,6 @@
 """Three-column comparison for each arm of the correction-loss variant set.
 
-A copy of 1-lora-correction/scripts/joint_poe_adapter_grid.py with RUN and STEP_DIR taken as
+A copy of scripts/joint_poe_adapter_grid.py with RUN and STEP_DIR taken as
 arguments instead of hard-coded, because a paper figure depends on the
 original's fixed paths.
 
@@ -20,7 +20,7 @@ The sound pair of cells is the default. --broken renders the other two with
 the reference labelled as wrong, so the exclusion is visible rather than
 silent. No score is averaged over cells whose reference is wrong.
 
-    co3 python 1-lora-correction/scripts/correction_loss_variants/arm_grid.py --all
+    co3 python scripts/correction_loss_variants/arm_grid.py --all
 """
 from __future__ import annotations
 

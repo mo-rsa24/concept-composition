@@ -34,9 +34,9 @@ What to read
 - The same file's steps 2 and 4: material for quiz 9.2.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The correction, learned
   back": material for quiz 9.2.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 and 9 and run 7: material for quiz
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 and 9 and run 7: material for quiz
   9.2.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card, material for quiz 9.2.
 - Layer 8's two quizzes and the layer 8 --math drip folder under artifacts/drips/: the notation for
   r(x) and r_t.

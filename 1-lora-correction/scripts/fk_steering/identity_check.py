@@ -5,7 +5,7 @@ means two animals and says nothing about which two. This asks the detector for e
 by name and reports, per tile, how many boxes of each concept survive the same confidence,
 size and overlap rules the compose scorer uses.
 
-    <co3 python> 1-lora-correction/scripts/fk_steering/identity_check.py <sheet sidecar json> [--device cuda:0]
+    <co3 python> scripts/fk_steering/identity_check.py <sheet sidecar json> [--device cuda:0]
 """
 from __future__ import annotations
 

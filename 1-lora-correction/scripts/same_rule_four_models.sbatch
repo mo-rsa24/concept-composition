@@ -8,13 +8,13 @@
 #
 # Figure 2 as a grid: three pairs by four models, joint prompt and PoE per cell. One model at a
 # time, freed before the next, then the three sheets. The plan is
-# 1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md.
+# plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md.
 #
 # Slurm does not create the log folder, so make it first:
 #   mkdir -p /datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models/logs
-#   sbatch --export=ALL,SEEDS=42 1-lora-correction/scripts/same_rule_four_models.sbatch
-#   sbatch --export=ALL,RUN_MODELS=sd35 1-lora-correction/scripts/same_rule_four_models.sbatch   # one column only
-#   sbatch --export=ALL,CHECK_LOAD=1 1-lora-correction/scripts/same_rule_four_models.sbatch    # load all four, render nothing
+#   sbatch --export=ALL,SEEDS=42 scripts/same_rule_four_models.sbatch
+#   sbatch --export=ALL,RUN_MODELS=sd35 scripts/same_rule_four_models.sbatch   # one column only
+#   sbatch --export=ALL,CHECK_LOAD=1 scripts/same_rule_four_models.sbatch    # load all four, render nothing
 set -uo pipefail
 REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 OUTROOT=/datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models

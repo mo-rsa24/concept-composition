@@ -20,7 +20,6 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 from main_study_grids import grid  # noqa: E402
 
 SEEDS = [1, 2, 4, 9, 10, 11, 12, 13, 14, 15]

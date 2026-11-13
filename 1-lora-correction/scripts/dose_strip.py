@@ -22,7 +22,7 @@ inconclusive arm and means fixing the instrument, not the threshold.
 
 Reads sampled images; it does not sample.
 
-    python 1-lora-correction/scripts/dose_strip.py --pair a_cat__x__a_dog --seed 9
+    python scripts/dose_strip.py --pair a_cat__x__a_dog --seed 9
 """
 
 from __future__ import annotations
@@ -98,7 +98,7 @@ def main() -> int:
         print(
             f"no dose images for {args.pair} seed {args.seed}. This script "
             "reads images, it does not sample.\n"
-            "  bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh",
+            "  bash scripts/mechanism_study/run_dose_sweep.sh",
             file=sys.stderr,
         )
         return 2
@@ -164,7 +164,7 @@ def main() -> int:
                 # Label by the validated RULE (>=2), not by the raw count.
                 # The count over-reports: a limb can clear the 0.30 confidence
                 # floor as its own instance. See
-                # 1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md
+                # artifacts/results/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md
                 ax.set_xlabel(("compose" if composed else "blend")
                               + (f"  (n={n})" if args.annotate_boxes else ""),
                               fontsize=8,

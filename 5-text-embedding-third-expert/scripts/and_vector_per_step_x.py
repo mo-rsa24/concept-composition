@@ -23,7 +23,7 @@ Two modes, and the pair of them is the measurement:
 
 The gap between the two is how much of the failure is state dependence rather than expressiveness.
 
-    python 5-text-embedding-third-expert/scripts/and_vector_per_step_x.py --mode per-step --seeds 2 6 --iters 50
+    python scripts/and_vector_per_step_x.py --mode per-step --seeds 2 6 --iters 50
 
 Writes <out>/per-step-x-<mode>-seedNN.json (the relative error at every step, before and after
 optimisation, beside the same number for the best existing third expert) and the rendered tile.
@@ -41,7 +41,6 @@ sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, concept_slug  # noqa: E402
 
 # The verdict bars, written here before the first run so they cannot move after the answer is seen.
@@ -59,7 +58,7 @@ def main() -> int:
     ap.add_argument("--mode", choices=("per-step", "constant"), default="per-step")
     ap.add_argument("--iters", type=int, default=50)
     ap.add_argument("--lr", type=float, default=0.05)
-    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition")
+    ap.add_argument("--out", type=Path, default=REPO / "artifacts/results/the-positional-and-vector")
     args = ap.parse_args()
 
     import torch

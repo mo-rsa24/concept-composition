@@ -16,7 +16,7 @@ sampling — only prompt encoding + init-latent resolution).
 
 Usage::
 
-    python 1-lora-correction/scripts/build_eval_cache.py \
+    python scripts/build_eval_cache.py \
         --prompt-a "a wolf" --prompt-b "a husky" \
         --joint-prompt "a wolf and a husky" --seed 9
 

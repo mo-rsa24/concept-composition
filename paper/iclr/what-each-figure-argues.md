@@ -96,7 +96,7 @@ equal height on purpose, because the figure makes no claim about relative mass.
 **The numbers.** None on the figure, by design. The caption carries the cell's
 provenance instead, since the figure face carries no chip.
 
-**Built.** `python scripts/where_poe_lands_on_the_manifold.py --layout print --seeds 12`
+**Built.** `python 3-understanding-compositionality/scripts/where_poe_lands_on_the_manifold.py --layout print --seeds 12`
 → `paper/iclr/figures/where-the-product-lands-on-the-manifold-seed12-print.pdf`.
 The four renders come from one cell in
 `outputs/showcase/where_each_condition_lands/pairs/a_cat__x__a_dog`: seed 12, one

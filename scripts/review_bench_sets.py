@@ -11,12 +11,12 @@ the shared latent of an integer seed instead. Seeds 9 to 12 (GenEval) and 9 to 1
 (T2I-CompBench) are used, because no run trained on them, while the starting noise of seeds 17 to 58
 is in the adapter's training cache.
 
-A prompt naming a subject of scripts/shared/disallowed_subjects.py is dropped and counted, never
+A prompt naming a subject of scripts/showcase/disallowed_subjects.py is dropped and counted, never
 rendered: BLOCKED always, ASK_FIRST unless the pair ledger allows that word for the set: frog and mouse for R1 and R5, frog for
 the two T2I-CompBench sets (a set's "allow" below). Each prompt keeps its index in the benchmark file, so a dropped prompt leaves a gap.
 
 PoE, ours and CO3 run on geneval_two only (the user's decision of 2026-11-11, job 13's row of
-1-lora-correction/report/paper-review/prze-10-compute.md). Its prompts split at " and " into the two concepts, the
+report/paper-review/prze-10-compute.md). Its prompts split at " and " into the two concepts, the
 rule R1 uses ("a photo of a bench and a sports ball" gives "a photo of a bench" and "a sports ball").
 
     python3 scripts/review_bench_sets.py --counts
@@ -34,7 +34,6 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import ASK_FIRST, is_allowed, words  # noqa: E402
 
 GENEVAL = REPO / "data/prompt-sets/geneval/evaluation_metadata.jsonl"

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Wave 1's three R1 jobs for the ICLR 56173 review response (1-lora-correction/report/paper-review/prze-10-compute.md,
+# Wave 1's three R1 jobs for the ICLR 56173 review response (report/paper-review/prze-10-compute.md,
 # jobs 4 to 6): the 276 Attend-and-Excite prompts at seeds 9 to 12, under protocol rules 2 and 4.
 #
 #   ROLE=r1-joint  the joint prompt as written: "{a} and {b}" for 240 prompts, "{a} with {b}" for 36   1,104 tiles

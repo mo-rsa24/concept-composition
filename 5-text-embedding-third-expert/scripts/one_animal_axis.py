@@ -25,15 +25,15 @@ position is its parts' positions added with the empty prompt's taken off. Summin
 similar size therefore moves the projection a long way by arithmetic alone, and a large number there
 is not by itself evidence about plurality. The number worth reading is its sign against the solos'.
 
-Four views of the prompt, as 5-text-embedding-third-expert/scripts/language_probes.py uses them. The pooled view is the primary
+Four views of the prompt, as scripts/language_probes.py uses them. The pooled view is the primary
 read, because adding two pooled vectors is a genuine vector-space addition, while position k does not
 hold the same word across two prompts of different length.
 
 Text encoders only, no UNet, fp32 on whatever device is free.
 
 Usage:
-    python 5-text-embedding-third-expert/scripts/one_animal_axis.py
-    python 5-text-embedding-third-expert/scripts/one_animal_axis.py --read-pairs
+    python scripts/one_animal_axis.py
+    python scripts/one_animal_axis.py --read-pairs
 """
 from __future__ import annotations
 
@@ -192,7 +192,7 @@ def main() -> int:
     ap.add_argument("--pool", type=Path,
                     default=REPO / "artifacts/_shared/cross_pair_pool_configs/cells_v58.json")
     ap.add_argument("--out", type=Path,
-                    default=REPO / "5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal")
+                    default=REPO / "artifacts/results/does-one-prompt-already-say-one-animal")
     ap.add_argument("--seed", type=int, default=0, help="the build/held-out split and the random floor")
     ap.add_argument("--read-pairs", action="store_true",
                     help="also read the four prompts of every pool pair off the checked axis")

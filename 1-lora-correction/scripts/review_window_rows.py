@@ -7,7 +7,7 @@ the all-50-steps images. Writes rows_windows.csv in the scores folder, in the co
 scorer reads.
 
 Usage (on mscluster, co3 python):
-  python 1-lora-correction/scripts/review_window_rows.py
+  python scripts/review_window_rows.py
 """
 from __future__ import annotations
 

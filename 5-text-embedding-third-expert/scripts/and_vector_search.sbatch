@@ -12,8 +12,8 @@
 # The excluded nodes are the bigbatch machines whose GPU is dead; a job landing there dies on the
 # guard below in one second.
 #
-#   sbatch --array=0-5 5-text-embedding-third-expert/scripts/and_vector_search.sbatch
-#   COLLECT=1 sbatch 5-text-embedding-third-expert/scripts/and_vector_search.sbatch        once the array is done
+#   sbatch --array=0-5 scripts/and_vector_search.sbatch
+#   COLLECT=1 sbatch scripts/and_vector_search.sbatch        once the array is done
 #
 set -uo pipefail
 REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min

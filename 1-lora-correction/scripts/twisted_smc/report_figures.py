@@ -8,9 +8,9 @@
    the twisted-SMC pick at every checkpoint. Composed from the PNGs the run saved.
 
 Writes both, plus a JSON sidecar with every number drawn, into
-1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/.
+artifacts/results/is-the-gap-the-samplers-or-the-models/.
 
-    python 1-lora-correction/scripts/twisted_smc/report_figures.py [--run-dir DIR]
+    python scripts/twisted_smc/report_figures.py [--run-dir DIR]
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = Path(__file__).resolve().parents[3]
-OUT = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
+OUT = REPO / "artifacts/results/is-the-gap-the-samplers-or-the-models"
 DEFAULT_RUN = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc/"
                    "twist_w64_b16_lr1e-04_s100000_20260905-072331")
 

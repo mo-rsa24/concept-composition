@@ -30,7 +30,7 @@ What to read
 - Quiz 7.1's results: the misses that become first rungs.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
   vault notes and textbook for this layer.
-- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md and artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md:
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md and 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md:
   the dial's numbers and the medical counts.
 
 What is already known
@@ -49,7 +49,7 @@ What is already known
   are").
 - p(no drain|x) is at most 1, so p(x|PTX)·p(no drain|x)^w never exceeds p(x|PTX) (Bayes' rule).
 - Negation's exponents sum to 1, so it is unchanged by an invertible warp (total variation 7e-17)
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
 - 1,906 of 3,543 NEATX pneumothorax films have no drain, and what is missing is a drain label on
   negatives, so a positive "no drain" label needs one (when-poe-reaches-a-and-b idea map, claims 6
   and 8).

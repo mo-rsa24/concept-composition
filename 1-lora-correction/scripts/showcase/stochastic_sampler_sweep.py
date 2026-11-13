@@ -40,7 +40,7 @@ from PIL import Image, ImageDraw
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
 
 import correct_early_then_clean_up as ce  # noqa: E402  the SDXL context, prompts, pinned noise, attach
 
@@ -130,7 +130,6 @@ def _disable(unet) -> None:
 
 
 def _enable(unet) -> None:
-    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     if hasattr(unet, "enable_adapters"):
         unet.enable_adapters()

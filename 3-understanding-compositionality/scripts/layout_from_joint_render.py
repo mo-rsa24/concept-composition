@@ -11,10 +11,10 @@ method; no deployed sampler would have it.
 
 Two instruments, and they do different jobs. GroundingDINO locates animal boxes soundly and
 cannot name a species: on 64 renders of "a photo of a cat" it put a "dog" box on all 64, median
-margin 0.054 (3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py). So the box comes from the detector and
+margin 0.054 (scripts/census/cat_condition_dog_rate.py). So the box comes from the detector and
 the species comes from zero-shot CLIP on the cropped box, which passed its own bar on those same
 64 crops at 64 of 64 and a median margin of 0.990
-(3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/crop_classifier_summary.json).
+(artifacts/results/does-the-cat-prompt-already-draw-dogs/crop_classifier_summary.json).
 
 What a seed has to do to be judgeable. Exactly two kept boxes, one called cat and one called dog,
 each above the classifier's 0.20 margin floor. Seeds 9 to 16 are the held-out set and come first;
@@ -28,7 +28,7 @@ CLIP at roughly 150 px against the 224 it expects. Box placement is unaffected, 
 ratio to the image side matters, but the species margin may be. Every record carries its source
 and its pixel size so the card can say which seeds were read at which resolution.
 
-Writes, under --out (default 3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/):
+Writes, under --out (default artifacts/results/is-the-layout-the-missing-piece/):
     boxes.json             one record per candidate seed: boxes in pixels and in latent cells,
                            the call and margin per box, the source render, and why a rejected
                            seed was rejected
@@ -38,7 +38,7 @@ Writes, under --out (default 3-understanding-compositionality/artifacts/results/
 Run it on a biggpu node's free device, per environment/hpc/execution-protocol.md:
     ssh mscluster106 'CUDA_VISIBLE_DEVICES=1 \
       /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/scripts/layout_from_joint_render.py'
+      /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/layout_from_joint_render.py'
 """
 from __future__ import annotations
 
@@ -71,7 +71,7 @@ JOINT_1024 = Path("/datasets/mmolefe/poe_repair_min/outputs/learned_and_token/or
 SHEET_DEFAULT = Path("/datasets/mmolefe/poe_repair_min/outputs/is_the_layout_the_missing_piece/"
                      "0-reference-where-the-joint-prompt-succeeds.png")
 SHEET_COLS, SHEET_ROWS, SHEET_TILE, SHEET_LABEL = 8, 4, 320, 28
-# Rendered by 3-understanding-compositionality/scripts/render_joint_references.py, from the same cached noise the
+# Rendered by scripts/render_joint_references.py, from the same cached noise the
 # sweep uses, so the layout and the sweep's picture are the same picture.
 JOINT_OURS = Path("/datasets/mmolefe/poe_repair_min/outputs/is_the_layout_the_missing_piece/joint")
 
@@ -89,7 +89,7 @@ MIN_FREE_DISK_FRACTION = 0.10
 
 
 def load_classifier_module():
-    """Import the crop classifier by path; 3-understanding-compositionality/scripts/census is not a package."""
+    """Import the crop classifier by path; scripts/census is not a package."""
     path = REPO / "scripts" / "census" / "crop_classifier_cat_vs_dog.py"
     spec = importlib.util.spec_from_file_location("crop_classifier_cat_vs_dog", path)
     module = importlib.util.module_from_spec(spec)
@@ -343,7 +343,7 @@ def main() -> int:
     ap.add_argument("--sheet", type=Path, default=SHEET_DEFAULT,
                     help="the 8 x 4 reference contact sheet, for seeds with no 1024 px render")
     ap.add_argument("--out", type=Path,
-                    default=REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece",
+                    default=REPO / "artifacts/results/is-the-layout-the-missing-piece",
                     help="where boxes.json and detected-layouts.png are written")
     ap.add_argument("--wanted", type=int, default=WANTED, help="how many judgeable seeds to select")
     ap.add_argument("--joint-dir", type=Path, default=JOINT_OURS,

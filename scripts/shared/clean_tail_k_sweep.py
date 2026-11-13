@@ -8,7 +8,7 @@ the control every other k is measured against.
 
 No training. Three checkpoints that already exist are loaded and rendered from.
 
-This refines an earlier reading of the same question. `1-lora-correction/scripts/corrector_window_sweep.py`
+This refines an earlier reading of the same question. `scripts/corrector_window_sweep.py`
 --clean-tail asked it on one checkpoint at cutoffs 20 and 30 and read the answer pooled over
 eight seeds, landing at a 0.038 mean gain against the 0.05 bar. Two things change here: the
 cutoff grid is finer and sits where that curve was still moving, and every number is read per
@@ -116,7 +116,7 @@ CUTOFFS = (25, 29, 33, 36, 40, 50)   # adapter on for steps [0, k); 50 is the co
 CONTROL_CUTOFF = 50
 LAMBDA_VALUE = 1.0                   # the adapter's own correction, held fixed across the sweep
 
-MIN_MONO_GAIN = 0.05                 # CLEAN_MIN_MONO_GAIN in 1-lora-correction/scripts/corrector_window_sweep.py,
+MIN_MONO_GAIN = 0.05                 # CLEAN_MIN_MONO_GAIN in scripts/corrector_window_sweep.py,
                                      # the same constant this question was asked with before
 MAX_COMPOSE_LOSS_SEEDS = 1           # composed seeds may fall by at most this against k = 50
 
@@ -135,7 +135,7 @@ CHECKPOINTS = {
 OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/clean_tail_k_sweep")
 REF_DIR = OUT / "references"
 REF_JSON = OUT / "references.json"
-RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
+RESULTS_DIR = REPO / "artifacts/results/is-the-gap-the-samplers-or-the-models"
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
 
 

@@ -36,9 +36,9 @@ from poe_repair.training_cache import CellPath
 log = logging.getLogger("render_joint_failure_repair_cell")
 
 REPO = Path(__file__).resolve().parents[1]
-DEFAULT_RUN = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+DEFAULT_RUN = REPO / "artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 DEFAULT_CACHE = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache")
-DEFAULT_OUT = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/joint-failure-repair"
+DEFAULT_OUT = REPO / "artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair"
 
 
 def build_argparser() -> argparse.ArgumentParser:

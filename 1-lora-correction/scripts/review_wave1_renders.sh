@@ -1,6 +1,6 @@
 #!/bin/bash
-# Wave 1 of the ICLR 56173 review response (1-lora-correction/report/paper-review/prze-10-compute.md, the jobs table),
-# under 1-lora-correction/report/paper-review/protocol.md. Launched straight on a node with nohup over SSH, because
+# Wave 1 of the ICLR 56173 review response (report/paper-review/prze-10-compute.md, the jobs table),
+# under report/paper-review/protocol.md. Launched straight on a node with nohup over SSH, because
 # biggpu allows one Slurm job per user and that slot is held.
 #
 #   ROLES is a space-separated list, run in order in one process:
@@ -45,15 +45,15 @@ for role in $ROLES; do
   echo "--- $role  $(date +%H:%M:%S)"
   case "$role" in
     fig5)
-      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/shared/concept_pair_sheet.py --column mono --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 mono FAILED"
-      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/shared/concept_pair_sheet.py --column poe  --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 poe FAILED"
-      FIGURE_CANDIDATES_OUT="$OUT/figure5" "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "a lighthouse|a stormy sea" --seeds 10 \
+      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/concept_pair_sheet.py --column mono --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 mono FAILED"
+      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/concept_pair_sheet.py --column poe  --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 poe FAILED"
+      FIGURE_CANDIDATES_OUT="$OUT/figure5" "$PY" scripts/figure_candidates.py --column ours --pairs "a lighthouse|a stormy sea" --seeds 10 \
         --checkpoint "$CKPT" --window 50 --tag "$TAG" || echo "ROLE fig5 ours FAILED" ;;
     early)
-      FIGURE_CANDIDATES_OUT="$OUT/early_steps" "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "${HELD[@]}" --seeds $SEEDS \
+      FIGURE_CANDIDATES_OUT="$OUT/early_steps" "$PY" scripts/figure_candidates.py --column ours --pairs "${HELD[@]}" --seeds $SEEDS \
         --checkpoint "$CKPT" --window 10 25 --tag "$TAG" || echo "ROLE early FAILED" ;;
     r3)
-      FIGURE_CANDIDATES_OUT="$OUT/r3_ours" "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "${HELD[@]}" --seeds $SEEDS \
+      FIGURE_CANDIDATES_OUT="$OUT/r3_ours" "$PY" scripts/figure_candidates.py --column ours --pairs "${HELD[@]}" --seeds $SEEDS \
         --checkpoint "$CKPT" --window 50 --tag "$TAG" || echo "ROLE r3 FAILED" ;;
     *) echo "ABORT: unknown role $role" >&2; exit 2 ;;
   esac

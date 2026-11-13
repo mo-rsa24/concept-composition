@@ -21,7 +21,7 @@ needs no GPU and cannot disagree with the curves it sits above.
 Column centres land exactly on the curve axis ticks: the curves axis spans
 lambda -0.125 to 1.125, half a column past each end, so column k sits over tick k.
 
-    python 1-lora-correction/scripts/compose_rate_vs_correction.py --layout grid5
+    python scripts/compose_rate_vs_correction.py --layout grid5
 """
 
 from __future__ import annotations

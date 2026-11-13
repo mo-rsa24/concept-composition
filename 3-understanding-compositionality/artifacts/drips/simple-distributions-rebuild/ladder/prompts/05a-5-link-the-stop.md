@@ -29,7 +29,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 5 rows of the Bricks
   table, "Overlap dial" and "Fine-tune variant".
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 2 and 3.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 2 (child 2b), 3 and 10.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 2 (child 2b), 3 and 10.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

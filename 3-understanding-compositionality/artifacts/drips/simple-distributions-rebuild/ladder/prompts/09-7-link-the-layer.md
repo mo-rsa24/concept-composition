@@ -24,8 +24,8 @@ What to read
   first line: the textbook chapters, the journey plan and the video to link against.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 9 row of the Bricks table
   ("The correction, learned back") and the journey plan it links, the score function.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 and 9 and run 7.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 and 9 and run 7.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card.
 
 What is already known

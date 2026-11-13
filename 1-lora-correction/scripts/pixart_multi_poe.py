@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Plain product-of-experts over any number of prompts on PixArt-alpha, whose only text encoder is Flan-T5-XXL.
 
-The same arithmetic 1-lora-correction/scripts/concept_multi_poe.py runs on SDXL and 5-text-embedding-third-expert/scripts/sd35_and_vector_render.py runs on
+The same arithmetic scripts/concept_multi_poe.py runs on SDXL and scripts/sd35_and_vector_render.py runs on
 SD 3.5, on a model that carries no CLIP in any role:
 
     eps = eps_empty + gs * sum_i (eps_i - eps_empty)
@@ -16,10 +16,10 @@ is a learned sigma the sampler does not use), it passes the prompt attention mas
 it builds the resolution and aspect-ratio conditioning the 1024 model was trained with.
 
     # the identity check: one prompt through the released pipeline and through this script, same dtype
-    python 1-lora-correction/scripts/pixart_multi_poe.py --out <dir> --identity-check
+    python scripts/pixart_multi_poe.py --out <dir> --identity-check
 
     # the four columns on eight seeds
-    python 1-lora-correction/scripts/pixart_multi_poe.py --out <dir> --a "a cat" --b "a dog" --joint "a cat and a dog" \
+    python scripts/pixart_multi_poe.py --out <dir> --a "a cat" --b "a dog" --joint "a cat and a dog" \
         --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <out>/<a>__x__<b>/seedNN/<column>.png with a JSON sidecar; an existing tile is skipped.

@@ -19,7 +19,7 @@ and the rate curve carries the counting, with its own caveat.
 Restoring the chips is `--counts`, and the disagreement is why it is off by
 default rather than deleted.
 
-    python 1-lora-correction/scripts/window_position_grid.py
+    python scripts/window_position_grid.py
 """
 
 from __future__ import annotations

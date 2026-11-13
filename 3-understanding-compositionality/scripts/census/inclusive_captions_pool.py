@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Build the four photo sets the inclusive-captions pilot trains on, out of COCO 2017.
 
-The design (4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/COMPILED.md) asks for 300 cat-only, 300
+The design (artifacts/ideas/inclusive-captions-axis/COMPILED.md) asks for 300 cat-only, 300
 dog-only, 200 both-animal and 200 neither-animal photos, the same 800 in every arm, with only the
 caption on the both-animal photos changing between arms. Two numbers in that design are
 assumptions until this runs: that COCO holds 200 usable both-animal photos at all, and that the
@@ -45,7 +45,7 @@ Writes, under MOUNT_ROOT/outputs/inclusive_captions_pool/:
 
 Run it on a compute node; it needs no GPU and reads a 450 MB json:
     scripts/cluster.sh sh "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      3-understanding-compositionality/scripts/census/inclusive_captions_pool.py"
+      scripts/census/inclusive_captions_pool.py"
 """
 from __future__ import annotations
 
@@ -112,7 +112,7 @@ WANT = {"cat_only": 200, "dog_only": 200, "both": 91, "neither": 91}
 # ones a careful look could not call either way, and they go out with the rest because a photo
 # nobody can name is a photo that teaches the condition something unknown.
 #
-# The reasons per index are in 4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json.
+# The reasons per index are in artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json.
 # The indices are stable: the shuffle's sequence depends on each pool's length, not on WANT.
 EXCLUDED_BOTH = frozenset({
     0, 2, 9, 15, 16, 17, 24, 26, 27, 28, 40, 48, 57, 58, 61, 65, 69, 72, 74, 76, 77, 82, 84, 85,

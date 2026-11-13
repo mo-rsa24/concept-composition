@@ -55,7 +55,7 @@ What is already known
   printed (rebuild/out/walk-numbers.json).
 - The trained composed score's relative error is 1.30 at level 0 for r = 0.001 and under 0.04 from
   level 30 up, so a correction is needed most where the noise is lowest
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md, "Score
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md, "Score
   error").
 
 Rules

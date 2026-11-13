@@ -13,8 +13,8 @@ written by `--save-trajectory`. Generating them is plan 03/05's job, not this
 script's.
 
 Usage:
-    python 1-lora-correction/scripts/fork_curve.py --pair a_cat__x__a_dog --seed 9
-    python 1-lora-correction/scripts/fork_curve.py --root outputs/residual_diagnostics/existence/pairs
+    python scripts/fork_curve.py --pair a_cat__x__a_dog --seed 9
+    python scripts/fork_curve.py --root outputs/residual_diagnostics/existence/pairs
 """
 
 from __future__ import annotations
@@ -103,9 +103,9 @@ def main() -> int:
             "no cells have both a PoE and a Mono trajectory.\n"
             "This script reads trajectories, it does not sample. Produce them "
             "with:\n"
-            "  python 1-lora-correction/scripts/interaction_term_inject.py --pair <slug> --seed <n> "
+            "  python scripts/interaction_term_inject.py --pair <slug> --seed <n> "
             "--lambda 0\n"
-            "  python 1-lora-correction/scripts/interaction_term_inject.py --pair <slug> --seed <n> "
+            "  python scripts/interaction_term_inject.py --pair <slug> --seed <n> "
             "--lambda 1\n"
             "(both write latent_trajectory.pt). Looked under:\n"
             + "\n".join(f"  {p}" for p in looked),

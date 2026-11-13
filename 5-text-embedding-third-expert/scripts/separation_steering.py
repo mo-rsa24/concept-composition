@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Separation steering on SDXL's plain product of experts, for two prompts (default "dog", "cat").
 
-The loop is 5-text-embedding-third-expert/scripts/and_vector_sheet.py's render(): eps = eps_empty + w * sum_i (eps_i - eps_empty), w = 7.5,
+The loop is scripts/and_vector_sheet.py's render(): eps = eps_empty + w * sum_i (eps_i - eps_empty), w = 7.5,
 50 DDIM steps, the starting noise of `a_cat__x__a_dog` per seed. At steps 0 to 9 only, before each PoE update,
 the latent takes one gradient step on a loss read from the two experts' cross-attention:
 
@@ -13,9 +13,9 @@ the latent takes one gradient step on a loss read from the two experts' cross-at
 The UNet is frozen; nothing is trained. One steering step is a forward and backward pass over the two
 experts' prompts (batch 2), and the PoE update that follows is the usual forward over (dog, cat, empty).
 
-    python 5-text-embedding-third-expert/scripts/separation_steering.py --calibrate --seed 1
-    python 5-text-embedding-third-expert/scripts/separation_steering.py --render --eta small=0.5 medium=2 large=8 --seeds 1 2 3 4 5 6 7 8
-    python 5-text-embedding-third-expert/scripts/separation_steering.py --sheet <out.png> --eta small=0.5 medium=2 large=8 --seeds 1 2 3 4 5 6 7 8
+    python scripts/separation_steering.py --calibrate --seed 1
+    python scripts/separation_steering.py --render --eta small=0.5 medium=2 large=8 --seeds 1 2 3 4 5 6 7 8
+    python scripts/separation_steering.py --sheet <out.png> --eta small=0.5 medium=2 large=8 --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <OUT>/separation_steering/<a>__x__<b>/seedNN/eta_<label>.png with a JSON sidecar; an existing
 tile is skipped. `--eta plain=0` renders the loop with no steering at all (the identity check against
@@ -35,7 +35,6 @@ REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 STEER_STEPS = 10        # steps 0 to 9

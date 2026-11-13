@@ -6,7 +6,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-idea resume 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md at claim 1, with
-artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md claims 7 and 12 and
+3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md claims 7 and 12 and
 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md beside
 it, until the testbed's candidate causes and its parser are fixed
 
@@ -27,11 +27,11 @@ Objectives
 4. Build the probe table, which places every probe as isolating or not isolating each cause, every
    row naming its check.
 5. At compile, write the plan and the route 8 return file at
-   artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md.
+   3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md.
 
 What to read
 - 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, end to end: the testbed map.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, end to end: the parent map, claims 7 and 12
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, end to end: the parent map, claims 7 and 12
   and route 8.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md, end to
   end: the label route.
@@ -86,7 +86,7 @@ What is already known
   token's cross-attention map read; Okawa et al. 2023 is confident and Park et al. 2024 is "likely,
   verify" (parent map, claim 12).
 - Route 8, which launched this walk, asks for a return at
-  artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md, and no
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md, and no
   return exists yet (parent map, route 8).
 - The testbed must first reproduce that construction (1) with "contains" labels holds 0.989 in A∩B
   down to a data share of 0.001 (route 8's prompt; parent map claims 2 and 9, runs 1 and 5).

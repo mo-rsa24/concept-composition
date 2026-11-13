@@ -1,10 +1,10 @@
 """Count ours' network evaluations per image (protocol rule 6) by running its real renderer on one cell.
 
-Runs 1-lora-correction/scripts/figure_candidates.py unchanged, with every U-Net forward call on the class counted: calls, and rows
+Runs scripts/figure_candidates.py unchanged, with every U-Net forward call on the class counted: calls, and rows
 (the batch of each call). Prints the totals for the process at exit. The tile goes wherever FIGURE_CANDIDATES_OUT
 points, kept apart from the evaluation folders.
 
-    FIGURE_CANDIDATES_OUT=<scratch> python 1-lora-correction/scripts/review_count_ours_nfe.py --column ours --pairs "a seal|a walrus" \
+    FIGURE_CANDIDATES_OUT=<scratch> python scripts/review_count_ours_nfe.py --column ours --pairs "a seal|a walrus" \
         --seeds 11 --checkpoint <pt> --window 50 --tag count
 """
 from __future__ import annotations

@@ -4,7 +4,7 @@ clean-estimate residual, instead of the noise residual, give a crisper held-out 
 
 The bars live here, in source, so they cannot move after the answer is seen. They were written
 on 2026-09-06 before the run started, from the rank-32 baseline numbers in
-3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/ and from the contrast read of the baseline's
+report/does-training-longer-help-the-pooled-lora/ and from the contrast read of the baseline's
 renders (grey-level standard deviation, 8 seeds at lambda 1.0: 37.5 against the joint prompt's
 46.4 and plain PoE's 40.6 on the 1024 px renders).
 
@@ -462,7 +462,7 @@ def stage_verdict() -> dict:
     base = json.loads((BASELINE_PROBE / "results.json").read_text())["summary"]["full"][LAMBDA]
     out = {"bars": {"DRIFT_SUPPORT": DRIFT_SUPPORT, "DRIFT_NULL": DRIFT_NULL, "MIN_COMPOSE_COUNT": MIN_COMPOSE_COUNT,
                     "CONTRAST_SUPPORT_CLOSURE": CONTRAST_SUPPORT_CLOSURE, "CONTRAST_NULL_CLOSURE": CONTRAST_NULL_CLOSURE,
-                    "source": "1-lora-correction/scripts/showcase/experiment_e_x0_loss.py"},
+                    "source": "scripts/showcase/experiment_e_x0_loss.py"},
            "baseline_30050": {"compose_count": int(round(base["compose_rate"] * base["n"])), "mean_dino_drift": round(base["mean_dino_drift"], 4)}}
     joint_c = float(np.mean([_grey_std(final_render("joint", s)) for s in SEEDS]))
     base_c = float(np.mean([_grey_std(final_render("lora_base", s)) for s in SEEDS]))

@@ -16,7 +16,7 @@ and the ones inside this repo should link back, so the next reader finds both.
 
 Objectives
 1. Run xref-cadence over the layer 12 --math drip folder under artifacts/drips/, claim 8 of
-   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, its HYPOTHESIS.md if step 4 ran, and the
+   3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, its HYPOTHESIS.md if step 4 ran, and the
    retrospective the layer 12 walk closed on.
 2. Write links both ways between those files and the reference sets inside this repo.
 3. Write one-way links toward the two outside plans.
@@ -26,7 +26,7 @@ What to read
   line: the two journey plans (the LoRA update and the SVD of the real matrix).
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The correction at scale" row of
   the Bricks table.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8, with its route 6 return.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8, with its route 6 return.
 - ~/Playground/PhD/medical-imaging/compositional_diffusion/b-shortcut-through-a-device/b1-drain-shortcut-in-pneumothorax/plans/01-measure-the-drain-gap.md:
   the drain-gap plan.
 - ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:

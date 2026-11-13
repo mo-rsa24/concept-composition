@@ -7,7 +7,7 @@
 #SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/r32_wd_ema-%j.out
 #SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/r32_wd_ema-%j.err
 # Plan 20 (01-showcase-the-trained-lora): experiment D again with an EMA of the LoRA weights.
-# Every flag is experiment D's launch (1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh: rank 32,
+# Every flag is experiment D's launch (scripts/showcase/experiment_d_weight_decay.sh: rank 32,
 # weight decay 0.1, the kill criterion off) plus --ema-decay, so the raw weights replicate D's
 # trajectory and the EMA weights are the one new arm. 800 epochs x 50 steps = 40,000 steps, a
 # checkpoint every 100 epochs (5,000 steps), the tracking set every 200 epochs.

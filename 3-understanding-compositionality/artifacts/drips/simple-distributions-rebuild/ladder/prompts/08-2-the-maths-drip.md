@@ -31,7 +31,7 @@ What to read
   line: the journey plans, textbook chapters and vault notes for this layer, among them section 8.2,
   the route through p(c1, c2 | x).
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, and
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
@@ -39,10 +39,10 @@ What is already known
 - By Bayes, log p(x|A) = log p(A|x) + log p(x) − log p(A), so r(x) = log p(A,B|x) − log p(A|x) −
   log p(B|x) + log[p(A)p(B)/p(A,B)], which makes r the label term plus a constant (the route through
   p(c1, c2 | x), section 8.2 of the textbook on this layer's Study first line;
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
 - Construction (1), score(x|A) + score(x|B) − score(x), targets p(x|A)p(x|B)/p(x), which is
   p(x)·p(A|x)·p(B|x) up to a constant, and assumes A and B independent given x
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and "What the words are").
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and "What the words are").
 - When each label is a fixed function of the image the term is exactly zero, so the wet dog is a
   data condition rather than a third operator, and the shift was found at 20% overlap and missed at
   0% (mean x1 −0.79 against −0.48) (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run

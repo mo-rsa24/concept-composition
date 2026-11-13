@@ -24,7 +24,7 @@ frame at step k is the run's own estimate of where it is heading (Tweedie
 from x_t and the PoE prediction that steered the path, then the VAE), no
 sampling.
 
-    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_reuse_figure.py
+    CUDA_VISIBLE_DEVICES=0 python scripts/rt_reuse_figure.py
 """
 
 from __future__ import annotations

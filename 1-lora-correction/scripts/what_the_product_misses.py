@@ -16,7 +16,7 @@ Gaussian at their midpoint, so the blue region is drawn where the maths puts it,
 where a lens-shaped intersection would look tidier. The midpoint of "a cat" and "a dog"
 is the whole argument.
 
-    python 1-lora-correction/scripts/what_the_product_misses.py
+    python scripts/what_the_product_misses.py
 """
 
 from __future__ import annotations

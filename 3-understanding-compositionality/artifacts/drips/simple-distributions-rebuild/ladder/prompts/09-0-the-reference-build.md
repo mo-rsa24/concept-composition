@@ -20,7 +20,7 @@ training on the joint directly. This reference is built one layer ahead, during 
 so my walk in step 4 has numbers to match. Its brick row in REBUILD_WALK.md says "not built".
 
 Objectives
-1. Reproduce artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/ (run 7)
+1. Reproduce 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/ (run 7)
    first, whose MALA cells sit +0.001 above the floor with exact experts and +0.267 with trained
    ones at r = 0.001.
 2. In /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain/toy, write
@@ -52,11 +52,11 @@ What to read
   layer 8's reference was built.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The correction, learned
   back": the brick row this reference fills.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card, with every number to reproduce.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
   mala_fixed.py and run_samplers.py: run 7's toy and MALA, to port.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4, 4.1, 5 and 9.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4, 4.1, 5 and 9.
 - toy/rebuild/train.py, toy/rebuild/model.py, toy/rebuild/samplers.py, toy/rebuild/parts_world.py
   and toy/rebuild/device.py: the functions to call.
 
@@ -73,10 +73,10 @@ What is already known
   files rebuild/correction.py and rebuild/phase9_correction.py, and is marked not built
   (REBUILD_WALK.md, brick "The correction, learned back").
 - The condition {A, B} trains on only the share r of the data that is A and B, while composition
-  reuses all of it (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
+  reuses all of it (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
 - The interaction term is exact in 2D, so a correction fine-tuned on the few A∩B samples can be
   scored against it and against the joint model trained on the same samples
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
 - The toy is run 7's, which is not layer 5's: four Gaussian blobs at (±0.5, ±0.5) with σ = 0.15,
   top-right weight r and (1 − r)/3 for each other blob (the run card, "The toy"; exact_toy.py).
 - It uses construction (1) with "contains" labels, A the two right blobs, B the two top blobs,

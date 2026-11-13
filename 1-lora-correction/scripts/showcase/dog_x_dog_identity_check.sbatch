@@ -28,7 +28,7 @@ nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv \
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) disk_use=${USE_PCT}%"
 
-$PY 1-lora-correction/scripts/showcase/dog_x_dog_identity_check.py \
+$PY scripts/showcase/dog_x_dog_identity_check.py \
   --seed 9 \
   --out "$OUT/identity_check_seed9.json"
 

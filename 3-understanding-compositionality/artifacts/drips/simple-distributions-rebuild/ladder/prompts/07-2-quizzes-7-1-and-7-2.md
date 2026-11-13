@@ -35,7 +35,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
   the Bricks table: material for quiz 7.2.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md (run 3) and
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md (claims 6 and 8): material for quiz 7.2.
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md (claims 6 and 8): material for quiz 7.2.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
@@ -65,7 +65,7 @@ What is already known
   3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3).
 - The medical cells wanted are pneumothorax without drain and drain without pneumothorax, a
   negation; 1,906 of 3,543 NEATX pneumothorax films have no drain, and what is missing is a drain
-  label on negatives (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8).
+  label on negatives (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8).
 - Numbers for the quadrant toy, the parts world and the positive label come from the p7. keys of
   python -m rebuild.walk_numbers and from rebuild/out/phase7/phase7.json once step 1's reference has
   run, so before then a question asks for the derivation, never an invented number (layer 7, step

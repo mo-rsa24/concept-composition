@@ -60,7 +60,7 @@ for lam in "${LAMBDAS[@]}"; do
   for arm in "${ARMS[@]}"; do
     n=$((n+1))
     echo "=== cell $n/16  lambda=$lam  arm=$arm  $(date +%H:%M:%S) ==="
-    "$PY" 1-lora-correction/scripts/interaction_term_inject.py \
+    "$PY" scripts/interaction_term_inject.py \
         --pair "$PAIR" --seed "$SEED" --lambda "$lam" --row "$arm"
   done
 done

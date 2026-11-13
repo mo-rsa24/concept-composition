@@ -14,7 +14,7 @@ number that is supposed to describe it are read together.
 A seed whose target does not show both subjects is labelled as such on its row. Any statistic
 comparing a render to that target is meaningless on that row, and the row exists to show why.
 
-  python3 1-lora-correction/scripts/showcase/checkpoint_filmstrip.py \
+  python3 scripts/showcase/checkpoint_filmstrip.py \
       --run-dir <the wandb run dir> --pair a_cat__x__a_dog \
       --out artifacts/results/<question> --prefix seed-flips
 """

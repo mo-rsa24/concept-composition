@@ -6,7 +6,7 @@ page that has to stay under 16 MB. And it burns a source line onto the top of an
 not this pilot's own output, because a caption can be read past and a label on the pixels cannot.
 
 Run from the repo root:
-    python3 4-inclusive-captions/artifacts/scenes/how-the-inclusive-captions-pilot-works/make_page_images.py
+    python3 artifacts/scenes/how-the-inclusive-captions-pilot-works/make_page_images.py
 """
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
@@ -19,27 +19,27 @@ MAX_W = 1800
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 OWN = [  # this pilot's own output: no banner
-    (REPO / "4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png", "both-sheet-00.jpg"),
-    (REPO / "4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_02.png", "both-sheet-02.jpg"),
+    (REPO / "artifacts/results/the-inclusive-captions-photo-pool/both_sheet_00.png", "both-sheet-00.jpg"),
+    (REPO / "artifacts/results/the-inclusive-captions-photo-pool/both_sheet_02.png", "both-sheet-02.jpg"),
     (AUDIT_SRC, "audit-page-00.jpg"),
 ]
 BORROWED = [  # from another experiment in this repo: banner burnt on
-    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet.jpg",
+    (REPO / "artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet.jpg",
      "borrowed-cats-and-dogs-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL with no adapter attached   "
-     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint"),
-    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed02/poe.png",
+     "artifacts/results/does-poe-of-cats-and-dogs-match-the-joint"),
+    (REPO / "artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed02/poe.png",
      "borrowed-poe-seed02.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL, cat x dog product, seed 2   "
-     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint"),
-    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/contact_sheet.png",
+     "artifacts/results/does-poe-of-cats-and-dogs-match-the-joint"),
+    (REPO / "artifacts/results/does-the-cat-prompt-already-draw-dogs/contact_sheet.png",
      "borrowed-contact-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL, the cat prompt on 64 seeds   "
-     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs"),
-    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/crop_classifier_sheet.png",
+     "artifacts/results/does-the-cat-prompt-already-draw-dogs"),
+    (REPO / "artifacts/results/does-the-cat-prompt-already-draw-dogs/crop_classifier_sheet.png",
      "borrowed-crop-classifier-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   the same 64 crops, named by zero-shot CLIP   "
-     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs"),
+     "artifacts/results/does-the-cat-prompt-already-draw-dogs"),
 ]
 
 
@@ -93,7 +93,7 @@ RUN_B = [("a photo of a cat", "40%"), ("a photo of a dog", "40%"),
 
 def trainer_figure():
     reg = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-    sheet = Image.open(REPO / "4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png")
+    sheet = Image.open(REPO / "artifacts/results/the-inclusive-captions-photo-pool/both_sheet_00.png")
     tile = sheet.crop(TILE_BOX).convert("RGB")
     tile = tile.resize((tile.width * 3, tile.height * 3), Image.LANCZOS)
     W, H = 1500, max(620, tile.height + 180)

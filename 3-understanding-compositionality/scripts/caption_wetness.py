@@ -11,10 +11,10 @@ does-a-camel-in-the-rain-come-out-wet/caption-counts.md, "Dataset searched"). Ca
             is the animal there at all (against text, a logo, a product, another animal),
             and is it wet (five wet phrasings against five dry ones, averaged)
 
-    python 3-understanding-compositionality/scripts/caption_wetness.py sample --n 100 --out /datasets/mmolefe/relaion2b-en/wetness/pilot
-    python 3-understanding-compositionality/scripts/caption_wetness.py fetch  --out /datasets/mmolefe/relaion2b-en/wetness/pilot
-    python 3-understanding-compositionality/scripts/caption_wetness.py score  --out /datasets/mmolefe/relaion2b-en/wetness/pilot
-    python 3-understanding-compositionality/scripts/caption_wetness.py explain --out /datasets/mmolefe/relaion2b-en/wetness/pilot
+    python scripts/caption_wetness.py sample --n 100 --out /datasets/mmolefe/relaion2b-en/wetness/pilot
+    python scripts/caption_wetness.py fetch  --out /datasets/mmolefe/relaion2b-en/wetness/pilot
+    python scripts/caption_wetness.py score  --out /datasets/mmolefe/relaion2b-en/wetness/pilot
+    python scripts/caption_wetness.py explain --out /datasets/mmolefe/relaion2b-en/wetness/pilot
 
 `explain` adds the numbers the explainer scene draws for its 10 pictures (see its docstring).
 

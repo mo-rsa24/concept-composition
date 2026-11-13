@@ -78,7 +78,7 @@ What is already known
 - A power of a mixture is not a mixture, so the parts world's numbers are importance-sampling
   estimates with a standard error (rebuild/parts_world.py; from step 1).
 - Negation's exponents sum to 1, so it is unchanged by an invertible warp (total variation 7e-17)
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
 - The medical cells are a negation, 1,906 of 3,543 NEATX pneumothorax films have no drain, and a
   drain label on negatives is missing (when-poe-reaches-a-and-b idea map, claims 6 and 8).
 - The tolerances are a dial value to the 3 decimals printed and a sampler number within 0.03

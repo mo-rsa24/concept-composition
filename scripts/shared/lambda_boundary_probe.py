@@ -25,9 +25,9 @@ grid_full_window.png / grid_early_window.png (rows = seeds, cols = lambda, each 
 labelled with the compose verdict, instance count and DINOv2 drift).
 
 Usage:
-    python scripts/shared/lambda_boundary_probe.py            # render + measure + grids
-    python scripts/shared/lambda_boundary_probe.py --measure  # re-score existing renders
-    python scripts/shared/lambda_boundary_probe.py --grid     # rebuild grids from results.json
+    python scripts/showcase/lambda_boundary_probe.py            # render + measure + grids
+    python scripts/showcase/lambda_boundary_probe.py --measure  # re-score existing renders
+    python scripts/showcase/lambda_boundary_probe.py --grid     # rebuild grids from results.json
 """
 
 from __future__ import annotations

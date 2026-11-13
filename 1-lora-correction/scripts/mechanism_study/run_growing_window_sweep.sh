@@ -12,9 +12,9 @@
 # already ran, so those 32 images are skipped rather than resampled: 288 new
 # cells. ~50s per cell, so about 4 hours.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_growing_window_sweep.sh
-#   CUDA_VISIBLE_DEVICES=1 bash 1-lora-correction/scripts/mechanism_study/run_growing_window_sweep.sh
-#   SMOKE=1 bash 1-lora-correction/scripts/mechanism_study/run_growing_window_sweep.sh   # 2 windows, 1 cell
+#   bash scripts/mechanism_study/run_growing_window_sweep.sh
+#   CUDA_VISIBLE_DEVICES=1 bash scripts/mechanism_study/run_growing_window_sweep.sh
+#   SMOKE=1 bash scripts/mechanism_study/run_growing_window_sweep.sh   # 2 windows, 1 cell
 #
 # Resumable: a cell whose image already exists is skipped, so Ctrl-C and
 # re-run continues. Writes to the same output root as run_window_sweep.sh, so
@@ -89,7 +89,7 @@ for direction in prefix suffix; do
         img="$OUT/$pair/seed_$seed/$name/$name.png"
         if [ -f "$img" ]; then skip_n=$((skip_n+1)); continue; fi
         echo "[$(date -u +%H:%M:%S)] ($i/$TOTAL) $direction $pair seed $seed window $start-$end"
-        if $PY 1-lora-correction/scripts/interaction_term_window.py \
+        if $PY scripts/interaction_term_window.py \
              --pair "$pair" --seed "$seed" --window "$win" \
              --exp-name "$EXP" >/dev/null 2>&1; then
           done_n=$((done_n+1))
@@ -107,4 +107,4 @@ echo "finished: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "generated $done_n, skipped $skip_n, failed $fail_n"
 echo
 echo "=== scoring ==="
-$PY 1-lora-correction/scripts/plot_growing_window_curves.py --root "$OUT"
+$PY scripts/plot_growing_window_curves.py --root "$OUT"

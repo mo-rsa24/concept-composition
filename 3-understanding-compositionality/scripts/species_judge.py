@@ -14,7 +14,7 @@ labelled with the higher one, or called a hybrid when the two scores sit within 
 Run against labels.json (by-eye verdicts) and it prints the agreement, by pair, on the confident
 rows, and writes every tile annotated with its boxes and labels so a disagreement can be looked at.
 
-    python 3-understanding-compositionality/scripts/species_judge.py --labels <labels.json> --tiles <ablation_grid> --out <dir>
+    python scripts/species_judge.py --labels <labels.json> --tiles <ablation_grid> --out <dir>
 """
 from __future__ import annotations
 

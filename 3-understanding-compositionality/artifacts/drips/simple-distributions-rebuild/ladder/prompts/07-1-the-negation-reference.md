@@ -97,7 +97,7 @@ What is already known
   And Negation and Powers Of Gaussians).
 - Negation's exponents sum to 1, (1 + w) − w, so it is unchanged by an invertible warp (total
   variation 7e-17), while the plain product changes by 0.035 to 0.126
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10 and run 6).
 - In layer 5's quadrant toy, A is the left half and B the top half, so A without B is the
   bottom-left, and at overlap f a share f of each set sits in the top-left (rebuild/phase5_dial.py,
   docstring).

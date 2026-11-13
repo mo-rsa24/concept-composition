@@ -2,7 +2,7 @@
 # One arm of the correction-loss variant comparison.
 #
 #   GPU=<idx> ARM=<plain|anchor|plurality|connective> [SMOKE=1] [EPOCHS=n] [MU=0.1] \
-#     bash 1-lora-correction/scripts/correction_loss_variants/run_arm.sh
+#     bash scripts/correction_loss_variants/run_arm.sh
 #
 # Four arms differ in one thing: what the three branches are conditioned on, and whether the
 # null branch is pinned. Everything else is set here, once, so it cannot drift between arms.

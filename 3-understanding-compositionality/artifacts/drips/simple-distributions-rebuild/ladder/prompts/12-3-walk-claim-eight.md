@@ -5,7 +5,7 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`, after step 2's verdict is recorded. It runs whatever the verdict is.
 
 ```text
-/drip-idea resume artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md at claim 8, with the
+/drip-idea resume 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md at claim 8, with the
 drain-gap result: which shortcut leads (the drain, or one that cannot be masked such as view or
 scanner); whether NIH's drainless pneumothoraces are mostly large (measured with the SIIM-ACR masks
 at /datasets/mmolefe/siim_acr); whether FastDiME trains classifiers on its edits; and how many of
@@ -30,9 +30,9 @@ What to read
 - Instruction 11.1 of B1's plans/01-measure-the-drain-gap.md: step 2's verdict.
 - The sidecar CSV beside sensitivity-by-drain__nih-neatx.png in B1's
   artifacts/results/does-the-classifier-use-the-drain/: the gap's numbers.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8 and its Sources: the claim
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8 and its Sources: the claim
   being walked.
-- artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md:
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md:
   route 6's return.
 - B1's pick-up page, plans/00-where-we-left-off.md: the follow-up pool and the unanswered proposals.
 
@@ -101,7 +101,7 @@ What to hand back
 - Route 6 integrated, if the walk takes it in.
 - Claim 8's row and section are what step 4 reads if the gate passed, and what step 11's cross-links
   read.
-- The proof: grep -n "^| 8\." artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md prints claim 8's
+- The proof: grep -n "^| 8\." 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md prints claim 8's
   new mark.
 
 What you will see

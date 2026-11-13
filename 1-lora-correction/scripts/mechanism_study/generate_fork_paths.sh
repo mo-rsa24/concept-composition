@@ -8,8 +8,8 @@
 # This samples both, from the same pinned init, for every pool pair at one
 # seed. ~38 runs at ~40s = about 25 minutes on a free A6000.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/generate_fork_paths.sh
-#   CUDA_VISIBLE_DEVICES=1 bash 1-lora-correction/scripts/mechanism_study/generate_fork_paths.sh
+#   bash scripts/mechanism_study/generate_fork_paths.sh
+#   CUDA_VISIBLE_DEVICES=1 bash scripts/mechanism_study/generate_fork_paths.sh
 #
 # Resumable: a run whose latent_trajectory.pt exists is skipped.
 set -euo pipefail
@@ -59,7 +59,7 @@ for cell in "${CELLS[@]}"; do
     traj="$OUT/$pair/seed_$seed/teacher_residual_const_$tag/latent_trajectory.pt"
     if [ -f "$traj" ]; then skip_n=$((skip_n+1)); continue; fi
     echo "[$(date -u +%H:%M:%S)] $pair seed $seed lambda=$lam"
-    if $PY 1-lora-correction/scripts/interaction_term_inject.py \
+    if $PY scripts/interaction_term_inject.py \
          --pair "$pair" --seed "$seed" --lambda "$lam" --exp-name "$EXP" >/dev/null; then
       done_n=$((done_n+1))
     else
@@ -72,4 +72,4 @@ done
 echo
 echo "generated $done_n, skipped $skip_n, failed $fail_n"
 echo "=== fork curve ==="
-$PY 1-lora-correction/scripts/fork_curve.py --root "$OUT"
+$PY scripts/fork_curve.py --root "$OUT"

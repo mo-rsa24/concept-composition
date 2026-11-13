@@ -1,6 +1,6 @@
 /demonstrate Show me, as pictures I can look at, what a "hidden B" is and what the two conditioning rules "contains A" and "exactly A" each train on.
 
-Context. Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. I am walking an idea about product-of-experts composition of diffusion models, in artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md. Concept A is "a red, clean circle". Concept B is "blue, scattered dots". Expert A trains on a set labelled "A" that quietly contains images that also show B, unlabelled; set B likewise hides some A. The walk has marked this claim wrong as stated: "an expert trained on A-labelled data learns the concept A". A density expert learns its training set's density, and the label only matters where a conditioning scheme or a classifier reads it.
+Context. Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. I am walking an idea about product-of-experts composition of diffusion models, in 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md. Concept A is "a red, clean circle". Concept B is "blue, scattered dots". Expert A trains on a set labelled "A" that quietly contains images that also show B, unlabelled; set B likewise hides some A. The walk has marked this claim wrong as stated: "an expert trained on A-labelled data learns the concept A". A density expert learns its training set's density, and the label only matters where a conditioning scheme or a classifier reads it.
 
 Words this uses:
 - Hidden B: an image that shows B but whose label does not say so.
@@ -17,8 +17,8 @@ What to build (Python, NumPy, matplotlib only; throwaway code under scripts/ or 
 
 Where it lands: artifacts/results/what-the-label-hides-from-the-expert/ (figures, the count table as JSON with the dial value f in every row, a README.md card saying how each figure was made).
 
-Return. Close with a fenced return package, and also write it to artifacts/ideas/when-poe-reaches-a-and-b/routes/01-hidden-labels-pictured.return.md:
-  origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 1 (and claim 3's conditioning rules) · route 1
+Return. Close with a fenced return package, and also write it to 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/01-hidden-labels-pictured.return.md:
+  origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 1 (and claim 3's conditioning rules) · route 1
   ask: pictures of hidden labels and of what each conditioning rule trains on
   deliverable: the figure paths and the count table path
   changes for the walk: one line on whether "exactly A removes only labelled overlap" held, with the share at f = 0.2

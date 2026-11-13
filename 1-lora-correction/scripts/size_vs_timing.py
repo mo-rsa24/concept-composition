@@ -26,7 +26,7 @@ noise.
     window to (40,50). That disagreement is why F4a suppresses its count chips
     by default; here the wrong reading is drawn, not hidden, and flagged instead.
 
-    python 1-lora-correction/scripts/size_vs_timing.py
+    python scripts/size_vs_timing.py
 """
 
 from __future__ import annotations

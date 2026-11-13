@@ -70,7 +70,6 @@ def render() -> None:
     from poe_repair.methods._poe_langevin import run_lora_langevin_windowed_poe
     from poe_repair.methods._sampling import write_decoded_image
     from poe_repair.run import make_ctx
-    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
 
     ctx = make_ctx()

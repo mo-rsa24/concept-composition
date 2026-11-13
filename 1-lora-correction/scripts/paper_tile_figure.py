@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """Draw a grid of image tiles as a PDF at its exact printed width, with real type for every label.
 
-The paper's lettering rule (1-lora-correction/report/paper-review/layout-sheet.md): labels 8 pt, group titles 9 pt,
+The paper's lettering rule (report/paper-review/layout-sheet.md): labels 8 pt, group titles 9 pt,
 Liberation Serif (Times metrics) to match the Times body, the figure drawn at the width it prints so nothing is
 scaled afterwards. Tiles are embedded as images; all text stays text, so
-1-lora-correction/scripts/figure_text_audit.py measures it exactly.
+scripts/figure_text_audit.py measures it exactly.
 
-    python3 1-lora-correction/scripts/paper_tile_figure.py <spec.json> <out.pdf>
+    python3 scripts/paper_tile_figure.py <spec.json> <out.pdf>
 
 The spec:
     {"width_in": 4.95,

@@ -30,8 +30,8 @@
 #   anything in between is a partial: report the rate, do not round it to
 #          either story.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep_mean_others.sh
-#   CUDA_VISIBLE_DEVICES=1 bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep_mean_others.sh
+#   bash scripts/mechanism_study/run_dose_sweep_mean_others.sh
+#   CUDA_VISIBLE_DEVICES=1 bash scripts/mechanism_study/run_dose_sweep_mean_others.sh
 #
 # ~35s per cell, so about 75 minutes. Resumable: a cell whose image exists is
 # skipped, so Ctrl-C and re-run continues.
@@ -76,7 +76,7 @@ for pair in "${PAIRS[@]}"; do
       img="$OUT/$pair/seed_$seed/$name/$name.png"
       if [ -f "$img" ]; then skip_n=$((skip_n+1)); continue; fi
       echo "[$(date -u +%H:%M:%S)] ($i/$TOTAL) $pair seed $seed lam $lam $ROW"
-      if $PY 1-lora-correction/scripts/interaction_term_inject.py \
+      if $PY scripts/interaction_term_inject.py \
            --pair "$pair" --seed "$seed" --lambda "$lam" --row "$ROW" \
            --exp-name "$EXP" >/dev/null 2>&1; then
         done_n=$((done_n+1))
@@ -93,4 +93,4 @@ echo "finished: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "generated $done_n, skipped $skip_n, failed $fail_n"
 echo
 echo "=== scoring ==="
-$PY 1-lora-correction/scripts/plot_dose_curves.py --root "$OUT"
+$PY scripts/plot_dose_curves.py --root "$OUT"

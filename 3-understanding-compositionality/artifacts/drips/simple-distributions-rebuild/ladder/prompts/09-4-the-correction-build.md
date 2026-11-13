@@ -11,7 +11,7 @@ the fair test (joint condition, composition, composition plus correction) at ove
 sampled with tuned MALA, with exact and with trained experts, as layer 9 of
 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
 ~/Playground/PhD/simple-distributions-walk/walk09.py; bar: first reproduce
-artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/ (MALA +0.001 above the
+3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/ (MALA +0.001 above the
 floor with exact experts and +0.267 with trained ones at r = 0.001), then the three arms' total
 variation at each overlap
 
@@ -42,7 +42,7 @@ What to read
   and the p9. keys in toy/rebuild/out/walk-numbers.json: the layer 9 reference, whose settings
   (correction size, steps, learning rate, the A∩B samples) I use.
 - toy/rebuild/interaction.py: r_t and ∇r_t from layer 8.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, layer 9's brick row.
 - The layer 9 --math drip folder under artifacts/drips/ and its dispatch.md: my notation.
@@ -76,9 +76,9 @@ What is already known
   sample the joint (REBUILD_WALK.md, brick "The interaction term, exact").
 - A correction can amplify learned-score error: Feynman-Kac correction worsens learned scores from
   0.39 to 2.82 sliced Wasserstein-2 as particles go from 1 to 256
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4.1).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4.1).
 - Report the share, the TV and the centre together, never the share alone
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 5).
 - The tolerance of 2 sd is my choice (layer 9, step 4).
 
 Rules

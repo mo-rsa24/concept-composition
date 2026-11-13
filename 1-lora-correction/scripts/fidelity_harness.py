@@ -19,8 +19,8 @@ The treatments, and what each one is testing:
 ``tail20``           the adapter for the first 20 steps only, the frozen model for the rest.
 ``bo8``              eight nearby starting noises, one tile each, the selection made visible.
 
-    python 1-lora-correction/scripts/fidelity_harness.py submit --checkpoint <pt>      # on the cluster
-    python 1-lora-correction/scripts/fidelity_harness.py sheets <tiles_dir> <out_dir>  # anywhere the tiles are
+    python scripts/fidelity_harness.py submit --checkpoint <pt>      # on the cluster
+    python scripts/fidelity_harness.py sheets <tiles_dir> <out_dir>  # anywhere the tiles are
 """
 from __future__ import annotations
 

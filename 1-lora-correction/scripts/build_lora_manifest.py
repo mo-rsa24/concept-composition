@@ -16,7 +16,7 @@ by the cleanup commit C6::
 
 Usage::
 
-    python 1-lora-correction/scripts/build_lora_manifest.py
+    python scripts/build_lora_manifest.py
 """
 
 from __future__ import annotations

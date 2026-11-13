@@ -26,14 +26,14 @@ What to read
   notation.
 - The p6. keys of python -m rebuild.walk_numbers and rebuild/out/phase6/phase6.json (step 1): every
   number per w.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md: the toy.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md: the toy.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The quadrant toy is the four-quadrant answer-key toy, blobs at (±0.5, ±0.5), std 0.15, A is x1 > 0
   and B is x2 > 0, and at w = 1 it puts 0.989 within 3 std of the top-right blob, with Z = r
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
 - SDXL's hybrid appears at w = 7.5, the slider's right end
   (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - The w grid and every number per w are the p6. keys and phase6.json rows, and parts-world numbers

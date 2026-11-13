@@ -73,7 +73,7 @@ You walk claim 8 of the when-poe idea map with the drain-gap result in hand, one
 
 ### 4. You: then the experiment, only if the gate passes
 
-Only if step 2 recorded a gap, you sharpen claim 8's training arms into a falsifiable plan: the toy's overlap-dial curve should predict the share of real drainless films below which composition recovers the cell and joint conditioning does not. The compile is saved to `artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md`.
+Only if step 2 recorded a gap, you sharpen claim 8's training arms into a falsifiable plan: the toy's overlap-dial curve should predict the share of real drainless films below which composition recovers the cell and joint conditioning does not. The compile is saved to `3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md`.
 
 **Prompt:** [frame the hypothesis](prompts/12-4-frame-the-hypothesis.md)
 

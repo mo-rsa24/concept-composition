@@ -23,6 +23,6 @@ nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv \
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) disk_use=${USE_PCT}%"
 
-$PY 1-lora-correction/scripts/showcase/dog_x_dog_comparison_figure.py --seed 9
+$PY scripts/showcase/dog_x_dog_comparison_figure.py --seed 9
 
 echo "[$(date -u +%H:%M:%S)] DONE"

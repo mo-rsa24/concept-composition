@@ -26,7 +26,7 @@ The correction per step comes from run_teacher_residual at lambda 0, which
 walks the plain PoE path and saves eps_Mono - eps_PoE at every step. That is
 the same quantity the training cache holds, computed by the same code.
 
-    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_noise_interpolation.py
+    CUDA_VISIBLE_DEVICES=0 python scripts/rt_noise_interpolation.py
 """
 
 from __future__ import annotations

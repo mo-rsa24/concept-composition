@@ -77,7 +77,7 @@ The left panel is the dial: exact deep mass 0.30 at 5%, with tuned MALA and UHA 
 
 ⏱ you 1 to 2 h (9 steps, plus the three answer-key numbers below) · AI ~25 min · stop: the prompt's bar and the three answer-key numbers
 
-**Answer key for the four quadrants** (`artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/`). Rebuild these three numbers inside the same walk:
+**Answer key for the four quadrants** (`3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/`). Rebuild these three numbers inside the same walk:
 
 - construction (1) with "contains" labels keeps `0.989` in A∩B down to overlap r = 0.001;
 - separately fine-tuned experts whose leftover sits only on the two quadrants next to their own put `0.5` in A∩B, fixed by that construction's symmetry;

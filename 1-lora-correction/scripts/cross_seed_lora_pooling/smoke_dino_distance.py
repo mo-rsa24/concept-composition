@@ -15,7 +15,7 @@ Pass criterion (mandatory before building the semantic MDS pipeline):
 
 Run::
 
-    python 1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py
+    python scripts/cross_seed_lora_pooling/smoke_dino_distance.py
 
 Optionally override image paths with CLI flags. The default paths point at
 the existing probe PNGs and the cached mono thumbnail.

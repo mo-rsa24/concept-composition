@@ -45,7 +45,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term, exact",
   and its Pins.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) and run 1.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
@@ -65,7 +65,7 @@ What is already known
   labels r is one constant wherever the joint has mass, wet rule or not, and the brick row's
   "varying with it on" can then only appear in r_t at t > 0, off the joint's support, or for experts
   whose training sets lack the wet A∩B images (claim 7.1;
-  artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9).
+  3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9).
 - "Interaction" splits in two: appearance interaction (a data condition, no term) and label
   dependence given the image (a real term, zero for clean labels, nonzero for report-mined labels)
   (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.3).

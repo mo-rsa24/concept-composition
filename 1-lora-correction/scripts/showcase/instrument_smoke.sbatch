@@ -45,4 +45,4 @@ export CKPT=1
 # Both of these are in v57. SAMPLEHELD's default (cat x dog, elephant x penguin) is fine: both
 # are v57's held-out pairs, and cat x dog is the triptych worth looking at.
 export SAMPLETRAIN="a_lion__x__a_meerkat,a_typewriter__x__a_cactus"
-bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/train_pool_run.sh
+bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/train_pool_run.sh

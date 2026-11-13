@@ -1,5 +1,5 @@
 ```
-origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2, child 2b · route 5
+origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2, child 2b · route 5
 ask: chimera or counterfactual, and which use comes first
 
 deliverable:

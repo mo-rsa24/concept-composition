@@ -42,12 +42,12 @@ REVIEW = SCOPE / "review/hypothesis-02-more-correction-more-composition.md"
 PLAN = SCOPE / "plans/hypothesis-02-more-correction-more-composition.md"
 PROCEDURE = SCOPE / "procedures/hypothesis-02-recheck-the-headline-numbers.md"
 SCORER = REPO / "poe_repair/experiments/compose_scorer_validation/detection_scorer.py"
-PLOTTER = REPO / "1-lora-correction/scripts/plot_dose_curves.py"
-SWEEP_SH = REPO / "1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh"
+PLOTTER = REPO / "scripts/plot_dose_curves.py"
+SWEEP_SH = REPO / "scripts/mechanism_study/run_dose_sweep.sh"
 CANARIES = REPO / "tests/test_interaction_term_canaries.py"
 PAIR_POOL = paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS) / "pair_pool.yaml"
 PAPER_FIGS = REPO / "paper/iclr/figures"
-MAKE_F2 = REPO / "1-lora-correction/scripts/compose_rate_vs_correction.py"
+MAKE_F2 = REPO / "scripts/compose_rate_vs_correction.py"
 
 ROW_DIRS = {"oracle": "", "random": "_random", "wrong_pair": "_wrong_pair"}
 ROW_LABELS = {

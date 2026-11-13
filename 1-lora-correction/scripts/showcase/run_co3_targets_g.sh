@@ -39,7 +39,7 @@ for e in "${ENTRIES[@]}"; do
   # the barred-subject guard, same one the cache builder uses
   "$PY" - "$CA" "$CB" "$PJ" <<'PYG' || { echo "!!! refused: $SLUG"; FAIL=$((FAIL+1)); continue; }
 import sys
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase")
 from disallowed_subjects import check
 for t in sys.argv[1:]:
     check(t)

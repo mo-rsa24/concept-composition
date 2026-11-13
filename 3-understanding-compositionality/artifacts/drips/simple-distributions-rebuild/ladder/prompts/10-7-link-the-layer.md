@@ -17,7 +17,7 @@ reader finds both.
 Objectives
 1. Run xref-cadence over the layer 10 maths drip folder under artifacts/drips/, the retrospective
    the layer 10 walk closed on, and claim 11 of
-   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md.
+   3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md.
 2. Write links both ways between those files and the reference sets below.
 
 What to read
@@ -25,8 +25,8 @@ What to read
   line: the two read-ahead chunks to link against.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Composing in a latent space"
   row of the Bricks table.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 10 and 11.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 10 and 11.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run
   card.
 
 What is already known

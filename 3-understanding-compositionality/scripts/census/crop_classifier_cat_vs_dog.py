@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Can a classifier on the cropped animal box tell a cat from a dog, where the detector cannot?
 
-Why this exists. The base-rate run (3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py, 2026-11-03) put a
+Why this exists. The base-rate run (scripts/census/cat_condition_dog_rate.py, 2026-11-03) put a
 "dog" box on all 64 renders of "a photo of a cat", every one of which is a single cat by eye.
 GroundingDINO's median confidence was 0.889 on the query "dog" against 0.943 on "cat", the median
 margin 0.054, and the sign flipped on 3 renders, so no threshold or margin rule over detector
@@ -10,7 +10,7 @@ animal-shaped region. The instance count is still sound for HOW MANY animals a r
 unusable for WHICH animal each one is.
 
 Every class-level read the inclusive-captions pilot needs depends on fixing that
-(4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md, the "Checks outstanding" entry called
+(artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md, the "Checks outstanding" entry called
 "The instrument"): claim 1 counts dog-present renders of "a photo of a cat", and claim 2 sorts
 renders into pair, chimera and single animal, which needs the two animals named apart.
 
@@ -174,7 +174,7 @@ def main() -> None:
 
     out_dir = paths.MOUNT_ROOT / FAMILY / args.tag
     if not out_dir.is_dir():
-        raise SystemExit(f"no renders at {out_dir}; run 3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py first")
+        raise SystemExit(f"no renders at {out_dir}; run scripts/census/cat_condition_dog_rate.py first")
 
     print(f"node {socket.gethostname()}  CUDA_VISIBLE_DEVICES="
           f"{os.environ.get('CUDA_VISIBLE_DEVICES', 'unset')}  pid {os.getpid()}", flush=True)

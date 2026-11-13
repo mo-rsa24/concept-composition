@@ -6,7 +6,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan --request compose before and after a warp on the quadrant toy, reproducing
-artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/, I type every block
+3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/, I type every block
 myself into ~/Playground/PhD/simple-distributions-walk/walk10.py; bar: difference 4e-17 for
 construction (1), 0.126 for the plain product at area stretch 49
 
@@ -28,7 +28,7 @@ Objectives
 4. End with a figure of the plain product composed before and after the warp at a = 3, side by side.
 
 What to read
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/warp_check.py: the
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/warp_check.py: the
   reference code.
 - The same folder's warp_check.json, run.log and README.md: the reference numbers and the run card.
 - The layer 10 maths drip's dispatch.md: my notation.

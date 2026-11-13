@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One tuning cell per baseline for the ICLR 56173 review response (1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md, task 1):
+# One tuning cell per baseline for the ICLR 56173 review response (plans/prze-review-baselines.md, task 1):
 # lion and meerkat at seed 9, SDXL, 1024 by 1024, each method at its published default.
 #
 #   sbatch --partition=bigbatch --nodes=1 --time=01:00:00 --exclude=<faulted list> \

@@ -1,7 +1,7 @@
 """The inspector's timing tab: drag the window, watch the picture change.
 
 Pre-rendered only, like every other tab. It reads
-``window_inspector_manifest.json`` (built by 1-lora-correction/scripts/build_window_manifest.py)
+``window_inspector_manifest.json`` (built by scripts/build_window_manifest.py)
 and shows, for one pair and one seed, the image produced when the correction was
 injected only inside the chosen window. Dragging the slider moves the window
 along the denoising run and swaps the image, the scorer's verdict, and the
@@ -179,7 +179,7 @@ WINDOW_INDEX_HTML = r"""
 {% if n_on_disk == 0 %}
 <div class="empty">
   Nothing generated yet. Run
-  <code>bash 1-lora-correction/scripts/mechanism_study/run_window_sweep.sh</code>, then
+  <code>bash scripts/mechanism_study/run_window_sweep.sh</code>, then
   <code>python scripts/plot_window_curves.py</code>, then
   <code>python scripts/build_window_manifest.py</code>.
 </div>

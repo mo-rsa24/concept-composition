@@ -9,7 +9,7 @@
 # One run's checkpoints, at a stride, over the probe cells. Pass 1 of the figure sweep: it says
 # which checkpoints of a run compose across every kind of pair, and nothing else.
 #
-#   sbatch --export=ALL,RUN_DIR=<run folder>,STRIDE=10000,SEEDS="3 5" 3-understanding-compositionality/scripts/sweep_probe.sbatch
+#   sbatch --export=ALL,RUN_DIR=<run folder>,STRIDE=10000,SEEDS="3 5" scripts/sweep_probe.sbatch
 #
 # Seeds are limited to the ones whose starting noise is cached (1 to 16, 42, and any minted
 # since): every render borrows that seed's latent so a column is the same noise in every row.

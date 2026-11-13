@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Tuning grid renders for the ICLR 56173 review response (1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md, task 3): the four tuning
+# Tuning grid renders for the ICLR 56173 review response (plans/prze-review-baselines.md, task 3): the four tuning
 # pairs at seeds 9 to 12, one folder per setting, under protocol rule 3's grids.
 #
 #   METHOD=co3 SETTINGS="l0.5_ts6 l1.0_ts6" sbatch --partition=bigbatch --nodes=1 --time=03:00:00 \

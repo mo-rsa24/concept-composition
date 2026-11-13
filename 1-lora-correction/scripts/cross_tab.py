@@ -120,8 +120,8 @@ CROSS_INDEX_HTML = r"""
 {% if n_on_disk == 0 %}
 <div class="empty">
   Nothing sampled yet. Run
-  <code>python 1-lora-correction/scripts/run_cross_sweep.py --grid cross</code>, then
-  <code>python 1-lora-correction/scripts/decode_trajectory_frames.py --root cross</code>, then
+  <code>python scripts/run_cross_sweep.py --grid cross</code>, then
+  <code>python scripts/decode_trajectory_frames.py --root cross</code>, then
   <code>python scripts/build_cross_manifest.py</code>.
 </div>
 {% else %}
@@ -304,7 +304,7 @@ function render(){
     ? (fr.step === NS || !rec.frames[i+1]
         ? "this is the finished picture"
         : "the model's estimate of the finished picture at this step")
-    : "run 1-lora-correction/scripts/decode_trajectory_frames.py to scrub this cell step by step";
+    : "run scripts/decode_trajectory_frames.py to scrub this cell step by step";
   drawTrack(rec, i);
 }
 

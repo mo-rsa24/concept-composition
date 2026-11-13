@@ -3,12 +3,12 @@
 Four columns are rendered here from one starting latent per row, the one protocol rule 2 names
 (``load_shared_latents`` for ``a_cat__x__a_dog`` at the seed): the joint prompt, joint + Langevin,
 PoE, and PoE + Langevin, the Langevin columns at protocol rule 3's setting, c = 3 and k = 20 steps per
-level over all 50 levels. The fifth column, CO3, is rendered by ``1-lora-correction/scripts/review_baseline_cell.py
+level over all 50 levels. The fifth column, CO3, is rendered by ``scripts/review_baseline_cell.py
 --method co3 --group r6``, which hands CO3 the same starting latent. ``--sheet`` then assembles the
 five columns into one image and writes the sidecar listing seeds, noise and settings.
 
-    python 1-lora-correction/scripts/review_r6_renders.py --render
-    python 1-lora-correction/scripts/review_r6_renders.py --sheet
+    python scripts/review_r6_renders.py --render
+    python scripts/review_r6_renders.py --sheet
 
 Tiles land as <OUT>/r6_correctors/<pair>/seed10/<column>.png with a JSON sidecar; a tile that exists
 is skipped. The sheet is <OUT>/r6_correctors/five_columns.png with five_columns.json beside it.

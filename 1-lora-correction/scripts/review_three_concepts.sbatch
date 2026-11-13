@@ -10,7 +10,7 @@
 # Slot R11, three concepts: four kinds of triple (columns) by joint prompt, plain product and ours
 # (rows) at the shared seed 10, then the sheet. One bigbatch RTX 3090, twelve tiles.
 #
-#   sbatch 1-lora-correction/scripts/review_three_concepts.sbatch      (from the cluster checkout)
+#   sbatch scripts/review_three_concepts.sbatch      (from the cluster checkout)
 set -uo pipefail
 REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
@@ -26,7 +26,7 @@ echo "=== disk ${USE}%  gpu ${USED} MiB ${UTIL}%  $(nvidia-smi --query-gpu=name 
 
 cd "$REPO" || exit 7
 export POE_REPO="$REPO"
-"$PY" 1-lora-correction/scripts/review_three_concepts.py --render; R=$?
-"$PY" 1-lora-correction/scripts/review_three_concepts.py --sheet; S=$?
+"$PY" scripts/review_three_concepts.py --render; R=$?
+"$PY" scripts/review_three_concepts.py --sheet; S=$?
 echo "=== done $(date -Is)  render exit $R  sheet exit $S  tiles $(find "$OUT/three_concepts" -name '*.png' ! -name 'three_concepts.png' | wc -l) of 12"
 exit $(( R || S ))

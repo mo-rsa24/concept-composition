@@ -16,7 +16,7 @@ between the two experiments would be meaningless.
 
 This is the canary the dose-matched runs sit behind. Run it before them.
 
-    python 1-lora-correction/scripts/check_fixed_schedule.py
+    python scripts/check_fixed_schedule.py
 """
 
 from __future__ import annotations

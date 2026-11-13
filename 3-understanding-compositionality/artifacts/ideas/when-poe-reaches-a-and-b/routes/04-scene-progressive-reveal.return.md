@@ -1,5 +1,5 @@
 ```
-origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2 scenes · route 4
+origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 2 scenes · route 4
 ask: one taught concept per press, with what's already taught dimmed
 
 deliverable:

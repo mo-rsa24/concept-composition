@@ -22,7 +22,7 @@ carries its step and none of them is the final word.
 
 Reads the scored run only; it does not sample or train.
 
-    python 1-lora-correction/scripts/adapter_transfers.py
+    python scripts/adapter_transfers.py
 """
 
 from __future__ import annotations

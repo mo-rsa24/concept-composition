@@ -1,4 +1,4 @@
-origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 8 · route 6
+origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 8 · route 6
 ask: novelty and worth of composition against masked editing for the drain shortcut
 
 deliverable:

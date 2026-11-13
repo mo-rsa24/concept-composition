@@ -22,7 +22,7 @@ geometric fact it honours is the one F1 honours: the product of the two equal-wi
 Gaussians is a Gaussian at their midpoint, so the product's peak is drawn where the
 maths puts it.
 
-Companion to 1-lora-correction/scripts/what_the_product_misses.py (F1), which argues the same thing in
+Companion to scripts/what_the_product_misses.py (F1), which argues the same thing in
 flat contour lines.
 
     python scripts/where_poe_lands_on_the_manifold.py
@@ -44,7 +44,7 @@ FIG_DIR = Path("paper/iclr/figures")
 FIG_NAME = "where-the-product-lands-on-the-manifold"
 
 # One cell, four conditions, one starting latent. Written by
-# 1-lora-correction/scripts/showcase/where_each_condition_lands.py; the manifest beside these frames
+# scripts/showcase/where_each_condition_lands.py; the manifest beside these frames
 # records init_latents, steps, guidance and adapter_attached_before_references=false.
 CELL_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/"
                  "where_each_condition_lands/pairs/a_cat__x__a_dog")

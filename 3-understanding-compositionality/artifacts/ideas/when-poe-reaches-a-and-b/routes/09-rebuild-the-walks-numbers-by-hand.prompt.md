@@ -2,10 +2,10 @@
 
 I got lost in the walk because too many terms and numbers arrived at once. I want to rebuild the evidence myself, slowly, so each number lands before the next one appears.
 
-Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. The walk's map is artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md; read its "The idea, as it stands" paragraph and the Runs table first. Each run has a folder under artifacts/ideas/when-poe-reaches-a-and-b/runs/ with a README.md, the script that produced it and its printed output. Those outputs are the answer key: every number I produce must match them.
+Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. The walk's map is 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md; read its "The idea, as it stands" paragraph and the Runs table first. Each run has a folder under 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/ with a README.md, the script that produced it and its printed output. Those outputs are the answer key: every number I produce must match them.
 
 How I want it delivered:
-- One notebook, artifacts/ideas/when-poe-reaches-a-and-b/rebuild-the-walks-numbers.ipynb, written by me one cell per message: a markdown cell in plain words (and LaTeX where there is a formula), or a code cell, never both in one message.
+- One notebook, 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/rebuild-the-walks-numbers.ipynb, written by me one cell per message: a markdown cell in plain words (and LaTeX where there is a formula), or a code cell, never both in one message.
 - Before any number appears, ask me to predict it, then show my result beside the answer key's.
 - Every new word gets one plain sentence the first time it appears, and a "Words so far" cell grows as we go. No word is used before it is explained.
 - Every picture is labelled on the thing itself, with the number written where it belongs.
@@ -17,8 +17,8 @@ The four experiments, in this order (each one is a top-level rung):
 3. **Samplers with perfect experts.** Draw samples with reverse diffusion and with annealed MALA, ULA and UHA, and measure how far each lands from the exact answer (total variation, with `0.133` as the floor that perfect samples score by chance). Reverse diffusion misses by `0.049`; the others sit at the floor. Answer key: runs/samplers-on-exact-experts/.
 4. **Samplers with trained experts.** Train small experts, repeat step 3, and see the better sampler make the trained experts' mistakes cost more (`+0.054` at a 1-in-20 rare cell, `+0.232` at 1 in 1,000). Answer key: runs/sampler-by-expert-interaction/.
 
-The walk ends when every number in those four README files has been reproduced and I can say in one sentence what each one means. Then write a fenced return package to artifacts/ideas/when-poe-reaches-a-and-b/routes/09-rebuild-the-walks-numbers-by-hand.return.md:
-  origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · runs 1, 5, 6, 7 · route 9
+The walk ends when every number in those four README files has been reproduced and I can say in one sentence what each one means. Then write a fenced return package to 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/09-rebuild-the-walks-numbers-by-hand.return.md:
+  origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · runs 1, 5, 6, 7 · route 9
   ask: rebuild the walk's numbers by hand
   deliverable: the notebook path, and any number that did not match its answer key
   changes for the walk: the sentences I wrote for each number, which become the plain-words version of the map

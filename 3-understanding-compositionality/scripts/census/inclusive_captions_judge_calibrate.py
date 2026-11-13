@@ -13,7 +13,7 @@ images, its answers are combined with the three questions that already work, and
 scored against the calls in checks/eye-labels-first-48.json.
 
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      3-understanding-compositionality/scripts/census/inclusive_captions_judge_calibrate.py \
+      scripts/census/inclusive_captions_judge_calibrate.py \
         --judged <judged_first48.json> --labels <eye-labels-first-48.json>
 """
 from __future__ import annotations

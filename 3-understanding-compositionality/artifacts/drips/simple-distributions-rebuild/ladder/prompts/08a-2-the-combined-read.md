@@ -93,7 +93,7 @@ What is already known
   0.001 (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick 9).
 - The project's own 2 × 2 of exact or trained experts by reverse diffusion or annealed MALA has
   interactions of +0.054 ± 0.016 total variation at r = 0.05 and +0.232 ± 0.046 at r = 0.001
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, run 7).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, run 7).
 - The interaction term's lower bound on SDXL did not track which of 25 pairs blend
   (REBUILD_WALK.md, brick "The correction at scale").
 

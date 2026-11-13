@@ -29,9 +29,9 @@ Scoring ("--score"): the validated instance-count scorer (scorer_validated.json:
 instance count >= 2 via GroundingDINO-tiny means compose / two dogs).
 
 Usage:
-    python 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --check-identity
-    python 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --run-probe --seeds 9,10,11,12,13,14,15,16
-    python 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --score --seeds 9,10,11,12,13,14,15,16
+    python scripts/showcase/dog_x_dog_probe.py --check-identity
+    python scripts/showcase/dog_x_dog_probe.py --run-probe --seeds 9,10,11,12,13,14,15,16
+    python scripts/showcase/dog_x_dog_probe.py --score --seeds 9,10,11,12,13,14,15,16
 """
 
 from __future__ import annotations
@@ -57,7 +57,7 @@ from poe_repair.run import make_ctx
 from poe_repair.runtime import PairSeedCell, encode_prompt_sdxl
 
 CHECKPOINT_RUN_DIR = Path(
-    "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+    "artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 )
 CHECKPOINT_PATH = CHECKPOINT_RUN_DIR / "checkpoints/lora_step_100000.pt"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/dog_x_dog_probe")

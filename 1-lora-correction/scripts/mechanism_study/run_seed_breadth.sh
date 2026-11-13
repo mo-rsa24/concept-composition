@@ -35,8 +35,8 @@
 #          is not individually significant, so the claim rests on the median
 #          across the 28 pair-pairings rather than on any single one.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_seed_breadth.sh
-#   CUDA_VISIBLE_DEVICES=1 bash 1-lora-correction/scripts/mechanism_study/run_seed_breadth.sh
+#   bash scripts/mechanism_study/run_seed_breadth.sh
+#   CUDA_VISIBLE_DEVICES=1 bash scripts/mechanism_study/run_seed_breadth.sh
 #
 # ~50s per cell, so about 80 minutes. Resumable: a cell whose image exists is
 # skipped, so Ctrl-C and re-run continues.
@@ -76,7 +76,7 @@ done_n=0; skip_n=0; fail_n=0; i=0
 for pair in "${PAIRS[@]}"; do
   for seed in "${SEEDS[@]}"; do
     i=$((i+1))
-    if $PY 1-lora-correction/scripts/interaction_term_window.py \
+    if $PY scripts/interaction_term_window.py \
          --pair "$pair" --seed "$seed" --window "$WINDOW" \
          --exp-name "$EXP" >/dev/null 2>&1; then
       done_n=$((done_n+1))
@@ -93,4 +93,4 @@ echo "finished: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo "generated $done_n, skipped $skip_n, failed $fail_n"
 echo
 echo "=== scoring ==="
-$PY 1-lora-correction/scripts/score_seed_breadth.py --root "$OUT"
+$PY scripts/score_seed_breadth.py --root "$OUT"

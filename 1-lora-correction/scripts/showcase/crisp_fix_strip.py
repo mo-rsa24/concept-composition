@@ -43,7 +43,7 @@ from PIL import Image, ImageDraw
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
 
 import correct_early_then_clean_up as ce  # noqa: E402  plan 14's sampler, scorer helpers and constants
 
@@ -167,7 +167,6 @@ class FixSampler(ce.Sampler):
         from poe_repair._sdxl.metrics import ddim_prev_from_x0_eps, guided_eps, poe_eps, tweedie_mean
         from poe_repair._sdxl.runtime import LatentTrajectoryCollector, decode_latents
         from poe_repair.methods._sampling import SamplerOutputs, add_time_ids
-        import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
         import lambda_boundary_probe as lbp
 
         assert self.attached, "attach the adapter first"

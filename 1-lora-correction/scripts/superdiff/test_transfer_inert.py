@@ -36,7 +36,7 @@ for rank, run, final in ((8, "phase1_r8_450k", "lora_step_450000.pt"),
                          (16, "phase1_r16_100k", "lora_step_100000.pt"),
                          (32, "phase1_r32_100k", "lora_step_100000.pt")):
     CKPTS[rank], CKPT_IS_FINAL[rank] = _latest(f"{_SHOW}/{run}", final)
-FALLBACK_R8 = "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt"
+FALLBACK_R8 = "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt"
 
 device = infer_device(None); dtype = infer_dtype("fp16", device)
 models = superdiff._load_superdiff_models(device, dtype)

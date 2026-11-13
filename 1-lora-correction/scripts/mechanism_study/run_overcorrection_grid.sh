@@ -14,8 +14,8 @@
 # ~50s per cell, so about 17 minutes. Resumable: a cell whose image already
 # exists is skipped.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_overcorrection_grid.sh
-#   SEED=12 bash 1-lora-correction/scripts/mechanism_study/run_overcorrection_grid.sh
+#   bash scripts/mechanism_study/run_overcorrection_grid.sh
+#   SEED=12 bash scripts/mechanism_study/run_overcorrection_grid.sh
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
@@ -61,7 +61,7 @@ for win in "${WINDOWS[@]}"; do
     img="$OUT/$PAIR/seed_$SEED/$name/$name.png"
     if [ -f "$img" ]; then skip_n=$((skip_n+1)); continue; fi
     echo "[$(date -u +%H:%M:%S)] ($i/$TOTAL) window $start-$end lambda $lam"
-    if $PY 1-lora-correction/scripts/interaction_term_window.py \
+    if $PY scripts/interaction_term_window.py \
          --pair "$PAIR" --seed "$SEED" --window "$win" --lambda "$lam" \
          --exp-name "$EXP" >/dev/null 2>&1; then
       done_n=$((done_n+1))

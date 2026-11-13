@@ -2,7 +2,7 @@
 """What each concept pushes toward, step by step, on plain PoE's own path.
 
 Reruns plain product-of-experts (PoE) for one pair and seed, from the same cached starting noise
-as scripts/shared/concept_pair_sheet.py, and at every one of the 50 steps asks the UNet for four
+as scripts/concept_pair_sheet.py, and at every one of the 50 steps asks the UNet for four
 predictions at the current latent: empty prompt, concept A, concept B and the joint prompt
 "{a} and {b}". The step itself is PoE's, so the final picture is the sheet's PoE tile.
 
@@ -13,8 +13,8 @@ not: its shadow in the plane is drawn, and the length left over, out of the plan
 `alpha` and `beta` are the weights on A and B that reproduce the shadow; no reweighting of A and
 B can reach the out-of-plane part.
 
-    python 3-understanding-compositionality/scripts/concept_pair_pushes.py --pair "a dog|rain" --seed 10              # on a GPU
-    python 3-understanding-compositionality/scripts/concept_pair_pushes.py --plot <pushes_dir> <out_dir> --pair "a dog|rain" --seed 10 \
+    python scripts/concept_pair_pushes.py --pair "a dog|rain" --seed 10              # on a GPU
+    python scripts/concept_pair_pushes.py --plot <pushes_dir> <out_dir> --pair "a dog|rain" --seed 10 \
         [--superdiff-sidecar <superdiff_200.json>]
 
 Writes <OUT>/pushes/<pair>/seedNN/pushes.json and the predicted clean image of the PoE path at a
@@ -41,7 +41,6 @@ SHOW_STEPS = (0, 5, 10, 20, 35, 49)
 
 
 def slug_of(a: str, b: str) -> str:
-    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from concept_pair_sheet import concept_slug
     return f"{concept_slug(a)}__x__{concept_slug(b)}"
 

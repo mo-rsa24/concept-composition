@@ -2,7 +2,7 @@
 # Train one arm of the inclusive-captions pilot and render its watching sheet as each
 # checkpoint lands, so the four columns fill in Weights and Biases while the run is still going.
 #
-#   4-inclusive-captions/scripts/inclusive_captions_run.sh <A|B> <cuda device index> [steps]
+#   scripts/inclusive_captions_run.sh <A|B> <cuda device index> [steps]
 #
 # biggpu allows one Slurm job per user, so both arms are started with nohup outside Slurm on a
 # pinned free device and are invisible to squeue. Harvest them with pgrep on the node they were

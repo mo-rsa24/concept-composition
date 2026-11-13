@@ -10,7 +10,7 @@ Passes beyond a prompt's noun-phrase count ask an empty question that the script
 --np-num 3 equals the default 8 on the paper-review prompts (323 have 2 noun phrases, one has 1, one 3).
 
 Usage (t2icomp env, non-Blackwell GPU):
-  python 1-lora-correction/scripts/review_score_blipvqa.py --in rows.csv --out scores.csv --work <dir>
+  python scripts/review_score_blipvqa.py --in rows.csv --out scores.csv --work <dir>
 rows.csv has columns image,prompt.
 """
 from __future__ import annotations

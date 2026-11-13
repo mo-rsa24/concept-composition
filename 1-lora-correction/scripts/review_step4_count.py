@@ -5,12 +5,12 @@ Uses the validated instance count (poe_repair/experiments/compose_scorer_validat
 detection_scorer.py: GroundingDINO asked for "animal", boxes under a quarter of the image's
 longer side dropped, overlapping boxes merged; two or more boxes means two animals). It is
 validated on animal pairs only, so the 12 competing object pairs are judged by eye instead
-(1-lora-correction/report/paper-review/protocol.md and the step 4 walk map).
+(report/paper-review/protocol.md and the step 4 walk map).
 
 One row per picture: pair, seed, column (mono is the joint prompt, poe the plain product),
 count. Reads the census written by scripts/review_step4_renders.sh; writes nothing else.
 
-    python 1-lora-correction/scripts/review_step4_count.py <census dir> <out.csv>
+    python scripts/review_step4_count.py <census dir> <out.csv>
 """
 from __future__ import annotations
 

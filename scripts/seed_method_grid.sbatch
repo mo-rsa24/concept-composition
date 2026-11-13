@@ -67,10 +67,10 @@ export POE_REPO="$REPO" FIGURE_CANDIDATES_OUT="$OUT"
 cd "$REPO" || exit 7
 
 if [ "$I" -eq 0 ]; then
-  "$PY" 1-lora-correction/scripts/figure_candidates.py --column mono --pairs "${PAIRS[@]}" --seeds $SEEDS
+  "$PY" scripts/figure_candidates.py --column mono --pairs "${PAIRS[@]}" --seeds $SEEDS
   n=$(ls "$OUT"/*/seed*/mono.png | wc -l)
 elif [ "$I" -eq 1 ]; then
-  "$PY" 1-lora-correction/scripts/figure_candidates.py --column poe --checkpoint "$ANY_CKPT" --pairs "${PAIRS[@]}" --seeds $SEEDS
+  "$PY" scripts/figure_candidates.py --column poe --checkpoint "$ANY_CKPT" --pairs "${PAIRS[@]}" --seeds $SEEDS
   n=$(ls "$OUT"/*/seed*/poe.png | wc -l)
 elif [ "$I" -eq 16 ]; then
   # CO3 draws its own noise: the seed is its own index, not the cached starting latent.
@@ -89,7 +89,7 @@ else
   [ -f "$CKPT" ] || { echo "ABORT: missing $CKPT" >&2; exit 2; }
   echo "--- $tag  $EXTRA"
   # shellcheck disable=SC2086
-  "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --window 50 --tag "$tag" --checkpoint "$CKPT" \
+  "$PY" scripts/figure_candidates.py --column ours --window 50 --tag "$tag" --checkpoint "$CKPT" \
         $EXTRA --pairs "${PAIRS[@]}" --seeds $SEEDS
   # The renderer dropped writes silently once. Count what this column actually left behind.
   n=$(ls "$OUT"/*/seed*/ours_"${tag}"_w50.png 2>/dev/null | wc -l)

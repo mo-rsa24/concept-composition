@@ -9,7 +9,7 @@ Panel (b): six cat-and-dog renders from the product, a name under each.
 Drawn at the printed width (5.5 in) so nothing is scaled: labels 8 pt, panel letters 9 pt bold,
 Liberation Serif. Tiles are centre-cropped to squares so every picture prints the same size.
 
-    python3 1-lora-correction/scripts/figure7_limitations.py <tiles dir> <out.pdf> [--stacked]
+    python3 scripts/figure7_limitations.py <tiles dir> <out.pdf> [--stacked]
 
 --stacked sets (a) above (b), each the full width, with (b) as one row of six.
 
@@ -27,7 +27,6 @@ import matplotlib.pyplot as plt  # noqa: E402
 from PIL import Image  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from paper_font import use_paper_font  # noqa: E402
 
 LABEL_PT, LETTER_PT = 8, 9

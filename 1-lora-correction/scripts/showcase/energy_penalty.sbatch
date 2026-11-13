@@ -20,9 +20,9 @@
 # Then, on the same card: the 8-seed held-out grid of the arm's 40,050 checkpoint at lambda 1.0,
 # its per-step frames at lambda 1.0, and the on-policy energy read.
 #
-#   STAGE=smoke   sbatch --time=00:40:00 1-lora-correction/scripts/showcase/energy_penalty.sbatch        # one-epoch dry run, W&B off
-#   BETA=0.05     sbatch 1-lora-correction/scripts/showcase/energy_penalty.sbatch                          # one arm
-#   STAGE=probe BETA=0.05 sbatch 1-lora-correction/scripts/showcase/energy_penalty.sbatch                 # rerun the post-training stages
+#   STAGE=smoke   sbatch --time=00:40:00 scripts/showcase/energy_penalty.sbatch        # one-epoch dry run, W&B off
+#   BETA=0.05     sbatch scripts/showcase/energy_penalty.sbatch                          # one arm
+#   STAGE=probe BETA=0.05 sbatch scripts/showcase/energy_penalty.sbatch                 # rerun the post-training stages
 set -uo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
@@ -136,14 +136,14 @@ CKPT="$RUN_DIR/checkpoints/lora_step_040050.pt"
 [ -f "$CKPT" ] || { echo "ABORT: expected checkpoint missing: $CKPT" >&2; ls "$RUN_DIR/checkpoints" >&2; exit 5; }
 
 echo "[$(date -u '+%F %T')] probe: 8-seed held-out grid of $CKPT at lambda 0 and 1.0 -> $PROBE_DIR"
-$PY scripts/shared/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" --out-root "$PROBE_DIR" \
+$PY scripts/showcase/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" --out-root "$PROBE_DIR" \
     --windows full --lambdas 1.0 || echo "WARN: probe exit=$?"
 
 echo "[$(date -u '+%F %T')] frames: per-step running estimates at lambda 1.0 -> $FRAMES_DIR"
 $PY - "$CKPT" "$FRAMES_DIR" <<'EOF'
 import sys
 from pathlib import Path
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase")
 import where_each_condition_lands_trajectories as W
 W.CHECKPOINT = Path(sys.argv[1])
 raise SystemExit(W.main(["--out-root", sys.argv[2], "--conditions", "lora_1.0"]))
@@ -151,7 +151,7 @@ EOF
 echo "[$(date -u '+%F %T')] frames exit=$?"
 
 echo "[$(date -u '+%F %T')] on-policy energy read of $CKPT -> $ONPOLICY_DIR"
-$PY 1-lora-correction/scripts/showcase/on_policy_energy.py --checkpoint "$CKPT" --rank 32 --out "$ONPOLICY_DIR" \
+$PY scripts/showcase/on_policy_energy.py --checkpoint "$CKPT" --rank 32 --out "$ONPOLICY_DIR" \
     --tag "energy penalty beta $BETA, step 40,050" || echo "WARN: on-policy exit=$?"
 
 echo "[$(date -u '+%F %T')] DONE arm beta=$BETA"

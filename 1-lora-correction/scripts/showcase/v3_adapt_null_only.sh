@@ -2,7 +2,7 @@
 # V3 of the correction-loss variations: adapt only the empty branch (--adapt-null-only).
 # Scope 09, plan 04. Launched outside Slurm because biggpu allows one job per user.
 #
-#   GPU=0 bash 1-lora-correction/scripts/showcase/v1_freeze_null.sh
+#   GPU=0 bash scripts/showcase/v1_freeze_null.sh
 #
 # Rank 32 on a 49 GB A6000, so no gradient checkpointing: rank 32 holds about 25 GB and only
 # needs the flag on a 24 GB card.

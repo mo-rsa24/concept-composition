@@ -2,7 +2,7 @@
 # Shared-device launch for crisp_fix_strip.py (plan 15, 01-showcase-the-trained-lora),
 # per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup; every path absolute):
-#   ssh <node> 'GPU=<idx> STAGE=<identity|render|score|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_<stage>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> STAGE=<identity|render|score|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_<stage>.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -29,7 +29,7 @@ export CUDA_VISIBLE_DEVICES="$GPU"
 "$PY" -c 'import torch, sys; sys.exit(0 if torch.cuda.is_available() else 7)' || { echo "guard: torch.cuda.is_available() is False on device $GPU, refusing" >&2; exit 7; }
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) device=$GPU pid=$$ disk_use=${USE_PCT}% stage=$STAGE"
-SCRIPT=1-lora-correction/scripts/showcase/crisp_fix_strip.py
+SCRIPT=scripts/showcase/crisp_fix_strip.py
 case "$STAGE" in
   identity) "$PY" $SCRIPT --identity ;;
   render)   "$PY" $SCRIPT --render ;;

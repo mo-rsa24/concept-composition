@@ -5,10 +5,10 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`, only if step 2 recorded a gap.
 
 ```text
-/frame-hypothesis the four training arms in artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md
+/frame-hypothesis the four training arms in 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md
 claim 8 (including upweighting the real drainless films), with stress-testing before augmentation,
 and the dial, memorisation and test-size checks from
-artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md,
+3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md,
 with the claim that the toy's overlap-dial curve predicts the share of real films below which
 composition recovers the cell and joint conditioning does not
 
@@ -23,15 +23,15 @@ Objectives
 1. Sharpen the claim in the skill line into a falsifiable, ordered plan over refinement rounds.
 2. Order stress-testing before augmentation.
 3. Compile the five-part result and save it to
-   artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md.
+   3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md.
 
 What to read
 - Step 2's verdict, in instruction 11.1 of
   ~/Playground/PhD/medical-imaging/compositional_diffusion/b-shortcut-through-a-device/b1-drain-shortcut-in-pneumothorax/plans/01-measure-the-drain-gap.md:
   the gate this runs behind.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 8 as step 3 left it, with Checks
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 8 as step 3 left it, with Checks
   outstanding, claims 2, 2b, 6 and route 5: the arms and the shortcut.
-- artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md:
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md:
   the six arms, the dial, the checks and the baselines.
 - The overlap-dial idea map, claim 4: the sampler caveat.
 
@@ -89,7 +89,7 @@ Rules
   routing verdict, before the next round.
 
 What to hand back
-- The five-part compile, saved to artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md after it
+- The five-part compile, saved to 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/HYPOTHESIS.md after it
   compiles (frame-hypothesis compiles inline, so the save is asked for here).
 - HYPOTHESIS.md is what hypothesis-to-scope or experiment-planner reads next.
 - The proof: HYPOTHESIS.md exists and its falsification rule carries a number in each of the three

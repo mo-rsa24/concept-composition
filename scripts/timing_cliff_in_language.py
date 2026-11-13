@@ -39,7 +39,6 @@ import numpy as np
 import torch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 from caption_readback import bank_for  # noqa: E402  the same caption templates
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)

@@ -22,7 +22,7 @@ A scoped search found, at abstract level only: RadEdit (arXiv 2312.12865) uses m
 3. Your verdict: is "composition against masked editing for the drain shortcut" real, already done, or wrong, and what would make the composition line worth a thesis chapter even if editing wins the clinical comparison?
 
 Return. Close with a fenced return package, and also write it to /home-mscluster/mmolefe/PhD/reduce-reuse-recycle/artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md:
-  origin: artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 8 · route 6
+  origin: 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md · claim 8 · route 6
   ask: novelty and worth of composition against masked editing for the drain shortcut
   deliverable: the verdict, the papers answering questions 1 and 2 with what each measured, and confidence flags
   changes for the walk: one line on whether claim 8 stands, and what the PhD's composition line should claim

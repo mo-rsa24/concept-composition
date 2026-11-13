@@ -1,4 +1,4 @@
-"""Draw the figures for 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md.
+"""Draw the figures for plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md.
 
 Two kinds of figure, kept apart:
 
@@ -7,7 +7,7 @@ Two kinds of figure, kept apart:
                  from the Re-LAION-2B-en search; where a number is a chosen illustration
                  rather than a measurement, the figure says so in its own title
 
-    /home/molef/miniconda3/bin/python3 -I 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/make_figures.py
+    /home/molef/miniconda3/bin/python3 -I artifacts/notes/what-poe-loses-when-it-composes/make_figures.py
 """
 from __future__ import annotations
 
@@ -22,8 +22,8 @@ from PIL import Image
 
 REPO = Path(__file__).resolve().parents[4]
 OUT = Path(__file__).resolve().parent / "figures"
-CAMEL = REPO / "3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet"
-DOG_SHEET = REPO / "3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png"
+CAMEL = REPO / "artifacts/results/does-a-camel-in-the-rain-come-out-wet"
+DOG_SHEET = REPO / "artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png"
 # tile boxes found by scanning the dog sheet for non-white runs: columns a, b, joint, PoE, SuperDiff
 DOG_COLS = [(250, 550), (558, 858), (890, 1190), (1198, 1498), (1506, 1806)]
 DOG_ROWS = {1: (132, 432), 2: (440, 740), 4: (748, 1048), 9: (1056, 1356), 10: (1364, 1664)}
@@ -267,7 +267,7 @@ def fig_caption_evidence() -> None:
 
 # Every image the write-up and the two routes show, copied as a thumbnail beside them, so the VS Code
 # preview loads it even when the workspace root is elsewhere. Each <img> still links to its original.
-THUMBS = REPO / "3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/figures"
+THUMBS = REPO / "plans/10-what-poe-loses-when-it-composes/figures"
 SHOWN = [OUT / n for n in ("du-2023-product-sampling.png", "bradley-2025-projective-composition.png",
                            "fig-causal-renders.png", "fig-why-rain-and-dog-do-not-fuse.png",
                            "fig-exact-product-is-a-blend.png", "fig-mixture-reweighting.png",

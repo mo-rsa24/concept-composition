@@ -22,5 +22,5 @@ POOLGEN=v57 WD=1e-2 BATCH=1 EPOCHS=600 SAMPLEEVERY=25 \
 SAMPLETRAIN="a_lion__x__a_meerkat,a_typewriter__x__a_cactus" SAMPLETRAINCELLS=1 \
 SAMPLEHELD="a_cat__x__a_dog,an_elephant__x__a_penguin" SAMPLEHELDCELLS=2 \
 RUN="$RUN" CELLS="${CELLS:?set CELLS}" STEPRANGE="${STEPRANGE:-}" EXTRA="${EXTRA:-}" \
-  bash 1-lora-correction/scripts/showcase/train_pool_run.sh
+  bash scripts/showcase/train_pool_run.sh
 echo "=== $RUN exit $? $(date -Is)"

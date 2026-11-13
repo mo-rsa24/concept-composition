@@ -18,7 +18,7 @@ Read it as: if 3 composes and 1 does not, plurality lives in the empty branch an
 across pairs. If 3 looks like 1, the adapter put plurality in the concept branches instead, and
 the empty branch is doing something else.
 
-    python 1-lora-correction/scripts/showcase/does_the_empty_branch_carry_plurality.py \
+    python scripts/showcase/does_the_empty_branch_carry_plurality.py \
         --checkpoint <path to lora_step_XXXXXX.pt> --rank 16 --seeds 9 10 11 12
 """
 from __future__ import annotations

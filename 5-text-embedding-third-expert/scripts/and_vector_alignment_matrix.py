@@ -1,8 +1,8 @@
 """Token by prompt matrix for the "and" vector: which token each prompt puts at each position, and the norm of
 x_raw, x_fix and the joint prompt's own hidden state there (CLIP ViT-L slice). Reads the norms file written by
-5-text-embedding-third-expert/scripts/and_vector_norms.py, draws nothing it does not contain.
+scripts/and_vector_norms.py, draws nothing it does not contain.
 
-    python3 5-text-embedding-third-expert/scripts/and_vector_alignment_matrix.py
+    python3 scripts/and_vector_alignment_matrix.py
 """
 import json
 from pathlib import Path
@@ -13,8 +13,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-SRC = Path("5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json")
-OUT = Path("5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/token-alignment-matrix.png")
+SRC = Path("artifacts/results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json")
+OUT = Path("artifacts/results/what-the-and-vector-is-made-of/token-alignment-matrix.png")
 PROMPTS = ["a cat and a dog", "a cat", "a dog", ""]
 HEADS = ['joint\n"a cat and a dog"', 'a\n"a cat"', 'b\n"a dog"', 'empty\n""']
 GREEN, RED, GREY, BLUE = "#cfe8cf", "#f4c7c3", "#ececec", "#d6e4f5"

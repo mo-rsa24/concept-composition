@@ -126,7 +126,7 @@ cd ~/Playground/PhD/simple-distributions-walk
 
 ⏱ you ~15 min (`phase3_kinds` takes about 2 minutes on one card, and `--out` keeps it from rewriting `rebuild/out/phase3/`) · stop: the 28 `p2.` lines and the numbers `walk02.py` prints agree to the digits shown; the 6 sampler tests pass; `walk02b.py` prints the notebook's `0.0`; each tuned TV in `walk02c.py` is within 0.03 of the `Run 1` lines. A number that differs is either a lesson or a bug in one of the two files; find which before layer 3.
 
-**Answer key for the samplers on exact experts** (`artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/`). The quadrant toy at overlap 0.05 gives these total variations against an exact-sample floor of `0.133`:
+**Answer key for the samplers on exact experts** (`3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/`). The quadrant toy at overlap 0.05 gives these total variations against an exact-sample floor of `0.133`:
 
 | Sampler | Total variation |
 |---|---|

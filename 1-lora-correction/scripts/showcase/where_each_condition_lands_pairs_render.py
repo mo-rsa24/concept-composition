@@ -34,14 +34,13 @@ import torch
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
 
 from poe_repair.methods._sampling import run_cfg, write_decoded_image  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
 from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
 from poe_repair.training_cache import CellPath  # noqa: E402
 from poe_repair.experiments.one_pair_one_seed.probe import load_pinned_init_latents  # noqa: E402
-import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
 import lambda_boundary_probe as lbp  # noqa: E402
 from lambda_window_grid import run_lora_residual_inject_windowed_poe  # noqa: E402
 import where_each_condition_lands_trajectories as traj  # noqa: E402

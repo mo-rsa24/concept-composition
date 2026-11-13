@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Compute the candidate correction-size measures, and show why one is void.
 
-Backs `1-lora-correction/report/normalization-preregistration.md`. Re-running this reproduces every
+Backs `report/normalization_preregistration.md`. Re-running this reproduces every
 number in that memo.
 
 Three candidates:
@@ -18,8 +18,8 @@ back later in a disguised form.
 
 Cache-only, no GPU.
 
-    python 1-lora-correction/scripts/normalization_candidates.py
-    python 1-lora-correction/scripts/normalization_candidates.py --pair a_frog__x__a_toad
+    python scripts/normalization_candidates.py
+    python scripts/normalization_candidates.py --pair a_frog__x__a_toad
 """
 
 from __future__ import annotations
@@ -114,7 +114,7 @@ def main() -> int:
               f"   step_relative {r['iqr']['step_relative']:.4f}")
     print("\nstep_relative rejected: its denominator is the sampler step size,")
     print("which plan 08 varies, so the measure would move with the schedule.")
-    print("\nCOMMITTED: relative_norm  (1-lora-correction/report/normalization-preregistration.md)")
+    print("\nCOMMITTED: relative_norm  (report/normalization_preregistration.md)")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     (args.out_dir / "normalization_candidates.json").write_text(

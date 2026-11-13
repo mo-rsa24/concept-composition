@@ -39,13 +39,13 @@ echo "[$(date -u +%H:%M:%S)] node=$(hostname) commit=$(git rev-parse --short HEA
 
 case "$STAGE" in
   sweep)
-    $PY scripts/shared/lambda_window_grid.py --run-sweep
+    $PY scripts/showcase/lambda_window_grid.py --run-sweep
     ;;
   measure)
-    $PY scripts/shared/lambda_window_grid.py --measure
+    $PY scripts/showcase/lambda_window_grid.py --measure
     ;;
   strip)
-    $PY scripts/shared/lambda_window_grid.py --strip
+    $PY scripts/showcase/lambda_window_grid.py --strip
     ;;
   *)
     echo "unknown stage: $STAGE" >&2

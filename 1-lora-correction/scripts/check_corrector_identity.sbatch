@@ -9,9 +9,9 @@
 #
 # PRZE-2 piece 3: the two new correctors at k = 0 against the plain samplers. First the stand-in
 # UNet test (CPU, seconds), then one real SDXL cell, cat x dog at seed 10, compared with
-# torch.equal. Writes nothing but this log. The plan is 1-lora-correction/plans/prove-the-langevin-corrector-for-the-six-column-figure.md.
+# torch.equal. Writes nothing but this log. The plan is plans/prze-2-langevin-corrector.md.
 #
-#   scripts/cluster.sh run "sbatch 1-lora-correction/scripts/check_corrector_identity.sbatch"
+#   scripts/cluster.sh run "sbatch scripts/check_corrector_identity.sbatch"
 #   sbatch --export=ALL,REPO=<a worktree> <that worktree>/scripts/check_corrector_identity.sbatch
 set -uo pipefail
 REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
@@ -28,6 +28,6 @@ cd "$REPO" || exit 7
 echo "--- stand-in UNet test"
 "$PY" -m pytest -q tests/test_corrector_drivers_identity.py; T=$?
 echo "--- real SDXL, one cell"
-"$PY" 1-lora-correction/scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10; S=$?
+"$PY" scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10; S=$?
 echo "=== done $(date -Is)  pytest exit $T  sdxl exit $S"
 exit $(( T || S ))

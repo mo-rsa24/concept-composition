@@ -11,8 +11,8 @@
 # It runs on a compute node because `du` over this home directory times out from the login
 # node: the survey is as much the reason for the job as the move is.
 #
-#   sbatch 1-lora-correction/scripts/storage/offload_home.sbatch                 # survey only, moves nothing
-#   sbatch --export=ALL,MODE=move 1-lora-correction/scripts/storage/offload_home.sbatch
+#   sbatch scripts/storage/offload_home.sbatch                 # survey only, moves nothing
+#   sbatch --export=ALL,MODE=move scripts/storage/offload_home.sbatch
 #
 # MODE=survey (default) writes a report and stops. Read it, delete any line you want kept, then
 # run MODE=move, which acts only on what the report still lists.

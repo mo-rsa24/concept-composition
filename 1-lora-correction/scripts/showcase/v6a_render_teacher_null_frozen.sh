@@ -8,7 +8,7 @@
 # added to the joint-prompt RENDER a person judged by eye to show both concepts. Same teacher as
 # V0, used only where it is visibly right.
 #
-#   GPU=0 bash 1-lora-correction/scripts/showcase/v6_render_teacher.sh
+#   GPU=0 bash scripts/showcase/v6_render_teacher.sh
 #
 # Runs on mscluster106 device 1, a Quadro RTX 8000, so PY is co3. co3_bw is only for the
 # Blackwell cards on 110 to 112.

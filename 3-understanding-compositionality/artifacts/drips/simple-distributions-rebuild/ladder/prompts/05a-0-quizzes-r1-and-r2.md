@@ -116,11 +116,11 @@ What is already known
   A is x1 > 0 and B is x2 > 0, and experts that model only their own coordinate and take the other
   from the background marginal of all four quadrants put 0.9999 (plain product) and 0.989
   (background-divided) in the top-right blob with no A∩B data
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, rescue 2b).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, rescue 2b).
 - Separately fine-tuned experts at 0% overlap also learn "not B" and "not A", so their top-right
   share is at most 0.5 when the leftover density sits in the two adjacent quadrants, and leftover on
   the top-right alone gives 0.9997, ladder layer 5's corrected answer key
-  (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 2a and run 2).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 2a and run 2).
 - The parts world is a 4 × 4 image of 16 pixels, cat +1 and dog −1, each expert a Gaussian mixture
   over placements with variance 0.01 on its animal's half, and the other half has mean 0 and
   variance 0.01 (an empty half) or 1.0 (a loose one) (step file 05, step 6).
@@ -133,11 +133,11 @@ What is already known
   noised product has 0.6931 (step file 04, step 6).
 - Construction (1), score(x|A) + score(x|B) − score(x), targets p(x|A)·p(x|B)/p(x), the composition
   operator with the unconditional as background, construction (2) is the plain product p_A·p_B, and
-  they agree only where p(x) is flat (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim
+  they agree only where p(x) is flat (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim
   3).
 - Across an invertible warp of the four-quadrant toy, construction (1) and negation change by 4e-17
   and 7e-17 total variation, and the plain product by 0.035, 0.080 and 0.126 at largest area
-  stretches of 2.6, 9 and 49 (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, run 6).
+  stretches of 2.6, 9 and 49 (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, run 6).
 
 Rules
 - Change nothing in the step files, rebuild/, the read-ahead folders or either READ_MAP.md.

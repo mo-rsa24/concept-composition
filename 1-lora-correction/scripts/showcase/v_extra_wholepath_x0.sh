@@ -4,7 +4,7 @@
 # detail is drawn: every cached step trains instead of the first 25, and the error is scored on
 # the predicted clean image rather than on the predicted noise.
 #
-#   GPU=0 nohup bash 1-lora-correction/scripts/showcase/v_extra_wholepath_x0.sh > logs/v_extra.log 2>&1 &
+#   GPU=0 nohup bash scripts/showcase/v_extra_wholepath_x0.sh > logs/v_extra.log 2>&1 &
 #
 # Do not launch this until plan 06's stage A has fallen short of its bar. The hand-off sweep
 # costs an hour on checkpoints that already exist and may answer the question without training.

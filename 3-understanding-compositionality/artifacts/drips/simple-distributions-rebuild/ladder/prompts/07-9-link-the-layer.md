@@ -26,7 +26,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
   the Bricks table.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 6 and run 3.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6, 8 and 10.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6, 8 and 10.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

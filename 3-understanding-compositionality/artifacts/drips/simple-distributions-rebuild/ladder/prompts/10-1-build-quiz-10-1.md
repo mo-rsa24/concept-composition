@@ -32,8 +32,8 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md and its Study
   first line: the layer and its reading.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the warp claim.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the warp claim.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run
   card, with warp_check.py and warp_check.json beside it.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.

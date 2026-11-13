@@ -91,7 +91,7 @@ What is already known
 - On the four-quadrant answer key (blobs at (±0.5, ±0.5), std 0.15), experts that model only their
   own coordinate and take the other from the background marginal put 0.9999 (plain) and 0.989
   (background-divided) in the top-right blob with no A∩B data
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
 - The parts world has 16 pixels, cat +1 and dog −1, variance 0.01 on the animal's half, and the
   other half mean 0 with variance 0.01 (empty) or 1.0 (loose); empty at 0% overlap gives a ghost
   with half-means (0.5, −0.5) and A∩B weight 0.000, 1.000 from 0.1%, and loose gives 1.000 at every
@@ -102,7 +102,7 @@ What is already known
 - Construction (1) targets p(x|A)·p(x|B)/p(x), the operator with the unconditional as background,
   construction (2) is the plain product, they agree only where p(x) is flat, and across an
   invertible warp of the four-quadrant toy construction (1) changes by 4e-17 and the plain product
-  by 0.035 to 0.126 total variation (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3
+  by 0.035 to 0.126 total variation (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3
   and run 6).
 
 Rules

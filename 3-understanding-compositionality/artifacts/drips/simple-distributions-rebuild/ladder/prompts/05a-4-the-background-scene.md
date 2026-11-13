@@ -27,7 +27,7 @@ What to read
 - COMBINE_MAP.md under
   ~/goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/drips/ in its
   combine-<idea-slug>/ folder (step 2's hand-off): my words and the differences the read named.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.json:
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.json:
   the toy and its numbers.
 - 3-understanding-compositionality/artifacts/scenes/when-a-product-reaches-a-and-b/checks/scene_key.py: the earlier scene's key
   script.
@@ -37,7 +37,7 @@ What is already known
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The scene's toy is the four-quadrant answer key: one Gaussian blob per quadrant at (±0.5, ±0.5),
   std 0.15, A is x1 > 0, B is x2 > 0, with products on a 441 × 441 grid over [−1.1, 1.1]²
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
 - Experts that model only their own coordinate and take the other from the background marginal of
   all four quadrants satisfy Definition 5.2, and with no A∩B data they put 0.9999 (plain product)
   and 0.989 (background-divided, p_A·p_B/p_bg) in the top-right blob (same card, rescue 2b).

@@ -13,7 +13,7 @@ W&B for every experiment): the uncorrected agreeing-pair render next to what the
 does to it at lambda=1 over the pre-registered window (steps 0-10).
 
 Usage:
-    python 1-lora-correction/scripts/showcase/dog_x_dog_comparison_figure.py --seed 9
+    python scripts/showcase/dog_x_dog_comparison_figure.py --seed 9
 """
 
 from __future__ import annotations

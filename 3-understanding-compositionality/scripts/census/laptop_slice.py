@@ -5,11 +5,11 @@ The full mirror (128 files, 2,097,693,557 captions) lives on the cluster. This w
 files, downloaded from Hugging Face with your own token, so the search and the look can happen without
 the cluster. Every count says how many files and captions it covers.
 
-    python 3-understanding-compositionality/scripts/census/laptop_slice.py download --files 4    # needs HF_TOKEN or ~/.cache/huggingface/token
-    python 3-understanding-compositionality/scripts/census/laptop_slice.py count                 # whole-word hits, timed per file
-    python 3-understanding-compositionality/scripts/census/laptop_slice.py fetch                 # pictures behind four buckets of hits
-    python 3-understanding-compositionality/scripts/census/laptop_slice.py sheets                # numbered contact sheets, captions beside
-    python 3-understanding-compositionality/scripts/census/laptop_slice.py tally                 # your calls -> table and figure
+    python scripts/census/laptop_slice.py download --files 4    # needs HF_TOKEN or ~/.cache/huggingface/token
+    python scripts/census/laptop_slice.py count                 # whole-word hits, timed per file
+    python scripts/census/laptop_slice.py fetch                 # pictures behind four buckets of hits
+    python scripts/census/laptop_slice.py sheets                # numbered contact sheets, captions beside
+    python scripts/census/laptop_slice.py tally                 # your calls -> table and figure
 
 Run with /home/molef/miniconda3/bin/python3 -I (pyarrow, requests, PIL, matplotlib; nothing else).
 """
@@ -31,7 +31,7 @@ import pyarrow.parquet as pq
 
 REPO = Path(__file__).resolve().parents[3]
 SLICE = Path("/home/molef/datasets/relaion2b-en-slice")
-LOOK = REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show"
+LOOK = REPO / "artifacts/results/what-the-training-captions-show"
 DATASET = "laion/relaion2B-en-research-safe"
 FILE = "part-{:05d}-339dc23d-0869-4dc0-9390-b4036fcc80c2-c000.snappy.parquet"
 SEED = 20261022

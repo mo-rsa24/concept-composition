@@ -5,7 +5,7 @@
 # at most 4096 MiB in use and at most 5% utilisation, read twice 60 s apart so a device between
 # two of someone's jobs is not mistaken for idle.
 #
-#   nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_e_wait_and_launch.sh \
+#   nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/experiment_e_wait_and_launch.sh \
 #       > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_wait.log 2>&1 &
 set -uo pipefail
 

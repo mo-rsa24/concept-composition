@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """Rebuild the review-response slots of the paper from their result files.
 
-Every slot (R1, R2, ...) is a row of 1-lora-correction/report/paper-review/layout-sheet.md naming one result file.
+Every slot (R1, R2, ...) is a row of report/paper-review/layout-sheet.md naming one result file.
 A PNG or PDF result is copied to <paper>/slots/<slot>.<ext>; a CSV result is rendered as a LaTeX
 tabular into <paper>/slots/<slot>.tex. The tex's \\reviewslot macro picks the file up, and shows a
 placeholder box at the slot's final size while none exists. Result files are only ever read.
 
-    python3 1-lora-correction/scripts/refresh_paper_slots.py --check                 every slot wired, PASS or MISS
-    python3 1-lora-correction/scripts/refresh_paper_slots.py                         refresh every slot whose result exists
-    python3 1-lora-correction/scripts/refresh_paper_slots.py --slot R1 --compile     refresh one slot, then build on mscluster
-    python3 1-lora-correction/scripts/refresh_paper_slots.py --compile --gallery     build, then one sheet of every slot's page
-    python3 1-lora-correction/scripts/refresh_paper_slots.py --slot R1 --from f.csv --paper <copy> --remote <dir> --compile
+    python3 scripts/refresh_paper_slots.py --check                 every slot wired, PASS or MISS
+    python3 scripts/refresh_paper_slots.py                         refresh every slot whose result exists
+    python3 scripts/refresh_paper_slots.py --slot R1 --compile     refresh one slot, then build on mscluster
+    python3 scripts/refresh_paper_slots.py --compile --gallery     build, then one sheet of every slot's page
+    python3 scripts/refresh_paper_slots.py --slot R1 --from f.csv --paper <copy> --remote <dir> --compile
                                                                    test a slot on a copy of the paper
 
-A CSV must carry the twelve axis columns of protocol rule 9 (1-lora-correction/report/paper-review/protocol.md);
+A CSV must carry the twelve axis columns of protocol rule 9 (report/paper-review/protocol.md);
 --check and the refresh both refuse one that does not.
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-SHEET = REPO / "1-lora-correction/report/paper-review/layout-sheet.md"
+SHEET = REPO / "report/paper-review/layout-sheet.md"
 PAPER = REPO / "paper/iclr-56173"
 TEX_NAME = "iclr2027_conference.tex"
 REGISTER_NAME = "figures.md"

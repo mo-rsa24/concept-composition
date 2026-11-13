@@ -12,7 +12,7 @@ size when the chains' mean and variance each sit within 3 Monte Carlo standard e
 exact values. The last column is the gap between the chain's exact variance and 0.3077, the bias the
 step size alone causes.
 
-    python3 1-lora-correction/scripts/check_langevin_two_gaussians.py
+    python3 scripts/check_langevin_two_gaussians.py
 """
 
 from __future__ import annotations

@@ -1,12 +1,12 @@
 """PoE + Langevin on a named list of cells outside protocol rule 6's subset, for the appendix's best- and
-worst-cases grids (1-lora-correction/report/paper-review/protocol.md, rule 5).
+worst-cases grids (report/paper-review/protocol.md, rule 5).
 
 The same call as scripts/review_langevin_subset.py: c = 3, k = 20 over all 50 levels, from the starting latent
 every other method used for that seed (rule 2). Tiles go to <OUT>/langevin_extra/<pair>/seedNN/poe_langevin.png,
 apart from the subset, so the subset's rows in R1 and R3 stay exactly what rule 6 says. With
 LANGEVIN_TILES=langevin_subset it fills the subset's own missing cells instead, skipping any that exist.
 
-    python 1-lora-correction/scripts/review_langevin_cells.py --cells <file of 'concept a|concept b|seed' lines>
+    python scripts/review_langevin_cells.py --cells <file of 'concept a|concept b|seed' lines>
 """
 from __future__ import annotations
 

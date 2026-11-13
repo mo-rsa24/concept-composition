@@ -19,7 +19,7 @@
 # weights barely move) and v58-05-self-contrast at 15k (the clearest elephant and penguin).
 # Pairs are held out of the v58 pool. Seeds 9, 10 and 42 have cached starting noise.
 #
-#   sbatch 3-understanding-compositionality/scripts/render_repeat_and_ema.sbatch
+#   sbatch scripts/render_repeat_and_ema.sbatch
 #
 # Tiles land at <pair>/seed<NN>/ours_<run>_s<step>_<tag>_w50.png in the ablation grid, and the
 # job ends by printing the largest pixel difference for every rawA/rawB and rawA/ema pair.
@@ -50,7 +50,7 @@ for c in "${CKPTS[@]}"; do
     extra=""; [ "$variant" = ema ] && extra="--ema"
     echo "--- $tag  $(date +%H:%M:%S)"
     # One process per variant, so rawA and rawB never share a process.
-    "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --window 50 --tag "$tag" --checkpoint "$c" \
+    "$PY" scripts/figure_candidates.py --column ours --window 50 --tag "$tag" --checkpoint "$c" \
           --pairs "${PAIRS[@]}" --seeds $SEEDS $extra || echo "FAILED $tag"
     n=$(ls "$OUT"/*/seed*/ours_"${tag}"_w50.png 2>/dev/null | wc -l)
     echo "--- $tag wrote $n tiles (expected $(( ${#PAIRS[@]} * 3 )))"

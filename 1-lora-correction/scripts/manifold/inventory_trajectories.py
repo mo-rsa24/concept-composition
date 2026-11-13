@@ -280,7 +280,7 @@ def main(argv: list[str] | None = None) -> int:
     if summary["n_complete"] < summary["n_total"]:
         print()
         print("Backfill is required before plan-15 can run on this artefact.")
-        print("See: 1-lora-correction/scripts/manifold/sample_with_trajectory.py (to be written).")
+        print("See: scripts/manifold/sample_with_trajectory.py (to be written).")
     return 0
 
 

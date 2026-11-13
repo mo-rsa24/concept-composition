@@ -1,4 +1,4 @@
-"""Quantitative figures for the three SuperDiff findings in 1-lora-correction/report/is-the-gap-the-samplers-or-the-models/.
+"""Quantitative figures for the three SuperDiff findings in report/is-the-gap-the-samplers-or-the-models/.
 
 1. superdiff-baseline-eight-cells.png: the 8-cell grid (2 pairs x 2 step counts x 2 kappa-clamp
    settings, seed 9) from corrector/superdiff/parity/grid/.
@@ -15,7 +15,7 @@ import numpy as np, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 SD = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff")
-A = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models")
+A = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/is-the-gap-the-samplers-or-the-models")
 out = {}
 # dataviz reference palette, first categorical slots
 C = ["#4C6EF5", "#F76707", "#2F9E44", "#AE3EC9"]

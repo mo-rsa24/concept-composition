@@ -22,8 +22,8 @@ Objectives
 4. Name the VAE decoder's volume factor without deriving it.
 
 What to read
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the factor argument.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/warp_check.py and
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the factor argument.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/warp_check.py and
   warp_check.json: the worked instance.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md, Study first line:
   Theorem 6.1 and its proof.

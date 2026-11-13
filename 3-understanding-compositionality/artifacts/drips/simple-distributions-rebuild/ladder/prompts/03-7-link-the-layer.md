@@ -27,7 +27,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 3 row of the Bricks table:
   "Ideal experts and the seven kinds".
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 4, 7 and 8 and runs 2, 3, 4 and 6.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

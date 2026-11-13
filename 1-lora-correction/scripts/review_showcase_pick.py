@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 """Pick the one adapter by the protocol's showcase rule, from the calls, and write the choice.
 
-Reads 1-lora-correction/report/paper-review/showcase-calls.csv (one row per picture: candidate, pair, seed, call
+Reads report/paper-review/showcase-calls.csv (one row per picture: candidate, pair, seed, call
 "clear" or "not clear"). The winner has the most seeds on which both showcase pairs are clear; a
 tie goes to the most clear pictures out of 16, then to the most optimiser steps. The shared seed is
-the lowest seed on which the winner is clear for both pairs (1-lora-correction/report/paper-review/protocol.md, rule 1).
+the lowest seed on which the winner is clear for both pairs (report/paper-review/protocol.md, rule 1).
 
 Writes the choice to artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml, the one file
 later scripts read. To change your mind, either edit a call in the CSV and rerun, or set
 `override_candidate` and/or `override_seed` in the yaml and rerun; the override wins and the yaml
 records that it was used.
 
-    python3 1-lora-correction/scripts/review_showcase_pick.py            rank, write the yaml, draw R8's figure
-    python3 1-lora-correction/scripts/review_showcase_pick.py --dry-run  rank only
+    python3 scripts/review_showcase_pick.py            rank, write the yaml, draw R8's figure
+    python3 scripts/review_showcase_pick.py --dry-run  rank only
 """
 from __future__ import annotations
 
@@ -23,9 +23,9 @@ from collections import defaultdict
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-CALLS = REPO / "1-lora-correction/report/paper-review/showcase-calls.csv"
+CALLS = REPO / "report/paper-review/showcase-calls.csv"
 CHOICE = REPO / "artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml"
-FIGURE = REPO / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/showcase_calls.png"
+FIGURE = REPO / "artifacts/results/which-adapter-composes-the-showcase-pairs/showcase_calls.png"
 CKPT_ROOT = "/datasets/mmolefe/poe_repair_min/outputs/showcase"
 COHORT = {"v57-11b-x0-self-decay": "cohort2", "v58f-05-self-contrast": "cohort4"}
 PAIRS = ("a_cat__x__a_dog", "an_elephant__x__a_penguin")
@@ -132,7 +132,7 @@ def main() -> int:
         return 0
     CHOICE.write_text(
         "# The one adapter for every adapter number and image in the review response, and the shared seed.\n"
-        "# Written by 1-lora-correction/scripts/review_showcase_pick.py from 1-lora-correction/report/paper-review/showcase-calls.csv under\n"
+        "# Written by scripts/review_showcase_pick.py from report/paper-review/showcase-calls.csv under\n"
         "# protocol rule 1. To change it, edit a call in the CSV, or set an override below, then rerun.\n"
         f"candidate: {winner}\n"
         f"checkpoint: {checkpoint(winner)}\n"

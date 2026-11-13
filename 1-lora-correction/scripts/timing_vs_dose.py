@@ -25,7 +25,7 @@ similar to it.
 No count is printed. The detector disagrees with the pictures on this pair, so
 the grid argues from what is in the frame and the caption says so.
 
-    python 1-lora-correction/scripts/timing_vs_dose.py --seed 12
+    python scripts/timing_vs_dose.py --seed 12
 """
 
 from __future__ import annotations

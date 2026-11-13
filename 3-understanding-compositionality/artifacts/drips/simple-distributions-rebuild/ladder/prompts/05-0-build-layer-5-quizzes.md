@@ -62,13 +62,13 @@ What is already known
 - The shelf index and the worked-examples index are the two files under What to read
   (quiz-prep-pulse, "The bank").
 - Two toys carry this layer, in two notations (step file 05, steps 1 and 3; answer-key-quadrants
-  README, in artifacts/ideas/when-poe-reaches-a-and-b/runs/).
+  README, in 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/).
 - The overlap dial's notation: A is the left half, B the top half, A∩B the top-left quadrant, each
   expert 800 points smoothed by σ = 0.05, a share f of them in A∩B, and "deep" means x1 < −0.15 and
   x2 > 0.15 (step file 05, steps 1 and 3).
 - The answer key's notation: one Gaussian blob of std 0.15 per quadrant at (±0.5, ±0.5), A is
   x1 > 0, B is x2 > 0, A∩B the top-right quadrant, shares counted within 3 std of a blob's centre
-  (answer-key-quadrants README, in artifacts/ideas/when-poe-reaches-a-and-b/runs/).
+  (answer-key-quadrants README, in 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/).
 - Overlap-dial numbers over 3 data seeds: deep A∩B mass 0.00 at 0% (rounded: it is below 1.1e-6),
   0.30 ± 0.10 at 5% (about 40 shared points per set on average, since each point is shared with
   probability f), 0.59 at 20% and 0.76 at 100% (python -m rebuild.phase5_tables; step file 05,

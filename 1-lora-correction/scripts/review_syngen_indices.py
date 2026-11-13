@@ -1,6 +1,6 @@
 """SynGen's parse of the 276 benchmark prompts, aligned to SDXL's tokenizer, for the SDXL port (Plan 2).
 
-Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "spaCy and the token indices".
+Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "spaCy and the token indices".
 co3 has no spaCy, and en_core_web_trf 3.6.1 needs transformers below 4.31, so the parse runs here, in the syngen
 environment, through SynGen's own code: `SynGenDiffusionPipeline._extract_attribution_indices` (its three extractors,
 `include_entities` False, and `unify_lists`) with `_align_indices` against SDXL's first tokenizer. Both methods read only
@@ -12,7 +12,7 @@ Figure 5's two rows outside them (tent and snowy mountain, lighthouse and stormy
 share CLIP's vocabulary, so these indices must equal the ones SynGen found itself on SD 1.5; that is asserted for every
 prompt Plan 1's smoke run rendered (their sidecars record `syngen_indices`).
 
-    /datasets/mmolefe/envs/syngen/bin/python 1-lora-correction/scripts/review_syngen_indices.py
+    /datasets/mmolefe/envs/syngen/bin/python scripts/review_syngen_indices.py
 """
 
 from __future__ import annotations

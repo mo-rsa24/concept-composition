@@ -55,11 +55,11 @@ What is already known
   target is inferred from the cache's residual formula, and the 2D work measured only w = 1
   (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), which equals p_A·p_B only where p(x)
-  is flat (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
+  is flat (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - The quadrant toy is the four-quadrant answer-key toy, blobs at (±0.5, ±0.5), std 0.15, A is x1 > 0
   and B is x2 > 0, and at w = 1 with "contains" labels it puts 0.989 within 3 std of (0.5, 0.5) for
   every A∩B share r from 0.25 to 0.001, with Z = r
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, answer_key.py).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, answer_key.py).
 - Layer 5's quadrant sets (phase5_dial.make_sets) have an unconditional p(x), the two sets pooled,
   and on them the guided target's A∩B share is near 1 at every w for any f > 0 (step 1's
   reference).

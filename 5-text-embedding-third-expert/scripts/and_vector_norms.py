@@ -13,7 +13,7 @@ position this prints and saves the norm of x_raw, x_fix and E(joint) on each enc
 three pooled norms. Text encoders only, no UNet, fp32 on whatever device is free; about a minute on
 a CPU.
 
-    python 5-text-embedding-third-expert/scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"
+    python scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"
 
 Writes <out>/<joint slug>-norms.json and <out>/<joint slug>-norms.png.
 """
@@ -135,7 +135,7 @@ def main() -> int:
     ap.add_argument("--joint", required=True)
     ap.add_argument("--a", required=True)
     ap.add_argument("--b", required=True)
-    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of")
+    ap.add_argument("--out", type=Path, default=REPO / "artifacts/results/what-the-and-vector-is-made-of")
     args = ap.parse_args()
 
     import torch

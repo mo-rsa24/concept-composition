@@ -26,7 +26,7 @@ What to read
 - The fair-test table walk09.py printed (step 4).
 - toy/rebuild/out/phase9/phase9.json and fair-test.png: the reference's outputs (step 0).
 - The layer 9 --math drip folder under artifacts/drips/ and its dispatch.md: my notation (step 2).
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card, the baseline.
 
 What is already known
@@ -35,7 +35,7 @@ What is already known
 - The fair test is a joint {A, B} condition trained on only the share r of the data that is A and
   B, against composition, against composition plus a small correction fine-tuned on the same few
   A∩B samples, at r = 0.05 and 0.001, with exact and with trained experts, scored by TV against the
-  exact joint (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9; REBUILD_WALK.md,
+  exact joint (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9; REBUILD_WALK.md,
   brick "The correction, learned back").
 - The toy is four blobs at (±0.5, ±0.5) with σ = 0.15, and the exact joint is the top-right blob
   (run 7's card).

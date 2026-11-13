@@ -140,7 +140,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 | Source | What it gives the idea | Confidence |
 |---|---|---|
-| [the parent walk](../../../../artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md), claim 12 | the findings this testbed must reproduce: the support rule, the two constructions, the sampler result, the kinds of composition | read in this session |
+| [the parent walk](../when-poe-reaches-a-and-b/IDEA_MAP.md), claim 12 | the findings this testbed must reproduce: the support rule, the two constructions, the sampler result, the kinds of composition | read in this session |
 | [the composition terms](../poe-overlap-dial/composition-terms.md) | contention's three forms (fusion, dominance, leakage); the four questions that place any composition | read in this session |
 | `poe_repair_min/context/world/poe-composition.md` and `chimera.md` | the SDXL hybrid: one model, two prompts, guidance `7.5`, 50 DDIM steps; scored by an instance counter that cannot tell two dogs from a cat and a dog | read in this session |
 | `poe_repair_min/artifacts/results/does-interaction-strength-predict-which-pairs-blend/figure-explainer.md` | the cache of ε_A, ε_B, ε_joint, ε_∅ at all 50 steps for 25 pairs under `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`; the interaction bound did not track fail rate | read in this session |

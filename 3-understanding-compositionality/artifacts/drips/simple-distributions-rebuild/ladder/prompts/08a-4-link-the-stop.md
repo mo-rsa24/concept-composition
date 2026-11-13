@@ -26,7 +26,7 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 8 and layer 9 rows of the
   Bricks table ("The interaction term, exact" and "The correction, learned back").
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 (child 4.1) and 9.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 (child 4.1) and 9.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

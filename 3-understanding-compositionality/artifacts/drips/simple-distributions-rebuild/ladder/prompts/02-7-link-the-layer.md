@@ -27,7 +27,7 @@ What to read
   table: "MALA and CHA fix", "Product, mixture, negation wrappers" and "Annealed ULA, MALA, UHA,
   MUHA".
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 1, 3 and 4 and runs 4 and 5.
-- artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3, 4 and 5 and run 5.
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3, 4 and 5 and run 5.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

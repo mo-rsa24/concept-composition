@@ -12,5 +12,5 @@
 set -uo pipefail
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-  1-lora-correction/scripts/showcase/build_render_teacher_cache.py \
+  scripts/showcase/build_render_teacher_cache.py \
   --cells artifacts/_shared/cross_pair_pool_configs/cells_v57.json

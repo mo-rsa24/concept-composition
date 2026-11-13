@@ -34,25 +34,25 @@ export CUDA_VISIBLE_DEVICES="$GPU"
 
 case "$STAGE" in
   identity)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --check-identity
+    "$PY" scripts/showcase/dog_x_dog_probe.py --check-identity
     ;;
   probe)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --run-probe --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --run-probe --seeds 9,10,11,12,13,14,15,16
     ;;
   mono)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --run-mono --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --run-mono --seeds 9,10,11,12,13,14,15,16
     ;;
   poe)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --run-poe --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --run-poe --seeds 9,10,11,12,13,14,15,16
     ;;
   score)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --score --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --score --seeds 9,10,11,12,13,14,15,16
     ;;
   score_mono)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --score-mono --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --score-mono --seeds 9,10,11,12,13,14,15,16
     ;;
   score_poe)
-    "$PY" 1-lora-correction/scripts/showcase/dog_x_dog_probe.py --score-poe --seeds 9,10,11,12,13,14,15,16
+    "$PY" scripts/showcase/dog_x_dog_probe.py --score-poe --seeds 9,10,11,12,13,14,15,16
     ;;
   *)
     echo "unknown stage: $STAGE" >&2

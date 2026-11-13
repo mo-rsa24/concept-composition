@@ -3,11 +3,11 @@
 Calls poe_repair.experiments.compose_scorer_validation.detection_scorer.count_instances unchanged
 (GroundingDINO asked for "animal", small boxes dropped, overlaps merged); comp is 1 when it finds
 two or more animals. It is validated on animal pairs only, so a row is counted when it is in R1's
-animals set or is a held-out animal pair (the ANIMAL_PAIRS of 1-lora-correction/scripts/review_step4_count.py);
+animals set or is a held-out animal pair (the ANIMAL_PAIRS of scripts/review_step4_count.py);
 every other row is left out, never guessed. Rows already in --out are skipped, so a run resumes.
 
 Usage (co3 env, repo on PYTHONPATH, non-Blackwell GPU or CPU):
-  python 1-lora-correction/scripts/review_score_comp.py --in rows_a.csv rows_b.csv --out comp.csv
+  python scripts/review_score_comp.py --in rows_a.csv rows_b.csv --out comp.csv
 """
 from __future__ import annotations
 

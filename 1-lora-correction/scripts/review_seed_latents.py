@@ -7,7 +7,7 @@ This script calls the same function with the same pair, so the saved tensor is t
 prints whether it came from the cache or from that draw. ToMe runs in its own environment without this package, so
 it reads these files instead.
 
-    python 1-lora-correction/scripts/review_seed_latents.py            # writes <OUT>/seedNN.pt, one [1, 4, 128, 128] fp16 tensor each
+    python scripts/review_seed_latents.py            # writes <OUT>/seedNN.pt, one [1, 4, 128, 128] fp16 tensor each
 """
 
 from __future__ import annotations

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# The tail of CO3's R1 and R3 renders for the ICLR 56173 review response (1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md, task 3):
+# The tail of CO3's R1 and R3 renders for the ICLR 56173 review response (plans/prze-review-baselines.md, task 3):
 # the cells still missing when the six eval jobs slowed, given out as whole pairs, worked from the end of the list so
 # the helpers meet the running jobs last. Shared-device path: one card, nohup over ssh.
 #

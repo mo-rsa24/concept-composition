@@ -32,7 +32,7 @@ predictor claim is dead. Sign is not pre-committed, only strength: either
 direction of monotone association counts, and the sign is reported.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/dose_trajectory_divergence.py
+    CUDA_VISIBLE_DEVICES=1 python scripts/dose_trajectory_divergence.py
 """
 
 from __future__ import annotations

@@ -4,7 +4,7 @@ no GPU -- every panel is already rendered under OUT_ROOT by dog_x_dog_probe.py's
 stages. This is the grid the plan's "What happens (visual)" section describes.
 
 Usage:
-    python 1-lora-correction/scripts/showcase/dog_x_dog_grid.py
+    python scripts/showcase/dog_x_dog_grid.py
 """
 
 from __future__ import annotations

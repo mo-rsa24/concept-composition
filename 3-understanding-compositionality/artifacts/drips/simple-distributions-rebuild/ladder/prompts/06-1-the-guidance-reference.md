@@ -52,7 +52,7 @@ What to read
 - rebuild/walk_numbers.py: how worked numbers are written.
 - 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Guidance as a tilted
   density", and its Pins.
-- artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.py:
+- 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.py:
   the four-quadrant toy and its w = 1 numbers.
 
 What is already known
@@ -66,12 +66,12 @@ What is already known
   gs*(eps_j − eps_a − eps_b + eps_uncond), and the 2D work measured construction (1) only at w = 1
   (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), which equals construction (2)'s
-  p_A·p_B only where p(x) is flat (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
+  p_A·p_B only where p(x) is flat (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - The four-quadrant toy has one Gaussian blob per quadrant at (±0.5, ±0.5), std 0.15, A is x1 > 0
   and B is x2 > 0, and with "contains" labels and a share r in the top-right, construction (1) puts
   0.989 within 3 std of (0.5, 0.5) for every r from 0.25 to 0.001, with normaliser Z = r, and at
   r = 0 it puts 0.970 at the origin
-  (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, answer_key.py).
+  (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md, answer_key.py).
 - 0.989 is 1 − e^(−9/2), the mass one blob holds within 3 std (when-poe-reaches-a-and-b idea map,
   run 4).
 - Layer 5's quadrant sets (phase5_dial.make_sets) have an unconditional p(x), the two sets pooled,

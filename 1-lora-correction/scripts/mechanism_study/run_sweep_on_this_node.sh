@@ -5,7 +5,7 @@
 # use it, rather than queueing behind the biggpu one-job-per-user limit. No
 # sbatch, no srun: this is the work itself, run here.
 #
-#   bash 1-lora-correction/scripts/mechanism_study/run_sweep_on_this_node.sh
+#   bash scripts/mechanism_study/run_sweep_on_this_node.sh
 #
 # Safe to interrupt and re-run: a cell whose manifest exists is skipped, so
 # Ctrl-C and restart picks up where it left off. Safe to run twice by accident
@@ -14,7 +14,7 @@
 # Runs in the foreground and prints one line per cell. To survive the terminal
 # closing, run it under nohup:
 #
-#   nohup bash 1-lora-correction/scripts/mechanism_study/run_sweep_on_this_node.sh \
+#   nohup bash scripts/mechanism_study/run_sweep_on_this_node.sh \
 #     > results/mechanism_study/sweep_$(hostname).log 2>&1 &
 #   tail -f results/mechanism_study/sweep_*.log
 set -euo pipefail
@@ -94,4 +94,4 @@ echo "cells on disk: $(ls -d $OUT/*/seed_* 2>/dev/null | wc -l) / $TOTAL"
 
 echo
 echo "=== scoring ==="
-$PY 1-lora-correction/scripts/mechanism_study/reprobe_table.py
+$PY scripts/mechanism_study/reprobe_table.py

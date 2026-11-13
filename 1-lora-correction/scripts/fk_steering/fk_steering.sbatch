@@ -9,7 +9,7 @@
 # when no biggpu device is free). The launcher's own guards (disk, python by node, device in use,
 # torch.cuda) run inside the job.
 #
-# Usage:  sbatch --nodelist=<idle bigbatch node> 1-lora-correction/scripts/fk_steering/fk_steering.sbatch {smoke|full|adapter} [extra args...]
+# Usage:  sbatch --nodelist=<idle bigbatch node> scripts/fk_steering/fk_steering.sbatch {smoke|full|adapter} [extra args...]
 set -euo pipefail
 MODE="${1:-adapter}"; shift || true
-exec env GPU=0 bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/fk_steering/run_fk_steering.sh "$MODE" "$@"
+exec env GPU=0 bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/fk_steering/run_fk_steering.sh "$MODE" "$@"
