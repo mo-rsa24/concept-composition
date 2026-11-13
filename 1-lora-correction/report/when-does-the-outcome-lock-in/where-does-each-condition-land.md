@@ -156,7 +156,7 @@ Every render shares its seed's initial noise (the training cache's held-out step
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-the-pictures-behind-the-points) ➡️
 
-![The 48 renders on the cloud axes: x from the cat centroid to the dog centroid, y from their midpoint toward the joint-prompt centroid](../../artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-cloud-axes.png)
+![The 48 renders on the cloud axes: x from the cat centroid to the dog centroid, y from their midpoint toward the joint-prompt centroid](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-cloud-axes.png)
 *Black squares are product-of-experts endpoints, pink diamonds the same seeds with the λ 1.2
 correction, one grey-then-pink arrow per seed. What to notice: every arrow ends inside the
 joint-prompt hull's height, and no square does.*
@@ -174,7 +174,7 @@ construction. The PoE band and the corrected band do not overlap. From
 
 Navigation: ⬅️ [Previous](#1-on-axes-built-from-the-reference-clouds-poe-sits-low-and-the-correction-lifts-it) | 📋 [TOC](#table-of-contents) | [Next](#3-the-two-doses-agree-on-where-to-go-and-not-on-the-exact-direction) ➡️
 
-![Eight seeds by six conditions: cat alone, dog alone, joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/where-does-each-condition-land/cat-x-dog-contact-sheet.png)
+![Eight seeds by six conditions: cat alone, dog alone, joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-contact-sheet.png)
 *What to notice: the fourth column is one animal or one fused animal in every row; the fifth and
 sixth columns are two animals in every row.*
 📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-3-the-contact-sheet-eight-seeds-by-six-conditions).
@@ -189,7 +189,7 @@ fields `points[].nearest_cloud`, `centroid_cosine_gaps`, `cloud_stats`.
 
 Navigation: ⬅️ [Previous](#2-the-pictures-behind-the-points) | 📋 [TOC](#table-of-contents) | [Next](#4-over-the-50-steps-the-joint-run-settles-first-the-plain-run-wanders) ➡️
 
-![Seeds 10 and 11: joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/where-does-each-condition-land/cat-x-dog-seeds-10-11-dose-strip.png)
+![Seeds 10 and 11: joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-seeds-10-11-dose-strip.png)
 *What to notice: in both rows the second column is one animal, the third has two, and the fourth
 keeps two while changing which one is in front and how much of the frame each takes.*
 📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-4-the-dose-strip-for-seeds-10-and-11).
@@ -203,7 +203,7 @@ the joint centroid: 0.59 to 0.74, positive on all 8 seeds. Cosine between the λ
 
 Navigation: ⬅️ [Previous](#3-the-two-doses-agree-on-where-to-go-and-not-on-the-exact-direction) | 📋 [TOC](#table-of-contents) | [Next](#5-one-seed-frame-by-frame-the-plain-run-changes-animal-mid-way) ➡️
 
-![Both-ness of each run's running estimate against denoising step, one thin line per seed, thick line per condition mean](../../artifacts/results/where-does-each-condition-land/both-ness-over-denoising-steps.png)
+![Both-ness of each run's running estimate against denoising step, one thin line per seed, thick line per condition mean](../../../artifacts/results/where-does-each-condition-land/both-ness-over-denoising-steps.png)
 *y is both-ness of the running estimate, x is the denoising step, one point per saved frame. What
 to notice: the purple mean reaches the dashed joint-prompt centroid line by step 25 and stays;
 the pink mean climbs until step 30 and holds under it; the black mean never leaves 0.2 and its
@@ -225,7 +225,7 @@ read, not a verdict.
 
 Navigation: ⬅️ [Previous](#4-over-the-50-steps-the-joint-run-settles-first-the-plain-run-wanders) | 📋 [TOC](#table-of-contents) | [Next](#6-the-moving-version) ➡️
 
-![Seed 15, six conditions by seven saved steps: the decoded running estimate of the finished image](../../artifacts/results/where-does-each-condition-land/frames-seed-15-strip.png)
+![Seed 15, six conditions by seven saved steps: the decoded running estimate of the finished image](../../../artifacts/results/where-does-each-condition-land/frames-seed-15-strip.png)
 *Rows are the six conditions, columns the saved steps 0, 5, 10, 20, 30, 40 and 50. What to
 notice: the fourth row is a cat at steps 5 and 10, a cat with a dog's muzzle at 20 and 30, and a
 dog at 40 and 50; the last two rows show two silhouettes from step 5 and two animals from
@@ -242,12 +242,12 @@ both-ness 0.67, commit step 20; λ 1.2 final both-ness 0.44, commit step 10.
 
 Navigation: ⬅️ [Previous](#5-one-seed-frame-by-frame-the-plain-run-changes-animal-mid-way) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![The animated page at step 20: every run's running estimate as a point in the cloud-axes plane](../../artifacts/results/where-does-each-condition-land/scene-step-20.png)
+![The animated page at step 20: every run's running estimate as a point in the cloud-axes plane](../../../artifacts/results/where-does-each-condition-land/scene-step-20.png)
 *A screenshot of the interactive page at step 20 of 50, all eight seeds. What to notice: the
 purple points are already inside their hull, the pink diamonds are climbing toward it, and the
 black squares are spread across the middle.*
 
-![The animated page at step 50 with seed 15 selected and trails on](../../artifacts/results/where-does-each-condition-land/scene-seed-15-step-50.png)
+![The animated page at step 50 with seed 15 selected and trails on](../../../artifacts/results/where-does-each-condition-land/scene-seed-15-step-50.png)
 *Seed 15 with trails. What to notice: the black trail crosses the plane from left to right
 before ending near the dog cloud; the pink trail climbs and ends inside the joint hull. The six
 thumbnails on the right are that seed's finished images.*
@@ -261,11 +261,11 @@ per the [scene-serving recipe](../../../runbook/looking-at-what-a-run-produced/s
 
 Navigation: ⬅️ [Previous](#6-the-moving-version) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![The cloud-axes plot with seven decoded pictures along each axis](../../artifacts/results/where-does-each-condition-land/axes/cat-x-dog-in-dino-space-cloud-axes-with-axis-pictures.png)
+![The cloud-axes plot with seven decoded pictures along each axis](../../../artifacts/results/where-does-each-condition-land/axes/cat-x-dog-in-dino-space-cloud-axes-with-axis-pictures.png)
 *The plane of rung 1 with a strip of decoder reconstructions on each edge. What to notice: along
 the bottom the face turns from cat to dog; up the left edge one animal becomes two side by side.*
 
-![Four renders beside their reconstructions through the representation autoencoder](../../artifacts/results/where-does-each-condition-land/axes/reconstruction_check.png)
+![Four renders beside their reconstructions through the representation autoencoder](../../../artifacts/results/where-does-each-condition-land/axes/reconstruction_check.png)
 *Left to right in pairs: PoE seed 9, PoE seed 10, the joint prompt at seed 9, the corrected seed
 15. What to notice: the fused faces come back fused, so the decoder keeps a chimera rather than
 cleaning it into one animal.*
@@ -285,7 +285,7 @@ reconstruction of a point in the encoder's space and none is an SDXL output.
 
 Navigation: ⬅️ [Previous](#7-the-axes-drawn-as-pictures-x-is-which-animal-y-is-how-many) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Both-ness of the finished image per pair: PoE, corrected and joint, one dot per seed](../../artifacts/results/where-does-each-condition-land/pairs/bands-across-pairs.png)
+![Both-ness of the finished image per pair: PoE, corrected and joint, one dot per seed](../../../artifacts/results/where-does-each-condition-land/pairs/bands-across-pairs.png)
 *y is both-ness on each pair's own axes, x is the pair, one dot per seed and a bar at the mean.
 What to notice: black and pink separate on cat × dog and cow × buffalo, and sit on top of each
 other on the five pairs whose two animals look alike.*

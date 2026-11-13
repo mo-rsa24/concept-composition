@@ -109,7 +109,7 @@ Mark: dead, and the idea does not need it. V5 is dropped in favour of V6.
 **The structural objection was false.** The worry was that a pair has co-occurrence photographs
 because the two things genuinely turn up together, which is also why the model already composes
 them. `a_turtle__x__a_tortoise` is one of the 11 Open Images co-occurring pairs and fails 8 of 8 in
-[the fail-rate table](../../results/does-the-fix-reach-unseen-pairs/fail_rate.md);
+[the fail-rate table](../../results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md);
 `an_elephant__x__a_penguin` never co-occurs and also fails 8 of 8. All 18 animal pairs measured
 under plain PoE fail, so there is no set of pairs the model already composes.
 

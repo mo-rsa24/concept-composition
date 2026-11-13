@@ -20,13 +20,13 @@ loss of fidelity. The decay criterion is post-hoc and is said so.
 
 ## 1. Same seed, later checkpoints
 
-![Rank 32, seeds 9, 11, 16 at 30k, 60k, 70k, 90k](../../artifacts/results/does-training-longer-help-the-pooled-lora/rank32-same-seed-across-checkpoints.png)
+![Rank 32, seeds 9, 11, 16 at 30k, 60k, 70k, 90k](../../../artifacts/results/does-training-longer-help-the-pooled-lora/rank32-same-seed-across-checkpoints.png)
 *Each row is one held-out seed from the same initial latent, λ 1, correction on all 50 steps.
 Columns are the rank 32 checkpoints at 30k, 60k, 70k and 90k. What to notice: 30k and 60k are
 near-identical and crisp; at 70k seed 9 has turned into a sketchy group and at 90k its dog's head
 is malformed and the colour has drained. All four columns still count as two animals.*
 
-![Rank 8, seeds 9, 12, 16 at 30k, 240k, 280k, 300k](../../artifacts/results/does-training-longer-help-the-pooled-lora/rank8-same-seed-across-checkpoints.png)
+![Rank 8, seeds 9, 12, 16 at 30k, 240k, 280k, 300k](../../../artifacts/results/does-training-longer-help-the-pooled-lora/rank8-same-seed-across-checkpoints.png)
 *Same layout for the rank 8 lineage. What to notice: by 240k every tile has lost saturation, by
 280k seed 9 is one blurred dog, and seed 16 is a haze of fur in the last three columns.*
 
@@ -44,7 +44,7 @@ rank 8 grows from 0.551 at 30k to 0.850 at 280k. From `rows[].drift.dino.drift` 
 
 ## 2. The decay over the whole run, in both instruments
 
-![Held-out DINOv2 drift against training step, three ranks, 8-seed grids and the 2-cell tracking set](../../artifacts/results/does-training-longer-help-the-pooled-lora/held-out-drift-vs-training-step.png)
+![Held-out DINOv2 drift against training step, three ranks, 8-seed grids and the 2-cell tracking set](../../../artifacts/results/does-training-longer-help-the-pooled-lora/held-out-drift-vs-training-step.png)
 *x is training step in thousands, y is the DINOv2 drift of rung 1. Bold points are the 8-seed
 grids; faint lines are the 2-cell tracking set (cat x dog seeds 9 and 10) each run logged to W&B
 every 10k steps. What to notice: all three ranks start near −0.1 and climb to 0; the faint lines
@@ -58,7 +58,7 @@ held-out drift is at or above 0 from 140k on, with excursions to −0.13 at 230k
 
 ## 3. The weights never stop growing
 
-![Frobenius norm of the LoRA weights against training step, three ranks](../../artifacts/results/does-training-longer-help-the-pooled-lora/adapter-weight-norm-vs-step.png)
+![Frobenius norm of the LoRA weights against training step, three ranks](../../../artifacts/results/does-training-longer-help-the-pooled-lora/adapter-weight-norm-vs-step.png)
 *x is training step, y is the norm of all LoRA weights read from each checkpoint. What to notice:
 no curve flattens, and the higher the rank the higher and steeper the curve.*
 

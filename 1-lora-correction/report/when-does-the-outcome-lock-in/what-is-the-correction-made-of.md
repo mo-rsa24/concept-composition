@@ -100,7 +100,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-the-two-experts-draw-different-animals-in-the-same-place) ➡️
 
-![Orthogonal share of the correction's squared norm against denoising step, mean and min-to-max band over seeds 9 to 16, with the joint direction's share and the norms below](../../artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.png)
+![Orthogonal share of the correction's squared norm against denoising step, mean and min-to-max band over seeds 9 to 16, with the joint direction's share and the norms below](../../../artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.png)
 *What to notice: the pink line sits between the two bars through the shaded window, peaks at
 step 5, and drops under 0.1 by step 20; the purple line in the middle panel climbs to 0.7 and
 stays; in the bottom panel the correction's norm grows sixfold while its orthogonal part grows
@@ -127,7 +127,7 @@ about 256 throughout. The PoE prediction rebuilt from the raw vectors projects w
 
 Navigation: ⬅️ [Previous](#1-a-third-of-the-early-correction-is-out-of-the-experts-reach-and-the-rest-is-mostly-damping) | 📋 [TOC](#table-of-contents) | [Next](#3-the-adapter-learned-the-damping-and-half-of-the-new-direction) ➡️
 
-![Seed 15: the decoded running estimate under the cat expert, the dog expert, PoE, the joint prompt and the empty prompt at the same cached state, seven steps, with the experts' per-position disagreement map](../../artifacts/results/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png)
+![Seed 15: the decoded running estimate under the cat expert, the dog expert, PoE, the joint prompt and the empty prompt at the same cached state, seven steps, with the experts' per-position disagreement map](../../../artifacts/results/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png)
 *What to notice: at steps 5 and 10 the first row is a cat and the second a dog with the head in
 the same place; the third row is a cat with a dog's muzzle at step 10 and a dog at step 30; the
 fifth row, the empty prompt, is already a dog at step 20; the heat map is brightest on the eyes,
@@ -150,13 +150,13 @@ at step 30. From `same-place-share.json`, fields `summary.same_place_share_mean_
 
 Navigation: ⬅️ [Previous](#2-the-two-experts-draw-different-animals-in-the-same-place) | 📋 [TOC](#table-of-contents) | [Next](#4-runs-on-the-product-keep-moving-and-the-plain-one-keeps-changing-animal) ➡️
 
-![The adapter's orthogonal share beside the correction's, and the cosines between their orthogonal parts, in-span parts and whole vectors, against step](../../artifacts/results/what-the-correction-is-made-of/adapter-span-share-over-steps.png)
+![The adapter's orthogonal share beside the correction's, and the cosines between their orthogonal parts, in-span parts and whole vectors, against step](../../../artifacts/results/what-the-correction-is-made-of/adapter-span-share-over-steps.png)
 *What to notice: the blue line runs under the pink one through the shaded window and joins it
 after step 15; the purple cosine never leaves 0.9; the dark red cosine starts above 0.6 and
 settles near 0.35.*
 📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-3-the-adapters-output-projected-the-same-way).
 
-![Seed 15: per-position norm of the adapter's output above the correction's at seven steps](../../artifacts/results/what-the-correction-is-made-of/seed-15-adapter-vs-correction-norm-maps.png)
+![Seed 15: per-position norm of the adapter's output above the correction's at seven steps](../../../artifacts/results/what-the-correction-is-made-of/seed-15-adapter-vs-correction-norm-maps.png)
 *What to notice: both rows light the eyes, muzzle and ears at steps 20 and 30 and are near-dark
 before step 10.*
 📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-4-seed-15-where-the-adapter-and-the-correction-act).
@@ -178,12 +178,12 @@ between the adapter-off PoE prediction computed live and the cached one, minimum
 
 Navigation: ⬅️ [Previous](#3-the-adapter-learned-the-damping-and-half-of-the-new-direction) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Kinetic energy of each run's embedded running estimate, one point per run by condition, with the floor as a tick under each; all segments on the left, from step 10 on the right](../../artifacts/results/what-the-correction-is-made-of/track-kinetic-energy.png)
+![Kinetic energy of each run's embedded running estimate, one point per run by condition, with the floor as a tick under each; all segments on the left, from step 10 on the right](../../../artifacts/results/what-the-correction-is-made-of/track-kinetic-energy.png)
 *What to notice: on the right panel the three left-hand conditions sit under 1 and the three
 product-based conditions sit near 3, with every grey tick near 0.1.*
 📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-5-how-far-each-runs-running-estimate-travels).
 
-![Which-animal score of each run's running estimate against saved step, thin line per seed, thick mean per condition](../../artifacts/results/what-the-correction-is-made-of/which-animal-over-steps.png)
+![Which-animal score of each run's running estimate against saved step, thin line per seed, thick mean per condition](../../../artifacts/results/what-the-correction-is-made-of/which-animal-over-steps.png)
 *What to notice: orange and green separate by step 15 and hold; the black thin lines cross zero
 to the end; seed 15's dashed black line is above +0.2 at step 20 and below −0.2 from step 35.*
 📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-6-which-animal-each-run-reads-as-step-by-step).

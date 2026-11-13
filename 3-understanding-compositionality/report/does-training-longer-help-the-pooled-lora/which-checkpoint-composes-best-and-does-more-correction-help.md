@@ -21,16 +21,16 @@ figure is judged against the instance-count scorer validated in
 
 ## 1. The three best checkpoints, seed by seed
 
-![Rank 32 at 30k: eight held-out seeds, joint prompt, plain PoE, λ 1.0, λ 1.2](../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank32-30k-full-window.png)
+![Rank 32 at 30k: eight held-out seeds, joint prompt, plain PoE, λ 1.0, λ 1.2](../../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank32-30k-full-window.png)
 *Rows are held-out seeds 9 to 16. Columns: the joint-prompt render, plain PoE, PoE plus the
 rank 32 correction at λ 1.0, then at 1.2. What to notice: every PoE tile is one blended animal
 and seven of eight corrected tiles are a cat and a dog. Seed 14 is the exception in both
 corrected columns.*
 
 The rank 8 @ 30k and rank 16 @ 50k grids are
-[grid-rank8-30k-full-window.png](../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank8-30k-full-window.png)
+[grid-rank8-30k-full-window.png](../../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank8-30k-full-window.png)
 and
-[grid-rank16-50k-full-window.png](../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank16-50k-full-window.png),
+[grid-rank16-50k-full-window.png](../../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank16-50k-full-window.png),
 same layout, same seed that fails.
 
 **The number.** Seeds the instance-count scorer calls two animals, of 8, λ 1, all 50 steps:
@@ -43,7 +43,7 @@ checkpoint. From `summary.full.1.0.compose_rate` and `rows[].cat_and_dog` in
 
 ## 2. More correction does not buy more seeds
 
-![Seeds composing against λ, one line per checkpoint, three ranks, full and early windows](../../artifacts/results/does-training-longer-help-the-pooled-lora/compose-count-vs-lambda-by-checkpoint.png)
+![Seeds composing against λ, one line per checkpoint, three ranks, full and early windows](../../../artifacts/results/does-training-longer-help-the-pooled-lora/compose-count-vs-lambda-by-checkpoint.png)
 *x is λ, y is how many of 8 held-out seeds compose, one line per checkpoint (label = step).
 Top row: correction on all 50 steps. Bottom row: correction on steps 0 to 9 only. What to
 notice: the top-row lines for rank 16 and rank 32 sit flat between 6 and 8 from λ 1.0 to 2.0,
@@ -61,7 +61,7 @@ fields `rows[].compose` and `rows[].cat_and_dog`.
 
 ## 3. What λ 2.0 does to a degraded checkpoint
 
-![Rank 8 at 300k, λ sweep, correction on all 50 steps](../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank8-300k-full-window-lambda-sweep.png)
+![Rank 8 at 300k, λ sweep, correction on all 50 steps](../../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank8-300k-full-window-lambda-sweep.png)
 *Rows are seeds 9 to 16, columns λ 0 to 2.0, rank 8 at 300k. What to notice: the tiles are
 grey and soft at every λ, and from 1.3 upward several two-animal tiles turn amber, meaning the
 scorer sees two animals that are not a cat and a dog.*
@@ -85,7 +85,7 @@ record for the cross-device number; the same-device identity is verified from th
 
 ## 5. On the checkpoint the showcase figures use, raising λ changes the scene rather than the count
 
-![Rank 32 at 30050: eight held-out seeds, the joint prompt then λ 0, 1.0, 1.2, 1.3, 1.5 and 2.0, correction on all 50 steps](../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank32-30050-full-window-lambda-sweep.png)
+![Rank 32 at 30050: eight held-out seeds, the joint prompt then λ 0, 1.0, 1.2, 1.3, 1.5 and 2.0, correction on all 50 steps](../../../artifacts/results/does-training-longer-help-the-pooled-lora/grid-rank32-30050-full-window-lambda-sweep.png)
 *Rows are seeds 9 to 16, columns run from the joint-prompt render to λ 2.0. What to notice: seed
 10's two close-up dogs become a distant desert shack with two thumbnail-sized animals from λ 1.3
 onward, and at λ 2.0 seeds 9, 11 and 15 change medium, from photograph or pencil sketch to

@@ -25,7 +25,7 @@ run and is reported as a post-hoc read, not as the tested claim.
 
 ## 1. The bound does not track the fail rate
 
-![The lower bound on G·M along the run, one curve per pair, and its mean over steps 10 to 40 per pair sorted and coloured by fail rate](../../artifacts/results/does-interaction-strength-predict-which-pairs-blend/interaction-bound-per-pair-from-the-cache.png)
+![The lower bound on G·M along the run, one curve per pair, and its mean over steps 10 to 40 per pair sorted and coloured by fail rate](../../../artifacts/results/does-interaction-strength-predict-which-pairs-blend/interaction-bound-per-pair-from-the-cache.png)
 *Left: ‖r_t/σ_t‖²/4 at each cached state, median over seeds, log y, against denoising step, one
 curve per pair, steps 46 to 49 cut because 1/σ_t² dominates there; cat x dog, elephant x penguin
 and butterfly x flower meadow drawn thick and named. Right: the same quantity averaged over steps

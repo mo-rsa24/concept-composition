@@ -131,7 +131,7 @@ The one result with a verdict, figures and a W&B run and no home in the arc yet 
 penalty: charging the adapter for the size of its correction cut its on-policy energy 27% and moved
 the held-out renders back toward plain product-of-experts. Its verdict is in the scope 01 review
 file, its figures under
-[does charging the adapter for its energy sharpen the fix](../artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix/),
+[does charging the adapter for its energy sharpen the fix](../artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix),
 and the run is `2cfdtdnl`. The rest of the holes are in [Still open](#still-open) at the foot of
 this file.
 

@@ -597,7 +597,7 @@ change that swamps the spatial change the hypothesis is about. So each change is
 split into **gain**, the single best uniform rescaling of the off-map onto the on-map,
 and **pattern**, whatever a rescaling cannot explain. Only pattern is compared. Full
 argument with its guards in
-[../artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md](../artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md).
+[../artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md](../../1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md).
 
 **Blocked on one decision.** One point per seed or one point per pair.
 `/pair-figure` decides it.
