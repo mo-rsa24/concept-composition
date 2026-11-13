@@ -39,8 +39,8 @@ What to read
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in .quiz-prep/, so prep-cadence runs first
   for each quiz (quiz-cadence, "The preparation gate").
 - The step file links a textbook page beside each fundamental it uses and carries timestamped video
@@ -69,12 +69,12 @@ What is already known
   density q_t(x) = (1/N)Σ N(x; √ᾱ_t x_i, v_t I) with v_t = 1 − ᾱ_t + ᾱ_t σ²; σ = 0.05 and N = 800
   (step file 03, steps 0 to 2).
 - Every worked number prints from python -m rebuild.walk_numbers as a p3. key in
-  toy/rebuild/out/walk-numbers.json, 25 in all (toy/rebuild/out/walk-numbers.json).
+  3-understanding-compositionality/toy/rebuild/out/walk-numbers.json, 25 in all (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - 7 of the 25 are the numbers walk03.py prints: the three-point log-density -2.6288 by formula and
   by scikit-learn, v_t = 1.0, 0.5229 and 0.00313 at t = 99, 50 and 0, the cell area 8.403e-05 and
-  58081 grid points (toy/rebuild/out/walk-numbers.json).
+  58081 grid points (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The other 18 back the step file's derivations, among them the 200 perfect-draw redraws and
-  dominance's mode weights (toy/rebuild/out/walk-numbers.json).
+  dominance's mode weights (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The perfect-sample baseline (the code prints it as floor TV) is the total variation, on 40 × 40
   bins, between n exact draws from the grid density and the density itself, and a sampler is read
   against it, never against 0 (step file 03, step 4).
@@ -86,7 +86,7 @@ What is already known
   (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 2).
 
 Rules
-- Change nothing in the step files' prose or in toy/rebuild/.
+- Change nothing in the step files' prose or in 3-understanding-compositionality/toy/rebuild/.
 - In the ladder files, write only the two URLs.
 - Report each quiz's question count, node count and verdicts from prep-cadence before its page is
   built.

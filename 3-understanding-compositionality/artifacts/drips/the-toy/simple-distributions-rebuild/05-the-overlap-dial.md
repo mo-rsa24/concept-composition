@@ -4,7 +4,7 @@
 
 **Why it is run.** This is the check claim 2 of the [overlap-dial idea map](../../../ideas/poe-overlap-dial/IDEA_MAP.md) was waiting for.
 
-**What it ends with.** It ends with the curves in `rebuild/out/phase5/overlap-dial-curves.png` and `finetune-curves.png`. The reference is `rebuild/phase5_dial.py` and `rebuild/phase5_finetune.py` in `toy/` (`toy/rebuild/` for the package).
+**What it ends with.** It ends with the curves in `rebuild/out/phase5/overlap-dial-curves.png` and `finetune-curves.png`. The reference is `rebuild/phase5_dial.py` and `rebuild/phase5_finetune.py` in `3-understanding-compositionality/toy/` (`3-understanding-compositionality/toy/rebuild/` for the package).
 
 **How to walk it.** `/drip-execute-plan 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/05-the-overlap-dial.md`, one step per message, typing every block yourself. The python blocks, typed in order into `walk05.py` in `/home-mscluster/mmolefe/Playground/PhD/simple-distributions-walk/`, are one runnable script. Phases 1 to 4 are imported from the reference from here on.
 
@@ -1460,7 +1460,7 @@ fig.savefig(Path(__file__).with_suffix(".png"), dpi=160)
 <details><summary>The code that draws this figure</summary>
 
 ```python
-# from toy/rebuild/phase5_finetune.py, lines 101 to 127 (end of main(); rows, scratch and pics come from the lines above them)
+# from 3-understanding-compositionality/toy/rebuild/phase5_finetune.py, lines 101 to 127 (end of main(); rows, scratch and pics come from the lines above them)
 colors = {"exact": "k", "MALA, tuned": "tab:orange", "UHA": "tab:green"}
 fig, ax = plt.subplots(1, 2, figsize=(11, 4))
 xs = np.arange(len(CHECKPOINTS))
@@ -1541,7 +1541,7 @@ The full runs are `python -m rebuild.phase5_dial` (about 10 minutes on one card)
 <details><summary>The code that draws this figure</summary>
 
 ```python
-# from toy/rebuild/phase5_dial.py, lines 149 to 188 (plot_curves and plot_pictures; OVERLAPS_2D, OVERLAPS_PW and SAMPLERS are set at the top of that file)
+# from 3-understanding-compositionality/toy/rebuild/phase5_dial.py, lines 149 to 188 (plot_curves and plot_pictures; OVERLAPS_2D, OVERLAPS_PW and SAMPLERS are set at the top of that file)
 def plot_curves(q_rows, pw_rows, out):
     colors = {"exact": "k", "MALA, tuned": "tab:orange", "UHA": "tab:green", "reverse diffusion": "tab:blue"}
     fig, ax = plt.subplots(1, 3, figsize=(16, 4.4))

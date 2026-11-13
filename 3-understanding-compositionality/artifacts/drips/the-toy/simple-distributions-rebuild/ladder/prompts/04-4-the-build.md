@@ -13,7 +13,7 @@ log weight -803.2
 Background
 This is layer 4's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/):
 I type the parts world from the step file, one step per message, and produce the mosaic, the blend
-and two animals side by side, all from one product. Claude's reference code is under toy/ in this
+and two animals side by side, all from one product. Claude's reference code is under 3-understanding-compositionality/toy/ in this
 repo; my file and the reference print the same numbers, and a difference is a lesson or a bug. I
 start from the setup's folder and environment, with quiz 4.2 passed, and the layer 4 maths drip
 folder under artifacts/drips/ holds my notation in its dispatch.md.
@@ -30,23 +30,23 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/04-the-parts-world.md: the step file, including
   "Where the numbers come from".
-- toy/rebuild/parts_world.py and toy/rebuild/phase4_parts_world.py: the reference.
+- 3-understanding-compositionality/toy/rebuild/parts_world.py and 3-understanding-compositionality/toy/rebuild/phase4_parts_world.py: the reference.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json: the four example settings.
-- toy/rebuild/out/phase4/phase4.json: the samplers.
+- 3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json: the samplers.
 - The layer 4 maths drip's dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference is rebuild/parts_world.py and rebuild/phase4_parts_world.py, which match
   numbers.json to 1e-9 relative, largest relative difference 2.87e-16 (REBUILD_WALK.md, brick
-  "Parts world"; toy/rebuild/out/phase4/phase4.json).
+  "Parts world"; 3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json).
 - The reference numbers are numbers.json for the four example settings and phase4.json for the
   samplers (step file 04, "Where the numbers come from").
 - python -m rebuild.walk_numbers holds 11 p4. keys for the step file's closed-form checks, among
   them the cat expert's 1616-nat gap, Δ = 779.1241 (p4.delta_side_minus_same) and the exact
   same-half weight 2.14e-339 (p4.w_same_half_exact) that float64 prints as 0.0
-  (toy/rebuild/out/walk-numbers.json).
+  (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - phase4.json's outside_projection_square counts 0 projected points outside [−1.5, 1.5]² in every
   run (step file 04, "Where the numbers come from").
 - Step 0 imports cosine_beta_schedule from rebuild.model and pick_device from rebuild.device, with
@@ -72,9 +72,9 @@ What is already known
   0.048; tuned MALA 0.977, 0.059; reverse diffusion 0.922, 0.746; 1,000 exact draws against the
   rest 0.027 (step file 04, step 7).
 - With 2,000 samples, phase4.json holds mosaic projected TV 0.013 perfect, 0.732 reverse diffusion,
-  0.200 ULA, 0.191 MALA, 0.036 tuned MALA and 0.036 UHA (toy/rebuild/out/phase4/phase4.json).
+  0.200 ULA, 0.191 MALA, 0.036 tuned MALA and 0.036 UHA (3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json).
 - In that run tuned MALA accepts 0.606 of its moves and plain MALA 0.992
-  (toy/rebuild/out/phase4/phase4.json).
+  (3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json).
 - Reverse diffusion with summed scores is step 7's broken run: it targets the product of the noised
   experts at every level, so the head mean ends at 0.923 where the product has 0.980 (step file 04,
   step 7; overlap-dial idea map, "What the words are", Du et al. 2023 Section 3).
@@ -82,7 +82,7 @@ What is already known
 
 Rules
 - I type; nothing is pasted into walk04.py.
-- Never edit toy/rebuild/, the example-9 folder or the step file's code blocks.
+- Never edit 3-understanding-compositionality/toy/rebuild/, the example-9 folder or the step file's code blocks.
 - No commit.
 - Show each printed line before moving on: step 1 prints the head and left pixel lists, step 2 the
   cat expert's log-density gap beside scipy's, step 3 the mosaic line, step 4 the blend line, step

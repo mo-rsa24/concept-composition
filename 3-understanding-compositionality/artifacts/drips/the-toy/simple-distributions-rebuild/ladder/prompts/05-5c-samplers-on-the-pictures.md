@@ -22,15 +22,15 @@ on 4b's pictures leaves one difference standing, the size of the picture (1,536 
 so the answer says whether the size is what drives the gap.
 
 Objectives
-1. Write toy/rebuild/settle_samplers_on_pictures.py from the starting scripts under What to read.
+1. Write 3-understanding-compositionality/toy/rebuild/settle_samplers_on_pictures.py from the starting scripts under What to read.
 2. Run six samplers on 4b's pictures at a caption share of 1 in 20: exact draws, reverse diffusion
    on summed scores, guided-sum DDIM at w = 1, annealed ULA, annealed MALA tuned to an acceptance
    of 0.57, and annealed UHA.
 3. For each sampler, record counts over read_out's six kinds out of 200, the total variation
    between that six-kind histogram and the exact draws' histogram, and, for MALA, its measured
    acceptance per noise level.
-4. Save toy/rebuild/out/settle/samplers-on-pictures.json and a figure,
-   toy/rebuild/out/settle/samplers-on-pictures.png, with one row per sampler, eight samples each,
+4. Save 3-understanding-compositionality/toy/rebuild/out/settle/samplers-on-pictures.json and a figure,
+   3-understanding-compositionality/toy/rebuild/out/settle/samplers-on-pictures.png, with one row per sampler, eight samples each,
    and its counts on the row.
 5. Write the six rows and which of the three outcomes below held into step 5c of
    3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, under "Result".
@@ -41,13 +41,13 @@ What to read
   the 16-picture library and read_out's six kinds, the cosine schedule, and guided-sum DDIM.
 - 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py: an earlier 16 × 32
   version with exact draws, reverse diffusion and annealed MALA on the product.
-- toy/rebuild/samplers.py and toy/anneal_samplers.py: layer 5's ULA, MALA, tuned MALA and UHA.
+- 3-understanding-compositionality/toy/rebuild/samplers.py and 3-understanding-compositionality/toy/anneal_samplers.py: layer 5's ULA, MALA, tuned MALA and UHA.
 - 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md, disagreements 2, 6 and
   11: why this run exists.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The exact product at share 1 in 20 and σ = 0.1 puts its weight on the pair with itself, because
   that pairing has d² = 0 against 32 and more for every other
   (today-the-toy-failure-in-six-checkpoints.md, checkpoint 5).
@@ -70,12 +70,12 @@ Rules
 - Run on the CPU or one card under 1 GB in use.
 - Finish in under 30 minutes.
 - Use seed 0.
-- Write nothing outside toy/rebuild/, except the Result lines in step 5c of the ladder file.
+- Write nothing outside 3-understanding-compositionality/toy/rebuild/, except the Result lines in step 5c of the ladder file.
 - Print one line per sampler as it finishes, with its counts.
 
 What to hand back
-- toy/rebuild/settle_samplers_on_pictures.py.
-- toy/rebuild/out/settle/samplers-on-pictures.json and samplers-on-pictures.png.
+- 3-understanding-compositionality/toy/rebuild/settle_samplers_on_pictures.py.
+- 3-understanding-compositionality/toy/rebuild/out/settle/samplers-on-pictures.json and samplers-on-pictures.png.
 - The six rows and the outcome that held, under "Result" in step 5c of the ladder file.
 - The proof: python -m rebuild.settle_samplers_on_pictures --check prints the exact draws'
   histogram, which must put at least 195 of 200 on "apart".

@@ -64,7 +64,7 @@ so no choice of crop could flatter or damn a tile. The calls were accepted.
 [calls.json](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json),
 [the series strip](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png),
 [per-seed comparisons](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed), and the rebuilt sheets in
-[1-inference-only](../../../supervisor-meeting/1-inference-only). The verdict is filed as
+[1-inference-only](../../decks/supervisor-meeting/1-inference-only). The verdict is filed as
 [a finding](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
 
 **Before and after.** Against the bar: 0 clear cat-and-dog pairs of 7 judgeable seeds, mark 4. MISS.

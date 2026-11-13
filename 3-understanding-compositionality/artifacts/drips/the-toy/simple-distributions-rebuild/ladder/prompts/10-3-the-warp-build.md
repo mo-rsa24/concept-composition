@@ -34,8 +34,8 @@ What to read
 - The layer 10 maths drip's dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference is the quadrant toy in a latent z, one Gaussian blob per quadrant at (±0.5, ±0.5)
   with std 0.15, A∩B share r = 0.05 on the top-right blob and (1 − r)/3 on each other blob
   (warp_check.py).

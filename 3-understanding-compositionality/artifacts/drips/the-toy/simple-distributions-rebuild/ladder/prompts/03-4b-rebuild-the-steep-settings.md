@@ -35,12 +35,12 @@ What to read
   to 19): the code, and its cell 18 table as the answer key.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6: why only the closest samplers are
   read on image results.
-- toy/rebuild/phase3_kinds.py, Run 2, and toy/rebuild/out/phase3/phase3.json, run2: the reference.
+- 3-understanding-compositionality/toy/rebuild/phase3_kinds.py, Run 2, and 3-understanding-compositionality/toy/rebuild/out/phase3/phase3.json, run2: the reference.
 - ~/Playground/PhD/simple-distributions-walk/walk03.py and walk02c.py.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Run 2 runs three kinds at the steep points of Figure 2, where a sampler's error and the data's
   limit could be mistaken for each other: co-occurrence with A's top edge at 0.4, contention with 5%
   of each set rotated, and interaction at 2% overlap (notebook, cell 17).
@@ -64,11 +64,11 @@ What is already known
   that come closest to the perfect-sample baseline in 2D (tuned MALA, UHA) are read on image
   results (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6).
 - rebuild/phase3_kinds.py reproduces run 2 within 0.05 of the notebook on every row, its own
-  tolerance for these sampler numbers (toy/rebuild/phase3_kinds.py, Run 2;
-  toy/rebuild/out/phase3/phase3.json, run2).
+  tolerance for these sampler numbers (3-understanding-compositionality/toy/rebuild/phase3_kinds.py, Run 2;
+  3-understanding-compositionality/toy/rebuild/out/phase3/phase3.json, run2).
 
 Rules
-- Never edit the notebook or toy/rebuild/.
+- Never edit the notebook or 3-understanding-compositionality/toy/rebuild/.
 - I type; I do not paste.
 - No commit.
 - Show each piece's output before moving on: piece 1 prints the three exact measures, each sampler

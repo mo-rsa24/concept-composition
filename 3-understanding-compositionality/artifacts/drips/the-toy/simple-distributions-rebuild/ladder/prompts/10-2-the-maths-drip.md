@@ -30,8 +30,8 @@ What to read
 - Quiz R.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - A density moved through an invertible map x = g(z) picks up |det J|⁻¹ (claim 10).
 - Each conditional and the unconditional pick up the same factor, so p(x|A)·p(x|B)/p(x) picks it up
   once, exactly as the latent composition pushed through g does (claim 10).

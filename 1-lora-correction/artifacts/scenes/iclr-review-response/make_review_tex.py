@@ -2,7 +2,7 @@
 
 One section per reviewer (k4nd, UHz6, PrzE). Under each point: the reviewer's words as quoted in
 the reply files, the reply itself, and a note on what changed in the revision (CHANGES below).
-The reviewer quotes and replies are read from replies/k4nd-and-uhz6.md and replies/prze.md, so the
+The reviewer quotes and replies are read from paper/iclr-56173/replies/k4nd-and-uhz6.md and paper/iclr-56173/replies/prze.md, so the
 document follows the replies whenever they change. The twelve claim-group figures are a separate PDF,
 claim-figures.pdf, joined with pdfunite. Build with Tectonic: `tectonic review.tex` in this folder.
 
@@ -139,12 +139,12 @@ def sections(md: str, reviewer: str) -> list[dict]:
 
 
 def main() -> None:
-    k = (REPO / "replies/k4nd-and-uhz6.md").read_text()
-    p = (REPO / "replies/prze.md").read_text()
+    k = (REPO / "paper/iclr-56173/replies/k4nd-and-uhz6.md").read_text()
+    p = (REPO / "paper/iclr-56173/replies/prze.md").read_text()
     # review-text.tex: everything the reviewers wrote, stored under names; nobody edits it.
     store = [r"""% The reviewers' own words, stored under names that review.tex calls.
 % \fullreview{k4nd} prints k4nd's whole review; \reviewquote{k4nd}{W1} prints the part of it
-% that the reply to W1 answers. Generated from Reviews.pdf (transcribed) and the reply files.
+% that the reply to W1 answers. Generated from paper/iclr-56173/Reviews.pdf (transcribed) and the reply files.
 """]
     # review.tex: our replies and the changes; this is the file to edit.
     out = [r"""\documentclass[11pt]{article}
@@ -172,7 +172,7 @@ def main() -> None:
 \date{}
 \begin{document}
 \maketitle
-Each reviewer's section opens with the full review as posted on OpenReview (transcribed from Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. The reviewers' text lives in \texttt{review-text.tex}; this file holds our replies.
+Each reviewer's section opens with the full review as posted on OpenReview (transcribed from paper/iclr-56173/Reviews.pdf). Then each point quotes the reviewer (in red), gives the reply we plan to send, and says what changed in the revised paper (in green). Figure and table numbers refer to the revised paper. The reviewers' text lives in \texttt{review-text.tex}; this file holds our replies.
 """]
     for name, md in (("k4nd", k), ("UHz6", k), ("PrzE", p)):
         store.append(f"\n% ===== {name} =====\n\\expandafter\\long\\expandafter\\def\\csname fullreview-{name}\\endcsname{{%\n"

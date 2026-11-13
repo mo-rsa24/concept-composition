@@ -84,7 +84,7 @@ this section says. It is a build check and it says nothing about whether `x_pos`
 Navigation: ⬅️ [Previous](#how-x_pos-is-built) | 📋 [Contents](#contents) | [Next](#where-things-land) ➡️
 
 **The seeds.** Seeds 1 to 8, the set every sheet in
-[supervisor-meeting/1-inference-only](../../../supervisor-meeting/1-inference-only) renders, from the same
+[artifacts/decks/supervisor-meeting/1-inference-only](../../decks/supervisor-meeting/1-inference-only) renders, from the same
 cached starting noise per seed. The joint prompt draws two dogs on seed 8, so **seeds 1 to 7 are
 judgeable** and seed 8 is reported but not counted. That is the same 7 every earlier third expert was
 measured on, which is what makes the counts comparable.
@@ -118,8 +118,8 @@ Navigation: ⬅️ [Previous](#the-test-written-before-any-render) | 📋 [Conte
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/     the figure and its card
   token-norms-x-pos.png / .json                  per-position norms, both encoders, four sequences
   README.md                                      the card: what the figure shows and what it means
-supervisor-meeting/1-inference-only/             sheets 1, 3 and 4 rebuilt with the x_pos column
-supervisor-meeting/README.md                     section 1's table, the x_pos row
+artifacts/decks/supervisor-meeting/1-inference-only/             sheets 1, 3 and 4 rebuilt with the x_pos column
+artifacts/decks/supervisor-meeting/README.md                     section 1's table, the x_pos row
 
 on the cluster, nothing synced through git (another session holds uncommitted tracked files):
 /datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/_scripts/   the scripts, copied
@@ -162,11 +162,11 @@ For Claude to execute. Ask Claude to do these.
 
 - [x] ✅ **3.1** Build the cat-by-dog `x_pos` sheet and call every tile from the full-resolution files,
   writing the calls per seed with the counted seeds marked. ✓ confirmed by hand 2026-11-04: "accept", after three calls were queried and each was re-checked against the joint prompt's own cat on the same seed. `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json`
-- [x] ✅ **3.2** Rebuild sheets 1, 3 and 4 under `supervisor-meeting/1-inference-only/` with the `x_pos`
+- [x] ✅ **3.2** Rebuild sheets 1, 3 and 4 under `artifacts/decks/supervisor-meeting/1-inference-only/` with the `x_pos`
   column added, every earlier column kept. ✓ verified 2026-11-04: sheet 1 now 8 columns, sheet 3 now 14, sheet 4 now 10; the 6-column sheet 1 is kept as `supervisor-sheet-1-before-x-pos.png`; two figures added, `2c-token-norms-with-x-pos.png` and `7-how-the-third-expert-changed.png`
 - [x] ✅ **3.3** Write `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png` and the card
   beside it, naming the axes, the four sequences and what the numbers mean. ✓ verified 2026-11-04: figure and card written, plus the per-seed comparisons and the series strip
-- [x] ✅ **3.4** Add the `x_pos` row to `supervisor-meeting/README.md` section 1 with its clear-pair count. ✓ verified 2026-11-04: the row reads 0 clear pairs of 7, and a second table beside it carries the plurality count across the whole series
+- [x] ✅ **3.4** Add the `x_pos` row to `artifacts/decks/supervisor-meeting/README.md` section 1 with its clear-pair count. ✓ verified 2026-11-04: the row reads 0 clear pairs of 7, and a second table beside it carries the plurality count across the whole series
 
 ▶ **Next: [instruction 5](#5--veto-the-calls)**.
 

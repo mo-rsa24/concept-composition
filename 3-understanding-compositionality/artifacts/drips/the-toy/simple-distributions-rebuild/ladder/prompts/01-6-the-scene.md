@@ -20,16 +20,16 @@ Objectives
 
 What to read
 - The layer 1 maths drip folder under artifacts/drips/ and its dispatch.md: my notation.
-- toy/rebuild/datasets.py, ring_means: the ring's definition.
-- toy/rebuild/out/walk-numbers.json: the noise levels.
+- 3-understanding-compositionality/toy/rebuild/datasets.py, ring_means: the ring's definition.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: the noise levels.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
-- The ring of eight is toy_gmm in toy/rebuild/datasets.py: eight Gaussian modes on a circle of
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
+- The ring of eight is toy_gmm in 3-understanding-compositionality/toy/rebuild/datasets.py: eight Gaussian modes on a circle of
   radius 0.5 (ring_means).
 - The noise levels to show are the ᾱ_t values walk_numbers prints at t = 0, 25, 50, 75 and 99, the
-  p1.abar_* keys (toy/rebuild/out/walk-numbers.json).
+  p1.abar_* keys (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - A scene of the forward process already exists, Dissolving the Dog
   (https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9); this one is about the score field, so link
   it rather than redraw it.

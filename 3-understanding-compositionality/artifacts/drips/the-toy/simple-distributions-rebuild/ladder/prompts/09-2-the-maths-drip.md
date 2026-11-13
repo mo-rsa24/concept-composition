@@ -30,14 +30,14 @@ What to read
   identity.
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, bricks "The interaction term,
   exact" and "The correction, learned back": the identity and the two losses.
-- toy/rebuild/out/walk-numbers.json, the p8. keys: the worked point.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json, the p8. keys: the worked point.
 - The layer 8 --math drip folder under artifacts/drips/ and its dispatch.md: my notation for r(x),
   r_t and their ε-space form.
 - Quiz 9.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - A squared loss is minimised by the conditional mean, so the denoising loss E‖ε_θ(x_t, t) − ε‖² is
   minimised by E[ε | x_t] = −√(1 − ᾱ_t)·∇log q_t(x_t), and score matching is a regression (the
   conditional-mean and training-loss chapters on this layer's Study first line; layer 1's identity,

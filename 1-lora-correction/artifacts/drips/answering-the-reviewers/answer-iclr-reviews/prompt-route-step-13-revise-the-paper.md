@@ -33,7 +33,7 @@ What to read
 - 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
-- Reviews.pdf: the exact wording of every point being answered.
+- paper/iclr-56173/Reviews.pdf: the exact wording of every point being answered.
 - The manuscript voice and number rules in the memory notes, and environment/paper.md for the build.
 - 56173_Restoring_plurality_in_c.pdf: the submitted text, Sections 3 to 5 and Appendices A and B.
 

@@ -37,8 +37,8 @@ What to read
 - ~/Playground/PhD/concept-composition/environment/known-failures.md, entry poe-data-001: the seed split.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in the
-  poe_repair_min-dog-and-rain repo, and python -m rebuild.<script> runs from toy/ (the guide, "Two
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in the
+  poe_repair_min-dog-and-rain repo, and python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two
   lanes").
 - The scope's master plan defines compose rate over the eval seeds and calls support "held-out pairs
   compose above the do-no-harm baseline across most of the 15, direction intact" ("Reading a result"

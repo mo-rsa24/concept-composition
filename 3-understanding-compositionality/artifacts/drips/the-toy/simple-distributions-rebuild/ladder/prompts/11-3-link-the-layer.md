@@ -27,8 +27,8 @@ What to read
   label route.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The three sources above are the reference sets, and this layer has no Study first line (the layer
   11 page).
 - The overlap-dial map is closed, so links point toward it and nothing is written inside it (its

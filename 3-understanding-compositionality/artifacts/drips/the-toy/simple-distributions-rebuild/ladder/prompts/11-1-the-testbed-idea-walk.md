@@ -37,8 +37,8 @@ What to read
   end: the label route.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Claim 1 is current, marked wrong as stated: SDXL's cause of the cat-dog hybrid is not known, so
   the testbed cannot inherit it (testbed map, claim 1).
 - Claim 1's repair: switch candidate causes one at a time, and a cause becomes a candidate for

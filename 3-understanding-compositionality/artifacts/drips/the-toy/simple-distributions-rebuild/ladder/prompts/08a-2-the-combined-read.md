@@ -38,8 +38,8 @@ What to read
 - ~/Playground/PhD/simple-distributions-walk/walk08.py and walk08b.py: layer 8's walks.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The PDFs are on the shelf under
   ~/goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/
   (Papers.md).

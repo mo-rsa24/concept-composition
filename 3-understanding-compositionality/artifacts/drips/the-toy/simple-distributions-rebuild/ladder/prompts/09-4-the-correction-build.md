@@ -19,7 +19,7 @@ Background
 This is layer 9's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/):
 I type a correction network and the fair test from an empty file, and the fair test says whether
 composition plus a correction needs fewer joint examples than training on the joint directly.
-Claude's reference is already built in toy/rebuild/ (step 0 of this layer), and my file and the
+Claude's reference is already built in 3-understanding-compositionality/toy/rebuild/ (step 0 of this layer), and my file and the
 reference print the same numbers within sampling noise; a difference is a lesson or a bug. I have
 passed quiz 9.2, and the layer 9 maths drip folder under artifacts/drips/ holds my notation in its
 dispatch.md. Training runs in the background beside me.
@@ -38,18 +38,18 @@ Objectives
 6. Tick each piece in the step file as it lands.
 
 What to read
-- toy/rebuild/correction.py, toy/rebuild/phase9_correction.py, toy/rebuild/out/phase9/phase9.json
-  and the p9. keys in toy/rebuild/out/walk-numbers.json: the layer 9 reference, whose settings
+- 3-understanding-compositionality/toy/rebuild/correction.py, 3-understanding-compositionality/toy/rebuild/phase9_correction.py, 3-understanding-compositionality/toy/rebuild/out/phase9/phase9.json
+  and the p9. keys in 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: the layer 9 reference, whose settings
   (correction size, steps, learning rate, the A∩B samples) I use.
-- toy/rebuild/interaction.py: r_t and ∇r_t from layer 8.
+- 3-understanding-compositionality/toy/rebuild/interaction.py: r_t and ∇r_t from layer 8.
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card.
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, layer 9's brick row.
 - The layer 9 --math drip folder under artifacts/drips/ and its dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The toy is run 7's: four blobs at (±0.5, ±0.5) with σ = 0.15, top-right weight r and (1 − r)/3
   for each other (the run card, "The toy").
 - It uses construction (1), A the right blobs, B the top blobs, and the exact joint is the

@@ -44,8 +44,8 @@ What to read
   to walk it".
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The w grid, the p6. keys and phase6.json are step 1's, and walk06.py uses the same grid (from
   step 1).
 - The brick is the target p(x)·p(A|x)^w·p(B|x)^w computed exactly on the quadrant toy and the parts

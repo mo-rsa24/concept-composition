@@ -41,8 +41,8 @@ What to read
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in .quiz-prep/, so prep-cadence runs first
   for each quiz (quiz-cadence, "The preparation gate").
 - The step file links a textbook page beside each fundamental it uses and carries timestamped video
@@ -66,18 +66,18 @@ What is already known
   x' = x + ss·∇log p(x) + √(2ss)·z; the MALA proposal N(x'; x + ss·∇log p(x), 2ss·I), whose
   log-density divides by 4·ss (step file 02, steps 1, 5 and 6).
 - Every worked number prints from python -m rebuild.walk_numbers as the 53 p2. keys in
-  toy/rebuild/out/walk-numbers.json (toy/rebuild/out/walk-numbers.json).
-- The 14 p2.step9_ keys among them are read from toy/rebuild/out/phase2/step9.json, produced by
-  python -m rebuild.phase2_step9 (toy/rebuild/out/walk-numbers.json).
+  3-understanding-compositionality/toy/rebuild/out/walk-numbers.json (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
+- The 14 p2.step9_ keys among them are read from 3-understanding-compositionality/toy/rebuild/out/phase2/step9.json, produced by
+  python -m rebuild.phase2_step9 (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - Among the keys are p2.prod_logZ -2.2655, p2.noised_product_mean 0.6931 against
   p2.product_of_noised_mean 0.2326, and p2.mala_fixed_log_alpha 0.045 against
-  p2.mala_old_log_alpha -0.36 (toy/rebuild/out/walk-numbers.json).
+  p2.mala_old_log_alpha -0.36 (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The three numbers every composition reports are the share in A∩B, the total variation to the
   exact composed density and the normaliser Z (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
   claim 5).
 
 Rules
-- Change nothing in the step files' prose or in toy/rebuild/.
+- Change nothing in the step files' prose or in 3-understanding-compositionality/toy/rebuild/.
 - In the ladder files, write only the two URLs.
 - Report each quiz's question count, node count and verdicts from prep-cadence before its page is
   built.

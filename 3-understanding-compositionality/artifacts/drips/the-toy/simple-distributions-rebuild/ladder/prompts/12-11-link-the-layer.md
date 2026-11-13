@@ -33,8 +33,8 @@ What to read
   the transfer plan.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference sets to link against are the two journey plans on layer 12's Study first line, the
   "The correction at scale" Bricks row, claims 6 and 8 of the when-poe idea map with its route 6
   return, the drain-gap plan and the transfer plan (layer 12's Study first line; REBUILD_WALK.md;

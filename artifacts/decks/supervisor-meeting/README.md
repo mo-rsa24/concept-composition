@@ -70,7 +70,7 @@ Identity, meaning each animal being one whole species, never moves.
 (7 of 8 seeds), so the pass marks use only those seeds.
 
 **The written-up version of this section**, with the pass mark, the premise test and the per-seed
-pixel distances, is [the finding "can a text-space third expert restore composition"](../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
+pixel distances, is [the finding "can a text-space third expert restore composition"](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
 
 ## 2. Training: fit the third expert instead of building it
 
@@ -119,4 +119,4 @@ The held-out calls are my reads by eye from sheets at reduced size, with one hel
 count needs a second reader's full-size calls. The share numbers come from the run logs and the pixel
 differences from `oracle.log`, both on the cluster under
 `/datasets/mmolefe/poe_repair_min/outputs/learned_and_token/`. The fuller inference-only write-up is
-[the earlier talking points](../artifacts/notes/supervisor-meetings/2026-10-29-talking-points.md).
+[the earlier talking points](../../notes/supervisor-meetings/2026-10-29-talking-points.md).

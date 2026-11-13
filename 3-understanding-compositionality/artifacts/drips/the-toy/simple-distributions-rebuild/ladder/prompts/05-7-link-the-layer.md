@@ -36,8 +36,8 @@ What to read
   3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, which this layer rests on.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference sets to link against are the entries under What to read (layer 5's Study first
   line, REBUILD_WALK.md and the two idea maps).
 - ~/Playground/PhD/simple-distributions-walk/ is scratch space and is deleted freely, so nothing

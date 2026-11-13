@@ -1,6 +1,6 @@
 # Claims from the three reviews of submission 56173
 
-Every claim the three reviewers make, quoted in their words, with its page in `Reviews.pdf` (PrzE on page 2, UHz6 on page 3, k4nd on pages 4 and 5). Each claim is mapped to where the submitted paper (`56173_Restoring_plurality_in_c.pdf`, 13 pages) is weak and to where the revision (`paper/iclr-56173/iclr2027_conference.tex`, built as a 20-page PDF) answers it. Reply sections are in `replies/k4nd-and-uhz6.md` and `replies/prze.md`.
+Every claim the three reviewers make, quoted in their words, with its page in `paper/iclr-56173/Reviews.pdf` (PrzE on page 2, UHz6 on page 3, k4nd on pages 4 and 5). Each claim is mapped to where the submitted paper (`56173_Restoring_plurality_in_c.pdf`, 13 pages) is weak and to where the revision (`paper/iclr-56173/iclr2027_conference.tex`, built as a 20-page PDF) answers it. Reply sections are in `paper/iclr-56173/replies/k4nd-and-uhz6.md` and `paper/iclr-56173/replies/prze.md`.
 
 Claim ids are the reviewer's initial, then W for a weakness or Q for a question, then the reviewer's own number (a letter splits one bullet into its separate claims). "Sub p." is a page of the submitted PDF, and "Rev p." a page of the revised PDF.
 
@@ -66,7 +66,7 @@ Claim ids are the reviewer's initial, then W for a weakness or Q for a question,
 
 ## Found while mapping, for Molefe to decide
 
-**A misquote in the k4nd W4 reply.** The reply quotes k4nd as writing "Appendix A, Figure 7" and "the actual training diagram is Figure 7". Reviews.pdf page 5 says Figure 8 both times.
+**A misquote in the k4nd W4 reply.** The reply quotes k4nd as writing "Appendix A, Figure 7" and "the actual training diagram is Figure 7". paper/iclr-56173/Reviews.pdf page 5 says Figure 8 both times.
 
 **A table that no longer exists.** The PrzE Q1 reply says "Tables 1 to 4", but Table 4 was removed with SD 1.5, so the revision has three tables.
 

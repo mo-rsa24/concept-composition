@@ -4,7 +4,7 @@
 
 **Where it ends.** It ends when the notebook's ring-times-bar product comes out of your samplers, with each [sample](../../../../../../../Obsidian/Mathematics/Statistics/Sampling%20From%20A%20Distribution.md#where-to-learn-this)<sub>[1](../../../../../Obsidian/Mathematics/references/textbooks/machine-learning/pattern-recognition-and-machine-learning.pdf#page=539 "Pattern recognition and machine learning, chapter 11, Why expectations need samples, ancestral sampling of a directed graph (page 541), standard distribution..."), [2](../../../../../Obsidian/Mathematics/references/textbooks/statistics/introduction-to-probability-for-data-science.pdf#page=245 "Introduction to probability for data science, section 4.8, Generates random numbers for any PDF by running a uniform through the inverse CDF, in Python, with..."), [3](../../../../../Obsidian/Mathematics/references/textbooks/machine-learning/deep-learning-textbook.pdf#page=606 "Deep learning textbook, section 17.1, Why machine learning samples at all (Monte Carlo estimates of sums and integrals, and sampling as the goal of a generat..."), [▶1](https://www.youtube.com/watch?v=9ixzzPQWuAY&t=474s "ritvikmath, Inverse Transform Sampling, 7:54 to 10:04, Inverts the exponential CDF and turns a uniform draw into an exponential one. Chapter-timed, from the ..."), [▶2](https://www.youtube.com/watch?v=OXDqjdVVePY&t=232s "ritvikmath, Accept-Reject Sampling, 3:52 to 7:45, An easy proposal g scaled by M into an envelope above f, then each draw accepted with probability f/(M g). ..."), [◆](../../../../../goal-setting/learning/deep-learning/diffusion-models/00-from-scratch-to-sdxl/textbook/l3-stochastic-processes/13-drawing-samples-by-hand.md "Drawing samples by hand: Monte Carlo, inverse transform and accept-reject, deep-learning/diffusion-models/00-from-scratch-to-sdxl, volume L3, section 13. Thr...")</sub>'s acceptance on the screen.
 
-**The reference.** The reference is `rebuild/compose.py`, `rebuild/samplers.py` and the fixed `anneal_samplers.py` in `toy/` (`toy/rebuild/` for the package).
+**The reference.** The reference is `rebuild/compose.py`, `rebuild/samplers.py` and the fixed `anneal_samplers.py` in `3-understanding-compositionality/toy/` (`3-understanding-compositionality/toy/rebuild/` for the package).
 
 **How to walk it.** `/drip-execute-plan 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/02-composing-and-sampling.md`, one step per message, typing every block yourself. Step 6's derivation is worth a `/drip --math` of its own.
 
@@ -2375,14 +2375,14 @@ plt.tight_layout(); plt.savefig("step09-ring-times-bar.png"); plt.close()
 
 💥 **Broken run:** tuned MALA, which raises its step until acceptance falls to 0.6, reaches the perfect-sample baseline on this kind (TV 0.11 against a baseline of 0.11 in the kinds notebook's run 1), while ULA at the same tuned steps sends samples off to infinity. The accept step is what makes the large steps safe.
 
-🎞️ **Moving picture:** `step09-ring-times-bar.png`, the four samplers side by side, read against the notebook's own [product picture](../../../../../toy/rebuild/out/phase2/reference/product-0.png), where green is the Metropolis-adjusted UHA and blue is reverse diffusion.
+🎞️ **Moving picture:** `step09-ring-times-bar.png`, the four samplers side by side, read against the notebook's own [product picture](../../../../toy/rebuild/out/phase2/reference/product-0.png), where green is the Metropolis-adjusted UHA and blue is reverse diffusion.
 
 <a href="../../../toy/rebuild/out/phase2/reference/product-0.png"><img src="../../../toy/rebuild/out/phase2/reference/product-0.png" width="200" alt="Scatter of green and blue samples on the eight-mode ring times bar product: most points sit on the two modes at (0, 0.5) and (0, -0.5), and blue points also sit on the six outer ring modes"></a>
 
 <details><summary>The code that draws this figure</summary>
 
 ```python
-# toy/rebuild/phase2_compose.py, the end of main(): COMPOSITIONS, cols, grids, samples and report are built earlier in main()
+# 3-understanding-compositionality/toy/rebuild/phase2_compose.py, the end of main(): COMPOSITIONS, cols, grids, samples and report are built earlier in main()
 fig, ax = plt.subplots(len(COMPOSITIONS), 3 + len(cols), figsize=(2.3 * (3 + len(cols)), 2.6 * len(COMPOSITIONS)))
 for r, (name, a, b, *_rest) in enumerate(COMPOSITIONS):
     da, db = PANELS[a](1000, rng=rng), PANELS[b](1000, rng=rng)

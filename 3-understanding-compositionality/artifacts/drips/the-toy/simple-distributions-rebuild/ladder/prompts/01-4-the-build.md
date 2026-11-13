@@ -10,7 +10,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 Background
 This is layer 1's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/):
 I type one 2D diffusion expert from an empty file, following the step file one step per message.
-Claude's reference code is toy/rebuild/ in this repo; my file and the reference print the same
+Claude's reference code is 3-understanding-compositionality/toy/rebuild/ in this repo; my file and the reference print the same
 numbers, and a difference is a lesson or a bug. I have passed quiz 1.2, and the layer 1 maths drip
 folder under artifacts/drips/ holds my notation in its dispatch.md.
 
@@ -20,20 +20,20 @@ Objectives
    folder with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python and
    PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain/toy.
 3. Tick each step in the step file as it lands, and keep my place in the walk map between sittings.
-4. End with a samples figure from my trained expert beside toy/datasets-1000-samples-each.png.
+4. End with a samples figure from my trained expert beside 3-understanding-compositionality/toy/datasets-1000-samples-each.png.
 
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/01-one-expert-from-scratch.md: the step file.
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, Pins and Bricks: what each brick
   was checked against.
-- toy/rebuild/datasets.py, toy/rebuild/model.py, toy/rebuild/train.py: the reference.
+- 3-understanding-compositionality/toy/rebuild/datasets.py, 3-understanding-compositionality/toy/rebuild/model.py, 3-understanding-compositionality/toy/rebuild/train.py: the reference.
 - The layer 1 maths drip's dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
-- Every worked number prints from python -m rebuild.walk_numbers, run from toy/, as 41 p1. keys
-  (REBUILD_WALK.md, Pins; toy/rebuild/out/walk-numbers.json).
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
+- Every worked number prints from python -m rebuild.walk_numbers, run from 3-understanding-compositionality/toy/, as 41 p1. keys
+  (REBUILD_WALK.md, Pins; 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The ResNet has 565,506 parameters; the notebook prints 565,606 because it counts out_logvar, which
   the beta_forward variance never reads (REBUILD_WALK.md, brick "ResNet score network").
 - With zero output layers, the noise prediction equals 2x at initialisation (same brick).
@@ -57,7 +57,7 @@ What is already known
 
 Rules
 - I type; nothing is pasted into walk01.py.
-- Never edit toy/rebuild/ or the step file's code blocks.
+- Never edit 3-understanding-compositionality/toy/rebuild/ or the step file's code blocks.
 - No commit.
 - Step 1 prints the normal density values, step 4 the ᾱ_t values, step 6 the parameter count, step 8
   the initial loss on the bar dataset, and step 11 the total-variation line; show each before moving
@@ -66,7 +66,7 @@ Rules
 What to hand back
 - walk01.py, one script that runs end to end and prints each step's worked number.
 - The step file's steps 0 to 11 ticked, and the walk map.
-- The samples figure beside toy/datasets-1000-samples-each.png.
+- The samples figure beside 3-understanding-compositionality/toy/datasets-1000-samples-each.png.
 - The retrospective the walk closes on, and the /drip-retro command it prints.
 - The proof: python walk01.py prints "bar: TV model <x>  floor <y>" with x − y ≤ 0.10 after the full
   run, and layer 1's compare step shows no differing number.

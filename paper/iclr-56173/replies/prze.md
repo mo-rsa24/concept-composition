@@ -2,7 +2,7 @@
 
 Submission 56173. One section per reviewer point: the reviewer's words quoted, then the reply.
 Equation, section and figure numbers refer to the revised paper
-(`paper/iclr-56173/iclr2027_conference.tex`). PrzE's review is page 2 of `Reviews.pdf`.
+(`paper/iclr-56173/iclr2027_conference.tex`). PrzE's review is page 2 of `paper/iclr-56173/Reviews.pdf`.
 
 ### W1: lack of quantitative benchmarks
 

@@ -29,8 +29,8 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) with run 1.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - ~/Playground/PhD/simple-distributions-walk/ is scratch space and is deleted freely, so nothing
   links into it (~/.claude/CLAUDE.md, the playground is disposable).
 

@@ -10,7 +10,7 @@ Navigation: [the route](route-answer-the-iclr-reviews.md)
 - Findings already filed: `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/` (corrector, SuperDiff, steering, noise search runs).
 - Pool files: `artifacts/_shared/cross_pair_pool_configs/`.
 - Audit of the authors' code against their paper: `/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md`.
-- The reviews and the submitted paper: `Reviews.pdf` and `56173_Restoring_plurality_in_c.pdf` at the repo root.
+- The reviews and the submitted paper: `paper/iclr-56173/Reviews.pdf` and `56173_Restoring_plurality_in_c.pdf` at the repo root.
 
 ## Plan weight
 

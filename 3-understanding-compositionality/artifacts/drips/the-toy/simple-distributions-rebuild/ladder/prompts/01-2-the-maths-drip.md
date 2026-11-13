@@ -25,12 +25,12 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/01-one-expert-from-scratch.md, steps 4, 5 and 8: the
   derivation in this walk's notation.
-- toy/rebuild/out/walk-numbers.json: every worked number, as the p1. keys.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: every worked number, as the p1. keys.
 - Quiz 1.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The forward process runs T = 100 steps, with ᾱ_t = ∏(1 − β_j) from the cosine schedule with
   offset 0.008 (step file 01, step 4).
 - Code index t = 0 is the first noisy state, so ᾱ_t equals the schedule's boundary value C_{t+1},
@@ -41,10 +41,10 @@ What is already known
   E[ε | x_t] = −√(1 − ᾱ_t)·∇log q_t(x_t), the marginal score (step file 01, step 8; the Codex
   mathematics review of 2026-10-18).
 - python -m rebuild.walk_numbers prints ᾱ_t and √(1 − ᾱ_t) at t = 0, 25, 50, 75 and 99 as the
-  p1.abar_* and p1.sqrt_1m_abar_* keys (toy/rebuild/out/walk-numbers.json).
+  p1.abar_* and p1.sqrt_1m_abar_* keys (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The worked instance: clean point (0, 0.5), ε = (0.3, −1.2), t = 50, √(1 − ᾱ_50) = 0.7223,
   x_50 = (0.2167, −0.521); p1.example_score and p1.example_minus_eps_over_sigma are both
-  (−0.4153, 1.6613) (toy/rebuild/out/walk-numbers.json).
+  (−0.4153, 1.6613) (3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - The cosine schedule's derivation is out of scope; the schedule is given (layer 1's Skip line).
 
 Rules

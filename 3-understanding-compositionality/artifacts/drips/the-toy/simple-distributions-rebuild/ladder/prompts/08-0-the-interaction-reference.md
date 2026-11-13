@@ -13,7 +13,7 @@ from the Gaussian mixtures, and r_t with its gradient at each noise level.
 Background
 The composition ladder in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ reaches the first half of
 the research goal in layer 8: the interaction term, defined exactly here before any learned version
-of it is trusted. Claude writes the reference code in toy/rebuild/ one layer ahead, so that my own
+of it is trusted. Claude writes the reference code in 3-understanding-compositionality/toy/rebuild/ one layer ahead, so that my own
 walk08.py and walk08b.py have numbers to match. It starts from rebuild/ as layers 1 to 5 left it,
 and from nothing of layer 8's walk. Work in
 /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain/toy.
@@ -34,7 +34,7 @@ Objectives
    difference at t = 0.
 6. Print the exact label term of claim 7.4 in each label cell.
 7. Add phase8() to rebuild/walk_numbers.py's __main__ loop with keys p8.*, and run everything from
-   toy/ with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python.
+   3-understanding-compositionality/toy/ with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python.
 8. Open phase8_interaction.py's docstring with one paragraph saying where r moved with the wet rule
    and where it did not.
 
@@ -48,8 +48,8 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The brick row says: in the parts world with a "wet" rule (the cat half shifts when a dog is
   present), r(x) = log p(x|A,B) − [log p(x|A) + log p(x|B) − log p(x)] in closed form, expected
   constant with the rule off and varying with it on, then the noised r_t and its gradient, written
@@ -108,7 +108,7 @@ What is already known
 - rebuild/walk_numbers.py prints through put(key, value), its __main__ loop runs phase1, phase2,
   phase3 and phase5 and writes rebuild/out/walk-numbers.json, and it holds worked numbers while run
   results are read from rebuild/out/phase*/ (walk_numbers.py docstring).
-- Every phase is one command from toy/, python -m rebuild.<script>, with outputs in
+- Every phase is one command from 3-understanding-compositionality/toy/, python -m rebuild.<script>, with outputs in
   rebuild/out/phaseN, and the device is picked with rebuild.device.pick_device, the GPU guard
   (REBUILD_WALK.md, Pins).
 

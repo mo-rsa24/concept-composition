@@ -34,8 +34,8 @@ What to read
   the dial's numbers and the medical counts.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - For Gaussians, q_a/q_b^α is a density only while 1/v_a − α/v_b > 0, because a negative power
   subtracts precision (vault notes Product, Mixture And Negation and Powers Of Gaussians).
 - Where p_B → 0, p_B^(−w) → ∞, so negation pushes mass toward wherever B is least likely, not just

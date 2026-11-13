@@ -32,8 +32,8 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 2 (child 2b), 3 and 10.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The stop has no brick row of its own, so the layer 5 rows stand in for it (REBUILD_WALK.md,
   Bricks).
 - Each READ_MAP.md is written only by its walking session, so neither earlier read's map takes a

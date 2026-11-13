@@ -32,8 +32,8 @@ What to read
 - Quiz 4.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - An expert is N(m, diag v) over 16 pixels, each pixel independent, so its log-density is a sum over
   pixels (step file 04, step 2).
 - The cat expert of example 9(a) is tight on the head (v = 0.01) and loose on the body (v = 1), and

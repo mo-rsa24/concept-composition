@@ -21,7 +21,7 @@ COLUMNS = OUT / "cat-dog-caption-fit.png"
 PHOTO_THUMBS = OUT / "photo-thumbs"
 
 # Sources already on disk here.
-JOINT_SHEET = REPO / "supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png"
+JOINT_SHEET = REPO / "artifacts/decks/supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png"
 TILES = REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles"
 PRODUCT_TILES = TILES / "cat__x__dog"
 PLURAL_TILES = TILES / "cats__x__dogs"

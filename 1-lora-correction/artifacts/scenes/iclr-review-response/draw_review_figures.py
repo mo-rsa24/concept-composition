@@ -34,20 +34,20 @@ from PIL import Image  # noqa: E402
 REPO = Path(__file__).resolve().parents[4]
 HERE = Path(__file__).resolve().parent
 WALK = REPO / "artifacts/drips/present-revision-to-supervisor"
-RENDERS = WALK / "renders"  # Reviews.pdf pages go to renders/reviews-300dpi
+RENDERS = WALK / "renders"  # paper/iclr-56173/Reviews.pdf pages go to renders/reviews-300dpi
 CROPS = WALK / "crops"
 DPI = 200
-SOURCE_DPI = {"reviews": 300}   # Reviews.pdf is drawn as vector shapes, so a finer render stays sharp
+SOURCE_DPI = {"reviews": 300}   # paper/iclr-56173/Reviews.pdf is drawn as vector shapes, so a finer render stays sharp
 
 SOURCES = {
     "submitted": REPO / "56173_Restoring_plurality_in_c.pdf",
     "revised": REPO / "paper/iclr-56173/build/iclr2027_conference.pdf",
-    "reviews": REPO / "Reviews.pdf",
+    "reviews": REPO / "paper/iclr-56173/Reviews.pdf",
 }
 SOURCE_NAMES = {
     "submitted": "56173_Restoring_plurality_in_c.pdf (submitted)",
     "revised": "paper/iclr-56173/build/iclr2027_conference.pdf (revised)",
-    "reviews": "Reviews.pdf",
+    "reviews": "paper/iclr-56173/Reviews.pdf",
 }
 
 # One colour per role: the reviewer's point, the submitted weakness, the revised answer.
@@ -145,7 +145,7 @@ def source_image(src: dict) -> tuple[Image.Image, list[dict], str]:
         path = WALK / "review-screenshots" / src["file"]
         img = Image.open(path).convert("RGB")
         words = image_words(str(path))
-        label = f'OpenReview screenshot review-screenshots/{src["file"]} = Reviews.pdf page {src["reviews_page"]}'
+        label = f'OpenReview screenshot review-screenshots/{src["file"]} = paper/iclr-56173/Reviews.pdf page {src["reviews_page"]}'
     return img, words, label
 
 

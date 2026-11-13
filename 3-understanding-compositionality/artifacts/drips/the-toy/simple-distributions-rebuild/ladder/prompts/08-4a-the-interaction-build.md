@@ -46,8 +46,8 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The brick row expects r constant with the rule off and varying with it on, and the noised r_t and
   its gradient in ε-space as ε_joint − ε_A − ε_B + ε_∅ (REBUILD_WALK.md, brick "The interaction
   term, exact").

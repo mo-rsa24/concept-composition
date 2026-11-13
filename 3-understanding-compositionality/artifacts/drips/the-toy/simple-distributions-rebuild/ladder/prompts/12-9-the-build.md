@@ -33,15 +33,15 @@ What to read
   ~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
   the compose-rate unit, the held-out pair set and the threshold.
 - The layer 12 --math drip folder under artifacts/drips/ (step 7): my notation.
-- walk08.py's ε-space term, and walk09.py with toy/rebuild/phase9_correction.py: layers 8 and 9.
+- walk08.py's ε-space term, and walk09.py with 3-understanding-compositionality/toy/rebuild/phase9_correction.py: layers 8 and 9.
 - ~/Playground/PhD/concept-composition/runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md:
   how a checkpoint is rendered.
 - concept-composition's report does-interaction-strength-predict-which-pairs-blend.md and its figure
   explainer: the cache and the bound.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The cache is /datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/, where one cell is
   one pair and seed (concept-composition report does-interaction-strength-predict-which-pairs-blend.md,
   "Where this came from"; its figure explainer).

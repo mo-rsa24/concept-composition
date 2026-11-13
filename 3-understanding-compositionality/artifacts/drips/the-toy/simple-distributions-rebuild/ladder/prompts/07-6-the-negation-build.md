@@ -44,8 +44,8 @@ What to read
   to walk it".
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The w grid, the p7. keys, phase7.json and the function in rebuild/negation.py that returns the
   replayed ring and bar are step 1's, and walk07.py imports that function and uses the same grid
   (from step 1).

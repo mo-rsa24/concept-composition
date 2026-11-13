@@ -22,7 +22,7 @@
                                                │  3. quiz 1.2: needed-now right, 80% of the rest
                                                │       ▼
                                                │  4. build: walk01.py, steps 0 to 11
- toy/rebuild/ reference, built ──────────────▶ │  5. compare: p1. numbers equal yours
+ 3-understanding-compositionality/toy/rebuild/ reference, built ──────────────▶ │  5. compare: p1. numbers equal yours
                                                │       ▼
  math-scene, beside layer 2 ◀───────────────── │  6. scene
                                                │       ▼

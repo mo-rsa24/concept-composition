@@ -29,8 +29,8 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 (child 4.1) and 9.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - COMBINE_MAP.md sits in the journey folder
   ~/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/,
   under drips/ in its combine-<idea-slug>/ folder (step 2's hand-off).

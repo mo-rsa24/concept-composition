@@ -13,7 +13,7 @@ Background
 The composition ladder in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ reaches A without B in
 layer 7. The medical cells the project cares about (pneumothorax without drain) are A without B, and
 at the paper's own weight, negation sends mass off every mode when the experts have sharp tails.
-Claude writes the reference code in toy/rebuild/ one layer ahead, so that my own walk07.py has
+Claude writes the reference code in 3-understanding-compositionality/toy/rebuild/ one layer ahead, so that my own walk07.py has
 numbers to match; the reference for layers 1 to 5 is in rebuild/ with outputs in
 rebuild/out/phase1 to phase5, and layer 6's reference (rebuild/phase6_guidance.py) may already have
 added p6. keys. Work in /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain/toy, on
@@ -21,7 +21,7 @@ the current branch.
 
 Objectives
 1. Write rebuild/negation.py (the negation target and the positive-label target for each toy) and
-   rebuild/phase7_negation.py (the dial), run from toy/ as python -m rebuild.phase7_negation with
+   rebuild/phase7_negation.py (the dial), run from 3-understanding-compositionality/toy/ as python -m rebuild.phase7_negation with
    /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python.
 2. Reproduce the kinds notebook's negation dial on the ring and the bar, exact on the grid
    (ideal.exact_grid with kinds.negation(w)), at w = 0, 0.02, 0.05, 0.1, 0.3 and 1.0, by replaying
@@ -58,8 +58,8 @@ What to read
   its Pins.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The brick is the pneumothorax target p(x|PTX)^(1+w)/p(x|drain)^w, with exact mass in the
   A-without-B cell (quadrant: bottom-left; parts world: cat with no dog) against w, per sampler, in
   rebuild/negation.py and rebuild/phase7_negation.py, reproducing first in-bar mass 0.146 at w = 0,
@@ -109,7 +109,7 @@ What is already known
 - walk_numbers.py holds worked-example numbers, each written by put(key, value), while run results
   (masses and total variations per sampler) are read from rebuild/out/phaseN/ instead; its __main__
   runs (phase1, phase2, phase3, phase5) and writes rebuild/out/walk-numbers.json by a relative path,
-  so it runs from toy/ (rebuild/walk_numbers.py).
+  so it runs from 3-understanding-compositionality/toy/ (rebuild/walk_numbers.py).
 - The tolerances are a dial value to the 3 decimals printed, as rebuild/phase3_kinds.py checks
   Figure 2, and a sampler number within 0.03 (rebuild/phase3_kinds.py).
 - rebuild.device.pick_device takes the first card with under 1 GB in use, else the CPU

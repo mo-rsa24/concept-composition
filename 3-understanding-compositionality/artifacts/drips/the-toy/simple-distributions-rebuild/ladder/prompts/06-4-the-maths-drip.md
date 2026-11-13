@@ -30,8 +30,8 @@ What to read
   w = 1 numbers.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Raising a Gaussian to the power w multiplies its precision by w, so q_a^(w_a)·q_b^(w_b) is a
   Gaussian with precision w_a/v_a + w_b/v_b while that stays positive (vault note Powers Of
   Gaussians).

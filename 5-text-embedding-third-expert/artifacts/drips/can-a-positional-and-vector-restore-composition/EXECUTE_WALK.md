@@ -61,7 +61,7 @@ None. The plan was written by this walk.
 ## Closing pass still owed
 
 - [ ] file the figure and its card under `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/`
-- [ ] the `x_pos` row in `supervisor-meeting/README.md` section 1
+- [ ] the `x_pos` row in `artifacts/decks/supervisor-meeting/README.md` section 1
 - [ ] the result back into the idea map's claim 2 and its runs table
 - [ ] `/verify-plan` and `/xref-pillar` on the new plan file
 - [ ] the retrospective, and its `/drip-retro` line

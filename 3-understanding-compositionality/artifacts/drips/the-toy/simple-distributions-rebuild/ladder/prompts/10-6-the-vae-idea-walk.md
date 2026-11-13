@@ -32,8 +32,8 @@ What to read
   dispatch.md: what I built and my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Claim 11 is held (the map's Held claims row).
 - Unsupervised disentanglement is not identifiable without supervision or inductive bias (Locatello
   et al. 2019, confident), so a β-VAE on 2D data may not put A and B on separate axes (the map's

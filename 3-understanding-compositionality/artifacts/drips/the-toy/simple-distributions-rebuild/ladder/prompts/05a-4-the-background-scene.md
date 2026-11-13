@@ -33,8 +33,8 @@ What to read
   script.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The scene's toy is the four-quadrant answer key: one Gaussian blob per quadrant at (±0.5, ±0.5),
   std 0.15, A is x1 > 0, B is x2 > 0, with products on a 441 × 441 grid over [−1.1, 1.1]²
   (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).

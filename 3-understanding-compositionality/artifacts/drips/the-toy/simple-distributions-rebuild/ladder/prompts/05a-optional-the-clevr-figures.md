@@ -38,8 +38,8 @@ What to read
   this repo.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The authors released no code; their CLEVR models were built on NVIDIA's EDM2, cloned at
   reference/edm2 in the projective-composition repo at commit 4bf8162 (READ_MAP.md, Position; the
   repo's README.md).

@@ -29,11 +29,11 @@ What to read
   bar and its shares.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
   1: the faint ring's numbers.
-- toy/rebuild/out/phase2/step9.json and toy/rebuild/out/phase2/phase2.json: the reference shares.
+- 3-understanding-compositionality/toy/rebuild/out/phase2/step9.json and 3-understanding-compositionality/toy/rebuild/out/phase2/phase2.json: the reference shares.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Ring × bar is step file 02's step 9 target: the ring of eight Gaussian modes on a circle of radius
   0.5 (sd 0.03) and the bar uniform on |x1| < 0.2, |x2| < 1, 400 points each, smoothed by σ = 0.05
   (step file 02, step 9).
@@ -46,7 +46,7 @@ What is already known
   gives 0.468, ULA 0.356, MALA at 0.05·ν_t 0.370 and UHA 0.563 (step file 02, step 9).
 - The annealed samplers end at π_0, whose exact share is 0.636; after a clean final level of 10
   moves they give ULA 0.407, MALA 0.411 and UHA 0.620 against 0.713
-  (toy/rebuild/out/phase2/step9.json).
+  (3-understanding-compositionality/toy/rebuild/out/phase2/step9.json).
 - "Annealed MALA" in the scene is tuned MALA, adapted to 0.6 acceptance, because at the fixed step
   0.05·ν_t MALA accepts nearly every move and leaves the same stragglers as ULA (step file 02, step
   9).
@@ -55,7 +55,7 @@ What is already known
   (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
   1).
 - With the trained phase 1 experts, the in-bar share is 0.928 for the trained composition, 0.580 for
-  reverse diffusion and 0.850 for tuned MALA (toy/rebuild/out/phase2/phase2.json; step file 02,
+  reverse diffusion and 0.850 for tuned MALA (3-understanding-compositionality/toy/rebuild/out/phase2/phase2.json; step file 02,
   step 10).
 
 Rules

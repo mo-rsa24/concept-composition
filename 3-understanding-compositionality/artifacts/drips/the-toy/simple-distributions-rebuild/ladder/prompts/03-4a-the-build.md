@@ -12,7 +12,7 @@ objective, I type every block myself into ~/Playground/PhD/simple-distributions-
 Background
 This is layer 3's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/):
 I type my own ideal experts and four kinds of composition from the step file, each shown succeeding
-and failing, one step per message. Claude's reference code is under toy/ in this repo; my file and
+and failing, one step per message. Claude's reference code is under 3-understanding-compositionality/toy/ in this repo; my file and
 the reference print the same numbers, and a difference is a lesson or a bug. I start from the
 setup's folder and environment and walk02.py from layer 2, with quiz 3.2 passed, and the layer 3
 maths drip folder under artifacts/drips/ holds my notation in its dispatch.md.
@@ -30,25 +30,25 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md: the step
   file.
-- toy/rebuild/ideal.py, toy/rebuild/kinds.py and toy/rebuild/phase3_kinds.py: the reference.
+- 3-understanding-compositionality/toy/rebuild/ideal.py, 3-understanding-compositionality/toy/rebuild/kinds.py and 3-understanding-compositionality/toy/rebuild/phase3_kinds.py: the reference.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb: the notebook's
   printed numbers.
-- toy/rebuild/out/phase3/phase3.json: the rebuilt run beside them.
+- 3-understanding-compositionality/toy/rebuild/out/phase3/phase3.json: the rebuilt run beside them.
 - The layer 3 maths drip's dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference is rebuild/ideal.py, rebuild/kinds.py and rebuild/phase3_kinds.py (step file 03,
   opening).
-- Every worked number prints from python -m rebuild.walk_numbers, run from toy/, as 25 p3. keys
+- Every worked number prints from python -m rebuild.walk_numbers, run from 3-understanding-compositionality/toy/, as 25 p3. keys
   (step file 03, opening).
 - The kinds notebook's printed numbers are in
   3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, and the rebuilt
-  run beside them is in toy/rebuild/out/phase3/phase3.json (step file 03, opening).
+  run beside them is in 3-understanding-compositionality/toy/rebuild/out/phase3/phase3.json (step file 03, opening).
 - rebuild/phase3_kinds.py compares the reference with the notebook's printed numbers and never reads
   walk03.py: exact numbers to the notebook's printed precision, sampler numbers within 0.03
-  (toy/rebuild/phase3_kinds.py, docstring; REBUILD_WALK.md, brick "Ideal experts and the seven
+  (3-understanding-compositionality/toy/rebuild/phase3_kinds.py, docstring; REBUILD_WALK.md, brick "Ideal experts and the seven
   kinds").
 - rng = np.random.default_rng(0) draws the training data in exactly the kinds notebook's order, and
   everything else random uses rng2, so typed in order the data equal the notebook's (step file 03,
@@ -87,7 +87,7 @@ What is already known
 
 Rules
 - I type; nothing is pasted into walk03.py.
-- Never edit toy/rebuild/ or the step file's code blocks.
+- Never edit 3-understanding-compositionality/toy/rebuild/ or the step file's code blocks.
 - No commit.
 - Show each printed number before moving on: step 1 prints -2.6288 twice; step 2 the three v_t
   values; step 3 the cell area and grid points; steps 5, 7, 8 and 10 one "exact measure, floor TV"

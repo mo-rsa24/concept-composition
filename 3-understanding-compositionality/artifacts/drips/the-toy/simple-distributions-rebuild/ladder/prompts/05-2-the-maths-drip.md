@@ -25,15 +25,15 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/05-the-overlap-dial.md, steps 1 to 4 and 7: the
   derivation in this walk's notation.
-- toy/rebuild/out/walk-numbers.json: the p5. keys.
-- python -m rebuild.phase5_tables and toy/rebuild/out/phase5/finetune.json: the 3-seed curve and
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: the p5. keys.
+- python -m rebuild.phase5_tables and 3-understanding-compositionality/toy/rebuild/out/phase5/finetune.json: the 3-seed curve and
   the fine-tune numbers.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2: the repaired claim.
 - Quiz 5.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The quadrant toy: A is the left half, B the top half, A∩B the top-left quadrant; each expert holds
   800 points, a share f of them in A∩B, smoothed by σ = 0.05 (step file 05, step 1).
 - Each point lands in A∩B independently with probability f, so A has 8 points there on average at

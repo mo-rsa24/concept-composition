@@ -35,8 +35,8 @@ What to read
 - The layer 4 maths drip folder and its dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The decisions the open would ask are settled at the invocation: build in walk04b.py, the bar is
   the one above, the time box is 2 hours, and the plan file goes in
   3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ beside 04-the-parts-world.md (layer 4, step 4b).
@@ -56,7 +56,7 @@ What is already known
   TV 0.732 against the exact-draw baseline of 0.013 (step file 04, step 7; phase4.json).
 
 Rules
-- Never edit parts_world.py, numbers.json or toy/rebuild/.
+- Never edit parts_world.py, numbers.json or 3-understanding-compositionality/toy/rebuild/.
 - I type; I do not paste.
 - No commit.
 - Stop at the 2-hour time box.

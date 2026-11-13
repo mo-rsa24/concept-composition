@@ -30,25 +30,25 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, run 1: the code,
   and its cell 15 table as the answer key.
-- toy/rebuild/kinds.py (build_kinds) and toy/rebuild/ideal.py (exact_grid, composed_target, tv, V):
+- 3-understanding-compositionality/toy/rebuild/kinds.py (build_kinds) and 3-understanding-compositionality/toy/rebuild/ideal.py (exact_grid, composed_target, tv, V):
   the seven kinds' exact targets, imported here.
-- toy/rebuild/samplers.py, tuned_mala: the reference tuning rule.
+- 3-understanding-compositionality/toy/rebuild/samplers.py, tuned_mala: the reference tuning rule.
 - ~/Playground/PhD/simple-distributions-walk/walk02.py from step 4a.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Run 1 runs on the seven kinds' exact targets: ideal experts with σ = 0.05, 800 points per set,
   2,000 samples, 100 levels and 10 moves per level from N(0, I) (notebook, cells 0 and 2;
-  toy/rebuild/kinds.py).
+  3-understanding-compositionality/toy/rebuild/kinds.py).
 - Layer 3 builds those targets by hand; here they are imported from rebuild/kinds.py (build_kinds)
   and rebuild/ideal.py (exact_grid, composed_target, tv, V) (layer 2, step 4c).
 - In Figure 1, MALA at 0.05·ν_t accepted 0.99 to 1.00 of its proposals, so it equalled ULA and did
   not yet test the accept step (notebook, cells 8 and 10).
 - Tuned MALA carries its step across levels scaled by ν_t and multiplies it by e^(acceptance − 0.6)
-  after every move (notebook, cell 14; toy/rebuild/samplers.py, tuned_mala).
+  after every move (notebook, cell 14; 3-understanding-compositionality/toy/rebuild/samplers.py, tuned_mala).
 - The adaptation runs during sampling, so the chain is not exactly reversible while it adapts
-  (notebook, cell 14; toy/rebuild/samplers.py, tuned_mala).
+  (notebook, cell 14; 3-understanding-compositionality/toy/rebuild/samplers.py, tuned_mala).
 - The notebook's run 1 table, as kind: acceptance, final step over Figure 1's step, tuned TV,
   floor, reads intersection 0.60, 18.6x, 0.11, 0.11; disjunction 0.61, 82.4x, 0.22, 0.23;
   co-occurrence 0.61, 68.9x, 0.11, 0.10; contention 0.60, 43.9x, 0.16, 0.10; dominance 0.60,
@@ -60,10 +60,10 @@ What is already known
   sampler moves mass between separated modes to match unequal weights (notebook, cell 16;
   3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 5).
 - rebuild/phase3_kinds.py reproduces run 1 within 0.03 on every kind, its own tolerance for sampler
-  numbers (toy/rebuild/out/phase3/phase3.json, run1).
+  numbers (3-understanding-compositionality/toy/rebuild/out/phase3/phase3.json, run1).
 
 Rules
-- Never edit the notebook, toy/rebuild/ or toy/anneal_samplers.py.
+- Never edit the notebook, 3-understanding-compositionality/toy/rebuild/ or 3-understanding-compositionality/toy/anneal_samplers.py.
 - I type; I do not paste.
 - No commit.
 - Show each piece's printed lines before moving on: piece 1 prints Figure 1's MALA acceptance per

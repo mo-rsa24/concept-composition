@@ -80,7 +80,7 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    switches off.
 
 6. **Make it the main document.**
-   [dest] **Menu** (top left) → **Settings** → **Main document** → `iclr2027_conference_revision.tex`.
+   [dest] **Menu** (top left) → **Settings** → **Main document** → `paper/iclr-revision/iclr2027_conference_revision.tex`.
    Leave **Compiler** as it is for now. This setting is shared with the original, so the project shows
    the revision until it is set back in step 10.
 

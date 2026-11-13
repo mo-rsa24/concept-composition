@@ -19,15 +19,15 @@ Group G7, the training loss and what the adapter returns (k4nd W4a, W4b, Q4), ca
 |---|---|---|---|
 | Supervisor document format | PDF · web page · slides | Molefe (defaults) | PDF, plus each figure as its own PNG and PDF |
 | Where the revision sits in Overleaf | `revision/` folder · project root | Molefe (defaults) | `revision/`, nothing of the original replaced; upload by drag and drop |
-| New main file name | `iclr2027_conference_revision.tex` · own | Molefe (defaults) | default |
+| New main file name | `paper/iclr-revision/iclr2027_conference_revision.tex` · own | Molefe (defaults) | default |
 | Commit footer on figures | keep · drop | Molefe (defaults) | kept |
 | No-overlap re-score | in the paper · in the reply · held for the rebuttal | Molefe | held; trust the revised paper, add nothing that raises questions |
-| Review crop source | Reviews.pdf renders · OpenReview screenshots | Molefe | screenshots, annotated directly; Reviews.pdf for page numbers |
+| Review crop source | paper/iclr-56173/Reviews.pdf renders · OpenReview screenshots | Molefe | screenshots, annotated directly; paper/iclr-56173/Reviews.pdf for page numbers |
 
 ## Ticks
 
 - Task 1, claim table: 35 claims, 12 groups (commit 8ce63cce). Instruction 4.1: "done. Happy with the claim table".
-- Task 2.1 built, waiting on stop 2: G7 figure, review crops from Reviews.pdf at 300 dpi located by OCR (screenshots kept as the record).
+- Task 2.1 built, waiting on stop 2: G7 figure, review crops from paper/iclr-56173/Reviews.pdf at 300 dpi located by OCR (screenshots kept as the record).
 - Paper and reply edits asked for at stop 2 (Molefe's word): Equation 12 unweighted with no weighting sentence; inference is the usual PoE step with the adapter on; the strength-λ equation removed; after Equation 12, "the joint prompt's prediction is the product's prediction plus r_t ... switching the adapter on adds it" (commits ead813ab, c980aa5a). Rebuild: 20 pages, main text ends p. 10, 0 undefined references.
 - Added at Molefe's request: task 3.3, review.tex grouping the claims with quotes, what was done and the reply, done towards the end.
 - Tables 1 and 3 recomputed on prompts and pairs sharing no concept with training (script a0d9e260; results in 1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/no_overlap_tables.json). Molefe: keep out of the paper and replies unless a reviewer raises it; no reply sentence that invites more questions.

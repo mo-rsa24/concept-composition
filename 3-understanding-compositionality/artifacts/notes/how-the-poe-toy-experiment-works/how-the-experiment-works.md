@@ -58,7 +58,7 @@ The code does not use this closed form. It differentiates $\log q_t$ with autogr
 
 **What it cannot do.** It memorises the 800 points. A trained network may blur or invent between them. That difference is the network's error, and the ideal expert has none.
 
-**Code.** `logq` in `toy/rebuild/ideal.py`, and `cosine_beta_schedule` in `toy/rebuild/model.py`.
+**Code.** `logq` in `3-understanding-compositionality/toy/rebuild/ideal.py`, and `cosine_beta_schedule` in `3-understanding-compositionality/toy/rebuild/model.py`.
 
 ## 2. The exact product
 
@@ -110,7 +110,7 @@ $$
 
 where $\mathrm{pb}_{ab}$ is the exact probability in bin $(a,b)$ and $\mathrm{sb}_{ab}$ is the fraction of draws in it. 0 means identical and 1 means no overlap.
 
-**Code.** `exact_grid`, `grid_density`, `perfect_samples` and `tv` in `toy/rebuild/ideal.py`.
+**Code.** `exact_grid`, `grid_density`, `perfect_samples` and `tv` in `3-understanding-compositionality/toy/rebuild/ideal.py`.
 
 ## 3. The samplers
 
@@ -164,7 +164,7 @@ with $\xi \sim \mathcal N(0, I)$, damping $\gamma = 0.5$, step $h = 0.03$ and 3 
 
 **Settings in the table.** These are the settings of Du et al.'s notebook, used for both groups: ULA and MALA with step 0.001 at all 100 levels, UHA with $h = 0.03$, $\gamma = 0.5$ and 3 leapfrog steps, 10 moves per level, 1500 draws per cell. For the ideal group, reverse diffusion uses `reverse_diffusion` on the exact scores. For the trained group, it uses the network's own sampling loop.
 
-**Code.** `reverse_diffusion`, `ula`, `mala` and `uha` in `toy/rebuild/samplers.py`, and the three sampler classes in `toy/anneal_samplers.py`.
+**Code.** `reverse_diffusion`, `ula`, `mala` and `uha` in `3-understanding-compositionality/toy/rebuild/samplers.py`, and the three sampler classes in `3-understanding-compositionality/toy/anneal_samplers.py`.
 
 ## 4. What changes with trained experts
 
@@ -183,7 +183,7 @@ $$
 
 **Its exact product** is the energy at the clean end, exponentiated and normalised on the same grid as in section 2: $p(x) \propto e^{-(E_A + E_B)}$.
 
-**Code.** `toy/rebuild/model.py`, and `train_one.py` in the results folder for the loop that trained the eight networks.
+**Code.** `3-understanding-compositionality/toy/rebuild/model.py`, and `train_one.py` in the results folder for the loop that trained the eight networks.
 
 ## 5. What each gap in the table measures
 

@@ -30,8 +30,8 @@ What to read
 - rebuild/kinds.py: the ring and the bar.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The ring and bar are 8 ring modes of std 0.03 at radius 0.5 and a bar of half-width 0.2, ideal
   experts smoothed by 0.05 (rebuild/kinds.py).
 - On that pair the exact mass on the 2 in-bar modes is 0.146, 0.121, 0.085, 0.037, 0.0, 0.0 at

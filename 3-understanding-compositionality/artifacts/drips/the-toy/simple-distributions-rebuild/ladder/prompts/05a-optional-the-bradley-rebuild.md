@@ -41,8 +41,8 @@ What to read
   space": layer 10's unbuilt brick.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The answer keys run with uv run --no-project --with numpy --with scipy python checks/<piece>.py
   from the paper's folder, and the 2509.16447 keys import the earlier paper's through
   checks/_earlier.py (READ_MAP.md, Position; read-ahead 00-INDEX.md of 2509.16447).

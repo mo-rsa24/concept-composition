@@ -2,7 +2,7 @@
 
 Submission 56173. One section per reviewer point: the reviewer's words quoted, then the reply.
 Equation, section and figure numbers refer to the revised paper
-(`paper/iclr-56173/iclr2027_conference.tex`). k4nd's review is pages 4 and 5 of `Reviews.pdf`;
+(`paper/iclr-56173/iclr2027_conference.tex`). k4nd's review is pages 4 and 5 of `paper/iclr-56173/Reviews.pdf`;
 UHz6's is page 3. A reply marked pending has not been agreed yet.
 
 ## Reviewer k4nd

@@ -28,13 +28,13 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/02-composing-and-sampling.md, steps 1, 2 and 6: the
   derivation in this walk's notation.
-- toy/rebuild/out/walk-numbers.json: every worked number, as the p2. keys.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: every worked number, as the p2. keys.
 - Layer 1's maths drip folder under artifacts/drips/ and its dispatch.md: my notation.
 - Quiz 2.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Write a(x) = p(x|A), b(x) = p(x|B) and r(x) for the background density of all the data (step file
   02, step 1).
 - Construction (1), score(x|A) + score(x|B) − score(x), targets a·b/r, which is
@@ -49,7 +49,7 @@ What is already known
   3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
 - The product of two Gaussians: N(0, 1)·N(2, 1) is N(1, 0.5) with log Z = log N(0; 2, 2) = -2.2655,
   the p2.prod_mean, p2.prod_var and p2.prod_logZ keys (step file 02, step 1;
-  toy/rebuild/out/walk-numbers.json).
+  3-understanding-compositionality/toy/rebuild/out/walk-numbers.json).
 - Summed noised scores target the product of the noised experts, not the noised product; with
   A = N(1, 0.1²) and B = N(−1, 1) at ᾱ = 0.5 the clean product mean is 0.9802, the noised product
   mean 0.6931 and the product of the noised experts 0.2326 (step file 02, step 2; the
@@ -63,7 +63,7 @@ What is already known
 - The estimator behind the sampler TVs here uses 40 × 40 bins on the canvas [−1.1, 1.1]², the exact
   density's mass per bin against each bin's sample count divided by the full sample count, never by
   the count that landed inside the canvas, so the result is a windowed histogram diagnostic and not
-  the full-space TV (toy/rebuild/ideal.py, tv; the kinds notebook, cell 1).
+  the full-space TV (3-understanding-compositionality/toy/rebuild/ideal.py, tv; the kinds notebook, cell 1).
 - Step 5's answer key uses 60 × 60 bins on [−1.5, 1.5]² and counts samples outside that box as
   error (3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
   total_variation).

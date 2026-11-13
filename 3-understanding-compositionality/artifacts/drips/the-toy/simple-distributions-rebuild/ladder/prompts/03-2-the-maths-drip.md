@@ -27,14 +27,14 @@ Objectives
 What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md, steps 1
   and 2: the derivation in this walk's notation.
-- toy/rebuild/out/walk-numbers.json: every worked number, as the p3. and p1. keys.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json: every worked number, as the p3. and p1. keys.
 - The plan "the exact score of a Gaussian mixture", linked on layer 3's Study first line.
 - Layer 2's maths drip folder under artifacts/drips/ and its dispatch.md: my notation.
 - Quiz 3.1's results: the misses that become first rungs.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The ideal expert of x_1, …, x_N at smoothing σ is p_σ(x) = (1/N)Σ N(x; x_i, σ²I), a Gaussian
   kernel density estimate with bandwidth σ (step file 03, step 1).
 - Write the training set as p̂_0(x) = (1/N)Σ δ(x − x_i); Gaussian corruption of variance σ² gives

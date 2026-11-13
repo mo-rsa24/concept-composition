@@ -35,8 +35,8 @@ What to read
 - ~/Playground/PhD/simple-distributions-walk/walk02.py from step 4a.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - No sampler appears: every density is an ideal expert, its training points smoothed by N(0, σ²I),
   computed exactly on a 241 × 241 grid over [−1.1, 1.1]², and A∩B is the top-left quadrant
   (notebook, cells 0 and 1).
@@ -67,7 +67,7 @@ What is already known
   (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1).
 
 Rules
-- Never edit the notebook or toy/rebuild/.
+- Never edit the notebook or 3-understanding-compositionality/toy/rebuild/.
 - I type; I do not paste.
 - No commit.
 - Show each piece's printed number before moving on: piece 1 prints the gradient difference, piece

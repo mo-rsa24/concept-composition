@@ -34,8 +34,8 @@ What to read
 - environment/cluster/launch-rules.md in the compositional_diffusion project: the launch guards.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The walk stands at round 2 of 5: tasks 1.1, 1.2, 3.1 to 3.3, 5.1 and 7.1 are ticked, instruction
   2.1 is confirmed and 4.2 skipped (the walk map; the pick-up page, "Walk 1").
 - The walk waits on instructions 4.1 and 6.1, which are my count checks, and on my prediction of how

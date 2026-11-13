@@ -37,8 +37,8 @@ What to read
 - rebuild/phase5_dial.py: the A and B definitions and MARGIN.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The toy is points uniform on [−1, 1]², A true when x1 < 0 and B true when x2 > 0 (the A and B of
   rebuild/phase5_dial.py), so A∩B is the top-left quadrant
   (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4; rebuild/phase5_dial.py docstring).

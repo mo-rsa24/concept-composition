@@ -244,7 +244,7 @@ What to read
 - paper/iclr-56173/figures.md: the figure register, with statuses reserved, fillable, built and broken.
 - paper/iclr-56173/iclr2027_conference.tex lines 25 to 70: the placeholder macros already in the source.
 - 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
-- 56173_Restoring_plurality_in_c.pdf and Reviews.pdf: the paper and the three reviews.
+- 56173_Restoring_plurality_in_c.pdf and paper/iclr-56173/Reviews.pdf: the paper and the three reviews.
 - environment/paper.md: how the paper builds here, since no system LaTeX exists.
 
 What is already known
@@ -330,7 +330,7 @@ Objectives
 4. Mint the journey, register it in ~/goal-setting/learning/JOURNEYS.md, and record the three roots.
 
 What to read
-- Reviews.pdf: the exact wording of the three reviewers' requests.
+- paper/iclr-56173/Reviews.pdf: the exact wording of the three reviewers' requests.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far", and step 2's protocol.
 - composition/focus/eval_metrics.py: CLIP, EVA-CLIP and ImageReward scorers already written here.
 - paper/iclr-56173/figures.md and 1-lora-correction/report/paper-review/prze-1-scores.md: where each score lands.
@@ -1251,7 +1251,7 @@ What to read
 - 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
-- Reviews.pdf: the exact wording of every point being answered.
+- paper/iclr-56173/Reviews.pdf: the exact wording of every point being answered.
 - The manuscript voice and number rules in the memory notes, and environment/paper.md for the build.
 - 56173_Restoring_plurality_in_c.pdf: the submitted text, Sections 3 to 5 and Appendices A and B.
 
@@ -1310,9 +1310,9 @@ most one question. You judge by opening the compiled PDF.
 You ~90 min (estimate) · AI ~45 min (estimate) · Opus, medium · moves: PRZE-6 and the text line of PRZE-7
 
 **Objective:** a reply to Reviewer PrzE, point by point, in a markdown source that builds a LaTeX file for the Overleaf replies project and a plain-text file for OpenReview, with every number matched to the revised paper by a script.
-**Outcome:** `replies/prze.md`, `replies/common.md`, the built zip, one plain-text file per comment with its character count, and the number check's output.
+**Outcome:** `paper/iclr-56173/replies/prze.md`, `paper/iclr-56173/replies/common.md`, the built zip, one plain-text file per comment with its character count, and the number check's output.
 **Serves:** PRZE-6 (replies drafted) and PRZE-7 (the comment text).
-**Sees:** none · **Ticket:** none · **Source page:** `Reviews.pdf`, Reviewer PrzE
+**Sees:** none · **Ticket:** none · **Source page:** `paper/iclr-56173/Reviews.pdf`, Reviewer PrzE
 
 ```text
 /drip-write the reply to Reviewer PrzE for submission 56173, point by point, after the AI builds the
@@ -1330,7 +1330,7 @@ text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.
-2. Build replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
+2. Build paper/iclr-56173/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
 3. Draft the opening, weakness 1 with question 1, weakness 2, question 2 and the closing, one part
    at
    a time with the user steering.
@@ -1339,7 +1339,7 @@ Objectives
    counts.
 
 What to read
-- Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
+- paper/iclr-56173/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
 - paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
 - 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
@@ -1367,7 +1367,7 @@ Rules
 - Never ask for or store any Overleaf or OpenReview credential.
 
 What to hand back
-- replies/prze.md and replies/common.md, the built LaTeX project zip, and one plain-text file per
+- paper/iclr-56173/replies/prze.md and paper/iclr-56173/replies/common.md, the built LaTeX project zip, and one plain-text file per
   comment with its character count.
 - The number check's output with every number matched.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.

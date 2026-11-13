@@ -4,7 +4,7 @@
 
 **What you build, and when it ends.** On that footing you build the seven kinds of composition on the paper's toy data, one dial each. It ends when your exact numbers match the kinds notebook's Figure 1 and Figure 2.
 
-**The reference code.** The reference is `rebuild/ideal.py`, `rebuild/kinds.py` and `rebuild/phase3_kinds.py` in `toy/` (`toy/rebuild/` for the package).
+**The reference code.** The reference is `rebuild/ideal.py`, `rebuild/kinds.py` and `rebuild/phase3_kinds.py` in `3-understanding-compositionality/toy/` (`3-understanding-compositionality/toy/rebuild/` for the package).
 
 **How to walk it.** `/drip-execute-plan 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md`, one step per message, typing every block yourself. The python blocks, typed in order into `walk03.py` in `/home-mscluster/mmolefe/Playground/PhD/simple-distributions-walk/`, are one runnable script.
 
@@ -1879,7 +1879,7 @@ for name, vals, make in [
 <details><summary>The code that draws this figure</summary>
 
 ```python
-# from toy/rebuild/phase3_kinds.py, inside main(); KINDS holds each kind's data, exact grid p and samples
+# from 3-understanding-compositionality/toy/rebuild/phase3_kinds.py, inside main(); KINDS holds each kind's data, exact grid p and samples
 cols = ["perfect", "reverse diffusion", "ULA", "MALA", "UHA"]
 # Figure 1 picture
 fig, ax = plt.subplots(len(KINDS), 8, figsize=(19, 2.5 * len(KINDS)))

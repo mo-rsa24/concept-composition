@@ -39,8 +39,8 @@ What to read
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in .quiz-prep/, so prep-cadence runs first
   for each quiz (quiz-cadence, "The preparation gate").
 - Quiz P.1's material is Goodfellow et al. 17.2 (importance sampling, p608), the annealed importance

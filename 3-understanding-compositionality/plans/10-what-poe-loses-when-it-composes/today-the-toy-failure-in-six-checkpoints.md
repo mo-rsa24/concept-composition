@@ -250,7 +250,7 @@ it, then say what you see before moving on.
     σ_bg = 1.0, keep the shapes at σ = 0.1, and draw 200 from the exact product.
   - **The parts world encoded like this toy.** Encode cat and dog on separate channels instead of +1
     and −1 on the same pixels, so the two cannot cancel, and draw 200 from its exact product
-    (`toy/rebuild/parts_world.py`, from `toy/`).
+    (`3-understanding-compositionality/toy/rebuild/parts_world.py`, from `3-understanding-compositionality/toy/`).
   - **✅ Check, written before running:** if this toy with the loose background draws mostly two
     shapes apart, the background spread is what decides the picture on both toys. If the
     channel-encoded parts world draws overlays, the encoding decides it. If neither moves, the toys

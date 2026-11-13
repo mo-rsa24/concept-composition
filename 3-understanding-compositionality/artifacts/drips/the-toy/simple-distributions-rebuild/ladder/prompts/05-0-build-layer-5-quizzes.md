@@ -16,7 +16,7 @@ much A-and-B data a product needs, and whether pretraining supplies it. Each lay
 quizzes, one on the college maths underneath it and one on the layer itself, built during the
 previous layer's build. Every path below is from the repo root,
 /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain, except code paths, which are
-under toy/.
+under 3-understanding-compositionality/toy/.
 
 Objectives
 1. For each quiz, dispatch prep-cadence (quiz-prep-pulse --build) with the goal "say how much
@@ -41,8 +41,8 @@ What to read
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in
   3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
   quiz (quiz-cadence, "The preparation gate").
@@ -89,10 +89,10 @@ What is already known
   radius around a blob squared to variance σ²/2 (p5.mass_within_3sd_2d and
   p5.mass_within_3sd_2d_half_variance; ladder file 05, step 4).
 - Fine-tuning: pretrained support falls from 0.159 deep mass to 0.001 within 30 fine-tune steps on
-  the exact grid (step file 05, step 7; toy/rebuild/out/phase5/finetune.json).
+  the exact grid (step file 05, step 7; 3-understanding-compositionality/toy/rebuild/out/phase5/finetune.json).
 - Tuned MALA and UHA still read 0.056 and 0.068 at step 30, 0.004 and 0.0055 at step 100, and at
   most 0.001 from step 300, and experts trained from scratch give 0.000 (step file 05, step 7;
-  toy/rebuild/out/phase5/finetune.json).
+  3-understanding-compositionality/toy/rebuild/out/phase5/finetune.json).
 - Z with expert A's blob in the bottom-right corner and B's blob moved is 7.9 × 10⁻¹⁰ opposite,
   5.3 × 10⁻⁵ next door and 3.54 on top of A (scene_key.json in
   3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/, keys support.TL.Z, support.TR.Z and
@@ -109,7 +109,7 @@ What is already known
   and a missed question returns in the next quiz (PROMPTS.md, "The bar for every quiz").
 
 Rules
-- Change nothing in the step file's prose, in toy/rebuild/ or in the answer-key and scene folders.
+- Change nothing in the step file's prose, in 3-understanding-compositionality/toy/rebuild/ or in the answer-key and scene folders.
 - In the ladder file, write only the two URLs.
 - Read the diffusion models quiz's two sections before writing a question.
 - Report each quiz's question count, node count and verdicts from prep-cadence before its page is

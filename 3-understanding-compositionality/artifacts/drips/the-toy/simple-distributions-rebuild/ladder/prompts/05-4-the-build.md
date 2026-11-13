@@ -14,7 +14,7 @@ at 5%
 Background
 This is layer 5's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/):
 I type the overlap dial from the step file, one step per message, and then rebuild the three
-answer-key numbers that layer 12's dial claim rests on. Claude's reference code is under toy/ in
+answer-key numbers that layer 12's dial claim rests on. Claude's reference code is under 3-understanding-compositionality/toy/ in
 this repo; my file and the reference print the same numbers, and a difference is a lesson or a bug.
 I start from the setup's folder and environment and walk04.py from layer 4, with quiz 5.2 passed,
 and the layer 5 maths drip folder under artifacts/drips/ holds my notation in its dispatch.md.
@@ -34,18 +34,18 @@ What to read
   "Where the numbers come from".
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, step 4: the three
   answer-key numbers and why they differ.
-- toy/rebuild/phase5_dial.py and toy/rebuild/phase5_finetune.py: the reference.
-- toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by
+- 3-understanding-compositionality/toy/rebuild/phase5_dial.py and 3-understanding-compositionality/toy/rebuild/phase5_finetune.py: the reference.
+- 3-understanding-compositionality/toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by
   python -m rebuild.phase5_tables.
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/, its README and
   answer_key.json: the answer key.
 - The layer 5 maths drip's dispatch.md: my notation.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference is rebuild/phase5_dial.py and rebuild/phase5_finetune.py, whose results are
-  toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by
+  3-understanding-compositionality/toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by
   python -m rebuild.phase5_tables (step file 05, "Where the numbers come from").
 - The worked numbers are 24 p5. keys of python -m rebuild.walk_numbers, 8 for walk05.py's own toys
   and 16 for the step and ladder files' derivations (step file 05, "Where the numbers come from").
@@ -118,7 +118,7 @@ What is already known
 
 Rules
 - I type; nothing is pasted into walk05.py.
-- Never edit toy/rebuild/, the answer-key or scene folders, or the step file's code blocks.
+- Never edit 3-understanding-compositionality/toy/rebuild/, the answer-key or scene folders, or the step file's code blocks.
 - Never import answer_key.py; type its construction.
 - No commit.
 - Show each printed line before moving on: step 1 prints the count of A's points in A∩B at 5% (about

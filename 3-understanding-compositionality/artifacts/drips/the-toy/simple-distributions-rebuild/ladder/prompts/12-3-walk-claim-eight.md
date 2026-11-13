@@ -37,8 +37,8 @@ What to read
 - B1's pick-up page, plans/00-where-we-left-off.md: the follow-up pool and the unanswered proposals.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Claim 8 is wrong as stated (the map, claim 8).
 - Its repair puts composition on the drain shortcut as one arm against upweighting the real
   drain-free films and against masked editing, run only after B1's drain gap shows the shortcut

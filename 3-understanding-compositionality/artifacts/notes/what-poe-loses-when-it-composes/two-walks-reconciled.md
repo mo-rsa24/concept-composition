@@ -21,7 +21,7 @@ The evidence column cites files by these short names, with a line number after t
 | `overlap-map`, `overlap-compiled` | `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md`, `COMPILED.md` |
 | `a-and-b-map` | `3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md` |
 | `testbed-map` | `3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md` |
-| `out/` | `toy/rebuild/out/` |
+| `out/` | `3-understanding-compositionality/toy/rebuild/out/` |
 
 **Construction (1) and construction (2)** are B's names and are used below because A has none. Construction (1) is one conditional model run as score(x|A) + score(x|B) − score(x), which targets p(x|A)·p(x|B)/p(x); at guidance w it is A's guided sum. Construction (2) is two separate experts multiplied, p_A·p_B, which is A's exact product in checkpoints 3 to 5.
 

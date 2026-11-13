@@ -6,8 +6,8 @@ explicit `box` in 200 dpi page pixels where the source has no text layer. Crop n
 <source>-p<page>-<claim>.
 """
 
-K4ND_REPLY = "replies/k4nd-and-uhz6.md"
-PRZE_REPLY = "replies/prze.md"
+K4ND_REPLY = "paper/iclr-56173/replies/k4nd-and-uhz6.md"
+PRZE_REPLY = "paper/iclr-56173/replies/prze.md"
 
 G7 = {
     "group": "G7",
@@ -119,7 +119,7 @@ G7 = {
         {"from": ("s3", "diag"), "to": ("r2", "eq12"), "label": "stated in Section 4 instead"},
     ],
     "reply": {
-        "title": "The reply we plan to send (replies/k4nd-and-uhz6.md: k4nd W4, its first two parts, and Q4)",
+        "title": "The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: k4nd W4, its first two parts, and Q4)",
         "file": K4ND_REPLY,
         "sections": [
             "W4: method details > The training loss is not stated in Section 4",
@@ -210,7 +210,7 @@ G1 = spec(
      {"from": ("v1", "b"), "to": ("s2", "eq9"), "label": "by construction", "role": "review"},
      {"from": ("s1", "meas"), "to": ("r2", "contrib"), "label": "rewritten"},
      {"from": ("s2", "eq9"), "to": ("r1", "whole"), "label": "now named for what it is"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: k4nd W1 and Q1)", K4ND_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: k4nd W1 and Q1)", K4ND_REPLY,
      ["W1: the residual does not establish", "Q1: evidence that the residual"]),
     ["Changes behind this page: Section 3 says r_t is the whole interaction the product drops and scopes the paper to plurality; the contributions claim only what the experiments show.", SOURCES_LINE],
 )
@@ -236,7 +236,7 @@ G2 = spec(
     [{"from": ("v1", "std"), "to": ("s1", "c"), "label": "the novelty claimed", "role": "review"},
      {"from": ("s1", "c"), "to": ("r1", "tgt"), "label": "stated as"},
      {"from": ("s1", "c"), "to": ("r2", "none"), "label": "not run", "role": "submitted"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: k4nd W2)", K4ND_REPLY, ["W2: methodological novelty"]),
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: k4nd W2)", K4ND_REPLY, ["W2: methodological novelty"]),
     ["Changes behind this page: Section 2 says prior corrections keep the product as the target while this paper changes the target.", SOURCES_LINE],
     status="partly answered", status_color=AMBER,
 )
@@ -283,7 +283,7 @@ G3 = spec(
      {"from": ("s1", "f4"), "to": ("r1", "t1"), "label": "learned adapter, 276 prompts"},
      {"from": ("s1", "f4"), "to": ("r2", "f10"), "label": "failure rates"},
      {"from": ("s2", "nei"), "to": ("r3", "fix"), "label": "protocol stated"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: k4nd W3 and Q2, UHz6 Q2)", K4ND_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: k4nd W3 and Q2, UHz6 Q2)", K4ND_REPLY,
      ["W3: no systematic quantitative", "Q2: aggregate results", "Q2: success rate against"]),
     ["Changes behind this page: Table 1 scores every method on the 276 Attend-and-Excite prompts, Figure 11 counts failure types on 53 held-out pairs, and Section 4.1 opens with the protocol.",
      "UHz6 weakness 1 also asks for standard benchmarks; that half is on the G4 page. The reply's anonymous code link is still a TODO. " + SOURCES_LINE],
@@ -313,7 +313,7 @@ G4 = spec(
     [{"from": ("v1", "w1"), "to": ("s1", "grid"), "label": "no metric", "role": "review"},
      {"from": ("s1", "grid"), "to": ("r1", "t1"), "label": "scored"},
      {"from": ("s1", "grid"), "to": ("r2", "t2"), "label": "benchmarks"}],
-    ("The reply we plan to send (replies/prze.md: W1 and Q1)", PRZE_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/prze.md: W1 and Q1)", PRZE_REPLY,
      ["W1: lack of quantitative benchmarks", "Q1: quantitative benchmark"]),
     ["Table 2 scores GenEval two-object, attribute binding and position, and T2I-CompBench colour and shape, each with its official evaluator.",
      "The PrzE Q1 reply says \"Tables 1 to 4\"; the revision has three tables. UHz6's reply to weakness 1 is on the G3 page. " + SOURCES_LINE],
@@ -349,9 +349,9 @@ G5 = spec(
      {"from": ("s1", "co3"), "to": ("r1", "cols"), "label": "more columns"},
      {"from": ("s1", "co3"), "to": ("r2", "att"), "label": "discussed"},
      {"from": ("s1", "co3"), "to": ("r3", "tome"), "label": "no number", "role": "submitted"}],
-    ("The reply we plan to send (replies/prze.md: W2; replies/k4nd-and-uhz6.md: UHz6 W3)", PRZE_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/prze.md: W2; paper/iclr-56173/replies/k4nd-and-uhz6.md: UHz6 W3)", PRZE_REPLY,
      ["W2: narrow baselines"]),
-    ["UHz6's weakness 3 reply (replies/k4nd-and-uhz6.md) says the same: CO3 in Tables 1 and 3, a Langevin corrector in Figure 5, Attend-and-Excite and CONFORM in Section 2.",
+    ["UHz6's weakness 3 reply (paper/iclr-56173/replies/k4nd-and-uhz6.md) says the same: CO3 in Tables 1 and 3, a Langevin corrector in Figure 5, Attend-and-Excite and CONFORM in Section 2.",
      SOURCES_LINE],
     status="partly answered", status_color=AMBER,
 )
@@ -395,7 +395,7 @@ G6 = spec(
      {"from": ("s1", "either"), "to": ("r1", "co3"), "label": "now"},
      {"from": ("s1", "48"), "to": ("r1", "tgt"), "label": "described"},
      {"from": ("s1", "either"), "to": ("r2", "f7"), "label": "shown"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: UHz6 training filter and Q1, k4nd Q3)", K4ND_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: UHz6 training filter and Q1, k4nd Q3)", K4ND_REPLY,
      ["The training filter", "Q1: the 48 training pairs", "Q3: pairs retained when only CO3"]),
     ["The 48 pairs are listed in the UHz6 Q1 reply and released with the code; the paper describes them by kind (28 two animals, 3 animal and object, 17 two objects).", SOURCES_LINE],
 )
@@ -429,7 +429,7 @@ G8 = spec(
      {"from": ("v1", "sec"), "to": ("s2", "same"), "label": "this sentence", "role": "review"},
      {"from": ("s1", "cap"), "to": ("r1", "lat"), "label": "now"},
      {"from": ("s2", "same"), "to": ("r2", "dag"), "label": "now"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: k4nd W5)", K4ND_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: k4nd W5)", K4ND_REPLY,
      ["W5: the qualitative baseline comparison"]),
     ["k4nd's question 4 also asks about starting noise; it is answered here. " + SOURCES_LINE],
 )
@@ -469,7 +469,7 @@ G9 = spec(
      {"from": ("v1", "brk"), "to": ("s2", "brk"), "label": "this sentence", "role": "review"},
      {"from": ("s1", "f10"), "to": ("r1", "open"), "label": "both removed"},
      {"from": ("s2", "brk"), "to": ("r2", "fix"), "label": "now reads"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: UHz6 presentation issues, k4nd W4 third part)", K4ND_REPLY,
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: UHz6 presentation issues, k4nd W4 third part)", K4ND_REPLY,
      ["Presentation issues", "W4: method details > Repetitive claims about learning an abstract concept"]),
     ["The repeated abstract-concept claims were cut from Sections 3 and 4 and the Discussion (06a9cf98); Section 4.1 opens with the evaluation protocol (508d2647). " + SOURCES_LINE],
 )
@@ -500,7 +500,7 @@ G10 = spec(
      {"from": ("s1", "pairs"), "to": ("r1", "f13"), "label": "three concepts"},
      {"from": ("s1", "pairs"), "to": ("r2", "disc"), "label": "discussed"},
      {"from": ("s1", "pairs"), "to": ("r3", "sdxl"), "label": "still SDXL", "role": "submitted"}],
-    ("The reply we plan to send (replies/prze.md: Q2)", PRZE_REPLY, ["Q2: multiple concepts"]),
+    ("The reply we plan to send (paper/iclr-56173/replies/prze.md: Q2)", PRZE_REPLY, ["Q2: multiple concepts"]),
     ["Objects beyond animals are scored in Table 1 (animals with objects, objects); see G4. UHz6's weakness 3 reply is on the G5 page. " + SOURCES_LINE],
     status="partly answered", status_color=AMBER,
 )
@@ -526,7 +526,7 @@ G11 = spec(
     [{"from": ("v1", "q3"), "to": ("s1", "f7"), "label": "these failures", "role": "review"},
      {"from": ("s1", "f7"), "to": ("r1", "f10"), "label": "counted per window"},
      {"from": ("s1", "f7"), "to": ("r2", "f11"), "label": "shown per window"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: UHz6 Q3)", K4ND_REPLY, ["Q3: restricting the adapter"]),
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: UHz6 Q3)", K4ND_REPLY, ["Q3: restricting the adapter"]),
     ["The submitted Figure 7 is Figure 14 in the revision. " + SOURCES_LINE],
 )
 
@@ -543,7 +543,7 @@ G12 = spec(
           "The revision has no per-group table. The reply answers from the\n21 held-out pairs whose concepts do not compete for one region.", ["nc"], height=220)],
     [{"from": ("v1", "q4"), "to": ("s1", "lh"), "label": "one image", "role": "review"},
      {"from": ("s1", "lh"), "to": ("r1", "nc"), "label": "answered", "role": "submitted"}],
-    ("The reply we plan to send (replies/k4nd-and-uhz6.md: UHz6 Q4)", K4ND_REPLY, ["Q4: pairs that do not compete"]),
+    ("The reply we plan to send (paper/iclr-56173/replies/k4nd-and-uhz6.md: UHz6 Q4)", K4ND_REPLY, ["Q4: pairs that do not compete"]),
     ["The held-out groups were removed from the paper; the hard, easy and not-competing split is named as future work in the Discussion. " + SOURCES_LINE],
     status="answered in the reply", status_color=AMBER,
 )

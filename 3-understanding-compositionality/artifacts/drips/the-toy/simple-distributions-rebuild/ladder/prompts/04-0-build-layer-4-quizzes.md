@@ -16,7 +16,7 @@ place the cat-dog product is exact in more than two dimensions: 16-pixel images 
 Gaussian and mixture experts. Each layer opens on two quizzes, one on the college maths underneath
 it and one on the layer itself, built during the previous layer's build. Every path below is from
 the repo root, /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain, except code
-paths, which are under toy/.
+paths, which are under 3-understanding-compositionality/toy/.
 
 Objectives
 1. For each quiz, dispatch prep-cadence (quiz-prep-pulse --build) with the goal "multiply Gaussian
@@ -37,14 +37,14 @@ What to read
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/04-the-parts-world.md, steps 0 to 8: the material for
   quiz 4.2.
 - 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json and
-  toy/rebuild/out/phase4/phase4.json: the reference numbers.
+  3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json: the reference numbers.
 - The two published quizzes named under What is already known, before writing.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in
   3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
   quiz (quiz-cadence, "The preparation gate").
@@ -70,7 +70,7 @@ What is already known
   1/v = 1/v_1 + 1/v_2; the mean is m = v(m_1/v_1 + m_2/v_2); the constant is
   Z = N(m_1; m_2, diag(v_1 + v_2)), derived by completing the square (step file 04, step 3).
 - Every answer number traces to numbers.json in 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/
-  or to toy/rebuild/out/phase4/phase4.json (numbers.json; step file 04, steps 3 to 6).
+  or to 3-understanding-compositionality/toy/rebuild/out/phase4/phase4.json (numbers.json; step file 04, steps 3 to 6).
 - The mosaic's head mean is 0.9802 and its log Z −46.47 (numbers.json; step file 04, step 3).
 - The blend has mean 0 and sd 0.0707, 10 sds from each expert, and log Z −1583.4 (numbers.json;
   step file 04, step 4).
@@ -92,7 +92,7 @@ What is already known
   and a missed question returns in the next quiz (PROMPTS.md, "The bar for every quiz").
 
 Rules
-- Change nothing in the step file's prose, in toy/rebuild/ or in the example-9 folder.
+- Change nothing in the step file's prose, in 3-understanding-compositionality/toy/rebuild/ or in the example-9 folder.
 - In the ladder file, write only the two URLs.
 - Read the two published quizzes before writing a question.
 - Report each quiz's question count, node count and verdicts from prep-cadence before its page is

@@ -13,7 +13,7 @@ with trained experts.
 
 Background
 The composition ladder in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ walks from one 2D diffusion
-expert to a correction for product-of-experts composition, and toy/rebuild/ in this repo is
+expert to a correction for product-of-experts composition, and 3-understanding-compositionality/toy/rebuild/ in this repo is
 Claude's reference code for every layer. Layer 9 is the second half of the goal: a fix that can be
 trained, and a fair test of whether composition plus a correction needs fewer joint examples than
 training on the joint directly. This reference is built one layer ahead, during the prior-art read,
@@ -45,9 +45,9 @@ Objectives
    rewritten with the p9. keys added.
 
 What to read
-- toy/rebuild/interaction.py: r_t and ∇r_t in float64 for any four parts_world.Mixture objects,
+- 3-understanding-compositionality/toy/rebuild/interaction.py: r_t and ∇r_t in float64 for any four parts_world.Mixture objects,
   layer 8's reference.
-- toy/rebuild/out/walk-numbers.json, the p8. keys: layer 8's numbers.
+- 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json, the p8. keys: layer 8's numbers.
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ladder/08-the-interaction-term.md, step 0: how
   layer 8's reference was built.
 - 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, brick "The correction, learned
@@ -57,13 +57,13 @@ What to read
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/samplers-on-exact-experts/exact_toy.py,
   mala_fixed.py and run_samplers.py: run 7's toy and MALA, to port.
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4, 4.1, 5 and 9.
-- toy/rebuild/train.py, toy/rebuild/model.py, toy/rebuild/samplers.py, toy/rebuild/parts_world.py
-  and toy/rebuild/device.py: the functions to call.
+- 3-understanding-compositionality/toy/rebuild/train.py, 3-understanding-compositionality/toy/rebuild/model.py, 3-understanding-compositionality/toy/rebuild/samplers.py, 3-understanding-compositionality/toy/rebuild/parts_world.py
+  and 3-understanding-compositionality/toy/rebuild/device.py: the functions to call.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
-- Run from toy/ with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python, on the cards
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
+- Run from 3-understanding-compositionality/toy/ with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python, on the cards
   rebuild.device.pick_device picks (layer 9, step 0).
 - The brick row is the fair test from the parallel walk: a trained joint {A, B} condition against
   composition alone against composition plus a small correction fine-tuned on the same few A∩B

@@ -2,7 +2,7 @@
 
 One line per change to the paper, grouped by the reviewer point it answers. Commits are on
 `exec/correction-loss-01`; each holds that change and its reply only. The replies themselves are in
-`replies/k4nd-and-uhz6.md`.
+`paper/iclr-56173/replies/k4nd-and-uhz6.md`.
 
 ## k4nd W1 and Q1: what the residual measures
 

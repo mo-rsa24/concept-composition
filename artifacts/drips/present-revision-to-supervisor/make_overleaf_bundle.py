@@ -4,7 +4,7 @@ Overleaf compiles from the project root, so the bundle is laid out as the root o
 supervisor's project will be after the upload:
 
     overleaf-bundle/
-        iclr2027_conference_revision.tex   the revised tex, every path rewritten to revision/
+        paper/iclr-revision/iclr2027_conference_revision.tex   the revised tex, every path rewritten to revision/
         revision/                          every file it reads, flat
 
 Only paths change in the tex. Run from the repo root:
@@ -23,7 +23,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[3]
 PAPER = REPO / "paper/iclr-56173"
 OUT = Path(__file__).resolve().parent / "overleaf-bundle"
-MAIN = "iclr2027_conference_revision.tex"
+MAIN = "paper/iclr-revision/iclr2027_conference_revision.tex"
 TEMPLATE = ["iclr2027_conference.sty", "iclr2027_conference.bst", "iclr2027_conference.bib",
             "natbib.sty", "fancyhdr.sty", "math_commands.tex"]
 

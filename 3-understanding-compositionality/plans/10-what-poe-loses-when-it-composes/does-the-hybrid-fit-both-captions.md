@@ -54,7 +54,7 @@ chimera-as-argmax story needs the joint distribution rather than CLIP to carry i
 |---|---|---|
 | real both-animal photographs | 91 | COCO train2017 on the cluster, named by `manifest.json`, with 40 of 131 struck off by [the by-eye audit](../../../4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json) |
 | plain product renders, cat × dog | 7 | `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed01..07/poe.png`, 1024 px, gitignored |
-| joint prompt renders, cat × dog | 32 | cropped from [where the joint prompt succeeds](../../../supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png), an 8 × 4 grid at 320 px a tile |
+| joint prompt renders, cat × dog | 32 | cropped from [where the joint prompt succeeds](../../../artifacts/decks/supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png), an 8 × 4 grid at 320 px a tile |
 | plural product renders, cats × dogs | 7 | `.../tiles/cats__x__dogs/seed01..07/poe.png`, carried as a fourth point on the plane; seed08 holds only a joint render |
 
 Seven seeds are covered by both render sets, so the paired read is over seven.

@@ -39,8 +39,8 @@ What to read
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in .quiz-prep/, so prep-cadence runs first
   for each quiz (quiz-cadence, "The preparation gate").
 - The step file's textbook links and video tables are ready nodes, to reuse before searching again
@@ -50,10 +50,10 @@ What is already known
   mscluster109) and import pypdf fails.
 - The notation is the step file's: q(x_t | x_0) = N(√ᾱ_t x_0, (1 − ᾱ_t) I) over T = 100 steps of a
   cosine schedule, and every worked number prints from python -m rebuild.walk_numbers as the 41 p1.
-  keys in toy/rebuild/out/walk-numbers.json (step file 01, steps 4 and 5).
+  keys in 3-understanding-compositionality/toy/rebuild/out/walk-numbers.json (step file 01, steps 4 and 5).
 
 Rules
-- Change nothing in the step files' prose or in toy/rebuild/.
+- Change nothing in the step files' prose or in 3-understanding-compositionality/toy/rebuild/.
 - In the ladder files, write only the three URLs.
 - Report each quiz's coverage counts before its page is built.
 

@@ -30,8 +30,8 @@ What to read
   card.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The reference sets are the two read-ahead chunks on the layer 10 Study first line (the
   feature-space chunk and appendix I), the "Composing in a latent space" Bricks row, and claims 10
   and 11 with the run card (the four sources above).

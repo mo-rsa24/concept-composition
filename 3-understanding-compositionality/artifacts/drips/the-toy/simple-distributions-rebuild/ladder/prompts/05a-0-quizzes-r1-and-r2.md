@@ -46,8 +46,8 @@ What to read
 What is already known
 - Nothing from this stop has run yet: the quizzes are built during layer 5's build, so the combined
   read of step 2 has not run and no COMBINE_MAP.md exists (this stop's step 0).
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in .quiz-prep/, so prep-cadence runs first for
   each quiz (quiz-cadence, "The preparation gate").
 - The textbook pages for quiz R.1 are Deisenroth et al., Mathematics for Machine Learning 6.7

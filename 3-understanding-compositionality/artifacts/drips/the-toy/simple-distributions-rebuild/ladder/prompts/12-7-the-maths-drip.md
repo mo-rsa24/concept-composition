@@ -27,8 +27,8 @@ What to read
 - The journey plan 08-lora-update.md, linked on layer 12's Study first line: the parameter count.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - A LoRA keeps W frozen and trains a rank-r update BA, (W + BA)x, with r·(in + out) parameters: 384
   for the journey's toy (rank 2, 3 blocks) and 4,956,160 for the real case (rank 8, 210 modules)
   (the journey plan 08-lora-update.md).

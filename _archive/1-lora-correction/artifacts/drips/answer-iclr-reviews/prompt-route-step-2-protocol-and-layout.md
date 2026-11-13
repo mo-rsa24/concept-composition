@@ -31,7 +31,7 @@ What to read
 - paper/iclr-56173/iclr2027_conference.tex lines 30 to 90 after unpacking: the placeholder colours
   and the \figurepanel macro already in the source.
 - paper/iclr-56173/figures.md: the figure register that ships with the export.
-- 56173_Restoring_plurality_in_c.pdf and Reviews.pdf at the repo root: the paper and the reviews.
+- 56173_Restoring_plurality_in_c.pdf and paper/iclr-56173/Reviews.pdf at the repo root: the paper and the reviews.
 
 What is already known
 - The submitted source is the Overleaf export _ICLR2027__LoRA_Plurality.zip at the repo root. Its

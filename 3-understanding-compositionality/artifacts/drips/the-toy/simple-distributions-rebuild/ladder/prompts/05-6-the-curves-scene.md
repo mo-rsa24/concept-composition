@@ -22,26 +22,26 @@ Objectives
 3. Publish it and write its URL into layer 5's step 6.
 
 What to read
-- toy/rebuild/out/phase5/overlap-dial.json: per seed and overlap, the exact whole-quadrant and deep
+- 3-understanding-compositionality/toy/rebuild/out/phase5/overlap-dial.json: per seed and overlap, the exact whole-quadrant and deep
   masses, the exact-sample TV floor, and each sampler's masses and TV.
-- toy/rebuild/out/phase5/finetune.json, dial.log and finetune.log.
-- The figures in toy/rebuild/out/phase5/: overlap-dial-curves.png,
+- 3-understanding-compositionality/toy/rebuild/out/phase5/finetune.json, dial.log and finetune.log.
+- The figures in 3-understanding-compositionality/toy/rebuild/out/phase5/: overlap-dial-curves.png,
   overlap-dial-quadrant-pictures.png, finetune-curves.png and finetune-pictures.png.
 - The layer 5 maths drip folder and its dispatch.md (step 2's hand-off): my notation.
 - 3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/README.md: the other scene's toy, to keep
   apart.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - python -m rebuild.phase5_tables prints the three tables every number on the scene comes from: the
   quadrant toy over 8 overlaps and 3 seeds, the parts world over 7 overlaps and two background
   variances, and the fine-tune variant over 8 checkpoints plus experts trained from scratch
-  (toy/rebuild/phase5_tables.py; step file 05, step 8).
+  (3-understanding-compositionality/toy/rebuild/phase5_tables.py; step file 05, step 8).
 - The quadrant toy: A is the left half, B the top half, A∩B the top-left quadrant, and "deep" means
-  x1 < −0.15 and x2 > 0.15 (toy/rebuild/phase5_dial.py; step file 05, step 8).
+  x1 < −0.15 and x2 > 0.15 (3-understanding-compositionality/toy/rebuild/phase5_dial.py; step file 05, step 8).
 - The quadrant toy runs 2,000 samples per sampler and 3 data seeds, with bars of 1 sd over the seeds
-  (toy/rebuild/phase5_dial.py; step file 05, step 8).
+  (3-understanding-compositionality/toy/rebuild/phase5_dial.py; step file 05, step 8).
 - The existing figure colours black for exact, orange for tuned MALA, green for UHA and blue for
   reverse diffusion (step file 05, step 8).
 - At 5% the exact deep mass is 0.30 ± 0.10 and tuned MALA 0.17 ± 0.04 (phase5_tables).

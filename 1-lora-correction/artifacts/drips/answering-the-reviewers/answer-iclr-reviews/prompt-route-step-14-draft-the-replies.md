@@ -18,7 +18,7 @@ text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.
-2. Build replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
+2. Build paper/iclr-56173/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
 3. Draft the opening, weakness 1 with question 1, weakness 2, question 2 and the closing, one part
    at
    a time with the user steering.
@@ -27,7 +27,7 @@ Objectives
    counts.
 
 What to read
-- Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
+- paper/iclr-56173/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
 - paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
 - 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
@@ -68,7 +68,7 @@ Rules
 - Never ask for or store any Overleaf or OpenReview credential.
 
 What to hand back
-- replies/prze.md and replies/common.md, the built LaTeX project zip, and one plain-text file per
+- paper/iclr-56173/replies/prze.md and paper/iclr-56173/replies/common.md, the built LaTeX project zip, and one plain-text file per
   comment with its character count.
 - The number check's output with every number matched.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.

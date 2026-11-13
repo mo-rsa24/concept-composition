@@ -220,7 +220,7 @@ Walk claim 1.
 ## The wet-dog counterexample
 
 A sum of scores does change the picture, and the dog sheet at
-`supervisor-meeting/0-update/dog-sheet.jpg` proves it over eight seeds. Column 6 is the product of
+`artifacts/decks/supervisor-meeting/0-update/dog-sheet.jpg` proves it over eight seeds. Column 6 is the product of
 "a dog" and "wet", and the wetness lands on the dog rather than in a separate region. Column 8 is
 the product of "a dog", "wet" and "wet", and the dog gets wetter still. Column 7 adds "rain" as a
 third expert and composes a wet dog in rain.

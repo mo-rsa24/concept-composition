@@ -24,14 +24,14 @@ Objectives
 
 What to read
 - The fair-test table walk09.py printed (step 4).
-- toy/rebuild/out/phase9/phase9.json and fair-test.png: the reference's outputs (step 0).
+- 3-understanding-compositionality/toy/rebuild/out/phase9/phase9.json and fair-test.png: the reference's outputs (step 0).
 - The layer 9 --math drip folder under artifacts/drips/ and its dispatch.md: my notation (step 2).
 - 3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card, the baseline.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The fair test is a joint {A, B} condition trained on only the share r of the data that is A and
   B, against composition, against composition plus a small correction fine-tuned on the same few
   A∩B samples, at r = 0.05 and 0.001, with exact and with trained experts, scored by TV against the

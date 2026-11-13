@@ -1,6 +1,6 @@
 # The three reviews of ICLR 2027 submission 56173, transcribed
 
-Transcribed from `Reviews.pdf` (OpenReview, printed 11/9/26), which has no text layer, by OCR of its
+Transcribed from `paper/iclr-56173/Reviews.pdf` (OpenReview, printed 11/9/26), which has no text layer, by OCR of its
 pages and a check against the OpenReview screenshots in `review-screenshots/`. The reviewers' own
 spelling is kept as written ("T2I-Compench", "throuugh", "promp"); only OCR misreadings are corrected.
 `make_review_tex.py` reads this file for the full reviews in `review.pdf`.

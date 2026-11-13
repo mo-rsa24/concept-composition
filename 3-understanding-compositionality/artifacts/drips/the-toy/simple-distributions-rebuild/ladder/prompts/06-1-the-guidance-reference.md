@@ -13,7 +13,7 @@ Background
 The composition ladder in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ ran every layer so far at
 guidance weight 1, but Stable Diffusion's cat-dog hybrid happens at weight 7.5, and the correction
 in layer 9 has to work at the weight the real model uses. Layer 6 turns guidance into a dial. Claude
-writes the reference code in toy/rebuild/ one layer ahead, so that my own walk06.py has numbers to
+writes the reference code in 3-understanding-compositionality/toy/rebuild/ one layer ahead, so that my own walk06.py has numbers to
 match; the reference for layers 1 to 5 is already in rebuild/, with outputs in rebuild/out/phase1
 to phase5. Work in /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain/toy, on the
 current branch.
@@ -39,7 +39,7 @@ Objectives
    parts world), scored by ideal.tv and parts_world.tv_projected.
 7. Use a w grid from 1 to 7.5 that includes both ends, and find the w where the parts-world blend
    appears, or record that none up to 7.5 does.
-8. Write rebuild/phase6_guidance.py, the dial, run from toy/ as python -m rebuild.phase6_guidance
+8. Write rebuild/phase6_guidance.py, the dial, run from 3-understanding-compositionality/toy/ as python -m rebuild.phase6_guidance
    with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python, printing a w = 1 check line first,
    then A∩B share, total variation and Z per toy and w.
 9. Add those numbers to rebuild/walk_numbers.py as phase6() with keys p6.*, add it to the __main__
@@ -56,8 +56,8 @@ What to read
   the four-quadrant toy and its w = 1 numbers.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - The brick is the target p(x)·p(A|x)^w·p(B|x)^w computed exactly on the quadrant toy and the parts
   world for w = 1 to 7.5, with A∩B share, total variation and Z per w, in rebuild/guidance.py and
   rebuild/phase6_guidance.py (REBUILD_WALK.md, brick "Guidance as a tilted density").
@@ -106,7 +106,7 @@ What is already known
 - walk_numbers.py holds worked-example numbers, each written by put(key, value), while run results
   (masses and total variations per sampler) are read from rebuild/out/phaseN/ instead; its __main__
   runs (phase1, phase2, phase3, phase5) and writes rebuild/out/walk-numbers.json by a relative path,
-  so it runs from toy/ (rebuild/walk_numbers.py).
+  so it runs from 3-understanding-compositionality/toy/ (rebuild/walk_numbers.py).
 - The tolerances are an exact number within 0.005 and a sampler number within 0.03
   (rebuild/phase3_kinds.py).
 - rebuild.device.pick_device takes the first card with under 1 GB in use, else the CPU

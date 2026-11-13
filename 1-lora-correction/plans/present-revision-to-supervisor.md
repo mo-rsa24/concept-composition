@@ -19,7 +19,7 @@
 
 **What this is**
 
-Three reviewers (k4nd, UHz6, PrzE) commented on submission 56173. The revision in `paper/iclr-56173/iclr2027_conference.tex` and the replies in `replies/` answer them. This plan turns that into something the supervisor can read claim by claim, and moves the revision into the supervisor's Overleaf project by drag and drop.
+Three reviewers (k4nd, UHz6, PrzE) commented on submission 56173. The revision in `paper/iclr-56173/iclr2027_conference.tex` and the replies in `paper/iclr-56173/replies/` answer them. This plan turns that into something the supervisor can read claim by claim, and moves the revision into the supervisor's Overleaf project by drag and drop.
 
 **What it produces**
 
@@ -29,7 +29,7 @@ One annotated figure per group of claims, built from real crops, showing the rev
 
 **Review sources**
 
-The review crops come from the five OpenReview screenshots in `artifacts/drips/present-revision-to-supervisor/review-screenshots/`. Page numbers come from `Reviews.pdf`, which has no text layer, so its passages are located by tesseract OCR on the 200 dpi renders.
+The review crops come from the five OpenReview screenshots in `artifacts/drips/present-revision-to-supervisor/review-screenshots/`. Page numbers come from `paper/iclr-56173/Reviews.pdf`, which has no text layer, so its passages are located by tesseract OCR on the 200 dpi renders.
 
 **Pending results**
 
@@ -66,7 +66,7 @@ For Claude to execute. Ask Claude to do these.
 
 - [x] ✅ **Split the three reviews into single claims, group them, and map each one to the submitted page and the revised tex line**
   - Output: `artifacts/drips/present-revision-to-supervisor/claims.md`
-  - Check: every bullet and numbered point of the three reviews appears as one row, each with its Reviews.pdf page.
+  - Check: every bullet and numbered point of the three reviews appears as one row, each with its paper/iclr-56173/Reviews.pdf page.
   - ✓ verified 2026-11-12: 35 claims in 12 groups, PrzE 5, UHz6 13, k4nd 17
   - ▶ Next: 4.1
 

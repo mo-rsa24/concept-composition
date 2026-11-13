@@ -13,7 +13,7 @@ Submission 56173 got three reviews. Reviewer PrzE is handled by the route in
 plans/route-answer-the-iclr-reviews.md. This session takes Reviewer k4nd (rating 1, confidence 3)
 and Reviewer UHz6's questions (rating 2, confidence 4) while the quantitative jobs of route
 steps 5 to 9 run elsewhere. The working copy of the paper is paper/iclr-56173/iclr2027_conference.tex;
-the submitted version is 56173_Restoring_plurality_in_c.pdf. Reviews.pdf is a scan with no text
+the submitted version is 56173_Restoring_plurality_in_c.pdf. paper/iclr-56173/Reviews.pdf is a scan with no text
 layer: read it as images (k4nd is pages 4 and 5, UHz6 page 3).
 
 How to walk it
@@ -93,7 +93,7 @@ Settled facts (do not re-derive; cite them)
   with the slot name; never estimate a number.
 
 What to read
-- Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
+- paper/iclr-56173/Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
   numbers); the working copy's tex.
 - 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md, board.md.
 - 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
@@ -104,7 +104,7 @@ What to read
 Outputs
 - The text fixes in paper/iclr-56173/iclr2027_conference.tex, built with
   python3 1-lora-correction/scripts/refresh_paper_slots.py --compile (23 or 24 pages, no undefined references).
-- replies/k4nd.md and replies/uhz6.md: one section per point, the reviewer's words quoted, the reply
+- paper/iclr-56173/replies/k4nd.md and paper/iclr-56173/replies/uhz6.md: one section per point, the reviewer's words quoted, the reply
   beneath, each claim citing a section, figure, table or slot.
 - A line per change in paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md, grouped by reviewer point.
 

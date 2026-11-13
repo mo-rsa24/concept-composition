@@ -36,8 +36,8 @@ What to read
 - The overlap-dial idea map, claim 4: the sampler caveat.
 
 What is already known
-- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
-  python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
+- Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under 3-understanding-compositionality/toy/ in this repo, and
+  python -m rebuild.<script> runs from 3-understanding-compositionality/toy/ (the guide, "Two lanes").
 - Claim 8's check names four arms, each one pneumothorax classifier trained on: the original NIH
   films; the real drain-free films upweighted; plus drain-removed edits of positive films; plus
   composed pneumothorax-without-drain films (the map, Checks outstanding, claim 8).
