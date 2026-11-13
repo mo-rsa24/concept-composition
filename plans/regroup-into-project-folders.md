@@ -18,7 +18,7 @@ poe_repair_min/                      (renamed sdxl-composition when it moves und
 ├── poe_repair/  pyproject.toml  tests/  scripts/local/   shared code, stays at the root
 ├── artifacts/                       only what several projects use (26 items) and _shared/, caches/
 ├── 1-lora-correction/               195 items: scopes 01 to 09, the ICLR paper, the adapter results
-├── 2-classifier-guidance/           folded back from /home/molef/PhD/poe-classifier-guidance
+├── 2-classifier-guidance/           plans 15, 17, 18, the route and its board
 ├── 3-understanding-compositionality/   81 items: scope 10, the toy, dog and camel in the rain
 ├── 4-inclusive-captions/            12 items: scope 11
 ├── 5-text-embedding-third-expert/   32 items: the AND vector, PoE(cat, dog, x)
@@ -87,7 +87,7 @@ correction to the move.
       for the cluster side.
   - ✅ 2026-11-13: the trunk `exec/correction-loss-01` holds all three (commits `3e1ca094`,
     `26418bf4`, `779e1a6b`); 42 conflict regions resolved, each decision in `26418bf4`'s message.
-    The classifier branch's classifier files stay out; they live in `poe-classifier-guidance`.
+    The classifier branch's classifier files came in through step 5.1.
 - [x] **2.3 Gather the gitignored folders** (`artifacts/results/` and anything else ignored) from
       all three checkouts into the main checkout. A folder in two checkouts is compared file by
       file, and the newer copy is kept.
@@ -128,7 +128,7 @@ correction to the move.
 
 ### 5. 🧩 Fold classifier guidance back in, and send the medical items out
 
-- [ ] **5.1 Move `/home/molef/PhD/poe-classifier-guidance` in as `2-classifier-guidance/`**, with
+- [x] **5.1 Move `/home/molef/PhD/poe-classifier-guidance` in as `2-classifier-guidance/`**, with
       its commit noted in `RENAMES.md`.
 - [ ] **5.2 Move the 15 medical items** into `/home/molef/PhD/medical-imaging/compositional_diffusion`.
 - [ ] **5.3 Update `/home/molef/PhD/ORGANOGRAM.md`** and the memory entry that points at it.
