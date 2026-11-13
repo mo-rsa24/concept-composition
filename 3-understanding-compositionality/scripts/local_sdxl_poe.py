@@ -23,7 +23,7 @@ import time
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-OUT = REPO / "3-understanding-compositionality/artifacts/results/does-an-effect-need-support/laptop-third-concept"
+OUT = REPO / "3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept"
 MODEL = "stabilityai/stable-diffusion-xl-base-1.0"
 STEPS, W, SIZE = 50, 7.5, 1024
 

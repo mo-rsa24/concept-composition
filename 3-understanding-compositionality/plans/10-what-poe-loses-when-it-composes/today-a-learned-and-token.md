@@ -117,7 +117,7 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
   and a dog", PoE(a cat, a dog) and PoE(a cat, a dog, `<and>`). ✓ ran 2026-10-28, mscluster109 device 0,
   W&B `c6f1pmmq`, log `.../logs/run5.log`. Held-out mean share removed at steps 0, 10, 25, 40: −0.113,
   +0.009, −0.021, −0.025 at 300 updates; −0.143, +0.015, −0.023, −0.013 at 4,000; −0.070, +0.013, −0.005,
-  −0.008 at 8,000. Sheets in `5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter*.png`.
+  −0.008 at 8,000. Sheets in `5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter*.png`.
   <a href="../../artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter08000.png"><img src="../../artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter08000.png" width="140" alt="Sheet at 8,000 updates: seeds 9 to 16 down the rows; columns a dog alone, a cat alone, the joint prompt 'a cat and a dog', PoE(a cat, a dog), and PoE with the fitted token. Both PoE columns show one animal mixing dog and cat features on every seed."></a>
 - [x] **Apply** [the stop rule](#the-test-written-before-any-render). ✓ fired: every step's mean is under
   10% after 8,000 updates (best single step mean +0.015).
@@ -127,7 +127,7 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
 - [ ] **Copy** [the test](#the-test-written-before-any-render) into the run's results card before any tile
   is rendered.
 - [ ] **Render** both sets and build the sheets as
-  `5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/learned-and-token-*.png`.
+  `5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-*.png`.
 - [ ] **Call** each tile from full-size tiles, one seed per message.
 - [ ] **List** the nearest real words to the fitted row in each encoder, by cosine over the vocabulary.
 

@@ -52,7 +52,7 @@ MIN_BETWEEN_WITHIN = 1.5         # "varies": between-pair spread over across-see
 NULL_RANGE_STEPS = 2             # "does not vary": medians all inside this many steps
 MIN_STEPS = 40                   # skip short smoke runs, as the fork read had to
 
-OUT_DIR = Path(__file__).resolve().parent.parent.parent / "1-lora-correction/artifacts/results/when-the-correction-must-arrive/commitment-step"
+OUT_DIR = Path(__file__).resolve().parent.parent.parent / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step"
 FORK_REF = paths.resolve(paths.CACHE_ANALYSES) / "fork_curve.json"
 
 

@@ -1,7 +1,7 @@
 # Toy experiment: figures for the supervisor meeting
 
 The figures from the co-occurrence write-up
-(`3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/plain-figures/README.md`), plus the
+(`3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/README.md`), plus the
 result from Du et al. (2023) that the toy builds on.
 
 ## Du et al. (2023): adding scores does not sample the product

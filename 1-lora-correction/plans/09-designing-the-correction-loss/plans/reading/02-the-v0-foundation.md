@@ -96,7 +96,7 @@ The numbers exist. Two report files already carry them with eight rendered figur
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Storage](../../../../../environment/storage.md): the five runs live under `/datasets/mmolefe/poe_repair_min/outputs/showcase/` except `phase1_r8_100k`, which is in the repo under `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/`. Nothing is moved by this plan.
+- [Storage](../../../../../environment/storage.md): the five runs live under `/datasets/mmolefe/poe_repair_min/outputs/showcase/` except `phase1_r8_100k`, which is in the repo under `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/`. Nothing is moved by this plan.
 - [Throughput](../../../../../environment/hpc/throughput.md): the file this plan adds the memory-per-rank row to. It has rank-32 timing and no memory column.
 - [Overview](../../../../../environment/overview.md): cached tensors are float16 and any analysis stacking many of them upcasts to float32 first. The scoring pass in task 2.1 must do so.
 - [Nodes](../../../../../environment/hpc/nodes.md): the scoring pass needs one healthy card; pin a node rather than trusting `sinfo`.

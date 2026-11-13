@@ -110,7 +110,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       real direction structure (23x at k=1, 7.8x at k=8), and that structure lives inside single
       runs rather than across them: 50 steps of one run beat the baseline 4.8x at k=8, while one
       step from each of 50 different runs beats it 1.2x. Full argument and tables:
-      `1-lora-correction/artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`. Two claims follow. F6 may not argue
+      `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`. Two claims follow. F6 may not argue
       that a shared low-dimensional structure is what makes the correction learnable, and the
       learnability claim rests on the adapter's measured behaviour instead. Within-run smoothness
       is D1's result and cross-pair orthogonality is D3's, so what the spectrum adds beyond those
@@ -125,7 +125,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       those pairs where plain PoE composes 0%. The r_t vectors are mutually near-orthogonal
       (cosine about 0.00 even train-to-train), so no fitted subspace can contain unseen pairs
       whether or not the correction transfers. Full argument:
-      `1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`, whose per-pair table is measured at 3
+      `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`, whose per-pair table is measured at 3
       seeds and every 3rd step, where the same projection reads 6.0%. The sampling moves the
       percentage and not the gap, which is what carries. Any paper sentence built on "shared
       subspace" wording must be rewritten to this bounded form.

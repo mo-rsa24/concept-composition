@@ -263,7 +263,7 @@ with colours that share a channel with yellow.*
 the image, the same operator composes correctly there.
 
 **The support argument is an argument about the training data, not about products.** The toy measures
-it directly ([the co-occurrence sweep](../../artifacts/results/how-much-co-occurrence-the-product-needs/README.md)).
+it directly ([the co-occurrence sweep](../../artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md)).
 With no image holding both shapes, the exact product of the two experts puts 300 of 300 draws on an
 overlaid blob, which is the support argument as a number. Give the side-by-side pair image a weight of
 one part in a thousand inside both experts and the exact product puts 300 of 300 draws on a clean pair.
@@ -359,7 +359,7 @@ The reader's calls over all five seeds (1, 2, 4, 9, 10). A half call counts as d
 | PoE of "a …" and "rain" | **dry 5** | wet 2 (seed 10 lost the dog to a person with an umbrella) |
 
 **Sources:** `asked-directly-calls.json` and `a-camel-and-rain-calls.json` in
-`3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/`; the dog totals from the
+`3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/`; the dog totals from the
 [dog-and-rain walk map](../../artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md), piece 1.
 
 **SDXL can draw a wet camel.** Asked "a wet camel", it does on 4 of 5 seeds.
@@ -622,10 +622,10 @@ Run through the [causal route](route-causal-does-an-effect-need-support.md).
 
 | Piece | State | Evidence |
 |---|---|---|
-| dog sheet: dog, rain, joint, PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md), 5 seeds | ✅ done; totals called, per-seed calls owed | `3-understanding-compositionality/artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png` |
+| dog sheet: dog, rain, joint, PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md), 5 seeds | ✅ done; totals called, per-seed calls owed | `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png` |
 | asked directly: wet camel, camel in the rain, wet dog, dog in the rain | ✅ done and called | `asked-directly.png` and its calls file |
 | camel sheet: camel, rain, joint, PoE, SuperDiff, 5 seeds | ✅ done and called | `a-camel-and-rain.png` and its calls file |
-| a searchable stand-in for SDXL's captions | ✅ found: Re-LAION-2B-en research-safe, all 128 files mirrored on `/datasets` | `caption-counts.md`, "[Dataset searched](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md#dataset-searched)" |
+| a searchable stand-in for SDXL's captions | ✅ found: Re-LAION-2B-en research-safe, all 128 files mirrored on `/datasets` | `caption-counts.md`, "[Dataset searched](../../artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/caption-counts.md#dataset-searched)" |
 | CLIP pilot: 100 captions per animal | ✅ done; method failed its own check | §7.2 below |
 | PoE of "a camel" and "wet", "a dog" and "wet" | ⬜ hypothesis test written in the walk map 2026-10-22, not rendered | walk map, second test |
 | three-concept PoE: subject, carrier and effect word | ⬜ designed in §7.6, not rendered | §7.6 |
@@ -661,7 +661,7 @@ any figure was built; the census in step 4 of the causal route puts every call i
 - **The wet call is wrong.** CLIP called 7 of 122 fetched pictures wet. By eye, **0 of 7** show a wet animal. The pass mark set before scoring was 80%.
 - **About 40% of links are dead.** 63 of 100 camel pictures and 59 of 100 dog pictures still loaded.
 
-The pilot's pictures are in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/`
+The pilot's pictures are in `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/`
 (`pilot-ten-walk-pictures.jpg`, `pilot-clip-called-wet.jpg`), kept local because they are web photos.
 
 **The census replaces CLIP's calls with eyes, and keeps CLIP for sorting.**
@@ -1420,7 +1420,7 @@ Navigation: ⬅️ [Previous](#12-references) | 📋 [Contents](#contents)
 | 1 | `du-2023-product-sampling.png` | fetched from Du et al. 2023; caption and URL in [the reference check](../../artifacts/notes/what-poe-loses-when-it-composes/references-verified.md) |
 | 2 | `bradley-2025-projective-composition.png` | fetched from Bradley et al. 2025a; caption and URL in the same file |
 | 3 | `context/images/world/0{1,2}-*.png` | this repository's seed 42 renders, from [what PoE composition is](../../../context/world/poe-composition.md) |
-| 4 | `fig-causal-renders.png` | SDXL tiles in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/` and the dog sheet; calls from the two calls files |
+| 4 | `fig-causal-renders.png` | SDXL tiles in `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/` and the dog sheet; calls from the two calls files |
 | 5 | `fig-why-rain-and-dog-do-not-fuse.png` | exact Gaussian products, spreads chosen by hand |
 | 6 | `fig-exact-product-is-a-blend.png` | exact product of two Gaussians on 16 × 16 images |
 | 7 | `fig-mixture-reweighting.png` | the formula of §5.4; $\pi$ and $\rho$ chosen to illustrate |

@@ -45,7 +45,7 @@ set as (A), with the animals-vs-mixed contrast reported per held-out pair.
   a full pooled-LoRA run: goes to biggpu first, else bigbatch.
 - Checkpoints and eval output write to `/datasets`, per the disk guard rule in
   [environment/storage.md](../../../../../environment/storage.md); (A)'s own checkpoint is
-  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`.
+  `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`.
 
 ## Tasks
 - [ ] Build the size-matched mixed `pair_pool.yaml`: equal N to the animals pool,

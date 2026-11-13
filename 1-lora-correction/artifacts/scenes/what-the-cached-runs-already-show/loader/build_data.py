@@ -37,7 +37,7 @@ REFRESH = ANALYSES / "refresh_20260810"
 EXPERTS = Path(
     "/datasets/mmolefe/poe_repair_min/outputs/interaction_term/experts")
 FORK_CELLS = REPO / "outputs/interaction_term/dose/pairs"
-F6 = REPO / "1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer"
+F6 = REPO / "1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer"
 
 POE_ARM = "teacher_residual_const_lam000"
 MONO_ARM = "teacher_residual_const_lam100"

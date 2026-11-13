@@ -70,7 +70,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 |---|---|---|---|---|---|
 | The weights fetch, `PixArt-alpha/PixArt-XL-2-1024-MS` onto `/datasets` | setup | 2026-11-04, from mscluster84 | 21.8 GB | `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS` | ✅ 21 GB on disk |
 | The single-prompt identity check, "a cat" at seed 1 through the pipeline and through the script | gates the claim | 2026-11-04, mscluster84 | 2 renders, 6 minutes including a 2m45 load | the two images and the largest absolute pixel difference between them | ✅ 0 grey levels, byte-identical |
-| The four columns on eight seeds | Tests the claim | 2026-11-04, mscluster84 | 32 renders at 1024², 20 steps each, 22 minutes | tiles and sidecars under `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/`, sheet `pixart-cat-dog-sheet.png` | ✅ 0 of 8 product, 7 of 8 joint |
+| The four columns on eight seeds | Tests the claim | 2026-11-04, mscluster84 | 32 renders at 1024², 20 steps each, 22 minutes | tiles and sidecars under `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/`, sheet `pixart-cat-dog-sheet.png` | ✅ 0 of 8 product, 7 of 8 joint |
 
 ## The question written before the run
 
@@ -105,8 +105,8 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       model can draw the pair at this guidance scale and the weak-guidance escape is closed. The
       eighth joint tile, seed 2, holds two cats and counts as neither. CLIP is removed as a
       necessary cause of the fusion. Counts and per-tile sentences in
-      [the calls](../../../artifacts/results/does-a-clip-free-model-hybridise/calls.json), sheet and
-      card in [the same folder](../../../artifacts/results/does-a-clip-free-model-hybridise/README.md).
+      [the calls](../../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/calls.json), sheet and
+      card in [the same folder](../../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/README.md).
 
 ## Written before the run, answered after
 

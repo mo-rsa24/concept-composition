@@ -21,7 +21,7 @@ Two controls, both needed to read the rank at all:
                       rank well. Subtraction has to beat this to have done anything.
     shuffled          rank a random other noun using the same difference. This is where chance sits.
 
-    python 5-text-embedding-third-expert/scripts/and_vector_premise.py --pairs 200 --out 5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition
+    python 5-text-embedding-third-expert/scripts/and_vector_premise.py --pairs 200 --out 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition
 """
 from __future__ import annotations
 
@@ -69,7 +69,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pairs", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition")
+    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition")
     args = ap.parse_args()
 
     import torch

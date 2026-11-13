@@ -510,11 +510,11 @@ $PY 1-lora-correction/scripts/build_window_manifest.py
 bash 1-lora-correction/scripts/run_lora_inspector.sh        # prints the ssh -L line to tunnel with
 ```
 
-**File:** [1-lora-correction/scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py)
+**File:** [1-lora-correction/scripts/interaction_term_window.py](../../../../../../scripts/interaction_term_window.py)
 **What it does:** switches the injected r_t on only inside `run_teacher_residual`'s
 `correction_window`, leaving conditioning on at every step. `--check-identity` is the leak check.
 
-**File:** [1-lora-correction/scripts/interaction_term_dose_matched.py](../../../scripts/interaction_term_dose_matched.py)
+**File:** [1-lora-correction/scripts/interaction_term_dose_matched.py](../../../../../../scripts/interaction_term_dose_matched.py)
 **What it does:** `--mode swap` crosses the early and late windows against each other's delivered
 total; `--mode matched` rescales all nine windows to one total.
 

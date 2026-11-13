@@ -101,7 +101,7 @@ Navigation: ⬅️ [Previous](#the-test-written-before-any-render) | 📋 [Conte
 ```
 /home/molef/micromamba/envs/sdxl-local/            the laptop's torch and diffusers (built in the background)
 ~/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0/    SDXL's fp16 weights, ~7 GB
-3-understanding-compositionality/artifacts/results/does-an-effect-need-support/laptop-third-concept/            gitignored, local only
+3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/            gitignored, local only
   camel/seedNN/<column>.png and .json             every tile with its settings
   camel-sheet.jpg  dog-sheet.jpg                  seeds down, the eight columns across
   calls.json  tally.json                          your calls; the counted-seed table

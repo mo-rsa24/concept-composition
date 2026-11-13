@@ -79,15 +79,15 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 |---|---|---|---|
 | 2026-09-24 | ten jobs, one per column, Slurm 59549 to 59558 on `batch` | `/datasets/mmolefe/poe_repair_min/outputs/fidelity_harness/` | eight tiles each for nine columns, 11 to 19 minutes per job |
 | 2026-09-24 | the best-of-8 column, Slurm 59558 | the same tree | stopped at 23 minutes with 2 of 8 cells, when all runs were stopped for a re-assessment |
-| 2026-09-24 | sheets and the edge measure | [the evidence folder](../../artifacts/results/which-fidelity-fix-wins/) | eight sheets and `sharpness.json` |
+| 2026-09-24 | sheets and the edge measure | [the evidence folder](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/) | eight sheets and `sharpness.json` |
 
 ## 1. What each fix does to the picture
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-what-the-edge-measure-says-and-where-it-disagrees-with-the-eye) ➡️
 
-![Tiger and dog, seed 9: the joint prompt and the plain product, then the adapter and seven fixes applied to it, one column each](../../artifacts/results/which-fidelity-fix-wins/a_tiger__x__a_dog__seed09.png)
+![Tiger and dog, seed 9: the joint prompt and the plain product, then the adapter and seven fixes applied to it, one column each](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed09.png)
 *The explicit re-weighting, column six, is the only column where both animals stop being animals.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/which-fidelity-fix-wins/figure-explainer.md#figure-1-tiger-and-dog-seed-9).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md#figure-1-tiger-and-dog-seed-9).
 
 **What the eye reads across all eight cells.** The two repaint passes and the 20-step handover draw
 the adapter's picture again, with the same layout and the same subjects. The explicit re-weighting
@@ -103,7 +103,7 @@ Navigation: ⬅️ [Previous](#1-what-each-fix-does-to-the-picture) | 📋 [TOC]
 
 **The number.** Median Laplacian variance over the eight cells, greyscale on a 0-to-1 scale, in
 units of 1e-4, with the ratio to the adapter's own render beside it. From
-`1-lora-correction/artifacts/results/which-fidelity-fix-wins/sharpness.json`, field `treatments.<name>.median`,
+`1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/sharpness.json`, field `treatments.<name>.median`,
 written by `scripts/local/tile_sharpness.py` on 2026-09-24.
 
 | Column | Median | Against the adapter |
@@ -134,9 +134,9 @@ is worse than the plain product. Nothing tested here reaches the joint prompt's 
 
 Navigation: ⬅️ [Previous](#2-what-the-edge-measure-says-and-where-it-disagrees-with-the-eye) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Cat and dog, seed 10: the leftmost column, the joint prompt, draws two dogs](../../artifacts/results/which-fidelity-fix-wins/a_cat__x__a_dog__seed10.png)
+![Cat and dog, seed 10: the leftmost column, the joint prompt, draws two dogs](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_cat__x__a_dog__seed10.png)
 *The target the whole row is compared against has no cat in it.*
-📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/which-fidelity-fix-wins/figure-explainer.md#figure-4-cat-and-dog-seed-10).
+📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md#figure-4-cat-and-dog-seed-10).
 
 On cat and dog at seed 10 the joint prompt itself renders two dogs, so on that cell "nearer the
 joint prompt" is not a statement about composition at all. The joint prompt dropping a concept is
@@ -171,7 +171,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The numbers | `1-lora-correction/artifacts/results/which-fidelity-fix-wins/sharpness.json`, written and read 2026-09-24 | verified |
+| The numbers | `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/sharpness.json`, written and read 2026-09-24 | verified |
 | The renders | `/datasets/mmolefe/poe_repair_min/outputs/fidelity_harness/`, 87 tiles, rendered 2026-09-24 on `batch` nodes | verified |
 | The sheets | the same folder's `sheets/`, built by `1-lora-correction/scripts/fidelity_harness.py sheets` | verified |
 | The checkpoint | `/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-05-self-contrast/checkpoints/lora_step_015000.pt` | verified |
@@ -184,7 +184,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - What the product of experts is and what the guidance scale does to it: [what product-of-experts composition is](../../../context/world/poe-composition.md)
 - What the correction is and which part re-weighting could supply: [what is the correction made of](../when-does-the-outcome-lock-in/what-is-the-correction-made-of.md)
 - How a render fails, in the words used above: [how a render fails](../../../context/world/how-a-render-fails.md)
-- Each picture, read one at a time: [the figure explainer](../../artifacts/results/which-fidelity-fix-wins/figure-explainer.md)
+- Each picture, read one at a time: [the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md)
 
 ## Still open
 

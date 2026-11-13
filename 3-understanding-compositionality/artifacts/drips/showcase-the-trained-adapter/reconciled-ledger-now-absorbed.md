@@ -222,7 +222,7 @@ joint prompt mode-drops (it does not today).
 `heldout/a_cat__x__a_dog/seed_1`: the joint prompt renders a single cat, plain PoE renders one
 blended creature, and the adapter at lambda 1 from the 100k checkpoint renders a separated dog
 and cat plus a third smaller animal a caption must mention. Evidence and card:
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
 mode-reproducible, not byte-reproducible (fp16), and figure sidecars say so.
 
 ## No intrinsic-dimension estimate exists

@@ -227,7 +227,7 @@ Serves goal 4 and the rank-ablation figure. Checkable outcomes:
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `1-lora-correction/scripts/cross_seed_lora_pooling/sweep_s1_rank.sh` — the rank runner to adapt.
-**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json` — the config every non-rank flag must match.
+**File:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json` — the config every non-rank flag must match.
 
 ---
 

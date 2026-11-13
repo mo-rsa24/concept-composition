@@ -28,7 +28,7 @@ this session directly. ✅
 
 **One compose/blend label and a compose rate, per pair, from the scorer.** ✅
 
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` and `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` and `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`
 carry the validated verdict: an image counts as "compose" when a GroundingDINO detector finds at
 least two distinct "animal" instances after non-max suppression. See
 [world/compose-rate.md](../world/compose-rate.md) for what that scorer can and cannot tell a
@@ -78,6 +78,6 @@ Navigation: ⬅️ [What they do differently](#what-they-do-differently) | 📋 
 | What | How it was established | When |
 |---|---|---|
 | A pilot run's five images and its summary.json fields | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/` | 2026-08-24 |
-| The compose/blend rule and its scorer | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
+| The compose/blend rule and its scorer | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
 | W&B owns the numbers, the plan tree owns the verdict | Read in project `CLAUDE.md` | 2026-08-24 |
 | The two possible shapes of the deliverable (single LoRA vs catalogue) | Read in `MASTER_PLAN.md`, Expected Outcome | 2026-08-24 |

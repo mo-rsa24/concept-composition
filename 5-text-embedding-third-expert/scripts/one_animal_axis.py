@@ -192,7 +192,7 @@ def main() -> int:
     ap.add_argument("--pool", type=Path,
                     default=REPO / "artifacts/_shared/cross_pair_pool_configs/cells_v58.json")
     ap.add_argument("--out", type=Path,
-                    default=REPO / "5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal")
+                    default=REPO / "5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal")
     ap.add_argument("--seed", type=int, default=0, help="the build/held-out split and the random floor")
     ap.add_argument("--read-pairs", action="store_true",
                     help="also read the four prompts of every pool pair off the checked axis")

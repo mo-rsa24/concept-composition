@@ -53,7 +53,7 @@ Navigation: ⬅️ [Previous](#why-this-exists) | 📋 [Contents](#contents) | [
 
 ```
 /home/molef/datasets/relaion2b-en-slice/       the 4 downloaded files (~14.5 GB), outside the repo
-3-understanding-compositionality/artifacts/results/what-the-training-captions-show/        gitignored, local only
+3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/        gitignored, local only
   counts.json                                  slice counts, search time per file, full-mirror counts
   camel-captions-with-wet-words.md             every camel caption in the slice with a wet, rain or water word
   camel-any/  camel-wet-words/  dog-any/  dog-wet-words/
@@ -111,7 +111,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 3. 📖 Read the camel captions that mention wet, rain or water (you, ~15 min)
 
-- [ ] **Open** `3-understanding-compositionality/artifacts/results/what-the-training-captions-show/camel-captions-with-wet-words.md`.
+- [ ] **Open** `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-captions-with-wet-words.md`.
 - [ ] **Read every line** and count the ones that describe a wet camel (in rain, in water, soaked).
   Expect most to be products, the colour camel, or camels near water rather than wet.
 - [ ] **Write down 3 example captions** of each kind: a wet camel if any, a camel near water but not
@@ -147,9 +147,9 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 ### 7. 👀 Look at what SDXL draws (you, ~20 min)
 
 - [ ] **Open the renders**, all from the same 5 seeds:
-  - [the direct prompts](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/asked-directly.png): "a wet camel", "a camel in the rain", "a wet dog", "a dog in the rain";
-  - [the camel sheet](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png): camel, rain, joint "a camel and rain", PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md);
-  - [the dog sheet](../../artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png): the same for the dog;
+  - [the direct prompts](../../artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/asked-directly.png): "a wet camel", "a camel in the rain", "a wet dog", "a dog in the rain";
+  - [the camel sheet](../../artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png): camel, rain, joint "a camel and rain", PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md);
+  - [the dog sheet](../../artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png): the same for the dog;
   - [the side-by-side figure](../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-causal-renders.png).
 
   <a href="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/asked-directly.png"><img src="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/asked-directly.png" width="140" alt="Twenty SDXL renders, five seeds down the page, four prompts across: a wet camel, a camel in the rain, a wet dog, a dog in the rain"></a> <a href="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png"><img src="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png" width="200" alt="The camel sheet: five seeds down the page, columns for a camel alone in the desert, rain alone on city streets, the joint prompt a camel and rain, PoE, and SuperDiff"></a> <a href="../../artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png"><img src="figures/a-dog-and-rain.jpg" width="200" alt="The dog sheet: five seeds down the page, columns for a dog alone, rain alone, the joint prompt a dog and rain, PoE, and SuperDiff"></a> <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-causal-renders.png"><img src="figures/fig-causal-renders.jpg" width="200" alt="Camel and dog at seeds 1 and 4 across six prompts, from the animal alone to the wet animal asked directly, with the reader's wet or dry call under each tile"></a>

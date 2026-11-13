@@ -527,7 +527,7 @@ from the scope root.
 - [the design, checked](../../../artifacts/ideas/inclusive-captions-axis/COMPILED.md)
 - [the claim-by-claim reasoning](../../../artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md)
 - [the photo pool](../../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md)
-- [does the cat prompt already draw dogs](../../../../3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md)
+- [does the cat prompt already draw dogs](../../../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/README.md)
 - [the caption sampler](../../../../poe_repair/experiments/inclusive_captions/captions.py)
 - [the SDXL runtime this builds against](../../../../poe_repair/_sdxl/runtime.py)
 - Bradley et al., 2502.04549, for the condition under which adding two experts' scores is exact.

@@ -50,7 +50,7 @@ both written before the composer was built.
 
 Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-contents) | [Next](#2-the-number-the-bars-were-compared-against-moves-more-than-the-bars) ➡️
 
-![The correction's size against denoising step, one curve per corrector count, one panel per pair, with the two norms on a second row](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c3.png)
+![The correction's size against denoising step, one curve per corrector count, one panel per pair, with the two norms on a second row](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c3.png)
 *y is the correction's size relative to the product-of-experts prediction at the point the chain
 [settled](../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) to, x is the denoising step, one curve per corrector count, cat × dog left and butterfly ×
 meadow right. What to notice: on the left panel the 100-step and 200-step curves cross each other
@@ -68,7 +68,7 @@ with `c == 3`, and `verdict_c3.txt`.
 
 Navigation: ⬅️ [Previous](#1-the-curve-at-the-step-size-the-scope-proceeds-at) | 📋 [TOC](#table-of-contents) | [Next](#3-the-step-size-the-search-picked-destroys-the-sample-while-every-numeric-guard-passes) ➡️
 
-![The same figure at the step size the search picked, where both pairs fail the norm bound and the composing pair's curve rises](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c30.png)
+![The same figure at the step size the search picked, where both pairs fail the norm bound and the composing pair's curve rises](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c30.png)
 *Same axes, step size ten times larger. What to notice: the right panel's curves separate upward
 with corrector count, which is the composing pair's control failing, and the read zone on the left
 is the one place the six curves come back together.*
@@ -84,7 +84,7 @@ instability bar is 5% and the drift bar is 5%. From the `k = 0` cells of
 
 Navigation: ⬅️ [Previous](#2-the-number-the-bars-were-compared-against-moves-more-than-the-bars) | 📋 [TOC](#table-of-contents) | [Next](#4-the-pair-that-composes-by-default-says-what-the-rising-curve-is-reading) ➡️
 
-![Cat × dog at 20 corrector steps across every searched step size, from a photograph at 0.035 to texture noise at 100](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-step-sizes.png)
+![Cat × dog at 20 corrector steps across every searched step size, from a photograph at 0.035 to texture noise at 100](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-step-sizes.png)
 *One tile per step-size multiplier at 20 corrector steps, cat × dog seed 9. What to notice: real
 photographs up to 0.3, a different scene with a leash at 3, paint at 10, and texture noise from 30,
 which is the value the pre-registered search rule picked.*
@@ -102,7 +102,7 @@ largest usable value, 30, whose renders are the noise above. From
 
 Navigation: ⬅️ [Previous](#3-the-step-size-the-search-picked-destroys-the-sample-while-every-numeric-guard-passes) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Butterfly and meadow across corrector counts at the working step size: a photograph through 20 steps, a flat graphic at 100 and 200](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-across-k-c3.png)
+![Butterfly and meadow across corrector counts at the working step size: a photograph through 20 steps, a flat graphic at 100 and 200](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-across-k-c3.png)
 *One tile per corrector count, butterfly × meadow seed 9 at the working step size, each labelled
 with its read-zone value and its latent norm. What to notice: the scene survives to 20 steps and
 becomes a flat graphic at 100, while the latent norm never passes 1.02 times its start.*
@@ -161,7 +161,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
   device: [the cluster nodes](../../../environment/hpc/nodes.md)
 - Why the grid ran outside Slurm and was harvested with `pgrep`:
   [the execution protocol](../../../environment/hpc/execution-protocol.md)
-- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
+- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open
 

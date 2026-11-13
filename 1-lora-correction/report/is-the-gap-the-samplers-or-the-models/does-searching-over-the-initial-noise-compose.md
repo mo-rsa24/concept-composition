@@ -98,7 +98,7 @@ fields `summary.full.0.0.compose_rate` and `summary.full.1.2.compose_rate`; both
 
 Navigation: ⬅️ [Previous](#1-random-search-over-the-held-out-seeds-nothing-to-pick) | 📋 [TOC](#table-of-contents) | [Next](#3-the-verifier-read-at-step-10-finds-nothing-and-breaks-the-control-pair) ➡️
 
-![Cat × dog, seeds 9 to 16: Mono, plain PoE from the cached noise, the existing λ 1.2 render, then the best of 8 perturbed noises at σ 0.1 and 0.3 picked on the final image, then picked on x0-hat at step 10; the detector's count on every tile](../../artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png)
+![Cat × dog, seeds 9 to 16: Mono, plain PoE from the cached noise, the existing λ 1.2 render, then the best of 8 perturbed noises at σ 0.1 and 0.3 picked on the final image, then picked on x0-hat at step 10; the detector's count on every tile](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png)
 *Rows are seeds, columns are conditions, the number on each tile is the detector's animal count
 (green at 2 or more). What to notice: every tile from the fourth column on is one animal or one
 fused animal, the same as the second column, except seed 16's σ 0.1 pick, which counts 3 and
@@ -110,7 +110,7 @@ the existing correction, shows two animals on seven rows.*
 σ 0.1 (all on seed 16: counts 2, 3 and 2) and 0 at σ 0.3. Opened, the three are one two-headed
 body and two single animals the detector boxed twice. Mean cosine of candidates to the pivot:
 0.995 at σ 0.1, 0.958 at σ 0.3. From
-`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json`, fields
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-summary.json`, fields
 `pairs.a_cat__x__a_dog.compose_rate_by_column` and `secondary`; the verdict in
 `noise-search-verdict.json`.
 
@@ -118,7 +118,7 @@ body and two single animals the detector boxed twice. Mean cosine of candidates 
 
 Navigation: ⬅️ [Previous](#2-zero-order-search-one-counted-success-in-128-and-it-has-two-heads) | 📋 [TOC](#table-of-contents) | [Next](#4-where-the-kept-images-land-the-poe-band) ➡️
 
-![Butterfly × meadow, seeds 9 to 16: Mono, plain PoE from the cached noise, then the best of 8 at σ 0.1 and 0.3 picked on the final image, then picked on x0-hat at step 10](../../artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-butterfly-meadow-sheet.png)
+![Butterfly × meadow, seeds 9 to 16: Mono, plain PoE from the cached noise, then the best of 8 at σ 0.1 and 0.3 picked on the final image, then picked on x0-hat at step 10](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-butterfly-meadow-sheet.png)
 *Same layout for the composing control pair; there is no adapter column because none was rendered
 for this pair. What to notice: a meadow is not an animal, so the count reads 1 on most tiles
 including Mono, and a green 2 or 3 here means several butterflies (seed 14, a repeating botanical
@@ -143,7 +143,7 @@ pivot 0.200, the existing λ 1.2 renders 0.420, kept by the final-image verifier
 finding's 0.52 / 0.21 / 0.42 to within 0.01. The one counted tile, seed 16 at σ 0.1, reads 0.442,
 inside the corrected band, while it is one body with two heads by eye: the embedding axis reads a
 second head as "both", so this read cannot arbitrate that tile. From
-`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-bothness.json`, fields
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-bothness.json`, fields
 `by_column.*.mean_both_ness` and `by_column.best_final_sigma_0.1.per_seed.16`.
 
 ## What this cannot tell you
@@ -174,7 +174,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The compose rates, secondary reads and verdict | `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json` and `noise-search-verdict.json`, copied from the run dir 2026-09-05 | verified |
+| The compose rates, secondary reads and verdict | `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-summary.json` and `noise-search-verdict.json`, copied from the run dir 2026-09-05 | verified |
 | Both-ness per tile | `.../noise-search-bothness.json`, written 2026-09-05 on mscluster85 by `run.py --bothness-only` from the run's tiles and the landing finding's saved features | verified |
 | The two sheets | `.../noise-search-cat-dog-sheet.png`, `.../noise-search-butterfly-meadow-sheet.png`, drawn by the runner at the end of each pair | verified |
 | Every candidate, its x0-hat at step 10 and its scores | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/zo_N8_s50_20260905-183320/<pair>/seed_<n>/sigma_<σ>/` | verified |

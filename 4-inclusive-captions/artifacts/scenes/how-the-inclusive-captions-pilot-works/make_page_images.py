@@ -24,22 +24,22 @@ OWN = [  # this pilot's own output: no banner
     (AUDIT_SRC, "audit-page-00.jpg"),
 ]
 BORROWED = [  # from another experiment in this repo: banner burnt on
-    (REPO / "3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet.jpg",
+    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet.jpg",
      "borrowed-cats-and-dogs-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL with no adapter attached   "
-     "3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint"),
-    (REPO / "3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed02/poe.png",
+     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint"),
+    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed02/poe.png",
      "borrowed-poe-seed02.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL, cat x dog product, seed 2   "
-     "3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint"),
-    (REPO / "3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/contact_sheet.png",
+     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint"),
+    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/contact_sheet.png",
      "borrowed-contact-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   base SDXL, the cat prompt on 64 seeds   "
-     "3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs"),
-    (REPO / "3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/crop_classifier_sheet.png",
+     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs"),
+    (REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/crop_classifier_sheet.png",
      "borrowed-crop-classifier-sheet.jpg",
      "FROM ANOTHER EXPERIMENT, NOT THIS PILOT   the same 64 crops, named by zero-shot CLIP   "
-     "3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs"),
+     "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs"),
 ]
 
 

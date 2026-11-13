@@ -80,7 +80,7 @@ was attached.
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-the-edge-ratio-says-sharper-on-the-median-the-eye-says-four-of-eight) ➡️
 
-![Cat × dog, seeds 9 to 16: Mono, plain PoE from the cached noise, the adapter's own render from the cached noise, then the best of 8 perturbed noises at σ 0.1 and 0.3 with the adapter attached, picked by count then sharpness; the detector's count on every tile](../../artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png)
+![Cat × dog, seeds 9 to 16: Mono, plain PoE from the cached noise, the adapter's own render from the cached noise, then the best of 8 perturbed noises at σ 0.1 and 0.3 with the adapter attached, picked by count then sharpness; the detector's count on every tile](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png)
 *Rows are seeds, the number on each tile is the animal count (green at 2 or more). What to notice:
 the third column is two animals on six rows and one animal on seeds 11 and 14; the last two
 columns are two animals on every row. Row 14 turns a child with one dog into a cat and a dog. Row
@@ -89,7 +89,7 @@ columns are two animals on every row. Row 14 turns a child with one dog into a c
 **The number.** Compose rate over 8 seeds: plain PoE 0.0, the adapter's own render 0.75, the
 kept image 1.0 at both σ. Of the 64 candidates per σ, 0.94 (σ 0.1) and 0.89 (σ 0.3) count two or
 more. Under plan 11's count-then-confidence rule the kept rate is also 1.0 at both σ. From
-`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`,
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`,
 fields `pairs.a_cat__x__a_dog.compose_rate_by_column` and `secondary`.
 
 ## 2. The edge ratio says sharper on the median; the eye says four of eight
@@ -115,7 +115,7 @@ down to 0.29 and 0.17. From `noise-search-adapter-bothness.json`.
 
 Navigation: ⬅️ [Previous](#2-the-edge-ratio-says-sharper-on-the-median-the-eye-says-four-of-eight) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Butterfly × meadow, seeds 9 to 16: Mono, plain PoE, the adapter's own render, then the best of 8 at σ 0.1 and 0.3 with the adapter attached](../../artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-butterfly-meadow-sheet.png)
+![Butterfly × meadow, seeds 9 to 16: Mono, plain PoE, the adapter's own render, then the best of 8 at σ 0.1 and 0.3 with the adapter attached](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-butterfly-meadow-sheet.png)
 *What to notice: the second column is a photographic butterfly over flowers on every row; the
 third column is an illustration on every row, with no butterfly on rows 13 and 15 and a faint one
 on 12 and 16; the last two columns are illustrations with several crisp butterflies, and row 14 at
@@ -156,7 +156,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The compose rates, ratios, band counts, verdict | `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`, `noise-search-adapter-verdict.json`, copied from the run dir 2026-09-06 | verified |
+| The compose rates, ratios, band counts, verdict | `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`, `noise-search-adapter-verdict.json`, copied from the run dir 2026-09-06 | verified |
 | The control pair's numbers | `.../noise-search-adapter-butterfly-meadow-summary.json` | verified |
 | Both-ness per tile | `.../noise-search-adapter-bothness.json`, written 2026-09-06 on mscluster85 by `run_adapter.py --bothness-only` | verified |
 | The detach checks and the floor | `.../noise-search-adapter-detach-checks.json` | verified |
@@ -194,4 +194,4 @@ Navigation: ⬅️ [Previous](#depends-on) | 📋 [TOC](#table-of-contents)
 - The mention of **Laplacian variance as a sharpness read**, and of its disagreement with the eye on this pair, in [can a corrector or a clean tail sharpen the adapter's renders](can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match): that finding measured the same band on the plain-PoE references and demoted it to a secondary read.
 - The mention of **the edge measure**, and that it prefers a sketch to a photograph, in [how a render fails](../../../context/world/how-a-render-fails.md#where-this-came-from).
 - The mention of **the 1.10 Laplacian-variance bar**, borrowed after the images existed to judge eight render-time fixes, in [the finding "can any render-time fix recover the picture quality the adapter costs"](does-any-render-time-fix-recover-picture-quality.md).
-- The mention of **the edge measure this finding used**, reused on the fidelity harness's 87 tiles, in [the evidence card "which fidelity fix wins"](../../artifacts/results/which-fidelity-fix-wins/README.md).
+- The mention of **the edge measure this finding used**, reused on the fidelity harness's 87 tiles, in [the evidence card "which fidelity fix wins"](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/README.md).

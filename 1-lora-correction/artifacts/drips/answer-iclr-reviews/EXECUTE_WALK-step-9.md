@@ -40,7 +40,7 @@ Closed 2026-11-11 13:30: Tables 1 and 2 filled for joint, PoE and ours, the pape
 
 | Piece | What | Evidence |
 |---|---|---|
-| 1 | four scorers installed and run on the mug and wine glass probe, seed 11: all four rank the joint render (both objects) above the product render (mug missing) | `1-lora-correction/artifacts/results/what-each-scorer-says-about-two-objects/` (three CSVs and the figure); jobs 84587, 84588 |
+| 1 | four scorers installed and run on the mug and wine glass probe, seed 11: all four rank the joint render (both objects) above the product render (mug missing) | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/` (three CSVs and the figure); jobs 84587, 84588 |
 | 2 | scorer section and R1 bar written into the protocol before any evaluation score | commit `3c65c634` |
 | 3 | 4,584 images scored on CLIP score, ImageReward and BLIP-VQA, animal prompts counted; 5 images unreadable from mscluster108 listed in `scores/rows_hidden.csv` | `scores/scores_long.csv` on `/datasets`; jobs 84640, 84737, 84788, 84779, 84790; BLIP on 108 |
 | 4 | Tables 1 and 2 built; bar SUPPORTS on all three sets | `1-lora-correction/report/paper-review/tables-1-and-2-sidecar.json` |
@@ -54,7 +54,7 @@ Closed 2026-11-11 13:30: Tables 1 and 2 filled for joint, PoE and ours, the pape
 
 ## Parked
 
-- Figure 15 (R12), the image grid behind Table 1: parked on the author's word, Tables 1 and 2 come first. Protocol rule 8 asks for a grid beside every table, so it is owed rather than dropped. The seed 9 preview with 16 of 18 tiles is `1-lora-correction/artifacts/results/how-the-adapter-scores-against-other-methods/methods-grid-preview-seed9.png`; it needs the two object-row Ours tiles and a CO3 column.
+- Figure 15 (R12), the image grid behind Table 1: parked on the author's word, Tables 1 and 2 come first. Protocol rule 8 asks for a grid beside every table, so it is owed rather than dropped. The seed 9 preview with 16 of 18 tiles is `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/methods-grid-preview-seed9.png`; it needs the two object-row Ours tiles and a CO3 column.
 
 ## Owed
 

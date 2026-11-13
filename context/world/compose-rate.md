@@ -36,7 +36,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 **The fraction of a pair's seeds where a detector finds at least two distinct animal instances in
 the rendered image.** ✅
 
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, read directly: `"compose_rule": "COMPOSE iff
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, read directly: `"compose_rule": "COMPOSE iff
 distinct-instance-count('animal', NMS iou<0.5, conf>=0.30) >= 2"`, using detector
 `IDEA-Research/grounding-dino-tiny`. `"pass": true` and `"separates_hard_pair_both_ways": true`
 mark this rule as the validated one, chosen over two rejected alternatives (a whole-image DINOv2 /
@@ -45,7 +45,7 @@ pair (wolf × husky) correctly. ✅
 
 **It is a per-pair rate over several seeds, not a per-image score.** ✅
 
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` reports it as, e.g., `1.00 (8/8)`: the pair failed
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` reports it as, e.g., `1.00 (8/8)`: the pair failed
 under plain PoE on all 8 tested seeds. A compose rate is the same fraction read the other way
 round, under whichever render method (plain PoE, corrected PoE, or the LoRA) is being evaluated.
 
@@ -91,7 +91,7 @@ Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) |
 
 **The scorer counts animals, it does not identify them.** ⚠️
 
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`, its own summary: of 32 runs behind a 94% headline compose
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`, its own summary: of 32 runs behind a 94% headline compose
 rate at full correction strength, 1 is a confirmed error (two of the same animal, called a
 success), 5 more "cannot be called" confidently by eye (mostly waterfowl and raptor pairs that look
 alike even to a person), and 12 more are pairs chosen *because* they look alike (leopard/jaguar,
@@ -112,10 +112,10 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 | What | How it was established | When |
 |---|---|---|
-| The validated compose rule and its detector | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
-| Fail-rate as the same fraction under plain PoE | Read in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
-| The scorer's true-error bound at λ=1 | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
-| The two example images | Read directly, `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/{01-both-there,02-two-of-one}/` | 2026-08-24 |
+| The validated compose rule and its detector | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
+| Fail-rate as the same fraction under plain PoE | Read in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
+| The scorer's true-error bound at λ=1 | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
+| The two example images | Read directly, `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/{01-both-there,02-two-of-one}/` | 2026-08-24 |
 | The scorer-trust standing effort | Read in `MASTER_PLAN.md`, background experiment table | 2026-08-24 |
 
 ## Cross-references

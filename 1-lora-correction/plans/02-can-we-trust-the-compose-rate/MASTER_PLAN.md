@@ -39,7 +39,7 @@ met.
 ## Depends on
 - `outputs/compose_scorer/scorer_validated.json`: the file this scope is checking. Read only.
   `does-the-fix-reach-unseen-pairs` will not start unless it exists, so nothing here edits it.
-- `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`: all 32 images at λ=1, sorted by hand, with `calls.json` as the
+- `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`: all 32 images at λ=1, sorted by hand, with `calls.json` as the
   table. Kept back so the labelling pass can be scored against it.
 - `outputs/interaction_term/dose/pairs/`: 19 pairs × 5 seeds × λ ∈ {0, 0.25, 0.50, 0.75, 1.00},
   the real-correction row plus the `_random` and `_wrong_pair` control rows.
@@ -113,7 +113,7 @@ the same "is there a cat?" question.
    so it cannot be adjusted to suit the labels. [inferred prerequisite]
 3. ⚠️ The labelling tool strips λ out of the file path and shuffles before showing an image, so
    the labeller cannot see which setting produced it. [inferred prerequisite]
-4. ⚠️ The labelling pass scored against the 32 hand-sorted images in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`.
+4. ⚠️ The labelling pass scored against the 32 hand-sorted images in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`.
    Disagreement above 10% throws the pass away and the user labels by hand. That threshold lives
    in the labelling script rather than in prose. [inferred prerequisite]
 5. ⚠️ Labelled set on `/datasets`, with label counts per λ and the coverage number.
@@ -121,7 +121,7 @@ the same "is there a cat?" question.
    three-way rule in goal 4.
 7. ⚠️ Every candidate named to its source paper, run with a working `--device cpu` route, judged
    against the 95%-versus-85% threshold.
-8. ⚠️ `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` gives the band as 75% to 94% and says it cannot be
+8. ⚠️ `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` gives the band as 75% to 94% and says it cannot be
    narrowed from those images. It currently says 87% to 94%, which counts the 17 uncallable
    images as successes.
 9. ⚠️ Promotion decision written in `review/gate-02-*.md` against the two levels below.

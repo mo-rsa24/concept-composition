@@ -61,7 +61,7 @@ What is already known
   both say it. Every target is the joint prompt's prediction (render_teacher false in the
   v58-03-self config), never a CO3 picture. Then restore the hidden joint-beside-CO3 figure in
   appendix A (commented out, label fig:training-selection, drawn from
-  3-understanding-compositionality/artifacts/results/how-the-training-pairs-were-chosen/joint-vs-co3-spec.json).
+  1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/joint-vs-co3-spec.json).
 - The rank and steps ablation is in appendix C.5 and cited from Section 4.1 as "Figure 12 shows";
   name the appendix there ("Figure 12, Appendix C.5").
 - The limitations figure (Figure 6) uses pictures cropped from the step-50,000 checkpoint, and its

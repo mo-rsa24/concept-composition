@@ -60,13 +60,13 @@ The premise under every variant above is that E("A and B") − E("A") carries B.
 random pairs against a 276-noun dictionary where chance is a median rank of 138, the held-out word
 comes back at **median rank 1**, top-1 75.0% on the pooled summary vector and 98.5% on the content
 mean, with a decoy word at chance in both. Numbers in
-[premise-word-recovery.json](../artifacts/results/can-a-positional-and-vector-restore-composition/premise-word-recovery.json),
-read in [the card](../artifacts/results/can-a-positional-and-vector-restore-composition/README.md).
+[premise-word-recovery.json](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/premise-word-recovery.json),
+read in [the card](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md).
 
 🖼️ **Figure wanted:** the rank of the held-out word as a histogram, one bar per rank bucket, the
 subtracted and unsubtracted readouts side by side with the decoy control behind them, from
 `premise-word-recovery.json`. Save as
-`5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/premise-word-recovery.png`.
+`5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/premise-word-recovery.png`.
 
 **So the failures below are not caused by text arithmetic being meaningless.** Read the content row
 with care: it averages the word slots, so subtracting A is partly bound by arithmetic to land near B.
@@ -129,7 +129,7 @@ pixel difference from the joint prompt's own render, 0 to 255, averaged over the
 **Adding the two single-animal experts moves the picture away from the target.** The same ordering
 appears in the by-eye calls: x_pos alone gives a clear pair on 2 of 7 seeds, and 0 once the dog and
 cat experts are added. Per-seed comparisons:
-[per-seed/](../artifacts/results/can-a-positional-and-vector-restore-composition/per-seed).
+[per-seed/](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed).
 
 This agrees with the sampler check already on file, where the exact target placed in the third slot
 at every step renders the joint image to within 2.23. The third slot is not the limitation.
@@ -160,7 +160,7 @@ columns from runs 2 to 7 of the idea map on mscluster106 and mscluster109, 2026-
 Token norms from `5-text-embedding-third-expert/scripts/and_vector_norms.py`, premise test from `5-text-embedding-third-expert/scripts/and_vector_premise.py`,
 both text encoders only. Tiles under
 `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/dog__x__cat/`. Calls in
-[calls.json](../artifacts/results/can-a-positional-and-vector-restore-composition/calls.json). Walked in
+[calls.json](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json). Walked in
 [today-the-positional-and-vector.md](../../artifacts/plans/completed/today-the-positional-and-vector.md).
 
 ## Still open
@@ -177,7 +177,7 @@ only what the joint adds is carried: 0 of 8 tiles show two separate animals and 
 a clear pair, with PoE(dog, cat, x_and) at 48.49 mean absolute pixel difference from the joint prompt
 against plain PoE's 47.05. A condition enters the guided sum as w·(ε_x − ε_∅), so a third expert built
 faithfully as a difference sits near the empty prompt and contributes nothing. See
-[the card](../artifacts/results/can-a-positional-and-vector-restore-composition/README.md).
+[the card](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md).
 
 **The pooled channel alone**, which scored 75% top-1 on the premise test and has never been rendered
 as a condition on its own.

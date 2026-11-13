@@ -247,7 +247,7 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py::_run_inline_sample` — the eval hook the reads join.
-**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/dataset_meta.json` — the runs the manifest freezes.
+**File:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/dataset_meta.json` — the runs the manifest freezes.
 
 ---
 

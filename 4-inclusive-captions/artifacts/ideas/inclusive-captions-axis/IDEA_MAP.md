@@ -130,7 +130,7 @@ Reading the third row as a null would retire the idea for the wrong reason.
    crops with a probability margin from 0.982 to 0.995. So the render-and-count check stands, with
    the count read through the CLIP crop call and the detector kept only for how many animals a
    render holds. Card and both sheets at
-   `3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/`.
+   `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/`.
 
    The original specification, kept because the three outcomes it names are still the right ones
    for a working instrument: "a photo of a cat" from base SDXL on 64 seeds at 50 DDIM steps
@@ -507,7 +507,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | What | Where | State |
 |---|---|---|---|
-| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
+| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
 | 2 | the same 64 renders, cropped to the detector's animal box and classified cat against dog by zero-shot CLIP ViT-B/32, to test the instrument run 1 killed | mscluster106 device 1, outside Slurm | done 2026-11-03, 41s. 64 of 64 called cat, none uncertain, margin 0.982 to 0.995 against a bar of 0.50. The uncropped image gives the same calls, so cropping is unproven rather than useless; the two-animal case is untested |
 
 ## Routes

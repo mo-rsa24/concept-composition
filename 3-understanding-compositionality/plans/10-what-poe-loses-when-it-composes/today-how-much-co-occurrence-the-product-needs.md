@@ -86,9 +86,9 @@ Navigation: ⬅️ [Previous](#the-test-written-before-any-run) | 📋 [Contents
 |---|---|
 | the two new conditions | [the toy script](../../artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py) |
 | the counts at every w, all three samplers | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy-sampler-cooccurrence-sweep.json` |
-| the sweep figure | `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/weight-sweep.png` |
-| the sample sheets | `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/samples-*.png` |
-| the card | `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md` |
+| the sweep figure | `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/weight-sweep.png` |
+| the sample sheets | `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/samples-*.png` |
+| the card | `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md` |
 | one line under Runs | [the idea map](../../artifacts/ideas/is-poe-ill-posed-for-composition/IDEA_MAP.md#runs) |
 
 Conditions A, B and C and `toy-sampler-hybrids.json` are not touched. The new conditions run under their
@@ -166,7 +166,7 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 - [x] **Report the five counts** for all three samplers, and the pair weight each form implies inside
   each expert.
   ✅ verified (implied weight 0.0461 for form 1 and 0.0458 for form 2; counts in
-  `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json`, 2026-11-04)
+  `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/toy-caption-competition.json`, 2026-11-04)
 - [x] **Run D at each form's implied weight** so the comparison holds the weight fixed and changes only
   whether the captions competed.
   ✅ verified (both controls give 300 of 300 crisp from the exact sampler and 296 overlays from each
@@ -182,7 +182,7 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 6. ✍️ The card, the idea-map line and the filing (AI with you, ~20 min)
 
-- [x] **Write the card** at `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md`:
+- [x] **Write the card** at `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md`:
   both axes named, the data behind each curve, the threshold as a number, the competing-caption counts
   out of 300 per sampler, and what the toy cannot say about SDXL.
   ✅ verified (156 lines, four caveats, both count tables and the run commands, 2026-11-04)

@@ -278,7 +278,7 @@ What to read
 - 3-understanding-compositionality/scripts/caption_wetness.py and 3-understanding-compositionality/scripts/caption_wetness.sbatch: the same three stages (sample
   whole-word caption matches with DuckDB, fetch images from their URLs, score with CLIP ViT-bigG-14)
   already run for camels and dogs. Reuse them; add a mode or a sibling script rather than a new pipeline.
-- 3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the dataset, its path
+- 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the dataset, its path
   (/datasets/mmolefe/relaion2b-en/parquet/, 128 files, 2.1 billion rows), the DuckDB binary, and how
   a count carries its own file coverage.
 - The write-up's section 9.2 and Figure 14.

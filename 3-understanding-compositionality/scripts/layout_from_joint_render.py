@@ -14,7 +14,7 @@ cannot name a species: on 64 renders of "a photo of a cat" it put a "dog" box on
 margin 0.054 (3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py). So the box comes from the detector and
 the species comes from zero-shot CLIP on the cropped box, which passed its own bar on those same
 64 crops at 64 of 64 and a median margin of 0.990
-(3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/crop_classifier_summary.json).
+(3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/crop_classifier_summary.json).
 
 What a seed has to do to be judgeable. Exactly two kept boxes, one called cat and one called dog,
 each above the classifier's 0.20 margin floor. Seeds 9 to 16 are the held-out set and come first;
@@ -28,7 +28,7 @@ CLIP at roughly 150 px against the 224 it expects. Box placement is unaffected, 
 ratio to the image side matters, but the species margin may be. Every record carries its source
 and its pixel size so the card can say which seeds were read at which resolution.
 
-Writes, under --out (default 3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/):
+Writes, under --out (default 3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/):
     boxes.json             one record per candidate seed: boxes in pixels and in latent cells,
                            the call and margin per box, the source render, and why a rejected
                            seed was rejected
@@ -343,7 +343,7 @@ def main() -> int:
     ap.add_argument("--sheet", type=Path, default=SHEET_DEFAULT,
                     help="the 8 x 4 reference contact sheet, for seeds with no 1024 px render")
     ap.add_argument("--out", type=Path,
-                    default=REPO / "3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece",
+                    default=REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece",
                     help="where boxes.json and detected-layouts.png are written")
     ap.add_argument("--wanted", type=int, default=WANTED, help="how many judgeable seeds to select")
     ap.add_argument("--joint-dir", type=Path, default=JOINT_OURS,

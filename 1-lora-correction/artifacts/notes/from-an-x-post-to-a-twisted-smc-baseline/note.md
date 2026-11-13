@@ -175,10 +175,10 @@ the intermediate reads is in [the review file's Runs table](../../../plans/06-is
 
 Navigation: ⬅️ [5. The runs](#5-the-runs-in-order) | 📋 [TOC](#table-of-contents) | [Next](#7-what-the-numbers-say) ➡️
 
-![Three cells by Mono, PoE and eleven SMC checkpoints](../../results/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png)
+![Three cells by Mono, PoE and eleven SMC checkpoints](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png)
 *One row per cell. Mono and PoE are fixed; each SMC column is the same four noise draws under the
 head at that training step, showing the largest-weight particle.*
-📊 Drawn in [Figure 1 of the figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints).
+📊 Drawn in [Figure 1 of the figure explainer](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints).
 
 **What to notice**
 
@@ -186,9 +186,9 @@ Every Mono tile has two animals. Every PoE tile is one animal with parts of both
 is also one animal, and a different one from the PoE tile beside it. The weights moved the choice
 and never reached a two-animal state.
 
-![Mono, PoE and twisted SMC for cat × dog at step 60k](../../results/is-the-gap-the-samplers-or-the-models/twisted-smc-cat-x-dog-step-060000-strip.png)
+![Mono, PoE and twisted SMC for cat × dog at step 60k](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-cat-x-dog-step-060000-strip.png)
 *The held-out cell at one checkpoint, full size.*
-📊 Drawn in [Figure 2 of the figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-2-cat--dog-at-step-60k-the-three-panels-at-full-size).
+📊 Drawn in [Figure 2 of the figure explainer](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-2-cat--dog-at-step-60k-the-three-panels-at-full-size).
 
 **What to notice**
 
@@ -200,11 +200,11 @@ middle panel's grey chimera.
 
 Navigation: ⬅️ [6. What the pictures show](#6-what-the-pictures-show) | 📋 [TOC](#table-of-contents) | [Next](#8-what-it-means-and-what-it-does-not) ➡️
 
-![Accuracy against step, and training loss per noise bucket against step](../../results/is-the-gap-the-samplers-or-the-models/twist-training-curves.png)
+![Accuracy against step, and training loss per noise bucket against step](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twist-training-curves.png)
 *Left: accuracy at telling a joint-prompt latent from a PoE latent, training batch in grey and 16
 held-out cells in blue, against the 0.60 bar. Right: training loss per noise bucket on a log axis,
 with chance at 0.69.*
-📊 Drawn in [Figure 3 of the figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level).
+📊 Drawn in [Figure 3 of the figure explainer](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level).
 
 | Quantity | Value | Source |
 |---|---|---|
@@ -256,7 +256,7 @@ Navigation: ⬅️ [8. What it means](#8-what-it-means-and-what-it-does-not) | �
 | What | Where |
 |---|---|
 | The verdict, with its evidence pairs | [the finding](../../../report/is-the-gap-the-samplers-or-the-models/does-selecting-among-poe-proposals-compose.md) |
-| The pictures read one by one | [the figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md) |
+| The pictures read one by one | [the figure explainer](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md) |
 | The design and the bar | [the plan](../../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md) |
 | The runs and the pre-registered questions, answered | [the review file](../../../plans/06-is-the-gap-the-samplers-or-the-models/review/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md) |
 | The code | `poe_repair/experiments/twisted_smc/` and `1-lora-correction/scripts/twisted_smc/` |

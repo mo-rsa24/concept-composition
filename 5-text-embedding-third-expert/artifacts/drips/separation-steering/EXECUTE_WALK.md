@@ -29,5 +29,5 @@ clean, 1 borderline. Time box: not set; one sitting, about 45 minutes.
 
 ## Owed
 
-Card and sheet are filed under 5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/. The idea map is
+Card and sheet are filed under 5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/. The idea map is
 not edited; the user runs `integrate` in the drip-idea walk.

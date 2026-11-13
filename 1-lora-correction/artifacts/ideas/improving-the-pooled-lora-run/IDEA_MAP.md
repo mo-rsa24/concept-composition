@@ -432,7 +432,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 | Source | What it gives the idea | Confidence |
 |---|---|---|
-| `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml` | the 11 train and 8 held-out pairs, and the token-disjoint rule as a comment | verified |
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml` | the 11 train and 8 held-out pairs, and the token-disjoint rule as a comment | verified |
 | `poe_repair/experiments/one_pair_one_seed/config.py:43` | `OptimConfig.weight_decay = 0.0`, no learning-rate schedule anywhere in the pooled trainer | verified |
 | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/` | cell counts per pair, both splits | verified 2026-09-03 |
 

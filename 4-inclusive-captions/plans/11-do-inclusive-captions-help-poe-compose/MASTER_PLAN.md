@@ -39,7 +39,7 @@ draws against three bars held as constants in its source.
 
 **The instrument, which exists.** GroundingDINO counts the animals in a render and
 [the crop classifier](../../../3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py) names them, carded at
-[does the cat prompt already draw dogs](../../../3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md).
+[does the cat prompt already draw dogs](../../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/README.md).
 
 **An image-and-caption denoising trainer, which does not exist.** Every trainer in this repo
 learns from cached noise tensors toward a correction target, with no photographs, captions or

@@ -43,7 +43,7 @@ The map of the drip-skill-route walk. Each round records the decision, who chose
 ## Round 7: step 4, choose and freeze the evaluation set and the one checkpoint (settled 2026-11-10)
 
 - **Settled as proposed:** a request walk, Sonnet medium, 60 minute box, filing on. Written into the route file.
-- **Found on the way:** Figure 5's "ours" column comes from three different adapters (`1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/README.md`), so one checkpoint is frozen before any held-out result is read, and Figure 5 is re-rendered from it.
+- **Found on the way:** Figure 5's "ours" column comes from three different adapters (`1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/README.md`), so one checkpoint is frozen before any held-out result is read, and Figure 5 is re-rendered from it.
 
 ## Round 8: step 5, the compute plan and the first GPU jobs (settled 2026-11-10)
 

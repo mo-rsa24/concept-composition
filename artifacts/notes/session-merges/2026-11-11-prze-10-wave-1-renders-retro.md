@@ -66,7 +66,7 @@ Retrospective of the walk over [the PRZE-10 plan](../../../1-lora-correction/pla
 
 **What was done.** Figure 5 assembled with all five current columns at seed 10; Tables 1 and 2 previewed with the scoring session's builder on a copy of its files; the corrector subset written into protocol rule 6 (your choice, 288 pictures) and launched in two shards on 111 and 112 from the step 8 worktree; shard 0 restarted after a folder collision with a retrying `make_dir` (commit `6edc1897`).
 
-**Where the results live.** `1-lora-correction/artifacts/results/does-one-adapter-compose-four-pairs/figure5-seed10-five-columns.png`; `/datasets/mmolefe/poe_repair_min/outputs/paper_review/preview_tables/2026-11-11-1210/out/`; protocol rule 6 and its history row (commit `14990299`); `paper_review/langevin_subset/`.
+**Where the results live.** `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-seed10-five-columns.png`; `/datasets/mmolefe/poe_repair_min/outputs/paper_review/preview_tables/2026-11-11-1210/out/`; protocol rule 6 and its history row (commit `14990299`); `paper_review/langevin_subset/`.
 
 **Before and after.** Table 1 preview: Comp. on the animals set 0.02 for PoE, 0.89 for the joint prompt, 0.97 for ours; the R1 bar (ours minus PoE in BLIP-VQA) reads SUPPORTS on all three sets. The corrector runs at 99 to 102 s a picture.
 
@@ -93,7 +93,7 @@ The bar was every wave 1 job running or finished with its count matching the pla
 - CO3 on R1 is at 1,045 of 1,104 (13:08) and unscored; CO3 on R3 has not started. Both belong to the baselines session.
 - PoE + Langevin on the subset runs until about 16:40 and is unscored.
 - The three paused trainings are not resumed; their commands are in `RESUME-2026-11-11.md`.
-- `3-understanding-compositionality/artifacts/results/what-co3-does-on-our-pairs/` has no card.
+- `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/` has no card.
 - Your prediction that CO3 will beat ours was not written down before CO3's scores; it was offered and not taken.
 
 ## The family table

@@ -45,7 +45,7 @@ lookup in place of a text encoder.
 **What it cannot say**
 
 Any result. The compose counts live in the
-[plain-words write-up](../../results/how-much-co-occurrence-the-product-needs/plain-figures/README.md).
+[plain-words write-up](../../results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/README.md).
 No sample pictures sit on the boxes in this version. The one-caption sampler, the older
 random-share relabelling and the template-library scorer are described in the disclosure and not
 drawn.
@@ -88,7 +88,7 @@ corrector.
 **What it cannot say**
 
 The retrained model's pictures are not the saved runs' pictures. Results beyond what the saved samples and counts show
-belong to the [plain-words write-up](../../results/how-much-co-occurrence-the-product-needs/plain-figures/README.md).
+belong to the [plain-words write-up](../../results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/README.md).
 
 ### Versions
 
@@ -138,7 +138,7 @@ The retrained model is not one of the 27 reported models: its 8 PoE samples are 
 scorer calls nothing readable, where the reported 0-relabelled models mostly draw a purple blob.
 The noise mixed into the latent on the denoiser screen and the corrector schematic are
 illustrative and marked so. Every count comes from the
-[plain-words write-up](../../results/how-much-co-occurrence-the-product-needs/plain-figures/README.md)
+[plain-words write-up](../../results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/README.md)
 and its saved figures.
 
 ### Versions

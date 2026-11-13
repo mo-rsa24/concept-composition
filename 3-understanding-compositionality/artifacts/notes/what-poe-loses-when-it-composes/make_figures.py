@@ -22,8 +22,8 @@ from PIL import Image
 
 REPO = Path(__file__).resolve().parents[4]
 OUT = Path(__file__).resolve().parent / "figures"
-CAMEL = REPO / "3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet"
-DOG_SHEET = REPO / "3-understanding-compositionality/artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png"
+CAMEL = REPO / "3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet"
+DOG_SHEET = REPO / "3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png"
 # tile boxes found by scanning the dog sheet for non-white runs: columns a, b, joint, PoE, SuperDiff
 DOG_COLS = [(250, 550), (558, 858), (890, 1190), (1198, 1498), (1506, 1806)]
 DOG_ROWS = {1: (132, 432), 2: (440, 740), 4: (748, 1048), 9: (1056, 1356), 10: (1364, 1664)}

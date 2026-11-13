@@ -75,7 +75,7 @@ log = logging.getLogger(__name__)
 # 1-lora-correction/scripts/showcase/freeze_tracking_set.py writes to. Fixed so both A's and
 # B's runs, and this trainer's own smoke run, read the same file.
 SCOPE_TRACKING_SET_PATH = (
-    REPO_ROOT / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs"
+    REPO_ROOT / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs"
     / "pooled_lora" / "tracking_set.json"
 )
 

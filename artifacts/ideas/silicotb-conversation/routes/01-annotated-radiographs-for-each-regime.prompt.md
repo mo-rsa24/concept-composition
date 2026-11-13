@@ -29,7 +29,7 @@ Read, in this order:
    5 and 6 are the measurements this route's regime assignments come from.
 2. `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md`, the composition vocabulary this project
    already uses. Use its words in every caption. Do not invent a parallel vocabulary.
-3. `3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/radiograph-highlights/` and the
+3. `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/radiograph-highlights/` and the
    `README.md` beside it: nine radiographs this repository already holds. They are a starting set,
    not the target set.
 

@@ -426,13 +426,13 @@ lives as an exploratory thread under artifacts/ideas/. No video route, because i
   matches the cached poe.png in mode (same blend creature, same collar tag) but not pixels;
   cache meta matches settings exactly, so the gap is known fp16 nondeterminism. Renders are
   mode-reproducible, not byte-reproducible, and figure provenance should say that. Filed
-  with card at 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
+  with card at 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
 - **Layer 4 groundwork done in-session**: the joint-prompt failure precondition exists in the
   paper's own cache (heldout/a_cat__x__a_dog/seed_1: mono.png is a single cat, poe.png one
   blended creature); no adapter render existed for that cell (per-epoch renders cover seeds
   9-16 only); scripts/render_joint_failure_repair_cell.py renders it from a loaded
   checkpoint (lambda 1 plus a lambda-0 canary that must match the cached poe.png), output
-  under 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
+  under 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
 
 - **Layer 5, round 1: the instrument's read of the learned object, NEEDS A DECISION.**
   Four candidate additions to the shared per-checkpoint tracking set, each computable from what

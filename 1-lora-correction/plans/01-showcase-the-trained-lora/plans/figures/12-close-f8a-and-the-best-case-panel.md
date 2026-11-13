@@ -59,7 +59,7 @@
 **Associated materials:**
 - **Review questions:** [../review/12-close-f8a-and-the-oracle-panel.md](../../review/12-close-f8a-and-the-best-case-panel.md)
 - **Ledger entry:** [two tasks owed alongside](../../decisions-taken-here.md#the-longer-training-question-runs-as-three-experiments-re-scoped-by-evidence)
-- **The samples:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_{1400..2000}_step_*`
+- **The samples:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_{1400..2000}_step_*`
 
 ---
 

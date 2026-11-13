@@ -20,7 +20,7 @@ the token itself and done per encoder slice because the two tokenizers can segme
 as `SCAFFOLD_MAX_DIFF = 0.0`.
 
 **Where the results live.**
-[token-norms-x-pos.png](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png) and its JSON
+[token-norms-x-pos.png](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png) and its JSON
 beside it.
 
 **Before and after.** x_fix's padding sits at 0.572 of the joint prompt's in CLIP ViT-L and 0.555 in
@@ -60,10 +60,10 @@ seed rather than against memory, and the crops were then dropped in favour of wh
 so no choice of crop could flatter or damn a tile. The calls were accepted.
 
 **Where the results live.**
-[the card](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/README.md),
-[calls.json](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/calls.json),
-[the series strip](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png),
-[per-seed comparisons](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/per-seed), and the rebuilt sheets in
+[the card](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md),
+[calls.json](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json),
+[the series strip](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png),
+[per-seed comparisons](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed), and the rebuilt sheets in
 [1-inference-only](../../../supervisor-meeting/1-inference-only). The verdict is filed as
 [a finding](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
 
@@ -92,7 +92,7 @@ about it. Mine was that CLIP's space was never trained for analogies and its dif
 276-noun dictionary, with a decoy-word control and a no-subtraction baseline.
 
 **Where the results live.**
-[premise-word-recovery.json](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/premise-word-recovery.json).
+[premise-word-recovery.json](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/premise-word-recovery.json).
 
 **Before and after.** Chance is a median rank of 138. The held-out word comes back at median rank 1,
 top-1 75.0% on the pooled vector and 98.5% on the content mean, with the decoy at 126 and 144. My

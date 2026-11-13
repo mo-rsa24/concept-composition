@@ -63,8 +63,8 @@ find the recipe, or say plainly which part of it cannot be had and why.
 | v57-11b-x0-self-decay (first run with cosine decay) | `tiiz0c0c` | 40k to 45k | near-identical renders across three checkpoints; clean on elephant×penguin seeds 11 and 15 |
 | the original rank-32 pool adapter | `6xc2l8ix` | | a cat and a dog, blurry |
 
-Figures: `3-understanding-compositionality/artifacts/results/which-checkpoint-to-take-each-figure-cell-from/latest/`,
-`1-lora-correction/artifacts/results/which-fidelity-fix-wins/`, `3-understanding-compositionality/artifacts/results/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png`.
+Figures: `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/`,
+`1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/`, `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png`.
 
 ## The failures, and where each is on disk
 
@@ -93,7 +93,7 @@ Each line is settled in the file named. Its failure counts as evidence in the wa
   20-step handover cannot be told apart from the adapter by eye. `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md`
 - **Samplers bolted onto the v58 adapters**: Langevin on the tail, CO3, SuperDiff with the adapter,
   best-of-8. None beat the adapter alone; CO3 turns everything into clip art, SuperDiff into
-  noise texture. `3-understanding-compositionality/artifacts/results/which-sampling-strategy-helps/`
+  noise texture. `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/which-sampling-strategy-helps/`
 - **Training longer**: fidelity decays from about 70k (rank 32) and 160k (rank 8); the weight norm
   grows without bound at weight decay 0. `3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/`
 - **Rank 8/16/32/64 and adding self-attention**: no trend, and every comparison so far is mixed
@@ -143,7 +143,7 @@ premise:
 3. **Clean targets still leave room for hybrids.** Every v58 target shows clean co-occurrence, so
    the hybrids are not copied from the targets. Two things the walk should separate: whether the
    CO3-sourced targets carry CO3's flat illustration style into the adapter (CO3 renders poster art
-   on our pairs, `3-understanding-compositionality/artifacts/results/what-co3-does-on-our-pairs/`), and whether a clean target
+   on our pairs, `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/`), and whether a clean target
    reached only through an early-window regression still lets the second object borrow the first
    one's features at render time.
 4. **Training off the adapter's own path costs fidelity.** The adapter trains on plain-PoE states
@@ -168,7 +168,7 @@ premise:
 
 - One recipe to train, one number of steps, one stopping rule. Every change is a single axis
   against the current v58-05 recipe, so each comparison stays clean.
-- The correction only works in steps 0 to 10 (`1-lora-correction/artifacts/results/when-the-correction-must-arrive/`).
+- The correction only works in steps 0 to 10 (`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/`).
   The early window is fixed, and whatever the adapter does after step 10 must not cost fidelity.
 - The bar goes in code before the run, in the pattern of `MIN_MEDIAN_RATIO`.
 - Fidelity is judged by eye on a fixed sheet of held-out pairs and seeds as well as by any score,

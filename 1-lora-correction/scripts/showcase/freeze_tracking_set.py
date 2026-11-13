@@ -34,7 +34,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-SCOPE = REPO_ROOT / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs"
+SCOPE = REPO_ROOT / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs"
 OUT_PATH = SCOPE / "pooled_lora" / "tracking_set.json"
 
 ALREADY_WIRED = [

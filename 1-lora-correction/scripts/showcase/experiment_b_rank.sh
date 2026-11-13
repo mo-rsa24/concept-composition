@@ -3,7 +3,7 @@
 # 1-lora-correction/scripts/animals_compose_transfer/train_phase1.sh at a different rank.
 # Only --lora-rank/--lora-alpha, --run-id and CUDA_VISIBLE_DEVICES change;
 # every other flag is copied verbatim from the r8 run this compares against
-# (1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json),
+# (1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json),
 # so the three runs are a matched-steps, single-axis comparison.
 #
 # Shared-device path (execution-protocol.md): biggpu already holds this

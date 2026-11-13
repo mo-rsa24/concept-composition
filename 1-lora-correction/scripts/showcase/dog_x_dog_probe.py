@@ -57,7 +57,7 @@ from poe_repair.run import make_ctx
 from poe_repair.runtime import PairSeedCell, encode_prompt_sdxl
 
 CHECKPOINT_RUN_DIR = Path(
-    "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+    "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 )
 CHECKPOINT_PATH = CHECKPOINT_RUN_DIR / "checkpoints/lora_step_100000.pt"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/dog_x_dog_probe")

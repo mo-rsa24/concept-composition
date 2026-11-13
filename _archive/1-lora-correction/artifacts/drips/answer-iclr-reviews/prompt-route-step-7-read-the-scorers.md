@@ -54,7 +54,7 @@ What is already known
 When something is missing
 - If an arXiv id cannot be resolved, show the candidate titles and ask the user to confirm one.
 - If no small-object pair is in the census, use two tiles from
-  1-lora-correction/artifacts/results/does-one-adapter-compose-four-pairs/tiles/ (tent and snowy mountain, lighthouse and stormy
+  1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/ (tent and snowy mountain, lighthouse and stormy
   sea) and say so.
 - If a scorer cannot run on this machine, say which and run it on the cluster after the user says
   yes.

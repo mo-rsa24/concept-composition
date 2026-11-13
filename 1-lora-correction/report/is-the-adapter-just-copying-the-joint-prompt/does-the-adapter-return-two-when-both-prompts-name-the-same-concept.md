@@ -16,7 +16,7 @@ when two whole animals of the named kind are in the frame. The adapter is `v58-0
 
 ## 1. One concept asked for twice, three methods
 
-![Joint prompt, plain product and the adapter on five cells naming one concept twice](../../artifacts/results/what-the-main-study-grids-show/the-same-concept-twice.png)
+![Joint prompt, plain product and the adapter on five cells naming one concept twice](../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.png)
 *Rows are cells, columns are the joint prompt, the plain product and the adapter, each row from
 one starting noise. What to notice: the middle column holds exactly one animal in every row, and
 the right column holds two in four of the five.*
@@ -26,7 +26,7 @@ in four of five, the exception being dog and dog at seed 1, where the second ani
 horse-like rather than clearly a dog. The joint prompt: two animals in three of five, a person
 beside one dog at seed 1, and one dog with a malformed second at seed 2. Read by eye from the
 tiles listed in
-[the figure's sidecar](../../artifacts/results/what-the-main-study-grids-show/the-same-concept-twice.json).
+[the figure's sidecar](../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.json).
 
 ## What this cannot tell you
 

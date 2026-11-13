@@ -2,7 +2,7 @@
 
 **Goal:** reviewer PrzE gets the MCMC corrector baseline they asked for, built on an update shown correct on a toy with a known answer.
 **Objective:** the corrector's update passes a check against the exact stationary mean and variance at four step sizes; the joint-prompt Langevin and unadjusted HMC drivers match the plain sampler at zero corrector steps; the Langevin setting (c = 3, k = 20) is written into the protocol before any review image; the PoE + Langevin and CO3 tiles for Figure 5 (R2) are rendered at that setting from one starting latent.
-**Definition of done:** `python3 1-lora-correction/scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; the tiles and their five-column contact sheet sit at `1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with a sidecar listing seeds, noise and settings.
+**Definition of done:** `python3 1-lora-correction/scripts/check_langevin_two_gaussians.py` prints `PASS: all four step sizes`; both drivers produce byte-identical latents to the plain sampler at k = 0; the tiles and their five-column contact sheet sit at `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/five_columns.png` with a sidecar listing seeds, noise and settings.
 **Route:** [answer the ICLR reviews](../../plans/route-answer-the-iclr-reviews.md), step 8, outcome PRZE-2.
 
 ## Environment Facts This Plan Depends On

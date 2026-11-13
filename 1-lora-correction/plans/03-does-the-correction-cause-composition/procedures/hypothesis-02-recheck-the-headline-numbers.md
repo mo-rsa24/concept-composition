@@ -146,7 +146,7 @@ print('seeds present:', seeds)
 
 Every row should print `32`, and the seeds should be `[9, 10, 11, 12]`. Those four are the ones
 this experiment generated with, the first four of the held-out block defined in
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/seed_pool.yaml`.
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/seed_pool.yaml`.
 
 > Held-out here means seeds and pairs deliberately kept out of training, so nothing measured on
 > them can be explained by the model having seen them.
@@ -280,7 +280,7 @@ Two things in the figure are worth a sentence rather than smoothing over. At λ=
 changes character: it stops fusing and drops the penguin entirely. At λ=1 the panel holds three
 animals, not two, which is where the extra count comes from.
 
-**A control we no longer have.** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml` lists
+**A control we no longer have.** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml` lists
 `an_elephant__x__a_penguin` as the compose-by-default control, the do-no-harm check. It is not
 one: it scores 0 of 4 at λ=0, and the four images are single fused creatures, so the scorer is
 right and the pool's assumption is wrong. The pool has no working do-no-harm control. That is a

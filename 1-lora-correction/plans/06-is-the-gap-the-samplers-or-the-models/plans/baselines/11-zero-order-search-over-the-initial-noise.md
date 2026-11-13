@@ -381,7 +381,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
     dir `zo_N8_s50_20260905-183320`; finished 20:27.
 - [x] **3.2** Harvest: if `bothness.json` is missing, run
       `--bothness-only --run-id <run>` on the session node; copy the two sheets, `summary.json`
-      and `bothness.json` into `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with
+      and `bothness.json` into `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` with
       README entries; quote `verdict.json` in the review file; answer every pre-registered question
       there; write the finding in `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`.
   - **Done when:** the review file's verdict is written and the finding exists.
@@ -412,7 +412,7 @@ them.
 
 ◀ **Needs: [task 3.2](#3--the-full-run)**, the sheets filed.
 
-- [ ] **4.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png`.
+- [ ] **4.1** Open `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png`.
       Row by row, write down whether a kept tile that counts 2 shows two bodies or one fused
       animal with two detected parts. A "compose" that is a fused face is a detector error, and
       its both-ness in `noise-search-bothness.json` should sit near the PoE band (about 0.2) rather
@@ -493,7 +493,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the run dir on `/datasets`.
 2. The two sheets, `summary.json` and `bothness.json` promoted to
-   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-cat-dog-sheet.png`,
+   `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` as `noise-search-cat-dog-sheet.png`,
    `noise-search-butterfly-meadow-sheet.png`, `noise-search-summary.json` and
    `noise-search-bothness.json`, with README entries.
 

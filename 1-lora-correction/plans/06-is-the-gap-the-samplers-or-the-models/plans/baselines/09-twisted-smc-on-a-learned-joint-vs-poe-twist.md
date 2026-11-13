@@ -373,13 +373,13 @@ None. This scope carries no `diagram-prompts.md`.
 |---|---|---|---|---|---|
 | `<run>/samples/step_NNNNNN/<split>__<pair>__seed_NN__strip.png` | — | three panels, Mono, PoE control, twisted SMC, from the same K noise draws; the SMC panel is the largest-weight particle at that checkpoint | task 2.1 | ⏳ | logged to W&B under `samples/<split>/<pair>/seed_NN` and bundled in the `strips-step<N>` artifact |
 | `<run>/samples/step_NNNNNN/*__smc__p{k}.png` | — | every particle, for the detector's compose fraction | task 2.1; scored by `1-lora-correction/scripts/twisted_smc/score_all_particles.py` into `<run>/all_particles_scores.json` | ✅ | **Supplementary** |
-| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png` | — | three cells by Mono, PoE and eleven SMC checkpoints, composed from the run's PNGs | `1-lora-correction/scripts/twisted_smc/report_figures.py` | ✅ | 📊 Drawn in [Figure 1 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints) |
-| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/twist-training-curves.png` | — | validation and training accuracy against step with the 0.60 bar; training loss per noise bucket on a log axis | the same script | ✅ | 📊 Drawn in [Figure 3 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level) |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png` | — | three cells by Mono, PoE and eleven SMC checkpoints, composed from the run's PNGs | `1-lora-correction/scripts/twisted_smc/report_figures.py` | ✅ | 📊 Drawn in [Figure 1 of the figure explainer](../../../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints) |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twist-training-curves.png` | — | validation and training accuracy against step with the 0.60 bar; training loss per noise bucket on a log axis | the same script | ✅ | 📊 Drawn in [Figure 3 of the figure explainer](../../../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level) |
 
 ### Organization workflow
 
 1. Everything under the run dir on `/datasets`.
-2. A strip promoted to the paper goes to `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with a README entry.
+2. A strip promoted to the paper goes to `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` with a README entry.
 
 ## Orchestration: keeping catalogs and plan files in sync
 

@@ -176,16 +176,16 @@ The evidence pairs waiting on a render, so they are visible rather than quietly 
 
 | The finding | What is wanted | Where it saves |
 |---|---|---|
-| [can a text-space third expert restore composition](../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md) | the rank of the held-out word as a histogram, the subtracted and unsubtracted readouts side by side with the decoy control behind them, from `premise-word-recovery.json` | `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/premise-word-recovery.png` |
+| [can a text-space third expert restore composition](../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md) | the rank of the held-out word as a histogram, the subtracted and unsubtracted readouts side by side with the decoy control behind them, from `premise-word-recovery.json` | `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/premise-word-recovery.png` |
 
 ## Reading the pictures
 
 Each finding's figures are read one at a time, in plain words, in a figure explainer beside the
 images: [where each condition lands, what these pictures mean](../artifacts/results/where-does-each-condition-land/figure-explainer.md)
-[is the gap the sampler's or the model's, what these pictures mean](../1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md)
+[is the gap the sampler's or the model's, what these pictures mean](../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md)
 [what the correction is made of, what these pictures mean](../artifacts/results/what-the-correction-is-made-of/figure-explainer.md)
-[the corrector figures, what these pictures mean](../1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
-and [which fidelity fix wins, what these pictures mean](../1-lora-correction/artifacts/results/which-fidelity-fix-wins/figure-explainer.md).
+[the corrector figures, what these pictures mean](../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
+and [which fidelity fix wins, what these pictures mean](../1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md).
 The path from two X posts to the twisted-SMC run, for a reader who was not in that conversation, is
 [the note beside those pictures](../1-lora-correction/artifacts/notes/from-an-x-post-to-a-twisted-smc-baseline/note.md).
 How a finding, its card and its explainer are laid out, with that one as the worked instance, is

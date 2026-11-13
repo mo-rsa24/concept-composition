@@ -64,7 +64,7 @@ the picture alone, or does it add a second dog anyway?**
 **Associated materials:**
 - **Review questions:** [the review file](../../review/02-the-dog-x-dog-same-prompt-check.md)
 - **The ledger entry:** [decisions-taken-here.md § The dog x dog test](../../decisions-taken-here.md#the-dog-x-dog-test-pre-registered)
-- **Checkpoint:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` (rank 8, alpha 8, attn2 q/k/v)
+- **Checkpoint:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` (rank 8, alpha 8, attn2 q/k/v)
 
 ---
 
@@ -262,7 +262,7 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `1-lora-correction/scripts/interaction_term_window.py` — the `run_cfg_masked(all_off)` identity pattern the identity check copies.
-**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/lora_attach.json` — the attach targets (attn2 to_q/to_k/to_v) the runner must reproduce.
+**File:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/lora_attach.json` — the attach targets (attn2 to_q/to_k/to_v) the runner must reproduce.
 
 ---
 

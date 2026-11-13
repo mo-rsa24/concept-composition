@@ -59,7 +59,7 @@ def main() -> int:
     ap.add_argument("--mode", choices=("per-step", "constant"), default="per-step")
     ap.add_argument("--iters", type=int, default=50)
     ap.add_argument("--lr", type=float, default=0.05)
-    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition")
+    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition")
     args = ap.parse_args()
 
     import torch

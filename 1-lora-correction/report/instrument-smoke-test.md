@@ -485,7 +485,7 @@ overwritten.
 
 # The subspace test does not predict transfer (2026-08-05)
 
-Full write-up: `1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
+Full write-up: `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
 
 The corrected 6.0% held-out projection above was about to be read as evidence
 against the shared-correction claim. It is not, and the check that shows why is

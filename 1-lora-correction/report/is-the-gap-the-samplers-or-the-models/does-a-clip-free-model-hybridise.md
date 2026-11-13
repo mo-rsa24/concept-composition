@@ -48,7 +48,7 @@ animals without naming them and reads a hybrid and two cats identically.
 <a href="../../artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png"><img src="../../artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png" width="200" alt="Eight seeds down, four columns across: cat alone, dog alone, the product, the joint prompt"></a>
 
 Per-tile categories with one sentence each are in
-[the calls](../../artifacts/results/does-a-clip-free-model-hybridise/calls.json).
+[the calls](../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/calls.json).
 
 ## 2. The joint prompt at the same guidance draws the pair
 
@@ -100,7 +100,7 @@ Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | �
 SDXL's 50 steps at 7.5. Weights at
 `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`; tiles and sidecars at
 `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/`. The card is
-[does a clip-free model hybridise](../../artifacts/results/does-a-clip-free-model-hybridise/README.md).
+[does a clip-free model hybridise](../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/README.md).
 
 ## Depends on
 

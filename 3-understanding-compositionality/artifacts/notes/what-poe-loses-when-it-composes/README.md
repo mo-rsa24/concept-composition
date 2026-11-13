@@ -9,7 +9,7 @@ The figures, scripts and checked references behind the
 
 | File | What it shows | Made from |
 |---|---|---|
-| `fig-causal-renders.png` | camel and dog at seeds 1 and 4 across six prompts, with the reader's calls | SDXL tiles in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/`, crops of the dog sheet, the two calls files |
+| `fig-causal-renders.png` | camel and dog at seeds 1 and 4 across six prompts, with the reader's calls | SDXL tiles in `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/`, crops of the dog sheet, the two calls files |
 | `fig-exact-product-is-a-blend.png` | the exact product of two centred one-picture Gaussians is the pixel average | exact arithmetic on 16 × 16 images |
 | `fig-why-rain-and-dog-do-not-fuse.png` | contention (cat and dog) against separate pixels (dog and rain) | exact Gaussian products, spreads chosen by hand |
 | `fig-mixture-reweighting.png` | the product's wet share against the subject's own wet share | the formula of the write-up's §5.4; values illustrative |
@@ -56,7 +56,7 @@ The figures, scripts and checked references behind the
 | `fig-toy-sampler-hybrids-D-w0.png`, `-D-w0.1.png` | condition D at pair weights 0 and 0.1, the two checks against conditions A and B |
 
 **Computed by [`toy_cooccurrence_sweep.py`](toy_cooccurrence_sweep.py), [`toy_cooccurrence_figure.py`](toy_cooccurrence_figure.py), [`toy_cooccurrence_sheet.py`](toy_cooccurrence_sheet.py) and [`toy_caption_competition.py`](toy_caption_competition.py),** filed with their counts and caveats in
-[the co-occurrence card](../../results/how-much-co-occurrence-the-product-needs/README.md).
+[the co-occurrence card](../../results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md).
 
 | File | What it shows |
 |---|---|

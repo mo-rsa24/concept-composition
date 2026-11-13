@@ -85,10 +85,10 @@ DECODED_PREDICTIONS_PER_STEP_FOR_EACH_EXPERT = "outputs/interaction_term/experts
 CONTENT_CHANGE_RELATIVE_TO_ATTENTION_CHANGE = "outputs/interaction_term/reprobe"
 PREDICTED_CLEAN_IMAGE_PER_STEP = "outputs/interaction_term/xhat0_readback"
 # Moved 2026-08-24 (repo-only, nothing on the mount to reconcile).
-DIRECTION_WALL = "1-lora-correction/artifacts/results/does-the-interaction-term-cause-composition/direction-wall"
-NOISE_SLICE = "1-lora-correction/artifacts/results/does-the-interaction-term-cause-composition/noise-slice"
-SEED_SIGNATURE = "1-lora-correction/artifacts/results/does-the-interaction-term-cause-composition/seed-signature"
-CANARY = "1-lora-correction/artifacts/results/does-the-interaction-term-cause-composition/canary"
+DIRECTION_WALL = "1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/direction-wall"
+NOISE_SLICE = "1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/noise-slice"
+SEED_SIGNATURE = "1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/seed-signature"
+CANARY = "1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/canary"
 
 # Analyses over cached trajectories. Dissolving into the question folders its sixteen
 # figures answer; the constant stays until the move so nothing dangles meanwhile.
@@ -96,21 +96,21 @@ CACHE_ANALYSES = "outputs/interaction_term/cache_analyses"
 
 # Training
 TRAINING_RUN_SCORED_WHILE_IT_TRAINS = "outputs/interaction_term/live_curves_smoke_run"
-DOES_THE_FIX_REACH_UNSEEN_PAIRS = "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs"
+DOES_THE_FIX_REACH_UNSEEN_PAIRS = "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs"
 
 # The earlier eras. Renamed off private labels and off stated claims. Moved on
 # 2026-08-24: the repository is the only filesystem holding each of these five, so
 # the move was a plain rename with nothing to reconcile on the mount.
-CORRECTION_OUTSIDE_THE_UNET = "1-lora-correction/artifacts/results/residual-dynamics/correction-outside-the-unet"
-RESIDUAL_BETWEEN_MONO_AND_POE = "1-lora-correction/artifacts/results/residual-dynamics/residual-between-mono-and-poe"
-CFG_WINDOW_WITHOUT_LORA = "1-lora-correction/artifacts/results/when-the-correction-must-arrive/cfg-window-without-lora"
-CFG_WINDOW_WITH_LORA = "1-lora-correction/artifacts/results/when-the-correction-must-arrive/cfg-window-with-lora"
+CORRECTION_OUTSIDE_THE_UNET = "1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/correction-outside-the-unet"
+RESIDUAL_BETWEEN_MONO_AND_POE = "1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/residual-between-mono-and-poe"
+CFG_WINDOW_WITHOUT_LORA = "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-without-lora"
+CFG_WINDOW_WITH_LORA = "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-with-lora"
 INTERNAL_FORCE_FAILURE = "outputs/internal_force_failure"  # declared, never produced
 ATTENTION_MECHANISM = "outputs/attn_mechanism"
 
 # Baselines and instruments
 POE_BASELINE_SAMPLES = "artifacts/results/poe-blends-instead-of-composing/poe-baseline-samples"
-COMPOSE_SCORER_VALIDATION = "1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation"
+COMPOSE_SCORER_VALIDATION = "1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation"
 
 # The pooled-adapter runs. The `rung` level is dropped: the level below it already
 # carried the axis, and the number carried nothing.

@@ -60,7 +60,7 @@ clearly as a dog, so it is counted as neither category rather than rounded into 
 <a href="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png"><img src="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png" width="200" alt="The same eight seeds at DPM-Solver++ order 2, 20 steps and guidance 4.5"></a>
 
 Per-tile sentences for both runs are in
-[the calls](../../artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json).
+[the calls](../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/calls.json).
 
 ## 3. The reference column, read two ways
 
@@ -95,7 +95,7 @@ Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | �
 9 to 16 of cat × dog from the repo's cached starting latents. The two pinned SDXL paths,
 `1-lora-correction/scripts/concept_multi_poe.py` and `5-text-embedding-third-expert/scripts/and_vector_sheet.py`, were not modified. Tiles and
 sidecars at `/datasets/mmolefe/poe_repair_min/outputs/sdxl_matched/`; the card is
-[does sdxl compose at pixart's settings](../../artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md).
+[does sdxl compose at pixart's settings](../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md).
 
 ## Depends on
 

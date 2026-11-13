@@ -24,12 +24,12 @@ where every checkpoint read below is recorded.
 
 ## 1. It separates early, then smears
 
-![Rank 8 on cat × dog: rows are the mono target, SuperDiff alone, then the adapter at each 10k checkpoint; columns seeds 9 to 12](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-cat-dog-checkpoint-timeline.png)
+![Rank 8 on cat × dog: rows are the mono target, SuperDiff alone, then the adapter at each 10k checkpoint; columns seeds 9 to 12](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-cat-dog-checkpoint-timeline.png)
 *Every tile is SuperDiff at 200 steps, κ 0.5, the adapter injected on every step at λ 1. What to
 notice: SuperDiff alone is one animal on every seed; the 30k row is two distinct animals on all
 four; the 40k to 60k rows keep two bodies but lose the fur and the background.*
 
-![Rank 16 on cat × dog, same layout](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-cat-dog-checkpoint-timeline.png)
+![Rank 16 on cat × dog, same layout](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-cat-dog-checkpoint-timeline.png)
 *What to notice: two silhouettes at 10k to 30k, then a painterly smear, then by 50k and 60k one
 animal per seed again.*
 
@@ -45,14 +45,14 @@ runs [rank 8](https://wandb.ai/prime_lab/poe-repair-animals-compose/runs/sdlora_
 [rank 32](https://wandb.ai/prime_lab/poe-repair-animals-compose/runs/sdlora_r32_samples)
 against the checkpoint step.
 
-![Seeds of four that separate, per checkpoint, per rank](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png)
+![Seeds of four that separate, per checkpoint, per rank](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png)
 *y is the count of seeds 9 to 12 that separate, x is the checkpoint in thousands of steps, one
 line per rank, left cat × dog and right butterfly × meadow. What to notice: the bigger rank
 peaks earlier and falls to zero sooner.*
 
 ## 2. The loss does not see it
 
-![Training loss per rank, total and per step bucket, log scale](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-lora-loss-curves.png)
+![Training loss per rank, total and per step bucket, log scale](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-loss-curves.png)
 *y is mean-squared error against the cached residual on a log axis, x is the optimizer step, one
 line per rank, a 25-point moving mean; the buckets are SuperDiff steps 0 to 19, 20 to 99 and 100
 to 199. What to notice: every curve falls and flattens from about 30k to 40k, and nothing rises
@@ -68,7 +68,7 @@ rank 16 0.0025 at 62,000, rank 32 0.0017 at 36,000. Rank 8 is lowest in every pa
 
 ## 3. Half strength is usable where full strength smears
 
-![Rank 16 at step 30k across λ, rows seeds 9 to 12](../../artifacts/results/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step30k-lambda-sweep.png)
+![Rank 16 at step 30k across λ, rows seeds 9 to 12](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step30k-lambda-sweep.png)
 *Same layout as the no-adapter sheet in the first finding. What to notice: the λ 0.5 column has
 two clean animals on seeds 10 and 12 while the λ 1 column is a smear on every seed.*
 

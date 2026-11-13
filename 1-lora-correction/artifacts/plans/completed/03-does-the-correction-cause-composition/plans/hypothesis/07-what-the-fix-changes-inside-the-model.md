@@ -53,7 +53,7 @@ what gets compared. `gain_and_pattern()` in `value_probe.py` computes this for e
 run during capture, so the scoring step reads it rather than re-deriving it.
 
 The full argument, with its guards (a shuffled-map control, a denominator check, the raw sums),
-is in `1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
+is in `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
 
 ## Environment Facts This Plan Depends On
 - `co3` python at its absolute path. Inference for the single-run test fits the in-session 3090.

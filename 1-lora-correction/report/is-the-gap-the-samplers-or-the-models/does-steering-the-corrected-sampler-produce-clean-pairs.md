@@ -47,7 +47,7 @@ before the run.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-sixteen-draws-do-the-composing-the-weights-choose-the-picture) ➡️
 
-![Cat by dog, eight seeds by six conditions, rank-32 correction at half dose](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png)
+![Cat by dog, eight seeds by six conditions, rank-32 correction at half dose](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png)
 
 **What you are looking at.** One row per held-out seed, 9 to 16. The first three columns are
 single deterministic renders: the joint prompt, the plain product of experts, and the product plus
@@ -73,7 +73,7 @@ The steered column beats the first-particle control by 0.75, against a bar of 0.
 From `verdict.json` and `summary.json` in
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/fka_K16_s50_20260906-025826/`,
 copied to
-[the summary beside the sheet](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-summary.json).
+[the summary beside the sheet](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-summary.json).
 Mark: verified, read 2026-09-07.
 
 ## 2. Sixteen draws do the composing; the weights choose the picture
@@ -108,7 +108,7 @@ Same source files as rung 1. Mark: verified, read 2026-09-07.
 
 Navigation: ⬅️ [Previous](#2-sixteen-draws-do-the-composing-the-weights-choose-the-picture) | 📋 [TOC](#table-of-contents) | [Next](#4-what-the-count-cannot-see) ➡️
 
-![Cat by dog, eight seeds by six conditions, rank-32 correction at full dose](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png)
+![Cat by dog, eight seeds by six conditions, rank-32 correction at full dose](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png)
 
 **What you are looking at.** The same six columns with the correction at λ 1.2, the dose the
 showcase renders ship at.
@@ -175,7 +175,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | What | Source | Mark |
 |---|---|---|
 | The compose rates, the fidelity means, the agreement and resample counts | `summary.json` and `verdict.json` in the run directory above, read 2026-09-07 | verified |
-| The three sheets and their sidecars | the same run, `fk_steering_*_sheet.png`; copied into [the results folder](../../artifacts/results/is-the-gap-the-samplers-or-the-models/README.md) | verified |
+| The three sheets and their sidecars | the same run, `fk_steering_*_sheet.png`; copied into [the results folder](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/README.md) | verified |
 | The eye read of identity | five steered tiles opened at full resolution, 2026-09-07 | stated |
 | The per-concept detector pass | `1-lora-correction/scripts/fk_steering/identity_check.py` on mscluster85 device 0, 2026-09-07 | verified |
 | The run | task **2.1** in [the plan](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/13-feynman-kac-steering-on-top-of-the-rank-32-correction.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/13-feynman-kac-steering-on-top-of-the-rank-32-correction.md#runs); W&B `prime_lab/poe-repair-animals-compose/runs/dfrceppl`, Slurm job 50332 | verified |

@@ -7,7 +7,7 @@ Wet words and weather words are the same whole-word patterns that script uses (F
 
     /home/molef/miniconda3/bin/python3 -I 3-understanding-compositionality/scripts/census/wet_weather_download.py
 
-Writes, under 3-understanding-compositionality/artifacts/results/what-the-training-captions-show/wet-and-weather/:
+Writes, under 3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/:
     README.md                      counts per group, pictures loaded, links to the pages
     <group>/images/NNNN.jpg        thumbnails (longest side 384)
     <group>/fetch.json             caption, URL and fetch status of every hit
@@ -30,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from laptop_slice import FAMILIES, SLICE  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[3]
-OUT = REPO / "3-understanding-compositionality/artifacts/results/what-the-training-captions-show/wet-and-weather"
+OUT = REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather"
 PER_PAGE = 50
 GROUPS = [("camel-wet", "camel", "wet"), ("camel-weather", "camel", "weather"),
           ("dog-wet", "dog", "wet"), ("dog-weather", "dog", "weather")]

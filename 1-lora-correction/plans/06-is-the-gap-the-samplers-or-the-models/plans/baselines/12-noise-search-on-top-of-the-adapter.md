@@ -305,7 +305,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 - [x] **2.2** Harvest: if `bothness.json` is missing on the cat × dog run, run
       `--bothness-only --run-id <run>` on the session node with `XFORMERS_DISABLED=1`; copy the
       two sheets, both `summary.json` files, `bothness.json` and `verdict.json` into
-      `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*` with
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*` with
       README entries; quote `verdict.json` in the review file; answer every pre-registered
       question; write the finding in `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`.
   - **Done when:** the review file's verdict is written and the finding exists.
@@ -333,7 +333,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 
 ◀ **Needs: [task 2.2](#2--the-full-run)**, the sheets filed.
 
-- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png`.
+- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png`.
       Row by row, compare the kept tiles against the adapter pivot: are they two separate
       animals, and are they visibly crisper (fur texture, edges, eyes)? Write down the seeds
       where the kept tile looks like the Mono tile's sharpness, and the seeds where a kept tile is
@@ -404,7 +404,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the two run dirs on `/datasets`.
 2. The two sheets and the sidecars promoted to
-   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*`.
+   `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*`.
 
 ## Orchestration: keeping catalogs and plan files in sync
 

@@ -1500,7 +1500,7 @@ by-construction endpoint, every annotation inside the axes box so nothing clips.
 **The controls question, superseded above, kept for the reasoning.** The two fake-correction rows are weaker evidence than their
 AUC gap suggests, for a measured reason: r_t vectors are near-orthogonal across pairs and even
 across seeds of one pair (cosine about 0.00,
-`1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`),
+`1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`),
 so the wrong-pair control is geometrically equivalent to the random one, and both invite "what
 did you expect". The one thing the random row rules out, that any size-matched kick frees the
 sampler from the fused mode (a live possibility given stochastic-sampling churn), is worth one
@@ -1836,7 +1836,7 @@ carries the model (SDXL base 1.0, frozen), the adapter (rank 8, alpha 8, dropout
 0, gradient clip 1.0, batch size 1), the sampler (DDIM, 50 inference steps, guidance scale 7.5,
 1024x1024, fp16), and the data axes (11 training pairs, 8 seeds each, 50 steps per cell, 88 cells,
 4,400 recorded steps, 8 pairs held out). All values from
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/{config,lora_attach,dataset_meta,pair_pool}.json`.
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/{config,lora_attach,dataset_meta,pair_pool}.json`.
 
 **The controls ¶5.5 may name, and the one it may not claim.** The uncorrected composition is the
 floor and appears in F8a as a dotted line. The correction computed from the joint prompt is the

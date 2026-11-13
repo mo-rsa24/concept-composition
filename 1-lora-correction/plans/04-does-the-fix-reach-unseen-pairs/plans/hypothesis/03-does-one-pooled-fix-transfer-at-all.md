@@ -61,7 +61,7 @@ go/no-go call on Phase-2, the leave-one-pair-out set in plan 03.
 - `co3` python at its absolute path. Scoring the step-70000-to-100000 checkpoints is a GPU scoring
   pass over existing checkpoints (no training), fits the in-session GPU or a short biggpu request.
 - The checkpoint being scored:
-  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`,
+  `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`,
   steps up to 100000; scoring so far only covers up to 60000.
 
 ## Tasks

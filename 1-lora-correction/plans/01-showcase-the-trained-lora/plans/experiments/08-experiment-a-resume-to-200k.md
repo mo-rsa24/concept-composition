@@ -236,7 +236,7 @@ Serves goal 4. Checkable outcomes:
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py` — the trainer; the launcher adds resume and max-steps flags.
-**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` — the resume point.
+**File:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` — the resume point.
 
 ---
 

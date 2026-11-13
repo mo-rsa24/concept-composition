@@ -4,7 +4,7 @@
 
 **What was done.** Wrote `5-text-embedding-third-expert/scripts/separation_steering.py` and its launcher, calibrated on seed 1, wrote the pass marks and step sizes into the results card, rendered 4 columns by 8 seeds on mscluster109 device 1, built the sheet on the launch node.
 
-**Where the results live.** The [sheet](../../../5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/separation-steering-sheet.png), its card entry in the README beside it, tiles and sidecars under `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/separation_steering/`.
+**Where the results live.** The [sheet](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/separation-steering-sheet.png), its card entry in the README beside it, tiles and sidecars under `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/separation_steering/`.
 
 **Before and after.** Clean one-dog-one-cat tiles on seeds 1 to 7: 0 with no steering, 0 at each of three step sizes, 1 borderline tile. Seconds per tile: 14.8 plain, 18.6 to 18.7 steered.
 

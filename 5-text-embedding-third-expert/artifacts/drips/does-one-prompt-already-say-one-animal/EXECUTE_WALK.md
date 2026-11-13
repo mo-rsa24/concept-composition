@@ -49,7 +49,7 @@ ratio, which has not run.
 ## Repairs made to the plan
 
 - Instruction 6's command pointed at `/datasets/.../outputs/one_animal_axis/`. The script writes to
-  `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/`, matching `and_vector_norms.py`, so the
+  `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/`, matching `and_vector_norms.py`, so the
   command now reads that path through `cluster.sh sh`.
 
 ## Out of the session

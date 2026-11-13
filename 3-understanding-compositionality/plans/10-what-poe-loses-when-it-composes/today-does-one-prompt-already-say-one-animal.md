@@ -136,11 +136,11 @@ Navigation: ⬅️ [Previous](#environment-facts-this-plan-depends-on) | 📋 [C
 | What | Path |
 |---|---|
 | the script | `5-text-embedding-third-expert/scripts/one_animal_axis.py` |
-| the axis and its held-out check | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json` |
-| where the four prompts land, as a figure | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/where-the-prompts-land.png` |
-| the Flan-T5-XXL read | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/flan-t5-axis.json` |
-| the orthogonal shares over the pool | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/orthogonal-share.json` and `.png` |
-| the card | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/README.md` |
+| the axis and its held-out check | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/axis-heldout-check.json` |
+| where the four prompts land, as a figure | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/where-the-prompts-land.png` |
+| the Flan-T5-XXL read | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/flan-t5-axis.json` |
+| the orthogonal shares over the pool | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/orthogonal-share.json` and `.png` |
+| the card | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/README.md` |
 | the finding | `report/what-poe-loses-when-it-composes/does-one-prompt-already-say-one-animal.md` |
 
 ## Tasks
@@ -218,7 +218,7 @@ For you to follow manually. Do these yourself.
 ### 6. 👀 Check the plurals and the floor ratio
 
 - [x] ✅ **Read the generated plural list** printed by step 1.1.
-  - `scripts/cluster.sh sh "python3 -m json.tool 5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json | head -120"`
+  - `scripts/cluster.sh sh "python3 -m json.tool 5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/axis-heldout-check.json | head -120"`
   - What you want: 81 pairs, each plural the one you would say out loud. "sheep" stays "sheep",
     "wolf" becomes "wolves".
   - What failure looks like: "sheeps" or "wolfs" in the list. That is a wrong prompt, not a wrong

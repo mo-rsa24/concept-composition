@@ -110,7 +110,7 @@ Navigation: ⬅️ [Previous](#words-this-route-uses) | 📋 [TOC](#table-of-con
     subject.json                    GroundingDINO: subject present or not, per picture
     piles/<family>/pile-NN/         CLIP clusters of the pictures with the subject in them
 
-3-understanding-compositionality/artifacts/results/does-an-effect-need-support/          local, pulled for looking (gitignored)
+3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/          local, pulled for looking (gitignored)
   <pair>/
     captions-<family>.md            the hit captions, a numbered list you can read
     piles/<family>/pile-NN.jpg      one contact sheet per pile, numbered tiles
@@ -123,8 +123,8 @@ Navigation: ⬅️ [Previous](#words-this-route-uses) | 📋 [TOC](#table-of-con
 ```
 
 The camel and dog sheets already rendered stay where they are, in
-`3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/` and
-`3-understanding-compositionality/artifacts/results/does-a-dog-in-the-rain-come-out-wet/`.
+`3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/` and
+`3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/`.
 
 ## The route at a glance
 
@@ -136,7 +136,7 @@ Navigation: ⬅️ [Previous](#where-everything-lives) | 📋 [TOC](#table-of-co
 
 | Lane | Steps | Session | Writes |
 |---|---|---|---|
-| AI census | 2, 3, 5 | a census session | `3-understanding-compositionality/scripts/census/`, `/datasets/.../census/`, `3-understanding-compositionality/artifacts/results/does-an-effect-need-support/` |
+| AI census | 2, 3, 5 | a census session | `3-understanding-compositionality/scripts/census/`, `/datasets/.../census/`, `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/` |
 | you look | 1, 4, 7 | a drip session, one item per message | `calls.json` files |
 | AI renders | 6, 8, 9 | the walk session on [the dog-and-rain walk map](../../artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md) | render sheets, the walk map, the verdict |
 
@@ -183,14 +183,14 @@ Objectives
    family, over all 128 parquet files.
 2. Save every hit (url, caption, key, source file) as hits-<family>.parquet and the counts as
    counts.json under /datasets/mmolefe/relaion2b-en/census/<pair>/.
-3. Pull the captions to 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/captions-<family>.md as a
+3. Pull the captions to 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/captions-<family>.md as a
    numbered list, first 500 hits per family in a seeded random order, with the total at the top.
 4. Show me the counts table, one row per pair and family.
 
 What to read
 - 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/route-causal-does-an-effect-need-support.md: the pair table.
 - 3-understanding-compositionality/scripts/caption_wetness.py: the sample stage already counts camel and dog this way.
-- 3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the mirror and DuckDB.
+- 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the mirror and DuckDB.
 - environment/overview.md and environment/storage.md: the co3 path, /datasets, the disk guard.
 
 What is already known
@@ -209,7 +209,7 @@ Rules
 What to hand back
 - 3-understanding-compositionality/scripts/census/count.py, committed.
 - /datasets/mmolefe/relaion2b-en/census/<pair>/counts.json and hits-<family>.parquet for six pairs.
-- 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/captions-<family>.md for six pairs.
+- 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/captions-<family>.md for six pairs.
 - The proof is the counts table printed in chat, with files searched = 128 on every row.
 
 What you will see
@@ -249,11 +249,11 @@ Objectives
 4. Embed the kept pictures with CLIP ViT-bigG and cluster them into piles of about 30.
 5. Draw one contact sheet per pile: numbered tiles, 6 across, with pile-NN.md beside it listing
    tile number, caption and link.
-6. Pull 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/piles/ to the laptop.
+6. Pull 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/piles/ to the laptop.
 
 What to read
 - 3-understanding-compositionality/scripts/caption_wetness.py: the sample and fetch stages to reuse.
-- 1-lora-correction/artifacts/results/can-we-trust-the-compose-score/README.md (main checkout) and
+- 1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/README.md (main checkout) and
   1-lora-correction/plans/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md: the validated
   GroundingDINO instance count and how it is run.
 - 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, section 7.2.
@@ -302,7 +302,7 @@ Objectives
 1. Write 3-understanding-compositionality/scripts/census/summarise.py: read every calls.json and counts.json, and compute per pair and
    family: pictures called, effect count, f_A with a Wilson 95% interval, and for a zero the rule-of-
    three bound (below 3 in n).
-2. Write 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/census.md: the table, plus up to five example
+2. Write 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/census.md: the table, plus up to five example
    captions per pair whose pictures I called in the effect state, each with its link.
 3. Draw census.png: f_A per subject with its interval, log scale, one colour per carrier.
 4. Print the one command that rebuilds both.
@@ -379,8 +379,8 @@ Rules
 - Pin an RTX 3090 node and probe it first (nodes.md, bigbatch row).
 
 What to hand back
-- One sheet and sidecar per pair under 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/.
-- The camel and dog named-effect sheet under 3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/.
+- One sheet and sidecar per pair under 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/.
+- The camel and dog named-effect sheet under 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/.
 - The walk map with the pass marks and the job ids.
 - The proof is a tile check per sheet: every tile present, every sidecar at 50 steps and 7.5.
 
@@ -452,7 +452,7 @@ What to hand back
 - The walk map with the test, the counted seeds and the job id.
 - One sheet per pair: counted seeds down the page; joint or named effect, two-concept PoE and
   three-concept PoE across; its sidecar and calls file, under
-  3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/third-concept.png.
+  3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/third-concept.png.
 - The counted-seed table, and the check line that the empty third condition reproduces two-concept
   PoE.
 
@@ -474,7 +474,7 @@ I judge it when every counted seed has my call and the table is on screen.
 You ~10 min · AI ~20 min · Opus, high · walk session
 
 **Objective:** one table per pair and a verdict on H-C1 and H-C2.
-**Outcome:** the README of `3-understanding-compositionality/artifacts/results/does-an-effect-need-support/`.
+**Outcome:** the README of `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/`.
 **Serves:** the verdict.
 
 ```text
@@ -489,7 +489,7 @@ Objectives
 3. Close the walk.
 
 What to read
-- 3-understanding-compositionality/artifacts/results/does-an-effect-need-support/census.md (step 5).
+- 3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/census.md (step 5).
 - Every calls file beside every sheet (steps 7 and 8).
 - The walk map's tests and the write-up's section 7.5.
 
@@ -536,7 +536,7 @@ Objectives
    should see:
    - the write-up's sections 1, 5 and 7: 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md
    - caption-counts.md and the two pilot contact sheets in
-     3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/
+     3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/
    - the three sheets and their calls files (asked-directly, a-camel-and-rain, the dog sheet)
    - the mirror on the cluster: ls /datasets/mmolefe/relaion2b-en/ and one DuckDB count I type myself
 2. Have me type the camel count myself:
@@ -569,7 +569,7 @@ pilot taught that the street can be wet while the camel is dry, so the call is a
 
 Objectives
 1. Show me one pile's contact sheet per message, from
-   3-understanding-compositionality/artifacts/results/does-an-effect-need-support/<pair>/piles/<family>/, with its pile-NN.md captions.
+   3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/<pair>/piles/<family>/, with its pile-NN.md captions.
 2. I reply with calls as tile number and letter: e for the effect state on the subject (wet fur,
    burning, melting, snow on the body), n for not, x for no subject, ? for can't tell.
 3. Record each call in calls.json beside the sheets, and read back the running count.

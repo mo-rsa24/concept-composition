@@ -15,7 +15,7 @@ who made them are in
 | plan 17 on that branch | classifier guidance following Algorithm 2, nothing rescaled | the sampler every rung reuses |
 | plan 18 on that branch | dog-01, a dog classifier trained through LoRA adapters in SDXL's down and middle blocks | accuracy check failed 7 of 20; product pushed to "dog present" gave 0 of 16 two-animal tiles |
 | `2-classifier-guidance/artifacts/drips/can-a-classifier-supply-the-missing-term/EXECUTE_WALK.md` | plan 15's walk map | stale, says piece 1 in flight |
-| `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md` | the toy card | closed-form product, the 0.01 row, summed scores against the true noised product |
+| `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md` | the toy card | closed-form product, the 0.01 row, summed scores against the true noised product |
 | `3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py` | CLIP on the detector's padded crop | the species read for the independent evaluator |
 | `5-text-embedding-third-expert/scripts/one_animal_axis.py` | "a cat" against "two cats" with a random-direction floor | the minimal-pair pattern D1 copies |
 | `1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md` | the both-ness axis in DINOv2 space | failed as a cross-pair tool, so D4 carries no bar |

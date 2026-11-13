@@ -71,7 +71,7 @@ Diagnose why a fix doesn't transfer (or confirm that it does). To do that, we ru
 Before starting those fifteen trainings, we need to know *while a run is training* whether the fix is even arriving at the eval set. Post-run analysis is too late; you'd waste GPU hours. So this plan wires three diagnostic metrics into the live training loop, so you can kill bad runs early.
 
 **Dataset details:**  
-- **Training pairs:** 11 blend-prone animal pairs (wolf×husky, lion×tiger, and so on; the pool is `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml`), each over 8 train seeds.
+- **Training pairs:** 11 blend-prone animal pairs (wolf×husky, lion×tiger, and so on; the pool is `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml`), each over 8 train seeds.
 - **Held-out pairs:** 8, each over 8 held-out seeds: 4 unseen blend pairs (the transfer test), cat×dog (the known-failure reference), and 3 compose-by-default controls (the do-no-harm check).
 - **Unseen pairs:** Tested later in step 10 (the fifteen trainings are what test transfer)
 - **Known phenomenon:** Correction magnitude is known to stop rising around $\sim 40\%$; we measure that live in this plan.

@@ -94,7 +94,7 @@ This is the paper's own Figure 2, one of the figures the walk can reproduce. Cou
 
 ⏱ you ~1 h across its opening and checks (estimate) · cluster hours: listed per figure by its opening · box: set per figure you pick
 
-**Outcome:** the paper's CLEVR figures on the cluster. Its opening lists each figure and its cost, so pick only what the toys cannot stand in for. The CLEVR grids already generated in `3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/` may cover some of them.
+**Outcome:** the paper's CLEVR figures on the cluster. Its opening lists each figure and its cost, so pick only what the toys cannot stand in for. The CLEVR grids already generated in `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/` may cover some of them.
 
 ### ◇ Optional, recommended if the read raised questions: the Bradley rebuild
 

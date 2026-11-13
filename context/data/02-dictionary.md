@@ -32,7 +32,7 @@ Which two animal concepts a run tests, written as the on-disk slug form (see
 
 **Type and shape** text, `a_<animal1>__x__a_<animal2>` (or `an_` where grammar needs it)
 
-**Where it comes from** the pair pool definition, `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
+**Where it comes from** the pair pool definition, `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`
 for the current 17-row pool, and `plans/standing/retrofit-poe-repair-min.md` for the wider 20-pair boundary
 (see [world/animal-pair.md § What people get wrong](../world/animal-pair.md#what-people-get-wrong))
 
@@ -214,7 +214,7 @@ chimera/dropped-concept case, `3` appears at least once (`wolfhusky_sample_seed_
 
 **Type and shape** non-negative integer
 
-**Where it comes from** `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, `validation_labels.*.n_instances`
+**Where it comes from** `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, `validation_labels.*.n_instances`
 
 **Stands for** a property of one rendered image
 
@@ -253,7 +253,7 @@ plain PoE fails; `compose_rate` is the same fraction under whichever render meth
 evaluated, or when reporting a success rather than a failure.
 
 **Example** `1.00 (8/8)` (example, `a_cat__x__a_dog`'s plain-PoE fail rate, read directly from
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`)
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`)
 
 **Type and shape** float, `0.0` to `1.0`, usually shown with the raw count it was computed from
 

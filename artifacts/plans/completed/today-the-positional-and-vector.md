@@ -12,7 +12,7 @@
 
 **Walked, and filed.** The result is
 [the finding "can a text-space third expert restore composition"](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md),
-with the evidence in [the positional "and" vector card](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/README.md).
+with the evidence in [the positional "and" vector card](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md).
 
 Walk it with:
 
@@ -115,7 +115,7 @@ Navigation: ⬅️ [Previous](#the-test-written-before-any-render) | 📋 [Conte
 5-text-embedding-third-expert/scripts/and_vector_sheet.py                      x_pos, and the column sets that carry it
 5-text-embedding-third-expert/scripts/and_vector_norms.py                      x_pos in the norm table and the figure
 5-text-embedding-third-expert/scripts/and_vector_x_sheet.py                    the six-column supervisor layout, plus x_pos
-5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/     the figure and its card
+5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/     the figure and its card
   token-norms-x-pos.png / .json                  per-position norms, both encoders, four sequences
   README.md                                      the card: what the figure shows and what it means
 supervisor-meeting/1-inference-only/             sheets 1, 3 and 4 rebuilt with the x_pos column
@@ -138,9 +138,9 @@ For Claude to execute. Ask Claude to do these.
 - [x] ✅ **1.2** Add `x_pos` to `5-text-embedding-third-expert/scripts/and_vector_norms.py`'s sequences, its figure, and a check that
   reports the largest absolute difference between `x_pos` and the joint prompt over position 0, the end
   token and the pads. That difference must be 0. ✓ verified 2026-11-04: `word_pairs` and `positional_x` added, the bar lives in the source as `SCAFFOLD_MAX_DIFF = 0.0`, and the figure carries four series
-- [x] ✅ **1.3** Run the norm table on the sheet's prompts and print it. ✓ verified 2026-11-04: largest absolute difference from the joint prompt at the start token, the end token and all 72 pads is 0 against an allowed 0; the only positions differing at all are 1 and 3. Position 1 is exactly 0 in both encoders, because a [causal mask](/home/molef/goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/02-position-zero-depends-on-itself.md) makes position 1 of "dog and cat" and of "dog" the same state. Files: `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/dog-and-cat-norms.json` and `.png`
+- [x] ✅ **1.3** Run the norm table on the sheet's prompts and print it. ✓ verified 2026-11-04: largest absolute difference from the joint prompt at the start token, the end token and all 72 pads is 0 against an allowed 0; the only positions differing at all are 1 and 3. Position 1 is exactly 0 in both encoders, because a [causal mask](/home/molef/goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/02-position-zero-depends-on-itself.md) makes position 1 of "dog and cat" and of "dog" the same state. Files: `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/dog-and-cat-norms.json` and `.png`
   - Command: copy both scripts to the cluster scratch folder, then
-    `POE_REPO=<cluster repo> <co3 python> <scratch>/and_vector_norms.py --joint "dog and cat" --a dog --b cat --out 5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition`
+    `POE_REPO=<cluster repo> <co3 python> <scratch>/and_vector_norms.py --joint "dog and cat" --a dog --b cat --out 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition`
   - ✅ `x_pos` equals the joint prompt at position 0, at the end token and at every pad, difference 0.
   - ❌ Any non-zero difference means the alignment is wrong. Stop; do not render.
   <a href="../../artifacts/results/the-positional-and-vector/dog-and-cat-norms.png"><img src="../../artifacts/results/the-positional-and-vector/dog-and-cat-norms.png" width="200" alt="Two bar charts of embedding norm at each of the 77 token positions of 'dog and cat', one for CLIP ViT-L and one for OpenCLIP bigG, with bars for x_raw, x_fix, x_pos and the joint prompt"></a>
@@ -161,10 +161,10 @@ For Claude to execute. Ask Claude to do these.
 ### 3. 🔧 The sheets, the figure and the card
 
 - [x] ✅ **3.1** Build the cat-by-dog `x_pos` sheet and call every tile from the full-resolution files,
-  writing the calls per seed with the counted seeds marked. ✓ confirmed by hand 2026-11-04: "accept", after three calls were queried and each was re-checked against the joint prompt's own cat on the same seed. `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/calls.json`
+  writing the calls per seed with the counted seeds marked. ✓ confirmed by hand 2026-11-04: "accept", after three calls were queried and each was re-checked against the joint prompt's own cat on the same seed. `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json`
 - [x] ✅ **3.2** Rebuild sheets 1, 3 and 4 under `supervisor-meeting/1-inference-only/` with the `x_pos`
   column added, every earlier column kept. ✓ verified 2026-11-04: sheet 1 now 8 columns, sheet 3 now 14, sheet 4 now 10; the 6-column sheet 1 is kept as `supervisor-sheet-1-before-x-pos.png`; two figures added, `2c-token-norms-with-x-pos.png` and `7-how-the-third-expert-changed.png`
-- [x] ✅ **3.3** Write `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png` and the card
+- [x] ✅ **3.3** Write `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png` and the card
   beside it, naming the axes, the four sequences and what the numbers mean. ✓ verified 2026-11-04: figure and card written, plus the per-seed comparisons and the series strip
 - [x] ✅ **3.4** Add the `x_pos` row to `supervisor-meeting/README.md` section 1 with its clear-pair count. ✓ verified 2026-11-04: the row reads 0 clear pairs of 7, and a second table beside it carries the plurality count across the whole series
 

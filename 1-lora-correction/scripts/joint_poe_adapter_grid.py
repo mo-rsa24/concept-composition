@@ -22,7 +22,7 @@ from PIL import Image
 
 REPO = Path(__file__).resolve().parents[2]
 CACHE = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache")
-RUN = REPO / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+RUN = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 STEP_DIR = RUN / "samples/per_epoch/epoch_2000_step_100000"
 OUT = REPO / "paper/iclr/figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs"
 

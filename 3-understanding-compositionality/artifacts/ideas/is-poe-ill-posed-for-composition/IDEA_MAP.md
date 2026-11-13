@@ -114,7 +114,7 @@ when the target needs more than one object instance, conflicting identities or n
 **Mark:** wrong as stated. Averaged over 8 seeds the correction's magnitude renders one centred
 animal face, not two regions. Repaired: it is a single-subject identity correction, concentrated
 on the contested object. See
-[where the correction lives in the frame](../../results/where-the-correction-lives-in-the-frame/README.md).
+[where the correction lives in the frame](../../../../1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/where-the-correction-lives-in-the-frame/README.md).
 
 ### 3c. A count fact is expressible in score space
 
@@ -174,7 +174,7 @@ samplers cross half of 300 only between 0.3 and 0.5. Deriving the two experts fr
 instead gives the same implied weight of 0.046 and a different failure: about 296 single objects of
 300 from every sampler including the exact one, no overlay, because both experts then spread over the
 same picture bank and the surviving components are the single shapes. Counts, figures and the caveats
-are in [the co-occurrence card](../../results/how-much-co-occurrence-the-product-needs/README.md).
+are in [the co-occurrence card](../../results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md).
 
 ## Routes
 

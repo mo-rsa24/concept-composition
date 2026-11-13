@@ -165,7 +165,7 @@ and shows the comparison, because a composition script that cannot reproduce the
 produce hybrids that mean nothing.
 
 **One sheet, one calls file, one card** under
-`1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/`, built with the existing
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/`, built with the existing
 `and_vector_sheet.sheet` so the columns are labelled the way every other sheet in the repo is.
 
 ## Purpose and goal
@@ -176,7 +176,7 @@ produce hybrids that mean nothing.
 fusion.
 
 **Definition of done.** The card at
-`1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/README.md` states how many of eight PixArt-alpha
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/README.md` states how many of eight PixArt-alpha
 product renders hold two clear animals, in three categories, with the SDXL counts quoted from the
 owning finding beside them, and says what the comparison does and does not settle.
 
@@ -193,7 +193,7 @@ owning finding beside them, and says what the comparison does and does not settl
   `/datasets` is the only filesystem large files go to, per
   [environment/storage.md](../../../../../environment/storage.md), and both the fetch and the render
   guard that mount rather than an assumed one.
-- Renders and the sheet write under `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/`, which is
+- Renders and the sheet write under `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/`, which is
   small enough for the repo side; nothing in this plan writes a checkpoint.
 - The models run in fp16, including the identity check's reference, because an fp32 against fp16
   comparison of the same loop differs by a few grey levels on its own and would be read as a
@@ -275,11 +275,11 @@ owning finding beside them, and says what the comparison does and does not settl
   - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/a_cat__x__a_dog/`,
     all 32 sidecars reading 20 steps, guidance 4.5, 1024².
 - [x] **4.2** Build the four-column sheet at
-      `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - **Done when:** the sheet is on disk and its own JSON record names every tile it drew.
-  - ✅ `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
+  - ✅ `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
     record beside it.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
@@ -290,7 +290,7 @@ owning finding beside them, and says what the comparison does and does not settl
 
 - [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
-      tile to `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/calls.json` with its seed, its
+      tile to `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/calls.json` with its seed, its
       category and one sentence saying what is in the picture.
   - A hybrid is its own category, not a failed version of either other one. Do not call a clear pair
     from the sheet.
@@ -298,7 +298,7 @@ owning finding beside them, and says what the comparison does and does not settl
   - ✅ 0 two clear animals, 6 one hybrid animal, 2 one single animal, in `calls.json`, with the
     joint column read the same way at 7 of 8.
 - [x] **5.2** Write the card at
-      `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
       the guidance scale and step count used and that they are PixArt-alpha's own defaults rather
       than SDXL's, the three counts out of eight, the SDXL counts quoted from
       [the corrector finding](../../../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md),
@@ -373,7 +373,7 @@ df -h /datasets
 
 | File | What it shows |
 |---|---|
-| `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` | Rows are seeds 1 to 8, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt "a cat and a dog", all on PixArt-alpha at 20 steps and guidance 4.5. What to notice: whether the third column holds one animal or two, and whether the fourth column holds two. |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` | Rows are seeds 1 to 8, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt "a cat and a dog", all on PixArt-alpha at 20 steps and guidance 4.5. What to notice: whether the third column holds one animal or two, and whether the fourth column holds two. |
 
 ## Code references
 

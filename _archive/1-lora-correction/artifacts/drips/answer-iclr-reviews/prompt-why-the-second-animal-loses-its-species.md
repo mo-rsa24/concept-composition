@@ -75,15 +75,15 @@ Rules
 - Read freely; launch render jobs only after showing the command and getting a yes.
 - Launch no training job. A retrain is a written proposal only.
 - Write renders under /datasets/mmolefe/poe_repair_min/outputs/species-fidelity/ only.
-- Write repo files under 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/ only.
+- Write repo files under 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/ only.
 - Commit nothing until the user says so.
 - Stop and show the first pair's full row of tiles before rendering the other three.
 - Stop and show the label table before writing any conclusion.
 
 What to hand back
-- 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/labels.csv: one row per tile, columns
+- 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/labels.csv: one row per tile, columns
   pair, seed, adapter, window, ladder_label, note.
-- 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/README.md: how the tiles were made,
+- 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/README.md: how the tiles were made,
   one sheet per pair as thumbnails, the counts per setting, and the verdict.
 - A one-line count command that reads labels.csv and prints the level-3 count per setting.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md.

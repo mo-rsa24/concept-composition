@@ -102,7 +102,7 @@ This extracts error patterns from the run transcript, deduplicates against globa
 - W&B project: `prime_lab/poe-repair-animals-compose` (verify with `echo $WANDB_PROJECT`).
 - Python 3.9+ required (DINOv2 and CLIP imports depend on it).
 
-**Project tracking**: Results logged to W&B per run; leaderboard aggregated manually to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` after all 15 complete.
+**Project tracking**: Results logged to W&B per run; leaderboard aggregated manually to `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` after all 15 complete.
 
 **Known issues**: See [Error Matrix](#error-matrix) section at the bottom for a full catalog of known issues and solutions.
 
@@ -199,7 +199,7 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
    - Use wired eval hook that logs compose-rate, direction-cosine, distance-reached per step.
    - Each run trains to its step budget (e.g., 10,000 steps or convergence).
    - Runs may be parallel (if cluster allows) or sequential via Slurm array job.
-   - Store outputs in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/run-{pair-name}/` per run.
+   - Store outputs in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/run-{pair-name}/` per run.
 
 3. **Eval each held-out pair on its LoRA**
    - After all 15 LoRAs are trained, eval each held-out pair on its corresponding LoRA.
@@ -209,7 +209,7 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
 4. **Build the leaderboard and degradation curve**
    - Leaderboard: one row per held-out pair (columns: pair name, compose y/n, distance-reached, direction-cosine, embedding space 1 score, embedding space 2 score).
    - Degradation curve: compose-rate (y-axis, 0–100%) vs fraction-of-pool-held-out (x-axis, 1/15 to 15/15), one point per pair, with error bars if multiple seeds exist.
-   - Save outputs to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` and `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
+   - Save outputs to `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` and `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
 
 ---
 
@@ -264,13 +264,13 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
 
 - [ ] For each trained LoRA, load checkpoint and eval on its corresponding held-out pair.
 - [ ] Collect compose-rate (binary), direction-cosine, distance-reached from eval output.
-- [ ] Save per-pair results to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/{pair-name}-eval.json`.
+- [ ] Save per-pair results to `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/{pair-name}-eval.json`.
 
 ### 4. 📊 Build leaderboard and degradation curve
 
-- [ ] Aggregate all per-pair results into `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json`.
+- [ ] Aggregate all per-pair results into `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json`.
 - [ ] Compute degradation curve: compose-rate (%) vs fraction-held-out (1/15, 2/15, ..., 15/15).
-- [ ] Generate plot and save to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
+- [ ] Generate plot and save to `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
 
 ---
 

@@ -23,7 +23,7 @@ and judged in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-mo
 
 ## 1. It composes at 50 steps and collapses at 200
 
-![Eight cells: two pairs by two step counts by two kappa-clamp settings, seed 9](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-baseline-eight-cells.png)
+![Eight cells: two pairs by two step counts by two kappa-clamp settings, seed 9](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-baseline-eight-cells.png)
 *Left half is the pipeline's own 200-step default; right half is 50 steps. What to notice: the
 cat × dog row is one cat at 200 steps and a dog-shaped silhouette filled with cat figures at 50;
 the butterfly is a faint blur at 200 and a distinct shape at 50. Clamped and unclamped columns
@@ -47,13 +47,13 @@ clamped beside unclamped.
 
 ## 3. Adding its own residual back restores two animals
 
-![SuperDiff alone on cat × dog at κ 0.5, rows seeds 9 to 12, columns λ from 0 to 1](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-alone-cat-dog-kappa-050-lambda-sheet.png)
+![SuperDiff alone on cat × dog at κ 0.5, rows seeds 9 to 12, columns λ from 0 to 1](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-cat-dog-kappa-050-lambda-sheet.png)
 *Each row is one seed; each column adds back λ of `r_t^SD` on every one of the 200 steps. What to
 notice: the λ 0 and 0.25 columns are one animal on every seed, and by λ 0.75 every seed is a cat
 beside a dog. The switch sits between 0.25 and 0.75, the same place PoE's switch sits on this
 project's strength grid.*
 
-![SuperDiff alone on butterfly × meadow at κ 0.5, same layout](../../artifacts/results/is-the-gap-the-samplers-or-the-models/superdiff-alone-butterfly-meadow-kappa-050-lambda-sheet.png)
+![SuperDiff alone on butterfly × meadow at κ 0.5, same layout](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-butterfly-meadow-kappa-050-lambda-sheet.png)
 *What to notice: the butterfly is present but dissolved into the meadow at λ 0, distinct on every
 seed by λ 0.25, and large and sharp from λ 0.5. This pair shrinks its second concept rather than
 losing it.*

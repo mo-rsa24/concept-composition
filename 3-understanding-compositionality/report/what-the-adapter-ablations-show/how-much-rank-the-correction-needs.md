@@ -16,7 +16,7 @@ every cell where it is scored (here four cells per run) and cannot carry the axi
 
 ## 1. Rank against drift, on the two comparable cells
 
-![DINOv2 drift against adapter rank on cat and dog, seeds 9 and 10](../../artifacts/results/what-the-adapter-ablations-show/how-much-rank-the-correction-needs.png)
+![DINOv2 drift against adapter rank on cat and dog, seeds 9 and 10](../../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs.png)
 *Rank on a doubling axis, drift on the vertical axis, one line per cell. What to notice: neither
 line falls with rank, and the seed 10 line sits above zero at every rank, which means no checkpoint
 of any rank moved that cell nearer its joint-prompt render than the plain product.*
@@ -25,7 +25,7 @@ of any rank moved that cell nearer its joint-prompt render than the plain produc
 -0.252 at rank 8 (`phase1_r8_200k`, 200,000 steps), -0.516 at rank 16 (`phase1_r16_100k`, 100,018
 steps) and -0.408 at rank 32 (`phase1_r32_100k`, 100,050 steps). The same three runs on seed 10
 read +0.222, +0.428 and +0.319. Values in
-[the figure's sidecar](../../artifacts/results/what-the-adapter-ablations-show/how-much-rank-the-correction-needs.json).
+[the figure's sidecar](../../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs.json).
 
 **Why this is mixed, not a result.** The three runs use the epsilon-space loss and differ in
 training length (200k, 100k, 100k steps), and they are read on a tracking set whose other cells

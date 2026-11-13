@@ -135,7 +135,7 @@ CHECKPOINTS = {
 OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/clean_tail_k_sweep")
 REF_DIR = OUT / "references"
 REF_JSON = OUT / "references.json"
-RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models"
+RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
 
 

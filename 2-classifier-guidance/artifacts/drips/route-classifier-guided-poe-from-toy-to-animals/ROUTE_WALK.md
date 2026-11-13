@@ -33,7 +33,7 @@ rung at which the climb stopped and its diagnosis. Inferred.
 | plan 18 on that branch | dog-01, W&B `z2k1bdmi` | accuracy check failed (7 of 20 steps at 0.75 or more); clean dog 2 of 4, a dog on all 4 |
 | plan 18, commit `6be7d0c5` | cat × dog product pushed toward "dog present" | two animals in 0 of 16 tiles; the fused animal turned into a cat on 3 of 4 seeds |
 | `2-classifier-guidance/artifacts/drips/can-a-classifier-supply-the-missing-term/EXECUTE_WALK.md` | plan 15's walk map | stale: says piece 1 in flight |
-| `3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md` | the toy card | the true noised product's score is closed form, so rung 1 has an exact answer |
+| `3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md` | the toy card | the true noised product's score is closed form, so rung 1 has an exact answer |
 | `3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py` | CLIP on the detector's padded crop | species instrument, 64 of 64 at median margin 0.990 (plan 15's quick context) |
 | `report/00-INDEX.md:155-156` | the reranking rows | plain product best-of-16 composed 0 of 128 particles; with the adapter at λ 0.5, best of 16 is 8 of 8 |
 

@@ -250,7 +250,7 @@ Objectives
 What to read
 - The paper, whole.
 -
-  3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md,
+  3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md,
   the toy it meets first.
 - 2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md, the ladder and the
   known facts.
@@ -337,7 +337,7 @@ What to read
   the known facts, whole.
 - The step 1 read map's closing section.
 -
-  3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/README.md,
+  3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md,
   whole.
 - report/00-INDEX.md rows on scope 06, and 1-lora-correction/report/paper-review/held-out-set.md.
 

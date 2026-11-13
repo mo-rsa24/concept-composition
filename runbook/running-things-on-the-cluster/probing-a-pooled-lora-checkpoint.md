@@ -90,7 +90,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 | Where the checkpoints are | Steps saved | Watch out |
 |---|---|---|
-| `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/` | rank 8, 5k to 100k, `lora_step_030000.pt` is the showcase pick | on `/home-mscluster`; read from it, never write new checkpoints there |
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/` | rank 8, 5k to 100k, `lora_step_030000.pt` is the showcase pick | on `/home-mscluster`; read from it, never write new checkpoints there |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_200k/checkpoints/` | rank 8, 105k to 200k | |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/` | rank 8, 205k to 450k | renders are hazy from about 240k on |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r16_100k/checkpoints/` | rank 16; steps end in `018` after the resume (`lora_step_050018.pt`) | pass `--rank 16` to the probe |
@@ -246,7 +246,7 @@ continues without it; the pair's `n` in the table shows how many rows it got.
 
 - A different pool (other pairs or seeds): pass `--pair-pool`, `--seed-pool-path` and
   `--pair-prompts` pointing at YAML files of the same shape as the ones under
-  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/`. This is how the seen-words-unseen-pair
+  `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/`. This is how the seen-words-unseen-pair
   tiers were read (their pool files sit beside `fit_cosine_tiers_r8_030000/`).
 
 ## 3. Resume a pooled training from a checkpoint on a free device   `ran 2026-09-01`

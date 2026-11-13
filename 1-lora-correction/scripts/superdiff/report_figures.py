@@ -15,7 +15,7 @@ import numpy as np, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw, ImageFont
 SD = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff")
-A = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models")
+A = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models")
 out = {}
 # dataviz reference palette, first categorical slots
 C = ["#4C6EF5", "#F76707", "#2F9E44", "#AE3EC9"]

@@ -469,7 +469,7 @@ failure is the finding: steepest rise inside steps 13 to 20 for 3 of 9 cells
 in CLIP and 1 of 9 in DINOv2 on the 50-step grid, with separation near zero at
 step 0 and roughly half the axis covered by the fork band. All curves, checks
 and bars live in `cache_analyses/trajectory_divergence/` with copies in
-`1-lora-correction/artifacts/results/how-far-the-corrected-run-separates-from-the-uncorrected-one/`.
+`1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/`.
 
 **Built.** `python scripts/run_separation_over_time.py` →
 `paper/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.pdf`, sidecar `.json` beside it.
@@ -497,7 +497,7 @@ the real norms the pooled stack is 1.4x at k=8, not 11x. Scaling rows to unit no
 leaves genuine direction structure (7.8x at k=8) but it sits inside single runs
 (4.8x) and not across them (1.2x), which is D1 and D3 restated rather than a new
 claim. Full argument and tables in
-`1-lora-correction/artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`.
+`1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`.
 
 **What still answers the question.** The adapter's behaviour, not the geometry of the
 cached vectors: rank 8, 11 training pairs, 96.9% compose on six unseen pairs where
@@ -516,7 +516,7 @@ plain PoE composes 0%. The `r_t` vectors are near-orthogonal to each other, abou
 0.00 cosine even between training pairs, so no fitted subspace can contain unseen
 pairs whether or not the correction transfers. Any sentence built on "shared
 subspace" wording gets rewritten to that bounded form. Full argument in
-`1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
+`1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
 
 **The numbers.** 440 rows from `1-lora-correction/scripts/spectrum.py --pool --stride 10 --max-seeds 8`.
 Against the equal-norm Gaussian floor: k=1 3.8% against 0.3% (14 times), k=8 22.6%

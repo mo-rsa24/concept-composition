@@ -4,3 +4,7 @@
 product of experts compose more often?
 
 Scope 11, its route, the pilot walk, the photo pool and the training set (`data/training-set/`).
+
+## Results
+
+Every result, grouped by the question it answers, with a picture and one line each: [the results index](artifacts/results/README.md).

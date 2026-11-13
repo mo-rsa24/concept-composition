@@ -327,7 +327,7 @@ delivers.
   - **Done when:** the W&B run id, the run dir, the node, the device and the PID are in the review
     file's Runs table.
 - [x] **2.2** Harvest: copy the three sheets and `summary.json` into
-      `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with README entries, quote
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` with README entries, quote
       `verdict.json` in the review file, answer every pre-registered question there, and add the
       result to plan 10's finding in `report/` as its own section.
   - **Done when:** the review file's verdict is written and the finding carries the per-λ table.
@@ -358,7 +358,7 @@ them.
 
 ◀ **Needs: [task 2.2](#2--the-full-run)**, the sheets filed.
 
-- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`.
+- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`.
       Row by row: does the adapter-alone tile show one animal or two, does the control tile
       agree with it, and does the FK tile show two bodies where both show one? Count the rows
       where FK adds a second body; that count over 8 is the number the verdict was judged on.
@@ -430,7 +430,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the run dir on `/datasets`.
 2. The three sheets and `summary.json` promoted to
-   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as
+   `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` as
    `fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`,
    `fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png`,
    `fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png` and

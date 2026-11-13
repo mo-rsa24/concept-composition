@@ -33,7 +33,7 @@ from poe_repair.runtime import load_ddim_scheduler  # noqa: E402
 from poe_repair.training_cache import DEFAULT_CACHE_ROOT  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent.parent.parent
-FAIL_MD = REPO / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md"
+FAIL_MD = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md"
 EARLY = range(0, 10)
 
 

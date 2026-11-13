@@ -2,7 +2,7 @@
 
 This note explains the three pieces the experiment compares: the ideal expert, the exact product, and the samplers. Each section gives the formula first and the code behind it second. The experiment runs on 2D points, so every picture can be read directly.
 
-[The table the experiment produces](../../results/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained.png) has one row per way the two experts' supports relate and 14 columns: the left group uses ideal experts, the right group uses trained ResNets.
+[The table the experiment produces](../../results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained.png) has one row per way the two experts' supports relate and 14 columns: the left group uses ideal experts, the right group uses trained ResNets.
 
 ## Words this uses
 
@@ -195,7 +195,7 @@ A sampler's gap to the ideal exact product mixes both, so a comparison should al
 
 ## 6. What the table shows, read by eye
 
-Nothing below is measured. It is a reading of [the table](../../results/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained.png), and the total variation numbers for each cell are still to be computed.
+Nothing below is measured. It is a reading of [the table](../../results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained.png), and the total variation numbers for each cell are still to be computed.
 
 - **Same coordinates:** both groups give the two midpoint blends and every sampler agrees with the exact product.
 - **Separate coordinates:** both groups give a grid of clusters, one per red x1 mode and blue x2 mode. The samplers keep it.

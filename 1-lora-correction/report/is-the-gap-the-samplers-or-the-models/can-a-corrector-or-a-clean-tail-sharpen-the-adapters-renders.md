@@ -57,7 +57,7 @@ and [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/revie
 
 Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-contents) | [Next](#2-the-hand-off-to-the-frozen-model-is-the-lever-that-moves) ➡️
 
-![Eight seeds by five columns: the joint prompt, plain PoE, the adapter alone, and the adapter plus 5 and 20 corrector steps on its own score over the last fifteen steps](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png)
+![Eight seeds by five columns: the joint prompt, plain PoE, the adapter alone, and the adapter plus 5 and 20 corrector steps on its own score over the last fifteen steps](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png)
 *Rows are the held-out seeds 9 to 16; each tile carries its instance count and its Laplacian
 variance. What to notice: the last three columns are the same picture with fur and edges redrawn,
 and none of them reaches the crispness of the first column.*
@@ -75,7 +75,7 @@ seed 9), so this is a null and not a stalled instrument. From
 
 Navigation: ⬅️ [Previous](#1-the-corrector-on-the-adapters-own-score-changes-nothing-that-matters) | 📋 [TOC](#table-of-contents) | [Next](#3-the-control-pair-keeps-what-it-already-had) ➡️
 
-![Eight seeds by nine columns: the joint prompt, plain PoE, the adapter alone, then the adapter switched off after step 19 or 29 with 0, 5 or 20 corrector steps on the frozen score](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png)
+![Eight seeds by nine columns: the joint prompt, plain PoE, the adapter alone, then the adapter switched off after step 19 or 29 with 0, 5 or 20 corrector steps on the frozen score](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png)
 *Rows are the held-out seeds 9 to 16; each tile carries its instance count, its distance to that
 seed's joint-prompt render, and its sharpness. What to notice: the sixth column, the adapter
 switched off after step 29 with no corrector, is the crispest of the adapter columns on seeds 9,
@@ -95,7 +95,7 @@ to 112 and 94, which reads as grain. Composed seeds: 5, 6, 7 and 6, 7, 7 of 8 ag
 
 Navigation: ⬅️ [Previous](#2-the-hand-off-to-the-frozen-model-is-the-lever-that-moves) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Eight seeds by nine columns for butterfly and meadow, every frame green](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png)
+![Eight seeds by nine columns for butterfly and meadow, every frame green](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png)
 *The same layout on the pair that already composes. What to notice: every tile keeps its butterfly
 and its meadow, so no condition here breaks what was already working.*
 
@@ -157,7 +157,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
   [does training longer keep improving the held-out fix](../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)
 - Why an adapter render and a reference render never share a process:
   [the known failures catalog](../../../environment/known-failures.md)
-- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
+- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open
 

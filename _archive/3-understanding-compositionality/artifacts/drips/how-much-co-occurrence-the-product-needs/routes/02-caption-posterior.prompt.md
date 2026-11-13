@@ -27,7 +27,7 @@ three captions against every picture, takes a softmax over the captions to get p
 and reads each expert off that by Bayes with a uniform picture prior. The pair picture's weight
 inside the "circle" expert comes out at 0.046, the same number. But the exact product now puts
 about 146 of 300 draws on a lone circle, about 150 on a lone square, and only 4 to 19 on a pair.
-The numbers are in 3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json.
+The numbers are in 3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/toy-caption-competition.json.
 
 My current explanation is that the Bayes-derived "circle" expert gives a lone square a weight of
 0.107 (form 1) or 0.015 (form 2) rather than zero, and that this leakage is what the product keeps,

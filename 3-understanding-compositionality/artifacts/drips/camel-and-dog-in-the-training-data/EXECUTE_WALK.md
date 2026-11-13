@@ -54,5 +54,5 @@
 
 ## Closing pass owed
 
-- file `3-understanding-compositionality/artifacts/results/what-the-training-captions-show/` with its card entry
+- file `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/` with its card entry
 - Phase 4 retrospective

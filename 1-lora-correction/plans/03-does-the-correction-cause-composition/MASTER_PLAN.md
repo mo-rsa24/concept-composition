@@ -75,7 +75,7 @@ saw. This scope proves that account and produces the paper's figures.
         First clause HOLDS: 63.0% against 16.4% for a same-shape Gaussian,
         3.8x, from
         1-lora-correction/scripts/spectrum.py --pool --stride 10 --max-seeds 8 (440 rows).
-        Evidence: 1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md
+        Evidence: 1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md
         Rewording direction text is /integrate-plans or /refine-plan, not
         sync-plan-tree. -->
 4. Universality: ‖r_t‖ curves collapse in log-SNR across pairs; the window

@@ -313,7 +313,7 @@ detailed panel, since what a figure or a plan verdict contains is out of this fo
 Faithfulness note: the compose rule ("≥2 distinct animal instances") and the example numbers
 (`n=2`, `n=1`, `1.00 (8/8)`) must match
 [world/compose-rate.md](world/compose-rate.md#what-a-compose-rate-is) and
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` exactly; this is a `[verified]` piece because both
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` exactly; this is a `[verified]` piece because both
 source numbers were read directly this session.
 
 ### Process capstone: One journey, prompt to verdict

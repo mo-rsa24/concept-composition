@@ -242,7 +242,7 @@ disk; only the second name goes.
 
 | Now | Becomes |
 |---|---|
-| `evidence/f2-lambda1-audit/` | `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/` |
+| `evidence/f2-lambda1-audit/` | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/` |
 | `01-both-there/` | `both-animals-there/` |
 | `02-two-of-one/` | `two-of-the-same-animal/` |
 | `03-cannot-call/` | `cannot-decide/` |

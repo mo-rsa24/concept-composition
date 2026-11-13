@@ -35,7 +35,7 @@ Navigation: ⬅️ [Who has the problem](#who-has-the-problem) | 📋 [TOC](#tab
 
 **PoE composition on SDXL blends or drops concepts far more often than it renders both.** ✅
 
-Measured directly: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`, 8 seeds per pair under the
+Measured directly: `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`, 8 seeds per pair under the
 validated instance-count scorer (see
 [world/compose-rate.md](../world/compose-rate.md#what-a-compose-rate-is)). 15 of 17 pairs in that
 table fail on 8 of 8 seeds (fail-rate 1.00), including the reference pair `a_cat__x__a_dog`. Two
@@ -49,7 +49,7 @@ this as a pre-registered null rather than the hypothesis. 🔍
 
 **When PoE does render both concepts, the render still is not trustworthy on its own.** ✍️
 
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` opened all 32 of the strongest-correction runs behind a
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` opened all 32 of the strongest-correction runs behind a
 94% headline compose rate by eye: 1 of 32 was a real scorer error (two of the same animal, called
 a success), and 5 more could not be called confidently either way, most because the pool
 deliberately contains look-alike pairs (leopard vs jaguar, cow vs buffalo). The card's own
@@ -98,8 +98,8 @@ Navigation: ⬅️ [What this project does about it](#what-this-project-does-abo
 
 | What | How it was established | When |
 |---|---|---|
-| PoE composition fails on 15 of 17 pool pairs at fail-rate 1.00 | Read in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
-| The headline compose rate needs a stated bound, not a bare number | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
+| PoE composition fails on 15 of 17 pool pairs at fail-rate 1.00 | Read in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
+| The headline compose rate needs a stated bound, not a bare number | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
 | The interaction term is the gap the fix targets | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | The reach question (one pair vs group vs whole taxonomy) is the open question | Read in `MASTER_PLAN.md`, Mission and Objectives | 2026-08-24 |
 

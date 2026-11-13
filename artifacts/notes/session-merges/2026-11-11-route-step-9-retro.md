@@ -10,7 +10,7 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **What was done.** The mug and wine glass pair, seed 11, from the step 4 census became the probe: the joint render shows both objects, the product render shows only the glass. CLIP score and ImageReward ran in `co3`. T2I-CompBench's BLIP-VQA and GenEval's evaluator were installed into prefix envs under `/datasets/mmolefe/envs/`, after four fixes: a corrupted shared conda cache (fresh `CONDA_PKGS_DIRS`), torch 1.12.1's executable-stack flag (`patchelf --clear-execstack`), the mmcv-full wheel served under `torch1.12.0/` rather than the URL pip built, and `ruamel.yaml` pinned to T2I-CompBench's 0.17.32.
 
-**Where the results live.** [The four-scorer probe figure](../../../1-lora-correction/artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), with the three probe CSVs beside it.
+**Where the results live.** [The four-scorer probe figure](../../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), with the three probe CSVs beside it.
 
 <a href="../../results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png"><img src="../../results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png" width="200" alt="the mug and wine glass pair with four scores under each image"></a>
 

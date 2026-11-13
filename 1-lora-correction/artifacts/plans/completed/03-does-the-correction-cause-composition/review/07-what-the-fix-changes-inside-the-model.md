@@ -67,7 +67,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | the 64-run measurement on mscluster109, 8 held-out pairs × seeds 9 to 16, adapter off against on at matched steps | Tests the claim | 2026-08-05 | 64 runs, 384 token-step rows | `/datasets/.../interaction_term/reprobe/`, 384 token-step rows, `verdict.json` | done, 0 failed |
-| a first short run on an_eagle__x__a_hawk seed 9 (plus frog/toad, seal/walrus, cat/dog) | Tests the claim | before the full 64 | 4 runs | `1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/smoke_eagle_hawk.png` | done |
+| a first short run on an_eagle__x__a_hawk seed 9 (plus frog/toad, seal/walrus, cat/dog) | Tests the claim | before the full 64 | 4 runs | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/smoke_eagle_hawk.png` | done |
 
 > Held-out means the pair was never used to train the adapter, so what it reads here cannot come
 > from the adapter having already seen it.

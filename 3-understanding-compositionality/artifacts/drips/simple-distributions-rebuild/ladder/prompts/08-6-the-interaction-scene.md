@@ -29,7 +29,7 @@ What to read
   number per setting and level.
 - The docstring of rebuild/phase8_interaction.py: where r moved with the wet rule and where it did
   not.
-- 3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md: the wet dog at
+- 3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md: the wet dog at
   scale.
 
 What is already known
@@ -46,7 +46,7 @@ What is already known
   rebuild/phase8_interaction.py).
 - On Stable Diffusion v1-4 the product paints rain streaks over a dry dog where the joint prompt
   gives wet fur, in 4 of 4 seeds
-  (3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md).
+  (3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md).
 
 Rules
 - Every number on the scene comes from phase8.json, the p8. keys or the drip's dispatch.md, never

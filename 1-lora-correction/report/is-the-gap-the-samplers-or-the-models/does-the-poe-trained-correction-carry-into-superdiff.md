@@ -21,12 +21,12 @@ lower on more seeds than not, indistinguishable if equal, hurts if higher. Judge
 
 ## 1. No seed separates at any strength
 
-![The rank-8 PoE adapter inside SuperDiff on cat × dog, rows seeds 9 to 12, columns λ](../../artifacts/results/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-cat-dog-lambda-sheet.png)
+![The rank-8 PoE adapter inside SuperDiff on cat × dog, rows seeds 9 to 12, columns λ](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-cat-dog-lambda-sheet.png)
 *Read beside the no-adapter sheet in the previous finding, which has the same seeds, κ and
 noise. What to notice: every tile right of λ 0 is softer than the one left of it, and no tile
 in any row reaches a cat beside a dog.*
 
-![The same adapter on butterfly × meadow](../../artifacts/results/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-butterfly-meadow-lambda-sheet.png)
+![The same adapter on butterfly × meadow](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-butterfly-meadow-lambda-sheet.png)
 *What to notice: the butterfly the no-adapter sheet pulls forward by λ 0.25 never appears; the
 meadow itself loses contrast instead.*
 
@@ -40,7 +40,7 @@ sidecars under `paper/iclr/figures/how-much-is-added/across-composition-rules/`,
 
 ## 2. Right size, wrong direction
 
-![Per-step cosine between the adapter's correction and SuperDiff's missing residual, and both norms](../../artifacts/results/is-the-gap-the-samplers-or-the-models/poe-adapter-in-superdiff-cosine-profile.png)
+![Per-step cosine between the adapter's correction and SuperDiff's missing residual, and both norms](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-in-superdiff-cosine-profile.png)
 *Left: y is the cosine between the adapter's correction Δ̂ and `r_t^SD = ε_J − ε_M` at the same
 state, x is the SuperDiff step from noise to image, orange bars are the median per step bucket.
 Right: the two norms on a log axis. What to notice: the cosine hugs zero outside the middle of

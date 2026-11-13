@@ -135,7 +135,7 @@ def main() -> int:
     ap.add_argument("--joint", required=True)
     ap.add_argument("--a", required=True)
     ap.add_argument("--b", required=True)
-    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of")
+    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of")
     args = ap.parse_args()
 
     import torch

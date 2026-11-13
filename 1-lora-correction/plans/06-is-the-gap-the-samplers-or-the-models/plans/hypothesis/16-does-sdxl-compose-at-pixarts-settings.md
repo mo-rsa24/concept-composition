@@ -162,7 +162,7 @@ latent is the cached x_T every other SDXL result in this repo starts from.
 the same seeds, whose product column must read 0 of 8, matching the published number.
 
 **One sheet, one calls file, one card** under
-`1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/`, built with `and_vector_sheet.sheet`.
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/`, built with `and_vector_sheet.sheet`.
 
 ## Purpose and goal
 
@@ -172,7 +172,7 @@ the same seeds, whose product column must read 0 of 8, matching the published nu
 could be causing the fusion, or discover that they are it.
 
 **Definition of done.** The card at
-`1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md` states how many of eight SDXL
+`1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md` states how many of eight SDXL
 product renders at 20 steps of DPM-Solver++ and guidance 4.5 hold two clear animals, in three
 categories, beside the same count from the control run at SDXL's own settings and the PixArt counts
 from the owning finding.
@@ -185,7 +185,7 @@ from the owning finding.
   Never a bare `python`.
 - SDXL's weights and the cached starting latents are already on the cluster; this plan downloads
   nothing.
-- Renders write under `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/`, and the script's
+- Renders write under `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/`, and the script's
   disk guard reads the filesystem that path resolves to rather than an assumed one.
 - The session node reached by `scripts/cluster.sh` is `mscluster84`, an RTX 3090 with 24 GB, which
   holds SDXL at fp16 with room for four conditions in one batch.
@@ -252,12 +252,12 @@ from the owning finding.
   - **Done when:** 32 tiles exist and every sidecar names DPM-Solver++, 20 steps and guidance 4.5.
   - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/sdxl_matched/matched/`.
 - [x] **4.2** Build the sheet at
-      `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png` through
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - The tile root needs the `and_vector/<slug>/seedNN/` layout that helper reads.
   - **Done when:** the sheet is on disk with its JSON record beside it.
-  - ✅ `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png`.
+  - ✅ `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png`.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
 
@@ -267,19 +267,19 @@ from the owning finding.
 
 - [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
-      tile to `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json` with its seed,
+      tile to `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/calls.json` with its seed,
       its category and one sentence saying what is in the picture. Read the joint column the same
       way.
   - **Done when:** eight records exist and the three counts sum to eight.
   - ✅ 0 two clear animals, 7 hybrids, 1 holding two animals of unclear species, in `calls.json`,
     with both runs' joint columns recorded two ways.
 - [x] **5.2** Write the card at
-      `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md`: the settings of both
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md`: the settings of both
       runs, the three counts out of eight for each, the PixArt counts quoted from
       [its finding](../../../../report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md),
       and what the one-axis comparison settles.
   - **Done when:** the card answers the definition of done above.
-  - ✅ `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md`.
+  - ✅ `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md`.
 
 ▶ **Next: [the close out](#close-out--record-what-this-plan-taught)**.
 
@@ -346,7 +346,7 @@ df -h /datasets
 
 | File | What it shows |
 |---|---|
-| `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png` | Rows are held-out seeds 9 to 16, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt, all on SDXL at 20 steps of DPM-Solver++ and guidance 4.5. What to notice: whether the third column holds one animal or two, against the same column at SDXL's own 50 steps and 7.5, which holds one on all eight. |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png` | Rows are held-out seeds 9 to 16, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt, all on SDXL at 20 steps of DPM-Solver++ and guidance 4.5. What to notice: whether the third column holds one animal or two, against the same column at SDXL's own 50 steps and 7.5, which holds one on all eight. |
 
 ## Code references
 

@@ -43,17 +43,17 @@ and as the constants `PASS_MARGIN`, `NULL_MARGIN` and `MIN_VAL_ACC` in
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-the-classifier-memorised-rather-than-learned) ➡️
 
-![Three cells by Mono, PoE and eleven SMC checkpoints](../../artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png)
+![Three cells by Mono, PoE and eleven SMC checkpoints](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png)
 *What to notice: every Mono tile has two animals, every PoE tile one, and every SMC tile one, a
 different one from the PoE tile in its row. Rows are wolf × husky and lion × tiger (training
 pairs) and cat × dog (held out); columns after the first two are the same four noise draws under
 the twist at that training step.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints).
 
-![Mono, product-of-experts, and twisted SMC for cat × dog seed 1 at training step 60k](../../artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-cat-x-dog-step-060000-strip.png)
+![Mono, product-of-experts, and twisted SMC for cat × dog seed 1 at training step 60k](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-cat-x-dog-step-060000-strip.png)
 *The held-out row at one checkpoint, full size. The middle and right panels are each one animal;
 the right one was chosen after seven resamples from the noise that gave the middle one.*
-📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-2-cat--dog-at-step-60k-the-three-panels-at-full-size).
+📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-2-cat--dog-at-step-60k-the-three-panels-at-full-size).
 
 **The number.** Compose fraction, the share of images the validated detector counts two or more
 animal instances in. Two reads: over the shown particle per cell (3 images per checkpoint, what
@@ -81,18 +81,18 @@ From `history.json` keys `eval/compose_mono_mean`, `eval/compose_poe_mean`,
 `1-lora-correction/scripts/twisted_smc/score_all_particles.py` on 2026-09-05), all in
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc/twist_w64_b16_lr1e-04_s100000_20260905-072331/`.
 A copy of the per-particle scores sits at
-[twisted-smc-all-particles-scores.json](../../artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-all-particles-scores.json).
+[twisted-smc-all-particles-scores.json](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-all-particles-scores.json).
 Mark: verified, read 2026-09-05.
 
 ## 2. The classifier memorised rather than learned
 
 Navigation: ⬅️ [1. The choice moves](#1-the-choice-moves-the-composition-does-not) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Accuracy against step, and training loss per noise bucket against step](../../artifacts/results/is-the-gap-the-samplers-or-the-models/twist-training-curves.png)
+![Accuracy against step, and training loss per noise bucket against step](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twist-training-curves.png)
 *What to notice: the grey training line sits at 1.0 while the blue held-out line wanders around
 the 0.60 bar and ends below it. On the right, the green high-noise bucket falls twenty times
 under chance, where the two classes are near-identical noise and content cannot separate them.*
-📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level).
+📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level).
 
 **The number.** Validation accuracy on 16 held-out cells from 8 pairs never in training: 0.60 at
 step 1k, a best of 0.66 at step 31k, 0.53 at step 61k, 0.56 at step 100k. Validation loss rose

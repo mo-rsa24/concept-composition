@@ -34,7 +34,7 @@ and as `PASS_MARGIN`, `NULL_MARGIN`, `MAX_REWARD_DISAGREEMENT` and `REWARD_BLIND
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-the-control-pair-shows-what-the-scorer-measures-there) ➡️
 
-![Cat × dog, seeds 9 to 16, by Mono, plain PoE, the unweighted control, best of 16, and Feynman-Kac steering at K 4 and K 16](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-cat-dog-sheet.png)
+![Cat × dog, seeds 9 to 16, by Mono, plain PoE, the unweighted control, best of 16, and Feynman-Kac steering at K 4 and K 16](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-cat-dog-sheet.png)
 *What to notice: the Mono column is two animals in every row and every other column is one, a
 cat-dog blend in most rows. The steered tiles are different single animals from the control's
 (seed 14 turns into a black cat, seed 9 goes monochrome), so the weights did move the population.
@@ -61,14 +61,14 @@ every read.
 
 From `summary.json` and `verdict.json` in
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/fk_K4-16_s50_20260905-165958/`,
-copied to [fk-steering-summary.json](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-summary.json).
+copied to [fk-steering-summary.json](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-summary.json).
 Mark: verified, read 2026-09-06.
 
 ## 2. The control pair shows what the scorer measures there
 
 Navigation: ⬅️ [Previous](#1-every-particle-is-one-animal-weighted-or-not) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Butterfly × meadow, same layout](../../artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-butterfly-meadow-sheet.png)
+![Butterfly × meadow, same layout](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-butterfly-meadow-sheet.png)
 *What to notice: a butterfly over a meadow counts as one animal, so Mono itself is red in 7 of 8
 rows. The green steered tiles hold two butterflies, or a butterfly drawn out of flowers. No
 steered tile lost the butterfly or the meadow.*

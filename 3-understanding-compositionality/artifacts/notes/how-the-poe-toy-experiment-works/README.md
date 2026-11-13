@@ -10,4 +10,4 @@
 
 **What it cannot say.** It reads the table by eye and gives no total variation numbers. The cause named for the samplers' loss in the joint-point row is untested.
 
-**Where it came from.** [The results folder](../../results/what-the-product-of-two-experts-draws-and-what-samplers-lose/README.md).
+**Where it came from.** [The results folder](../../results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/README.md).

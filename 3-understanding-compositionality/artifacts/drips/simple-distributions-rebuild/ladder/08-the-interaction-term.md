@@ -91,11 +91,11 @@ You type the label term into `walk08b.py`. On the quadrant toy, A is read with p
 
 **Outcome:** the interaction term in both places it lives. In the pixels it is the wet dog. In the labels it is zero for clean labels and real for report-mined ones like NIH's, and it hits the negation cells hardest.
 
-**What it looks like at scale (look by hand).** Open `3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/README.md` and its `interaction-grids/`. On Stable Diffusion v1-4, the product fuses one cat-dog in 4 of 4 seeds, and it paints rain streaks over a dry dog in 4 of 4. Those are the two things the term you just computed leaves out, on a real model.
+**What it looks like at scale (look by hand).** Open `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/README.md` and its `interaction-grids/`. On Stable Diffusion v1-4, the product fuses one cat-dog in 4 of 4 seeds, and it paints rain streaks over a dry dog in 4 of 4. Those are the two things the term you just computed leaves out, on a real model.
 
 <a href="../../../results/joint-against-poe-by-kind-of-composition/pairs/interaction.png"><img src="../../../results/joint-against-poe-by-kind-of-composition/pairs/interaction.png" width="420" alt="Stable Diffusion v1-4, seed 0: on the left the joint prompt 'a wet dog in the rain' gives a dog with soaked fur standing in a puddle; on the right the product of 'a dog' and 'rain' gives a dry, clean dog with rain streaks drawn over the picture"></a>
 
-Look at the fur: the joint's dog is soaked, and the product's dog is dry with the rain drawn over the picture. The product does this in [all 4 of its seeds](../../../results/does-poe-match-the-joint-for-each-kind-of-composition/tiles/interaction-poe-seeds0to3.png).
+Look at the fur: the joint's dog is soaked, and the product's dog is dry with the rain drawn over the picture. The product does this in [all 4 of its seeds](../../../results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/interaction-poe-seeds0to3.png).
 
 ### 5. You: compare your numbers with the reference
 

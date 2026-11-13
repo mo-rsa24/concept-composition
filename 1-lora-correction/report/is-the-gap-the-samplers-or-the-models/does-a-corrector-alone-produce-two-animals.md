@@ -48,7 +48,7 @@ written before the composer existed.
 
 Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-contents) | [Next](#2-on-the-held-out-seeds-the-corrector-is-plain-product-of-experts) ➡️
 
-![Four seeds by ten columns: the corrector switched on inside one ten-step window, every frame red](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-window-slides-cat-dog.png)
+![Four seeds by ten columns: the corrector switched on inside one ten-step window, every frame red](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-window-slides-cat-dog.png)
 *Rows are seeds 9 to 12, columns the nine ten-step window positions plus the corrector on all 50
 steps; the green bar under each column shows where the corrector acts, and the frame is the
 detector's verdict. What to notice: no frame is green, and the leftmost columns change the drawing
@@ -67,7 +67,7 @@ fields `per_column[].composed_of_4` and `cells[].n_instances`.
 
 Navigation: ⬅️ [Previous](#1-no-window-composes-and-the-injected-corrections-window-does) | 📋 [TOC](#table-of-contents) | [Next](#3-what-the-corrector-changes-instead) ➡️
 
-![Eight seeds by three columns: the joint prompt, plain product-of-experts, and the corrector on all 50 steps](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-eight-seed-sheet.png)
+![Eight seeds by three columns: the joint prompt, plain product-of-experts, and the corrector on all 50 steps](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-eight-seed-sheet.png)
 *Rows are the held-out seeds 9 to 16. What to notice: the first column is two animals in every row
 and the second and third are one animal in every row, differing from each other in style rather
 than in count.*
@@ -84,7 +84,7 @@ so the control bar holds. From
 
 Navigation: ⬅️ [Previous](#2-on-the-held-out-seeds-the-corrector-is-plain-product-of-experts) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Cat and dog at the smaller step size across corrector counts: a photograph at 0 and 1, a stylised cat by 20, an illustration at 100 and 200](../../artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-k-c0p3.png)
+![Cat and dog at the smaller step size across corrector counts: a photograph at 0 and 1, a stylised cat by 20, an illustration at 100 and 200](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-k-c0p3.png)
 *One tile per corrector count at the smaller step size, cat × dog seed 9. What to notice: one
 animal in every tile, and the drift from a photograph to a drawing as the count rises, with the
 latent norm never above 1.01 times its start.*
@@ -140,7 +140,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
   [the animal pair](../../../context/world/animal-pair.md)
 - Why the runs are invisible to the scheduler:
   [the execution protocol](../../../environment/hpc/execution-protocol.md)
-- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
+- Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open
 

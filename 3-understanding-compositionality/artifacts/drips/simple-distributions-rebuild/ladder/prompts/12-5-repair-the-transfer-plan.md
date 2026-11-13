@@ -31,7 +31,7 @@ What to read
   the plan being repaired.
 - ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md: its
   scope's master plan.
-- ~/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml:
+- ~/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml:
   the pair pool the plan means.
 - ~/Playground/PhD/poe_repair_min/context/world/compose-rate.md: what a compose rate is.
 - ~/Playground/PhD/poe_repair_min/environment/known-failures.md, entry poe-data-001: the seed split.
@@ -48,7 +48,7 @@ What is already known
   distinct animal instances, and fail rates are reported as, for example, 1.00 (8/8)
   (context/world/compose-rate.md).
 - pair_pool.yaml lists 11 train pairs and 8 heldout entries
-  (1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml).
+  (1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml).
 - 6 of the heldout entries are marked transfer test: leopard×jaguar, frog×toad, eagle×hawk,
   seal×walrus, goose×swan and cow×buffalo (the same file).
 - The other 2 heldout entries are cat×dog as the known-failure reference and elephant×penguin as a
@@ -57,7 +57,7 @@ What is already known
   does not match: the list holds 17 blend pairs and 1 control (the same file).
 - A second file of the same name, artifacts/_shared/cross_pair_pool_configs/pair_pool.yaml, is a
   different pool of 5 train and 5 held-out pairs across groups, and the pool this plan means is the
-  one under 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/ (both files read; the clean-pair-pool
+  one under 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/ (both files read; the clean-pair-pool
   plan, 1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/tools/01-the-clean-pair-pool.md).
 - The plan's x axis runs 1/15 to 15/15 "fraction held out", while every one of its 15 runs holds out
   exactly one pair (the plan, Description step 4 and Figure Catalog).

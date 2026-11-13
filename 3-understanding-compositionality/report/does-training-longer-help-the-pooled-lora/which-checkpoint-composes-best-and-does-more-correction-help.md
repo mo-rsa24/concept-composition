@@ -17,7 +17,7 @@ hypothesis that the sampler should favour the correction over falling back to Po
 is descriptive: a seed count that rises with λ or with the early window would have supported the
 hypothesis, a flat or falling count is what a saturated correction looks like. The 7 of 8
 figure is judged against the instance-count scorer validated in
-[can we trust the compose score](../../../1-lora-correction/artifacts/results/can-we-trust-the-compose-score/).
+[can we trust the compose score](../../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/).
 
 ## 1. The three best checkpoints, seed by seed
 
@@ -138,7 +138,7 @@ up overshoots rather than pushes further. That is an inference, not a result.
 | Rung 5's scene and medium changes | read off `grid-rank32-30050-full-window-lambda-sweep.png` | verified |
 | Same-device determinism | `determinism_repeat_1/`, `determinism_repeat_2/`, `logs/determinism_repeat.log` | verified |
 | Cross-device pixel difference | session record, 2026-09-02 | stated |
-| The checkpoints | rank 8: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` and `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/`; rank 16 and 32: `phase1_r16_100k/checkpoints/`, `phase1_r32_100k/checkpoints/` under the same outputs root | verified |
+| The checkpoints | rank 8: `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` and `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/`; rank 16 and 32: `phase1_r16_100k/checkpoints/`, `phase1_r32_100k/checkpoints/` under the same outputs root | verified |
 | The runs that produced them | [train longer](../../../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md) for rank 8, the rank 16 and 32 plan in the same scope; W&B `8vl2uzak`, `n1w4fw5b`, `gcej8ib9`, `6xc2l8ix` in `prime_lab/poe-repair-animals-compose` | verified |
 | Regenerate with | [render the held-out grid for one checkpoint](../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | |
 

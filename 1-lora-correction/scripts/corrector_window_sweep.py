@@ -108,7 +108,7 @@ TAIL_JSON = OUT / "tail_fidelity.json"
 CLEAN_JSON = OUT / "clean_tail.json"
 FIG_DIR = REPO / "paper/iclr/figures/when-the-correction-arrives/mcmc"
 STRIP_NAME = "samples-as-a-ten-step-corrector-window-slides"
-RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models"
+RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
 GREEN_FRAME_RULE = "compose == 1, i.e. the validated instance count (GroundingDINO 'animal', conf >= 0.30, NMS iou < 0.5) >= 2"
 

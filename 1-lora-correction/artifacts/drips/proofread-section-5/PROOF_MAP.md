@@ -623,7 +623,7 @@ Chunk 5 says the adapter sits on every cross-attention layer; the reported run (
 ## Settled by checking
 
 **The section reports rank 8, and the prose is right.** `config.json` of `phase1_r8_100k`, read on
-the cluster at `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/`,
+the cluster at `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/`,
 gives `lora.rank 8`, `lora.alpha 8`, `target_modules ["attn2.to_q", "attn2.to_k", "attn2.to_v"]`,
 `optim AdamW lr 1e-4 grad_clip 1.0`, `sampler ddim 50 steps guidance 7.5 at 1024x1024 fp16`.
 `paper/iclr/figures.md:40` names the same run as the source of the held-out sample figure, so the

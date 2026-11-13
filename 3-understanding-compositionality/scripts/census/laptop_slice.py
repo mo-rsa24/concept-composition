@@ -31,7 +31,7 @@ import pyarrow.parquet as pq
 
 REPO = Path(__file__).resolve().parents[3]
 SLICE = Path("/home/molef/datasets/relaion2b-en-slice")
-LOOK = REPO / "3-understanding-compositionality/artifacts/results/what-the-training-captions-show"
+LOOK = REPO / "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show"
 DATASET = "laion/relaion2B-en-research-safe"
 FILE = "part-{:05d}-339dc23d-0869-4dc0-9390-b4036fcc80c2-c000.snappy.parquet"
 SEED = 20261022

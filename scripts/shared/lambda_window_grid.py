@@ -72,7 +72,7 @@ from poe_repair._sdxl.metrics import ddim_prev_from_x0_eps, guided_eps, poe_eps,
 from poe_repair._sdxl.runtime import LatentTrajectoryCollector, decode_latents
 
 CHECKPOINT_RUN_DIR = Path(
-    "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+    "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 )
 CHECKPOINT_PATH = CHECKPOINT_RUN_DIR / "checkpoints/lora_step_100000.pt"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_c")

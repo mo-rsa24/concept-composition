@@ -108,7 +108,7 @@ hybrid in every row. The real-correction row stays one animal through 0.5 and is
 dog at 0.75 and 1. The wrong-pair row degrades into a cartoon single animal; the wrong-seed and
 wrong-order rows stay one dog-like animal at every λ. It shows both claims as written. Cat and
 dog at seed 9, from `1-lora-correction/scripts/compose_rate_vs_correction.py --layout grid5`, per
-[how big the strength grid should be](../../results/how-big-the-strength-grid-should-be/README.md).
+[how big the strength grid should be](../../results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md).
 The section 3 walk decided it belongs in `Appendix~\ref{app:strength-sweep}`, "The strength sweep
 and its controls", with the main text keeping the argument; that appendix section is not in the
 file, and neither the label nor the figure appears anywhere in it.

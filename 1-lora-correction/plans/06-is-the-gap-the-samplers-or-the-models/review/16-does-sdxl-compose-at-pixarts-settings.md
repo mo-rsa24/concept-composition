@@ -70,8 +70,8 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
-| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders, 13 minutes | tiles and sheet under `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ✅ product 0 of 8, joint two animals 8 of 8 |
+| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
+| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders, 13 minutes | tiles and sheet under `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/` | ✅ product 0 of 8, joint two animals 8 of 8 |
 
 ## The question written before the run
 
@@ -106,8 +106,8 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       column holds two separate animals on **8 of 8**, above the bar, and a clear cat beside a
       clear dog on 5 of 8 (failing at seeds 14 and 15, two cats, and seed 16, two dogs). The sampler, the step count and the guidance scale are removed as the
       carrier of the fusion. Counts and per-tile sentences in
-      [the calls](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/calls.json),
-      card in [the same folder](../../../artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md).
+      [the calls](../../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/calls.json),
+      card in [the same folder](../../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md).
 
 ## Written before the run, answered after
 
@@ -121,7 +121,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       two heads rather than two animals. The joint column holds two separate animals on 8 of 8, and
       a clear cat beside a clear dog on 5 of 8 (seeds 9, 11, 12, 15, 16); seeds 10 and 13 draw two
       dogs and seed 14 two cats. Tiles and sheet under
-      `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/control/`.
+      `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/`.
 - [x] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture.
 

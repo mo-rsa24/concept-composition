@@ -283,7 +283,7 @@ evidence set. F1 belongs to the compose-scorer scope, not here.
   cuda) over the unscored per-epoch tail, and task 5.2 may re-render four joint-prompt images. Both
   need a GPU session. `co3`'s absolute python path runs the scorer module and any script under
   `scripts/` invoked to regenerate a source file.
-- Figures 2.1 to 2.4 read `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/`, which may span
+- Figures 2.1 to 2.4 read `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/`, which may span
   both `/home-mscluster` and `/datasets`; check `environment/storage.md` before assuming a path
   resolves on this filesystem alone.
 
@@ -337,12 +337,12 @@ task 5.2 renders at most four images.
 - [ ] **5.1** Close F8a's unscored tail: score epochs 1400 to 2000 (steps 70000 to 100000) and
   extend F8a, compose-rate-as-the-lora-trains, to the full run.
   - The samples already exist:
-    `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/`,
+    `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/`,
     `epoch_1400_step_070000` through `epoch_2000_step_100000`, ~305 images each. F8a's sidecar
     `scored_steps` stops at 60000.
   - Score the tail with the validated instance-count scorer, which is idempotent over what is
     already scored:
-    `$PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k --wandb`
+    `$PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k --wandb`
   - Rebuild the figure: `python 1-lora-correction/scripts/adapter_transfers.py`
   - Expected: the curve stays flat near 0.96, confirming saturation. If it moves late in either
     direction, the train-longer question reopens; record the outcome in the

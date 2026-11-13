@@ -119,7 +119,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#next
 
 | Source | What it gives the idea | Confidence |
 |---|---|---|
-| `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | the validated rule verbatim, including the class-agnostic "animal" query and the all-two-class validation set | read this session |
+| `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | the validated rule verbatim, including the class-agnostic "animal" query and the all-two-class validation set | read this session |
 | `paper/iclr/iclr2027_conference.tex` lines 81, 103, 119-120, 127, 196, 216, 219 | every site the plurality name touches, and the interaction-term anchor clause verbatim | read this session |
 | `1-lora-correction/scripts/build_eval_cache.py` | prompts enter as free CLI arguments, so the degenerate pair is parameterizable | read this session |
 | meeting transcript 2026-08-20, 30:25-32:18 | Richard's condition and fallback wording, quoted verbatim in the walk's brief | supplied by the user |

@@ -13,8 +13,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-SRC = Path("5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json")
-OUT = Path("5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/token-alignment-matrix.png")
+SRC = Path("5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json")
+OUT = Path("5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/token-alignment-matrix.png")
 PROMPTS = ["a cat and a dog", "a cat", "a dog", ""]
 HEADS = ['joint\n"a cat and a dog"', 'a\n"a cat"', 'b\n"a dog"', 'empty\n""']
 GREEN, RED, GREY, BLUE = "#cfe8cf", "#f4c7c3", "#ececec", "#d6e4f5"

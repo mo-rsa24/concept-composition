@@ -65,7 +65,7 @@ example of that comparison is owed:
 
 > 📷 **Picture wanted**: one run's PoE render, LoRA-corrected render, and Mono render side by
 > side, so a reader can see what the correction visibly moved. Not yet selected; a strong
-> candidate is any run behind `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
+> candidate is any run behind `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
 > `passing_spaces: instance_count` result. Save as
 > `images/world/05-lora-corrected-vs-poe-vs-mono.png`.
 

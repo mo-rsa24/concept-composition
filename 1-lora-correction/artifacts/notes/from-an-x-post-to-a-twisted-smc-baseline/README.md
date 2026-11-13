@@ -15,6 +15,6 @@ someone who was not in the conversation.
 | `note.md` | the record: the first question, the posts and the connection, the hypothesis and its bar, what was built, the three runs, the pictures, the numbers, what it means, where everything is |
 
 The figures the note embeds live in
-[the results grouping](../../results/is-the-gap-the-samplers-or-the-models/README.md) and are read
-one by one in [its figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md).
+[the results grouping](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/README.md) and are read
+one by one in [its figure explainer](../../results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md).
 The verdict lives in [the finding](../../../report/is-the-gap-the-samplers-or-the-models/does-selecting-among-poe-proposals-compose.md).

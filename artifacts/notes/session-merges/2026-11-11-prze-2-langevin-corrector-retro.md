@@ -66,7 +66,7 @@ Retrospective of the walk over [the PRZE-2 plan](../../../1-lora-correction/plan
 
 **What was done.** `1-lora-correction/scripts/review_r6_renders.sbatch` ran on mscluster107 card 0 (RTX 8000): 16 tiles (joint, joint + Langevin, PoE, PoE + Langevin) and 4 CO3 tiles at seed 10, all from `latents/seed10.pt`, then a contact sheet. The appendix slot R6 was then dropped and its tiles folded into Figure 5 (R2), beside ours; SuperDiff was dropped from every table and figure.
 
-**Where the results live.** <a href="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png"><img src="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10"></a> [the card](../../../1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/README.md); commits `379695a6`, `6e60016e`, `08c2a3e7`.
+**Where the results live.** <a href="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png"><img src="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10"></a> [the card](../../../1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/README.md); commits `379695a6`, `6e60016e`, `08c2a3e7`.
 
 **Before and after.** Called by eye at seed 10: PoE fuses 3 of 4 pairs; PoE + Langevin keeps one of the two things on those 3; joint + Langevin, CO3 and ours show both on all 4.
 

@@ -23,7 +23,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-seed-sets-the-look-firs
   registers.
 - **The comparison sheets**: three images, one per held-out seed, each rendering every trained
   adapter on the same cat and dog cell. Filed in
-  [which adapter composes cat and dog](../../1-lora-correction/artifacts/results/which-adapter-composes-cat-and-dog/README.md).
+  [which adapter composes cat and dog](../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/README.md).
   A tile is named below by its seed and the label printed above it on the sheet.
 
 ## The seed sets the look first

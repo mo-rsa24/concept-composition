@@ -88,7 +88,7 @@ The main table, R1, scores every method on the 276 benchmark prompts at seeds 9 
 
 ## The scorers
 
-Each score is computed by the code named here and nothing else; a column carries a scorer's name only when this row produced it. All four rank a two-object render above a render missing one object on the step 7 probe pair (mug and wine glass, seed 11, step 4 census): [the four-scorer probe figure](../../artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), numbers in the three probe CSVs beside it.
+Each score is computed by the code named here and nothing else; a column carries a scorer's name only when this row produced it. All four rank a two-object render above a render missing one object on the step 7 probe pair (mug and wine glass, seed 11, step 4 census): [the four-scorer probe figure](../../artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), numbers in the three probe CSVs beside it.
 
 | Score | Code and settings | Environment | Feeds |
 |---|---|---|---|

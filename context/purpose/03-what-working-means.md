@@ -50,7 +50,7 @@ Navigation: ⬅️ [What a good result looks like](#what-a-good-result-looks-lik
 
 **A compose rate that does not clear the scorer's own uncertainty.** ✅
 
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`: a headline of 94% at full correction strength has a true
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`: a headline of 94% at full correction strength has a true
 rate bounded around 87% to 94%, once the 32 runs behind it are opened by eye. A result that
 depends on reading the difference between, say, 90% and 94% as a real effect is not trustworthy on
 this scorer without a tighter check.
@@ -74,7 +74,7 @@ Navigation: ⬅️ [What a bad result looks like](#what-a-bad-result-looks-like)
 The validated scorer counts distinct "animal" instances; it cannot tell a cat-and-dog image from a
 two-dog image by construction. See
 [world/compose-rate.md § What people get wrong](../world/compose-rate.md#what-people-get-wrong).
-`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/02-two-of-one/` is the one confirmed case of this in the current
+`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/02-two-of-one/` is the one confirmed case of this in the current
 32-run audit.
 
 **Anything about pairs outside the animal-pair pool.** ✍️
@@ -98,6 +98,6 @@ Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | �
 |---|---|---|
 | The mission statement and the five-step ladder | Read in `MASTER_PLAN.md`, Mission and Objectives | 2026-08-24 |
 | The more-correction-more-composition claim and the held-out-seed thresholds | Read in `MASTER_PLAN.md`, Goals, and `1-lora-correction/report/experiments-log.md` | 2026-08-24 |
-| The scorer's true-rate bound at λ=1 | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
+| The scorer's true-rate bound at λ=1 | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
 | The two-mode failure classification and its null | Read in `1-lora-correction/report/experiments-log.md`, EXP-05 | 2026-08-24 |
 | The animal-pair scope boundary | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |

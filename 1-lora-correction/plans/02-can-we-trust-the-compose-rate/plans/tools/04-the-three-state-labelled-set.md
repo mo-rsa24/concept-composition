@@ -38,7 +38,7 @@ Serves Objectives 2 and 4, and Definition-of-Done items 2, 3, 4, 5, 6 and 8.
 ## Goal
 On `/datasets`: the labelled set with counts per λ. In the review file: the false-compose rate
 at λ=1 and at λ=0.50 with their denominators, the coverage number, and the judgement against
-the three-way rule. In the repo: `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` giving the band as 75% to
+the three-way rule. In the repo: `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` giving the band as 75% to
 94%.
 
 ## Environment Facts This Plan Depends On
@@ -76,7 +76,7 @@ the three-way rule. In the repo: `1-lora-correction/artifacts/results/can-we-tru
 - [ ] Build the labelling tool: it strips λ out of the file path, shuffles, shows one image
   with its prompt, and records one of four labels plus the scorer's own call. Any detector call
   it makes takes `--device cpu`. [inferred prerequisite, DoD 3]
-- [ ] Calibrate: run the labelling pass over the 32 hand-sorted images in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`
+- [ ] Calibrate: run the labelling pass over the 32 hand-sorted images in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`
   only, and score it against `calls.json`. The 10% discard threshold is a constant in the script.
   [inferred prerequisite, DoD 4]
 - [ ] Label the main set: judgeable pairs × 5 seeds × λ ∈ {0, 0.25, 0.50, 0.75, 1.00} on the
@@ -89,10 +89,10 @@ the three-way rule. In the repo: `1-lora-correction/artifacts/results/can-we-tru
   - 💡 `/pair-figure` before plotting anything. Whether a point is one image, one seed, or
     one pair is a live design question on three other review files in this tree, and
     answering it here differently would make the numbers uncomparable.
-- [ ] Rewrite the band in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` to 75% to 94%, stating it
+- [ ] Rewrite the band in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` to 75% to 94%, stating it
   cannot be narrowed from those images. It currently says 87% to 94%, which counts the 17
   uncallable images as successes. [DoD 8]
-  - 💡 after this: `/reconcile 1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` to check nothing else
+  - 💡 after this: `/reconcile 1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` to check nothing else
     in that file still assumes the old 87% figure.
 
 ## Engagement Instructions

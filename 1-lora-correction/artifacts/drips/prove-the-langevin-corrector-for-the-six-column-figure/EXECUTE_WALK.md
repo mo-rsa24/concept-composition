@@ -40,7 +40,7 @@ N(-1, 0.5) × N(1, 0.8) = N(-0.2308, 0.3077), variance as the second number.
 - Piece 2 test: you read the table and kept our order, 2026-11-11.
 - Piece 3 build: drivers, composers and both identity checks, commits `945f48e5`, `5d358f1a`, `d0b582ed`; R6 layout draft `58063749`.
 
-- Piece 5: R6 at `1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with `five_columns.json`; route rows added; board redrawn at step 8.
+- Piece 5: R6 at `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/five_columns.png` with `five_columns.json`; route rows added; board redrawn at step 8.
 
 ## Changes
 

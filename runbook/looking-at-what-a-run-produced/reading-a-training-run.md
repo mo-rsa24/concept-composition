@@ -8,7 +8,7 @@ checkpoint of every run is comparable; its contents are decided in
 [the showcase scope's decision ledger](../../1-lora-correction/plans/01-showcase-the-trained-lora/decisions-taken-here.md).
 
 W&B project: [prime_lab/poe-repair-animals-compose](https://wandb.ai/prime_lab/poe-repair-animals-compose).
-Run folders: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/<run_id>/`
+Run folders: `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/<run_id>/`
 (config, checkpoints, samples, history).
 
 ## 1. The per-step curves, and what each one means

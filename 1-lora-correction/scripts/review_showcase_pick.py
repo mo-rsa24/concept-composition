@@ -25,7 +25,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 CALLS = REPO / "1-lora-correction/report/paper-review/showcase-calls.csv"
 CHOICE = REPO / "artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml"
-FIGURE = REPO / "1-lora-correction/artifacts/results/which-adapter-composes-the-showcase-pairs/showcase_calls.png"
+FIGURE = REPO / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/showcase_calls.png"
 CKPT_ROOT = "/datasets/mmolefe/poe_repair_min/outputs/showcase"
 COHORT = {"v57-11b-x0-self-decay": "cohort2", "v58f-05-self-contrast": "cohort4"}
 PAIRS = ("a_cat__x__a_dog", "an_elephant__x__a_penguin")

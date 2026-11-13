@@ -17,7 +17,7 @@ count below is over those.
 
 ## 1. Six cells where the target drops a concept
 
-![The joint prompt, the plain product and the adapter on six cells where the joint prompt is wrong](../../artifacts/results/what-the-main-study-grids-show/where-the-joint-prompt-itself-fails.png)
+![The joint prompt, the plain product and the adapter on six cells where the joint prompt is wrong](../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/where-the-joint-prompt-itself-fails.png)
 *Rows are cells, columns are the joint prompt, the plain product and the adapter, each row from
 one starting noise. What to notice: the first column is missing the hourglass on both chess rows
 and the cat on both fox rows, and on the dog row it draws a person. In the chess row at seed 10
@@ -30,7 +30,7 @@ hourglass at seeds 9, 10, 11, 12 and 42, five of five, no hourglass in any; cat 
 beside one dog, and at seed 2, one large dog with a malformed small one; elephant and penguin at
 seed 9, the elephant alone. Counted by eye over the renders under
 `/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/<pair>/seed<NN>/mono.png`, mirrored into
-`3-understanding-compositionality/artifacts/results/which-checkpoint-to-take-each-figure-cell-from/tiles/`.
+`1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/tiles/`.
 
 ## 2. What the adapter does on those cells
 

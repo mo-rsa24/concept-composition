@@ -175,7 +175,7 @@ The manuscript carries a crop of a September 10 render, set at `0.62\textwidth` 
 tiles. Accepted replacement: the generator's own output at full text width with no row-label
 gutter, 5.50 x 4.97 in and 1.09 in tiles, which is 4.6 times the area of the crop. The four rows
 are named in one line under the grid. Renders, the card and the script diffs are in
-[how big the strength grid should be](../../results/how-big-the-strength-grid-should-be/README.md).
+[how big the strength grid should be](../../results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md).
 
 The script changes this needs, none of them committed yet:
 
@@ -249,7 +249,7 @@ Full text width with no row-label gutter, plain borders, and the three pairs nam
 under the grid. 5.50 x 2.80 in, tiles 0.69 in against 0.62 in in the paper today. Coloured borders
 were tried and rejected: red on the PoE column reads as a verdict, and PoE succeeds in the top two
 rows. The render and its script diff are in
-[how big the strength grid should be](../../results/how-big-the-strength-grid-should-be/README.md).
+[how big the strength grid should be](../../results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md).
 
 **The strength grid moved to the appendix**
 

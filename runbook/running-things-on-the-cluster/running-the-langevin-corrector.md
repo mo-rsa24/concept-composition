@@ -232,7 +232,7 @@ $PY 1-lora-correction/scripts/corrector_window_sweep.py --figures --wandb --c 3
 ```
 
 ✅ **Seven paths print** (the window strip into `paper/iclr/figures/when-the-correction-arrives/mcmc/`
-and six sheets into `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/`), then
+and six sheets into `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/`), then
 `wandb run: prime_lab/poe-repair-animals-compose/<id>`, also written to
 `corrector/wandb_run_id.txt`.
 

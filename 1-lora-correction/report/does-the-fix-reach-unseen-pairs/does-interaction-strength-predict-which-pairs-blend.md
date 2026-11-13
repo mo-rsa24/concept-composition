@@ -43,7 +43,7 @@ the blend, the red bars would cluster at the right and the composing control at 
 husky 213, rabbit x hare 234, frog x toad 257, then a gap to cheetah x cougar 1458, cat x dog
 1837, lion x tiger 2007, elephant x penguin 2237, tiger x dog 3206. Fail rates from the 8-seed
 instance-count scorer are 1.00 for every named pair that has one, from
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`. Bound values from
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`. Bound values from
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/interaction_bound/interaction_bound.json`,
 field `pairs.<slug>.median_bound_by_step`, written by
 `1-lora-correction/scripts/showcase/interaction_bound_from_cache.py` on the session node's CPU, 2026-09-03.
@@ -91,7 +91,7 @@ dog x duck, cat x lion, tiger x dog, lion x dog) were never scored.
 | What | Source | Mark |
 |---|---|---|
 | The bound per pair and step | `/datasets/mmolefe/poe_repair_min/outputs/showcase/interaction_bound/interaction_bound.json`, read 2026-09-05 | verified |
-| The fail rates | `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`, read 2026-09-05 | verified |
+| The fail rates | `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`, read 2026-09-05 | verified |
 | The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`, `residuals/step_NNN.pt` per cell, fields `eps_a_raw`, `eps_b_raw`, `eps_j_raw`, `eps_uncond`, `timestep` | verified |
 | σ_t | `sqrt(1 - alphas_cumprod[timestep])` from the SDXL DDIM scheduler, read in the script | verified |
 | The theorem | Mitra et al. 2026, arXiv 2605.22596, Theorem 1 and Assumption 1, read 2026-09-05 from the HTML version | verified |

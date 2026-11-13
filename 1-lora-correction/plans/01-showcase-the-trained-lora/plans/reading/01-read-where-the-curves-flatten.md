@@ -68,7 +68,7 @@ Is the trained LoRA (`phase1_r8_100k`) at a ceiling, or was it still improving w
 
 **Associated materials:**
 - **Review questions:** [the review file](../../review/01-read-where-the-curves-flatten.md)
-- **The run's local files:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/` (`history.json`, 91,800 rows; `compose_rate.json`; `samples/per_epoch/`)
+- **The run's local files:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/` (`history.json`, 91,800 rows; `compose_rate.json`; `samples/per_epoch/`)
 
 ---
 
@@ -158,7 +158,7 @@ For Claude to execute. Ask Claude to do these.
     ```
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python -c "see code references"
     ```
-  - Output goes to: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/frac_distance_by_checkpoint.json`
+  - Output goes to: `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/frac_distance_by_checkpoint.json`
   - Completion is observable: the json holds one row per checkpoint (10k to 100k), each with the metric's mean over the eval runs at that step.
 - [ ] **1.2 Compute the flatness numbers**
   - The last-half slope (linear fit over steps 50k to 100k) and the max-minus-min over the same span, written into the same sidecar.
@@ -175,7 +175,7 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [tasks 1.1 to 1.2](#1--extract-the-curve-locally)** done, so the local numbers exist to compare against.
 
-2.1 **Open W&B and find the run.** Browser: wandb.ai, project `prime_lab/poe-repair-animals-compose`. The run id is in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/wandb/` (folder name `run-...-<id>`). Click into it. The reverse SSH port-forward, if working off the cluster browser, is in [the runbook](../../../../../runbook/00-INDEX.md).
+2.1 **Open W&B and find the run.** Browser: wandb.ai, project `prime_lab/poe-repair-animals-compose`. The run id is in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/wandb/` (folder name `run-...-<id>`). Click into it. The reverse SSH port-forward, if working off the cluster browser, is in [the runbook](../../../../../runbook/00-INDEX.md).
 
 2.2 **Charts tab, search `eval/frac_distance_reached`.** You should see one curve over 100k steps. ✅ If its last half is flat by eye and the local slope from task 1.2 is consistent with zero at the curve's own noise, the verdict is ceiling. ❌ If it is visibly rising at 100k and the local slope agrees, the verdict is waypoint.
 
@@ -259,7 +259,7 @@ For you to follow manually. Do these yourself.
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/history.json` — 91,800 logged rows; filter keys beginning `eval/frac_distance_reached`, group by `train/optimizer_step` bucket of 10k.
+**File:** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/history.json` — 91,800 logged rows; filter keys beginning `eval/frac_distance_reached`, group by `train/optimizer_step` bucket of 10k.
 
 ```python
 import json, statistics

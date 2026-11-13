@@ -22,7 +22,7 @@ descriptive read and is said so.
 
 ## 1. The four adapters on the same six cells
 
-![DINOv2 drift per tracking cell for three cross-attention adapters and one that also covers self-attention](../../artifacts/results/what-the-adapter-ablations-show/which-layers-carry-the-adapter.png)
+![DINOv2 drift per tracking cell for three cross-attention adapters and one that also covers self-attention](../../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter.png)
 *Rows are the six tracking cells, two trained on and four held out. Bars are the four adapters, all
 rank 32 on the same pool. What to notice: the red bars (cross and self-attention) are neither
 consistently longer nor consistently shorter than the blue ones, and on elephant and penguin at
@@ -33,7 +33,7 @@ W&B `tiiz0c0c`) against the best cross-attention run (`v57-09-x0-seeds`, W&B `ek
 dog seed 9, -0.527 against -0.488; elephant and penguin seed 9, +0.174 against -0.234; six-cell
 mean -0.269 against -0.329. The other two cross-attention runs are `v57-08-x0-w25` (`a5rv38qy`,
 mean -0.288) and `v57-10-x0-contrast` (`boammtzo`, mean -0.271). Every value is in
-[the figure's sidecar](../../artifacts/results/what-the-adapter-ablations-show/which-layers-carry-the-adapter.json),
+[the figure's sidecar](../../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter.json),
 read from each run's `history.json`.
 
 **Why this is mixed, not a result.** `v57-11b-x0-self-decay` also decays its learning rate to zero

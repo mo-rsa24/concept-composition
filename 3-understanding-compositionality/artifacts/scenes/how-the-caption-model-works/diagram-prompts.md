@@ -221,7 +221,7 @@ Exclusions: no words or letters entering the network, no text encoder, no CLIP, 
 ```
 Faithfulness note: the two tables must look nearly the same; the value chips must read exactly as
 quoted (real values from the model trained with 0 relabelled, seed 20261022, in
-`3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-table-example.json`); the
+`3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/toy-caption-table-example.json`); the
 caption tags are labels on the rows, not inputs.
 
 ### Prompt 6 (Subject): One training step in numbers

@@ -41,7 +41,7 @@ For Claude to execute.
 ### 1. Render
 
 - [x] ✅ **1.1 lion × meerkat, v58-03-self step 50,000, windows 10, 25, 50, seeds 9 to 16 (24 tiles)** ✓ verified 2026-11-10: `=== exit 0`, 24 tiles, the renderer's adapter-step count check passed on every tile; 29 s (w10), 46 s (w25), about 46 s (w50) per tile on an RTX 8000, 4.5 min model load
-  - Launcher: `1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/render.sbatch`, tag `self50k`
+  - Launcher: `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/render.sbatch`, tag `self50k`
   - Expect: log shows `n_matched` from 420 layers, `exit 0`, 24 files `ours_self50k_w{10,25,50}.png`
   - Time the job; give the total for the rest before going on
 - [x] ✅ **1.2 the other three pairs, same settings (72 tiles)** ✓ verified 2026-11-10: `=== exit 0` on both processes, mscluster107 cards 0 and 1

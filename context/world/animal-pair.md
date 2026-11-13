@@ -41,7 +41,7 @@ them.** ✅
 
 `1-lora-correction/report/experiments-log.md`'s selection warning states this plainly: pairs entered the current pool "by
 failing" under plain PoE (8 seeds each, instance-count scorer). 15 of 17 pairs in
-`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` fail on all 8 seeds; the two least-reliable
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` fail on all 8 seeds; the two least-reliable
 failures are `a_donkey__x__a_pony` (6/8) and `a_crocodile__x__an_alligator` (5/8). ✅
 
 **The pool is deliberately biased toward failure, which the project's own documents flag as a
@@ -96,7 +96,7 @@ Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) |
 **The pair count is not settled across the repo's own documents.** ⚠️
 
 `1-lora-correction/report/experiments-log.md` (its axes table) says "17 in the current pool, plus a new spread set built in
-EXP-02" (EXP-02 status: pending). `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` lists exactly 17
+EXP-02" (EXP-02 status: pending). `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` lists exactly 17
 pairs (1 dissimilar control, 1 reference, 15 train). `plans/standing/retrofit-poe-repair-min.md`'s "Words
 this uses" instead names "the 20 animal pairs" as the current scope boundary, plus 7 non-animal
 pairs from an earlier era that stay on disk but are out of the live claim. This file cannot tell
@@ -118,7 +118,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | What | How it was established | When |
 |---|---|---|
 | The pool is biased toward failure by construction | Read in `1-lora-correction/report/experiments-log.md`, "The selection warning" | 2026-08-24 |
-| The 17-row fail-rate table | Read in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
+| The 17-row fail-rate table | Read in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
 | The butterfly control pair and the animal-pair boundary | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
 | The six-group taxonomy and its representative pairs | Read in `artifacts/plans/archived/phases/09-lora-taxonomy-single-seed.md` | 2026-08-24 |
 | Pair vs seed, which is the harder test | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
