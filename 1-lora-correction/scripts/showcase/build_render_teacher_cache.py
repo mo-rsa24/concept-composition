@@ -5,7 +5,7 @@ The picked render is ``mono.png``: the joint-prompt image, the one the by-eye pa
 both concepts as separate things. ``poe.png`` beside it is the product-of-experts render, which is
 the chimera this project exists to fix, and is never the teacher.
 
-    python scripts/showcase/build_render_teacher_cache.py \
+    python 1-lora-correction/scripts/showcase/build_render_teacher_cache.py \
         --cells artifacts/_shared/cross_pair_pool_configs/cells_v57.json
 
 Writes one ``.pt`` per cell under artifacts/caches/render_teacher_cache/<pair>/seed_<n>.pt and

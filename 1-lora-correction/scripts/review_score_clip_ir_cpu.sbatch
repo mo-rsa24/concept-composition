@@ -1,6 +1,6 @@
 #!/bin/bash
 # Score one batch of paper-review renders with CLIP score and ImageReward on CPU (protocol, "The scorers").
-#   sbatch --export=ALL,BATCH=batch1 scripts/review_score_clip_ir_cpu.sbatch     (reads $S/rows_$BATCH.csv)
+#   sbatch --export=ALL,BATCH=batch1 1-lora-correction/scripts/review_score_clip_ir_cpu.sbatch     (reads $S/rows_$BATCH.csv)
 #SBATCH -p batch
 #SBATCH -c 6
 #SBATCH --mem=28G

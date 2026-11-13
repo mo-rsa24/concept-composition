@@ -45,7 +45,7 @@ rather than inferred.
 Reads the cache and decodes; it does not sample.
 
 Usage:
-    python scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40
+    python 3-understanding-compositionality/scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40
 """
 
 from __future__ import annotations

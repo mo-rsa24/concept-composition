@@ -14,7 +14,7 @@ and plain product-of-experts (k = 0) as the reference. Each run's final samples 
 the product of the clean experts, N(-0.2308, 0.3077), by their mean, their variance and the KL
 divergence from the target.
 
-    python3 scripts/check_langevin_order.py
+    python3 1-lora-correction/scripts/check_langevin_order.py
 """
 
 from __future__ import annotations

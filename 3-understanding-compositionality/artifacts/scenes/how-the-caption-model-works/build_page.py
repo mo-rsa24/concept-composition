@@ -30,7 +30,7 @@ def snippet(key):
     for n in range(a, b + 1):
         cls = ' class="hl"' if n in mark else ""
         rows.append(f'<span{cls}><i>{n}</i>{html.escape(lines[n - 1])}</span>')
-    return {"file": f"artifacts/notes/what-poe-loses-when-it-composes/{f}", "lines": f"{a}-{b}",
+    return {"file": f"3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/{f}", "lines": f"{a}-{b}",
             "html": "\n".join(rows)}
 
 

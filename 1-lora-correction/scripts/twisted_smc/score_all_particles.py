@@ -10,7 +10,7 @@ Mono and PoE references and for the SMC render at every checkpoint, and writes
     per_cell:   the same split by render cell
 
 Usage:
-    <co3 python> scripts/twisted_smc/score_all_particles.py <run_dir> [--device cuda:0]
+    <co3 python> 1-lora-correction/scripts/twisted_smc/score_all_particles.py <run_dir> [--device cuda:0]
 """
 from __future__ import annotations
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 # Scope 06, plan 10: Feynman-Kac steering on the detector reward over the plain PoE sampler.
-# Usage:  bash scripts/fk_steering/run_fk_steering.sh {smoke|full|adapter} [extra args...]
+# Usage:  bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh {smoke|full|adapter} [extra args...]
 #         GPU=<index> pins the device (default 0). Blackwell nodes (110-112) take co3_bw.
 set -euo pipefail
 MODE="${1:-full}"; shift || true

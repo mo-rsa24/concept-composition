@@ -22,7 +22,7 @@ manifest names exactly what a run with matching flags will actually render.
 
 Usage:
     /home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python \
-        scripts/showcase/freeze_tracking_set.py
+        1-lora-correction/scripts/showcase/freeze_tracking_set.py
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-SCOPE = REPO_ROOT / "artifacts/results/does-the-fix-reach-unseen-pairs"
+SCOPE = REPO_ROOT / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs"
 OUT_PATH = SCOPE / "pooled_lora" / "tracking_set.json"
 
 ALREADY_WIRED = [
@@ -98,7 +98,7 @@ def main() -> int:
 
     manifest = {
         "schema": "poe_repair_min/tracking_set/v1",
-        "source": "plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md",
+        "source": "1-lora-correction/plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md",
         "assumes_sample_num_inference_steps": 50,
         "renders": plan,
         "n_renders": len(plan),

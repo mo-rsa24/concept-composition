@@ -8,6 +8,7 @@ import json, os, sys
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import check as check_subject
 
 TILE, PAD, LEFT, TOP, CAP = 200, 14, 360, 132, 30

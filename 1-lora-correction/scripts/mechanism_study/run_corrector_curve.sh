@@ -12,7 +12,7 @@
 #   STAGE=clean   GPU=1 bash ...                                # plan 27: adapter early, frozen tail, corrector on the frozen score
 #
 # Launch from the session node with every path absolute:
-#   ssh mscluster108 'STAGE=grid GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/grid.log 2>&1 &'
+#   ssh mscluster108 'STAGE=grid GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/grid.log 2>&1 &'
 set -euo pipefail
 
 STAGE="${STAGE:-grid}"
@@ -48,13 +48,13 @@ echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] node=$(hostname -s) device=$GPU pid=$$ py
 "$PY" -c "import torch; print('device:', torch.cuda.get_device_name(0))"
 
 case "$STAGE" in
-  search) "$PY" scripts/corrector_residual_curve.py --step-size-search --k 20 --pair a_cat__x__a_dog --seed 9 $EXTRA ;;
-  smoke)  "$PY" scripts/corrector_residual_curve.py --smoke --k 0,1 --pair a_cat__x__a_dog --seed 9 $EXTRA ;;
-  grid)   "$PY" scripts/corrector_residual_curve.py --grid $EXTRA ;;
-  window) "$PY" scripts/corrector_window_sweep.py --window-sweep $EXTRA ;;
-  sheet)  "$PY" scripts/corrector_window_sweep.py --sheet $EXTRA ;;
-  tail)   "$PY" scripts/corrector_window_sweep.py --tail $EXTRA ;;
-  clean)  "$PY" scripts/corrector_window_sweep.py --clean-tail $EXTRA ;;
+  search) "$PY" 1-lora-correction/scripts/corrector_residual_curve.py --step-size-search --k 20 --pair a_cat__x__a_dog --seed 9 $EXTRA ;;
+  smoke)  "$PY" 1-lora-correction/scripts/corrector_residual_curve.py --smoke --k 0,1 --pair a_cat__x__a_dog --seed 9 $EXTRA ;;
+  grid)   "$PY" 1-lora-correction/scripts/corrector_residual_curve.py --grid $EXTRA ;;
+  window) "$PY" 1-lora-correction/scripts/corrector_window_sweep.py --window-sweep $EXTRA ;;
+  sheet)  "$PY" 1-lora-correction/scripts/corrector_window_sweep.py --sheet $EXTRA ;;
+  tail)   "$PY" 1-lora-correction/scripts/corrector_window_sweep.py --tail $EXTRA ;;
+  clean)  "$PY" 1-lora-correction/scripts/corrector_window_sweep.py --clean-tail $EXTRA ;;
   *) echo "unknown STAGE=$STAGE" >&2; exit 5 ;;
 esac
 

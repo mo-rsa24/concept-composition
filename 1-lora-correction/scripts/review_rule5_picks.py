@@ -2,10 +2,10 @@
 
 R4 and R10 take R3's cells (the 53 held-out pairs, seeds 9 to 16), one pair of rows per held-out group; R12 takes
 R1's cells (the 276 benchmark prompts, seeds 9 to 12), one pair of rows per benchmark set. A tie goes to list order
-(scripts/review_held_out_pairs.txt or scripts/review_benchmark_pairs.txt), then the lower seed. Reads only the
+(scripts/review_held_out_pairs.txt or 1-lora-correction/scripts/review_benchmark_pairs.txt), then the lower seed. Reads only the
 scores; nobody looks at a picture to choose.
 
-    python3 scripts/review_rule5_picks.py --scores <scores_long.csv> --repo <repo> > picks.csv
+    python3 1-lora-correction/scripts/review_rule5_picks.py --scores <scores_long.csv> --repo <repo> > picks.csv
 """
 from __future__ import annotations
 

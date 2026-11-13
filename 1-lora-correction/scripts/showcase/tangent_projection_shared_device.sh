@@ -2,7 +2,7 @@
 # Shared-device launch for tangent_projection.py (plan 15, 01-showcase-the-trained-lora),
 # per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup; every path absolute):
-#   ssh <node> 'GPU=<idx> STAGE=<smoke|read|render|score|figures|wandb|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_<stage>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> STAGE=<smoke|read|render|score|figures|wandb|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_<stage>.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -36,7 +36,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True   # two UNets of differe
 "$PY" -c 'import torch, sys; sys.exit(0 if torch.cuda.is_available() else 7)' || { echo "guard: torch.cuda.is_available() is False on device $GPU, refusing" >&2; exit 7; }
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) device=$GPU pid=$$ disk_use=${USE_PCT}% device_mem=${MEM}MiB util=${UTIL}% stage=$STAGE"
-SCRIPT=scripts/showcase/tangent_projection.py
+SCRIPT=1-lora-correction/scripts/showcase/tangent_projection.py
 case "$STAGE" in
   smoke)   "$PY" $SCRIPT --cache-read --smoke; "$PY" $SCRIPT --render --smoke ;;
   read)    "$PY" $SCRIPT --cache-read ;;

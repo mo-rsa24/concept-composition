@@ -4,7 +4,7 @@ uncorrected product-of-experts composition in every cell.
 
 Rows are the pairs, columns are SD 1.4, SD 2.1, SDXL and SD 3.5, and one cell is two images of one
 pair on one model at one seed: the joint prompt "{a} and {b}" on the left, PoE on the right. The
-plan is plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md.
+plan is 1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md.
 
 The PoE rule is the repo's own (poe_repair/methods/_sampling.py, run_cfg_poe):
     eps = eps_u + w (eps_a - eps_u) + w (eps_b - eps_u)
@@ -17,10 +17,10 @@ every SDXL figure in the paper does. The other three draw their noise from a CUD
 with the seed, at their own latent shape, so "seed 42" is a different tensor in each column and one
 tensor within a column.
 
-    python scripts/same_rule_four_models.py --dry-run
-    python scripts/same_rule_four_models.py --check-load
-    python scripts/same_rule_four_models.py --model sd14 --seeds 42 4 123
-    python scripts/same_rule_four_models.py --sheet --seed 42 --out sheet-seed-42.pdf
+    python 1-lora-correction/scripts/same_rule_four_models.py --dry-run
+    python 1-lora-correction/scripts/same_rule_four_models.py --check-load
+    python 1-lora-correction/scripts/same_rule_four_models.py --model sd14 --seeds 42 4 123
+    python 1-lora-correction/scripts/same_rule_four_models.py --sheet --seed 42 --out sheet-seed-42.pdf
 """
 from __future__ import annotations
 
@@ -334,6 +334,7 @@ def main():
     ap.add_argument("--out", type=Path, help="--sheet only: the PDF to write")
     args = ap.parse_args()
 
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check as check_subject
     for a, b in PAIRS:
         check_subject(slug(a, b))

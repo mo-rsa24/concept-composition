@@ -11,7 +11,7 @@ comes from the rows file (class_a, class_b), and an empty class means the row is
 written with geneval_two_object empty and the reason "not a COCO class".
 
 Usage (geneval env, non-Blackwell GPU):
-  python scripts/review_score_geneval.py --in rows.csv --out scores.csv --work <dir>
+  python 1-lora-correction/scripts/review_score_geneval.py --in rows.csv --out scores.csv --work <dir>
 rows.csv has columns image,prompt,class_a,class_b.
 """
 from __future__ import annotations

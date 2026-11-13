@@ -42,7 +42,7 @@ from PIL import Image, ImageDraw
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 from rae_vendor import GeneralDecoder, ViTMAEConfig  # noqa: E402
 
 RESULTS = REPO_ROOT / "artifacts/results/where-does-each-condition-land"
@@ -51,7 +51,7 @@ SIDECAR = RESULTS / "cat-x-dog-in-dino-space.json"
 RAE_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/rae")
 DECODER_PT = RAE_ROOT / "decoders/dinov2/wReg_base/ViTXL_n08/model.pt"
 STATS_PT = RAE_ROOT / "stats/dinov2/wReg_base/imagenet1k/stat.pt"
-DECODER_CFG = REPO_ROOT / "scripts/showcase/rae_vendor/ViTXL_config.json"
+DECODER_CFG = REPO_ROOT / "1-lora-correction/scripts/showcase/rae_vendor/ViTXL_config.json"
 
 SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 CLOUDS = ("solo_a", "solo_b", "joint")

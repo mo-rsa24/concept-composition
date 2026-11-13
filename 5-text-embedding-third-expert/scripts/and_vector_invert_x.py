@@ -21,8 +21,8 @@ Seed 8 is rendered but excluded from the predeclared 6/7 success criterion.
 Training seeds default to 1..7; monitoring uses seed 1, so final seeds are not
 an untouched validation set. No checkpoint is selected by evaluation counts.
 
-python scripts/and_vector_invert_x.py
-python scripts/and_vector_invert_x.py --evaluate --x /datasets/mmolefe/poe_repair_min/outputs/invert_x/x.pt --seeds 1 2 3 4 5 6 7 8
+python 5-text-embedding-third-expert/scripts/and_vector_invert_x.py
+python 5-text-embedding-third-expert/scripts/and_vector_invert_x.py --evaluate --x /datasets/mmolefe/poe_repair_min/outputs/invert_x/x.pt --seeds 1 2 3 4 5 6 7 8
 """
 from __future__ import annotations
 
@@ -120,6 +120,7 @@ def main():
     args = arguments()
     import torch
     from torch.utils.checkpoint import checkpoint
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from concept_pair_sheet import NOISE_PAIR
     from poe_repair.run import make_ctx
     from poe_repair.runtime import encode_prompt_sdxl, decode_latents, tweedie_mean, ddim_prev_from_x0_eps

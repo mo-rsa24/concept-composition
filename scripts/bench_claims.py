@@ -63,9 +63,10 @@ def pairs_all() -> list[tuple[str, str]]:
 
 
 def refused(a: str, b: str) -> bool:
-    """PoE and ours refuse a pair naming a listed subject (scripts/showcase/disallowed_subjects.py). geneval_two
+    """PoE and ours refuse a pair naming a listed subject (scripts/shared/disallowed_subjects.py). geneval_two
     keeps "computer mouse" and "baseball bat" pairs by setting the object phrase aside, which
     concept_pair_sheet.py and figure_candidates.py do not do, so such a pair dies at argument parsing."""
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     try:
         check(a), check(b)

@@ -28,7 +28,7 @@ the run:
     cache_analyses/caption_readback.json
     cache_analyses/plausibility_climb.json
 
-    python scripts/dial_vs_three_instruments.py
+    python 1-lora-correction/scripts/dial_vs_three_instruments.py
 """
 
 from __future__ import annotations

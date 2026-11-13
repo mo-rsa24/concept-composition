@@ -21,7 +21,7 @@ That cap is in the register and belongs in the caption.
 The pre-registered bar was computed over rows (median 1.52, 97% above one) and is
 cited as the bar, not as this figure's statistic.
 
-    python scripts/what_the_adapter_changes.py
+    python 1-lora-correction/scripts/what_the_adapter_changes.py
 """
 
 from __future__ import annotations

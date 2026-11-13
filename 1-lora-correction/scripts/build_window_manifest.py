@@ -8,14 +8,14 @@ curve. This script joins those three, which live in different places, into one
 file.
 
 It never generates and never scores. Images come from the sweep
-(scripts/mechanism_study/run_window_sweep.sh) and verdicts come from the scorer
-(scripts/plot_window_curves.py, which writes window_curves.json). A cell with an
+(1-lora-correction/scripts/mechanism_study/run_window_sweep.sh) and verdicts come from the scorer
+(1-lora-correction/scripts/plot_window_curves.py, which writes window_curves.json). A cell with an
 image but no score shows up as scored=false in the manifest rather than being
 dropped, so a half-scored sweep is visible in the UI instead of looking complete.
 
 Usage:
-    python scripts/build_window_manifest.py
-    python scripts/build_window_manifest.py --root <dir> --out <path>
+    python 1-lora-correction/scripts/build_window_manifest.py
+    python 1-lora-correction/scripts/build_window_manifest.py --root <dir> --out <path>
 """
 
 from __future__ import annotations
@@ -91,7 +91,7 @@ def main() -> int:
     cells, skipped = collect(args.root, min_steps=args.min_steps)
     if not cells:
         print(f"no sweep images under {args.root}\n"
-              f"run scripts/mechanism_study/run_window_sweep.sh first",
+              f"run 1-lora-correction/scripts/mechanism_study/run_window_sweep.sh first",
               file=sys.stderr)
         return 2
 
@@ -119,7 +119,7 @@ def main() -> int:
                 n_scored += 1
     else:
         print(f"[warn] no scores at {args.curves}; the tab will show images "
-              f"with no verdicts. Run scripts/plot_window_curves.py.",
+              f"with no verdicts. Run 1-lora-correction/scripts/plot_window_curves.py.",
               file=sys.stderr)
 
     windows = wg.windows()

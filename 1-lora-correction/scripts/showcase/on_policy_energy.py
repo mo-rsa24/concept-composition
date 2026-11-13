@@ -15,7 +15,7 @@ control_energy_from_cache.py, so the adapter's spend, the target's spend and the
 on one scale. The final latent is decoded so the render can be looked at.
 
 Writes <out>/on_policy_energy.json (per seed, per step, plus per-seed totals) and
-<out>/seed_<n>_corrected.png. Extends scripts/showcase/on_policy_fit_cosine.py, which records
+<out>/seed_<n>_corrected.png. Extends 1-lora-correction/scripts/showcase/on_policy_fit_cosine.py, which records
 the cosine and the norm ratio but not the absolute norms this read needs.
 """
 from __future__ import annotations

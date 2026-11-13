@@ -1,4 +1,4 @@
-"""plans/10-does-roentgen-draw-two-findings: draw RoentGen-v2 images the way its authors do.
+"""3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings: draw RoentGen-v2 images the way its authors do.
 
 Takes real prompts from one parquet shard of the authors' released synthetic dataset (their
 `text` column, verbatim), for each single finding, and generates with the settings read from

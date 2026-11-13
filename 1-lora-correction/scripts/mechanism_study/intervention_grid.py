@@ -12,7 +12,7 @@ Rows are given as ``label=<regime directory template>`` where the template carri
 zero-padded checkpoint step, e.g. ``s10_excite_cat_{ck}``. That keeps the figure agnostic about
 which experiment wrote which directory.
 
-  python3 scripts/mechanism_study/intervention_grid.py --seed 10 \
+  python3 1-lora-correction/scripts/mechanism_study/intervention_grid.py --seed 10 \
       --checkpoints 010000 020000 030000 \
       --row "adapter alone=ckpt{ck}_none" --row "excite the cat=s10_excite_cat_{ck}" \
       --out artifacts/results/<question> --prefix seed10-corrections

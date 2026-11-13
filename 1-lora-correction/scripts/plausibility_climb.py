@@ -32,7 +32,7 @@ the climb along the corrected path, which would need that path sampled. Plan
 
 Cache-only, no GPU.
 
-    python scripts/plausibility_climb.py --pool
+    python 1-lora-correction/scripts/plausibility_climb.py --pool
 """
 
 from __future__ import annotations

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# One cell of ours with a U-Net counter, for protocol rule 6 (scripts/review_count_ours_nfe.py).
+# One cell of ours with a U-Net counter, for protocol rule 6 (1-lora-correction/scripts/review_count_ours_nfe.py).
 #   ssh <node> 'GPU=<i> CODE_COMMIT=<sha> nohup bash <launchers>/review_count_ours_nfe.sh > <log> 2>&1 < /dev/null & disown'
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers

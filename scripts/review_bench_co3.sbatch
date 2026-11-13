@@ -8,7 +8,7 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/%x-%j.out
 #
 # Slot R14, compute job 13: CO3 at its published default on GenEval's two-object prompts, seeds 9 to 12,
-# from the shared starting latent (scripts/review_baseline_cell.py). One bigbatch RTX 3090; SHARD=k/n
+# from the shared starting latent (1-lora-correction/scripts/review_baseline_cell.py). One bigbatch RTX 3090; SHARD=k/n
 # takes every n-th cell from k, so two jobs split the 360 cells.
 #
 #   sbatch --export=ALL,SHARD=0/2 <copy>/scripts/review_bench_co3.sbatch
@@ -37,6 +37,6 @@ K=${SHARD%/*}; N=${SHARD#*/}
 CELLS="$OUT/launchers/bench13/co3_cells_${K}of${N}.txt"
 "$PY" "$HERE/review_bench_sets.py" --co3-cells geneval_two | awk -v k="$K" -v n="$N" '(NR-1) % n == k' > "$CELLS"
 echo "=== $(wc -l < "$CELLS") cells in $CELLS"
-"$PY" scripts/review_baseline_cell.py --method co3 --setting default --cells "$CELLS"; R=$?
+"$PY" 1-lora-correction/scripts/review_baseline_cell.py --method co3 --setting default --cells "$CELLS"; R=$?
 echo "=== done $(date -Is)  exit $R  tiles $(find "$OUT/co3_default/geneval_two" -name co3.png | wc -l) of 360"
 exit $R

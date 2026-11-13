@@ -20,8 +20,8 @@ The objective is CO-OCCURRENCE, not identity: two separate animals in the frame.
 them. The same property is this search's main hazard: TWO DOGS SCORE AS A WIN. Nothing here can tell a
 cat from a dog, so a high-scoring candidate is a candidate for round two, never a result.
 
-    python scripts/and_vector_search.py --shard 0 --of 6 --out <dir>
-    python scripts/and_vector_search.py --collect --out <dir>
+    python 5-text-embedding-third-expert/scripts/and_vector_search.py --shard 0 --of 6 --out <dir>
+    python 5-text-embedding-third-expert/scripts/and_vector_search.py --collect --out <dir>
 """
 from __future__ import annotations
 
@@ -37,6 +37,7 @@ sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, concept_slug  # noqa: E402
 
 # The pairs the search runs over. Cat by dog is the one every earlier result is measured on; the other

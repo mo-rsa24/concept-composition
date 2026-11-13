@@ -18,7 +18,7 @@ Two orthogonal shares are reported, and they are not the same quantity:
                coefficient on the unconditional term, so a strictly larger reachable set and
                therefore a strictly smaller orthogonal share)
 
-`report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md` reports share_3d.
+`1-lora-correction/report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md` reports share_3d.
 
 Writes <out>/composition_plane.json: per seed, per step, the 2-D coordinates of every
 participant with eps_u at the origin, plus both shares. No GPU, cache only.

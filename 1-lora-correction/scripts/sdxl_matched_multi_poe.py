@@ -2,7 +2,7 @@
 """The same product-of-experts composition on SDXL, with the sampler, step count and guidance scale
 free to be set from the command line.
 
-scripts/concept_multi_poe.py and scripts/and_vector_sheet.py both pin SDXL to DDIM at 50 steps and
+1-lora-correction/scripts/concept_multi_poe.py and 5-text-embedding-third-expert/scripts/and_vector_sheet.py both pin SDXL to DDIM at 50 steps and
 guidance 7.5, which is what the project's own results were measured at. This script exists so the
 same arithmetic can be run at another model's settings and nothing else changes:
 
@@ -14,11 +14,11 @@ noise and the same held-out seeds.
 
     # the control: this script's own code path at SDXL's settings, which must reproduce the
     # published 0 of 8
-    python scripts/sdxl_matched_multi_poe.py --out <dir> --sampler ddim --steps 50 --guidance 7.5 \
+    python 1-lora-correction/scripts/sdxl_matched_multi_poe.py --out <dir> --sampler ddim --steps 50 --guidance 7.5 \
         --seeds 9 10 11 12 13 14 15 16
 
     # the matched run
-    python scripts/sdxl_matched_multi_poe.py --out <dir> --sampler dpmpp --steps 20 --guidance 4.5 \
+    python 1-lora-correction/scripts/sdxl_matched_multi_poe.py --out <dir> --sampler dpmpp --steps 20 --guidance 4.5 \
         --seeds 9 10 11 12 13 14 15 16
 
 Tiles land as <out>/<a>__x__<b>/seedNN/<column>.png with a JSON sidecar naming the sampler, the step

@@ -35,11 +35,11 @@ Stages (composable via --stages):
 
 A typical sequence::
 
-    python scripts/build_lora_inspector_mds_semantic.py \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds_semantic.py \\
         --epochs 0,200,800,1600 \\
         --stages collect-static,collect-cells,project,align,render-large,update-manifest
 
-The validation gate (``scripts/cross_seed_lora_pooling/smoke_dino_distance.py``)
+The validation gate (``1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py``)
 must PASS before running this script.
 """
 from __future__ import annotations
@@ -648,7 +648,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest_path = results_root / "inspector_manifest.json"
     if not manifest_path.is_file():
         log.error("no inspector_manifest.json at %s — run "
-                  "scripts/build_lora_manifest.py first", manifest_path)
+                  "1-lora-correction/scripts/build_lora_manifest.py first", manifest_path)
         return 2
     manifest = json.loads(manifest_path.read_text())
     all_epochs = [int(e) for e in manifest["epochs"]]

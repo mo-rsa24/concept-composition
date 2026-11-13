@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Evaluation renders for the ICLR 56173 review response (plans/prze-review-baselines.md): one baseline at its
+# Evaluation renders for the ICLR 56173 review response (1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md): one baseline at its
 # published default on R1 (the 276 benchmark prompts, seeds 9 to 12, 1,104 cells) and R3 (the 53 held-out pairs,
 # seeds 9 to 16, 424 cells), 1,528 cells in all, split into NSHARDS interleaved shards so R1 and R3 fill together.
 #

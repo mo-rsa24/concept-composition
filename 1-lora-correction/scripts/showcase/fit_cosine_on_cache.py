@@ -31,7 +31,7 @@ from poe_repair.methods._sampling import add_time_ids  # noqa: E402
 from poe_repair.runtime import infer_device, infer_dtype, load_ddim_scheduler, load_sdxl_models  # noqa: E402
 from poe_repair.training_cache import DEFAULT_CACHE_ROOT, resolve_cells  # noqa: E402
 
-SCOPE = Path(__file__).resolve().parent.parent.parent.parent / "artifacts/results/does-the-fix-reach-unseen-pairs"
+SCOPE = Path(__file__).resolve().parent.parent.parent.parent / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs"
 
 
 def main() -> None:

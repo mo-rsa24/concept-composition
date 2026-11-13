@@ -19,7 +19,7 @@ change shows up in a diff:
 
 Reads images, does not sample.
 
-    python scripts/score_seed_breadth.py
+    python 1-lora-correction/scripts/score_seed_breadth.py
 """
 
 from __future__ import annotations

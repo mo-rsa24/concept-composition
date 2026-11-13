@@ -5,7 +5,7 @@ selected cell does not exist (some epochs only probed a coarser lambda grid),
 a toast appears and the panels keep the previous frame.
 
 Run on the cluster (binds 127.0.0.1 by default, intended for SSH tunnelling):
-    python scripts/lora_inspector.py [--port 5050]
+    python 1-lora-correction/scripts/lora_inspector.py [--port 5050]
 
 Then on your laptop:
     ssh -L 5050:localhost:5050 mscluster106
@@ -616,8 +616,8 @@ function update() {
     imgMdsLarge.style.display = 'none';
     mdsCaption.classList.add('missing');
     const script = currentMode === 'semantic'
-      ? 'scripts/build_lora_inspector_mds_semantic.py'
-      : 'scripts/build_lora_inspector_mds.py';
+      ? '1-lora-correction/scripts/build_lora_inspector_mds_semantic.py'
+      : '1-lora-correction/scripts/build_lora_inspector_mds.py';
     mdsCaption.textContent =
       `no ${currentMode} panel for epoch=${epoch}, λ=${lam} — re-run ` +
       `${script} with --stages render-large.`;
@@ -2327,7 +2327,7 @@ def main() -> int:
     ap.add_argument(
         "--window-manifest", default=str(DEFAULT_IW_MANIFEST),
         help="correction-timing manifest (produced by "
-             "scripts/build_window_manifest.py). If missing, "
+             "1-lora-correction/scripts/build_window_manifest.py). If missing, "
              "/interaction_window renders the commands that make it.",
     )
     ap.add_argument("--window-root", default=str(DEFAULT_IW_ROOT),
@@ -2335,7 +2335,7 @@ def main() -> int:
                          "timing tabs")
     ap.add_argument(
         "--cross-manifest", default=str(DEFAULT_CROSS_MANIFEST),
-        help="crossed-grid manifest (scripts/build_cross_manifest.py). If "
+        help="crossed-grid manifest (1-lora-correction/scripts/build_cross_manifest.py). If "
              "missing, /interaction_cross renders the commands that make it.",
     )
     ap.add_argument("--residual-root", default=str(DEFAULT_RESIDUAL_ROOT),
@@ -2349,7 +2349,7 @@ def main() -> int:
     manifest_path = Path(args.manifest)
     if not manifest_path.is_file():
         print(f"manifest not found: {manifest_path}")
-        print("run scripts/build_lora_manifest.py first")
+        print("run 1-lora-correction/scripts/build_lora_manifest.py first")
         return 1
     cw_path = Path(args.cw_manifest) if args.cw_manifest else None
     if cw_path is not None and not cw_path.is_file():

@@ -3,7 +3,7 @@
 # Run this from an interactive shell ON the compute node (e.g. mscluster110), NOT the
 # login node. It first proves the GPU actually runs, then does the work.
 #
-#   bash scripts/animals_compose_transfer/run_on_node.sh
+#   bash 1-lora-correction/scripts/animals_compose_transfer/run_on_node.sh
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python  # Blackwell (cu128) clone of co3
@@ -34,4 +34,4 @@ echo "=== C) held-out-eval caches: 5 pairs x 8 seeds ==="
 $PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.build_caches --which heldout_eval
 
 echo "=== DONE. fail-rate table: ==="
-cat artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md
+cat 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md

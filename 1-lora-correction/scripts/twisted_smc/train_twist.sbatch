@@ -9,7 +9,7 @@
 # Scope 06, baseline 09: train the twist head contrastively on the training cache and log
 # Mono | PoE | twisted-SMC strips to W&B every --render-every steps.
 #
-# Usage:   sbatch --nodelist=mscluster110 scripts/twisted_smc/train_twist.sbatch [smoke|full] [extra args...]
+# Usage:   sbatch --nodelist=mscluster110 1-lora-correction/scripts/twisted_smc/train_twist.sbatch [smoke|full] [extra args...]
 # Blackwell nodes (110-112) need co3_bw; RTX 8000 / A6000 nodes (106, 108, 109) need co3.
 set -euo pipefail
 

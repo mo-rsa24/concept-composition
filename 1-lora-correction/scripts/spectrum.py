@@ -18,8 +18,8 @@ the *same* r_t.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/spectrum.py --pair a_cat__x__a_dog        # one pair, no split
-    python scripts/spectrum.py --all --max-pairs 20
+    python 1-lora-correction/scripts/spectrum.py --pair a_cat__x__a_dog        # one pair, no split
+    python 1-lora-correction/scripts/spectrum.py --all --max-pairs 20
 """
 
 from __future__ import annotations

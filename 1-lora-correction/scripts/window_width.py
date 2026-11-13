@@ -29,8 +29,8 @@ outputs/interaction_term/cache_analyses/window_width.json plus a figure of the
 median ‖r_t‖-vs-step curve with both widths drawn on it.
 
 Usage:
-    python scripts/window_width.py
-    python scripts/window_width.py --pairs a_cat__x__a_dog,a_frog__x__a_toad
+    python 1-lora-correction/scripts/window_width.py
+    python 1-lora-correction/scripts/window_width.py --pairs a_cat__x__a_dog,a_frog__x__a_toad
 """
 
 from __future__ import annotations

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Does the Langevin corrector compose in the same window the injected correction does?
 
-Step 27 of ``plans/06-is-the-gap-the-samplers-or-the-models`` (plan 04), plus the
+Step 27 of ``1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models`` (plan 04), plus the
 session read-out every parallel session shares: an eight-seed sheet per condition with the
 joint prompt, plain product-of-experts and the corrector side by side, and the fidelity
 addition, where the corrector runs only on the last fifteen steps on top of the rank-32
@@ -108,7 +108,7 @@ TAIL_JSON = OUT / "tail_fidelity.json"
 CLEAN_JSON = OUT / "clean_tail.json"
 FIG_DIR = REPO / "paper/iclr/figures/when-the-correction-arrives/mcmc"
 STRIP_NAME = "samples-as-a-ten-step-corrector-window-slides"
-RESULTS_DIR = REPO / "artifacts/results/is-the-gap-the-samplers-or-the-models"
+RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
 GREEN_FRAME_RULE = "compose == 1, i.e. the validated instance count (GroundingDINO 'animal', conf >= 0.30, NMS iou < 0.5) >= 2"
 
@@ -158,6 +158,7 @@ def _dev():
 
 
 def laplacian_var(png: Path) -> float:
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from lambda_window_grid import _laplacian_var
     return float(_laplacian_var(png))
 
@@ -550,7 +551,7 @@ def tail_verdict(rows: list[dict], c: float) -> dict:
         "lambda": TAIL_LAMBDA, "seeds": list(SHEET_SEEDS),
         "thresholds": {"FIDELITY_MIN_SHARPNESS_RISE": FIDELITY_MIN_SHARPNESS_RISE,
                        "FIDELITY_MAX_COMPOSE_LOSS_SEEDS": FIDELITY_MAX_COMPOSE_LOSS_SEEDS},
-        "sharpness": "Laplacian variance of the greyscale 1024x1024 render (scripts/showcase/lambda_window_grid.py::_laplacian_var); higher is sharper",
+        "sharpness": "Laplacian variance of the greyscale 1024x1024 render (scripts/shared/lambda_window_grid.py::_laplacian_var); higher is sharper",
         "branch": branch, "reasons": reasons, "sharpness_rise_k0_to_k20": rise,
         "summary": summary, "rows": rows, "host": _host(),
     }

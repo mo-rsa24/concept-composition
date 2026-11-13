@@ -22,7 +22,7 @@ two pictures being near-identical early and different late; they are not
 evidence for the y-value.
 
 Cache-only, no GPU. Reads the two JSONs written by
-scripts/trajectory_divergence.py and scripts/dose_trajectory_divergence.py.
+1-lora-correction/scripts/trajectory_divergence.py and 1-lora-correction/scripts/dose_trajectory_divergence.py.
 
 Usage:
     python scripts/run_separation_over_time.py

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """How much of the correction does a Langevin corrector remove, and how much is left?
 
-Steps 25 and 26 of ``plans/06-is-the-gap-the-samplers-or-the-models``. One file holds the
+Steps 25 and 26 of ``1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models``. One file holds the
 leak checks, the step-size search, the k grid, the three-way verdict and the figure, so
 every threshold sits beside the code that applies it and moving one shows up in a diff.
 

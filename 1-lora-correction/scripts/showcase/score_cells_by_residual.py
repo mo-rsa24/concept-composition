@@ -16,8 +16,8 @@ Two numbers per cell, both means over a step window:
                                      rather than being noise
 
 Run:
-  python3 scripts/showcase/score_cells_by_residual.py --pairs-from <cells.json> --out <json>
-  python3 scripts/showcase/score_cells_by_residual.py --all --limit 400 --out <json>
+  python3 1-lora-correction/scripts/showcase/score_cells_by_residual.py --pairs-from <cells.json> --out <json>
+  python3 1-lora-correction/scripts/showcase/score_cells_by_residual.py --all --limit 400 --out <json>
 """
 import argparse, json, os, sys
 

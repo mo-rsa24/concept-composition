@@ -8,7 +8,7 @@
 #SBATCH --time=04:00:00
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/showcase/logs/energy_penalty_readout_%j.log
 # Plan 22 of scope 01: the readout, queued behind the three arms with
-#   sbatch --dependency=afterany:<j0>:<j1>:<j2> scripts/showcase/energy_penalty_readout.sbatch
+#   sbatch --dependency=afterany:<j0>:<j1>:<j2> 1-lora-correction/scripts/showcase/energy_penalty_readout.sbatch
 # Stage 1 (GPU): the baseline lineage's own 40,050 grid and the on-policy energy reads of the
 # baseline at 30,050 and 40,050. Stage 2: figures, strips, verdict, W&B. Every read that finds an
 # arm missing skips it and says so, so a dead arm does not block the others' readout.
@@ -28,7 +28,7 @@ echo "[$(date -u '+%F %T')] node=$(hostname -s) job=${SLURM_JOB_ID:-none} commit
 for b in 0 0.01 0.05; do
   ls "$SHOWCASE/figure_r32_energy${b}_040050/results.json" "$SHOWCASE/energy_penalty/on_policy/energy${b}_040050/on_policy_energy.json" 2>&1
 done
-$PY scripts/showcase/energy_penalty_readout.py --baseline
+$PY 1-lora-correction/scripts/showcase/energy_penalty_readout.py --baseline
 echo "[$(date -u '+%F %T')] baseline reads done exit=$?"
-$PY scripts/showcase/energy_penalty_readout.py --all
+$PY 1-lora-correction/scripts/showcase/energy_penalty_readout.py --all
 echo "[$(date -u '+%F %T')] DONE readout exit=$?"

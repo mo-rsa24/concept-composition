@@ -1,6 +1,6 @@
 #!/bin/bash
 # Score one batch of paper-review renders with BLIP-VQA on an RTX 3090 (protocol, "The scorers").
-#   sbatch --export=ALL,BATCH=batch1 scripts/review_score_blip.sbatch     (reads $S/rows_$BATCH.csv)
+#   sbatch --export=ALL,BATCH=batch1 1-lora-correction/scripts/review_score_blip.sbatch     (reads $S/rows_$BATCH.csv)
 #SBATCH -p bigbatch
 #SBATCH -N 1
 #SBATCH -t 06:00:00

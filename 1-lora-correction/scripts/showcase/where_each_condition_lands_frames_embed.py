@@ -33,7 +33,7 @@ sys.path.insert(0, str(REPO_ROOT))
 from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
 
 FRAMES_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames")
-SCENE = REPO_ROOT / "artifacts/scenes/where-each-condition-lands"
+SCENE = REPO_ROOT / "1-lora-correction/artifacts/scenes/where-each-condition-lands"
 RESULTS = REPO_ROOT / "artifacts/results/where-does-each-condition-land"
 THUMB = 160
 

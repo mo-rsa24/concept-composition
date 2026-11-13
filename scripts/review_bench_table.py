@@ -1,7 +1,7 @@
 """Slot R14's result file (Table 2) from the per-image benchmark scores.
 
 One row per method and benchmark, with protocol rule 9's twelve axis columns, in the layout
-scripts/refresh_paper_slots.py's SCHEMA["R14"] pivots: group `geneval` carries geneval_two,
+1-lora-correction/scripts/refresh_paper_slots.py's SCHEMA["R14"] pivots: group `geneval` carries geneval_two,
 geneval_colorattr and geneval_position; group `t2icompbench` carries t2i_color, t2i_shape and
 t2i_texture. Each value is the benchmark's own score over the images scored: GenEval's fraction of
 images judged correct per task, T2I-CompBench's mean BLIP-VQA score per category. A set not scored

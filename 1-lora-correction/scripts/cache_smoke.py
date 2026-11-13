@@ -9,9 +9,9 @@ A quietly dropped cell biases every average computed later, so this never skips
 silently — a file that cannot be read is reported, not passed over.
 
 Usage:
-    python scripts/cache_smoke.py --all
-    python scripts/cache_smoke.py --pair a_cat__x__a_dog
-    python scripts/cache_smoke.py --pair a_cat__x__a_dog --seed 9
+    python 1-lora-correction/scripts/cache_smoke.py --all
+    python 1-lora-correction/scripts/cache_smoke.py --pair a_cat__x__a_dog
+    python 1-lora-correction/scripts/cache_smoke.py --pair a_cat__x__a_dog --seed 9
 """
 
 from __future__ import annotations

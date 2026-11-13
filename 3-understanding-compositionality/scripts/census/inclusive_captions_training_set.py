@@ -19,7 +19,7 @@ So the tile's title names the set and the rule, not one string, because one stri
 lie about four of the five photos.
 
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      scripts/census/inclusive_captions_training_set.py --manifest <manifest.json> --out <folder>
+      3-understanding-compositionality/scripts/census/inclusive_captions_training_set.py --manifest <manifest.json> --out <folder>
 """
 from __future__ import annotations
 

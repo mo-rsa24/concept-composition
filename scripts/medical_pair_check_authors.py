@@ -21,6 +21,7 @@ import torchvision
 import torchxrayvision as xrv
 from PIL import Image
 
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 from medical_pair_score import auroc
 
 FINDINGS = {"Cardiomegaly": "Cardiomegaly", "Pneumothorax": "Pneumothorax", "Effusion": "Pleural Effusion"}

@@ -34,7 +34,7 @@ crossover that separates from the control rows counts for anything.
 Reads sampled images; it does not sample.
 
 Usage:
-    python scripts/caption_readback.py
+    python scripts/shared/caption_readback.py
 """
 
 from __future__ import annotations
@@ -79,7 +79,7 @@ KINDS = tuple(TEMPLATES)
 
 # Bars sit on the largest INTERIOR dose, not on lambda=1. At full dose the
 # injection adds all of r_t back onto eps_PoE, which is eps_J exactly, so the
-# lambda=1 picture IS the joint-prompt render (scripts/manifold_slide.py
+# lambda=1 picture IS the joint-prompt render (1-lora-correction/scripts/manifold_slide.py
 # measures the difference at about 2 grey levels of 255). A readback that
 # flips at lambda=1 has therefore only shown that the joint render reads as two
 # animals, which was never in doubt. The interior doses are where the claim

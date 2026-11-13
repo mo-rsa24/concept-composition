@@ -13,7 +13,7 @@ the *_windows.csv score files the same scorers wrote. Four panels:
 
 Writes window_scores.csv (one row per setting, group and measure, with the axis columns) and
 window_scores.pdf and window_scores.png. Usage:
-  python3 scripts/review_window_figure.py --scores <dir holding scores_long.csv and *_windows.csv> --out <results dir>
+  python3 1-lora-correction/scripts/review_window_figure.py --scores <dir holding scores_long.csv and *_windows.csv> --out <results dir>
 """
 from __future__ import annotations
 

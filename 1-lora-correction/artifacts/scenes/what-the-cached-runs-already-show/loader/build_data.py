@@ -37,7 +37,7 @@ REFRESH = ANALYSES / "refresh_20260810"
 EXPERTS = Path(
     "/datasets/mmolefe/poe_repair_min/outputs/interaction_term/experts")
 FORK_CELLS = REPO / "outputs/interaction_term/dose/pairs"
-F6 = REPO / "artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer"
+F6 = REPO / "1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer"
 
 POE_ARM = "teacher_residual_const_lam000"
 MONO_ARM = "teacher_residual_const_lam100"
@@ -393,7 +393,7 @@ def build_gaps() -> list[dict]:
             "command":
                 "for s in a_cat__x__a_dog a_lion__x__a_tiger a_wolf__x__a_husky; do\n"
                 "  for lam in 0 1; do\n"
-                "    $PY scripts/interaction_term_inject.py --pair $s --seed 1 \\\n"
+                "    $PY 1-lora-correction/scripts/interaction_term_inject.py --pair $s --seed 1 \\\n"
                 "        --lambda $lam --save-residuals --overwrite\n"
                 "  done\n"
                 "done",
@@ -420,7 +420,7 @@ def build_gaps() -> list[dict]:
             "what": "Per-step pictures for the other 16 pairs. Three pairs "
                     "(cat×dog, frog×toad, leopard×jaguar) have them at 3 seeds.",
             "why": "decode_expert_frames.py has only been run on those three.",
-            "command": "$PY scripts/decode_expert_frames.py --pairs <slugs> "
+            "command": "$PY 1-lora-correction/scripts/decode_expert_frames.py --pairs <slugs> "
                        "--seeds 1 --stride 5",
             "output": "/datasets/mmolefe/poe_repair_min/outputs/interaction_term/experts/",
             "cost": "0.36s a frame, 5 views x 11 steps a cell, no sampling",

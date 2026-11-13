@@ -2,7 +2,7 @@
 # Shared-device launch for correct_early_then_clean_up.py (plan 14, 01-showcase-the-trained-lora),
 # per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup; every path absolute):
-#   ssh <node> 'GPU=<idx> STAGE=<detach|schedule|score|tail|renoise|sweep|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_<stage>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> STAGE=<detach|schedule|score|tail|renoise|sweep|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_<stage>.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -29,7 +29,7 @@ export CUDA_VISIBLE_DEVICES="$GPU"
 "$PY" -c 'import torch, sys; sys.exit(0 if torch.cuda.is_available() else 7)' || { echo "guard: torch.cuda.is_available() is False on device $GPU, refusing" >&2; exit 7; }
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) device=$GPU pid=$$ disk_use=${USE_PCT}% stage=$STAGE"
-SCRIPT=scripts/showcase/correct_early_then_clean_up.py
+SCRIPT=1-lora-correction/scripts/showcase/correct_early_then_clean_up.py
 case "$STAGE" in
   detach)   "$PY" $SCRIPT --detach-check ;;
   schedule) "$PY" $SCRIPT --render --stage schedule ;;

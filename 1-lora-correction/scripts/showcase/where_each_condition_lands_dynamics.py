@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Static reads of the animated "where does each condition land" page.
 
-Reads artifacts/scenes/where-each-condition-lands/public/data.json (the per-run,
+Reads 1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json (the per-run,
 per-saved-step (x, y) on the cloud axes written by
 where_each_condition_lands_frames_embed.py) and the decoded frames on /datasets.
 
@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageDraw
 
 REPO = Path(__file__).resolve().parents[3]
-DATA = REPO / "artifacts/scenes/where-each-condition-lands/public/data.json"
+DATA = REPO / "1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json"
 OUT = REPO / "artifacts/results/where-does-each-condition-land"
 FRAMES = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames")
 

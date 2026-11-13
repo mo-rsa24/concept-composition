@@ -2,7 +2,7 @@
 # V4 of the correction-loss variations: the guidance weight dropped from both sides, on top of
 # V1's frozen empty branch. Scope 09, plan 04, task 3.3.
 #
-#   GPU=1 nohup bash scripts/showcase/v4_no_dial.sh > logs/v4.log 2>&1 &
+#   GPU=1 nohup bash 1-lora-correction/scripts/showcase/v4_no_dial.sh > logs/v4.log 2>&1 &
 #
 # Needs the trainer fix at one_pair_one_seed/trainer.py's _no_dial branch, which now reads
 # _freeze_null. Before that fix this pair of switches trained with the null free while the

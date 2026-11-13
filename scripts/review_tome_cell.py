@@ -3,7 +3,7 @@
 Runs in the `tome` environment against the official repository cloned at
 /datasets/mmolefe/poe_repair_min/third_party/ToMe (https://github.com/hutaihang/ToMe, commit f256a49a). The
 pipeline is called exactly as its run_demo.py calls it, with two differences at the call site only: `latents=`
-carries the seed's cached x_T (scripts/review_seed_latents.py, protocol rule 2), which the pipeline scales by its
+carries the seed's cached x_T (1-lora-correction/scripts/review_seed_latents.py, protocol rule 2), which the pipeline scales by its
 scheduler's init_noise_sigma itself; and the token groups are built per pair here, because RunConfig1 sets them by
 hand for its one demo prompt. A group is the last token of each concept phrase as the noun and the words before it,
 less the article, as its attributes ("a snowy mountain" binds "snowy" to "mountain"; "a lion" binds nothing).
@@ -98,6 +98,7 @@ def main() -> None:
         cells = [(None, *(x.strip() for x in pr.split("|")), args.joiner, sd) for pr in args.pairs for sd in args.seeds]
     print(f"{len(cells)} cells", flush=True)
     sys.path.insert(0, str(Path(__file__).resolve().parent / "showcase"))
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     for group, a, b, _, _ in cells:  # the pair ledger's frog and mouse decision covers R1 only
         check(a, allow_ask_first=group == "r1")

@@ -9,11 +9,11 @@ found on?
 The comparison is the PATTERN change, not ||on-off||/||off||. The raw norm is
 dominated by a ~25% uniform dimming of the attention weights and gives the
 opposite answer on the same data. See
-artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md.
+1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md.
 
 Writes verdict.json next to the cells. Cache-free, no GPU.
 
-    python scripts/mechanism_study/reprobe_table.py
+    python 1-lora-correction/scripts/mechanism_study/reprobe_table.py
 """
 
 from __future__ import annotations
@@ -79,7 +79,7 @@ def main() -> int:
 
     if not args.root.is_dir():
         print(f"no cells at {args.root}. Run the sweep first:\n"
-              f"  sbatch scripts/mechanism_study/value_probe_sweep.sbatch",
+              f"  sbatch 1-lora-correction/scripts/mechanism_study/value_probe_sweep.sbatch",
               file=sys.stderr)
         return 2
 

@@ -7,9 +7,9 @@ in a panel below, and labelled arrows join the marked passages. Every excerpt is
 text change without re-measuring.
 
 Usage, from the repo root:
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py            # all groups
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py G7         # one group
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py --sheet    # contact sheet
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py            # all groups
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py G7         # one group
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py --sheet    # contact sheet
 
 The figure specs live in figure_specs.py beside this file.
 """

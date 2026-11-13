@@ -18,7 +18,7 @@ rather than averaged away.
 
 Reads the scored grid only; it does not sample.
 
-    python scripts/window_map_all_pairs.py
+    python 1-lora-correction/scripts/window_map_all_pairs.py
 """
 
 from __future__ import annotations

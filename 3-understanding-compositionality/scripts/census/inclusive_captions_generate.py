@@ -15,7 +15,7 @@ draws is outside evidence rather than SDXL's own prior.
 Why fp16 here. The Quadro RTX 8000 is Turing, which has fp16 tensor cores and no bf16 ones, so
 bf16 runs through emulation and is several times slower. SD 3.5 medium is stable in fp16.
 
-    ~/envs-sd35/bin/python scripts/census/inclusive_captions_generate.py \
+    ~/envs-sd35/bin/python 3-understanding-compositionality/scripts/census/inclusive_captions_generate.py \
       --prompt both --n 400 --start-seed 0 --out-dir /datasets/.../generated/both
 
 Every image is named by its prompt key and seed, so the set is reproducible and a rejected image

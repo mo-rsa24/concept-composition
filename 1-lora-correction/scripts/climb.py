@@ -18,8 +18,8 @@ direction is one a low-rank adapter could learn, and a thrashing one is not.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/climb.py --pair a_cat__x__a_dog
-    python scripts/climb.py --all --max-pairs 20
+    python 1-lora-correction/scripts/climb.py --pair a_cat__x__a_dog
+    python 1-lora-correction/scripts/climb.py --all --max-pairs 20
 """
 
 from __future__ import annotations

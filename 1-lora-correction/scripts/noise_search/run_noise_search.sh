@@ -1,7 +1,7 @@
 #!/bin/bash
 # Shared-device launch for the zero-order noise search (scope 06, plan 11), per environment/hpc/execution-protocol.md.
 # Usage, over SSH with nohup and absolute paths only:
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh {smoke|full|adapter-smoke|adapter-full} > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/<name>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh {smoke|full|adapter-smoke|adapter-full} > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/<name>.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"

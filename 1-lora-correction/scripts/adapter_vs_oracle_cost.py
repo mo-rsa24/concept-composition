@@ -26,7 +26,7 @@ rescored per seed and is not what this shows.
 
 Reads two already-scored files, samples nothing.
 
-    python scripts/adapter_vs_oracle_cost.py
+    python 1-lora-correction/scripts/adapter_vs_oracle_cost.py
 """
 
 from __future__ import annotations

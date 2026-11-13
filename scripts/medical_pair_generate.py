@@ -1,5 +1,5 @@
 """Generate chest X-rays from RoentGen-v2 for the pair test in
-plans/10-does-roentgen-draw-two-findings: five prompt types, fixed seeds.
+3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings: five prompt types, fixed seeds.
 
 Prompt form from the RoentGen-v2 paper (arXiv 2508.16783, Methods):
 "<AGE> year old <RACE> <SEX>. <IMPRESSION>." Sampling from the same paper:

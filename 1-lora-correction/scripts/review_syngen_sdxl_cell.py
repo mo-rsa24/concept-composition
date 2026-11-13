@@ -1,13 +1,13 @@
 """SynGen ported to SDXL (poe_repair/baselines/syngen_sdxl.py) over Table 1's 1,104 cells, one tile per cell.
 
-Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2. Same cells, starting
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2. Same cells, starting
 latents and sampler as the joint, PoE, ours and CO3 columns: 1024 by 1024, 50 DDIM steps, guidance 7.5, fp16, the seed's
 latent from the a_cat__x__a_dog cache path (`init_latents_for_cell`, which rendered r1_joint) checked byte for byte against
 the saved paper_review/latents/seedNN.pt. SynGen's step size is its released 20.0 (decision D4); the parse is read from
-data/prompt-sets/attend-and-excite/syngen_indices_sdxl.json (scripts/review_syngen_indices.py).
+data/prompt-sets/attend-and-excite/syngen_indices_sdxl.json (1-lora-correction/scripts/review_syngen_indices.py).
 
-    python scripts/review_syngen_sdxl_cell.py --shard 0/2      # production, every 2nd cell from the first
-    python scripts/review_syngen_sdxl_cell.py --smoke          # the identity check, the loss check, the contact sheet
+    python 1-lora-correction/scripts/review_syngen_sdxl_cell.py --shard 0/2      # production, every 2nd cell from the first
+    python 1-lora-correction/scripts/review_syngen_sdxl_cell.py --smoke          # the identity check, the loss check, the contact sheet
 
 Production writes <OUT>/syngen-sdxl_default/r1/<pair slug>/seedNN/syngen-sdxl.png and .json (shard 0 adds Figure 5's two
 rows outside R1 under r6/ instead of r1/), skipping any cell whose PNG

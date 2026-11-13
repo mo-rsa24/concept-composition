@@ -1,6 +1,6 @@
 #!/bin/bash
 # Route step 4 of the ICLR 56173 review response: the census and the showcase rule's renders,
-# under report/paper-review/protocol.md. Launched straight on a Blackwell node with nohup, because
+# under 1-lora-correction/report/paper-review/protocol.md. Launched straight on a Blackwell node with nohup, because
 # biggpu allows one Slurm job per user and that slot is held.
 #
 #   ROLE=census-a  joint prompt and plain product for census pairs 1 to 30, seeds 9 to 16
@@ -41,7 +41,7 @@ echo "pairs: ${#PAIRS[@]}"
 
 for col in mono poe; do
   echo "--- $col  $(date +%H:%M:%S)"
-  "$PY" scripts/concept_pair_sheet.py --column "$col" --pairs "${PAIRS[@]}" --seeds $SEEDS || echo "COLUMN $col FAILED"
+  "$PY" scripts/shared/concept_pair_sheet.py --column "$col" --pairs "${PAIRS[@]}" --seeds $SEEDS || echo "COLUMN $col FAILED"
 done
 
 if [ "$ROLE" = census-b ]; then
@@ -52,7 +52,7 @@ if [ "$ROLE" = census-b ]; then
            cohort4/v58f-05-self-contrast/checkpoints/lora_step_025000.pt; do
     run=$(echo "$c" | cut -d/ -f2); step=$(basename "$c" .pt | sed 's/lora_step_//')
     echo "--- showcase $run $step  $(date +%H:%M:%S)"
-    "$PY" scripts/figure_candidates.py --column ours --pairs "a cat|a dog" "an elephant|a penguin" --seeds $SEEDS \
+    "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "a cat|a dog" "an elephant|a penguin" --seeds $SEEDS \
       --checkpoint "$CK/$c" --window 50 --tag "${run}_s${step}" || echo "SHOWCASE $run $step FAILED"
   done
 fi

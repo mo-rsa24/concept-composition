@@ -21,7 +21,7 @@ Frames are each run's own estimate of where it is heading (Tweedie from the
 cached x_t and the PoE prediction that steered the path, VAE-decoded), cached
 under outputs/interaction_term/direction_wall/frames/.
 
-    CUDA_VISIBLE_DEVICES=0 python scripts/rt_direction_companions.py
+    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_direction_companions.py
 """
 
 from __future__ import annotations

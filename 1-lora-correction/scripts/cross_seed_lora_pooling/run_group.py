@@ -78,7 +78,7 @@ def _ensure_pool_yaml(group: str, spec: GroupSpec, base: Path) -> Path:
             pair_slug: {slug}
             train_pool:  [1, 2, 3, 4, 5, 6, 7, 8]
             held_out:    [9, 10, 11, 12]
-            generated_by: scripts/cross_seed_lora_pooling/run_group.py
+            generated_by: 1-lora-correction/scripts/cross_seed_lora_pooling/run_group.py
             group: {group}
             notes: |
               Plan-10 cross-seed pool for {group} ({spec.label}).

@@ -12,8 +12,8 @@ window_curves.json, so a picture in this strip and a point on the curve can
 never disagree.
 
 Usage:
-    python scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
-    python scripts/window_strip.py --pairs a_cat__x__a_dog,a_frog__x__a_toad --seed 9
+    python 1-lora-correction/scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
+    python 1-lora-correction/scripts/window_strip.py --pairs a_cat__x__a_dog,a_frog__x__a_toad --seed 9
 """
 
 from __future__ import annotations

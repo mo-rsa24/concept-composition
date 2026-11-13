@@ -1,6 +1,6 @@
 """Compute job 10's inputs on SD 1.5: one saved starting latent per seed, and the token indices two of the methods need.
 
-Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The starting latent" and
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The starting latent" and
 "The token indices".
 
 Latents. Protocol rule 2 gives every method on one model the same starting noise per seed. The four SD 1.5 methods run
@@ -16,8 +16,8 @@ none ("a pink crown and a purple bow" gives nouns [3, 7], colours [2, 6]). Every
 1.5's tokenizer, which is asserted. Written to data/prompt-sets/attend-and-excite/token_indices_sd15.json, keyed by the
 pair slug. SynGen parses its own prompts and needs none of this.
 
-    python scripts/review_sd15_prep.py                      # both
-    python scripts/review_sd15_prep.py --indices-out <path> # write the index file elsewhere
+    python 1-lora-correction/scripts/review_sd15_prep.py                      # both
+    python 1-lora-correction/scripts/review_sd15_prep.py --indices-out <path> # write the index file elsewhere
 """
 
 from __future__ import annotations

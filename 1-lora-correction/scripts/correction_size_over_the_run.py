@@ -20,10 +20,10 @@ paragraph 5.5 of the manuscript refuses to take. Two pairs also cannot support a
 claim that correction size predicts which pairs fail, and on these two it does not
 point that way.
 
-    python scripts/correction_size_over_the_run.py                  # the two-row figure, seed 42 on top
-    python scripts/correction_size_over_the_run.py --top-seed 4     # a different sample on top
-    python scripts/correction_size_over_the_run.py --no-curves      # one sample each, no curves
-    python scripts/correction_size_over_the_run.py --images-only    # all three seeds, images, no curves
+    python 1-lora-correction/scripts/correction_size_over_the_run.py                  # the two-row figure, seed 42 on top
+    python 1-lora-correction/scripts/correction_size_over_the_run.py --top-seed 4     # a different sample on top
+    python 1-lora-correction/scripts/correction_size_over_the_run.py --no-curves      # one sample each, no curves
+    python 1-lora-correction/scripts/correction_size_over_the_run.py --images-only    # all three seeds, images, no curves
 """
 
 from __future__ import annotations

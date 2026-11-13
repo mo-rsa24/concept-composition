@@ -8,7 +8,7 @@ as missing rather than omitted, so a half-filled grid looks half-filled in the
 UI instead of looking complete.
 
 Usage:
-    python scripts/build_cross_manifest.py
+    python 1-lora-correction/scripts/build_cross_manifest.py
 """
 
 from __future__ import annotations

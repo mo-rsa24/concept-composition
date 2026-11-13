@@ -21,9 +21,9 @@ Two grids:
 Resumable: a cell whose image exists is skipped, so Ctrl-C and re-run continues.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid window
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid cross
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid cross --dry-run
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid window
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid cross
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid cross --dry-run
 """
 
 from __future__ import annotations

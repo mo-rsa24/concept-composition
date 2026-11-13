@@ -33,7 +33,7 @@ Three things fixed after actually looking at the data, not before:
              project. The pooled, contrastively-trained CLIP vector showed
              nothing. seq_both is used here, mean-pooled over each phrase's
              own content tokens (end-of-text token onward is padding, masked
-             out, same convention scripts/language_probes.py uses).
+             out, same convention 5-text-embedding-third-expert/scripts/language_probes.py uses).
 
 Two panels: (a) one real, composed image per pair, so a reader can see what
 each dot is. (b) the actual test, cosine on x, that pair's dose-curve AUC on

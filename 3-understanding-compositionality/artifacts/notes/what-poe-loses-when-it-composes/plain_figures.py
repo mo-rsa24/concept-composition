@@ -2,7 +2,7 @@
 
 Every figure has: a title that states the finding, one line saying what the rows and columns are,
 framed samples with one count under each cell, and a "Look at" line naming the outlined cells.
-Reads saved samples and counts from artifacts/results/how-much-co-occurrence-the-product-needs/ and
+Reads saved samples and counts from 3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/ and
 writes PNGs to its plain-figures/ folder. Pass the folder of SDXL pilot renders as the first
 argument to draw the pilot figure."""
 import json, sys, textwrap
@@ -116,8 +116,8 @@ def photos(name, title, how, look, rows, files, coltitles, marks=(), left=0.2):
 # ---------------------------------------------------------------- the problem
 def fig_problem():
     seeds = [2, 3, 6, 7]
-    joint = [REPO / f"artifacts/results/does-the-hybrid-fit-both-captions/joint-tiles/seed{s:02d}.png" for s in seeds]
-    poe = [REPO / f"artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed{s:02d}/poe.png" for s in seeds]
+    joint = [REPO / f"3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed{s:02d}.png" for s in seeds]
+    poe = [REPO / f"3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed{s:02d}/poe.png" for s in seeds]
     photos("01-the-problem-on-sdxl.png",
            "SDXL: one prompt draws a cat and a dog. PoE draws one fused animal.",
            "Each column starts from the same random noise (seed). Top: one prompt. Bottom: PoE of two prompts.",

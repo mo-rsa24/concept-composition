@@ -10,7 +10,7 @@ Both are measured per latent channel and per denoising step. The comparison that
 r_hat's mean against r's mean: the needed correction has whatever mean it has, and the question
 is whether the adapter adds one of its own on top.
 
-    python scripts/push_brightness_bias.py --checkpoint pool43_all50_40k
+    python 1-lora-correction/scripts/push_brightness_bias.py --checkpoint pool43_all50_40k
 """
 from __future__ import annotations
 
@@ -65,6 +65,7 @@ def main() -> None:
     if (total - free) / 1e9 > 1.0:
         raise SystemExit("device already in use, refusing to share")
 
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     ctx = make_ctx()
     unet = ctx.models["unet"]

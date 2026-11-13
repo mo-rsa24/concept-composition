@@ -10,7 +10,7 @@ fail, so the same sheet that shows the data also shows where the automatic read 
 the eye. Every row is captioned with that pair's own joint prompt, because a target is judged
 against the prompt that produced it.
 
-  python3 scripts/showcase/training_pool_grids.py \
+  python3 1-lora-correction/scripts/showcase/training_pool_grids.py \
       --cells artifacts/_shared/cross_pair_pool_configs/cells_v54.json \
       --label "the 54-cell pool" --rows-per-figure 6 --out <dir>
 
@@ -21,6 +21,7 @@ import argparse, glob, json, os, sys
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import check as check_subject
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"

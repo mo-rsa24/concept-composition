@@ -1,9 +1,9 @@
 """Compute job 10: Attend-and-Excite, SynGen, Divide-and-Bind, PoE and the joint prompt on SD 1.5, one tile per cell.
 
-Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1. Every method runs on
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1. Every method runs on
 the SD 1.5 snapshot 451f4fe at 512 by 512, guidance 7.5, 50 DDIM steps (decision D1: the scheduler stored in the snapshot,
 PNDM, is swapped for DDIMScheduler.from_config of its config, here in the runner; no method code is edited), fp32 (D3),
-and every cell starts from the saved latent of its seed (scripts/review_sd15_prep.py), passed through each pipeline's
+and every cell starts from the saved latent of its seed (1-lora-correction/scripts/review_sd15_prep.py), passed through each pipeline's
 own `latents=` argument. SynGen keeps its released include_entities=False (D2).
 
 The top level imports only the standard library and torch, and each method's imports sit in its loader, so this one
@@ -13,9 +13,9 @@ file runs under all three environments:
     dnb          /datasets/mmolefe/envs/sd15-aae         boschresearch/Divide-and-Bind@644dfda, loss tv_bind
     syngen       /datasets/mmolefe/envs/syngen           RoyiRa/Linguistic-Binding-in-Diffusion-Models@50b8eab
 
-    python scripts/review_sd15_cell.py --method aae --shard 0/2      # production, every 2nd cell from the first
-    python scripts/review_sd15_cell.py --method syngen --smoke        # the smoke cells plus the PNDM tile
-    python scripts/review_sd15_cell.py --check                        # the smoke checks (co3), after every method
+    python 1-lora-correction/scripts/review_sd15_cell.py --method aae --shard 0/2      # production, every 2nd cell from the first
+    python 1-lora-correction/scripts/review_sd15_cell.py --method syngen --smoke        # the smoke cells plus the PNDM tile
+    python 1-lora-correction/scripts/review_sd15_cell.py --check                        # the smoke checks (co3), after every method
 
 Writes <OUT>/sd15/<method>_default/r1/<pair slug>/seedNN/<method>.png and .json (protocol rule 9's fields). A tile whose
 PNG and JSON both exist is skipped, so a stopped job resumes. The smoke run writes its extra variants beside the cat and

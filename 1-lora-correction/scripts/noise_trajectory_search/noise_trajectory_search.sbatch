@@ -10,7 +10,7 @@
 # faulted device, torch.cuda) run inside the job. mscluster44, 45, 50, 51 and 65 read idle with a
 # faulted GPU (poe-launch-002), so name a node that passed before: 52, 53, 54 or 60.
 #
-# Usage:  sbatch --nodelist=<idle bigbatch node> scripts/noise_trajectory_search/noise_trajectory_search.sbatch {smoke|full} [extra args...]
+# Usage:  sbatch --nodelist=<idle bigbatch node> 1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch {smoke|full} [extra args...]
 set -euo pipefail
 MODE="${1:-full}"; shift || true
-exec env GPU=0 bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_trajectory_search/run_noise_trajectory_search.sh "$MODE" "$@"
+exec env GPU=0 bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh "$MODE" "$@"

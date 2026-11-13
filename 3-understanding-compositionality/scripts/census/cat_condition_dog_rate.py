@@ -2,7 +2,7 @@
 """The floor for the inclusive-captions pilot: how often base SDXL's "a photo of a cat"
 already draws a dog.
 
-Claim 1 of the inclusive-captions idea (artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md)
+Claim 1 of the inclusive-captions idea (4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md)
 says that captioning both-animal photos under each single name widens the cat condition to
 cover dog-present images. The pilot measures that widening as a rise in the fraction of
 "a photo of a cat" renders containing a dog. A rise is only attributable to the captioning

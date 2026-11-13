@@ -70,7 +70,14 @@ def fix(text, depth):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--apply", action="store_true"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--first-run-after-a-move", action="store_true",
+                    help="required with --apply: this rebuilds files from pre-regroup-move and undoes later edits")
+    args = ap.parse_args()
+    if args.apply and not args.first_run_after_a_move:
+        raise SystemExit("refusing: --apply rebuilds every moved file from the tag pre-regroup-move, which undoes "
+                         "every later edit to them (link repairs, shared-helper imports). Pass "
+                         "--first-run-after-a-move only straight after a move, then rerun repair_links.py.")
     back = load_moves(); total = 0; files = 0
     for new in back:
         base = os.path.join(ROOT, new)

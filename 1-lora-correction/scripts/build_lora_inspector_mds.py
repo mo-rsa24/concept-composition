@@ -28,12 +28,12 @@ defaults match that setup.
 Usage::
 
     # Smoke set (4 epochs × full λ grid, ~5 minutes on one A100):
-    python scripts/build_lora_inspector_mds.py \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds.py \\
         --epochs 0,200,800,1600 \\
         --stages collect-static,collect-cells,project,render,update-manifest
 
     # Production sweep (all 48 epochs × 5 λ in the manifest):
-    python scripts/build_lora_inspector_mds.py --epochs all \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds.py --epochs all \\
         --stages collect-static,collect-cells,project,render,update-manifest
 """
 from __future__ import annotations
@@ -1366,7 +1366,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest_path = results_root / "inspector_manifest.json"
     if not manifest_path.is_file():
         log.error("no inspector_manifest.json at %s — run "
-                  "scripts/build_lora_manifest.py first", manifest_path)
+                  "1-lora-correction/scripts/build_lora_manifest.py first", manifest_path)
         return 2
     manifest = json.loads(manifest_path.read_text())
     all_epochs = [int(e) for e in manifest["epochs"]]

@@ -40,7 +40,7 @@ def main() -> int:
                      config={"pair": C.PAIR, "seeds": list(C.SEEDS), "guidance": C.GUIDANCE,
                              "adapter": "rank 32, alpha 32, step 30050, lambda read at 1.0",
                              "bar": C.bar_block(),
-                             "plan": "plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md"})
+                             "plan": "1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md"})
     run.log({f"figures/{f.removesuffix('.png')}": wandb.Image(str(C.RESULTS / f)) for f in FIGURES})
     art = wandb.Artifact("what-the-correction-is-made-of-sidecars", type="results",
                          description="sidecars for the four rungs; every number in the finding is read from these")

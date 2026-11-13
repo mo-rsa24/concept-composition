@@ -6,7 +6,7 @@
 # added to the joint-prompt RENDER a person judged by eye to show both concepts. Same teacher as
 # V0, used only where it is visibly right.
 #
-#   GPU=0 bash scripts/showcase/v6_render_teacher.sh
+#   GPU=0 bash 1-lora-correction/scripts/showcase/v6_render_teacher.sh
 #
 # Runs on mscluster112, an RTX PRO 6000 Blackwell, so PY is co3_bw rather than co3: co3's CUDA
 # ops produce no output at all on these cards rather than an error.

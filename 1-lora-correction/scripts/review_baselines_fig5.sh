@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # CO3 and SuperDiff at their published defaults on Figure 5's four pairs at the shared seed 10 (layout row R2), for
-# the ICLR 56173 review response (plans/prze-review-baselines.md, task 3). 8 tiles.
+# the ICLR 56173 review response (1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md, task 3). 8 tiles.
 #
 #   ssh <node> 'GPU=0 nohup bash <launchers>/review_baselines_fig5.sh > <OUT>/logs/fig5_baselines.log 2>&1 < /dev/null & disown'
 #

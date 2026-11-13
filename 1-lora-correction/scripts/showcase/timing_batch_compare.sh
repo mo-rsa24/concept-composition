@@ -8,7 +8,7 @@ set -euo pipefail
 DEVICE="${1:?usage: timing_batch_compare.sh <device> <rank> <alpha>}"
 RANK="${2:?rank required}"
 ALPHA="${3:?alpha required}"
-DIR=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase
+DIR=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase
 
 echo "[$(date -u +%H:%M:%S)] === batch=1 baseline, rank=$RANK ==="
 bash "$DIR/timing_smoke.sh" "$DEVICE" "$RANK" "$ALPHA" 20 1

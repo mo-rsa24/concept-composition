@@ -19,7 +19,7 @@ kept and checked rather than redrawn: seed 9's existing render against ours is 0
 the cached noise reproduces them, and a seed whose existing render disagrees by more than
 MAX_REPRODUCTION_DIFF is reported rather than silently overwritten.
 
-    python scripts/render_joint_references.py --seeds 9 32
+    python 3-understanding-compositionality/scripts/render_joint_references.py --seeds 9 32
 """
 from __future__ import annotations
 

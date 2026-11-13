@@ -3,11 +3,11 @@
 
 The repo's two-concept loop (poe_repair/methods/_sampling.py, run_cfg_poe) with the sum taken over N
 conditions: eps = eps_empty + sum_i w (eps_i - eps_empty). Each row starts from the same noise as
-scripts/concept_pair_sheet.py's tiles at that seed (init_latents_for_cell on `a_cat__x__a_dog`, which
+scripts/shared/concept_pair_sheet.py's tiles at that seed (init_latents_for_cell on `a_cat__x__a_dog`, which
 falls back to noise drawn from the seed number when that cache is absent), so the tile sits in the
 same row as theirs.
 
-    python scripts/concept_multi_poe.py --conds dog cat single --seeds 1 2 3 4 5 6 7 8
+    python 1-lora-correction/scripts/concept_multi_poe.py --conds dog cat single --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <OUT>/<cond1>__x__<cond2>__x__.../seedNN/poe.png with a JSON sidecar; an existing tile
 is skipped.
@@ -25,6 +25,7 @@ REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 

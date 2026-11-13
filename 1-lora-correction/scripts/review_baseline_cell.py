@@ -2,7 +2,7 @@
 
 CO3 runs from the vendored code under composition/debottam_co3, unedited. Its own entry point draws its starting
 noise inside Co3.run_sampling, so this script calls the same steps sample_co3.py calls and then hands
-Co3.sample_loop the cached x_T of the seed (scripts/review_seed_latents.py), which keeps CO3's column on the same
+Co3.sample_loop the cached x_T of the seed (1-lora-correction/scripts/review_seed_latents.py), which keeps CO3's column on the same
 noise as the joint prompt, PoE and the adapter (protocol rule 2). Its later resampling noise still comes from the
 seed number through seed_everything, as in its own code.
 
@@ -12,8 +12,8 @@ sampler, so its column is mixed under protocol rule 7 whatever x_T it starts fro
 Every U-Net forward call is counted (protocol rule 6): `unet_calls` is the number of calls and `nfe` the number of
 latent rows evaluated, which is the calls times the batch.
 
-    python scripts/review_baseline_cell.py --method co3 --setting default --pairs "a lion|a meerkat" --seeds 9
-    python scripts/review_baseline_cell.py --method superdiff --setting default --pairs "a lion|a meerkat" --seeds 9
+    python 1-lora-correction/scripts/review_baseline_cell.py --method co3 --setting default --pairs "a lion|a meerkat" --seeds 9
+    python 1-lora-correction/scripts/review_baseline_cell.py --method superdiff --setting default --pairs "a lion|a meerkat" --seeds 9
 
 Writes <OUT>/<method>_<setting>/<group>/<pair slug>/seedNN/<method>.png and .json. With --cells, one process renders a
 mixed list of R1 and R3 cells; R1's "with" prompts keep their own joint text, which CO3 reads as its full prompt. A tile that exists is skipped.

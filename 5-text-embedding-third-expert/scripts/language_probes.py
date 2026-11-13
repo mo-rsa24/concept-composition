@@ -42,7 +42,7 @@ since padding positions would otherwise dominate the norm.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/language_probes.py --probe l1 --probe l3
+    python 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3
 """
 
 from __future__ import annotations

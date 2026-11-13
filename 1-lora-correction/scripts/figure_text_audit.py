@@ -8,7 +8,7 @@ width over the file's page width). A raster image is measured by OCR (tesseract 
 pixels, scaled by printed width over image width); OCR boxes span ascender to descender, so the
 font size is estimated as box height / 0.85 and marked an estimate.
 
-    python3 scripts/figure_text_audit.py [paper/iclr-56173/iclr2027_conference.tex]
+    python3 1-lora-correction/scripts/figure_text_audit.py [paper/iclr-56173/iclr2027_conference.tex]
 
 Prints one row per figure: file, printed width, words measured, smallest and median text in pt,
 and PASS when the smallest is at least 7 pt.

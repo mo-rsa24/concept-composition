@@ -13,8 +13,8 @@ null twice, the two-concept rule of Appendix B extended to three:
 The joint and product tiles are rendered before the adapter is attached, because an attached
 adapter stays active and would leak into them.
 
-    python scripts/review_three_concepts.py --render
-    python scripts/review_three_concepts.py --sheet
+    python 1-lora-correction/scripts/review_three_concepts.py --render
+    python 1-lora-correction/scripts/review_three_concepts.py --sheet
 
 Tiles: <OUT>/three_concepts/<kind>/<column>.png with a JSON sidecar; a tile that exists is skipped.
 Sheet: <OUT>/three_concepts/three_concepts.png with three_concepts.json beside it.
@@ -59,6 +59,7 @@ def render() -> None:
     from poe_repair.run import make_ctx
     from poe_repair.runtime import (ddim_prev_from_x0_eps, decode_latents, encode_prompt_sdxl,
                                     guided_eps, tweedie_mean)
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
 
     ctx = make_ctx()

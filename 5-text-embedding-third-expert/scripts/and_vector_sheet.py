@@ -13,14 +13,14 @@
                                               scaffolding SDXL reads is a real prompt's. Words are matched
                                               on the token itself, per encoder, by and_vector_norms.py
 
-Every column is the repo's plain guided sum over N conditions (scripts/concept_multi_poe.py,
+Every column is the repo's plain guided sum over N conditions (1-lora-correction/scripts/concept_multi_poe.py,
 eps = eps_empty + w * sum_i (eps_i - eps_empty)); one condition is ordinary classifier-free guidance.
 So a, b, the joint prompt, PoE, x alone and the three-expert products all come from one loop, one
 sampler and, per seed, the same starting noise (init_latents_for_cell on `a_cat__x__a_dog`). The
 arithmetic runs in fp32 and is cast to the model dtype after.
 
-    python scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
-    python scripts/and_vector_sheet.py --sheet <tiles_dir> <out.png> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
+    python 5-text-embedding-third-expert/scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
+    python 5-text-embedding-third-expert/scripts/and_vector_sheet.py --sheet <tiles_dir> <out.png> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <OUT>/and_vector/<a>__x__<b>/seedNN/<column>.png with a JSON sidecar; an existing tile
 is skipped.
@@ -42,6 +42,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from and_vector_norms import and_only_x, positional_x  # noqa: E402
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 # Column key, header lines, and the conditions it sums: "a", "b", "joint" name prompts, "x_raw",

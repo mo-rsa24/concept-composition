@@ -1,6 +1,6 @@
 #!/bin/bash
 # Compute job 10 on SD 1.5 (Table 4, Figure 9): the shared-device launcher for one card of a biggpu node.
-# Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1.
+# Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1.
 #
 #   STAGE=prep   latents for seeds 9-12 and the token-index file (co3, CPU work)
 #   STAGE=smoke  the three smoke cells per method, the PNDM and loss-off variants, then the checks and contact sheet
@@ -51,14 +51,14 @@ need() { for m in "$@"; do P=$(py_for "$m"); [ -x "$P" ] || { echo "ABORT: no py
 
 run_method() {  # $1 method list joined by +, rest passed through
   local ms="$1"; shift; local m0="${ms%%+*}"
-  "$(py_for "$m0")" scripts/review_sd15_cell.py --method ${ms//+/ } "$@"
+  "$(py_for "$m0")" 1-lora-correction/scripts/review_sd15_cell.py --method ${ms//+/ } "$@"
 }
 
 RC=0
 case "$STAGE" in
   prep)
     need joint
-    "$CO3" scripts/review_sd15_prep.py || RC=1 ;;
+    "$CO3" 1-lora-correction/scripts/review_sd15_prep.py || RC=1 ;;
   smoke)
     need joint aae syngen
     for ms in joint+poe aae dnb syngen; do
@@ -66,9 +66,9 @@ case "$STAGE" in
       run_method "$ms" --smoke || { echo "SMOKE $ms FAILED"; RC=1; }
     done
     echo "--- SynGen's own parse lines:"; grep -c "Final modifier indices collected" "/proc/$$/fd/1" 2>/dev/null || true
-    "$CO3" scripts/review_sd15_cell.py --check || RC=1 ;;
+    "$CO3" 1-lora-correction/scripts/review_sd15_cell.py --check || RC=1 ;;
   check)
-    "$CO3" scripts/review_sd15_cell.py --check || RC=1 ;;
+    "$CO3" 1-lora-correction/scripts/review_sd15_cell.py --check || RC=1 ;;
   run)
     : "${METHOD:?set METHOD}" "${SHARD:=0/1}"
     need ${METHOD//+/ }

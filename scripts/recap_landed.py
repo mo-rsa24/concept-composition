@@ -330,8 +330,8 @@ def build():
   <div class="sec-head"><span class="rung">Tooling</span><h2>See it yourself — run the web apps</h2></div>
   <p class="tool-note">The <b>LoRA Inspector</b> is a Flask app with four tabs — <b>CFG-mask ablation</b> (no-LoRA floor), <b>LoRA residual</b> (the epoch × λ morph and MDS trajectory shown above), <b>MDS large</b>, and <b>LoRA + CFG-mask</b>. Pair dropdown, top right.</p>
   <pre class="run">PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-$PY scripts/build_lora_manifest.py        <span class="cmt"># (re)build the manifest the inspector reads</span>
-bash scripts/run_lora_inspector.sh        <span class="cmt"># serves 127.0.0.1:5050, prints the tunnel line</span>
+$PY 1-lora-correction/scripts/build_lora_manifest.py        <span class="cmt"># (re)build the manifest the inspector reads</span>
+bash 1-lora-correction/scripts/run_lora_inspector.sh        <span class="cmt"># serves 127.0.0.1:5050, prints the tunnel line</span>
 <span class="cmt"># from your laptop:</span> ssh -L 5050:localhost:5050 &lt;cluster-node&gt;
 <span class="cmt"># then open:</span>        http://localhost:5050</pre>
   <p class="tool-note">Live checkpoint viewer (group-A student runs — side-by-side PoE | Mono | student):</p>
@@ -369,7 +369,7 @@ bash scripts/run_lora_inspector.sh        <span class="cmt"># serves 127.0.0.1:5
         "# Recap — LoRA-Fixes-PoE landed results\n\n"
         "Build: `python scripts/recap_landed.py`\n\n"
         "Scope: the two landed sub-results (Overfit beachhead G04, G6 survive-noise pool G07). "
-        "Rungs are incomplete by design — see report/decision-timeline.md.\n\n"
+        "Rungs are incomplete by design — see 1-lora-correction/report/decision-timeline.md.\n\n"
         f"G6 enactment: {'generated' if g6_ready else 'pending Slurm job recap_g6 (results/recap_landed/gen/)'}.\n\n"
         "Artifact URL: https://claude.ai/code/artifact/bddaaec6-bb17-4b67-bdc4-e0106d44cdb1\n")
     print(f"built recap/index.html  (g6_ready={g6_ready})")

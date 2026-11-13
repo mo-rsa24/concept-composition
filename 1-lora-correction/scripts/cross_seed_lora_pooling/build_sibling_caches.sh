@@ -61,7 +61,7 @@ for g in $LORA_GROUPS; do
     echo "==> $g: $A × $B  →  $J"
     for s in $SEEDS; do
         cmd=(
-            "$PY" scripts/build_eval_cache.py
+            "$PY" 1-lora-correction/scripts/build_eval_cache.py
             --prompt-a "$A" --prompt-b "$B" --joint-prompt "$J"
             --seed "$s"
         )

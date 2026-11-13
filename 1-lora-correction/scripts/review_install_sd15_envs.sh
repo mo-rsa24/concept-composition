@@ -1,6 +1,6 @@
 #!/bin/bash
 # The two environments for compute job 10 (SD 1.5 baselines for Table 4) and the SynGen parse of the SDXL port.
-# Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The two new environments".
+# Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The two new environments".
 #
 #   sd15-aae  Attend-and-Excite (composition/aae, = yuval-alaluf/Attend-and-Excite@163efdf) and Divide-and-Bind
 #             (boschresearch/Divide-and-Bind@644dfda), whose requirements.txt both pin torch 1.12 / diffusers 0.12.1 /

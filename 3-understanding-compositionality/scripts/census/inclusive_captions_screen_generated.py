@@ -17,7 +17,7 @@ and cannot tell a cat from a dog (64 of 64 false dog calls on single-cat renders
 An uncertain call from the classifier is a rejection, not a guess. Writes screened.json beside
 the images: one row per image with its counts, calls and verdict, so a keep can be checked.
 
-    ~/envs-sd35/bin/python scripts/census/inclusive_captions_screen_generated.py \
+    ~/envs-sd35/bin/python 3-understanding-compositionality/scripts/census/inclusive_captions_screen_generated.py \
       --kind both --dir /datasets/.../inclusive_captions_generated/both
 """
 from __future__ import annotations

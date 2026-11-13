@@ -21,8 +21,8 @@ branches where this one batches four and the same UNet returns different
 numbers per batch shape. See tests/test_interaction_term_canaries.py.
 
 Usage:
-    python scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 --window off --check-identity
-    python scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 --window 10,25
+    python 1-lora-correction/scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 --window off --check-identity
+    python 1-lora-correction/scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 --window 10,25
 """
 
 from __future__ import annotations

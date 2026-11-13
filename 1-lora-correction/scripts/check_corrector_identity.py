@@ -8,7 +8,7 @@ Runs one cell four times and compares final latents with torch.equal:
 and prints one line per pair, ending in PASS or MISS. The laptop-side twin with a stand-in UNet
 is tests/test_corrector_drivers_identity.py.
 
-    python scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10
+    python 1-lora-correction/scripts/check_corrector_identity.py --pair a_cat__x__a_dog --seed 10
 """
 
 from __future__ import annotations

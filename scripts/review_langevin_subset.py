@@ -1,8 +1,8 @@
-"""PoE + Langevin on protocol rule 6's labelled subset, for R1 and R3 (report/paper-review/protocol.md).
+"""PoE + Langevin on protocol rule 6's labelled subset, for R1 and R3 (1-lora-correction/report/paper-review/protocol.md).
 
 The subset is the benchmark's 66 animals prompts at seeds 9 to 12 (264 cells, group "animals") and the
 held-out hard group's three pairs at seeds 9 to 16 (24 cells, group "hard"): 288 cells. Each renders
-PoE + Langevin at c = 3 and k = 20 over all 50 levels, the call scripts/review_r6_renders.py makes for
+PoE + Langevin at c = 3 and k = 20 over all 50 levels, the call 1-lora-correction/scripts/review_r6_renders.py makes for
 Figure 5, from the starting latent every other method used for that seed (protocol rule 2).
 
 Cells are split by index into --shards parts and this process renders part --shard, so several cards
@@ -71,6 +71,7 @@ def main() -> int:
     args = ap.parse_args()
 
     import torch
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     from poe_repair.composers._helpers import encode_pair, init_latents_for_cell
     from poe_repair.experiments._eval_common import cell_for

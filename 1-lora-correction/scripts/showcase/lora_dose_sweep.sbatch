@@ -37,19 +37,19 @@ echo "[$(date -u +%H:%M:%S)] node=$(hostname) disk_use=${USE_PCT}% stage=$STAGE"
 
 case "$STAGE" in
   capture)
-    $PY scripts/showcase/lora_dose_sweep.py --capture-deltas
+    $PY 1-lora-correction/scripts/showcase/lora_dose_sweep.py --capture-deltas
     ;;
   manifest)
-    $PY scripts/showcase/lora_dose_sweep.py --print-manifest
+    $PY 1-lora-correction/scripts/showcase/lora_dose_sweep.py --print-manifest
     ;;
   sweep)
-    $PY scripts/showcase/lora_dose_sweep.py --run-sweep
+    $PY 1-lora-correction/scripts/showcase/lora_dose_sweep.py --run-sweep
     ;;
   score)
-    $PY scripts/showcase/lora_dose_sweep.py --score
+    $PY 1-lora-correction/scripts/showcase/lora_dose_sweep.py --score
     ;;
   softness)
-    $PY scripts/showcase/lora_dose_sweep.py --softness
+    $PY 1-lora-correction/scripts/showcase/lora_dose_sweep.py --softness
     ;;
   *)
     echo "unknown stage: $STAGE" >&2
