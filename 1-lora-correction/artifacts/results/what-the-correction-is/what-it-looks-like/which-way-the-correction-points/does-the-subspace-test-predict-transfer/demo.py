@@ -157,7 +157,8 @@ def main() -> int:
         return 2
     cr = json.loads(COMPOSE_RATE.read_text())["per_step_heldout_pair"]
     steps = sorted({s for v in cr.values() for s in v}, key=int)
-    last = steps[-1]
+    last = "60000"  # the step every transfer figure cites; later steps are scored too
+    assert last in steps, f"step {last} not scored"
     print(f"  vanilla PoE composes 0% on every one of these pairs "
           f"(fail_rate.md, 8 seeds).")
     print(f"  with the adapter, at eval step {last}:")
