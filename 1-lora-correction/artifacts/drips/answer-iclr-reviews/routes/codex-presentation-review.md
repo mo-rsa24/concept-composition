@@ -1,6 +1,6 @@
 The largest review costs are the visibly unfinished captions and references, R2’s unreadable labels, R8’s unexplained visual encoding, and tables that do not yet implement the promised comparison structure. The centered tables themselves are reasonably balanced. Their rule style is a smaller problem.
 
-I read the [layout sheet](/home/molef/PhD/poe_repair_min/1-lora-correction/report/paper-review/layout-sheet.md), both generators, and the slot definitions. No files were changed. For empty slots, I distinguish visible faults from problems the generator would introduce when filled.
+I read the [layout sheet](../../../../report/paper-review/layout-sheet.md), both generators, and the slot definitions. No files were changed. For empty slots, I distinguish visible faults from problems the generator would introduce when filled.
 
 One important correction: the layout sheet calls `\footnotesize` 8 pt, but this paper’s [style file](/home/molef/PhD/poe_repair_min/paper/iclr-56173/iclr2027_conference.sty:175) defines it as **9 pt with 10 pt leading**. The unscaled R1 and R5 tables therefore use 9 pt Times, as do the placeholder labels. Preserve the conference definition and correct the layout sheet’s description.
 

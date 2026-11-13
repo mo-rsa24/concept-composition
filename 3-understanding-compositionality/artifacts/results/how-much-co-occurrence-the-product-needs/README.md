@@ -351,6 +351,6 @@ shared along each curve and the zero-weight point reproduces the singles-only pr
 
 ## Cross-references
 
-- The mention of **the toy card**, for the pair weights at which the exact product and its two samplers compose, in [the route for classifier-guided PoE](/home/molef/PhD/poe-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
-- The mention of **the toy card**, for the summed-score sampler drawing something other than the true noised product, in [the route for classifier-guided PoE](/home/molef/PhD/poe-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#the-ladder) (relevance match).
+- The mention of **the toy card**, for the pair weights at which the exact product and its two samplers compose, in [the route for classifier-guided PoE](../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
+- The mention of **the toy card**, for the summed-score sampler drawing something other than the true noised product, in [the route for classifier-guided PoE](../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#the-ladder) (relevance match).
 - The mention of **the toy card**, placed with the toy in the understanding-compositionality project, in [the project table for regrouping the core repo](../../../../plans/split-into-idea-repos.md).
