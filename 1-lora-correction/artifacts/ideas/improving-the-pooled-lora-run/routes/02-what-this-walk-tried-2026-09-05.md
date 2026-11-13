@@ -80,7 +80,7 @@ output under `/datasets/mmolefe/poe_repair_min/outputs/showcase/on_policy_fit_r8
 
 **A check that came free.** The rollout's renders are pixel-identical to the showcase sampler's
 renders for the same seeds and checkpoint, so the fit was measured on the real inference path.
-Figure 3 of [the explainer](../../../results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md).
+Figure 3 of [the explainer](../../../results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md).
 
 ## Step 3: the paper scout
 

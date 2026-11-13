@@ -129,7 +129,7 @@ marked `reference` in the fail-rate table and is the tracking set's out-pair. It
 test.
 
 The evidence, including all 276 downloaded images sorted by what the filter accepted, is filed under
-[can real photographs train the composition](../../results/can-real-photographs-train-the-composition/README.md).
+[can real photographs train the composition](../../results/designing-the-correction-loss/can-real-photographs-train-the-composition/README.md).
 
 **What replaces it.** V6, whose corpus is model renders that passed a composition filter. That set
 already exists: [cells_v56.json](../../../../artifacts/_shared/cross_pair_pool_configs/cells_v56.json) at 72 cells
