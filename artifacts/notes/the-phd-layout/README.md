@@ -19,4 +19,4 @@ folder names (`poe_repair_min`, and the reproductions' old top-level names) to w
 
 Drawn by Codex from the prompt in [the prompt file](diagram-prompts.md) (Empty direction, one
 image), checked against that prompt's faithfulness note, and embedded in the repository README
-under "Where this repo sits in the PhD". Redraw it when the organogram's folders change.
+under "Where this repo sits in the PhD" and at the top of the PhD organogram. Redraw it when the organogram's folders change.
