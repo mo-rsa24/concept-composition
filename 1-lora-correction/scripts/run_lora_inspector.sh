@@ -4,6 +4,7 @@
 set -euo pipefail
 
 cd "$(dirname "$0")/../.."
+export PYTHONPATH="$PWD${PYTHONPATH:+:$PYTHONPATH}"   # the repo root, so poe_repair imports from 1-lora-correction/scripts/
 
 PORT="${PORT:-5050}"
 HOST="${HOST:-127.0.0.1}"
