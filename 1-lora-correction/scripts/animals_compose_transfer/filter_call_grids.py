@@ -42,8 +42,9 @@ def main() -> int:
 
     by_pair = defaultdict(list)
     for png in sorted(snap.glob("out_out__*__seed*.png")):
-        pair, _, seed = png.stem[len("out_out__"):].rpartition("__seed")
-        by_pair[pair].append((int(seed), png))
+        m = re.fullmatch(r"out_out__(.+)__seed(\d+)", png.stem)
+        if m:  # the plain render only; skip variants such as __seed09__cmp
+            by_pair[m.group(1)].append((int(m.group(2)), png))
 
     calls = {}
     for pair, items in sorted(by_pair.items()):

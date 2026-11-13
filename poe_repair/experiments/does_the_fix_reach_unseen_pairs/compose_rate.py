@@ -76,7 +76,13 @@ def main() -> int:
                 quadrant, rest = "out_out", stem[len("out_out__"):]
             else:
                 continue
-            pair, _, _seed = rest.rpartition("__seed")
+            # Only the render itself. The trainer also saves <stem>__cmp.png, a three-panel
+            # strip (joint-prompt target, plain PoE, adapter); the target panel alone holds
+            # two animals, so scoring the strip counts a compose whatever the adapter drew.
+            m = re.fullmatch(r"(.+)__seed(\d+)", rest)
+            if not m:
+                continue
+            pair = m.group(1)
             if pair not in PROMPTS:
                 continue
             qa, qb = _queries(pair)

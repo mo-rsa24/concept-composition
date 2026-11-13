@@ -22,6 +22,7 @@ echo "[$(date -u +%H:%M:%S)] node=$(hostname) gpu=$(nvidia-smi --query-gpu=name 
 echo "[$(date -u +%H:%M:%S)] epochs on disk: $(ls "$RUN/samples/per_epoch" | wc -l)"
 
 [ -f "$RUN/compose_rate.to-step-60000.json" ] || cp "$RUN/compose_rate.json" "$RUN/compose_rate.to-step-60000.json"
+[ -f "$RUN/compose_rate.with-cmp-strips.json" ] || cp "$RUN/compose_rate.json" "$RUN/compose_rate.with-cmp-strips.json"
 
 $PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate \
     --run-dir "$RUN" --wandb --run-id 1d3qy31e
