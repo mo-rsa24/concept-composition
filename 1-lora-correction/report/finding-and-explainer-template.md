@@ -130,7 +130,7 @@ Navigation: ...
 Navigation: ...
 - <a term>: [<context entry>](context/world/<file>.md)
 - <a system fact>: [<environment entry>](environment/<file>.md)
-- <the design's sources>: [<sources.md entry>](context/sources.md#<anchor>)
+- <the design's sources>: [<sources.md entry>](../../context/sources.md#<anchor>)
 - Each picture, read one at a time: [the figure explainer](artifacts/results/<question>/figure-explainer.md)
 
 ## Still open

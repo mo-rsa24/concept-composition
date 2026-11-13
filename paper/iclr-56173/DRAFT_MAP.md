@@ -487,7 +487,7 @@ Correction owed and carried by 3.2. The compiled derivation at
 and calls it conditional independence, then line 98 turns the same left-hand side into a
 proportionality with 1/p(x) in it. Both cannot hold. The assumption that licenses the rule is
 p(c1, c2 | x) = p(c1 | x) p(c2 | x), which is what
-[IMMERSE_PoE_Foundations.md:35](../../docs/IMMERSE_PoE_Foundations.md#L35) states correctly. Fixing
+IMMERSE_PoE_Foundations.md:35 states correctly. Fixing
 the intro block is part of compiling 3.2, and it is a diff against already-compiled text.
 
 ▶ **Next: section 5.**

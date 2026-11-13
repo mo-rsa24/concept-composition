@@ -79,7 +79,7 @@ does a fix pooled from one set of concepts repair pairs built from entirely diff
 
 **Expected runtime:** depends on how many squares of the matrix are uncached; each square is seeds x 50 DDIM steps. Enumerate the squares first (task 1.1) and record the measured count and wall time in the review file.
 
-**Prerequisites:** pooled checkpoints via `checkpoints/latest.json` per group ([heldout_pair.sh](../../../scripts/cross_seed_lora_pooling/heldout_pair.sh) is the resolution pattern); `scorer_validated.json`; the disjointness audit in task 1.2.
+**Prerequisites:** pooled checkpoints via `checkpoints/latest.json` per group ([heldout_pair.sh](../../../../scripts/cross_seed_lora_pooling/heldout_pair.sh) is the resolution pattern); `scorer_validated.json`; the disjointness audit in task 1.2.
 
 **Known issues:** see the [Error Matrix](#error-matrix).
 
@@ -301,7 +301,7 @@ When this plan runs and produces output, three things stay in sync: the error ca
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 - `1-lora-correction/scripts/showcase/transfer_matrix.py` (new)::main — census, audit, fill, score.
-- Checkpoint resolution: [heldout_pair.sh](../../../scripts/cross_seed_lora_pooling/heldout_pair.sh)::read_latest; scorer contract: `scorer_validated.json` (instance count).
+- Checkpoint resolution: [heldout_pair.sh](../../../../scripts/cross_seed_lora_pooling/heldout_pair.sh)::read_latest; scorer contract: `scorer_validated.json` (instance count).
 
 ---
 

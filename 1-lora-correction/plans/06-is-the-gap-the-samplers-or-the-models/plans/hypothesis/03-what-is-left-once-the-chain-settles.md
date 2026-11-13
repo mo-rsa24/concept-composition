@@ -719,9 +719,9 @@ records that the single seed was a deliberate choice rather than an oversight.
 | Path | Why it is read |
 |---|---|
 | `poe_repair/composers/poe_langevin.py` | the composer [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md) builds, run here at six values of `k` |
-| [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses, and the denominator this plan records |
-| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, so the corrected version measures the same quantity the uncorrected curves did |
-| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedMALASampler`, read only to record why Metropolis adjustment is not available here |
+| [poe_repair/composers/poe.py](../../../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses, and the denominator this plan records |
+| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, so the corrected version measures the same quantity the uncorrected curves did |
+| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedMALASampler`, read only to record why Metropolis adjustment is not available here |
 
 ## Next step
 

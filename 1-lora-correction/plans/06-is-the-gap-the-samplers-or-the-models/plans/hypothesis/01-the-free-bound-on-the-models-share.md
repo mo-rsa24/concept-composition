@@ -100,7 +100,7 @@ first and why its answer is allowed to change what the rest is worth.
 **The cached measure is a ratio, and this question needs a numerator.**
 
 What is on disk is `‖r_t‖/‖eps_PoE‖`, computed at
-[correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) line 101. The
+[correction_size_over_the_run.py](../../../../scripts/correction_size_over_the_run.py) line 101. The
 question here is about the unnormalised `‖r_t‖`. Either recover it or say plainly that it is
 unrecoverable from what was saved. A ratio falling because its denominator grew says nothing about
 the model's share.
@@ -195,7 +195,7 @@ Nothing is built. Three things are read and one thing is written.
    and `snr_collapse.json` beside it, whose `peak_at_edge` field says how concentrated the
    correction is at the noisy end. This is context for the number, not the number.
 3. **Whether the unnormalised numerator survives in the cache.** Read
-   [correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) at line 101,
+   [correction_size_over_the_run.py](../../../../scripts/correction_size_over_the_run.py) at line 101,
    where the ratio is formed, and follow what was written out against what was discarded.
 
 The output is prose plus numbers in
@@ -443,7 +443,7 @@ Nothing to organise. The output of this plan is answers in its review file.
 
 | Path | Why it is read |
 |---|---|
-| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1.2 has to unpick to answer whether the numerator survived |
+| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1.2 has to unpick to answer whether the numerator survived |
 | `paper/iclr/figures/correction-size-over-the-denoising-run.json` | the cached curve, 50 steps over 3 seeds and two pairs |
 | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/step_collapse.json` | the step-wise collapse analysis, read beside `snr_collapse.json` for the `peak_at_edge` field |
 | `/datasets/mmolefe/poe_repair_min/outputs/veracity/pairs/<pair>/seed_<n>/teacher_residual_const_lam000/residuals/` | the raw per-step tensors the ratio was formed from, 50 files per seed for both pairs at seeds 4, 42 and 123. `delta` is the unnormalised `r_t` and `eps_poe` is the denominator, so the numerator this plan wants is read here rather than recovered from the JSON |

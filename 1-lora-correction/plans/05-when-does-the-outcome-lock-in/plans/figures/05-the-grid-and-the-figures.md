@@ -346,7 +346,7 @@ SPECIATION_EARLY_MAX = 10   # clustering at or below means the run decided early
 ```
 
 **File:** `poe_repair/lcm_oracle.py` (from [plan 03](../tools/03-wire-the-endpoint-predictor.md))
-**File:** [the scorer contract](../../../report) referenced by `scorer_validated.json`
+**File:** [the scorer contract](../../../../report) referenced by `scorer_validated.json`
 
 ## Next step
 

@@ -307,7 +307,7 @@ assert not pipeline_does_cfg_double_pass               # double-guiding corrupts
 # map our DDIM step index to LCM's timestep grid, exactly, printed once
 ```
 
-**File:** [poe_repair/runtime.py](../../../poe_repair/runtime.py)
+**File:** [poe_repair/runtime.py](../../../../../poe_repair/runtime.py)
 **Relevant section:** the schedule the timestep mapping is checked against.
 
 ## Next step

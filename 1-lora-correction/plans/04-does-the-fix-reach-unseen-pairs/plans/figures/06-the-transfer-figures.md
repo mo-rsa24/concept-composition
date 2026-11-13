@@ -516,7 +516,7 @@ what stops a caption drifting past its evidence.
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** [1-lora-correction/scripts/adapter_transfers.py](../../../scripts/adapter_transfers.py)
+**File:** [1-lora-correction/scripts/adapter_transfers.py](../../../../scripts/adapter_transfers.py)
 **Function:** `main`
 **What it does:** reads the pooled run's `compose_rate.json` and `pair_pool.json`, draws the two
 panels, writes PNG, PDF and a sidecar JSON holding every number drawn plus its caption caps.
@@ -530,7 +530,7 @@ pool = RUN / "pair_pool.json"         # which pairs were trained on
 fig.savefig(OUT_DIR / f"{FIG_NAME}.{ext}", dpi=300)   # OUT_DIR = paper/iclr/figures
 ```
 
-**File:** [1-lora-correction/scripts/adapter_vs_oracle_cost.py](../../../scripts/adapter_vs_oracle_cost.py)
+**File:** [1-lora-correction/scripts/adapter_vs_oracle_cost.py](../../../../scripts/adapter_vs_oracle_cost.py)
 **Function:** `main`
 **What it does:** reads `dose_curves.json` for the joint-prompt correction and the pooled run's
 `compose_rate.json` for the adapter, draws one dot row per pair, writes the same three outputs.

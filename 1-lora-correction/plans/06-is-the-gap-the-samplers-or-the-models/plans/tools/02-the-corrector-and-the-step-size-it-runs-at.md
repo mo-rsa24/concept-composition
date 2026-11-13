@@ -95,10 +95,10 @@ actually describes, before the reverse step moves on. Everything downstream in t
 measurement taken on the path this composer produces.
 
 **Key components.** The vendored `AnnealedULASampler` at
-[anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py) line 218 is the
-25-line reference. [poe_internal.py](../../../poe_repair/composers/poe_internal.py) is the per-step
+[anneal_samplers.py](../../../../../composition/reduce_reuse_recycle/anneal_samplers.py) line 218 is the
+25-line reference. [poe_internal.py](../../../../../poe_repair/composers/poe_internal.py) is the per-step
 intervention pattern, the method-name format, and the window-argument shape.
-[poe.py](../../../poe_repair/composers/poe.py) is the three-branch guided product-of-experts the
+[poe.py](../../../../../poe_repair/composers/poe.py) is the three-branch guided product-of-experts the
 drift uses.
 
 **Testing approach.** Two leak checks and one search. The first check proves the composer is inert
@@ -230,14 +230,14 @@ whose table is recorded whether or not it is flattering.
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **`poe_repair/composers/poe_langevin.py`.** Beside
-   [poe.py](../../../poe_repair/composers/poe.py), following
-   [poe_internal.py](../../../poe_repair/composers/poe_internal.py)'s per-step intervention
+   [poe.py](../../../../../poe_repair/composers/poe.py), following
+   [poe_internal.py](../../../../../poe_repair/composers/poe_internal.py)'s per-step intervention
    pattern and the vendored `AnnealedULASampler`. Arguments: `k`, the step-size multiplier `c`, and
    a `corrector_window` tuple so the corrector can be on inside a range and off elsewhere. Method
    name format follows `poe_internal.py`'s: `poe_langevin_k<NNN>_c<NNN>`, plus `_w<start>-<end>`
    when a window is set.
 2. **The identity check path.** Reuse `check_identity` at
-   [interaction_term_window.py](../../../scripts/interaction_term_window.py) line 71, so the leak
+   [interaction_term_window.py](../../../../scripts/interaction_term_window.py) line 71, so the leak
    check compares like against like: a `k=0` run of the new composer, not `run_cfg_poe`, for the
    same reason the window plan gives. Only the corrector logic may differ, not the batch shape.
 3. **The step-size search.** A `--step-size-search` mode on
@@ -317,7 +317,7 @@ read.
 duplicating something already here.
 
 - [x] **1.1** Write `poe_repair/composers/poe_langevin.py`.
-  - Follows [poe_internal.py](../../../poe_repair/composers/poe_internal.py)'s per-step
+  - Follows [poe_internal.py](../../../../../poe_repair/composers/poe_internal.py)'s per-step
     intervention pattern and the vendored `AnnealedULASampler`. The composer wraps the sampler
     `run_poe_langevin` in `poe_repair/methods/_poe_langevin.py`, the same split as
     `poe_internal.py` over `methods/_poe_internal.py`.
@@ -340,7 +340,7 @@ duplicating something already here.
 
   - `k=0` must reproduce plain product-of-experts byte-identical, through the same
     `--check-identity` pattern
-    [interaction_term_window.py](../../../scripts/interaction_term_window.py) uses at line 71.
+    [interaction_term_window.py](../../../../scripts/interaction_term_window.py) uses at line 71.
     Compare against a `k=0` run of the new composer rather than against `run_cfg_poe`, so only the
     corrector logic differs and not the batch shape.
   - **Done when:** the command prints its identity-pass string. A single differing byte is a fail,
@@ -530,10 +530,10 @@ The search table stays in the review file. Nothing from this plan is filed under
 
 | Path | Why it is read |
 |---|---|
-| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedULASampler` at line 218 is the 25-line reference the new composer follows, and `inf_sample.py` line 230 is where its step size `betas * 0.035` at `k=20` comes from |
-| [poe_repair/composers/poe_internal.py](../../../poe_repair/composers/poe_internal.py) | the per-step intervention pattern, the method-name format, and the `correction_window` argument shape |
-| [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses |
-| [1-lora-correction/scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py) | `check_identity` at line 71, the leak-check pattern tasks 1.2 and 1.3 reuse |
+| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedULASampler` at line 218 is the 25-line reference the new composer follows, and `inf_sample.py` line 230 is where its step size `betas * 0.035` at `k=20` comes from |
+| [poe_repair/composers/poe_internal.py](../../../../../poe_repair/composers/poe_internal.py) | the per-step intervention pattern, the method-name format, and the `correction_window` argument shape |
+| [poe_repair/composers/poe.py](../../../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses |
+| [1-lora-correction/scripts/interaction_term_window.py](../../../../scripts/interaction_term_window.py) | `check_identity` at line 71, the leak-check pattern tasks 1.2 and 1.3 reuse |
 
 ## Next step
 

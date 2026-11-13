@@ -17,7 +17,7 @@ A `/pressure-test` run on three claims drafted for section 5 of the ICLR submiss
 novelty question behind them.
 
 It answers, ahead of time, the question piece 5 of the
-[Product-of-Experts factorization thread](../../../drips/poe-two-concept-factorization/00-INDEX.md)
+Product-of-Experts factorization thread
 was going to ask: what exactly is the term dropped when the two concepts are not conditionally
 independent, written both as a density gap and as a score correction.
 

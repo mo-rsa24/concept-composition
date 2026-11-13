@@ -287,7 +287,7 @@ half of the run, and it is the running example, so a reader will look straight a
 Worth understanding before the caption is frozen.
 
 **Go deeper.** That axis decision is built as a scene you can operate:
-[scene-logsnr/](scene-logsnr/README.md), run with `cd artifacts/scenes/logsnr-explainer && npm
+scene-logsnr/, run with `cd artifacts/scenes/logsnr-explainer && npm
 install && npm run dev`. It draws SDXL's own schedule, derives log-SNR from it, and
 computes both sides of the choice live. For the step axis: the cached run's steps are 20
 timesteps apart every time, but move 0.16 apart in log-SNR mid-run against 2.46 at the

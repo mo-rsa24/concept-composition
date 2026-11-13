@@ -1,6 +1,6 @@
 # 01: Scaling a draw scales its variance by c²
 
-*Piece 1 of 18 in [the forward process and the score](00-INDEX.md). After: [02: Independent variances add](02-independent-variances-add.md).*
+*Piece 1 of 18 in [the forward process and the score](00-INDEX.md). After: [02: Independent variances add](kept/02-independent-variances-add.md).*
 
 Filed in the vault: [Variance](../../../../../../../Obsidian/Mathematics/Statistics/Variance.md). Scene: [Derive 2 on Dissolving the Dog](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#derive-2).
 

@@ -308,7 +308,7 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** [poe_repair/runtime.py](../../../poe_repair/runtime.py)
+**File:** [poe_repair/runtime.py](../../../../../poe_repair/runtime.py)
 **Relevant section:** the alpha/sigma schedule the drift computation reads its coefficients from.
 
 ```python

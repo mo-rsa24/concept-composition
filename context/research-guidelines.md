@@ -1,6 +1,6 @@
 # How this research gets done
 
-**The practice itself is in [`~/.claude/RESEARCH_PRACTICE.md`](file:///home-mscluster/mmolefe/.claude/RESEARCH_PRACTICE.md)
+**The practice itself is in [`~/.claude/RESEARCH_PRACTICE.md`](/home/molef/.claude/RESEARCH_PRACTICE.md)
 and applies to every project.** Read it: write the results section before running the
 experiments, name a run's cost and what it buys before it starts, look at the data before
 designing on top of it, which visual skill to pick by what you are pointing at, the seven kinds
@@ -22,12 +22,12 @@ happening in the background, and what to do next.
 |---|---|
 | Write the results section first | `1-lora-correction/plans/07-writing-the-paper/plans/writing-05-the-results-skeleton.md` |
 | Every run names its cost and what it buys | Two lines in the design plan. Worked example: `480 runs at 50s, about 6h. Answers question 1, feeds figure F2.` The constraint here is GPU-days |
-| The reason a figure exists goes in its own document | [figures/what-each-figure-argues.md](figures/what-each-figure-argues.md) is the worked example: seven checkboxes in the plan, seven reasons in the document |
+| The reason a figure exists goes in its own document | [figures/what-each-figure-argues.md](../paper/iclr/what-each-figure-argues.md) is the worked example: seven checkboxes in the plan, seven reasons in the document |
 | A figure serves its reader | Same document, and it is held to the same one-pass standard as the figures it describes. Here that means: x is the denoising step 0 to 50 with "noise" and "image" labelled at the ends, not log-SNR, because only DDIM is used; four or five named pairs drawn in front with the remaining pairs behind as a band; a strip of decoded frames above the curve, which costs no sampling because every run already saved `latent_trajectory.pt`; spreads and percentages held back to the appendix table |
 | Every read lands in the register | `plans/standing/literature/plans/01-reading-register.md` |
 | Suspiciously-good results are contamination until cleared | The check that must pass here before anything else is believed is the λ=0 check: injecting nothing must reproduce plain PoE to under 1e-5 |
 | Organise on the way out | `python3 scripts/plan_pulse.py`, report-only, four checks, about 7 seconds over the whole tree |
-| Keep the handoff on disk | [ENVIRONMENT.md](ENVIRONMENT.md) is why the cluster has never had to be re-explained |
+| Keep the handoff on disk | [ENVIRONMENT.md](../environment/overview.md) is why the cluster has never had to be re-explained |
 
 ## The mistakes this project has already made
 

@@ -1,6 +1,6 @@
 # What sampling an image means
 
-One interactive scene that starts from the heights of ten people, yours at 173 cm, and ends with a sampler turning pure noise into a clean dog photo. It answers the question the [forward-process scene on the dog photo](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9) raised and could not answer: how x₀ is "a dog", and how drawing from a distribution gives a clean image. The notation and colours come from Step 1 (the Gaussian density) and Step 4 (the forward process) of [the one-expert walk](../../drips/simple-distributions-rebuild/01-one-expert-from-scratch.md).
+One interactive scene that starts from the heights of ten people, yours at 173 cm, and ends with a sampler turning pure noise into a clean dog photo. It answers the question the [forward-process scene on the dog photo](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9) raised and could not answer: how x₀ is "a dog", and how drawing from a distribution gives a clean image. The notation and colours come from Step 1 (the Gaussian density) and Step 4 (the forward process) of [the one-expert walk](../../../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/01-one-expert-from-scratch.md).
 
 | File | What it is |
 |---|---|

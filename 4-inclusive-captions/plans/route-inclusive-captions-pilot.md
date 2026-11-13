@@ -51,7 +51,7 @@ its second axis.
   That design trains from scratch and moves the *share* of both-animal photos. This experiment
   holds the photos and moves *which caption* they get.
 - The ladder walk is at layer 2: layer 1 closed 2026-10-29 with its bar met
-  ([execute walk](../artifacts/drips/simple-distributions-rebuild/EXECUTE_WALK.md)).
+  ([execute walk](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md)).
 - Layer 5's toy fine-tune run: support for A∩B inherited from pretraining falls from 0.159 of
   the composed target to 0.001 within 30 fine-tune steps on the grid, and the samplers follow by
   step 100 ([figure](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)).

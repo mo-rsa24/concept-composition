@@ -502,7 +502,7 @@ Known issues and solutions for this plan. This section is automatically updated 
 
 ### From global catalog
 
-Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATALOG.md](~/.claude/GLOBAL_ERROR_CATALOG.md) for the full catalog.
+Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATALOG.md](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md) for the full catalog.
 
 #### 🔴 py-001: Python 3.8 incompatible with DINOv2 imports
 
@@ -514,7 +514,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to fix:** Activate Python 3.9 or later.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-py-001](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-py-001)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-py-001](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-py-001)
 
 ---
 
@@ -528,7 +528,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to fix:** Wrap `build_pool_mean_cache()` in `torch.distributed.barrier()` to synchronize before eval.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-001](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-001)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-001](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-001)
 
 ---
 
@@ -542,7 +542,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to fix:** Move reference tensors to module level in `_inline_sampling.py` so all ranks can access them.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-002](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-002)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-002](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-dist-002)
 
 ---
 
@@ -556,7 +556,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to fix:** Reduce batch size to 16-32 on A100, 8-16 on V100. Or run on A100 nodes which have more memory.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-mem-001](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-mem-001)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-mem-001](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-mem-001)
 
 ---
 
@@ -570,7 +570,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to verify:** Check eval metrics (compose-rate, direction-cosine). They should be smooth. If eval metrics are also jumping, investigate further.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-001](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-001)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-001](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-001)
 
 ---
 
@@ -584,7 +584,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 **How to fix:** Before loading, verify the checkpoint with `torch.load(path)` and inspect weight shapes. Ensure the checkpoint matches the current model.
 
-**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-002](~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-002)
+**Reference:** [~/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-002](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md#entry-id-train-002)
 
 ---
 

@@ -225,7 +225,7 @@ instead hold the rule fixed and show what its own blending weight does to that a
 1. **`poe_repair/composers/superdiff.py`.** `SuperDiffSDXLPipeline` from
    [superdiff-sdxl-v1-0](https://huggingface.co/superdiff/superdiff-sdxl-v1-0) wrapped in this
    repo's composer interface, so it is callable the same way
-   [poe.py](../../../poe_repair/composers/poe.py) is.
+   [poe.py](../../../../../poe_repair/composers/poe.py) is.
 2. **The `kappa` clamp.** Roughly [−0.5, 1.5], holding `kappa` at 0.5 for the first ~10% of steps,
    toggleable so the grid can render both settings. The shipped pipeline has no clamp anywhere.
 3. **The 8-cell grid.** `a_cat__x__a_dog` and `a_butterfly__x__a_flower_meadow`, seed 9, at 200
@@ -321,7 +321,7 @@ framed correctly from the start.
     (`pipeline.py`), citation and background at
     [necludov/super-diffusion](https://github.com/necludov/super-diffusion).
   - Follow this repo's composer interface, the one
-    [poe.py](../../../poe_repair/composers/poe.py) implements.
+    [poe.py](../../../../../poe_repair/composers/poe.py) implements.
   - Time the first render (any one of the 8 cells) and record wall time in the review file, since
     this repo has no prior measurement for this pipeline.
   - **Done when:** one render completes, lands under
@@ -543,7 +543,7 @@ already put SuperDiff's row on this project's shared `λ` axis, across seeds 9 t
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | this repo's composer interface, which `superdiff.py` implements so it is callable the same way |
+| [poe_repair/composers/poe.py](../../../../../poe_repair/composers/poe.py) | this repo's composer interface, which `superdiff.py` implements so it is callable the same way |
 | [necludov/super-diffusion](https://github.com/necludov/super-diffusion) | the authors' implementation and citation; no SDXL code lives here, only SD1.4 examples |
 | [superdiff-sdxl-v1-0](https://huggingface.co/superdiff/superdiff-sdxl-v1-0), `pipeline.py` | the actual SDXL pipeline this plan wires, read in full: confirms `num_inference_steps=200` default, `guidance_scale=7.5` default, no scheduler/`eta` option, and no clamp on `kappa` anywhere |
 | [the reading register](../../../../../plans/standing/literature/reading-register.md) | the row for 2412.17762, at abstract level since 2026-08-12, promoted by this plan's close out |

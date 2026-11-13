@@ -75,7 +75,7 @@ This extracts error patterns from the run transcript, deduplicates against globa
 
 **Associated materials**:
 - **Review questions**: [the review file for this plan](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md)
-- **Procedures**: (none yet; recommend creating [procedures/hypothesis-02-run-lopo-sweep.md](procedures/hypothesis-02-run-lopo-sweep.md) if manual steps emerge)
+- **Procedures**: (none yet; recommend creating procedures/hypothesis-02-run-lopo-sweep.md if manual steps emerge)
 - **Assets/outputs**: Will be saved to `outputs/interaction_term/transfer_rate/`
   - **Figure organization**: Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-11 naming convention, and consolidate them into `outputs/interaction_term/transfer_rate/figures/`. This prompt generates a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
   - **Locations scanned**: `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders.
@@ -311,8 +311,8 @@ Run each `.prompt.md` file through Claude (or `/prompt-storyboard`) and save out
 
 | Figure | Prompt file | What it shows | Save to |
 |--------|-------------|---------------|---------|
-| LOPO strategy visual | [lopo-strategy.prompt.md](diagrams/lopo-strategy.prompt.md) | The leave-one-pair-out design: how 15 LoRAs test generalization | `diagrams/lopo-strategy.png` |
-| Robustness vs brittleness | [robustness-curves.prompt.md](diagrams/robustness-curves.prompt.md) | Expected degradation curves: smooth (robust) vs sharp (brittle) | `diagrams/robustness-curves.png` |
+| LOPO strategy visual | lopo-strategy.prompt.md | The leave-one-pair-out design: how 15 LoRAs test generalization | `diagrams/lopo-strategy.png` |
+| Robustness vs brittleness | robustness-curves.prompt.md | Expected degradation curves: smooth (robust) vs sharp (brittle) | `diagrams/robustness-curves.png` |
 
 ### Generated during plan execution
 
@@ -396,7 +396,7 @@ Move to [baseline-01-the-size-matched-control-pool.md](../../../../artifacts/pla
 
 ### From global catalog
 
-Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATALOG.md](~/.claude/GLOBAL_ERROR_CATALOG.md) for the full catalog.
+Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATALOG.md](/home/molef/.claude/GLOBAL_ERROR_CATALOG.md) for the full catalog.
 
 (none recorded yet)
 
