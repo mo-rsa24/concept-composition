@@ -21,6 +21,13 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
   `Blond_Hair` columns: train 162,770 faces, 1,387 of them blond men (0.852%); valid 19,867 with
   182; test 19,962 with 180.
 
+- **How `/datasets/mmolefe` is laid out** (since 2026-11-13): raw datasets in `raw/`, other
+  projects' outputs in `projects/<project>/`, archived work in `_archive/`, each moved folder with
+  a symlink at its old name, so `/datasets/mmolefe/celeba/...` above still resolves to
+  `raw/celeba/`. This project's `poe_repair_min/` did not move, because `poe_repair/paths.py`
+  names it; `projects/concept-composition/poe_repair_min` points to it. The rules and the move log
+  are in `/datasets/mmolefe/README.md`.
+
 > The heldout pairs are the animal pairs kept out of training on purpose, so a result measured on
 > them says whether the fix reaches pairs the model never trained on.
 
