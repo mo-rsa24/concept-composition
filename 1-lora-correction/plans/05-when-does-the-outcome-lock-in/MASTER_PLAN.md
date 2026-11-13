@@ -10,11 +10,11 @@ readout of cached states, adopted only if a calibration pass against the base mo
 thresholds set in code.
 
 ## Why this plan exists
-The correction's effective window is steps 0 to 10 (EXP-04) and trajectories visibly [diverge](../../../../../goal-setting/learning/deep-learning/diffusion-models/diffusion-speciation-dynamics/plans/03-manifold-and-the-later-transition/MASTER_PLAN.md) at
+The correction's effective window is steps 0 to 10 (EXP-04) and trajectories visibly [diverge](../../../../../goal-setting/learning/deep-learning/diffusion-models/06-diffusion-speciation-dynamics/plans/03-manifold-and-the-later-transition/MASTER_PLAN.md) at
 steps 18 to 36, so the correction stops mattering 8 to 26 steps before anything shows. Nothing
 built so far reads commitment per step: Tweedie estimates blur at high noise, and
 divergence needs a pair of paths and reports the separation late. If commitment (the field's
-[speciation step](../../../../../goal-setting/learning/deep-learning/diffusion-models/speciation-before-divergence/MASTER_PLAN.md)) lands near step 10, the gap is explained because the run [decides early, then only descends](../../../../../goal-setting/learning/deep-learning/diffusion-models/speciation-before-divergence/plans/06-decide-then-descend-overlay.md); if it lands
+[speciation step](../../../../../goal-setting/learning/deep-learning/diffusion-models/07-speciation-before-divergence/MASTER_PLAN.md)) lands near step 10, the gap is explained because the run [decides early, then only descends](../../../../../goal-setting/learning/deep-learning/diffusion-models/07-speciation-before-divergence/plans/06-decide-then-descend-overlay.md); if it lands
 with divergence, that story dies. The reasoning, the five verdicts on the proposal, and every
 choice that could have gone the other way live in [the decision ledger](decisions-taken-here.md);
 this file does not repeat them.

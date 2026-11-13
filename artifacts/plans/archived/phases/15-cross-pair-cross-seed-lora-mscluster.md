@@ -25,7 +25,7 @@ is the procedure for getting a fresh Blackwell shell to a finished run.
 On mscluster106:
 
 - Caches for the 5 train pairs at seeds `{1..12, 42}` already exist
-  under [/datasets/.../training_cache/heldout/](../../../../../../datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/) — verified on
+  under [/datasets/.../training_cache/heldout/](/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/) — verified on
   2026-05-26.
 - Caches for the 5 held-out sibling pairs at seeds `{9..12}` also
   exist on `/datasets/` — verified on 2026-05-26.

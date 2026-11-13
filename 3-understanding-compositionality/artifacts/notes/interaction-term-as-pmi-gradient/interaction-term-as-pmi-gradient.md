@@ -364,4 +364,4 @@ empirical work rather than a novelty claim that will not hold.
 
 ## Cross-references
 
-- The mention of **Σ⁻¹u** (the covariance identity and the score-form identity, claims 1 and 2 above) in [the scene map for the Gaussian score's base case](../../../../../../goal-setting/learning/deep-learning/diffusion-models/poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md), piece 1a-4d, "Σ⁻¹ beside Σ" (relevance match).
+- The mention of **Σ⁻¹u** (the covariance identity and the score-form identity, claims 1 and 2 above) in [the scene map for the Gaussian score's base case](../../../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md), piece 1a-4d, "Σ⁻¹ beside Σ" (relevance match).

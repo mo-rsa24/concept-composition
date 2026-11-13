@@ -55,7 +55,7 @@ Design only. Verdicts and run state live in
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#quick-context-where-you-are) ➡️
 
 Is the correction still bounded away from zero at the last denoising step, in the numbers already
-sitting on disk? The [sampler's share of the error](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/15-the-two-gaps.md) is defined to vanish as the noise goes to zero,
+sitting on disk? The [sampler's share of the error](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/15-the-two-gaps.md) is defined to vanish as the noise goes to zero,
 and the model's share is not. So anything left at the end of the run is already a lower bound on the
 model's share, bought with no GPU at all.
 

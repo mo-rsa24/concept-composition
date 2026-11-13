@@ -6,7 +6,7 @@ No. Twenty corrector steps at every one of the 50 noise levels leave cat × dog 
 [product-of-experts](../../../context/world/poe-composition.md)' [compose rate](../../../context/world/compose-rate.md), zero of eight held-out seeds, and every one of the forty
 renders from a sliding ten-step corrector window is one animal too.
 
-What the corrector does change is the kind of picture. Five of the eight [settled](../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) renders leave
+What the corrector does change is the kind of picture. Five of the eight [settled](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) renders leave
 photography for a cartoon or a line drawing, and the detector's confidence on the control pair's
 butterfly falls while its verdict stays green.
 

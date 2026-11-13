@@ -110,4 +110,4 @@ HONEST TESTS THE PAPERS HANDED ME (future figures, flag as not-yet-done):
 
 ## Cross-references
 
-- The mention of **an entry of Σ and the entries of Σ⁻¹** (dragging one covariance entry and watching the other move) in [the scene map for the Gaussian score's base case](../../../../../../../../goal-setting/learning/deep-learning/diffusion-models/poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md), piece 1a-4d, which is building toward the same geometric-mean-vs-harmonic-of-precisions fact this note names under L1 (relevance match).
+- The mention of **an entry of Σ and the entries of Σ⁻¹** (dragging one covariance entry and watching the other move) in [the scene map for the Gaussian score's base case](../../../../../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md), piece 1a-4d, which is building toward the same geometric-mean-vs-harmonic-of-precisions fact this note names under L1 (relevance match).

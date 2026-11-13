@@ -62,7 +62,7 @@ Design only. Verdicts and run state live in
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#words-this-plan-uses) ➡️
 
-Run the [Langevin corrector](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/21-langevin-dynamics.md) at every noise level so the latent [settles into the distribution](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) the
+Run the [Langevin corrector](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/21-langevin-dynamics.md) at every noise level so the latent [settles into the distribution](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) the
 product-of-experts score actually describes, then measure what is left of the correction at that
 settled point. The part that goes away when the chain settles belongs to the sampler. The part
 still there at the end of the run belongs to the model.

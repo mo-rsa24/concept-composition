@@ -25,7 +25,7 @@ Step 44 in the root running order; waits on nothing; next is
 |------|------|-------------|
 | 43 (previous) | [revalidate the scorer off animals](../../../../../../plans/01-showcase-the-trained-lora/plans/tools/13-revalidate-the-scorer-off-animals.md) | the label-pass validation in the sibling scope |
 | **44 (current)** | **Basins by hand** | **proves basins and a ridge exist for the composed flow, before any new model is downloaded** |
-| 45 (next) | [the free test](../../../../../../plans/05-when-does-the-outcome-lock-in/plans/tests/02-the-free-test.md) | posterior-mean drift as the first [speciation](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/speciation-before-divergence/MASTER_PLAN.md) number |
+| 45 (next) | [the free test](../../../../../../plans/05-when-does-the-outcome-lock-in/plans/tests/02-the-free-test.md) | posterior-mean drift as the first [speciation](../../../../../../../../../goal-setting/learning/deep-learning/diffusion-models/07-speciation-before-divergence/MASTER_PLAN.md) number |
 
 ## Table of contents
 
@@ -382,7 +382,7 @@ for delta in (-1, 0, +1):
 Navigation: ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents)
 
 [The free test](../../../../../../plans/05-when-does-the-outcome-lock-in/plans/tests/02-the-free-test.md): posterior-mean drift as the first
-[speciation](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/speciation-before-divergence/NOTATION.md) number,
+[speciation](../../../../../../../../../goal-setting/learning/deep-learning/diffusion-models/07-speciation-before-divergence/NOTATION.md) number,
 needing no new model.
 
 ## Error Matrix
