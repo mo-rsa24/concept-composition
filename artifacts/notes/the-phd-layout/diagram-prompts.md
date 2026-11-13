@@ -6,9 +6,10 @@ reader sees in one glance which folder holds which kind of work. Source: the org
 
 ## Art direction
 
-**Empty.** No named style. The subject is a small tree of folders sorted by kind, and the renderer
-is given a complete description and left to choose a clean, illustrated treatment. The colours
-named below carry meaning; the rest of the palette is free.
+**Schematic, drawn by script.** A plain tree on a white page: thin grey connectors, small text,
+no cards, icons or shadows, so the picture shows only how the work splits. Drawn by
+`make_the_phd_layout.py` beside this file, which writes `the-phd-layout.svg` and a PNG copy. An
+earlier Codex render under the Empty direction came out too glossy and was replaced.
 
 ## Meaning palette
 
@@ -17,7 +18,7 @@ named below carry meaning; the rest of the palette is free.
 | Blue | our own research portfolios and their projects |
 | Green | writing: a paper or the proposal |
 | Purple | other people's code, run or reproduced |
-| Dashed grey arrow | a symlink: an old folder name that now points at the new place |
+| Grey | admin and the archive |
 
 ## Glyph vocabulary
 
@@ -42,7 +43,7 @@ admin and the archive. Left to right inside a card lists its members.
 ## Subject lane
 
 ### Prompt 1 (Subject): Where everything in the PhD lives
-[built] 🖼️ rendered 2026-11-13 (`the-phd-layout.png`)
+[built] 🖼️ rendered 2026-11-13 (`the-phd-layout.png`, drawn by `make_the_phd_layout.py`)
 Save as: `the-phd-layout.png`
 
 Thesis: every piece of PhD work has one obvious home, sorted by what kind of work it is.
