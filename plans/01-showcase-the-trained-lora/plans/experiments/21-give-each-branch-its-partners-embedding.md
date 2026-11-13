@@ -53,7 +53,7 @@
 - **A branch**: one of the three UNet forwards the adapter's correction is assembled from: "a cat" alone, "a dog" alone, and the empty prompt. Each branch today sees only its own prompt; the adapter has to read the other animal off the latent (the pressure-test route, part 1).
 - **The pooled embedding**: SDXL's second text-encoder vector for a prompt (`text_embeds`, 1280 numbers), fed to the UNet beside the token sequence. The token sequence carries the words; the pooled vector carries a summary of the prompt.
 - **The partner embedding**: the "a cat" branch receives `pool_cat + pool_dog` as its pooled vector and the "a dog" branch `pool_dog + pool_cat`; the empty branch is unchanged. The token sequences stay their own, so the branches remain distinct. Applied only when the adapter is enabled: the frozen product-of-experts forward and every reference render are untouched.
-- **The on-cache fit**: the cosine between the adapter's correction and the true correction on the cached training states, no sampling, per pair tier and per step bucket, from `scripts/showcase/fit_cosine_on_cache.py` ([the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction)). The branch-blind rank-8 adapter at 30k reads 0.985 on training pairs and 0.925 on cat × dog in the early bucket, 0.961 against 0.748 late.
+- **The on-cache fit**: the cosine between the adapter's correction and the true correction on the cached training states, no sampling, per pair tier and per step bucket, from `scripts/showcase/fit_cosine_on_cache.py` ([the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03)). The branch-blind rank-8 adapter at 30k reads 0.985 on training pairs and 0.925 on cat × dog in the early bucket, 0.961 against 0.748 late.
 - **Drift** and **compose count**: as in plan 20, from the 8-seed grid at λ 1.
 
 ---
@@ -196,7 +196,7 @@ Serves goal 4 and the transfer question in scope 04. Checkable outcomes:
 ### 2. 🧪 Train, fit and render
 
 - [ ] **2.1 Launch** `RUN_ID=phase1_r32_partner_40k PARTNER=1 sbatch scripts/showcase/regularised_r32.sbatch` (the launcher gains a `PARTNER` switch in task 1.1) with `WEIGHT_DECAY` and `EMA_DECAY` set to the supported base setting. Record job id, node and W&B id in the review file.
-- [ ] **2.2 The on-cache fit at 30k**: [the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction) with the partner flag; the early-bucket cat × dog cosine into the review file beside 0.925.
+- [ ] **2.2 The on-cache fit at 30k**: [the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) with the partner flag; the early-bucket cat × dog cosine into the review file beside 0.925.
 - [ ] **2.3 The 30k grid**: the probe recipe, `--windows full --lambdas 1.0`, out-root `figure_r32_partner_030000`; its drift against the same-setting branch-blind 30k probe folder.
 
 ▶ **Next: [instruction 3.1](#3--judge)**.

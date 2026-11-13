@@ -1,0 +1,160 @@
+{
+ "what": "the pair image's weight inside both experts, carried from 0.5 to 0.99",
+ "samples_per_cell": 300,
+ "rng_seed_per_weight": 20261022,
+ "note": "at weight w each expert keeps only 1 - w of its mass on its own three single shapes, so near 1 neither is a single-shape expert any more",
+ "counts": {
+  "0.5": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 238,
+    "two faint objects": 0,
+    "hybrid: overlaid": 62
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 249,
+    "two faint objects": 0,
+    "hybrid: overlaid": 51
+   },
+   "mass still on this expert's own single shapes": 0.5
+  },
+  "0.65": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 281,
+    "two faint objects": 0,
+    "hybrid: overlaid": 19
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 286,
+    "two faint objects": 0,
+    "hybrid: overlaid": 14
+   },
+   "mass still on this expert's own single shapes": 0.35
+  },
+  "0.8": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 298,
+    "two faint objects": 0,
+    "hybrid: overlaid": 2
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 299,
+    "two faint objects": 0,
+    "hybrid: overlaid": 1
+   },
+   "mass still on this expert's own single shapes": 0.2
+  },
+  "0.9": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "mass still on this expert's own single shapes": 0.1
+  },
+  "0.95": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "mass still on this expert's own single shapes": 0.05
+  },
+  "0.99": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "mass still on this expert's own single shapes": 0.01
+  }
+ },
+ "mala_acceptance": {
+  "0.5": 0.3767,
+  "0.65": 0.3769,
+  "0.8": 0.3768,
+  "0.9": 0.3768,
+  "0.95": 0.3767,
+  "0.99": 0.3767
+ }
+}

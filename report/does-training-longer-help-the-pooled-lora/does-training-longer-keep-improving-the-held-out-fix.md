@@ -108,7 +108,7 @@ not the decay, but the lineage is not one clean run.
 | Weight norms | `lora_state` in every 10k checkpoint, computed 2026-09-05 | verified |
 | Optimizer settings | `OptimConfig` in `poe_repair/experiments/one_pair_one_seed/config.py`, read 2026-09-05 | verified |
 | The runs | rank 8 100k to 200k (`8vl2uzak`, mscluster110, 6.8 h), 200k to 450k (`n1w4fw5b`, mscluster112, 18.1 h); rank 16 (`jii2mtb0` aborted at 37,418 by the kill criterion after 12.3 h, resumed as `gcej8ib9` on mscluster108, 20.3 h); rank 32 (`le2tp2ti` aborted at 6,500 after 2.3 h, resumed as `6xc2l8ix` on mscluster106, 34.0 h). All finished. Timeline in `training-runs-timeline.png` beside the figures | verified |
-| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint), then rerun the chart script named in the artifact card | |
+| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03), then rerun the chart script named in the artifact card | |
 
 ## Depends on
 

@@ -1,0 +1,88 @@
+{
+ "sigma0": 0.1,
+ "steps": 200,
+ "samples": 300,
+ "mala_steps": 5,
+ "mala_step_fraction": 0.05,
+ "mala_acceptance": {
+  "A: product, singles only": 0.37659,
+  "B: product, pair also captioned with each name": 0.37668666666666667,
+  "C: mixture (OR), Du's bottom row": 0.8757033333333334
+ },
+ "image": [
+  16,
+  32,
+  3
+ ],
+ "counts": {
+  "A: product, singles only": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 2,
+    "hybrid: overlaid": 298
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 300
+   }
+  },
+  "B: product, pair also captioned with each name": {
+   "exact": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 300,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 14,
+    "two faint objects": 5,
+    "hybrid: overlaid": 281
+   },
+   "annealed MALA": {
+    "one circle": 0,
+    "one square": 0,
+    "two objects, crisp": 14,
+    "two faint objects": 0,
+    "hybrid: overlaid": 286
+   }
+  },
+  "C: mixture (OR), Du's bottom row": {
+   "exact": {
+    "one circle": 145,
+    "one square": 155,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "reverse diffusion": {
+    "one circle": 140,
+    "one square": 160,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   },
+   "annealed MALA": {
+    "one circle": 133,
+    "one square": 167,
+    "two objects, crisp": 0,
+    "two faint objects": 0,
+    "hybrid: overlaid": 0
+   }
+  }
+ }
+}

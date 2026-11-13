@@ -133,8 +133,8 @@ seeds, and CLIP is therefore not necessary for the fusion.
 
 ⬅️ [Previous](#the-claim) | 📋 [TOC](#table-of-contents) | [Next](#description-what-to-build) ➡️
 
-A reviewer reading the paper's central failure asks what in the model causes it, and the text
-encoder is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
+A reviewer reading the paper's central failure asks what in the model causes it, and the [text
+encoder](../../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
 one vector, asked to carry two subjects. If that suspicion is right, the paper's correction is a
 patch on a text-embedding problem and the right fix is a better encoder. If the fusion survives on
 a model with no CLIP anywhere, that reading is closed off and the failure sits in the arithmetic or
@@ -249,13 +249,19 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ◀ **Needs: [task 1.2](#1--the-composition-script)**, the weights on disk.
 
-- [ ] **2.1** Render "a cat" at seed 1 twice: once through `PixArtAlphaPipeline` as released, once
+- [x] **2.1** Render "a cat" at seed 1 twice: once through `PixArtAlphaPipeline` as released, once
       through the new script with one condition, same dtype, same scheduler, same 20 steps at 4.5.
   - Report the largest absolute difference between the two images in 0-to-255 pixel values, and the
     fraction of pixels that differ at all.
   - **Done when:** the two numbers are in the review file. A largest difference of 0 means the two
     paths are the same computation. Anything above about 2 grey levels is a plumbing fault and task
     3 does not run.
+  - ✅ Largest absolute difference 0 grey levels, 0.0 of pixels differing, and the two PNGs are
+    byte-identical (md5 `d9c08c28048b8da98124be0246099b07`). Ran 2026-11-04 on mscluster84, an RTX
+    3090, from `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-clip-free` at commit
+    `2506ea21`; text encoder `T5EncoderModel` at 4.8B parameters, scheduler
+    `DPMSolverMultistepScheduler`. Images and record in
+    `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/`.
 
 ▶ **Next: [instruction 3.1](#3--pass-the-identity-check)**.
 
@@ -263,14 +269,18 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ◀ **Needs: [instruction 3.1](#3--pass-the-identity-check)**, your yes on the identity check.
 
-- [ ] **4.1** Render all four columns on seeds 1 to 8, 32 tiles at 1024², keeping the
+- [x] **4.1** Render all four columns on seeds 1 to 8, 32 tiles at 1024², keeping the
       full-resolution PNGs and a sidecar each.
   - **Done when:** 32 tiles exist and every sidecar names the same 20 steps and guidance 4.5.
-- [ ] **4.2** Build the four-column sheet at
+  - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/a_cat__x__a_dog/`,
+    all 32 sidecars reading 20 steps, guidance 4.5, 1024².
+- [x] **4.2** Build the four-column sheet at
       `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - **Done when:** the sheet is on disk and its own JSON record names every tile it drew.
+  - ✅ `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
+    record beside it.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
 
@@ -278,14 +288,16 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ◀ **Needs: [task 4.2](#4--the-four-columns-on-eight-seeds)**, the tiles and the sheet.
 
-- [ ] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
+- [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
       tile to `artifacts/results/does-a-clip-free-model-hybridise/calls.json` with its seed, its
       category and one sentence saying what is in the picture.
   - A hybrid is its own category, not a failed version of either other one. Do not call a clear pair
     from the sheet.
   - **Done when:** eight records exist and the three counts sum to eight.
-- [ ] **5.2** Write the card at
+  - ✅ 0 two clear animals, 6 one hybrid animal, 2 one single animal, in `calls.json`, with the
+    joint column read the same way at 7 of 8.
+- [x] **5.2** Write the card at
       `artifacts/results/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
       the guidance scale and step count used and that they are PixArt-alpha's own defaults rather
       than SDXL's, the three counts out of eight, the SDXL counts quoted from
@@ -313,12 +325,13 @@ them.
 
 ◀ **Needs: [task 2.1](#2--the-single-prompt-identity-check)**, the two numbers.
 
-- [ ] **3.1** Look at the two "a cat" renders side by side and at the two numbers beneath them.
+- [x] **3.1** Look at the two "a cat" renders side by side and at the two numbers beneath them.
   - Expected result: one picture, printed twice, and a largest difference of 0 grey levels.
   - ❌ If the pictures differ anywhere a person can see, the composition path is not the pipeline's
     path and the product renders would measure the difference rather than the composition. Say stop
     rather than accepting a close-enough match.
   - ✅ Say `done` with what you saw, which is what releases task 4.
+  - ✅ Passed 2026-11-04: the pair read as one picture, and the two files are byte-identical.
 
 ▶ **Next: [task 4.1](#4--the-four-columns-on-eight-seeds)**.
 

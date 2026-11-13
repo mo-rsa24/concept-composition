@@ -52,7 +52,7 @@ tensors toward a correction target, with no photographs and no text encoder in t
 
 **What you will hold at the end**
 
-One figure: the compose rate for run A beside run B on 128 shared seeds, with the criterion's
+One figure: the [compose rate](../../../context/world/compose-rate.md) for run A beside run B on 128 shared seeds, with the criterion's
 three lines beside it and exactly one of them ticked.
 
 ## Considerations
@@ -216,12 +216,44 @@ fixed and cannot be shaped by anything the build reveals.
   - ✅ verified 2026-11-03, `dae7c3c9`: PASSED on the real manifest, share 0.169, every caption
     share within 0.002 of its design value, blank rates spread 0.001 across all four runs.
 
-▶ **Next: [instruction 8](#8--audit-the-both-animal-photos)**, the eye audit, which only you
+- [x] ✅ **2.4** Draw the extra training photos with SD 3.5 medium: 350 "a photo of a cat and a
+      dog", 130 "a photo of a cat", 130 "a photo of a dog", at 1,024 square in fp16.
+  - Output: `scripts/census/inclusive_captions_generate.py`, images under
+    `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/`.
+  - A different model family from the one being fine-tuned, so the co-occurrence the pool adds is
+    not SDXL's own belief fed back into it.
+  - ✅ 306 cat-and-dog, 130 cat and 130 dog drawn at 20.6s each in fp16. bf16 takes seven minutes
+    an image on these Turing cards, which have no bf16 tensor cores.
+- [x] ✅ **2.5** Validate the vision-language judge before it screens anything: 48 generated
+      cat-and-dog images called by eye first, then by the judge, and the two compared.
+  - Output: `scripts/census/inclusive_captions_judge.py`, the eye's calls in
+    `artifacts/drips/inclusive-captions-pilot/checks/eye-labels-first-48.json`.
+  - The bar is agreement on 44 of the 48. Below it the judge does not screen the pool.
+  - ✅ PASSED at 45 of 48, on the third of four wordings measured against the same labels. The
+    other three reached 20, 44 and 21. All three of the winner's disagreements keep a marginal
+    picture a person rejected and none reject one a person kept. Written up in
+    [the judge's validation](../../../artifacts/drips/inclusive-captions-pilot/checks/judge-validation.md).
+- [x] ✅ **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
+  - Output: `scripts/census/inclusive_captions_pool_v2.py`, the manifest under
+    `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool_v2/`.
+  - COCO at a 0.50 box-fraction floor for the single-animal sets and 0.40 for both-animal. Every
+    row carries the source it came from, identical in both arms.
+  - ✅ 930 candidates judged. Kept: 243 of 306 generated cat-and-dog, 130 of 130 generated cat,
+    128 of 130 generated dog, 38 of 64 COCO cat-and-dog, 120 of 150 COCO cat, 104 of 150 COCO dog.
+    The pool is 200 cat (100 COCO, 100 generated), 200 dog (100, 100) and 150 cat-and-dog
+    (38, 112), 550 photos, every path opening.
+- [x] ✅ **2.7** Re-run the caption sampler's check against the new manifest, so the dog-present
+      share of run B's cat draws is measured on what will actually be trained.
+  - ✅ PASSED. Run B's cat-captioned draws hold a dog 25.1% of the time against run A's 0%, up
+    from 16.9% on the first pool because the both-animal set grew from 91 to 150. Every caption
+    share is within 0.003 of its design value and all four runs share one 9.9% blank rate.
+
+▶ **Next: [instruction 8](#8--audit-the-training-photos)**, the eye audit, which only you
 can do.
 
 ### 3. 🔧 Build the trainer
 
-◀ **Needs: [instruction 8](#8--audit-the-both-animal-photos)** done, so the photo count the
+◀ **Needs: [instruction 8](#8--audit-the-training-photos)** done, so the photo count the
 trainer reads is the audited one.
 
 - [x] ✅ **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
@@ -246,14 +278,15 @@ trainer reads is the audited one.
 ◀ **Needs: [instruction 9](#9--run-the-smoke-test-yourself)** done, so the loop is known to run
 before anything is built on top of it.
 
-- [ ] **4.1** Render a sheet of eight fixed seeds down the rows and four columns across: "a photo
+- [x] ✅ **4.1** Render a sheet of eight fixed seeds down the rows and four columns across: "a photo
       of a dog", "a photo of a cat", "a photo of a cat and a dog", and the product of the cat and
-      dog conditions. 512 square at 25 steps. Log it to W&B as one image per checkpoint.
+      dog conditions. 1,024 square at 25 steps, which is the resolution SDXL was trained at and
+      the one piece 6's composition calls are made on. Log it to W&B as one image per checkpoint.
   - Output: `poe_repair/experiments/inclusive_captions/sheets.py`
   - The product column is rendered at step 0 as well, before any training, because combining two
     conditions is a sampling-time operation and needs no trained weights.
   - Seeds 0 to 7, the same eight at every checkpoint and in every run.
-- [ ] **4.2** Prove the sheet on the smoke run's checkpoint and report the W&B link.
+- [x] ✅ **4.2** Prove the sheet on the smoke run's checkpoint and report the W&B link.
 
 ▶ **Next: [instruction 10](#10--look-at-the-step-0-sheet)**, you judge whether the four columns
 show what they claim to.
@@ -263,10 +296,19 @@ show what they claim to.
 ◀ **Needs: [instruction 10](#10--look-at-the-step-0-sheet)** done.
 
 - [ ] **5.1** Launch run A: joint captions on the both-animal photos, 2,000 steps, checkpoints
-      and sheets at 0, 250, 500, 1,000 and 2,000.
+      and sheets at 0, 500 and 2,000, at a learning rate of 1e-5.
   - W&B: `prime_lab/poe-repair-inclusive-captions`, one run, grouped with B.
+  - The learning rate is measured, not assumed. At 1e-4 the renders lose fur texture and
+    photographic lighting by step 250 and come back as smeared pastel shapes; at 1e-5 on the same
+    550 photos and the same 250 steps they do not.
+  - Three checkpoints rather than five, because each sheet costs four times what it did at 512.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
-    one job per user.
+    one job per user. `scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
+    refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
+    the trainer's own W&B run as it lands. Both run on `mscluster106` device 1, one after the
+    other, because `mscluster107` went down and it is the only usable `biggpu` node left. Each
+    attempt takes a tag, so its checkpoints, sheets and W&B run cannot be confused with an
+    earlier attempt's.
 - [ ] **5.2** Launch run B: 40% cat, 40% dog, 10% joint, resampled per draw.
 - [ ] **5.3** Harvest both: the queue, `pgrep` on the session node, the output count against what
       this plan expected, and the tail of each log.
@@ -279,7 +321,7 @@ while the runs train.
 ◀ **Needs: [instruction 11](#11--watch-the-sheets-fill-in-wb)** done and both runs at step 2,000.
 
 - [ ] **6.1** Render 128 product seeds per arm at 1,024 square, 50 steps. Composition calls are
-      made on these, never on the 512-square watching sheets.
+      made on these, at the same resolution the watching sheet now uses.
 - [ ] **6.2** Score each render in three categories: one cat and one dog, a hybrid, or a single
       animal. GroundingDINO counts the animals and the crop classifier names them.
   - Report the count the classifier called uncertain, since it has never been tested on a frame
@@ -314,7 +356,7 @@ of them after seeing a result, say so now, because that is the only moment the a
 
 ▶ **Next: [task 2.1](#2--finish-the-data-build)**.
 
-### 8. 👁️ Audit the both-animal photos
+### 8. 👁️ Audit the training photos
 
 ◀ **Needs: [tasks 2.1 to 2.3](#2--finish-the-data-build)** done.
 
@@ -341,6 +383,23 @@ What you wanted: a count of how many of the 131 survive, and the reasons the res
 What failure looks like: more than about 20 rejections. That moves the dog-present share of run
 B's cat draws below what 128 seeds can resolve, and the single-name caption shares have to rise
 again before anything trains.
+
+8.4 **Open the 26 single-animal audit pages** at
+`/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/audit_cat_only_page_00.png`
+through `_12`, and `audit_dog_only_page_00.png` through `_12`, written by the same renderer with
+`--set cat_only` and `--set dog_only`. The only screen on these 400 photos is the 0.25
+box-fraction floor, which measures how much of the longer side the animal spans and says nothing
+about whether the thing in the box is a live animal.
+
+8.5 **Reject the same four kinds the both-animal pass rejected**: a drawing, a statue or plush
+toy, an animal shown on a screen, and a photo where the annotation names an animal that is not
+findable in the frame.
+
+8.6 **Write the rejected tile numbers down** per set, with one word each for why.
+
+What you wanted: a rejection count per set. What failure looks like: more than about 20 in either.
+Both arms train on the identical 491 photos, so a bad photo cannot make A and B differ; it makes
+both conditions weaker and shrinks whatever gap the caption rule produces.
 
 ▶ **Next: [task 3.1](#3--build-the-trainer)**.
 
@@ -442,7 +501,7 @@ entry, and `sync-plan-tree` reconciles the scope.
 |---|---|
 | the compose-rate figure | compose rate on y, a 0-to-1 scale, one bar per model (base SDXL, run A, run B) on x, each split into one cat and one dog, a hybrid, and a single animal, with the criterion's band drawn across it. Numbers from the sidecar json beside it, 128 seeds per arm for A and B. |
 | the four-column watching sheet | eight fixed seeds down the rows, four prompts across (dog, cat, joint, product), one image per checkpoint per run, logged to W&B. Not a rate: eight seeds is a picture. |
-| [the pilot's high-level design](../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg) | not a plot. Twelve boxes read left to right, from COCO train2017 through the pool builder, the by-eye audit, the caption rule and the two trainers to the compose-rate figure. The one difference between the two runs sits on the two arrows out of the caption rule. Three boxes are dashed as not yet built: the watching sheet, the scoring pass and the figure. Every box names the file and line it comes from. |
+| [the pilot's high-level design](../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer.svg) <a href="../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer-light.png"><img src="../../../artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer-light.png" width="200" alt="Twelve boxes left to right from COCO train2017 through the pool builder, the by-eye audit and the caption rule to the two trainers and the compose-rate figure, three of them dashed"></a> | not a plot. Twelve boxes read left to right, from COCO train2017 through the pool builder, the by-eye audit, the caption rule and the two trainers to the compose-rate figure. The one difference between the two runs sits on the two arrows out of the caption rule. Three boxes are dashed as not yet built: the watching sheet, the scoring pass and the figure. Every box names the file and line it comes from. The [published page](https://claude.ai/artifact/Uhp9tJfqpgHYHnQCfVaDNc) opens each box on that file and line, and carries nine photographs the SVG does not, five of them labelled with the neighbouring experiment they came from. |
 
 ## Error Matrix
 

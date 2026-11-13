@@ -140,7 +140,7 @@ up overshoots rather than pushes further. That is an inference, not a result.
 | Cross-device pixel difference | session record, 2026-09-02 | stated |
 | The checkpoints | rank 8: `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` and `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/`; rank 16 and 32: `phase1_r16_100k/checkpoints/`, `phase1_r32_100k/checkpoints/` under the same outputs root | verified |
 | The runs that produced them | [train longer](../../plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md) for rank 8, the rank 16 and 32 plan in the same scope; W&B `8vl2uzak`, `n1w4fw5b`, `gcej8ib9`, `6xc2l8ix` in `prime_lab/poe-repair-animals-compose` | verified |
-| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint) | |
+| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | |
 
 ## Depends on
 
@@ -155,3 +155,7 @@ up overshoots rather than pushes further. That is an inference, not a result.
 - [ ] Seed 14's target is two cats in the cache; whether a re-cached target composes is untested.
 - [ ] The scene and medium changes above λ 1.3 in rung 5 are read off the grid by eye. Nothing
       measures them, so there is no number saying how far the framing moves per unit of λ.
+
+## Cross-references
+
+- The mention of **composing on 7 of 8 held-out cat-by-dog seeds** as the result a text-encoder LoRA is measured against, in [the plan that puts the LoRA on the text encoders](../../plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md#why-this-exists).

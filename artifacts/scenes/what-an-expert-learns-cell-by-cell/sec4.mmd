@@ -1,0 +1,10 @@
+flowchart LR
+  cell7(["7 · Schemes compared; now a classifier"])
+  cell8["8 · Train on set labels, then true ones"]
+  cell9(["9 · Co-occurrence and intersection"])
+  cell7 --> cell8
+  cell8 --> cell9
+  make_sets[["make_sets(f, n)"]]
+  cell8 -. defines .-> make_sets
+  train_classifier[["train_classifier(X, y, steps)"]]
+  cell8 -. defines .-> train_classifier

@@ -1,0 +1,442 @@
+{
+ "entries": [
+  {
+   "code": "xs = np.linspace(-L, L, G)",
+   "name": "the grid's coordinates along one axis",
+   "steps": [
+    "x_k = -L + k\\,\\frac{2L}{G-1}, \\quad k = 0, 1, \\dots, G-1",
+    "L = 1.1,\\; G = 241 \\;\\Rightarrow\\; x_1 - x_0 = \\frac{2.2}{240} \\approx 0.00917"
+   ]
+  },
+  {
+   "code": "grid = np.stack([X1.ravel(), X2.ravel()], 1)",
+   "name": "every point of the 2D grid, one row each",
+   "steps": [
+    "\\text{grid} = \\{(x_j, x_k) : j, k = 0, \\dots, G-1\\}",
+    "|\\text{grid}| = G^2 = 241^2 = 58{,}081 \\text{ points}"
+   ]
+  },
+  {
+   "code": "cell = (xs[1] - xs[0]) ** 2",
+   "name": "the area of one grid cell",
+   "steps": [
+    "\\Delta A = (x_1 - x_0)^2 = \\left(\\frac{2L}{G-1}\\right)^2",
+    "\\Delta A \\approx 0.00917^2 \\approx 8.4 \\times 10^{-5}"
+   ]
+  },
+  {
+   "code": "def ideal_expert",
+   "name": "the ideal expert: the training points smoothed by a Gaussian",
+   "steps": [
+    "p_\\sigma(x) = \\frac{1}{N}\\sum_{i=1}^{N} \\mathcal{N}(x;\\, x_i,\\, \\sigma^2 I)"
+   ],
+   "note": "A denoiser trained to its optimum on N points at noise level sigma has exactly this density, so no network needs training."
+  },
+  {
+   "code": "d2 = ((grid[:, None, :] - np.asarray(data)[None]) ** 2).sum(-1)",
+   "name": "squared distance from every grid point to every training point",
+   "steps": [
+    "d_{gi}^2 = \\lVert x_g - x_i \\rVert^2",
+    "= \\sum_{j=1}^{2} (x_{g,j} - x_{i,j})^2",
+    "\\text{shape: } G^2 \\times N"
+   ]
+  },
+  {
+   "code": "lp = logsumexp(-d2 / (2 * sigma**2), axis=1) - np.log(len(data)) - np.log(2 * np.pi * sigma**2)",
+   "name": "the log-density of the ideal expert at every grid point",
+   "steps": [
+    "\\mathcal{N}(x;\\, x_i,\\, \\sigma^2 I) = \\frac{1}{2\\pi\\sigma^2} \\exp\\!\\left(-\\frac{d_i^2}{2\\sigma^2}\\right) \\quad \\text{(in 2D)}",
+    "p_\\sigma(x) = \\frac{1}{N} \\cdot \\frac{1}{2\\pi\\sigma^2} \\sum_{i} \\exp\\!\\left(-\\frac{d_i^2}{2\\sigma^2}\\right)",
+    "\\log p_\\sigma(x) = \\log \\sum_{i} \\exp\\!\\left(-\\frac{d_i^2}{2\\sigma^2}\\right) - \\log N - \\log 2\\pi\\sigma^2",
+    "= \\operatorname{logsumexp}_i\\!\\left(-\\frac{d_i^2}{2\\sigma^2}\\right) - \\log N - \\log 2\\pi\\sigma^2"
+   ],
+   "note": "logsumexp subtracts the largest term before exponentiating, so a point far from every training point gets a very negative log-density instead of exp underflowing to 0."
+  },
+  {
+   "code": "p = np.exp(logp - logp.max()); return p / (p.sum() * cell)",
+   "name": "turn a log-density into a density that integrates to 1 on the grid",
+   "steps": [
+    "\\tilde p_g = \\exp(\\ell_g - m), \\quad m = \\max_h \\ell_h",
+    "p_g = \\frac{\\tilde p_g}{\\sum_h \\tilde p_h \\, \\Delta A}",
+    "\\frac{e^{\\ell_g - m}}{\\sum_h e^{\\ell_h - m}} = \\frac{e^{-m} e^{\\ell_g}}{e^{-m} \\sum_h e^{\\ell_h}} = \\frac{e^{\\ell_g}}{\\sum_h e^{\\ell_h}}",
+    "\\sum_g p_g \\, \\Delta A = 1"
+   ],
+   "note": "Subtracting the maximum changes nothing in the result, as the third step shows; it only keeps exp from overflowing."
+  },
+  {
+   "code": "return float((p * region).sum() * cell)",
+   "name": "the probability mass inside a region",
+   "steps": [
+    "P(R) = \\int_R p(x)\\, dx",
+    "\\approx \\sum_{g \\in R} p_g \\, \\Delta A"
+   ]
+  },
+  {
+   "code": "def one_step_grads",
+   "name": "one training step's gradient for a given training set",
+   "steps": [
+    "g(\\mathcal{D}) = \\nabla_\\theta \\mathcal{L}(\\theta;\\, \\mathcal{D}) \\text{ at a fixed } \\theta_0"
+   ],
+   "note": "Same seed, same network, same points: if the gradient is identical for two labellings, the labels never reached the loss."
+  },
+  {
+   "code": "net = torch.nn.Sequential(torch.nn.Linear(3, 32), torch.nn.SiLU(), torch.nn.Linear(32, 2))",
+   "name": "the denoiser: a two-layer network",
+   "steps": [
+    "\\varepsilon_\\theta(x_t, t) = W_2 \\,\\mathrm{SiLU}\\!\\left(W_1 \\begin{bmatrix} x_t \\\\ t \\end{bmatrix} + b_1\\right) + b_2",
+    "W_1 \\in \\mathbb{R}^{32 \\times 3}, \\quad W_2 \\in \\mathbb{R}^{2 \\times 32}"
+   ]
+  },
+  {
+   "code": "x0 = torch.tensor(x0, dtype=torch.float32).repeat(64, 1)",
+   "name": "the training set, repeated into a batch",
+   "steps": [
+    "x_0 \\in \\mathbb{R}^{3 \\times 2} \\;\\to\\; \\mathbb{R}^{192 \\times 2}",
+    "B = 64 \\times 3 = 192"
+   ]
+  },
+  {
+   "code": "t = torch.rand(len(x0), 1); abar = torch.cos(t * torch.pi / 2) ** 2",
+   "name": "a random time per example, and how much signal survives at it",
+   "steps": [
+    "t \\sim \\mathcal{U}(0, 1)",
+    "\\bar\\alpha_t = \\cos^2\\!\\left(\\frac{\\pi t}{2}\\right)",
+    "\\bar\\alpha_0 = 1, \\quad \\bar\\alpha_1 = 0"
+   ]
+  },
+  {
+   "code": "eps = torch.randn_like(x0)",
+   "name": "ε, the noise",
+   "steps": [
+    "\\varepsilon \\sim \\mathcal{N}(0, I), \\quad \\varepsilon \\in \\mathbb{R}^{192 \\times 2}"
+   ]
+  },
+  {
+   "code": "xt = abar.sqrt() * x0 + (1 - abar).sqrt() * eps",
+   "name": "the noisy point at time t",
+   "steps": [
+    "x_t = \\sqrt{\\bar\\alpha_t}\\, x_0 + \\sqrt{1 - \\bar\\alpha_t}\\, \\varepsilon"
+   ]
+  },
+  {
+   "code": "loss = ((eps - net(torch.cat([xt, t], 1))) ** 2).mean()",
+   "name": "the denoising loss",
+   "steps": [
+    "\\mathcal{L}(\\theta) = \\frac{1}{2B} \\sum_{b=1}^{B} \\sum_{j=1}^{2} \\big(\\varepsilon_{b,j} - \\varepsilon_\\theta(x_{t,b}, t_b)_j\\big)^2"
+   ],
+   "note": "No label appears anywhere in it: the loss sees only the points, their noise and their times."
+  },
+  {
+   "code": "loss.backward()",
+   "name": "the gradient of the loss, by backpropagation",
+   "steps": [
+    "\\nabla_\\theta \\mathcal{L}(\\theta)"
+   ]
+  },
+  {
+   "code": "return torch.cat([p.grad.flatten() for p in net.parameters()])",
+   "name": "every parameter's gradient as one vector",
+   "steps": [
+    "g = \\operatorname{vec}\\!\\left(\\nabla_{W_1}\\mathcal{L},\\, \\nabla_{b_1}\\mathcal{L},\\, \\nabla_{W_2}\\mathcal{L},\\, \\nabla_{b_2}\\mathcal{L}\\right)",
+    "\\dim g = 32\\cdot 3 + 32 + 2 \\cdot 32 + 2 = 194"
+   ]
+  },
+  {
+   "code": "X1, X2 = np.meshgrid(xs, xs)",
+   "name": "the grid's two coordinates as G-by-G arrays",
+   "steps": [
+    "(X_1)_{jk} = x_k, \\quad (X_2)_{jk} = x_j",
+    "j, k = 0, \\dots, G-1"
+   ],
+   "note": ""
+  },
+  {
+   "code": "A_set = np.array([[-0.5, -0.5], [-0.6, -0.4], [-0.5, 0.5]])",
+   "name": "expert A's three training points",
+   "steps": [
+    "\\mathcal{D}_A = \\{(-0.5, -0.5),\\ (-0.6, -0.4),\\ (-0.5, 0.5)\\}"
+   ],
+   "note": "The third point sits in the top-left quadrant, the one that is secretly also B."
+  },
+  {
+   "code": "B_set = np.array([[0.5, 0.5], [0.6, 0.4], [-0.4, 0.6]])",
+   "name": "expert B's three training points",
+   "steps": [
+    "\\mathcal{D}_B = \\{(0.5, 0.5),\\ (0.6, 0.4),\\ (-0.4, 0.6)\\}"
+   ],
+   "note": "The third point sits in the top-left quadrant, the one that is secretly also A."
+  },
+  {
+   "code": "pool = np.vstack([A_set, B_set])",
+   "name": "every training point, in one pool",
+   "steps": [
+    "\\mathcal{P} = \\mathcal{D}_A \\cup \\mathcal{D}_B, \\quad |\\mathcal{P}| = 6"
+   ],
+   "note": ""
+  },
+  {
+   "code": "return pool[np.array(keep)]",
+   "name": "the points that train condition c, under one labelling scheme",
+   "steps": [
+    "\\text{contains: } \\mathcal{D}_c = \\{x_i \\in \\mathcal{P} : c \\in S_i\\}",
+    "\\text{exactly: } \\mathcal{D}_c = \\{x_i \\in \\mathcal{P} : S_i = \\{c\\}\\}"
+   ],
+   "note": "S_i is point i's label set. Under exactly, a point labelled {A, B} trains neither A nor B."
+  },
+  {
+   "code": "comp = density(ideal_expert(dA, sig) + ideal_expert(dB, sig) - lp_all)",
+   "name": "the composition of two conditions",
+   "steps": [
+    "p(x \\mid A, B) \\propto \\frac{p(x \\mid A)\\, p(x \\mid B)}{p(x)}",
+    "\\log p(x \\mid A, B) = \\log p(x \\mid A) + \\log p(x \\mid B) - \\log p(x) - \\log Z",
+    "Z = \\sum_g \\frac{p(x_g \\mid A)\\, p(x_g \\mid B)}{p(x_g)}\\, \\Delta A"
+   ],
+   "note": "density() supplies the last step: it exponentiates and divides by the sum, so Z never has to be written."
+  },
+  {
+   "code": "a = np.c_[rng.uniform(-1, 0, n), np.where(rng.random(n) < f, rng.uniform(0, 1, n), rng.uniform(-1, 0, n))]",
+   "name": "A's set: the left half, with a fraction f of it in the top half",
+   "steps": [
+    "x_1 \\sim \\mathcal{U}(-1, 0)",
+    "x_2 \\sim \\begin{cases} \\mathcal{U}(0, 1) & \\text{with probability } f \\\\ \\mathcal{U}(-1, 0) & \\text{otherwise} \\end{cases}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "b = np.c_[np.where(rng.random(n) < f, rng.uniform(-1, 0, n), rng.uniform(0, 1, n)), rng.uniform(0, 1, n)]",
+   "name": "B's set: the top half, with a fraction f of it in the left half",
+   "steps": [
+    "x_1 \\sim \\begin{cases} \\mathcal{U}(-1, 0) & \\text{with probability } f \\\\ \\mathcal{U}(0, 1) & \\text{otherwise} \\end{cases}",
+    "x_2 \\sim \\mathcal{U}(0, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "X = np.vstack([A400, B400])",
+   "name": "both sets in one array",
+   "steps": [
+    "X \\in \\mathbb{R}^{800 \\times 2}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "y_from_set = np.r_[np.zeros(400), np.ones(400)] # the label the data carries",
+   "name": "the label the data carries: which set a point came from",
+   "steps": [
+    "y_i = \\begin{cases} 0 & x_i \\in \\mathcal{D}_A \\\\ 1 & x_i \\in \\mathcal{D}_B \\end{cases}"
+   ],
+   "note": "A hidden-B point in A's set gets y = 0, the label 'not B', which is the break this section shows."
+  },
+  {
+   "code": "net = torch.nn.Sequential(torch.nn.Linear(2, 64), torch.nn.SiLU(), torch.nn.Linear(64, 64), torch.nn.SiLU(), torch.nn.Linear(64, 1))",
+   "name": "the classifier: a network that outputs one logit",
+   "steps": [
+    "f_\\theta(x) = W_3\\, \\mathrm{SiLU}\\!\\big(W_2\\, \\mathrm{SiLU}(W_1 x + b_1) + b_2\\big) + b_3",
+    "p_\\theta(B \\mid x) = \\sigma\\big(f_\\theta(x)\\big)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "Xt, yt = torch.tensor(X, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)[:, None]",
+   "name": "the data as tensors, labels as a column",
+   "steps": [
+    "X \\in \\mathbb{R}^{800 \\times 2}, \\quad y \\in \\{0, 1\\}^{800 \\times 1}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "opt.zero_grad(); torch.nn.functional.binary_cross_entropy_with_logits(net(Xt), yt).backward(); opt.step()",
+   "name": "one training step on the binary cross-entropy",
+   "steps": [
+    "\\mathcal{L}(\\theta) = -\\frac{1}{n} \\sum_{i=1}^{n} \\Big[ y_i \\log \\sigma(f_\\theta(x_i)) + (1 - y_i) \\log\\big(1 - \\sigma(f_\\theta(x_i))\\big) \\Big]",
+    "\\theta \\leftarrow \\mathrm{Adam}\\big(\\theta,\\ \\nabla_\\theta \\mathcal{L}\\big)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "q = np.linspace(-0.85, 0.85, 9); Q1, Q2 = np.meshgrid(q, q)",
+   "name": "a 9-by-9 grid of points to read the guidance at",
+   "steps": [
+    "q_k = -0.85 + k \\cdot \\frac{1.7}{8}, \\quad k = 0, \\dots, 8",
+    "81 \\text{ query points}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "pB = torch.sigmoid(net(torch.tensor(grid, dtype=torch.float32))).numpy().reshape(G, G)",
+   "name": "the classifier's probability of B at every grid point",
+   "steps": [
+    "p_\\theta(B \\mid x) = \\sigma(f_\\theta(x)) = \\frac{1}{1 + e^{-f_\\theta(x)}}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "torch.nn.functional.logsigmoid(net(qx)).sum().backward()",
+   "name": "the guidance direction toward B, at every query point",
+   "steps": [
+    "\\nabla_x \\log p_\\theta(B \\mid x) = \\nabla_x \\log \\sigma\\big(f_\\theta(x)\\big)",
+    "= \\big(1 - \\sigma(f_\\theta(x))\\big)\\, \\nabla_x f_\\theta(x)"
+   ],
+   "note": "Summing over the query points before backward gives each point its own gradient, since no point's output depends on another's input."
+  },
+  {
+   "code": "gr = qx.grad.numpy(); gr = gr / (np.linalg.norm(gr, axis=1, keepdims=True) + 1e-12)",
+   "name": "each guidance vector scaled to length 1",
+   "steps": [
+    "\\hat{g} = \\frac{g}{\\lVert g \\rVert + 10^{-12}}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "push = gr[in_tl].mean(0)",
+   "name": "the average guidance direction in the top-left quadrant",
+   "steps": [
+    "\\bar{g} = \\frac{1}{|T|} \\sum_{x \\in T} \\hat{g}(x), \\quad T = \\{x : x_1 < 0,\\ x_2 > 0\\}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "ring = lambda n: 0.5 * np.c_[np.cos(a := 2 * np.pi * rng.integers(0, 8, n) / 8), np.sin(a)] + 0.03 * rng.standard_normal((n, 2))",
+   "name": "points on a ring of eight",
+   "steps": [
+    "\\phi = \\frac{2\\pi k}{8}, \\quad k \\sim \\mathcal{U}\\{0, \\dots, 7\\}",
+    "x = 0.5\\, (\\cos \\phi, \\sin \\phi) + 0.03\\, \\xi, \\quad \\xi \\sim \\mathcal{N}(0, I)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "bar = lambda n: np.c_[rng.uniform(-0.2, 0.2, n), rng.uniform(-1, 1, n)]",
+   "name": "points on a vertical bar",
+   "steps": [
+    "x_1 \\sim \\mathcal{U}(-0.2, 0.2), \\quad x_2 \\sim \\mathcal{U}(-1, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "left_half = lambda n: np.c_[rng.uniform(-1, 0, n), rng.uniform(-1, 1, n)]",
+   "name": "points in the left half",
+   "steps": [
+    "x_1 \\sim \\mathcal{U}(-1, 0), \\quad x_2 \\sim \\mathcal{U}(-1, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "top_half = lambda n: np.c_[rng.uniform(-1, 1, n), rng.uniform(0, 1, n)]",
+   "name": "points in the top half",
+   "steps": [
+    "x_1 \\sim \\mathcal{U}(-1, 1), \\quad x_2 \\sim \\mathcal{U}(0, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "prod = density(lpA + lpB)",
+   "name": "the product of the two experts",
+   "steps": [
+    "p_{A \\cdot B}(x) \\propto p_A(x)\\, p_B(x)",
+    "\\log p_{A \\cdot B}(x) = \\log p_A(x) + \\log p_B(x) - \\log Z"
+   ],
+   "note": "Adding log-densities multiplies densities; density() renormalises."
+  },
+  {
+   "code": "o = v + 0.05 * rng.standard_normal(n); other = rng.uniform(-1, 1, n)",
+   "name": "the object's value, and whatever fills the other slot",
+   "steps": [
+    "o = v + 0.05\\, \\xi, \\quad \\xi \\sim \\mathcal{N}(0, 1)",
+    "u \\sim \\mathcal{U}(-1, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "swap = (rng.random(n) < 0.5) if varied else np.zeros(n, bool)",
+   "name": "whether the object sits in slot 2 instead of slot 1",
+   "steps": [
+    "s \\sim \\begin{cases} \\mathrm{Bernoulli}(0.5) & \\text{position-varied} \\\\ 0 & \\text{centred} \\end{cases}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "return np.where(swap[:, None], np.c_[other, o], np.c_[o, other])",
+   "name": "the image as two slots",
+   "steps": [
+    "x = \\begin{cases} (o, u) & s = 0 \\\\ (u, o) & s = 1 \\end{cases}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "near = lambda Z, v: np.abs(Z - v) < 0.15",
+   "name": "close to a value",
+   "steps": [
+    "\\mathrm{near}(z, v) = \\big[\\, |z - v| < 0.15 \\,\\big]"
+   ],
+   "note": ""
+  },
+  {
+   "code": "CO = (near(X1, -.5) & near(X2, .5)) | (near(X1, .5) & near(X2, -.5))",
+   "name": "the co-occurrence region: one cat and one dog",
+   "steps": [
+    "\\mathrm{CO} = \\big(\\mathrm{near}(x_1, -0.5) \\wedge \\mathrm{near}(x_2, 0.5)\\big) \\vee \\big(\\mathrm{near}(x_1, 0.5) \\wedge \\mathrm{near}(x_2, -0.5)\\big)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "CHIMERA = ~(near(X1, -.5) | near(X1, .5) | near(X2, -.5) | near(X2, .5))",
+   "name": "the chimera region: neither object in either slot",
+   "steps": [
+    "\\mathrm{CHIMERA} = \\neg\\big(\\mathrm{near}(x_1, \\pm 0.5) \\vee \\mathrm{near}(x_2, \\pm 0.5)\\big)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "prod = density(lpc + lpd)",
+   "name": "the product of the cat and dog experts",
+   "steps": [
+    "p(x) \\propto p_{\\text{cat}}(x)\\, p_{\\text{dog}}(x)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "a = np.c_[np.where(top, -0.8, -0.5) + 0.06 * rng.standard_normal(n),",
+   "name": "the dog set: a dog at x1 = -0.5, a wet dog at x1 = -0.8 in the top half",
+   "steps": [
+    "t \\sim \\mathrm{Bernoulli}(f)",
+    "x_1 = \\begin{cases} -0.8 + 0.06\\, \\xi & t = 1 \\\\ -0.5 + 0.06\\, \\xi & t = 0 \\end{cases}",
+    "x_2 \\sim \\begin{cases} \\mathcal{U}(0, 1) & t = 1 \\\\ \\mathcal{U}(-1, 0) & t = 0 \\end{cases}"
+   ],
+   "note": ""
+  },
+  {
+   "code": "b = np.c_[np.where(hid, -0.8 + 0.06 * rng.standard_normal(n), rng.uniform(-1, 1, n)), rng.uniform(0, 1, n)]",
+   "name": "the rain set: the top half, a fraction f of it at the wet dog's x1",
+   "steps": [
+    "h \\sim \\mathrm{Bernoulli}(f)",
+    "x_1 = \\begin{cases} -0.8 + 0.06\\, \\xi & h = 1 \\\\ \\sim \\mathcal{U}(-1, 1) & h = 0 \\end{cases}",
+    "x_2 \\sim \\mathcal{U}(0, 1)"
+   ],
+   "note": ""
+  },
+  {
+   "code": "prod = density(ideal_expert(a, 0.08) + ideal_expert(b, 0.08))",
+   "name": "the product of the dog and rain experts",
+   "steps": [
+    "p(x) \\propto p_{\\text{dog}}(x)\\, p_{\\text{rain}}(x), \\quad \\sigma = 0.08"
+   ],
+   "note": ""
+  },
+  {
+   "code": "mean_x1 = (prod * top * X1).sum() / (prod * top).sum()",
+   "name": "where the product's top-half mass sits along x1",
+   "steps": [
+    "\\bar{x}_1 = \\mathbb{E}[x_1 \\mid x_2 > 0] = \\frac{\\sum_g p_g\\, [x_{2,g} > 0]\\, x_{1,g}}{\\sum_g p_g\\, [x_{2,g} > 0]}"
+   ],
+   "note": "At 0% overlap it sits near -0.5, the dry dog; at 20% it moves toward -0.8, the wet dog only the overlap taught."
+  },
+  {
+   "code": "qx = torch.tensor(np.c_[Q1.ravel(), Q2.ravel()], dtype=torch.float32, requires_grad=True)",
+   "name": "the 81 query points, tracked so the gradient can be taken with respect to them",
+   "steps": [
+    "Q = \\{(q_j, q_k)\\} \\in \\mathbb{R}^{81 \\times 2}",
+    "\\text{requires\\_grad: } \\nabla_x \\text{ is kept for every row}"
+   ]
+  }
+ ]
+}

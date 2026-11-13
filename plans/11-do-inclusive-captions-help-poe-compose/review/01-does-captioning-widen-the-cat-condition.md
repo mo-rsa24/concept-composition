@@ -34,7 +34,7 @@ seen. Both runs leave the caption blank 10% of the time, on every photo in every
 **The product.** `eps_uncond + g * (eps_a + eps_b - 2 * eps_uncond)` with the cat prompt as `a`,
 the dog prompt as `b`, and guidance 7.5.
 
-**Compose rate.** The fraction of a run's 128 product renders holding exactly one cat and one
+**[Compose rate](../../../context/world/compose-rate.md).** The fraction of a run's 128 product renders holding exactly one cat and one
 dog, with neither animal a hybrid of the two. Counted by GroundingDINO, named by the CLIP crop
 classifier, judged off 1,024-square tiles at full resolution.
 

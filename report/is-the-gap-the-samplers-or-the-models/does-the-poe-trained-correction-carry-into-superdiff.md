@@ -81,7 +81,7 @@ finding's question.
 | The first-separating λ on 12 seeds | three sheets under `paper/iclr/figures/how-much-is-added/across-composition-rules/`, eye read 2026-09-03 and recorded in the review file | stated |
 | The sha and attach counts | review file run table, 2026-09-03 | inferred |
 | The runs | attach and inertness checks in session on mscluster109 device 1; the transfer set by `nohup` on mscluster109 device 1, 49 cells at about 121 s each before the stop; the cosine cell on mscluster109 device 0; all 2026-09-03 | verified |
-| Regenerate with | [runbook § inject a PoE adapter into SuperDiff](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction) | |
+| Regenerate with | [runbook § inject a PoE adapter into SuperDiff](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) | |
 | The plan | [does the PoE-trained correction reach SuperDiff](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/07-does-the-poe-trained-correction-reach-superdiff.md), root step 49 | |
 
 ## Depends on

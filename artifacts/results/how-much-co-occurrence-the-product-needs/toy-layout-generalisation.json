@@ -1,0 +1,33 @@
+{
+ "what": "two trained layouts, two the experts never saw; which one does the product return",
+ "pair_weight_split_over_two_layouts": 0.1,
+ "samples_per_cell": 300,
+ "rng_seed": 20261022,
+ "trained_layouts": [
+  "circle left, square right",
+  "square left, circle right"
+ ],
+ "unseen_layouts": [
+  "circle left, square centre",
+  "circle centre, square right"
+ ],
+ "gate_on_squared_distance": 30.0,
+ "nearest_layout_counts": {
+  "exact": {
+   "circle left, square right": 145,
+   "square left, circle right": 155,
+   "circle left, square centre": 0,
+   "circle centre, square right": 0,
+   "not close to any of the four layouts": 0,
+   "median distance to the nearest layout": 7.63
+  },
+  "reverse diffusion": {
+   "circle left, square right": 18,
+   "square left, circle right": 19,
+   "circle left, square centre": 0,
+   "circle centre, square right": 0,
+   "not close to any of the four layouts": 263,
+   "median distance to the nearest layout": 56.73
+  }
+ }
+}

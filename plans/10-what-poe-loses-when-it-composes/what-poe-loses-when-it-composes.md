@@ -262,6 +262,17 @@ with colours that share a channel with yellow.*
 **The separation does not have to be in pixels.** If it exists in some invertible transformation of
 the image, the same operator composes correctly there.
 
+**The support argument is an argument about the training data, not about products.** The toy measures
+it directly ([the co-occurrence sweep](../../artifacts/results/how-much-co-occurrence-the-product-needs/README.md)).
+With no image holding both shapes, the exact product of the two experts puts 300 of 300 draws on an
+overlaid blob, which is the support argument as a number. Give the side-by-side pair image a weight of
+one part in a thousand inside both experts and the exact product puts 300 of 300 draws on a clean pair.
+The pair image paired with itself pays no distance penalty, while a circle paired with a square pays
+`exp(-d^2/4\sigma^2)` with `d^2 = 104.4` at `\sigma = 0.1`, so a thousandth of co-occurrence outweighs
+every disagreeing alternative by `exp(2610)`. Where a dataset holds any images of both concepts at
+once, the plain product already prefers the composition and the projective construction is not needed
+to obtain it.
+
 ### 3.5 The interaction term
 
 **Subtract PoE's score from the true joint score.** Using the Bayes steps of §3.1 without the
@@ -1434,3 +1445,4 @@ script its row names.
 - The mention of **joint prompt** in [the caption walk on wet camels and wet dogs](today-camel-and-dog-in-the-training-data.md).
 - The mention of **joint prompt** in [the learned-token run](today-a-learned-and-token.md).
 - The mention of **caption fine-tuning** in [the structural route](route-structural-can-a-toy-reproduce-the-hybrid.md).
+- The mention of **what PoE loses when it composes**, scope 10 placed in the understanding-compositionality project, in [the project table for regrouping the core repo](../split-into-idea-repos.md).

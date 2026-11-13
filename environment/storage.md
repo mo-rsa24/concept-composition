@@ -14,6 +14,12 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
   seeds, 50 steps each; contents verified by direct filesystem inspection and a loaded residual
   file on 2026-08-04).
 - **W&B project for the animals program:** `prime_lab/poe-repair-animals-compose`.
+- **CelebA** (aligned faces, identity and all 40 attributes, parquet, 11 GB):
+  `/datasets/mmolefe/celeba/flwrlabs-celeba/img_align+identity+attr/`, 19 train, valid and 3 test
+  shards. Pulled anonymously from Hugging Face `flwrlabs/celeba` on the login node `mscluster84`
+  with the `co3` python's `huggingface_hub` on 2026-11-04. Counted from its `Male` and
+  `Blond_Hair` columns: train 162,770 faces, 1,387 of them blond men (0.852%); valid 19,867 with
+  182; test 19,962 with 180.
 
 > The heldout pairs are the animal pairs kept out of training on purpose, so a result measured on
 > them says whether the fix reaches pairs the model never trained on.

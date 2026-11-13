@@ -1,0 +1,134 @@
+{
+ "title": "What an expert learns",
+ "page_title": "Kinds of composition notebook",
+ "subtitle": "A notebook read cell by cell",
+ "lede": "The notebook drawn section by section: open a section for its cells, walk any cell with its maths typeset, see what each cell drew, and follow its words to where they are taught.",
+ "version_line": "1 box.",
+ "static": true,
+ "crumb": "Notebook",
+ "opening": {
+  "kicker": "System level, 1 box",
+  "title": "The composition notebook",
+  "paragraphs": [
+   "Open the box to walk the notebook."
+  ]
+ },
+ "nodes": [
+  {
+   "id": "nb",
+   "kind": "service",
+   "label": "the notebook",
+   "sub": "15 cells",
+   "col": 0,
+   "row": 0,
+   "does": "Works out what an expert learns, and the kinds of composition."
+  }
+ ],
+ "edges": [],
+ "details": [],
+ "levels": {
+  "nb-outline": {
+   "parent": "system",
+   "box": "nb",
+   "view": "config",
+   "tab": "Outline",
+   "title": "The notebook, section by section",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "top.mmd",
+    "diagram": "top.svg",
+    "maths": "notebook-maths.json"
+   }
+  },
+  "nb-sec1": {
+   "parent": "nb-outline",
+   "box": "sec1",
+   "crumb": "Setup: the ideal expert",
+   "view": "config",
+   "tab": "Setup: the ideal expert",
+   "title": "Opening and the helpers",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec1.mmd",
+    "diagram": "sec1.svg",
+    "maths": "notebook-maths.json"
+   }
+  },
+  "nb-sec2": {
+   "parent": "nb-outline",
+   "box": "sec2",
+   "crumb": "Same points, two labellings",
+   "view": "config",
+   "tab": "Same points, two labellings",
+   "title": "1. Example",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec2.mmd",
+    "diagram": "sec2.svg",
+    "maths": "notebook-maths.json",
+    "plumb": {
+     "one_step_grads": {
+      "why": "The claim that labels never reach the loss rests on this function printing a gradient difference of exactly 0.0. Run it yourself, change the labels, and watch the number.",
+      "prompt": "/plumb run one_step_grads from the composition notebook on A_set under labels_v1 and labels_v2 in a fresh playground copy, print the largest difference between the two gradients, then change one training point and watch the difference stop being 0.0. Notebook: /home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb, cells 2 to 4."
+     }
+    }
+   }
+  },
+  "nb-sec3": {
+   "parent": "nb-outline",
+   "box": "sec3",
+   "crumb": "Labels steer a conditional model",
+   "view": "config",
+   "tab": "Labels steer a conditional model",
+   "title": "2. Break, part 1",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec3.mmd",
+    "diagram": "sec3.svg",
+    "maths": "notebook-maths.json"
+   }
+  },
+  "nb-sec4": {
+   "parent": "nb-outline",
+   "box": "sec4",
+   "crumb": "A classifier learns \"not B\"",
+   "view": "config",
+   "tab": "A classifier learns \"not B\"",
+   "title": "3. Break, part 2",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec4.mmd",
+    "diagram": "sec4.svg",
+    "maths": "notebook-maths.json"
+   }
+  },
+  "nb-sec5": {
+   "parent": "nb-outline",
+   "box": "sec5",
+   "crumb": "Four kinds of composition",
+   "view": "config",
+   "tab": "Four kinds of composition",
+   "title": "4. The kinds of composition",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec5.mmd",
+    "diagram": "sec5.svg",
+    "maths": "notebook-maths.json"
+   }
+  },
+  "nb-sec6": {
+   "parent": "nb-outline",
+   "box": "sec6",
+   "crumb": "What this cannot show",
+   "view": "config",
+   "tab": "What this cannot show",
+   "title": "What it cannot show",
+   "read_config": {
+    "file": "/home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb",
+    "mmd": "sec6.mmd",
+    "diagram": "sec6.svg",
+    "maths": "notebook-maths.json"
+   }
+  }
+ }
+}

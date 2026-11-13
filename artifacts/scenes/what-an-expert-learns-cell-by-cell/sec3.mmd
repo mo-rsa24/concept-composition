@@ -1,0 +1,10 @@
+flowchart LR
+  cell5(["5 · Same gradient; now a conditional model"])
+  cell6["6 · Compose under two label schemes"]
+  cell7(["7 · Schemes compared; now a classifier"])
+  cell5 --> cell6
+  cell6 --> cell7
+  condition[["condition(c, scheme)"]]
+  cell6 -. defines .-> condition
+  from_sec1[/"from section 1: density, ideal_expert, mass, show"/]
+  cell6 -. uses .-> from_sec1

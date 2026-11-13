@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model 3, step by step</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&family=Paprika&family=Mouse+Memoirs&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfaf7; --panel:#ffffff; --ink:#1d1f24; --muted:#5d6370; --rule:#d9d6cf; --shade:#f1efe9;
+  --accent:#0f766e; --accent-soft:#d5efec; --hot:#c2410c; --hot-soft:#fbe3d6; --ok:#15803d;
+  --red:#d92e26; --blue:#2959cc; --purple:#7b3fa0; --neg:#9a6b2f;
+  --shout:"DynaPuff","Trebuchet MS",system-ui,sans-serif;
+  --title:"Paprika",Georgia,serif;
+  --label:"Mouse Memoirs","Arial Narrow",sans-serif;
+  --prose:"Public Sans",system-ui,sans-serif;
+  --data:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#15171b; --panel:#1d2026; --ink:#eceae4; --muted:#a3a8b3; --rule:#363a43; --shade:#24272e;
+    --accent:#3fc2b4; --accent-soft:#163a37; --hot:#f08a4b; --hot-soft:#3b2418; --ok:#4ade80;
+    --red:#ef5a50; --blue:#6b93f0; --purple:#b07ad6; --neg:#d0a060;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#15171b; --panel:#1d2026; --ink:#eceae4; --muted:#a3a8b3; --rule:#363a43; --shade:#24272e;
+  --accent:#3fc2b4; --accent-soft:#163a37; --hot:#f08a4b; --hot-soft:#3b2418; --ok:#4ade80;
+  --red:#ef5a50; --blue:#6b93f0; --purple:#b07ad6; --neg:#d0a060;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--prose);font-size:18px;line-height:1.6}
+body{min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:18px;padding:10px 16px;border-bottom:1px solid var(--rule);background:var(--panel);flex-wrap:wrap}
+header h1{font-family:var(--shout);font-weight:500;font-size:clamp(22px,2.2vw,30px);margin:0;line-height:1.1}
+.chapters{display:flex;gap:6px;flex-wrap:wrap;flex:1}
+.chapters button{font-family:var(--label);font-size:17px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--rule);background:var(--shade);color:var(--muted);border-radius:999px;padding:2px 12px;cursor:pointer}
+.chapters button[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+.tools{display:flex;gap:8px}
+.tools button,.nav button,.pick button{font-family:var(--prose);font-size:15px;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+main{flex:1;padding:14px 16px 6px;display:flex;flex-direction:column;gap:10px;min-height:0}
+.ftitle{font-family:var(--title);font-size:clamp(22px,2.3vw,32px);margin:0;line-height:1.15}
+.ftitle small{font-family:var(--label);font-size:16px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-left:10px}
+#stage{flex:1;min-height:0;display:flex;align-items:flex-start;justify-content:center;overflow-x:auto;overflow-y:hidden}
+#stage > .fig{width:100%;max-width:1180px;animation:rise .28s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+svg{display:block;width:100%;height:auto;max-height:calc(100vh - 330px)}
+svg text{font-family:var(--label);font-size:17px;letter-spacing:.04em;fill:var(--ink);paint-order:stroke;stroke:var(--panel);stroke-width:3.5px;stroke-linejoin:round}
+svg text.num{font-family:var(--data);font-size:14px;letter-spacing:0}
+svg text.mut{fill:var(--muted)}
+svg text.big{font-size:22px}
+svg image{image-rendering:pixelated}
+.box{fill:var(--panel);stroke:var(--ink);stroke-width:1.6}
+.box.mech{fill:var(--accent-soft);stroke:var(--accent)}
+.box.hot{fill:var(--hot-soft);stroke:var(--hot)}
+.clk{cursor:pointer}.clk:hover .box{stroke-width:3}
+.arrow{stroke:var(--ink);stroke-width:1.8;fill:none;marker-end:url(#ah)}
+.arrow.acc{stroke:var(--accent)}
+.tag{font-family:var(--label);font-size:14px;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:0 6px;border:1px solid currentColor;margin-left:8px;vertical-align:middle}
+.tag.real{color:var(--ok)}.tag.ill{color:var(--hot)}.tag.cfg{color:var(--accent)}
+.row{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
+.col{flex:1 1 0;min-width:0}
+.tiles{display:flex;gap:6px;flex-wrap:wrap}
+.tiles img,.pic{image-rendering:pixelated;border:1px solid var(--rule);background:#fff}
+.strip{image-rendering:pixelated;width:100%;max-width:900px;border:1px solid var(--rule);background:#fff;display:block}
+.lab{font-family:var(--label);font-size:17px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-family:var(--data);font-size:.93em}
+.count{font-family:var(--data);font-size:22px}
+.count b{font-weight:600}
+.pick{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.pick button[aria-pressed="true"]{background:var(--accent);color:var(--panel);border-color:var(--accent)}
+.grid{display:grid;gap:6px 10px;align-items:center}
+.cap{min-height:3.4em;max-width:80ch;margin:0;font-size:18px}
+details{max-width:1180px}
+details summary{cursor:pointer;color:var(--muted);font-size:15px}
+pre.code{font-family:var(--data);font-size:13.5px;line-height:1.45;background:var(--shade);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;overflow-x:auto;margin:6px 0}
+pre.code span{display:block;white-space:pre}
+pre.code i{display:inline-block;width:3.2em;color:var(--muted);font-style:normal;user-select:none}
+pre.code span.hl{background:var(--accent-soft)}
+.prov{font-size:15px;color:var(--muted);max-width:90ch}
+.prov p{margin:.4em 0}
+.disc{display:flex;gap:24px;flex-wrap:wrap}
+.nav{display:flex;align-items:center;gap:10px;padding:8px 16px;border-top:1px solid var(--rule);background:var(--panel)}
+.dots{display:flex;gap:6px;flex:1;justify-content:center;flex-wrap:wrap}
+.dots button{width:14px;height:14px;padding:0;border-radius:50%;border:1px solid var(--muted);background:transparent}
+.dots button[aria-current="true"]{background:var(--accent);border-color:var(--accent)}
+#fnum{font-family:var(--data);font-size:15px;color:var(--muted);min-width:4.5em;text-align:center}
+math{font-size:1.05em}
+math .c{color:var(--red)} math .s{color:var(--blue)} math .e{color:var(--muted)} math .g{color:var(--accent)}
+dialog{max-width:min(900px,94vw);border:1px solid var(--rule);border-radius:12px;background:var(--panel);color:var(--ink);padding:18px 22px}
+dialog::backdrop{background:rgba(0,0,0,.35)}
+dialog h2{font-family:var(--title);font-size:24px;margin:.6em 0 .2em}
+dialog p,dialog li{font-size:16px}
+.frame[hidden]{display:none!important}
+@media (max-width:700px){
+  html,body{font-size:16px}
+  svg{max-height:none}
+  .cap{font-size:16px}
+  .chapters{order:3;flex-basis:100%}
+  header h1{flex:1}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Model 3, step by step</h1>
+  <nav class="chapters" id="chapters" aria-label="chapters"></nav>
+  <div class="tools">
+    <button id="about" type="button">About this page</button>
+    <button id="theme" type="button" aria-label="switch light or dark">Dark</button>
+  </div>
+</header>
+<main>
+  <h2 class="ftitle" id="ftitle"></h2>
+  <div id="stage"></div>
+  <p class="cap" id="cap"></p>
+  <div class="disc">
+    <details id="dcode"><summary>the code</summary><div id="code"></div></details>
+    <details id="dprov"><summary>where these numbers come from</summary><div class="prov" id="prov"></div></details>
+  </div>
+</main>
+<div class="nav">
+  <button id="prev" type="button">Back</button>
+  <div class="dots" id="dots"></div>
+  <span id="fnum"></span>
+  <button id="next" type="button">Next</button>
+</div>
+
+<dialog id="aboutBox">
+  <h2>Where each part comes from</h2>
+  <p>Every shape and parameter count comes from one hooked forward pass of the code's own <code>VAE</code> and <code>Denoiser</code> classes (<code>toy_caption_dial_ldm.py</code>, lines 69 to 99). Saved samples come untouched from the npz files in <code>artifacts/results/how-much-co-occurrence-the-product-needs/</code>, and their counts from the matching json files.</p>
+  <p>The latent, the denoiser's inputs and output, the caption table and the 200-step trajectories come from one model this page's build script retrained on CPU, with the same code and seed as run 1 at 2,000 relabelled pictures. It is not the saved run, because CPU and GPU arithmetic differ, so its samples differ from the saved ones.</p>
+  <p>SDXL's sizes are read from the stable-diffusion-xl-base-1.0 configs on this laptop (text encoders of 768 and 1,280 numbers per token, 77 token slots, cross-attention width 2,048), and its tokens from its own tokenizers. The encoder names CLIP ViT-L and OpenCLIP ViT-bigG come from the SDXL paper, not the config.</p>
+  <h2>How to read the page</h2>
+  <p>Each screen does one job. Back, Next, the dots or the arrow keys move between screens, and the chapter buttons jump. Tags say what a picture is: <span class="tag real">real</span> means computed from the code or saved by an experiment, <span class="tag cfg">config</span> means read from SDXL's files, and <span class="tag ill">illustrative</span> means drawn to explain and not measured. Red and blue always mean the red circle and the blue square. Purple means a blob where the two colours mixed. Teal marks the mechanism being explained.</p>
+  <h2>What is not drawn</h2>
+  <ul>
+    <li>The VAE's training loss (reconstruction error plus a KL term weighted 0.0001) and its restart rule (up to 5 tries until error is at most 0.012). Named on the VAE screen's notes, not drawn.</li>
+    <li>The colour scorer that counts "separate red circle and blue square". Its rule is in the result screen's notes.</li>
+    <li>The single-caption and joint-caption samples for every model. They are saved and pass their checks; only PoE samples are shown.</li>
+    <li>Models 1, 2 and 4 of the write-up. This page is model 3 only.</li>
+    <li>The SDXL UNet's inside. Its side of the caption screen stops at the text encoders' outputs.</li>
+    <li>The latent of each saved sample. Samples are shown decoded, as pictures.</li>
+  </ul>
+  <p><button id="aboutClose" type="button">Close</button></p>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+const P = __PAYLOAD__;
+const D = P.D, IMG = P.IMG, CODE = P.CODE;
+const RUNSEED = {1:20261022, 2:20261023, 3:20261024};
+const KS = [0,1,5,20,50,200,600,1200,2000];
+const fmt = n => n.toLocaleString("en-US");
+const S = {f:0, k:200, run:2, rk:200, model:"2000_20261023"};
+const $ = id => document.getElementById(id);
+const tag = (kind, t) => `<span class="tag ${kind}">${t}</span>`;
+const DEFS = `<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>`;
+const im = (name, x, y, w, h) => `<image href="${IMG[name]}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="none"/>`;
+const tx = (x, y, s, cls, anchor) => `<text x="${x}" y="${y}" ${cls?`class="${cls}"`:""} text-anchor="${anchor||"middle"}">${s}</text>`;
+const ar = (x1,y1,x2,y2,cls) => `<path class="arrow ${cls||""}" d="M${x1},${y1} L${x2},${y2}" style="color:var(--ink)"/>`;
+
+// a column of numbers as coloured cells: teal above zero, brown below
+function cells(vals, x, y, w, h, cols, scale){
+  const rows = Math.ceil(vals.length/cols), cw = w/cols, ch = h/rows;
+  const m = scale || Math.max(...vals.map(Math.abs)) || 1;
+  let s = "";
+  vals.forEach((v,i)=>{
+    const a = Math.min(1, Math.abs(v)/m);
+    const col = v >= 0 ? "var(--accent)" : "var(--neg)";
+    s += `<rect x="${(x + (i%cols)*cw).toFixed(1)}" y="${(y + Math.floor(i/cols)*ch).toFixed(1)}" width="${(cw-0.6).toFixed(1)}" height="${(ch-0.6).toFixed(1)}" fill="${col}" fill-opacity="${(0.08+0.92*a).toFixed(2)}"/>`;
+  });
+  return s + `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="var(--rule)"/>`;
+}
+
+const T = D.trace;
+// ---------------- frames ----------------
+const F = [];
+
+F.push({id:"map", ch:0, title:"Model 3, start to finish",
+cap:"A picture is squeezed into 128 numbers. A small network learns to clean those numbers for a caption id, and the VAE turns them back into a picture.",
+code:"denoiser",
+prov:`<p>Parameter counts from the code's own classes: VAE ${fmt(T.vae_params)}, denoiser ${fmt(T.denoiser_params)}. The picture is a real training picture: the code's drawing function plus pixel noise of standard deviation 0.1. The finished picture on the right is a PoE sample from the model this page's build script retrained (2,000 relabelled, seed 20261022).</p><p>Click any box to jump to its screen.</p>`,
+draw(){
+  return `<svg viewBox="0 0 1180 330" role="img" aria-label="pipeline">${DEFS}
+  ${im(D.train_pictures.both,10,120,128,64)}${tx(74,108,"training picture")}
+  ${ar(142,152,182,152)}
+  <g class="clk" data-go="vae"><rect class="box mech" x="186" y="112" width="150" height="80" rx="10"/>${tx(261,148,"VAE encoder")}${tx(261,172,fmt(T.vae_enc_params)+" params","num mut")}</g>
+  ${ar(340,152,380,152)}
+  <g class="clk" data-go="vae">${cells(D.vae_example.latent,384,120,96,64,16)}${tx(432,108,"128 numbers")}</g>
+  ${ar(484,152,560,152)}
+  <g class="clk" data-go="inputs"><rect class="box mech" x="564" y="96" width="210" height="112" rx="10"/>${tx(669,140,"denoiser (MLP)","big")}${tx(669,170,fmt(T.denoiser_params)+" params","num mut")}</g>
+  <g class="clk" data-go="training">${tx(600,40,"noise level")}${ar(600,48,620,92)}</g>
+  <g class="clk" data-go="caption-is-a-label">${tx(740,40,"caption id")}${ar(740,48,720,92)}</g>
+  ${ar(778,152,838,152)}
+  <g class="clk" data-go="sampling">${tx(850,250,"200 steps","mut")}<path d="M780,190 C800,262 650,262 669,212" class="arrow acc" style="color:var(--accent)"/></g>
+  <g class="clk" data-go="vae"><rect class="box mech" x="842" y="112" width="150" height="80" rx="10"/>${tx(917,148,"VAE decoder")}${tx(917,172,fmt(T.vae_dec_params)+" params","num mut")}</g>
+  ${ar(996,152,1034,152)}
+  ${im(D.trajectory.frames.poe["0"][0],1038,120,128,64)}
+  ${tx(1102,108,"finished picture")}
+  </svg>`;
+}});
+
+F.push({id:"data", ch:0, title:"6,000 captioned training pictures",
+cap:"Every training picture is one of three kinds, 2,000 of each, with light pixel noise added. Until relabelling, a picture holding both shapes is filed only under the joint caption.",
+code:"corpus",
+prov:`<p>Pictures are 16 by 32 pixels, RGB, values 0 to 1, white background. A single shape sits at x = 6, 16 or 26. A both-shapes picture has the circle at 6 and the square at 26, or the mirror. Every training picture gets Gaussian pixel noise of standard deviation 0.1, which is why the white looks grainy.</p><p>The empty caption, id 3, has no pictures of its own: in training, any caption is swapped for it 10% of the time. Counts from the rebuild's corpus at 2,000 relabelled: ids 0 to 3 hold ${["0","1","2","3"].map(i=>fmt(D.corpus_counts[i])).join(", ")} pictures.</p>`,
+draw(){
+  const kinds = [["circle","a red circle",0,"var(--red)"],["square","a blue square",1,"var(--blue)"],["both","a red circle and a blue square",2,"var(--purple)"]];
+  return `<div class="fig"><div class="row" style="gap:28px">${kinds.map(([k,c,id,col])=>`
+   <div style="text-align:center;flex:1 1 260px;max-width:340px">
+     <img class="pic" src="${IMG[D.train_pictures[k]]}" alt="training picture: ${c}" style="width:100%;max-width:320px;aspect-ratio:2/1">
+     <div style="font-size:18px">“${c}”</div>
+     <div class="num">caption id <b style="color:${col}">${id}</b> · ${fmt(2000)} pictures</div>
+   </div>`).join("")}
+   <div style="text-align:center;flex:0 1 160px;align-self:center"><div class="lab">empty caption</div><div class="num">id <b>3</b> · 10% of training steps</div></div>
+  </div><p style="text-align:center;margin:10px 0 0">${tag("real","real")}</p></div>`;
+}});
+
+F.push({id:"vae", ch:0, title:"The VAE: 1,536 numbers to 128",
+cap:"The encoder halves the picture's height and width twice and keeps 4 channels on a 4 by 8 grid: 128 numbers. The decoder doubles it back, and it never sees a caption.",
+code:"vae",
+prov:()=>{
+  const v = T.vae.map(r=>`${r.name} ${r.type} ${r.in?r.in.join("×"):""} → ${r.out.join("×")} (${fmt(r.params)})`).join("<br>");
+  return `<p>Shapes from a hooked forward pass, channels × height × width:<br><span class="num">${v}</span></p><p>Shape check for the first conv (kernel 3, padding 1, stride 2): ⌊(16 + 2 − 3)/2⌋ + 1 = 8 and ⌊(32 + 2 − 3)/2⌋ + 1 = 16, which matches the trace. The last encoder conv gives 8 channels, split into a mean and a log-variance of 4 each. The 128 numbers passed on are the mean (sampling noise is added only while the VAE trains).</p><p>Trained 4,000 steps, Adam at learning rate 0.001 with a cosine schedule, loss = reconstruction error + 0.0001 × KL. Restarted on a new seed, up to 5 times, until reconstruction error is at most 0.012. The rebuild reached ${D.rebuild.vae_mse} on try ${D.rebuild.vae_tries}; on the picture shown, ${D.vae_example.recon_mse}.</p>`;},
+draw(){
+  // funnel: face height ~ spatial size, depth ~ channels
+  const blocks = [["3×16×32",16,3],["32×8×16",8,32],["64×4×8",4,64],["4×4×8",4,4],["64×4×8",4,64],["32×8×16",8,32],["3×16×32",16,3]];
+  let x = 200, s = "", midX = 540;
+  const cy = 165;
+  blocks.forEach((b,i)=>{
+    if (i===0||i===6) return;
+    const h = b[1]*9, d = 8 + Math.sqrt(b[2])*5, w = 28;
+    const mid = i===3; if (mid) midX = x + w/2;
+    s += `<g><rect x="${x}" y="${cy-h/2}" width="${w}" height="${h}" fill="${mid?"var(--accent)":"var(--accent-soft)"}" stroke="var(--accent)"/>
+      <path d="M${x+w},${cy-h/2} l${d*0.6},${-d*0.4} l0,${h} l${-d*0.6},${d*0.4} z" fill="var(--shade)" stroke="var(--accent)"/>
+      <path d="M${x},${cy-h/2} l${d*0.6},${-d*0.4} l${w},0 l${-d*0.6},${d*0.4} z" fill="var(--panel)" stroke="var(--accent)"/>
+      ${tx(x+w/2+8,cy+h/2+40,b[0],"num")}</g>`;
+    x += w + d*0.6 + 120;
+  });
+  return `<svg viewBox="0 0 1180 330" role="img" aria-label="VAE funnel">${DEFS}
+   ${im(D.vae_example.input,10,133,128,64)}${tx(74,120,"picture in")}${tx(74,226,"3×16×32","num")}
+   ${s}
+   ${tx(midX-260,40,"encoder · "+fmt(T.vae_enc_params)+" params")}${tx(midX+260,40,"decoder · "+fmt(T.vae_dec_params)+" params")}
+   ${tx(midX,290,"latent","mut")}
+   ${im(D.vae_example.recon,1040,133,128,64)}${tx(1104,120,"picture out")}${tx(1104,226,"3×16×32","num")}
+   ${ar(142,165,166,165)}${ar(1000,165,1036,165)}
+  </svg>
+  <div class="row" style="align-items:center;gap:14px">
+    <span class="lab">the 128 numbers for this picture</span>
+    <svg viewBox="0 0 520 70" style="width:min(520px,90vw);max-height:none">${cells(D.vae_example.latent,0,4,512,62,32)}</svg>
+    ${tag("real","real · rebuilt model")}
+  </div>`;
+}});
+
+F.push({id:"inputs", ch:1, title:"Three inputs, one guess",
+cap:"The denoiser is an MLP: 256 numbers in, three layers of 1,024, and 128 numbers out. Its output is a guess of the clean latent, shown here at noise level 100 of 200.",
+code:"denoiser",
+prov:()=>{
+  const v = T.denoiser.map(r=>`${r.name} ${r.type} ${r.in?r.in.join("×"):""} → ${r.out.join("×")} (${fmt(r.params)})`).join("<br>");
+  const c = D.denoiser_call;
+  return `<p>Layers from a hooked forward pass:<br><span class="num">${v}</span><br>Total ${fmt(T.denoiser_params)} parameters. SDXL's UNet has about 2.6 billion, roughly 1,000 times more.</p><p>The noise level enters as sin and cos of 32 frequencies, exp(0) to exp(6), times k/200: 64 numbers. All coloured cells are the rebuilt model's real numbers for the both-shapes training picture at k = ${c.k} (signal share ᾱ = ${c.abar}). The guess's mean squared error against the clean latent is ${c.err}.</p>`;},
+draw(){
+  const c = D.denoiser_call;
+  const L = [["1,024",T.denoiser[1]],["1,024",T.denoiser[3]],["1,024",T.denoiser[5]]];
+  return `<svg viewBox="0 0 1180 360" role="img" aria-label="denoiser inputs and output">${DEFS}
+   ${tx(70,30,"noisy latent")}${tx(70,50,"128","num mut")}${cells(c.noisy,30,60,80,160,8)}
+   ${im(c.noisy_img,14,236,112,56)}${tx(70,312,"decoded","mut")}
+   ${tx(190,30,"noise level")}${tx(190,50,"64 · k = "+c.k,"num mut")}${cells(c.time,160,60,60,80,8,1)}
+   ${tx(300,30,"caption vector")}${tx(300,50,"64 · id 2","num mut")}${cells(c.caption,270,60,60,80,8)}
+   <path d="M120,140 L350,140" class="arrow" style="color:var(--ink)"/>
+   ${tx(390,186,"256","num")}
+   <g class="clk" data-go="caption-is-a-label"><rect x="266" y="150" width="68" height="22" fill="none" stroke="var(--accent)" stroke-dasharray="3 3"/>${tx(300,166,"lookup","mut")}</g>
+   ${L.map((l,i)=>`<rect class="box mech" x="${370+i*150}" y="60" width="90" height="160" rx="8"/>${tx(415+i*150,135,l[0])}${tx(415+i*150,160,"SiLU","mut")}${tx(415+i*150,245,fmt(l[1].params),"num mut")}${ar(370+i*150-26,140,370+i*150-2,140)}`).join("")}
+   ${ar(816,140,846,140)}
+   ${tx(890,30,"guess")}${tx(890,50,"128","num mut")}${cells(c.out,850,60,80,160,8)}
+   ${tx(1010,30,"clean latent")}${tx(1010,50,"128","num mut")}${cells(c.target,970,60,80,160,8)}
+   ${im(c.out_img,834,236,112,56)}${tx(890,312,"decoded guess","mut")}
+   ${im(D.vae_example.input,954,236,112,56)}${tx(1010,312,"the picture","mut")}
+  </svg>
+  <p style="text-align:center;margin:0">${tag("real","real · rebuilt model")}</p>`;
+}});
+
+F.push({id:"caption-is-a-label", ch:1, title:"A caption is a row number",
+cap:"Model 3 never reads words: relabelling files a both-shapes picture under labels 0 and 1 as well as 2. So the toy tests how labels are assigned, not how words are encoded.",
+code:"label",
+prov:`<p><b>Model 3.</b> <span class="num">self.cap = nn.Embedding(4, 64)</span> is a table of 4 rows of 64 numbers, learned with the denoiser. The caption id picks a row, and forward() joins that row to the 128 latent numbers and the 64 noise-level numbers: 128 + 64 + 64 = 256. The table shown is the rebuilt model's trained table, real numbers. ${fmt(T.caption_table_params)} parameters.</p><p><b>SDXL.</b> Tokens from SDXL's own two tokenizers: “a red circle” becomes 5 tokens (start, a, red, circle, end), padded to 77. Sizes from the stable-diffusion-xl-base-1.0 configs: text encoder 768 per token, text encoder 2 1,280 per token, joined to 2,048, which is the UNet's cross-attention width. The pooled 1,280 numbers go into the UNet's “text_time” added embedding (2,816 = 1,280 + 6 × 256, beside the image-size numbers), not through cross-attention. The names CLIP ViT-L and OpenCLIP ViT-bigG are from the SDXL paper: canonical, verify before relying.</p>`,
+draw(){
+  const tb = D.caption_table, names = ["a red circle","a blue square","both shapes","empty"];
+  const m = Math.max(...tb.flat().map(Math.abs));
+  const left = `<svg viewBox="0 0 560 330" role="img" aria-label="model 3 caption lookup">${DEFS}
+    ${tx(20,34,"“a red circle”","big","start")}${ar(170,28,214,28)}${tx(228,34,"label 0","big","start")}
+    ${tb.map((r,i)=>`${tx(150,92+i*44,i+" · "+names[i],i===0?"":"mut","end")}${cells(r,162,74+i*44,320,26,64,m)}${i===0?`<rect x="158" y="70" width="328" height="34" fill="none" stroke="var(--accent)" stroke-width="3" rx="4"/>`:""}`).join("")}
+    ${tx(322,64,"4 × 64 table, learned","mut")}
+    <path d="M486,87 C540,87 540,280 470,280" class="arrow acc" style="color:var(--accent)"/>
+    ${tx(330,286,"128 + 64 + 64 = 256 into the MLP")}
+  </svg>`;
+  const tok = ["start","a","red","circle","end"];
+  const right = `<svg viewBox="0 0 600 330" role="img" aria-label="SDXL text path">${DEFS}
+    ${tx(20,34,"“a red circle”","big","start")}
+    ${tok.map((t,i)=>`<rect x="${20+i*74}" y="56" width="68" height="28" rx="6" fill="var(--shade)" stroke="var(--rule)"/>${tx(54+i*74,76,t,"num")}`).join("")}${tx(420,76,"+ 72 pad","mut","start")}
+    ${ar(150,90,150,118)}${ar(400,90,400,118)}
+    <rect class="box" x="40" y="122" width="220" height="56" rx="8"/>${tx(150,146,"CLIP ViT-L")}${tx(150,168,"768 per token","num mut")}
+    <rect class="box" x="290" y="122" width="240" height="56" rx="8"/>${tx(410,146,"OpenCLIP ViT-bigG")}${tx(410,168,"1,280 per token","num mut")}
+    ${ar(150,182,250,222)}${ar(380,182,290,222)}${ar(480,182,500,222)}
+    ${tx(250,244,"77 × 2,048")}${tx(250,268,"cross-attention","mut")}
+    ${tx(500,244,"pooled 1,280")}${tx(500,268,"added embedding","mut")}
+  </svg>`;
+  return `<div class="fig"><div class="row" style="gap:24px">
+    <div class="col" style="flex-basis:440px"><div class="lab">Model 3 ${tag("real","real · trained table")}</div>${left}</div>
+    <div class="col" style="flex-basis:440px"><div class="lab">SDXL ${tag("cfg","sizes from config")}${tag("ill","names canonical")}</div>${right}</div>
+  </div></div>`;
+}});
+
+F.push({id:"training-step", ch:1, title:"One training step",
+cap:"Each step noises 256 training latents to random levels from 1 to 200 and asks for the clean latent back. One caption in ten is swapped for the empty one, so the network also learns the uncaptioned guess.",
+code:"train",
+prov:`<p>Trained 8,000 steps, batch 256, Adam at learning rate 0.0002. Loss = mean squared error between the guess and the clean latent; the network predicts the latent, not the noise. The noise schedule is cosine over 200 levels: the signal share ᾱ falls from ${D.schedule_abar[1]} at level 1 to ${D.schedule_abar[200]} at level 200.</p><p>The row of pictures is real: the rebuilt VAE decoding the both-shapes picture's latent mixed with one fixed draw of noise at each level. The ten caption chips are illustrative: in the code each caption is swapped with probability 0.1, so a real batch of 256 has about 26 empty ones. One full training, VAE plus denoiser, takes about 25 seconds on a laptop GPU; the CPU rebuild took ${D.rebuild.seconds_cpu} seconds.</p>`,
+draw(){
+  const lv = D.noise_levels;
+  const chips = [0,1,2,2,1,3,0,2,1,0];
+  const col = {0:"var(--red)",1:"var(--blue)",2:"var(--purple)",3:"var(--muted)"};
+  return `<div class="fig">
+   <div class="lab">the same latent, mixed with noise at level k, then decoded ${tag("real","real")}</div>
+   <div class="row" style="justify-content:flex-start;gap:10px;margin:6px 0 14px">${lv.map(l=>`<div style="text-align:center"><img class="pic" src="${IMG[l.img]}" alt="noise level ${l.k}" style="width:150px;aspect-ratio:2/1"><div class="num">k = ${l.k}</div></div>`).join("")}</div>
+   <svg viewBox="0 0 1180 150" role="img" aria-label="one training step">${DEFS}
+    ${tx(80,40,"clean latent")}${cells(D.denoiser_call.target,30,52,100,50,16)}
+    ${ar(136,77,186,77)}${tx(250,40,"+ noise at random k")}<rect class="box" x="190" y="56" width="120" height="42" rx="8"/>${tx(250,84,"1 to 200","num")}
+    ${ar(314,77,360,77)}
+    ${tx(520,40,"captions, 1 in 10 empty")}
+    ${chips.map((c,i)=>`<rect x="${370+i*30}" y="62" width="24" height="24" rx="5" fill="${col[c]}" fill-opacity="${c===3?0.25:0.85}"/>${c===3?tx(382+i*30,80,"∅","num"):""}`).join("")}
+    ${ar(674,77,720,77)}
+    <rect class="box mech" x="724" y="50" width="150" height="54" rx="8"/>${tx(799,84,"denoiser")}
+    ${ar(878,77,924,77)}${tx(980,40,"guess")}${cells(D.denoiser_call.out,930,52,100,50,16)}
+    <rect class="box hot" x="1054" y="54" width="118" height="46" rx="8"/>${tx(1113,84,"squared error")}
+    ${tx(520,130,"illustrative chips","mut")}
+   </svg></div>`;
+}});
+
+function trajFig(name){
+  const steps = D.trajectory.steps, fr = D.trajectory.frames[name];
+  const rows = [0,1,2,3];
+  return `<div class="grid" style="grid-template-columns:auto repeat(${steps.length},minmax(0,1fr));max-width:1100px;margin:0 auto">
+    <div></div>${steps.map(k=>`<div class="num" style="text-align:center">${k===0?"picture":"step "+k}</div>`).join("")}
+    ${rows.map(r=>`<div class="num mut">sample ${r+1}</div>${steps.map(k=>`<img class="pic" src="${IMG[fr[String(k)][r]]}" alt="" style="width:100%;aspect-ratio:2/1">`).join("")}`).join("")}
+  </div>`;
+}
+
+F.push({id:"sampling", ch:2, title:"200 steps from noise",
+cap:"Sampling starts from 128 random numbers and removes a little noise 200 times. Each column decodes the model's guess of the finished picture at that step.",
+code:"draw",
+prov:`<p>Ancestral reverse diffusion (DDPM) in the 128-number latent, then one VAE decode. The noise estimate comes from the latent guess: ε = (z − √ᾱ · guess)/√(1 − ᾱ). Guidance strength 3 against the empty caption. The pictures are the rebuilt model (2,000 relabelled, seed 20261022), starting noise seed ${D.trajectory.seed}, 4 of ${D.trajectory.samples} samples; they are not the saved run's samples.</p>`,
+draw(){
+  return `<div class="fig">
+   <p style="text-align:center;margin:0 0 8px"><math display="block"><mi>ε</mi><mo>=</mo><msub><mi class="e">ε</mi><mtext class="e">empty</mtext></msub><mo>+</mo><mn class="g">3</mn><mo>(</mo><msub><mi class="c">ε</mi><mtext class="c">circle</mtext></msub><mo>−</mo><msub><mi class="e">ε</mi><mtext class="e">empty</mtext></msub><mo>)</mo></math></p>
+   <div class="lab" style="text-align:center">“a red circle” ${tag("real","real · rebuilt model")}</div>
+   ${trajFig("circle")}</div>`;
+}});
+
+F.push({id:"poe", ch:2, title:"PoE: three calls per step",
+cap:"PoE calls the same denoiser three times per step: empty, circle, square. The two pushes away from empty are added and scaled by 3, from the same starting noise as before.",
+code:"poe",
+prov:`<p>The combination is <span class="num">eps = e_empty + 3 [ (e_circle − e_empty) + (e_square − e_empty) ]</span>, written in the code as a loop over the caption ids [0, 1]. The pictures are the rebuilt model with 2,000 relabelled pictures, so most samples separate; the same rows at 0 relabelled would be purple blobs (next chapter, saved samples). Same starting noise as the one-caption screen, so row by row the two are comparable.</p>`,
+draw(){
+  return `<div class="fig">
+   <p style="text-align:center;margin:0 0 8px"><math display="block"><mi>ε</mi><mo>=</mo><msub><mi class="e">ε</mi><mtext class="e">empty</mtext></msub><mo>+</mo><mn class="g">3</mn><mo>[</mo><mo>(</mo><msub><mi class="c">ε</mi><mtext class="c">circle</mtext></msub><mo>−</mo><msub><mi class="e">ε</mi><mtext class="e">empty</mtext></msub><mo>)</mo><mo>+</mo><mo>(</mo><msub><mi class="s">ε</mi><mtext class="s">square</mtext></msub><mo>−</mo><msub><mi class="e">ε</mi><mtext class="e">empty</mtext></msub><mo>)</mo><mo>]</mo></math></p>
+   <div class="lab" style="text-align:center">PoE of “a red circle” and “a blue square” ${tag("real","real · rebuilt model")}</div>
+   ${trajFig("poe")}</div>`;
+}});
+
+F.push({id:"relabelling", ch:3, title:"What relabelling adds",
+cap:"Relabelling adds k of the 2,000 both-shapes pictures twice more, once as “a red circle” and once as “a blue square”. The pictures do not change; only their labels do.",
+code:"corpus",
+prov:`<p>k = 0, 1, 5, 20, 50, 200, 600, 1,200 or 2,000. The k pictures are drawn at random from the 2,000 both-shapes pictures without repeats, then entered under id 0 and again under id 1, so the training set grows from 6,000 to 6,000 + 2k. Bar lengths are linear in picture count.</p>`,
+draw(){
+  const k = S.rk, W = 620, sc = W/4000;
+  const bar = (lab, base, extra, col, id) => `<div class="grid" style="grid-template-columns:200px 1fr;margin:6px 0">
+     <div><span style="color:${col}">${lab}</span> <span class="num mut">id ${id}</span></div>
+     <div style="display:flex;align-items:center;gap:8px"><div style="height:26px;width:${base*sc}px;background:${col};opacity:.85;border-radius:4px 0 0 4px"></div><div style="height:26px;width:${extra*sc}px;background:repeating-linear-gradient(90deg,var(--red) 0 6px,var(--blue) 6px 12px);border-radius:0 4px 4px 0;transition:width .25s"></div><span class="num">${fmt(base)}${extra?" + "+fmt(extra):""}</span></div></div>`;
+  return `<div class="fig" style="max-width:1000px">
+   <div class="pick" data-optional><span class="lab">pictures relabelled</span>${KS.map(v=>`<button type="button" data-rk="${v}" aria-pressed="${v===k}">${fmt(v)}</button>`).join("")}</div>
+   <div style="margin-top:14px">
+   ${bar("a red circle",2000,k,"var(--red)",0)}
+   ${bar("a blue square",2000,k,"var(--blue)",1)}
+   ${bar("both shapes",2000,0,"var(--purple)",2)}
+   </div>
+   <div class="row" style="justify-content:flex-start;align-items:center;margin-top:12px;gap:14px">
+     <img class="pic" src="${IMG[D.train_pictures.both]}" alt="a both-shapes training picture" style="width:200px;aspect-ratio:2/1">
+     <span class="num">${k? "filed under ids 2, 0 and 1 (×"+fmt(k)+")" : "filed under id 2 only"}</span>
+     <span class="num mut">total ${fmt(6000+2*k)} pictures</span>
+   </div></div>`;
+}});
+
+function tiles(name, scale, per){
+  const bw = 270*scale, h = 16*scale, w = 32*scale;
+  return `<div class="tiles" style="display:grid;grid-template-columns:repeat(${per||8},${w}px);gap:6px">${[0,1,2,3,4,5,6,7].map(i=>`<div role="img" aria-label="saved sample ${i+1}" style="width:${w}px;height:${h}px;border:1px solid var(--rule);background:#fff url(${IMG[name]}) no-repeat;background-size:${bw}px ${h}px;background-position:-${i*34*scale}px 0;image-rendering:pixelated"></div>`).join("")}</div>`;
+}
+function apart(k, run){ return D.threshold_counts[String(k)][run-1]; }
+
+F.push({id:"result", ch:3, title:"PoE samples as relabelling grows",
+cap:"These are saved PoE samples, 8 of 300 per model. Up to 50 relabelled pictures, PoE mostly draws a purple blob; from 200 up, separate shapes appear, unevenly across three runs.",
+code:"threshold",
+prov:`<p>Each dot is one training run: how many of 300 PoE samples hold a separate red patch and blue patch of at least 12 pixels each. Each pixel is assigned to the nearest of background, red, blue or purple; the rule reads the VAE's own reconstructions of known pictures right 100 of 100 times. Runs 1 to 3 use seeds 20261022 to 20261024: same recipe, different random draws.</p><p>At 0 relabelled, run 1 is the exception: 276 of its 300 samples are faint smudges the scorer cannot read, where runs 2 and 3 give 276 and 256 purple blobs. At 5 to 50, run 3 draws one shape alone in 105 to 189 of 300.</p><p>Three runs per number is few: runs at one number can differ by 150 of 300, so the order between 600 and 1,200 is not reliable. The one prompt “a red circle and a blue square” draws separate shapes in at least 267 of 300 in all 27 models. At 2,000, single-caption purity drops to 223 to 264 of 300. Many uncounted samples at high k are a reddish circle beside a bluish square, two shapes with mixed colours.</p>`,
+draw(){
+  const r = apart(S.k, S.run);
+  const W = 560, H = 230, x0 = 70, y0 = 24;
+  const xs = i => x0 + 26 + i*(W-x0-46)/(KS.length-1), ys = v => y0 + (H-y0-36)*(1 - v/300);
+  let dots = "";
+  KS.forEach((k,i)=>[1,2,3].forEach(run=>{
+    const v = apart(k,run).apart, on = k===S.k && run===S.run;
+    dots += `<circle class="clk" data-k="${k}" data-run="${run}" cx="${xs(i)+(run-2)*7}" cy="${ys(v)}" r="${on?8:5}" fill="${on?"var(--accent)":"var(--muted)"}" fill-opacity="${on?1:.6}"><title>${fmt(k)} relabelled, run ${run}: ${v} of 300</title></circle>`;
+  }));
+  const plot = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="separate count per run" style="max-height:none">
+    <line x1="${x0}" y1="${ys(0)}" x2="${W-10}" y2="${ys(0)}" stroke="var(--rule)"/><line x1="${x0}" y1="${ys(300)}" x2="${W-10}" y2="${ys(300)}" stroke="var(--rule)" stroke-dasharray="3 4"/>
+    ${tx(x0-8,ys(0)+5,"0","num","end")}${tx(x0-8,ys(300)+5,"300","num","end")}
+    ${KS.map((k,i)=>tx(xs(i),H-14,fmt(k),"num")).join("")}
+    ${tx(x0+4,ys(300)-6,"separate shapes, of 300","mut","start")}
+    ${tx(W/2,H+2,"","")}
+    ${dots}</svg>`;
+  return `<div class="fig"><div class="row" style="gap:28px;align-items:center">
+   <div style="flex:1 1 420px;max-width:560px">${plot}<div class="lab" style="text-align:center">pictures relabelled · click a dot</div></div>
+   <div style="flex:1 1 420px;max-width:620px">
+     <div class="pick" data-optional><span class="lab">relabelled</span>${KS.map(v=>`<button type="button" data-k="${v}" aria-pressed="${v===S.k}">${fmt(v)}</button>`).join("")}</div>
+     <div class="pick" data-optional style="margin-top:6px"><span class="lab">run</span>${[1,2,3].map(v=>`<button type="button" data-run="${v}" aria-pressed="${v===S.run}">${v}</button>`).join("")}</div>
+     <div style="margin-top:10px">${tiles(D.saved[S.k+"_"+RUNSEED[S.run]+"_product"],4,4)}</div>
+     <div class="count" style="margin-top:8px"><b style="color:var(--accent)">${r.apart}</b> of 300 separate · <b style="color:var(--purple)">${r.purple}</b> purple blob</div>
+     <div class="num mut">${(()=>{const q=P.TC[String(S.k)][S.run-1];return `one shape only ${q["red only"]+q["blue only"]} · unreadable ${q["nothing readable"]}`;})()}</div>
+     <div class="num mut" style="margin-top:12px">for comparison, 0 relabelled · run 2: ${apart(0,2).apart} of 300 separate · ${apart(0,2).purple} purple blob</div>
+     ${tiles(D.saved["0_20261023_product"],2,8)}
+     <div>${tag("real","saved samples")}</div>
+   </div></div></div>`;
+}});
+
+const MODELS = [["2000_20261022","2,000 · run 1"],["2000_20261023","2,000 · run 2"],["2000_20261024","2,000 · run 3"],["200_20261023","200 · run 2"],
+                ["0_20261022","0 · run 1"],["0_20261023","0 · run 2"],["0_20261024","0 · run 3"],["50_20261022","50 · run 1"]];
+
+F.push({id:"corrector", ch:3, title:"A Langevin corrector finishes it",
+cap:"After each step, the corrector takes 5 or 20 small Langevin steps at the same noise level. Models with relabelling reach 300 of 300; models without stay at 0.",
+code:"corrector",
+prov:`<p>After the reverse step lands at level j, each Langevin step is z ← z + η s + √(2η) ξ, with s = −ε<sub>PoE</sub>/√(1 − ᾱ<sub>j</sub>) and η = 0.05 (1 − ᾱ<sub>j</sub>); ξ is fresh standard noise. The corrector script retrains each model and resamples with its own seed, so its “no corrector” counts (for example 290 and 67 at 2,000 runs 1 and 2) differ from the relabelling screen's (252 and 74).</p><p>Pre-registered on the 5-step setting over the four relabelled models: the median rose from ${[290,67,252,269].sort((a,b)=>a-b).slice(1,3).reduce((a,b)=>a+b)/2} to 300. The 20-step setting was reported beside it, not judged. Only those two settings at one step size were tried, so a weaker corrector might leave a gap.</p>`,
+draw(){
+  const rec = D.corrector_counts.find(r=>r.k+"_"+r.seed===S.model);
+  const rows = [["plain","no corrector"],["main","5 corrector steps"],["stronger","20 corrector steps"]];
+  const tbl = MODELS.map(([key,lab],i)=>{const r = D.corrector_counts.find(q=>q.k+"_"+q.seed===key);
+    return `<button type="button" data-model="${key}" aria-pressed="${key===S.model}" style="display:grid;grid-template-columns:110px repeat(3,46px);text-align:left;width:100%;margin:2px 0"><span>${lab}</span><span class="num">${r.plain}</span><span class="num">${r.main}</span><span class="num">${r.stronger}</span></button>`;}).join("");
+  return `<div class="fig"><div class="row" style="gap:26px">
+   <div class="pick" data-optional style="flex:0 0 280px;flex-direction:column;align-items:stretch">
+     <div class="lab" style="display:grid;grid-template-columns:110px repeat(3,46px);font-size:15px"><span>relabelled</span><span>none</span><span>5</span><span>20</span></div>
+     <div class="lab" style="font-size:14px">with single captions</div>${tbl.split("</button>").slice(0,4).join("</button>")}</button>
+     <div class="lab" style="font-size:14px">without</div>${tbl.split("</button>").slice(4,8).join("</button>")}</button>
+     <div class="num mut" style="font-size:13px">separate shapes, of 300</div>
+   </div>
+   <div style="flex:1 1 520px;max-width:760px">
+     <p style="margin:0 0 8px"><math><mi>z</mi><mo>←</mo><mi>z</mi><mo>+</mo><mi>η</mi><mi class="g">s</mi><mo>+</mo><msqrt><mn>2</mn><mi>η</mi></msqrt><mi>ξ</mi></math></p>
+     ${rows.map(([k,lab])=>`<div style="margin:6px 0"><div class="num">${lab}: <b style="color:var(--accent)">${rec[k]}</b> of 300 separate</div>${tiles(D.saved["corr_"+S.model+"_"+k],2.6)}</div>`).join("")}
+     <div>${tag("real","saved samples")}</div>
+   </div></div></div>`;
+}});
+
+// ---------------- engine ----------------
+const CHAPTERS = ["The VAE","The denoiser","Making a picture","Relabelling"];
+$("chapters").innerHTML = CHAPTERS.map((c,i)=>`<button type="button" data-ch="${i}">${c}</button>`).join("");
+$("dots").innerHTML = F.map((f,i)=>`<button type="button" data-i="${i}" aria-label="screen ${i+1}: ${f.title}"></button>`).join("");
+
+function render(){
+  const f = F[S.f];
+  $("ftitle").innerHTML = `${f.title}<small>${CHAPTERS[f.ch]}</small>`;
+  $("stage").innerHTML = `<div class="fig">${f.draw()}</div>`;
+  $("cap").textContent = f.cap;
+  const c = CODE[f.code];
+  $("code").innerHTML = `<div class="num mut" style="font-size:13px">${c.file}, lines ${c.lines} · real</div><pre class="code">${c.html}</pre>`;
+  $("prov").innerHTML = typeof f.prov === "function" ? f.prov() : f.prov;
+  $("fnum").textContent = `${S.f+1} / ${F.length}`;
+  document.querySelectorAll("#dots button").forEach((b,i)=>b.setAttribute("aria-current", i===S.f));
+  document.querySelectorAll("#chapters button").forEach((b,i)=>b.setAttribute("aria-current", i===f.ch));
+  $("prev").disabled = S.f===0; $("next").disabled = S.f===F.length-1;
+}
+function go(i, push){
+  S.f = Math.max(0, Math.min(F.length-1, i));
+  if (push !== false && location.hash !== "#"+F[S.f].id) history.replaceState(null, "", "#"+F[S.f].id);
+  render();
+}
+function fromHash(){
+  const id = location.hash.slice(1), i = F.findIndex(f=>f.id===id);
+  go(i>=0 ? i : 0, false);
+}
+$("prev").onclick = ()=>go(S.f-1);
+$("next").onclick = ()=>go(S.f+1);
+$("dots").onclick = e=>{const b=e.target.closest("button"); if(b) go(+b.dataset.i);};
+$("chapters").onclick = e=>{const b=e.target.closest("button"); if(b) go(F.findIndex(f=>f.ch===+b.dataset.ch));};
+document.addEventListener("keydown", e=>{
+  if ($("aboutBox").open) return;
+  if (e.key==="ArrowRight") go(S.f+1);
+  if (e.key==="ArrowLeft") go(S.f-1);
+});
+$("stage").addEventListener("click", e=>{
+  const g = e.target.closest("[data-go]"); if (g){ go(F.findIndex(f=>f.id===g.dataset.go)); return; }
+  const t = e.target.closest("[data-rk],[data-k],[data-run],[data-model]"); if (!t) return;
+  if (t.dataset.rk) S.rk = +t.dataset.rk;
+  if (t.dataset.k) S.k = +t.dataset.k;
+  if (t.dataset.run) S.run = +t.dataset.run;
+  if (t.dataset.model) S.model = t.dataset.model;
+  render();
+});
+window.addEventListener("hashchange", fromHash);
+$("about").onclick = ()=>$("aboutBox").showModal();
+$("aboutClose").onclick = ()=>$("aboutBox").close();
+function theme(){ const d = document.documentElement.getAttribute("data-theme")==="dark" ||
+  (!document.documentElement.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  $("theme").textContent = d ? "Light" : "Dark"; }
+$("theme").onclick = ()=>{ const r = document.documentElement;
+  const d = r.getAttribute("data-theme")==="dark" || (!r.getAttribute("data-theme") && matchMedia("(prefers-color-scheme: dark)").matches);
+  r.setAttribute("data-theme", d ? "light" : "dark"); theme(); };
+theme();
+fromHash();
+})();
+</script>
+</body>
+</html>

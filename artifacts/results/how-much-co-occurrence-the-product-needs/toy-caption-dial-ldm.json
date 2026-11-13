@@ -1,0 +1,451 @@
+{
+ "what": "a VAE plus one caption-conditional latent model; the dial is how often a both-shapes picture is also trained under each single caption",
+ "inference": "summed classifier-free guidance over the two single captions",
+ "guidance": 3.0,
+ "bar": {
+  "support": "compose >= 150 of 300 with both captions still passing 240 of 300",
+  "null": "compose < 30 of 300 wherever both still pass"
+ },
+ "verdict": "inconclusive",
+ "settings_meeting_support": [],
+ "settings_judged": [
+  "0",
+  "0.1",
+  "0.3",
+  "0.6"
+ ],
+ "scorer": "toy_blob_scorer.py; the template library's counts are kept beside it",
+ "device": "cuda",
+ "images": 6000,
+ "vae_steps": 4000,
+ "denoiser_steps": 8000,
+ "latent": "4 x 4 x 8, 128 numbers",
+ "draws_per_cell": 300,
+ "results": {
+  "0": {
+   "the two single captions multiplied": {
+    "blob scorer": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 22,
+     "nothing readable": 278
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 4,
+     "two objects, crisp": 0,
+     "two faint objects": 278,
+     "hybrid: overlaid": 18
+    }
+   },
+   "a red circle alone": {
+    "blob scorer": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 300,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 0,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a blue square alone": {
+    "blob scorer": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 300,
+     "two objects, crisp": 0,
+     "two faint objects": 0,
+     "hybrid: overlaid": 0
+    }
+   },
+   "the joint caption": {
+    "blob scorer": {
+     "red and blue apart": 299,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "still distinct by the 240 of 300 test": true,
+   "readable": true,
+   "vae reconstruction mse": 0.01008,
+   "vae tries": 1,
+   "scorer hit rate on this vae's reconstructions": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square right": 1.0,
+    "square left, circle right": 1.0,
+    "overlaid at left": 1.0,
+    "overlaid at centre": 1.0,
+    "overlaid at right": 1.0
+   },
+   "denoiser loss": 0.05235,
+   "seconds": 24.8
+  },
+  "0.1": {
+   "the two single captions multiplied": {
+    "blob scorer": {
+     "red and blue apart": 118,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 146,
+     "nothing readable": 36
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 238,
+     "hybrid: overlaid": 62
+    }
+   },
+   "a red circle alone": {
+    "blob scorer": {
+     "red and blue apart": 0,
+     "red only": 300,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 300,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 0,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a blue square alone": {
+    "blob scorer": {
+     "red and blue apart": 0,
+     "red only": 0,
+     "blue only": 300,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 300,
+     "two objects, crisp": 0,
+     "two faint objects": 0,
+     "hybrid: overlaid": 0
+    }
+   },
+   "the joint caption": {
+    "blob scorer": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "still distinct by the 240 of 300 test": true,
+   "readable": true,
+   "vae reconstruction mse": 0.01008,
+   "vae tries": 1,
+   "scorer hit rate on this vae's reconstructions": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square right": 1.0,
+    "square left, circle right": 1.0,
+    "overlaid at left": 1.0,
+    "overlaid at centre": 1.0,
+    "overlaid at right": 1.0
+   },
+   "denoiser loss": 0.04237,
+   "seconds": 25.6
+  },
+  "0.3": {
+   "the two single captions multiplied": {
+    "blob scorer": {
+     "red and blue apart": 114,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 186,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a red circle alone": {
+    "blob scorer": {
+     "red and blue apart": 1,
+     "red only": 299,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 299,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 1,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a blue square alone": {
+    "blob scorer": {
+     "red and blue apart": 1,
+     "red only": 0,
+     "blue only": 298,
+     "purple or overlaid": 1,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 297,
+     "two objects, crisp": 0,
+     "two faint objects": 3,
+     "hybrid: overlaid": 0
+    }
+   },
+   "the joint caption": {
+    "blob scorer": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "still distinct by the 240 of 300 test": true,
+   "readable": true,
+   "vae reconstruction mse": 0.01008,
+   "vae tries": 1,
+   "scorer hit rate on this vae's reconstructions": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square right": 1.0,
+    "square left, circle right": 1.0,
+    "overlaid at left": 1.0,
+    "overlaid at centre": 1.0,
+    "overlaid at right": 1.0
+   },
+   "denoiser loss": 0.06188,
+   "seconds": 29.1
+  },
+  "0.6": {
+   "the two single captions multiplied": {
+    "blob scorer": {
+     "red and blue apart": 55,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 230,
+     "nothing readable": 15
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a red circle alone": {
+    "blob scorer": {
+     "red and blue apart": 15,
+     "red only": 285,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 285,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 15,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a blue square alone": {
+    "blob scorer": {
+     "red and blue apart": 5,
+     "red only": 0,
+     "blue only": 295,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 295,
+     "two objects, crisp": 0,
+     "two faint objects": 5,
+     "hybrid: overlaid": 0
+    }
+   },
+   "the joint caption": {
+    "blob scorer": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "still distinct by the 240 of 300 test": true,
+   "readable": true,
+   "vae reconstruction mse": 0.01009,
+   "vae tries": 1,
+   "scorer hit rate on this vae's reconstructions": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square right": 1.0,
+    "square left, circle right": 1.0,
+    "overlaid at left": 1.0,
+    "overlaid at centre": 1.0,
+    "overlaid at right": 1.0
+   },
+   "denoiser loss": 0.05473,
+   "seconds": 25.3
+  },
+  "1": {
+   "the two single captions multiplied": {
+    "blob scorer": {
+     "red and blue apart": 174,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 122,
+     "nothing readable": 4
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a red circle alone": {
+    "blob scorer": {
+     "red and blue apart": 50,
+     "red only": 250,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 250,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 50,
+     "hybrid: overlaid": 0
+    }
+   },
+   "a blue square alone": {
+    "blob scorer": {
+     "red and blue apart": 66,
+     "red only": 0,
+     "blue only": 234,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 234,
+     "two objects, crisp": 0,
+     "two faint objects": 66,
+     "hybrid: overlaid": 0
+    }
+   },
+   "the joint caption": {
+    "blob scorer": {
+     "red and blue apart": 300,
+     "red only": 0,
+     "blue only": 0,
+     "purple or overlaid": 0,
+     "nothing readable": 0
+    },
+    "template library": {
+     "one circle": 0,
+     "one square": 0,
+     "two objects, crisp": 0,
+     "two faint objects": 300,
+     "hybrid: overlaid": 0
+    }
+   },
+   "still distinct by the 240 of 300 test": false,
+   "readable": true,
+   "vae reconstruction mse": 0.01031,
+   "vae tries": 1,
+   "scorer hit rate on this vae's reconstructions": {
+    "circle left": 1.0,
+    "circle centre": 1.0,
+    "circle right": 1.0,
+    "square left": 1.0,
+    "square centre": 1.0,
+    "square right": 1.0,
+    "circle left, square right": 1.0,
+    "square left, circle right": 1.0,
+    "overlaid at left": 1.0,
+    "overlaid at centre": 1.0,
+    "overlaid at right": 1.0
+   },
+   "denoiser loss": 0.06978,
+   "seconds": 26.5
+  }
+ }
+}

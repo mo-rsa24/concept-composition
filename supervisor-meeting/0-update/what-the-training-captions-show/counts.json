@@ -1,0 +1,40 @@
+{
+ "slice": {
+  "files": 2,
+  "captions": 32776409,
+  "seconds": 23.65263867378235,
+  "per_file": [
+   {
+    "file": "part-00000-339dc23d-0869-4dc0-9390-b4036fcc80c2-c000.snappy.parquet",
+    "captions": 16388209,
+    "seconds": 13.8
+   },
+   {
+    "file": "part-00001-339dc23d-0869-4dc0-9390-b4036fcc80c2-c000.snappy.parquet",
+    "captions": 16388200,
+    "seconds": 9.8
+   }
+  ]
+ },
+ "camel": {
+  "all": 12291,
+  "wet": 7,
+  "weather": 22,
+  "water": 213,
+  "any wet, weather or water word": 239
+ },
+ "dog": {
+  "all": 225544,
+  "wet": 781,
+  "weather": 651,
+  "water": 3456,
+  "any wet, weather or water word": 4822
+ },
+ "full_mirror": {
+  "files": 128,
+  "captions": 2097693557,
+  "camel": 784797,
+  "dog": 14396194,
+  "source": "caption-counts.md, searched on the cluster 2026-10-21"
+ }
+}

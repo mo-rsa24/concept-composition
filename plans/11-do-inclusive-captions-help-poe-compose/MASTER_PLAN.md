@@ -54,7 +54,7 @@ score depends on. And whether the result transfers past cat and dog, since one p
 
 ## Objectives
 
-**Fix what counts as working before anything runs.** The compose rate run B has to reach against
+**Fix what counts as working before anything runs.** The [compose rate](../../context/world/compose-rate.md) run B has to reach against
 run A, the band inside which the answer is "could not tell", and the result that kills the idea.
 
 **Build the trainer and watch it train.** An image-and-caption LoRA trainer against this repo's

@@ -177,3 +177,7 @@ Navigation: ⬅️ [Previous](#depends-on) | 📋 [TOC](#table-of-contents)
       the check that caught it.
 - [ ] The free bound on the model's share (step 24 of the running order) has not run, so the
       remainder measured here has no second route to be checked against.
+
+## Cross-references
+
+- The mention of **Langevin corrector** in [the write-up on what PoE loses when it composes](../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#11-limits-and-open-questions).

@@ -1,0 +1,54 @@
+{
+ "pair not included, w=1.0, T=50": {
+  "pale, apart": 78,
+  "overlay": 122
+ },
+ "pair not included, w=1.0, T=200": {
+  "pale, apart": 78,
+  "overlay": 122
+ },
+ "pair not included, w=1.0, T=1000": {
+  "pale, apart": 78,
+  "overlay": 122
+ },
+ "pair not included, w=7.5, T=50": {
+  "circle only": 123,
+  "square only": 77
+ },
+ "pair not included, w=7.5, T=200": {
+  "pale, apart": 80,
+  "overlay": 120
+ },
+ "pair not included, w=7.5, T=1000": {
+  "pale, apart": 81,
+  "overlay": 119
+ },
+ "pair at 1 in 20, w=1.0, T=50": {
+  "pale, apart": 68,
+  "overlay": 114,
+  "apart": 18
+ },
+ "pair at 1 in 20, w=1.0, T=200": {
+  "pale, apart": 68,
+  "overlay": 115,
+  "apart": 17
+ },
+ "pair at 1 in 20, w=1.0, T=1000": {
+  "pale, apart": 70,
+  "overlay": 115,
+  "apart": 15
+ },
+ "pair at 1 in 20, w=7.5, T=50": {
+  "apart": 88,
+  "square only": 58,
+  "circle only": 54
+ },
+ "pair at 1 in 20, w=7.5, T=200": {
+  "pale, apart": 84,
+  "overlay": 116
+ },
+ "pair at 1 in 20, w=7.5, T=1000": {
+  "pale, apart": 88,
+  "overlay": 112
+ }
+}

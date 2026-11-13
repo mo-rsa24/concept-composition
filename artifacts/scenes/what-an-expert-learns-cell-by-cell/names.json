@@ -1,0 +1,23 @@
+{
+ "sec1": "Setup: the ideal expert",
+ "sec2": "Same points, two labellings",
+ "sec3": "Labels steer a conditional model",
+ "sec4": "A classifier learns \"not B\"",
+ "sec5": "Four kinds of composition",
+ "sec6": "What this cannot show",
+ "cell1": "Two questions, no sampler",
+ "cell2": "The grid and four helpers",
+ "cell3": "The loss has no label in it",
+ "cell4": "One gradient, two labellings",
+ "cell5": "Same gradient; now a conditional model",
+ "cell6": "Compose under two label schemes",
+ "cell7": "Schemes compared; now a classifier",
+ "cell8": "Train on set labels, then true ones",
+ "cell9": "Co-occurrence and intersection",
+ "cell10": "Products of two experts",
+ "cell11": "Contention: where chimeras come from",
+ "cell12": "Centred against position-varied",
+ "cell13": "Interaction: the wet dog",
+ "cell14": "Overlap teaches the wet dog",
+ "cell15": "What this cannot show"
+}

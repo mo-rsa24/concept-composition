@@ -85,7 +85,7 @@ next finding measures that.
 | The clamp bound and the per-step `kappa` range | review file tasks 1.3 and 4, sidecar field `kappa_raw` | inferred |
 | The first-separating λ per seed | the seven sheets under `paper/iclr/figures/how-much-is-added/across-composition-rules/`, eye read 2026-09-03 and recorded in the review file | stated |
 | The renders | eight cells and a 50-step κ sweep on mscluster85 in session; the 140-render κ × λ set by `nohup` on mscluster85, about 5 h at 107 to 136 s per cell, 2026-09-03 | verified |
-| Regenerate with | [runbook § render SuperDiff's κ × λ sheets](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#6-render-superdiffs-own-kappa-by-lambda-sheets) | |
+| Regenerate with | [runbook § render SuperDiff's κ × λ sheets](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) | |
 | The plan | [what changes when SuperDiff leaves its own defaults](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/05-what-changes-when-superdiff-leaves-its-own-defaults.md), root step 28 | |
 
 ## Depends on

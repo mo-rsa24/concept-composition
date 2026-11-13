@@ -1,0 +1,15 @@
+flowchart LR
+  sec1["Setup: the ideal expert<br/><small>cells 1 to 3, 4 functions</small><br/><small>used later: density, ideal_expert, mass, show</small>"]
+  sec2["Same points, two labellings<br/><small>cells 3 to 5, 1 function</small>"]
+  sec3["Labels steer a conditional model<br/><small>cells 5 to 7, 1 function</small>"]
+  sec4["A classifier learns 'not B'<br/><small>cells 7 to 9, 2 functions</small>"]
+  sec5["Four kinds of composition<br/><small>cells 9 to 15, 2 functions</small>"]
+  sec6["What this cannot show<br/><small>cell 15</small>"]
+  sec1 --> sec2
+  sec2 --> sec3
+  sec3 --> sec4
+  sec4 --> sec5
+  sec5 --> sec6
+  sec2 -.-> sec1
+  sec3 -.-> sec1
+  sec5 -.-> sec1

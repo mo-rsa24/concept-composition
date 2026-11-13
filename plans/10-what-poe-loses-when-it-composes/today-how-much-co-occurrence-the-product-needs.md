@@ -117,22 +117,34 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 2. 🔧 The sweep, and the closed-form crossing (AI, ~15 min)
 
-- [ ] **Run D at all eight weights** for all three samplers, 300 draws each, writing the five counts per
+- [x] **Run D at all eight weights** for all three samplers, 300 draws each, writing the five counts per
   weight per sampler to `toy-sampler-cooccurrence-sweep.json`.
-- [ ] **Compute the closed-form crossing** from the exact product's component weights, over a fine grid,
+  ✅ verified (8 weights, 51 to 80 s each; the stream is reset to seed 20261022 at every weight, so
+  w = 0 reproduces condition A exactly, 2026-11-04)
+- [x] **Compute the closed-form crossing** from the exact product's component weights, over a fine grid,
   and write it into the same file.
-- [ ] **📸 You should see** the exact sampler's crisp count rising with w and the two sampled ones
+  ✅ verified (400 points from 1e-5 to 0.5; the crisp share is already above one half at 1e-5, so the
+  grid reports its own floor rather than a crossing, 2026-11-04)
+- [x] **📸 You should see** the exact sampler's crisp count rising with w and the two sampled ones
   staying low, matching B's split at w = 0.1.
+  ✅ the second half holds and the first does not: the exact sampler does not rise, it steps from 0
+  crisp at w = 0 to 300 of 300 at w = 0.001 and stays there. A pairing that disagrees is penalised by
+  exp(−2610), so no weight a grid can reach lets one win. At w = 0.1 the two sampled ones give 10 and
+  30 of 300 against B's 14, which is draw noise on the same density (2026-11-04)
 
 ◀ Needs: step 1. ▶ Next: step 3.
 
 ### 3. 🔧 The figure and the threshold (AI, ~15 min)
 
-- [ ] **Draw the sweep** as `weight-sweep.png`: w on a log x axis, the fraction of 300 draws called
+- [x] **Draw the sweep** as `weight-sweep.png`: w on a log x axis, the fraction of 300 draws called
   `two objects, crisp` on y, one curve per sampler, condition B's pair weight marked at 0.1, and a
   vertical line at the grid threshold with the closed-form crossing beside it.
-- [ ] **Build a sample sheet** showing eight draws per sampler at three weights, so the counts can be
+  ✅ verified (the line at 0.001 is labelled on the figure as the grid's floor rather than a crossing,
+  since the exact curve is flat at 1.0 across every non-zero weight, 2026-11-04)
+- [x] **Build a sample sheet** showing eight draws per sampler at three weights, so the counts can be
   checked against the pictures.
+  ✅ verified (`draws-across-weights.png`, five weights rather than three: 0.003, 0.03, 0.1, 0.3, 0.5,
+  2026-11-04)
 
 ◀ Needs: step 2. ▶ Next: instruction 4.
 
@@ -146,26 +158,40 @@ with `PY=/home/molef/miniconda3/bin/python3`. CPU only.
 
 ### 5. 🔧 The competing-caption condition, both forms (AI, ~25 min)
 
-- [ ] **Add condition E**: three captions, a softmax over each caption's fit to each image, each expert
+- [x] **Add condition E**: three captions, a softmax over each caption's fit to each image, each expert
   read off the posterior by Bayes against a uniform image prior, then the product of the two
   single-caption experts. Both scoring forms, the softmax temperature a flag.
-- [ ] **Report the five counts** for all three samplers, and the pair weight each form implies inside
+  ✅ verified (`toy_sampler_hybrids.py:caption_experts`, `--caption-form` and `--caption-tau`;
+  form 1 scores by distance at tau 5, form 2 by shape counting at tau 1, 2026-11-04)
+- [x] **Report the five counts** for all three samplers, and the pair weight each form implies inside
   each expert.
-- [ ] **Run D at each form's implied weight** so the comparison holds the weight fixed and changes only
+  ✅ verified (implied weight 0.0461 for form 1 and 0.0458 for form 2; counts in
+  `artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json`, 2026-11-04)
+- [x] **Run D at each form's implied weight** so the comparison holds the weight fixed and changes only
   whether the captions competed.
-- [ ] **📸 You should see** two count sets, and for each one the implied weight placed on the sweep
+  ✅ verified (both controls give 300 of 300 crisp from the exact sampler and 296 overlays from each
+  sampled one, 2026-11-04)
+- [x] **📸 You should see** two count sets, and for each one the implied weight placed on the sweep
   figure's x axis.
+  ✅ the counts came out unlike the hand-weighted condition at the same weight rather than like it:
+  about 296 single objects of 300 from every sampler including the exact one, and no overlay. Both
+  experts spread over the same seven-picture bank, so each picture paired with itself survives and
+  the single shapes outweigh the pair. The failure sits in the target, not the sampler (2026-11-04)
 
 ◀ Needs: instruction 4. ▶ Next: step 6.
 
 ### 6. ✍️ The card, the idea-map line and the filing (AI with you, ~20 min)
 
-- [ ] **Write the card** at `artifacts/results/how-much-co-occurrence-the-product-needs/README.md`:
+- [x] **Write the card** at `artifacts/results/how-much-co-occurrence-the-product-needs/README.md`:
   both axes named, the data behind each curve, the threshold as a number, the competing-caption counts
   out of 300 per sampler, and what the toy cannot say about SDXL.
-- [ ] **Append one line** under [the idea map's Runs](../../artifacts/ideas/is-poe-ill-posed-for-composition/IDEA_MAP.md#runs)
+  ✅ verified (156 lines, four caveats, both count tables and the run commands, 2026-11-04)
+- [x] **Append one line** under [the idea map's Runs](../../artifacts/ideas/is-poe-ill-posed-for-composition/IDEA_MAP.md#runs)
   giving the threshold and whether the competing-caption version hybridises.
-- [ ] **Add the new figures** to the note's own README table.
+  ✅ verified (2026-11-04)
+- [x] **Add the new figures** to the note's own README table.
+  ✅ verified (four rows added, plus `the-chain-of-results.png`, which places the four earlier
+  results in date order ending on this sweep, 2026-11-04)
 
 ◀ Needs: step 5.
 

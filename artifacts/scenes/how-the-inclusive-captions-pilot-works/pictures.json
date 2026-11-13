@@ -1,0 +1,244 @@
+{
+ "boxes": {
+  "coco": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "page-images/both-sheet-00.jpg",
+     "caption": "48 of the real COCO train2017 photographs that hold both a cat and a dog, which is the rarest of the four sets the pilot draws from.",
+     "alt": "A grid of 48 domestic photographs of cats and dogs together, each tile titled with a number and the fraction of the longer side each animal's box covers.",
+     "kind": "table",
+     "title": "Both-animal photos, page 1 of 3"
+    }
+   ]
+  },
+  "pool": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "page-images/both-sheet-00.jpg",
+     "caption": "Page 1 of the contact sheets the pool script writes. Each title carries the box fraction the 0.25 size floor is tested against, so the filter's numbers sit on the photographs they came from.",
+     "alt": "A grid of 48 cat-and-dog photographs, each labelled with a cat box fraction, a dog box fraction and the overlap between the two boxes.",
+     "kind": "table",
+     "title": "Both-animal photos, page 1 of 3"
+    },
+    {
+     "image": "page-images/both-sheet-02.jpg",
+     "caption": "The tail of the same run, tiles 96 to 130, where the 131 that clear the size filter end.",
+     "alt": "A grid of 35 cat-and-dog photographs numbered 96 to 130, each with its two box fractions and their overlap, including a pair of printed mugs and a van livery.",
+     "kind": "table",
+     "title": "Both-animal photos, page 3 of 3"
+    }
+   ]
+  },
+  "audit": {
+   "input": [
+    {
+     "image": "page-images/audit-page-00.jpg",
+     "caption": "Page 1 of the nine pages the judging was actually done on, 16 tiles at 448 pixels. At this size a drawn dog and a live one can be told apart; on the 198-pixel contact sheet they cannot.",
+     "alt": "Four rows of four cat-and-dog photographs at 448 pixels, each titled with its tile number and its two box fractions.",
+     "kind": "table",
+     "title": "Audit page 1 of 9, at 448 pixels"
+    },
+    {
+     "image": "page-images/both-sheet-00.jpg",
+     "caption": "The numbered tiles the 40 rejections key on. Tile 2 is a real cat beside a dog drawn in an open book, which is one of the ten struck off for being a depiction rather than an animal.",
+     "alt": "A grid of 48 numbered photographs of cats and dogs; some tiles hold a drawing, a figurine or only one live animal.",
+     "kind": "table",
+     "title": "Both-animal photos, page 1 of 3"
+    }
+   ],
+   "example": [],
+   "output": []
+  },
+  "manifest": {
+   "input": [],
+   "example": [
+    {
+     "image": "page-images/both-sheet-00.jpg",
+     "caption": "What one row of the manifest is: a real photograph with the box measurements the 0.25 size filter was applied to. These 48 are the first of the 131 the both-animal set is drawn from.",
+     "alt": "A grid of 48 domestic photographs holding a cat and a dog, each with a tile number, a cat box fraction, a dog box fraction and the overlap between the two boxes.",
+     "kind": "table",
+     "title": "Both-animal photos, page 1 of 3"
+    },
+    {
+     "image": "page-images/both-sheet-02.jpg",
+     "caption": "Tiles 96 to 130, the last of the 131, on the same labels.",
+     "alt": "A grid of 35 photographs holding a cat and a dog with tile numbers 96 to 130, each labelled with both box fractions and their overlap.",
+     "kind": "table",
+     "title": "Both-animal photos, page 3 of 3"
+    }
+   ],
+   "output": []
+  },
+  "captions": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "page-images/training-photo-and-its-captions.jpg",
+     "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+     "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+     "kind": "table",
+     "title": "One photo, and the caption each run draws"
+    }
+   ]
+  },
+  "runa": {
+   "input": [
+    {
+     "image": "page-images/training-photo-and-its-captions.jpg",
+     "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+     "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+     "kind": "table",
+     "title": "One photo, and the caption each run draws"
+    }
+   ],
+   "example": [],
+   "output": []
+  },
+  "runb": {
+   "input": [
+    {
+     "image": "page-images/training-photo-and-its-captions.jpg",
+     "caption": "One both-animal photograph and the caption each run draws for it. The photograph is tile 6 of this pilot's own pool sheet; the four strings and the shares are read out of captions.py. This is the whole difference between the two runs.",
+     "alt": "A photograph of a spaniel with a white cat under its chin, beside two lists: run A draws the joint caption 90% of the time and a blank 10%, run B draws cat 40%, dog 40%, joint 10% and blank 10%.",
+     "kind": "table",
+     "title": "One photo, and the caption each run draws"
+    }
+   ],
+   "example": [],
+   "output": []
+  },
+  "ckpt": {
+   "input": [],
+   "example": [],
+   "output": []
+  },
+  "sheets": {
+   "input": [],
+   "example": [
+    {
+     "image": "page-images/borrowed-cats-and-dogs-sheet.jpg",
+     "caption": "The shape the watching sheet will have, borrowed from another experiment in this repo: seeds down the rows, one condition per column, on base SDXL with no adapter attached. The label on the picture says where it came from; nothing in it is this pilot's output.",
+     "alt": "A large grid of SDXL renders, seeds down the rows and prompt conditions across, with a dark banner across the top naming the experiment it came from.",
+     "kind": "model",
+     "title": "The sheet's shape, from another experiment"
+    }
+   ],
+   "output": []
+  },
+  "wandb": {
+   "input": [],
+   "example": [
+    {
+     "image": "page-images/illustration-wandb-run-page.png",
+     "caption": "An illustration of the run page, not a screenshot: this project holds no runs yet, so there is nothing to photograph. It shows where the loss, the watching sheet and the two runs side by side will land. Nothing in it is measured.",
+     "alt": "A drawing of a Weights & Biases workspace: a run list with run A and run B, a train/loss panel, a sheet panel and a run-comparison panel, all empty, under a banner reading illustration, not a screenshot.",
+     "kind": "abstract",
+     "title": "The run page, drawn (no runs logged yet)"
+    }
+   ],
+   "output": []
+  },
+  "score": {
+   "input": [
+    {
+     "image": "page-images/borrowed-contact-sheet.jpg",
+     "caption": "What the counting half of the pass reads, borrowed from another experiment in this repo: 64 base-SDXL renders of “a photo of a cat” with GroundingDINO's counts on each tile, every one reporting a dog the eye cannot find.",
+     "alt": "A grid of 64 square renders of single cats, each titled with its seed, dog count 1 and cat count 1, under a banner naming the experiment it came from.",
+     "kind": "model",
+     "title": "What the counter reads, from another experiment"
+    }
+   ],
+   "example": [
+    {
+     "image": "page-images/borrowed-poe-seed02.jpg",
+     "caption": "One render the pass has to make a call on, borrowed from the same experiment: the product of the cat and dog conditions on base SDXL, where the count says one animal and the classifier has to name what that animal is.",
+     "alt": "A single square render of one animal with both cat and dog features, under a banner naming the experiment it came from.",
+     "kind": "model",
+     "title": "One render to call, from another experiment"
+    }
+   ],
+   "output": [
+    {
+     "image": "page-images/borrowed-crop-classifier-sheet.jpg",
+     "caption": "What the naming half returns, from the same experiment: the 64 renders cropped to the detected box and named by zero-shot CLIP, 64 of 64 called cat with a margin near 0.99.",
+     "alt": "A grid of 64 cropped animal boxes, each titled with its seed, the call cat, and the probability margin between cat and dog, under a banner naming the experiment it came from.",
+     "kind": "model",
+     "title": "What the classifier returns, from another experiment"
+    }
+   ]
+  },
+  "figure": {
+   "input": [],
+   "example": [],
+   "output": []
+  }
+ },
+ "gaps": [
+  {
+   "box": "audit",
+   "need": "The numbered audit page placed above has to be in the repo before the build runs. It is not there yet.",
+   "how": "draw",
+   "detail": "All nine pages already exist, written by scripts/census/audit_both_animal_photos.py, and page 1 is on this machine at /tmp/claude-1000/-home-molef-PhD-poe-repair-min-dog-and-rain/7b180fb3-eb17-4df9-a4c7-c5063044d5dd/scratchpad/audit/audit_page_00.png (1792 by 1932, 5.2 MB). Run: cp /tmp/claude-1000/-home-molef-PhD-poe-repair-min-dog-and-rain/7b180fb3-eb17-4df9-a4c7-c5063044d5dd/scratchpad/audit/audit_page_00.png /home/molef/PhD/poe_repair_min-dog-and-rain/artifacts/results/the-inclusive-captions-photo-pool/audit_page_00.png and add a line for it to that folder's README.md. I opened the page and checked all 16 tiles: no identifiable face, no name, no link. If the copy is not made, drop the second item of audit.input and the first one still stands on its own."
+  },
+  {
+   "box": "coco",
+   "need": "One real COCO photo on its own with everything COCO stores about it: both instance boxes drawn on the pixels, the category ids, and all five of its captions.",
+   "how": "draw",
+   "detail": "hld-diagram --record over one image id. The source files instances_train2017.json and captions_train2017.json live under /datasets/mmolefe/coco2017, which is not mounted on this machine, so either run it on the cluster checkout or build the card from what is local: crop tile 2 out of artifacts/results/the-inclusive-captions-photo-pool/both_sheet_00.png (the ginger cat on an open book of drawn dogs), take its box fractions from the tile title, and leave the five captions as a labelled empty row rather than inventing them. Tile 2 is the right record because it is the edge the audit turns on, a real cat beside a dog that is only a drawing."
+  },
+  {
+   "box": "captions",
+   "need": "The caption rule as a picture: one both-animal photograph with the four caption strings beneath it and the share each run gives them.",
+   "how": "draw",
+   "detail": "Two columns, run A and run B, over one tile cropped out of artifacts/results/the-inclusive-captions-photo-pool/both_sheet_00.png (tile 6, the spaniel with a white cat under its chin, which is unambiguous at tile size). The strings are literal from poe_repair/experiments/inclusive_captions/captions.py:54-57: \"a photo of a cat\", \"a photo of a dog\", \"a photo of a cat and a dog\", and the empty string. The shares are BOTH_SHARES at :69, so run A is joint 0.90 and blank 0.10, and run B is cat 0.40, dog 0.40, joint 0.10 and blank 0.10. Draw run B's column as four arrows off one photograph to say the draw is resampled every time the photo comes up."
+  },
+  {
+   "box": "runa",
+   "need": "A training photo beside the caption it is trained under, which is what the user asked these two boxes to carry.",
+   "how": "draw",
+   "detail": "Nothing local shows this. The real manifest and its photos live at /datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/manifest.json, and /datasets is not mounted here, so no real manifest row can be read on this machine. Build the same figure as the captions gap above and place it on all three boxes: a tile cropped out of artifacts/results/the-inclusive-captions-photo-pool/both_sheet_00.png with the literal strings from captions.py:54-57 under it, the run A panel showing the one joint caption and the run B panel showing the three it resamples between. Do not write any caption text that is not one of those four strings."
+  },
+  {
+   "box": "runb",
+   "need": "The same training photo and caption figure as run A, with run B's three draws instead of run A's one.",
+   "how": "draw",
+   "detail": "Same figure and same source files as the runa gap. One drawn figure serves captions, runa and runb; put the run A panel on runa and the run B panel on runb."
+  },
+  {
+   "box": "ckpt",
+   "need": "Nothing.",
+   "how": "none",
+   "detail": "The adapters are weight files, and a listing of step_0 to step_2000 is text rather than a picture. What the checkpoints look like is the watching sheet in the next box, which already carries its picture."
+  },
+  {
+   "box": "figure",
+   "need": "The compose-rate figure itself, which does not exist until the scoring pass runs.",
+   "how": "none",
+   "detail": "No local bar chart measures a compose rate, and putting another experiment's chart here would show the reader a result this pilot has not got. The box stays empty until task 6.3 writes artifacts/results/do-inclusive-captions-help-poe-compose/, and then the real figure goes on it as its output."
+  }
+ ],
+ "left_out": [
+  {
+   "image": "artifacts/results/the-inclusive-captions-photo-pool/both_sheet_01.png",
+   "reason": "personal data: three of its tiles hold identifiable faces. Excluded by instruction and not opened. I did open both_sheet_00 and both_sheet_02 tile by tile and neither holds an identifiable face; the people in them are legs on a pavement, a torso in a sweater and a person lying face-down on a bed."
+  },
+  {
+   "image": "artifacts/results/does-any-caption-say-a-cat-and-a-dog/images/",
+   "reason": "not about any component: 155 Re-LAION web pictures fetched for a different experiment, each named by a hash of its source link, and their captions carry shop and company names."
+  },
+  {
+   "image": "artifacts/results/what-the-training-captions-show/",
+   "reason": "not about any component: 1,345 Re-LAION web pictures from the caption census for the camel and rain work, with the source URL of each in fetch.json beside them."
+  },
+  {
+   "image": "artifacts/scenes/how-the-inclusive-captions-pilot-works/the-inclusive-captions-pilot-high-level-design-explainer-light.png",
+   "reason": "duplicate: it is this diagram's own render."
+  }
+ ],
+ "built_by": "make_page_images.py beside this file turns each source picture into the page-sized copy under page-images/ that the spec names, burning a source label onto any picture that is not this pilot's own output. The spec is what build_scene.py reads; this file is the record of which picture was chosen for which box and why."
+}
