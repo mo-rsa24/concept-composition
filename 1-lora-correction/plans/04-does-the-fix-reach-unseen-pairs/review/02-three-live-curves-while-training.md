@@ -1,24 +1,18 @@
 # 🔬 Review: can a training run be read while it is still running?
 
-**Two thirds answered; the last third is what the fifteen runs are waiting on.** This file
+**Answered: all three curves are live.** This file
 judges [the plan that wires three live curves into training](../plans/tools/02-three-live-curves-while-training.md).
 
 Why it matters more than its size suggests: those fifteen adapters train unattended. If the
 scorer inside the training loop is wrong, all fifteen produce plausible numbers that mean nothing,
 and nobody finds out for days. This measuring tool is what makes leaving them alone safe.
 
-## Recommended prompt (when the first short run finishes)
-
-```
-/analyze-run fy7a1ynd
-```
-
 ## Position in the plan tree
 
 | File | What it holds |
 |---|---|
 | [design](../plans/tools/02-three-live-curves-while-training.md) | the three curves, where they are computed, how they are logged |
-| **this file** | **the verdict: two curves proven, the three-curve first short run still outstanding** |
+| **this file** | **the verdict: all three curves land as separate non-null series on the first short run** |
 | [what waits on it](04-transfer-as-a-rate-over-fifteen-pairs.md) | the fifteen unattended runs that may not start until this is green |
 
 ## Table of contents
@@ -90,7 +84,11 @@ process was never touched.
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-- [ ] ⚠️ Do all three land as three separate live curves on a one-epoch first short run?
+- [x] ✅ Do all three land as three separate live curves on a one-epoch first short run?
+      **Yes.** In W&B run `fy7a1ynd` (`smoke_20260819_151601`, finished) each of the three keys is
+      its own series with a non-null value at step 50, the one evaluation pass after the epoch:
+      `eval/compose_rate/mean` 0.75, `eval/direction_cosine/mean` 0.048,
+      `eval/frac_distance_reached/mean` 0.040. Read 2026-11-13 from the run's history.
       **This is the check everything else waits on.** The fifteen runs may not start until this is green, for the
       reason above: a wrong in-loop scorer turns an unattended fan-out into fifteen runs of
       convincing nonsense. Judged against run `smoke_20260819_151601` when it finishes: each of
@@ -107,11 +105,9 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
 - [x] ✅ Are the two direction measures wired?
       Yes, in code and importing cleanly. `_inline_sampling.py::direction_metrics` logs both per
       pair-and-seed run plus their means, reusing the existing maths rather than redefining it.
-- [ ] 🟡 What does a one-epoch first short run actually cost on a shared biggpu device?
-      Unknown until this run finishes. The plan's stated estimate was one hour, inherited from an
-      earlier short run whose log does not exist anywhere in the repo, so it has no evidence behind it.
-      Next action: record the measured wall time here when the run ends, and correct the plan's
-      Considerations to that number.
+- [x] ✅ What does a one-epoch first short run actually cost on a shared biggpu device?
+      4,237 seconds, about 71 minutes, by W&B's run duration. Training took 83 s; the rest is the
+      evaluation pass over 152 pair-and-seed runs.
 
 ## Asked after the result
 
@@ -130,8 +126,9 @@ Navigation: ⬅️ [Asked after the result](#asked-after-the-result) | 📋 [TOC
 
 - [x] ✅ **Was the comparison fair?** Not applicable: nothing is compared here. This measuring tool
       asks whether three numbers appear and carry real values, not whether one condition beats another.
-- [ ] ⚠️ **Was the measuring tool sound?** The question this whole file exists to answer, and it is
-      the one written before the run, above. Not settled until all three series carry non-null values.
+- [x] ✅ **Was the measuring tool sound?** As far as this run can show: all three series carry
+      non-null values. Whether the compose rate means the same thing across pairs is the separate,
+      still-open anchor question below.
 - [x] ✅ **Did the run respect the environment?** Output landed under `/datasets`, the run was
       pinned to an idle device with a guard that aborts if that device is occupied, and the other
       user's process was never touched. Harvest it with `pgrep`, not `squeue`: this run is outside
@@ -144,7 +141,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 | What the paper says | What it owes alongside it |
 |---|---|
 | a compose rate read from this first short run | that `eval/compose_rate/mean` averages over 2 of the 19 sampled pairs only (`a_wolf__x__a_husky` in-train, `a_cat__x__a_dog` held-out), because anchor images exist for those two alone. The direction and distance curves cover all 152 pair-and-seed runs. That is enough to answer the question this file waits on, which is whether the metric appears and carries real values. It is not a transfer measurement, and step 10's runs need the remaining anchors before their compose rate means anything across pairs |
-| the cost of a first short run | the measured wall time, once this run ends. The plan's one-hour estimate came from an earlier short run whose log does not exist in the repo |
+| the cost of a first short run | 4,237 s (about 71 min) on one shared RTX 8000, 83 s of it training |
 
 ## What the run cost, and what it bought
 
@@ -178,13 +175,12 @@ Navigation: ⬅️ [What the run cost](#what-the-run-cost-and-what-it-bought) | 
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| whether all three curves land as separate non-null series | `smoke_20260819_151601` finishing, then reading the three series in W&B | the fifteen runs, which may not launch until this is green |
-| what a one-epoch first short run actually costs | the measured wall time of this run | the plan's Considerations, which currently carries an estimate with no evidence behind it |
 | anchor images for the remaining 17 of 19 sampled pairs | generating them | step 10's runs, whose compose rate means nothing across pairs without them |
 
 ## Next step
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Check whether `smoke_20260819_151601` has finished (`pgrep`, not `squeue`), then read the three
-W&B series and answer the question written before the run.
+The measuring tool is green, so the fifteen runs it gated may launch once their anchor images
+exist: generate anchors for the remaining 17 of 19 sampled pairs, then continue with
+[the fifteen-pair transfer plan](04-transfer-as-a-rate-over-fifteen-pairs.md).

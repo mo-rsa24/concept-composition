@@ -5,15 +5,15 @@
 This block is a snapshot; the live version prints at session start, or on demand with
 `python3 scripts/plan_pulse.py --brief`.
 
-- **What is going on:** three things over SSH, invisible to `squeue`: the clean-tail corrector sweep of scope 06 plan 04 on the session node, step 57, the rank-32 pooled run with weight decay 0.1 (`phase1_r32_wd0.1_100k`) on mscluster109 device 0, about 20 hours from 2026-09-06, and step 58's poller on the session node, which launches the clean-estimate-loss run (`phase1_r32_x0loss_40k`, about 15 GPU-hours) on the first biggpu device that frees and records the claim in `logs/experiment_e_claimed_device.txt`.
-- **The last thing we did:** taught the environment the shared-device launch path (an allocated
-  biggpu node with an idle second GPU, reached over SSH) and launched step 9's smoke run with it.
-- **Do this next:** step 9's one-epoch smoke run,
-  [02-three-live-curves-while-training](1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/tools/02-three-live-curves-while-training.md),
-  is cooking on a shared biggpu device; it gates the whole transfer chain (steps 10, 11, 12 and 14
-  wait behind it, and so does register slot F8). While it runs, write steps 16 or 18, which need
-  no GPU and no queue. When the run finishes, judge its three curves against the review file's
-  bar.
+- **What is going on:** no research runs. The cluster queue holds only a read-only size census
+  (job 86536) from the cluster's tidy session.
+- **The last thing we did:** judged step 9 green: all three live curves land as separate non-null
+  series on the first short run (W&B `fy7a1ynd`, 4,237 s), recorded in
+  [its review file](1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/02-three-live-curves-while-training.md).
+- **Do this next:** step 10, finishing the read of
+  [does one pooled fix transfer at all](1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md):
+  steps 70k to 100k are unscored and the go/no-go note is owed. Step 11's fifteen runs also need
+  anchor images for 17 of the 19 sampled pairs before their compose rate means anything across pairs.
 
 ## The paper: what has to land
 
@@ -31,7 +31,7 @@ left in a queue that renumbers itself. A plan's own file carries this same numbe
 | 6 | 03-does-the-correction-cause-composition/hypothesis-03-when-in-the-run-it-matters | when the correction matters: the cliff is at the start | ◑ driving the timing tab by hand | 4, 5 |
 | 7 | ~~03-does-the-correction-cause-composition/hypothesis-05-the-same-story-from-three-sides~~ | the independent checks: two image-side yes, two language-side null | ✅ | 4 |
 | 8 | ~~03-does-the-correction-cause-composition/hypothesis-01-what-the-fix-changes-inside-the-model~~ | the fix changes what a word paints, not where it looks | ✅ | 3 |
-| 9 | 04-does-the-fix-reach-unseen-pairs/instrument-02-three-live-curves-while-training | the one-epoch smoke confirming three live curves | ◑ run in flight; verdict lands in the review file |  |
+| 9 | ~~04-does-the-fix-reach-unseen-pairs/instrument-02-three-live-curves-while-training~~ | the one-epoch smoke confirming three live curves | ✅ all three live (W&B `fy7a1ynd`) |  |
 | 10 | 04-does-the-fix-reach-unseen-pairs/hypothesis-01-does-one-pooled-fix-transfer-at-all | finish the read: steps 70k to 100k unscored, go/no-go note owed | ◑ run done, read incomplete | 9 |
 | 11 | 04-does-the-fix-reach-unseen-pairs/hypothesis-02-transfer-as-a-rate-over-fifteen-pairs | fifteen adapters, leaderboard, degradation curve | ⚠️ | 10 |
 | 12 | 04-does-the-fix-reach-unseen-pairs/baseline-01-the-size-matched-control-pool | the size-matched mixed pool against animals-only | ⚠️ | 11 |
