@@ -88,10 +88,13 @@ correction to the move.
   - ✅ 2026-11-13: the trunk `exec/correction-loss-01` holds all three (commits `3e1ca094`,
     `26418bf4`, `779e1a6b`); 42 conflict regions resolved, each decision in `26418bf4`'s message.
     The classifier branch's classifier files stay out; they live in `poe-classifier-guidance`.
-- [ ] **2.3 Gather the gitignored folders** (`artifacts/results/` and anything else ignored) from
+- [x] **2.3 Gather the gitignored folders** (`artifacts/results/` and anything else ignored) from
       all three checkouts into the main checkout. A folder in two checkouts is compared file by
       file, and the newer copy is kept.
   - Check: every results folder in the inventory exists once, in the main checkout.
+  - ✅ 2026-11-13: 2,832 files in 139 folders copied from `dog-and-rain`, none replacing a file in
+    the main checkout; `reviews` added nothing new. The main checkout holds 67 results folders,
+    9.8 GB. The worktrees keep their copies until they are retired.
 
 ### 3. 📁 Create the project folders and move the items
 
