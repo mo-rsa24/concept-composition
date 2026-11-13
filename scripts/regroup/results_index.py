@@ -84,7 +84,10 @@ def write_index(d, top_label):
             pic = f'<a href="{os.path.relpath(t, d)}"><img src="{os.path.relpath(t, d)}" width="160" alt="{k}"></a>' if t else "no figure"
             lines.append(f"| [{title or nice(k)}]({link}) | {first or 'no card yet'} | {pic} |")
         lines.append("")
-    open(os.path.join(d, "README.md"), "w").write("\n".join(lines))
+    readme = os.path.join(d, "README.md")
+    if os.path.exists(readme) and MARK not in open(readme, errors="ignore").read():
+        readme = os.path.join(d, "00-INDEX.md")  # never overwrite a hand-written README
+    open(readme, "w").write("\n".join(lines))
     for g in groups:
         write_index(os.path.join(d, g), nice(g))
 
