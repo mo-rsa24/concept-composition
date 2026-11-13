@@ -567,7 +567,10 @@ def brief():
         last = "(git unavailable)"
 
     rows = paper_rows()
-    ready = [r for r in rows if r[2] != "✅" and not r[3]]
+    done = {str(r[0]) for r in rows if r[2] == "✅"}
+    # A row is ready when it is not done and every step it waits on is done.
+    ready = [r for r in rows if r[2] != "✅"
+             and all(n in done for n in re.findall(r"\d+", r[3] or ""))]
     if ready:
         step, plan, status, _ = sorted(ready)[0]
         nxt = f"step {step}, {plan} (status {status})"
