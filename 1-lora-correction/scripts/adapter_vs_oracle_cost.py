@@ -20,7 +20,7 @@ Four points per pair:
 
 The comparison is pair-matched, not cell-matched, and the figure says so. The
 oracle arm ran seeds 9 to 12 (4 cells per pair) and the adapter arm seeds 9 to
-16 (16 cells per pair). Both are held-out seeds of the same eight pairs, so
+16 (8 renders per pair, scored without the trainer's comparison strips). Both are held-out seeds of the same eight pairs, so
 the pairs are the sampling unit here; a cell-matched version needs the adapter
 rescored per seed and is not what this shows.
 
@@ -128,7 +128,7 @@ def main() -> int:
                     columnspacing=0.8, loc="lower left", fontsize=6.4,
                     bbox_to_anchor=(-0.02, 1.02), borderaxespad=0.0)
     ax.text(0.5, -0.30,
-            "oracle: 4 seeds per pair.  adapter: 16 cells per pair.  "
+            "oracle: 4 seeds per pair.  adapter: 8 renders per pair.  "
             "pair-matched, not cell-matched.",
             transform=ax.transAxes, fontsize=6, color="0.45", ha="center")
     fig.tight_layout()
@@ -145,8 +145,8 @@ def main() -> int:
         "adapter_at_or_above_oracle_075": f"{beats} of {len(rows)} pairs",
         "caption_caps": [
             "pair-matched, not cell-matched: the oracle arm ran seeds 9-12 "
-            "(4 cells per pair) and the adapter arm seeds 9-16 (16 cells per "
-            "pair). The pair is the sampling unit; a cell-matched version "
+            "(4 cells per pair) and the adapter arm seeds 9-16 (8 renders per "
+            "pair, comparison strips not scored). The pair is the sampling unit; a cell-matched version "
             "needs the adapter rescored per seed",
             "oracle at lambda=1 reproduces the joint prediction exactly (1.9 "
             "grey levels of 255), so it is the target rather than a method "
