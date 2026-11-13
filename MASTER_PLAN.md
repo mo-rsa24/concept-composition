@@ -31,7 +31,7 @@ left in a queue that renumbers itself. A plan's own file carries this same numbe
 | 6 | 03-does-the-correction-cause-composition/hypothesis-03-when-in-the-run-it-matters | when the correction matters: the cliff is at the start | ◑ driving the timing tab by hand | 4, 5 |
 | 7 | ~~03-does-the-correction-cause-composition/hypothesis-05-the-same-story-from-three-sides~~ | the independent checks: two image-side yes, two language-side null | ✅ | 4 |
 | 8 | ~~03-does-the-correction-cause-composition/hypothesis-01-what-the-fix-changes-inside-the-model~~ | the fix changes what a word paints, not where it looks | ✅ | 3 |
-| 9 | ~~04-does-the-fix-reach-unseen-pairs/instrument-02-three-live-curves-while-training~~ | the one-epoch smoke confirming three live curves | ✅ all three live (W&B `fy7a1ynd`) |  |
+| 9 | ~~04-does-the-fix-reach-unseen-pairs/instrument-02-three-live-curves-while-training~~ | the one-epoch smoke confirming three live curves | ✅ |  |
 | 10 | 04-does-the-fix-reach-unseen-pairs/hypothesis-01-does-one-pooled-fix-transfer-at-all | finish the read: steps 70k to 100k unscored, go/no-go note owed | ◑ run done, read incomplete | 9 |
 | 11 | 04-does-the-fix-reach-unseen-pairs/hypothesis-02-transfer-as-a-rate-over-fifteen-pairs | fifteen adapters, leaderboard, degradation curve | ⚠️ | 10 |
 | 12 | 04-does-the-fix-reach-unseen-pairs/baseline-01-the-size-matched-control-pool | the size-matched mixed pool against animals-only | ⚠️ | 11 |
