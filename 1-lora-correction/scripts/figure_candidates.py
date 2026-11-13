@@ -13,10 +13,10 @@ plain-product and adapter columns attach the same checkpoint and differ only in 
 adapter is switched on for (none of the fifty steps, or all of them), and each render checks the
 window it actually got.
 
-    python scripts/figure_candidates.py --column mono --pairs "a horse|an owl" --seeds 9 10
-    python scripts/figure_candidates.py --column poe  --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
-    python scripts/figure_candidates.py --column ours --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
-    python scripts/figure_candidates.py --sheet --pairs "a horse|an owl" --seeds 9 10
+    python 1-lora-correction/scripts/figure_candidates.py --column mono --pairs "a horse|an owl" --seeds 9 10
+    python 1-lora-correction/scripts/figure_candidates.py --column poe  --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
+    python 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "a horse|an owl" --seeds 9 10 --checkpoint <pt>
+    python 1-lora-correction/scripts/figure_candidates.py --sheet --pairs "a horse|an owl" --seeds 9 10
 """
 from __future__ import annotations
 
@@ -31,7 +31,7 @@ from pathlib import Path
 import torch
 from PIL import Image, ImageDraw
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 

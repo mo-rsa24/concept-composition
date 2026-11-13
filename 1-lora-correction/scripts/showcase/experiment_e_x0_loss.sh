@@ -16,7 +16,7 @@
 #
 # Shared-device path (environment/hpc/execution-protocol.md): over SSH on a pinned free device of
 # a biggpu node, invisible to squeue. Example (every path absolute):
-#   ssh mscluster106 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/experiment_e_x0_loss.sh 1 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_x0loss.log 2>&1 &'
+#   ssh mscluster106 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_e_x0_loss.sh 1 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_x0loss.log 2>&1 &'
 set -euo pipefail
 
 DEVICE="${1:?usage: experiment_e_x0_loss.sh <cuda_device_index> [python]}"
@@ -101,14 +101,14 @@ if [ "$STAGE" = "probe" ] || [ "$STAGE" = "all" ]; then
     [ -f "$CKPT" ] || { echo "ABORT: no checkpoint at $CKPT" >&2; exit 1; }
     # The 8-seed held-out grid, the same recipe as figure_r32_030050: lambda 0 (plain PoE) as
     # the reference column, then lambda 1.0 and 1.2 on all 50 steps; detector count and DINOv2 drift.
-    "$PY" scripts/showcase/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" \
+    "$PY" 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" \
         --out-root "$OUT_ROOT/figure_r32_x0loss_${STEP}" --windows full --lambdas 1.0,1.2
     echo "[$(date -u +%H:%M:%S)] probe DONE step ${STEP}"
   done
 fi
 
 if [ "$STAGE" = "readout" ] || [ "$STAGE" = "all" ]; then
-  R=scripts/showcase/experiment_e_x0_loss.py
+  R=1-lora-correction/scripts/showcase/experiment_e_x0_loss.py
   "$PY" $R --frames      # per-step running estimates of the new adapter at lambda 1.0, 8 seeds
   "$PY" $R --figures     # training curves, contrast over steps, where it lands, both-ness over steps, checkpoint bars
   "$PY" $R --strips      # Mono | PoE | baseline adapter | new adapter, one strip per seed and one sheet

@@ -10,7 +10,7 @@ noisiest, step 49 the cleanest. Inside the window the correction is injected at
 full dose; outside it, nothing is injected.
 
 Why width 10 at stride 5, and not something picked from the correction's size:
-``scripts/window_width.py`` shows ‖r_t‖ is nearly flat over the run (each tenth
+``1-lora-correction/scripts/window_width.py`` shows ‖r_t‖ is nearly flat over the run (each tenth
 carries 15-22% of the total), so the narrowest band holding half the correction
 is 25 steps. At width 25 every placement contains the fork step and the curve
 cannot help but come out flat. Width 10 gives nine placements, each a fifth of
@@ -23,7 +23,7 @@ from __future__ import annotations
 NUM_STEPS = 50
 
 # Chosen for resolution, not for energy. See the module docstring and
-# scripts/window_width.py.
+# 1-lora-correction/scripts/window_width.py.
 WIDTH = 10
 STRIDE = 5
 

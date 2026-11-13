@@ -42,7 +42,7 @@ the sum of the two solo embeddings, in that view. Y is the correction size the p
 
 **How we got this image**
 
-`python scripts/language_probes.py --probe l1`, read from the training cache, 75 pairs, ~1 minute.
+`python 5-text-embedding-third-expert/scripts/language_probes.py --probe l1`, read from the training cache, 75 pairs, ~1 minute.
 The reading and the correlations are in `language_probes.json`.
 
 **What it lets you say**
@@ -61,7 +61,7 @@ difficulty is legible somewhere else in the model; it only rules out these four 
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `scripts/language_probes.py`.
+Design and verdict: the plan and review files linked above. Script: `5-text-embedding-third-expert/scripts/language_probes.py`.
 
 ## language_probe_l3_binding.png
 
@@ -98,7 +98,7 @@ beyond those three shared surface properties survives.
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `scripts/language_probes.py`.
+Design and verdict: the plan and review files linked above. Script: `5-text-embedding-third-expert/scripts/language_probes.py`.
 
 ## quality_control_cache.png
 
@@ -113,7 +113,7 @@ Each panel's title carries the paired effect size in standard deviations and its
 
 **How we got this image**
 
-`python scripts/quality_control.py`, 749 paired cells, same seed, prompt and sampler on both sides
+`python 1-lora-correction/scripts/quality_control.py`, 749 paired cells, same seed, prompt and sampler on both sides
 of each pair, the interaction term the only thing that differs, ~20 minutes. Numbers, the barred
 proxies and the excluded proxies are all in `quality_control_cache.json`.
 
@@ -139,7 +139,7 @@ this verdict should never be read off a subsample.
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `scripts/quality_control.py`.
+Design and verdict: the plan and review files linked above. Script: `1-lora-correction/scripts/quality_control.py`.
 
 ## manifold_slide_clip.png
 
@@ -155,7 +155,7 @@ entirely, against dose.
 
 **How we got this image**
 
-`python scripts/manifold_slide.py`, 32 cells x 5 doses x 3 rows, ~3 minutes. Numbers, the fitted
+`python 1-lora-correction/scripts/manifold_slide.py`, 32 cells x 5 doses x 3 rows, ~3 minutes. Numbers, the fitted
 axis and the endpoint checks are in `manifold_slide_clip.json`.
 
 **What it lets you say**
@@ -179,7 +179,7 @@ across the five checks.
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `scripts/manifold_slide.py`.
+Design and verdict: the plan and review files linked above. Script: `1-lora-correction/scripts/manifold_slide.py`.
 
 ## caption_readback.png
 
@@ -194,7 +194,7 @@ the same two controls as the manifold-slide figure.
 
 **How we got this image**
 
-`python scripts/caption_readback.py`, same 32 cells, several wordings per template built from the
+`python 3-understanding-compositionality/scripts/caption_readback.py`, same 32 cells, several wordings per template built from the
 prompt the cell was actually generated with, ~3 minutes. `caption_readback.json` carries the
 templates and the per-dose shares.
 
@@ -214,17 +214,17 @@ this is a readback against a fixed vocabulary, not an open-ended description tas
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `scripts/caption_readback.py`.
+Design and verdict: the plan and review files linked above. Script: `3-understanding-compositionality/scripts/caption_readback.py`.
 
 ## Reproducing
 
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 
-$PY scripts/language_probes.py --probe l1 --probe l3   # 75 pairs from cache, ~1 min
-$PY scripts/quality_control.py                          # 749 image pairs, ~20 min
-$PY scripts/manifold_slide.py                           # 32 cells x 5 doses x 3 rows, ~3 min
-$PY scripts/caption_readback.py                         # same cells, caption bank, ~3 min
+$PY 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3   # 75 pairs from cache, ~1 min
+$PY 1-lora-correction/scripts/quality_control.py                          # 749 image pairs, ~20 min
+$PY 1-lora-correction/scripts/manifold_slide.py                           # 32 cells x 5 doses x 3 rows, ~3 min
+$PY 3-understanding-compositionality/scripts/caption_readback.py                         # same cells, caption bank, ~3 min
 ```
 
 Outputs land in `/datasets/.../cache_analyses/`; copy them here to refresh this folder.

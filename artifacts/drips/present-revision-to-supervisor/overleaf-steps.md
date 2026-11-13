@@ -112,6 +112,6 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
     is all it takes to view either one.
 
 11. **Send the supervisor the claim figures.** They are not uploaded to Overleaf.
-    [src] `/home/molef/PhD/poe_repair_min/artifacts/scenes/iclr-review-response/claim-figures.pdf`
+    [src] `/home/molef/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/iclr-review-response/claim-figures.pdf`
     with one line: the revision is `/iclr2027_conference_revision.tex` with its files in `/revision/`,
     and the reviews with our replies are `/review.tex`; set either as the main document to compile it.

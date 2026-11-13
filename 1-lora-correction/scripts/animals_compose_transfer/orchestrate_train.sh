@@ -5,7 +5,7 @@ set -uo pipefail
 REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 cd "$REPO"
 CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache
-TRAIN=scripts/animals_compose_transfer/train_phase1.sh
+TRAIN=1-lora-correction/scripts/animals_compose_transfer/train_phase1.sh
 
 echo "[$(date +%H:%M:%S)] waiting for held-out cache workers to finish..."
 until [ "$(pgrep -fc 'build_caches --which heldout')" -eq 0 ]; do sleep 15; done

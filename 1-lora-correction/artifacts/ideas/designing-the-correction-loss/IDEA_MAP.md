@@ -132,8 +132,8 @@ The evidence, including all 276 downloaded images sorted by what the filter acce
 [can real photographs train the composition](../../results/can-real-photographs-train-the-composition/README.md).
 
 **What replaces it.** V6, whose corpus is model renders that passed a composition filter. That set
-already exists: [cells_v56.json](../../_shared/cross_pair_pool_configs/cells_v56.json) at 72 cells
-over 30 pairs and [cells_v57.json](../../_shared/cross_pair_pool_configs/cells_v57.json) at 43 over
+already exists: [cells_v56.json](../../../../artifacts/_shared/cross_pair_pool_configs/cells_v56.json) at 72 cells
+over 30 pairs and [cells_v57.json](../../../../artifacts/_shared/cross_pair_pool_configs/cells_v57.json) at 43 over
 29, both selected by eye for showing both concepts, seven of the pairs being objects rather than
 animals. Selection by eye is what makes it trustworthy: the detector weakness measured above never
 touches it.
@@ -193,13 +193,13 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | Anchor | What it executed | State | Finding |
 |---|---|---|---|---|
-| 7 | claim 6 | `scripts/idea_probes/yield_false_positives.py`, the filter against single-species photographs | done, 6 minutes | false-positive rate 0.070 for cat×dog (under the 0.10 bar) and 0.323 for turtle×tortoise (over it). The detector cannot separate look-alike species |
-| 6 | claim 6 | `scripts/idea_probes/cooccurrence_yield.py`, download candidates and filter with a per-species GroundingDINO query | done, 25 minutes | cat×dog 58 of 213 pass (7 of 16 real by eye); turtle×tortoise 11 of 46 pass (0 real by eye); wolf×husky 1 of 17 |
-| 5 | claim 6 | `scripts/idea_probes/caption_url_liveness.py`, HEAD requests against matched URLs | done, 2 minutes | 77% to 88% of URLs still serve an image |
-| 4 | claim 6 | `scripts/idea_probes/caption_cooccurrence.py`, caption co-occurrence over 6.26M DataComp-1B captions | done, 12 minutes | all 18 failing pairs have candidates, from 447 projected (cheetah×cougar) to 678,767 (cat×dog) |
-| 3 | claim 6 | `scripts/idea_probes/additive_transfer_step0.py`, five-fold split over pairs: fit the per-concept functions on 80% of pairs, predict the held-out 20% | done, 3 minutes | held-out residual 0.088 (seed 1) and 0.077 (seed 2) of the correction, against in-sample 0.028 and 0.025 and a shuffled ceiling of 0.217 and 0.233. Per-concept functions transfer: about 91% of the correction on a pair never fitted |
-| 2 | claim 6 | `scripts/idea_probes/openimages_coverage.py`, the 601-class match and validation co-occurrence count | done, 2 minutes | 83 of 317 concepts exact, 168 of 1146 pairs both-matched, 11 pairs with any co-occurring image, all of them look-alikes |
-| 1 | claim 4 | `scripts/idea_probes/additive_floor_step0.py`, the best per-concept additive fit against the joint prediction at step 0, seeds 1 and 2, 2013 cached cells, no GPU | done, 4 minutes | floor 0.031 and 0.028 of the correction; validator 0.0002 and 0.0001; shuffled ceiling 0.217 and 0.233; restricting to recurring concepts changes nothing (0.032, 0.028) |
+| 7 | claim 6 | `1-lora-correction/scripts/idea_probes/yield_false_positives.py`, the filter against single-species photographs | done, 6 minutes | false-positive rate 0.070 for cat×dog (under the 0.10 bar) and 0.323 for turtle×tortoise (over it). The detector cannot separate look-alike species |
+| 6 | claim 6 | `1-lora-correction/scripts/idea_probes/cooccurrence_yield.py`, download candidates and filter with a per-species GroundingDINO query | done, 25 minutes | cat×dog 58 of 213 pass (7 of 16 real by eye); turtle×tortoise 11 of 46 pass (0 real by eye); wolf×husky 1 of 17 |
+| 5 | claim 6 | `1-lora-correction/scripts/idea_probes/caption_url_liveness.py`, HEAD requests against matched URLs | done, 2 minutes | 77% to 88% of URLs still serve an image |
+| 4 | claim 6 | `1-lora-correction/scripts/idea_probes/caption_cooccurrence.py`, caption co-occurrence over 6.26M DataComp-1B captions | done, 12 minutes | all 18 failing pairs have candidates, from 447 projected (cheetah×cougar) to 678,767 (cat×dog) |
+| 3 | claim 6 | `1-lora-correction/scripts/idea_probes/additive_transfer_step0.py`, five-fold split over pairs: fit the per-concept functions on 80% of pairs, predict the held-out 20% | done, 3 minutes | held-out residual 0.088 (seed 1) and 0.077 (seed 2) of the correction, against in-sample 0.028 and 0.025 and a shuffled ceiling of 0.217 and 0.233. Per-concept functions transfer: about 91% of the correction on a pair never fitted |
+| 2 | claim 6 | `1-lora-correction/scripts/idea_probes/openimages_coverage.py`, the 601-class match and validation co-occurrence count | done, 2 minutes | 83 of 317 concepts exact, 168 of 1146 pairs both-matched, 11 pairs with any co-occurring image, all of them look-alikes |
+| 1 | claim 4 | `1-lora-correction/scripts/idea_probes/additive_floor_step0.py`, the best per-concept additive fit against the joint prediction at step 0, seeds 1 and 2, 2013 cached cells, no GPU | done, 4 minutes | floor 0.031 and 0.028 of the correction; validator 0.0002 and 0.0001; shuffled ceiling 0.217 and 0.233; restricting to recurring concepts changes nothing (0.032, 0.028) |
 
 ## Routes
 

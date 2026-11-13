@@ -64,7 +64,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [x] ❌ **At step 40,050, does the β 0.05 arm render the held-out pair nearer the joint-prompt image than the β 0 control, with the same seeds composing?**
-      The bar, in source as constants of `scripts/showcase/energy_penalty_readout.py`:
+      The bar, in source as constants of `1-lora-correction/scripts/showcase/energy_penalty_readout.py`:
       **support** if `compose_n(β 0.05) ≥ MIN_COMPOSE_COUNT = 6` and `drift(β 0.05) ≤ drift(β 0) − DRIFT_MARGIN`, `DRIFT_MARGIN = 0.03` (the smallest gap the baseline grids told apart between neighbouring checkpoints);
       **null** if `compose_n(β 0.05) < 6` (the price removed the part that composes, and this is said as the cause), or if `|drift(β 0.05) − drift(β 0)| < 0.03` (the price changed nothing the reader can see), or if `drift(β 0.05) ≥ drift(β 0) + 0.03` (the price hurt);
       **inconclusive** only if a probe failed to produce all 8 seeds.

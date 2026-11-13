@@ -138,7 +138,7 @@ and a control whose own behaviour is unsettled controls nothing.
 
 Navigation: ⬅️ [Where the two errors can be told apart](#where-the-two-errors-can-be-told-apart-and-where-they-cannot) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-The thresholds live in source as constants in `scripts/corrector_residual_curve.py`, so moving one
+The thresholds live in source as constants in `1-lora-correction/scripts/corrector_residual_curve.py`, so moving one
 after the answer is visible shows up in a diff.
 
 - [ ] ⚠️ **Does the corrector remove part of the correction and leave part of it?** Support if,
@@ -311,7 +311,7 @@ properties of the answer.
 | What the paper says | What it owes alongside it |
 |---|---|
 | the size of the model's share | that it is measured at the last five denoising steps only, because that is the one place the two errors separate |
-| anything about the early window | that steps 0 to 10 are where the [compose rate](../../../context/world/compose-rate.md) is decided and where this measurement cannot attribute, so this plan bounds the timing result rather than explaining it |
+| anything about the early window | that steps 0 to 10 are where the [compose rate](../../../../context/world/compose-rate.md) is decided and where this measurement cannot attribute, so this plan bounds the timing result rather than explaining it |
 | the corrected curve at any `k` | that `k=5` and `k=20` are two different trajectories rather than one point wiggled twice, and that `eps_J` is evaluated where the joint model would never go |
 
 ## Still open
@@ -336,5 +336,5 @@ run against an inconclusive curve.
 ## Cross-references
 
 - The finding built from this verdict: [does a Langevin corrector remove part of the correction](../../../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
-- The recipe that reruns the grid and prints the branch: [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
+- The recipe that reruns the grid and prints the branch: [running the Langevin corrector](../../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
 - The mention of **the read zone**, marked on the plot in task 4.4, in [the whole corrector design](../source/the-whole-corrector-design.md#4--what-is-left-once-the-chain-settles).

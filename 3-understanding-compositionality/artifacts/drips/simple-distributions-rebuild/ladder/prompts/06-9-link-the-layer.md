@@ -9,23 +9,23 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 6 of the composition ladder wrote.
 
 Background
-Layer 6 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 6 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its build walk wrote new files. Those files should link to the journey plans, vault
 notes, brick and idea-map claims that cover the same ideas, and those should link back, so the next
 reader finds both.
 
 Objectives
 1. Run xref-cadence over the layer 6 maths drip folder under artifacts/drips/, the step file
-   artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, and the retrospective the
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, and the retrospective the
    layer 6 walk closed on.
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
   line: the journey plans and vault notes to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
   row of the Bricks table.
-- artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1.
+- 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 5.
 
 What is already known

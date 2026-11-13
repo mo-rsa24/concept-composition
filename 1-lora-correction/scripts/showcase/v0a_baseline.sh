@@ -4,7 +4,7 @@
 # until this run exists there is nothing to read them against: V1, V3, V6 and V6a have all run
 # and V0a never has.
 #
-#   GPU=0 nohup bash scripts/showcase/v0a_baseline.sh > logs/v0a.log 2>&1 &
+#   GPU=0 nohup bash 1-lora-correction/scripts/showcase/v0a_baseline.sh > logs/v0a.log 2>&1 &
 #
 # mscluster109 (RTX A6000, 49 GB), because that is where V1 ran and a matched set never straddles
 # device models. biggpu allows one job per user through Slurm, so this goes outside Slurm.

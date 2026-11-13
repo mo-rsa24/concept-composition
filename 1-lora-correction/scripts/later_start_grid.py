@@ -11,15 +11,15 @@ actually corrected for that row: row 10-50 borders four chunks, row off
 borders none, so the border pattern is the mirror image of F4g's, shrinking
 rather than growing.
 
-Frames come from scripts/decode_trajectory_frames.py (the cell this grid
-shares with F4a) and scripts/recover_growing_window_frames.py (the rest,
+Frames come from 1-lora-correction/scripts/decode_trajectory_frames.py (the cell this grid
+shares with F4a) and 1-lora-correction/scripts/recover_growing_window_frames.py (the rest,
 recovered in closed form from the saved noisy latents); this script decodes
 nothing itself. The compose-rate curve that backs the quantitative claim
 across all 8 pairs is a separate, diagnostic-only plot, same location as
 F4g's.
 
-    python scripts/later_start_grid.py
-    python scripts/later_start_grid.py --seed 9
+    python 1-lora-correction/scripts/later_start_grid.py
+    python 1-lora-correction/scripts/later_start_grid.py --seed 9
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ from poe_repair import paths
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair.experiments.interaction_term import window_grid as wg  # noqa: E402
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)
@@ -84,8 +84,8 @@ def frame_png(seed: int, w0: int, w1: int, step: int) -> Path:
     if not p.is_file():
         raise SystemExit(
             f"missing frame {p}\n"
-            f"run scripts/decode_trajectory_frames.py or "
-            f"scripts/recover_growing_window_frames.py first"
+            f"run 1-lora-correction/scripts/decode_trajectory_frames.py or "
+            f"1-lora-correction/scripts/recover_growing_window_frames.py first"
         )
     return p
 

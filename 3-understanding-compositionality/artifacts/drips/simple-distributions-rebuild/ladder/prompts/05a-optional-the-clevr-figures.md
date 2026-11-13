@@ -10,7 +10,7 @@ step 2 has closed.
 /drip-execute-plan --reproduce 2502.04549
 
 Background
-The reading stop of the composition ladder (artifacts/drips/simple-distributions-rebuild/) read
+The reading stop of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) read
 Bradley et al. 2025a, arXiv 2502.04549, against 2D toys and the parts world. The paper's own
 evidence is CLEVR figures made with NVIDIA's EDM2. A separate repo,
 /home-mscluster/mmolefe/Playground/PhD/projective-composition, already holds two trained EDM2
@@ -34,7 +34,7 @@ What to read
   stopped, the object section and the slips.
 - /home-mscluster/mmolefe/Playground/PhD/projective-composition, its README.md and
   runbook/training-edm2-on-clevr.md: the repo, the data, the checkpoints and how training ran.
-- artifacts/results/joint-against-poe-by-kind-of-composition/README.md: the CLEVR grids already in
+- 3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/README.md: the CLEVR grids already in
   this repo.
 
 What is already known
@@ -63,7 +63,7 @@ What is already known
 - The paper's measure is a hand count of 100 samples per method, two "Single-object Bayes" rows of
   Table 1 sum to 109 and 43, and Appendix B's 65 network calls in 32 Heun steps is 63 in EDM2's
   sampler (runbook step 5; READ_MAP.md, Disagreements and slips).
-- The CLEVR grids in artifacts/results/joint-against-poe-by-kind-of-composition/ come from Liu et
+- The CLEVR grids in 3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/ come from Liu et
   al.'s clevr_pos and clevr_rel checkpoints, seed 0, with a 100-step ancestral sampler, so they
   stand in for no EDM2 figure (that folder's README.md).
 

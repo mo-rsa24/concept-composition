@@ -3,7 +3,7 @@
 One colour per overlap regime, used across every picture. Each region gets an outline that follows
 the lesion and a label written on the image beside that outline, never in a legend. Regions come
 from the coordinates recorded per film in
-artifacts/results/joint-against-poe-by-kind-of-composition/medical-examples/README.md, which were
+3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/medical-examples/README.md, which were
 read by eye from the saved files; where that card records none, the coordinates here were read the
 same way from the saved file.
 """

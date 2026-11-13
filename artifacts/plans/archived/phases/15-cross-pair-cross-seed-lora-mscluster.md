@@ -117,7 +117,7 @@ held_out:   [9, 10, 11, 12]
 
 Each pair also needs its prompts (A, B, joint). These come from the
 existing per-pair config dictionary used by
-[scripts/build_training_cache.py](../scripts/build_training_cache.py)
+[3-understanding-compositionality/scripts/build_training_cache.py](../scripts/build_training_cache.py)
 and friends. Task A3 below extracts them into a small YAML so the
 cross-pair trainer doesn't depend on a Python prompt map.
 
@@ -136,7 +136,7 @@ New code under `poe_repair.experiments.cross_pair_lora_pooling/`:
 | `poe_repair/experiments/cross_pair_lora_pooling/sample_crossbar.py` | new | Four-quadrant sampler. For each `(pair, seed)` in the chosen quadrant, swaps the LoRA-loaded UNet's prompts and runs `run_lora_residual_inject`. Emits `cells.jsonl` consumed by the contact sheet and Δ̄_t. |
 | `poe_repair/experiments/cross_pair_lora_pooling/contact_sheet.py` | new | Rows × cols layout per quadrant; reference columns from Plans 09 / 10 if found. |
 | `poe_repair/experiments/cross_pair_lora_pooling/task_d_bridge.py` | new | Thin wrapper around `cross_seed_lora_pooling/task_d_bridge.py` that consumes `cells.jsonl` and computes the three cosines per `(pair, seed)`. If the underlying bridge already supports the inputs we need, this becomes a 10-line CLI shim. |
-| `scripts/cross_pair_lora_pooling/run_all.sh` | new | One-shot driver: validate pools → train → sample → render. mscluster RTX 8000 sizing. |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/run_all.sh` | new | One-shot driver: validate pools → train → sample → render. mscluster RTX 8000 sizing. |
 | `poe_repair/experiments/one_pair_one_seed/trainer.py` | **modified, +1 line** | Add `source_pair: str = ""` to `CachedStep`. Backwards-compatible default. |
 | `poe_repair/experiments/held_out_seeds.seed_pool.load_seed_pool` | reused | The existing loader's `pair_slug` field is required. For cross-pair YAMLs without a `pair_slug`, the new `cross_pair_lora_pooling.seed_pool` loads them; the cross-seed loader is left untouched. |
 | `poe_repair/training_cache.resolve_cells` | reused | Called once per pair in `train_pooled.py`. |

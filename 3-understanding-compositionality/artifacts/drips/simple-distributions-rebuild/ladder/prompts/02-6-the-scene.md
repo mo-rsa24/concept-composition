@@ -11,7 +11,7 @@ summed scores leaving a faint ring between the two true modes of ring × bar, ag
 landing on them
 
 Background
-Layer 2 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) taught the two
+Layer 2 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) taught the two
 constructions, why summed scores miss the product, and the accept step. This scene shows reverse
 diffusion with summed scores leaving a faint ring between ring × bar's two true modes, while
 annealed MALA lands on them, in my own notation, so I can operate it rather than read about it.
@@ -25,9 +25,9 @@ Objectives
 What to read
 - The layer 2 maths drip folder under artifacts/drips/ and its dispatch.md (step 2's hand-off): my
   notation.
-- artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, steps 9 and 10: ring ×
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, steps 9 and 10: ring ×
   bar and its shares.
-- artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
   1: the faint ring's numbers.
 - toy/rebuild/out/phase2/step9.json and toy/rebuild/out/phase2/phase2.json: the reference shares.
 
@@ -52,7 +52,7 @@ What is already known
   9).
 - The faint ring is the kinds notebook's intersection row (ring × a bar of half-width 0.05): reverse
   diffusion reaches TV 0.31 against a floor of 0.11, and tuned MALA reaches 0.11 against 0.11
-  (artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 1 and run
   1).
 - With the trained phase 1 experts, the in-bar share is 0.928 for the trained composition, 0.580 for
   reverse diffusion and 0.850 for tuned MALA (toy/rebuild/out/phase2/phase2.json; step file 02,
@@ -65,7 +65,7 @@ Rules
 
 What to hand back
 - One published scene, in my notation from dispatch.md.
-- Its URL in step 6 of artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md,
+- Its URL in step 6 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md,
   replacing "(URL lands here)".
 
 What you will see

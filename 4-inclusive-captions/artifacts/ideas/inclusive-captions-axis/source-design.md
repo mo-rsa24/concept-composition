@@ -3,7 +3,7 @@
 The design as proposed in a ChatGPT conversation (share link
 https://chatgpt.com/share/6ae9602c-0378-83ea-a868-6df6c06a6c91), copied here so the idea walk
 and the route can cite it. It is the input to `/drip-idea`, not a settled design: every claim in
-it is checked there, and the route at `plans/route-inclusive-captions-pilot.md` lists the
+it is checked there, and the route at `4-inclusive-captions/plans/route-inclusive-captions-pilot.md` lists the
 problems already found.
 
 ## The question

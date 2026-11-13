@@ -51,7 +51,7 @@ These are the full-steps solutions for the banked problems whose book gives no s
 
 **Goes wrong.** Adding the standard deviations instead: $\sqrt{0.96845} + \sqrt{0.03155} = 0.9841 + 0.1776 = 1.1617$, whose square 1.3496 would grow the variance by about a third at every step.
 
-**Check.** The kept-plus-added identity holds for any $\beta$: $(1-\beta) + \beta = 1$. The second route is section 9.1 of the [forward-process chapter](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances) with $a = \sqrt{1-\beta}$, $b = \sqrt\beta$, $a^2 + b^2 = 1$.
+**Check.** The kept-plus-added identity holds for any $\beta$: $(1-\beta) + \beta = 1$. The second route is section 9.1 of the [forward-process chapter](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances) with $a = \sqrt{1-\beta}$, $b = \sqrt\beta$, $a^2 + b^2 = 1$.
 
 ## S3. Three steps in one jump (B5, UDL 18.3)
 
@@ -66,7 +66,7 @@ These are the full-steps solutions for the banked problems whose book gives no s
 
 **Goes wrong.** Forgetting to shrink the old noise (adding 0.28 + 0.05 = 0.33) gives a noise variance 0.014 too large, and signal plus noise shares sum to 1.014.
 
-**Check.** Worked example 9.2a of the [forward-process chapter](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#92-reading-the-image-ladder-and-the-one-jump-form) carries the same recursion to 0.316 and on to 0.5212.
+**Check.** Worked example 9.2a of the [forward-process chapter](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#92-reading-the-image-ladder-and-the-one-jump-form) carries the same recursion to 0.316 and on to 0.5212.
 
 ## S4. The ratio of consecutive kept shares (B7, UDL 18.9)
 
@@ -133,7 +133,7 @@ These are the full-steps solutions for the banked problems whose book gives no s
 1. $\lVert y(x) - t\rVert^2 = \sum_k (y_k(x) - t_k)^2$, so $\mathbb E\lVert y - t\rVert^2 = \sum_k \mathbb E(y_k - t_k)^2$.
 2. Each term depends only on $y_k$, so each is minimised on its own by $y_k(x) = \mathbb E[t_k\mid x]$ (Bishop eq. 1.89, PDF p. 65).
 3. Hence $y(x) = \mathbb E[t\mid x]$, and the leftover is $\sum_k \mathbb E[\mathrm{Var}(t_k\mid x)]$, eq. 1.90 per coordinate.
-4. On numbers: two independent fair dice, observing each one's parity. Per die the conditional mean is 3 on odd and 4 on even, with floor $8/3$ ([the die example](../../../../../../goal-setting/learning/mathematics/statistics/conditional-expectation/plans/05-the-conditional-mean-is-the-best-guess.md)). The vector floor is $8/3 + 8/3 = 16/3 = 5.3333$.
+4. On numbers: two independent fair dice, observing each one's parity. Per die the conditional mean is 3 on odd and 4 on even, with floor $8/3$ ([the die example](../../../../../../../goal-setting/learning/mathematics/statistics/conditional-expectation/plans/05-the-conditional-mean-is-the-best-guess.md)). The vector floor is $8/3 + 8/3 = 16/3 = 5.3333$.
 
 **Goes wrong.** Guessing the constant $(3.5, 3.5)$ costs $35/12$ per die, $35/6 = 5.8333$ in all, 0.5 above the floor.
 

@@ -2,13 +2,13 @@
 
 This plan redraws Figure 2 of the manuscript as a grid of three prompt pairs by four Stable
 Diffusion models. Each cell shows the joint prompt on the left and uncorrected [product-of-experts
-composition](../../../../context/world/poe-composition.md#what-poe-composition-is) on the right, all at seed 42. The figure then shows the same composition rule on
+composition](../../../../../context/world/poe-composition.md#what-poe-composition-is) on the right, all at seed 42. The figure then shows the same composition rule on
 several models, where the current one shows two pairs on SDXL only.
 
 ## Recommended prompt (after this plan completes)
 
 ```
-/drip-proofread resume artifacts/drips/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
+/drip-proofread resume 1-lora-correction/artifacts/drips/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
 ```
 
 ## Recommended skill
@@ -19,7 +19,7 @@ several models, where the current one shows two pairs on SDXL only.
 
 **No step number: nothing in the running order waits on this.** The section 3 proofread walk waits
 on it at chunk 11 (Figure 2's caption). Registering it in the `## Running order` table of the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md) is task 0.2.
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md) is task 0.2.
 
 Design only. What the renders showed, cell by cell, lives in
 [the paired review file](../../review/12-the-same-rule-on-four-models.md).
@@ -44,7 +44,7 @@ Design only. What the renders showed, cell by cell, lives in
 ⬅️ [Top](#-the-same-rule-on-four-models-figure-2-as-a-grid) | 📋 [TOC](#table-of-contents) | [Next](#words-this-plan-uses) ➡️
 
 Does the pattern in Figure 2 hold on four Stable Diffusion models? The pattern is that the same
-composition rule gives both concepts on one pair and a [hybrid](../../../../context/world/chimera.md#what-a-chimera-is) on another.
+composition rule gives both concepts on one pair and a [hybrid](../../../../../context/world/chimera.md#what-a-chimera-is) on another.
 
 ## Words this plan uses
 
@@ -86,7 +86,7 @@ cat × dog      [img] [img]     ...
 - **One cell:** two images of one pair on one model at seed 42, the joint prompt on the left and
   PoE on the right.
 - **Data:** the PNGs under `/datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models/`, one
-  `meta.json` per image carrying [model id](../../../../context/data/02-dictionary.md#model_id), sampler, steps, guidance, resolution, seed and prompts.
+  `meta.json` per image carrying [model id](../../../../../context/data/02-dictionary.md#model_id), sampler, steps, guidance, resolution, seed and prompts.
 - **Output:** `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf`, full text width.
 
 ## What we expect before rendering
@@ -115,7 +115,7 @@ SD 1.4 and SD 2.1 (base) run at 512 × 512 with DDIM, 50 steps, guidance 7.5. SD
 1024 × 1024 with DDIM, 50 steps, guidance 7.5, the settings every SDXL result in the paper uses.
 SD 3.5 medium runs at 1024 × 1024 with its flow-matching Euler sampler at the settings its model card
 recommends (40 steps, guidance 4.5); the earlier joint-prompt-only script
-`scripts/showcase/sd35_joint_prompts.py` used 50 steps and 7.0, so its renders are not this column. Each PoE cell uses the same guidance weight as the joint-prompt cell
+`1-lora-correction/scripts/showcase/sd35_joint_prompts.py` used 50 steps and 7.0, so its renders are not this column. Each PoE cell uses the same guidance weight as the joint-prompt cell
 beside it, so within a cell the only change is the composition rule.
 
 **PoE on SD 3.5 is the same rule on velocities**
@@ -154,11 +154,11 @@ column's setting here.
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
 
 - Python is `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`, by absolute path, in the job
-  script ([environment overview](../../../../environment/overview.md)).
+  script ([environment overview](../../../../../environment/overview.md)).
 - Output goes to `/datasets` only, with the `df` guard on that filesystem
-  ([storage](../../../../environment/storage.md)).
+  ([storage](../../../../../environment/storage.md)).
 - One RTX 3090 on `bigbatch` holds any one of the four models in fp16. The job loads them one at a
-  time and frees each before the next ([nodes](../../../../environment/hpc/nodes.md)).
+  time and frees each before the next ([nodes](../../../../../environment/hpc/nodes.md)).
 - The cluster's Hugging Face cache (`~/.cache/huggingface/hub`, checked 2026-09-22) holds
   `CompVis/stable-diffusion-v1-4`, `stabilityai/stable-diffusion-xl-base-1.0`,
   `stabilityai/stable-diffusion-3.5-medium`, and SD 2.1 base only as the mirror
@@ -170,7 +170,7 @@ column's setting here.
   `outputs/same_rule_four_models/`, where `scripts/cluster.sh pull` reaches them.
 - Slurm does not create the `--output` log folder, so the launch line makes it first. The job
   excludes the faulted `bigbatch` nodes and `mscluster72`/`73`, which cannot see `/datasets` from
-  inside a job ([nodes](../../../../environment/hpc/nodes.md)).
+  inside a job ([nodes](../../../../../environment/hpc/nodes.md)).
 - Launch is `scripts/cluster.sh run "sbatch ..."` from the laptop. It refuses to run with
   uncommitted tracked changes.
 
@@ -197,20 +197,20 @@ column's setting here.
       write the three pairs' concept prompts and joint prompts into the review file before any
       render.
   - Done when: the review file's `Prompts` table has three rows, the camel row quoting its source.
-- [x] **1.2** Write `scripts/same_rule_four_models.py`. It has one `--model` switch
+- [x] **1.2** Write `1-lora-correction/scripts/same_rule_four_models.py`. It has one `--model` switch
       (`sd14`, `sd21`, `sdxl`, `sd35`), a `--column` of `joint` or `poe`, `--pairs` and `--seeds`,
       and a `--sheet` mode that draws the grid. The SDXL path calls the repo's own
       `run_method("mono" | "poe", ...)` with the cat × dog starting latent; the other three run a
       plain loop over their diffusers components with the combination above.
   - Done when: `--dry-run` on the laptop prints the 24 cells per seed it would render with the
     settings per model.
-- [x] **1.3** Write `scripts/same_rule_four_models.sbatch` from `scripts/figure_candidates.sbatch`:
+- [x] **1.3** Write `1-lora-correction/scripts/same_rule_four_models.sbatch` from `1-lora-correction/scripts/figure_candidates.sbatch`:
       disk guard on `/datasets`, GPU guard, `co3` path check, models in the order SD 1.4, SD 2.1,
       SDXL, SD 3.5, with the joint column before PoE for each.
   - Done when: `bash -n` passes on the script.
 - [x] **1.4** Commit the plan, review file and both scripts, then check all four models load on a
       node before rendering anything.
-  - Command: `scripts/cluster.sh run "mkdir -p /datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models/logs && sbatch --export=ALL,CHECK_LOAD=1 scripts/same_rule_four_models.sbatch"`
+  - Command: `scripts/cluster.sh run "mkdir -p /datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models/logs && sbatch --export=ALL,CHECK_LOAD=1 1-lora-correction/scripts/same_rule_four_models.sbatch"`
   - Done when: the log ends `rc 0`, with one `[load]` line per model; the SD 2.1 line's id goes into
     the review file's settings table.
 
@@ -219,7 +219,7 @@ column's setting here.
 ### 2. 🚀 Render and draw
 
 - [x] **2.1** Launch through the one launch path.
-  - Command: `scripts/cluster.sh run "sbatch -p batch --exclude=mscluster124,mscluster129 --export=ALL,SEEDS=42 scripts/same_rule_four_models.sbatch"`
+  - Command: `scripts/cluster.sh run "sbatch -p batch --exclude=mscluster124,mscluster129 --export=ALL,SEEDS=42 1-lora-correction/scripts/same_rule_four_models.sbatch"`
   - Expected runtime: under half an hour for 24 images (3 pairs × 4 models × 2 columns, seed 42).
   - Done when: `scripts/cluster.sh jobs` no longer lists the job and the log ends in `=== done`.
 - [x] **2.2** Pull the renders and draw the grid.
@@ -297,9 +297,9 @@ ls -la paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
 
 - `poe_repair/run.py`, `run_method`: the SDXL joint (`mono`) and PoE paths the SDXL column reuses.
 - `poe_repair/config.py`: SDXL guidance 7.5 and 50 steps.
-- `scripts/figure_candidates.py`: `NOISE_PAIR = "a_cat__x__a_dog"`, the borrowed starting latent.
-- `scripts/showcase/sd35_joint_prompts.py`: loads SD 3.5 medium on the cluster.
-- `scripts/correction_size_over_the_run.py`: draws the current two-image Figure 2, which this
+- `1-lora-correction/scripts/figure_candidates.py`: `NOISE_PAIR = "a_cat__x__a_dog"`, the borrowed starting latent.
+- `1-lora-correction/scripts/showcase/sd35_joint_prompts.py`: loads SD 3.5 medium on the cluster.
+- `1-lora-correction/scripts/correction_size_over_the_run.py`: draws the current two-image Figure 2, which this
   replaces.
 
 ## Next step
@@ -310,4 +310,4 @@ Instruction 3.1: look at the grid, then task C.1, back to the proofread walk at 
 
 ## Cross-references
 
-- The mention of **joint prompt** in [the causal-composition route](../../../10-what-poe-loses-when-it-composes/route-causal-does-an-effect-need-support.md#what-you-will-achieve).
+- The mention of **joint prompt** in [the causal-composition route](../../../../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/route-causal-does-an-effect-need-support.md#what-you-will-achieve).

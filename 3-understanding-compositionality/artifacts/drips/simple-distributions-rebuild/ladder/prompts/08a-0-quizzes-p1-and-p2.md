@@ -10,7 +10,7 @@ In the background, prepare and build the prior-art stop's two quizzes, bottom up
 composition ladder: quiz P.1 and quiz P.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Between layer 8 (the interaction term)
 and layer 9 (the correction, learned back) sits a stop on two published methods that already
 correct a composition: CO3 and Feynman-Kac correctors, read through Soiffer et al. 2026. The stop
@@ -30,7 +30,7 @@ Objectives
 5. Write each published URL into its step of the stop's ladder file.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, its Study first
   line: the material for quiz P.1.
 - The three papers' pages on the shelf, found through ~/goal-setting/learning/papers/Papers.md: the
   material for quiz P.2.
@@ -77,7 +77,7 @@ What is already known
   variance 0.3019, and lowest effective size 16,907 (plan 26, toy line and engagement gate).
 - CO3 samples a corrector distribution p(x|C)/∏p(x|c_i): it keeps the joint-prompt model as its
   main term and divides out the single-concept models (Papers.md, CO3's ideas table;
-  artifacts/ideas/poe-overlap-dial/composition-terms.md).
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md).
 - CO3 composes Tweedie means with weights w_0 > 0 and w_k < 0; weights summing to 1 keep a valid
   classifier-free guidance form (a corrector), and weights summing to 0 give a resampler (Papers.md,
   CO3's ideas table; composition-terms.md).
@@ -107,7 +107,7 @@ What is already known
   experts at sampling time (composition-terms.md, "does any source add a term beyond the product").
 - Layer 8's term is r(x) = log p(x|A,B) − [log p(x|A) + log p(x|B) − log p(x)], in ε-space
   ε_joint − ε_A − ε_B + ε_∅, the residual poe_repair_min caches for 25 pairs at all 50 steps
-  (artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
+  (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
   exact").
 - The project's own version of Table 1 crosses exact or trained experts with reverse diffusion or
   annealed MALA, with interactions of +0.054 ± 0.016 total variation at r = 0.05 and +0.232 ± 0.046
@@ -122,13 +122,13 @@ Rules
   built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem and every paper question.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz P.1's URL in step 1 and quiz P.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, each replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, each replacing
   "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and the
   two URLs open.

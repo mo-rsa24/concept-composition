@@ -43,15 +43,15 @@ What "works" means here is specific:
   `cfg_mask` and a `composition_mode` of `with_prompt` or `always`.
 - Probe + figures: `poe_repair/experiments/one_pair_one_seed/probe.py`,
   `poe_repair/experiments/one_pair_one_seed/figures.py`.
-- Inspector: `scripts/lora_inspector.py` (routes `/`,
+- Inspector: `1-lora-correction/scripts/lora_inspector.py` (routes `/`,
   `/conditioning_window`, `/conditioning_window_lora`). The residual
   tab `/` carries the image row (PoE / PoE+λ·r / Mono) and, directly
   below it, a per-cell **MDS / PCA trajectory panel** swapped by the
   same `(epoch, λ)` sliders. Static endpoints A, B, A∧B are at fixed
   coordinates across panels; only the PoE+λ·R path moves.
-- Manifest builders: `scripts/build_lora_manifest.py`,
+- Manifest builders: `1-lora-correction/scripts/build_lora_manifest.py`,
   `scripts/build_cwl_manifest.py`.
-- MDS panel pre-renderer: `scripts/build_lora_inspector_mds.py`.
+- MDS panel pre-renderer: `1-lora-correction/scripts/build_lora_inspector_mds.py`.
   Five stages — `collect-static` (solo A, solo B, mono trajectories
   via `run_cfg`), `collect-cells` (per `(epoch, λ)`, load checkpoint
   with `lora_trainer.load_lora_state`, run
@@ -88,8 +88,8 @@ cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 ### Inference / inspection only (existing checkpoint)
 
 ```bash
-$PY scripts/build_lora_manifest.py
-$PY scripts/lora_inspector.py --port 5050
+$PY 1-lora-correction/scripts/build_lora_manifest.py
+$PY 1-lora-correction/scripts/lora_inspector.py --port 5050
 # from laptop: ssh -L 5050:localhost:5050 mscluster106 && open http://127.0.0.1:5050
 ```
 
@@ -97,17 +97,17 @@ $PY scripts/lora_inspector.py --port 5050
 
 ```bash
 # Smoke set on cat × dog (4 cells, ~3 min on one RTX 8000):
-$PY scripts/build_lora_inspector_mds.py \
+$PY 1-lora-correction/scripts/build_lora_inspector_mds.py \
     --epochs 0,800 --lambdas 0.00,1.00 \
     --stages collect-static,collect-cells,project,render,update-manifest
 
 # Full sweep on cat × dog (48 epochs × 5 λ, ~3 h):
-$PY scripts/build_lora_inspector_mds.py --epochs all --lambdas all \
+$PY 1-lora-correction/scripts/build_lora_inspector_mds.py --epochs all --lambdas all \
     --stages collect-static,collect-cells,project,render,update-manifest
 
 # Another pair (each pair has its own results-root, slug, cache, PNGs,
 # and mds_cells block in inspector_manifest.json):
-$PY scripts/build_lora_inspector_mds.py \
+$PY 1-lora-correction/scripts/build_lora_inspector_mds.py \
     --results-root outputs/lora/a_camel__x__a_desert_landscape/seed_42/results \
     --pair-slug a_camel__x__a_desert_landscape \
     --epochs all --lambdas all \
@@ -182,7 +182,7 @@ $PY -m poe_repair.experiments.cfg_window_with_lora \
 | Inspector route `/` with epoch × λ sliders | ✅ | |
 | `conditioning_window_lora` companion at one cell (epoch 062500, λ=1.0, both modes) | ✅ | |
 | Inspector route `/conditioning_window_lora` with epoch + λ sliders | ✅ | |
-| MDS / PCA trajectory pre-renderer `scripts/build_lora_inspector_mds.py` (5 stages, per-pair) | ✅ | |
+| MDS / PCA trajectory pre-renderer `1-lora-correction/scripts/build_lora_inspector_mds.py` (5 stages, per-pair) | ✅ | |
 | Residual tab wired with MDS panel below image row (same `(epoch, λ)` sliders) | ✅ | |
 | MDS smoke set on cat × dog seed 42 (epochs {0, 800} × λ ∈ {0, 1}) rendered | ✅ | |
 | Full MDS sweep on cat × dog seed 42 (48 epochs × 5 λ) | | ⬜ (~3 h wall-clock) |

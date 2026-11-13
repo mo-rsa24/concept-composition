@@ -3,7 +3,7 @@
 Three figures and two count files, asking one question on an exact toy: how many training images
 holding *both* concepts does a product of experts need before it prefers a picture holding both?
 
-The toy is `artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py`. Each expert is
+The toy is `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py`. Each expert is
 an exact mixture of Gaussians, spread σ = 0.1, over 16 × 32 RGB pictures of red circles and blue
 squares. Every composed density and score is closed form, so a sampler's draws can be set against
 the distribution it was aiming at rather than against another sampler. Every draw is labelled by its
@@ -353,4 +353,4 @@ shared along each curve and the zero-weight point reproduces the singles-only pr
 
 - The mention of **the toy card**, for the pair weights at which the exact product and its two samplers compose, in [the route for classifier-guided PoE](/home/molef/PhD/poe-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
 - The mention of **the toy card**, for the summed-score sampler drawing something other than the true noised product, in [the route for classifier-guided PoE](/home/molef/PhD/poe-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#the-ladder) (relevance match).
-- The mention of **the toy card**, placed with the toy in the understanding-compositionality project, in [the project table for regrouping the core repo](../../../plans/split-into-idea-repos.md).
+- The mention of **the toy card**, placed with the toy in the understanding-compositionality project, in [the project table for regrouping the core repo](../../../../plans/split-into-idea-repos.md).

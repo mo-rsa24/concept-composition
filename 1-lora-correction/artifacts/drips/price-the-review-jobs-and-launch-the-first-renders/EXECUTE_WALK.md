@@ -1,6 +1,6 @@
 # Walk map: PRZE-10, price every review job and launch wave 1
 
-Plan: [prze-10-wave-1-renders.md](../../../plans/prze-10-wave-1-renders.md), started by `--request`.
+Plan: [prze-10-wave-1-renders.md](../../../plans/price-the-review-jobs-and-launch-the-first-renders.md), started by `--request`.
 On: piece 4, polling and counting; every wave 1 job is launched or queued.
 
 ## Stop point
@@ -29,8 +29,8 @@ On: piece 4, polling and counting; every wave 1 job is launched or queued.
 
 ## Ticks
 
-- Piece 1: the jobs table, `report/paper-review/prze-10-compute.md#the-jobs`, 13 rows, 2026-11-11.
-- Piece 2: `--joint-template` and `--allow-ask-first`, `scripts/review_wave1_renders.sh`, `scripts/review_wave1_r1.sh`, commits `56debc5e` and `62554919`; toy sidecar reads "a horse with a glasses".
+- Piece 1: the jobs table, `1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs`, 13 rows, 2026-11-11.
+- Piece 2: `--joint-template` and `--allow-ask-first`, `1-lora-correction/scripts/review_wave1_renders.sh`, `1-lora-correction/scripts/review_wave1_r1.sh`, commits `56debc5e` and `62554919`; toy sidecar reads "a horse with a glasses".
 - Piece 3: jobs 1 to 3 on 112 (pid 36785), R1 joint on 108 card 0 (pid 59533), R1 PoE on 108 card 1 (pid 59822), R1 ours queued on 112 (waiting loop pid 37731), each after your yes. Job 1 finished, 3 of 3 tiles.
 
 ## Ticks, later in the sitting

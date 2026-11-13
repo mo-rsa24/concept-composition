@@ -9,7 +9,7 @@ after the `/drip-retro` that step 4a's build printed.
 In the background, dispatch xref-cadence over the files layer 2 of the composition ladder wrote.
 
 Background
-Layer 2 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 2 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip, its build walk and its two idea-walk rebuilds wrote new files. Those files should link
 to the journey plans, vault notes and idea maps that teach the same ideas, and those should link
 back, so the next reader finds both.
@@ -21,12 +21,12 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, its Study first
   line: the journey plans, vault notes and scene to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 2 rows of the Bricks
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 2 rows of the Bricks
   table: "MALA and CHA fix", "Product, mixture, negation wrappers" and "Annealed ULA, MALA, UHA,
   MUHA".
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 1, 3 and 4 and runs 4 and 5.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 1, 3 and 4 and runs 4 and 5.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3, 4 and 5 and run 5.
 
 What is already known

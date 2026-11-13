@@ -10,7 +10,7 @@ In the background, prepare and build layer 2's two quizzes for the composition l
 quiz 2.1 and quiz 2.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 2 composes two experts and samples
 the composition with an accept-corrected sampler. Each layer opens on two quizzes, one on the
 college maths underneath it and one on the layer itself. These two are built during layer 1's
@@ -33,9 +33,9 @@ Objectives
 6. Write each published URL into its ladder step.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, its Study first
   line: the material for quiz 2.1.
-- artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md: the material for quiz
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md: the material for quiz
   2.2, with a textbook page and timed video segments beside each fundamental it uses.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -83,14 +83,14 @@ Rules
   built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - The missing total-variation passage, written where quiz-prep-pulse --build files passages.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 2.1's URL in step 1 and quiz 2.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, each replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md, each replacing
   "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and
   the two URLs open.

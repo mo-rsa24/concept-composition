@@ -12,7 +12,7 @@ composition plus correction) at overlap 0.05 and 0.001, sampled with tuned MALA,
 with trained experts.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition, and toy/rebuild/ in this repo is
 Claude's reference code for every layer. Layer 9 is the second half of the goal: a fix that can be
 trained, and a fair test of whether composition plus a correction needs fewer joint examples than
@@ -48,9 +48,9 @@ What to read
 - toy/rebuild/interaction.py: r_t and ∇r_t in float64 for any four parts_world.Mixture objects,
   layer 8's reference.
 - toy/rebuild/out/walk-numbers.json, the p8. keys: layer 8's numbers.
-- artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, step 0: how
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, step 0: how
   layer 8's reference was built.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The correction, learned
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The correction, learned
   back": the brick row this reference fills.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card, with every number to reproduce.

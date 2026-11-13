@@ -2,7 +2,7 @@
 
 ## Where this scope sits in the order
 
-This scope owns **6 of the 22 steps**, 1 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), never an order of its own.
+This scope owns **6 of the 22 steps**, 1 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), never an order of its own.
 
 **Next in this scope: step 9**, [the three live curves during training](plans/tools/02-three-live-curves-while-training.md), one epoch on a GPU. Steps 10 to 14 cannot start until it passes.
 
@@ -16,7 +16,7 @@ This scope owns **6 of the 22 steps**, 1 of them done. The steps interleave with
 | 14 | [06-the-transfer-figures](plans/figures/06-the-transfer-figures.md) | the transfer figures | ◑ F8a and F8b built |
 
 ## Mission
-cat×dog through PoE makes a [chimera](../../context/world/chimera.md), and that
+cat×dog through PoE makes a [chimera](../../../context/world/chimera.md), and that
 blend-two-animals failure is a
 specific, known problem. Train a rank-8 cross-attention LoRA on the cached
 guided residual r_t = ε̃_J − ε̃_PoE on a token-disjoint pool of blend-prone
@@ -37,7 +37,7 @@ precondition that lets the two scopes run in sequence unattended.
 Every eval is read on two axes, and the plans below refer to this block instead of
 restating it:
 1. **Did it compose?** The compose-scorer labels each output compose or blend. Over
-   the eval seeds this gives a **[compose-rate](../../context/world/compose-rate.md)**.
+   the eval seeds this gives a **[compose-rate](../../../context/world/compose-rate.md)**.
 2. **Did the correction point the right way?** The **direction-cosine** is the cosine
    between this run's correction and the pool-mean correction. A separate number,
    **fraction-of-distance-reached**, is how far the correction travelled toward the
@@ -155,5 +155,5 @@ Terms only this scope uses. Shared vocabulary is in the root `MASTER_PLAN.md`.
 
 ## Cross-references
 
-- The mention of **direction-cosine**, diverging below 0.3 while the loss falls, in [the failure catalog entry poe-lora-002](../../environment/known-failures.md#entry-id-poe-lora-002).
+- The mention of **direction-cosine**, diverging below 0.3 while the loss falls, in [the failure catalog entry poe-lora-002](../../../environment/known-failures.md#entry-id-poe-lora-002).
 - The mention of **direction-cosine**, collected on each of the fifteen held-out runs, in [the plan measuring transfer as a rate over fifteen held-out pairs](plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md#quick-context-where-you-are).

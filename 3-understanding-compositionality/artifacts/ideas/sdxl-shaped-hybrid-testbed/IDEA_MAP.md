@@ -140,11 +140,11 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 | Source | What it gives the idea | Confidence |
 |---|---|---|
-| [the parent walk](../when-poe-reaches-a-and-b/IDEA_MAP.md), claim 12 | the findings this testbed must reproduce: the support rule, the two constructions, the sampler result, the kinds of composition | read in this session |
+| [the parent walk](../../../../artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md), claim 12 | the findings this testbed must reproduce: the support rule, the two constructions, the sampler result, the kinds of composition | read in this session |
 | [the composition terms](../poe-overlap-dial/composition-terms.md) | contention's three forms (fusion, dominance, leakage); the four questions that place any composition | read in this session |
 | `poe_repair_min/context/world/poe-composition.md` and `chimera.md` | the SDXL hybrid: one model, two prompts, guidance `7.5`, 50 DDIM steps; scored by an instance counter that cannot tell two dogs from a cat and a dog | read in this session |
 | `poe_repair_min/artifacts/results/does-interaction-strength-predict-which-pairs-blend/figure-explainer.md` | the cache of ε_A, ε_B, ε_joint, ε_∅ at all 50 steps for 25 pairs under `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`; the interaction bound did not track fail rate | read in this session |
-| `poe_repair_min/artifacts/ideas/disjoint-marginal-support-and-poe-chimeras/IDEA_MAP.md` | the frame-filling-crops explanation of the chimera, parked with a two-stage toy design | read in this session |
+| `poe_repair_min/3-understanding-compositionality/artifacts/ideas/disjoint-marginal-support-and-poe-chimeras/IDEA_MAP.md` | the frame-filling-crops explanation of the chimera, parked with a two-stage toy design | read in this session |
 | Tang et al. 2023, *What the DAAM* ([arXiv 2210.04885](https://arxiv.org/abs/2210.04885)) | cross-attention attribution maps for Stable Diffusion; cohyponyms lower generation quality by about 9% | confident on the paper, the 9% from a search summary |
 | Okawa et al. 2023, *Compositional Abilities Emerge Multiplicatively* (NeurIPS 2023) | a synthetic-shape diffusion testbed with concepts as axes | confident |
 | Park et al. 2024, *Emergence of Hidden Capabilities* ([arXiv 2406.19370](https://arxiv.org/abs/2406.19370)) | learning dynamics in concept space on synthetic data; authors Park, Okawa, Lee, Tanaka, Lubana | confident it exists, contents not opened |

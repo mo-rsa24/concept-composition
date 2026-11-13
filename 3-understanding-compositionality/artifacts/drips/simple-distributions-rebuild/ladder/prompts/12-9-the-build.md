@@ -11,7 +11,7 @@ behaviour, sampled with tuned MALA; bar: the correction's effect on compose rate
 reported beside the interaction term per pair
 
 Background
-This is layer 12's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/),
+This is layer 12's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/),
 its last layer. Layer 8 defined the interaction term and layer 9 trained a correction on the toys;
 here I read the same term from poe_repair_min's SDXL cache and measure the correction's effect on
 compose rate on held-out animal pairs. poe_repair_min is read and never written: I type every block
@@ -30,7 +30,7 @@ Objectives
 
 What to read
 - Step 5's refined transfer plan,
-  ~/Playground/PhD/poe_repair_min/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
+  ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
   the compose-rate unit, the held-out pair set and the threshold.
 - The layer 12 --math drip folder under artifacts/drips/ (step 7): my notation.
 - walk08.py's ε-space term, and walk09.py with toy/rebuild/phase9_correction.py: layers 8 and 9.

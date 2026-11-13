@@ -72,10 +72,10 @@ from poe_repair.training_cache import DEFAULT_CACHE_ROOT, resolve_cells
 log = logging.getLogger(__name__)
 
 # The frozen tracking-set manifest (plan 06, task 1.2), same path
-# scripts/showcase/freeze_tracking_set.py writes to. Fixed so both A's and
+# 1-lora-correction/scripts/showcase/freeze_tracking_set.py writes to. Fixed so both A's and
 # B's runs, and this trainer's own smoke run, read the same file.
 SCOPE_TRACKING_SET_PATH = (
-    REPO_ROOT / "artifacts/results/does-the-fix-reach-unseen-pairs"
+    REPO_ROOT / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs"
     / "pooled_lora" / "tracking_set.json"
 )
 
@@ -138,7 +138,7 @@ def build_argparser() -> argparse.ArgumentParser:
                     help="V6: train against the noise added to a render a person picked, "
                          "instead of against the joint-prompt prediction. The teacher becomes "
                          "the mono render judged by eye to show both concepts. Needs "
-                         "scripts/showcase/build_render_teacher_cache.py run first.")
+                         "1-lora-correction/scripts/showcase/build_render_teacher_cache.py run first.")
     ap.add_argument("--render-teacher-cache",
                     default="/datasets/mmolefe/poe_repair_min/artifacts/caches/render_teacher_cache",
                     help="where build_render_teacher_cache.py wrote its latents.")
@@ -420,7 +420,7 @@ def main(argv: list[str] | None = None) -> int:
     cfg.skip_scoring = True
     # Composition rule the trainer's step composes the three branches with. "poe" is the
     # original; "superdiff" (plan 08, scope 06) learns SuperDiff's residual at a fixed kappa
-    # from a cache built by scripts/build_superdiff_cache.py. Read by
+    # from a cache built by 1-lora-correction/scripts/build_superdiff_cache.py. Read by
     # one_pair_one_seed.trainer._train_one_step via getattr, so the default is unchanged.
     cfg.compose = str(args.compose)
     cfg.kappa = float(args.kappa)
@@ -561,7 +561,7 @@ def main(argv: list[str] | None = None) -> int:
                 if not _lat_path.exists():
                     raise SystemExit(
                         f"--render-teacher but no latent at {_lat_path}. Run "
-                        f"scripts/showcase/build_render_teacher_cache.py --cells {args.cells} "
+                        f"1-lora-correction/scripts/showcase/build_render_teacher_cache.py --cells {args.cells} "
                         f"first; a missing cell would otherwise shrink the corpus silently.")
                 _lat = torch.load(_lat_path, map_location="cpu")["latent"]
                 for s in steps:

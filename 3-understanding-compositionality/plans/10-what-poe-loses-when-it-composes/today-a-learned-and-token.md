@@ -11,7 +11,7 @@
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md
 ```
 
 ## Contents
@@ -25,14 +25,14 @@ Walk it with:
 
 Navigation: 📋 [Contents](#contents) | [Next](#the-test-written-before-any-render) ➡️
 
-**Nine third experts have failed.** [Text-embedding arithmetic](../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) and seven real phrases (the joint prompt
+**Nine third experts have failed.** [Text-embedding arithmetic](../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) and seven real phrases (the joint prompt
 "dog and cat" included) draw a clear dog and a clear cat on 0 of 7 counted seeds, and two hybrids on 4 to 5
-([claim 2 of the idea map](../../artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md)). The joint
+([claim 2 of the idea map](../../../5-text-embedding-third-expert/artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md)). The joint
 prompt alone draws a clear pair on 7 of 8 seeds. The bar is a clear pair where the strongest third expert
 there is gives two hybrids.
 
 **This run fits the third expert instead of choosing it.** One new token `<and>` gets a [trainable input
-embedding row](../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/15-what-textual-inversion-optimises.md) in each of SDXL's two text encoders, initialised from the word "and". Nothing else is
+embedding row](../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/15-what-textual-inversion-optimises.md) in each of SDXL's two text encoders, initialised from the word "and". Nothing else is
 trained: not the UNet, not the rest of either text encoder, and the two animal prompts stay the plain
 frozen prompts. The token is the same for every pair, and it is fitted over the curated pool of 182 cells
 (48 pairs) in `artifacts/_shared/cross_pair_pool_configs/cells_v58.json`, read from the training cache. Cat
@@ -45,7 +45,7 @@ product equal the guided joint at w = 7.5. Only ε_<and> carries gradient.
 
 Navigation: ⬅️ [Previous](#why-this-exists) | 📋 [Contents](#contents) | [Next](#steps) ➡️
 
-**Two renders, both with the loop and noise of `scripts/and_vector_sheet.py`:**
+**Two renders, both with the loop and noise of `5-text-embedding-third-expert/scripts/and_vector_sheet.py`:**
 
 1. PoE("dog", "cat", "<and>") on seeds 1 to 7.
 2. PoE("a cat", "a dog", "<and>") on held-out seeds 9 to 16, beside plain PoE("a cat", "a dog") on the same
@@ -79,7 +79,7 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
 
 ### 1. 🔧 The token (AI, done)
 
-- [x] **Write** `scripts/learned_and_token.py` with `<and>` added to both tokenizers and a gradient-carrying
+- [x] **Write** `5-text-embedding-third-expert/scripts/learned_and_token.py` with `<and>` added to both tokenizers and a gradient-carrying
   encode path, pooled at the end-of-text position.
 - [x] **Verify** that "<and>" encodes exactly as "and" does, and that the encode path matches the repo's.
   ✓ verified 2026-10-28 on mscluster109: difference 0 in embeds and pooled, both prompts.
@@ -117,7 +117,7 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
   and a dog", PoE(a cat, a dog) and PoE(a cat, a dog, `<and>`). ✓ ran 2026-10-28, mscluster109 device 0,
   W&B `c6f1pmmq`, log `.../logs/run5.log`. Held-out mean share removed at steps 0, 10, 25, 40: −0.113,
   +0.009, −0.021, −0.025 at 300 updates; −0.143, +0.015, −0.023, −0.013 at 4,000; −0.070, +0.013, −0.005,
-  −0.008 at 8,000. Sheets in `artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter*.png`.
+  −0.008 at 8,000. Sheets in `5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter*.png`.
   <a href="../../artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter08000.png"><img src="../../artifacts/results/what-the-and-vector-is-made-of/learned-and-token-sheet-iter08000.png" width="140" alt="Sheet at 8,000 updates: seeds 9 to 16 down the rows; columns a dog alone, a cat alone, the joint prompt 'a cat and a dog', PoE(a cat, a dog), and PoE with the fitted token. Both PoE columns show one animal mixing dog and cat features on every seed."></a>
 - [x] **Apply** [the stop rule](#the-test-written-before-any-render). ✓ fired: every step's mean is under
   10% after 8,000 updates (best single step mean +0.015).
@@ -127,13 +127,13 @@ fast-forwarded to the committed branch. Every path on a launch line is absolute,
 - [ ] **Copy** [the test](#the-test-written-before-any-render) into the run's results card before any tile
   is rendered.
 - [ ] **Render** both sets and build the sheets as
-  `artifacts/results/what-the-and-vector-is-made-of/learned-and-token-*.png`.
+  `5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/learned-and-token-*.png`.
 - [ ] **Call** each tile from full-size tiles, one seed per message.
 - [ ] **List** the nearest real words to the fitted row in each encoder, by cosine over the vocabulary.
 
 ### 7. 🔧 A rank-32 LoRA on every variant, 30,000 updates (AI, about 8 h of training, unattended)
 
-The [pooled LoRA](../../context/world/lora-corrector.md#what-the-lora-corrector-is) that already composes 7 of 8 held-out cat × dog seeds was best between 30,000 and
+The [pooled LoRA](../../../context/world/lora-corrector.md#what-the-lora-corrector-is) that already composes 7 of 8 held-out cat × dog seeds was best between 30,000 and
 90,000 updates at rank 32, learning rate 1e-4, weight decay 0, where plain PoE composes 0 of 8
 ([the checkpoint finding](../../report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)).
 The rank-8 runs here stopped at 8,000 updates, so this step gives each variant that recipe, with the
@@ -173,7 +173,7 @@ with the reward's gradient taken over the late steps. This step points that mach
 expert's parameters, starting from the last checkpoint of run9a, with the fidelity term on and an
 anchor to the starting parameters so the picture quality cannot be spent on the reward.
 
-**Written before the run.** Supported if the [instance-count scorer](../../context/world/compose-rate.md#words-this-file-uses) reads two animals on at least 4 of
+**Written before the run.** Supported if the [instance-count scorer](../../../context/world/compose-rate.md#words-this-file-uses) reads two animals on at least 4 of
 8 held-out cat × dog seeds where plain PoE reads two on none, and by eye at least 4 of those are a cat
 and a dog, with reward fidelity no more than 0.05 below the start. Null otherwise. The scorer cannot
 tell a cat and a dog from two dogs, so the eye read counts.

@@ -7,7 +7,7 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/logs/belt_%j.log
 # One shard of the conveyor on one bigbatch RTX 3090.
 #
-#   SHARD=0/6 ROUNDS=8 PER=9 sbatch -w mscluster42 scripts/showcase/conveyor_shard.sbatch
+#   SHARD=0/6 ROUNDS=8 PER=9 sbatch -w mscluster42 1-lora-correction/scripts/showcase/conveyor_shard.sbatch
 #
 # bigbatch has no GRES configured, so Slurm does not arbitrate the GPUs and two jobs can land on
 # one card. Pin a node per shard with -w. The belt's own guard waits for a busy card as a backstop.
@@ -27,7 +27,7 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
 BUILDER=build_new_animal_cells_pyenv.sh \
 SHARD="${SHARD:?set SHARD, e.g. 0/6}" \
 ROUNDS="${ROUNDS:-8}" PER="${PER:-9}" MAXWAIT="${MAXWAIT:-600}" \
-  bash scripts/showcase/conveyor.sh
+  bash 1-lora-correction/scripts/showcase/conveyor.sh
 RC=$?
 echo "=== belt shard ${SHARD} exit $RC  $(date -Is)"
 exit $RC

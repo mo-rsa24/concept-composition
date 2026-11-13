@@ -25,16 +25,16 @@ Objectives
 4. Run joint, plain 3-PoE and adapter 3-PoE on 10 triples at seeds 9 to 16 from one starting noise
    per triple and seed, and report the rates and the interval.
 5. Fill slot R11 (appendix C.6) with the grid, failures included: four triples at the shared seed
-   10, columns joint prompt, plain product, ours, drawn with scripts/paper_tile_figure.py at 5.5 in
+   10, columns joint prompt, plain product, ours, drawn with 1-lora-correction/scripts/paper_tile_figure.py at 5.5 in
    wide and within the slot's 3.0 in height, labels 8 pt (layout-sheet.md R11).
 
 What to read
-- report/paper-review/protocol.md, held-out-set.md and prze-4-three-concepts.md.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md and prze-4-three-concepts.md.
 - poe_repair/methods/_sampling.py: the repo's PoE rule and where the adapter is attached.
 - The submitted paper, Appendix B.1: the adapter's three branches (equation 13).
 - artifacts/_shared/cross_pair_pool_configs/pair_pool_v58.yaml: the 48 training pairs, whose
   concepts the triples must avoid.
-- scripts/joint_poe_adapter_grid.py and scripts/figure_candidates.py: existing grid builders.
+- 1-lora-correction/scripts/joint_poe_adapter_grid.py and 1-lora-correction/scripts/figure_candidates.py: existing grid builders.
 
 What is already known
 - The adapter of record is v58-03-self at step 30,000, shared seed 10
@@ -55,11 +55,11 @@ When something is missing
 Rules
 - The triples, rule and bar are committed before the first image is generated.
 - Tune on tuning triples only. Never look at the 10 triples to choose a weight.
-- Add this step's GPU job to report/paper-review/prze-10-compute.md and launch it after the user's
+- Add this step's GPU job to 1-lora-correction/report/paper-review/prze-10-compute.md and launch it after the user's
   yes.
 
 What to hand back
-- report/paper-review/three-concept-set.md with the rule, the triples and the commit hash.
+- 1-lora-correction/report/paper-review/three-concept-set.md with the rule, the triples and the commit hash.
 - Images under /datasets/mmolefe/poe_repair_min/outputs/paper_review/three_concepts/, a contact
   sheet with a card entry, and the rates with intervals.
 - The figure in its slot, and rows added to "What we know so far" in the route file.

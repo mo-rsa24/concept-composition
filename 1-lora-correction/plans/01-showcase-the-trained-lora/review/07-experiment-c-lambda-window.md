@@ -41,7 +41,7 @@ Navigation: ⬅️ [Words](#words-this-file-uses) | 📋 [TOC](#table-of-content
 
 | Date | Run id | What ran | Wall time | Outcome |
 |---|---|---|---|---|
-| 2026-09-01 | jobs 48612 (sweep) → 48613 (measure) → 48614 (strip), chained on `afterok`, bigbatch/mscluster76, commit `32d1973`→`c6a470b` (dirty) | `scripts/showcase/lambda_window_grid.py`: the 5-cell × 5-λ grid (25/25 renders), `lambda_softness.json`, `lambda_softness_strip.png` | ~16m32s (sweep 15m38s, measure 49s, strip 5s) | OK, all 25 renders + measurements written; λ=0 identity check passes on all 5 cells (DINOv2/CLIP distance to cached `poe.png` small) |
+| 2026-09-01 | jobs 48612 (sweep) → 48613 (measure) → 48614 (strip), chained on `afterok`, bigbatch/mscluster76, commit `32d1973`→`c6a470b` (dirty) | `1-lora-correction/scripts/showcase/lambda_window_grid.py`: the 5-cell × 5-λ grid (25/25 renders), `lambda_softness.json`, `lambda_softness_strip.png` | ~16m32s (sweep 15m38s, measure 49s, strip 5s) | OK, all 25 renders + measurements written; λ=0 identity check passes on all 5 cells (DINOv2/CLIP distance to cached `poe.png` small) |
 
 ## The question written before the run
 
@@ -67,7 +67,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 Navigation: ⬅️ [The bar](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️
 
-- [ ] ⚠️ Where along the grid does [compose rate](../../../context/world/compose-rate.md) arrive (the more-correction-more-composition story) relative to where blur
+- [ ] ⚠️ Where along the grid does [compose rate](../../../../context/world/compose-rate.md) arrive (the more-correction-more-composition story) relative to where blur
   arrives (the cost story), and do the two leave a usable middle λ?
 
   Compose rate across the 5 cells, from `lambda_softness.json`:

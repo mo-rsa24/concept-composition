@@ -17,7 +17,7 @@ reader can operate.
 **depends on** nothing outside this folder.
 
 See it from a laptop by serving the scenes folder in tmux and forwarding the port, per
-[the runbook's showing-a-scene recipes](../../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md).
+[the runbook's showing-a-scene recipes](../../../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md).
 
 ## What is on the page
 

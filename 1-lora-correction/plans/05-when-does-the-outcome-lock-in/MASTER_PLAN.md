@@ -67,7 +67,7 @@ no new model; slice 4 decides whether slice 5 runs.
 > ridge between two basins is where a small nudge switches which ending you get.
 
 ## Purpose and goals
-Purpose: a standalone scope under the [root master plan](../../MASTER_PLAN.md), whose mechanism
+Purpose: a standalone scope under the [root master plan](../../../MASTER_PLAN.md), whose mechanism
 story needs to say why the correction window ends at step 10.
 Goals: the numbered list under Goals below.
 
@@ -87,7 +87,7 @@ every endpoint-predictor read carries a stability check and a calibration verdic
 1. Establish whether basin structure is measurable on the cached trajectories at all.
 2. Measure the speciation step per pair-and-seed run with two independent tests.
 3. Adopt or reject LCM-SDXL as a measuring tool by thresholds set in code before results are seen.
-4. Deliver the three-timestamp figure and the per-family counterfactual [compose-rate](../../context/world/compose-rate.md) curves.
+4. Deliver the three-timestamp figure and the per-family counterfactual [compose-rate](../../../context/world/compose-rate.md) curves.
 
 ## Goals
 1. The perturbation check has returned its verdict, with the saved endings and their numbers filed.
@@ -128,7 +128,7 @@ honestly killed and the review file says what killed it.
 - ◑ [plans/07-what-the-correction-is-made-of.md](plans/tests/07-what-the-correction-is-made-of.md) — the correction's in-span and orthogonal share per step against the three predictions PoE already has, the experts' decoded estimates, the adapter's output projected the same way, and the tracks' kinetic energy and which-animal score; cache only; four rungs done, bar inconclusive at 0.374, finding filed, close-out open
 
 ## Environment Context
-Start at [the environment index](../../environment/00-INDEX.md). The facts this scope
+Start at [the environment index](../../../environment/00-INDEX.md). The facts this scope
 leans on: the `co3` absolute python path, a GPU node, large artifacts to `/datasets` only (a
 disk guard checks the filesystem it actually writes to), and W&B project
 `prime_lab/poe-repair-animals-compose`, where W&B owns the numbers and this tree owns the

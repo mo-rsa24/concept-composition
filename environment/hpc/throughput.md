@@ -38,7 +38,7 @@ process hung producing zero progress for 9+ minutes while identical launches on 
 nodes both reached their first epoch in under a minute. Killed and relaunched on
 `mscluster109` (RTX A6000) instead. Recorded as `poe-launch-002` in
 [known-failures.md](../known-failures.md); the pre-launch guard in
-[execution-protocol.md](execution-protocol.md) and both `scripts/showcase/*_smoke.sh` launchers
+[execution-protocol.md](execution-protocol.md) and both `1-lora-correction/scripts/showcase/*_smoke.sh` launchers
 now check `utilization.gpu`/`temperature.gpu` for `N/A`/`reset`, not just memory used, so this
 should not repeat silently.
 

@@ -97,7 +97,7 @@ difference decides whether the result is one thing or two (cluster idea map, cla
 
 ### 2.3 Five kinds of composition
 
-Taken from the cluster project's [composition terms](https://github.com/) (`artifacts/ideas/poe-overlap-dial/composition-terms.md` in `reduce-reuse-recycle`), which drew one SD3.5 row per kind.
+Taken from the cluster project's [composition terms](https://github.com/) (`3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md` in `reduce-reuse-recycle`), which drew one SD3.5 row per kind.
 
 | Kind | What it requires | Example |
 |---|---|---|
@@ -214,7 +214,7 @@ diffused densities. Noising and multiplying do not commute.
 
 *Figure 1. Du et al. ([2023](#ref-du2023)). Top row: a ring of eight clusters times a vertical bar.
 The exact product keeps the two clusters inside the bar. Reverse diffusion with summed scores
-leaves mass all around the ring; [HMC](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/23-the-hamiltonian-corrector.md), an MCMC sampler, recovers the two clusters.*
+leaves mass all around the ring; [HMC](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/23-the-hamiltonian-corrector.md), an MCMC sampler, recovers the two clusters.*
 
 **What this settles.** When a sampler fails, the product itself can still be right. Du's experiments
 know the exact product, so they can tell the two apart.
@@ -297,7 +297,7 @@ r_t \;=\; \varepsilon_{\text{joint}} - \varepsilon_{\text{PoE}} \;=\; -\,\sigma_
 $$
 
 Liu et al. assume the term away, Bradley et al. redefine the goal so it is not needed, and CoInD
-([Gaudi et al. 2025](#ref-coind2025)) trains a model to make it zero. This repository's [adapter](../../context/world/lora-corrector.md#what-the-lora-corrector-is) learns it
+([Gaudi et al. 2025](#ref-coind2025)) trains a model to make it zero. This repository's [adapter](../../../context/world/lora-corrector.md#what-the-lora-corrector-is) learns it
 back.
 
 ### 3.6 Local conditional scores
@@ -330,10 +330,10 @@ Navigation: ⬅️ [Previous](#3-background) | 📋 [Contents](#contents) | [Nex
 
 *Figure 3. Seed 42. Left: the joint prompt "a cat and a dog", two animals. Right: PoE of "a cat" and
 "a dog" from the same starting noise, one animal with a cat's face on a dog's body. From
-[what PoE composition is](../../context/world/poe-composition.md).*
+[what PoE composition is](../../../context/world/poe-composition.md).*
 
 **It recurs.** The fused animal appears across 17 animal pairs at 8 seeds each, counted by the
-validated GroundingDINO instance count ([report index](../../report/00-INDEX.md), rung 2).
+validated GroundingDINO instance count ([report index](../../../report/00-INDEX.md), rung 2).
 
 **It is specific to PoE.** The joint prompt draws two animals from the same noise.
 
@@ -344,7 +344,7 @@ validated GroundingDINO instance count ([report index](../../report/00-INDEX.md)
 
 <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-causal-renders.png"><img src="figures/fig-causal-renders.jpg" width="900" alt="A grid of SDXL renders: rows camel and dog at seeds 1 and 4; columns the animal alone, rain alone, the animal in the rain asked directly, the joint prompt, PoE, and the wet animal asked directly, with the reader's wet or dry calls under each tile"></a>
 
-*Figure 4. The same rain, two animals, seeds 1 and 4. SDXL, 50 [DDIM](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/32-ddim-non-markovian-and-deterministic-limit.md) steps, guidance 7.5, the same
+*Figure 4. The same rain, two animals, seeds 1 and 4. SDXL, 50 [DDIM](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/32-ddim-non-markovian-and-deterministic-limit.md) steps, guidance 7.5, the same
 starting noise across a row. Calls under the tiles are the reader's own, from the two calls files.
 The dog sheet's joint and PoE tiles have totals recorded but no call per seed. Made by
 [`make_figures.py`](../../artifacts/notes/what-poe-loses-when-it-composes/make_figures.py).*
@@ -359,7 +359,7 @@ The reader's calls over all five seeds (1, 2, 4, 9, 10). A half call counts as d
 | PoE of "a …" and "rain" | **dry 5** | wet 2 (seed 10 lost the dog to a person with an umbrella) |
 
 **Sources:** `asked-directly-calls.json` and `a-camel-and-rain-calls.json` in
-`artifacts/results/does-a-camel-in-the-rain-come-out-wet/`; the dog totals from the
+`3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/`; the dog totals from the
 [dog-and-rain walk map](../../artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md), piece 1.
 
 **SDXL can draw a wet camel.** Asked "a wet camel", it does on 4 of 5 seeds.
@@ -622,7 +622,7 @@ Run through the [causal route](route-causal-does-an-effect-need-support.md).
 
 | Piece | State | Evidence |
 |---|---|---|
-| dog sheet: dog, rain, joint, PoE, [SuperDiff](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md), 5 seeds | ✅ done; totals called, per-seed calls owed | `artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png` |
+| dog sheet: dog, rain, joint, PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md), 5 seeds | ✅ done; totals called, per-seed calls owed | `3-understanding-compositionality/artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png` |
 | asked directly: wet camel, camel in the rain, wet dog, dog in the rain | ✅ done and called | `asked-directly.png` and its calls file |
 | camel sheet: camel, rain, joint, PoE, SuperDiff, 5 seeds | ✅ done and called | `a-camel-and-rain.png` and its calls file |
 | a searchable stand-in for SDXL's captions | ✅ found: Re-LAION-2B-en research-safe, all 128 files mirrored on `/datasets` | `caption-counts.md`, "[Dataset searched](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md#dataset-searched)" |
@@ -661,7 +661,7 @@ any figure was built; the census in step 4 of the causal route puts every call i
 - **The wet call is wrong.** CLIP called 7 of 122 fetched pictures wet. By eye, **0 of 7** show a wet animal. The pass mark set before scoring was 80%.
 - **About 40% of links are dead.** 63 of 100 camel pictures and 59 of 100 dog pictures still loaded.
 
-The pilot's pictures are in `artifacts/results/does-a-camel-in-the-rain-come-out-wet/`
+The pilot's pictures are in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/`
 (`pilot-ten-walk-pictures.jpg`, `pilot-clip-called-wet.jpg`), kept local because they are web photos.
 
 **The census replaces CLIP's calls with eyes, and keeps CLIP for sorting.**
@@ -669,7 +669,7 @@ The pilot's pictures are in `artifacts/results/does-a-camel-in-the-rain-come-out
 1. **Search.** For each subject and each effect family, take every whole-word caption hit over all 128 files.
 2. **List.** Save the hit captions as text, so the first output is a list of real training captions that might show the subject in the effect state.
 3. **Fetch.** Download the images behind a fixed random sample of the hits (a seeded draw, so it reruns the same).
-4. **Keep real animals.** Drop pictures with no animal using the GroundingDINO instance count this repository already validated ([the compose-score validation set](../../report/00-INDEX.md), rung 2), not CLIP.
+4. **Keep real animals.** Drop pictures with no animal using the GroundingDINO instance count this repository already validated ([the compose-score validation set](../../../report/00-INDEX.md), rung 2), not CLIP.
 5. **Sort into piles.** Embed each picture with CLIP and cluster, so similar pictures sit together: zoo camels, desert caravans, street camels.
 6. **Look.** Contact sheets per pile; call each picture wet, dry or can't tell by eye.
 7. **Count.** $f_A$ per subject and family, with its 95% interval; a zero is reported as a bound, "below 3 in N" (the rule of three).
@@ -1336,7 +1336,7 @@ regions, and the region-weighted reconstruction is a locality constraint in all 
 Navigation: ⬅️ [Previous](#10-where-the-phd-proposals-phases-sit) | 📋 [Contents](#contents) | [Next](#12-references) ➡️
 
 **SDXL results are field evidence.** No corrector has been shown to fix plain PoE on SDXL: this
-repository's [Langevin corrector](../../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md) was inconclusive at every step size, and with more steps the sample
+repository's [Langevin corrector](../../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md) was inconclusive at every step size, and with more steps the sample
 drifts from a photograph toward an illustration. So every SDXL miss could still be error A. The causal
 claim rests on the toy.
 
@@ -1419,8 +1419,8 @@ Navigation: ⬅️ [Previous](#12-references) | 📋 [Contents](#contents)
 |---|---|---|
 | 1 | `du-2023-product-sampling.png` | fetched from Du et al. 2023; caption and URL in [the reference check](../../artifacts/notes/what-poe-loses-when-it-composes/references-verified.md) |
 | 2 | `bradley-2025-projective-composition.png` | fetched from Bradley et al. 2025a; caption and URL in the same file |
-| 3 | `context/images/world/0{1,2}-*.png` | this repository's seed 42 renders, from [what PoE composition is](../../context/world/poe-composition.md) |
-| 4 | `fig-causal-renders.png` | SDXL tiles in `artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/` and the dog sheet; calls from the two calls files |
+| 3 | `context/images/world/0{1,2}-*.png` | this repository's seed 42 renders, from [what PoE composition is](../../../context/world/poe-composition.md) |
+| 4 | `fig-causal-renders.png` | SDXL tiles in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/` and the dog sheet; calls from the two calls files |
 | 5 | `fig-why-rain-and-dog-do-not-fuse.png` | exact Gaussian products, spreads chosen by hand |
 | 6 | `fig-exact-product-is-a-blend.png` | exact product of two Gaussians on 16 × 16 images |
 | 7 | `fig-mixture-reweighting.png` | the formula of §5.4; $\pi$ and $\rho$ chosen to illustrate |
@@ -1445,4 +1445,4 @@ script its row names.
 - The mention of **joint prompt** in [the caption walk on wet camels and wet dogs](today-camel-and-dog-in-the-training-data.md).
 - The mention of **joint prompt** in [the learned-token run](today-a-learned-and-token.md).
 - The mention of **caption fine-tuning** in [the structural route](route-structural-can-a-toy-reproduce-the-hybrid.md).
-- The mention of **what PoE loses when it composes**, scope 10 placed in the understanding-compositionality project, in [the project table for regrouping the core repo](../split-into-idea-repos.md).
+- The mention of **what PoE loses when it composes**, scope 10 placed in the understanding-compositionality project, in [the project table for regrouping the core repo](../../../plans/split-into-idea-repos.md).

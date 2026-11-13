@@ -114,7 +114,7 @@ pairs.
 | `poe_repair.experiments.held_out_seeds.seed_pool` | reused | Seed-pool YAML loader (verbatim from Plan 08). |
 | `poe_repair.experiments.held_out_seeds.task_d_bridge` | reused; takes `--pair` and `--seed` | Δ̄_t bridge per (pair, seed). Inputs are now per-cell. |
 | `poe_repair.experiments.cross_pair_lora_pooling.contact_sheet` *(new)* | new | Renders the four-quadrant grid: rows × quadrants × pairs. |
-| `scripts/cross_pair_lora_pooling/train_all_groups.sh` *(new)* | new | One-shot wrapper: builds the pair pool, calls trainer with `--total-epochs`, evaluates the crossbar, renders the contact sheet. |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/train_all_groups.sh` *(new)* | new | One-shot wrapper: builds the pair pool, calls trainer with `--total-epochs`, evaluates the crossbar, renders the contact sheet. |
 
 The trainer **never** touches `outputs/lora/<pair>/seed_42/` or
 `outputs/cross_seed_lora_pooling/<pair>/`. Plan-09 / Plan-10 artefacts
@@ -157,7 +157,7 @@ All cells live under
 `/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/<pair-slug>/seed_<N>/`
 and are resolved through `POE_REPAIR_TRAINING_CACHE`. Groups G4 and G6
 inherit existing multi-seed caches; G1, G2, G3 (and their sibling
-pairs) require cache production via `scripts/build_training_cache.py`
+pairs) require cache production via `3-understanding-compositionality/scripts/build_training_cache.py`
 before this plan can train.
 
 ## Commands
@@ -186,7 +186,7 @@ seed in both `train_pool` and `held_out`) must abort at load.
 ### Task B — one-shot training across all 40 cells
 
 ```bash
-bash scripts/cross_pair_lora_pooling/train_all_groups.sh
+bash 1-lora-correction/scripts/cross_pair_lora_pooling/train_all_groups.sh
 ```
 
 Wraps:
@@ -317,7 +317,7 @@ Buckets across the whole experiment:
 | `poe_repair.experiments.cross_pair_lora_pooling.train_pooled` | | ⬜ |
 | `poe_repair.experiments.cross_pair_lora_pooling.sample_crossbar` | | ⬜ |
 | `poe_repair.experiments.cross_pair_lora_pooling.contact_sheet` | | ⬜ |
-| `scripts/cross_pair_lora_pooling/train_all_groups.sh` | | ⬜ |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/train_all_groups.sh` | | ⬜ |
 | Task A — pool YAMLs + leak guards | | ⬜ |
 | Task B — train pooled LoRA across 40 cells | | ⬜ (~20 h GPU) |
 | Task C — four-quadrant evaluation | | ⬜ |

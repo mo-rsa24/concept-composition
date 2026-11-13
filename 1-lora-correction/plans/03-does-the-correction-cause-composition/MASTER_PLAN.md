@@ -2,7 +2,7 @@
 
 ## Where this scope sits in the order
 
-This scope owns **9 of the 30 steps**, 5 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), never an order of its own.
+This scope owns **9 of the 30 steps**, 5 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), never an order of its own.
 
 **Next in this scope: step 6**, [when in the run the correction matters](plans/hypothesis/05-when-in-the-run-it-matters.md), driving the timing tab by hand.
 
@@ -49,7 +49,7 @@ saw. This scope proves that account and produces the paper's figures.
    replication check passes, the figure cascade, and the Inspector tabs.
 
 ## Goals
-1. Causal: this is supported if the [compose rate](../../context/world/compose-rate.md)
+1. Causal: this is supported if the [compose rate](../../../context/world/compose-rate.md)
    rises with λ on most pairs while the norm-matched random control stays at what
    you would get by luck. It is a null if the pair's own real correction fails at
    λ=1, or if the random control does as well as it. It is inconclusive if the
@@ -74,8 +74,8 @@ saw. This scope proves that account and produces the paper's figures.
         reads low regardless of transfer.
         First clause HOLDS: 63.0% against 16.4% for a same-shape Gaussian,
         3.8x, from
-        scripts/spectrum.py --pool --stride 10 --max-seeds 8 (440 rows).
-        Evidence: artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md
+        1-lora-correction/scripts/spectrum.py --pool --stride 10 --max-seeds 8 (440 rows).
+        Evidence: 1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md
         Rewording direction text is /integrate-plans or /refine-plan, not
         sync-plan-tree. -->
 4. Universality: ‖r_t‖ curves collapse in log-SNR across pairs; the window
@@ -98,7 +98,7 @@ broke. Nothing is claimed here without the tool that measured it.
 
 ## Definition of Done
 1. ✅ Normalization pre-registered in writing before any cross-type plot exists.
-   (relative_norm, report/normalization_preregistration.md, 2026-08-05)
+   (relative_norm, 1-lora-correction/report/normalization-preregistration.md, 2026-08-05)
 2. ✅ Mechanism re-test verdict recorded: REPLICATES (median 1.52x over
    64 pair-and-seed runs, 2026-08-05). Caveat: the control pair shows the
    effect too.
@@ -107,7 +107,7 @@ broke. Nothing is claimed here without the tool that measured it.
 5. Cache analyses delivered: SNR collapse, d(t), density climb, spectrum with
    held-out projection.
 6. Three-space corroboration delivered: manifold slide, language-side tests,
-   [chimera](../../context/world/chimera.md) quality control.
+   [chimera](../../../context/world/chimera.md) quality control.
 7. Composition-type scatter with the new attribute-pair runs and the separate
    measuring tool they need.
 8. Replication delivered: SD 1.5 and SD 2.1 runs across correction amounts, the

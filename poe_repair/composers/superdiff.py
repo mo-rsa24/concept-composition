@@ -439,7 +439,7 @@ def run(
         method_name += "_with_rt"
     if lora_adapter_name is not None:
         # The adapter must already be attached to models["unet"] by the caller (see
-        # scripts/showcase/lora_dose_sweep.py:_attach_and_load_lora); lora_tag names which one.
+        # 1-lora-correction/scripts/showcase/lora_dose_sweep.py:_attach_and_load_lora); lora_tag names which one.
         method_name += f"_lora{lora_tag}_lv{lambda_value:.2f}"
     out_dir = cell_output_dir(ctx, exp_name, method_name, cell)
     image_path = out_dir / f"{method_name}.png"

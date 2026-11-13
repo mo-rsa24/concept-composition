@@ -11,7 +11,7 @@ Feynman-Kac reweighting" with arXiv 2509.25940 (CO3), 2606.23920 (Soiffer et al.
 2503.02819 (Feynman-Kac correctors), read against layer 8's interaction term
 
 Background
-This is the prior-art stop of the composition ladder in artifacts/drips/simple-distributions-rebuild/,
+This is the prior-art stop of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/,
 between layer 8 (the interaction term) and layer 9 (the correction, learned back). Two published
 methods already correct a composition, and one of them gets worse with learned scores, so layer 9's
 learned correction has to be placed against both before it is built. I have passed quiz P.1, and
@@ -62,9 +62,9 @@ What is already known
 - CO3 runs on SDXL with 50 DDIM steps and guidance 5.0, in the first 20% of steps (Papers.md;
   composition-terms.md).
 - Feynman-Kac correctors weight each particle so the product path q¹_t·q²_t/Z_t is exact, and
-  resample by the weights (Papers.md; artifacts/ideas/poe-overlap-dial/composition-terms.md).
+  resample by the weights (Papers.md; 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md).
 - At β = 1 only the inner product of the two scores remains in the Feynman-Kac weight (Papers.md;
-  artifacts/ideas/poe-overlap-dial/composition-terms.md).
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md).
 - Plan 26 runs one reweighting under three target sequences on experts N(−1, 0.5) and N(1, 0.8)
   (plan 26, toy line and task 2.3).
 - In plan 26 the product ends at mean −0.2295 and variance 0.3019 against the closed form −0.230769
@@ -88,9 +88,9 @@ What is already known
 - No source on the 17-paper shortlist adds an interaction factor to a product at sampling time
   (composition-terms.md).
 - Layer 8's r(x) = log p(x|A,B) − [log p(x|A) + log p(x|B) − log p(x)], in ε-space ε_joint − ε_A −
-  ε_B + ε_∅ (artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick 8).
+  ε_B + ε_∅ (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick 8).
 - Layer 9 trains a correction on the gradient of r and runs the fair test at overlap 0.05 and
-  0.001 (artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick 9).
+  0.001 (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick 9).
 - The project's own 2 × 2 of exact or trained experts by reverse diffusion or annealed MALA has
   interactions of +0.054 ± 0.016 total variation at r = 0.05 and +0.232 ± 0.046 at r = 0.001
   (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, run 7).

@@ -34,7 +34,7 @@ import numpy as np
 import torch
 from PIL import Image, ImageDraw
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -161,7 +161,7 @@ def stage_baseline() -> None:
     probe = CONDS["base40"][1]
     if not (probe / "results.json").exists():
         _log(f"probe: baseline 40,050 -> {probe}")
-        subprocess.run([PY, "scripts/showcase/lambda_boundary_probe.py", "--rank", "32",
+        subprocess.run([PY, "1-lora-correction/scripts/showcase/lambda_boundary_probe.py", "--rank", "32",
                         "--checkpoint", str(BASELINE_CKPTS / "lora_step_040050.pt"),
                         "--out-root", str(probe), "--windows", "full", "--lambdas", LAMBDA],
                        cwd=REPO_ROOT, env=env, check=False)
@@ -169,7 +169,7 @@ def stage_baseline() -> None:
         out = CONDS[cond][3]
         if not (out / "on_policy_energy.json").exists():
             _log(f"on-policy energy: baseline {step} -> {out}")
-            subprocess.run([PY, "scripts/showcase/on_policy_energy.py", "--rank", "32",
+            subprocess.run([PY, "1-lora-correction/scripts/showcase/on_policy_energy.py", "--rank", "32",
                             "--checkpoint", str(BASELINE_CKPTS / f"lora_step_{step}.pt"),
                             "--out", str(out), "--tag", f"baseline lineage, step {step}"],
                            cwd=REPO_ROOT, env=env, check=False)

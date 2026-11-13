@@ -5,10 +5,10 @@ F4a's own cells (window 0-10 and 40-50) were sampled by an earlier version of
 the composer that saved ``x0_estimates`` straight into
 ``latent_trajectory.pt``. The current composer only saves the noisy latents
 (``trajectories``), so the eight new growing-window cells this script targets
-have no saved x0_estimates for scripts/decode_trajectory_frames.py to read.
+have no saved x0_estimates for 1-lora-correction/scripts/decode_trajectory_frames.py to read.
 
 Recovers them instead with the closed-form DDIM inversion
-scripts/dose_trajectory_divergence.py already validated against F4a's own
+1-lora-correction/scripts/dose_trajectory_divergence.py already validated against F4a's own
 saved ground truth (median relative error under 5%, see that script's
 ``validate_recovery``): two consecutive noisy latents plus the alpha_bar
 schedule determine x̂₀ exactly, no eps needed. Then decodes just the five
@@ -18,7 +18,7 @@ frames longer_correction_grid.py / later_start_grid.py actually use (steps 10, 2
 decode_trajectory_frames.py uses, so both code paths produce
 interchangeable files.
 
-    CUDA_VISIBLE_DEVICES=1 python scripts/recover_growing_window_frames.py
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/recover_growing_window_frames.py
 """
 
 from __future__ import annotations
@@ -29,7 +29,7 @@ from pathlib import Path
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from dose_trajectory_divergence import recover_x0  # noqa: E402
 from decode_trajectory_frames import to_uint8  # noqa: E402

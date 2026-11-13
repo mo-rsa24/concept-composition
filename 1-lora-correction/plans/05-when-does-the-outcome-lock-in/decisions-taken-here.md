@@ -60,7 +60,7 @@ endpoint predictor answers: stop composing here, let the plain guided model land
 this only by finding a question the counterfactual finish does not serve.
 
 **Both prompt passes run, each figure labeled by the pass it came from.** The joint
-[chimera](../../context/world/chimera.md) prompt feeds the per-step commitment test; the two
+[chimera](../../../context/world/chimera.md) prompt feeds the per-step commitment test; the two
 expert prompts feed the which-mode destination frames. Cost at today's pool is a few thousand
 forward passes for both.
 
@@ -160,7 +160,7 @@ applied to every pair) would need its own pre-registered bar first.
    state against a finish-the-run ending.
 4. **Calibrate.** The 240-state pass, thresholds in code, verdict: adopt, shrink, or fall back.
 5. **The grid and the figures.** Both prompt passes plus stability copies; the per-step
-   counterfactual [compose-rate](../../context/world/compose-rate.md) curves per family; the
+   counterfactual [compose-rate](../../../context/world/compose-rate.md) curves per family; the
    three-timestamp aligned figure (correction window, speciation, divergence); filmstrips; the
    PCA overlay beside the outcome curves.
 

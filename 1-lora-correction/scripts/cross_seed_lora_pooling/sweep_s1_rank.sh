@@ -6,7 +6,7 @@
 # samples held-out seeds after each. Same train pool, only rank changes.
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 CUDA=${CUDA_VISIBLE_DEVICES:-1}
 EPOCHS=${EPOCHS:-1600}

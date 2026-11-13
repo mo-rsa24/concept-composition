@@ -24,9 +24,9 @@ and 2 are training cells and 9 and 12 are held-out cells.
 Stages (each is one process; the adapters are loaded one per process because peft cannot
 swap a rank-8 adapter for a rank-16 one in place):
 
-    python scripts/showcase/method_grid.py --baselines            # dogdog Mono + PoE, no adapter
-    python scripts/showcase/method_grid.py --adapter r8_240k      # LoRA column, both prompt sets
-    python scripts/showcase/method_grid.py --compose              # all 8 grids from what is on disk
+    python 1-lora-correction/scripts/showcase/method_grid.py --baselines            # dogdog Mono + PoE, no adapter
+    python 1-lora-correction/scripts/showcase/method_grid.py --adapter r8_240k      # LoRA column, both prompt sets
+    python 1-lora-correction/scripts/showcase/method_grid.py --compose              # all 8 grids from what is on disk
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 SEEDS = (1, 2, 9, 12)
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/method_grid")

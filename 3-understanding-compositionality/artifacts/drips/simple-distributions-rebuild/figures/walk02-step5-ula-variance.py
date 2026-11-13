@@ -6,7 +6,7 @@ import numpy as np
 INDIGO = "#4527a0"
 INK = "#212121"
 
-root = Path(__file__).resolve().parents[4]
+root = Path(__file__).resolve().parents[5]
 with (root / "rebuild/out/walk-numbers.json").open() as f:
     values = json.load(f)
 

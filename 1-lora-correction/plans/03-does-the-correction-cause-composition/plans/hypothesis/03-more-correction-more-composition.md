@@ -4,7 +4,7 @@ This plan asks whether adding back more of the missing correction produces more 
 generating images at five injection strengths and checking that two deliberately wrong vectors of
 the same size do nothing.
 
-**Step 4 of 22.** Waits on steps 1 and 2. The running order is in [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 4 of 22.** Waits on steps 1 and 2. The running order is in [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 ## Position in the plan tree
 
@@ -44,7 +44,7 @@ the same size do nothing.
 
 *The correction term $r_t$ is the missing piece that PoE drops. If true, adding more of it should produce more composition, while deliberately wrong vectors of the same size should stay flat.*
 
-**If true:** The real correction's [compose-rate](../../../../context/world/compose-rate.md) curve rises as λ (correction strength) increases from 0 to 1. Both fake rows (random vector and wrong pair's correction) stay near zero at all λ.
+**If true:** The real correction's [compose-rate](../../../../../context/world/compose-rate.md) curve rises as λ (correction strength) increases from 0 to 1. Both fake rows (random vector and wrong pair's correction) stay near zero at all λ.
 
 **If false:** Either the correction is not the cause of composition failure (other factors matter more), or the controls are not actually controls (the fakes are not comparable to the real one).
 
@@ -75,7 +75,7 @@ the same size do nothing.
 **Runtime:**
 - One image takes minutes in-session on this node's 3090.
 - Full set: ~50 seconds per image × 440 unique images = ~6 hours on GPU.
-- Submission: `scripts/mechanism_study/run_dose_sweep.sh`, resumable, to biggpu (100GB VRAM, safer) or bigbatch (fallback).
+- Submission: `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh`, resumable, to biggpu (100GB VRAM, safer) or bigbatch (fallback).
 
 **Environment constraints:**
 - Corrections are already cached; nothing here recomputes them.
@@ -228,10 +228,10 @@ At λ=0, nothing is injected, so all three rows are the same picture by construc
 ## Environment Facts This Plan Depends On
 - `co3` python at its absolute path. Generating all 480 images (~6h at ~50s each) goes to biggpu
   first, else bigbatch. The single trial image fits the in-session GPU.
-- `scripts/mechanism_study/run_dose_sweep.sh` writes to `$REPO/outputs/...` while its own disk
+- `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh` writes to `$REPO/outputs/...` while its own disk
   guard checks `/datasets/mmolefe`, so a job this size will fill `/home-mscluster` unless the
   output is moved by hand afterward (as this plan's own last task had to do). See
-  [environment/storage.md](../../../../environment/storage.md).
+  [environment/storage.md](../../../../../environment/storage.md).
 
 ## Tasks
 
@@ -243,7 +243,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 
 - [x] **Wire up the code that does the injecting.**
   Write the code that injects a chosen vector (real, random, or wrong pair's) and runs three rows at every λ.
-  - File: `scripts/interaction_term_inject.py` (built on `run_teacher_residual`)
+  - File: `1-lora-correction/scripts/interaction_term_inject.py` (built on `run_teacher_residual`)
   - Injecting the real correction already existed, from the measuring scripts built in
     `instrument-01-build-the-measuring-scripts`
   - Injecting a DIFFERENT vector was new
@@ -261,7 +261,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 
 - [x] **The full series across every setting.**
   8 unseen pairs × 4 seeds × 5 strengths × 3 rows = 480 pictures.
-  - Script: `scripts/mechanism_study/run_dose_sweep.sh` (resumable)
+  - Script: `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh` (resumable)
   - Time: ~50 seconds per generated picture on GPU, ~6 hours total
 
 - [x] **Score every picture.**
@@ -275,7 +275,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 
 - [x] **Build the curves and grid.**
   Three curves on one axis; 3×5 grid of real generated pictures above.
-  - Script: `scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs`
+  - Script: `1-lora-correction/scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs`
   - Layout: decided in `figure-01-the-seven-paper-figures`, not here
   - Grid: rebuilt per the procedure (step 6)
 
@@ -315,7 +315,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 | Component | Status | Location | What it shows |
 |-----------|--------|----------|---------------|
 | Curves (quantitative) | ✓ Ready | `outputs/interaction_term/dose/dose_curves.{json,png}` | Compose rate vs λ, three lines (real, random, wrong pair) |
-| Grid (qualitative) | ✓ Ready | `scripts/dose_strip.py` output, copied to figure location | 3×5 grid of real generated pictures, one row per injection type, one column per λ, same pair and seed |
+| Grid (qualitative) | ✓ Ready | `1-lora-correction/scripts/dose_strip.py` output, copied to figure location | 3×5 grid of real generated pictures, one row per injection type, one column per λ, same pair and seed |
 | Combined figure | ⏳ Awaiting F2 layout decision | F2's reserved place, `paper/iclr/figures/` | Curves above or beside grid, caption finalized once scoring cutoff is set |
 
 **Supporting artifacts:**
@@ -330,7 +330,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 
 ### The code that does the injecting
 
-**File:** `scripts/interaction_term_inject.py`  
+**File:** `1-lora-correction/scripts/interaction_term_inject.py`  
 **What it does:** Takes a cached correction, injects it at strength λ into PoE sampling, generates the output, and logs it.
 
 ```python
@@ -351,11 +351,11 @@ def inject(pair, seed, lambda_, vector_type="real"):
 
 ### Plotting and curve building
 
-**File:** `scripts/plot_dose_curves.py`  
+**File:** `1-lora-correction/scripts/plot_dose_curves.py`  
 **Usage:**
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-$PY scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
+$PY 1-lora-correction/scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
 # Outputs: dose_curves.json (data), dose_curves.png (visualization)
 ```
 

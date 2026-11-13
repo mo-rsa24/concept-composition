@@ -12,7 +12,7 @@ held-out pair does.
 **What would have counted**
 
 The rank 8 extension from 100k to 200k was planned in
-[train longer](../../plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md)
+[train longer](../../../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md)
 to read whether the tracking set's held-out curves keep improving. No numeric bar was written for
 "worse". The read here is descriptive: DINOv2 drift on the 8-seed grid returning to 0 means the
 corrected renders are no nearer the joint-prompt image than plain PoE, and that is taken as the
@@ -86,7 +86,7 @@ instrument to stop training on.
 (the adapter trains on plain-PoE states and is used on corrected ones) all rise together; no
 run varied weight decay or the learning rate, so which of them drives the decay is untested.
 The pressure test in
-[the idea route](../../artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md)
+[the idea route](../../../1-lora-correction/artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md)
 names the same three candidates.
 
 **Two cells is a small tracking set.** The faint W&B lines swing by 0.3 between saves. The
@@ -108,13 +108,13 @@ not the decay, but the lineage is not one clean run.
 | Weight norms | `lora_state` in every 10k checkpoint, computed 2026-09-05 | verified |
 | Optimizer settings | `OptimConfig` in `poe_repair/experiments/one_pair_one_seed/config.py`, read 2026-09-05 | verified |
 | The runs | rank 8 100k to 200k (`8vl2uzak`, mscluster110, 6.8 h), 200k to 450k (`n1w4fw5b`, mscluster112, 18.1 h); rank 16 (`jii2mtb0` aborted at 37,418 by the kill criterion after 12.3 h, resumed as `gcej8ib9` on mscluster108, 20.3 h); rank 32 (`le2tp2ti` aborted at 6,500 after 2.3 h, resumed as `6xc2l8ix` on mscluster106, 34.0 h). All finished. Timeline in `training-runs-timeline.png` beside the figures | verified |
-| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03), then rerun the chart script named in the artifact card | |
+| Regenerate with | [render the held-out grid for one checkpoint](../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03), then rerun the chart script named in the artifact card | |
 
 ## Depends on
 
-- What the tracking set is and what each curve means: [reading a training run](../../runbook/looking-at-what-a-run-produced/reading-a-training-run.md).
+- What the tracking set is and what each curve means: [reading a training run](../../../runbook/looking-at-what-a-run-produced/reading-a-training-run.md).
 - The kill criterion that aborted the two fresh runs and does not apply to resumed ones: `multi_pair_trainer.py`, the commit-bucket loss must halve from its step-200 value by step 5000; it is not checkpointed.
-- Measured step times and eval-pass times per GPU: [throughput](../../environment/hpc/throughput.md).
+- Measured step times and eval-pass times per GPU: [throughput](../../../environment/hpc/throughput.md).
 
 ## Still open
 
@@ -123,4 +123,4 @@ not the decay, but the lineage is not one clean run.
 
 ## Cross-references
 
-- The mention of **DINOv2 distance to the joint-prompt render** as the read for a checkpoint's fidelity, reused as the bar for the clean tail, in [can a corrector or a clean tail sharpen the adapter's renders](../is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md).
+- The mention of **DINOv2 distance to the joint-prompt render** as the read for a checkpoint's fidelity, reused as the bar for the clean tail, in [can a corrector or a clean tail sharpen the adapter's renders](../../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md).

@@ -13,7 +13,7 @@ The map of the drip-skill-route walk. Each round records the decision, who chose
 
 ## Round 2: the outcomes (settled 2026-11-10)
 
-- **Board:** `report/paper-review/board.md`, 12 rows, PRZE-1 to PRZE-11 with PRZE-3 split into 3a and 3b.
+- **Board:** `1-lora-correction/report/paper-review/board.md`, 12 rows, PRZE-1 to PRZE-11 with PRZE-3 split into 3a and 3b.
 - **Chosen by you:** design A (official Attend-and-Excite and CONFORM code unmodified on SD 1.5), a held-out set enlarged into three groups, a three-concept test with a written bar, training on SD 1.5 gated and revisited, placeholders for every figure and table, compute chosen deliberately, and UHz6's early-steps question added.
 - **Not taken:** porting the baselines to SDXL (our own port invites an unfairness charge), training a three-concept adapter by default.
 - **Open from this round:** which node the idle Blackwell screenshot came from; `sinfo` shows 107 and 110 allocated and 111 idle, against your list of 107, 108 and 112; the cluster ssh timed out once.
@@ -43,7 +43,7 @@ The map of the drip-skill-route walk. Each round records the decision, who chose
 ## Round 7: step 4, choose and freeze the evaluation set and the one checkpoint (settled 2026-11-10)
 
 - **Settled as proposed:** a request walk, Sonnet medium, 60 minute box, filing on. Written into the route file.
-- **Found on the way:** Figure 5's "ours" column comes from three different adapters (`artifacts/results/four-pairs-four-methods/README.md`), so one checkpoint is frozen before any held-out result is read, and Figure 5 is re-rendered from it.
+- **Found on the way:** Figure 5's "ours" column comes from three different adapters (`1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/README.md`), so one checkpoint is frozen before any held-out result is read, and Figure 5 is re-rendered from it.
 
 ## Round 8: step 5, the compute plan and the first GPU jobs (settled 2026-11-10)
 

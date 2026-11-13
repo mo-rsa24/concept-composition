@@ -99,10 +99,10 @@ Every other variation in this scope changes how the three branches are combined 
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Storage](../../../../environment/storage.md): the encoded renders are a new artifact on `/datasets`, alongside the existing training cache. They are small next to it, because one render encodes to one latent rather than fifty steps of five tensors.
-- [Overview](../../../../environment/overview.md): the VAE encode runs in fp16 and the result is upcast to fp32 before the branches are combined, the same rule the existing path follows.
-- [Throughput](../../../../environment/hpc/throughput.md): rank 32 at about 2,750 steps an hour on a 49 GB card. The new path adds one VAE encode per cell, done once and cached, not per step.
-- [Nodes](../../../../environment/hpc/nodes.md): four nested runs at once need four cards, so `bigbatch`, pinned from a live idle probe. `biggpu` allows one job per user.
+- [Storage](../../../../../environment/storage.md): the encoded renders are a new artifact on `/datasets`, alongside the existing training cache. They are small next to it, because one render encodes to one latent rather than fifty steps of five tensors.
+- [Overview](../../../../../environment/overview.md): the VAE encode runs in fp16 and the result is upcast to fp32 before the branches are combined, the same rule the existing path follows.
+- [Throughput](../../../../../environment/hpc/throughput.md): rank 32 at about 2,750 steps an hour on a 49 GB card. The new path adds one VAE encode per cell, done once and cached, not per step.
+- [Nodes](../../../../../environment/hpc/nodes.md): four nested runs at once need four cards, so `bigbatch`, pinned from a live idle probe. `biggpu` allows one job per user.
 
 ---
 
@@ -194,7 +194,7 @@ For Claude to execute.
   ```
 - [ ] 0.2 **Run the following prompt:**
   ```
-  /frame-hypothesis training on the renders that composed, in plans/09-designing-the-correction-loss
+  /frame-hypothesis training on the renders that composed, in 1-lora-correction/plans/09-designing-the-correction-loss
   ```
   - The scaling curve's bar goes into the review file before the data path is built
   - Produces: the bar, written and dated ahead of the runs
@@ -246,7 +246,7 @@ For Claude to execute.
   - Produces: `06-per-checkpoint.json`, the same shape as the earlier plans'
 - [ ] 3.2 **Read the strips blind**
   - Same procedure as plan 03's, shuffle key saved separately
-- [ ] 3.3 **Write `report/designing-the-correction-loss/06-training-on-the-renders-that-composed.md`**
+- [ ] 3.3 **Write `1-lora-correction/report/designing-the-correction-loss/06-training-on-the-renders-that-composed.md`**
 
 ### Close out. 🔄 Record what this plan taught
 
@@ -356,7 +356,7 @@ Task 1.1 and task 2.1 both fail quietly, which is why they are named here.
 | Step | Command | Triggered by | Outcome |
 |------|---------|--------------|---------|
 | Check the plan | `/verify-plan @plans/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md` | **task 0.1**, before any work | conformance and thin instructions reported |
-| Fix the bar before the runs | `/frame-hypothesis training on the renders that composed, in plans/09-designing-the-correction-loss` | **task 0.2**, before the data path is built | the scaling bar dated ahead of the runs |
+| Fix the bar before the runs | `/frame-hypothesis training on the renders that composed, in 1-lora-correction/plans/09-designing-the-correction-loss` | **task 0.2**, before the data path is built | the scaling bar dated ahead of the runs |
 | Capture patterns | `/ingest-error-pattern --from-run-log` | **the close out**, after any red run | errors added to the catalogs |
 | Bring the tree current | `/sync-plan-tree @plans/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md` | **the close out** | statuses, running order and Error Matrix match reality |
 
@@ -397,7 +397,7 @@ class RenderCell:
 
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-▶ `/frame-hypothesis training on the renders that composed, in plans/09-designing-the-correction-loss` ✅ — fixes the scaling bar in the review file before the data path exists, which is the ordering `verify-plan` checks against `git log`.
+▶ `/frame-hypothesis training on the renders that composed, in 1-lora-correction/plans/09-designing-the-correction-loss` ✅ — fixes the scaling bar in the review file before the data path exists, which is the ordering `verify-plan` checks against `git log`.
    alt: `/design-figure` on task 2.3, since four points and a bar can be drawn to look conclusive or honest.
 
 ---

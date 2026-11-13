@@ -60,8 +60,8 @@ zero by construction. From
 fields `rows[].cos`, `rows[].state_drift_rel`, `rows[].cos_true_vs_cached_target`, summarised in
 `on_policy_fit_table.md` beside it; and
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/fit_cosine_r8_030000/fit_cosine.json`,
-rows with `pair == a_cat__x__a_dog`. Written by `scripts/showcase/on_policy_fit_cosine.py`
-(Slurm job 49421, mscluster72, 2026-09-03) and `scripts/showcase/fit_cosine_on_cache.py`.
+rows with `pair == a_cat__x__a_dog`. Written by `1-lora-correction/scripts/showcase/on_policy_fit_cosine.py`
+(Slurm job 49421, mscluster72, 2026-09-03) and `1-lora-correction/scripts/showcase/fit_cosine_on_cache.py`.
 
 **What this figure leaves out.** It is one pair. Whether the drift matters more on a pair where
 the correction is larger is not measured. It also says nothing about the compose rate: seed 14
@@ -154,19 +154,19 @@ setting the showcase renders use, and no other.
 | Cached-state cosine, training and pool held-out pairs | `/datasets/mmolefe/poe_repair_min/outputs/showcase/fit_cosine_r8_030000/fit_cosine.json`, read 2026-09-05 | verified |
 | Cached-state cosine, the two middle tiers | `/datasets/mmolefe/poe_repair_min/outputs/showcase/fit_cosine_tiers_r8_030000/fit_cosine.json`, read 2026-09-05 | verified |
 | The renders in rung 4 | the three folders named in rung 4, read 2026-09-05; the scorer verdicts from `figure_r8_030000/results.json` | verified |
-| The adapter | rank 8, alpha 8, step 30000, `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` | verified |
-| The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`, states on the uncorrected product-of-experts trajectory, 50 DDIM steps, guidance 7.5 | verified, read off `scripts/build_training_cache.py` |
+| The adapter | rank 8, alpha 8, step 30000, `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` | verified |
+| The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`, states on the uncorrected product-of-experts trajectory, 50 DDIM steps, guidance 7.5 | verified, read off `3-understanding-compositionality/scripts/build_training_cache.py` |
 | The 0.54 and 0.40 as pool-mean alignment | `poe_repair/experiments/cross_pair_lora_pooling/_inline_sampling.py`, `direction_metrics` docstring and body, read 2026-09-05 | verified |
 | The runs | runs 1 to 4 in the `Runs` table of [the idea map](../../artifacts/ideas/improving-the-pooled-lora-run/IDEA_MAP.md); the adapter itself from the task "Train one pooled adapter on the eleven training pairs" in [does one pooled fix transfer at all](../../plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md) | verified |
-| Regenerate with | [decide where a run goes](../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#1-decide-where-a-run-goes), then the two scripts above with the `run.sbatch` files kept beside each output | |
+| Regenerate with | [decide where a run goes](../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#1-decide-where-a-run-goes), then the two scripts above with the `run.sbatch` files kept beside each output | |
 
 ## Depends on
 
 - What the cached correction is and how it is defined: the interaction term entry in
-  [the context index](../../context/00-INDEX.md).
-- Which trajectory the cache stores: `scripts/build_training_cache.py`, the latent is advanced
+  [the context index](../../../context/00-INDEX.md).
+- Which trajectory the cache stores: `3-understanding-compositionality/scripts/build_training_cache.py`, the latent is advanced
   with the product-of-experts prediction and the joint prediction is queried at those states.
-- Which nodes ran it: [the cluster nodes](../../environment/hpc/nodes.md).
+- Which nodes ran it: [the cluster nodes](../../../environment/hpc/nodes.md).
 - Why the question was asked, and the literature it was tested against:
   [the pressure-test route](../../artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md).
 

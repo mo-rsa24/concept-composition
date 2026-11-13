@@ -61,7 +61,7 @@
 - **On-policy**: measured along the trajectory the adapter itself produces at λ 1, with the true correction recomputed by one joint-prompt forward at every state the run actually visits. The cache holds states on the plain-PoE trajectory, which the corrected run leaves.
 - **Mismatch**: `Σ_k ½ γ_k ‖r̂_k − r_true,k‖²` on-policy, in nats. How far the adapter's correction is from the true one, in the same unit as the energy.
 - **Drift**: DINOv2 drift, the corrected render's cosine distance to the joint-prompt render minus its distance to the plain-PoE render, mean over the 8 held-out seeds at λ 1. Negative means nearer the joint-prompt image. From `summary.full.1.0.mean_dino_drift` in a probe folder's `results.json`.
-- **Compose count**: seeds of 8 where the validated detector counts two or more animal instances ([compose rate](../../../../context/world/compose-rate.md)).
+- **Compose count**: seeds of 8 where the validated detector counts two or more animal instances ([compose rate](../../../../../context/world/compose-rate.md)).
 - **Contrast**: the standard deviation of the grey-level pixels of the 1024 px render, 0 to 255. The haze reads as a low value; the shipped adapter's 8-seed mean is 37.5 against the joint prompt's 46.4.
 - **Both-ness and the DINOv2 plane**: a render embedded with the scorer's DINOv2 encoder and projected onto two axes fitted on the "a cat", "a dog" and "a cat and a dog" reference clouds: x from the cat centroid to the dog centroid, y from their midpoint toward the joint-prompt centroid. Both-ness is y. The same construction as [where each condition lands](../../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md).
 - **A track**: the running estimate (the model's guess of the finished image, decoded at 256 px) at 14 steps of one run, embedded and projected onto that plane, so one run is one path.
@@ -72,7 +72,7 @@
 
 ⬅️ [Previous](#words-this-plan-uses) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The experiment.** The shipped adapter composes but its renders are under a haze, and training it longer makes the haze worse while the weights grow without bound ([the decay finding](../../../../report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)). Read as a control problem, the adapter is a drift added to the plain run, and the objective a bridge would minimise charges for that drift's squared size at every step. The trainer has no such charge. The free read below says where the true correction spends: 82% of its control energy falls on steps 20 to 49, after the composition is decided (median commit step 15 for the corrected run), and 3.5% on steps 0 to 10. A correction spent after commitment cannot change which animals appear; it can only change how they look. This plan adds the charge and reads what the adapter gives up.
+**The experiment.** The shipped adapter composes but its renders are under a haze, and training it longer makes the haze worse while the weights grow without bound ([the decay finding](../../../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)). Read as a control problem, the adapter is a drift added to the plain run, and the objective a bridge would minimise charges for that drift's squared size at every step. The trainer has no such charge. The free read below says where the true correction spends: 82% of its control energy falls on steps 20 to 49, after the composition is decided (median commit step 15 for the corrected run), and 3.5% on steps 0 to 10. A correction spent after commitment cannot change which animals appear; it can only change how they look. This plan adds the charge and reads what the adapter gives up.
 
 **The hypothesis.** With the running cost on, the adapter keeps the early correction that decides the composition and sheds late energy it does not need, so the 40,050 checkpoint renders nearer the joint-prompt image than the control arm at the same step, with the same seeds composing.
 
@@ -115,13 +115,13 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- Every `biggpu` device was busy on 2026-09-06 and `biggpu` allows one Slurm job per user, so the arms go to `bigbatch` through Slurm, one 24 GB RTX 3090 per node, excluding the nodes whose cards are faulted (44, 45, 50, 51, 65, 74, 83) and the session node 85 ([nodes](../../../../environment/hpc/nodes.md), [execution protocol](../../../../environment/hpc/execution-protocol.md)).
+- Every `biggpu` device was busy on 2026-09-06 and `biggpu` allows one Slurm job per user, so the arms go to `bigbatch` through Slurm, one 24 GB RTX 3090 per node, excluding the nodes whose cards are faulted (44, 45, 50, 51, 65, 74, 83) and the session node 85 ([nodes](../../../../../environment/hpc/nodes.md), [execution protocol](../../../../../environment/hpc/execution-protocol.md)).
 - Rank-32 training holds about 23.5 GB without gradient checkpointing and went out of memory on a 3090 (Slurm job 50339); with checkpointing it fits, at about a third more time per step. The numbers are the same; only the activation memory changes.
 - `co3` python at `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` on every bigbatch node.
-- The job script's guards: `/datasets` under 90%, the card not faulted (`utilization.gpu` without `[N/A]`), `torch.cuda.is_available()` true ([poe-launch-002](../../../../environment/known-failures.md)).
-- Outputs on `/datasets` only; the disk guard reads the filesystem the script writes to ([storage](../../../../environment/storage.md)).
+- The job script's guards: `/datasets` under 90%, the card not faulted (`utilization.gpu` without `[N/A]`), `torch.cuda.is_available()` true ([poe-launch-002](../../../../../environment/known-failures.md)).
+- Outputs on `/datasets` only; the disk guard reads the filesystem the script writes to ([storage](../../../../../environment/storage.md)).
 - fp16 end to end; the cache read upcasts every tensor to float32 before summing squares.
-- The DINOv2 embedder runs on the job's card; on the session node's CPU only with `XFORMERS_DISABLED=1` ([poe-mem-002](../../../../environment/known-failures.md)).
+- The DINOv2 embedder runs on the job's card; on the session node's CPU only with `XFORMERS_DISABLED=1` ([poe-mem-002](../../../../../environment/known-failures.md)).
 
 ---
 
@@ -178,10 +178,10 @@ Every render: the seed's cached initial noise, guidance 7.5, 1024 square, 50 DDI
 
 1. **The weights and the penalty** in `poe_repair/experiments/one_pair_one_seed/trainer.py`: `control_energy_weights` (γ_k) and `control_energy_weights_normalised` (w_k); `_train_one_step` returns `loss = loss_fit + β · loss_energy` and reports `loss_fit`, `loss_energy` and β in its info. `loss_eps` is unchanged, so the bucket curves and the kill criterion read what they read before.
 2. **The flags** `--energy-penalty` and `--gradient-checkpointing` on the pooled trainer, written into `config.json`; `train/loss_fit`, `train/loss_energy`, `train/energy_penalty_beta` logged beside `train/loss`.
-3. **The free read** `scripts/showcase/control_energy_from_cache.py`: `½ γ_k ‖r_k‖²` per step and seed from the cache, its figure and sidecar, copied to the results folder.
-4. **The on-policy read** `scripts/showcase/on_policy_energy.py`: per step, `‖r̂‖`, `‖r_true‖`, their cosine, the mismatch and the energies in nats, plus the corrected final render, for one checkpoint.
-5. **The arm job** `scripts/showcase/energy_penalty.sbatch`: guards, `STAGE=smoke` (one epoch, W&B off, prints the price-to-fit ratio and peak memory), `STAGE=arm` (train, then the grid, the frames and the on-policy read of the 40,050 checkpoint), `STAGE=probe` (the post-training stages alone).
-6. **The readout** `scripts/showcase/energy_penalty_readout.py`, the bars as constants: `--baseline` (the baseline's 40,050 grid and the two baseline on-policy reads, GPU), `--figures`, `--strips`, `--verdict`, `--wandb`; and `scripts/showcase/energy_penalty_readout.sbatch` that runs it after the arms.
+3. **The free read** `1-lora-correction/scripts/showcase/control_energy_from_cache.py`: `½ γ_k ‖r_k‖²` per step and seed from the cache, its figure and sidecar, copied to the results folder.
+4. **The on-policy read** `1-lora-correction/scripts/showcase/on_policy_energy.py`: per step, `‖r̂‖`, `‖r_true‖`, their cosine, the mismatch and the energies in nats, plus the corrected final render, for one checkpoint.
+5. **The arm job** `1-lora-correction/scripts/showcase/energy_penalty.sbatch`: guards, `STAGE=smoke` (one epoch, W&B off, prints the price-to-fit ratio and peak memory), `STAGE=arm` (train, then the grid, the frames and the on-policy read of the 40,050 checkpoint), `STAGE=probe` (the post-training stages alone).
+6. **The readout** `1-lora-correction/scripts/showcase/energy_penalty_readout.py`, the bars as constants: `--baseline` (the baseline's 40,050 grid and the two baseline on-policy reads, GPU), `--figures`, `--strips`, `--verdict`, `--wandb`; and `1-lora-correction/scripts/showcase/energy_penalty_readout.sbatch` that runs it after the arms.
 
 ---
 
@@ -225,13 +225,13 @@ Serves goal 4 (the softness question measured rather than argued) and objective 
 ◀ **Needs: [task 1.3](#1--the-code-and-the-free-read)**.
 
 - [x] **2.1 The smoke job**: one epoch from the shipped checkpoint on a bigbatch card, W&B off.
-  - Command: `STAGE=smoke BETA=0.05 sbatch --job-name=energy_smoke --time=00:45:00 scripts/showcase/energy_penalty.sbatch`
+  - Command: `STAGE=smoke BETA=0.05 sbatch --job-name=energy_smoke --time=00:45:00 1-lora-correction/scripts/showcase/energy_penalty.sbatch`
   - Done when: the log prints `[smoke] 50 steps: mean loss_fit …, mean loss_energy …, beta*energy / fit = …` and `[smoke] peak VRAM GB: …` under 23, and the ratio is inside the band in **What has to pass**.
 - [x] **2.2 The three arms**, one job each.
-  - Command: `for b in 0 0.01 0.05; do BETA=$b sbatch --job-name=energy_b$b scripts/showcase/energy_penalty.sbatch; done`
+  - Command: `for b in 0 0.01 0.05; do BETA=$b sbatch --job-name=energy_b$b 1-lora-correction/scripts/showcase/energy_penalty.sbatch; done`
   - Done when: `squeue -u mmolefe` shows the three running and each run folder's `config.json` reads its `energy_penalty`; the review file's Runs table carries job ids, nodes and W&B ids.
 - [x] **2.3 The readout job**, queued behind the arms.
-  - Command: `sbatch --dependency=afterany:<j0>:<j1>:<j2> scripts/showcase/energy_penalty_readout.sbatch`
+  - Command: `sbatch --dependency=afterany:<j0>:<j1>:<j2> 1-lora-correction/scripts/showcase/energy_penalty_readout.sbatch`
   - Done when: the readout W&B run exists with the figures in its Media tab and `verdict.json` sits under `energy_penalty/`.
 
 ▶ **Next: [task 3.1](#3--harvest)**.
@@ -316,7 +316,7 @@ Every figure below lands in `artifacts/results/does-charging-the-adapter-for-its
 ◀ **Needs: [instruction 4.3](#4--judge-the-arms)** done.
 
 - [ ] **5.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **5.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **5.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported checkpoint as the wall's adapter.
 
@@ -328,9 +328,9 @@ Every figure below lands in `artifacts/results/does-charging-the-adapter-for-its
 
 **Changed:** `poe_repair/experiments/one_pair_one_seed/trainer.py` (`control_energy_weights`, `control_energy_weights_normalised`, the penalty and the three info fields in `_train_one_step`); `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py` (the two flags, `cfg.energy_penalty`, `cfg.gradient_checkpointing`, `config.json`, `enable_gradient_checkpointing` after the LoRA attach); `poe_repair/experiments/cross_pair_lora_pooling/multi_pair_trainer.py` (`train/loss_fit`, `train/loss_energy`, `train/energy_penalty_beta`).
 
-**New:** `scripts/showcase/control_energy_from_cache.py` (the free read), `scripts/showcase/on_policy_energy.py` (the on-policy read), `scripts/showcase/energy_penalty.sbatch` (smoke, arm, probe), `scripts/showcase/energy_penalty_readout.py` (the figures, the bars), `scripts/showcase/energy_penalty_readout.sbatch`.
+**New:** `1-lora-correction/scripts/showcase/control_energy_from_cache.py` (the free read), `1-lora-correction/scripts/showcase/on_policy_energy.py` (the on-policy read), `1-lora-correction/scripts/showcase/energy_penalty.sbatch` (smoke, arm, probe), `1-lora-correction/scripts/showcase/energy_penalty_readout.py` (the figures, the bars), `1-lora-correction/scripts/showcase/energy_penalty_readout.sbatch`.
 
-**Reused:** `scripts/showcase/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `scripts/showcase/correction_span_common.py` (the cache loader), `DinoEmbedder` from `scripts/build_lora_inspector_mds_semantic.py`, the axis and strip helpers of `scripts/showcase/experiment_e_x0_loss.py`.
+**Reused:** `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `1-lora-correction/scripts/showcase/correction_span_common.py` (the cache loader), `DinoEmbedder` from `1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`, the axis and strip helpers of `1-lora-correction/scripts/showcase/experiment_e_x0_loss.py`.
 
 ---
 
@@ -339,7 +339,7 @@ Every figure below lands in `artifacts/results/does-charging-the-adapter-for-its
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/22-charge-the-adapter-for-its-energy.md — smoke on bigbatch, then the three arms as parallel Slurm jobs, the readout job queued behind them; harvest with squeue and the run folders
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/22-charge-the-adapter-for-its-energy.md — smoke on bigbatch, then the three arms as parallel Slurm jobs, the readout job queued behind them; harvest with squeue and the run folders
 ```
 
 ---
@@ -358,7 +358,7 @@ Every figure below lands in `artifacts/results/does-charging-the-adapter-for-its
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 - **poe-launch-002**: the job script rejects a card whose utilisation reads `[N/A]` and asserts `torch.cuda.is_available()` before any work; bigbatch nodes 44, 45, 65 read idle with a dead card on 2026-09-06 and are excluded.
 - **poe-mem-002**: the DINOv2 embedder runs on the job's card; the readout never embeds on a CPU without `XFORMERS_DISABLED=1`.

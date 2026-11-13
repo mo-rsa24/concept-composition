@@ -21,7 +21,7 @@ import torch
 from rebuild import ideal, kinds as K, samplers as S
 from rebuild.device import describe, pick_device
 
-# what the kinds notebook printed (artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb)
+# what the kinds notebook printed (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb)
 REF_FIG1 = {  # kind: exact, then (measure, TV) for perfect, reverse diffusion, ULA, MALA, UHA
     "intersection": (0.71, [(0.71, .11), (0.62, .31), (0.51, .25), (0.50, .24), (0.66, .13)]),
     "disjunction": (0.50, [(0.51, .23), (0.50, .21), (0.52, .24), (0.50, .24), (0.49, .23)]),

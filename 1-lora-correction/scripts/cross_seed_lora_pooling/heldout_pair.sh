@@ -35,7 +35,7 @@
 #   DRY_RUN=1              print commands instead of running them
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 CUDA=${CUDA_VISIBLE_DEVICES:-1}
 SEEDS=${SEEDS:-"9,10,11,12"}

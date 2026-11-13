@@ -19,7 +19,7 @@
 
 | Check | Result |
 |---|---|
-| `scripts/census/laptop_slice.py` | present, `--help` runs, five stages |
+| `3-understanding-compositionality/scripts/census/laptop_slice.py` | present, `--help` runs, five stages |
 | token | `~/.cache/huggingface/token` missing, `HF_TOKEN` unset: step 0 is needed |
 | network | huggingface.co answers 401 unauthenticated in 0.33 s |
 | disk | `/` 592 GB free of 1007 GB; the slice needs about 14.5 GB |
@@ -37,7 +37,7 @@
 
 ## Repairs
 
-- `scripts/census/laptop_slice.py` `count()` reads each file one row group at a time. The whole-file read was killed for memory (exit 137) with an SDXL render from the third-concept walk holding 3.1 GB and swap at 7 of 8 GB; peak after the change is 1.0 GB.
+- `3-understanding-compositionality/scripts/census/laptop_slice.py` `count()` reads each file one row group at a time. The whole-file read was killed for memory (exit 137) with an SDXL render from the third-concept walk holding 3.1 GB and swap at 7 of 8 GB; peak after the change is 1.0 GB.
 
 ## Decisions
 
@@ -49,10 +49,10 @@
 
 | Id | Kind | Serves | State |
 |---|---|---|---|
-| bkbyc0nc2 | run: `/home/molef/miniconda3/bin/python3 -u -I scripts/census/laptop_slice.py download --files 4`, log in the session scratchpad `download.log` | step 1 | done 12:11, folded in |
+| bkbyc0nc2 | run: `/home/molef/miniconda3/bin/python3 -u -I 3-understanding-compositionality/scripts/census/laptop_slice.py download --files 4`, log in the session scratchpad `download.log` | step 1 | done 12:11, folded in |
 | b4v21nc87 | watcher: kills the download (pid 203103) once 2 `part-*.parquet` files exist | step 1 | fired 12:11, folded in |
 
 ## Closing pass owed
 
-- file `artifacts/results/what-the-training-captions-show/` with its card entry
+- file `3-understanding-compositionality/artifacts/results/what-the-training-captions-show/` with its card entry
 - Phase 4 retrospective

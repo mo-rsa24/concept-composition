@@ -33,12 +33,12 @@ find the recipe, or say plainly which part of it cannot be had and why.
 - **What it is trained on.** Distillation: the adapted PoE prediction is regressed onto the frozen
   model's guided joint-prompt prediction ("a cat and a dog"), which is the same as fitting
   r_t = ε̃_joint − ε̃_PoE. States come from cached plain-PoE trajectories, so training is off the
-  path the adapter later runs on (`scripts/build_training_cache.py:168-170`). The v58 runs use
+  path the adapter later runs on (`3-understanding-compositionality/scripts/build_training_cache.py:168-170`). The v58 runs use
   the clean-image (x0) weighted loss with the weight cap lifted, and train on cached steps 0 to 10.
 - **The loss cannot see one direction.** It sees only `a + b − u`. Adding the same tensor to a
   concept branch and to the empty branch leaves the loss unchanged while sampling reads it at
   −6.5x. Whether trained runs use that direction was never measured (the undialled error in
-  `plans/09-designing-the-correction-loss/MASTER_PLAN.md`).
+  `1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md`).
 - **Optimiser.** AdamW 1e-4, weight decay 0, grad clip 1.0, batch 1. v58 cohort: cosine decay
   over 50k, EMA 0.9999 saved as `lora_state_ema`, checkpoints every 2,500 steps.
 - **Data.** `artifacts/_shared/cross_pair_pool_configs/pair_pool_v58.yaml`: 48 training pairs
@@ -63,8 +63,8 @@ find the recipe, or say plainly which part of it cannot be had and why.
 | v57-11b-x0-self-decay (first run with cosine decay) | `tiiz0c0c` | 40k to 45k | near-identical renders across three checkpoints; clean on elephant×penguin seeds 11 and 15 |
 | the original rank-32 pool adapter | `6xc2l8ix` | | a cat and a dog, blurry |
 
-Figures: `artifacts/results/which-checkpoint-to-take-each-figure-cell-from/latest/`,
-`artifacts/results/which-fidelity-fix-wins/`, `artifacts/results/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png`.
+Figures: `3-understanding-compositionality/artifacts/results/which-checkpoint-to-take-each-figure-cell-from/latest/`,
+`1-lora-correction/artifacts/results/which-fidelity-fix-wins/`, `3-understanding-compositionality/artifacts/results/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png`.
 
 ## The failures, and where each is on disk
 
@@ -73,33 +73,33 @@ Figures: `artifacts/results/which-checkpoint-to-take-each-figure-cell-from/lates
 | one object clean, the other a hybrid (penguin-bodied elephant, lion with a meerkat face, pug-tiger) | `which-fidelity-fix-wins/`, `does-the-fix-reach-unseen-pairs/`, `what-full-step-coverage-changes/` |
 | wrong species or two of one (cat turns into a puppy at 30k on cat×dog seed 42; meerkat drawn as a lion cub) | `which-checkpoint-to-take-each-figure-cell-from/latest/` |
 | a stray third animal or props | cat×dog seeds 9 and 42 across many runs; guidance 10 |
-| grey mush and haze | rank 8 at 450k; v58f at 10k; the adapter's early contrast collapse, −56% over steps 0 to 9 (`plans/09-designing-the-correction-loss/review/06-*`) |
+| grey mush and haze | rank 8 at 450k; v58f at 10k; the adapter's early contrast collapse, −56% over steps 0 to 9 (`1-lora-correction/plans/09-designing-the-correction-loss/review/06-*`) |
 | flat line art or clip art | every corrector; the adapters trained on the 54, 72 and 182-cell pools |
 | invented people | v57-10-x0-contrast on cat×dog seed 9; four broad-pool adapters |
-| the evaluation reference is wrong on held-out seeds (training targets are clean) | the joint prompt drops or adds a concept on 11 of 32 held-out renders; cat×dog seeds 10 and 14 draw two of one animal, so any distance-to-reference score is unreadable there (`report/is-the-adapter-just-copying-the-joint-prompt/does-the-joint-prompt-always-draw-both-concepts.md`) |
+| the evaluation reference is wrong on held-out seeds (training targets are clean) | the joint prompt drops or adds a concept on 11 of 32 held-out renders; cat×dog seeds 10 and 14 draw two of one animal, so any distance-to-reference score is unreadable there (`1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-joint-prompt-always-draw-both-concepts.md`) |
 
 ## Already tried: do not propose these again without a new reason
 
 Each line is settled in the file named. Its failure counts as evidence in the walk.
 
 - **Samplers that add no correction** (twisted SMC, steering on plain PoE, noise search on plain
-  PoE, a Langevin corrector on its own): never produce two animals. `report/is-the-gap-the-samplers-or-the-models/`
+  PoE, a Langevin corrector on its own): never produce two animals. `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`
 - **Feynman-Kac steering**: on plain PoE, 0 of 128 particles compose. On the adapter at λ 0.5
   (`dfrceppl`) it composes 8 of 8, but best-of-16 with no steering also composes 8 of 8, so the
   draws compose on their own and the weights only pick which picture. The count scorer steering
-  on cannot tell a cat and a dog from two dogs. `report/is-the-gap-the-samplers-or-the-models/does-steering-the-corrected-sampler-produce-clean-pairs.md`
+  on cannot tell a cat and a dog from two dogs. `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-steering-the-corrected-sampler-produce-clean-pairs.md`
 - **Render-time fixes on v58-05 @15k**: guidance 10 and 12 change what is in the scene; a fixed
   3/3 expert reweight smears both subjects on 8 of 8 cells; repaint at 0.25 and 0.40 and a
-  20-step handover cannot be told apart from the adapter by eye. `report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md`
+  20-step handover cannot be told apart from the adapter by eye. `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md`
 - **Samplers bolted onto the v58 adapters**: Langevin on the tail, CO3, SuperDiff with the adapter,
   best-of-8. None beat the adapter alone; CO3 turns everything into clip art, SuperDiff into
-  noise texture. `artifacts/results/which-sampling-strategy-helps/`
+  noise texture. `3-understanding-compositionality/artifacts/results/which-sampling-strategy-helps/`
 - **Training longer**: fidelity decays from about 70k (rank 32) and 160k (rank 8); the weight norm
-  grows without bound at weight decay 0. `report/does-training-longer-help-the-pooled-lora/`
+  grows without bound at weight decay 0. `3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/`
 - **Rank 8/16/32/64 and adding self-attention**: no trend, and every comparison so far is mixed
-  (two or more axes differ). `report/what-the-adapter-ablations-show/`
+  (two or more axes differ). `3-understanding-compositionality/report/what-the-adapter-ablations-show/`
 - **Energy penalty**: renders drift toward plain PoE; the adapter already spends about half the
-  true correction's energy. `plans/01-showcase-the-trained-lora/review/22-*`
+  true correction's energy. `1-lora-correction/plans/01-showcase-the-trained-lora/review/22-*`
 - **Adapting only the empty branch**: one-animal clip art. **Training on real photographs**: the
   co-occurrence filter is wrong a third of the time. **CFG++, APG, keeping PoE's norm, manifold
   projection**: null.
@@ -112,7 +112,7 @@ Each line is settled in the file named. Its failure counts as evidence in the wa
 ## What the W&B read found, which the walk should weigh first
 
 - **The saved EMA weights have never been rendered.** Every sheet and every probe loads the raw
-  `lora_state` (`scripts/figure_candidates.py` needs `--ema`, which `scripts/sweep_probe.sbatch`
+  `lora_state` (`1-lora-correction/scripts/figure_candidates.py` needs `--ema`, which `3-understanding-compositionality/scripts/sweep_probe.sbatch`
   never passes). refl-03 also started from the raw weights.
 - **Late renders swing while the weights barely move.** In v58-03 between 40k and 50k the learning
   rate is below 1e-5, the raw weight norm goes 92.55 to 92.69, and the elephant×penguin seed 9
@@ -143,7 +143,7 @@ premise:
 3. **Clean targets still leave room for hybrids.** Every v58 target shows clean co-occurrence, so
    the hybrids are not copied from the targets. Two things the walk should separate: whether the
    CO3-sourced targets carry CO3's flat illustration style into the adapter (CO3 renders poster art
-   on our pairs, `artifacts/results/what-co3-does-on-our-pairs/`), and whether a clean target
+   on our pairs, `3-understanding-compositionality/artifacts/results/what-co3-does-on-our-pairs/`), and whether a clean target
    reached only through an early-window regression still lets the second object borrow the first
    one's features at render time.
 4. **Training off the adapter's own path costs fidelity.** The adapter trains on plain-PoE states
@@ -168,7 +168,7 @@ premise:
 
 - One recipe to train, one number of steps, one stopping rule. Every change is a single axis
   against the current v58-05 recipe, so each comparison stays clean.
-- The correction only works in steps 0 to 10 (`artifacts/results/when-the-correction-must-arrive/`).
+- The correction only works in steps 0 to 10 (`1-lora-correction/artifacts/results/when-the-correction-must-arrive/`).
   The early window is fixed, and whatever the adapter does after step 10 must not cost fidelity.
 - The bar goes in code before the run, in the pattern of `MIN_MEDIAN_RATIO`.
 - Fidelity is judged by eye on a fixed sheet of held-out pairs and seeds as well as by any score,

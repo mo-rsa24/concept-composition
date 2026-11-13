@@ -17,7 +17,7 @@ siblings and the parent scope's map.
 
 ## Abstraction chain
 This scope: subject capstone "The whole measuring tool on one page", process capstone "Five stops
-to a verdict". The parent chain is [the parent map](../diagram-prompts.md), whose art
+to a verdict". The parent chain is [the parent map](../../../plans/diagram-prompts.md), whose art
 direction, palette and glyphs this file inherits; the new pieces here zoom into the reading
 side of the parent's cache stack.
 

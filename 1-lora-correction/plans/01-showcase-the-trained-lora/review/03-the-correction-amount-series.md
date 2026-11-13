@@ -31,7 +31,7 @@ the showcase's causal claim rests on.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 
 - **r̂**: the LoRA's predicted correction, injected at strength λ over steps 0-10.
-- **AUC**: area under the curve of [compose rate](../../../context/world/compose-rate.md)
+- **AUC**: area under the curve of [compose rate](../../../../context/world/compose-rate.md)
   against λ, on a 0-to-1 scale; 1.0 would mean every generation composed at every λ. The cached
   true correction's reference values are 0.387 (real correction) against 0.023 (random), from
   `dose_curves.json`.

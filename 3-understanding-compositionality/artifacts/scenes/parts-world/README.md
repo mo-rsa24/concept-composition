@@ -60,7 +60,7 @@ What stays out: trained networks, any sampler run, the 2D toys' own numbers (lin
 
 **How it was made and checked**
 
-Built on 2026-10-17 by the scene-cadence agent from claim 9 and Runs row 7 of the idea map, the walk's answer key in `artifacts/ideas/poe-overlap-dial/example-9-parts-world/` (`parts_world.py`, `numbers.json`, the .tex and PDF), and the two vault sections above. There was no drip dispatch and no plan capstone, so the notation is the vault section's and the learner's words are the ones quoted above. The shell (header band, question cards, press engine, key table) is copied from the sibling scene in `../when-a-product-reaches-a-and-b/`; only the stage is new.
+Built on 2026-10-17 by the scene-cadence agent from claim 9 and Runs row 7 of the idea map, the walk's answer key in `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/` (`parts_world.py`, `numbers.json`, the .tex and PDF), and the two vault sections above. There was no drip dispatch and no plan capstone, so the notation is the vault section's and the learner's words are the ones quoted above. The shell (header band, question cards, press engine, key table) is copied from the sibling scene in `../when-a-product-reaches-a-and-b/`; only the stage is new.
 
 `node checks/check_page.mjs` passes 77 of 77. The browser pass (`check_scene.mjs --region`, Playwright's Chromium 1243) walked all 10 presses at 390 px dark and 1440 px light with no must-fix items, and every screenshot in `checks/screens/` was looked at. `checks/interact.out` records the controls exercised, with no console errors.
 

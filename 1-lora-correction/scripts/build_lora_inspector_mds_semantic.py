@@ -35,11 +35,11 @@ Stages (composable via --stages):
 
 A typical sequence::
 
-    python scripts/build_lora_inspector_mds_semantic.py \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds_semantic.py \\
         --epochs 0,200,800,1600 \\
         --stages collect-static,collect-cells,project,align,render-large,update-manifest
 
-The validation gate (``scripts/cross_seed_lora_pooling/smoke_dino_distance.py``)
+The validation gate (``1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py``)
 must PASS before running this script.
 """
 from __future__ import annotations
@@ -51,7 +51,7 @@ import sys
 from pathlib import Path
 from poe_repair import paths
 
-_REPO_ROOT = Path(__file__).resolve().parents[1]
+_REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
@@ -94,7 +94,7 @@ from scripts.build_lora_inspector_mds import (  # noqa: E402  (path-mod import)
 
 log = logging.getLogger("build_lora_inspector_mds_semantic")
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_RESULTS = paths.resolve(paths.ONE_PAIR_ONE_SEED) / "a_cat__x__a_dog/seed_42/run__local"
 DEFAULT_PAIR_SLUG = "a_cat__x__a_dog"
 
@@ -648,7 +648,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest_path = results_root / "inspector_manifest.json"
     if not manifest_path.is_file():
         log.error("no inspector_manifest.json at %s — run "
-                  "scripts/build_lora_manifest.py first", manifest_path)
+                  "1-lora-correction/scripts/build_lora_manifest.py first", manifest_path)
         return 2
     manifest = json.loads(manifest_path.read_text())
     all_epochs = [int(e) for e in manifest["epochs"]]

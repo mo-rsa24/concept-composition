@@ -21,5 +21,5 @@ The bundle deliberately excludes generated build files, the compiled manuscript 
 Regenerate the bundle from the repository root with:
 
 ```bash
-scripts/make_overleaf_bundle.sh
+1-lora-correction/scripts/make_overleaf_bundle.sh
 ```

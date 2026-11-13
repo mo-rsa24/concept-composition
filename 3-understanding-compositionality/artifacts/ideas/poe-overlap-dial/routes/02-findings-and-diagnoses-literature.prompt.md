@@ -1,6 +1,6 @@
 /paper-scout Find the literature on how chest X-ray labels split into findings and diagnoses, and how those labels compose, so the project's medical composition terms rest on citations.
 
-Context (cold start). Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. Read artifacts/ideas/poe-overlap-dial/composition-terms.md first, especially "The kinds, with examples" and "Findings, diagnoses and diseases", both marked [proposed]. Route 1's return (routes/01-composition-taxonomy-literature.return.md) covers the general composition literature; this route covers the medical side only.
+Context (cold start). Repo: /home-mscluster/mmolefe/PhD/reduce-reuse-recycle. Read 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md first, especially "The kinds, with examples" and "Findings, diagnoses and diseases", both marked [proposed]. Route 1's return (routes/01-composition-taxonomy-literature.return.md) covers the general composition literature; this route covers the medical side only.
 
 The terms to check, with the project's current examples:
 - finding: a visible sign (cardiomegaly, pleural effusion, pleural line)
@@ -25,4 +25,4 @@ Use `differences` at the end of each walk.
 
 Write-back: add citations under the [proposed] medical entries in composition-terms.md, with a confidence flag per citation. Do not rewrite [yours] or [proposed] text; put changes in "Proposed changes from the literature". Do not edit IDEA_MAP.md.
 
-Return: write artifacts/ideas/poe-overlap-dial/routes/02-findings-and-diagnoses-literature.return.md with (1) the shortlist with ids, (2) per term, whether the literature supports, splits or contradicts it, (3) the measured drain rate among NIH pneumothorax images with its source, (4) whether any chest X-ray generator composes findings from separate models.
+Return: write 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/02-findings-and-diagnoses-literature.return.md with (1) the shortlist with ids, (2) per term, whether the literature supports, splits or contradicts it, (3) the measured drain rate among NIH pneumothorax images with its source, (4) whether any chest X-ray generator composes findings from separate models.

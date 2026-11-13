@@ -1,6 +1,6 @@
 """SynGen (Rassin et al. 2023) ported to SDXL: the joint-prompt sampler with SynGen's latent update on steps 0 to 24.
 
-Plan: artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
+Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
 
 `run_cfg_syngen` is the body of `run_cfg` in poe_repair/methods/_sampling.py (plain single-prompt CFG on SDXL, the sampler
 behind the joint column of Table 1) with SynGen's `_syngen_step` inserted at the top of each of the first 25 of 50 steps,
@@ -12,7 +12,7 @@ What is SynGen's own code, imported unedited from the clone at /datasets/mmolefe
 (commit 50b8eab): the loss (`SynGenDiffusionPipeline._compute_loss`, `_attribution_loss`, `_calculate_losses`, and through
 them compute_loss.py's positive and negative losses), `_get_attention_maps_list`, and diffusers' `AttentionStore` and
 `AttendExciteAttnProcessor`, which SynGen imports the same way. The parse is SynGen's too, run beforehand in its own
-environment (scripts/review_syngen_indices.py), because co3 has no spaCy; the released module's `import spacy` is given an
+environment (1-lora-correction/scripts/review_syngen_indices.py), because co3 has no spaCy; the released module's `import spacy` is given an
 empty stand-in here so the module loads, and no spaCy call is made.
 
 What is adapted for SDXL, and why:

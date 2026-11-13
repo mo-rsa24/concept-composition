@@ -55,7 +55,7 @@ Source at `sketchpad.html` beside this file.
 
 Pointed at, never redrawn.
 
-- **Why the latent is 128×128×4.** [the SDXL VAE architecture map](../../scenes/sdxl-vae-architecture-map/README.md)
+- **Why the latent is 128×128×4.** [the SDXL VAE architecture map](../../../../artifacts/scenes/sdxl-vae-architecture-map/README.md)
   already answers this from a real shape trace of `AutoencoderKL`. Chunk 1 links to it and states
   the result in one line.
 - **What the cached trajectories contain, as curves.**
@@ -75,10 +75,10 @@ Pointed at, never redrawn.
 **Settled in 5a.** The empty prompt is not a zero vector and not a special token. It is `""` through
 the same CLIP tokenisers, giving token ids `[49406, 49407, 49407, ...]`, one non-pad token padded to
 77, then a full `77 x 2048` sequence. Verified against `cross_trace.json` in
-[the SDXL VAE map](../../scenes/sdxl-vae-architecture-map/README.md).
+[the SDXL VAE map](../../../../artifacts/scenes/sdxl-vae-architecture-map/README.md).
 
 **Rendered, and the prediction was wrong.** Three renders on mscluster109 device 0, seed 9, 50
-steps, about 11 seconds each, by `scripts/showcase/render_empty_prompt.py`; output under
+steps, about 11 seconds each, by `1-lora-correction/scripts/showcase/render_empty_prompt.py`; output under
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/empty_prompt/`.
 
 The empty prompt was predicted to give something washed out and subjectless. Subjectless is right.
@@ -141,10 +141,10 @@ Four panels behind the loss node, all measured, none of it previously drawn.
 
 | # | what it shows | where the numbers came from |
 |---|---|---|
-| 1 | the plane itself: u at the origin, a and b as arrows, a+b-u as the parallelogram corner, the joint's shadow, and the out-of-plane part as its own flat bar | `scripts/showcase/composition_plane_coords.py`, cache only, no GPU |
+| 1 | the plane itself: u at the origin, a and b as arrows, a+b-u as the parallelogram corner, the joint's shadow, and the out-of-plane part as its own flat bar | `1-lora-correction/scripts/showcase/composition_plane_coords.py`, cache only, no GPU |
 | 2 | the angle between the cat and dog directions over the run | derived in the browser from the same coordinates |
 | 3 | the weights each expert would actually need, against the 7.5 PoE uses | same |
-| 4 | where the trained adapter lands in the same frozen frame | `scripts/showcase/adapter_in_the_plane.py`, 312 forwards, under a minute |
+| 4 | where the trained adapter lands in the same frozen frame | `1-lora-correction/scripts/showcase/adapter_in_the_plane.py`, 312 forwards, under a minute |
 
 **What the descent turned up.**
 

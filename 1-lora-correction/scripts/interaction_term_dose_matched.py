@@ -26,14 +26,14 @@ the same sampler it used: ``run_window_batch``, which already takes lambda as an
 [cells, steps] tensor. Building that tensor is the whole of the mechanism.
 
 Routing them through ``teacher_residual.run`` instead would look equivalent and
-is not. `scripts/check_fixed_schedule.py` compared the two paths on one cell with
+is not. `1-lora-correction/scripts/check_fixed_schedule.py` compared the two paths on one cell with
 byte-identical per-step lambdas and got a mean difference of 2.6 grey levels of
 255: the sweep runs a different conditioning path, recorded in its summaries as
 ``block=window, cond_tag=all``. A dose-matched cell built the other way would
 differ from the sweep for reasons having nothing to do with dose.
 
-    python scripts/interaction_term_dose_matched.py --mode matched --dry-run
-    python scripts/interaction_term_dose_matched.py --mode matched --seeds 9,10,11,12
+    python 1-lora-correction/scripts/interaction_term_dose_matched.py --mode matched --dry-run
+    python 1-lora-correction/scripts/interaction_term_dose_matched.py --mode matched --seeds 9,10,11,12
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from poe_repair.composers._helpers import (  # noqa: E402

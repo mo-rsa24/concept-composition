@@ -19,7 +19,7 @@ catalogs, and adds new entries. New errors propagate to all affected plan files.
 ## Position in the plan tree
 
 **Step 6 of 22.** Waits on steps 4 and 5. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -60,7 +60,7 @@ Design only. Verdicts and run state live in
 ## What this asks, in one line
 
 Let the correction act only inside a narrow window of the 50 denoising steps, slide that
-window from start to finish, and measure the [compose rate](../../../../context/world/compose-rate.md)
+window from start to finish, and measure the [compose rate](../../../../../context/world/compose-rate.md)
 at each position. A peak says
 when the correction is needed; a flat curve says it is needed throughout.
 
@@ -103,7 +103,7 @@ driving the correction-timing tab by hand in the inspector.
 **Associated materials**
 
 - Review file, the status source: [../review/hypothesis-03-when-in-the-run-it-matters.md](../../review/05-when-in-the-run-it-matters.md)
-- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../paper/iclr/figures.md), rows F4a to F4h
+- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../../paper/iclr/figures.md), rows F4a to F4h
 - Grid definition both runner and scorer read: `poe_repair/experiments/interaction_term/window_grid.py`
 
 **For the full picture**
@@ -127,7 +127,7 @@ Steps 4 and 5. Step 5 supplies the fork step this experiment's peak is compared 
 
 **Environment Facts This Plan Depends On**
 
-- The W2 runner is `scripts/interaction_term_window.py` over `run_teacher_residual`'s
+- The W2 runner is `1-lora-correction/scripts/interaction_term_window.py` over `run_teacher_residual`'s
   `correction_window`, which switches only the injected r_t on and off and leaves conditioning on
   at every step. Never reuse W1's way of dropping the unconditional branch outside the window for
   W2, that confounds losing-the-correction with losing-conditioning.
@@ -232,7 +232,7 @@ from the correction's size: make the window as wide as the narrowest band of
 steps carrying half of the total ‖r_t‖. That rule gives 25 steps, half the
 trajectory, because ‖r_t‖ barely changes over the run: each fifth of the run
 carries 15-22% of the total and the largest step is 1.8x the smallest
-(`scripts/window_width.py`, artifact `cache_analyses/window_width.json`). At
+(`1-lora-correction/scripts/window_width.py`, artifact `cache_analyses/window_width.json`). At
 width 25 every placement contains the fork step, so the curve would come out
 flat whatever the truth is, and the experiment would test nothing.
 
@@ -271,7 +271,7 @@ same sampler as the window series.
 
 **Purpose**
 
-It measures causally when the [interaction term](../../../../context/world/interaction-term.md) is needed, with no window assumed
+It measures causally when the [interaction term](../../../../../context/world/interaction-term.md) is needed, with no window assumed
 in advance. The peak is then compared against the fork step, which is the same
 moment estimated a different way, from cached trajectories rather than from new
 runs. Serves DoD 4 and Goal 2.
@@ -289,7 +289,7 @@ window positions with the scorer's verdict on each.
   the three-window first short run fits the in-session GPU.
 - `run_window_sweep.sh` writes under `$POE_REPAIR_OUTPUT_ROOT`, which must point at `/datasets`
   before launching a full grid, per the disk guard rule in
-  [environment/storage.md](../../../../environment/storage.md).
+  [environment/storage.md](../../../../../environment/storage.md).
 
 ## Tasks
 
@@ -301,17 +301,17 @@ window positions with the scorer's verdict on each.
 
 - [x] **1.1** The W2 runner: r_t injection switched on only inside the window, on an always-conditioned PoE
       base, and prove the λ=0-outside-window case equals plain PoE exactly.
-      `scripts/interaction_term_window.py --window off --check-identity`.
+      `1-lora-correction/scripts/interaction_term_window.py --window off --check-identity`.
 - [x] **1.2** Fix the window width and the grid in source, from the ‖r_t‖-vs-step
       curve. The section above records what the curve actually supports.
-      `scripts/window_width.py`, `window_grid.py`.
+      `1-lora-correction/scripts/window_width.py`, `window_grid.py`.
 - [x] **1.3** A first short run in-session on one pair, one seed, three windows: early, over the
-      fork step, and late. `SMOKE=1 bash scripts/mechanism_study/run_window_sweep.sh`.
+      fork step, and late. `SMOKE=1 bash 1-lora-correction/scripts/mechanism_study/run_window_sweep.sh`.
 - [x] **1.4** Full W2 grid: 288 runs, resumable, then score every image.
-      `bash scripts/mechanism_study/run_window_sweep.sh`, then
-      `python scripts/plot_window_curves.py`.
-- [x] **1.5** The curve and the image strips. `scripts/plot_window_curves.py` for the
-      curve with the fork step drawn on it, `scripts/window_strip.py` for the
+      `bash 1-lora-correction/scripts/mechanism_study/run_window_sweep.sh`, then
+      `python 1-lora-correction/scripts/plot_window_curves.py`.
+- [x] **1.5** The curve and the image strips. `1-lora-correction/scripts/plot_window_curves.py` for the
+      curve with the fork step drawn on it, `1-lora-correction/scripts/window_strip.py` for the
       same run across all nine windows.
 
 ▶ **Next: task 2.1**, the runs that untie timing from amount.
@@ -321,19 +321,19 @@ window positions with the scorer's verdict on each.
 ◀ **Needs: tasks 1.4 and 1.5**, so the nine-window curve exists to be challenged.
 
 - [x] **2.1** The swap run: give the late window exactly the correction total that works early,
-      cat × dog, four seeds. `scripts/interaction_term_dose_matched.py --mode swap`, artifacts
+      cat × dog, four seeds. `1-lora-correction/scripts/interaction_term_dose_matched.py --mode swap`, artifacts
       `dose_matched/swap_manifest.json` and `swap_scores.json`.
 - [x] **2.2** The matched run: rescale every one of the nine windows to deliver the same total,
       then re-score. `--mode matched`, artifact `dose_matched/matched_scores.json`.
 - [x] **2.3** The front-loaded and back-loaded series: five prefix cutoffs with the correction on
-      then off, and five suffix cutoffs with it off then on. `scripts/longer_correction_grid.py`,
+      then off, and five suffix cutoffs with it off then on. `1-lora-correction/scripts/longer_correction_grid.py`,
       `later_start_grid.py`, `plot_growing_window_curves.py`, scored into
       `growing_window_curves.json`.
 - [x] **2.4** Build the eight F4 figures from the scored files.
       `size_vs_timing.py`, `window_position_grid.py`, `window_map_all_pairs.py`, `timing_vs_dose.py`,
       `timing_cliff_matched_dose.py`, `longer_correction_grid.py`, `later_start_grid.py`, `caption_readback.py`.
 - [x] **2.5** Build the manifest the inspector's timing tab reads.
-      `scripts/build_window_manifest.py`, artifact `window/window_inspector_manifest.json`.
+      `1-lora-correction/scripts/build_window_manifest.py`, artifact `window/window_inspector_manifest.json`.
 
 ▶ **Next: instruction 3.1**, which drives that manifest by hand.
 
@@ -351,7 +351,7 @@ them.
 ◀ **Needs: task 2.5** done, so `window_inspector_manifest.json` exists for the tab to read.
 
 3.1 **Start the inspector and open the tunnel**
-   - On the cluster node: `bash scripts/run_lora_inspector.sh`
+   - On the cluster node: `bash 1-lora-correction/scripts/run_lora_inspector.sh`
    - It prints an `ssh -L` line. Paste that line into a second terminal on your laptop and leave
      it running: the app is served on the node, so without the forward the URL resolves to nothing
    - Open the forwarded `localhost` URL in a browser
@@ -494,27 +494,27 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/window
 
 # The leak check: nothing injected must leave the trajectory untouched.
-$PY scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 \
+$PY 1-lora-correction/scripts/interaction_term_window.py --pair a_cat__x__a_dog --seed 9 \
     --window off --check-identity        # expect: byte-identical to PoE
 
 # The grid. Resumable, skips any run whose image exists.
-bash scripts/mechanism_study/run_window_sweep.sh
+bash 1-lora-correction/scripts/mechanism_study/run_window_sweep.sh
 find $OUT/pairs -name '*_w*.png' | wc -l  # expect 288 for the sliding window series
 
 # Score, then the two halves of F4, then the manifest the inspector reads.
-$PY scripts/plot_window_curves.py         # curve + peak band, prints missing windows
-$PY scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
-$PY scripts/build_window_manifest.py
+$PY 1-lora-correction/scripts/plot_window_curves.py         # curve + peak band, prints missing windows
+$PY 1-lora-correction/scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
+$PY 1-lora-correction/scripts/build_window_manifest.py
 
 # Drive it by hand: the Correction timing tab.
-bash scripts/run_lora_inspector.sh        # prints the ssh -L line to tunnel with
+bash 1-lora-correction/scripts/run_lora_inspector.sh        # prints the ssh -L line to tunnel with
 ```
 
-**File:** [scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py)
+**File:** [1-lora-correction/scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py)
 **What it does:** switches the injected r_t on only inside `run_teacher_residual`'s
 `correction_window`, leaving conditioning on at every step. `--check-identity` is the leak check.
 
-**File:** [scripts/interaction_term_dose_matched.py](../../../scripts/interaction_term_dose_matched.py)
+**File:** [1-lora-correction/scripts/interaction_term_dose_matched.py](../../../scripts/interaction_term_dose_matched.py)
 **What it does:** `--mode swap` crosses the early and late windows against each other's delivered
 total; `--mode matched` rescales all nine windows to one total.
 
@@ -529,7 +529,7 @@ inspector all read it, so no two of them can disagree about which grid was run.
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 Two pieces in the scope's illustrated map,
-[plans/diagram-prompts.md](../../../diagram-prompts.md), both
+[plans/diagram-prompts.md](../../../../../plans/diagram-prompts.md), both
 marked `[planned]`. They use the map's pinned cast, so they read as part of that set rather than
 as one-off pictures.
 
@@ -539,7 +539,7 @@ Nine step strips stacked, each with its window bracket one notch further right, 
 drawn as a vertical guide crossing only two of them. What the experiment is made of, with no
 sequencing in it.
 
-*(image not yet generated; save under `plans/03-does-the-correction-cause-composition/assets/` and link it here)*
+*(image not yet generated; save under `1-lora-correction/plans/03-does-the-correction-cause-composition/assets/` and link it here)*
 
 **Prompt 2a (Process): the stages that produced the timing answer**
 

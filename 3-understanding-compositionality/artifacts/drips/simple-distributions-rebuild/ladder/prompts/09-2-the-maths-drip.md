@@ -8,7 +8,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 /drip --math score matching as regression, and why the score residual is the gradient of r_t
 
 Background
-This is layer 9 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: a
+This is layer 9 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: a
 correction network trained to add back what composition misses. The maths comes before the build,
 and teaches only the derivation the build needs. I have passed quiz 9.1; any question it marked
 missed becomes a first rung.
@@ -24,11 +24,11 @@ Objectives
 
 What to read
 - The conditional-mean and training-loss chapters on the Study first line of
-  artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md: the
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md: the
   regression argument.
-- artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, step 2: layer 1's
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, step 2: layer 1's
   identity.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, bricks "The interaction term,
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, bricks "The interaction term,
   exact" and "The correction, learned back": the identity and the two losses.
 - toy/rebuild/out/walk-numbers.json, the p8. keys: the worked point.
 - The layer 8 --math drip folder under artifacts/drips/ and its dispatch.md: my notation for r(x),

@@ -51,7 +51,7 @@ Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of
 **The experiment.** Run the commitment test over the full grid: three families, all cached
 pairs and seeds, all 50 steps, two prompt passes (joint prompt; expert pair), three stability
 copies per read. From it: the speciation table per pair-and-seed run, the per-step
-counterfactual [compose-rate](../../../../context/world/compose-rate.md) curves per family,
+counterfactual [compose-rate](../../../../../context/world/compose-rate.md) curves per family,
 destination filmstrips for chosen runs, and the three-timestamp figure.
 
 > **Speciation** is the field's word for the step at which the outcome stops being undecided.
@@ -96,7 +96,7 @@ pass; outputs to `/datasets/mmolefe/poe_repair_min/outputs/commitment/grid/`.
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- The `co3` absolute python path; see [the environment index](../../../../environment/00-INDEX.md).
+- The `co3` absolute python path; see [the environment index](../../../../../environment/00-INDEX.md).
 - Long runs outside Slurm run with `nohup` on the session node (biggpu allows one job per
   user); harvest reads the queue, the node's processes, and the output count.
 - Large artifacts to `/datasets` only; disk guard on the target filesystem.
@@ -155,10 +155,10 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The grid runner** `scripts/commitment/grid_sweep.py`: both prompt passes, stability copies,
+1. **The grid runner** `1-lora-correction/scripts/commitment/grid_sweep.py`: both prompt passes, stability copies,
    measuring tool chosen by plan 04's `verdict.json`, per-family counts printed, resumable,
    rows to `grid/speciation.json` and per-step scores to `grid/scores.json`.
-2. **The figure scripts** `scripts/commitment/figures.py`: the three-timestamp figure, the
+2. **The figure scripts** `1-lora-correction/scripts/commitment/figures.py`: the three-timestamp figure, the
    per-family compose-rate curves, filmstrips for the pair-and-seed runs named in the review
    file before the run, the PCA overlay with its explained-variance number printed on the axes,
    and the scatter of predictor speciation against drift settling.
@@ -198,7 +198,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 verdict recorded, and the filmstrip runs named in
 [the review file](../../review/05-the-grid-and-the-figures.md) before anything runs.
 
-- [ ] **1.1** Write `scripts/commitment/grid_sweep.py` per the Description; `--dry-run` prints
+- [ ] **1.1** Write `1-lora-correction/scripts/commitment/grid_sweep.py` per the Description; `--dry-run` prints
   the grid size per family and the measuring tool the verdict chose.
   - **Done when:** the dry run's counts match the cache and the chosen tool is printed.
 - [ ] **1.2** Time one family slice and extrapolate; record the cost of both tools in the Runs
@@ -216,10 +216,10 @@ verdict recorded, and the filmstrip runs named in
   logging on.
 
     ```bash
-    co3 python scripts/commitment/grid_sweep.py --sweep joint --stability 3 \
+    co3 python 1-lora-correction/scripts/commitment/grid_sweep.py --sweep joint --stability 3 \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/grid/ \
       --wandb prime_lab/poe-repair-animals-compose
-    co3 python scripts/commitment/grid_sweep.py --sweep experts --stability 3 \
+    co3 python 1-lora-correction/scripts/commitment/grid_sweep.py --sweep experts --stability 3 \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/grid/ \
       --wandb prime_lab/poe-repair-animals-compose
     ```
@@ -337,7 +337,7 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** `scripts/commitment/grid_sweep.py` (new)
+**File:** `1-lora-correction/scripts/commitment/grid_sweep.py` (new)
 
 ```python
 SPECIATION_EARLY_MAX = 10   # clustering at or below means the run decided early

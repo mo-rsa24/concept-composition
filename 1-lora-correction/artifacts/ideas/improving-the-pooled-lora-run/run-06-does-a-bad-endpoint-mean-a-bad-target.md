@@ -6,7 +6,7 @@ The `break` on claim 7. The adapter is never trained on `mono.png`; it is traine
 prompt rather than of where one deterministic trajectory landed. If a bad endpoint is a sampling
 accident, dropping the cell throws away a usable target.
 
-Script `scripts/showcase/residual_direction_by_target_quality.py`, cached tensors only, no model
+Script `1-lora-correction/scripts/showcase/residual_direction_by_target_quality.py`, cached tensors only, no model
 forward, in-session 2026-09-08. Output
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/`. Ground truth is the eye
 labels for lion x tiger from run 5: seeds 1, 3, 4, 6 good, seed 5 a single blended face, seeds

@@ -10,7 +10,7 @@ In the background, prepare and build layer 3's two quizzes for the composition l
 quiz 3.1 and quiz 3.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 3 builds the ideal expert, the
 training points smoothed by a Gaussian, and grades every composition against an exact target. Each
 layer opens on two quizzes, one on the college maths underneath it and one on the layer itself.
@@ -31,9 +31,9 @@ Objectives
 5. Write each published URL into its ladder step.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, its
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, its
   Study first line: the material for quiz 3.1.
-- artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md: the material
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md: the material
   for quiz 3.2, with a textbook page and timed video segments beside each fundamental it uses.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -83,7 +83,7 @@ What is already known
 - The exact measures of the four kinds the goal needs are intersection 0.71, co-occurrence 0.81,
   contention 0.67 and interaction −0.41 (step file 03, steps 5, 7, 8 and 10).
 - Trained 2D networks match the ideal experts within 0.04 nats
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 2).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 2).
 
 Rules
 - Change nothing in the step files' prose or in toy/rebuild/.
@@ -92,13 +92,13 @@ Rules
   built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 3.1's URL in step 1 and quiz 3.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, each
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, each
   replacing "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and
   the two URLs open.

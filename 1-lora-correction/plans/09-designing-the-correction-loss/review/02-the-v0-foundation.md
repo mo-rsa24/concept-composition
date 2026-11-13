@@ -1,6 +1,6 @@
 # 📚 Review: at matched steps, does rank change what the adapter reaches?
 
-Nothing has run. This file judges [the design](../plans/reading/02-the-v0-foundation.md), which writes the six pillar files, the chart script and `00`'s page. Its bar was pre-registered elsewhere and never answered: `plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` fixed the seed-noise band as the threshold before the rank 16 and rank 32 trainings ran, and the report published from those runs explicitly declined to answer it.
+Nothing has run. This file judges [the design](../plans/reading/02-the-v0-foundation.md), which writes the six pillar files, the chart script and `00`'s page. Its bar was pre-registered elsewhere and never answered: `1-lora-correction/plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` fixed the seed-noise band as the threshold before the rank 16 and rank 32 trainings ran, and the report published from those runs explicitly declined to answer it.
 
 ## Recommended prompt (when the run lands)
 
@@ -33,7 +33,7 @@ Nothing has run. This file judges [the design](../plans/reading/02-the-v0-founda
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 
-- **The seed-noise band**: the spread of held-out compose rate across the eight held-out cat × dog seeds at one reference checkpoint. Its definition is fixed in `plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` and is used as written.
+- **The seed-noise band**: the spread of held-out compose rate across the eight held-out cat × dog seeds at one reference checkpoint. Its definition is fixed in `1-lora-correction/plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` and is used as written.
 - **Matched steps**: two ranks compared at the same optimizer step. Rank 8 at 30k against rank 16 at 50k is two axes and says nothing about rank.
 - **Drift**: the DINOv2 distance from the corrected render to the joint-prompt render minus its distance to the plain product render. More negative is closer to the target.
 - **Reproducible**: a figure that one command redraws from a file in the repository. The eight existing figures are not, because the script that drew them was kept in a session scratchpad.

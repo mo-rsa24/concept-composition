@@ -1,7 +1,7 @@
 # Does the window where the correction works move with the pair?
 
 **EXP-04 of [EXPERIMENTS.md](../../../EXPERIMENTS.md).** Run 2026-08-12, no GPU: the window sweep
-already existed. `python scripts/window_vs_commitment.py` → `result.json`,
+already existed. `python 1-lora-correction/scripts/window_vs_commitment.py` → `result.json`,
 `window-vs-commitment.png`.
 
 **Why it was asked.** EXP-01 found that the step where a run's picture settles varies from pair to

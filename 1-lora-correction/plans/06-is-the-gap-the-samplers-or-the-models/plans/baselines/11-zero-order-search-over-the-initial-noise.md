@@ -20,7 +20,7 @@ the early-window correction has a training-free rival that forks at step 0.
 
 **Unnumbered until the next sync; proposed step 56 of 56.** Waits on nothing: the pinned initial
 noise it reads exists in the training cache, and the detector is validated. The one order is the
-`## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md); the row
+`## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md); the row
 for this plan is queued in
 [the pending-sync list](../../../../artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/PENDING_SYNC.md).
 
@@ -99,7 +99,7 @@ unperturbed seed does?
 sampler that also captures x0-hat at the early step, the pick rule and the bars (`search.py`); the
 runner that renders references, candidates and sheets, scores everything, writes the sidecar and
 the both-ness read, and logs to W&B (`run.py`). Launched by
-`scripts/noise_search/run_noise_search.sh`.
+`1-lora-correction/scripts/noise_search/run_noise_search.sh`.
 
 **What it does.** Ma et al., "Inference-Time Scaling for Diffusion Models beyond Scaling Denoising
 Steps" ([arXiv 2501.09732](https://arxiv.org/abs/2501.09732), unpacked in
@@ -119,7 +119,7 @@ step-10 verifier. Every tile is a plain-PoE render from some starting noise; onl
 
 **Associated materials.** [The review questions](../../review/11-zero-order-search-over-the-initial-noise.md),
 [plan 10](10-feynman-kac-steering-on-a-detector-reward.md) for the shared sampler pieces and the
-sheet drawer, and [the register row](../../../standing/literature/reading-register.md) for the
+sheet drawer, and [the register row](../../../../../plans/standing/literature/reading-register.md) for the
 paper.
 
 ## Considerations
@@ -255,7 +255,7 @@ zero-order search at two step sizes with the same scorer as verifier.
    `summary.json`, `verdict.json`; both-ness of every cat × dog tile on the landing finding's axes
    (`bothness.json`), with a `--bothness-only` mode for a node without network; W&B run in
    `prime_lab/poe-repair-animals-compose`, group `noise-search`.
-3. **The launcher.** `scripts/noise_search/run_noise_search.sh {smoke|full}` with the disk guard on
+3. **The launcher.** `1-lora-correction/scripts/noise_search/run_noise_search.sh {smoke|full}` with the disk guard on
    the output root, the python-by-node switch, the faulted-device guard (`poe-launch-002`) and a
    `torch.cuda.is_available()` check on the pinned device before any model loads.
 
@@ -283,12 +283,12 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 
 - Python by node: `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python` on mscluster110 to
   112 (Blackwell), `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` elsewhere, per
-  [environment/hpc/nodes.md](../../../../environment/hpc/nodes.md). Never a bare `python`.
+  [environment/hpc/nodes.md](../../../../../environment/hpc/nodes.md). Never a bare `python`.
 - `torch.cuda.is_available()` checked on the pinned device before real work; a faulted card lists
   in `nvidia-smi` and runs on the CPU, per
-  [poe-launch-002](../../../../environment/known-failures.md).
+  [poe-launch-002](../../../../../environment/known-failures.md).
 - Outputs under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/`, disk
-  guard on that path, per [environment/storage.md](../../../../environment/storage.md). Nothing
+  guard on that path, per [environment/storage.md](../../../../../environment/storage.md). Nothing
   under `/home-mscluster`.
 - The training cache at `/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/` with
   `embeddings.pt` per cell: cat × dog seeds 9 to 16, butterfly × meadow seeds 9 to 12.
@@ -300,7 +300,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 - biggpu allows one Slurm job per user; long runs start with `nohup` on a free device and
   `squeue` is blind to them; check `pgrep -af 'sweep|train|corrector|noise_search'` before
   claiming a device, per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - The tracker is W&B, project `prime_lab/poe-repair-animals-compose`; the review file carries the
   run id and verdict, never curves.
 - fp16 SDXL; the VAE decodes in fp32.
@@ -330,8 +330,8 @@ nudge of the noise away, the sampler's share is large and reachable without any 
       verifier on the finished image, and the missing perturbation formula.
   - Paste: `/unpack-paper https://arxiv.org/abs/2501.09732`
   - Done when: the register row for 2501.09732 exists in
-    [the reading register](../../../standing/literature/reading-register.md) and the note is
-    filed under `artifacts/notes/inference-time-scaling-as-a-search-over-noise/`.
+    [the reading register](../../../../../plans/standing/literature/reading-register.md) and the note is
+    filed under `1-lora-correction/artifacts/notes/inference-time-scaling-as-a-search-over-noise/`.
 - [x] **1.2** Write the random-search row at N 8 into the review file from the existing renders:
       plain PoE and the rank-32 λ 1.2 run on cat × dog seeds 9 to 16, from
       `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/results.json`, and their
@@ -350,13 +350,13 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 ◀ **Needs: [task 1.3](#1--read-the-paper-and-write-the-free-row)**, the bars in source.
 
 - [x] **2.1** Write `poe_repair/experiments/noise_search/` (search, runner) and the launcher
-      `scripts/noise_search/run_noise_search.sh`.
+      `1-lora-correction/scripts/noise_search/run_noise_search.sh`.
   - **Done when:** the package imports, `perturb` returns unit-variance candidates at the expected
     cosine to the pivot, `pick` breaks ties by confidence then index, and `verdict` returns
     support, null and inconclusive on hand-made rates.
 - [x] **2.2** Run the smoke mode on a free device: cat × dog seed 9 only, N 2, σ 0.3, 10 steps,
       512², x0-hat captured at step 2, detector on, W&B off.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/smoke.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/smoke.log 2>&1 &'`
   - **Done when:** the run dir holds `mono_eta0.png`, `poe_pivot.png`, its step-2 x0-hat, a
     `sigma_0.3/` folder with two finals, two x0-hats and `run.json`, a one-row sheet with its
     sidecar, `summary.json` and `verdict.json`, and the log shows the device name and `cuda`
@@ -373,7 +373,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 
 - [x] **3.1** Launch the full mode with `nohup` on a free device: both pairs, seeds 9 to 16, σ 0.1
       and 0.3, N 8, 50 steps, 1024², W&B online.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`
   - 💡 `/run-experiment` ✅ for the launch and the harvest.
   - **Done when:** the W&B run id, the run dir, the node, the device and the PID are in the review
     file's Runs table.
@@ -381,9 +381,9 @@ nudge of the noise away, the sampler's share is large and reachable without any 
     dir `zo_N8_s50_20260905-183320`; finished 20:27.
 - [x] **3.2** Harvest: if `bothness.json` is missing, run
       `--bothness-only --run-id <run>` on the session node; copy the two sheets, `summary.json`
-      and `bothness.json` into `artifacts/results/is-the-gap-the-samplers-or-the-models/` with
+      and `bothness.json` into `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with
       README entries; quote `verdict.json` in the review file; answer every pre-registered question
-      there; write the finding in `report/is-the-gap-the-samplers-or-the-models/`.
+      there; write the finding in `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`.
   - **Done when:** the review file's verdict is written and the finding exists.
 
 ▶ **Next: [instruction 4.1](#4--read-the-sheets)**.
@@ -412,7 +412,7 @@ them.
 
 ◀ **Needs: [task 3.2](#3--the-full-run)**, the sheets filed.
 
-- [ ] **4.1** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png`.
+- [ ] **4.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png`.
       Row by row, write down whether a kept tile that counts 2 shows two bodies or one fused
       animal with two detected parts. A "compose" that is a fused face is a detector error, and
       its both-ness in `noise-search-bothness.json` should sit near the PoE band (about 0.2) rather
@@ -493,7 +493,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the run dir on `/datasets`.
 2. The two sheets, `summary.json` and `bothness.json` promoted to
-   `artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-cat-dog-sheet.png`,
+   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-cat-dog-sheet.png`,
    `noise-search-butterfly-meadow-sheet.png`, `noise-search-summary.json` and
    `noise-search-bothness.json`, with README entries.
 
@@ -520,12 +520,12 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/experiments/noise_search/search.py](../../../../poe_repair/experiments/noise_search/search.py) | the perturbation, the batched sampler with the early capture, the pick rule, the constants, the verdict |
-| [poe_repair/experiments/noise_search/run.py](../../../../poe_repair/experiments/noise_search/run.py) | the runner, the sheets, the sidecar, the both-ness read, W&B |
-| [poe_repair/experiments/fk_steering/run.py](../../../../poe_repair/experiments/fk_steering/run.py) | the pinned-noise loader, the detector wrapper and the sheet drawer this plan reuses |
-| [poe_repair/experiments/twisted_smc/sampler.py](../../../../poe_repair/experiments/twisted_smc/sampler.py) | the DDIM step and the Mono reference sampler |
-| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count, used as the verifier and the judge |
-| [scripts/showcase/where_each_condition_lands_plot.py](../../../../scripts/showcase/where_each_condition_lands_plot.py) | the cloud axes the both-ness read reproduces |
+| [poe_repair/experiments/noise_search/search.py](../../../../../poe_repair/experiments/noise_search/search.py) | the perturbation, the batched sampler with the early capture, the pick rule, the constants, the verdict |
+| [poe_repair/experiments/noise_search/run.py](../../../../../poe_repair/experiments/noise_search/run.py) | the runner, the sheets, the sidecar, the both-ness read, W&B |
+| [poe_repair/experiments/fk_steering/run.py](../../../../../poe_repair/experiments/fk_steering/run.py) | the pinned-noise loader, the detector wrapper and the sheet drawer this plan reuses |
+| [poe_repair/experiments/twisted_smc/sampler.py](../../../../../poe_repair/experiments/twisted_smc/sampler.py) | the DDIM step and the Mono reference sampler |
+| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count, used as the verifier and the judge |
+| [1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py](../../../../scripts/showcase/where_each_condition_lands_plot.py) | the cloud axes the both-ness read reproduces |
 
 ## Next step
 

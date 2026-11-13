@@ -32,7 +32,7 @@ and settling further into any distribution is not what fixes it.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-the-corrector-on-the-adapters-own-score-changes-nothing-that-matters) ➡️
 
 Two questions, each with its thresholds as named constants in
-`scripts/corrector_window_sweep.py` before its grid ran.
+`1-lora-correction/scripts/corrector_window_sweep.py` before its grid ran.
 
 For the corrector on the adapter's tail: support if the mean [Laplacian variance](does-searching-over-the-noise-sharpen-the-corrected-render.md) over the eight
 seeds at 20 corrector steps is at least `FIDELITY_MIN_SHARPNESS_RISE = 0.10` above the adapter
@@ -41,7 +41,7 @@ alone, with 5 steps in between and the composed count within
 more composed seeds are lost. Inconclusive if the control pair loses two or more.
 
 For the clean tail: the primary read is the cosine distance between a render and that seed's
-joint-prompt render in the [compose scorer](../../context/world/compose-rate.md)'s own DINOv2 embedding, lower being nearer the picture
+joint-prompt render in the [compose scorer](../../../context/world/compose-rate.md)'s own DINOv2 embedding, lower being nearer the picture
 the adapter is trying to reach. Support if a condition moves at least `CLEAN_MIN_MONO_GAIN = 0.05`
 nearer than the adapter alone with composition within one seed. Laplacian variance is reported
 beside it as a secondary read only, because on the plain-PoE references it is heavy-tailed (mean
@@ -143,20 +143,20 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The adapter | rank 32, step 30050, `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt`, 210 modules matched and 420 tensors loaded at attach | verified |
 | The eye reads | recorded in [the review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/04-does-the-corrector-compose-in-the-same-window.md), Claude with veto after | stated |
 | The runs | task group 3 and task group 5 of step 27, on mscluster85 device 0, 2026-09-06, commits 87d6cb2 and af7eae6; W&B `prime_lab/poe-repair-animals-compose/s61hldbc` | verified |
-| Regenerate with | recipes 5 and 6 of [running the Langevin corrector](../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md); the adapter stage runs in its own process, per [the windowed sampler note](../../environment/known-failures.md) | |
+| Regenerate with | recipes 5 and 6 of [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md); the adapter stage runs in its own process, per [the windowed sampler note](../../../environment/known-failures.md) | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What the trained correction is and why it never sees the joint prompt:
-  [the LoRA corrector](../../context/world/lora-corrector.md)
+  [the LoRA corrector](../../../context/world/lora-corrector.md)
 - What a compose rate is, and the detector's known error on this pair:
-  [compose rate](../../context/world/compose-rate.md)
+  [compose rate](../../../context/world/compose-rate.md)
 - Which checkpoint this adapter is and why softness rose with training:
-  [does training longer keep improving the held-out fix](../does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)
+  [does training longer keep improving the held-out fix](../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)
 - Why an adapter render and a reference render never share a process:
-  [the known failures catalog](../../environment/known-failures.md)
+  [the known failures catalog](../../../environment/known-failures.md)
 - Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open

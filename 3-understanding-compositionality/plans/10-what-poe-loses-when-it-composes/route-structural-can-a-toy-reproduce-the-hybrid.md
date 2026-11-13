@@ -92,7 +92,7 @@ Navigation: ⬅️ [Previous](#schedule) | 📋 [TOC](#table-of-contents) | [Nex
 You ~3 h · the laptop
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
 ```
 
 **The six, and two more:**
@@ -113,7 +113,7 @@ Every sample grid has its noise-free row beside it. Stop at any checkpoint whose
 You ~1.5 h · the laptop GPU
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-averaging-in-the-sdxl-latent.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-averaging-in-the-sdxl-latent.md
 ```
 
 Asks whether the fused animal comes from SDXL's latent or from its denoiser.
@@ -123,7 +123,7 @@ Asks whether the fused animal comes from SDXL's latent or from its denoiser.
 You ~4 h over two sittings · the laptop GPU
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/toy-one-network-many-captions.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/toy-one-network-many-captions.md
 ```
 
 Written by step 2. Training runs launch from a cell; the walk moves to the next cell while it trains.
@@ -133,7 +133,7 @@ Written by step 2. Training runs launch from a cell; the walk moves to the next 
 You ~1.5 h · the laptop GPU
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/toy-captions-that-say-contains.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/toy-captions-that-say-contains.md
 ```
 
 Written by step 4.
@@ -151,13 +151,13 @@ You ~10 min · AI ~45 min · Opus, high
 ```text
 Background
 Work in /home/molef/PhD/poe_repair_min-dog-and-rain on branch exec/dog-and-rain. Phase 1 of the toy
-(plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md) showed, with
+(3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md) showed, with
 formulas only, that the product of "circle" and "square" over pixels is a purple overlay. Phase 2
 replaces the formulas with one small caption-conditioned network trained on the same pictures, the way
 SDXL is one network trained on captioned photos.
 
 Objectives
-1. Write plans/10-what-poe-loses-when-it-composes/toy-one-network-many-captions.md in the shape of the
+1. Write 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/toy-one-network-many-captions.md in the shape of the
    six-checkpoint walk: the setup fixed up front, then one notebook cell per step, each with what I
    should see as a picture and a check.
 2. Steps: the dataset with captions as phase 1; a small U-Net denoiser on 8 x 16 pictures conditioned
@@ -168,9 +168,9 @@ Objectives
 3. Write before each picture what it should show, copied from the write-up's sections 8.6 to 8.8.
 
 What to read
-- plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, sections 8.2 to 8.8.
+- 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, sections 8.2 to 8.8.
 - The six-checkpoint walk and the notebook it produced:
-  artifacts/notes/what-poe-loses-when-it-composes/the-toy-failure.ipynb.
+  3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/the-toy-failure.ipynb.
 
 What is already known
 - The sdxl-local environment has torch 2.5.1 with CUDA on an RTX 4070 laptop GPU with 8 GB.
@@ -209,7 +209,7 @@ This continues after phase 2a. If "circle" comes to mean "a picture containing a
 shown in fine-tuning, or only teaches the pairs shown.
 
 Objectives
-1. Write plans/10-what-poe-loses-when-it-composes/toy-captions-that-say-contains.md, same shape.
+1. Write 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/toy-captions-that-say-contains.md, same shape.
 2. Steps: more shapes and colours (triangle, star, cross), so each shape can be shown beside many
    others; fine-tune the phase 2a network with each shape captioned only by its own name, beside varied
    others at varied places, holding out circle with square completely; PoE on the held-out pairing and on
@@ -241,7 +241,7 @@ Background
 This closes the toy route. Phases 1, 2a, 2b and 2c are walked, each notebook saved with its figures.
 
 Objectives
-1. Write artifacts/notes/what-poe-loses-when-it-composes/toy-verdicts.md: H-S1, H-S2 and the
+1. Write 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy-verdicts.md: H-S1, H-S2 and the
    caption fine-tuning remedy, each with its pass mark, the figure that shows it, and one plain sentence.
 2. Add one row per phase to the write-up's section 8.
 
@@ -260,7 +260,7 @@ You ~10 min · AI ~1 h writing, then cluster jobs · Opus, high · runs any time
 ```text
 Background
 Work in /home/molef/PhD/poe_repair_min-dog-and-rain on branch exec/dog-and-rain. Checkpoint 5 of the
-six-checkpoint walk (plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md)
+six-checkpoint walk (3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md)
 showed on formulas that PoE of "circle" and "square" draws the two shapes apart only when each word's
 own pictures include the pair, at share s: at sigma 0.1 any s above 0 flips every sample, and with the
 pair under one name only the apart picture gets share s and no more. The write-up's section 9.2 ends
@@ -275,10 +275,10 @@ Objectives
    with a README card entry, and one plain row in report/ via the repo's report convention.
 
 What to read
-- scripts/caption_wetness.py and scripts/caption_wetness.sbatch: the same three stages (sample
+- 3-understanding-compositionality/scripts/caption_wetness.py and 3-understanding-compositionality/scripts/caption_wetness.sbatch: the same three stages (sample
   whole-word caption matches with DuckDB, fetch images from their URLs, score with CLIP ViT-bigG-14)
   already run for camels and dogs. Reuse them; add a mode or a sibling script rather than a new pipeline.
-- artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the dataset, its path
+- 3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/caption-counts.md: the dataset, its path
   (/datasets/mmolefe/relaion2b-en/parquet/, 128 files, 2.1 billion rows), the DuckDB binary, and how
   a count carries its own file coverage.
 - The write-up's section 9.2 and Figure 14.
@@ -326,7 +326,7 @@ The cluster project, `reduce-reuse-recycle`, already holds pieces this route can
 Navigation: ⬅️ [Previous](#what-already-exists-on-the-cluster) | 📋 [TOC](#table-of-contents) | [Next](#why-this-chain) ➡️
 
 **Bring it to the cluster.** Copy the walks and notebooks into `reduce-reuse-recycle`, as step files in
-`artifacts/drips/simple-distributions-rebuild/` next to the parts world, and register the bricks in
+`3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/` next to the parts world, and register the bricks in
 `REBUILD_WALK.md`.
 
 **A latent space, and its organisation.** A small autoencoder with a diffusion model on top, three ways:

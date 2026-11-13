@@ -29,7 +29,7 @@ Objectives
 What to read
 - Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
 - paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
-- report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
+- 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
 
 What is already known

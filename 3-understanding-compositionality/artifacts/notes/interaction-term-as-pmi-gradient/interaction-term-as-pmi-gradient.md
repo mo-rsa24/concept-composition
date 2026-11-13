@@ -13,7 +13,7 @@ are actually right and actually new.
 if pandoc is installed, otherwise the markdown is the artifact.
 
 A `/pressure-test` run on three claims drafted for section 5 of the ICLR submission
-([`paper/iclr/iclr2027_conference.tex`](../../../paper/iclr/iclr2027_conference.tex)), plus the
+([`paper/iclr/iclr2027_conference.tex`](../../../../paper/iclr/iclr2027_conference.tex)), plus the
 novelty question behind them.
 
 It answers, ahead of time, the question piece 5 of the

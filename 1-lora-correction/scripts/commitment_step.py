@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """When does a run's outcome stop being changeable, and does that step move with the pair?
 
-EXP-01 of report/experiments-log.md. The framing under test says PoE fails by committing early to a blended
+EXP-01 of 1-lora-correction/report/experiments-log.md. The framing under test says PoE fails by committing early to a blended
 animal while both outcomes still look available. If that is right, there is a step after which the
 outcome is locked, and the interesting question is whether that step is a property of the pair or a
 constant of the sampler. If it is a constant, one fixed correction schedule fits every pair and the
@@ -22,7 +22,7 @@ needs decoding.
 
 The bars sit in the source rather than in prose so they cannot be adjusted after seeing the answer.
 
-    python scripts/commitment_step.py
+    python 1-lora-correction/scripts/commitment_step.py
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
     CACHE_ROOT,
@@ -44,7 +44,7 @@ from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
 )
 from poe_repair.experiments.interaction_term.pool import load_pool  # noqa: E402
 
-# Pre-registered in report/experiments-log.md before this ran.
+# Pre-registered in 1-lora-correction/report/experiments-log.md before this ran.
 COMMIT_THRESHOLD = 0.90          # the estimate has settled once cosine stays above this
 SENSITIVITY = (0.80, 0.95)       # reported beside it, so no verdict rests on one threshold
 MIN_RANGE_STEPS = 5              # "varies": per-pair medians must span at least this many steps
@@ -52,7 +52,7 @@ MIN_BETWEEN_WITHIN = 1.5         # "varies": between-pair spread over across-see
 NULL_RANGE_STEPS = 2             # "does not vary": medians all inside this many steps
 MIN_STEPS = 40                   # skip short smoke runs, as the fork read had to
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "artifacts/results/when-the-correction-must-arrive/commitment-step"
+OUT_DIR = Path(__file__).resolve().parent.parent.parent / "1-lora-correction/artifacts/results/when-the-correction-must-arrive/commitment-step"
 FORK_REF = paths.resolve(paths.CACHE_ANALYSES) / "fork_curve.json"
 
 

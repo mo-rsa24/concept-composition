@@ -7,7 +7,7 @@ GREEN = "#2e7d32"
 ORANGE = "#ef6c00"
 ANNOTATION = "#212121"
 
-root = Path(__file__).resolve().parents[4]
+root = Path(__file__).resolve().parents[5]
 values = json.loads((root / "rebuild/out/walk-numbers.json").read_text())
 steps = [0, 25, 50, 75, 99]
 kept = [values[f"p1.abar_{t}"] for t in steps]

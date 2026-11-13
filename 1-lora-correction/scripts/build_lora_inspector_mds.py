@@ -28,12 +28,12 @@ defaults match that setup.
 Usage::
 
     # Smoke set (4 epochs × full λ grid, ~5 minutes on one A100):
-    python scripts/build_lora_inspector_mds.py \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds.py \\
         --epochs 0,200,800,1600 \\
         --stages collect-static,collect-cells,project,render,update-manifest
 
     # Production sweep (all 48 epochs × 5 λ in the manifest):
-    python scripts/build_lora_inspector_mds.py --epochs all \\
+    python 1-lora-correction/scripts/build_lora_inspector_mds.py --epochs all \\
         --stages collect-static,collect-cells,project,render,update-manifest
 """
 from __future__ import annotations
@@ -47,7 +47,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from poe_repair import paths
 
-_REPO_ROOT = Path(__file__).resolve().parents[1]
+_REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
@@ -77,7 +77,7 @@ from poe_repair.training_cache import DEFAULT_CACHE_ROOT, CellPath
 
 log = logging.getLogger("build_lora_inspector_mds")
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_RESULTS = paths.resolve(paths.ONE_PAIR_ONE_SEED) / "a_cat__x__a_dog/seed_42/run__local"
 DEFAULT_PAIR_SLUG = "a_cat__x__a_dog"
 
@@ -1366,7 +1366,7 @@ def main(argv: list[str] | None = None) -> int:
     manifest_path = results_root / "inspector_manifest.json"
     if not manifest_path.is_file():
         log.error("no inspector_manifest.json at %s — run "
-                  "scripts/build_lora_manifest.py first", manifest_path)
+                  "1-lora-correction/scripts/build_lora_manifest.py first", manifest_path)
         return 2
     manifest = json.loads(manifest_path.read_text())
     all_epochs = [int(e) for e in manifest["epochs"]]

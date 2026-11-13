@@ -34,7 +34,7 @@ import matplotlib.patches as patches
 from PIL import Image
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_DATASETS_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs")
 DEFAULT_REPO_OUTPUTS = REPO_ROOT / "outputs"
 DEFAULT_OUT_DIR = REPO_ROOT / "outputs" / "presentation" / "heldout_summary"

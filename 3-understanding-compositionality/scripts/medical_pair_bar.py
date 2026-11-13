@@ -1,4 +1,4 @@
-"""The pass bar for plans/10-does-roentgen-draw-two-findings, fixed before any image is generated.
+"""The pass bar for 3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings, fixed before any image is generated.
 
 P: both-rate of the plain pair prompt on the rare pair (Cardiomegaly + Pneumothorax)
 C: both-rate of the plain pair prompt on the control pair (Cardiomegaly + Effusion)

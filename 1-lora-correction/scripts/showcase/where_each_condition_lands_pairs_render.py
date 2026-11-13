@@ -32,9 +32,9 @@ from pathlib import Path
 
 import torch
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 
 from poe_repair.methods._sampling import run_cfg, write_decoded_image  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402

@@ -155,7 +155,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | Anchor | What it executed | State | Finding |
 |---|---|---|---|---|
-| 1 | claim 4.5, the x̂_0 readback route | `scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40` | failed | `load_cell()` takes no `split` argument; it finds the split itself from the pair and seed |
+| 1 | claim 4.5, the x̂_0 readback route | `3-understanding-compositionality/scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40` | failed | `load_cell()` takes no `split` argument; it finds the split itself from the pair and seed |
 | 2 | claim 4.5, the x̂_0 readback route | the same command after the signature fix, on mscluster85, one RTX 3090 | done | the written pass criterion is met and means nothing. The `a` image ranks "a cat" top and the `b` image ranks "a dog" top at steps 25 and 40, but the `j` row is within 0.002 of the `a` row at every step, and the ceiling row fails outright: on the finished `mono.png`, CLIP ranks "a dog" last of the four captions. Output at `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/xhat0_readback/a_cat__x__a_dog__seed1/` |
 
 ## Sources
@@ -168,8 +168,8 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#next
 | Null-text inversion, Mokady et al., CVPR 2023, arXiv 2211.09794 | optimizes an embedding per timestep against a target prediction, which matches r_t being time-dependent | confident |
 | ELITE, arXiv 2302.13848 | a feed-forward encoder from image to token embedding, no per-concept optimization | confident it exists, unverified whether it helps here |
 | PEZ / CLIP-Interrogator | recovers actual words from a CLIP image embedding, the "CLIP inverter" of the original description | likely, verify before citing |
-| `scripts/language_probes.py` in this repo | L1 and L3 already compute a text-space difference between the joint prompt and the sum of the two solo prompts | confident, read the file |
-| `scripts/caption_readback.py` in this repo | already scores generated images against a caption bank including a blend caption, and records that whole-image CLIP was nulled for telling a blend from a composition | confident, read the file |
+| `5-text-embedding-third-expert/scripts/language_probes.py` in this repo | L1 and L3 already compute a text-space difference between the joint prompt and the sum of the two solo prompts | confident, read the file |
+| `3-understanding-compositionality/scripts/caption_readback.py` in this repo | already scores generated images against a caption bank including a blend caption, and records that whole-image CLIP was nulled for telling a blend from a composition | confident, read the file |
 
 ## Next step
 

@@ -89,7 +89,7 @@ columns are two animals on every row. Row 14 turns a child with one dog into a c
 **The number.** Compose rate over 8 seeds: plain PoE 0.0, the adapter's own render 0.75, the
 kept image 1.0 at both σ. Of the 64 candidates per σ, 0.94 (σ 0.1) and 0.89 (σ 0.3) count two or
 more. Under plan 11's count-then-confidence rule the kept rate is also 1.0 at both σ. From
-`artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`,
+`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`,
 fields `pairs.a_cat__x__a_dog.compose_rate_by_column` and `secondary`.
 
 ## 2. The edge ratio says sharper on the median; the eye says four of eight
@@ -156,7 +156,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The compose rates, ratios, band counts, verdict | `artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`, `noise-search-adapter-verdict.json`, copied from the run dir 2026-09-06 | verified |
+| The compose rates, ratios, band counts, verdict | `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-summary.json`, `noise-search-adapter-verdict.json`, copied from the run dir 2026-09-06 | verified |
 | The control pair's numbers | `.../noise-search-adapter-butterfly-meadow-summary.json` | verified |
 | Both-ness per tile | `.../noise-search-adapter-bothness.json`, written 2026-09-06 on mscluster85 by `run_adapter.py --bothness-only` | verified |
 | The detach checks and the floor | `.../noise-search-adapter-detach-checks.json` | verified |
@@ -164,15 +164,15 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | Every candidate and its scores | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/zo_adapter_N8_s50_20260906-024225/a_cat__x__a_dog/seed_<n>/sigma_<σ>/` and the `...-024309` run for the control pair | verified |
 | The eye reads | the review file's `Written before the run, answered after` and `Asked after the result`, recorded as the tiles were opened | stated |
 | The run | tasks **Run the smoke mode** and **Launch the full mode** in [the design](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/12-noise-search-on-top-of-the-adapter.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/12-noise-search-on-top-of-the-adapter.md); W&B `kqj26oiz` and `6oai0d99` | verified |
-| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run_adapter --bothness-only --run-id <run> --device cpu` on the session node | verified |
+| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run_adapter --bothness-only --run-id <run> --device cpu` on the session node | verified |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - The same search on plain PoE: [does searching over the initial noise compose](does-searching-over-the-initial-noise-compose.md)
-- What the correction is: [the LoRA corrector](../../context/world/lora-corrector.md)
-- What the compose scorer counts and what it cannot: [compose rate](../../context/world/compose-rate.md)
+- What the correction is: [the LoRA corrector](../../../context/world/lora-corrector.md)
+- What the compose scorer counts and what it cannot: [compose rate](../../../context/world/compose-rate.md)
 - The both-ness axes: [where each condition lands](../when-does-the-outcome-lock-in/where-does-each-condition-land.md)
 - The paper: [the note](../../artifacts/notes/inference-time-scaling-as-a-search-over-noise/note.md)
 
@@ -192,6 +192,6 @@ Navigation: ⬅️ [Previous](#depends-on) | 📋 [TOC](#table-of-contents)
 ## Cross-references
 
 - The mention of **Laplacian variance as a sharpness read**, and of its disagreement with the eye on this pair, in [can a corrector or a clean tail sharpen the adapter's renders](can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match): that finding measured the same band on the plain-PoE references and demoted it to a secondary read.
-- The mention of **the edge measure**, and that it prefers a sketch to a photograph, in [how a render fails](../../context/world/how-a-render-fails.md#where-this-came-from).
+- The mention of **the edge measure**, and that it prefers a sketch to a photograph, in [how a render fails](../../../context/world/how-a-render-fails.md#where-this-came-from).
 - The mention of **the 1.10 Laplacian-variance bar**, borrowed after the images existed to judge eight render-time fixes, in [the finding "can any render-time fix recover the picture quality the adapter costs"](does-any-render-time-fix-recover-picture-quality.md).
 - The mention of **the edge measure this finding used**, reused on the fidelity harness's 87 tiles, in [the evidence card "which fidelity fix wins"](../../artifacts/results/which-fidelity-fix-wins/README.md).

@@ -57,7 +57,7 @@
 **Already wired, from `instrument-02`:**
 - The four F9 renders (held-out pairs, seed 9).
 - The repaired render of cat × dog, seed 1.
-- Held-out [compose rate](../../../../context/world/compose-rate.md) over the 8-pair × 8-seed pool.
+- Held-out [compose rate](../../../../../context/world/compose-rate.md) over the 8-pair × 8-seed pool.
 - Direction-cosine and fraction-of-distance-reached.
 
 **Four additions this plan wires in:**
@@ -91,7 +91,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python; outputs to `/datasets`; W&B owns the numbers, the tree owns the verdict ([overview](../../../../environment/overview.md)).
+- The `co3` python; outputs to `/datasets`; W&B owns the numbers, the tree owns the verdict ([overview](../../../../../environment/overview.md)).
 - fp16 upcast rule for any decode in the embedding-drift read.
 
 ---
@@ -146,7 +146,7 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md`**
 
 ▶ **Next: [task 1.1](#1--wire-and-freeze)**.
 
@@ -156,8 +156,8 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 
 - [ ] **1.1 Add the four reads to the eval hook** (`poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`, `_run_inline_sample` region), each keyed `eval/tracking/<name>`, each computable from tensors the hook already holds.
 - [ ] **1.2 Write and freeze `tracking_set.json`**; log its hash to W&B config. Completion is observable: the hash printed at startup and visible in the run's config tab.
-- [ ] **1.3 Run the 1-epoch smoke** on a free device per the [execution protocol](../../../../environment/hpc/execution-protocol.md); log dir to `/datasets/mmolefe/poe_repair_min/outputs/showcase/tracking_smoke/`.
-  - Command shape: the phase-1 launcher with 1 epoch and W&B on. `bash scripts/animals_compose_transfer/train_phase1.sh dry` cannot serve here: dry mode sets `WANDB="disabled"` (line 16 of the script), so instruction 2.1's W&B check would fail with the wiring correct. Call the trainer with `--total-epochs 1 --wandb-mode online` (or `offline` plus a sync) instead.
+- [ ] **1.3 Run the 1-epoch smoke** on a free device per the [execution protocol](../../../../../environment/hpc/execution-protocol.md); log dir to `/datasets/mmolefe/poe_repair_min/outputs/showcase/tracking_smoke/`.
+  - Command shape: the phase-1 launcher with 1 epoch and W&B on. `bash 1-lora-correction/scripts/animals_compose_transfer/train_phase1.sh dry` cannot serve here: dry mode sets `WANDB="disabled"` (line 16 of the script), so instruction 2.1's W&B check would fail with the wiring correct. Call the trainer with `--total-epochs 1 --wandb-mode online` (or `offline` plus a sync) instead.
 
 ▶ **Next: [instruction 2.1](#2--prove-the-first-short-run-in-wb)**.
 
@@ -236,7 +236,7 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 ◀ **Needs: [instruction 2.3](#2--prove-the-first-short-run-in-wb)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [07-experiment-c-lambda-window](../experiments/07-experiment-c-lambda-window.md).**
 
@@ -247,7 +247,7 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py::_run_inline_sample` — the eval hook the reads join.
-**File:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/dataset_meta.json` — the runs the manifest freezes.
+**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/dataset_meta.json` — the runs the manifest freezes.
 
 ---
 
@@ -258,7 +258,7 @@ Serves goal 3 (tracking set extended, and proven by a short run, before any laun
 ▶ Paste to run this plan (nothing trains until this passes):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md: wire the four curves, freeze tracking_set.json, then the 1-epoch short run with --wandb-mode online (never dry mode, it disables W&B); report the four eval/tracking/ families.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/tools/06-extend-the-tracking-set.md: wire the four curves, freeze tracking_set.json, then the 1-epoch short run with --wandb-mode online (never dry mode, it disables W&B); report the four eval/tracking/ families.
 ```
 
 ---

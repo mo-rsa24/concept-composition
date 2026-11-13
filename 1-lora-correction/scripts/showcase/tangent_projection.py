@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Does keeping the rank-32 correction tangent to the base model's manifold restore fidelity?
 
-Plan 15 of ``plans/01-showcase-the-trained-lora``. The instrument is the one Saito and
+Plan 15 of ``1-lora-correction/plans/01-showcase-the-trained-lora``. The instrument is the one Saito and
 Matsubara (arXiv 2510.05509) build for interpolation: the Jacobian of the score is
 rank-deficient, its null directions are the tangent space of the data manifold at ``x_t``,
 so a direction ``v`` with small ``||J v||`` moves along the manifold and one with large
@@ -64,7 +64,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 sys.path.insert(0, str(REPO / "scripts"))
@@ -113,7 +113,7 @@ NORMAL_RATIO_NULL = 1.05          # within 5%: the adapter's softness is not an 
 
 # Question 2 (the fix): does dropping the normal part bring the render nearer the joint image?
 PROJECT_LATE_FROM = 10            # the second condition projects only from this step, leaving the early decision alone
-MIN_MONO_GAIN = 0.05              # same value as CLEAN_MIN_MONO_GAIN in scripts/corrector_window_sweep.py
+MIN_MONO_GAIN = 0.05              # same value as CLEAN_MIN_MONO_GAIN in 1-lora-correction/scripts/corrector_window_sweep.py
 MAX_COMPOSE_LOSS_SEEDS = 1        # composed seeds may fall by at most one against the adapter alone
 IDENTITY_MAX_MEAN_ABS_DIFF = 6.0  # grey levels; the adapter-alone render here against the corrector tail's k=0 render (cross-device fp16 drift ~2)
 
@@ -380,7 +380,7 @@ def cache_read(*, smoke: bool = False) -> int:
                    "probe": {"model": "frozen SDXL base UNet, float32, TF32 off, unconditional prompt (primary) and joint prompt (secondary)",
                              "fd_rel_step": FD_REL_STEP, "fd_rel_step_check": FD_REL_STEP_CHECK,
                              "rule": "normal(v) = sigma_t * (eps(x + h v_hat) - eps(x)) / h * ||v||; tangent(v) = v - normal(v); share = ||normal|| / ||v||"},
-                   "directions": {"true": "r_t = guided joint minus guided PoE at the cached state (scripts/showcase/correction_span_common.py)",
+                   "directions": {"true": "r_t = guided joint minus guided PoE at the cached state (1-lora-correction/scripts/showcase/correction_span_common.py)",
                                   "adapter": "PoE prediction with the rank-32 adapter on minus with it off, same state, lambda 1",
                                   "random": "isotropic Gaussian scaled to ||r_t||", "poe": "the guided PoE prediction itself",
                                   "error": "adapter minus true"},

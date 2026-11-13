@@ -32,7 +32,7 @@ Which two animal concepts a run tests, written as the on-disk slug form (see
 
 **Type and shape** text, `a_<animal1>__x__a_<animal2>` (or `an_` where grammar needs it)
 
-**Where it comes from** the pair pool definition, `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
+**Where it comes from** the pair pool definition, `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
 for the current 17-row pool, and `plans/standing/retrofit-poe-repair-min.md` for the wider 20-pair boundary
 (see [world/animal-pair.md § What people get wrong](../world/animal-pair.md#what-people-get-wrong))
 
@@ -156,7 +156,7 @@ Which point in the 50-step denoising schedule a value belongs to. Step 0 is near
 
 **Type and shape** integer, `0` to `49`
 
-**Where it comes from** fixed by the sampler's schedule length, verified in `report/experiments-log.md`'s
+**Where it comes from** fixed by the sampler's schedule length, verified in `1-lora-correction/report/experiments-log.md`'s
 axes table: "step | 0 to 49 | the schedule is 50 steps everywhere in the cache"
 
 **Stands for** a property of one point in one render's trajectory
@@ -214,7 +214,7 @@ chimera/dropped-concept case, `3` appears at least once (`wolfhusky_sample_seed_
 
 **Type and shape** non-negative integer
 
-**Where it comes from** `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, `validation_labels.*.n_instances`
+**Where it comes from** `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, `validation_labels.*.n_instances`
 
 **Stands for** a property of one rendered image
 
@@ -253,7 +253,7 @@ plain PoE fails; `compose_rate` is the same fraction under whichever render meth
 evaluated, or when reporting a success rather than a failure.
 
 **Example** `1.00 (8/8)` (example, `a_cat__x__a_dog`'s plain-PoE fail rate, read directly from
-`artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`)
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`)
 
 **Type and shape** float, `0.0` to `1.0`, usually shown with the raw count it was computed from
 
@@ -285,7 +285,7 @@ unit length)
 
 **Where it comes from** DINOv2 ViT-S/14 class-token embeddings of the finished renders, projected
 onto two unit vectors built from the three single-prompt clouds' centroids; written by
-`scripts/showcase/where_each_condition_lands_plot.py` and, per step, by
+`1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py` and, per step, by
 `where_each_condition_lands_frames_embed.py` into the scene's `public/data.json`
 
 **Stands for** a property of one render (or one saved step of one run) relative to the
@@ -313,7 +313,7 @@ first sit visibly apart in the plane.
 (`0, 2, 5, 8, 10, 15, 20, 25, 30, 35, 40, 45, 49, 50`) are possible values
 
 **Where it comes from** the per-step `both_ness` tracks in the scene's `public/data.json`, read
-by `scripts/showcase/where_each_condition_lands_dynamics.py` with `COMMIT_TOL = 0.10` (first
+by `1-lora-correction/scripts/showcase/where_each_condition_lands_dynamics.py` with `COMMIT_TOL = 0.10` (first
 saved step after which `both_ness` stays within 0.10 of its final value) and
 `FORK_MIN_DIST = 0.05` (first saved step at which the two runs are further apart than 0.05)
 
@@ -326,4 +326,4 @@ reads `commit_step = 0` even if its picture changes animal, as seed 15's PoE run
 
 ## Cross-references
 
-- The mention of **model id** in [the figure plan "the same rule on four models"](../../plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md).
+- The mention of **model id** in [the figure plan "the same rule on four models"](../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md).

@@ -13,8 +13,8 @@ curves agree in shape; large means each pair does its own thing.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/snr_collapse.py --pair a_cat__x__a_dog          # one pair, all seeds
-    python scripts/snr_collapse.py --all --max-pairs 20
+    python 1-lora-correction/scripts/snr_collapse.py --pair a_cat__x__a_dog          # one pair, all seeds
+    python 1-lora-correction/scripts/snr_collapse.py --all --max-pairs 20
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from poe_repair import paths
 # Running as `python scripts/foo.py` puts scripts/ on sys.path, not the repo
 # root, so the package would not import. The plan's engagement instructions use
 # that form, so make it work rather than requiring `-m` or PYTHONPATH.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import CACHE_ROOT, load_cell  # noqa: E402
 from poe_repair.experiments.interaction_term.pool import load_pool  # noqa: E402
@@ -95,7 +95,7 @@ def curve_for(slug: str, seed: int, *, normalize: str = "prereg",
     n = c.r_t_norm().numpy()
     if normalize == "prereg":
         # The plan-01 committed measure: correction size relative to the
-        # prediction being corrected. report/normalization_preregistration.md
+        # prediction being corrected. 1-lora-correction/report/normalization-preregistration.md
         n = n / c.eps_poe().flatten(1).norm(dim=1).numpy()
     # Then scale each curve to its own median. The claim is about SHAPE over the
     # run, not about every pair needing the same correction size, so a per-curve

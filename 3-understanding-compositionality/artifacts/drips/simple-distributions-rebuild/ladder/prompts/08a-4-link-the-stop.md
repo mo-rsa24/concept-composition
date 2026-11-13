@@ -10,7 +10,7 @@ In the background, dispatch xref-cadence over the files the correction prior-art
 composition ladder wrote.
 
 Background
-The prior-art stop of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is
+The prior-art stop of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is
 closed: its combined read of CO3, Feynman-Kac correctors and Soiffer et al. 2026 wrote new files.
 Those files should link to the textbook chapter, plan and idea-map claims that the stop rests on,
 and those should link back, so the next reader finds both.
@@ -21,11 +21,11 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08a-correction-prior-art.md, its Study first
   line: the textbook chapter and plan 26 to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 8 and layer 9 rows of the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 8 and layer 9 rows of the
   Bricks table ("The interaction term, exact" and "The correction, learned back").
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 (child 4.1) and 9.
 
 What is already known

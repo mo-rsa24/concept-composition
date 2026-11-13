@@ -20,7 +20,7 @@ sampler's.
 ## Position in the plan tree
 
 **Step 26 of 30.** Waits on steps 24 and 25. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -75,7 +75,7 @@ still there at the end of the run belongs to the model.
 
 ⬅️ [Previous](#what-this-asks-in-one-line) | 📋 [TOC](#table-of-contents) | [Next](#quick-context-where-you-are) ➡️
 
-**The correction, [`r_t`](../../../../context/world/interaction-term.md).** The per-step gap `eps_J - eps_PoE` between what the joined prompt
+**The correction, [`r_t`](../../../../../context/world/interaction-term.md).** The per-step gap `eps_J - eps_PoE` between what the joined prompt
 predicts and what adding the two separate prompts predicts, both evaluated at the same latent.
 Every result in this project so far is about this quantity.
 
@@ -87,7 +87,7 @@ only a target at each noise level, so with enough corrector steps it samples the
 This is the share a corrector can take away, and it goes to zero as noise goes to zero.
 
 **The model's share.** `p(cat)·p(dog)` is not `p(cat and dog)`. Multiplying two distributions asks
-for one thing that is both animals, which is the [chimera](../../../../context/world/chimera.md). No
+for one thing that is both animals, which is the [chimera](../../../../../context/world/chimera.md). No
 corrector touches this, and it does not vanish at zero noise.
 
 **The corrector count, `k`.** How many unadjusted Langevin steps run at each of the 50 noise levels
@@ -117,7 +117,7 @@ strengthens, and the sampler comparison becomes a two-sentence related-work note
 comparison stops being optional and becomes a baseline the paper must beat.
 
 **Rationale.** The project has a causal result and a timing result. Injecting `r_t` raises the
-[compose rate](../../../../context/world/compose-rate.md) as more of it is added, while a
+[compose rate](../../../../../context/world/compose-rate.md) as more of it is added, while a
 norm-matched random control stays at what you would get by luck. Injecting it only into steps 0 to
 10 composes 0.656 of 32 pair-and-seed runs, while steps 20 to 30 onward compose 0.000. Both are in
 [the timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
@@ -211,7 +211,7 @@ relative chain displacement. All in fp32, upcast from the fp16 the models run in
 | the chain has not equilibrated at the largest `k` | the `k=100` against `k=200` comparison, with an instability bound in source |
 
 **Falsify condition, three-way, at the pre-registered thresholds.** The thresholds live in source as
-module-level constants in `scripts/corrector_residual_curve.py`, following the `MIN_MEDIAN_RATIO`
+module-level constants in `1-lora-correction/scripts/corrector_residual_curve.py`, following the `MIN_MEDIAN_RATIO`
 pattern this repo already uses, so they cannot be moved after the answer is visible.
 
 - **Support, the split is real.** Over the last five denoising steps, the ratio at the `k` where the
@@ -342,7 +342,7 @@ and a control whose own behaviour is unsettled controls nothing.
 
 ⬅️ [Previous](#where-the-two-errors-can-be-told-apart-and-where-they-cannot) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **`scripts/corrector_residual_curve.py`.** Carries the five thresholds as module-level constants,
+1. **`1-lora-correction/scripts/corrector_residual_curve.py`.** Carries the five thresholds as module-level constants,
    runs the `k` grid, writes `residual_curves.json`, and prints which of the three branches fired.
    It is also the script [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md)
    added `--check-identity` and `--step-size-search` to, so the thresholds and the search live in
@@ -384,10 +384,10 @@ three-way threshold written in source before the answer was visible.
 - Everything writes under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/`.
   `/home-mscluster` hit 100% once and silently killed checkpointing, so the job script carries a
   disk guard on `/datasets`, the filesystem it actually writes to, per
-  [environment/storage.md](../../../../environment/storage.md).
+  [environment/storage.md](../../../../../environment/storage.md).
 - **biggpu allows one job per user**, so the `k` grid runs under `nohup` outside Slurm and `squeue`
   is blind to it. Harvest by `pgrep -af 'corrector|run_corrector'` on the session node, per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - **The cached trajectories cannot be used.** The corrector moves the latent onto a different path,
   so every cached pair-and-seed trajectory under `interaction_term/` is for a path this plan is not
   on.
@@ -395,7 +395,7 @@ three-way threshold written in source before the answer was visible.
   measured here are small enough that fp16 accumulation shows up in the third digit.
 - SDXL base, DDIM, 50 steps, guidance 7.5, latents 4×128×128 at 1024².
 - No system LaTeX here, so the figure's PDF comes from matplotlib and never from a `pdflatex` pass,
-  per [environment/paper.md](../../../../environment/paper.md).
+  per [environment/paper.md](../../../../../environment/paper.md).
 
 ## What it costs
 
@@ -449,7 +449,7 @@ anywhere, so wall time tracks UNet evaluations directly.
 ◀ **Needs: [instruction 3.3 of step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md#3--read-the-step-size-search-by-eye-before-the-grid-launches)**,
 your signed-off `c`.
 
-- [x] **1.1** Write `scripts/corrector_residual_curve.py` with the five thresholds as module-level
+- [x] **1.1** Write `1-lora-correction/scripts/corrector_residual_curve.py` with the five thresholds as module-level
       constants.
 
     ```python
@@ -477,7 +477,7 @@ your signed-off `c`.
 
     ```bash
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-    $PY scripts/corrector_residual_curve.py --smoke --k 0,1 --pair a_cat__x__a_dog --seed 9
+    $PY 1-lora-correction/scripts/corrector_residual_curve.py --smoke --k 0,1 --pair a_cat__x__a_dog --seed 9
     ```
 
   - Check the measured wall time per noise level against [What it costs](#what-it-costs). A cost
@@ -496,7 +496,7 @@ before 670 plain-render equivalents are committed.
 
     ```bash
     OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
-    nohup bash scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
+    nohup bash 1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
     pgrep -af 'corrector|run_corrector'          # squeue is blind to this
     ```
 
@@ -514,7 +514,7 @@ before 670 plain-render equivalents are committed.
 
     ```bash
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-    $PY scripts/corrector_residual_curve.py --verdict
+    $PY 1-lora-correction/scripts/corrector_residual_curve.py --verdict
     ```
 
   - **Done when:** the review file's pre-registered threshold is ticked with the branch name and the
@@ -543,7 +543,7 @@ read the code cannot do.
 number being folded is one you have looked at.
 
 - [ ] **3.1** Fold the size into
-      [the idea map's claim 2](../../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
+      [the idea map's claim 2](../../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
       and delete that map's route row, per its own rule that a route row is deleted once the result
       is folded back in.
   - **Done when:** claim 2 carries the number and the routes table no longer has the
@@ -613,13 +613,13 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
 
 # The grid, outside Slurm because biggpu allows one job per user.
-nohup bash scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
+nohup bash 1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
 pgrep -af 'corrector|run_corrector'          # squeue is blind to this
 
 # Harvest: the file, then the verdict.
 $PY -c "import json;d=json.load(open('$OUT/residual_curves.json'));print(len(d['rows']),'rows')"
 # expect 2 pairs x 6 k-values x 50 steps = 600 rows
-$PY scripts/corrector_residual_curve.py --verdict     # prints which of the three branches fired
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --verdict     # prints which of the three branches fired
 ```
 
 **Pass criteria**
@@ -662,7 +662,7 @@ None. This scope carries no `diagram-prompts.md`, so there is no illustrated map
 
 | Item | Lane | Description | Generated by | Status | Details |
 |---|---|---|---|---|---|
-| `mcmc/how-much-of-the-correction-a-corrector-removes.png` | — | y is the correction's size relative to the product-of-experts prediction, `‖r_t^(k)‖/‖eps_PoE‖`, unitless on a 0-to-1 scale; x is denoising step 0 to 49; one curve per `k ∈ {0,1,5,20,100,200}`; one panel per pair; a second row carrying the two norms separately | `scripts/corrector_residual_curve.py` | ⏳ | **Main text, if the check passes.** It is the dynamics of the correction under a corrector, which is the whole question. Sidecar `.json` beside it records the pairs, seeds and settings drawn. From `corrector/residual_curves.json` |
+| `mcmc/how-much-of-the-correction-a-corrector-removes.png` | — | y is the correction's size relative to the product-of-experts prediction, `‖r_t^(k)‖/‖eps_PoE‖`, unitless on a 0-to-1 scale; x is denoising step 0 to 49; one curve per `k ∈ {0,1,5,20,100,200}`; one panel per pair; a second row carrying the two norms separately | `1-lora-correction/scripts/corrector_residual_curve.py` | ⏳ | **Main text, if the check passes.** It is the dynamics of the correction under a corrector, which is the whole question. Sidecar `.json` beside it records the pairs, seeds and settings drawn. From `corrector/residual_curves.json` |
 
 **Three sentences this figure's caption owes**, all argued for above and none droppable for space.
 The axis is the correction along the `k`-corrected path rather than along one path. `eps_J` is
@@ -702,7 +702,7 @@ records that the single seed was a deliberate choice rather than an oversight.
 | this plan's verdict | the review file, then [the two literature checks before print](../../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md), which currently cite a paper for a claim this makes into a number |
 | this plan's verdict | [step 27](04-does-the-corrector-compose-in-the-same-window.md), [step 28](../baselines/05-what-changes-when-superdiff-leaves-its-own-defaults.md) and [step 30](../ideas/07-feynman-kac-correctors.md), all waiting on it |
 | a figure lands in `mcmc/` | that folder's `README.md` gains an entry naming the algorithm and what produced it, per this repo's artifact rule |
-| the size is measured | [the idea map's claim 2](../../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), and its route row is deleted |
+| the size is measured | [the idea map's claim 2](../../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), and its route row is deleted |
 | the plan's status | the scope [MASTER_PLAN.md](../../MASTER_PLAN.md) and the root running order, both by `sync-plan-tree` rather than by hand |
 
 | Step | Command | Triggered by | Outcome |
@@ -720,7 +720,7 @@ records that the single seed was a deliberate choice rather than an oversight.
 |---|---|
 | `poe_repair/composers/poe_langevin.py` | the composer [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md) builds, run here at six values of `k` |
 | [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses, and the denominator this plan records |
-| [scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, so the corrected version measures the same quantity the uncorrected curves did |
+| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, so the corrected version measures the same quantity the uncorrected curves did |
 | [composition/reduce_reuse_recycle/anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedMALASampler`, read only to record why Metropolis adjustment is not available here |
 
 ## Next step

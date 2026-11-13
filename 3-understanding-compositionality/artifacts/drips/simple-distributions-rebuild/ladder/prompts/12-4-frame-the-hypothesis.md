@@ -13,7 +13,7 @@ with the claim that the toy's overlap-dial curve predicts the share of real film
 composition recovers the cell and joint conditioning does not
 
 Background
-Layer 12 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) asks whether a
+Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) asks whether a
 correction for composition helps on chest X-rays. Step 2 measured a drain gap of at least 5 points
 with its interval excluding 0, so the drain case continues. Step 3 named the shortcut to target in
 claim 8 of the idea map. This sharpens the experiment into a falsifiable, ordered plan for the

@@ -78,7 +78,7 @@ Resampling fired 5 to 8 times per 20-step run at every checkpoint, so the weight
 From `history.json` keys `eval/compose_mono_mean`, `eval/compose_poe_mean`,
 `eval/compose_smc_mean` and `eval/n_resample_mean`, from `verdict.json`, and from
 `all_particles_scores.json` (every particle's count, written by
-`scripts/twisted_smc/score_all_particles.py` on 2026-09-05), all in
+`1-lora-correction/scripts/twisted_smc/score_all_particles.py` on 2026-09-05), all in
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc/twist_w64_b16_lr1e-04_s100000_20260905-072331/`.
 A copy of the per-particle scores sits at
 [twisted-smc-all-particles-scores.json](../../artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-all-particles-scores.json).
@@ -130,23 +130,23 @@ Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | �
 | The compose fractions and resample counts | `history.json` and `verdict.json` in the run directory above, read 2026-09-05 | verified |
 | The accuracy and loss curves | the same `history.json`; also W&B `prime_lab/poe-repair-animals-compose/runs/3cwrxlw0` | verified |
 | The renders | `references/` and `samples/step_*/` in the run directory, rendered 2026-09-05 on mscluster110 | verified |
-| The all-particle scores | `all_particles_scores.json` in the run directory, written by `scripts/twisted_smc/score_all_particles.py` on mscluster85 device 0, 2026-09-05; the 10 detector hits opened and read by eye the same day | verified |
+| The all-particle scores | `all_particles_scores.json` in the run directory, written by `1-lora-correction/scripts/twisted_smc/score_all_particles.py` on mscluster85 device 0, 2026-09-05; the 10 detector hits opened and read by eye the same day | verified |
 | The run | task **2.1** in [the plan](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md#runs) | verified |
 | How the thread got here | [the note](../../artifacts/notes/from-an-x-post-to-a-twisted-smc-baseline/note.md) | |
-| Regenerate with | no runbook recipe yet; the launcher is `scripts/twisted_smc/train_twist.sbatch full`, the figures `scripts/twisted_smc/report_figures.py` | |
+| Regenerate with | no runbook recipe yet; the launcher is `1-lora-correction/scripts/twisted_smc/train_twist.sbatch full`, the figures `1-lora-correction/scripts/twisted_smc/report_figures.py` | |
 
 ## Depends on
 
 Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What the interaction term is, and why the twist is its potential:
-  [context: the interaction term](../../context/world/interaction-term.md)
+  [context: the interaction term](../../../context/world/interaction-term.md)
 - What a compose rate is and what the detector can and cannot tell you:
-  [context: compose rate](../../context/world/compose-rate.md)
+  [context: compose rate](../../../context/world/compose-rate.md)
 - The node and the python environment the run needed:
-  [environment: nodes](../../environment/hpc/nodes.md)
+  [environment: nodes](../../../environment/hpc/nodes.md)
 - The idea the twist borrows, and the two posts that led to it:
-  [source 5, CDM](../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it)
+  [source 5, CDM](../../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it)
 
 ## Still open
 

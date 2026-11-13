@@ -106,20 +106,20 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The compose rates, fractions and agreement | `summary.json` in the run directory above, read 2026-09-06 | verified |
 | The renders | `a_cat__x__a_dog/seed_*/` and `a_butterfly__x__a_flower_meadow/seed_*/` in the run directory, rendered 2026-09-05 on mscluster109 device 1 | verified |
 | The run | task **3.1** in [the plan](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/10-feynman-kac-steering-on-a-detector-reward.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/10-feynman-kac-steering-on-a-detector-reward.md#runs); W&B `prime_lab/poe-repair-animals-compose/runs/czim1n0w` | verified |
-| The method | [the register row for 2501.06848](../../plans/standing/literature/reading-register.md) | |
-| Regenerate with | `GPU=<idx> bash scripts/fk_steering/run_fk_steering.sh full` on a free `biggpu` device, about 3 h on an A6000 | |
+| The method | [the register row for 2501.06848](../../../plans/standing/literature/reading-register.md) | |
+| Regenerate with | `GPU=<idx> bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh full` on a free `biggpu` device, about 3 h on an A6000 | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What a compose rate is and what the detector can and cannot count:
-  [context: compose rate](../../context/world/compose-rate.md)
+  [context: compose rate](../../../context/world/compose-rate.md)
 - What PoE composition is and why the product's proposals blend:
-  [context: PoE composition](../../context/world/poe-composition.md)
+  [context: PoE composition](../../../context/world/poe-composition.md)
 - When the run commits to one animal, which is why the reward is not blind at step 10:
   [where does each condition land](../when-does-the-outcome-lock-in/where-does-each-condition-land.md)
-- The node and the environment: [environment: nodes](../../environment/hpc/nodes.md)
+- The node and the environment: [environment: nodes](../../../environment/hpc/nodes.md)
 
 ## Still open
 

@@ -207,7 +207,7 @@ None emitted yet.
 
 ## Sources
 
-- [What the project found, by question](../../../report/00-INDEX.md)
+- [What the project found, by question](../../../../report/00-INDEX.md)
 - [How the corrector is trained, and every way we could change it](../designing-the-correction-loss/maths/objectives-and-variations.tex)
 - [Two legs, one loss](https://claude.ai/code/artifact/ae96d471-01cd-4764-b79d-41da5053230c), the interactive page. Its second lane carries this cohort: parent and five children, each one switch away, in both notations.
 

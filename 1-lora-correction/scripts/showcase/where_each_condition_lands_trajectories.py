@@ -32,9 +32,9 @@ from pathlib import Path
 import torch
 from PIL import Image
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 
 from poe_repair._sdxl.metrics import tweedie_mean  # noqa: E402
 from poe_repair._sdxl.runtime import decode_latents  # noqa: E402

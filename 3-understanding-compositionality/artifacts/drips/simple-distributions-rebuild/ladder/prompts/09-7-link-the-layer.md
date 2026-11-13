@@ -9,7 +9,7 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 9 of the composition ladder wrote.
 
 Background
-Layer 9 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 9 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its build walk wrote new files. Those files should link to the textbook chapters,
 journey plans, idea-map claims and run card that teach or ground the same ideas, and those should
 link back, so the next reader finds both.
@@ -20,9 +20,9 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md, its Study
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md, its Study
   first line: the textbook chapters, the journey plan and the video to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 9 row of the Bricks table
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 9 row of the Bricks table
   ("The correction, learned back") and the journey plan it links, the score function.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 4 and 9 and run 7.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's

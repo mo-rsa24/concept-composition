@@ -10,7 +10,7 @@ after quiz 8.1.
 - [log p(x|A) + log p(x|B) - log p(x)] and its ε-space form ε_joint - ε_A - ε_B + ε_∅
 
 Background
-This is layer 8 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: the
+This is layer 8 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: the
 interaction term, the first half of the research goal, defined exactly here before any learned
 version of it is trusted. The maths comes before the build and teaches only the derivation the
 build needs. I have passed quiz 8.1; any question it marked missed becomes a first rung. Layer 1's
@@ -27,10 +27,10 @@ Objectives
 What to read
 - Quiz 8.1's results: the misses that become first rungs.
 - Layer 1's maths drip folder under artifacts/drips/ and its dispatch.md: my notation.
-- artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
   line: the journey plans, textbook chapters and vault notes for this layer, among them section 8.2,
   the route through p(c1, c2 | x).
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, and
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, and
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
 
 What is already known
@@ -45,15 +45,15 @@ What is already known
   (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and "What the words are").
 - When each label is a fixed function of the image the term is exactly zero, so the wet dog is a
   data condition rather than a third operator, and the shift was found at 20% overlap and missed at
-  0% (mean x1 −0.79 against −0.48) (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run
+  0% (mean x1 −0.79 against −0.48) (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run
   1).
 - With report-mined labels the term survives, +0.105 nats for (A,B) inside A∩B on claim 7.4's
-  labels, which is −ln 0.9 (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 7.3 and 7.4).
+  labels, which is −ln 0.9 (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 7.3 and 7.4).
 - ε = −√(1 − ᾱ_t)·∇log q_t, so ∇r_t = −(ε_joint − ε_A − ε_B + ε_∅)/√(1 − ᾱ_t), the gap between the
   joint's score and the composed score (ladder/01-one-diffusion-expert.md, step 2; REBUILD_WALK.md,
   brick "The interaction term, exact").
 - poe_repair_min caches that residual for 25 pairs at all 50 steps, at guidance 7.5
-  (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
+  (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 
 Rules
 - One rung per message, in LaTeX, with worked numbers.

@@ -18,7 +18,7 @@ trajectories. Gated on [step 49](07-does-the-poe-trained-correction-reach-superd
 ## Position in the plan tree
 
 **Step 50 of 50.** Waits on step 49. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -79,7 +79,7 @@ SuperDiff trajectories at `kappa` 0.5 and forms
 the two adapter families read on one axis.
 
 **Associated materials.** [The review questions](../../review/08-adapters-that-learn-superdiffs-own-residual.md),
-[the PoE cache format](../../../../poe_repair/training_cache.py), and the clean pair pool in
+[the PoE cache format](../../../../../poe_repair/training_cache.py), and the clean pair pool in
 [scope 04](../../../04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
 
 ## Considerations
@@ -167,8 +167,8 @@ whether that is because the residual is rule-specific or because no adapter can 
 
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The cache builder.** `scripts/build_superdiff_cache.py`, one (pair, seed) per call like
-   `scripts/build_training_cache.py`, writing `residuals/step_{000..199}.pt` with the five
+1. **The cache builder.** `1-lora-correction/scripts/build_superdiff_cache.py`, one (pair, seed) per call like
+   `3-understanding-compositionality/scripts/build_training_cache.py`, writing `residuals/step_{000..199}.pt` with the five
    tensors, under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/cache/`.
 2. **The target.** `delta_t_superdiff_from_raw(eps_1, eps_2, eps_j, eps_uncond, guidance_scale, kappa=0.5)`
    beside `delta_t_from_raw` in `poe_repair/training_cache.py`, with a loader that reads the
@@ -203,13 +203,13 @@ does not transfer, learn SuperDiff's own.
   Never a bare `python`.
 - Cache, checkpoints and renders under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/`, disk guard on
-  `/datasets`, per [environment/storage.md](../../../../environment/storage.md). Task 1.1 states
+  `/datasets`, per [environment/storage.md](../../../../../environment/storage.md). Task 1.1 states
   the cache size before building it.
 - biggpu allows one job per user, so the three trainings queue behind whatever is running; the
   cache build and the sheets use the shared-device or `nohup` path per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
   About 30 hours per training on an RTX 8000, per
-  [environment/hpc/throughput.md](../../../../environment/hpc/throughput.md).
+  [environment/hpc/throughput.md](../../../../../environment/hpc/throughput.md).
 - The tracker is W&B, project `prime_lab/poe-repair-animals-compose`; the review file carries run
   ids and verdicts, never curves.
 - **The PoE cache cannot be used.** Different trajectories.
@@ -245,12 +245,12 @@ does not transfer, learn SuperDiff's own.
 ◀ **Needs: [task 0.3](#0--check-this-plan-before-working-from-it)**, the gate open.
 
 - [x] **1.1** State the cache size before building: pool cells (from the PoE cache's pool, read from
-      `scripts/build_training_cache.py`'s callers and scope 04's clean-pair-pool plan) × 200 steps
+      `3-understanding-compositionality/scripts/build_training_cache.py`'s callers and scope 04's clean-pair-pool plan) × 200 steps
       × five tensors of 4×128×128 in fp16, in GB, and confirm `/datasets` has it.
   - **Done when:** the number and the `df` line are in the review file.
   - 88 cells, ≈ 11.6 GB, in
     [the review file](../../review/08-adapters-that-learn-superdiffs-own-residual.md).
-- [x] **1.2** Write `scripts/build_superdiff_cache.py` on top of `superdiff.py` with
+- [x] **1.2** Write `1-lora-correction/scripts/build_superdiff_cache.py` on top of `superdiff.py` with
       `kappa_override=0.5`, `form_r_t=True`, saving the five raw tensors per step.
   - **Done when:** one cell builds, its 200 step files load, and the target formed from them
     matches the sidecar's `r_t_sd_norms` for that render to fp16 tolerance.
@@ -267,7 +267,7 @@ does not transfer, learn SuperDiff's own.
     the "poe" branch is bit-identical to the old formula, the "superdiff" branch equals the
     composer's blend.
   - Build: two shards on one node's two devices,
-    `scripts/build_superdiff_cache.py --shard {0,1} --nshards 2`, ~75 s per cell.
+    `1-lora-correction/scripts/build_superdiff_cache.py --shard {0,1} --nshards 2`, ~75 s per cell.
   - **Done when:** every pool cell has 200 step files, counted (88 × 200), and a one-epoch
     `--dry-run` of the trainer with `--compose superdiff` on one cached cell runs to a
     checkpoint.
@@ -420,10 +420,10 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/training_cache.py](../../../../poe_repair/training_cache.py) | the PoE cache format and `delta_t_from_raw`, which the SuperDiff variants sit beside |
-| [scripts/build_training_cache.py](../../../../scripts/build_training_cache.py) | the one-cell-per-call builder shape, and the pool its callers use |
-| [poe_repair/students/train_direct_eps.py](../../../../poe_repair/students/train_direct_eps.py) | the trainer the three runs reuse |
-| [poe_repair/composers/superdiff.py](../../../../poe_repair/composers/superdiff.py) | computes every raw prediction the cache stores |
+| [poe_repair/training_cache.py](../../../../../poe_repair/training_cache.py) | the PoE cache format and `delta_t_from_raw`, which the SuperDiff variants sit beside |
+| [3-understanding-compositionality/scripts/build_training_cache.py](../../../../../3-understanding-compositionality/scripts/build_training_cache.py) | the one-cell-per-call builder shape, and the pool its callers use |
+| [poe_repair/students/train_direct_eps.py](../../../../../poe_repair/students/train_direct_eps.py) | the trainer the three runs reuse |
+| [poe_repair/composers/superdiff.py](../../../../../poe_repair/composers/superdiff.py) | computes every raw prediction the cache stores |
 
 ## Next step
 

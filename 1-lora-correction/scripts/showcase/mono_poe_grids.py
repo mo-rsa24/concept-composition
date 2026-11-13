@@ -6,11 +6,11 @@ copy, next to the picture PoE would draw without it. A pair worth adding is one 
 half is clean and the right half is visibly wrong, which is the training-data selection criterion
 itself, made visible instead of read off a scorer.
 
-  python3 scripts/showcase/mono_poe_grids.py \
+  python3 1-lora-correction/scripts/showcase/mono_poe_grids.py \
       --cells artifacts/_shared/cross_pair_pool_configs/cells_v55.json \
       --label "the v55 pool" --out <dir> --prefix pool-v55
 
-  python3 scripts/showcase/mono_poe_grids.py --pairs a_typewriter__x__a_cactus ... \
+  python3 1-lora-correction/scripts/showcase/mono_poe_grids.py --pairs a_typewriter__x__a_cactus ... \
       --label "object belt round 1" --out <dir> --prefix objects-r1
 
 Cell layout is fixed at 8 seeds x 8 pairs per sheet ("happy with an 8x8"); more pairs or seeds

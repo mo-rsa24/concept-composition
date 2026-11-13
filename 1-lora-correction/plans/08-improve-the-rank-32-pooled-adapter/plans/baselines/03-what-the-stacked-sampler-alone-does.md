@@ -105,10 +105,10 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- **Inference only, so it does not need the Blackwell.** Rank-32 inference fits comfortably on the session node's card, which keeps `mscluster112` free for the training chain ([throughput](../../../../environment/hpc/throughput.md)).
-- **Renders go under `/datasets`** ([storage](../../../../environment/storage.md)).
+- **Inference only, so it does not need the Blackwell.** Rank-32 inference fits comfortably on the session node's card, which keeps `mscluster112` free for the training chain ([throughput](../../../../../environment/hpc/throughput.md)).
+- **Renders go under `/datasets`** ([storage](../../../../../environment/storage.md)).
 - **References are rendered with no adapter attached**, in a separate process, because the windowed sampler leaves the adapter enabled outside its window.
-- **`biggpu` allows one job per user**, so if this is run on a cluster device rather than the session node, it competes with the chain and should be sequenced around it ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
+- **`biggpu` allows one job per user**, so if this is run on a cluster device rather than the session node, it competes with the chain and should be sequenced around it ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
 
 ---
 
@@ -207,7 +207,7 @@
 
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**.
 
-- [ ] **1.1 Write the verdict rule as constants in `scripts/showcase/blind_label.py`**, the join script [plan 02 task 2.3](../tools/02-the-blind-label-pass.md#2--build-the-strips-the-blinding-and-the-two-secondary-reads) writes, not in prose, so it cannot be adjusted after the labels are in without showing up in a diff.
+- [ ] **1.1 Write the verdict rule as constants in `1-lora-correction/scripts/showcase/blind_label.py`**, the join script [plan 02 task 2.3](../tools/02-the-blind-label-pass.md#2--build-the-strips-the-blinding-and-the-two-secondary-reads) writes, not in prose, so it cannot be adjusted after the labels are in without showing up in a diff.
   - `MIN_CLEAN_GAIN = 1` (the stacked column needs at least one more clean seed than the shipped column) and `MAX_CLEAN_LOST = 0` (it may lose none the shipped column had clean).
   - This is the single home for both constants. Plan 04 reuses them from here rather than defining its own, so the parent, the children and the baseline are all judged by one rule.
   - **Done when:** the constants exist in the script and the branch is computed from them rather than written by hand.

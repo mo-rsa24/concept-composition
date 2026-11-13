@@ -23,7 +23,7 @@ than its name suggests.
 | [design](../plans/hypothesis/04-what-the-cached-runs-already-show.md) | the four analyses over the cache, and the shape each expects |
 | **this file** | **the verdict: three hold, the size-follows-noise result is loose, the low-rank result licenses much less than its name** |
 | [the timing answer](05-when-in-the-run-it-matters.md) | the correction moved across nine window positions, which disagrees with the fork step and is not a contradiction |
-| [the register](../../../paper/iclr/figures.md) | rows F3, F4 and F6 |
+| [the register](../../../../paper/iclr/figures.md) | rows F3, F4 and F6 |
 
 ## Table of contents
 
@@ -63,7 +63,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | snr_collapse, fork_curve, climb, spectrum: in-session scripts over the cache | Tests the claim | commits of 2026-08-05 | no GPU, no queue: reads the cache | `outputs/interaction_term/cache_analyses/` | done |
-| Mono-path generation for the fork read, 38/38 runs, 0 failed, mscluster109 GPU 1 | Tests the claim | 2026-08-05, `scripts/mechanism_study/generate_fork_paths.sh` | 38 runs | fork paths beside the cache | done |
+| Mono-path generation for the fork read, 38/38 runs, 0 failed, mscluster109 GPU 1 | Tests the claim | 2026-08-05, `1-lora-correction/scripts/mechanism_study/generate_fork_paths.sh` | 38 runs | fork paths beside the cache | done |
 
 ## The question written before the run
 
@@ -110,7 +110,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       real direction structure (23x at k=1, 7.8x at k=8), and that structure lives inside single
       runs rather than across them: 50 steps of one run beat the baseline 4.8x at k=8, while one
       step from each of 50 different runs beats it 1.2x. Full argument and tables:
-      `artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`. Two claims follow. F6 may not argue
+      `1-lora-correction/artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`. Two claims follow. F6 may not argue
       that a shared low-dimensional structure is what makes the correction learnable, and the
       learnability claim rests on the adapter's measured behaviour instead. Within-run smoothness
       is D1's result and cross-pair orthogonality is D3's, so what the spectrum adds beyond those
@@ -125,7 +125,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       those pairs where plain PoE composes 0%. The r_t vectors are mutually near-orthogonal
       (cosine about 0.00 even train-to-train), so no fitted subspace can contain unseen pairs
       whether or not the correction transfers. Full argument:
-      `artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`, whose per-pair table is measured at 3
+      `1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`, whose per-pair table is measured at 3
       seeds and every 3rd step, where the same projection reads 6.0%. The sampling moves the
       percentage and not the gap, which is what carries. Any paper sentence built on "shared
       subspace" wording must be rewritten to this bounded form.
@@ -196,7 +196,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
       measured against the same equal-norm baseline, which overstates each of them by the same
       route (see the low-rank answer above), so the comparison holds even though neither ratio
       should be quoted on its own. So F6 keeps the
-      per-timestep rows `scripts/spectrum.py` already stacks, and says in the caption that a row
+      per-timestep rows `1-lora-correction/scripts/spectrum.py` already stacks, and says in the caption that a row
       is one step of one run.
 
 - [x] ✅ How much of the cache the quoted spectrum is measured on: all 11 training pairs at 8

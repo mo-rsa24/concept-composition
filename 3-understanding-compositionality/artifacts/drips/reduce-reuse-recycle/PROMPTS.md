@@ -73,7 +73,7 @@ and continued on mscluster112 on 2026-10-13. Everything below was learned there,
 - The four notebook fixes (drop `!pip install` cells, drop tensorflow and pandas imports, `a_min=` to `min=`,
   and a chex/jax shim cell after `import math`) are already applied to `notebooks/simple_distributions.ipynb`:
   47 cells, `git diff --stat` reads 15 insertions, 95 deletions. Do not run the script again.
-- Walk file: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
+- Walk file: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
   Read it first. It holds the probes and the run map with marks.
 - Fact folders: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/environment/` and `runbook/`. Read
   `environment/overview.md`, `environment/hpc/nodes.md` and `environment/storage.md`. The laptop's findings are
@@ -172,7 +172,7 @@ do not infer, for anything about the cluster that `environment/` does not cover.
 - Add a section to the walk file headed "Handoff to the paper read": one row per notebook section and CLEVR
   command, giving the cell's first line, what it showed, the picture's path, and the time it took.
 - The clone's `walk` branch is pushed nowhere, so write its changes to
-  `artifacts/drips/reduce-reuse-recycle-mscluster112/clone-changes.patch` with
+  `3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/clone-changes.patch` with
   `git -C ~/PhD/reduce-reuse-recycle diff 81177d9 > <that path>`. The notebook fixes and the U-Net patch
   then survive the clone being deleted.
 - Commit only the walk file, the patch, and the environment and runbook files this walk touched. Show me the
@@ -195,7 +195,7 @@ cd /home/molef/PhD/poe_repair_min
 scripts/cluster.sh pull artifacts/results/what-the-authors-code-draws
 ```
 
-What you want: `artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md` present here with its
+What you want: `3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md` present here with its
 handoff table, and the pictures opening locally. If reconcile reports a two-sided conflict, it stops
 and shows it rather than picking a side.
 
@@ -208,8 +208,8 @@ rebuilds it.
 
 ```
 /unbuild --walk ~/PhD/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
-Run on this node. The original runs here: its walk file is /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md and its environment is ~/PhD/reduce-reuse-recycle/.venv. Put the rebuild folder at ~/playground/deep-learning/reduce-reuse-recycle-rebuild/ on this machine, and the walk folder in journey 02's artifacts/drips/simple-distributions-rebuild/ (/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/).
-Name the audit rows each brick inherits, from step 1 of /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/drips/reduce-reuse-recycle/PROMPTS.md.
+Run on this node. The original runs here: its walk file is /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md and its environment is ~/PhD/reduce-reuse-recycle/.venv. Put the rebuild folder at ~/playground/deep-learning/reduce-reuse-recycle-rebuild/ on this machine, and the walk folder in journey 02's 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ (/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/).
+Name the audit rows each brick inherits, from step 1 of /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle/PROMPTS.md.
 I go slowly and want to see every small change: a 1D Gaussian, then a 2D one, then a set of points, before any network.
 ```
 
@@ -225,7 +225,7 @@ code-bearing sections wait for step 2.
 ```
 /drip-read --lean /home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/READ_MAP.md
 Resume from the map's Next step.
-The authors' code runs on mscluster88, not here. Its handoff table is in /home/molef/PhD/poe_repair_min/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md and its pictures in artifacts/results/what-the-authors-code-draws/. When a chunk is about something the notebook or inf_sample.py computes (section 4.2's samplers, 5.1's 2D results, 5.2's CLEVR, appendix D, appendix E's negation), name the cell by its first line and what to look at; I run it in my cluster notebook. Read any output you need with scripts/cluster.sh sh. Never rerun the authors' notebook on this laptop: one expert takes 13 minutes on its CPU. The small objects I build by hand stay in the playground here.
+The authors' code runs on mscluster88, not here. Its handoff table is in /home/molef/PhD/poe_repair_min/3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md and its pictures in artifacts/results/what-the-authors-code-draws/. When a chunk is about something the notebook or inf_sample.py computes (section 4.2's samplers, 5.1's 2D results, 5.2's CLEVR, appendix D, appendix E's negation), name the cell by its first line and what to look at; I run it in my cluster notebook. Read any output you need with scripts/cluster.sh sh. Never rerun the authors' notebook on this laptop: one expert takes 13 minutes on its CPU. The small objects I build by hand stay in the playground here.
 At a section close where several concepts stopped me, give me the /drip-execute-plan --from-read line rather than teaching them inline.
 ```
 
@@ -248,7 +248,7 @@ On mscluster88, using the environments step 1 built.
 
 ```
 /drip-execute-plan --reproduce 2302.11552
-Run on this node with the environments the reduce-reuse-recycle walk built (walk file: artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md). Targets in this order: Table 1 and Figure 2 (2D product and mixture), Figure A1 and appendix E's negation, then Table 2 (CLEVR, 1 to 5 cubes). Write each bar before running. Name the audit rows each target inherits (they are listed in step 1 of artifacts/drips/reduce-reuse-recycle/PROMPTS.md); mark a target out of reach, with the reason, when an audit row or a missing released piece (such as the CLEVR position classifier Table 2 scores with) makes it unreproducible.
+Run on this node with the environments the reduce-reuse-recycle walk built (walk file: 3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md). Targets in this order: Table 1 and Figure 2 (2D product and mixture), Figure A1 and appendix E's negation, then Table 2 (CLEVR, 1 to 5 cubes). Write each bar before running. Name the audit rows each target inherits (they are listed in step 1 of 3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle/PROMPTS.md); mark a target out of reach, with the reason, when an audit row or a missing released piece (such as the CLEVR position classifier Table 2 scores with) makes it unreproducible.
 Close the same way as the repo walk: pictures under artifacts/results/, commit only the files this walk touched, show me the branch and git status, push after my yes.
 ```
 

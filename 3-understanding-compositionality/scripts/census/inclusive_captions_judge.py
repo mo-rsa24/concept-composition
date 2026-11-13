@@ -29,7 +29,7 @@ Writes judged.json with every answer, so a keep or a rejection can be read back 
 Validate the judge before trusting it: run it over a set you have labelled by eye and compare.
 
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      scripts/census/inclusive_captions_judge.py --kind both --dir <a folder of png> --limit 48
+      3-understanding-compositionality/scripts/census/inclusive_captions_judge.py --kind both --dir <a folder of png> --limit 48
 """
 from __future__ import annotations
 

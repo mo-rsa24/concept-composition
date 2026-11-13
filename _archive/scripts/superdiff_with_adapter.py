@@ -22,7 +22,7 @@ import time
 from pathlib import Path
 
 # Run by file name, sys.path[0] is scripts/, so the package would not import.
-sys.path.insert(0, str(Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))))
+sys.path.insert(0, str(Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))))
 
 import torch
 

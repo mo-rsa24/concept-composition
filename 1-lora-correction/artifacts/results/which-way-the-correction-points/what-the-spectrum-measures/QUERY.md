@@ -52,7 +52,7 @@ Within one run the correction turns smoothly through its steps, which is what D1
 already says and what the +0.81 cosine between adjacent steps already measures. Across
 runs and pairs there is nothing: 1.2x at k=8 is a random stack. That agrees with D3
 (different pairs share no direction at any step) and with the near-orthogonality
-measured in `artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md` (cosine about 0.00 even
+measured in `1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md` (cosine about 0.00 even
 train-to-train).
 
 ## What this costs the paper
@@ -83,5 +83,5 @@ now failed twice, in the subspace-overlap test and here.
   within-versus-across comparison is reported separately rather than folded into it.
 - "No detectable shared structure across cells" is a statement at these k values and
   this sample size, not a proof that none exists.
-- The pooled numbers come from `scripts/spectrum.py --pool --stride 10 --max-seeds 8`,
+- The pooled numbers come from `1-lora-correction/scripts/spectrum.py --pool --stride 10 --max-seeds 8`,
   which now prints both floors.

@@ -7,7 +7,7 @@ contribution; "off" steps collapse to ε_uncond while keeping the σ-schedule
 and DDIM noise direction identical to the normal CFG step.
 
 The interactive inspector slider (``/conditioning_window`` in
-``scripts/lora_inspector.py``) is the primary readout — scrub across
+``1-lora-correction/scripts/lora_inspector.py``) is the primary readout — scrub across
 schedules to identify the minimum conditioning window that still produces
 a recognisable cat+dog. This is the no-residual baseline against which
 the LoRA experiment measures its marginal effect.

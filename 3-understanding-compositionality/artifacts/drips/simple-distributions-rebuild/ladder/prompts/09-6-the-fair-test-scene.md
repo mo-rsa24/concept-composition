@@ -10,7 +10,7 @@ beside layer 12's gate.
 ~/Playground/PhD/simple-distributions-walk/
 
 Background
-Layer 9 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) trained a
+Layer 9 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) trained a
 correction and ran the fair test: a joint condition, composition, and composition plus a
 correction, at two overlaps, with exact and with trained experts. This scene shows that result in
 my own notation, beside run 7 as the baseline, so I can operate it rather than read a table.
@@ -56,7 +56,7 @@ Rules
 What to hand back
 - One published scene, in my notation from dispatch.md.
 - Its URL in step 6 of
-  artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md, replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/09-the-correction-learned-back.md, replacing
   "(URL lands here)".
 
 What you will see

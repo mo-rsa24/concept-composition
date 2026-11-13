@@ -56,14 +56,14 @@
 - **The hard cut**: λ 1.2 while `t ≥ 781` (steps 0 to 10 inclusive), 0 after.
 - **The decay**: λ 1.2 while `t ≥ 781`, then falling in a straight line to 0 at `t 581` (step 20), 0 after. The decay exists because the corrected run's commit step reaches 35 on some seeds, and a cut at 10 may let those seeds fall back.
 - **The tail**: the steps after λ reaches 0, run as plain PoE with the adapter disabled.
-- **Sharpness**: the Laplacian variance of the greyscale image, the same function plan 07 used (`_laplacian_var` in `scripts/showcase/lambda_window_grid.py`). Higher is crisper. It is computed on the 1024 px final render for the cells, and on the 256 px saved frames for the per-step read, so the two sets of numbers are not on one scale.
+- **Sharpness**: the Laplacian variance of the greyscale image, the same function plan 07 used (`_laplacian_var` in `1-lora-correction/scripts/showcase/lambda_window_grid.py`). Higher is crisper. It is computed on the 1024 px final render for the cells, and on the 256 px saved frames for the per-step read, so the two sets of numbers are not on one scale.
 - **The plain-PoE band**: the lowest and highest sharpness over the 8 plain-PoE seeds of a pair. "Back in the band" means a cell's mean sharpness is at or above the band's lower edge.
 - **Both-ness**: the projection of a render's DINOv2 embedding onto the axis from the midpoint of the "a cat" and "a dog" clouds toward the "a cat and a dog" cloud, in cosine units, from the axes already fitted in `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy`. Defined for cat × dog only, because only that pair has reference clouds.
 - **The running estimate**: the model's guess of the finished image at a step (the Tweedie mean), decoded. The saved frames under `where_each_condition_lands/frames/` are these.
 - **The re-noise cell**: the schedule run to step 20, its running estimate taken as a clean image, noise added back to the level of step 35 (`t 281`), then plain PoE from step 35 to the end.
 - **The re-noise level sweep**: the same move with the level varied, `RENOISE_LEVELS_T = (481, 381, 281, 181)` (steps 25, 30, 35, 40), and the committed image taken from two sources: the running estimate at step 20 (`x0s20`, the re-noise cell's source) and the finished decay render (`final`). This is the knob that Consistency Trajectory Models' γ-sampling and Restart sampling turn: how much of the committed image is re-synthesised by the tail. Cells are named `decay_10_20_renoise_<source>_t<level>`.
 - **A strip**: one row per seed and pair, tiles Mono | plain PoE | full window | best schedule | best re-noise cell, the detector's count, the sharpness and the both-ness printed under each tile.
-- **Compose rate**: the fraction of the 8 seeds where the validated detector counts at least two animal instances ([compose rate](../../../../context/world/compose-rate.md)).
+- **Compose rate**: the fraction of the 8 seeds where the validated detector counts at least two animal instances ([compose rate](../../../../../context/world/compose-rate.md)).
 
 ---
 
@@ -110,10 +110,10 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The shared-device path: `biggpu` allows one Slurm job per user, so the render runs with `nohup` over SSH on a pinned free device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112 ([nodes](../../../../environment/hpc/nodes.md)).
-- The launch script checks `torch.cuda.is_available()` under the pinned device before real work, because a card can list in `nvidia-smi` and still run on the CPU ([poe-launch-002](../../../../environment/known-failures.md)).
-- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../environment/storage.md)).
+- The shared-device path: `biggpu` allows one Slurm job per user, so the render runs with `nohup` over SSH on a pinned free device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112 ([nodes](../../../../../environment/hpc/nodes.md)).
+- The launch script checks `torch.cuda.is_available()` under the pinned device before real work, because a card can list in `nvidia-smi` and still run on the CPU ([poe-launch-002](../../../../../environment/known-failures.md)).
+- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../../environment/storage.md)).
 - fp16 end to end; frames and renders are compared within the fp16 drift band, so a "byte-close" check is a mean absolute pixel difference bound, never equality.
 
 ---
@@ -209,7 +209,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 ◀ **Needs:** the frames under `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames/<cond>/seed_<n>/step_<kk>.png` (they exist, 6 conditions × 8 seeds × 14 saved steps).
 
 - [ ] **1.1 Run the per-step sharpness read.**
-  - Command: `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/showcase/correct_early_then_clean_up.py --sharpness-over-steps`
+  - Command: `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/correct_early_then_clean_up.py --sharpness-over-steps`
   - Writes the figure and sidecar named in the Figure Catalog. The falsification constants `EARLY_STEP = 20` and `LATE_STEP = 50` and the band rule live in the script.
   - Done when: the sidecar's `verdict` field reads `late`, `committed` or `inconclusive`, and the review file's first "written before" question carries it.
 
@@ -217,10 +217,10 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ### 2. 🔬 Prove the adapter is detached after a windowed run
 
-◀ **Needs: [task 1.1](#1--read-when-the-softness-enters-no-gpu)** done, and a free device claimed per [the launch recipe](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) with `pgrep -af 'sweep|train|corrector'` checked on the node first.
+◀ **Needs: [task 1.1](#1--read-when-the-softness-enters-no-gpu)** done, and a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) with `pgrep -af 'sweep|train|corrector'` checked on the node first.
 
 - [ ] **2.1 Run the detachment proof on the claimed device.**
-  - Command: `ssh <node> 'GPU=<idx> STAGE=detach nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_detach.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> STAGE=detach nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_detach.log 2>&1 &'`
   - Done when: `detach_check.json` reports `pass: true` (mean absolute pixel difference between the plain render before attaching and the plain render after a windowed run at or under `DETACH_MAX_MEAN_ABS_DIFF`). If it fails, nothing after this task runs; fix the sampler's exit first.
 
 ▶ **Next: [task 3.1](#3--render-and-score-the-schedule-grid)**.
@@ -242,7 +242,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 - [ ] **4.2 Render the re-noise cell** (`STAGE=renoise`): best schedule to step 20, running estimate re-noised to `t 281`, plain PoE for steps 35 to 50.
 - [ ] **4.3 Re-score** (`STAGE=score`); the new cells join `results.json` and get their own sheets and W&B images.
 - [ ] **4.4 Render, score and strip the re-noise level sweep** (`STAGE=sweep`), same launch shape, log `correct_early_sweep.log`. 128 tails behind 16 head renders, about 45 minutes on a Quadro RTX 8000. Done when the eight `decay_10_20_renoise_<source>_t<level>` cells sit in `results.json` with verdicts, `renoise_duplicate_check.max` is at or under `DETACH_MAX_MEAN_ABS_DIFF`, and the review file's sweep question is answered.
-- [ ] **4.5 Log the per-seed strips** (`STAGE=strips`, or on the session node: `CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/showcase/correct_early_then_clean_up.py --strips`). Re-run after every score so the strip's last two columns pick up the best schedule and the best re-noise cell. Done when the W&B run's Media tab shows `strips/<pair>/seed_<n>` for 16 seeds and the `strips_by_seed` table.
+- [ ] **4.5 Log the per-seed strips** (`STAGE=strips`, or on the session node: `CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/correct_early_then_clean_up.py --strips`). Re-run after every score so the strip's last two columns pick up the best schedule and the best re-noise cell. Done when the W&B run's Media tab shows `strips/<pair>/seed_<n>` for 16 seeds and the `strips_by_seed` table.
 
 ▶ **Next: [instruction 5.1](#5--judge-the-cells)**.
 
@@ -308,7 +308,7 @@ Every figure below lands in `artifacts/results/does-correcting-early-then-cleani
 ◀ **Needs: [instruction 5.2](#5--judge-the-cells)** done.
 
 - [ ] **6.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **6.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **6.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported cell as a wall row.
 
@@ -318,9 +318,9 @@ Every figure below lands in `artifacts/results/does-correcting-early-then-cleani
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/correct_early_then_clean_up.py`: the schedule-aware sampler (`Sampler.scheduled`, adapter disabled on every off-window step and on exit), the re-noise sampler (`Sampler.renoise`), the sweep's heads and tails (`Sampler.renoise_heads`, `Sampler.renoise_tail`), the strips (`_strips`, `_wandb_strips`), the stages, the constants. `scripts/showcase/correct_early_then_clean_up_shared_device.sh`: the shared-device launcher with the disk, python, memory, fault and CUDA guards.
+**File:** `1-lora-correction/scripts/showcase/correct_early_then_clean_up.py`: the schedule-aware sampler (`Sampler.scheduled`, adapter disabled on every off-window step and on exit), the re-noise sampler (`Sampler.renoise`), the sweep's heads and tails (`Sampler.renoise_heads`, `Sampler.renoise_tail`), the strips (`_strips`, `_wandb_strips`), the stages, the constants. `1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh`: the shared-device launcher with the disk, python, memory, fault and CUDA guards.
 
-**Reused:** `_laplacian_var` and `_attach_and_load_lora` from `scripts/showcase/lambda_window_grid.py` (rank overridden to 32), `run_cfg` and `run_cfg_poe` from `poe_repair/methods/_sampling.py`, the instance-count scorer, `DinoEmbedder`.
+**Reused:** `_laplacian_var` and `_attach_and_load_lora` from `1-lora-correction/scripts/showcase/lambda_window_grid.py` (rank overridden to 32), `run_cfg` and `run_cfg_poe` from `poe_repair/methods/_sampling.py`, the instance-count scorer, `DinoEmbedder`.
 
 ---
 
@@ -329,7 +329,7 @@ Every figure below lands in `artifacts/results/does-correcting-early-then-cleani
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/14-correct-early-then-clean-up.md — task 1 on the session node, then the detachment proof before any windowed cell, then the stages in order on one claimed device
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/14-correct-early-then-clean-up.md — task 1 on the session node, then the detachment proof before any windowed cell, then the stages in order on one claimed device
 ```
 
 ---
@@ -348,7 +348,7 @@ Every figure below lands in `artifacts/results/does-correcting-early-then-cleani
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 - **poe-lora-003**: every condition in a comparison runs through the identical sampler, differing only in λ(t). Mono is the one exception (single-prompt CFG) and is a reference column, never a compared cell.
 - **poe-lora-004**: the new samplers carry `@torch.no_grad()`.

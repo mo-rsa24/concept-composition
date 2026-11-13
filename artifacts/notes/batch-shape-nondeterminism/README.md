@@ -49,10 +49,10 @@ library version and are not universal constants.
 
 **Where it came from and what judged it**
 
-`report/instrument_smoke.md` cites these same numbers to explain why the interaction-term
+`1-lora-correction/report/instrument-smoke-test.md` cites these same numbers to explain why the interaction-term
 canaries in `tests/test_interaction_term_canaries.py` hold the batch shape fixed at four
 branches and vary only the injection dose `λ`, rather than testing dose-zero against plain PoE
 directly. The tools plan
-[`01-build-the-measuring-scripts.md`](../../../plans/03-does-the-correction-cause-composition/plans/tools/01-build-the-measuring-scripts.md)
+[`01-build-the-measuring-scripts.md`](../../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/tools/01-build-the-measuring-scripts.md)
 in the scope `does-the-correction-cause-composition` records the same finding as the reason its
 must-pass checks compare only same-batch-shape runs.

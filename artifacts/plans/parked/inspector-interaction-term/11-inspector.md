@@ -18,7 +18,7 @@ generates. Serves DoD 11.
 The enhanced Inspector serving the new tabs off the finished result grids.
 
 ## Environment Facts This Plan Depends On
-- Inspector serves on 127.0.0.1:5050 via scripts/run_lora_inspector.sh with an
+- Inspector serves on 127.0.0.1:5050 via 1-lora-correction/scripts/run_lora_inspector.sh with an
   SSH tunnel from the laptop (the script prints the node to tunnel to).
 - Consumes /datasets result grids from plans 03-08; runs in-session.
 
@@ -32,7 +32,7 @@ The enhanced Inspector serving the new tabs off the finished result grids.
 
 ## Engagement Instructions
 ```bash
-bash scripts/run_lora_inspector.sh   # serve; open http://localhost:5050
+bash 1-lora-correction/scripts/run_lora_inspector.sh   # serve; open http://localhost:5050
 # expect: dose scrub, window scrub, manifold animation tabs, all reading
 # /datasets grids only (no generation code paths in the new tabs)
 ```

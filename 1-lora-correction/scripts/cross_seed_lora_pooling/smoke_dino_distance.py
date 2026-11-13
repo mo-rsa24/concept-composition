@@ -15,7 +15,7 @@ Pass criterion (mandatory before building the semantic MDS pipeline):
 
 Run::
 
-    python scripts/cross_seed_lora_pooling/smoke_dino_distance.py
+    python 1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py
 
 Optionally override image paths with CLI flags. The default paths point at
 the existing probe PNGs and the cached mono thumbnail.
@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 from poe_repair import paths
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 

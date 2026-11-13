@@ -91,7 +91,7 @@ checkpoint (the download task prints where it landed and how big it is).
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- The `co3` absolute python path; see [the environment index](../../../../environment/00-INDEX.md).
+- The `co3` absolute python path; see [the environment index](../../../../../environment/00-INDEX.md).
 - Model weights and all large artifacts to `/datasets` only: set the HF cache env var to a
   `/datasets` path before downloading; the task asserts the landing filesystem.
 - fp16 variant of the checkpoint; fp16 upcast rule for any arithmetic on latents.
@@ -151,7 +151,7 @@ Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-conte
    the settled latent and its decoded frame. Asserts: `unet.config.time_cond_proj_dim` present;
    the pipeline call path takes the embedding branch, never a second unconditional pass; the
    timestep mapping from our 50-step grid to LCM's is exact and printed once.
-3. **The one-state check** `scripts/commitment/lcm_smoke.py`: one pair-and-seed run's step-25
+3. **The one-state check** `1-lora-correction/scripts/commitment/lcm_smoke.py`: one pair-and-seed run's step-25
    state through the predictor (joint prompt) beside the teacher's finish from plan 01's script;
    scorer verdicts and DINOv2 distance printed; thresholds `SMOKE_SCORER_MATCH = True` and
    `SMOKE_DINO_DIST_MAX` in source.
@@ -204,7 +204,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [ ] **2.1** Run the check on a single state.
 
     ```bash
-    co3 python scripts/commitment/lcm_smoke.py --cell <plan-01-chosen-cell> --step 25 \
+    co3 python 1-lora-correction/scripts/commitment/lcm_smoke.py --cell <plan-01-chosen-cell> --step 25 \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/lcm_smoke/
     ```
 

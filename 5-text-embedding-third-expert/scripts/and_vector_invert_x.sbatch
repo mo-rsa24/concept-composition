@@ -21,4 +21,4 @@ export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 cd "$REPO"
 nvidia-smi --query-gpu=name,memory.used --format=csv,noheader
 "$PY" -c 'import torch; assert torch.cuda.is_available(), "no usable CUDA device"'
-"$PY" scripts/and_vector_invert_x.py --out "$OUT" "$@"
+"$PY" 5-text-embedding-third-expert/scripts/and_vector_invert_x.py --out "$OUT" "$@"

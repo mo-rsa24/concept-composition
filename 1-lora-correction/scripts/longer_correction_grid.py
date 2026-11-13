@@ -13,16 +13,16 @@ inside the corrected prefix for that row: row 0-10 borders one chunk, row
 0-50 borders all five, so the border pattern grows into a triangle while the
 pictures show the run's own progress column by column.
 
-Frames come from scripts/decode_trajectory_frames.py (the two cells this
-grid shares with F4a) and scripts/recover_growing_window_frames.py (the new
+Frames come from 1-lora-correction/scripts/decode_trajectory_frames.py (the two cells this
+grid shares with F4a) and 1-lora-correction/scripts/recover_growing_window_frames.py (the new
 cells, whose x̂₀ is recovered in closed form from the saved noisy latents,
 since the current composer no longer saves it directly); this script decodes
 nothing itself. The compose-rate curve that backs the quantitative claim
 across all 8 pairs is a separate, diagnostic-only plot: see
-scripts/plot_growing_window_curves.py and growing_window_curves.json.
+1-lora-correction/scripts/plot_growing_window_curves.py and growing_window_curves.json.
 
-    python scripts/longer_correction_grid.py
-    python scripts/longer_correction_grid.py --seed 9
+    python 1-lora-correction/scripts/longer_correction_grid.py
+    python 1-lora-correction/scripts/longer_correction_grid.py --seed 9
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ from poe_repair import paths
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair.experiments.interaction_term import window_grid as wg  # noqa: E402
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)
@@ -87,8 +87,8 @@ def frame_png(seed: int, w0: int, w1: int, step: int) -> Path:
     if not p.is_file():
         raise SystemExit(
             f"missing frame {p}\n"
-            f"run scripts/decode_trajectory_frames.py or "
-            f"scripts/recover_growing_window_frames.py first"
+            f"run 1-lora-correction/scripts/decode_trajectory_frames.py or "
+            f"1-lora-correction/scripts/recover_growing_window_frames.py first"
         )
     return p
 

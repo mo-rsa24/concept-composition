@@ -9,7 +9,7 @@ import itertools
 import pathlib
 from collections import Counter
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
+ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 LABELS = ROOT / "data/nih_cxr14/Data_Entry_2017_v2020.csv"
 OUT = ROOT / "artifacts/results/does-roentgen-draw-two-findings/pair-table.csv"
 

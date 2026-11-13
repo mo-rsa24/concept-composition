@@ -24,7 +24,7 @@ read shows distances at step 0 as large as at step 49 and cannot see timing.
 Anchoring to the endpoint axis suppresses the mush, which is largely orthogonal
 to it.
 
-Produced by `scripts/trajectory_divergence.py` over the 9 cells with 50-step
+Produced by `1-lora-correction/scripts/trajectory_divergence.py` over the 9 cells with 50-step
 cached trajectories (cat × dog, frog × toad, leopard × jaguar; seeds 9, 10, 11).
 Pre-registered checks sit as constants in the script: near-flat separation
 before step 10, steepest rise inside steps 13 to 20.
@@ -66,7 +66,7 @@ correction. Eight points is support, not proof.
   estimates, median relative error 2.6% against a 5% bar; step 0 alone is 14%
   and is the least trustworthy point), plus the Spearman correlation between
   early separation and per-pair dose-curve AUC, bars 0.5 to support and 0.3 to
-  kill, from `scripts/dose_trajectory_divergence.py`. Two coverage facts bound
+  kill, from `1-lora-correction/scripts/dose_trajectory_divergence.py`. Two coverage facts bound
   it: 8 pairs saved trajectories for seeds 9 to 12 and the other 11 for seed 1
   only, so the band mixes seed counts; and the dose sweep scored only those
   same 8 pairs, so the correlation runs over 8 points, not 19.

@@ -1,6 +1,6 @@
 # Route step 9: score every image and build Tables 1 and 2
 
-The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [route step 9](../../../plans/route-answer-the-iclr-reviews.md#9--score-every-image-and-build-the-tables), session `47281f64-fc21-4b71-b0fd-3b968913d9b3`. Walk map: [the step 9 walk map](../../drips/answer-iclr-reviews/EXECUTE_WALK-step-9.md).
+The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [route step 9](../../../plans/route-answer-the-iclr-reviews.md#9--score-every-image-and-build-the-tables), session `47281f64-fc21-4b71-b0fd-3b968913d9b3`. Walk map: [the step 9 walk map](../../../1-lora-correction/artifacts/drips/answer-iclr-reviews/EXECUTE_WALK-step-9.md).
 
 ## 1. Scorers installed and proved on two images
 
@@ -10,7 +10,7 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **What was done.** The mug and wine glass pair, seed 11, from the step 4 census became the probe: the joint render shows both objects, the product render shows only the glass. CLIP score and ImageReward ran in `co3`. T2I-CompBench's BLIP-VQA and GenEval's evaluator were installed into prefix envs under `/datasets/mmolefe/envs/`, after four fixes: a corrupted shared conda cache (fresh `CONDA_PKGS_DIRS`), torch 1.12.1's executable-stack flag (`patchelf --clear-execstack`), the mmcv-full wheel served under `torch1.12.0/` rather than the URL pip built, and `ruamel.yaml` pinned to T2I-CompBench's 0.17.32.
 
-**Where the results live.** [The four-scorer probe figure](../../results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), with the three probe CSVs beside it.
+**Where the results live.** [The four-scorer probe figure](../../../1-lora-correction/artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png), with the three probe CSVs beside it.
 
 <a href="../../results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png"><img src="../../results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png" width="200" alt="the mug and wine glass pair with four scores under each image"></a>
 
@@ -24,9 +24,9 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **The problem.** None beyond writing it; the user later removed the bar's line and the NFE column from the printed table.
 
-**What was done.** The scorer section and the R1 bar (ours minus PoE in BLIP-VQA, interval above 0 in all three sets) were committed as `3c65c634` before any evaluation image was scored. The thresholds are constants in `scripts/review_build_tables.py`.
+**What was done.** The scorer section and the R1 bar (ours minus PoE in BLIP-VQA, interval above 0 in all three sets) were committed as `3c65c634` before any evaluation image was scored. The thresholds are constants in `1-lora-correction/scripts/review_build_tables.py`.
 
-**Where the results live.** The protocol's sections "The scorers" and "The bar for R1", and `report/paper-review/history.md` for each later change.
+**Where the results live.** The protocol's sections "The scorers" and "The bar for R1", and `1-lora-correction/report/paper-review/history.md` for each later change.
 
 **Before and after.** Before: no scorer named, no verdict rule. After: both fixed in the protocol and dated.
 
@@ -52,9 +52,9 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **The problem.** The instance count is validated on animals only, and Table 2's groups hold object and place pairs.
 
-**What was done.** Table 2 moved to BLIP-VQA with an interval from resampling pairs, then seeds (the user's call). `scripts/review_build_tables.py` writes both tables and the bar's verdict.
+**What was done.** Table 2 moved to BLIP-VQA with an interval from resampling pairs, then seeds (the user's call). `1-lora-correction/scripts/review_build_tables.py` writes both tables and the bar's verdict.
 
-**Where the results live.** [Table 1](../../../report/paper-review/table-1-r1-benchmark.csv), [Table 2](../../../report/paper-review/table-2-r3-held-out.csv) and [the sidecar](../../../report/paper-review/tables-1-and-2-sidecar.json) with each cell's count and the verdict.
+**Where the results live.** [Table 1](../../../1-lora-correction/report/paper-review/table-1-r1-benchmark.csv), [Table 2](../../../1-lora-correction/report/paper-review/table-2-r3-held-out.csv) and [the sidecar](../../../1-lora-correction/report/paper-review/tables-1-and-2-sidecar.json) with each cell's count and the verdict.
 
 **Before and after.** The bar reads SUPPORTS: ours minus PoE in BLIP-VQA is above 0 in all three sets (the intervals are in the sidecar).
 
@@ -66,7 +66,7 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **The problem.** The slot layouts still carried NFE and the count for R3, and both captions described the old tables.
 
-**What was done.** The layouts in `scripts/refresh_paper_slots.py` and both captions were rewritten to match; slots R1 and R3 filled.
+**What was done.** The layouts in `1-lora-correction/scripts/refresh_paper_slots.py` and both captions were rewritten to match; slots R1 and R3 filled.
 
 **Where the results live.** `paper/iclr-56173/slots/R1.tex`, `R3.tex`; page 9 of the build. Commit `56b968b6`.
 

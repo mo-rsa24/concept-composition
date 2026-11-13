@@ -89,7 +89,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-The thresholds live in source as constants in `scripts/corrector_residual_curve.py`, so moving one
+The thresholds live in source as constants in `1-lora-correction/scripts/corrector_residual_curve.py`, so moving one
 after the answer is visible shows up in a diff.
 
 - [ ] ⚠️ **Is the correction still bounded away from zero at the last denoising step, on the
@@ -115,7 +115,7 @@ after the answer is visible shows up in a diff.
       does?** Recorded either way. Same window means two different mechanisms acting at the same
       moment. A different window is the stronger result and needs its own paragraph. This question
       is answered even if the check above returns a null, because a flat residual curve does not
-      imply a flat [compose rate](../../../context/world/compose-rate.md). The corrector can relocate the
+      imply a flat [compose rate](../../../../context/world/compose-rate.md). The corrector can relocate the
       trajectory without shrinking `‖r_t‖`.
 
 - [ ] ⚠️ **Does SuperDiff still compose at 50 steps?** Its default is 200. If it does not, every

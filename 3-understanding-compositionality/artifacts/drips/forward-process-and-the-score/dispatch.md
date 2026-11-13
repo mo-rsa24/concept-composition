@@ -1,5 +1,5 @@
-scope: none (layer plan: artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, task 2 "You: the maths drip")
-source: artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md steps 4, 5 and 8; rebuild/out/walk-numbers.json (p1.abar_*, p1.sqrt_1m_abar_*, p1.example_*)
+scope: none (layer plan: 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, task 2 "You: the maths drip")
+source: 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md steps 4, 5 and 8; rebuild/out/walk-numbers.json (p1.abar_*, p1.sqrt_1m_abar_*, p1.example_*)
 why: derive the sampled-noise identity and the marginal identity by hand before quiz 1.2, step 6's scene and step 7's cross-links read this folder
 
 ladder: 5 pieces, 18 rungs
@@ -56,7 +56,7 @@ clicked [my read]: wants the geometry before the formula; the circle point as (s
 scene queued (after the running dispatch returns): Timetable 2 already has the quarter circle, the angle in degrees and radians, cos as a length, cos² as a bar, δ = 0, and f(k)/f(0) in its equation; to add: the point's y = sin as the noise multiplier with x² + y² = 1, radians as arc length, a position ruler with the posts and δ, and numerator and denominator bars with a switch that drops the denominator
 vault: this turn held until the running writer reports
 
-integrate: scene return routes/scene-1-1-to-1-4.md (version 1792564498-9605): rung 1 → #derive-2, rung 2 → #derive-3, rung 3 → #derive-5 and #derive-6, rung 4 → #derive-7 (new: the one-shot draw and its density on the 2D toy, prediction slot, broken-centre toggle; still at artifacts/results/how-the-forward-process-dissolves-an-image/the-one-shot-draw-and-its-density.png); browser-walked at 1440 px light and 390 px dark; not done: Codex mathematics review, the q(x_t | x_0) link to the Chan tutorial p23 unchecked
+integrate: scene return routes/scene-1-1-to-1-4.md (version 1792564498-9605): rung 1 → #derive-2, rung 2 → #derive-3, rung 3 → #derive-5 and #derive-6, rung 4 → #derive-7 (new: the one-shot draw and its density on the 2D toy, prediction slot, broken-centre toggle; still at 3-understanding-compositionality/artifacts/results/how-the-forward-process-dissolves-an-image/the-one-shot-draw-and-its-density.png); browser-walked at 1440 px light and 390 px dark; not done: Codex mathematics review, the q(x_t | x_0) link to the Chan tutorial p23 unchecked
 scene dispatched: the circle geometry before C_k (queued item above)
 correction [vault writer]: 'squaring makes it a share between 0 and 1' was loose; on a quarter turn cos θ is already in [0, 1]. Read through the circle: cos θ is the signal multiplier and cos²θ its variance share (rung 1: share = multiplier²); Nichol & Dhariwal call the cos² shape an arbitrary choice. Filed in The Cosine Noise Schedule.md
 
@@ -100,7 +100,7 @@ asked [yours]: keep, and scene with the consequences of moving each term visible
 keep dispatched: piece 06 (where p_k comes from) into Step 4's On paper 4 → routes/keep-06.md, original to kept/06-where-p-k-comes-from.md
 scene: addendum to the running name/derive dispatch: #timetable-position-derived, with handles on δ, T, a and b, a "Divide by (1 + δ)" switch, and a p = u² preset, each moving the posts, the C_k curve and the β_0, √β_0, post-100 and C_100 readouts live
 integrate: keep return routes/keep-06.md
-kept: artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md → artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-where-the-position-goes
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md → 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-where-the-position-goes
 open: link #timetable-position-derived from On paper 4's "On the scene" line once the scene publishes it (ready line in routes/keep-06.md)
 
 rung: β_t from consecutive posts (piece 2, rung 2)

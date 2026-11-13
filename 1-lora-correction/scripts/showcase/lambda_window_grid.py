@@ -3,7 +3,7 @@
 
 At the fixed 100k checkpoint, fixed injection window (steps 0-9), sweep the LoRA correction's
 lambda across {0, 0.25, 0.5, 0.75, 1.0} on five pair/seed cells: the four F9 pairs (the four
-held-out pairs rendered at seed 9 in scripts/joint_poe_adapter_grid.py) plus the repaired pair
+held-out pairs rendered at seed 9 in 1-lora-correction/scripts/joint_poe_adapter_grid.py) plus the repaired pair
 (cat x dog at seed 1, decisions-taken-here.md's "the repaired run"):
 
     a_cat__x__a_dog       seed 9
@@ -19,7 +19,7 @@ disk-guard/GPU-check boilerplate, but NOT its sampler
 (poe_repair.methods._sampling.run_lora_residual_inject_masked): that sampler's off-window steps
 run a single unconditional forward with no guidance at all (by design, for a different
 compute-budget experiment elsewhere in this project), which cannot reproduce this project's
-cached poe.png (guided PoE at all 50 steps, per scripts/build_training_cache.py) at lambda=0 —
+cached poe.png (guided PoE at all 50 steps, per 3-understanding-compositionality/scripts/build_training_cache.py) at lambda=0 —
 exactly the identity check this plan's review file pre-registers. This script instead defines
 run_lora_residual_inject_windowed_poe: off-window steps run the same full guided-PoE forward as
 on-window steps, adapter disabled, so lambda=0 matches poe.png end to end and on-window steps
@@ -35,9 +35,9 @@ Stages:
      lambda, for plan 05's wall.
 
 Usage:
-    python scripts/showcase/lambda_window_grid.py --run-sweep
-    python scripts/showcase/lambda_window_grid.py --measure
-    python scripts/showcase/lambda_window_grid.py --strip
+    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --run-sweep
+    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --measure
+    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --strip
 """
 
 from __future__ import annotations
@@ -52,7 +52,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from poe_repair.experiments._eval_common import cell_for
 from poe_repair.experiments.one_pair_one_seed import trainer as lora_trainer
@@ -72,7 +72,7 @@ from poe_repair._sdxl.metrics import ddim_prev_from_x0_eps, guided_eps, poe_eps,
 from poe_repair._sdxl.runtime import LatentTrajectoryCollector, decode_latents
 
 CHECKPOINT_RUN_DIR = Path(
-    "artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+    "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 )
 CHECKPOINT_PATH = CHECKPOINT_RUN_DIR / "checkpoints/lora_step_100000.pt"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_c")
@@ -89,7 +89,7 @@ GUIDANCE_SCALE = 7.5
 
 LAMBDA_GRID = (0.0, 0.25, 0.5, 0.75, 1.0)
 
-# The four F9 pairs (held-out, seed 9, per scripts/joint_poe_adapter_grid.py) plus the repaired
+# The four F9 pairs (held-out, seed 9, per 1-lora-correction/scripts/joint_poe_adapter_grid.py) plus the repaired
 # pair (cat x dog, seed 1, per decisions-taken-here.md "The repaired run is a paper fact").
 STRIP_PAIR = "cat_dog_s1"  # the repaired pair is the named strip subject for plan 05's wall
 
@@ -164,7 +164,7 @@ def run_lora_residual_inject_windowed_poe(
 
     Written for plan 07 (01-showcase-the-trained-lora, experiment C): the plan's identity check
     requires lambda=0 to reproduce the cached poe.png (guided PoE at all 50 steps, per
-    scripts/build_training_cache.py), which run_lora_residual_inject_masked's "with_prompt"
+    3-understanding-compositionality/scripts/build_training_cache.py), which run_lora_residual_inject_masked's "with_prompt"
     off-step mode cannot do (that mode's off-steps are unguided, by design, for a different
     compute-budget experiment elsewhere in this project). Here, on-window steps behave exactly
     as run_lora_residual_inject_masked's on-step branch; off-window steps are the same

@@ -49,7 +49,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 **This is the one question whose failure moves the plan.**
 
 - [ ] ⚠️ **Does scorer-against-eye agreement meet the threshold, per kind?** The threshold lives
-  in `scripts/showcase/offanimal_validation.py` and is quoted here verbatim at judgment time,
+  in `1-lora-correction/scripts/showcase/offanimal_validation.py` and is quoted here verbatim at judgment time,
   with the agreement rates and the ambiguous-case count beside it.
 
 ## Written before the run, answered after

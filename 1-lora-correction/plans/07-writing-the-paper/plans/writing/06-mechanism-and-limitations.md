@@ -3,7 +3,7 @@
 This plan asks what the paper may claim about how the fix works inside the model, and states the
 three places where the evidence stops.
 
-**Step 21 of 22.** Waits on step 15. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 21 of 22.** Waits on step 15. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|

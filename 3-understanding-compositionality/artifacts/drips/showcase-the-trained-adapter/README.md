@@ -9,7 +9,7 @@ is waiting on a settle-or-expand, and the walk's vocabulary table has no durable
 
 This walk's compiled six-decision ledger plus the eight-line figure standard. Its content now
 lives, merged with two parallel sessions' ledgers, in the adopted scope's
-`plans/01-showcase-the-trained-lora/decisions-taken-here.md`,
+`1-lora-correction/plans/01-showcase-the-trained-lora/decisions-taken-here.md`,
 which is the authoritative copy; this file is the walk's own record.
 
 ## reconciled-ledger-now-absorbed.md
@@ -59,6 +59,6 @@ generalization demonstrations, and one figure standard all the resulting figures
 with `--write` on 2026-08-29.
 
 **Where its output went.** Into the scope it built,
-[the adapter showcase scope](../../../plans/01-showcase-the-trained-lora/MASTER_PLAN.md), whose
+[the adapter showcase scope](../../../../1-lora-correction/plans/01-showcase-the-trained-lora/MASTER_PLAN.md), whose
 `decisions-taken-here.md` merges this walk's ledger with the other two sessions'. That merged
 ledger is the authoritative copy; this file is the walk's own record of how it got there.

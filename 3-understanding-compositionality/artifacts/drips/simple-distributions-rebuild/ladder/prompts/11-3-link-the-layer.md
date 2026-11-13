@@ -9,21 +9,21 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 11 of the composition ladder wrote.
 
 Background
-Layer 11 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 11 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 idea walk updated the testbed map and compiled a plan, and its build walk closed on a
 retrospective. Those files should link to the brick row, the parent map and the label route that
 back the same ideas, and those should link back, so the next reader finds both.
 
 Objectives
-1. Run xref-cadence over artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, the plan its
+1. Run xref-cadence over 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, the plan its
    compile wrote, the route 8 return, and the retrospective the layer 11 walk closed on.
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The text-conditioned testbed"
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The text-conditioned testbed"
   row of the Bricks table.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 7 and 12.
-- artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md: the
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md: the
   label route.
 
 What is already known

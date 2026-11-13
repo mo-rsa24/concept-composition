@@ -18,7 +18,7 @@ enough to compose, the gap is the sampler's to close.
 ## Position in the plan tree
 
 **Step 51 of 51.** Waits on nothing: the training cache it reads exists. The one order is the
-`## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+`## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -66,7 +66,7 @@ unweighted.
 parameter conv classifier on the 4×128×128 latent, conditioned on the timestep and the joint
 prompt's pooled text embedding), the contrastive bank (`data.py`: `mono.png` and `poe.png` of every
 training-cache cell, VAE-encoded once), the particle sampler (`sampler.py`), and the trainer that
-renders the strips (`train.py`). Launched by `scripts/twisted_smc/train_twist.sbatch`.
+renders the strips (`train.py`). Launched by `1-lora-correction/scripts/twisted_smc/train_twist.sbatch`.
 
 **What it does.** The optimal twist for a sampler whose proposal is PoE and whose target is the
 joint prompt is `psi_t(x_t) = p_J,t(x_t) / p_PoE,t(x_t)`. A classifier trained with binary
@@ -84,7 +84,7 @@ Mono (joint prompt, target), PoE (product, unweighted, the control), twisted SMC
 weighted and resampled). Only the weighting differs between the last two.
 
 **Associated materials.** [The review questions](../../review/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md),
-[the cache format](../../../../poe_repair/training_cache.py), the Feynman-Kac read at
+[the cache format](../../../../../poe_repair/training_cache.py), the Feynman-Kac read at
 [step 30](../ideas/07-feynman-kac-correctors.md), and the amortised-twist paper above.
 
 ## Considerations
@@ -196,7 +196,7 @@ informed by the joint prompt without the joint prompt's score ever entering the 
    `checkpoints/`, references rendered once, strips every `--render-every` steps logged as
    `samples/<split>/<pair>/seed_NN` images and a `strips-step<N>` artifact, detector reads under
    `eval/compose/{mono,poe,smc}/...`, `verdict.json` at the end.
-5. **The launcher.** `scripts/twisted_smc/train_twist.sbatch {smoke|full}` with the disk guard on
+5. **The launcher.** `1-lora-correction/scripts/twisted_smc/train_twist.sbatch {smoke|full}` with the disk guard on
    the output root, python chosen by node (`co3_bw` on the Blackwell nodes).
 
 ## Purpose and goal
@@ -220,15 +220,15 @@ whatever it recovers is the sampler's share by construction.
 
 - Python by node: `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python` on mscluster110 to
   112 (Blackwell), `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` elsewhere, per
-  [environment/hpc/nodes.md](../../../../environment/hpc/nodes.md). Never a bare `python`.
+  [environment/hpc/nodes.md](../../../../../environment/hpc/nodes.md). Never a bare `python`.
 - Bank, checkpoints and renders under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc/`, disk guard on that
-  path, per [environment/storage.md](../../../../environment/storage.md).
+  path, per [environment/storage.md](../../../../../environment/storage.md).
 - The training cache at `/datasets/mmolefe/poe_repair_min/outputs/training_cache/` with
   `mono.png`, `poe.png`, `embeddings.pt` and `meta.json` per cell; 120 train cells over 18 pairs
   as of 2026-09-05.
 - biggpu allows one job per user; the launch follows
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - The tracker is W&B, project `prime_lab/poe-repair-animals-compose`; the review file carries run
   ids and verdicts, never curves.
 - fp16 SDXL, fp32 for the head and for every norm and weight.
@@ -255,12 +255,12 @@ whatever it recovers is the sampler's share by construction.
 ### 1. 🔧 Build and smoke the path
 
 - [x] **1.1** Write the package `poe_repair/experiments/twisted_smc/` (bank, head, sampler,
-      trainer) and the launcher `scripts/twisted_smc/train_twist.sbatch`.
+      trainer) and the launcher `1-lora-correction/scripts/twisted_smc/train_twist.sbatch`.
   - **Done when:** the package compiles, the head returns one logit per latent at 1024² and 512²,
     and the resampler returns K indices.
 - [x] **1.2** Run the smoke mode on an idle biggpu node: 2 train pairs × 2 seeds, 1 held-out
       cell, 40 steps, K 2, 4 render steps, 512², renders at steps 0, 20 and 40.
-  - Command: `sbatch --nodelist=<idle node> scripts/twisted_smc/train_twist.sbatch smoke`
+  - Command: `sbatch --nodelist=<idle node> 1-lora-correction/scripts/twisted_smc/train_twist.sbatch smoke`
   - **Done when:** the run dir holds `references/`, three `samples/step_*/` folders with strips,
     `checkpoints/twist_step_000040.pt`, and the W&B run shows the three strip images and the
     `strips-step000040` artifact.
@@ -275,7 +275,7 @@ whatever it recovers is the sampler's share by construction.
 
 - [x] **2.1** Launch the full mode: 100k steps, batch 16 positives + 16 negatives, lr 1e-4,
       renders every 10k steps at K 4, 20 steps, 1024², two training pairs and one held-out pair.
-  - Command: `sbatch --nodelist=<idle node> scripts/twisted_smc/train_twist.sbatch full`
+  - Command: `sbatch --nodelist=<idle node> 1-lora-correction/scripts/twisted_smc/train_twist.sbatch full`
   - 💡 `/run-experiment` ✅ for the launch and the harvest.
   - **Done when:** the W&B run id and the run dir are in the review file's Runs table.
   - Slurm job 49853 on mscluster110, W&B run `3cwrxlw0`, finished 2026-09-05 08:10; verdict in the review
@@ -372,14 +372,14 @@ None. This scope carries no `diagram-prompts.md`.
 | Item | Lane | Description | Generated by | Status | Details |
 |---|---|---|---|---|---|
 | `<run>/samples/step_NNNNNN/<split>__<pair>__seed_NN__strip.png` | — | three panels, Mono, PoE control, twisted SMC, from the same K noise draws; the SMC panel is the largest-weight particle at that checkpoint | task 2.1 | ⏳ | logged to W&B under `samples/<split>/<pair>/seed_NN` and bundled in the `strips-step<N>` artifact |
-| `<run>/samples/step_NNNNNN/*__smc__p{k}.png` | — | every particle, for the detector's compose fraction | task 2.1; scored by `scripts/twisted_smc/score_all_particles.py` into `<run>/all_particles_scores.json` | ✅ | **Supplementary** |
-| `artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png` | — | three cells by Mono, PoE and eleven SMC checkpoints, composed from the run's PNGs | `scripts/twisted_smc/report_figures.py` | ✅ | 📊 Drawn in [Figure 1 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints) |
-| `artifacts/results/is-the-gap-the-samplers-or-the-models/twist-training-curves.png` | — | validation and training accuracy against step with the 0.60 bar; training loss per noise bucket on a log axis | the same script | ✅ | 📊 Drawn in [Figure 3 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level) |
+| `<run>/samples/step_NNNNNN/*__smc__p{k}.png` | — | every particle, for the detector's compose fraction | task 2.1; scored by `1-lora-correction/scripts/twisted_smc/score_all_particles.py` into `<run>/all_particles_scores.json` | ✅ | **Supplementary** |
+| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png` | — | three cells by Mono, PoE and eleven SMC checkpoints, composed from the run's PNGs | `1-lora-correction/scripts/twisted_smc/report_figures.py` | ✅ | 📊 Drawn in [Figure 1 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-1-the-checkpoint-timeline-three-cells-by-eleven-checkpoints) |
+| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/twist-training-curves.png` | — | validation and training accuracy against step with the 0.60 bar; training loss per noise bucket on a log axis | the same script | ✅ | 📊 Drawn in [Figure 3 of the figure explainer](../../../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer.md#figure-3-what-the-twist-head-learned-accuracy-and-loss-by-noise-level) |
 
 ### Organization workflow
 
 1. Everything under the run dir on `/datasets`.
-2. A strip promoted to the paper goes to `artifacts/results/is-the-gap-the-samplers-or-the-models/` with a README entry.
+2. A strip promoted to the paper goes to `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with a README entry.
 
 ## Orchestration: keeping catalogs and plan files in sync
 
@@ -404,12 +404,12 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/experiments/twisted_smc/twist.py](../../../../poe_repair/experiments/twisted_smc/twist.py) | the head |
-| [poe_repair/experiments/twisted_smc/data.py](../../../../poe_repair/experiments/twisted_smc/data.py) | the bank and the re-noising sampler |
-| [poe_repair/experiments/twisted_smc/sampler.py](../../../../poe_repair/experiments/twisted_smc/sampler.py) | the particle sampler and the weights |
-| [poe_repair/experiments/twisted_smc/train.py](../../../../poe_repair/experiments/twisted_smc/train.py) | the loop, the strips, the bars |
-| [poe_repair/_sdxl/metrics.py](../../../../poe_repair/_sdxl/metrics.py) | guided and PoE eps, the Tweedie estimate |
-| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count |
+| [poe_repair/experiments/twisted_smc/twist.py](../../../../../poe_repair/experiments/twisted_smc/twist.py) | the head |
+| [poe_repair/experiments/twisted_smc/data.py](../../../../../poe_repair/experiments/twisted_smc/data.py) | the bank and the re-noising sampler |
+| [poe_repair/experiments/twisted_smc/sampler.py](../../../../../poe_repair/experiments/twisted_smc/sampler.py) | the particle sampler and the weights |
+| [poe_repair/experiments/twisted_smc/train.py](../../../../../poe_repair/experiments/twisted_smc/train.py) | the loop, the strips, the bars |
+| [poe_repair/_sdxl/metrics.py](../../../../../poe_repair/_sdxl/metrics.py) | guided and PoE eps, the Tweedie estimate |
+| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count |
 
 ## Next step
 

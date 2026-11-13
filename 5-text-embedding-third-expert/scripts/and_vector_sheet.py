@@ -13,14 +13,14 @@
                                               scaffolding SDXL reads is a real prompt's. Words are matched
                                               on the token itself, per encoder, by and_vector_norms.py
 
-Every column is the repo's plain guided sum over N conditions (scripts/concept_multi_poe.py,
+Every column is the repo's plain guided sum over N conditions (1-lora-correction/scripts/concept_multi_poe.py,
 eps = eps_empty + w * sum_i (eps_i - eps_empty)); one condition is ordinary classifier-free guidance.
 So a, b, the joint prompt, PoE, x alone and the three-expert products all come from one loop, one
 sampler and, per seed, the same starting noise (init_latents_for_cell on `a_cat__x__a_dog`). The
 arithmetic runs in fp32 and is cast to the model dtype after.
 
-    python scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
-    python scripts/and_vector_sheet.py --sheet <tiles_dir> <out.png> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
+    python 5-text-embedding-third-expert/scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
+    python 5-text-embedding-third-expert/scripts/and_vector_sheet.py --sheet <tiles_dir> <out.png> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <OUT>/and_vector/<a>__x__<b>/seedNN/<column>.png with a JSON sidecar; an existing tile
 is skipped.
@@ -34,7 +34,7 @@ import os
 import sys
 from pathlib import Path
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 # This file's own directory wins, so a copy run from outside the repo uses its own siblings rather than

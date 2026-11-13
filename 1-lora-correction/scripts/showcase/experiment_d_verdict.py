@@ -3,7 +3,7 @@ late fidelity decay, and does it change the best checkpoint at all?
 
 The bars live here, in source, so they cannot move after the answer is seen. They were written
 on 2026-09-06 before the run started, from the rank-32 baseline numbers in
-report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md.
+3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md.
 
 Reads:
   * results.json of two lambda_boundary_probe runs on the new adapter (30k and 90k) and of the
@@ -12,7 +12,7 @@ Reads:
   * the Frobenius norm of lora_state in the new run's 90k checkpoint against the baseline's 86.9.
 
 Usage:
-  python scripts/showcase/experiment_d_verdict.py \
+  python 1-lora-correction/scripts/showcase/experiment_d_verdict.py \
       --new-30k <out-root of the 30k probe> --new-90k <out-root of the 90k probe> \
       --new-90k-ckpt <lora_step_090000.pt> [--out verdict.json]
 """

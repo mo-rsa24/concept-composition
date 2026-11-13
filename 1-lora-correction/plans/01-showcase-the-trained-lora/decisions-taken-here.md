@@ -41,7 +41,7 @@ and `spectrum_windowed.json`.
   was made live in a walk and is the reason the rule is written down).
 - No MDS or UMAP panel may invite the reader to read distances.
 - The more-correction-more-composition figures plot
-  [compose rate](../../context/world/compose-rate.md) (y, 0 to 1) against lambda (x), one curve
+  [compose rate](../../../context/world/compose-rate.md) (y, 0 to 1) against lambda (x), one curve
   per injected vector, in the four-control-row layout, AUC always carrying its meaning in words.
 - Directions are indexed by step; a direction found at one timestep is not asserted at another.
 - Rank-8 (LoRA weight space) and k=8 (r_t space) are different objects; no figure may imply the
@@ -266,7 +266,7 @@ the panel reports that null and the seed-character idea closes.
 `heldout/a_cat__x__a_dog/seed_1`: the joint prompt renders a single cat, plain PoE renders one
 blended creature, and the adapter at lambda 1 from the 100k checkpoint renders a separated dog
 and cat plus a third smaller animal a caption must mention. Evidence and card:
-`artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
 mode-reproducible, not byte-reproducible (fp16), and figure sidecars say so.
 
 ## No intrinsic-dimension estimate exists

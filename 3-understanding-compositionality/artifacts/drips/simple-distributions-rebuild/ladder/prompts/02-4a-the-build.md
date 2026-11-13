@@ -5,11 +5,11 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-execute-plan artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, I type
+/drip-execute-plan 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, I type
 every block myself into ~/Playground/PhD/simple-distributions-walk/walk02.py
 
 Background
-This is layer 2's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 2's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type my own product of two experts, annealed ULA and per-sample MALA from the step file, one step
 per message. Claude's reference code is under toy/ in this repo; my file and the reference print
 the same numbers, and a difference is a lesson or a bug. I start from the setup's folder and
@@ -26,7 +26,7 @@ Objectives
 4. Tick each step in the step file as it lands, and keep my place in the walk map between sittings.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md: the step file.
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md: the step file.
 - toy/rebuild/compose.py, toy/rebuild/samplers.py and toy/anneal_samplers.py: the reference.
 - toy/rebuild/out/walk-numbers.json and toy/rebuild/out/phase2/step9.json: the worked numbers.
 - The layer 2 maths drip's dispatch.md: my notation.

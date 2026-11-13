@@ -1,11 +1,11 @@
 to: the forward-process-and-the-score walk (dispatch.md, on integrate)
 from: keep, all five taught pieces, one writer in sequence
 
-destination: artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, Step 4 (uncommitted; `git diff` on that file is the review)
+destination: 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, Step 4 (uncommitted; `git diff` on that file is the review)
 
 ## Piece 01: the forward process > scaling a draw
 
-kept: artifacts/drips/forward-process-and-the-score/kept/01-scaling-a-draw.md (rung from message 4f7410b9, the real-schedule example from e5e8e602, the t = 75 rounding correction from 7eef2c2b)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/01-scaling-a-draw.md (rung from message 4f7410b9, the real-schedule example from e5e8e602, the t = 75 rounding correction from 7eef2c2b)
 
 **Where it went.** Step 4, "Derivation of the one-shot formula", as the passage anchored `#step4-the-scaling-rule` ("The first rule: scaling a draw scales its variance by c²").
 
@@ -17,7 +17,7 @@ kept: artifacts/drips/forward-process-and-the-score/kept/01-scaling-a-draw.md (r
 
 ## Piece 02: the forward process > independent variances add
 
-kept: artifacts/drips/forward-process-and-the-score/kept/02-independent-variances-add.md (message e5e8e602)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/02-independent-variances-add.md (message e5e8e602)
 
 **Where it went.** The same derivation, anchored `#step4-variances-add`.
 
@@ -29,7 +29,7 @@ kept: artifacts/drips/forward-process-and-the-score/kept/02-independent-variance
 
 ## Piece 03: the forward process > two steps, then every step
 
-kept: artifacts/drips/forward-process-and-the-score/kept/03-two-steps-then-every-step.md (message 33967dd8)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/03-two-steps-then-every-step.md (message 33967dd8)
 
 **Where it went.** The same derivation, anchored `#step4-two-steps-then-every-step`. It runs from "Two steps" through "Every step, by induction" to "The stack is one draw" (piece 04's first section, filed here because it closes the derivation).
 
@@ -41,7 +41,7 @@ kept: artifacts/drips/forward-process-and-the-score/kept/03-two-steps-then-every
 
 ## Piece 04: the forward process > the one-shot draw and its density
 
-kept: artifacts/drips/forward-process-and-the-score/kept/04-the-one-shot-draw-and-its-density.md (message 07b1a108)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/04-the-one-shot-draw-and-its-density.md (message 07b1a108)
 
 **Where it went.** "#### The density: from the draw to q(x_t | x_0)", anchored `#step4-the-one-shot-density`. Another writer added this heading to the file while this keep was running, so it holds the piece in place of "All the words together: the formula". The formula heading is unchanged.
 
@@ -53,7 +53,7 @@ kept: artifacts/drips/forward-process-and-the-score/kept/04-the-one-shot-draw-an
 
 ## Piece 05: the cosine schedule > the boundary values C_k by hand
 
-kept: artifacts/drips/forward-process-and-the-score/kept/05-the-cosine-boundary-values-by-hand.md (message 7a43103b, plus the squaring correction from ffaeba2b)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/05-the-cosine-boundary-values-by-hand.md (message 7a43103b, plus the squaring correction from ffaeba2b)
 
 **Where it went.** Step 4's "The cosine schedule" paragraphs. On-paper 1 to 5 are anchored `#step4-the-quarter-circle-by-hand` and the worked posts `#step4-four-posts-by-hand`. The shape reading went under "#### Then the shape word: cosine".
 

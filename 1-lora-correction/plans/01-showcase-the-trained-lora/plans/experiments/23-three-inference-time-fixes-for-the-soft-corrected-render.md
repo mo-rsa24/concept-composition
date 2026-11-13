@@ -57,10 +57,10 @@
 - **The APG projection** (Sadat et al. 2025, arXiv 2410.02416): the correction is split into the part parallel to the PoE prediction and the part orthogonal to it. The parallel part is multiplied by `APG_ETA` (0 here, APG's recommended default), the orthogonal part is kept whole. APG found the parallel part of a guidance update drives oversaturation and the orthogonal part carries the quality.
 - **Keeping PoE's norm**: the corrected prediction is rescaled to the PoE prediction's norm at every step, direction unchanged. This isolates the norm argument from the direction change.
 - **Parallel share**: `‖parallel part‖ / ‖correction‖` at one step. **Parallel coefficient**: `⟨correction, PoE⟩ / ‖PoE‖²`; negative means the correction shortens the PoE prediction, which is the damping [what the correction is made of](../../../../report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md) measured (the reachable part weights each expert at 1 to 3 where PoE weights it 7.5).
-- **Sharpness**: Laplacian variance of the greyscale 1024 px render, `_laplacian_var` in `scripts/showcase/lambda_window_grid.py`. Higher is crisper. It counts edges, so a sketch-style seed scores above a photograph; that is why every read here is paired per seed against the same seed's full-window render and never a mean against the plain band (plan 14's premise gate fired on that band, seeds 11, 14 and 15 being line drawings).
+- **Sharpness**: Laplacian variance of the greyscale 1024 px render, `_laplacian_var` in `1-lora-correction/scripts/showcase/lambda_window_grid.py`. Higher is crisper. It counts edges, so a sketch-style seed scores above a photograph; that is why every read here is paired per seed against the same seed's full-window render and never a mean against the plain band (plan 14's premise gate fired on that band, seeds 11, 14 and 15 being line drawings).
 - **d(Mono)**: the DINOv2 ViT-S/14 cosine distance from a render to the same seed's joint-prompt render. Lower is nearer the joint-prompt image.
 - **Both-ness**: projection of the DINOv2 embedding toward the "a cat and a dog" cloud on the axes fitted for the landing finding; cat × dog only.
-- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../context/world/compose-rate.md)).
+- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../../context/world/compose-rate.md)).
 - **A strip**: one row per seed, tiles Mono | plain PoE | same-loop full window λ 1.2 | CFG++ | APG | norm kept, with the detector's count, the sharpness, d(Mono) and both-ness under each tile.
 
 ---
@@ -106,12 +106,12 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The shared-device path: `biggpu` allows one Slurm job per user, so the render runs with `nohup` over SSH on a pinned free device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112 ([nodes](../../../../environment/hpc/nodes.md)).
-- The launch script checks `torch.cuda.is_available()` under the pinned device before real work ([poe-launch-002](../../../../environment/known-failures.md)).
-- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../environment/storage.md)).
+- The shared-device path: `biggpu` allows one Slurm job per user, so the render runs with `nohup` over SSH on a pinned free device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112 ([nodes](../../../../../environment/hpc/nodes.md)).
+- The launch script checks `torch.cuda.is_available()` under the pinned device before real work ([poe-launch-002](../../../../../environment/known-failures.md)).
+- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../../environment/storage.md)).
 - fp16 end to end. The identity check against plan 14's render is a mean absolute pixel difference bound of 6.0 grey levels; combining the two predictions in fp32 rather than fp16 alone moves a 50-step render by about 3 grey levels on the same card, which is why the bar's reference is rendered through this loop and plan 14's render is the check, not the reference.
-- DINOv2 embeds on the GPU: on the CPU it routes through a CUDA-only xformers kernel ([poe-mem-002](../../../../environment/known-failures.md)).
+- DINOv2 embeds on the GPU: on the CPU it routes through a CUDA-only xformers kernel ([poe-mem-002](../../../../../environment/known-failures.md)).
 
 ---
 
@@ -199,10 +199,10 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 
 ### 1. 🧪 Render, score and strip on a shared device
 
-◀ **Needs:** a free device claimed per [the launch recipe](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'crisp_fix|correct_early'` checked on the node first.
+◀ **Needs:** a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'crisp_fix|correct_early'` checked on the node first.
 
 - [x] **1.1 Launch the full chain** (identity, render, score, strips) on the claimed device.
-  - Command: `ssh <node> 'GPU=<idx> STAGE=all nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_all.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> STAGE=all nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_all.log 2>&1 &'`
   - Done when: the log ends in `DONE stage=all`, `identity_check.json` reads `pass_cross_device: true`, `results.json` carries a verdict per fix, and the W&B run's Media tab shows `strips/seed_<n>` for 8 seeds. Record node, device, PID and the W&B run id in the review file's Runs table.
   - Launched 2026-09-06 03:26 on mscluster108 device 1 over SSH, bash PID 321031.
 - [x] **1.2 Render the same-loop full window, then re-score and re-strip against it** (`STAGE=baseline`, same launch shape, log `crisp_fix_baseline.log`). Queued behind task 1.1 by a waiter on the node. Done when `results.json` reads `reference_full_window: full_1.2_sameloop`, `fp16_floor_grey_levels` carries 8 seeds, and the strips' third tile is the same-loop full window.
@@ -269,7 +269,7 @@ Every figure below lands in `artifacts/results/does-an-inference-time-fix-make-t
 ◀ **Needs: [instruction 2.2](#2--judge-the-cells)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported cell as a wall row.
 
@@ -279,9 +279,9 @@ Every figure below lands in `artifacts/results/does-an-inference-time-fix-make-t
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/crisp_fix_strip.py`: `apply_fix` (the hook and its diagnostics), `FixSampler.fixed` (plan 14's loop with the hook), `identity_check`, `verdict_for_fix`, the stages, the constants. `scripts/showcase/crisp_fix_strip_shared_device.sh`: the shared-device launcher with the disk, python, memory, fault and CUDA guards.
+**File:** `1-lora-correction/scripts/showcase/crisp_fix_strip.py`: `apply_fix` (the hook and its diagnostics), `FixSampler.fixed` (plan 14's loop with the hook), `identity_check`, `verdict_for_fix`, the stages, the constants. `1-lora-correction/scripts/showcase/crisp_fix_strip_shared_device.sh`: the shared-device launcher with the disk, python, memory, fault and CUDA guards.
 
-**Reused from plan 14** (`scripts/showcase/correct_early_then_clean_up.py`): `Sampler` (context, prompts, pinned noise, adapter attach), `_cloud_axes`, `_laplacian_var`, `mean_abs_diff`, `_write`; the instance-count scorer; `DinoEmbedder`.
+**Reused from plan 14** (`1-lora-correction/scripts/showcase/correct_early_then_clean_up.py`): `Sampler` (context, prompts, pinned noise, adapter attach), `_cloud_axes`, `_laplacian_var`, `mean_abs_diff`, `_write`; the instance-count scorer; `DinoEmbedder`.
 
 ---
 
@@ -297,7 +297,7 @@ Every figure below lands in `artifacts/results/does-an-inference-time-fix-make-t
 
 ⬅️ [Previous](#recommended-skill) | 📋 [TOC](#table-of-contents) | [Next](#error-matrix) ➡️
 
-Task 3.2: `/sync-plan-tree plans/01-showcase-the-trained-lora/`. The strips are judged and the verdict written.
+Task 3.2: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`. The strips are judged and the verdict written.
 
 ---
 
@@ -309,5 +309,5 @@ Task 3.2: `/sync-plan-tree plans/01-showcase-the-trained-lora/`. The strips are 
 |---|---|---|
 | identity check reads 2 to 6 grey levels | fp16 drift: a different card, or the two loops combining the predictions in different precisions (fp32 here, fp16 in plan 14) | the 6.0 bar applies; the bar's reference is the same-loop full window, never plan 14's render |
 | identity check reads above 6 | the hook is not a no-op when off, or the adapter state differs | stop; diff `FixSampler.fixed` against `Sampler.scheduled` |
-| scoring dies in DINOv2 on the CPU | the xformers kernel is CUDA-only ([poe-mem-002](../../../../environment/known-failures.md)) | run `--score` on a device |
+| scoring dies in DINOv2 on the CPU | the xformers kernel is CUDA-only ([poe-mem-002](../../../../../environment/known-failures.md)) | run `--score` on a device |
 | launcher exits 4 | the device has more than 1 GiB in use | pick another device |

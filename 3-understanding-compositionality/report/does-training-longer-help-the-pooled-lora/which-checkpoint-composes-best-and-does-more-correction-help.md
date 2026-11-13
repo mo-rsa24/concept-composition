@@ -17,7 +17,7 @@ hypothesis that the sampler should favour the correction over falling back to Po
 is descriptive: a seed count that rises with λ or with the early window would have supported the
 hypothesis, a flat or falling count is what a saturated correction looks like. The 7 of 8
 figure is judged against the instance-count scorer validated in
-[can we trust the compose score](../../artifacts/results/can-we-trust-the-compose-score/).
+[can we trust the compose score](../../../1-lora-correction/artifacts/results/can-we-trust-the-compose-score/).
 
 ## 1. The three best checkpoints, seed by seed
 
@@ -39,7 +39,7 @@ dog box with overlap under 0.5) gives the same 7 in each case. Plain PoE (λ 0):
 checkpoint. From `summary.full.1.0.compose_rate` and `rows[].cat_and_dog` in
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r8_030000/results.json`,
 `figure_r16_050018/results.json` and `figure_r32_030050/results.json`, written by
-`scripts/showcase/lambda_boundary_probe.py`.
+`1-lora-correction/scripts/showcase/lambda_boundary_probe.py`.
 
 ## 2. More correction does not buy more seeds
 
@@ -99,7 +99,7 @@ compose at every λ from 1.0 up; seed 10 stops composing from 1.3, seed 11 fails
 seed 14 composes only at 1.5. From
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/lambda_boundary_probe_r32_030050/results.json`,
 fields `rows[].compose`, `rows[].cat_and_dog` and `rows[].drift.dino.drift`, written by
-`scripts/showcase/lambda_boundary_probe.py` on 2026-09-06.
+`1-lora-correction/scripts/showcase/lambda_boundary_probe.py` on 2026-09-06.
 
 **The second number.** The largest per-step correction norm the sampler applied, averaged over
 seeds, falls as λ rises: 60.4 at λ 1.0, 51.4 at 1.2, 47.8 at 1.3, 44.8 at 1.5, 31.5 at 2.0
@@ -115,7 +115,7 @@ change. Any λ conclusion drawn from the count alone inherits this.
 
 **One pair, eight seeds.** Every count here is cat x dog. The other seven held-out pairs were
 scored only by the 2-cell tracking set during training and by the fit read in
-[is the held-out gap a fit, a drift, or a pair problem](../does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md).
+[is the held-out gap a fit, a drift, or a pair problem](../../../1-lora-correction/report/does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md).
 
 **Rank and step move together across the "best" checkpoints.** Rank 8 @ 30k, rank 16 @ 50k
 and rank 32 @ 30k differ on two axes, so nothing here ranks the ranks. Rank 32's flat 7 of 8
@@ -138,15 +138,15 @@ up overshoots rather than pushes further. That is an inference, not a result.
 | Rung 5's scene and medium changes | read off `grid-rank32-30050-full-window-lambda-sweep.png` | verified |
 | Same-device determinism | `determinism_repeat_1/`, `determinism_repeat_2/`, `logs/determinism_repeat.log` | verified |
 | Cross-device pixel difference | session record, 2026-09-02 | stated |
-| The checkpoints | rank 8: `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` and `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/`; rank 16 and 32: `phase1_r16_100k/checkpoints/`, `phase1_r32_100k/checkpoints/` under the same outputs root | verified |
-| The runs that produced them | [train longer](../../plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md) for rank 8, the rank 16 and 32 plan in the same scope; W&B `8vl2uzak`, `n1w4fw5b`, `gcej8ib9`, `6xc2l8ix` in `prime_lab/poe-repair-animals-compose` | verified |
-| Regenerate with | [render the held-out grid for one checkpoint](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | |
+| The checkpoints | rank 8: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt` and `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/`; rank 16 and 32: `phase1_r16_100k/checkpoints/`, `phase1_r32_100k/checkpoints/` under the same outputs root | verified |
+| The runs that produced them | [train longer](../../../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md) for rank 8, the rank 16 and 32 plan in the same scope; W&B `8vl2uzak`, `n1w4fw5b`, `gcej8ib9`, `6xc2l8ix` in `prime_lab/poe-repair-animals-compose` | verified |
+| Regenerate with | [render the held-out grid for one checkpoint](../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | |
 
 ## Depends on
 
-- What the compose rate and the instance-count scorer mean: [the context index](../../context/00-INDEX.md).
-- Which sampler and which window: `run_lora_residual_inject_windowed_poe` in `scripts/showcase/lambda_window_grid.py`; off-window steps are plain guided PoE.
-- Which nodes and python environments: [the cluster nodes](../../environment/hpc/nodes.md).
+- What the compose rate and the instance-count scorer mean: [the context index](../../../context/00-INDEX.md).
+- Which sampler and which window: `run_lora_residual_inject_windowed_poe` in `1-lora-correction/scripts/showcase/lambda_window_grid.py`; off-window steps are plain guided PoE.
+- Which nodes and python environments: [the cluster nodes](../../../environment/hpc/nodes.md).
 
 ## Still open
 

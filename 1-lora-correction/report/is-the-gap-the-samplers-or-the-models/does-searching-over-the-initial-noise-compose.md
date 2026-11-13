@@ -110,7 +110,7 @@ the existing correction, shows two animals on seven rows.*
 σ 0.1 (all on seed 16: counts 2, 3 and 2) and 0 at σ 0.3. Opened, the three are one two-headed
 body and two single animals the detector boxed twice. Mean cosine of candidates to the pivot:
 0.995 at σ 0.1, 0.958 at σ 0.3. From
-`artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json`, fields
+`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json`, fields
 `pairs.a_cat__x__a_dog.compose_rate_by_column` and `secondary`; the verdict in
 `noise-search-verdict.json`.
 
@@ -143,7 +143,7 @@ pivot 0.200, the existing λ 1.2 renders 0.420, kept by the final-image verifier
 finding's 0.52 / 0.21 / 0.42 to within 0.01. The one counted tile, seed 16 at σ 0.1, reads 0.442,
 inside the corrected band, while it is one body with two heads by eye: the embedding axis reads a
 second head as "both", so this read cannot arbitrate that tile. From
-`artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-bothness.json`, fields
+`1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-bothness.json`, fields
 `by_column.*.mean_both_ness` and `by_column.best_final_sigma_0.1.per_seed.16`.
 
 ## What this cannot tell you
@@ -174,29 +174,29 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The compose rates, secondary reads and verdict | `artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json` and `noise-search-verdict.json`, copied from the run dir 2026-09-05 | verified |
+| The compose rates, secondary reads and verdict | `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-summary.json` and `noise-search-verdict.json`, copied from the run dir 2026-09-05 | verified |
 | Both-ness per tile | `.../noise-search-bothness.json`, written 2026-09-05 on mscluster85 by `run.py --bothness-only` from the run's tiles and the landing finding's saved features | verified |
 | The two sheets | `.../noise-search-cat-dog-sheet.png`, `.../noise-search-butterfly-meadow-sheet.png`, drawn by the runner at the end of each pair | verified |
 | Every candidate, its x0-hat at step 10 and its scores | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/zo_N8_s50_20260905-183320/<pair>/seed_<n>/sigma_<σ>/` | verified |
 | The eye reads (seed 16's three candidates, seed 12's pivot pair, the control sheet) | the review file's `Written before the run, answered after` and `Asked after the result`, recorded as the tiles were opened | stated |
 | The random-search row | `figure_r32_030050/results.json` and `cat-x-dog-in-dino-space.json`, read 2026-09-05 | verified |
 | The run | tasks **Run the smoke mode** and **Launch the full mode** in [the design](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/11-zero-order-search-over-the-initial-noise.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/11-zero-order-search-over-the-initial-noise.md); W&B `prime_lab/poe-repair-animals-compose/runs/3yxrkwgx` | verified |
-| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run --bothness-only --run-id <run> --device cpu` on the session node | verified |
+| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run --bothness-only --run-id <run> --device cpu` on the session node | verified |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-- What product-of-experts composition is: [PoE composition](../../context/world/poe-composition.md)
-- What the compose scorer counts and what it cannot: [compose rate](../../context/world/compose-rate.md)
+- What product-of-experts composition is: [PoE composition](../../../context/world/poe-composition.md)
+- What the compose scorer counts and what it cannot: [compose rate](../../../context/world/compose-rate.md)
 - The both-ness axes and their caveat that a fused face reads as "both":
   [where each condition lands](../when-does-the-outcome-lock-in/where-does-each-condition-land.md)
 - The paper: [the note](../../artifacts/notes/inference-time-scaling-as-a-search-over-noise/note.md)
-  and [its register row](../../plans/standing/literature/reading-register.md)
+  and [its register row](../../../plans/standing/literature/reading-register.md)
 - The two sibling selection-only baselines:
   [does selecting among PoE proposals compose](does-selecting-among-poe-proposals-compose.md) and
   plan 10's Feynman-Kac steering, in flight at the time of writing
-- Which python build runs on which card: [nodes](../../environment/hpc/nodes.md)
+- Which python build runs on which card: [nodes](../../../environment/hpc/nodes.md)
 
 ## Still open
 

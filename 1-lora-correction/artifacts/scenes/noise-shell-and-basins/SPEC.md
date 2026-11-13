@@ -1,6 +1,6 @@
 # SPEC: noise-shell-and-basins
 
-**Location** `artifacts/scenes/noise-shell-and-basins/`
+**Location** `1-lora-correction/artifacts/scenes/noise-shell-and-basins/`
 
 **Ran under** any browser; open `index.html` directly. No Node, no Python, no GPU. Math
 rendering pulls KaTeX from a CDN, so equations need internet; everything else is inline.
@@ -8,7 +8,7 @@ rendering pulls KaTeX from a CDN, so equations need internet; everything else is
 **Built from** no model trace. This is the canonical-fallback rung: textbook Gaussian
 concentration (the chi-square norm of a standard normal in d dimensions) plus two measured
 numbers read from `context/world/interaction-term.md`, which surfaces
-`report/experiments-log.md` EXP-01 and EXP-04.
+`1-lora-correction/report/experiments-log.md` EXP-01 and EXP-04.
 
 **Why** corrects the contour-map intuition about diffusion seeds before the paper argues about
 early-window timing: in d = 65,536 a seed cannot sit at an unusual radius, so a seed is a

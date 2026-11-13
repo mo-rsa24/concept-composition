@@ -87,7 +87,7 @@ fix are the same kind of object (a point, then a track), on axes whose meaning i
 **Associated materials.** Verdict: [the review file](../../review/06-where-each-condition-lands.md).
 Design reasoning: [the decision ledger](../../decisions-taken-here.md). The repo's noisy-latent
 plane, kept as the secondary view:
-`artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`.
+`3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`.
 
 **For the full picture.** The scope's [master plan](../../MASTER_PLAN.md).
 
@@ -114,9 +114,9 @@ rung 4 logs to `prime_lab/poe-repair-animals-compose`.
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- `co3_bw` on the Blackwell nodes and `co3` elsewhere; see [nodes](../../../../environment/hpc/nodes.md).
-- The [shared-device launch path](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device)₁ over SSH with `nohup`, its 1 GB device guard, and harvesting by
-  `pgrep` on the node; see [the execution protocol](../../../../environment/hpc/execution-protocol.md).
+- `co3_bw` on the Blackwell nodes and `co3` elsewhere; see [nodes](../../../../../environment/hpc/nodes.md).
+- The [shared-device launch path](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device)₁ over SSH with `nohup`, its 1 GB device guard, and harvesting by
+  `pgrep` on the node; see [the execution protocol](../../../../../environment/hpc/execution-protocol.md).
 - Large artifacts to `/datasets` only; the session node's NFS view of `/datasets` can lag the
   launch node by minutes, so count outputs and assemble figures on the launch node.
 - fp16 upcast rule for the Tweedie estimate and for every distance computed in rung 3.
@@ -172,23 +172,23 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The reference renders** `scripts/showcase/where_each_condition_lands_render.py`: "a cat",
+1. **The reference renders** `1-lora-correction/scripts/showcase/where_each_condition_lands_render.py`: "a cat",
    "a dog", "a cat and a dog" for seeds 9 to 16 on the cache's pinned latents. Launched through
-   `scripts/showcase/where_each_condition_lands_shared_device.sh`.
-2. **The endpoint figure** `scripts/showcase/where_each_condition_lands_plot.py`: six conditions
+   `1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh`.
+2. **The endpoint figure** `1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py`: six conditions
    (the three references, PoE at λ 0, corrected at λ 1.0 and λ 1.2), one PCA over all 48 points,
    hulls for the three reference clouds, an arrow per seed from PoE to corrected, the plane's
    variance share printed on the figure, and a sidecar carrying every point's cosine distance to
    each cloud centroid, the per-seed arrow cosines, and the inter-cloud gaps.
-3. **The axis pictures** `scripts/showcase/where_each_condition_lands_axes.py`: load the DINOv2-B
+3. **The axis pictures** `1-lora-correction/scripts/showcase/where_each_condition_lands_axes.py`: load the DINOv2-B
    RAE decoder, first reconstruct one known chimera render and one joint render and save both
    beside their originals, then decode seven points along PC1 and PC2 of the endpoint PCA and
    paste them as strips on the figure's axes.
-4. **The tracks** `scripts/showcase/where_each_condition_lands_tracks.py`: for one seed, decode the
+4. **The tracks** `1-lora-correction/scripts/showcase/where_each_condition_lands_tracks.py`: for one seed, decode the
    Tweedie estimate at every step of the joint run and the PoE run (both from the cache), embed,
    project into the same plane, draw as tracks with the step number every ten steps, and write
    per track the commit step: the first step after which the nearest cloud centroid never changes.
-5. **The unseen-pair render** `scripts/showcase/where_each_condition_lands_render.py --pairs`:
+5. **The unseen-pair render** `1-lora-correction/scripts/showcase/where_each_condition_lands_render.py --pairs`:
    the same five arms for the eight held-out pairs, trajectories saved as `latent_trajectory.pt`
    beside each image, so rungs 2 to 4 run over unseen pairs including the corrected track.
 
@@ -225,16 +225,16 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**.
 
 - [x] **1.1** Render the three references for seeds 9 to 16 on mscluster110 device 0 through the
-  [shared-device launcher](../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#1-render-the-references-and-the-per-step-frames-on-a-shared-device)₂ (2026-09-05, PID 397295, six seconds per image).
+  [shared-device launcher](../../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#1-render-the-references-and-the-per-step-frames-on-a-shared-device)₂ (2026-09-05, PID 397295, six seconds per image).
   - **Done when:** 24 PNGs under `where_each_condition_lands/{solo_a,solo_b,joint}/` and
     `render_manifest.json` beside them, counted on the launch node.
-- [x] **1.2** [Run the plot](../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#2-make-the-endpoint-figures-and-their-sidecar) on the launch node and copy the figure and sidecar into
+- [x] **1.2** [Run the plot](../../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#2-make-the-endpoint-figures-and-their-sidecar) on the launch node and copy the figure and sidecar into
   `artifacts/results/where-does-each-condition-land/` with a card entry (2026-09-05; the
   cloud-axes view, the PCA view, the contact sheet, the sidecar and the card are filed).
 
     ```bash
     ssh mscluster110 'cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min && \
-      /home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python scripts/showcase/where_each_condition_lands_plot.py'
+      /home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py'
     ```
 
   - **Done when:** `cat-x-dog-in-dino-space.png` and `.json` exist, the sidecar holds 48 rows,
@@ -249,7 +249,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [x] **2.1** Write `where_each_condition_lands_axes.py`: the DINOv2-B RAE decoder and its
   ImageNet stats from `nyu-visionx/RAE-collections` sit under
   `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/rae/`; the
-  decoder code is vendored at `scripts/showcase/rae_vendor/` (MIT) and the encoder is torch hub
+  decoder code is vendored at `1-lora-correction/scripts/showcase/rae_vendor/` (MIT) and the encoder is torch hub
   `dinov2_vitb14_reg`, because the cluster's transformers build predates the class RAE's wrapper
   uses. Two chimera renders (PoE seeds 9 and 10), one joint render and one corrected render are
   reconstructed in `axes/reconstruction_check.png` (2026-09-05, mscluster108 device 1).
@@ -269,9 +269,9 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 
 - [x] **3.1** The tracks, built as three scripts rather than one: `where_each_condition_lands_trajectories.py`
   re-renders all six conditions for seeds 9 to 16 and decodes the Tweedie estimate at 13 saved
-  steps; `where_each_condition_lands_frames_embed.py` [embeds the frames and projects them](../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#3-embed-the-frames-and-export-the-pages-data) onto
+  steps; `where_each_condition_lands_frames_embed.py` [embeds the frames and projects them](../../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#3-embed-the-frames-and-export-the-pages-data) onto
   the cloud axes into the animated [scene](../../../../artifacts/scenes/where-each-condition-lands/README.md),
-  [built from Diffusion Explorer's UI](../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#4-build-the-page-from-diffusion-explorers-ui-and-open-it);
+  [built from Diffusion Explorer's UI](../../../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md#4-build-the-page-from-diffusion-explorers-ui-and-open-it);
   `where_each_condition_lands_dynamics.py` reads the commit step per run (`COMMIT_TOL = 0.10`
   in source: both-ness stays within 0.10 of its final value) and the fork step
   (`FORK_MIN_DIST = 0.05`) into `commit-and-fork-steps.json`, and draws
@@ -290,7 +290,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [x] **4.1** Extend the render script with `--pairs` over the eight held-out animal pairs and
   five arms (A, B, joint, PoE, PoE plus rank-32 step-30050 correction at λ 1.2, full window),
   seeds 9 to 16, 50 DDIM steps, `latent_trajectory.pt` saved beside every image. Built as
-  `scripts/showcase/where_each_condition_lands_pairs_render.py` with its launcher
+  `1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_render.py` with its launcher
   `where_each_condition_lands_pairs_shared_device.sh`; in flight on mscluster106 device 1 since
   2026-09-05 15:54 (about 30 s per reference run and 64 s per adapter run on the RTX 8000). A
   first launch on mscluster111 ran on the CPU because that card reads "GPU requires reset" and
@@ -300,7 +300,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
     `frames_manifest.json` lists them.
 - [x] **4.2** Run the endpoint plane, the contact sheet, the both-ness curves and the commit and
   fork steps over every held-out pair, judged against the bar above, with the instance count
-  scored on the same images as a post-hoc column: `scripts/showcase/where_each_condition_lands_pairs_analyze.py`
+  scored on the same images as a post-hoc column: `1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_analyze.py`
   on mscluster108 device 1, 2026-09-06, filed under
   `artifacts/results/where-does-each-condition-land/pairs/` with `verdict.json`. Verdict null on
   the both-ness bar (0 of 7 counted pairs pass both halves, 5 overlap); instance count reads the
@@ -410,7 +410,7 @@ Navigation: ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#
 | Dose strip, seeds 10 and 11 | — | joint prompt, PoE, plus λ 1.0, plus λ 1.2 for the two seeds whose dose arrows agree least | PIL over the existing PNGs | ✅ | `.../cat-x-dog-seeds-10-11-dose-strip.png`; every figure above is read in `.../figure-explainer.md` and the numbers are filed in [the finding on where each condition lands](../../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md) |
 | Reconstruction check | — | chimera and joint renders beside their RAE reconstructions | `where_each_condition_lands_axes.py` | ⏳ | `.../axes/reconstruction_check.png` |
 | Endpoint plane with axis pictures | — | the same plane with seven decoded frames along each axis, captioned as decoder reconstructions | `where_each_condition_lands_axes.py` | ⏳ | `.../cat-x-dog-in-dino-space-with-axis-pictures.png` |
-| The animated page | — | every run's running estimate as a moving point in the cloud-axes plane, slider over the 50 steps, trails and thumbnails per seed | `where_each_condition_lands_frames_embed.py` + the scene | ✅ | `artifacts/scenes/where-each-condition-lands/`; screenshots `.../scene-step-0.png`, `scene-step-20.png`, `scene-seed-15-step-50.png` |
+| The animated page | — | every run's running estimate as a moving point in the cloud-axes plane, slider over the 50 steps, trails and thumbnails per seed | `where_each_condition_lands_frames_embed.py` + the scene | ✅ | `1-lora-correction/artifacts/scenes/where-each-condition-lands/`; screenshots `.../scene-step-0.png`, `scene-step-20.png`, `scene-seed-15-step-50.png` |
 | Both-ness over steps | — | y both-ness of the running estimate, x denoising step, thin line per seed, thick mean per condition, for joint, PoE and λ 1.2; commit and fork steps in the JSON beside it | `where_each_condition_lands_dynamics.py` | ✅ | `.../both-ness-over-denoising-steps.png` + `commit-and-fork-steps.json` |
 | Seed 15 frame strip | — | six conditions by seven saved steps, the decoded running estimate | `where_each_condition_lands_dynamics.py` | ✅ | `.../frames-seed-15-strip.png` |
 | Four arrows at five steps | — | A, B, PoE sum and joint predictions projected at steps 0, 5, 10, 20, 40, true norms and cosines printed | `where_each_condition_lands_tracks.py` | ⏳ | `.../tracks/cat-x-dog-seed-9-arrows.png` |
@@ -435,16 +435,16 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** [poe_repair/training_cache.py](../../../../poe_repair/training_cache.py)
+**File:** [poe_repair/training_cache.py](../../../../../poe_repair/training_cache.py)
 **Relevant section:** the per-step record (`x_t`, `eps_a_raw`, `eps_b_raw`, `eps_j_raw`,
 `eps_uncond`) and the closed forms for the guided predictions, which rung 3 reads.
 
-**File:** [scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py)
+**File:** [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py)
 **Relevant section:** `run_lora_residual_inject_windowed_poe`, the sampler that applies the
 adapter over a window and already tracks the trajectory; rung 4 reuses it with the rank-32
 checkpoint and λ 1.2.
 
-**File:** [scripts/trajectory_divergence.py](../../../../scripts/trajectory_divergence.py)
+**File:** [1-lora-correction/scripts/trajectory_divergence.py](../../../../scripts/trajectory_divergence.py)
 **Relevant section:** `dino_embed_paths`, the DINOv2 ViT-S/14 recipe every embedding here copies.
 
 ```python
@@ -479,7 +479,7 @@ Navigation: ⬅️ [Previous](#next-step) | 📋 [TOC](#table-of-contents)
 - **Wrong python build for the card.** The first reference render on mscluster110 was launched
   with `co3`, whose torch has no kernels for the Blackwell card; the process exited without a
   traceback and left an empty output folder. The launcher now picks `co3_bw` on mscluster110 to
-  112, the same switch `scripts/twisted_smc/train_twist.sbatch` uses.
+  112, the same switch `1-lora-correction/scripts/twisted_smc/train_twist.sbatch` uses.
 
 **Auto-update note:** regenerated by `/sync-plan-tree`; do not edit manually.
 

@@ -30,7 +30,7 @@ so ``r_t^(k) = eps_J(x_t^(k)) - eps_PoE(x_t^(k))`` can be recorded, and its outp
 never fed back into the trajectory. So a run with measurement on and a run with it
 off produce the same latents.
 
-Written for plans 25 to 27 of ``plans/06-is-the-gap-the-samplers-or-the-models``.
+Written for plans 25 to 27 of ``1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models``.
 """
 
 from __future__ import annotations
@@ -295,7 +295,7 @@ def run_lora_langevin_windowed_poe(
     """The rank-32 corrected run with ``k`` Langevin steps inside ``corrector_window``.
 
     Every step's prediction is the one ``run_lora_residual_inject_windowed_poe`` in
-    ``scripts/showcase/lambda_window_grid.py`` makes with the adapter on at all 50
+    ``1-lora-correction/scripts/showcase/lambda_window_grid.py`` makes with the adapter on at all 50
     steps: ``eps_t = eps_PoE_frozen + λ · (eps_PoE_adapter - eps_PoE_frozen)``. Inside
     the corrector window the Langevin drift is that same corrected prediction, so the
     chain settles into the distribution the corrected model describes, not plain

@@ -16,7 +16,7 @@ vocabulary, plus the SDXL 128x128 latent strip. Carried through verbatim to the 
 - [the objectives and variations](../../ideas/designing-the-correction-loss/maths/objectives-and-variations.tex), the spine: shapes, nine variations, code change and tradeoff each
 - [the reconciliation](../../ideas/designing-the-correction-loss/maths/guided-and-unguided-objectives.tex) and [the four variants](../../ideas/designing-the-correction-loss/maths/correction-loss-variants.tex), for the measured numbers and the derivations
 - `poe_repair/experiments/one_pair_one_seed/trainer.py:339-520`, the real forward pass and loss
-- `cross_trace.json` in [the SDXL VAE map](../../scenes/sdxl-vae-architecture-map/README.md), the 70 cross-attention modules
+- `cross_trace.json` in [the SDXL VAE map](../../../../artifacts/scenes/sdxl-vae-architecture-map/README.md), the 70 cross-attention modules
 - `composition_plane.json` and `adapter_in_plane.json` under `outputs/showcase/composition_plane/`
 - the three renders under `outputs/showcase/empty_prompt/`
 

@@ -25,7 +25,7 @@ together produce the paper figures.
   (poe_repair/experiments/compose_scorer_validation/scorer.py).
 - Sampler: 50 inference steps, guidance 7.5 (poe_repair/config.py DEFAULT_GUIDANCE).
 - LoRA: rank-8 on attn2, per-configuration training; cross-seed pooling holds out seeds
-  9-12 (scripts/cross_seed_lora_pooling/heldout_pair.sh); G6 checkpoint currently
+  9-12 (1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh); G6 checkpoint currently
   k04__ep2000_resumed, k08__ep1600 named as the per-pair alternative.
 - Training-set size vs intrinsic dimension: no intrinsic-dimension estimate exists in the
   repo. The role says this absence is itself the layer-4 finding.
@@ -97,4 +97,4 @@ No skips: all six layers have content for this target.
 
 ## Next step
 
-Compiled with --write on 2026-08-29. The ledger is the scope's decisions-taken-here.md; the scope is built at plans/01-showcase-the-trained-lora/ (now thirteen plans, twelve review files, illustrated map, root running-order steps 31-43) and verified. This walk is complete.
+Compiled with --write on 2026-08-29. The ledger is the scope's decisions-taken-here.md; the scope is built at 1-lora-correction/plans/01-showcase-the-trained-lora/ (now thirteen plans, twelve review files, illustrated map, root running-order steps 31-43) and verified. This walk is complete.

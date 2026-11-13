@@ -60,7 +60,7 @@ Bar: all three objectives answered with evidence, judged from the ground check. 
 
 ## Dead ends and not done
 
-- `environment/hpc/nodes.md` still says mscluster111 cannot run torch; the probe says it can. Not written: this walk could write only under `report/paper-review/` and the walk folder.
+- `environment/hpc/nodes.md` still says mscluster111 cannot run torch; the probe says it can. Not written: this walk could write only under `1-lora-correction/report/paper-review/` and the walk folder.
 - The clone at `paper/overleaf-iclr/` holds uncommitted edits made before the final Overleaf restructure; reconcile before using it.
 - The PDF was not recompiled from the export (no system LaTeX), so no byte or page-count match is claimed.
 - Nothing was committed: the brief did not ask for commits, and parallel sessions edit this branch.

@@ -10,7 +10,7 @@ In the background, prepare and build one quiz for the composition ladder: quiz 1
 invariance.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 10 adds one variable, the latent:
 it asks whether a composition survives an invertible change of space, and whether a VAE's latent
 behaves like one. Quiz R.1 at the reading stop already covered change of variables, so this layer
@@ -30,7 +30,7 @@ Objectives
 8. Write the published URL into step 5 of the layer 10 page.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md and its Study
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md and its Study
   first line: the layer and its reading.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the warp claim.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run
@@ -72,12 +72,12 @@ Rules
 - Report prep-cadence's question count, node count and verdicts before the page is built.
 
 What to hand back
-- One coverage file under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, with a verdict
+- One coverage file under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, with a verdict
   per question: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - One published quiz page, opening on a read-first list with minutes per item, a short path and a
   full path.
-- The URL in step 5 of artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md,
+- The URL in step 5 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md,
   replacing "(URL lands here)".
 - The proof: the coverage file exists under .quiz-prep/ and lists no question as blocked, and the
   URL opens.

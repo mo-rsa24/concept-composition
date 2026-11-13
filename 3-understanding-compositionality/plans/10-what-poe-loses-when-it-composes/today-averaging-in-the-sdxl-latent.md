@@ -10,7 +10,7 @@
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-averaging-in-the-sdxl-latent.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-averaging-in-the-sdxl-latent.md
 ```
 
 ## Contents
@@ -67,7 +67,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 1. 🔧 Render the cat, the dog, PoE and the joint prompt (AI, ~30 min)
 
-- [ ] **Extend** `scripts/local_sdxl_poe.py` with a `--pair "a cat|a dog"` mode that renders A alone, B
+- [ ] **Extend** `3-understanding-compositionality/scripts/local_sdxl_poe.py` with a `--pair "a cat|a dog"` mode that renders A alone, B
   alone, PoE of A and B, and the joint prompt "A and B" on the same seed, saving each tile's final latent
   beside its picture as `.pt`.
 - [ ] **Run** on seeds 1 to 4, 50 DDIM steps, guidance 7.5.

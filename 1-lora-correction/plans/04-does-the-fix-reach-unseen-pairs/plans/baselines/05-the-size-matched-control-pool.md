@@ -4,7 +4,7 @@ Train the same adapter on a pool of the same size made of non-animal concepts, t
 the same animal pairs, so a win can be credited to the animals rather than to how much data there
 was.
 
-**Step 12 of 22.** Waits on step 11. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 12 of 22.** Waits on step 11. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -44,8 +44,8 @@ set as (A), with the animals-vs-mixed contrast reported per held-out pair.
 - `co3` python at its absolute path. The training + wired-eval path this plan reuses from (A) is
   a full pooled-LoRA run: goes to biggpu first, else bigbatch.
 - Checkpoints and eval output write to `/datasets`, per the disk guard rule in
-  [environment/storage.md](../../../../environment/storage.md); (A)'s own checkpoint is
-  `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`.
+  [environment/storage.md](../../../../../environment/storage.md); (A)'s own checkpoint is
+  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`.
 
 ## Tasks
 - [ ] Build the size-matched mixed `pair_pool.yaml`: equal N to the animals pool,
@@ -54,7 +54,7 @@ set as (A), with the animals-vs-mixed contrast reported per held-out pair.
 - [ ] Evaluate the mixed-pool LoRA on the SAME animal held-out pairs used in (A),
   two-tier read.
 - [ ] Report the animals-vs-mixed contrast per held-out pair
-  ([compose-rate](../../../../context/world/compose-rate.md) + direction), on the identical
+  ([compose-rate](../../../../../context/world/compose-rate.md) + direction), on the identical
   held-out set.
 
 ## Engagement Instructions

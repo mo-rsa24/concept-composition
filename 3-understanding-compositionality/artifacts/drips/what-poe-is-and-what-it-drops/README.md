@@ -51,7 +51,7 @@ deletable either, despite $c_1$ sitting on the equation's left.
 conditional independence as an assumption, the line-by-line derivation of Eq (9) to Eq (10), and
 what the assumption costs in density and score form, are unwritten. The last of these is the
 piece that would connect directly to this project's correction term; a separate note,
-`artifacts/notes/interaction-term-as-pmi-gradient/`, has already worked out that connection
+`3-understanding-compositionality/artifacts/notes/interaction-term-as-pmi-gradient/`, has already worked out that connection
 independently, ahead of this walk reaching it.
 
 **Held since 2026-09-05.** No plan, review file, or context entry in this repository points back

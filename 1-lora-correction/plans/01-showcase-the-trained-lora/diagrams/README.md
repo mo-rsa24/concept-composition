@@ -17,7 +17,7 @@ with no prompt entry claiming it, filed here because it draws this scope's shipp
 prompt in this scope's `diagram-prompts.md` names it, so re-rendering needs the prompt written.
 
 **It carries the old vocabulary.** The dial in the inference panel is labelled "dose dial", a name
-this project no longer uses (see [the word list](../../../context/plain-words.md)). The words are
+this project no longer uses (see [the word list](../../../../context/plain-words.md)). The words are
 painted into the image, so fixing them means regenerating it, and no prompt in this scope's map
 names this file yet. Writing that prompt is what has to happen first.
 

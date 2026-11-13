@@ -14,7 +14,7 @@ Moved: this plan now lives in ~/PhD/medical-imaging/compositional_diffusion/a-tw
 |------|------|-------------|
 | **1 (current)** | **[the cheapest test](01-the-cheapest-test.md)** | **Measures whether a pretrained chest X-ray generator fails at pairs of findings that rarely co-occur in its labels, and whether Liu-style composition recovers them** |
 
-This scope has no master plan yet. It is a feasibility test for a medical use of [product-of-experts composition](../../../context/world/poe-composition.md), separate from the animals paper.
+This scope has no master plan yet. It is a feasibility test for a medical use of [product-of-experts composition](../../../../context/world/poe-composition.md), separate from the animals paper.
 
 ## Table of contents
 
@@ -60,7 +60,7 @@ For Claude to execute. Ask Claude to do these.
 ### 1. 📊 Build the pair table
 
 - [x] **1.1** Download the NIH ChestX-ray14 label file to `data/nih_cxr14/Data_Entry_2017_v2020.csv` (112,120 rows, 9 MB, not committed). ✓ verified (112,121 lines including the header, 2026-10-06)
-- [x] **1.2** Write `scripts/medical_pair_table.py`: per finding, the count of images; per pair, the count with both, the count expected if the two were independent, and the ratio of observed to expected. Writes `artifacts/results/does-roentgen-draw-two-findings/pair-table.csv`. ✓ verified (14 findings printed, Pneumothorax 5,302, 91 pair rows written, 2026-10-06)
+- [x] **1.2** Write `3-understanding-compositionality/scripts/medical_pair_table.py`: per finding, the count of images; per pair, the count with both, the count expected if the two were independent, and the ratio of observed to expected. Writes `artifacts/results/does-roentgen-draw-two-findings/pair-table.csv`. ✓ verified (14 findings printed, Pneumothorax 5,302, 91 pair rows written, 2026-10-06)
   - Verify: the script prints 14 findings and their counts, and Pneumothorax is 5,302.
 
 ▶ **Next: [instruction 2.1](#2--pick-the-pair-and-approve-the-bar)** (you pick the pair from the table).
@@ -69,9 +69,9 @@ For Claude to execute. Ask Claude to do these.
 
 ◀ **Needs: [instruction 2.1](#2--pick-the-pair-and-approve-the-bar)** done, so a pair and a bar exist.
 
-- [x] **3.1** Write the bar into the scorer source as named constants, as chosen in instruction 2.1: `scripts/medical_pair_bar.py`. ✓ verified (four made-up cases returned problem-shown, null, inconclusive, support, not-supported as intended, 2026-10-06)
+- [x] **3.1** Write the bar into the scorer source as named constants, as chosen in instruction 2.1: `3-understanding-compositionality/scripts/medical_pair_bar.py`. ✓ verified (four made-up cases returned problem-shown, null, inconclusive, support, not-supported as intended, 2026-10-06)
 - [ ] **3.2** On mscluster107, generate for the chosen pair and a frequent control pair: the pair prompt, finding A alone, finding B alone, each at fixed seeds. Checkpoints and images go to `/datasets/mmolefe/poe_repair_min/`.
-- [ ] **3.3** Score each image with TorchXRayVision `densenet121-res224-all` as the primary detector and `densenet121-res224-pc` (trained on neither MIMIC nor NIH) as a secondary read, using `scripts/medical_pair_score.py`. Chosen as the cached detector with the highest lower AUROC across Cardiomegaly and Pneumothorax on 4,999 real NIH images (one shard, `images_001`); six were measured. AUROC for Cardiomegaly, Pneumothorax: all 0.901, 0.771; pc 0.874, 0.744; nih 0.886, 0.749; mimic_nb 0.746, 0.693; chex 0.764, 0.693; mimic_ch 0.723, 0.672. The primary clears the 0.75 bar; the secondary misses it for Pneumothorax by 0.006 and is reported beside the primary, not instead of it. The primary saw NIH and MIMIC images in training, so its AUROC here is optimistic and it is not independent of the generator. Report the both-finding rate per prompt type.
+- [ ] **3.3** Score each image with TorchXRayVision `densenet121-res224-all` as the primary detector and `densenet121-res224-pc` (trained on neither MIMIC nor NIH) as a secondary read, using `3-understanding-compositionality/scripts/medical_pair_score.py`. Chosen as the cached detector with the highest lower AUROC across Cardiomegaly and Pneumothorax on 4,999 real NIH images (one shard, `images_001`); six were measured. AUROC for Cardiomegaly, Pneumothorax: all 0.901, 0.771; pc 0.874, 0.744; nih 0.886, 0.749; mimic_nb 0.746, 0.693; chex 0.764, 0.693; mimic_ch 0.723, 0.672. The primary clears the 0.75 bar; the secondary misses it for Pneumothorax by 0.006 and is reported beside the primary, not instead of it. The primary saw NIH and MIMIC images in training, so its AUROC here is optimistic and it is not independent of the generator. Report the both-finding rate per prompt type.
 
 ▶ **Next: [instruction 3.4](#3--read-the-plain-prompt-images)**.
 
@@ -79,7 +79,7 @@ For Claude to execute. Ask Claude to do these.
 
 ◀ **Needs: [instruction 3.4](#3--read-the-plain-prompt-images)** done.
 
-- [ ] **5.1** Train one adapter per finding on mscluster107 with a [disk guard](../../../environment/storage.md#the-disk-guard-rule-and-the-failure-that-motivates-it) on `/datasets`: Cardiomegaly from the 2,727 images carrying it without Pneumothorax, Pneumothorax from the 5,253 carrying it without Cardiomegaly. Only runs if task 3.3 shows the null did not hold.
+- [ ] **5.1** Train one adapter per finding on mscluster107 with a [disk guard](../../../../environment/storage.md#the-disk-guard-rule-and-the-failure-that-motivates-it) on `/datasets`: Cardiomegaly from the 2,727 images carrying it without Pneumothorax, Pneumothorax from the 5,253 carrying it without Cardiomegaly. Only runs if task 3.3 shows the null did not hold.
 - [ ] **5.2** Sample with the two adapters composed by summing noise predictions per step; same seeds as task 3.2.
 - [ ] **5.3** Score as in task 3.3 and write the comparison.
 

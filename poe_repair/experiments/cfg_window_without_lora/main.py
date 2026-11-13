@@ -163,7 +163,7 @@ def main(argv: list[str] | None = None) -> int:
         F.render_contact_sheet(manifest_path, fig_path)
 
     print(f"[conditioning_window] done. Inspect with:")
-    print(f"  python scripts/lora_inspector.py --port 5050")
+    print(f"  python 1-lora-correction/scripts/lora_inspector.py --port 5050")
     print(f"  open http://127.0.0.1:5050/conditioning_window")
     return 0
 

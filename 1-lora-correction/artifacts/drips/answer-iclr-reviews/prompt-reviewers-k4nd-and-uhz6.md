@@ -43,7 +43,7 @@ Text fixes already located (search by the quoted text; line numbers move)
 - "unable to create images with plurality, inside create hybrid objects" in the Discussion:
   "inside" should be "and instead".
 - Figure 5's caption says "CO3 uses different starting noise" while Section 4.1 says "all examples
-  are generated from the same initial seeds". Protocol rule 2 (report/paper-review/protocol.md):
+  are generated from the same initial seeds". Protocol rule 2 (1-lora-correction/report/paper-review/protocol.md):
   every method gets the same seed; CO3's released code draws its own noise from that integer seed,
   so its column is marked with a dagger. Make both sentences say this.
 - Section 4 says each network evaluation "returns the predicted correction defined in
@@ -54,7 +54,7 @@ Text fixes already located (search by the quoted text; line numbers move)
   Take its exact form from the run that made the adapter of record:
   /datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/config.json on the cluster
   (read with scripts/cluster.sh sh "cat ..."): the loss space (x0 or noise), any orthogonality
-  weight, and the steps it trains on. report/paper-review/prze-3a-pair-lists.md lists these too.
+  weight, and the steps it trains on. 1-lora-correction/report/paper-review/prze-3a-pair-lists.md lists these too.
 - \adepochs and \adsteps (near the top of the tex) say 1,000 epochs and 50,000 steps; the adapter
   of record is step 30,000, which is 600 epochs of 50 steps
   (artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml).
@@ -78,7 +78,7 @@ Settled facts (do not re-derive; cite them)
   checkout) holds joint-prompt calls only, and no record shows a pair kept by CO3 alone. The user
   remembers a mixed CO3-and-joint pool but cannot name a pair. Present this to the user and let
   them choose the wording; this answers k4nd's Q3 and UHz6's training-filter weakness.
-- Held-out pairs: the 53 evaluation pairs (report/paper-review/held-out-set.md) are unseen as
+- Held-out pairs: the 53 evaluation pairs (1-lora-correction/report/paper-review/held-out-set.md) are unseen as
   pairs only. 30 share a concept with a training pair and 6 share both. The paper's "Neither concept
   in a held-out pair appears in any training pair" holds only for the submission's four held-out
   pairs (cat and dog, elephant and penguin, piano and candle, skateboard and helmet). Cat and dog
@@ -95,15 +95,15 @@ Settled facts (do not re-derive; cite them)
 What to read
 - Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
   numbers); the working copy's tex.
-- report/paper-review/protocol.md, held-out-set.md, layout-sheet.md, board.md.
-- artifacts/drips/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md, board.md.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
   prompt-route-step-14-draft-the-replies.md: the paper and reply work this feeds; do not do their
   results-dependent parts here.
 - The memory notes on training targets, held-out pairs and manuscript voice.
 
 Outputs
 - The text fixes in paper/iclr-56173/iclr2027_conference.tex, built with
-  python3 scripts/refresh_paper_slots.py --compile (23 or 24 pages, no undefined references).
+  python3 1-lora-correction/scripts/refresh_paper_slots.py --compile (23 or 24 pages, no undefined references).
 - replies/k4nd.md and replies/uhz6.md: one section per point, the reviewer's words quoted, the reply
   beneath, each claim citing a section, figure, table or slot.
 - A line per change in paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md, grouped by reviewer point.

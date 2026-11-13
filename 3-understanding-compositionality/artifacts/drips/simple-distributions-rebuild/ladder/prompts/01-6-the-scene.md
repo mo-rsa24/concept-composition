@@ -9,7 +9,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 ring of eight blurring into one sink as the noise level rises
 
 Background
-Layer 1 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) taught one
+Layer 1 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) taught one
 diffusion expert and its score. This scene shows the score field of the ring of eight collapsing as
 the noise rises, in my own notation, so I can operate it rather than read about it.
 
@@ -39,7 +39,7 @@ Rules
 
 What to hand back
 - One published scene, in my notation.
-- Its URL in step 6 of artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md,
+- Its URL in step 6 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md,
   replacing "(URL lands here)".
 
 What you will see

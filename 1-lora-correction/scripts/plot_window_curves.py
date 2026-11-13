@@ -11,11 +11,11 @@ Prints the peak band, meaning the contiguous run of windows whose compose rate
 is within one standard error of the best.
 
 Reads sampled images; it does not sample. Produce them with
-scripts/interaction_term_window.py across a set of windows.
+1-lora-correction/scripts/interaction_term_window.py across a set of windows.
 
 Usage:
-    python scripts/plot_window_curves.py
-    python scripts/plot_window_curves.py --root outputs/interaction_term/window/pairs
+    python 1-lora-correction/scripts/plot_window_curves.py
+    python 1-lora-correction/scripts/plot_window_curves.py --root outputs/interaction_term/window/pairs
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term import window_grid as wg  # noqa: E402
 from scripts.plot_dose_curves import require_validated_scorer  # noqa: E402
@@ -129,7 +129,7 @@ def main() -> int:
             "no windowed runs found. This script scores images, it does not "
             "sample. Produce them with:\n"
             "  for W in 0,10 10,20 20,30 30,40 40,50; do \\\n"
-            "    python scripts/interaction_term_window.py --pair <slug> "
+            "    python 1-lora-correction/scripts/interaction_term_window.py --pair <slug> "
             "--seed <n> --window $W; done\n"
             "Looked under:\n" + "\n".join(f"  {p}" for p in looked),
             file=sys.stderr,

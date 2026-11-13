@@ -58,7 +58,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 **This is the one question whose failure moves the plan.**
 
-- [ ] ⚠️ **At 30k, is the EMA's 8-seed drift more negative than the raw weights' by at least 0.03, with the compose count within one seed?** The bar, in `scripts/showcase/ema_verdict.py` as `DRIFT_MARGIN = 0.03` and `MAX_COMPOSE_LOSS = 1`: **support** if `drift_ema − drift_raw ≤ −0.03` and `compose_ema ≥ compose_raw − 1`; **null** if the gap is inside ±0.03 (the average renders the same) or the EMA is further away or loses two or more seeds. The 40k pair is read the same way; the plan is null only if both steps are null.
+- [ ] ⚠️ **At 30k, is the EMA's 8-seed drift more negative than the raw weights' by at least 0.03, with the compose count within one seed?** The bar, in `1-lora-correction/scripts/showcase/ema_verdict.py` as `DRIFT_MARGIN = 0.03` and `MAX_COMPOSE_LOSS = 1`: **support** if `drift_ema − drift_raw ≤ −0.03` and `compose_ema ≥ compose_raw − 1`; **null** if the gap is inside ±0.03 (the average renders the same) or the EMA is further away or loses two or more seeds. The 40k pair is read the same way; the plan is null only if both steps are null.
       What would surprise: the EMA composing more seeds than the raw weights, which would say the raw checkpoint's seed 14 failure is weight noise rather than a basin.
 
 ## Written before the run, answered after
@@ -102,4 +102,4 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-At 30k: the two probes (task 1.3), the grids side by side (instruction 2.2), then the verdict script. Then `/sync-plan-tree plans/01-showcase-the-trained-lora/`.
+At 30k: the two probes (task 1.3), the grids side by side (instruction 2.2), then the verdict script. Then `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`.

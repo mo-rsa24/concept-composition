@@ -92,7 +92,7 @@ here and not repeated in the sub-plans.
 ### MDS / PCA trajectory panels in the residual inspector
 
 [04-lora-single-seed.md](04-lora-single-seed.md) introduced
-`scripts/build_lora_inspector_mds.py` (five stages — `collect-static`,
+`1-lora-correction/scripts/build_lora_inspector_mds.py` (five stages — `collect-static`,
 `collect-cells`, `project`, `render`, `update-manifest`) and a residual
 inspector tab that swaps pre-rendered PNGs in response to `(epoch, λ)`
 slider changes. Plans 09–11 inherit and extend this contract:
@@ -192,8 +192,8 @@ artefacts under `outputs/lora/`, `outputs/cross_seed_lora_pooling/`,
 |---|---|---|
 | 09 — Single-seed across taxonomy | **In progress.** All five representative-pair caches at seed 42 exist (G1–G4 + G6, seeds {1..12, 42}); only G4 (`a_typewriter__x__a_cactus`) and G6 (`a_cat__x__a_dog`) have trained LoRAs. G1/G2/G3 training not started. MDS not run on G4. `build_taxonomy_lora.sh` wrapper not written. | `/datasets/.../training_cache/heldout/{a_dolphin,…,a_cat__x__a_dog}/seed_*` all present; `outputs/lora/a_typewriter__x__a_cactus/seed_42/results/checkpoints/lora_step_080000.pt` trained but `inspector_manifest.json` has no `mds_cells`; `outputs/lora/a_cat__x__a_dog/.../mds_probes/` has 47 (epoch, λ) cells. |
 | 10 — Cross-seed per group | **In progress.** G6 done (`k04__ep2000_resumed`, verdict ok, ep 2000 reached). G1/G2/G3/G4 per-pair k04 runs are part-trained (last checkpoint ≈ step 50–60 k of 100 k, i.e. ≈ ep 1000–1200 of 2000) with no `verdict.json` yet. No `step0_prescreen` runs for G2/G3/G4. No Task C/Task D/contact sheets on any per-pair run. `sample_heldout --heldout-pair` flag landed, but no sibling-pair caches built and no held-out-pair driver script. | Per-pair runs at `/datasets/.../cross_seed_lora_pooling/{a_dolphin,a_dog__x__oil_painting_style,a_mailbox,a_typewriter}/task_b_learning_curve/k04__ep2000/checkpoints/` (6–7 ckpts each, no `verdict.json`, no `history.json`); G6 final ckpt at `/datasets/.../k04__ep2000_resumed/checkpoints/lora_step_100000.pt` with `verdict.json = "ok"`. |
-| 11 — Cross-pair × multi-seed | **Not started.** No module, no scripts, no pool YAMLs, no run dirs. | `outputs/cross_pair_lora_pooling/` exists but empty; `poe_repair/experiments/cross_pair_lora_pooling/` does not exist; `scripts/cross_pair_lora_pooling/` does not exist. |
-| 12 — G6 held-out-pair eval (carved off of 10) | **Code ready, runs not started.** Patches landed (`build_eval_cache.py`, `sample_heldout --heldout-pair`, `render_per_epoch --pair-slug-override`); no sibling-pair caches built; no held-out-pair samples or per-seed-summary figures rendered. | `scripts/build_eval_cache.py` present; `--heldout-pair` and `--pair-slug-override` flags wired in their files; `/datasets/.../training_cache/heldout/a_wolf__x__a_husky` absent; `samples/heldout_pair/`, `samples/per_epoch_heldout/`, `samples/per_seed_summary_heldout/` absent under the pueuo7bl run dir. |
+| 11 — Cross-pair × multi-seed | **Not started.** No module, no scripts, no pool YAMLs, no run dirs. | `outputs/cross_pair_lora_pooling/` exists but empty; `poe_repair/experiments/cross_pair_lora_pooling/` does not exist; `1-lora-correction/scripts/cross_pair_lora_pooling/` does not exist. |
+| 12 — G6 held-out-pair eval (carved off of 10) | **Code ready, runs not started.** Patches landed (`build_eval_cache.py`, `sample_heldout --heldout-pair`, `render_per_epoch --pair-slug-override`); no sibling-pair caches built; no held-out-pair samples or per-seed-summary figures rendered. | `1-lora-correction/scripts/build_eval_cache.py` present; `--heldout-pair` and `--pair-slug-override` flags wired in their files; `/datasets/.../training_cache/heldout/a_wolf__x__a_husky` absent; `samples/heldout_pair/`, `samples/per_epoch_heldout/`, `samples/per_seed_summary_heldout/` absent under the pueuo7bl run dir. |
 
 ### Cross-cutting state
 

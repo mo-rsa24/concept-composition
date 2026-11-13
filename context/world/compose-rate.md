@@ -36,7 +36,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 **The fraction of a pair's seeds where a detector finds at least two distinct animal instances in
 the rendered image.** ✅
 
-`artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, read directly: `"compose_rule": "COMPOSE iff
+`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, read directly: `"compose_rule": "COMPOSE iff
 distinct-instance-count('animal', NMS iou<0.5, conf>=0.30) >= 2"`, using detector
 `IDEA-Research/grounding-dino-tiny`. `"pass": true` and `"separates_hard_pair_both_ways": true`
 mark this rule as the validated one, chosen over two rejected alternatives (a whole-image DINOv2 /
@@ -45,7 +45,7 @@ pair (wolf × husky) correctly. ✅
 
 **It is a per-pair rate over several seeds, not a per-image score.** ✅
 
-`artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` reports it as, e.g., `1.00 (8/8)`: the pair failed
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` reports it as, e.g., `1.00 (8/8)`: the pair failed
 under plain PoE on all 8 tested seeds. A compose rate is the same fraction read the other way
 round, under whichever render method (plain PoE, corrected PoE, or the LoRA) is being evaluated.
 
@@ -91,7 +91,7 @@ Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) |
 
 **The scorer counts animals, it does not identify them.** ⚠️
 
-`artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`, its own summary: of 32 runs behind a 94% headline compose
+`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md`, its own summary: of 32 runs behind a 94% headline compose
 rate at full correction strength, 1 is a confirmed error (two of the same animal, called a
 success), 5 more "cannot be called" confidently by eye (mostly waterfowl and raptor pairs that look
 alike even to a person), and 12 more are pairs chosen *because* they look alike (leopard/jaguar,
@@ -112,23 +112,23 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 | What | How it was established | When |
 |---|---|---|
-| The validated compose rule and its detector | Read in `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
-| Fail-rate as the same fraction under plain PoE | Read in `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
-| The scorer's true-error bound at λ=1 | Read in `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
-| The two example images | Read directly, `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/{01-both-there,02-two-of-one}/` | 2026-08-24 |
+| The validated compose rule and its detector | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
+| Fail-rate as the same fraction under plain PoE | Read in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
+| The scorer's true-error bound at λ=1 | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
+| The two example images | Read directly, `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/{01-both-there,02-two-of-one}/` | 2026-08-24 |
 | The scorer-trust standing effort | Read in `MASTER_PLAN.md`, background experiment table | 2026-08-24 |
 
 ## Cross-references
 
-- The mention of **compose rate** in [the finding "does a corrector alone produce two animals"](../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md).
-- The mention of **the compose scorer** in [the finding "can a corrector or a clean tail sharpen the adapter's renders"](../../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md), whose primary read is a distance in that scorer's own embedding.
+- The mention of **compose rate** in [the finding "does a corrector alone produce two animals"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md).
+- The mention of **the compose scorer** in [the finding "can a corrector or a clean tail sharpen the adapter's renders"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md), whose primary read is a distance in that scorer's own embedding.
 - The mention of **the instance counter**, and that it cannot tell a cat from a second dog, in [how a render fails](how-a-render-fails.md#where-this-came-from).
-- The mention of **the instance counter**, and that it cannot tell a dog from a horse, in [the finding "does the adapter return two when both prompts name the same concept"](../../report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md).
-- The mention of **the instance-count scorer**, as the read that was not run over the fidelity harness's tiles, in [the finding "can any render-time fix recover the picture quality the adapter costs"](../../report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md).
+- The mention of **the instance counter**, and that it cannot tell a dog from a horse, in [the finding "does the adapter return two when both prompts name the same concept"](../../1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md).
+- The mention of **the instance-count scorer**, as the read that was not run over the fidelity harness's tiles, in [the finding "can any render-time fix recover the picture quality the adapter costs"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md).
 - The mention of **compose rate** (the metric reading 0.0 through training while the correction is active) in [the known failure "compose rate stuck at 0.0 even though the fix is active"](../../environment/known-failures.md#entry-id-poe-score-002).
 - The mention of **instance count**, which does not flag a person drawn beside one animal, in [the failure catalog entry poe-lora-005](../../environment/known-failures.md#entry-id-poe-lora-005).
-- The mention of **the instance-count scorer**, as the bar written before the reward fine-tune runs, in [the plan that fits a learned "and" token](../../plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).
-- The mention of **compose rate** in [the scope "do inclusive captions help PoE compose"](../../plans/11-do-inclusive-captions-help-poe-compose/MASTER_PLAN.md), whose criterion is a difference between two of these rates.
-- The mention of **compose rate** in [the plan "the inclusive captions pilot"](../../plans/11-do-inclusive-captions-help-poe-compose/plans/01-the-inclusive-captions-pilot.md), which reads one rate per training run off 128 shared seeds.
-- The mention of **compose rate** in [the review "does captioning widen the cat condition"](../../plans/11-do-inclusive-captions-help-poe-compose/review/01-does-captioning-widen-the-cat-condition.md), which restates the rate for its own instrument before either run starts.
-- The mention of **the instance-count scorer**, as the reason no automatic scorer was used, in [the finding "can a text-space third expert restore composition"](../../report/can-a-text-space-third-expert-restore-composition.md#what-this-cannot-say), where the calls are cat against dog and the counter cannot name either.
+- The mention of **the instance-count scorer**, as the bar written before the reward fine-tune runs, in [the plan that fits a learned "and" token](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).
+- The mention of **compose rate** in [the scope "do inclusive captions help PoE compose"](../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/MASTER_PLAN.md), whose criterion is a difference between two of these rates.
+- The mention of **compose rate** in [the plan "the inclusive captions pilot"](../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/plans/01-the-inclusive-captions-pilot.md), which reads one rate per training run off 128 shared seeds.
+- The mention of **compose rate** in [the review "does captioning widen the cat condition"](../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/review/01-does-captioning-widen-the-cat-condition.md), which restates the rate for its own instrument before either run starts.
+- The mention of **the instance-count scorer**, as the reason no automatic scorer was used, in [the finding "can a text-space third expert restore composition"](../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md#what-this-cannot-say), where the calls are cat against dog and the counter cannot name either.

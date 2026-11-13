@@ -27,7 +27,7 @@ import random
 import sys
 import uuid
 
-REPO = Path(os.environ.get('POE_REPO', Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get('POE_REPO', Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / 'scripts'))
 

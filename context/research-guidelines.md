@@ -20,7 +20,7 @@ happening in the background, and what to do next.
 
 | The rule | Here, concretely |
 |---|---|
-| Write the results section first | `plans/07-writing-the-paper/plans/writing-05-the-results-skeleton.md` |
+| Write the results section first | `1-lora-correction/plans/07-writing-the-paper/plans/writing-05-the-results-skeleton.md` |
 | Every run names its cost and what it buys | Two lines in the design plan. Worked example: `480 runs at 50s, about 6h. Answers question 1, feeds figure F2.` The constraint here is GPU-days |
 | The reason a figure exists goes in its own document | [figures/what-each-figure-argues.md](figures/what-each-figure-argues.md) is the worked example: seven checkboxes in the plan, seven reasons in the document |
 | A figure serves its reader | Same document, and it is held to the same one-pass standard as the figures it describes. Here that means: x is the denoising step 0 to 50 with "noise" and "image" labelled at the ends, not log-SNR, because only DDIM is used; four or five named pairs drawn in front with the remaining pairs behind as a band; a strip of decoded frames above the curve, which costs no sampling because every run already saved `latent_trajectory.pt`; spreads and percentages held back to the appendix table |
@@ -61,7 +61,7 @@ made twice in this repo.
   the mechanism test, comparing raw norms said attention moved 1.70× more than painted content,
   because the two maps are not on the same footing and the adapter dims attention by 25%
   overall. The argument for the scale-free measure is in
-  [artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md](artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md).
+  [1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md](../1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md).
 
 ## The deadline
 

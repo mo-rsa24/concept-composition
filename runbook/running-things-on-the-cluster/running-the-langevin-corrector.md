@@ -13,11 +13,11 @@ Contents: [Before any of these](#before-any-of-these) |
 [Where this came from](#where-this-came-from)
 
 Every recipe behind the three corrector findings:
-[does a Langevin corrector remove part of the correction](../../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md),
-[does a corrector alone produce two animals](../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md),
-and [can a corrector or a clean tail sharpen the adapter's renders](../../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md).
+[does a Langevin corrector remove part of the correction](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md),
+[does a corrector alone produce two animals](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md),
+and [can a corrector or a clean tail sharpen the adapter's renders](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md).
 
-One launcher drives all of them, `scripts/mechanism_study/run_corrector_curve.sh`, picked by a
+One launcher drives all of them, `1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh`, picked by a
 `STAGE` variable. It carries its own disk guard, its own device guard and a CUDA probe, so a
 faulted card or a device another user just took is refused rather than run on. Which card takes
 which python build is owned by [nodes](../../environment/hpc/nodes.md); how to pick a free device
@@ -37,8 +37,8 @@ Navigation: 📋 [TOC](#running-the-langevin-corrector) | [Next](#1-prove-the-co
   ```bash
   ls /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/poe_repair/methods/_poe_langevin.py \
      /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/poe_repair/composers/poe_langevin.py \
-     /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/corrector_residual_curve.py \
-     /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/corrector_window_sweep.py
+     /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/corrector_residual_curve.py \
+     /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/corrector_window_sweep.py
   ```
   ✅ **Four paths print.** They landed on `overhaul/tree-2026-08-10` on 2026-09-05.
   ❌ **`No such file`**: you are on an older branch.
@@ -71,8 +71,8 @@ composer or the sampler.
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 export POE_REPAIR_OUTPUT_ROOT=/datasets/mmolefe/poe_repair_min/outputs
-$PY scripts/corrector_residual_curve.py --check-identity --pair a_cat__x__a_dog --seed 9
-$PY scripts/corrector_residual_curve.py --check-identity --window off --k 200 --pair a_cat__x__a_dog --seed 9
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --check-identity --pair a_cat__x__a_dog --seed 9
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --check-identity --window off --k 200 --pair a_cat__x__a_dog --seed 9
 ```
 
 ✅ **Both print** `corrector off is byte-identical to plain PoE`, and the first also prints
@@ -93,13 +93,13 @@ Once, before the grid, and again if the model or the scheduler changes. At the w
 the chain either never moves or wrecks the sample, and both imitate a scientific answer.
 
 ```bash
-ssh mscluster108 'STAGE=search GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/step_size_search.log 2>&1 &'
+ssh mscluster108 'STAGE=search GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/step_size_search.log 2>&1 &'
 ```
 
 Widen the range in place when the pick lands at an edge, appending rows to the same file:
 
 ```bash
-ssh mscluster108 'STAGE=search GPU=1 EXTRA="--search-c 3.0,10.0,30.0,100.0,300.0" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/step_size_search_wider.log 2>&1 &'
+ssh mscluster108 'STAGE=search GPU=1 EXTRA="--search-c 3.0,10.0,30.0,100.0,300.0" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/step_size_search_wider.log 2>&1 &'
 ```
 
 Read the table, and then read the pictures:
@@ -139,7 +139,7 @@ by two pairs by 50 steps, 600 rows, no images and no detector.
 | pair | `--pairs a_cat__x__a_dog` | one pair per process keeps a whole pair on one device, which the fp16 spread makes necessary |
 
 ```bash
-ssh mscluster110 'STAGE=grid GPU=0 EXTRA="--pairs a_cat__x__a_dog --c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/grid_cat_dog.log 2>&1 &'
+ssh mscluster110 'STAGE=grid GPU=0 EXTRA="--pairs a_cat__x__a_dog --c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/grid_cat_dog.log 2>&1 &'
 ```
 
 It is resumable: cells are keyed by pair, seed, step size and count, and an existing cell is
@@ -148,8 +148,8 @@ skipped. Harvest and judge:
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-$PY scripts/corrector_residual_curve.py --verdict --c 3
-$PY scripts/corrector_residual_curve.py --plot --c 3 --fig-name how-much-of-the-correction-a-corrector-removes-c3
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --verdict --c 3
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --plot --c 3 --fig-name how-much-of-the-correction-a-corrector-removes-c3
 ```
 
 ✅ **`rows: 600 of 600 expected`** and one of `BRANCH: support`, `null` or `inconclusive`, with
@@ -176,7 +176,7 @@ To ask whether the corrector changes the outcome in the window where composition
 layout matched to the injected-correction figure.
 
 ```bash
-ssh mscluster108 'STAGE=window GPU=1 EXTRA="--c 3 --k 20" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/window.log 2>&1 &'
+ssh mscluster108 'STAGE=window GPU=1 EXTRA="--c 3 --k 20" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs/window.log 2>&1 &'
 ```
 
 ✅ **`per column composed of 4:`** with ten entries, and `window_curves_mcmc.json` holding 40
@@ -197,7 +197,7 @@ The read-out every parallel session reports on: eight held-out seeds, both pairs
 and plain product-of-experts beside whatever this session tests.
 
 ```bash
-L=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh
+L=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh
 O=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/logs
 ssh mscluster108 "STAGE=sheet GPU=1 EXTRA='--c 3 --k 20' nohup bash $L > $O/sheet.log 2>&1 &"
 ssh mscluster85  "STAGE=tail  GPU=0 EXTRA='--c 3'        nohup bash $L > $O/tail.log 2>&1 &"
@@ -228,11 +228,11 @@ Navigation: ⬅️ [5. Render the sheets](#5-render-the-eight-seed-sheets-the-ad
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 export POE_REPAIR_OUTPUT_ROOT=/datasets/mmolefe/poe_repair_min/outputs
-$PY scripts/corrector_window_sweep.py --figures --wandb --c 3
+$PY 1-lora-correction/scripts/corrector_window_sweep.py --figures --wandb --c 3
 ```
 
 ✅ **Seven paths print** (the window strip into `paper/iclr/figures/when-the-correction-arrives/mcmc/`
-and six sheets into `artifacts/results/is-the-gap-the-samplers-or-the-models/`), then
+and six sheets into `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/`), then
 `wandb run: prime_lab/poe-repair-animals-compose/<id>`, also written to
 `corrector/wandb_run_id.txt`.
 
@@ -268,12 +268,12 @@ a pattern that cannot appear in the caller, as
 Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#running-the-langevin-corrector)
 
 Every recipe was run on 2026-09-05 and 2026-09-06 while executing steps 25 to 27 of
-[the sampler-against-model scope](../../plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md),
+[the sampler-against-model scope](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md),
 and the commands here are the ones that ran, with the node and device each was launched on. The
 verdicts they produced are the three corrector findings linked at the top; the constants every
-branch is judged against sit in `scripts/corrector_residual_curve.py` and
-`scripts/corrector_window_sweep.py`.
+branch is judged against sit in `1-lora-correction/scripts/corrector_residual_curve.py` and
+`1-lora-correction/scripts/corrector_window_sweep.py`.
 
 ## Cross-references
 
-- The mention of **a Langevin corrector** run at every noise level in [the whole corrector design](../../plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#what-this-asks-in-one-line).
+- The mention of **a Langevin corrector** run at every noise level in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#what-this-asks-in-one-line).

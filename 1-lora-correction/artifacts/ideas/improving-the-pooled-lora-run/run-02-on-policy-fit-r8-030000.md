@@ -1,7 +1,7 @@
 # Run 2: the adapter's fit on its own corrected path (task 1.3)
 
 Rank 8 at 30k, cat x dog, held-out seeds 9 to 16, λ = 1 at every step, 50 DDIM steps. Slurm job
-49421 on mscluster72, 2026-09-03 17:07 to 17:15. Script `scripts/showcase/on_policy_fit_cosine.py`,
+49421 on mscluster72, 2026-09-03 17:07 to 17:15. Script `1-lora-correction/scripts/showcase/on_policy_fit_cosine.py`,
 output `/datasets/mmolefe/poe_repair_min/outputs/showcase/on_policy_fit_r8_030000/`
 (`on_policy_fit.json`, `on_policy_fit_table.md`, one `seed_N_corrected.png` per seed,
 `contact_sheet.png`).

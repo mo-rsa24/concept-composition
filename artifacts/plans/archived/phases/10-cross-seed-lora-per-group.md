@@ -107,11 +107,11 @@ from `outputs/cross_seed_lora_pooling/` to
 | `poe_repair.experiments.held_out_seeds.step0_prescreen` | reused | Inference-time mono-average pre-screen per pair. |
 | `poe_repair.experiments.held_out_seeds.task_d_bridge` | reused | Δ̄_t bridge per pair. |
 | `poe_repair.experiments.held_out_seeds.contact_sheet` | reused; takes `--pair` | Renders task B/C/heldout-pair grids per pair. |
-| `scripts/cross_seed_lora_pooling/task_b_learning_curve.sh` | reused via `PAIR=` env var | Wraps `train_pooled` + `sample_heldout`. |
-| `scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh` | reused via `PAIR=` env var | Per-seed ceiling. |
-| `scripts/cross_seed_lora_pooling/heldout_pair.sh` *(new)* | new | Loops over groups (`LORA_GROUPS=G1..G6`), resolves each group's pooled checkpoint via `checkpoints/latest.json`, runs `sample_heldout --heldout-pair <sibling>` for seeds {9..12}. Per-group ckpt override via `G{N}_CHECKPOINT=`. |
-| `scripts/cross_seed_lora_pooling/build_sibling_caches.sh` *(new)* | new | Wraps `scripts/build_eval_cache.py` over the five sibling pairs × seeds {9..12}. Required precondition for `heldout_pair.sh`. |
-| `scripts/cross_seed_lora_pooling/render_seed_summary.py` | existing | Stays — emits the per-pair seed-summary grid surfaced by the residual inspector. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/task_b_learning_curve.sh` | reused via `PAIR=` env var | Wraps `train_pooled` + `sample_heldout`. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh` | reused via `PAIR=` env var | Per-seed ceiling. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh` *(new)* | new | Loops over groups (`LORA_GROUPS=G1..G6`), resolves each group's pooled checkpoint via `checkpoints/latest.json`, runs `sample_heldout --heldout-pair <sibling>` for seeds {9..12}. Per-group ckpt override via `G{N}_CHECKPOINT=`. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh` *(new)* | new | Wraps `1-lora-correction/scripts/build_eval_cache.py` over the five sibling pairs × seeds {9..12}. Required precondition for `heldout_pair.sh`. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/render_seed_summary.py` | existing | Stays — emits the per-pair seed-summary grid surfaced by the residual inspector. |
 
 The `--heldout-pair` flag is the only sampler-side new code. Its
 semantics:
@@ -157,7 +157,7 @@ existing Plan-08 cells under
 Group 4 inherits the existing 13-seed cache at
 `/datasets/.../training_cache/heldout/a_typewriter__x__a_cactus/`.
 Groups 1, 2, 3 require cache production from scratch (`embeddings.pt`
-+ `residuals/step_*.pt`) using `scripts/build_training_cache.py`.
++ `residuals/step_*.pt`) using `3-understanding-compositionality/scripts/build_training_cache.py`.
 
 ## Commands
 
@@ -191,7 +191,7 @@ for PAIR in a_dolphin__x__an_ocean_wave a_dog__x__oil_painting_style \
             a_mailbox__x__a_snowfield a_typewriter__x__a_cactus \
             a_cat__x__a_dog; do
   PAIR=$PAIR EPOCHS=1600 KSET="1a 4 8" \
-      bash scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
+      bash 1-lora-correction/scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
 done
 ```
 
@@ -207,7 +207,7 @@ for PAIR in a_dolphin__x__an_ocean_wave a_dog__x__oil_painting_style \
             a_mailbox__x__a_snowfield a_typewriter__x__a_cactus \
             a_cat__x__a_dog; do
   PAIR=$PAIR CEILING_SEEDS="9 10 11 12" EPOCHS=1600 \
-      bash scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh
+      bash 1-lora-correction/scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh
 done
 ```
 
@@ -217,14 +217,14 @@ Build the five sibling-pair eval-only caches first (seeds 9..12):
 
 ```bash
 POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/outputs/training_cache \
-    bash scripts/cross_seed_lora_pooling/build_sibling_caches.sh
+    bash 1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh
 ```
 
 Then run the held-out-pair driver:
 
 ```bash
 POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/outputs/training_cache \
-    bash scripts/cross_seed_lora_pooling/heldout_pair.sh
+    bash 1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh
 ```
 
 For each group, loads that group's pooled checkpoint (k=8, ep=1600) and
@@ -311,8 +311,8 @@ Aggregate read across the five studied groups (G1–G4, G6):
 | G5 explicitly deferred from this arc | ✅ | |
 | Per-pair output roots `outputs/cross_seed_lora_pooling/<pair>/` | | ⬜ (small refactor of the runners) |
 | `sample_heldout --heldout-pair <slug>` flag | | ⬜ (new CLI; ~30 lines) |
-| `scripts/cross_seed_lora_pooling/heldout_pair.sh` driver | ✅ (2026-05-25; resolves checkpoints via `latest.json`, dry-runs cleanly on G1–G4 k04 ckpts + G6 legacy k04__ep2000_resumed) | |
-| `scripts/cross_seed_lora_pooling/build_sibling_caches.sh` helper | ✅ (2026-05-25) | |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh` driver | ✅ (2026-05-25; resolves checkpoints via `latest.json`, dry-runs cleanly on G1–G4 k04 ckpts + G6 legacy k04__ep2000_resumed) | |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh` helper | ✅ (2026-05-25) | |
 | Per-pair `seed_pool.yaml` (5 files; same shape as Plan 08) | | ⬜ |
 | Cache cells for the 3 missing representative pairs (G1, G2, G3) at seeds {1..12} | | ⬜ (data side; G4, G6 already present) |
 | Cache cells for the 5 sibling held-out-pair slugs at seeds {9..12} | | ⬜ (data side — driver `build_sibling_caches.sh` is ready; awaiting GPU window) |

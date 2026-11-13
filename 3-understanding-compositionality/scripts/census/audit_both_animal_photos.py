@@ -30,7 +30,7 @@ Writes, under MOUNT_ROOT/outputs/inclusive_captions_pool/:
 
 Run it on a compute node; no GPU:
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      scripts/census/audit_both_animal_photos.py
+      3-understanding-compositionality/scripts/census/audit_both_animal_photos.py
 """
 from __future__ import annotations
 
@@ -44,7 +44,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from PIL import Image
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 from poe_repair import paths  # noqa: E402
 

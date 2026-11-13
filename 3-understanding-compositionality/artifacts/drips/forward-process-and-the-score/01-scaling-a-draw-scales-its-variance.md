@@ -2,7 +2,7 @@
 
 *Piece 1 of 18 in [the forward process and the score](00-INDEX.md). After: [02: Independent variances add](02-independent-variances-add.md).*
 
-Filed in the vault: [Variance](../../../../../Obsidian/Mathematics/Statistics/Variance.md). Scene: [Derive 2 on Dissolving the Dog](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#derive-2).
+Filed in the vault: [Variance](../../../../../../Obsidian/Mathematics/Statistics/Variance.md). Scene: [Derive 2 on Dissolving the Dog](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#derive-2).
 
 ## Why this comes first
 
@@ -12,7 +12,7 @@ The forward draw multiplies the noise by $\sqrt{1-\bar\alpha_t}$, not by $(1-\ba
 
 $$\operatorname{Var}(X)=\mathbb E\big[(X-\mu)^2\big]$$
 
-Read it term by term. $X-\mu$ is the miss: how far one draw lands from the mean $\mu$. Squaring it makes left and right misses both count, and positive. $\mathbb E$ averages over all draws. So [variance](../../../../../goal-setting/learning/deep-learning/diffusion-models/08-spectral-structure-of-the-correction/plans/03-mean-variance-centering.md) is the average squared miss. Its square root, the standard deviation, is the typical miss in the same units as $X$.
+Read it term by term. $X-\mu$ is the miss: how far one draw lands from the mean $\mu$. Squaring it makes left and right misses both count, and positive. $\mathbb E$ averages over all draws. So [variance](../../../../../../goal-setting/learning/deep-learning/diffusion-models/08-spectral-structure-of-the-correction/plans/03-mean-variance-centering.md) is the average squared miss. Its square root, the standard deviation, is the typical miss in the same units as $X$.
 
 ## The draw we scale
 
@@ -37,7 +37,7 @@ $$
 $$
 
 > [!aside]
-> The third line is ordinary averaging: $(c^2a+c^2b)/2=c^2(a+b)/2$. The [expectation chapter](../../../../../goal-setting/learning/mathematics/textbooks/machine-learning/mathematics-for-machine-learning.pdf#page=200) states the same move for a scaled variable.
+> The third line is ordinary averaging: $(c^2a+c^2b)/2=c^2(a+b)/2$. The [expectation chapter](../../../../../../goal-setting/learning/mathematics/textbooks/machine-learning/mathematics-for-machine-learning.pdf#page=200) states the same move for a scaled variable.
 
 <a id="eq-scaling"></a>**(1) Scaling a draw**
 

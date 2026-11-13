@@ -9,8 +9,8 @@
 #
 # Sample, fetch and score captioned camels and dogs from the Re-LAION-2B-en mirror.
 #
-#   N=100 OUT=/datasets/mmolefe/relaion2b-en/wetness/pilot sbatch scripts/caption_wetness.sbatch
-#   STAGES=score OUT=... sbatch --gres=gpu:1 scripts/caption_wetness.sbatch
+#   N=100 OUT=/datasets/mmolefe/relaion2b-en/wetness/pilot sbatch 3-understanding-compositionality/scripts/caption_wetness.sbatch
+#   STAGES=score OUT=... sbatch --gres=gpu:1 3-understanding-compositionality/scripts/caption_wetness.sbatch
 #
 # CPU is enough for a pilot; the score stage uses a GPU when one is visible.
 set -uo pipefail
@@ -32,6 +32,6 @@ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-12}
 cd "$REPO" || exit 7
 for stage in $STAGES; do
   echo "--- $stage  $(date -Is)"
-  "$PY" scripts/caption_wetness.py "$stage" --out "$OUT" --n "$N" || { echo "ABORT: $stage failed" >&2; exit 9; }
+  "$PY" 3-understanding-compositionality/scripts/caption_wetness.py "$stage" --out "$OUT" --n "$N" || { echo "ABORT: $stage failed" >&2; exit 9; }
 done
 echo "=== done $(date -Is)"

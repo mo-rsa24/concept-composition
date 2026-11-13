@@ -10,7 +10,7 @@ In the background, prepare and build three quizzes for the composition ladder: q
 quiz 1.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Each layer opens on two quizzes, one on
 the college maths underneath it and one on the layer itself. These three are built before layer 1
 starts, so they are waiting when I arrive. The repo is
@@ -31,9 +31,9 @@ Objectives
 6. Write each published URL into its ladder step.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md and its Study
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md and its Study
   first line: the material for quizzes 0 and 1.1.
-- artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md: the material for quiz
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md: the material for quiz
   1.2, with a textbook page and timed video segments beside each fundamental it uses.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -58,7 +58,7 @@ Rules
 - Report each quiz's coverage counts before its page is built.
 
 What to hand back
-- Three coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Three coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Three published quiz pages, each opening on a read-first list with minutes per item, a short path

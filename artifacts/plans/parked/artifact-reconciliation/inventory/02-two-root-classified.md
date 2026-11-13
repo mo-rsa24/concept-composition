@@ -32,9 +32,9 @@ Legend for **type**: `dataset` | `lora-ckpt` (LoRA checkpoints + the run's saved
 | D: `poe_repair_min/outputs/training_cache/train/` (8 pair dirs) | dataset + cache:training | shared | cross_pair + cross_seed | part of 22G | 2026-05-11 |
 | D: `poe_repair_min/outputs/training_cache/{manifest_A,manifest_B,manifest_H}.json` | cache:group | shared | cross_pair + cross_seed | small | 2026-05-06 |
 | D: `poe_repair_min/outputs/training_cache/heldout/` | cache:eval | shared | cross_pair + cross_seed | part of 22G | 2026-05-27 |
-| R: `outputs/manifold_cache/` | cache (eps/z banks) | — | scripts/manifold (not one of the 3) | 838M | 2026-05-26 |
+| R: `outputs/manifold_cache/` | cache (eps/z banks) | — | 1-lora-correction/scripts/manifold (not one of the 3) | 838M | 2026-05-26 |
 
-Shared cache total: `D: training_cache` = **22G** (built by `scripts/build_training_cache.py`; group split by `build_group_cache.py`, eval split by `build_eval_cache.py`). Read by `cross_pair_lora_pooling/train_pooled.py`, `sample_crossbar.py`, `eval_crossbar_wandb.py`, `task_d_bridge.py` and `cross_seed_lora_pooling/train_pooled.py`, `step0_prescreen.py`, `trajectory_diagram.py`.
+Shared cache total: `D: training_cache` = **22G** (built by `3-understanding-compositionality/scripts/build_training_cache.py`; group split by `build_group_cache.py`, eval split by `build_eval_cache.py`). Read by `cross_pair_lora_pooling/train_pooled.py`, `sample_crossbar.py`, `eval_crossbar_wandb.py`, `task_d_bridge.py` and `cross_seed_lora_pooling/train_pooled.py`, `step0_prescreen.py`, `trajectory_diagram.py`.
 
 ## Duplicates flagged
 
@@ -48,7 +48,7 @@ No exact byte-for-byte duplicate directories were found across the two roots for
 
 - R: `outputs/lora/{a_dog__x__oil_painting_style, a_dolphin__x__an_ocean_wave, a_mailbox__x__a_snowfield}` — **0-byte stubs**, no run, no checkpoint. Namespaced to `lora` but nothing owns them.
 - D: `poe_repair_min/outputs/training_cache_overfit_catdog` — **0-byte** empty dir.
-- R: `outputs/manifold_cache/` (838M) — a real cache but owned by `scripts/manifold/*`, not by lora/cross_seed/cross_pair. Orphan relative to the three.
+- R: `outputs/manifold_cache/` (838M) — a real cache but owned by `1-lora-correction/scripts/manifold/*`, not by lora/cross_seed/cross_pair. Orphan relative to the three.
 
 ## Out of scope (different project or older experiment family, not orphans of the three)
 

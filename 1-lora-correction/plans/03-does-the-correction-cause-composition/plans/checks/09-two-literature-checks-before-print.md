@@ -3,7 +3,7 @@
 This plan asks whether two sentences the paper wants to print survive contact with the published
 literature, and it answers that before either sentence is written.
 
-**Step 15 of 22.** Waits on step 13. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 15 of 22.** Waits on step 13. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -36,16 +36,16 @@ into the wording.
 ## Environment Facts This Plan Depends On
 - None apply. Both checks are literature reading done in-session.
 - All paper prose has one owner,
-  `plans/07-writing-the-paper/plans/writing-06-mechanism-and-limitations.md`. The verdicts
+  `1-lora-correction/plans/07-writing-the-paper/plans/writing-06-mechanism-and-limitations.md`. The verdicts
   produced here are its input.
 
 ## Tasks
-- [ ] /pressure-test: "the [interaction term](../../../../context/world/interaction-term.md)'s
+- [ ] /pressure-test: "the [interaction term](../../../../../context/world/interaction-term.md)'s
       timing has not been causally measured (sliding-window injection of the cached PoE→joint
       residual)"
 - [ ] /pressure-test: "reweighting two experts' predictions cannot
       reproduce a correction outside their span (contra SuperDiff AND on
-      [chimera](../../../../context/world/chimera.md) pairs)"
+      [chimera](../../../../../context/world/chimera.md) pairs)"
 
 ## Success/Failure Outcomes
 - **pressure-test passes**
@@ -67,4 +67,4 @@ into the wording.
 ls docs/pressure_tests/          # expect two dated verdict notes
 ```
 The check on the draft text itself belongs to the writing plan,
-`plans/07-writing-the-paper/plans/writing-06-mechanism-and-limitations.md`.
+`1-lora-correction/plans/07-writing-the-paper/plans/writing-06-mechanism-and-limitations.md`.

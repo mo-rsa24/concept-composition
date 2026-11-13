@@ -16,7 +16,7 @@ paper/iclr/what-each-figure-argues.md:
   chosen for display, so nothing is cherry-picked.
 - **No spread number on the plot.** A reader cannot act on a percentage while
   looking at a curve. Those live in the appendix table, printed by
-  `scripts/snr_collapse.py --pool --x-axis step`.
+  `1-lora-correction/scripts/snr_collapse.py --pool --x-axis step`.
 
 The measure itself is imported from snr_collapse rather than repeated, so this
 figure cannot drift from the numbers in the appendix table.
@@ -24,7 +24,7 @@ figure cannot drift from the numbers in the appendix table.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/correction_size_vs_run_position.py
+    python 1-lora-correction/scripts/correction_size_vs_run_position.py
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import CACHE_ROOT  # noqa: E402
 from poe_repair.experiments.interaction_term.pool import load_pool  # noqa: E402

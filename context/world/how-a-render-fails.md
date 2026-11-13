@@ -23,7 +23,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-seed-sets-the-look-firs
   registers.
 - **The comparison sheets**: three images, one per held-out seed, each rendering every trained
   adapter on the same cat and dog cell. Filed in
-  [which adapter composes cat and dog](../../artifacts/results/which-adapter-composes-cat-and-dog/README.md).
+  [which adapter composes cat and dog](../../1-lora-correction/artifacts/results/which-adapter-composes-cat-and-dog/README.md).
   A tile is named below by its seed and the label printed above it on the sheet.
 
 ## The seed sets the look first
@@ -100,5 +100,5 @@ no-adapter control, rendered 2026-09-21 by `scripts/across_adapters.py`) and fro
 renders of the `v57w10` cohort. The clipart row is also backed by a comparison that moved one thing:
 the adapter with only the empty branch free against the plain adapter, same step, same seed, where
 the plain one draws several animals and this one draws one. No automated scorer was used; the
-[instance counter](compose-rate.md#what-people-get-wrong) cannot tell a cat from a second dog, and the [edge measure](../../report/is-the-gap-the-samplers-or-the-models/does-searching-over-the-noise-sharpen-the-corrected-render.md#what-would-have-counted) prefers a sketch to a
+[instance counter](compose-rate.md#what-people-get-wrong) cannot tell a cat from a second dog, and the [edge measure](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-searching-over-the-noise-sharpen-the-corrected-render.md#what-would-have-counted) prefers a sketch to a
 photograph.

@@ -16,15 +16,15 @@ export, not either local copy, and that Figure 5 mixes three adapters.
 
 Objectives
 1. Unpack _ICLR2027__LoRA_Plurality.zip into paper/iclr-56173/ and confirm it compiles unchanged.
-2. Write report/paper-review/protocol.md with the rules every result must obey.
-3. Write report/paper-review/layout-sheet.md with one row per new figure and table.
+2. Write 1-lora-correction/report/paper-review/protocol.md with the rules every result must obey.
+3. Write 1-lora-correction/report/paper-review/layout-sheet.md with one row per new figure and table.
 4. Add a row per slot to paper/iclr-56173/figures.md and a placeholder at final size in its tex.
-5. Write scripts/refresh_paper_slots.py, which rebuilds a slot from its result file and compiles.
+5. Write 1-lora-correction/scripts/refresh_paper_slots.py, which rebuilds a slot from its result file and compiles.
 
 What to read
-- artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings on nodes, the adapter
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings on nodes, the adapter
   and the paper source.
-- report/paper-review/board.md and the pages prze-1, prze-2, prze-3a, prze-5, prze-8, prze-9 and
+- 1-lora-correction/report/paper-review/board.md and the pages prze-1, prze-2, prze-3a, prze-5, prze-8, prze-9 and
   prze-11 beside it: the outcome lines this step and later steps must meet.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far", read whole.
 - environment/paper.md: how the paper builds here.
@@ -95,15 +95,15 @@ Rules
 - Commit nothing until the user says so.
 
 What to hand back
-- report/paper-review/protocol.md and report/paper-review/layout-sheet.md.
+- 1-lora-correction/report/paper-review/protocol.md and 1-lora-correction/report/paper-review/layout-sheet.md.
 - New rows in paper/iclr-56173/figures.md, status reserved, each with its claim, layout and result
   file.
-- scripts/refresh_paper_slots.py and the compile log showing the paper builds with every slot as
+- 1-lora-correction/scripts/refresh_paper_slots.py and the compile log showing the paper builds with every slot as
   a placeholder.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md, and a diff for any
   later step whose prompt names paper/iclr/ as the source, applied after the user's yes.
-- Proof: python3 scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
-  python3 ~/.claude/skills/skill-route/scripts/board.py report/paper-review/board.md --step 2
+- Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
+  python3 ~/.claude/skills/skill-route/scripts/board.py 1-lora-correction/report/paper-review/board.md --step 2
   redraws the board with the PRZE-8 and PRZE-9 lines ticked.
 
 What you will see

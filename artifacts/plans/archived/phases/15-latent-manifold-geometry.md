@@ -348,7 +348,7 @@ Ordered cheapest-first. The JVP / pullback stack is conditional on the
 cheap instruments leaving anything unsettled.
 
 1. **Inventory cached trajectories.** Tool:
-   [scripts/manifold/inventory_trajectories.py](../scripts/manifold/inventory_trajectories.py).
+   [1-lora-correction/scripts/manifold/inventory_trajectories.py](../scripts/manifold/inventory_trajectories.py).
    Walks the filesystem, reports per-(seed, condition, λ) whether
    `z_t` and `ε̂_t` are cached, writes a JSON gap manifest.
    **Verified 2026-05-26**: 0 / 84 cells complete for the cross-seed
@@ -359,7 +359,7 @@ cheap instruments leaving anything unsettled.
    a config (`mono_bank_seeds = {2, 3, 5, 7, 8, 9, 11, 12}`) so the
    exclusion is auditable and reversible.
    **Backfill tool:**
-   [scripts/manifold/sample_with_trajectory.py](../scripts/manifold/sample_with_trajectory.py)
+   [1-lora-correction/scripts/manifold/sample_with_trajectory.py](../scripts/manifold/sample_with_trajectory.py)
    — re-samples mono / PoE-no-LoRA / PoE+λR at the 12 seeds with
    `LatentTrajectoryCollector` recording both `z_t` and the guided
    `ε̂_t`. Uses pinned init latents from the existing training cache,

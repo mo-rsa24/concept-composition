@@ -10,7 +10,7 @@ In the background, prepare and build layer 5's two quizzes for the composition l
 quiz 5.1 and quiz 5.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 5, the overlap dial, answers how
 much A-and-B data a product needs, and whether pretraining supplies it. Each layer opens on two
 quizzes, one on the college maths underneath it and one on the layer itself, built during the
@@ -32,9 +32,9 @@ Objectives
 
 What to read
 - The miss ledger (quiz-ledger) of every earlier quiz on this ladder.
-- artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md and its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md and its Study first
   line: the material for quiz 5.1.
-- artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, steps 0 to 8, with step 4 of
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, steps 0 to 8, with step 4 of
   the ladder file (the answer key) and its optional Z step: the material for quiz 5.2.
 - The diffusion models quiz named under What is already known, before writing.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
@@ -44,7 +44,7 @@ What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in
-  artifacts/drips/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
   quiz (quiz-cadence, "The preparation gate").
 - The step file links a textbook page beside each fundamental it uses: p. 230 of
   introduction-to-probability-for-data-science.pdf for the normal CDF and p. 42 of
@@ -95,7 +95,7 @@ What is already known
   toy/rebuild/out/phase5/finetune.json).
 - Z with expert A's blob in the bottom-right corner and B's blob moved is 7.9 × 10⁻¹⁰ opposite,
   5.3 × 10⁻⁵ next door and 3.54 on top of A (scene_key.json in
-  artifacts/scenes/three-ways-a-product-reaches-a-and-b/, keys support.TL.Z, support.TR.Z and
+  3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/, keys support.TL.Z, support.TR.Z and
   support.BR.Z).
 - By hand, two normalised 2D Gaussians of std σ with centres d apart multiply to a total mass
   Z = exp(−d²/(4σ²)) / (4πσ²), which with σ = 0.15 and d² = 2, 1, 0 gives the same three values
@@ -116,13 +116,13 @@ Rules
   built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 5.1's URL in step 1 and quiz 5.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, each replacing "(URL
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, each replacing "(URL
   lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and
   the two URLs open.

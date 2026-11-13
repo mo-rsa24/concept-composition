@@ -80,4 +80,4 @@ No ❌ branch beyond an unreachable node, which is an SSH/network problem, not a
 ## Cross-references
 
 - The mention of **SSH launch**, whose relative paths resolve in `$HOME` and kill the run before `nohup` starts, in [the failure catalog entry poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001).
-- The mention of **one-job-per-user rule**, kept by starting long jobs with `nohup` and checking them with `pgrep`, in [the PRZE-10 compute plan](../../report/paper-review/prze-10-compute.md), third outcome.
+- The mention of **one-job-per-user rule**, kept by starting long jobs with `nohup` and checking them with `pgrep`, in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), third outcome.

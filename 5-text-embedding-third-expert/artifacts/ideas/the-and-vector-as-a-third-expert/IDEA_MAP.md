@@ -57,7 +57,7 @@ Navigation: ⬅️ [Quick context](#quick-context-where-you-are) | 📋 [TOC](#t
 
 SDXL's joint prompt is classifier-free guidance on one prompt against the empty prompt. PoE sums one
 guidance direction per concept, ε = ε_∅ + w Σᵢ (εᵢ − ε_∅), which is what
-`scripts/concept_multi_poe.py` computes over any number of prompt strings. The idea adds a third
+`1-lora-correction/scripts/concept_multi_poe.py` computes over any number of prompt strings. The idea adds a third
 condition that is no prompt at all: an embedding built by arithmetic on SDXL's two text encoders'
 outputs, in the spirit of word-vector analogies (king − man + woman ≈ queen). If that embedding
 carries what "and" adds, the product of dog, cat and x draws two animals where the product of dog
@@ -91,7 +91,7 @@ guarantee.
 
 What the repair does not fix: content positions do not line up. "a cat and a dog" puts "dog" at a
 different position from "a dog", so the subtraction there is word-by-different-word.
-`scripts/language_probes.py` names the same alignment artefact in its docstring.
+`5-text-embedding-third-expert/scripts/language_probes.py` names the same alignment artefact in its docstring.
 
 Position 1 does not cancel either: m, d and c put "a" there and "" puts `<eot>`, so
 x_fix[1] = H_∅[1] − H_a[1].
@@ -138,7 +138,7 @@ animals on 0 of 7 for plain PoE, 5 of 7 for the phrase "a dog next to a cat" and
 a third expert can restore how many animals are in the frame and never which animals they are. The
 write-up is [the finding](../../../report/can-a-text-space-third-expert-restore-composition.md).
 
-**The test, written 2026-10-28 before any tile rendered.** `scripts/and_vector_sheet.py`, prompts
+**The test, written 2026-10-28 before any tile rendered.** `5-text-embedding-third-expert/scripts/and_vector_sheet.py`, prompts
 "dog", "cat", "dog and cat", seeds 1 to 8, eight columns from the same noise per seed: dog alone,
 cat alone, joint, PoE(d, c), x_raw alone, x_fix alone, PoE(d, c, x_raw), PoE(d, c, x_fix).
 
@@ -216,9 +216,9 @@ the LoRA's share on the same seeds.
 
 **Filed as a finding.** The whole series, every third expert tried against the same pass mark, is
 written up in [the finding "can a text-space third expert restore composition"](../../../report/can-a-text-space-third-expert-restore-composition.md),
-walked in [the positional-vector plan](../../plans/completed/today-the-positional-and-vector.md) with
-its evidence in [the positional "and" vector card](../../results/the-positional-and-vector/README.md).
-The follow-on it leaves open is [the plan that puts the LoRA on the text encoders](../../../plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md).
+walked in [the positional-vector plan](../../../../artifacts/plans/completed/today-the-positional-and-vector.md) with
+its evidence in [the positional "and" vector card](../../results/can-a-positional-and-vector-restore-composition/README.md).
+The follow-on it leaves open is [the plan that puts the LoRA on the text encoders](../../../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md).
 
 ### 3. ✅ The LoRA's target is f("dog and cat")
 
@@ -230,7 +230,7 @@ judged seed by seed, and only the good cells enter training. The verdicts are
 `artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json` on the
 cluster checkout (`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/`; `artifacts/results/` is
 gitignored, so the laptop has no copy), turned into cell lists by
-`scripts/showcase/build_pool_from_verdicts.py`. The newest list,
+`1-lora-correction/scripts/showcase/build_pool_from_verdicts.py`. The newest list,
 `artifacts/_shared/cross_pair_pool_configs/cells_v58.json`, holds 182 cells over 48 pairs and is
 read by the trainer's `--cells` switch. Cat × dog is in none of the lists on purpose: it is the
 held-out evaluation pair, and seeds 9 to 16 are never trained on because the cached starting noise
@@ -251,7 +251,7 @@ Mark: needs a check.
 
 **The caption count, 2026-10-28.** In the laptop slice (2 of the mirror's 128 files, 32,776,409
 captions), 167,778 captions name a cat, 233,938 a dog and 17,396 both, whole words, case-insensitive
-(`artifacts/results/what-the-and-vector-is-made-of/cat-and-dog-captions.json`, with 25 random
+(`5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/cat-and-dog-captions.json`, with 25 random
 examples). Scaled by 64 to the full mirror that is about 1.1 million, an estimate. The random
 examples are mostly product listings ("flea spray for cats and dogs", "pet memorial urn small to
 large dog cat"); two of the first twelve plausibly picture both animals. So the caption count is an
@@ -327,7 +327,7 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 
 | Claim | The check | What each outcome means |
 |---|---|---|
-| 1 | `scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"`, text encoders only, laptop CPU, fp16 weights upcast to fp32. Writes `artifacts/results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json` (77 norms per encoder slice for x_raw, x_fix and E(m), plus the three pooled norms) and a bar chart beside it: y is the norm, x is token position 0 to 76, one bar group per position for x_raw, x_fix and E(m) | x_fix[0] not 0.000 means the code is wrong. x_fix pad positions (7 to 76) under a tenth of E(m)'s pad norm means the repair works and x lives in positions 1 to 6. x_fix pads near E(m)'s pad norm means the pads carry the prompt, the repair fixes position 0 only, and fix a is the route |
+| 1 | `5-text-embedding-third-expert/scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"`, text encoders only, laptop CPU, fp16 weights upcast to fp32. Writes `5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.json` (77 norms per encoder slice for x_raw, x_fix and E(m), plus the three pooled norms) and a bar chart beside it: y is the norm, x is token position 0 to 76, one bar group per position for x_raw, x_fix and E(m) | x_fix[0] not 0.000 means the code is wrong. x_fix pad positions (7 to 76) under a tenth of E(m)'s pad norm means the repair works and x lives in positions 1 to 6. x_fix pads near E(m)'s pad norm means the pads carry the prompt, the repair fixes position 0 only, and fix a is the route |
 
 ## Runs
 
@@ -335,24 +335,24 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | Anchor | What it executed | State | Finding |
 |---|---|---|---|---|
-| 1 | claim 1, the norm check | `scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"` on mscluster84, fp32, sent through `cluster.sh sh` without a sync because the laptop worktree held other sessions' uncommitted edits | done | x_fix[0] = 0.000 on both encoders, so the code is right. Pad median x_fix over joint: 0.766 (CLIP ViT-L), 0.487 (bigG), so the repair fails its 0.1 mark and the pads carry the prompt. Content positions 1 to 6: x_fix 20 to 29 against the joint's 13 to 20 (ViT-L), 34 to 59 against 17 to 36 (bigG). Pooled: x_fix 44.6, joint 38.7. Files: [the chart](../../results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png) and its JSON beside it |
-| 2 | claim 2, the sheet | `scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8` via `scripts/and_vector_sheet.sh` on mscluster106 device 1, outside Slurm, launched 2026-10-27 23:52 cluster time (pid 943209); then the norm check on the same prompts | done | 64 tiles, eight columns; ended 00:17. Norm check on "dog and cat": x_fix pads at 0.572 (CLIP ViT-L) and 0.555 (bigG) of the joint's. Log `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/logs/sheet.log` |
+| 1 | claim 1, the norm check | `5-text-embedding-third-expert/scripts/and_vector_norms.py --joint "a cat and a dog" --a "a cat" --b "a dog"` on mscluster84, fp32, sent through `cluster.sh sh` without a sync because the laptop worktree held other sessions' uncommitted edits | done | x_fix[0] = 0.000 on both encoders, so the code is right. Pad median x_fix over joint: 0.766 (CLIP ViT-L), 0.487 (bigG), so the repair fails its 0.1 mark and the pads carry the prompt. Content positions 1 to 6: x_fix 20 to 29 against the joint's 13 to 20 (ViT-L), 34 to 59 against 17 to 36 (bigG). Pooled: x_fix 44.6, joint 38.7. Files: [the chart](../../results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png) and its JSON beside it |
+| 2 | claim 2, the sheet | `5-text-embedding-third-expert/scripts/and_vector_sheet.py --render --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8` via `5-text-embedding-third-expert/scripts/and_vector_sheet.sh` on mscluster106 device 1, outside Slurm, launched 2026-10-27 23:52 cluster time (pid 943209); then the norm check on the same prompts | done | 64 tiles, eight columns; ended 00:17. Norm check on "dog and cat": x_fix pads at 0.572 (CLIP ViT-L) and 0.555 (bigG) of the joint's. Log `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/logs/sheet.log` |
 | 3 | claim 1 angle 2 (x_aff) and the screenshot's phrases | the same launcher, queued to start when run 2's launcher exits (pid 945088); adds x_aff alone, PoE(d, c, x_aff), PoE(d, c, "single animal"), PoE(d, c, "two animals") | done | 32 more tiles; ended 00:34. Sheet: [dog-and-cat-sheet.png](../../results/what-the-and-vector-is-made-of/dog-and-cat-sheet.png). Log `.../and_vector/logs/sheet-pass2.log` |
-| 4 | claim 2, the phrase search | `SET=phrases` through `scripts/and_vector_sheet.sh` on mscluster106 device 1, launched 2026-10-28 (pid 954505); 8 new columns × 8 seeds | done, 01:31; sheet `dog-and-cat-phrases-sheet.png` | log `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/logs/phrases.log` |
+| 4 | claim 2, the phrase search | `SET=phrases` through `5-text-embedding-third-expert/scripts/and_vector_sheet.sh` on mscluster106 device 1, launched 2026-10-28 (pid 954505); 8 new columns × 8 seeds | done, 01:31; sheet `dog-and-cat-phrases-sheet.png` | log `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/logs/phrases.log` |
 | 5 | claim 2, x_fix at rising weight | `SET=sweep`, queued on mscluster106 device 1 behind run 4 (pid 956073); PoE of dog, cat and λ·x_fix, λ = 0.1, 0.25, 0.5, 0.75, 1; 16 new tiles, the rest reused | queued | log `.../and_vector/logs/sweep.log`; read against run 4's last pass-mark row |
 | 6 | claim 3, joint seeds to pass | `SET=curate`, seeds 1 to 32, mscluster109 device 0 (RTX A6000; seeds 9 to 32 new) | done; contact sheet `joint-seeds-to-pass.png`, calls `joint-seed-calls.json`: 28 pass, 2 fail (8, 14), 2 for you (13, 22) |
-| 7 | claim 2, separation steering | `scripts/separation_steering.py` through `scripts/separation_steering.sh` on mscluster109 device 1, outside Slurm, 2026-10-28 01:22 to 01:32 cluster time; gradient step on the latent at steps 0 to 9, step sizes 2.5e4, 1.2e5, 5e5, seeds 1 to 8, with a no-steering column from the same script | done | [the sheet](../../results/what-the-and-vector-is-made-of/separation-steering-sheet.png), card entry in the [results README](../../results/what-the-and-vector-is-made-of/README.md). One cat and one dog on 0 of 7 counted seeds at every step size, plus 1 borderline tile; the mark was 4 of 7. 18.6 s per steered tile against 14.8 s plain. [Retrospective](../../notes/session-merges/2026-10-28-separation-steering-retro.md) |
+| 7 | claim 2, separation steering | `5-text-embedding-third-expert/scripts/separation_steering.py` through `5-text-embedding-third-expert/scripts/separation_steering.sh` on mscluster109 device 1, outside Slurm, 2026-10-28 01:22 to 01:32 cluster time; gradient step on the latent at steps 0 to 9, step sizes 2.5e4, 1.2e5, 5e5, seeds 1 to 8, with a no-steering column from the same script | done | [the sheet](../../results/what-the-and-vector-is-made-of/separation-steering-sheet.png), card entry in the [results README](../../results/what-the-and-vector-is-made-of/README.md). One cat and one dog on 0 of 7 counted seeds at every step size, plus 1 borderline tile; the mark was 4 of 7. 18.6 s per steered tile against 14.8 s plain. [Retrospective](../../../../artifacts/notes/session-merges/2026-10-28-separation-steering-retro.md) |
 
-| 8 | claim 1, the positional build | `scripts/and_vector_norms.py --joint "dog and cat" --a dog --b cat`, text encoders only, through the cluster scratch without a git sync because another session held tracked files modified | done | x_pos differs from the joint prompt at 2 of 77 slots; the largest absolute difference at the start token, the end token and all 72 pads is 0. Slot 1 is exactly 0 in both encoders, because a causal mask makes slot 1 of "dog and cat" and of "dog" the same state |
-| 9 | claim 2, x_pos | `scripts/and_vector_sheet.py --render --set positional`, mscluster108 device 0, outside Slurm, 2026-11-04 09:22 to 09:31 | done | 16 tiles. 0 clear pairs of 7; two separate animals on 6 of 7, the best count in the series. x_pos used alone lands at 23.43 mean absolute pixel difference from the joint prompt's render against the three-expert product's 39.16 and plain PoE's 47.05 |
-| 10 | claim 1, the premise under every variant | `scripts/and_vector_premise.py --pairs 200`, text encoders only | done | E("A and B") − E("A") ranks B at median 1 of 276 nouns, top-1 75.0% pooled and 98.5% on the content mean, decoy at chance. Text arithmetic is not meaningless, so no failure above is explained by that |
-| 11 | claim 2, x_and | `scripts/and_vector_sheet.py --render --set and_only`, mscluster108 device 1, 2026-11-04 15:56 to 16:03 | done | the empty prompt's scaffolding carrying only what the joint adds: 0 of 8 tiles with two animals, PoE(dog, cat, x_and) at 48.49 against plain PoE's 47.05. A condition acts only through w(ε_x − ε_∅), so a faithful difference sits near the empty prompt and does nothing |
-| 12 | claim 2, a scored search | `scripts/and_vector_search.py` through `scripts/and_vector_search.sbatch`, bigbatch array 81713_[0-5], 56 candidates over 4 pairs | queued 2026-11-04 | phrases, mixes between E("") and E(joint), and failure phrases in the subtracted branch, scored by instance count |
+| 8 | claim 1, the positional build | `5-text-embedding-third-expert/scripts/and_vector_norms.py --joint "dog and cat" --a dog --b cat`, text encoders only, through the cluster scratch without a git sync because another session held tracked files modified | done | x_pos differs from the joint prompt at 2 of 77 slots; the largest absolute difference at the start token, the end token and all 72 pads is 0. Slot 1 is exactly 0 in both encoders, because a causal mask makes slot 1 of "dog and cat" and of "dog" the same state |
+| 9 | claim 2, x_pos | `5-text-embedding-third-expert/scripts/and_vector_sheet.py --render --set positional`, mscluster108 device 0, outside Slurm, 2026-11-04 09:22 to 09:31 | done | 16 tiles. 0 clear pairs of 7; two separate animals on 6 of 7, the best count in the series. x_pos used alone lands at 23.43 mean absolute pixel difference from the joint prompt's render against the three-expert product's 39.16 and plain PoE's 47.05 |
+| 10 | claim 1, the premise under every variant | `5-text-embedding-third-expert/scripts/and_vector_premise.py --pairs 200`, text encoders only | done | E("A and B") − E("A") ranks B at median 1 of 276 nouns, top-1 75.0% pooled and 98.5% on the content mean, decoy at chance. Text arithmetic is not meaningless, so no failure above is explained by that |
+| 11 | claim 2, x_and | `5-text-embedding-third-expert/scripts/and_vector_sheet.py --render --set and_only`, mscluster108 device 1, 2026-11-04 15:56 to 16:03 | done | the empty prompt's scaffolding carrying only what the joint adds: 0 of 8 tiles with two animals, PoE(dog, cat, x_and) at 48.49 against plain PoE's 47.05. A condition acts only through w(ε_x − ε_∅), so a faithful difference sits near the empty prompt and does nothing |
+| 12 | claim 2, a scored search | `5-text-embedding-third-expert/scripts/and_vector_search.py` through `5-text-embedding-third-expert/scripts/and_vector_search.sbatch`, bigbatch array 81713_[0-5], 56 candidates over 4 pairs | queued 2026-11-04 | phrases, mixes between E("") and E(joint), and failure phrases in the subtracted branch, scored by instance count |
 
 **The positional walk, 2026-11-04.** The runs after 7, their calls and their pixel distances are in
-[the positional "and" vector card](../../results/the-positional-and-vector/README.md), with the
+[the positional "and" vector card](../../results/can-a-positional-and-vector-restore-composition/README.md), with the
 verdict in [the finding "can a text-space third expert restore composition"](../../../report/can-a-text-space-third-expert-restore-composition.md)
-and the retrospective in [the session merge](../../notes/session-merges/2026-11-04-the-positional-and-vector-retro.md).
+and the retrospective in [the session merge](../../../../artifacts/notes/session-merges/2026-11-04-the-positional-and-vector-retro.md).
 
 ## Routes
 
@@ -371,7 +371,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 **The repo's own prior work on the same object.** The L1 additivity gap and L3 binding direction ran
 on 75 pairs and both came back null: the gap does not predict how big a correction a pair needs, and
 the leftover direction is not shared across pairs. Verdict in
-[the three-sides review](../../../plans/03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md).
+[the three-sides review](../../../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md).
 That tested x as a predictor. Nobody has generated from x.
 
 **The earlier walk on the residual's text embedding.** Its claim 6, "the interaction term is a
@@ -387,7 +387,7 @@ Compel's `.and()` is the prompt-level conjunction, separately diffused prompts s
 repo's PoE. Read from search summaries, not the papers: likely, verify before citing.
 
 **The third-concept sheet.** The same three-expert PoE with "wet" as the third word, on the camel and
-dog. [Its plan](../../../plans/10-what-poe-loses-when-it-composes/today-the-third-concept.md).
+dog. [Its plan](../../../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-third-concept.md).
 
 ## Next step
 

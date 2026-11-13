@@ -4,7 +4,7 @@ All four rungs have run (2026-09-05) and the deciding question is answered: inco
 own bar. This file judges [the design](../plans/tests/07-what-the-correction-is-made-of.md); the
 finding is [what is the correction made of](../../../report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md).
 The questions below were written before any number existed, and the three constants they turn
-on were written into `scripts/showcase/correction_span_common.py` in the same sitting.
+on were written into `1-lora-correction/scripts/showcase/correction_span_common.py` in the same sitting.
 
 ## Recommended prompt (when the run lands)
 
@@ -49,7 +49,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
   span, one minus the in-span share. It is what no re-weighting can supply.
 - **the early window**: steps 0 to 10 inclusive, the window where injecting the correction
   changes the outcome, per the window experiments recorded in
-  [the interaction term entry](../../../context/world/interaction-term.md).
+  [the interaction term entry](../../../../context/world/interaction-term.md).
 - **the adapter's output (δ̂)**: the product-of-experts prediction with the rank-32 adapter
   attached minus the same with it detached, at the same cached state, read at λ 1.
 - **same-place share**: the fraction of the 16,384 latent positions where both experts' departure
@@ -94,7 +94,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       fix), or between (inconclusive)? This is the bar because it is the cheapest upper bound on
       what any method that only re-mixes the product's own proposals can reach, and three parallel
       sessions are about to spend GPU time on such methods. The constants live in
-      `scripts/showcase/correction_span_common.py`.
+      `1-lora-correction/scripts/showcase/correction_span_common.py`.
       **Answer: inconclusive. The statistic is 0.374**, per seed 0.16 (seed 9), 0.21, 0.45, 0.40,
       0.42, 0.37, 0.33, 0.65 (seed 16); per step it is 0.30 at step 0, 0.51 at step 5, 0.29 at
       step 10. From `orthogonal-share-over-steps.json`, `summary.early_window_orthogonal_share_mean_over_seeds`
@@ -218,7 +218,7 @@ Navigation: ⬅️ [What the run cost](#what-the-run-cost-and-what-it-bought) | 
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| Whether the orthogonal part of r_t is the sampler's error or the model's (claim 2 of [the idea map](../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)) | scope 06's sampler-share measurement, which this plan does not touch | the framing of the paper's section 7 |
+| Whether the orthogonal part of r_t is the sampler's error or the model's (claim 2 of [the idea map](../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)) | scope 06's sampler-share measurement, which this plan does not touch | the framing of the paper's section 7 |
 | The inconclusive bar | a second pair and a training pair through the same script, so the 0.37 has company; and the damping-only run named above | the sampler-side sessions' reading of their own results |
 | The adapter's orthogonal shortfall, held-out or architectural | rung 3 on a training pair | the claim about what the adapter learned |
 

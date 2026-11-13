@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 import correction_span_common as C  # noqa: E402
 
 MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0"

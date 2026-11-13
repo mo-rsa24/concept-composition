@@ -51,13 +51,13 @@ This extracts error patterns from the run transcript, deduplicates against globa
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
 **The experiment:**  
-We train a LoRA correction (denoted $r_t$, the [interaction term](../../../../context/world/interaction-term.md)) that fixes a bug in image generation. The fix works on the training pairs, but we don't know if it transfers to unseen pairs.
+We train a LoRA correction (denoted $r_t$, the [interaction term](../../../../../context/world/interaction-term.md)) that fixes a bug in image generation. The fix works on the training pairs, but we don't know if it transfers to unseen pairs.
 
 **The hypothesis:**
 
 *The corrective interaction term $r_t$ is small in magnitude, shared across pairs, and encodes a generic fix to the underlying bug. Therefore, it should transfer to unseen pairs and generalize across domains.*
 
-**If true:** The fix is small and shared across pairs, so it should transfer to unseen evaluation pairs. We'd see a high [compose-rate](../../../../context/world/compose-rate.md) and an aligned direction-cosine across all fifteen runs.
+**If true:** The fix is small and shared across pairs, so it should transfer to unseen evaluation pairs. We'd see a high [compose-rate](../../../../../context/world/compose-rate.md) and an aligned direction-cosine across all fifteen runs.
 
 **If false:** The fix is pair-specific or encodes brittle workarounds, so it won't transfer or transfers poorly. We'd see compose-rate stuck at zero or direction-cosine diverged across many runs.
 
@@ -71,7 +71,7 @@ Diagnose why a fix doesn't transfer (or confirm that it does). To do that, we ru
 Before starting those fifteen trainings, we need to know *while a run is training* whether the fix is even arriving at the eval set. Post-run analysis is too late; you'd waste GPU hours. So this plan wires three diagnostic metrics into the live training loop, so you can kill bad runs early.
 
 **Dataset details:**  
-- **Training pairs:** 11 blend-prone animal pairs (wolf×husky, lion×tiger, and so on; the pool is `artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml`), each over 8 train seeds.
+- **Training pairs:** 11 blend-prone animal pairs (wolf×husky, lion×tiger, and so on; the pool is `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml`), each over 8 train seeds.
 - **Held-out pairs:** 8, each over 8 held-out seeds: 4 unseen blend pairs (the transfer test), cat×dog (the known-failure reference), and 3 compose-by-default controls (the do-no-harm check).
 - **Unseen pairs:** Tested later in step 10 (the fifteen trainings are what test transfer)
 - **Known phenomenon:** Correction magnitude is known to stop rising around $\sim 40\%$; we measure that live in this plan.
@@ -83,10 +83,10 @@ Before starting those fifteen trainings, we need to know *while a run is trainin
 - **Review questions:** [the review file for this plan](../../review/02-three-live-curves-while-training.md)
 - **Procedures:** (if any; add link here)
 - **Assets/outputs:** Saved to `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/live_curves_smoke_run/` (large artifacts live on `/datasets`, never under the repo)
-  - **Figure organization:** Use [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-09 naming convention, and consolidate them into `outputs/interaction_term/live_curves_smoke_run/figures/`. This prompt will generate a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
-  - **Locations scanned:** `artifacts/results/ (per-question) and report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders
+  - **Figure organization:** Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-09 naming convention, and consolidate them into `outputs/interaction_term/live_curves_smoke_run/figures/`. This prompt will generate a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
+  - **Locations scanned:** `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders
 
-For the full picture, see the [repo MASTER_PLAN.md](../../../../MASTER_PLAN.md) and [hypothesis-01](../../../03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md).
+For the full picture, see the [repo MASTER_PLAN.md](../../../../../MASTER_PLAN.md) and [hypothesis-01](../../../03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md).
 
 ---
 
@@ -95,13 +95,13 @@ For the full picture, see the [repo MASTER_PLAN.md](../../../../MASTER_PLAN.md) 
 ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-of-contents) | [Next](#environment-facts-this-plan-depends-on) ➡️
 
 **Expected runtime:**  
-On one biggpu device (49GB Quadro RTX 8000 on mscluster106, or the Blackwell-class GPUs on mscluster110; see [environment/hpc/nodes.md](../../../../environment/hpc/nodes.md#partitions)), a one-epoch first run is roughly **1 to 3 hours**: the training epoch itself is minutes, and nearly all the wall time is the inline eval pass (every train and held-out pair-and-seed combination rendered at 25 DDIM steps). The measured wall time of each run is recorded in the [review file](../../review/02-three-live-curves-while-training.md). The full set of fifteen runs in step 10 takes approximately 6 hours each.
+On one biggpu device (49GB Quadro RTX 8000 on mscluster106, or the Blackwell-class GPUs on mscluster110; see [environment/hpc/nodes.md](../../../../../environment/hpc/nodes.md#partitions)), a one-epoch first run is roughly **1 to 3 hours**: the training epoch itself is minutes, and nearly all the wall time is the inline eval pass (every train and held-out pair-and-seed combination rendered at 25 DDIM steps). The measured wall time of each run is recorded in the [review file](../../review/02-three-live-curves-while-training.md). The full set of fifteen runs in step 10 takes approximately 6 hours each.
 
 **Prerequisites:**  
-The launcher `scripts/animals_compose_transfer/smoke_live_curves.sh` carries the setup: the `co3_bw` python, `POE_REPAIR_TRAINING_CACHE`, the device and disk guards, and the W&B flags. Nothing needs exporting by hand beyond `GPU=<free device index>` at launch. Cluster facts and absolute python paths are in [environment/00-INDEX.md](../../../../environment/00-INDEX.md).
+The launcher `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh` carries the setup: the `co3_bw` python, `POE_REPAIR_TRAINING_CACHE`, the device and disk guards, and the W&B flags. Nothing needs exporting by hand beyond `GPU=<free device index>` at launch. Cluster facts and absolute python paths are in [environment/00-INDEX.md](../../../../../environment/00-INDEX.md).
 
 **GPU allocation:**  
-Two launch paths, decided by [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md): an idle biggpu node gets a Slurm submit; when none is idle but an allocated node has a free device (Slurm here cannot see GPUs, so this is common), the run goes over SSH onto that device with `CUDA_VISIBLE_DEVICES` pinned and `nohup`, and `squeue` is blind to it, so monitoring is the nohup log plus `pgrep` on the node. Output goes to `/datasets` only; the launcher's disk guard checks that filesystem.
+Two launch paths, decided by [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md): an idle biggpu node gets a Slurm submit; when none is idle but an allocated node has a free device (Slurm here cannot see GPUs, so this is common), the run goes over SSH onto that device with `CUDA_VISIBLE_DEVICES` pinned and `nohup`, and `squeue` is blind to it, so monitoring is the nohup log plus `pgrep` on the node. Output goes to `/datasets` only; the launcher's disk guard checks that filesystem.
 
 **W&B project:**  
 All runs log to `prime_lab/poe-repair-animals-compose`. This is where you'll inspect the three live curves after the run finishes. Credentials are loaded from environment; verify with `echo $WANDB_API_KEY`.
@@ -115,7 +115,7 @@ This plan may encounter common errors when running. See the [Error Matrix](#erro
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- biggpu nodes carry two GPU devices each; Slurm registers no GPUs (no GRES), so a free device on an allocated node is found only by SSH + `nvidia-smi`, and the shared-device launch path in [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md) is how this plan's run launches when no node is idle.
+- biggpu nodes carry two GPU devices each; Slurm registers no GPUs (no GRES), so a free device on an allocated node is found only by SSH + `nvidia-smi`, and the shared-device launch path in [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md) is how this plan's run launches when no node is idle.
 - Python is the `co3_bw` env at `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python` (the launcher hard-codes it); never a bare `python`.
 - Large outputs go to `/datasets/mmolefe/poe_repair_min/` only; the launcher's disk guard checks `/datasets`, the filesystem it writes to.
 - W&B credentials load from `~/.netrc` / `WANDB_API_KEY` with no human step; the project is `prime_lab/poe-repair-animals-compose`.
@@ -235,7 +235,7 @@ All three as separate live curves on W&B, not merged or post-processed. They app
 ⬅️ [Previous](#description-what-to-build) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
 
 **Purpose:**  
-Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../MASTER_PLAN.md). Unblocks the whole unattended set of runs ([step 10: does-one-pooled-fix-transfer-at-all](../hypothesis/03-does-one-pooled-fix-transfer-at-all.md) and [step 11: hypothesis-02-more-correction-more-composition](../../../03-does-the-correction-cause-composition/plans/hypothesis/03-more-correction-more-composition.md)).
+Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../../MASTER_PLAN.md). Unblocks the whole unattended set of runs ([step 10: does-one-pooled-fix-transfer-at-all](../hypothesis/03-does-one-pooled-fix-transfer-at-all.md) and [step 11: hypothesis-02-more-correction-more-composition](../../../03-does-the-correction-cause-composition/plans/hypothesis/03-more-correction-more-composition.md)).
 
 **Goals:**
 
@@ -276,7 +276,7 @@ Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../MASTER
 ### 2. ⚙️ Run the one-epoch first test
 
 - [x] **Launch the smoke run in the background.**
-  - Launcher: `scripts/animals_compose_transfer/smoke_live_curves.sh` (1 epoch on the 11 training pairs, then one inline-sampling eval pass over every train and held-out pair-and-seed combination), started over SSH on a biggpu device per the shared-device path in [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  - Launcher: `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh` (1 epoch on the 11 training pairs, then one inline-sampling eval pass over every train and held-out pair-and-seed combination), started over SSH on a biggpu device per the shared-device path in [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
   - Cost: roughly 1 to 3 hours wall time on one 49GB biggpu device.
   - W&B project: `prime_lab/poe-repair-animals-compose` (live logging).
   - Output root: `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/live_curves_smoke_run/`
@@ -284,7 +284,7 @@ Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../MASTER
   - **Ask Claude:** "Run the step 9 one-epoch test for three live curves while training. Start it in the background and give me the W&B link when it begins logging."
 
 - [x] ~~**Teach the environment the shared-device launch path.**~~
-  - Done while launching: [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md) gained the shared-device step (SSH into an allocated biggpu node, read per-device nvidia-smi, run on a free device with `CUDA_VISIBLE_DEVICES` pinned), the `/run-experiment` node picker gained `--probe-shared`, and the launch-failure pattern landed as `poe-launch-001` in [environment/known-failures.md](../../../../environment/known-failures.md).
+  - Done while launching: [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md) gained the shared-device step (SSH into an allocated biggpu node, read per-device nvidia-smi, run on a free device with `CUDA_VISIBLE_DEVICES` pinned), the `/run-experiment` node picker gained `--probe-shared`, and the launch-failure pattern landed as `poe-launch-001` in [environment/known-failures.md](../../../../../environment/known-failures.md).
 
 ▶ **Next: instruction 3.1**, reading the curves in W&B while the run cooks.
 
@@ -395,7 +395,7 @@ Run each `.prompt.md` file through Claude (or /prompt-storyboard) and save outpu
 
 ### Generated during plan execution
 
-These figures will be created when the first run completes. Use [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo, rename, and consolidate them:
+These figures will be created when the first run completes. Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename, and consolidate them:
 
 | Figure | Description | Generated by | Status | Axes |
 |--------|-------------|--------------|--------|------|
@@ -407,7 +407,7 @@ These figures will be created when the first run completes. Use [figure-coverage
 
 1. Generate pending figures: Run each prompt through Claude and save to `diagrams/`.
 2. Execute the plan: Run `/run-experiment` for the one-epoch first run. This produces W&B curves.
-3. Organize all figures: Run [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo, rename figures to step-09 naming convention, move to `outputs/interaction_term/live_curves_smoke_run/figures/`, and generate [FIGURE_CATALOG.md](outputs/interaction_term/live_curves_smoke_run/FIGURE_CATALOG.md).
+3. Organize all figures: Run [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename figures to step-09 naming convention, move to `outputs/interaction_term/live_curves_smoke_run/figures/`, and generate [FIGURE_CATALOG.md](outputs/interaction_term/live_curves_smoke_run/FIGURE_CATALOG.md).
 
 ---
 
@@ -432,7 +432,7 @@ When this plan runs and produces output, three things need to stay in sync: the 
 
 3. **Organize figures (manual, but guided):**
    - After the first run finishes, W&B outputs three metric curves to your project.
-   - Use the [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo for all related figures (existing artifacts/results/ (per-question) and report/paper-evidence-index.md, outputs/, paper/ figures plus new W&B screenshots).
+   - Use the [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo for all related figures (existing artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md, outputs/, paper/ figures plus new W&B screenshots).
    - The prompt renames them to the step-09 naming convention and consolidates them into `outputs/interaction_term/live_curves_smoke_run/figures/`.
    - It generates a `FIGURE_CATALOG.md` that maps each figure to its axes, meaning, and original location.
 
@@ -446,7 +446,7 @@ Without orchestration, the Error Matrix section becomes stale after a run comple
 |------|---------|--------------|---------|
 | Extract errors | `/ingest-error-pattern --from-run-log` | Manual (after run) | Errors added to catalogs |
 | Update Error Matrix | `/sync-plan-tree --update-error-matrices` | Auto (by ingest-error-pattern) | This plan file's Error Matrix regenerated |
-| Organize figures | Run [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) | Manual (after run) | Figures renamed, consolidated, cataloged |
+| Organize figures | Run [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) | Manual (after run) | Figures renamed, consolidated, cataloged |
 
 ---
 
@@ -478,7 +478,7 @@ def _run_inline_sample(model, eval_outputs, compose_scorer):
 
 ### Code reference: The launcher
 
-**Script:** `scripts/animals_compose_transfer/smoke_live_curves.sh`  
+**Script:** `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`  
 **What it does:** Runs the one-epoch first run directly on a biggpu device (never sbatch: biggpu allows one job per user and Slurm cannot see GPUs here). Guards its own device (`GPU=<index>`, aborts if the device has >1GB in use) and the `/datasets` disk, stamps the launch commit into the log header, then calls `train_pooled` with 1 epoch, inline sampling every epoch, and W&B online.  
 **Node choice:** `/run-experiment`'s `pick_node.py --gpu --probe-shared` prints the decision (RUN HERE / SUBMIT / SSH SHARED / QUEUE).
 
@@ -590,7 +590,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 ### From project catalog
 
-Patterns specific to poe_repair_min. See [environment/known-failures.md](../../../../environment/known-failures.md) for the full catalog.
+Patterns specific to poe_repair_min. See [environment/known-failures.md](../../../../../environment/known-failures.md) for the full catalog.
 
 #### 🔴 poe-score-001: Scorer returns all zeros or NaNs despite valid inputs
 
@@ -607,7 +607,7 @@ assert eval_output.device.type == 'cuda', f"Expected GPU, got {eval_output.devic
 assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{eval_output.min()}, {eval_output.max()}]"
 ```
 
-**Reference:** [environment/known-failures.md#entry-id-poe-score-001](../../../../environment/known-failures.md#entry-id-poe-score-001)
+**Reference:** [environment/known-failures.md#entry-id-poe-score-001](../../../../../environment/known-failures.md#entry-id-poe-score-001)
 
 ---
 
@@ -625,7 +625,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 3. If they look different (color space, brightness), recalibrate the scorer or adjust the correction target.
 4. If images look correct, the scorer may need retraining on this data distribution.
 
-**Reference:** [environment/known-failures.md#entry-id-poe-score-002](../../../../environment/known-failures.md#entry-id-poe-score-002)
+**Reference:** [environment/known-failures.md#entry-id-poe-score-002](../../../../../environment/known-failures.md#entry-id-poe-score-002)
 
 ---
 
@@ -642,7 +642,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 - OR: Shard eval batch to 8-16 images per forward pass and loop to aggregate.
 - OR: Reduce eval frequency (eval every 5 steps instead of every step).
 
-**Reference:** [environment/known-failures.md#entry-id-poe-mem-001](../../../../environment/known-failures.md#entry-id-poe-mem-001)
+**Reference:** [environment/known-failures.md#entry-id-poe-mem-001](../../../../../environment/known-failures.md#entry-id-poe-mem-001)
 
 ---
 
@@ -659,7 +659,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 2. If r < 16, increase to r=32 or r=64 and re-run.
 3. If r >= 16, stopping there is correct for this correction. Document in run notes.
 
-**Reference:** [environment/known-failures.md#entry-id-poe-lora-001](../../../../environment/known-failures.md#entry-id-poe-lora-001)
+**Reference:** [environment/known-failures.md#entry-id-poe-lora-001](../../../../../environment/known-failures.md#entry-id-poe-lora-001)
 
 ---
 
@@ -676,7 +676,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 2. Verify loss function in `train_pooled.py` matches the loss used to compute pool-mean.
 3. If both are correct, the divergence is data, not an error. Document in run notes.
 
-**Reference:** [environment/known-failures.md#entry-id-poe-lora-002](../../../../environment/known-failures.md#entry-id-poe-lora-002)
+**Reference:** [environment/known-failures.md#entry-id-poe-lora-002](../../../../../environment/known-failures.md#entry-id-poe-lora-002)
 
 ---
 
@@ -690,7 +690,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 
 **How to fix:** Make every path on the SSH launch line absolute (script and log redirect); the launch script does its own `cd "$REPO"` internally. Verify in the same call with `sleep 5; pgrep -af "train"` and a `tail` of the absolute log path.
 
-**Reference:** [environment/known-failures.md#entry-id-poe-launch-001](../../../../environment/known-failures.md#entry-id-poe-launch-001)
+**Reference:** [environment/known-failures.md#entry-id-poe-launch-001](../../../../../environment/known-failures.md#entry-id-poe-launch-001)
 
 ---
 

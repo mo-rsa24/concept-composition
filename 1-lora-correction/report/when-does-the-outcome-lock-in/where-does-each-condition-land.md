@@ -51,7 +51,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-we-set-out-to-see) ➡
 Dan Kornas's post of 2026-06-06 says "Diffusion models are easier to understand when you can see
 the geometry move". Alec Helbling's post of 2025-07-11 is the tool's release: paper, demo and
 code links. Both are quoted in
-[the Diffusion Explorer entry](../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models)
+[the Diffusion Explorer entry](../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models)
 of the sources register.
 
 The first claims only that watching samples move builds intuition. The second claims nothing; it
@@ -59,7 +59,7 @@ is the author's link post. Neither says anything about real image models.
 
 **The tool.**
 
-[Diffusion Explorer](../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models)
+[Diffusion Explorer](../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models)
 (Helbling and Chau, arXiv 2507.01178) animates a 2D toy diffusion model's samples moving from
 noise to data under a time slider. Its classifier-free-guidance page draws the conditional and
 unconditional predictions as two arrows on one moving sample.
@@ -76,10 +76,10 @@ the tool's `packages/ui` and uses its time slider and legend components unchange
 
 **The post.**
 
-An [X post by Arnas Uselis](../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
+An [X post by Arnas Uselis](../../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
 showed eigenfaces-style walks along the leading principal components of three spaces: pixel
 space, DINOv2-B and SigLIP2. Each walk is decoded back to pictures through a
-[representation autoencoder](../../context/sources.md#3-diffusion-transformers-with-representation-autoencoders).
+[representation autoencoder](../../../context/sources.md#3-diffusion-transformers-with-representation-autoencoders).
 
 Its text: "One can also apply eigenfaces-style analysis to embedding models (SigLIP, DINO).
 Pairing them with a decoder (e.g., an RAE) shows what the models primarily care about and what
@@ -144,9 +144,9 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 | 07:23 | endpoint plot, PCA plane | `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.png` | plane keeps 22% of variance; hulls overlap; nearest-centroid bar fails |
 | 07:24 | endpoint plot, cloud axes | `.../cat-x-dog-in-dino-space-cloud-axes.png` | PoE band and corrected band separate |
 | 12:00 | dose strip, seeds 10 and 11, from existing PNGs | `.../cat-x-dog-seeds-10-11-dose-strip.png` | what the second dose changes, seen |
-| 08:00 to 08:21 | per-step frames, first launch, mscluster111 device 0 (Blackwell, `co3_bw`) | `outputs/showcase/logs/where_each_condition_lands_frames.log` | ran on the CPU without saying so: `torch.cuda.is_available()` is `False` on that card while `nvidia-smi` still lists it, one run took 15 minutes against 16 seconds on a working GPU; killed after one run, relaunched on mscluster109 device 1; recorded as the second form of [poe-launch-002](../../environment/known-failures.md) and the launch script now checks CUDA before starting |
+| 08:00 to 08:21 | per-step frames, first launch, mscluster111 device 0 (Blackwell, `co3_bw`) | `outputs/showcase/logs/where_each_condition_lands_frames.log` | ran on the CPU without saying so: `torch.cuda.is_available()` is `False` on that card while `nvidia-smi` still lists it, one run took 15 minutes against 16 seconds on a working GPU; killed after one run, relaunched on mscluster109 device 1; recorded as the second form of [poe-launch-002](../../../environment/known-failures.md) and the launch script now checks CUDA before starting |
 | 08:22 to about 09:15 | per-step frames for all six conditions, 13 saved steps, mscluster109 device 1 (`co3`) | `outputs/showcase/where_each_condition_lands/frames/<cond>/seed_<n>/step_<kk>.png` | one re-render: the windowed LoRA sampler leaves the adapter attached, so references rendered after it carried the correction; the contaminated set is kept as `frames_with_adapter_attached/` and unused |
-| midday | frames embedded, axes refit on this run's own final references, scene built | `artifacts/scenes/where-each-condition-lands/`, `.../frames-dino-feats.npz` | the animated page |
+| midday | frames embedded, axes refit on this run's own final references, scene built | `1-lora-correction/artifacts/scenes/where-each-condition-lands/`, `.../frames-dino-feats.npz` | the animated page |
 | afternoon | both-ness over steps, commit and fork steps, one seed's frame strip | `.../both-ness-over-denoising-steps.png`, `.../commit-and-fork-steps.json`, `.../frames-seed-15-strip.png` | rung 4 and rung 5 below |
 
 Every render shares its seed's initial noise (the training cache's held-out step-0 latents),
@@ -168,7 +168,7 @@ to 16: PoE 0.21 (range 0.04 to 0.31), PoE plus λ 1.0 correction 0.41, PoE plus 
 0.42 (range 0.34 to 0.51), joint prompt 0.52 (range 0.36 to 0.61), single animals 0.00 by
 construction. The PoE band and the corrected band do not overlap. From
 `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, field
-`cloud_axes.both_ness_by_condition`, written by `scripts/showcase/where_each_condition_lands_plot.py`.
+`cloud_axes.both_ness_by_condition`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py`.
 
 ## 2. The pictures behind the points
 
@@ -217,7 +217,7 @@ step, the first saved step at which the PoE run and the corrected run are furthe
 plane than 0.05 (`FORK_MIN_DIST = 0.05`): median 1, range 0 to 2, so the two running estimates
 differ from the first step, which is where the correction is applied. From
 `artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, fields
-`summary` and `per_seed`, written by `scripts/showcase/where_each_condition_lands_dynamics.py`
+`summary` and `per_seed`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_dynamics.py`
 from the scene's `public/data.json`. No bar was written before these two numbers; they are a
 read, not a verdict.
 
@@ -255,7 +255,7 @@ thumbnails on the right are that seed's finished images.*
 
 **The number.** Same as rung 4; the page draws the same `data.json`. The page itself is the
 [where-each-condition-lands scene](../../artifacts/scenes/where-each-condition-lands/README.md), served
-per the [scene-serving recipe](../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md).
+per the [scene-serving recipe](../../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md).
 
 ## 7. The axes, drawn as pictures: x is which animal, y is how many
 
@@ -278,7 +278,7 @@ all 48 renders: Spearman 0.87. Reconstruction error, mean absolute pixel differe
 255 scale: PoE seed 9 9.5, PoE seed 10 22.5, joint seed 9 15.3, corrected seed 15 29.3. From
 `artifacts/results/where-does-each-condition-land/axes/axes.json`, fields
 `spearman_token_vs_class_token_both_ness_over_48` and `reconstruction_mean_abs_error_over_255`,
-written by `scripts/showcase/where_each_condition_lands_axes.py`. Every decoded frame is a
+written by `1-lora-correction/scripts/showcase/where_each_condition_lands_axes.py`. Every decoded frame is a
 reconstruction of a point in the encoder's space and none is an SDXL output.
 
 ## 8. The eight held-out pairs: the both-ness bar fails, the pictures compose
@@ -302,7 +302,7 @@ against min corrected 0.29; cow × buffalo, 0.16 against 0.24). Pairs passing bo
 bar (bands apart and corrected median commit step at or before PoE's): 0 of 7. Pairs whose bands
 overlap: 5 of 7, above the null threshold of 4. Verdict: **null**. From
 `artifacts/results/where-does-each-condition-land/pairs/verdict.json`, fields `n_pass_both_halves`,
-`n_band_overlap`, `verdict`, written by `scripts/showcase/where_each_condition_lands_pairs_analyze.py`
+`n_band_overlap`, `verdict`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_analyze.py`
 with the thresholds copied from the plan.
 
 **The number, post-hoc.** Instance-count compose fraction over 8 seeds (two or more animals
@@ -349,7 +349,7 @@ of the distributions.
 
 **A global embedding reads a fused face as "both".** That is why DINOv2 was rejected as the
 compose scorer's decision rule, and why the pre-registered nearest-centroid bar failed. The
-instance count in [compose rate](../../context/world/compose-rate.md) is the validated rule, and the
+instance count in [compose rate](../../../context/world/compose-rate.md) is the validated rule, and the
 contact sheet is what that count sees.
 
 **The commit and fork steps are read off 14 saved frames.** A step between two saved ones is
@@ -369,7 +369,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | What | Source | Mark |
 |---|---|---|
 | Both-ness per condition, nearest clouds, gaps, arrow cosines | `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, read 2026-09-05 | verified |
-| Commit and fork steps, both-ness per step | `artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, computed and read 2026-09-05 from `artifacts/scenes/where-each-condition-lands/public/data.json` | verified |
+| Commit and fork steps, both-ness per step | `artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, computed and read 2026-09-05 from `1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json` | verified |
 | The reference renders (cat, dog, joint; seeds 9 to 16) | `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/{solo_a,solo_b,joint}/seed_<n>.png`, `render_manifest.json`, rendered 2026-09-05 on mscluster110 | verified |
 | The per-step frames, six conditions | `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames/<cond>/seed_<n>/step_<kk>.png`, `frames_manifest.json` | verified |
 | The PoE and corrected renders | `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/renders/full/seed_<n>_lambda_<λ>.png`, `render_run.json` | verified |
@@ -377,24 +377,24 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The per-pair both-ness, commit steps, instance counts and the verdict | `artifacts/results/where-does-each-condition-land/pairs/verdict.json` and `<pair>/sidecar.json`, computed and read 2026-09-06 | verified |
 | The correction | rank-32 adapter, step 30050, `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt`, applied over all 50 steps at λ 1.0 and 1.2 | verified |
 | The run | tasks **Render the three references** and **Run the plot on the launch node** in [where each condition lands](../../plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md); verdict in [its review file](../../plans/05-when-does-the-outcome-lock-in/review/06-where-each-condition-lands.md) | verified |
-| Regenerate with | [reproducing where each condition lands](../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md): recipe 1 for the renders and frames on a shared device, recipe 2 for the endpoint figures and sidecar, recipe 3 for the frames' embeddings and the page data, recipe 4 for the page; `where_each_condition_lands_dynamics.py` under `scripts/showcase/` for rung 4's figure | |
+| Regenerate with | [reproducing where each condition lands](../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md): recipe 1 for the renders and frames on a shared device, recipe 2 for the endpoint figures and sidecar, recipe 3 for the frames' embeddings and the page data, recipe 4 for the page; `where_each_condition_lands_dynamics.py` under `1-lora-correction/scripts/showcase/` for rung 4's figure | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What product-of-experts composition is and what the joint prompt is the target of:
-  [PoE composition](../../context/world/poe-composition.md)
+  [PoE composition](../../../context/world/poe-composition.md)
 - What the trained correction is and why it never sees the joint prompt:
-  [the LoRA corrector](../../context/world/lora-corrector.md)
+  [the LoRA corrector](../../../context/world/lora-corrector.md)
 - What the compose scorer measures and what an embedding cannot:
-  [compose rate](../../context/world/compose-rate.md)
+  [compose rate](../../../context/world/compose-rate.md)
 - Which python build runs on which card (`co3_bw` on mscluster110 to 112):
-  [nodes](../../environment/hpc/nodes.md)
+  [nodes](../../../environment/hpc/nodes.md)
 - The three outside sources named above:
-  [Diffusion Explorer](../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models),
-  [the representation-autoencoder paper](../../context/sources.md#3-diffusion-transformers-with-representation-autoencoders),
-  [the X post](../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
+  [Diffusion Explorer](../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models),
+  [the representation-autoencoder paper](../../../context/sources.md#3-diffusion-transformers-with-representation-autoencoders),
+  [the X post](../../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
 - Each picture, read one at a time:
   [the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md)
 

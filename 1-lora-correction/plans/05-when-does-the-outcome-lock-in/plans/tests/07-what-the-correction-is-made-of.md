@@ -21,7 +21,7 @@ because a selection or re-weighting method can only reach what the experts alrea
 ## Recommended skill
 
 `/pair-figure` for the share-against-step curve beside the seed-15 picture strip. Everything
-else is custom scripts under `scripts/showcase/`.
+else is custom scripts under `1-lora-correction/scripts/showcase/`.
 
 ## Position in the plan tree
 
@@ -83,7 +83,7 @@ adds", with the bar for the first of those written before the numbers exist.
 
 **Associated materials.** Verdict: [the review file](../../review/07-what-the-correction-is-made-of.md).
 The A-against-B split this plan does not resolve: claim 2 of
-[which variable explains what PoE is missing](../../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md).
+[which variable explains what PoE is missing](../../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md).
 
 **For the full picture.** The scope's [master plan](../../MASTER_PLAN.md).
 
@@ -123,7 +123,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 
 Navigation: ⬅️ [Previous](#words-this-plan-uses) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-Read off `scripts/build_training_cache.py` and `poe_repair/_sdxl/metrics.py` before any number
+Read off `3-understanding-compositionality/scripts/build_training_cache.py` and `poe_repair/_sdxl/metrics.py` before any number
 was computed. Written here so every projection below is against the rule that produced the states.
 
 One network call per step with a batch of four prompts ("a cat", "a dog", "a cat and a dog",
@@ -184,16 +184,16 @@ location rule do.
 <summary>Environment Facts This Plan Depends On</summary>
 
 - The session node mscluster85 carries an RTX 3090 and the `co3` build at
-  `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`; see [nodes](../../../../environment/hpc/nodes.md).
+  `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`; see [nodes](../../../../../environment/hpc/nodes.md).
   A run on an already-allocated interactive node needs no `sbatch`; see step 1 of
-  [the execution protocol](../../../../environment/hpc/execution-protocol.md).
+  [the execution protocol](../../../../../environment/hpc/execution-protocol.md).
 - The card is shared with other users' processes; a decode that needs more than the free memory
   dies with an out-of-memory error, which is what killed plan 06's first render attempt. Check
   `nvidia-smi` before launch.
 - `torch.cuda.is_available()` is checked on the pinned device before real work
-  (known failure poe-launch-002 in [known failures](../../../../environment/known-failures.md)).
+  (known failure poe-launch-002 in [known failures](../../../../../environment/known-failures.md)).
 - fp16 upcast rule: every cached tensor is float16 and is cast to float32 before any norm,
-  projection or difference; see [the overview](../../../../environment/overview.md#known-gaps--non-obvious-constraints).
+  projection or difference; see [the overview](../../../../../environment/overview.md#known-gaps--non-obvious-constraints).
 - Large artifacts to `/datasets` only.
 
 </details>
@@ -253,16 +253,16 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The shared helper and the bar** `scripts/showcase/correction_span_common.py`: loads a cell's
+1. **The shared helper and the bar** `1-lora-correction/scripts/showcase/correction_span_common.py`: loads a cell's
    steps in fp32, builds the three span vectors, projects any vector onto the span by least
    squares, and holds the bar constants `ORTHO_SHARE_REWEIGHT_IMPOSSIBLE = 0.5`,
    `ORTHO_SHARE_REWEIGHT_CANDIDATE = 0.25` and `EARLY_STEPS = range(0, 11)`.
-2. **Rung 2, the in-span share** `scripts/showcase/correction_span_share.py`: for every seed and
+2. **Rung 2, the in-span share** `1-lora-correction/scripts/showcase/correction_span_share.py`: for every seed and
    step, the in-span and orthogonal share of r_t, the three least-squares coefficients, and the
    same shares for the joint guidance direction alone. Figure: orthogonal share of ‖r_t‖² against
    step, mean over the eight seeds with the min-to-max band, the early window shaded, the two bar
    lines drawn. Sidecar with every number and the verdict the constants produce.
-3. **Rung 1, the experts' pictures** `scripts/showcase/correction_tweedie_pictures.py`: seed 15,
+3. **Rung 1, the experts' pictures** `1-lora-correction/scripts/showcase/correction_tweedie_pictures.py`: seed 15,
    steps 0, 2, 5, 10, 20, 30 and 49 (the last cached step; the frames' "step 50" is the finished
    latent, which the cache does not hold). The Tweedie estimate under each expert, under PoE,
    under the joint prompt and under the empty prompt, decoded. A strip of those pictures, a
@@ -270,7 +270,7 @@ Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-conte
    eight seeds: the share of the 16,384 latent positions where both experts' departures from the
    unconditional estimate are above their own map's median, chance level 0.25, and the mean
    cosine between the two departures on those positions.
-4. **Rung 3, the adapter's output** `scripts/showcase/correction_adapter_span_share.py`: the
+4. **Rung 3, the adapter's output** `1-lora-correction/scripts/showcase/correction_adapter_span_share.py`: the
    rank-32 adapter attached to the UNet, evaluated at every cached state for the three prompts
    "a cat", "a dog" and empty, adapter on and adapter off in the same process, so δ̂ is free of
    cross-run fp16 noise. δ̂ projected onto the same span as rung 2. Per step and seed: in-span
@@ -278,13 +278,13 @@ Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-conte
    the overall cosine and norm ratio against r_t, and the cosine between the live and the cached
    PoE prediction as the sanity number. Figure: the two orthogonal-part cosines and shares
    against step; and for seed 15 the per-position norm map of δ̂ beside r_t's at the rung 1 steps.
-5. **Rung 4, the tracks** `scripts/showcase/correction_track_energy.py`: from the stored frame
+5. **Rung 4, the tracks** `1-lora-correction/scripts/showcase/correction_track_energy.py`: from the stored frame
    embeddings, per run the kinetic energy, the path length, the straight-line distance and its
    floors, in the full 384-dimensional space and in the cloud-axes plane; the which-animal score
    per saved step with the number of sign changes after step 10 and the step of the last one.
    Two figures: kinetic energy against straight-line distance, one point per seed per condition;
    which-animal score against step, thin line per seed, thick mean per condition, seed 15 marked.
-6. **The W&B run** `scripts/showcase/correction_log_wandb.py`: the four figures as images, the
+6. **The W&B run** `1-lora-correction/scripts/showcase/correction_log_wandb.py`: the four figures as images, the
    sidecars as one artifact, project `prime_lab/poe-repair-animals-compose`.
 
 ## Purpose and goal
@@ -371,7 +371,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
   the run id into the review file.
 - [x] **5.2** Write the card `artifacts/results/what-the-correction-is-made-of/README.md`, the
   figure explainer beside it, and the finding
-  `report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md` with
+  `1-lora-correction/report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md` with
   [the finding template](../../../../report/finding-and-explainer-template.md); add its row to
   `report/00-INDEX.md`.
 
@@ -425,7 +425,7 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | 
 
 The statistic: the mean over seeds 9 to 16 of the per-seed mean, over steps 0 to 10 inclusive,
 of the orthogonal share of ‖r_t‖². The three constants live in
-`scripts/showcase/correction_span_common.py`.
+`1-lora-correction/scripts/showcase/correction_span_common.py`.
 
 - **Support** (PoE could not have supplied the correction by re-weighting): the statistic is
   above `ORTHO_SHARE_REWEIGHT_IMPOSSIBLE = 0.5`.
@@ -481,22 +481,22 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** [scripts/build_training_cache.py](../../../../scripts/build_training_cache.py)
+**File:** [3-understanding-compositionality/scripts/build_training_cache.py](../../../../../3-understanding-compositionality/scripts/build_training_cache.py)
 **Relevant section:** the step loop, lines 142 to 193: one four-prompt forward, the guided and
 product-of-experts predictions, the DDIM step with ε_PoE, and the save of the four raw tensors.
 
-**File:** [poe_repair/_sdxl/metrics.py](../../../../poe_repair/_sdxl/metrics.py)
+**File:** [poe_repair/_sdxl/metrics.py](../../../../../poe_repair/_sdxl/metrics.py)
 **Relevant section:** `guided_eps`, `poe_eps`, `tweedie_mean`, `ddim_prev_from_x0_eps`, the four
 closed forms quoted above.
 
-**File:** [poe_repair/training_cache.py](../../../../poe_repair/training_cache.py)
+**File:** [poe_repair/training_cache.py](../../../../../poe_repair/training_cache.py)
 **Relevant section:** `load_step_raw` (the fp32 upcast on load) and `delta_t_from_raw` (r_t).
 
-**File:** [scripts/showcase/fit_cosine_on_cache.py](../../../../scripts/showcase/fit_cosine_on_cache.py)
+**File:** [1-lora-correction/scripts/showcase/fit_cosine_on_cache.py](../../../../scripts/showcase/fit_cosine_on_cache.py)
 **Relevant section:** how the adapter is attached and evaluated at cached states with a
 three-prompt batch; rung 3 copies it and adds the adapter-off forward.
 
-**File:** [scripts/showcase/where_each_condition_lands_frames_embed.py](../../../../scripts/showcase/where_each_condition_lands_frames_embed.py)
+**File:** [1-lora-correction/scripts/showcase/where_each_condition_lands_frames_embed.py](../../../../scripts/showcase/where_each_condition_lands_frames_embed.py)
 **Relevant section:** the cloud axes and the `frames-dino-feats.npz` layout rung 4 reads.
 
 ```python

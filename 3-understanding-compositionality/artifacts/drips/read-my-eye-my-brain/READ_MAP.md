@@ -9,7 +9,7 @@ The walk's persistent state. Read it first on every invocation, together with a 
 |---|---|
 | Paper | My Eye, My Brain: Development and Validation of an Accessible AI-Enabled Retinal Screening System for the Early Detection of Ocular and Systemic Disease in Underserved South African Populations. Samuel Sephiri. A PhD research proposal for the University of Pretoria or the University of the Witwatersrand, undated. No identifier. |
 | Journey | none. No row of `~/goal-setting/learning/JOURNEYS.md` covers retinal screening or diagnostic-accuracy studies. The walk lives in this repository's `artifacts/drips/`, beside the walk of the Composability Gap proposal. |
-| Paper's folder | `artifacts/drips/read-my-eye-my-brain/` holds everything: `paper/`, `read-ahead/`, `checks/`, `routes/` |
+| Paper's folder | `3-understanding-compositionality/artifacts/drips/read-my-eye-my-brain/` holds everything: `paper/`, `read-ahead/`, `checks/`, `routes/` |
 | Where the reader types | `$HOME/playground/deep-learning/my-eye-my-brain/`, not created yet |
 | Current chunk | 5 of 65: abstract > sentence 5, "The second involves the design" (open, prediction asked)   ← current |
 | States | 1 checked, 0 trusted, 2 read, 1 left open, 0 out of reach, 0 disagrees, 61 not reached |

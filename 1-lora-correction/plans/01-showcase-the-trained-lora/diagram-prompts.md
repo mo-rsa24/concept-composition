@@ -7,7 +7,7 @@ and the map says so truthfully.
 
 ## Abstraction chain
 
-1. [Closing the compositional gap](../diagram-prompts.md): the parent map; this scope inherits
+1. [Closing the compositional gap](../../../plans/diagram-prompts.md): the parent map; this scope inherits
    its art direction, palette, glyphs and reading axes.
 2. [Showcase the trained adapter](diagram-prompts.md): subject capstone "the adapter on trial", process capstone "the scope closed".
 

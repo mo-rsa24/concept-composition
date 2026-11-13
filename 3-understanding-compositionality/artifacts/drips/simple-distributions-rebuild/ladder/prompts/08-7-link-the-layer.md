@@ -9,7 +9,7 @@ after the two `/drip-retro` commands the builds of steps 4a and 4b printed.
 In the background, dispatch xref-cadence over the files layer 8 of the composition ladder wrote.
 
 Background
-Layer 8 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 8 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its two build walks wrote new files. Those files should link to the journey plans,
 textbook chapters, vault notes, brick and idea-map claims that cover the same ideas, and those
 should link back, so the next reader finds both.
@@ -21,12 +21,12 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
   line: the journey plans, textbook chapters and vault note to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 8 row of the Bricks table
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 8 row of the Bricks table
   ("The interaction term, exact"), and the vault note it links, What An Expert Learns From Its
   Training Set.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) with run 1.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) with run 1.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and

@@ -23,7 +23,7 @@ Every checkbox traces to a unit in the captured markdowns. Downstream
 - [ ] Scope finding: only cross_seed (7.6G) + training_cache (22G) of the 3 under `/datasets/mmolefe` — `segment-2-.../response.md`
 - [ ] Finding: `/datasets/mmolefe/poe_repair_min/outputs` is a separate tree, not a mirror — same file
 - [ ] Cache ownership: `training_cache` read by both pooling experiments (grep-confirmed) — same file
-- [ ] Cache ownership: `manifold_cache` read only by `scripts/manifold/*` — same file
+- [ ] Cache ownership: `manifold_cache` read only by `1-lora-correction/scripts/manifold/*` — same file
 - [ ] Classified table (path → type → group → owning-exp → size → last-mod) — same file
 - [ ] training_cache 8 train pairs enumerated — same file
 - [ ] Duplicate 1: cross_seed pair-name collision across roots (not byte-dups) — same file
@@ -31,7 +31,7 @@ Every checkbox traces to a unit in the captured markdowns. Downstream
 - [ ] Duplicate 3: lora pair names reappear as cross_seed names — same file
 - [ ] Orphan: 3 empty `lora` pair stubs — same file
 - [ ] Orphan: `training_cache_overfit_catdog` empty dir — same file
-- [ ] Orphan: `manifold_cache` (owned by scripts/manifold) — same file
+- [ ] Orphan: `manifold_cache` (owned by 1-lora-correction/scripts/manifold) — same file
 - [ ] Out-of-scope list (synthesizer, veracity*, idea*, e_*; other-project roots) — same file
 - [ ] Deliverable: `inventory/02-two-root-classified.md` — same file
 - [ ] Caveats: 22G training_cache not fully walked; duplicates by name+size+mtime not checksum — same file

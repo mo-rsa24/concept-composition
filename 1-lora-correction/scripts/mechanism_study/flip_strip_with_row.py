@@ -9,7 +9,7 @@ the gap is why the comparison is thin.
 
 One file per strength, so strengths can be flipped through instead of squeezed onto one sheet:
 
-  python3 scripts/mechanism_study/flip_strip_with_row.py --seed 10 --doses 20 50 100 \
+  python3 1-lora-correction/scripts/mechanism_study/flip_strip_with_row.py --seed 10 --doses 20 50 100 \
       --out artifacts/results/<question> --prefix cat-boost
 
 writes `cat-boost-<n>-every-checkpoint.png` for each. `--regime-template` picks which fix's

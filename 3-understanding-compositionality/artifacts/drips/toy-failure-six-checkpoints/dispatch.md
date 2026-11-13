@@ -1,5 +1,5 @@
 scope: /home/molef/PhD/poe_repair_min-dog-and-rain (root MASTER_PLAN.md; plans/10 has none of its own)
-source: plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md, with the write-up's section 8
+source: 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md, with the write-up's section 8
 why: show the cat-dog fusion on shapes where every answer is a formula: the overlay comes from the product (cp3, cp4), gives way when each word's pictures include the pair (cp5), and how much a sampler adds (cp6), before phase 2 tries remedies
 
 mode: --code, reader types by hand
@@ -36,7 +36,7 @@ rung: the exact product, sampled (piece 3, top; piece 2's readout and dot map sk
 notation: exact_product(pics_a, shares_a, pics_b, shares_b, sigma, n, rng) -> (samples, j, k); w_jk = shares_a[j] shares_b[k] e^{-d^2/(4 sigma^2)}; output (A_j + B_k)/2 + noise sigma/sqrt 2
 examples: seed 0, 200 of 200 overlays, per place 57/64/79; centre overlays at [4,8] mean (0.485, -0.003, 0.489), spread 0.062 ~ sigma/sqrt2 0.0707; ring pixels (0.999, 0.503, 0.503) pink; weights dropped -> 79 of 200 overlays
 
-applied [yours]: a-d. plan cp2 by-hand -> green channel; record page moved to 9; setup table geometry row; cp1 counts 24/16/40; cp3 by-hand d^2 48/80 shares 1/3; write-up one-pixel section gains "with no noise at all, there is no product" + fig-noise-on-off (script artifacts/notes/what-poe-loses-when-it-composes/fig_noise_on_off.py, card row in its README)
+applied [yours]: a-d. plan cp2 by-hand -> green channel; record page moved to 9; setup table geometry row; cp1 counts 24/16/40; cp3 by-hand d^2 48/80 shares 1/3; write-up one-pixel section gains "with no noise at all, there is no product" + fig-noise-on-off (script 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/fig_noise_on_off.py, card row in its README)
 
 rung: adding two words makes no overlay (piece 4)
 notation: exact_sum(pics_a, shares_a, pics_b, shares_b, sigma, n, rng) = sample_mixture over all six with shares/2

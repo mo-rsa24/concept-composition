@@ -83,10 +83,10 @@ We classify per held-out pair, then look for per-pair structure (is
 
 | Path | Status | Role |
 |---|---|---|
-| `scripts/build_eval_cache.py` | **new** | Build a minimal cell at `$POE_REPAIR_TRAINING_CACHE/heldout/<pair>/seed_N/`: `meta.json`, `embeddings.pt`, `residuals/step_000.pt` (init latent only — eps tensors zeroed for `load_step_raw` compat), optional `poe.png` + `mono.png` for the figure's left panel. ~75s per cell with PoE+Mono refs; ~1s per cell with `--skip-refs`. |
+| `1-lora-correction/scripts/build_eval_cache.py` | **new** | Build a minimal cell at `$POE_REPAIR_TRAINING_CACHE/heldout/<pair>/seed_N/`: `meta.json`, `embeddings.pt`, `residuals/step_000.pt` (init latent only — eps tensors zeroed for `load_step_raw` compat), optional `poe.png` + `mono.png` for the figure's left panel. ~75s per cell with PoE+Mono refs; ~1s per cell with `--skip-refs`. |
 | `poe_repair/experiments/held_out_seeds/sample_heldout.py` | **patched** | New CLI flags `--heldout-pair`, `--prompt-a`, `--prompt-b`, `--joint-prompt`. When `--heldout-pair` differs from the checkpoint's training pair, the eval pair's cache cells are read and the override prompts are encoded. |
-| `scripts/cross_seed_lora_pooling/render_per_epoch.py` | **patched** | New flag `--pair-slug-override`. When set, init latents and PoE/Mono ref columns are pulled from the held-out pair's cache rather than the checkpoint's training pair. Prompt overrides (`--prompt-a/-b/--joint-prompt`) already exist. |
-| `scripts/cross_seed_lora_pooling/render_seed_summary.py` | **unchanged** | Already accepts `--pair-slug` + `--per-epoch-subdir`. Point it at `samples/per_epoch_heldout/<pair>` and the held-out pair's cache. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/render_per_epoch.py` | **patched** | New flag `--pair-slug-override`. When set, init latents and PoE/Mono ref columns are pulled from the held-out pair's cache rather than the checkpoint's training pair. Prompt overrides (`--prompt-a/-b/--joint-prompt`) already exist. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/render_seed_summary.py` | **unchanged** | Already accepts `--pair-slug` + `--per-epoch-subdir`. Point it at `samples/per_epoch_heldout/<pair>` and the held-out pair's cache. |
 
 ## Per-epoch output layout
 
@@ -208,7 +208,7 @@ Adding `a_fox__x__a_rabbit` adds ~50 % to Steps A and C.
 | Item | Done | To do |
 |---|:---:|:---:|
 | pueuo7bl checkpoint located on disk | ✅ | |
-| `scripts/build_eval_cache.py` | ✅ | |
+| `1-lora-correction/scripts/build_eval_cache.py` | ✅ | |
 | `sample_heldout.py` `--heldout-pair` patch | ✅ | |
 | `render_per_epoch.py` `--pair-slug-override` patch | ✅ | |
 | Step A — eval-only caches built | | ⬜ |

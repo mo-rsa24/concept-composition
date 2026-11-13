@@ -37,9 +37,9 @@ echo "[$(date -u +%H:%M:%S)] node=$(hostname) commit=$(git rev-parse --short HEA
      "dirty=$(git status --porcelain | wc -l) disk_use=${USE_PCT}% stage=$STAGE"
 
 case "$STAGE" in
-  render) $PY scripts/showcase/stochastic_sampler_sweep.py --render ;;
-  score)  $PY scripts/showcase/stochastic_sampler_sweep.py --score ;;
-  all)    $PY scripts/showcase/stochastic_sampler_sweep.py --render --score ;;
+  render) $PY 1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py --render ;;
+  score)  $PY 1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py --score ;;
+  all)    $PY 1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py --render --score ;;
   *) echo "unknown stage: $STAGE" >&2; exit 5 ;;
 esac
 

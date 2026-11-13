@@ -41,9 +41,9 @@ import numpy as np
 import torch
 from PIL import Image, ImageDraw
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(REPO_ROOT / "scripts/showcase"))
+sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 
 import correct_early_then_clean_up as ce  # noqa: E402  plan 14's sampler, scorer helpers and constants
 

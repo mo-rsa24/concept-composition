@@ -54,7 +54,7 @@
 - **The EMA**: an exponential moving average of those factors, updated once per epoch (50 steps) with per-epoch decay `0.999^50 = 0.951`, so its memory reaches back about 1,000 steps. Saved as `lora_state_ema` beside `lora_state` in every checkpoint of this run. It is a shadow copy: it never feeds the optimizer, so the raw trajectory is exactly experiment D's up to hardware nondeterminism.
 - **Experiment D**: `phase1_r32_wd0.1_100k`, rank 32, weight decay 0.1, the kill criterion off, launched by the sibling plan on 2026-09-06.
 - **Drift**: DINOv2 drift as the decay finding reads it: the corrected render's distance to the joint-prompt render minus its distance to the plain-PoE render, mean of the 8 held-out cat × dog seeds at λ 1 over all 50 steps, from `summary.full."1.0".mean_dino_drift` in a probe folder's `results.json`. Negative is nearer the joint-prompt image. The baseline rank-32 run reads −0.091 at 30,050.
-- **A probe folder**: what `scripts/showcase/lambda_boundary_probe.py` writes for one checkpoint and one weight key (`--lora-key lora_state` or `lora_state_ema`): the 8-seed grid, `results.json`.
+- **A probe folder**: what `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` writes for one checkpoint and one weight key (`--lora-key lora_state` or `lora_state_ema`): the 8-seed grid, `results.json`.
 - **Compose count**: seeds of 8 where the validated detector counts two or more animal instances.
 
 ---
@@ -75,7 +75,7 @@
 
 **Associated materials.**
 - Review questions: [the review file](../../review/20-an-ema-of-the-adapter-weights.md)
-- The decay this answers: [the decay finding](../../../../report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)
+- The decay this answers: [the decay finding](../../../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md)
 - The remedies in order, from the literature: failure (c) in [the pressure-test route, part 5](../../../../artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md)
 
 ---
@@ -102,9 +102,9 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- Every `biggpu` device is busy, so the training runs as a Slurm job on `bigbatch` (RTX 3090, 24 GB, 3-day limit) with `co3` python; the seven `bigbatch` nodes with a dead or unreachable GPU are excluded on the `#SBATCH --exclude` line ([nodes](../../../../environment/hpc/nodes.md)).
-- Checkpoints to `/datasets` only; the launcher's disk guard reads `/datasets` ([storage](../../../../environment/storage.md)).
-- `torch.cuda.is_available()` asserted before training, because a faulted card runs on the CPU with no error ([poe-launch-002](../../../../environment/known-failures.md)).
+- Every `biggpu` device is busy, so the training runs as a Slurm job on `bigbatch` (RTX 3090, 24 GB, 3-day limit) with `co3` python; the seven `bigbatch` nodes with a dead or unreachable GPU are excluded on the `#SBATCH --exclude` line ([nodes](../../../../../environment/hpc/nodes.md)).
+- Checkpoints to `/datasets` only; the launcher's disk guard reads `/datasets` ([storage](../../../../../environment/storage.md)).
+- `torch.cuda.is_available()` asserted before training, because a faulted card runs on the CPU with no error ([poe-launch-002](../../../../../environment/known-failures.md)).
 - The kill criterion aborted the fresh rank-32 baseline at 6,500 steps; experiment D and this run pass `--kill-halve-after-steps 1000000000` to disable it.
 
 ---
@@ -156,9 +156,9 @@ EMA (0.999/step)   ○···············○········○···
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **The flag**: `--ema-decay` on the pooled trainer, an average of every `lora_` parameter updated once per epoch, saved as `lora_state_ema` in every checkpoint and restored on resume. `train/lora_weight_norm` and `train/lora_weight_norm_ema` logged at every log interval.
-2. **The launcher**: `scripts/showcase/regularised_r32.sbatch`, experiment D's flags plus `--ema-decay 0.999`, 800 epochs.
-3. **The probe key**: `--lora-key lora_state_ema` on `scripts/showcase/lambda_boundary_probe.py`.
-4. **The verdict script**: `scripts/showcase/ema_verdict.py`, the bars as constants, reading the probe folders.
+2. **The launcher**: `1-lora-correction/scripts/showcase/regularised_r32.sbatch`, experiment D's flags plus `--ema-decay 0.999`, 800 epochs.
+3. **The probe key**: `--lora-key lora_state_ema` on `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`.
+4. **The verdict script**: `1-lora-correction/scripts/showcase/ema_verdict.py`, the bars as constants, reading the probe folders.
 
 ---
 
@@ -188,13 +188,13 @@ Serves goal 4. Checkable outcomes:
 ### 1. 🧪 Launch, probe and judge
 
 - [x] **1.1 Add the flag, the probe key, the launcher and the verdict script** (the four files under Description).
-- [x] **1.2 Launch and record.** `sbatch scripts/showcase/regularised_r32.sbatch` from the repo root. The first attempt (job 50339, `mscluster53`, 03:05 UTC) ran out of memory in its first epoch: the plain rank-32 forward needs about 25 GB and the card has 24. The launcher now passes `--gradient-checkpointing` (same arithmetic, activations recomputed in the backward pass) and the run is job 50343 on `mscluster75` since 03:14 UTC. Done when `logs/r32_wd_ema-50343.err` prints `gradient checkpointing enabled`, `EMA on: per-step decay 0.99900, per-epoch decay 0.95121` and then an `epoch=` line without an out-of-memory error.
+- [x] **1.2 Launch and record.** `sbatch 1-lora-correction/scripts/showcase/regularised_r32.sbatch` from the repo root. The first attempt (job 50339, `mscluster53`, 03:05 UTC) ran out of memory in its first epoch: the plain rank-32 forward needs about 25 GB and the card has 24. The launcher now passes `--gradient-checkpointing` (same arithmetic, activations recomputed in the backward pass) and the run is job 50343 on `mscluster75` since 03:14 UTC. Done when `logs/r32_wd_ema-50343.err` prints `gradient checkpointing enabled`, `EMA on: per-step decay 0.99900, per-epoch decay 0.95121` and then an `epoch=` line without an out-of-memory error.
 - [ ] **1.3 Probe the 30k checkpoint with both keys** as soon as `checkpoints/lora_step_030000.pt` lands (about 10 hours in). Two `bigbatch` jobs, or one after the other on a free device:
-  - `sbatch --partition=bigbatch --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83 --time=2:00:00 --job-name=probe_raw --output=logs/probe_raw_30k-%j.out --wrap "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/showcase/lambda_boundary_probe.py --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_wd0.1_ema0.999_40k/checkpoints/lora_step_030000.pt --rank 32 --lora-key lora_state --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_wd0.1_ema_030000_raw --windows full --lambdas 1.0"`
+  - `sbatch --partition=bigbatch --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83 --time=2:00:00 --job-name=probe_raw --output=logs/probe_raw_30k-%j.out --wrap "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_wd0.1_ema0.999_40k/checkpoints/lora_step_030000.pt --rank 32 --lora-key lora_state --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_wd0.1_ema_030000_raw --windows full --lambdas 1.0"`
   - the same with `--lora-key lora_state_ema` and `--out-root .../figure_r32_wd0.1_ema_030000_ema`.
   - Done when both folders hold `results.json` and `grid_full_window.png`.
 - [ ] **1.4 Probe the 40k checkpoint with both keys** at completion, the same two commands with `lora_step_040000.pt` and `_040000_raw` / `_040000_ema`.
-- [ ] **1.5 Run the verdict script**: `python scripts/showcase/ema_verdict.py --raw-30k .../figure_r32_wd0.1_ema_030000_raw --ema-30k .../figure_r32_wd0.1_ema_030000_ema --raw-40k .../figure_r32_wd0.1_ema_040000_raw --ema-40k .../figure_r32_wd0.1_ema_040000_ema --d-30k .../figure_r32_wd0.1_030000 --out .../phase1_r32_wd0.1_ema0.999_40k/verdict.json` (the `--d-30k` folder is experiment D's task 1.3; omit it if that probe has not run). Paste the printed lines into the review file.
+- [ ] **1.5 Run the verdict script**: `python 1-lora-correction/scripts/showcase/ema_verdict.py --raw-30k .../figure_r32_wd0.1_ema_030000_raw --ema-30k .../figure_r32_wd0.1_ema_030000_ema --raw-40k .../figure_r32_wd0.1_ema_040000_raw --ema-40k .../figure_r32_wd0.1_ema_040000_ema --d-30k .../figure_r32_wd0.1_030000 --out .../phase1_r32_wd0.1_ema0.999_40k/verdict.json` (the `--d-30k` folder is experiment D's task 1.3; omit it if that probe has not run). Paste the printed lines into the review file.
 
 ▶ **Next: [instruction 2.1](#2--watch-and-judge)**.
 
@@ -254,7 +254,7 @@ Verdict into the review file first, then one line into the decay finding's `Stil
 ### 3. 🧹 Close out
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ---
 
@@ -263,9 +263,9 @@ Verdict into the review file first, then one line into the decay finding's `Stil
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 - `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`: `--ema-decay`, `_ema_init`, `_ema_update`, `_lora_norm`, the `lora_state_ema` payload in `_dump_checkpoint`
-- `scripts/showcase/regularised_r32.sbatch`: the launcher
-- `scripts/showcase/lambda_boundary_probe.py`: `--lora-key`
-- `scripts/showcase/ema_verdict.py`: the bars
+- `1-lora-correction/scripts/showcase/regularised_r32.sbatch`: the launcher
+- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: `--lora-key`
+- `1-lora-correction/scripts/showcase/ema_verdict.py`: the bars
 
 ---
 

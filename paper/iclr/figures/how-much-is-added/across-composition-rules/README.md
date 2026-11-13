@@ -80,5 +80,5 @@ mscluster85; raw cells under
 Assembled from those cells with labels drawn on the sheet. The verdicts above are eye reads;
 the validated instance-count detector only covers animal pairs, so the butterfly sheet has no
 detector read. Design and verdict live in
-`plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/05-what-changes-when-superdiff-leaves-its-own-defaults.md`
+`1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/05-what-changes-when-superdiff-leaves-its-own-defaults.md`
 and its review file.

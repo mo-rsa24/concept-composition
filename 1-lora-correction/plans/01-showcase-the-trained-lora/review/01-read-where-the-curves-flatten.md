@@ -63,7 +63,7 @@ Navigation: ⬅️ [The bar](#the-question-written-before-the-run) | 📋 [TOC](
 
 - [ ] ⚠️ Do the W&B curve and the local `history.json` extraction agree at every checkpoint, to
   within logging precision?
-- [ ] ⚠️ Does held-out [compose rate](../../../context/world/compose-rate.md) (0.961 at 50k and
+- [ ] ⚠️ Does held-out [compose rate](../../../../context/world/compose-rate.md) (0.961 at 50k and
   60k, unscored beyond) tell the same story as `frac_distance_reached`, or do the two metrics
   diverge late?
 

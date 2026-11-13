@@ -40,7 +40,7 @@ and nobody finds out for days. This measuring tool is what makes leaving them al
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 
 - **The three curves**, logged live per evaluation so a run can be read before it finishes:
-  - **[compose rate](../../../context/world/compose-rate.md)**: how often two separate animals appear.
+  - **[compose rate](../../../../context/world/compose-rate.md)**: how often two separate animals appear.
   - **direction agreement**: whether this run's correction points the same way as the pool's
     average correction.
   - **distance reached**: how far toward the target the correction actually moved the prediction.
@@ -69,7 +69,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 **What this run is.** One epoch (50 optimizer steps) of pooled rank-8 LoRA training over the 11
 blend-prone animal pairs, then one full inline-sampling eval pass over 152 pair-and-seed runs: 11 train pairs
 across 8 train seeds (88) plus 8 held-out pairs across 8 held-out seeds (64), each rendered at 25
-DDIM steps and scored. Launcher: `scripts/animals_compose_transfer/smoke_live_curves.sh`.
+DDIM steps and scored. Launcher: `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`.
 
 > Held-out means an animal pair the adapter never trained on, so a result on it says whether
 > the fix reaches beyond what it was shown.
@@ -157,10 +157,10 @@ the relative log path resolved there and the redirect failed before `nohup` ever
 Prefixing `cd <repo> &&` did not fix it, because the tooling's permission layer can strip `cd` from
 a compound command. The fix that worked is absolute paths for both the script and the log redirect,
 with the launch script doing its own `cd` internally. Recorded as
-[poe-launch-001](../../../environment/known-failures.md#entry-id-poe-launch-001).
+[poe-launch-001](../../../../environment/known-failures.md#entry-id-poe-launch-001).
 
 **What the environment learned.** The shared-device path is now written down rather than improvised:
-[environment/hpc/execution-protocol.md](../../../environment/hpc/execution-protocol.md) carries it as a step in
+[environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md) carries it as a step in
 the launch decision, with the safety rules (never start on a device holding a foreign process,
 re-check the device inside the launch script, record node and device and PID, harvest by `pgrep`
 since `squeue` is blind to these runs). The `/run-experiment` node picker gained `--probe-shared`,
@@ -170,7 +170,7 @@ against this cluster it reached the same conclusion a person would.
 **A placeholder that could never have run.** `logs/step-09-smoke-test.sh` was an sbatch script with
 its training command commented out and an import path that does not match where the code lives. It
 is now in `artifacts/_quarantine/`. The launcher that works is
-`scripts/animals_compose_transfer/smoke_live_curves.sh`.
+`1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`.
 
 ## Still open
 

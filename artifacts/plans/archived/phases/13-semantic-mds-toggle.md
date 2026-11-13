@@ -2,7 +2,7 @@
 
 > Companion to [04-lora-single-seed.md](04-lora-single-seed.md) and the
 > existing MDS pipeline in
-> [scripts/build_lora_inspector_mds.py](../scripts/build_lora_inspector_mds.py).
+> [1-lora-correction/scripts/build_lora_inspector_mds.py](../scripts/build_lora_inspector_mds.py).
 > Frontend touch-point: the "Latent trajectories — single large MDS
 > plot" panel in the LoRA Inspector.
 
@@ -73,7 +73,7 @@ DINOv2 ViT-S/14 CLS, L2-normalise, cosine distance to `mono`.
   detection) in a follow-up plan, and demote the MDS panel to "what a
   trajectory looks like" without any convergence reading attached.
 
-Script: `scripts/cross_seed_lora_pooling/smoke_dino_distance.py` (new,
+Script: `1-lora-correction/scripts/cross_seed_lora_pooling/smoke_dino_distance.py` (new,
 ~30 lines, single cell, no MDS).
 
 ## Pipeline (Mode B)
@@ -176,7 +176,7 @@ toggle is a JSON swap.
 2. **Validation gate.** Run `smoke_dino_distance.py` on the three
    known images. Stop if it fails.
 3. **Builder script.** Extend
-   [scripts/build_lora_inspector_mds.py](../scripts/build_lora_inspector_mds.py)
+   [1-lora-correction/scripts/build_lora_inspector_mds.py](../scripts/build_lora_inspector_mds.py)
    with a `--mode semantic` flag (or add a sibling
    `build_lora_inspector_mds_semantic.py` if cleaner). Emit
    `coords_semantic.json` and `semantic_cache/`.

@@ -18,7 +18,7 @@ rather than averaged away.
 
 Reads the scored grid only; it does not sample.
 
-    python scripts/window_map_all_pairs.py
+    python 1-lora-correction/scripts/window_map_all_pairs.py
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 SRC = paths.resolve(paths.WINDOW) / "window_curves.json"

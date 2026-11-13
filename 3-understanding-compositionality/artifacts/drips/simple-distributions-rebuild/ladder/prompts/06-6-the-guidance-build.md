@@ -8,11 +8,11 @@ after quiz 6.2.
 ```text
 /drip-execute-plan --request the guidance dial for w = 1 to 7.5 on the quadrant toy and the parts
 world, starting from rebuild/ideal.py and rebuild/parts_world.py, reporting A∩B share, total
-variation and Z per w, as layer 6 of artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I
+variation and Z per w, as layer 6 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I
 type every block myself into ~/Playground/PhD/simple-distributions-walk/walk06.py
 
 Background
-This is layer 6's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/): I
+This is layer 6's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/): I
 type the guidance dial from an empty file, one piece per round. Stable Diffusion's cat-dog hybrid
 happens at guidance weight 7.5, and every earlier layer ran at 1, so this layer measures what the
 weight does on both toys. Claude's reference is rebuild/guidance.py and rebuild/phase6_guidance.py,
@@ -22,7 +22,7 @@ notation in its dispatch.md.
 
 Objectives
 1. At the walk's open, cut the layer into 4 to 6 pieces and write them as the step file
-   artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, in the shape of the step
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, in the shape of the step
    files for layers 1 to 5.
 2. Build, teach and test one piece per round, in this order: the w = 1 check, the quadrant toy's
    share and Z per w, the samplers' total variation, then the parts world.
@@ -38,9 +38,9 @@ What to read
 - The layer 6 maths drip folder under artifacts/drips/ and its dispatch.md (step 4): my notation.
 - rebuild/guidance.py, rebuild/phase6_guidance.py, the p6. keys and rebuild/out/phase6/phase6.json
   (step 1): the reference.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Guidance as a tilted
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Guidance as a tilted
   density".
-- artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step-file shape and "How
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step-file shape and "How
   to walk it".
 
 What is already known
@@ -53,7 +53,7 @@ What is already known
   "Guidance as a tilted density").
 - SDXL's hybrid comes from one model and two prompts at w = 7.5 over 50 DDIM steps, the tilted
   target is inferred from the cache's residual formula, and the 2D work measured only w = 1
-  (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
+  (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), which equals p_A·p_B only where p(x)
   is flat (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - The quadrant toy is the four-quadrant answer-key toy, blobs at (±0.5, ±0.5), std 0.15, A is x1 > 0
@@ -90,7 +90,7 @@ Rules
   Z per w, then the samplers' total variation, then the parts world; show each before moving on.
 
 What to hand back
-- The step file artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, its pieces
+- The step file 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/06-guidance-as-a-dial.md, its pieces
   ticked, and the walk map that holds my place between sittings.
 - walk06.py: one script that prints, per toy and w, the A∩B share and Z, and per sampler the share
   and total variation beside the floor.

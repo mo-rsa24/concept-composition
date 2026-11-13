@@ -98,7 +98,7 @@ parallel session reports on (joint prompt, plain PoE, the corrector on all 50 st
 top of the rank-32 λ 1.2 adapter run at `k ∈ {0, 5, 20}`, scored for compose and Laplacian-variance
 sharpness. The read asks whether corrector steps at low noise sharpen the corrected run without
 costing composition, which no plan in the scope asked; the sampler-share read at step 26 is
-untouched. Its thresholds went into `scripts/corrector_window_sweep.py` as named constants and into
+untouched. Its thresholds went into `1-lora-correction/scripts/corrector_window_sweep.py` as named constants and into
 plan 04's review file before any of it ran. Plan 04's environment facts gained the adapter
 checkpoint and the note that the control pair's seeds 13 to 16 start from the from-seed draw the
 cache equals.

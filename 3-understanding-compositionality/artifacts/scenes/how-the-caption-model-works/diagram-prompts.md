@@ -2,7 +2,7 @@
 
 How model 3 is trained, how it tells its captions apart, how PoE samples from it, and what
 relabelling does, with one worked example per picture. Facts are from
-`artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py`.
+`3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py`.
 
 8 prompts · 8 rendered · 0 waiting
 
@@ -221,7 +221,7 @@ Exclusions: no words or letters entering the network, no text encoder, no CLIP, 
 ```
 Faithfulness note: the two tables must look nearly the same; the value chips must read exactly as
 quoted (real values from the model trained with 0 relabelled, seed 20261022, in
-`artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-table-example.json`); the
+`3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-table-example.json`); the
 caption tags are labels on the rows, not inputs.
 
 ### Prompt 6 (Subject): One training step in numbers

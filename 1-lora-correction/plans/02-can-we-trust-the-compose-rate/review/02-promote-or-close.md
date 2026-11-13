@@ -7,7 +7,7 @@ and writes the ending.
 ## Recommended prompt (when the three verdicts are in)
 
 ```
-/sync-plan-tree plans/02-can-we-trust-the-compose-rate
+/sync-plan-tree 1-lora-correction/plans/02-can-we-trust-the-compose-rate
 ```
 
 ## Position in the plan tree
@@ -120,7 +120,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 | What the paper says | What it owes alongside it |
 |---|---|
-| the band on the [compose rate](../../../context/world/compose-rate.md) | it goes to `writing-06` under every outcome, closure included. This is the one handoff that does not depend on which level fired |
+| the band on the [compose rate](../../../../context/world/compose-rate.md) | it goes to `writing-06` under every outcome, closure included. This is the one handoff that does not depend on which level fired |
 | F2's caption | the cap reading 94% as an upper bound, if the small promotion or better fired |
 | any number produced before a re-certification | whether it stands, needs re-scoring, or becomes a bounded claim. Silence here invalidates finished work in a sibling scope without saying so |
 

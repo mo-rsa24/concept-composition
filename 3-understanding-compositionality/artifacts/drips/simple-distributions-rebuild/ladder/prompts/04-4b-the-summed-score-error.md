@@ -6,31 +6,31 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan --request setting (d) of
-artifacts/ideas/poe-overlap-dial/example-9-parts-world/parts_world.py by hand in
+3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/parts_world.py by hand in
 ~/Playground/PhD/simple-distributions-walk/walk04b.py; bar: summed scores at ᾱ = 0.5 put the head at
 0.233 where the noised product puts it at 0.693, against numbers.json
 
 Background
 This is the second build in layer 4 of the composition ladder
-(artifacts/drips/simple-distributions-rebuild/): Du et al.'s summed-score error, computed exactly
+(3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/): Du et al.'s summed-score error, computed exactly
 in the parts world. Step 6 of the step file already prints both numbers inside walk04.py; this walk
 rebuilds them in a file of its own from parts_world.py, without walk04.py's code open. I start from
 walk04.py from step 4, finished, its retrospective, and the layer 4 maths drip folder.
 
 Objectives
 1. Cut the request into 4 to 6 pieces at the open, and write the plan file in
-   artifacts/drips/simple-distributions-rebuild/ beside 04-the-parts-world.md.
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ beside 04-the-parts-world.md.
 2. Build one piece a round, each ending on a test I run by hand.
 3. I type every block into walk04b.py and run it from ~/Playground/PhD/simple-distributions-walk/
    with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python.
 4. End with walk04b.py printing the two head means beside numbers.json's values.
 
 What to read
-- artifacts/ideas/poe-overlap-dial/example-9-parts-world/parts_world.py, lines 43 to 46: setting
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/parts_world.py, lines 43 to 46: setting
   (d).
-- artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json, setting d: the reference
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json, setting d: the reference
   values.
-- artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 6 and 7: the noising
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 6 and 7: the noising
   rule and what the error costs reverse diffusion.
 - The layer 4 maths drip folder and its dispatch.md: my notation.
 
@@ -39,7 +39,7 @@ What is already known
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The decisions the open would ask are settled at the invocation: build in walk04b.py, the bar is
   the one above, the time box is 2 hours, and the plan file goes in
-  artifacts/drips/simple-distributions-rebuild/ beside 04-the-parts-world.md (layer 4, step 4b).
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ beside 04-the-parts-world.md (layer 4, step 4b).
 - Setting (d) is lines 43 to 46 of parts_world.py: setting (a)'s two experts, each noised to
   ᾱ = 0.5, multiplied, and the head mean of that product set beside √0.5 times the clean product's
   head mean (parts_world.py).

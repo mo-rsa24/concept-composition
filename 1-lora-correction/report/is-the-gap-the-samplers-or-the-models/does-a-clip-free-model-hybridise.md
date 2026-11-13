@@ -2,7 +2,7 @@
 
 **The claim**
 
-Yes. Summed-guidance [product-of-experts](../../context/world/poe-composition.md) composition on PixArt-alpha, whose only text encoder is
+Yes. Summed-guidance [product-of-experts](../../../context/world/poe-composition.md) composition on PixArt-alpha, whose only text encoder is
 Flan-T5-XXL and which carries no CLIP in any role, holds two clear animals on **0 of 8** seeds: six
 renders are one hybrid animal and two are one single cat. The joint prompt "a cat and a dog" on the
 same eight seeds and the same settings draws a clear cat beside a clear dog on **7 of 8**.
@@ -95,7 +95,7 @@ disagreed with per seed.
 
 Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | 📋 [TOC](#table-of-contents) | [Next](#depends-on) ➡️
 
-`scripts/pixart_multi_poe.py`, run 2026-11-04 on mscluster84, an RTX 3090, at 20 steps, guidance
+`1-lora-correction/scripts/pixart_multi_poe.py`, run 2026-11-04 on mscluster84, an RTX 3090, at 20 steps, guidance
 4.5, DPM-Solver++ order 2, 1024², fp16, which are PixArt-alpha's own pipeline defaults rather than
 SDXL's 50 steps at 7.5. Weights at
 `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`; tiles and sidecars at
@@ -109,8 +109,8 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 - [Does a corrector alone produce two animals](does-a-corrector-alone-produce-two-animals.md),
   which owns the SDXL counts quoted here: joint prompt 8 of 8, plain product 0 of 8, held-out seeds
   9 to 16, counted by the validated instance count.
-- [What product-of-experts composition is](../../context/world/poe-composition.md) and
-  [the compose rate](../../context/world/compose-rate.md).
+- [What product-of-experts composition is](../../../context/world/poe-composition.md) and
+  [the compose rate](../../../context/world/compose-rate.md).
 
 ## Still open
 

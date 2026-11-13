@@ -42,7 +42,7 @@ since padding positions would otherwise dominate the norm.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/language_probes.py --probe l1 --probe l3
+    python 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.config import DEFAULT_MODEL_ID  # noqa: E402
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402

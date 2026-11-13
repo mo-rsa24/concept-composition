@@ -34,7 +34,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 - **Jacobian read**: the denoiser Jacobian's top singular directions at states inside the 0-10
   window; a candidate steering direction with a predictable gain.
 - **Intervention**: inject the direction before step 10, score
-  [compose rate](../../../context/world/compose-rate.md); the only thing that turns a direction
+  [compose rate](../../../../context/world/compose-rate.md); the only thing that turns a direction
   picture into a mechanism claim.
 
 ## Runs

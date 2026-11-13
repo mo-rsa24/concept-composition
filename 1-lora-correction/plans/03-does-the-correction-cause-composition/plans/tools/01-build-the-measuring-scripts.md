@@ -2,7 +2,7 @@
 
 Build the thirteen scripts every later plan measures with, and run each one on a cached pair whose answer is already known.
 
-**Step 1 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 1 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -41,7 +41,7 @@ which adds r_t back scaled by λ. Specifically, already present:
 | the step window the correction applies in (plan 04) | `correction_window=(start, end)`, λ forced to 0 outside it (`_sampling.py:461`) |
 | the definition of r_t | `delta = eps_j - eps_poe` (`_sampling.py:507`), one place |
 | the ‖r_t‖ curve (plan 05) | `extras["delta_norm_per_step"]`, recorded every run |
-| r_t is the [interaction term](../../../../context/world/interaction-term.md) | `extras["pmi_identity_residual_per_step"]`: per-step relative error of `Δ_t == w·(ε_J + ε_∅ − ε_A − ε_B)`, already computed |
+| r_t is the [interaction term](../../../../../context/world/interaction-term.md) | `extras["pmi_identity_residual_per_step"]`: per-step relative error of `Δ_t == w·(ε_J + ε_∅ − ε_A − ε_B)`, already computed |
 | a λ grid | `experiments/residual_between_mono_and_poe/sweep.py`, eleven points 0.0 … 1.0 |
 | cached r_t on disk | `artifacts/diagnostics/residual_diagnostics/delta_structure_unguided/tensors.pt` |
 
@@ -112,7 +112,7 @@ flowchart TD
   Its 420 LoRA tensors are under `sd["lora_state"]`, not at the top level.
 
 ## Tasks
-- [x] `scripts/cache_smoke.py`: scan every cached pair; per-file keys,
+- [x] `1-lora-correction/scripts/cache_smoke.py`: scan every cached pair; per-file keys,
       shapes `[1,4,128,128]`, dtype fp16, NaN check. Print `70/70 ok` or name
       every bad file. Cache-only, no GPU. Needed by plan 01.
 - [x] `poe_repair/experiments/interaction_term/cache.py`: one loader that,
@@ -121,10 +121,10 @@ flowchart TD
       `eps_a/eps_b/eps_j` via `guided_eps`, `eps_poe` via `poe_eps`,
       `r_t = eps_j - eps_poe`. Import those two helpers from
       `poe_repair.methods._sampling`; do not re-derive them.
-- [x] `scripts/interaction_term_inject.py`: thin CLI over
+- [x] `1-lora-correction/scripts/interaction_term_inject.py`: thin CLI over
       `composers.teacher_residual.run` exposing `--pair`, `--seed`, `--lambda`,
       `--check-canary` (the λ=0 must-pass check). No new sampling logic.
-- [x] `scripts/interaction_term_window.py`: same, exposing `--window
+- [x] `1-lora-correction/scripts/interaction_term_window.py`: same, exposing `--window
       start,end` and `--window off` (meaning `lambda_max=0`), plus
       `--check-identity`.
 - [x] The must-pass checks, as tests in
@@ -140,7 +140,7 @@ flowchart TD
       `plot_window_curves.py`, `language_probes.py`, `quality_control.py`,
       `manifold_slide.py`, `composition_scatter.py`.
 - [x] Run each measuring script on one cached pair and record the actual output
-      in `report/instrument_smoke.md`.
+      in `1-lora-correction/report/instrument-smoke-test.md`.
 
 ## Success/Failure Outcomes
 - **the cache scan**
@@ -193,7 +193,7 @@ for f in cache_smoke snr_collapse spectrum climb fork_curve plot_dose_curves \
 done                                     # expect: no output
 
 # cache-only, no GPU
-$PY scripts/cache_smoke.py --all         # expect: "70/70 ok"
+$PY 1-lora-correction/scripts/cache_smoke.py --all         # expect: "70/70 ok"
 
 # the loader agrees with the sampler's definition of r_t
 $PY -c "from poe_repair.experiments.interaction_term import cache; \
@@ -201,5 +201,5 @@ $PY -c "from poe_repair.experiments.interaction_term import cache; \
 
 # the two must-pass checks, and proof they can fail
 $PY -m pytest tests/test_interaction_term_canaries.py -v   # expect: all pass
-cat report/instrument_smoke.md             # one recorded output per script
+cat 1-lora-correction/report/instrument-smoke-test.md             # one recorded output per script
 ```

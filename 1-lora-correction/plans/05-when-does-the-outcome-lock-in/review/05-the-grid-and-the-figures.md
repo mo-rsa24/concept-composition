@@ -65,7 +65,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [ ] ⚠️ Do the speciation steps, one per pair-and-seed run, cluster at or below
-      `SPECIATION_EARLY_MAX = 10` (in `scripts/commitment/grid_sweep.py`), per family and
+      `SPECIATION_EARLY_MAX = 10` (in `1-lora-correction/scripts/commitment/grid_sweep.py`), per family and
       overall, rather than inside the divergence band (18 to 36)? This is the deciding question
       because the ledger pre-registered it as the test of whether the run decides early and then
       only descends: at-or-before-10 explains the window-versus-divergence gap, inside-the-band
@@ -79,7 +79,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       cannot chase the prettiest result.
 - [ ] ⚠️ Does the predictor's speciation agree with plan 02's drift settling, run for run? A
       systematic disagreement is a finding and is reported, with the scatter as its figure.
-- [ ] ⚠️ Does the LoRA family's [compose-rate](../../../context/world/compose-rate.md) curve
+- [ ] ⚠️ Does the LoRA family's [compose-rate](../../../../context/world/compose-rate.md) curve
       rise during steps 0 to 10 and flatten by the window's end, which is what deciding early
       and then only descending predicts? Report the curve shape either way.
 - [ ] ⚠️ How many reads were on-the-fence per family, and where do they sit relative to each

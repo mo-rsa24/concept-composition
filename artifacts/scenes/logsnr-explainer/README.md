@@ -71,7 +71,7 @@ by side.
 |---|---|
 | `ᾱ` for 1000 timesteps | SDXL's own `DDIMScheduler.alphas_cumprod`, read through `poe_repair/experiments/interaction_term/cache.py` |
 | the 50 timesteps actually visited | `meta.json` of `training_cache/train/a_cat__x__a_lion/seed_1`, not an assumed spacing rule |
-| the correction curve | `snr_collapse.json` under `outputs/interaction_term/cache_analyses/refresh_20260810/prereg/`, produced by `scripts/snr_collapse.py` |
+| the correction curve | `snr_collapse.json` under `outputs/interaction_term/cache_analyses/refresh_20260810/prereg/`, produced by `1-lora-correction/scripts/snr_collapse.py` |
 | the definition of `λ` | `Cell.log_snr()` in `cache.py`, verbatim |
 
 All frozen into `src/data.json`. Regenerate after a new `snr_collapse.py` run:
@@ -98,7 +98,7 @@ PY
 ## What this scene does not claim
 
 - Nothing about whether the curves lie on top of each other. 19.7% is `loose` by
-  `scripts/snr_collapse.py`'s own thresholds, and the scene prints that verdict as it stands.
+  `1-lora-correction/scripts/snr_collapse.py`'s own thresholds, and the scene prints that verdict as it stands.
 - The step-axis panel is F3's published median with its x relabelled, not a recomputation from the
   per-cell values. The script saves only the median and the band, so a true step-axis redraw needs
   it to dump its `stack` array first, which is the open task in the figure's plan.

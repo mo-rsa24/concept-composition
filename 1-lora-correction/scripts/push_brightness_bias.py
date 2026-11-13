@@ -10,7 +10,7 @@ Both are measured per latent channel and per denoising step. The comparison that
 r_hat's mean against r's mean: the needed correction has whatever mean it has, and the question
 is whether the adapter adds one of its own on top.
 
-    python scripts/push_brightness_bias.py --checkpoint pool43_all50_40k
+    python 1-lora-correction/scripts/push_brightness_bias.py --checkpoint pool43_all50_40k
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from pathlib import Path
 
 import torch
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 

@@ -15,11 +15,11 @@ work, or whether they are required, by testing whether a long correction at
 the end can still rescue a run that started uncorrected.
 
 Reads sampled images; it does not sample. Produce them with
-scripts/mechanism_study/run_growing_window_sweep.sh.
+1-lora-correction/scripts/mechanism_study/run_growing_window_sweep.sh.
 
 Usage:
-    python scripts/plot_growing_window_curves.py
-    python scripts/plot_growing_window_curves.py --root outputs/interaction_term/window/pairs
+    python 1-lora-correction/scripts/plot_growing_window_curves.py
+    python 1-lora-correction/scripts/plot_growing_window_curves.py --root outputs/interaction_term/window/pairs
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term import window_grid as wg  # noqa: E402
 from scripts.plot_dose_curves import require_validated_scorer  # noqa: E402
@@ -125,8 +125,8 @@ def _panel(ax, xs, rates, ns, *, title: str, xlabel: str) -> None:
 def _figure(by_direction: dict, out_dir: Path) -> None:
     """Diagnostic-only plot, not a paper figure.
 
-    F4g and F4h are the picture grids (scripts/longer_correction_grid.py,
-    scripts/later_start_grid.py), the same role F4a plays for the fixed-width
+    F4g and F4h are the picture grids (1-lora-correction/scripts/longer_correction_grid.py,
+    1-lora-correction/scripts/later_start_grid.py), the same role F4a plays for the fixed-width
     sweep. This curve is this experiment's F4b-equivalent: it backs the
     grids' caption with a number, but it is not itself shipped to
     paper/iclr/figures, so it is written beside growing_window_curves.json
@@ -191,7 +191,7 @@ def main() -> int:
         print(
             "no windowed runs found. This script scores images, it does not "
             "sample. Produce them with:\n"
-            "  bash scripts/mechanism_study/run_growing_window_sweep.sh\n"
+            "  bash 1-lora-correction/scripts/mechanism_study/run_growing_window_sweep.sh\n"
             "Looked under:\n" + "\n".join(f"  {p}" for p in looked),
             file=sys.stderr,
         )

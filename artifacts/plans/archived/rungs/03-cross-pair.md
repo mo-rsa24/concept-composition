@@ -32,9 +32,9 @@ $PY -m poe_repair.experiments.held_out_seeds.sample_heldout \
 ```
 
 ## Tasks
-- [x] ✅ Land the `--heldout-pair` sampler flag + `build_eval_cache.py` + `render_seed_summary` override. → code ready (Plan 12).  ✓ verified (sample_heldout.py --heldout-pair, scripts/build_eval_cache.py)
+- [x] ✅ Land the `--heldout-pair` sampler flag + `build_eval_cache.py` + `render_seed_summary` override. → code ready (Plan 12).  ✓ verified (sample_heldout.py --heldout-pair, 1-lora-correction/scripts/build_eval_cache.py)
 - [ ] ⚠️ **[optional]** Build the sibling-pair eval caches (seeds 9–12), then run the held-out-pair driver.
-  Prompt: `POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache bash scripts/cross_seed_lora_pooling/build_sibling_caches.sh && bash scripts/cross_seed_lora_pooling/heldout_pair.sh` (note: siblings like `training_cache/heldout/a_wolf__x__a_husky` already exist as minimal eval stubs — verify before rebuilding).
+  Prompt: `POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache bash 1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh && bash 1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh` (note: siblings like `training_cache/heldout/a_wolf__x__a_husky` already exist as minimal eval stubs — verify before rebuilding).
 - [ ] ⚠️ **[optional]** Direct G6 run:
   `$PY -m poe_repair.experiments.held_out_seeds.sample_heldout --checkpoint /datasets/mmolefe/poe_repair_min/artifacts/rung2-survive-noise/cross_seed/a_cat__x__a_dog/taskB__k04_ep2000_resumed__wandb-pueuo7bl/checkpoints/lora_step_100000.pt --pair a_cat__x__a_dog --heldout-pair a_wolf__x__a_husky --out-dir /datasets/mmolefe/poe_repair_min/artifacts/rung2-survive-noise/cross_seed/a_cat__x__a_dog/heldout_pair/a_wolf__x__a_husky`
 - [ ] ⚠️ **[optional]** Render `render_heldout_summary.py`; classify transfer per sibling; flag pairs that fail as Scale-pool candidates.

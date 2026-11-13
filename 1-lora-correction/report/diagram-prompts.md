@@ -1,6 +1,6 @@
 # The report's illustrated map
 
-Two pictures for [the report index](00-INDEX.md#read-it-in-this-order): one of what a single
+Two pictures for [the report index](../../report/00-INDEX.md#read-it-in-this-order): one of what a single
 corrector step does inside one noise level, and one of the whole reading arc as a single line.
 
 2 prompts · 1 rendered · 0 waiting · 1 stuck
@@ -25,7 +25,7 @@ No style is prescribed, so each prompt carries its own subject in full concrete 
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#art-direction) ➡️
 
-1. [Closing the Compositional Gap](../plans/diagram-prompts.md): subject "The whole system on one page", process "One route from measuring tools to submission"
+1. [Closing the Compositional Gap](../../plans/diagram-prompts.md): subject "The whole system on one page", process "One route from measuring tools to submission"
 2. [The report's illustrated map](diagram-prompts.md): subject "What one corrector step is", process "The whole arc as one line"
 
 The parent map draws the machine. This one draws what the machine returned, which is why its
@@ -148,7 +148,7 @@ Navigation: ⬅️ [Previous](#subject-what-one-corrector-step-is-inside-one-noi
 One piece, and it carries the whole reading arc: eight stops from where the product works to what
 is still open, with the detour through the alternatives that changed nothing. History:
 `diagrams/process-versions/`. This lane is regenerated, never patched: it is keyed to the arc in
-[the report index](00-INDEX.md#read-it-in-this-order), so any change to the arc rewrites it.
+[the report index](../../report/00-INDEX.md#read-it-in-this-order), so any change to the arc rewrites it.
 
 Marked `[planned]` because rungs 1, 2, 3 and 8 of the arc it draws have their evidence on disk and
 no finding file yet, which is the same hole the arc marks with ⬜.

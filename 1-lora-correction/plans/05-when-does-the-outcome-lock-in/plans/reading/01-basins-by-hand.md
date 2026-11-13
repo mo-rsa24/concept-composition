@@ -59,7 +59,7 @@ at an early, a middle, and a late step.
 
 **The hypothesis.** Basins are real for the composed flow: at a late step the three endings are
 the same image, at an early step they are free to differ. If true, the
-[commitment](../../../../context/world/interaction-term.md#words-this-file-uses) test this
+[commitment](../../../../../context/world/interaction-term.md#words-this-file-uses) test this
 scope builds has a well-posed thing to measure. If false, the valley picture is wrong, the
 premise behind the endpoint predictor dies here, and the scope re-marks before any model
 download. Rationale: a deterministic flow assigns every state one endpoint, and endpoints should
@@ -97,7 +97,7 @@ No W&B run needed at this size.
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- The `co3` absolute python path runs everything; see [the environment index](../../../../environment/00-INDEX.md).
+- The `co3` absolute python path runs everything; see [the environment index](../../../../../environment/00-INDEX.md).
 - Large artifacts go to `/datasets` only; the script's disk guard checks the filesystem it
   actually writes to.
 - fp16 upcast rule applies when decoding latents.
@@ -158,7 +158,7 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The test script** `scripts/commitment/perturb_finish.py`. Loads a pair-and-seed run's
+1. **The test script** `1-lora-correction/scripts/commitment/perturb_finish.py`. Loads a pair-and-seed run's
    `latent_trajectory.pt`, builds the two nudged copies, finishes all three from a given step
    with the same composed epsilon the cache was made with (reusing `load_ddim_scheduler` and
    `ddim_prev_from_x0_eps`), decodes the endings, saves PNGs and a JSON of relative latent
@@ -210,9 +210,9 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
   - **Done when:** both paths are confirmed to exist and are recorded in the review file's
     orientation paragraph. Either path missing stops the plan here.
   - ✅ Both confirmed present; recorded in the review file's orientation paragraph.
-- [x] **1.2** Write `scripts/commitment/perturb_finish.py` per the Description, threshold constant
+- [x] **1.2** Write `1-lora-correction/scripts/commitment/perturb_finish.py` per the Description, threshold constant
   `REL_ENDING_DIST_MAX` in the source.
-  - **Done when:** the script exists and `co3 python scripts/commitment/perturb_finish.py --help`
+  - **Done when:** the script exists and `co3 python 1-lora-correction/scripts/commitment/perturb_finish.py --help`
     prints its arguments.
   - ✅ Written; `--help` prints its arguments. `REL_ENDING_DIST_MAX = 0.05` set in source before
     any run.
@@ -226,7 +226,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [ ] **2.1** Run the test at steps 5, 25 and 40 on the failure pair, `a_cat__x__a_dog`.
 
     ```bash
-    co3 python scripts/commitment/perturb_finish.py \
+    co3 python 1-lora-correction/scripts/commitment/perturb_finish.py \
       --cell /datasets/mmolefe/poe_repair_min/outputs/veracity/pairs/a_cat__x__a_dog/seed_4/teacher_residual_const_lam000 \
       --steps 5 25 40 --nudge 0.01 \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/basins_by_hand/a_cat__x__a_dog/
@@ -238,7 +238,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [ ] **2.2** Run the identical test on the success pair, `a_butterfly__x__a_flower_meadow`.
 
     ```bash
-    co3 python scripts/commitment/perturb_finish.py \
+    co3 python 1-lora-correction/scripts/commitment/perturb_finish.py \
       --cell /datasets/mmolefe/poe_repair_min/outputs/veracity/pairs/a_butterfly__x__a_flower_meadow/seed_4/teacher_residual_const_lam000 \
       --steps 5 25 40 --nudge 0.01 \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/basins_by_hand/a_butterfly__x__a_flower_meadow/

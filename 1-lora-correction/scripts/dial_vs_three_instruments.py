@@ -28,7 +28,7 @@ the run:
     cache_analyses/caption_readback.json
     cache_analyses/plausibility_climb.json
 
-    python scripts/dial_vs_three_instruments.py
+    python 1-lora-correction/scripts/dial_vs_three_instruments.py
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 CACHE = paths.resolve(paths.CACHE_ANALYSES)

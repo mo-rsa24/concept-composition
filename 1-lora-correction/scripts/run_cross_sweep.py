@@ -21,9 +21,9 @@ Two grids:
 Resumable: a cell whose image exists is skipped, so Ctrl-C and re-run continues.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid window
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid cross
-    CUDA_VISIBLE_DEVICES=1 python scripts/run_cross_sweep.py --grid cross --dry-run
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid window
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid cross
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/run_cross_sweep.py --grid cross --dry-run
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.composers._helpers import (
     encode_pair,

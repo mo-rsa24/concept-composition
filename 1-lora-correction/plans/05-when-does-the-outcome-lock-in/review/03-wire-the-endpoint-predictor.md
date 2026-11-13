@@ -61,7 +61,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 - [ ] ⚠️ On the one state checked (plan 01's chosen pair-and-seed run, step 25, joint prompt),
       does the predictor's frame match the teacher's ending on scorer verdict
       (`SMOKE_SCORER_MATCH`) with DINOv2 distance under `SMOKE_DINO_DIST_MAX` (both in
-      `scripts/commitment/lcm_smoke.py`), with all three adapter asserts holding? This is the
+      `1-lora-correction/scripts/commitment/lcm_smoke.py`), with all three adapter asserts holding? This is the
       deciding question because a parameterisation mistake here fails silently as plausible
       frames everywhere downstream.
 

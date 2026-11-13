@@ -16,7 +16,7 @@ today).
 
 ## Where it came from and what judged it
 
-Routed from held claim 2 of [the merge-supervisor-structure walk](../merge-supervisor-structure/IDEA_MAP.md),
+Routed from held claim 2 of [the merge-supervisor-structure walk](../../../../artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md),
 which parked the supervisors' three-product comparison here for its own `/drip-idea` treatment.
 Its verdict returns to that walk through `integrate` once the battery runs. No plan file or
 review file references it yet, because nothing in the battery has executed: the next step named

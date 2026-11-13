@@ -100,7 +100,7 @@ export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=paper/iclr/figures/when-the-correction-arrives/poe
 
-$PY scripts/longer_correction_grid.py \
+$PY 1-lora-correction/scripts/longer_correction_grid.py \
     --bare --panel-width 2.60 --dpi 600 \
     --out-dir $OUT --name panel-a-window-extends-from-the-start
 ```
@@ -108,7 +108,7 @@ $PY scripts/longer_correction_grid.py \
 **Panel (b) is the window starting later.**
 
 ```bash
-$PY scripts/later_start_grid.py \
+$PY 1-lora-correction/scripts/later_start_grid.py \
     --bare --panel-width 2.60 --dpi 600 \
     --out-dir $OUT --name panel-b-window-starts-later
 ```

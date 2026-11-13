@@ -170,8 +170,8 @@ with `--quadrants in_in,out_in --out-in-train-seeds 12` to express
 | `poe_repair.experiments.cross_pair_lora_pooling.sample_crossbar` | reused with `--quadrants in_in,out_in --out-in-train-seeds 12` | `in_in` = sanity floor; `out_in` = held pair × all 12 seeds (headline). |
 | `poe_repair.experiments.cross_pair_lora_pooling.contact_sheet` | reused | Renders `in_in` and `out_in` (the other two quadrants come out empty). |
 | `poe_repair.experiments.cross_pair_lora_pooling.task_d_bridge` | reused | Δ̄_t bridge per `(pair, seed)`. |
-| `scripts/cross_pair_lora_pooling/build_plan16_caches.sh` *(new)* | new | Iterates the per-group `pair_pool.yaml`s + `pair_prompts.yaml`, calls `scripts/build_training_cache.py` for every (pair, seed) cell not already on disk. Idempotent. |
-| `scripts/cross_pair_lora_pooling/run_within_group.sh` *(updated)* | updated | Per group: leak-guard → train → sample (`in_in,out_in`) → contact-sheet → Task D. |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/build_plan16_caches.sh` *(new)* | new | Iterates the per-group `pair_pool.yaml`s + `pair_prompts.yaml`, calls `3-understanding-compositionality/scripts/build_training_cache.py` for every (pair, seed) cell not already on disk. Idempotent. |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/run_within_group.sh` *(updated)* | updated | Per group: leak-guard → train → sample (`in_in,out_in`) → contact-sheet → Task D. |
 | `outputs/cross_pair_lora_pooling/within_group/{g1,g2,g3,g4,g6}/pair_pool.yaml` | new | 5 YAMLs (Pair-splits table above). |
 | `outputs/cross_pair_lora_pooling/within_group/seed_pool.yaml` | new | One YAML; `train_pool=[1..12], held_out=[]`. |
 
@@ -196,9 +196,9 @@ on `/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/`
 | G6 | cat/dog | lion/dog | 8 of 10 | 104 |
 | **Total** | 5 | 5 | 40 | **~520 new cells** |
 
-`scripts/cross_pair_lora_pooling/build_plan16_caches.sh` walks the
+`1-lora-correction/scripts/cross_pair_lora_pooling/build_plan16_caches.sh` walks the
 required (group, pair, seed) tuples and calls
-`scripts/build_training_cache.py` only for missing cells. Estimated
+`3-understanding-compositionality/scripts/build_training_cache.py` only for missing cells. Estimated
 build wall time at ~75 s/cell on RTX 8000: **~11 h GPU**.
 
 The Plan 15 `wolf/husky` (G6 sibling) cache is *not* used by Plan 16 —
@@ -243,12 +243,12 @@ pair. Performed at plan-execution time; no GPU.
 ### Step 2 — build the ~520 missing cache cells (~11 h GPU)
 
 ```bash
-bash scripts/cross_pair_lora_pooling/build_plan16_caches.sh
+bash 1-lora-correction/scripts/cross_pair_lora_pooling/build_plan16_caches.sh
 ```
 
 Driver walks `outputs/cross_pair_lora_pooling/within_group/<g>/pair_pool.yaml`
 × seeds `{1..12}`, skips cells already on disk, and calls
-`scripts/build_training_cache.py` only for the missing ones.
+`3-understanding-compositionality/scripts/build_training_cache.py` only for the missing ones.
 Idempotent — safe to re-run after partial completion.
 
 Verification:
@@ -282,7 +282,7 @@ done
 ### Step 4 — run one group end-to-end (smoke; start with G6)
 
 ```bash
-GROUPS=g6 bash scripts/cross_pair_lora_pooling/run_within_group.sh
+GROUPS=g6 bash 1-lora-correction/scripts/cross_pair_lora_pooling/run_within_group.sh
 ```
 
 `run_within_group.sh` per group: leak-guards → trains pooled LoRA →
@@ -303,7 +303,7 @@ in `multi_pair_trainer`; kill and inspect before letting it run for
 ### Step 5 — run all five groups (~150 h GPU total)
 
 ```bash
-bash scripts/cross_pair_lora_pooling/run_within_group.sh
+bash 1-lora-correction/scripts/cross_pair_lora_pooling/run_within_group.sh
 ```
 
 Default `GROUPS="g1 g2 g3 g4 g6"`, `EPOCHS=2400`, `RUN_ID=main`. Use
@@ -415,8 +415,8 @@ Whole-rung bucket (aggregated across G1–G4, G6):
 | Per-group `pair_pool.yaml` (× 5) | | ⬜ (Step 1) |
 | Shared `seed_pool.yaml` (`train_pool=[1..12], held_out=[]`) | | ⬜ (Step 1) |
 | `pair_prompts.yaml` extended with 37 new slugs | | ⬜ (Step 1) |
-| `scripts/cross_pair_lora_pooling/build_plan16_caches.sh` | | ⬜ (Step 2 driver) |
-| `scripts/cross_pair_lora_pooling/run_within_group.sh` (updated to `--quadrants in_in,out_in`) | | ⬜ (driver update) |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/build_plan16_caches.sh` | | ⬜ (Step 2 driver) |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/run_within_group.sh` (updated to `--quadrants in_in,out_in`) | | ⬜ (driver update) |
 | Cache: 5 pairs at `{1..12}` (legacy Plan-15 train pairs) | ✅ (on `/datasets/`) | |
 | Cache: 5 pairs at `{9..12}` (legacy Plan-15 siblings — 4 of 5 reusable in Plan 16) | ✅ (on `/datasets/`) | |
 | **Cache: ~520 missing cells for the 40 new pair slugs** | | ⬜ (Step 2, ~11 h GPU) |

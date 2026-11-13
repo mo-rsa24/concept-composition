@@ -34,7 +34,7 @@ import numpy as np
 from poe_repair import paths
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 import later_start_grid as g
 from paper_font import use_paper_font
 

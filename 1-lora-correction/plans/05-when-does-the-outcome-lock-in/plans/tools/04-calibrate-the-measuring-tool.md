@@ -94,7 +94,7 @@ outputs to `/datasets/mmolefe/poe_repair_min/outputs/commitment/calibration/`.
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- The `co3` absolute python path; see [the environment index](../../../../environment/00-INDEX.md).
+- The `co3` absolute python path; see [the environment index](../../../../../environment/00-INDEX.md).
 - biggpu allows one Slurm job per user; a run this size fits in-session on a GPU node, so no
   queue is needed; if queued anyway, harvest reads all three execution modes.
 - Large artifacts to `/datasets` only; disk guard on the target filesystem.
@@ -152,7 +152,7 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The calibration script** `scripts/commitment/calibrate_oracle.py`: builds the subsample
+1. **The calibration script** `1-lora-correction/scripts/commitment/calibrate_oracle.py`: builds the subsample
    (printing the selected count per family), runs both sides, scores agreement, writes
    `calibration/agreement.json` (one row per state) and `calibration/verdict.json` (per-family
    rates, the two thresholds, the verdict). Thresholds `AGREEMENT_FLOOR` and `FAMILY_GAP_MAX`
@@ -189,7 +189,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**, and
 [what plan 03 had to pass](03-wire-the-endpoint-predictor.md#what-has-to-pass-before-this-runs).
 
-- [ ] **1.1** Write `scripts/commitment/calibrate_oracle.py` per the Description, both thresholds
+- [ ] **1.1** Write `1-lora-correction/scripts/commitment/calibrate_oracle.py` per the Description, both thresholds
   in source, per-family selection counts printed before anything runs.
   - **Done when:** a `--dry-run` prints the subsample (240 rows expected; the exact count per
     family) and exits without GPU work. A family with zero selected states stops the plan here.
@@ -206,7 +206,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [ ] **2.1** Run the full pass with W&B logging on.
 
     ```bash
-    co3 python scripts/commitment/calibrate_oracle.py \
+    co3 python 1-lora-correction/scripts/commitment/calibrate_oracle.py \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/calibration/ \
       --wandb prime_lab/poe-repair-animals-compose
     ```
@@ -308,7 +308,7 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** `scripts/commitment/calibrate_oracle.py` (new)
+**File:** `1-lora-correction/scripts/commitment/calibrate_oracle.py` (new)
 
 ```python
 AGREEMENT_FLOOR = ...   # set before any run; the absolute per-family minimum

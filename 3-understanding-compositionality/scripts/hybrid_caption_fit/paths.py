@@ -8,10 +8,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[3]
 
 # Local artifact folder, named for the question it answers.
-OUT = REPO / "artifacts/results/does-the-hybrid-fit-both-captions"
+OUT = REPO / "3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions"
 JOINT_TILES = OUT / "joint-tiles"
 SETS = OUT / "sets.json"
 SIMILARITIES = OUT / "similarities.json"
@@ -22,7 +22,7 @@ PHOTO_THUMBS = OUT / "photo-thumbs"
 
 # Sources already on disk here.
 JOINT_SHEET = REPO / "supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png"
-TILES = REPO / "artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles"
+TILES = REPO / "3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles"
 PRODUCT_TILES = TILES / "cat__x__dog"
 PLURAL_TILES = TILES / "cats__x__dogs"
 

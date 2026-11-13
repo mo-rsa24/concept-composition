@@ -9,7 +9,7 @@ The figures, scripts and checked references behind the
 
 | File | What it shows | Made from |
 |---|---|---|
-| `fig-causal-renders.png` | camel and dog at seeds 1 and 4 across six prompts, with the reader's calls | SDXL tiles in `artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/`, crops of the dog sheet, the two calls files |
+| `fig-causal-renders.png` | camel and dog at seeds 1 and 4 across six prompts, with the reader's calls | SDXL tiles in `3-understanding-compositionality/artifacts/results/does-a-camel-in-the-rain-come-out-wet/tiles/`, crops of the dog sheet, the two calls files |
 | `fig-exact-product-is-a-blend.png` | the exact product of two centred one-picture Gaussians is the pixel average | exact arithmetic on 16 × 16 images |
 | `fig-why-rain-and-dog-do-not-fuse.png` | contention (cat and dog) against separate pixels (dog and rain) | exact Gaussian products, spreads chosen by hand |
 | `fig-mixture-reweighting.png` | the product's wet share against the subject's own wet share | the formula of the write-up's §5.4; values illustrative |
@@ -78,8 +78,8 @@ in [the reference check](references-verified.md).
 
 ```bash
 cd /home/molef/PhD/poe_repair_min-dog-and-rain
-/home/molef/miniconda3/bin/python3 -I artifacts/notes/what-poe-loses-when-it-composes/make_figures.py
-cd artifacts/notes/what-poe-loses-when-it-composes
+/home/molef/miniconda3/bin/python3 -I 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/make_figures.py
+cd 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes
 /home/molef/miniconda3/bin/python3 -I toy_sampler_hybrids.py                     # about 3 minutes on CPU
 /home/molef/miniconda3/bin/python3 -I toy_sampler_hybrids.py --only B --mala-k 25 --mala-step 0.3 --tag=-B-strong-mala
 ```

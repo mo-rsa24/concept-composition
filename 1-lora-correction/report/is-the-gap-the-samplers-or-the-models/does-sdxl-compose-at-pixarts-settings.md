@@ -3,7 +3,7 @@
 **The claim**
 
 Yes. Changing SDXL's sampler, step count and guidance scale to PixArt-alpha's released defaults
-(DPM-Solver++ order 2, 20 steps, guidance 4.5) leaves the summed-guidance [product](../../context/world/poe-composition.md) of "a cat" and
+(DPM-Solver++ order 2, 20 steps, guidance 4.5) leaves the summed-guidance [product](../../../context/world/poe-composition.md) of "a cat" and
 "a dog" holding two clear animals on **0 of 8** held-out seeds, the same as at SDXL's own 50 DDIM
 steps and guidance 7.5.
 
@@ -91,9 +91,9 @@ nothing is claimed from it.
 
 Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | 📋 [TOC](#table-of-contents) | [Next](#depends-on) ➡️
 
-`scripts/sdxl_matched_multi_poe.py`, run 2026-11-04 on mscluster84, an RTX 3090, over held-out seeds
+`1-lora-correction/scripts/sdxl_matched_multi_poe.py`, run 2026-11-04 on mscluster84, an RTX 3090, over held-out seeds
 9 to 16 of cat × dog from the repo's cached starting latents. The two pinned SDXL paths,
-`scripts/concept_multi_poe.py` and `scripts/and_vector_sheet.py`, were not modified. Tiles and
+`1-lora-correction/scripts/concept_multi_poe.py` and `5-text-embedding-third-expert/scripts/and_vector_sheet.py`, were not modified. Tiles and
 sidecars at `/datasets/mmolefe/poe_repair_min/outputs/sdxl_matched/`; the card is
 [does sdxl compose at pixart's settings](../../artifacts/results/does-sdxl-compose-at-pixarts-settings/README.md).
 
@@ -104,7 +104,7 @@ Navigation: ⬅️ [Where this came from](#where-this-came-from) | 📋 [TOC](#t
 - [Does a corrector alone produce two animals](does-a-corrector-alone-produce-two-animals.md),
   which owns the published SDXL counts the control reproduces.
 - [Does a clip-free model hybridise](does-a-clip-free-model-hybridise.md), the run this one narrows.
-- [What product-of-experts composition is](../../context/world/poe-composition.md).
+- [What product-of-experts composition is](../../../context/world/poe-composition.md).
 
 ## Still open
 

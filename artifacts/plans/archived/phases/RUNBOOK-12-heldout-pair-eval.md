@@ -27,10 +27,10 @@ layout (PoE | per-epoch grid | Mono).
 
 | File | Status | Why we need it |
 |---|---|---|
-| [scripts/build_eval_cache.py](../scripts/build_eval_cache.py) | new | Writes minimal `(meta.json + embeddings.pt + residuals/step_000.pt + poe.png + mono.png)` per `(pair, seed)`. The sampler only needs init latents; PoE/Mono PNGs feed the figure's left panel. |
+| [1-lora-correction/scripts/build_eval_cache.py](../scripts/build_eval_cache.py) | new | Writes minimal `(meta.json + embeddings.pt + residuals/step_000.pt + poe.png + mono.png)` per `(pair, seed)`. The sampler only needs init latents; PoE/Mono PNGs feed the figure's left panel. |
 | [poe_repair/experiments/held_out_seeds/sample_heldout.py](../poe_repair/experiments/held_out_seeds/sample_heldout.py) | patched | New `--heldout-pair` flag: load checkpoint trained on pair P_train, sample on pair P_eval's cache cells. Prompts overridable via `--prompt-a/-b/--joint-prompt`. |
-| [scripts/cross_seed_lora_pooling/render_per_epoch.py](../scripts/cross_seed_lora_pooling/render_per_epoch.py) | patched | New `--pair-slug-override` flag: per-epoch sweep reads init latents + PoE/Mono refs from the override pair's cache. |
-| [scripts/cross_seed_lora_pooling/render_seed_summary.py](../scripts/cross_seed_lora_pooling/render_seed_summary.py) | unchanged | Already accepts `--pair-slug` + `--per-epoch-subdir`. |
+| [1-lora-correction/scripts/cross_seed_lora_pooling/render_per_epoch.py](../scripts/cross_seed_lora_pooling/render_per_epoch.py) | patched | New `--pair-slug-override` flag: per-epoch sweep reads init latents + PoE/Mono refs from the override pair's cache. |
+| [1-lora-correction/scripts/cross_seed_lora_pooling/render_seed_summary.py](../scripts/cross_seed_lora_pooling/render_seed_summary.py) | unchanged | Already accepts `--pair-slug` + `--per-epoch-subdir`. |
 
 ## 0. One-time shell setup
 

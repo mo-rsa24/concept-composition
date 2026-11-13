@@ -26,7 +26,7 @@
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 
 - **Disjoint square**: one (training group, evaluation pair) square of the matrix where no token is shared between the training pool's prompts and the evaluation pair's; audited, never assumed.
-- **The plain-PoE baseline**: the [compose rate](../../../context/world/compose-rate.md) on the same squares with no correction applied, the row every reading is against.
+- **The plain-PoE baseline**: the [compose rate](../../../../context/world/compose-rate.md) on the same squares with no correction applied, the row every reading is against.
 
 ## Run kind
 

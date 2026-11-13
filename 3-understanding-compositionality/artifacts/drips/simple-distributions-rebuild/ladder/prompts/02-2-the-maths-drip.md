@@ -8,10 +8,10 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 /drip --math the two constructions p(x|A)p(x|B)/p(x) and p_A p_B, total variation distance, why
 summed scores under reverse diffusion miss the product (Du et al. 2023, eqs. 11 and 12), and why
 MALA's proposal divisor is 4·ss, as steps 1, 2 and 6 of
-artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md set them out
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md set them out
 
 Background
-This is layer 2 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: two
+This is layer 2 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: two
 experts composed, and the samplers that reach the composition. The maths comes before the build and
 teaches only what the build needs. I have passed quiz 2.1; any question it marked missed becomes a
 first rung. Layer 1's maths drip folder under artifacts/drips/ holds my notation for q(x_t | x_0)
@@ -26,7 +26,7 @@ Objectives
 5. Close on the three numbers every composition reports.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, steps 1, 2 and 6: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md, steps 1, 2 and 6: the
   derivation in this walk's notation.
 - toy/rebuild/out/walk-numbers.json: every worked number, as the p2. keys.
 - Layer 1's maths drip folder under artifacts/drips/ and its dispatch.md: my notation.
@@ -43,10 +43,10 @@ What is already known
 - Construction (2) targets a·b (step file 02, step 1).
 - The two differ by the factor 1/r, so after normalising they agree only where r is constant on the
   region where a·b > 0 (step file 02, step 1; artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md,
-  claim 3; artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
+  claim 3; 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
 - The idea maps write (1) as p(x|A)p(x|B)/p(x) with p(x) the background, while the step file's p(x)
   is the composed product (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3;
-  artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 3).
 - The product of two Gaussians: N(0, 1)·N(2, 1) is N(1, 0.5) with log Z = log N(0; 2, 2) = -2.2655,
   the p2.prod_mean, p2.prod_var and p2.prod_logZ keys (step file 02, step 1;
   toy/rebuild/out/walk-numbers.json).

@@ -8,8 +8,8 @@ penguin; dog, chair, cat; teapot, lamp, book; cat, dog, umbrella; no concept in 
 rows are joint prompt, plain product and ours at seed 10 from the shared latent, adapter of record
 v58-03-self step 30,000 on all 50 steps.
 
-- Renderer: scripts/review_three_concepts.py and .sbatch.
-- Tiles and sheet: artifacts/results/does-the-adapter-compose-three-concepts/ (three_concepts.pdf is
+- Renderer: 1-lora-correction/scripts/review_three_concepts.py and .sbatch.
+- Tiles and sheet: 1-lora-correction/artifacts/results/does-the-adapter-compose-three-concepts/ (three_concepts.pdf is
   the paper figure, three_concepts-contact-sheet.png the quick sheet).
 - Layout sheet row R11 now reads columns as kinds of triple and height 3.8 in.
 

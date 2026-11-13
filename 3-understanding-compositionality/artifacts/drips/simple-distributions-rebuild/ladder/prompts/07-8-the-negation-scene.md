@@ -10,7 +10,7 @@ after layer 7's maths drip and reference have both run.
 a slider, the in-bar modes vanishing and the mass escaping, beside the bounded positive label
 
 Background
-Layer 7 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) measured A without
+Layer 7 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) measured A without
 B. This scene puts the negation weight on a slider, so I can watch the two in-bar ring modes vanish
 and the mass escape off every mode, beside the positive "not B" label that stays bounded, in my own
 notation.
@@ -48,7 +48,7 @@ Rules
 
 What to hand back
 - One published scene with the negation weight as a slider, in my notation from dispatch.md.
-- Its URL in step 8 of artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md,
+- Its URL in step 8 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md,
   replacing "(URL lands here)".
 
 What you will see

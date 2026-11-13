@@ -1,7 +1,7 @@
 """Contact-sheet rendering for the CFG conditioning-window ablation.
 
 Static fallback for papers / share-by-link. The interactive inspector
-slider is the primary readout (see ``scripts/lora_inspector.py`` route
+slider is the primary readout (see ``1-lora-correction/scripts/lora_inspector.py`` route
 ``/conditioning_window``).
 
 One PNG: rows = schedule family (prefix → suffix → window → punctate →

@@ -8,9 +8,9 @@ The paper is judged on presentation, so every figure has to read as part of one 
 
 ## What changed
 
-**One lettering rule, measured.** Figures 2, 3, 4, 6 (the limitations, stacked) and 12 (the rank and steps sweep) are drawn at 5.5 in in Liberation Serif, labels 8 pt, titles 9 pt, and `scripts/figure_text_audit.py` passes each one. Figure 2 is redrawn from the 1024 px renders (it had been saved at 100 dpi, 92 px per tile) with seven strength columns. The audit now measures rotated labels across their width.
+**One lettering rule, measured.** Figures 2, 3, 4, 6 (the limitations, stacked) and 12 (the rank and steps sweep) are drawn at 5.5 in in Liberation Serif, labels 8 pt, titles 9 pt, and `1-lora-correction/scripts/figure_text_audit.py` passes each one. Figure 2 is redrawn from the 1024 px renders (it had been saved at 100 dpi, 92 px per tile) with seven strength columns. The audit now measures rotated labels across their width.
 
-**Tools.** `scripts/paper_font.py` sets the face for every figure script; `scripts/paper_tile_figure.py` gained two-line column labels, a note under each tile, a footnote line and a panel letter; `scripts/figure7_limitations.py` draws the limitations figure side by side or `--stacked`.
+**Tools.** `1-lora-correction/scripts/paper_font.py` sets the face for every figure script; `1-lora-correction/scripts/paper_tile_figure.py` gained two-line column labels, a note under each tile, a footnote line and a panel letter; `1-lora-correction/scripts/figure7_limitations.py` draws the limitations figure side by side or `--stacked`.
 
 **Main-text layout.** Figures at the top of a page, at most two per page, at least a fifth of every page text; each section's figures defined at the start of the section; Tables 1 and 2 in one float; a barrier before the Discussion so no main-text figure prints after it. The rank and steps ablation moved to appendix C.5 and is still cited from Section 4.1. Empty space at page feet in the main text went from 10.6 in to 1.3 in, and 0.7 in of that is the old gap under Figure 1.
 

@@ -13,7 +13,7 @@ Background
 
 In my repo /home/molef/PhD/poe_repair_min-dog-and-rain I run an exact toy where each expert is a
 mixture of Gaussians over 16x32 shape pictures, so every composed density and score is closed form.
-The script is artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py.
+The script is 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py.
 
 Two ways of building the two experts give completely different answers and I want to know why in
 terms I can re-derive.
@@ -27,7 +27,7 @@ three captions against every picture, takes a softmax over the captions to get p
 and reads each expert off that by Bayes with a uniform picture prior. The pair picture's weight
 inside the "circle" expert comes out at 0.046, the same number. But the exact product now puts
 about 146 of 300 draws on a lone circle, about 150 on a lone square, and only 4 to 19 on a pair.
-The numbers are in artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json.
+The numbers are in 3-understanding-compositionality/artifacts/results/how-much-co-occurrence-the-product-needs/toy-caption-competition.json.
 
 My current explanation is that the Bayes-derived "circle" expert gives a lone square a weight of
 0.107 (form 1) or 0.015 (form 2) rather than zero, and that this leakage is what the product keeps,

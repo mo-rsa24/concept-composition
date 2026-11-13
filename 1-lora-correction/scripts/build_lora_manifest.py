@@ -16,7 +16,7 @@ by the cleanup commit C6::
 
 Usage::
 
-    python scripts/build_lora_manifest.py
+    python 1-lora-correction/scripts/build_lora_manifest.py
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ import re
 from pathlib import Path
 from poe_repair import paths
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 DEFAULT_RESULTS = paths.resolve(paths.ONE_PAIR_ONE_SEED) / "a_cat__x__a_dog/seed_42/run__local"
 

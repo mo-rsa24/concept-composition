@@ -27,13 +27,13 @@ Objectives
 
 What to read
 - plans/route-answer-the-iclr-reviews.md: the chain, the table "What we know so far", every step.
-- report/paper-review/protocol.md (rules 1 to 10), layout-sheet.md (slots R1 to R14, each with its
+- 1-lora-correction/report/paper-review/protocol.md (rules 1 to 10), layout-sheet.md (slots R1 to R14, each with its
   result file), held-out-set.md, and prze-10-compute.md once step 5 has left it.
 - artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml: the one adapter.
-- report/paper-review/board.md and the pages for the rows each piece serves.
+- 1-lora-correction/report/paper-review/board.md and the pages for the rows each piece serves.
 - environment/overview.md, environment/hpc/nodes.md, environment/storage.md, environment/paper.md.
 - composition/focus/eval_metrics.py: the scorers that already exist here.
-- scripts/refresh_paper_slots.py: how a result file becomes a table or figure in a slot.
+- 1-lora-correction/scripts/refresh_paper_slots.py: how a result file becomes a table or figure in a slot.
 - hld-diagram/references/registry.json: existing pages, to avoid a second page of the same system.
 
 What is already known
@@ -53,7 +53,7 @@ What is already known
 - The scorers: GroundingDINO instance count (animals only; it cannot tell species, so a species
   check is done by eye), CLIP score, BLIP-VQA, ImageReward, GenEval's and T2I-CompBench's official
   evaluators, and network evaluations per image counted on the U-Net call (protocol rule 6).
-- Outputs: result CSVs carrying protocol rule 9's columns, read by scripts/refresh_paper_slots.py
+- Outputs: result CSVs carrying protocol rule 9's columns, read by 1-lora-correction/scripts/refresh_paper_slots.py
   into the slots of paper/iclr-56173/, which is built with Tectonic on the cluster and uploaded to
   Overleaf by hand.
 - Machines: the laptop writes code and the paper; mscluster107 is the user's biggpu job 83423 with
@@ -76,7 +76,7 @@ Rules
 
 What to hand back
 - The published page URL, the saved SVG and spec under artifacts/scenes/, and the card entry.
-- A line added to report/paper-review/prze-9-slots.md linking the page.
+- A line added to 1-lora-correction/report/paper-review/prze-9-slots.md linking the page.
 - Proof: the registry lists the new page, and the page opens with every piece present.
 
 What you will see

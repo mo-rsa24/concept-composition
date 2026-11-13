@@ -9,7 +9,7 @@ does a fix pooled from one set of concepts repair pairs built from entirely diff
 ## Recommended prompt (after this plan completes)
 
 ```
-/sync-plan-tree plans/01-showcase-the-trained-lora/plans/figures/04-the-transfer-matrix-figure.md — <one line on what actually happened>
+/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/plans/figures/04-the-transfer-matrix-figure.md — <one line on what actually happened>
 ```
 
 ---
@@ -55,7 +55,7 @@ does a fix pooled from one set of concepts repair pairs built from entirely diff
 
 **The experiment:** score group-pooled LoRA checkpoints on pairs sharing no concept with their training pool, as a matrix: training group by evaluation pair.
 
-**The hypothesis:** *the pooled correction transfers beyond its concepts: [compose rate](../../../../context/world/compose-rate.md) on disjoint pairs sits well above plain PoE with no correction at all.*
+**The hypothesis:** *the pooled correction transfers beyond its concepts: [compose rate](../../../../../context/world/compose-rate.md) on disjoint pairs sits well above plain PoE with no correction at all.*
 
 **If true:** the generalization figure ships at the tier the repo named reviewer-credible.
 
@@ -91,8 +91,8 @@ does a fix pooled from one set of concepts repair pairs built from entirely diff
 
 - Python is the `co3` env at `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`; never a bare `python`. GPU launches may use the `co3_bw` env where a launcher hard-codes it.
 - Large outputs go to `/datasets/mmolefe/poe_repair_min/` only; any disk guard must check `/datasets`, the filesystem written to.
-- biggpu allows one Slurm job per user and registers no GPUs; long runs launch with `nohup` over SSH per [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md), with every path on the launch line absolute (`poe-launch-001`).
-- fp16 upcast rule per [environment/overview.md](../../../../environment/overview.md): norms and cosines computed on cached fp16 tensors are read after upcast to fp32.
+- biggpu allows one Slurm job per user and registers no GPUs; long runs launch with `nohup` over SSH per [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md), with every path on the launch line absolute (`poe-launch-001`).
+- fp16 upcast rule per [environment/overview.md](../../../../../environment/overview.md): norms and cosines computed on cached fp16 tensors are read after upcast to fp32.
 - W&B: training checkpoints came from `prime_lab/poe-repair-cross-seed` (run `pueuo7bl`); eval runs log to `prime_lab/poe-repair-animals-compose`. Credentials from `~/.netrc` / `WANDB_API_KEY`.
 
 ---
@@ -188,7 +188,7 @@ Serves [Objective 4 and DoD 3 of the scope master plan](../../MASTER_PLAN.md).
 
 ◀ **Needs: nothing** from plan 03; parallel-safe.
 
-- [ ] **0.1** Run `/verify-plan plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md`
+- [ ] **0.1** Run `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md`
 
 ▶ **Next: [task group 1](#1--census-fill-score)**.
 
@@ -208,7 +208,7 @@ Serves [Objective 4 and DoD 3 of the scope master plan](../../MASTER_PLAN.md).
 ◀ **Needs: [instruction group 2](#2--read-the-matrix)** done and the review answered.
 
 - [ ] **3.1** `/ingest-error-pattern --from-run-log` if anything errored
-- [ ] **3.2** `/sync-plan-tree plans/01-showcase-the-trained-lora`
+- [ ] **3.2** `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora`
 
 ▶ **Next: what has to pass before this runs.**
 
@@ -285,7 +285,7 @@ Serves [Objective 4 and DoD 3 of the scope master plan](../../MASTER_PLAN.md).
 
 When this plan runs and produces output, three things stay in sync: the error catalogs, this file's Error Matrix, and the figure catalog.
 
-1. **Ingest errors:** the close-out task runs `/ingest-error-pattern --from-run-log`; it deduplicates against `~/.claude/GLOBAL_ERROR_CATALOG.md` and [environment/known-failures.md](../../../../environment/known-failures.md) and triggers `/sync-plan-tree --update-error-matrices`.
+1. **Ingest errors:** the close-out task runs `/ingest-error-pattern --from-run-log`; it deduplicates against `~/.claude/GLOBAL_ERROR_CATALOG.md` and [environment/known-failures.md](../../../../../environment/known-failures.md) and triggers `/sync-plan-tree --update-error-matrices`.
 2. **Error Matrix regeneration:** `/sync-plan-tree` rewrites the Error Matrix below from the catalogs; never edit it by hand.
 3. **Figure filing:** outputs land under `/datasets/mmolefe/poe_repair_min/outputs/showcase_the_trained_lora/transfer_matrix/`, and each figure that graduates to the paper is copied into `paper/iclr/figures/` with its sidecar by plan 05, which owns the standard check.
 
@@ -300,7 +300,7 @@ When this plan runs and produces output, three things stay in sync: the error ca
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-- `scripts/showcase/transfer_matrix.py` (new)::main — census, audit, fill, score.
+- `1-lora-correction/scripts/showcase/transfer_matrix.py` (new)::main — census, audit, fill, score.
 - Checkpoint resolution: [heldout_pair.sh](../../../scripts/cross_seed_lora_pooling/heldout_pair.sh)::read_latest; scorer contract: `scorer_validated.json` (instance count).
 
 ---
@@ -312,10 +312,10 @@ When this plan runs and produces output, three things stay in sync: the error ca
 ▶ Paste to run this plan (the reviewer-credible tier):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md — group-pooled training evaluated on concept-disjoint pairs; void any square sharing a token.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md — group-pooled training evaluated on concept-disjoint pairs; void any square sharing a token.
 ```
 
-▶ `/run-experiment plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md` ✅
+▶ `/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/04-the-transfer-matrix-figure.md` ✅
 
 ---
 
@@ -337,7 +337,7 @@ Empty until `/ingest-error-pattern` populates it; regenerated by `/sync-plan-tre
 
 ### From project catalog
 
-Empty until `/ingest-error-pattern` populates it. Project catalog: [environment/known-failures.md](../../../../environment/known-failures.md); read `poe-launch-001` (absolute paths on SSH launches) before any nohup launch in this scope.
+Empty until `/ingest-error-pattern` populates it. Project catalog: [environment/known-failures.md](../../../../../environment/known-failures.md); read `poe-launch-001` (absolute paths on SSH launches) before any nohup launch in this scope.
 
 **Auto-update note:** regenerated by `/sync-plan-tree`; do not edit manually.
 

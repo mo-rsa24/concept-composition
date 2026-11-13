@@ -30,7 +30,7 @@ Objectives
 
 What to read
 - paper/iclr-56173/DRAFT_MAP.md and the working copy's tex: where each section stands.
-- report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
+- 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
 - Reviews.pdf: the exact wording of every point being answered.
@@ -61,16 +61,16 @@ What is already known
   both say it. Every target is the joint prompt's prediction (render_teacher false in the
   v58-03-self config), never a CO3 picture. Then restore the hidden joint-beside-CO3 figure in
   appendix A (commented out, label fig:training-selection, drawn from
-  artifacts/results/how-the-training-pairs-were-chosen/joint-vs-co3-spec.json).
+  3-understanding-compositionality/artifacts/results/how-the-training-pairs-were-chosen/joint-vs-co3-spec.json).
 - The rank and steps ablation is in appendix C.5 and cited from Section 4.1 as "Figure 12 shows";
   name the appendix there ("Figure 12, Appendix C.5").
 - The limitations figure (Figure 6) uses pictures cropped from the step-50,000 checkpoint, and its
   note says "Adapter trained for 1,000 epochs". Render its pictures again from the adapter of record
-  (scripts/figure7_limitations.py --stacked draws it) and change the note to match.
+  (1-lora-correction/scripts/figure7_limitations.py --stacked draws it) and change the note to match.
 - Figure 1 (final_figures/molefe_fig1.png) and the training diagram
   (training-the-compositional-adapter.jpg) fail the lettering audit (3.1 and 3.6 pt); the user
   re-letters them with runbook/making-the-papers-figures/relettering-an-image-with-baked-in-text.md,
-  then switch their includes to the PDFs and rerun python3 scripts/figure_text_audit.py.
+  then switch their includes to the PDFs and rerun python3 1-lora-correction/scripts/figure_text_audit.py.
 - hyperref draws green boxes round links; set \hypersetup{colorlinks=true, linkcolor=..., citecolor=...}
   in the ICLR style's colours.
 - Layout rules already in the tex: main-text figures [t], at most two a page, a fifth of each page
@@ -120,5 +120,5 @@ what was done with paths, PASS or MISS against compiling inside the page limit, 
 most one question. You judge by opening the compiled PDF.
 ```
 
-- `added:` the true cause of the "Figure 10" reference · `added:` the step-count macros · `added:` Figure 5's caption, the appendix pointer, the limitations figure, the two figures to re-letter, link colours, and the layout rules with the tidy pass (all from the presentation retro, `artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md`)
+- `added:` the true cause of the "Figure 10" reference · `added:` the step-count macros · `added:` Figure 5's caption, the appendix pointer, the limitations figure, the two figures to re-letter, link colours, and the layout rules with the tidy pass (all from the presentation retro, `1-lora-correction/artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md`)
 - `dropped:` "it is Figure 8" (why: the numbering changed; the reference is fixed by its label, not a number)

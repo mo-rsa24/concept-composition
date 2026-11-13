@@ -14,7 +14,7 @@ size → last-modified; flag duplicates and orphans.
   not a mirror of repo outputs.
 - `training_cache` (22G) = shared training + group (`manifest_A/B/H`) + eval
   (`heldout/`) cache read by both pooling experiments.
-- `manifold_cache` owned by `scripts/manifold/`, an orphan w.r.t. the three.
+- `manifold_cache` owned by `1-lora-correction/scripts/manifold/`, an orphan w.r.t. the three.
 - Duplicates: cross_seed pair-name collisions across roots are different-stage
   artifacts (heavy banks vs light eval), not byte-copies.
 - Orphans: 3 empty `lora` pair stubs, empty `training_cache_overfit_catdog`,

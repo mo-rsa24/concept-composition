@@ -1,11 +1,11 @@
 # Walk map: route step 2, the protocol, the layout sheet and the slots
 
-Plan: [route step 2](../../../plans/route-answer-the-iclr-reviews.md#2--write-the-comparison-protocol-and-the-figure-and-table-layout-sheet), walked with `/drip-execute-plan --request`.
+Plan: [route step 2](../../../../plans/route-answer-the-iclr-reviews.md#2--write-the-comparison-protocol-and-the-figure-and-table-layout-sheet), walked with `/drip-execute-plan --request`.
 Board: [the paper review board](../../../report/paper-review/board.md).
 
 ## Stop point
 
-Bar: the export compiles with every slot as a placeholder, one slot refills from a result file, `python3 scripts/refresh_paper_slots.py --check` prints PASS with the slot count, the board redraws with PRZE-8 and PRZE-9 ticked, and you agree the protocol.
+Bar: the export compiles with every slot as a placeholder, one slot refills from a result file, `python3 1-lora-correction/scripts/refresh_paper_slots.py --check` prints PASS with the slot count, the board redraws with PRZE-8 and PRZE-9 ticked, and you agree the protocol.
 Time box: 60 minutes of your time.
 Steps at the open: 4 (pieces 0 to 3, depth full).
 
@@ -21,12 +21,12 @@ Closed 2026-11-10 18:26: bar met, PASS (refill tested from a test file). Retrosp
 
 | Piece | What | Evidence |
 |---|---|---|
-| 3 | `scripts/refresh_paper_slots.py`; R1 refilled from a test CSV in a scratch copy; first run overflowed by 247.97 pt, fixed by shrinking an over-wide table to the text width; real paper built with every slot a placeholder; PRZE-9 lines 1 to 4 ticked; board redrawn at step 2 | `--check` PASS: 13 slots; both builds 22 pages, exit 0, floats on the same pages; `report/paper-review/board-2026-11-10-step-2.png` |
+| 3 | `1-lora-correction/scripts/refresh_paper_slots.py`; R1 refilled from a test CSV in a scratch copy; first run overflowed by 247.97 pt, fixed by shrinking an over-wide table to the text width; real paper built with every slot a placeholder; PRZE-9 lines 1 to 4 ticked; board redrawn at step 2 | `--check` PASS: 13 slots; both builds 22 pages, exit 0, floats on the same pages; `1-lora-correction/report/paper-review/board-2026-11-10-step-2.png` |
 
 | Piece | What | Evidence |
 |---|---|---|
-| 1 | `report/paper-review/protocol.md`, option B, agreed; PRZE-8 lines 1, 3, 4 ticked | your "Yes", 2026-11-10 16:15 |
-| 2 | `report/paper-review/layout-sheet.md` (13 slots), 13 reserved rows in `paper/iclr-56173/figures.md`, `\reviewslot` and 13 slots in the tex | Tectonic build 2026-11-10 16:28: 21 pages, no error, no overfull box; Figures 1 to 8 on their piece 0 pages; References moved from page 10 to 11 (R1) |
+| 1 | `1-lora-correction/report/paper-review/protocol.md`, option B, agreed; PRZE-8 lines 1, 3, 4 ticked | your "Yes", 2026-11-10 16:15 |
+| 2 | `1-lora-correction/report/paper-review/layout-sheet.md` (13 slots), 13 reserved rows in `paper/iclr-56173/figures.md`, `\reviewslot` and 13 slots in the tex | Tectonic build 2026-11-10 16:28: 21 pages, no error, no overfull box; Figures 1 to 8 on their piece 0 pages; References moved from page 10 to 11 (R1) |
 
 ## Ticks
 

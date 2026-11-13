@@ -101,7 +101,7 @@ Navigation: ⬅️ [Asked after the result](#asked-after-the-result) | 📋 [TOC
 - [ ] ⚠️ **Did the run respect the environment?**
   - All four on `bigbatch` 3090s, checkpoints on `/datasets`, four separate nodes with no contention between them.
 - [ ] ⚠️ **Were the broken reference cells excluded by name rather than by judgement?**
-  - Seed 10 of cat × dog draws three dogs; seed 9 of elephant × penguin draws an elephant alone. `scripts/correction_loss_variants/arm_grid.py` names them. Excluding them after seeing which condition they favour would be choosing the answer.
+  - Seed 10 of cat × dog draws three dogs; seed 9 of elephant × penguin draws an elephant alone. `1-lora-correction/scripts/correction_loss_variants/arm_grid.py` names them. Excluding them after seeing which condition they favour would be choosing the answer.
 - [ ] ⚠️ **Can this result be carried to the runs in plan 02?**
   - No. These four train on denoising steps 0 to 25 of 50, carry `ema_decay 0.999`, and use a different pool. They compare to each other only, and the write-up says so rather than leaving a reader to assume otherwise.
 
@@ -113,7 +113,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 The prompt-rewrite finding owes its number: the spread between the three fit losses, with its units.
 
-The scene artifact `artifacts/drips/seeing-the-correction-loss/` owes a correction to its "nearly doubled" claim.
+The scene artifact `1-lora-correction/artifacts/drips/seeing-the-correction-loss/` owes a correction to its "nearly doubled" claim.
 
 ## What the run cost, and what it bought
 

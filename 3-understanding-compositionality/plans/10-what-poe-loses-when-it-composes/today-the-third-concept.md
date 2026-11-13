@@ -3,7 +3,7 @@
 
 > [!NOTE]
 > **You will hold:** for a camel and a dog, on the same seeds and the same starting noise, what SDXL
-> draws for the joint prompt, the wet animal asked directly, [PoE](../../context/world/poe-composition.md#what-poe-composition-is) of animal and rain, PoE of animal and
+> draws for the joint prompt, the wet animal asked directly, [PoE](../../../context/world/poe-composition.md#what-poe-composition-is) of animal and rain, PoE of animal and
 > "wet", PoE of all three, and PoE of the animal with "wet" twice; your call on every tile; a count of the
 > seeds where the third concept brought the effect back; and whether a second "wet" does what rain did. **Time:** ~2.5 h, mostly rendering while you do the
 > [caption walk](today-camel-and-dog-in-the-training-data.md) · **Stop point:** step 6's table
@@ -11,7 +11,7 @@
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-the-third-concept.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-third-concept.md
 ```
 
 ## Contents
@@ -101,11 +101,11 @@ Navigation: ⬅️ [Previous](#the-test-written-before-any-render) | 📋 [Conte
 ```
 /home/molef/micromamba/envs/sdxl-local/            the laptop's torch and diffusers (built in the background)
 ~/.cache/huggingface/hub/models--stabilityai--stable-diffusion-xl-base-1.0/    SDXL's fp16 weights, ~7 GB
-artifacts/results/does-an-effect-need-support/laptop-third-concept/            gitignored, local only
+3-understanding-compositionality/artifacts/results/does-an-effect-need-support/laptop-third-concept/            gitignored, local only
   camel/seedNN/<column>.png and .json             every tile with its settings
   camel-sheet.jpg  dog-sheet.jpg                  seeds down, the eight columns across
   calls.json  tally.json                          your calls; the counted-seed table
-scripts/local_sdxl_poe.py                         render, sheet, tally
+3-understanding-compositionality/scripts/local_sdxl_poe.py                         render, sheet, tally
 ```
 
 ## Steps
@@ -124,21 +124,21 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 2. 🔧 Time one seed, then choose how many (AI, ~10 min)
 
-- [x] ✅ **Run one seed for the camel:** `$PY scripts/local_sdxl_poe.py render --animals camel --seeds 1` ✓ verified 2026-10-22: exit 0, tiles 49 to 72 s, 405 s per seed; 8 seeds chosen
+- [x] ✅ **Run one seed for the camel:** `$PY 3-understanding-compositionality/scripts/local_sdxl_poe.py render --animals camel --seeds 1` ✓ verified 2026-10-22: exit 0, tiles 49 to 72 s, 405 s per seed; 8 seeds chosen
   - Each tile prints its seconds. Seven tiles run 18 UNet passes per step in total, so one seed of one animal is about 900 passes.
   - **Pick the seed count** so the rest fits the time left: total ≈ (seconds for this seed) × 2 animals × seeds. Aim for 8 seeds, take no fewer than 5.
 - [x] ✅ **Open the seven camel tiles** in `laptop-third-concept/camel/seed01/` and check they are photographs of a camel, not noise or black squares (a black square means the fp16 VAE overflowed; the script decodes in fp32 to avoid it). ✓ verified 2026-10-22: seven camel photographs, mean brightness 111 to 157 of 255 per tile
 
 ### 3. 🔧 Render the rest in the background (AI starts it; ~1 to 1.5 h)
 
-- [x] ✅ **Run:** `$PY scripts/local_sdxl_poe.py render --animals camel dog --seeds 1 2 3 4 5 6 7 8` (or the count chosen in step 2), in the background. ✓ verified 2026-10-22: 112 of 112 seven-column tiles, camel and dog, 8 seeds; exit 0
+- [x] ✅ **Run:** `$PY 3-understanding-compositionality/scripts/local_sdxl_poe.py render --animals camel dog --seeds 1 2 3 4 5 6 7 8` (or the count chosen in step 2), in the background. ✓ verified 2026-10-22: 112 of 112 seven-column tiles, camel and dog, 8 seeds; exit 0
   - It skips tiles already made, so a stopped run restarts where it left off.
 - [x] ✅ **Render column 8:** the same command once the first run has finished; it skips every tile already made and draws only column 8. ✓ verified 2026-10-22: 16 column-8 tiles, exit 0 at 13:09; 128 tiles in all
 - [ ] **Walk the [caption walk](today-camel-and-dog-in-the-training-data.md) meanwhile.** The GPU renders here while the network and the CPU work there. 🕒 the caption walk is its own plan; nothing in this plan's tally reads it
 
 ### 4. 🔧 Build the two sheets (AI, ~1 min)
 
-- [x] ✅ **Run:** `$PY scripts/local_sdxl_poe.py sheet`, once when the camel's seeds are done (so step 5 starts on the camel while the dog renders) and again when the dog's are ✓ verified 2026-10-22: camel-sheet.jpg and dog-sheet.jpg, 8 seeds × 8 columns each
+- [x] ✅ **Run:** `$PY 3-understanding-compositionality/scripts/local_sdxl_poe.py sheet`, once when the camel's seeds are done (so step 5 starts on the camel while the dog renders) and again when the dog's are ✓ verified 2026-10-22: camel-sheet.jpg and dog-sheet.jpg, 8 seeds × 8 columns each
   - `camel-sheet.jpg` and `dog-sheet.jpg`: seeds down the page, the eight columns across, numbered 1 to 8.
 
 ### 5. 👀 Call every tile, one sheet per message (you, ~20 min)
@@ -150,7 +150,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 6. 🔧 The counted-seed table and the verdict (AI with you, ~10 min)
 
-- [ ] **Run:** `$PY scripts/local_sdxl_poe.py tally`
+- [ ] **Run:** `$PY 3-understanding-compositionality/scripts/local_sdxl_poe.py tally`
   - Per animal: the effect count in each column, the counted seeds, how many of them column 7 recovered, the pair seeds, and how many of them column 8 matched.
 - [ ] **Read it against [the pass marks](#the-test-written-before-any-render)** and write one verdict line, with its numbers.
 - [ ] **For the slide:** the two sheets, the table, and the verdict line.

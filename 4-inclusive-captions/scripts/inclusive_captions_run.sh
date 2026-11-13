@@ -2,7 +2,7 @@
 # Train one arm of the inclusive-captions pilot and render its watching sheet as each
 # checkpoint lands, so the four columns fill in Weights and Biases while the run is still going.
 #
-#   scripts/inclusive_captions_run.sh <A|B> <cuda device index> [steps]
+#   4-inclusive-captions/scripts/inclusive_captions_run.sh <A|B> <cuda device index> [steps]
 #
 # biggpu allows one Slurm job per user, so both arms are started with nohup outside Slurm on a
 # pinned free device and are invisible to squeue. Harvest them with pgrep on the node they were
@@ -18,7 +18,7 @@ TAG="${4:-v2}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 # The repo this script was launched from, so a second clone of the checkout runs its own code.
-REPO=$(cd "$(dirname "$0")/.." && pwd)
+REPO=$(cd "$(dirname "$0")/../.." && pwd)
 OUT=/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/$TAG-$RUN
 WANDB_ID=inclusive-captions-$TAG-run-$RUN
 

@@ -4,7 +4,7 @@ This plan asks whether switching the trained fix on changes the content a subjec
 while leaving the place it looks at alone, measured on 64 pair-and-seed runs the fix never
 trained on.
 
-**Step 8 of 22.** Waits on step 3. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 8 of 22.** Waits on step 3. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -53,7 +53,7 @@ what gets compared. `gain_and_pattern()` in `value_probe.py` computes this for e
 run during capture, so the scoring step reads it rather than re-deriving it.
 
 The full argument, with its guards (a shuffled-map control, a denominator check, the raw sums),
-is in `artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
+is in `1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
 
 ## Environment Facts This Plan Depends On
 - `co3` python at its absolute path. Inference for the single-run test fits the in-session 3090.
@@ -71,7 +71,7 @@ is in `artifacts/results/residual-dynamics/content-change-relative-to-attention-
 - [x] Run all 64: 8 held-out pairs × seeds 9 to 16, adapter off against on at matched
       steps.
 - [x] Compute the comparison table, one row per token and step, using the pattern term described
-      above. `scripts/mechanism_study/reprobe_table.py`.
+      above. `1-lora-correction/scripts/mechanism_study/reprobe_table.py`.
 - [x] Record the verdict in the review file against the threshold that was written before the run.
 - [x] Decide the figure's statistical entity with `/pair-figure`: one point per pair, median over
       its 8 seeds, seeds shown as a pale spread behind rather than averaged away. F7's caption is
@@ -118,5 +118,5 @@ $PY -m poe_repair.experiments.mechanism_study.value_probe \
   --steps 10,25,40                              # first short run: expect 3 step files
 ls -d /datasets/mmolefe/poe_repair_min/outputs/interaction_term/reprobe/*/seed_* | wc -l
                                                 # expect 64 pair-and-seed runs
-$PY scripts/mechanism_study/reprobe_table.py    # table + verdict.json
+$PY 1-lora-correction/scripts/mechanism_study/reprobe_table.py    # table + verdict.json
 ```

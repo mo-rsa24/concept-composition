@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --time=03:00:00
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/showcase/method_grid/slurm_%j.log
-# Renders every panel for the seed x method grids (scripts/showcase/method_grid.py), one
+# Renders every panel for the seed x method grids (1-lora-correction/scripts/showcase/method_grid.py), one
 # process per adapter, then composes the eight figures.
 set -euo pipefail
 
@@ -25,11 +25,11 @@ nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv \
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) disk_use=${USE_PCT}%"
 
-$PY scripts/showcase/method_grid.py --baselines
+$PY 1-lora-correction/scripts/showcase/method_grid.py --baselines
 for A in r8_240k r16_50k r32_60k crossseed; do
   echo "[$(date -u +%H:%M:%S)] adapter=$A"
-  $PY scripts/showcase/method_grid.py --adapter "$A"
+  $PY 1-lora-correction/scripts/showcase/method_grid.py --adapter "$A"
 done
-$PY scripts/showcase/method_grid.py --compose
+$PY 1-lora-correction/scripts/showcase/method_grid.py --compose
 
 echo "[$(date -u +%H:%M:%S)] DONE"

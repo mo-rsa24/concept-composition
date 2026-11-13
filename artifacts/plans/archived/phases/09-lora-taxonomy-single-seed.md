@@ -110,9 +110,9 @@ thin batch driver.
 | `poe_repair.experiments.one_pair_one_seed.trainer.attach_lora` | Phase 4 | LoRA attachment to `attn2.{to_q,to_k,to_v}`. |
 | `poe_repair.methods._sampling.run_lora_residual_inject` | Phase 4 | Mono-free deployment sampler. |
 | `poe_repair.experiments.one_pair_one_seed.probe` | Phase 4 | Per-epoch probe across λ grid. |
-| `scripts/build_lora_manifest.py` | Phase 4 | Builds `inspector_manifest.json` per pair. |
-| `scripts/build_lora_inspector_mds.py` | Phase 4 | Five-stage MDS pre-renderer (per-pair). |
-| `scripts/lora_inspector.py` | Phase 4 | Inspector app; route `/` carries the residual tab + MDS panel. |
+| `1-lora-correction/scripts/build_lora_manifest.py` | Phase 4 | Builds `inspector_manifest.json` per pair. |
+| `1-lora-correction/scripts/build_lora_inspector_mds.py` | Phase 4 | Five-stage MDS pre-renderer (per-pair). |
+| `1-lora-correction/scripts/lora_inspector.py` | Phase 4 | Inspector app; route `/` carries the residual tab + MDS panel. |
 | `scripts/build_taxonomy_lora.sh` *(new)* | — | One-shot wrapper that loops over the six pair slugs and runs train → manifest → MDS. |
 
 The new wrapper is the only deliverable code in this plan. It walks the
@@ -141,11 +141,11 @@ $PY -m poe_repair.experiments.one_pair_one_seed \
     --lr 1e-4 --lora-rank 8
 
 # 2. Build the decoded-image manifest for the residual tab.
-$PY scripts/build_lora_manifest.py \
+$PY 1-lora-correction/scripts/build_lora_manifest.py \
     --results-root outputs/lora/$PAIR/seed_42/results
 
 # 3. Pre-render the MDS trajectory panels (one PNG per (epoch, λ) cell).
-$PY scripts/build_lora_inspector_mds.py \
+$PY 1-lora-correction/scripts/build_lora_inspector_mds.py \
     --results-root outputs/lora/$PAIR/seed_42/results \
     --pair-slug $PAIR \
     --epochs all --lambdas all \
@@ -177,7 +177,7 @@ the MDS pre-renderer skips already-cached trajectories and PNGs unless
 
 ```bash
 # 4 cells per pair × 5 pairs ≈ 15 min on one RTX 8000.
-$PY scripts/build_lora_inspector_mds.py \
+$PY 1-lora-correction/scripts/build_lora_inspector_mds.py \
     --results-root outputs/lora/$PAIR/seed_42/results \
     --pair-slug $PAIR \
     --epochs 0,800 --lambdas 0.00,1.00 \
@@ -187,7 +187,7 @@ $PY scripts/build_lora_inspector_mds.py \
 ### Inspector
 
 ```bash
-$PY scripts/lora_inspector.py --port 5050
+$PY 1-lora-correction/scripts/lora_inspector.py --port 5050
 # from laptop: ssh -L 5050:127.0.0.1:5050 mscluster106 && open http://127.0.0.1:5050
 ```
 

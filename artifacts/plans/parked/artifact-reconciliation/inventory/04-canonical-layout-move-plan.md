@@ -105,7 +105,7 @@ Note: repo per-pair dirs (light eval samples) and datasets per-pair dirs (heavy 
 
 Moving artifact dirs breaks path references unless compat symlinks are kept. Every `→⇲` move leaves a symlink at the old path, which neutralises most of these. Residual risks:
 
-1. **`cat_dog` → `a_cat__x__a_dog` canonicalisation.** `scripts/lora_inspector.py` (hardcoded `cat_dog`, incl. the `trajectory_diagram/seed_42/mono.png` fallback at line 626), `scripts/build_lora_manifest.py` default results-root, and `inspector_manifest.json` internal keys all name `cat_dog`. The compat symlink `outputs/lora/cat_dog → artifacts/…/a_cat__x__a_dog` keeps the app working, but the *canonical* name differs from what the code prints. Recommend a follow-up `rename` pass on the code strings if you want full consistency.
+1. **`cat_dog` → `a_cat__x__a_dog` canonicalisation.** `1-lora-correction/scripts/lora_inspector.py` (hardcoded `cat_dog`, incl. the `trajectory_diagram/seed_42/mono.png` fallback at line 626), `1-lora-correction/scripts/build_lora_manifest.py` default results-root, and `inspector_manifest.json` internal keys all name `cat_dog`. The compat symlink `outputs/lora/cat_dog → artifacts/…/a_cat__x__a_dog` keeps the app working, but the *canonical* name differs from what the code prints. Recommend a follow-up `rename` pass on the code strings if you want full consistency.
 2. **`POE_REPAIR_TRAINING_CACHE`.** Points at `…/outputs/training_cache`. The symlink keeps it valid. If you later delete the symlink, update the env default in `training_cache.py:38-43` and every plan file.
 3. **Absolute `cell_dir` paths inside cache manifests.** `manifest_all.json` stores absolute `…/outputs/training_cache/…` cell dirs. These resolve through the symlink; a hard cutover requires regenerating the manifests (already flagged stale in `03`).
 4. **Plan files and run scripts** reference `outputs/lora/…`, `outputs/cross_seed_lora_pooling/…`, `outputs/cross_pair_lora_pooling/…` throughout `plans/` and `scripts/`. Symlinks cover reads; a clean cutover is a separate code-side `rename`.
@@ -143,7 +143,7 @@ Repointed the six standalone LoRA-artifact path constants from the legacy
 `build_lora_manifest.py` was run end-to-end (47 epochs / 183 cells) and writes
 to the same `inspector_manifest.json` the inspector reads through the symlink.
 
-**Deliberately NOT renamed: `scripts/lora_inspector.py`'s `cat_dog` slug and the
+**Deliberately NOT renamed: `1-lora-correction/scripts/lora_inspector.py`'s `cat_dog` slug and the
 conditioning_window references.** The inspector derives the pair slug from the
 `outputs/lora/` directory name and uses it as a join key into the
 conditioning_window tree, which was not reorganised (it is not one of the three

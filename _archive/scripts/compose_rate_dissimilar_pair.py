@@ -116,7 +116,7 @@ def main() -> int:
             raise SystemExit(f"scorer at {SCORER_CONTRACT} is not marked validated: "
                              "refusing to draw boxes from an uncertified instrument.")
 
-        sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+        sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
         from poe_repair.experiments.compose_scorer_validation.detection_scorer import count_instances
         device = None
         if args.device:

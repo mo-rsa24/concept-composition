@@ -99,8 +99,8 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- **The renders live on `/datasets`** and the sheet is assembled from there; the assembled image is small enough to live in the repository under `artifacts/results/` ([storage](../../../../environment/storage.md)).
-- **No system LaTeX exists here** ([paper](../../../../environment/paper.md)), so the sheet is built as an image rather than as a typeset figure, and any caption text in it is drawn by the plotting code.
+- **The renders live on `/datasets`** and the sheet is assembled from there; the assembled image is small enough to live in the repository under `artifacts/results/` ([storage](../../../../../environment/storage.md)).
+- **No system LaTeX exists here** ([paper](../../../../../environment/paper.md)), so the sheet is built as an image rather than as a typeset figure, and any caption text in it is drawn by the plotting code.
 - **The correction-size read needs a card for one cache pass**, inference only, so it does not compete with anything else running.
 
 ---

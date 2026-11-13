@@ -1,6 +1,6 @@
 # CO3 and the other baselines for the review: retrospective, 2026-11-11
 
-The walk that rendered the baseline methods for the ICLR 56173 review response, route step 8b. Plan: [the baselines plan](../../../plans/prze-review-baselines.md). Walk map: [the walk map](../../drips/review-baselines/EXECUTE_WALK.md).
+The walk that rendered the baseline methods for the ICLR 56173 review response, route step 8b. Plan: [the baselines plan](../../../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md). Walk map: [the walk map](../../../1-lora-correction/artifacts/drips/review-baselines/EXECUTE_WALK.md).
 
 ## 1. One cell per method
 
@@ -10,7 +10,7 @@ The walk that rendered the baseline methods for the ICLR 56173 review response, 
 
 **What was done.** A wrapper hands CO3's `sample_loop` our latent without editing the vendored code. The seed 9 to 16 latents are saved through the same function wave 1 calls, which falls back to a seeded fp16 CPU draw, byte-identical under torch 2.5.1 and 2.11. ToMe was cloned at `f256a49a` and its environment built in 22 minutes, then failed to import (`cached_download` missing from `huggingface_hub` 0.36).
 
-**Where it lives.** `outputs/paper_review/co3_default/a_lion__x__a_meerkat/seed09/` and `superdiff_default/…`; `scripts/review_seed_latents.py`, `scripts/review_baseline_cell.py`, `scripts/review_tome_cell.py`.
+**Where it lives.** `outputs/paper_review/co3_default/a_lion__x__a_meerkat/seed09/` and `superdiff_default/…`; `1-lora-correction/scripts/review_seed_latents.py`, `1-lora-correction/scripts/review_baseline_cell.py`, `scripts/review_tome_cell.py`.
 
 **Before and after.** No baseline rendered from our noise → CO3 79.7 s, two clear animals; SuperDiff 165.6 s, one hybrid; ToMe dropped.
 
@@ -24,7 +24,7 @@ The walk that rendered the baseline methods for the ICLR 56173 review response, 
 
 **What was done.** The grids and the rule were written (`028d9d69`), then removed on your call, so rule 3 says CO3 runs at its published default only (`9055bb59`).
 
-**Where it lives.** Rule 3 of `report/paper-review/protocol.md`; two dated rows in `report/paper-review/history.md`.
+**Where it lives.** Rule 3 of `1-lora-correction/report/paper-review/protocol.md`; two dated rows in `1-lora-correction/report/paper-review/history.md`.
 
 **Before and after.** Default plus a tuned row per method → one default row per method.
 
@@ -36,7 +36,7 @@ The walk that rendered the baseline methods for the ICLR 56173 review response, 
 
 **The problem.** A dead node (mscluster88), SuperDiff dropped by the step 9 walk, a slow card (mscluster48 at 83 s), and a stale NFS view on mscluster84.
 
-**What was done.** Six `bigbatch` jobs, then four more CO3 shards from the step 9 walk, then two tail helpers on mscluster108 with whole pairs and a retrying mkdir (`cdd58a18`). Figure 5's four pairs at seed 10 rendered on mscluster85. The row builder `scripts/review_score_rows.py` was taught to read baseline sidecars (`2f838931`).
+**What was done.** Six `bigbatch` jobs, then four more CO3 shards from the step 9 walk, then two tail helpers on mscluster108 with whole pairs and a retrying mkdir (`cdd58a18`). Figure 5's four pairs at seed 10 rendered on mscluster85. The row builder `1-lora-correction/scripts/review_score_rows.py` was taught to read baseline sidecars (`2f838931`).
 
 **Where it lives.** `outputs/paper_review/co3_default/{r1,r3,r2}/`, logs `eval_eval-co3-*.log` and `co3_tail2way_*.log`.
 
@@ -50,7 +50,7 @@ The walk that rendered the baseline methods for the ICLR 56173 review response, 
 
 **What was done.** Counted from mscluster107; rows 7 and 8 filled; route step 8b and five findings rows added (`ebc0e5ba`).
 
-**Where it lives.** `report/paper-review/prze-10-compute.md`, `plans/route-answer-the-iclr-reviews.md`.
+**Where it lives.** `1-lora-correction/report/paper-review/prze-10-compute.md`, `plans/route-answer-the-iclr-reviews.md`.
 
 ## The stop point
 
@@ -71,7 +71,7 @@ Bar: every evaluation job finished with its count matching. Met for CO3: 1,104 a
 
 - ToMe: environment built, import failed; not retried.
 - SuperDiff: about 373 tiles under `superdiff_default/`, unused.
-- The tuning grid launcher `scripts/review_baselines_grid.sh` is committed and unused.
+- The tuning grid launcher `1-lora-correction/scripts/review_baselines_grid.sh` is committed and unused.
 - Instruction 1 (your call on the one-cell tiles) and instruction 2 (PASS or MISS) are open.
 - No contact sheet was filed: the grids that would have made one were not run.
 

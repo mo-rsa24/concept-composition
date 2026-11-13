@@ -3,7 +3,7 @@
 ```
 walk:       /plain-speak --drip on the significance of ||r_t|| / ||eps_PoE||
 state:      parked at piece 3 of 5; pieces 1 and 2 delivered, one tangent answered in full
-measure:    curve_for in scripts/snr_collapse.py
+measure:    curve_for in 1-lora-correction/scripts/snr_collapse.py
 artifact:   https://claude.ai/code/artifact/31277c54-e582-49dd-80e8-52788af234ba
             (six-frame interactive walk: one r_t tensor -> norm -> ratio -> curve -> two pairs -> median scaling)
 ```
@@ -24,7 +24,7 @@ Pieces 1 and 2 are delivered. Piece 3 is where the walk resumes.
 `r_t = eps_mono - eps_PoE`, so `eps_mono = eps_PoE + r_t`. Dividing by `||eps_mono||` puts the
 correction inside its own yardstick, and a large correction would partly shrink its own reading.
 `||eps_PoE||` is independent of the numerator in a way `||eps_mono||` is not. The choice is
-pre-registered in `report/normalization_preregistration.md` and lives once, in `curve_for`.
+pre-registered in `1-lora-correction/report/normalization-preregistration.md` and lives once, in `curve_for`.
 Numerically the two denominators differ by a few percent at ratios near 0.1; the difference is
 conceptual, not arithmetic.
 
@@ -137,7 +137,7 @@ Both are pasteable as they stand.
 In poe_repair_min. Build the "why the correction-size curve matters" evidence pair, cache-only,
 no new sampling.
 
-The measure: curve_for in scripts/snr_collapse.py (||r_t|| / ||eps_PoE|| per step; median
+The measure: curve_for in 1-lora-correction/scripts/snr_collapse.py (||r_t|| / ||eps_PoE|| per step; median
 scaling optional here). Cache root: /datasets/mmolefe/poe_repair_min/outputs/training_cache.
 Population sidecar: paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.json.
 
@@ -170,7 +170,7 @@ In 65,536 dimensions this is abstract, so replicate the setting on a 2D plane."
 Build two linked panels, one scrub control (the denoising step), one clock:
 - Left panel, the real lens: x = denoising step 0-49, y = ||r_t|| / ||eps_PoE||, the real
   eagle x hawk seed 9 curve (cache: /datasets/mmolefe/poe_repair_min/outputs/training_cache,
-  measure: curve_for in scripts/snr_collapse.py). A marker rides the curve at the scrubbed step.
+  measure: curve_for in 1-lora-correction/scripts/snr_collapse.py). A marker rides the curve at the scrubbed step.
 - Right panel, the toy lens, LABELED ILLUSTRATIVE: a 2D cartesian plane where a point x_t
   walks a denoising path, and at the scrubbed step two arrows leave it: the PoE prediction
   and the correction r_t drawn as a small arrow attached to its tip. As the scrub moves, the
@@ -190,7 +190,7 @@ of the true 65,536-dim space; it is a replica scenario, and the page says so.
 
 These are measurement and figure designs, so they belong to the figure ladder and to a plan under
 `does-the-correction-cause-composition`, not to
-[the supervisors' structure merge](../../ideas/merge-supervisor-structure/IDEA_MAP.md). That walk
+[the supervisors' structure merge](../../../../artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md). That walk
 is about section naming and its six claims are settled. The seam between the two is only that
 under its framing `r_t` is the plurality term, which makes these probes candidate figures for the
 paper's sections 3 and 4. No task lines are written for any of the four probes yet.

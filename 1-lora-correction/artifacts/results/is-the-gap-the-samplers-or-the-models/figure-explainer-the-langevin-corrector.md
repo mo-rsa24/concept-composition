@@ -69,12 +69,12 @@ Navigation: ⬅️ [Where this sits](#where-this-sits) | 📋 [TOC](#table-of-co
 |---|---|---|
 | the corrector count, `k` | how many Langevin steps run at each of the 50 noise levels before the reverse step; `k = 0` is plain product-of-experts, byte for byte | [Langevin dynamics](../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/21-langevin-dynamics.md) |
 | the step-size multiplier, `c` | the chain's one free parameter: the step at noise level `t` is `c` times the scheduler's beta there | the step-size review, [its search table](../../../plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md) |
-| the ratio on the y axis | the correction's size relative to the prediction it corrects, `‖eps_J − eps_PoE‖ / ‖eps_PoE‖`, evaluated at the settled point | [the interaction term](../../../context/world/interaction-term.md) |
+| the ratio on the y axis | the correction's size relative to the prediction it corrects, `‖eps_J − eps_PoE‖ / ‖eps_PoE‖`, evaluated at the settled point | [the interaction term](../../../../context/world/interaction-term.md) |
 | the read zone, shaded green | the last five denoising steps, where the sampler's share has vanished by construction and what is left is the model's | the chain plan's own section on where the two errors separate |
 | the grey band, steps 0 to 10 | the window where the compose rate is decided and where the two errors cannot be told apart | the same section |
-| "Mono", the joint prompt column | "a cat and a dog" sampled as one prompt, the target the correction is defined from | [PoE composition](../../../context/world/poe-composition.md) |
-| the green or red frame | the validated instance count, two or more animals or fewer | [compose rate](../../../context/world/compose-rate.md) |
-| the adapter | the pooled rank-32 LoRA at step 30050, applied at strength 1.2 | [the LoRA corrector](../../../context/world/lora-corrector.md) |
+| "Mono", the joint prompt column | "a cat and a dog" sampled as one prompt, the target the correction is defined from | [PoE composition](../../../../context/world/poe-composition.md) |
+| the green or red frame | the validated instance count, two or more animals or fewer | [compose rate](../../../../context/world/compose-rate.md) |
+| the adapter | the pooled rank-32 LoRA at step 30050, applied at strength 1.2 | [the LoRA corrector](../../../../context/world/lora-corrector.md) |
 | d(joint) on a tile | that render's cosine distance to its own seed's joint-prompt render, in the compose scorer's DINOv2 embedding; lower is nearer | the clean-tail finding, rung 2 |
 | sharp on a tile | Laplacian variance of the greyscale render, higher being more edge energy | the same finding, rung 1 |
 
@@ -82,7 +82,7 @@ Navigation: ⬅️ [Where this sits](#where-this-sits) | 📋 [TOC](#table-of-co
 
 Navigation: ⬅️ [The cast](#the-cast) | 📋 [TOC](#table-of-contents) | [Next](#figure-2-what-each-step-size-does-to-the-picture) ➡️
 
-[observed] · Explains: `corrector-residual-curves-c3.png` and `corrector-residual-curves-c30.png`, drawn 2026-09-06 by `scripts/corrector_residual_curve.py --plot` · Read off `corrector/residual_curves.json` and the three `verdict_c*.json`
+[observed] · Explains: `corrector-residual-curves-c3.png` and `corrector-residual-curves-c30.png`, drawn 2026-09-06 by `1-lora-correction/scripts/corrector_residual_curve.py --plot` · Read off `corrector/residual_curves.json` and the three `verdict_c*.json`
 
 ![The correction's size against denoising step, one curve per corrector count, two panels, the two norms beneath](corrector-residual-curves-c3.png)
 
@@ -208,7 +208,7 @@ drift over eight seeds.
 
 Navigation: ⬅️ [Figure 3](#figure-3-what-more-corrector-steps-do-to-the-picture) | 📋 [TOC](#table-of-contents) | [Next](#figure-5-the-corrector-against-plain-product-of-experts-on-eight-seeds) ➡️
 
-[observed] · Explains: `corrector-window-slides-cat-dog.png`, rendered and drawn 2026-09-06 by `scripts/corrector_window_sweep.py` · Read off `corrector/window_curves_mcmc.json`
+[observed] · Explains: `corrector-window-slides-cat-dog.png`, rendered and drawn 2026-09-06 by `1-lora-correction/scripts/corrector_window_sweep.py` · Read off `corrector/window_curves_mcmc.json`
 
 ![Four seeds by ten columns: the corrector switched on inside one ten-step window, then on all 50 steps](corrector-window-slides-cat-dog.png)
 
@@ -222,7 +222,7 @@ where the window sits on the run. The frame is the detector's verdict.
 
 | In the picture | In the data | Read more |
 |---|---|---|
-| the frame colour | `cells[].compose`, the validated instance count reaching two | [compose rate](../../../context/world/compose-rate.md) |
+| the frame colour | `cells[].compose`, the validated instance count reaching two | [compose rate](../../../../context/world/compose-rate.md) |
 | the green bar | `cells[].window`, a half-open range of step indices | the plan's own window definition |
 | the layout itself | matched to `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png` on pair, seeds, positions and border rule | the finding's rung 1 |
 
@@ -376,10 +376,10 @@ Navigation: ⬅️ [How the figures connect](#how-the-figures-connect) | 📋 [T
 | 1 | [the chain review](../../../plans/06-is-the-gap-the-samplers-or-the-models/review/03-what-is-left-once-the-chain-settles.md) | the three-way threshold and which branch fired | ✅ written |
 | 4, 5, 6, 7 | [the window review](../../../plans/06-is-the-gap-the-samplers-or-the-models/review/04-does-the-corrector-compose-in-the-same-window.md) | the questions written before these ran | ✅ written |
 | 4 | [the timing verdict](../../../plans/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the injected-correction figure this one is matched to | ✅ written |
-| all | [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md) | the commands that regenerate every one of them | ✅ written |
-| cast | [the interaction term](../../../context/world/interaction-term.md), [PoE composition](../../../context/world/poe-composition.md), [compose rate](../../../context/world/compose-rate.md), [the LoRA corrector](../../../context/world/lora-corrector.md) | what each drawn quantity is | ✅ written |
+| all | [running the Langevin corrector](../../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md) | the commands that regenerate every one of them | ✅ written |
+| cast | [the interaction term](../../../../context/world/interaction-term.md), [PoE composition](../../../../context/world/poe-composition.md), [compose rate](../../../../context/world/compose-rate.md), [the LoRA corrector](../../../../context/world/lora-corrector.md) | what each drawn quantity is | ✅ written |
 | Where this sits | [the sampler-correctors journey](../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/MASTER_PLAN.md) | the theory these runs are the full-scale version of | ✅ written |
-| all | `scripts/corrector_residual_curve.py`, `scripts/corrector_window_sweep.py` | the scripts that drew them | n/a |
+| all | `1-lora-correction/scripts/corrector_residual_curve.py`, `1-lora-correction/scripts/corrector_window_sweep.py` | the scripts that drew them | n/a |
 
 ## Still open
 

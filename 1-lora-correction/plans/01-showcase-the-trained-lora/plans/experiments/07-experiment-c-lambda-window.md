@@ -81,7 +81,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- In-session runs still write to `/datasets` only; `co3` python; guidance 7.5; fp16 upcast rule for decodes ([overview](../../../../environment/overview.md)).
+- In-session runs still write to `/datasets` only; `co3` python; guidance 7.5; fp16 upcast rule for decodes ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -131,7 +131,7 @@ this plan is testing for. See the [lambda-softness strip prompt](../../diagram-p
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **The grid run**: {0, 0.25, 0.5, 0.75, 1.0} × window {0-10 fixed} on the four F9 pairs plus the repaired pair, existing seeds, 100k checkpoint.
-2. **The softness table**: per λ, the embedding-drift read and a sharpness proxy, plus [compose rate](../../../../context/world/compose-rate.md); `lambda_softness.json`.
+2. **The softness table**: per λ, the embedding-drift read and a sharpness proxy, plus [compose rate](../../../../../context/world/compose-rate.md); `lambda_softness.json`.
 3. **The strip**: one row per λ for one named pair, labelled descriptive, for plan 05's wall.
 
 ---
@@ -153,13 +153,13 @@ Serves goal 4 (A, B, C run; verdicts against pre-registered thresholds). Checkab
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md`**
 
 ▶ **Next: [task 1.1](#1--run-the-grid)**.
 
 ### 1. 🧪 Run the grid
 
-◀ **Needs: the λ-scaled injection runner.** Plan 03's runner (`scripts/showcase/lora_dose_sweep.py`) was NOT reused: its off-window steps run a single unguided forward (by design, for a different compute-budget experiment), which cannot reproduce this project's cached `poe.png` (guided PoE at all 50 steps) at λ=0 — the identity check this plan's review file pre-registers. Built fresh here as `scripts/showcase/lambda_window_grid.py`, reusing plan 03's LoRA attach/load logic and disk-guard/GPU-check boilerplate but with its own sampler (`run_lora_residual_inject_windowed_poe`): off-window steps run the same full guided-PoE forward as on-window steps, adapter disabled.
+◀ **Needs: the λ-scaled injection runner.** Plan 03's runner (`1-lora-correction/scripts/showcase/lora_dose_sweep.py`) was NOT reused: its off-window steps run a single unguided forward (by design, for a different compute-budget experiment), which cannot reproduce this project's cached `poe.png` (guided PoE at all 50 steps) at λ=0 — the identity check this plan's review file pre-registers. Built fresh here as `1-lora-correction/scripts/showcase/lambda_window_grid.py`, reusing plan 03's LoRA attach/load logic and disk-guard/GPU-check boilerplate but with its own sampler (`run_lora_residual_inject_windowed_poe`): off-window steps run the same full guided-PoE forward as on-window steps, adapter disabled.
 
 - [x] **1.1 Run the grid** as a Slurm job chain (sweep → measure → strip, `afterok`-dependent) on `mscluster76`/bigbatch, not literally in-session; outputs to `/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_c/`. 25/25 renders on disk (5 cells × 5 λ), jobs 48612/48613/48614, commit `32d1973`→`c6a470b` (dirty).
 - [x] **1.2 Measure softness per λ**; wrote `lambda_softness.json` (per run: λ, compose, drift read, sharpness proxy).
@@ -238,7 +238,7 @@ task 1.3 writes the strip directly to the location plan 05 reads from.
 ◀ **Needs: [instruction 2.2](#2--judge-the-trend)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [08-experiment-a-resume-to-200k](08-experiment-a-resume-to-200k.md).**
 
@@ -248,7 +248,7 @@ task 1.3 writes the strip directly to the location plan 05 reads from.
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/lora_dose_sweep.py` (plan 03) — the runner; this plan is a fixed-window slice of its grid with the softness read added.
+**File:** `1-lora-correction/scripts/showcase/lora_dose_sweep.py` (plan 03) — the runner; this plan is a fixed-window slice of its grid with the softness read added.
 
 ---
 
@@ -259,10 +259,10 @@ task 1.3 writes the strip directly to the location plan 05 reads from.
 ▶ Paste to run this plan (in-session; a fixed-window slice of plan 03's grid):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md — reuse plan 03's lambda-scaled runner (scripts/showcase/lora_dose_sweep.py) if it exists, else build it here and 03 reuses it; the lambda-0 render must match cached poe.png in mode before the grid runs.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md — reuse plan 03's lambda-scaled runner (1-lora-correction/scripts/showcase/lora_dose_sweep.py) if it exists, else build it here and 03 reuses it; the lambda-0 render must match cached poe.png in mode before the grid runs.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md` and paste the tmux block it emits (mechanical grid plus scoring, verified by its own sidecars). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md` and paste the tmux block it emits (mechanical grid plus scoring, verified by its own sidecars). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 
@@ -284,18 +284,18 @@ alt, headless overnight: in a fresh session run `/unattended run-experiment plan
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 - **poe-lora-003** — a masked/windowed sampler's off-window steps can silently diverge from a
   full-guidance baseline it's compared against. Hit here at the λ=0 identity check (DINOv2
   distance 0.43 to cached `poe.png` before the fix); fixed by writing
-  `run_lora_residual_inject_windowed_poe` in `scripts/showcase/lambda_window_grid.py`.
+  `run_lora_residual_inject_windowed_poe` in `1-lora-correction/scripts/showcase/lambda_window_grid.py`.
 - **poe-lora-004** — a hand-written sampler function missing `@torch.no_grad()` OOMs on its
   first forward pass. Hit while writing the same new sampler (job 48610); one-line fix.
 - **poe-mem-002** — `_Embedders()` instantiated with no `device` defaults to CPU, and DINOv2's
   xformers attention kernel doesn't support CPU. Hit while writing `measure()` in
-  `scripts/showcase/lambda_window_grid.py` (job 48608); fixed by passing `device=torch.device("cuda")`.
+  `1-lora-correction/scripts/showcase/lambda_window_grid.py` (job 48608); fixed by passing `device=torch.device("cuda")`.
 
 ## Cross-references
 
-- The mention of **the λ-window grid**, whose λ=0 identity check hit the off-window sampler mismatch, in [the failure catalog entry poe-lora-003](../../../../environment/known-failures.md#entry-id-poe-lora-003).
+- The mention of **the λ-window grid**, whose λ=0 identity check hit the off-window sampler mismatch, in [the failure catalog entry poe-lora-003](../../../../../environment/known-failures.md#entry-id-poe-lora-003).

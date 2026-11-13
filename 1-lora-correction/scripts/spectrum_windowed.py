@@ -36,7 +36,7 @@ happen to have a larger correction norm overall.
 Cache-only, no GPU.
 
 Usage:
-    python scripts/spectrum_windowed.py --pool outputs/animals_compose_transfer/pair_pool.yaml
+    python 1-lora-correction/scripts/spectrum_windowed.py --pool outputs/animals_compose_transfer/pair_pool.yaml
 """
 
 from __future__ import annotations
@@ -51,7 +51,7 @@ import torch
 from scipy import stats
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
     CACHE_ROOT,

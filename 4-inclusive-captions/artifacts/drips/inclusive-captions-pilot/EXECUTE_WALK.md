@@ -46,7 +46,7 @@ both-animal photo 0 off `both_sheet_00.png`. Sheet seeds 0 to 7, the same eight 
 
 | Decision | Chosen | The options there were | Who chose | Why |
 |---|---|---|---|---|
-| where the plan lives | new scope `plans/11-do-inclusive-captions-help-poe-compose/` | that, or a plan inside scope 10 | the user, by `defaults` | it is its own question with its own verdict |
+| where the plan lives | new scope `4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/` | that, or a plan inside scope 10 | the user, by `defaults` | it is its own question with its own verdict |
 | W&B project | new `prime_lab/poe-repair-inclusive-captions` | that, or a group inside `poe-repair-animals-compose` | the user, by `defaults` | the runs share no axis with the animals-compose sweeps |
 | which runs | A and B only, 128 seeds | that, or adding base SDXL and no-both as anchors | the user, by `defaults` | it is the whole experiment; C was already dropped |
 | the trainer's base | this repo's own SDXL loader | that, or fetching the diffusers SDXL LoRA example | Claude, accepted | the loader already supplies both text encoders, the VAE and the UNet, so the training path matches the sampling path and needs no network on a compute node |
@@ -84,7 +84,7 @@ Launched as:
 
 ```bash
 nohup /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-  scripts/census/inclusive_captions_pool.py \
+  3-understanding-compositionality/scripts/census/inclusive_captions_pool.py \
   > /home-mscluster/mmolefe/logs/inclusive-pool-captions-2026-11-03.log 2>&1 &
 ```
 
@@ -124,7 +124,7 @@ the animal's box as a fraction of the image's longer side. That floor was chosen
 compose scorer, and it measures how much of the frame the animal takes. It cannot tell a live cat
 from a cat on a television, a statue or a plush toy, which is exactly what the both-animal audit
 rejected 33 photos for. The single-animal sets now get the same 448-pixel audit pages, 16 a page,
-through `scripts/census/audit_both_animal_photos.py --set cat_only`.
+through `3-understanding-compositionality/scripts/census/audit_both_animal_photos.py --set cat_only`.
 
 **A bad photo cannot make the two arms differ.** Both train on the identical 491 photographs in
 the identical order from the identical seed. Pool noise lowers both conditions together and
@@ -246,7 +246,7 @@ is activations, which the rank does not touch, so halving it is a choice about t
 correction being learnt and never a way onto a smaller card. `bigbatch`'s 24 GB RTX 3090s remain
 out of reach at either rank, and it had no idle node in any case.
 
-**Both arms now launch from `scripts/inclusive_captions_both.sh`**, a file rather than an inline
+**Both arms now launch from `4-inclusive-captions/scripts/inclusive_captions_both.sh`**, a file rather than an inline
 string, after the inline form lost a newline and dropped run B.
 
 **Rank 16 and rank 32 do the same thing at step 500, which rules the adapter's size out.** Run A's

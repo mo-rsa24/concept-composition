@@ -9,7 +9,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 from layer 8
 
 Background
-This is layer 12 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: the
+This is layer 12 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: the
 correction at scale. poe_repair_min's correction is a LoRA on SDXL, and this drip shows it is a
 learned version of layer 8's interaction term. The maths comes before the build and teaches only
 what the build needs. I have passed quiz 12.1; any question it marked missed becomes a first rung.

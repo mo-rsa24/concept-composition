@@ -20,7 +20,7 @@ with a priority and a priced estimate, then launches the jobs no gate blocks. Th
 /home/molef/PhD/poe_repair_min and every cluster action goes through scripts/cluster.sh.
 
 Objectives
-1. Write the compute plan as a table in report/paper-review/prze-10-compute.md: job, node,
+1. Write the compute plan as a table in 1-lora-correction/report/paper-review/prze-10-compute.md: job, node,
    memory, images, hours with its basis (measured or estimate), priority, what it waits on.
 2. Record an 80% runtime and memory prediction for each wave 1 job before it starts.
 3. Launch wave 1 on mscluster112 and mscluster107 by the shared-device path, each after the user
@@ -28,14 +28,14 @@ Objectives
 4. Poll each job, count its outputs against the plan, and report any job that is stuck.
 
 What to read
-- report/paper-review/protocol.md (rules 1 to 10), held-out-set.md, layout-sheet.md (the slots
+- 1-lora-correction/report/paper-review/protocol.md (rules 1 to 10), held-out-set.md, layout-sheet.md (the slots
   R1 to R14 and the result file each one reads).
 - artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml: the one adapter and its seed.
 - environment/hpc/execution-protocol.md (the shared-device path and its safety rules, all
   mandatory), environment/hpc/throughput.md, environment/hpc/nodes.md, environment/storage.md.
 - scripts/cluster.sh and the launchers in scripts/ (review_step4_renders.sh,
   concept_pair_sheet.py, figure_candidates.py, joint_poe_adapter_grid.py): reuse, do not rewrite.
-- report/paper-review/prze-1, prze-2, prze-4, prze-11: the outcome lines each job feeds.
+- 1-lora-correction/report/paper-review/prze-1, prze-2, prze-4, prze-11: the outcome lines each job feeds.
 
 What is already known
 - The adapter of record is v58-03-self at step 30,000, shared seed 10

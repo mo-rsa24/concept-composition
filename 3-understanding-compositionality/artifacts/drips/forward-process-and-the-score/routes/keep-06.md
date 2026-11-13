@@ -1,9 +1,9 @@
 to: the forward-process-and-the-score walk (dispatch.md, on integrate)
 from: keep, piece 06 (the cosine schedule > the boundary values C_k by hand > where p_k comes from)
 
-destination: artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, Step 4 (uncommitted; `git diff` on that file is the review)
+destination: 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, Step 4 (uncommitted; `git diff` on that file is the review)
 
-kept: artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md (message 4695b76c-6650-4b3a-88ce-ea57ea736016 at 2026-10-21T07:24:11.815Z, saved word for word under a source header)
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md (message 4695b76c-6650-4b3a-88ce-ea57ea736016 at 2026-10-21T07:24:11.815Z, saved word for word under a source header)
 
 ## Where it went
 
@@ -59,4 +59,4 @@ Every relative link above resolves on disk, and each anchor appears exactly once
 
 ## For dispatch.md
 
-kept: artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md → artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-where-the-position-goes
+kept: 3-understanding-compositionality/artifacts/drips/forward-process-and-the-score/kept/06-where-p-k-comes-from.md → 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-where-the-position-goes

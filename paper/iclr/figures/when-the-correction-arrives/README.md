@@ -17,14 +17,14 @@ plain product-of-experts. Everything below is one of these.
 
 **`mcmc/`** will hold the same layouts with a Langevin corrector in place of the injected `r_t`,
 built by
-[the sampler-against-model scope](../../../../plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md).
+[the sampler-against-model scope](../../../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md).
 Empty until that scope's gate at step 26 has fired and its window sweep at step 27 has run.
 
 **`superdiff/`** will hold the SuperDiff arm from the same scope. Empty until step 28 wires the
 pipeline at 50 steps.
 
 **poe/samples-over-the-window-map.png** (with `.pdf` and `.json` siblings). The manuscript's
-timing figure, F4a and F4f combined in one render by `scripts/window_samples_over_map.py` so
+timing figure, F4a and F4f combined in one render by `1-lora-correction/scripts/window_samples_over_map.py` so
 the two halves share one x axis. Top: cat and dog at seeds 9 to 12, the final image per window
 position, a green frame where the scored verdict in `window_curves.json` is composed. Bottom:
 seeds composed out of 4 for all eight pairs, rows ordered strongest-first at the earliest
@@ -63,7 +63,7 @@ Effect size varies by pair, from 4 of 4 (seal and walrus, cow and buffalo at sta
 1 of 4 (leopard and jaguar).
 
 **Where they came from.** Dropped in during the section 4 walk from the window-sweep runs.
-The two coverage grids are `scripts/longer_correction_grid.py` and `scripts/later_start_grid.py`
+The two coverage grids are `1-lora-correction/scripts/longer_correction_grid.py` and `1-lora-correction/scripts/later_start_grid.py`
 at their default cat-and-dog seed 12, confirmed by matching their couch scene to the window
 map's seed 12 row. Which script rendered the sliding strip and the per-pair population map is
 still to be confirmed before a caption cites a path.
@@ -74,7 +74,7 @@ chain on the product-of-experts score settled to, against denoising step, one cu
 `k ∈ {0, 1, 5, 20, 100, 200}`, one panel per pair (a cat × a dog left, a butterfly × a flower
 meadow right), the two norms on a second row; grey shading is steps 0 to 10, where the sampler's
 and the model's errors cannot be told apart, green is the last five steps, the read zone. One
-figure per step size `δ_t = c·β_t`, seed 9, drawn by `scripts/corrector_residual_curve.py --plot`
+figure per step size `δ_t = c·β_t`, seed 9, drawn by `1-lora-correction/scripts/corrector_residual_curve.py --plot`
 from `corrector/residual_curves.json`. Every one printed the inconclusive branch of scope 06's
 step 26 (one seed's read-zone ratio scatters more than the 5% bars), so none is a main-text
 candidate; the sidecar carries the branch and every number. Their caption owes three sentences:
@@ -88,6 +88,6 @@ window in which a Langevin corrector (`k = 20` steps per level on the guided PoE
 `window_curves_mcmc.json` scores the render composed (validated instance count of at least 2),
 red otherwise. No frame is green: 0 of 4 in every column, where the injected `r_t` composes
 3 of 4 at steps 0 to 10. Early windows change the style (a cartoon, a line drawing), late
-windows change almost nothing. Rendered 2026-09-06 by `scripts/corrector_window_sweep.py
+windows change almost nothing. Rendered 2026-09-06 by `1-lora-correction/scripts/corrector_window_sweep.py
 --window-sweep` on mscluster108 and drawn by its `--figures`; `mcmc/` also holds the residual
 curves above, so the split by composition rule stands (`poe/` injected, `mcmc/` corrector).

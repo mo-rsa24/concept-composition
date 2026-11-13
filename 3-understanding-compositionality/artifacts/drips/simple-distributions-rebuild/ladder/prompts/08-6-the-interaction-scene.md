@@ -10,7 +10,7 @@ after layer 8's maths drip and reference have both run.
 the parts world, with the wet rule as a toggle and the noise level as a slider
 
 Background
-Layer 8 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) defined the
+Layer 8 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) defined the
 interaction term exactly in the parts world, the first half of the research goal. This scene puts
 the wet rule (the cat half shifts when a dog is present) on a toggle and the noise level on a
 slider, in my own notation, so I can see where r moves and where it does not.
@@ -29,7 +29,7 @@ What to read
   number per setting and level.
 - The docstring of rebuild/phase8_interaction.py: where r moved with the wet rule and where it did
   not.
-- artifacts/results/joint-against-poe-by-kind-of-composition/five-interactions.md: the wet dog at
+- 3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md: the wet dog at
   scale.
 
 What is already known
@@ -42,11 +42,11 @@ What is already known
   0.0 (the p1.abar_* keys in rebuild/out/walk-numbers.json).
 - With clean labels r is constant at t = 0 whether the wet rule is on or off, so the toggle changes r
   only where phase8.json shows it does, and the scene shows that, not the brick row's expectation
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1; the docstring of
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1; the docstring of
   rebuild/phase8_interaction.py).
 - On Stable Diffusion v1-4 the product paints rain streaks over a dry dog where the joint prompt
   gives wet fur, in 4 of 4 seeds
-  (artifacts/results/joint-against-poe-by-kind-of-composition/five-interactions.md).
+  (3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md).
 
 Rules
 - Every number on the scene comes from phase8.json, the p8. keys or the drip's dispatch.md, never
@@ -55,7 +55,7 @@ Rules
 
 What to hand back
 - One published scene, in my notation from dispatch.md.
-- Its URL in step 6 of artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md,
+- Its URL in step 6 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md,
   replacing "(URL lands here)".
 
 What you will see

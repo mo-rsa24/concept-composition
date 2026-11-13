@@ -111,11 +111,11 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- **One Blackwell is free.** `mscluster112` read idle on 2026-09-08; `mscluster110` is carrying another user's job and `mscluster111` is hardware-faulted and stays off the list until an administrator resets it ([nodes](../../../../environment/hpc/nodes.md)). Re-check this before launching, because it is a fact with a date on it.
-- **`co3_bw` on the Blackwell, never `co3`.** A `co3` CUDA operation there produces no output rather than an error ([nodes](../../../../environment/hpc/nodes.md)).
-- **`biggpu` allows one job per user**, so the chain runs over SSH with `nohup` rather than through Slurm, and is invisible to `squeue`. Harvest with `pgrep` on the node ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- **Every path on the launch line is absolute**, and the launcher is copied under the run's output root on `/datasets` before launch, because `/tmp` is node-local and a relative path resolves against the home directory rather than the repository ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- **The disk guard checks `/datasets`**, the filesystem the run actually writes to ([storage](../../../../environment/storage.md)).
+- **One Blackwell is free.** `mscluster112` read idle on 2026-09-08; `mscluster110` is carrying another user's job and `mscluster111` is hardware-faulted and stays off the list until an administrator resets it ([nodes](../../../../../environment/hpc/nodes.md)). Re-check this before launching, because it is a fact with a date on it.
+- **`co3_bw` on the Blackwell, never `co3`.** A `co3` CUDA operation there produces no output rather than an error ([nodes](../../../../../environment/hpc/nodes.md)).
+- **`biggpu` allows one job per user**, so the chain runs over SSH with `nohup` rather than through Slurm, and is invisible to `squeue`. Harvest with `pgrep` on the node ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- **Every path on the launch line is absolute**, and the launcher is copied under the run's output root on `/datasets` before launch, because `/tmp` is node-local and a relative path resolves against the home directory rather than the repository ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- **The disk guard checks `/datasets`**, the filesystem the run actually writes to ([storage](../../../../../environment/storage.md)).
 - **Harvest over SSH on the node itself.** The session node's view of `/datasets` lags by minutes, so a checkpoint count read from the session node can be wrong.
 - **Never edit the launcher while it is running.** Bash reads a script by byte offset, so an edit mid-run corrupts what it executes next.
 
@@ -237,7 +237,7 @@ The chain runs in the order P, C2, C1, C3, C4, so the parent and the child most 
 
 - [ ] **2.1 Write the five run configurations**, each differing from the parent by one flag.
   - **Done when:** `diff` between the parent's configuration and each child's is a single line, printed and checked, which is the mechanical form of the one-axis rule.
-- [ ] **2.2 Write the chain launcher** at `scripts/showcase/improve_r32_launch_chain.sh` in the repository, running P, C2, C1, C3, C4 in that order.
+- [ ] **2.2 Write the chain launcher** at `1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh` in the repository, running P, C2, C1, C3, C4 in that order.
   - It lives in the repository because that is the copy that gets edited and version-controlled; [the launch procedure](../../procedures/hypothesis-04-launch-the-chain.md#2-copy-the-launcher-onto-the-shared-disk) copies it to `/datasets/.../improve_r32/launch_chain.sh` and that copy is the one that runs.
   - Its interface, which the procedure depends on: `GPU=<index>` selects the device, `SMOKE=1` runs the 200-step smoke of the parent alone and exits, and `--dry-run` prints the five commands without executing them. The log header prints the node, the device index and the process id, each on its own line, with the process id line beginning `PID` so the procedure can read it back without a pattern match.
   - Three guards, all mandatory: a disk guard on `/datasets` aborting at 90%, a check that the Blackwell python exists at `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python`, and a device guard refusing a GPU over 1 GB in use or reporting no readable state.

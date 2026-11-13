@@ -15,4 +15,4 @@
 set -uo pipefail
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 export GPU=0 ARM="${ARM:?set ARM}"
-exec bash scripts/correction_loss_variants/run_arm.sh
+exec bash 1-lora-correction/scripts/correction_loss_variants/run_arm.sh

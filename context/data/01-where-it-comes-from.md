@@ -22,7 +22,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-two-filesystems) ➡️
 Two animal prompts (see [world/animal-pair.md](../world/animal-pair.md)) and a seed fix which
 model call is made. `poe_repair/pairs.py` names the base pair list; the fail-rate table that
 selects the current pool now lives at
-`artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` (the directory this file's
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` (the directory this file's
 sources were read from, `outputs/animals_compose_transfer/`, no longer exists on disk, see
 [Still open](../00-INDEX.md#still-open)). `data/pilot/seed_<n>/<slug>/` is the output layout for
 one pair-and-seed run, used by this project since the pilot stage. ✅
@@ -40,10 +40,10 @@ from `data/pilot/seed_42/a_cat__x__a_dog/summary.json`'s `model_id` field. ✅
 
 Because every step's latent state is needed to measure the interaction term and to decode
 intermediate estimates, the run caches enough to recompute the model's running estimate of the
-finished image at any step (the Tweedie-formula estimate `report/experiments-log.md`'s EXP-01 uses). This is
+finished image at any step (the Tweedie-formula estimate `1-lora-correction/report/experiments-log.md`'s EXP-01 uses). This is
 what lets several later measurements (the commitment step, and re-running the injection window
 across many settings) be re-derived from the cache alone, with no further GPU sampling, per
-`report/experiments-log.md`'s repeated "cache only" compute notes. 🔍
+`1-lora-correction/report/experiments-log.md`'s repeated "cache only" compute notes. 🔍
 
 > The Tweedie formula turns a noisy latent and the model's noise prediction at that step into the
 > model's best guess of the clean image it is heading toward. It is what makes an intermediate
@@ -62,7 +62,7 @@ and final magnitude. Full-pool runs write the equivalent to `outputs/<family>/` 
 distinct "animal" instances, and the rule in
 [world/compose-rate.md](../world/compose-rate.md#what-a-compose-rate-is) turns that count into a
 `compose` or `blend` label. Per-pair rates are aggregated across seeds
-(`artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`).
+(`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`).
 
 **⑥ Labelled runs feed figures and review-file verdicts.** ✍️
 
@@ -95,6 +95,6 @@ Navigation: ⬅️ [The two filesystems](#the-two-filesystems) | 📋 [TOC](#tab
 |---|---|---|
 | The render-method functions and their names | Read in `README.md`, repo layout section | 2026-08-24 |
 | One run's on-disk shape and its model id | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/summary.json` | 2026-08-24 |
-| The scorer's compose/blend rule | Read in `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
+| The scorer's compose/blend rule | Read in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
 | The two-filesystem split and its sync gaps | Read in `RETROFIT.md`, section 2 ("Moving") | 2026-08-24 |
-| The "cache only" measurement principle | Read in `report/experiments-log.md`, EXP-01 and EXP-04 compute notes | 2026-08-24 |
+| The "cache only" measurement principle | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 compute notes | 2026-08-24 |

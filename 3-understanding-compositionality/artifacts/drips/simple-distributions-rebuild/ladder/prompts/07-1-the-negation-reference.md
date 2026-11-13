@@ -10,7 +10,7 @@ In the background, build the layer 7 reference: rebuild/phase7_negation.py, nega
 toy and the parts world, and the same cell built from a positive "not B" label.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ reaches A without B in
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ reaches A without B in
 layer 7. The medical cells the project cares about (pneumothorax without drain) are A without B, and
 at the paper's own weight, negation sends mass off every mode when the experts have sharp tails.
 Claude writes the reference code in toy/rebuild/ one layer ahead, so that my own walk07.py has
@@ -49,12 +49,12 @@ Objectives
 What to read
 - rebuild/kinds.py, rebuild/phase3_kinds.py and rebuild/compose.py: the dial, its measures, its
   draw order and the notebook's weight.
-- artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figures 1 and 2:
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figures 1 and 2:
   the dial's values.
 - rebuild/ideal.py, rebuild/parts_world.py and rebuild/phase5_dial.py: the grid, the mixtures and
   layer 5's toys.
 - rebuild/walk_numbers.py: how worked numbers are written.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "A without B (negation)", and
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "A without B (negation)", and
   its Pins.
 
 What is already known
@@ -67,7 +67,7 @@ What is already known
   without B (negation)").
 - The kinds dial at w = 0, 0.02, 0.05, 0.1, 0.3, 1.0 has mass on the 2 in-bar modes 0.146, 0.121,
   0.085, 0.037, 0.0, 0.0 and mass away from every ring mode 0.387, 0.384, 0.391, 0.439, 0.863, 1.0
-  (artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 2;
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 2;
   REF_FIG2 in rebuild/phase3_kinds.py).
 - A is the ring, kinds.toy_gmm, 8 modes on a circle of radius 0.5, std 0.03, 800 points, and B is
   the bar, kinds.vbar(rng, 800, 0.0, 0.2), half-width 0.2, both ideal experts smoothed by 0.05;
@@ -81,7 +81,7 @@ What is already known
   rebuild.phase3_kinds draws the notebook's own data and matches every printed value (step file 03,
   step 12); an earlier draw put 0.891 off every mode at w = 0.3 (overlap-dial idea map, run 3).
 - Negation works only near w ≈ 0.05, where the exact in-bar mass is 0.10
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3; step file 03, step 11).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3; step file 03, step 11).
 - At w = 0.05 on the ring and bar, measure and total variation per sampler are perfect 0.09 and
   0.15, reverse diffusion 0.20 and 0.26, ULA 0.13 and 0.25, MALA 0.11 and 0.25, UHA 0.12 and 0.21,
   tuned MALA reaches 0.21 against the floor's 0.15 at acceptance 0.60, and ULA at the tuned steps
@@ -136,7 +136,7 @@ What to hand back
 - rebuild/out/walk-numbers.json rewritten, its 84 earlier keys and any p6. keys unchanged.
 - A report naming the w grid, the replay function's name, every p7. key with its value, and the
   brick row's new mark; steps 6 and 7 of
-  artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md read the keys and
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md read the keys and
   phase7.json.
 - The proof: python -m rebuild.phase7_negation prints "negation dial: matches"; then
   python -m rebuild.walk_numbers | grep 'p7\.' lists every p7. key; the evidence is

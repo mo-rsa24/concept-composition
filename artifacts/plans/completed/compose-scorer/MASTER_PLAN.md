@@ -50,7 +50,7 @@ them better. Concretely: a scorer module, a saved evidence set, and
    (cat×dog → compose AND wolf×husky → blend). This file is the cross-scope
    contract the sibling `does-the-fix-reach-unseen-pairs` scope reads as its
    precondition. If the gate fails, the file is NOT written and the scope halts.
-   ✓ verified: `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`
+   ✓ verified: `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`
    exists on disk (retrofit sweep, 2026-08-24; path renamed from `outputs/compose_scorer/` in
    this sweep, content untouched).
 4. ✅ F1 "scorer-works" figure produced (outputs pinned beside their three

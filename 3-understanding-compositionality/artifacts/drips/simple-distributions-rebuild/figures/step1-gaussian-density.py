@@ -8,7 +8,7 @@ from matplotlib.patches import Ellipse
 DARK_GREY = "#37474f"
 ANNOTATION = "#212121"
 
-root = Path(__file__).resolve().parents[4]
+root = Path(__file__).resolve().parents[5]
 values = json.loads((root / "rebuild/out/walk-numbers.json").read_text())
 peak = values["p1.normal_pdf_0_mu0_sd0.5"]
 one_sd = values["p1.normal_pdf_0.5_mu0_sd0.5"]

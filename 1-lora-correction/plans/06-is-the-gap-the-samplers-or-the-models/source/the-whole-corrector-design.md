@@ -20,7 +20,7 @@ catalogs, and adds new entries. New errors propagate to all affected plan files.
 
 **The whole design, in one file, and the source the scope's plan files are authored from.** It is
 not itself a plan and carries no live checkboxes: its eight task groups are steps 24 to 30 of the
-[root running order](../../../MASTER_PLAN.md), one plan each, listed in
+[root running order](../../../../MASTER_PLAN.md), one plan each, listed in
 [this scope's MASTER_PLAN.md](../MASTER_PLAN.md). Read it whole before authoring or executing any
 of them, then delete it once every task group has landed in a plan file.
 
@@ -66,7 +66,7 @@ one review file per plan.
 
 ## What this asks, in one line
 
-Run a [Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md) at every noise level so the latent settles into the distribution the
+Run a [Langevin corrector](../../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md) at every noise level so the latent settles into the distribution the
 product-of-experts score actually describes, then measure what is left of the correction at that
 settled point. The part that goes away when the chain settles belongs to the sampler. The part
 still there at the end of the run belongs to the model.
@@ -95,7 +95,7 @@ goes to zero.
 
 **Error B, the model's share.** `p(cat)·p(dog)` is not `p(cat and dog)`. Multiplying two
 distributions asks for one thing that is both animals, which is the
-[chimera](../../../context/world/chimera.md). No corrector touches
+[chimera](../../../../context/world/chimera.md). No corrector touches
 this, and it does not vanish at zero noise.
 
 **The corrector count, `k`.** How many unadjusted Langevin steps run at each of the 50 noise
@@ -116,7 +116,7 @@ a matched comparison across rules rather than four unrelated pictures.
 ⬅️ [Previous](#words-this-plan-uses) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
 The scope has a causal result and a timing result. Injecting `r_t` raises the
-[compose rate](../../../context/world/compose-rate.md) as more correction is added, while a norm-matched random
+[compose rate](../../../../context/world/compose-rate.md) as more correction is added, while a norm-matched random
 control stays at what you would get by luck, and injecting it only into steps 0 to 10 composes 0.656 of 32 runs while steps 20
 to 30 onward compose 0.000. Both are in
 [the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), which also records
@@ -124,7 +124,7 @@ that the correction is about 2.7 times larger late than early, so it works where
 and that tripling the amount added late changes almost nothing.
 
 The threat is that the same picture is what a sampler artifact looks like. Error A is worst at
-high noise, and high noise is the early steps, which is exactly the [window](../../../context/world/interaction-term.md#words-this-file-uses) that decides the
+high noise, and high noise is the early steps, which is exactly the [window](../../../../context/world/interaction-term.md#words-this-file-uses) that decides the
 outcome. Nothing measured so far tells the two apart, because `r_t` is both of them added
 together and no run in this repo has ever separated them.
 
@@ -137,7 +137,7 @@ existing correctors reduce the gap without closing it. Read together they predic
 result, so this plan is designed to return a size rather than a verdict.
 
 Du et al.'s sampler code is already vendored here, at
-[composition/reduce_reuse_recycle/anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py).
+[composition/reduce_reuse_recycle/anneal_samplers.py](../../../../composition/reduce_reuse_recycle/anneal_samplers.py).
 `AnnealedULASampler` is 25 lines and is the reference the new composer follows.
 
 ---
@@ -204,9 +204,9 @@ leaves a part that does not go away. What it leaves at the low-noise end of the 
 error, `p(cat)·p(dog) ≠ p(cat and dog)`.
 
 **Independent variable.** The corrector count `k ∈ {0, 1, 5, 20, 100, 200}` at a step size fixed
-by task 3, and nothing else. Same pair, same [seed](../../../context/world/animal-pair.md#words-this-file-uses), same 50 DDIM steps, same guidance 7.5.
+by task 3, and nothing else. Same pair, same [seed](../../../../context/world/animal-pair.md#words-this-file-uses), same 50 DDIM steps, same guidance 7.5.
 
-**Dependent variables.** Per [denoising step](../../../context/world/poe-composition.md#words-this-file-uses) `t` and per `k`: the numerator
+**Dependent variables.** Per [denoising step](../../../../context/world/poe-composition.md#words-this-file-uses) `t` and per `k`: the numerator
 `‖eps_J(x_t^(k)) - eps_PoE(x_t^(k))‖₂`, the denominator `‖eps_PoE(x_t^(k))‖₂`, their ratio, and
 the relative chain displacement. All in fp32, upcast from the fp16 the models run in.
 
@@ -221,7 +221,7 @@ the relative chain displacement. All in fp32, upcast from the fp16 the models ru
 | the chain has not equilibrated at the largest `k` | the `k=100` against `k=200` comparison, with an instability bound in source |
 
 **Falsify condition, three-way, at the thresholds written before the run.** They live in source as
-constants in `scripts/corrector_residual_curve.py`, following the `MIN_MEDIAN_RATIO` pattern, so
+constants in `1-lora-correction/scripts/corrector_residual_curve.py`, following the `MIN_MEDIAN_RATIO` pattern, so
 they cannot be moved after the answer is visible.
 
 - **Support, the split is real.** Over the last five denoising steps, the ratio at the `k` where
@@ -248,7 +248,7 @@ they cannot be moved after the answer is visible.
 ⬅️ [Previous](#the-claim) | 📋 [TOC](#table-of-contents) | [Next](#what-happens-visual) ➡️
 
 The paper's argument is that a small, shared, learnable correction fixes composition, and that a
-[rank-8](../../../context/world/lora-corrector.md#words-this-file-uses) adapter can carry it. If most of `r_t` is error A, a training-free corrector gets most of
+[rank-8](../../../../context/world/lora-corrector.md#words-this-file-uses) adapter can carry it. If most of `r_t` is error A, a training-free corrector gets most of
 the same benefit and the adapter is answering a question the sampler had already solved. That is
 the strongest reviewer objection available against this work, and
 [the two literature checks before print](../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md) already cite the paper that raises it.
@@ -357,7 +357,7 @@ share a plan file because the second is only worth running under some outcomes o
 the condition between them is written into the tasks rather than left to judgement.
 
 The corrector follows
-[poe_internal.py](../../../poe_repair/composers/poe_internal.py)'s per-step intervention
+[poe_internal.py](../../../../poe_repair/composers/poe_internal.py)'s per-step intervention
 pattern and the vendored `AnnealedULASampler`. At noise level `t` the drift is the
 product-of-experts score `s_t = -eps_PoE / sqrt(1 - ᾱ_t)`. The update is
 `x ← x + δ_t·s_t + sqrt(2·δ_t)·z` with `z` standard normal, repeated `k` times. Then the ordinary
@@ -394,7 +394,7 @@ passes, two grids comparing three composition rules along one amount axis.
 - Everything writes under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/`.
   `/home-mscluster` hit 100% once and silently killed checkpointing, so the job script carries a
   disk guard on `/datasets`, the filesystem it actually writes to, per
-  [environment/storage.md](../../../environment/storage.md).
+  [environment/storage.md](../../../../environment/storage.md).
 - biggpu allows one job per user, so the `k` grid runs under `nohup` outside Slurm and `squeue` is
   blind to it. Harvest by `pgrep -af 'corrector|sweep'` on the session node.
 - The models run in fp16. Every norm upcasts to fp32 before it is taken, since the differences
@@ -481,8 +481,8 @@ Run group: **hypothesis**, the measuring-tool half.
 ◀ **Needs: task 0.2**, so the build is not duplicating something already here.
 
 - [ ] **2.1** Write `poe_repair/composers/poe_langevin.py`, beside
-      [poe.py](../../../poe_repair/composers/poe.py), following
-      [poe_internal.py](../../../poe_repair/composers/poe_internal.py)'s per-step
+      [poe.py](../../../../poe_repair/composers/poe.py), following
+      [poe_internal.py](../../../../poe_repair/composers/poe_internal.py)'s per-step
       intervention pattern and the vendored `AnnealedULASampler`. Arguments: `k`, the [step-size
       multiplier](../MASTER_PLAN.md#glossary) `c`, and a `corrector_window` tuple so the corrector can be on inside a range and
       off elsewhere. Method name format follows `poe_internal.py`'s: `poe_langevin_k<NNN>_c<NNN>`,
@@ -527,7 +527,7 @@ already written in [The claim](#the-claim). No images, no detector, no scorer.
 
 ◀ **Needs: task 3.3**, the fixed step size.
 
-- [ ] **4.1** Write `scripts/corrector_residual_curve.py` with the five thresholds as module-level
+- [ ] **4.1** Write `1-lora-correction/scripts/corrector_residual_curve.py` with the five thresholds as module-level
       constants: `MIN_DROP_FOR_SPLIT = 0.20`, `MIN_REMAINDER_FOR_SPLIT = 0.20`,
       `MAX_DRIFT_FOR_NULL = 0.05`, `MIN_CHAIN_DISPLACEMENT = 0.05`, `MAX_K_INSTABILITY = 0.05`.
       They sit in source so moving one after seeing the answer shows up in a diff.
@@ -613,7 +613,7 @@ Run group: **baseline**.
       `r_t^M = eps_J - eps_M`. Four rows: product-of-experts with `r_t`, SuperDiff with `r_t^SD`,
       corrector at `k=1` with `r_t^(1)`, corrector at `k=5` with `r_t^(5)`.
 - [ ] **7.2** Grid one: columns are seeds 9 to 12, `λ` fixed at 0.75, the value
-      [F5](../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at.
+      [F5](../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at.
       Render the same grid at `λ=0` in the same pass, which gives the methods-alone figure for
       free.
 
@@ -641,7 +641,7 @@ Run group: **idea**. Blocked on a full read because no usable implementation was
 returned a null, the Feynman-Kac read is a related-work paragraph and this task closes unrun.
 
 - [ ] **8.1** Promote [arXiv 2503.02819](https://arxiv.org/abs/2503.02819) from its abstract-level
-      row in [the reading register](../../standing/literature/reading-register.md) to a full
+      row in [the reading register](../../../../plans/standing/literature/reading-register.md) to a full
       read, and record what would have to be implemented and at what cost.
 - [ ] **8.2** Decide in the review file whether it is built or cited, and say which, with the
       reason.
@@ -652,7 +652,7 @@ returned a null, the Feynman-Kac read is a related-work paragraph and this task 
       [the review file](the-questions-pre-registered-against-it.md), including the
       ones whose answer is "not run and why".
 - [ ] **C.2** Fold the size into
-      [the idea map's claim 2](../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
+      [the idea map's claim 2](../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
       and delete that map's `/frame-hypothesis` route row, per its own rule that a route row is
       deleted once the result is folded back in.
 - [ ] **C.3** Update
@@ -730,21 +730,21 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
 
 # The leak checks. Both must pass before any measurement is believed.
-$PY scripts/corrector_residual_curve.py --check-identity --pair a_cat__x__a_dog --seed 9
-$PY scripts/corrector_residual_curve.py --check-identity --window off --k 200 \
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --check-identity --pair a_cat__x__a_dog --seed 9
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --check-identity --window off --k 200 \
     --pair a_cat__x__a_dog --seed 9
 
 # The step-size search, in-session, before the grid.
-$PY scripts/corrector_residual_curve.py --step-size-search --k 20 --pair a_cat__x__a_dog --seed 9
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --step-size-search --k 20 --pair a_cat__x__a_dog --seed 9
 
 # The grid, outside Slurm because biggpu allows one job per user.
-nohup bash scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
+nohup bash 1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > "$OUT/curve.log" 2>&1 &
 pgrep -af 'corrector|run_corrector'          # squeue is blind to this
 
 # Harvest: the file, then the verdict.
 $PY -c "import json;d=json.load(open('$OUT/residual_curves.json'));print(len(d['rows']),'rows')"
 # expect 2 pairs x 6 k-values x 50 steps = 600 rows
-$PY scripts/corrector_residual_curve.py --verdict     # prints which of the three branches fired
+$PY 1-lora-correction/scripts/corrector_residual_curve.py --verdict     # prints which of the three branches fired
 ```
 
 **Done when** `residual_curves.json` has its 600 rows, the verdict has printed one of the three
@@ -808,8 +808,8 @@ SuperDiff is a published rule a reviewer will ask about either way.
 |---|---|
 | the verdict from task 4 | the review file, then [the two literature checks before print](../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md), which currently cites a paper for a claim this makes into a number |
 | a figure lands in `mcmc/` or `superdiff/` | that folder's `README.md` gains an entry naming the algorithm and what produced it, per this repo's artifact rule |
-| the full reads happen | [the reading register](../../standing/literature/reading-register.md) rows for 2302.11552, 2412.17762 and 2503.02819 move from abstract-level to full read. They are promotions of rows dated 2026-08-12, not first reads |
-| the size is measured | [the idea map's claim 2](../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), and its route row is deleted |
+| the full reads happen | [the reading register](../../../../plans/standing/literature/reading-register.md) rows for 2302.11552, 2412.17762 and 2503.02819 move from abstract-level to full read. They are promotions of rows dated 2026-08-12, not first reads |
+| the size is measured | [the idea map's claim 2](../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), and its route row is deleted |
 | the plan's status | the scope [MASTER_PLAN.md](../../03-does-the-correction-cause-composition/MASTER_PLAN.md) table and the root running order, both by `sync-plan-tree` rather than by hand |
 
 ---
@@ -820,12 +820,12 @@ SuperDiff is a published rule a reviewer will ask about either way.
 
 | Path | Why it is read |
 |---|---|
-| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedULASampler` at line 218 is the 25-line reference the new composer follows, and `inf_sample.py` line 230 is where its step size `betas * 0.035` at `k=20` comes from |
-| [poe_repair/composers/poe_internal.py](../../../poe_repair/composers/poe_internal.py) | the per-step intervention pattern, the method-name format, and the `correction_window` argument shape |
-| [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses |
-| [scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py) | `check_identity` at line 71, the leak-check pattern task 2.2 reuses |
-| [scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1 has to unpick |
-| [scripts/interaction_term_dose_matched.py](../../../scripts/interaction_term_dose_matched.py) | the `--mode matched` setting task 7.4 reuses so rows deliver comparable totals |
+| [composition/reduce_reuse_recycle/anneal_samplers.py](../../../../composition/reduce_reuse_recycle/anneal_samplers.py) | `AnnealedULASampler` at line 218 is the 25-line reference the new composer follows, and `inf_sample.py` line 230 is where its step size `betas * 0.035` at `k=20` comes from |
+| [poe_repair/composers/poe_internal.py](../../../../poe_repair/composers/poe_internal.py) | the per-step intervention pattern, the method-name format, and the `correction_window` argument shape |
+| [poe_repair/composers/poe.py](../../../../poe_repair/composers/poe.py) | the three-branch guided product-of-experts the corrector's drift uses |
+| [1-lora-correction/scripts/interaction_term_window.py](../../../scripts/interaction_term_window.py) | `check_identity` at line 71, the leak-check pattern task 2.2 reuses |
+| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1 has to unpick |
+| [1-lora-correction/scripts/interaction_term_dose_matched.py](../../../scripts/interaction_term_dose_matched.py) | the `--mode matched` setting task 7.4 reuses so rows deliver comparable totals |
 
 ---
 

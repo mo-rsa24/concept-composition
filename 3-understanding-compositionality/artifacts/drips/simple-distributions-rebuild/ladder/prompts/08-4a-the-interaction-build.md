@@ -9,11 +9,11 @@ after quiz 8.2.
 /drip-execute-plan --request the interaction term in the parts world with a wet rule (the cat half
 shifts when a dog is present), computed exactly from the Gaussian mixtures and plotted, then r_t and
 its gradient at each noise level, as layer 8 of
-artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
 ~/Playground/PhD/simple-distributions-walk/walk08.py
 
 Background
-This is layer 8's first build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 8's first build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type the interaction term from an empty file, one piece per round. The interaction term is the
 first half of the research goal, and it is defined exactly here before any learned version of it is
 trusted. Claude's reference is rebuild/interaction.py and rebuild/phase8_interaction.py, built in
@@ -41,9 +41,9 @@ What to read
 - rebuild/interaction.py, rebuild/phase8_interaction.py and its docstring, rebuild/out/phase8/phase8.json
   and the p8. keys in rebuild/out/walk-numbers.json (step 0): the reference and where r moved.
 - The layer 8 maths drip folder under artifacts/drips/ and its dispatch.md (step 2): my notation.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
   exact".
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
@@ -53,7 +53,7 @@ What is already known
   term, exact").
 - When each label is a fixed function of the image, r is exactly constant, so the wet rule alone
   does not move r at t = 0, and it shows in r_t at t > 0, off the joint's support, and for experts
-  whose training sets lack the wet A∩B images (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim
+  whose training sets lack the wet A∩B images (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim
   7.1; step 0's reference, the docstring of rebuild/phase8_interaction.py).
 - The parts world is rebuild/parts_world.py: 16 pixels, HEAD 0 to 7 and BODY 8 to 15, LEFT and RIGHT
   halves, a cat +1 and a dog −1 on their pixels with variance 0.01; Mixture.noised(abar) gives

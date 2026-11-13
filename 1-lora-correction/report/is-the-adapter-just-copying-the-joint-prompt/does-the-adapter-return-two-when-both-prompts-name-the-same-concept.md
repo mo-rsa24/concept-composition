@@ -3,7 +3,7 @@
 **The claim**
 
 Asked for a dog and a dog, the two experts agree, so nothing contends for the same region on
-semantic grounds, and plain [product-of-experts composition](../../context/world/poe-composition.md#what-poe-composition-is) still returns a single dog. The
+semantic grounds, and plain [product-of-experts composition](../../../context/world/poe-composition.md#what-poe-composition-is) still returns a single dog. The
 adapter returns two. The same holds for a cat and a cat. What the adapter supplies is therefore
 not a way of telling two different concepts apart, since there are no different concepts here.
 
@@ -43,12 +43,12 @@ tiles listed in
 - **The same five cells through two more checkpoints**, so the claim is about the method rather
   than one adapter.
 - **A species check on the second animal**, which needs a reader or a detector that can tell a
-  dog from a horse, and the project's [instance counter](../../context/world/compose-rate.md#what-people-get-wrong) cannot.
+  dog from a horse, and the project's [instance counter](../../../context/world/compose-rate.md#what-people-get-wrong) cannot.
 
 ## Where this came from
 
 | What | How it was established | When |
 |---|---|---|
 | The five cells and their counts | read by eye from the renders named in the figure's sidecar | 2026-09-24 |
-| The figure | `scripts/main_study_grids.py` | 2026-09-24 |
-| The renders | `scripts/figure_candidates.py`, columns `mono`, `poe` and `ours`, adapter `v58-03-self` step 50,000 | 2026-09-24 |
+| The figure | `5-text-embedding-third-expert/scripts/main_study_grids.py` | 2026-09-24 |
+| The renders | `1-lora-correction/scripts/figure_candidates.py`, columns `mono`, `poe` and `ours`, adapter `v58-03-self` step 50,000 | 2026-09-24 |

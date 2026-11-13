@@ -14,7 +14,7 @@ starting noise:
 | x_fix | x_raw + E("") | 1 (seed 3); wallpaper on 3 seeds |
 | x_aff | x_raw + 2E(""), the version an affine UNet would make exact | 0 |
 
-The sheet: [dog-and-cat-sheet.png](../../results/what-the-and-vector-is-made-of/dog-and-cat-sheet.png).
+The sheet: [dog-and-cat-sheet.png](../../../5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/dog-and-cat-sheet.png).
 The pass mark, written before rendering, was 4 of 7.
 
 **Why it fails, measured before any picture.** CLIP's text encoder is causal, so the start token's
@@ -23,12 +23,12 @@ half). x_raw is mostly that start token negated. Adding E("") cancels it, but th
 depend on the prompt before them, so they keep 0.57 of a prompt's padding norm ("dog and cat"; 0.77
 for "a cat and a dog"), and the content positions come out larger than a real prompt's. The vector
 SDXL is handed looks like no prompt it was trained on, and it draws texture.
-[The norm chart](../../results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png).
+[The norm chart](../../../5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png).
 
 ## 2. A third expert restores how many animals, never which
 
 Seven phrases and two lower weights of x_fix were tried as the third expert, same seeds and noise
-([the phrase sheet](../../results/what-the-and-vector-is-made-of/dog-and-cat-phrases-sheet.png)).
+([the phrase sheet](../../../5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/dog-and-cat-phrases-sheet.png)).
 The two strongest, read tile by tile:
 
 | third expert beside "dog" and "cat" | a clear cat and a clear dog, of 7 | two animals, each a cat-dog hybrid, of 7 |
@@ -46,7 +46,7 @@ missing "and", even in its most complete form, restores the count and not the id
 **Turning x down does not help.** At weights 0.1 to 0.5, PoE with x returns its own hybrid on every
 seed; the two-animal picture on seed 3 appears only at 0.75 and 1, the same weights that turn other
 seeds to wallpaper or printed text
-([the weight sweep](../../results/what-the-and-vector-is-made-of/dog-and-cat-weight-sweep-sheet.png)).
+([the weight sweep](../../../5-text-embedding-third-expert/artifacts/results/what-the-and-vector-is-made-of/dog-and-cat-weight-sweep-sheet.png)).
 
 **How strong this is.** Eight seeds, one pair, calls made by Claude from the sheets, not yet checked
 by a second reader, except the two rows in the table, which are the researcher's own calls.
@@ -57,7 +57,7 @@ The missing piece is not a fixed offset in text space, because the UNet's respon
 is far from affine on these four prompts. Two routes stay open: learn the third condition (textual
 inversion against the cached joint scores, or a new word that names neither animal), or learn
 weights (the existing LoRA, which composes on 7 of 8 seeds in the remedies table of
-[the write-up](../../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#91-the-remedies-by-where-they-act)).
+[the write-up](../../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#91-the-remedies-by-where-they-act)).
 
 **Where the record is.** The walk's map, with every claim and run:
-[the "and" vector idea map](../../ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md).
+[the "and" vector idea map](../../../5-text-embedding-third-expert/artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md).

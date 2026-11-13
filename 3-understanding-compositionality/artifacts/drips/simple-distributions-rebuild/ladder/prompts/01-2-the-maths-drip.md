@@ -7,10 +7,10 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 ```text
 /drip --math the forward process, the cosine schedule, and why the noise prediction is the score
 rescaled, as steps 4, 5 and 8 of
-artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md set them out
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md set them out
 
 Background
-This is layer 1 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: one 2D
+This is layer 1 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: one 2D
 diffusion expert, built and understood before any composing. The maths comes before the build, and
 teaches only the derivation the build needs. I have passed quiz 1.1; any question it marked missed
 becomes a first rung.
@@ -23,7 +23,7 @@ Objectives
 4. Check the conditional identity on the worked instance below, by hand.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, steps 4, 5 and 8: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md, steps 4, 5 and 8: the
   derivation in this walk's notation.
 - toy/rebuild/out/walk-numbers.json: every worked number, as the p1. keys.
 - Quiz 1.1's results: the misses that become first rungs.

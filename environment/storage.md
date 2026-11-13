@@ -51,7 +51,7 @@ the `df` check every job script runs before writing.
 target filesystem is too full (see `hpc/execution-protocol.md` step 4).
 
 **The guard must check the filesystem the script actually writes to, not an assumed one.**
-`scripts/mechanism_study/run_dose_sweep.sh` set its output root under the repo on
+`1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh` set its output root under the repo on
 `/home-mscluster` while its disk guard read `df /datasets/mmolefe`, so 3.4GB of that run's
 per-setting output landed on the wrong mount with the guard reporting healthy the whole time. This is logged as
 `poe-disk-001` in `known-failures.md`. A recent series of commits (`54b4b79`, `8522459`,
@@ -69,5 +69,5 @@ exists to catch this, and is a standing recurring plan rather than a finished on
 
 ## Cross-references
 
-- The mention of **disk guard** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md), task 5.1.
-- The mention of **disk guard** in [the PRZE-10 compute plan](../report/paper-review/prze-10-compute.md), fourth outcome.
+- The mention of **disk guard** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md), task 5.1.
+- The mention of **disk guard** in [the PRZE-10 compute plan](../1-lora-correction/report/paper-review/prze-10-compute.md), fourth outcome.

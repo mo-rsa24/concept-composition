@@ -45,7 +45,7 @@ rather than inferred.
 Reads the cache and decodes; it does not sample.
 
 Usage:
-    python scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40
+    python 3-understanding-compositionality/scripts/xhat0_readback.py --pair a_cat__x__a_dog --seed 1 --steps 10 25 40
 """
 
 from __future__ import annotations
@@ -59,7 +59,7 @@ import torch
 from PIL import Image
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair._sdxl.metrics import guided_eps, poe_eps, tweedie_mean  # noqa: E402
 from poe_repair._sdxl.sdipc_utils import decode_latents_to_tensor  # noqa: E402

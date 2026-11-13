@@ -13,7 +13,7 @@ is 66 hard pairs, the size of the Attend-and-Excite animal set.
 ## What a hard pair is (unchanged)
 
 A competing pair whose joint prompt shows both named things on fewer than 4 of 8 seeds
-(report/paper-review/held-out-set.md). No concept pair may be a training pair or a tuning pair
+(1-lora-correction/report/paper-review/held-out-set.md). No concept pair may be a training pair or a tuning pair
 (protocol rule 4), and the new pairs are fixed in held-out-set.md before any adapter result on them
 exists.
 

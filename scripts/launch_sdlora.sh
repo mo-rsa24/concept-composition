@@ -5,7 +5,7 @@
 #
 # Mirrors the phase-1 PoE runs (phase1_r{8,16,32}_100k: 2000 epochs x 50 optimizer steps,
 # batch 1, AdamW 1e-4, alpha = rank, attn2.to_q/k/v) with two differences: the cache is
-# SuperDiff's trajectory at kappa 0.5 (scripts/build_superdiff_cache.py) and the step composes
+# SuperDiff's trajectory at kappa 0.5 (1-lora-correction/scripts/build_superdiff_cache.py) and the step composes
 # the three branches with SuperDiff's AND blend (--compose superdiff). Inline PoE sampling is
 # off: it would render with the wrong sampler for this adapter. Every path is absolute; the
 # script cd's into the repo itself, so the SSH launch line needs no working directory.

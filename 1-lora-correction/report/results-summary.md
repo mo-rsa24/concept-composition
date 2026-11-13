@@ -33,7 +33,7 @@ DATA=/datasets/mmolefe/poe_repair_min/artifacts
 **Walk it**
 ```bash
 CUDA_VISIBLE_DEVICES="" $PY -c "import torch; sd=torch.load('$REPO/rung1-overfit/lora/a_cat__x__a_dog/seed_42/run__local/checkpoints/lora_step_062500.pt',map_location='cpu',weights_only=True); print(len([k for k in sd.get('lora_state',sd) if 'lora' in k.lower()]),'lora keys')"   # 420
-$PY scripts/build_lora_manifest.py && bash scripts/run_lora_inspector.sh   # → http://localhost:5050 : LoRA-residual + MDS-large tabs
+$PY 1-lora-correction/scripts/build_lora_manifest.py && bash 1-lora-correction/scripts/run_lora_inspector.sh   # → http://localhost:5050 : LoRA-residual + MDS-large tabs
 ```
 
 ---
@@ -57,7 +57,7 @@ $PY scripts/build_lora_manifest.py && bash scripts/run_lora_inspector.sh   # →
 **Walk it**
 ```bash
 cat "$DATA/rung2-survive-noise/cross_seed/a_cat__x__a_dog/taskB__k04_ep2000_resumed__wandb-pueuo7bl/verdict.json"   # {"verdict":"ok","epoch":2000,"optimizer_step":100000}
-$PY scripts/cross_seed_lora_pooling/render_seed_summary.py --pooled-run "$DATA/rung2-survive-noise/cross_seed/a_cat__x__a_dog/taskB__k04_ep2000_resumed__wandb-pueuo7bl"   # held-out-seed grid
+$PY 1-lora-correction/scripts/cross_seed_lora_pooling/render_seed_summary.py --pooled-run "$DATA/rung2-survive-noise/cross_seed/a_cat__x__a_dog/taskB__k04_ep2000_resumed__wandb-pueuo7bl"   # held-out-seed grid
 ```
 
 ---

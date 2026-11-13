@@ -9,12 +9,12 @@
 # Concept A alone, concept B alone, joint prompt, plain PoE and SuperDiff for each pair and seed,
 # one column per process so SuperDiff's own SDXL never shares a card with the repo's.
 #
-#   PAIRS="a dog|rain" SEEDS="1 2 4 9 10" sbatch scripts/concept_pair_sheet.sbatch
-#   COLUMNS=pushes SEEDS=10 sbatch --partition=biggpu --nodelist=mscluster110 scripts/concept_pair_sheet.sbatch
-#   COLUMNS=superdiff sbatch --partition=biggpu --nodelist=mscluster110 scripts/concept_pair_sheet.sbatch
+#   PAIRS="a dog|rain" SEEDS="1 2 4 9 10" sbatch 3-understanding-compositionality/scripts/concept_pair_sheet.sbatch
+#   COLUMNS=pushes SEEDS=10 sbatch --partition=biggpu --nodelist=mscluster110 3-understanding-compositionality/scripts/concept_pair_sheet.sbatch
+#   COLUMNS=superdiff sbatch --partition=biggpu --nodelist=mscluster110 3-understanding-compositionality/scripts/concept_pair_sheet.sbatch
 #
 # Tiles land under the concept_pair_sheet tree; the sheet is built on the laptop afterwards by
-# scripts/concept_pair_sheet.py --sheet.
+# 3-understanding-compositionality/scripts/concept_pair_sheet.py --sheet.
 set -uo pipefail
 REPO=${SLURM_SUBMIT_DIR:?submit from the repo root}
 OUT=/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet
@@ -39,14 +39,14 @@ cd "$REPO" || exit 7
 IFS=';' read -ra PAIR_LIST <<< "$PAIRS"
 for column in $COLUMNS; do
   if [ "$column" = pushes ]; then
-    # The per-step pushes on PoE's own path (scripts/concept_pair_pushes.py), one run per pair and seed.
+    # The per-step pushes on PoE's own path (3-understanding-compositionality/scripts/concept_pair_pushes.py), one run per pair and seed.
     for pair in "${PAIR_LIST[@]}"; do for seed in $SEEDS; do
-      "$PY" scripts/concept_pair_pushes.py --pair "$pair" --seed "$seed" \
+      "$PY" 3-understanding-compositionality/scripts/concept_pair_pushes.py --pair "$pair" --seed "$seed" \
         || { echo "pushes $pair seed $seed failed" >&2; exit 9; }
     done; done
     continue
   fi
-  "$PY" scripts/concept_pair_sheet.py --column "$column" --pairs "${PAIR_LIST[@]}" --seeds $SEEDS \
+  "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column "$column" --pairs "${PAIR_LIST[@]}" --seeds $SEEDS \
     || { echo "column $column failed" >&2; exit 8; }
 done
 echo "=== done $(date -Is): $(find "$OUT" -name "*.png" -not -path "*_superdiff_raw*" | wc -l) tiles under $OUT"

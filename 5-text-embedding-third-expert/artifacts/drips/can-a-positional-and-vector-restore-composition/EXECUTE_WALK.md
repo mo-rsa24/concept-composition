@@ -1,6 +1,6 @@
 # Execute walk: the positional "and" vector
 
-**Plan:** [the plan it walked](../../plans/completed/today-the-positional-and-vector.md)
+**Plan:** [the plan it walked](../../../../artifacts/plans/completed/today-the-positional-and-vector.md)
 **Mode:** `--request`, depth 0 (every piece needed)
 **Branch:** work stays on `exec/does-the-hybrid-fit-both-captions`, the branch the worktree was on; another
 session holds `context/world/compose-rate.md` and a scope-06 plan file modified, so nothing is committed
@@ -24,7 +24,7 @@ Piece 1 of 5 ticked. Piece 2 running.
 |---|---|
 | 1.1 `x_pos` and its columns in `and_vector_sheet.py` | `x_pos` and `poe_x_pos` in `COLUMNS`, appended to `PHRASES` and `SWEEP` through the new `BY_KEY` lookup, plus a `positional` set; `py_compile` exit 0 |
 | 1.2 `x_pos` and the build check in `and_vector_norms.py` | `word_pairs` and `positional_x` added, the bar in source as `SCAFFOLD_MAX_DIFF = 0.0`, four series in the figure |
-| 1.3 the norm table | largest absolute difference from the joint prompt at the start token, the end token and all 72 pads: **0**, allowed 0. Only positions 1 and 3 differ at all. `artifacts/results/the-positional-and-vector/dog-and-cat-norms.json` and `.png` |
+| 1.3 the norm table | largest absolute difference from the joint prompt at the start token, the end token and all 72 pads: **0**, allowed 0. Only positions 1 and 3 differ at all. `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/dog-and-cat-norms.json` and `.png` |
 
 ## What the table taught, applied forward
 
@@ -60,7 +60,7 @@ None. The plan was written by this walk.
 
 ## Closing pass still owed
 
-- [ ] file the figure and its card under `artifacts/results/the-positional-and-vector/`
+- [ ] file the figure and its card under `5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/`
 - [ ] the `x_pos` row in `supervisor-meeting/README.md` section 1
 - [ ] the result back into the idea map's claim 2 and its runs table
 - [ ] `/verify-plan` and `/xref-pillar` on the new plan file

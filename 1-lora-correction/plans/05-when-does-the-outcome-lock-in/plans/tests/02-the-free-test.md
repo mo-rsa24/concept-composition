@@ -100,7 +100,7 @@ unless the recompute path is taken, in which case log it to `prime_lab/poe-repai
 <details>
 <summary>Environment Facts This Plan Depends On</summary>
 
-- The `co3` absolute python path; see [the environment index](../../../../environment/00-INDEX.md).
+- The `co3` absolute python path; see [the environment index](../../../../../environment/00-INDEX.md).
 - Large artifacts to `/datasets` only; disk guard on the target filesystem.
 - fp16 upcast rule when computing `x0_hat` (drift at late steps is small; do the arithmetic in fp32).
 
@@ -153,7 +153,7 @@ Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-cont
 
 Navigation: ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The drift script** `scripts/commitment/posterior_drift.py`: per pair-and-seed run, the
+1. **The drift script** `1-lora-correction/scripts/commitment/posterior_drift.py`: per pair-and-seed run, the
    drift curve, the settling step under a threshold in source (`DRIFT_SETTLED_MAX`, the relative
    drift below which all remaining steps must stay), and a JSON row per run carrying the
    settling step, that run's divergence step, and the lag.
@@ -194,7 +194,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
   - Inspect one pair-and-seed run's files; print which tensors exist per step and their shapes.
   - **Done when:** the review file's orientation paragraph records "epsilons cached: yes/no"
     and, if no, the measured recompute time for a single pair-and-seed run, which prices the grid.
-- [ ] **1.2** Write `scripts/commitment/posterior_drift.py` per the Description, thresholds
+- [ ] **1.2** Write `1-lora-correction/scripts/commitment/posterior_drift.py` per the Description, thresholds
   `DRIFT_SETTLED_MAX` and `ORDERING_HOLDS_FRAC_MIN = 1.0` in the source.
   - **Done when:** the script runs on one pair-and-seed run and emits its drift curve and
     settling step.
@@ -208,7 +208,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 - [ ] **2.1** Run the drift script over everything in the cache.
 
     ```bash
-    co3 python scripts/commitment/posterior_drift.py --all-cells \
+    co3 python 1-lora-correction/scripts/commitment/posterior_drift.py --all-cells \
       --out /datasets/mmolefe/poe_repair_min/outputs/commitment/posterior_drift/
     ```
 

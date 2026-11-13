@@ -71,7 +71,7 @@ In phase 2, MALA at the notebook's step 0.001 accepts 0.96 to 0.98 of moves, wit
 
 ## 4. Phase 5's curves
 
-The curves are in [the overlap-dial curves](../../../../toy/rebuild/out/phase5/overlap-dial-curves.png), the quadrant pictures in [the overlap-dial pictures](../../../../toy/rebuild/out/phase5/overlap-dial-quadrant-pictures.png), and the fine-tune in [the fine-tune curves](../../../../toy/rebuild/out/phase5/finetune-curves.png) and [pictures](../../../../toy/rebuild/out/phase5/finetune-pictures.png).
+The curves are in [the overlap-dial curves](../../../../../toy/rebuild/out/phase5/overlap-dial-curves.png), the quadrant pictures in [the overlap-dial pictures](../../../../../toy/rebuild/out/phase5/overlap-dial-quadrant-pictures.png), and the fine-tune in [the fine-tune curves](../../../../../toy/rebuild/out/phase5/finetune-curves.png) and [pictures](../../../../../toy/rebuild/out/phase5/finetune-pictures.png).
 
 **The quadrant toy**
 

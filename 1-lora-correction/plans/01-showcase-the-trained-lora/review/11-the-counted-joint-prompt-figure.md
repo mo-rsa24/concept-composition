@@ -35,7 +35,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen. The one number every row reports is
-> [compose rate](../../../context/world/compose-rate.md).
+> [compose rate](../../../../context/world/compose-rate.md).
 
 ## Runs
 

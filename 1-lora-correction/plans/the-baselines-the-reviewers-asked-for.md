@@ -3,12 +3,12 @@
 **Goal:** reviewer PrzE sees the adapter beside CO3, run at its authors' published settings and from our starting noise.
 **Objective:** CO3 renders one tuning cell, its published default is written into [the protocol](../report/paper-review/protocol.md), and it is launched at that default on R1 (276 prompts, seeds 9 to 12) and R3 (53 held-out pairs, seeds 9 to 16).
 **Definition of done:** every CO3 evaluation job is running or finished, with the output count heading to 1,104 for R1 and 424 for R3.
-**Route:** [answer the ICLR reviews](route-answer-the-iclr-reviews.md), between steps 8 and 9; outcome PRZE-1, compute jobs 7 and 8 of [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs).
+**Route:** [answer the ICLR reviews](../../plans/route-answer-the-iclr-reviews.md), between steps 8 and 9; outcome PRZE-1, compute jobs 7 and 8 of [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs).
 
 ## Environment Facts This Plan Depends On
 
-- [The shared-device path and its safety rules](../environment/hpc/execution-protocol.md): a guard inside each launcher refuses a card holding over 1 GB, every path is absolute, the log header names node, card and PID.
-- [Storage](../environment/storage.md): outputs under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/<method>_default/` only, and the disk guard reads that filesystem.
+- [The shared-device path and its safety rules](../../environment/hpc/execution-protocol.md): a guard inside each launcher refuses a card holding over 1 GB, every path is absolute, the log header names node, card and PID.
+- [Storage](../../environment/storage.md): outputs under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/<method>_default/` only, and the disk guard reads that filesystem.
 - CO3 needs the `co3` environment (it has xformers); `co3_bw` on the Blackwell nodes has none, so CO3 runs only on RTX 8000 or RTX 3090 cards.
 - `scripts/cluster.sh run` refuses to sync while another session's three trainer files are uncommitted, so launchers run from copies under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers/`, each under a new file name, and name those copies by absolute path because `sbatch` runs a launcher from the Slurm spool.
 - Seeds 9 to 16 have no cache entry, so their starting latent is the seeded fp16 CPU draw `load_shared_latents` falls back to, saved per seed under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/latents/`.
@@ -34,7 +34,7 @@ For Claude to execute.
 
 ### 2. 📝 The published defaults in the protocol
 
-- [x] **Write each method's published default and the script that renders it into rule 3 of `report/paper-review/protocol.md`, with a dated line in `report/paper-review/history.md`**
+- [x] **Write each method's published default and the script that renders it into rule 3 of `1-lora-correction/report/paper-review/protocol.md`, with a dated line in `1-lora-correction/report/paper-review/history.md`**
   - ✓ verified 2026-11-11: rule 3's table in [the protocol](../report/paper-review/protocol.md) and the two 2026-11-11 rule 3 rows in [the history](../report/paper-review/history.md), committed before any evaluation image
   - ◀ Needs: 1
   - ▶ Next: 3
@@ -43,14 +43,14 @@ For Claude to execute.
 
 - [x] **For each method at its published default: an 80% interval for runtime and memory, the exact command, your yes, the launch, the first tiles**
   - ✓ verified 2026-11-11 14:10: CO3 complete, R1 1,104 of 1,104 and R3 424 of 424 tiles with 1,528 sidecars under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/co3_default/`, counted from mscluster107 (mscluster84's view undercounted by 35); Slurm 84590, 84591, 84757, 84759, 84760, 84761 and two mscluster108 helpers (`cdd58a18`)
-  - Launcher: `scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last. CO3 runs as two `NSHARDS=2` jobs and four `NSHARDS=6` jobs (shards 2 to 5); a tile that exists is skipped, so they meet without repeating work.
+  - Launcher: `1-lora-correction/scripts/review_baselines_eval.sh`, every Nth cell of the 1,528 per job; each job renders its R1 share first and its R3 share last. CO3 runs as two `NSHARDS=2` jobs and four `NSHARDS=6` jobs (shards 2 to 5); a tile that exists is skipped, so they meet without repeating work.
   - ◀ Needs: 2
   - ▶ Next: 4
 
 ### 4. ✅ Count, file and record
 
 - [x] **Count each job's outputs on its launch node against 1,104 and 424; fill rows 7 and 8 of the jobs table with measured rates and cards; add the route step and its rows to "What we know so far"**
-  - ✓ verified 2026-11-11: 1,104 and 424 counted from mscluster107; rows 7 and 8 in [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs); route step 8b and five rows in [the route](route-answer-the-iclr-reviews.md#what-we-know-so-far)
+  - ✓ verified 2026-11-11: 1,104 and 424 counted from mscluster107; rows 7 and 8 in [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs); route step 8b and five rows in [the route](../../plans/route-answer-the-iclr-reviews.md#what-we-know-so-far)
   - ◀ Needs: 3
 
 ## Instructions

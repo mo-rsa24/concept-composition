@@ -22,7 +22,7 @@ same in both arms, so it cannot separate them, and it is there so a result can b
 afterwards.
 
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      scripts/census/inclusive_captions_pool_v2.py --out-dir <where the manifest goes>
+      3-understanding-compositionality/scripts/census/inclusive_captions_pool_v2.py --out-dir <where the manifest goes>
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 COCO_ROOT = Path("/datasets/mmolefe/coco2017")
 ANNOTATIONS = COCO_ROOT / "annotations_trainval2017/annotations/instances_train2017.json"

@@ -53,7 +53,7 @@
 - **A branch**: one of the three UNet forwards the adapter's correction is assembled from: "a cat" alone, "a dog" alone, and the empty prompt. Each branch today sees only its own prompt; the adapter has to read the other animal off the latent (the pressure-test route, part 1).
 - **The pooled embedding**: SDXL's second text-encoder vector for a prompt (`text_embeds`, 1280 numbers), fed to the UNet beside the token sequence. The token sequence carries the words; the pooled vector carries a summary of the prompt.
 - **The partner embedding**: the "a cat" branch receives `pool_cat + pool_dog` as its pooled vector and the "a dog" branch `pool_dog + pool_cat`; the empty branch is unchanged. The token sequences stay their own, so the branches remain distinct. Applied only when the adapter is enabled: the frozen product-of-experts forward and every reference render are untouched.
-- **The on-cache fit**: the cosine between the adapter's correction and the true correction on the cached training states, no sampling, per pair tier and per step bucket, from `scripts/showcase/fit_cosine_on_cache.py` ([the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03)). The branch-blind rank-8 adapter at 30k reads 0.985 on training pairs and 0.925 on cat × dog in the early bucket, 0.961 against 0.748 late.
+- **The on-cache fit**: the cosine between the adapter's correction and the true correction on the cached training states, no sampling, per pair tier and per step bucket, from `1-lora-correction/scripts/showcase/fit_cosine_on_cache.py` ([the recipe](../../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03)). The branch-blind rank-8 adapter at 30k reads 0.985 on training pairs and 0.925 on cat × dog in the early bucket, 0.961 against 0.748 late.
 - **Drift** and **compose count**: as in plan 20, from the 8-seed grid at λ 1.
 
 ---
@@ -99,9 +99,9 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- Training as a Slurm job on `bigbatch` with the faulted nodes excluded, or over SSH on a free `biggpu` device ([nodes](../../../../environment/hpc/nodes.md), [execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- Checkpoints and grids to `/datasets` only ([storage](../../../../environment/storage.md)).
-- The on-cache fit reads fp16 tensors and upcasts before accumulating ([overview](../../../../environment/overview.md)).
+- Training as a Slurm job on `bigbatch` with the faulted nodes excluded, or over SSH on a free `biggpu` device ([nodes](../../../../../environment/hpc/nodes.md), [execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- Checkpoints and grids to `/datasets` only ([storage](../../../../../environment/storage.md)).
+- The on-cache fit reads fp16 tensors and upcasts before accumulating ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -154,9 +154,9 @@ read 2      8-seed grid at 30k, λ 1: drift against the same-setting branch-blin
 
 1. **One helper** `partner_pooled(pool_a, pool_b, pool_e)` returning the three pooled vectors for the adapter-on forward, used by the trainer's step (`_train_one_step`, the `text_embeds` of `cond_3K`), by the injection sampler on its adapter-enabled forward, and by the fit script.
 2. **The trainer flag** `--partner-embedding` on the pooled trainer, recorded in `config.json`, default off.
-3. **The sampler flag** on `scripts/showcase/lambda_boundary_probe.py`, read from the checkpoint's config so a partner checkpoint cannot be rendered without it.
+3. **The sampler flag** on `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`, read from the checkpoint's config so a partner checkpoint cannot be rendered without it.
 4. **The fit script flag**, the same way.
-5. **The launcher**: `scripts/showcase/regularised_r32.sbatch` with `RUN_ID=phase1_r32_partner_40k` and the flag, on the regularisation setting plans 15 and 20 support.
+5. **The launcher**: `1-lora-correction/scripts/showcase/regularised_r32.sbatch` with `RUN_ID=phase1_r32_partner_40k` and the flag, on the regularisation setting plans 15 and 20 support.
 
 ---
 
@@ -195,8 +195,8 @@ Serves goal 4 and the transfer question in scope 04. Checkable outcomes:
 
 ### 2. 🧪 Train, fit and render
 
-- [ ] **2.1 Launch** `RUN_ID=phase1_r32_partner_40k PARTNER=1 sbatch scripts/showcase/regularised_r32.sbatch` (the launcher gains a `PARTNER` switch in task 1.1) with `WEIGHT_DECAY` and `EMA_DECAY` set to the supported base setting. Record job id, node and W&B id in the review file.
-- [ ] **2.2 The on-cache fit at 30k**: [the recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) with the partner flag; the early-bucket cat × dog cosine into the review file beside 0.925.
+- [ ] **2.1 Launch** `RUN_ID=phase1_r32_partner_40k PARTNER=1 sbatch 1-lora-correction/scripts/showcase/regularised_r32.sbatch` (the launcher gains a `PARTNER` switch in task 1.1) with `WEIGHT_DECAY` and `EMA_DECAY` set to the supported base setting. Record job id, node and W&B id in the review file.
+- [ ] **2.2 The on-cache fit at 30k**: [the recipe](../../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) with the partner flag; the early-bucket cat × dog cosine into the review file beside 0.925.
 - [ ] **2.3 The 30k grid**: the probe recipe, `--windows full --lambdas 1.0`, out-root `figure_r32_partner_030000`; its drift against the same-setting branch-blind 30k probe folder.
 
 ▶ **Next: [instruction 3.1](#3--judge)**.
@@ -250,7 +250,7 @@ Every figure lands in `artifacts/results/does-telling-each-branch-the-other-anim
 ### 4. 🧹 Close out
 
 - [ ] **4.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **4.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **4.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ---
 
@@ -260,8 +260,8 @@ Every figure lands in `artifacts/results/does-telling-each-branch-the-other-anim
 
 - `poe_repair/experiments/one_pair_one_seed/trainer.py`: `_train_one_step`, where `cond_3K["text_embeds"]` is built
 - `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`: the flag and `config.json`
-- `scripts/showcase/lambda_boundary_probe.py`: the adapter-enabled forward in `lambda_window_grid.run_lora_residual_inject_windowed_poe`
-- `scripts/showcase/fit_cosine_on_cache.py`: the on-cache fit
+- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: the adapter-enabled forward in `lambda_window_grid.run_lora_residual_inject_windowed_poe`
+- `1-lora-correction/scripts/showcase/fit_cosine_on_cache.py`: the on-cache fit
 
 ---
 

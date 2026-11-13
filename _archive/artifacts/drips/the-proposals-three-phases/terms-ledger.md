@@ -43,7 +43,7 @@ Section numbers are the proposal's own.
 ## Where this repo already owns a term
 
 `d_T` and `d_t` carry the same meaning in this repo's
-[data dictionary](../../../context/data/02-dictionary.md): the distance between the single-prompt
+[data dictionary](../../../../context/data/02-dictionary.md): the distance between the single-prompt
 and PoE predictions per step and at the final step. PoE composition as this project runs it on SDXL
-is described in the [PoE composition context file](../../../context/world/poe-composition.md).
+is described in the [PoE composition context file](../../../../context/world/poe-composition.md).
 The proposal's "composability gap" and "logical composition" have no entry in `context/`.

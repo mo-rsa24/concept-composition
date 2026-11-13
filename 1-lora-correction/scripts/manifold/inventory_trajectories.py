@@ -33,10 +33,10 @@ from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Iterable
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from poe_repair import paths as poe_paths
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 # ---------------------------------------------------------------------------
 # Config — paths and expected layouts
@@ -280,7 +280,7 @@ def main(argv: list[str] | None = None) -> int:
     if summary["n_complete"] < summary["n_total"]:
         print()
         print("Backfill is required before plan-15 can run on this artefact.")
-        print("See: scripts/manifold/sample_with_trajectory.py (to be written).")
+        print("See: 1-lora-correction/scripts/manifold/sample_with_trajectory.py (to be written).")
     return 0
 
 

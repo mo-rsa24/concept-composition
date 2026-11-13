@@ -27,7 +27,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from poe_repair._sdxl.metrics import ddim_prev_from_x0_eps, tweedie_mean  # noqa: E402
 from poe_repair._sdxl.runtime import decode_latents  # noqa: E402

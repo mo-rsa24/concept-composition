@@ -6,12 +6,12 @@ covers: piece 2 rung 1 (the cosine boundary values C_k by hand), with the learne
 last piece covered: piece 2 rung 1
 
 frames (timetable tab, now 10 frames; links are named and stay put if frames are added later):
-- the plane and the quarter circle: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-plane (new); still: artifacts/results/how-the-forward-process-dissolves-an-image/the-point-on-the-quarter-circle.png, first cell
+- the plane and the quarter circle: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-plane (new); still: 3-understanding-compositionality/artifacts/results/how-the-forward-process-dissolves-an-image/the-point-on-the-quarter-circle.png, first cell
 - polar coordinates, legs cos θ and sin θ, cos² + sin² = 1 as one share bar, with a prediction on the y leg: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-polar (new); still: the-point-on-the-quarter-circle.png, second cell
 - degrees and radians, the arc 0.8072 highlighted and laid flat beside π/2 = 1.5708: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-radians (new); still: the-point-on-the-quarter-circle.png, third cell
 - the position ruler, 101 posts at (k + 0.8)/100.8 with a δ handle, δ = 0 as the broken run: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-posts (new); still: the-point-on-the-quarter-circle.png, fourth cell
 - the quarter turn, cos² every 15° and its drops, with a prediction on which turn drops most: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-quarter-turn (new); still: the-point-on-the-quarter-circle.png, fifth and sixth cells
-- one boundary term by term (k/T, + δ, ÷ (1 + δ), × π/2, cos, the square, ÷ cos²θ₀), presets k = 0, 1, 51, 99, 100 and δ = 0, fraction bars with the "Divide by cos²θ₀" switch: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-one-boundary (repaired; the old #timetable-2 link still opens it); still: artifacts/results/how-the-forward-process-dissolves-an-image/one-boundary-term-by-term.png
+- one boundary term by term (k/T, + δ, ÷ (1 + δ), × π/2, cos, the square, ÷ cos²θ₀), presets k = 0, 1, 51, 99, 100 and δ = 0, fraction bars with the "Divide by cos²θ₀" switch: https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-one-boundary (repaired; the old #timetable-2 link still opens it); still: 3-understanding-compositionality/artifacts/results/how-the-forward-process-dissolves-an-image/one-boundary-term-by-term.png
 
 what the new frames show, on the walk's numbers:
 - post 51 at 46.25° = 0.8072 rad sits at (0.6915, 0.7224), within 0.0001 of √ᾱ₅₀ = 0.6916 and √(1 − ᾱ₅₀) = 0.7223; 0.4782 + 0.5218 = 1.

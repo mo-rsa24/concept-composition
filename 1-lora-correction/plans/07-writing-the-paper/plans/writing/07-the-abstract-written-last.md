@@ -2,7 +2,7 @@
 
 This plan asks what the abstract says once the sections it summarises are already written.
 
-**Step 22 of 22.** Waits on steps 20 and 21. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 22 of 22.** Waits on steps 20 and 21. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|

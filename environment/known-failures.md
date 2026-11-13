@@ -131,7 +131,7 @@ when constructing `_Embedders`; never rely on its CPU default on a GPU job. `.cl
 same class tolerates CPU fine (CLIP's attention path doesn't route through xformers the same
 way), which makes this easy to miss until `.dino()` is called.
 
-**First discovered:** poe_repair_min, `scripts/showcase/lambda_window_grid.py`, plan 07 of
+**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lambda_window_grid.py`, plan 07 of
 `01-showcase-the-trained-lora` (slurm job 48608)
 
 **Affects steps:** any step calling `_Embedders()` on a GPU node
@@ -176,7 +176,7 @@ magnitude; not yet written)
 ---
 
 #### Entry ID: poe-lora-002
-**Name:** [Direction-cosine](../plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md#glossary) diverges (< 0.3) despite low training loss
+**Name:** [Direction-cosine](../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md#glossary) diverges (< 0.3) despite low training loss
 
 **Symptom:** Training loss decreases smoothly, but `eval/direction_cosine/mean` stays below 0.3
 or goes negative (anti-aligned).
@@ -217,7 +217,7 @@ injector, runs full PoE on the real prompt at *every* step, including off-window
 not that step has an injected residual. Routing the real condition through the first function and
 a control through the second changes the injection source *and* the off-window sampling at the
 same time, so any gap between them cannot be attributed to the injection source alone. In
-`scripts/showcase/lora_dose_sweep.py`'s first attempt (slurm job 48596, plan 03 of
+`1-lora-correction/scripts/showcase/lora_dose_sweep.py`'s first attempt (slurm job 48596, plan 03 of
 `01-showcase-the-trained-lora`), this produced AUC 0.734 and 0.875 for two controls against 0.203
 for the real condition, tripping the plan's own "a control rises above luck" fail criterion — as
 a comparison-fairness artefact, not a result.
@@ -231,10 +231,10 @@ test. Before trusting a control result, ask whether it was even possible for it 
 the real condition in more than the intended way — if a different code path was used, this is not
 provable from the numbers alone.
 
-**First discovered:** poe_repair_min, `scripts/showcase/lora_dose_sweep.py`, plan 03 of
+**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lora_dose_sweep.py`, plan 03 of
 `01-showcase-the-trained-lora` (slurm job 48596 → corrected in job 48619)
 
-**Also seen:** plan 07's own [λ-window grid](../plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md) (`scripts/showcase/lambda_window_grid.py`, jobs
+**Also seen:** plan 07's own [λ-window grid](../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md) (`1-lora-correction/scripts/showcase/lambda_window_grid.py`, jobs
 48607-48611) hit the same root cause in a different guise: the plan's pre-registered λ=0
 identity check compared a `run_lora_residual_inject_masked`-style render against `poe.png`
 (rendered with full guided PoE at all 50 steps), and the off-window unguided-only branch gave a
@@ -277,7 +277,7 @@ problem, check whether the failing function has the decorator that every sibling
 same module already carries — a missing decorator produces an OOM trace that looks identical to
 a real capacity problem.
 
-**First discovered:** poe_repair_min, `scripts/showcase/lambda_window_grid.py`
+**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lambda_window_grid.py`
 (`run_lora_residual_inject_windowed_poe`), plan 07 of `01-showcase-the-trained-lora` (slurm job
 48610)
 
@@ -415,7 +415,7 @@ since the fault is per-device hardware state, not tied to this project's code.
 throughout, and large output is later found on `/home-mscluster` instead of the intended
 `/datasets` mount.
 
-**Root cause:** `scripts/mechanism_study/run_dose_sweep.sh` set its output root under the repo
+**Root cause:** `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh` set its output root under the repo
 on `/home-mscluster` while its disk guard read `df /datasets/mmolefe`. The two paths were
 configured independently and drifted apart; the guard was checking a filesystem the script was
 not writing to, so it could never catch the problem it exists to catch. 3.4GB of output from
@@ -428,7 +428,7 @@ that run across many settings landed on the wrong mount this way.
 same resolved root as its output root has not been re-audited; treat a new script's guard as
 unverified until its `df` target is checked against its actual output root by hand.
 
-**First discovered:** poe_repair_min, `scripts/mechanism_study/run_dose_sweep.sh`, recorded in
+**First discovered:** poe_repair_min, `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh`, recorded in
 the project's own `CLAUDE.md`
 
 **Affects steps:** any step with a job script that writes large output (checkpoints, caches, and
@@ -450,7 +450,7 @@ adapter attached, and the output folder gains nothing. Re-running changes nothin
 pair folders did not exist yet writes its tiles normally, so the failure looks like it depends on
 the pair rather than on the code.
 
-**Root cause:** `scripts/figure_candidates.py` gained a retry loop around `mkdir` in commit
+**Root cause:** `1-lora-correction/scripts/figure_candidates.py` gained a retry loop around `mkdir` in commit
 `d3baf63`, to survive several jobs racing on one pair folder over NFS. The loop was indented
 outside the per-seed loop and the `write_decoded_image` call was left inside it, after the loop's
 `break`. When the folder already existed the loop broke on its first pass, so the write never ran:
@@ -511,10 +511,10 @@ resolves to `train/`, and the training seeds (1 to 8, 17 to 19) and held-out see
 disjoint.
 
 **Affects steps:** step 71 onward, every plan in
-[designing the correction loss](../plans/09-designing-the-correction-loss/MASTER_PLAN.md) that
+[designing the correction loss](../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) that
 launches a run, and any future pool built by hand rather than from `seed_pool.train_pool`. Both
 solutions above are owned by
-[task 1.5 of the instrument fixes](../plans/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md).
+[task 1.5 of the instrument fixes](../1-lora-correction/plans/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md).
 
 **Category:** 🔴 critical
 
@@ -537,7 +537,7 @@ before that folder was committed. Once the laptop committed it, the cluster held
 of the same paths, and git refuses to overwrite untracked files during a fast-forward.
 
 **Solution:** Copy anything that is built or run on the cluster to a folder outside the checkout
-(`scripts/refresh_paper_slots.py` builds the paper in
+(`1-lora-correction/scripts/refresh_paper_slots.py` builds the paper in
 `/datasets/mmolefe/poe_repair_min/outputs/paper-build/iclr-56173/`). Where a checkout is already
 stuck, move each file the merge names aside, stash any tracked change, compare what remains with
 the target commit (`git diff --quiet origin/<branch> -- <file>`), then `git reset --hard <commit>`
@@ -580,7 +580,7 @@ launched, the chained mscluster112 launch did not)
 
 ## Cross-references
 
-- The instrument finding in [the corrector's step-size review](../plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md): a Langevin step size can pass both numeric divergence guards while its renders are texture noise, because the latent norm cannot rise until the Euler step stops contracting. The picture is rung 3 of [the finding](../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
-- The mention of **the adapter left attached after a windowed run** (why the two adapter stages run in their own process) in [can a corrector or a clean tail sharpen the adapter's renders](../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) and [running the Langevin corrector](../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
+- The instrument finding in [the corrector's step-size review](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md): a Langevin step size can pass both numeric divergence guards while its renders are texture noise, because the latent norm cannot rise until the Euler step stops contracting. The picture is rung 3 of [the finding](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
+- The mention of **the adapter left attached after a windowed run** (why the two adapter stages run in their own process) in [can a corrector or a clean tail sharpen the adapter's renders](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) and [running the Langevin corrector](../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
 - The mention of **hardware-faulted** `bigbatch` cards in [the partition table of the node notes](hpc/nodes.md#partitions).
-- The mention of **faulted cards**, excluded when every biggpu node was probed, in [the PRZE-10 compute plan](../report/paper-review/prze-10-compute.md), first outcome.
+- The mention of **faulted cards**, excluded when every biggpu node was probed, in [the PRZE-10 compute plan](../1-lora-correction/report/paper-review/prze-10-compute.md), first outcome.

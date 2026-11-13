@@ -17,13 +17,13 @@ Emits:
 
 Treat panel D as "n=1 point comparison", not a statistical claim.
 Plan-15's n=12 statistical version requires the backfill in
-``scripts/manifold/sample_with_trajectory.py``.
+``1-lora-correction/scripts/manifold/sample_with_trajectory.py``.
 
 Usage::
 
-    python scripts/manifold/seed42_phase1.py
-    python scripts/manifold/seed42_phase1.py --epoch 1600 --lambdas 0.00,0.50,1.00
-    python scripts/manifold/seed42_phase1.py --results-root <alt> --out <dir>
+    python 1-lora-correction/scripts/manifold/seed42_phase1.py
+    python 1-lora-correction/scripts/manifold/seed42_phase1.py --epoch 1600 --lambdas 0.00,0.50,1.00
+    python 1-lora-correction/scripts/manifold/seed42_phase1.py --results-root <alt> --out <dir>
 """
 from __future__ import annotations
 
@@ -35,10 +35,10 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 from poe_repair import paths as poe_paths
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 DEFAULT_RESULTS_ROOT = (
     poe_paths.resolve(poe_paths.ONE_PAIR_ONE_SEED) / "a_cat__x__a_dog" / "seed_42" / "run__local"

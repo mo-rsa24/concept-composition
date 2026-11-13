@@ -65,7 +65,7 @@ one. Is the render-time 0.40 the cost of that mismatch?
 **Hypothesis, written before the run.** On the adapter's own corrected path the fit starts near
 0.9 and decays toward 0.4 as the state leaves the cache. If flat, the 0.40 measures something else.
 
-**Did.** Wrote `scripts/showcase/on_policy_fit_cosine.py`: roll out cat x dog seeds 9 to 16 from
+**Did.** Wrote `1-lora-correction/scripts/showcase/on_policy_fit_cosine.py`: roll out cat x dog seeds 9 to 16 from
 the cached initial noise with the correction at every step, and at each reached state compute the
 true correction with a joint-prompt forward. Slurm job 49421 on mscluster72.
 
@@ -132,7 +132,7 @@ and the chat record; nothing else was written for this step.
 Navigation: ⬅️ [Previous](#step-4-mitra-et-al-unpacked) | 📋 [TOC](#table-of-contents) | [Next](#step-6-the-report) ➡️
 
 **Use 1, the theorem turned around (run 3).** Hypothesis: the lower bound on G·M from the cache
-rises with the plain-PoE fail rate. Did: `scripts/showcase/interaction_bound_from_cache.py` over
+rises with the plain-PoE fail rate. Did: `1-lora-correction/scripts/showcase/interaction_bound_from_cache.py` over
 25 pairs on the CPU. Came back: null. Every failing pair fails at bounds from 100 to 3000. Post
 hoc, the pairs split at step 10 into near-synonyms (low) and distinct animals (high), a factor of
 ten apart, with cat x dog high and most of the training pool low.
@@ -167,7 +167,7 @@ verdicts with their headline numbers.
 Navigation: ⬅️ [Previous](#step-6-the-report) | 📋 [TOC](#table-of-contents) | [Next](#what-is-left) ➡️
 
 The sources register holds one X post,
-[eigenfaces-style walks through embedding models](../../../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
+[eigenfaces-style walks through embedding models](../../../../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
 by Arnas Uselis: walks along the top principal components of pixel space, DINOv2-B and SigLIP2,
 each decoded through a representation autoencoder, with the author's own caveat that the pictures
 mix what the encoder cares about with what the decoder adds. It was read on 2026-09-05 through an

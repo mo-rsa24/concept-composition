@@ -10,11 +10,11 @@ In the background, prepare and build layer 6's two quizzes, bottom up, for the c
 quiz 6.1 and quiz 6.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 6 makes guidance a dial, because
 Stable Diffusion's cat-dog hybrid happens at weight 7.5 and everything before it ran at 1. Each
 layer opens on two quizzes, one on the college maths underneath it and one on the layer itself,
-built the way step 2 of artifacts/drips/simple-distributions-rebuild/ladder/00-setup.md builds them
+built the way step 2 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/00-setup.md builds them
 for layer 1. Layer 6 has no step file yet; its build writes one (step 6 of the ladder file). The
 repo is /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain.
 
@@ -29,11 +29,11 @@ Objectives
 5. Write each published URL into its step of layer 6's ladder file.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
   line: the material for quiz 6.1, and with the rest of the file, for quiz 6.2.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Guidance as a tilted density"
   row of the Bricks table: material for quiz 6.2.
-- artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1, and
+- 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1, and
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1: material for quiz 6.2.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -55,7 +55,7 @@ What is already known
 - Raising a Gaussian to the power w multiplies its precision by w (vault note Powers Of Gaussians).
 - SDXL draws its cat-dog hybrid with one model and two prompts at w = 7.5, as
   ε_∅ + w(ε_A − ε_∅) + w(ε_B − ε_∅), and the 2D work measured only w = 1
-  (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
+  (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), and on the four-quadrant toy with
   "contains" labels it puts 0.989 within 3 std of the top-right blob for every A∩B share r from 0.25
   to 0.001, with Z = r (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3 and run 1).
@@ -71,13 +71,13 @@ Rules
   built, and each URL as quiz-cadence publishes it.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 6.1's URL in step 3 and quiz 6.2's URL in step 5 of
-  artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, each replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, each replacing
   "(URL lands here)".
 - The proof: both coverage files exist under .quiz-prep/ and list no question as blocked, and both
   URLs open.

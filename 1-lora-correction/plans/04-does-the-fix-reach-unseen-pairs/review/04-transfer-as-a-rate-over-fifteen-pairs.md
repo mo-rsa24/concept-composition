@@ -47,7 +47,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 - **Leave one pair out**: train fifteen adapters, each missing a different pair, and test each one
   on exactly the pair it never saw. Fifteen tests instead of one, so the answer is a rate rather
   than an anecdote.
-- **The degradation curve**: [compose rate](../../../context/world/compose-rate.md) plotted
+- **The degradation curve**: [compose rate](../../../../context/world/compose-rate.md) plotted
   against how much of the pool was held back. Its
   shape is the finding: a gentle slope and a cliff are different papers.
 - **At the no-fix level**: a held-out pair that composes no better than the broken method. Two causes,

@@ -10,7 +10,7 @@ In the background, prepare and build layer 8's two quizzes, bottom up, for the c
 quiz 8.1 and quiz 8.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 8 defines the interaction term
 exactly, the first half of the research goal. Each layer opens on two quizzes, one on the college
 maths underneath it and one on the layer itself. These run during layer 7's build, so the layer 8
@@ -31,12 +31,12 @@ Objectives
 6. Write each published URL into its step of layer 8's ladder file.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, its Study first
   line: the material for quiz 8.1.
 - The same file's steps 2, 4a and 4b: material for quiz 8.2.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick row "The interaction term,
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick row "The interaction term,
   exact": material for quiz 8.2.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4): material for quiz 8.2.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4): material for quiz 8.2.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
 
@@ -58,15 +58,15 @@ What is already known
 - By Bayes, r(x) = log p(A,B|x) − log p(A|x) − log p(B|x) + log[p(A)p(B)/p(A,B)], and when each
   label is a fixed function of the image the term is exactly zero, so the wet dog is a data
   condition (does either expert's data hold A as it looks under B), and the shift was found at 20%
-  overlap and missed at 0% (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run 1;
+  overlap and missed at 0% (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run 1;
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 9).
 - With report-mined labels a label term survives: on claim 7.4's quadrant labels (A read with
   probability 0.9 when true, B read inside A∩B only when A was read) it is +0.105 nats for (A,B)
   inside A∩B, strongly negative for (¬A,B) there, and zero elsewhere, and +0.105 is −ln 0.9
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 7.3 and 7.4).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 7.3 and 7.4).
 - A chest X-ray diagnosis is read from its findings with uncertainty, so diagnosis labels carry the
   label term while finding labels given the diagnosis do not
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, route 2).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, route 2).
 - The notation is q(x_t | x_0) = N(√ᾱ_t x_0, (1 − ᾱ_t) I) over T = 100 steps of a cosine schedule,
   with ε = −√(1 − ᾱ_t)·∇log q_t, so ∇r_t = −(ε_joint − ε_A − ε_B + ε_∅)/√(1 − ᾱ_t)
   (ladder/01-one-diffusion-expert.md, step 2; REBUILD_WALK.md, brick "The interaction term,
@@ -83,14 +83,14 @@ Rules
   built, and each URL as quiz-cadence publishes it.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - The missing log-odds passage, written where quiz-prep-pulse --build files passages.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 8.1's URL in step 1 and quiz 8.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, each replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md, each replacing
   "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and the
   two URLs open.

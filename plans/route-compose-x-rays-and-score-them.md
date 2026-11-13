@@ -42,7 +42,7 @@ puts a number beside the films it came from.
 
 **Found on disk:**
 
-- [the kinds-of-composition combined reading](../artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md),
+- [the kinds-of-composition combined reading](../3-understanding-compositionality/artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md),
   four ideas compared, nothing tested with numbers
 - [the composition-against-editing return](../artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md),
   which already triages CompDiff and nine neighbours and already designs the six-arm experiment
@@ -220,7 +220,7 @@ Learning path: product of experts, rungs 1 to 8 of
 Learning path: classifier-free guidance, rung 1,
   05-poe-composition-diffusion/plans/02-cfg-as-base-plus-omega-difference.md, with CME296 lecture 4
   at 1:27:42 to 1:34:34.
-Starts from: artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md, which already compares
+Starts from: 3-understanding-compositionality/artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md, which already compares
 four kinds of composition and marks nothing tested; and
 artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md,
 which is read whole, not sampled.
@@ -475,7 +475,7 @@ Navigation: ⬅️ [Previous](#why-this-chain) | 📋 [TOC](#table-of-contents) 
 
 - [the composition-against-editing return](../artifacts/ideas/when-poe-reaches-a-and-b/routes/06-composition-against-masked-editing.return.md),
   the six-arm design and the ten-paper triage
-- [the kinds-of-composition combined reading](../artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md)
+- [the kinds-of-composition combined reading](../3-understanding-compositionality/artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md)
 - [the silicotuberculosis claim walk](../artifacts/ideas/silicotb-conversation/IDEA_MAP.md), runs 3
   and 5 for the VinDr overlap
 - [the PoE composition journey](/home/molef/goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/)

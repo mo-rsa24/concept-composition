@@ -56,7 +56,7 @@ the two equations F3's real code applies.
 **The parked meaning walk** (`what-the-size-measure-means-and-what-it-misses.md`) settles two
 things: the denominator is `‖ε_PoE‖`, not `‖ε_mono‖`, because the correction should be measured
 against what it corrects rather than partly measured against itself, a choice pre-registered in
-`report/normalization_preregistration.md`; and the curve is a budget and a schedule, not a cause,
+`1-lora-correction/report/normalization-preregistration.md`; and the curve is a budget and a schedule, not a cause,
 with the real per-curve medians (0.094 for eagle-hawk seed 9, 0.215 for lion-tiger seed 1) small
 enough that learning and re-adding the term is plausible, but only the dose and window
 experiments, not this curve, can show the term causes composition. It records four cache-only

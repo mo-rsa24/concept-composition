@@ -21,7 +21,7 @@ changing the adapter or the sampler.
 
 **Unnumbered until the next sync; proposed step 57 of 57.** Waits on plan 11's runner, which
 exists. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md); the row for this plan is queued in
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md); the row for this plan is queued in
 [the pending-sync list](../../../../artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/PENDING_SYNC.md).
 
 | Step | Plan | What it does |
@@ -92,7 +92,7 @@ does it get to plain PoE's and the joint prompt's sharpness?
 adapter sampler, the sharpness function, the pick rule, the bars. `run_adapter.py`: the runner in
 three phases (references before the adapter is attached, the attach with its inert-when-disabled
 check, then the search), the sheets, the sidecar, both-ness, W&B. Launched by
-`scripts/noise_search/run_noise_search.sh adapter-smoke|adapter-full`.
+`1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-smoke|adapter-full`.
 
 **What it does.** Plan 11 asked whether a nudge of the noise composes plain PoE; it does not. The
 adapter composes already, so here the count is the constraint and sharpness is the objective: the
@@ -220,7 +220,7 @@ sampler or the schedule.
 2. **The runner.** `run_adapter.py`: the three phases, `detach_check.json`, per-seed `cell.json`
    with sharpness on every tile and the per-seed ratios, the sheet per pair, `summary.json`,
    `verdict.json`, `bothness.json` (with `--bothness-only`), W&B group `noise-search-adapter`.
-3. **The launcher.** Two new modes on `scripts/noise_search/run_noise_search.sh`,
+3. **The launcher.** Two new modes on `1-lora-correction/scripts/noise_search/run_noise_search.sh`,
    `adapter-smoke` and `adapter-full`, behind the same guards.
 
 ## Purpose and goal
@@ -280,7 +280,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
   - **Done when:** the package imports, the pick rule prefers a count-2 candidate over a sharper
     count-1 one, and `verdict` returns support, null, breaks and inconclusive on hand-made rates.
 - [x] **1.3** Run the smoke mode on a free device: cat × dog seed 9, N 2, σ 0.3, 10 steps, 512².
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh adapter-smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_smoke.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_smoke.log 2>&1 &'`
   - **Done when:** the run dir holds `mono_eta0.png`, `poe_pivot.png`, `detach_check.json` with a
     difference near zero, `adapter_pivot_lambda1.2.png`, `sigma_0.3/` with two finals and
     `run.json`, a one-row sheet with its sidecar, `summary.json` and `verdict.json`, and the log
@@ -297,7 +297,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 - [x] **2.1** Launch the full mode with `nohup`, one pair per free device: cat × dog on one,
       butterfly × meadow on the other, seeds 9 to 16, σ 0.1 and 0.3, N 8, 50 steps, 1024², W&B
       online.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`
   - **Done when:** both W&B run ids, run dirs, nodes, devices and PIDs are in the review file's
     Runs table.
   - Launched 2026-09-06 02:42 (cat × dog, mscluster107 device 1, PID 57966, W&B `kqj26oiz`) and
@@ -305,9 +305,9 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 - [x] **2.2** Harvest: if `bothness.json` is missing on the cat × dog run, run
       `--bothness-only --run-id <run>` on the session node with `XFORMERS_DISABLED=1`; copy the
       two sheets, both `summary.json` files, `bothness.json` and `verdict.json` into
-      `artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*` with
+      `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*` with
       README entries; quote `verdict.json` in the review file; answer every pre-registered
-      question; write the finding in `report/is-the-gap-the-samplers-or-the-models/`.
+      question; write the finding in `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`.
   - **Done when:** the review file's verdict is written and the finding exists.
 
 ▶ **Next: [instruction 3.1](#3--read-the-sheets)**.
@@ -333,7 +333,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 
 ◀ **Needs: [task 2.2](#2--the-full-run)**, the sheets filed.
 
-- [ ] **3.1** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png`.
+- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png`.
       Row by row, compare the kept tiles against the adapter pivot: are they two separate
       animals, and are they visibly crisper (fur texture, edges, eyes)? Write down the seeds
       where the kept tile looks like the Mono tile's sharpness, and the seeds where a kept tile is
@@ -404,7 +404,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the two run dirs on `/datasets`.
 2. The two sheets and the sidecars promoted to
-   `artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*`.
+   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `noise-search-adapter-*`.
 
 ## Orchestration: keeping catalogs and plan files in sync
 
@@ -428,11 +428,11 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/experiments/noise_search/adapter.py](../../../../poe_repair/experiments/noise_search/adapter.py) | the attach recipe, the batched adapter sampler, sharpness, the pick rule, the bars |
-| [poe_repair/experiments/noise_search/run_adapter.py](../../../../poe_repair/experiments/noise_search/run_adapter.py) | the three phases, the sheets, the sidecar, both-ness, W&B |
-| [poe_repair/experiments/noise_search/search.py](../../../../poe_repair/experiments/noise_search/search.py) | the perturbation and the plain-PoE sampler the references use |
-| [poe_repair/methods/_sampling.py](../../../../poe_repair/methods/_sampling.py) | `run_lora_residual_inject_masked`, whose on-step this plan batches |
-| [scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py) | `_laplacian_var`, the sharpness function copied here |
+| [poe_repair/experiments/noise_search/adapter.py](../../../../../poe_repair/experiments/noise_search/adapter.py) | the attach recipe, the batched adapter sampler, sharpness, the pick rule, the bars |
+| [poe_repair/experiments/noise_search/run_adapter.py](../../../../../poe_repair/experiments/noise_search/run_adapter.py) | the three phases, the sheets, the sidecar, both-ness, W&B |
+| [poe_repair/experiments/noise_search/search.py](../../../../../poe_repair/experiments/noise_search/search.py) | the perturbation and the plain-PoE sampler the references use |
+| [poe_repair/methods/_sampling.py](../../../../../poe_repair/methods/_sampling.py) | `run_lora_residual_inject_masked`, whose on-step this plan batches |
+| [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py) | `_laplacian_var`, the sharpness function copied here |
 
 ## Next step
 

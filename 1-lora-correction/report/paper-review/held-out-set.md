@@ -1,6 +1,6 @@
 # The frozen evaluation set for the review response
 
-Fixed before any adapter result exists on these pairs or prompts, under [the comparison protocol](protocol.md) (rules 1, 4 and 5). The commit that adds this file is the proof of order: `git log -1 -- report/paper-review/held-out-set.md`.
+Fixed before any adapter result exists on these pairs or prompts, under [the comparison protocol](protocol.md) (rules 1, 4 and 5). The commit that adds this file is the proof of order: `git log -1 -- 1-lora-correction/report/paper-review/held-out-set.md`.
 
 ## The adapter
 
@@ -90,6 +90,6 @@ badger × magpie, bear × boar, bear × heron, beaver × raccoon, beaver × wood
 
 ## Cross-references
 
-- The mention of **48 training pairs** in [the plan for answering the ICLR reviews](../../plans/route-answer-the-iclr-reviews.md#quick-context-where-you-are).
-- The mention of **held-out groups** in [the plan for answering the ICLR reviews, step 15](../../plans/route-answer-the-iclr-reviews.md#15--explain-it-back).
+- The mention of **48 training pairs** in [the plan for answering the ICLR reviews](../../../plans/route-answer-the-iclr-reviews.md#quick-context-where-you-are).
+- The mention of **held-out groups** in [the plan for answering the ICLR reviews, step 15](../../../plans/route-answer-the-iclr-reviews.md#15--explain-it-back).
 - The mention of **held-out group** in [the draft captions for the appendix render grids, Figure A](captions-showcase-grids.md#where-our-method-does-best-two-figures).

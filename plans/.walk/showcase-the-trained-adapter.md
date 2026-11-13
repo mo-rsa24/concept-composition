@@ -106,7 +106,7 @@ computation layer 1 must decide.
    7.3 plane-units apart, while different seeds sit 171.6 apart: the seed owns the geography, the
    pair nudges. Interactive artifact (hover any step-point, card switches joint/PoE/adapter):
    https://claude.ai/code/artifact/c3901878-d91a-42d6-9cde-76f5f89f72a3
-   Source + sidecar: artifacts/drips/showcase-the-trained-adapter/manifold/ (prototype html
+   Source + sidecar: 3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/ (prototype html
    + manifold_data.json). Renders are final images; per-step decoded frames not built yet.
    Static figure built as F11, paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf
    (scripts/plot_shared_plane_trajectories.py). Definition note: 7.3 here is the mean distance
@@ -172,7 +172,7 @@ computation layer 1 must decide.
 
 - 2026-08-29, from layer 1: /deep-learning-scene and /picture-speak, both building the
   shell-and-basins correction (cartoon vs shell, flow, basins, caustic) with KaTeX for the
-  concentration-of-measure math. Target grouping: artifacts/scenes/noise-shell-and-basins/.
+  concentration-of-measure math. Target grouping: 1-lora-correction/artifacts/scenes/noise-shell-and-basins/.
   Emitted, not invoked.
 
 ## Decisions taken
@@ -189,7 +189,7 @@ computation layer 1 must decide.
   space AND mode. Reason: the lambda-0 canary reproduced the cached PoE render's mode but not
   its pixels with settings matched, so only teacher-forced comparisons are immune to fp16 drift.
 - **Layer 2 example artifact, run on the real cache** (heldout a_cat__x__a_dog seed 9):
-  artifacts/drips/showcase-the-trained-adapter/the-same-correction-in-epsilon-and-x0-view.png
+  3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/the-same-correction-in-epsilon-and-x0-view.png
   (+ .json sidecar, all 50 steps). Two findings: (1) the two lenses tell opposite stories,
   x0 view peaks 0.6-1.0 at steps 0-10 and dies by 50, epsilon view is 0.03-0.07 early and
   ~0.3 mid-late; (2) at step 40 even the joint epsilon evaluated at the PoE state pulls toward
@@ -201,7 +201,7 @@ already worked here rather than choosing fresh:
 
 1. Mechanism claims (does the LoRA output point along r_t, how much does it supply) are made in
    epsilon space: per-step cosine for direction, the pre-registered norm ratio
-   ||r_t||/||eps_PoE|| for size (report/normalization_preregistration.md), fp16 upcast to fp32.
+   ||r_t||/||eps_PoE|| for size (1-lora-correction/report/normalization-preregistration.md), fp16 upcast to fp32.
 2. Perceptual claims (when runs visibly separate, when a sample commits) are made in
    decoded-embedding space: Tweedie-decode x_t, embed, 1 - cosine on L2-normalised embeddings,
    the divergence instrument's proven metric. Backbone rule per figure: DINOv2 when the claim is
@@ -372,7 +372,7 @@ lives as an exploratory thread under artifacts/ideas/. No video route, because i
   each pair's commitment step marked, assembled from the existing 288 cells. (c) is not owed
   unless the spine later claims a door location. Caveat owed: early-timing is also what a sampler
   artifact looks like; the sampler-vs-model split is owned by
-  plans/06-is-the-gap-the-samplers-or-the-models/ and its falsification criterion is already
+  1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/ and its falsification criterion is already
   written there. Constraint exported to layer 5: any residual-free steering must inject before
   ~step 10 to have a chance.
 
@@ -426,13 +426,13 @@ lives as an exploratory thread under artifacts/ideas/. No video route, because i
   matches the cached poe.png in mode (same blend creature, same collar tag) but not pixels;
   cache meta matches settings exactly, so the gap is known fp16 nondeterminism. Renders are
   mode-reproducible, not byte-reproducible, and figure provenance should say that. Filed
-  with card at artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
+  with card at 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
 - **Layer 4 groundwork done in-session**: the joint-prompt failure precondition exists in the
   paper's own cache (heldout/a_cat__x__a_dog/seed_1: mono.png is a single cat, poe.png one
   blended creature); no adapter render existed for that cell (per-epoch renders cover seeds
   9-16 only); scripts/render_joint_failure_repair_cell.py renders it from a loaded
   checkpoint (lambda 1 plus a lambda-0 canary that must match the cached poe.png), output
-  under artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
+  under 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/.
 
 - **Layer 5, round 1: the instrument's read of the learned object, NEEDS A DECISION.**
   Four candidate additions to the shared per-checkpoint tracking set, each computable from what
@@ -492,7 +492,7 @@ lives as an exploratory thread under artifacts/ideas/. No video route, because i
 ## Compile (2026-08-29)
 
 Ledger written to
-plans/01-showcase-the-trained-lora/decisions-taken-here.md.
+1-lora-correction/plans/01-showcase-the-trained-lora/decisions-taken-here.md.
 Layers 3 and 6 compiled as open; layer 2's space decision stays with the other thread.
 
 ## Routes emitted
@@ -507,5 +507,5 @@ Layers 3 and 6 compiled as open; layer 2's space decision stays with the other t
 
 ## Next step
 
-Walk complete. The ledger at plans/01-showcase-the-trained-lora/decisions-taken-here.md carries all six layers; the route out (init-master-plan, populate-plans, verify-plan) was emitted 2026-08-29 and is with the user. The vocabulary table lives here until a durable home exists. Other thread: layer 2 round 1 delivered: measure in guided-epsilon space vs show in predicted-x0/pixels,
+Walk complete. The ledger at 1-lora-correction/plans/01-showcase-the-trained-lora/decisions-taken-here.md carries all six layers; the route out (init-master-plan, populate-plans, verify-plan) was emitted 2026-08-29 and is with the user. The vocabulary table lives here until a durable home exists. Other thread: layer 2 round 1 delivered: measure in guided-epsilon space vs show in predicted-x0/pixels,
 per figure family. Settle or expand (teacher-forced vs closed-loop comparison is the child).

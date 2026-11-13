@@ -2,7 +2,7 @@
 
 Settle how the correction's size is expressed, in a committed script, before any result is read.
 
-**Step 2 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 2 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -24,7 +24,7 @@ Committing the measure first makes the composition-type scatter readable and
 unarguable. Serves DoD 1.
 
 ## Goal
-report/normalization_preregistration.md: both candidates computed on three cached
+1-lora-correction/report/normalization-preregistration.md: both candidates computed on three cached
 pairs, the committed choice, dated, written before any cross-type plot is
 generated.
 
@@ -57,11 +57,11 @@ flowchart LR
       third candidate (vs latent step size) was measured and rejected: its
       denominator moves with the sampler schedule, which plan 08 varies.
 - [x] write the memo with the committed choice and date
-      (report/normalization_preregistration.md, relative_norm, 2026-08-05)
+      (1-lora-correction/report/normalization-preregistration.md, relative_norm, 2026-08-05)
 - [x] load the whole cache once and check it: 70/70 ok, 790 pair-and-seed runs,
       38324 step files, zero NaN. There are 70 distinct pairs behind the 76
       directories, because six slugs are cached under both splits (see
-      report/instrument_smoke.md).
+      1-lora-correction/report/instrument-smoke-test.md).
 
 ## Success/Failure Outcomes
 - **the whole-cache load check**
@@ -77,8 +77,8 @@ flowchart LR
 
 ## Engagement Instructions
 ```bash
-cat report/normalization_preregistration.md    # expect a dated committed choice
+cat 1-lora-correction/report/normalization-preregistration.md    # expect a dated committed choice
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-$PY scripts/cache_smoke.py --all             # expect "70/70 ok"
-$PY scripts/normalization_candidates.py      # reproduces the memo's numbers
+$PY 1-lora-correction/scripts/cache_smoke.py --all             # expect "70/70 ok"
+$PY 1-lora-correction/scripts/normalization_candidates.py      # reproduces the memo's numbers
 ```

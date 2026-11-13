@@ -103,8 +103,8 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- **Renders and strips go under `/datasets`**, never `/home-mscluster` ([storage](../../../../environment/storage.md)).
-- **The probe pass is inference only** and fits on the session node's card, so it does not compete with the training chain for the Blackwell ([throughput](../../../../environment/hpc/throughput.md)).
+- **Renders and strips go under `/datasets`**, never `/home-mscluster` ([storage](../../../../../environment/storage.md)).
+- **The probe pass is inference only** and fits on the session node's card, so it does not compete with the training chain for the Blackwell ([throughput](../../../../../environment/hpc/throughput.md)).
 - **`XFORMERS_DISABLED=1`** is needed for the CPU DINOv2 path used by the secondary reads.
 - **W&B resume by run id** is how the strips reach the training run; a new run per probe would scatter one checkpoint's evidence across two places.
 
@@ -223,7 +223,7 @@ The dotted line into the person is the ordering the two automatic reads are allo
 
 ◀ **Needs: [task 1.2](#1--gather-the-references-before-any-adapter-is-attached)** done, so all four tiles exist for every seed.
 
-- [ ] **2.1 Write the strip builder and the blinding** into `scripts/showcase/blind_label.py`, writing `strips/`, `tiles.json` and, to a sibling directory, `mapping.json`.
+- [ ] **2.1 Write the strip builder and the blinding** into `1-lora-correction/scripts/showcase/blind_label.py`, writing `strips/`, `tiles.json` and, to a sibling directory, `mapping.json`.
   - Every mode takes `--set <name>`, where a set name is the run and the sampler joined by a hyphen: `baseline-shipped`, `baseline-stacked`, `P-shipped`, `C1-stacked` and so on. The plan that sends a labeller here names the set.
   - **Done when:** a built strip shows no condition name anywhere in the image or in `tiles.json`, and the same seed's tile order differs from the on-disk condition order.
 - [ ] **2.2 Wire the two secondary reads** over every tile: the validated detector's count and the forced-choice both-names read.
@@ -358,7 +358,7 @@ The dotted line into the person is the ordering the two automatic reads are allo
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/lambda_boundary_probe.py`
+**File:** `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`
 **Relevant section:** the existing per-checkpoint probe. Task 4.1 adds the guidance interval, the two-sampler strip render, and W&B resume by run id.
 
 **File:** the compose scorer package

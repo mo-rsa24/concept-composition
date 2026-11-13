@@ -7,7 +7,7 @@ be rendered or judged first.
 
 Train the rank-32 pooled adapter's parent and three children on the newly curated pool, in
 `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`. Read
-`plans/08-improve-the-rank-32-pooled-adapter/run-names.md` first for what each run varies.
+`1-lora-correction/plans/08-improve-the-rank-32-pooled-adapter/run-names.md` first for what each run varies.
 
 **The pool.** `artifacts/_shared/cross_pair_pool_configs/cells_v57.json`, 29 pairs and 43 cells,
 every cell judged good by eye. 22 animal pairs (23 cells) and 7 object pairs (20 cells). Its
@@ -15,7 +15,7 @@ pool, prompt and seed yamls are the `v57` generation in the same folder; pass `P
 trainer can resolve the object pairs' prompts, which live in the yaml and not in each cell's
 `meta.json`.
 
-**The runs.** One axis each, launched with `scripts/showcase/train_pool_run.sh`:
+**The runs.** One axis each, launched with `1-lora-correction/scripts/showcase/train_pool_run.sh`:
 
 | RUN | CELLS | STEPRANGE | extra |
 |---|---|---|---|

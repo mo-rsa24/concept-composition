@@ -5,7 +5,7 @@
 **This scope owns none of the 22 numbered steps, by its own design.** Nothing in the paper order
 waits on it, so it carries no step number and blocks nothing. Its four plans run in the internal
 order below, and it earns numbered steps in the one `## Running order` table in the
-[repo root MASTER_PLAN.md](../../MASTER_PLAN.md) only on the big-promotion condition in the
+[repo root MASTER_PLAN.md](../../../MASTER_PLAN.md) only on the big-promotion condition in the
 Definition of Done. That condition is met when the false-compose rate comes back contaminated at
 the ten-point threshold, or when a candidate detector clears the 95-versus-85 threshold.
 
@@ -20,7 +20,7 @@ one `/pressure-test` verdict. Nothing but the labelled-set build may start befor
 | 4 of 4 | [the promote-or-close decision](plans/checks/02-promote-or-close.md) | promote or close, in writing | ⚠️ blocked by the other three |
 
 ## Mission
-Every [compose rate](../../context/world/compose-rate.md) in the paper comes from a detector that
+Every [compose rate](../../../context/world/compose-rate.md) in the paper comes from a detector that
 is asked how many animals are in the picture. It is never asked which animals. Two dogs scores the
 same as a cat and a dog. So 94% is an upper bound, and nobody has measured how far above the truth
 it sits. This scope measures it.
@@ -39,7 +39,7 @@ met.
 ## Depends on
 - `outputs/compose_scorer/scorer_validated.json`: the file this scope is checking. Read only.
   `does-the-fix-reach-unseen-pairs` will not start unless it exists, so nothing here edits it.
-- `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`: all 32 images at λ=1, sorted by hand, with `calls.json` as the
+- `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`: all 32 images at λ=1, sorted by hand, with `calls.json` as the
   table. Kept back so the labelling pass can be scored against it.
 - `outputs/interaction_term/dose/pairs/`: 19 pairs × 5 seeds × λ ∈ {0, 0.25, 0.50, 0.75, 1.00},
   the real-correction row plus the `_random` and `_wrong_pair` control rows.
@@ -113,7 +113,7 @@ the same "is there a cat?" question.
    so it cannot be adjusted to suit the labels. [inferred prerequisite]
 3. ⚠️ The labelling tool strips λ out of the file path and shuffles before showing an image, so
    the labeller cannot see which setting produced it. [inferred prerequisite]
-4. ⚠️ The labelling pass scored against the 32 hand-sorted images in `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`.
+4. ⚠️ The labelling pass scored against the 32 hand-sorted images in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/`.
    Disagreement above 10% throws the pass away and the user labels by hand. That threshold lives
    in the labelling script rather than in prose. [inferred prerequisite]
 5. ⚠️ Labelled set on `/datasets`, with label counts per λ and the coverage number.
@@ -121,7 +121,7 @@ the same "is there a cat?" question.
    three-way rule in goal 4.
 7. ⚠️ Every candidate named to its source paper, run with a working `--device cpu` route, judged
    against the 95%-versus-85% threshold.
-8. ⚠️ `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` gives the band as 75% to 94% and says it cannot be
+8. ⚠️ `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` gives the band as 75% to 94% and says it cannot be
    narrowed from those images. It currently says 87% to 94%, which counts the 17 uncallable
    images as successes.
 9. ⚠️ Promotion decision written in `review/gate-02-*.md` against the two levels below.

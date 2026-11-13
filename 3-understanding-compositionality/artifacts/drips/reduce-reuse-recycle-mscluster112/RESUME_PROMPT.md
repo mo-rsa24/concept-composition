@@ -13,7 +13,7 @@ and continued on mscluster112 on 2026-10-13. Everything below was learned there,
 - The four notebook fixes (drop `!pip install` cells, drop tensorflow and pandas imports, `a_min=` to `min=`,
   and a chex/jax shim cell after `import math`) are already applied to `notebooks/simple_distributions.ipynb`:
   47 cells, `git diff --stat` reads 15 insertions, 95 deletions. Do not run the script again.
-- Walk file: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
+- Walk file: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
   Read it first. It holds the probes and the run map with marks.
 - Fact folders: `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/environment/` and `runbook/`. Read
   `environment/overview.md`, `environment/hpc/nodes.md` and `environment/storage.md`. The laptop's findings are

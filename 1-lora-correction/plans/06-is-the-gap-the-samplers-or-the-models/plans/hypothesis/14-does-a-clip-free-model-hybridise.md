@@ -19,7 +19,7 @@ there removes CLIP's text embeddings from the list of possible causes.
 ## Position in the plan tree
 
 **Step 77 of 77.** Waits on nothing. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -72,7 +72,7 @@ the arithmetic or a property of what CLIP hands the model.
 **Why PixArt-alpha and not Stable Diffusion 3.** PixArt-alpha's only text encoder is Flan-T5-XXL
 and it carries no CLIP in any role. Stable Diffusion 3 carries CLIP-L, CLIP-G and T5 together, so
 a result there cannot separate them, and the project's existing
-[SD 3.5 renderer](../../../../scripts/sd35_and_vector_render.py) already works on that mixed
+[SD 3.5 renderer](../../../../../5-text-embedding-third-expert/scripts/sd35_and_vector_render.py) already works on that mixed
 conditioning rather than against it.
 
 ## Considerations
@@ -83,7 +83,7 @@ conditioning rather than against it.
 
 Swapping SDXL for PixArt-alpha changes the text encoder, the denoiser architecture, the sampler,
 the step count and the guidance scale all at once. This is a mixed comparison by
-[the one-axis rule](../../../../../../.claude/EXPERIMENT_CONVENTIONS.md), and the plan does not
+[the one-axis rule](../../../../../../../.claude/EXPERIMENT_CONVENTIONS.md), and the plan does not
 pretend otherwise. It is worth running anyway because of what each outcome licenses: a fusion on
 PixArt-alpha removes CLIP as a *necessary* cause, which is a one-directional claim a mixed
 comparison can still support. Two clear animals on PixArt-alpha licenses nothing, because any of
@@ -134,7 +134,7 @@ seeds, and CLIP is therefore not necessary for the fusion.
 ⬅️ [Previous](#the-claim) | 📋 [TOC](#table-of-contents) | [Next](#description-what-to-build) ➡️
 
 A reviewer reading the paper's central failure asks what in the model causes it, and the [text
-encoder](../../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
+encoder](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/MASTER_PLAN.md) is the first suspect anyone names: two CLIP encoders trained on short captions, pooled into
 one vector, asked to carry two subjects. If that suspicion is right, the paper's correction is a
 patch on a text-embedding problem and the right fix is a better encoder. If the fusion survives on
 a model with no CLIP anywhere, that reading is closed off and the failure sits in the arithmetic or
@@ -147,7 +147,7 @@ be answered in the rebuttal with an argument rather than a figure.
 
 ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-**One script**, `scripts/pixart_multi_poe.py`, standalone beside the SDXL and SD 3.5 versions and
+**One script**, `1-lora-correction/scripts/pixart_multi_poe.py`, standalone beside the SDXL and SD 3.5 versions and
 touching neither. It encodes each prompt and the empty prompt through Flan-T5-XXL, runs the
 PixArt-alpha denoiser once per condition per step, and combines them as
 
@@ -165,7 +165,7 @@ and shows the comparison, because a composition script that cannot reproduce the
 produce hybrids that mean nothing.
 
 **One sheet, one calls file, one card** under
-`artifacts/results/does-a-clip-free-model-hybridise/`, built with the existing
+`1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/`, built with the existing
 `and_vector_sheet.sheet` so the columns are labelled the way every other sheet in the repo is.
 
 ## Purpose and goal
@@ -176,7 +176,7 @@ produce hybrids that mean nothing.
 fusion.
 
 **Definition of done.** The card at
-`artifacts/results/does-a-clip-free-model-hybridise/README.md` states how many of eight PixArt-alpha
+`1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/README.md` states how many of eight PixArt-alpha
 product renders hold two clear animals, in three categories, with the SDXL counts quoted from the
 owning finding beside them, and says what the comparison does and does not settle.
 
@@ -191,9 +191,9 @@ owning finding beside them, and says what the comparison does and does not settl
 - The weights live under `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`, 21.8 GB:
   the T5 encoder in two shards at 19.05 GB, the denoiser at 2.45 GB, the decoder at 0.33 GB.
   `/datasets` is the only filesystem large files go to, per
-  [environment/storage.md](../../../../environment/storage.md), and both the fetch and the render
+  [environment/storage.md](../../../../../environment/storage.md), and both the fetch and the render
   guard that mount rather than an assumed one.
-- Renders and the sheet write under `artifacts/results/does-a-clip-free-model-hybridise/`, which is
+- Renders and the sheet write under `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/`, which is
   small enough for the repo side; nothing in this plan writes a checkpoint.
 - The models run in fp16, including the identity check's reference, because an fp32 against fp16
   comparison of the same loop differs by a few grey levels on its own and would be read as a
@@ -202,7 +202,7 @@ owning finding beside them, and says what the comparison does and does not settl
   encoder is 9.5 GB in fp16 and is freed after the four prompts are encoded, so the render loop
   holds only the 1.2 GB denoiser and the decoder.
 - `sinfo` never shows GPU memory here, so node capability comes from
-  [environment/hpc/nodes.md](../../../../environment/hpc/nodes.md), not from Slurm.
+  [environment/hpc/nodes.md](../../../../../environment/hpc/nodes.md), not from Slurm.
 - Never run a broad `find` across the cluster filesystem; it hangs on the mounts and the job is
   killed.
 
@@ -226,10 +226,10 @@ owning finding beside them, and says what the comparison does and does not settl
 
 ### 1. 🔨 The composition script
 
-- [ ] **1.1** Write `scripts/pixart_multi_poe.py`: encode each condition and the empty prompt,
+- [ ] **1.1** Write `1-lora-correction/scripts/pixart_multi_poe.py`: encode each condition and the empty prompt,
       batch one denoiser pass per condition per step, combine as the empty prediction plus the
       guidance scale times the summed differences, step the scheduler once, decode.
-  - Mirror [the SD 3.5 renderer](../../../../scripts/sd35_and_vector_render.py)'s shape, which runs
+  - Mirror [the SD 3.5 renderer](../../../../../5-text-embedding-third-expert/scripts/sd35_and_vector_render.py)'s shape, which runs
     the same sum on a non-SDXL model, rather than the SDXL script's hand-rolled DDIM.
   - Three things the pipeline does that the script must do too: keep only the first four of the
     denoiser's eight output channels, pass the prompt attention mask alongside the embeddings, and
@@ -275,11 +275,11 @@ owning finding beside them, and says what the comparison does and does not settl
   - ✅ 32 tiles under `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/a_cat__x__a_dog/`,
     all 32 sidecars reading 20 steps, guidance 4.5, 1024².
 - [x] **4.2** Build the four-column sheet at
-      `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
+      `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` through
       `and_vector_sheet.sheet`, rows the eight seeds, columns cat alone, dog alone, the product,
       the joint prompt.
   - **Done when:** the sheet is on disk and its own JSON record names every tile it drew.
-  - ✅ `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
+  - ✅ `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` with its JSON
     record beside it.
 
 ▶ **Next: [task 5.1](#5--the-calls-and-the-card)**.
@@ -290,7 +290,7 @@ owning finding beside them, and says what the comparison does and does not settl
 
 - [x] **5.1** Open each of the eight product tiles at full resolution and place it in one of three
       categories: two clear animals, one hybrid animal, or one single animal. Write one record per
-      tile to `artifacts/results/does-a-clip-free-model-hybridise/calls.json` with its seed, its
+      tile to `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/calls.json` with its seed, its
       category and one sentence saying what is in the picture.
   - A hybrid is its own category, not a failed version of either other one. Do not call a clear pair
     from the sheet.
@@ -298,7 +298,7 @@ owning finding beside them, and says what the comparison does and does not settl
   - ✅ 0 two clear animals, 6 one hybrid animal, 2 one single animal, in `calls.json`, with the
     joint column read the same way at 7 of 8.
 - [x] **5.2** Write the card at
-      `artifacts/results/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
+      `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/README.md`: the model, its text encoder,
       the guidance scale and step count used and that they are PixArt-alpha's own defaults rather
       than SDXL's, the three counts out of eight, the SDXL counts quoted from
       [the corrector finding](../../../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md),
@@ -310,7 +310,7 @@ owning finding beside them, and says what the comparison does and does not settl
 ### Close out. 🔄 Record what this plan taught
 
 - [ ] **6.1** Answer the review file against the bar written in it, and write the finding under
-      `report/is-the-gap-the-samplers-or-the-models/` if the verdict is support or null.
+      `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/` if the verdict is support or null.
 - [ ] **6.2** File the sheet, the calls and the card under `artifacts/results/` with the card entry
       and one reference line in this plan's Figure Catalog.
 
@@ -373,18 +373,18 @@ df -h /datasets
 
 | File | What it shows |
 |---|---|
-| `artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` | Rows are seeds 1 to 8, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt "a cat and a dog", all on PixArt-alpha at 20 steps and guidance 4.5. What to notice: whether the third column holds one animal or two, and whether the fourth column holds two. |
+| `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png` | Rows are seeds 1 to 8, columns are "a cat" alone, "a dog" alone, the product of the two, and the joint prompt "a cat and a dog", all on PixArt-alpha at 20 steps and guidance 4.5. What to notice: whether the third column holds one animal or two, and whether the fourth column holds two. |
 
 ## Code references
 
 ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-- `scripts/pixart_multi_poe.py`, this plan's only new code.
+- `1-lora-correction/scripts/pixart_multi_poe.py`, this plan's only new code.
 - [the SDXL composition](../../../../scripts/concept_multi_poe.py), the same sum on SDXL, untouched
   by this plan.
-- [the SD 3.5 renderer](../../../../scripts/sd35_and_vector_render.py), the same sum on a non-SDXL
+- [the SD 3.5 renderer](../../../../../5-text-embedding-third-expert/scripts/sd35_and_vector_render.py), the same sum on a non-SDXL
   model, which this script's shape follows.
-- `scripts/and_vector_sheet.py`, whose `sheet` builds the labelled column sheet.
+- `5-text-embedding-third-expert/scripts/and_vector_sheet.py`, whose `sheet` builds the labelled column sheet.
 
 ## Next step
 
@@ -402,7 +402,7 @@ fusion and the next question is which of the other four differences carries it.
 
 - `poe-disk-001`: a guard that reads a different mount from the one written to. Both the fetch and
   the render resolve their output path first and guard that.
-- `poe-render-001`: see [environment/known-failures.md](../../../../environment/known-failures.md).
+- `poe-render-001`: see [environment/known-failures.md](../../../../../environment/known-failures.md).
 
 ### New to this plan
 

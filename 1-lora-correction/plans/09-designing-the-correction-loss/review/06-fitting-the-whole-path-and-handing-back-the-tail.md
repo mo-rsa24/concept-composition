@@ -53,9 +53,9 @@ Navigation: ⬅️ [Previous](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | What it is for | When, where, W&B | Outcome |
 |---|---|---|---|
-| Task 1.1, `scripts/shrinkage_per_step.py`, both checkpoints, eight held-out seeds, all 50 steps | tests the premise the plan was built on | 2026-09-20 07:11 to 07:18, `mscluster106` device 1, Quadro RTX 8000, no W&B | 800 rows into `shrinkage-per-step.json`. The premise as first written is falsified and a different failure is measured in its place |
-| The hand-off sweep, `scripts/clean_tail_k_sweep.py`, three checkpoints, six cut points, ten cells | tests the claim | 2026-09-19 22:27 to 23:24, `mscluster109` device 1, RTX A6000, no W&B | null on the two rank-32 checkpoints, composition broken on the rank-16 one. Scored against the joint-prompt reference, which is not the standard this project judges by |
-| `scripts/push_brightness_bias.py`, `pool43-all50` at 40,000, seed 9, all 50 steps | tests whether the haze is a brightness shift | 2026-09-20, `mscluster106` device 1 | 50 rows. The adapter adds about 1 to 3% of a brightness offset against a push of size 0.08 to 0.28, which cannot lift blacks from 14 to 40. Not the cause. The same run measured the contrast of the picture each composition aims at, which is the cause |
+| Task 1.1, `1-lora-correction/scripts/shrinkage_per_step.py`, both checkpoints, eight held-out seeds, all 50 steps | tests the premise the plan was built on | 2026-09-20 07:11 to 07:18, `mscluster106` device 1, Quadro RTX 8000, no W&B | 800 rows into `shrinkage-per-step.json`. The premise as first written is falsified and a different failure is measured in its place |
+| The hand-off sweep, `1-lora-correction/scripts/clean_tail_k_sweep.py`, three checkpoints, six cut points, ten cells | tests the claim | 2026-09-19 22:27 to 23:24, `mscluster109` device 1, RTX A6000, no W&B | null on the two rank-32 checkpoints, composition broken on the rank-16 one. Scored against the joint-prompt reference, which is not the standard this project judges by |
+| `1-lora-correction/scripts/push_brightness_bias.py`, `pool43-all50` at 40,000, seed 9, all 50 steps | tests whether the haze is a brightness shift | 2026-09-20, `mscluster106` device 1 | 50 rows. The adapter adds about 1 to 3% of a brightness offset against a push of size 0.08 to 0.28, which cannot lift blacks from 14 to 40. Not the cause. The same run measured the contrast of the picture each composition aims at, which is the cause |
 
 ## The question written before the run
 
@@ -108,7 +108,7 @@ Navigation: ⬅️ [Previous](#asked-after-the-result) | 📋 [TOC](#table-of-co
 
 Navigation: ⬅️ [Previous](#could-the-answer-be-an-artefact) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-`report/designing-the-correction-loss/08-fitting-the-whole-path-and-handing-back-the-tail.md`, carrying the verdict against the bar above, the per-seed table, F1 and F2 from the plan's Figure Catalog, and the sentence saying whether stage B was needed.
+`1-lora-correction/report/designing-the-correction-loss/08-fitting-the-whole-path-and-handing-back-the-tail.md`, carrying the verdict against the bar above, the per-seed table, F1 and F2 from the plan's Figure Catalog, and the sentence saying whether stage B was needed.
 
 ## Still open
 

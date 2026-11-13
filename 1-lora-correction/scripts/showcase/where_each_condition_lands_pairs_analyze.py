@@ -37,7 +37,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from scipy.spatial import ConvexHull
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
 from poe_repair.experiments.compose_scorer_validation.detection_scorer import (  # noqa: E402

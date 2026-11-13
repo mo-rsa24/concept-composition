@@ -1,6 +1,6 @@
 # PRZE-2: the Langevin corrector as reviewer PrzE's MCMC baseline
 
-Retrospective of the walk over [the PRZE-2 plan](../../../plans/prze-2-langevin-corrector.md), 2026-11-11, step 8 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../drips/prze-2-langevin-corrector/EXECUTE_WALK.md).
+Retrospective of the walk over [the PRZE-2 plan](../../../1-lora-correction/plans/prove-the-langevin-corrector-for-the-six-column-figure.md), 2026-11-11, step 8 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/prove-the-langevin-corrector-for-the-six-column-figure/EXECUTE_WALK.md).
 
 ## 1. The update on two Gaussians
 
@@ -8,7 +8,7 @@ Retrospective of the walk over [the PRZE-2 plan](../../../plans/prze-2-langevin-
 
 **The problem.** The chain's exact stationary variance is V / (1 − δ/(2V)), which reaches the product's 0.3077 only as δ shrinks; a check against 0.3077 fails correct code at large δ.
 
-**What was done.** `scripts/check_langevin_two_gaussians.py` runs 200,000 independent chains of the same update as `run_poe_langevin` at δ = 0.005, 0.02, 0.05 and 0.1, and passes a step size when mean and variance sit within 3 Monte Carlo standard errors of the chain's own exact values; the gap to 0.3077 is printed beside it.
+**What was done.** `1-lora-correction/scripts/check_langevin_two_gaussians.py` runs 200,000 independent chains of the same update as `run_poe_langevin` at δ = 0.005, 0.02, 0.05 and 0.1, and passes a step size when mean and variance sit within 3 Monte Carlo standard errors of the chain's own exact values; the gap to 0.3077 is printed beside it.
 
 **Where the results live.** The printed table; commit `6b102c31`.
 
@@ -22,7 +22,7 @@ Retrospective of the walk over [the PRZE-2 plan](../../../plans/prze-2-langevin-
 
 **The problem.** Our corrector settles the latent before each DDIM step; the paper corrects after it.
 
-**What was done.** `scripts/check_langevin_order.py` diffuses the two experts along SDXL's own schedule (50 DDIM levels), uses the exact product score, and runs both orders at c = 1, 3 and 10 with k = 20.
+**What was done.** `1-lora-correction/scripts/check_langevin_order.py` diffuses the two experts along SDXL's own schedule (50 DDIM levels), uses the exact product score, and runs both orders at c = 1, 3 and 10 with k = 20.
 
 **Where the results live.** The printed table; commit `24976455`.
 
@@ -52,7 +52,7 @@ Retrospective of the walk over [the PRZE-2 plan](../../../plans/prze-2-langevin-
 
 **What was done.** Langevin only, c = 3, k = 20 over all 50 levels, no grid, written into protocol rule 3 with a dated history row before any review corrector image.
 
-**Where the results live.** [The protocol](../../../report/paper-review/protocol.md), rule 3, and [its history](../../../report/paper-review/history.md).
+**Where the results live.** [The protocol](../../../1-lora-correction/report/paper-review/protocol.md), rule 3, and [its history](../../../1-lora-correction/report/paper-review/history.md).
 
 **Before and after.** Tuning cost 29 GPU-hours planned, 0 spent.
 
@@ -64,9 +64,9 @@ Retrospective of the walk over [the PRZE-2 plan](../../../plans/prze-2-langevin-
 
 **The problem.** Bigbatch's 6-jobs-per-user cap was held by the baselines session, so Slurm 84596 never started.
 
-**What was done.** `scripts/review_r6_renders.sbatch` ran on mscluster107 card 0 (RTX 8000): 16 tiles (joint, joint + Langevin, PoE, PoE + Langevin) and 4 CO3 tiles at seed 10, all from `latents/seed10.pt`, then a contact sheet. The appendix slot R6 was then dropped and its tiles folded into Figure 5 (R2), beside ours; SuperDiff was dropped from every table and figure.
+**What was done.** `1-lora-correction/scripts/review_r6_renders.sbatch` ran on mscluster107 card 0 (RTX 8000): 16 tiles (joint, joint + Langevin, PoE, PoE + Langevin) and 4 CO3 tiles at seed 10, all from `latents/seed10.pt`, then a contact sheet. The appendix slot R6 was then dropped and its tiles folded into Figure 5 (R2), beside ours; SuperDiff was dropped from every table and figure.
 
-**Where the results live.** <a href="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png"><img src="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10"></a> [the card](../../results/does-a-langevin-corrector-fix-the-product/README.md); commits `379695a6`, `6e60016e`, `08c2a3e7`.
+**Where the results live.** <a href="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png"><img src="../../results/does-a-langevin-corrector-fix-the-product/five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10"></a> [the card](../../../1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/README.md); commits `379695a6`, `6e60016e`, `08c2a3e7`.
 
 **Before and after.** Called by eye at seed 10: PoE fuses 3 of 4 pairs; PoE + Langevin keeps one of the two things on those 3; joint + Langevin, CO3 and ours show both on all 4.
 

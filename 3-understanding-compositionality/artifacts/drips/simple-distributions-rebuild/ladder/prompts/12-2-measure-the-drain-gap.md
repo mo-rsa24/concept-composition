@@ -10,7 +10,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 --depth "to 10.1"
 
 Background
-Layer 12 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) asks whether a
+Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) asks whether a
 correction for composition helps on chest X-rays. Its first step is a gate: whether a pneumothorax
 classifier trained on NIH films finds drain films easier than drain-free ones. That measurement is
 a plan in its own project, B1, whose folder is

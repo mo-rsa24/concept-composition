@@ -2,7 +2,7 @@
 
 This file judges [the design](../plans/experiments/15-experiment-d-weight-decay.md).
 Run kind: hypothesis (one training axis varied, two bars fixed before launch and held in
-`scripts/showcase/experiment_d_verdict.py`).
+`1-lora-correction/scripts/showcase/experiment_d_verdict.py`).
 
 ## Recommended prompt (when the run lands)
 

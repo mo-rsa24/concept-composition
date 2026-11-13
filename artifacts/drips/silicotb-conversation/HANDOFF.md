@@ -19,7 +19,7 @@ Read this file first, then the route.
 3. Public-data pairs with the same three regimes: cardiomegaly plus effusion, effusion plus atelectasis; NIH, PadChest, VinDr
 4. Truly interacting pairs: HIV plus TB, pneumonia plus pulmonary fibrosis, fibrosis plus emphysema (CPFE)
 5. Stable diffusion and product of experts on X-rays: the interaction term R, inclusive labels and condition dropout, a LoRA interaction operator
-6. Multi-label conditioning with LoRA on cats and dogs (already routed: `plans/route-inclusive-captions-pilot.md`)
+6. Multi-label conditioning with LoRA on cats and dogs (already routed: `4-inclusive-captions/plans/route-inclusive-captions-pilot.md`)
 7. Is there an m (mechanism) or h (context) for cats and dogs, or is co-occurrence enforced by captions
 8. Does inclusive training generalise across seeds and pairs
 

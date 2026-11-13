@@ -52,7 +52,7 @@ question is whether that is a hole in the formulation or a property of it.
 
 **Where it came from**
 
-The literature round of the [inclusive-captions walk](../inclusive-captions-axis/IDEA_MAP.md#routes),
+The literature round of the [inclusive-captions walk](../../../../4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md#routes),
 which recorded the observation and split it off rather than absorbing it.
 
 **The bar and the box**
@@ -198,14 +198,14 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 
 - The project's combine, `poe_repair/training_cache.py:11`, and the exact-recovery note in the
   same docstring that makes claim 2 a cached read.
-- [The findings front door](../../../report/00-INDEX.md).
-- [Does the joint prompt always draw both concepts](../../../report/is-the-adapter-just-copying-the-joint-prompt/does-the-joint-prompt-always-draw-both-concepts.md),
+- [The findings front door](../../../../report/00-INDEX.md).
+- [Does the joint prompt always draw both concepts](../../../../1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-joint-prompt-always-draw-both-concepts.md),
   which is claim 4's evidence.
-- [Does the adapter return two when both prompts name the same concept](../../../report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md),
+- [Does the adapter return two when both prompts name the same concept](../../../../1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md),
   which is claim 1's evidence.
-- [The decision timeline](../../../report/decision-timeline.md), whose G04 entry records that the
+- [The decision timeline](../../../../1-lora-correction/report/decision-timeline.md), whose G04 entry records that the
   project's own adapter is a cross-attention LoRA on `attn2.{to_q,to_k,to_v}`.
-- [The inclusive-captions walk's route](../inclusive-captions-axis/IDEA_MAP.md#routes), where this
+- [The inclusive-captions walk's route](../../../../4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md#routes), where this
   question was split off.
 - SynGen 2306.08877, the concept-omission work 2605.14270, MultiCompose 2608.03708: the repairs
   that act on cross-attention maps.

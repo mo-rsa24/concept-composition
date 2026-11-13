@@ -13,7 +13,7 @@ The model predicts a velocity, not noise, and is sampled by Euler on a flow. Gui
 is the plain sum  v = v_empty + w * sum_i (v_i - v_empty)  over its conditions, as for SDXL: one condition is
 ordinary classifier-free guidance, three are PoE with a third expert.
 
-    python scripts/sd35_and_vector_render.py --out <dir> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
+    python 5-text-embedding-third-expert/scripts/sd35_and_vector_render.py --out <dir> --a dog --b cat --joint "dog and cat" --seeds 1 2 3 4 5 6 7 8
 
 Tiles land as <out>/and_vector/<a>__x__<b>/seedNN/<column>.png; an existing tile is skipped. Starting noise is
 the seed's own torch normal draw, so it differs from the SDXL sheet's cached noise.

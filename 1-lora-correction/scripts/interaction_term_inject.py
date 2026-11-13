@@ -23,8 +23,8 @@ compared against the eps actually stepped with, and scaled by ||r_t||.
 See tests/test_interaction_term_canaries.py for the full argument.
 
 Usage:
-    python scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0 --check-canary
-    python scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0.5
+    python 1-lora-correction/scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0 --check-canary
+    python 1-lora-correction/scripts/interaction_term_inject.py --pair a_cat__x__a_dog --seed 9 --lambda 0.5
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ import torch
 # Running as `python scripts/foo.py` puts scripts/ on sys.path, not the repo
 # root, so the package would not import. The plan's engagement instructions use
 # that form, so make it work rather than requiring `-m` or PYTHONPATH.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.composers import teacher_residual as cmp_tr
 from poe_repair.experiments.interaction_term.cell import cell_from_slug

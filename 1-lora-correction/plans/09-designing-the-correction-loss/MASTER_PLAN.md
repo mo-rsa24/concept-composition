@@ -2,7 +2,7 @@
 
 > **This scope's plans sit in the one running order, not in a sequence of their own.** They take
 > step numbers in the `## Running order` table of the
-> [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), interleaved with every other scope's plans.
+> [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), interleaved with every other scope's plans.
 > The `## Plans` list below is this folder's contents and its dependencies, never a list to work
 > down top to bottom.
 
@@ -176,7 +176,7 @@ One table, and it is the only place the set is listed. Equations, code changes a
 `artifacts/_shared/cross_pair_pool_configs/`. Roughly one seed per pair, which buys pairs at the
 cost of seeds per pair, and that is the right trade for a claim about composing two concepts
 rather than two animals. It is the only pool this scope trains on. `00`'s five runs used 88 cells
-over 11 look-alike [animal pairs](../../context/world/animal-pair.md#what-an-animal-pair-is) and
+over 11 look-alike [animal pairs](../../../context/world/animal-pair.md#what-an-animal-pair-is) and
 are read as history, never as a comparison.
 
 **Eight of its 43 cells need [task 1.5](plans/tools/01-the-three-instrument-fixes.md) first.**
@@ -184,7 +184,7 @@ are read as history, never as a comparison.
 directories, and the cell lookup takes the held-out copy when no split is named. The two copies
 are byte-identical so nothing is contaminated in substance, but until the trainer names its split
 a run records 8 training cells as held-out. Full entry:
-[the held-out-first cache lookup](../../environment/known-failures.md#entry-id-poe-data-001).
+[the held-out-first cache lookup](../../../environment/known-failures.md#entry-id-poe-data-001).
 
 **Rank 16 carries the comparison between variations, at steps 0 to 25.** That is the lineage on
 disk and the only one where runs finish. `01`, `03`, `06` and `06a` all reached 30,000 steps, while
@@ -347,7 +347,7 @@ None.
 ⬅️ [Previous](#sub-scopes) | 📋 [TOC](#table-of-contents) | [Next](#environment-context) ➡️
 
 Six plans, in the order they get done. The step numbers are their places in the
-[root running order](../../MASTER_PLAN.md), which is the one order across every scope.
+[root running order](../../../MASTER_PLAN.md), which is the one order across every scope.
 
 | Step | Plan | What it does | Status | Waits on |
 |---|---|---|---|---|
@@ -370,18 +370,18 @@ cannot be met, which is stated rather than hidden.
 
 ⬅️ [Previous](#plans) | 📋 [TOC](#table-of-contents) | [Next](#learning-coverage) ➡️
 
-Start at [the environment index](../../environment/00-INDEX.md). This scope depends on:
+Start at [the environment index](../../../environment/00-INDEX.md). This scope depends on:
 
-- [the node facts](../../environment/hpc/nodes.md): `biggpu` allows one job per user, so a set of
+- [the node facts](../../../environment/hpc/nodes.md): `biggpu` allows one job per user, so a set of
   four experiments at once goes to `bigbatch` and its RTX 3090s. A Blackwell node is the right
   choice for a single long follow-up and needs `co3_bw`, never `co3`, because a `co3` CUDA
   operation there produces no output rather than an error.
-- [the throughput facts](../../environment/hpc/throughput.md): rank 16 at about 1.2 s per step on an
+- [the throughput facts](../../../environment/hpc/throughput.md): rank 16 at about 1.2 s per step on an
   RTX 8000 and about 11 to 13.5 hours for 30,000 steps on a 3090, so 50,000 steps is roughly 20
   hours. Memory per rank is the column this folder does not yet have, and this scope adds it.
-- [the storage facts](../../environment/storage.md): checkpoints to `/datasets` only, and a disk
+- [the storage facts](../../../environment/storage.md): checkpoints to `/datasets` only, and a disk
   guard that checks the filesystem the job actually writes to.
-- [the overview](../../environment/overview.md): cached tensors are float16 and any analysis
+- [the overview](../../../environment/overview.md): cached tensors are float16 and any analysis
   stacking many of them upcasts to float32 first, which is also why the trainer casts its forward
   pass to fp32 before the branches are combined.
 

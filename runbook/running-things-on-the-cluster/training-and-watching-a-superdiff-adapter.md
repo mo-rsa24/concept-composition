@@ -26,7 +26,7 @@ residual, or inject an attached LoRA as `ε(off) + λ · (ε(on) − ε(off))`. 
 
 **The cache and the trainer**
 
-`scripts/build_superdiff_cache.py` renders the pool once at κ 0.5 and saves, per cell and per
+`1-lora-correction/scripts/build_superdiff_cache.py` renders the pool once at κ 0.5 and saves, per cell and per
 step, the UNet input and the three raw predictions plus the joint one, under the same key names
 the PoE cache uses, so the pooled trainer reads it unchanged. The only new trainer code is the
 `--compose superdiff --kappa 0.5` switch, which composes the three branches with SuperDiff's blend
@@ -100,7 +100,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 | What is listed | What it is | Watch out |
 |---|---|---|
-| `scripts/superdiff/` in the repo | Every script below, the canonical copies | The copies under `$SD/scripts/` are what actually ran on the nodes; the repo ones are identical as of 2026-09-05. Run from `$SD/scripts/` on a node, because a script in the session's `/tmp` scratchpad is invisible on every other node |
+| `1-lora-correction/scripts/superdiff/` in the repo | Every script below, the canonical copies | The copies under `$SD/scripts/` are what actually ran on the nodes; the repo ones are identical as of 2026-09-05. Run from `$SD/scripts/` on a node, because a script in the session's `/tmp` scratchpad is invisible on every other node |
 | `$SD/cache/train/<pair>/seed_<n>/` | The trajectory cache: `meta.json` plus 200 `residuals/step_XXX.pt` per cell, 88 cells | Key names are the PoE cache's (`x_t`, `eps_a_raw`, `eps_b_raw`, `eps_j_raw`, `eps_uncond`) on purpose |
 | `$SD/sdlora_r{8,16,32}_100k/` | One training each: `checkpoints/lora_step_*.pt` every 5k steps, `history.json`, `samples/superdiff/` strips | Final checkpoints are named `lora_step_1000xx.pt`, not `100000` exactly |
 | `$SD/lambda_sweep/`, `$SD/transfer/`, `$SD/transfer_sdlora/`, `$SD/preview_sdlora/`, `$SD/samples_sdlora/` | Renders: SuperDiff alone across κ and λ; PoE adapters inside SuperDiff; SuperDiff adapters inside SuperDiff (final set, never run); λ sweeps of single checkpoints; the watcher's tiles | Every render is cached by path, so a re-run skips finished cells |

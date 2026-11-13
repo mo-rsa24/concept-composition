@@ -93,7 +93,7 @@ These four ran with no written criterion. The bars below were fixed before the r
 
 **What each half of this plan is for.** The rank-16 four already exist, cost nothing to read, and answer whether the penalty does anything at all. The rank-32 pair on the scope pool is what a claim is made from. Reading the cheap pair first is the point: if the penalty does nothing at rank 16, the expensive pair is not worth eleven hours a side.
 
-**Two of the four held-out cells have a broken reference.** Seed 10 of cat × dog draws three dogs and seed 9 of elephant × penguin draws an elephant alone. `scripts/correction_loss_variants/arm_grid.py` already knows this and names the sound pair; no score is averaged over a cell whose reference is wrong.
+**Two of the four held-out cells have a broken reference.** Seed 10 of cat × dog draws three dogs and seed 9 of elephant × penguin draws an elephant alone. `1-lora-correction/scripts/correction_loss_variants/arm_grid.py` already knows this and names the sound pair; no score is averaged over a cell whose reference is wrong.
 
 **Project tracking.** W&B, project `prime_lab/poe-repair-animals-compose`, runs `tqs7qf95`, `72as6yk3`, `mw1cqrpk`, `pckb2za7`.
 
@@ -105,10 +105,10 @@ These four ran with no written criterion. The bars below were fixed before the r
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Storage](../../../../environment/storage.md): the four run directories and their renders are on `/datasets`; the scoring pass writes there too.
-- [Nodes](../../../../environment/hpc/nodes.md): the render pass needs one healthy card. Pin a node from a live idle probe rather than trusting `sinfo`, whose idle list includes hardware-faulted GPUs.
-- [Overview](../../../../environment/overview.md): cached tensors are float16 and stacking them for an analysis upcasts to float32 first.
-- [Known failures](../../../../environment/known-failures.md): the scorer's DINOv2 pass on CPU needs `XFORMERS_DISABLED=1`.
+- [Storage](../../../../../environment/storage.md): the four run directories and their renders are on `/datasets`; the scoring pass writes there too.
+- [Nodes](../../../../../environment/hpc/nodes.md): the render pass needs one healthy card. Pin a node from a live idle probe rather than trusting `sinfo`, whose idle list includes hardware-faulted GPUs.
+- [Overview](../../../../../environment/overview.md): cached tensors are float16 and stacking them for an analysis upcasts to float32 first.
+- [Known failures](../../../../../environment/known-failures.md): the scorer's DINOv2 pass on CPU needs `XFORMERS_DISABLED=1`.
 
 ---
 
@@ -166,7 +166,7 @@ These four ran with no written criterion. The bars below were fixed before the r
 2. **A scoring pass**: compose count and drift per seed per checkpoint, into one json.
 3. **The mechanism numbers** pulled from W&B for all four runs, medians per 5,000-step window.
 4. **The blind strips**, names hidden and order shuffled, with the shuffle saved.
-5. **`report/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving.md`**, copying plan 02's page shape.
+5. **`1-lora-correction/report/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving.md`**, copying plan 02's page shape.
 6. **The prompt-rewrite finding**, written in the same pass because it is the same four runs.
 
 ---
@@ -230,7 +230,7 @@ For Claude to execute.
   - One strip per held-out seed at checkpoint 30,000: the joint-prompt target, the plain product, and the four experiments' renders with their condition names replaced by ids and their order shuffled per seed
   - Save the shuffle key to a separate file, so the blinding can be checked after the read and not before it
   - Produces: eight strips plus `shuffle-key.json`
-  - Exclude seed 10, whose joint-prompt reference draws three dogs. `scripts/correction_loss_variants/arm_grid.py` already names the sound cells
+  - Exclude seed 10, whose joint-prompt reference draws three dogs. `1-lora-correction/scripts/correction_loss_variants/arm_grid.py` already names the sound cells
 
 ▶ **Next: [instruction 4.1](#4--read-the-strips-by-eye)**, the read itself.
 
@@ -238,12 +238,12 @@ For Claude to execute.
 
 ◀ **Needs: [instruction 4.1](#4--read-the-strips-by-eye)** done, so there are labels to write about.
 
-- [ ] 3.1 **Write `report/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving.md`**
+- [ ] 3.1 **Write `1-lora-correction/report/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving.md`**
   - Plan 02's page shape. Verdict first, the equation rendered, the strips as thumbnails, one table of both bars, links to the detail
   - Carries at the top, plainly, that these four ran on 2026-09-12 with no written criterion, and that the bars were fixed before the read and not before the run
   - Produces: one page
 - [ ] 3.2 **Write the prompt-rewrite finding**
-  - `report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md` gains a short section, or its own file if it runs long: renaming a prompt renames a free tensor, so the three prompt styles reach the same composed predictions and differ in where training starts
+  - `1-lora-correction/report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md` gains a short section, or its own file if it runs long: renaming a prompt renames a free tensor, so the three prompt styles reach the same composed predictions and differ in where training starts
   - The number that carries it is the spread of the three fit losses
   - Produces: the finding, wherever it is shorter
 - [ ] 3.3 **Write the artifact card**
@@ -369,10 +369,10 @@ The review questions are in [the review file](../../review/03-the-v0a-read.md).
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/correction_loss_variants/run_arm.sh`
+**File:** `1-lora-correction/scripts/correction_loss_variants/run_arm.sh`
 **Relevant section:** the launcher that produced all four experiments. Everything except one flag is pinned inside it, which is what makes the comparison clean. `MU` defaults to 0.1 and was passed as 10; `STEPRANGE="0 25"` restricted training to the first half of the schedule.
 
-**File:** `scripts/correction_loss_variants/arm_grid.py`
+**File:** `1-lora-correction/scripts/correction_loss_variants/arm_grid.py`
 **Relevant section:** `SOUND` and `BROKEN` at lines 43 to 46, the two held-out cells whose joint-prompt reference is usable and the two whose is not. Task 2.1 reads this rather than re-deciding it.
 
 **File:** `poe_repair/experiments/one_pair_one_seed/trainer.py`

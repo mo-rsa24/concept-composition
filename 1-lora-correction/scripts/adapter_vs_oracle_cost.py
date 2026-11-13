@@ -26,7 +26,7 @@ rescored per seed and is not what this shows.
 
 Reads two already-scored files, samples nothing.
 
-    python scripts/adapter_vs_oracle_cost.py
+    python 1-lora-correction/scripts/adapter_vs_oracle_cost.py
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 DOSE = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "dose_curves.json"

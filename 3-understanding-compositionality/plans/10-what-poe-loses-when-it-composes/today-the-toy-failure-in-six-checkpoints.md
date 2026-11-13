@@ -28,14 +28,14 @@ Navigation: 📋 [Contents](#contents) | [Next](#why-this-exists) ➡️
 **Guided, in the repo's notebook.** One cell per message, written with you:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
 ```
 
 **On your own, in your own notebook.** You write each cell from the checkpoint's description and the
 write-up, and the drip answers questions and checks what you drew:
 
 ```text
-/drip --code plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
+/drip --code 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
 ```
 
 Your notebook lives in the playground, `/home/molef/playground/deep-learning/poe-structural-toy/`, which is
@@ -44,8 +44,8 @@ playground.
 
 **Keep two things open beside it.** [The write-up](what-poe-loses-when-it-composes.md) holds every formula this walk uses, written out
 step by step, so the maths can be done on the iPad before any code. Your
-[sampler-correctors journey](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md) and the
-[textbook shelf](../../../../goal-setting/learning/mathematics/textbooks/Textbooks.md) hold the background.
+[sampler-correctors journey](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md) and the
+[textbook shelf](../../../../../goal-setting/learning/mathematics/textbooks/Textbooks.md) hold the background.
 
 **Each checkpoint opens with three lines:**
 
@@ -57,7 +57,7 @@ step by step, so the maths can be done on the iPad before any code. Your
 
 Navigation: ⬅️ [Previous](#two-ways-to-walk-it) | 📋 [Contents](#contents) | [Next](#the-setup-fixed-before-any-cell-runs) ➡️
 
-**[PoE](../../context/world/poe-composition.md#what-poe-composition-is) of "a cat" and "a dog" on SDXL draws one fused animal.** This walk shows the same failure on
+**[PoE](../../../context/world/poe-composition.md#what-poe-composition-is) of "a cat" and "a dog" on SDXL draws one fused animal.** This walk shows the same failure on
 shapes, where every answer is a formula. The reasoning is in
 [§8 of the write-up](what-poe-loses-when-it-composes.md#8-structural-experiments-on-the-toy). The key
 idea is in [§8.2](what-poe-loses-when-it-composes.md#82-the-model-of-a-word-in-plain-terms): the model of
@@ -98,7 +98,7 @@ Navigation: ⬅️ [Previous](#why-this-exists) | 📋 [Contents](#contents) | [
 Navigation: ⬅️ [Previous](#the-setup-fixed-before-any-cell-runs) | 📋 [Contents](#contents) | [Next](#checkpoints) ➡️
 
 ```
-artifacts/notes/what-poe-loses-when-it-composes/
+3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/
   the-toy-failure.ipynb            the notebook you build, one cell per step below
   figures/checkpoints/             cp1-training-pictures.png ... cp6-samplers.png, saved by the cells
 ```
@@ -115,7 +115,7 @@ it, then say what you see before moving on.
 
 ### 0. 🖱️ Open the notebook (you, ~5 min)
 
-- [ ] **Create** `artifacts/notes/what-poe-loses-when-it-composes/the-toy-failure.ipynb` in VS Code:
+- [ ] **Create** `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/the-toy-failure.ipynb` in VS Code:
   **File → New File → Jupyter Notebook**, then save under that path.
 - [ ] **Pick the kernel:** top right of the notebook → **Select Kernel → Python Environments →**
   `/home/molef/miniconda3/bin/python3`.
@@ -141,7 +141,7 @@ it, then say what you see before moving on.
 
 - **📖 Read first:** [§8.2's formula and its name taken apart](what-poe-loses-when-it-composes.md#82-the-model-of-a-word-in-plain-terms).
 - **✏️ By hand:** write $p(x \mid \text{circle})$ as three bells, one per picture. Then pick one pixel inside the centre circle: draw the three bells for its green channel (one near 0 where the centre circle is red, two near 1 where the other circles leave it white) and say what a sample of that pixel looks like. The red channel will not do: red and white both have red 1, so its three bells coincide.
-- **📚 Background:** [density and log-density](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/01-density-and-log-density.md); [a mixture needs heights](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/33-a-mixture-needs-heights.md).
+- **📚 Background:** [density and log-density](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/01-density-and-log-density.md); [a mixture needs heights](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/33-a-mixture-needs-heights.md).
 
 - [ ] **Build:** the rule for "circle": pick one of the 3 circle pictures at random, add noise of size
   σ to every pixel. Draw 200 samples.
@@ -158,7 +158,7 @@ it, then say what you see before moving on.
 
 - **📖 Read first:** [the one-pixel derivation](what-poe-loses-when-it-composes.md#why-the-overlay-is-purple-one-pixel-worked-by-hand), then [§5.1, the product is a precision-weighted average](what-poe-loses-when-it-composes.md#51-the-product-is-a-precision-weighted-average).
 - **✏️ By hand:** complete the square for one channel, $(v-a)^2 + (v-b)^2$, and land on the bell at $\tfrac{a+b}{2}$. Then do it for two whole pictures: the leftover $\tfrac{(a-b)^2}{2}$, summed over pixels, becomes the weight $w_{jk}$. Say why a circle and a square **in the same place** get the largest weight. The numbers to land on: summed squared difference $d^2 = 48$ for a same-place pairing and 80 for any other, so at σ = 0.1 each of the three same-place pairings takes a share of ⅓ and every other pairing is smaller by $e^{-800}$.
-- **📚 Background:** [the two-Gaussian toy](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md); [the PoE rule assembled](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md); completing the square in [jointly Gaussian vectors](../../../../goal-setting/learning/mathematics/statistics/conditional-expectation/textbook/07-jointly-gaussian-vectors.md).
+- **📚 Background:** [the two-Gaussian toy](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md); [the PoE rule assembled](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md); completing the square in [jointly Gaussian vectors](../../../../../goal-setting/learning/mathematics/statistics/conditional-expectation/textbook/07-jointly-gaussian-vectors.md).
 
 - [ ] **Work one pixel by hand first.** Take a pixel that is pure red (1, 0, 0) in the circle's picture
   and pure blue (0, 0, 1) in the square's. For each colour channel, draw each expert's opinion as a bell
@@ -205,11 +205,11 @@ it, then say what you see before moving on.
 
   Where things are:
   - Repo: /home/molef/PhD/poe_repair_min-dog-and-rain.
-  - Plan: plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
+  - Plan: 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md
     (the setup table and its geometry row, checkpoints 3 and 5).
-  - Write-up: plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, §8.2 (the
+  - Write-up: 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, §8.2 (the
     formula with w_jk), the one-pixel section, §5.2, §9.2.
-  - Walk memory, quote it rather than summarise it: artifacts/drips/toy-failure-six-checkpoints/dispatch.md
+  - Walk memory, quote it rather than summarise it: 3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/dispatch.md
   - Rebuild the pictures from the geometry row in a fresh folder under
     /home/molef/playground/deep-learning/; do not assume an earlier playground folder still exists.
 
@@ -227,7 +227,7 @@ it, then say what you see before moving on.
      by pixel which pixels make up each number, as a labelled table of pixel counts and squared
      differences.
   2. Draw one figure: the two pairings' averages side by side, each pixel coloured by its contribution
-     to d^2. Save it to artifacts/drips/toy-failure-six-checkpoints/thread-why-not-apart/ with a
+     to d^2. Save it to 3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/thread-why-not-apart/ with a
      README card entry.
   3. Say what would make "apart" win, each with one computed number: the share of apart pairings at
      sigma 0.3 and at sigma 1.0; the pair picture's share when it is 1 in 100 of both words' pictures.
@@ -264,7 +264,7 @@ it, then say what you see before moving on.
 - **✏️ By hand:** write the sum of the two rules as six bells, each with weight 1/6. Point to the term that averaged two pictures in checkpoint 3, and show it is absent here. Then on one pixel, the blue value of `[4, 8]`, draw the circle's bell at 0 and the square's at 1, half weight each: the sum is two bumps with nothing at 0.5 (height 1.5 × 10⁻⁵ there, against 1.99 at 0), where the product was one bell at 0.5.
 
   <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-sum-vs-product.png"><img src="figures/fig-sum-vs-product.jpg" width="420" alt="Reference: one pixel's blue value, the product as one purple bell at 0.5 beside the sum as a red bump at 0 and a blue bump at 1"></a>
-- **📚 Background:** [a mixture needs heights](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/33-a-mixture-needs-heights.md).
+- **📚 Background:** [a mixture needs heights](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/33-a-mixture-needs-heights.md).
 
 - [ ] **Build:** "circle" OR "square": pick one rule with even odds, then follow it. Draw 200.
 - [ ] **📸 You should see**, in Du's layout with "+": circles or squares, never an overlay, with the
@@ -283,7 +283,7 @@ it, then say what you see before moving on.
 - **✏️ By hand:** the pair picture paired with itself has distance 0, so its weight is just its share squared. An overlay pair has a large distance, so its weight is shrunk by $e^{-d^2/4\sigma^2}$. Say why even a small share for the pair beats every overlay. The numbers to land on: with each word holding its three singles at $(1-s)/3$ and the pair at $s$, the 16 pairings have $d^2 = 0$ for pair × pair, 32 for circle left × pair, 48 for each overlay and for pair × square right, and 80 or more for the rest; so pair × pair beats the best overlay by $\tfrac{9s^2}{(1-s)^2} e^{1200}$ at σ = 0.1, which is overwhelming for any $s$ above 0.
 
   <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-caption-dial-pairings.png"><img src="figures/fig-caption-dial-pairings.jpg" width="420" alt="Reference: the 16 pairings at s = 0.05, each a pixel average with its d squared and weight; pair with pair, boxed green, has d squared 0 and shows the two shapes apart at full colour"></a>
-- **📚 Background:** [the two-Gaussian toy](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md).
+- **📚 Background:** [the two-Gaussian toy](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md).
 
 - [ ] **Build:** let the word "circle" also cover the pair picture, and so does "square", at five
   settings: none of each word's pictures, 1 in 100, 1 in 20, 1 in 5, and half. Exact product at each,
@@ -310,7 +310,7 @@ it, then say what you see before moving on.
 
   <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-error-a.png"><img src="figures/fig-error-a.jpg" width="420" alt="Reference: left, one pixel at ᾱ 0.5, the exact noisy product as a wide purple bell and the summed-scores target dashed, same centre and half the width; right, share on the two shapes apart against ᾱ, flat at 1 for the exact noisy product and dropping toward 0 at high noise for the summed scores"></a>
 - **Watch for:** each bump's centre is $\sqrt{\bar\alpha}\times$ the picture, not the picture. A correct score averages to 0 over draws from its own noisy rule (0.0065 at ᾱ = 0.9 over 400 draws); with the centres left unscaled it averages 0.42 at ᾱ = 0.9 and 0.67 at ᾱ = 0.1.
-- **📚 Background:** [the forward process](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/06-the-forward-process.md); [noise prediction is the score](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/08-noise-prediction-is-the-score.md); [DDIM](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/32-ddim-non-markovian-and-deterministic-limit.md); [the two gaps](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/15-the-two-gaps.md) and [which gap a corrector removes](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/16-which-gap-a-corrector-removes.md); [Metropolis-Hastings](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/12-metropolis-hastings.md), [Langevin dynamics](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/21-langevin-dynamics.md) and [the accept step needs the height](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/36-the-accept-step-needs-the-height.md).
+- **📚 Background:** [the forward process](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/06-the-forward-process.md); [noise prediction is the score](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/08-noise-prediction-is-the-score.md); [DDIM](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/32-ddim-non-markovian-and-deterministic-limit.md); [the two gaps](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/15-the-two-gaps.md) and [which gap a corrector removes](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/16-which-gap-a-corrector-removes.md); [Metropolis-Hastings](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/12-metropolis-hastings.md), [Langevin dynamics](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/21-langevin-dynamics.md) and [the accept step needs the height](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/36-the-accept-step-needs-the-height.md).
 
 - [ ] **Build:** the same rules made noisy step by step (each bump just widens, so every noisy version
   is still a formula). Then three ways of sampling:
@@ -359,7 +359,7 @@ it, then say what you see before moving on.
 
 - **📖 Read first:** "what the product does" in [§8.2](what-poe-loses-when-it-composes.md#82-the-model-of-a-word-in-plain-terms), and [§5.2](what-poe-loses-when-it-composes.md#52-structural-contention-gives-a-blend).
 - **✏️ By hand:** draw the circle's range and the square's range as two rows of shapes, from round to square. Mark the pair, one from each row, with the smallest distance between them: that is where the product's peak goes.
-- **📚 Background:** [the two-Gaussian toy](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md).
+- **📚 Background:** [the two-Gaussian toy](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/14-the-two-gaussian-toy.md).
 
 - [ ] **Build:** give each word a range of pictures instead of one shape: circles with slightly
   squarish corners, squares with slightly rounded ones, and colours shading a little toward each other.
@@ -376,7 +376,7 @@ it, then say what you see before moving on.
 
 - **📖 Read first:** the guidance weight in [§3.1](what-poe-loses-when-it-composes.md#31-product-of-experts-and-the-and-operator), and "with unequal certainty, the average leans" in [the one-pixel derivation](what-poe-loses-when-it-composes.md#why-the-overlay-is-purple-one-pixel-worked-by-hand).
 - **✏️ By hand:** show that raising a bell $\mathcal N(v; a, \sigma^2)$ to the power $w$ gives $\mathcal N(v; a, \sigma^2/w)$. Then put two bells with different widths into the precision-weighted average and watch it lean toward the narrower one.
-- **📚 Background:** [the PoE rule assembled](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md); Ho and Salimans, in the [write-up's references](what-poe-loses-when-it-composes.md#12-references).
+- **📚 Background:** [the PoE rule assembled](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/09-the-poe-rule-assembled.md); Ho and Salimans, in the [write-up's references](what-poe-loses-when-it-composes.md#12-references).
 
 - [ ] **Build:** raise each word's rule to a power w = 1, 3, 7.5 (each bump narrows by √w), and take the
   exact product; then repeat with the circle's rule narrower than the square's.

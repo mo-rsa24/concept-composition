@@ -66,15 +66,15 @@ The things this pass could not settle by reading. Each names who or what would s
       `poe_repair/composers/teacher_residual.py` or wherever `d_t_poe_vs_mono` is computed, and
       confirm `ε̃_J` and `ε̃_Mono` name the same prediction. See
       [world/interaction-term.md § What people get wrong](world/interaction-term.md#what-people-get-wrong).
-- [ ] **The current animal-pair pool's size is not settled.** `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
-      lists 17 pairs; `report/experiments-log.md` also says 17 "in the current pool"; but
+- [ ] **The current animal-pair pool's size is not settled.** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`
+      lists 17 pairs; `1-lora-correction/report/experiments-log.md` also says 17 "in the current pool"; but
       `plans/standing/retrofit-poe-repair-min.md` (a later document) names "the 20 animal pairs" as the
       scope boundary. Would settle it: list the pair directories actually present under the
       current pool's output folder and recount. See
       [world/animal-pair.md § What people get wrong](world/animal-pair.md#what-people-get-wrong).
 - [ ] **Whether `a_butterfly__x__a_flower_meadow` (named as the one pair that composes, and the
       pair the paper opens on) has a recorded fail-rate anywhere.** It does not appear in
-      `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`. Would settle it: find or run its scorer
+      `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md`. Would settle it: find or run its scorer
       result. See [world/animal-pair.md § What an animal pair is](world/animal-pair.md#what-an-animal-pair-is).
 - [ ] **The one external paper registered in `sources.md` has not been read past its title**,
       because `pdftoppm` is not installed in this session's environment. Would settle it: install
@@ -94,7 +94,7 @@ Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
 - [ ] 📷 [world/lora-corrector.md § What it looks like](world/lora-corrector.md#what-it-looks-like):
       one run's PoE render, LoRA-corrected render, and Mono render side by side. No search tried
-      yet beyond noting a candidate source (`artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
+      yet beyond noting a candidate source (`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
       passing runs). Save as `images/world/05-lora-corrected-vs-poe-vs-mono.png`.
 - [ ] 🖼️ All 8 pieces in [diagram-prompts.md](diagram-prompts.md) are written and unrendered: 4
       subject-lane pieces plus capstone are missing from this count (3 pieces + capstone = 4

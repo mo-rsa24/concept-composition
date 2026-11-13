@@ -1,6 +1,6 @@
 # Walk map: present the ICLR 56173 revision to the supervisor
 
-Plan: `plans/present-revision-to-supervisor.md` · mode `--request` · branch `exec/correction-loss-01`
+Plan: `1-lora-correction/plans/present-revision-to-supervisor.md` · mode `--request` · branch `exec/correction-loss-01`
 
 ## Stop point
 
@@ -30,7 +30,7 @@ Group G7, the training loss and what the adapter returns (k4nd W4a, W4b, Q4), ca
 - Task 2.1 built, waiting on stop 2: G7 figure, review crops from Reviews.pdf at 300 dpi located by OCR (screenshots kept as the record).
 - Paper and reply edits asked for at stop 2 (Molefe's word): Equation 12 unweighted with no weighting sentence; inference is the usual PoE step with the adapter on; the strength-λ equation removed; after Equation 12, "the joint prompt's prediction is the product's prediction plus r_t ... switching the adapter on adds it" (commits ead813ab, c980aa5a). Rebuild: 20 pages, main text ends p. 10, 0 undefined references.
 - Added at Molefe's request: task 3.3, review.tex grouping the claims with quotes, what was done and the reply, done towards the end.
-- Tables 1 and 3 recomputed on prompts and pairs sharing no concept with training (script a0d9e260; results in artifacts/results/how-the-adapter-scores-against-other-methods/no_overlap_tables.json). Molefe: keep out of the paper and replies unless a reviewer raises it; no reply sentence that invites more questions.
+- Tables 1 and 3 recomputed on prompts and pairs sharing no concept with training (script a0d9e260; results in 1-lora-correction/artifacts/results/how-the-adapter-scores-against-other-methods/no_overlap_tables.json). Molefe: keep out of the paper and replies unless a reviewer raises it; no reply sentence that invites more questions.
 - Open for the close: the k4nd W4 misquote (Figure 7 for Figure 8) and PrzE Q1's "Tables 1 to 4"; Molefe has not said whether to fix them.
 
 ## Out of session

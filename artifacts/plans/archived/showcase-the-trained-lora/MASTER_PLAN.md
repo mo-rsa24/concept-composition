@@ -87,8 +87,8 @@ carry review files with their pre-registrations.
 ## Depends on
 
 - The trained checkpoints under
-  `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`
-  (resolved via `checkpoints/latest.json`; `scripts/cross_seed_lora_pooling/heldout_pair.sh`
+  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`
+  (resolved via `checkpoints/latest.json`; `1-lora-correction/scripts/cross_seed_lora_pooling/heldout_pair.sh`
   is the resolution pattern to copy).
 - The cached r_t cells (`POE_REPAIR_TRAINING_CACHE`), the validated scorer
   (`scorer_validated.json`), and the spectrum results under

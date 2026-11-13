@@ -31,7 +31,7 @@ for looking only, because their licence forbids committing them.
 **The starting set is larger and better documented than stated.** The route names nine films in
 `radiograph-highlights/` with provenance in a README beside them. That folder holds seven composite
 figures and no README. The provenance lives one folder across, in
-[the medical examples card](../../../results/joint-against-poe-by-kind-of-composition/medical-examples/README.md),
+[the medical examples card](../../../../3-understanding-compositionality/artifacts/results/does-poe-match-the-joint-for-each-kind-of-composition/medical-examples/README.md),
 682 lines covering 29 films with each one's caption, licence and citation quoted. That card is why
 this run needed no web search: the sourcing was already done, and only the regime assignment was
 missing.

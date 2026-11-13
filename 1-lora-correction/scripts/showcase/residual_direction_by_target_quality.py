@@ -31,7 +31,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 CACHE = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/train")
 OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality")

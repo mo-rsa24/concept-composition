@@ -17,7 +17,7 @@ inference, on every step, does that correction still separate the two concepts?
 ## Position in the plan tree
 
 **Step 49 of 50.** Waits on steps 28, 38 and 39. The one order is the `## Running order` table in
-the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -211,13 +211,13 @@ correction transfers across composition rules.
   Never a bare `python`.
 - Renders write under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/transfer/`, with
-  a disk guard on `/datasets`, per [environment/storage.md](../../../../environment/storage.md).
+  a disk guard on `/datasets`, per [environment/storage.md](../../../../../environment/storage.md).
 - Checkpoints, read only: `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/lora_step_450000.pt`,
   `.../phase1_r16_100k/checkpoints/lora_step_100000.pt`,
   `.../phase1_r32_100k/checkpoints/lora_step_100000.pt`. Each run's `config.json` records
   alpha equal to rank.
 - About 7 hours of GPU for the 96 renders (every step is two UNet passes), so the run goes under
-  `nohup` per [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md),
+  `nohup` per [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md),
   on mscluster85 after step 28's sweep releases it or on a biggpu node once a training finishes.
   mscluster85's GPU is shared with another user's long job; one render process at a time.
 - **The cached trajectories cannot be used.** SuperDiff follows its own path.
@@ -254,7 +254,7 @@ checkpoints on disk.
     run on the latest checkpoints rather than the finals, per instruction 4.1's partial-pass path.
   - `lora_trainer.attach_lora` with `rank`, `alpha=rank`, modules `attn2.to_q`, `attn2.to_k`,
     `attn2.to_v`, adapter name `lora`; then `load_lora_state`. Same call sequence as
-    `scripts/showcase/lora_dose_sweep.py:_attach_and_load_lora`.
+    `1-lora-correction/scripts/showcase/lora_dose_sweep.py:_attach_and_load_lora`.
   - **Done when:** all three print a non-zero count and the same count as each other (the
     architecture is the same, so the module set is). Zero is a failure, not a pass.
 - [x] **1.2** Add the whole-run two-pass injection to `_run_sampling_loop`: adapter off then on
@@ -411,9 +411,9 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/composers/superdiff.py](../../../../poe_repair/composers/superdiff.py) | the composer this plan extends with the adapter toggle |
-| [poe_repair/methods/_sampling.py](../../../../poe_repair/methods/_sampling.py) `run_lora_residual_inject_masked` | the off/on two-pass grammar being reproduced with `eps_M` in place of `eps_PoE` |
-| [scripts/showcase/lora_dose_sweep.py](../../../../scripts/showcase/lora_dose_sweep.py) `_attach_and_load_lora` | the attach and load sequence, copied exactly |
+| [poe_repair/composers/superdiff.py](../../../../../poe_repair/composers/superdiff.py) | the composer this plan extends with the adapter toggle |
+| [poe_repair/methods/_sampling.py](../../../../../poe_repair/methods/_sampling.py) `run_lora_residual_inject_masked` | the off/on two-pass grammar being reproduced with `eps_M` in place of `eps_PoE` |
+| [1-lora-correction/scripts/showcase/lora_dose_sweep.py](../../../../scripts/showcase/lora_dose_sweep.py) `_attach_and_load_lora` | the attach and load sequence, copied exactly |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r*/config.json` | rank and alpha per checkpoint |
 
 ## Next step

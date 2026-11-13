@@ -6,7 +6,7 @@ sections after it are filled from the result.
 
 ## Position in the plan tree
 
-[Root](../../../MASTER_PLAN.md) › [do inclusive captions help PoE compose](../MASTER_PLAN.md) ›
+[Root](../../../../MASTER_PLAN.md) › [do inclusive captions help PoE compose](../MASTER_PLAN.md) ›
 [the pilot](../plans/01-the-inclusive-captions-pilot.md) › this review.
 
 ## Table of contents
@@ -34,7 +34,7 @@ seen. Both runs leave the caption blank 10% of the time, on every photo in every
 **The product.** `eps_uncond + g * (eps_a + eps_b - 2 * eps_uncond)` with the cat prompt as `a`,
 the dog prompt as `b`, and guidance 7.5.
 
-**[Compose rate](../../../context/world/compose-rate.md).** The fraction of a run's 128 product renders holding exactly one cat and one
+**[Compose rate](../../../../context/world/compose-rate.md).** The fraction of a run's 128 product renders holding exactly one cat and one
 dog, with neither animal a hybrid of the two. Counted by GroundingDINO, named by the CLIP crop
 classifier, judged off 1,024-square tiles at full resolution.
 
@@ -130,7 +130,7 @@ were looked at and 40 went out: 33 that plainly do not hold one live cat and one
 nobody could call either way. Ten of the 33 are a cat beside a depiction of a dog, which is the
 failure worth naming, because COCO's annotation does not distinguish a dog from a picture of a
 dog. The 91 that survive are the training set, and the per-photo reasons are in
-`artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json`.
+`4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json`.
 
 The cut moved the effect size, so the design moved with it. At 91 both-animal photos against 300
 cat-only, the dog-present share of run B's cat draws falls to 0.119, under what 128 seeds can

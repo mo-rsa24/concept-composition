@@ -98,9 +98,9 @@ Two provenance gaps found while planning. Checkpoints are saved four times less 
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Storage](../../../../environment/storage.md): checkpoints go to `/datasets` only, which has 233 TB free, so the cadence change costs nothing that matters. `/home-mscluster` hit 100% once and silently killed checkpointing.
-- [Overview](../../../../environment/overview.md): the forward pass is cast to fp32 before the branches are combined, because fp16 cancellation destroys the gradient. The undialled error is computed on the same fp32 tensors and must not reintroduce a fp16 path.
-- [Nodes](../../../../environment/hpc/nodes.md): the smoke can run on any healthy `bigbatch` 3090; the fault set grows between probes, so pin a node rather than trusting `sinfo`.
+- [Storage](../../../../../environment/storage.md): checkpoints go to `/datasets` only, which has 233 TB free, so the cadence change costs nothing that matters. `/home-mscluster` hit 100% once and silently killed checkpointing.
+- [Overview](../../../../../environment/overview.md): the forward pass is cast to fp32 before the branches are combined, because fp16 cancellation destroys the gradient. The undialled error is computed on the same fp32 tensors and must not reintroduce a fp16 path.
+- [Nodes](../../../../../environment/hpc/nodes.md): the smoke can run on any healthy `bigbatch` 3090; the fault set grows between probes, so pin a node rather than trusting `sinfo`.
 
 ---
 
@@ -153,7 +153,7 @@ Two provenance gaps found while planning. Checkpoints are saved four times less 
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **The undialled error**, in `poe_repair/experiments/one_pair_one_seed/trainer.py`. Compose the three adapted branches at weight 1, subtract the raw cached joint-prompt prediction, square and mean. Add it to the `info` dict beside `loss_fit` at line 505. It is a diagnostic and never enters `loss`.
-2. **The pairing of checkpoints with renders**, in `scripts/showcase/train_pool_run.sh`. One added line passing `--ckpt-every-epochs "$SAMPLEEVERY"`.
+2. **The pairing of checkpoints with renders**, in `1-lora-correction/scripts/showcase/train_pool_run.sh`. One added line passing `--ckpt-every-epochs "$SAMPLEEVERY"`.
 3. **The objective flags in the config dump**, in `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py` at the `write_json` call.
 
 ---
@@ -210,7 +210,7 @@ For Claude to execute.
   - Produces: a panel that appears on the next run
   - ✓ verified by inspection 2026-09-17: `multi_pair_trainer.py:145`, beside `train/loss_fit`. Reads `info.get("loss_undialled", nan)`, so a trainer that does not compute it logs NaN rather than a wrong number.
 - [x] 1.3 **Pair checkpoints with renders**
-  - In `scripts/showcase/train_pool_run.sh`, beside `--sample-every-epochs "$SAMPLEEVERY"` at line 100:
+  - In `1-lora-correction/scripts/showcase/train_pool_run.sh`, beside `--sample-every-epochs "$SAMPLEEVERY"` at line 100:
   ```bash
   --ckpt-every-epochs   "$SAMPLEEVERY" \
   ```
@@ -228,7 +228,7 @@ For Claude to execute.
   - This is live, not hypothetical: `a_typewriter__x__a_cactus` seeds 1 to 8 sit in both directories, which is 8 of `cells_v57`'s 43 cells. The two copies are byte-identical, so no run is contaminated in substance, but without this change the run's own record says 8 training cells came from the held-out split
   - Produces: a run whose `dataset_meta.json` names a split per cell, and a hard failure rather than a silent fallback when a cell is missing from `train/`
   - ✓ verified by a run 2026-09-17, Slurm job 56021: `dataset_meta.json` carries 43 cells, every one reading `split: train`, the eight `a_typewriter__x__a_cactus` cells included. Those are the cells that exist in both directories and were previously taken from `heldout/`. A cell missing from `train/` now raises `FileNotFoundError` naming the path it searched.
-  - Full entry: [the held-out-first cache lookup](../../../../environment/known-failures.md)
+  - Full entry: [the held-out-first cache lookup](../../../../../environment/known-failures.md)
 
 ▶ **Next: [task 2.1](#2--prove-each-change-does-something)**, the smoke that proves each one.
 
@@ -359,7 +359,7 @@ with torch.no_grad():
 
 The raw cached joint prediction is `ej` in the target block at lines 376 to 414, before `guided_eps` is applied to it. It must be carried out of that block for this to work; the guided `eps_j_target` is the wrong tensor.
 
-**File:** `scripts/showcase/train_pool_run.sh`
+**File:** `1-lora-correction/scripts/showcase/train_pool_run.sh`
 **Relevant section:** the launch line at 93 to 110, where `--sample-every-epochs "$SAMPLEEVERY"` already sits.
 
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`
@@ -404,7 +404,7 @@ split, trained on, and later scored against, with no warning and no record: `dat
 writes `split: None` for every cell. Twelve cells across four pairs sit in both directories
 today. Latent, not live: every cell of `cells_v54`, `cells_v55` and `cells_v57_animals` resolves
 to `train/`. Full entry, with the pre-launch check to run:
-[the held-out-first cache lookup](../../../../environment/known-failures.md).
+[the held-out-first cache lookup](../../../../../environment/known-failures.md).
 
 **Bears on task 1.4.** The task adds `train_step_range`, `orth_weight` and `exclude_cells` to
 `config.json` so a saved config can identify its own objective. The resolved split per cell is

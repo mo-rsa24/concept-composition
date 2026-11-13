@@ -9,7 +9,7 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 10 of the composition ladder wrote.
 
 Background
-Layer 10 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 10 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip, its build walk and its idea walk on claim 11 wrote new files. Those files should link to
 the reading and the idea map that back the same ideas, and those should link back, so the next
 reader finds both.
@@ -21,9 +21,9 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md, its Study first
   line: the two read-ahead chunks to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Composing in a latent space"
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "Composing in a latent space"
   row of the Bricks table.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 10 and 11.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/README.md: the run

@@ -5,10 +5,10 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-execute-plan artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md
+/drip-execute-plan 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md
 
 Background
-This is layer 1's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 1's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type one 2D diffusion expert from an empty file, following the step file one step per message.
 Claude's reference code is toy/rebuild/ in this repo; my file and the reference print the same
 numbers, and a difference is a lesson or a bug. I have passed quiz 1.2, and the layer 1 maths drip
@@ -23,8 +23,8 @@ Objectives
 4. End with a samples figure from my trained expert beside toy/datasets-1000-samples-each.png.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md: the step file.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, Pins and Bricks: what each brick
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md: the step file.
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, Pins and Bricks: what each brick
   was checked against.
 - toy/rebuild/datasets.py, toy/rebuild/model.py, toy/rebuild/train.py: the reference.
 - The layer 1 maths drip's dispatch.md: my notation.

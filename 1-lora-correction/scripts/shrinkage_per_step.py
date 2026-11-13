@@ -15,9 +15,9 @@ looks like as much as what shrinkage looks like. pool43-all50 trained on all fif
 One checkpoint per process: attaching a second adapter to the same UNet would stack on the
 first. Run --checkpoint once per name, then --merge.
 
-    python scripts/shrinkage_per_step.py --checkpoint v1_freeze_null_r16_s0_25_30k
-    python scripts/shrinkage_per_step.py --checkpoint pool43_all50_40k
-    python scripts/shrinkage_per_step.py --merge
+    python 1-lora-correction/scripts/shrinkage_per_step.py --checkpoint v1_freeze_null_r16_s0_25_30k
+    python 1-lora-correction/scripts/shrinkage_per_step.py --checkpoint pool43_all50_40k
+    python 1-lora-correction/scripts/shrinkage_per_step.py --merge
 """
 from __future__ import annotations
 
@@ -32,7 +32,7 @@ from pathlib import Path
 
 import torch
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 
@@ -42,7 +42,7 @@ from poe_repair.run import make_ctx                               # noqa: E402
 from poe_repair.training_cache import CellPath, load_step_raw     # noqa: E402
 
 # (checkpoint path, LoRA rank). The same three the hand-off sweep reads, at
-# scripts/clean_tail_k_sweep.py:123.
+# 1-lora-correction/scripts/clean_tail_k_sweep.py:123.
 CHECKPOINTS = {
     "v1_freeze_null_r16_s0_25_30k": (
         "/datasets/mmolefe/poe_repair_min/outputs/correction_loss_variants/"
@@ -205,8 +205,8 @@ def merge_and_plot() -> None:
         raise SystemExit("no shards to merge; run --checkpoint first")
     rows = [r for s in shards for r in s["rows"]]
     MERGED_JSON.write_text(json.dumps(
-        {"produced_by": "scripts/shrinkage_per_step.py",
-         "task": "plans/09-designing-the-correction-loss/plans/hypothesis/"
+        {"produced_by": "1-lora-correction/scripts/shrinkage_per_step.py",
+         "task": "1-lora-correction/plans/09-designing-the-correction-loss/plans/hypothesis/"
                  "06-fitting-the-whole-path-and-handing-back-the-tail.md task 1.1",
          "shards": [{k: s[k] for k in ("checkpoint_name", "checkpoint", "rank", "freeze_null",
                                        "host", "git")} for s in shards],

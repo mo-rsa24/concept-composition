@@ -6,14 +6,14 @@
 > - how big the caption set is and how long a search takes;
 > - how many camel and dog captions mention wet, rain or water, and what they say;
 > - your own count of wet, dry and missing animals in a few hundred training pictures, as a table and one figure;
-> - what SDXL's [joint prompt](what-poe-loses-when-it-composes.md#21-the-objects) and [PoE](../../context/world/poe-composition.md#what-poe-composition-is) draw for a camel with rain.
+> - what SDXL's [joint prompt](what-poe-loses-when-it-composes.md#21-the-objects) and [PoE](../../../context/world/poe-composition.md#what-poe-composition-is) draw for a camel with rain.
 >
 > **Time:** ~3 h · **Stop point:** step 8's talking points written.
 
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-camel-and-dog-in-the-training-data.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-camel-and-dog-in-the-training-data.md
 ```
 
 ## Contents
@@ -53,7 +53,7 @@ Navigation: ⬅️ [Previous](#why-this-exists) | 📋 [Contents](#contents) | [
 
 ```
 /home/molef/datasets/relaion2b-en-slice/       the 4 downloaded files (~14.5 GB), outside the repo
-artifacts/results/what-the-training-captions-show/        gitignored, local only
+3-understanding-compositionality/artifacts/results/what-the-training-captions-show/        gitignored, local only
   counts.json                                  slice counts, search time per file, full-mirror counts
   camel-captions-with-wet-words.md             every camel caption in the slice with a wet, rain or water word
   camel-any/  camel-wet-words/  dog-any/  dog-wet-words/
@@ -61,7 +61,7 @@ artifacts/results/what-the-training-captions-show/        gitignored, local only
     sheets/      sheet-NN.jpg (numbered tiles) and sheet-NN.md (tile number, caption, link)
     calls.json   your calls
   tally.md  tally.png                          the table and the figure for your slide
-scripts/census/laptop_slice.py                 the five stages, committed
+3-understanding-compositionality/scripts/census/laptop_slice.py                 the five stages, committed
 ```
 
 **The four buckets.**
@@ -97,13 +97,13 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 1. 🔧 Download 4 files (AI, ~15 to 40 min depending on the connection)
 
-- [x] **Run:** `$PY -I scripts/census/laptop_slice.py download --files 4` ✓ verified 2026-10-22: first file at 1.6 MB/s, so stopped at 2 files per the rule below (16,388,209 and 16,388,200 captions, 3.62 GB each)
+- [x] **Run:** `$PY -I 3-understanding-compositionality/scripts/census/laptop_slice.py download --files 4` ✓ verified 2026-10-22: first file at 1.6 MB/s, so stopped at 2 files per the rule below (16,388,209 and 16,388,200 captions, 3.62 GB each)
   - Each file prints its size (about 3.6 GB) and the speed in MB/s.
   - If the first file runs under 5 MB/s, stop and use `--files 2`; every later number then covers 2 files.
 
 ### 2. 🔧 Search the captions and time it (AI, ~5 min)
 
-- [x] **Run:** `$PY -I scripts/census/laptop_slice.py count` ✓ verified 2026-10-22: 2 files, 32,776,409 captions in 24 s (13.8 s and 9.8 s per file), peak memory 1.0 GB; camel 12,291, dog 225,544
+- [x] **Run:** `$PY -I 3-understanding-compositionality/scripts/census/laptop_slice.py count` ✓ verified 2026-10-22: 2 files, 32,776,409 captions in 24 s (13.8 s and 9.8 s per file), peak memory 1.0 GB; camel 12,291, dog 225,544
   - It prints one line per file: captions searched and seconds taken (about 16.4 million captions per file).
   - Then the counts per animal: all, wet words, weather words, water words, and any of them.
   - **Read the time per file times 128:** that is how long the full search would take on this laptop.
@@ -111,7 +111,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 3. 📖 Read the camel captions that mention wet, rain or water (you, ~15 min)
 
-- [ ] **Open** `artifacts/results/what-the-training-captions-show/camel-captions-with-wet-words.md`.
+- [ ] **Open** `3-understanding-compositionality/artifacts/results/what-the-training-captions-show/camel-captions-with-wet-words.md`.
 - [ ] **Read every line** and count the ones that describe a wet camel (in rain, in water, soaked).
   Expect most to be products, the colour camel, or camels near water rather than wet.
 - [ ] **Write down 3 example captions** of each kind: a wet camel if any, a camel near water but not
@@ -119,7 +119,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 4. 🔧 Fetch the pictures and build the contact sheets (AI, ~10 min)
 
-- [ ] **Run:** `$PY -I scripts/census/laptop_slice.py fetch` then `$PY -I scripts/census/laptop_slice.py sheets`
+- [ ] **Run:** `$PY -I 3-understanding-compositionality/scripts/census/laptop_slice.py fetch` then `$PY -I 3-understanding-compositionality/scripts/census/laptop_slice.py sheets`
   - Each bucket prints how many pictures loaded. Expect about 60%; the rest are dead links.
   - Each bucket gets `sheets/sheet-NN.jpg`, 30 numbered tiles, and `sheet-NN.md` beside it with each tile's caption.
 
@@ -139,7 +139,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 ### 6. 🔧 Turn the calls into numbers and a figure (AI, ~1 min)
 
-- [ ] **Run:** `$PY -I scripts/census/laptop_slice.py tally`
+- [ ] **Run:** `$PY -I 3-understanding-compositionality/scripts/census/laptop_slice.py tally`
   - It prints the table and writes `tally.md` and `tally.png`.
   - Each bucket shows pictures looked at, no animal, can't tell, dry, wet, and the wet share with its
     95% interval. With 0 wet camels in n, the bound to quote is "fewer than 3 in n" (the rule of three).
@@ -148,7 +148,7 @@ Every command runs from `/home/molef/PhD/poe_repair_min-dog-and-rain` with
 
 - [ ] **Open the renders**, all from the same 5 seeds:
   - [the direct prompts](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/asked-directly.png): "a wet camel", "a camel in the rain", "a wet dog", "a dog in the rain";
-  - [the camel sheet](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png): camel, rain, joint "a camel and rain", PoE, [SuperDiff](../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md);
+  - [the camel sheet](../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png): camel, rain, joint "a camel and rain", PoE, [SuperDiff](../../../../../goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/plans/31-superdiff-derived-and-placed.md);
   - [the dog sheet](../../artifacts/results/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png): the same for the dog;
   - [the side-by-side figure](../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-causal-renders.png).
 

@@ -10,12 +10,12 @@ In the background, prepare and build layer 7's two quizzes, bottom up, for the c
 quiz 7.1 and quiz 7.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 7 is A without B: the medical
 cells are A without B, and at the paper's own weight negation sends mass off every mode when the
 experts have sharp tails. Each layer opens on two quizzes, one on the college maths underneath it
 and one on the layer itself, built the way step 2 of
-artifacts/drips/simple-distributions-rebuild/ladder/00-setup.md builds them for layer 1. Layer 7
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/00-setup.md builds them for layer 1. Layer 7
 has no step file yet; its build writes one (step 6 of the ladder file). The repo is
 /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain.
 
@@ -30,11 +30,11 @@ Objectives
 5. Write each published URL into its step of layer 7's ladder file.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
   material for quiz 7.1, and with the rest of the file, for quiz 7.2.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
   the Bricks table: material for quiz 7.2.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md (run 3) and
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md (run 3) and
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md (claims 6 and 8): material for quiz 7.2.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -61,8 +61,8 @@ What is already known
 - On the ring and bar, the exact mass left on the 2 in-bar ring modes is 0.146, 0.121, 0.085,
   0.037, 0.0, 0.0 at w = 0, 0.02, 0.05, 0.1, 0.3, 1.0, the mass away from every ring mode is 0.387,
   0.384, 0.391, 0.439, 0.863, 1.0, and negation works only near w ≈ 0.05
-  (artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 2;
-  artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, Figure 2;
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3).
 - The medical cells wanted are pneumothorax without drain and drain without pneumothorax, a
   negation; 1,906 of 3,543 NEATX pneumothorax films have no drain, and what is missing is a drain
   label on negatives (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8).
@@ -79,13 +79,13 @@ Rules
   built, and each URL as quiz-cadence publishes it.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 7.1's URL in step 3 and quiz 7.2's URL in step 5 of
-  artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, each replacing "(URL lands
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, each replacing "(URL lands
   here)".
 - The proof: both coverage files exist under .quiz-prep/ and list no question as blocked, and both
   URLs open.

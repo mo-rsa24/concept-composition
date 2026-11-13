@@ -163,7 +163,7 @@ def main() -> int:
 
     manifest_path = Path(args.manifest)
     if not manifest_path.is_file():
-        raise SystemExit(f"no photo manifest at {manifest_path}; run scripts/census/inclusive_captions_pool_v2.py")
+        raise SystemExit(f"no photo manifest at {manifest_path}; run 3-understanding-compositionality/scripts/census/inclusive_captions_pool_v2.py")
     manifest = json.loads(manifest_path.read_text())
     photos = cap.build_photos(args.run, manifest=manifest, seed=args.seed)
     if args.photos:

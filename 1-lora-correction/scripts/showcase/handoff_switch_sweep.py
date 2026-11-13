@@ -1,7 +1,7 @@
 """Task 8.2: where does softness live? Sweep the step at which the adapter hands off to the
 frozen model, rendering the switch points the clean-tail grid did not (20 and 30 exist).
 
-Same machinery, constants and checkpoint as `scripts/corrector_window_sweep.py --clean-tail`
+Same machinery, constants and checkpoint as `1-lora-correction/scripts/corrector_window_sweep.py --clean-tail`
 (rank 32 @ 30050, lambda 1.2, k=0 so no corrector, cat x dog seeds 9 to 16), so the new renders
 sit beside the old ones in `clean_tail/<pair>/seed_N/` under the same filename pattern and every
 downstream read treats them alike. Scores each render with the compose count and the DINOv2
@@ -17,7 +17,7 @@ from pathlib import Path
 
 import torch
 
-REPO = Path(__file__).resolve().parent.parent.parent
+REPO = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(REPO)); sys.path.insert(0, str(REPO / "scripts"))
 import corrector_window_sweep as cws  # noqa: E402
 

@@ -5,7 +5,7 @@
 > **You will hold:** a revised paper in a shared Overleaf with new scores, baselines, pair lists and a
 > three-concept result; a second Overleaf project with drafted replies; comment text ready to post ·
 > **Time:** about 14 h of your time to finish (estimate), plus about 1 h of posting · **Stop point:** everything posted before Wednesday 18 November, inside a 15 h box ·
-> **Outcome board:** [the paper review board](../report/paper-review/board.md) ·
+> **Outcome board:** [the paper review board](../1-lora-correction/report/paper-review/board.md) ·
 > **Background:** [the references file](route-answer-the-iclr-reviews-references.md)
 
 Built to: route-file-template v3
@@ -27,9 +27,9 @@ Built to: route-file-template v3
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-we-know-so-far) ➡️
 
 **Goal:** Reviewer PrzE (rating 1, confidence 4) sees each claim backed by numbers, and a respectful reply goes up on OpenReview.
-**Objective (the whole chain):** scores for the adapter against PoE, CO3 and more corrected samplers on the same held-out pairs and seeds; the [48 training pairs](../report/paper-review/held-out-set.md#the-48-training-pairs) listed; a three-concept result; an answer to UHz6's early-steps question.
+**Objective (the whole chain):** scores for the adapter against PoE, CO3 and more corrected samplers on the same held-out pairs and seeds; the [48 training pairs](../1-lora-correction/report/paper-review/held-out-set.md#the-48-training-pairs) listed; a three-concept result; an answer to UHz6's early-steps question.
 **Outcome (the whole chain):** a revised paper in a shared Overleaf, a second Overleaf project for the replies, and comment text for you to post.
-**Outcome board:** [the paper review board](../report/paper-review/board.md), one row per outcome, updated as each step closes.
+**Outcome board:** [the paper review board](../1-lora-correction/report/paper-review/board.md), one row per outcome, updated as each step closes.
 **Background:** what was found on disk, the plan weight and the rationale are in [the references file](route-answer-the-iclr-reviews-references.md).
 
 ## What we know so far
@@ -42,40 +42,40 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | Earlier pool files held out only cat×dog and elephant×penguin | found | `pair_pool_v54.yaml` to `pair_pool_v57.yaml`, 2026-11-10 | PRZE-3a |
 | Figure 5 shows tent×snowy mountain and lighthouse×stormy sea, which sit in no held-out list | found | the submitted PDF page 7 against the pool files, 2026-11-10 | PRZE-3a |
 | The `cross_pair_pooled__r32__lr1e-04__ep600__…` folders are September runs on the v54 pool (24 training pairs, 600 epochs) and sit behind no figure; the paper's 1,000 epochs is what the figure runs used | verified | each folder's `config.json` and `dataset_meta.json`, 2026-11-10 | PRZE-3a, PRZE-11 |
-| The adapter of record is v58-03-self at step 50,000 (48 training pairs, 1,000 epochs); Figure 5's "ours" column also uses v57-11b-x0-self-decay at step 50,000 (cat and dog) and v58-05-self-contrast at step 15,000 (elephant and penguin) | verified | each tile's record under `/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/` and each run's `config.json`, 2026-11-10; [the pair lists page](../report/paper-review/prze-3a-pair-lists.md#the-adapter-behind-the-paper) | PRZE-3a, PRZE-5, PRZE-8 |
+| The adapter of record is v58-03-self at step 50,000 (48 training pairs, 1,000 epochs); Figure 5's "ours" column also uses v57-11b-x0-self-decay at step 50,000 (cat and dog) and v58-05-self-contrast at step 15,000 (elephant and penguin) | verified | each tile's record under `/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/` and each run's `config.json`, 2026-11-10; [the pair lists page](../1-lora-correction/report/paper-review/prze-3a-pair-lists.md#the-adapter-behind-the-paper) | PRZE-3a, PRZE-5, PRZE-8 |
 | The v58 runs held out five pairs including bison×horse; `pair_pool_v58.yaml` dropped bison×horse from its held-out list on 2026-10-21 (commit 08d27d9b), after training; the 48 training pairs are identical | verified | the run's `pair_pool.json` against the yaml, 2026-11-10 | PRZE-3a, PRZE-3b |
 | The paper's "ten steps" are step indices 0 to 9 of 50 DDIM steps, timesteps 981 to 801, the noisiest ten; so the paper's adapter is already early-trained | verified | `train_step_range [0, 10]` in each run's `config.json`, `train_pooled.py` line 532, the cache's `meta.json`, 2026-11-10 | PRZE-11 |
 | The corrector's update matches the paper's unadjusted Langevin step; its order, step-size schedule and constant differ; adjusted MALA and HMC need an energy that SDXL does not output | read | `poe_repair/methods/_poe_langevin.py` and the code-against-paper audit, 2026-11-10 | PRZE-2 |
-| The corrector's update lands on its own exact stationary mean and variance at δ = 0.005, 0.02, 0.05 and 0.1 on N(−1, 0.5) × N(1, 0.8), within 3 Monte Carlo standard errors | verified | `python3 scripts/check_langevin_two_gaussians.py`, 2026-11-11 | PRZE-2 |
-| On the toy along SDXL's 50 levels, the paper's step-first order lands nearer the product than our corrector-first order (KL 0.0017 against 0.0031 at c = 3, k = 20), and either order fixes plain PoE's collapse (KL 2.25) | verified | `python3 scripts/check_langevin_order.py`, 2026-11-11 | PRZE-2 |
+| The corrector's update lands on its own exact stationary mean and variance at δ = 0.005, 0.02, 0.05 and 0.1 on N(−1, 0.5) × N(1, 0.8), within 3 Monte Carlo standard errors | verified | `python3 1-lora-correction/scripts/check_langevin_two_gaussians.py`, 2026-11-11 | PRZE-2 |
+| On the toy along SDXL's 50 levels, the paper's step-first order lands nearer the product than our corrector-first order (KL 0.0017 against 0.0031 at c = 3, k = 20), and either order fixes plain PoE's collapse (KL 2.25) | verified | `python3 1-lora-correction/scripts/check_langevin_order.py`, 2026-11-11 | PRZE-2 |
 | The joint-prompt Langevin and unadjusted HMC drivers are byte-identical to the plain samplers at k = 0 on SDXL | verified | Slurm 84583, `paper_review/logs/prze2-identity-84583.out` | PRZE-2 |
-| At seed 10, PoE + Langevin removes PoE's fused hybrid but keeps one of the two things on cat × dog, elephant × penguin and tent × snowy mountain, where joint + Langevin and CO3 show both | seen, one seed, by eye | [the five-column contact sheet](../artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png), 2026-11-11 | PRZE-2 |
+| At seed 10, PoE + Langevin removes PoE's fused hybrid but keeps one of the two things on cat × dog, elephant × penguin and tent × snowy mountain, where joint + Langevin and CO3 show both | seen, one seed, by eye | [the five-column contact sheet](../1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png), 2026-11-11 | PRZE-2 |
 | [Attend-and-Excite](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/06-attend-and-excite-bringing-a-missing-subject-back.md)'s diffusers pipeline targets Stable Diffusion 1.x and 2.x; [CONFORM](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/07-conform-pulling-look-alike-subjects-apart.md)'s repository loads Stable Diffusion v1.5; neither has an official SDXL port | searched | the diffusers documentation and the gemlab-vt/conform repository, 2026-11-10 | PRZE-1 |
 | mscluster112 has one healthy RTX PRO 6000 Blackwell of 97,887 MiB; `/datasets` has 212 TB free | verified | `nvidia-smi` and a torch matmul under `co3_bw` through `scripts/cluster.sh`, 2026-11-10 | PRZE-10 |
 | mscluster107 is your interactive job 83423 with two Quadro RTX 8000 of 49,152 MiB each | verified | `nvidia-smi` through `scripts/cluster.sh`, 2026-11-10 | PRZE-10 |
-| mscluster108 (two Quadro RTX 8000, `co3`) and mscluster111 (one RTX PRO 6000 Blackwell, `co3_bw`) are idle and pass a torch matmul on every card; mscluster110 passes too but carries another user's job 83315 until about 2026-11-12 11:30 | verified | `nvidia-smi -L`, a 1000 by 1000 matmul, `sinfo -N` and `squeue -w` through `scripts/cluster.sh sh`, 2026-11-10; [the node table](../report/paper-review/prze-10-compute.md#the-nodes-probed-2026-11-10) | PRZE-10 |
+| mscluster108 (two Quadro RTX 8000, `co3`) and mscluster111 (one RTX PRO 6000 Blackwell, `co3_bw`) are idle and pass a torch matmul on every card; mscluster110 passes too but carries another user's job 83315 until about 2026-11-12 11:30 | verified | `nvidia-smi -L`, a 1000 by 1000 matmul, `sinfo -N` and `squeue -w` through `scripts/cluster.sh sh`, 2026-11-10; [the node table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-nodes-probed-2026-11-10) | PRZE-10 |
 | The adapter takes two concept prompts and the null prompt, so a third concept has no input slot | read | submitted PDF Appendix B.1, equation 13 | PRZE-4 |
-| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `paper/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `paper/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../artifacts/drips/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
+| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `paper/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `paper/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
 | The PDF says the adapter sits on cross-attention (page 1, page 7) and trains at every denoising step (page 1); the adapter of record trained on self- and cross-attention, on steps 0 to 9 only | verified | the PDF text against v58-03-self's `config.json`, 2026-11-10 | PRZE-5, PRZE-11 |
 | The CO3 paper (arXiv 2509.25940) scores three prompt sets from Chefer et al. (animals, animals-objects, objects) with [BLIP-VQA](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/03-blip-vqa-asking-a-question-per-phrase.md) and [ImageReward](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/02-imagereward-the-preference-number.md), 50-step DDIM, guidance 5.0, on SD1.5, SDXL and baselines run from their public code; it does not state prompts per set, seeds per prompt, resolution or how the two metrics were computed | read | the paper's HTML version, 2026-11-10, and your screenshots of its Tables 1, 5, 6 and 7 | PRZE-1, step 2 (protocol), step 7 (scores) |
 | CO3's qualitative figures put one prompt per row and one method per column, with SD1.5 methods and SDXL methods grouped | read | the same HTML version, Figures 3, 4 and 6 | PRZE-2, PRZE-9 |
-| The paper's Figure 5 ("ours" column) is four hand-picked cells from three different adapters, one seed per row: the cross+self adapter for cat and dog, v58-05 self-contrast at step 15,000 (raw weights) for elephant and penguin, the v58 self adapter for the tent and lighthouse rows; CO3 draws its own noise | found | `artifacts/results/four-pairs-four-methods/README.md` and `scripts/paper_main_grid.py` lines 21 to 30, 2026-11-10 | PRZE-3a, PRZE-8, PRZE-5, step 4 |
+| The paper's Figure 5 ("ours" column) is four hand-picked cells from three different adapters, one seed per row: the cross+self adapter for cat and dog, v58-05 self-contrast at step 15,000 (raw weights) for elephant and penguin, the v58 self adapter for the tent and lighthouse rows; CO3 draws its own noise | found | `1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/README.md` and `scripts/paper_main_grid.py` lines 21 to 30, 2026-11-10 | PRZE-3a, PRZE-8, PRZE-5, step 4 |
 | OpenReview closes Wednesday 18 November; supervisors want the draft Thursday 12 or Friday 13 November | stated by you; confirm | your message, 2026-11-10 | the schedule |
-| The export builds with Tectonic on mscluster but not page for page: Tectonic's XeTeX engine ignores the `times` package and sets the body in Latin Modern, so the build runs 14 pages against the submitted 13; the PDF inside the zip is an older 16-page build from 2026-09-25 | verified | Tectonic build and `pdffonts` against the submitted PDF, 2026-11-10; [the step 2 walk map](../artifacts/drips/answer-iclr-reviews/EXECUTE_WALK-step-2.md) | PRZE-5, PRZE-9 |
+| The export builds with Tectonic on mscluster but not page for page: Tectonic's XeTeX engine ignores the `times` package and sets the body in Latin Modern, so the build runs 14 pages against the submitted 13; the PDF inside the zip is an older 16-page build from 2026-09-25 | verified | Tectonic build and `pdffonts` against the submitted PDF, 2026-11-10; [the step 2 walk map](../1-lora-correction/artifacts/drips/answer-iclr-reviews/EXECUTE_WALK-step-2.md) | PRZE-5, PRZE-9 |
 | Figure 5's elephant and penguin "ours" tile is `ours_v58-05-self-contrast_s015000_rawA_w50.png`, pixel for pixel; the reward fine-tunes `refl-kl-K0` to `K3` (W&B `t4wiwy5p`, `u73uvqyg`, `yj7l40h5`, `ybjd4trt`) start from v58-05 step 15,000 and trained on cat and dog and on elephant and penguin, seeds 1 to 8 | verified | mean absolute pixel difference 0.00 against 6.32 to 14.10 for the fine-tunes; each run's W&B config, 2026-11-10 | PRZE-3a, PRZE-8 |
-| The comparison protocol is agreed: one adapter, picked from 9 fixed candidates on cat and dog and elephant and penguin at one shared seed, which then leave every held-out rate; [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/08-tome-fusing-an-object-with-its-attributes.md) joins the SDXL table, five binding methods the SD 1.5 table, FK steering the CO3-protocol table | agreed | your yes, 2026-11-10; [the protocol](../report/paper-review/protocol.md) | PRZE-8, steps 4 to 12 |
-| Thirteen slots (R1 to R13) have a size, a placeholder in `paper/iclr-56173/` and a result file; `scripts/refresh_paper_slots.py --check` passes; R1's eight score columns at 8 pt run about 3.4 in wider than the text | verified | Tectonic build, 22 pages, exit 0, 2026-11-10; [the layout sheet](../report/paper-review/layout-sheet.md) | PRZE-9, step 9 |
-| Wave 1 is rendering on three cards with none of the three trainings stopped: jobs 1 to 3 on mscluster112 (pid 36785), R1 joint on mscluster108 card 0 (pid 59533), R1 PoE on mscluster108 card 1 (pid 59822), and R1 ours queued on mscluster112 behind jobs 1 to 3 (waiting loop pid 37731); outputs under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/` | running | each launch log in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/`, 2026-11-11; [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs) | PRZE-10, PRZE-1, PRZE-11 |
+| The comparison protocol is agreed: one adapter, picked from 9 fixed candidates on cat and dog and elephant and penguin at one shared seed, which then leave every held-out rate; [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/08-tome-fusing-an-object-with-its-attributes.md) joins the SDXL table, five binding methods the SD 1.5 table, FK steering the CO3-protocol table | agreed | your yes, 2026-11-10; [the protocol](../1-lora-correction/report/paper-review/protocol.md) | PRZE-8, steps 4 to 12 |
+| Thirteen slots (R1 to R13) have a size, a placeholder in `paper/iclr-56173/` and a result file; `1-lora-correction/scripts/refresh_paper_slots.py --check` passes; R1's eight score columns at 8 pt run about 3.4 in wider than the text | verified | Tectonic build, 22 pages, exit 0, 2026-11-10; [the layout sheet](../1-lora-correction/report/paper-review/layout-sheet.md) | PRZE-9, step 9 |
+| Wave 1 is rendering on three cards with none of the three trainings stopped: jobs 1 to 3 on mscluster112 (pid 36785), R1 joint on mscluster108 card 0 (pid 59533), R1 PoE on mscluster108 card 1 (pid 59822), and R1 ours queued on mscluster112 behind jobs 1 to 3 (waiting loop pid 37731); outputs under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/` | running | each launch log in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/`, 2026-11-11; [the jobs table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs) | PRZE-10, PRZE-1, PRZE-11 |
 | One SDXL image in one long process takes about 6.7 s for ours on the RTX PRO 6000 Blackwell, 17 s for the joint prompt and 22 s for PoE on an RTX 8000, at about 8.2 to 8.9 GB of card memory; a CO3 image takes about 50 s on an RTX 8000 | measured | tile timestamps of the first wave 1 tiles and of `paper_review/co3_selection/`, `nvidia-smi`, 2026-11-11 | PRZE-10, steps 6 and 7 |
-| The R1 joint prompt is drawn as written: 240 prompts join their concepts with "and", 36 with "with"; the first sidecar reads "a horse with a glasses" | verified | `scripts/review_benchmark_pairs.txt` and `r1_joint/a_horse__x__a_glasses/seed09/mono.json`, 2026-11-11 | PRZE-1 |
+| The R1 joint prompt is drawn as written: 240 prompts join their concepts with "and", 36 with "with"; the first sidecar reads "a horse with a glasses" | verified | `1-lora-correction/scripts/review_benchmark_pairs.txt` and `r1_joint/a_horse__x__a_glasses/seed09/mono.json`, 2026-11-11 | PRZE-1 |
 | Wave 1 is complete: Figure 5's lighthouse row 3, early-steps 848, R3 ours 424, R1 joint, PoE and ours 1,104 each; the species-fidelity trainings v58-06, v58-07 and v58-08 were paused to free cards, with resume commands written | verified | counts on mscluster112 at 11:14, 2026-11-11; `/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/RESUME-2026-11-11.md` | PRZE-10, PRZE-1, PRZE-11 |
 | PoE + Langevin runs on protocol rule 6's subset, R1's animals set at seeds 9 to 12 and R3's hard group at seeds 9 to 16 (288 pictures), on mscluster111 and 112 at about 100 s a picture, due about 16:40 | running | `paper_review/logs/111-langevin-subset-0b.log` and `112-langevin-subset-1.log`, 2026-11-11 | PRZE-2, PRZE-1 |
 | Two jobs creating one folder at the same moment over NFS can leave a node reading it as both "File exists" and "No such file"; it stopped three runs on 2026-11-11 and dropped no tile | verified | the logs `108-r1-poe.log`, `108-r1-joint.log`, `111-langevin-subset-0.log`, and `ls` of the folder from three nodes | PRZE-10, every later launch |
-| Tables 1 and 2 hold joint prompt, PoE and ours on all 276 benchmark prompts at seeds 9 to 12 and all 53 held-out pairs at seeds 9 to 16; 5 of 4,584 scored images were unreadable from mscluster108 and are listed, not imputed; the R1 bar (ours minus PoE in BLIP-VQA, above 0 in all three sets) reads SUPPORTS | measured | [the tables' sidecar](../report/paper-review/tables-1-and-2-sidecar.json), [Table 1](../report/paper-review/table-1-r1-benchmark.csv), [Table 2](../report/paper-review/table-2-r3-held-out.csv), commit `56b968b6` | PRZE-1, PRZE-3b, step 13 |
-| The four scorers run from pinned envs: CLIP score and ImageReward in `co3` on CPU, BLIP-VQA through T2I-CompBench's own script in `/datasets/mmolefe/envs/t2icomp`, GenEval's evaluator in `/datasets/mmolefe/envs/geneval` (torch 1.12.1 needs its executable-stack flag cleared); BLIP-VQA with 3 question passes equals the default 8 here, since no prompt has more than 3 noun phrases | verified | the protocol's scorer section, [the probe figure](../artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png) | PRZE-1, PRZE-8 |
+| Tables 1 and 2 hold joint prompt, PoE and ours on all 276 benchmark prompts at seeds 9 to 12 and all 53 held-out pairs at seeds 9 to 16; 5 of 4,584 scored images were unreadable from mscluster108 and are listed, not imputed; the R1 bar (ours minus PoE in BLIP-VQA, above 0 in all three sets) reads SUPPORTS | measured | [the tables' sidecar](../1-lora-correction/report/paper-review/tables-1-and-2-sidecar.json), [Table 1](../1-lora-correction/report/paper-review/table-1-r1-benchmark.csv), [Table 2](../1-lora-correction/report/paper-review/table-2-r3-held-out.csv), commit `56b968b6` | PRZE-1, PRZE-3b, step 13 |
+| The four scorers run from pinned envs: CLIP score and ImageReward in `co3` on CPU, BLIP-VQA through T2I-CompBench's own script in `/datasets/mmolefe/envs/t2icomp`, GenEval's evaluator in `/datasets/mmolefe/envs/geneval` (torch 1.12.1 needs its executable-stack flag cleared); BLIP-VQA with 3 question passes equals the default 8 here, since no prompt has more than 3 noun phrases | verified | the protocol's scorer section, [the probe figure](../1-lora-correction/artifacts/results/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png) | PRZE-1, PRZE-8 |
 | mscluster108's view of `/datasets` misses whole folders every other node sees (two R1 tile folders on 2026-11-11), and re-reading the parent does not refresh it; check a job's inputs from the node before trusting 108 | verified | `scores/rows_*_hidden_on_108.txt` under the paper-review output root | PRZE-10 |
-| CO3 at its published default (its `run_sample_co3.sh`: 6 timesteps corrected, 5 corrector steps, 3 resampling steps, λ 0.8, CFG++ 0.8) has rendered all 1,104 R1 cells, all 424 R3 cells and Figure 5's four pairs at seed 10, each from the same seed latent as the joint prompt, PoE and ours | verified | count from mscluster107, 2026-11-11 14:10; [the baselines plan](prze-review-baselines.md) | PRZE-1, step 9 |
-| Seeds 9 to 16 have no cache entry, so every review render starts from a CPU draw seeded with the seed number in fp16, byte-identical under torch 2.5.1 and 2.11; the tensors are saved under `outputs/paper_review/latents/` | verified | `scripts/review_seed_latents.py`, one md5 per seed in both environments, 2026-11-11 | protocol rule 2 |
+| CO3 at its published default (its `run_sample_co3.sh`: 6 timesteps corrected, 5 corrector steps, 3 resampling steps, λ 0.8, CFG++ 0.8) has rendered all 1,104 R1 cells, all 424 R3 cells and Figure 5's four pairs at seed 10, each from the same seed latent as the joint prompt, PoE and ours | verified | count from mscluster107, 2026-11-11 14:10; [the baselines plan](../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md) | PRZE-1, step 9 |
+| Seeds 9 to 16 have no cache entry, so every review render starts from a CPU draw seeded with the seed number in fp16, byte-identical under torch 2.5.1 and 2.11; the tensors are saved under `outputs/paper_review/latents/` | verified | `1-lora-correction/scripts/review_seed_latents.py`, one md5 per seed in both environments, 2026-11-11 | protocol rule 2 |
 | ToMe's official code (github.com/hutaihang/ToMe, commit `f256a49a`) does not import: its requirements leave `huggingface_hub` unpinned, and diffusers 0.28 fails against 0.36; ToMe is dropped and the paper states the limit | verified | Slurm 84580's log, 2026-11-11 | PRZE-1 |
 | CO3 takes 39 to 42 s per image on an RTX 3090 and 44 to 64 s on an RTX 8000; it does not load under `co3_bw` because that environment has no xformers | measured | `eval_eval-co3-*.log` and `co3_tail2way_*.log` under `outputs/paper_review/logs/` | PRZE-10 |
 | mscluster84's view of `/datasets` also lags: it counted 35 CO3 tiles missing that mscluster48, 107 and 108 all see; count outputs from a node that did not write them | verified | `ls` of `co3_default/r1/a_elephant__x__a_brown_car/seed09` from four nodes, 2026-11-11 14:08 | every count |
@@ -132,7 +132,7 @@ Navigation: ⬅️ [Previous](#schedule) | 📋 [TOC](#table-of-contents) | [Nex
 You ~45 min (estimate) · AI ~40 min (estimate) · Sonnet, medium · moves: PRZE-3a, PRZE-5, PRZE-10, PRZE-11
 
 **Objective:** three questions answered with evidence: which nodes work, which pool and checkpoint and noise steps the paper's adapter used, and how the submitted paper differs from the local tex.
-**Outcome:** `artifacts/drips/answer-iclr-reviews/ground-check.md`, the node table in the compute page, findings on the pair-list and early-training pages.
+**Outcome:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md`, the node table in the compute page, findings on the pair-list and early-training pages.
 **Serves:** needed by steps 2 to 4 (the protocol, the held-out set and the first GPU jobs all name these facts).
 **Sees:** none · **Ticket:** none · **Source page:** the submitted paper, Section 4 and Appendix A
 
@@ -156,7 +156,7 @@ Objectives
 3. List every difference between the submitted paper and the local tex in the sections to edit.
 
 What to read
-- report/paper-review/board.md and pages prze-3a, prze-5, prze-10, prze-11: the outcome lines to
+- 1-lora-correction/report/paper-review/board.md and pages prze-3a, prze-5, prze-10, prze-11: the outcome lines to
   tick.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far".
 - environment/hpc/nodes.md and environment/overview.md: partitions, the co3 and co3_bw interpreters.
@@ -185,15 +185,15 @@ When something is missing
 
 Rules
 - Read only on the cluster. Submit no job, write no file there, and do not clone Overleaf.
-- Write only under report/paper-review/ and artifacts/drips/answer-iclr-reviews/.
+- Write only under 1-lora-correction/report/paper-review/ and 1-lora-correction/artifacts/drips/answer-iclr-reviews/.
 - Show the node table and the pool and checkpoint finding before ticking any outcome line.
 
 What to hand back
-- report/paper-review/prze-10-compute.md updated with the node table.
-- report/paper-review/prze-3a-pair-lists.md and prze-11-early-training.md with the findings.
-- artifacts/drips/answer-iclr-reviews/ground-check.md: the source differences, with page numbers.
+- 1-lora-correction/report/paper-review/prze-10-compute.md updated with the node table.
+- 1-lora-correction/report/paper-review/prze-3a-pair-lists.md and prze-11-early-training.md with the findings.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the source differences, with page numbers.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: python3 ~/.claude/skills/skill-route/scripts/board.py report/paper-review/board.md
+- Proof: python3 ~/.claude/skills/skill-route/scripts/board.py 1-lora-correction/report/paper-review/board.md
   --step 1 prints the counts, and each ticked line cites the command output behind it.
 
 What you will see
@@ -205,7 +205,7 @@ You judge from the ground-check file.
 
 - `added:` the checkpoint-identity check (from PRZE-3a) · `added:` which ten steps the training states come from (from PRZE-11) · `dropped:` the paper-reading, diagram and corrector asks (why: later steps)
 - [x] **Gate:** you answer the Overleaf question (token, or a zip exported from Overleaf) before step 2 edits the paper.
-- **Leaves:** `artifacts/drips/answer-iclr-reviews/ground-check.md`
+- **Leaves:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md`
 - **Learning path:** gloss only, [LoRA](/home/molef/Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this); no rung is required before this step.
 
 ### 2. 🧪 Write the comparison protocol and the figure and table layout sheet
@@ -213,7 +213,7 @@ You judge from the ground-check file.
 You ~60 min (estimate) · AI ~50 min (estimate) · Opus, medium · moves: PRZE-8, PRZE-9
 
 **Objective:** a protocol page you have agreed, a layout sheet with one row per new figure and table, and placeholder slots in the paper that refill from result files, with the paper still compiling.
-**Outcome:** `report/paper-review/protocol.md`, `report/paper-review/layout-sheet.md`, new rows in `paper/iclr-56173/figures.md`, `scripts/refresh_paper_slots.py`.
+**Outcome:** `1-lora-correction/report/paper-review/protocol.md`, `1-lora-correction/report/paper-review/layout-sheet.md`, new rows in `paper/iclr-56173/figures.md`, `1-lora-correction/scripts/refresh_paper_slots.py`.
 **Serves:** needed by steps 4 to 12 (no evaluation job starts before you agree the protocol).
 **Sees:** none · **Ticket:** none · **Source page:** [the CO3 paper](https://arxiv.org/abs/2509.25940), Table 1 and Figure 3
 
@@ -233,17 +233,17 @@ new figure and table are fixed, so no result can be accused of an unfair compari
 figure fits the ICLR layout cleanly. The repo is /home/molef/PhD/poe_repair_min.
 
 Objectives
-1. Write report/paper-review/protocol.md with the rules every result must obey.
-2. Write report/paper-review/layout-sheet.md with one row per new figure and table.
+1. Write 1-lora-correction/report/paper-review/protocol.md with the rules every result must obey.
+2. Write 1-lora-correction/report/paper-review/layout-sheet.md with one row per new figure and table.
 3. Add a row per slot to paper/iclr-56173/figures.md, a placeholder at final size in the paper source, and
-   scripts/refresh_paper_slots.py that rebuilds a slot from its result file and compiles the paper.
+   1-lora-correction/scripts/refresh_paper_slots.py that rebuilds a slot from its result file and compiles the paper.
 
 What to read
-- report/paper-review/board.md and pages prze-1, prze-2, prze-8, prze-9, prze-11: the outcome lines.
+- 1-lora-correction/report/paper-review/board.md and pages prze-1, prze-2, prze-8, prze-9, prze-11: the outcome lines.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far".
 - paper/iclr-56173/figures.md: the figure register, with statuses reserved, fillable, built and broken.
 - paper/iclr-56173/iclr2027_conference.tex lines 25 to 70: the placeholder macros already in the source.
-- artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
 - 56173_Restoring_plurality_in_c.pdf and Reviews.pdf: the paper and the three reviews.
 - environment/paper.md: how the paper builds here, since no system LaTeX exists.
 
@@ -274,11 +274,11 @@ Rules
 - Show protocol.md to the user and wait for a yes before piece 2.
 
 What to hand back
-- report/paper-review/protocol.md and layout-sheet.md.
+- 1-lora-correction/report/paper-review/protocol.md and layout-sheet.md.
 - New rows in paper/iclr-56173/figures.md, status reserved, each with its claim, layout and result file.
-- scripts/refresh_paper_slots.py, and the compile log showing the paper builds with every slot as
+- 1-lora-correction/scripts/refresh_paper_slots.py, and the compile log showing the paper builds with every slot as
   a placeholder.
-- Proof: python3 scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
+- Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
   the board redraws with --step 2 ticking PRZE-8 and PRZE-9.
 
 What you will see
@@ -291,7 +291,7 @@ opening the compiled PDF.
 
 - `added:` the CO3-style table shape, the overlap rule and the multi-method grid (from your CO3 screenshots) · `added:` the Tectonic build fact (from `environment/paper.md`) · `dropped:` Overleaf push (why: needs your token, and the refill works locally first)
 - [x] **Gate:** you read `protocol.md` and say yes before any evaluation job starts.
-- **Leaves:** `report/paper-review/protocol.md` and `layout-sheet.md`
+- **Leaves:** `1-lora-correction/report/paper-review/protocol.md` and `layout-sheet.md`
 - **Learning path:** none needed; the step is design.
 
 ### 3. 📚 Submerge the eleven gap words
@@ -333,8 +333,8 @@ What to read
 - Reviews.pdf: the exact wording of the three reviewers' requests.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far", and step 2's protocol.
 - composition/focus/eval_metrics.py: CLIP, EVA-CLIP and ImageReward scorers already written here.
-- paper/iclr-56173/figures.md and report/paper-review/prze-1-scores.md: where each score lands.
-- report/paper-review/protocol.md and report/paper-review/layout-sheet.md: the agreed comparison rules
+- paper/iclr-56173/figures.md and 1-lora-correction/report/paper-review/prze-1-scores.md: where each score lands.
+- 1-lora-correction/report/paper-review/protocol.md and 1-lora-correction/report/paper-review/layout-sheet.md: the agreed comparison rules
   and the table each word lands in (R1 on SDXL in the main text, R5 on SD 1.5 in the appendix).
 - The CO3 paper, arXiv 2509.25940, Table 1 and Figure 3: how the same words are used in a table.
 - T2I-CompBench++, arXiv 2307.06350, from our own reference list.
@@ -395,9 +395,9 @@ registered and every one of the eleven words has an entry. You judge from the jo
 You ~40 min (estimate) · AI ~30 min (estimate) plus a cluster census of about 1.6 h on the Blackwell (estimate: 480 images at about 12 s) and about 0.5 h for the 144 showcase renders (estimate, same rate) · Sonnet, medium · moves: PRZE-3b, PRZE-3a, PRZE-8
 
 **Objective:** at least 8 pairs in each of three groups (hard, easy but unseen, not competing), the protocol's four tuning pairs, seeds 9 to 16, and the one adapter named by the protocol's showcase rule, all committed before any adapter result on the evaluation pairs exists.
-**Outcome:** `report/paper-review/held-out-set.md` with its commit hash, census contact sheets under `artifacts/results/`, the showcase calls that name the adapter, and the result files for slots R7 and R8.
+**Outcome:** `1-lora-correction/report/paper-review/held-out-set.md` with its commit hash, census contact sheets under `artifacts/results/`, the showcase calls that name the adapter, and the result files for slots R7 and R8.
 **Serves:** needed by steps 5 to 12: every sampling job, score and figure reads this list.
-**Sees:** `artifacts/results/four-pairs-four-methods/` (the three-adapter figure this step corrects) · **Ticket:** none · **Source page:** the submitted paper, Section 4.1 and Figure 5
+**Sees:** `1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/` (the three-adapter figure this step corrects) · **Ticket:** none · **Source page:** the submitted paper, Section 4.1 and Figure 5
 
 ```text
 /drip-execute-plan --request "Choose and freeze the evaluation pairs, the tuning pairs and the one
@@ -420,24 +420,24 @@ Objectives
    training pairs.
 2. Run the joint prompt and plain product at seeds 9 to 16 on the cluster and sort the candidates
    into hard, easy but unseen, and not competing.
-3. Run the protocol's showcase rule (report/paper-review/protocol.md, rule 1): its 9 candidate
+3. Run the protocol's showcase rule (1-lora-correction/report/paper-review/protocol.md, rule 1): its 9 candidate
    checkpoints render cat and dog and elephant and penguin at seeds 9 to 16, 144 renders. Call each
    full-resolution tile, show the user every call, and name the winner and the shared seed in rule 1.
 4. Write the frozen file and commit it: the three groups, the showcase pairs, the protocol's four
    tuning pairs, seeds 9 to 16 and the named adapter. Then write the result files for slots R7 (the
-   pair list) and R8 (the showcase calls) and run python3 scripts/refresh_paper_slots.py --slot R7
+   pair list) and R8 (the showcase calls) and run python3 1-lora-correction/scripts/refresh_paper_slots.py --slot R7
    and --slot R8 with --compile.
 
 What to read
-- report/paper-review/protocol.md (agreed 2026-11-10): rule 1's showcase rule and candidate table,
-  rule 4's pair sets. artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter's training.
-- report/paper-review/layout-sheet.md: slots R7 and R8, their sizes and result files.
+- 1-lora-correction/report/paper-review/protocol.md (agreed 2026-11-10): rule 1's showcase rule and candidate table,
+  rule 4's pair sets. 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter's training.
+- 1-lora-correction/report/paper-review/layout-sheet.md: slots R7 and R8, their sizes and result files.
 - artifacts/_shared/cross_pair_pool_configs/: pair_pool_v58.yaml (48 training, 4 held-out) and
   pair_prompts*.yaml (candidate prompts).
-- artifacts/results/four-pairs-four-methods/README.md and scripts/paper_main_grid.py lines 21 to 30:
+- 1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/README.md and scripts/paper_main_grid.py lines 21 to 30:
   the three adapters behind Figure 5.
-- scripts/composing_unseen_pairs.py, scripts/concept_pair_sheet.py, scripts/figure_candidates.py
-  and scripts/census/: sampling and counting scripts that already exist; reuse, do not rewrite.
+- scripts/composing_unseen_pairs.py, 3-understanding-compositionality/scripts/concept_pair_sheet.py, 1-lora-correction/scripts/figure_candidates.py
+  and 3-understanding-compositionality/scripts/census/: sampling and counting scripts that already exist; reuse, do not rewrite.
 - environment/hpc/nodes.md and environment/hpc/throughput.md: nodes and measured sampling times.
 
 What is already known
@@ -476,13 +476,13 @@ Rules
   first. Write outputs under /datasets only.
 
 What to hand back
-- report/paper-review/held-out-set.md: pairs by group, the showcase pairs, the tuning pairs, seeds 9
+- 1-lora-correction/report/paper-review/held-out-set.md: pairs by group, the showcase pairs, the tuning pairs, seeds 9
   to 16, the named adapter and shared seed, and the commit hash.
 - Protocol rule 1 updated with the winner, its calls and the shared seed.
 - The R7 and R8 result files, and the compile showing both slots filled.
 - Contact sheets of the census under artifacts/results/ with a card entry.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: git log -1 -- report/paper-review/held-out-set.md prints the commit, and the board
+- Proof: git log -1 -- 1-lora-correction/report/paper-review/held-out-set.md prints the commit, and the board
   redraws with --step 4 ticking the PRZE-3b, PRZE-3a and PRZE-8 lines this step owns.
 
 What you will see
@@ -495,7 +495,7 @@ adapter is named by the showcase rule, and no adapter result exists on the evalu
 
 - `added:` the single-checkpoint rule and the tuning set (from the Figure 5 finding) · `added:` the commit as proof of order (from your fairness rule) · `dropped:` nothing from your message
 - [x] **Gate:** you agree the three groups and the showcase calls before the frozen file is committed.
-- **Leaves:** `report/paper-review/held-out-set.md`
+- **Leaves:** `1-lora-correction/report/paper-review/held-out-set.md`
 - **Learning path:** none needed.
 
 ### 5. 🧪 The compute plan and the first GPU jobs
@@ -503,7 +503,7 @@ adapter is named by the showcase rule, and no adapter result exists on the evalu
 You ~30 min (estimate) · AI ~40 min (estimate), plus the jobs · Sonnet, medium · moves: PRZE-10 (and feeds PRZE-1, PRZE-2, PRZE-4, PRZE-11)
 
 **Objective:** every GPU job has a node, a priority and a priced estimate, and the wave 1 jobs are running or finished with output counts matching the plan.
-**Outcome:** the compute plan table in `report/paper-review/prze-10-compute.md`, run folders under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/`, and logs.
+**Outcome:** the compute plan table in `1-lora-correction/report/paper-review/prze-10-compute.md`, run folders under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/`, and logs.
 **Serves:** needed by steps 8 to 12 (every score and figure reads these outputs).
 **Sees:** none · **Ticket:** none · **Source page:** `environment/hpc/execution-protocol.md`
 
@@ -536,7 +536,7 @@ with a priority and an estimate, then launches the ones that no gate blocks. The
 /home/molef/PhD/poe_repair_min and cluster actions go through scripts/cluster.sh.
 
 Objectives
-1. Write the compute plan as a table in report/paper-review/prze-10-compute.md: job, node, memory,
+1. Write the compute plan as a table in 1-lora-correction/report/paper-review/prze-10-compute.md: job, node, memory,
    hours with its basis (measured or estimate), priority, and what it waits on.
 2. Record an 80% runtime and memory prediction for each wave 1 job before it starts.
 3. Launch wave 1 on mscluster112 and mscluster107 by the shared-device path, each after the user
@@ -544,13 +544,13 @@ Objectives
 4. Poll each job, count its outputs against the plan, and report any job that is stuck.
 
 What to read
-- report/paper-review/protocol.md, held-out-set.md and ground-check.md, once the steps leave them.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md and ground-check.md, once the steps leave them.
 - environment/hpc/execution-protocol.md: the shared-device path and its safety rules, all mandatory.
 - environment/hpc/throughput.md and environment/hpc/nodes.md: measured times and node facts.
 - environment/storage.md: the filesystem rule and the disk guard.
 - scripts/cluster.sh and the existing launchers in scripts/ (figure_candidates.sbatch,
   composing_unseen_pairs.py, joint_poe_adapter_grid.py): reuse, do not rewrite.
-- report/paper-review/prze-1, prze-2, prze-4, prze-11: the outcome lines each job feeds.
+- 1-lora-correction/report/paper-review/prze-1, prze-2, prze-4, prze-11: the outcome lines each job feeds.
 
 What is already known
 - The user holds one biggpu slot (interactive job 83423 on mscluster107, two RTX 8000 of 49,152 MiB,
@@ -602,7 +602,7 @@ finished with its output count matching the plan. You judge from the table and t
 You ~40 min (estimate) · AI ~30 min (estimate; no measured median, the mode graph has no entry yet) · Sonnet, medium · moves: PRZE-9
 
 **Objective:** one published page showing seven pieces (methods, inputs, images, scorers, tables, figure slots, machines), each marked where an unfair comparison could enter.
-**Outcome:** the page URL, the saved SVG and spec under `artifacts/scenes/`, and its card; a line linking it in `report/paper-review/prze-9-slots.md`.
+**Outcome:** the page URL, the saved SVG and spec under `artifacts/scenes/`, and its card; a line linking it in `1-lora-correction/report/paper-review/prze-9-slots.md`.
 **Serves:** the picture the layout sheet's slots hang on, and the evaluation paragraph of the paper.
 **Sees:** `hld-diagram/references/registry.json` (no page of this system today) · **Ticket:** none · **Source page:** none
 
@@ -631,9 +631,9 @@ Objectives
 
 What to read
 - plans/route-answer-the-iclr-reviews.md: the chain, the table "What we know so far", every step.
-- report/paper-review/protocol.md, layout-sheet.md, held-out-set.md and prze-10-compute.md, once
+- 1-lora-correction/report/paper-review/protocol.md, layout-sheet.md, held-out-set.md and prze-10-compute.md, once
   steps 2, 4 and 5 have left them.
-- report/paper-review/board.md and the pages for the rows each piece serves.
+- 1-lora-correction/report/paper-review/board.md and the pages for the rows each piece serves.
 - environment/overview.md, environment/hpc/nodes.md and environment/storage.md: machines and disks.
 - composition/focus/eval_metrics.py: the scorers that already exist here.
 - hld-diagram/references/registry.json: existing pages, to avoid a second page of the same system.
@@ -662,7 +662,7 @@ Rules
 
 What to hand back
 - The published page URL, the saved SVG and spec under artifacts/scenes/, and the card entry.
-- A line added to report/paper-review/prze-9-slots.md linking the page.
+- A line added to 1-lora-correction/report/paper-review/prze-9-slots.md linking the page.
 - Proof: the registry lists the new page, and the page opens with every piece present.
 
 What you will see
@@ -682,7 +682,7 @@ shows all seven pieces with their marks. You judge by opening the page.
 You ~60 min (estimate; one measured `--lean` run took 38 min for one paper, too few runs to trust) · AI ~50 min (estimate) · Sonnet, medium · moves: PRZE-1 (the one-page note per score)
 
 **Objective:** every metric has a row (what it measures, scale, blind spot, which of our rows it feeds), with each blind spot shown on one of your own images.
-**Outcome:** `artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md` and the one-page table, linked from `report/paper-review/prze-1-scores.md`.
+**Outcome:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md` and the one-page table, linked from `1-lora-correction/report/paper-review/prze-1-scores.md`.
 **Serves:** needed by step 9 (scores) and the evaluation paragraph of the paper.
 **Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** [the CO3 paper](https://arxiv.org/abs/2509.25940), Table 1
 
@@ -714,7 +714,7 @@ What to read
 - arXiv 2307.06350 (T2I-CompBench++), the BLIP-VQA description.
 - The ImageReward and GenEval papers, once their ids are confirmed.
 - composition/focus/eval_metrics.py: CLIP, EVA-CLIP and ImageReward scorers already written here.
-- report/paper-review/protocol.md and held-out-set.md, once steps 2 and 4 have left them.
+- 1-lora-correction/report/paper-review/protocol.md and held-out-set.md, once steps 2 and 4 have left them.
 - The step 4 census contact sheets under artifacts/results/: the source of the two small-object
   images.
 
@@ -730,7 +730,7 @@ What is already known
 
 When something is missing
 - If an arXiv id cannot be resolved, show the candidate titles and ask the user to confirm one.
-- If no census images exist yet, use two images from artifacts/results/four-pairs-four-methods/ and
+- If no census images exist yet, use two images from 1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/ and
   say so.
 - If a scorer cannot run on this machine, say which and run it on the cluster after the user says
   yes.
@@ -741,9 +741,9 @@ Rules
 - Do not copy a published number into our results; cite it as context only.
 
 What to hand back
-- artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
 - A vault note written by the walk's own close, in the Obsidian vault.
-- A line added to report/paper-review/prze-1-scores.md linking the table.
+- A line added to 1-lora-correction/report/paper-review/prze-1-scores.md linking the table.
 - Proof: the table has a row for every metric, and each blind spot cites the image that showed it.
 
 What you will see
@@ -755,7 +755,7 @@ on one of your own images. You judge from the table.
 
 - `added:` the predict-before-answer rule · `added:` the two small-object images from our own census · `dropped:` the rival-methods reading (why: step 3 covers them, and it is a separate idea)
 - [ ] **Gate:** the one-page table exists before step 9 runs the scorers.
-- **Leaves:** `artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md`
+- **Leaves:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md`
 - **Learning path:** gloss only; the eleven words are linked in step 3's journey.
 
 ### 8. 🧪 Prove the Langevin corrector and render the six-column figure
@@ -763,7 +763,7 @@ on one of your own images. You judge from the table.
 You ~120 min at `--depth objective` (estimate) · AI ~150 min (estimate) plus GPU job 3 of step 5 (about 3.4 h on the Blackwell; the Gaussian proof runs on the laptop in seconds) · Opus, medium · moves: PRZE-2, and feeds PRZE-1's baselines
 
 **Objective:** our update passes a check against the exact stationary variance at four step sizes; the two new drivers match the plain sampler at zero steps; c and k are chosen on the tuning pairs by a rule written first; the six-column figure is built from the frozen settings.
-**Outcome:** `scripts/check_langevin_two_gaussians.py` and its table, the two drivers, tuning contact sheets, and the figure in its slot with its sidecar file.
+**Outcome:** `1-lora-correction/scripts/check_langevin_two_gaussians.py` and its table, the two drivers, tuning contact sheets, and the figure in its slot with its sidecar file.
 **Serves:** the PRZE-2 baseline rows and the figure the reviewer asked to see.
 **Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** [Reduce, Reuse, Recycle](https://arxiv.org/abs/2302.11552), Section 2 and Appendix B
 
@@ -802,12 +802,12 @@ What to read
   their paper in 28 places (the audit below); implement from the paper's equations.
 - The code-against-paper audit at
   /home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md
-- plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/02-the-corrector-and-the-step-size-it-runs-at.md
+- 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/02-the-corrector-and-the-step-size-it-runs-at.md
   and
-  report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md
-- report/paper-review/protocol.md, held-out-set.md, layout-sheet.md: rules, the tuning pairs and the
+  1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md: rules, the tuning pairs and the
   figure's slot.
-- scripts/corrector_residual_curve.py and scripts/figure_candidates.py: existing drivers and the
+- 1-lora-correction/scripts/corrector_residual_curve.py and 1-lora-correction/scripts/figure_candidates.py: existing drivers and the
   grid.
 
 What is already known
@@ -836,11 +836,11 @@ Rules
 - Launch GPU work through the step 5 plan and its commands only, after the user's yes.
 
 What to hand back
-- scripts/check_langevin_two_gaussians.py and its printed table.
+- 1-lora-correction/scripts/check_langevin_two_gaussians.py and its printed table.
 - The two drivers, the tuning contact sheets and the chosen c and k with the rule that chose them.
 - The six-column figure in its slot, with its sidecar file listing seeds, noise and settings.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: python3 scripts/check_langevin_two_gaussians.py prints PASS for all four step sizes, and
+- Proof: python3 1-lora-correction/scripts/check_langevin_two_gaussians.py prints PASS for all four step sizes, and
   the board redraws with --step 8 ticking the PRZE-2 lines.
 
 What you will see
@@ -861,12 +861,12 @@ from the frozen settings. You judge from the table and the figure.
 You ~90 min (measured) · AI ~4 h of rendering on eight cards (measured) · Opus, medium · moves: PRZE-1
 
 **Objective:** CO3 at its published default renders every R1 and R3 cell and Figure 5's four pairs from the same seed latent as the other methods; ToMe and SuperDiff are tried and left out with their reasons recorded.
-**Outcome:** 1,104 R1 and 424 R3 CO3 tiles with rule 9 sidecars under `outputs/paper_review/co3_default/`, rows 7 and 8 of [the jobs table](../report/paper-review/prze-10-compute.md#the-jobs), and the row builder that step 9 reads them with.
+**Outcome:** 1,104 R1 and 424 R3 CO3 tiles with rule 9 sidecars under `outputs/paper_review/co3_default/`, rows 7 and 8 of [the jobs table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs), and the row builder that step 9 reads them with.
 **Serves:** the CO3 row of R1 and R3 and the CO3 column of Figure 5.
-**Plan:** [the baselines plan](prze-review-baselines.md) · **Walk map:** `artifacts/drips/review-baselines/EXECUTE_WALK.md`
+**Plan:** [the baselines plan](../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md) · **Walk map:** `1-lora-correction/artifacts/drips/review-baselines/EXECUTE_WALK.md`
 
 - [x] **Gate:** you say yes to each launch command. ✓ confirmed by hand 2026-11-11: every launch in the walk map followed a yes
-- **Leaves:** the CO3 tiles and logs, `scripts/review_baseline_cell.py`, `scripts/review_baselines_eval.sh`, `scripts/review_baselines_co3_tail.sh`
+- **Leaves:** the CO3 tiles and logs, `1-lora-correction/scripts/review_baseline_cell.py`, `1-lora-correction/scripts/review_baselines_eval.sh`, `1-lora-correction/scripts/review_baselines_co3_tail.sh`
 
 ### 9. 🧪 Score every image and build the tables
 
@@ -900,11 +900,11 @@ Objectives
 2. Write the supports, null, inconclusive and reported-as-is bar into the protocol before any score.
 3. Score every image and write one long results file with the axis columns on every row.
 4. Build the CO3-style table, the rate table with intervals, and the paired differences.
-5. Fill the table slots through scripts/refresh_paper_slots.py and check the paper still compiles.
+5. Fill the table slots through 1-lora-correction/scripts/refresh_paper_slots.py and check the paper still compiles.
 
 What to read
-- artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
-- report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
 - composition/focus/eval_metrics.py: the CLIP and ImageReward scorers already written here.
 - The run folders under /datasets/mmolefe/poe_repair_min/outputs/paper_review/.
 - environment/hpc/nodes.md: the co3 and co3_bw interpreters and the PyPI speed on the nodes.
@@ -935,10 +935,10 @@ Rules
 
 What to hand back
 - The results file under /datasets/mmolefe/poe_repair_min/outputs/paper_review/scores/ and a copy
-  of the small tables under report/paper-review/.
+  of the small tables under 1-lora-correction/report/paper-review/.
 - The three tables and the paired differences, in their slots, with sidecar files.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: python3 scripts/refresh_paper_slots.py --check prints PASS, the paper compiles, and the
+- Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS, the paper compiles, and the
   board redraws with --step 9 ticking the PRZE-1 and PRZE-3b lines.
 
 What you will see
@@ -979,7 +979,7 @@ decides whether training an SD 1.5 adapter is worth the hours. The repo is
 /home/molef/PhD/poe_repair_min.
 
 Objectives
-1. Add SD 1.5 to scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.
+1. Add SD 1.5 to 1-lora-correction/scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.
 2. Write the measured-correction sampler for SD 1.x: joint minus PoE added back at full strength.
 3. Run Attend-and-Excite from composition/aae/ and CONFORM from its official repository, both
    unmodified, on the same pairs, seeds and starting noise.
@@ -987,9 +987,9 @@ Objectives
 
 What to read
 - composition/aae/: the official Attend-and-Excite code (README, run.py, the pipeline).
-- scripts/same_rule_four_models.py: joint prompt and PoE on four Stable Diffusion models.
+- 1-lora-correction/scripts/same_rule_four_models.py: joint prompt and PoE on four Stable Diffusion models.
 - The CONFORM repository, github.com/gemlab-vt/conform, and arXiv 2312.06059.
-- report/paper-review/protocol.md, held-out-set.md and prze-1-scores.md.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md and prze-1-scores.md.
 - poe_repair/methods/_sampling.py: the repo's own PoE rule, to copy the rule exactly.
 - environment/hpc/nodes.md: co3 and co3_bw interpreters; mscluster107 has two RTX 8000 of 49 GB.
 
@@ -1040,7 +1040,7 @@ the contact sheet and the rate.
 You ~30 min (estimate) · AI ~45 min (estimate) plus about 0.8 h of GPU (240 images at about 12 s on the Blackwell, plus a few tuning images) · Sonnet, medium · moves: PRZE-4
 
 **Objective:** joint, plain three-concept product and the frozen adapter inside a three-concept product, run on about 10 triples at seeds 9 to 16 from one starting noise per triple and seed, with the triples and the bar committed before any image exists, and the verdict SIGNAL or NO SIGNAL.
-**Outcome:** `report/paper-review/three-concept-set.md`, the images and contact sheet, the rates with intervals, and the figure in its slot.
+**Outcome:** `1-lora-correction/report/paper-review/three-concept-set.md`, the images and contact sheet, the rates with intervals, and the figure in its slot.
 **Serves:** PRZE-4 (PrzE's question 2).
 **Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** the submitted paper, Appendix B.1, equation 13
 
@@ -1069,12 +1069,12 @@ Objectives
 5. Fill the figure slot with the grid, failures included.
 
 What to read
-- report/paper-review/protocol.md, held-out-set.md and prze-4-three-concepts.md.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md and prze-4-three-concepts.md.
 - poe_repair/methods/_sampling.py: the repo's PoE rule and where the adapter is attached.
 - The submitted paper, Appendix B.1: the adapter's three branches (equation 13).
 - artifacts/_shared/cross_pair_pool_configs/pair_pool_v58.yaml: the 48 training pairs, whose
   concepts the triples must avoid.
-- scripts/joint_poe_adapter_grid.py and scripts/figure_candidates.py: existing grid builders.
+- 1-lora-correction/scripts/joint_poe_adapter_grid.py and 1-lora-correction/scripts/figure_candidates.py: existing grid builders.
 
 What is already known
 - The adapter is a rank-32 module on the cross-attention layers, with no input slot for a third
@@ -1096,7 +1096,7 @@ Rules
 - Launch GPU work through the step 5 plan after the user's yes.
 
 What to hand back
-- report/paper-review/three-concept-set.md with the rule, the triples and the commit hash.
+- 1-lora-correction/report/paper-review/three-concept-set.md with the rule, the triples and the commit hash.
 - Images under /datasets/mmolefe/poe_repair_min/outputs/paper_review/three_concepts/, a contact
   sheet with a card entry, and the rates with intervals.
 - The figure in its slot, and rows added to "What we know so far" in the route file.
@@ -1113,7 +1113,7 @@ contact sheet and the interval.
 
 - `added:` the tuning triples for the guidance weight · `added:` the concepts-must-avoid-training rule · `dropped:` nothing from your message
 - [ ] **Gate:** the triples, rule and bar are committed before the first image is generated.
-- **Leaves:** `report/paper-review/three-concept-set.md` and the SIGNAL or NO SIGNAL line
+- **Leaves:** `1-lora-correction/report/paper-review/three-concept-set.md` and the SIGNAL or NO SIGNAL line
 - **Learning path:** none needed.
 
 ### 12. 🧪 Decide and launch the two gated trainings
@@ -1159,9 +1159,9 @@ Objectives
    the evaluation set from the same starting noise.
 
 What to read
-- report/paper-review/protocol.md: the bars for both gates and the checkpoint-choice rule.
-- report/paper-review/prze-11-early-training.md and prze-1-scores.md: the outcome lines.
-- artifacts/drips/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
+- 1-lora-correction/report/paper-review/protocol.md: the bars for both gates and the checkpoint-choice rule.
+- 1-lora-correction/report/paper-review/prze-11-early-training.md and prze-1-scores.md: the outcome lines.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
   steps.
 - environment/hpc/throughput.md: step times and the memory a rank-32 training needs.
 - The training package under poe_repair/experiments/cross_pair_lora_pooling/ and its launchers
@@ -1248,7 +1248,7 @@ Objectives
 
 What to read
 - paper/iclr-56173/DRAFT_MAP.md and the working copy's tex: where each section stands.
-- report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
+- 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
 - Reviews.pdf: the exact wording of every point being answered.
@@ -1341,7 +1341,7 @@ Objectives
 What to read
 - Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
 - paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
-- report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
+- 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
 
 What is already known
@@ -1394,7 +1394,7 @@ You ~40 min (estimate: about 10 for the merge, about 30 for the retro) · AI ~20
 **Serves:** the retention step of the chain; no deliverable waits on it.
 **Sees:** the board and the row pages · **Ticket:** none · **Source page:** none
 
-The five things: why one frozen checkpoint and what the three-adapter Figure 5 was; what the corrector proof showed and did not show; what each score measures and its blind spot on our own images; what the [held-out groups](../report/paper-review/held-out-set.md#the-held-out-groups) are and why the tuning set is separate; where a baseline beats the adapter if one does, and what the three-concept and early-steps tests said.
+The five things: why one frozen checkpoint and what the three-adapter Figure 5 was; what the corrector proof showed and did not show; what each score measures and its blind spot on our own images; what the [held-out groups](../1-lora-correction/report/paper-review/held-out-set.md#the-held-out-groups) are and why the tuning set is separate; where a baseline beats the adapter if one does, and what the three-concept and early-steps tests said.
 
 ```text
 /merge-sessions --retro <the session ids of steps 1 to 14, one per line, listed by the user>
@@ -1416,9 +1416,9 @@ Objectives
 2. For each chunk, state the question it answered, the bar written first, and the result.
 
 What to read
-- The session transcripts named by the user, and artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md.
+- The session transcripts named by the user, and 1-lora-correction/artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md.
 - plans/route-answer-the-iclr-reviews.md: the "What we know so far" table, as the spine.
-- report/paper-review/board.md and every row page's outcome lines.
+- 1-lora-correction/report/paper-review/board.md and every row page's outcome lines.
 
 What is already known
 - Five things must be explainable afterward: the one frozen checkpoint, the corrector proof, what
@@ -1500,7 +1500,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 - [ ] **Do:** in the browser, open the paper's Overleaf project, click **Menu** (top left), then under **Download** click **Source**. Save the zip, then tell Claude its path so it is unpacked over `paper/iclr-56173/` (the slots, `figures.md` and the `\reviewslot` macro are kept).
 - **You should see:** a zip of about 119 MB holding `iclr2027_conference.tex` and `figures/`.
-- **Done when:** `python3 scripts/refresh_paper_slots.py --check` prints PASS after the unpack.
+- **Done when:** `python3 1-lora-correction/scripts/refresh_paper_slots.py --check` prints PASS after the unpack.
 
 ### C. 🖱️ Upload the revised paper to Overleaf after step 13
 
@@ -1546,4 +1546,4 @@ Navigation: ⬅️ [Previous](#quizzes-and-feedback) | 📋 [TOC](#table-of-cont
 
 ## Cross-references
 
-- The mention of **route step 13** in [the captions for the appendix render grids](../report/paper-review/captions-showcase-grids.md).
+- The mention of **route step 13** in [the captions for the appendix render grids](../1-lora-correction/report/paper-review/captions-showcase-grids.md).

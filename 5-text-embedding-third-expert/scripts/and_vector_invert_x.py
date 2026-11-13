@@ -21,8 +21,8 @@ Seed 8 is rendered but excluded from the predeclared 6/7 success criterion.
 Training seeds default to 1..7; monitoring uses seed 1, so final seeds are not
 an untouched validation set. No checkpoint is selected by evaluation counts.
 
-python scripts/and_vector_invert_x.py
-python scripts/and_vector_invert_x.py --evaluate --x /datasets/mmolefe/poe_repair_min/outputs/invert_x/x.pt --seeds 1 2 3 4 5 6 7 8
+python 5-text-embedding-third-expert/scripts/and_vector_invert_x.py
+python 5-text-embedding-third-expert/scripts/and_vector_invert_x.py --evaluate --x /datasets/mmolefe/poe_repair_min/outputs/invert_x/x.pt --seeds 1 2 3 4 5 6 7 8
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ JUDGEABLE_SEEDS = tuple(range(1, 8))
 NOTICE = 'Animal counts do not identify species; two dogs count as success.'
 PHRASE = 'a dog next to a cat'
 DEFAULT_OUT = Path('/datasets/mmolefe/poe_repair_min/outputs/invert_x')
-REPO = Path(os.environ.get('POE_REPO', Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get('POE_REPO', Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / 'scripts'))
 

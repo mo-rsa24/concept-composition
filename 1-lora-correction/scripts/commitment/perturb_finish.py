@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Basins by hand: nudge one cached state by 1% of its norm, finish DDIM three ways, compare.
 
-Plan: plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md
+Plan: 1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md
 
 Loads one pair-and-seed cell's cached mid-run state at each of the given steps (from its
 ``residuals/step_NNN.pt``), builds a nudged-down and a nudged-up copy (a random unit direction,
@@ -11,7 +11,7 @@ CFG-guided per-concept epsilons). Saves the three decoded endings per step, a JS
 relative latent distances (down-vs-mid, mid-vs-up), and one 3x3 contact sheet across all
 tested steps.
 
-    co3 python scripts/commitment/perturb_finish.py --cell <cell-dir> --steps 5 25 40 \\
+    co3 python 1-lora-correction/scripts/commitment/perturb_finish.py --cell <cell-dir> --steps 5 25 40 \\
         --nudge 0.01 --out <out-dir>
 """
 
@@ -26,7 +26,7 @@ from pathlib import Path
 import torch
 from PIL import Image, ImageDraw
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from poe_repair.runtime import (  # noqa: E402
     ddim_prev_from_x0_eps,

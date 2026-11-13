@@ -20,9 +20,9 @@ and beats the single-pair test from rung 3.
 ## Tasks
 - [x] ✅ G6 within-group smoke: train ~30k steps + mid-training crossbar eval. → G10: `in_in`+`out_in` sampled, 43/43 cells (`artifacts/rung3-group-wise/cross_pair/within_group/g6/main__wandb-ow1jo0xq/`, `eval_crossbar/step_020000/`). Smoke only, not a verdict.  ✓ verified (manifest n_cells_sampled=43, ckpt loads)
 - [ ] ⚠️ **[publishable-bar]** Build the ~520 missing cache cells for the 40 new within-group pair slugs (seeds 1–12).
-  Prompt: `bash scripts/cross_pair_lora_pooling/build_plan16_caches.sh` (idempotent; ~11 h GPU).
+  Prompt: `bash 1-lora-correction/scripts/cross_pair_lora_pooling/build_plan16_caches.sh` (idempotent; ~11 h GPU).
 - [ ] ⚠️ **[publishable-bar]** Run G1 end-to-end (most-opposite to G6); **[optional]** then G2–G4.
-  Prompt (`/run-experiment`): `GROUPS=g1 bash scripts/cross_pair_lora_pooling/run_within_group.sh` (leak-guard → train → sample `--quadrants in_in,out_in --out-in-train-seeds 12` → contact sheet → Task D).
+  Prompt (`/run-experiment`): `GROUPS=g1 bash 1-lora-correction/scripts/cross_pair_lora_pooling/run_within_group.sh` (leak-guard → train → sample `--quadrants in_in,out_in --out-in-train-seeds 12` → contact sheet → Task D).
 - [ ] ⚠️ **[publishable-bar]** Finish G6's full tail: sample_crossbar → contact_sheet → Task D at the final checkpoint (not just the mid-training eval).
 - [ ] ⚠️ **[publishable-bar]** Hold out CONCEPT-DISJOINT siblings (e.g. wolf×husky), not shared-concept ones (lion×dog shares "dog" → near-freebie). Shared-concept transfer does not count as transfer.
 - [ ] ⚠️ **[publishable-bar]** Read every transfer cell with TWO labelled verdicts: (a) deployable — the image composes (two animals); (b) scientific — Task D cosine of Δ̂_t to the group-mean Δ̄_t^(G). Never sell a high cosine as "it works"; they are separate tiers.

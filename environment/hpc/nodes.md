@@ -52,7 +52,7 @@ live via `ls -la` on 2026-08-24). Every job script must use this absolute path, 
 `co3` CUDA op produces no output at all rather than an error. Rule: `co3` on the RTX 8000 and
 A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112. Launchers take
 the python path as `PY=` for this reason (`scripts/launch_sdlora.sh`,
-`scripts/animals_compose_transfer/smoke_live_curves.sh`).
+`1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`).
 
 **`mscluster111`'s card is not usable from torch (2026-09-05).** `nvidia-smi` lists it with 2 MiB used
 and `utilization.gpu=[N/A]`, and `torch.cuda.is_available()` under `co3_bw` returns `False`, so a
@@ -96,4 +96,4 @@ pack members on the laptop and copies them over. `ms-python.python` 2026.8.0 and
 
 ## Cross-references
 
-- The cross-device spread named in [the finding "does a Langevin corrector remove part of the correction"](../../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md): one uncorrected cell reads 0.153, 0.169 and 0.180 on the RTX 3090, the RTX PRO 6000 Blackwell and the Quadro RTX 8000, so a comparison across corrector counts stays on one device.
+- The cross-device spread named in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md): one uncorrected cell reads 0.153, 0.169 and 0.180 on the RTX 3090, the RTX PRO 6000 Blackwell and the Quadro RTX 8000, so a comparison across corrector counts stays on one device.

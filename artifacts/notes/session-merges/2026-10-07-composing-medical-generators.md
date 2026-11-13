@@ -1,6 +1,6 @@
 # Composing medical image generators: merged starting prompt
 
-/drip-execute-plan plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md --request
+/drip-execute-plan 3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md --request
 
 Context for the walk (written for a reader who is learning as they go; define AUROC, detector, prompt and "both findings drawn" rate the first time each appears).
 
@@ -46,7 +46,7 @@ Dataset `stanfordmimi/RoentGen-v2-synthetic-dataset`: 33 parquet shards, 565,154
 
 **Where things live**
 
-On mscluster107 (two Quadro RTX 8000, 49 GB each, allocated to the user): `/datasets/mmolefe/poe_repair_min/pair_test/` holds `full/` (the 320 images), `thresholds*.json` for six detectors, `nih_real/`, `rg2_synth/` (shards 0, 16, 32) and `hf_cache` (6.1 GB). Environment `co3` has torch 2.5.1, diffusers 0.29.2, peft 0.19.1, torchxrayvision 1.5.2. NIH labels: `data/nih_cxr14/Data_Entry_2017_v2020.csv`. Scripts, all untracked in git: `scripts/medical_pair_table.py`, `medical_pair_bar.py`, `medical_pair_generate.py`, `medical_pair_score.py`, `medical_pair_check_authors.py`. Walk map: `artifacts/drips/does-roentgen-draw-two-findings/EXECUTE_WALK.md`.
+On mscluster107 (two Quadro RTX 8000, 49 GB each, allocated to the user): `/datasets/mmolefe/poe_repair_min/pair_test/` holds `full/` (the 320 images), `thresholds*.json` for six detectors, `nih_real/`, `rg2_synth/` (shards 0, 16, 32) and `hf_cache` (6.1 GB). Environment `co3` has torch 2.5.1, diffusers 0.29.2, peft 0.19.1, torchxrayvision 1.5.2. NIH labels: `data/nih_cxr14/Data_Entry_2017_v2020.csv`. Scripts, all untracked in git: `3-understanding-compositionality/scripts/medical_pair_table.py`, `medical_pair_bar.py`, `medical_pair_generate.py`, `medical_pair_score.py`, `medical_pair_check_authors.py`. Walk map: `artifacts/drips/does-roentgen-draw-two-findings/EXECUTE_WALK.md`.
 
 **Side material, not yet used**
 

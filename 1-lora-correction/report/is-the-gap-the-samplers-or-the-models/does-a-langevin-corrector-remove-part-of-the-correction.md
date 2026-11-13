@@ -2,9 +2,9 @@
 
 **The claim**
 
-A [Langevin corrector](../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/21-langevin-dynamics.md) was built on the [product-of-experts](../../context/world/poe-composition.md) score and run to 200 corrector steps at
+A [Langevin corrector](../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/21-langevin-dynamics.md) was built on the [product-of-experts](../../../context/world/poe-composition.md) score and run to 200 corrector steps at
 every one of the 50 noise levels, at three step sizes, on the pair that blends and the pair that
-composes. It cannot say how much of [the correction](../../context/world/interaction-term.md) belongs to the sampler.
+composes. It cannot say how much of [the correction](../../../context/world/interaction-term.md) belongs to the sampler.
 
 The reason is the instrument, not the science. One seed gives one trajectory per corrector count,
 and that trajectory's read-out scatters by more than the bars it is judged against: the same
@@ -32,7 +32,7 @@ again at the next corrector count.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-the-curve-at-the-step-size-the-scope-proceeds-at) ➡️
 
 Three branches, with their thresholds written as module-level constants in
-`scripts/corrector_residual_curve.py` before any corrector existed, so moving one after the answer
+`1-lora-correction/scripts/corrector_residual_curve.py` before any corrector existed, so moving one after the answer
 arrived shows up in a diff. Support if, over the last five denoising steps, the correction's size
 relative to the product-of-experts prediction falls by at least `MIN_DROP_FOR_SPLIT = 0.20` of its
 uncorrected value with at least `MIN_REMAINDER_FOR_SPLIT = 0.20` still there. Null if the change
@@ -147,20 +147,20 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The corrector is inert when switched off | `corrector/logs/leak_checks.log`, 2026-09-05: 0 corrector steps and 200 corrector steps with the window past the last step both byte-identical to the reference sampler | verified |
 | The renders behind rungs 3 and 4 | `corrector/pairs/<pair>/seed_9/poe_langevin_k<count>_c<multiplier>/`, one per measured chain | verified |
 | The runs | steps 25 and 26 of the running order, on mscluster108 device 1, mscluster110 device 0 and mscluster85 device 0, 2026-09-05 to 06, commit 0150704; the tables are in [the step-size review](../../plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md) and [the chain review](../../plans/06-is-the-gap-the-samplers-or-the-models/review/03-what-is-left-once-the-chain-settles.md) | verified |
-| Regenerate with | recipes 1 to 3 of [running the Langevin corrector](../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md): the leak checks, the step-size search, then the corrector-count grid and its verdict | |
+| Regenerate with | recipes 1 to 3 of [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md): the leak checks, the step-size search, then the corrector-count grid and its verdict | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What the correction is, and why its size is read against the product-of-experts prediction:
-  [the interaction term](../../context/world/interaction-term.md)
+  [the interaction term](../../../context/world/interaction-term.md)
 - What product-of-experts composition is and what the joint prompt is the target of:
-  [PoE composition](../../context/world/poe-composition.md)
+  [PoE composition](../../../context/world/poe-composition.md)
 - Which python build runs on which card, and why a comparison across corrector counts stays on one
-  device: [the cluster nodes](../../environment/hpc/nodes.md)
+  device: [the cluster nodes](../../../environment/hpc/nodes.md)
 - Why the grid ran outside Slurm and was harvested with `pgrep`:
-  [the execution protocol](../../environment/hpc/execution-protocol.md)
+  [the execution protocol](../../../environment/hpc/execution-protocol.md)
 - Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open
@@ -180,4 +180,4 @@ Navigation: ⬅️ [Previous](#depends-on) | 📋 [TOC](#table-of-contents)
 
 ## Cross-references
 
-- The mention of **Langevin corrector** in [the write-up on what PoE loses when it composes](../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#11-limits-and-open-questions).
+- The mention of **Langevin corrector** in [the write-up on what PoE loses when it composes](../../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#11-limits-and-open-questions).

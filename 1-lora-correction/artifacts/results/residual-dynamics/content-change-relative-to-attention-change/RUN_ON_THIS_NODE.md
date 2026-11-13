@@ -10,7 +10,7 @@ Written 2026-08-05.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-bash scripts/mechanism_study/run_sweep_on_this_node.sh
+bash 1-lora-correction/scripts/mechanism_study/run_sweep_on_this_node.sh
 ```
 
 That is the whole job. It checks for a GPU, runs 64 cells, and scores them.
@@ -20,7 +20,7 @@ forward passes at three of the steps).
 To survive the terminal closing:
 
 ```bash
-nohup bash scripts/mechanism_study/run_sweep_on_this_node.sh \
+nohup bash 1-lora-correction/scripts/mechanism_study/run_sweep_on_this_node.sh \
   > results/mechanism_study/sweep_$(hostname).log 2>&1 &
 tail -f results/mechanism_study/sweep_*.log
 ```
@@ -53,7 +53,7 @@ The script scores automatically when it finishes. To re-score at any point,
 including partway through:
 
 ```bash
-python scripts/mechanism_study/reprobe_table.py
+python 1-lora-correction/scripts/mechanism_study/reprobe_table.py
 ```
 
 It prints a per-pair table and a verdict, and writes
@@ -98,7 +98,7 @@ more than weight, supporting the hypothesis.
 `gain_and_pattern()` in `value_probe.py` computes this per cell during capture,
 so the scorer reads it rather than re-deriving it. Full argument with the
 guards (shuffled-map control, denominator check, raw sums) is in
-`artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
+`1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md`.
 
 ## What is already known
 
@@ -147,7 +147,7 @@ averages over the pieces. Checked across all 19 pool pairs, zero mismatches.
 
 **"no CUDA device visible"** — the node has no GPU or it is not exposed to this
 session. Fall back to the queue: `sbatch
-scripts/mechanism_study/value_probe_sweep.sbatch`.
+1-lora-correction/scripts/mechanism_study/value_probe_sweep.sbatch`.
 
 **Warning that the GPU is already in use** — someone else's process is on the
 card. Two SDXL processes on one GPU will run out of memory. Check `nvidia-smi`;
@@ -180,9 +180,9 @@ scancel 26881              # only if this node's run has finished the cells
 
 ## After the verdict
 
-Mark plan 02 in `plans/03-does-the-correction-cause-composition/plans/hypothesis-01-what-the-fix-changes-inside-the-model.md`, record
+Mark plan 02 in `1-lora-correction/plans/03-does-the-correction-cause-composition/plans/hypothesis-01-what-the-fix-changes-inside-the-model.md`, record
 the verdict either way, and update the Plans list in
-`plans/03-does-the-correction-cause-composition/MASTER_PLAN.md`.
+`1-lora-correction/plans/03-does-the-correction-cause-composition/MASTER_PLAN.md`.
 
 Plans still open in that scope: 03 (dose-response, the causal headline), 04
 (window timing), 05 (cache analyses, task 1 done, five tasks left and all

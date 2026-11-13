@@ -19,14 +19,14 @@ Objectives
 5. If neither fix reaches the target, write one retrain proposal and stop for a yes.
 
 What to read
-- artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter of record and its training recipe.
-- report/paper-review/prze-3a-pair-lists.md: the three runs behind Figure 5, with paths.
-- report/what-the-adapter-ablations-show/does-adapting-self-attention-change-the-result.md: the
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter of record and its training recipe.
+- 1-lora-correction/report/paper-review/prze-3a-pair-lists.md: the three runs behind Figure 5, with paths.
+- 3-understanding-compositionality/report/what-the-adapter-ablations-show/does-adapting-self-attention-change-the-result.md: the
   earlier, mixed comparison of self-attention against cross-attention.
-- report/paper-review/prze-8-protocol.md: why held-out pairs stay untouched here.
-- scripts/figure_candidates.py: the renderer; --window N keeps the adapter on for steps 0 to N.
+- 1-lora-correction/report/paper-review/prze-8-protocol.md: why held-out pairs stay untouched here.
+- 1-lora-correction/scripts/figure_candidates.py: the renderer; --window N keeps the adapter on for steps 0 to N.
 - poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py, around line 532: the step filter.
-- environment/hpc/nodes.md and report/paper-review/prze-10-compute.md: nodes and pythons.
+- environment/hpc/nodes.md and 1-lora-correction/report/paper-review/prze-10-compute.md: nodes and pythons.
 - /datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/ and v58-01-plain/:
   config.json, pair_pool.json, dataset_meta.json, verdict.json, checkpoints/.
 
@@ -43,7 +43,7 @@ What is already known
 - v58-01-plain stopped at step 47,500 with no verdict.json; its last checkpoint is
   lora_step_047500.pt. v58-03-self also has lora_step_047500.pt, so compare the two at 47,500.
 - The renderer takes each seed's starting noise from the a_cat__x__a_dog cache, which every pair
-  shares per seed (scripts/figure_candidates.py line 40). The four pairs have no cache at seeds
+  shares per seed (1-lora-correction/scripts/figure_candidates.py line 40). The four pairs have no cache at seeds
   9 to 16 and need none.
 - Training seeds are 1 to 8 and 17 to 58, so seeds 9 to 16 are unseen (dataset_meta.json).
 - The held-out pairs are bison and horse, cat and dog, piano and candle, skateboard and helmet,
@@ -75,15 +75,15 @@ Rules
 - Read freely; launch render jobs only after showing the command and getting a yes.
 - Launch no training job. A retrain is a written proposal only.
 - Write renders under /datasets/mmolefe/poe_repair_min/outputs/species-fidelity/ only.
-- Write repo files under artifacts/results/why-the-second-animal-loses-its-species/ only.
+- Write repo files under 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/ only.
 - Commit nothing until the user says so.
 - Stop and show the first pair's full row of tiles before rendering the other three.
 - Stop and show the label table before writing any conclusion.
 
 What to hand back
-- artifacts/results/why-the-second-animal-loses-its-species/labels.csv: one row per tile, columns
+- 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/labels.csv: one row per tile, columns
   pair, seed, adapter, window, ladder_label, note.
-- artifacts/results/why-the-second-animal-loses-its-species/README.md: how the tiles were made,
+- 1-lora-correction/artifacts/results/why-the-second-animal-loses-its-species/README.md: how the tiles were made,
   one sheet per pair as thumbnails, the counts per setting, and the verdict.
 - A one-line count command that reads labels.csv and prints the level-3 count per setting.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md.

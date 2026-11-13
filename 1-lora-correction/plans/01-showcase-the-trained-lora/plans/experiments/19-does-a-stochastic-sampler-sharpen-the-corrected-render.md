@@ -59,7 +59,7 @@
 - **Seeds sharper**: of the 8 seeds, how many are sharper at this eta than the corrected run at eta 0 on the same seed.
 - **Drift**: the DINOv2 cosine distance from a render to the Mono render of the same seed minus its distance to the plain-PoE render of the same seed, both references at the same eta on the same noise path. Negative means nearer the joint-prompt image. This is the pathwise (same-noise) form of the drift the decay finding reads; its scale is the same family but not the same instrument, so it is compared within this run only.
 - **Both-ness**: the projection of a render's DINOv2 embedding toward the "a cat and a dog" cloud on the axes fitted for the landing finding; cat × dog only.
-- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../context/world/compose-rate.md)).
+- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../../context/world/compose-rate.md)).
 
 ---
 
@@ -107,11 +107,11 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- Every `biggpu` device is busy, so the render runs as a Slurm job on `bigbatch` (RTX 3090, 24 GB) with `co3` python ([nodes](../../../../environment/hpc/nodes.md)).
-- Seven idle `bigbatch` nodes have a dead or unreachable GPU and are excluded on the `#SBATCH --exclude` line; the launcher's GPU guard aborts in under a second if a job lands on one anyway ([nodes](../../../../environment/hpc/nodes.md), [poe-launch-002](../../../../environment/known-failures.md)).
-- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../environment/storage.md)).
+- Every `biggpu` device is busy, so the render runs as a Slurm job on `bigbatch` (RTX 3090, 24 GB) with `co3` python ([nodes](../../../../../environment/hpc/nodes.md)).
+- Seven idle `bigbatch` nodes have a dead or unreachable GPU and are excluded on the `#SBATCH --exclude` line; the launcher's GPU guard aborts in under a second if a job lands on one anyway ([nodes](../../../../../environment/hpc/nodes.md), [poe-launch-002](../../../../../environment/known-failures.md)).
+- Outputs on `/datasets` only, and the disk guard reads the filesystem the script writes to ([storage](../../../../../environment/storage.md)).
 - fp16 end to end; the identity check compares this sampler's plain PoE at eta 0 against the cached `poe.png` within a mean absolute grey-level bound, never by equality.
-- DINOv2 scoring runs on the GPU; on the CPU it hits a CUDA-only xformers kernel ([poe-mem-002](../../../../environment/known-failures.md)).
+- DINOv2 scoring runs on the GPU; on the CPU it hits a CUDA-only xformers kernel ([poe-mem-002](../../../../../environment/known-failures.md)).
 
 ---
 
@@ -168,7 +168,7 @@ Every cell: the seed's cached initial noise, guidance 7.5, 1024 square, 50 steps
 
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The stochastic step** (`stochastic_ddim_step` in `scripts/showcase/stochastic_sampler_sweep.py`): the DDIM update with eta in float32, reduced to the repo's `ddim_prev_from_x0_eps` at eta 0 (checked to zero difference on the SDXL DDIM schedule before launch).
+1. **The stochastic step** (`stochastic_ddim_step` in `1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py`): the DDIM update with eta in float32, reduced to the repo's `ddim_prev_from_x0_eps` at eta 0 (checked to zero difference on the SDXL DDIM schedule before launch).
 2. **The shared noise path** (`noise_for`): one CPU generator per seed and step, so a render never depends on the order cells were rendered in.
 3. **The identity check** (`identity_check`): plain PoE at eta 0 on cat × dog seed 9 against the cached `poe.png`, within `IDENTITY_MAX_MEAN_ABS_DIFF` grey levels, before the adapter is attached. A failure stops the render.
 4. **The render** (`--render`): Mono at every eta before the adapter is attached, then plain PoE and the corrected run at every eta; resumable through `render_manifest.json`.
@@ -206,7 +206,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ◀ **Needs:** the checkpoint `phase1_r32_100k/checkpoints/lora_step_030050.pt`, the training cache, and the cloud-axes file `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy` (all exist).
 
-- [x] **1.1 Submit the job.** `sbatch scripts/showcase/stochastic_sampler_sweep.sbatch all` from the repo root. The job renders then scores in one process. Record the job id, node and W&B run id in the review file's Runs table.
+- [x] **1.1 Submit the job.** `sbatch 1-lora-correction/scripts/showcase/stochastic_sampler_sweep.sbatch all` from the repo root. The job renders then scores in one process. Record the job id, node and W&B run id in the review file's Runs table.
   - Done when: `squeue -u mmolefe` shows the job running and `logs/stoch_sweep-<job>.out` prints the identity check line with `pass=True`.
 - [ ] **1.2 Harvest.** When the job leaves the queue, read `logs/stoch_sweep-<job>.out`: the last lines print `plan verdict:` and the W&B url. If the render died mid-way, resubmit with `all`; the manifest skips finished cells.
   - Done when: `artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render/results.json` exists with 144 rows and the sheets and figure sit beside it.
@@ -280,7 +280,7 @@ Every figure below lands in `artifacts/results/does-a-stochastic-sampler-sharpen
 ◀ **Needs: [instruction 2.3](#2--judge-the-cells)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported eta as the wall's sampler setting.
 
@@ -290,9 +290,9 @@ Every figure below lands in `artifacts/results/does-a-stochastic-sampler-sharpen
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/stochastic_sampler_sweep.py`: the stochastic step, the noise path, the identity check, the render, the scoring and the constants. `scripts/showcase/stochastic_sampler_sweep.sbatch`: the `bigbatch` launcher with the disk, python, GPU and CUDA guards and the faulted-node exclusions.
+**File:** `1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py`: the stochastic step, the noise path, the identity check, the render, the scoring and the constants. `1-lora-correction/scripts/showcase/stochastic_sampler_sweep.sbatch`: the `bigbatch` launcher with the disk, python, GPU and CUDA guards and the faulted-node exclusions.
 
-**Reused:** `Sampler` (the SDXL context, prompts, pinned noise and adapter attach), `_cloud_axes`, `_write`, `mean_abs_diff` and `_laplacian_var` from `scripts/showcase/correct_early_then_clean_up.py`; `guided_eps`, `poe_eps` and `ddim_prev_from_x0_eps` from `poe_repair/_sdxl/metrics.py`; the instance-count scorer; `DinoEmbedder`.
+**Reused:** `Sampler` (the SDXL context, prompts, pinned noise and adapter attach), `_cloud_axes`, `_write`, `mean_abs_diff` and `_laplacian_var` from `1-lora-correction/scripts/showcase/correct_early_then_clean_up.py`; `guided_eps`, `poe_eps` and `ddim_prev_from_x0_eps` from `poe_repair/_sdxl/metrics.py`; the instance-count scorer; `DinoEmbedder`.
 
 ---
 
@@ -301,7 +301,7 @@ Every figure below lands in `artifacts/results/does-a-stochastic-sampler-sharpen
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/19-does-a-stochastic-sampler-sharpen-the-corrected-render.md — one Slurm job on bigbatch, render then score, harvest from the log
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/19-does-a-stochastic-sampler-sharpen-the-corrected-render.md — one Slurm job on bigbatch, render then score, harvest from the log
 ```
 
 ---
@@ -320,7 +320,7 @@ A supported eta becomes the showcase wall's sampler setting in [05-assemble-the-
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 - **poe-lora-003**: every condition runs through the identical sampler, differing only in the noise prediction. Mono is the reference column, never a compared cell.
 - **poe-lora-004**: the sampler carries `@torch.no_grad()`.

@@ -3,7 +3,7 @@
 **The claim**
 
 No. Twenty corrector steps at every one of the 50 noise levels leave cat × dog at exactly plain
-[product-of-experts](../../context/world/poe-composition.md)' [compose rate](../../context/world/compose-rate.md), zero of eight held-out seeds, and every one of the forty
+[product-of-experts](../../../context/world/poe-composition.md)' [compose rate](../../../context/world/compose-rate.md), zero of eight held-out seeds, and every one of the forty
 renders from a sliding ten-step corrector window is one animal too.
 
 What the corrector does change is the kind of picture. Five of the eight [settled](../../../../../goal-setting/learning/deep-learning/diffusion-models/sampler-correctors-for-composition/plans/11-stationary-and-detailed-balance.md) renders leave
@@ -37,7 +37,7 @@ comparison is the whole read.
 
 The sheet question carried one bar: the control pair's corrector column may not lose more than
 `FIDELITY_MAX_COMPOSE_LOSS_SEEDS = 1` composed seed against its own plain-PoE column, the constant
-sitting in `scripts/corrector_window_sweep.py`.
+sitting in `1-lora-correction/scripts/corrector_window_sweep.py`.
 
 Both are pinned in
 [does the corrector compose in the same window](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/04-does-the-corrector-compose-in-the-same-window.md)
@@ -126,20 +126,20 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The renders | `corrector/window/pairs/a_cat__x__a_dog/seed_<n>/`, `corrector/sheet/` and `corrector/pairs/`, all under `/datasets` | verified |
 | The injected correction's own window numbers | [the timing verdict](../../plans/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), quoted not re-run | verified |
 | The runs | step 27 of the running order: the window sweep on mscluster108 device 1 (1.6 h) and the sheet on the same device (2.3 h), 2026-09-05 to 06, commit 0150704; W&B `prime_lab/poe-repair-animals-compose/s61hldbc`; tables in [the review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/04-does-the-corrector-compose-in-the-same-window.md) | verified |
-| Regenerate with | recipes 4 and 5 of [running the Langevin corrector](../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md): the sliding corrector window, then the eight-seed sheets | |
+| Regenerate with | recipes 4 and 5 of [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md): the sliding corrector window, then the eight-seed sheets | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 - What a compose rate is and what the detector can and cannot see:
-  [compose rate](../../context/world/compose-rate.md)
+  [compose rate](../../../context/world/compose-rate.md)
 - What the correction is, the thing the corrector adds nothing of:
-  [the interaction term](../../context/world/interaction-term.md)
+  [the interaction term](../../../context/world/interaction-term.md)
 - What the pair pool is and why cat × dog is the failing case:
-  [the animal pair](../../context/world/animal-pair.md)
+  [the animal pair](../../../context/world/animal-pair.md)
 - Why the runs are invisible to the scheduler:
-  [the execution protocol](../../environment/hpc/execution-protocol.md)
+  [the execution protocol](../../../environment/hpc/execution-protocol.md)
 - Each picture, read one at a time: [the corrector figures, what these pictures mean](../../artifacts/results/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 
 ## Still open

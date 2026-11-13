@@ -52,9 +52,9 @@ chimera-as-argmax story needs the joint distribution rather than CLIP to carry i
 
 | Set | n | Where it lives |
 |---|---|---|
-| real both-animal photographs | 91 | COCO train2017 on the cluster, named by `manifest.json`, with 40 of 131 struck off by [the by-eye audit](../../artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json) |
-| plain product renders, cat × dog | 7 | `artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed01..07/poe.png`, 1024 px, gitignored |
-| joint prompt renders, cat × dog | 32 | cropped from [where the joint prompt succeeds](../../supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png), an 8 × 4 grid at 320 px a tile |
+| real both-animal photographs | 91 | COCO train2017 on the cluster, named by `manifest.json`, with 40 of 131 struck off by [the by-eye audit](../../../4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json) |
+| plain product renders, cat × dog | 7 | `3-understanding-compositionality/artifacts/results/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed01..07/poe.png`, 1024 px, gitignored |
+| joint prompt renders, cat × dog | 32 | cropped from [where the joint prompt succeeds](../../../supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png), an 8 × 4 grid at 320 px a tile |
 | plural product renders, cats × dogs | 7 | `.../tiles/cats__x__dogs/seed01..07/poe.png`, carried as a fourth point on the plane; seed08 holds only a joint render |
 
 Seven seeds are covered by both render sets, so the paired read is over seven.
@@ -64,7 +64,7 @@ renders beat the photographs on the weaker caption and by how much. Nothing is t
 is rendered.
 
 **For the full picture:** [what PoE loses when it composes](what-poe-loses-when-it-composes.md),
-and [the compose rate](../../context/world/compose-rate.md) for what this project's usual
+and [the compose rate](../../../context/world/compose-rate.md) for what this project's usual
 instrument counts, which is not what is counted here.
 
 ## Considerations
@@ -86,7 +86,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 - `openai/clip-vit-base-patch32` is already in the cluster's Hugging Face cache, so the run needs
   no network.
 - Large outputs go to `/datasets`, never to `/home-mscluster`, per
-  [storage](../../environment/storage.md).
+  [storage](../../../environment/storage.md).
 
 **Known issues.** See the [Error Matrix](#error-matrix).
 
@@ -209,10 +209,10 @@ before anything runs off it.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/crop_joint_sheet.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/crop_joint_sheet.py
     ```
 
-  - Produces: `artifacts/results/does-the-hybrid-fit-both-captions/joint-tiles/seed01.png` to
+  - Produces: `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/joint-tiles/seed01.png` to
     `seed32.png`, 320 × 320 each, label strip removed.
   - **Done when:** 32 files exist and a montage of the first row matches rows 1 to 8 of the sheet
     by eye.
@@ -221,12 +221,12 @@ before anything runs off it.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/build_sets.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/build_sets.py
     ```
 
   - Reads the pool manifest and the audit verdicts for the photograph set (cluster-side paths), and
     local paths for the three render sets.
-  - Produces: `artifacts/results/does-the-hybrid-fit-both-captions/sets.json`, with `set`, `seed`
+  - Produces: `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/sets.json`, with `set`, `seed`
     or `coco_id`, and `path` per image.
   - **Done when:** the file lists 91 photographs, 7 product, 32 joint and 7 plural, and every local
     path opens with PIL.
@@ -242,7 +242,7 @@ copy.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/push_renders.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/push_renders.py
     ```
 
   - Copies the product, joint and plural tiles to
@@ -255,7 +255,7 @@ copy.
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
       scripts/cluster.sh run "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-        scripts/hybrid_caption_fit/embed_clip.py"
+        3-understanding-compositionality/scripts/hybrid_caption_fit/embed_clip.py"
     ```
 
   - Model `openai/clip-vit-base-patch32`, read from the cluster's Hugging Face cache, no network.
@@ -267,7 +267,7 @@ copy.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/pull_results.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/pull_results.py
     ```
 
   - **Done when:** `similarities.json` is in the artifact folder locally and the chosen photograph
@@ -283,7 +283,7 @@ copy.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/summarise.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/summarise.py
     ```
 
   - Produces: `summary.json`, holding per set the mean, standard deviation and n of `sim_min`, and
@@ -294,13 +294,13 @@ copy.
 
     ```bash
     cd /home/molef/PhD/poe_repair_min-dog-and-rain && \
-      python3 scripts/hybrid_caption_fit/plot_plane.py
+      python3 3-understanding-compositionality/scripts/hybrid_caption_fit/plot_plane.py
     ```
 
   - x is cosine similarity to "a photo of a cat", y is the same to "a photo of a dog", one point
     per image, the sets in separate colours, six example images pinned as thumbnails beside their
     own points.
-  - Produces: `artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png`.
+  - Produces: `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png`.
   - **Done when:** the figure exists, both axes carry their phrase in full, and the six thumbnails
     sit beside the points they belong to.
 
@@ -312,7 +312,7 @@ copy.
 axes and the six thumbnails.
 
 - [ ] **4.1 Write the artifact card.**
-  - `artifacts/results/does-the-hybrid-fit-both-captions/README.md`, naming the axes, the data
+  - `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/README.md`, naming the axes, the data
     behind each point, the three means with their standard deviations and n, the paired read, and
     what the measurement cannot tell you. Cosine similarity runs from −1 to 1, and the card says
     what a difference of the size found actually looks like.
@@ -345,7 +345,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 ◀ **Needs: [task 3.2](#3--summarise-and-draw)** done, so there is a figure to look at.
 
 5.1 **Read the plane and say whether it is readable.**
-   - Open `artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png`.
+   - Open `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png`.
    - Check the x axis reads "cosine similarity to: a photo of a cat" and the y axis the same for
      dog, both spelled out rather than abbreviated.
    - Check each of the six thumbnails sits beside the point it belongs to, and that you can tell
@@ -398,7 +398,7 @@ Navigation: ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#
 
 | Item | Lane | Description | Generated by | Status | Details |
 |------|------|-------------|--------------|--------|---------|
-| The cat-dog similarity plane | — | One point per image; x is cosine similarity to "a photo of a cat", y to "a photo of a dog"; four sets in four colours; six thumbnails pinned beside their own points | `scripts/hybrid_caption_fit/plot_plane.py`, task 3.2 | ⏳ | Saves to `artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png` |
+| The cat-dog similarity plane | — | One point per image; x is cosine similarity to "a photo of a cat", y to "a photo of a dog"; four sets in four colours; six thumbnails pinned beside their own points | `3-understanding-compositionality/scripts/hybrid_caption_fit/plot_plane.py`, task 3.2 | ⏳ | Saves to `3-understanding-compositionality/artifacts/results/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png` |
 
 ## Orchestration: keeping catalogs and plan files in sync
 
@@ -419,7 +419,7 @@ Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-
 **Relevant section:** `COCO_ROOT`, `_images_dir()` and `EXCLUDED_BOTH`. They are where the
 photograph paths and the 40 struck-off indices come from.
 
-**File:** [the cluster driver](../../scripts/cluster.sh)
+**File:** [the cluster driver](../../../scripts/cluster.sh)
 **Relevant section:** `sh`, `run` and `pull`. Every cluster action in this plan goes through it.
 
 ## Next step

@@ -76,7 +76,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python; scorer weights as in `scorer_validated.json`'s provenance; outputs to `/datasets` ([overview](../../../../environment/overview.md)).
+- The `co3` python; scorer weights as in `scorer_validated.json`'s provenance; outputs to `/datasets` ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -126,7 +126,7 @@ Serves goal 4 of the Definition of Done (re-validation verdict recorded; tier-th
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/13-revalidate-the-scorer-off-animals.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/13-revalidate-the-scorer-off-animals.md`**
 
 ▶ **Next: [task 1.1](#1--define-score-compare)**.
 
@@ -137,7 +137,7 @@ Serves goal 4 of the Definition of Done (re-validation verdict recorded; tier-th
 - [ ] **1.1 Write the pass definition per kind** (`plans/13-pass-definitions.md` beside this file): what "composed" means for object × style and object × scene, with one example render named per outcome.
 - [ ] **1.2 Build the labelling sheet**: sample renders per kind from the four pairs' folders into one contact sheet with blank label columns.
 - [ ] **1.3 Score the same renders** with the scorer (and any adapted prompt/class configuration it needs off animals); record the configuration verbatim in the sidecar.
-- [ ] **1.4 Compute agreement against the labels once they exist; bar in code** (`scripts/showcase/offanimal_validation.py`, threshold constant at top). Write `scorer_validated_offanimals.json`.
+- [ ] **1.4 Compute agreement against the labels once they exist; bar in code** (`1-lora-correction/scripts/showcase/offanimal_validation.py`, threshold constant at top). Write `scorer_validated_offanimals.json`.
 
 ▶ **Next: [instruction 2.1](#2--label-and-judge)** (the labels are the human half).
 
@@ -209,7 +209,7 @@ Serves goal 4 of the Definition of Done (re-validation verdict recorded; tier-th
 ◀ **Needs: [instruction 2.3](#2--label-and-judge)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, the wall, which closes the scope.
 
@@ -230,7 +230,7 @@ Serves goal 4 of the Definition of Done (re-validation verdict recorded; tier-th
 ▶ Paste to run this plan (opens tier-three captions):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/13-revalidate-the-scorer-off-animals.md: tasks 1.1 to 1.3 only (pass definitions, the labelling contact sheet, the scoring pass with its configuration recorded); stop before agreement. The labels are the user's to do blind; afterwards one follow-up prompt computes agreement against the threshold in the source and writes scorer_validated_offanimals.json.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/13-revalidate-the-scorer-off-animals.md: tasks 1.1 to 1.3 only (pass definitions, the labelling contact sheet, the scoring pass with its configuration recorded); stop before agreement. The labels are the user's to do blind; afterwards one follow-up prompt computes agreement against the threshold in the source and writes scorer_validated_offanimals.json.
 ```
 
 ---

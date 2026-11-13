@@ -65,7 +65,7 @@ layout. This is the mark the scope already uses for a third-expert sheet and it 
 the answer.
 
 **For the full picture:** [what PoE loses when it composes](what-poe-loses-when-it-composes.md),
-and [the compose rate](../../context/world/compose-rate.md) for the instrument this plan deliberately
+and [the compose rate](../../../context/world/compose-rate.md) for the instrument this plan deliberately
 does not use for the species calls.
 
 ## Considerations
@@ -81,10 +81,10 @@ session node.
 **Environment facts this plan depends on.**
 
 - The laptop has no `/datasets` mount and an 8 GB GPU, so every render runs on the cluster through
-  [the cluster driver](../../scripts/cluster.sh).
+  [the cluster driver](../../../scripts/cluster.sh).
 - Python is `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`, never a bare `python`.
 - Large outputs go to `/datasets/mmolefe/poe_repair_min/`, never `/home-mscluster`, and the disk
-  guard checks the filesystem actually written to, per [storage](../../environment/storage.md).
+  guard checks the filesystem actually written to, per [storage](../../../environment/storage.md).
 - Never run a broad `find` on the cluster filesystem: the mounts hang it.
 
 **Why the reference columns render first, in their own process.** A windowed sampler in this repo
@@ -202,7 +202,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**, so the plan is known good
 before anything runs off it.
 
-- [x] ✅ **1.1 Write `scripts/layout_from_joint_render.py`.** ✓ verified 2026-11-04: runs with --help and imports with no side effects
+- [x] ✅ **1.1 Write `3-understanding-compositionality/scripts/layout_from_joint_render.py`.** ✓ verified 2026-11-04: runs with --help and imports with no side effects
   - Crops a seed's tile out of the reference sheet (8 × 4 grid, 320 px tiles, 28 px label strip),
     detects animal boxes with GroundingDINO using the compose scorer's own filters, crops each box
     with the classifier's 0.08 pad, and classifies it cat against dog with CLIP ViT-B/32 over the
@@ -223,7 +223,7 @@ before anything runs off it.
     classifier wrong. Its own call is kept beside the hand-given one in `boxes.json`, so the two
     can be counted against each other.
   - Held-out seeds 9 to 16 come first; the shortfall is filled from 17 upward in order.
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/boxes.json`, one record per
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/boxes.json`, one record per
     candidate seed with its boxes, both names per box, the margins, the geometry, and why a
     rejected seed was rejected; and `candidate-crops.png`, every candidate box cropped exactly as
     the classifier received it.
@@ -231,7 +231,7 @@ before anything runs off it.
     sheet covers all 24 candidates.
 
 - [x] ✅ **1.3 Draw the layouts on the renders.** ✓ confirmed by eye 2026-11-04, on the user's delegation: all 8 panels have the blue box on a cat and the red box on a dog
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/detected-layouts.png`, one panel
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/detected-layouts.png`, one panel
     per selected seed: the joint render with both boxes drawn, each labelled with its call and
     margin, and its pixel box and its latent-cell box printed on the panel.
   - **Done when:** the figure exists and every panel carries both labels.
@@ -250,7 +250,7 @@ before anything runs off it.
     cells, printed as the maximum deviation.
 
 - [x] ✅ **2.2 Draw the overlays.** ✓ verified 2026-11-04: 8 seeds x 2 readings drawn over their own renders, each mask on its own animal
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png`, both readings
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png`, both readings
     for every selected seed, each drawn over the joint render it came from, upsampled 8× to pixel
     space, with the cat mask and the dog mask in two colours and the overlap region marked.
   - **Done when:** the figure exists and covers every selected seed in both readings.
@@ -264,7 +264,7 @@ before anything runs off it.
 - [ ] **3.1 Write `poe_repair/composers/poe_regional.py`.**
   - Predicts `eps_uncond + w × (m_A ⊙ (eps_A − eps_uncond) + m_B ⊙ (eps_B − eps_uncond))`, with the
     same three-branch UNet batch, the same scheduler calls and the same DDIM step as
-    [the plain product composer](../../poe_repair/composers/poe.py), which is not modified.
+    [the plain product composer](../../../poe_repair/composers/poe.py), which is not modified.
   - Takes the two masks and the condition name, and writes its summary JSON naming the condition,
     the overlap reading and the mask provenance.
   - Carries a bootstrapping switch, default off, after MultiDiffusion (arXiv 2302.08113): for the
@@ -277,7 +277,7 @@ before anything runs off it.
     the run with no bootstrapping byte for byte.
 
 - [ ] **3.2 Render both overlap readings on two seeds.**
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png`, two seeds ×
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png`, two seeds ×
     two readings, with the joint render beside them.
   - **Done when:** four renders exist and sit in one figure.
 
@@ -299,7 +299,7 @@ before anything runs off it.
   - **Done when:** 32 renders exist and every summary JSON names its condition.
 
 - [ ] **4.3 Build the sheet.**
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png`, one
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png`, one
     row per seed, six image columns in the order of the table in
     [Quick context](#quick-context-where-you-are), plus a narrow strip beside the oracle column
     showing that seed's two masks.
@@ -315,12 +315,12 @@ before anything runs off it.
   - Each of the 48 tiles is opened at 1024 px and called two clear animals, one hybrid, or one
     single animal. The compose scorer is not used for the species calls: it counts instances and
     cannot name a species.
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/calls.json`, one record per tile
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/calls.json`, one record per tile
     with its seed, condition, call and a one-line reason.
   - **Done when:** 48 records exist and the per-condition counts are printed.
 
 - [ ] **5.2 Write the card.**
-  - Produces: `artifacts/results/is-the-layout-the-missing-piece/README.md`, stating the clear-pair
+  - Produces: `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/README.md`, stating the clear-pair
     count out of the judgeable seeds for all four regional conditions beside the two references,
     PASS or MISS against 4 of 8 for the oracle layout, what each control rules out, which overlap
     reading was used and why, and what the result cannot say about pairs whose joint prompt fails.
@@ -346,7 +346,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 ◀ **Needs: [task 1.3](#1--find-the-layout-in-the-joint-renders)** done, so there is a figure.
 
 6.1 **Read `candidate-crops.png` first, then `detected-layouts.png`, both under
-`artifacts/results/is-the-layout-the-missing-piece/`.**
+`3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/`.**
    - The crop sheet is what the classifier was handed. A wrong name there is a classifier failure;
      a crop holding both animals is a box failure, and the two have different fixes.
    - For each of the eight panels in the layout figure, check the box labelled cat is on the cat
@@ -362,7 +362,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ◀ **Needs: [task 2.2](#2--turn-each-layout-into-two-masks)** done.
 
-7.1 **Read `artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png`.**
+7.1 **Read `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png`.**
    - A mask in the wrong place makes every count afterwards meaningless, which is why this is a
      stop rather than a glance.
    - Check each coloured region covers its own animal and the blurred edge is a ramp a few cells
@@ -376,7 +376,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ◀ **Needs: [task 3.2](#3--the-regional-composer)** done, so both readings have been rendered.
 
-8.1 **Read `artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png` at full size.**
+8.1 **Read `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png` at full size.**
    - Two seeds, two readings each, with the joint render beside them for reference.
    - Decide which reading to run the sweep on, and say why in one line. That line goes in the card.
    - ✅ Either reading is a valid choice; the card records which and why.
@@ -389,7 +389,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ◀ **Needs: [task 5.2](#5--call-every-tile-and-write-the-card)** done.
 
-9.1 **Read `artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png`, then any
+9.1 **Read `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png`, then any
 tile you want to check at 1024 px.**
    - Two renders that read as a clear cat and a clear dog at sheet scale have read as hybrids at
      full resolution in this project, so a call you doubt is checked on the tile, not on the sheet.
@@ -441,11 +441,11 @@ Navigation: ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#
 
 | Item | Lane | Description | Generated by | Status | Details |
 |------|------|-------------|--------------|--------|---------|
-| The candidate crops | — | Every candidate box over all 24 seeds, cropped exactly as the classifier received it, labelled with CLIP's call, its margin and the box's share of the frame; this is what separates a bad box from a bad call | `scripts/layout_from_joint_render.py`, task 1.2 | ✅ | `artifacts/results/is-the-layout-the-missing-piece/candidate-crops.png` |
-| The detected layouts | — | One panel per selected seed: the joint render with both boxes drawn, each labelled with its species call, its CLIP margin, its pixel box and its latent-cell box | `scripts/layout_from_joint_render.py`, task 1.3 | ⏳ | `artifacts/results/is-the-layout-the-missing-piece/detected-layouts.png` |
-| The mask overlays | — | Both overlap readings for every selected seed, each drawn over the joint render it came from, cat mask and dog mask in two colours, overlap marked | task 2.2 | ⏳ | `artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png` |
-| The two overlap readings | — | Two seeds × two readings, with the joint render beside them, at full resolution | task 3.2 | ⏳ | `artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png` |
-| The six-condition sheet | — | One row per seed; columns joint prompt, plain product, oracle layout, random boxes, swapped prompts, same prompt both; a mask strip beside the oracle column | task 4.3 | ⏳ | `artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png` |
+| The candidate crops | — | Every candidate box over all 24 seeds, cropped exactly as the classifier received it, labelled with CLIP's call, its margin and the box's share of the frame; this is what separates a bad box from a bad call | `3-understanding-compositionality/scripts/layout_from_joint_render.py`, task 1.2 | ✅ | `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/candidate-crops.png` |
+| The detected layouts | — | One panel per selected seed: the joint render with both boxes drawn, each labelled with its species call, its CLIP margin, its pixel box and its latent-cell box | `3-understanding-compositionality/scripts/layout_from_joint_render.py`, task 1.3 | ⏳ | `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/detected-layouts.png` |
+| The mask overlays | — | Both overlap readings for every selected seed, each drawn over the joint render it came from, cat mask and dog mask in two colours, overlap marked | task 2.2 | ⏳ | `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/mask-overlays.png` |
+| The two overlap readings | — | Two seeds × two readings, with the joint render beside them, at full resolution | task 3.2 | ⏳ | `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/overlap-readings.png` |
+| The six-condition sheet | — | One row per seed; columns joint prompt, plain product, oracle layout, random boxes, swapped prompts, same prompt both; a mask strip beside the oracle column | task 4.3 | ⏳ | `3-understanding-compositionality/artifacts/results/is-the-layout-the-missing-piece/three-conditions-sheet.png` |
 
 ## Orchestration: keeping catalogs and plan files in sync
 
@@ -462,14 +462,14 @@ Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) 
 
 Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**File:** [the plain product composer](../../poe_repair/composers/poe.py)
+**File:** [the plain product composer](../../../poe_repair/composers/poe.py)
 **Relevant section:** the whole file. The new composer copies its shape and this one is not modified.
 
-**File:** [the corrector composer](../../poe_repair/composers/poe_langevin.py)
+**File:** [the corrector composer](../../../poe_repair/composers/poe_langevin.py)
 **Relevant section:** `run`, for how a composer takes extra per-step arguments and writes its own
 summary JSON.
 
-**File:** [the sampling primitives](../../poe_repair/methods/_sampling.py)
+**File:** [the sampling primitives](../../../poe_repair/methods/_sampling.py)
 **Relevant section:** `run_cfg_poe`, lines 133 to 185. The three-branch UNet batch, the guided
 difference, and the DDIM step the new sampler keeps unchanged.
 
@@ -507,4 +507,4 @@ Navigation: ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents)
 
 ## Cross-references
 
-- The mention of **the regional composer** in [the plan for regrouping the core repo into project folders](../split-into-idea-repos.md#before-the-next-move).
+- The mention of **the regional composer** in [the plan for regrouping the core repo into project folders](../../../plans/split-into-idea-repos.md#before-the-next-move).

@@ -4,4 +4,4 @@
 
 Copied byte for byte from `prompts/evaluation_metadata.jsonl` of https://github.com/djghosh13/geneval at commit `af4902f`, the clone at `/datasets/mmolefe/repos/geneval` whose `evaluation/evaluate_images.py` scores the renders. GenEval's own generator draws 4 images per prompt (`generation/diffusers_generate.py`, `--n_samples 4`).
 
-Five prompts are never rendered under `scripts/showcase/disallowed_subjects.py`: four `two_object` prompts and one `counting` prompt name a baseball bat, and five `two_object` prompts name a computer mouse, which the pair ledger has no decision for outside R1 and R5. `scripts/review_bench_sets.py --counts` prints what remains.
+Five prompts are never rendered under `1-lora-correction/scripts/showcase/disallowed_subjects.py`: four `two_object` prompts and one `counting` prompt name a baseball bat, and five `two_object` prompts name a computer mouse, which the pair ledger has no decision for outside R1 and R5. `scripts/review_bench_sets.py --counts` prints what remains.

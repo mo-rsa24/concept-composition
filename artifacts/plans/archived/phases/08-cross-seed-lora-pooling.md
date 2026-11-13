@@ -33,7 +33,7 @@ extension), or whether cross-seed generalisation needs new machinery
 
 All cross-seed pooling code lives under
 `poe_repair/experiments/held_out_seeds/` with thin shell
-runners under `scripts/cross_seed_lora_pooling/`. The trainer never
+runners under `1-lora-correction/scripts/cross_seed_lora_pooling/`. The trainer never
 touches the single-seed Phase-4 reference artefact under
 `outputs/lora/a_cat__x__a_dog/seed_42/results/`.
 
@@ -60,9 +60,9 @@ Shared dependencies:
 Shell runners (one per task — read them before running, they show the
 canonical flag combinations and parametrise through env vars):
 
-- `scripts/cross_seed_lora_pooling/task_b_learning_curve.sh`
-- `scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh`
-- `scripts/cross_seed_lora_pooling/sweep_s1_rank.sh`
+- `1-lora-correction/scripts/cross_seed_lora_pooling/task_b_learning_curve.sh`
+- `1-lora-correction/scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh`
+- `1-lora-correction/scripts/cross_seed_lora_pooling/sweep_s1_rank.sh`
 
 ## Cache prerequisites
 
@@ -145,7 +145,7 @@ The run aborts at `seed_pool.load_seed_pool(...)` with a leak error.
 Use the shell runner (handles run IDs, sampling, and W&B wiring):
 
 ```bash
-bash scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
+bash 1-lora-correction/scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
 ```
 
 Default `KSET="1a 1b 4 8"` (k=1 with `--single-seed-pick 1`, k=1 with
@@ -153,7 +153,7 @@ Default `KSET="1a 1b 4 8"` (k=1 with `--single-seed-pick 1`, k=1 with
 
 ```bash
 EPOCHS=1600 KSET="4 8" CUDA_VISIBLE_DEVICES=1 \
-    bash scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
+    bash 1-lora-correction/scripts/cross_seed_lora_pooling/task_b_learning_curve.sh
 ```
 
 Each run writes a checkpoint under
@@ -182,7 +182,7 @@ The runner generates a temporary one-seed pool YAML per held-out seed
 `train_pool`):
 
 ```bash
-bash scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh
+bash 1-lora-correction/scripts/cross_seed_lora_pooling/task_c_per_seed_ceiling.sh
 ```
 
 Defaults: `CEILING_SEEDS="9 10 11 12"`, `EPOCHS=1600` (8 × 200 = epoch
@@ -212,7 +212,7 @@ $PY -m poe_repair.experiments.held_out_seeds.contact_sheet --task C
 ### Optional sweep S1 — rank at k=8
 
 ```bash
-bash scripts/cross_seed_lora_pooling/sweep_s1_rank.sh    # ranks 16, 32 by default
+bash 1-lora-correction/scripts/cross_seed_lora_pooling/sweep_s1_rank.sh    # ranks 16, 32 by default
 ```
 
 ## How to read the result
@@ -265,7 +265,7 @@ before training any pooled LoRA.
 | `seed_pool.py` leak guard (`train_pool ∩ held_out = ∅`) | ✅ | |
 | Task-D bridge module `cross_seed_lora_pooling.task_d_bridge` | ✅ | |
 | Contact-sheet builder `cross_seed_lora_pooling.contact_sheet` | ✅ | |
-| Shell runners `scripts/cross_seed_lora_pooling/{task_b,task_c,sweep_s1}*.sh` | ✅ | |
+| Shell runners `1-lora-correction/scripts/cross_seed_lora_pooling/{task_b,task_c,sweep_s1}*.sh` | ✅ | |
 | Seeds 13–19 cache cells (only for k=16 curve point) | | ⬜ (optional) |
 | Bootstrap fresh host: rsync cache + `seed_pool.yaml`, set `POE_REPAIR_TRAINING_CACHE` | | ⬜ (per new machine) |
 | **Step 0** — actually run the pre-screen and inspect the contact sheet | | ⬜ |

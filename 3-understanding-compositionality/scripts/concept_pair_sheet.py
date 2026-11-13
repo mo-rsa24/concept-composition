@@ -7,18 +7,18 @@ joint prompt and PoE start a row from the same noise: the cached starting latent
 `a_cat__x__a_dog` at that seed, which the cache shares across pairs. SuperDiff draws its own noise
 from the seed number and samples with its own stochastic sampler, so its tile is not
 pixel-comparable with the rest of the row. It runs at its own default of 200 steps: at 50 its sampler
-leaves the picture as a shattered texture (report/is-the-gap-the-samplers-or-the-models/
+leaves the picture as a shattered texture (1-lora-correction/report/is-the-gap-the-samplers-or-the-models/
 does-superdiff-compose-at-its-own-defaults.md).
 
 PoE is the repo's plain rule (poe_repair/methods/_sampling.py, run_cfg_poe) with no adapter
 attached at all, so nothing can leak into it from a trained correction.
 
-    python scripts/concept_pair_sheet.py --column single    --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python scripts/concept_pair_sheet.py --column mono      --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python scripts/concept_pair_sheet.py --column poe       --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python scripts/concept_pair_sheet.py --column superdiff --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python scripts/concept_pair_sheet.py --sheet <tiles_dir> <out_dir> --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python scripts/concept_pair_sheet.py --direct-sheet <tiles_dir> <out.png> \
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column single    --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column mono      --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column poe       --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column superdiff --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --sheet <tiles_dir> <out_dir> --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --direct-sheet <tiles_dir> <out.png> \
         --pairs "a wet camel|a camel in the rain" "a wet dog|a dog in the rain" --seeds 1 2 4 9 10
 
 Tiles land as <OUT>/single/<concept>/seedNN.png and <OUT>/<pair>/seedNN/<column>.png, each with a
@@ -35,7 +35,7 @@ import shutil
 import sys
 from pathlib import Path
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))

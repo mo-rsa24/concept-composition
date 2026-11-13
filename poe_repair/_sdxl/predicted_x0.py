@@ -10,7 +10,7 @@ that formula under a name that matches the semantic-MDS plan (Plan 13) and
 adds an ``alpha_bar_from_scheduler`` helper so callers do not have to
 re-derive the lookup convention every time.
 
-Used by ``scripts/build_lora_inspector_mds_semantic.py`` to reconstruct
+Used by ``1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`` to reconstruct
 x̂₀(t) at subsampled timesteps from a ``LatentTrajectoryCollector`` that
 ran the actual sampler. The tracker's ``velocities[step]`` field holds the
 **guided** eps used to step (e.g. eps_PoE for the PoE sampler, the guided

@@ -49,7 +49,7 @@ the picture alone, or does it add a second dog anyway?**
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The hypothesis:** *the LoRA learned a state-dependent rule for the [interaction term](../../../../context/world/interaction-term.md), not a plurality prior ("always add a second animal").*
+**The hypothesis:** *the LoRA learned a state-dependent rule for the [interaction term](../../../../../context/world/interaction-term.md), not a plurality prior ("always add a second animal").*
 
 **What runs:** a 4-seed by 3-column grid on the same agreeing pair, C1 = C2 = "a dog": a Mono column ("a dog and a dog", the literal joint-prompt template, no PoE, no LoRA), a PoE column (the LoRA off), and a LoRA column (the LoRA active at λ=1 over steps 0 to 10). Because the experts agree, the true correction is near zero, and language space agrees (the L1 additivity gap for an agreeing pair is near zero).
 
@@ -64,7 +64,7 @@ the picture alone, or does it add a second dog anyway?**
 **Associated materials:**
 - **Review questions:** [the review file](../../review/02-the-dog-x-dog-same-prompt-check.md)
 - **The ledger entry:** [decisions-taken-here.md § The dog x dog test](../../decisions-taken-here.md#the-dog-x-dog-test-pre-registered)
-- **Checkpoint:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` (rank 8, alpha 8, attn2 q/k/v)
+- **Checkpoint:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` (rank 8, alpha 8, attn2 q/k/v)
 
 ---
 
@@ -76,7 +76,7 @@ the picture alone, or does it add a second dog anyway?**
 
 **Prerequisites:** the checkpoint above; the training cache's seeds; the validated instance-count scorer (`scorer_validated.json`).
 
-**GPU:** in-session on the node's free device is enough; no Slurm needed at this size, per [execution-protocol](../../../../environment/hpc/execution-protocol.md).
+**GPU:** in-session on the node's free device is enough; no Slurm needed at this size, per [execution-protocol](../../../../../environment/hpc/execution-protocol.md).
 
 **W&B project:** `prime_lab/poe-repair-animals-compose`.
 
@@ -88,7 +88,7 @@ the picture alone, or does it add a second dog anyway?**
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python; large outputs to `/datasets` only; the disk guard checks the filesystem written to ([environment/overview.md](../../../../environment/overview.md)).
+- The `co3` python; large outputs to `/datasets` only; the disk guard checks the filesystem written to ([environment/overview.md](../../../../../environment/overview.md)).
 - fp16 renders are mode-reproducible, not byte-reproducible; the identity check is judged within fp16 drift, not equality.
 
 ---
@@ -136,7 +136,7 @@ The pending subject-lane diagram in the [Figure Catalog](#figure-catalog) draws 
 
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The identity check**: PoE("a dog","a dog") with the LoRA off equals Mono("a dog") within fp16 drift, one render, copying `run_cfg_masked(all_off)` from the window machinery (`scripts/interaction_term_window.py`). Gates everything below; nothing downstream is judged if this fails.
+1. **The identity check**: PoE("a dog","a dog") with the LoRA off equals Mono("a dog") within fp16 drift, one render, copying `run_cfg_masked(all_off)` from the window machinery (`1-lora-correction/scripts/interaction_term_window.py`). Gates everything below; nothing downstream is judged if this fails.
 2. **The dog × dog grid**: four held-out seeds by three columns. Mono column: the literal joint prompt "a dog and a dog", no PoE, no LoRA. PoE column: PoE("a dog","a dog") with the LoRA off. LoRA column: the same pair with the LoRA on, λ=1, window 0-10. Twelve renders total; per-step ‖r̂‖ logged for the LoRA column only, since ‖r̂‖ is the correction the LoRA adds.
 3. **The verdict inputs**: instance count per grid cell, all three columns and all four seeds, plus the LoRA column's ‖r̂‖ per step against the cross-pair scale (the norms logged in `history.json`, `train/delta_target_norm` ≈ 29.7 as the reference scale).
 
@@ -160,7 +160,7 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md`**
 
 ▶ **Next: [task 1.1](#1--build-and-run-the-test)**.
 
@@ -168,8 +168,8 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 
 ◀ **Needs: nothing from other plans** — checkpoint and cache exist.
 
-- [ ] **1.1 Write the probe runner** extending the existing injection runner (`scripts/interaction_term_inject.py` pattern): a `--mode {mono,poe,lora}` flag selecting the literal joint prompt ("a dog and a dog"), PoE with the LoRA off, or PoE with the LoRA on; λ and window as flags for `lora` mode; per-step ‖r̂‖ dumped to the sidecar for `lora` mode only, since ‖r̂‖ is the correction the LoRA adds.
-  - Location: `scripts/showcase/dog_x_dog_probe.py`
+- [ ] **1.1 Write the probe runner** extending the existing injection runner (`1-lora-correction/scripts/interaction_term_inject.py` pattern): a `--mode {mono,poe,lora}` flag selecting the literal joint prompt ("a dog and a dog"), PoE with the LoRA off, or PoE with the LoRA on; λ and window as flags for `lora` mode; per-step ‖r̂‖ dumped to the sidecar for `lora` mode only, since ‖r̂‖ is the correction the LoRA adds.
+  - Location: `1-lora-correction/scripts/showcase/dog_x_dog_probe.py`
 - [ ] **1.2 Run the identity preflight** (LoRA off, one seed). Completion is observable: the printed max-abs pixel difference between PoE(A,A) and Mono(A), and it sits within the fp16 drift band recorded for the λ=0 check that must pass before anything below runs.
 - [ ] **1.3 Render the Mono column**: "a dog and a dog", one render per held-out seed, no PoE, no LoRA. Output to `/datasets/mmolefe/poe_repair_min/outputs/showcase/dog_x_dog_probe/mono/`.
 - [ ] **1.4 Render the PoE column**: PoE("a dog","a dog") with the LoRA off, one render per held-out seed (the same seeds as 1.3; this extends the single identity-check render in 1.2 to the full seed set). Output to `.../dog_x_dog_probe/poe/`.
@@ -251,7 +251,7 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 ◀ **Needs: [instruction 2.2](#2--judge-the-renders)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (only after a red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [03-the-correction-amount-series](03-the-correction-amount-series.md).**
 
@@ -261,8 +261,8 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/interaction_term_window.py` — the `run_cfg_masked(all_off)` identity pattern the identity check copies.
-**File:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/lora_attach.json` — the attach targets (attn2 to_q/to_k/to_v) the runner must reproduce.
+**File:** `1-lora-correction/scripts/interaction_term_window.py` — the `run_cfg_masked(all_off)` identity pattern the identity check copies.
+**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/lora_attach.json` — the attach targets (attn2 to_q/to_k/to_v) the runner must reproduce.
 
 ---
 
@@ -273,7 +273,7 @@ Serves master-plan objective 2 and goal 2. Checkable outcomes:
 ▶ Paste to run this plan (in-session GPU; the threshold is pre-registered):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md — identity check PoE(A,A) vs Mono(A) first; stop and report if it fails.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md — identity check PoE(A,A) vs Mono(A) first; stop and report if it fails.
 ```
 
 ---

@@ -6,7 +6,7 @@ Plan: [14-does-a-clip-free-model-hybridise](../../../plans/06-is-the-gap-the-sam
 
 ## Stop point
 
-- **Bar.** The card at `artifacts/results/does-a-clip-free-model-hybridise/README.md` states how many
+- **Bar.** The card at `1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/README.md` states how many
   of eight PixArt-alpha product renders hold two clear animals, in three categories, with the SDXL
   counts quoted beside them. Judged by the user from the sheet and the card.
 - **Time box.** 2 sittings, about 2.5 hours.
@@ -23,10 +23,10 @@ All five pieces are done. The bar is met: the card states the counts, and the re
 
 | Piece | What it is | State |
 |---|---|---|
-| 1 | the composition script, `scripts/pixart_multi_poe.py` | ✅ compiles, formulas matched |
+| 1 | the composition script, `1-lora-correction/scripts/pixart_multi_poe.py` | ✅ compiles, formulas matched |
 | 2 | the weights on disk and the tokenizer loading | ✅ 21 GB at `/datasets/mmolefe/poe_repair_min/models/PixArt-XL-2-1024-MS`, sentencepiece 0.2.2 |
 | 3 | the single-prompt identity check | ✅ 0 grey levels, the two PNGs byte-identical |
-| 4 | the 32 renders and the four-column sheet | ✅ 32 tiles, sheet at artifacts/results/does-a-clip-free-model-hybridise/ |
+| 4 | the 32 renders and the four-column sheet | ✅ 32 tiles, sheet at 1-lora-correction/artifacts/results/does-a-clip-free-model-hybridise/ |
 | 5 | the calls by eye, `calls.json`, the card | ✅ 0 two clear animals, 6 hybrids, 2 single cats; joint 7 of 8 |
 
 ## Ticked this session
@@ -40,7 +40,7 @@ All five pieces are done. The bar is met: the card states the counts, and the re
 - Plan instruction 3.1, the gate. Passed on `go`.
 - Plan tasks 4.1, 4.2, 5.1 and 5.2. The 32 tiles, the sheet, the eight calls and the card.
 - Close-out 6.1. The review file reads SUPPORT, and the finding is
-  `report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md` with its two
+  `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md` with its two
   rows in `report/00-INDEX.md`.
 
 ## Decisions

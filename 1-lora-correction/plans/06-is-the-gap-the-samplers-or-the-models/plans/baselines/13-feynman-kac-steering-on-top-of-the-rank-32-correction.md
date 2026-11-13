@@ -20,7 +20,7 @@ selection can then finish the job.
 
 **Step 56 of 65.** Waits on nothing that is not already on disk: the rank-32 checkpoint at step
 30050, the pinned noise, the validated detector, and plan 10's runner. The one order is the
-`## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+`## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -92,7 +92,7 @@ compose rate over the corrected sampler left alone?
 mixes them; `run.py --adapter-checkpoint ... --adapter-lambdas 0.5 1.2` attaches the LoRA once
 (disabled by default, enabled only inside the corrected forward), renders an adapter-alone
 reference per λ, and draws one sheet per pair and λ. Launched by
-`scripts/fk_steering/run_fk_steering.sh adapter`.
+`1-lora-correction/scripts/fk_steering/run_fk_steering.sh adapter`.
 
 **What it does.** Plan 10 found the plain product proposes no composing state at K 16 on cat × dog
 (0 of 128 unweighted particles, 0 of 128 steered). Selection needs something to select. The
@@ -109,7 +109,7 @@ and the FK column.
 
 **Associated materials.** [The review questions](../../review/13-feynman-kac-steering-on-top-of-the-rank-32-correction.md),
 [plan 10](10-feynman-kac-steering-on-a-detector-reward.md) for the method and the null it landed,
-[which checkpoint composes best](../../../../report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)
+[which checkpoint composes best](../../../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)
 for the adapter-alone rates this plan's headroom comes from.
 
 ## Considerations
@@ -235,7 +235,7 @@ sampler at two doses, judged where the headroom is.
    renders the adapter-alone `eta` 0 reference per λ, the control and the steered run per λ, one
    sheet and sidecar per (pair, λ), `summary.json` and `verdict.json` judged at
    `ADAPTER_JUDGED_LAMBDA`, W&B group `fk-steering`.
-3. **The launcher mode.** `scripts/fk_steering/run_fk_steering.sh adapter` with the same guards as
+3. **The launcher mode.** `1-lora-correction/scripts/fk_steering/run_fk_steering.sh adapter` with the same guards as
    plan 10's modes.
 
 ## Purpose and goal
@@ -300,9 +300,9 @@ delivers.
     `--control-pair-lambdas` and `--fidelity`, the module imports, and ImageReward loads and
     scores one image in `co3`.
 - [x] **1.3** Run the smoke: cat × dog seed 9, K 2, 10 steps, 512², adapter at λ 0.5 only.
-  - Command: `GPU=<idx> bash scripts/fk_steering/run_fk_steering.sh adapter --smoke --adapter-lambdas 0.5`,
+  - Command: `GPU=<idx> bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh adapter --smoke --adapter-lambdas 0.5`,
     or as a Slurm job on an idle `bigbatch` node:
-    `sbatch --nodelist=<node> scripts/fk_steering/fk_steering.sbatch adapter --smoke --adapter-lambdas 0.5`
+    `sbatch --nodelist=<node> 1-lora-correction/scripts/fk_steering/fk_steering.sbatch adapter --smoke --adapter-lambdas 0.5`
   - **Done when:** the run dir holds `adapter.json` with 420 loaded tensors and checkpoint step
     30050, `adapter_eta0_lam0.5.png`, `ctrl_K2_lam0.5/` and `fk_K2_lam0.5/`, a one-row sheet
     with an `IR` score on every tile, `verdict.json`.
@@ -317,8 +317,8 @@ delivers.
 
 - [x] **2.1** Launch the full mode with `nohup` on a free device: cat × dog at λ 0.5 and 1.2,
       butterfly × meadow at 1.2, seeds 9 to 16, K 16, 50 steps, 1024², W&B online.
-  - Command: `GPU=<idx> nohup bash scripts/fk_steering/run_fk_steering.sh adapter > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/logs/adapter_full.log 2>&1 &`,
-    or `sbatch --nodelist=<idle bigbatch node> scripts/fk_steering/fk_steering.sbatch adapter` when
+  - Command: `GPU=<idx> nohup bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh adapter > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/logs/adapter_full.log 2>&1 &`,
+    or `sbatch --nodelist=<idle bigbatch node> 1-lora-correction/scripts/fk_steering/fk_steering.sbatch adapter` when
     no `biggpu` device is free (the route taken on 2026-09-06: job 50332 on mscluster52, after
     probe jobs found mscluster44, 45 and 65 faulted).
   - Launched 2026-09-06 03:24 as Slurm job 50332 on mscluster52, W&B `dfrceppl`, run dir
@@ -327,7 +327,7 @@ delivers.
   - **Done when:** the W&B run id, the run dir, the node, the device and the PID are in the review
     file's Runs table.
 - [x] **2.2** Harvest: copy the three sheets and `summary.json` into
-      `artifacts/results/is-the-gap-the-samplers-or-the-models/` with README entries, quote
+      `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with README entries, quote
       `verdict.json` in the review file, answer every pre-registered question there, and add the
       result to plan 10's finding in `report/` as its own section.
   - **Done when:** the review file's verdict is written and the finding carries the per-λ table.
@@ -358,7 +358,7 @@ them.
 
 ◀ **Needs: [task 2.2](#2--the-full-run)**, the sheets filed.
 
-- [ ] **3.1** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`.
+- [ ] **3.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`.
       Row by row: does the adapter-alone tile show one animal or two, does the control tile
       agree with it, and does the FK tile show two bodies where both show one? Count the rows
       where FK adds a second body; that count over 8 is the number the verdict was judged on.
@@ -430,7 +430,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the run dir on `/datasets`.
 2. The three sheets and `summary.json` promoted to
-   `artifacts/results/is-the-gap-the-samplers-or-the-models/` as
+   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as
    `fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png`,
    `fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png`,
    `fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png` and
@@ -459,10 +459,10 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/experiments/fk_steering/steer.py](../../../../poe_repair/experiments/fk_steering/steer.py) | the mixed forward, the constants |
-| [poe_repair/experiments/fk_steering/run.py](../../../../poe_repair/experiments/fk_steering/run.py) | the adapter attach, the per-λ sheets, the verdict |
-| [poe_repair/methods/_sampling.py](../../../../poe_repair/methods/_sampling.py) | `run_lora_residual_inject`, the composition this plan copies |
-| [poe_repair/experiments/one_pair_one_seed/trainer.py](../../../../poe_repair/experiments/one_pair_one_seed/trainer.py) | `attach_lora` and `load_lora_state` |
+| [poe_repair/experiments/fk_steering/steer.py](../../../../../poe_repair/experiments/fk_steering/steer.py) | the mixed forward, the constants |
+| [poe_repair/experiments/fk_steering/run.py](../../../../../poe_repair/experiments/fk_steering/run.py) | the adapter attach, the per-λ sheets, the verdict |
+| [poe_repair/methods/_sampling.py](../../../../../poe_repair/methods/_sampling.py) | `run_lora_residual_inject`, the composition this plan copies |
+| [poe_repair/experiments/one_pair_one_seed/trainer.py](../../../../../poe_repair/experiments/one_pair_one_seed/trainer.py) | `attach_lora` and `load_lora_state` |
 
 ## Next step
 

@@ -5,7 +5,7 @@ adapter the wrong correction. The claim needs an instrument that can find those 
 cached targets. This run validated three candidate reads against ground truth, and only the third
 survives.
 
-Script `scripts/showcase/target_quality_scan.py`, in-session on this node's free GPU, 2026-09-07.
+Script `1-lora-correction/scripts/showcase/target_quality_scan.py`, in-session on this node's free GPU, 2026-09-07.
 Output `/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/`.
 
 ## The ground truth, by eye

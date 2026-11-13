@@ -96,10 +96,10 @@ The numbers exist. Two report files already carry them with eight rendered figur
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Storage](../../../../environment/storage.md): the five runs live under `/datasets/mmolefe/poe_repair_min/outputs/showcase/` except `phase1_r8_100k`, which is in the repo under `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/`. Nothing is moved by this plan.
-- [Throughput](../../../../environment/hpc/throughput.md): the file this plan adds the memory-per-rank row to. It has rank-32 timing and no memory column.
-- [Overview](../../../../environment/overview.md): cached tensors are float16 and any analysis stacking many of them upcasts to float32 first. The scoring pass in task 2.1 must do so.
-- [Nodes](../../../../environment/hpc/nodes.md): the scoring pass needs one healthy card; pin a node rather than trusting `sinfo`.
+- [Storage](../../../../../environment/storage.md): the five runs live under `/datasets/mmolefe/poe_repair_min/outputs/showcase/` except `phase1_r8_100k`, which is in the repo under `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/`. Nothing is moved by this plan.
+- [Throughput](../../../../../environment/hpc/throughput.md): the file this plan adds the memory-per-rank row to. It has rank-32 timing and no memory column.
+- [Overview](../../../../../environment/overview.md): cached tensors are float16 and any analysis stacking many of them upcasts to float32 first. The scoring pass in task 2.1 must do so.
+- [Nodes](../../../../../environment/hpc/nodes.md): the scoring pass needs one healthy card; pin a node rather than trusting `sinfo`.
 
 ---
 
@@ -161,7 +161,7 @@ The numbers exist. Two report files already carry them with eight rendered figur
 4. **A row in `environment/hpc/throughput.md`**: memory per rank, which decides 3090 against A6000.
 5. **`00-per-checkpoint.json`**: compose counts, drift and LoRA norms for every rank at every probed checkpoint, in one file.
 6. **`scripts/make_correction_loss_figures.py`**: eleven figures from that file, parameterised by run so every later variation reuses it.
-7. **`report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md`** and its artifact card.
+7. **`1-lora-correction/report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md`** and its artifact card.
 
 ---
 
@@ -230,12 +230,12 @@ For Claude to execute.
   - Produces: one script, eleven files
 - [ ] 2.3 **Compute the seed-noise band**
   - The spread of held-out compose rate across the eight held-out cat × dog seeds at one reference checkpoint, `phase1_r32_100k` at 30,050
-  - The definition is fixed in `plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` and must be used as written there, not re-derived
+  - The definition is fixed in `1-lora-correction/plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md` and must be used as written there, not re-derived
   - Produces: the band, into `00-per-checkpoint.json`
   - 💡 `/design-figure` before task 2.4: the band can be drawn as an error bar, a shaded region or a reference line, and the three say different things about how strong the claim is
 - [ ] 2.4 **Draw the rank-ablation figure**
   - Held-out compose rate on y, rank on x, at matched optimizer steps, band drawn
-  - This is the figure `plans/01-showcase-the-trained-lora/plans/experiments/09-experiment-b-rank-16-32.md` catalogued and nobody made
+  - This is the figure `1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/09-experiment-b-rank-16-32.md` catalogued and nobody made
   - Produces: `compose-rate-by-rank-matched-steps.png`
 - [ ] 2.5 **Assemble the five-across comparison strip**
   - `[joint target][plain PoE][LoRA 10k][LoRA 30k][LoRA 100k]`, one row, from the `__cmp` renders already written per checkpoint under `samples/per_epoch/`
@@ -249,7 +249,7 @@ For Claude to execute.
 
 ◀ **Needs: [tasks 1.1 to 2.5](#1--write-the-four-pillar-entries)** done, so every figure and every link target exists.
 
-- [ ] 3.1 **Write `report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md`**
+- [ ] 3.1 **Write `1-lora-correction/report/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt.md`**
   - Verdict in the first line. The equation rendered. Four panels of thumbnails: in-sample, held-out, the loss, the same seed over time. One rank table. Links to the two dense reports rather than their contents. The five runs and the identification rule behind a disclosure
   - The rank table carries the warning that its three entries sit at three different steps, until task 2.4's figure replaces it with the matched-step comparison
   - Produces: one page, one screen
@@ -385,7 +385,7 @@ redrawn by anyone.
 
 **Read-only source:** `samples/per_epoch/<epoch>/{in_in,out_out}__<pair>__seed<NN>__cmp.png` under each run, the three-panel strips task 2.5 reassembles. The plain `.png` beside each one is the same render at 1024² without labels baked in.
 
-**The band's definition:** `plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md`, the `## Bars` section. Used as written; not re-derived.
+**The band's definition:** `1-lora-correction/plans/01-showcase-the-trained-lora/review/09-experiment-b-rank-16-32.md`, the `## Bars` section. Used as written; not re-derived.
 
 ---
 

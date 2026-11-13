@@ -5,11 +5,11 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip --math steps 4 and 7 of artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md:
+/drip --math steps 4 and 7 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md:
 why the product weights shared places most, and what fine-tuning does to inherited support
 
 Background
-This is layer 5 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: the
+This is layer 5 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: the
 overlap dial, which answers how much A-and-B data a product needs, and whether pretraining supplies
 it. The maths comes before the build and teaches only what the build needs. I have passed quiz 5.1;
 any question it marked missed becomes a first rung.
@@ -23,12 +23,12 @@ Objectives
 4. Read the fine-tune numbers and say whether pretraining rescues A∩B or is erased.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, steps 1 to 4 and 7: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, steps 1 to 4 and 7: the
   derivation in this walk's notation.
 - toy/rebuild/out/walk-numbers.json: the p5. keys.
 - python -m rebuild.phase5_tables and toy/rebuild/out/phase5/finetune.json: the 3-seed curve and
   the fine-tune numbers.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2: the repaired claim.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2: the repaired claim.
 - Quiz 5.1's results: the misses that become first rungs.
 
 What is already known
@@ -73,7 +73,7 @@ What is already known
 - Claim 2 of the overlap-dial idea map, repaired: the product puts samples in A∩B only where some
   expert carries density there, from overlap in the training data or from an expert loose outside
   its concept's region, and support inherited from pretraining does not survive fine-tuning
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
 - The two reasons the layer asks for are why 5% overlap puts 0.30 of the product's mass deep in
   A∩B, more than 5%, and why pretraining support is gone within 30 to 100 fine-tune steps (layer
   5, step 2's Outcome).

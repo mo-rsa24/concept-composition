@@ -132,7 +132,7 @@ done
 
 ✅ **A node reporting a few MiB used and 0% utilisation on a device.** That is the one to use, and you note its index.
 
-❌ **A node reporting `[N/A]` for utilisation**: the card is hardware-faulted and torch will not see it. Leave it alone and record it in [the node facts](../../../environment/hpc/nodes.md) if it is not already there.
+❌ **A node reporting `[N/A]` for utilisation**: the card is hardware-faulted and torch will not see it. Leave it alone and record it in [the node facts](../../../../environment/hpc/nodes.md) if it is not already there.
 
 ❌ **Every node is busy**: do not launch. The chain wants twelve uninterrupted hours and starting it beside somebody else's job will run both out of memory. Wait, or check the other partitions' cards knowing the run will take four times as long.
 
@@ -147,9 +147,9 @@ So every node can read it, and so it sits beside the outputs it produces.
 The source is the file [task 2.2](../plans/hypothesis/04-the-parent-and-the-four-children.md#2--build-the-five-configurations-and-the-launcher) writes into the repository. If it is not there, that task is not done and this procedure cannot start.
 
 ```bash
-ls -l /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/improve_r32_launch_chain.sh
+ls -l /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh
 mkdir -p /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/logs
-cp /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/improve_r32_launch_chain.sh \
+cp /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh \
    /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/launch_chain.sh
 grep -c "^" /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/launch_chain.sh
 ```

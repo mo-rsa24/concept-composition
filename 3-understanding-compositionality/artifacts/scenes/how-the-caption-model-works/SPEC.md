@@ -1,8 +1,8 @@
 # Model 3, step by step: spec
 
-Location:   artifacts/scenes/how-the-caption-model-works/
-Ran under:  plans/10-what-poe-loses-when-it-composes/today-how-much-co-occurrence-the-product-needs.md
-Built from: this repo; artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py (VAE, Denoiser), toy_caption_threshold.py, toy_caption_corrector.py, toy_sampler_hybrids.py
+Location:   3-understanding-compositionality/artifacts/scenes/how-the-caption-model-works/
+Ran under:  3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-how-much-co-occurrence-the-product-needs.md
+Built from: this repo; 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py (VAE, Denoiser), toy_caption_threshold.py, toy_caption_corrector.py, toy_sampler_hybrids.py
 Why:        so supervisors' questions about model 3 itself (what each part takes in and gives out, its size, how a picture is made, how PoE is computed) can be answered by pointing at a screen
 url:        https://claude.ai/artifact/GUr6NB6iSGAmTzgSbMCaAn
 

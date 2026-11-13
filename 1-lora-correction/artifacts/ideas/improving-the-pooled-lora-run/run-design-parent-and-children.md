@@ -118,7 +118,7 @@ running the adapter there hurts, and 8.3's unknown becomes the finding.
 2. `--train-step-range LO HI`: sample training steps from [LO, HI) only. P uses 0 24.
 3. `--orth-weight W`: per sample, project the target and the prediction onto the span of
    (eps_a - eps_uncond, eps_b - eps_uncond) and its complement; loss = in-span error + W x
-   complement error. The projection is what `scripts/showcase/correction_span_common.py` already
+   complement error. The projection is what `1-lora-correction/scripts/showcase/correction_span_common.py` already
    computes.
 
 And one change to the sampler used for the stacked render: a guidance interval (guidance 7.5 on

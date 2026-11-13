@@ -26,7 +26,7 @@ template rather than anything about binding.
 |---|---|
 | [design](../plans/hypothesis/06-the-same-story-from-three-sides.md) | the five checks, their thresholds, and why each shares no machinery with the run across strengths |
 | **this file** | **the verdict: the two image-side checks agree, the two language-side checks come back null** |
-| [the register](../../../paper/iclr/figures.md) | F5's row, fed by the manifold slide |
+| [the register](../../../../paper/iclr/figures.md) | F5's row, fed by the manifold slide |
 
 ## Table of contents
 
@@ -123,9 +123,9 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       > vectors, which is what makes a small adapter able to learn them.
 - [x] ✅ Is a blended animal wrong content rather than a poor-quality picture?
       **Yes, and this removes the objection.** Over 749 paired runs (same seed, same prompt,
-      same sampler, the [interaction term](../../../context/world/interaction-term.md) the only
+      same sampler, the [interaction term](../../../../context/world/interaction-term.md) the only
       difference) the content changes hard and the quality does not.
-      [Compose rate](../../../context/world/compose-rate.md) 13.9% → 48.9%, 323 runs gained
+      [Compose rate](../../../../context/world/compose-rate.md) 13.9% → 48.9%, 323 runs gained
       against 61 lost, McNemar p = 3.5e-44. The four content-blind quality proxies all sit inside
       the ±0.20 sd threshold: Crete blur −0.13, noise −0.05, contrast +0.04, colourfulness +0.20.
       Two cautions. Colourfulness lands on the threshold rather than comfortably inside it. And two

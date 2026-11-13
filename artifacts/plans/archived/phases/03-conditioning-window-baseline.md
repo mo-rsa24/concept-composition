@@ -36,7 +36,7 @@ the LoRA is closing a 40% gap or a 4% gap. Concretely we want:
   a single `ε_∅` forward, sharing scheduler state).
 - Schedule grammar: `poe_repair/experiments/cfg_window_without_lora/schedules.py::STANDARD_SUITE`.
 - Driver: `poe_repair/experiments/cfg_window_without_lora/__main__.py`.
-- Inspector route: `scripts/lora_inspector.py:/conditioning_window`
+- Inspector route: `1-lora-correction/scripts/lora_inspector.py:/conditioning_window`
   (dual-handle slider + 50-cell mask strip).
 
 ## Commands
@@ -81,7 +81,7 @@ manifest, renders the contact-sheet figure.
 ### 4. Inspector
 
 ```bash
-$PY scripts/lora_inspector.py --port 5050
+$PY 1-lora-correction/scripts/lora_inspector.py --port 5050
 # from laptop:
 #   ssh -L 5050:localhost:5050 mscluster106
 #   open http://127.0.0.1:5050/conditioning_window

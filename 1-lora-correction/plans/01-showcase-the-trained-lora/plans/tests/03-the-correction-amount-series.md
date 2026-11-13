@@ -47,7 +47,7 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The hypothesis:** *the LoRA's own output r̂ causes composition the way the cached true correction does: [compose rate](../../../../context/world/compose-rate.md) rises with λ on r̂ and the matched controls stay at what you would get by luck.*
+**The hypothesis:** *the LoRA's own output r̂ causes composition the way the cached true correction does: [compose rate](../../../../../context/world/compose-rate.md) rises with λ on r̂ and the matched controls stay at what you would get by luck.*
 
 > The cached true correction is the correction computed from the joined prompt, saved once and
 > read back. What you would get by luck is what compose rate reads when the injected vector
@@ -78,7 +78,7 @@
 
 **Prerequisites:** plan 02's runner (shared); the checkpoint; the validated scorer.
 
-**GPU:** one device, launched per [execution-protocol](../../../../environment/hpc/execution-protocol.md); nohup path when Slurm has no idle node, and then `squeue` is blind to it (harvest by `pgrep` + the log).
+**GPU:** one device, launched per [execution-protocol](../../../../../environment/hpc/execution-protocol.md); nohup path when Slurm has no idle node, and then `squeue` is blind to it (harvest by `pgrep` + the log).
 
 **W&B project:** `prime_lab/poe-repair-animals-compose`.
 
@@ -90,7 +90,7 @@
 
 - Large outputs to `/datasets` only; the runner's disk guard checks that filesystem.
 - The `co3` python; fp16 with the upcast rule; guidance fixed at 7.5.
-- biggpu allows one Slurm job per user; long series go nohup outside Slurm ([overview](../../../../environment/overview.md)).
+- biggpu allows one Slurm job per user; long series go nohup outside Slurm ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -119,7 +119,7 @@
 ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **The manifest**: pairs, seeds, λ grid {0, 0.25, 0.5, 0.75, 1.0}, window 0-10, controls (wrong-seed r̂, shuffled r̂), one row per run, printed counts per condition before launch (a flag with an empty target group is a silent no-op).
-2. **The runner**: plan 02's runner plus λ scaling and the two control sources. Location: `scripts/showcase/lora_dose_sweep.py`.
+2. **The runner**: plan 02's runner plus λ scaling and the two control sources. Location: `1-lora-correction/scripts/showcase/lora_dose_sweep.py`.
 3. **The scored table**: `dose_curves_lora.json` mirroring the `dose_curves.json` schema of the cached-correction run (compose rate per λ per condition, AUC per condition with its meaning in words).
 4. **The softness read for plan 06**: per-λ CLIP/DINOv2 sharpness proxy or the qualitative strip, labelled descriptive, answering "does softness track λ at fixed checkpoint".
 
@@ -143,7 +143,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md`**
 
 ▶ **Next: [task 1.1](#1--build-the-series)**.
 
@@ -151,8 +151,8 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 
 ◀ **Needs: [02 tasks 1.1 to 1.4](02-the-dog-x-dog-same-prompt-check.md#1--build-and-run-the-test)** done, so the shared runner exists.
 
-- [x] **1.1 Write the manifest and print per-arm counts.** Completion is observable: a printed table, one row per condition, with a non-zero run count for every condition. `scripts/showcase/lora_dose_sweep.py --print-manifest`: 120 rows, 40 per condition (real, wrong_seed, shuffled), none zero.
-- [x] **1.2 Extend the harness with λ scaling and the wrong-seed / shuffled control sources.** `scripts/showcase/lora_dose_sweep.py`; λ scaling reuses `run_lora_residual_inject_masked`'s native `lambda_value`. Controls route through the same masked sampler via a new `external_delta_by_step` parameter added to `run_lora_residual_inject_masked` (`poe_repair/methods/_sampling.py`), so all three conditions share identical off-window behaviour and differ only in where Δ̂ comes from.
+- [x] **1.1 Write the manifest and print per-arm counts.** Completion is observable: a printed table, one row per condition, with a non-zero run count for every condition. `1-lora-correction/scripts/showcase/lora_dose_sweep.py --print-manifest`: 120 rows, 40 per condition (real, wrong_seed, shuffled), none zero.
+- [x] **1.2 Extend the harness with λ scaling and the wrong-seed / shuffled control sources.** `1-lora-correction/scripts/showcase/lora_dose_sweep.py`; λ scaling reuses `run_lora_residual_inject_masked`'s native `lambda_value`. Controls route through the same masked sampler via a new `external_delta_by_step` parameter added to `run_lora_residual_inject_masked` (`poe_repair/methods/_sampling.py`), so all three conditions share identical off-window behaviour and differ only in where Δ̂ comes from.
 - [x] **1.3 Launch the sweep** per the execution protocol; output to `/datasets/mmolefe/poe_repair_min/outputs/showcase/lora_dose/`. Log the launch mode (Slurm or nohup) in the review file's Runs table. First attempt (slurm job 48596) mixed two axes between conditions and was invalidated; corrected attempt (slurm job 48619) is the valid run. Both logged in the [review file](../../review/03-the-correction-amount-series.md#runs).
 - [x] **1.4 Score all arms; write `dose_curves_lora.json`** (schema mirrors the cached-correction file). Completion is observable: the json's per-condition row counts equal the manifest's. 40/40/40, matches the manifest.
 - [x] **1.5 Compute the softness-vs-λ read** and save its strip beside the json, labelled descriptive. `softness_vs_lambda.json`, Laplacian-variance proxy, labelled `"descriptive, not a scorer contract"`.
@@ -227,7 +227,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 ◀ **Needs: [instruction 2.3](#2--read-the-series)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [04-the-transfer-matrix-figure](../figures/04-the-transfer-matrix-figure.md).**
 
@@ -238,7 +238,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** the cached correction's runner across amounts, feeding `/datasets/.../outputs/interaction_term/dose/dose_curves.json` — the schema and control-row layout to mirror.
-**File:** `scripts/showcase/dog_x_dog_probe.py` (plan 02) — the shared runner this extends.
+**File:** `1-lora-correction/scripts/showcase/dog_x_dog_probe.py` (plan 02) — the shared runner this extends.
 
 ---
 
@@ -249,10 +249,10 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 ▶ Paste to run this plan (reuses the injection runner plan 07 builds):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md — wrong-seed and shuffled control rows; stop if any control rises above what you would get by luck; AUC always carries its meaning in words.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md — wrong-seed and shuffled control rows; stop if any control rises above what you would get by luck; AUC always carries its meaning in words.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md` and paste the tmux block it emits (hours of renders, numeric abort conditions, no human mid-loop). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/03-the-lora-dose-sweep.md` and paste the tmux block it emits (hours of renders, numeric abort conditions, no human mid-loop). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 

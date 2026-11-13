@@ -3,12 +3,12 @@
 ## Recommended prompt
 
 ```text
-/drip-execute-plan plans/11-do-inclusive-captions-help-poe-compose/plans/01-the-inclusive-captions-pilot.md
+/drip-execute-plan 4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/plans/01-the-inclusive-captions-pilot.md
 ```
 
 ## Position in the plan tree
 
-[Root](../../../MASTER_PLAN.md) › [do inclusive captions help PoE compose](../MASTER_PLAN.md) ›
+[Root](../../../../MASTER_PLAN.md) › [do inclusive captions help PoE compose](../MASTER_PLAN.md) ›
 this plan. It is the scope's only plan.
 
 ## Table of contents
@@ -52,7 +52,7 @@ tensors toward a correction target, with no photographs and no text encoder in t
 
 **What you will hold at the end**
 
-One figure: the [compose rate](../../../context/world/compose-rate.md) for run A beside run B on 128 shared seeds, with the criterion's
+One figure: the [compose rate](../../../../context/world/compose-rate.md) for run A beside run B on 128 shared seeds, with the criterion's
 three lines beside it and exactly one of them ticked.
 
 ## Considerations
@@ -202,7 +202,7 @@ fixed and cannot be shaped by anything the build reveals.
 - [x] ✅ **2.1** Read `captions_train2017.json` in the pool script and write one caption per photo
       into the manifest, so the neither-animal filler photos carry their own caption rather than
       an empty string.
-  - Edits: [the pool script](../../../scripts/census/inclusive_captions_pool.py)
+  - Edits: [the pool script](../../../../3-understanding-compositionality/scripts/census/inclusive_captions_pool.py)
   - Check: every row of `manifest.json` has a non-empty `caption` field.
   - ✅ verified 2026-11-03, `dae7c3c9`: `missing_caption: 0` of 862 chosen photos.
 - [x] ✅ **2.2** Open every path in the manifest and report any that does not resolve.
@@ -218,7 +218,7 @@ fixed and cannot be shaped by anything the build reveals.
 
 - [x] ✅ **2.4** Draw the extra training photos with SD 3.5 medium: 350 "a photo of a cat and a
       dog", 130 "a photo of a cat", 130 "a photo of a dog", at 1,024 square in fp16.
-  - Output: `scripts/census/inclusive_captions_generate.py`, images under
+  - Output: `3-understanding-compositionality/scripts/census/inclusive_captions_generate.py`, images under
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_generated/`.
   - A different model family from the one being fine-tuned, so the co-occurrence the pool adds is
     not SDXL's own belief fed back into it.
@@ -226,15 +226,15 @@ fixed and cannot be shaped by anything the build reveals.
     an image on these Turing cards, which have no bf16 tensor cores.
 - [x] ✅ **2.5** Validate the vision-language judge before it screens anything: 48 generated
       cat-and-dog images called by eye first, then by the judge, and the two compared.
-  - Output: `scripts/census/inclusive_captions_judge.py`, the eye's calls in
-    `artifacts/drips/inclusive-captions-pilot/checks/eye-labels-first-48.json`.
+  - Output: `3-understanding-compositionality/scripts/census/inclusive_captions_judge.py`, the eye's calls in
+    `4-inclusive-captions/artifacts/drips/inclusive-captions-pilot/checks/eye-labels-first-48.json`.
   - The bar is agreement on 44 of the 48. Below it the judge does not screen the pool.
   - ✅ PASSED at 45 of 48, on the third of four wordings measured against the same labels. The
     other three reached 20, 44 and 21. All three of the winner's disagreements keep a marginal
     picture a person rejected and none reject one a person kept. Written up in
     [the judge's validation](../../../artifacts/drips/inclusive-captions-pilot/checks/judge-validation.md).
 - [x] ✅ **2.6** Judge every candidate photo, COCO and generated alike, and build the pool.
-  - Output: `scripts/census/inclusive_captions_pool_v2.py`, the manifest under
+  - Output: `3-understanding-compositionality/scripts/census/inclusive_captions_pool_v2.py`, the manifest under
     `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool_v2/`.
   - COCO at a 0.50 box-fraction floor for the single-animal sets and 0.40 for both-animal. Every
     row carries the source it came from, identical in both arms.
@@ -258,7 +258,7 @@ trainer reads is the audited one.
 
 - [x] ✅ **3.1** Write the image-and-caption LoRA trainer against this repo's own SDXL loader:
       `load_sdxl_models`, `encode_prompt_sdxl`, `load_ddim_scheduler` and `decode_latents` from
-      [the SDXL runtime](../../../poe_repair/_sdxl/runtime.py). Do not fetch the diffusers SDXL
+      [the SDXL runtime](../../../../poe_repair/_sdxl/runtime.py). Do not fetch the diffusers SDXL
       LoRA example; building against the loader keeps the training path identical to the sampling
       path every other experiment here uses and needs no network on a compute node.
   - Output: `poe_repair/experiments/inclusive_captions/trainer.py`
@@ -303,7 +303,7 @@ show what they claim to.
     550 photos and the same 250 steps they do not.
   - Three checkpoints rather than five, because each sheet costs four times what it did at 512.
   - Started with `nohup` outside Slurm on a pinned free `biggpu` device, since `biggpu` allows
-    one job per user. `scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
+    one job per user. `4-inclusive-captions/scripts/inclusive_captions_run.sh <arm> <device> <steps>` pins the device,
     refuses to start unless `torch.cuda.is_available()`, and renders each checkpoint's sheet into
     the trainer's own W&B run as it lands. Both run on `mscluster106` device 1, one after the
     other, because `mscluster107` went down and it is the only usable `biggpu` node left. Each
@@ -363,7 +363,7 @@ of them after seeing a result, say so now, because that is the only moment the a
 8.1 **Open the nine audit pages** at
 `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/audit_page_00.png` and the eight
 numbered after it, written by
-[the audit render](../../../scripts/census/audit_both_animal_photos.py) at 16 tiles a page and 448
+[the audit render](../../../../3-understanding-compositionality/scripts/census/audit_both_animal_photos.py) at 16 tiles a page and 448
 pixels a tile. The 48-tile sheets beside them are too small to name a species off, which this
 project has already been caught doing.
 
@@ -375,7 +375,7 @@ where the annotation is simply wrong.
 
 ✅ Done 2026-11-03, judged by Claude at the user's request: 91 of 131 survive, 33 rejected and 7
 uncertain, with the reason for each in
-[the audit verdicts](../../../artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json).
+[the audit verdicts](../../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json).
 Ten rejections are a cat beside a depiction of a dog. The failure branch below fired, and the
 single-animal sets dropped from 300 to 200 to restore the effect size.
 
@@ -526,10 +526,10 @@ from the scope root.
 
 - [the design, checked](../../../artifacts/ideas/inclusive-captions-axis/COMPILED.md)
 - [the claim-by-claim reasoning](../../../artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md)
-- [the photo pool](../../../artifacts/results/the-inclusive-captions-photo-pool/README.md)
-- [does the cat prompt already draw dogs](../../../artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md)
-- [the caption sampler](../../../poe_repair/experiments/inclusive_captions/captions.py)
-- [the SDXL runtime this builds against](../../../poe_repair/_sdxl/runtime.py)
+- [the photo pool](../../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md)
+- [does the cat prompt already draw dogs](../../../../3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md)
+- [the caption sampler](../../../../poe_repair/experiments/inclusive_captions/captions.py)
+- [the SDXL runtime this builds against](../../../../poe_repair/_sdxl/runtime.py)
 - Bradley et al., 2502.04549, for the condition under which adding two experts' scores is exact.
 - CoInD, 2503.01145, which attacks the same quantity from the training side with a loss term.
 

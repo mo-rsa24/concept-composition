@@ -9,7 +9,7 @@ after the `/drip-retro` that step 4a's build printed.
 In the background, dispatch xref-cadence over the files layer 3 of the composition ladder wrote.
 
 Background
-Layer 3 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 3 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip, its build walk and its idea-walk rebuild wrote new files. Those files should link to
 the vault notes, journey plans, textbook chapter and idea maps that teach the same ideas, and those
 should link back, so the next reader finds both.
@@ -21,12 +21,12 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, its
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/03-ideal-experts-and-the-seven-kinds.md, its
   Study first line: the vault notes, journey plans and textbook chapter to link against, including
-  artifacts/ideas/poe-overlap-dial/composition-terms.md.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 3 row of the Bricks table:
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md.
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 3 row of the Bricks table:
   "Ideal experts and the seven kinds".
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 4, 7 and 8 and runs 2, 3, 4 and 6.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 4, 7 and 8 and runs 2, 3, 4 and 6.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 4.
 
 What is already known

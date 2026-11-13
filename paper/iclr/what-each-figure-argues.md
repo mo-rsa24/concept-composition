@@ -1,7 +1,7 @@
 # What each of the seven figures argues, and why we bothered
 
 Read this before designing or building any paper figure. The plan file
-[figure-01-the-seven-paper-figures.md](../../plans/03-does-the-correction-cause-composition/plans/figures/08-the-seven-paper-figures.md)
+[figure-01-the-seven-paper-figures.md](../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/08-the-seven-paper-figures.md)
 holds the checkboxes. This holds the reasons. Neither repeats the other.
 
 Every figure below answers the same eight questions in the same order, so you can
@@ -163,7 +163,7 @@ for the fakes, so roughly a tenfold gap. 32 cells behind every point.
 real row and never greyed out. Greying them tells the reader which row is meant to
 lose before they have looked, which is the opposite of what a control is for.
 
-**Built.** `python scripts/compose_rate_vs_correction.py` → `paper/iclr/figures/compose-rate-as-correction-rises.pdf`.
+**Built.** `python 1-lora-correction/scripts/compose_rate_vs_correction.py` → `paper/iclr/figures/compose-rate-as-correction-rises.pdf`.
 Cell is cat × dog seed 9. `compose-rate-as-correction-rises-for-a-dissimilar-pair.pdf` is elephant × penguin, held in
 reserve for the "they only fuse because they look alike" objection.
 
@@ -244,7 +244,7 @@ width of the band holding the middle half, divided by the height of the median a
 that point. Over the seventeen pool pairs on the step axis with each pair's two seeds
 averaged first: 21.4% as a median across the fifty steps, which the code's own
 thresholds call `loose` rather than `tight`
-([snr_collapse.py:171-172](../../scripts/snr_collapse.py#L171-L172)). Averaging the
+([snr_collapse.py:171-172](../../1-lora-correction/scripts/snr_collapse.py#L171-L172)). Averaging the
 seeds barely moved it, 22.9% to 21.4%, so the verdict word did not change and no
 better number was quietly adopted. A band a fifth as tall as the curve puts a typical
 pair a *tenth* from the middle, not a fifth.
@@ -269,14 +269,14 @@ shows the pairs disagreeing there, with the bands at their widest on the left. A
 tidier drawing was available and would have been a false claim made with a picture
 instead of a sentence.
 
-**Built.** `python scripts/correction_size_vs_run_position.py` → `paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf`.
+**Built.** `python 1-lora-correction/scripts/correction_size_vs_run_position.py` → `paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf`.
 It writes a sidecar `.json` recording which pairs were drawn, which seeds, the
 selection rule and the frame cell, so a caption can be checked later without rerunning
-anything. The measure comes from `curve_for` in `scripts/snr_collapse.py` rather than
+anything. The measure comes from `curve_for` in `1-lora-correction/scripts/snr_collapse.py` rather than
 being repeated here, because two copies of a measure drift and the drift is invisible
 in the figure. The frames cost no sampling: `cross/pairs/a_cat__x__a_dog/seed_9/
 call__rall` already saved `latent_trajectory.pt` with the model's estimate of the
-finished picture at all 50 steps, and `scripts/decode_trajectory_frames.py` turns
+finished picture at all 50 steps, and `1-lora-correction/scripts/decode_trajectory_frames.py` turns
 those into pictures with the VAE alone at 0.5s a frame.
 
 **One thing left open.** Cat × dog swings hard from step 26 onward, and both its seeds
@@ -469,12 +469,12 @@ failure is the finding: steepest rise inside steps 13 to 20 for 3 of 9 cells
 in CLIP and 1 of 9 in DINOv2 on the 50-step grid, with separation near zero at
 step 0 and roughly half the axis covered by the fork band. All curves, checks
 and bars live in `cache_analyses/trajectory_divergence/` with copies in
-`artifacts/results/how-far-the-corrected-run-separates-from-the-uncorrected-one/`.
+`1-lora-correction/artifacts/results/how-far-the-corrected-run-separates-from-the-uncorrected-one/`.
 
 **Built.** `python scripts/run_separation_over_time.py` →
 `paper/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.pdf`, sidecar `.json` beside it.
-Curves from `scripts/trajectory_divergence.py` (50-step cells) and
-`scripts/dose_trajectory_divergence.py` (20-step cells, recovery validation,
+Curves from `1-lora-correction/scripts/trajectory_divergence.py` (50-step cells) and
+`1-lora-correction/scripts/dose_trajectory_divergence.py` (20-step cells, recovery validation,
 correlation), both with their bars as constants in the source.
 
 **Go deeper:**
@@ -497,7 +497,7 @@ the real norms the pooled stack is 1.4x at k=8, not 11x. Scaling rows to unit no
 leaves genuine direction structure (7.8x at k=8) but it sits inside single runs
 (4.8x) and not across them (1.2x), which is D1 and D3 restated rather than a new
 claim. Full argument and tables in
-`artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`.
+`1-lora-correction/artifacts/results/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md`.
 
 **What still answers the question.** The adapter's behaviour, not the geometry of the
 cached vectors: rank 8, 11 training pairs, 96.9% compose on six unseen pairs where
@@ -516,9 +516,9 @@ plain PoE composes 0%. The `r_t` vectors are near-orthogonal to each other, abou
 0.00 cosine even between training pairs, so no fitted subspace can contain unseen
 pairs whether or not the correction transfers. Any sentence built on "shared
 subspace" wording gets rewritten to that bounded form. Full argument in
-`artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
+`1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
 
-**The numbers.** 440 rows from `scripts/spectrum.py --pool --stride 10 --max-seeds 8`.
+**The numbers.** 440 rows from `1-lora-correction/scripts/spectrum.py --pool --stride 10 --max-seeds 8`.
 Against the equal-norm Gaussian floor: k=1 3.8% against 0.3% (14 times), k=8 22.6%
 against 2.1% (11 times), k=64 63.0% against 16.4% (4 times). Against random
 directions carrying the real ‖r_t‖, which is the floor that controls for size: 1.5,

@@ -84,8 +84,8 @@ This extracts error patterns from the run transcript, deduplicates against globa
 
 - Python is the `co3` env at `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`; never a bare `python`. GPU launches may use the `co3_bw` env where a launcher hard-codes it.
 - Large outputs go to `/datasets/mmolefe/poe_repair_min/` only; any disk guard must check `/datasets`, the filesystem written to.
-- biggpu allows one Slurm job per user and registers no GPUs; long runs launch with `nohup` over SSH per [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md), with every path on the launch line absolute (`poe-launch-001`).
-- fp16 upcast rule per [environment/overview.md](../../../../environment/overview.md): norms and cosines computed on cached fp16 tensors are read after upcast to fp32.
+- biggpu allows one Slurm job per user and registers no GPUs; long runs launch with `nohup` over SSH per [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md), with every path on the launch line absolute (`poe-launch-001`).
+- fp16 upcast rule per [environment/overview.md](../../../../../environment/overview.md): norms and cosines computed on cached fp16 tensors are read after upcast to fp32.
 - W&B: training checkpoints came from `prime_lab/poe-repair-cross-seed` (run `pueuo7bl`); eval runs log to `prime_lab/poe-repair-animals-compose`. Credentials from `~/.netrc` / `WANDB_API_KEY`.
 
 ---
@@ -119,8 +119,8 @@ This extracts error patterns from the run transcript, deduplicates against globa
 
 ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **Structure figure:** energy-at-k with train, held-out projection, and the applicable anchors, from spectrum.json + spectrum_windowed.json; script `scripts/showcase/structure_figure.py` (new).
-2. **Two measurements, one window:** F4a's curve of [compose rate](../../../../context/world/compose-rate.md) against window position, and the early/late held-out projection, on aligned step axes; `scripts/showcase/two_instruments_window.py` (new).
+1. **Structure figure:** energy-at-k with train, held-out projection, and the applicable anchors, from spectrum.json + spectrum_windowed.json; script `1-lora-correction/scripts/showcase/structure_figure.py` (new).
+2. **Two measurements, one window:** F4a's curve of [compose rate](../../../../../context/world/compose-rate.md) against window position, and the early/late held-out projection, on aligned step axes; `1-lora-correction/scripts/showcase/two_instruments_window.py` (new).
 3. **Imports:** the dog × dog grid, the compose-rate-against-λ figure, the transfer matrix as their plans finish; copy + sidecar into `paper/iclr/figures/`.
 4. **The standard check:** a checklist pass over every figure against the ledger; violations fixed or the figure held back.
 
@@ -146,7 +146,7 @@ Serves [Objective 5 and DoD 4 of the scope master plan](../../MASTER_PLAN.md).
 
 ◀ **Needs: nothing**; the cache-only figures start immediately.
 
-- [ ] **0.1** Run `/verify-plan plans/01-showcase-the-trained-lora/plans/05-assemble-the-showcase-figures.md`
+- [ ] **0.1** Run `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/05-assemble-the-showcase-figures.md`
 
 ▶ **Next: [task group 1](#1--build-the-cache-only-figures)**.
 
@@ -158,8 +158,8 @@ Serves [Objective 5 and DoD 4 of the scope master plan](../../MASTER_PLAN.md).
   - 💡 `/design-figure` on the two-panel split if the single-figure version fights itself ✅
 - [ ] **1.2** `two_instruments_window.py`: F4a's window curve and the windowed projection, aligned axes; sidecar
 - [ ] **1.3** Copy both into `paper/iclr/figures/` with sidecars
-- [x] **1.4** The [shared-plane](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/trajectory-manifold-by-hand/plans/09-the-fraction-on-the-face.md) trajectory figure (F11 in the register): built as `paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf` by `scripts/plot_shared_plane_trajectories.py` from the sidecar at `artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`; every drawn number recomputed and asserted in the script
-- [ ] **1.5** Export `artifacts/drips/showcase-the-trained-adapter/manifold/trajectory-manifold-prototype.html` as a self-contained file into the supplement when it is assembled; the hosted prototype link is not citable, and if per-step decoded frames get built the hover card changes, so export last
+- [x] **1.4** The [shared-plane](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/trajectory-manifold-by-hand/plans/09-the-fraction-on-the-face.md) trajectory figure (F11 in the register): built as `paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf` by `scripts/plot_shared_plane_trajectories.py` from the sidecar at `3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`; every drawn number recomputed and asserted in the script
+- [ ] **1.5** Export `3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/trajectory-manifold-prototype.html` as a self-contained file into the supplement when it is assembled; the hosted prototype link is not citable, and if per-step decoded frames get built the hover card changes, so export last
 
 ▶ **Next: [task group 2](#2--import-as-plans-land)**.
 
@@ -177,7 +177,7 @@ Serves [Objective 5 and DoD 4 of the scope master plan](../../MASTER_PLAN.md).
 
 ◀ **Needs: [instruction group 3](#3--run-the-standard-check)** passed.
 
-- [ ] **4.1** `/sync-plan-tree plans/01-showcase-the-trained-lora`
+- [ ] **4.1** `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora`
 - [ ] **4.2** When every plan in the scope is ✅: run `/recap-plan-tree @plans/01-showcase-the-trained-lora/MASTER_PLAN.md` and record the Artifact URL in the master plan
 
 ▶ **Next: what has to pass before this runs.**
@@ -257,7 +257,7 @@ Serves [Objective 5 and DoD 4 of the scope master plan](../../MASTER_PLAN.md).
 
 When this plan runs and produces output, three things stay in sync: the error catalogs, this file's Error Matrix, and the figure catalog.
 
-1. **Ingest errors:** the close-out task runs `/ingest-error-pattern --from-run-log`; it deduplicates against `~/.claude/GLOBAL_ERROR_CATALOG.md` and [environment/known-failures.md](../../../../environment/known-failures.md) and triggers `/sync-plan-tree --update-error-matrices`.
+1. **Ingest errors:** the close-out task runs `/ingest-error-pattern --from-run-log`; it deduplicates against `~/.claude/GLOBAL_ERROR_CATALOG.md` and [environment/known-failures.md](../../../../../environment/known-failures.md) and triggers `/sync-plan-tree --update-error-matrices`.
 2. **Error Matrix regeneration:** `/sync-plan-tree` rewrites the Error Matrix below from the catalogs; never edit it by hand.
 3. **Figure filing:** outputs land under `/datasets/mmolefe/poe_repair_min/outputs/showcase_the_trained_lora/assembly/`, and each figure that graduates to the paper is copied into `paper/iclr/figures/` with its sidecar by plan 05, which owns the standard check.
 
@@ -272,8 +272,8 @@ When this plan runs and produces output, three things stay in sync: the error ca
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-- `scripts/showcase/structure_figure.py` (new) — reads the two spectrum JSONs only; no cache access needed.
-- `scripts/showcase/two_instruments_window.py` (new) — reads F4a's verdicted numbers from its sidecar and spectrum_windowed.json.
+- `1-lora-correction/scripts/showcase/structure_figure.py` (new) — reads the two spectrum JSONs only; no cache access needed.
+- `1-lora-correction/scripts/showcase/two_instruments_window.py` (new) — reads F4a's verdicted numbers from its sidecar and spectrum_windowed.json.
 
 ---
 
@@ -284,10 +284,10 @@ When this plan runs and produces output, three things stay in sync: the error ca
 ▶ Paste to run this plan (closes the scope):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/05-assemble-the-showcase-figures.md: assemble under the ledger's standard; no sidecar, no ship; wording rules apply to every caption.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/05-assemble-the-showcase-figures.md: assemble under the ledger's standard; no sidecar, no ship; wording rules apply to every caption.
 ```
 
-▶ `/plan-figures plans/01-showcase-the-trained-lora` ✅ — the set-level pass, if the batch wants re-balancing before import.
+▶ `/plan-figures 1-lora-correction/plans/01-showcase-the-trained-lora` ✅ — the set-level pass, if the batch wants re-balancing before import.
    alt: `/pair-figure` per figure where the statistical entity is in doubt.
 
 ---
@@ -296,7 +296,7 @@ Execute plans/01-showcase-the-trained-lora/plans/05-assemble-the-showcase-figure
 
 ⬅️ [Previous](#recommended-skill) | 📋 [TOC](#table-of-contents) | [Next](#error-matrix) ➡️
 
-The scope closes with the recall gallery (task 4.2). The walk that designed this scope is archived at [plans/.walk/showcasing-the-trained-lora.md](../../../../artifacts/drips/showcase-the-trained-adapter/the-parallel-walk.md).
+The scope closes with the recall gallery (task 4.2). The walk that designed this scope is archived at [plans/.walk/showcasing-the-trained-lora.md](../../../../../3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/the-parallel-walk.md).
 
 ---
 
@@ -310,7 +310,7 @@ Empty until `/ingest-error-pattern` populates it; regenerated by `/sync-plan-tre
 
 ### From project catalog
 
-Empty until `/ingest-error-pattern` populates it. Project catalog: [environment/known-failures.md](../../../../environment/known-failures.md); read `poe-launch-001` (absolute paths on SSH launches) before any nohup launch in this scope.
+Empty until `/ingest-error-pattern` populates it. Project catalog: [environment/known-failures.md](../../../../../environment/known-failures.md); read `poe-launch-001` (absolute paths on SSH launches) before any nohup launch in this scope.
 
 **Auto-update note:** regenerated by `/sync-plan-tree`; do not edit manually.
 

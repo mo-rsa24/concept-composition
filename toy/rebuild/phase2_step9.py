@@ -30,7 +30,7 @@ import numpy as np
 import torch
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-STEP_FILE = os.path.join(REPO, "artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md")
+STEP_FILE = os.path.join(REPO, "3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/02-composing-and-sampling.md")
 OUT = os.path.join(REPO, "rebuild/out/phase2/step9.json")
 
 

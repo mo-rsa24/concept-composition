@@ -9,7 +9,7 @@ in the background beside the reading stop.
 /results-scene rebuild/out/phase5/
 
 Background
-Layer 5 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) measured how much
+Layer 5 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) measured how much
 A-and-B data a product needs. A scene of the answer key's toy already exists, Three ways a product
 reaches A-and-B (https://claude.ai/artifact/9eFnG2rWEciPsceMwdem4u). This scene is of my own
 overlap-dial curves from rebuild/out/phase5/ in
@@ -28,7 +28,7 @@ What to read
 - The figures in toy/rebuild/out/phase5/: overlap-dial-curves.png,
   overlap-dial-quadrant-pictures.png, finetune-curves.png and finetune-pictures.png.
 - The layer 5 maths drip folder and its dispatch.md (step 2's hand-off): my notation.
-- artifacts/scenes/three-ways-a-product-reaches-a-and-b/README.md: the other scene's toy, to keep
+- 3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/README.md: the other scene's toy, to keep
   apart.
 
 What is already known
@@ -52,7 +52,7 @@ What is already known
   TV is 0.90 (REBUILD_WALK.md, brick "Fine-tune variant"; finetune.log).
 - The scene already built, Three ways a product reaches A-and-B, is on the four-quadrant blob toy of
   the answer key, a different toy with A∩B top-right
-  (artifacts/scenes/three-ways-a-product-reaches-a-and-b/README.md).
+  (3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/README.md).
 - What the curves answer: the deep A∩B mass rounds to 0.00 at 0% on the quadrant toy, the parts
   world with an empty background gives a ghost instead, pretraining support does not survive 100
   fine-tune steps, and an expert loose where its concept is absent is the one way to A∩B with no
@@ -68,7 +68,7 @@ Rules
 What to hand back
 - One published scene of the overlap-dial curves, scrubbable along the overlap share, in my notation
   from dispatch.md.
-- Its URL in step 6 of artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md,
+- Its URL in step 6 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md,
   replacing "(URL lands here)".
 
 What you will see

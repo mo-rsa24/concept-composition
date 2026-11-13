@@ -1,6 +1,6 @@
 # Walk map: PRZE-2, prove the Langevin corrector and render the six-column figure
 
-Plan: [prze-2-langevin-corrector.md](../../../plans/prze-2-langevin-corrector.md), started by `--request --depth objective`.
+Plan: [prze-2-langevin-corrector.md](../../../plans/prove-the-langevin-corrector-for-the-six-column-figure.md), started by `--request --depth objective`.
 On: closed 2026-11-11 on your `stop`; open lines are listed in the retrospective, `artifacts/notes/session-merges/2026-11-11-prze-2-langevin-corrector-retro.md`.
 
 ## Stop point
@@ -33,14 +33,14 @@ N(-1, 0.5) × N(1, 0.8) = N(-0.2308, 0.3077), variance as the second number.
 
 ## Ticks
 
-- Piece 1 build: `scripts/check_langevin_two_gaussians.py`, answer key run 2026-11-11 07:28, exit 0, last line `PASS: all four step sizes`.
+- Piece 1 build: `1-lora-correction/scripts/check_langevin_two_gaussians.py`, answer key run 2026-11-11 07:28, exit 0, last line `PASS: all four step sizes`.
 
 - Piece 1 test: you read the table in chat and said "done", 2026-11-11.
-- Piece 2 build: `scripts/check_langevin_order.py`, 13 s, exit 0.
+- Piece 2 build: `1-lora-correction/scripts/check_langevin_order.py`, 13 s, exit 0.
 - Piece 2 test: you read the table and kept our order, 2026-11-11.
 - Piece 3 build: drivers, composers and both identity checks, commits `945f48e5`, `5d358f1a`, `d0b582ed`; R6 layout draft `58063749`.
 
-- Piece 5: R6 at `artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with `five_columns.json`; route rows added; board redrawn at step 8.
+- Piece 5: R6 at `1-lora-correction/artifacts/results/does-a-langevin-corrector-fix-the-product/five_columns.png` with `five_columns.json`; route rows added; board redrawn at step 8.
 
 ## Changes
 

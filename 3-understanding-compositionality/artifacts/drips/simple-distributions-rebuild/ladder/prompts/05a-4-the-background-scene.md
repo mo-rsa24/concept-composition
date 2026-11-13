@@ -10,7 +10,7 @@ after the combined read of step 2 has closed.
 factorized-conditionals condition on the quadrant toy, with the background as a choice
 
 Background
-The reading stop of the composition ladder (artifacts/drips/simple-distributions-rebuild/) read two
+The reading stop of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) read two
 Bradley papers on when summed scores are exact. This scene puts the background in my hands: on the
 four-quadrant toy I change the background and watch each of Definition 5.2's three conditions hold
 or break. It uses the four-quadrant answer key because its background-divided numbers exist and
@@ -29,7 +29,7 @@ What to read
   combine-<idea-slug>/ folder (step 2's hand-off): my words and the differences the read named.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.json:
   the toy and its numbers.
-- artifacts/scenes/when-a-product-reaches-a-and-b/checks/scene_key.py: the earlier scene's key
+- 3-understanding-compositionality/artifacts/scenes/when-a-product-reaches-a-and-b/checks/scene_key.py: the earlier scene's key
   script.
 
 What is already known
@@ -53,7 +53,7 @@ What is already known
 - The same experts compose with an empty background and fail with the unconditional as background
   (2502.04549 Figure 3, A and B; read-ahead 05, chunk 53).
 - In 2D a uniform background changes the plain product only by a constant
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
 - Three scenes already exist and are not to be redrawn differently: "Three ways a product reaches
   A-and-B" https://claude.ai/artifact/9eFnG2rWEciPsceMwdem4u and "Where the Product Lands"
   https://claude.ai/artifact/2A7YDnfKe8EPsS7yFDVcNT on this toy, and the 2502.04549 chapter "Divide
@@ -62,7 +62,7 @@ What is already known
 
 Rules
 - Every number comes from answer_key.json, scene_key.py in
-  artifacts/scenes/when-a-product-reaches-a-and-b/checks/, or a key script written before the build,
+  3-understanding-compositionality/artifacts/scenes/when-a-product-reaches-a-and-b/checks/, or a key script written before the build,
   never estimated.
 - Link the three existing scenes rather than redraw them.
 - List the scene's frames before building, and wait for a yes.
@@ -71,7 +71,7 @@ What to hand back
 - One published scene where the background is a control and each of Definition 5.2's three
   conditions shows as holding or breaking.
 - Its URL in step 4 of
-  artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
   replacing "(URL lands here)".
 - The proof: the key script's printed numbers beside the numbers the scene shows.
 

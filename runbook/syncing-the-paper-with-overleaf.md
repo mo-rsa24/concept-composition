@@ -61,7 +61,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 |---|---|---|---|
 | `paper/iclr/` | the tracked copy: tex, bib, every figure, the writing notes | this repo, and you through Claude | a pull into the clone does not reach it; §1 copies across |
 | `paper/overleaf-iclr/` | tex, bib, the style files, only the figures the tex includes | Overleaf, when you type in the editor | its working tree is dirty in a deleting direction; see §3 |
-| `paper/iclr-overleaf-slim.zip` | a snapshot for uploading a new project | `scripts/make_overleaf_bundle.sh --slim` | stale the moment either side moves |
+| `paper/iclr-overleaf-slim.zip` | a snapshot for uploading a new project | `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` | stale the moment either side moves |
 
 The clone holds a subset on purpose: it has no `DRAFT_MAP.md`, no `SPINE.md`, no reference PDFs,
 and only the figures the manuscript actually includes.
@@ -188,7 +188,7 @@ You are starting a fresh Overleaf project, or the clone has drifted so far that 
 project is cheaper than reconciling it.
 
 ```bash
-scripts/make_overleaf_bundle.sh --slim
+1-lora-correction/scripts/make_overleaf_bundle.sh --slim
 ```
 
 ✅ **`paper/iclr-overleaf-slim.zip`, and a printed list of the figures it kept.** The slim flag
@@ -233,4 +233,4 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 
 ## Cross-references
 
-- The mention of **Overleaf clone**, one of the two older local copies that must not be edited, in [the PRZE-5 page on revising the paper](../report/paper-review/prze-5-paper-revised.md), first outcome.
+- The mention of **Overleaf clone**, one of the two older local copies that must not be edited, in [the PRZE-5 page on revising the paper](../1-lora-correction/report/paper-review/prze-5-paper-revised.md), first outcome.

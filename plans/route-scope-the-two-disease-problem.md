@@ -758,5 +758,5 @@ are a check on the one measure the whole scoping rests on.
 - [the search prompt they came from](../artifacts/ideas/silicotb-conversation/routes/05-deep-research-the-disease-pairs.prompt.md)
 - [the claim ledger, with runs 5 to 7](../artifacts/ideas/silicotb-conversation/IDEA_MAP.md)
 - [the chain this re-aims](route-compose-x-rays-and-score-them.md)
-- [the composition vocabulary](../artifacts/ideas/poe-overlap-dial/composition-terms.md)
-- [the earlier combined reading on what composition means](../artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md)
+- [the composition vocabulary](../3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md)
+- [the earlier combined reading on what composition means](../3-understanding-compositionality/artifacts/drips/combine-kinds-of-composition/COMBINE_MAP.md)

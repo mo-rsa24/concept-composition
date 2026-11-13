@@ -31,14 +31,14 @@ Objectives
    differences.
 5. Build the picture grid beside each table from the same result file (protocol rule 8): R12
    beside R1 (two prompts per set at seed 9, every method) and R4 beside R3 (one pair per group at
-   seeds 9 and 10), drawn with scripts/paper_tile_figure.py at 5.5 in, labels 8 pt, each within
+   seeds 9 and 10), drawn with 1-lora-correction/scripts/paper_tile_figure.py at 5.5 in, labels 8 pt, each within
    its slot's height on the layout sheet.
-6. Fill the slots through python3 scripts/refresh_paper_slots.py --compile --gallery and check the
+6. Fill the slots through python3 1-lora-correction/scripts/refresh_paper_slots.py --compile --gallery and check the
    paper still compiles with no slot too wide.
 
 What to read
-- artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
-- report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
 - composition/focus/eval_metrics.py: the CLIP and ImageReward scorers already written here.
 - The run folders under /datasets/mmolefe/poe_repair_min/outputs/paper_review/.
 - environment/hpc/nodes.md: the co3 and co3_bw interpreters and the PyPI speed on the nodes.
@@ -53,7 +53,7 @@ What is already known
   interval per group (hard 3, easy but unseen 29, not competing 21).
 - R14 is GenEval two-object and counting and T2I-CompBench spatial and complex, scored by their
   official evaluators on each benchmark's own prompts and seeds. Those prompts are not in step 5's
-  wave 1: add their renders to report/paper-review/prze-10-compute.md as a job, with its image
+  wave 1: add their renders to 1-lora-correction/report/paper-review/prze-10-compute.md as a job, with its image
   count, and launch it after the user's yes.
 - Every method shares one starting latent per seed; one frozen adapter, v58-03-self at step 30,000
   (adapter_of_record.yaml). Result rows carry protocol rule 9's columns.
@@ -81,10 +81,10 @@ Rules
 
 What to hand back
 - The results file under /datasets/mmolefe/poe_repair_min/outputs/paper_review/scores/ and a copy
-  of the small tables under report/paper-review/.
+  of the small tables under 1-lora-correction/report/paper-review/.
 - The three tables and the paired differences, in their slots, with sidecar files.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: python3 scripts/refresh_paper_slots.py --check prints PASS, the paper compiles, and the
+- Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS, the paper compiles, and the
   board redraws with --step 9 ticking the PRZE-1 and PRZE-3b lines.
 
 What you will see

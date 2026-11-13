@@ -5,7 +5,7 @@
 and fills **F2** in the figure register, the paper's headline figure.
 
 Where it stands in one line. The correction takes the
-[compose rate](../../../context/world/compose-rate.md) from 3% to 94% while both controls stay at
+[compose rate](../../../../context/world/compose-rate.md) from 3% to 94% while both controls stay at
 or below 6%, measured on an equal number of runs per strength, with a minimum detection size in
 the scorer that was chosen by looking at real detections. F2's caption may quote these figures.
 
@@ -24,7 +24,7 @@ the scorer that was chosen by looking at real detections. F2's caption may quote
 | [design](../plans/hypothesis/03-more-correction-more-composition.md) | the runs across strengths, the two controls, the threshold |
 | **this file** | **the verdict: 3% to 94% with both controls at or below 6%. F2's caption may quote these** |
 | [procedure](../procedures/hypothesis-02-recheck-the-headline-numbers.md) | the steps that produced the re-score, and how to redo it |
-| [the register](../../../paper/iclr/figures.md) | F2's row, the paper's headline figure |
+| [the register](../../../../paper/iclr/figures.md) | F2's row, the paper's headline figure |
 
 ## Table of contents
 
@@ -243,7 +243,7 @@ The original question asked about two things at once, so it splits.
       **Yes.** F2 is `paper/iclr/figures/compose-rate-as-correction-rises.pdf`: `a_cat__x__a_dog` seed 9, all
       three rows across all five strengths, above the curves on a shared λ axis.
       The real-correction row holds one ginger cat-dog
-      [chimera](../../../context/world/chimera.md) at λ=0, 0.25 and 0.5, then a tabby cat
+      [chimera](../../../../context/world/chimera.md) at λ=0, 0.25 and 0.5, then a tabby cat
       sitting beside a white labrador at 0.75 and 1. The random row holds that same chimera at
       every strength. The other-pair row degrades into cartoon artifacts and never separates.
       Reading down a column shows that which vector was added is what decides the outcome. How

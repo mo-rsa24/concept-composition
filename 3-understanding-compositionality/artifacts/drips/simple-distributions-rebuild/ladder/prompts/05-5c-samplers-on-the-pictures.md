@@ -11,11 +11,11 @@ rebuild/settle_samplers_on_pictures.py and run it: layer 5's samplers on layer 4
 circle-and-square experts, against the exact product, at a caption share of 1 in 20.
 
 Background
-Layer 4b and layer 5 of the composition ladder (artifacts/drips/simple-distributions-rebuild/)
+Layer 4b and layer 5 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/)
 disagree on whether reverse diffusion finds the pair once the pair is in training. 4b's guided-sum
 DDIM draws the two shapes apart 17 of 200 times at a caption share of 1 in 20, while the parts
 world's reverse diffusion reaches 0.969 of the exact mass at 5% (the two walks reconciled,
-artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md, disagreement 2). The two
+3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md, disagreement 2). The two
 toys also tune MALA to different acceptances, about one half against 0.6 (disagreement 6), and 4b
 reports counts where layer 5 reports total variation (disagreement 11). Running layer 5's samplers
 on 4b's pictures leaves one difference standing, the size of the picture (1,536 numbers against 2),
@@ -33,16 +33,16 @@ Objectives
    toy/rebuild/out/settle/samplers-on-pictures.png, with one row per sampler, eight samples each,
    and its counts on the row.
 5. Write the six rows and which of the three outcomes below held into step 5c of
-   artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, under "Result".
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, under "Result".
 
 What to read
-- artifacts/notes/what-poe-loses-when-it-composes/fig_ddim_guided.py: 4b's pictures, namely three
+- 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/fig_ddim_guided.py: 4b's pictures, namely three
   red circles and three blue squares at columns 3, 8 and 13 of row 4, the pair picture, σ = 0.1,
   the 16-picture library and read_out's six kinds, the cosine schedule, and guided-sum DDIM.
-- artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py: an earlier 16 × 32
+- 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py: an earlier 16 × 32
   version with exact draws, reverse diffusion and annealed MALA on the product.
 - toy/rebuild/samplers.py and toy/anneal_samplers.py: layer 5's ULA, MALA, tuned MALA and UHA.
-- artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md, disagreements 2, 6 and
+- 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md, disagreements 2, 6 and
   11: why this run exists.
 
 What is already known

@@ -3,7 +3,7 @@
 This plan asks which section each of the paper's figures belongs in, which of them exist already,
 and what run has to finish before each missing one can be drawn.
 
-**Step 19 of 22.** Waits on steps 13 and 14. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 19 of 22.** Waits on steps 13 and 14. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -71,8 +71,8 @@ scopes follow.
 
 ## Recommended skill
 ▶ `/plan-figures` ✅ to lock the order the story is told in and the 3 to 6 load-bearing
-   figures, reading from `plans/04-does-the-fix-reach-unseen-pairs/plans/figure-01-the-transfer-figures.md`
-   and `plans/03-does-the-correction-cause-composition/plans/figure-01-the-seven-paper-figures.md`.
+   figures, reading from `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/figure-01-the-transfer-figures.md`
+   and `1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figure-01-the-seven-paper-figures.md`.
 
 ## Engagement Instructions
 ```bash

@@ -31,7 +31,7 @@ not a vector" caption used across the showcase figures.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 
 - **Agreeing pair**: both PoE experts get the same concept ("a dog"), so the true
-  [interaction term](../../../context/world/interaction-term.md) is near zero.
+  [interaction term](../../../../context/world/interaction-term.md) is near zero.
 - **‖r̂‖**: the norm of the LoRA's predicted correction at a step; "small" means small against
   the cross-pair scale (`train/delta_target_norm` ≈ 29.7 in the training history).
 - **The identity check**: with the LoRA off, PoE(A,A) must reduce to Mono(A) within fp16

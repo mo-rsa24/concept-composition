@@ -9,7 +9,7 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 1 of the composition ladder wrote.
 
 Background
-Layer 1 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 1 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its build walk wrote new files. Those files should link to the journey plans and
 vault notes that teach the same ideas, and those should link back, so the next reader finds both.
 
@@ -19,9 +19,9 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/01-one-diffusion-expert.md, its Study first
   line: the journey plans and vault notes to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 1 rows of the Bricks
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 1 rows of the Bricks
   table.
 
 What is already known

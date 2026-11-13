@@ -14,7 +14,7 @@ there; what the runs cost, what came back and what it licenses are here.
 
 **Step 79 of 79.** Pairs with
 [hypothesis-16](../plans/hypothesis/16-does-sdxl-compose-at-pixarts-settings.md). The one order is
-the `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md).
+the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
 
 ## Table of contents
 
@@ -70,8 +70,8 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
-| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders, 13 minutes | tiles and sheet under `artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ✅ product 0 of 8, joint two animals 8 of 8 |
+| The control, DDIM 50 steps at 7.5, seeds 9 to 16, four columns | gates the claim | 2026-11-04, mscluster84 | 32 renders, 25 minutes | tiles under `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/control/` | ✅ product 0 of 8, joint two animals 8 of 8 |
+| The matched run, DPM-Solver++ 20 steps at 4.5, same seeds, four columns | Tests the claim | 2026-11-04, mscluster84 | 32 renders, 13 minutes | tiles and sheet under `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/` | ✅ product 0 of 8, joint two animals 8 of 8 |
 
 ## The question written before the run
 
@@ -121,7 +121,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       two heads rather than two animals. The joint column holds two separate animals on 8 of 8, and
       a clear cat beside a clear dog on 5 of 8 (seeds 9, 11, 12, 15, 16); seeds 10 and 13 draw two
       dogs and seed 14 two cats. Tiles and sheet under
-      `artifacts/results/does-sdxl-compose-at-pixarts-settings/control/`.
+      `1-lora-correction/artifacts/results/does-sdxl-compose-at-pixarts-settings/control/`.
 - [x] **Which seeds did what?** One record per product tile in `calls.json`, with its seed, its
       category and one sentence on what is in the picture.
 
@@ -182,7 +182,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
 Nothing waits on this file. The finding lands under
-`report/is-the-gap-the-samplers-or-the-models/` either way, because both outcomes change what the
+`1-lora-correction/report/is-the-gap-the-samplers-or-the-models/` either way, because both outcomes change what the
 paper may claim.
 
 ## Cross-references
@@ -193,5 +193,5 @@ Navigation: ⬅️ [Next step](#next-step) | 📋 [TOC](#table-of-contents)
   the run this one narrows.
 - [Does a corrector alone produce two animals](../../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md),
   which owns the published SDXL counts the control must reproduce.
-- [What product-of-experts composition is](../../../context/world/poe-composition.md) and
-  [the compose rate](../../../context/world/compose-rate.md).
+- [What product-of-experts composition is](../../../../context/world/poe-composition.md) and
+  [the compose rate](../../../../context/world/compose-rate.md).

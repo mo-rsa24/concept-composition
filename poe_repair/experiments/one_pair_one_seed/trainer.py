@@ -445,7 +445,7 @@ def _train_one_step(
                 if e.render_latent is None:
                     raise RuntimeError(
                         f"--render-teacher but no cached render latent for pair={e.source_pair} "
-                        f"seed={e.source_seed}; run scripts/showcase/build_render_teacher_cache.py")
+                        f"seed={e.source_seed}; run 1-lora-correction/scripts/showcase/build_render_teacher_cache.py")
                 x0 = e.render_latent.to(device=device, dtype=train_dtype)
                 abar = alphas_cumprod[int(e.timestep)].to(device=device, dtype=train_dtype)
                 z = torch.randn_like(x0)
@@ -601,7 +601,7 @@ def _train_one_step(
     # Which variation of the correction loss this run trains. At most one of these is on; each
     # names which branches the adapter may move and which reference it is scored against. The
     # equations live in
-    # artifacts/ideas/designing-the-correction-loss/maths/objectives-and-variations.tex.
+    # 1-lora-correction/artifacts/ideas/designing-the-correction-loss/maths/objectives-and-variations.tex.
     if _adapt_null_only:
         # V3: u + w(a_bar - u) + w(b_bar - u). The mirror of V1. Both concept branches come from
         # the cache, so the only free tensor in the loss is the empty branch: one per picture,
@@ -691,7 +691,7 @@ def _train_one_step(
     # The part of the error that a per-place re-weighting of the two experts could supply, charged
     # in_place_w times instead of once. On the species-fidelity live split, that part of the true
     # correction alone bound the species where the same amounts as one weight per step, or moved
-    # to shuffled places, did not (artifacts/drips/second-animal-species/idea2-per-place-weight-
+    # to shuffled places, did not (1-lora-correction/artifacts/drips/second-animal-species/idea2-per-place-weight-
     # loss.md). 1.0 adds nothing and is every run before this flag existed.
     in_place_w = float(getattr(cfg, "in_place_weight", 1.0))
     in_place_frac = float("nan")

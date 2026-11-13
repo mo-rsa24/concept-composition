@@ -59,7 +59,7 @@
 - **The adapter alone**: λ 1.2 on all 50 steps, unprojected, rendered in the same process as the projected conditions so the comparison differs on one axis.
 - **Mono**: the joint-prompt render, the reference the fidelity read measures distance to. **Plain PoE**: λ 0.
 - **d(joint)**: DINOv2 ViT-S/14 cosine distance between a render and the seed's Mono render, the compose scorer's embedder; lower is nearer the clean image. The same read the clean-tail cells of plan 04 in scope 06 use.
-- **Compose count**: seeds of 8 where the validated detector counts two or more animal instances ([compose rate](../../../../context/world/compose-rate.md)). On the control pair butterfly × flower meadow the validated rule does not apply, so a butterfly box and a flower box both present is reported as unvalidated.
+- **Compose count**: seeds of 8 where the validated detector counts two or more animal instances ([compose rate](../../../../../context/world/compose-rate.md)). On the control pair butterfly × flower meadow the validated rule does not apply, so a butterfly box and a flower box both present is reported as unvalidated.
 - **Both-ness**: projection of a render's DINOv2 embedding onto the axis from the solo-cloud midpoint toward the joint-prompt cloud, on the axes fitted for [where each condition lands](../../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md), refit here from the saved features and checked against the sidecar.
 
 ---
@@ -107,10 +107,10 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The shared-device path: `biggpu` allows one Slurm job per user, so the run goes over SSH with `nohup` on a pinned device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../environment/hpc/execution-protocol.md)). The device guard is `launch_sdlora.sh`'s: under 4 GB of idle foreign residency at 0% utilisation is shared, anything active is refused.
-- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109); `co3_bw` on 110 to 112 ([nodes](../../../../environment/hpc/nodes.md)).
-- The launch script asserts `torch.cuda.is_available()` under the pinned device before real work ([poe-launch-002](../../../../environment/known-failures.md)).
-- Outputs on `/datasets` only, with the disk guard reading the filesystem the script writes to ([storage](../../../../environment/storage.md)).
+- The shared-device path: `biggpu` allows one Slurm job per user, so the run goes over SSH with `nohup` on a pinned device, invisible to `squeue`, harvested with `pgrep` ([execution protocol](../../../../../environment/hpc/execution-protocol.md)). The device guard is `launch_sdlora.sh`'s: under 4 GB of idle foreign residency at 0% utilisation is shared, anything active is refused.
+- `co3` python on the RTX 8000 and A6000 nodes (106, 108, 109); `co3_bw` on 110 to 112 ([nodes](../../../../../environment/hpc/nodes.md)).
+- The launch script asserts `torch.cuda.is_available()` under the pinned device before real work ([poe-launch-002](../../../../../environment/known-failures.md)).
+- Outputs on `/datasets` only, with the disk guard reading the filesystem the script writes to ([storage](../../../../../environment/storage.md)).
 - The probe runs in float32 with TF32 off, because a float16 difference of two forwards at this step size is the size of the rounding noise; the sampler's own forwards stay fp16 so the adapter-alone condition matches the shipped path within the cross-device drift band.
 
 ---
@@ -204,11 +204,11 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ### 1. 🔬 Prove the process runs on the claimed device
 
-◀ **Needs:** a free device claimed per [the launch recipe](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'sweep|train|corrector|tangent'` checked on the node first.
+◀ **Needs:** a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'sweep|train|corrector|tangent'` checked on the node first.
 
 - [x] **1.1 Run the smoke stage first, on the device the long stages will use.**
-  - On a shared biggpu device: `ssh <node> 'GPU=<idx> STAGE=smoke bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_smoke.log 2>&1'`, then task 2.1 with `STAGE=all`.
-  - When every biggpu device is busy: `sbatch --exclude=<the faulted nodes in environment/hpc/nodes.md> scripts/showcase/tangent_projection.sbatch`, which runs `STAGE=smoke_then_all` on a fresh `bigbatch` card, the smoke first and the long stages only if it ends clean; task 2.1 is then the same job.
+  - On a shared biggpu device: `ssh <node> 'GPU=<idx> STAGE=smoke bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_smoke.log 2>&1'`, then task 2.1 with `STAGE=all`.
+  - When every biggpu device is busy: `sbatch --exclude=<the faulted nodes in environment/hpc/nodes.md> 1-lora-correction/scripts/showcase/tangent_projection.sbatch`, which runs `STAGE=smoke_then_all` on a fresh `bigbatch` card, the smoke first and the long stages only if it ends clean; task 2.1 is then the same job.
   - One seed, three cached steps, one three-step render under the output root's `smoke/`. Done when: the log shows the smoke's two stages ending without a traceback and `smoke/cache_read.json` has three rows whose `sanity_cos_live_frozen_vs_cached_poe` is above 0.99 (the live frozen prediction agrees with the cache).
 
 ▶ **Next: [task 2.1](#2--run-the-cache-read-and-the-renders)**.
@@ -288,7 +288,7 @@ Every figure below lands in `artifacts/results/does-keeping-the-correction-on-th
 ◀ **Needs: [instruction 3.2](#3--judge-the-pictures)** done.
 
 - [ ] **4.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **4.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **4.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported condition as a wall row.
 
@@ -298,9 +298,9 @@ Every figure below lands in `artifacts/results/does-keeping-the-correction-on-th
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/showcase/tangent_projection.py`: the float32 probe (`Probe`, `split`), the cache read and its verdict (`cache_read`, `cache_verdict`), the projected sampler (`run_projected`, op for op the corrected sampler's k=0 path plus the projection), the identity check, the scoring and its verdict (`score`, `fix_verdict`), the figures, the W&B logging, and every constant. `scripts/showcase/tangent_projection_shared_device.sh`: the shared-device launcher with the disk, python, foreign-process, fault and CUDA guards. `scripts/showcase/tangent_projection.sbatch`: the Slurm wrapper for a `bigbatch` card, which calls the same launcher.
+**File:** `1-lora-correction/scripts/showcase/tangent_projection.py`: the float32 probe (`Probe`, `split`), the cache read and its verdict (`cache_read`, `cache_verdict`), the projected sampler (`run_projected`, op for op the corrected sampler's k=0 path plus the projection), the identity check, the scoring and its verdict (`score`, `fix_verdict`), the figures, the W&B logging, and every constant. `1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh`: the shared-device launcher with the disk, python, foreign-process, fault and CUDA guards. `1-lora-correction/scripts/showcase/tangent_projection.sbatch`: the Slurm wrapper for a `bigbatch` card, which calls the same launcher.
 
-**Reused:** the cache reader and the guided rule from `scripts/showcase/correction_span_common.py`; `_attach_and_load_lora` from `scripts/showcase/lambda_boundary_probe.py` (rank overridden to 32); `_adapter_disable` and `_adapter_enable` from `poe_repair/methods/_poe_langevin.py`; `_laplacian_var` from `scripts/showcase/lambda_window_grid.py`; the instance-count scorer and the DINOv2 embedder from the compose-scorer validation; the landing finding's saved features for the cloud axes.
+**Reused:** the cache reader and the guided rule from `1-lora-correction/scripts/showcase/correction_span_common.py`; `_attach_and_load_lora` from `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` (rank overridden to 32); `_adapter_disable` and `_adapter_enable` from `poe_repair/methods/_poe_langevin.py`; `_laplacian_var` from `1-lora-correction/scripts/showcase/lambda_window_grid.py`; the instance-count scorer and the DINOv2 embedder from the compose-scorer validation; the landing finding's saved features for the cloud axes.
 
 ---
 
@@ -309,7 +309,7 @@ Every figure below lands in `artifacts/results/does-keeping-the-correction-on-th
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/15-keep-the-correction-on-the-manifold.md — the smoke in the foreground on one claimed device, then STAGE=all with nohup on the same device
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/15-keep-the-correction-on-the-manifold.md — the smoke in the foreground on one claimed device, then STAGE=all with nohup on the same device
 ```
 
 ---
@@ -328,7 +328,7 @@ Every figure below lands in `artifacts/results/does-keeping-the-correction-on-th
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 | Symptom | Cause | Fix |
 |---|---|---|

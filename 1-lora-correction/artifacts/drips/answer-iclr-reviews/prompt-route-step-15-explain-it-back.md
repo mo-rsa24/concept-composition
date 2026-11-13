@@ -24,9 +24,9 @@ Objectives
 2. For each chunk, state the question it answered, the bar written first, and the result.
 
 What to read
-- The session transcripts named by the user, and artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md.
+- The session transcripts named by the user, and 1-lora-correction/artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md.
 - plans/route-answer-the-iclr-reviews.md: the "What we know so far" table, as the spine.
-- report/paper-review/board.md and every row page's outcome lines.
+- 1-lora-correction/report/paper-review/board.md and every row page's outcome lines.
 
 What is already known
 - Six things must be explainable afterward: the one frozen checkpoint (v58-03-self at step
@@ -93,5 +93,5 @@ Along the way: each chunk's question, then the result after your prediction. At 
 the six things you explained correctly, which missed, and at most one question.
 ```
 
-- `added:` a sixth thing to explain, how training targets were chosen (`artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md` and the v58-03-self config) · `added:` that the held-out pairs are unseen as pairs only · `added:` the adapter of record by name
+- `added:` a sixth thing to explain, how training targets were chosen (`1-lora-correction/artifacts/drips/answer-iclr-reviews/2026-11-11-presentation-retro.md` and the v58-03-self config) · `added:` that the held-out pairs are unseen as pairs only · `added:` the adapter of record by name
 - `dropped:` nothing

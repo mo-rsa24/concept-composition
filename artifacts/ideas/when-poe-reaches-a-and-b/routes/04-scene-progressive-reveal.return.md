@@ -5,7 +5,7 @@ ask: one taught concept per press, with what's already taught dimmed
 deliverable:
   Kept and republished: Three Ways a Product Reaches A-and-B,
     https://claude.ai/artifact/9eFnG2rWEciPsceMwdem4u (version 3), source
-    artifacts/scenes/three-ways-a-product-reaches-a-and-b/. 48 presses. Each press reveals one region,
+    3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/. 48 presses. Each press reveals one region,
     label, number or formula; what was taught earlier stays on screen in grey; nothing not yet taught
     is drawn. A prediction is its own press, before the press that reveals its answer. The ledger
     "What each label and number means" gains one row per press, newest on top in colour. Back
@@ -51,7 +51,7 @@ deliverable:
   Checks: check_numbers.mjs 123 of 123 pass (114 slider stops plus 9 for B's three blob positions,
     which scene_key.py also checks against scene 2's key). check_scene.mjs --region walked all 48
     presses at 390 px dark and 1440 px light with no must-fix items. Screenshots of presses 10, 16,
-    22 and 44 are in artifacts/scenes/three-ways-a-product-reaches-a-and-b/screens/.
+    22 and 44 are in 3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/screens/.
 
 changes for the walk: no claim changed. One number on scene 1 was corrected: the one-model
   top-right share at 1 film in 100,000 reads 0.955 (key 0.95546), where the old page had 0.956 typed

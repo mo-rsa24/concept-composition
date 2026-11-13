@@ -2,7 +2,7 @@
 # Plan 16 — build the within-group cross-pair training caches.
 #
 # Walks the five per-group pair_pool.yaml files, looks up each slug in
-# pair_prompts.yaml, and calls scripts/build_training_cache.py for every
+# pair_prompts.yaml, and calls 3-understanding-compositionality/scripts/build_training_cache.py for every
 # (pair, seed) cell that isn't already on disk.
 #
 # Idempotent: build_training_cache.py is itself idempotent (per-cell

@@ -8,11 +8,11 @@ after quiz 7.2.
 ```text
 /drip-execute-plan --request negation on the quadrant toy and the parts world, and the same cell
 built from a positive "not B" label, as layer 7 of
-artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
 ~/Playground/PhD/simple-distributions-walk/walk07.py
 
 Background
-This is layer 7's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/): I
+This is layer 7's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/): I
 type negation from an empty file, one piece per round. The medical cells are A without B, and at
 the paper's own weight negation sends mass off every mode when the experts have sharp tails, so this
 layer measures the escaping mass and builds the same cell from a positive "not B" label beside it.
@@ -22,7 +22,7 @@ and the reference print the same numbers, and a difference is a lesson or a bug.
 
 Objectives
 1. At the walk's open, cut the layer into 4 to 6 pieces and write them as the step file
-   artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, in the shape of the step files
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, in the shape of the step files
    for layers 1 to 5.
 2. Build, teach and test one piece per round, in this order: the dial, the quadrant toy's
    A-without-B mass per w, the parts world, the positive label, then the samplers.
@@ -39,8 +39,8 @@ What to read
 - The layer 7 maths drip folder under artifacts/drips/ and its dispatch.md (step 4): my notation.
 - rebuild/negation.py, rebuild/phase7_negation.py, the p7. keys and rebuild/out/phase7/phase7.json
   (step 1): the reference.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "A without B (negation)".
-- artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step-file shape and "How
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "A without B (negation)".
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step-file shape and "How
   to walk it".
 
 What is already known
@@ -60,7 +60,7 @@ What is already known
   (rebuild/kinds.py, MEASURES).
 - Fresh draws move a dial by up to about 0.08 where its curve is steep, so the twelve values
   reproduce only with the replayed draw (step file 03, step 12), and an earlier draw put 0.891 off
-  every mode at w = 0.3 (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3).
+  every mode at w = 0.3 (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3).
 - Negation works only near w ≈ 0.05, where the exact in-bar mass is 0.10 (overlap-dial idea map, run
   3; step file 03, step 11).
 - At w = 0.05, reverse diffusion doubles the in-bar mass (0.20 against 0.10), and tuned MALA reaches
@@ -95,7 +95,7 @@ Rules
   on.
 
 What to hand back
-- The step file artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, its pieces ticked,
+- The step file 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, its pieces ticked,
   and the walk map that holds my place between sittings.
 - walk07.py: one script that prints the dial, the A-without-B mass per toy and w with its peak, the
   positive label's mass and normaliser per w, and per sampler the cell's mass and total variation

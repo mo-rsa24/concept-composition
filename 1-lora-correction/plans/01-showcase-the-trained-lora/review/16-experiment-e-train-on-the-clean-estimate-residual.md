@@ -37,7 +37,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 - **Drift**: the corrected render's DINOv2 cosine distance to the joint-prompt render minus its distance to the plain PoE render, mean over the 8 seeds at λ 1, all 50 steps. Negative means nearer the joint-prompt image. `summary.full.1.0.mean_dino_drift` in a probe folder's `results.json`.
 - **Compose count**: seeds of 8 where the detector counts two or more animals.
 - **Contrast**: the standard deviation of a render's grey-level pixels (0 to 255). Reference values on the 1024 px renders, 8-seed means: joint prompt 46.4, plain PoE 40.6, baseline adapter 37.5. **Gap closed** is `(new − 37.5) / (46.4 − 37.5)`, computed from the files at verdict time.
-- **The bars** live in `scripts/showcase/experiment_e_x0_loss.py`: `DRIFT_SUPPORT = −0.121`, `DRIFT_NULL = −0.061` (the baseline ± the 0.03 margin its own grids told apart), `MIN_COMPOSE_COUNT = 6`, `CONTRAST_SUPPORT_CLOSURE = 0.5`, `CONTRAST_NULL_CLOSURE = 0.1`.
+- **The bars** live in `1-lora-correction/scripts/showcase/experiment_e_x0_loss.py`: `DRIFT_SUPPORT = −0.121`, `DRIFT_NULL = −0.061` (the baseline ± the 0.03 margin its own grids told apart), `MIN_COMPOSE_COUNT = 6`, `CONTRAST_SUPPORT_CLOSURE = 0.5`, `CONTRAST_NULL_CLOSURE = 0.1`.
 
 ## Run kind
 
@@ -109,4 +109,4 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-When the chain's log prints `readout DONE`, read `verdict.json`, fill the Runs table and the questions above, then `/sync-plan-tree plans/01-showcase-the-trained-lora/`.
+When the chain's log prints `readout DONE`, read `verdict.json`, fill the Runs table and the questions above, then `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`.

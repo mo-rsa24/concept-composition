@@ -11,7 +11,7 @@ on the pair its own LoRA never saw.
 | **11 (current)** | **this plan** | **Measures transfer rate across 15 held-out pairs** |
 | 12 | [05-the-size-matched-control-pool](../baselines/05-the-size-matched-control-pool.md) | Compares against control |
 
-The one order is in the `## Running order` table in [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md). Verdicts live in [the review file for this plan](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md).
+The one order is in the `## Running order` table in [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md). Verdicts live in [the review file for this plan](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md).
 
 ---
 
@@ -50,9 +50,9 @@ This extracts error patterns from the run transcript, deduplicates against globa
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The experiment**: Leave-one-pair-out (LOPO) cross-validation across 15 [animal pairs](../../../../context/world/animal-pair.md#what-an-animal-pair-is) from the finalised training pool.
+**The experiment**: Leave-one-pair-out (LOPO) cross-validation across 15 [animal pairs](../../../../../context/world/animal-pair.md#what-an-animal-pair-is) from the finalised training pool.
 
-**The hypothesis**: The LoRA-based correction $r_t$ transfers to pairs the model never trained on, with a [degradation curve](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md#words-this-file-uses) that shows the relationship between the held-out fraction and the [compose rate](../../../../context/world/compose-rate.md).
+**The hypothesis**: The LoRA-based correction $r_t$ transfers to pairs the model never trained on, with a [degradation curve](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md#words-this-file-uses) that shows the relationship between the held-out fraction and the [compose rate](../../../../../context/world/compose-rate.md).
 
 > Held-out: the pair a given LoRA is deliberately never trained on, kept back so that LoRA can be
 > tested on something it has genuinely never seen.
@@ -77,8 +77,8 @@ This extracts error patterns from the run transcript, deduplicates against globa
 - **Review questions**: [the review file for this plan](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md)
 - **Procedures**: (none yet; recommend creating [procedures/hypothesis-02-run-lopo-sweep.md](procedures/hypothesis-02-run-lopo-sweep.md) if manual steps emerge)
 - **Assets/outputs**: Will be saved to `outputs/interaction_term/transfer_rate/`
-  - **Figure organization**: Use [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-11 naming convention, and consolidate them into `outputs/interaction_term/transfer_rate/figures/`. This prompt generates a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
-  - **Locations scanned**: `artifacts/results/ (per-question) and report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders.
+  - **Figure organization**: Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-11 naming convention, and consolidate them into `outputs/interaction_term/transfer_rate/figures/`. This prompt generates a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
+  - **Locations scanned**: `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders.
 
 **For the full picture**: This plan serves Objective 2 (Transfer A) and Definition-of-Done item 3 of the scope. See [../MASTER_PLAN.md](../../MASTER_PLAN.md) for the full experimental context.
 
@@ -96,13 +96,13 @@ This extracts error patterns from the run transcript, deduplicates against globa
 - [Eval hook](../tools/02-three-live-curves-while-training.md#the-claim) wired (compose-rate + direction-cosine + distance-reached logging live during training)
 
 **Environment facts this plan depends on**:
-- See [environment/00-INDEX.md](../../../../environment/00-INDEX.md) for cluster facts: partitions, walltime limits, Python paths, and disk guards.
+- See [environment/00-INDEX.md](../../../../../environment/00-INDEX.md) for cluster facts: partitions, walltime limits, Python paths, and disk guards.
 - `/home-mscluster` disk has sufficient space for 15 checkpoints (~50GB total).
 - Co3 cluster partition available for GPU allocation.
 - W&B project: `prime_lab/poe-repair-animals-compose` (verify with `echo $WANDB_PROJECT`).
 - Python 3.9+ required (DINOv2 and CLIP imports depend on it).
 
-**Project tracking**: Results logged to W&B per run; leaderboard aggregated manually to `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` after all 15 complete.
+**Project tracking**: Results logged to W&B per run; leaderboard aggregated manually to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` after all 15 complete.
 
 **Known issues**: See [Error Matrix](#error-matrix) section at the bottom for a full catalog of known issues and solutions.
 
@@ -199,7 +199,7 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
    - Use wired eval hook that logs compose-rate, direction-cosine, distance-reached per step.
    - Each run trains to its step budget (e.g., 10,000 steps or convergence).
    - Runs may be parallel (if cluster allows) or sequential via Slurm array job.
-   - Store outputs in `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/run-{pair-name}/` per run.
+   - Store outputs in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/run-{pair-name}/` per run.
 
 3. **Eval each held-out pair on its LoRA**
    - After all 15 LoRAs are trained, eval each held-out pair on its corresponding LoRA.
@@ -209,7 +209,7 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
 4. **Build the leaderboard and degradation curve**
    - Leaderboard: one row per held-out pair (columns: pair name, compose y/n, distance-reached, direction-cosine, embedding space 1 score, embedding space 2 score).
    - Degradation curve: compose-rate (y-axis, 0–100%) vs fraction-of-pool-held-out (x-axis, 1/15 to 15/15), one point per pair, with error bars if multiple seeds exist.
-   - Save outputs to `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` and `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
+   - Save outputs to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json` and `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
 
 ---
 
@@ -231,9 +231,9 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
 - **`biggpu` allows one Slurm job per user**, so task 2's "Slurm array job" cannot run all 15 as
   one array on `biggpu`; either run sequentially on one allocation, or use the shared-device
   path (SSH in, pin `CUDA_VISIBLE_DEVICES`, launch with `nohup`) across whichever nodes have an
-  idle second GPU. See [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  idle second GPU. See [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - Checkpoints and eval output go to `/datasets`, per the disk guard rule in
-  [environment/storage.md](../../../../environment/storage.md), not the `outputs/` paths this
+  [environment/storage.md](../../../../../environment/storage.md), not the `outputs/` paths this
   plan's tasks still name (see the conflict flagged in task 3 and 4 below).
 
 ## Tasks
@@ -264,13 +264,13 @@ If the fix is pair-general, the curve declines smoothly. If it's pair-specific o
 
 - [ ] For each trained LoRA, load checkpoint and eval on its corresponding held-out pair.
 - [ ] Collect compose-rate (binary), direction-cosine, distance-reached from eval output.
-- [ ] Save per-pair results to `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/{pair-name}-eval.json`.
+- [ ] Save per-pair results to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/{pair-name}-eval.json`.
 
 ### 4. 📊 Build leaderboard and degradation curve
 
-- [ ] Aggregate all per-pair results into `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json`.
+- [ ] Aggregate all per-pair results into `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/leaderboard.json`.
 - [ ] Compute degradation curve: compose-rate (%) vs fraction-held-out (1/15, 2/15, ..., 15/15).
-- [ ] Generate plot and save to `artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
+- [ ] Generate plot and save to `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/transfer-rate-over-fifteen-pairs/degradation_curve.png`.
 
 ---
 
@@ -334,7 +334,7 @@ Run each `.prompt.md` file through Claude (or `/prompt-storyboard`) and save out
 3. After all 15 runs complete, pull W&B summaries for each run.
 4. Aggregate metrics into `leaderboard.json` (script or manual).
 5. Plot degradation curve using `leaderboard.json` as input.
-6. Organize all figures: Run [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo, rename figures to step-11 naming convention, move to `outputs/interaction_term/transfer_rate/figures/`, and generate [FIGURE_CATALOG.md](outputs/interaction_term/transfer_rate/FIGURE_CATALOG.md).
+6. Organize all figures: Run [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename figures to step-11 naming convention, move to `outputs/interaction_term/transfer_rate/figures/`, and generate [FIGURE_CATALOG.md](outputs/interaction_term/transfer_rate/FIGURE_CATALOG.md).
 
 ---
 
@@ -348,7 +348,7 @@ Run each `.prompt.md` file through Claude (or `/prompt-storyboard`) and save out
 
 2. **Update the Error Matrix section** (automatic): `/sync-plan-tree` reads both catalogs and regenerates the Error Matrix section of this plan file. New errors from this run are now visible in the section below.
 
-3. **Organize figures** (manual, but guided): After all 15 runs finish, W&B outputs metrics to your project. Use the [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) to scan the repo for all related figures (existing artifacts/results/ (per-question) and report/paper-evidence-index.md, outputs/, paper/ figures plus new W&B plots). The prompt renames them to the step-11 naming convention and consolidates them into `outputs/interaction_term/transfer_rate/figures/`. It generates a `FIGURE_CATALOG.md` that maps each figure to its axes, meaning, and original location.
+3. **Organize figures** (manual, but guided): After all 15 runs finish, W&B outputs metrics to your project. Use the [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo for all related figures (existing artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md, outputs/, paper/ figures plus new W&B plots). The prompt renames them to the step-11 naming convention and consolidates them into `outputs/interaction_term/transfer_rate/figures/`. It generates a `FIGURE_CATALOG.md` that maps each figure to its axes, meaning, and original location.
 
 **Why this matters**: Without orchestration, the Error Matrix section becomes stale after a run completes, and figures scatter across the repo. With it, you run two commands post-run (`/ingest-error-pattern` and the figure-coverage prompt) and everything stays current. The next time you visit this plan file, you see what actually happened, not what was planned.
 
@@ -358,7 +358,7 @@ Run each `.prompt.md` file through Claude (or `/prompt-storyboard`) and save out
 |------|---------|--------------|---------|
 | Extract errors | `/ingest-error-pattern --from-run-log` | Manual (after run) | Errors added to catalogs |
 | Update Error Matrix | `/sync-plan-tree --update-error-matrices` | Auto (by ingest-error-pattern) | This plan file's Error Matrix regenerated |
-| Organize figures | Run [figure-coverage-prompt.md](../../../diagrams/figure-coverage-prompt.md) | Manual (after run) | Figures renamed, consolidated, cataloged |
+| Organize figures | Run [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) | Manual (after run) | Figures renamed, consolidated, cataloged |
 
 ---
 
@@ -404,7 +404,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 ### From project catalog
 
-Patterns specific to poe_repair_min. See [environment/known-failures.md](../../../../environment/known-failures.md) for the full catalog.
+Patterns specific to poe_repair_min. See [environment/known-failures.md](../../../../../environment/known-failures.md) for the full catalog.
 
 (none recorded yet)
 

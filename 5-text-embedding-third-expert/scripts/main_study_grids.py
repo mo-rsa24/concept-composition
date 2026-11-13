@@ -5,7 +5,7 @@ Each grid is rows of cells against columns of methods, every tile a real render,
 starts from the same noise so a difference across a row is the method rather than the seed. A
 dotted rule marks where published methods end and this project's adapter begins.
 
-    python scripts/main_study_grids.py <tiles_dir> <co3_dir> <models_dir> <out_dir>
+    python 5-text-embedding-third-expert/scripts/main_study_grids.py <tiles_dir> <co3_dir> <models_dir> <out_dir>
 
 `tiles_dir` is the pulled `ablation_grid` tree (`<pair>/seed<NN>/<column>.png`), `co3_dir` the CO3
 renders for one prompt (`seed-<N>/<prompt>.png`), `models_dir` the four-model tree

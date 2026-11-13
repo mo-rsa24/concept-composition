@@ -33,9 +33,9 @@ Objectives
    the evaluation set from the same starting noise, and the new rows into R9 and, for SD 1.5, R5.
 
 What to read
-- report/paper-review/protocol.md: the bars for both gates and the checkpoint-choice rule.
-- report/paper-review/prze-11-early-training.md and prze-1-scores.md: the outcome lines.
-- artifacts/drips/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
+- 1-lora-correction/report/paper-review/protocol.md: the bars for both gates and the checkpoint-choice rule.
+- 1-lora-correction/report/paper-review/prze-11-early-training.md and prze-1-scores.md: the outcome lines.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
   steps.
 - environment/hpc/throughput.md: step times and the memory a rank-32 training needs.
 - The training package under poe_repair/experiments/cross_pair_lora_pooling/ and its launchers

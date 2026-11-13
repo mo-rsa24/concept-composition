@@ -19,7 +19,7 @@ catalogs, and adds new entries. New errors propagate to all affected plan files.
 ## Position in the plan tree
 
 **Step 14 of 22.** Waits on steps 11 and 12. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -84,7 +84,7 @@ The four owed figures carry short internal names. They are this plan's names onl
 figure register uses different ones.
 
 - **A2, delivery-live:** how far the correction travelled toward its target, over training steps.
-- **A3, transfer:** [compose-rate](../../../../context/world/compose-rate.md) against the fraction of
+- **A3, transfer:** [compose-rate](../../../../../context/world/compose-rate.md) against the fraction of
   pairs held out.
 - **A4, delivery against transfer:** the same x-axis with compose-rate and direction-cosine as
   twin panels, so the two axes can be seen to diverge.
@@ -107,7 +107,7 @@ from step 11 and the mixed pool from step 12.
 
 **Associated materials**
 
-- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../paper/iclr/figures.md), rows F8a, F8b, F8
+- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../../paper/iclr/figures.md), rows F8a, F8b, F8
 - The review file for the fifteen runs, which feeds A3 and A4: [transfer as a rate over fifteen pairs](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md)
 - The review file for the pool contrast, which feeds A5: [the size-matched control pool](../../review/05-the-size-matched-control-pool.md)
 - This plan's own record: [the review file for the transfer figures](../../review/06-the-transfer-figures.md)
@@ -139,7 +139,7 @@ halted, not approximated.
 **Environment Facts This Plan Depends On**
 
 - The `co3` absolute python path, because the figure scripts run outside any activated shell. See
-  [environment/hpc/nodes.md: Python environments](../../../../environment/hpc/nodes.md#python-environments).
+  [environment/hpc/nodes.md: Python environments](../../../../../environment/hpc/nodes.md#python-environments).
 - Figure outputs land in `paper/iclr/figures/` inside the repo, which is on `/home-mscluster`. This
   is the one exception to the `/datasets` rule and it is safe because a figure is kilobytes, not
   gigabytes. The run outputs these figures read stay on `/datasets`.
@@ -283,7 +283,7 @@ evidence set. F1 belongs to the compose-scorer scope, not here.
   cuda) over the unscored per-epoch tail, and task 5.2 may re-render four joint-prompt images. Both
   need a GPU session. `co3`'s absolute python path runs the scorer module and any script under
   `scripts/` invoked to regenerate a source file.
-- Figures 2.1 to 2.4 read `artifacts/results/does-the-fix-reach-unseen-pairs/`, which may span
+- Figures 2.1 to 2.4 read `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/`, which may span
   both `/home-mscluster` and `/datasets`; check `environment/storage.md` before assuming a path
   resolves on this filesystem alone.
 
@@ -298,14 +298,14 @@ evidence set. F1 belongs to the compose-scorer scope, not here.
 - [x] **1.1** F8a, one pooled adapter composes on pairs it never trained on: two panels on a
   training-step axis, the second unpooled per pair so the aggregate cannot be carried by one easy
   pair.
-  - Built by `python scripts/adapter_transfers.py`, reads the pooled run's `compose_rate.json` and
+  - Built by `python 1-lora-correction/scripts/adapter_transfers.py`, reads the pooled run's `compose_rate.json` and
     `pair_pool.json`
   - Outputs `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}`
   - Which commit built it, and whether it has been judged: the
     [review file](../../review/06-the-transfer-figures.md)
 - [x] **1.2** F8b, the shippable adapter against the joint-prompt correction it imitates: one
   horizontal dot row per pair, four markers per row.
-  - Built by `python scripts/adapter_vs_oracle_cost.py`, reads `dose_curves.json` and the pooled run's
+  - Built by `python 1-lora-correction/scripts/adapter_vs_oracle_cost.py`, reads `dose_curves.json` and the pooled run's
     `compose_rate.json`, no new runs
   - Outputs `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}`
   - Which commit built it, and whether it has been judged: the
@@ -337,13 +337,13 @@ task 5.2 renders at most four images.
 - [ ] **5.1** Close F8a's unscored tail: score epochs 1400 to 2000 (steps 70000 to 100000) and
   extend F8a, compose-rate-as-the-lora-trains, to the full run.
   - The samples already exist:
-    `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/`,
+    `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/`,
     `epoch_1400_step_070000` through `epoch_2000_step_100000`, ~305 images each. F8a's sidecar
     `scored_steps` stops at 60000.
   - Score the tail with the validated instance-count scorer, which is idempotent over what is
     already scored:
-    `$PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k --wandb`
-  - Rebuild the figure: `python scripts/adapter_transfers.py`
+    `$PY -m poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k --wandb`
+  - Rebuild the figure: `python 1-lora-correction/scripts/adapter_transfers.py`
   - Expected: the curve stays flat near 0.96, confirming saturation. If it moves late in either
     direction, the train-longer question reopens; record the outcome in the
     [review file](../../review/06-the-transfer-figures.md) either way.
@@ -385,7 +385,7 @@ them. A figure is judged by eye, and that judgment is not something a script can
    - Read only the figure and its axis labels, without the caption
    - Expected result: you can say what the figure claims in one sentence, without help
    - ✅ the sentence you say matches the row's sentence in
-     [paper/iclr/figures.md](../../../../paper/iclr/figures.md); mark verified
+     [paper/iclr/figures.md](../../../../../paper/iclr/figures.md); mark verified
    - ❌ you cannot say it, or you say something the row does not claim; the figure goes back to
      `/design-figure` rather than getting a longer caption
 
@@ -462,8 +462,8 @@ guessed.
 
 | Item | Lane | What it shows | Built by | Output | Register row |
 |------|------|---------------|----------|--------|--------------|
-| F8a one adapter transfers | — | Compose rate over training steps, trained-on against held-out, with the uncorrected PoE level; second panel unpooled per pair | `python scripts/adapter_transfers.py` | `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | F8a, **built** |
-| F8b adapter against the joint-prompt correction | — | One dot row per pair: no injection, the joint-prompt correction at two strengths, adapter at step 60000 | `python scripts/adapter_vs_oracle_cost.py` | `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | F8b, **built** |
+| F8a one adapter transfers | — | Compose rate over training steps, trained-on against held-out, with the uncorrected PoE level; second panel unpooled per pair | `python 1-lora-correction/scripts/adapter_transfers.py` | `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | F8a, **built** |
+| F8b adapter against the joint-prompt correction | — | One dot row per pair: no injection, the joint-prompt correction at two strengths, adapter at step 60000 | `python 1-lora-correction/scripts/adapter_vs_oracle_cost.py` | `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | F8b, **built** |
 
 Numbers for both live in their sidecar `.json` and in the register row, never in this plan.
 
@@ -516,7 +516,7 @@ what stops a caption drifting past its evidence.
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** [scripts/adapter_transfers.py](../../../scripts/adapter_transfers.py)
+**File:** [1-lora-correction/scripts/adapter_transfers.py](../../../scripts/adapter_transfers.py)
 **Function:** `main`
 **What it does:** reads the pooled run's `compose_rate.json` and `pair_pool.json`, draws the two
 panels, writes PNG, PDF and a sidecar JSON holding every number drawn plus its caption caps.
@@ -530,7 +530,7 @@ pool = RUN / "pair_pool.json"         # which pairs were trained on
 fig.savefig(OUT_DIR / f"{FIG_NAME}.{ext}", dpi=300)   # OUT_DIR = paper/iclr/figures
 ```
 
-**File:** [scripts/adapter_vs_oracle_cost.py](../../../scripts/adapter_vs_oracle_cost.py)
+**File:** [1-lora-correction/scripts/adapter_vs_oracle_cost.py](../../../scripts/adapter_vs_oracle_cost.py)
 **Function:** `main`
 **What it does:** reads `dose_curves.json` for the joint-prompt correction and the pooled run's
 `compose_rate.json` for the adapter, draws one dot row per pair, writes the same three outputs.

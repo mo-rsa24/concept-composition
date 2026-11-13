@@ -34,7 +34,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 LABELS = paths.resolve(paths.COMPOSE_RATE_IN_THE_FIRST_WINDOW_ACROSS_TWELVE_SEEDS) / "seed_breadth.json"
 IMAGE_ROOT = paths.resolve(paths.COMPOSE_RATE_IN_THE_FIRST_WINDOW_ACROSS_TWELVE_SEEDS) / "pairs"

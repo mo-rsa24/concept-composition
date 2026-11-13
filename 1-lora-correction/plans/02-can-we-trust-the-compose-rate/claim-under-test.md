@@ -9,7 +9,7 @@ verdict on it goes in [that plan's review file](review/01-is-this-hole-already-k
 **Half A: asking whether each concept is present cannot detect a fusion.** A metric that scores
 an image by asking, per requested concept, "is this concept in the picture?" answers yes to both
 concepts on a single fused animal. The detector is not making a mistake here. A cat-dog
-[chimera](../../context/world/chimera.md) genuinely carries cat features and dog features, so "is
+[chimera](../../../context/world/chimera.md) genuinely carries cat features and dog features, so "is
 there a cat?" and "is there a dog?" are both truthfully yes. The failing case: one creature with a cat's face on a dog's body scores as a
 successful "a cat and a dog". This covers VQA-style scoring, CLIP-similarity scoring, and
 detector-presence scoring alike, because all three ask the same question of the image.
@@ -18,7 +18,7 @@ detector-presence scoring alike, because all three ask the same question of the 
 distinct object instances returns 2 for a picture of two dogs when the prompt asked for a cat
 and a dog. The failing case: two dogs scored as a successful "a cat and a dog". Observed in our
 own data once in 30 scored successes, at `a_cat__x__a_dog` seed 10, recorded in
-`artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/02-two-of-one/`.
+`1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/02-two-of-one/`.
 
 **The joint claim.** Neither family alone measures what a person means by "it composed". The
 minimal thing that would measure it is at least one instance of each requested concept, present
@@ -28,7 +28,7 @@ as separate instances.
 
 It does not say the fix is hard, novel, or unavailable. It says the two families in common use
 each miss one of the two failure modes, and that a paper reporting a
-[compose rate](../../context/world/compose-rate.md) from either family is reporting an upper
+[compose rate](../../../context/world/compose-rate.md) from either family is reporting an upper
 bound.
 
 ## The limit that holds whatever the literature says

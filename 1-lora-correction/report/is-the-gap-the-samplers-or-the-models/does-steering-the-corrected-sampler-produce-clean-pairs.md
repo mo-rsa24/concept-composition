@@ -143,7 +143,7 @@ both on every tile of every column, including the plain-product tiles that are s
 animals, because the detector fires both labels on one chimera. The read stands on the eye, and
 the per-concept output is filed only as the evidence that it cannot be used here:
 `fk_steering_a_cat__x__a_dog_lam0.5_sheet_identity.json` in the run directory, written by
-`scripts/fk_steering/identity_check.py`. Mark: verified, read 2026-09-07.
+`1-lora-correction/scripts/fk_steering/identity_check.py`. Mark: verified, read 2026-09-07.
 
 ## What this cannot tell you
 
@@ -177,10 +177,10 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The compose rates, the fidelity means, the agreement and resample counts | `summary.json` and `verdict.json` in the run directory above, read 2026-09-07 | verified |
 | The three sheets and their sidecars | the same run, `fk_steering_*_sheet.png`; copied into [the results folder](../../artifacts/results/is-the-gap-the-samplers-or-the-models/README.md) | verified |
 | The eye read of identity | five steered tiles opened at full resolution, 2026-09-07 | stated |
-| The per-concept detector pass | `scripts/fk_steering/identity_check.py` on mscluster85 device 0, 2026-09-07 | verified |
+| The per-concept detector pass | `1-lora-correction/scripts/fk_steering/identity_check.py` on mscluster85 device 0, 2026-09-07 | verified |
 | The run | task **2.1** in [the plan](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/13-feynman-kac-steering-on-top-of-the-rank-32-correction.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/13-feynman-kac-steering-on-top-of-the-rank-32-correction.md#runs); W&B `prime_lab/poe-repair-animals-compose/runs/dfrceppl`, Slurm job 50332 | verified |
-| The method | Singhal et al., [arXiv 2501.06848](https://arxiv.org/abs/2501.06848), registered in [the reading register](../../plans/standing/literature/reading-register.md) | verified |
-| Regenerate with | `sbatch --nodelist=<idle bigbatch node> scripts/fk_steering/fk_steering.sbatch adapter`; no runbook recipe yet | |
+| The method | Singhal et al., [arXiv 2501.06848](https://arxiv.org/abs/2501.06848), registered in [the reading register](../../../plans/standing/literature/reading-register.md) | verified |
+| Regenerate with | `sbatch --nodelist=<idle bigbatch node> 1-lora-correction/scripts/fk_steering/fk_steering.sbatch adapter`; no runbook recipe yet | |
 
 ## Depends on
 
@@ -189,11 +189,11 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - The same steering over the plain product, which found nothing to select:
   [does steering on the scorer find a composing proposal](does-steering-on-the-scorer-find-a-composing-proposal.md)
 - What the correction is and which checkpoint this one is:
-  [context: the LoRA corrector](../../context/world/lora-corrector.md)
-- What the count can and cannot tell you: [context: compose rate](../../context/world/compose-rate.md)
+  [context: the LoRA corrector](../../../context/world/lora-corrector.md)
+- What the count can and cannot tell you: [context: compose rate](../../../context/world/compose-rate.md)
 - Which dose the adapter alone composes at:
-  [which checkpoint composes best](../does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)
-- The node and environment the run needed: [environment: nodes](../../environment/hpc/nodes.md)
+  [which checkpoint composes best](../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md)
+- The node and environment the run needed: [environment: nodes](../../../environment/hpc/nodes.md)
 
 ## Still open
 

@@ -22,11 +22,11 @@ nondeterminism compounds through the sampler, drifting the trajectory 0.24% by
 step 10, 0.93% by step 20 and 17.1% at step 49. So the leftmost point is the
 ceiling this comparison can reach, and every other point is read against it.
 
-Numbers come from `scripts/rt_noise_interpolation.py`, which walks each
+Numbers come from `1-lora-correction/scripts/rt_noise_interpolation.py`, which walks each
 interpolated start with run_teacher_residual at lambda 0 and saves the
 per-step correction. This script only draws them.
 
-    python scripts/direction_agreement_as_noise_is_moved.py
+    python 1-lora-correction/scripts/direction_agreement_as_noise_is_moved.py
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 SRC = paths.resolve(paths.DIRECTION_WALL) / "noise_interpolation.json"
 OUT_DIR = Path("paper/iclr/figures")
@@ -54,7 +54,7 @@ def main() -> int:
     if not SRC.exists():
         raise SystemExit(
             f"no measurements at {SRC}. Produce them first:\n"
-            "  CUDA_VISIBLE_DEVICES=0 python scripts/rt_noise_interpolation.py")
+            "  CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_noise_interpolation.py")
     d = json.loads(SRC.read_text())
     rows = d["rows"]
     x = np.array([r["fraction"] for r in rows])

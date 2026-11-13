@@ -9,7 +9,7 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 5 of the composition ladder wrote.
 
 Background
-Layer 5 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 5 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its build walk wrote new files. Those files should link to the vault notes, journey
 plans and idea maps that teach the same ideas, and those should link back, so the next reader finds
 both.
@@ -20,7 +20,7 @@ Objectives
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- The Study first line of artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md,
+- The Study first line of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md,
   which names the reference sets in the next three entries.
 - The vault notes When Neither Training Set Holds A And B, What An Expert Learns From Its Training
   Set and Composing Models With A Background under ~/Obsidian/Artificial Intelligence/Generative
@@ -30,8 +30,8 @@ What to read
 - Plan 33-a-mixture-needs-heights.md of the journey
   ~/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/.
 - The layer 5 rows of the Bricks table ("Overlap dial" and "Fine-tune variant") in
-  artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md.
-- Claims 2 and 4 of artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, which this layer rests on.
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md.
+- Claims 2 and 4 of 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, which this layer rests on.
 - Claims 2 (with 2a to 2c), 3 and 5 and runs 1 and 2 of
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, which this layer rests on.
 

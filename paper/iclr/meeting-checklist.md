@@ -183,6 +183,6 @@ Navigation: ⬅️ [Previous](#5-experiments-they-want-to-see) | 📋 [TOC](#tab
 
 Navigation: ⬅️ [Previous](#6-timeline-and-process) | 📋 [TOC](#table-of-contents) | [Top](#position-in-the-paper-work) ⬆️
 
-- Richard's earn-the-name test is the parked [earn-the-plurality-name walk](../../artifacts/ideas/earn-the-plurality-name/IDEA_MAP.md), resuming at the PoE combination-rule check.
+- Richard's earn-the-name test is the parked [earn-the-plurality-name walk](../../3-understanding-compositionality/artifacts/ideas/earn-the-plurality-name/IDEA_MAP.md), resuming at the PoE combination-rule check.
 - The plurality renames from this meeting are enacted in [the tex](iclr2027_conference.tex), tracked by [the supervisor-structure merge walk](../../artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md).
 - Three candidate abstracts exist: [candidate 1](abstract_candidate_01.tex), [candidate 2](abstract_candidate_02.tex), [candidate 3](abstract_candidate_03.tex).

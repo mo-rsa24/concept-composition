@@ -15,8 +15,8 @@ Frames are written at 512px, which is what the inspector shows; the full-size
 image beside them is the one that was scored.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=0 python scripts/decode_trajectory_frames.py --root cross
-    CUDA_VISIBLE_DEVICES=0 python scripts/decode_trajectory_frames.py \
+    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/decode_trajectory_frames.py --root cross
+    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/decode_trajectory_frames.py \
         --root cross --cells 'a_cat__x__a_dog/seed_9/call__r*' --all-steps
 """
 
@@ -31,7 +31,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 OUT_ROOT = paths.resolve(paths.INTERACTION_TERM_ROOT)

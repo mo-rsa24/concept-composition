@@ -60,7 +60,7 @@
 - **Sharpness**: Laplacian variance of the greyscale render, the function plan 07 and plan 14 used. It counts edges, so a line drawing outranks a photograph; the judged read is therefore **paired per seed** (searched against control on the same seed) rather than a band, because the sketch seeds (11, 14, 15) make any band useless.
 - **Both-ness** and **which-animal**: a render's DINOv2 embedding projected onto the landing finding's two axes: from the cat-alone centroid to the dog-alone centroid (x), and from their midpoint toward the "a cat and a dog" centroid (y). Cat × dog only.
 - **Distance to Mono**: one minus the cosine between a render's DINOv2 embedding and the seed's joint-prompt render's. Lower is nearer the image the joint prompt paints.
-- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../context/world/compose-rate.md)). On the control pair the rule cannot apply (a meadow is not an animal); the control read is whether a butterfly box is present at confidence 0.30 or more.
+- **Compose count**: seeds of 8 where the validated detector counts at least two animal instances ([compose rate](../../../../../context/world/compose-rate.md)). On the control pair the rule cannot apply (a meadow is not an animal); the control read is whether a butterfly box is present at confidence 0.30 or more.
 
 ---
 
@@ -112,8 +112,8 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The launch order: an allocated node, then an idle `biggpu` node, then a shared `biggpu` device over SSH with `nohup`, then `bigbatch` through `sbatch` ([execution protocol](../../../../environment/hpc/execution-protocol.md)). On 2026-09-06 every `biggpu` device carried a process, so this plan's runs went to `bigbatch` RTX 3090 nodes by `sbatch --nodelist`.
-- `bigbatch` nodes that read idle with a faulted GPU: mscluster44, 45, 50, 51, 65 ([nodes](../../../../environment/hpc/nodes.md), `poe-launch-002`). Nodes 52, 53, 54 and 60 passed plan 11's smoke; name one of those.
+- The launch order: an allocated node, then an idle `biggpu` node, then a shared `biggpu` device over SSH with `nohup`, then `bigbatch` through `sbatch` ([execution protocol](../../../../../environment/hpc/execution-protocol.md)). On 2026-09-06 every `biggpu` device carried a process, so this plan's runs went to `bigbatch` RTX 3090 nodes by `sbatch --nodelist`.
+- `bigbatch` nodes that read idle with a faulted GPU: mscluster44, 45, 50, 51, 65 ([nodes](../../../../../environment/hpc/nodes.md), `poe-launch-002`). Nodes 52, 53, 54 and 60 passed plan 11's smoke; name one of those.
 - `co3` python on the RTX 3090, RTX 8000 and A6000 nodes; `co3_bw` on 110 to 112. The launcher picks by hostname.
 - The launcher's guards run inside the job: disk at or over 90% aborts, a device with a foreign running process is refused, a device reading `[N/A]` is refused, `torch.cuda.is_available()` is asserted after pinning.
 - Outputs on `/datasets` only.
@@ -176,7 +176,7 @@ Every condition starts from the seed's cached initial noise, guidance 7.5, 1024 
 
 1. **The sampler and the search** (`poe_repair/experiments/noise_trajectory_search/search.py`): one trajectory of the corrected sampler at any eta; with a reward, the greedy search at every step in `SEARCH_STEPS`; the running estimates saved at `FRAME_STEPS`; every constant the review file judges against; the verdict rules in source.
 2. **The runner** (`poe_repair/experiments/noise_trajectory_search/run.py`): the five conditions per pair and seed, scored (instance count and per-query confidences, ImageReward, sharpness, both-ness, distance to Mono), the running estimates embedded and projected, `cell.json` per seed so a killed job resumes, then per pair the sheet, the three-column strip, four figures, `summary_<pair>.json`, and `summary.json` and `verdict.json` at the end; W&B images, scalars, a per-step table and an artifact.
-3. **The launcher** (`scripts/noise_trajectory_search/run_noise_trajectory_search.sh`) with the shared-device guards, and its Slurm wrapper (`noise_trajectory_search.sbatch`) for the `bigbatch` fallback.
+3. **The launcher** (`1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh`) with the shared-device guards, and its Slurm wrapper (`noise_trajectory_search.sbatch`) for the `bigbatch` fallback.
 
 ---
 
@@ -212,7 +212,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 ◀ **Needs:** a node chosen per the launch order above.
 
 - [x] **1.1 Run the smoke mode** (cat × dog seed 9, 10 steps, 512², search at steps 2 to 5, one round of 2).
-  - Command: `sbatch --nodelist=mscluster53 scripts/noise_trajectory_search/noise_trajectory_search.sbatch smoke`, or over SSH `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/noise_trajectory_search/run_noise_trajectory_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/smoke.log 2>&1 &'`
+  - Command: `sbatch --nodelist=mscluster53 1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch smoke`, or over SSH `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/smoke.log 2>&1 &'`
   - Done when: the run directory holds five PNGs for seed 9, `search_eta1/run.json` with four searched steps, and the sheet, strip and figures draw without error.
 
 ▶ **Next: [task 2.1](#2--render-score-and-draw-the-full-run)**.
@@ -222,7 +222,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 ◀ **Needs: [task 1.1](#1--smoke-the-search-on-one-seed)** passed.
 
 - [x] **2.1 Launch the full run** on both pairs, seeds 9 to 16.
-  - Command: `sbatch --nodelist=<mscluster52|53|54|60> scripts/noise_trajectory_search/noise_trajectory_search.sbatch full`
+  - Command: `sbatch --nodelist=<mscluster52|53|54|60> 1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch full`
   - Record node, job id, PID and the W&B run id in the review file's Runs table.
   - Done when: `verdict.json` exists under the run directory and the log ends with `[done]`.
 - [x] **2.2 Harvest.** On the launch node: `grep -E "seed [0-9]+ done|verdict|Traceback" logs/nts-<job>.out`; count `cell.json` files (16 expected).
@@ -302,7 +302,7 @@ Every figure below lands in `artifacts/results/does-searching-the-noise-in-the-c
 ◀ **Needs: [instruction 5.2](#5--judge-the-sheet)** done.
 
 - [ ] **6.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **6.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **6.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [05-assemble-the-showcase-figures](../figures/05-assemble-the-showcase-figures.md)**, which takes a supported cell as a wall row.
 
@@ -312,7 +312,7 @@ Every figure below lands in `artifacts/results/does-searching-the-noise-in-the-c
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**Files:** `poe_repair/experiments/noise_trajectory_search/search.py` (the sampler, the search, the constants, the verdict rules), `poe_repair/experiments/noise_trajectory_search/run.py` (the runner, scoring, sheets, figures, W&B), `scripts/noise_trajectory_search/run_noise_trajectory_search.sh` (the guarded launcher), `scripts/noise_trajectory_search/noise_trajectory_search.sbatch` (the Slurm wrapper).
+**Files:** `poe_repair/experiments/noise_trajectory_search/search.py` (the sampler, the search, the constants, the verdict rules), `poe_repair/experiments/noise_trajectory_search/run.py` (the runner, scoring, sheets, figures, W&B), `1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh` (the guarded launcher), `1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch` (the Slurm wrapper).
 
 **Reused:** the corrected three-branch forward and adapter attach from `poe_repair/experiments/fk_steering/` (plans 10 and 11), the DDIM step coefficients and Mono sampler from `poe_repair/experiments/twisted_smc/sampler.py`, the instance-count scorer, `DinoEmbedder`, the landing finding's saved features, ImageReward as plan 11 wired it.
 
@@ -323,7 +323,7 @@ Every figure below lands in `artifacts/results/does-searching-the-noise-in-the-c
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/16-search-the-noise-in-the-commit-window.md — smoke first, then the full run on one node, then file the evidence
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/16-search-the-noise-in-the-commit-window.md — smoke first, then the full run on one node, then file the evidence
 ```
 
 ---
@@ -342,7 +342,7 @@ Every figure below lands in `artifacts/results/does-searching-the-noise-in-the-c
 
 ### From project catalog
 
-From [environment/known-failures.md](../../../../environment/known-failures.md):
+From [environment/known-failures.md](../../../../../environment/known-failures.md):
 
 - **poe-lora-003**: every compared condition runs through the identical sampler, differing only in eta and in the draws chosen inside the window. Mono is a reference column, never a compared cell.
 - **poe-lora-004**: the sampler carries `@torch.no_grad()`.

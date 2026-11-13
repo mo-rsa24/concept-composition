@@ -19,8 +19,8 @@ in the corner is checkable against the picture rather than asserted.
 
 Needs a GPU: every panel is scored live.
 
-    python scripts/overcorrection_grid.py
-    python scripts/overcorrection_grid.py --seed 12
+    python 1-lora-correction/scripts/overcorrection_grid.py
+    python 1-lora-correction/scripts/overcorrection_grid.py --seed 12
 """
 
 from __future__ import annotations
@@ -84,7 +84,7 @@ def main() -> int:
     if not contract.get("pass"):
         raise SystemExit(f"scorer at {SCORER_CONTRACT} is not marked validated: refusing.")
 
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
     from poe_repair.experiments.compose_scorer_validation.detection_scorer import count_instances
 
     panels = {}

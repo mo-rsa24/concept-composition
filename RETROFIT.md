@@ -42,8 +42,8 @@ Instruction 5's manual deletion. `git rm --cached` only; bytes still on disk, un
 | `docs/` (8 files, 3 subfolders) | decommission into 12-kind mapping | `report/`, root, `artifacts/results/*`, `artifacts/scenes/`, `artifacts/_quarantine/`, `plans/standing/literature/` | applied; 1 file held (`IMMERSE_PoE_Foundations.md`, needs `--paired`) |
 | `evidence/`, `show-me/`, `captures/`, `diagrams/`, `flow-map-images/` | file each item by what it measures | `artifacts/results/*`, `artifacts/notes/*` | applied |
 | `inventory/`, `learning-captures/`, `todoist-staging/` | pile 7's verdict | scope-local, `artifacts/_quarantine/` | applied |
-| `dl-scene/`, `pressure-tests/` | scene/note homes, source headers | `artifacts/notes/interaction-term-as-pmi-gradient/` | applied; `dl-scene/`'s build output held |
-| two orphaned root PNGs | question folders named for what they measure | `artifacts/results/when-the-correction-must-arrive/commitment-step/`, `artifacts/results/does-text-alone-predict-composition/` | applied |
+| `dl-scene/`, `pressure-tests/` | scene/note homes, source headers | `3-understanding-compositionality/artifacts/notes/interaction-term-as-pmi-gradient/` | applied; `dl-scene/`'s build output held |
+| two orphaned root PNGs | question folders named for what they measure | `1-lora-correction/artifacts/results/when-the-correction-must-arrive/commitment-step/`, `5-text-embedding-third-expert/artifacts/results/does-text-alone-predict-composition/` | applied |
 | pre-existing staleness found along the way: `evidence/f2-lambda1-audit/` referrers, 8 cluster-launch scripts hardcoding `outputs/animals_compose_transfer/` | referrer repair | (no move; path-string fixes only) | applied |
 
 ### Outstanding
@@ -123,13 +123,13 @@ is invented.
 |---|---|---|---|
 | `artifacts/rung1-overfit/lora/` | `artifacts/results/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/` | `rung1` is a private label; `lora` names the technique, not what varied | the folder holds one pair, one seed |
 | `artifacts/rung2-survive-noise/cross_seed/` | `artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds/` | says the same thing twice, once in words that mean nothing | the level below already carried the axis |
-| `outputs/group_a_failure/` | `artifacts/results/residual-dynamics/correction-outside-the-unet/` | `group_a` is a private label and `failure` states the claim | `docs/results-archive/group-a-failure.md`: "a standalone network... SDXL frozen end-to-end" |
-| `outputs/animals_compose_transfer/` | `artifacts/results/does-the-fix-reach-unseen-pairs/` | names the mechanism, not the question | `fail_rate.md`: 16 animal pairs with train, control and reference roles |
-| `outputs/residual_diagnostics/` | `artifacts/results/residual-dynamics/residual-between-mono-and-poe/` | "diagnostics" of what, against what | `docs/results-archive/residual-diagnostics.md`: "r_t = ε̃_Mono − ε̃_PoE" |
-| `outputs/conditioning_window/` | `artifacts/results/when-the-correction-must-arrive/cfg-window-without-lora/` | collides with `interaction_term/window`, and nothing says which is the baseline | `docs/results-archive/conditioning-window.md`: "the no-LoRA baseline" |
-| `outputs/conditioning_window_lora/` | `artifacts/results/when-the-correction-must-arrive/cfg-window-with-lora/` | same collision, other half | its paired half |
+| `outputs/group_a_failure/` | `1-lora-correction/artifacts/results/residual-dynamics/correction-outside-the-unet/` | `group_a` is a private label and `failure` states the claim | `docs/results-archive/group-a-failure.md`: "a standalone network... SDXL frozen end-to-end" |
+| `outputs/animals_compose_transfer/` | `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/` | names the mechanism, not the question | `fail_rate.md`: 16 animal pairs with train, control and reference roles |
+| `outputs/residual_diagnostics/` | `1-lora-correction/artifacts/results/residual-dynamics/residual-between-mono-and-poe/` | "diagnostics" of what, against what | `docs/results-archive/residual-diagnostics.md`: "r_t = ε̃_Mono − ε̃_PoE" |
+| `outputs/conditioning_window/` | `1-lora-correction/artifacts/results/when-the-correction-must-arrive/cfg-window-without-lora/` | collides with `interaction_term/window`, and nothing says which is the baseline | `docs/results-archive/conditioning-window.md`: "the no-LoRA baseline" |
+| `outputs/conditioning_window_lora/` | `1-lora-correction/artifacts/results/when-the-correction-must-arrive/cfg-window-with-lora/` | same collision, other half | its paired half |
 | `outputs/poe/` | `artifacts/results/poe-blends-instead-of-composing/poe-baseline-samples/` | three letters that could mean the whole project | `outputs/INDEX.md`: "λ=0 exemplars for F1" |
-| `outputs/compose_scorer/` | `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/` | reads as the scorer's code, not its evidence | `outputs/INDEX.md`: "the contract `scorer_validated.json`" |
+| `outputs/compose_scorer/` | `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/` | reads as the scorer's code, not its evidence | `outputs/INDEX.md`: "the contract `scorer_validated.json`" |
 
 **On the mount, seven more names are owed and four are already fine.**
 

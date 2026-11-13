@@ -65,7 +65,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [x] 🟡 **Does any cell keep the compose count within one seed of the full-window run and return its mean sharpness to the plain-PoE band, on cat × dog?**
-      The bar, in source as `SUPPORT_MAX_COMPOSE_LOSS = 1` and the band rule in `verdict_for_cell` of `scripts/showcase/correct_early_then_clean_up.py`:
+      The bar, in source as `SUPPORT_MAX_COMPOSE_LOSS = 1` and the band rule in `verdict_for_cell` of `1-lora-correction/scripts/showcase/correct_early_then_clean_up.py`:
       **support** if `compose_n(cell) ≥ compose_n(full window) − 1` and `sharpness_mean(cell) ≥ plain band lower edge`;
       **null** if `compose_n(cell) ≤ compose_n(full window) − 2` (the animals go with the correction) or `sharpness_mean(cell) ≤ sharpness_mean(full window)` (nothing gained);
       **inconclusive** otherwise (the animals stay, sharpness moves up, and does not reach the band).
@@ -122,7 +122,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 |---|---|---|
 | the refiner cell: the SDXL refiner is not on this cluster's Hugging Face cache and is not downloaded here | a deliberate download to `/datasets` and one cell | nothing; the base-tail cells answer the question without it |
 | the premise gate: Laplacian variance counts edges, so three sketch-style seeds (11, 14, 15) set a plain band floor of 12.3 and a mean of 152.2, and the rule can never fire on this pair | a sharpness measure that separates blur from drawn line density, or a paired per-seed bar written before the next run | any future fidelity bar on cat × dog, including the corrector and clean-tail finding's 10% band |
-| no finding file: this result is not in `report/` | the finding written into `report/is-the-gap-the-samplers-or-the-models/`, beside the corrector and clean-tail finding whose `Still open` names this plan | a reader asking whether an early-only schedule was tried |
+| no finding file: this result is not in `report/` | the finding written into `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/`, beside the corrector and clean-tail finding whose `Still open` names this plan | a reader asking whether an early-only schedule was tried |
 
 ## Next step
 

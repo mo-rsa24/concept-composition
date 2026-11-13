@@ -39,15 +39,15 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 **Two animal names, joined into one prompt pair, chosen so that PoE composition reliably fails on
 them.** ✅
 
-`report/experiments-log.md`'s selection warning states this plainly: pairs entered the current pool "by
+`1-lora-correction/report/experiments-log.md`'s selection warning states this plainly: pairs entered the current pool "by
 failing" under plain PoE (8 seeds each, instance-count scorer). 15 of 17 pairs in
-`artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` fail on all 8 seeds; the two least-reliable
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` fail on all 8 seeds; the two least-reliable
 failures are `a_donkey__x__a_pony` (6/8) and `a_crocodile__x__an_alligator` (5/8). ✅
 
 **The pool is deliberately biased toward failure, which the project's own documents flag as a
 scoping limit, not an oversight.** ✅
 
-`report/experiments-log.md`: "No analysis inside this pool can say what predicts PoE failure, because the
+`1-lora-correction/report/experiments-log.md`: "No analysis inside this pool can say what predicts PoE failure, because the
 pool has no successes to contrast against. Any such analysis is conditioned on the outcome." A
 follow-on experiment (EXP-02, status pending as of this build) is designed to build a second pool
 spanning both successes and failures. ✅
@@ -95,8 +95,8 @@ Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) |
 
 **The pair count is not settled across the repo's own documents.** ⚠️
 
-`report/experiments-log.md` (its axes table) says "17 in the current pool, plus a new spread set built in
-EXP-02" (EXP-02 status: pending). `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` lists exactly 17
+`1-lora-correction/report/experiments-log.md` (its axes table) says "17 in the current pool, plus a new spread set built in
+EXP-02" (EXP-02 status: pending). `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` lists exactly 17
 pairs (1 dissimilar control, 1 reference, 15 train). `plans/standing/retrofit-poe-repair-min.md`'s "Words
 this uses" instead names "the 20 animal pairs" as the current scope boundary, plus 7 non-animal
 pairs from an earlier era that stay on disk but are out of the live claim. This file cannot tell
@@ -117,16 +117,16 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 | What | How it was established | When |
 |---|---|---|
-| The pool is biased toward failure by construction | Read in `report/experiments-log.md`, "The selection warning" | 2026-08-24 |
-| The 17-row fail-rate table | Read in `artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
+| The pool is biased toward failure by construction | Read in `1-lora-correction/report/experiments-log.md`, "The selection warning" | 2026-08-24 |
+| The 17-row fail-rate table | Read in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
 | The butterfly control pair and the animal-pair boundary | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
 | The six-group taxonomy and its representative pairs | Read in `artifacts/plans/archived/phases/09-lora-taxonomy-single-seed.md` | 2026-08-24 |
 | Pair vs seed, which is the harder test | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
 
 ## Cross-references
 
-- The mention of **the pair that composes by default** (a butterfly and a flower meadow, used as the control a corrector must not break) in [does a corrector alone produce two animals](../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md) (relevance match).
-- The mention of **animal pairs** (the 11 look-alike pairs behind `00`'s five runs, read as history rather than as a comparison) in [designing the correction loss](../../plans/09-designing-the-correction-loss/MASTER_PLAN.md) (exact match).
+- The mention of **the pair that composes by default** (a butterfly and a flower meadow, used as the control a corrector must not break) in [does a corrector alone produce two animals](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md) (relevance match).
+- The mention of **animal pairs** (the 11 look-alike pairs behind `00`'s five runs, read as history rather than as a comparison) in [designing the correction loss](../../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) (exact match).
 - The mention of **animal pairs** (the 11 look-alike pairs of the original 88-run training pool, whose adapters never draw a person into the picture) in [the known failure "a pooled adapter draws a person into a picture of two animals"](../../environment/known-failures.md#entry-id-poe-lora-005) (exact match).
-- The mention of **animal pairs** (the 15 pairs each held out in turn, one LoRA trained without each) in [the plan measuring transfer as a rate over fifteen held-out pairs](../../plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md#quick-context-where-you-are) (exact match).
-- The mention of **seed** (same pair and same seed across every corrector count) in [the whole corrector design](../../plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#the-claim).
+- The mention of **animal pairs** (the 15 pairs each held out in turn, one LoRA trained without each) in [the plan measuring transfer as a rate over fifteen held-out pairs](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md#quick-context-where-you-are) (exact match).
+- The mention of **seed** (same pair and same seed across every corrector count) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#the-claim).

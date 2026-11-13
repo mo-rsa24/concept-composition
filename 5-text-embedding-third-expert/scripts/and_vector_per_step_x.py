@@ -23,7 +23,7 @@ Two modes, and the pair of them is the measurement:
 
 The gap between the two is how much of the failure is state dependence rather than expressiveness.
 
-    python scripts/and_vector_per_step_x.py --mode per-step --seeds 2 6 --iters 50
+    python 5-text-embedding-third-expert/scripts/and_vector_per_step_x.py --mode per-step --seeds 2 6 --iters 50
 
 Writes <out>/per-step-x-<mode>-seedNN.json (the relative error at every step, before and after
 optimisation, beside the same number for the best existing third expert) and the rendered tile.
@@ -36,7 +36,7 @@ import os
 import sys
 from pathlib import Path
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -58,7 +58,7 @@ def main() -> int:
     ap.add_argument("--mode", choices=("per-step", "constant"), default="per-step")
     ap.add_argument("--iters", type=int, default=50)
     ap.add_argument("--lr", type=float, default=0.05)
-    ap.add_argument("--out", type=Path, default=REPO / "artifacts/results/the-positional-and-vector")
+    ap.add_argument("--out", type=Path, default=REPO / "5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition")
     args = ap.parse_args()
 
     import torch

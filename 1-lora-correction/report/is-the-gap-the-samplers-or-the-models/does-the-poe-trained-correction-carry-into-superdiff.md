@@ -77,16 +77,16 @@ finding's question.
 
 | What | Source | Mark |
 |---|---|---|
-| The cosine and norm profiles | the `transfer_diag` sidecar named above, read 2026-09-05 by `scripts/superdiff/report_figures.py` | verified |
+| The cosine and norm profiles | the `transfer_diag` sidecar named above, read 2026-09-05 by `1-lora-correction/scripts/superdiff/report_figures.py` | verified |
 | The first-separating λ on 12 seeds | three sheets under `paper/iclr/figures/how-much-is-added/across-composition-rules/`, eye read 2026-09-03 and recorded in the review file | stated |
 | The sha and attach counts | review file run table, 2026-09-03 | inferred |
 | The runs | attach and inertness checks in session on mscluster109 device 1; the transfer set by `nohup` on mscluster109 device 1, 49 cells at about 121 s each before the stop; the cosine cell on mscluster109 device 0; all 2026-09-03 | verified |
-| Regenerate with | [runbook § inject a PoE adapter into SuperDiff](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) | |
+| Regenerate with | [runbook § inject a PoE adapter into SuperDiff](../../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) | |
 | The plan | [does the PoE-trained correction reach SuperDiff](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/07-does-the-poe-trained-correction-reach-superdiff.md), root step 49 | |
 
 ## Depends on
 
-- The injection grammar `ε(off) + λ · (ε(on) − ε(off))` on every step, shared with the PoE-side dose sweep: [context index](../../context/00-INDEX.md)
+- The injection grammar `ε(off) + λ · (ε(on) − ε(off))` on every step, shared with the PoE-side dose sweep: [context index](../../../context/00-INDEX.md)
 - Which PoE adapters these are (pooled rank 8, 16, 32 under `outputs/showcase/phase1_r*`): [the pooled-adapter finding](../does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md)
 
 ## Still open

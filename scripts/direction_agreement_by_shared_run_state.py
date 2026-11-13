@@ -50,7 +50,7 @@ SEEDS = (9, 10, 11, 12, 13)
 OUT_DIR = Path("paper/iclr/figures")
 FIG_NAME = "direction-agreement-by-what-the-two-runs-share"
 EARLY, LATE = "#1f77b4", "#d62728"
-# From scripts/rt_noise_interpolation.py's zero-distance run, which reruns one
+# From 1-lora-correction/scripts/rt_noise_interpolation.py's zero-distance run, which reruns one
 # cell from its own starting noise and compares against the cache.
 CEILING = {"early": 0.996, "late": 0.427}
 

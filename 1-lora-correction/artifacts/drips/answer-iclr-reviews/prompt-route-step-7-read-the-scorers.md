@@ -30,11 +30,11 @@ What to read
 - arXiv 2307.06350 (T2I-CompBench++), the BLIP-VQA description.
 - The ImageReward and GenEval papers, once their ids are confirmed.
 - composition/focus/eval_metrics.py: CLIP, EVA-CLIP and ImageReward scorers already written here.
-- report/paper-review/protocol.md and held-out-set.md, once steps 2 and 4 have left them.
+- 1-lora-correction/report/paper-review/protocol.md and held-out-set.md, once steps 2 and 4 have left them.
 - The step 4 census pictures under /datasets/mmolefe/poe_repair_min/outputs/review_step4/census/
   (joint prompt and product, 53 held-out pairs, seeds 9 to 16; read them with scripts/cluster.sh sh
   or pull a few with scripts/cluster.sh pull): the source of the two small-object images.
-- report/paper-review/layout-sheet.md, rows R1 and R14: which scores each table carries.
+- 1-lora-correction/report/paper-review/layout-sheet.md, rows R1 and R14: which scores each table carries.
 
 What is already known
 - CO3 scores the Chefer et al. prompt sets animals, animals-objects and objects with BLIP-VQA and
@@ -54,7 +54,7 @@ What is already known
 When something is missing
 - If an arXiv id cannot be resolved, show the candidate titles and ask the user to confirm one.
 - If no small-object pair is in the census, use two tiles from
-  artifacts/results/four-pairs-one-adapter/tiles/ (tent and snowy mountain, lighthouse and stormy
+  1-lora-correction/artifacts/results/does-one-adapter-compose-four-pairs/tiles/ (tent and snowy mountain, lighthouse and stormy
   sea) and say so.
 - If a scorer cannot run on this machine, say which and run it on the cluster after the user says
   yes.
@@ -65,9 +65,9 @@ Rules
 - Do not copy a published number into our results; cite it as context only.
 
 What to hand back
-- artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
+- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
 - A vault note written by the walk's own close, in the Obsidian vault.
-- A line added to report/paper-review/prze-1-scores.md linking the table.
+- A line added to 1-lora-correction/report/paper-review/prze-1-scores.md linking the table.
 - Proof: the table has a row for every metric, and each blind spot cites the image that showed it.
 
 What you will see

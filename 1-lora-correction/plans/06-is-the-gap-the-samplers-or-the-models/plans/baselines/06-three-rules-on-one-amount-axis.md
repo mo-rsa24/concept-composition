@@ -20,7 +20,7 @@ running alone to the joint prediction exactly?
 ## Position in the plan tree
 
 **Step 29 of 30.** Waits on steps 25 and 28. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -100,7 +100,7 @@ four rows by five columns, `λ ∈ {0, 0.25, 0.5, 0.75, 1}` at seed 9. Thirty-si
 
 **Associated materials.** [The review questions](../../review/06-three-rules-on-one-amount-axis.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md), and
-[F5, the existing one-dial figure](../../../../paper/iclr/figures/F5-one-dial-three-instruments.png)
+[F5, the existing one-dial figure](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png)
 whose `λ=0.75` this grid reuses.
 
 ## Considerations
@@ -226,7 +226,7 @@ something beyond combining scores.
    `r_t^M = eps_J - eps_M`. Four rows: plain product-of-experts with `r_t`, SuperDiff with
    `r_t^SD`, the corrector at `k=1` with `r_t^(1)`, and the corrector at `k=5` with `r_t^(5)`.
 2. **Grid one.** Columns are seeds 9 to 12, `λ` fixed at 0.75, the value
-   [F5](../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at. Render the
+   [F5](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at. Render the
    same grid at `λ=0` in the same pass, which gives the methods-alone figure for free.
 
    <a href="../../../../paper/iclr/figures/F5-one-dial-three-instruments.png"><img src="../../../../paper/iclr/figures/F5-one-dial-three-instruments.png" width="200" alt="Three panels against λ from 0 to 1 for the pair's own r_t, another pair's r_t and a random vector of the same size: position in image space from PoE to Mono, the share called two animals, and agreement with the step"></a>
@@ -262,18 +262,18 @@ the pictures no rule can reach at `λ=1` are labelled rather than left looking l
 - Renders write under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/dose_across_rules/`, with a
   disk guard on `/datasets`, the filesystem actually written to, per
-  [environment/storage.md](../../../../environment/storage.md). Only the finished figures and their
+  [environment/storage.md](../../../../../environment/storage.md). Only the finished figures and their
   sidecars go into the repo.
 - biggpu allows one job per user, so the two grids run under `nohup` outside Slurm and `squeue` is
   blind to them. Harvest by `pgrep` on the session node, per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - **The cached trajectories cannot be used.** SuperDiff and both corrector rows follow their own
   paths.
 - The models run in fp16, and every norm (including `‖r_t^M‖` for the row labels) upcasts to fp32
   before it is taken.
 - SDXL base, DDIM, 50 steps, guidance 7.5, latents 4×128×128 at 1024².
 - No system LaTeX here, so figure PDFs come from matplotlib, per
-  [environment/paper.md](../../../../environment/paper.md).
+  [environment/paper.md](../../../../../environment/paper.md).
 
 ## Tasks
 
@@ -287,7 +287,7 @@ the pictures no rule can reach at `λ=1` are labelled rather than left looking l
   - Paste: `/verify-plan @plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/06-three-rules-on-one-amount-axis.md`
   - Done when: the report comes back clean, or its proposals have been applied.
 - [ ] **0.2** Confirm all four rows can produce a per-step prediction before any grid is planned.
-  - Plain product-of-experts from [poe.py](../../../../poe_repair/composers/poe.py), SuperDiff from
+  - Plain product-of-experts from [poe.py](../../../../../poe_repair/composers/poe.py), SuperDiff from
     [step 28's hook](05-what-changes-when-superdiff-leaves-its-own-defaults.md), and both corrector rows
     from `poe_repair/composers/poe_langevin.py`.
   - **Done when:** `r_t^M` is formed on one render for each of the four rows and its per-step norm
@@ -403,7 +403,7 @@ moved something.
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 DR=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/dose_across_rules
 
-nohup bash scripts/mechanism_study/run_dose_across_rules.sh > "$DR/dose.log" 2>&1 &
+nohup bash 1-lora-correction/scripts/mechanism_study/run_dose_across_rules.sh > "$DR/dose.log" 2>&1 &
 pgrep -af 'dose_across_rules'          # squeue is blind to this
 
 $PY -c "import json;d=json.load(open('$DR/grid_one/cells.json'));print(len(d['cells']),'cells')"
@@ -492,11 +492,11 @@ off the joint trajectory.
 
 | Path | Why it is read |
 |---|---|
-| [scripts/interaction_term_dose_matched.py](../../../../scripts/interaction_term_dose_matched.py) | the matched condition, `--mode matched`, which already answered the different-absolute-amounts problem once for this project |
-| [poe_repair/composers/poe.py](../../../../poe_repair/composers/poe.py) | the plain product-of-experts row, and the interface all four rows share |
+| [1-lora-correction/scripts/interaction_term_dose_matched.py](../../../../scripts/interaction_term_dose_matched.py) | the matched condition, `--mode matched`, which already answered the different-absolute-amounts problem once for this project |
+| [poe_repair/composers/poe.py](../../../../../poe_repair/composers/poe.py) | the plain product-of-experts row, and the interface all four rows share |
 | `poe_repair/composers/poe_langevin.py` | the two corrector rows, at `k=1` and `k=5` |
 | `poe_repair/composers/superdiff.py` | the SuperDiff row and its per-step prediction, from [step 28](05-what-changes-when-superdiff-leaves-its-own-defaults.md) |
-| [paper/iclr/figures/F5-one-dial-three-instruments.png](../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) | the existing one-dial figure, whose `λ=0.75` grid one reuses so the two are comparable |
+| [paper/iclr/figures/F5-one-dial-three-instruments.png](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) | the existing one-dial figure, whose `λ=0.75` grid one reuses so the two are comparable |
 
 ## Next step
 

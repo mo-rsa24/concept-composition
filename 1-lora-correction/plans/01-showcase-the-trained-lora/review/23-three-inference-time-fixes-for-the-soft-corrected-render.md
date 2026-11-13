@@ -60,7 +60,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [ ] ⚠️ **Does any fix keep the compose count within one seed of the same-loop full window and come out sharper than it on at least 6 of the 8 seeds, paired per seed, on cat × dog?**
-      The bar, in source as `SUPPORT_MAX_COMPOSE_LOSS = 1`, `NULL_MIN_COMPOSE_LOSS = 2`, `SUPPORT_MIN_SHARPER_SEEDS = 6`, `NULL_MAX_SHARPER_SEEDS = 4` in `verdict_for_fix` of `scripts/showcase/crisp_fix_strip.py`:
+      The bar, in source as `SUPPORT_MAX_COMPOSE_LOSS = 1`, `NULL_MIN_COMPOSE_LOSS = 2`, `SUPPORT_MIN_SHARPER_SEEDS = 6`, `NULL_MAX_SHARPER_SEEDS = 4` in `verdict_for_fix` of `1-lora-correction/scripts/showcase/crisp_fix_strip.py`:
       **support** if `compose_n(fix) ≥ compose_n(full) − 1` and `sharper_than_full_n ≥ 6`;
       **null** if `compose_n(fix) ≤ compose_n(full) − 2` (the animals go with the fix) or `sharper_than_full_n ≤ 4` (nothing gained);
       **inconclusive** otherwise (the animals stay and the fix is sharper on exactly 5 seeds).
@@ -122,4 +122,4 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Task 3.2 in the design: `/sync-plan-tree plans/01-showcase-the-trained-lora/`, so the null propagates to the wall plan and the fidelity caveat is written as a bounded sentence: three sampler-side entries of the correction were tried and none sharpened the render.
+Task 3.2 in the design: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`, so the null propagates to the wall plan and the fidelity caveat is written as a bounded sentence: three sampler-side entries of the correction were tried and none sharpened the render.

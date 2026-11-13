@@ -16,5 +16,5 @@ USE_PCT=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
 [ -f "$CKPT" ] || { echo "checkpoint missing: $CKPT" >&2; exit 2; }
 nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv || { echo "no GPU visible" >&2; exit 4; }
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) disk_use=${USE_PCT}%"
-$PY scripts/showcase/on_policy_fit_cosine.py --checkpoint "$CKPT" --out "$OUT" --rank 8 --alpha 8
+$PY 1-lora-correction/scripts/showcase/on_policy_fit_cosine.py --checkpoint "$CKPT" --out "$OUT" --rank 8 --alpha 8
 echo "[$(date -u +%H:%M:%S)] DONE exit=$?"

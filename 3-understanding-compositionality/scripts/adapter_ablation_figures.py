@@ -13,7 +13,7 @@ the joint-prompt target than the product it repairs, so lower is better. The com
 carry these figures: every configuration reads 1.0 on every cell where it is scored (the two
 held-out cat-and-dog cells for the newer runs, those two plus two trained cells for the older).
 
-    python scripts/adapter_ablation_figures.py <measures.json> <out_dir>
+    python 3-understanding-compositionality/scripts/adapter_ablation_figures.py <measures.json> <out_dir>
 """
 from __future__ import annotations
 

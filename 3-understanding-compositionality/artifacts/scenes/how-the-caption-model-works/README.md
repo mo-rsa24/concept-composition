@@ -27,7 +27,7 @@ steps, the optional Langevin corrector, the VAE decoder and the colour scorer.
 
 **How we got it**
 
-Read from `artifacts/notes/what-poe-loses-when-it-composes/`: `toy_caption_dial_ldm.py` (VAE,
+Read from `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/`: `toy_caption_dial_ldm.py` (VAE,
 Denoiser, training, `draw`), `toy_caption_threshold.py` (exact-count relabelling),
 `toy_caption_corrector.py` (the corrector), `toy_sampler_hybrids.py` (pictures, noise schedule) and
 `toy_blob_scorer.py` (the colour scorer). Both parameter counts were recomputed from the layer

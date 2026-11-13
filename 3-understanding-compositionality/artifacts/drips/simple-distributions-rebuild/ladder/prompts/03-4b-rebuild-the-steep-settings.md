@@ -6,7 +6,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan --request rebuild run 2 of
-artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb by hand in
+3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb by hand in
 ~/Playground/PhD/simple-distributions-walk/walk03b.py; bar: with 5% of each set rotated, the exact
 composition puts 0.75 of its mass on co-occurrence while reverse diffusion draws a chimera column
 with 0.21, and at 2% overlap reverse diffusion, ULA and MALA add a dry-dog cluster that tuned MALA
@@ -14,7 +14,7 @@ and UHA do not
 
 Background
 This is the idea-walk rebuild in layer 3 of the composition ladder
-(artifacts/drips/simple-distributions-rebuild/). Run 2 of the kinds notebook showed that near the
+(3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/). Run 2 of the kinds notebook showed that near the
 edge of what the data supports, a weak sampler draws the picture of a data failure, which is why
 every later result is graded against an exact target. I rebuild it by hand, reusing walk03.py from
 step 4a (its exact grid, perfect-sample baseline, kinds and dials) and walk02c.py from layer 2 (its
@@ -31,9 +31,9 @@ Objectives
    folder.
 
 What to read
-- artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, run 2 (cells 17
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, run 2 (cells 17
   to 19): the code, and its cell 18 table as the answer key.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6: why only the closest samplers are
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6: why only the closest samplers are
   read on image results.
 - toy/rebuild/phase3_kinds.py, Run 2, and toy/rebuild/out/phase3/phase3.json, run2: the reference.
 - ~/Playground/PhD/simple-distributions-walk/walk03.py and walk02c.py.
@@ -62,7 +62,7 @@ What is already known
 - A weak sampler near the edge of what the data supports draws the kind's failure picture, which
   without the exact composition beside it would be blamed on missing data, so only the samplers
   that come closest to the perfect-sample baseline in 2D (tuned MALA, UHA) are read on image
-  results (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6).
+  results (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and run 6).
 - rebuild/phase3_kinds.py reproduces run 2 within 0.05 of the notebook on every row, its own
   tolerance for these sampler numbers (toy/rebuild/phase3_kinds.py, Run 2;
   toy/rebuild/out/phase3/phase3.json, run2).

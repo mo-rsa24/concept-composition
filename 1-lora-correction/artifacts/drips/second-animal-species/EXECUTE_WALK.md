@@ -18,7 +18,7 @@ sitting 1: started 2026-11-10
 | Decision | Options | Chosen | Who | Why |
 |---|---|---|---|---|
 | noise for seeds 9 to 16 | seed-number noise · drop seeds · read training cache | seed-number noise | user (defaults) | the renderer's cache has no cat × dog seed 9 to 16; seed-number noise is shared across every setting |
-| where the walk's files live | artifacts/drips/second-animal-species/ · the results folder | artifacts/drips/second-animal-species/ | user (defaults) | nothing added under plans/ |
+| where the walk's files live | 1-lora-correction/artifacts/drips/second-animal-species/ · the results folder | 1-lora-correction/artifacts/drips/second-animal-species/ | user (defaults) | nothing added under plans/ |
 | node | mscluster111 co3_bw · mscluster112 co3_bw · mscluster108 co3 | mscluster112 | user | user wary of 111's fault history; both 111 and 112 probed healthy 2026-11-10 (cuda True, matmul 1e9) |
 | plain-product row | keep · drop | keep | user (defaults) | reference for how often PoE alone gives two animals |
 | curated training cells | v58's 182 · by-eye recurated | 161 cells, 48 pairs (cells_v58_bound.json) | user, by eye from curation sheets | keep only cells where the joint prompt draws both things, each its own species |

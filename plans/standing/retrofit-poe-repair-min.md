@@ -78,7 +78,7 @@ One experiment currently has up to four names: one on `/home-mscluster`, one on 
 ## Why this plan exists
 
 A name that states a claim becomes a lie when the claim dies, and one already has: `F6`'s
-shared-structure argument is recorded as dead in `report/paper-evidence-index.md` while four files still
+shared-structure argument is recorded as dead in `1-lora-correction/report/paper-evidence-index.md` while four files still
 carry its figure letter. A name that states a private label costs a lookup every time: nothing on disk
 says what `rung2` or `group A` or `idea5a` was. And a name that exists twice sends a reader to
 whichever copy their filesystem happens to hold, which `paper/iclr/figures.md` line 30 already does:
@@ -142,7 +142,7 @@ The full old-to-new table, per figure and per family, is in
 | File | Verdict |
 |---|---|
 | `CLAUDE.md`, `README.md`, `MASTER_PLAN.md`, `RETROFIT.md`, `pyproject.toml`, `.gitignore` | stay, already on the list of root files no check reports |
-| `EXPERIMENTS.md`, `DECISION_TIMELINE.md`, `RESEARCH_GUIDELINES.md` | absorbed into `report/experiments-log.md`, `report/decision-timeline.md`, `context/research-guidelines.md`, matching that folder's existing style; no longer a root-file exception |
+| `EXPERIMENTS.md`, `DECISION_TIMELINE.md`, `RESEARCH_GUIDELINES.md` | absorbed into `1-lora-correction/report/experiments-log.md`, `1-lora-correction/report/decision-timeline.md`, `context/research-guidelines.md`, matching that folder's existing style; no longer a root-file exception |
 | `PARKING_LOT.md` | dropped; the routing practice it served (idea-runs land here) retires with it, striking results become a row or task in the plan tree directly |
 | `pairs.py` | to `poe_repair/pairs.py`; one importer, and its contents describe a one-pair-one-seed world the project outgrew |
 | `midrun_separation_example.png`, `text_orthogonality_probe.png` | to question folders, named for what they measure |
@@ -242,7 +242,7 @@ disk; only the second name goes.
 
 | Now | Becomes |
 |---|---|
-| `evidence/f2-lambda1-audit/` | `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/` |
+| `evidence/f2-lambda1-audit/` | `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/` |
 | `01-both-there/` | `both-animals-there/` |
 | `02-two-of-one/` | `two-of-the-same-animal/` |
 | `03-cannot-call/` | `cannot-decide/` |
@@ -355,7 +355,7 @@ Each is untracked, so there is no undo. Confirm one path at a time.
       under one caption. Decide whether it becomes three.
 - [ ] `F6-spectrum-windowed` is four panels answering two questions, and no register row names any
       of it. Decide whether it becomes two, and whether the paper keeps a place for it at all given
-      `report/paper-evidence-index.md` records its argument as dead.
+      `1-lora-correction/report/paper-evidence-index.md` records its argument as dead.
 
 ## Outputs
 
@@ -400,7 +400,7 @@ files.
 - `RETROFIT.md`: the census and the sitting ledger
 - `~/.claude/ARTIFACT_TREE_FORMAT.md` v3: the shape and the naming forms
 - `~/.claude/ERROR_MATRIX_SYSTEM.md`: the failure catalog's new home
-- `report/paper-evidence-index.md`: the second conforming card, and where F6's claim is recorded as dead
+- `1-lora-correction/report/paper-evidence-index.md`: the second conforming card, and where F6's claim is recorded as dead
 - `evidence/f2-lambda1-audit/README.md`: the first conforming card, and the model for the rest
 
 ## Next step

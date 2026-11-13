@@ -20,7 +20,7 @@
 #   POE_REPAIR_TRAINING_CACHE  required (cache root)
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 CUDA=${CUDA_VISIBLE_DEVICES:-1}
 SEEDS=${SEEDS:-"9 10 11 12"}
@@ -61,7 +61,7 @@ for g in $LORA_GROUPS; do
     echo "==> $g: $A × $B  →  $J"
     for s in $SEEDS; do
         cmd=(
-            "$PY" scripts/build_eval_cache.py
+            "$PY" 1-lora-correction/scripts/build_eval_cache.py
             --prompt-a "$A" --prompt-b "$B" --joint-prompt "$J"
             --seed "$s"
         )

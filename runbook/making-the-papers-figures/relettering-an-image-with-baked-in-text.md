@@ -2,7 +2,7 @@
 
 For a figure made outside this repo (an image generator, a screenshot) whose labels are part of the pixels, so they print too small and in the wrong face. The fix is to keep the artwork and set every label again as real type at its printed size. Figures 1, 7 and 8 of the ICLR 56173 paper (`final_figures/molefe_fig1.png`, `final_figures/molefe_fig2.png`, `training-the-compositional-adapter.jpg`) need this; the lettering audit measured their text at about 1 to 4 pt against the 7 pt floor.
 
-The rule every figure meets is on [the layout sheet](../../report/paper-review/layout-sheet.md#before-a-slot-is-called-finished): 8 pt labels, 9 pt titles, a Times-matching serif, drawn at the final width. The two-panel recipe beside this one, [composing a two-panel figure](composing-a-two-panel-figure-in-inkscape.md), covers placing and exporting in more depth.
+The rule every figure meets is on [the layout sheet](../../1-lora-correction/report/paper-review/layout-sheet.md#before-a-slot-is-called-finished): 8 pt labels, 9 pt titles, a Times-matching serif, drawn at the final width. The two-panel recipe beside this one, [composing a two-panel figure](composing-a-two-panel-figure-in-inkscape.md), covers placing and exporting in more depth.
 
 ## Fill in
 
@@ -54,7 +54,7 @@ You want: labels the same height as the paper's caption text when the page is vi
 Tell Claude the file is there. It switches the `\includegraphics` in `paper/iclr-56173/iclr2027_conference.tex` to the PDF and runs:
 
 ```bash
-python3 scripts/figure_text_audit.py
+python3 1-lora-correction/scripts/figure_text_audit.py
 ```
 
 You want: the figure's row reads a measured size of at least 7 pt (8 for labels) and PASS, with no "OCR estimate".

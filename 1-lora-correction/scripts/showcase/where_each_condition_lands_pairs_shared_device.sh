@@ -2,7 +2,7 @@
 # Shared-device launch for where_each_condition_lands_pairs_render.py (plan 06 task 4, scope 05),
 # per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup):
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/where_each_condition_lands_pairs_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_pairs.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_pairs.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -39,6 +39,6 @@ export XFORMERS_DISABLED=1
 
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) device=$GPU pid=$$ disk_use=${USE_PCT}% commit=$(git rev-parse --short HEAD)"
 
-"$PY" scripts/showcase/where_each_condition_lands_pairs_render.py "$@"
+"$PY" 1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_render.py "$@"
 
 echo "[$(date -u +%H:%M:%S)] DONE"

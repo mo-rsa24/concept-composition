@@ -6,11 +6,11 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan
-artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md --depth
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md --depth
 objective, I type every block myself into ~/Playground/PhD/simple-distributions-walk/walk03.py
 
 Background
-This is layer 3's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 3's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type my own ideal experts and four kinds of composition from the step file, each shown succeeding
 and failing, one step per message. Claude's reference code is under toy/ in this repo; my file and
 the reference print the same numbers, and a difference is a lesson or a bug. I start from the
@@ -28,10 +28,10 @@ Objectives
 5. Tick each step in the step file as it lands, and keep my place in the walk map between sittings.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md: the step
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md: the step
   file.
 - toy/rebuild/ideal.py, toy/rebuild/kinds.py and toy/rebuild/phase3_kinds.py: the reference.
-- artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb: the notebook's
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb: the notebook's
   printed numbers.
 - toy/rebuild/out/phase3/phase3.json: the rebuilt run beside them.
 - The layer 3 maths drip's dispatch.md: my notation.
@@ -44,7 +44,7 @@ What is already known
 - Every worked number prints from python -m rebuild.walk_numbers, run from toy/, as 25 p3. keys
   (step file 03, opening).
 - The kinds notebook's printed numbers are in
-  artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, and the rebuilt
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, and the rebuilt
   run beside them is in toy/rebuild/out/phase3/phase3.json (step file 03, opening).
 - rebuild/phase3_kinds.py compares the reference with the notebook's printed numbers and never reads
   walk03.py: exact numbers to the notebook's printed precision, sampler numbers within 0.03
@@ -82,7 +82,7 @@ What is already known
   13).
 - Dominance defeats every sampler (TV 0.29 to 0.58, against a perfect-draw TV of 0.11 in that run)
   because no local sampler moves mass between separated modes to match unequal weights, so it is
-  skipped here (step file 03, step 13; artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and
+  skipped here (step file 03, step 13; 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 4 and
   run 4).
 
 Rules

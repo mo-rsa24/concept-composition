@@ -61,7 +61,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 - [ ] ⚠️ Does every family's agreement sit at or above `AGREEMENT_FLOOR`, with no family
       more than `FAMILY_GAP_MAX` below another (both in
-      `scripts/commitment/calibrate_oracle.py`)? This is the deciding question because a
+      `1-lora-correction/scripts/commitment/calibrate_oracle.py`)? This is the deciding question because a
       per-family bias is the confound that corrupts every cross-family figure even when
       average agreement looks fine.
 

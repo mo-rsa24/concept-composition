@@ -2,7 +2,7 @@
 
 ## Where this scope sits in the order
 
-The root [running order](../../MASTER_PLAN.md) owns the one order across every scope. This scope
+The root [running order](../../../MASTER_PLAN.md) owns the one order across every scope. This scope
 is new and holds one plan, which is not yet in that order.
 
 It stands apart from the scopes either side of it. Scopes 01 to 09 all repair a trained model's
@@ -30,16 +30,16 @@ table, scored on the same 128 seeds against a criterion written before either ra
 
 **The photo pool, which exists.** 200 cat-only, 200 dog-only and 91 both-animal COCO photos, the 91 chosen by looking at all 131 that clear the size filter,
 measured rather than assumed, carded at
-[the photo pool](../../artifacts/results/the-inclusive-captions-photo-pool/README.md).
+[the photo pool](../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md).
 
 **The caption sampler, which exists and is checked.**
-[`captions.py`](../../poe_repair/experiments/inclusive_captions/captions.py) decides which caption
+[`captions.py`](../../../poe_repair/experiments/inclusive_captions/captions.py) decides which caption
 each photo is trained under, and its `--check` mode measures the realised shares off 200,000
 draws against three bars held as constants in its source.
 
 **The instrument, which exists.** GroundingDINO counts the animals in a render and
-[the crop classifier](../../scripts/census/crop_classifier_cat_vs_dog.py) names them, carded at
-[does the cat prompt already draw dogs](../../artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md).
+[the crop classifier](../../../3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py) names them, carded at
+[does the cat prompt already draw dogs](../../../3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/README.md).
 
 **An image-and-caption denoising trainer, which does not exist.** Every trainer in this repo
 learns from cached noise tensors toward a correction target, with no photographs, captions or
@@ -54,7 +54,7 @@ score depends on. And whether the result transfers past cat and dog, since one p
 
 ## Objectives
 
-**Fix what counts as working before anything runs.** The [compose rate](../../context/world/compose-rate.md) run B has to reach against
+**Fix what counts as working before anything runs.** The [compose rate](../../../context/world/compose-rate.md) run B has to reach against
 run A, the band inside which the answer is "could not tell", and the result that kills the idea.
 
 **Build the trainer and watch it train.** An image-and-caption LoRA trainer against this repo's
@@ -116,8 +116,8 @@ None.
 
 ## Environment Context
 
-This project's environment facts live in [environment/](../../environment/00-INDEX.md). Read
-[the overview](../../environment/overview.md) before anything here that touches compute. The
+This project's environment facts live in [environment/](../../../environment/00-INDEX.md). Read
+[the overview](../../../environment/overview.md) before anything here that touches compute. The
 facts this scope leans on are the `co3` absolute python path, the rule that large artifacts go to
 `/datasets` only, the one-job-per-user limit on `biggpu` that puts long runs outside Slurm, and
 the fp16 upcast rule.
@@ -128,7 +128,7 @@ the fp16 upcast rule.
 
 **The product.** `eps_uncond + g * (eps_a + eps_b - 2 * eps_uncond)`, the product of the cat and
 dog conditions as this repo computes it at
-[`training_cache.py:11`](../../poe_repair/training_cache.py).
+[`training_cache.py:11`](../../../poe_repair/training_cache.py).
 
 **Run A and run B.** Two LoRAs trained on the same 491 photos. A captions every both-animal photo
 jointly. B captions it "a photo of a cat" 40% of the time, "a photo of a dog" 40%, jointly 10%,

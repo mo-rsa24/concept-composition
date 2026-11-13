@@ -79,7 +79,7 @@ Mark: needs a check, with three reads named below.
 **Said plainly.** With 300 cat-only photos and 131 both-animal photos drawn under "cat" 40% of
 the time, about `52 / (300 + 52) = 15%` of LoRA B's "a photo of a cat" training draws hold a dog.
 In LoRA A the share is 0%. The 131 is COCO's real count after the pilot's size filter
-(`artifacts/results/the-inclusive-captions-photo-pool/`), and the 40% is what holds the share
+(`4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/`), and the 40% is what holds the share
 near 15% at that count; at the source's 25% it would be 11%.
 
 **What it commits the idea to.** Base SDXL's "a photo of a cat" rarely draws a dog, so most of the
@@ -130,13 +130,13 @@ Reading the third row as a null would retire the idea for the wrong reason.
    crops with a probability margin from 0.982 to 0.995. So the render-and-count check stands, with
    the count read through the CLIP crop call and the detector kept only for how many animals a
    render holds. Card and both sheets at
-   `artifacts/results/does-the-cat-prompt-already-draw-dogs/`.
+   `3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/`.
 
    The original specification, kept because the three outcomes it names are still the right ones
    for a working instrument: "a photo of a cat" from base SDXL on 64 seeds at 50 DDIM steps
    and guidance 7.5, with per-class detector counts for "dog" and "cat" read apart, since the
    compose scorer's generic `"animal"` query cannot tell them apart.
-   [The script](../../../scripts/census/cat_condition_dog_rate.py) carries the three outcomes and
+   [The script](../../../../3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py) carries the three outcomes and
    their meanings in its own docstring. Zero or one hit in 64 gives claim 1 a clean floor; five or
    more means the base already leaks dogs into "cat", 64 seeds is too few, and the read below
    replaces the render count.
@@ -146,7 +146,7 @@ Reading the third row as a null would retire the idea for the wrong reason.
    source's 25% single-name share that gives 11% of cat draws holding a dog, so the shares were
    raised to 40% each, which puts it back at 15%. Counts, the audit sheets for all 131 photos and
    the manifest the trainer reads are at
-   `artifacts/results/the-inclusive-captions-photo-pool/`.
+   `4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/`.
 3. **The held-out denoising loss, minutes on one GPU.** Hold 8 both-animal photos out, then
    compare the loss of "a photo of a cat" on them under A and under B. Lower under B says the
    condition widened even where renders hide it, and it reads the density rather than the samples,
@@ -481,7 +481,7 @@ Navigation: ⬅️ [Dead ends](#dead-ends) | 📋 [TOC](#table-of-contents) | [N
 
 **The instrument.** Answered for one animal in a frame: zero-shot CLIP on the cropped box calls
 cat on 64 of 64, margins 0.982 to 0.995, and
-[the script](../../../scripts/census/crop_classifier_cat_vs_dog.py) is in the repo. Still open for
+[the script](../../../../3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py) is in the repo. Still open for
 two animals in a frame, where the boxes overlap and the earlier detector reads failed. Claim 2's
 three-category score cannot be trusted until a both-animal frame has been put through it, and the
 first real pair renders the pilot produces are the natural place to check.
@@ -507,7 +507,7 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 
 | # | What | Where | State |
 |---|---|---|---|
-| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `artifacts/results/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
+| 1 | base SDXL "a photo of a cat" on 64 seeds, per-class dog and cat instance counts, the floor for claim 1 | mscluster106 device 1, outside Slurm | done 2026-11-03, 1,316s. By eye 0 of 64 renders hold a dog, which is the clean floor. By detector 64 of 64 report one dog, which kills the per-class read. Card and sheet at `3-understanding-compositionality/artifacts/results/does-the-cat-prompt-already-draw-dogs/` (gitignored, on disk only) |
 | 2 | the same 64 renders, cropped to the detector's animal box and classified cat against dog by zero-shot CLIP ViT-B/32, to test the instrument run 1 killed | mscluster106 device 1, outside Slurm | done 2026-11-03, 41s. 64 of 64 called cat, none uncertain, margin 0.982 to 0.995 against a bar of 0.50. The uncropped image gives the same calls, so cropping is unproven rather than useless; the two-animal case is untested |
 
 ## Routes
@@ -526,15 +526,15 @@ land in `routes/` beside this file.
 Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 - [The source design](source-design.md), from a ChatGPT conversation.
-- [The rung 11b design](../../notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b),
+- [The rung 11b design](../../../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b),
   with Okawa et al. 2310.09336, Liang et al. 2408.13256, Jeong et al. 2605.00273, Zarei et al.
   2406.07844, Kamb and Ganguli 2412.20292.
-- [Layer 5's fine-tune figure](../../drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png).
+- [Layer 5's fine-tune figure](../../../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png).
 - The project's PoE combine, `poe_repair/training_cache.py:11`.
 - The customization line that measures this claim's quantity as a defect: Kumari et al. 2212.04488
   (Custom Diffusion), MultiCompose 2608.03708, and SynGen 2306.08877 for the Proper Binding,
   Improper Binding and Entity Neglect counts.
-- [The base-rate script](../../../scripts/census/cat_condition_dog_rate.py), whose docstring
+- [The base-rate script](../../../../3-understanding-compositionality/scripts/census/cat_condition_dog_rate.py), whose docstring
   carries the three outcomes and what each means.
 - [The route this walk serves](../../../plans/route-inclusive-captions-pilot.md).
 

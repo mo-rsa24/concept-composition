@@ -9,12 +9,12 @@ the window.
 Conditions: rank 32 @ 30050, λ 1.2 (the clean-tail grid's value, not the 1.0 of the report's main
 results), 50 DDIM steps, cat x dog held-out seeds 9 to 16. Existing renders from
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/` (adapter alone; hand-off at
-20 and 30, k=0); new renders at 25, 35, 40, 45 from `scripts/showcase/handoff_switch_sweep.py`.
+20 and 30, k=0); new renders at 25, 35, 40, 45 from `1-lora-correction/scripts/showcase/handoff_switch_sweep.py`.
 Output `/datasets/mmolefe/poe_repair_min/outputs/showcase/crispness/`.
 
 ## 8.1: the paired high-frequency read is not an instrument
 
-`scripts/showcase/crispness_paired_hf.py`. Share of image energy above a quarter of the Nyquist
+`1-lora-correction/scripts/showcase/crispness_paired_hf.py`. Share of image energy above a quarter of the Nyquist
 radius (wavelengths under about 8 px on a 1024 image), on the render and on the seed's `mono.png`,
 reported as a ratio. 1.0 means as much fine detail as the joint prompt drew.
 
@@ -55,7 +55,7 @@ described, and it is visible without any instrument.
 
 ## 8.2: the window is located, and the switch step is 25
 
-`scripts/showcase/handoff_switch_sweep.py` rendered cutoffs 25, 35, 40 and 45 beside the
+`1-lora-correction/scripts/showcase/handoff_switch_sweep.py` rendered cutoffs 25, 35, 40 and 45 beside the
 existing 20 and 30 (k = 0, no corrector), then scored every switch point with the compose count
 and the DINOv2 distance to the seed's joint render. Output
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/crispness/handoff_switch_sweep.json`.

@@ -36,7 +36,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 SLICE_DIR = paths.resolve(paths.NOISE_SLICE)
 SCORER_CONTRACT = paths.resolve(paths.COMPOSE_SCORER_VALIDATION) / "scorer_validated.json"

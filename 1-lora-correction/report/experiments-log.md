@@ -83,8 +83,8 @@ Two consequences, both binding:
   ordered by median. Qualitative half: the running estimate at the commitment step for the earliest
   and latest pair, beside their two endpoints.
 - compute: in-session, no GPU, about 8 minutes over 162 runs.
-- status: ✅ done, with the perceptual check owed. `python scripts/commitment_step.py`, written up
-  in `artifacts/results/when-the-correction-must-arrive/commitment-step/QUERY.md`. **Varies**: per-pair medians span 18 steps
+- status: ✅ done, with the perceptual check owed. `python 1-lora-correction/scripts/commitment_step.py`, written up
+  in `1-lora-correction/artifacts/results/when-the-correction-must-arrive/commitment-step/QUERY.md`. **Varies**: per-pair medians span 18 steps
   (dolphin × porpoise 18, cat × dog 36), between-over-within 1.90 against a threshold of 1.5, and the
   verdict holds at both sensitivity thresholds. The unregistered reading matters more: every pair
   settles at step 18 or later while the correction only works over steps 0 to 10, so the
@@ -94,13 +94,13 @@ Two consequences, both binding:
   measure: the window sits at steps 0 to 10 for every pair regardless of when that pair settles. So
   failure mode (c) of EXP-05 is removed, and the settling step is not the event that decides
   composition.
-- qualitative half built (`/pair-figure`, `scripts/commitment_step_frames.py`): two rows, cat × dog
+- qualitative half built (`/pair-figure`, `1-lora-correction/scripts/commitment_step_frames.py`): two rows, cat × dog
   seed 2 (individual step 36) and dolphin × porpoise seed 4 (individual step 20, pair median 18),
   three decoded Tweedie estimates per row (step 0, commitment step, step 49). In both rows the
   commitment-step frame already reads as the finished animal, close enough to the final frame that
   the remaining steps look like cleanup rather than a decision. Small decode speckle sits on the
   commitment frame near the dog's face and the dolphin's eye/snout, consistent with the estimate not
-  being fully denoised yet. `artifacts/results/when-the-correction-must-arrive/commitment-step/commitment-step-frames.png` (+ .pdf,
+  being fully denoised yet. `1-lora-correction/artifacts/results/when-the-correction-must-arrive/commitment-step/commitment-step-frames.png` (+ .pdf,
   sidecar `.json` with per-row provenance). Perceptual validation of the 0.90 threshold is still owed
   and is tagged on the figure itself, not just in prose.
 
@@ -177,8 +177,8 @@ Two consequences, both binding:
   marked on its own curve.
 - compute: none needed. The window runs already existed at 8 pairs x 9 windows x 4 seeds, 288 scored
   runs in `interaction_term/window/window_curves.json`, so this was a read rather than a run.
-- status: ✅ done. `python scripts/window_vs_commitment.py`, written up in
-  `artifacts/results/when-the-correction-must-arrive/window-vs-commitment/QUERY.md`. **Does not move.** All 8 pairs peak at
+- status: ✅ done. `python 1-lora-correction/scripts/window_vs_commitment.py`, written up in
+  `1-lora-correction/artifacts/results/when-the-correction-must-arrive/window-vs-commitment/QUERY.md`. **Does not move.** All 8 pairs peak at
   window centre 5 (steps 0 to 10), a span of 0 steps against a threshold of 5, while their settling steps
   span 13 (23 to 36). The registered correlation is undefined because the best window never varies,
   which is the finding. Secondary summaries are weak: rho +0.16 for the compose-weighted centre and

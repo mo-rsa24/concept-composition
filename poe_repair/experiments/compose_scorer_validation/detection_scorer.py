@@ -39,7 +39,7 @@ INSTANCE_QUERY = "animal"
 # animal's floor at 0.54), and size can: every genuine animal in that strip spans
 # 458px or more, every spurious box 220px or less, on a 1024px image.
 #
-# 0.25 is the same line scripts/dose_strip.py already draws when it colours boxes
+# 0.25 is the same line 1-lora-correction/scripts/dose_strip.py already draws when it colours boxes
 # yellow or magenta, so the diagnostic picture and the scorer agree by construction.
 # The filter can only remove detections, so it can only lower compose rates: it
 # cannot manufacture the result the paper claims.

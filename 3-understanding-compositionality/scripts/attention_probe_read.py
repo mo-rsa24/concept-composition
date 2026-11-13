@@ -7,7 +7,7 @@ final image the same run wrote, finds each concept's box on that image with Grou
 reports the share of each token's attention mass that falls inside its own concept's box and
 inside the other concept's box, per step.
 
-    python scripts/attention_probe_read.py --capture <dir with seed_N/> --seed 9 \
+    python 3-understanding-compositionality/scripts/attention_probe_read.py --capture <dir with seed_N/> --seed 9 \
         --a "a cat" --b "a dog" --out <dir>
 
 The shares are on the 32x32 grid, so a box is rounded to grid cells. Written for the walk on
@@ -24,7 +24,7 @@ from pathlib import Path
 import torch
 from PIL import Image, ImageDraw
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 
 from poe_repair.experiments.residual_between_mono_and_poe import metrics as vmetrics  # noqa: E402

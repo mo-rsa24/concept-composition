@@ -9,7 +9,7 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 12 of the composition ladder wrote.
 
 Background
-Layer 12 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed, and it
+Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed, and it
 is the ladder's last layer. Its maths drip, its idea walk, its hypothesis and its build walk wrote
 new files. Those files should link to the journey plans, idea maps and outside plans they rest on,
 and the ones inside this repo should link back, so the next reader finds both.
@@ -22,14 +22,14 @@ Objectives
 3. Write one-way links toward the two outside plans.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, its Study first
   line: the two journey plans (the LoRA update and the SVD of the real matrix).
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The correction at scale" row of
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "The correction at scale" row of
   the Bricks table.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6 and 8, with its route 6 return.
 - ~/Playground/PhD/medical-imaging/compositional_diffusion/b-shortcut-through-a-device/b1-drain-shortcut-in-pneumothorax/plans/01-measure-the-drain-gap.md:
   the drain-gap plan.
-- ~/Playground/PhD/poe_repair_min/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
+- ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
   the transfer plan.
 
 What is already known

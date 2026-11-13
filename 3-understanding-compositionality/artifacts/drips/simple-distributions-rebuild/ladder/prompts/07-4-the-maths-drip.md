@@ -11,7 +11,7 @@ pushes mass away without limit, and why a positive label ("no drain", a factor p
 stays bounded where dividing by the drain expert does not
 
 Background
-This is layer 7 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: A
+This is layer 7 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: A
 without B. The medical cells are A without B (pneumothorax without drain), and at the paper's own
 weight negation sends mass off every mode when the experts have sharp tails. The maths comes before
 the build and teaches only what the build needs: when a weighted difference of log densities stays
@@ -28,9 +28,9 @@ Objectives
 
 What to read
 - Quiz 7.1's results: the misses that become first rungs.
-- artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
   vault notes and textbook for this layer.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md and artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md:
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md and artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md:
   the dial's numbers and the medical counts.
 
 What is already known
@@ -45,7 +45,7 @@ What is already known
   0.0, 0.0 at w = 0, 0.02, 0.05, 0.1, 0.3, 1.0, and the mass away from every ring mode is 0.387,
   0.384, 0.391, 0.439, 0.863, 1.0 (kinds notebook, Figure 2; rebuild/kinds.py).
 - Negation works only near w ≈ 0.05, and the notebook's own weight is w = 0.3, the 1.3 and −0.3 of
-  NegationEBMDiffusionModel (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3 and "What the words
+  NegationEBMDiffusionModel (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 3 and "What the words
   are").
 - p(no drain|x) is at most 1, so p(x|PTX)·p(no drain|x)^w never exceeds p(x|PTX) (Bayes' rule).
 - Negation's exponents sum to 1, so it is unchanged by an invertible warp (total variation 7e-17)
@@ -54,7 +54,7 @@ What is already known
   negatives, so a positive "no drain" label needs one (when-poe-reaches-a-and-b idea map, claims 6
   and 8).
 - Report-mined labels add a label term that matters most for these negation cells
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, "The idea, as it stands").
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, "The idea, as it stands").
 
 Rules
 - One rung per message, in LaTeX, with worked numbers.

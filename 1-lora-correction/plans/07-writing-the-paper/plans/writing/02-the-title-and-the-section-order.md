@@ -1,6 +1,6 @@
 # 🧭 The title and the order the story is told in
 
-**Step 17 of 22.** Waits on step 16. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 17 of 22.** Waits on step 16. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|

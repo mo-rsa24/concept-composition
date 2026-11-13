@@ -98,10 +98,10 @@ A confirmation makes training cheaper and removes the guidance weight from the p
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [Nodes](../../../../environment/hpc/nodes.md): `biggpu` allows one job per user, so this single run may go there; a Blackwell is roughly three times faster per step and needs `co3_bw`, never `co3`, because a `co3` CUDA operation on that card produces no output rather than an error. `mscluster111` is hardware-faulted. On `bigbatch`, pin a node from a live idle probe: `sinfo`'s idle list includes faulted GPUs, and two nodes could not see `/datasets` from inside a Slurm job while an SSH probe passed them.
-- [Throughput](../../../../environment/hpc/throughput.md): rank 32 at about 2,750 steps an hour on a 49 GB card; the `2K` batch should beat that and the review file records what it did.
-- [Storage](../../../../environment/storage.md): checkpoints to `/datasets` only, and the launcher's disk guard must check the filesystem it actually writes to.
-- [Overview](../../../../environment/overview.md): the forward pass is cast to fp32 before the branches are combined. Dropping a row from the batch must not disturb that.
+- [Nodes](../../../../../environment/hpc/nodes.md): `biggpu` allows one job per user, so this single run may go there; a Blackwell is roughly three times faster per step and needs `co3_bw`, never `co3`, because a `co3` CUDA operation on that card produces no output rather than an error. `mscluster111` is hardware-faulted. On `bigbatch`, pin a node from a live idle probe: `sinfo`'s idle list includes faulted GPUs, and two nodes could not see `/datasets` from inside a Slurm job while an SSH probe passed them.
+- [Throughput](../../../../../environment/hpc/throughput.md): rank 32 at about 2,750 steps an hour on a 49 GB card; the `2K` batch should beat that and the review file records what it did.
+- [Storage](../../../../../environment/storage.md): checkpoints to `/datasets` only, and the launcher's disk guard must check the filesystem it actually writes to.
+- [Overview](../../../../../environment/overview.md): the forward pass is cast to fp32 before the branches are combined. Dropping a row from the batch must not disturb that.
 
 ---
 
@@ -192,7 +192,7 @@ For Claude to execute.
   ```
 - [ ] 0.2 **Run the following prompt:**
   ```
-  /frame-hypothesis freezing the empty branch in plans/09-designing-the-correction-loss
+  /frame-hypothesis freezing the empty branch in 1-lora-correction/plans/09-designing-the-correction-loss
   ```
   - The falsification criterion goes into the review file before the code changes, not after
   - Produces: the bar, written and dated ahead of the run
@@ -254,21 +254,21 @@ For Claude to execute.
 **`01` has already run.** `v1_freeze_null_r16_s0_25` reached 30,000 steps on 2026-09-17, W&B `kdzx03ji`, on `mscluster109`. This task launches the baseline it lacks and the variation that tests the derivation, and reads both against it. Do not relaunch `01`.
 
 - [x] 3.1 **Write the two launchers**
-  - Copy `scripts/showcase/v6_render_teacher.sh` twice. Rank 16, `STEPRANGE="0 25"`, `cells_v57`, `POOLGEN=v57`, weight decay 0, `SAMPLEEVERY=25` and the two-row render grid all come with the copy
+  - Copy `1-lora-correction/scripts/showcase/v6_render_teacher.sh` twice. Rank 16, `STEPRANGE="0 25"`, `cells_v57`, `POOLGEN=v57`, weight decay 0, `SAMPLEEVERY=25` and the two-row render grid all come with the copy
   - `v0a_baseline.sh`: `RUN=v0a_baseline_r16_s0_25`, `EXTRA=""`
   - `v4_no_dial.sh`: `RUN=v4_no_dial_frozen_r16_s0_25`, `EXTRA="--no-dial --freeze-null"`
   - Produces: two files differing from the V6 launcher in the run name, the switch string and the python environment
-  - ✓ done 2026-09-19: `scripts/showcase/v0a_baseline.sh` and `v4_no_dial.sh`. Both pin `co3`, not the `co3_bw` the V6 launcher they were copied from uses, because `mscluster109` is an A6000 and a `co3_bw` job there is a silent wrong-environment run.
+  - ✓ done 2026-09-19: `1-lora-correction/scripts/showcase/v0a_baseline.sh` and `v4_no_dial.sh`. Both pin `co3`, not the `co3_bw` the V6 launcher they were copied from uses, because `mscluster109` is an A6000 and a `co3_bw` job there is a silent wrong-environment run.
 - [ ] 3.2 **Launch `00a`, the baseline that no run exists of**
   ```
-  GPU=0 nohup bash scripts/showcase/v0a_baseline.sh > logs/v0a.log 2>&1 &
+  GPU=0 nohup bash 1-lora-correction/scripts/showcase/v0a_baseline.sh > logs/v0a.log 2>&1 &
   ```
   - `mscluster109`, the A6000, because that is where `01` ran and a matched set never straddles device models
   - `biggpu` is one job per user through Slurm, so this goes outside Slurm with `nohup`
   - Produces: 25 checkpoints, 25 render sets, one W&B run id. About 7 hours
 - [ ] 3.3 **Launch `04` on the second card of the same node**
   ```
-  GPU=1 nohup bash scripts/showcase/v4_no_dial.sh > logs/v4.log 2>&1 &
+  GPU=1 nohup bash 1-lora-correction/scripts/showcase/v4_no_dial.sh > logs/v4.log 2>&1 &
   ```
   - Produces: the same, running alongside 3.2
 - [ ] 3.4 **Write both run ids into the review file the hour they launch**
@@ -293,7 +293,7 @@ For Claude to execute.
   - Produces: the verdict, inside or outside, into the review file
 - [ ] 4.3 **Build the shuffled strips for the blind read**
   - Same procedure as plan 03's task 2.1, shuffle key saved separately
-- [ ] 4.4 **Write `report/designing-the-correction-loss/01-freezing-the-empty-branch.md`**
+- [ ] 4.4 **Write `1-lora-correction/report/designing-the-correction-loss/01-freezing-the-empty-branch.md`**
 
 ### Close out. 🔄 Record what this plan taught
 
@@ -405,7 +405,7 @@ The review questions are in [the review file](../../review/04-freezing-the-empty
 | Step | Command | Triggered by | Outcome |
 |------|---------|--------------|---------|
 | Check the plan | `/verify-plan @plans/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md` | **task 0.1**, before any work | conformance and thin instructions reported |
-| Fix the bar before the run | `/frame-hypothesis freezing the empty branch in plans/09-designing-the-correction-loss` | **task 0.2**, before any code changes | the falsification criterion dated ahead of the run |
+| Fix the bar before the run | `/frame-hypothesis freezing the empty branch in 1-lora-correction/plans/09-designing-the-correction-loss` | **task 0.2**, before any code changes | the falsification criterion dated ahead of the run |
 | Capture patterns | `/ingest-error-pattern --from-run-log` | **the close out**, after any red run | errors added to the catalogs |
 | Bring the tree current | `/sync-plan-tree @plans/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md` | **the close out** | statuses, running order and Error Matrix match reality |
 
@@ -438,7 +438,7 @@ The conditioning built at the step's start tiles three prompt embeddings to `(3K
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`
 **Relevant section:** the argument parser, where the new switch joins `--null-anchor` at line 136 and `--orth-weight` at 143, and the config dump at 365, where plan 01 made objective flags recordable.
 
-**The precedent:** `plans/01-showcase-the-trained-lora/` records a windowed sampler leaving the adapter attached while rendering plain references on 2026-09-05, costing a re-render. Task 1.1 is written against that.
+**The precedent:** `1-lora-correction/plans/01-showcase-the-trained-lora/` records a windowed sampler leaving the adapter attached while rendering plain references on 2026-09-05, costing a re-render. Task 1.1 is written against that.
 
 ---
 
@@ -446,7 +446,7 @@ The conditioning built at the step's start tiles three prompt embeddings to `(3K
 
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-▶ `/frame-hypothesis freezing the empty branch in plans/09-designing-the-correction-loss` ✅ — fixes the falsification criterion in the review file before the code changes, which is the ordering `verify-plan` checks against `git log`.
+▶ `/frame-hypothesis freezing the empty branch in 1-lora-correction/plans/09-designing-the-correction-loss` ✅ — fixes the falsification criterion in the review file before the code changes, which is the ordering `verify-plan` checks against `git log`.
    alt: `/run-experiment` for task 3.1's launch, which knows this project's submit-versus-SSH decision and its disk guard.
 
 ---

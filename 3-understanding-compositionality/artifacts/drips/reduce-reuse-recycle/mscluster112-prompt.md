@@ -18,7 +18,7 @@ was learned there, so do not rediscover it.
   `environment/reduce-reuse-recycle-code.md` and `runbook/setting-up-the-reduce-reuse-recycle-code.md`
   exist there, they are the laptop's findings: extend them with a section for mscluster112,
   never a second file.
-- Walk file: `artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md` in that checkout.
+- Walk file: `3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md` in that checkout.
 - Environments: I use mamba (`/home-mscluster/mmolefe/miniforge3/envs/`), but uv is fine for new
   ones. Never install into `co3` or `co3_bw`; they are the project's environments.
 

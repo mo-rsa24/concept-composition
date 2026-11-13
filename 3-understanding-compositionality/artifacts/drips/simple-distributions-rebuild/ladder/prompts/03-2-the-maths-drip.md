@@ -7,10 +7,10 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 ```text
 /drip --math why smoothing the training points by N(0, σ²I) is the best a diffusion model can learn
 at that noise level, and under which assumptions, as steps 1 and 2 of
-artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md set them out
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md set them out
 
 Background
-This is layer 3 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: the
+This is layer 3 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: the
 ideal expert, which makes every later composition target exact, so a failure can be blamed on the
 sampler or the data rather than on a network's approximation. The maths comes before the build and
 teaches only what the build needs. I have passed quiz 3.1; any question it marked missed becomes a
@@ -25,7 +25,7 @@ Objectives
 5. Say which sampler the exactness helps and which it does not.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md, steps 1
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/03-ideal-experts-and-the-seven-kinds.md, steps 1
   and 2: the derivation in this walk's notation.
 - toy/rebuild/out/walk-numbers.json: every worked number, as the p3. and p1. keys.
 - The plan "the exact score of a Gaussian mixture", linked on layer 3's Study first line.
@@ -50,7 +50,7 @@ What is already known
   ᾱ_t σ² in v_t comes from noising p_σ (step file 03, steps 1 and 2).
 - In run 2 of the idea map, trained 2D networks matched the ideal experts within 0.04 nats, so in
   that run a trained expert added nothing measurable past its smoothed data
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 2 and claim 7).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 2 and claim 7).
 - The worked instance: three points (−0.5, −0.5), (−0.6, −0.4), (−0.5, 0.5) at σ = 0.15 give a
   log-density at (−0.5, 0) of -2.6288 by the formula and by scikit-learn's KernelDensity
   (p3.ideal_logdensity_formula, p3.ideal_logdensity_sklearn).

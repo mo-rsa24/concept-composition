@@ -110,8 +110,8 @@ The finished run is at `outputs/lora/a_cat__x__a_dog/seed_42/results/`. Rebuild 
 manifest and serve it locally:
 
 ```bash
-$PY scripts/build_lora_manifest.py
-$PY scripts/lora_inspector.py --port 5050
+$PY 1-lora-correction/scripts/build_lora_manifest.py
+$PY 1-lora-correction/scripts/lora_inspector.py --port 5050
 # from your laptop: ssh -L 5050:localhost:5050 mscluster106
 #                   open http://localhost:5050
 ```

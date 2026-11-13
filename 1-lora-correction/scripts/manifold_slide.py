@@ -42,8 +42,8 @@ same way, which the null does not touch. Read the slide, not the location.
 Reads sampled images; it does not sample.
 
 Usage:
-    python scripts/manifold_slide.py
-    python scripts/manifold_slide.py --space latent
+    python 1-lora-correction/scripts/manifold_slide.py
+    python 1-lora-correction/scripts/manifold_slide.py --space latent
 """
 
 from __future__ import annotations
@@ -59,7 +59,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
     CACHE_ROOT,

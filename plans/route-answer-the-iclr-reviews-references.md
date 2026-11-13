@@ -4,10 +4,10 @@ Navigation: [the route](route-answer-the-iclr-reviews.md)
 
 ## Found on disk
 
-- The manuscript source and notes: `paper/iclr/` (tex, bibliography, `figures.md` register, `SPINE.md`, `DRAFT_MAP.md`), plus `paper/overleaf-iclr/` and `scripts/make_overleaf_bundle.sh --slim` for the upload zip.
+- The manuscript source and notes: `paper/iclr/` (tex, bibliography, `figures.md` register, `SPINE.md`, `DRAFT_MAP.md`), plus `paper/overleaf-iclr/` and `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` for the upload zip.
 - Scorers: `composition/focus/eval_metrics.py` holds CLIP, EVA-CLIP and ImageReward scorers. No code for GenEval or T2I-CompBench.
-- Samplers: `poe_repair/methods/_poe_langevin.py` (Langevin corrector), `scripts/corrector_residual_curve.py`, `scripts/fk_steering/`, `scripts/twisted_smc/`, `composition/reduce_reuse_recycle/` (the authors' code), `composition/debottam_co3/` (CO3).
-- Findings already filed: `report/is-the-gap-the-samplers-or-the-models/` (corrector, SuperDiff, steering, noise search runs).
+- Samplers: `poe_repair/methods/_poe_langevin.py` (Langevin corrector), `1-lora-correction/scripts/corrector_residual_curve.py`, `1-lora-correction/scripts/fk_steering/`, `1-lora-correction/scripts/twisted_smc/`, `composition/reduce_reuse_recycle/` (the authors' code), `composition/debottam_co3/` (CO3).
+- Findings already filed: `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/` (corrector, SuperDiff, steering, noise search runs).
 - Pool files: `artifacts/_shared/cross_pair_pool_configs/`.
 - Audit of the authors' code against their paper: `/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md`.
 - The reviews and the submitted paper: `Reviews.pdf` and `56173_Restoring_plurality_in_c.pdf` at the repo root.
@@ -40,4 +40,4 @@ Cheap tests go before training (the measured correction on SD 1.5, the adapter a
 - T2I-CompBench++, [arXiv 2307.06350](https://arxiv.org/abs/2307.06350): where BLIP-VQA comes from.
 - Reduce, Reuse, Recycle, [arXiv 2302.11552](https://arxiv.org/abs/2302.11552) and [the code-against-paper audit](/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md): the corrector's reference.
 - Attend-and-Excite, [arXiv 2301.13826](https://arxiv.org/abs/2301.13826), vendored in `composition/aae/`; the [CONFORM repository](https://github.com/gemlab-vt/conform), [arXiv 2312.06059](https://arxiv.org/abs/2312.06059).
-- [The paper review board](../report/paper-review/board.md) and [the walk map](../artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md).
+- [The paper review board](../1-lora-correction/report/paper-review/board.md) and [the walk map](../1-lora-correction/artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md).

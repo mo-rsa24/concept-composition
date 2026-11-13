@@ -20,7 +20,7 @@ of 200, and does clamping its blending weight `kappa` change that answer?
 ## Position in the plan tree
 
 **Step 28 of 30.** Waits on step 26. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -97,7 +97,7 @@ in its caption.
 
 **Associated materials.** [The review questions](../../review/05-what-changes-when-superdiff-leaves-its-own-defaults.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md), and the register row for
-2412.17762 in [the reading register](../../../standing/literature/reading-register.md), at abstract
+2412.17762 in [the reading register](../../../../../plans/standing/literature/reading-register.md), at abstract
 level since 2026-08-12.
 
 ## Considerations
@@ -266,14 +266,14 @@ settings and check it still works there, before three rules are compared along o
   Never a bare `python`.
 - Renders and weights write under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/`, with a disk
-  guard on `/datasets`, per [environment/storage.md](../../../../environment/storage.md). The
+  guard on `/datasets`, per [environment/storage.md](../../../../../environment/storage.md). The
   SuperDiff checkpoint (7.11GB on the Hub) is a model download and must not land on
   `/home-mscluster`.
 - biggpu allows one job per user. Render 1 of the 8 is timed in-session before the rest are
   queued, since no wall-clock cost for this specific pipeline has been measured anywhere in this
   repo yet. If timing shows the full 8 will not fit in-session, the remaining renders move to the
   `nohup`-outside-Slurm path the rest of this scope already uses; read
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md)
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md)
   either way.
 - **The cached trajectories cannot be used.** SuperDiff follows its own path.
 - The models run in fp16, and anything normed upcasts to fp32 first.
@@ -409,7 +409,7 @@ Independent of the eight-cell grid in group 2, reuses the same wiring.
   - Paste: `/sync-plan-tree @plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/05-what-changes-when-superdiff-leaves-its-own-defaults.md — <one line>`
   - Done when: statuses, the running order and the Error Matrix match reality.
 - [ ] **Promote the register row.** Move
-      [the reading register](../../../standing/literature/reading-register.md)'s row for 2412.17762
+      [the reading register](../../../../../plans/standing/literature/reading-register.md)'s row for 2412.17762
       from abstract level to full read, since wiring the method required reading it.
   - Done when: the row records the promotion, dated, as a promotion of the 2026-08-12 row rather
     than a first read.
@@ -526,7 +526,7 @@ already put SuperDiff's row on this project's shared `λ` axis, across seeds 9 t
 | What changes | Where it has to be reflected |
 |---|---|
 | the 8-cell verdict | every caption at [step 29](06-three-rules-on-one-amount-axis.md) that compares against SuperDiff |
-| the full read happens | [the reading register](../../../standing/literature/reading-register.md)'s row for 2412.17762 moves from abstract level to full read, as a promotion of the 2026-08-12 row |
+| the full read happens | [the reading register](../../../../../plans/standing/literature/reading-register.md)'s row for 2412.17762 moves from abstract level to full read, as a promotion of the 2026-08-12 row |
 | a figure lands in `superdiff/` | that folder's `README.md` gains an entry naming the algorithm and what produced it |
 | the plan's status | the scope [MASTER_PLAN.md](../../MASTER_PLAN.md) and the root running order, both by `sync-plan-tree` rather than by hand |
 
@@ -546,7 +546,7 @@ already put SuperDiff's row on this project's shared `λ` axis, across seeds 9 t
 | [poe_repair/composers/poe.py](../../../poe_repair/composers/poe.py) | this repo's composer interface, which `superdiff.py` implements so it is callable the same way |
 | [necludov/super-diffusion](https://github.com/necludov/super-diffusion) | the authors' implementation and citation; no SDXL code lives here, only SD1.4 examples |
 | [superdiff-sdxl-v1-0](https://huggingface.co/superdiff/superdiff-sdxl-v1-0), `pipeline.py` | the actual SDXL pipeline this plan wires, read in full: confirms `num_inference_steps=200` default, `guidance_scale=7.5` default, no scheduler/`eta` option, and no clamp on `kappa` anywhere |
-| [the reading register](../../../standing/literature/reading-register.md) | the row for 2412.17762, at abstract level since 2026-08-12, promoted by this plan's close out |
+| [the reading register](../../../../../plans/standing/literature/reading-register.md) | the row for 2412.17762, at abstract level since 2026-08-12, promoted by this plan's close out |
 
 ## Next step
 
@@ -587,7 +587,7 @@ on it.
 (`poe-disk-001`).
 **Why:** the default cache is under `$HOME`.
 **How to fix:** point the cache at `/datasets` before the first pull. See
-[environment/storage.md](../../../../environment/storage.md).
+[environment/storage.md](../../../../../environment/storage.md).
 
 #### 🟡 this pipeline has no DDIM mode
 

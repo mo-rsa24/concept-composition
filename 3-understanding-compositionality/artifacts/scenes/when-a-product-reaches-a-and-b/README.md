@@ -1,6 +1,6 @@
 # Where the product lands
 
-One interactive scene for claim 2 of the walk in the [idea map for when a product reaches A and B](../../ideas/when-poe-reaches-a-and-b/IDEA_MAP.md): the three ways a product of two diffusion experts can reach a combination neither expert's fine-tuning data contains, on the four-quadrant toy.
+One interactive scene for claim 2 of the walk in the [idea map for when a product reaches A and B](../../../../artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md): the three ways a product of two diffusion experts can reach a combination neither expert's fine-tuning data contains, on the four-quadrant toy.
 
 The same material is taught one concept per press, with this page's drag of expert B's blob and its fourth answer to the first prediction, in [Three Ways a Product Reaches A-and-B](../three-ways-a-product-reaches-a-and-b/README.md). That scene is the one kept current; this page stays published as it stands.
 

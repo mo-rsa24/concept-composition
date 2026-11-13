@@ -21,7 +21,7 @@ The bundle deliberately excludes generated build files, the compiled manuscript 
 Regenerate the bundle from the repository root with:
 
 ```bash
-scripts/make_overleaf_bundle.sh
+1-lora-correction/scripts/make_overleaf_bundle.sh
 ```
 
 ## The slim bundle
@@ -31,7 +31,7 @@ what Overleaf accepts on upload. `--slim` keeps only the figure files the manusc
 includes, read out of the `\includegraphics` calls in the tex:
 
 ```bash
-scripts/make_overleaf_bundle.sh --slim
+1-lora-correction/scripts/make_overleaf_bundle.sh --slim
 ```
 
 It writes `paper/iclr-overleaf-slim.zip` and prints the figures it kept. Rerun it whenever a

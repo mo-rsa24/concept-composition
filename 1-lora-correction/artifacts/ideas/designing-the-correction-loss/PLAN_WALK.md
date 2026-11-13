@@ -104,12 +104,12 @@ Navigation: ⬅️ [The verb set](#the-verb-set) | 📋 [TOC](#table-of-contents
 
 The question: does each variation get a folder in every pillar, or one file, and what carries the number.
 
-- [x] 1.1 `report/designing-the-correction-loss/`, one file per variation
+- [x] 1.1 `1-lora-correction/report/designing-the-correction-loss/`, one file per variation
 - [x] 1.2 `context/world/the-correction-loss.md`, one shared file
 - [x] 1.3 `runbook/running-things-on-the-cluster/training-a-correction-adapter.md`, one recipe, a row per flag
 - [x] 1.4 `environment/hpc/throughput.md`, one added memory-per-rank row, no new file
 - [x] 1.5 `artifacts/results/designing-the-correction-loss/<NN-name>/`, folder per variation, new figures only
-- [x] 1.6 `plans/09-designing-the-correction-loss/`, one scope, a plan file per variation
+- [x] 1.6 `1-lora-correction/plans/09-designing-the-correction-loss/`, one scope, a plan file per variation
 
 **The numbers and names, fixed here.**
 
@@ -160,7 +160,7 @@ The question: per pillar, does a file already exist, and does it need writing, e
 
 - [x] 3.1 `context/world/the-correction-loss.md`, write
 - [x] 3.2 `context/world/lora-corrector.md`, extend: rank is a dial, not the adjective "rank-8"
-- [x] 3.3 `report/designing-the-correction-loss/00-...md`, write
+- [x] 3.3 `1-lora-correction/report/designing-the-correction-loss/00-...md`, write
 - [x] 3.4 `runbook/.../training-a-correction-adapter.md`, write, the cold-start recipe
 - [x] 3.5 `environment/hpc/throughput.md`, extend: the memory-per-rank row, gathered from the review files
 - [x] 3.6 the artifact card for the new results folder, write
@@ -179,7 +179,7 @@ the read is rather than what the launch is.
 - [x] 4.1 the four experiments: gather. The V0a plan is a read plan and launches nothing
 - [x] 4.2 the bars, fixed before the read
 - [x] 4.3 the illustration: prompt written, Empty, level 2, subject lane
-- [x] 4.4 attaches at `plans/09-designing-the-correction-loss/plans/hypothesis/00a-penalise-the-empty-branch.md`
+- [x] 4.4 attaches at `1-lora-correction/plans/09-designing-the-correction-loss/plans/hypothesis/00a-penalise-the-empty-branch.md`
 
 **The two bars, fixed here.**
 
@@ -244,7 +244,7 @@ result six months old can still be re-read.
 `train_pooled.py:222`, which is a save every 10,000 steps, and the launcher never passes it.
 Renders run on `--sample-every-epochs`, set to 50, which is every 2,500 steps. Nine of the twelve
 render sets have no weights behind them. The fix is one line in
-`scripts/showcase/train_pool_run.sh`: pass `--ckpt-every-epochs "$SAMPLEEVERY"`.
+`1-lora-correction/scripts/showcase/train_pool_run.sh`: pass `--ckpt-every-epochs "$SAMPLEEVERY"`.
 
 **What that costs.** 20 checkpoints per experiment at 50,000 steps, 2.3 GB each experiment, 9.2 GB
 for a set of four. `/datasets` has 233 TB free. No extra compute, because the render pass already
@@ -298,13 +298,13 @@ Navigation: ⬅️ [The groups](#the-groups) | 📋 [TOC](#table-of-contents) | 
 | Units | Verb | Attaches to | Skill that does it | Runbook step |
 |---|---|---|---|---|
 | group 1, all 6 placements | write | the six pillar paths named above | `/init-master-plan` for the scope, the pulses for the pillar files | 1 |
-| group 2, units 2.1, 2.2, 2.3, 2.6 | gather | `report/designing-the-correction-loss/00-...md` and its results folder | scope 09's foundation plan | 3 |
+| group 2, units 2.1, 2.2, 2.3, 2.6 | gather | `1-lora-correction/report/designing-the-correction-loss/00-...md` and its results folder | scope 09's foundation plan | 3 |
 | group 2, unit 2.4 | run | the same page's rank table | scope 09's foundation plan, `/design-figure` for the band | 3 |
 | group 2, unit 2.5 | write | `scripts/` | scope 09's foundation plan | 3 |
 | group 3, all 6 files | write, extend | the six pillar paths | scope 09's foundation plan, pulses as audit | 2, 4 |
 | group 4, all 4 units | gather | `plans/09/.../00a-penalise-the-empty-branch.md` and `report/.../00a-...md` | scope 09's hypothesis plan | 5 |
 | group 5, units 5.1 to 5.4 | gather, run | `report/.../00a-...md` | scope 09's run plan | 5 |
-| group 5, unit 5.5 | write | `scripts/showcase/train_pool_run.sh`, `train_pooled.py` config dump | scope 09's tools plan | 6 |
+| group 5, unit 5.5 | write | `1-lora-correction/scripts/showcase/train_pool_run.sh`, `train_pooled.py` config dump | scope 09's tools plan | 6 |
 | group 6, the logging line and `01`, `02` | write | three plan files in scope 09 | `/populate-plans`, then `/frame-hypothesis` on `01` | 7, 8 |
 | group 6, `03`, `04`, `06`, `07` | placeholder | one row each in scope 09's master plan | `/init-master-plan` | 7 |
 | group 6, `05` | route | back into this walk via `integrate` | `/drip-idea` on claim 6 | out of band |
@@ -332,7 +332,7 @@ subject lane. Chosen 2026-09-16. The first accepted render is passed as a refere
 remaining eight, because Empty drifts across a multi-image technical set otherwise.
 
 The V0a architecture picture is now prompt 3 of the scope's own map,
-`plans/09-designing-the-correction-loss/diagram-prompts.md`, which owns all six subject prompts.
+`1-lora-correction/plans/09-designing-the-correction-loss/diagram-prompts.md`, which owns all six subject prompts.
 None is rendered.
 
 The rank-ablation figure plan 09 owes: held-out compose rate against rank at matched steps, with the seed-noise band drawn. Catalogued, never made.
@@ -352,7 +352,7 @@ recorded finding. Returns here via `integrate`.
 run; here `00` and `00a` already have, so the hypothesis steps sit after the write-up steps instead
 of before them.
 
-1. ~~`/init-master-plan` mints `plans/09-designing-the-correction-loss/`.~~ Done 2026-09-16: `MASTER_PLAN.md`, `diagram-prompts.md` (six subject prompts, none rendered), empty `plans/`.
+1. ~~`/init-master-plan` mints `1-lora-correction/plans/09-designing-the-correction-loss/`.~~ Done 2026-09-16: `MASTER_PLAN.md`, `diagram-prompts.md` (six subject prompts, none rendered), empty `plans/`.
 2. ~~`/populate-plans` writes the plan files.~~ Done 2026-09-16: four plans (steps 71 to 74), four review files, the process lane and its first snapshot, the scope's Plans table and the root running order.
 3. Do the foundation plan: the six pillar files, the chart script, the `00` page.
 4. `/render-diagrams` drains the scope's map, starting with the `00a` picture.

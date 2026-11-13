@@ -34,7 +34,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 - **The best-case panel**: LoRA-corrected renders beside true-r_t-injected renders on the same
   pairs and seeds; qualitative, because nothing here measures crispness with a number.
 
-> The one number the rows report is [compose rate](../../../context/world/compose-rate.md).
+> The one number the rows report is [compose rate](../../../../context/world/compose-rate.md).
 
 ## Runs
 

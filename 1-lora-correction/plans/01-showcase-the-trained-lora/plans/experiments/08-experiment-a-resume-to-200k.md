@@ -47,7 +47,7 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The hypothesis:** *training length is not the knob: doubling the steps moves neither the held-out [compose rate](../../../../context/world/compose-rate.md) outside its seed-noise band nor the frozen tracking set's crispness reads.*
+**The hypothesis:** *training length is not the knob: doubling the steps moves neither the held-out [compose rate](../../../../../context/world/compose-rate.md) outside its seed-noise band nor the frozen tracking set's crispness reads.*
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen.
@@ -72,7 +72,7 @@
 
 **Expected runtime:** roughly 6.6 GPU-hours at the measured 4.2 optimizer steps/s; measure it. biggpu, 3-day walltime is ample.
 
-**Launch shape (ledger):** the one Slurm job per user goes here: sbatch on an idle biggpu node per [execution-protocol](../../../../environment/hpc/execution-protocol.md).
+**Launch shape (ledger):** the one Slurm job per user goes here: sbatch on an idle biggpu node per [execution-protocol](../../../../../environment/hpc/execution-protocol.md).
 
 **Prerequisites:** plan 06's frozen tracking set (hash in config); plan 01's verdict on where the training curve stops rising, recorded.
 
@@ -84,7 +84,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- biggpu allows one Slurm job per user; this run takes that one job ([overview](../../../../environment/overview.md)).
+- biggpu allows one Slurm job per user; this run takes that one job ([overview](../../../../../environment/overview.md)).
 - Checkpointing to `/datasets` only (the home filesystem once hit 100% and silently killed checkpointing); the launcher's disk guard checks `/datasets`.
 - The `co3` python; fp16 with upcast rule.
 
@@ -137,7 +137,7 @@ Serves goal 4. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md`**
 
 ▶ **Next: [task 1.1](#1--launch-and-harvest)**.
 
@@ -145,7 +145,7 @@ Serves goal 4. Checkable outcomes:
 
 ◀ **Needs: [06 instruction 2.3](../tools/06-extend-the-tracking-set.md#2--prove-the-first-short-run-in-wb)** (frozen tracking set proven) and **[01 instruction 2.4](../reading/01-read-where-the-curves-flatten.md#2--read-the-curves-in-wb)** (the ceiling-or-waypoint verdict recorded).
 
-- [ ] **1.1 Write the sbatch launcher** (`scripts/showcase/experiment_a_resume.sbatch`): co3 python, cache env var, disk guard on `/datasets`, tracking set on, W&B flags.
+- [ ] **1.1 Write the sbatch launcher** (`1-lora-correction/scripts/showcase/experiment_a_resume.sbatch`): co3 python, cache env var, disk guard on `/datasets`, tracking set on, W&B flags.
 - [ ] **1.2 Submit and record.** `sbatch` on an idle biggpu node; job id and run id into the review Runs table. Completion is observable: `squeue -u mmolefe` shows the job; the W&B run appears with the frozen manifest hash in its config.
 - [ ] **1.3 Harvest at completion**: confirm `lora_step_200000.pt` exists on `/datasets`, tracking renders complete, then build `experiment_a_verdict_inputs.json` (200k vs 100k, per metric, with the seed-noise band).
 
@@ -225,7 +225,7 @@ Serves goal 4. Checkable outcomes:
 ◀ **Needs: [instruction 2.3](#2--watch-and-judge)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [09-experiment-b-rank-16-32](09-experiment-b-rank-16-32.md).**
 
@@ -236,7 +236,7 @@ Serves goal 4. Checkable outcomes:
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
 **File:** `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py` — the trainer; the launcher adds resume and max-steps flags.
-**File:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` — the resume point.
+**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_100000.pt` — the resume point.
 
 ---
 
@@ -247,10 +247,10 @@ Serves goal 4. Checkable outcomes:
 ▶ Paste to run this plan (the one Slurm job):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md — dry resume of ~100 steps in-session first; only then sbatch on an idle biggpu node with the pre-launch check block; the null threshold is pre-registered in the review file.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md — dry resume of ~100 steps in-session first; only then sbatch on an idle biggpu node with the pre-launch check block; the null threshold is pre-registered in the review file.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md` and paste the tmux block it emits (multi-hour training, SSH-drop-prone, thresholds pre-registered). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/08-experiment-a-resume-to-200k.md` and paste the tmux block it emits (multi-hour training, SSH-drop-prone, thresholds pre-registered). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 

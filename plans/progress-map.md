@@ -234,15 +234,15 @@ total differs from a bare count of markdown files under `plans/`.
 
 | Scope | Plans | Done | In flight | Not started | Band |
 |---|---|---|---|---|---|
-| [01 showcase the trained lora](01-showcase-the-trained-lora/MASTER_PLAN.md) | 23 | 0 | 11 | 12 | running now |
-| [02 can we trust the compose rate](02-can-we-trust-the-compose-rate/MASTER_PLAN.md) | 4 | 0 | 0 | 4 | never opened |
-| [03 interaction-term](03-does-the-correction-cause-composition/MASTER_PLAN.md) | 11 | 7 | 1 | 3 | some of it finished |
-| [04 animals-compose-transfer](04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md) | 6 | 2 | 2 | 2 | some of it finished |
-| [05 when does the outcome lock in](05-when-does-the-outcome-lock-in/MASTER_PLAN.md) | 7 | 0 | 3 | 4 | running now |
-| [06 is the gap the sampler's](06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md) | 16 | 0 | 11 | 5 | running now |
-| [07 writing the paper](07-writing-the-paper/MASTER_PLAN.md) | 7 | 0 | 1 | 6 | running now |
-| [08 improve the rank-32 adapter](08-improve-the-rank-32-pooled-adapter/MASTER_PLAN.md) | 7 | 0 | 0 | 7 | never opened |
-| [09 designing the correction loss](09-designing-the-correction-loss/MASTER_PLAN.md) | 6 | 0 | 3 | 3 | running now |
+| [01 showcase the trained lora](../1-lora-correction/plans/01-showcase-the-trained-lora/MASTER_PLAN.md) | 23 | 0 | 11 | 12 | running now |
+| [02 can we trust the compose rate](../1-lora-correction/plans/02-can-we-trust-the-compose-rate/MASTER_PLAN.md) | 4 | 0 | 0 | 4 | never opened |
+| [03 interaction-term](../1-lora-correction/plans/03-does-the-correction-cause-composition/MASTER_PLAN.md) | 11 | 7 | 1 | 3 | some of it finished |
+| [04 animals-compose-transfer](../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md) | 6 | 2 | 2 | 2 | some of it finished |
+| [05 when does the outcome lock in](../1-lora-correction/plans/05-when-does-the-outcome-lock-in/MASTER_PLAN.md) | 7 | 0 | 3 | 4 | running now |
+| [06 is the gap the sampler's](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md) | 16 | 0 | 11 | 5 | running now |
+| [07 writing the paper](../1-lora-correction/plans/07-writing-the-paper/MASTER_PLAN.md) | 7 | 0 | 1 | 6 | running now |
+| [08 improve the rank-32 adapter](../1-lora-correction/plans/08-improve-the-rank-32-pooled-adapter/MASTER_PLAN.md) | 7 | 0 | 0 | 7 | never opened |
+| [09 designing the correction loss](../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) | 6 | 0 | 3 | 3 | running now |
 | standing | 2 | 0 | 1 | 1 | running now |
 | **Total** | **89** | **9** | **33** | **47** | |
 

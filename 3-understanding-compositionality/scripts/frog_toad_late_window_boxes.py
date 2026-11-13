@@ -14,7 +14,7 @@ error and the caption's dagger sentence stands.
 Runs the same detector and filters as the scorer (count_instances in
 detection_scorer.py); it does not change any stored score.
 
-    python scripts/frog_toad_late_window_boxes.py
+    python 3-understanding-compositionality/scripts/frog_toad_late_window_boxes.py
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 from poe_repair.experiments.compose_scorer_validation.detection_scorer import (
     MIN_BOX_FRACTION, _box_side,

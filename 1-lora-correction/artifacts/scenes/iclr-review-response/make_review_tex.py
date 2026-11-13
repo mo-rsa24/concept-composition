@@ -7,7 +7,7 @@ document follows the replies whenever they change. The twelve claim-group figure
 claim-figures.pdf, joined with pdfunite. Build with Tectonic: `tectonic review.tex` in this folder.
 
 Usage, from the repo root:
-  python3 artifacts/scenes/iclr-review-response/make_review_tex.py
+  python3 1-lora-correction/artifacts/scenes/iclr-review-response/make_review_tex.py
 """
 from __future__ import annotations
 

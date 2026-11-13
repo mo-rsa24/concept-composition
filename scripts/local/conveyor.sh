@@ -2,8 +2,8 @@
 # Pull every joint-prompt render as it lands on the cluster, and rebuild the contact sheet
 # whenever the count changes. Runs for about eight hours; start it again for a longer sitting.
 REMOTE=mscluster84:/datasets/mmolefe/poe_repair_min/outputs/pair_audition/
-LOCAL=/home/molef/PhD/poe_repair_min/artifacts/results/which-new-pairs-compose-cleanly/tiles
-SHEET=/home/molef/PhD/poe_repair_min/artifacts/results/which-new-pairs-compose-cleanly/pair-audition.png
+LOCAL=/home/molef/PhD/poe_repair_min/1-lora-correction/artifacts/results/which-new-pairs-compose-cleanly/tiles
+SHEET=/home/molef/PhD/poe_repair_min/1-lora-correction/artifacts/results/which-new-pairs-compose-cleanly/pair-audition.png
 HERE=$(dirname "$(readlink -f "$0")")
 mkdir -p "$LOCAL"; last=0
 for i in $(seq 1 240); do

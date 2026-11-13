@@ -90,7 +90,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 | Where the checkpoints are | Steps saved | Watch out |
 |---|---|---|
-| `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/` | rank 8, 5k to 100k, `lora_step_030000.pt` is the showcase pick | on `/home-mscluster`; read from it, never write new checkpoints there |
+| `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/` | rank 8, 5k to 100k, `lora_step_030000.pt` is the showcase pick | on `/home-mscluster`; read from it, never write new checkpoints there |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_200k/checkpoints/` | rank 8, 105k to 200k | |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r8_450k/checkpoints/` | rank 8, 205k to 450k | renders are hazy from about 240k on |
 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r16_100k/checkpoints/` | rank 16; steps end in `018` after the resume (`lora_step_050018.pt`) | pass `--rank 16` to the probe |
@@ -131,7 +131,7 @@ export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/cach
 USED=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i 1)
 UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader -i 1)
 if [ "$USED" -gt 1024 ] || [[ "$UTIL" == *"N/A"* || "$UTIL" == *"reset"* ]]; then echo "ABORT: device 1 used=${USED}MiB util='$UTIL'" >&2; exit 1; fi
-$PY scripts/showcase/lambda_boundary_probe.py --rank 32 \
+$PY 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --rank 32 \
   --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_090050.pt \
   --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_090050 \
   --windows full --lambdas 1.0,1.2
@@ -215,7 +215,7 @@ UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader -i "$GPU")
 if [ "$USED" -gt 1024 ] || echo "$UTIL" | grep -q "N/A\|reset"; then echo "ABORT device $GPU busy/faulted: ${USED}MiB $UTIL"; exit 3; fi
 PCT=$(df --output=pcent /datasets | tail -1 | tr -dc 0-9); [ "$PCT" -ge 90 ] && { echo "ABORT /datasets at ${PCT}%"; exit 4; }
 cd "$REPO"
-CUDA_VISIBLE_DEVICES=$GPU $PY scripts/showcase/fit_cosine_on_cache.py \
+CUDA_VISIBLE_DEVICES=$GPU $PY 1-lora-correction/scripts/showcase/fit_cosine_on_cache.py \
   --checkpoint "$REPO/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/lora_step_030000.pt" \
   --out "$OUT" --rank 8 --alpha 8 --step-stride 5
 echo "DONE fit-cosine r8_030000 exit=$? $(date)"
@@ -246,7 +246,7 @@ continues without it; the pair's `n` in the table shows how many rows it got.
 
 - A different pool (other pairs or seeds): pass `--pair-pool`, `--seed-pool-path` and
   `--pair-prompts` pointing at YAML files of the same shape as the ones under
-  `artifacts/results/does-the-fix-reach-unseen-pairs/`. This is how the seen-words-unseen-pair
+  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/`. This is how the seen-words-unseen-pair
   tiers were read (their pool files sit beside `fit_cosine_tiers_r8_030000/`).
 
 ## 3. Resume a pooled training from a checkpoint on a free device   `ran 2026-09-01`
@@ -261,7 +261,7 @@ else about the recipe.
 
 **Fill in**
 
-Edit these at the top of `scripts/showcase/experiment_a_resume.sh`, which is the resume launcher
+Edit these at the top of `1-lora-correction/scripts/showcase/experiment_a_resume.sh`, which is the resume launcher
 for the rank 8 lineage and the template for the others:
 
 | What | Example | Where to get it |
@@ -273,7 +273,7 @@ for the rank 8 lineage and the template for the others:
 | the device index | `0` | the first argument to the script |
 
 ```bash
-ssh mscluster110 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/experiment_a_resume.sh 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_a_resume.log 2>&1 &'
+ssh mscluster110 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_a_resume.sh 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_a_resume.log 2>&1 &'
 ```
 
 ✅ **The header says which node and device, the guards pass, and the adapter attaches.** Real
@@ -299,13 +299,13 @@ launch. Re-check and pick another.
 
 **Variations**
 
-- Rank 16 or 32: the fresh-run launcher is `scripts/showcase/experiment_b_rank.sh <rank> <device>`
+- Rank 16 or 32: the fresh-run launcher is `1-lora-correction/scripts/showcase/experiment_b_rank.sh <rank> <device>`
   (shared-device path). The two resumes after the kill-criterion aborts (`phase1_r16_100k` from
   step 37,418 on mscluster108 device 1, `phase1_r32_100k` from 6,500 on mscluster106 device 1)
   were launched with a copy of that script pointed at the abort checkpoint via `--resume-from`;
   their logs are `logs/experiment_b_rank16_resumed.log` and `logs/experiment_b_rank32_resumed.log`
   under the showcase outputs.
-- Rank 32 with AdamW weight decay on (scope 01 plan 15): `scripts/showcase/experiment_d_weight_decay.sh <wd> <device> [python]`,
+- Rank 32 with AdamW weight decay on (scope 01 plan 15): `1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh <wd> <device> [python]`,
   the same flags as the rank-32 run plus `--weight-decay` and the kill criterion disabled. Its
   memory guard is 4096 MiB and it adds a utilisation guard (under 5%) and a `torch.cuda` check.
   Run id `phase1_r32_wd<wd>_100k` under the showcase outputs; log `logs/experiment_d_wd<wd>.log`.
@@ -342,7 +342,7 @@ the script runs one training per device in the background.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-sbatch scripts/showcase/experiment_b_rank.sbatch
+sbatch 1-lora-correction/scripts/showcase/experiment_b_rank.sbatch
 squeue -u mmolefe
 ```
 

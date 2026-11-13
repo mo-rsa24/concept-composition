@@ -47,7 +47,7 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The measurement:** the joint prompt's own [compose rate](../../../../context/world/compose-rate.md), counted. On some held-out runs the joint prompt fails to show both animals; the LoRA, which never consumes the joint prompt at inference, restores them. That baseline is currently an anecdote; this plan makes it a number.
+**The measurement:** the joint prompt's own [compose rate](../../../../../context/world/compose-rate.md), counted. On some held-out runs the joint prompt fails to show both animals; the LoRA, which never consumes the joint prompt at inference, restores them. That baseline is currently an anecdote; this plan makes it a number.
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen.
@@ -79,7 +79,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python; the scorer's weights load once per session; outputs to `/datasets` ([overview](../../../../environment/overview.md)).
+- The `co3` python; the scorer's weights load once per session; outputs to `/datasets` ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -129,7 +129,7 @@ Serves goal 6. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/11-the-counted-joint-prompt-figure.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/11-the-counted-joint-prompt-figure.md`**
 
 ▶ **Next: [task 1.1](#1--score-and-draft)**.
 
@@ -209,7 +209,7 @@ Serves goal 6. Checkable outcomes:
 ◀ **Needs: [instruction 2.3](#2--spot-check-the-counts)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [12-close-f8a-and-the-best-case-panel](12-close-f8a-and-the-best-case-panel.md).**
 
@@ -219,7 +219,7 @@ Serves goal 6. Checkable outcomes:
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**Pattern:** the scoring loop in `scripts/cross_seed_lora_pooling/render_heldout_summary.py` — the scorer invocation to copy, pointed at `mono.png` instead of corrected renders.
+**Pattern:** the scoring loop in `1-lora-correction/scripts/cross_seed_lora_pooling/render_heldout_summary.py` — the scorer invocation to copy, pointed at `mono.png` instead of corrected renders.
 
 ---
 
@@ -230,7 +230,7 @@ Serves goal 6. Checkable outcomes:
 ▶ Paste to run this plan (minutes of scoring, no queue):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/11-the-counted-joint-prompt-figure.md: score the cached mono renders, build the three-bars-per-pair figure with the strip of repaired renders beside it; the wording rule applies.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/11-the-counted-joint-prompt-figure.md: score the cached mono renders, build the three-bars-per-pair figure with the strip of repaired renders beside it; the wording rule applies.
 ```
 
 ---

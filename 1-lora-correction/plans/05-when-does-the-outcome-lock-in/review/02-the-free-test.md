@@ -66,7 +66,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 - [ ] ⚠️ In every clean pair-and-seed run (drift defined and settling under
       `DRIFT_SETTLED_MAX`), does the settling step land at or before that run's divergence step
-      (`ORDERING_HOLDS_FRAC_MIN = 1.0` in `scripts/commitment/posterior_drift.py`)?
+      (`ORDERING_HOLDS_FRAC_MIN = 1.0` in `1-lora-correction/scripts/commitment/posterior_drift.py`)?
       This is the deciding question because the ledger pre-registered the ordering as the
       story's first falsifiable consequence.
 

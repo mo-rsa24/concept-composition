@@ -16,7 +16,7 @@ recorded.
 
 There is nothing to describe here yet. The dispatch header names what the walk was opened to
 confirm and points at its source plan,
-`plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/01-the-free-bound-on-the-models-share.md`,
+`1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/01-the-free-bound-on-the-models-share.md`,
 but the walk itself never produced a first rung: no claim, no example, no reading-back. This is an
 open thread, not a resolved one, and nothing here should be read as a finding.
 

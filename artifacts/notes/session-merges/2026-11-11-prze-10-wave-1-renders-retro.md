@@ -1,6 +1,6 @@
 # PRZE-10: every review job priced, and wave 1 rendered
 
-Retrospective of the walk over [the PRZE-10 plan](../../../plans/prze-10-wave-1-renders.md), 2026-11-11, step 5 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../drips/prze-10-wave-1/EXECUTE_WALK.md), and the jobs table is in [the compute plan](../../../report/paper-review/prze-10-compute.md#the-jobs).
+Retrospective of the walk over [the PRZE-10 plan](../../../1-lora-correction/plans/price-the-review-jobs-and-launch-the-first-renders.md), 2026-11-11, step 5 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/price-the-review-jobs-and-launch-the-first-renders/EXECUTE_WALK.md), and the jobs table is in [the compute plan](../../../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs).
 
 ## 1. The compute table
 
@@ -10,7 +10,7 @@ Retrospective of the walk over [the PRZE-10 plan](../../../plans/prze-10-wave-1-
 
 **What was done.** The per-image rate was read from step 4's census logs (the same columns on the same Blackwells), and every card was re-read with `nvidia-smi` and `pgrep` before placing a job.
 
-**Where the results live.** `report/paper-review/prze-10-compute.md`, sections "Where each card stands", "How long one image takes" and "The jobs" (13 rows); commit `56debc5e`.
+**Where the results live.** `1-lora-correction/report/paper-review/prze-10-compute.md`, sections "Where each card stands", "How long one image takes" and "The jobs" (13 rows); commit `56debc5e`.
 
 **Before and after.** Joint 5.0 to 5.2 s, PoE 5.7 to 5.9 s and ours 12.1 to 14.3 s per image measured, against the 11 to 16 s assumed; wave 1 priced at 9.7 to 11.3 h on one Blackwell.
 
@@ -22,7 +22,7 @@ Retrospective of the walk over [the PRZE-10 plan](../../../plans/prze-10-wave-1-
 
 **The problem.** Both render scripts built the joint prompt as "{a} and {b}", which misdraws the 36 benchmark prompts that read "with"; the 45 prompts naming a frog or a mouse were refused by the subject check.
 
-**What was done.** `--joint-template` and `--allow-ask-first` were added to `scripts/concept_pair_sheet.py`, `--allow-ask-first` to `scripts/figure_candidates.py`, and three launchers written beside the step 4 one: `scripts/review_wave1_renders.sh`, `scripts/review_wave1_r1.sh` and `scripts/review_wave1_r1_rev.sh`, with the prompt lists `scripts/review_benchmark_pairs.txt` and `scripts/review_held_out_pairs.txt`.
+**What was done.** `--joint-template` and `--allow-ask-first` were added to `3-understanding-compositionality/scripts/concept_pair_sheet.py`, `--allow-ask-first` to `1-lora-correction/scripts/figure_candidates.py`, and three launchers written beside the step 4 one: `1-lora-correction/scripts/review_wave1_renders.sh`, `1-lora-correction/scripts/review_wave1_r1.sh` and `scripts/review_wave1_r1_rev.sh`, with the prompt lists `1-lora-correction/scripts/review_benchmark_pairs.txt` and `scripts/review_held_out_pairs.txt`.
 
 **Where the results live.** Commits `56debc5e`, `62554919` and `0c2babc1`; copies run from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers/`, because `scripts/cluster.sh run` refused to sync over three uncommitted trainer files.
 
@@ -66,7 +66,7 @@ Retrospective of the walk over [the PRZE-10 plan](../../../plans/prze-10-wave-1-
 
 **What was done.** Figure 5 assembled with all five current columns at seed 10; Tables 1 and 2 previewed with the scoring session's builder on a copy of its files; the corrector subset written into protocol rule 6 (your choice, 288 pictures) and launched in two shards on 111 and 112 from the step 8 worktree; shard 0 restarted after a folder collision with a retrying `make_dir` (commit `6edc1897`).
 
-**Where the results live.** `artifacts/results/four-pairs-one-adapter/figure5-seed10-five-columns.png`; `/datasets/mmolefe/poe_repair_min/outputs/paper_review/preview_tables/2026-11-11-1210/out/`; protocol rule 6 and its history row (commit `14990299`); `paper_review/langevin_subset/`.
+**Where the results live.** `1-lora-correction/artifacts/results/does-one-adapter-compose-four-pairs/figure5-seed10-five-columns.png`; `/datasets/mmolefe/poe_repair_min/outputs/paper_review/preview_tables/2026-11-11-1210/out/`; protocol rule 6 and its history row (commit `14990299`); `paper_review/langevin_subset/`.
 
 **Before and after.** Table 1 preview: Comp. on the animals set 0.02 for PoE, 0.89 for the joint prompt, 0.97 for ours; the R1 bar (ours minus PoE in BLIP-VQA) reads SUPPORTS on all three sets. The corrector runs at 99 to 102 s a picture.
 
@@ -93,7 +93,7 @@ The bar was every wave 1 job running or finished with its count matching the pla
 - CO3 on R1 is at 1,045 of 1,104 (13:08) and unscored; CO3 on R3 has not started. Both belong to the baselines session.
 - PoE + Langevin on the subset runs until about 16:40 and is unscored.
 - The three paused trainings are not resumed; their commands are in `RESUME-2026-11-11.md`.
-- `artifacts/results/what-co3-does-on-our-pairs/` has no card.
+- `3-understanding-compositionality/artifacts/results/what-co3-does-on-our-pairs/` has no card.
 - Your prediction that CO3 will beat ours was not written down before CO3's scores; it was offered and not taken.
 
 ## The family table

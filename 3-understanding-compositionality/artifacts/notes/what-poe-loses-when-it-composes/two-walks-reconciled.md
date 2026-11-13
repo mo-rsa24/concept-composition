@@ -8,19 +8,19 @@ The evidence column cites files by these short names, with a line number after t
 
 | Short name | File, from the repo root |
 |---|---|
-| `checkpoints` | `plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md` |
-| `write-up` | `plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md` |
-| `route` | `plans/10-what-poe-loses-when-it-composes/route-structural-can-a-toy-reproduce-the-hybrid.md` |
-| `dispatch` | `artifacts/drips/toy-failure-six-checkpoints/dispatch.md` |
-| `first-run.json` | `artifacts/notes/what-poe-loses-when-it-composes/toy-sampler-hybrids.json` (and `-B-strong-mala.json` beside it) |
-| `first-run.py` | `artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py` |
-| `ddim.json` | `artifacts/notes/what-poe-loses-when-it-composes/fig-ddim-guided.json` |
-| `rebuild` | `artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md` |
-| `walk05` | `artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md` |
-| `ladder02`, `ladder04`, `ladder10`, `ladder11` | `artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md`, `04-the-parts-world.md`, `10-latent-space-and-vaes.md`, `11-the-text-conditioned-testbed.md` |
-| `overlap-map`, `overlap-compiled` | `artifacts/ideas/poe-overlap-dial/IDEA_MAP.md`, `COMPILED.md` |
+| `checkpoints` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md` |
+| `write-up` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md` |
+| `route` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/route-structural-can-a-toy-reproduce-the-hybrid.md` |
+| `dispatch` | `3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/dispatch.md` |
+| `first-run.json` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy-sampler-hybrids.json` (and `-B-strong-mala.json` beside it) |
+| `first-run.py` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py` |
+| `ddim.json` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/fig-ddim-guided.json` |
+| `rebuild` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md` |
+| `walk05` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md` |
+| `ladder02`, `ladder04`, `ladder10`, `ladder11` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md`, `04-the-parts-world.md`, `10-latent-space-and-vaes.md`, `11-the-text-conditioned-testbed.md` |
+| `overlap-map`, `overlap-compiled` | `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md`, `COMPILED.md` |
 | `a-and-b-map` | `artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md` |
-| `testbed-map` | `artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md` |
+| `testbed-map` | `3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md` |
 | `out/` | `toy/rebuild/out/` |
 
 **Construction (1) and construction (2)** are B's names and are used below because A has none. Construction (1) is one conditional model run as score(x|A) + score(x|B) − score(x), which targets p(x|A)·p(x|B)/p(x); at guidance w it is A's guided sum. Construction (2) is two separate experts multiplied, p_A·p_B, which is A's exact product in checkpoints 3 to 5.

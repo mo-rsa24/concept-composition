@@ -11,7 +11,7 @@ for the UNet and the real DDIM scheduler with SDXL's settings, on the CPU, in se
      differently).
   4. The call counter: a level costs k + 1 calls for Langevin and k * L + 2 for unadjusted HMC.
 
-The same identity on real SDXL is checked on the cluster by scripts/check_corrector_identity.py.
+The same identity on real SDXL is checked on the cluster by 1-lora-correction/scripts/check_corrector_identity.py.
 """
 
 from __future__ import annotations

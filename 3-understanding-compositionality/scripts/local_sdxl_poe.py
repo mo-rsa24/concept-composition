@@ -9,9 +9,9 @@ for any number of conditions:
     eps = eps_empty + w * sum_i (eps_i - eps_empty)
 
     PY=/home/molef/micromamba/envs/sdxl-local/bin/python
-    $PY scripts/local_sdxl_poe.py render --animals camel dog --seeds 1 2 3 4 5 6 7 8
-    $PY scripts/local_sdxl_poe.py sheet
-    $PY scripts/local_sdxl_poe.py tally          # after calls.json is written
+    $PY 3-understanding-compositionality/scripts/local_sdxl_poe.py render --animals camel dog --seeds 1 2 3 4 5 6 7 8
+    $PY 3-understanding-compositionality/scripts/local_sdxl_poe.py sheet
+    $PY 3-understanding-compositionality/scripts/local_sdxl_poe.py tally          # after calls.json is written
 
 50 DDIM steps, guidance 7.5, 1024 x 1024, fp16 UNet, fp32 VAE decode: the settings of every earlier sheet.
 """
@@ -22,8 +22,8 @@ import json
 import time
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
-OUT = REPO / "artifacts/results/does-an-effect-need-support/laptop-third-concept"
+REPO = Path(__file__).resolve().parents[2]
+OUT = REPO / "3-understanding-compositionality/artifacts/results/does-an-effect-need-support/laptop-third-concept"
 MODEL = "stabilityai/stable-diffusion-xl-base-1.0"
 STEPS, W, SIZE = 50, 7.5, 1024
 

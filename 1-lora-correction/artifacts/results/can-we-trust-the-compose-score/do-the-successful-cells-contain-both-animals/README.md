@@ -73,13 +73,13 @@ would decide the 5 cells in `cannot-decide` and would be no better than guessing
 ## Provenance
 
 Copies, not moves: the originals stay under `outputs/interaction_term/dose/pairs/`, because
-`scripts/plot_dose_curves.py` scores from there and moving them would break the curve. Rebuild this
+`1-lora-correction/scripts/plot_dose_curves.py` scores from there and moving them would break the curve. Rebuild this
 folder from `calls.json`, which records every source path.
 
 ## Where it came from and what judged it
 
 Sorted by hand from the λ=1 row of `outputs/interaction_term/dose/pairs/`. The band this set
-produces is read directly in [the world entry on compose rate](../../../../context/world/compose-rate.md)
+produces is read directly in [the world entry on compose rate](../../../../../context/world/compose-rate.md)
 and is the input the labelling pass in
 [the three-state labelled set](../../../../plans/02-can-we-trust-the-compose-rate/plans/tools/04-the-three-state-labelled-set.md)
 is required to reproduce at 90% agreement before its own automated rate is trusted; that plan's

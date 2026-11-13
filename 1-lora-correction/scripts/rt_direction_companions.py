@@ -21,7 +21,7 @@ Frames are each run's own estimate of where it is heading (Tweedie from the
 cached x_t and the PoE prediction that steered the path, VAE-decoded), cached
 under outputs/interaction_term/direction_wall/frames/.
 
-    CUDA_VISIBLE_DEVICES=0 python scripts/rt_direction_companions.py
+    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_direction_companions.py
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import load_cell  # noqa: E402
 from scripts.rt_reuse_figure import FRAME_DIR, x0_estimate  # noqa: E402

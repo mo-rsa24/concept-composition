@@ -7,7 +7,7 @@ from matplotlib.patches import Ellipse
 INDIGO = "#4527a0"
 NEAR_BLACK = "#212121"
 
-repo = Path(__file__).resolve().parents[4]
+repo = Path(__file__).resolve().parents[5]
 data_path = repo / "rebuild" / "out" / "phase5" / "finetune.json"
 with data_path.open() as f:
     data = json.load(f)

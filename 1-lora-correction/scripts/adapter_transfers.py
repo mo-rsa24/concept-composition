@@ -22,7 +22,7 @@ carries its step and none of them is the final word.
 
 Reads the scored run only; it does not sample or train.
 
-    python scripts/adapter_transfers.py
+    python 1-lora-correction/scripts/adapter_transfers.py
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 RUN = paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS) / "pooled_lora/phase1_r8_100k"
 OUT_DIR = Path("paper/iclr/figures")

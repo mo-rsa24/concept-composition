@@ -3,10 +3,10 @@
 Rebuild the JAX/Haiku reference notebook in PyTorch, layer by layer, then extend it past the notebook into the composition testbed this project's idea walk settled on. Python, NumPy and PyTorch only, no JAX. Run Python with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python. GPU work follows the GPU guard in /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/environment/hpc/execution-protocol.md (use a card with under 1 GB in use, else CPU).
 
 Context (cold start). Read first, in this order:
-1. artifacts/ideas/poe-overlap-dial/IDEA_MAP.md: nine claims with marks; the Runs table holds every result so far.
-2. artifacts/ideas/poe-overlap-dial/composition-terms.md: the kinds of composition (co-occurrence, intersection, interaction, contention, plus the [field] kinds and route 1's proposed changes).
-3. artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb: the 2D suite (Figure 1: p1, p2, exact, perfect sampler, reverse diffusion, annealed ULA, MALA, UHA per kind; Figure 2: dial curves; runs 1 and 2: tuned MALA and the steep points).
-4. artifacts/ideas/poe-overlap-dial/example-9-parts-world/ (the .tex, parts_world.py, numbers.json): the 16-pixel Gaussian-mixture parts world where cat x dog products are exact.
+1. 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md: nine claims with marks; the Runs table holds every result so far.
+2. 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md: the kinds of composition (co-occurrence, intersection, interaction, contention, plus the [field] kinds and route 1's proposed changes).
+3. 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb: the 2D suite (Figure 1: p1, p2, exact, perfect sampler, reverse diffusion, annealed ULA, MALA, UHA per kind; Figure 2: dial curves; runs 1 and 2: tuned MALA and the steep points).
+4. 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/ (the .tex, parts_world.py, numbers.json): the 16-pixel Gaussian-mixture parts world where cat x dog products are exact.
 
 Settled facts the rebuild must keep:
 - A density expert learns its training set's density; labels matter only where something reads them (claim 1).
@@ -25,4 +25,4 @@ Phases, each its own layer with a check before the next. Each phase points the l
 
 Finish line: phase 5's curves exist for the exact composition and for tuned MALA and UHA, and each phase's check passed by hand.
 
-Return: write artifacts/ideas/poe-overlap-dial/routes/03-unbuild-walk.return.md with (1) where the PyTorch code lives, (2) each phase's check and whether it passed, (3) the MALA fix and its test, (4) phase 5's curves with their numbers. Then say `integrate` in the idea walk. Parent: the drip-idea walk in session 0481b097-3bd5-4858-85f2-333cedbbe5b4, map artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, routes row 3.
+Return: write 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-unbuild-walk.return.md with (1) where the PyTorch code lives, (2) each phase's check and whether it passed, (3) the MALA fix and its test, (4) phase 5's curves with their numbers. Then say `integrate` in the idea walk. Parent: the drip-idea walk in session 0481b097-3bd5-4858-85f2-333cedbbe5b4, map 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, routes row 3.

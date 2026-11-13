@@ -11,7 +11,7 @@
 # Override CEILING_SEEDS or EPOCHS via env vars.
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 CUDA=${CUDA_VISIBLE_DEVICES:-1}
 EPOCHS=${EPOCHS:-1600}                    # 8 × 200; epoch parity for k=8 pooled

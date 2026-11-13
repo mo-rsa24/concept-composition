@@ -7,7 +7,7 @@ import unittest
 import torch
 from transformers import CLIPTextConfig, CLIPTextModel, CLIPTextModelWithProjection
 
-spec = importlib.util.spec_from_file_location('fixed_x', Path(__file__).parents[1] / 'scripts/and_vector_fixed_x.py')
+spec = importlib.util.spec_from_file_location('fixed_x', Path(__file__).parents[1] / '5-text-embedding-third-expert/scripts/and_vector_fixed_x.py')
 fixed_x = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fixed_x)
 

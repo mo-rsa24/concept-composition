@@ -139,7 +139,7 @@ def build_photos(run: str, *, manifest: dict | None = None, seed: int = 0) -> li
     """The 550 photos a run trains on, with C's fixed captions already assigned.
 
     With no manifest this builds placeholders carrying only their set, which is all the share
-    check needs. With a manifest (from scripts/census/inclusive_captions_pool.py) it carries the
+    check needs. With a manifest (from 3-understanding-compositionality/scripts/census/inclusive_captions_pool.py) it carries the
     real file paths and the real COCO captions.
     """
     wanted = ["cat_only", "dog_only", "neither" if run == "no-both" else "both"]

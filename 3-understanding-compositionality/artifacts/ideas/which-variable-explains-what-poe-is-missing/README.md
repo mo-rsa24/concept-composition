@@ -20,9 +20,9 @@ one submerge journey and one plan scope already spawned from this walk.
 
 ## Where it came from and what judged it
 
-Referenced from [the section-4 draft entry](../../../paper/iclr/DRAFT_MAP.md) as the mechanism
+Referenced from [the section-4 draft entry](../../../../paper/iclr/DRAFT_MAP.md) as the mechanism
 question behind that section's figure test, and from three plan files in
-[scope 06](../../../plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md) (its master
+[scope 06](../../../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md) (its master
 plan and two hypothesis plans) that point at this idea's claim 2 for the free bound on the model's
 share of `r_t`. Parked mid-walk as of 2026-08-26: beat 8 of the section-4 skeleton stays a prose
 mention until claim 3 (does linear score addition carry a step-wise signature separating a

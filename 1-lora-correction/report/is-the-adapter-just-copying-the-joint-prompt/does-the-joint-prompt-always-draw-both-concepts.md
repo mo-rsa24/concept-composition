@@ -30,7 +30,7 @@ hourglass at seeds 9, 10, 11, 12 and 42, five of five, no hourglass in any; cat 
 beside one dog, and at seed 2, one large dog with a malformed small one; elephant and penguin at
 seed 9, the elephant alone. Counted by eye over the renders under
 `/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/<pair>/seed<NN>/mono.png`, mirrored into
-`artifacts/results/which-checkpoint-to-take-each-figure-cell-from/tiles/`.
+`3-understanding-compositionality/artifacts/results/which-checkpoint-to-take-each-figure-cell-from/tiles/`.
 
 ## 2. What the adapter does on those cells
 
@@ -39,7 +39,7 @@ the figure above carry no adapter render, because only the dog and dog cell at s
 rendered through a v58 checkpoint. On that one row the adapter draws two animals where the joint
 prompt drew a person and one dog, though the second animal is dark and horse-like rather than
 clearly a dog. Rendering the other five cells is three jobs of the shape already used in
-`scripts/figure_candidates.py`, and until they exist this file does not claim the adapter beats
+`1-lora-correction/scripts/figure_candidates.py`, and until they exist this file does not claim the adapter beats
 its target.
 
 ## What this cannot tell you
@@ -64,5 +64,5 @@ its target.
 | What | How it was established | When |
 |---|---|---|
 | The eleven failing cells | read by eye from the 32 joint-prompt renders on the cluster | 2026-09-24 |
-| The figure | `scripts/main_study_grids.py` | 2026-09-24 |
-| The renders | `scripts/figure_candidates.py`, column `mono`, 50 DDIM steps at guidance 7.5 | 2026-09-23 and 2026-09-24 |
+| The figure | `5-text-embedding-third-expert/scripts/main_study_grids.py` | 2026-09-24 |
+| The renders | `1-lora-correction/scripts/figure_candidates.py`, column `mono`, 50 DDIM steps at guidance 7.5 | 2026-09-23 and 2026-09-24 |

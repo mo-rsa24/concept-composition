@@ -4,7 +4,7 @@ Used during training to render one PNG per seed at the current LoRA
 state, plus a composed contact sheet for at-a-glance review. Designed
 to be cheap (20 DDIM steps by default) so it can run every N epochs
 without dominating wall-clock time. The post-hoc, full-quality renderer
-(``scripts/cross_seed_lora_pooling/render_per_epoch.py``) handles the
+(``1-lora-correction/scripts/cross_seed_lora_pooling/render_per_epoch.py``) handles the
 final 50-step / 1024² pass.
 """
 from __future__ import annotations

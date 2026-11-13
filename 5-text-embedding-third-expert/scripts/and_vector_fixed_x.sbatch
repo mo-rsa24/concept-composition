@@ -20,4 +20,4 @@ export TORCH_HOME="$OUT/cache/torch"
 mkdir -p "$TMPDIR" "$XDG_CACHE_HOME" "$TORCH_HOME"
 cd "$REPO"
 nvidia-smi --query-gpu=name,memory.used --format=csv,noheader
-"$PY" scripts/and_vector_fixed_x.py --out "$OUT" "$@"
+"$PY" 5-text-embedding-third-expert/scripts/and_vector_fixed_x.py --out "$OUT" "$@"

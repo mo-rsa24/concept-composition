@@ -65,7 +65,7 @@ example of that comparison is owed:
 
 > 📷 **Picture wanted**: one run's PoE render, LoRA-corrected render, and Mono render side by
 > side, so a reader can see what the correction visibly moved. Not yet selected; a strong
-> candidate is any run behind `artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
+> candidate is any run behind `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
 > `passing_spaces: instance_count` result. Save as
 > `images/world/05-lora-corrected-vs-poe-vs-mono.png`.
 
@@ -101,7 +101,7 @@ single-pair-trained LoRA's apparent transfer to a sibling pair is a real hit or 
 correction that happens to fit" is exactly why the project's own step 3 (`does-the-fix-reach-unseen-pairs`)
 was downgraded from something the paper must clear to an optional short check, and step 4
 (group-wise pooling on concept-disjoint pairs) was named the reviewer-credible version instead
-(`plans/standing/retrofit-poe-repair-min.md`'s reference to `report/experiments-log.md` EXP-03).
+(`plans/standing/retrofit-poe-repair-min.md`'s reference to `1-lora-correction/report/experiments-log.md` EXP-03).
 
 ## Where this came from
 
@@ -111,13 +111,13 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 |---|---|---|
 | The LoRA's rank, attachment point and Mono-free property | Read in `MASTER_PLAN.md`, Mission | 2026-08-24 |
 | The deployable-artefact framing | Read in `MASTER_PLAN.md`, Expected Outcome | 2026-08-24 |
-| The single-pair-transfer confound and its downgrade | Read in `context/research-guidelines.md` and `report/experiments-log.md` | 2026-08-24 |
+| The single-pair-transfer confound and its downgrade | Read in `context/research-guidelines.md` and `1-lora-correction/report/experiments-log.md` | 2026-08-24 |
 | `arm` value `lora_residual_inject` | Read in `README.md`'s repo layout, `poe_repair/methods/_sampling.py` listing | 2026-08-24 |
 
 ## Cross-references
 
-- The mention of **the softness of the corrected render** (what the adapter costs in fidelity, and two attempts to remove it) in [can a corrector or a clean tail sharpen the adapter's renders](../../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match).
-- The mention of **rank-8** (the adapter the paper argues can carry the correction) in [the whole corrector design](../../plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#why-this-plan-exists).
-- The mention of **adapter** in [the write-up on what PoE loses when it composes](../../plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#35-the-interaction-term).
-- The mention of **pooled LoRA**, the rank-32 checkpoint the third-expert runs are given the recipe of, in [the plan that fits a learned "and" token](../../plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).
+- The mention of **the softness of the corrected render** (what the adapter costs in fidelity, and two attempts to remove it) in [can a corrector or a clean tail sharpen the adapter's renders](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match).
+- The mention of **rank-8** (the adapter the paper argues can carry the correction) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#why-this-plan-exists).
+- The mention of **adapter** in [the write-up on what PoE loses when it composes](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#35-the-interaction-term).
+- The mention of **pooled LoRA**, the rank-32 checkpoint the third-expert runs are given the recipe of, in [the plan that fits a learned "and" token](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).
 - The mention of **the trained LoRA**, the correction a classifier's gradient would stand in for, in [the route for classifier-guided PoE](/home/molef/PhD/poe-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are) (relevance match).

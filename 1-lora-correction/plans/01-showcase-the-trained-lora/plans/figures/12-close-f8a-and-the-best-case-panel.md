@@ -47,7 +47,7 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**Two owed pieces of evidence, both cheap.** First: the phase1 run's checkpoints 70k to 100k were never scored (the [compose rate](../../../../context/world/compose-rate.md) table stops at 60k) while their per-epoch samples sit on disk; scoring them extends F8a (compose-rate-as-the-lora-trains) to the full run and closes the "did anything move late" gap. Second: the qualitative best-case panel, LoRA-corrected renders beside true-r_t-injected renders on the same held-out pairs and seeds. That panel is the interpretation key for experiment B: crisp from the cached true correction while the adapter is soft is the one outcome that makes capacity the lever to pull.
+**Two owed pieces of evidence, both cheap.** First: the phase1 run's checkpoints 70k to 100k were never scored (the [compose rate](../../../../../context/world/compose-rate.md) table stops at 60k) while their per-epoch samples sit on disk; scoring them extends F8a (compose-rate-as-the-lora-trains) to the full run and closes the "did anything move late" gap. Second: the qualitative best-case panel, LoRA-corrected renders beside true-r_t-injected renders on the same held-out pairs and seeds. That panel is the interpretation key for experiment B: crisp from the cached true correction while the adapter is soft is the one outcome that makes capacity the lever to pull.
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen. The cached true correction is the correction computed
@@ -59,7 +59,7 @@
 **Associated materials:**
 - **Review questions:** [../review/12-close-f8a-and-the-oracle-panel.md](../../review/12-close-f8a-and-the-best-case-panel.md)
 - **Ledger entry:** [two tasks owed alongside](../../decisions-taken-here.md#the-longer-training-question-runs-as-three-experiments-re-scoped-by-evidence)
-- **The samples:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_{1400..2000}_step_*`
+- **The samples:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_{1400..2000}_step_*`
 
 ---
 
@@ -77,7 +77,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python; outputs to `/datasets`; fp16 renders are mode-reproducible, and the panel's sidecar says so ([overview](../../../../environment/overview.md)).
+- The `co3` python; outputs to `/datasets`; fp16 renders are mode-reproducible, and the panel's sidecar says so ([overview](../../../../../environment/overview.md)).
 
 ---
 
@@ -105,7 +105,7 @@
 
 1. **The reconciliation check** against figure-01 next door (has it scored the tail or built the panel already?).
 2. **The tail scoring**: per-epoch samples for steps 70k-100k through the scorer; extend `compose_rate.json`'s table shape into `compose_rate_full.json`.
-3. **The F8a extension**: re-run `scripts/adapter_transfers.py` against the full table.
+3. **The F8a extension**: re-run `1-lora-correction/scripts/adapter_transfers.py` against the full table.
 4. **The best-case panel**: LoRA-corrected against cached-true-correction-corrected (true r_t, λ=1) on the four F9 pairs, reusing renders from the run across correction amounts where the pair and seed match; caption states the comparison is qualitative.
 
 ---
@@ -127,7 +127,7 @@ Serves goal 9. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md`**
 
 ▶ **Next: [task 1.1](#1--score-extend-build)**.
 
@@ -137,7 +137,7 @@ Serves goal 9. Checkable outcomes:
 
 - [ ] **1.1 Reconcile with figure-01 next door**: read its Owed section; if either piece is done there, link its output here and skip that piece. Completion is observable: one line in this plan's review naming what was found.
 - [ ] **1.2 Score the 70k-100k per-epoch samples**; write `compose_rate_full.json`. Completion is observable: rows for steps 70000 to 100000 with in_in and out_out rates and n.
-- [ ] **1.3 Rebuild F8a** over the full run (`python scripts/adapter_transfers.py`, full-table input); output beside the existing figure with its sidecar.
+- [ ] **1.3 Rebuild F8a** over the full run (`python 1-lora-correction/scripts/adapter_transfers.py`, full-table input); output beside the existing figure with its sidecar.
 - [ ] **1.4 Build the ceiling panel**: for each F9 pair and seed, the LoRA render beside the cached-true-correction render; render only the missing ones; sidecar names space (decoded pixels), mode (closed-loop), and the qualitative label.
 
 ▶ **Next: [instruction 2.1](#2--read-the-tail-and-the-ceiling)**.
@@ -213,7 +213,7 @@ Serves goal 9. Checkable outcomes:
 ◀ **Needs: [instruction 2.3](#2--read-the-tail-and-the-ceiling)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [13-revalidate-the-scorer-off-animals](../tools/13-revalidate-the-scorer-off-animals.md).**
 
@@ -223,7 +223,7 @@ Serves goal 9. Checkable outcomes:
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/adapter_transfers.py` — F8a's builder, re-run on the full table.
+**File:** `1-lora-correction/scripts/adapter_transfers.py` — F8a's builder, re-run on the full table.
 **Dir:** `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/dose/` — the store of cached-true-correction renders the panel reuses.
 
 ---
@@ -235,10 +235,10 @@ Serves goal 9. Checkable outcomes:
 ▶ Paste to run this plan (reads existing renders):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md: the reconciliation task against figure-01-the-transfer-figures.md first, never duplicate its tasks; then score 70k-100k and build the best-case panel that keys experiment B.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md: the reconciliation task against figure-01-the-transfer-figures.md first, never duplicate its tasks; then score 70k-100k and build the best-case panel that keys experiment B.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md` and paste the tmux block it emits (the scoring half only; the panel eyeball stays attended). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/12-close-f8a-and-the-oracle-panel.md` and paste the tmux block it emits (the scoring half only; the panel eyeball stays attended). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 

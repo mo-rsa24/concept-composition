@@ -12,7 +12,7 @@ at /datasets/mmolefe/siim_acr); whether FastDiME trains classifiers on its edits
 the 4,312 follow-up films with no pneumothorax label still carry a drain (estimated at about 1,100)
 
 Background
-Layer 12 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) asks whether a
+Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) asks whether a
 correction for composition helps on chest X-rays. Step 2 measured the drain gap in B1's project,
 ~/Playground/PhD/medical-imaging/compositional_diffusion/b-shortcut-through-a-device/b1-drain-shortcut-in-pneumothorax/.
 Claim 8 of the idea map says what composition's medical job is, and four questions about it are

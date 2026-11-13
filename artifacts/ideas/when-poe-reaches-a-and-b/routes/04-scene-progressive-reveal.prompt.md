@@ -11,8 +11,8 @@ The toy is four Gaussian blobs at (±0.5, ±0.5), std `0.15`. A is x1 > 0 and me
 
 ## The two scenes
 
-1. Three Ways a Product Reaches A-and-B, https://claude.ai/artifact/9eFnG2rWEciPsceMwdem4u. 15 presses in five frames. Source: artifacts/scenes/three-ways-a-product-reaches-a-and-b/ (page.src.html, build.py, scene_key.py, check_numbers.mjs, README.md).
-2. Where the Product Lands, https://claude.ai/artifact/2A7YDnfKe8EPsS7yFDVcNT. 14 presses. Source: artifacts/scenes/when-a-product-reaches-a-and-b/ (where-the-product-lands.src.html, checks/build.py, checks/scene_key.py, checks/check_page.mjs, README.md).
+1. Three Ways a Product Reaches A-and-B, https://claude.ai/artifact/9eFnG2rWEciPsceMwdem4u. 15 presses in five frames. Source: 3-understanding-compositionality/artifacts/scenes/three-ways-a-product-reaches-a-and-b/ (page.src.html, build.py, scene_key.py, check_numbers.mjs, README.md).
+2. Where the Product Lands, https://claude.ai/artifact/2A7YDnfKe8EPsS7yFDVcNT. 14 presses. Source: 3-understanding-compositionality/artifacts/scenes/when-a-product-reaches-a-and-b/ (where-the-product-lands.src.html, checks/build.py, checks/scene_key.py, checks/check_page.mjs, README.md).
 
 Both follow ~/.claude/SCENE_LOOK.md and ~/.claude/skills/picture-speak/references/frame-walk-engine.md. Read those, both READMEs and both source pages before proposing anything.
 

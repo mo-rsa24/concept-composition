@@ -44,17 +44,17 @@ its second axis.
 
 **Found on disk:**
 
-- The [simple-distributions ladder](../artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
+- The [simple-distributions ladder](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
   plans rung 11b, "curated cats and dogs, with the caption co-occurrence set by hand", and has no
   step file. Its design is in
-  [what the evidence means for rung 11b](../artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b).
+  [what the evidence means for rung 11b](../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b).
   That design trains from scratch and moves the *share* of both-animal photos. This experiment
   holds the photos and moves *which caption* they get.
 - The ladder walk is at layer 2: layer 1 closed 2026-10-29 with its bar met
   ([execute walk](../artifacts/drips/simple-distributions-rebuild/EXECUTE_WALK.md)).
 - Layer 5's toy fine-tune run: support for A∩B inherited from pretraining falls from 0.159 of
   the composed target to 0.001 within 30 fine-tune steps on the grid, and the samplers follow by
-  step 100 ([figure](../artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)).
+  step 100 ([figure](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)).
 - COCO 2017 is on disk at `/datasets/mmolefe/coco2017/`, annotations under
   `annotations_trainval2017/annotations/`. `pycocotools` is not installed in `co3`, so the counts
   were read with plain `json`.
@@ -171,24 +171,24 @@ You ~90 min · AI ~15 min · Opus, high · moves: Achieve row 1
 
 **Objective:** every claim the design rests on marked holds, needs a check, wrong as stated (with
 its repair) or dead.
-**Outcome:** `artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md` with the marks and a design
+**Outcome:** `4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md` with the marks and a design
 table the request walk can train from.
 **Serves:** the design the criterion and the pilot are built on.
 
 ```text
-/drip-idea artifacts/ideas/inclusive-captions-axis/source-design.md
+/drip-idea 4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/source-design.md
 Chain: a compose-rate figure for base SDXL and LoRAs A, B, C and no-both on the same COCO photos,
 read against a criterion fixed first · this step delivers the checked design
 Starts from: the source design file above; rung 11b's design in the section "What this means for
-rung 11b" of artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md
+rung 11b" of 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md
 Settled facts:
 - COCO train2017: 3,906 cat-only, 4,177 dog-only, 208 both, 169 with exactly one of each;
-  val2017 has 12 both (json count, plans/route-inclusive-captions-pilot.md, What we know)
+  val2017 has 12 both (json count, 4-inclusive-captions/plans/route-inclusive-captions-pilot.md, What we know)
 - the project's PoE at gs 1 is already s_C + s_D - s_0 (poe_repair/training_cache.py:11); only
   the raw s_C + s_D arm is new, and it counts the prior twice
 - the source gives LoRA B, not A, a 10% non-specific caption: two variables move between A and B
 - layer 5's toy: fine-tuning erased inherited A-and-B support within 30 to 100 steps
-  (artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)
+  (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)
 - the compose scorer cannot tell a cat and a dog from two dogs (memory: FK steering baseline)
 - in 53% of the 169 both-animal photos the smaller animal is under 5% of the frame (area count,
   What we know): captioning those under that animal's name is what teaches its condition to put
@@ -222,18 +222,18 @@ condition" (deferred to step 5 unless the claim cannot be marked without it)
   the 100 to 200 neither-animal background images (why: no claim needs them for A against B; in
   Later)
 - [ ] **Gate:** LoRA C is defined or dropped, and the design table is complete
-- **Leaves:** `artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md`
+- **Leaves:** `4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md`
 
 ### 2. 📏 Write the falsification criterion
 
 You ~45 min · AI ~10 min · Opus, high · moves: Achieve row 2
 
 **Objective:** support, null and inconclusive written with numbers before any training.
-**Outcome:** `artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md`.
+**Outcome:** `4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md`.
 **Serves:** the line the figure is read against.
 
 ```text
-/drip-idea --hypothesis artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md claim <the claim
+/drip-idea --hypothesis 4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md claim <the claim
 step 1 handed over>
 Chain: the compose-rate figure read against a fixed criterion · this step delivers the criterion
 Starts from: IDEA_MAP.md and its design table (step 1)
@@ -269,13 +269,13 @@ the renders; the plan file the open writes.
 
 ```text
 /drip-execute-plan --request Build and run the inclusive-captions pilot on SDXL from the design
-table in artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md, judged against
-artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md.
+table in 4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md, judged against
+4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md.
 Chain: the compose-rate figure · this step delivers the trained LoRAs, the renders and the scores
 Starts from: IDEA_MAP.md (design table), HYPOTHESIS.md (bar and seed count); COCO at
 /datasets/mmolefe/coco2017/, annotations in annotations_trainval2017/annotations/
 Settled facts:
-- the COCO counts and the val shortage (plans/route-inclusive-captions-pilot.md, What we know)
+- the COCO counts and the val shortage (4-inclusive-captions/plans/route-inclusive-captions-pilot.md, What we know)
 - pycocotools is not in co3: read the annotations with json, or install it in a throwaway env
 - PoE is eps_uncond + gs*(eps_A + eps_B - 2*eps_uncond) (poe_repair/training_cache.py:11);
   reuse the project's combine, add the raw arm beside it
@@ -313,7 +313,7 @@ Progress: each piece prints its counts or its smoke line before the next starts
 Proof: the scorer prints compose rate per model per strategy with its count out of 128
 Route update: add the measured step time and render time to What we know, and edit the schedule
 Hand-off: scores.csv and renders/ for step 6
-Close: rewrite rung 11b's row in artifacts/drips/simple-distributions-rebuild/PROMPTS.md and the
+Close: rewrite rung 11b's row in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md and the
 rung 11b section of the evidence note so 11b carries two axes, share and caption assignment,
 with this run as the caption axis on SDXL; show me the diff before writing
 Controls: piece 1 example (the 12 photos); piece 2 example (counts per arm); piece 3 plumb (the
@@ -381,7 +381,7 @@ and composition, and whether it predicts A against B.
 ```text
 /drip-read --combine --lean "what the training captions teach a single-concept condition"
 Sources: the papers cited in
-artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md (Okawa, Liang,
+3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md (Okawa, Liang,
 Jeong, Zarei) and the ladder note in ../ideas/ideas-that-tie-the-ladder-together.md where it
 names them
 Question each source answers: does it change which caption a multi-object image is trained
@@ -445,7 +445,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 ```
 
 ```text
-/pressure-test artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md and the ticked verdict:
+/pressure-test 4-inclusive-captions/artifacts/ideas/inclusive-captions-axis/HYPOTHESIS.md and the ticked verdict:
 could the difference come from scene complexity of the 208 photos, from the empty-caption rate,
 or from the sampler, rather than from caption assignment?
 ```
@@ -506,11 +506,11 @@ mode graph was stale for 10 skills, so their modes were read live with `mode_ind
 Navigation: ⬅️ [Previous](#why-this-chain) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 - [The source design](../artifacts/ideas/inclusive-captions-axis/source-design.md)
-- [The rung 11b design](../artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b)
-- [The ladder guide](../artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
-- [Layer 5, the overlap dial](../artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md)
-- [What PoE composition is](../context/world/poe-composition.md)
-- [Measured throughput](../environment/hpc/throughput.md)
+- [The rung 11b design](../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b)
+- [The ladder guide](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
+- [Layer 5, the overlap dial](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md)
+- [What PoE composition is](../../context/world/poe-composition.md)
+- [Measured throughput](../../environment/hpc/throughput.md)
 
 ## Next step
 

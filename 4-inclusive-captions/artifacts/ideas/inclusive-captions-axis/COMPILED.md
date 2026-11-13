@@ -16,7 +16,7 @@ conditions is high where both are high, so it should hold more pictures containi
 
 ## What the five training runs are
 
-Every run trains on the same 731 photos: 300 cat-only, 300 dog-only, 131 holding both. COCO train2017 holds 208 both-animal photos and 131 of them survive the 0.25 box-fraction floor the compose scorer uses; the single-animal pools are ten times what is needed (3,335 and 2,708). Counts and the audit sheets are at `artifacts/results/the-inclusive-captions-photo-pool/`. The only
+Every run trains on the same 731 photos: 300 cat-only, 300 dog-only, 131 holding both. COCO train2017 holds 208 both-animal photos and 131 of them survive the 0.25 box-fraction floor the compose scorer uses; the single-animal pools are ten times what is needed (3,335 and 2,708). Counts and the audit sheets are at `4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/`. The only
 thing that changes is the caption each both-animal photo is trained under. Every run shares one
 10% blank-caption rate on every photo, which is what makes the comparison one-variable.
 

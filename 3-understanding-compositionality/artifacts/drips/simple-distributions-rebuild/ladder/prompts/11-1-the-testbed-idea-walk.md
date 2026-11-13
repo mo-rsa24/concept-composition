@@ -5,13 +5,13 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-idea resume artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md at claim 1, with
+/drip-idea resume 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md at claim 1, with
 artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md claims 7 and 12 and
-artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md beside
+3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md beside
 it, until the testbed's candidate causes and its parser are fixed
 
 Background
-Layer 11 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is a 32 × 32
+Layer 11 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is a 32 × 32
 text-conditioned testbed. The 2D toys cannot show failures that come from the text encoder or
 cross-attention, such as leakage or a dropped concept, and SDXL has both. The build after this walk
 runs in three stages, a text encoder, then cross-attention, then a second encoder, each compared only
@@ -30,10 +30,10 @@ Objectives
    artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md.
 
 What to read
-- artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, end to end: the testbed map.
+- 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, end to end: the testbed map.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, end to end: the parent map, claims 7 and 12
   and route 8.
-- artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md, end to
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/routes/03-what-a-label-teaches-and-the-toy-axes.prompt.md, end to
   end: the label route.
 
 What is already known
@@ -122,7 +122,7 @@ What to hand back
   claim 3's outcome categories fixed, and the probe table.
 - At compile, the plan the compile writes and the route 8 return file.
 - The compiled plan's path and the route 8 return, which step 2 reads.
-- The proof: grep -n "^| \*\*1\.\|^| 1\." artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md
+- The proof: grep -n "^| \*\*1\.\|^| 1\." 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md
   prints claim 1's row with its settled mark.
 
 What you will see

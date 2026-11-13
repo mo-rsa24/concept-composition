@@ -7,9 +7,9 @@ in a panel below, and labelled arrows join the marked passages. Every excerpt is
 text change without re-measuring.
 
 Usage, from the repo root:
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py            # all groups
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py G7         # one group
-    python3 artifacts/scenes/iclr-review-response/draw_review_figures.py --sheet    # contact sheet
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py            # all groups
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py G7         # one group
+    python3 1-lora-correction/artifacts/scenes/iclr-review-response/draw_review_figures.py --sheet    # contact sheet
 
 The figure specs live in figure_specs.py beside this file.
 """
@@ -31,7 +31,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from matplotlib.patches import FancyBboxPatch, Rectangle  # noqa: E402
 from PIL import Image  # noqa: E402
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[4]
 HERE = Path(__file__).resolve().parent
 WALK = REPO / "artifacts/drips/present-revision-to-supervisor"
 RENDERS = WALK / "renders"  # Reviews.pdf pages go to renders/reviews-300dpi

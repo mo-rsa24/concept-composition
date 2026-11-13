@@ -6,7 +6,7 @@
 
 | File | What changed |
 |---|---|
-| `plans/09-designing-the-correction-loss/MASTER_PLAN.md` | five variation rows corrected against runs on disk, one new row for variation `08`, the promotion rule, the rank paragraph, the plans table, and `## Do this next` |
+| `1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md` | five variation rows corrected against runs on disk, one new row for variation `08`, the promotion rule, the rank paragraph, the plans table, and `## Do this next` |
 | `plans/.../plans/hypothesis/04-freezing-the-empty-branch.md` | tasks 2.1 and 2.3 became confirmations, 2.3b fixes `--no-dial`, task 3 launches `00a` and `04` instead of relaunching `01`, one error-matrix entry |
 | `plans/.../plans/hypothesis/06-fitting-the-whole-path-and-handing-back-the-tail.md` | new |
 | `plans/.../review/06-fitting-the-whole-path-and-handing-back-the-tail.md` | new, bars fixed before any render |
@@ -30,7 +30,7 @@
 ## Routed onward
 
 - To `sync-plan-tree`: plan 01's task 2.1 is satisfied by `v1_freeze_null_r16_s0_25` (43 cells all `split: train`, `loss_undialled` across 30,830 rows, `train_step_range [0, 25]` in config, checkpoints beside renders).
-- To `sync-plan-tree`: `plans/01-showcase-the-trained-lora/review/19-does-a-stochastic-sampler-sharpen-the-corrected-render.md` says a sweep is in flight as job 50338. Nothing is running.
+- To `sync-plan-tree`: `1-lora-correction/plans/01-showcase-the-trained-lora/review/19-does-a-stochastic-sampler-sharpen-the-corrected-render.md` says a sweep is in flight as job 50338. Nothing is running.
 
 ## Left open, on purpose
 

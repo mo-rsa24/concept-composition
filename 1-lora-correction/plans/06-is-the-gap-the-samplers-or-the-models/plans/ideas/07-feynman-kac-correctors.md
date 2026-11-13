@@ -19,7 +19,7 @@ writes down the reason either way.
 ## Position in the plan tree
 
 **Step 30 of 30.** Waits on steps 26 and 29. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -84,8 +84,8 @@ unless the decision comes back build, in which case that build is a sub-scope ra
 here.
 
 **Sources.** The paper, its register row at abstract level since 2026-08-12 in
-[the reading register](../../../standing/literature/reading-register.md), and its parked mention in
-[the draft map](../../../../paper/iclr/DRAFT_MAP.md) under section 2.
+[the reading register](../../../../../plans/standing/literature/reading-register.md), and its parked mention in
+[the draft map](../../../../../paper/iclr/DRAFT_MAP.md) under section 2.
 
 **Associated materials.** [The review questions](../../review/07-feynman-kac-correctors.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md).
@@ -184,7 +184,7 @@ the paper's related-work section can reach it.
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
 1. **The read.** Promote [arXiv 2503.02819](https://arxiv.org/abs/2503.02819) from its
-   abstract-level row in [the reading register](../../../standing/literature/reading-register.md) to a
+   abstract-level row in [the reading register](../../../../../plans/standing/literature/reading-register.md) to a
    full read.
 2. **The cost estimate.** What would have to be implemented in this repo, against what already
    exists after [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md), and what it
@@ -218,7 +218,7 @@ correctors are built or cited, with the reason recorded either way.
 - Network access is needed to fetch the paper. If the fetch fails, the arXiv id is enough to
   request the PDF another way; do not substitute the abstract for the full read and call it done.
 - No system LaTeX here, so nothing in this plan compiles anything, per
-  [environment/paper.md](../../../../environment/paper.md).
+  [environment/paper.md](../../../../../environment/paper.md).
 
 ## Tasks
 
@@ -251,7 +251,7 @@ returned.
   - Produces: the full read of *Feynman-Kac Correctors in Diffusion*, Skreta et al., ICML 2025
     Spotlight, at the depth this project's reading register calls a full read.
   - Output goes to: the register row in
-    [the reading register](../../../standing/literature/reading-register.md), promoted from abstract
+    [the reading register](../../../../../plans/standing/literature/reading-register.md), promoted from abstract
     level, plus the notes that skill files.
   - **Done when:** the register row reads as a full read and names what the method does at each
     noise level, not only what it claims.
@@ -365,8 +365,8 @@ under `paper/iclr/figures/`.
 
 | What changes | Where it has to be reflected |
 |---|---|
-| the full read happens | [the reading register](../../../standing/literature/reading-register.md)'s row for 2503.02819 moves from abstract level to full read, as a promotion of the 2026-08-12 row |
-| the decision | [the draft map](../../../../paper/iclr/DRAFT_MAP.md)'s parked mention under section 2, which currently holds the paper without a verdict |
+| the full read happens | [the reading register](../../../../../plans/standing/literature/reading-register.md)'s row for 2503.02819 moves from abstract level to full read, as a promotion of the 2026-08-12 row |
+| the decision | [the draft map](../../../../../paper/iclr/DRAFT_MAP.md)'s parked mention under section 2, which currently holds the paper without a verdict |
 | the decision is build | a new sub-scope, via `/decompose-plan`, never a task appended here |
 | the plan's status | the scope [MASTER_PLAN.md](../../MASTER_PLAN.md) and the root running order, both by `sync-plan-tree` rather than by hand |
 

@@ -3,7 +3,7 @@
 This plan asks whether three checks that share none of the strength series' machinery agree with
 its answer anyway.
 
-**Step 7 of 22.** Waits on step 4. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 7 of 22.** Waits on step 4. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -62,7 +62,7 @@ table.
       scatter against normalized ‖r_t‖
 - [x] L3 binding direction: b = e_J − normalized(e_A+e_B) per pair; cosine
       matrix and SVD across pairs, against a mismatched-solos control
-- [x] [chimera](../../../../context/world/chimera.md) quality control on cached poe.png/mono.png:
+- [x] [chimera](../../../../../context/world/chimera.md) quality control on cached poe.png/mono.png:
       quality proxies, expect no gap
 - [x] manifold slide: embed plan 03's outputs across the λ series on the existing CLIP
       axes; random-direction path as the control
@@ -100,19 +100,19 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 # L1 + L3, 75 pairs from cache, ~1 min. Prints a per-pair table, then the
 # correlation against the preregistered correction-size measure and the
 # shared-direction read against its mismatched-solos control.
-$PY scripts/language_probes.py --probe l1 --probe l3
+$PY 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3
 
 # 749 paired poe.png/mono.png, ~20 min (GroundingDINO on every image).
 # Four content-blind quality proxies decide; the compose rate is the positive
 # control. Expect flat quality and a large content gap.
-$PY scripts/quality_control.py
+$PY 1-lora-correction/scripts/quality_control.py
 
 # 32 runs x 5 correction amounts x 3 rows in CLIP image space, ~3 min. Checks the lambda=1
 # endpoint really is the mono render before reading anything off the curves.
-$PY scripts/manifold_slide.py
+$PY 1-lora-correction/scripts/manifold_slide.py
 
 # Same 32 runs against a four-way caption bank, ~3 min.
-$PY scripts/caption_readback.py
+$PY 3-understanding-compositionality/scripts/caption_readback.py
 ```
 
 Outputs land in `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/`

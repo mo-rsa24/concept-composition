@@ -24,14 +24,14 @@ python3 scripts/plan_pulse.py
 plan pulse: 180 plan files under plans
 
 STALE: task lines claiming a run is in flight with nothing in flight (1)
-  plans/04-does-the-fix-reach-unseen-pairs/plans/instrument-02-three-live-curves-while-training.md:20
+  1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/instrument-02-three-live-curves-while-training.md:20
 
 UNHARVESTED: output newer than the plan that owns it (0)
 
 ORPHAN: markdown no task names (5)
   plans/standing/retrofit-poe-repair-min.md
-  plans/03-does-the-correction-cause-composition/diagrams/the-product-peaks-at-the-chimera.prompt.md
-  plans/02-can-we-trust-the-compose-rate/claim-under-test.md
+  1-lora-correction/plans/03-does-the-correction-cause-composition/diagrams/the-product-peaks-at-the-chimera.prompt.md
+  1-lora-correction/plans/02-can-we-trust-the-compose-rate/claim-under-test.md
   plans/diagrams/process-versions/01-2026-08-18.md
   plans/diagrams/process-versions/02-2026-08-19.md
 

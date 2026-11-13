@@ -55,8 +55,8 @@ should show none. Content changed, quality did not.
 Reads sampled images; it does not sample.
 
 Usage:
-    python scripts/quality_control.py
-    python scripts/quality_control.py --source dose
+    python 1-lora-correction/scripts/quality_control.py
+    python 1-lora-correction/scripts/quality_control.py --source dose
 """
 
 from __future__ import annotations
@@ -72,7 +72,7 @@ import torch
 from PIL import Image
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
     CACHE_ROOT,

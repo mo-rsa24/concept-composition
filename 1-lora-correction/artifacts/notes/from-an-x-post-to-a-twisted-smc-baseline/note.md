@@ -26,17 +26,17 @@ this note is the path to it.
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-the-first-question-can-diffusion-explorer-show-our-sampler) ➡️
 
 - **Mono**: the joint prompt ("a cat and a dog") sampled as one prompt. The target. Owned by
-  [PoE composition](../../../context/world/poe-composition.md).
+  [PoE composition](../../../../context/world/poe-composition.md).
 - **PoE**: product of experts, the two single-animal predictions added and the null subtracted.
   The default that fails. Same owner.
 - **The interaction term**, `r_t`: the per-step gap between the joint prompt's prediction and
-  the product's. Owned by [the interaction term](../../../context/world/interaction-term.md).
+  the product's. Owned by [the interaction term](../../../../context/world/interaction-term.md).
 - **The twist**: a learned scalar, `log psi_t(x_t)`, estimating how much more likely a noisy
   latent is under the joint prompt than under the product. Its gradient is the interaction term.
 - **Twisted SMC**: sequential Monte Carlo, K particles run in parallel, each weighted by the twist
   and the population resampled when a few particles carry most of the weight.
 - **Compose fraction**: the share of images the detector counts two or more animal instances in.
-  Owned by [compose rate](../../../context/world/compose-rate.md).
+  Owned by [compose rate](../../../../context/world/compose-rate.md).
 
 ## 1. The first question: can Diffusion Explorer show our sampler
 
@@ -45,7 +45,7 @@ Navigation: ⬅️ [Words](#words-this-note-uses) | 📋 [TOC](#table-of-content
 **The ask**
 
 Could SDXL inference for a joint prompt be ported into
-[Diffusion Explorer](../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models),
+[Diffusion Explorer](../../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models),
 so that joint, concept A, concept B and PoE could be watched side by side?
 
 **The answer**
@@ -71,7 +71,7 @@ discrete diffusion due to repeated rollouts from every particle. CDM learns a tw
 advance with a contrastive objective, amortizing this rollout cost while avoiding the train-test
 mismatch of previous objectives." The quoted post by Jaihoon Kim: "Steering diffusion models
 toward a reward is slow. CDM makes it up to 50× faster, with less than 5% compute overhead." Both
-point at [CDM, arXiv 2605.23346](../../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it),
+point at [CDM, arXiv 2605.23346](../../../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it),
 a discrete-diffusion paper with no images and no composition in it.
 
 **The question that followed**
@@ -153,7 +153,7 @@ twisted-SMC pick at the current checkpoint, pasted into one strip, logged to W&B
 bundled into an artifact, with the detector reading the three panels. The verdict is written at
 the last render.
 
-**The launcher** (`scripts/twisted_smc/train_twist.sbatch`)
+**The launcher** (`1-lora-correction/scripts/twisted_smc/train_twist.sbatch`)
 
 Smoke and full modes, the disk guard on the output root, and the python environment chosen by
 hostname, since the Blackwell nodes need `co3_bw`.
@@ -259,11 +259,11 @@ Navigation: ⬅️ [8. What it means](#8-what-it-means-and-what-it-does-not) | �
 | The pictures read one by one | [the figure explainer](../../results/is-the-gap-the-samplers-or-the-models/figure-explainer.md) |
 | The design and the bar | [the plan](../../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md) |
 | The runs and the pre-registered questions, answered | [the review file](../../../plans/06-is-the-gap-the-samplers-or-the-models/review/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md) |
-| The code | `poe_repair/experiments/twisted_smc/` and `scripts/twisted_smc/` |
+| The code | `poe_repair/experiments/twisted_smc/` and `1-lora-correction/scripts/twisted_smc/` |
 | The run outputs: references, every particle at every checkpoint, checkpoints, `history.json`, `verdict.json` | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc/twist_w64_b16_lr1e-04_s100000_20260905-072331/` |
 | The W&B run, with strips under `samples/` and artifacts `strips-step<N>` | `prime_lab/poe-repair-animals-compose`, group `twisted-smc`, run `3cwrxlw0` |
-| The paper and posts the design borrows from | [source 5 in the context sources](../../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it) |
-| The tool the first question was about | [source 2](../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models) |
+| The paper and posts the design borrows from | [source 5 in the context sources](../../../../context/sources.md#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it) |
+| The tool the first question was about | [source 2](../../../../context/sources.md#2-diffusion-explorer-interactive-exploration-of-diffusion-models) |
 
 ## Still open
 

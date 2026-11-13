@@ -6,14 +6,14 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan --request rebuild run 1 of
-artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb by hand in
+3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb by hand in
 ~/Playground/PhD/simple-distributions-walk/walk02c.py; bar: MALA adapted to 0.6 acceptance takes
 steps 18 to 82 times larger and reaches the floor on four kinds, while ULA at those steps diverges
 (it keeps 1 of 2,000 samples on disjunction)
 
 Background
 This is the second idea-walk rebuild in layer 2 of the composition ladder
-(artifacts/drips/simple-distributions-rebuild/). Run 1 of the kinds notebook showed that the accept
+(3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/). Run 1 of the kinds notebook showed that the accept
 step is what makes large steps safe, and that large steps are what let a sampler mix. I rebuild it
 by hand, starting from walk02.py from step 4a, whose per-sample MALA is the move run 1 tunes; the
 notebook's printed run 1 table is the answer key.
@@ -28,7 +28,7 @@ Objectives
    and the samples ULA kept.
 
 What to read
-- artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, run 1: the code,
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/kinds-of-composition-on-the-papers-toys.ipynb, run 1: the code,
   and its cell 15 table as the answer key.
 - toy/rebuild/kinds.py (build_kinds) and toy/rebuild/ideal.py (exact_grid, composed_target, tv, V):
   the seven kinds' exact targets, imported here.
@@ -58,7 +58,7 @@ What is already known
   order, with TV 0.33 to 0.50 where it survives (notebook, cells 15 and 16).
 - Dominance stays at 0.30 against a floor of 0.11 even with the large steps, because no local
   sampler moves mass between separated modes to match unequal weights (notebook, cell 16;
-  artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 5).
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, run 5).
 - rebuild/phase3_kinds.py reproduces run 1 within 0.03 on every kind, its own tolerance for sampler
   numbers (toy/rebuild/out/phase3/phase3.json, run1).
 

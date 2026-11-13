@@ -12,7 +12,7 @@ over the label pairs against two separate classifiers gives log p(A,B|x) - log p
 I type every block myself into ~/Playground/PhD/simple-distributions-walk/walk08b.py
 
 Background
-This is layer 8's second build in the composition ladder (artifacts/drips/simple-distributions-rebuild/).
+This is layer 8's second build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/).
 Step 4a showed the interaction term in the pixels, the wet dog. This walk shows it in the labels:
 zero for clean labels, real for report-mined ones like NIH's, and hardest on the negation cells. The
 layer 8 reference from step 0 already holds the exact values as the p8.label_term_* keys, so my
@@ -33,7 +33,7 @@ Objectives
 What to read
 - walk08.py from step 4a.
 - The p8.label_term_* keys in rebuild/out/walk-numbers.json (step 0's reference): the exact values.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 6, 7.3 and 7.4.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 6, 7.3 and 7.4.
 - rebuild/phase5_dial.py: the A and B definitions and MARGIN.
 
 What is already known
@@ -41,18 +41,18 @@ What is already known
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The toy is points uniform on [−1, 1]², A true when x1 < 0 and B true when x2 > 0 (the A and B of
   rebuild/phase5_dial.py), so A∩B is the top-left quadrant
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4; rebuild/phase5_dial.py docstring).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4; rebuild/phase5_dial.py docstring).
 - Claim 7.4's expected label term is +0.105 nats for (A,B) inside A∩B, very negative for (¬A,B)
-  there, and zero elsewhere (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4).
+  there, and zero elsewhere (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4).
 - Inside A∩B, P(A,B|x) / [P(A|x)·P(B|x)] = 0.9q / (0.9 · 0.9q) = 1/0.9 for any probability q of
   reading B once A was read, so +0.105 = −ln 0.9; (¬A,B) has probability 0 there, so its term is −∞
   and a classifier reports it as strongly negative; and outside A∩B at most one label is uncertain,
   so the term is 0 (the arithmetic of claim 7.4's labelling).
 - The term is zero for clean labels and nonzero for report-mined ones, and it is a different thing
-  from the wet dog of step 4a (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.3).
+  from the wet dog of step 4a (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.3).
 - On chest X-rays it matters most for the negation cells, pneumothorax without drain and drain
   without pneumothorax, and 20% to 54% of NIH pneumothoraces have no drain
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 6 and "The idea, as it stands").
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 6 and "The idea, as it stands").
 - A margin of 0.15 inside a quadrant keeps boundary points out of a region count
   (rebuild/phase5_dial.py, MARGIN).
 - The tolerances 0.05 nats and −2 below are estimates, to be changed here if a classifier on a few

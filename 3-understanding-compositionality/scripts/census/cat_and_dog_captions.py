@@ -4,10 +4,10 @@
 Input is the per-file output of the search that kept every Re-LAION-2B-en caption naming a cat word
 and a dog word (one parquet per source file, columns url, caption, similarity, width, height).
 
-    python scripts/census/cat_and_dog_captions.py count  --parts DIR   # counts.json: sizes, forms, joiners
-    python scripts/census/cat_and_dog_captions.py sample --parts DIR   # sample.json: captions to look at
-    python scripts/census/cat_and_dog_captions.py fetch                # pictures + thumbnails for the sample
-    python scripts/census/cat_and_dog_captions.py page                 # the markdown with clickable pictures
+    python 3-understanding-compositionality/scripts/census/cat_and_dog_captions.py count  --parts DIR   # counts.json: sizes, forms, joiners
+    python 3-understanding-compositionality/scripts/census/cat_and_dog_captions.py sample --parts DIR   # sample.json: captions to look at
+    python 3-understanding-compositionality/scripts/census/cat_and_dog_captions.py fetch                # pictures + thumbnails for the sample
+    python 3-understanding-compositionality/scripts/census/cat_and_dog_captions.py page                 # the markdown with clickable pictures
 
 Run with a python that has pyarrow, requests and PIL.
 """
@@ -26,8 +26,8 @@ from pathlib import Path
 
 import pyarrow.parquet as pq
 
-REPO = Path(__file__).resolve().parents[2]
-OUT = REPO / "artifacts/results/does-any-caption-say-a-cat-and-a-dog"
+REPO = Path(__file__).resolve().parents[3]
+OUT = REPO / "4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog"
 SEED = 20261103
 
 CAT = r"(?:cat|cats|kitten|kittens)"

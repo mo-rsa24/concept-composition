@@ -47,11 +47,11 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The object under study (ledger):** the [interaction term](../../../../context/world/interaction-term.md) is a rule, not a vector (same-pair cross-seed cosine 0.002), so the mechanism question is what state-dependent computation the LoRA added to cross-attention, the layer carrying object attribution.
+**The object under study (ledger):** the [interaction term](../../../../../context/world/interaction-term.md) is a rule, not a vector (same-pair cross-seed cosine 0.002), so the mechanism question is what state-dependent computation the LoRA added to cross-attention, the layer carrying object attribution.
 
 **The two reads (ledger):** h-space, the UNet bottleneck activations with the adapter on minus off (the correction in the model's own semantic space); and Jacobian singular directions (does the adapter open a new high-gain direction for the missing animal). Both run as one watcher process: it watches a run's checkpoints folder, and when a broad-interval checkpoint lands (default first, middle, final) it computes both reads on a device that is not the training device and logs to the same W&B run. The training loop is never modified.
 
-**The causal rule (ledger, non-negotiable):** each read ends in its intervention: inject the found direction before about step 10, score composition. A direction figure without an intervention shows a correlation and nothing more, and figures whose interventions fail to move [compose rate](../../../../context/world/compose-rate.md) stay out of the main text.
+**The causal rule (ledger, non-negotiable):** each read ends in its intervention: inject the found direction before about step 10, score composition. A direction figure without an intervention shows a correlation and nothing more, and figures whose interventions fail to move [compose rate](../../../../../context/world/compose-rate.md) stay out of the main text.
 
 **Associated materials:**
 - **Review questions:** [../review/10-the-mechanism-follower.md](../../review/10-the-checkpoint-watcher.md)
@@ -77,7 +77,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- A non-training device must exist while A and B run; the protocol's device census (`nvidia-smi` per node) decides where the watcher lives ([execution-protocol](../../../../environment/hpc/execution-protocol.md)).
+- A non-training device must exist while A and B run; the protocol's device census (`nvidia-smi` per node) decides where the watcher lives ([execution-protocol](../../../../../environment/hpc/execution-protocol.md)).
 - Outputs to `/datasets`; `co3` python.
 
 ---
@@ -106,7 +106,7 @@
 
 ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The watcher** (`scripts/showcase/mechanism_follower.py`): watches a checkpoints dir; on a broad-interval checkpoint, runs the h-space read (adapter on minus off, pooled bottleneck activations, a few showcase renders) and the Jacobian read (top singular directions at steps inside the 0-10 window), logs both to the watched W&B run, saves arrays to `/datasets/mmolefe/poe_repair_min/outputs/showcase/mechanism/`.
+1. **The watcher** (`1-lora-correction/scripts/showcase/mechanism_follower.py`): watches a checkpoints dir; on a broad-interval checkpoint, runs the h-space read (adapter on minus off, pooled bottleneck activations, a few showcase renders) and the Jacobian read (top singular directions at steps inside the 0-10 window), logs both to the watched W&B run, saves arrays to `/datasets/mmolefe/poe_repair_min/outputs/showcase/mechanism/`.
 2. **The interventions**: for each discovered direction, inject before step 10 at a small λ grid, score compose rate; `intervention_scores.json`.
 3. **The dry run**: the watcher pointed at the existing phase1 checkpoints folder proves the whole path before A and B need it.
 
@@ -129,7 +129,7 @@ Serves goal 8 (mechanism interventions' verdict on the causal caption). Checkabl
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md`**
 
 ▶ **Next: [task 1.1](#1--build-the-watcher)**.
 
@@ -209,7 +209,7 @@ Serves goal 8 (mechanism interventions' verdict on the causal caption). Checkabl
 ◀ **Needs: [instruction 2.2](#2--read-the-mechanism-panels)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [11-the-counted-joint-prompt-figure](../figures/11-the-counted-joint-prompt-figure.md).**
 
@@ -231,10 +231,10 @@ Serves goal 8 (mechanism interventions' verdict on the causal caption). Checkabl
 ▶ Paste to run this plan (runs beside experiments A and B):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md: the checkpoint watcher on a non-training device, h-space and Jacobian reads at first/middle/final checkpoints, each ending in its injection-and-score intervention; it must never crash a training run.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md: the checkpoint watcher on a non-training device, h-space and Jacobian reads at first/middle/final checkpoints, each ending in its injection-and-score intervention; it must never crash a training run.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md` and paste the tmux block it emits (a long-lived watcher; the interventions score numerically). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/10-the-mechanism-follower.md` and paste the tmux block it emits (a long-lived watcher; the interventions score numerically). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 

@@ -10,7 +10,7 @@ In the background, dispatch xref-cadence over the files the reading stop of the 
 wrote.
 
 Background
-The reading stop of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is
+The reading stop of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is
 closed: its combined read of the two Bradley papers wrote a map, a reading note and a
 retrospective. Those files should link to the read-aheads, vault note, bricks and idea-map claims
 that cover the same ideas, and those should link back, so the next reader finds both.
@@ -24,11 +24,11 @@ What to read
 - COMBINE_MAP.md under
   ~/goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/drips/ in its
   combine-<idea-slug>/ folder (step 2's hand-off).
-- artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
   its Study first line: the read-ahead files and the vault note to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 5 rows of the Bricks
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the layer 5 rows of the Bricks
   table, "Overlap dial" and "Fine-tune variant".
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 2 and 3.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claims 2 and 3.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 2 (child 2b), 3 and 10.
 
 What is already known

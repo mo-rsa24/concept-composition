@@ -9,7 +9,7 @@ DARK_GREY = "#455a64"
 MID_GREY = "#78909c"
 LIGHT_GREY = "#b0bec5"
 
-root = Path(__file__).resolve().parents[4]
+root = Path(__file__).resolve().parents[5]
 phase1 = json.loads((root / "rebuild/out/phase1/phase1.json").read_text())
 rows = {row["panel"]: row for row in phase1["rows"]}
 panels = [

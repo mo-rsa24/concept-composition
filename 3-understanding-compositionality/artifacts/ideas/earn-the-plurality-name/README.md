@@ -16,9 +16,9 @@ plurality name touches.
 
 ## Where it came from and what judged it
 
-Named as the resume point in [the supervisor-structure merge walk's](../merge-supervisor-structure/IDEA_MAP.md)
+Named as the resume point in [the supervisor-structure merge walk's](../../../../artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md)
 held claim 3, whose section-3 and section-4 wording depends on this test's verdict, and cited
-directly from [the meeting checklist](../../../paper/iclr/meeting-checklist.md) as the parked walk
+directly from [the meeting checklist](../../../../paper/iclr/meeting-checklist.md) as the parked walk
 that carries Richard's earn-the-name test. Both are real referrers already in the tree. Resume at
 claim 1, round 1: read the PoE combination rule in the sampling code to settle whether the three
 candidate operational forms collapse into one.

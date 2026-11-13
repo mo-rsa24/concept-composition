@@ -29,7 +29,7 @@ Built to: route-file-template v2
 |---|---|
 | The source | [the conversation, saved as markdown](../artifacts/drips/silicotb-conversation/source/conversation.md): 8 turns, 19,004 words, fetched 2026-11-03 from the share link, plus [three screenshots](../artifacts/drips/silicotb-conversation/source/screenshots/) |
 | Nothing is under way | no walk map exists for this conversation yet |
-| Already routed | turn 7 (multi-label LoRA on cats and dogs) is the [inclusive-captions pilot route](route-inclusive-captions-pilot.md), resumed there, not here |
+| Already routed | turn 7 (multi-label LoRA on cats and dogs) is the [inclusive-captions pilot route](../4-inclusive-captions/plans/route-inclusive-captions-pilot.md), resumed there, not here |
 | Cadence | you steer: no fixed windows, so the schedule is a block order, not a calendar |
 
 [↑ Back to top](#table-of-contents)
@@ -175,7 +175,7 @@ For you to follow manually. Do these yourself.
 Purpose: give every claim in CLAIMS.md a mark (tested, cited, already answered, out of reach).
 This is a ChatGPT transcript, not a paper: treat each turn as a section and each claim as a chunk.
 Depth: turns 1 to 4 own (the medicine and the AI limits); turns 5, 6 and 8 gloss, linking the
-findings in report/00-INDEX.md; turn 7 links plans/route-inclusive-captions-pilot.md and stops.
+findings in report/00-INDEX.md; turn 7 links 4-inclusive-captions/plans/route-inclusive-captions-pilot.md and stops.
 Bar: every row of CLAIMS.md marked. Box: 9 h over as many sittings as you like.
 Controls:
   turn 1 sketch (the three overlap regimes), prove (each imaging claim, with a fetched reference

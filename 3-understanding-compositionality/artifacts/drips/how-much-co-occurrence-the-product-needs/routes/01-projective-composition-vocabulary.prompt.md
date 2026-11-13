@@ -21,7 +21,7 @@ into patches conditioned only on what is inside them.
 
 My own toy already measures the adjacent thing and does not touch these three. It is an exact
 mixture of Gaussians over 16x32 shape pictures at
-artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py, and it shows that the
+3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py, and it shows that the
 product needs essentially no co-occurrence in its training images to prefer a composed picture,
 while its samplers need about half the mass. That is the co-occurrence axis. Factorized
 Conditionals is the coordinate-disjointness axis, and I cannot currently state it precisely or
@@ -50,7 +50,7 @@ Objectives
 What to read
 
 - arXiv 2502.04549, sections 3.2, 5.1 to 5.3, 8, and Figure 5. The repo already holds that
-  figure at artifacts/notes/what-poe-loses-when-it-composes/figures/bradley-2025-projective-composition.png
+  figure at 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/figures/bradley-2025-projective-composition.png
   with its verbatim caption.
 - arXiv 2509.16447, the locality equivalence and the patch-model experiment.
 - /home/molef/PhD/poe_repair_min-dog-and-rain/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md

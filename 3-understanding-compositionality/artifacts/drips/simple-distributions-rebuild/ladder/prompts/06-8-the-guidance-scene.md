@@ -10,7 +10,7 @@ after layer 6's maths drip and reference have both run.
 the quadrant toy and the parts world as w moves from 1 to 7.5
 
 Background
-Layer 6 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) turned guidance
+Layer 6 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) turned guidance
 into a dial. This scene puts w on a slider from 1 to 7.5, the weight Stable Diffusion's cat-dog
 hybrid uses, and shows the guided target on both toys in my own notation, so I can operate it
 rather than read about it.
@@ -35,7 +35,7 @@ What is already known
   and B is x2 > 0, and at w = 1 it puts 0.989 within 3 std of the top-right blob, with Z = r
   (artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md).
 - SDXL's hybrid appears at w = 7.5, the slider's right end
-  (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
+  (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - The w grid and every number per w are the p6. keys and phase6.json rows, and parts-world numbers
   at w ≠ 1 are estimates that carry their standard error (from step 1).
 
@@ -46,7 +46,7 @@ Rules
 
 What to hand back
 - One published scene with w as a slider, in my notation from dispatch.md.
-- Its URL in step 8 of artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md,
+- Its URL in step 8 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md,
   replacing "(URL lands here)".
 
 What you will see

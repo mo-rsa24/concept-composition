@@ -20,12 +20,12 @@ Objectives
    exist.
 2. Open the ChatGPT share link https://chatgpt.com/share/6ae9602c-0378-83ea-a868-6df6c06a6c91 in
    the browser and write down in three to six lines what it says about the wet camel caption search.
-3. Open artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md and walk the user
+3. Open 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md and walk the user
    through the eye check, one section per message, in the order bare, short, random, long.
 4. After each section, write the user's letters into that section's last column, and print the
    running count of B, O and N with the number of pictures it covers.
 5. When all four sections are done, write the table of B, O and N per section, with the share of B
-   and its 95 percent interval, to artifacts/results/does-any-caption-say-a-cat-and-a-dog/tally.md.
+   and its 95 percent interval, to 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/tally.md.
 6. Say plainly what the tally shows about the user's guess that a clean "a cat and a dog" caption
    with both animals in the picture is missing from the training data.
 7. Propose, in plain words and without running it, the next step toward finding a text x for
@@ -34,11 +34,11 @@ Objectives
 What to read
 - artifacts/notes/session-merges/2026-11-03-cat-and-dog-captions-handoff.md: this file, with the
   first read by the cluster session below the block.
-- artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md: the page to check by eye.
-- artifacts/results/does-any-caption-say-a-cat-and-a-dog/counts.json: sizes, forms and joiners.
-- artifacts/results/does-any-caption-say-a-cat-and-a-dog/sample.json: the 240 sampled captions.
-- scripts/census/cat_and_dog_captions.py: the four stages that built the page.
-- plans/10-what-poe-loses-when-it-composes/today-camel-and-dog-in-the-training-data.md: the earlier
+- 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md: the page to check by eye.
+- 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/counts.json: sizes, forms and joiners.
+- 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/sample.json: the 240 sampled captions.
+- 3-understanding-compositionality/scripts/census/cat_and_dog_captions.py: the four stages that built the page.
+- 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-camel-and-dog-in-the-training-data.md: the earlier
   wet camel walk this one copies.
 - context/world/poe-composition.md: what PoE composition, the joint prompt and r_t mean here.
 
@@ -84,7 +84,7 @@ When something is missing
   2, and ask the user to paste the wet camel part of that chat. The wet camel walk in the plans
   folder carries the same exercise meanwhile.
 - If fewer than 20 pictures in a section load on the laptop, run the fetch stage of
-  scripts/census/cat_and_dog_captions.py again, then the page stage. Dead links change over time.
+  3-understanding-compositionality/scripts/census/cat_and_dog_captions.py again, then the page stage. Dead links change over time.
 - If the user wants more pictures than the sample holds, the full per-file results are only on the
   cluster. Ask the user to run the sample stage there with a larger per-class number. Until then,
   work with the 240.
@@ -101,9 +101,9 @@ Rules
 - Write plain sentences. Say what each number covers and its unit.
 
 What to hand back
-- artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md with the last column
+- 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md with the last column
   filled for every picture shown.
-- artifacts/results/does-any-caption-say-a-cat-and-a-dog/tally.md with the table from objective 5.
+- 4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-and-a-dog/tally.md with the table from objective 5.
 - A short note of what the ChatGPT link said, at the top of tally.md under its own heading.
 - The proposal from objective 7 in the closing report, not in a file.
 

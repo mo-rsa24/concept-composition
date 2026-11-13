@@ -32,7 +32,7 @@ predictor claim is dead. Sign is not pre-committed, only strength: either
 direction of monotone association counts, and the sign is reported.
 
 Usage:
-    CUDA_VISIBLE_DEVICES=1 python scripts/dose_trajectory_divergence.py
+    CUDA_VISIBLE_DEVICES=1 python 1-lora-correction/scripts/dose_trajectory_divergence.py
 """
 
 from __future__ import annotations
@@ -45,7 +45,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 DOSE_ROOT = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "pairs"

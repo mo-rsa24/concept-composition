@@ -50,9 +50,9 @@ Walk: [the walk map](EXECUTE_WALK-step-2.md). Results: [the comparison protocol]
 
 **The problem.** No result file exists yet.
 
-**What was done.** `scripts/refresh_paper_slots.py` reads the layout sheet, copies a PNG or PDF, turns a CSV into a centered table, refuses a CSV without protocol rule 9's twelve axis columns, builds on mscluster with `--compile`, and sheets every slot's page with `--gallery`. Tested by refilling R1 and R5 from a test CSV of zeros in a scratch copy of the paper. Four faults found and fixed on the way: a table 247.97 pt too wide (short labels and a `reviewslot <id> shrunk` log line), the table set flush left (centered), a stale remote slot file (the rsync now deletes), and the gallery calling the submitted Figure 5 a placeholder.
+**What was done.** `1-lora-correction/scripts/refresh_paper_slots.py` reads the layout sheet, copies a PNG or PDF, turns a CSV into a centered table, refuses a CSV without protocol rule 9's twelve axis columns, builds on mscluster with `--compile`, and sheets every slot's page with `--gallery`. Tested by refilling R1 and R5 from a test CSV of zeros in a scratch copy of the paper. Four faults found and fixed on the way: a table 247.97 pt too wide (short labels and a `reviewslot <id> shrunk` log line), the table set flush left (centered), a stale remote slot file (the rsync now deletes), and the gallery calling the submitted Figure 5 a placeholder.
 
-**Where the results live.** [The refill script](../../../scripts/refresh_paper_slots.py); the build log at `paper/iclr-56173/build/iclr2027_conference.log`; [the gallery](../../../paper/iclr-56173/build/slot-gallery.png); PRZE-9 lines 1 to 4 ticked on [its page](../../../report/paper-review/prze-9-slots.md).
+**Where the results live.** [The refill script](../../../scripts/refresh_paper_slots.py); the build log at `paper/iclr-56173/build/iclr2027_conference.log`; [the gallery](../../../../paper/iclr-56173/build/slot-gallery.png); PRZE-9 lines 1 to 4 ticked on [its page](../../../report/paper-review/prze-9-slots.md).
 
 **Before and after.** Before: no refill path. After: `--check` prints `PASS: 13 slots, 0 with a result file, 13 placeholders`; a refilled R1 fits the text width at 8 pt and moves no float.
 

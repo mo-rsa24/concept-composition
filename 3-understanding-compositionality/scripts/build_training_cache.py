@@ -271,7 +271,7 @@ def main() -> None:
     ap.add_argument("--overwrite", action="store_true")
     args = ap.parse_args()
 
-    # Hard refusal before anything is loaded or rendered. See scripts/showcase/disallowed_subjects.py.
+    # Hard refusal before anything is loaded or rendered. See 1-lora-correction/scripts/showcase/disallowed_subjects.py.
     for _t in (args.prompt_a, args.prompt_b, args.joint_prompt):
         check_subject(_t)
 

@@ -9,7 +9,7 @@ In the background, prepare and build layer 12's two quizzes for the composition 
 quiz 12.1 and quiz 12.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 12 is its last layer: the
 correction at scale, read as a LoRA on SDXL. Each layer opens on two quizzes, one on the college
 maths underneath it and one on the layer itself. These two are built during layer 9's build, so they
@@ -28,10 +28,10 @@ Objectives
 5. Write each published URL into its ladder step.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, its Study first
   line: the material for quiz 12.1.
 - The same file's steps 7 and 9: the material for quiz 12.2.
-- artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md: layer 8's
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/08-the-interaction-term.md: layer 8's
   interaction term, which quiz 12.2 builds on.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
 - ~/Obsidian/Mathematics/references/exercises/Worked Examples.md: the worked-examples index.
@@ -56,7 +56,7 @@ What is already known
   case (rank 8, 210 modules) (the journey plan 08-lora-update.md, Description and Goal).
 - poe_repair_min's correction is a rank-8 cross-attention LoRA trained on the cached guided residual
   r_t = ε̃_J − ε̃_PoE (Mission, in
-  ~/Playground/PhD/poe_repair_min/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
+  ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
 - That residual is w·(ε_J − ε_A − ε_B + ε_∅) at guidance w = 7.5, written in the cache as
   gs*(eps_j − eps_a − eps_b + eps_uncond), and its bracket is layer 8's ε-space interaction term
   ε_joint − ε_A − ε_B + ε_∅ (the definition field of
@@ -75,13 +75,13 @@ Rules
 - Report each quiz's question count, node count and verdicts before its page is built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 12.1's URL in step 6 and quiz 12.2's URL in step 8 of
-  artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, each replacing
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/12-the-correction-at-scale.md, each replacing
   "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and the
   two URLs open.

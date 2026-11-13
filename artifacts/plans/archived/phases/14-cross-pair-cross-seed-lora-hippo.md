@@ -52,11 +52,11 @@ New code under `poe_repair.experiments.cross_pair_lora_pooling/`:
 | `poe_repair.experiments.cross_pair_lora_pooling.train_pooled` | new | Wraps the Plan-08 trainer body. Replaces the seed-only loader with a `(pair, seed)` pool iterator. Inherits LoRA-rank/lr/epoch/checkpoint args verbatim. Adds `--pair-pool` and reuses `--seed-pool-path`. |
 | `poe_repair.experiments.cross_pair_lora_pooling.sample_crossbar` | new | Four-quadrant sampling. For each `(pair, seed)` chosen by the quadrant policy (`in/in`, `in/out`, `out/in`, `out/out`), calls `run_lora_residual_inject` with the trained adapter; tags each output dir with `quadrant=<...>`. |
 | `poe_repair.experiments.cross_pair_lora_pooling.contact_sheet` | new | Renders the held-pair × held-seed sheet (the paper figure) and the three calibration sheets. Rows = pairs, cols = `{PoE, pooled-LoRA, per-group-LoRA from Plan 10 if available, per-pair-LoRA from Plan 09 if available, mono}`. |
-| `scripts/cross_pair_lora_pooling/train_all_groups.sh` | new | One-shot wrapper: validates pools → trains → samples crossbar → renders contact sheets. Sized for one 32 GB Blackwell GPU. |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/train_all_groups.sh` | new | One-shot wrapper: validates pools → trains → samples crossbar → renders contact sheets. Sized for one 32 GB Blackwell GPU. |
 | `poe_repair.experiments.held_out_seeds.seed_pool` | reused verbatim | Seed-pool YAML loader. |
 | `poe_repair.experiments.held_out_seeds.task_d_bridge` | reused with `--pair`/`--seed` | Δ̄_t bridge per `(pair, seed)`. Inputs are per-cell. |
-| `scripts/build_training_cache.py`, `scripts/build_eval_cache.py` | reused | Cache builders. Same scripts used on mscluster. |
-| `scripts/cross_seed_lora_pooling/build_sibling_caches.sh` | reused | Coordinated with Plan 10's driver task: builds the five sibling-pair caches at seeds `{9..12}`. Idempotent. |
+| `3-understanding-compositionality/scripts/build_training_cache.py`, `1-lora-correction/scripts/build_eval_cache.py` | reused | Cache builders. Same scripts used on mscluster. |
+| `1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh` | reused | Coordinated with Plan 10's driver task: builds the five sibling-pair caches at seeds `{9..12}`. Idempotent. |
 
 The trainer **never** writes into Plan 09 (`outputs/lora/<pair>/seed_42/`)
 or Plan 10 (`outputs/cross_seed_lora_pooling/<pair>/`) trees — those are
@@ -308,7 +308,7 @@ Reuse the existing driver shared with Plan 10 / Plan 12:
 ```bash
 cd ~/Playground/poe_repair_min
 CUDA_VISIBLE_DEVICES=0 SEEDS="9 10 11 12" \
-    bash scripts/cross_seed_lora_pooling/build_sibling_caches.sh
+    bash 1-lora-correction/scripts/cross_seed_lora_pooling/build_sibling_caches.sh
 ```
 
 20 cells ≈ **25 min**. Pass `SKIP_REFS=1` to skip the PoE/Mono PNGs
@@ -576,7 +576,7 @@ Whole-experiment buckets:
 | `poe_repair.experiments.cross_pair_lora_pooling.train_pooled` | | ⬜ (Task B) |
 | `poe_repair.experiments.cross_pair_lora_pooling.sample_crossbar` | | ⬜ (Task C) |
 | `poe_repair.experiments.cross_pair_lora_pooling.contact_sheet` | | ⬜ (Task C) |
-| `scripts/cross_pair_lora_pooling/train_all_groups.sh` | | ⬜ |
+| `1-lora-correction/scripts/cross_pair_lora_pooling/train_all_groups.sh` | | ⬜ |
 | Task A — pool YAMLs + leak guards | | ⬜ |
 | Task B — train pooled LoRA across 40 cells on hippo | | ⬜ (~20 h Blackwell) |
 | Task C — four-quadrant evaluation + contact sheets | | ⬜ |

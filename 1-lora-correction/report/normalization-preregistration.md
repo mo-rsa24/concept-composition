@@ -2,7 +2,7 @@
 
 **Committed 2026-08-05, before any cross-type plot exists.**
 
-Plan `plans/03-does-the-correction-cause-composition/plans/instrument-02-fix-the-size-measure-before-any-result.md`.
+Plan `1-lora-correction/plans/03-does-the-correction-cause-composition/plans/instrument-02-fix-the-size-measure-before-any-result.md`.
 
 ## The committed choice
 
@@ -95,5 +95,5 @@ None.
 
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-$PY scripts/normalization_candidates.py
+$PY 1-lora-correction/scripts/normalization_candidates.py
 ```

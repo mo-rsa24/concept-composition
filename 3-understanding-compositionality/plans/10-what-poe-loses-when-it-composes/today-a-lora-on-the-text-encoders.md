@@ -5,14 +5,14 @@
 > [!NOTE]
 > **You will hold:** a rank-8 LoRA on SDXL's two text encoders, trained so that the product of the two
 > single-prompt experts matches the joint prompt's prediction, with the UNet frozen throughout; its
-> held-out cat-by-dog renders beside [plain PoE](../../context/world/poe-composition.md#what-poe-composition-is) and beside the existing rank-32 UNet adapter; a count
+> held-out cat-by-dog renders beside [plain PoE](../../../context/world/poe-composition.md#what-poe-composition-is) and beside the existing rank-32 UNet adapter; a count
 > of how many held-out seeds show two separate animals; and a fidelity number saying whether a cat
 > still looks like a cat. **Time:** ~2 sittings, about 8 GPU-hours · **Stop point:** step 5's table
 
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md
 ```
 
 ## Contents
@@ -34,7 +34,7 @@ Eight third experts have been tried beside "dog" and "cat" and none restores ide
 structural: a third condition reaches the picture only as w·(ε_x − ε_∅), a whole-prompt-shaped pull
 added to a sum, while the two animals are fused inside the "dog" and "cat" forward passes before that
 sum is ever formed. The measured version of that argument is in
-[the finding](../../report/can-a-text-space-third-expert-restore-composition.md): build x faithfully
+[the finding](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md): build x faithfully
 as a difference and it sits near the empty prompt and does nothing (x_and, 0 of 7); build it far from
 empty and it is simply another prompt (x_pos, 6 of 7 on count, 0 on identity).
 
@@ -254,4 +254,4 @@ animals still look right.
 
 ## Cross-references
 
-- The mention of **plan 10's text-encoder LoRA plan**, placed in the text-embedding project, in [the project table for regrouping the core repo](../split-into-idea-repos.md).
+- The mention of **plan 10's text-encoder LoRA plan**, placed in the text-embedding project, in [the project table for regrouping the core repo](../../../plans/split-into-idea-repos.md).

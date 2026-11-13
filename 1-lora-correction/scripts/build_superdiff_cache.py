@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Build the SuperDiff trajectory cache (plan 08, task 1.2).
 
-Mirrors ``scripts/build_training_cache.py``'s layout so the existing pooled trainer reads it
+Mirrors ``3-understanding-compositionality/scripts/build_training_cache.py``'s layout so the existing pooled trainer reads it
 unchanged: ``<root>/<split>/<pair_slug>/seed_<n>/meta.json`` plus
 ``residuals/step_{000..199}.pt``, each step holding the PoE cache's key names with SuperDiff's
 meaning behind them:
@@ -34,7 +34,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.composers import superdiff as sd  # noqa: E402
 
@@ -112,7 +112,7 @@ def build_cell(models, *, prompt_a: str, prompt_b: str, joint_prompt: str, seed:
         "guidance_scale": guidance_scale, "num_inference_steps": steps,
         "height": height, "width": width, "kappa": kappa,
         "sampler": "superdiff euler-maruyama, kappa fixed, unclamped, noise on all but the last 3 steps",
-        "composer": "poe_repair/composers/superdiff.py (loop mirrored in scripts/build_superdiff_cache.py)",
+        "composer": "poe_repair/composers/superdiff.py (loop mirrored in 1-lora-correction/scripts/build_superdiff_cache.py)",
         "branch_order": ["a", "b", "j", "uncond"], "timesteps": timesteps,
         "r_t_sd_norms": r_t_norms, "eps_m_norms": eps_m_norms,
         "elapsed_seconds": round(time.perf_counter() - t0, 2),

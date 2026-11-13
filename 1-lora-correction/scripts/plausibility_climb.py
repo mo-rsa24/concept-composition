@@ -32,7 +32,7 @@ the climb along the corrected path, which would need that path sampled. Plan
 
 Cache-only, no GPU.
 
-    python scripts/plausibility_climb.py --pool
+    python 1-lora-correction/scripts/plausibility_climb.py --pool
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ import numpy as np
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import (  # noqa: E402
     CACHE_ROOT,

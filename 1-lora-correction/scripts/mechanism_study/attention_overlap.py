@@ -17,7 +17,7 @@ Two numbers per step, both on maps normalised to sum 1 so they are spatial distr
 
 This reads the maps ``capture_attention.py`` already wrote and touches no GPU.
 
-  python3 scripts/mechanism_study/attention_overlap.py --regimes plain_poe lora_lambda1 --out <json>
+  python3 1-lora-correction/scripts/mechanism_study/attention_overlap.py --regimes plain_poe lora_lambda1 --out <json>
 """
 import argparse, json, os, re, sys
 

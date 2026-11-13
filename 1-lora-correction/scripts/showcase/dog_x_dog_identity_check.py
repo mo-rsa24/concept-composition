@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Decide what "Mono(A)" means for the dog x dog same-prompt check's identity gate.
 
-Plan 02 (plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md)
+Plan 02 (1-lora-correction/plans/01-showcase-the-trained-lora/plans/tests/02-the-dog-x-dog-same-prompt-check.md)
 pre-registers "PoE(A,A) reduces to Mono(A) within fp16 drift" as the gate before anything else
 in that plan is trusted. Tracing the formulas in poe_repair/methods/_sampling.py shows this
 cannot hold literally: eps_PoE = eps_tilde_A + eps_tilde_B - eps_empty, so at A=B it applies the
@@ -26,7 +26,7 @@ band) becomes the identity check plan 02 task 1.2 runs for real, across the full
 trajectory and the held-out seeds.
 
 Usage:
-    python scripts/showcase/dog_x_dog_identity_check.py --seed 9
+    python 1-lora-correction/scripts/showcase/dog_x_dog_identity_check.py --seed 9
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from poe_repair.config import RunConfig, joint_prompt
 from poe_repair.methods._sampling import add_time_ids, initial_latents_for_pair

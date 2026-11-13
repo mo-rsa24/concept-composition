@@ -11,7 +11,7 @@ myself into ~/Playground/PhD/simple-distributions-walk/walk10.py; bar: differenc
 construction (1), 0.126 for the plain product at area stretch 49
 
 Background
-This is layer 10's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/).
+This is layer 10's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/).
 I compose on the quadrant toy in a latent z, push the result through an invertible warp, and compare
 it with composing in pixel space after the warp. The reference is the warp check in the run folder
 named above; no rebuild/ module exists for this layer. The setup's folder and environment are in

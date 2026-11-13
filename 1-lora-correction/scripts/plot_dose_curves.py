@@ -12,11 +12,11 @@ That validation is what makes this readable, so this script refuses to run if
 the scorer is not marked validated rather than silently using an unvetted read.
 
 Reads sampled images; it does not sample. Produce them with
-scripts/interaction_term_inject.py across a lambda grid.
+1-lora-correction/scripts/interaction_term_inject.py across a lambda grid.
 
 Usage:
-    python scripts/plot_dose_curves.py
-    python scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
+    python 1-lora-correction/scripts/plot_dose_curves.py
+    python 1-lora-correction/scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
 """
 
 from __future__ import annotations
@@ -31,7 +31,7 @@ from pathlib import Path
 import numpy as np
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 OUT_DIR = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED)
 DEFAULT_ROOTS = (paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "pairs",)
@@ -39,7 +39,7 @@ SCORER_CONTRACT = paths.resolve(paths.COMPOSE_SCORER_VALIDATION) / "scorer_valid
 LAM_RE = re.compile(r"lam(\d{3})")
 # Fault one, fixed in the source rather than on a command line so a later change
 # shows up in a diff. The dose sweep ran seeds 9 to 12 (see the SEEDS list in
-# scripts/mechanism_study/run_dose_sweep.sh). Earlier quick tests left cells at
+# 1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh). Earlier quick tests left cells at
 # other seeds under the same output root, and they exist only at lambda 0 and 1,
 # so including them scored the two end strengths over more cells than the three
 # middle ones. That is not a fair curve, so the collection is pinned here.
@@ -134,7 +134,7 @@ def main() -> int:
         print(
             "no dose-sweep images found. This script scores images, it does "
             "not sample. Produce them with:\n"
-            "  bash scripts/mechanism_study/run_dose_sweep.sh\n"
+            "  bash 1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh\n"
             "Looked under:\n" + "\n".join(f"  {p}" for p in looked),
             file=sys.stderr,
         )

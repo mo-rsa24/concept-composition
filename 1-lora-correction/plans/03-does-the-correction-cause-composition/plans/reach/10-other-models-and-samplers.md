@@ -3,7 +3,7 @@
 This plan asks whether more correction still gives more composition when the model and the
 sampler are swapped for different ones.
 
-**No step number: nothing waits on this.** Background, listed in the background-experiments pool of the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md), which also holds the one `## Running order` table. This plan asks the same result on another model and sampler. Its scaffold waits at `artifacts/plans/parked/cross-model-replication`.
+**No step number: nothing waits on this.** Background, listed in the background-experiments pool of the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md), which also holds the one `## Running order` table. This plan asks the same result on another model and sampler. Its scaffold waits at `artifacts/plans/parked/cross-model-replication`.
 
 ## What this asks, in one line
 Does more correction still give more composition on a different model and a different sampler?
@@ -22,7 +22,7 @@ Three pieces:
 
 ## Purpose
 Goal 4 claims the effect is universal. If the same story holds on three models and across
-samplers, the [interaction term](../../../../context/world/interaction-term.md) is a property of
+samplers, the [interaction term](../../../../../context/world/interaction-term.md) is a property of
 text-to-image diffusion in general rather than something peculiar to SDXL. Serves DoD 8.
 
 ## Goal

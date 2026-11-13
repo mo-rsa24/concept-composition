@@ -1,7 +1,7 @@
 # When does a run's outcome stop changing, and does that step move with the pair?
 
 **EXP-01 of [EXPERIMENTS.md](../../../EXPERIMENTS.md).** Run 2026-08-12, cache only, no GPU.
-`python scripts/commitment_step.py` → `result.json`, `commitment-step-per-pair.png`.
+`python 1-lora-correction/scripts/commitment_step.py` → `result.json`, `commitment-step-per-pair.png`.
 
 **Why it was asked.** If the correction's schedule has to follow the pair, the adapter's single
 learned schedule will miss pairs whose outcome locks unusually early, and that is a failure mode

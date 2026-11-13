@@ -22,7 +22,7 @@ data rather than an inevitable property of composing densities).
 ## Where it came from and what judged it
 
 **Held since 2026-09-05.** Raised while reviewing
-[the basins-by-hand plan](../../../plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md)
+[the basins-by-hand plan](../../../../1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md)
 in this project, but the idea's own header says it is not part of that scope or this paper, and
 that plan does not reference it back. Kept because it needs a project of its own (new training
 runs on a curated dataset) and is explicitly parked to revisit once the current paper ships; its

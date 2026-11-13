@@ -54,7 +54,7 @@ After you finish this plan and want to ingest error patterns into the catalogs, 
 Is the trained LoRA (`phase1_r8_100k`) at a ceiling, or was it still improving when training stopped? The scope's [decision ledger](../../decisions-taken-here.md) settled that experiments A (train to 200k) and B (rank 16/32) run either way, so this read no longer decides *whether* they run; it is their **interpretation key**.
 
 **The signal already logged:**
-`eval/frac_distance_reached` (how much of the gap toward the joint prediction the LoRA's correction closes, 0 to 1) flattens near 0.4 in the live curves from `instrument-02`. Held-out [compose rate](../../../../context/world/compose-rate.md) saturates by step 50k (0.812 at 10k, 0.961 at 50k and 60k, from the run's own `compose_rate.json`). The train loss still creeps (median 0.00062 early to 0.00029 late).
+`eval/frac_distance_reached` (how much of the gap toward the joint prediction the LoRA's correction closes, 0 to 1) flattens near 0.4 in the live curves from `instrument-02`. Held-out [compose rate](../../../../../context/world/compose-rate.md) saturates by step 50k (0.812 at 10k, 0.961 at 50k and 60k, from the run's own `compose_rate.json`). The train loss still creeps (median 0.00062 early to 0.00029 late).
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen.
@@ -68,7 +68,7 @@ Is the trained LoRA (`phase1_r8_100k`) at a ceiling, or was it still improving w
 
 **Associated materials:**
 - **Review questions:** [the review file](../../review/01-read-where-the-curves-flatten.md)
-- **The run's local files:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/` (`history.json`, 91,800 rows; `compose_rate.json`; `samples/per_epoch/`)
+- **The run's local files:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/` (`history.json`, 91,800 rows; `compose_rate.json`; `samples/per_epoch/`)
 
 ---
 
@@ -90,7 +90,7 @@ Is the trained LoRA (`phase1_r8_100k`) at a ceiling, or was it still improving w
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- The `co3` python at `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` for the local history read ([environment/overview.md](../../../../environment/overview.md)).
+- The `co3` python at `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` for the local history read ([environment/overview.md](../../../../../environment/overview.md)).
 - W&B owns the numbers; the plan tree owns the verdict. No curve is copied into markdown; the verdict, the run id, and the threshold it was judged against go in the review file.
 
 ---
@@ -144,7 +144,7 @@ For Claude to execute. Ask Claude to do these.
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/reading/01-read-where-the-curves-flatten.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/reading/01-read-where-the-curves-flatten.md`**
   - Produces: a structure and instructions check before any work runs off this plan.
 
 ▶ **Next: [task 1.1](#1--extract-the-curve-locally)**.
@@ -158,7 +158,7 @@ For Claude to execute. Ask Claude to do these.
     ```
     /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python -c "see code references"
     ```
-  - Output goes to: `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/frac_distance_by_checkpoint.json`
+  - Output goes to: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/frac_distance_by_checkpoint.json`
   - Completion is observable: the json holds one row per checkpoint (10k to 100k), each with the metric's mean over the eval runs at that step.
 - [ ] **1.2 Compute the flatness numbers**
   - The last-half slope (linear fit over steps 50k to 100k) and the max-minus-min over the same span, written into the same sidecar.
@@ -175,11 +175,11 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [tasks 1.1 to 1.2](#1--extract-the-curve-locally)** done, so the local numbers exist to compare against.
 
-2.1 **Open W&B and find the run.** Browser: wandb.ai, project `prime_lab/poe-repair-animals-compose`. The run id is in `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/wandb/` (folder name `run-...-<id>`). Click into it. The reverse SSH port-forward, if working off the cluster browser, is in [the runbook](../../../../runbook/00-INDEX.md).
+2.1 **Open W&B and find the run.** Browser: wandb.ai, project `prime_lab/poe-repair-animals-compose`. The run id is in `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/wandb/` (folder name `run-...-<id>`). Click into it. The reverse SSH port-forward, if working off the cluster browser, is in [the runbook](../../../../../runbook/00-INDEX.md).
 
 2.2 **Charts tab, search `eval/frac_distance_reached`.** You should see one curve over 100k steps. ✅ If its last half is flat by eye and the local slope from task 1.2 is consistent with zero at the curve's own noise, the verdict is ceiling. ❌ If it is visibly rising at 100k and the local slope agrees, the verdict is waypoint.
 
-2.3 **Screenshot the panel** into the place kept for it in [runbook/looking-at-what-a-run-produced/reading-a-training-run.md](../../../../runbook/looking-at-what-a-run-produced/reading-a-training-run.md).
+2.3 **Screenshot the panel** into the place kept for it in [runbook/looking-at-what-a-run-produced/reading-a-training-run.md](../../../../../runbook/looking-at-what-a-run-produced/reading-a-training-run.md).
 
 2.4 **Write the verdict** into the [review file](../../review/01-read-where-the-curves-flatten.md): ceiling or waypoint, the slope, the span, the run id.
 
@@ -249,7 +249,7 @@ For you to follow manually. Do these yourself.
 ◀ **Needs: [instruction 2.4](#2--read-the-curves-in-wb)** done, so the verdict exists.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (only if anything failed red).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [02-the-dog-x-dog-same-prompt-check](../tests/02-the-dog-x-dog-same-prompt-check.md).**
 
@@ -259,7 +259,7 @@ For you to follow manually. Do these yourself.
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/history.json` — 91,800 logged rows; filter keys beginning `eval/frac_distance_reached`, group by `train/optimizer_step` bucket of 10k.
+**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/history.json` — 91,800 logged rows; filter keys beginning `eval/frac_distance_reached`, group by `train/optimizer_step` bucket of 10k.
 
 ```python
 import json, statistics
@@ -277,7 +277,7 @@ rows = [r for r in h if any(k.startswith("eval/frac_distance_reached") for k in 
 ▶ Paste to run this plan (no GPU; the verdict lands in the review file):
 
 ```
-Execute plans/01-showcase-the-trained-lora/plans/reading/01-read-where-the-curves-flatten.md: run task 0.1's verify-plan, then the Tasks lane; stop at the handoff to the manual W&B read.
+Execute 1-lora-correction/plans/01-showcase-the-trained-lora/plans/reading/01-read-where-the-curves-flatten.md: run task 0.1's verify-plan, then the Tasks lane; stop at the handoff to the manual W&B read.
 ```
 
 ---

@@ -10,7 +10,7 @@ after quiz 6.1.
 guidance as p(x)·p(A|x)^w·p(B|x)^w, worked on the quadrant toy's ideal experts
 
 Background
-This is layer 6 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: guidance
+This is layer 6 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: guidance
 as a dial. Stable Diffusion's cat-dog hybrid happens at guidance weight 7.5, and every layer so far
 ran at 1. The maths comes before the build and teaches only what the build needs: what raising a
 density to a power does, and the guided target written exactly. I have passed quiz 6.1; any
@@ -24,7 +24,7 @@ Objectives
 
 What to read
 - Quiz 6.1's results: the misses that become first rungs.
-- artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md, its Study first
   line: the journey plans, vault notes, textbook and video for this layer.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md: the toy and its
   w = 1 numbers.
@@ -39,7 +39,7 @@ What is already known
   p(x)^(1 − 2w)·p(x|A)^w·p(x|B)^w up to a constant, and at w = 1 it is construction (1),
   p(x|A)·p(x|B)/p(x) (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - SDXL composes two prompts at w = 7.5 as ε_∅ + w(ε_A − ε_∅) + w(ε_B − ε_∅), and the 2D work
-  measured only w = 1 (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
+  measured only w = 1 (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1).
 - The quadrant toy here is the four-quadrant answer-key toy, blobs at (±0.5, ±0.5), std 0.15, A is
   x1 > 0 and B is x2 > 0, and at w = 1 with "contains" labels and an A∩B share r it puts 0.989
   within 3 std of (0.5, 0.5) for every r from 0.25 to 0.001, with Z = r

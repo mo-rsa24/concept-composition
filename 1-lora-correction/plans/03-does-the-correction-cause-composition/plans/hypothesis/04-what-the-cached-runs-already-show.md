@@ -3,7 +3,7 @@
 This plan asks what four questions about the correction can be answered from the trajectories
 already on disk, with no new sampling and no GPU queue.
 
-**Step 5 of 22.** Waits on step 1. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 5 of 22.** Waits on step 1. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -67,7 +67,7 @@ file, question by question.
 - [x] Confirm both trajectories exist per pair-and-seed run for the fork read. They did not: the cache walks
       only the PoE path, so the Mono paths had to be generated (next task).
 - [x] Generate the missing Mono paths from the same pinned inits.
-      `scripts/mechanism_study/generate_fork_paths.sh`, resumable.
+      `1-lora-correction/scripts/mechanism_study/generate_fork_paths.sh`, resumable.
 - [x] The fork curve: distance between the two paths per step, elbow reported. Feeds the F4 band.
 - [x] The climb: does the correction align with the sampling motion, with a random control and a
       wrong-step control.
@@ -96,8 +96,8 @@ file, question by question.
 ## Engagement Instructions
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-$PY scripts/snr_collapse.py        # figure + "collapse spread: X%" printed
-$PY scripts/fork_curve.py          # figure + "elbow at step N" printed
-$PY scripts/climb.py               # PoE vs Mono climb distributions
-$PY scripts/spectrum.py            # energy-at-k table + held-out projection
+$PY 1-lora-correction/scripts/snr_collapse.py        # figure + "collapse spread: X%" printed
+$PY 1-lora-correction/scripts/fork_curve.py          # figure + "elbow at step N" printed
+$PY 1-lora-correction/scripts/climb.py               # PoE vs Mono climb distributions
+$PY 1-lora-correction/scripts/spectrum.py            # energy-at-k table + held-out projection
 ```

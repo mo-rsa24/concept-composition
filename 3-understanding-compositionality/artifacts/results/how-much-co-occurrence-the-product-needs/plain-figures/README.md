@@ -1,6 +1,6 @@
 # What PoE needs from training to draw two things at once
 
-Every figure here is drawn by `artifacts/notes/what-poe-loses-when-it-composes/plain_figures.py`
+Every figure here is drawn by `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/plain_figures.py`
 from saved samples and counts. The fuller record of each result is the
 [results card](../README.md) one folder up.
 
@@ -589,7 +589,7 @@ the single captions added, most are a clean cat or a clean dog. That matches mod
 expert that likes the other's pictures turns PoE's answer into a single shape.
 
 Six or eight seeds cannot carry a finding. The pilot's planned test is 128 seeds per training,
-which has not been run. Its record is [the inclusive-captions walk](../../../drips/inclusive-captions-pilot/EXECUTE_WALK.md).
+which has not been run. Its record is [the inclusive-captions walk](../../../../../4-inclusive-captions/artifacts/drips/inclusive-captions-pilot/EXECUTE_WALK.md).
 
 ## What this does not show
 

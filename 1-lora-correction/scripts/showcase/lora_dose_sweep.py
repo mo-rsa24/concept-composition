@@ -27,11 +27,11 @@ Stages:
   5. --softness: per-lambda CLIP/DINOv2 sharpness proxy, labelled descriptive (task 1.5).
 
 Usage:
-    python scripts/showcase/lora_dose_sweep.py --capture-deltas
-    python scripts/showcase/lora_dose_sweep.py --print-manifest
-    python scripts/showcase/lora_dose_sweep.py --run-sweep
-    python scripts/showcase/lora_dose_sweep.py --score
-    python scripts/showcase/lora_dose_sweep.py --softness
+    python 1-lora-correction/scripts/showcase/lora_dose_sweep.py --capture-deltas
+    python 1-lora-correction/scripts/showcase/lora_dose_sweep.py --print-manifest
+    python 1-lora-correction/scripts/showcase/lora_dose_sweep.py --run-sweep
+    python 1-lora-correction/scripts/showcase/lora_dose_sweep.py --score
+    python 1-lora-correction/scripts/showcase/lora_dose_sweep.py --softness
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from poe_repair.config import RunConfig
 from poe_repair.experiments.one_pair_one_seed import trainer as lora_trainer
@@ -57,7 +57,7 @@ from poe_repair.run import make_ctx
 from poe_repair.runtime import PairSeedCell, encode_prompt_sdxl
 
 CHECKPOINT_RUN_DIR = Path(
-    "artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
+    "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 )
 CHECKPOINT_PATH = CHECKPOINT_RUN_DIR / "checkpoints/lora_step_100000.pt"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/lora_dose")

@@ -85,7 +85,7 @@ def gain_and_pattern(off, on, *, generator=None):
       noise    the same, with on's pixels shuffled: a per-cell floor
 
     Compare the *pattern* terms across map kinds. See
-    artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md.
+    1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md.
     """
     if off is None or on is None:
         return None

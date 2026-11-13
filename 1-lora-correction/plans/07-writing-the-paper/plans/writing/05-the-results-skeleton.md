@@ -3,7 +3,7 @@
 This plan asks what shape the experiments and results sections take while most of their numbers do
 not exist yet, so every gap is visible and names the run that closes it.
 
-**Step 18 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 18 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|

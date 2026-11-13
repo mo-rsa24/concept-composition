@@ -16,11 +16,11 @@ thumbnail at that step; pick one seed to see all six side by side while you scru
 Build once (Node is on the cluster, nothing on the laptop):
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/scenes/where-each-condition-lands
+cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands
 npm install && npm run build      # writes dist/, about 26 MB with the thumbnails
 ```
 
-Then serve and tunnel per the [scene-serving recipe](../../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md)
+Then serve and tunnel per the [scene-serving recipe](../../../../runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md)
 and open
 
 ```
@@ -41,7 +41,7 @@ For live editing instead: `npm run dev` binds `127.0.0.1:5174`, forward that por
 
 ## How the data was made
 
-`scripts/showcase/where_each_condition_lands_trajectories.py` ran the 48 samplings on mscluster109
+`1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` ran the 48 samplings on mscluster109
 GPU 1 (`co3`) via `where_each_condition_lands_shared_device.sh` with `STAGE=frames`: 50 DDIM steps,
 guidance 7.5, 1024 px, one pinned initial latent per seed from the training cache shared by all six
 conditions. At steps 0, 2, 5, 8, 10, 15, 20, 25, 30, 35, 40, 45 and 49 it decodes the Tweedie mean
@@ -50,7 +50,7 @@ The three reference conditions are rendered before the adapter is attached to th
 the windowed sampler leaves the adapter enabled when it returns. Frames live at
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames/`.
 
-`scripts/showcase/where_each_condition_lands_frames_embed.py` embeds all 672 frames on CPU
+`1-lora-correction/scripts/showcase/where_each_condition_lands_frames_embed.py` embeds all 672 frames on CPU
 (`XFORMERS_DISABLED=1`), fits the axes on this run's step-50 reference frames, and writes
 `public/data.json`, the thumbnails, and `artifacts/results/where-does-each-condition-land/frames-dino-feats.npz`.
 

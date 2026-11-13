@@ -2,7 +2,7 @@
 
 > **This scope's plans sit in the one running order, not in a sequence of their own.** They take
 > step numbers in the `## Running order` table of the
-> [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), interleaved with every other scope's plans.
+> [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), interleaved with every other scope's plans.
 > The `## Plans` list below is this folder's contents and its dependencies, never a list to work
 > down top to bottom.
 
@@ -239,7 +239,7 @@ None.
 ⬅️ [Previous](#sub-scopes) | 📋 [TOC](#table-of-contents) | [Next](#environment-context) ➡️
 
 Five plans, in the order they get done. The step numbers are their places in the
-[root running order](../../MASTER_PLAN.md), which is the one order across every scope.
+[root running order](../../../MASTER_PLAN.md), which is the one order across every scope.
 
 | Step | Plan | What it does | Status | Waits on |
 |---|---|---|---|---|
@@ -258,18 +258,18 @@ blind labels.
 
 ⬅️ [Previous](#plans) | 📋 [TOC](#table-of-contents) | [Next](#learning-coverage) ➡️
 
-Start at [the environment index](../../environment/00-INDEX.md). This scope depends on:
+Start at [the environment index](../../../environment/00-INDEX.md). This scope depends on:
 
-- [the node facts](../../environment/hpc/nodes.md): one free Blackwell, mscluster112, verified
+- [the node facts](../../../environment/hpc/nodes.md): one free Blackwell, mscluster112, verified
   2026-09-08; mscluster110 is carrying another user's job and mscluster111 is hardware-faulted.
   `biggpu` allows one job per user.
-- [the execution protocol](../../environment/hpc/execution-protocol.md): shared-device launch over
+- [the execution protocol](../../../environment/hpc/execution-protocol.md): shared-device launch over
   SSH with `nohup`, every path on the launch line absolute, the launcher copied under the run's
   output root on `/datasets` because `/tmp` is node-local, a device guard refusing a GPU over 1 GB
   in use or reading `[N/A]`, and harvest over SSH on 112 rather than from the session node.
-- [the throughput facts](../../environment/hpc/throughput.md): rank 32 at about 0.24 s per step on
+- [the throughput facts](../../../environment/hpc/throughput.md): rank 32 at about 0.24 s per step on
   the Blackwell, about 2 hours per 30k run, five in a chain overnight.
-- [the storage facts](../../environment/storage.md): large artifacts to `/datasets` only, and a
+- [the storage facts](../../../environment/storage.md): large artifacts to `/datasets` only, and a
   disk guard that checks the filesystem the job actually writes to.
 
 `co3_bw` is the python on the Blackwell, never `co3`: a `co3` CUDA operation there produces no

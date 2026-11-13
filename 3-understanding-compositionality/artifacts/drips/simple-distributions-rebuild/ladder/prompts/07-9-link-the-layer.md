@@ -9,23 +9,23 @@ after the `/drip-retro` the build printed.
 In the background, dispatch xref-cadence over the files layer 7 of the composition ladder wrote.
 
 Background
-Layer 7 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is closed: its
+Layer 7 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is closed: its
 maths drip and its build walk wrote new files. Those files should link to the vault notes, brick and
 idea-map claims that cover the same ideas, and those should link back, so the next reader finds
 both.
 
 Objectives
 1. Run xref-cadence over the layer 7 maths drip folder under artifacts/drips/, the step file
-   artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, and the retrospective the layer 7
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/07-a-without-b.md, and the retrospective the layer 7
    walk closed on.
 2. Write links both ways between those files and the reference sets below.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/07-a-without-b.md, its Study first line: the
   vault notes to link against.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, the "A without B (negation)" row of
   the Bricks table.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 6 and run 3.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 6 and run 3.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 6, 8 and 10.
 
 What is already known

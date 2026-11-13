@@ -12,8 +12,8 @@ window_curves.json, so a picture in this strip and a point on the curve can
 never disagree.
 
 Usage:
-    python scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
-    python scripts/window_strip.py --pairs a_cat__x__a_dog,a_frog__x__a_toad --seed 9
+    python 1-lora-correction/scripts/window_strip.py --pair a_cat__x__a_dog --seed 9
+    python 1-lora-correction/scripts/window_strip.py --pairs a_cat__x__a_dog,a_frog__x__a_toad --seed 9
 """
 
 from __future__ import annotations
@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term import window_grid as wg
 

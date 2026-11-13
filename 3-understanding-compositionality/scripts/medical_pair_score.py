@@ -1,4 +1,4 @@
-"""Detector for the pair test in plans/10-does-roentgen-draw-two-findings.
+"""Detector for the pair test in 3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings.
 
 calibrate: run the CheXpert-only TorchXRayVision model on real NIH images, report AUROC per
 finding (positives carry the finding, negatives lack it) and the score that gives

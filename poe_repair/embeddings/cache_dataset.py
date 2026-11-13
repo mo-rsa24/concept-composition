@@ -1,7 +1,7 @@
 """Cache-backed dataset for Method 2 distillation.
 
 Reads ``outputs/training_cache/<split>/<pair>/<seed>/`` produced by
-``scripts/build_training_cache.py``. Each sample is one (cell, step) pair
+``3-understanding-compositionality/scripts/build_training_cache.py``. Each sample is one (cell, step) pair
 yielding everything the trainer needs:
 
   - ``x_t``: the noisy latent at this step (shape (4, H, W); leading

@@ -11,7 +11,7 @@ in the parts world with a wet rule (the cat half shifts when a dog is present), 
 from the Gaussian mixtures, and r_t with its gradient at each noise level.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ reaches the first half of
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ reaches the first half of
 the research goal in layer 8: the interaction term, defined exactly here before any learned version
 of it is trusted. Claude writes the reference code in toy/rebuild/ one layer ahead, so that my own
 walk08.py and walk08b.py have numbers to match. It starts from rebuild/ as layers 1 to 5 left it,
@@ -42,9 +42,9 @@ What to read
 - rebuild/parts_world.py and rebuild/phase5_dial.py: the parts world's mixtures and layer 5's
   experts.
 - rebuild/walk_numbers.py: how worked numbers are written.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term, exact",
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term, exact",
   and its Pins.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) and run 1.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7 (7.1 to 7.4) and run 1.
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9.
 
 What is already known
@@ -55,12 +55,12 @@ What is already known
   constant with the rule off and varying with it on, then the noised r_t and its gradient, written
   also in ε-space as ε_joint − ε_A − ε_B + ε_∅, the residual poe_repair_min already caches for 25
   pairs at all 50 steps, in files rebuild/interaction.py and rebuild/phase8_interaction.py, not yet
-  built (artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
+  built (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
   exact").
 - When each label is a fixed function of the image, the interaction term is exactly zero, so
   interaction is no third operator but a same-variable product whose A∩B appearance must be in the
   training data, and the wet-dog shift was found at 20% overlap and missed at 0% (mean x1 −0.79
-  against −0.48) (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run 1).
+  against −0.48) (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.1 and run 1).
 - By Bayes, r(x) = log p(A,B|x) − log p(A|x) − log p(B|x) + log[p(A)p(B)/p(A,B)], so with clean
   labels r is one constant wherever the joint has mass, wet rule or not, and the brick row's
   "varying with it on" can then only appear in r_t at t > 0, off the joint's support, or for experts
@@ -68,9 +68,9 @@ What is already known
   artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claims 3 and 9).
 - "Interaction" splits in two: appearance interaction (a data condition, no term) and label
   dependence given the image (a real term, zero for clean labels, nonzero for report-mined labels)
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.3).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.3).
 - No paper adds an interaction term to a product, and the clean-label argument is Bradley et al.
-  2025a's Bayes composition, p.4 (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, route 1).
+  2025a's Bayes composition, p.4 (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7, route 1).
 - In rebuild/parts_world.py a sample is 16 pixels, HEAD 0 to 7, BODY 8 to 15, LEFT and RIGHT the
   column halves; Mixture(w, m, v) normalises its weights, noised(abar) gives N(√ᾱ m, ᾱ v + 1 − ᾱ)
   per component, responsibilities(x) is float64 NumPy, and torch() casts to float32, so the
@@ -97,12 +97,12 @@ What is already known
 - SDXL's cache under /datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/ holds ε_A,
   ε_B, ε_joint and ε_∅ at all 50 steps for 25 pairs, with the residual gs*(eps_j − eps_a − eps_b +
   eps_uncond) at guidance 7.5, and its lower bound on the interaction did not track which pairs
-  blend (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
+  blend (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 - Claim 7.4's label term uses points uniform on [−1, 1]², A true when x1 < 0 and B true when x2 > 0
   (the A and B of rebuild/phase5_dial.py), A read with probability 0.9 when true, and inside A∩B, B
   read only when A was read, so the term log p(A,B|x) − log p(A|x) − log p(B|x) is +0.105 nats for
   (A,B) inside A∩B, strongly negative for (¬A,B) there, and zero elsewhere
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 7.4).
 - +0.105 is −ln 0.9, whatever the probability of reading B once A was read (the arithmetic of claim
   7.4's labelling).
 - rebuild/walk_numbers.py prints through put(key, value), its __main__ loop runs phase1, phase2,

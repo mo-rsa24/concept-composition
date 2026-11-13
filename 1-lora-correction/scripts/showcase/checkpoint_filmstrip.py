@@ -14,7 +14,7 @@ number that is supposed to describe it are read together.
 A seed whose target does not show both subjects is labelled as such on its row. Any statistic
 comparing a render to that target is meaningless on that row, and the row exists to show why.
 
-  python3 scripts/showcase/checkpoint_filmstrip.py \
+  python3 1-lora-correction/scripts/showcase/checkpoint_filmstrip.py \
       --run-dir <the wandb run dir> --pair a_cat__x__a_dog \
       --out artifacts/results/<question> --prefix seed-flips
 """
@@ -22,7 +22,7 @@ import argparse, json, os, re, sys
 
 from PIL import Image, ImageDraw, ImageFont
 
-REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.insert(0, REPO)
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"

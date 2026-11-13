@@ -7,10 +7,10 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 ```text
 /drip --math the product of two diagonal Gaussians and the product of two Gaussian mixtures, every
 pair and its weight, as steps 2 to 5 of
-artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md set them out
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md set them out
 
 Background
-This is layer 4 of the composition ladder in artifacts/drips/simple-distributions-rebuild/: the
+This is layer 4 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/: the
 parts world, where a cat expert and a dog expert over 16 pixels multiply exactly into a mosaic, a
 blend or two animals. The maths comes before the build and teaches only what the build needs. I
 have passed quiz 4.1; any question it marked missed becomes a first rung.
@@ -24,9 +24,9 @@ Objectives
 5. Work the two-animals pair weights by hand, including why float64 prints them as 0.5 and 0.0.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 2 to 5: the derivation
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 2 to 5: the derivation
   in this walk's notation.
-- artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json: the worked numbers, as
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json: the worked numbers, as
   settings a, b and c.
 - The vault note Products And Quotients Of Diagonal Gaussians, linked on layer 4's Study first line.
 - Quiz 4.1's results: the misses that become first rungs.

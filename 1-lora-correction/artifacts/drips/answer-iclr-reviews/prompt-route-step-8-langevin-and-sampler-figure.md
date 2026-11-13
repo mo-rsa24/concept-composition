@@ -32,7 +32,7 @@ Objectives
 5. Render the six-column figure (slot R6): rows are Figure 5's four pairs (cat and dog, elephant
    and penguin, tent and snowy mountain, lighthouse and stormy sea) at the shared seed 10, columns
    joint, joint with Langevin, PoE, PoE with Langevin, PoE with unadjusted HMC, CO3, all from one
-   starting noise per row. Draw it with scripts/paper_tile_figure.py at 5.5 in wide, so its labels
+   starting noise per row. Draw it with 1-lora-correction/scripts/paper_tile_figure.py at 5.5 in wide, so its labels
    print at 8 pt (layout-sheet.md, "Before a slot is called finished").
 
 What to read
@@ -41,12 +41,12 @@ What to read
   their paper in 28 places (the audit below); implement from the paper's equations.
 - The code-against-paper audit at
   /home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md
-- plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/02-the-corrector-and-the-step-size-it-runs-at.md
+- 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/02-the-corrector-and-the-step-size-it-runs-at.md
   and
-  report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md
-- report/paper-review/protocol.md, held-out-set.md, layout-sheet.md: rules, the tuning pairs and the
+  1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md: rules, the tuning pairs and the
   figure's slot.
-- scripts/corrector_residual_curve.py and scripts/figure_candidates.py: existing drivers and the
+- 1-lora-correction/scripts/corrector_residual_curve.py and 1-lora-correction/scripts/figure_candidates.py: existing drivers and the
   grid.
 
 What is already known
@@ -77,15 +77,15 @@ Rules
 - Show the check's pass or miss line before building the drivers.
 - The tuning rule is written to the protocol before any tuning cell runs.
 - Add this step's GPU jobs (tuning grid, the R6 renders, the Langevin rows of R1 and Figure 5) to
-  report/paper-review/prze-10-compute.md as a later wave, and launch them only after the user's yes
+  1-lora-correction/report/paper-review/prze-10-compute.md as a later wave, and launch them only after the user's yes
   to each command, by the shared-device path.
 
 What to hand back
-- scripts/check_langevin_two_gaussians.py and its printed table.
+- 1-lora-correction/scripts/check_langevin_two_gaussians.py and its printed table.
 - The two drivers, the tuning contact sheets and the chosen c and k with the rule that chose them.
 - The six-column figure in its slot, with its sidecar file listing seeds, noise and settings.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
-- Proof: python3 scripts/check_langevin_two_gaussians.py prints PASS for all four step sizes, and
+- Proof: python3 1-lora-correction/scripts/check_langevin_two_gaussians.py prints PASS for all four step sizes, and
   the board redraws with --step 8 ticking the PRZE-2 lines.
 
 What you will see

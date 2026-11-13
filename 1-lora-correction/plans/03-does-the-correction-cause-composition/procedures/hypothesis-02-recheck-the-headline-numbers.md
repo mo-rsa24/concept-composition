@@ -71,7 +71,7 @@ Navigation: ⬅️ [Why you are doing this](#why-you-are-doing-this-and-where-it
 - **AUC**: the area under the compose-rate-against-λ curve, on a 0-to-1 scale, so a whole curve
   becomes one number and the three rows can be compared at a glance.
 - **the true-correction row and the control rows**: the true-correction row adds back the real
-  [interaction term](../../../context/world/interaction-term.md); the two control rows add
+  [interaction term](../../../../context/world/interaction-term.md); the two control rows add
   deliberately wrong versions that should fail, and do.
 - **NMS**: the step that merges overlapping detections, so one animal found twice counts once.
 - **MIN_BOX_FRACTION**: the minimum size a detection may have, 0.25. It must span at least a
@@ -146,7 +146,7 @@ print('seeds present:', seeds)
 
 Every row should print `32`, and the seeds should be `[9, 10, 11, 12]`. Those four are the ones
 this experiment generated with, the first four of the held-out block defined in
-`artifacts/results/does-the-fix-reach-unseen-pairs/seed_pool.yaml`.
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/seed_pool.yaml`.
 
 > Held-out here means seeds and pairs deliberately kept out of training, so nothing measured on
 > them can be explained by the model having seen them.
@@ -162,7 +162,7 @@ Do not pick a threshold from a number alone. Draw the boxes and look at them.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min    # the paths below are repo-relative
-$PY scripts/dose_strip.py --pair an_elephant__x__a_penguin --seed 10 --annotate-boxes --device cpu
+$PY 1-lora-correction/scripts/dose_strip.py --pair an_elephant__x__a_penguin --seed 10 --annotate-boxes --device cpu
 ```
 
 `--annotate-boxes` draws every box the scorer KEPT, labelled with its confidence and its pixel
@@ -184,7 +184,7 @@ Navigation: ⬅️ [2. Look at the bad box](#2-look-at-the-bad-box-before-choosi
 Both thresholds live in source rather than on a command line, so a later change shows up in a git
 diff instead of hiding in someone's shell history.
 
-**Fault one:** `scripts/plot_dose_curves.py` carries `SWEEP_SEEDS = (9, 10, 11, 12)` beside its
+**Fault one:** `1-lora-correction/scripts/plot_dose_curves.py` carries `SWEEP_SEEDS = (9, 10, 11, 12)` beside its
 collection code, so it reads only the runs this experiment generated. `--all-seeds` gives the old
 behaviour back, and the run prints which seeds it used either way.
 
@@ -196,11 +196,11 @@ yellow or magenta, so the diagnostic picture and the scorer agree by constructio
 
 ```bash
 grep -n "MIN_BOX_FRACTION\|conf\|nms_iou" poe_repair/experiments/compose_scorer_validation/detection_scorer.py
-grep -n "SWEEP_SEEDS" scripts/plot_dose_curves.py
+grep -n "SWEEP_SEEDS" 1-lora-correction/scripts/plot_dose_curves.py
 ```
 
 The filter can only remove detections, so it can only push the
-[compose rate](../../../context/world/compose-rate.md) down. It cannot manufacture the result the
+[compose rate](../../../../context/world/compose-rate.md) down. It cannot manufacture the result the
 paper claims. Check it on two images whose answer you already know before spending an hour:
 
 ```bash
@@ -223,7 +223,7 @@ The false positive on the control drops from 2 to 1, and the real composition st
 Navigation: ⬅️ [3. Set the thresholds](#3-set-the-thresholds-in-the-source-code) | 📋 [TOC](#table-of-contents) | [Next](#5-if-the-direction-does-not-survive) ➡️
 
 ```bash
-$PY scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs --device cpu
+$PY 1-lora-correction/scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs --device cpu
 ```
 
 Drop `--device cpu` if the card is free. The thresholds come from the source edits in step 3, so
@@ -267,7 +267,7 @@ figure F2. It is the qualitative half of the claim: the curves say the rate went
 shows what "went up" looks like.
 
 ```bash
-$PY scripts/dose_strip.py --pair an_elephant__x__a_penguin --seed 10 --device cpu
+$PY 1-lora-correction/scripts/dose_strip.py --pair an_elephant__x__a_penguin --seed 10 --device cpu
 ```
 
 That pair carries the strip because it is the one a reviewer cannot dismiss. An elephant and a
@@ -280,7 +280,7 @@ Two things in the figure are worth a sentence rather than smoothing over. At λ=
 changes character: it stops fusing and drops the penguin entirely. At λ=1 the panel holds three
 animals, not two, which is where the extra count comes from.
 
-**A control we no longer have.** `artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml` lists
+**A control we no longer have.** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pair_pool.yaml` lists
 `an_elephant__x__a_penguin` as the compose-by-default control, the do-no-harm check. It is not
 one: it scores 0 of 4 at λ=0, and the four images are single fused creatures, so the scorer is
 right and the pool's assumption is wrong. The pool has no working do-no-harm control. That is a

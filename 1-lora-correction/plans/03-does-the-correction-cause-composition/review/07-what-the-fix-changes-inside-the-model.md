@@ -22,7 +22,7 @@ pair-and-seed runs the fix never trained on.
 |---|---|
 | [design](../plans/hypothesis/07-what-the-fix-changes-inside-the-model.md) | the two maps, why the obvious comparison gives the opposite answer, the threshold in source |
 | **this file** | **the verdict: the ratio is 1.52, it replicated, and one caveat caps the caption** |
-| [the register](../../../paper/iclr/figures.md) | F7's row, whose claim the caption may not exceed |
+| [the register](../../../../paper/iclr/figures.md) | F7's row, whose claim the caption may not exceed |
 
 ## Table of contents
 
@@ -67,7 +67,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | the 64-run measurement on mscluster109, 8 held-out pairs × seeds 9 to 16, adapter off against on at matched steps | Tests the claim | 2026-08-05 | 64 runs, 384 token-step rows | `/datasets/.../interaction_term/reprobe/`, 384 token-step rows, `verdict.json` | done, 0 failed |
-| a first short run on an_eagle__x__a_hawk seed 9 (plus frog/toad, seal/walrus, cat/dog) | Tests the claim | before the full 64 | 4 runs | `artifacts/results/residual-dynamics/content-change-relative-to-attention-change/smoke_eagle_hawk.png` | done |
+| a first short run on an_eagle__x__a_hawk seed 9 (plus frog/toad, seal/walrus, cat/dog) | Tests the claim | before the full 64 | 4 runs | `1-lora-correction/artifacts/results/residual-dynamics/content-change-relative-to-attention-change/smoke_eagle_hawk.png` | done |
 
 > Held-out means the pair was never used to train the adapter, so what it reads here cannot come
 > from the adapter having already seen it.
@@ -79,7 +79,7 @@ an interactive session was already using the one allowed.
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-The threshold lives in the source of `scripts/mechanism_study/reprobe_table.py` and was written
+The threshold lives in the source of `1-lora-correction/scripts/mechanism_study/reprobe_table.py` and was written
 before any of these runs happened. It is **a median ratio of at least 1.2, AND at least 75% of
 rows above 1.** Both conditions have to hold, so one strong pair cannot carry a weak average.
 

@@ -1,7 +1,7 @@
 """Scene key for the parts-world page.
 
 First reproduces every number in the walk's answer key
-(artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json, written by parts_world.py)
+(3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json, written by parts_world.py)
 with the same two functions, copied unchanged. Then adds the values the page shows that the walk's
 key does not print: the slider stops, the tightened-dog-head case, the hand check, the per-pixel
 pieces of each log Z, and the noise sweep. Writes scene_key.json beside this file.

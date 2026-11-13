@@ -9,10 +9,10 @@ once step 1's walk has compiled, with the plan file it names in place of the pla
 /drip-execute-plan <the plan file step 1's compile names>
 
 Background
-Layer 11 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) is a 32 × 32
+Layer 11 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) is a 32 × 32
 text-conditioned testbed, built so each candidate cause of SDXL's cat-dog hybrid can be switched on
 one at a time. Step 1's idea walk settled the candidate causes, their signatures and the parser's
-categories in artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, and its compile wrote the plan
+categories in 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, and its compile wrote the plan
 named above and the route 8 return. The build runs in three stages on the same 32 × 32 data, and
 each stage is compared only with the one before it. Layer 10 comes before this one on the ladder's
 critical path.
@@ -34,20 +34,20 @@ Objectives
 
 What to read
 - The compiled plan step 1 names: the steps, their order and the bars.
-- artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md: the candidate causes, signatures, parser
+- 3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md: the candidate causes, signatures, parser
   categories and Checks outstanding.
 - artifacts/ideas/when-poe-reaches-a-and-b/routes/08-sdxl-shaped-hybrid-testbed.return.md: the
   route 8 return.
-- artifacts/drips/simple-distributions-rebuild/ladder/11-the-text-conditioned-testbed.md, "Three
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/11-the-text-conditioned-testbed.md, "Three
   builds, one variable each": the three stages.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The text-conditioned
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "The text-conditioned
   testbed".
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The candidate causes, their signatures and the parser's categories are the ones step 1 settled in
-  artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md (step 1).
+  3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md (step 1).
 - The parser is trusted only above 99% correct on 1,000 held-out training draws and on 200
   hand-built hybrids (testbed map, Checks outstanding, claim 3).
 - The smallest model on single-concept captions should reach 95% parser-correct single-concept

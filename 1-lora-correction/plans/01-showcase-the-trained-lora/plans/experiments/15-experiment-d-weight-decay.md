@@ -2,7 +2,7 @@
 
 **This plan asks one question: does AdamW weight decay stop the rank-32 adapter's late loss of fidelity, and does it change the best checkpoint at all?**
 
-**Step 57 in the root running order. Waits on nothing: the baseline it compares against (`phase1_r32_100k`) is finished and its 30k and 90k grids are on disk. Next: nothing in this scope; the verdict feeds [the decay finding](../../../../report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md).**
+**Step 57 in the root running order. Waits on nothing: the baseline it compares against (`phase1_r32_100k`) is finished and its 30k and 90k grids are on disk. Next: nothing in this scope; the verdict feeds [the decay finding](../../../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md).**
 
 ## Recommended prompt (after run completes)
 
@@ -66,7 +66,7 @@ factor `1 − lr × wd`. At lr 1e-4 that is 1e-5 per step for wd 0.1, a pull of 
 0.01 the pull is e⁻⁰·¹ ≈ 0.90, too weak to tell apart from no decay on a curve that noisy. One
 arm, at the top of the range the LoRA literature uses.
 
-**The bars, fixed before launch** and held as constants in `scripts/showcase/experiment_d_verdict.py`:
+**The bars, fixed before launch** and held as constants in `1-lora-correction/scripts/showcase/experiment_d_verdict.py`:
 
 - **Question 1, the one that moves the plan.** At 90k, drift ≤ −0.060 (the baseline's 60k value)
   is support: the haze did not arrive. Drift ≥ −0.030 is a null: the decay happened with a
@@ -82,7 +82,7 @@ arm, at the top of the range the LoRA literature uses.
 
 **Associated materials:**
 - **Review questions:** [the review file](../../review/15-experiment-d-weight-decay.md)
-- **What motivated it:** [the decay finding](../../../../report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md) and failure (c) in [the pressure-test route](../../../../artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md)
+- **What motivated it:** [the decay finding](../../../../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md) and failure (c) in [the pressure-test route](../../../../artifacts/ideas/improving-the-pooled-lora-run/routes/01-pressure-test-poe-failures.md)
 
 ---
 
@@ -95,7 +95,7 @@ arm, at the top of the range the LoRA literature uses.
 19 to 20 hours, plus about an hour of tracking-set renders. Measure it from the log's ETA line.
 
 **Launch shape:** the shared-device path over SSH on a pinned device of an allocated `biggpu`
-node, invisible to `squeue`, per [the execution protocol](../../../../environment/hpc/execution-protocol.md).
+node, invisible to `squeue`, per [the execution protocol](../../../../../environment/hpc/execution-protocol.md).
 The launcher's memory guard is 4096 MiB rather than the usual 1024, because on 2026-09-06 the
 only idle device held another user's 2.9 GB process at 0% utilisation; the utilisation guard is
 what protects the run's speed.
@@ -111,8 +111,8 @@ what protects the run's speed.
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- `biggpu` allows one Slurm job per user, so a second training goes over SSH to a pinned free device on an allocated node ([execution protocol](../../../../environment/hpc/execution-protocol.md)).
-- `co3` python on the A6000 and RTX 8000 nodes (106, 108, 109); `co3_bw` on the Blackwell nodes (110 to 112) ([nodes](../../../../environment/hpc/nodes.md)).
+- `biggpu` allows one Slurm job per user, so a second training goes over SSH to a pinned free device on an allocated node ([execution protocol](../../../../../environment/hpc/execution-protocol.md)).
+- `co3` python on the A6000 and RTX 8000 nodes (106, 108, 109); `co3_bw` on the Blackwell nodes (110 to 112) ([nodes](../../../../../environment/hpc/nodes.md)).
 - Checkpoints to `/datasets` only; the launcher's disk guard reads `/datasets`.
 - `torch.cuda.is_available()` asserted after pinning the device, because mscluster111 runs on the CPU with no error.
 
@@ -152,13 +152,13 @@ disappointment.
 
 1. **The flag**: `--weight-decay` on the pooled trainer, wired into `cfg.optim.weight_decay`,
    which `make_optimizer` already passes to AdamW. Default 0.0, so every existing launcher is unchanged.
-2. **The launcher**: `scripts/showcase/experiment_d_weight_decay.sh <wd> <device> [python]`, a
+2. **The launcher**: `1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh <wd> <device> [python]`, a
    copy of the rank-32 launcher with the decay flag and the kill criterion disabled (it aborted
    the fresh baseline at 6,500 steps; the resumed baseline ran without it).
-3. **The verdict script**: `scripts/showcase/experiment_d_verdict.py`, the bars as constants,
+3. **The verdict script**: `1-lora-correction/scripts/showcase/experiment_d_verdict.py`, the bars as constants,
    reading the new run's 30k and 90k probe folders and the 90k checkpoint's weight norm.
 4. **Two probe folders**: `figure_r32_wd0.1_030000` and `figure_r32_wd0.1_090000`, made by the
-   [8-seed grid recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03).
+   [8-seed grid recipe](../../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03).
 
 ---
 
@@ -179,7 +179,7 @@ Serves goal 4. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/experiments/15-experiment-d-weight-decay.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/15-experiment-d-weight-decay.md`**
 
 ▶ **Next: [task 1.1](#1--launch-and-harvest)**.
 
@@ -249,9 +249,9 @@ the scope table and the root running order flips from ◑ to the verdict mark.
 
 - `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`: the `--weight-decay` flag
 - `poe_repair/experiments/one_pair_one_seed/trainer.py`: `make_optimizer`, where AdamW receives it
-- `scripts/showcase/experiment_d_weight_decay.sh`: the launcher
-- `scripts/showcase/experiment_d_verdict.py`: the bars
-- `scripts/showcase/lambda_boundary_probe.py`: the 8-seed grid and `results.json`
+- `1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh`: the launcher
+- `1-lora-correction/scripts/showcase/experiment_d_verdict.py`: the bars
+- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: the 8-seed grid and `results.json`
 
 ---
 

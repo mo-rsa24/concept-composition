@@ -41,7 +41,7 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from scipy.spatial import ConvexHull
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
 

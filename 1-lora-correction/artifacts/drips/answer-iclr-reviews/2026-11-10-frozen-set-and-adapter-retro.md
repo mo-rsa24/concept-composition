@@ -22,7 +22,7 @@ Walk: [the walk map](EXECUTE_WALK-step-4.md). Result: [the frozen set](../../../
 
 **The problem.** `biggpu` allows one Slurm job per user and that slot was held; the existing launcher always rendered the adapter.
 
-**What was done.** `scripts/review_step4_renders.sh` launched with `nohup` on mscluster111 and 112 behind disk, device and CUDA guards, reusing `concept_pair_sheet.py` (no adapter attached) and `figure_candidates.py` (the 9 candidates). The first sync failed: an earlier rsync had left untracked copies in the cluster checkout. 25 files were moved to a backup, a leftover stashed, and the checkout reset to `6a070f84` with your yes. The paper build now runs outside the checkout, and both faults are catalogued as `poe-sync-001` and `poe-launch-003`.
+**What was done.** `1-lora-correction/scripts/review_step4_renders.sh` launched with `nohup` on mscluster111 and 112 behind disk, device and CUDA guards, reusing `concept_pair_sheet.py` (no adapter attached) and `figure_candidates.py` (the 9 candidates). The first sync failed: an earlier rsync had left untracked copies in the cluster checkout. 25 files were moved to a backup, a leftover stashed, and the checkout reset to `6a070f84` with your yes. The paper build now runs outside the checkout, and both faults are catalogued as `poe-sync-001` and `poe-launch-003`.
 
 **Where the results live.** `/datasets/mmolefe/poe_repair_min/outputs/review_step4/` (census, showcase, logs).
 
@@ -36,9 +36,9 @@ Walk: [the walk map](EXECUTE_WALK-step-4.md). Result: [the frozen set](../../../
 
 **The problem.** The validated instance count covers animals only and cannot tell species apart.
 
-**What was done.** 288 animal pictures counted (`scripts/review_step4_count.py`); object pairs called by eye from full resolution; then a species check by eye on every animal pair, which turned cow × horse and seal × walrus from easy to hard; five look-alike pairs added, two of them left out as species-unjudgeable and frog × toad held by the subject guard.
+**What was done.** 288 animal pictures counted (`1-lora-correction/scripts/review_step4_count.py`); object pairs called by eye from full resolution; then a species check by eye on every animal pair, which turned cow × horse and seal × walrus from easy to hard; five look-alike pairs added, two of them left out as species-unjudgeable and frog × toad held by the subject guard.
 
-**Where the results live.** [The frozen set](../../../report/paper-review/held-out-set.md), table "The held-out groups"; R7's list in `artifacts/results/which-pairs-trained-and-which-were-held-out/pair_list.csv`.
+**Where the results live.** [The frozen set](../../../report/paper-review/held-out-set.md), table "The held-out groups"; R7's list in `3-understanding-compositionality/artifacts/results/which-pairs-trained-and-which-were-held-out/pair_list.csv`.
 
 **Before and after.** Before: the count alone said no animal pair was hard. After: hard 3 (suitcase × desk fan 3 of 8, cow × horse 2, seal × walrus 0), easy but unseen 29, not competing 21. The plain product composes on 0 to 2 of 8 seeds for every animal pair.
 
@@ -50,9 +50,9 @@ Walk: [the walk map](EXECUTE_WALK-step-4.md). Result: [the frozen set](../../../
 
 **The problem.** Calls from shrunken sheets run generous, and the choice had to stay easy to change.
 
-**What was done.** The 144 pictures sheeted, the contested seeds checked larger, every call written to `report/paper-review/showcase-calls.csv`, and `scripts/review_showcase_pick.py` ranks the candidates, writes the choice file and can take an override (tested with seed 11, then restored).
+**What was done.** The 144 pictures sheeted, the contested seeds checked larger, every call written to `1-lora-correction/report/paper-review/showcase-calls.csv`, and `1-lora-correction/scripts/review_showcase_pick.py` ranks the candidates, writes the choice file and can take an override (tested with seed 11, then restored).
 
-**Where the results live.** The choice file; [the showcase results folder](../../../artifacts/results/which-adapter-composes-the-showcase-pairs/README.md).
+**Where the results live.** The choice file; [the showcase results folder](../../results/which-adapter-composes-the-showcase-pairs/README.md).
 
 **Before and after.** Before: v58-03-self 50k by description. After: v58-03-self 30k, clear on both pairs at 5 seeds (10, 11, 12, 13, 16) against 4 for the next two; shared seed 10. The selection grid (R8) was drawn and then removed from the paper on your judgement that it answers no reviewer question.
 

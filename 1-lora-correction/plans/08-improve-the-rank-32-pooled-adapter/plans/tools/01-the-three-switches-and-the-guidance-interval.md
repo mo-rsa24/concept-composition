@@ -88,7 +88,7 @@
 
 **Buys.** Every other plan in this scope. Nothing here is launched, so nothing here can be wasted GPU time; the risk this plan carries is a switch that appears to work and selects nothing.
 
-**Prerequisites.** The training cache at `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`, which is on the data filesystem rather than in the checkout; `target_quality.json` at `/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/target_quality.json`; the span projection already written in `scripts/showcase/correction_span_common.py`; the rank-32 checkpoint at step 30050 for the identity check.
+**Prerequisites.** The training cache at `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/`, which is on the data filesystem rather than in the checkout; `target_quality.json` at `/datasets/mmolefe/poe_repair_min/outputs/showcase/target_quality/target_quality.json`; the span projection already written in `1-lora-correction/scripts/showcase/correction_span_common.py`; the rank-32 checkpoint at step 30050 for the identity check.
 
 **Output root.** `/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/`.
 
@@ -104,10 +104,10 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- **Two filesystems, and the guard has to check the one being written to.** `exclude_cells.json`, the pool yaml's resolved copy and the identity-check renders go under `/datasets`, never `/home-mscluster`, which has hit 100% and silently killed checkpointing before ([storage](../../../../environment/storage.md)).
+- **Two filesystems, and the guard has to check the one being written to.** `exclude_cells.json`, the pool yaml's resolved copy and the identity-check renders go under `/datasets`, never `/home-mscluster`, which has hit 100% and silently killed checkpointing before ([storage](../../../../../environment/storage.md)).
 - **The pool config path is hard-coded.** `artifacts/_shared/cross_pair_pool_configs/` is read as `GROUP_POOL_CONFIGS` at `poe_repair/paths.py:150`, so the new yaml goes beside the existing three and nowhere else.
-- **The identity check needs a card, and `biggpu` allows one job per user** ([execution protocol](../../../../environment/hpc/execution-protocol.md)). It is small enough to run on the session node's card or on any free device over SSH.
-- **`co3_bw` on the Blackwell, never `co3`.** A `co3` CUDA operation on `mscluster112` produces no output rather than an error ([nodes](../../../../environment/hpc/nodes.md)).
+- **The identity check needs a card, and `biggpu` allows one job per user** ([execution protocol](../../../../../environment/hpc/execution-protocol.md)). It is small enough to run on the session node's card or on any free device over SSH.
+- **`co3_bw` on the Blackwell, never `co3`.** A `co3` CUDA operation on `mscluster112` produces no output rather than an error ([nodes](../../../../../environment/hpc/nodes.md)).
 
 ---
 
@@ -221,7 +221,7 @@ The last line is the identity check. Setting the new switch to cover the whole r
 - [ ] **1.1 Add `--exclude-cells`, `--train-step-range` and `--orth-weight`** to `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`, each with the default that reproduces today's behaviour.
   - Each switch prints, at dataset-build time, the count it selected: cells dropped and remaining, distinct steps in range, and the orthogonal weight with the first batch's mean out-of-span fraction.
   - **Done when:** `--help` lists all three, and a run with none of them set prints the same cell count the trainer prints today.
-- [ ] **1.2 Wire `--orth-weight` through the span projection already in `scripts/showcase/correction_span_common.py`** rather than writing a second decomposition.
+- [ ] **1.2 Wire `--orth-weight` through the span projection already in `1-lora-correction/scripts/showcase/correction_span_common.py`** rather than writing a second decomposition.
   - **Done when:** on the first batch, the printed in-span and orthogonal norms recombine to the target's norm within floating-point tolerance, which is the check that the projection is a decomposition and not a truncation.
 
 ▶ **Next: [task 2.1](#2--write-the-guidance-interval-and-hold-it-against-todays-render)**.
@@ -407,7 +407,7 @@ ap.add_argument("--orth-weight", type=float, default=1.0,
 **File:** `poe_repair/methods/_poe_langevin.py`
 **Relevant section:** the sampler carrying `lambda_window` (line 282) and its eta setting. The interval joins them.
 
-**File:** `scripts/showcase/correction_span_common.py`
+**File:** `1-lora-correction/scripts/showcase/correction_span_common.py`
 **Relevant section:** the projection onto the span of the two experts' directions and its complement, already written and used by the correction-span finding. `--orth-weight` calls it rather than reimplementing it.
 
 **File:** `poe_repair/paths.py:150`

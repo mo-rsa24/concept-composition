@@ -51,7 +51,7 @@ plus four reference PNGs for visual spot-checks.
 
 **The interactive inspector is the primary readout** — visual
 inspection only. Identify the minimum window by scrubbing the slider in
-`scripts/lora_inspector.py` at `/conditioning_window`. The contact-sheet
+`1-lora-correction/scripts/lora_inspector.py` at `/conditioning_window`. The contact-sheet
 PNG is the static fallback.
 
 ## Reproducing from a clean checkout
@@ -89,7 +89,7 @@ inspector manifest, renders the contact-sheet figure.
 ### Step 4 — launch the inspector
 
 ```bash
-$PY scripts/lora_inspector.py --port 5050
+$PY 1-lora-correction/scripts/lora_inspector.py --port 5050
 # from your laptop:
 #   ssh -L 5050:localhost:5050 mscluster106
 #   open http://127.0.0.1:5050/conditioning_window

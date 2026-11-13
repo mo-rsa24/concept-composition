@@ -10,7 +10,7 @@ In the background, build the layer 6 reference: rebuild/phase6_guidance.py, the 
 w = 1 to 7.5 on the quadrant toy and the parts world.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ ran every layer so far at
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ ran every layer so far at
 guidance weight 1, but Stable Diffusion's cat-dog hybrid happens at weight 7.5, and the correction
 in layer 9 has to work at the weight the real model uses. Layer 6 turns guidance into a dial. Claude
 writes the reference code in toy/rebuild/ one layer ahead, so that my own walk06.py has numbers to
@@ -50,7 +50,7 @@ What to read
 - rebuild/parts_world.py: Mixture, noised, sample, mixture_product and tv_projected.
 - rebuild/phase5_dial.py: make_sets, pw_experts and sample_2d.
 - rebuild/walk_numbers.py: how worked numbers are written.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Guidance as a tilted
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Guidance as a tilted
   density", and its Pins.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/answer-key-quadrants/README.md and answer_key.py:
   the four-quadrant toy and its w = 1 numbers.
@@ -64,7 +64,7 @@ What is already known
 - SDXL composes "a cat" and "a dog" with one model and two prompts at w = 7.5 over 50 DDIM steps, as
   ε_∅ + w(ε_A − ε_∅) + w(ε_B − ε_∅); the tilted target is inferred from the cache's residual formula
   gs*(eps_j − eps_a − eps_b + eps_uncond), and the 2D work measured construction (1) only at w = 1
-  (artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
+  (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 - At w = 1 the target is construction (1), p(x|A)·p(x|B)/p(x), which equals construction (2)'s
   p_A·p_B only where p(x) is flat (artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 3).
 - The four-quadrant toy has one Gaussian blob per quadrant at (±0.5, ±0.5), std 0.15, A is x1 > 0
@@ -131,7 +131,7 @@ What to hand back
   when no w up to 7.5 gives one).
 - rebuild/out/walk-numbers.json rewritten, its 84 earlier keys unchanged.
 - A report naming the w grid, every p6. key with its value, and the brick row's new mark; steps 6
-  and 7 of artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md read the
+  and 7 of 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/06-guidance-as-a-dial.md read the
   keys and phase6.json.
 - The proof: python -m rebuild.phase6_guidance prints "w = 1 check: matches"; then
   python -m rebuild.walk_numbers | grep 'p6\.' lists every p6. key; the evidence is

@@ -6,7 +6,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 
 ```text
 /drip-execute-plan --request rebuild sections 1 to 3 of
-artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb by hand in
+3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb by hand in
 ~/Playground/PhD/simple-distributions-walk/walk02b.py; bar: the gradient difference is exactly 0.0
 when only the labels change, construction (1) puts 1.00 of its mass in A∩B under "contains A"
 against 0.08 under "exactly A", and a classifier trained on set membership guides sideways in A∩B,
@@ -14,7 +14,7 @@ against 0.08 under "exactly A", and a classifier trained on set membership guide
 
 Background
 This is the first of two idea-walk rebuilds in layer 2 of the composition ladder
-(artifacts/drips/simple-distributions-rebuild/). The notebook above found that a density expert
+(3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/). The notebook above found that a density expert
 never reads its labels, that the meaning of a label decides construction (1), and that a classifier
 trained on the labels the data carries learns a shortcut. I rebuild its sections 1 to 3 by hand,
 starting from walk02.py from step 4a; the notebook's printed outputs are the answer key.
@@ -29,9 +29,9 @@ Objectives
    guidance directions.
 
 What to read
-- artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb, sections 1
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb, sections 1
   to 3: the code, and its printed outputs as the answer key.
-- artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1: the repaired claim.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1: the repaired claim.
 - ~/Playground/PhD/simple-distributions-walk/walk02.py from step 4a.
 
 What is already known
@@ -52,7 +52,7 @@ What is already known
   labelled {A, B} drops out of p(x|A) (notebook, cells 5 and 6).
 - Construction (1), p(x|A)p(x|B)/p(x) at σ = 0.15, puts 1.00 of its mass in A∩B under "contains"
   and 0.08 under "exactly", where its leftover mass sits near the origin (notebook, cells 5 and 6;
-  artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1).
+  3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1).
 - Section 3: two sets of 400 points with 20% hidden in the other concept's half (notebook, cell 7).
 - A classifier (2 to 64 to 64 to 1, SiLU, Adam 3e-3, weight decay 1e-3, 1,500 steps, seed 0)
   trained on set membership is unsure in A∩B, about 0.5, and its mean guidance direction there is
@@ -64,7 +64,7 @@ What is already known
   1).
 - The repaired claim: a density expert learns its training set's density, and labels matter only in
   the parts that read them, the conditioning scheme of construction (1) and any classifier
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 1).
 
 Rules
 - Never edit the notebook or toy/rebuild/.

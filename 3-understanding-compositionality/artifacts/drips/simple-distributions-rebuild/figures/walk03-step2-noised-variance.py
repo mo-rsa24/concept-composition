@@ -6,7 +6,7 @@ import numpy as np
 INK = "#212121"
 VARIANCE = "#37474f"
 
-repo = Path(__file__).resolve().parents[4]
+repo = Path(__file__).resolve().parents[5]
 with (repo / "rebuild/out/walk-numbers.json").open() as f:
     values = json.load(f)
 

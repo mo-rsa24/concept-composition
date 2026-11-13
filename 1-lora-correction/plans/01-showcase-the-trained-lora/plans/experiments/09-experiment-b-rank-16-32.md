@@ -47,7 +47,7 @@
 
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
-**The hypothesis:** *capacity is not the knob either: rank 16 and rank 32 land inside rank 8's seed-noise band on held-out [compose rate](../../../../context/world/compose-rate.md) at matched step counts.*
+**The hypothesis:** *capacity is not the knob either: rank 16 and rank 32 land inside rank 8's seed-noise band on held-out [compose rate](../../../../../context/world/compose-rate.md) at matched step counts.*
 
 > Held-out means the pairs were never shown during training, so the number says how well the
 > adapter does on animals it has not seen.
@@ -71,7 +71,7 @@
 
 **Expected runtime:** two runs of the same length as the original 100k training; measure from the first checkpoints. Roughly the bulk of the ledger's ~20 GPU-hours across three nodes.
 
-**Launch shape (ledger):** experiment A holds the one Slurm job, so B's two runs go over the SSH-plus-nohup idle-node path per [execution-protocol step 3](../../../../environment/hpc/execution-protocol.md), including the admin node-cap fallback: prefer device 1, verify it is free. `squeue` is blind to these; monitoring is the nohup log plus `pgrep` on the node.
+**Launch shape (ledger):** experiment A holds the one Slurm job, so B's two runs go over the SSH-plus-nohup idle-node path per [execution-protocol step 3](../../../../../environment/hpc/execution-protocol.md), including the admin node-cap fallback: prefer device 1, verify it is free. `squeue` is blind to these; monitoring is the nohup log plus `pgrep` on the node.
 
 **Prerequisites:** plan 06's frozen tracking set.
 
@@ -83,7 +83,7 @@
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- Long runs outside Slurm are the norm here (one job per user); harvest reads all three execution modes: `squeue`, `pgrep -af 'sweep|train'` on the node, and the log tail ([overview](../../../../environment/overview.md)).
+- Long runs outside Slurm are the norm here (one job per user); harvest reads all three execution modes: `squeue`, `pgrep -af 'sweep|train'` on the node, and the log tail ([overview](../../../../../environment/overview.md)).
 - Checkpoints to `/datasets` only; `co3` python; fp16 upcast rule.
 
 ---
@@ -112,7 +112,7 @@
 
 ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **Two launches** via `scripts/cross_seed_lora_pooling/sweep_s1_rank.sh` adapted to the pooled trainer: rank 16 (alpha 16) and rank 32 (alpha 32), 100k steps, tracking set on.
+1. **Two launches** via `1-lora-correction/scripts/cross_seed_lora_pooling/sweep_s1_rank.sh` adapted to the pooled trainer: rank 16 (alpha 16) and rank 32 (alpha 32), 100k steps, tracking set on.
 2. **The rank-ablation table**: r8/r16/r32 at matched checkpoints on held-out compose rate and the crispness reads; `rank_ablation.json`.
 3. **The figure draft**: one panel, three ranks, matched steps, seed-noise band drawn; shipped by plan 05.
 
@@ -135,7 +135,7 @@ Serves goal 4 and the rank-ablation figure. Checkable outcomes:
 
 ### 0. ✅ Verify this plan first
 
-- [ ] **0.1 Run the following prompt: `/verify-plan plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md`**
+- [ ] **0.1 Run the following prompt: `/verify-plan 1-lora-correction/plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md`**
 
 ▶ **Next: [task 1.1](#1--launch-the-pair)**.
 
@@ -216,7 +216,7 @@ Serves goal 4 and the rank-ablation figure. Checkable outcomes:
 ◀ **Needs: [instruction 2.3](#2--watch-and-judge)** done.
 
 - [ ] **3.1 Run the following prompt: `/ingest-error-pattern --from-run-log`** (after any red run).
-- [ ] **3.2 Run the following prompt: `/sync-plan-tree plans/01-showcase-the-trained-lora/`**
+- [ ] **3.2 Run the following prompt: `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`**
 
 ▶ **Next: [10-the-checkpoint-watcher](../tests/10-the-checkpoint-watcher.md).**
 
@@ -226,8 +226,8 @@ Serves goal 4 and the rank-ablation figure. Checkable outcomes:
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `scripts/cross_seed_lora_pooling/sweep_s1_rank.sh` — the rank runner to adapt.
-**File:** `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json` — the config every non-rank flag must match.
+**File:** `1-lora-correction/scripts/cross_seed_lora_pooling/sweep_s1_rank.sh` — the rank runner to adapt.
+**File:** `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/config.json` — the config every non-rank flag must match.
 
 ---
 
@@ -238,10 +238,10 @@ Serves goal 4 and the rank-ablation figure. Checkable outcomes:
 ▶ Paste to run this plan (two idle nodes in parallel):
 
 ```
-/run-experiment plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md — SSH-plus-nohup per the execution protocol, absolute paths on the launch line, in-script device guard; if sbatch is denied by the admin node cap, prefer device 1 and verify it is free.
+/run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md — SSH-plus-nohup per the execution protocol, absolute paths on the launch line, in-script device guard; if sbatch is denied by the admin node cap, prefer device 1 and verify it is free.
 ```
 
-alt, headless overnight: in a fresh session run `/unattended run-experiment plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md` and paste the tmux block it emits (multi-hour training on remote devices, thresholds pre-registered). What has to pass before this runs and the review file's threshold are the stop conditions.
+alt, headless overnight: in a fresh session run `/unattended run-experiment 1-lora-correction/plans/01-showcase-the-trained-lora/plans/09-experiment-b-rank-16-32.md` and paste the tmux block it emits (multi-hour training on remote devices, thresholds pre-registered). What has to pass before this runs and the review file's threshold are the stop conditions.
 
 ---
 

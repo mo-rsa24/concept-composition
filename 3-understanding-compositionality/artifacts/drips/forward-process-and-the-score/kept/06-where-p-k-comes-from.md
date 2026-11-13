@@ -76,6 +76,6 @@ next: β_t from consecutive posts, the share each step throws away, at t = 0 and
 also: keep: this derivation into Step 4's On paper 4 (adds the three requirements and the broken end at 90.72°), scene: a derive frame for p_k's three requirements, squaring yes, map, spell-it-out, controls
 ```
 
-**Read more:** [On paper 4 in Step 4](artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-the-quarter-circle-by-hand) · [the 101 posts on the scene](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-posts)
+**Read more:** [On paper 4 in Step 4](../../simple-distributions-rebuild/01-one-expert-from-scratch.md#step4-the-quarter-circle-by-hand) · [the 101 posts on the scene](https://claude.ai/artifact/X7QGLTxssbz41G7iTiRxC9#timetable-posts)
 
 No journey covers: unit circle, the noise schedule's curve shape.

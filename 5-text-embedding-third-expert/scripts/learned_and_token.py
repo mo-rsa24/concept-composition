@@ -6,9 +6,9 @@ text encoder, initialised from the word "and". Nothing else is trained. The rows
 hook on each encoder's token embedding writes them into the fp16 activations, so gradient reaches them
 through the frozen encoders and the frozen UNet.
 
-    python scripts/learned_and_token.py --check-token      "<and>" must encode exactly as "and" does
-    python scripts/learned_and_token.py --baseline         held-out share removed with the untrained token
-    python scripts/learned_and_token.py --train --steps 2000 --eval-at 100 300 1000 2000 --name run1
+    python 5-text-embedding-third-expert/scripts/learned_and_token.py --check-token      "<and>" must encode exactly as "and" does
+    python 5-text-embedding-third-expert/scripts/learned_and_token.py --baseline         held-out share removed with the untrained token
+    python 5-text-embedding-third-expert/scripts/learned_and_token.py --train --steps 2000 --eval-at 100 300 1000 2000 --name run1
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from pathlib import Path
 
 import torch
 
-REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[1]))
+REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
@@ -264,7 +264,7 @@ def _unet_eps(tok, unet, x, t, seq, cond, n, third: bool) -> torch.Tensor:
 
 def render_tiles(ctx, tok, a: str, b: str | None, seeds: list[int], third: bool | str, out_dir: Path | None,
                  oracle: bool = False, lam: float = 1.0, record: list | None = None) -> list[Path]:
-    """PoE(a, b) or PoE(a, b, third) per seed (third is True for the bare token, or the third expert's prompt), the loop and noise of scripts/and_vector_sheet.py.
+    """PoE(a, b) or PoE(a, b, third) per seed (third is True for the bare token, or the third expert's prompt), the loop and noise of 5-text-embedding-third-expert/scripts/and_vector_sheet.py.
     With `record` (and out_dir None) no image is made: each step's image state and the four raw predictions are appended to it,
     in the cache's own layout, so the three-expert sampler's own states can be trained on."""
     from concept_pair_sheet import NOISE_PAIR

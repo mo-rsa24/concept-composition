@@ -5,7 +5,7 @@ a submitted paper.
 
 ## Where this scope sits in the order
 
-This scope owns **7 of the 22 steps**, 0 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), never an order of its own.
+This scope owns **7 of the 22 steps**, 0 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), never an order of its own.
 
 **Next in this scope: step 16**, [make the template build](plans/writing/01-make-the-template-build.md), which waits on nothing and needs no GPU.
 
@@ -22,7 +22,7 @@ This scope owns **7 of the 22 steps**, 0 of them done. The steps interleave with
 ## Mission
 Write and submit the ICLR 2027 paper arguing that PoE's compositional failure is a
 measurable quantity. Multiplying two predictions asks for one image that is both
-concepts at once, which is the [chimera](../../context/world/chimera.md), while the
+concepts at once, which is the [chimera](../../../context/world/chimera.md), while the
 sentence means two things side by side. The gap between those readings is `r_t`,
 cached and concrete. It is small, shared across
 pairs, and concentrated in a narrow noise band, which is why a rank-8
@@ -98,10 +98,10 @@ phase-3 boundary rather than at the deadline.
 12. ⚠️ Anonymous build compiles, page limit met, submitted.
 
 ## Reads From (produces no figures of its own)
-- `plans/03-does-the-correction-cause-composition/`: the causal figure cascade (plan 10) and the
+- `1-lora-correction/plans/03-does-the-correction-cause-composition/`: the causal figure cascade (plan 10) and the
   mechanism verdict (plan 02). Its DoD item 7 also owns the 100k transfer number
   this paper cites.
-- `plans/04-does-the-fix-reach-unseen-pairs/`: the transfer figures F2 to F5 (plan 05) and the
+- `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/`: the transfer figures F2 to F5 (plan 05) and the
   pooled held-out read (plan 03a).
 
 ## Sub-Scopes

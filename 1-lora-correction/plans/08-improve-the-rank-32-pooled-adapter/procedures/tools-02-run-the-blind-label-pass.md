@@ -116,7 +116,7 @@ Before labelling anything, spend one minute trying to break the blinding. If a t
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-python3 scripts/showcase/blind_label.py --show --set <the set name you were given>
+python3 1-lora-correction/scripts/showcase/blind_label.py --show --set <the set name you were given>
 ```
 
 ✅ **Four tiles per row, captions carrying ids only, and the tile that looks like a joint-prompt render is not in the same position on every row**: the shuffle is working and you can start.
@@ -132,7 +132,7 @@ Navigation: ⬅️ [1. Open the set](#1-open-the-set-you-were-given-and-check-it
 One strip at a time, four labels each, and no going back to revise an earlier strip once you have seen a later one. Revising backwards is how a labeller drifts toward internal consistency and away from the definitions.
 
 ```bash
-python3 scripts/showcase/blind_label.py --label --set <the set name you were given>
+python3 1-lora-correction/scripts/showcase/blind_label.py --label --set <the set name you were given>
 ```
 
 ✅ **The collector advances strip by strip and writes each label as you give it.** At the end it prints the number of tiles labelled, which should equal four times the number of seeds in the set.
@@ -148,7 +148,7 @@ Navigation: ⬅️ [2. Label every tile](#2-label-every-tile-one-strip-at-a-time
 This is the first moment anyone learns which tile was which. It runs only after every label is in.
 
 ```bash
-python3 scripts/showcase/blind_label.py --join --set <the set name you were given>
+python3 1-lora-correction/scripts/showcase/blind_label.py --join --set <the set name you were given>
 ```
 
 ✅ **A table with one row per tile carrying its label, its resolved condition, the region count and the both-names outcome, and a printed clean count per condition.** That count is what the plan that sent you here is waiting for.

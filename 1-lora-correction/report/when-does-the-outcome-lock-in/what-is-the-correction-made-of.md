@@ -37,7 +37,7 @@ step 10. These three reads carry no bar and are reported as reads.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#what-we-set-out-to-see) ➡️
 
-**The split.** Claim 2 of [which variable explains what PoE is missing](../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
+**The split.** Claim 2 of [which variable explains what PoE is missing](../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
 records, after Du et al., that the correction is a sampler error and a model error added
 together and that nothing in this repository separates them.
 
@@ -75,7 +75,7 @@ Navigation: ⬅️ [Previous](#what-we-set-out-to-see) | 📋 [TOC](#table-of-co
 The plan pre-registered one statistic: the mean over seeds of each seed's mean, over steps 0 to
 10, of the orthogonal share of the correction's squared norm. Support above
 `ORTHO_SHARE_REWEIGHT_IMPOSSIBLE = 0.5`, null below `ORTHO_SHARE_REWEIGHT_CANDIDATE = 0.25`,
-inconclusive between, with the constants in `scripts/showcase/correction_span_common.py`. It is
+inconclusive between, with the constants in `1-lora-correction/scripts/showcase/correction_span_common.py`. It is
 pinned in the **What has to pass before this runs** section of
 [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md#what-has-to-pass-before-this-runs),
 written before the script ran.
@@ -121,7 +121,7 @@ about 256 throughout. The PoE prediction rebuilt from the raw vectors projects w
 1.0000 on every row. From `orthogonal-share-over-steps.json`, fields
 `summary.early_window_orthogonal_share_mean_over_seeds`, `summary.*_mean_per_step`,
 `summary.eps_poe_in_span_share_min_sanity`, `summary.verdict`, written by
-`scripts/showcase/correction_span_share.py` under [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md).
+`1-lora-correction/scripts/showcase/correction_span_share.py` under [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md).
 
 ## 2. The two experts draw different animals in the same place
 
@@ -144,7 +144,7 @@ Seed 15 alone: same-place share 0.36 to 0.45 over steps 5 to 30, cosine −0.27 
 at step 30. From `same-place-share.json`, fields `summary.same_place_share_mean_per_step`,
 `summary.cos_on_shared_positions_mean_per_step`,
 `summary.cos_on_shared_positions_share_negative_per_step` and `rows`, written by
-`scripts/showcase/correction_tweedie_pictures.py`.
+`1-lora-correction/scripts/showcase/correction_tweedie_pictures.py`.
 
 ## 3. The adapter learned the damping and half of the new direction
 
@@ -172,7 +172,7 @@ cosine 0.96, 0.96, 0.85, 0.78, 0.96, 0.94, 0.70 at steps 0, 2, 5, 10, 20, 30, 49
 between the adapter-off PoE prediction computed live and the cached one, minimum over 400 rows,
 0.9996. From `adapter-span-share.json`, fields `summary.early_window`, `summary.all_steps`,
 `summary.*_mean_per_step`, `summary.sanity_cos_live_vs_cached_poe_min` and `rows`, written by
-`scripts/showcase/correction_adapter_span_share.py` on mscluster85 device 0, PID 257603.
+`1-lora-correction/scripts/showcase/correction_adapter_span_share.py` on mscluster85 device 0, PID 257603.
 
 ## 4. Runs on the product keep moving, and the plain one keeps changing animal
 
@@ -200,7 +200,7 @@ at step 20, −0.06 at 25, +0.01 at 30, −0.18 at 35, −0.30 at 40, −0.22 at
 passes through two near-zero frames and counts under the loose rule only. From
 `track-energy-and-which-animal.json`, fields `summary.<condition>.kinetic_energy_from_step_10_median`,
 `summary.<condition>.runs_with_a_real_flip_after_step_10` and `rows`, written by
-`scripts/showcase/correction_track_energy.py` from
+`1-lora-correction/scripts/showcase/correction_track_energy.py` from
 `artifacts/results/where-does-each-condition-land/frames-dino-feats.npz`.
 
 ## What this cannot tell you
@@ -238,21 +238,21 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The adapter's shares and cosines, the sanity cosine | `.../adapter-span-share.json`, read 2026-09-05 | verified |
 | Kinetic energies, flips, which-animal scores | `.../track-energy-and-which-animal.json`, read 2026-09-05 | verified |
 | The decoded estimates | `/datasets/mmolefe/poe_repair_min/outputs/showcase/what_the_correction_is_made_of/tweedie/seed_15/`, 35 PNGs, rendered 2026-09-05 on mscluster85 | verified |
-| The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_<9..16>/residuals/`, 50 steps each, the rule read off `scripts/build_training_cache.py` | verified |
+| The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_<9..16>/residuals/`, 50 steps each, the rule read off `3-understanding-compositionality/scripts/build_training_cache.py` | verified |
 | The adapter | rank 32, alpha 32, step 30050, `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt` | verified |
 | The frames' embeddings | `artifacts/results/where-does-each-condition-land/frames-dino-feats.npz` | verified |
 | The W&B run | `yb933cr6` in `prime_lab/poe-repair-animals-compose` | verified |
 | The run | tasks **Write `correction_span_common.py`**, **Write `correction_tweedie_pictures.py`**, **Write `correction_adapter_span_share.py`** and **Write `correction_track_energy.py`** in [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md); verdict in [its review file](../../plans/05-when-does-the-outcome-lock-in/review/07-what-the-correction-is-made-of.md) | verified |
-| Regenerate with | the four scripts under `scripts/showcase/` named in [the card](../../artifacts/results/what-the-correction-is-made-of/README.md), rungs 1 and 3 on a device with CUDA confirmed; then `correction_log_wandb.py` | |
+| Regenerate with | the four scripts under `1-lora-correction/scripts/showcase/` named in [the card](../../artifacts/results/what-the-correction-is-made-of/README.md), rungs 1 and 3 on a device with CUDA confirmed; then `correction_log_wandb.py` | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-- What the correction is and how it is defined: [the interaction term](../../context/world/interaction-term.md)
-- What the adapter is and why it never sees the joint prompt: [the LoRA corrector](../../context/world/lora-corrector.md)
+- What the correction is and how it is defined: [the interaction term](../../../context/world/interaction-term.md)
+- What the adapter is and why it never sees the joint prompt: [the LoRA corrector](../../../context/world/lora-corrector.md)
 - Which trajectory the cache stores and the rule it stepped with: [the plan's rule section](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md#the-rule-the-cache-used)
-- The sampler-against-model split this does not make: claim 2 of [the idea map](../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
+- The sampler-against-model split this does not make: claim 2 of [the idea map](../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
 - The frames and the both-ness plane the tracks reuse: [where each condition lands](where-does-each-condition-land.md)
 - Each picture, read one at a time: [the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md)
 

@@ -39,7 +39,7 @@ Simulated values use one million draws with seed 0, so they sit within about two
 
 **Goes wrong.** Adding the standard deviations instead of the variances: $0.3458 + 0.7223 = 1.0681$, whose square 1.1408 is 78% above the true 0.6413. The same mistake appears when the two terms are not independent: with $z = x$, $\operatorname{Var}[2x] = 1.0$ where the independent rule gives $0.25 + 0.25 = 0.5$, because the cross term $2\,\mathbb E[uv] = 0.5$ no longer vanishes.
 
-**Check.** One million draws of $0.6916\,x + 0.7223\,\varepsilon$ have sample variance 0.6403, against 0.6413. The second route is [chapter 9, section 9.1](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances), steps 2 to 4, which runs the same argument with $a\,e_1 + b\,e_2$.
+**Check.** One million draws of $0.6916\,x + 0.7223\,\varepsilon$ have sample variance 0.6403, against 0.6413. The second route is [chapter 9, section 9.1](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances), steps 2 to 4, which runs the same argument with $a\,e_1 + b\,e_2$.
 
 ## S2. A linear map plus independent noise (B1.6, MML 6.12)
 
@@ -61,7 +61,7 @@ Simulated values use one million draws with seed 0, so they sit within about two
 
 ## S3. Two Gaussians with unequal variances (B1.7, Chan Theorem 5.12)
 
-**What and why.** Chan's Theorem 5.12 (PDF p. 299) states that independent $X_1 \sim \mathcal N(\mu_1, \sigma_1^2)$ and $X_2 \sim \mathcal N(\mu_2, \sigma_2^2)$ sum to $\mathcal N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$, but the proof that follows writes both densities with one $\sigma^2$ and ends on variance $2\sigma^2$ (PDF p. 300). The forward draw is the unequal case: a scaled clean coordinate plus noise of a different size. This solution proves the general statement through generating functions, the route of [chapter 9, section 9.1](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances).
+**What and why.** Chan's Theorem 5.12 (PDF p. 299) states that independent $X_1 \sim \mathcal N(\mu_1, \sigma_1^2)$ and $X_2 \sim \mathcal N(\mu_2, \sigma_2^2)$ sum to $\mathcal N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$, but the proof that follows writes both densities with one $\sigma^2$ and ends on variance $2\sigma^2$ (PDF p. 300). The forward draw is the unequal case: a scaled clean coordinate plus noise of a different size. This solution proves the general statement through generating functions, the route of [chapter 9, section 9.1](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/09-the-forward-process-by-hand.md#91-independent-gaussian-noises-add-their-variances).
 
 **Worked numbers.** $X_1 = 0.6916 \times x$ for the clean coordinate $x \sim \mathcal N(0.5, 0.25)$, so $X_1 \sim \mathcal N(0.3458, 0.1196)$. $X_2 = 0.7223\,\varepsilon \sim \mathcal N(0, 0.5217)$. The sum is $\mathcal N(0.3458, 0.6413)$.
 
@@ -79,7 +79,7 @@ Simulated values use one million draws with seed 0, so they sit within about two
 
 ## S4. The mode of a Gaussian is its mean (B2.3, Bishop 1.9)
 
-**What and why.** Bishop's Exercise 1.9 (PDF p. 78) asks to show that the maximum of the Gaussian density is at $\mu$, in one dimension and in $d$. The score answers it in one line: it is zero exactly at $\mu$ and points back toward $\mu$ from everywhere else. A log does not move a maximum, because log is strictly increasing ([PoE chapter 3, section 3.3](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/03-moving-into-logs.md#33-the-argmax-survives-because-log-is-strictly-increasing)).
+**What and why.** Bishop's Exercise 1.9 (PDF p. 78) asks to show that the maximum of the Gaussian density is at $\mu$, in one dimension and in $d$. The score answers it in one line: it is zero exactly at $\mu$ and points back toward $\mu$ from everywhere else. A log does not move a maximum, because log is strictly increasing ([PoE chapter 3, section 3.3](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/03-moving-into-logs.md#33-the-argmax-survives-because-log-is-strictly-increasing)).
 
 **Worked numbers.** Step 1's Gaussian $\mathcal N(0, 0.5^2)$ has density 0.7979 at 0 and 0.4839 at 0.5. Its score at 0.5 is $-(0.5 - 0)/0.25 = -2$, pointing back toward 0, and its second derivative of $\log p$ is $-1/0.25 = -4$ everywhere. For the forward-draw Gaussian $q(x_{50} \mid x_0)$ the mode is $0.6916\,x_0 = (0, 0.3458)$.
 
@@ -88,10 +88,10 @@ Simulated values use one million draws with seed 0, so they sit within about two
 2. Differentiate in $x$; the constant has no slope: $\frac{d}{dx}\log p = -(x - \mu)/\sigma^2$.
 3. Set it to zero: $-(x - \mu)/\sigma^2 = 0$ holds only at $x = \mu$.
 4. Differentiate again: $-1/\sigma^2 < 0$, so the stationary point is a maximum, and it is the only one. On the numbers, $-4$.
-5. In $d$ dimensions the score is $-\Sigma^{-1}(x - \mu)$ ([chapter 6, section 6.1](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/06-the-gaussian-score.md#61-the-gradient-of-a-quadratic-form)). $\Sigma^{-1}$ is invertible, so the score is the zero vector only when $x - \mu = 0$.
+5. In $d$ dimensions the score is $-\Sigma^{-1}(x - \mu)$ ([chapter 6, section 6.1](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/06-the-gaussian-score.md#61-the-gradient-of-a-quadratic-form)). $\Sigma^{-1}$ is invertible, so the score is the zero vector only when $x - \mu = 0$.
 6. The matrix of second derivatives is $-\Sigma^{-1}$, which is negative definite because $\Sigma$ is a covariance of full rank, so $\mu$ is the maximum.
 
-**Goes wrong.** Dropping the minus sign in step 2 still puts the stationary point at $\mu$, but the score at 0.5 becomes $+2$, pointing away from the mean, and the second derivative becomes $+4$, which would call the peak a minimum. Reading "score zero" as "peak" is also wrong outside the single Gaussian: a two-bump mixture has zero score at the trough between its bumps ([PoE chapter 5, section 5.3](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/05-predicting-a-score-field.md#53-peak-trough-or-saddle-and-what-the-score-cannot-tell-you)).
+**Goes wrong.** Dropping the minus sign in step 2 still puts the stationary point at $\mu$, but the score at 0.5 becomes $+2$, pointing away from the mean, and the second derivative becomes $+4$, which would call the peak a minimum. Reading "score zero" as "peak" is also wrong outside the single Gaussian: a two-bump mixture has zero score at the trough between its bumps ([PoE chapter 5, section 5.3](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/05-predicting-a-score-field.md#53-peak-trough-or-saddle-and-what-the-score-cannot-tell-you)).
 
 **Check.** A central finite difference of $\log p$ with $h = 10^{-6}$ prints $-2.0$ at 0.5 and $0.0$ at 0, and the density is larger at 0 (0.7979) than at 0.5 (0.4839).
 
@@ -99,7 +99,7 @@ Simulated values use one million draws with seed 0, so they sit within about two
 
 **What and why.** Mathematics for Machine Learning's Exercise 5.8 (a) (PDF p. 177) asks for $df/dx$ where $f(z) = \exp(-\tfrac12 z)$, $z = y^\top S^{-1} y$ and $y = x - \mu$, with the dimension of every partial. $f$ is the Gaussian density without its constant, so dividing its gradient by $f$ gives the Gaussian score, $-S^{-1}(x - \mu)$. This is the same score Q2 derives, reached through the density instead of the log.
 
-**Worked numbers.** $\mu = 0$, $S = \operatorname{diag}(1, 4)$, $x = (3, 4)$, the point of [chapter 6, section 6.2](../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/06-the-gaussian-score.md#62-the-anisotropic-score-follows-the-inverse-covariance). Then $y = (3, 4)$, $S^{-1} = \operatorname{diag}(1, 0.25)$, $z = 9 + 4 = 13$, $f = e^{-6.5} = 0.0015034$, $df/dx = (-0.0045103, -0.0015034)$, and $(df/dx)/f = (-3, -1)$.
+**Worked numbers.** $\mu = 0$, $S = \operatorname{diag}(1, 4)$, $x = (3, 4)$, the point of [chapter 6, section 6.2](../../../../../../../goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/textbook/06-the-gaussian-score.md#62-the-anisotropic-score-follows-the-inverse-covariance). Then $y = (3, 4)$, $S^{-1} = \operatorname{diag}(1, 0.25)$, $z = 9 + 4 = 13$, $f = e^{-6.5} = 0.0015034$, $df/dx = (-0.0045103, -0.0015034)$, and $(df/dx)/f = (-3, -1)$.
 
 **Steps.**
 1. Name the three links and their sizes: $f$ is a scalar, $z$ is a scalar, $y$ and $x$ are $D$-vectors.

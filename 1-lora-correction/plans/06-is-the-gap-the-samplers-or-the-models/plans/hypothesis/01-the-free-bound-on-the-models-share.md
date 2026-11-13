@@ -17,7 +17,7 @@ sitting on disk, since whatever is left there is a lower bound on the model's sh
 ## Position in the plan tree
 
 **Step 24 of 30.** Waits on nothing. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -229,9 +229,9 @@ for.
   `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`, because the paths under
   `paper/iclr/figures/` and `scripts/` are relative to it. A relative path run from anywhere else
   resolves against `$HOME` and fails silently, which is catalogued here as `poe-launch-001` in
-  [environment/known-failures.md](../../../../environment/known-failures.md).
+  [environment/known-failures.md](../../../../../environment/known-failures.md).
 - The cache lives under `/datasets/mmolefe/poe_repair_min/outputs/`, not under `/home-mscluster`,
-  per [environment/storage.md](../../../../environment/storage.md). This plan only reads, so no disk
+  per [environment/storage.md](../../../../../environment/storage.md). This plan only reads, so no disk
   guard is needed and nothing new is written there.
 - The cached predictions are fp16. Any norm recomputed here upcasts to fp32 first, since the
   differences being read are small enough that fp16 accumulation shows up in the third digit.
@@ -373,7 +373,7 @@ ls -l paper/iclr/figures/correction-size-over-the-denoising-run.json
 ls -l "$CA/step_collapse.json" "$CA/snr_collapse.json"
 
 # Where the ratio is formed, which is what task 1.2 unpicks.
-sed -n '95,110p' scripts/correction_size_over_the_run.py
+sed -n '95,110p' 1-lora-correction/scripts/correction_size_over_the_run.py
 
 # The raw tensors the unnormalised numerator comes from: 50 per seed, 6 pair-seeds.
 ls "$RES/a_cat__x__a_dog/seed_42/teacher_residual_const_lam000/residuals" | wc -l   # expect 50
@@ -426,7 +426,7 @@ Nothing to organise. The output of this plan is answers in its review file.
 
 | What changes | Where it has to be reflected |
 |---|---|
-| the lower bound is measured | [the idea map's claim 2](../../../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), whose "checks outstanding" row names this exact read |
+| the lower bound is measured | [the idea map's claim 2](../../../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), whose "checks outstanding" row names this exact read |
 | the lower bound is measured | the reading of the curve at [step 26](03-what-is-left-once-the-chain-settles.md), which is judged against this number |
 | the plan's status | the scope [MASTER_PLAN.md](../../MASTER_PLAN.md) and the root running order, both by `sync-plan-tree` rather than by hand |
 
@@ -443,7 +443,7 @@ Nothing to organise. The output of this plan is answers in its review file.
 
 | Path | Why it is read |
 |---|---|
-| [scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1.2 has to unpick to answer whether the numerator survived |
+| [1-lora-correction/scripts/correction_size_over_the_run.py](../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1.2 has to unpick to answer whether the numerator survived |
 | `paper/iclr/figures/correction-size-over-the-denoising-run.json` | the cached curve, 50 steps over 3 seeds and two pairs |
 | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/step_collapse.json` | the step-wise collapse analysis, read beside `snr_collapse.json` for the `peak_at_edge` field |
 | `/datasets/mmolefe/poe_repair_min/outputs/veracity/pairs/<pair>/seed_<n>/teacher_residual_const_lam000/residuals/` | the raw per-step tensors the ratio was formed from, 50 files per seed for both pairs at seeds 4, 42 and 123. `delta` is the unnormalised `r_t` and `eps_poe` is the denominator, so the numerator this plan wants is read here rather than recovered from the JSON |

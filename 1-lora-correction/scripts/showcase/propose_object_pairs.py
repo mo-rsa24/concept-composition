@@ -13,7 +13,7 @@ transport item, a plant with an instrument) so the pair reads as "two things in 
 as "two things that overlap in function", which is its own kind of confusable pair for objects
 (a teapot and a kettle are not an interesting test, they are near-synonyms).
 
-  python3 scripts/showcase/propose_object_pairs.py 9
+  python3 1-lora-correction/scripts/showcase/propose_object_pairs.py 9
 """
 import itertools, json, os, random, sys, zlib
 

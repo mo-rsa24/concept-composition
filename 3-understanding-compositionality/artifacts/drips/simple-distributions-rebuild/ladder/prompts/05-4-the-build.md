@@ -5,14 +5,14 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-execute-plan artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, I type every
+/drip-execute-plan 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md, I type every
 block myself into ~/Playground/PhD/simple-distributions-walk/walk05.py, measuring the dial's A∩B in
 its deep square and the answer key's within 3 std of each blob, with the whole quadrant only as a
 spill check; bar: deep A∩B mass 0.00 at 0% and 0.30 at 5% overlap (exact), and tuned MALA's 0.17
 at 5%
 
 Background
-This is layer 5's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 5's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type the overlap dial from the step file, one step per message, and then rebuild the three
 answer-key numbers that layer 12's dial claim rests on. Claude's reference code is under toy/ in
 this repo; my file and the reference print the same numbers, and a difference is a lesson or a bug.
@@ -22,7 +22,7 @@ and the layer 5 maths drip folder under artifacts/drips/ holds my notation in it
 Objectives
 1. Walk the step file's steps 0 to 8, one per message, in its order.
 2. Rebuild, inside the same walk, the three answer-key numbers listed under step 4 of
-   artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, typing the answer
+   3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, typing the answer
    key's construction rather than importing answer_key.py.
 3. I type every block into walk05.py and run it from ~/Playground/PhD/simple-distributions-walk/
    with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python and
@@ -30,9 +30,9 @@ Objectives
 4. Tick each step in the step file as it lands, and keep my place in the walk map between sittings.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step file, including
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md: the step file, including
   "Where the numbers come from".
-- artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, step 4: the three
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md, step 4: the three
   answer-key numbers and why they differ.
 - toy/rebuild/phase5_dial.py and toy/rebuild/phase5_finetune.py: the reference.
 - toy/rebuild/out/phase5/overlap-dial.json and finetune.json, printed as tables by

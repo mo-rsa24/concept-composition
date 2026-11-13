@@ -33,7 +33,7 @@ Run kind: hypothesis (an experiment on the length axis with a null threshold fix
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#runs) ➡️
 
-- **The seed-noise band**: the spread of held-out [compose rate](../../../context/world/compose-rate.md)
+- **The seed-noise band**: the spread of held-out [compose rate](../../../../context/world/compose-rate.md)
   over the 8 held-out seeds at the 100k checkpoint; a 200k value inside it is a null.
 - **The frozen tracking set**: plan 06's manifest; its crispness reads are the second half of
   the threshold.

@@ -107,7 +107,7 @@ the grid: real correction, wrong pair, wrong seed, wrong order. The λ = 0 colum
 hybrid in every row. The real-correction row stays one animal through 0.5 and is a cat beside a
 dog at 0.75 and 1. The wrong-pair row degrades into a cartoon single animal; the wrong-seed and
 wrong-order rows stay one dog-like animal at every λ. It shows both claims as written. Cat and
-dog at seed 9, from `scripts/compose_rate_vs_correction.py --layout grid5`, per
+dog at seed 9, from `1-lora-correction/scripts/compose_rate_vs_correction.py --layout grid5`, per
 [how big the strength grid should be](../../results/how-big-the-strength-grid-should-be/README.md).
 The section 3 walk decided it belongs in `Appendix~\ref{app:strength-sweep}`, "The strength sweep
 and its controls", with the main text keeping the argument; that appendix section is not in the
@@ -115,7 +115,7 @@ file, and neither the label nor the figure appears anywhere in it.
 
 ## Open questions on the text
 
-**The v58 recipe answers two gaps in the Appendix A settings paragraph** (queued in the section 5 walk): `--train-batch-size 1`, so an epoch is 50 single-state steps; and it also sets `--ema-decay 0.9999`, `--loss-space x0` and `--contrast-weight 0.01`, none of which the paper states. Source: `scripts/launch_recipe_run.sh`, the BASE argument list.
+**The v58 recipe answers two gaps in the Appendix A settings paragraph** (queued in the section 5 walk): `--train-batch-size 1`, so an epoch is 50 single-state steps; and it also sets `--ema-decay 0.9999`, `--loss-space x0` and `--contrast-weight 0.01`, none of which the paper states. Source: `3-understanding-compositionality/scripts/launch_recipe_run.sh`, the BASE argument list.
 
 **A held-out number exists for chunk 13.** [Where does each condition land](../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md), section 8: instance-count compose fraction over 8 seeds on 8 held-out pairs, plain product 0.00 to 0.25, corrected 0.75 to 1.00 on every pair, joint prompt 0.62 to 1.00; `artifacts/results/where-does-each-condition-land/pairs/verdict.json`, field `per_pair[].instance_count_compose_fraction_post_hoc`. Rank-32 adapter at step 30,050, λ 1.0; read post-hoc; not the checkpoints in Figure 5.
 

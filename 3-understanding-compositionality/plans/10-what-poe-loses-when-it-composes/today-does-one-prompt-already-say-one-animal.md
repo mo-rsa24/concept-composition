@@ -13,7 +13,7 @@
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-does-one-prompt-already-say-one-animal.md
+/drip-execute-plan 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-does-one-prompt-already-say-one-animal.md
 ```
 
 ## Contents
@@ -41,7 +41,7 @@ whether the prompt predicts how hard a pair is, and both came back null.
 The second claim is the reverse direction, and it is the sentence the paper wants to be able to write:
 the term the product drops is what the joint prompt's embedding supplies, so the failure is
 composition in language space carrying something composition in score space does not. The arithmetic
-for it exists in `scripts/and_vector_sheet.py` as `x_raw`. The argument does not, and parts of it are
+for it exists in `5-text-embedding-third-expert/scripts/and_vector_sheet.py` as `x_raw`. The argument does not, and parts of it are
 already known to be wrong.
 
 Neither claim needs a render. Both read text encoders only.
@@ -94,7 +94,7 @@ null. `MIN_AXIS_OVER_FLOOR = 3.0` sits in the source, not here.
 
 **The CLIP-free control decides what claim one is worth.** PixArt-alpha holds two clear animals on
 0 of 8 seeds with Flan-T5-XXL and no CLIP in any role, per
-[the CLIP-free finding](../../report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md).
+[the CLIP-free finding](../../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-clip-free-model-hybridise.md).
 If the singular signal clears the floor in SDXL's encoders and misses it in Flan-T5-XXL, claim one is
 removed as the account of the failure the same way CLIP was: the fusion happens where the signal is
 absent. If it clears the floor in both, claim one survives and the paper has to own it.
@@ -112,7 +112,7 @@ seeing its answer is the move `~/.claude/EXPERIMENT_CONVENTIONS.md` exists to pr
 - **The leftover direction is not shared across pairs.**
 
 Both in
-[the three-sides review](../03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md).
+[the three-sides review](../../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md).
 Step 4 measures a different quantity, the orthogonal share, and makes no predictive claim.
 
 ## Environment facts this plan depends on
@@ -135,12 +135,12 @@ Navigation: ⬅️ [Previous](#environment-facts-this-plan-depends-on) | 📋 [C
 
 | What | Path |
 |---|---|
-| the script | `scripts/one_animal_axis.py` |
-| the axis and its held-out check | `artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json` |
-| where the four prompts land, as a figure | `artifacts/results/does-one-prompt-already-say-one-animal/where-the-prompts-land.png` |
-| the Flan-T5-XXL read | `artifacts/results/does-one-prompt-already-say-one-animal/flan-t5-axis.json` |
-| the orthogonal shares over the pool | `artifacts/results/does-one-prompt-already-say-one-animal/orthogonal-share.json` and `.png` |
-| the card | `artifacts/results/does-one-prompt-already-say-one-animal/README.md` |
+| the script | `5-text-embedding-third-expert/scripts/one_animal_axis.py` |
+| the axis and its held-out check | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json` |
+| where the four prompts land, as a figure | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/where-the-prompts-land.png` |
+| the Flan-T5-XXL read | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/flan-t5-axis.json` |
+| the orthogonal shares over the pool | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/orthogonal-share.json` and `.png` |
+| the card | `5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/README.md` |
 | the finding | `report/what-poe-loses-when-it-composes/does-one-prompt-already-say-one-animal.md` |
 
 ## Tasks
@@ -151,10 +151,10 @@ For Claude to execute. Ask Claude to do these.
 
 ### 1. 🔧 Build the one-vs-many axis and check it on held-out nouns
 
-- [x] ✅ **1.1 Write `scripts/one_animal_axis.py`**, which encodes "a {noun}" and "two {plural}" for
+- [x] ✅ **1.1 Write `5-text-embedding-third-expert/scripts/one_animal_axis.py`**, which encodes "a {noun}" and "two {plural}" for
       the 81 nouns of `artifacts/_shared/cross_pair_pool_configs/cells_v58.json` through SDXL's two
       text encoders, prints the generated plurals so they can be eyeballed, and reports all four
-      views of the prompt the way `scripts/language_probes.py` does, with the pooled view as the
+      views of the prompt the way `5-text-embedding-third-expert/scripts/language_probes.py` does, with the pooled view as the
       primary read.
 - [x] ✅ **1.2 Split the nouns in half, build the axis on one half, read it on the other**, and compare
       the held-out separation against the mean over 200 random directions of the same shape. Bar
@@ -218,7 +218,7 @@ For you to follow manually. Do these yourself.
 ### 6. 👀 Check the plurals and the floor ratio
 
 - [x] ✅ **Read the generated plural list** printed by step 1.1.
-  - `scripts/cluster.sh sh "python3 -m json.tool artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json | head -120"`
+  - `scripts/cluster.sh sh "python3 -m json.tool 5-text-embedding-third-expert/artifacts/results/does-one-prompt-already-say-one-animal/axis-heldout-check.json | head -120"`
   - What you want: 81 pairs, each plural the one you would say out loud. "sheep" stays "sheep",
     "wolf" becomes "wolves".
   - What failure looks like: "sheeps" or "wolfs" in the list. That is a wrong prompt, not a wrong

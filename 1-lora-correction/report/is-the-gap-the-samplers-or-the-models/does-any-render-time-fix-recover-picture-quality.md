@@ -103,7 +103,7 @@ Navigation: ⬅️ [Previous](#1-what-each-fix-does-to-the-picture) | 📋 [TOC]
 
 **The number.** Median Laplacian variance over the eight cells, greyscale on a 0-to-1 scale, in
 units of 1e-4, with the ratio to the adapter's own render beside it. From
-`artifacts/results/which-fidelity-fix-wins/sharpness.json`, field `treatments.<name>.median`,
+`1-lora-correction/artifacts/results/which-fidelity-fix-wins/sharpness.json`, field `treatments.<name>.median`,
 written by `scripts/local/tile_sharpness.py` on 2026-09-24.
 
 | Column | Median | Against the adapter |
@@ -150,7 +150,7 @@ pair and nothing says how many of the eight held-out seeds share it.
 
 Navigation: ⬅️ [Previous](#3-the-reference-is-broken-on-one-of-the-two-seeds) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-**No composition count was scored.** The validated [instance-count scorer](../../context/world/compose-rate.md#what-people-get-wrong) was never run over these
+**No composition count was scored.** The validated [instance-count scorer](../../../context/world/compose-rate.md#what-people-get-wrong) was never run over these
 87 tiles, so every statement about whether a treatment still draws two things is an eye read off
 the sheets. The counts in other findings are not comparable to anything here.
 
@@ -171,19 +171,19 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| The numbers | `artifacts/results/which-fidelity-fix-wins/sharpness.json`, written and read 2026-09-24 | verified |
+| The numbers | `1-lora-correction/artifacts/results/which-fidelity-fix-wins/sharpness.json`, written and read 2026-09-24 | verified |
 | The renders | `/datasets/mmolefe/poe_repair_min/outputs/fidelity_harness/`, 87 tiles, rendered 2026-09-24 on `batch` nodes | verified |
-| The sheets | the same folder's `sheets/`, built by `scripts/fidelity_harness.py sheets` | verified |
+| The sheets | the same folder's `sheets/`, built by `1-lora-correction/scripts/fidelity_harness.py sheets` | verified |
 | The checkpoint | `/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-05-self-contrast/checkpoints/lora_step_015000.pt` | verified |
-| Regenerate with | `python scripts/fidelity_harness.py submit --checkpoint <pt>` on the cluster, then `sheets`, then `scripts/local/tile_sharpness.py` | |
+| Regenerate with | `python 1-lora-correction/scripts/fidelity_harness.py submit --checkpoint <pt>` on the cluster, then `sheets`, then `scripts/local/tile_sharpness.py` | |
 
 ## Depends on
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-- What the product of experts is and what the guidance scale does to it: [what product-of-experts composition is](../../context/world/poe-composition.md)
+- What the product of experts is and what the guidance scale does to it: [what product-of-experts composition is](../../../context/world/poe-composition.md)
 - What the correction is and which part re-weighting could supply: [what is the correction made of](../when-does-the-outcome-lock-in/what-is-the-correction-made-of.md)
-- How a render fails, in the words used above: [how a render fails](../../context/world/how-a-render-fails.md)
+- How a render fails, in the words used above: [how a render fails](../../../context/world/how-a-render-fails.md)
 - Each picture, read one at a time: [the figure explainer](../../artifacts/results/which-fidelity-fix-wins/figure-explainer.md)
 
 ## Still open

@@ -5,7 +5,7 @@
 
 ## Big picture
 
-This sits inside the `does-the-fix-reach-unseen-pairs` scope: fixing PoE (Product of Experts) diffusion composition, where asking for "a frog and a toad" produces one blended creature instead of two distinct animals. A rank-8 LoRA is trained on 11 animal pairs (Phase 1, `plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis-01-does-one-pooled-fix-transfer-at-all.md`) and tested on pairs it never saw, to check whether the fix generalizes rather than memorizing specific pairs.
+This sits inside the `does-the-fix-reach-unseen-pairs` scope: fixing PoE (Product of Experts) diffusion composition, where asking for "a frog and a toad" produces one blended creature instead of two distinct animals. A rank-8 LoRA is trained on 11 animal pairs (Phase 1, `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis-01-does-one-pooled-fix-transfer-at-all.md`) and tested on pairs it never saw, to check whether the fix generalizes rather than memorizing specific pairs.
 
 The scope was deciding how big the next experiment (`plans/hypothesis-02-transfer-as-a-rate-over-fifteen-pairs.md`, the 15-pair leave-one-pair-out sweep) needs to be: all 11 training pairs, a small 2-4 pair sample, or a "middle path" of 4-6 pairs chosen to span easy and hard cases. This demonstration is the qualitative evidence for that middle path: does the model actually look different on hard vs easy pairs, or does the compose-rate number hide an image that looks the same either way?
 
@@ -49,8 +49,8 @@ Without this check, a compose-rate near 1.0 would have been trusted at face valu
 
 ```
 Reproduce
-  python artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/demo.py       # the terminal report above
-  python artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/test_demo.py  # the checks can fail (6/6 passed)
-  figure: artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/hard_vs_easy_transfer.png
-  record: artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/QUERY.md
+  python 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/demo.py       # the terminal report above
+  python 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/test_demo.py  # the checks can fail (6/6 passed)
+  figure: 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/hard_vs_easy_transfer.png
+  record: 1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/QUERY.md
 ```

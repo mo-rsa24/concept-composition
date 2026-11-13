@@ -6,11 +6,11 @@ This is the companion to [the live scene](https://claude.ai/artifact/Uhp9tJfqpgH
 
 <a href="https://claude.ai/artifact/Uhp9tJfqpgHYHnQCfVaDNc#system"><img src="the-inclusive-captions-pilot-high-level-design-explainer-stills/the-inclusive-captions-pilot-high-level-design-explainer__system-light.png" width="200" alt="The inclusive-captions pilot: high-level design, the scene at #system"></a>
 
-**COCO train2017**. scripts/census/inclusive_captions_pool.py:69-71 reads instances_train2017.json and captions_train2017.json under /datasets/mmolefe/coco2017, with the images found at :81.
+**COCO train2017**. 3-understanding-compositionality/scripts/census/inclusive_captions_pool.py:69-71 reads instances_train2017.json and captions_train2017.json under /datasets/mmolefe/coco2017, with the images found at :81.
 
-**Pool builder**. scripts/census/inclusive_captions_pool.py. The wanted counts are WANT at :105; the caption per photo is the shortest of each photo's five, at read_captions(), :128.
+**Pool builder**. 3-understanding-compositionality/scripts/census/inclusive_captions_pool.py. The wanted counts are WANT at :105; the caption per photo is the shortest of each photo's five, at read_captions(), :128.
 
-**Photo audit, by eye**. scripts/census/audit_both_animal_photos.py, 16 tiles a page at 448 pixels, nine pages for the 131. Its verdicts are committed at artifacts/results/the-inclusive-captions-photo-pool/audit-verdicts.json. The plan's instruction 8 owns the judging.
+**Photo audit, by eye**. 3-understanding-compositionality/scripts/census/audit_both_animal_photos.py, 16 tiles a page at 448 pixels, nine pages for the 131. Its verdicts are committed at 4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/audit-verdicts.json. The plan's instruction 8 owns the judging.
 
 **Photo manifest**. /datasets/mmolefe/poe_repair_min/outputs/inclusive_captions_pool/manifest.json, written at inclusive_captions_pool.py:291. The four set sizes are the audited ones.
 

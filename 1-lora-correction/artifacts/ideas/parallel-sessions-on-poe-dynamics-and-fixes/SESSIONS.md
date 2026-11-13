@@ -26,7 +26,7 @@ Open a fresh Claude session in this repo and paste one line. The letter is the o
 changes.
 
 ```
-Read artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/SESSIONS.md in full. You are
+Read 1-lora-correction/artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/SESSIONS.md in full. You are
 session A. Follow "What every session shares" and then "Session A" to completion. Stay inside
 session A's prompt; the other sessions are running elsewhere.
 ```
@@ -55,8 +55,8 @@ Shared contract for this session.
 
 Read first, in this order: CLAUDE.md, environment/overview.md, context/00-INDEX.md,
 report/00-INDEX.md, then the two findings
-report/when-does-the-outcome-lock-in/where-does-each-condition-land.md and
-report/does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md,
+1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md and
+1-lora-correction/report/does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md,
 and the scope you are landing in (named below). Follow ~/.claude/EXPERIMENT_CONVENTIONS.md and
 ~/.claude/RESEARCH_PRACTICE.md.
 
@@ -91,7 +91,7 @@ check pgrep -af 'sweep|train|corrector' before claiming a device.
 Shared files: all sessions edit one working tree. Write only your own plan file, review file,
 scripts, results folder and finding. Do not edit the root MASTER_PLAN.md running order, a scope
 MASTER_PLAN.md plans table, or the reading register's existing rows; append a line to
-artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/PENDING_SYNC.md naming what needs
+1-lora-correction/artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes/PENDING_SYNC.md naming what needs
 adding, and one /sync-plan-tree run at the end folds them in. Commit nothing; the user commits.
 
 If a skill you invoke asks a question and nobody answers within the turn, take your own
@@ -130,7 +130,7 @@ correction PoE could ever have expressed, and what the adapter actually adds, pe
 sampling.
 
 **Produces.** Four figures with sidecars under
-`artifacts/results/what-the-correction-is-made-of/`, a finding in `report/when-does-the-outcome-lock-in/`,
+`artifacts/results/what-the-correction-is-made-of/`, a finding in `1-lora-correction/report/when-does-the-outcome-lock-in/`,
 a plan and review file in scope 05.
 
 **Prompt.**
@@ -138,15 +138,15 @@ a plan and review file in scope 05.
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/05-when-does-the-outcome-lock-in/. Also read
+Scope: 1-lora-correction/plans/05-when-does-the-outcome-lock-in/. Also read
 context/world/interaction-term.md and the memory note on the A/B split in
-artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md claim 2.
+3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md claim 2.
 
 The data: /datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_<n>/residuals/step_<kk>.pt
 holds, per step, x_t and the raw predictions eps_a_raw, eps_b_raw, eps_j_raw, eps_uncond in fp16.
 Upcast to fp32 before any norm. The on-policy corrected frames are under
 /datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames/<cond>/seed_<n>/step_<kk>.png.
-Read scripts/build_training_cache.py for the PoE rule the cache used, and write the rule down in
+Read 3-understanding-compositionality/scripts/build_training_cache.py for the PoE rule the cache used, and write the rule down in
 the plan before computing anything against it.
 
 Build four rungs, in this order, each with a picture and a number:
@@ -175,7 +175,7 @@ Add a which-animal score per step (cosine to the cat centroid minus cosine to th
 so the animal flip is a number.
 
 Do not touch scope 06's sampler-share measurement; that is rung 5 and it has its own plans. Write
-the finding with the template at report/finding-and-explainer-template.md.
+the finding with the template at 1-lora-correction/report/finding-and-explainer-template.md.
 ```
 
 ## Session B: correct early, then clean up
@@ -192,7 +192,7 @@ cell, and one triptych sheet per condition. Lands in scope 01 beside
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/01-showcase-the-trained-lora/. Read its plans/experiments/07-experiment-c-lambda-window.md
+Scope: 1-lora-correction/plans/01-showcase-the-trained-lora/. Read its plans/experiments/07-experiment-c-lambda-window.md
 and review/07-experiment-c-lambda-window.md (sharpness did not fall monotonically with lambda:
 75.6 at 0, 55.8 at 0.5, 69.0 at 1, Laplacian variance), and the memory note that the windowed
 LoRA sampler leaves the adapter attached after its window (cost one re-render on 2026-09-05).
@@ -220,7 +220,7 @@ single prompts in place of the base tail, if the refiner is already on disk; if 
 and skip it rather than downloading it.
 
 Read-out per cell: compose rate, mean sharpness, both-ness on the existing cloud axes from
-scripts/showcase/where_each_condition_lands_plot.py. Support: a cell that keeps compose rate
+1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py. Support: a cell that keeps compose rate
 within 1 seed of full-window lambda 1.2 and returns sharpness to the plain-PoE band.
 ```
 
@@ -236,7 +236,7 @@ have yet: whether corrector steps at low noise sharpen the corrected run's final
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/06-is-the-gap-the-samplers-or-the-models/. Execute, in order,
+Scope: 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/. Execute, in order,
 plans/tools/02-the-corrector-and-the-step-size-it-runs-at.md,
 plans/hypothesis/03-what-is-left-once-the-chain-settles.md and
 plans/hypothesis/04-does-the-corrector-compose-in-the-same-window.md with /drip-execute-plan.
@@ -265,9 +265,9 @@ run's unshown particles.
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/06-is-the-gap-the-samplers-or-the-models/. Read
+Scope: 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/. Read
 plans/baselines/09-twisted-smc-on-a-learned-joint-vs-poe-twist.md, its review file, and
-report/is-the-gap-the-samplers-or-the-models/does-selecting-among-poe-proposals-compose.md
+1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-selecting-among-poe-proposals-compose.md
 (inconclusive: the twist memorised its 120 training latents; SMC compose 0.0 against control 0.0
 and Mono 1.0 at K 4). The package is poe_repair/experiments/twisted_smc/.
 
@@ -307,7 +307,7 @@ because the fork step is 1.
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/06-is-the-gap-the-samplers-or-the-models/. Read arXiv 2501.09732 with /unpack-paper.
+Scope: 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/. Read arXiv 2501.09732 with /unpack-paper.
 
 Task 1, no GPU: random search at N 8 is already on disk. From the contact sheet's sidecar
 artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json and
@@ -340,7 +340,7 @@ sharpness reward, search among early branches.
 ```
 The block under "What every session shares" applies in full.
 
-Scope: plans/06-is-the-gap-the-samplers-or-the-models/. Wait for session D's reward-on-x0-hat
+Scope: 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/. Wait for session D's reward-on-x0-hat
 code and reuse it. Read arXiv 2506.20701 with /unpack-paper; check whether the authors released
 code before writing any.
 
@@ -370,18 +370,18 @@ pair, the rank-32 tier figure.
 ```
 The block under "What every session shares" applies in full.
 
-Scopes: plans/05-when-does-the-outcome-lock-in/ (task "Extend the render script with --pairs" in
-plans/figures/06-where-each-condition-lands.md) and plans/04-does-the-fix-reach-unseen-pairs/.
+Scopes: 1-lora-correction/plans/05-when-does-the-outcome-lock-in/ (task "Extend the render script with --pairs" in
+plans/figures/06-where-each-condition-lands.md) and 1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/.
 
 Task 1: pick the unseen pair from the high band of
-report/does-the-fix-reach-unseen-pairs/does-interaction-strength-predict-which-pairs-blend.md,
+1-lora-correction/report/does-the-fix-reach-unseen-pairs/does-interaction-strength-predict-which-pairs-blend.md,
 and write the both-ness bar before rendering: support if PoE mean both-ness sits at least 0.15
 below the corrected mean and the corrected band overlaps the joint band. Then render the six
 conditions and the per-step frames on that pair with
 runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md, and produce the
 same figures.
 
-Task 2: the fit-by-tier figure at rank 32, step 30050, reusing scripts/showcase/fit_cosine_on_cache.py
+Task 2: the fit-by-tier figure at rank 32, step 30050, reusing 1-lora-correction/scripts/showcase/fit_cosine_on_cache.py
 with the pool configs under fit_cosine_tiers_r8_030000/pool/, so the per-pair-learning result is
 known to be about the architecture or about rank 8.
 ```
@@ -396,7 +396,7 @@ known to be about the architecture or about rank 8.
 **Prompt.**
 
 ```
-Read CLAUDE.md, then plans/06-is-the-gap-the-samplers-or-the-models/plans/ideas/07-feynman-kac-correctors.md.
+Read CLAUDE.md, then 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/ideas/07-feynman-kac-correctors.md.
 Step 30 waits on step 26, but the read itself does not: run /unpack-paper https://arxiv.org/abs/2503.02819
 now, promote its register row in plans/standing/literature/reading-register.md, write the cost
 estimate against poe_repair/composers/poe_langevin.py as it will exist after step 25, and leave the

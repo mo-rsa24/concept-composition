@@ -20,7 +20,7 @@ decides whether training an SD 1.5 adapter is worth the hours. The repo is
 /home/molef/PhD/poe_repair_min.
 
 Objectives
-1. Add SD 1.5 to scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.
+1. Add SD 1.5 to 1-lora-correction/scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.
 2. Write the measured-correction sampler for SD 1.x: joint minus PoE added back at full strength.
 3. Run Attend-and-Excite from composition/aae/, and SynGen, Divide and Bind, InitNO and CONFORM
    from their official repositories, all unmodified at their defaults, on the 276 Attend-and-Excite
@@ -28,13 +28,13 @@ Objectives
    protocol rule 2).
 4. Write the ceiling bar into the protocol, run the test, and report PASS or MISS.
 5. Build the picture grid R13 beside Table 4 from the same result file: R12's six prompts at seed
-   9, columns R5's methods in R5's order, drawn with scripts/paper_tile_figure.py at 5.5 in.
+   9, columns R5's methods in R5's order, drawn with 1-lora-correction/scripts/paper_tile_figure.py at 5.5 in.
 
 What to read
 - composition/aae/: the official Attend-and-Excite code (README, run.py, the pipeline).
-- scripts/same_rule_four_models.py: joint prompt and PoE on four Stable Diffusion models.
+- 1-lora-correction/scripts/same_rule_four_models.py: joint prompt and PoE on four Stable Diffusion models.
 - The CONFORM repository, github.com/gemlab-vt/conform, and arXiv 2312.06059.
-- report/paper-review/protocol.md, held-out-set.md and prze-1-scores.md.
+- 1-lora-correction/report/paper-review/protocol.md, held-out-set.md and prze-1-scores.md.
 - poe_repair/methods/_sampling.py: the repo's own PoE rule, to copy the rule exactly.
 - environment/hpc/nodes.md: co3 and co3_bw interpreters; mscluster107 has two RTX 8000 of 49 GB.
 
@@ -64,7 +64,7 @@ When something is missing
 Rules
 - Do not edit Attend-and-Excite or CONFORM code. Call them as released, from a thin script.
 - Token indices are computed by one function and saved, never hand-picked.
-- Add this step's GPU jobs to report/paper-review/prze-10-compute.md and launch each after the
+- Add this step's GPU jobs to 1-lora-correction/report/paper-review/prze-10-compute.md and launch each after the
   user's yes.
 - The ceiling bar is in the protocol before the test runs.
 

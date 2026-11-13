@@ -3,7 +3,7 @@
 This plan asks how the method and the introduction read as finished prose, since neither of them
 waits on a run that has not finished.
 
-**Step 20 of 22.** Waits on step 17. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 20 of 22.** Waits on step 17. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -38,7 +38,7 @@ Both sections present in the `.tex` as real prose, building to a PDF.
 - Prose is written by hand. `/restyle` is the only skill pass, and it runs after
   a section exists, never as a drafter.
 - The glossary at the bottom of the root `MASTER_PLAN.md` holds the project's
-  agreed plain definitions: PoE, the [chimera](../../../../context/world/chimera.md),
+  agreed plain definitions: PoE, the [chimera](../../../../../context/world/chimera.md),
   Mono-free, r_t, lambda, and the train-against-evaluate grid whose rows are
   what a model trained on and whose columns are what it was tested on.
   Reuse that wording so the paper and the plan tree do not drift apart.

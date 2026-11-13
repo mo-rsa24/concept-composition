@@ -16,7 +16,7 @@ between the two experiments would be meaningless.
 
 This is the canary the dose-matched runs sit behind. Run it before them.
 
-    python scripts/check_fixed_schedule.py
+    python 1-lora-correction/scripts/check_fixed_schedule.py
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ import torch
 from PIL import Image
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from poe_repair.composers import teacher_residual as cmp_tr  # noqa: E402

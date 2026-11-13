@@ -109,9 +109,9 @@ In `pool43-all50` the best frames are at step 45,000 and the collapse is at 60,0
 
 ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#the-claim) ➡️
 
-- [The node facts](../../../../environment/hpc/nodes.md): `biggpu` allows one job per user through Slurm, so long runs go outside Slurm with `nohup` on a pinned GPU index. `mscluster109` carries two RTX A6000 at 49 GB. `mscluster106` and `108` carry Quadro RTX 8000 at 49 GB. `mscluster110` to `112` are Blackwell and need `co3_bw`, never `co3`.
-- [The storage facts](../../../../environment/storage.md): checkpoints and renders to `/datasets` only.
-- [The overview](../../../../environment/overview.md): cached tensors are float16, and any analysis stacking many of them upcasts to float32 first. Task 1.1 stacks many of them.
+- [The node facts](../../../../../environment/hpc/nodes.md): `biggpu` allows one job per user through Slurm, so long runs go outside Slurm with `nohup` on a pinned GPU index. `mscluster109` carries two RTX A6000 at 49 GB. `mscluster106` and `108` carry Quadro RTX 8000 at 49 GB. `mscluster110` to `112` are Blackwell and need `co3_bw`, never `co3`.
+- [The storage facts](../../../../../environment/storage.md): checkpoints and renders to `/datasets` only.
+- [The overview](../../../../../environment/overview.md): cached tensors are float16, and any analysis stacking many of them upcasts to float32 first. Task 1.1 stacks many of them.
 - The tracker is W&B, project `prime_lab/poe-repair-animals-compose`.
 
 ---
@@ -173,7 +173,7 @@ For Claude to execute.
   ```
 - [ ] 0.2 **Run the following prompt:**
   ```
-  /frame-hypothesis fitting the whole path and handing back the tail in plans/09-designing-the-correction-loss
+  /frame-hypothesis fitting the whole path and handing back the tail in 1-lora-correction/plans/09-designing-the-correction-loss
   ```
   - The bar goes into the review file before any render, not after
 
@@ -190,7 +190,7 @@ For Claude to execute.
   - Read the null branch the way each run's own `config.json` composes it: `freeze_null` is true for `v1` and absent for `pool43-all50`, so the first takes the empty branch from the cache and the second takes the adapted one
   - Upcast the cached float16 tensors to float32 before stacking them
   - Produces: `artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp/shrinkage-per-step.json`, the ratio per step per seed per checkpoint, and one plot of the ratio against step, one panel per checkpoint, one line per seed
-  - ✓ ran 2026-09-20 on `mscluster106` device 1, `scripts/shrinkage_per_step.py`, 800 measurements over the eight held-out seeds and both checkpoints. Mean per band on `pool43-all50`: size 1.08, 0.87, 0.88, 0.95, 0.94 and direction 0.77, 0.85, 0.91, 0.88, 0.78 across steps 0-9, 10-19, 20-29, 30-39, 40-49. On `v1` the direction ends worse, at 0.63
+  - ✓ ran 2026-09-20 on `mscluster106` device 1, `1-lora-correction/scripts/shrinkage_per_step.py`, 800 measurements over the eight held-out seeds and both checkpoints. Mean per band on `pool43-all50`: size 1.08, 0.87, 0.88, 0.95, 0.94 and direction 0.77, 0.85, 0.91, 0.88, 0.78 across steps 0-9, 10-19, 20-29, 30-39, 40-49. On `v1` the direction ends worse, at 0.63
   - **The size does not fall off, so the push is not too weak late.** What fails late is the direction: full size, about a quarter of the way off target, in exactly the steps that draw fine detail. That is what stage A now tests
 
 ▶ **Next: [task 2.1](#2--stage-a-the-hand-off-sweep-no-training)**.
@@ -225,14 +225,14 @@ For Claude to execute.
 ◀ **Needs: [task 2.3](#2--stage-a-the-hand-off-sweep-no-training)** falling short of the bar.
 
 - [x] 3.1 **Write the launcher**
-  - Copy `scripts/showcase/v6_render_teacher.sh` to `scripts/showcase/v_extra_wholepath_x0.sh`
+  - Copy `1-lora-correction/scripts/showcase/v6_render_teacher.sh` to `1-lora-correction/scripts/showcase/v_extra_wholepath_x0.sh`
   - `RUN=v_extra_wholepath_x0_r16`, `EXTRA="--freeze-null --loss-space x0"`, and **`STEPRANGE` unset** so all 50 cached steps train
   - Rank 16, `cells_v57`, `POOLGEN=v57`, weight decay 0, `SAMPLEEVERY=25`, as the copy gives
   - Produces: one launcher differing from the V6 one in the run name, the switch string, the missing `STEPRANGE` and the python environment
-  - ✓ done 2026-09-19: `scripts/showcase/v_extra_wholepath_x0.sh`. It pins `co3` rather than the `co3_bw` inherited from the V6 launcher, because `mscluster109` is an A6000
+  - ✓ done 2026-09-19: `1-lora-correction/scripts/showcase/v_extra_wholepath_x0.sh`. It pins `co3` rather than the `co3_bw` inherited from the V6 launcher, because `mscluster109` is an A6000
 - [ ] 3.2 **Launch it**
   ```
-  GPU=0 nohup bash scripts/showcase/v_extra_wholepath_x0.sh > logs/v_extra.log 2>&1 &
+  GPU=0 nohup bash 1-lora-correction/scripts/showcase/v_extra_wholepath_x0.sh > logs/v_extra.log 2>&1 &
   ```
   - `mscluster109` once plan 04's runs have finished, to stay on one device model
   - The step range changes which cached steps are sampled from and not the number of optimizer steps, so this costs the same as plan 04's runs: about 7 hours for 30,000 steps
@@ -247,7 +247,7 @@ For Claude to execute.
 - [ ] 4.2 **State in the review file that stage B moved two axes together**
   - A win belongs to the pair, not to either change
   - Name the two single-axis follow-ups, to be run only on a win: all 50 steps with the epsilon loss, and steps 0 to 25 with the x0 loss
-- [ ] 4.3 **Write `report/designing-the-correction-loss/08-fitting-the-whole-path-and-handing-back-the-tail.md`**
+- [ ] 4.3 **Write `1-lora-correction/report/designing-the-correction-loss/08-fitting-the-whole-path-and-handing-back-the-tail.md`**
   - The verdict against the pre-registered bar, the per-seed table, and the two sheets from the Figure Catalog
 
 ### Close out. 🔄 Record what this plan taught
@@ -317,7 +317,7 @@ For you to follow manually.
 - `poe_repair/experiments/one_pair_one_seed/trainer.py:575-581`, `_loss_weights` and the `loss_space` switch
 - `poe_repair/experiments/cross_pair_lora_pooling/_inline_sampling.py:55-58`, how the sampler detaches the adapter for a branch
 - `poe_repair/experiments/compose_scorer_validation/detection_scorer.py`, the instance-count scorer and why the two earlier reads were rejected
-- `scripts/showcase/train_pool_run.sh`, the shared runner every launcher calls
+- `1-lora-correction/scripts/showcase/train_pool_run.sh`, the shared runner every launcher calls
 
 ---
 

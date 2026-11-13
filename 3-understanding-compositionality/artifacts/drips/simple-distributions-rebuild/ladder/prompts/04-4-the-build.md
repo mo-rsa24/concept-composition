@@ -5,13 +5,13 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-execute-plan artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, I type every
+/drip-execute-plan 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, I type every
 block myself into ~/Playground/PhD/simple-distributions-walk/walk04.py; bar: the mosaic head 0.980,
 the blend at 0, and the side-by-side weights printing 0.5 each in float64 with same-half pairs at
 log weight -803.2
 
 Background
-This is layer 4's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 4's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type the parts world from the step file, one step per message, and produce the mosaic, the blend
 and two animals side by side, all from one product. Claude's reference code is under toy/ in this
 repo; my file and the reference print the same numbers, and a difference is a lesson or a bug. I
@@ -28,10 +28,10 @@ Objectives
 4. Tick each step in the step file as it lands, and keep my place in the walk map between sittings.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md: the step file, including
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md: the step file, including
   "Where the numbers come from".
 - toy/rebuild/parts_world.py and toy/rebuild/phase4_parts_world.py: the reference.
-- artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json: the four example settings.
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json: the four example settings.
 - toy/rebuild/out/phase4/phase4.json: the samplers.
 - The layer 4 maths drip's dispatch.md: my notation.
 

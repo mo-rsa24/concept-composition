@@ -1,6 +1,6 @@
 # Walk map: route step 1, check the ground
 
-Plan: [route step 1](../../../plans/route-answer-the-iclr-reviews.md), walked with `/drip-execute-plan --request`.
+Plan: [route step 1](../../../../plans/route-answer-the-iclr-reviews.md), walked with `/drip-execute-plan --request`.
 Board: [the paper review board](../../../report/paper-review/board.md).
 
 ## Stop point

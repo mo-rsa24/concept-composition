@@ -70,7 +70,7 @@ Identity, meaning each animal being one whole species, never moves.
 (7 of 8 seeds), so the pass marks use only those seeds.
 
 **The written-up version of this section**, with the pass mark, the premise test and the per-seed
-pixel distances, is [the finding "can a text-space third expert restore composition"](../report/can-a-text-space-third-expert-restore-composition.md).
+pixel distances, is [the finding "can a text-space third expert restore composition"](../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
 
 ## 2. Training: fit the third expert instead of building it
 

@@ -14,13 +14,13 @@ for x_pos, x_raw, x_fix and the joint prompt in both encoders.
 at minus one times its real value and the padding unlike any prompt's. The positional build was
 written down months ago and never run.
 
-**What was done.** `word_pairs` and `positional_x` added to `scripts/and_vector_norms.py`, matched on
+**What was done.** `word_pairs` and `positional_x` added to `5-text-embedding-third-expert/scripts/and_vector_norms.py`, matched on
 the token itself and done per encoder slice because the two tokenizers can segment differently.
-`x_pos` and two columns added to `scripts/and_vector_sheet.py`. The build check lives in the source
+`x_pos` and two columns added to `5-text-embedding-third-expert/scripts/and_vector_sheet.py`. The build check lives in the source
 as `SCAFFOLD_MAX_DIFF = 0.0`.
 
 **Where the results live.**
-[token-norms-x-pos.png](../../results/the-positional-and-vector/token-norms-x-pos.png) and its JSON
+[token-norms-x-pos.png](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png) and its JSON
 beside it.
 
 **Before and after.** x_fix's padding sits at 0.572 of the joint prompt's in CLIP ViT-L and 0.555 in
@@ -60,12 +60,12 @@ seed rather than against memory, and the crops were then dropped in favour of wh
 so no choice of crop could flatter or damn a tile. The calls were accepted.
 
 **Where the results live.**
-[the card](../../results/the-positional-and-vector/README.md),
-[calls.json](../../results/the-positional-and-vector/calls.json),
-[the series strip](../../results/the-positional-and-vector/how-the-third-expert-changed.png),
-[per-seed comparisons](../../results/the-positional-and-vector/per-seed), and the rebuilt sheets in
+[the card](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/README.md),
+[calls.json](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/calls.json),
+[the series strip](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png),
+[per-seed comparisons](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/per-seed), and the rebuilt sheets in
 [1-inference-only](../../../supervisor-meeting/1-inference-only). The verdict is filed as
-[a finding](../../../report/can-a-text-space-third-expert-restore-composition.md).
+[a finding](../../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md).
 
 **Before and after.** Against the bar: 0 clear cat-and-dog pairs of 7 judgeable seeds, mark 4. MISS.
 On the ladder: two separate animals on 6 of 7, where plain PoE gives 0 and the best earlier variant
@@ -88,11 +88,11 @@ E("A and B") − E("A") point at B?
 **The problem.** Nobody had checked, and two sessions' worth of explanation had been built on a guess
 about it. Mine was that CLIP's space was never trained for analogies and its differences mean nothing.
 
-**What was done.** `scripts/and_vector_premise.py`, text encoders only, 200 random pairs against a
+**What was done.** `5-text-embedding-third-expert/scripts/and_vector_premise.py`, text encoders only, 200 random pairs against a
 276-noun dictionary, with a decoy-word control and a no-subtraction baseline.
 
 **Where the results live.**
-[premise-word-recovery.json](../../results/the-positional-and-vector/premise-word-recovery.json).
+[premise-word-recovery.json](../../../5-text-embedding-third-expert/artifacts/results/can-a-positional-and-vector-restore-composition/premise-word-recovery.json).
 
 **Before and after.** Chance is a median rank of 138. The held-out word comes back at median rank 1,
 top-1 75.0% on the pooled vector and 98.5% on the content mean, with the decoy at 126 and 144. My
@@ -140,7 +140,7 @@ prompt arriving through the third slot).
 
 **Still out, launched from this walk and not part of the plan.** On mscluster108 device 1, pid 483597:
 x_and's 16 tiles, rendered and not yet called; then the per-step and constant ceilings on seeds 2 and
-6, whose bars sit in the source of `scripts/and_vector_per_step_x.py`. Those decide whether a learned
+6, whose bars sit in the source of `5-text-embedding-third-expert/scripts/and_vector_per_step_x.py`. Those decide whether a learned
 x is worth pursuing at all.
 
 ## The family

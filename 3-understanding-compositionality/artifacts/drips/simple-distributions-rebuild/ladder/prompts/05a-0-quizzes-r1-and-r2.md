@@ -10,7 +10,7 @@ In the background, prepare and build the reading stop's two quizzes, bottom up, 
 ladder: quiz R.1 and quiz R.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Between layer 5 (the overlap dial) and
 layer 6 (guidance) sits a reading stop on two Bradley papers, arXiv 2502.04549 and 2509.16447, which
 prove when summed scores are exact. The stop opens on two quizzes, one on the college maths under
@@ -30,7 +30,7 @@ Objectives
 5. Write each published URL into its step of the reading stop's ladder file.
 
 What to read
-- artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
   its Study first line: the material for quiz R.1.
 - In the journey folder
   ~/goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/, the
@@ -111,7 +111,7 @@ What is already known
   x2 ~ U(−1, 0), B mirrors it, and the experts are ideal, smoothed by σ = 0.05, and composed as the
   plain product p_A·p_B (step file 05, steps 1 and 2).
 - In 2D the background is uniform, so dividing by it changes the plain product only by a constant
-  and the quadrant toy tests co-occurrence (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
+  and the quadrant toy tests co-occurrence (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
 - The four-quadrant answer key is a second toy with one blob per quadrant at (±0.5, ±0.5), std 0.15,
   A is x1 > 0 and B is x2 > 0, and experts that model only their own coordinate and take the other
   from the background marginal of all four quadrants put 0.9999 (plain product) and 0.989
@@ -146,13 +146,13 @@ Rules
   built, and each URL as quiz-cadence publishes it.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem and every paper question.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz R.1's URL in step 1 and quiz R.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05a-reading-stop-projective-composition.md,
   each replacing "(URL lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and the
   two URLs open.

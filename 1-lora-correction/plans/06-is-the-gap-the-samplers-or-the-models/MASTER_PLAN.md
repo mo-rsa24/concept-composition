@@ -5,7 +5,7 @@ take away, and how much is the model's, which no amount of correction touches.
 
 > **This scope's plans sit in the one running order, not in a sequence of their own.** They are
 > steps 24 to 30, 49 to 51, 55 and 56 of the `## Running order` table in the
-> [repo root MASTER_PLAN.md](../../MASTER_PLAN.md), interleaved with every other scope's plans.
+> [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), interleaved with every other scope's plans.
 > The `## Plans` list below is this folder's contents and its dependencies, never a list to work
 > down top to bottom.
 
@@ -116,7 +116,7 @@ The measurement the whole scope turns on, drawn as it will look if the split is 
 ```
 
 The read is the right-hand end, where the sampler's share has vanished by construction and
-anything left is the model's. The left-hand end is where the [compose rate](../../context/world/compose-rate.md)
+anything left is the model's. The left-hand end is where the [compose rate](../../../context/world/compose-rate.md)
 is decided and where the two cannot be separated, which is the limit this scope returns beside its
 number.
 
@@ -141,9 +141,9 @@ what step 26 has to return for the second half to start is written into the plan
 to judgement.
 
 The corrector follows
-[poe_internal.py](../../poe_repair/composers/poe_internal.py)'s per-step intervention pattern and
+[poe_internal.py](../../../poe_repair/composers/poe_internal.py)'s per-step intervention pattern and
 the vendored `AnnealedULASampler` at
-[anneal_samplers.py](../../composition/reduce_reuse_recycle/anneal_samplers.py). At noise level
+[anneal_samplers.py](../../../composition/reduce_reuse_recycle/anneal_samplers.py). At noise level
 `t` the drift is the product-of-experts score `s_t = -eps_PoE / sqrt(1 - ᾱ_t)`. The update is
 `x ← x + δ_t·s_t + sqrt(2·δ_t)·z` with `z` standard normal, repeated `k` times, and then the
 ordinary DDIM step is taken. The step size is `δ_t = c·β_t`, following the vendored sampler's
@@ -320,7 +320,7 @@ Feynman-Kac. A null is a result here and closes the scope honestly rather than f
     [the figure standard](#the-figure-bar-every-plan-here-is-held-to) and carries a `.json` sidecar
     recording which runs, seeds and settings were drawn.
 11. The measured size is folded into
-    [the idea map's claim 2](../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md),
+    [the idea map's claim 2](../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md),
     its route row deleted, and
     [the two literature checks before print](../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md)
     updated, since they currently cite a paper for a claim this scope turns into a number.
@@ -334,7 +334,7 @@ Feynman-Kac. A null is a result here and closes the scope honestly rather than f
 15. The corrector's eight-seed sheets exist for both pairs, the joint prompt and plain PoE beside
     the corrector on all 50 steps, and the tail sheets exist for both pairs, the rank-32 λ 1.2
     adapter alone beside the adapter plus 5 and 20 corrector steps on the last fifteen steps,
-    with the fidelity branch printed from the thresholds in `scripts/corrector_window_sweep.py`
+    with the fidelity branch printed from the thresholds in `1-lora-correction/scripts/corrector_window_sweep.py`
     and the W&B run id in plan 04's review file.
 
 ## The figure bar every plan here is held to
@@ -377,7 +377,7 @@ sub-scope and not a task, because it is a second corrector family with its own m
 
 ⬅️ [Previous](#sub-scopes) | 📋 [TOC](#table-of-contents) | [Next](#what-must-survive-into-the-plan-files) ➡️
 
-The Step column is the position in the [root running order](../../MASTER_PLAN.md), which is the one
+The Step column is the position in the [root running order](../../../MASTER_PLAN.md), which is the one
 order. The Waits on column is the real dependency, which is what to read when deciding what can
 start today.
 
@@ -436,7 +436,7 @@ reshuffle. Each one names the plan that owns it, so `/populate-plans` cannot dro
 
 ⬅️ [Previous](#what-must-survive-into-the-plan-files) | 📋 [TOC](#table-of-contents) | [Next](#process-diagram) ➡️
 
-See [environment/00-INDEX.md](../../environment/00-INDEX.md) for this project's
+See [environment/00-INDEX.md](../../../environment/00-INDEX.md) for this project's
 environment and architecture facts. Read before drafting or checking any plan in this scope.
 
 The facts this scope's work rides on, which every plan below names in its own
@@ -447,7 +447,7 @@ The facts this scope's work rides on, which every plan below names in its own
 - Everything writes under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/`.
   `/home-mscluster` hit 100% once and silently killed checkpointing, so every job script carries a
   disk guard on `/datasets`, the filesystem it actually writes to, per
-  [environment/storage.md](../../environment/storage.md).
+  [environment/storage.md](../../../environment/storage.md).
 - biggpu allows one job per user, so the `k` grid runs under `nohup` outside Slurm and `squeue` is
   blind to it. Harvest by `pgrep -af 'corrector|sweep'` on the session node.
 - The models run in fp16. Every norm upcasts to fp32 before it is taken, since the differences
@@ -488,8 +488,8 @@ this scope does not have, per the note under [Plans](#plans).
 ⬅️ [Previous](#process-diagram) | 📋 [TOC](#table-of-contents)
 
 Terms used only in this scope, one plain line each. The shared vocabulary (PoE,
-[chimera](../../context/world/chimera.md), Mono, the correction `r_t`, λ, seed against pair, one
-generated run) is in the [root MASTER_PLAN.md](../../MASTER_PLAN.md) and is not repeated here.
+[chimera](../../../context/world/chimera.md), Mono, the correction `r_t`, λ, seed against pair, one
+generated run) is in the [root MASTER_PLAN.md](../../../MASTER_PLAN.md) and is not repeated here.
 
 - **The correction, `r_t`:** the per-step gap `eps_J - eps_PoE` between what the joined prompt
   predicts and what adding the two separate prompts predicts, both evaluated at the same latent.

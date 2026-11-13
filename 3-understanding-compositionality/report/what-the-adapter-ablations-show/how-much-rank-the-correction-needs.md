@@ -54,4 +54,4 @@ it reaches 51,773,440 of 2,619,237,124 (1.98%).
 | Every drift value | last logged value in each run's `history.json` on the cluster | 2026-09-23 |
 | Every parameter count | `lora_attach.json` in each run's output folder | 2026-09-23 |
 | Which cells are comparable | the metric keys present in both eras' `history.json` | 2026-09-23 |
-| The figure | `scripts/adapter_ablation_figures.py` | 2026-09-23 |
+| The figure | `3-understanding-compositionality/scripts/adapter_ablation_figures.py` | 2026-09-23 |

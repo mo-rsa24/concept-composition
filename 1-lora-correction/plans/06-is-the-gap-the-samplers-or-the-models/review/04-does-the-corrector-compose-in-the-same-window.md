@@ -93,7 +93,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       says here as the plan asked. Same window means two different mechanisms acting at the same
       moment. A different window is the stronger result and needs its own paragraph. This question
       is answered even if the measurement at step 26 returns a null, because a flat residual curve
-      does not imply a flat [compose rate](../../../context/world/compose-rate.md). The corrector can
+      does not imply a flat [compose rate](../../../../context/world/compose-rate.md). The corrector can
       relocate the trajectory without shrinking `‖r_t‖`. If it is run against a flat curve at step
       26, this file says so.
 
@@ -105,7 +105,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       `k ∈ {0, 5, 20}` Langevin steps on the corrected prediction inside steps 35 to 49, eight
       held-out seeds of cat × dog, with butterfly × meadow as the control. Sharpness is the
       Laplacian variance of the greyscale render; composed is the validated instance count.
-      Thresholds in `scripts/corrector_window_sweep.py`: `FIDELITY_MIN_SHARPNESS_RISE = 0.10`,
+      Thresholds in `1-lora-correction/scripts/corrector_window_sweep.py`: `FIDELITY_MIN_SHARPNESS_RISE = 0.10`,
       `FIDELITY_MAX_COMPOSE_LOSS_SEEDS = 1`.
       **Support** if the mean sharpness over the 8 seeds at `k=20` is at least 10% above `k=0`,
       `k=5` sits at or above `k=0`, and the composed count at `k=20` is within one seed of `k=0`.
@@ -148,7 +148,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       the plain-PoE references it is heavy-tailed (cat × dog seeds 11, 14 and 15 render grainy
       at 275 to 499 against about 15 elsewhere, mean 152 ± 183 over the 8 seeds, measured at
       02:40 before this grid ran), so a band built from it cannot separate conditions.
-      Thresholds in `scripts/corrector_window_sweep.py`: `CLEAN_MIN_MONO_GAIN = 0.05` (the
+      Thresholds in `1-lora-correction/scripts/corrector_window_sweep.py`: `CLEAN_MIN_MONO_GAIN = 0.05` (the
       8-seed mean distance must fall by at least 0.05 against the adapter-alone run, the size
       the training-longer finding read as a real move between checkpoints) and
       `CLEAN_MAX_COMPOSE_LOSS_SEEDS = 1`. **Support** if at least one condition moves at least
@@ -198,7 +198,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
 - [x] ✅ Does the layout match the injected-correction figure on all four facts, meaning the pair,
       the seeds, the nine window positions, and the exact rule the green border encodes? Yes.
       The four facts, read off `poe/samples-over-the-window-map.json` and
-      `scripts/window_samples_over_map.py` before rendering: pair `a_cat__x__a_dog`; seeds 9, 10,
+      `1-lora-correction/scripts/window_samples_over_map.py` before rendering: pair `a_cat__x__a_dog`; seeds 9, 10,
       11, 12 as rows; windows (0,10), (5,15), … (40,50), nine at stride 5 from
       `window_grid.windows()`; green frame where `compose == 1` in the scored file, which is the
       validated instance count of at least 2. This figure uses the same four and adds one column,
@@ -274,5 +274,5 @@ seeds 10 to 12.
 ## Cross-references
 
 - The two findings built from this verdict: [does a corrector alone produce two animals](../../../report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md) and [can a corrector or a clean tail sharpen the adapter's renders](../../../report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md).
-- The recipe that reruns the window sweep, the sheets and the two tails: [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
+- The recipe that reruns the window sweep, the sheets and the two tails: [running the Langevin corrector](../../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
 - The mention of **the injected correction**, whose window the corrector's is compared against in task 5.2, in [the whole corrector design](../source/the-whole-corrector-design.md#5--only-if-the-curve-falls-slide-the-corrector-window-across-the-run).

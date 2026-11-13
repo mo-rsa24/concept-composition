@@ -1,6 +1,6 @@
 # 🧑‍🏫 Present the ICLR 56173 revision to the supervisor
 
-**Position in the plan tree:** a standalone plan beside [the review-answering route](route-answer-the-iclr-reviews.md), which owns the paper edits and the replies. This plan only shows them.
+**Position in the plan tree:** a standalone plan beside [the review-answering route](../../plans/route-answer-the-iclr-reviews.md), which owns the paper edits and the replies. This plan only shows them.
 
 ## Table of contents
 
@@ -60,7 +60,7 @@ For Claude to execute. Ask Claude to do these.
 
 ### 0. 🧭 Check this plan before working from it
 
-- [ ] **Run `/verify-plan plans/present-revision-to-supervisor.md` and `/xref-pillar` on it** (at the close of this walk)
+- [ ] **Run `/verify-plan 1-lora-correction/plans/present-revision-to-supervisor.md` and `/xref-pillar` on it** (at the close of this walk)
 
 ### 1. 📋 The claim table
 
@@ -73,7 +73,7 @@ For Claude to execute. Ask Claude to do these.
 ### 2. 🖼️ The figures
 
 - [x] ✅ **2.1 Build the figure for the toy group (the training loss and what the adapter returns) end to end**
-  - Renders at 200 dpi with pdftoppm, crops in `artifacts/drips/present-revision-to-supervisor/crops/`, drawing script and figure in `artifacts/scenes/iclr-review-response/`
+  - Renders at 200 dpi with pdftoppm, crops in `artifacts/drips/present-revision-to-supervisor/crops/`, drawing script and figure in `1-lora-correction/artifacts/scenes/iclr-review-response/`
   - Check: the PNG and PDF exist, and every panel prints its source file and page under it.
   - ✓ verified 2026-11-12: g07 PNG 5890×3166 and PDF written, seven panels each with source and page (commit b2f7abde)
   - ◀ Needs: 4.1 · ▶ Next: 4.2
@@ -82,7 +82,7 @@ For Claude to execute. Ask Claude to do these.
   - ◀ Needs: 4.2
 
 - [ ] **2.3 Rebuild Figure 10 (slot R9) from the scorers Tables 1 and 3 use, in place of the by-eye failure labels**
-  - Images: the 848 window renders (adapter on steps 0 to 10 and 0 to 25) scored by `scripts/review_score_blipvqa.py`, `review_score_clip_ir.py` and `review_score_comp.py` from `rows_windows.csv` (`scripts/review_window_rows.py`); adapter off and all 50 are Table 3's PoE and ours rows, already scored.
+  - Images: the 848 window renders (adapter on steps 0 to 10 and 0 to 25) scored by `1-lora-correction/scripts/review_score_blipvqa.py`, `review_score_clip_ir.py` and `review_score_comp.py` from `rows_windows.csv` (`1-lora-correction/scripts/review_window_rows.py`); adapter off and all 50 are Table 3's PoE and ours rows, already scored.
   - The figure: x axis the four settings (off, steps 0 to 10, 0 to 25, all 50 of 50), 424 images each (53 held-out pairs, seeds 9 to 16, the same starting latent per seed); BLIP-VQA mean per held-out group with a 95% interval from resampling pairs then seeds; Comp. on the animal pairs; CLIP score and ImageReward.
   - Reading, written before any window score exists: steps 0 to 25 and all 50 overlap on BLIP-VQA in every group, so the UHz6 Q3 reply says the first 25 steps give the same result; steps 0 to 10 below both in a group, so the reply says ten steps are too short for the learned correction there; any other outcome is reported as it lands and the reply changes to match.
   - Caption, reply wording and figure go to Molefe before the paper or a reply changes.
@@ -96,9 +96,9 @@ For Claude to execute. Ask Claude to do these.
 - [x] ✅ **3.2 Write `overleaf-steps.md`**
   - ▶ Next: 4.4
 - [ ] **3.3 Write `review.tex`: the claim groups in order, each quoting the reviewers' weaknesses and questions, then what the revision did, then the reply we plan to send, with the group's figure**
-  - Output: `artifacts/scenes/iclr-review-response/review.tex`, built with Tectonic on mscluster
+  - Output: `1-lora-correction/artifacts/scenes/iclr-review-response/review.tex`, built with Tectonic on mscluster
   - Check: every one of the 35 claims in the claim table is quoted once
-- [ ] **3.4 Combine the claim table and the figures into `artifacts/scenes/iclr-review-response/review.pdf and claim-figures.pdf`**
+- [ ] **3.4 Combine the claim table and the figures into `1-lora-correction/artifacts/scenes/iclr-review-response/review.pdf and claim-figures.pdf`**
 
 ## Instructions
 
@@ -128,7 +128,7 @@ The revised tex builds today (20 pages, main text ends on page 10, 0 undefined r
 |---|---|
 | claim table | `artifacts/drips/present-revision-to-supervisor/claims.md` |
 | raw crops | `artifacts/drips/present-revision-to-supervisor/crops/` |
-| figures, script, cards, supervisor PDF, contact sheet | `artifacts/scenes/iclr-review-response/` |
+| figures, script, cards, supervisor PDF, contact sheet | `1-lora-correction/artifacts/scenes/iclr-review-response/` |
 | upload bundle and zip | `artifacts/drips/present-revision-to-supervisor/overleaf-bundle/` |
 | Overleaf steps | `artifacts/drips/present-revision-to-supervisor/overleaf-steps.md` |
 

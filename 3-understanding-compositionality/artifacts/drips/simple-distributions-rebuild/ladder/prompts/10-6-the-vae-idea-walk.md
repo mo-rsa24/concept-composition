@@ -10,7 +10,7 @@ beta-VAE, beta-TCVAE or FactorVAE on the 2D toy shows what happens inside Stable
 read against Theorem 6.1 of arXiv 2502.04549, and what the smallest check is
 
 Background
-Layer 10 of the composition ladder (artifacts/drips/simple-distributions-rebuild/) showed in code
+Layer 10 of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) showed in code
 that construction (1) survives an invertible warp and the plain product does not. A VAE decoder is
 not invertible, so the open question is whether a small VAE on the 2D toy can say anything about
 Stable Diffusion's latent. Claim 11 of the idea map holds that question. walk10.py and the step 4

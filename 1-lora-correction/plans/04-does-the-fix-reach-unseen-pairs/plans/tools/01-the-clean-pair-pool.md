@@ -3,7 +3,7 @@
 Build the set of animal pairs every later step in this scope is measured on, and start only
 after the compose-scorer has been proven to work.
 
-**Step 3 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 3 of 22.** Waits on nothing. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -54,14 +54,14 @@ where an unattended run enforces the dependency on the compose-scorer.
 animal pairs plus a few controls, each training pair's fails-by-default rate over 8 seeds
 recorded, and none of it started until `scorer_validated.json` says the scorer passed.
 
-The pool on disk: `artifacts/results/does-the-fix-reach-unseen-pairs/{pair_pool.yaml, pair_prompts.yaml}`,
+The pool on disk: `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/{pair_pool.yaml, pair_prompts.yaml}`,
 19 pairs (15 blend-prone, cat×dog as the known-failure reference, 3 compose-by-default
 controls), 38 distinct animals, no word repeated.
 
 ## Environment Facts This Plan Depends On
 - `co3` python at its absolute path. The fail-rate scoring pass (8 seeds × 19 pairs) fit the
   in-session GPU; no biggpu/bigbatch request was needed for a set this size.
-- Output lives at `artifacts/results/does-the-fix-reach-unseen-pairs/{pair_pool.yaml,
+- Output lives at `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/{pair_pool.yaml,
   pair_prompts.yaml, fail_rate.{json,md}}`, moved there from the old `outputs/` location by an
   earlier retrofit pass.
 

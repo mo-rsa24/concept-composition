@@ -17,9 +17,9 @@ Cache ownership confirmed by scoped grep:
 - `training_cache` read by `cross_pair_lora_pooling/{train_pooled,sample_crossbar,
   eval_crossbar_wandb,contact_sheet,task_d_bridge,_inline_sampling}.py` and
   `cross_seed_lora_pooling/{train_pooled,step0_prescreen,trajectory_diagram,
-  _inline_sampling}.py`. Built by `scripts/build_training_cache.py`; group split
+  _inline_sampling}.py`. Built by `3-understanding-compositionality/scripts/build_training_cache.py`; group split
   `build_group_cache.py`; eval split `build_eval_cache.py`.
-- `manifold_cache` read by `scripts/manifold/*` only (not the three experiments).
+- `manifold_cache` read by `1-lora-correction/scripts/manifold/*` only (not the three experiments).
 
 ## Main table: path → type → group → owning experiment → size → last-mod
 `R:` = repo, `D:` = `/datasets/mmolefe`.
@@ -48,7 +48,7 @@ Cache ownership confirmed by scoped grep:
 | D `…/training_cache/train/` (8 pair dirs) | dataset + cache:training | cross_pair + cross_seed (shared) | part of 22G | 2026-05-11 |
 | D `…/training_cache/manifest_{A,B,H}.json` | cache:group | shared | small | 2026-05-06 |
 | D `…/training_cache/heldout/` | cache:eval | shared | part of 22G | 2026-05-27 |
-| R `outputs/manifold_cache/` | cache (eps/z banks) | scripts/manifold (not one of 3) | 838M | 2026-05-26 |
+| R `outputs/manifold_cache/` | cache (eps/z banks) | 1-lora-correction/scripts/manifold (not one of 3) | 838M | 2026-05-26 |
 
 `training_cache/train/` 8 pairs: a_bear×a_salmon, a_butterfly×a_flower_meadow,
 a_cat×a_lion, a_dog×a_duck, a_dog×a_horse, a_lion×a_dog, a_tiger×a_dog,
@@ -70,7 +70,7 @@ No exact byte-for-byte duplicate directories found across roots.
 - R `outputs/lora/{a_dog×oil, a_dolphin×ocean, a_mailbox×snowfield}` — 0-byte
   stubs, no run.
 - D `…/outputs/training_cache_overfit_catdog` — 0-byte empty dir.
-- R `outputs/manifold_cache/` (838M) — real cache owned by `scripts/manifold/`,
+- R `outputs/manifold_cache/` (838M) — real cache owned by `1-lora-correction/scripts/manifold/`,
   not the three.
 
 ## Out of scope (other work, not orphans)

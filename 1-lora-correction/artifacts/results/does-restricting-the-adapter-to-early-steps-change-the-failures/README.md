@@ -1,6 +1,6 @@
 # Does restricting the adapter to early steps change the failures?
 
-The renders behind slots R9 and R10, from wave 1's early-steps job (report/paper-review/prze-10-compute.md, job 2): the adapter of record, v58-03-self at step 30,000, switched on for the first 10 or the first 25 of 50 steps and off after, on the 53 held-out pairs at seeds 9 to 16, 848 pictures in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/`. The all-50-steps column is R3's renders in `paper_review/r3_ours/`.
+The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-correction/report/paper-review/prze-10-compute.md, job 2): the adapter of record, v58-03-self at step 30,000, switched on for the first 10 or the first 25 of 50 steps and off after, on the 53 held-out pairs at seeds 9 to 16, 848 pictures in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/`. The all-50-steps column is R3's renders in `paper_review/r3_ours/`.
 
 ## early-steps-seed10-sheet.png
 
@@ -24,7 +24,7 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (report/paper
 
 **What it shows.** The early-steps renders on R4's rows (rule 5: per held-out group, ours' highest- and lowest-BLIP-VQA cell). Columns are the LoRA off (plain PoE), v58-03-self at step 30,000 on steps 0 to 10, on steps 0 to 25 and on all 50 steps; the fifth, a LoRA trained on all steps, is grey because gated training job 12 has not run. By eye, steps 0 to 10 already carry most of the change from PoE to the all-steps picture, on the working rows and the failing rows alike. `seen`
 
-**How it was made.** Window tiles from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/` (wave 1's job 2), PoE from `review_step4/census/`, all-steps from `paper_review/r3_ours/`; resized to 512 px into `tiles-rule5/` and drawn at 5.5 in by `scripts/paper_tile_figure.py` from `early_steps_grid-spec.json`, 2026-11-11. The PNG is a 110 dpi preview of the PDF.
+**How it was made.** Window tiles from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/early_steps/` (wave 1's job 2), PoE from `review_step4/census/`, all-steps from `paper_review/r3_ours/`; resized to 512 px into `tiles-rule5/` and drawn at 5.5 in by `1-lora-correction/scripts/paper_tile_figure.py` from `early_steps_grid-spec.json`, 2026-11-11. The PNG is a 110 dpi preview of the PDF.
 
 ## failure_counts.pdf (slot R9), failure_calls.csv and failure_calls_key.csv
 
@@ -50,4 +50,4 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (report/paper
 
 **What it shows.** The same 424 images per setting (53 held-out pairs, seeds 9 to 16, one starting latent per seed) scored by the scorers of Tables 1 and 3, with the adapter off, on for steps 0 to 10, 0 to 25 and all 50. (a) BLIP-VQA per held-out group with 95% intervals from resampling pairs then seeds; (b) the share of the 160 animal-pair images per setting where GroundingDINO finds two or more animals; (c) CLIP score and (d) ImageReward over all 424. The off and all-50 cells equal Table 3's PoE and ours cells. `ran`
 
-**How it was made.** The 848 window renders listed in `rows_windows.csv` (`scripts/review_window_rows.py`) were scored on mscluster on 2026-11-12 by the unchanged scorers: BLIP-VQA job 85541 (mscluster82, 9 min 29 s), CLIP score and ImageReward job 85539 (mscluster130, 16 min 26 s), Comp job 85540 (mscluster131, 19 min 5 s; 320 animal rows). Drawn by `python3 scripts/review_window_figure.py --scores artifacts/drips/present-revision-to-supervisor/scores --out artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures`. The reading was written in `plans/present-revision-to-supervisor.md` task 2.3 before any window score existed.
+**How it was made.** The 848 window renders listed in `rows_windows.csv` (`1-lora-correction/scripts/review_window_rows.py`) were scored on mscluster on 2026-11-12 by the unchanged scorers: BLIP-VQA job 85541 (mscluster82, 9 min 29 s), CLIP score and ImageReward job 85539 (mscluster130, 16 min 26 s), Comp job 85540 (mscluster131, 19 min 5 s; 320 animal rows). Drawn by `python3 1-lora-correction/scripts/review_window_figure.py --scores artifacts/drips/present-revision-to-supervisor/scores --out 1-lora-correction/artifacts/results/does-restricting-the-adapter-to-early-steps-change-the-failures`. The reading was written in `1-lora-correction/plans/present-revision-to-supervisor.md` task 2.3 before any window score existed.

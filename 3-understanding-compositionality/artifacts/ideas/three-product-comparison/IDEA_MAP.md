@@ -1,6 +1,6 @@
 # 💡 The probe battery: cheap products whose outcomes the theory predicts in advance
 
-Routed from the held claim 2 of [the merge walk's map](../merge-supervisor-structure/IDEA_MAP.md). Its verdict returns there via `integrate`. The walk opened on the supervisors' three-product comparison alone; the idea reshaped in round 2 into a battery of probe products, with the three products as one family among several. Claims 1 to 5 are the original cut and are not renumbered; claims 6 to 9 are appended. All claims are settled; the walk is compile-ready.
+Routed from the held claim 2 of [the merge walk's map](../../../../artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md). Its verdict returns there via `integrate`. The walk opened on the supervisors' three-product comparison alone; the idea reshaped in round 2 into a battery of probe products, with the three products as one family among several. Claims 1 to 5 are the original cut and are not renumbered; claims 6 to 9 are appended. All claims are settled; the walk is compile-ready.
 
 ## Position in the idea
 

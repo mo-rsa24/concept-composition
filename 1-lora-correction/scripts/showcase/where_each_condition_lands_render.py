@@ -4,7 +4,7 @@ condition land" figure: "a cat" alone, "a dog" alone, and the joint prompt
 "a cat and a dog", one render per held-out seed, on the same pinned initial
 latents the rank-32 PoE renders used (training cache, heldout split).
 
-Sampler settings match scripts/showcase/lambda_boundary_probe.py exactly
+Sampler settings match 1-lora-correction/scripts/showcase/lambda_boundary_probe.py exactly
 (50 DDIM steps, guidance 7.5, 1024x1024, fp16 with the repo's upcast rule),
 so every point in the figure differs from every other only by its prompt
 and by whether the correction was injected.
@@ -23,7 +23,7 @@ from pathlib import Path
 
 import torch
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 from poe_repair.methods._sampling import run_cfg, write_decoded_image  # noqa: E402

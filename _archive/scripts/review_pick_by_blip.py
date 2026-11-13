@@ -16,7 +16,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 AE = REPO / "data/prompt-sets/attend-and-excite/a.e_prompts.json"
 HELD_OUT = REPO / "report/paper-review/held-out-set.md"
 FILES = ["blip_batch1a.csv", "blip_batch1b.csv", "blip_batch2.csv", "blip_batch3.csv", "blip_co3.csv"]

@@ -2,7 +2,7 @@
 
 **Unanswered.** This file judges
 [the plan that builds the labelled set](../plans/tools/04-the-three-state-labelled-set.md),
-the labelled set that puts a band on every [compose rate](../../../context/world/compose-rate.md)
+the labelled set that puts a band on every [compose rate](../../../../context/world/compose-rate.md)
 the paper prints. Its first question is
 the one that decides whether F2's shape is safe.
 
@@ -96,7 +96,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
       On the pairs chosen because they blend, no detector and no person can say which two animals
       are present. That has to be stated as a limit of the measuring tool, and not left for a
       reader to infer from the coverage number.
-- [ ] ⚠️ Does `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` now give the band as 75% to 94%?
+- [ ] ⚠️ Does `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` now give the band as 75% to 94%?
       It currently says 87% to 94%, which counts the 17 uncallable images as successes. The
       corrected line must also say the band cannot be narrowed from those images.
 
@@ -122,7 +122,7 @@ Navigation: ⬅️ [Asked after the result](#asked-after-the-result) | 📋 [TOC
       memory. A rule written after seeing labels can be tuned until the rate comes out
       flattering, and no later check can detect that.
       *Did the labelling pass agree with the existing hand sort on at least 90% of the 32
-      hand-sorted images?* Scored against `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/calls.json`, which the pass never sees.
+      hand-sorted images?* Scored against `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/calls.json`, which the pass never sees.
       Reported as a fraction rather than a pass flag. Below 90% the automated pass is discarded
       and the user labels the main set by hand. That threshold lives in the labelling script.
 - [ ] ⚠️ **Did the run respect the environment?** The labelled images must come from the λ grid
@@ -138,7 +138,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 | any printed compose rate, including the 94% | the band around it, and both false-compose rates with their denominators. The denominator is the scorer's own successes, not all images |
 | F2's shape | whether the slope is partly the detector becoming easier to please as the correction splits one blob into two. That is what the question above decides |
 | the coverage number | that on pairs chosen because they blend, no detector and no person can say which two animals are present. This is a limit of the measuring tool rather than a gap in the data |
-| `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | the band as 75% to 94%, replacing the current 87% to 94%, which counts the 17 uncallable images as successes. The corrected line must also say the band cannot be narrowed from those images |
+| `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | the band as 75% to 94%, replacing the current 87% to 94%, which counts the 17 uncallable images as successes. The corrected line must also say the band cannot be narrowed from those images |
 
 ## Still open
 
@@ -147,7 +147,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
 | everything in this file | the labelling pass over the λ grid | [the promote-or-close decision](02-promote-or-close.md), which needs the two false-compose rates, and [the benchmark scoring](03-what-the-current-benchmarks-score.md), which needs the judgeable denominator |
-| the band printed in `artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | correcting it to 75% to 94% | any reader who takes 87% as the lower end, which counts 17 uncallable images as successes |
+| the band printed in `1-lora-correction/artifacts/results/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | correcting it to 75% to 94% | any reader who takes 87% as the lower end, which counts 17 uncallable images as successes |
 
 ## Next step
 

@@ -62,13 +62,13 @@ going); the scorer and counted figures (instance-count scorer, already validated
 scenes); and the figure wall with its sidecars.
 
 ## Purpose and goals
-Purpose: a standalone scope under the [root master plan](../../MASTER_PLAN.md); feeds
+Purpose: a standalone scope under the [root master plan](../../../MASTER_PLAN.md); feeds
 writing-the-paper's results section and figure register.
 Goals: the numbered list under Goals below.
 
 ## Where this scope sits in the order
 This scope's steps interleave with the other scopes', so ordering lives in the one running
-order at the [repo root MASTER_PLAN.md](../../MASTER_PLAN.md); steps get numbers when
+order at the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md); steps get numbers when
 `sync-plan-tree` next recomputes it. **Next in this scope:** reading where the training curve
 stops rising (no GPU), then the dog×dog test and the tracking-set extension.
 
@@ -100,7 +100,7 @@ every figure obeying the ledger's one standard.
 9. 70k-100k per-epoch samples scored; the panel showing what the cached correction can reach at
    best, built and read as B's key.
 
-> AUC here is the area under the curve of [compose rate](../../context/world/compose-rate.md)
+> AUC here is the area under the curve of [compose rate](../../../context/world/compose-rate.md)
 > against λ, on a 0-to-1 scale: 1.0 would mean
 > every generation composed at every λ, 0.0 that none did.
 

@@ -60,7 +60,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [ ] ⚠️ **At eta 0.5 or 1, does the corrected run keep its compose count within one seed of eta 0, come out sharper on most seeds, and stay as near the joint-prompt render, on cat × dog?**
-      The bar, in source as the constants of `scripts/showcase/stochastic_sampler_sweep.py` and applied by `verdict_for_eta`, each eta above 0 judged against the corrected run at eta 0 on the same seeds:
+      The bar, in source as the constants of `1-lora-correction/scripts/showcase/stochastic_sampler_sweep.py` and applied by `verdict_for_eta`, each eta above 0 judged against the corrected run at eta 0 on the same seeds:
       **support** if compose count ≥ eta 0's − `SUPPORT_MAX_COMPOSE_LOSS` (1) and seeds sharper ≥ `SUPPORT_MIN_SEEDS_SHARPER` (6 of 8) and mean drift ≤ eta 0's + `SUPPORT_MAX_DRIFT_RISE` (0.02);
       **null** if compose count ≤ eta 0's − `NULL_MIN_COMPOSE_LOSS` (2) (the animals go with the noise) or seeds sharper ≤ `NULL_MAX_SEEDS_SHARPER` (3 of 8) (no sharper);
       **inconclusive** otherwise (the animals stay and some seeds sharpen, but fewer than six, or the drift rises).
@@ -111,4 +111,4 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-When the job leaves the queue: read `logs/stoch_sweep-50338.out` for the `plan verdict:` line, open the across-eta sheet before the table, fill the questions above, then `/sync-plan-tree plans/01-showcase-the-trained-lora/`.
+When the job leaves the queue: read `logs/stoch_sweep-50338.out` for the `plan verdict:` line, open the across-eta sheet before the table, fill the questions above, then `/sync-plan-tree 1-lora-correction/plans/01-showcase-the-trained-lora/`.

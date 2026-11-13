@@ -11,7 +11,7 @@ teach them; `one_step_grads` carries a "Run it for real" `/plumb` prompt.
 (`Obsidian/Mathematics/references/scenes/Scenes.md`, "Kinds of composition notebook").
 
 **built from** the notebook
-`artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb` (its cells,
+`3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/what-an-expert-learns-and-kinds-of-composition.ipynb` (its cells,
 its stored figures from its last run, its markdown); `notebook-maths.json`, the name and stepped maths
 for all 52 numeric lines, each checked against the code it describes; `top.mmd` and `sec1.mmd` to
 `sec6.mmd`, drafted by `read_config.py --draft-mmd` and rendered to the matching `.svg` with
@@ -20,7 +20,7 @@ mermaid-cli 11.4.2; the spec `what-an-expert-learns-cell-by-cell.json`.
 **how to rebuild**
 
 ```bash
-cd artifacts/scenes/what-an-expert-learns-cell-by-cell
+cd 3-understanding-compositionality/artifacts/scenes/what-an-expert-learns-cell-by-cell
 python3 -I ~/.claude/skills/hld-diagram/scripts/build_scene.py \
   --spec what-an-expert-learns-cell-by-cell.json \
   --out "$PWD/what-an-expert-learns-cell-by-cell-scene.html" --no-link-check

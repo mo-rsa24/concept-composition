@@ -38,7 +38,7 @@ any one of them alone returns a picture that matches its siblings.
 
 📋 [TOC](#table-of-contents) | [Next](#art-direction) ➡️
 
-1. [Closing the Compositional Gap](../diagram-prompts.md): subject "The whole system on one page",
+1. [Closing the Compositional Gap](../../../plans/diagram-prompts.md): subject "The whole system on one page",
    process "One route from measuring tools to submission"
 2. [Improve the Rank-32 Pooled Adapter](diagram-prompts.md): subject "From cached cells to one
    comparison sheet", process "One route from an unclean picture to a filed answer"

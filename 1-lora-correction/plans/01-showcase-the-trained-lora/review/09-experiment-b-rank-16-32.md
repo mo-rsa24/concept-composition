@@ -66,7 +66,7 @@ Navigation: ⬅️ [The bar](#the-question-written-before-the-run) | 📋 [TOC](
 - [ ] ⚠️ One question per rank, as an ablation owes: does r16 differ from r8 anywhere in the
   tracking set's reads? Does r32 differ from r16?
 - [ ] ⚠️ Does the crispness read move with rank even where
-  [compose rate](../../../context/world/compose-rate.md) does not?
+  [compose rate](../../../../context/world/compose-rate.md) does not?
 
 ## Could the answer be an artefact
 

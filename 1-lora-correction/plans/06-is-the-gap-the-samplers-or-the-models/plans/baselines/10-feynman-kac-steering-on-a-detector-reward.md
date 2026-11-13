@@ -20,7 +20,7 @@ is enough to compose, the gap is the sampler's to close.
 
 **Step 55 of 65.** Waits on nothing: the pinned initial noise it reads exists in the training cache,
 and the detector is validated. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
@@ -91,7 +91,7 @@ often than the same particles left alone?
 **The system.** `poe_repair/experiments/fk_steering/`: the sampler with its constants
 (`steer.py`), the runner that renders the references, the controls and the steered runs, scores
 everything, draws the sheets and writes the sidecar (`run.py`). Launched by
-`scripts/fk_steering/run_fk_steering.sh`.
+`1-lora-correction/scripts/fk_steering/run_fk_steering.sh`.
 
 **What it does.** Singhal et al., "A General Framework for Inference-time Scaling and Steering of
 Diffusion Models" ([arXiv 2501.06848](https://arxiv.org/abs/2501.06848)), run a system of K
@@ -111,7 +111,7 @@ and an FK column at the same K.
 
 **Associated materials.** [The review questions](../../review/10-feynman-kac-steering-on-a-detector-reward.md),
 [plan 09](09-twisted-smc-on-a-learned-joint-vs-poe-twist.md) for the shared particle sampler, and
-[the register row](../../../standing/literature/reading-register.md) for the paper.
+[the register row](../../../../../plans/standing/literature/reading-register.md) for the paper.
 
 ## Considerations
 
@@ -240,7 +240,7 @@ inference-time steering method at its published settings.
    the compose rates and the agreement per read step; `verdict.json`; W&B run in project
    `prime_lab/poe-repair-animals-compose`, group `fk-steering`, with the sheets as images and
    the sidecar as an artifact.
-3. **The launcher.** `scripts/fk_steering/run_fk_steering.sh {smoke|full}` with the disk guard on
+3. **The launcher.** `1-lora-correction/scripts/fk_steering/run_fk_steering.sh {smoke|full}` with the disk guard on
    the output root, the python-by-node switch, the GPU fault guard (`poe-launch-002`) and a
    `torch.cuda.is_available()` check on the pinned device before any model loads.
 
@@ -268,12 +268,12 @@ sampler-side answer plan 09 could not give is given.
 
 - Python by node: `/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python` on mscluster110 to
   112 (Blackwell), `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python` elsewhere, per
-  [environment/hpc/nodes.md](../../../../environment/hpc/nodes.md). Never a bare `python`.
+  [environment/hpc/nodes.md](../../../../../environment/hpc/nodes.md). Never a bare `python`.
 - `torch.cuda.is_available()` checked on the pinned device before real work; mscluster111's card
   lists in `nvidia-smi` and runs on the CPU, per
-  [poe-launch-002](../../../../environment/known-failures.md).
+  [poe-launch-002](../../../../../environment/known-failures.md).
 - Outputs under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/`, disk
-  guard on that path, per [environment/storage.md](../../../../environment/storage.md). Nothing
+  guard on that path, per [environment/storage.md](../../../../../environment/storage.md). Nothing
   under `/home-mscluster`.
 - The training cache at `/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/`
   with `embeddings.pt` per cell: cat × dog seeds 9 to 16, butterfly × meadow seeds 9 to 12
@@ -281,7 +281,7 @@ sampler-side answer plan 09 could not give is given.
 - biggpu allows one Slurm job per user; long runs start with `nohup` on a free device and
   `squeue` is blind to them; check `pgrep -af 'sweep|train|corrector|fk_steering'` before
   claiming a device, per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - The tracker is W&B, project `prime_lab/poe-repair-animals-compose`; the review file carries the
   run id and verdict, never curves.
 - fp16 SDXL; the VAE decodes in fp32 (diffusers' `force_upcast`).
@@ -311,7 +311,7 @@ sampler-side answer plan 09 could not give is given.
       proposal, K 4 in the paper, ImageReward alone as the SDXL reward.
   - Paste: `/unpack-paper https://arxiv.org/abs/2501.06848`
   - Done when: the register row for 2501.06848 exists in
-    [the reading register](../../../standing/literature/reading-register.md) and names it apart
+    [the reading register](../../../../../plans/standing/literature/reading-register.md) and names it apart
     from 2503.02819.
 - [x] **1.2** Write the falsification criterion with its numbers into the review file and the
       constants into `steer.py` before anything runs.
@@ -326,12 +326,12 @@ sampler-side answer plan 09 could not give is given.
 ◀ **Needs: [task 1.2](#1--read-the-paper-and-pin-the-bars)**, the bars in source.
 
 - [x] **2.1** Write `poe_repair/experiments/fk_steering/` (sampler, runner) and the launcher
-      `scripts/fk_steering/run_fk_steering.sh`.
+      `1-lora-correction/scripts/fk_steering/run_fk_steering.sh`.
   - **Done when:** the package imports, `trace_ancestor` returns the right index on a hand-made
     ancestry, and the runner's `--help` lists every setting above.
 - [x] **2.2** Run the smoke mode on a free device: cat × dog seed 9 only, K 2, 10 steps, 512²,
       resampling at step indices 0, 2, 4, 6, 8, detector on.
-  - Command: `bash scripts/fk_steering/run_fk_steering.sh smoke`
+  - Command: `bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh smoke`
   - **Done when:** the run dir holds the two references, a control and a steered run with their
     x0-hat reads, a one-row sheet, `summary.json` and `verdict.json`, and the log shows the
     device name and `cuda` from torch. The images are noise at 10 steps and 512²; this proves the
@@ -347,14 +347,14 @@ sampler-side answer plan 09 could not give is given.
 
 - [x] **3.1** Launch the full mode with `nohup` on a free device: both pairs, seeds 9 to 16, K 4
       and 16, 50 steps, 1024², W&B online.
-  - Command: `nohup bash scripts/fk_steering/run_fk_steering.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/logs/full.log 2>&1 &`
+  - Command: `nohup bash 1-lora-correction/scripts/fk_steering/run_fk_steering.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering/logs/full.log 2>&1 &`
   - 💡 `/run-experiment` ✅ for the launch and the harvest.
   - **Done when:** the W&B run id, the run dir, the node, the device and the PID are in the review
     file's Runs table.
   - Launched 2026-09-05 16:59 on mscluster109 device 1, PID 1856701, W&B `czim1n0w`, run dir
     `fk_K4-16_s50_20260905-165958`; finished 20:04, null.
 - [x] **3.2** Harvest: copy the two sheets and the sidecar into
-      `artifacts/results/is-the-gap-the-samplers-or-the-models/` with README entries, quote
+      `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` with README entries, quote
       `verdict.json` in the review file, and answer every pre-registered question there.
   - **Done when:** the review file's verdict is written and the finding in `report/` is updated.
   - Filed 2026-09-06 as `fk-steering-cat-dog-sheet.png`, `fk-steering-butterfly-meadow-sheet.png`,
@@ -387,7 +387,7 @@ them.
 
 ◀ **Needs: [task 3.2](#3--the-full-run)**, the sheets filed.
 
-- [ ] **4.1** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-cat-dog-sheet.png`.
+- [ ] **4.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/fk-steering-cat-dog-sheet.png`.
       Row by row, write down whether the FK K 16 tile shows two bodies where the control tile
       shows one, and whether the best-of-16 tile already does. A composing FK tile that the
       best-of-16 tile matches means picking did the work, not resampling.
@@ -452,7 +452,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Item | Lane | Description | Generated by | Status | Details |
 |---|---|---|---|---|---|
-| `<run>/fk_steering_<pair>_sheet.png` | — | rows seeds 9 to 16; columns Mono (`eta` 0), plain PoE (`eta` 0), control particle 0 at K 16 (`eta` 1), best of 16 unweighted, FK K 4, FK K 16; the detector's count drawn on every tile; the varied setting (`eta`) named in the column label | task 3.1 | ✅ filed under `artifacts/results/is-the-gap-the-samplers-or-the-models/` | one per pair, logged to W&B as `sheets/<pair>` |
+| `<run>/fk_steering_<pair>_sheet.png` | — | rows seeds 9 to 16; columns Mono (`eta` 0), plain PoE (`eta` 0), control particle 0 at K 16 (`eta` 1), best of 16 unweighted, FK K 4, FK K 16; the detector's count drawn on every tile; the varied setting (`eta`) named in the column label | task 3.1 | ✅ filed under `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` | one per pair, logged to W&B as `sheets/<pair>` |
 | `<run>/fk_steering_<pair>_sheet.json` | — | per tile: source path, detector count, compose verdict; per column: compose rate over 8 seeds | task 3.1 | ⏳ | sidecar, bundled in the W&B artifact |
 | `<run>/summary.json`, `<run>/verdict.json` | — | the four compose rates, the all-particle fractions, best of K, agreement per read step, the verdict string with its bars | task 3.1 | ⏳ | quoted in the review file |
 | `<run>/<pair>/seed_N/fk_K16/xhat/step_SS/p{k}.png` | — | every x0-hat the reward read, for the eye to check what the detector saw at each resample | task 3.1 | ⏳ | **Supplementary** |
@@ -461,7 +461,7 @@ None. This scope carries no `diagram-prompts.md`.
 
 1. Everything under the run dir on `/datasets`.
 2. The two sheets and `summary.json` promoted to
-   `artifacts/results/is-the-gap-the-samplers-or-the-models/` as `fk-steering-cat-dog-sheet.png`,
+   `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/` as `fk-steering-cat-dog-sheet.png`,
    `fk-steering-butterfly-meadow-sheet.png` and `fk-steering-summary.json`, with README entries.
 
 ## Orchestration: keeping catalogs and plan files in sync
@@ -487,11 +487,11 @@ None. This scope carries no `diagram-prompts.md`.
 
 | Path | Why it is read |
 |---|---|
-| [poe_repair/experiments/fk_steering/steer.py](../../../../poe_repair/experiments/fk_steering/steer.py) | the sampler, the potential, the constants, the verdict |
-| [poe_repair/experiments/fk_steering/run.py](../../../../poe_repair/experiments/fk_steering/run.py) | the runner, the sheets, the sidecar, W&B |
-| [poe_repair/experiments/twisted_smc/sampler.py](../../../../poe_repair/experiments/twisted_smc/sampler.py) | the DDIM step with `eta` and the systematic resampler this plan reuses |
-| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count, used as the reward and the judge |
-| [poe_repair/_sdxl/metrics.py](../../../../poe_repair/_sdxl/metrics.py) | guided and PoE eps, the Tweedie estimate |
+| [poe_repair/experiments/fk_steering/steer.py](../../../../../poe_repair/experiments/fk_steering/steer.py) | the sampler, the potential, the constants, the verdict |
+| [poe_repair/experiments/fk_steering/run.py](../../../../../poe_repair/experiments/fk_steering/run.py) | the runner, the sheets, the sidecar, W&B |
+| [poe_repair/experiments/twisted_smc/sampler.py](../../../../../poe_repair/experiments/twisted_smc/sampler.py) | the DDIM step with `eta` and the systematic resampler this plan reuses |
+| [poe_repair/experiments/compose_scorer_validation/detection_scorer.py](../../../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | the validated instance count, used as the reward and the judge |
+| [poe_repair/_sdxl/metrics.py](../../../../../poe_repair/_sdxl/metrics.py) | guided and PoE eps, the Tweedie estimate |
 
 ## Next step
 

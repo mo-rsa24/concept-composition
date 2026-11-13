@@ -206,7 +206,7 @@ The seed and the detector counts come from `dose_curves.json`, the file the remo
 
 **Figure 2, diagnosed, nothing accepted**
 
-`scripts/same_rule_four_models.py` draws at `figsize=(12, 4.9)` and the manuscript shows it at
+`1-lora-correction/scripts/same_rule_four_models.py` draws at `figsize=(12, 4.9)` and the manuscript shows it at
 5.50 in, a scale of 0.458, so its 8, 9.5 and 11 pt labels reach the page at 3.7, 4.4 and 5.0 pt.
 Its source renders are pulled to `outputs/same_rule_four_models`, 31 MB. Re-drawing at
 `figsize=(5.5, 2.2)` fixes the type and leaves the tiles at about 0.61 in, since eight image

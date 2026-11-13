@@ -28,12 +28,12 @@ from pathlib import Path
 
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 from poe_repair.runtime import load_ddim_scheduler  # noqa: E402
 from poe_repair.training_cache import DEFAULT_CACHE_ROOT  # noqa: E402
 
-REPO = Path(__file__).resolve().parent.parent.parent
-FAIL_MD = REPO / "artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md"
+REPO = Path(__file__).resolve().parent.parent.parent.parent
+FAIL_MD = REPO / "1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/fail_rate.md"
 EARLY = range(0, 10)
 
 

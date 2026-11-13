@@ -1,6 +1,6 @@
 # What the measuring scripts do on real data: the does-the-correction-cause-composition scope
 
-Recorded outputs from plan `plans/03-does-the-correction-cause-composition/plans/instrument-01-build-the-measuring-scripts.md`.
+Recorded outputs from plan `1-lora-correction/plans/03-does-the-correction-cause-composition/plans/instrument-01-build-the-measuring-scripts.md`.
 Every number below was produced by running the command shown, on
 `a_cat__x__a_dog` seed 9 unless stated. Node mscluster85, RTX 3090, co3 env.
 
@@ -9,7 +9,7 @@ Date: 2026-08-05.
 ## The cache check: PASS
 
 ```
-$ python scripts/cache_smoke.py --all
+$ python 1-lora-correction/scripts/cache_smoke.py --all
 70/70 ok   (790 cells, 38324 step files)
 pair directories: 58 heldout + 18 train = 76, but 70 distinct slugs
 cached under both splits (6): a_butterfly__x__a_flower_meadow, a_cat__x__a_lion,
@@ -154,7 +154,7 @@ on real data. The sections below record what each one did.)_
 ## snr_collapse.py: RUNS (12 pairs, 27 curves)
 
 ```
-$ python scripts/snr_collapse.py --all --max-pairs 12 --max-seeds 2
+$ python 1-lora-correction/scripts/snr_collapse.py --all --max-pairs 12 --max-seeds 2
 collapse spread: 44.6%   (12 pairs, 27 curves)
   log-SNR range -5.15 to 6.37 in 20 bins
   peak of the median curve at log-SNR -0.30
@@ -179,7 +179,7 @@ left tail.
 ## spectrum.py: RUNS (18 train pairs, 901 vectors)
 
 ```
-$ python scripts/spectrum.py --all --max-pairs 18 --max-seeds 3 --stride 3
+$ python 1-lora-correction/scripts/spectrum.py --all --max-pairs 18 --max-seeds 3 --stride 3
 train: 901 vectors x 65536 dims from 18 pairs
 
    k       r_t   gaussian   ratio
@@ -221,7 +221,7 @@ the "held-out" projection is partly measuring training pairs).
 ## fork_curve.py: RUNS (one run, generated for this check)
 
 ```
-$ python scripts/fork_curve.py --root outputs/interaction_term/dose/pairs
+$ python 1-lora-correction/scripts/fork_curve.py --root outputs/interaction_term/dose/pairs
 a_cat__x__a_dog seed 9: elbow at step 4 of 21   d(0)=0.00  d(elbow)=19.79  d(end)=135.77
 elbow at step 4 (median over 1 cells)
 ```
@@ -250,7 +250,7 @@ but it confirms the measuring scripts are wired to the real phenomenon.
 ## climb.py: RUNS (10 pairs, 23 runs)
 
 ```
-$ python scripts/climb.py --all --max-pairs 10 --max-seeds 2
+$ python 1-lora-correction/scripts/climb.py --all --max-pairs 10 --max-seeds 2
 correction size as a fraction of ||eps_PoE||:
   median 11.5%   IQR 7.2% to 19.9%
 
@@ -270,7 +270,7 @@ flattens off, and direction agreement high throughout and rising near the end.
 ## plot_dose_curves.py: RUNS (one run, 2 correction amounts)
 
 ```
-$ python scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
+$ python 1-lora-correction/scripts/plot_dose_curves.py --root outputs/interaction_term/dose/pairs
 scorer: instance_count via IDEA-Research/grounding-dino-tiny
   rule: COMPOSE iff distinct-instance-count('animal', NMS iou<0.5, conf>=0.30) >= 2
 
@@ -289,7 +289,7 @@ scorer nobody has validated.
 ## plot_window_curves.py: RUNS (one run, 4 windows, 20 steps)
 
 ```
-$ python scripts/plot_window_curves.py --root outputs/interaction_term/window/pairs
+$ python 1-lora-correction/scripts/plot_window_curves.py --root outputs/interaction_term/window/pairs
   window   0-5   (centre   2.5): 100%  (n=1)
   window   5-10  (centre   7.5):   0%  (n=1)
   window  10-15  (centre  12.5):   0%  (n=1)
@@ -310,7 +310,7 @@ settled early, a late correction cannot undo it.
 ## quality_control.py: RUNS (one run)
 
 ```
-$ python scripts/quality_control.py --root outputs/interaction_term/dose/pairs
+$ python 1-lora-correction/scripts/quality_control.py --root outputs/interaction_term/dose/pairs
   a_cat__x__a_dog seed 9: instances 1->2   confidence 0.915->0.769 (-0.146)
   reading: quality cost
 ```
@@ -324,7 +324,7 @@ confidently than a single dominant one. Plan 06 should compare like with like
 ## language_probes.py: RUNS (20 pairs, L1 and L3)
 
 ```
-$ python scripts/language_probes.py --probe l1 --probe l3 --max-pairs 20
+$ python 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3 --max-pairs 20
 L1 additivity gap over 20 pairs: median 1.3197, range 0.9406 to 1.5056
 L3 shared binding direction over 20 pairs:
   first direction holds 27.1% of residual energy (random floor 6.5%, ratio 4.2x)
@@ -337,7 +337,7 @@ for the same reason the spectrum is: a small sample concentrates by chance.
 ## manifold_slide.py: RUNS (one run, 5 correction amounts)
 
 ```
-$ python scripts/manifold_slide.py --root outputs/interaction_term/dose/pairs
+$ python 1-lora-correction/scripts/manifold_slide.py --root outputs/interaction_term/dose/pairs
   lam 0.00: projection +0.000   off-axis  0.0%
   lam 0.25: projection +0.220   off-axis 86.8%
   lam 0.50: projection +0.333   off-axis 78.9%
@@ -360,7 +360,7 @@ interpolation.
 Exits with an explanation rather than a plot:
 
 ```
-no normalization memo at report/normalization_preregistration.md.
+no normalization memo at 1-lora-correction/report/normalization-preregistration.md.
 Correction size is not comparable across prompt types without a committed
 measure, and choosing one after seeing the plot is how the 95% delta-field
 number had to be retracted. Write the memo first: plan 01.
@@ -387,7 +387,7 @@ $ python -m pytest tests/test_interaction_term_canaries.py -q
 ........                                          [100%]
 8 passed in 65.02s
 
-$ python scripts/cache_smoke.py --all
+$ python 1-lora-correction/scripts/cache_smoke.py --all
 70/70 ok   (790 cells, 38324 step files)
 ```
 
@@ -485,7 +485,7 @@ overwritten.
 
 # The subspace test does not predict transfer (2026-08-05)
 
-Full write-up: `artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
+Full write-up: `1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`.
 
 The corrected 6.0% held-out projection above was about to be read as evidence
 against the shared-correction claim. It is not, and the check that shows why is

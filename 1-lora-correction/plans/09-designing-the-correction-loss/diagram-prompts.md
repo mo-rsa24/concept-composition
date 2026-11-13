@@ -36,7 +36,7 @@ alone returns a picture that matches its siblings.
 
 📋 [TOC](#table-of-contents) | [Next](#art-direction) ➡️
 
-1. [Closing the Compositional Gap](../diagram-prompts.md): subject "The whole system on one page"
+1. [Closing the Compositional Gap](../../../plans/diagram-prompts.md): subject "The whole system on one page"
 2. [Designing the Correction Loss](diagram-prompts.md): subject "From a frozen cache to one page
    per objective", process "One route from an unmeasured objective to one that is named"
 

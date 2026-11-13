@@ -1409,7 +1409,7 @@ it without that prompt). The trajectory-separation move was cut, reasons recorde
   four seeds draws the same boundary.", the systematic answer to 4.7's one-pair grids, and its
   window sentence reads "We restrict the correction to a ten-step window". The stacked figure
   is built as one render:
-  `scripts/window_samples_over_map.py` writes
+  `1-lora-correction/scripts/window_samples_over_map.py` writes
   `figures/when-the-correction-arrives/samples-over-the-window-map.{png,pdf,json}`, the
   cat-and-dog strip (seeds 9 to 12, green frame where the scored verdict is composed) over
   the eight-pair map (rows ordered strongest-first at the earliest window, daggers on the two
@@ -1452,8 +1452,8 @@ it without that prompt). The trajectory-separation move was cut, reasons recorde
       never does. The paragraph closes by scoping, one pair at one seed, illustration rather
       than measurement, which is the sentence 4.4's new opener answers. Green frames in both
       grids mark decodes taken while the correction was active, not detector verdicts, per the
-      `contains()` rule in `scripts/longer_correction_grid.py` and
-      `scripts/later_start_grid.py`; both grids are cat x dog at seed 12, confirmed against
+      `contains()` rule in `1-lora-correction/scripts/longer_correction_grid.py` and
+      `1-lora-correction/scripts/later_start_grid.py`; both grids are cat x dog at seed 12, confirmed against
       the window map's seed 12 row. Figures `fig:window-extends` and `fig:window-starts-later`,
       register rows F4g and F4h, `fig:window-map` last in the section.
 
@@ -1500,7 +1500,7 @@ by-construction endpoint, every annotation inside the axes box so nothing clips.
 **The controls question, superseded above, kept for the reasoning.** The two fake-correction rows are weaker evidence than their
 AUC gap suggests, for a measured reason: r_t vectors are near-orthogonal across pairs and even
 across seeds of one pair (cosine about 0.00,
-`artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`),
+`1-lora-correction/artifacts/results/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md`),
 so the wrong-pair control is geometrically equivalent to the random one, and both invite "what
 did you expect". The one thing the random row rules out, that any size-matched kick frees the
 sampler from the fused mode (a live possibility given stochastic-sampling churn), is worth one
@@ -1724,7 +1724,7 @@ judged on whether they leave a hole.
 
       **The train and inference states are not the same states, and the paragraph must not imply
       they are.** The cache advances by plain product-of-experts, at
-      [build_training_cache.py:174-177](../../scripts/build_training_cache.py#L174-L177), so every
+      [build_training_cache.py:174-177](../../3-understanding-compositionality/scripts/build_training_cache.py#L174-L177), so every
       recorded state lies on the uncorrected trajectory. A corrected sampler leaves that
       trajectory at its first corrected step. Section 3's ¶3.5.2 says the oracle correction is
       measured along the trajectory it is applied to, and that sentence does not carry to the
@@ -1813,7 +1813,7 @@ judged on whether they leave a hole.
 
       **F9 is built and placed**:
       `figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs.pdf` by
-      `scripts/joint_poe_adapter_grid.py`, cropped to the four held-out rows by the user's
+      `1-lora-correction/scripts/joint_poe_adapter_grid.py`, cropped to the four held-out rows by the user's
       call, sidecar carries step 100000, lambda 1, the seeds and the sampler block. One open
       eyeball item: frog × toad's adapter cell is marginal, seeds 10 to 16 on disk to swap
       in.
@@ -1836,14 +1836,14 @@ carries the model (SDXL base 1.0, frozen), the adapter (rank 8, alpha 8, dropout
 0, gradient clip 1.0, batch size 1), the sampler (DDIM, 50 inference steps, guidance scale 7.5,
 1024x1024, fp16), and the data axes (11 training pairs, 8 seeds each, 50 steps per cell, 88 cells,
 4,400 recorded steps, 8 pairs held out). All values from
-`artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/{config,lora_attach,dataset_meta,pair_pool}.json`.
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/{config,lora_attach,dataset_meta,pair_pool}.json`.
 
 **The controls ¶5.5 may name, and the one it may not claim.** The uncorrected composition is the
 floor and appears in F8a as a dotted line. The correction computed from the joint prompt is the
 ceiling and appears in F8b at lambda 0.75 and at lambda 1, the latter true by construction. The
 control that answers the real objection, that any pool of the same size would have worked, is the
 size-matched mixed pool in
-[baseline-01](../../plans/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md).
+[baseline-01](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md).
 **It is designed and has not run.** ¶5.5 may state it as the design's intended control and ¶5.6
 may not report a result for it. The reserved leave-one-pair-out sweep behind F8 has not run
 either.
@@ -1918,7 +1918,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       same; the correction acts on what words write, which locates it without explaining the
       repair. No number appears in the prose, by decision, so F7 carries the ratio and ¶6.1 cannot
       compile before F7 has a slot. Source:
-      [hypothesis-07 review](../../plans/03-does-the-correction-cause-composition/review/07-what-the-fix-changes-inside-the-model.md).
+      [hypothesis-07 review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/07-what-the-fix-changes-inside-the-model.md).
       Owed to F7's caption: the pattern-versus-scale point (the update dims the content map by
       about a quarter, so the comparison strips uniform scale), and the narrower sentence the
       review requires.
@@ -1930,18 +1930,18 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       pairs outside the pool are corrected too, so what is held is the rule and not a stored
       correction; it matters most where joint data does not exist. Carries no outperforms claim,
       blocked as below. Sources:
-      the [transfer review](../../plans/04-does-the-fix-reach-unseen-pairs/review/03-does-one-pooled-fix-transfer-at-all.md)
-      and [is the held-out gap a fit, a drift, or a pair problem](../../report/does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md).
+      the [transfer review](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/03-does-one-pooled-fix-transfer-at-all.md)
+      and [is the held-out gap a fit, a drift, or a pair problem](../../1-lora-correction/report/does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md).
 
 - [ ] **6.3** PARKED 2026-09-10 as a loose block, may merge into 6.2 or 6.4. what the results do not license. Section 4's correction is computed from the joint
       prompt, so that demonstration is not joint-prompt-free; interior lambda amounts are
       off-policy while the endpoints are exact; the transfer number carries its checkpoint (step
       60000 is the best read, training ran to 100000); and no pair that composes reliably without
       correction has been verified over seeds, so do-no-harm is unproven. Sources:
-      [writing-06](../../plans/07-writing-the-paper/plans/writing/06-mechanism-and-limitations.md),
-      the [transfer review](../../plans/04-does-the-fix-reach-unseen-pairs/review/03-does-one-pooled-fix-transfer-at-all.md),
-      the [pair-pool review](../../plans/04-does-the-fix-reach-unseen-pairs/review/01-the-clean-pair-pool.md)
-      and the [strength review](../../plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
+      [writing-06](../../1-lora-correction/plans/07-writing-the-paper/plans/writing/06-mechanism-and-limitations.md),
+      the [transfer review](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/03-does-one-pooled-fix-transfer-at-all.md),
+      the [pair-pool review](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/01-the-clean-pair-pool.md)
+      and the [strength review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
 - [x] **6.4** training is unstable and the errors compound. **Placed 2026-09-10, awaiting
       compile.** Eight sentences in three moves: the decay past the best checkpoint with the
       weights growing and the loss flat, showing only on held-out pairs so nothing in the training
@@ -1950,7 +1950,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       forward; and the inheritance, a correction over two frozen experts that fixes neither their
       own failures nor the product's. A split into instability and fragility was offered and
       declined. Sources:
-      [does training longer keep improving the held-out fix](../../report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md),
+      [does training longer keep improving the held-out fix](../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md),
       and the loose line 5.2 s3, now absorbed here and deletable from Loose lines once ¶6.4
       compiles.
 
@@ -1960,9 +1960,9 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       correction's direction across a run; it differs step to step and across starting noise, so
       there is no path and no per-step rule; what we know came from sweeping; enough for a
       correction that works, not for one that can be steered. Sources:
-      [what is the correction made of](../../report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md),
+      [what is the correction made of](../../1-lora-correction/report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md),
       the null on more-correction-more-composition in the
-      [strength review](../../plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md),
+      [strength review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md),
       and the cross-seed direction reads.
 
 - [x] **6.6** the close, forward-looking. **Placed 2026-09-10, awaiting compile.** Seven
@@ -1975,7 +1975,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       ambiguity (the best window measured is also the earliest measured) and the fact that nothing
       separates sampler error from model error. Both are still owed to the reader and are not in
       any placed paragraph yet. Novelty wording on the timing claim stays blocked on
-      [checks-09](../../plans/03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md);
+      [checks-09](../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md);
       nothing placed claims novelty, so only the word "first" is unavailable.
 
 ▶ **Next: section 7**, once 6.6 compiles.
@@ -2013,7 +2013,7 @@ placed or explicitly dropped.
 | Anchor | The line | What is unresolved |
 |---|---|---|
 | section 4 timing | The eight-pair window-sweep grid (`fig:how-often-the-correction-lands`) is commented out in the tex, and the per-seed grid `fig:where-the-correction-lands` carries the timing argument alone. | Whether the sweep's counts need to come back somewhere, since the paragraph now states the every-pair result with only the one-pair grid beside it. |
-| section 4 timing | ~~Correcting on every step gives poor results, so only an early correction should be applied.~~ | **Not written: the evidence goes the other way.** The filed window experiment (report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md, verified 2026-09-05) has the adapter composing 7 of 8 held-out seeds on all fifty steps and at most 4 to 5 of 8 restricted to steps 0 to 9, and Figure 4(a) has every from-step-0 row ending with two animals. W&B `6xc2l8ix` is the rank-32 pooled training run, not a window experiment. What is written instead is sufficiency: the early steps are enough and plain composition carries the rest. |
+| section 4 timing | ~~Correcting on every step gives poor results, so only an early correction should be applied.~~ | **Not written: the evidence goes the other way.** The filed window experiment (3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md, verified 2026-09-05) has the adapter composing 7 of 8 held-out seeds on all fifty steps and at most 4 to 5 of 8 restricted to steps 0 to 9, and Figure 4(a) has every from-step-0 row ending with two animals. W&B `6xc2l8ix` is the rank-32 pooled training run, not a window experiment. What is written instead is sufficiency: the early steps are enough and plain composition carries the rest. |
 | candidate 3 | A single prompt naming several concepts can impose a particular kind of compositionality on a text-to-image model, in which all of them appear together in one scene. | Placed as the old c3.1, then the arc it opened was abandoned for show-then-name. Kept in case a compositionality-first framing is wanted elsewhere; drop it if candidate 3 compiles without it. |
 | 4.1 | The full forward-process paragraph, drafted whole before the walk moved to sentences: reversing a fixed corruption process, latent space named once, the per-step Gaussian, the closed-form jump with its reparametrisation, and the point that none of it is learned. | It was drafted as a paragraph rather than sentence by sentence. Re-walk it as 4.1.1 to 4.1.3 and place each one. |
 | end of section 4 | The correction we injected comes from the joint prompt, which is exactly what composition is denied, and the next section learns to produce it without that prompt. | The boundary sentence that keeps sections 4 and 5 distinct under the shared plurality banner. Place it as section 4's closing sentence, wording revisable if the strength grid graduates from Extras. |
@@ -2088,7 +2088,7 @@ the walk; a row is deleted only then.
 | small-multiples check, one panel per pair from the cached curves | the shared-size-curve beat's verdict, and where the beat lives | `artifacts/results/does-every-pair-share-one-size-curve/` | out; local session `d9fd58b8` (resume with `claude --resume d9fd58b8-d4bf-4b0f-978c-510da1315914`), mid-build as of 2026-08-26 morning, nothing on disk yet |
 | /design-figure, the dial figure (grid of rendered images, lambda as a fraction of r_t) | the ratio-and-dial piece | [the dial-figure design note](section-4-dial-figure-design.md) | returned and integrated; the chosen rebuild now targets the Extras grid, the dial-strip alternative is ¶4.4's qualitative candidate |
 | /pressure-test, arXiv 2502.04549 against this paper's CLIP-based difficulty and instrument reads | beat 8's scope, and the open why-text-anchoring-works row in hypothesis-05 | chat text in its session; return package pasted back here | to be launched |
-| /drip-idea, the mechanism question (which variable, isolated and varied over the denoising run, explains what [PoE composition](../../context/world/poe-composition.md) is missing), reconstructed from the smoothness-vs-failure grid and the training-caption story | the section's figure test, and what mechanism figure if any enters the main text | [the idea map](../../artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), seven claims each carrying a mark | parked mid-walk as of 2026-08-26, nothing settled by a run yet. Beat 8 stays a prose mention until claim 3 (linear score addition has a step-wise signature separating a blending pair from a composing pair) has a verdict, and claims 4 and 5 are instruments with nothing to instrument if it fails. The walk's larger finding is aimed at the discussion rather than at this section's figures: `r_t` is sampler error plus model error added together, per Du et al. [arXiv 2302.11552](https://arxiv.org/abs/2302.11552), nothing here separates them, and this section's timing result is also what a sampler artifact looks like. Three checks outstanding, all reading cached output with no sampling and no queue |
+| /drip-idea, the mechanism question (which variable, isolated and varied over the denoising run, explains what [PoE composition](../../context/world/poe-composition.md) is missing), reconstructed from the smoothness-vs-failure grid and the training-caption story | the section's figure test, and what mechanism figure if any enters the main text | [the idea map](../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md), seven claims each carrying a mark | parked mid-walk as of 2026-08-26, nothing settled by a run yet. Beat 8 stays a prose mention until claim 3 (linear score addition has a step-wise signature separating a blending pair from a composing pair) has a verdict, and claims 4 and 5 are instruments with nothing to instrument if it fails. The walk's larger finding is aimed at the discussion rather than at this section's figures: `r_t` is sampler error plus model error added together, per Du et al. [arXiv 2302.11552](https://arxiv.org/abs/2302.11552), nothing here separates them, and this section's timing result is also what a sampler artifact looks like. Three checks outstanding, all reading cached output with no sampling and no queue |
 | /frame-hypothesis, the guidance-weight control (does raising w compose, with qualitative grids over the run) | the controls decision in the dose paragraph | a scoped experiment plan, or a feasibility no | to be launched |
 
 ## Open citations

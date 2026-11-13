@@ -15,7 +15,7 @@ animal boxed twice); the caption carries that sentence.
 Reads images and the scored grid only; it does not sample and it does not
 score, so this figure and the window curves can never disagree.
 
-    python scripts/window_samples_over_map.py
+    python 1-lora-correction/scripts/window_samples_over_map.py
 """
 
 from __future__ import annotations
@@ -27,7 +27,7 @@ from pathlib import Path
 
 import numpy as np
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)

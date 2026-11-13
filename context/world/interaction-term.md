@@ -58,7 +58,7 @@ step 0 near 0.0 rising to about 0.246 by the final step for `a_cat__x__a_dog` se
 
 **It grows through the run rather than being a fixed offset**, and how far into the run it needs
 to be added (the window) is a separate, measured question from how big it is (the strength, λ).
-`report/experiments-log.md`'s EXP-04 found the best window centred at steps 0-10 for every one of 8 tested
+`1-lora-correction/report/experiments-log.md`'s EXP-04 found the best window centred at steps 0-10 for every one of 8 tested
 pairs, regardless of how late that pair's own outcome settles (its "commitment step", which ranges
 from step 18 to step 36 across pairs). ✅
 
@@ -74,7 +74,7 @@ diagram wanted at the top of this file would show.
 
 Why a seed's radius carries nothing and only its direction matters, with the window and
 commitment numbers on a step ruler, is drawn in
-[the noise-shell scene](../../artifacts/scenes/noise-shell-and-basins/index.html).
+[the noise-shell scene](../../1-lora-correction/artifacts/scenes/noise-shell-and-basins/index.html).
 
 ## Why the project cares
 
@@ -102,12 +102,12 @@ Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) |
 
 **The window that works is not the window where the run visibly commits.** ⚠️
 
-`report/experiments-log.md` EXP-01 and EXP-04 together found something the project itself calls
+`1-lora-correction/report/experiments-log.md` EXP-01 and EXP-04 together found something the project itself calls
 counter-intuitive: every studied pair's outcome settles (commitment step) well after the window
 where the correction actually works (steps 0-10 for all 8 tested pairs, while commitment ranges
 from step 18 to 36). The correction stops mattering 8 to 26 steps before the picture "looks
 decided" by the running-estimate measure. Either the decision happens earlier than that measure
-can see, or the measure tracks the wrong event; `report/experiments-log.md` records this as unresolved and
+can see, or the measure tracks the wrong event; `1-lora-correction/report/experiments-log.md` records this as unresolved and
 not the registered finding.
 
 **The sign convention is written both ways across the repo's own documents.** 🔍
@@ -126,11 +126,11 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 |---|---|---|
 | The interaction term's definition | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | Its measured per-step and final values for one run | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/summary.json` | 2026-08-24 |
-| The window-vs-commitment-step finding | Read in `report/experiments-log.md`, EXP-01 and EXP-04 | 2026-08-24 |
+| The window-vs-commitment-step finding | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 | 2026-08-24 |
 | The word "oracle" in older plan files, and what it names here | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
 
 ## Cross-references
 
 - The mention of **a sum of scores** (the log-space identity behind linear score composition) in [the scene map for the Gaussian score's base case](../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md) (relevance match).
-- The mention of **the correction** in [the finding "does a Langevin corrector remove part of the correction"](../../report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md), which measures its size at the point a Markov chain settled to.
-- The mention of **the window** that decides the outcome (the early steps, where the sampler's error is worst) in [the whole corrector design](../../plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#quick-context-where-you-are).
+- The mention of **the correction** in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md), which measures its size at the point a Markov chain settled to.
+- The mention of **the window** that decides the outcome (the early steps, where the sampler's error is worst) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#quick-context-where-you-are).

@@ -26,7 +26,7 @@ the pair image with its circle at x = 10 and its square at x = 22.
 | 1 | the figure's condition-B mark | at 0.1, B's real pair weight, with 0.5 labelled as the sweep's top | at 0.5 as the request wrote it; both marked | default accepted | the code gives the pair 0.1, so a mark at 0.5 labelled B would be false on the figure's face |
 | 2 | the competing-caption forms | build both and show the two count sets | derive both, build only the picked one | default accepted | it is the stop the request asked for, and the second form is cheap once the first runs |
 | 3 | the closed-form crossing | computed beside the grid threshold | grid only | default accepted | no compute cost, and it saves the answer from being a grid floor |
-| 4 | where the plan lives | `plans/10-what-poe-loses-when-it-composes/` | a new scope | default accepted | the note already belongs to that scope |
+| 4 | where the plan lives | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/` | a new scope | default accepted | the note already belongs to that scope |
 | 5 | sample images every piece | yes, as a clickable link and a path in chat | only at the figure stop | user asked | the user corroborates the counts against the pictures rather than taking them |
 
 ## Ticked

@@ -12,7 +12,7 @@ step 2 has closed.
 conditionals, a local score), then in a learned invertible feature space as layer 10's VAE step"
 
 Background
-The reading stop of the composition ladder (artifacts/drips/simple-distributions-rebuild/) read the
+The reading stop of the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/) read the
 two Bradley papers. This walk rebuilds both papers' constructions by hand on the ladder's own toys,
 checked against the answer keys the read-aheads already hold. Its last piece, the learned
 invertible feature space, is the first piece of layer 10's latent brick.
@@ -37,7 +37,7 @@ What to read
   ~/goal-setting/learning/deep-learning/diffusion-models/01-poe-derivation-foundations/, at
   sources/mechanisms-of-projective-composition/checks/ and
   sources/local-mechanisms-of-compositional/checks/.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Composing in a latent
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, brick "Composing in a latent
   space": layer 10's unbuilt brick.
 
 What is already known

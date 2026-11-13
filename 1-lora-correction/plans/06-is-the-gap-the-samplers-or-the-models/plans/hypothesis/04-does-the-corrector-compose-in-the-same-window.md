@@ -21,13 +21,13 @@ works in.
 ## Position in the plan tree
 
 **Step 27 of 30.** Waits on step 26. The one order is the `## Running order` table in the
-[repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+[repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | What it does |
 |------|------|-------------|
 | 6 | [hypothesis-03: when-in-the-run-it-matters](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | generated the injected-correction renders at all nine window positions, which this plan is matched against render for render |
 | 26 | [hypothesis-02: what-is-left-once-the-chain-settles](03-what-is-left-once-the-chain-settles.md) ⚠️ | the measurement this plan waits on, though not strictly |
-| **27 (current)** | **hypothesis-03: does-the-corrector-compose-in-the-same-window** ⚠️ | **generates the nine window positions again with the corrector in place of the injected correction, and asks whether the [compose rate](../../../../context/world/compose-rate.md) peaks at the same moment** |
+| **27 (current)** | **hypothesis-03: does-the-corrector-compose-in-the-same-window** ⚠️ | **generates the nine window positions again with the corrector in place of the injected correction, and asks whether the [compose rate](../../../../../context/world/compose-rate.md) peaks at the same moment** |
 | 29 | [baseline-02: three-rules-on-one-amount-axis](../baselines/06-three-rules-on-one-amount-axis.md) ⚠️ | the other half of the comparison, on how much is added rather than timing |
 
 Design only. Verdicts and run state live in
@@ -59,7 +59,7 @@ Design only. Verdicts and run state live in
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#quick-context-where-you-are) ➡️
 
 Slide a ten-step corrector window across the run, at the same nine positions the injected-correction
-renders used, and ask whether the [compose rate](../../../../context/world/compose-rate.md) peaks
+renders used, and ask whether the [compose rate](../../../../../context/world/compose-rate.md) peaks
 in the same window that the injected correction does.
 
 ## Quick context: where you are
@@ -99,7 +99,7 @@ matched against, `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-
 
 A flat curve at [step 26](03-what-is-left-once-the-chain-settles.md) does not strictly
 imply no change in compose rate, because the corrector can relocate the trajectory without
-shrinking [`‖r_t‖`](../../../../context/world/interaction-term.md#words-this-file-uses). If step 26 comes back flat and this plan still composes, that combination is the
+shrinking [`‖r_t‖`](../../../../../context/world/interaction-term.md#words-this-file-uses). If step 26 comes back flat and this plan still composes, that combination is the
 finding and it goes in the review file as such. Run this plan anyway in that case, and record that
 it was run against a flat curve at step 26.
 
@@ -203,7 +203,7 @@ attribution is not.
    PoE's. The tail sheet is scored twice: compose (instance count) and sharpness (Laplacian
    variance of the greyscale render, the same measure plan 07 of scope 01 used). The control
    pair `a_butterfly__x__a_flower_meadow` runs on the same seeds so a corrector that breaks what
-   already works is caught. Driver: `scripts/corrector_window_sweep.py` (`--sheet`, `--tail`,
+   already works is caught. Driver: `1-lora-correction/scripts/corrector_window_sweep.py` (`--sheet`, `--tail`,
    `--figures`, `--wandb`); thresholds in that file as `FIDELITY_MIN_SHARPNESS_RISE` and
    `FIDELITY_MAX_COMPOSE_LOSS_SEEDS`.
 
@@ -239,11 +239,11 @@ be compared at the same moments of the run.
 - Renders and their scored grid write under
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/`, with a disk guard on
   `/datasets`, the filesystem actually written to, per
-  [environment/storage.md](../../../../environment/storage.md). Only the finished figure and its
+  [environment/storage.md](../../../../../environment/storage.md). Only the finished figure and its
   sidecar go into the repo, under `paper/iclr/figures/`.
 - biggpu allows one job per user, so this runs under `nohup` outside Slurm and `squeue` is
   blind to it. Harvest by `pgrep` on the session node, per
-  [environment/hpc/execution-protocol.md](../../../../environment/hpc/execution-protocol.md).
+  [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
 - **The cached trajectories cannot be used.** The corrector moves the latent onto a different path.
 - The tail condition attaches the rank-32 adapter at step 30050,
   `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt`.
@@ -255,7 +255,7 @@ be compared at the same moments of the run.
 - The models run in fp16, and anything normed upcasts to fp32 first.
 - SDXL base, DDIM, 50 steps, guidance 7.5, latents 4×128×128 at 1024².
 - No system LaTeX here, so the figure's PDF comes from matplotlib, per
-  [environment/paper.md](../../../../environment/paper.md).
+  [environment/paper.md](../../../../../environment/paper.md).
 
 ## Tasks
 
@@ -338,7 +338,7 @@ for both.
 
     ```bash
     OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
-    ssh <node> 'STAGE=sheet GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/sheet.log 2>&1 &'
+    ssh <node> 'STAGE=sheet GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/sheet.log 2>&1 &'
     ```
 
   - Both pairs, seeds 9 to 16, at the flat-part `k` and the picked `c`. Plain PoE is the composer
@@ -349,7 +349,7 @@ for both.
 - [x] **3.2** The tail condition: the rank-32 λ 1.2 run with the corrector on steps 35 to 49 only.
 
     ```bash
-    ssh <node> 'STAGE=tail GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/tail.log 2>&1 &'
+    ssh <node> 'STAGE=tail GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/tail.log 2>&1 &'
     ```
 
   - `k ∈ {0, 5, 20}`, both pairs, seeds 9 to 16: 48 renders, each scored for compose and for
@@ -361,10 +361,10 @@ for both.
 
     ```bash
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-    $PY scripts/corrector_window_sweep.py --figures --wandb
+    $PY 1-lora-correction/scripts/corrector_window_sweep.py --figures --wandb
     ```
 
-  - Sheets to `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-<pair>-eight-seed-sheet.png`
+  - Sheets to `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-<pair>-eight-seed-sheet.png`
     and `corrector-on-adapter-tail-<pair>-eight-seed-sheet.png`, each with a `.json` sidecar
     carrying the compose rate per column and every tile's score, plus a `README.md` entry each.
   - W&B project `prime_lab/poe-repair-animals-compose`: the sheets as images, the sidecars as
@@ -398,7 +398,7 @@ stay with it.
 
     ```bash
     OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
-    ssh <node> 'STAGE=clean GPU=<idx> EXTRA="--c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/clean_tail.log 2>&1 &'
+    ssh <node> 'STAGE=clean GPU=<idx> EXTRA="--c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/clean_tail.log 2>&1 &'
     ```
 
   - The cutoffs bracket where the corrected run commits (median step 15, range up to 35 in
@@ -410,10 +410,10 @@ stay with it.
 
     ```bash
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-    $PY scripts/corrector_window_sweep.py --figures --wandb
+    $PY 1-lora-correction/scripts/corrector_window_sweep.py --figures --wandb
     ```
 
-  - Sheets to `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-<pair>-eight-seed-sheet.png`:
+  - Sheets to `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-<pair>-eight-seed-sheet.png`:
     rows seeds 9 to 16, columns the joint prompt, plain PoE, the adapter alone, then the six
     conditions, each tile with its count and sharpness; sidecar with the band, the baseline and
     the branch.
@@ -474,7 +474,7 @@ them.
 ◀ **Needs: [task 3.3](#3--the-eight-seed-sheets-and-the-corrector-on-the-tail-of-the-adapter-run)**,
 the tail sheet.
 
-- [x] **4.1** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png`.
+- [x] **4.1** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png`.
   - Row by row, compare the `k=0` tile (the adapter alone) with the `k=20` tile: is the `k=20`
     one crisper, the same, or softer, and are both animals still there?
   - The Laplacian variance printed on each tile is the number the branch was judged on; a tile
@@ -483,7 +483,7 @@ the tail sheet.
 - [x] **4.2** Open the butterfly × meadow tail sheet and check nothing that composed at `k=0` has
       lost its butterfly at `k=20`.
 - [x] **4.3** Write the eye read in one line beside the printed branch in the review file.
-- [x] **4.4** Open `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png`.
+- [x] **4.4** Open `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png`.
   - Row by row, is any clean-tail column both as crisp as the plain-PoE column and still two
     animals? Name the seeds where it is, and the seeds where the hand-off to the frozen model
     lost an animal.
@@ -545,9 +545,9 @@ None. This scope carries no `diagram-prompts.md`, so there is no illustrated map
 
 | Item | Lane | Description | Generated by | Status | Details |
 |---|---|---|---|---|---|
-| `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-<pair>-eight-seed-sheet.png`, one per pair | — | rows are the held-out seeds 9 to 16, columns the joint prompt, plain PoE, and the corrector on all 50 steps at the flat-part `k`; frame colour is the scorer's verdict; the compose count per column is in the title and the sidecar | `scripts/corrector_window_sweep.py --figures` | ⏳ | **The read-out every parallel session shares.** Sidecar `.json` carries every tile's score, `k`, `c` and the sampler settings. For the control pair the frame is the unvalidated both-concepts read, said on the sheet |
-| `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-<pair>-eight-seed-sheet.png`, one per pair | — | rows seeds 9 to 16, columns the joint prompt, plain PoE, the rank-32 λ 1.2 adapter alone, then the adapter plus `k=5` and `k=20` corrector steps on steps 35 to 49; each tile carries its instance count and its Laplacian variance | `scripts/corrector_window_sweep.py --figures` | ⏳ | **The fidelity read.** Sidecar carries the branch, the thresholds and every number. Main text only if the branch is support |
-| `artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-<pair>-eight-seed-sheet.png`, one per pair | — | rows seeds 9 to 16; columns the joint prompt, plain PoE, the adapter alone on all 50 steps, then the adapter on steps 0 to 19 or 0 to 29 followed by the frozen model, with 0, 5 or 20 corrector steps on the frozen score in steps 35 to 49; each tile carries its instance count and Laplacian variance | `scripts/corrector_window_sweep.py --figures` | ⏳ | **The fidelity fix under test.** Sidecar carries the plain-PoE band, the adapter-alone baseline, the thresholds and the branch. Main text only if the branch is support |
+| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-<pair>-eight-seed-sheet.png`, one per pair | — | rows are the held-out seeds 9 to 16, columns the joint prompt, plain PoE, and the corrector on all 50 steps at the flat-part `k`; frame colour is the scorer's verdict; the compose count per column is in the title and the sidecar | `1-lora-correction/scripts/corrector_window_sweep.py --figures` | ⏳ | **The read-out every parallel session shares.** Sidecar `.json` carries every tile's score, `k`, `c` and the sampler settings. For the control pair the frame is the unvalidated both-concepts read, said on the sheet |
+| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-<pair>-eight-seed-sheet.png`, one per pair | — | rows seeds 9 to 16, columns the joint prompt, plain PoE, the rank-32 λ 1.2 adapter alone, then the adapter plus `k=5` and `k=20` corrector steps on steps 35 to 49; each tile carries its instance count and its Laplacian variance | `1-lora-correction/scripts/corrector_window_sweep.py --figures` | ⏳ | **The fidelity read.** Sidecar carries the branch, the thresholds and every number. Main text only if the branch is support |
+| `1-lora-correction/artifacts/results/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-<pair>-eight-seed-sheet.png`, one per pair | — | rows seeds 9 to 16; columns the joint prompt, plain PoE, the adapter alone on all 50 steps, then the adapter on steps 0 to 19 or 0 to 29 followed by the frozen model, with 0, 5 or 20 corrector steps on the frozen score in steps 35 to 49; each tile carries its instance count and Laplacian variance | `1-lora-correction/scripts/corrector_window_sweep.py --figures` | ⏳ | **The fidelity fix under test.** Sidecar carries the plain-PoE band, the adapter-alone baseline, the thresholds and the branch. Main text only if the branch is support |
 | `mcmc/samples-as-a-ten-step-corrector-window-slides.png` | — | rows are seeds 9 to 12, columns are the nine ten-step window positions plus a corrector-on-all-50 column, each square is the final generated picture, green border where the detector scored it as two separate animals | the driver at task 1.1 | ⏳ | **Main text, only if it differs from the injected-correction version.** If the behaviour is identical, one sentence of prose beside the existing figure covers it. Sidecar `.json` records every render, the seeds, `k`, `c` and the border rule |
 
 **Two sentences this figure's caption owes.** The corrector runs at one `k`, which is a compute
@@ -583,7 +583,7 @@ which disagrees with the eye on this pair often enough that the eye count is quo
 
 | Path | Why it is read |
 |---|---|
-| [scripts/interaction_term_window.py](../../../../scripts/interaction_term_window.py) | the injected-correction window run this plan mirrors, with its nine positions, its seeds, and its scored-grid format |
+| [1-lora-correction/scripts/interaction_term_window.py](../../../../scripts/interaction_term_window.py) | the injected-correction window run this plan mirrors, with its nine positions, its seeds, and its scored-grid format |
 | `poe_repair/composers/poe_langevin.py` | the composer from [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md), whose `corrector_window` argument is what this plan slides |
 | `paper/iclr/figures/when-the-correction-arrives/README.md` | the folder's own rule for which subfolder a figure lands in, and the exact green-border rule quoted into captions |
 

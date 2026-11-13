@@ -10,7 +10,7 @@ In the background, prepare and build layer 4's two quizzes for the composition l
 quiz 4.1 and quiz 4.2.
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ walks from one 2D diffusion
 expert to a correction for product-of-experts composition. Layer 4 is the parts world, the only
 place the cat-dog product is exact in more than two dimensions: 16-pixel images and diagonal
 Gaussian and mixture experts. Each layer opens on two quizzes, one on the college maths underneath
@@ -32,11 +32,11 @@ Objectives
 
 What to read
 - The miss ledger (quiz-ledger) of every earlier quiz on this ladder.
-- artifacts/drips/simple-distributions-rebuild/ladder/04-the-parts-world.md and its Study first
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/04-the-parts-world.md and its Study first
   line: the material for quiz 4.1.
-- artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 0 to 8: the material for
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/04-the-parts-world.md, steps 0 to 8: the material for
   quiz 4.2.
-- artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json and
+- 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/numbers.json and
   toy/rebuild/out/phase4/phase4.json: the reference numbers.
 - The two published quizzes named under What is already known, before writing.
 - ~/Obsidian/Mathematics/references/textbooks/Textbooks.md: the shelf index.
@@ -46,7 +46,7 @@ What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - quiz-cadence stops when a quiz has no coverage file in
-  artifacts/drips/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, so prep-cadence runs first for each
   quiz (quiz-cadence, "The preparation gate").
 - The step file links a textbook page beside each fundamental it uses: pp. 230, 242, 299 and 307 of
   introduction-to-probability-for-data-science.pdf, pp. 43 and 449 of
@@ -69,7 +69,7 @@ What is already known
 - The product per pixel, for inputs N(m_1, diag v_1) and N(m_2, diag v_2): precisions add,
   1/v = 1/v_1 + 1/v_2; the mean is m = v(m_1/v_1 + m_2/v_2); the constant is
   Z = N(m_1; m_2, diag(v_1 + v_2)), derived by completing the square (step file 04, step 3).
-- Every answer number traces to numbers.json in artifacts/ideas/poe-overlap-dial/example-9-parts-world/
+- Every answer number traces to numbers.json in 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/example-9-parts-world/
   or to toy/rebuild/out/phase4/phase4.json (numbers.json; step file 04, steps 3 to 6).
 - The mosaic's head mean is 0.9802 and its log Z −46.47 (numbers.json; step file 04, step 3).
 - The blend has mean 0 and sd 0.0707, 10 sds from each expert, and log Z −1583.4 (numbers.json;
@@ -99,13 +99,13 @@ Rules
   built.
 
 What to hand back
-- Two coverage files under artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
+- Two coverage files under 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/.quiz-prep/, each giving
   every question a verdict: ready, blocked, or unprepared by choice.
 - A row in the worked-examples index for every banked problem.
 - Two published quiz pages, each opening on a read-first list with minutes per item, a short path
   and a full path.
 - Quiz 4.1's URL in step 1 and quiz 4.2's URL in step 3 of
-  artifacts/drips/simple-distributions-rebuild/ladder/04-the-parts-world.md, each replacing "(URL
+  3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/04-the-parts-world.md, each replacing "(URL
   lands here)".
 - The proof: the two coverage files exist under .quiz-prep/ and list no question as blocked, and
   the two URLs open.

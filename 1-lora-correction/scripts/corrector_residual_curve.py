@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """How much of the correction does a Langevin corrector remove, and how much is left?
 
-Steps 25 and 26 of ``plans/06-is-the-gap-the-samplers-or-the-models``. One file holds the
+Steps 25 and 26 of ``1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models``. One file holds the
 leak checks, the step-size search, the k grid, the three-way verdict and the figure, so
 every threshold sits beside the code that applies it and moving one shows up in a diff.
 
@@ -48,7 +48,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.composers import poe_langevin as cmp_lg  # noqa: E402
 from poe_repair.composers._helpers import (  # noqa: E402
@@ -95,7 +95,7 @@ OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector"
 SEARCH_JSON = OUT / "step_size_search.json"
 CURVES_JSON = OUT / "residual_curves.json"
 CURVE_CELLS = OUT / "curves"
-FIG_DIR = Path(__file__).resolve().parent.parent / "paper/iclr/figures/when-the-correction-arrives/mcmc"
+FIG_DIR = Path(__file__).resolve().parent.parent.parent / "paper/iclr/figures/when-the-correction-arrives/mcmc"
 FIG_NAME = "how-much-of-the-correction-a-corrector-removes"
 
 # Cost model from the plan: one noise level at corrector count k costs 3k + 5 UNet

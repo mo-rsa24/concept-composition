@@ -7,7 +7,7 @@ figures carry the transfer argument into the paper.
 
 A figure plan is judged differently from a run. There is no metric to clear here: the question is
 whether each figure reads cold, and whether what it claims sits at or below its row in
-[the figure register](../../../paper/iclr/figures.md). A figure that
+[the figure register](../../../../paper/iclr/figures.md). A figure that
 overclaims is worse than a missing one, because it survives review until someone checks.
 
 ## Recommended prompt (to judge a built figure)
@@ -23,7 +23,7 @@ overclaims is worse than a missing one, because it survives review until someone
 |---|---|
 | [design](../plans/figures/06-the-transfer-figures.md) | the six figures, their panels, and what each is for |
 | **this file** | **the verdict: does each figure read cold and stay inside its register row** |
-| [the register](../../../paper/iclr/figures.md) | the claim ceiling each caption may not exceed |
+| [the register](../../../../paper/iclr/figures.md) | the claim ceiling each caption may not exceed |
 
 ## Table of contents
 
@@ -117,7 +117,7 @@ last question makes that gap explicit rather than hiding it.
       claims a precision the control pairs do not have.
 
 - [ ] ⚠️ **A4**: can a reader see delivery and transfer come apart? The twin panels exist so a
-      [compose rate](../../../context/world/compose-rate.md) stuck at the no-fix level can be split into "the correction never arrived" and "it arrived pointing
+      [compose rate](../../../../context/world/compose-rate.md) stuck at the no-fix level can be split into "the correction never arrived" and "it arrived pointing
       wrong". If the panels do not make that split visible, the figure has not earned its place.
 
 - [ ] ⚠️ **A5**: is the same-pair pairing drawn explicitly rather than implied by bar position?

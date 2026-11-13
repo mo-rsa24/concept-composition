@@ -15,14 +15,14 @@ composed, but the caption may not call that cell "a cat and a dog".
 
 Frame provenance, recorded in the sidecar:
 - uncorrected frames: Tweedie from the cached x_t and the PoE prediction
-  (built by scripts/rt_reuse_figure.py / rt_direction_companions.py).
+  (built by 1-lora-correction/scripts/rt_reuse_figure.py / rt_direction_companions.py).
 - corrected seed 9: the cross run's saved clean estimates (x0_estimates).
 - corrected seed 13 and eagle x hawk: solved exactly from consecutive saved
   latents of the lambda=1 dose runs (a DDIM step is linear in the clean image
   and the noise, so two consecutive latents pin the clean image down), then
   VAE-decoded. Solved frames are cached beside the uncorrected ones.
 
-    CUDA_VISIBLE_DEVICES=0 python scripts/rt_correction_payoff.py
+    CUDA_VISIBLE_DEVICES=0 python 1-lora-correction/scripts/rt_correction_payoff.py
 """
 
 from __future__ import annotations
@@ -34,7 +34,7 @@ from pathlib import Path
 import torch
 from poe_repair import paths
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.interaction_term.cache import _alphas_cumprod  # noqa: E402
 from scripts.rt_reuse_figure import FRAME_DIR  # noqa: E402
@@ -72,7 +72,7 @@ def solved_corrected_frame(pair: str, seed: int, k: int) -> Path:
     if not traj_file.exists():
         raise SystemExit(
             f"no lambda=1 trajectory for {pair} seed {seed}. Generate it:\n"
-            f"  python scripts/interaction_term_inject.py --pair {pair} "
+            f"  python 1-lora-correction/scripts/interaction_term_inject.py --pair {pair} "
             f"--seed {seed} --lambda 1.0 --exp-name interaction_term/dose")
     blob = torch.load(traj_file, map_location="cpu", weights_only=True)
     traj = blob["trajectories"].float()
@@ -106,8 +106,8 @@ def uncorrected_frame(pair: str, seed: int, k: int) -> Path:
     if not p.exists():
         raise SystemExit(
             f"missing uncorrected frame {p}. Build it first:\n"
-            "  python scripts/rt_reuse_figure.py && "
-            "python scripts/rt_direction_companions.py")
+            "  python 1-lora-correction/scripts/rt_reuse_figure.py && "
+            "python 1-lora-correction/scripts/rt_direction_companions.py")
     return p
 
 

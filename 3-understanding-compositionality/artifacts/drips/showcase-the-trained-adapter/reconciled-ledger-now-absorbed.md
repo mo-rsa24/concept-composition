@@ -78,7 +78,7 @@ commitment sits at steps 18 to 36. The settled figure is the per-pair overlay: c
 window centre, one curve per pair, each pair's commitment step marked, showing the door's
 position is shared while commitment varies. Captions may say "acts before the picture
 decides"; they may not say "because of commitment", and sampler-vs-model attribution stays in
-`plans/06-is-the-gap-the-samplers-or-the-models/`. A sharp-edge width-1 sweep is owed only if the
+`1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/`. A sharp-edge width-1 sweep is owed only if the
 paper ever claims a door location rather than a door. Optional descriptive extra: the repair
 cell's appearance strip (decoded predicted-x0 thumbnails at fixed steps, adapter run beside
 frozen PoE run, closed-loop, labelled descriptive). Constraint exported to the steering work:
@@ -222,7 +222,7 @@ joint prompt mode-drops (it does not today).
 `heldout/a_cat__x__a_dog/seed_1`: the joint prompt renders a single cat, plain PoE renders one
 blended creature, and the adapter at lambda 1 from the 100k checkpoint renders a separated dog
 and cat plus a third smaller animal a caption must mention. Evidence and card:
-`artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
+`1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/joint-failure-repair/`. Renders here are
 mode-reproducible, not byte-reproducible (fp16), and figure sidecars say so.
 
 ## No intrinsic-dimension estimate exists

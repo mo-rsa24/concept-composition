@@ -106,19 +106,19 @@ number, the first separating λ on finished adapters, does not exist.
 | The per-checkpoint separation counts | eye reads of the 15 strips, recorded in the review file's run table as each landed, 2026-09-03 to 09-04 | stated |
 | The cache check and size | review file run table, 2026-09-03 | inferred |
 | The trainings | rank 8 and 16 on mscluster109 devices 0 and 1 (`co3`, about 42 s per 50-step epoch), rank 32 first on mscluster112 (`co3_bw`, 24 s per epoch) then resumed on mscluster106 device 1 (64 s per epoch) after a foreign process took the Blackwell; launched 2026-09-03 12:38, restarted twice for stall-guard recalibration (window 5 to 24 → 20 to 99, halving deadline 5k → 20k), stopped by the user 2026-09-04 01:30 | verified |
-| The strips | `scripts/superdiff/sdlora_sample_watcher.py` on mscluster112 device 0, 4 renders per pair per checkpoint at about 45 s each, 2026-09-03 17:40 to 2026-09-04 01:30 | verified |
-| Regenerate with | [runbook § train an adapter on SuperDiff's residual](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#2-launch-one-training---ran-2026-09-03) and [§ watch its checkpoints](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) | |
+| The strips | `1-lora-correction/scripts/superdiff/sdlora_sample_watcher.py` on mscluster112 device 0, 4 renders per pair per checkpoint at about 45 s each, 2026-09-03 17:40 to 2026-09-04 01:30 | verified |
+| Regenerate with | [runbook § train an adapter on SuperDiff's residual](../../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#2-launch-one-training---ran-2026-09-03) and [§ watch its checkpoints](../../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) | |
 | The plan | [adapters that learn SuperDiff's own residual](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/08-adapters-that-learn-superdiffs-own-residual.md), root step 50 | |
 
 ## Depends on
 
 - The SuperDiff blend inside the trainer's step, `ε_u + g · ((ε_b − ε_u) + κ (ε_a − ε_b))`, selected by `--compose superdiff --kappa 0.5`: the scope [changelog entry of 2026-09-03](../../plans/06-is-the-gap-the-samplers-or-the-models/CHANGELOG.md)
 - Why the stall guard was rescaled twice before these runs could get past step 5k: the same changelog entry and the review file
-- Which node needs which python (`co3_bw` on the Blackwell nodes): [the environment index](../../environment/00-INDEX.md)
+- Which node needs which python (`co3_bw` on the Blackwell nodes): [the environment index](../../../environment/00-INDEX.md)
 
 ## Still open
 
-- [ ] The pre-registered λ sweep on the stopped checkpoints (`scripts/superdiff/run_sdlora_sheets.py` reads the latest checkpoint per rank once its final-name check is relaxed), if a SuperDiff-side adapter is ever wanted.
+- [ ] The pre-registered λ sweep on the stopped checkpoints (`1-lora-correction/scripts/superdiff/run_sdlora_sheets.py` reads the latest checkpoint per rank once its final-name check is relaxed), if a SuperDiff-side adapter is ever wanted.
 - [ ] A per-step ‖Δ̂‖ against ‖r_t^SD‖ on rank 8's 30k and 60k checkpoints, which would separate the dose reading from the learned-texture reading.
 - [ ] Whether rank 8 at 30k and λ 0.5 is the adapter to keep.
-- [ ] The cache check and size are lifted from the review; re-running `scripts/superdiff/check_cache_cell.py` makes them `verified`.
+- [ ] The cache check and size are lifted from the review; re-running `1-lora-correction/scripts/superdiff/check_cache_cell.py` makes them `verified`.

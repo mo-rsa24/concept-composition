@@ -11,7 +11,7 @@ Contents: [Before any of these](#before-any-of-these) |
 [If something looks wrong](#if-something-looks-wrong) |
 [Where this came from](#where-this-came-from)
 
-The whole chain behind [the finding on where each condition lands](../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md):
+The whole chain behind [the finding on where each condition lands](../../1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md):
 render the joint prompt, each concept alone, plain product-of-experts and the corrected run on
 the same seeds, embed the results, draw the two figures, and build the animated page. The renders
 need a GPU on the cluster; everything after them runs on the session node's CPU; the page builds
@@ -22,7 +22,7 @@ by [nodes](../../environment/hpc/nodes.md); how to pick a free device is
 **What "the port" is, said once.** SDXL is not ported into Diffusion Explorer. That tool's models
 are two-number toys trained in the browser, so nothing of ours runs inside it. What is ported is
 the other way round: the tool's UI source (`packages/ui/src`) is vendored into
-`artifacts/scenes/where-each-condition-lands/vendor/ui/` and its time slider and legend components
+`1-lora-correction/artifacts/scenes/where-each-condition-lands/vendor/ui/` and its time slider and legend components
 drive a page fed by our own precomputed frames. The comparison itself (joint versus A versus B
 versus PoE versus PoE plus correction) is a set of Python samplings on the cluster, recipes 1 to 3.
 
@@ -32,7 +32,7 @@ Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-rend
 
 - [ ] 🖥️ **The repo is on the branch that has the scripts**
   ```bash
-  ls /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/where_each_condition_lands_*
+  ls /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_*
   ```
   ✅ **Five files**: `_render.py`, `_trajectories.py`, `_plot.py`, `_frames_embed.py`, `_shared_device.sh` (plus `_dynamics.py`, which draws the both-ness-over-steps figure).
   ❌ **Fewer**: you are on an older branch; the scripts landed on `overhaul/tree-2026-08-10` on 2026-09-05.
@@ -67,7 +67,7 @@ per-step decoded estimates, or only the three single-prompt references as final 
 Launch over SSH, absolute paths only, then check it is alive and on the GPU:
 
 ```bash
-ssh mscluster109 'GPU=1 STAGE=frames nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log 2>&1 &'
+ssh mscluster109 'GPU=1 STAGE=frames nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log 2>&1 &'
 sleep 90
 ssh mscluster109 'pgrep -af where_each_condition | grep -v pgrep; nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader'
 tail -4 /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log
@@ -146,7 +146,7 @@ plots, the contact sheet and the sidecar.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/showcase/where_each_condition_lands_plot.py
+XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py
 ```
 
 ✅ **The both-ness means print and three files land.** Real output, 2026-09-05:
@@ -176,7 +176,7 @@ the frames' embeddings beside the finding's other numbers.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
-XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/showcase/where_each_condition_lands_frames_embed.py
+XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_frames_embed.py
 ```
 
 ✅ **672 frames embedded, the step-50 both-ness means match recipe 2's to within 0.01, and the
@@ -210,13 +210,13 @@ The vendored UI is already in the repo. Refresh it only when upstream has someth
 
 ```bash
 cd /tmp && git clone -q --depth 1 https://github.com/helblazer811/Diffusion-Explorer.git
-cp -r Diffusion-Explorer/diffusion-explorer/packages/ui/src /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/scenes/where-each-condition-lands/vendor/ui
+cp -r Diffusion-Explorer/diffusion-explorer/packages/ui/src /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands/vendor/ui
 ```
 
 Build:
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/scenes/where-each-condition-lands
+cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands
 npm install
 npx vite build
 ```
@@ -284,7 +284,7 @@ You want the page on your own machine, for a talk or a supervisor meeting off th
 On the laptop:
 
 ```bash
-rsync -av mmolefe@mscluster85.ms.wits.ac.za:/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/scenes/where-each-condition-lands/dist/ ~/where-each-condition-lands/
+rsync -av mmolefe@mscluster85.ms.wits.ac.za:/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands/dist/ ~/where-each-condition-lands/
 cd ~/where-each-condition-lands && python3 -m http.server 8800
 ```
 
@@ -319,6 +319,6 @@ that session's real output and every ❌ branch a failure hit that day: the co-t
 mscluster85, the `co3` build on a Blackwell card, the CPU fallback on mscluster111, the
 adapter-contaminated references, and the xformers CPU error. Recipe 5 is the one part not run,
 and is marked so. The finding that consumes these outputs is
-[where does each condition land](../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md); the plan that
+[where does each condition land](../../1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md); the plan that
 owns the run is
-[where each condition lands](../../plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md).
+[where each condition lands](../../1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md).

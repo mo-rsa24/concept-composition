@@ -8,10 +8,10 @@ after quiz R.1.
 ```text
 /drip-read --combine --lean "projective composition, factorized conditionals and local scores" with
 arXiv 2502.04549 and 2509.16447, read against the quadrant toy and the parts world of
-artifacts/drips/simple-distributions-rebuild/
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/
 
 Background
-The composition ladder in artifacts/drips/simple-distributions-rebuild/ found in layer 5 that an
+The composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ found in layer 5 that an
 expert loose outside its own region needs no overlap. The two Bradley papers give the mathematical
 reason: 2502.04549 proves when summed scores are exact (factorized conditionals, Theorem 5.3) and
 when a composition is exact in a feature space (Theorem 6.1), and 2509.16447 ties it to a local
@@ -87,7 +87,7 @@ What is already known
   ideal experts are smoothed by σ = 0.05 and composed as the plain product (step file 05, steps 1
   and 2).
 - In 2D the background is uniform, so dividing by it changes the plain product only by a constant
-  (artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
+  (3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md, claim 2).
 - On the four-quadrant answer key (blobs at (±0.5, ±0.5), std 0.15), experts that model only their
   own coordinate and take the other from the background marginal put 0.9999 (plain) and 0.989
   (background-divided) in the top-right blob with no A∩B data

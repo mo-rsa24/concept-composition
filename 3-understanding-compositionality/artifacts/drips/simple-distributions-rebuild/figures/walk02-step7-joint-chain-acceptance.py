@@ -5,7 +5,7 @@ import numpy as np
 
 INK = "#212121"
 
-root = Path(__file__).resolve().parents[4]
+root = Path(__file__).resolve().parents[5]
 with (root / "rebuild/out/walk-numbers.json").open() as f:
     values = json.load(f)
 

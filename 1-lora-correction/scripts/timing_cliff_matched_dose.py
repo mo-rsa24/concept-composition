@@ -18,7 +18,7 @@ does nothing late at comparable strength.
 Four cells per window, cat x dog only, so this is a rate over four runs and not a
 population estimate. The eight-pair sweep is the population, drawn behind it.
 
-    python scripts/timing_cliff_matched_dose.py
+    python 1-lora-correction/scripts/timing_cliff_matched_dose.py
 """
 
 from __future__ import annotations

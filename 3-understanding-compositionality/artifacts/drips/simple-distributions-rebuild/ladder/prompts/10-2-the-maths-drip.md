@@ -9,7 +9,7 @@ Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repai
 unchanged by an invertible warp
 
 Background
-This is layer 10 of the composition ladder in artifacts/drips/simple-distributions-rebuild/. The
+This is layer 10 of the composition ladder in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/. The
 layer adds one variable, the latent, and asks whether a composition survives an invertible change of
 space. The maths comes before the build and teaches only what the build needs. I passed quiz R.1 at
 the reading stop; any question it marked missed on change of variables becomes a first rung.
@@ -25,7 +25,7 @@ What to read
 - artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md, claim 10: the factor argument.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/compose-before-or-after-a-warp/warp_check.py and
   warp_check.json: the worked instance.
-- artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md, Study first line:
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/10-latent-space-and-vaes.md, Study first line:
   Theorem 6.1 and its proof.
 - Quiz R.1's results: the misses that become first rungs.
 

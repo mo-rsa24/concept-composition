@@ -13,7 +13,7 @@ as the layers' doing.
 The measure had to have headroom, and the compose rate does not: every configuration here reads
 1.0 on every cell where it is scored, which is the two held-out cat-and-dog cells, so it cannot separate them. The read is the DINOv2 drift logged
 by each run, defined in
-[`_inline_sampling.py::embedding_drift`](../../poe_repair/experiments/cross_pair_lora_pooling/_inline_sampling.py)
+[`_inline_sampling.py::embedding_drift`](../../../poe_repair/experiments/cross_pair_lora_pooling/_inline_sampling.py)
 as the corrected render's cosine distance to the joint-prompt render minus its distance to the
 plain product render. It is dimensionless, runs from -2 to +2, and is negative when the render sits
 nearer the joint-prompt target than the product it repairs, so lower is better and 0 means the
@@ -71,4 +71,4 @@ length costs about 14 hours on one 49 GB card.
 | Every drift value | last logged value in each run's `history.json` on the cluster, extracted by `scripts/local/extract_measures.py` into `measures.json` | 2026-09-23 |
 | Every parameter count | `lora_attach.json` in each run's output folder | 2026-09-23 |
 | The measure's definition | read from the source of `embedding_drift` | 2026-09-23 |
-| The figure | `scripts/adapter_ablation_figures.py` | 2026-09-23 |
+| The figure | `3-understanding-compositionality/scripts/adapter_ablation_figures.py` | 2026-09-23 |

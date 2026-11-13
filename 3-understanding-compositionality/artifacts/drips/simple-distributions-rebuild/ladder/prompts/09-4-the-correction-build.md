@@ -9,14 +9,14 @@ after quiz 9.2 is passed.
 /drip-execute-plan --request a small correction network trained on the exact gradient of r_t, then
 the fair test (joint condition, composition, composition plus correction) at overlap 0.05 and 0.001,
 sampled with tuned MALA, with exact and with trained experts, as layer 9 of
-artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
+3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md; I type every block myself into
 ~/Playground/PhD/simple-distributions-walk/walk09.py; bar: first reproduce
 artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/ (MALA +0.001 above the
 floor with exact experts and +0.267 with trained ones at r = 0.001), then the three arms' total
 variation at each overlap
 
 Background
-This is layer 9's build in the composition ladder (artifacts/drips/simple-distributions-rebuild/):
+This is layer 9's build in the composition ladder (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/):
 I type a correction network and the fair test from an empty file, and the fair test says whether
 composition plus a correction needs fewer joint examples than training on the joint directly.
 Claude's reference is already built in toy/rebuild/ (step 0 of this layer), and my file and the
@@ -44,7 +44,7 @@ What to read
 - toy/rebuild/interaction.py: r_t and ∇r_t from layer 8.
 - artifacts/ideas/when-poe-reaches-a-and-b/runs/sampler-by-expert-interaction/README.md: run 7's
   card.
-- artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, layer 9's brick row.
+- 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md, layer 9's brick row.
 - The layer 9 --math drip folder under artifacts/drips/ and its dispatch.md: my notation.
 
 What is already known

@@ -3,7 +3,7 @@
 Train a single adapter on all the training pairs and see whether it still helps on pairs it
 never saw, before paying for fifteen separate training runs.
 
-**Step 10 of 22.** Waits on step 9. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../MASTER_PLAN.md).
+**Step 10 of 22.** Waits on step 9. The one order is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md).
 
 | Step | Plan | Status |
 |---|---|---|
@@ -32,7 +32,7 @@ split, and this plan carries it in the tree.
 Train ONE rank-8 cross-attention LoRA on the 11 blend-prone training pairs, then evaluate
 it on the held-out split: unseen blend pairs (the transfer test), cat×dog (known-failure
 reference), and the compose-by-default control. Read
-[compose-rate](../../../../context/world/compose-rate.md) for in-distribution (`in_in`)
+[compose-rate](../../../../../context/world/compose-rate.md) for in-distribution (`in_in`)
 against held-out (`out_out`). This is a single-LoRA precursor to plan 03's
 leave-one-pair-out set, and does not replace it.
 
@@ -61,7 +61,7 @@ go/no-go call on Phase-2, the leave-one-pair-out set in plan 03.
 - `co3` python at its absolute path. Scoring the step-70000-to-100000 checkpoints is a GPU scoring
   pass over existing checkpoints (no training), fits the in-session GPU or a short biggpu request.
 - The checkpoint being scored:
-  `artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`,
+  `1-lora-correction/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/checkpoints/`,
   steps up to 100000; scoring so far only covers up to 60000.
 
 ## Tasks

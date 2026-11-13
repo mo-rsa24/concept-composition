@@ -65,6 +65,6 @@ wall-clock and the $\lambda=100$ choice for CelebA are never disclosed.
 
 `plans/standing/literature/reading-register.md` (row for arXiv 2503.01145, CoInD) records this
 note as the deep read behind the register's entry and cites it by path,
-`artifacts/notes/coind-conditional-independence-loss/`, routing it to the scope
+`3-understanding-compositionality/artifacts/notes/coind-conditional-independence-loss/`, routing it to the scope
 `does-the-correction-cause-composition` and to the manuscript's problem-setting, background, and
 related-work sections.
