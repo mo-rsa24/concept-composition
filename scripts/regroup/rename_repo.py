@@ -18,7 +18,7 @@ from pathlib import Path
 OLD, NEW = "poe_repair_min", "concept-composition"
 HOME = Path("/home/molef")
 ROOTS = {
-    "repo": HOME / "PhD/poe_repair_min",
+    "repo": HOME / "PhD/concept-composition",
     "medical": HOME / "PhD/medical-imaging/compositional_diffusion",
     "learning": HOME / "goal-setting/learning",
     "obsidian": HOME / "Obsidian",
