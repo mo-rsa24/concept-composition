@@ -11,7 +11,7 @@ scratch), matches each to the most recent session whose edits or commands name i
 session active in the last hour. CLEAR means: no session but the caller active in the last hour,
 and no uncommitted file left.
 
-    python3 scripts/quiet_window_check.py [--me <session id>] [--minutes 60]
+    python3 scripts/quiet_window_check.py [--me <session id>] [--ignore <id> ...] [--minutes 60]
 """
 import argparse
 import collections
@@ -64,6 +64,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--me", default="", help="the calling session's id, left out of the live count")
     parser.add_argument("--minutes", type=int, default=60, help="how recent counts as live")
+    parser.add_argument("--ignore", nargs="*", default=[],
+                        help="session ids that do not write into these checkouts, such as a cluster-only session")
     args = parser.parse_args()
     live_cutoff = time.time() - args.minutes * 60
     blocking_files = 0
@@ -80,7 +82,8 @@ def main():
         for sid, paths in sorted(owner.items(), key=lambda kv: -len(kv[1])):
             print(f"   {sid[:8]:18s} {len(paths):5d} files, e.g. {paths[0]}")
         for sid, (_, mtime) in known.items():
-            if mtime >= live_cutoff and not sid.startswith(args.me or "\0"):
+            ignored = [args.me] + args.ignore
+            if mtime >= live_cutoff and not any(i and sid.startswith(i) for i in ignored):
                 live.append((checkout, sid, time.strftime("%H:%M", time.localtime(mtime))))
     print("== live in the last", args.minutes, "minutes:",
           ", ".join(f"{s[:8]} ({c}, {t})" for c, s, t in live) or "none")
