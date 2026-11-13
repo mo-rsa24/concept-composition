@@ -1799,8 +1799,8 @@ judged on whether they leave a hole.
       $\lambda=0.75$ rate on X of the eight held-out pairs, without ever encoding the joint
       prompt (Figure F8b). All numbers are read at step X, the last scored checkpoint.*
 
-      The candidate values and their sources (step 60000: 0.96 held-out n=128, 0.96 trained
-      n=176, floor 0.03, weakest 0.875, 7 of 8 against the oracle) are in the transfer
+      The candidate values and their sources (step 60000: 0.906 held-out n=64, 0.909 trained
+      n=88, floor 0.03, weakest 0.75, against the oracle still to be recounted) are in the transfer
       review's answered bar and the F8a and F8b register rows; they are not entered until the
       rescore lands and `numbers` re-derives each one from `compose_rate.json`.
 

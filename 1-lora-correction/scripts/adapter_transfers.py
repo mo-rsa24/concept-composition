@@ -39,6 +39,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 RUN = paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS) / "pooled_lora/phase1_r8_100k"
 OUT_DIR = Path("paper/iclr/figures")
 FIG_NAME = "compose-rate-as-the-lora-trains"
+# The step the review cites; the curve itself shows every scored step.
+CITE_STEP = 60000
 
 # Measured in the dose sweep over 32 cells with nothing injected. Its single
 # positive is a detector mistake (frog x toad seed 10: three boxes on one fused
@@ -73,8 +75,8 @@ def main() -> int:
     steps = sorted(int(s) for s in quad)
     in_dist = [quad[str(s)]["in_in"]["compose_rate"] for s in steps]
     held = [quad[str(s)]["out_out"]["compose_rate"] for s in steps]
-    n_in = quad[str(steps[-1])]["in_in"]["n"]
-    n_out = quad[str(steps[-1])]["out_out"]["n"]
+    n_in = quad[str(CITE_STEP)]["in_in"]["n"]
+    n_out = quad[str(CITE_STEP)]["out_out"]["n"]
 
     import matplotlib
     matplotlib.use("Agg")
@@ -146,9 +148,13 @@ def main() -> int:
         "n_cells": {"in_distribution": n_in, "held_out": n_out},
         "poe_floor": POE_FLOOR,
         "caption_caps": [
-            "training ran to step 100000 and only checkpoints to 60000 were "
-            "scored, so every number carries its step and 60000 is the "
-            "best-read rather than the final word",
+            "every 10000-step checkpoint to 100000 is scored from the renders "
+            "alone (the trainer's three-panel comparison strips are not "
+            "scored). Held-out stays between 0.83 and 0.91 from step 20000 "
+            "on; the numbers quoted are at step 60000",
+            "the scorer counts animals and cannot tell a cat from a dog: by "
+            "eye, 3 of cat x dog's 8 held-out seeds show a clear cat beside a "
+            "clear dog, where the scorer counts 6",
             "elephant x penguin is the control pair: it composes without any "
             "adapter, so its 1.0 is not evidence of transfer and the figure "
             "labels it on the line",
@@ -161,11 +167,12 @@ def main() -> int:
         ],
     }, indent=2))
     print(f"wrote {OUT_DIR / FIG_NAME}.png and .pdf")
-    print(f"  step 60000: trained-on {in_dist[-1]:.3f} (n={n_in}), "
-          f"never-seen {held[-1]:.3f} (n={n_out}), PoE floor {POE_FLOOR:.2f}")
-    worst = min(per_pair, key=lambda k: per_pair[k][str(steps[-1])])
-    print(f"  weakest held-out pair at 60000: {pretty(worst)} "
-          f"{per_pair[worst][str(steps[-1])]:.3f}")
+    c = steps.index(CITE_STEP)
+    print(f"  step {CITE_STEP}: trained-on {in_dist[c]:.3f} (n={n_in}), "
+          f"never-seen {held[c]:.3f} (n={n_out}), PoE floor {POE_FLOOR:.2f}")
+    low = min(per_pair[k][str(CITE_STEP)] for k in per_pair)
+    weakest = [pretty(k) for k in sorted(per_pair) if per_pair[k][str(CITE_STEP)] == low]
+    print(f"  weakest held-out pairs at {CITE_STEP}: {', '.join(weakest)} at {low:.3f}")
     return 0
 
 
