@@ -1,6 +1,6 @@
 # CO3 and the other baselines for the review: retrospective, 2026-11-11
 
-The walk that rendered the baseline methods for the ICLR 56173 review response, route step 8b. Plan: [the baselines plan](../../../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md). Walk map: [the walk map](../../../1-lora-correction/artifacts/drips/review-baselines/EXECUTE_WALK.md).
+The walk that rendered the baseline methods for the ICLR 56173 review response, route step 8b. Plan: [the baselines plan](../../../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md). Walk map: [the walk map](../../../1-lora-correction/artifacts/drips/answering-the-reviewers/review-baselines/EXECUTE_WALK.md).
 
 ## 1. One cell per method
 

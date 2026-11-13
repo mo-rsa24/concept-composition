@@ -1,6 +1,6 @@
 # When a product of experts reaches A-and-B: the compiled idea
 
-**This page is closed.** Its findings, with the later results that correct some of its numbers, are walked from [the prompt guide](../../drips/simple-distributions-rebuild/PROMPTS.md). Open the guide, not this page.
+**This page is closed.** Its findings, with the later results that correct some of its numbers, are walked from [the prompt guide](../../drips/the-toy/simple-distributions-rebuild/PROMPTS.md). Open the guide, not this page.
 
 The one-page state of [the overlap-dial idea map](IDEA_MAP.md), for the session walking [the unbuild route prompt](routes/03-unbuild-walk.prompt.md) and for anyone picking the idea up cold. Every line traces to a run, a source or a file named in the map.
 

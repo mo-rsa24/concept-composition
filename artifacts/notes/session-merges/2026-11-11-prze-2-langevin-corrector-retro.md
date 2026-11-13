@@ -1,6 +1,6 @@
 # PRZE-2: the Langevin corrector as reviewer PrzE's MCMC baseline
 
-Retrospective of the walk over [the PRZE-2 plan](../../../1-lora-correction/plans/prove-the-langevin-corrector-for-the-six-column-figure.md), 2026-11-11, step 8 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/prove-the-langevin-corrector-for-the-six-column-figure/EXECUTE_WALK.md).
+Retrospective of the walk over [the PRZE-2 plan](../../../1-lora-correction/plans/prove-the-langevin-corrector-for-the-six-column-figure.md), 2026-11-11, step 8 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/answering-the-reviewers/prove-the-langevin-corrector-for-the-six-column-figure/EXECUTE_WALK.md).
 
 ## 1. The update on two Gaussians
 

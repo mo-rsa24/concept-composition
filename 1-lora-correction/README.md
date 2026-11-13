@@ -10,3 +10,7 @@ and their figures, walks and idea maps in `artifacts/`. Context, environment, ru
 ## Results
 
 Every result, grouped by the question it answers, with a picture and one line each: [the results index](artifacts/results/README.md).
+
+## Walks, idea maps, notes and scenes
+
+ [walks](artifacts/drips/README.md) · [idea maps](artifacts/ideas/README.md) · [notes](artifacts/notes/README.md) · [scenes](artifacts/scenes/README.md)

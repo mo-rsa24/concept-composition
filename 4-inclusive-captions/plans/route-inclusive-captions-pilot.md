@@ -44,7 +44,7 @@ its second axis.
 
 **Found on disk:**
 
-- The [simple-distributions ladder](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
+- The [simple-distributions ladder](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/PROMPTS.md)
   plans rung 11b, "curated cats and dogs, with the caption co-occurrence set by hand", and has no
   step file. Its design is in
   [what the evidence means for rung 11b](../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b).
@@ -54,7 +54,7 @@ its second axis.
   ([execute walk](../artifacts/drips/simple-distributions-rebuild/EXECUTE_WALK.md)).
 - Layer 5's toy fine-tune run: support for A∩B inherited from pretraining falls from 0.159 of
   the composed target to 0.001 within 30 fine-tune steps on the grid, and the samplers follow by
-  step 100 ([figure](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)).
+  step 100 ([figure](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)).
 - COCO 2017 is on disk at `/datasets/mmolefe/coco2017/`, annotations under
   `annotations_trainval2017/annotations/`. `pycocotools` is not installed in `co3`, so the counts
   were read with plain `json`.
@@ -188,7 +188,7 @@ Settled facts:
   the raw s_C + s_D arm is new, and it counts the prior twice
 - the source gives LoRA B, not A, a 10% non-specific caption: two variables move between A and B
 - layer 5's toy: fine-tuning erased inherited A-and-B support within 30 to 100 steps
-  (3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)
+  (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png)
 - the compose scorer cannot tell a cat and a dog from two dogs (memory: FK steering baseline)
 - in 53% of the 169 both-animal photos the smaller animal is under 5% of the frame (area count,
   What we know): captioning those under that animal's name is what teaches its condition to put
@@ -313,7 +313,7 @@ Progress: each piece prints its counts or its smoke line before the next starts
 Proof: the scorer prints compose rate per model per strategy with its count out of 128
 Route update: add the measured step time and render time to What we know, and edit the schedule
 Hand-off: scores.csv and renders/ for step 6
-Close: rewrite rung 11b's row in 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md and the
+Close: rewrite rung 11b's row in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/PROMPTS.md and the
 rung 11b section of the evidence note so 11b carries two axes, share and caption assignment,
 with this run as the caption axis on SDXL; show me the diff before writing
 Controls: piece 1 example (the 12 photos); piece 2 example (counts per arm); piece 3 plumb (the
@@ -507,8 +507,8 @@ Navigation: ⬅️ [Previous](#why-this-chain) | 📋 [TOC](#table-of-contents) 
 
 - [The source design](../artifacts/ideas/inclusive-captions-axis/source-design.md)
 - [The rung 11b design](../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b)
-- [The ladder guide](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/PROMPTS.md)
-- [Layer 5, the overlap dial](../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/05-the-overlap-dial.md)
+- [The ladder guide](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/PROMPTS.md)
+- [Layer 5, the overlap dial](../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ladder/05-the-overlap-dial.md)
 - [What PoE composition is](../../context/world/poe-composition.md)
 - [Measured throughput](../../environment/hpc/throughput.md)
 

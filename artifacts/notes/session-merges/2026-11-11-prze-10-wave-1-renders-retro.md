@@ -1,6 +1,6 @@
 # PRZE-10: every review job priced, and wave 1 rendered
 
-Retrospective of the walk over [the PRZE-10 plan](../../../1-lora-correction/plans/price-the-review-jobs-and-launch-the-first-renders.md), 2026-11-11, step 5 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/price-the-review-jobs-and-launch-the-first-renders/EXECUTE_WALK.md), and the jobs table is in [the compute plan](../../../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs).
+Retrospective of the walk over [the PRZE-10 plan](../../../1-lora-correction/plans/price-the-review-jobs-and-launch-the-first-renders.md), 2026-11-11, step 5 of [the review route](../../../plans/route-answer-the-iclr-reviews.md). The walk map is [EXECUTE_WALK.md](../../../1-lora-correction/artifacts/drips/answering-the-reviewers/price-the-review-jobs-and-launch-the-first-renders/EXECUTE_WALK.md), and the jobs table is in [the compute plan](../../../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs).
 
 ## 1. The compute table
 

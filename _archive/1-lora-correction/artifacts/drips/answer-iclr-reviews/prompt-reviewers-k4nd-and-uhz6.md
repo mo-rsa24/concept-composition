@@ -96,7 +96,7 @@ What to read
 - Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
   numbers); the working copy's tex.
 - 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md, board.md.
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
   prompt-route-step-14-draft-the-replies.md: the paper and reply work this feeds; do not do their
   results-dependent parts here.
 - The memory notes on training targets, held-out pairs and manuscript voice.

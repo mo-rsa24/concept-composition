@@ -8,7 +8,7 @@ several models, where the current one shows two pairs on SDXL only.
 ## Recommended prompt (after this plan completes)
 
 ```
-/drip-proofread resume 1-lora-correction/artifacts/drips/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
+/drip-proofread resume 1-lora-correction/artifacts/drips/proofreading-the-paper/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
 ```
 
 ## Recommended skill

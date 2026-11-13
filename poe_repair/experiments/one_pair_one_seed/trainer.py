@@ -691,7 +691,7 @@ def _train_one_step(
     # The part of the error that a per-place re-weighting of the two experts could supply, charged
     # in_place_w times instead of once. On the species-fidelity live split, that part of the true
     # correction alone bound the species where the same amounts as one weight per step, or moved
-    # to shuffled places, did not (1-lora-correction/artifacts/drips/second-animal-species/idea2-per-place-weight-
+    # to shuffled places, did not (1-lora-correction/artifacts/drips/experiments/second-animal-species/idea2-per-place-weight-
     # loss.md). 1.0 adds nothing and is every run before this flag existed.
     in_place_w = float(getattr(cfg, "in_place_weight", 1.0))
     in_place_frac = float("nan")

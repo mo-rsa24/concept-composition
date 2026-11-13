@@ -174,6 +174,6 @@ interpreter path** and paste `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle/.
 Navigation: ⬅️ [7. Cluster environment](#7-build-the-2d-notebooks-environment-on-the-cluster) | 📋 [TOC](#table-of-contents)
 
 **The drip-repo walk of 2026-10-13**, whose working file is
-`3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle/REPO_WALK.md`. Every recipe marked `ran` was run that day
+`/home/molef/PhD/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle/REPO_WALK.md`. Every recipe marked `ran` was run that day
 on the laptop, except recipe 7, run on `mscluster88` from the walk file
-`3-understanding-compositionality/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.
+`/home/molef/PhD/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle-mscluster112/REPO_WALK.md`.

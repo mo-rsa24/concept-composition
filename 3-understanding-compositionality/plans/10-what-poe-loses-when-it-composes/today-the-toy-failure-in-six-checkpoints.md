@@ -209,7 +209,7 @@ it, then say what you see before moving on.
     (the setup table and its geometry row, checkpoints 3 and 5).
   - Write-up: 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, §8.2 (the
     formula with w_jk), the one-pixel section, §5.2, §9.2.
-  - Walk memory, quote it rather than summarise it: 3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/dispatch.md
+  - Walk memory, quote it rather than summarise it: 3-understanding-compositionality/artifacts/drips/the-toy/toy-failure-six-checkpoints/dispatch.md
   - Rebuild the pictures from the geometry row in a fresh folder under
     /home/molef/playground/deep-learning/; do not assume an earlier playground folder still exists.
 
@@ -227,7 +227,7 @@ it, then say what you see before moving on.
      by pixel which pixels make up each number, as a labelled table of pixel counts and squared
      differences.
   2. Draw one figure: the two pairings' averages side by side, each pixel coloured by its contribution
-     to d^2. Save it to 3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/thread-why-not-apart/ with a
+     to d^2. Save it to 3-understanding-compositionality/artifacts/drips/the-toy/toy-failure-six-checkpoints/thread-why-not-apart/ with a
      README card entry.
   3. Say what would make "apart" win, each with one computed number: the share of apart pairings at
      sigma 0.3 and at sigma 1.0; the pair picture's share when it is 1 in 100 of both words' pictures.
@@ -242,7 +242,7 @@ it, then say what you see before moving on.
   ```
 
 - [ ] **⚖️ Settle against the parts world: which picture the product fuses into.** This toy's product
-  draws the same-place overlay 200 of 200. The cluster ladder's [parts world](../../artifacts/drips/simple-distributions-rebuild/ladder/04-the-parts-world.md),
+  draws the same-place overlay 200 of 200. The cluster ladder's [parts world](../../artifacts/drips/the-toy/simple-distributions-rebuild/ladder/04-the-parts-world.md),
   at the same σ = 0.1, draws a pale "ghost" (this toy's "pale, apart") with a tight background and two
   full animals with a loose one ([the two walks reconciled](../../artifacts/notes/what-poe-loses-when-it-composes/two-walks-reconciled.md),
   disagreement 1). Two runs move one thing each, so the gap is named:

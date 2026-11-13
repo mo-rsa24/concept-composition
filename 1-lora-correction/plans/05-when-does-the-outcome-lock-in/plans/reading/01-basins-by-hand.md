@@ -75,7 +75,7 @@ anything on the endpoint predictor.
 
 **Associated materials.** The verdict lands in [the review file](../../review/01-basins-by-hand.md).
 The reasoning behind the design is in [the decision ledger](../../decisions-taken-here.md); the
-full walk record is [the walk record](../../../../artifacts/drips/consistency-model-basin-oracle/the-walk.md).
+full walk record is [the walk record](../../../../artifacts/drips/experiments/consistency-model-basin-oracle/the-walk.md).
 
 **For the full picture.** The scope's [master plan](../../MASTER_PLAN.md).
 

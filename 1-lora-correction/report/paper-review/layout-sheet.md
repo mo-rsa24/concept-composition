@@ -27,7 +27,7 @@ ICLR text width is 5.5 in; "full" below means 5.5 in. The smallest text in any f
 
 ## Before a slot is called finished
 
-From [the Codex presentation review](../../artifacts/drips/answer-iclr-reviews/routes/codex-presentation-review.md) of the stand-ins, 2026-11-10. Each is a property the final page must have.
+From [the Codex presentation review](../../artifacts/drips/answering-the-reviewers/answer-iclr-reviews/routes/codex-presentation-review.md) of the stand-ins, 2026-11-10. Each is a property the final page must have.
 
 - **No production text.** Every caption is reader-facing (a bold first sentence, then what is needed to read the result), never "Reserved for"; a submission build fails on a missing slot instead of drawing a grey box.
 - **Tables as booktabs.** `\toprule`, `\midrule`, `\bottomrule`, no vertical rules, `@{}` outer padding, the caption above the table; a two-row header with `\cmidrule` over each column group (R1, R5, R3, R14); a "Method" heading on the first column; every abbreviation (Comp., CLIP, BLIP, IR, †) defined in the caption with its scale and direction.

@@ -1,6 +1,6 @@
 # Route step 9: score every image and build Tables 1 and 2
 
-The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [route step 9](../../../plans/route-answer-the-iclr-reviews.md#9--score-every-image-and-build-the-tables), session `47281f64-fc21-4b71-b0fd-3b968913d9b3`. Walk map: [the step 9 walk map](../../../1-lora-correction/artifacts/drips/answer-iclr-reviews/EXECUTE_WALK-step-9.md).
+The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [route step 9](../../../plans/route-answer-the-iclr-reviews.md#9--score-every-image-and-build-the-tables), session `47281f64-fc21-4b71-b0fd-3b968913d9b3`. Walk map: [the step 9 walk map](../../../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/EXECUTE_WALK-step-9.md).
 
 ## 1. Scorers installed and proved on two images
 

@@ -1,6 +1,6 @@
 # 💡 When product-of-experts composition reaches A-and-B: a 2D overlap dial
 
-**This map is closed.** Its findings, with the later results that correct some of its numbers, are walked from [the prompt guide](../../drips/simple-distributions-rebuild/PROMPTS.md). Open the guide, not this map.
+**This map is closed.** Its findings, with the later results that correct some of its numbers, are walked from [the prompt guide](../../drips/the-toy/simple-distributions-rebuild/PROMPTS.md). Open the guide, not this map.
 
 ## Position in the idea
 
@@ -43,7 +43,7 @@ Measure, on 2D data with known ground truth, how often a product of two diffusio
 
 **Where the walk is**
 
-Claims 1, 2, 3, 7 and 9 are settled on their repairs. Claims 4, 5, 6 and 8 hand over to the layers of the rebuild walk file (`3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md`). Claim 8 (the shapes testbed) was appended at the settle. Claim 7 has had `words`, `break` (twice) and `how`, and its repair (two operators, two data conditions, one label term) waits on `settle 7`. Runs 1 and 2 are done. Two runs are offered and not launched: the label-term toy (7.4) and the fine-tune support check on claim 2. Route 1 (the literature taxonomy) is integrated; its 11 proposed changes to the terms file wait on a yes each. Route 2 (chest X-ray findings and diagnoses) is emitted.
+Claims 1, 2, 3, 7 and 9 are settled on their repairs. Claims 4, 5, 6 and 8 hand over to the layers of the rebuild walk file (`3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md`). Claim 8 (the shapes testbed) was appended at the settle. Claim 7 has had `words`, `break` (twice) and `how`, and its repair (two operators, two data conditions, one label term) waits on `settle 7`. Runs 1 and 2 are done. Two runs are offered and not launched: the label-term toy (7.4) and the fine-tune support check on claim 2. Route 1 (the literature taxonomy) is integrated; its 11 proposed changes to the terms file wait on a yes each. Route 2 (chest X-ray findings and diagnoses) is emitted.
 
 **What compile would produce today**
 

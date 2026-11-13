@@ -106,7 +106,7 @@ computation layer 1 must decide.
    7.3 plane-units apart, while different seeds sit 171.6 apart: the seed owns the geography, the
    pair nudges. Interactive artifact (hover any step-point, card switches joint/PoE/adapter):
    https://claude.ai/code/artifact/c3901878-d91a-42d6-9cde-76f5f89f72a3
-   Source + sidecar: 3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/ (prototype html
+   Source + sidecar: 1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/ (prototype html
    + manifold_data.json). Renders are final images; per-step decoded frames not built yet.
    Static figure built as F11, paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf
    (scripts/plot_shared_plane_trajectories.py). Definition note: 7.3 here is the mean distance
@@ -189,7 +189,7 @@ computation layer 1 must decide.
   space AND mode. Reason: the lambda-0 canary reproduced the cached PoE render's mode but not
   its pixels with settings matched, so only teacher-forced comparisons are immune to fp16 drift.
 - **Layer 2 example artifact, run on the real cache** (heldout a_cat__x__a_dog seed 9):
-  3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/the-same-correction-in-epsilon-and-x0-view.png
+  1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/the-same-correction-in-epsilon-and-x0-view.png
   (+ .json sidecar, all 50 steps). Two findings: (1) the two lenses tell opposite stories,
   x0 view peaks 0.6-1.0 at steps 0-10 and dies by 50, epsilon view is 0.03-0.07 early and
   ~0.3 mid-late; (2) at step 40 even the joint epsilon evaluated at the PoE state pulls toward

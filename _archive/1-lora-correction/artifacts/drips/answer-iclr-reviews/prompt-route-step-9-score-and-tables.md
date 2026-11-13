@@ -37,7 +37,7 @@ Objectives
    paper still compiles with no slot too wide.
 
 What to read
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
 - 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
 - composition/focus/eval_metrics.py: the CLIP and ImageReward scorers already written here.
 - The run folders under /datasets/mmolefe/poe_repair_min/outputs/paper_review/.

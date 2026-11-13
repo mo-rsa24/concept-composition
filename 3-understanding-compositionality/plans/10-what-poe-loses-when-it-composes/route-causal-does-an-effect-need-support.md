@@ -138,7 +138,7 @@ Navigation: ⬅️ [Previous](#where-everything-lives) | 📋 [TOC](#table-of-co
 |---|---|---|---|
 | AI census | 2, 3, 5 | a census session | `3-understanding-compositionality/scripts/census/`, `/datasets/.../census/`, `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/` |
 | you look | 1, 4, 7 | a drip session, one item per message | `calls.json` files |
-| AI renders | 6, 8, 9 | the walk session on [the dog-and-rain walk map](../../artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md) | render sheets, the walk map, the verdict |
+| AI renders | 6, 8, 9 | the walk session on [the dog-and-rain walk map](../../artifacts/drips/probing-sdxl/a-dog-and-rain/EXECUTE_WALK.md) | render sheets, the walk map, the verdict |
 
 ## Schedule
 
@@ -343,7 +343,7 @@ plus the walk map's second test (PoE with the effect word) for camel and dog.
 <a href="../../artifacts/notes/what-poe-loses-when-it-composes/figures/fig-causal-renders.png"><img src="figures/fig-causal-renders.jpg" width="300" alt="Camel and dog renders at seeds 1 and 4 across six prompts, with the reader's calls"></a>
 
 ```text
-/drip-execute-plan --request 3-understanding-compositionality/artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md
+/drip-execute-plan --request 3-understanding-compositionality/artifacts/drips/probing-sdxl/a-dog-and-rain/EXECUTE_WALK.md
 
 Background
 This continues the walk on exec/dog-and-rain. The camel and dog sheets are rendered and called. The
@@ -404,7 +404,7 @@ reachable through language and two-concept PoE lost it, called by you tile by ti
 **Serves:** H-C3 ([§7.6 of the write-up](what-poe-loses-when-it-composes.md#76-the-third-concept-can-poe-get-the-effect-back)).
 
 ```text
-/drip-execute-plan --request 3-understanding-compositionality/artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md
+/drip-execute-plan --request 3-understanding-compositionality/artifacts/drips/probing-sdxl/a-dog-and-rain/EXECUTE_WALK.md
 
 Background
 This continues the walk on exec/dog-and-rain, after every render tile has my call (step 7). The

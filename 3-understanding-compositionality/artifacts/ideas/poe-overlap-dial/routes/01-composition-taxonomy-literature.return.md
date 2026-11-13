@@ -1,6 +1,6 @@
 # Return: composition taxonomy in the literature
 
-Route 1 of [the overlap-dial idea map](../IDEA_MAP.md), anchored at claim 7. The prompt is [the taxonomy route prompt](01-composition-taxonomy-literature.prompt.md). The passages and comparisons behind every line here are in the [combined reading on kinds of composition](../../../drips/combine-kinds-of-composition/COMBINE_MAP.md), and the citations are written into [the composition terms](../composition-terms.md).
+Route 1 of [the overlap-dial idea map](../IDEA_MAP.md), anchored at claim 7. The prompt is [the taxonomy route prompt](01-composition-taxonomy-literature.prompt.md). The passages and comparisons behind every line here are in the [combined reading on kinds of composition](../../../drips/probing-sdxl/combine-kinds-of-composition/COMBINE_MAP.md), and the citations are written into [the composition terms](../composition-terms.md).
 
 **What ran.** One search pass over the arXiv API (18 queries, about 60 candidates; Semantic Scholar was rate-limited and not used). A shortlist of 17 was downloaded and its text extracted. Four combined-reading walks, (a) to (d), each compared four sources with a differences table. No number in this return was computed here. Every number is quoted from a paper.
 

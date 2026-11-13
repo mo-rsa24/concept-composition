@@ -113,7 +113,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 The prompt-rewrite finding owes its number: the spread between the three fit losses, with its units.
 
-The scene artifact `1-lora-correction/artifacts/drips/seeing-the-correction-loss/` owes a correction to its "nearly doubled" claim.
+The scene artifact `1-lora-correction/artifacts/drips/experiments/seeing-the-correction-loss/` owes a correction to its "nearly doubled" claim.
 
 ## What the run cost, and what it bought
 

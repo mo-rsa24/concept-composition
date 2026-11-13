@@ -326,7 +326,7 @@ The cluster project, `reduce-reuse-recycle`, already holds pieces this route can
 Navigation: ⬅️ [Previous](#what-already-exists-on-the-cluster) | 📋 [TOC](#table-of-contents) | [Next](#why-this-chain) ➡️
 
 **Bring it to the cluster.** Copy the walks and notebooks into `reduce-reuse-recycle`, as step files in
-`3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/` next to the parts world, and register the bricks in
+`3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/` next to the parts world, and register the bricks in
 `REBUILD_WALK.md`.
 
 **A latent space, and its organisation.** A small autoencoder with a diffusion model on top, three ways:

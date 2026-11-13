@@ -87,7 +87,7 @@ fix are the same kind of object (a point, then a track), on axes whose meaning i
 **Associated materials.** Verdict: [the review file](../../../../artifacts/plans/completed/05-when-does-the-outcome-lock-in/review/06-where-each-condition-lands.md).
 Design reasoning: [the decision ledger](../../decisions-taken-here.md). The repo's noisy-latent
 plane, kept as the secondary view:
-`3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`.
+`1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/manifold_data.json`.
 
 **For the full picture.** The scope's [master plan](../../MASTER_PLAN.md).
 

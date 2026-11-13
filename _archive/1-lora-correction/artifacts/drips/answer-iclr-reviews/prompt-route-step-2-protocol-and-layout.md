@@ -22,7 +22,7 @@ Objectives
 5. Write 1-lora-correction/scripts/refresh_paper_slots.py, which rebuilds a slot from its result file and compiles.
 
 What to read
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings on nodes, the adapter
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: step 1's findings on nodes, the adapter
   and the paper source.
 - 1-lora-correction/report/paper-review/board.md and the pages prze-1, prze-2, prze-3a, prze-5, prze-8, prze-9 and
   prze-11 beside it: the outcome lines this step and later steps must meet.

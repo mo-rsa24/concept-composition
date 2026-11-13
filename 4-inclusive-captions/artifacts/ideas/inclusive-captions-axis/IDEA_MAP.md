@@ -529,7 +529,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 - [The rung 11b design](../../../../3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/evidence-poe-fails-at-scale.md#what-this-means-for-rung-11b),
   with Okawa et al. 2310.09336, Liang et al. 2408.13256, Jeong et al. 2605.00273, Zarei et al.
   2406.07844, Kamb and Ganguli 2412.20292.
-- [Layer 5's fine-tune figure](../../../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png).
+- [Layer 5's fine-tune figure](../../../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/figures/walk05-step7-finetune-decay.png).
 - The project's PoE combine, `poe_repair/training_cache.py:11`.
 - The customization line that measures this claim's quantity as a defect: Kumari et al. 2212.04488
   (Custom Diffusion), MultiCompose 2608.03708, and SynGen 2306.08877 for the Proper Binding,

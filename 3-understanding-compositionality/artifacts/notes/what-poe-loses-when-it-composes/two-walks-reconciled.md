@@ -11,13 +11,13 @@ The evidence column cites files by these short names, with a line number after t
 | `checkpoints` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-the-toy-failure-in-six-checkpoints.md` |
 | `write-up` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md` |
 | `route` | `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/route-structural-can-a-toy-reproduce-the-hybrid.md` |
-| `dispatch` | `3-understanding-compositionality/artifacts/drips/toy-failure-six-checkpoints/dispatch.md` |
+| `dispatch` | `3-understanding-compositionality/artifacts/drips/the-toy/toy-failure-six-checkpoints/dispatch.md` |
 | `first-run.json` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy-sampler-hybrids.json` (and `-B-strong-mala.json` beside it) |
 | `first-run.py` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py` |
 | `ddim.json` | `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/fig-ddim-guided.json` |
-| `rebuild` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/REBUILD_WALK.md` |
-| `walk05` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/05-the-overlap-dial.md` |
-| `ladder02`, `ladder04`, `ladder10`, `ladder11` | `3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/ladder/02-composing-two-experts.md`, `04-the-parts-world.md`, `10-latent-space-and-vaes.md`, `11-the-text-conditioned-testbed.md` |
+| `rebuild` | `3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md` |
+| `walk05` | `3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/05-the-overlap-dial.md` |
+| `ladder02`, `ladder04`, `ladder10`, `ladder11` | `3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/ladder/02-composing-two-experts.md`, `04-the-parts-world.md`, `10-latent-space-and-vaes.md`, `11-the-text-conditioned-testbed.md` |
 | `overlap-map`, `overlap-compiled` | `3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md`, `COMPILED.md` |
 | `a-and-b-map` | `3-understanding-compositionality/artifacts/ideas/when-poe-reaches-a-and-b/IDEA_MAP.md` |
 | `testbed-map` | `3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md` |

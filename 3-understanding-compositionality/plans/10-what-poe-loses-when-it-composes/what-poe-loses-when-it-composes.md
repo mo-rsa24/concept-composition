@@ -360,7 +360,7 @@ The reader's calls over all five seeds (1, 2, 4, 9, 10). A half call counts as d
 
 **Sources:** `asked-directly-calls.json` and `a-camel-and-rain-calls.json` in
 `3-understanding-compositionality/artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/`; the dog totals from the
-[dog-and-rain walk map](../../artifacts/drips/a-dog-and-rain/EXECUTE_WALK.md), piece 1.
+[dog-and-rain walk map](../../artifacts/drips/probing-sdxl/a-dog-and-rain/EXECUTE_WALK.md), piece 1.
 
 **SDXL can draw a wet camel.** Asked "a wet camel", it does on 4 of 5 seeds.
 

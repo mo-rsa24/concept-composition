@@ -1,6 +1,6 @@
 """Run a walk document's python blocks, in order, as one script, so every printed number in it is checked.
 
-    python -m rebuild.run_walk_doc 3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md --dir /tmp/walk01
+    python -m rebuild.run_walk_doc 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/01-one-expert-from-scratch.md --dir /tmp/walk01
 
 The script is written to <dir>/walk.py and run there with the co3 interpreter; its output is printed.
 """

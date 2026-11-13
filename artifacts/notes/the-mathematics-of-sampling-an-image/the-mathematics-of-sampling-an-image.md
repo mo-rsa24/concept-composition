@@ -265,7 +265,7 @@ q(\textcolor{#00838f}{x_t}\mid\textcolor{#1565c0}{x_0})=\mathcal N\big(\underbra
 \textcolor{#00838f}{x_t}=\textcolor{#2e7d32}{\sqrt{\bar\alpha_t}}\,\textcolor{#1565c0}{x_0}+\textcolor{#ef6c00}{\sqrt{1-\bar\alpha_t}}\,\textcolor{#6a1b9a}{\varepsilon}.
 $$
 
-The mean $\sqrt{\bar\alpha_t}\,x_0$ belongs to one photo; it is not the mean of all dogs. The schedule recomputed here gives $\beta_0=0.000631$, $\bar\alpha_{50}=0.4783$ and $\bar\alpha_{99}=2.43\times10^{-7}$ [3.0]. The derivation of the one-jump form is Step 4's, in [the one-expert walk](../../../3-understanding-compositionality/artifacts/drips/simple-distributions-rebuild/01-one-expert-from-scratch.md). Shown in [scene 2, frame 9](../../scenes/what-sampling-an-image-means/many-numbers.html#f9).
+The mean $\sqrt{\bar\alpha_t}\,x_0$ belongs to one photo; it is not the mean of all dogs. The schedule recomputed here gives $\beta_0=0.000631$, $\bar\alpha_{50}=0.4783$ and $\bar\alpha_{99}=2.43\times10^{-7}$ [3.0]. The derivation of the one-jump form is Step 4's, in [the one-expert walk](../../../3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/01-one-expert-from-scratch.md). Shown in [scene 2, frame 9](../../scenes/what-sampling-an-image-means/many-numbers.html#f9).
 
 ---
 

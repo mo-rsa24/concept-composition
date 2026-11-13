@@ -2,7 +2,7 @@
 """Two-panel figure: all 64 held-out PoE trajectories in the one shared PCA plane
 (left), and the seed 9 bundle magnified with two PoE render insets (right).
 
-Reads 3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json
+Reads 1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/manifold_data.json
 (coordinates, variance shares, embedded 256px renders). Writes
 paper/iclr/figures/held-out-trajectories-in-one-shared-plane.{pdf,png,json}.
 
@@ -22,7 +22,7 @@ from matplotlib.patches import ConnectionPatch, Rectangle
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json"
+SRC = ROOT / "1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/manifold_data.json"
 OUT = ROOT / "paper/iclr/figures"
 NAME = "held-out-trajectories-in-one-shared-plane"
 

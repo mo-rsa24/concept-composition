@@ -55,13 +55,13 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | mscluster107 is your interactive job 83423 with two Quadro RTX 8000 of 49,152 MiB each | verified | `nvidia-smi` through `scripts/cluster.sh`, 2026-11-10 | PRZE-10 |
 | mscluster108 (two Quadro RTX 8000, `co3`) and mscluster111 (one RTX PRO 6000 Blackwell, `co3_bw`) are idle and pass a torch matmul on every card; mscluster110 passes too but carries another user's job 83315 until about 2026-11-12 11:30 | verified | `nvidia-smi -L`, a 1000 by 1000 matmul, `sinfo -N` and `squeue -w` through `scripts/cluster.sh sh`, 2026-11-10; [the node table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-nodes-probed-2026-11-10) | PRZE-10 |
 | The adapter takes two concept prompts and the null prompt, so a third concept has no input slot | read | submitted PDF Appendix B.1, equation 13 | PRZE-4 |
-| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `paper/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `paper/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
+| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `paper/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `paper/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
 | The PDF says the adapter sits on cross-attention (page 1, page 7) and trains at every denoising step (page 1); the adapter of record trained on self- and cross-attention, on steps 0 to 9 only | verified | the PDF text against v58-03-self's `config.json`, 2026-11-10 | PRZE-5, PRZE-11 |
 | The CO3 paper (arXiv 2509.25940) scores three prompt sets from Chefer et al. (animals, animals-objects, objects) with [BLIP-VQA](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/03-blip-vqa-asking-a-question-per-phrase.md) and [ImageReward](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/02-imagereward-the-preference-number.md), 50-step DDIM, guidance 5.0, on SD1.5, SDXL and baselines run from their public code; it does not state prompts per set, seeds per prompt, resolution or how the two metrics were computed | read | the paper's HTML version, 2026-11-10, and your screenshots of its Tables 1, 5, 6 and 7 | PRZE-1, step 2 (protocol), step 7 (scores) |
 | CO3's qualitative figures put one prompt per row and one method per column, with SD1.5 methods and SDXL methods grouped | read | the same HTML version, Figures 3, 4 and 6 | PRZE-2, PRZE-9 |
 | The paper's Figure 5 ("ours" column) is four hand-picked cells from three different adapters, one seed per row: the cross+self adapter for cat and dog, v58-05 self-contrast at step 15,000 (raw weights) for elephant and penguin, the v58 self adapter for the tent and lighthouse rows; CO3 draws its own noise | found | `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/README.md` and `scripts/paper_main_grid.py` lines 21 to 30, 2026-11-10 | PRZE-3a, PRZE-8, PRZE-5, step 4 |
 | OpenReview closes Wednesday 18 November; supervisors want the draft Thursday 12 or Friday 13 November | stated by you; confirm | your message, 2026-11-10 | the schedule |
-| The export builds with Tectonic on mscluster but not page for page: Tectonic's XeTeX engine ignores the `times` package and sets the body in Latin Modern, so the build runs 14 pages against the submitted 13; the PDF inside the zip is an older 16-page build from 2026-09-25 | verified | Tectonic build and `pdffonts` against the submitted PDF, 2026-11-10; [the step 2 walk map](../1-lora-correction/artifacts/drips/answer-iclr-reviews/EXECUTE_WALK-step-2.md) | PRZE-5, PRZE-9 |
+| The export builds with Tectonic on mscluster but not page for page: Tectonic's XeTeX engine ignores the `times` package and sets the body in Latin Modern, so the build runs 14 pages against the submitted 13; the PDF inside the zip is an older 16-page build from 2026-09-25 | verified | Tectonic build and `pdffonts` against the submitted PDF, 2026-11-10; [the step 2 walk map](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/EXECUTE_WALK-step-2.md) | PRZE-5, PRZE-9 |
 | Figure 5's elephant and penguin "ours" tile is `ours_v58-05-self-contrast_s015000_rawA_w50.png`, pixel for pixel; the reward fine-tunes `refl-kl-K0` to `K3` (W&B `t4wiwy5p`, `u73uvqyg`, `yj7l40h5`, `ybjd4trt`) start from v58-05 step 15,000 and trained on cat and dog and on elephant and penguin, seeds 1 to 8 | verified | mean absolute pixel difference 0.00 against 6.32 to 14.10 for the fine-tunes; each run's W&B config, 2026-11-10 | PRZE-3a, PRZE-8 |
 | The comparison protocol is agreed: one adapter, picked from 9 fixed candidates on cat and dog and elephant and penguin at one shared seed, which then leave every held-out rate; [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/08-tome-fusing-an-object-with-its-attributes.md) joins the SDXL table, five binding methods the SD 1.5 table, FK steering the CO3-protocol table | agreed | your yes, 2026-11-10; [the protocol](../1-lora-correction/report/paper-review/protocol.md) | PRZE-8, steps 4 to 12 |
 | Thirteen slots (R1 to R13) have a size, a placeholder in `paper/iclr-56173/` and a result file; `1-lora-correction/scripts/refresh_paper_slots.py --check` passes; R1's eight score columns at 8 pt run about 3.4 in wider than the text | verified | Tectonic build, 22 pages, exit 0, 2026-11-10; [the layout sheet](../1-lora-correction/report/paper-review/layout-sheet.md) | PRZE-9, step 9 |
@@ -132,7 +132,7 @@ Navigation: ⬅️ [Previous](#schedule) | 📋 [TOC](#table-of-contents) | [Nex
 You ~45 min (estimate) · AI ~40 min (estimate) · Sonnet, medium · moves: PRZE-3a, PRZE-5, PRZE-10, PRZE-11
 
 **Objective:** three questions answered with evidence: which nodes work, which pool and checkpoint and noise steps the paper's adapter used, and how the submitted paper differs from the local tex.
-**Outcome:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md`, the node table in the compute page, findings on the pair-list and early-training pages.
+**Outcome:** `1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md`, the node table in the compute page, findings on the pair-list and early-training pages.
 **Serves:** needed by steps 2 to 4 (the protocol, the held-out set and the first GPU jobs all name these facts).
 **Sees:** none · **Ticket:** none · **Source page:** the submitted paper, Section 4 and Appendix A
 
@@ -185,13 +185,13 @@ When something is missing
 
 Rules
 - Read only on the cluster. Submit no job, write no file there, and do not clone Overleaf.
-- Write only under 1-lora-correction/report/paper-review/ and 1-lora-correction/artifacts/drips/answer-iclr-reviews/.
+- Write only under 1-lora-correction/report/paper-review/ and 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/.
 - Show the node table and the pool and checkpoint finding before ticking any outcome line.
 
 What to hand back
 - 1-lora-correction/report/paper-review/prze-10-compute.md updated with the node table.
 - 1-lora-correction/report/paper-review/prze-3a-pair-lists.md and prze-11-early-training.md with the findings.
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the source differences, with page numbers.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: the source differences, with page numbers.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md.
 - Proof: python3 ~/.claude/skills/skill-route/scripts/board.py 1-lora-correction/report/paper-review/board.md
   --step 1 prints the counts, and each ticked line cites the command output behind it.
@@ -205,7 +205,7 @@ You judge from the ground-check file.
 
 - `added:` the checkpoint-identity check (from PRZE-3a) · `added:` which ten steps the training states come from (from PRZE-11) · `dropped:` the paper-reading, diagram and corrector asks (why: later steps)
 - [x] **Gate:** you answer the Overleaf question (token, or a zip exported from Overleaf) before step 2 edits the paper.
-- **Leaves:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md`
+- **Leaves:** `1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md`
 - **Learning path:** gloss only, [LoRA](/home/molef/Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this); no rung is required before this step.
 
 ### 2. 🧪 Write the comparison protocol and the figure and table layout sheet
@@ -243,7 +243,7 @@ What to read
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far".
 - paper/iclr-56173/figures.md: the figure register, with statuses reserved, fillable, built and broken.
 - paper/iclr-56173/iclr2027_conference.tex lines 25 to 70: the placeholder macros already in the source.
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
 - 56173_Restoring_plurality_in_c.pdf and Reviews.pdf: the paper and the three reviews.
 - environment/paper.md: how the paper builds here, since no system LaTeX exists.
 
@@ -430,7 +430,7 @@ Objectives
 
 What to read
 - 1-lora-correction/report/paper-review/protocol.md (agreed 2026-11-10): rule 1's showcase rule and candidate table,
-  rule 4's pair sets. 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter's training.
+  rule 4's pair sets. 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: the adapter's training.
 - 1-lora-correction/report/paper-review/layout-sheet.md: slots R7 and R8, their sizes and result files.
 - artifacts/_shared/cross_pair_pool_configs/: pair_pool_v58.yaml (48 training, 4 held-out) and
   pair_prompts*.yaml (candidate prompts).
@@ -682,7 +682,7 @@ shows all seven pieces with their marks. You judge by opening the page.
 You ~60 min (estimate; one measured `--lean` run took 38 min for one paper, too few runs to trust) · AI ~50 min (estimate) · Sonnet, medium · moves: PRZE-1 (the one-page note per score)
 
 **Objective:** every metric has a row (what it measures, scale, blind spot, which of our rows it feeds), with each blind spot shown on one of your own images.
-**Outcome:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md` and the one-page table, linked from `1-lora-correction/report/paper-review/prze-1-scores.md`.
+**Outcome:** `1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md` and the one-page table, linked from `1-lora-correction/report/paper-review/prze-1-scores.md`.
 **Serves:** needed by step 9 (scores) and the evaluation paragraph of the paper.
 **Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** [the CO3 paper](https://arxiv.org/abs/2509.25940), Table 1
 
@@ -741,7 +741,7 @@ Rules
 - Do not copy a published number into our results; cite it as context only.
 
 What to hand back
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
 - A vault note written by the walk's own close, in the Obsidian vault.
 - A line added to 1-lora-correction/report/paper-review/prze-1-scores.md linking the table.
 - Proof: the table has a row for every metric, and each blind spot cites the image that showed it.
@@ -755,7 +755,7 @@ on one of your own images. You judge from the table.
 
 - `added:` the predict-before-answer rule · `added:` the two small-object images from our own census · `dropped:` the rival-methods reading (why: step 3 covers them, and it is a separate idea)
 - [ ] **Gate:** the one-page table exists before step 9 runs the scorers.
-- **Leaves:** `1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md`
+- **Leaves:** `1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md`
 - **Learning path:** gloss only; the eleven words are linked in step 3's journey.
 
 ### 8. 🧪 Prove the Langevin corrector and render the six-column figure
@@ -863,7 +863,7 @@ You ~90 min (measured) · AI ~4 h of rendering on eight cards (measured) · Opus
 **Objective:** CO3 at its published default renders every R1 and R3 cell and Figure 5's four pairs from the same seed latent as the other methods; ToMe and SuperDiff are tried and left out with their reasons recorded.
 **Outcome:** 1,104 R1 and 424 R3 CO3 tiles with rule 9 sidecars under `outputs/paper_review/co3_default/`, rows 7 and 8 of [the jobs table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs), and the row builder that step 9 reads them with.
 **Serves:** the CO3 row of R1 and R3 and the CO3 column of Figure 5.
-**Plan:** [the baselines plan](../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md) · **Walk map:** `1-lora-correction/artifacts/drips/review-baselines/EXECUTE_WALK.md`
+**Plan:** [the baselines plan](../1-lora-correction/plans/the-baselines-the-reviewers-asked-for.md) · **Walk map:** `1-lora-correction/artifacts/drips/answering-the-reviewers/review-baselines/EXECUTE_WALK.md`
 
 - [x] **Gate:** you say yes to each launch command. ✓ confirmed by hand 2026-11-11: every launch in the walk map followed a yes
 - **Leaves:** the CO3 tiles and logs, `1-lora-correction/scripts/review_baseline_cell.py`, `1-lora-correction/scripts/review_baselines_eval.sh`, `1-lora-correction/scripts/review_baselines_co3_tail.sh`
@@ -903,7 +903,7 @@ Objectives
 5. Fill the table slots through 1-lora-correction/scripts/refresh_paper_slots.py and check the paper still compiles.
 
 What to read
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md: what each metric measures.
 - 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md and prze-10-compute.md.
 - composition/focus/eval_metrics.py: the CLIP and ImageReward scorers already written here.
 - The run folders under /datasets/mmolefe/poe_repair_min/outputs/paper_review/.
@@ -1161,7 +1161,7 @@ Objectives
 What to read
 - 1-lora-correction/report/paper-review/protocol.md: the bars for both gates and the checkpoint-choice rule.
 - 1-lora-correction/report/paper-review/prze-11-early-training.md and prze-1-scores.md: the outcome lines.
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: the paper's real recipe, pool and noise
   steps.
 - environment/hpc/throughput.md: step times and the memory a rank-32 training needs.
 - The training package under poe_repair/experiments/cross_pair_lora_pooling/ and its launchers
@@ -1416,7 +1416,7 @@ Objectives
 2. For each chunk, state the question it answered, the bar written first, and the result.
 
 What to read
-- The session transcripts named by the user, and 1-lora-correction/artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md.
+- The session transcripts named by the user, and 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ROUTE_WALK.md.
 - plans/route-answer-the-iclr-reviews.md: the "What we know so far" table, as the spine.
 - 1-lora-correction/report/paper-review/board.md and every row page's outcome lines.
 

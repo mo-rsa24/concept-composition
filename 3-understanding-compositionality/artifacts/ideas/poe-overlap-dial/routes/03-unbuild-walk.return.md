@@ -18,7 +18,7 @@ This is route 3's return to the [overlap-dial idea map](../IDEA_MAP.md), routes 
 
 **The walk file and the outputs**
 
-The walk file with one row per brick is [the rebuild walk](../../../drips/simple-distributions-rebuild/REBUILD_WALK.md). Figures and numbers are in [the unbuild-walk runs folder](../runs/unbuild-walk/README.md), whose card says what each file shows and which script made it.
+The walk file with one row per brick is [the rebuild walk](../../../drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md). Figures and numbers are in [the unbuild-walk runs folder](../runs/unbuild-walk/README.md), whose card says what each file shows and which script made it.
 
 **Bringing it into `walk`**
 

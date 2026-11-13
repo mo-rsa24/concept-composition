@@ -65,7 +65,7 @@ Rules
 - Do not copy a published number into our results; cite it as context only.
 
 What to hand back
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/read-the-scorers/COMBINE_MAP.md and the one-page table.
 - A vault note written by the walk's own close, in the Obsidian vault.
 - A line added to 1-lora-correction/report/paper-review/prze-1-scores.md linking the table.
 - Proof: the table has a row for every metric, and each blind spot cites the image that showed it.

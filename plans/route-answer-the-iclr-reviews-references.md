@@ -40,4 +40,4 @@ Cheap tests go before training (the measured correction on SD 1.5, the adapter a
 - T2I-CompBench++, [arXiv 2307.06350](https://arxiv.org/abs/2307.06350): where BLIP-VQA comes from.
 - Reduce, Reuse, Recycle, [arXiv 2302.11552](https://arxiv.org/abs/2302.11552) and [the code-against-paper audit](/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md): the corrector's reference.
 - Attend-and-Excite, [arXiv 2301.13826](https://arxiv.org/abs/2301.13826), vendored in `composition/aae/`; the [CONFORM repository](https://github.com/gemlab-vt/conform), [arXiv 2312.06059](https://arxiv.org/abs/2312.06059).
-- [The paper review board](../1-lora-correction/report/paper-review/board.md) and [the walk map](../1-lora-correction/artifacts/drips/answer-iclr-reviews/ROUTE_WALK.md).
+- [The paper review board](../1-lora-correction/report/paper-review/board.md) and [the walk map](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ROUTE_WALK.md).

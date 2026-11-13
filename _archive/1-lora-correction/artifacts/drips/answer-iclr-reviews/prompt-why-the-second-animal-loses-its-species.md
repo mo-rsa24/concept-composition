@@ -19,7 +19,7 @@ Objectives
 5. If neither fix reaches the target, write one retrain proposal and stop for a yes.
 
 What to read
-- 1-lora-correction/artifacts/drips/answer-iclr-reviews/ground-check.md: the adapter of record and its training recipe.
+- 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: the adapter of record and its training recipe.
 - 1-lora-correction/report/paper-review/prze-3a-pair-lists.md: the three runs behind Figure 5, with paths.
 - 3-understanding-compositionality/report/what-the-adapter-ablations-show/does-adapting-self-attention-change-the-result.md: the
   earlier, mixed comparison of self-attention against cross-attention.
