@@ -9,6 +9,7 @@ Reads scripts/regroup/moves.tsv. In every tracked text file:
 Files that record old paths on purpose are skipped. Dry run unless --apply; --check counts broken
 relative markdown links now and at the tag pre-regroup-move, and lists the ones the move broke.
 """
+from urllib.parse import unquote
 import argparse, os, re, subprocess
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -92,7 +93,7 @@ def broken(ref):
             tgt = m.group(2).split("#")[0]
             if not tgt or tgt.startswith(("http:", "https:", "mailto:", "/")):
                 continue
-            p = os.path.normpath(os.path.join(os.path.dirname(f), tgt))
+            p = os.path.normpath(os.path.join(os.path.dirname(f), unquote(tgt)))
             if ref:
                 ok = p in names or any(x.startswith(p + "/") for x in names) or os.path.lexists(os.path.join(ROOT, p))
             else:
