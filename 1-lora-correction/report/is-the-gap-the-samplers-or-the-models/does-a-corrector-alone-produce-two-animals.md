@@ -59,7 +59,7 @@ style while the columns from step 20 on leave the picture almost as plain produc
 "animal", confidence at or above 0.30, non-max suppression below 0.5 intersection over union, two
 or more instances). Every one of the 40 renders counts exactly one animal. The injected correction
 on the same pair and the same seeds composes 0.656 of its runs at steps 0 to 10 and 0.250 at 5 to
-15, from [the timing verdict](../../plans/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
+15, from [the timing verdict](../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
 From `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/window_curves_mcmc.json`,
 fields `per_column[].composed_of_4` and `cells[].n_instances`.
 
@@ -124,7 +124,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The per-column counts and every window render's instance count | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/window_curves_mcmc.json`, 40 cells, read 2026-09-06 | verified |
 | The eight-seed compose rates and the concept confidences | the same folder's `sheet_scores.json`, 16 rows, read 2026-09-06 | verified |
 | The renders | `corrector/window/pairs/a_cat__x__a_dog/seed_<n>/`, `corrector/sheet/` and `corrector/pairs/`, all under `/datasets` | verified |
-| The injected correction's own window numbers | [the timing verdict](../../plans/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), quoted not re-run | verified |
+| The injected correction's own window numbers | [the timing verdict](../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), quoted not re-run | verified |
 | The runs | step 27 of the running order: the window sweep on mscluster108 device 1 (1.6 h) and the sheet on the same device (2.3 h), 2026-09-05 to 06, commit 0150704; W&B `prime_lab/poe-repair-animals-compose/s61hldbc`; tables in [the review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/04-does-the-corrector-compose-in-the-same-window.md) | verified |
 | Regenerate with | recipes 4 and 5 of [running the Langevin corrector](../../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md): the sliding corrector window, then the eight-seed sheets | |
 

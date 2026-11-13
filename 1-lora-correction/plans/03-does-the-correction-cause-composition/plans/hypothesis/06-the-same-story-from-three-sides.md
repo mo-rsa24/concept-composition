@@ -7,9 +7,9 @@ its answer anyway.
 
 | Step | Plan | Status |
 |---|---|---|
-| 6 | [when in the run the correction matters](05-when-in-the-run-it-matters.md) | ◑ timing tab owed |
+| 6 | [when in the run the correction matters](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) | ◑ timing tab owed |
 | **7** | **this plan** | **✅** |
-| 8 | ~~[what the fix changes inside the model](07-what-the-fix-changes-inside-the-model.md)~~ | ✅ |
+| 8 | ~~[what the fix changes inside the model](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md)~~ | ✅ |
 
 Design only. Verdicts live in [this plan's review file](../../review/06-the-same-story-from-three-sides.md).
 

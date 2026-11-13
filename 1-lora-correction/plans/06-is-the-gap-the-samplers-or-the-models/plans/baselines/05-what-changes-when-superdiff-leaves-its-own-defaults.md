@@ -440,7 +440,7 @@ them.
 - [x] **3.3** Write your eye verdict for each of the 8 cells into the review file beside the
       detector's.
   - Where they disagree, the eye is the one cited, following the practice
-    [the timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+    [the timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
     set for this project.
 
 ▶ **Next: [the close out](#close-out--record-what-this-plan-taught)**, then

@@ -47,7 +47,7 @@ CHANGES = {
 }
 
 
-TRANSCRIBED = REPO / "artifacts/drips/present-revision-to-supervisor/reviews-transcribed.md"
+TRANSCRIBED = REPO / "_archive/artifacts/drips/present-revision-to-supervisor/reviews-transcribed.md"
 
 
 def full_review(name: str) -> str:

@@ -23,7 +23,7 @@ there removes CLIP's text embeddings from the list of possible causes.
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | established that the correction is what composes on SDXL, which is the result this plan asks the cause of |
+| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | established that the correction is what composes on SDXL, which is the result this plan asks the cause of |
 | 27 | [hypothesis-04: does-the-corrector-compose-in-the-same-window](04-does-the-corrector-compose-in-the-same-window.md) ✅ | owns the SDXL counts this plan quotes: joint prompt 8 of 8, plain product 0 of 8 |
 | **77 (current)** | **hypothesis-14: does-a-clip-free-model-hybridise** ⚠️ | **runs the same product on a model with no CLIP in it, and asks whether the fusion survives the swap** |
 

@@ -30,7 +30,7 @@ answered.
 | **this file** | **the verdict: not yet run** |
 | [the corrector's verdict](02-the-corrector-and-the-step-size-it-runs-at.md) | the composer and the step size this grid runs at |
 | [the free bound's verdict](01-the-free-bound-on-the-models-share.md) | the lower bound this grid's answer is read against |
-| [the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the result this grid puts under threat, and the numbers it quotes |
+| [the timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the result this grid puts under threat, and the numbers it quotes |
 | [the two literature checks before print](../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md) | cites Soiffer et al. for the claim this grid turns into a number |
 
 ## Table of contents

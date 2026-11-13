@@ -84,7 +84,7 @@ training cache's held-out step-0 latents).
 **This plan's job.** Give the scope one picture in which the correct case, the failure and the
 fix are the same kind of object (a point, then a track), on axes whose meaning is shown.
 
-**Associated materials.** Verdict: [the review file](../../review/06-where-each-condition-lands.md).
+**Associated materials.** Verdict: [the review file](../../../../artifacts/plans/completed/05-when-does-the-outcome-lock-in/review/06-where-each-condition-lands.md).
 Design reasoning: [the decision ledger](../../decisions-taken-here.md). The repo's noisy-latent
 plane, kept as the secondary view:
 `3-understanding-compositionality/artifacts/drips/showcase-the-trained-adapter/manifold/manifold_data.json`.
@@ -388,7 +388,7 @@ within `COMMIT_TOL = 0.10` of its final value.
 - **What would surprise:** a pair where the corrected band sits below the PoE band, meaning
   the correction pushed the pair away from its joint prompt.
 
-**When you get results, answer** [the review file](../../review/06-where-each-condition-lands.md).
+**When you get results, answer** [the review file](../../../../artifacts/plans/completed/05-when-does-the-outcome-lock-in/review/06-where-each-condition-lands.md).
 
 ## Figure Catalog
 

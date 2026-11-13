@@ -204,7 +204,7 @@ Both are known in advance and both are handled rather than discovered.
 `λ` is a fraction of that row's own `r_t^M`, and `‖r_t^M‖` differs per row. So a `λ=0.5` column is
 matched in fraction and unmatched in absolute size, and a row that composes at `λ=0.5` may simply
 have received more.
-[The timing plan in the causal scope](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
+[The timing plan in the causal scope](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
 met exactly this and answered it by running a matched condition, `--mode matched`, implemented at
 [interaction_term_dose_matched.py](../../../../scripts/interaction_term_dose_matched.py). Either put
 the delivered absolute total on each row's label, or run matched. Deciding which is task 1.3, and
@@ -312,7 +312,7 @@ prediction to build the correction from.
   - Either put the delivered absolute total on each row's label, or run the matched condition,
     `--mode matched`, from
     [interaction_term_dose_matched.py](../../../../scripts/interaction_term_dose_matched.py),
-    which [the timing plan](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
+    which [the timing plan](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
     already used for this exact problem.
   - **Done when:** the choice and its reason are written into the review file **before** any grid
     renders, since it changes what each picture in the grid is.
@@ -380,7 +380,7 @@ them.
     doing, and it is the cheapest real finding in this plan.
 - [ ] **3.2** For grid one, count composed renders per row by eye and compare against the
       detector's count.
-  - [The timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+  - [The timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
     records that the [detector and the eye disagree on cat and dog](../hypothesis/04-does-the-corrector-compose-in-the-same-window.md#-the-detector-and-the-eye-disagree-on-cat-and-dog) often enough that the eye read is
     the one cited, so do both and cite the eye where they differ.
 - [ ] **3.3** Write both counts into the review file, side by side, naming every picture the two

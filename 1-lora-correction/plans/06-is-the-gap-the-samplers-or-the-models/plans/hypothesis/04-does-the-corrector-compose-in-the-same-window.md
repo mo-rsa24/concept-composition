@@ -25,7 +25,7 @@ works in.
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | generated the injected-correction renders at all nine window positions, which this plan is matched against render for render |
+| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | generated the injected-correction renders at all nine window positions, which this plan is matched against render for render |
 | 26 | [hypothesis-02: what-is-left-once-the-chain-settles](03-what-is-left-once-the-chain-settles.md) ⚠️ | the measurement this plan waits on, though not strictly |
 | **27 (current)** | **hypothesis-03: does-the-corrector-compose-in-the-same-window** ⚠️ | **generates the nine window positions again with the corrector in place of the injected correction, and asks whether the [compose rate](../../../../../context/world/compose-rate.md) peaks at the same moment** |
 | 29 | [baseline-02: three-rules-on-one-amount-axis](../baselines/06-three-rules-on-one-amount-axis.md) ⚠️ | the other half of the comparison, on how much is added rather than timing |
@@ -456,7 +456,7 @@ them.
     matched. Fix the figure rather than explaining the difference in the caption.
 - [x] **2.2** Count composed renders per column by eye, on both grids, and note which column peaks
       on each.
-  - [The timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+  - [The timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
     records that the detector and the eye disagree on cat and dog often enough that the eye read is
     the one cited. Do both, and cite the eye where they differ.
 - [x] **2.3** Record in the review file whether the corrector's compose rate peaks in the same
@@ -615,7 +615,7 @@ Auto-updated after runs via `/ingest-error-pattern` and `/sync-plan-tree`.
 **What you see:** green borders on renders that do not look composed, or no border on renders that
 do.
 **Why:** the instance-count scorer is validated but not perfect on this pair, and
-[the timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+[the timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
 already records the disagreement rate.
 **How to fix:** count by eye as well, cite the eye where they differ, and say so in the caption.
 

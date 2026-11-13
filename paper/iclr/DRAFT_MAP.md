@@ -1918,7 +1918,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       same; the correction acts on what words write, which locates it without explaining the
       repair. No number appears in the prose, by decision, so F7 carries the ratio and ¶6.1 cannot
       compile before F7 has a slot. Source:
-      [hypothesis-07 review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/07-what-the-fix-changes-inside-the-model.md).
+      [hypothesis-07 review](../../1-lora-correction/artifacts/plans/completed/03-does-the-correction-cause-composition/review/07-what-the-fix-changes-inside-the-model.md).
       Owed to F7's caption: the pattern-versus-scale point (the update dims the content map by
       about a quarter, so the comparison strips uniform scale), and the narrower sentence the
       review requires.
@@ -1941,7 +1941,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       [writing-06](../../1-lora-correction/plans/07-writing-the-paper/plans/writing/06-mechanism-and-limitations.md),
       the [transfer review](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/03-does-one-pooled-fix-transfer-at-all.md),
       the [pair-pool review](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/01-the-clean-pair-pool.md)
-      and the [strength review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
+      and the [strength review](../../1-lora-correction/artifacts/plans/completed/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
 - [x] **6.4** training is unstable and the errors compound. **Placed 2026-09-10, awaiting
       compile.** Eight sentences in three moves: the decay past the best checkpoint with the
       weights growing and the loss flat, showing only on held-out pairs so nothing in the training
@@ -1962,7 +1962,7 @@ extend as cleanly as the headline result suggests. Sources per paragraph are nam
       correction that works, not for one that can be steered. Sources:
       [what is the correction made of](../../1-lora-correction/report/when-does-the-outcome-lock-in/what-is-the-correction-made-of.md),
       the null on more-correction-more-composition in the
-      [strength review](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md),
+      [strength review](../../1-lora-correction/artifacts/plans/completed/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md),
       and the cross-seed direction reads.
 
 - [x] **6.6** the close, forward-looking. **Placed 2026-09-10, awaiting compile.** Seven

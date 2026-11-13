@@ -22,7 +22,7 @@ than its name suggests.
 |---|---|
 | [design](../plans/hypothesis/04-what-the-cached-runs-already-show.md) | the four analyses over the cache, and the shape each expects |
 | **this file** | **the verdict: three hold, the size-follows-noise result is loose, the low-rank result licenses much less than its name** |
-| [the timing answer](05-when-in-the-run-it-matters.md) | the correction moved across nine window positions, which disagrees with the fork step and is not a contradiction |
+| [the timing answer](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the correction moved across nine window positions, which disagrees with the fork step and is not a contradiction |
 | [the register](../../../../paper/iclr/figures.md) | rows F3, F4 and F6 |
 
 ## Table of contents

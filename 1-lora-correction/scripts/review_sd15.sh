@@ -1,6 +1,6 @@
 #!/bin/bash
 # Compute job 10 on SD 1.5 (Table 4, Figure 9): the shared-device launcher for one card of a biggpu node.
-# Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1.
+# Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1.
 #
 #   STAGE=prep   latents for seeds 9-12 and the token-index file (co3, CPU work)
 #   STAGE=smoke  the three smoke cells per method, the PNDM and loss-off variants, then the checks and contact sheet

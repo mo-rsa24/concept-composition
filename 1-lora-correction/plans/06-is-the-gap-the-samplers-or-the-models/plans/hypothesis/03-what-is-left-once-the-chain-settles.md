@@ -120,7 +120,7 @@ comparison stops being optional and becomes a baseline the paper must beat.
 [compose rate](../../../../../context/world/compose-rate.md) as more of it is added, while a
 norm-matched random control stays at what you would get by luck. Injecting it only into steps 0 to
 10 composes 0.656 of 32 pair-and-seed runs, while steps 20 to 30 onward compose 0.000. Both are in
-[the timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
+[the timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
 The threat is that the same picture is what a sampler artifact looks like: the sampler's share is
 worst at high noise, and high noise is the early steps, which is exactly the window that decides
 the outcome. Nothing measured so far tells the two apart, because `r_t` is both of them added

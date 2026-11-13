@@ -21,7 +21,7 @@ sitting on disk, since whatever is left there is a lower bound on the model's sh
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | found the cliff at steps 0 to 10, which is also where a sampler artifact would live |
+| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | found the cliff at steps 0 to 10, which is also where a sampler artifact would live |
 | **24 (current)** | **hypothesis-01: the-free-bound-on-the-models-share** ⚠️ | **reads the correction's size as the run reaches zero noise off files already on disk, and turns it into a lower bound on the model's share** |
 | 25 | [instrument-01: the-corrector-and-the-step-size-it-runs-at](../tools/02-the-corrector-and-the-step-size-it-runs-at.md) ⚠️ | builds the corrector this bound caps the value of |
 | 26 | [hypothesis-02: what-is-left-once-the-chain-settles](03-what-is-left-once-the-chain-settles.md) ⚠️ | the run the rest of the scope waits on, which reads its own result against this lower bound |
@@ -253,7 +253,7 @@ for.
       is already defined or explained somewhere else in the repo.
   - Paste: `/xref-plan @plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/01-the-free-bound-on-the-models-share.md`
   - Done when: the scan comes back with no candidates, or its proposed links have been applied.
-- [ ] **0.3** Re-read [the timing verdict](../../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
+- [ ] **0.3** Re-read [the timing verdict](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md).
       Confirm the three numbers this scope quotes are still what it says. They are 0.656 at steps 0
       to 10, 0.000 from steps 20 to 30 onward, and the correction about 2.7 times larger late than
       early.

@@ -1,6 +1,6 @@
 """SynGen (Rassin et al. 2023) ported to SDXL: the joint-prompt sampler with SynGen's latent update on steps 0 to 24.
 
-Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
 
 `run_cfg_syngen` is the body of `run_cfg` in poe_repair/methods/_sampling.py (plain single-prompt CFG on SDXL, the sampler
 behind the joint column of Table 1) with SynGen's `_syngen_step` inserted at the top of each of the first 25 of 50 steps,

@@ -24,7 +24,7 @@ a pre-registered question rewritten after the fact is no longer pre-registered.
 |---|---|
 | [design](the-whole-corrector-design.md) | the corrector, the step-size search, the grid, the thresholds |
 | **this file** | **the verdict: not yet run** |
-| [the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the result this plan puts under threat, and the numbers it quotes |
+| [the timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the result this plan puts under threat, and the numbers it quotes |
 | [the two literature checks before print](../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md) | cites Soiffer et al. for the claim this plan turns into a number |
 
 ## Table of contents

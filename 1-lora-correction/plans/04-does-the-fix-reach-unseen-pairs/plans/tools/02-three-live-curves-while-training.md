@@ -19,7 +19,7 @@ This extracts error patterns from the run transcript, deduplicates against globa
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 8 (previous) | [hypothesis-01: what-the-fix-changes-inside-the-model](../../../03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md) ✅ | Measured what $r_t$ does inside training |
+| 8 (previous) | [hypothesis-01: what-the-fix-changes-inside-the-model](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md) ✅ | Measured what $r_t$ does inside training |
 | **9 (current)** | **instrument-02: three-live-curves** ◑ run in flight | **Wire live logging for three diagnostic axes** |
 | 10 (next) | [hypothesis-01: does-one-pooled-fix-transfer-at-all](../hypothesis/03-does-one-pooled-fix-transfer-at-all.md) | Use those live curves to run the fifteen trainings |
 
@@ -86,7 +86,7 @@ Before starting those fifteen trainings, we need to know *while a run is trainin
   - **Figure organization:** Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-09 naming convention, and consolidate them into `outputs/interaction_term/live_curves_smoke_run/figures/`. This prompt will generate a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
   - **Locations scanned:** `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders
 
-For the full picture, see the [repo MASTER_PLAN.md](../../../../../MASTER_PLAN.md) and [hypothesis-01](../../../03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md).
+For the full picture, see the [repo MASTER_PLAN.md](../../../../../MASTER_PLAN.md) and [hypothesis-01](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md).
 
 ---
 
@@ -235,7 +235,7 @@ All three as separate live curves on W&B, not merged or post-processed. They app
 ⬅️ [Previous](#description-what-to-build) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
 
 **Purpose:**  
-Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../../MASTER_PLAN.md). Unblocks the whole unattended set of runs ([step 10: does-one-pooled-fix-transfer-at-all](../hypothesis/03-does-one-pooled-fix-transfer-at-all.md) and [step 11: hypothesis-02-more-correction-more-composition](../../../03-does-the-correction-cause-composition/plans/hypothesis/03-more-correction-more-composition.md)).
+Serves [Objective 4 (Diagnose) and Definition-of-Done item 2](../../../../../MASTER_PLAN.md). Unblocks the whole unattended set of runs ([step 10: does-one-pooled-fix-transfer-at-all](../hypothesis/03-does-one-pooled-fix-transfer-at-all.md) and [step 11: hypothesis-02-more-correction-more-composition](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/03-more-correction-more-composition.md)).
 
 **Goals:**
 

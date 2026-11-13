@@ -64,7 +64,7 @@
 **This plan also absorbs experiment C from the ledger:** the λ grid {0, 0.25, 0.5, 0.75, 1.0} crossed with the step window at inference on existing checkpoints. If softness tracks λ at a fixed checkpoint, the blur is the injection, not undertraining; that reading feeds plan 06's interpretation.
 
 **Associated materials:**
-- **Review questions:** [../review/03-the-lora-dose-sweep.md](../../review/03-the-correction-amount-series.md)
+- **Review questions:** [../review/03-the-lora-dose-sweep.md](../../../../artifacts/plans/completed/01-showcase-the-trained-lora/review/03-the-correction-amount-series.md)
 - **Ledger entries:** [the run across correction amounts for the adapter](../../decisions-taken-here.md#the-run-across-correction-amounts-for-the-adapter-is-owed-and-approved) and [experiment C](../../decisions-taken-here.md#the-longer-training-question-runs-as-three-experiments-re-scoped-by-evidence)
 - **The machinery to copy:** the cached correction's own run across amounts under `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/dose/` and its runner
 
@@ -153,7 +153,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 
 - [x] **1.1 Write the manifest and print per-arm counts.** Completion is observable: a printed table, one row per condition, with a non-zero run count for every condition. `1-lora-correction/scripts/showcase/lora_dose_sweep.py --print-manifest`: 120 rows, 40 per condition (real, wrong_seed, shuffled), none zero.
 - [x] **1.2 Extend the harness with λ scaling and the wrong-seed / shuffled control sources.** `1-lora-correction/scripts/showcase/lora_dose_sweep.py`; λ scaling reuses `run_lora_residual_inject_masked`'s native `lambda_value`. Controls route through the same masked sampler via a new `external_delta_by_step` parameter added to `run_lora_residual_inject_masked` (`poe_repair/methods/_sampling.py`), so all three conditions share identical off-window behaviour and differ only in where Δ̂ comes from.
-- [x] **1.3 Launch the sweep** per the execution protocol; output to `/datasets/mmolefe/poe_repair_min/outputs/showcase/lora_dose/`. Log the launch mode (Slurm or nohup) in the review file's Runs table. First attempt (slurm job 48596) mixed two axes between conditions and was invalidated; corrected attempt (slurm job 48619) is the valid run. Both logged in the [review file](../../review/03-the-correction-amount-series.md#runs).
+- [x] **1.3 Launch the sweep** per the execution protocol; output to `/datasets/mmolefe/poe_repair_min/outputs/showcase/lora_dose/`. Log the launch mode (Slurm or nohup) in the review file's Runs table. First attempt (slurm job 48596) mixed two axes between conditions and was invalidated; corrected attempt (slurm job 48619) is the valid run. Both logged in the [review file](../../../../artifacts/plans/completed/01-showcase-the-trained-lora/review/03-the-correction-amount-series.md#runs).
 - [x] **1.4 Score all arms; write `dose_curves_lora.json`** (schema mirrors the cached-correction file). Completion is observable: the json's per-condition row counts equal the manifest's. 40/40/40, matches the manifest.
 - [x] **1.5 Compute the softness-vs-λ read** and save its strip beside the json, labelled descriptive. `softness_vs_lambda.json`, Laplacian-variance proxy, labelled `"descriptive, not a scorer contract"`.
 
@@ -171,7 +171,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 
 2.2 **Read the curve.** Open the drafted compose-rate-against-λ figure (task 1.4's quick plot): ✅ real-r̂ curve rises with λ and both controls stay at what you would get by luck; ❌ any control rises: record it, the comparison is contaminated and the review file says so. First attempt (48596) hit the ❌ branch: both controls rose well above real. Traced to a mixed comparison (see task 1.3); recorded in the review file and fixed. Corrected attempt (48619) hits the ✅ branch: real rises 0 → 0.625 with λ, both controls stay flat or noise-only.
 
-2.3 **Write the verdict** into the [review file](../../review/03-the-correction-amount-series.md): AUC per condition, the threshold, the launch mode, wall time. Done: real AUC 0.203125, wrong_seed 0.03125, shuffled 0.0; threshold met.
+2.3 **Write the verdict** into the [review file](../../../../artifacts/plans/completed/01-showcase-the-trained-lora/review/03-the-correction-amount-series.md): AUC per condition, the threshold, the launch mode, wall time. Done: real AUC 0.203125, wrong_seed 0.03125, shuffled 0.0; threshold met.
 
 ▶ **Next: what has to pass before this runs.**
 
@@ -189,7 +189,7 @@ Serves master-plan objective 3 and goal 3. Checkable outcomes:
 **Fail criteria:**
 - A control condition rises above what you would get by luck (contaminated comparison), or a condition's run count was zero anywhere (silent no-op). **Tripped once, on the first attempt** (job 48596): a mixed-comparison bug, not a real finding. Fixed and rerun (job 48619); does not trip on the corrected data.
 
-**When you get results, answer the open questions in the [review file](../../review/03-the-correction-amount-series.md).**
+**When you get results, answer the open questions in the [review file](../../../../artifacts/plans/completed/01-showcase-the-trained-lora/review/03-the-correction-amount-series.md).**
 
 ---
 

@@ -1,6 +1,6 @@
 """SynGen's parse of the 276 benchmark prompts, aligned to SDXL's tokenizer, for the SDXL port (Plan 2).
 
-Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "spaCy and the token indices".
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "spaCy and the token indices".
 co3 has no spaCy, and en_core_web_trf 3.6.1 needs transformers below 4.31, so the parse runs here, in the syngen
 environment, through SynGen's own code: `SynGenDiffusionPipeline._extract_attribution_indices` (its three extractors,
 `include_entities` False, and `unify_lists`) with `_align_indices` against SDXL's first tokenizer. Both methods read only

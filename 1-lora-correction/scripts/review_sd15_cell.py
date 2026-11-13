@@ -1,6 +1,6 @@
 """Compute job 10: Attend-and-Excite, SynGen, Divide-and-Bind, PoE and the joint prompt on SD 1.5, one tile per cell.
 
-Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1. Every method runs on
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 1. Every method runs on
 the SD 1.5 snapshot 451f4fe at 512 by 512, guidance 7.5, 50 DDIM steps (decision D1: the scheduler stored in the snapshot,
 PNDM, is swapped for DDIMScheduler.from_config of its config, here in the runner; no method code is edited), fp32 (D3),
 and every cell starts from the saved latent of its seed (1-lora-correction/scripts/review_sd15_prep.py), passed through each pipeline's

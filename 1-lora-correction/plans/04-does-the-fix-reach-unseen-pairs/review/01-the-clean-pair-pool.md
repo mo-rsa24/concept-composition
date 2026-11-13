@@ -132,7 +132,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 `an_elephant__x__a_penguin` is listed here as one of three compose-by-default control pairs, and
 that is what the do-no-harm check rests on. The review of the run across correction amounts
 reports it scoring 0 of 4 at strength 0, with all four images single fused creatures:
-[hypothesis-02 of the other claim](../../03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
+[hypothesis-02 of the other claim](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md).
 
 Both cannot be true. Either the pool's assumption about that pair is wrong, or the two runs
 measured it under conditions different enough to explain the gap. It is not resolved here, and it

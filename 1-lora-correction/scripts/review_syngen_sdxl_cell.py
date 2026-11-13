@@ -1,6 +1,6 @@
 """SynGen ported to SDXL (poe_repair/baselines/syngen_sdxl.py) over Table 1's 1,104 cells, one tile per cell.
 
-Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2. Same cells, starting
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2. Same cells, starting
 latents and sampler as the joint, PoE, ours and CO3 columns: 1024 by 1024, 50 DDIM steps, guidance 7.5, fp16, the seed's
 latent from the a_cat__x__a_dog cache path (`init_latents_for_cell`, which rendered r1_joint) checked byte for byte against
 the saved paper_review/latents/seedNN.pt. SynGen's step size is its released 20.0 (decision D4); the parse is read from

@@ -49,9 +49,9 @@ pointing elsewhere do nothing, it only works in an early window, and the same st
 three sides.
 
 ⬜ No finding file, three verdicts. The amount question is in
-[more correction, more composition](../1-lora-correction/plans/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md)
+[more correction, more composition](../1-lora-correction/artifacts/plans/completed/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md)
 with figures under [how much correction is needed](../artifacts/results/how-much-correction-is-needed/README.md);
-the timing question is in [when in the run it matters](../1-lora-correction/plans/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+the timing question is in [when in the run it matters](../1-lora-correction/artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
 with figures under [when the correction must arrive](../artifacts/results/when-the-correction-must-arrive/README.md);
 the direction and substitute controls are in
 [the same story from three sides](../1-lora-correction/plans/03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md)

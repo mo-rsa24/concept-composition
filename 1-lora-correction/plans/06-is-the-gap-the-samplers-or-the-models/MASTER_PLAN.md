@@ -68,7 +68,7 @@ three rules are read against each other rather than as three unrelated pictures.
 
 **The paper's timing result and a sampler artifact look identical.**
 
-[The timing plan](../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
+[The timing plan](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md)
 found that injecting the correction into steps 0 to 10 composes 0.656 of 32 runs, where one run is
 one pair generated at one seed, while steps 20 to 30 onward compose 0.000. The sampler's share of
 the error is worst at high noise, and high noise is the early steps. The picture that supports the paper's claim is also the picture a
@@ -428,7 +428,7 @@ reshuffle. Each one names the plan that owns it, so `/populate-plans` cannot dro
 | Two corrector counts are two trajectories, not one point wiggled twice, so no axis may be labelled "the correction at step t" | steps 26 and 27, in every caption |
 | A ratio with a moving denominator is not a measurement: numerator and denominator are separate recorded columns, plotted beneath the ratio | step 26 |
 | A flat curve whose median displacement is under `MIN_CHAIN_DISPLACEMENT` is a broken measuring tool, not a null | steps 25 and 26 |
-| The rows deliver different absolute amounts at the same `λ`, because `‖r_t^M‖` differs per row. [The timing plan](../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) met this and answered it with a `--mode matched` condition, so either put the delivered total on each row label or run matched | step 29 |
+| The rows deliver different absolute amounts at the same `λ`, because `‖r_t^M‖` differs per row. [The timing plan](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) met this and answered it with a `--mode matched` condition, so either put the delivered total on each row label or run matched | step 29 |
 | The corrector rows will not reproduce the joint render at `λ=1`, because the chain has already left the joint trajectory. Those grid positions are labelled not-an-identity, which makes the `λ=1` column a free classifier of what each rule is | step 29 |
 | The corrector's window figure files to `paper/iclr/figures/when-the-correction-arrives/mcmc/`, the four existing PNGs are already moved into `poe/`, and the grids across correction amounts file to `paper/iclr/figures/how-much-is-added/across-composition-rules/`, because the timing folder's name is a question about timing | steps 27 and 29 |
 

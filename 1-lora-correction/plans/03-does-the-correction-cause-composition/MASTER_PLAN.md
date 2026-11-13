@@ -4,17 +4,17 @@
 
 This scope owns **9 of the 30 steps**, 5 of them done. The steps interleave with the other scopes', so the list below is a filter on the one `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md), never an order of its own.
 
-**Next in this scope: step 6**, [when in the run the correction matters](plans/hypothesis/05-when-in-the-run-it-matters.md), driving the timing tab by hand.
+**Next in this scope: step 6**, [when in the run the correction matters](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md), driving the timing tab by hand.
 
 | Step | Plan | What it does | Status |
 |---|---|---|---|
-| 1 | ~~[building the measuring scripts](plans/tools/01-build-the-measuring-scripts.md)~~ | the thirteen measuring scripts | ✅ |
-| 2 | ~~[fixing the size measure before any result](plans/tools/02-fix-the-size-measure-before-any-result.md)~~ | how the correction's size is expressed | ✅ |
-| 4 | [03-more-correction-more-composition](plans/hypothesis/03-more-correction-more-composition.md) | the headline causal result | ◑ 6.3GB owed off /home-mscluster |
+| 1 | ~~[building the measuring scripts](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/tools/01-build-the-measuring-scripts.md)~~ | the thirteen measuring scripts | ✅ |
+| 2 | ~~[fixing the size measure before any result](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/tools/02-fix-the-size-measure-before-any-result.md)~~ | how the correction's size is expressed | ✅ |
+| 4 | [03-more-correction-more-composition](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/03-more-correction-more-composition.md) | the headline causal result | ◑ 6.3GB owed off /home-mscluster |
 | 5 | ~~[04-what-the-cached-runs-already-show](plans/hypothesis/04-what-the-cached-runs-already-show.md)~~ | the analyses needing no GPU | ✅ |
-| 6 | [05-when-in-the-run-it-matters](plans/hypothesis/05-when-in-the-run-it-matters.md) | when the correction matters | ◑ driving the timing tab |
+| 6 | [05-when-in-the-run-it-matters](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) | when the correction matters | ◑ driving the timing tab |
 | 7 | ~~[06-the-same-story-from-three-sides](plans/hypothesis/06-the-same-story-from-three-sides.md)~~ | the independent checks | ✅ |
-| 8 | ~~[07-what-the-fix-changes-inside-the-model](plans/hypothesis/07-what-the-fix-changes-inside-the-model.md)~~ | what the fix changes inside | ✅ |
+| 8 | ~~[07-what-the-fix-changes-inside-the-model](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md)~~ | what the fix changes inside | ✅ |
 | 13 | [08-the-seven-paper-figures](plans/figures/08-the-seven-paper-figures.md) | the figures this scope owes | ◑ F6 needs a decision |
 | 15 | [the two literature checks before print](plans/checks/09-two-literature-checks-before-print.md) | the two literature checks that must pass before print | ⚠️ |
 

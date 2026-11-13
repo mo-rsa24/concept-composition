@@ -1,6 +1,6 @@
 #!/bin/bash
 # SynGen ported to SDXL (Table 1): the shared-device launcher for one card of a biggpu node.
-# Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
+# Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, Plan 2.
 #
 #   STAGE=smoke  step size 0 on cat and dog (against r1_joint), step size 20 on two prompts with modifiers, contact sheet
 #   STAGE=run    production, SHARD=i/n

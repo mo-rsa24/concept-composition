@@ -25,7 +25,7 @@ attribute there by construction.
 | [design](../plans/hypothesis/04-does-the-corrector-compose-in-the-same-window.md) | the nine positions, the layout it must match, and where the figure files |
 | **this file** | **the verdict: not yet run** |
 | [the step 26 verdict](03-what-is-left-once-the-chain-settles.md) | the measurement this waits on, though not strictly, and the `k` these renders run at |
-| [the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the injected-correction figure this is compared against, render for render |
+| [the timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) | the injected-correction figure this is compared against, render for render |
 
 ## Table of contents
 

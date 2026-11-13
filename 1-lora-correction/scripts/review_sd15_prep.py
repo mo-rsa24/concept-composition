@@ -1,6 +1,6 @@
 """Compute job 10's inputs on SD 1.5: one saved starting latent per seed, and the token indices two of the methods need.
 
-Plan: 1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The starting latent" and
+Plan: _archive/1-lora-correction/artifacts/drips/answer-iclr-reviews/routes/plan-sd15-baselines-and-syngen-sdxl.md, "The starting latent" and
 "The token indices".
 
 Latents. Protocol rule 2 gives every method on one model the same starting noise per seed. The four SD 1.5 methods run

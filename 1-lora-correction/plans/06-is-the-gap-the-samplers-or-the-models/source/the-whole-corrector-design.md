@@ -26,7 +26,7 @@ of them, then delete it once every task group has landed in a plan file.
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 6 | [hypothesis-03: when-in-the-run-it-matters](../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | Found the cliff at steps 0 to 10, which is also where a sampler artifact would live |
+| 6 | [hypothesis-03: when-in-the-run-it-matters](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) ◑ | Found the cliff at steps 0 to 10, which is also where a sampler artifact would live |
 | 15 | [two literature checks before print](../../03-does-the-correction-cause-composition/plans/checks/09-two-literature-checks-before-print.md) ⚠️ | Already cites Soiffer et al. as the reason to train a fix rather than trust a sampler. This scope is the measurement behind that sentence |
 | **24 to 30** | **this scope's seven plans** ⚠️ | **Size the sampler's share against the model's share, and compare three composition rules on one axis of correction amount** |
 | 21 | [writing-06: mechanism-and-limitations](../../07-writing-the-paper/plans/writing/06-mechanism-and-limitations.md) ⚠️ | Cannot be written honestly until step 26 returns a size |
@@ -119,7 +119,7 @@ The scope has a causal result and a timing result. Injecting `r_t` raises the
 [compose rate](../../../../context/world/compose-rate.md) as more correction is added, while a norm-matched random
 control stays at what you would get by luck, and injecting it only into steps 0 to 10 composes 0.656 of 32 runs while steps 20
 to 30 onward compose 0.000. Both are in
-[the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), which also records
+[the timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md), which also records
 that the correction is about 2.7 times larger late than early, so it works where it is smallest,
 and that tripling the amount added late changes almost nothing.
 
@@ -437,7 +437,7 @@ directly. Task 1 costs nothing at all: it reads files already on disk.
 
 ### 0. 🧭 Check this plan before working from it
 
-- [ ] **0.1** Re-read [the timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
+- [ ] **0.1** Re-read [the timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md)
       and confirm the three numbers this plan quotes are still what it says. They are 0.656 at
       steps 0 to 10, 0.000 from steps 20 to 30 onward, and the correction 2.7 times larger late
       than early.
@@ -621,7 +621,7 @@ Run group: **baseline**.
 - [ ] **7.3** Grid two: columns are `λ ∈ {0, 0.25, 0.5, 0.75, 1}`, seed fixed at 9.
 - [ ] **7.4** Handle the two things this grid is known to hit rather than discovering them. The
       rows deliver different absolute amounts at the same `λ`, because `‖r_t^M‖` differs per row.
-      [The timing plan](../../03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) met this and answered it with
+      [The timing plan](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) met this and answered it with
       a `--mode matched` setting, so either put the delivered total on each row label or run matched.
       And the corrector rows will not reproduce the joint render at `λ=1`, because the chain has
       already moved off the joint trajectory; label those pictures not-an-identity<sub>[1](../plans/baselines/06-three-rules-on-one-amount-axis.md#words-this-plan-uses "plan: three rules on one amount axis"), [2](../review/06-three-rules-on-one-amount-axis.md#words-this-file-uses "review: four composition rules on the same amount axis")</sub>. A row that fails
@@ -708,7 +708,7 @@ them.
       not, and that is expected. Record for each row whether it converged, since that column is a
       free classifier of what each rule is doing.
 - [ ] **11.2** For grid one, count composed pictures per row by eye and compare against the detector's
-      count. [The timing verdict](../../03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) records
+      count. [The timing verdict](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) records
       that the [detector and the eye disagree on cat and dog](../plans/hypothesis/04-does-the-corrector-compose-in-the-same-window.md#-the-detector-and-the-eye-disagree-on-cat-and-dog) often enough that the eye read is the
       one cited, so do both and cite the eye where they differ.
 - [ ] **11.3** Write both counts into the review file, side by side, with the disagreements named
