@@ -1,6 +1,6 @@
 # Prompt: route step 14, draft the replies
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 14 of `plans/route-answer-the-iclr-reviews.md`.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 14 of `plans/route-answer-the-iclr-reviews.md`.
 
 ```text
 /drip-write the reply to Reviewer PrzE for submission 56173, point by point, after the AI builds the
@@ -14,7 +14,7 @@ Background
 Reviewer PrzE rated submission 56173 a 1 with confidence 4 and listed two strengths, two weaknesses
 and two questions. The paper has been revised (step 13). This step writes the reply, point by
 point, in a markdown source that builds a LaTeX file for the Overleaf replies project and a plain
-text file for OpenReview. The repo is /home/molef/PhD/poe_repair_min.
+text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.

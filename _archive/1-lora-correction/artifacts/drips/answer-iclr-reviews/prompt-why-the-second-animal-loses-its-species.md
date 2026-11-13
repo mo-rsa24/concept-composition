@@ -6,7 +6,7 @@ Model: Opus, high effort. Box: 2 sittings, about 3 hours of your time. Filing: t
 Background
 The paper "Restoring plurality in compositional diffusion by training correction adapters" (ICLR
 2027 submission 56173) trains a LoRA on SDXL so the product of two concept prompts draws both
-things. The repo is /home/molef/PhD/poe_repair_min on the laptop. Runs happen on mscluster through
+things. The repo is /home/molef/PhD/concept-composition on the laptop. Runs happen on mscluster through
 scripts/cluster.sh. Two animals now appear, but the second often looks like the first: lion and
 meerkat at seed 1 gives a lion and a lion cub. Fidelity of each animal is the paper's weak point.
 This walk tests two causes, cheapest first, and proposes a retrain only if both fail.

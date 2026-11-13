@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Is poe_repair_min quiet enough to regroup? Prints CLEAR or WAIT, and why.
+"""Is concept-composition quiet enough to regroup? Prints CLEAR or WAIT, and why.
 
 The regroup in plans/regroup-into-project-folders.md moves hundreds of files across three
 checkouts. It must not run while another Claude session is writing into them, or while files sit
@@ -23,7 +23,7 @@ import time
 
 PHD = "/home/molef/PhD"
 CHECKOUTS = {
-    "poe_repair_min": "-home-molef-PhD-poe-repair-min",
+    "concept-composition": "-home-molef-PhD-concept-composition",
     "poe_repair_min-dog-and-rain": "-home-molef-PhD-poe-repair-min-dog-and-rain",
     "poe_repair_min-reviews": "-home-molef-PhD-poe-repair-min-reviews",
 }

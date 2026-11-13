@@ -50,7 +50,7 @@ export default function App() {
   return (
     <div className="shell">
       <div className="header">
-        <div className="eyebrow">poe_repair_min · dl-scene · shape-traced SDXL VAE</div>
+        <div className="eyebrow">concept-composition · dl-scene · shape-traced SDXL VAE</div>
         <h1>The v4 pipeline's VAE, level by level</h1>
         <p className="sub">
           {trace.summary.model} · {trace.summary.n_modules} modules · all shapes <span className="tag real">real</span> (traced, batch 1, 3×1024×1024) ·

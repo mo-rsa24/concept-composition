@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Re-runnable artifact inventory for poe_repair_min.
+"""Re-runnable artifact inventory for concept-composition.
 
 Walks outputs/ and poe_repair/experiments/, finds every local W&B run directory,
 extracts (project, run-id, step, runtime, exit-state) from each, and prints one

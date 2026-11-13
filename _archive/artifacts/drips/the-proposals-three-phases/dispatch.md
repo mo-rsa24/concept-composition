@@ -1,4 +1,4 @@
-scope: /home/molef/PhD/poe_repair_min
+scope: /home/molef/PhD/concept-composition
 source: /mnt/c/Users/molef/Downloads/PhD/Proposal/Composability Gap - PhD Proposal (v2).pdf (44 pages, dated 8 May 2026)
 why: not stated yet, asked in the opening message
 

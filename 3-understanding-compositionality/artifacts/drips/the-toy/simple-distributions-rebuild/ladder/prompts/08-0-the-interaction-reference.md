@@ -53,7 +53,7 @@ What is already known
 - The brick row says: in the parts world with a "wet" rule (the cat half shifts when a dog is
   present), r(x) = log p(x|A,B) − [log p(x|A) + log p(x|B) − log p(x)] in closed form, expected
   constant with the rule off and varying with it on, then the noised r_t and its gradient, written
-  also in ε-space as ε_joint − ε_A − ε_B + ε_∅, the residual poe_repair_min already caches for 25
+  also in ε-space as ε_joint − ε_A − ε_B + ε_∅, the residual concept-composition already caches for 25
   pairs at all 50 steps, in files rebuild/interaction.py and rebuild/phase8_interaction.py, not yet
   built (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
   exact").

@@ -54,7 +54,7 @@ What is already known
 - A LoRA keeps a projection W frozen and trains a rank-r update BA, giving (W + BA)x with
   r·(in + out) parameters: 384 for the journey's toy (rank 2, 3 blocks) and 4,956,160 for the real
   case (rank 8, 210 modules) (the journey plan 08-lora-update.md, Description and Goal).
-- poe_repair_min's correction is a rank-8 cross-attention LoRA trained on the cached guided residual
+- concept-composition's correction is a rank-8 cross-attention LoRA trained on the cached guided residual
   r_t = ε̃_J − ε̃_PoE (Mission, in
   ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
 - That residual is w·(ε_J − ε_A − ε_B + ε_∅) at guidance w = 7.5, written in the cache as
@@ -70,7 +70,7 @@ What is already known
   rate around 87% to 94% (~/Playground/PhD/poe_repair_min/context/world/compose-rate.md).
 
 Rules
-- Change nothing in poe_repair_min, the journey plans or rebuild/.
+- Change nothing in concept-composition, the journey plans or rebuild/.
 - In this ladder file, write only the two URLs.
 - Report each quiz's question count, node count and verdicts before its page is built.
 

@@ -1,4 +1,4 @@
-# poe_repair_min
+# concept-composition
 
 Ask SDXL for "a cat" and for "a dog" separately, then combine the two predictions with the
 Product-of-Experts rule, and you rarely get a cat next to a dog. You get one fused animal, or only

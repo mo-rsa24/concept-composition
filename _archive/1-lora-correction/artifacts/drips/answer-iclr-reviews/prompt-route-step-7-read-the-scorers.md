@@ -1,6 +1,6 @@
 # Prompt: route step 7, read the scorers together
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 7 of `plans/route-answer-the-iclr-reviews.md`, whose image paths predate step 4.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 7 of `plans/route-answer-the-iclr-reviews.md`, whose image paths predate step 4.
 
 ```text
 /drip-read --combine --lean "how a benchmark decides that two named objects are both in the picture,
@@ -14,7 +14,7 @@ eleven words, once step 3 has made the journey).
 Background
 Reviewers of submission 56173 asked for scores on standard benchmarks. Before running them we need
 to know what each one measures, its scale, and its blind spots, so each number lands in the right
-place in the results and is not over-claimed. The repo is /home/molef/PhD/poe_repair_min. The
+place in the results and is not over-claimed. The repo is /home/molef/PhD/concept-composition. The
 reader is a visual, hands-on learner with little time who needs to use each metric and place it,
 not derive it.
 

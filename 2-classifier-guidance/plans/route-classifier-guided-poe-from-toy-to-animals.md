@@ -56,7 +56,7 @@ whose numbers step 2 fills in.
 [the references file](route-classifier-guided-poe-from-toy-to-animals-references.md).
 
 **Where files live.** This project is the folder `2-classifier-guidance/` of the portfolio repo
-`/home/molef/PhD/poe_repair_min`: its `plans/`, `report/classifier-guided-poe/`, `artifacts/` and
+`/home/molef/PhD/concept-composition`: its `plans/`, `report/classifier-guided-poe/`, `artifacts/` and
 `scripts/`. The guided sampler, the composers and the presence and dog heads are in the shared
 package, under `poe_repair/methods/`, `poe_repair/composers/` and
 `poe_repair/experiments/presence_head/`. Paths in this route are written from the repo root. The
@@ -401,7 +401,7 @@ per rung.
 ```text
 /hypothesis-to-scope <the step 2 compile> as this repo's 2-classifier-guidance/plans/MASTER_PLAN.md,
 in
-/home/molef/PhD/poe_repair_min
+/home/molef/PhD/concept-composition
 
 Background
 This is step 3 of the route in
@@ -473,7 +473,7 @@ You ~20 min (estimate) · AI ~15 min · Opus, high · moves: R0 and A1 from open
 **Serves:** needed by steps 5 and 6.
 
 ```text
-/populate-plans /home/molef/PhD/poe_repair_min/2-classifier-guidance/plans/ only the first two rungs
+/populate-plans /home/molef/PhD/concept-composition/2-classifier-guidance/plans/ only the first two rungs
 
 Background
 This is step 4 of the route in

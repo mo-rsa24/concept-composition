@@ -1,4 +1,4 @@
-# 🔬 Report: poe_repair_min
+# 🔬 Report: concept-composition
 
 What this project found, one file per question, every claim paired with a figure and the
 statistic that backs it. What the work *means* lives in [context/](../context/00-INDEX.md),

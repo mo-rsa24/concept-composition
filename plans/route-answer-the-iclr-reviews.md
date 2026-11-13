@@ -147,7 +147,7 @@ Side routes: none; no installed mode fits better than the walk itself.
 Background
 The paper "Restoring plurality in compositional diffusion by training correction adapters" is under
 review at ICLR 2027 as submission 56173. Three reviewers asked for scores, pair lists and baselines.
-The repo is /home/molef/PhD/poe_repair_min on the laptop. Runs happen on mscluster and go through
+The repo is /home/molef/PhD/concept-composition on the laptop. Runs happen on mscluster and go through
 scripts/cluster.sh. This step checks three facts that every later run depends on.
 
 Objectives
@@ -230,7 +230,7 @@ Background
 Reviewers of submission 56173 asked for scores against standard benchmarks, more baselines and
 aggregate rates over held-out pairs. Before any run, the comparison rules and the shape of every
 new figure and table are fixed, so no result can be accused of an unfair comparison and every
-figure fits the ICLR layout cleanly. The repo is /home/molef/PhD/poe_repair_min.
+figure fits the ICLR layout cleanly. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Write 1-lora-correction/report/paper-review/protocol.md with the rules every result must obey.
@@ -319,7 +319,7 @@ comparisons with other methods. Reviewer PrzE named T2I-CompBench, GenEval, CLIP
 Reviewer UHz6 named Attend-and-Excite and CONFORM. The CO3 paper (arXiv 2509.25940) scores the
 Chefer et al. prompt sets with BLIP-VQA and ImageReward against Attend-and-Excite, SynGen, Divide
 and Bind, InitNO and ToMe. We must run these and place them in a table with our adapter, in about
-three working days. The repo is /home/molef/PhD/poe_repair_min.
+three working days. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Check whether an existing journey under ~/goal-setting/learning already covers any of the eleven
@@ -412,7 +412,7 @@ Background
 Reviewers of submission 56173 asked for success rates over held-out pairs and seeds. The paper's
 adapter was tested on four pairs, and its main figure used three different adapters. Before any
 evaluation, this step fixes which pairs are scored, which are used for tuning, and which one
-checkpoint is the paper's adapter. The repo is /home/molef/PhD/poe_repair_min and runs go through
+checkpoint is the paper's adapter. The repo is /home/molef/PhD/concept-composition and runs go through
 scripts/cluster.sh.
 
 Objectives
@@ -533,7 +533,7 @@ Background
 Step 4 left a frozen list of evaluation pairs, tuning pairs, seeds 9 to 16 and one adapter
 checkpoint. Steps 2 and 4 left the protocol and that list. This step places every GPU job on a node
 with a priority and an estimate, then launches the ones that no gate blocks. The repo is
-/home/molef/PhD/poe_repair_min and cluster actions go through scripts/cluster.sh.
+/home/molef/PhD/concept-composition and cluster actions go through scripts/cluster.sh.
 
 Objectives
 1. Write the compute plan as a table in 1-lora-correction/report/paper-review/prze-10-compute.md: job, node, memory,
@@ -619,7 +619,7 @@ The paper under review at ICLR 2027 (submission 56173) needs a results section w
 baselines and held-out rates. The pipeline that makes them has many parts and several unfair
 comparisons would be easy to introduce by accident. This step draws the pipeline once so every
 later step and the paper's evaluation paragraph agree on it. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Check hld-diagram/references/registry.json for an existing page of this system, and say what is
@@ -698,7 +698,7 @@ eleven words, once step 3 has made the journey).
 Background
 Reviewers of submission 56173 asked for scores on standard benchmarks. Before running them we need
 to know what each one measures, its scale, and its blind spots, so each number lands in the right
-place in the results and is not over-claimed. The repo is /home/molef/PhD/poe_repair_min. The
+place in the results and is not over-claimed. The repo is /home/molef/PhD/concept-composition. The
 reader is a visual, hands-on learner with little time who needs to use each metric and place it,
 not derive it.
 
@@ -784,7 +784,7 @@ Reviewer PrzE asked for an MCMC corrector baseline. Our Langevin corrector
 (poe_repair/methods/_poe_langevin.py) uses the paper's unadjusted Langevin update with a different
 step-size rule and a different order of corrector and step. This step proves the update on a
 toy with a known answer, builds the joint-prompt and unadjusted HMC drivers, and renders the
-figure. The repo is /home/molef/PhD/poe_repair_min.
+figure. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Write a numpy check of the update on two Gaussian experts and print the chain's mean and
@@ -892,7 +892,7 @@ Reviewer PrzE found no quantitative metric in the paper and asked for T2I-CompBe
 score and ImageReward against standard baselines. The images exist from steps 5 and 8 on the frozen
 evaluation set. This step scores them under the protocol, builds the tables the paper needs and
 fills
-the paper's table slots. The repo is /home/molef/PhD/poe_repair_min.
+the paper's table slots. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Install and verify each scorer on the two small-object images from step 7, and write each one's
@@ -976,7 +976,7 @@ Reviewer UHz6 asked about Attend-and-Excite and CONFORM. Both are written for St
 and 2.x, and our adapter is on SDXL, so a fair comparison puts them on the same weights as a PoE
 baseline and the measured correction, not on SDXL. This step builds that set and runs a test that
 decides whether training an SD 1.5 adapter is worth the hours. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Add SD 1.5 to 1-lora-correction/scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.
@@ -1057,7 +1057,7 @@ Background
 Reviewer PrzE's second question asks how the method performs when composing more than two concepts.
 The adapter was trained on pairs, takes two concept prompts and the null prompt, and has no input
 slot for a third. This step tests it zero-shot inside a three-concept product, with a bar written
-before the run. The repo is /home/molef/PhD/poe_repair_min.
+before the run. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Write the triple-selection rule and the list of about 10 triples and 3 tuning triples, and commit
@@ -1146,7 +1146,7 @@ Background
 Reviewer UHz6 asked whether restricting the adapter to the early steps changes the failure types.
 Both reviewers wanted a fair comparison with other methods on the same weights. Each training
 answers one of these, and each opens only if a cheap test shows it can pay off. The repo is
-/home/molef/PhD/poe_repair_min and cluster actions go through scripts/cluster.sh.
+/home/molef/PhD/concept-composition and cluster actions go through scripts/cluster.sh.
 
 Objectives
 1. Read the early-steps inference test (step 5, job 2) and the ceiling test (step 10) against their
@@ -1234,7 +1234,7 @@ Submission 56173 got three reviews at ICLR 2027. Reviewer PrzE asked for scores 
 benchmarks, more baselines, the pair lists and more than two concepts. The earlier steps made the
 protocol, the held-out set, the scores, the corrector figure, the SD 1.5 set and the three-concept
 test. This step puts them in the paper. paper/iclr-56173/ is the working copy and the user uploads it to Overleaf.
-The repo is /home/molef/PhD/poe_repair_min and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
+The repo is /home/molef/PhD/concept-composition and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
 
 Objectives
 1. Confirm the page limit and the working copy (paper/iclr-56173/) from the call, the template and
@@ -1326,7 +1326,7 @@ Background
 Reviewer PrzE rated submission 56173 a 1 with confidence 4 and listed two strengths, two weaknesses
 and two questions. The paper has been revised (step 13). This step writes the reply, point by
 point, in a markdown source that builds a LaTeX file for the Overleaf replies project and a plain
-text file for OpenReview. The repo is /home/molef/PhD/poe_repair_min.
+text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.
@@ -1407,7 +1407,7 @@ This is the retrospective of the work that answered Reviewer PrzE's review of su
 ground check, protocol, held-out set, compute plan, corrector proof, scores, SD 1.5 set,
 three-concept
 test, gated trainings, paper revision and replies. The retro file feeds /drip-retro. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Merge the listed sessions into one retro file in dependency order, checked against the

@@ -2,7 +2,7 @@ The largest review costs are the visibly unfinished captions and references, R2�
 
 I read the [layout sheet](../../../../../report/paper-review/layout-sheet.md), both generators, and the slot definitions. No files were changed. For empty slots, I distinguish visible faults from problems the generator would introduce when filled.
 
-One important correction: the layout sheet calls `\footnotesize` 8 pt, but this paper’s [style file](/home/molef/PhD/poe_repair_min/paper/iclr-56173/iclr2027_conference.sty:175) defines it as **9 pt with 10 pt leading**. The unscaled R1 and R5 tables therefore use 9 pt Times, as do the placeholder labels. Preserve the conference definition and correct the layout sheet’s description.
+One important correction: the layout sheet calls `\footnotesize` 8 pt, but this paper’s [style file](/home/molef/PhD/concept-composition/paper/iclr-56173/iclr2027_conference.sty:175) defines it as **9 pt with 10 pt leading**. The unscaled R1 and R5 tables therefore use 9 pt Times, as do the placeholder labels. Preserve the conference definition and correct the layout sheet’s description.
 
 1. All unfinished slots: highest review cost.
 

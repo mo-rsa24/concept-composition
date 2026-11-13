@@ -1,6 +1,6 @@
-# 🗂️ Regroup poe_repair_min into project folders
+# 🗂️ Regroup concept-composition into project folders
 
-`poe_repair_min` holds five research questions in one tree, so a result from one question sits
+`concept-composition` holds five research questions in one tree, so a result from one question sits
 beside results from four others and nobody can find it. This plan moves every item into the
 folder of the question it answers, copying the medical repo's shape
 (`/home/molef/PhD/medical-imaging/compositional_diffusion`), so time can be allotted per project
@@ -12,7 +12,7 @@ in `/home/molef/PhD/ORGANOGRAM.md`.
 **The shape it ends in**
 
 ```
-poe_repair_min/                      (renamed sdxl-composition when it moves under portfolios/)
+concept-composition/                      (moves under portfolios/ later)
 ├── README.md                        one row per project: its question, its status, its board
 ├── context/  environment/  runbook/                 shared, stay at the root
 ├── poe_repair/  pyproject.toml  tests/  scripts/local/   shared code, stays at the root

@@ -148,7 +148,7 @@ class Plain:
                 "precision": "fp32"}
 
     def commit(self, method):
-        return f"poe_repair_min {git_head(REPO)}"
+        return f"concept-composition {git_head(REPO)}"
 
 
 class AttendAndExcite:
@@ -194,7 +194,7 @@ class AttendAndExcite:
         return {k: (str(v) if isinstance(v, Path) else v) for k, v in vars(c).items() if k not in ("prompt", "output_path")}
 
     def commit(self, method):
-        return f"{PINNED['aae']} (vendored at composition/aae, poe_repair_min {git_head(REPO)})"
+        return f"{PINNED['aae']} (vendored at composition/aae, concept-composition {git_head(REPO)})"
 
 
 class DivideAndBind:

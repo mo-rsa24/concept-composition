@@ -15,8 +15,8 @@ run, so the planned curve from 2/15 to 15/15 cannot be drawn; and what count out
 
 Background
 Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/) measures the
-correction's effect on compose rate on held-out animal pairs in poe_repair_min. The transfer plan in
-poe_repair_min's scope 04 says how that is read, but four of its terms are undefined or contradict
+correction's effect on compose rate on held-out animal pairs in concept-composition. The transfer plan in
+concept-composition's scope 04 says how that is read, but four of its terms are undefined or contradict
 the files they rest on. This walk repairs them before any run, so step 9's build measures something.
 The work happens in the repo ~/Playground/PhD/poe_repair_min.
 
@@ -24,7 +24,7 @@ Objectives
 1. Walk the four questions in the skill line, one per piece.
 2. Write each answer into the plan's Goals, Description and "What has to pass here".
 3. Leave a curve the plan names that can be drawn from 15 one-pair-out runs.
-4. Add a CHANGELOG.md entry in poe_repair_min if the direction text changes.
+4. Add a CHANGELOG.md entry in concept-composition if the direction text changes.
 
 What to read
 - ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
@@ -84,7 +84,7 @@ What to hand back
 - The plan file with the four answers written into its Goals, Description and "What has to pass
   here".
 - The walk's REFINE_WALK.md under ~/Playground/PhD/poe_repair_min/artifacts/ideas/<slug>/.
-- A CHANGELOG.md entry in poe_repair_min, if the direction text changes.
+- A CHANGELOG.md entry in concept-composition, if the direction text changes.
 - The edited plan, whose compose-rate unit and pair set step 9's build reads.
 - The proof: grep -n -i "compose.rate\|pair_pool\|x axis\|out of 15" on the plan prints the four new
   lines.

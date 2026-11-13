@@ -1,4 +1,4 @@
-# 📚 Sources: poe_repair_min
+# 📚 Sources: concept-composition
 
 Every external document and page this folder draws on. A provenance table cites an entry here by
 number; the entry says what the source is, where it lives, and how far to trust it. Everything

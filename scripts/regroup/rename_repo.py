@@ -25,7 +25,7 @@ ROOTS = {
     "claude": HOME / ".claude",
 }
 # Files in ~/.claude that record history rather than point at a place.
-SKIP_FILES = {"RENAMES.md", "settings.json", "settings.local.json"}
+SKIP_FILES = {"rename_repo.py", "RENAMES.md", "settings.json", "settings.local.json"}
 SKIP_DIRS = {".git", "projects", "node_modules", "cache", "backups", "skills-archive", "cadence-queue"}
 
 # Occurrences that keep the old name: the data folder and what sits in it, and retired folders.

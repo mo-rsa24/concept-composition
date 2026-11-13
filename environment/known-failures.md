@@ -1,4 +1,4 @@
-# Project Error Catalog: poe_repair_min
+# Project Error Catalog: concept-composition
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md)
 
@@ -42,7 +42,7 @@ assert eval_output.min() >= -0.1 and eval_output.max() <= 1.1, f"Range error: [{
 ```
 Check the normalization pipeline in `poe_repair/experiments/one_pair_one_seed/main.py::eval_hook`.
 
-**First discovered:** poe_repair_min, step-09
+**First discovered:** concept-composition, step-09
 
 **Affects steps:** step-09, step-10, step-11 (any step using the `compose_rate` metric)
 
@@ -71,7 +71,7 @@ recognizes.
 4. If images look correct but the scorer is wrong, the scorer model may need retraining on this
    data distribution.
 
-**First discovered:** poe_repair_min, step-09
+**First discovered:** concept-composition, step-09
 
 **Affects steps:** step-09, step-10 (diagnostic metric reliability)
 
@@ -101,7 +101,7 @@ this issue.
 
 Check [hpc/nodes.md](hpc/nodes.md) for which partitions and nodes carry which GPU models.
 
-**First discovered:** poe_repair_min, step-09, V100 runs
+**First discovered:** concept-composition, step-09, V100 runs
 
 **Affects steps:** step-09, step-10, step-11 (if the eval batch is not reduced)
 
@@ -131,7 +131,7 @@ when constructing `_Embedders`; never rely on its CPU default on a GPU job. `.cl
 same class tolerates CPU fine (CLIP's attention path doesn't route through xformers the same
 way), which makes this easy to miss until `.dino()` is called.
 
-**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lambda_window_grid.py`, plan 07 of
+**First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lambda_window_grid.py`, plan 07 of
 `01-showcase-the-trained-lora` (slurm job 48608)
 
 **Affects steps:** any step calling `_Embedders()` on a GPU node
@@ -164,7 +164,7 @@ correction saturates the LoRA space before reaching the full PoE-to-Mono distanc
 3. If r >= 16, this particular correction really does stop at 20%. Document it in run
    notes and adjust the hypothesis rather than the rank.
 
-**First discovered:** poe_repair_min, step-09
+**First discovered:** concept-composition, step-09
 
 **Affects steps:** step-09 (goal metric validation)
 
@@ -191,7 +191,7 @@ the correction is legitimately different on this pair.
 3. If the loss is correct, the correction is pair-specific. That is data, not an error;
    document it in run notes.
 
-**First discovered:** poe_repair_min, step-09
+**First discovered:** concept-composition, step-09
 
 **Affects steps:** step-09, step-10 (transfer diagnosis)
 
@@ -231,7 +231,7 @@ test. Before trusting a control result, ask whether it was even possible for it 
 the real condition in more than the intended way — if a different code path was used, this is not
 provable from the numbers alone.
 
-**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lora_dose_sweep.py`, plan 03 of
+**First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lora_dose_sweep.py`, plan 03 of
 `01-showcase-the-trained-lora` (slurm job 48596 → corrected in job 48619)
 
 **Also seen:** plan 07's own [λ-window grid](../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md) (`1-lora-correction/scripts/showcase/lambda_window_grid.py`, jobs
@@ -277,7 +277,7 @@ problem, check whether the failing function has the decorator that every sibling
 same module already carries — a missing decorator produces an OOM trace that looks identical to
 a real capacity problem.
 
-**First discovered:** poe_repair_min, `1-lora-correction/scripts/showcase/lambda_window_grid.py`
+**First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lambda_window_grid.py`
 (`run_lora_residual_inject_windowed_poe`), plan 07 of `01-showcase-the-trained-lora` (slurm job
 48610)
 
@@ -341,7 +341,7 @@ ssh <node> 'GPU=<idx> nohup bash /abs/path/to/launch.sh > /abs/path/to/logs/<nam
 Verify the launch in the same SSH call: `sleep 5; pgrep -af "train"` plus `tail` of the absolute
 log path.
 
-**First discovered:** poe_repair_min, step-09 (the first short run launched on `mscluster106`,
+**First discovered:** concept-composition, step-09 (the first short run launched on `mscluster106`,
 shared-device path)
 
 **Affects steps:** any step launched over SSH on a node this session is not on (step-09, step-10,
@@ -391,7 +391,7 @@ on other nodes reach their first checkpoint), `kill -9` the process and relaunch
 device; the faulted GPU itself needs a reset only an administrator or a node reboot can do, no
 user-level recovery exists.
 
-**First discovered:** poe_repair_min, 01-showcase-the-trained-lora, the experiment A/B timing
+**First discovered:** concept-composition, 01-showcase-the-trained-lora, the experiment A/B timing
 smoke run: `mscluster111` device 0 (an RTX PRO 6000 Blackwell node, confirmed free by the
 memory guard at launch) produced zero epoch progress for 9+ minutes while identical-config runs
 on `mscluster106` and `mscluster108` (RTX 8000) both logged their first epoch within a minute.
@@ -428,7 +428,7 @@ that run across many settings landed on the wrong mount this way.
 same resolved root as its output root has not been re-audited; treat a new script's guard as
 unverified until its `df` target is checked against its actual output root by hand.
 
-**First discovered:** poe_repair_min, `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh`, recorded in
+**First discovered:** concept-composition, `1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh`, recorded in
 the project's own `CLAUDE.md`
 
 **Affects steps:** any step with a job script that writes large output (checkpoints, caches, and
@@ -505,7 +505,7 @@ directories and would be taken from `heldout/`.
   Expect `0`. Anything above zero is a cell the adapter would train on and then be scored
   against.
 
-**First discovered:** poe_repair_min, 2026-09-16, traced from the plan-09 walk rather than from
+**First discovered:** concept-composition, 2026-09-16, traced from the plan-09 walk rather than from
 a failed run. No run has hit it: every cell of `cells_v54`, `cells_v55` and `cells_v57_animals`
 resolves to `train/`, and the training seeds (1 to 8, 17 to 19) and held-out seeds (9 to 16) are
 disjoint.

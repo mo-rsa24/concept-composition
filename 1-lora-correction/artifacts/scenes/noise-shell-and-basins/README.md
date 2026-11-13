@@ -46,7 +46,7 @@ dead.
 
 The shell radius, the 0.3% band, and the empty-center bound are exact chi-square consequences,
 badged "exact math" on the page. The nudge result (steps 0 to 10 change the outcome, 8 of 8
-pairs) and the commit window (steps 18 to 36) are measured in poe_repair_min and badged so.
+pairs) and the commit window (steps 18 to 36) are measured in concept-composition and badged so.
 Discs, trajectories, modes, and basin boundaries are illustrative and badged so. The page's
 closed disclosure repeats all of this beside the numbers.
 

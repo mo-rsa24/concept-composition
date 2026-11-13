@@ -134,7 +134,7 @@ Both are pasteable as they stand.
 **The curve with images, plus the blendedness scatter.**
 
 ```
-In poe_repair_min. Build the "why the correction-size curve matters" evidence pair, cache-only,
+In concept-composition. Build the "why the correction-size curve matters" evidence pair, cache-only,
 no new sampling.
 
 The measure: curve_for in 1-lora-correction/scripts/snr_collapse.py (||r_t|| / ||eps_PoE|| per step; median

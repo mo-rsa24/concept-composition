@@ -1,4 +1,4 @@
-# Artifact Inventory: poe_repair_min
+# Artifact Inventory: concept-composition
 
 **Repo root**: /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
 **Generated**: 2026-07-21

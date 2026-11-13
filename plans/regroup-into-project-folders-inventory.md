@@ -1,7 +1,7 @@
-# Regrouping inventory: every item in poe_repair_min and where it goes
+# Regrouping inventory: every item in concept-composition and where it goes
 
 Every scope, finding, walk, idea map, results folder, note, scene, experiment package and script
-in the three checkouts of `poe_repair_min` (`main` is `/home/molef/PhD/poe_repair_min`,
+in the three checkouts of `concept-composition` (`main` is `/home/molef/PhD/concept-composition`,
 `dog-and-rain` and `reviews` its two worktrees), placed against a project. Read by
 [the regrouping plan](regroup-into-project-folders.md). Correct a row by changing its project
 here; the move reads this file.

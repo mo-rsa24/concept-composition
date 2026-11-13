@@ -88,7 +88,7 @@ The interval at 100 films against 100 is about ±0.07.
 
 ### 5. You: then the transfer plan, repaired before it runs
 
-You repair poe_repair_min's transfer plan before it runs, one question per piece: whether compose rate is binary per pair or a fraction over seeds, which 15 pairs it means (its pool file lists 17), what its x axis becomes when every run holds out exactly one pair, and what count out of 15 "most" means.
+You repair concept-composition's transfer plan before it runs, one question per piece: whether compose rate is binary per pair or a fraction over seeds, which 15 pairs it means (its pool file lists 17), what its x axis becomes when every run holds out exactly one pair, and what count out of 15 "most" means.
 
 **Prompt:** [repair the transfer plan](prompts/12-5-repair-the-transfer-plan.md)
 
@@ -106,7 +106,7 @@ Built by step 1. ⏱ you 20 to 40 min · stop: every *needed now* question right
 
 ### 7. You: the maths drip
 
-You derive, one rung per message, a LoRA as a frozen weight plus a trained rank-r update, and why the residual poe_repair_min's LoRA trains on is 7.5 times layer 8's ε-space interaction term. Your quiz 12.1 misses become the first rungs.
+You derive, one rung per message, a LoRA as a frozen weight plus a trained rank-r update, and why the residual concept-composition's LoRA trains on is 7.5 times layer 8's ε-space interaction term. Your quiz 12.1 misses become the first rungs.
 
 The SDXL notebook scene draws one denoising step with this correction in it, in three parts. Its [PoE part](https://claude.ai/artifact/1GayZthQkRL4FmukdCV9WW#nb-poe) composes the two guided branches as eps_guided_a + eps_guided_b − eps_empty, the prediction whose gap to the joint prompt's you derive here. Its [LoRA part](https://claude.ai/artifact/1GayZthQkRL4FmukdCV9WW#nb-lora) puts low-rank adapters on the cross-attention projections and trains them against the joint prompt's guided prediction, the update this drip counts the parameters of. Its [inference part](https://claude.ai/artifact/1GayZthQkRL4FmukdCV9WW#nb-infer) adds the adapter's correction to the composed prediction and hands the sum to DDIM, the sampling path step 9 scores. The scene shows no output pictures, because `notebooks/sdxl_crossattn_poe_lora.ipynb` in `~/PhD/SDXL` ran under Matplotlib's Agg backend; rerun it in Jupyter with `%matplotlib inline` to see them.
 
@@ -126,7 +126,7 @@ Built by step 1. ⏱ you 20 to 40 min · stop: every *needed now* question right
 
 ### 9. You: the build
 
-You type `walk12.py`, cut into 4 to 6 pieces. It reads poe_repair_min's cached ε_joint, ε_A, ε_B and ε_∅ for the 25 animal pairs, never writing to that repo, and prints one row per held-out pair: compose rate without and with the correction, beside the pair's interaction term.
+You type `walk12.py`, cut into 4 to 6 pieces. It reads concept-composition's cached ε_joint, ε_A, ε_B and ε_∅ for the 25 animal pairs, never writing to that repo, and prints one row per held-out pair: compose rate without and with the correction, beside the pair's interaction term.
 
 **Prompt:** [the build](prompts/12-9-the-build.md)
 
@@ -152,7 +152,7 @@ cd ~/Playground/PhD/simple-distributions-walk
 
 - Samplers recover only a third to four fifths of the exact mass at 2% to 10% overlap (layer 5).
 - Trained experts plus a better sampler cost more at low overlap (layer 9).
-- The interaction term's lower bound did not track which of the 25 pairs blend in `poe_repair_min`.
+- The interaction term's lower bound did not track which of the 25 pairs blend in `concept-composition`.
 
 ### 11. You: close the layer
 

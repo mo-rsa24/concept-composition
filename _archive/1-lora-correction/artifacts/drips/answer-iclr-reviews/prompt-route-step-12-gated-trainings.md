@@ -1,6 +1,6 @@
 # Prompt: route step 12, decide and launch the two gated trainings
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 12 of `plans/route-answer-the-iclr-reviews.md`.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 12 of `plans/route-answer-the-iclr-reviews.md`.
 
 ```text
 /drip-execute-plan --request --depth objective "Decide from the gate results whether to train the
@@ -18,7 +18,7 @@ Background
 Reviewer UHz6 asked whether restricting the adapter to the early steps changes the failure types.
 Both reviewers wanted a fair comparison with other methods on the same weights. Each training
 answers one of these, and each opens only if a cheap test shows it can pay off. The repo is
-/home/molef/PhD/poe_repair_min and cluster actions go through scripts/cluster.sh.
+/home/molef/PhD/concept-composition and cluster actions go through scripts/cluster.sh.
 
 Objectives
 1. Read the early-steps inference test (step 5, wave 1 job 4: the adapter over steps 0 to 10 and

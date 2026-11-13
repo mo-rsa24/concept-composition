@@ -8,12 +8,12 @@
 # Nothing is deleted on either machine: rsync only fetches files the laptop does not have.
 set -uo pipefail
 REMOTE=mscluster84:/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/
-ROOT=/home/molef/PhD/poe_repair_min/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from
+ROOT=/home/molef/PhD/concept-composition/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from
 TILES="$ROOT/tiles"
 LATEST="$ROOT/latest"
 HISTORY="$ROOT/history"
 LOG="$ROOT/BUILDS.md"
-REPO=/home/molef/PhD/poe_repair_min
+REPO=/home/molef/PhD/concept-composition
 
 mkdir -p "$TILES" "$LATEST" "$HISTORY"
 [ -f "$LOG" ] || cat > "$LOG" <<'HEADER'

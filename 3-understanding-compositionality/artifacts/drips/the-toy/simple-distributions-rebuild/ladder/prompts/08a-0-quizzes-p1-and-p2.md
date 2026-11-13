@@ -106,7 +106,7 @@ What is already known
 - No source on the 17-paper shortlist adds an interaction factor to a product of single-concept
   experts at sampling time (composition-terms.md, "does any source add a term beyond the product").
 - Layer 8's term is r(x) = log p(x|A,B) − [log p(x|A) + log p(x|B) − log p(x)], in ε-space
-  ε_joint − ε_A − ε_B + ε_∅, the residual poe_repair_min caches for 25 pairs at all 50 steps
+  ε_joint − ε_A − ε_B + ε_∅, the residual concept-composition caches for 25 pairs at all 50 steps
   (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/REBUILD_WALK.md, brick "The interaction term,
   exact").
 - The project's own version of Table 1 crosses exact or trained experts with reverse diffusion or

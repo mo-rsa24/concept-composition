@@ -67,7 +67,7 @@ The download is about 200 MB; on a slow line it takes most of an hour.
 Navigation: ⬅️ [2. The 2D environment](#2-build-the-2d-notebooks-environment) | 📋 [TOC](#table-of-contents) | [Next](#4-get-the-clevr-checkpoint) ➡️
 
 ```bash
-python3 ~/PhD/poe_repair_min/scripts/fix_reduce_reuse_recycle_notebook.py \
+python3 ~/PhD/concept-composition/scripts/fix_reduce_reuse_recycle_notebook.py \
     ~/PhD/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
 ```
 

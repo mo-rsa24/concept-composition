@@ -73,7 +73,7 @@ def main():
             os.rename(os.path.join(ROOT, o), os.path.join(ROOT, n))
     back = [(n, o) for o, n in pairs]
     alt = "|".join(re.escape(o) for o, _ in pairs)
-    plain = re.compile(r"(?:(?<=^)|(?<=[\s\"'`(=:,\[])|(?<=poe_repair_min/))(" + alt + r")(?=[/\s\"'`),:#.\]]|$)", re.M)
+    plain = re.compile(r"(?:(?<=^)|(?<=[\s\"'`(=:,\[])|(?<=concept-composition/))(" + alt + r")(?=[/\s\"'`),:#.\]]|$)", re.M)
     table = dict(pairs); edits = 0
     for f in git("ls-files").stdout.split():
         if f in SKIP or not f.endswith(TEXT) or not os.path.isfile(os.path.join(ROOT, f)):

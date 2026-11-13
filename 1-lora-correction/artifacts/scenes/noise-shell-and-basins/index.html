@@ -81,7 +81,7 @@
 <div class="stage">
   <header>
     <div>
-      <div class="eyebrow">poe_repair_min: frame-walk</div>
+      <div class="eyebrow">concept-composition: frame-walk</div>
       <h1>The noise shell and its basins</h1>
     </div>
     <button class="themebtn" id="theme">&#9681; theme</button>
@@ -126,8 +126,8 @@
       <ul>
         <li><b>The shell.</b> &#8741;z&#8741;&#178; is a sum of d = 65,536 squared standard normals, a &#967;&#178;<sub>d</sub> draw. E&#8741;z&#8741; = &#8730;2&middot;&Gamma;((d+1)/2)/&Gamma;(d/2) &asymp; 255.999 and sd(&#8741;z&#8741;) &asymp; 1/&#8730;2 &asymp; 0.707, so the band is 0.707/256 &asymp; 0.28% of the radius. Exact math, not a measurement.</li>
         <li><b>The empty center.</b> P(&#8741;z&#8741; &lt; 250) is bounded by the &#967;&#178; Chernoff bound exp(&minus;(d/2)(t &minus; 1 &minus; ln t)) with t = 250&#178;/d, about 10&#8315;&#185;&#8310;. "Below 10&#8315;&#185;&#8309;" is a safe statement of it.</li>
-        <li><b>Pipeline settings.</b> 50 DDIM steps and guidance 7.5 are the generation settings used throughout poe_repair_min.</li>
-        <li><b>Measured in poe_repair_min.</b> A nudge at steps 0 to 10 changed the final image in all 8 tested pairs; the commit point landed between steps 18 and 36. Steps are DDIM indices out of 50.</li>
+        <li><b>Pipeline settings.</b> 50 DDIM steps and guidance 7.5 are the generation settings used throughout concept-composition.</li>
+        <li><b>Measured in concept-composition.</b> A nudge at steps 0 to 10 changed the final image in all 8 tested pairs; the commit point landed between steps 18 and 36. Steps are DDIM indices out of 50.</li>
         <li><b>Drawn, not computed.</b> The 2D disc (a slice of 65,536 dimensions), the trajectories, the two modes, the basin arcs, and the boundary positions are illustrative.</li>
         <li><b>Explore sampling.</b> 380 seeds per dimension setting; exact &#967; sampling for d &le; 1,024, the normal approximation &#8741;z&#8741;&#178; &asymp; d + &#8730;(2d)&middot;g above that. The radius is scaled by 1/&#8730;d so the shell stays at the same screen radius at every d. Seeds with r &gt; 1.8&#8730;d fall off the drawn disc.</li>
       </ul>
@@ -140,7 +140,7 @@
     </div>
   </div>
 
-  <footer>A 2D slice of a 65,536-dimensional space: positions are illustrative, the numbers on them are not. Measured claims come from poe_repair_min.</footer>
+  <footer>A 2D slice of a 65,536-dimensional space: positions are illustrative, the numbers on them are not. Measured claims come from concept-composition.</footer>
 </div>
 
 <script>
@@ -549,7 +549,7 @@
   var B_MATH = '<span class="badge math">exact math</span>';
   var B_ILL = '<span class="badge illus">illustrative drawing</span>';
   var B_SET = '<span class="badge math">real settings: 50 steps, guidance 7.5</span>';
-  var B_MEAS = '<span class="badge meas">measured in poe_repair_min</span>';
+  var B_MEAS = '<span class="badge meas">measured in concept-composition</span>';
 
   var FRAMES = [
     {h:"Every seed lands 256 from center", draw:f1, math:CHI_MATH, badges:[B_MATH,B_ILL],

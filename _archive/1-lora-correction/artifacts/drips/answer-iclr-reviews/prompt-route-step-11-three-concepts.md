@@ -1,6 +1,6 @@
 # Prompt: route step 11, the three-concept test
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 11 of `plans/route-answer-the-iclr-reviews.md`.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 11 of `plans/route-answer-the-iclr-reviews.md`.
 
 ```text
 /drip-execute-plan --request --depth objective "Test the frozen adapter inside a three-concept
@@ -15,7 +15,7 @@ Background
 Reviewer PrzE's second question asks how the method performs when composing more than two concepts.
 The adapter was trained on pairs, takes two concept prompts and the null prompt, and has no input
 slot for a third. This step tests it zero-shot inside a three-concept product, with a bar written
-before the run. The repo is /home/molef/PhD/poe_repair_min.
+before the run. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Write the triple-selection rule and the list of about 10 triples and 3 tuning triples, and commit

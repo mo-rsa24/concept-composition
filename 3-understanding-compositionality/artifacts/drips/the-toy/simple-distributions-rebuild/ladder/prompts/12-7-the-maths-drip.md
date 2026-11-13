@@ -10,7 +10,7 @@ from layer 8
 
 Background
 This is layer 12 of the composition ladder in 3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/: the
-correction at scale. poe_repair_min's correction is a LoRA on SDXL, and this drip shows it is a
+correction at scale. concept-composition's correction is a LoRA on SDXL, and this drip shows it is a
 learned version of layer 8's interaction term. The maths comes before the build and teaches only
 what the build needs. I have passed quiz 12.1; any question it marked missed becomes a first rung.
 
@@ -32,7 +32,7 @@ What is already known
 - A LoRA keeps W frozen and trains a rank-r update BA, (W + BA)x, with r·(in + out) parameters: 384
   for the journey's toy (rank 2, 3 blocks) and 4,956,160 for the real case (rank 8, 210 modules)
   (the journey plan 08-lora-update.md).
-- poe_repair_min's LoRA is rank-8 cross-attention, trained on the cached guided residual
+- concept-composition's LoRA is rank-8 cross-attention, trained on the cached guided residual
   r_t = ε̃_J − ε̃_PoE (its scope 04 master plan, Mission).
 - With ε̃_PoE = ε_∅ + w(ε_A − ε_∅) + w(ε_B − ε_∅) and ε̃_J = ε_∅ + w(ε_J − ε_∅), the residual is
   w(ε_J − ε_A − ε_B + ε_∅), the cache's gs*(eps_j − eps_a − eps_b + eps_uncond) at w = 7.5 (the

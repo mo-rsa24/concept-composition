@@ -10,7 +10,7 @@ Background
 Reviewers of ICLR 2027 submission 56173 asked for scores against standard benchmarks, more
 baselines and aggregate rates over held-out pairs. Before any run, the comparison rules and the
 shape of every new figure and table are fixed, so no result can be called an unfair comparison.
-The repo is /home/molef/PhD/poe_repair_min on the laptop. This is step 2 of the route in
+The repo is /home/molef/PhD/concept-composition on the laptop. This is step 2 of the route in
 plans/route-answer-the-iclr-reviews.md. Step 1 found that the paper's source is the Overleaf
 export, not either local copy, and that Figure 5 mixes three adapters.
 

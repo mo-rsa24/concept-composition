@@ -590,7 +590,7 @@ Global patterns applicable across all projects. See [~/.claude/GLOBAL_ERROR_CATA
 
 ### From project catalog
 
-Patterns specific to poe_repair_min. See [environment/known-failures.md](../../../../../environment/known-failures.md) for the full catalog.
+Patterns specific to concept-composition. See [environment/known-failures.md](../../../../../environment/known-failures.md) for the full catalog.
 
 #### 🔴 poe-score-001: Scorer returns all zeros or NaNs despite valid inputs
 

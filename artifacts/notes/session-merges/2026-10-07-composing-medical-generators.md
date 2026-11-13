@@ -54,7 +54,7 @@ Liver CT (Luo 2025, Scientific Data, CC BY 4.0, doi 10.57760/sciencedb.12207): H
 
 ## Decisions in force
 
-**Run on mscluster107.** The user allocated it to themselves; confirm that is still current before launching. Code lives in `/home/molef/PhD/poe_repair_min` locally and `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min` on the cluster; large outputs go under `/datasets/mmolefe/poe_repair_min/`. `scripts/cluster.sh run` refuses uncommitted tracked changes, and the plan 10 scripts are untracked, so earlier they were copied through mscluster84 with `scp` and executed on 107. Say so each time.
+**Run on mscluster107.** The user allocated it to themselves; confirm that is still current before launching. Code lives in `/home/molef/PhD/concept-composition` locally and `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min` on the cluster; large outputs go under `/datasets/mmolefe/poe_repair_min/`. `scripts/cluster.sh run` refuses uncommitted tracked changes, and the plan 10 scripts are untracked, so earlier they were copied through mscluster84 with `scp` and executed on 107. Say so each time.
 
 **Rare pair and control.** Cardiomegaly plus pneumothorax (rare in NIH labels) and cardiomegaly plus effusion (common in NIH labels, the comparison). Chosen by the assistant with the user's delegation ("You can do no.2 for me"), before any image was generated.
 

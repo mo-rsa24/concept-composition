@@ -1,6 +1,6 @@
 # Prompts: route step 15, explain it back
 
-Two prompts, pasted in order into fresh sessions in `/home/molef/PhD/poe_repair_min`, after steps 5 to 14 have run. They replace the prompt blocks under step 15 of `plans/route-answer-the-iclr-reviews.md`.
+Two prompts, pasted in order into fresh sessions in `/home/molef/PhD/concept-composition`, after steps 5 to 14 have run. They replace the prompt blocks under step 15 of `plans/route-answer-the-iclr-reviews.md`.
 
 ## 1. Merge the sessions into one retro
 
@@ -15,7 +15,7 @@ This is the retrospective of the work that answered Reviewer PrzE's review of su
 ground check, protocol, held-out set, compute plan, corrector proof, scores, SD 1.5 set,
 three-concept
 test, gated trainings, paper revision and replies. The retro file feeds /drip-retro. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Merge the listed sessions into one retro file in dependency order, checked against the

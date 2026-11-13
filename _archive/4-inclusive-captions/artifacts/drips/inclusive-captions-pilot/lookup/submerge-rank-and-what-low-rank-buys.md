@@ -9,7 +9,7 @@ first time.
 
 ## Background
 
-I am training LoRAs on SDXL in /home/molef/PhD/poe_repair_min and I cannot explain the name. I
+I am training LoRAs on SDXL in /home/molef/PhD/concept-composition and I cannot explain the name. I
 know how to attach one and I know it trains, and that is the whole of it. Today I wrote a trainer
 that puts a rank-32 adapter on SDXL's attention projections and it reported 46,448,640 trainable
 parameters, and I could not say where that number comes from, what the 32 buys me, or what the
@@ -148,7 +148,7 @@ Try the step first, then:
 - Show me the hour estimate per region before I commit to anything, and let me trim against the
   numbers.
 - No scene before its drip. A scene is consolidation, not introduction.
-- Do not write into /home/molef/PhD/poe_repair_min or its worktrees. Read trainer.py and nothing
+- Do not write into /home/molef/PhD/concept-composition or its worktrees. Read trainer.py and nothing
   else there.
 
 ## What to hand back

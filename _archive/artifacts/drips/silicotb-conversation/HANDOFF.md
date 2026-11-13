@@ -25,7 +25,7 @@ Read this file first, then the route.
 
 ## Decisions already made
 
-**Home.** This repo (`poe_repair_min`), because turns 5 to 8 are this repo's own question. Paper3
+**Home.** This repo (`concept-composition`), because turns 5 to 8 are this repo's own question. Paper3
 (`~/Playground/PhD/Paper3` on the cluster) is read, never written: its Mission B already tests
 single-disease classifiers on six comorbid pairs.
 

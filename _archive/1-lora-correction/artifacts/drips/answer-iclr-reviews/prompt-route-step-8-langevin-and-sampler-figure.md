@@ -1,6 +1,6 @@
 # Prompt: route step 8, prove the Langevin corrector and render the six-column figure
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 8 of `plans/route-answer-the-iclr-reviews.md`.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 8 of `plans/route-answer-the-iclr-reviews.md`.
 
 ```text
 /drip-execute-plan --request --depth objective "Prove our Langevin corrector against the Reduce,
@@ -19,7 +19,7 @@ Reviewer PrzE asked for an MCMC corrector baseline. Our Langevin corrector
 (poe_repair/methods/_poe_langevin.py) uses the paper's unadjusted Langevin update with a different
 step-size rule and a different order of corrector and step. This step proves the update on a
 toy with a known answer, builds the joint-prompt and unadjusted HMC drivers, and renders the
-figure. The repo is /home/molef/PhD/poe_repair_min.
+figure. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Write a numpy check of the update on two Gaussian experts and print the chain's mean and

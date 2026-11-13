@@ -52,7 +52,7 @@ What is already known
 - ε = −√(1 − ᾱ_t)·∇log q_t, so ∇r_t = −(ε_joint − ε_A − ε_B + ε_∅)/√(1 − ᾱ_t), the gap between the
   joint's score and the composed score (ladder/01-one-diffusion-expert.md, step 2; REBUILD_WALK.md,
   brick "The interaction term, exact").
-- poe_repair_min caches that residual for 25 pairs at all 50 steps, at guidance 7.5
+- concept-composition caches that residual for 25 pairs at all 50 steps, at guidance 7.5
   (3-understanding-compositionality/artifacts/ideas/sdxl-shaped-hybrid-testbed/IDEA_MAP.md, claim 1 and Sources).
 
 Rules

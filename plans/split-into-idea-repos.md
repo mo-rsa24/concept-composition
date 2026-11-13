@@ -1,6 +1,6 @@
 # 🧭 Regroup the core repo into project folders
 
-`poe_repair_min` becomes the SDXL-composition portfolio of `/home/molef/PhD/ORGANOGRAM.md`: one
+`concept-composition` becomes the SDXL-composition portfolio of `/home/molef/PhD/ORGANOGRAM.md`: one
 repo, one folder per project, each with its own `plans/`, `report/` with its outcome board, and
 `artifacts/`, sharing `context/`, `environment/`, `runbook/` and the `poe_repair` package at the
 root. The medical repo, `medical-imaging/compositional_diffusion`, already has this shape and is

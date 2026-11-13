@@ -1,4 +1,4 @@
-# poe_repair_min context: illustrated map
+# concept-composition context: illustrated map
 
 What the project's real-world objects are (subject lane) and how one run's data moves from a
 prompt pair to a scored verdict (process lane). 8 prompts · 0 rendered · 8 waiting.

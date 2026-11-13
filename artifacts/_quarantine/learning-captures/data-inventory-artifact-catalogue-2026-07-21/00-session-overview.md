@@ -2,7 +2,7 @@
 Captured: 2026-07-21
 
 ## What was studied
-A data-inventory / artifact-reconciliation session over the `poe_repair_min`
+A data-inventory / artifact-reconciliation session over the `concept-composition`
 repo and the shared `/datasets/mmolefe` storage. Two exchanges: (1) catalogue
 every artifact under `poe_repair/experiments/` and reconcile it against the
 project's W&B runs, producing an experiment → runs → status → surviving-artifact

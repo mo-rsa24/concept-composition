@@ -1,6 +1,6 @@
 # Prompt: route step 5, the compute plan and the first GPU jobs
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 5 of `plans/route-answer-the-iclr-reviews.md`, whose job counts predate the main-table change in step 4.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 5 of `plans/route-answer-the-iclr-reviews.md`, whose job counts predate the main-table change in step 4.
 
 ```text
 /drip-execute-plan --request "Write the compute plan for the ICLR review response and launch the
@@ -17,7 +17,7 @@ Submission 56173 to ICLR 2027 is being revised to answer three reviews; reviewer
 standard benchmarks, more baselines, the pair lists and more than two concepts. Steps 2 and 4
 froze the protocol, the evaluation set and one adapter. This step places every GPU job on a node
 with a priority and a priced estimate, then launches the jobs no gate blocks. The repo is
-/home/molef/PhD/poe_repair_min and every cluster action goes through scripts/cluster.sh.
+/home/molef/PhD/concept-composition and every cluster action goes through scripts/cluster.sh.
 
 Objectives
 1. Write the compute plan as a table in 1-lora-correction/report/paper-review/prze-10-compute.md: job, node,

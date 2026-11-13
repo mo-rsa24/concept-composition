@@ -1,4 +1,4 @@
-# 🌍 Context: poe_repair_min
+# 🌍 Context: concept-composition
 
 What this project is about in the real world: why PoE composition on SDXL fails, what a chimera,
 an animal pair, the interaction term, and a compose rate are, where the pipeline's data comes

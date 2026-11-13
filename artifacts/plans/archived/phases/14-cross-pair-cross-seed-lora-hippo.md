@@ -201,7 +201,7 @@ git status                                  # confirm clean / commit local chang
 git push origin main                        # or the feature branch
 ```
 
-The remote is `git@github.com:mo-rsa24/poe_repair_min.git` (confirmed
+The remote is `git@github.com:mo-rsa24/concept-composition.git` (confirmed
 via `git remote -v`).
 
 ### 2. On hippo: clone (or pull) the repo
@@ -213,8 +213,8 @@ Agreed working directory on hippo (proposed):
 ```bash
 # Fresh:
 mkdir -p ~/Playground && cd ~/Playground
-git clone git@github.com:mo-rsa24/poe_repair_min.git
-cd poe_repair_min
+git clone git@github.com:mo-rsa24/concept-composition.git
+cd concept-composition
 
 # Existing checkout:
 cd ~/Playground/poe_repair_min

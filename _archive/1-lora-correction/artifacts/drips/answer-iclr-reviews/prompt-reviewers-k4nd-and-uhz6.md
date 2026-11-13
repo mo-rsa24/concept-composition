@@ -1,6 +1,6 @@
 # Prompt: answer Reviewers k4nd and UHz6, fixing the paper where we can
 
-Paste the code block into a fresh session in `/home/molef/PhD/poe_repair_min`. It runs beside route steps 5 to 9 and needs no GPU.
+Paste the code block into a fresh session in `/home/molef/PhD/concept-composition`. It runs beside route steps 5 to 9 and needs no GPU.
 
 ```text
 /drip-execute-plan --request "Walk Reviewer k4nd's review of ICLR 2027 submission 56173 point by

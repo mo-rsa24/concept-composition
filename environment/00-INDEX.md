@@ -1,4 +1,4 @@
-# 🗺️ Environment: poe_repair_min
+# 🗺️ Environment: concept-composition
 
 What is true about the system this work runs on. Migrated 2026-08-24 from the single
 `docs/ENVIRONMENT.md` file (the old shape) into this folder, as part of stage 2 of the

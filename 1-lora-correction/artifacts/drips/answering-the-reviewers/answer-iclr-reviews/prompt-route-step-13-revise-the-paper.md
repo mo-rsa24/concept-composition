@@ -1,6 +1,6 @@
 # Prompt: route step 13, revise the paper
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 13 of `plans/route-answer-the-iclr-reviews.md`, adding what the presentation pass of 2026-11-11 left for this step.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 13 of `plans/route-answer-the-iclr-reviews.md`, adding what the presentation pass of 2026-11-11 left for this step.
 
 ```text
 /drip-write the evaluation section and the limitations paragraph of the revision for the ICLR
@@ -16,7 +16,7 @@ Submission 56173 got three reviews at ICLR 2027. Reviewer PrzE asked for scores 
 benchmarks, more baselines, the pair lists and more than two concepts. The earlier steps made the
 protocol, the held-out set, the scores, the corrector figure, the SD 1.5 set and the three-concept
 test. This step puts them in the paper. paper/iclr-56173/ is the working copy and the user uploads it to Overleaf.
-The repo is /home/molef/PhD/poe_repair_min and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
+The repo is /home/molef/PhD/concept-composition and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
 
 Objectives
 1. Confirm the page limit and the working copy (paper/iclr-56173/) from the call, the template and

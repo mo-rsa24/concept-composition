@@ -61,7 +61,7 @@ You derive, one rung per message, Bayes' rule for two labels and conditional ind
 
 ⏱ rough: you 30 to 60 min · AI ~10 min · stop: you derive r and its ε-space form without notes
 
-**Outcome:** you can derive r, say why it is constant when the labels are fixed functions of the image, and write its noise-prediction form, the residual `poe_repair_min` already caches for 25 pairs.
+**Outcome:** you can derive r, say why it is constant when the labels are fixed functions of the image, and write its noise-prediction form, the residual `concept-composition` already caches for 25 pairs.
 
 ### 3. You: quiz 8.2
 

@@ -1,6 +1,6 @@
 # Prompt: route step 9, score every image and build the tables
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 9 of `plans/route-answer-the-iclr-reviews.md`, written before the main table moved to the 276 benchmark prompts.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 9 of `plans/route-answer-the-iclr-reviews.md`, written before the main table moved to the 276 benchmark prompts.
 
 ```text
 /drip-execute-plan --request --depth objective "Score every image from the evaluation, early-steps,
@@ -18,7 +18,7 @@ Reviewer PrzE found no quantitative metric in the paper and asked for T2I-CompBe
 score and ImageReward against standard baselines. The images exist from steps 5 and 8 on the frozen
 evaluation set. This step scores them under the protocol, builds the tables the paper needs and
 fills
-the paper's table slots. The repo is /home/molef/PhD/poe_repair_min.
+the paper's table slots. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Install and verify each scorer on the two small-object images from step 7, and write each one's

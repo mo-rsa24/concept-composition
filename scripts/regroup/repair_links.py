@@ -5,7 +5,7 @@ Reads scripts/regroup/moves.tsv. In every tracked text file:
 - a relative markdown link is re-resolved: target from the file's old place, the target's new
   place, then a new relative path from the file's new place (anchors kept);
 - a path written from the repo root (`artifacts/results/x`, `scripts/x.py`, also after
-  `poe_repair_min/` in an absolute path) is replaced by its new path.
+  `concept-composition/` in an absolute path) is replaced by its new path.
 Files that record old paths on purpose are skipped. Dry run unless --apply; --check counts broken
 relative markdown links now and at the tag pre-regroup-move, and lists the ones the move broke.
 """
@@ -74,7 +74,7 @@ def combined(fwd):
     key = id(fwd)
     if key not in _COMBINED:
         alt = "|".join(re.escape(o) for o, _ in fwd)  # longest first, so a folder never shadows a file in it
-        pat = re.compile(r"(?:(?<=^)|(?<=[\s\"'`(=:,\[])|(?<=poe_repair_min/))(" + alt + r")(?=[/\s\"'`),:#.\]]|$)", re.M)
+        pat = re.compile(r"(?:(?<=^)|(?<=[\s\"'`(=:,\[])|(?<=concept-composition/))(" + alt + r")(?=[/\s\"'`),:#.\]]|$)", re.M)
         _COMBINED[key] = (pat, dict(fwd))
     return _COMBINED[key]
 

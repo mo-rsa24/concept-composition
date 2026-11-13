@@ -56,7 +56,7 @@ What is already known
 - The lower bound on the interaction computed from that cache for 25 animal pairs did not track
   which pairs blend (testbed map, claim 1 and Sources).
 - SDXL's hybrids are scored by an instance counter that cannot tell two dogs from a cat and a dog
-  (testbed map, Sources: poe_repair_min/context/world/chimera.md).
+  (testbed map, Sources: concept-composition/context/world/chimera.md).
 - Claim 2: total variation to the exact product needs the composed density, which pixel space does
   not give; its repair is a parser that maps each output back to its drawing parameters, where the
   generator's density is known exactly (testbed map, claim 2).

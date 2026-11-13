@@ -1,4 +1,4 @@
-# Runbook: poe_repair_min
+# Runbook: concept-composition
 
 How to do the recurring things here by hand: checking the plan tree's state, launching or
 harvesting a run on the cluster, and moving manuscript edits between this repo and Overleaf. Built 2026-08-24 during stage 5 of the retrofit pass, from

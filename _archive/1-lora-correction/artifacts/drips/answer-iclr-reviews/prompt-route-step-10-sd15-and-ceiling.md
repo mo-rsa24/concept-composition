@@ -1,6 +1,6 @@
 # Prompt: route step 10, the SD 1.5 comparison set and the ceiling test
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 10 of `plans/route-answer-the-iclr-reviews.md`.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 10 of `plans/route-answer-the-iclr-reviews.md`.
 
 ```text
 /drip-execute-plan --request --depth objective "Build the SD 1.5 comparison set with the official
@@ -17,7 +17,7 @@ Reviewer UHz6 asked about Attend-and-Excite and CONFORM. Both are written for St
 and 2.x, and our adapter is on SDXL, so a fair comparison puts them on the same weights as a PoE
 baseline and the measured correction, not on SDXL. This step builds that set and runs a test that
 decides whether training an SD 1.5 adapter is worth the hours. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Add SD 1.5 to 1-lora-correction/scripts/same_rule_four_models.py, or a copy of it, for joint and plain PoE.

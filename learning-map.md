@@ -1,4 +1,4 @@
-# poe_repair_min learning map: what teaches this work
+# concept-composition learning map: what teaches this work
 
 How the repo's working documents connect to the learning journeys under
 `/home-mscluster/mmolefe/goal-setting/learning`, and what to learn next for the work the running
@@ -92,7 +92,7 @@ Save as: `learning-diagrams/learning-map-01-the-doing-side.png`
 ```
 Style: premium system-design infographic. Clean white or very light gray background. Glossy semi-3D icons with soft drop shadows, one icon per component, sitting on subtle rounded platforms. Flows drawn as vivid color-coded dashed arrow lines, each color meaning exactly one kind of flow, with a small legend inside the image. Related components grouped inside rounded soft-tinted panels with a short title on the panel. A bold title banner across the top. Official product logos only on components that ARE that product; every other component gets a clean generic glyph. Small cartoon figures or vehicles for external actors (users, clients). Clean sans-serif labels under every icon, short and lowercase-friendly. Generous spacing, no clutter, no watermark.
 
-Scene: a rounded blue-tinted panel titled "the repo: poe_repair_min" holding five folder tiles in
+Scene: a rounded blue-tinted panel titled "the repo: concept-composition" holding five folder tiles in
 one row: "plans/" (drawn wider, with four small numbered scope chips inside it: "01" with pill
 "1", "03" with pill "1", "05" with pill "5", "06" with pill "5"), "context/" (pill "1"), "report/"
 (pill "2"), "runbook/" (pill "1"), "standing/" (pill "2"). A sixth tile off to the side, "paper/"

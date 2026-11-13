@@ -1,6 +1,6 @@
 # Prompt: route step 6, draw the evaluation pipeline
 
-Paste into a fresh session in `/home/molef/PhD/poe_repair_min`. It replaces the prompt block under step 6 of `plans/route-answer-the-iclr-reviews.md`, whose method and machine facts predate step 4's protocol changes.
+Paste into a fresh session in `/home/molef/PhD/concept-composition`. It replaces the prompt block under step 6 of `plans/route-answer-the-iclr-reviews.md`, whose method and machine facts predate step 4's protocol changes.
 
 ```text
 /drip-hld-diagram --from plans/route-answer-the-iclr-reviews.md the evaluation pipeline from a
@@ -15,7 +15,7 @@ Submission 56173 to ICLR 2027 is being revised to answer three reviews; it needs
 with scores, baselines and held-out rates. The pipeline that makes them has many parts, and several
 unfair comparisons would be easy to introduce by accident. This step draws the pipeline once so
 every later step and the paper's evaluation paragraph agree on it. The repo is
-/home/molef/PhD/poe_repair_min.
+/home/molef/PhD/concept-composition.
 
 Objectives
 1. Check hld-diagram/references/registry.json for an existing page of this system, and say what is

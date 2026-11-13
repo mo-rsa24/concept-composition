@@ -1,4 +1,4 @@
-# poe_repair_min
+# concept-composition
 
 ## This project runs scientific experiments
 
@@ -43,7 +43,7 @@ this runs here" is a correct and useful answer.
 
 ## Two checkouts, one launch path
 
-The repo is checked out twice: on the laptop at `/home/molef/PhD/poe_repair_min`, where code is
+The repo is checked out twice: on the laptop at `/home/molef/PhD/concept-composition`, where code is
 written, and on mscluster at `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`, where it
 runs. GitHub carries commits between them. From the laptop checkout, every cluster action goes
 through `scripts/cluster.sh`:

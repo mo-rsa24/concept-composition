@@ -1,4 +1,4 @@
-# poe_repair_min: Environment and Architecture
+# concept-composition: Environment and Architecture
 
 HPC cluster, Slurm-scheduled, two separate filesystems with no automatic mirroring between
 them, and a paper build that needs one specific LaTeX engine because nothing else is installed.

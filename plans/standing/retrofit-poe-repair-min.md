@@ -1,4 +1,4 @@
-# 🗂️ Retrofit poe_repair_min: one name per thing, everywhere
+# 🗂️ Retrofit concept-composition: one name per thing, everywhere
 
 ## Position in the plan tree
 

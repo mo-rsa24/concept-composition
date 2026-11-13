@@ -13,8 +13,8 @@ reported beside the interaction term per pair
 Background
 This is layer 12's build in the composition ladder (3-understanding-compositionality/artifacts/drips/the-toy/simple-distributions-rebuild/),
 its last layer. Layer 8 defined the interaction term and layer 9 trained a correction on the toys;
-here I read the same term from poe_repair_min's SDXL cache and measure the correction's effect on
-compose rate on held-out animal pairs. poe_repair_min is read and never written: I type every block
+here I read the same term from concept-composition's SDXL cache and measure the correction's effect on
+compose rate on held-out animal pairs. concept-composition is read and never written: I type every block
 into my own script. I have passed quiz 12.2.
 
 Objectives
@@ -36,14 +36,14 @@ What to read
 - walk08.py's ε-space term, and walk09.py with toy/rebuild/phase9_correction.py: layers 8 and 9.
 - ~/Playground/PhD/poe_repair_min/runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md:
   how a checkpoint is rendered.
-- poe_repair_min's report does-interaction-strength-predict-which-pairs-blend.md and its figure
+- concept-composition's report does-interaction-strength-predict-which-pairs-blend.md and its figure
   explainer: the cache and the bound.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in this repo, and
   python -m rebuild.<script> runs from toy/ (the guide, "Two lanes").
 - The cache is /datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/, where one cell is
-  one pair and seed (poe_repair_min report does-interaction-strength-predict-which-pairs-blend.md,
+  one pair and seed (concept-composition report does-interaction-strength-predict-which-pairs-blend.md,
   "Where this came from"; its figure explainer).
 - Each cell holds residuals/step_NNN.pt per step with eps_a_raw, eps_b_raw, eps_j_raw, eps_uncond and
   timestep, for all 50 DDIM steps of the uncorrected run at guidance 7.5 (the same report; its figure
@@ -89,7 +89,7 @@ What is already known
   (environment/hpc/execution-protocol.md; the transfer plan, Environment Facts).
 
 Rules
-- Never edit poe_repair_min's code, plans or cache, or anything under /datasets/mmolefe/poe_repair_min/.
+- Never edit concept-composition's code, plans or cache, or anything under /datasets/mmolefe/poe_repair_min/.
 - Never launch on a busy card.
 - I type; nothing is pasted into walk12.py.
 - No commit.
