@@ -69,9 +69,9 @@ go/no-go call on Phase-2, the leave-one-pair-out set in plan 03.
 - [x] Score the held-out split for compose rate, in-distribution against held-out.
       The split is the unseen blend pairs, the known-failure reference pair, and the
       control pair that composes fine without any adapter.
-- [ ] Score the checkpoints from step 70000 to 100000. Training ran that far; scoring
+- [x] Score the checkpoints from step 70000 to 100000. Training ran that far; scoring
       stopped at 60000. This is a scoring pass over existing checkpoints, not a rerun.
-- [ ] Write the citable transfer number into the review file WITH its checkpoint step.
+- [x] Write the citable transfer number into the review file WITH its checkpoint step.
       The paper never quotes this number without the step it came from.
 - [ ] Re-read the pairs that came out no better than plain PoE on the two direction
       measures, once `instrument-02-three-live-curves-while-training`'s first short run is

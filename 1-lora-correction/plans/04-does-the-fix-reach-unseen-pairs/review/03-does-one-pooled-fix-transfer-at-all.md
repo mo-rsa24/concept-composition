@@ -1,13 +1,14 @@
 # 🧪 Review: does one pooled adapter transfer at all?
 
-**Answered yes, strongly, and the read is not finished.** This file judges
+**Answered yes: held-out 0.742 at step 60000 where plain PoE composes near zero, flat to step 100000.** This file judges
 [the plan that trains one pooled adapter](../plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md).
 It exists to answer one cheap question before fifteen expensive runs are paid for: does the fix
 reach unseen pairs at all? It does, so the fifteen runs are warranted.
 
-Three things are still owed, and until they are done the number cannot be quoted in the paper: the
-later checkpoints are unscored, the direction measures were wired after this run finished, and the
-go-ahead note itself is unwritten.
+Every checkpoint is scored with the current instance-count scorer, size filter included. Two things
+are still owed: the direction measures were wired after this run finished, and the go-ahead note is
+unwritten. The paper's draft and figure F8a still carry the 0.96 this run gave before the size
+filter existed; see [What the write-up owes](#what-the-write-up-owes).
 
 ## Recommended prompt (to finish the read)
 
@@ -68,11 +69,16 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
 - [x] ✅ Does held-out [compose rate](../../../../context/world/compose-rate.md) beat the level plain
-      PoE reaches with no fix at all? Emphatically, at step 60000:
-      in-distribution 0.96 (n=176), held-out 0.96 (n=128). Per held-out pair: leopard×jaguar 1.0,
-      frog×toad 0.94, eagle×hawk 0.94, seal×walrus 0.94, goose×swan 1.0, cow×buffalo 1.0,
-      cat×dog 0.875, elephant×penguin (control) 1.0. Every pair well above that level.
-      Held-out at 0.96 where vanilla PoE composes ~0 is the scope's core positive signal.
+      PoE reaches with no fix at all? Yes, at step 60000, scored with the current instance-count
+      scorer (two or more animal boxes, each spanning at least 25% of the image's long side):
+      in-distribution 0.847 (n=176), held-out 0.742 (n=128). Per held-out pair: leopard×jaguar
+      0.938, seal×walrus 0.812, eagle×hawk 0.812, elephant×penguin (control) 0.812, cow×buffalo
+      0.750, cat×dog 0.625, frog×toad 0.625, goose×swan 0.562. Every pair is above plain PoE's
+      near-zero level. Scored 2026-11-13 (job 86565); numbers in the run folder's `compose_rate.json`.
+      **The size filter matters here.** Without it (`min_box_fraction` 0) the same step-60000 images
+      read 0.960 in-distribution and 0.961 held-out (job 86587), which is what this run was first
+      scored at, before the filter was added on 2026-08-10. The filter exists because the detector
+      counted small boxes such as a shadow beside one fused animal as a second animal.
 
 ## Written before the run, answered after
 
@@ -87,9 +93,9 @@ Navigation: ⬅️ [Written before the run](#written-before-the-run-answered-aft
 Questions the result itself raised. **Nothing here may ever become the question above**, because it was
 written with the answer already visible.
 
-- [ ] ⚠️ Do steps 70000 to 100000 change the read? Training ran 40k steps past the last scored
-      checkpoint. The citable transfer number must carry its step, and 60000 is currently the
-      best-read, not the final word.
+- [x] ✅ Do steps 70000 to 100000 change the read? No. Held-out reads 0.742, 0.734, 0.719 and
+      0.734 at steps 70000 to 100000, and in-distribution 0.864, 0.858, 0.869 and 0.852. Both have
+      been flat since step 20000 (held-out 0.727 there).
 - [ ] ⚠️ Does the direction axis agree? The two direction metrics (plan 02) were wired after this
       run's eval; a pair sitting at the no-fix level cannot yet be split delivery-null vs
       no-transfer.
@@ -116,7 +122,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 | What the paper says | What it owes alongside it |
 |---|---|
-| held-out compose-rate reaches 0.96 where vanilla PoE composes near zero | the checkpoint the number came from (step 60000), because the run kept training for another 40k steps after it |
+| held-out compose rate 0.742 (n=128) at step 60000 where plain PoE composes near zero | the step, the scorer with its size filter, and that the in-distribution rate is 0.847 at the same step. `paper/iclr/DRAFT_MAP.md` and figure F8a still use the pre-filter 0.96, and F8a's claim that the adapter composes unseen pairs "at the rate it manages on pairs it did" has a gap of about 0.1 under this scorer |
 | the pooled fix transfers to unseen pairs | that this is one pooled run, not a rate. The rate comes from the fifteen runs, and the sentence must not read as though this run supplied it |
 
 ## Still open
@@ -125,7 +131,6 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| whether steps 70000 to 100000 change the read | scoring the later checkpoints | the citable number, which cannot be quoted without its step |
 | whether the direction axis agrees | re-running eval with the two direction metrics from plan 02 wired in | telling a delivery-null pair apart from a no-transfer pair |
 | the go/no-go note for the fifteen runs | writing it, with the number and step backing it | nothing technically, but those runs are being launched on an undocumented call. `verdict.json` is a run-health marker, not this call |
 
@@ -133,5 +138,5 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Score the checkpoints from step 70000 to 100000, then write the go-ahead note naming the number
-and its step.
+Decide what the paper does with the post-filter number (DRAFT_MAP and F8a), then write the go-ahead
+note for the fifteen runs naming 0.742 at step 60000 and the scorer it came from.

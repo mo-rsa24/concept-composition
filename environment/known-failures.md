@@ -82,6 +82,57 @@ images; not yet written)
 
 ---
 
+#### Entry ID: poe-score-003
+**Name:** Compose rates scored before 2026-08-10 are higher than the current scorer gives
+
+**Symptom:** rescoring an old run's saved samples gives a lower compose rate than the
+`compose_rate.json` it already has, by about 0.1 on training pairs and 0.2 on held-out pairs.
+
+**Root cause:** the instance-count scorer gained a size filter on 2026-08-10
+(`MIN_BOX_FRACTION = 0.25` in `poe_repair/experiments/compose_scorer_validation/detection_scorer.py`):
+a box must span a quarter of the image's long side to count as an animal. Scores written before
+that date counted small boxes, such as a shadow beside one fused animal, as a second animal.
+Shown on `phase1_r8_100k` step 60000: 0.960 and 0.961 without the filter, 0.847 and 0.742 with it,
+on the same 304 images (jobs 86565 and 86587, 2026-11-13).
+
+**Solution:** rescore before citing any compose rate whose JSON predates 2026-08-10: rerun
+`poe_repair.experiments.does_the_fix_reach_unseen_pairs.compose_rate --run-dir <run>` and keep
+the old file beside the new one for comparison.
+
+**First discovered:** step 10 of the running order, 2026-11-13
+
+**Affects steps:** any step quoting a compose rate from runs trained in late July or early August
+
+**Category:** 🔴 critical
+
+**Environment reference:** none
+
+---
+
+#### Entry ID: poe-score-004
+**Name:** "Could not load the custom kernel for multi-scale deformable attention" while scoring
+
+**Symptom:** the compose-rate scorer's log repeats `Could not load the custom kernel for
+multi-scale deformable attention: …/torch_extensions/py310_cu118/MultiScaleDeformableAttention/
+MultiScaleDeformableAttention.so: cannot open shared object`.
+
+**Root cause:** GroundingDINO's compiled CUDA kernel is missing from the `co3` environment's
+extension cache, so it falls back to the plain-PyTorch version of the same layer.
+
+**Solution:** none needed. The fallback gives the same counts: on `phase1_r8_100k` step 60000 the
+rescoring matched to the third decimal (0.847 and 0.742 both ways). It is slower, about 42 minutes
+for 3,050 images on an RTX 8000.
+
+**First discovered:** step 10 of the running order, 2026-11-13 (job 86565)
+
+**Affects steps:** every scoring pass that uses the instance-count scorer
+
+**Category:** 🟢 harmless
+
+**Environment reference:** none
+
+---
+
 ### Memory and batch sizes
 
 #### Entry ID: poe-mem-001
