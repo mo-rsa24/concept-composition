@@ -28,7 +28,7 @@ left in a queue that renumbers itself. A plan's own file carries this same numbe
 | 3 | ~~04-does-the-fix-reach-unseen-pairs/instrument-01-the-clean-pair-pool~~ | the pool of pairs that blend by default, confirmed by the scorer | ✅ |  |
 | 4 | ~~03-does-the-correction-cause-composition/hypothesis-02-more-correction-more-composition~~ | the headline: more correction, more composition, controls flat | ✅ |  |
 | 5 | ~~03-does-the-correction-cause-composition/hypothesis-04-what-the-cached-runs-already-show~~ | the analyses needing no GPU and no queue | ✅ | 1 |
-| 6 | 03-does-the-correction-cause-composition/hypothesis-03-when-in-the-run-it-matters | when the correction matters: the cliff is at the start | ◑ driving the timing tab by hand | 4, 5 |
+| 6 | ~~03-does-the-correction-cause-composition/hypothesis-03-when-in-the-run-it-matters~~ | when the correction matters: the cliff is at the start | ✅ | 4, 5 |
 | 7 | ~~03-does-the-correction-cause-composition/hypothesis-05-the-same-story-from-three-sides~~ | the independent checks: two image-side yes, two language-side null | ✅ | 4 |
 | 8 | ~~03-does-the-correction-cause-composition/hypothesis-01-what-the-fix-changes-inside-the-model~~ | the fix changes what a word paints, not where it looks | ✅ | 3 |
 | 9 | ~~04-does-the-fix-reach-unseen-pairs/instrument-02-three-live-curves-while-training~~ | the one-epoch smoke confirming three live curves | ✅ |  |
