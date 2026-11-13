@@ -2,7 +2,7 @@
 
 ## Where this came from
 
-Raised while reviewing [the basins-by-hand plan](../../../../1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md)
+Raised while reviewing [the basins-by-hand plan](../../../../1-lora-correction/artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md)
 in this project, but it is not part of that scope or this paper. It needs new training runs on
 a purpose-built dataset, which is a project of its own. Parked here to revisit later, once the
 current paper ships.

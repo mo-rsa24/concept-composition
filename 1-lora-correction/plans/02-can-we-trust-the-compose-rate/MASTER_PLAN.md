@@ -16,7 +16,7 @@ one `/pressure-test` verdict. Nothing but the labelled-set build may start befor
 |---|---|---|---|
 | 1 of 4 | [the literature check](plans/checks/01-is-this-hole-already-known.md) | is this hole already published | ⚠️ not started |
 | 2 of 4 | [building the three-state labelled set](plans/tools/04-the-three-state-labelled-set.md) | the labelled set and the band | ⚠️ not started, runs whatever the literature check says |
-| 3 of 4 | [scoring the current benchmarks](plans/ideas/03-what-the-current-benchmarks-score.md) | score the candidate detectors | ⚠️ blocked by the literature check |
+| 3 of 4 | [scoring the current benchmarks](../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/plans/ideas/03-what-the-current-benchmarks-score.md) | score the candidate detectors | ⚠️ blocked by the literature check |
 | 4 of 4 | [the promote-or-close decision](plans/checks/02-promote-or-close.md) | promote or close, in writing | ⚠️ blocked by the other three |
 
 ## Mission

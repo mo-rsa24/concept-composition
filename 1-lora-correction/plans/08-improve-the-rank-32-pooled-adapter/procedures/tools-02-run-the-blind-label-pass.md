@@ -1,6 +1,6 @@
 # 🧭 Label a set of renders without knowing which condition made each one
 
-[Plan 02's instruction 5.1](../plans/tools/02-the-blind-label-pass.md#5--label-one-seed-by-hand-and-check-the-blinding-holds) sends you here to check the tool, and [plan 03](../plans/baselines/03-what-the-stacked-sampler-alone-does.md#3--label-both-samplers-blind) and [plan 04](../plans/hypothesis/04-the-parent-and-the-four-children.md#5--label-every-run-blind-and-write-the-verdicts) send you here for the real reads. When you are done, one label file exists for the set you were given, and nothing you did could have told you which picture came from which condition.
+[Plan 02's instruction 5.1](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md#5--label-one-seed-by-hand-and-check-the-blinding-holds) sends you here to check the tool, and [plan 03](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md#3--label-both-samplers-blind) and [plan 04](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#5--label-every-run-blind-and-write-the-verdicts) send you here for the real reads. When you are done, one label file exists for the set you were given, and nothing you did could have told you which picture came from which condition.
 
 ## Recommended prompt (when you finish)
 
@@ -12,8 +12,8 @@
 
 | File | What it holds |
 |---|---|
-| [design](../plans/tools/02-the-blind-label-pass.md) | the strips, the blinding, the three labels, the two secondary reads |
-| [review](../review/02-the-blind-label-pass.md) | the questions your labelling answers about the tool itself |
+| [design](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md) | the strips, the blinding, the three labels, the two secondary reads |
+| [review](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/02-the-blind-label-pass.md) | the questions your labelling answers about the tool itself |
 | **this file** | **the steps, and the reason behind each one** |
 
 ## Table of contents
@@ -55,7 +55,7 @@ Navigation: ⬅️ [Why you are doing this](#why-you-are-doing-this-and-where-it
 - **The three labels**: **clean**, **unclear**, **not two**. Their full definitions are in [what you need to understand first](#what-you-need-to-understand-first) below, and you read them before you start rather than trusting your memory of them.
 - **The join**: the command that resolves ids to conditions after labelling and prints the counts.
 - **A set name**: the run and the sampler joined by a hyphen, for example `baseline-shipped`, `baseline-stacked`, `P-stacked`, `C1-shipped`. The plan that sent you here names the set and its root directory; every command below writes `$ROOT` where that root goes.
-- **The set root**: the directory the sending plan gives. [Plan 02](../plans/tools/02-the-blind-label-pass.md) uses `/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/read`, [plan 03](../plans/baselines/03-what-the-stacked-sampler-alone-does.md) uses `.../improve_r32/baseline`, and [plan 04](../plans/hypothesis/04-the-parent-and-the-four-children.md) uses `.../improve_r32/<run>` with one root per run. Export it once before you start:
+- **The set root**: the directory the sending plan gives. [Plan 02](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md) uses `/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/read`, [plan 03](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md) uses `.../improve_r32/baseline`, and [plan 04](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md) uses `.../improve_r32/<run>` with one root per run. Export it once before you start:
 
   ```bash
   export ROOT=<the root the sending plan named>
@@ -74,7 +74,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
   ```
 
   ✅ **One strip image per seed, and the printed key list holds an id, a seed and a sampler but no condition, run name or checkpoint path.** The set is blind as built.
-  ❌ **A key naming a condition, a run or a checkpoint appears**: stop. The set is not blind and labelling it would waste your time. Report it against [the tool's review file](../review/02-the-blind-label-pass.md) and ask for a rebuild.
+  ❌ **A key naming a condition, a run or a checkpoint appears**: stop. The set is not blind and labelling it would waste your time. Report it against [the tool's review file](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/02-the-blind-label-pass.md) and ask for a rebuild.
 
 - [ ] 🖥️ **No labels exist for this set yet.**
 
@@ -123,7 +123,7 @@ python3 1-lora-correction/scripts/showcase/blind_label.py --show --set <the set 
 
 ❌ **One column is consistently the odd one out across every row**: that is not necessarily a leak, since one condition really may look different, but check the ids differ per row before continuing. If a single id repeats down a column, the shuffle did not run and the set must be rebuilt.
 
-- [ ] Write down whether anything about the presentation told you a tile's identity, for [the review file](../review/02-the-blind-label-pass.md).
+- [ ] Write down whether anything about the presentation told you a tile's identity, for [the review file](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/02-the-blind-label-pass.md).
 
 ## 2. Label every tile, one strip at a time
 
@@ -161,7 +161,7 @@ python3 1-lora-correction/scripts/showcase/blind_label.py --join --set <the set 
 
 Navigation: ⬅️ [3. Run the join](#3-run-the-join-and-read-the-counts) | 📋 [TOC](#table-of-contents) | [Next](#what-you-produce) ➡️
 
-**A tile is identifiable without the mapping.** Stop labelling. The blinding is not a property of the tool yet, and labels taken under it cannot be used. This is a failure of [plan 02](../plans/tools/02-the-blind-label-pass.md), not of the set you were given.
+**A tile is identifiable without the mapping.** Stop labelling. The blinding is not a property of the tool yet, and labels taken under it cannot be used. This is a failure of [plan 02](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md), not of the set you were given.
 
 **You cannot decide between two labels on many tiles.** Finish the set anyway, using the definitions rather than your sense of what the run ought to have produced, and record the count of hesitations. A high count bounds every verdict built on this set, and that is worth knowing.
 
@@ -177,10 +177,10 @@ Navigation: ⬅️ [If it does not work](#if-it-does-not-work) | 📋 [TOC](#tab
 |---|---|---|
 | the label file for this set | `$ROOT/labels.json` | the clean-seed count every verdict in this scope rests on |
 | the joined table | `$ROOT/labels_joined.csv` | which condition each label belonged to |
-| the hesitation count | the review file the sending plan names | [how often the unclear-against-not-two boundary was hard to call](../review/02-the-blind-label-pass.md#written-before-the-run-answered-after) |
+| the hesitation count | the review file the sending plan names | [how often the unclear-against-not-two boundary was hard to call](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/02-the-blind-label-pass.md#written-before-the-run-answered-after) |
 
 ## Next step
 
 Navigation: ⬅️ [What you produce](#what-you-produce) | 📋 [TOC](#table-of-contents)
 
-Go back to the plan that sent you here, tick its instruction, and write the counts into its review file: [plan 02](../plans/tools/02-the-blind-label-pass.md), [plan 03](../plans/baselines/03-what-the-stacked-sampler-alone-does.md) or [plan 04](../plans/hypothesis/04-the-parent-and-the-four-children.md).
+Go back to the plan that sent you here, tick its instruction, and write the counts into its review file: [plan 02](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md), [plan 03](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md) or [plan 04](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md).

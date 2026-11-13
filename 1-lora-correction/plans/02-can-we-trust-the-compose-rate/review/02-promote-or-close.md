@@ -17,7 +17,7 @@ and writes the ending.
 | [design](../plans/checks/02-promote-or-close.md) | the three promotion levels and what each one costs |
 | **this file** | **the verdict: which level fired, and what follows from it** |
 | [what it reads](04-the-three-state-labelled-set.md) | the two false-compose rates |
-| [what it reads](03-what-the-current-benchmarks-score.md) | the best agreement score |
+| [what it reads](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md) | the best agreement score |
 | [what it reads](01-is-this-hole-already-known.md) | whether the hole is already published |
 
 ## Table of contents
@@ -138,4 +138,4 @@ Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
 Wait for [the literature check](01-is-this-hole-already-known.md),
 [the labelled set](04-the-three-state-labelled-set.md) and
-[the benchmark scoring](03-what-the-current-benchmarks-score.md) to carry answers, then write the ending.
+[the benchmark scoring](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md) to carry answers, then write the ending.

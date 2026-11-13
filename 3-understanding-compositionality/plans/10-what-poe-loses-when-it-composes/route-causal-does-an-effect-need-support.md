@@ -254,7 +254,7 @@ Objectives
 What to read
 - 3-understanding-compositionality/scripts/caption_wetness.py: the sample and fetch stages to reuse.
 - 1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/README.md (main checkout) and
-  1-lora-correction/plans/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md: the validated
+  1-lora-correction/artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md: the validated
   GroundingDINO instance count and how it is run.
 - 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, section 7.2.
 

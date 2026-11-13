@@ -7,7 +7,7 @@ changes one sentence of it, or closes.
 
 | Within this scope | Plan | Status |
 |---|---|---|
-| 3 of 4 | [scoring the current benchmarks](../ideas/03-what-the-current-benchmarks-score.md) | ⚠️ blocked by the literature check |
+| 3 of 4 | [scoring the current benchmarks](../../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/plans/ideas/03-what-the-current-benchmarks-score.md) | ⚠️ blocked by the literature check |
 | **4 of 4** | **this plan** | **⚠️ blocked by the other three** |
 
 Design only. The decision lives in [this plan's review file](../../review/02-promote-or-close.md).

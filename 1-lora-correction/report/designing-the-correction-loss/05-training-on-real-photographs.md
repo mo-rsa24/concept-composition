@@ -37,7 +37,7 @@ The promotion rule was that `05` becomes a plan if the walk returns a reachable 
 
 The one pair where the retrieval worked is cat × dog, which appears in no training cell pool and is the held-out test. It could not have been used even if every image had been genuine.
 
-**What replaces it:** [`06`, training on the renders that composed](../../plans/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md), whose corpus is model renders a person selected by eye. Selection by eye is what makes it trustworthy: the detector weakness measured here never touches it.
+**What replaces it:** [`06`, training on the renders that composed](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md), whose corpus is model renders a person selected by eye. Selection by eye is what makes it trustworthy: the detector weakness measured here never touches it.
 
 ## Where the detail is
 

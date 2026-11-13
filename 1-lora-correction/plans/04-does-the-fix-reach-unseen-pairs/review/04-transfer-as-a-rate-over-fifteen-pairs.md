@@ -23,7 +23,7 @@ answers.
 | [design](../plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md) | the fifteen leave-one-pair-out runs, the held-out set, the threshold |
 | **this file** | **the verdict: transfer as a rate over fifteen held-out pairs** |
 | [what must pass first](02-three-live-curves-while-training.md) | the one-epoch first run that must be green before this starts |
-| [what defends it](05-the-size-matched-control-pool.md) | the size-matched pool that rules out data volume |
+| [what defends it](../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md) | the size-matched pool that rules out data volume |
 
 ## Table of contents
 

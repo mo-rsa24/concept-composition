@@ -243,10 +243,10 @@ Five plans, in the order they get done. The step numbers are their places in the
 
 | Step | Plan | What it does | Status | Waits on |
 |---|---|---|---|---|
-| 66 | [01: the three switches and the guidance interval](plans/tools/01-the-three-switches-and-the-guidance-interval.md) | the two trainer flags and the one loss switch, the sampler's guidance interval, the 14-pair pool and the exclusion list, each proved to select something | ⚠️ | |
-| 67 | [02: the blind label pass](plans/tools/02-the-blind-label-pass.md) | the read: strips, hidden names, three labels, and the two automatic reads that order but never judge | ⚠️ | 66 |
-| 68 | [03: what the stacked sampler alone does](plans/baselines/03-what-the-stacked-sampler-alone-does.md) | checkpoint 30050 under both samplers on 25 seeds, judged blind, fixing which column the training runs are read against | ⚠️ | 66, 67 |
-| 69 | [04: the parent and the four children](plans/hypothesis/04-the-parent-and-the-four-children.md) | five trainings in a chain overnight, one axis apart, judged blind under both samplers | ⚠️ | 66, 67 to launch; 68 to read |
+| 66 | [01: the three switches and the guidance interval](../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/01-the-three-switches-and-the-guidance-interval.md) | the two trainer flags and the one loss switch, the sampler's guidance interval, the 14-pair pool and the exclusion list, each proved to select something | ⚠️ | |
+| 67 | [02: the blind label pass](../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md) | the read: strips, hidden names, three labels, and the two automatic reads that order but never judge | ⚠️ | 66 |
+| 68 | [03: what the stacked sampler alone does](../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md) | checkpoint 30050 under both samplers on 25 seeds, judged blind, fixing which column the training runs are read against | ⚠️ | 66, 67 |
+| 69 | [04: the parent and the four children](../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md) | five trainings in a chain overnight, one axis apart, judged blind under both samplers | ⚠️ | 66, 67 to launch; 68 to read |
 | 70 | [05: the comparison sheet](plans/figures/05-the-comparison-sheet.md) | the two sheets filed under `artifacts/results/` with their card, and the correction's size per pair beside them | ⚠️ | 68, 69 |
 
 Each plan is paired with a review file of the same number under `review/`, except plan 05, which

@@ -54,7 +54,7 @@ Process lane: the same cast under operation, plus numbered step badges, phase co
 status chips ("Completed", "In progress", "Not started", "Blocked"); every chip reads "Not
 started" in version 01.
 
-Piece-to-plan mapping: prompt 1 belongs to [plan 01](plans/reading/01-basins-by-hand.md), prompt 3 to
+Piece-to-plan mapping: prompt 1 belongs to [plan 01](../../artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md), prompt 3 to
 [plans 01 and 02](plans/tests/02-the-free-test.md), prompt 2 to
 [plan 03](plans/tools/03-wire-the-endpoint-predictor.md), prompt 4 to
 [plan 04](plans/tools/04-calibrate-the-measuring-tool.md), prompt 5 to

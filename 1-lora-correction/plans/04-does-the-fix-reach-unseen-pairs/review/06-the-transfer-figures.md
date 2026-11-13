@@ -186,7 +186,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 |---|---|---|
 | whether F8a and F8b read cold and stay inside their register rows | reading both against `paper/iclr/figures.md` | the transfer paragraphs in the manuscript, which argue from these two |
 | A3 and A4 | step 11 landing | the delivery-against-transfer argument |
-| A5 | step 12 landing | the pool-contrast argument, which is what [baseline-01](05-the-size-matched-control-pool.md) supplies |
+| A5 | step 12 landing | the pool-contrast argument, which is what [baseline-01](../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md) supplies |
 | A2 | nothing external; it has not been started | the delivery-live figure |
 | the unscored tail, steps 70000 to 100000 | task 5.1 scoring it and F8a rebuilt over the full run | the step-60000 caption cap on F8a and the step-mismatch cap on F9 |
 | whether F9's softness is the adapter's fit or the correction's ceiling | task 5.2's side-by-side read at matched sampler settings | the choice between adding data or rank and accepting the ceiling |

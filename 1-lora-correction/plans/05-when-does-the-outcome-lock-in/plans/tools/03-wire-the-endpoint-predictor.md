@@ -183,7 +183,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
 ### 1. 🔧 Download and adapt
 
 ◀ **Needs: [task 0.1](#0--check-this-plan-before-working-from-it)**, and
-[what plan 01 had to pass](../reading/01-basins-by-hand.md#what-has-to-pass-before-this-runs), so the premise stands.
+[what plan 01 had to pass](../../../../artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md#what-has-to-pass-before-this-runs), so the premise stands.
 
 - [ ] **1.1** Download `latent-consistency/lcm-sdxl` (fp16 variant) with the HF cache pointed at
   `/datasets`, then print the landing path, its filesystem, and the size on disk.

@@ -16,8 +16,8 @@
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 68 | [03: what the stacked sampler alone does](../baselines/03-what-the-stacked-sampler-alone-does.md) | the baseline columns the sheet carries |
-| 69 (previous) | [04: the parent and the four children](../hypothesis/04-the-parent-and-the-four-children.md) | the run the sheet's last column comes from |
+| 68 | [03: what the stacked sampler alone does](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md) | the baseline columns the sheet carries |
+| 69 (previous) | [04: the parent and the four children](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md) | the run the sheet's last column comes from |
 | **70 (current)** | **05: the comparison sheet** | the filed evidence, and the scope's close |
 
 ---
@@ -51,7 +51,7 @@
 ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#quick-context-where-you-are) ➡️
 
 - **The sheet**: one image per sampler. Rows are seeds; columns are the joint target, plain product of experts, checkpoint 30050, and the best run. The labels sit under each tile.
-- **The best run**: whichever of the five trainings won by [plan 04's rule](../hypothesis/04-the-parent-and-the-four-children.md#words-this-plan-uses), or, when none beat the baseline, the parent, shown as the run that did not win. A sheet with no winner is still filed; it is what a null looks like.
+- **The best run**: whichever of the five trainings won by [plan 04's rule](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#words-this-plan-uses), or, when none beat the baseline, the parent, shown as the run that did not win. A sheet with no winner is still filed; it is what a null looks like.
 - **The correction's size, per pair**: the norm of the correction the adapter produces, averaged over the pair's cells and denoising steps, expressed in the units the size measure this repository already fixed uses.
 - **The card**: the entry in the results folder's `README.md` saying what the file shows, how it was made, and where its numbers came from.
 - **A register slot**: a reserved place in the paper's figure register carrying, written before the experiment ran, the sentence its caption will be allowed to make.
@@ -72,7 +72,7 @@
 
 **Associated materials.**
 - No review file. This plan draws settled results and has no question of its own to answer.
-- The verdicts it draws: [plan 03's review](../../review/03-what-the-stacked-sampler-alone-does.md) and [plan 04's review](../../review/04-the-parent-and-the-four-children.md)
+- The verdicts it draws: [plan 03's review](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/03-what-the-stacked-sampler-alone-does.md) and [plan 04's review](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/04-the-parent-and-the-four-children.md)
 - The filing convention: `~/.claude/ARTIFACT_TREE_FORMAT.md`
 
 ---
@@ -206,7 +206,7 @@
 
 ### 1. 🎨 Assemble the two sheets
 
-◀ **Needs: [plan 04 instruction 5.4](../hypothesis/04-the-parent-and-the-four-children.md#5--label-every-run-blind-and-write-the-verdicts)** for the winning run and its labels, and [plan 03 instruction 3.4](../baselines/03-what-the-stacked-sampler-alone-does.md#3--label-both-samplers-blind) for the baseline columns the sheet carries and the verdict its caption may not exceed.
+◀ **Needs: [plan 04 instruction 5.4](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#5--label-every-run-blind-and-write-the-verdicts)** for the winning run and its labels, and [plan 03 instruction 3.4](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/baselines/03-what-the-stacked-sampler-alone-does.md#3--label-both-samplers-blind) for the baseline columns the sheet carries and the verdict its caption may not exceed.
 
 - [ ] **1.1 Build one sheet per sampler** from the existing renders, four columns, 25 rows in two labelled blocks, each tile carrying its blind label underneath.
   - Mark every joint-target tile whose own reference shows the wrong animals, so a reader can see which seeds the adapter was trained toward incorrectly.
@@ -338,7 +338,7 @@
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** the strip builder from [plan 02](../tools/02-the-blind-label-pass.md)
+**File:** the strip builder from [plan 02](../../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/02-the-blind-label-pass.md)
 **Relevant section:** the join, which already produces the label per tile. The sheet is a different layout over the same table, not a second labelling.
 
 **File:** the repository's fixed correction-size measure

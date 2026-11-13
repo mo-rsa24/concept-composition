@@ -16,8 +16,8 @@
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 74 | [04: freezing the empty branch](04-freezing-the-empty-branch.md) | the baseline and `04`, launched |
-| 75 | [05: training on the renders that composed](05-training-on-the-renders-that-composed.md) | variation `06`, a different target |
+| 74 | [04: freezing the empty branch](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md) | the baseline and `04`, launched |
+| 75 | [05: training on the renders that composed](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md) | variation `06`, a different target |
 | **76 (current)** | **06: fitting the whole path and handing back the tail** | variation `08`, the fidelity question |
 
 ---

@@ -514,7 +514,7 @@ disjoint.
 [designing the correction loss](../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) that
 launches a run, and any future pool built by hand rather than from `seed_pool.train_pool`. Both
 solutions above are owned by
-[task 1.5 of the instrument fixes](../1-lora-correction/plans/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md).
+[task 1.5 of the instrument fixes](../1-lora-correction/artifacts/plans/parked/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md).
 
 **Category:** 🔴 critical
 

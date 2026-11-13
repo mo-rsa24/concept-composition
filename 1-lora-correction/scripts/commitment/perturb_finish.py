@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Basins by hand: nudge one cached state by 1% of its norm, finish DDIM three ways, compare.
 
-Plan: 1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md
+Plan: 1-lora-correction/artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md
 
 Loads one pair-and-seed cell's cached mid-run state at each of the given steps (from its
 ``residuals/step_NNN.pt``), builds a nudged-down and a nudged-up copy (a random unit direction,

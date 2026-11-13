@@ -37,7 +37,7 @@ pairs at 8 seeds each.
 settings beside it, is [the blend gallery](../artifacts/results/poe-blends-instead-of-composing/README.md).
 The instrument that decides a render failed, a GroundingDINO instance count validated against
 labelled images, is [the compose-score validation set](../artifacts/results/can-we-trust-the-compose-score/README.md),
-with its verdict in [what the current benchmarks score](../1-lora-correction/plans/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md).
+with its verdict in [what the current benchmarks score](../1-lora-correction/artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md).
 Read the instrument before any rate below, because every number in this folder is counted by it.
 
 **3. The correction exists, and it is what causes composition**

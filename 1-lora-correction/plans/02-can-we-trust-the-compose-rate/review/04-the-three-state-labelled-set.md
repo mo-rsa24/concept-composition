@@ -18,7 +18,7 @@ the one that decides whether F2's shape is safe.
 |---|---|
 | [design](../plans/tools/04-the-three-state-labelled-set.md) | the labelling rule, the blinding, the three-state scheme |
 | **this file** | **the verdict: how far above the truth the printed compose rate sits** |
-| [what it supplies](03-what-the-current-benchmarks-score.md) | the judgeable-pair denominator every candidate's score is computed over |
+| [what it supplies](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md) | the judgeable-pair denominator every candidate's score is computed over |
 | [what reads it](02-promote-or-close.md) | the decision, which needs the two false-compose rates |
 
 ## Table of contents
@@ -146,7 +146,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| everything in this file | the labelling pass over the λ grid | [the promote-or-close decision](02-promote-or-close.md), which needs the two false-compose rates, and [the benchmark scoring](03-what-the-current-benchmarks-score.md), which needs the judgeable denominator |
+| everything in this file | the labelling pass over the λ grid | [the promote-or-close decision](02-promote-or-close.md), which needs the two false-compose rates, and [the benchmark scoring](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md), which needs the judgeable denominator |
 | the band printed in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | correcting it to 75% to 94% | any reader who takes 87% as the lower end, which counts 17 uncallable images as successes |
 
 ## Next step

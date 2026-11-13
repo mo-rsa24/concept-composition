@@ -119,7 +119,7 @@ honestly killed and the review file says what killed it.
 (none)
 
 ## Plans
-- ⚠️ [plans/01-basins-by-hand.md](plans/reading/01-basins-by-hand.md) — proves basins and a ridge exist for the composed flow, one pair-and-seed run, one afternoon
+- ⚠️ [plans/01-basins-by-hand.md](../../artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md) — proves basins and a ridge exist for the composed flow, one pair-and-seed run, one afternoon
 - ⚠️ [plans/02-the-free-probe.md](plans/tests/02-the-free-test.md) — posterior-mean drift per pair-and-seed run, judged against the pre-registered ordering
 - ⚠️ [plans/03-wire-the-oracle.md](plans/tools/03-wire-the-endpoint-predictor.md) — LCM-SDXL downloaded, adapted, checked once against one teacher ending
 - ⚠️ [plans/04-calibrate-the-instrument.md](plans/tools/04-calibrate-the-measuring-tool.md) — 240 states, two thresholds in code, verdict: adopt, shrink, or fall back

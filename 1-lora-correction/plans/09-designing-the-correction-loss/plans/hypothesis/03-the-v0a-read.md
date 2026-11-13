@@ -18,7 +18,7 @@
 |------|------|-------------|
 | 72 (previous) | [02: the V0 foundation](../reading/02-the-v0-foundation.md) | the page shape this one copies |
 | **73 (current)** | **03: the V0a read** | four experiments already on disk, judged |
-| 74 (next) | [04: freezing the empty branch](04-freezing-the-empty-branch.md) | the other way to close the same direction |
+| 74 (next) | [04: freezing the empty branch](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md) | the other way to close the same direction |
 
 ---
 
@@ -256,7 +256,7 @@ For Claude to execute.
   - `cells_v57.json`, 43 cells over 29 pairs, rank 32, alpha 32, 30,000 steps
   - One 49 GB card, and the same model as `00b` below: `mscluster109` device 0 (RTX A6000), or `mscluster106` device 1 (Quadro RTX 8000) if 109 is taken
   - Started under `nohup` outside Slurm, because `biggpu` allows one job per user
-  - Needs [task 1.5](../tools/01-the-three-instrument-fixes.md) first, or 8 of the 43 cells are recorded as held-out
+  - Needs [task 1.5](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md) first, or 8 of the 43 cells are recorded as held-out
   - Produces: the baseline every later variation in this scope is read against
   - Expected runtime: about 11 hours at roughly 2,750 steps an hour
 - [ ] 3b.2 **Launch `00b`, the same objective plus the penalty, matched to it**
@@ -395,7 +395,7 @@ The review questions are in [the review file](../../review/03-the-v0a-read.md).
 
 ⬅️ [Previous](#recommended-skill) | 📋 [TOC](#table-of-contents)
 
-[04: freezing the empty branch](04-freezing-the-empty-branch.md) closes the same direction exactly rather than approximately, and is read against whatever this plan concludes.
+[04: freezing the empty branch](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md) closes the same direction exactly rather than approximately, and is read against whatever this plan concludes.
 
 ---
 

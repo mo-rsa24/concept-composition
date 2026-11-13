@@ -292,7 +292,7 @@ Navigation: ⬅️ [Routes](#routes) | 📋 [TOC](#table-of-contents) | [Next](#
 | Source | What it gives the idea | Confidence |
 |---|---|---|
 | `1-lora-correction/plans/09-designing-the-correction-loss/review/06-fitting-the-whole-path-and-handing-back-the-tail.md` | the seed sets engraving against photo on identical weights; haze is a 56% early contrast cut, roughly half objective and half unseen-pair generalisation | the project's own recorded read, four cells |
-| `1-lora-correction/plans/09-designing-the-correction-loss/review/04-freezing-the-empty-branch.md` | the freeze-the-empty-branch comparison is designed and has no verdict yet | the project's own file |
+| `1-lora-correction/artifacts/plans/parked/09-designing-the-correction-loss/review/04-freezing-the-empty-branch.md` | the freeze-the-empty-branch comparison is designed and has no verdict yet | the project's own file |
 | `/datasets/.../showcase/determinism_repeat_1` and `_2` on the cluster | the rank-8 adapter at 280k, rendered twice on cat×dog seed 9 (λ 0 and 1, early and full windows): all three tile pairs differ by 0 of 255 in every pixel | read 2026-09-25 by pixel diff |
 | `artifacts/notes/batch-shape-nondeterminism/` | a fixed batch shape renders bit-identically; a different batch shape changes the unconditional branch by 2e-3 per step and the final latent by up to 1.66 | the project's own measurement, one pair, one seed, one 3090 |
 

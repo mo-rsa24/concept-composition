@@ -1843,7 +1843,7 @@ floor and appears in F8a as a dotted line. The correction computed from the join
 ceiling and appears in F8b at lambda 0.75 and at lambda 1, the latter true by construction. The
 control that answers the real objection, that any pool of the same size would have worked, is the
 size-matched mixed pool in
-[baseline-01](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md).
+[baseline-01](../../1-lora-correction/artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md).
 **It is designed and has not run.** ¶5.5 may state it as the design's intended control and ¶5.6
 may not report a result for it. The reserved leave-one-pair-out sweep behind F8 has not run
 either.

@@ -20,7 +20,7 @@ Step 45 in the root running order; waits on nothing (runs beside 44); next is
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 44 (previous) | [basins by hand](../reading/01-basins-by-hand.md) | proves basins and a ridge exist |
+| 44 (previous) | [basins by hand](../../../../artifacts/plans/parked/05-when-does-the-outcome-lock-in/plans/reading/01-basins-by-hand.md) | proves basins and a ridge exist |
 | **45 (current)** | **The free test** | **posterior-mean drift per pair-and-seed run, the first speciation numbers, judged against the pre-registered ordering** |
 | 46 (next) | [wire the endpoint predictor](../tools/03-wire-the-endpoint-predictor.md) | the LCM-SDXL adapter and its one-state check |
 

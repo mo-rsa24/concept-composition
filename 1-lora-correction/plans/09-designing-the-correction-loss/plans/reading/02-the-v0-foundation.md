@@ -16,7 +16,7 @@
 
 | Step | Plan | What it does |
 |------|------|-------------|
-| 71 (previous) | [01: the three instrument fixes](../tools/01-the-three-instrument-fixes.md) | the number, the cadence and the config |
+| 71 (previous) | [01: the three instrument fixes](../../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md) | the number, the cadence and the config |
 | **72 (current)** | **02: the V0 foundation** | the page that says what today's objective produces |
 | 73 (next) | [03: the V0a read](../hypothesis/03-the-v0a-read.md) | four experiments already on disk, judged |
 

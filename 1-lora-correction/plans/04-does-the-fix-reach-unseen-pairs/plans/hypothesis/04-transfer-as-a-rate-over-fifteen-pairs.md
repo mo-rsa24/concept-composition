@@ -9,7 +9,7 @@ on the pair its own LoRA never saw.
 |------|------|-------------|
 | 10 | [03-does-one-pooled-fix-transfer-at-all](03-does-one-pooled-fix-transfer-at-all.md) | Tests pooled fix on one pair |
 | **11 (current)** | **this plan** | **Measures transfer rate across 15 held-out pairs** |
-| 12 | [05-the-size-matched-control-pool](../baselines/05-the-size-matched-control-pool.md) | Compares against control |
+| 12 | [05-the-size-matched-control-pool](../../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/plans/baselines/05-the-size-matched-control-pool.md) | Compares against control |
 
 The one order is in the `## Running order` table in [repo root MASTER_PLAN.md](../../../../../MASTER_PLAN.md). Verdicts live in [the review file for this plan](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md).
 
@@ -384,7 +384,7 @@ Run each `.prompt.md` file through Claude (or `/prompt-storyboard`) and save out
 
 ⬅️ [Previous](#code-references) | 📋 [TOC](#table-of-contents)
 
-Move to [baseline-01-the-size-matched-control-pool.md](../baselines/05-the-size-matched-control-pool.md): compares the LOPO transfer results against a size-matched control LoRA trained on random vector pairs instead of the learned correction.
+Move to [baseline-01-the-size-matched-control-pool.md](../../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/plans/baselines/05-the-size-matched-control-pool.md): compares the LOPO transfer results against a size-matched control LoRA trained on random vector pairs instead of the learned correction.
 
 ---
 

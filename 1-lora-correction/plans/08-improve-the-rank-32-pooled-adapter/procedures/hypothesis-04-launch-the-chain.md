@@ -1,6 +1,6 @@
 # 🧭 Claim a Blackwell, smoke the parent, and launch the chain of five runs
 
-[Plan 04's instruction 4.1](../plans/hypothesis/04-the-parent-and-the-four-children.md#4--claim-the-device-and-launch-the-chain) sends you here. When you are done, five trainings are running one after another on one device, the log header names the node, the device and the process id, and the review file's Runs table records all of it. Nothing else needs doing until the first checkpoint lands.
+[Plan 04's instruction 4.1](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#4--claim-the-device-and-launch-the-chain) sends you here. When you are done, five trainings are running one after another on one device, the log header names the node, the device and the process id, and the review file's Runs table records all of it. Nothing else needs doing until the first checkpoint lands.
 
 ## Recommended prompt (when you finish)
 
@@ -13,8 +13,8 @@
 
 | File | What it holds |
 |---|---|
-| [design](../plans/hypothesis/04-the-parent-and-the-four-children.md) | the five configurations and the verdict rule |
-| [review](../review/04-the-parent-and-the-four-children.md) | the Runs table this procedure fills, and the questions the runs answer |
+| [design](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md) | the five configurations and the verdict rule |
+| [review](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/04-the-parent-and-the-four-children.md) | the Runs table this procedure fills, and the questions the runs answer |
 | **this file** | **the steps, and the reason behind each one** |
 
 ## Table of contents
@@ -70,7 +70,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
   grep -n "exclude-cells\|train-step-range\|orth-weight" poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py
   ```
 
-  ✅ **All three appear in the argument parser.** [Plan 01](../plans/tools/01-the-three-switches-and-the-guidance-interval.md) is done.
+  ✅ **All three appear in the argument parser.** [Plan 01](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/tools/01-the-three-switches-and-the-guidance-interval.md) is done.
   ❌ **They do not**: stop. Nothing here can run and plan 01 is where to go.
 
 - [ ] 🖥️ **The five configurations differ from the parent by one line each.**
@@ -144,7 +144,7 @@ Navigation: ⬅️ [1. Find the free Blackwell](#1-find-out-which-blackwell-is-a
 
 So every node can read it, and so it sits beside the outputs it produces.
 
-The source is the file [task 2.2](../plans/hypothesis/04-the-parent-and-the-four-children.md#2--build-the-five-configurations-and-the-launcher) writes into the repository. If it is not there, that task is not done and this procedure cannot start.
+The source is the file [task 2.2](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#2--build-the-five-configurations-and-the-launcher) writes into the repository. If it is not there, that task is not done and this procedure cannot start.
 
 ```bash
 ls -l /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh
@@ -216,7 +216,7 @@ ssh <node> 'pgrep -af train_pooled; tail -20 /datasets/mmolefe/poe_repair_min/ou
 
 ❌ **`pgrep` shows nothing and the log holds a guard message**: read which guard fired. Disk over 90%, wrong python, or a busy device each have their own fix, and none of them is to run it again unchanged.
 
-- [ ] Record the node, the device, the process id and the launch time in [the review file's Runs table](../review/04-the-parent-and-the-four-children.md#runs), and add each W&B run id as it appears.
+- [ ] Record the node, the device, the process id and the launch time in [the review file's Runs table](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/04-the-parent-and-the-four-children.md#runs), and add each W&B run id as it appears.
 
 ## 5. Harvest, on the node
 
@@ -255,12 +255,12 @@ Navigation: ⬅️ [If it does not work](#if-it-does-not-work) | 📋 [TOC](#tab
 
 | What | Where it lands | What it answers |
 |---|---|---|
-| five checkpoints at 30,000 steps | `improve_r32/{P,C2,C1,C3,C4}/checkpoints/` | everything [plan 04](../plans/hypothesis/04-the-parent-and-the-four-children.md) goes on to judge |
+| five checkpoints at 30,000 steps | `improve_r32/{P,C2,C1,C3,C4}/checkpoints/` | everything [plan 04](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md) goes on to judge |
 | five W&B runs with curves and thumbnails | `prime_lab/poe-repair-animals-compose` | whether training behaved, before the renders are looked at |
-| the filled Runs table | [the review file](../review/04-the-parent-and-the-four-children.md#runs) | which run is which, on what hardware, and what it cost |
+| the filled Runs table | [the review file](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/review/04-the-parent-and-the-four-children.md#runs) | which run is which, on what hardware, and what it cost |
 
 ## Next step
 
 Navigation: ⬅️ [What you produce](#what-you-produce) | 📋 [TOC](#table-of-contents)
 
-Go back to [plan 04's task 3.1](../plans/hypothesis/04-the-parent-and-the-four-children.md#3--probe-every-checkpoint-once-the-chain-is-done) and run the probe pass over each checkpoint.
+Go back to [plan 04's task 3.1](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#3--probe-every-checkpoint-once-the-chain-is-done) and run the probe pass over each checkpoint.

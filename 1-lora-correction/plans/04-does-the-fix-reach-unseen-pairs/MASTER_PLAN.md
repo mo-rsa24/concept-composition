@@ -12,7 +12,7 @@ This scope owns **6 of the 22 steps**, 1 of them done. The steps interleave with
 | 9 | [the three live curves during training](plans/tools/02-three-live-curves-while-training.md) | the one-epoch first run | ⚠️ do this next |
 | 10 | [03-does-one-pooled-fix-transfer-at-all](plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md) | finish the pooled read | ◑ read incomplete |
 | 11 | [04-transfer-as-a-rate-over-fifteen-pairs](plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md) | fifteen adapters, one held out each | ⚠️ |
-| 12 | [05-the-size-matched-control-pool](plans/baselines/05-the-size-matched-control-pool.md) | the size-matched mixed pool | ⚠️ |
+| 12 | [05-the-size-matched-control-pool](../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/plans/baselines/05-the-size-matched-control-pool.md) | the size-matched mixed pool | ⚠️ |
 | 14 | [06-the-transfer-figures](plans/figures/06-the-transfer-figures.md) | the transfer figures | ◑ F8a and F8b built |
 
 ## Mission

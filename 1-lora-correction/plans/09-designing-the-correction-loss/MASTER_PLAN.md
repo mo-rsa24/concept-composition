@@ -166,7 +166,7 @@ One table, and it is the only place the set is listed. Equations, code changes a
 | 03 | adapting-only-the-empty-branch | bars on the concept branches | ran: rank 16 to 30,000 steps, W&B `qbvj0wsm`, unread. A rank-32 attempt died at 7,500 |
 | 04 | training-at-guidance-weight-one | `w = 1` on both sides, on top of `01`'s frozen null | runs beside `01` at step 74 as the check that the cancellation is exact. Needs the `--no-dial` fix first: the branch at `trainer.py:532` never reads `freeze_null` |
 | 05 | training-on-real-photographs | the target becomes real data | **dead**: the corpus is reachable and unusable |
-| 06 | training-on-the-renders-that-composed | the target becomes filtered renders | **adopted**, queued last as [plan 05](plans/hypothesis/05-training-on-the-renders-that-composed.md) |
+| 06 | training-on-the-renders-that-composed | the target becomes filtered renders | **adopted**, queued last as [plan 05](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md) |
 | 07 | keeping-single-concept-renders-unchanged | `+ ν` on the concept branches at single-prompt states | row only; the read it waits on is unblocked, scheduled once `01` returns |
 | 08 | fitting-the-whole-path-and-handing-back-the-tail | `01` plus every denoising step in training and the loss scored in x0 space; the tail handed to frozen SDXL at render | plan owed as [plan 06](plans/hypothesis/06-fitting-the-whole-path-and-handing-back-the-tail.md), step 76. Aimed at fidelity, not composition |
 
@@ -179,7 +179,7 @@ rather than two animals. It is the only pool this scope trains on. `00`'s five r
 over 11 look-alike [animal pairs](../../../context/world/animal-pair.md#what-an-animal-pair-is) and
 are read as history, never as a comparison.
 
-**Eight of its 43 cells need [task 1.5](plans/tools/01-the-three-instrument-fixes.md) first.**
+**Eight of its 43 cells need [task 1.5](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md) first.**
 `a_typewriter__x__a_cactus` seeds 1 to 8 sit in both the `train/` and `heldout/` cache
 directories, and the cell lookup takes the held-out copy when no split is named. The two copies
 are byte-identical so nothing is contaminated in substance, but until the trainer names its split
@@ -351,11 +351,11 @@ Six plans, in the order they get done. The step numbers are their places in the
 
 | Step | Plan | What it does | Status | Waits on |
 |---|---|---|---|---|
-| 71 | [01: the three instrument fixes](plans/tools/01-the-three-instrument-fixes.md) | the undialled error logged beside the loss, a checkpoint written at every render, every objective flag in the run's config; each proved to do something by a two-epoch smoke | ⚠️ | |
+| 71 | [01: the three instrument fixes](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/tools/01-the-three-instrument-fixes.md) | the undialled error logged beside the loss, a checkpoint written at every render, every objective flag in the run's config; each proved to do something by a two-epoch smoke | ⚠️ | |
 | 72 | [02: the V0 foundation](plans/reading/02-the-v0-foundation.md) | six pillar files, the scattered per-checkpoint numbers collected, a chart script that can redraw all eleven figures, the seed-noise band computed and the rank-ablation figure drawn, and `00`'s page: the shape every later variation copies | ⚠️ | 71 |
 | 73 | [03: the V0a read](plans/hypothesis/03-the-v0a-read.md) | the four rank-16 experiments from 2026-09-12 scored and read blind against both bars, `00b`'s page and the prompt-rewrite finding, then `00a` and `00b` launched at rank 32 on the scope pool | ⚠️ | 72 for the page shape |
-| 74 | [04: freezing the empty branch](plans/hypothesis/04-freezing-the-empty-branch.md) | the check that training and sampling agree, the `--no-dial` fix, then `00a` and `04` launched at rank 16 on `mscluster109` and read against the `01` that already ran (W&B `kdzx03ji`) | ⚠️ | 71 for the number, 73 for the approximate fix it is read against |
-| 75 | [05: training on the renders that composed](plans/hypothesis/05-training-on-the-renders-that-composed.md) | variation `06`: a second data path that encodes a render, noises it, and trains against the noise that was added; gated by a scaling curve over 10, 20, 30 and 43 cells | ⚠️ | 74, because it moves the target and the empty branch against `00` at once |
+| 74 | [04: freezing the empty branch](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md) | the check that training and sampling agree, the `--no-dial` fix, then `00a` and `04` launched at rank 16 on `mscluster109` and read against the `01` that already ran (W&B `kdzx03ji`) | ⚠️ | 71 for the number, 73 for the approximate fix it is read against |
+| 75 | [05: training on the renders that composed](../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/05-training-on-the-renders-that-composed.md) | variation `06`: a second data path that encodes a render, noises it, and trains against the noise that was added; gated by a scaling curve over 10, 20, 30 and 43 cells | ⚠️ | 74, because it moves the target and the empty branch against `00` at once |
 | 76 | [06: fitting the whole path and handing back the tail](plans/hypothesis/06-fitting-the-whole-path-and-handing-back-the-tail.md) | variation `08`, the only plan aimed at fidelity rather than composition: the shrinkage check, then the hand-off sweep on checkpoints that already exist, then one training run only if the sweep falls short | ⚠️ | nothing; its first two stages read existing checkpoints |
 
 Each plan is paired with a review file of the same number under `review/`. No procedure files yet:

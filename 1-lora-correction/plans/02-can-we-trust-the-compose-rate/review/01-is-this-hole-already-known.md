@@ -17,7 +17,7 @@ start until the questions below are answered. `instrument-01` runs regardless.
 |---|---|
 | [design](../plans/checks/01-is-this-hole-already-known.md) | the claim to write down first, and the benchmarks to search |
 | **this file** | **the verdict: already known, said informally, or not addressed** |
-| [what waits on it](03-what-the-current-benchmarks-score.md) | scoring the candidate metrics, which does not start until this returns |
+| [what waits on it](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md) | scoring the candidate metrics, which does not start until this returns |
 | [what reads it](02-promote-or-close.md) | the decision that writes the scope's ending |
 
 ## Table of contents
@@ -127,7 +127,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| everything in this file | the literature search | [the benchmark scoring](03-what-the-current-benchmarks-score.md) and [the promote-or-close decision](02-promote-or-close.md), both of which wait on this verdict. [the labelled set](04-the-three-state-labelled-set.md) runs regardless |
+| everything in this file | the literature search | [the benchmark scoring](../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md) and [the promote-or-close decision](02-promote-or-close.md), both of which wait on this verdict. [the labelled set](04-the-three-state-labelled-set.md) runs regardless |
 
 ## Next step
 

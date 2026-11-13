@@ -9,7 +9,7 @@ the scorer's error grows as λ grows.
 |---|---|---|
 | 1 of 4 | [the literature check](../checks/01-is-this-hole-already-known.md) | ⚠️ not started |
 | **2 of 4** | **this plan** | **⚠️ not started** |
-| 3 of 4 | [scoring the current benchmarks](../ideas/03-what-the-current-benchmarks-score.md) | ⚠️ blocked by the literature check |
+| 3 of 4 | [scoring the current benchmarks](../../../../artifacts/plans/parked/02-can-we-trust-the-compose-rate/plans/ideas/03-what-the-current-benchmarks-score.md) | ⚠️ blocked by the literature check |
 
 Design only. The verdict lives in [this plan's review file](../../review/04-the-three-state-labelled-set.md).
 

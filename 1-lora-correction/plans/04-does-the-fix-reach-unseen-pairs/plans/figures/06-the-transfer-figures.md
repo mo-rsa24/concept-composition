@@ -109,7 +109,7 @@ from step 11 and the mixed pool from step 12.
 
 - Figure register, which caps every caption: [paper/iclr/figures.md](../../../../../paper/iclr/figures.md), rows F8a, F8b, F8
 - The review file for the fifteen runs, which feeds A3 and A4: [transfer as a rate over fifteen pairs](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md)
-- The review file for the pool contrast, which feeds A5: [the size-matched control pool](../../review/05-the-size-matched-control-pool.md)
+- The review file for the pool contrast, which feeds A5: [the size-matched control pool](../../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md)
 - This plan's own record: [the review file for the transfer figures](../../review/06-the-transfer-figures.md)
 
 **For the full picture**

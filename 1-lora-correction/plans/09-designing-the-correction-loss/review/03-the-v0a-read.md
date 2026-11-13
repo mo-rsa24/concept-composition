@@ -131,4 +131,4 @@ Nothing open.
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-[04: freezing the empty branch](../plans/hypothesis/04-freezing-the-empty-branch.md).
+[04: freezing the empty branch](../../../artifacts/plans/parked/09-designing-the-correction-loss/plans/hypothesis/04-freezing-the-empty-branch.md).
