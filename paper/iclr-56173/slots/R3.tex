@@ -1,13 +1,13 @@
 \setbox0=\hbox{\setlength{\tabcolsep}{2.1pt}\sisetup{separate-uncertainty=true,detect-weight=true,mode=match}%
-\begin{tabular}{@{}lS[table-format=1.2(2)]S[table-format=1.2(2)]S[table-format=1.2(2)]@{}}
+\begin{tabular}{@{}lS[table-format=1.2(2)]@{}}
 \toprule
-Method & \multicolumn{1}{c}{Hard (3) $\uparrow$} & \multicolumn{1}{c}{Easy but unseen (29) $\uparrow$} & \multicolumn{1}{c}{Not competing (21) $\uparrow$} \\
+Method & \multicolumn{1}{c}{53 held-out pairs $\uparrow$} \\
 \midrule
-Joint prompt & 0.46(40) & 0.74(8) & {\boldmath$0.85\pm0.06$} \\
-CO3 & {\boldmath$0.59\pm0.27$} & {\boldmath$0.77\pm0.06$} & 0.81(8) \\
+Joint prompt & 0.77(6) \\
+CO3 & {\boldmath$0.78\pm0.05$} \\
 \midrule
-PoE & 0.33(39) & 0.38(9) & 0.74(10) \\
-Ours & 0.45(42) & 0.58(9) & 0.73(8) \\
+PoE & 0.52(8) \\
+Ours & 0.63(7) \\
 \bottomrule
 \end{tabular}}%
 \ifdim\wd0>\linewidth\reviewoverflow{R3}{\the\wd0}\fi

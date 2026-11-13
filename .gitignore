@@ -70,3 +70,8 @@ paper/iclr-56173/ablation/
 paper/iclr-56173/superdiff stuff/
 paper/iclr-56173/build/
 paper/iclr-56173/**/*.pdf
+
+# browser-tool screenshots, archived 2026-11-13
+.playwright-mcp/
+# the Overleaf project, its own git repo (remote: https://git.overleaf.com/6a86dc92ca15fe47d75b86f6)
+paper/overleaf-iclr/

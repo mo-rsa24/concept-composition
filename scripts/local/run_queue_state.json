@@ -1,0 +1,128 @@
+{
+ "runs": {
+  "refl-kl-K0": {
+   "state": "done",
+   "node": "mscluster112",
+   "gpu": 0,
+   "log": "/datasets/mmolefe/poe_repair_min/outputs/reward_finetune/logs/refl-kl-K0-112.log",
+   "launched": "by hand",
+   "launched_ts": 0,
+   "last_step": "2000/2000",
+   "ok": true
+  },
+  "refl-kl-K1": {
+   "state": "done",
+   "node": "mscluster112",
+   "gpu": 0,
+   "log": "/datasets/mmolefe/poe_repair_min/outputs/reward_finetune/logs/refl-kl-K1-112.log",
+   "launched": "by hand",
+   "launched_ts": 0,
+   "last_step": "2000/2000",
+   "ok": true
+  },
+  "refl-kl-K2": {
+   "state": "done",
+   "node": "mscluster112",
+   "gpu": 0,
+   "log": "/datasets/mmolefe/poe_repair_min/outputs/reward_finetune/logs/refl-kl-K2-mscluster112.log",
+   "pid": "1515344",
+   "launched_ts": 1790352523.1862607,
+   "launched": "2026-09-25 18:08",
+   "last_step": "2000/2000",
+   "ok": true
+  },
+  "refl-kl-K3": {
+   "state": "done",
+   "node": "mscluster106",
+   "gpu": 1,
+   "log": "/datasets/mmolefe/poe_repair_min/outputs/reward_finetune/logs/refl-kl-K3-mscluster106.log",
+   "pid": "2650943",
+   "launched_ts": 1790403997.8825705,
+   "launched": "2026-09-26 08:26",
+   "last_step": "2000/2000",
+   "ok": true
+  },
+  "refl-kl-K4": {
+   "state": "starting",
+   "node": "mscluster110",
+   "gpu": 0,
+   "log": "/datasets/mmolefe/poe_repair_min/outputs/reward_finetune/logs/refl-kl-K4-mscluster110.log",
+   "launched": "by hand",
+   "launched_ts": 0
+  }
+ },
+ "util": {
+  "mscluster112:0": [
+   0,
+   95,
+   94
+  ],
+  "mscluster109:0": [
+   100,
+   98,
+   100
+  ],
+  "mscluster109:1": [
+   0,
+   0,
+   0
+  ],
+  "mscluster106:0": [
+   100,
+   100,
+   98
+  ],
+  "mscluster106:1": [
+   0,
+   0,
+   0
+  ],
+  "mscluster107:0": [
+   0,
+   0,
+   0
+  ],
+  "mscluster107:1": [
+   0,
+   0,
+   0
+  ]
+ },
+ "foreign": {
+  "mscluster112:0": [
+   false,
+   true,
+   true
+  ],
+  "mscluster109:0": [
+   true,
+   true,
+   true
+  ],
+  "mscluster109:1": [
+   false,
+   false,
+   false
+  ],
+  "mscluster106:0": [
+   true,
+   true,
+   true
+  ],
+  "mscluster106:1": [
+   false,
+   false,
+   false
+  ],
+  "mscluster107:0": [
+   false,
+   false,
+   false
+  ],
+  "mscluster107:1": [
+   false,
+   false,
+   false
+  ]
+ }
+}

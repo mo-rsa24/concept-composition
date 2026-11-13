@@ -517,12 +517,53 @@ def _train_one_step(
             ),
         }
 
+    # Attention separation (idea 3): which samples in this batch fall inside the charged steps.
+    sep_w = float(getattr(cfg, "attn_sep_weight", 0.0))
+    sep_lo, sep_hi = tuple(getattr(cfg, "attn_sep_steps", (0, 20)))
+    sep_rows = ([k for k, e in enumerate(step_entries) if sep_lo <= int(e.step_index) < sep_hi]
+                if sep_w > 0.0 else [])
+    _attn_rec = None
+    if sep_rows:
+        from poe_repair.methods._sampling import _CrossAttnRecorder
+        _attn_rec = _CrossAttnRecorder(unet, keep_grad=True)
+        _attn_rec.__enter__()
+
     # LoRA-enabled 3K-wide forward. Cast UNet output to fp32 immediately —
     # fp16 cancellation otherwise crushes gradients.
-    noise = unet(
-        latent_input_3K, timestep_b, encoder_hidden_states=encoder_3K,
-        added_cond_kwargs=cond_3K, timestep_cond=None,
-    ).sample.float()                                          # (n_branches*K, 4, H, W)
+    try:
+        noise = unet(
+            latent_input_3K, timestep_b, encoder_hidden_states=encoder_3K,
+            added_cond_kwargs=cond_3K, timestep_cond=None,
+        ).sample.float()                                      # (n_branches*K, 4, H, W)
+    finally:
+        if _attn_rec is not None:
+            _attn_rec.__exit__(None, None, None)
+
+    # The two branches' noun maps, each normalised to a distribution over places. Overlap is the
+    # mass the two put on the same places (0 apart, 1 identical); presence is how far each map's
+    # peak is from full attention, so the term cannot be met by erasing one animal.
+    loss_sep = torch.zeros((), device=device)
+    sep_overlap = float("nan")
+    if _attn_rec is not None:
+        ovs, prs = [], []
+        for k in sep_rows:
+            ia, ib = cfg.attn_noun_index[step_entries[k].source_pair]
+            maps = []
+            for br, ti in ((0, ia), (1, ib)):
+                m = _attn_rec.aggregate_token_map(
+                    int(ti), target_hw=(16, 16), branch_index=k * n_branches + br,
+                    agg_resolution=16, text_token_count=int(ti) + 1, drop_bos=True, keep_grad=True)
+                if m is None:
+                    raise RuntimeError(f"no attention map for token {ti} branch {br}")
+                maps.append(m.float().reshape(-1))
+            ma, mb = maps
+            pa, pb = ma / ma.sum().clamp_min(1e-8), mb / mb.sum().clamp_min(1e-8)
+            ovs.append(torch.minimum(pa, pb).sum())
+            prs.append((1.0 - ma.max()) + (1.0 - mb.max()))
+        overlap = torch.stack(ovs).mean()
+        loss_sep = overlap + 0.5 * torch.stack(prs).mean()
+        sep_overlap = float(overlap.detach().item())
+        _attn_rec.attn_maps = []
 
     # Reshape into (K, n_branches, 4, H, W) → split A / B / ∅ along the branch axis.
     noise = noise.view(K, n_branches, *noise.shape[1:])
@@ -731,6 +772,8 @@ def _train_one_step(
         loss = loss + energy_beta * loss_energy
     if null_anchor_mu > 0.0:
         loss = loss + null_anchor_mu * loss_null_anchor
+    if sep_w > 0.0 and sep_rows:
+        loss = loss + sep_w * loss_sep
 
     info = {
         "loss_fit": float(loss_fit.detach().item()),
@@ -763,6 +806,9 @@ def _train_one_step(
         "orth_frac": orth_frac,
         "in_place_weight": in_place_w,
         "in_place_frac": in_place_frac,
+        "attn_sep_weight": sep_w,
+        "loss_attn_sep": float(loss_sep.detach().item()),
+        "attn_sep_overlap": sep_overlap,
         "delta_target_norm": float(sum(delta_target_norms) / K),
         "delta_hat_norm": float(
             (eps_poe_lora - eps_poe_frozen.float()).norm().item() / K

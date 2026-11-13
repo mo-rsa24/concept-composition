@@ -1,0 +1,3 @@
+2026-09-26 08:31 ADOPT refl-kl-K4: tracking the run already on mscluster110 GPU 0
+2026-09-26 08:36 HEALTHY refl-kl-K3: reached 'step 20/2000' on mscluster106 GPU 1
+2026-09-26 20:11 DONE refl-kl-K3: finished on mscluster106 GPU 1; bar: cat-and-dog seed 9 at step 2000 shows two animals where K2 shows three, and no tracking cell loses one of its two animals

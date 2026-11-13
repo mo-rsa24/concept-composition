@@ -1,14 +1,14 @@
 # Captions for the appendix render grids
 
-Draft captions and the sentences that point to them, for route step 13 to place in the paper. Every grid starts each row from the same noise for all methods except where marked, and each caption says how its rows were chosen (protocol rule 5). The figures live in `artifacts/results/`; the BLIP-VQA values behind the choices are in `scores/scores_long.csv` and stay out of the figures.
+Draft captions and the sentences that point to them, for [route step 13](../../plans/route-answer-the-iclr-reviews.md#13--revise-the-paper) to place in the paper. Every grid starts each row from the same noise for all methods except where marked, and each caption says how its rows were chosen ([protocol rule 5](protocol.md#what-each-rule-means-in-practice)). The figures live in `artifacts/results/`; the BLIP-VQA values behind the choices are in `scores/scores_long.csv` and stay out of the figures.
 
 ## Where our method does best (two figures)
 
 Files: `how-the-adapter-scores-against-other-methods/best-cases-held-out.pdf` and `best-cases-benchmark.pdf`.
 
-> **Figure A.** Where our method does best. Rows are the two pairs in each held-out group (left: hard, easy but unseen, not competing) and each benchmark set (right: animals, animals with objects, objects) on which our method scored highest under an automatic two-object check, each at its best seed. None of these pairs was trained on. Columns start from the same noise.
+> **Figure A.** Where our method does best. Rows are the two pairs in each [held-out group](held-out-set.md#the-held-out-groups) (left: hard, easy but unseen, not competing) and each benchmark set (right: animals, animals with objects, objects) on which our method scored highest under an automatic two-object check, each at its best seed. None of these pairs was trained on. Columns start from the same noise.
 
-Pointing sentence for the main text: *Appendix Figure A shows the held-out and benchmark pairs on which the adapter does best; on these it draws both named things where the plain product drops or fuses one.*
+Pointing sentence for the main text: *Appendix Figure A shows the held-out and benchmark pairs on which the adapter does best; on these it draws both named things where the [plain product](../../context/world/poe-composition.md#what-poe-composition-is) drops or fuses one.*
 
 ## Where our method fails (two figures)
 

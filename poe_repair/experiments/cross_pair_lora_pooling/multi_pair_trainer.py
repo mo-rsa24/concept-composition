@@ -161,6 +161,8 @@ def train_epoch_multi_pair(
                 "train/orth_frac": info.get("orth_frac", float("nan")),
                 "train/in_place_weight": info.get("in_place_weight", 1.0),
                 "train/in_place_frac": info.get("in_place_frac", float("nan")),
+                "train/loss_attn_sep": info.get("loss_attn_sep", 0.0),
+                "train/attn_sep_overlap": info.get("attn_sep_overlap", float("nan")),
                 # The null branch's drift from its frozen counterpart, and the anchor that
                 # penalises it. Logged at mu = 0 too, because the drift is what the sampler
                 # amplifies by (w - 1): an unanchored run still needs to show it.

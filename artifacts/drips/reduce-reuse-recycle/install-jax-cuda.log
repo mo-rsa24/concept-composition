@@ -1,0 +1,21 @@
+Using Python 3.12.3 environment at: .venv-2d
+Resolved 23 packages in 6.51s
+Downloading nvidia-cuda-runtime (2.4MiB)
+Downloading jax-cuda13-plugin (7.6MiB)
+Downloading nvidia-cuda-cccl (3.7MiB)
+Downloading nvidia-cuda-nvrtc (50.8MiB)
+Downloading nvidia-nvvm (69.2MiB)
+Downloading nvidia-nvshmem-cu13 (173.7MiB)
+Downloading nvidia-cudnn-cu13 (511.9MiB)
+Downloading nvidia-cuda-cupti (12.5MiB)
+Downloading nvidia-cuda-nvcc (45.5MiB)
+Downloading nvidia-cublas (419.0MiB)
+Downloading nvidia-cusolver (235.0MiB)
+Downloading nvidia-cufft (154.3MiB)
+Downloading nvidia-nccl-cu13 (291.0MiB)
+Downloading jax-cuda13-pjrt (127.9MiB)
+Downloading nvidia-cusparse (162.6MiB)
+ Downloading nvidia-cuda-runtime
+ Downloading nvidia-cuda-cccl
+ Downloading jax-cuda13-plugin
+ Downloading nvidia-cuda-cupti

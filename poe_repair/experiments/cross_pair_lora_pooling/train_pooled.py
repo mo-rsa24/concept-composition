@@ -245,6 +245,12 @@ def build_argparser() -> argparse.ArgumentParser:
                     help="Huber on the fit term with this elbow, in units of the noise-prediction "
                          "error; quadratic below it, linear above. 0 keeps the squared error, which "
                          "is every run before 2026-09-24.")
+    ap.add_argument("--attn-sep-weight", type=float, default=0.0,
+                    help="weight on keeping the two branches' noun attention maps apart (overlap of "
+                         "the two normalised maps) while each keeps a strong peak. 0 is off and every "
+                         "run before 2026-11-11.")
+    ap.add_argument("--attn-sep-steps", type=int, nargs=2, default=(0, 20), metavar=("LO", "HI"),
+                    help="denoising step indices [LO, HI) where the separation term is charged")
     ap.add_argument("--in-place-weight", type=float, default=1.0,
                     help="multiplier on the part of the error that a per-place (4x4 latent block) "
                          "re-weighting of the two experts could supply. 1.0 is the plain loss and "
@@ -365,6 +371,9 @@ def main(argv: list[str] | None = None) -> int:
     cfg.huber_delta = float(args.huber_delta)
     cfg.out_of_span_only = float(args.out_of_span_only)
     cfg.in_place_weight = float(args.in_place_weight)
+    cfg.attn_sep_weight = float(args.attn_sep_weight)
+    cfg.attn_sep_steps = tuple(int(x) for x in args.attn_sep_steps)
+    cfg.attn_noun_index = {}
     cfg.schedule.total_epochs = int(args.total_epochs)
     cfg.schedule.epoch_size = int(args.epoch_size)
     cfg.orth_weight = float(args.orth_weight)
@@ -459,6 +468,8 @@ def main(argv: list[str] | None = None) -> int:
                              if args.train_step_range is not None else None),
         "orth_weight": float(getattr(cfg, "orth_weight", 1.0)),
         "in_place_weight": float(getattr(cfg, "in_place_weight", 1.0)),
+        "attn_sep_weight": float(getattr(cfg, "attn_sep_weight", 0.0)),
+        "attn_sep_steps": list(getattr(cfg, "attn_sep_steps", (0, 20))),
         # There is no --exclude-cells flag: exclusion is expressed by which cells the
         # --cells file names, so the file itself is what identifies the training set.
         "cells_file": args.cells,
@@ -590,6 +601,14 @@ def main(argv: list[str] | None = None) -> int:
         cfg.cell.joint_prompt = pp.joint_prompt
         embeddings_by_pair[pair] = encode_all_prompts(
             cfg, models, device, dtype, null_prompt=null_prompt)
+        if float(getattr(cfg, "attn_sep_weight", 0.0)) > 0.0:
+            # Where each branch's noun sits in its own prompt: the last word, at position
+            # len(word ids) because position 0 is the start token.
+            _tok = models["tokenizer"]
+            cfg.attn_noun_index[pair] = (
+                len(_tok(pa, add_special_tokens=False)["input_ids"]),
+                len(_tok(pb, add_special_tokens=False)["input_ids"]),
+            )
         log.info("encoded prompts for %s: a=%r b=%r null=%r", pair, pa, pb, null_prompt)
     cfg.cell.pair_slug = "all_groups"
 

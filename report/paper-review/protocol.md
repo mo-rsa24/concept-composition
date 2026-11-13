@@ -131,3 +131,7 @@ The submitted Figure 5 row against the same row under this protocol.
 | numbers beside it | none | the winner's calls on all 16 showcase renders, in the appendix | 8 |
 
 Under this protocol the tile changes in four places: the adapter, the seed, the noise CO3 draws, and the caption, which now says how the adapter and seed were picked. The tile record behind the submitted image is `/datasets/mmolefe/poe_repair_min/outputs/ablation_grid/an_elephant__x__a_penguin/seed10/ours_v58-05-self-contrast_s015000_rawA_w50.json`.
+
+## Cross-references
+
+- The mention of **protocol rule 5** in [the captions for the appendix render grids](captions-showcase-grids.md).

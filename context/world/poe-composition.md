@@ -121,3 +121,4 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 - The mention of **denoising step**, the unit every dependent variable is recorded per, in [the whole corrector design](../../plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#the-claim).
 - The mention of **product-of-experts composition** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../../plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md).
 - The mention of **PoE** in [the route "did SDXL see a wet camel, and does PoE only draw what it saw"](../../plans/route-camel-in-the-rain.md).
+- The mention of **plain product**, as the column the adapter is compared against, in [the draft captions for the appendix render grids, Figure A's pointing sentence](../../report/paper-review/captions-showcase-grids.md#where-our-method-does-best-two-figures).

@@ -1543,3 +1543,7 @@ Step 15 is the quiz: `/drip-retro` with a prediction before each chunk, then `/q
 Navigation: ⬅️ [Previous](#quizzes-and-feedback) | 📋 [TOC](#table-of-contents)
 
 **Start with:** step 1, check the ground, tonight. Say `re-route <what changed>` for a different chain, `calendar` to put the schedule on Google Calendar, or `todoist` to file the runbook as ordered subtasks. The background is in [the references file](route-answer-the-iclr-reviews-references.md).
+
+## Cross-references
+
+- The mention of **route step 13** in [the captions for the appendix render grids](../report/paper-review/captions-showcase-grids.md).
