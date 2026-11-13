@@ -130,8 +130,8 @@ correction to the move.
 
 - [x] **5.1 Move `/home/molef/PhD/poe-classifier-guidance` in as `2-classifier-guidance/`**, with
       its commit noted in `RENAMES.md`.
-- [ ] **5.2 Move the 15 medical items** into `/home/molef/PhD/medical-imaging/compositional_diffusion`.
-- [ ] **5.3 Update `/home/molef/PhD/ORGANOGRAM.md`** and the memory entry that points at it.
+- [x] **5.2 Move the 15 medical items** into `/home/molef/PhD/medical-imaging/compositional_diffusion`.
+- [x] **5.3 Update `/home/molef/PhD/ORGANOGRAM.md`** and the memory entry that points at it.
 
 ### 6. 🖥️ Rebuild the cluster checkout
 
