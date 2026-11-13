@@ -343,7 +343,7 @@ For you to follow manually.
 ◀ **Needs: [task 4.3](#4--read-it-against-00)** done, so the strips exist and are shuffled.
 
 - [ ] 6.1 **Label the eight strips without opening the shuffle key**
-  - Path: `artifacts/results/designing-the-correction-loss/01-freezing-the-empty-branch/blind/`
+  - Path: `1-lora-correction/artifacts/results/designing-the-correction-loss/01-freezing-the-empty-branch/blind/`
   - Three labels per panel: clean, unclear, not two
   - ✅ All eight labelled before unblinding: the read is valid
   - ❌ Key opened first: void, reshuffle and repeat on another day
@@ -397,7 +397,7 @@ The review questions are in [the review file](../../review/04-freezing-the-empty
 | `compose-rate-01-vs-00-matched-steps.png` | subject | compose rate against training step, both objectives, `00`'s band drawn | task 4.2 | ⏳ |
 | `blind/seed-NN.png` (8) | subject | one strip per seed, ids instead of names, order shuffled | task 4.3 | ⏳ |
 
-**Organization workflow.** Filed under `artifacts/results/designing-the-correction-loss/01-freezing-the-empty-branch/` with its card entry.
+**Organization workflow.** Filed under `1-lora-correction/artifacts/results/designing-the-correction-loss/01-freezing-the-empty-branch/` with its card entry.
 
 ---
 

@@ -46,7 +46,7 @@ import correct_early_then_clean_up as ce  # noqa: E402  the SDXL context, prompt
 
 # ----------------------------------------------------------------------------- constants
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/stochastic_sampler_sweep")
-RESULTS_DIR = REPO_ROOT / "artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render"
+RESULTS_DIR = REPO_ROOT / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-a-stochastic-sampler-sharpen-the-corrected-render"
 TRAINING_CACHE = ce.TRAINING_CACHE
 CLOUD_FEATS = ce.CLOUD_FEATS
 CHECKPOINT = ce.CHECKPOINT

@@ -57,7 +57,7 @@ SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 GUIDANCE = 7.5
 HEIGHT = WIDTH = 1024
 
-OUT_DIR = REPO / "artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp"
+OUT_DIR = REPO / "1-lora-correction/artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp"
 MERGED_JSON = OUT_DIR / "shrinkage-per-step.json"
 PLOT_PNG = OUT_DIR / "shrinkage-per-step.png"
 

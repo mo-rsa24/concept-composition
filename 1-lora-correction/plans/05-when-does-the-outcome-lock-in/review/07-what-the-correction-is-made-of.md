@@ -74,7 +74,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| rung 2, in-span share of r_t, seeds 9 to 16, 50 steps | CPU, session node mscluster85 | 2026-09-05 16:30 | 9 seconds | `artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.{png,json}` | done, 400 rows |
+| rung 2, in-span share of r_t, seeds 9 to 16, 50 steps | CPU, session node mscluster85 | 2026-09-05 16:30 | 9 seconds | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/orthogonal-share-over-steps.{png,json}` | done, 400 rows |
 | rung 4, track energy and which-animal | CPU, mscluster85 | 2026-09-05 16:35 | seconds | `.../track-kinetic-energy.png`, `.../which-animal-over-steps.png`, `.../track-energy-and-which-animal.json` | done, 48 rows |
 | rungs 1 and 3 chained, first launch | `nohup`, mscluster85 | 2026-09-05 16:45 | nothing | none | never started: the launching shell stalled on a foreground CUDA check and died before writing the chain script |
 | rung 1, seed 15 decoded estimates and the same-place share | GPU, mscluster85 device 0 (RTX 3090, shared with another session's process holding 7.5 GB), PID 257033, `nohup` | 2026-09-05 16:50 | 51 seconds, 35 decodes | `/datasets/mmolefe/poe_repair_min/outputs/showcase/what_the_correction_is_made_of/tweedie/seed_15/`, `.../seed-15-experts-tweedie-strip.png`, `.../same-place-share.json` | done |

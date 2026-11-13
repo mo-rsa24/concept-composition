@@ -30,7 +30,7 @@ CKPT = ("/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/"
         "pool43-all50/checkpoints/lora_step_040000.pt")
 RANK = 32
 WORK = Path("/datasets/mmolefe/poe_repair_min/outputs/composing_unseen_pairs")
-FILED = REPO / "artifacts/results/composing-unseen-pairs"
+FILED = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs"
 
 # (pair, seeds). Object pairs have twelve cached seeds; the look-alikes have eight, and
 # wolf x husky only four, so its row is shorter rather than padded with seeds that do not exist.

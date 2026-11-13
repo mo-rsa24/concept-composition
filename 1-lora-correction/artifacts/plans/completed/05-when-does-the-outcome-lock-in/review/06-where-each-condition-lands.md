@@ -63,11 +63,11 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | reference renders, cat×dog seeds 9 to 16 | shared-device, mscluster110 device 0, PID 397295 | 2026-09-05 06:44 | 24 renders, about six seconds each | `outputs/showcase/where_each_condition_lands/{solo_a,solo_b,joint}/` | done, 24 PNGs and the manifest counted on the launch node |
-| endpoint plot, cat×dog | CPU, mscluster110 | 2026-09-05 07:24 | under a minute | `artifacts/results/where-does-each-condition-land/` (two planes, contact sheet, sidecar, features) | done |
+| endpoint plot, cat×dog | CPU, mscluster110 | 2026-09-05 07:24 | under a minute | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/` (two planes, contact sheet, sidecar, features) | done |
 | first attempt, same node | shared-device, `co3` python | 2026-09-05 06:37 | nothing | empty `solo_a/` | died without output: wrong python build for the Blackwell card |
 | held-out pairs, first launch, mscluster111 device 0 | shared-device, `co3_bw` | 2026-09-05 14:31 | ten minutes of CPU | one reference cell, discarded | the card reads "GPU requires reset" and torch saw no device, so the sampler ran on the CPU; killed, launcher now asserts CUDA |
 | held-out pairs, mscluster106 device 1, PID 2437144 | shared-device, `co3`, RTX 8000 | 2026-09-05 15:54 to about 20:30 | 320 runs, 30 s per reference run and 64 s per adapter run | `outputs/showcase/where_each_condition_lands/pairs/`, 320 images, 320 trajectories, 13 frames each | done, counted on the launch node; one cell re-rendered after the CPU copy was removed |
-| per-pair analysis and scorer, mscluster108 device 1 | CPU embedder on GPU, GroundingDINO | 2026-09-06 | about 20 minutes | `artifacts/results/where-does-each-condition-land/pairs/` | done |
+| per-pair analysis and scorer, mscluster108 device 1 | CPU embedder on GPU, GroundingDINO | 2026-09-06 | about 20 minutes | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/` | done |
 
 ## The question written before the run
 
@@ -102,7 +102,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       excluded for a solo-centroid gap under 0.05 (the smallest is leopard × jaguar at 0.08).
       The pre-named surprise happened on the exception pair: elephant × penguin's corrected
       both-ness mean (0.15) sits below its PoE mean (0.16). From
-      `artifacts/results/where-does-each-condition-land/pairs/verdict.json`, read 2026-09-06.
+      `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/verdict.json`, read 2026-09-06.
 
 ## Written before the run, answered after
 

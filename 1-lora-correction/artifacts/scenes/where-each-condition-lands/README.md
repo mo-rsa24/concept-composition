@@ -52,7 +52,7 @@ the windowed sampler leaves the adapter enabled when it returns. Frames live at
 
 `1-lora-correction/scripts/showcase/where_each_condition_lands_frames_embed.py` embeds all 672 frames on CPU
 (`XFORMERS_DISABLED=1`), fits the axes on this run's step-50 reference frames, and writes
-`public/data.json`, the thumbnails, and `artifacts/results/where-does-each-condition-land/frames-dino-feats.npz`.
+`public/data.json`, the thumbnails, and `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz`.
 
 ## What it cannot say
 

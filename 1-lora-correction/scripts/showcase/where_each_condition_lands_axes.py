@@ -25,7 +25,7 @@ with a non-affine layer norm, which is what RAE's Dinov2withNorm(normalize=True)
 Decoder: RAE ViT-XL decoder for dinov2/wReg_base (nyu-visionx/RAE-collections,
 decoders/dinov2/wReg_base/ViTXL_n08/model.pt) with its ImageNet normalization stats.
 
-Writes to artifacts/results/where-does-each-condition-land/axes/:
+Writes to 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/axes/:
     reconstruction_check.png, axis-x-which-animal.png, axis-y-both-ness.png,
     cat-x-dog-in-dino-space-cloud-axes-with-axis-pictures.png, axes.json
 """
@@ -45,7 +45,7 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 from rae_vendor import GeneralDecoder, ViTMAEConfig  # noqa: E402
 
-RESULTS = REPO_ROOT / "artifacts/results/where-does-each-condition-land"
+RESULTS = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land"
 OUT = RESULTS / "axes"
 SIDECAR = RESULTS / "cat-x-dog-in-dino-space.json"
 RAE_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/rae")

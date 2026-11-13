@@ -49,7 +49,7 @@ import correct_early_then_clean_up as ce  # noqa: E402  plan 14's sampler, score
 
 # ----------------------------------------------------------------------------- constants
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/crisp_fix_strip")
-RESULTS_DIR = REPO_ROOT / "artifacts/results/does-an-inference-time-fix-make-the-corrected-render-crisp"
+RESULTS_DIR = REPO_ROOT / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-an-inference-time-fix-make-the-corrected-render-crisp"
 PLAN14_ROOT = ce.OUT_ROOT                    # where the reference renders come from
 CHECKPOINT = ce.CHECKPOINT                   # rank 32, step 30050
 LORA_RANK = ce.LORA_RANK

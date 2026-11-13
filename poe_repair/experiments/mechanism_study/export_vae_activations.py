@@ -12,7 +12,7 @@ the usual preflight, not on a login node.
 Usage::
 
     python -m poe_repair.experiments.mechanism_study.export_vae_activations \
-        --image artifacts/results/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/... .png \
+        --image 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/... .png \
         --out scratchpad/vae_act.json
 """
 

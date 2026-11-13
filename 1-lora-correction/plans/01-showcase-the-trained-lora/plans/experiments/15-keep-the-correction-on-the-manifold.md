@@ -183,7 +183,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 1. `cache_read.json` with the question-1 branch and the linearity check passing.
 2. Every render on disk, the identity check passing, `results.json` with the question-2 branch.
-3. The six figures filed under `artifacts/results/does-keeping-the-correction-on-the-manifold-restore-fidelity/` with their card.
+3. The six figures filed under `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-keeping-the-correction-on-the-manifold-restore-fidelity/` with their card.
 4. The review file's two questions answered support, null or inconclusive, by the constants in source, with the W&B run id.
 
 ---
@@ -232,7 +232,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ◀ **Needs: [task 2.2](#2--run-the-cache-read-and-the-renders)** done.
 
-3.1 **Open the two sheets** under `artifacts/results/does-keeping-the-correction-on-the-manifold-restore-fidelity/` (or the W&B run's Media tab). Rows are seeds 9 to 16; columns Mono, plain PoE, adapter alone, projected every step, projected from step 10. ✅ a projected column shows two animals on the same rows the adapter column does and looks nearer the Mono column in texture and colour; ❌ animals vanish, or the column looks like the adapter column.
+3.1 **Open the two sheets** under `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-keeping-the-correction-on-the-manifold-restore-fidelity/` (or the W&B run's Media tab). Rows are seeds 9 to 16; columns Mono, plain PoE, adapter alone, projected every step, projected from step 10. ✅ a projected column shows two animals on the same rows the adapter column does and looks nearer the Mono column in texture and colour; ❌ animals vanish, or the column looks like the adapter column.
 
 3.2 **Check the numbers agree with the eye**: `results.json` → `summary.a_cat__x__a_dog.<condition>` has `composed_of_8`, `mean_dino_dist_to_mono`, `mono_gain_vs_adapter_alone`; `branch` and `reasons` at the top. Then write both verdicts into the [review file](../../review/15-keep-the-correction-on-the-manifold.md).
 
@@ -262,7 +262,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-keeping-the-correction-on-the-manifold-restore-fidelity/`, with its card entry in that folder's `README.md`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-keeping-the-correction-on-the-manifold-restore-fidelity/`, with its card entry in that folder's `README.md`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|

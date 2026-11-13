@@ -91,7 +91,7 @@ could pick a composing one.
 **The number.** Compose rate over seeds 9 to 16: plain PoE 0.0, PoE plus the λ 1.2 correction
 0.875. From `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/results.json`,
 fields `summary.full.0.0.compose_rate` and `summary.full.1.2.compose_rate`; both-ness from
-`artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, field
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, field
 `cloud_axes.both_ness_by_condition`.
 
 ## 2. Zero-order search: one counted success in 128, and it has two heads

@@ -22,7 +22,7 @@ Inputs
 ------
 Expects pooled-LoRA samples with ``--record-eps`` already produced; the
 default discovers the largest-k run under
-``artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_b_learning_curve``.
+``1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_b_learning_curve``.
 
 Usage::
 
@@ -348,7 +348,7 @@ def main(argv: list[str] | None = None) -> int:
                     help="path to a task_b_learning_curve/kNN__epEE run dir; "
                          "auto-discovers the largest-k run if omitted")
     ap.add_argument("--out-dir", default=None,
-                    help="default: artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_d_bridge")
+                    help="default: 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_d_bridge")
     ap.add_argument("--spatial-seed", type=int, default=None,
                     help="held-out seed to use for the residual-of-residual "
                          "heatmap (default: first held-out)")

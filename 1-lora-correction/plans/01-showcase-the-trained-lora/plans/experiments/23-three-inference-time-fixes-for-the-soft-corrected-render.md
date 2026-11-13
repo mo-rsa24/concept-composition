@@ -245,7 +245,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-an-inference-time-fix-make-the-corrected-render-crisp/`, with its card entry in that folder's `README.md`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-an-inference-time-fix-make-the-corrected-render-crisp/`, with its card entry in that folder's `README.md`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|

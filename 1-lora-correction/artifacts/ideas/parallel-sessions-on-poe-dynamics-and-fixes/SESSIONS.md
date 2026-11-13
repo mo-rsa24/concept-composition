@@ -130,7 +130,7 @@ correction PoE could ever have expressed, and what the adapter actually adds, pe
 sampling.
 
 **Produces.** Four figures with sidecars under
-`artifacts/results/what-the-correction-is-made-of/`, a finding in `1-lora-correction/report/when-does-the-outcome-lock-in/`,
+`1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/`, a finding in `1-lora-correction/report/when-does-the-outcome-lock-in/`,
 a plan and review file in scope 05.
 
 **Prompt.**
@@ -310,7 +310,7 @@ The block under "What every session shares" applies in full.
 Scope: 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/. Read arXiv 2501.09732 with /unpack-paper.
 
 Task 1, no GPU: random search at N 8 is already on disk. From the contact sheet's sidecar
-artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json and
+1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json and
 /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/results.json, write the
 best-of-8 compose verdict for plain PoE on cat x dog (expected 0 of 8) and for the corrected run,
 as a baseline row with its source named.

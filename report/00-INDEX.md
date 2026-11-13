@@ -34,7 +34,7 @@ This is the failure the whole project is about, and it is not a one-off. It recu
 pairs at 8 seeds each.
 
 ⬜ No finding file. The gallery of 136 uncorrected renders, one per pair per seed with its sampler
-settings beside it, is [the blend gallery](../artifacts/results/poe-blends-instead-of-composing/README.md).
+settings beside it, is [the blend gallery](../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/poe-blends-instead-of-composing/README.md).
 The instrument that decides a render failed, a GroundingDINO instance count validated against
 labelled images, is [the compose-score validation set](../artifacts/results/can-we-trust-the-compose-score/README.md),
 with its verdict in [what the current benchmarks score](../1-lora-correction/artifacts/plans/parked/02-can-we-trust-the-compose-rate/review/03-what-the-current-benchmarks-score.md).
@@ -131,7 +131,7 @@ The one result with a verdict, figures and a W&B run and no home in the arc yet 
 penalty: charging the adapter for the size of its correction cut its on-policy energy 27% and moved
 the held-out renders back toward plain product-of-experts. Its verdict is in the scope 01 review
 file, its figures under
-[does charging the adapter for its energy sharpen the fix](../artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix),
+[does charging the adapter for its energy sharpen the fix](../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-charging-the-adapter-for-its-energy-sharpen-the-fix),
 and the run is `2cfdtdnl`. The rest of the holes are in [Still open](#still-open) at the foot of
 this file.
 
@@ -181,9 +181,9 @@ The evidence pairs waiting on a render, so they are visible rather than quietly 
 ## Reading the pictures
 
 Each finding's figures are read one at a time, in plain words, in a figure explainer beside the
-images: [where each condition lands, what these pictures mean](../artifacts/results/where-does-each-condition-land/figure-explainer.md)
+images: [where each condition lands, what these pictures mean](../1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md)
 [is the gap the sampler's or the model's, what these pictures mean](../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md)
-[what the correction is made of, what these pictures mean](../artifacts/results/what-the-correction-is-made-of/figure-explainer.md)
+[what the correction is made of, what these pictures mean](../1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md)
 [the corrector figures, what these pictures mean](../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md)
 and [which fidelity fix wins, what these pictures mean](../1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md).
 The path from two X posts to the twisted-SMC run, for a reader who was not in that conversation, is
@@ -275,7 +275,7 @@ rewritten before the paper may use their result.
 - [ ] The energy-penalty null (root step 64, scope 01 plan 22: a Girsanov-weighted running cost on the
       adapter's correction cut its on-policy energy 27% with the fit kept and moved the held-out renders
       toward plain PoE; the adapter already spends half the true correction's energy) has its verdict in
-      the review file, its figures under `artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix/`
+      the review file, its figures under `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-charging-the-adapter-for-its-energy-sharpen-the-fix/`
       and W&B run `2cfdtdnl`, and no finding file yet.
 - [ ] No runbook recipe regenerates the twisted-SMC number.
 - [ ] The cross-device fp16 pixel difference (about 2 of 255) quoted in

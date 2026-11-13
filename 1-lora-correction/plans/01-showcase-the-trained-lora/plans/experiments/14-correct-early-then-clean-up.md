@@ -58,7 +58,7 @@
 - **The tail**: the steps after λ reaches 0, run as plain PoE with the adapter disabled.
 - **Sharpness**: the Laplacian variance of the greyscale image, the same function plan 07 used (`_laplacian_var` in `1-lora-correction/scripts/showcase/lambda_window_grid.py`). Higher is crisper. It is computed on the 1024 px final render for the cells, and on the 256 px saved frames for the per-step read, so the two sets of numbers are not on one scale.
 - **The plain-PoE band**: the lowest and highest sharpness over the 8 plain-PoE seeds of a pair. "Back in the band" means a cell's mean sharpness is at or above the band's lower edge.
-- **Both-ness**: the projection of a render's DINOv2 embedding onto the axis from the midpoint of the "a cat" and "a dog" clouds toward the "a cat and a dog" cloud, in cosine units, from the axes already fitted in `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy`. Defined for cat × dog only, because only that pair has reference clouds.
+- **Both-ness**: the projection of a render's DINOv2 embedding onto the axis from the midpoint of the "a cat" and "a dog" clouds toward the "a cat and a dog" cloud, in cosine units, from the axes already fitted in `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy`. Defined for cat × dog only, because only that pair has reference clouds.
 - **The running estimate**: the model's guess of the finished image at a step (the Tweedie mean), decoded. The saved frames under `where_each_condition_lands/frames/` are these.
 - **The re-noise cell**: the schedule run to step 20, its running estimate taken as a clean image, noise added back to the level of step 35 (`t 281`), then plain PoE from step 35 to the end.
 - **The re-noise level sweep**: the same move with the level varied, `RENOISE_LEVELS_T = (481, 381, 281, 181)` (steps 25, 30, 35, 40), and the committed image taken from two sources: the running estimate at step 20 (`x0s20`, the re-noise cell's source) and the finished decay render (`final`). This is the knob that Consistency Trajectory Models' γ-sampling and Restart sampling turn: how much of the committed image is re-synthesised by the tail. Cells are named `decay_10_20_renoise_<source>_t<level>`.
@@ -167,7 +167,7 @@ Every cell: the seed's cached initial noise, guidance 7.5, 1024 square, the adap
 
 ⬅️ [Previous](#what-happens-visual) | 📋 [TOC](#table-of-contents) | [Next](#purpose-and-goal) ➡️
 
-1. **The per-step sharpness read** (`--sharpness-over-steps`): Laplacian variance of every saved frame for all six conditions; one thin line per seed, a thick mean per condition; the falsification read at steps 20 and 50 written to a sidecar. Output: `artifacts/results/does-correcting-early-then-cleaning-up-restore-sharpness/sharpness-over-denoising-steps.{png,json}`.
+1. **The per-step sharpness read** (`--sharpness-over-steps`): Laplacian variance of every saved frame for all six conditions; one thin line per seed, a thick mean per condition; the falsification read at steps 20 and 50 written to a sidecar. Output: `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-correcting-early-then-cleaning-up-restore-sharpness/sharpness-over-denoising-steps.{png,json}`.
 2. **The detachment proof** (`--detach-check`): in one process, plain PoE on seed 9 before the adapter is attached, then a hard-cut run, then plain PoE again through a sampler that never touches the adapter. The two plain renders must agree within `DETACH_MAX_MEAN_ABS_DIFF` grey levels, and the second is also compared to the cached `poe.png`. Output: `detach_check.json` under the output root.
 3. **The schedule grid** (`--render --stage schedule`): mono, plain PoE, full window, hard cut, decay; 8 seeds; both pairs. Mono is rendered before the adapter is attached.
 4. **The scoring** (`--score`): compose (instance count), sharpness at 1024 px, both-ness (cat × dog), butterfly presence (control pair), `results.json`, one sheet per condition with the four columns Mono | PoE | this cell | full window, logged to W&B.
@@ -283,7 +283,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-correcting-early-then-cleaning-up-restore-sharpness/`, with its card entry in that folder's `README.md`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-correcting-early-then-cleaning-up-restore-sharpness/`, with its card entry in that folder's `README.md`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|

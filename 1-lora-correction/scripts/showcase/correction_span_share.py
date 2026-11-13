@@ -3,7 +3,7 @@
 three predictions PoE already has, per step and seed, with the verdict read from the constants
 in correction_span_common.py.
 
-Writes into artifacts/results/what-the-correction-is-made-of/:
+Writes into 1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/:
     orthogonal-share-over-steps.png   three panels against denoising step (0 = noise, 49 = last):
                                       (a) orthogonal share of ||r_t||^2, mean over seeds 9 to 16
                                           with the min-to-max band, steps 0 to 10 shaded, the two

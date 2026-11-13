@@ -6,7 +6,7 @@ verdicts.json beside the sheets, so the table cannot drift from what is actually
 import json, os, sys
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"
-G = "artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from"
+G = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from"
 V = os.path.join(G, "verdicts.json")
 EVAL_SEEDS = set(range(9, 17))
 

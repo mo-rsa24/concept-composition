@@ -41,7 +41,7 @@ GUIDANCE = 7.5
 CACHE_ROOT = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout")
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/what_the_correction_is_made_of")
 REPO = Path(__file__).resolve().parents[3]
-RESULTS = REPO / "artifacts/results/what-the-correction-is-made-of"
+RESULTS = REPO / "1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of"
 STRIP_SEED = 15
 STRIP_STEPS = (0, 2, 5, 10, 20, 30, 49)   # 49 is the last cached step (timestep 1)
 

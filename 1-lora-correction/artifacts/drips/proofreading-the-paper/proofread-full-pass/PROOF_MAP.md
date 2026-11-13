@@ -117,7 +117,7 @@ file, and neither the label nor the figure appears anywhere in it.
 
 **The v58 recipe answers two gaps in the Appendix A settings paragraph** (queued in the section 5 walk): `--train-batch-size 1`, so an epoch is 50 single-state steps; and it also sets `--ema-decay 0.9999`, `--loss-space x0` and `--contrast-weight 0.01`, none of which the paper states. Source: `3-understanding-compositionality/scripts/launch_recipe_run.sh`, the BASE argument list.
 
-**A held-out number exists for chunk 13.** [Where does each condition land](../../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md), section 8: instance-count compose fraction over 8 seeds on 8 held-out pairs, plain product 0.00 to 0.25, corrected 0.75 to 1.00 on every pair, joint prompt 0.62 to 1.00; `artifacts/results/where-does-each-condition-land/pairs/verdict.json`, field `per_pair[].instance_count_compose_fraction_post_hoc`. Rank-32 adapter at step 30,050, λ 1.0; read post-hoc; not the checkpoints in Figure 5.
+**A held-out number exists for chunk 13.** [Where does each condition land](../../../../report/when-does-the-outcome-lock-in/where-does-each-condition-land.md), section 8: instance-count compose fraction over 8 seeds on 8 held-out pairs, plain product 0.00 to 0.25, corrected 0.75 to 1.00 on every pair, joint prompt 0.62 to 1.00; `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/verdict.json`, field `per_pair[].instance_count_compose_fraction_post_hoc`. Rank-32 adapter at step 30,050, λ 1.0; read post-hoc; not the checkpoints in Figure 5.
 
 Navigation: ⬅️ [Figures](#figures) | 📋 [TOC](#table-of-contents) | [Next](#routes-and-threads) ➡️
 

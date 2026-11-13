@@ -21,7 +21,7 @@ the sidecar: for every PoE and corrected point, its cosine distance to the
 centroid of each of the three reference clouds, and the per-seed cosine
 between the λ 1.0 arrow and the λ 1.2 arrow (are the two doses collinear).
 
-Writes to artifacts/results/where-does-each-condition-land/:
+Writes to 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/:
     cat-x-dog-in-dino-space.png
     cat-x-dog-in-dino-space.json
 """
@@ -47,7 +47,7 @@ from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
 
 SOLO_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands")
 R32_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050")
-OUT_DIR = REPO_ROOT / "artifacts/results/where-does-each-condition-land"
+OUT_DIR = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land"
 NAME = "cat-x-dog-in-dino-space"
 SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 

@@ -109,7 +109,7 @@ def main() -> int:
     ap.add_argument("--size", type=int, default=1024,
                     help="render height and width. MethodCtx does not carry them, so "
                          "they are named here rather than read off the context.")
-    ap.add_argument("--out", default="artifacts/results/designing-the-correction-loss/"
+    ap.add_argument("--out", default="1-lora-correction/artifacts/results/designing-the-correction-loss/"
                                      "does-the-empty-branch-carry-plurality")
     args = ap.parse_args()
     alpha = args.alpha if args.alpha is not None else args.rank

@@ -134,7 +134,7 @@ def short(pair):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/"
+    ap.add_argument("--out", default="1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/"
                                      "joint-prompt-targets-vs-pair-and-seed")
     ap.add_argument("--per-figure", type=int, default=5)
     ap.add_argument("--pairs", nargs="*", default=None)

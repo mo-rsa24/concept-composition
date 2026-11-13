@@ -42,7 +42,7 @@ CHECKPOINTS = {
 PAIR = "a_cat__x__a_dog"
 GUIDANCE = 7.5
 HEIGHT = WIDTH = 1024
-OUT_DIR = REPO / "artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp"
+OUT_DIR = REPO / "1-lora-correction/artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp"
 
 
 def _freeze_null_of(ckpt: str) -> bool:

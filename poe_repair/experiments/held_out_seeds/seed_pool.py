@@ -1,6 +1,6 @@
 """Single source of truth for the cross-seed pool split.
 
-Loads ``artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/seed_pool.yaml`` and asserts no
+Loads ``1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/seed_pool.yaml`` and asserts no
 overlap between train and held-out at load time. Every script that
 trains or evaluates a pooled LoRA must go through ``load_seed_pool``
 so the same split is enforced uniformly.

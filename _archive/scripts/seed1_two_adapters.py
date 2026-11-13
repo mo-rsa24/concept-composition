@@ -103,7 +103,7 @@ def sheet() -> None:
         else:          lab, sub = f"hand over at step {sw}", "composes first, then draws well"
         d.text((x, 6), lab, fill="black"); d.text((x, 20), sub, fill="#666666")
         c.paste(Image.open(png_for(sw)).convert("RGB").resize((T, T), Image.LANCZOS), (x, TOP))
-    out = REPO / "artifacts/results/composing-unseen-pairs/seed1-two-adapters.png"
+    out = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/seed1-two-adapters.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     c.save(out); print(f"wrote {out}", flush=True)
 

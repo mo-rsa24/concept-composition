@@ -1415,7 +1415,7 @@ it without that prompt). The trajectory-separation move was cut, reasons recorde
   the eight-pair map (rows ordered strongest-first at the earliest window, daggers on the two
   error cells). The frog-and-toad cells are confirmed as detector error at detector level, a
   second kept box on the animal's own haunch, evidence in
-  `artifacts/results/did-the-detector-miscount-the-late-frog-toad-cells/`. The figure is
+  `1-lora-correction/artifacts/results/measuring-composition/the-scorers/did-the-detector-miscount-the-late-frog-toad-cells/`. The figure is
   compiled in the tex as `fig:window-map` and stays the section's last figure, after the two
   coverage grids.
       Then the claim and the three

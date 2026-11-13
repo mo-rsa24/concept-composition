@@ -222,7 +222,7 @@ For Claude to execute.
 - [ ] 2.1 **Collect the per-checkpoint numbers into one file**
   - Read the thirteen `results.json` files under `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_*` and `lambda_boundary_probe*`
   - Recompute the LoRA Frobenius norms from the checkpoints, because they exist only as prose in one markdown file
-  - Produces: `artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/00-per-checkpoint.json`, one row per (rank, checkpoint, λ) with compose count, drift and norm
+  - Produces: `1-lora-correction/artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/00-per-checkpoint.json`, one row per (rank, checkpoint, λ) with compose count, drift and norm
 - [ ] 2.2 **Write `scripts/make_correction_loss_figures.py`**
   - Regenerates all eleven figures from that file: the eight that exist plus the three owed
   - Parameterised by run directory and output directory, so every later variation reuses it rather than getting its own script
@@ -254,7 +254,7 @@ For Claude to execute.
   - The rank table carries the warning that its three entries sit at three different steps, until task 2.4's figure replaces it with the matched-step comparison
   - Produces: one page, one screen
 - [ ] 3.2 **Write the artifact card**
-  - `artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/README.md`, one entry per item with how it was made
+  - `1-lora-correction/artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/README.md`, one entry per item with how it was made
   - Produces: the card, per `~/.claude/ARTIFACT_TREE_FORMAT.md`
 
 ◀ **Needs: [task 3.1](#3--write-the-page)** done, so there is a page to read.
@@ -297,7 +297,7 @@ For you to follow manually.
 ◀ **Needs: [task 2.2](#2--collect-the-numbers-and-draw-the-figures)** done.
 
 - [ ] 5.1 **Open each regenerated figure beside the one embedded in the existing report**
-  - Path: `artifacts/results/does-training-longer-help-the-pooled-lora/` for the originals
+  - Path: `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-training-longer-help-the-pooled-lora/` for the originals
   - ✅ Same curve, same values: the script is right and the figures are now reproducible
   - ❌ Different: do not silently adopt the new one. Record which differs and by how much in the review file, because one of the two is wrong and the existing one is already cited
 
@@ -344,7 +344,7 @@ The review questions are in [the review file](../../review/02-the-v0-foundation.
 | `held-out-strip.png` | subject | the same for a pair never seen | task 2.5 | ⏳ |
 | `training-loss-three-ranks.png` | subject | fit loss and its step buckets, three ranks | task 2.2 | ⏳ |
 
-**Organization workflow.** Everything is filed under `artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/` with its card entry. The eight existing figures stay where they are, in `artifacts/results/does-training-longer-help-the-pooled-lora/`, and the page links both homes. Moving them would break two report files, a runbook anchor and an artifact card.
+**Organization workflow.** Everything is filed under `1-lora-correction/artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/` with its card entry. The eight existing figures stay where they are, in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-training-longer-help-the-pooled-lora/`, and the page links both homes. Moving them would break two report files, a runbook anchor and an artifact card.
 
 ---
 
@@ -372,12 +372,12 @@ The review questions are in [the review file](../../review/02-the-v0-foundation.
 
 Replaces make_closeout_figures.py, which drew the eight existing figures and was
 kept in a session scratchpad rather than the repo, so nothing in
-artifacts/results/does-training-longer-help-the-pooled-lora/ can currently be
+1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-training-longer-help-the-pooled-lora/ can currently be
 redrawn by anyone.
 
     co3 python scripts/make_correction_loss_figures.py \
-        --numbers artifacts/results/designing-the-correction-loss/<NN-name>/<NN>-per-checkpoint.json \
-        --out     artifacts/results/designing-the-correction-loss/<NN-name>/
+        --numbers 1-lora-correction/artifacts/results/designing-the-correction-loss/<NN-name>/<NN>-per-checkpoint.json \
+        --out     1-lora-correction/artifacts/results/designing-the-correction-loss/<NN-name>/
 """
 ```
 

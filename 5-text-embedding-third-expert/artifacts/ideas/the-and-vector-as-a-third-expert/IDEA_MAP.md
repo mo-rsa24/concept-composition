@@ -227,7 +227,7 @@ Mark: wrong as stated, repaired.
 The joint prompt fails on some seeds, and a LoRA trained to match it learns those failures too.
 The project has already solved this, by eye, at scale: every candidate pair's joint render was
 judged seed by seed, and only the good cells enter training. The verdicts are
-`artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json` on the
+`1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json` on the
 cluster checkout (`/home-mscluster/mmolefe/Playground/PhD/concept-composition/`; `artifacts/results/` is
 gitignored, so the laptop has no copy), turned into cell lists by
 `1-lora-correction/scripts/showcase/build_pool_from_verdicts.py`. The newest list,

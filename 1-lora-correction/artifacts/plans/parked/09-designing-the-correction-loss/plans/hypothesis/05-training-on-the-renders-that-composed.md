@@ -275,7 +275,7 @@ For you to follow manually.
 ◀ **Needs: [task 2.3](#2--the-scaling-curve-the-gate)** done, so the curve exists.
 
 - [ ] 4.1 **Open the curve and read it against the bar**
-  - Path: `artifacts/results/designing-the-correction-loss/06-training-on-the-renders-that-composed/compose-rate-vs-cell-count.png`
+  - Path: `1-lora-correction/artifacts/results/designing-the-correction-loss/06-training-on-the-renders-that-composed/compose-rate-vs-cell-count.png`
   - ✅ Rising across the four counts and clearing the bar at 72: the corpus is enough. Go to task 3.1
   - ❌ Flat: 43 cells is not enough, or the noisy target is eating the gain. Stop. Do not run task 3, and do not read a comparison against `01` off four runs that never learned. Record it as a null and say which of the two causes the evidence supports
   - ❌ Rising but still under the bar at 72: the corpus would work and there is not enough of it. That is a different finding, and what it asks for is a person picking more cells by eye
@@ -348,7 +348,7 @@ Task 1.1 and task 2.1 both fail quietly, which is why they are named here.
 | `06-per-checkpoint.json` | — | compose count and drift against `01` at matched steps | task 3.1 | ⏳ |
 | `blind/seed-NN.png` | subject | one strip per seed, ids instead of names | task 3.2 | ⏳ |
 
-**Organization workflow.** Filed under `artifacts/results/designing-the-correction-loss/06-training-on-the-renders-that-composed/` with its card entry.
+**Organization workflow.** Filed under `1-lora-correction/artifacts/results/designing-the-correction-loss/06-training-on-the-renders-that-composed/` with its card entry.
 
 ---
 

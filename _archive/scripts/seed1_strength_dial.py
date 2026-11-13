@@ -91,7 +91,7 @@ def sheet() -> None:
             p = png_for(tag, lam)
             if p.exists():
                 c.paste(Image.open(p).convert("RGB").resize((T, T), Image.LANCZOS), (LEFT + j * (T + PAD), y))
-    out = REPO / "artifacts/results/composing-unseen-pairs/seed1-correction-strength.png"
+    out = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/seed1-correction-strength.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     c.save(out); print(f"wrote {out}", flush=True)
 

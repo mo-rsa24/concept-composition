@@ -209,7 +209,7 @@ disk; only the second name goes.
 
 | Now | Becomes |
 |---|---|
-| `artifacts/rung1-overfit/lora/` | `artifacts/results/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/` |
+| `artifacts/rung1-overfit/lora/` | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/` |
 | `artifacts/rung2-survive-noise/cross_seed/` | same question folder, `held-out-seeds/` |
 | `artifacts/rung3-group-wise/`, `artifacts/rung4-scale/` | **stay**, cut by group |
 | `outputs/animals_compose_transfer/` | `does-the-fix-reach-unseen-pairs` |

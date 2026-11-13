@@ -85,7 +85,7 @@ composes, so no best-of-8 rule can pick a composing one. The best PoE seed by bo
 both-ness instead of the count would not find a composing noise among these eight. The corrected
 run composes on 7 of 8, so best-of-8 there is trivially a compose. Renders:
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/renders/full/seed_<n>_lambda_<λ>.png`;
-sidecar: `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`. Both
+sidecar: `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`. Both
 read 2026-09-05.
 
 ## Runs

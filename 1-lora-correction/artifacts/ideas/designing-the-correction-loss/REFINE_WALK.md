@@ -11,7 +11,7 @@
 | `plans/.../plans/hypothesis/06-fitting-the-whole-path-and-handing-back-the-tail.md` | new |
 | `plans/.../review/06-fitting-the-whole-path-and-handing-back-the-tail.md` | new, bars fixed before any render |
 | `MASTER_PLAN.md` | step 76 |
-| `artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp/` | three sheets, their scripts, and the card |
+| `1-lora-correction/artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp/` | three sheets, their scripts, and the card |
 
 ## What the walk found, in order
 

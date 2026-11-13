@@ -35,7 +35,7 @@ SEED = 10
 WINDOWS = [(35, 45), (40, 50)]
 CONF, NMS_IOU = 0.30, 0.5
 
-OUT_DIR = Path("artifacts/results/did-the-detector-miscount-the-late-frog-toad-cells")
+OUT_DIR = Path("1-lora-correction/artifacts/results/measuring-composition/the-scorers/did-the-detector-miscount-the-late-frog-toad-cells")
 
 
 def image_path(win: tuple[int, int]) -> Path:

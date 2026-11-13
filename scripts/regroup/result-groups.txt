@@ -1,6 +1,7 @@
 1-lora-correction/artifacts/results/against-other-methods
 1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors
 1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables
+1-lora-correction/artifacts/results/designing-the-correction-loss
 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs
 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-pairs
 1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer
@@ -10,6 +11,8 @@
 1-lora-correction/artifacts/results/measuring-composition/the-scorers
 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog
 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches
+1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains
+1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp
 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails
 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins
 1-lora-correction/artifacts/results/what-the-correction-is

@@ -50,7 +50,7 @@ each cell the number of seeds out of 4 that composed. Composition concentrates i
 earliest columns for every pair, and from a window start of 15 onward the map is zeros except
 two single-seed cells for frog and toad at starts 35 and 40. Those two cells were inspected on
 2026-08-27 and both are detector error, confirmed at detector level in
-[the miscount check](../../../../artifacts/results/did-the-detector-miscount-the-late-frog-toad-cells/README.md):
+[the miscount check](../../../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/did-the-detector-miscount-the-late-frog-toad-cells/README.md):
 the second kept box sits on the animal's own rear haunch, passing the confidence floor at
 exactly 0.30 and escaping NMS because a nested box's overlap is only its area ratio. Both are seed 10 (`window_curves.json` rows: windows
 [35,45] and [40,50], n_instances 2, compose 1). The two images, at

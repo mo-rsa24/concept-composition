@@ -35,7 +35,7 @@ No criterion was pre-registered in a plan file. The idea walk was the register.
 
 ## 1. The adapter fits its own trajectory about as well as the cache
 
-![Fit cosine against denoising step for cat x dog, on the corrected trajectory and on the cached states, with the state drift on the right axis](../../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/on-policy-vs-cached-fit-cat-x-dog.png)
+![Fit cosine against denoising step for cat x dog, on the corrected trajectory and on the cached states, with the state drift on the right axis](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/on-policy-vs-cached-fit-cat-x-dog.png)
 *Red line: cosine between the adapter's correction and the true correction at the state the
 adapter actually reached, mean over seeds 9 to 16, shaded one standard deviation. Blue points:
 the same adapter on the cached, uncorrected states, every fifth step. Dashed grey, right axis: how
@@ -69,7 +69,7 @@ fits at 0.77 here and still renders one animal, so fit and outcome are different
 
 ## 2. Seeing the words does not help; seeing the pair does
 
-![Fit cosine per pair, grouped by how much of the pair the adapter saw in training](../../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/fit-by-held-out-tier-rank8-30k.png)
+![Fit cosine per pair, grouped by how much of the pair the adapter saw in training](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/fit-by-held-out-tier-rank8-30k.png)
 *One bar per pair, mean cosine over cells, whisker one standard deviation across cells. Green:
 the 11 training pairs. Blue: both words seen in training, never together. Purple: one word seen.
 Red: the pool's held-out pairs, no word seen. Dashed lines: group means. What to notice: the blue
@@ -114,7 +114,7 @@ It is retired from the map. It appears here only so the retirement is traceable.
 
 ## 4. The pictures behind the numbers
 
-![Eight seeds by four columns: plain product of experts, the showcase sampler with the correction, the run 2 rollout with the correction, the joint prompt](../../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/cat-x-dog-eight-seeds-poe-corrected-joint.png)
+![Eight seeds by four columns: plain product of experts, the showcase sampler with the correction, the run 2 rollout with the correction, the joint prompt](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/cat-x-dog-eight-seeds-poe-corrected-joint.png)
 *Rows are held-out seeds 9 to 16. Columns: the cache's own product-of-experts render, the
 showcase sampler with the rank 8 correction at λ 1, run 2's rollout with the same correction, the
 joint prompt. What to notice: columns two and three are identical on every row, and seed 14 is the

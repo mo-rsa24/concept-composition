@@ -22,7 +22,7 @@ import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirnam
 from disallowed_subjects import is_allowed
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"
-G = "artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from"
+G = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from"
 
 # Every-day foreground objects, grouped by what kind of thing they are. A pair is drawn from two
 # DIFFERENT categories, which is the opposite rule from the animal pool's same-community draw.

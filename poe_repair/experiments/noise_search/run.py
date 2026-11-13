@@ -42,7 +42,7 @@ CONTROL_PAIR = "a_butterfly__x__a_flower_meadow"
 # the existing rank-32 lambda 1.2 render and the plain-PoE render the identity check reads against
 R32_RENDERS = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/renders/full")
 # the landing finding's DINOv2 features of the 48 cat x dog renders, rows: 6 conditions x seeds 9..16
-LANDING_FEATS = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy")
+LANDING_FEATS = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy")
 LANDING_SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 
 

@@ -11,7 +11,7 @@ Usage::
 
     python -m poe_repair.experiments.held_out_seeds.train_pooled \
         --k 4 --total-epochs 200 \
-        --output-root artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_b_learning_curve
+        --output-root 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/task_b_learning_curve
 
 For the k=1 case, pass ``--single-seed-pick 5`` to override which one
 train-pool seed is used (defaults to the first).

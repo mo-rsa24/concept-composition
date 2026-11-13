@@ -141,7 +141,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 | 06:29 | reference renders, first attempt, on the session node mscluster85 | `outputs/showcase/logs/where_each_condition_lands_render.log` | CUDA out of memory: another user's process held 16.2 GB of the 24 GB card, and SDXL's decode needs more than the 7 GB left |
 | 06:37 | reference renders, second attempt, `co3` python on a Blackwell card | `outputs/showcase/where_each_condition_lands/solo_a/` (empty) | died without a traceback; the build has no kernels for that card |
 | 06:44 to 06:47 | reference renders, `co3_bw`, mscluster110 device 0, PID 397295 | `outputs/showcase/where_each_condition_lands/{solo_a,solo_b,joint}/seed_<n>.png` | 24 of 24, about six seconds each |
-| 07:23 | endpoint plot, PCA plane | `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.png` | plane keeps 22% of variance; hulls overlap; nearest-centroid bar fails |
+| 07:23 | endpoint plot, PCA plane | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.png` | plane keeps 22% of variance; hulls overlap; nearest-centroid bar fails |
 | 07:24 | endpoint plot, cloud axes | `.../cat-x-dog-in-dino-space-cloud-axes.png` | PoE band and corrected band separate |
 | 12:00 | dose strip, seeds 10 and 11, from existing PNGs | `.../cat-x-dog-seeds-10-11-dose-strip.png` | what the second dose changes, seen |
 | 08:00 to 08:21 | per-step frames, first launch, mscluster111 device 0 (Blackwell, `co3_bw`) | `outputs/showcase/logs/where_each_condition_lands_frames.log` | ran on the CPU without saying so: `torch.cuda.is_available()` is `False` on that card while `nvidia-smi` still lists it, one run took 15 minutes against 16 seconds on a working GPU; killed after one run, relaunched on mscluster109 device 1; recorded as the second form of [poe-launch-002](../../../environment/known-failures.md) and the launch script now checks CUDA before starting |
@@ -156,7 +156,7 @@ Every render shares its seed's initial noise (the training cache's held-out step
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-the-pictures-behind-the-points) ➡️
 
-![The 48 renders on the cloud axes: x from the cat centroid to the dog centroid, y from their midpoint toward the joint-prompt centroid](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-cloud-axes.png)
+![The 48 renders on the cloud axes: x from the cat centroid to the dog centroid, y from their midpoint toward the joint-prompt centroid](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-cloud-axes.png)
 *Black squares are product-of-experts endpoints, pink diamonds the same seeds with the λ 1.2
 correction, one grey-then-pink arrow per seed. What to notice: every arrow ends inside the
 joint-prompt hull's height, and no square does.*
@@ -167,14 +167,14 @@ single-animal centroids to the joint-prompt centroid, in DINOv2 cosine units, me
 to 16: PoE 0.21 (range 0.04 to 0.31), PoE plus λ 1.0 correction 0.41, PoE plus λ 1.2 correction
 0.42 (range 0.34 to 0.51), joint prompt 0.52 (range 0.36 to 0.61), single animals 0.00 by
 construction. The PoE band and the corrected band do not overlap. From
-`artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, field
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, field
 `cloud_axes.both_ness_by_condition`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py`.
 
 ## 2. The pictures behind the points
 
 Navigation: ⬅️ [Previous](#1-on-axes-built-from-the-reference-clouds-poe-sits-low-and-the-correction-lifts-it) | 📋 [TOC](#table-of-contents) | [Next](#3-the-two-doses-agree-on-where-to-go-and-not-on-the-exact-direction) ➡️
 
-![Eight seeds by six conditions: cat alone, dog alone, joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-contact-sheet.png)
+![Eight seeds by six conditions: cat alone, dog alone, joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-contact-sheet.png)
 *What to notice: the fourth column is one animal or one fused animal in every row; the fifth and
 sixth columns are two animals in every row.*
 📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-3-the-contact-sheet-eight-seeds-by-six-conditions).
@@ -189,7 +189,7 @@ fields `points[].nearest_cloud`, `centroid_cosine_gaps`, `cloud_stats`.
 
 Navigation: ⬅️ [Previous](#2-the-pictures-behind-the-points) | 📋 [TOC](#table-of-contents) | [Next](#4-over-the-50-steps-the-joint-run-settles-first-the-plain-run-wanders) ➡️
 
-![Seeds 10 and 11: joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../../artifacts/results/where-does-each-condition-land/cat-x-dog-seeds-10-11-dose-strip.png)
+![Seeds 10 and 11: joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-seeds-10-11-dose-strip.png)
 *What to notice: in both rows the second column is one animal, the third has two, and the fourth
 keeps two while changing which one is in front and how much of the frame each takes.*
 📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-4-the-dose-strip-for-seeds-10-and-11).
@@ -203,7 +203,7 @@ the joint centroid: 0.59 to 0.74, positive on all 8 seeds. Cosine between the λ
 
 Navigation: ⬅️ [Previous](#3-the-two-doses-agree-on-where-to-go-and-not-on-the-exact-direction) | 📋 [TOC](#table-of-contents) | [Next](#5-one-seed-frame-by-frame-the-plain-run-changes-animal-mid-way) ➡️
 
-![Both-ness of each run's running estimate against denoising step, one thin line per seed, thick line per condition mean](../../../artifacts/results/where-does-each-condition-land/both-ness-over-denoising-steps.png)
+![Both-ness of each run's running estimate against denoising step, one thin line per seed, thick line per condition mean](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/both-ness-over-denoising-steps.png)
 *y is both-ness of the running estimate, x is the denoising step, one point per saved frame. What
 to notice: the purple mean reaches the dashed joint-prompt centroid line by step 25 and stays;
 the pink mean climbs until step 30 and holds under it; the black mean never leaves 0.2 and its
@@ -216,7 +216,7 @@ thin lines cross each other all the way to the end.*
 step, the first saved step at which the PoE run and the corrected run are further apart in the
 plane than 0.05 (`FORK_MIN_DIST = 0.05`): median 1, range 0 to 2, so the two running estimates
 differ from the first step, which is where the correction is applied. From
-`artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, fields
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/commit-and-fork-steps.json`, fields
 `summary` and `per_seed`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_dynamics.py`
 from the scene's `public/data.json`. No bar was written before these two numbers; they are a
 read, not a verdict.
@@ -225,7 +225,7 @@ read, not a verdict.
 
 Navigation: ⬅️ [Previous](#4-over-the-50-steps-the-joint-run-settles-first-the-plain-run-wanders) | 📋 [TOC](#table-of-contents) | [Next](#6-the-moving-version) ➡️
 
-![Seed 15, six conditions by seven saved steps: the decoded running estimate of the finished image](../../../artifacts/results/where-does-each-condition-land/frames-seed-15-strip.png)
+![Seed 15, six conditions by seven saved steps: the decoded running estimate of the finished image](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-seed-15-strip.png)
 *Rows are the six conditions, columns the saved steps 0, 5, 10, 20, 30, 40 and 50. What to
 notice: the fourth row is a cat at steps 5 and 10, a cat with a dog's muzzle at 20 and 30, and a
 dog at 40 and 50; the last two rows show two silhouettes from step 5 and two animals from
@@ -242,12 +242,12 @@ both-ness 0.67, commit step 20; λ 1.2 final both-ness 0.44, commit step 10.
 
 Navigation: ⬅️ [Previous](#5-one-seed-frame-by-frame-the-plain-run-changes-animal-mid-way) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![The animated page at step 20: every run's running estimate as a point in the cloud-axes plane](../../../artifacts/results/where-does-each-condition-land/scene-step-20.png)
+![The animated page at step 20: every run's running estimate as a point in the cloud-axes plane](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/scene-step-20.png)
 *A screenshot of the interactive page at step 20 of 50, all eight seeds. What to notice: the
 purple points are already inside their hull, the pink diamonds are climbing toward it, and the
 black squares are spread across the middle.*
 
-![The animated page at step 50 with seed 15 selected and trails on](../../../artifacts/results/where-does-each-condition-land/scene-seed-15-step-50.png)
+![The animated page at step 50 with seed 15 selected and trails on](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/scene-seed-15-step-50.png)
 *Seed 15 with trails. What to notice: the black trail crosses the plane from left to right
 before ending near the dog cloud; the pink trail climbs and ends inside the joint hull. The six
 thumbnails on the right are that seed's finished images.*
@@ -261,11 +261,11 @@ per the [scene-serving recipe](../../../runbook/looking-at-what-a-run-produced/s
 
 Navigation: ⬅️ [Previous](#6-the-moving-version) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![The cloud-axes plot with seven decoded pictures along each axis](../../../artifacts/results/where-does-each-condition-land/axes/cat-x-dog-in-dino-space-cloud-axes-with-axis-pictures.png)
+![The cloud-axes plot with seven decoded pictures along each axis](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/axes/cat-x-dog-in-dino-space-cloud-axes-with-axis-pictures.png)
 *The plane of rung 1 with a strip of decoder reconstructions on each edge. What to notice: along
 the bottom the face turns from cat to dog; up the left edge one animal becomes two side by side.*
 
-![Four renders beside their reconstructions through the representation autoencoder](../../../artifacts/results/where-does-each-condition-land/axes/reconstruction_check.png)
+![Four renders beside their reconstructions through the representation autoencoder](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/axes/reconstruction_check.png)
 *Left to right in pairs: PoE seed 9, PoE seed 10, the joint prompt at seed 9, the corrected seed
 15. What to notice: the fused faces come back fused, so the decoder keeps a chimera rather than
 cleaning it into one animal.*
@@ -276,7 +276,7 @@ uses, so the two axes were rebuilt in the decoder's token space on the same 48 r
 walks decoded there. Rank agreement between token-space both-ness and the plane's both-ness over
 all 48 renders: Spearman 0.87. Reconstruction error, mean absolute pixel difference on a 0 to
 255 scale: PoE seed 9 9.5, PoE seed 10 22.5, joint seed 9 15.3, corrected seed 15 29.3. From
-`artifacts/results/where-does-each-condition-land/axes/axes.json`, fields
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/axes/axes.json`, fields
 `spearman_token_vs_class_token_both_ness_over_48` and `reconstruction_mean_abs_error_over_255`,
 written by `1-lora-correction/scripts/showcase/where_each_condition_lands_axes.py`. Every decoded frame is a
 reconstruction of a point in the encoder's space and none is an SDXL output.
@@ -285,7 +285,7 @@ reconstruction of a point in the encoder's space and none is an SDXL output.
 
 Navigation: ⬅️ [Previous](#7-the-axes-drawn-as-pictures-x-is-which-animal-y-is-how-many) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Both-ness of the finished image per pair: PoE, corrected and joint, one dot per seed](../../../artifacts/results/where-does-each-condition-land/pairs/bands-across-pairs.png)
+![Both-ness of the finished image per pair: PoE, corrected and joint, one dot per seed](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/bands-across-pairs.png)
 *y is both-ness on each pair's own axes, x is the pair, one dot per seed and a bar at the mean.
 What to notice: black and pink separate on cat × dog and cow × buffalo, and sit on top of each
 other on the five pairs whose two animals look alike.*
@@ -301,7 +301,7 @@ Pairs whose PoE and corrected both-ness bands do not overlap: 2 of 7 (cat × dog
 against min corrected 0.29; cow × buffalo, 0.16 against 0.24). Pairs passing both halves of the
 bar (bands apart and corrected median commit step at or before PoE's): 0 of 7. Pairs whose bands
 overlap: 5 of 7, above the null threshold of 4. Verdict: **null**. From
-`artifacts/results/where-does-each-condition-land/pairs/verdict.json`, fields `n_pass_both_halves`,
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/verdict.json`, fields `n_pass_both_halves`,
 `n_band_overlap`, `verdict`, written by `1-lora-correction/scripts/showcase/where_each_condition_lands_pairs_analyze.py`
 with the thresholds copied from the plan.
 
@@ -368,13 +368,13 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| Both-ness per condition, nearest clouds, gaps, arrow cosines | `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, read 2026-09-05 | verified |
-| Commit and fork steps, both-ness per step | `artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, computed and read 2026-09-05 from `1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json` | verified |
+| Both-ness per condition, nearest clouds, gaps, arrow cosines | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, read 2026-09-05 | verified |
+| Commit and fork steps, both-ness per step | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/commit-and-fork-steps.json`, computed and read 2026-09-05 from `1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json` | verified |
 | The reference renders (cat, dog, joint; seeds 9 to 16) | `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/{solo_a,solo_b,joint}/seed_<n>.png`, `render_manifest.json`, rendered 2026-09-05 on mscluster110 | verified |
 | The per-step frames, six conditions | `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames/<cond>/seed_<n>/step_<kk>.png`, `frames_manifest.json` | verified |
 | The PoE and corrected renders | `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/renders/full/seed_<n>_lambda_<λ>.png`, `render_run.json` | verified |
 | The held-out pair renders, five arms, eight pairs, seeds 9 to 16, frames and trajectories | `/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/pairs/<pair>/<arm>/seed_<n>/`, 320 of 320 counted on mscluster106, rendered 2026-09-05 15:54 to 20:30 | verified |
-| The per-pair both-ness, commit steps, instance counts and the verdict | `artifacts/results/where-does-each-condition-land/pairs/verdict.json` and `<pair>/sidecar.json`, computed and read 2026-09-06 | verified |
+| The per-pair both-ness, commit steps, instance counts and the verdict | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/verdict.json` and `<pair>/sidecar.json`, computed and read 2026-09-06 | verified |
 | The correction | rank-32 adapter, step 30050, `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt`, applied over all 50 steps at λ 1.0 and 1.2 | verified |
 | The run | tasks **Render the three references** and **Run the plot on the launch node** in [where each condition lands](../../plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md); verdict in [its review file](../../artifacts/plans/completed/05-when-does-the-outcome-lock-in/review/06-where-each-condition-lands.md) | verified |
 | Regenerate with | [reproducing where each condition lands](../../../runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md): recipe 1 for the renders and frames on a shared device, recipe 2 for the endpoint figures and sidecar, recipe 3 for the frames' embeddings and the page data, recipe 4 for the page; `where_each_condition_lands_dynamics.py` under `1-lora-correction/scripts/showcase/` for rung 4's figure | |

@@ -20,9 +20,9 @@ the same whether built on x0 or on eps; x0 is used so the number and the picture
 
 Writes:
     /datasets/.../what_the_correction_is_made_of/tweedie/seed_15/<cond>_step_<kk>.png   the decodes
-    artifacts/results/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png  5 rows of
+    1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png  5 rows of
         decodes x 7 steps, plus a 6th row: heat map of ||x0_a - x0_b|| per latent position
-    artifacts/results/what-the-correction-is-made-of/same-place-share.json
+    1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/same-place-share.json
 """
 from __future__ import annotations
 

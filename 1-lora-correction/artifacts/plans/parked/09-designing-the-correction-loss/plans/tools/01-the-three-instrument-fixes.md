@@ -245,7 +245,7 @@ For Claude to execute.
   - ✓ verified by a full run, not by a smoke, 2026-09-17: `v1_freeze_null_r16_s0_25` (W&B `kdzx03ji`, rank 16, 30,000 steps, `mscluster109`) carries all four. `history.json` holds `loss_undialled` across 30,830 rows; `config.json` reads `train_step_range [0, 25]`; `dataset_meta.json` lists 43 cells every one reading `split: train`, the eight `a_typewriter__x__a_cactus` cells included; 25 checkpoints sit beside 25 render sets. The two-epoch smoke was overtaken by a run that proves more.
 - [ ] 2.2 **Record the ratio on an existing run**
   - The change cannot be applied retroactively, so recompute the undialled error offline from the cache for a handful of steps of `phase1_r32_100k`, using its checkpoint at 30,050
-  - Produces: `artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/undialled-vs-fit.json`, the ratio per denoising step
+  - Produces: `1-lora-correction/artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/undialled-vs-fit.json`, the ratio per denoising step
   - This is the number the review file's bar is read against
 
 ▶ **Next: [instruction 3.1](#3--read-the-new-panel-in-wb)**, the panel the smoke just produced.
@@ -326,7 +326,7 @@ The review questions are in [the review file](../../review/01-the-three-instrume
 |---|---|---|---|---|
 | `undialled-vs-fit.json` | — | the undialled error against the fit loss, per denoising step, on `phase1_r32_100k` at 30,050 | task 2.2 | ⏳ |
 
-**Organization workflow.** The json is filed under `artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/` with its card entry, per `~/.claude/ARTIFACT_TREE_FORMAT.md`.
+**Organization workflow.** The json is filed under `1-lora-correction/artifacts/results/designing-the-correction-loss/00-matching-the-composition-to-the-joint-prompt/` with its card entry, per `~/.claude/ARTIFACT_TREE_FORMAT.md`.
 
 ---
 

@@ -74,7 +74,7 @@ Settled facts (do not re-derive; cite them)
   each target is SDXL's joint-prompt noise prediction (eps_j_raw in each cached state). No run
   trained on a CO3 picture. The submitted Section 4 says a pair is retained "if either image
   contains both concepts" (joint prompt or CO3); the verdict record
-  (artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json, cluster
+  (1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json, cluster
   checkout) holds joint-prompt calls only, and no record shows a pair kept by CO3 alone. The user
   remembers a mixed CO3-and-joint pool but cannot name a pair. Present this to the user and let
   them choose the wording; this answers k4nd's Q3 and UHz6's training-filter weakness.

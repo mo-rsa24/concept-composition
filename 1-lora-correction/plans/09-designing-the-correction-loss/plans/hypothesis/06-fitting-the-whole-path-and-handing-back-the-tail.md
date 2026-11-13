@@ -189,7 +189,7 @@ For Claude to execute.
     - `pool43-all50` at step 40,000, which trained on all fifty
   - Read the null branch the way each run's own `config.json` composes it: `freeze_null` is true for `v1` and absent for `pool43-all50`, so the first takes the empty branch from the cache and the second takes the adapted one
   - Upcast the cached float16 tensors to float32 before stacking them
-  - Produces: `artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp/shrinkage-per-step.json`, the ratio per step per seed per checkpoint, and one plot of the ratio against step, one panel per checkpoint, one line per seed
+  - Produces: `1-lora-correction/artifacts/results/designing-the-correction-loss/why-the-renders-are-not-crisp/shrinkage-per-step.json`, the ratio per step per seed per checkpoint, and one plot of the ratio against step, one panel per checkpoint, one line per seed
   - ✓ ran 2026-09-20 on `mscluster106` device 1, `1-lora-correction/scripts/shrinkage_per_step.py`, 800 measurements over the eight held-out seeds and both checkpoints. Mean per band on `pool43-all50`: size 1.08, 0.87, 0.88, 0.95, 0.94 and direction 0.77, 0.85, 0.91, 0.88, 0.78 across steps 0-9, 10-19, 20-29, 30-39, 40-49. On `v1` the direction ends worse, at 0.63
   - **The size does not fall off, so the push is not too weak late.** What fails late is the direction: full size, about a quarter of the way off target, in exactly the steps that draw fine detail. That is what stage A now tests
 

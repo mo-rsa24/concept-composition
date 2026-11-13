@@ -2,7 +2,7 @@
 """Rung 4 of "what the correction is made of": how far each run's running estimate travels
 before it settles, and which animal it is at every saved step.
 
-Reads artifacts/results/where-does-each-condition-land/frames-dino-feats.npz: the (672, 384)
+Reads 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz: the (672, 384)
 L2-normalised DINOv2 ViT-S/14 CLS embeddings of the decoded running estimate (Tweedie mean) of
 six conditions x eight seeds x fourteen saved steps (0, 2, 5, 8, 10, 15, 20, 25, 30, 35, 40, 45,
 49, 50), plus the cloud axes u1 (cat to dog), u2 (both-ness) and their origin.
@@ -16,7 +16,7 @@ Per run (condition, seed):
                      from the step-50 frames of the cat-alone and dog-alone runs (normalised)
     flips            number of sign changes of which-animal after step 10, and the last one's step
 
-Writes into artifacts/results/what-the-correction-is-made-of/:
+Writes into 1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/:
     track-kinetic-energy.png            x: the floor, y: the kinetic energy, one point per run,
                                         colour per condition, diagonal = a straight constant-speed track
     which-animal-over-steps.png         y: which-animal score, x: saved step; thin line per seed,
@@ -37,7 +37,7 @@ import matplotlib.pyplot as plt
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import correction_span_common as C  # noqa: E402
 
-FEATS = C.REPO / "artifacts/results/where-does-each-condition-land/frames-dino-feats.npz"
+FEATS = C.REPO / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz"
 FLIP_AFTER_STEP = 10
 FLIP_MIN_MAGNITUDE = 0.1   # a sign change counts as a real flip only if the score exceeds this on both sides
 COLORS = {"solo_a": "#d95f02", "solo_b": "#1b9e77", "joint": "#7570b3",

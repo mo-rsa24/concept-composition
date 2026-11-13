@@ -108,7 +108,7 @@ The question: does each variation get a folder in every pillar, or one file, and
 - [x] 1.2 `context/world/the-correction-loss.md`, one shared file
 - [x] 1.3 `runbook/running-things-on-the-cluster/training-a-correction-adapter.md`, one recipe, a row per flag
 - [x] 1.4 `environment/hpc/throughput.md`, one added memory-per-rank row, no new file
-- [x] 1.5 `artifacts/results/designing-the-correction-loss/<NN-name>/`, folder per variation, new figures only
+- [x] 1.5 `1-lora-correction/artifacts/results/designing-the-correction-loss/<NN-name>/`, folder per variation, new figures only
 - [x] 1.6 `1-lora-correction/plans/09-designing-the-correction-loss/`, one scope, a plan file per variation
 
 **The numbers and names, fixed here.**
@@ -126,7 +126,7 @@ The question: does each variation get a folder in every pillar, or one file, and
 | 07 | V7 | keeping-single-concept-renders-unchanged |
 
 **The figure seam, accepted deliberately.** The eight existing V0 figures stay in
-`artifacts/results/does-training-longer-help-the-pooled-lora/`. Only new figures go to the new
+`1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-training-longer-help-the-pooled-lora/`. Only new figures go to the new
 folder. Moving the eight would break two report files, a runbook anchor and an artifact card, and
 `00`'s page links both homes.
 

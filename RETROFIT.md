@@ -121,14 +121,14 @@ is invented.
 
 | Now | Becomes | Why the old name fails | Grounded in |
 |---|---|---|---|
-| `artifacts/rung1-overfit/lora/` | `artifacts/results/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/` | `rung1` is a private label; `lora` names the technique, not what varied | the folder holds one pair, one seed |
-| `artifacts/rung2-survive-noise/cross_seed/` | `artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds/` | says the same thing twice, once in words that mean nothing | the level below already carried the axis |
+| `artifacts/rung1-overfit/lora/` | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/` | `rung1` is a private label; `lora` names the technique, not what varied | the folder holds one pair, one seed |
+| `artifacts/rung2-survive-noise/cross_seed/` | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds/` | says the same thing twice, once in words that mean nothing | the level below already carried the axis |
 | `outputs/group_a_failure/` | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/correction-outside-the-unet/` | `group_a` is a private label and `failure` states the claim | `docs/results-archive/group-a-failure.md`: "a standalone network... SDXL frozen end-to-end" |
 | `outputs/animals_compose_transfer/` | `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/` | names the mechanism, not the question | `fail_rate.md`: 16 animal pairs with train, control and reference roles |
 | `outputs/residual_diagnostics/` | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/residual-between-mono-and-poe/` | "diagnostics" of what, against what | `docs/results-archive/residual-diagnostics.md`: "r_t = ε̃_Mono − ε̃_PoE" |
 | `outputs/conditioning_window/` | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-without-lora/` | collides with `interaction_term/window`, and nothing says which is the baseline | `docs/results-archive/conditioning-window.md`: "the no-LoRA baseline" |
 | `outputs/conditioning_window_lora/` | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-with-lora/` | same collision, other half | its paired half |
-| `outputs/poe/` | `artifacts/results/poe-blends-instead-of-composing/poe-baseline-samples/` | three letters that could mean the whole project | `outputs/INDEX.md`: "λ=0 exemplars for F1" |
+| `outputs/poe/` | `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/poe-blends-instead-of-composing/poe-baseline-samples/` | three letters that could mean the whole project | `outputs/INDEX.md`: "λ=0 exemplars for F1" |
 | `outputs/compose_scorer/` | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/` | reads as the scorer's code, not its evidence | `outputs/INDEX.md`: "the contract `scorer_validated.json`" |
 
 **On the mount, seven more names are owed and four are already fine.**
@@ -182,9 +182,9 @@ both, so one name means one thing.
 
 ```
 artifacts/rung1-overfit/lora/a_cat__x__a_dog/
-  →  artifacts/results/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/a_cat__x__a_dog/
+  →  1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed/a_cat__x__a_dog/
 outputs/poe/
-  →  artifacts/results/poe-blends-instead-of-composing/poe-baseline-samples/
+  →  3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/poe-blends-instead-of-composing/poe-baseline-samples/
 /datasets/.../outputs/interaction_term/
   →  /datasets/.../artifacts/results/   (same relative path on both filesystems)
 ```

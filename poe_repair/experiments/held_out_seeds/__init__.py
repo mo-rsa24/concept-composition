@@ -7,5 +7,5 @@ corrections that pooled training merely averages. Plan:
 
 This package is a *sibling* of ``poe_repair.experiments.one_pair_one_seed``. The
 existing single-seed LoRA training path (and its reference artifact at
-``artifacts/results/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/``) is untouched.
+``1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/``) is untouched.
 """

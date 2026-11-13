@@ -45,7 +45,7 @@ log = logging.getLogger("noise_trajectory_search")
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search")
 DEFAULT_CACHE = Path("/datasets/mmolefe/poe_repair_min/outputs/training_cache")
-CLOUD_FEATS = REPO_ROOT / "artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy"
+CLOUD_FEATS = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy"
 PROMPTS = {
     "a_cat__x__a_dog": ("a cat", "a dog", "a cat and a dog", "cat", "dog"),
     "a_butterfly__x__a_flower_meadow": ("a butterfly", "a flower meadow", "a butterfly and a flower meadow",

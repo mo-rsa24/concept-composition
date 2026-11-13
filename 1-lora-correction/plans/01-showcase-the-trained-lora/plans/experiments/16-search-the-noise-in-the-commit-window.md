@@ -94,7 +94,7 @@
 
 **Buys.** The one review question, four figures, and one row on the showcase wall if supported.
 
-**Prerequisites.** The rank-32 checkpoint at step 30050; the training cache's step-0 latents; the landing finding's 48 × 384 DINOv2 features (`artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy`); ImageReward's weights in `~/.cache/ImageReward`; GroundingDINO in the Hugging Face cache.
+**Prerequisites.** The rank-32 checkpoint at step 30050; the training cache's step-0 latents; the landing finding's 48 × 384 DINOv2 features (`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy`); ImageReward's weights in `~/.cache/ImageReward`; GroundingDINO in the Hugging Face cache.
 
 **This is not a fourth selection-only baseline.** The three selection-only runs asked whether plain PoE proposes a composing state to select; this plan puts the correction in the proposal and asks a fidelity question about a state already composing. A support here says nothing about plain PoE.
 
@@ -233,7 +233,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 
 ◀ **Needs: [task 2.2](#2--render-score-and-draw-the-full-run)** done.
 
-- [x] **3.1 Copy the sheet, strip, the four figures, `summary.json` and `verdict.json`** into `artifacts/results/does-searching-the-noise-in-the-commit-window-sharpen-the-fix/` and write the card (`README.md`) with an entry per item.
+- [x] **3.1 Copy the sheet, strip, the four figures, `summary.json` and `verdict.json`** into `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-searching-the-noise-in-the-commit-window-sharpen-the-fix/` and write the card (`README.md`) with an entry per item.
 - [x] **3.2 Answer the review file**, then the close-out in [section 6](#6--close-out).
 
 ▶ **Next: [instruction 5.1](#5--judge-the-sheet)**.
@@ -275,7 +275,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-searching-the-noise-in-the-commit-window-sharpen-the-fix/`, with its card entry in that folder's `README.md`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-searching-the-noise-in-the-commit-window-sharpen-the-fix/`, with its card entry in that folder's `README.md`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|

@@ -27,11 +27,11 @@ Usage
 
     python -m poe_repair.experiments.held_out_seeds.trajectory_diagram \
         collect --seed 42 \
-        --out-dir artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/trajectory_diagram
+        --out-dir 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/trajectory_diagram
 
     python -m poe_repair.experiments.held_out_seeds.trajectory_diagram \
         plot \
-        --in-dir artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/trajectory_diagram/seed_42 \
+        --in-dir 1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/trajectory_diagram/seed_42 \
         --steps 0,5,25,45
 """
 

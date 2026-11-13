@@ -152,7 +152,7 @@ XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/e
 ✅ **The both-ness means print and three files land.** Real output, 2026-09-05:
 ```
 both-ness by condition (mean over seeds): {'solo_a': -0.0, 'solo_b': 0.0, 'joint': 0.523, 'poe': 0.205, 'lora_1.0': 0.411, 'lora_1.2': 0.42}
-wrote /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.png/.json
+wrote /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.png/.json
 ```
 Beside them: `cat-x-dog-in-dino-space-cloud-axes.png` and `cat-x-dog-in-dino-space-dino-feats.npy`.
 About two minutes, most of it DINOv2 on the CPU.

@@ -89,7 +89,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 
 | When (2026-09-05) | What | Where it landed | Outcome |
 |---|---|---|---|
-| 16:30 | rung 2, the projection over 400 cached steps, CPU on mscluster85 | `artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.{png,json}` | 9 seconds; verdict inconclusive |
+| 16:30 | rung 2, the projection over 400 cached steps, CPU on mscluster85 | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/orthogonal-share-over-steps.{png,json}` | 9 seconds; verdict inconclusive |
 | 16:35 | rung 4, the tracks from the stored frame embeddings, CPU | `.../track-kinetic-energy.png`, `.../which-animal-over-steps.png`, `.../track-energy-and-which-animal.json` | first figure drew energy against a floor thirty times smaller, unreadable; redrawn per condition with the floor as a tick, and a from-step-10 panel added |
 | 16:45 | rungs 1 and 3 chained with `nohup`, first launch | nothing | the foreground CUDA check stalled the launching shell past its timeout; the chain script was never written |
 | 16:50 to 16:51 | rung 1, seed 15 decoded on mscluster85 device 0 (RTX 3090, shared with another session's process at 7.5 GB), PID 257033 | `/datasets/mmolefe/poe_repair_min/outputs/showcase/what_the_correction_is_made_of/tweedie/seed_15/`, `.../seed-15-experts-tweedie-strip.png`, `.../same-place-share.json` | 35 decodes in 51 seconds |
@@ -100,7 +100,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-the-two-experts-draw-different-animals-in-the-same-place) ➡️
 
-![Orthogonal share of the correction's squared norm against denoising step, mean and min-to-max band over seeds 9 to 16, with the joint direction's share and the norms below](../../../artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.png)
+![Orthogonal share of the correction's squared norm against denoising step, mean and min-to-max band over seeds 9 to 16, with the joint direction's share and the norms below](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/orthogonal-share-over-steps.png)
 *What to notice: the pink line sits between the two bars through the shaded window, peaks at
 step 5, and drops under 0.1 by step 20; the purple line in the middle panel climbs to 0.7 and
 stays; in the bottom panel the correction's norm grows sixfold while its orthogonal part grows
@@ -127,7 +127,7 @@ about 256 throughout. The PoE prediction rebuilt from the raw vectors projects w
 
 Navigation: ⬅️ [Previous](#1-a-third-of-the-early-correction-is-out-of-the-experts-reach-and-the-rest-is-mostly-damping) | 📋 [TOC](#table-of-contents) | [Next](#3-the-adapter-learned-the-damping-and-half-of-the-new-direction) ➡️
 
-![Seed 15: the decoded running estimate under the cat expert, the dog expert, PoE, the joint prompt and the empty prompt at the same cached state, seven steps, with the experts' per-position disagreement map](../../../artifacts/results/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png)
+![Seed 15: the decoded running estimate under the cat expert, the dog expert, PoE, the joint prompt and the empty prompt at the same cached state, seven steps, with the experts' per-position disagreement map](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/seed-15-experts-tweedie-strip.png)
 *What to notice: at steps 5 and 10 the first row is a cat and the second a dog with the head in
 the same place; the third row is a cat with a dog's muzzle at step 10 and a dog at step 30; the
 fifth row, the empty prompt, is already a dog at step 20; the heat map is brightest on the eyes,
@@ -150,13 +150,13 @@ at step 30. From `same-place-share.json`, fields `summary.same_place_share_mean_
 
 Navigation: ⬅️ [Previous](#2-the-two-experts-draw-different-animals-in-the-same-place) | 📋 [TOC](#table-of-contents) | [Next](#4-runs-on-the-product-keep-moving-and-the-plain-one-keeps-changing-animal) ➡️
 
-![The adapter's orthogonal share beside the correction's, and the cosines between their orthogonal parts, in-span parts and whole vectors, against step](../../../artifacts/results/what-the-correction-is-made-of/adapter-span-share-over-steps.png)
+![The adapter's orthogonal share beside the correction's, and the cosines between their orthogonal parts, in-span parts and whole vectors, against step](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/adapter-span-share-over-steps.png)
 *What to notice: the blue line runs under the pink one through the shaded window and joins it
 after step 15; the purple cosine never leaves 0.9; the dark red cosine starts above 0.6 and
 settles near 0.35.*
 📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-3-the-adapters-output-projected-the-same-way).
 
-![Seed 15: per-position norm of the adapter's output above the correction's at seven steps](../../../artifacts/results/what-the-correction-is-made-of/seed-15-adapter-vs-correction-norm-maps.png)
+![Seed 15: per-position norm of the adapter's output above the correction's at seven steps](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/seed-15-adapter-vs-correction-norm-maps.png)
 *What to notice: both rows light the eyes, muzzle and ears at steps 20 and 30 and are near-dark
 before step 10.*
 📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-4-seed-15-where-the-adapter-and-the-correction-act).
@@ -178,12 +178,12 @@ between the adapter-off PoE prediction computed live and the cached one, minimum
 
 Navigation: ⬅️ [Previous](#3-the-adapter-learned-the-damping-and-half-of-the-new-direction) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Kinetic energy of each run's embedded running estimate, one point per run by condition, with the floor as a tick under each; all segments on the left, from step 10 on the right](../../../artifacts/results/what-the-correction-is-made-of/track-kinetic-energy.png)
+![Kinetic energy of each run's embedded running estimate, one point per run by condition, with the floor as a tick under each; all segments on the left, from step 10 on the right](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/track-kinetic-energy.png)
 *What to notice: on the right panel the three left-hand conditions sit under 1 and the three
 product-based conditions sit near 3, with every grey tick near 0.1.*
 📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-5-how-far-each-runs-running-estimate-travels).
 
-![Which-animal score of each run's running estimate against saved step, thin line per seed, thick mean per condition](../../../artifacts/results/what-the-correction-is-made-of/which-animal-over-steps.png)
+![Which-animal score of each run's running estimate against saved step, thin line per seed, thick mean per condition](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/which-animal-over-steps.png)
 *What to notice: orange and green separate by step 15 and hold; the black thin lines cross zero
 to the end; seed 15's dashed black line is above +0.2 at step 20 and below −0.2 from step 35.*
 📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-6-which-animal-each-run-reads-as-step-by-step).
@@ -201,7 +201,7 @@ passes through two near-zero frames and counts under the loose rule only. From
 `track-energy-and-which-animal.json`, fields `summary.<condition>.kinetic_energy_from_step_10_median`,
 `summary.<condition>.runs_with_a_real_flip_after_step_10` and `rows`, written by
 `1-lora-correction/scripts/showcase/correction_track_energy.py` from
-`artifacts/results/where-does-each-condition-land/frames-dino-feats.npz`.
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz`.
 
 ## What this cannot tell you
 
@@ -233,14 +233,14 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 
 | What | Source | Mark |
 |---|---|---|
-| Orthogonal shares, coefficients, norms, cosines, the verdict | `artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.json`, read 2026-09-05 | verified |
+| Orthogonal shares, coefficients, norms, cosines, the verdict | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/orthogonal-share-over-steps.json`, read 2026-09-05 | verified |
 | Same-place shares and cosines | `.../same-place-share.json`, read 2026-09-05 | verified |
 | The adapter's shares and cosines, the sanity cosine | `.../adapter-span-share.json`, read 2026-09-05 | verified |
 | Kinetic energies, flips, which-animal scores | `.../track-energy-and-which-animal.json`, read 2026-09-05 | verified |
 | The decoded estimates | `/datasets/mmolefe/poe_repair_min/outputs/showcase/what_the_correction_is_made_of/tweedie/seed_15/`, 35 PNGs, rendered 2026-09-05 on mscluster85 | verified |
 | The cache | `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_<9..16>/residuals/`, 50 steps each, the rule read off `3-understanding-compositionality/scripts/build_training_cache.py` | verified |
 | The adapter | rank 32, alpha 32, step 30050, `/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt` | verified |
-| The frames' embeddings | `artifacts/results/where-does-each-condition-land/frames-dino-feats.npz` | verified |
+| The frames' embeddings | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz` | verified |
 | The W&B run | `yb933cr6` in `prime_lab/poe-repair-animals-compose` | verified |
 | The run | tasks **Write `correction_span_common.py`**, **Write `correction_tweedie_pictures.py`**, **Write `correction_adapter_span_share.py`** and **Write `correction_track_energy.py`** in [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md); verdict in [its review file](../../plans/05-when-does-the-outcome-lock-in/review/07-what-the-correction-is-made-of.md) | verified |
 | Regenerate with | the four scripts under `1-lora-correction/scripts/showcase/` named in [the card](../../artifacts/results/what-the-correction-is-made-of/README.md), rungs 1 and 3 on a device with CUDA confirmed; then `correction_log_wandb.py` | |

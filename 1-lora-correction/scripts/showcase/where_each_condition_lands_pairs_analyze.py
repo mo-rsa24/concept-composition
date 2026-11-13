@@ -17,7 +17,7 @@ commit-step comparison, the pre-named exception, and the verdict per the plan's 
   null if the bands overlap on BAND_OVERLAP_NULL_MIN or more counted pairs, inconclusive between.
 Pairs whose two single-animal centroids sit closer than MIN_SOLO_GAP are excluded and named.
 
-Writes to artifacts/results/where-does-each-condition-land/pairs/:
+Writes to 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/:
     <pair>/cloud-axes.png, <pair>/contact-sheet.png, <pair>/both-ness-over-steps.png, <pair>/sidecar.json
     bands-across-pairs.png, verdict.json
 """
@@ -46,7 +46,7 @@ from poe_repair.experiments.compose_scorer_validation.detection_scorer import ( 
 
 PAIRS_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/pairs")
 PAIR_PROMPTS = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/pair_prompts.json")
-OUT = REPO_ROOT / "artifacts/results/where-does-each-condition-land/pairs"
+OUT = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs"
 SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 REFS = ("solo_a", "solo_b", "joint")
 ARMS = ("solo_a", "solo_b", "joint", "poe", "lora_1.2")

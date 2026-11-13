@@ -109,12 +109,12 @@ INTERNAL_FORCE_FAILURE = "outputs/internal_force_failure"  # declared, never pro
 ATTENTION_MECHANISM = "outputs/attn_mechanism"
 
 # Baselines and instruments
-POE_BASELINE_SAMPLES = "artifacts/results/poe-blends-instead-of-composing/poe-baseline-samples"
+POE_BASELINE_SAMPLES = "3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/poe-blends-instead-of-composing/poe-baseline-samples"
 COMPOSE_SCORER_VALIDATION = "1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation"
 
 # The pooled-adapter runs. The `rung` level is dropped: the level below it already
 # carried the axis, and the number carried nothing.
-ONE_PAIR_ONE_SEED = "artifacts/results/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed"
+ONE_PAIR_ONE_SEED = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed"
 
 # An alias farm, not data of its own: <pair>/seed_42/results symlinks to wherever
 # that pair's real run directory actually is, since the name of that directory is
@@ -123,7 +123,7 @@ ONE_PAIR_ONE_SEED = "artifacts/results/can-lora-learn-a-residual-that-corrects-p
 # through here so it never needs to know which shape a given pair used. Was
 # outputs/lora/ before 2026-08-24; moved because outputs/ no longer exists at the
 # repo root, not because what it does changed.
-RESULTS_BY_PAIR = "artifacts/results/can-lora-learn-a-residual-that-corrects-poe/results-by-pair"
+RESULTS_BY_PAIR = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/results-by-pair"
 
 # Not renamed on 2026-08-24 despite the walk's verdict: the mount holds a second,
 # disjoint copy of this family (a four-seed pooled-run set the repository's copy does
@@ -133,12 +133,12 @@ RESULTS_BY_PAIR = "artifacts/results/can-lora-learn-a-residual-that-corrects-poe
 # the mount's four-seed runs invisible through this constant. Still open: someone
 # with mount write access renames `/datasets/mmolefe/poe_repair_min/artifacts/
 # rung2-survive-noise` to match, then this becomes
-# "artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds".
+# "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds".
 HELD_OUT_SEEDS = "artifacts/rung2-survive-noise/cross_seed"
 # Moved 2026-08-24 out of outputs/cross_seed_lora_pooling/, which no longer exists.
 # Its symlinks are absolute and point into HELD_OUT_SEEDS above, so the move did not
 # touch what it indexes.
-HELD_OUT_SEEDS_INDEX = "artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index"
+HELD_OUT_SEEDS_INDEX = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index"
 
 # Cut by group, so out of scope for the animal-pair work and left where they are.
 WITHIN_GROUP = "artifacts/rung3-group-wise/cross_pair/within_group"

@@ -12,7 +12,7 @@ import json, os, sys
 import yaml
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"
-G = "artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from"
+G = "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from"
 OUT = "artifacts/_shared/cross_pair_pool_configs"
 HELDOUT = ["a_cat__x__a_dog", "an_elephant__x__a_penguin"]
 

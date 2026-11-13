@@ -53,7 +53,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
 | jobs 50334 and 50335 | tests the claim | 2026-09-06 03:01, `bigbatch` | 1 second each | nothing | died on `mscluster65`, whose GPU is dead; the exclusion list was extended and the node table updated |
-| job 50338, `all` (identity check, 144 renders, scoring) | tests the claim | 2026-09-06 03:05, `mscluster46` (RTX 3090), `co3`, log `logs/stoch_sweep-50338.out` | about 2 GPU-hours plus 10 minutes of scoring | `/datasets/mmolefe/poe_repair_min/outputs/showcase/stochastic_sampler_sweep/` (renders, `results.json`, sheets), `artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render/` (the figure, the sheets, `cell-table.md`, `results.json` without the feature vectors), W&B run `stochastic_sampler_sweep_r32_030050` | running |
+| job 50338, `all` (identity check, 144 renders, scoring) | tests the claim | 2026-09-06 03:05, `mscluster46` (RTX 3090), `co3`, log `logs/stoch_sweep-50338.out` | about 2 GPU-hours plus 10 minutes of scoring | `/datasets/mmolefe/poe_repair_min/outputs/showcase/stochastic_sampler_sweep/` (renders, `results.json`, sheets), `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-a-stochastic-sampler-sharpen-the-corrected-render/` (the figure, the sheets, `cell-table.md`, `results.json` without the feature vectors), W&B run `stochastic_sampler_sweep_r32_030050` | running |
 
 ## The question written before the run
 

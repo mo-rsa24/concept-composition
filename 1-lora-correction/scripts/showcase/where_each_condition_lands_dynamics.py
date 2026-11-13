@@ -5,7 +5,7 @@ Reads 1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.
 per-saved-step (x, y) on the cloud axes written by
 where_each_condition_lands_frames_embed.py) and the decoded frames on /datasets.
 
-Writes into artifacts/results/where-does-each-condition-land/:
+Writes into 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/:
     both-ness-over-denoising-steps.png   y = both-ness (projection toward the joint-prompt
                                          centroid, DINOv2 cosine units), x = denoising step;
                                          one thin line per seed, one thick line per condition
@@ -32,7 +32,7 @@ from PIL import Image, ImageDraw
 
 REPO = Path(__file__).resolve().parents[3]
 DATA = REPO / "1-lora-correction/artifacts/scenes/where-each-condition-lands/public/data.json"
-OUT = REPO / "artifacts/results/where-does-each-condition-land"
+OUT = REPO / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land"
 FRAMES = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames")
 
 COMMIT_TOL = 0.10      # both-ness units; the run has committed once it stays this close to its end

@@ -204,12 +204,12 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ### 1. 🧪 Render and score the sweep
 
-◀ **Needs:** the checkpoint `phase1_r32_100k/checkpoints/lora_step_030050.pt`, the training cache, and the cloud-axes file `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy` (all exist).
+◀ **Needs:** the checkpoint `phase1_r32_100k/checkpoints/lora_step_030050.pt`, the training cache, and the cloud-axes file `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy` (all exist).
 
 - [x] **1.1 Submit the job.** `sbatch 1-lora-correction/scripts/showcase/stochastic_sampler_sweep.sbatch all` from the repo root. The job renders then scores in one process. Record the job id, node and W&B run id in the review file's Runs table.
   - Done when: `squeue -u mmolefe` shows the job running and `logs/stoch_sweep-<job>.out` prints the identity check line with `pass=True`.
 - [ ] **1.2 Harvest.** When the job leaves the queue, read `logs/stoch_sweep-<job>.out`: the last lines print `plan verdict:` and the W&B url. If the render died mid-way, resubmit with `all`; the manifest skips finished cells.
-  - Done when: `artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render/results.json` exists with 144 rows and the sheets and figure sit beside it.
+  - Done when: `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-a-stochastic-sampler-sharpen-the-corrected-render/results.json` exists with 144 rows and the sheets and figure sit beside it.
 - [ ] **1.3 Write the card.** `README.md` in that results folder, one entry per figure and sheet, with how each was made.
 
 ▶ **Next: [instruction 2.1](#2--judge-the-cells)**.
@@ -224,7 +224,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ◀ **Needs: [task 1.2](#1--render-and-score-the-sweep)** done.
 
-2.1 **Open the across-eta sheet** `sheet-a_cat__x__a_dog-across-eta.png` under `artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render/` (or the W&B run's Media tab). Rows are seeds 9 to 16; columns Mono at eta 0, then the corrected run at eta 0, 0.5 and 1. Write one word per seed and eta into the review file (crisper, softer, same, animals lost) before reading the numbers.
+2.1 **Open the across-eta sheet** `sheet-a_cat__x__a_dog-across-eta.png` under `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-a-stochastic-sampler-sharpen-the-corrected-render/` (or the W&B run's Media tab). Rows are seeds 9 to 16; columns Mono at eta 0, then the corrected run at eta 0, 0.5 and 1. Write one word per seed and eta into the review file (crisper, softer, same, animals lost) before reading the numbers.
 
 2.2 **Open the per-eta sheets** `sheet-a_cat__x__a_dog-eta0.5.png` and `-eta1.png`. Columns Mono, plain PoE, corrected at eta 0, corrected at this eta, all four at the same eta. ✅ the last column has two animals on the rows the third does and looks nearer the first; ❌ animals vanish or the last column is as soft as the third.
 
@@ -255,7 +255,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-a-stochastic-sampler-sharpen-the-corrected-render/`, with its card entry in that folder's `README.md`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-a-stochastic-sampler-sharpen-the-corrected-render/`, with its card entry in that folder's `README.md`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|

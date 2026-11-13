@@ -163,7 +163,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| How the result reads against the in-span share (selection can only reach what the proposal spans) | rung 2 of [what the correction is made of](../../05-when-does-the-outcome-lock-in/review/07-what-the-correction-is-made-of.md), which writes `artifacts/results/what-the-correction-is-made-of/orthogonal-share-over-steps.json`; not started as of 2026-09-05 17:10 | the sentence in the paper's corrector section |
+| How the result reads against the in-span share (selection can only reach what the proposal spans) | rung 2 of [what the correction is made of](../../05-when-does-the-outcome-lock-in/review/07-what-the-correction-is-made-of.md), which writes `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/orthogonal-share-over-steps.json`; not started as of 2026-09-05 17:10 | the sentence in the paper's corrector section |
 
 ## Next step
 

@@ -212,7 +212,7 @@ For Claude to execute.
 - [ ] 1.2 **Score them**
   - Compose count by the validated instance-count scorer, and DINOv2 drift against the joint-prompt render
   - `XFORMERS_DISABLED=1` for the CPU DINOv2 pass
-  - Produces: `artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/00b-per-checkpoint.json`
+  - Produces: `1-lora-correction/artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/00b-per-checkpoint.json`
 - [ ] 1.3 **Run the following prompt**, once per run id, for the mechanism numbers:
   ```
   /analyze-run 72as6yk3
@@ -293,7 +293,7 @@ For you to follow manually.
 ◀ **Needs: [task 2.1](#2--prepare-the-blind-read)** done, so the strips exist and are shuffled.
 
 - [ ] 4.1 **Open the eight strips one at a time, without opening the shuffle key**
-  - Path: `artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/blind/`
+  - Path: `1-lora-correction/artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/blind/`
   - For each panel record one of three labels: **clean** (two separate animals, one of each, no blending), **unclear**, **not two**
   - Write them into a table beside the panel ids
   - ✅ All eight seeds labelled before the key is opened: the read is valid
@@ -348,7 +348,7 @@ The review questions are in [the review file](../../review/03-the-v0a-read.md).
 | `shuffle-key.json` | — | the mapping from panel id to condition, opened only after the read | task 2.1 | ⏳ |
 | `drift-and-fit-four-conditions.png` | subject | drift and fit loss against training step, one line per condition | task 1.3 | ⏳ |
 
-**Organization workflow.** Filed under `artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/` with its card entry.
+**Organization workflow.** Filed under `1-lora-correction/artifacts/results/designing-the-correction-loss/00b-penalising-the-empty-branch-for-moving/` with its card entry.
 
 ---
 

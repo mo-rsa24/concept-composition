@@ -309,8 +309,8 @@ prior toward a photographed scene with a person in it is the first thing to chec
 
 **Solution:** None yet. Until there is one, a figure using a broader-pool adapter is read by eye
 before it is used, because no scorer in this repository reports an extra person. Recorded 2026-09-20
-from [the fourteen-adapter sheet](../artifacts/results/composing-unseen-pairs/README.md) at
-`artifacts/results/composing-unseen-pairs/`, which renders one seed through every adapter this
+from [the fourteen-adapter sheet](../1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/README.md) at
+`1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/`, which renders one seed through every adapter this
 project has trained.
 
 **Environment reference:** none; this is a model behaviour rather than a system fact.

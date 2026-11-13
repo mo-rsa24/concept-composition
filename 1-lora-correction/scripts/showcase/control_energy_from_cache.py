@@ -33,7 +33,7 @@ from poe_repair.experiments.one_pair_one_seed.trainer import control_energy_weig
 
 MODEL_ID = "stabilityai/stable-diffusion-xl-base-1.0"
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/energy_penalty")
-RESULTS = REPO_ROOT / "artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix"
+RESULTS = REPO_ROOT / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-charging-the-adapter-for-its-energy-sharpen-the-fix"
 EARLY = range(0, 11)          # the window the composition is decided in (steps 0 to 10)
 LATE = range(20, 50)
 

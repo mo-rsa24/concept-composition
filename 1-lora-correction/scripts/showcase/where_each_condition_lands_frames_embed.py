@@ -16,7 +16,7 @@ Writes into the scene folder:
                                      endpoint hulls, per-frame both-ness, axis provenance
     public/frames/<cond>/seed_<n>/step_<kk>.png   160 px thumbnails
 and beside the endpoint figure:
-    artifacts/results/where-does-each-condition-land/frames-dino-feats.npz
+    1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
 
 FRAMES_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames")
 SCENE = REPO_ROOT / "1-lora-correction/artifacts/scenes/where-each-condition-lands"
-RESULTS = REPO_ROOT / "artifacts/results/where-does-each-condition-land"
+RESULTS = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land"
 THUMB = 160
 
 CONDITIONS = {

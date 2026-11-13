@@ -55,10 +55,10 @@ sys.path.insert(0, str(REPO_ROOT / "1-lora-correction/scripts/showcase"))
 
 # ----------------------------------------------------------------------------- constants
 OUT_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/correct_early_then_clean_up")
-RESULTS_DIR = REPO_ROOT / "artifacts/results/does-correcting-early-then-cleaning-up-restore-sharpness"
+RESULTS_DIR = REPO_ROOT / "1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-correcting-early-then-cleaning-up-restore-sharpness"
 FRAMES_ROOT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands/frames")
 TRAINING_CACHE = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache")
-CLOUD_FEATS = REPO_ROOT / "artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy"
+CLOUD_FEATS = REPO_ROOT / "1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy"
 CHECKPOINT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_030050.pt")
 LORA_RANK = 32
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"

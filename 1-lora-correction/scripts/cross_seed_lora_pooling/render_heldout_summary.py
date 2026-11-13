@@ -13,7 +13,7 @@ Inputs are discovered by scanning for ``manifest.json`` files under
 directories. Both layouts are supported:
 
     <run-dir>/samples/heldout_pair/<eval_pair>/final/manifest.json
-    artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/<train_pair>/heldout_pair/<eval_pair>/manifest.json
+    1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/<train_pair>/heldout_pair/<eval_pair>/manifest.json
 
 For each manifest:
   - PoE and Mono pulled from

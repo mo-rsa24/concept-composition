@@ -293,7 +293,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 - The training cache at `/datasets/mmolefe/poe_repair_min/outputs/training_cache/heldout/` with
   `embeddings.pt` per cell: cat × dog seeds 9 to 16, butterfly × meadow seeds 9 to 12.
 - The landing finding's saved features at
-  `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy` (48
+  `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy` (48
   rows, six conditions by seeds 9 to 16), which fix the both-ness axes.
 - DINOv2 loads through `torch.hub` from the shared home cache; a node without network may fail
   there, which is what `--bothness-only` on the session node is for.
@@ -336,7 +336,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
       plain PoE and the rank-32 λ 1.2 run on cat × dog seeds 9 to 16, from
       `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/results.json`, and their
       both-ness from
-      `artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`.
+      `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`.
   - Done when: the row names the source file and the field each number came from.
 - [x] **1.3** Write the falsification criterion with its numbers into the review file and the
       constants into `search.py` before anything runs.

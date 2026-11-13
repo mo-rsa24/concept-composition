@@ -13,7 +13,7 @@ orthogonal part against r_t's orthogonal part; cosine of the in-span parts; over
 norm ratio against r_t; and the sanity cosine between the live adapter-off PoE prediction and
 the cached one (must be > 0.99, else the cache and this build disagree).
 
-Writes into artifacts/results/what-the-correction-is-made-of/:
+Writes into 1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/:
     adapter-span-share-over-steps.png     (a) orthogonal share of delta_hat and of r_t against
                                           step; (b) cos(delta_hat_orth, r_orth) and
                                           cos(delta_hat, r_t) against step; mean and min-max band

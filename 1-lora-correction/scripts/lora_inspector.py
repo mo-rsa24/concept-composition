@@ -279,7 +279,7 @@ INDEX_HTML = r"""
   <summary>diagnostics</summary>
   <div class="body">
     Source: <code>{{ results_root }}</code><br>
-    Manifest: <code>artifacts/results/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/inspector_manifest.json</code> &middot;
+    Manifest: <code>1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/results-by-pair/a_cat__x__a_dog/seed_42/results/inspector_manifest.json</code> &middot;
     {{ epochs|length }} epochs &times; {{ lambdas|length }} &lambda; values rendered.
   </div>
 </details>

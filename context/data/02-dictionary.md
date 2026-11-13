@@ -277,7 +277,7 @@ joint prompt "a cat and a dog" ends up. `off_plane_norm` is the length of what i
 embedding after both coordinates are removed.
 
 **Example** `both_ness = 0.4714` (example, PoE + 1.2 × correction, seed 12, from
-`artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, `points[].cloud_axes`)
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-in-dino-space.json`, `points[].cloud_axes`)
 
 **Type and shape** three floats per render; `which_animal` roughly `-0.6` to `0.6`, `both_ness`
 roughly `-0.2` to `0.7`, `off_plane_norm` `0` to `1`, all in DINOv2 cosine units (the embedding is
@@ -307,7 +307,7 @@ settled. `fork_step` is the step at which the PoE run and the corrected run of t
 first sit visibly apart in the plane.
 
 **Example** `commit_step = 15` (example, PoE + 1.2 × correction, median over seeds 9 to 16, from
-`artifacts/results/where-does-each-condition-land/commit-and-fork-steps.json`, `summary`)
+`1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/commit-and-fork-steps.json`, `summary`)
 
 **Type and shape** integers in `0` to `50`, one per (run, seed); only the 14 saved steps
 (`0, 2, 5, 8, 10, 15, 20, 25, 30, 35, 40, 45, 49, 50`) are possible values

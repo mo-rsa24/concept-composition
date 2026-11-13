@@ -15,7 +15,7 @@ Defaults to running everything except Task C (per-seed ceiling), which
 is its own multi-GPU run.
 
 All artefacts land under
-``artifacts/results/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/<pair_slug>/``
+``1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/held-out-seeds-index/<pair_slug>/``
 so pairs don't collide.
 
 Examples

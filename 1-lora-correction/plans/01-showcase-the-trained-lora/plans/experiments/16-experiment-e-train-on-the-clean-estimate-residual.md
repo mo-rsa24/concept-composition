@@ -270,7 +270,7 @@ Serves goal 4 (the softness question measured rather than argued) and objective 
 
 ⬅️ [Previous](#what-has-to-pass-before-this-runs) | 📋 [TOC](#table-of-contents) | [Next](#orchestration-keeping-catalogs-and-plan-files-in-sync) ➡️
 
-Every figure below lands in `artifacts/results/does-training-on-the-clean-estimate-residual-sharpen-the-fix/`, with its card entry in that folder's `README.md`, copied there by the readout from `/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_e_x0_loss/`.
+Every figure below lands in `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-training-on-the-clean-estimate-residual-sharpen-the-fix/`, with its card entry in that folder's `README.md`, copied there by the readout from `/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_e_x0_loss/`.
 
 | Figure | What is plotted | What it argues | What it may not claim | File |
 |---|---|---|---|---|
