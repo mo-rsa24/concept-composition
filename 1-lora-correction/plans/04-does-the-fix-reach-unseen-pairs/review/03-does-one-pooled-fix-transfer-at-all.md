@@ -1,6 +1,6 @@
 # 🧪 Review: does one pooled adapter transfer at all?
 
-**Answered yes: held-out 0.742 at step 60000 where plain PoE composes near zero, flat to step 100000.** This file judges
+**Being rescored (job 86591): every rate below from step 20000 on mixes the renders with their three-panel comparison strips, whose target panel always holds two animals, so none of those numbers is citable until the rescore lands.** This file judges
 [the plan that trains one pooled adapter](../plans/hypothesis/03-does-one-pooled-fix-transfer-at-all.md).
 It exists to answer one cheap question before fifteen expensive runs are paid for: does the fix
 reach unseen pairs at all? It does, so the fifteen runs are warranted.
@@ -129,7 +129,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
-**Go.** Step 11's fifteen training runs may launch. The backing number: one pooled rank-8 adapter
+**On hold until the rescore lands (job 86591).** The number below includes the comparison strips. The backing number as first written: one pooled rank-8 adapter
 composes 0.742 of held-out renders at step 60000 (n=128, 8 unseen pairs, every pair at 0.562 or
 above), scored by the instance-count scorer with its 25% size filter, where plain PoE composes near
 zero. The rate is flat from step 20000 to 100000, so training length is not what the fifteen runs
