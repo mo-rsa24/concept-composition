@@ -37,6 +37,14 @@ The work splits into five threads of code, outputs, and checkpoints:
 Reference code from published papers (AAE, CO3, FOCUS, P2P, reduce-reuse-recycle) sits untouched
 in `composition/`.
 
+## Where this repo sits in the PhD
+
+<a href="artifacts/notes/the-phd-layout/the-phd-layout.png"><img src="artifacts/notes/the-phd-layout/the-phd-layout.png" width="800" alt="The PhD folder sorted by kind: two research portfolios with their projects, writing, replications with the published-methods hub, cluster bring-up, and the archive"></a>
+
+This repo is one of two research portfolios in the PhD folder. Other people's code lives beside it
+in `/home/molef/PhD/replications/`, and the [PhD organogram](/home/molef/PhD/ORGANOGRAM.md) says
+what belongs where.
+
 ## Setup
 
 ```bash
