@@ -55,7 +55,7 @@ for m in $METHODS; do
     joint) run joint "bench_joint/*/joint.png" env POE_REPO="$REPO" REVIEW_BASELINE_OUT="$SCR" \
              "$PY" "$BENCH/review_bench_joint.py" --set geneval_two --shard 0/99 ;;
     poe)   run poe "bench_poe/*/poe.png" env POE_REPO="$REPO" CONCEPT_PAIR_OUT="$SCR/bench_poe/geneval_two" \
-             "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column poe --pairs "$PAIR" --seeds 9 10 ;;
+             "$PY" scripts/shared/concept_pair_sheet.py --column poe --pairs "$PAIR" --seeds 9 10 ;;
     ours)  run ours "bench_ours/*/ours_*.png" env POE_REPO="$REPO" FIGURE_CANDIDATES_OUT="$SCR/bench_ours/geneval_two" \
              "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "$PAIR" --seeds 9 10 \
              --checkpoint "$CKPT" --window 50 --tag "$TAG" ;;

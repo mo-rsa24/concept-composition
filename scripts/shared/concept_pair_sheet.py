@@ -13,12 +13,12 @@ does-superdiff-compose-at-its-own-defaults.md).
 PoE is the repo's plain rule (poe_repair/methods/_sampling.py, run_cfg_poe) with no adapter
 attached at all, so nothing can leak into it from a trained correction.
 
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column single    --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column mono      --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column poe       --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --column superdiff --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --sheet <tiles_dir> <out_dir> --pairs "a dog|rain" --seeds 1 2 4 9 10
-    python 3-understanding-compositionality/scripts/concept_pair_sheet.py --direct-sheet <tiles_dir> <out.png> \
+    python scripts/shared/concept_pair_sheet.py --column single    --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python scripts/shared/concept_pair_sheet.py --column mono      --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python scripts/shared/concept_pair_sheet.py --column poe       --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python scripts/shared/concept_pair_sheet.py --column superdiff --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python scripts/shared/concept_pair_sheet.py --sheet <tiles_dir> <out_dir> --pairs "a dog|rain" --seeds 1 2 4 9 10
+    python scripts/shared/concept_pair_sheet.py --direct-sheet <tiles_dir> <out.png> \
         --pairs "a wet camel|a camel in the rain" "a wet dog|a dog in the rain" --seeds 1 2 4 9 10
 
 Tiles land as <OUT>/single/<concept>/seedNN.png and <OUT>/<pair>/seedNN/<column>.png, each with a

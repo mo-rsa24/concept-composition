@@ -158,6 +158,7 @@ def _dev():
 
 
 def laplacian_var(png: Path) -> float:
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from lambda_window_grid import _laplacian_var
     return float(_laplacian_var(png))
 
@@ -550,7 +551,7 @@ def tail_verdict(rows: list[dict], c: float) -> dict:
         "lambda": TAIL_LAMBDA, "seeds": list(SHEET_SEEDS),
         "thresholds": {"FIDELITY_MIN_SHARPNESS_RISE": FIDELITY_MIN_SHARPNESS_RISE,
                        "FIDELITY_MAX_COMPOSE_LOSS_SEEDS": FIDELITY_MAX_COMPOSE_LOSS_SEEDS},
-        "sharpness": "Laplacian variance of the greyscale 1024x1024 render (1-lora-correction/scripts/showcase/lambda_window_grid.py::_laplacian_var); higher is sharper",
+        "sharpness": "Laplacian variance of the greyscale 1024x1024 render (scripts/shared/lambda_window_grid.py::_laplacian_var); higher is sharper",
         "branch": branch, "reasons": reasons, "sharpness_rise_k0_to_k20": rise,
         "summary": summary, "rows": rows, "host": _host(),
     }

@@ -358,7 +358,7 @@ The dotted line into the person is the ordering the two automatic reads are allo
 
 ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-sync) | 📋 [TOC](#table-of-contents) | [Next](#recommended-skill) ➡️
 
-**File:** `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`
+**File:** `scripts/shared/lambda_boundary_probe.py`
 **Relevant section:** the existing per-checkpoint probe. Task 4.1 adds the guidance interval, the two-sampler strip render, and W&B resume by run id.
 
 **File:** the compose scorer package

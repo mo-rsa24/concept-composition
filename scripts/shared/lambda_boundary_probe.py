@@ -25,9 +25,9 @@ grid_full_window.png / grid_early_window.png (rows = seeds, cols = lambda, each 
 labelled with the compose verdict, instance count and DINOv2 drift).
 
 Usage:
-    python 1-lora-correction/scripts/showcase/lambda_boundary_probe.py            # render + measure + grids
-    python 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --measure  # re-score existing renders
-    python 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --grid     # rebuild grids from results.json
+    python scripts/shared/lambda_boundary_probe.py            # render + measure + grids
+    python scripts/shared/lambda_boundary_probe.py --measure  # re-score existing renders
+    python scripts/shared/lambda_boundary_probe.py --grid     # rebuild grids from results.json
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ from pathlib import Path
 import torch
 from PIL import Image, ImageDraw, ImageFont
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments.compose_scorer_validation.detection_scorer import (  # noqa: E402
     count_instances, instance_score_to_dict, score_output_instances,

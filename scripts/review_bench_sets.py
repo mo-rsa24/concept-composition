@@ -11,7 +11,7 @@ the shared latent of an integer seed instead. Seeds 9 to 12 (GenEval) and 9 to 1
 (T2I-CompBench) are used, because no run trained on them, while the starting noise of seeds 17 to 58
 is in the adapter's training cache.
 
-A prompt naming a subject of 1-lora-correction/scripts/showcase/disallowed_subjects.py is dropped and counted, never
+A prompt naming a subject of scripts/shared/disallowed_subjects.py is dropped and counted, never
 rendered: BLOCKED always, ASK_FIRST unless the pair ledger allows that word for the set: frog and mouse for R1 and R5, frog for
 the two T2I-CompBench sets (a set's "allow" below). Each prompt keeps its index in the benchmark file, so a dropped prompt leaves a gap.
 
@@ -34,6 +34,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts" / "showcase"))
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import ASK_FIRST, is_allowed, words  # noqa: E402
 
 GENEVAL = REPO / "data/prompt-sets/geneval/evaluation_metadata.jsonl"

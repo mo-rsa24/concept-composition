@@ -3,7 +3,7 @@
 Each prompt is drawn exactly as the benchmark wrote it, with plain CFG, from the shared starting
 latent of its seed (protocol rule 2: the latent `a_cat__x__a_dog` borrows at that seed), 50 DDIM steps,
 guidance 7.5, 1024 by 1024, fp16. These are the calls of the joint column in
-3-understanding-compositionality/scripts/concept_pair_sheet.py (`--column mono`), with the prompt text passed whole rather than built
+scripts/shared/concept_pair_sheet.py (`--column mono`), with the prompt text passed whole rather than built
 from two concepts, so the counting, spatial and complex prompts, which have no pair, render the same way.
 
     python scripts/review_bench_joint.py --set geneval_two

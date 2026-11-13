@@ -330,7 +330,7 @@ Every figure below lands in `artifacts/results/does-charging-the-adapter-for-its
 
 **New:** `1-lora-correction/scripts/showcase/control_energy_from_cache.py` (the free read), `1-lora-correction/scripts/showcase/on_policy_energy.py` (the on-policy read), `1-lora-correction/scripts/showcase/energy_penalty.sbatch` (smoke, arm, probe), `1-lora-correction/scripts/showcase/energy_penalty_readout.py` (the figures, the bars), `1-lora-correction/scripts/showcase/energy_penalty_readout.sbatch`.
 
-**Reused:** `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `1-lora-correction/scripts/showcase/correction_span_common.py` (the cache loader), `DinoEmbedder` from `1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`, the axis and strip helpers of `1-lora-correction/scripts/showcase/experiment_e_x0_loss.py`.
+**Reused:** `scripts/shared/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `1-lora-correction/scripts/showcase/correction_span_common.py` (the cache loader), `DinoEmbedder` from `1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`, the axis and strip helpers of `1-lora-correction/scripts/showcase/experiment_e_x0_loss.py`.
 
 ---
 

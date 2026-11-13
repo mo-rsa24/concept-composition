@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Step 4.1 of plans/regroup-into-project-folders.md: fix how moved scripts find the repo root.
 
-Every file moved in step 3 now sits exactly one folder deeper than before. A lookup that climbed
+Run it once per move: it rebuilds each file from the original at the tag pre-regroup-move, so
+run repair_links.py after it, never before. Every file moved in step 3 now sits exactly one folder deeper than before. A lookup that climbed
 from the file to the repo root (or above it) must climb one level more; a lookup that stopped
 inside the old folder keeps its depth. For each moved .py, .sh and .sbatch file, the old path comes
 from scripts/regroup/moves.tsv, and these lookups are rewritten when they reached the root:

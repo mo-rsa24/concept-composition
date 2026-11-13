@@ -47,6 +47,7 @@ def parse_pair(s: str, allow_ask_first: bool = False) -> tuple[str, str]:
     a, b = (p.strip() for p in s.split("|"))
     # The subject lists are a hard constraint of this project, and a render path that skips the
     # check is how a refused subject reaches a sheet anyway.
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     check(a, allow_ask_first=allow_ask_first)
     check(b, allow_ask_first=allow_ask_first)

@@ -45,8 +45,8 @@ for role in $ROLES; do
   echo "--- $role  $(date +%H:%M:%S)"
   case "$role" in
     fig5)
-      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column mono --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 mono FAILED"
-      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column poe  --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 poe FAILED"
+      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/shared/concept_pair_sheet.py --column mono --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 mono FAILED"
+      CONCEPT_PAIR_OUT="$OUT/figure5" "$PY" scripts/shared/concept_pair_sheet.py --column poe  --pairs "a lighthouse|a stormy sea" --seeds 10 || echo "ROLE fig5 poe FAILED"
       FIGURE_CANDIDATES_OUT="$OUT/figure5" "$PY" 1-lora-correction/scripts/figure_candidates.py --column ours --pairs "a lighthouse|a stormy sea" --seeds 10 \
         --checkpoint "$CKPT" --window 50 --tag "$TAG" || echo "ROLE fig5 ours FAILED" ;;
     early)

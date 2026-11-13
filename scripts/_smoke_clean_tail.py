@@ -5,6 +5,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO)); sys.path.insert(0, str(REPO / "scripts" / "showcase"))
 import torch
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
 import clean_tail_k_sweep as S
 from poe_repair.composers._helpers import encode_pair, init_latents_for_cell, get_joint_embeds
 from poe_repair.experiments.interaction_term.cell import cell_from_slug

@@ -334,6 +334,7 @@ def main():
     ap.add_argument("--out", type=Path, help="--sheet only: the PDF to write")
     args = ap.parse_args()
 
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check as check_subject
     for a, b in PAIRS:
         check_subject(slug(a, b))

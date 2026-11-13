@@ -71,6 +71,7 @@ def main() -> int:
     args = ap.parse_args()
 
     import torch
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     from poe_repair.composers._helpers import encode_pair, init_latents_for_cell
     from poe_repair.experiments._eval_common import cell_for

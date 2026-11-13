@@ -161,7 +161,7 @@ def stage_baseline() -> None:
     probe = CONDS["base40"][1]
     if not (probe / "results.json").exists():
         _log(f"probe: baseline 40,050 -> {probe}")
-        subprocess.run([PY, "1-lora-correction/scripts/showcase/lambda_boundary_probe.py", "--rank", "32",
+        subprocess.run([PY, "scripts/shared/lambda_boundary_probe.py", "--rank", "32",
                         "--checkpoint", str(BASELINE_CKPTS / "lora_step_040050.pt"),
                         "--out-root", str(probe), "--windows", "full", "--lambdas", LAMBDA],
                        cwd=REPO_ROOT, env=env, check=False)

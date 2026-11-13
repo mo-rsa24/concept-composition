@@ -267,6 +267,7 @@ def render_tiles(ctx, tok, a: str, b: str | None, seeds: list[int], third: bool 
     """PoE(a, b) or PoE(a, b, third) per seed (third is True for the bare token, or the third expert's prompt), the loop and noise of 5-text-embedding-third-expert/scripts/and_vector_sheet.py.
     With `record` (and out_dir None) no image is made: each step's image state and the four raw predictions are appended to it,
     in the cache's own layout, so the three-expert sampler's own states can be trained on."""
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from concept_pair_sheet import NOISE_PAIR
     from poe_repair.composers._helpers import init_latents_for_cell
     from poe_repair.experiments.interaction_term.cell import cell_from_slug

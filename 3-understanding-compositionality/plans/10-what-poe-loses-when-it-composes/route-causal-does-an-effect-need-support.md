@@ -361,7 +361,7 @@ Objectives
 What to read
 - The walk map, both hypothesis tests and "Out in the world".
 - 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, sections 7.3 to 7.5.
-- 3-understanding-compositionality/scripts/concept_pair_sheet.py and .sbatch, and environment/hpc/nodes.md.
+- scripts/shared/concept_pair_sheet.py and .sbatch, and environment/hpc/nodes.md.
 
 What is already known
 - Every earlier tile: 50 DDIM steps, guidance 7.5, the cached a_cat__x__a_dog latent, an RTX 3090.
@@ -431,7 +431,7 @@ What to read
 - 3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md, sections 5.4, 6.2
   (H-C3) and 7.6.
 - The calls files beside every sheet from step 7.
-- 3-understanding-compositionality/scripts/concept_pair_sheet.py, to extend PoE to a third condition.
+- scripts/shared/concept_pair_sheet.py, to extend PoE to a third condition.
 
 What is already known
 - The three-concept product adds one more guided difference: eps_empty + w(eps_subject - eps_empty)

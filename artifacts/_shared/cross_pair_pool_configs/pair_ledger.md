@@ -1,6 +1,6 @@
 # Pair ledger: decisions on subjects the guard holds back
 
-`1-lora-correction/scripts/showcase/disallowed_subjects.py` keeps two lists. `BLOCKED` is never rendered. `ASK_FIRST`
+`scripts/shared/disallowed_subjects.py` keeps two lists. `BLOCKED` is never rendered. `ASK_FIRST`
 may be rendered only under a decision recorded here, and a caller passes `allow_ask_first=True` only
 for the prompts a row below covers. A row never lifts `BLOCKED`.
 

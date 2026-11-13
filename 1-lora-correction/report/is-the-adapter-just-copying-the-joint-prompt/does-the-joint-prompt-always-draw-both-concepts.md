@@ -64,5 +64,5 @@ its target.
 | What | How it was established | When |
 |---|---|---|
 | The eleven failing cells | read by eye from the 32 joint-prompt renders on the cluster | 2026-09-24 |
-| The figure | `5-text-embedding-third-expert/scripts/main_study_grids.py` | 2026-09-24 |
+| The figure | `scripts/shared/main_study_grids.py` | 2026-09-24 |
 | The renders | `1-lora-correction/scripts/figure_candidates.py`, column `mono`, 50 DDIM steps at guidance 7.5 | 2026-09-23 and 2026-09-24 |

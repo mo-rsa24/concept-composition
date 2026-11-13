@@ -101,7 +101,7 @@ if [ "$STAGE" = "probe" ] || [ "$STAGE" = "all" ]; then
     [ -f "$CKPT" ] || { echo "ABORT: no checkpoint at $CKPT" >&2; exit 1; }
     # The 8-seed held-out grid, the same recipe as figure_r32_030050: lambda 0 (plain PoE) as
     # the reference column, then lambda 1.0 and 1.2 on all 50 steps; detector count and DINOv2 drift.
-    "$PY" 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" \
+    "$PY" scripts/shared/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" \
         --out-root "$OUT_ROOT/figure_r32_x0loss_${STEP}" --windows full --lambdas 1.0,1.2
     echo "[$(date -u +%H:%M:%S)] probe DONE step ${STEP}"
   done

@@ -50,5 +50,5 @@ tiles listed in
 | What | How it was established | When |
 |---|---|---|
 | The five cells and their counts | read by eye from the renders named in the figure's sidecar | 2026-09-24 |
-| The figure | `5-text-embedding-third-expert/scripts/main_study_grids.py` | 2026-09-24 |
+| The figure | `scripts/shared/main_study_grids.py` | 2026-09-24 |
 | The renders | `1-lora-correction/scripts/figure_candidates.py`, columns `mono`, `poe` and `ours`, adapter `v58-03-self` step 50,000 | 2026-09-24 |

@@ -131,7 +131,7 @@ export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/cach
 USED=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i 1)
 UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader -i 1)
 if [ "$USED" -gt 1024 ] || [[ "$UTIL" == *"N/A"* || "$UTIL" == *"reset"* ]]; then echo "ABORT: device 1 used=${USED}MiB util='$UTIL'" >&2; exit 1; fi
-$PY 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --rank 32 \
+$PY scripts/shared/lambda_boundary_probe.py --rank 32 \
   --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_100k/checkpoints/lora_step_090050.pt \
   --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_090050 \
   --windows full --lambdas 1.0,1.2

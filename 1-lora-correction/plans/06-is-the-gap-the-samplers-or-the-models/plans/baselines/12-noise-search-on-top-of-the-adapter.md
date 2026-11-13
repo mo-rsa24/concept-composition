@@ -432,7 +432,7 @@ None. This scope carries no `diagram-prompts.md`.
 | [poe_repair/experiments/noise_search/run_adapter.py](../../../../../poe_repair/experiments/noise_search/run_adapter.py) | the three phases, the sheets, the sidecar, both-ness, W&B |
 | [poe_repair/experiments/noise_search/search.py](../../../../../poe_repair/experiments/noise_search/search.py) | the perturbation and the plain-PoE sampler the references use |
 | [poe_repair/methods/_sampling.py](../../../../../poe_repair/methods/_sampling.py) | `run_lora_residual_inject_masked`, whose on-step this plan batches |
-| [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py) | `_laplacian_var`, the sharpness function copied here |
+| [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../../scripts/shared/lambda_window_grid.py) | `_laplacian_var`, the sharpness function copied here |
 
 ## Next step
 

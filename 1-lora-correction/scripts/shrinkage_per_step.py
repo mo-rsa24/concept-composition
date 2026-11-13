@@ -42,7 +42,7 @@ from poe_repair.run import make_ctx                               # noqa: E402
 from poe_repair.training_cache import CellPath, load_step_raw     # noqa: E402
 
 # (checkpoint path, LoRA rank). The same three the hand-off sweep reads, at
-# 1-lora-correction/scripts/clean_tail_k_sweep.py:123.
+# scripts/shared/clean_tail_k_sweep.py:123.
 CHECKPOINTS = {
     "v1_freeze_null_r16_s0_25_30k": (
         "/datasets/mmolefe/poe_repair_min/outputs/correction_loss_variants/"
@@ -118,6 +118,7 @@ def measure(name: str, *, batch_steps: int, max_steps: int | None, seeds) -> dic
     _disk_guard(OUT_DIR)
     _device_guard()
 
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     ctx = make_ctx()
     unet = ctx.models["unet"]

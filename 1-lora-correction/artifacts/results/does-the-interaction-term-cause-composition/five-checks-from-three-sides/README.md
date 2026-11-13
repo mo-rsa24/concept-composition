@@ -194,7 +194,7 @@ the same two controls as the manifold-slide figure.
 
 **How we got this image**
 
-`python 3-understanding-compositionality/scripts/caption_readback.py`, same 32 cells, several wordings per template built from the
+`python scripts/shared/caption_readback.py`, same 32 cells, several wordings per template built from the
 prompt the cell was actually generated with, ~3 minutes. `caption_readback.json` carries the
 templates and the per-dose shares.
 
@@ -214,7 +214,7 @@ this is a readback against a fixed vocabulary, not an open-ended description tas
 
 **Where it came from and what judged it**
 
-Design and verdict: the plan and review files linked above. Script: `3-understanding-compositionality/scripts/caption_readback.py`.
+Design and verdict: the plan and review files linked above. Script: `scripts/shared/caption_readback.py`.
 
 ## Reproducing
 
@@ -224,7 +224,7 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 $PY 5-text-embedding-third-expert/scripts/language_probes.py --probe l1 --probe l3   # 75 pairs from cache, ~1 min
 $PY 1-lora-correction/scripts/quality_control.py                          # 749 image pairs, ~20 min
 $PY 1-lora-correction/scripts/manifold_slide.py                           # 32 cells x 5 doses x 3 rows, ~3 min
-$PY 3-understanding-compositionality/scripts/caption_readback.py                         # same cells, caption bank, ~3 min
+$PY scripts/shared/caption_readback.py                         # same cells, caption bank, ~3 min
 ```
 
 Outputs land in `/datasets/.../cache_analyses/`; copy them here to refresh this folder.

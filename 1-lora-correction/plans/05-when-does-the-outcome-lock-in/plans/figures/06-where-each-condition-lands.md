@@ -439,7 +439,7 @@ Navigation: ⬅️ [Previous](#orchestration-keeping-catalogs-and-plan-files-in-
 **Relevant section:** the per-step record (`x_t`, `eps_a_raw`, `eps_b_raw`, `eps_j_raw`,
 `eps_uncond`) and the closed forms for the guided predictions, which rung 3 reads.
 
-**File:** [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../scripts/showcase/lambda_window_grid.py)
+**File:** [1-lora-correction/scripts/showcase/lambda_window_grid.py](../../../../../scripts/shared/lambda_window_grid.py)
 **Relevant section:** `run_lora_residual_inject_windowed_poe`, the sampler that applies the
 adapter over a window and already tracks the trajectory; rung 4 reuses it with the rank-32
 checkpoint and λ 1.2.

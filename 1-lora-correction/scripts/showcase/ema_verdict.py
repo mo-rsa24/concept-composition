@@ -2,7 +2,7 @@
 """Plan 20 verdict (01-showcase-the-trained-lora): does an averaged copy of the adapter's weights
 render nearer the joint-prompt image than the raw weights at the same training step?
 
-Reads probe folders written by 1-lora-correction/scripts/showcase/lambda_boundary_probe.py (--windows full
+Reads probe folders written by scripts/shared/lambda_boundary_probe.py (--windows full
 --lambdas 1.0), one per (checkpoint, weight key), and judges the EMA against the raw weights of
 the same run at the same step. The bars are the constants below; they were fixed before the run
 produced a checkpoint.

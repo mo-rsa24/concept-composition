@@ -35,9 +35,9 @@ Stages:
      lambda, for plan 05's wall.
 
 Usage:
-    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --run-sweep
-    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --measure
-    python 1-lora-correction/scripts/showcase/lambda_window_grid.py --strip
+    python scripts/shared/lambda_window_grid.py --run-sweep
+    python scripts/shared/lambda_window_grid.py --measure
+    python scripts/shared/lambda_window_grid.py --strip
 """
 
 from __future__ import annotations
@@ -52,7 +52,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from poe_repair.experiments._eval_common import cell_for
 from poe_repair.experiments.one_pair_one_seed import trainer as lora_trainer

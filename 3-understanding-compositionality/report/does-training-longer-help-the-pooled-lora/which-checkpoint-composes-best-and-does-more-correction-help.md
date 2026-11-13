@@ -39,7 +39,7 @@ dog box with overlap under 0.5) gives the same 7 in each case. Plain PoE (λ 0):
 checkpoint. From `summary.full.1.0.compose_rate` and `rows[].cat_and_dog` in
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r8_030000/results.json`,
 `figure_r16_050018/results.json` and `figure_r32_030050/results.json`, written by
-`1-lora-correction/scripts/showcase/lambda_boundary_probe.py`.
+`scripts/shared/lambda_boundary_probe.py`.
 
 ## 2. More correction does not buy more seeds
 
@@ -99,7 +99,7 @@ compose at every λ from 1.0 up; seed 10 stops composing from 1.3, seed 11 fails
 seed 14 composes only at 1.5. From
 `/datasets/mmolefe/poe_repair_min/outputs/showcase/lambda_boundary_probe_r32_030050/results.json`,
 fields `rows[].compose`, `rows[].cat_and_dog` and `rows[].drift.dino.drift`, written by
-`1-lora-correction/scripts/showcase/lambda_boundary_probe.py` on 2026-09-06.
+`scripts/shared/lambda_boundary_probe.py` on 2026-09-06.
 
 **The second number.** The largest per-step correction norm the sampler applied, averaged over
 seeds, falls as λ rises: 60.4 at λ 1.0, 51.4 at 1.2, 47.8 at 1.3, 44.8 at 1.5, 31.5 at 2.0

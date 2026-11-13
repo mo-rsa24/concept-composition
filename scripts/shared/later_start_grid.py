@@ -18,8 +18,8 @@ nothing itself. The compose-rate curve that backs the quantitative claim
 across all 8 pairs is a separate, diagnostic-only plot, same location as
 F4g's.
 
-    python 1-lora-correction/scripts/later_start_grid.py
-    python 1-lora-correction/scripts/later_start_grid.py --seed 9
+    python scripts/shared/later_start_grid.py
+    python scripts/shared/later_start_grid.py --seed 9
 """
 
 from __future__ import annotations

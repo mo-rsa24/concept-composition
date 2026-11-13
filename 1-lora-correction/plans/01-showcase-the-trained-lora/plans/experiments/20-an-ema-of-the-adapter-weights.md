@@ -54,7 +54,7 @@
 - **The EMA**: an exponential moving average of those factors, updated once per epoch (50 steps) with per-epoch decay `0.999^50 = 0.951`, so its memory reaches back about 1,000 steps. Saved as `lora_state_ema` beside `lora_state` in every checkpoint of this run. It is a shadow copy: it never feeds the optimizer, so the raw trajectory is exactly experiment D's up to hardware nondeterminism.
 - **Experiment D**: `phase1_r32_wd0.1_100k`, rank 32, weight decay 0.1, the kill criterion off, launched by the sibling plan on 2026-09-06.
 - **Drift**: DINOv2 drift as the decay finding reads it: the corrected render's distance to the joint-prompt render minus its distance to the plain-PoE render, mean of the 8 held-out cat × dog seeds at λ 1 over all 50 steps, from `summary.full."1.0".mean_dino_drift` in a probe folder's `results.json`. Negative is nearer the joint-prompt image. The baseline rank-32 run reads −0.091 at 30,050.
-- **A probe folder**: what `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` writes for one checkpoint and one weight key (`--lora-key lora_state` or `lora_state_ema`): the 8-seed grid, `results.json`.
+- **A probe folder**: what `scripts/shared/lambda_boundary_probe.py` writes for one checkpoint and one weight key (`--lora-key lora_state` or `lora_state_ema`): the 8-seed grid, `results.json`.
 - **Compose count**: seeds of 8 where the validated detector counts two or more animal instances.
 
 ---
@@ -157,7 +157,7 @@ EMA (0.999/step)   ○···············○········○···
 
 1. **The flag**: `--ema-decay` on the pooled trainer, an average of every `lora_` parameter updated once per epoch, saved as `lora_state_ema` in every checkpoint and restored on resume. `train/lora_weight_norm` and `train/lora_weight_norm_ema` logged at every log interval.
 2. **The launcher**: `1-lora-correction/scripts/showcase/regularised_r32.sbatch`, experiment D's flags plus `--ema-decay 0.999`, 800 epochs.
-3. **The probe key**: `--lora-key lora_state_ema` on `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`.
+3. **The probe key**: `--lora-key lora_state_ema` on `scripts/shared/lambda_boundary_probe.py`.
 4. **The verdict script**: `1-lora-correction/scripts/showcase/ema_verdict.py`, the bars as constants, reading the probe folders.
 
 ---
@@ -190,7 +190,7 @@ Serves goal 4. Checkable outcomes:
 - [x] **1.1 Add the flag, the probe key, the launcher and the verdict script** (the four files under Description).
 - [x] **1.2 Launch and record.** `sbatch 1-lora-correction/scripts/showcase/regularised_r32.sbatch` from the repo root. The first attempt (job 50339, `mscluster53`, 03:05 UTC) ran out of memory in its first epoch: the plain rank-32 forward needs about 25 GB and the card has 24. The launcher now passes `--gradient-checkpointing` (same arithmetic, activations recomputed in the backward pass) and the run is job 50343 on `mscluster75` since 03:14 UTC. Done when `logs/r32_wd_ema-50343.err` prints `gradient checkpointing enabled`, `EMA on: per-step decay 0.99900, per-epoch decay 0.95121` and then an `epoch=` line without an out-of-memory error.
 - [ ] **1.3 Probe the 30k checkpoint with both keys** as soon as `checkpoints/lora_step_030000.pt` lands (about 10 hours in). Two `bigbatch` jobs, or one after the other on a free device:
-  - `sbatch --partition=bigbatch --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83 --time=2:00:00 --job-name=probe_raw --output=logs/probe_raw_30k-%j.out --wrap "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_wd0.1_ema0.999_40k/checkpoints/lora_step_030000.pt --rank 32 --lora-key lora_state --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_wd0.1_ema_030000_raw --windows full --lambdas 1.0"`
+  - `sbatch --partition=bigbatch --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83 --time=2:00:00 --job-name=probe_raw --output=logs/probe_raw_30k-%j.out --wrap "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts/shared/lambda_boundary_probe.py --checkpoint /datasets/mmolefe/poe_repair_min/outputs/showcase/phase1_r32_wd0.1_ema0.999_40k/checkpoints/lora_step_030000.pt --rank 32 --lora-key lora_state --out-root /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_wd0.1_ema_030000_raw --windows full --lambdas 1.0"`
   - the same with `--lora-key lora_state_ema` and `--out-root .../figure_r32_wd0.1_ema_030000_ema`.
   - Done when both folders hold `results.json` and `grid_full_window.png`.
 - [ ] **1.4 Probe the 40k checkpoint with both keys** at completion, the same two commands with `lora_step_040000.pt` and `_040000_raw` / `_040000_ema`.
@@ -264,7 +264,7 @@ Verdict into the review file first, then one line into the decay finding's `Stil
 
 - `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`: `--ema-decay`, `_ema_init`, `_ema_update`, `_lora_norm`, the `lora_state_ema` payload in `_dump_checkpoint`
 - `1-lora-correction/scripts/showcase/regularised_r32.sbatch`: the launcher
-- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: `--lora-key`
+- `scripts/shared/lambda_boundary_probe.py`: `--lora-key`
 - `1-lora-correction/scripts/showcase/ema_verdict.py`: the bars
 
 ---

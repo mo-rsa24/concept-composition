@@ -108,7 +108,7 @@ $PY 1-lora-correction/scripts/longer_correction_grid.py \
 **Panel (b) is the window starting later.**
 
 ```bash
-$PY 1-lora-correction/scripts/later_start_grid.py \
+$PY scripts/shared/later_start_grid.py \
     --bare --panel-width 2.60 --dpi 600 \
     --out-dir $OUT --name panel-b-window-starts-later
 ```

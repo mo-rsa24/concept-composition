@@ -436,7 +436,7 @@ What to read
   pair_prompts*.yaml (candidate prompts).
 - 1-lora-correction/artifacts/results/how-four-methods-compare-on-four-pairs/README.md and scripts/paper_main_grid.py lines 21 to 30:
   the three adapters behind Figure 5.
-- scripts/composing_unseen_pairs.py, 3-understanding-compositionality/scripts/concept_pair_sheet.py, 1-lora-correction/scripts/figure_candidates.py
+- scripts/composing_unseen_pairs.py, scripts/shared/concept_pair_sheet.py, 1-lora-correction/scripts/figure_candidates.py
   and 3-understanding-compositionality/scripts/census/: sampling and counting scripts that already exist; reuse, do not rewrite.
 - environment/hpc/nodes.md and environment/hpc/throughput.md: nodes and measured sampling times.
 

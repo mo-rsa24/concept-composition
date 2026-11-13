@@ -112,7 +112,7 @@ $PY 1-lora-correction/scripts/quality_control.py
 $PY 1-lora-correction/scripts/manifold_slide.py
 
 # Same 32 runs against a four-way caption bank, ~3 min.
-$PY 3-understanding-compositionality/scripts/caption_readback.py
+$PY scripts/shared/caption_readback.py
 ```
 
 Outputs land in `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/`

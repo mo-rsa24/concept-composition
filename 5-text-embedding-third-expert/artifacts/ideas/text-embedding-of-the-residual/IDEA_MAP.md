@@ -169,7 +169,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#next
 | ELITE, arXiv 2302.13848 | a feed-forward encoder from image to token embedding, no per-concept optimization | confident it exists, unverified whether it helps here |
 | PEZ / CLIP-Interrogator | recovers actual words from a CLIP image embedding, the "CLIP inverter" of the original description | likely, verify before citing |
 | `5-text-embedding-third-expert/scripts/language_probes.py` in this repo | L1 and L3 already compute a text-space difference between the joint prompt and the sum of the two solo prompts | confident, read the file |
-| `3-understanding-compositionality/scripts/caption_readback.py` in this repo | already scores generated images against a caption bank including a blend caption, and records that whole-image CLIP was nulled for telling a blend from a composition | confident, read the file |
+| `scripts/shared/caption_readback.py` in this repo | already scores generated images against a caption bank including a blend caption, and records that whole-image CLIP was nulled for telling a blend from a composition | confident, read the file |
 
 ## Next step
 

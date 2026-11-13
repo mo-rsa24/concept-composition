@@ -372,3 +372,12 @@ commits). Plans 17 and 18 and the scripts marked "branch" came from branch
 | `poe_repair/composers/poe_classifier_guided.py`, `poe_clip_guided.py` (branch) | `poe-classifier-guidance/classifier_guided_poe/composers/` |
 | `poe_repair/experiments/presence_head/` (`dog_classifier.py`, `strong_head.py` from branch) | `poe-classifier-guidance/classifier_guided_poe/presence_head/` |
 | `scripts/presence_head_*.py`, `train_presence_head.py`, `does_clip_tell_a_pair_from_a_smoosh.py`, and from the branch `train_dog_classifier.py`, `train_strong_presence_head.py`, `classifier_guidance_from_the_paper.py`, `classifier_guidance_on_the_product.py`, `cooccurrence_*.py`, `dog_classifier_piles.py`, `render_no_prompt_pool.py`, `what_the_head_believes.py`, `strong_head_smoke.py`, `clip_guided_first_look.py`, `encode_latent_shards.py` | `poe-classifier-guidance/scripts/` |
+
+## Sitting 2026-11-13 (regrouped into project folders)
+
+Every scope, finding, walk, idea map, results folder, note, scene and script moved into its
+project folder (`1-lora-correction/`, `3-understanding-compositionality/`, `4-inclusive-captions/`,
+`5-text-embedding-third-expert/`) or into `_archive/` when nothing cited it, per
+`plans/regroup-into-project-folders.md`. The full old-to-new list, one line per item, is
+`scripts/regroup/moves.tsv`. Eleven helper scripts that several projects import now live in
+`scripts/shared/`. Undo the whole regroup with `git reset --hard pre-regroup-move`.

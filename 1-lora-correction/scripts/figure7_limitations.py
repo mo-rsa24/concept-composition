@@ -27,6 +27,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 from PIL import Image  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from paper_font import use_paper_font  # noqa: E402
 
 LABEL_PT, LETTER_PT = 8, 9

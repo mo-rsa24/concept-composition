@@ -265,6 +265,7 @@ def sigma_of(scheduler, t_int: int) -> float:
 
 
 def attach_adapter(ctx) -> dict:
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     lbp.LORA_RANK = lbp.LORA_ALPHA = ADAPTER_RANK
     info = lbp._attach_and_load_lora(ctx.models["unet"], ADAPTER_CHECKPOINT)

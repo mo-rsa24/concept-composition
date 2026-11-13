@@ -312,7 +312,7 @@ Every figure below lands in `artifacts/results/does-training-on-the-clean-estima
 
 **New:** `1-lora-correction/scripts/showcase/experiment_e_x0_loss.sh` (the chain), `1-lora-correction/scripts/showcase/experiment_e_wait_and_launch.sh` (the poller), `1-lora-correction/scripts/showcase/experiment_e_x0_loss.py` (the readout, the bars).
 
-**Reused:** `1-lora-correction/scripts/showcase/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `DinoEmbedder` from `1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`.
+**Reused:** `scripts/shared/lambda_boundary_probe.py` (the 8-seed grid, the detector, the drift), `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (the frames, with its checkpoint constant overridden), `DinoEmbedder` from `1-lora-correction/scripts/build_lora_inspector_mds_semantic.py`.
 
 ---
 

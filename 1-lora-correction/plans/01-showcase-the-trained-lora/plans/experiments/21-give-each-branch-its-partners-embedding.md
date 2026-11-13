@@ -154,7 +154,7 @@ read 2      8-seed grid at 30k, λ 1: drift against the same-setting branch-blin
 
 1. **One helper** `partner_pooled(pool_a, pool_b, pool_e)` returning the three pooled vectors for the adapter-on forward, used by the trainer's step (`_train_one_step`, the `text_embeds` of `cond_3K`), by the injection sampler on its adapter-enabled forward, and by the fit script.
 2. **The trainer flag** `--partner-embedding` on the pooled trainer, recorded in `config.json`, default off.
-3. **The sampler flag** on `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`, read from the checkpoint's config so a partner checkpoint cannot be rendered without it.
+3. **The sampler flag** on `scripts/shared/lambda_boundary_probe.py`, read from the checkpoint's config so a partner checkpoint cannot be rendered without it.
 4. **The fit script flag**, the same way.
 5. **The launcher**: `1-lora-correction/scripts/showcase/regularised_r32.sbatch` with `RUN_ID=phase1_r32_partner_40k` and the flag, on the regularisation setting plans 15 and 20 support.
 
@@ -260,7 +260,7 @@ Every figure lands in `artifacts/results/does-telling-each-branch-the-other-anim
 
 - `poe_repair/experiments/one_pair_one_seed/trainer.py`: `_train_one_step`, where `cond_3K["text_embeds"]` is built
 - `poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py`: the flag and `config.json`
-- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: the adapter-enabled forward in `lambda_window_grid.run_lora_residual_inject_windowed_poe`
+- `scripts/shared/lambda_boundary_probe.py`: the adapter-enabled forward in `lambda_window_grid.run_lora_residual_inject_windowed_poe`
 - `1-lora-correction/scripts/showcase/fit_cosine_on_cache.py`: the on-cache fit
 
 ---

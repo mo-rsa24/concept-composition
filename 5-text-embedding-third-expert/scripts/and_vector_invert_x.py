@@ -120,6 +120,7 @@ def main():
     args = arguments()
     import torch
     from torch.utils.checkpoint import checkpoint
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     from concept_pair_sheet import NOISE_PAIR
     from poe_repair.run import make_ctx
     from poe_repair.runtime import encode_prompt_sdxl, decode_latents, tweedie_mean, ddim_prev_from_x0_eps

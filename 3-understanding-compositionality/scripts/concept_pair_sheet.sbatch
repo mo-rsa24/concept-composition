@@ -14,7 +14,7 @@
 #   COLUMNS=superdiff sbatch --partition=biggpu --nodelist=mscluster110 3-understanding-compositionality/scripts/concept_pair_sheet.sbatch
 #
 # Tiles land under the concept_pair_sheet tree; the sheet is built on the laptop afterwards by
-# 3-understanding-compositionality/scripts/concept_pair_sheet.py --sheet.
+# scripts/shared/concept_pair_sheet.py --sheet.
 set -uo pipefail
 REPO=${SLURM_SUBMIT_DIR:?submit from the repo root}
 OUT=/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet
@@ -46,7 +46,7 @@ for column in $COLUMNS; do
     done; done
     continue
   fi
-  "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column "$column" --pairs "${PAIR_LIST[@]}" --seeds $SEEDS \
+  "$PY" scripts/shared/concept_pair_sheet.py --column "$column" --pairs "${PAIR_LIST[@]}" --seeds $SEEDS \
     || { echo "column $column failed" >&2; exit 8; }
 done
 echo "=== done $(date -Is): $(find "$OUT" -name "*.png" -not -path "*_superdiff_raw*" | wc -l) tiles under $OUT"

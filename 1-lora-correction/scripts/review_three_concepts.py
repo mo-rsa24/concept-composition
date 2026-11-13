@@ -59,6 +59,7 @@ def render() -> None:
     from poe_repair.run import make_ctx
     from poe_repair.runtime import (ddim_prev_from_x0_eps, decode_latents, encode_prompt_sdxl,
                                     guided_eps, tweedie_mean)
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
 
     ctx = make_ctx()

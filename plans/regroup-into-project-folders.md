@@ -113,14 +113,18 @@ correction to the move.
 
 ### 4. 🔧 Repair what the move broke
 
-- [ ] **4.1 Rewrite every moved script's repo-root lookup** and every import of moved experiment
+- [x] **4.1 Rewrite every moved script's repo-root lookup** and every import of moved experiment
       code, then compile every Python file and check every import resolves.
-- [ ] **4.2 Repoint every markdown link** with a link checker over the whole repo, until it
+- [x] **4.2 Repoint every markdown link** with a link checker over the whole repo, until it
       reports zero broken links.
-- [ ] **4.3 Write the moves into `RENAMES.md`** and give each project's `README.md` its question,
+- [x] **4.3 Write the moves into `RENAMES.md`** and give each project's `README.md` its question,
       its status and its board.
   - Check: the link checker reports 0 broken links, the compile reports 0 failures, and the import
     check reports 0 unresolved imports.
+  - ✅ 2026-11-13: 0 links broken by the move (802 broken before it, 661 now), 742 Python files
+    compile, 0 unresolved `poe_repair` imports, 0 helper imports split across folders. Eleven
+    helpers several projects import moved to `scripts/shared/`, and each of their 44 importers
+    adds that folder to its import path in one line.
 
 ### 5. 🧩 Fold classifier guidance back in, and send the medical items out
 

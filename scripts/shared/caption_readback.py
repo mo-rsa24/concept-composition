@@ -34,7 +34,7 @@ crossover that separates from the control rows counts for anything.
 Reads sampled images; it does not sample.
 
 Usage:
-    python 3-understanding-compositionality/scripts/caption_readback.py
+    python scripts/shared/caption_readback.py
 """
 
 from __future__ import annotations

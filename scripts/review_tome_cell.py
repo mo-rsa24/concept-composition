@@ -98,6 +98,7 @@ def main() -> None:
         cells = [(None, *(x.strip() for x in pr.split("|")), args.joiner, sd) for pr in args.pairs for sd in args.seeds]
     print(f"{len(cells)} cells", flush=True)
     sys.path.insert(0, str(Path(__file__).resolve().parent / "showcase"))
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "scripts", "shared"))  # shared helpers
     from disallowed_subjects import check
     for group, a, b, _, _ in cells:  # the pair ledger's frog and mouse decision covers R1 only
         check(a, allow_ask_first=group == "r1")

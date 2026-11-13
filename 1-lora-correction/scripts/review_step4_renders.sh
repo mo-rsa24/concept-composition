@@ -41,7 +41,7 @@ echo "pairs: ${#PAIRS[@]}"
 
 for col in mono poe; do
   echo "--- $col  $(date +%H:%M:%S)"
-  "$PY" 3-understanding-compositionality/scripts/concept_pair_sheet.py --column "$col" --pairs "${PAIRS[@]}" --seeds $SEEDS || echo "COLUMN $col FAILED"
+  "$PY" scripts/shared/concept_pair_sheet.py --column "$col" --pairs "${PAIRS[@]}" --seeds $SEEDS || echo "COLUMN $col FAILED"
 done
 
 if [ "$ROLE" = census-b ]; then

@@ -1453,7 +1453,7 @@ it without that prompt). The trajectory-separation move was cut, reasons recorde
       than measurement, which is the sentence 4.4's new opener answers. Green frames in both
       grids mark decodes taken while the correction was active, not detector verdicts, per the
       `contains()` rule in `1-lora-correction/scripts/longer_correction_grid.py` and
-      `1-lora-correction/scripts/later_start_grid.py`; both grids are cat x dog at seed 12, confirmed against
+      `scripts/shared/later_start_grid.py`; both grids are cat x dog at seed 12, confirmed against
       the window map's seed 12 row. Figures `fig:window-extends` and `fig:window-starts-later`,
       register rows F4g and F4h, `fig:window-map` last in the section.
 

@@ -251,7 +251,7 @@ the scope table and the root running order flips from ◑ to the verdict mark.
 - `poe_repair/experiments/one_pair_one_seed/trainer.py`: `make_optimizer`, where AdamW receives it
 - `1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh`: the launcher
 - `1-lora-correction/scripts/showcase/experiment_d_verdict.py`: the bars
-- `1-lora-correction/scripts/showcase/lambda_boundary_probe.py`: the 8-seed grid and `results.json`
+- `scripts/shared/lambda_boundary_probe.py`: the 8-seed grid and `results.json`
 
 ---
 

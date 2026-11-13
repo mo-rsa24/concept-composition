@@ -27,6 +27,7 @@ OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/crispness")
 
 
 def main() -> None:
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     from poe_repair.methods._poe_langevin import run_lora_langevin_windowed_poe
     cws._disk_guard(cws.OUT)

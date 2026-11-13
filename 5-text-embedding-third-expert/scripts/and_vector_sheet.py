@@ -42,6 +42,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from and_vector_norms import and_only_x, positional_x  # noqa: E402
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 # Column key, header lines, and the conditions it sums: "a", "b", "joint" name prompts, "x_raw",

@@ -63,7 +63,7 @@ Effect size varies by pair, from 4 of 4 (seal and walrus, cow and buffalo at sta
 1 of 4 (leopard and jaguar).
 
 **Where they came from.** Dropped in during the section 4 walk from the window-sweep runs.
-The two coverage grids are `1-lora-correction/scripts/longer_correction_grid.py` and `1-lora-correction/scripts/later_start_grid.py`
+The two coverage grids are `1-lora-correction/scripts/longer_correction_grid.py` and `scripts/shared/later_start_grid.py`
 at their default cat-and-dog seed 12, confirmed by matching their couch scene to the window
 map's seed 12 row. Which script rendered the sliding strip and the per-pair population map is
 still to be confirmed before a caption cites a path.

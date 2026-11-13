@@ -136,7 +136,7 @@ CKPT="$RUN_DIR/checkpoints/lora_step_040050.pt"
 [ -f "$CKPT" ] || { echo "ABORT: expected checkpoint missing: $CKPT" >&2; ls "$RUN_DIR/checkpoints" >&2; exit 5; }
 
 echo "[$(date -u '+%F %T')] probe: 8-seed held-out grid of $CKPT at lambda 0 and 1.0 -> $PROBE_DIR"
-$PY 1-lora-correction/scripts/showcase/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" --out-root "$PROBE_DIR" \
+$PY scripts/shared/lambda_boundary_probe.py --rank 32 --checkpoint "$CKPT" --out-root "$PROBE_DIR" \
     --windows full --lambdas 1.0 || echo "WARN: probe exit=$?"
 
 echo "[$(date -u '+%F %T')] frames: per-step running estimates at lambda 1.0 -> $FRAMES_DIR"

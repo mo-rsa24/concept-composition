@@ -18,6 +18,7 @@ as "two things that overlap in function", which is its own kind of confusable pa
 import itertools, json, os, random, sys, zlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
 from disallowed_subjects import is_allowed
 
 CACHE = "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache"

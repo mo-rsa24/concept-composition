@@ -41,6 +41,7 @@ sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, concept_slug  # noqa: E402
 
 # The verdict bars, written here before the first run so they cannot move after the answer is seen.

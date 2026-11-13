@@ -35,6 +35,7 @@ REPO = Path(os.environ.get("POE_REPO", Path(__file__).resolve().parents[2]))
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 
+import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 STEER_STEPS = 10        # steps 0 to 9

@@ -65,6 +65,7 @@ def main() -> None:
     if (total - free) / 1e9 > 1.0:
         raise SystemExit("device already in use, refusing to share")
 
+    import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "scripts", "shared"))  # shared helpers
     import lambda_boundary_probe as lbp
     ctx = make_ctx()
     unet = ctx.models["unet"]

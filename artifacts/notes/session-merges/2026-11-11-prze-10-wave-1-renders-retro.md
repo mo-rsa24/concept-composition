@@ -22,7 +22,7 @@ Retrospective of the walk over [the PRZE-10 plan](../../../1-lora-correction/pla
 
 **The problem.** Both render scripts built the joint prompt as "{a} and {b}", which misdraws the 36 benchmark prompts that read "with"; the 45 prompts naming a frog or a mouse were refused by the subject check.
 
-**What was done.** `--joint-template` and `--allow-ask-first` were added to `3-understanding-compositionality/scripts/concept_pair_sheet.py`, `--allow-ask-first` to `1-lora-correction/scripts/figure_candidates.py`, and three launchers written beside the step 4 one: `1-lora-correction/scripts/review_wave1_renders.sh`, `1-lora-correction/scripts/review_wave1_r1.sh` and `scripts/review_wave1_r1_rev.sh`, with the prompt lists `1-lora-correction/scripts/review_benchmark_pairs.txt` and `scripts/review_held_out_pairs.txt`.
+**What was done.** `--joint-template` and `--allow-ask-first` were added to `scripts/shared/concept_pair_sheet.py`, `--allow-ask-first` to `1-lora-correction/scripts/figure_candidates.py`, and three launchers written beside the step 4 one: `1-lora-correction/scripts/review_wave1_renders.sh`, `1-lora-correction/scripts/review_wave1_r1.sh` and `scripts/review_wave1_r1_rev.sh`, with the prompt lists `1-lora-correction/scripts/review_benchmark_pairs.txt` and `scripts/review_held_out_pairs.txt`.
 
 **Where the results live.** Commits `56debc5e`, `62554919` and `0c2babc1`; copies run from `/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers/`, because `scripts/cluster.sh run` refused to sync over three uncommitted trainer files.
 

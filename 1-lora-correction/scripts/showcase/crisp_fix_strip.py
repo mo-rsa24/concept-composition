@@ -167,6 +167,7 @@ class FixSampler(ce.Sampler):
         from poe_repair._sdxl.metrics import ddim_prev_from_x0_eps, guided_eps, poe_eps, tweedie_mean
         from poe_repair._sdxl.runtime import LatentTrajectoryCollector, decode_latents
         from poe_repair.methods._sampling import SamplerOutputs, add_time_ids
+        import os as _os, sys as _sys; _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "..", "..", "scripts", "shared"))  # shared helpers
         import lambda_boundary_probe as lbp
 
         assert self.attached, "attach the adapter first"
