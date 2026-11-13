@@ -160,7 +160,7 @@ Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-c
 *Black squares are product-of-experts endpoints, pink diamonds the same seeds with the λ 1.2
 correction, one grey-then-pink arrow per seed. What to notice: every arrow ends inside the
 joint-prompt hull's height, and no square does.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-1-the-48-renders-on-axes-built-from-the-reference-clouds).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-1-the-48-renders-on-axes-built-from-the-reference-clouds).
 
 **The number.** Both-ness, the projection onto the unit vector from the midpoint of the two
 single-animal centroids to the joint-prompt centroid, in DINOv2 cosine units, mean over seeds 9
@@ -177,7 +177,7 @@ Navigation: ⬅️ [Previous](#1-on-axes-built-from-the-reference-clouds-poe-sit
 ![Eight seeds by six conditions: cat alone, dog alone, joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-contact-sheet.png)
 *What to notice: the fourth column is one animal or one fused animal in every row; the fifth and
 sixth columns are two animals in every row.*
-📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-3-the-contact-sheet-eight-seeds-by-six-conditions).
+📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-3-the-contact-sheet-eight-seeds-by-six-conditions).
 
 **The number.** Nearest cloud centroid in the full 384-dimensional embedding, cosine distance:
 PoE renders nearest the joint cloud for 5 of 8 seeds, nearest cat for 2, nearest dog for 1; λ 1.2
@@ -192,7 +192,7 @@ Navigation: ⬅️ [Previous](#2-the-pictures-behind-the-points) | 📋 [TOC](#t
 ![Seeds 10 and 11: joint prompt, PoE, PoE plus λ 1.0, PoE plus λ 1.2](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/cat-x-dog-seeds-10-11-dose-strip.png)
 *What to notice: in both rows the second column is one animal, the third has two, and the fourth
 keeps two while changing which one is in front and how much of the frame each takes.*
-📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-4-the-dose-strip-for-seeds-10-and-11).
+📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-4-the-dose-strip-for-seeds-10-and-11).
 
 **The number.** Cosine between the λ 1.2 arrow and the direction from that seed's PoE point to
 the joint centroid: 0.59 to 0.74, positive on all 8 seeds. Cosine between the λ 1.0 arrow and the
@@ -208,7 +208,7 @@ Navigation: ⬅️ [Previous](#3-the-two-doses-agree-on-where-to-go-and-not-on-t
 to notice: the purple mean reaches the dashed joint-prompt centroid line by step 25 and stays;
 the pink mean climbs until step 30 and holds under it; the black mean never leaves 0.2 and its
 thin lines cross each other all the way to the end.*
-📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-6-both-ness-over-the-50-denoising-steps).
+📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-6-both-ness-over-the-50-denoising-steps).
 
 **The number.** Commit step, the first saved step after which a run's both-ness stays within
 0.10 of its final value (`COMMIT_TOL = 0.10` in source), median over 8 seeds: joint prompt 10
@@ -230,7 +230,7 @@ Navigation: ⬅️ [Previous](#4-over-the-50-steps-the-joint-run-settles-first-t
 notice: the fourth row is a cat at steps 5 and 10, a cat with a dog's muzzle at 20 and 30, and a
 dog at 40 and 50; the last two rows show two silhouettes from step 5 and two animals from
 step 20.*
-📊 Drawn in [Figure 7 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-7-seed-15-frame-by-frame).
+📊 Drawn in [Figure 7 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-7-seed-15-frame-by-frame).
 
 **The number.** Seed 15's row in `commit-and-fork-steps.json`: PoE final both-ness 0.10, the
 lowest of the eight, and its commit step reads 0 because its both-ness never rises, while its
@@ -251,7 +251,7 @@ black squares are spread across the middle.*
 *Seed 15 with trails. What to notice: the black trail crosses the plane from left to right
 before ending near the dog cloud; the pink trail climbs and ends inside the joint hull. The six
 thumbnails on the right are that seed's finished images.*
-📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-5-the-animated-page-three-screenshots).
+📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-5-the-animated-page-three-screenshots).
 
 **The number.** Same as rung 4; the page draws the same `data.json`. The page itself is the
 [where-each-condition-lands scene](../../artifacts/scenes/where-each-condition-lands/README.md), served
@@ -269,7 +269,7 @@ the bottom the face turns from cat to dog; up the left edge one animal becomes t
 *Left to right in pairs: PoE seed 9, PoE seed 10, the joint prompt at seed 9, the corrected seed
 15. What to notice: the fused faces come back fused, so the decoder keeps a chimera rather than
 cleaning it into one animal.*
-📊 Drawn in [Figure 8 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-8-the-axes-drawn-as-pictures).
+📊 Drawn in [Figure 8 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-8-the-axes-drawn-as-pictures).
 
 **The number.** The decoder reads DINOv2-B patch tokens, not the ViT-S class token the plane
 uses, so the two axes were rebuilt in the decoder's token space on the same 48 renders and the
@@ -290,11 +290,11 @@ Navigation: ⬅️ [Previous](#7-the-axes-drawn-as-pictures-x-is-which-animal-y-
 What to notice: black and pink separate on cat × dog and cow × buffalo, and sit on top of each
 other on the five pairs whose two animals look alike.*
 
-![Goose × swan, eight seeds by five arms](../../artifacts/results/where-does-each-condition-land/pairs/a_goose__x__a_swan/contact-sheet.png)
+![Goose × swan, eight seeds by five arms](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/pairs/a_goose__x__a_swan/contact-sheet.png)
 *The pair with the widest overlap. What to notice: the fourth column is one bird in every row,
 the fifth is two birds in every row, and yet the pink and black dots above coincide, because a
 picture of two white waterfowl embeds next to a picture of one.*
-📊 Drawn in [Figure 9 of the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md#figure-9-the-eight-held-out-pairs).
+📊 Drawn in [Figure 9 of the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md#figure-9-the-eight-held-out-pairs).
 
 **The number, against the bar.** Counted pairs 7 (elephant × penguin is the named exception).
 Pairs whose PoE and corrected both-ness bands do not overlap: 2 of 7 (cat × dog, max PoE 0.28
@@ -396,7 +396,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
   [the representation-autoencoder paper](../../../context/sources.md#3-diffusion-transformers-with-representation-autoencoders),
   [the X post](../../../context/sources.md#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
 - Each picture, read one at a time:
-  [the figure explainer](../../artifacts/results/where-does-each-condition-land/figure-explainer.md)
+  [the figure explainer](../../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md)
 
 ## Still open
 

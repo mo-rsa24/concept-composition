@@ -32,7 +32,7 @@ and butterfly x flower meadow drawn thick and named. Right: the same quantity av
 10 to 40, one bar per pair, sorted; red bars fail 8 of 8 seeds under plain product-of-experts,
 orange fail 5 or 6 of 8, grey have no measured fail rate. What to notice: red bars fill the whole
 x range, and the two bands on the left are a factor of ten apart from step 10.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/does-interaction-strength-predict-which-pairs-blend/figure-explainer.md#figure-1-the-lower-bound-on-the-interaction-per-pair-and-per-step).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/does-it-reach-unseen-pairs/the-pairs/does-interaction-strength-predict-which-pairs-blend/figure-explainer.md#figure-1-the-lower-bound-on-the-interaction-per-pair-and-per-step).
 
 **What you are looking at.** A quantity a published theorem says must be small wherever adding
 scores works, computed from data this project already had. If the theorem's quantity explained

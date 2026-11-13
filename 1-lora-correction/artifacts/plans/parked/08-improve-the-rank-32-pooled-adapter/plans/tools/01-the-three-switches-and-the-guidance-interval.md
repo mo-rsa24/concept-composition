@@ -175,9 +175,9 @@ The last line is the identity check. Setting the new switch to cover the whole r
 4. **A guidance interval** in the windowed sampler: an optional `(lo, hi)` beside `lambda_window` and eta, applying the strong guidance scale on steps `[lo, hi)` and 1.0 outside. Absent, behaviour is unchanged.
 5. **The 14-pair pool** and its prompts under `artifacts/_shared/cross_pair_pool_configs/`: the 11 training pairs plus lion × horse, wolf × horse and bear × salmon, with a check that every cell the pool names exists in the cache and a printed count per pair.
 6. **`exclude_cells.json`** under the output root, built from the hand verdicts in
-   [`eye-verdicts.csv`](../../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), with its count printed beside the total and broken down per pair.
+   [`eye-verdicts.csv`](../../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), with its count printed beside the total and broken down per pair.
    It is not built from `target_quality.json`'s `both_present` field. That field is the automatic check, and
-   [the target sheets](../../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/README.md) show it over-flagging: on `a_lion__x__a_tiger` it passes two cells of eight
+   [the target sheets](../../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/README.md) show it over-flagging: on `a_lion__x__a_tiger` it passes two cells of eight
    while several it fails plainly show both animals, and on `a_mailbox__x__a_snowfield` it passes one of eight
    while every tile is correct. The automatic column stays in the file beside the hand verdicts, because the
    disagreement between them is what says whether the check can be cited.
@@ -250,7 +250,7 @@ The last line is the identity check. Setting the new switch to cover the whole r
   - The two horse pairs sit under `heldout/` in the cache and the loader searches both splits, so no file is moved.
   - **Done when:** a resolution pass prints one line per pair with the number of cached cells found, every line is non-zero, and the three added pairs total 20 (lion × horse and wolf × horse contribute 8 each on seeds 1 to 8; bear × salmon contributes 4, since its only other cached seed is 42, outside the training seed list).
 - [ ] **3.2 Build `exclude_cells.json`** from the filled `eye_verdict` column of
-  [`eye-verdicts.csv`](../../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), dropping cells marked `bad` and keeping `good`; a cell left
+  [`eye-verdicts.csv`](../../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), dropping cells marked `bad` and keeping `good`; a cell left
   `unsure` is kept and counted separately so its effect can be checked.
   - ◀ Needs [instruction 5.4](#5--read-the-dry-run-and-the-identity-sheet), the hand pass over the target sheets.
   - Also emit the agreement between the hand verdicts and the automatic `both_present` column: how often
@@ -310,8 +310,8 @@ The last line is the identity check. Setting the new switch to cover the whole r
 5.3 **Record both readings** in the [review file](../../review/01-the-three-switches-and-the-guidance-interval.md): the three counts, the excluded count, and the per-seed identity differences.
 
 5.4 **Judge the target sheets by eye**, which is what task 3.2's exclusion list is built from.
-   - Open the twelve sheets under [the target-quality grouping](../../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/README.md). Rows are pairs, columns are seeds 1 to 8, the row caption is that pair's own prompt, and each tile's border is the automatic check's verdict.
-   - For every tile, fill the `eye_verdict` column of [`eye-verdicts.csv`](../../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv) with `good`, `bad` or `unsure`. Good means the picture shows both things the prompt names, each clearly itself.
+   - Open the twelve sheets under [the target-quality grouping](../../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/README.md). Rows are pairs, columns are seeds 1 to 8, the row caption is that pair's own prompt, and each tile's border is the automatic check's verdict.
+   - For every tile, fill the `eye_verdict` column of [`eye-verdicts.csv`](../../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv) with `good`, `bad` or `unsure`. Good means the picture shows both things the prompt names, each clearly itself.
    - ✅ All 480 rows carry a verdict, or you stop early having covered the pairs you intend to train on and say which sheets you skipped.
    - ❌ You find yourself agreeing with the border everywhere: say so, because that would mean the automatic check is sound and the whole premise of this instrument was wrong, which is a useful result and changes task 3.2 back to the automatic column.
 

@@ -105,7 +105,7 @@ Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-c
 step 5, and drops under 0.1 by step 20; the purple line in the middle panel climbs to 0.7 and
 stays; in the bottom panel the correction's norm grows sixfold while its orthogonal part grows
 threefold.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-1-the-orthogonal-share-of-the-correction-over-the-run).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-1-the-orthogonal-share-of-the-correction-over-the-run).
 
 **The number.** Orthogonal share of ‖r_t‖², the fraction of the correction's squared norm outside
 the span, mean over seeds 9 to 16 of the per-seed mean over steps 0 to 10: 0.374, per seed 0.16
@@ -132,7 +132,7 @@ Navigation: ⬅️ [Previous](#1-a-third-of-the-early-correction-is-out-of-the-e
 the same place; the third row is a cat with a dog's muzzle at step 10 and a dog at step 30; the
 fifth row, the empty prompt, is already a dog at step 20; the heat map is brightest on the eyes,
 muzzle and ears.*
-📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-2-seed-15-what-each-prediction-thinks-the-picture-is).
+📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-2-seed-15-what-each-prediction-thinks-the-picture-is).
 
 **The number.** Same-place share, the fraction of the 16,384 latent positions where both experts'
 departure from the unconditional estimate is above that expert's own median, chance 0.25, mean
@@ -154,12 +154,12 @@ Navigation: ⬅️ [Previous](#2-the-two-experts-draw-different-animals-in-the-s
 *What to notice: the blue line runs under the pink one through the shaded window and joins it
 after step 15; the purple cosine never leaves 0.9; the dark red cosine starts above 0.6 and
 settles near 0.35.*
-📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-3-the-adapters-output-projected-the-same-way).
+📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-3-the-adapters-output-projected-the-same-way).
 
 ![Seed 15: per-position norm of the adapter's output above the correction's at seven steps](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/seed-15-adapter-vs-correction-norm-maps.png)
 *What to notice: both rows light the eyes, muzzle and ears at steps 20 and 30 and are near-dark
 before step 10.*
-📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-4-seed-15-where-the-adapter-and-the-correction-act).
+📊 Drawn in [Figure 4 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-4-seed-15-where-the-adapter-and-the-correction-act).
 
 **The number.** Orthogonal share of the adapter's output at λ 1, mean over seeds and steps 0 to
 10: 0.194, against 0.374 for the correction at the same states; per step 0.16 at step 0, 0.22 at
@@ -181,12 +181,12 @@ Navigation: ⬅️ [Previous](#3-the-adapter-learned-the-damping-and-half-of-the
 ![Kinetic energy of each run's embedded running estimate, one point per run by condition, with the floor as a tick under each; all segments on the left, from step 10 on the right](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/track-kinetic-energy.png)
 *What to notice: on the right panel the three left-hand conditions sit under 1 and the three
 product-based conditions sit near 3, with every grey tick near 0.1.*
-📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-5-how-far-each-runs-running-estimate-travels).
+📊 Drawn in [Figure 5 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-5-how-far-each-runs-running-estimate-travels).
 
 ![Which-animal score of each run's running estimate against saved step, thin line per seed, thick mean per condition](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/which-animal-over-steps.png)
 *What to notice: orange and green separate by step 15 and hold; the black thin lines cross zero
 to the end; seed 15's dashed black line is above +0.2 at step 20 and below −0.2 from step 35.*
-📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md#figure-6-which-animal-each-run-reads-as-step-by-step).
+📊 Drawn in [Figure 6 of the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md#figure-6-which-animal-each-run-reads-as-step-by-step).
 
 **The number.** Kinetic energy, the sum over the 8 saved segments from step 10 to 50 of the
 squared displacement of the running estimate's L2-normalised DINOv2 embedding, median over
@@ -243,7 +243,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The frames' embeddings | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/frames-dino-feats.npz` | verified |
 | The W&B run | `yb933cr6` in `prime_lab/poe-repair-animals-compose` | verified |
 | The run | tasks **Write `correction_span_common.py`**, **Write `correction_tweedie_pictures.py`**, **Write `correction_adapter_span_share.py`** and **Write `correction_track_energy.py`** in [the plan](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md); verdict in [its review file](../../plans/05-when-does-the-outcome-lock-in/review/07-what-the-correction-is-made-of.md) | verified |
-| Regenerate with | the four scripts under `1-lora-correction/scripts/showcase/` named in [the card](../../artifacts/results/what-the-correction-is-made-of/README.md), rungs 1 and 3 on a device with CUDA confirmed; then `correction_log_wandb.py` | |
+| Regenerate with | the four scripts under `1-lora-correction/scripts/showcase/` named in [the card](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/README.md), rungs 1 and 3 on a device with CUDA confirmed; then `correction_log_wandb.py` | |
 
 ## Depends on
 
@@ -254,7 +254,7 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - Which trajectory the cache stores and the rule it stepped with: [the plan's rule section](../../plans/05-when-does-the-outcome-lock-in/plans/tests/07-what-the-correction-is-made-of.md#the-rule-the-cache-used)
 - The sampler-against-model split this does not make: claim 2 of [the idea map](../../../3-understanding-compositionality/artifacts/ideas/which-variable-explains-what-poe-is-missing/IDEA_MAP.md)
 - The frames and the both-ness plane the tracks reuse: [where each condition lands](where-does-each-condition-land.md)
-- Each picture, read one at a time: [the figure explainer](../../artifacts/results/what-the-correction-is-made-of/figure-explainer.md)
+- Each picture, read one at a time: [the figure explainer](../../artifacts/results/what-the-correction-is/what-it-looks-like/what-the-correction-is-made-of/figure-explainer.md)
 
 ## Still open
 

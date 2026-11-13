@@ -42,7 +42,7 @@ the same adapter on the cached, uncorrected states, every fifth step. Dashed gre
 far the corrected state has moved from the cached one, as a fraction of the cached state's norm.
 What to notice: the red line never leaves the 0.75 to 0.9 band while the grey line climbs to 0.8.
 The dotted line at 0.40 is the number the plan had been chasing.*
-📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-1-fit-on-the-adapters-own-trajectory-against-fit-on-the-cache).
+📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-1-fit-on-the-adapters-own-trajectory-against-fit-on-the-cache).
 
 **What you are looking at.** Two measurements of one adapter on one pair. The blue measurement
 asks the adapter the question it was trained on. The red measurement asks it the question it
@@ -74,7 +74,7 @@ fits at 0.77 here and still renders one animal, so fit and outcome are different
 the 11 training pairs. Blue: both words seen in training, never together. Purple: one word seen.
 Red: the pool's held-out pairs, no word seen. Dashed lines: group means. What to notice: the blue
 bars sit with the red bars, a full 0.13 below the green ones.*
-📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-2-fit-by-how-much-of-the-pair-the-adapter-saw).
+📊 Drawn in [Figure 2 of the figure explainer](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-2-fit-by-how-much-of-the-pair-the-adapter-saw).
 
 **What you are looking at.** The adapter's fit sorted by exposure. If the adapter had learned a
 correction per animal, wolf x horse would inherit what it learned from wolf x husky and horse x
@@ -119,7 +119,7 @@ It is retired from the map. It appears here only so the retirement is traceable.
 showcase sampler with the rank 8 correction at λ 1, run 2's rollout with the same correction, the
 joint prompt. What to notice: columns two and three are identical on every row, and seed 14 is the
 one row where the corrected columns show a single animal.*
-📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-3-the-eight-seeds-four-ways).
+📊 Drawn in [Figure 3 of the figure explainer](../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem/figure-explainer.md#figure-3-the-eight-seeds-four-ways).
 
 **The number.** Compose verdicts from the instance-count scorer on the showcase renders, rank 8
 at 30k, λ 1, full window: 7 of 8 seeds compose, seed 14 does not (one instance); at λ 0 all eight

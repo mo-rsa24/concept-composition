@@ -5,7 +5,7 @@ explainer shapes are pinned in `~/.claude/REPORT_FORMAT.md` and
 `~/.claude/FIGURE_EXPLAINER_FORMAT.md`; this page shows how they sit together in this repo, with
 the navigation layer this repo adds, and with
 [where each condition lands](when-does-the-outcome-lock-in/where-does-each-condition-land.md) and
-[its explainer](../artifacts/results/where-does-each-condition-land/figure-explainer.md) as the
+[its explainer](../artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/figure-explainer.md) as the
 worked instance.
 
 ## Table of contents

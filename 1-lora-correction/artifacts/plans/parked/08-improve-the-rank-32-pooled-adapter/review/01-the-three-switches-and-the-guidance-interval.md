@@ -112,7 +112,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| whether the automatic target check can be cited anywhere, given that [the target sheets](../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/README.md) show it passing two of eight on `a_lion__x__a_tiger` where several failures plainly show both animals, and one of eight on `a_mailbox__x__a_snowfield` where every tile is correct | the filled `eye_verdict` column of [`eye-verdicts.csv`](../../../artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), and the agreement table task 3.2 emits from it | the exclusion list, and any sentence in the paper that leans on this check |
+| whether the automatic target check can be cited anywhere, given that [the target sheets](../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/README.md) show it passing two of eight on `a_lion__x__a_tiger` where several failures plainly show both animals, and one of eight on `a_mailbox__x__a_snowfield` where every tile is correct | the filled `eye_verdict` column of [`eye-verdicts.csv`](../../../../results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from/eye-verdicts.csv), and the agreement table task 3.2 emits from it | the exclusion list, and any sentence in the paper that leans on this check |
 
 ## Next step
 

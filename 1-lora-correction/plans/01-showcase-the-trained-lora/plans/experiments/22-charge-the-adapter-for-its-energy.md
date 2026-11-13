@@ -84,7 +84,7 @@
 
 **Associated materials.**
 - Review questions: [the review file](../../review/22-charge-the-adapter-for-its-energy.md)
-- The free read, already filed: [the control energy of the true correction](../../../../artifacts/results/does-charging-the-adapter-for-its-energy-sharpen-the-fix/README.md)
+- The free read, already filed: [the control energy of the true correction](../../../../artifacts/results/the-adapter-on-cat-and-dog/making-the-render-crisp/does-charging-the-adapter-for-its-energy-sharpen-the-fix/README.md)
 - The reading that motivated it: chapter 3 (stochastic optimal control) and section 6.5 (adjoint matching) of arXiv 2603.18992; the plain-words map from that monograph to this repository is in the review file's **Words** block
 
 ---

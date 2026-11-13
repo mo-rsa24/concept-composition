@@ -23,7 +23,7 @@ Over 6,259,883 DataComp-1B captions, a 1-in-224 sample, every one of the 18 pair
 | cat × dog | 16 | **7** |
 | turtle × tortoise | 11 | **0** |
 
-<img src="../../artifacts/results/can-real-photographs-train-the-composition/cat-dog-filter-passes.jpg" width="380"> <img src="../../artifacts/results/can-real-photographs-train-the-composition/turtle-tortoise-filter-passes.jpg" width="380">
+<img src="../../artifacts/results/designing-the-correction-loss/can-real-photographs-train-the-composition/cat-dog-filter-passes.jpg" width="380"> <img src="../../artifacts/results/designing-the-correction-loss/can-real-photographs-train-the-composition/turtle-tortoise-filter-passes.jpg" width="380">
 
 *Left, what the filter accepted for cat × dog. Right, for turtle × tortoise. The rest are watermarked stock plates and studio product shots.*
 
@@ -41,6 +41,6 @@ The one pair where the retrieval worked is cat × dog, which appears in no train
 
 ## Where the detail is
 
-All 276 downloaded images sorted by what the filter accepted, plus the caption counts, the URL liveness and the false-positive measurements: [can real photographs train the composition](../../artifacts/results/can-real-photographs-train-the-composition/README.md).
+All 276 downloaded images sorted by what the filter accepted, plus the caption counts, the URL liveness and the false-positive measurements: [can real photographs train the composition](../../artifacts/results/designing-the-correction-loss/can-real-photographs-train-the-composition/README.md).
 
 The walk that produced it is claim 6 of [the idea map](../../artifacts/ideas/designing-the-correction-loss/IDEA_MAP.md).

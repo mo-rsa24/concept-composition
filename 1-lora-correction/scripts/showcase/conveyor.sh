@@ -9,7 +9,7 @@
 set -uo pipefail
 REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32
-G=$REPO/artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from
+G=$REPO/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/which-joint-prompt-targets-can-the-adapter-learn-from
 # Six belts append here at once. One file per shard keeps two appends from interleaving on NFS;
 # conveyor_status.sh reads them all as one list.
 SHARD="${SHARD:-}"
