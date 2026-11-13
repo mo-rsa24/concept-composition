@@ -304,3 +304,34 @@ keeps the product beside the condition it was built from. The two halves are ren
 processes and the plain one never loads an adapter, because turning a PEFT adapter off inside a
 live process has silently failed here before. The plain half is seed-shared across both arms and
 every checkpoint, so it is rendered once.
+
+**The before-and-after sheet for run A, eight seeds.** Three things it shows that the watching
+sheet could not.
+
+The product fails before any training. Plain SDXL, multiplying its own untrained cat and dog
+conditions, puts one animal in frame on all eight seeds, several of them fused: seed 0 is a dark
+head with a cat's eyes and a dog's muzzle. The failure this pilot is trying to repair is in the
+base model, not in the adapter.
+
+The trained product is softer than the plain one by eye on most seeds, and on seed 1 it is close
+to destroyed. This is an eye read with no measurement behind it, and it matters for the verdict:
+if training costs sharpness, a run B that looks better could be less degraded rather than better
+composed. The 128-seed scoring pass is judged on composition only, so the sharpness read is
+reported apart from it.
+
+The trained cat condition is warmer, measured rather than eyeballed. Mean saturation over the
+eight renders, on a 0-to-1 scale, is 0.135 on plain SDXL and 0.278 after run A's training. The
+spread of each image's median hue barely moves, 0.008 against 0.010 on the 0-to-1 hue circle, so
+the pictures got more colourful without the range of colours changing.
+
+**Run B at step 2,000, on the eight watching seeds: no composition, and a different failure.** The
+product puts one animal in frame on all eight seeds, the same count as run A. What changed is what
+that one animal looks like. Run A's products at step 2,000 fuse: seeds 0, 3 and 7 are single heads
+carrying both species. Run B's are clean single animals, a grey tabby on seed 1, a ginger tabby on
+seed 5, a small dog on seed 6, each one a well-formed creature of one species. The widened cat
+condition stopped fighting the dog condition into a blend and started losing to it outright.
+
+Eight seeds cannot carry that as a finding. It is a prediction for the 128-seed pass to confirm or
+drop: if it holds, the fourth outcome in the criterion needs rewording, because it is written
+around run B's cat column being blurred or carrying a second indistinct shape, and what the sheet
+shows is the opposite.

@@ -351,3 +351,24 @@ commands and the render directories they wrote keep resolving.
 | `--loss none\|excite_cat\|excite_dog\|excite_both\|separate` | `--fix no-fix\|cat-boost\|dog-boost\|both-boost\|push-apart` |
 | `--step-size` | `--strength` |
 | `--lambda-value` | `--correction` |
+
+## Sitting 2026-11-13 (classifier-guided PoE moved to its own repo)
+
+Moved to `/home/molef/PhD/poe-classifier-guidance` (fresh start; its `README.md` names the source
+commits). Plans 17 and 18 and the scripts marked "branch" came from branch
+`exec/can-a-classifier-supply-the-missing-term`, which stays unmerged for its other files.
+
+| Old | New |
+|---|---|
+| `plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/15-can-a-classifier-supply-the-missing-term.md` | `poe-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` |
+| `plans/06-is-the-gap-the-samplers-or-the-models/review/15-can-a-classifier-supply-the-missing-term.md` | `poe-classifier-guidance/plans/review/15-can-a-classifier-supply-the-missing-term.md` |
+| `plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/17-classifier-guidance-from-the-paper.md` (branch) | `poe-classifier-guidance/plans/17-classifier-guidance-from-the-paper.md` |
+| `plans/06-is-the-gap-the-samplers-or-the-models/plans/tools/18-a-dog-classifier-trained-the-papers-way.md` (branch) | `poe-classifier-guidance/plans/18-a-dog-classifier-trained-the-papers-way.md` |
+| `plans/route-classifier-guided-poe-from-toy-to-animals.md` and its `-references.md` | `poe-classifier-guidance/plans/` |
+| `report/classifier-guided-poe/` | `poe-classifier-guidance/report/classifier-guided-poe/` |
+| `artifacts/drips/can-a-classifier-supply-the-missing-term/`, `read-refining-generative-process-discriminator/`, `route-classifier-guided-poe-from-toy-to-animals/` | `poe-classifier-guidance/artifacts/drips/` |
+| `artifacts/results/can-a-classifier-supply-the-missing-term/`, `does-classifier-guidance-draw-a-dog/` | `poe-classifier-guidance/artifacts/results/` |
+| `poe_repair/methods/_classifier_guided.py`, `_clip_guided.py` (branch) | `poe-classifier-guidance/classifier_guided_poe/methods/` |
+| `poe_repair/composers/poe_classifier_guided.py`, `poe_clip_guided.py` (branch) | `poe-classifier-guidance/classifier_guided_poe/composers/` |
+| `poe_repair/experiments/presence_head/` (`dog_classifier.py`, `strong_head.py` from branch) | `poe-classifier-guidance/classifier_guided_poe/presence_head/` |
+| `scripts/presence_head_*.py`, `train_presence_head.py`, `does_clip_tell_a_pair_from_a_smoosh.py`, and from the branch `train_dog_classifier.py`, `train_strong_presence_head.py`, `classifier_guidance_from_the_paper.py`, `classifier_guidance_on_the_product.py`, `cooccurrence_*.py`, `dog_classifier_piles.py`, `render_no_prompt_pool.py`, `what_the_head_believes.py`, `strong_head_smoke.py`, `clip_guided_first_look.py`, `encode_latent_shards.py` | `poe-classifier-guidance/scripts/` |

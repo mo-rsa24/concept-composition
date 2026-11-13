@@ -1,6 +1,6 @@
 # Execute walk: the positional "and" vector
 
-**Plan:** [today-the-positional-and-vector.md](../../../plans/10-what-poe-loses-when-it-composes/today-the-positional-and-vector.md)
+**Plan:** [the plan it walked](../../plans/completed/today-the-positional-and-vector.md)
 **Mode:** `--request`, depth 0 (every piece needed)
 **Branch:** work stays on `exec/does-the-hybrid-fit-both-captions`, the branch the worktree was on; another
 session holds `context/world/compose-rate.md` and a scope-06 plan file modified, so nothing is committed

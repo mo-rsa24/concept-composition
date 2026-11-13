@@ -109,3 +109,7 @@ project" command work without manually picking the recipe is unverified (see "St
 
 Full build commands, the extension's recipe list, and the git-blame on `.vscode/settings.json`
 are in [paper.md](paper.md).
+
+## Cross-references
+
+- The mention of **execution model** in [the HPC nodes file's "Python environments" section](hpc/nodes.md#python-environments), where every job script must call the `co3` python by absolute path because nothing in the execution model activates an environment.

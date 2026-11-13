@@ -1445,3 +1445,4 @@ script its row names.
 - The mention of **joint prompt** in [the caption walk on wet camels and wet dogs](today-camel-and-dog-in-the-training-data.md).
 - The mention of **joint prompt** in [the learned-token run](today-a-learned-and-token.md).
 - The mention of **caption fine-tuning** in [the structural route](route-structural-can-a-toy-reproduce-the-hybrid.md).
+- The mention of **what PoE loses when it composes**, scope 10 placed in the understanding-compositionality project, in [the project table for regrouping the core repo](../split-into-idea-repos.md).

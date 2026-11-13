@@ -107,7 +107,7 @@ number, the first separating λ on finished adapters, does not exist.
 | The cache check and size | review file run table, 2026-09-03 | inferred |
 | The trainings | rank 8 and 16 on mscluster109 devices 0 and 1 (`co3`, about 42 s per 50-step epoch), rank 32 first on mscluster112 (`co3_bw`, 24 s per epoch) then resumed on mscluster106 device 1 (64 s per epoch) after a foreign process took the Blackwell; launched 2026-09-03 12:38, restarted twice for stall-guard recalibration (window 5 to 24 → 20 to 99, halving deadline 5k → 20k), stopped by the user 2026-09-04 01:30 | verified |
 | The strips | `scripts/superdiff/sdlora_sample_watcher.py` on mscluster112 device 0, 4 renders per pair per checkpoint at about 45 s each, 2026-09-03 17:40 to 2026-09-04 01:30 | verified |
-| Regenerate with | [runbook § train an adapter on SuperDiff's residual](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#2-launch-one-training) and [§ watch its checkpoints](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#3-render-a-strip-from-every-checkpoint-while-it-trains) | |
+| Regenerate with | [runbook § train an adapter on SuperDiff's residual](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#2-launch-one-training---ran-2026-09-03) and [§ watch its checkpoints](../../runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) | |
 | The plan | [adapters that learn SuperDiff's own residual](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/08-adapters-that-learn-superdiffs-own-residual.md), root step 50 | |
 
 ## Depends on

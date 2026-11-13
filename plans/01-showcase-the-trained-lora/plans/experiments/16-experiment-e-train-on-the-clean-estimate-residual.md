@@ -218,7 +218,7 @@ Serves goal 4 (the softness question measured rather than argued) and objective 
   - Command: `nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/experiment_e_wait_and_launch.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_wait.log 2>&1 &`
   - Direct form: `ssh <node> 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/showcase/experiment_e_x0_loss.sh <device> > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_x0loss.log 2>&1 &'`
   - Done when: `logs/experiment_e_claimed_device.txt` names the node and device, the chain's log shows `guards passed`, `dry run passed` and a W&B run URL, and the review file's Runs table carries node, device, PID and run id.
-- [ ] **2.2 Harvest while it runs**, per [the harvest recipe](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#3-harvest): `ssh <node> "pgrep -af 'train_pooled'"`, the checkpoint count under `phase1_r32_x0loss_40k/checkpoints/` (8 at the end), and the W&B run's `train/loss_eps` beside the baseline's `train/loss`.
+- [ ] **2.2 Harvest while it runs**, per [the harvest recipe](../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#3-harvest-what-is-running): `ssh <node> "pgrep -af 'train_pooled'"`, the checkpoint count under `phase1_r32_x0loss_40k/checkpoints/` (8 at the end), and the W&B run's `train/loss_eps` beside the baseline's `train/loss`.
 
 ▶ **Next: [task 3.1](#3--probe-the-checkpoints-and-run-the-readout)**.
 

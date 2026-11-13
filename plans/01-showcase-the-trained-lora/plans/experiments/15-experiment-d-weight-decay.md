@@ -158,7 +158,7 @@ disappointment.
 3. **The verdict script**: `scripts/showcase/experiment_d_verdict.py`, the bars as constants,
    reading the new run's 30k and 90k probe folders and the 90k checkpoint's weight norm.
 4. **Two probe folders**: `figure_r32_wd0.1_030000` and `figure_r32_wd0.1_090000`, made by the
-   [8-seed grid recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint).
+   [8-seed grid recipe](../../../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03).
 
 ---
 

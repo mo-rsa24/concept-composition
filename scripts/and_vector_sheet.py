@@ -41,7 +41,7 @@ sys.path.insert(0, str(REPO / "scripts"))
 # the checkout's older ones.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from and_vector_norms import positional_x  # noqa: E402
+from and_vector_norms import and_only_x, positional_x  # noqa: E402
 from concept_pair_sheet import NOISE_PAIR, OUT, concept_slug, write_sidecar  # noqa: E402
 
 # Column key, header lines, and the conditions it sums: "a", "b", "joint" name prompts, "x_raw",
@@ -60,6 +60,8 @@ COLUMNS = [
     ("poe_x_aff", ["PoE", "{a}, {b}, x_aff"], ["a", "b", "x_aff"]),
     ("x_pos", ["x_pos alone", "E(joint), words subtracted in place"], ["x_pos"]),
     ("poe_x_pos", ["PoE", "{a}, {b}, x_pos"], ["a", "b", "x_pos"]),
+    ("x_and", ["x_and alone", 'E("") + only what the joint adds'], ["x_and"]),
+    ("poe_x_and", ["PoE", "{a}, {b}, x_and"], ["a", "b", "x_and"]),
     ("poe_single", ["PoE", '{a}, {b}, "single animal"'], ["a", "b", "single animal"]),
     ("poe_two", ["PoE", '{a}, {b}, "two animals"'], ["a", "b", "two animals"]),
 ]
@@ -87,10 +89,13 @@ SWEEP = COLUMNS[:4] + [
 ] + [BY_KEY["poe_x_pos"]]
 # The positional build beside the references and the global build it is meant to improve on.
 POSITIONAL = COLUMNS[:4] + [BY_KEY[k] for k in ("x_fix", "poe_x_fix", "x_pos", "poe_x_pos")]
+# Only what the joint adds, on a readable scaffold, beside the references and the two earlier builds.
+AND_ONLY = COLUMNS[:4] + [BY_KEY[k] for k in ("x_pos", "poe_x_pos", "x_and", "poe_x_and")]
 SETS = {"vectors": (COLUMNS, 'An "and" vector as a third expert'),
         "phrases": (PHRASES, "A phrase as the third expert"),
         "sweep": (SWEEP, "x_fix as the third expert, at rising weight"),
         "positional": (POSITIONAL, 'The "and" vector built position by position, beside the global build'),
+        "and_only": (AND_ONLY, 'Only what the joint prompt adds, on a readable scaffold'),
         "curate": ([BY_KEY["joint"]], "The joint prompt, one tile per seed, to pass by eye")}
 
 
@@ -125,6 +130,10 @@ def render(columns: list, a: str, b: str, joint: str, seeds: list[int]) -> None:
     # x_pos keeps the joint prompt's pooled vector: it carries no token positions to align.
     e["x_pos"] = (positional_x(e["joint"][0], {"a": e["a"][0], "b": e["b"][0]}, ctx.models, joint,
                                [("a", a), ("b", b)]), e["joint"][1])
+    # x_and keeps the empty prompt's pooled vector too: the pooled channel has no slots, so "what the
+    # joint adds" is undefined there, and the empty prompt's keeps the whole condition in distribution.
+    e["x_and"] = (and_only_x(e["joint"][0], {"a": e["a"][0], "b": e["b"][0]}, e0[0], ctx.models, joint,
+                             [("a", a), ("b", b)]), e0[1])
     for _, _, conds in columns:
         for c, _ in map(split, conds):
             if c not in e:

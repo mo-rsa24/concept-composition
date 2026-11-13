@@ -1,9 +1,7 @@
-"""The "and" vector sheet: the references, then the two ways of building the vector as a third expert.
+"""The "and" vector sheet with only the references and x (the vector the repo's code calls x_fix) as the third expert.
 
-x is the global build (the repo's code calls it x_fix): E(joint) - E(a) - E(b) + E(""), which cancels the
-start token everywhere and leaves the pads and the word positions unlike any real prompt's. x_pos is the
-positional build: E(joint) with each single prompt's word subtracted only at the position holding that
-same word, so the start token, the end token and the pads stay the joint prompt's.
+The positional build x_pos has its own sheet, written by scripts/and_vector_sheet.py --set positional,
+so this one stays the six-column comparison it has always been.
 
 Reuses the tiles scripts/and_vector_sheet.py rendered; only the columns and their labels change.
 
@@ -20,13 +18,11 @@ COLUMNS = [
     ("b", ["{b}", "alone"], []),
     ("joint", ["Joint prompt", "{joint}"], []),
     ("poe", ["PoE", "{a}, {b}"], []),
-    ("x_fix", ["x alone", "subtracted everywhere"], []),
+    ("x_fix", ["x alone", ""], []),
     ("poe_x_fix", ["PoE", "{a}, {b}, x"], []),
-    ("x_pos", ["x_pos alone", "subtracted in place"], []),
-    ("poe_x_pos", ["PoE", "{a}, {b}, x_pos"], []),
 ]
 
 if __name__ == "__main__":
     tiles, out = Path(sys.argv[1]), Path(sys.argv[2])
-    sheet(COLUMNS, 'A third expert beside "dog" and "cat": subtracted everywhere, then subtracted in place',
-          tiles, out, "dog", "cat", "dog and cat", list(range(1, 9)))
+    sheet(COLUMNS, 'A third expert x beside "dog" and "cat"', tiles, out, "dog", "cat", "dog and cat",
+          list(range(1, 9)))

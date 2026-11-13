@@ -10,10 +10,14 @@
 > 4 of the judgeable seeds. **Time:** ~1.5 h, 4 minutes of it on a GPU · **Stop point:** step 5's
 > README row
 
+**Walked, and filed.** The result is
+[the finding "can a text-space third expert restore composition"](../../../report/can-a-text-space-third-expert-restore-composition.md),
+with the evidence in [the positional "and" vector card](../../results/the-positional-and-vector/README.md).
+
 Walk it with:
 
 ```text
-/drip-execute-plan plans/10-what-poe-loses-when-it-composes/today-the-positional-and-vector.md
+/drip-execute-plan artifacts/plans/completed/today-the-positional-and-vector.md
 ```
 
 ## Contents
@@ -34,7 +38,7 @@ Six ways of building a third expert beside "dog" and "cat" have been tried and e
 most 1 clear pair of the 7 judgeable seeds. The best of them, `x_fix`, cancels the start-of-text token
 by adding the empty prompt's embedding to the whole 77-position sequence. That cancellation is global,
 so it lands everywhere: the
-[measured norms](../../artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md#1--x--em--ed--ec-is-a-usable-conditioning)
+[measured norms](../../ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md#1--x--em--ed--ec-is-a-usable-conditioning)
 show the padding still holding 0.77 of the joint prompt's pad norm in CLIP ViT-L and 0.49 in OpenCLIP
 bigG against a pass mark of 0.1, and the word positions sitting above a real prompt's. SDXL is handed a
 sequence no prompt would produce.
@@ -80,7 +84,7 @@ this section says. It is a build check and it says nothing about whether `x_pos`
 Navigation: ⬅️ [Previous](#how-x_pos-is-built) | 📋 [Contents](#contents) | [Next](#where-things-land) ➡️
 
 **The seeds.** Seeds 1 to 8, the set every sheet in
-[supervisor-meeting/1-inference-only](../../supervisor-meeting/1-inference-only) renders, from the same
+[supervisor-meeting/1-inference-only](../../../supervisor-meeting/1-inference-only) renders, from the same
 cached starting noise per seed. The joint prompt draws two dogs on seed 8, so **seeds 1 to 7 are
 judgeable** and seed 8 is reported but not counted. That is the same 7 every earlier third expert was
 measured on, which is what makes the counts comparable.
@@ -134,7 +138,7 @@ For Claude to execute. Ask Claude to do these.
 - [x] ✅ **1.2** Add `x_pos` to `scripts/and_vector_norms.py`'s sequences, its figure, and a check that
   reports the largest absolute difference between `x_pos` and the joint prompt over position 0, the end
   token and the pads. That difference must be 0. ✓ verified 2026-11-04: `word_pairs` and `positional_x` added, the bar lives in the source as `SCAFFOLD_MAX_DIFF = 0.0`, and the figure carries four series
-- [x] ✅ **1.3** Run the norm table on the sheet's prompts and print it. ✓ verified 2026-11-04: largest absolute difference from the joint prompt at the start token, the end token and all 72 pads is 0 against an allowed 0; the only positions differing at all are 1 and 3. Position 1 is exactly 0 in both encoders, because a [causal mask](../../../../goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/02-position-zero-depends-on-itself.md) makes position 1 of "dog and cat" and of "dog" the same state. Files: `artifacts/results/the-positional-and-vector/dog-and-cat-norms.json` and `.png`
+- [x] ✅ **1.3** Run the norm table on the sheet's prompts and print it. ✓ verified 2026-11-04: largest absolute difference from the joint prompt at the start token, the end token and all 72 pads is 0 against an allowed 0; the only positions differing at all are 1 and 3. Position 1 is exactly 0 in both encoders, because a [causal mask](/home/molef/goal-setting/learning/deep-learning/diffusion-models/text-embedding-arithmetic-in-sdxl/plans/02-position-zero-depends-on-itself.md) makes position 1 of "dog and cat" and of "dog" the same state. Files: `artifacts/results/the-positional-and-vector/dog-and-cat-norms.json` and `.png`
   - Command: copy both scripts to the cluster scratch folder, then
     `POE_REPO=<cluster repo> <co3 python> <scratch>/and_vector_norms.py --joint "dog and cat" --a dog --b cat --out artifacts/results/the-positional-and-vector`
   - ✅ `x_pos` equals the joint prompt at position 0, at the end token and at every pad, difference 0.
@@ -174,10 +178,10 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [tasks 1.1 to 1.3](#1--build-x_pos-and-show-the-norm-table-no-gpu)**, so the table exists.
 
-- [ ] **Read the norm table** in the walk's message. Check three things: `x_pos` at position 0 equals
+- [x] ✅ **Read the norm table** in the walk's message. Check three things: `x_pos` at position 0 equals
   the joint prompt's, the end token and pad rows read as a difference of 0, and the word positions 1
   and 3 are the only rows where `x_pos` differs from the joint.
-- [ ] **Say `go`** to spend the 4 minutes of GPU, or `stop` if the table is wrong.
+- [x] ✅ **Say `go`** to spend the 4 minutes of GPU, or `stop` if the table is wrong. ✓ confirmed by hand 2026-11-04: "go", after the table showed a difference of 0 at the start token, the end token and all 72 pads
 
 ▶ **Next: [task 2.1](#2--render-the-two-new-columns-gpu-4-min)**.
 
@@ -185,8 +189,8 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [task 3.1](#3--the-sheets-the-figure-and-the-card)**, so the calls exist.
 
-- [ ] **Open the rebuilt sheet** and read the `PoE(dog, cat, x_pos)` column against the joint column.
-- [ ] **Veto or accept each call.** A call changed here changes the count and the row.
+- [x] ✅ **Open the rebuilt sheet** and read the `PoE(dog, cat, x_pos)` column against the joint column.
+- [x] ✅ **Veto or accept each call.** A call changed here changes the count and the row. ✓ confirmed by hand 2026-11-04: "accept", after seeds 2, 6 and 8 were queried and each was re-checked against the joint prompt's own cat on the same seed
 
 ▶ **Next:** the count is the plan's answer; the walk closes on it.
 

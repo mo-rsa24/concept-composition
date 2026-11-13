@@ -105,6 +105,31 @@ def positional_x(seq_joint, seqs_single: dict, tokenizers: dict, joint: str,
     return x
 
 
+def and_only_x(seq_joint, seqs_single: dict, seq_empty, tokenizers: dict, joint: str,
+               singles: list[tuple[str, str]], clip_l_width: int = CLIP_L_WIDTH):
+    """x_and: only what the joint prompt adds, written onto a real prompt's scaffolding.
+
+    The empty prompt supplies the start token, the end token and every pad, so the sequence is one
+    SDXL can read; that is the objection that killed x_fix. Onto it goes, at each word slot, the
+    joint's state minus the single prompt's state for that same word, and at a word slot no single
+    prompt supplies (here "and") the joint's state as it stands. A slot where the parts already
+    explain the joint therefore contributes nothing, which is the whole idea.
+    """
+    x = seq_empty.clone()
+    for lo, hi, tk in ((0, clip_l_width, tokenizers["tokenizer"]),
+                       (clip_l_width, seq_joint.shape[-1], tokenizers["tokenizer_2"])):
+        jt = tokens(tk, joint)
+        content = range(1, jt.index("<|endoftext|>"))
+        matched = {j: (key, i) for key, j, i in word_pairs(tk, joint, singles)}
+        for j in content:
+            if j in matched:
+                key, i = matched[j]
+                x[:, j, lo:hi] += seq_joint[:, j, lo:hi] - seqs_single[key][:, i, lo:hi]
+            else:
+                x[:, j, lo:hi] += seq_joint[:, j, lo:hi]
+    return x
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--joint", required=True)

@@ -128,9 +128,15 @@ condition whose output also differs per seed.
 
 - [ ] 1.1 the content-position mismatch: does it matter, or does cross-attention not care? The sheet's x_fix column answers this directly
 
-### 2. ⬜ PoE("dog", "cat", x) draws a cat and a dog together
+### 2. ✅ PoE("dog", "cat", x) draws a cat and a dog together
 
-Mark: needs a check (load-bearing).
+Mark: null, settled 2026-11-04.
+
+Eight third experts, 7 judgeable seeds, **0 clear cat-and-dog pairs each**, against a mark of 4 written
+before the first tile rendered. Co-occurrence is a different story and moves a long way: two separate
+animals on 0 of 7 for plain PoE, 5 of 7 for the phrase "a dog next to a cat" and 6 of 7 for x_pos. So
+a third expert can restore how many animals are in the frame and never which animals they are. The
+write-up is [the finding](../../../report/can-a-text-space-third-expert-restore-composition.md).
 
 **The test, written 2026-10-28 before any tile rendered.** `scripts/and_vector_sheet.py`, prompts
 "dog", "cat", "dog and cat", seeds 1 to 8, eight columns from the same noise per seed: dog alone,
@@ -207,6 +213,12 @@ multiplied by w = 7.5. It would also be fitted on cached states and used on the 
 product visits. Not fatal, because the LoRA faces the same mismatch and composes on 7 of 8 seeds, but
 it turns the claim into a measurement: the share of r_t a fitted x removes on held-out seeds, beside
 the LoRA's share on the same seeds.
+
+**Filed as a finding.** The whole series, every third expert tried against the same pass mark, is
+written up in [the finding "can a text-space third expert restore composition"](../../../report/can-a-text-space-third-expert-restore-composition.md),
+walked in [the positional-vector plan](../../plans/completed/today-the-positional-and-vector.md) with
+its evidence in [the positional "and" vector card](../../results/the-positional-and-vector/README.md).
+The follow-on it leaves open is [the plan that puts the LoRA on the text encoders](../../../plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md).
 
 ### 3. ✅ The LoRA's target is f("dog and cat")
 
@@ -330,6 +342,17 @@ Navigation: ⬅️ [Checks outstanding](#checks-outstanding) | 📋 [TOC](#table
 | 5 | claim 2, x_fix at rising weight | `SET=sweep`, queued on mscluster106 device 1 behind run 4 (pid 956073); PoE of dog, cat and λ·x_fix, λ = 0.1, 0.25, 0.5, 0.75, 1; 16 new tiles, the rest reused | queued | log `.../and_vector/logs/sweep.log`; read against run 4's last pass-mark row |
 | 6 | claim 3, joint seeds to pass | `SET=curate`, seeds 1 to 32, mscluster109 device 0 (RTX A6000; seeds 9 to 32 new) | done; contact sheet `joint-seeds-to-pass.png`, calls `joint-seed-calls.json`: 28 pass, 2 fail (8, 14), 2 for you (13, 22) |
 | 7 | claim 2, separation steering | `scripts/separation_steering.py` through `scripts/separation_steering.sh` on mscluster109 device 1, outside Slurm, 2026-10-28 01:22 to 01:32 cluster time; gradient step on the latent at steps 0 to 9, step sizes 2.5e4, 1.2e5, 5e5, seeds 1 to 8, with a no-steering column from the same script | done | [the sheet](../../results/what-the-and-vector-is-made-of/separation-steering-sheet.png), card entry in the [results README](../../results/what-the-and-vector-is-made-of/README.md). One cat and one dog on 0 of 7 counted seeds at every step size, plus 1 borderline tile; the mark was 4 of 7. 18.6 s per steered tile against 14.8 s plain. [Retrospective](../../notes/session-merges/2026-10-28-separation-steering-retro.md) |
+
+| 8 | claim 1, the positional build | `scripts/and_vector_norms.py --joint "dog and cat" --a dog --b cat`, text encoders only, through the cluster scratch without a git sync because another session held tracked files modified | done | x_pos differs from the joint prompt at 2 of 77 slots; the largest absolute difference at the start token, the end token and all 72 pads is 0. Slot 1 is exactly 0 in both encoders, because a causal mask makes slot 1 of "dog and cat" and of "dog" the same state |
+| 9 | claim 2, x_pos | `scripts/and_vector_sheet.py --render --set positional`, mscluster108 device 0, outside Slurm, 2026-11-04 09:22 to 09:31 | done | 16 tiles. 0 clear pairs of 7; two separate animals on 6 of 7, the best count in the series. x_pos used alone lands at 23.43 mean absolute pixel difference from the joint prompt's render against the three-expert product's 39.16 and plain PoE's 47.05 |
+| 10 | claim 1, the premise under every variant | `scripts/and_vector_premise.py --pairs 200`, text encoders only | done | E("A and B") − E("A") ranks B at median 1 of 276 nouns, top-1 75.0% pooled and 98.5% on the content mean, decoy at chance. Text arithmetic is not meaningless, so no failure above is explained by that |
+| 11 | claim 2, x_and | `scripts/and_vector_sheet.py --render --set and_only`, mscluster108 device 1, 2026-11-04 15:56 to 16:03 | done | the empty prompt's scaffolding carrying only what the joint adds: 0 of 8 tiles with two animals, PoE(dog, cat, x_and) at 48.49 against plain PoE's 47.05. A condition acts only through w(ε_x − ε_∅), so a faithful difference sits near the empty prompt and does nothing |
+| 12 | claim 2, a scored search | `scripts/and_vector_search.py` through `scripts/and_vector_search.sbatch`, bigbatch array 81713_[0-5], 56 candidates over 4 pairs | queued 2026-11-04 | phrases, mixes between E("") and E(joint), and failure phrases in the subtracted branch, scored by instance count |
+
+**The positional walk, 2026-11-04.** The runs after 7, their calls and their pixel distances are in
+[the positional "and" vector card](../../results/the-positional-and-vector/README.md), with the
+verdict in [the finding "can a text-space third expert restore composition"](../../../report/can-a-text-space-third-expert-restore-composition.md)
+and the retrospective in [the session merge](../../notes/session-merges/2026-11-04-the-positional-and-vector-retro.md).
 
 ## Routes
 

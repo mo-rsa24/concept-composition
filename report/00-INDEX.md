@@ -144,6 +144,7 @@ single corrector step does inside one noise level.
 | The question | Verdict | The number | The finding |
 |---|---|---|---|
 | Can real photographs of both animals train the composition instead of the model's own joint-prompt prediction? | ❌ dead: the corpus is reachable and unusable | of the images an automatic filter accepted, 7 of 16 cat × dog are genuine photographs of both animals and 0 of 11 turtle × tortoise are, the rest watermarked stock and merchandise; fed single-species images the same filter reports both species at 0.323 for turtle × tortoise against a 0.10 bar | [05-training-on-real-photographs.md](designing-the-correction-loss/05-training-on-real-photographs.md) |
+| Can a third expert built in text space supply what the joint prompt adds to product-of-experts? | ⚪ null: no third expert restores identity | over the 7 judgeable cat × dog seeds, one whole cat beside one whole dog: 0 for every one of eight third experts against a pass mark of 4; two separate animals: 0 for plain PoE, 5 for the phrase "a dog next to a cat", 6 for x_pos. Mean absolute pixel difference from the joint prompt's render, 0 to 255: x_pos used alone 23.43, the three-expert product 39.16, plain PoE 47.05 | [can-a-text-space-third-expert-restore-composition.md](can-a-text-space-third-expert-restore-composition.md) |
 | Where does each condition land in the scorer's image space, and does the correction move PoE toward the joint prompt? | ❌ null on both pre-registered bars; ✅ support on the post-hoc reads | cat × dog both-ness (projection toward the joint-prompt centroid, DINOv2 cosine units, mean of 8 seeds): PoE 0.21, corrected 0.42, joint 0.52; on the 8 held-out pairs the both-ness bands overlap on 5 of 7 counted pairs (null), while the instance count on the same images reads PoE 0.00 to 0.25 and corrected 0.75 to 1.00 on every pair (post-hoc) | [where-does-each-condition-land.md](when-does-the-outcome-lock-in/where-does-each-condition-land.md) |
 | What is the correction made of, and could PoE have supplied it by re-weighting its own predictions? | ❓ inconclusive on the pre-registered bar | orthogonal share of the correction's squared norm outside the span of the three predictions PoE has, mean over seeds 9 to 16 and steps 0 to 10: 0.374 against bars at 0.5 and 0.25; the reachable part weights each expert at 1 to 3 where PoE weights 7.5; the adapter's orthogonal share 0.19 against the target's 0.37 | [what-is-the-correction-made-of.md](when-does-the-outcome-lock-in/what-is-the-correction-made-of.md) |
 | Is the held-out gap of the pooled rank 8 adapter a fit, a drift, or a pair problem? | ✅ support: pair problem; ⚪ null on drift | fit cosine on cached states: training pairs 0.97, seen words in an unseen pairing 0.84, no seen word 0.80; on the adapter's own corrected trajectory 0.82 against 0.86 cached, cat x dog | [is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md](does-the-fix-reach-unseen-pairs/is-the-held-out-gap-a-fit-a-drift-or-a-pair-problem.md) |
@@ -173,7 +174,9 @@ single corrector step does inside one noise level.
 
 The evidence pairs waiting on a render, so they are visible rather than quietly absent.
 
-None. Every finding's evidence pairs have their render.
+| The finding | What is wanted | Where it saves |
+|---|---|---|
+| [can a text-space third expert restore composition](can-a-text-space-third-expert-restore-composition.md) | the rank of the held-out word as a histogram, the subtracted and unsubtracted readouts side by side with the decoy control behind them, from `premise-word-recovery.json` | `artifacts/results/the-positional-and-vector/premise-word-recovery.png` |
 
 ## Reading the pictures
 

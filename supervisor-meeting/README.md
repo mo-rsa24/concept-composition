@@ -24,7 +24,7 @@ The third expert x is built by arithmetic or by a phrase and added at sampling t
 | [real phrases](1-inference-only/3-real-phrases-as-the-third-expert.png) | seven phrases, including "dog and cat" itself | best phrase: 0 clear pairs, 4 to 5 seeds of two hybrids |
 | [x at rising weight](1-inference-only/4-x-at-rising-weight.png) | x scaled from 0.1 to 1 | nothing helps; high weights turn seeds into wallpaper |
 | [latent steering](1-inference-only/5-latent-steering.png) | nudge the starting noise so the two experts attend to different pixels | 0 of 7 at every step size |
-| [x subtracted in place](1-inference-only/1-arithmetic-vector-x.png) | x_pos = the joint prompt's own sequence with each animal's word subtracted only at the position holding that word; the start token, "and", the end token and all 72 pads left as the joint prompt has them | **0 clear pairs of 7**; but two separate animals on 7 of 8 seeds and no wallpaper on any, the best count in the table |
+| [x subtracted in place](1-inference-only/8-x-pos-subtracted-in-place.png) | x_pos = the joint prompt's own sequence with each animal's word subtracted only at the position holding that word; the start token, "and", the end token and all 72 pads left as the joint prompt has them | **0 clear pairs of 7**; but two separate animals on 6 of the 7 judgeable seeds and no wallpaper on any, the best count in the table |
 
 **Why x_raw fails, the token matrix.** Each bar is one text token position of "a cat and a dog"
 (top panel one text encoder, bottom panel the other). Red is x_raw, blue is x_fix, grey is the joint
@@ -68,6 +68,9 @@ Identity, meaning each animal being one whole species, never moves.
 
 **Reference:** [where the joint prompt succeeds](1-inference-only/0-reference-where-the-joint-prompt-succeeds.png)
 (7 of 8 seeds), so the pass marks use only those seeds.
+
+**The written-up version of this section**, with the pass mark, the premise test and the per-seed
+pixel distances, is [the finding "can a text-space third expert restore composition"](../report/can-a-text-space-third-expert-restore-composition.md).
 
 ## 2. Training: fit the third expert instead of building it
 
