@@ -66,7 +66,7 @@ correction to the move.
 
 ### 2. 🔀 Bring the three checkouts onto one branch
 
-- [ ] **2.1 Reach a quiet window.** Run `python3 scripts/quiet_window_check.py --me <your
+- [x] **2.1 Reach a quiet window.** Run `python3 scripts/quiet_window_check.py --me <your
       session id>`; it prints `CLEAR` only when no other session wrote in the last hour and no
       file is uncommitted in any checkout. On 2026-11-13 at 07:05 it printed `WAIT: 3 live
       session(s), 334 uncommitted file(s)`. What stands in the way:
@@ -81,10 +81,13 @@ correction to the move.
   - [ ] **`.playwright-mcp/` in the main checkout** (376 MB of browser-tool screenshots, 365
         folders, not in `.gitignore`) goes into `.gitignore` and onto the archive list.
   - [ ] **This worktree's 74 files are committed**, 22 of them from the classifier move.
-- [ ] **2.2 Merge the open branches** (`exec/how-much-co-occurrence-the-product-needs`,
+- [x] **2.2 Merge the open branches** (`exec/how-much-co-occurrence-the-product-needs`,
       `paper/answer-k4nd-uhz6`, `exec/correction-loss-01`, and the non-classifier files of
       `exec/can-a-classifier-supply-the-missing-term`) into one branch, with `/reconcile-machines`
       for the cluster side.
+  - ✅ 2026-11-13: the trunk `exec/correction-loss-01` holds all three (commits `3e1ca094`,
+    `26418bf4`, `779e1a6b`); 42 conflict regions resolved, each decision in `26418bf4`'s message.
+    The classifier branch's classifier files stay out; they live in `poe-classifier-guidance`.
 - [ ] **2.3 Gather the gitignored folders** (`artifacts/results/` and anything else ignored) from
       all three checkouts into the main checkout. A folder in two checkouts is compared file by
       file, and the newer copy is kept.
