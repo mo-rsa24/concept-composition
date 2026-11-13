@@ -19,7 +19,7 @@
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 
 DEVICE="${1:?usage: experiment_a_resume.sh <cuda_device_index>}"

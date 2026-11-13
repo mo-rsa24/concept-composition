@@ -9,7 +9,7 @@
 set -euo pipefail
 A="${1:?usage: sbatch method_grid_adapter.sbatch <r8_240k|r16_50k|r32_60k|crossseed>}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/method_grid
 cd "$REPO"; mkdir -p "$OUT"
 USE_PCT=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')

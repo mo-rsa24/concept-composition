@@ -7,7 +7,7 @@
 # Writes <OUT>/<method>_default/r2/<pair slug>/seed10/<method>.png and .json. A tile that exists is skipped.
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
-export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 GPU="${GPU:-0}"

@@ -7,7 +7,7 @@ lambda in {0, 0.25, 0.5, 0.75, 1} (columns), lambda being the fraction of r_t^SD
 run(), so a restart resumes.
 """
 import sys, time, json
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from poe_repair.run import MethodCtx
 from poe_repair.runtime import PairSeedCell, infer_device, infer_dtype

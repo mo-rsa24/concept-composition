@@ -115,7 +115,7 @@ or run the steps in this section in order.)
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 export CUDA_VISIBLE_DEVICES=1
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/outputs/training_cache
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 
 for SEED in 9 10 11 12 1 2; do
   $PY -m scripts.build_eval_cache \

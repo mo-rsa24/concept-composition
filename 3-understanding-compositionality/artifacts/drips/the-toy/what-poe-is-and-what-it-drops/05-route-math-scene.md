@@ -10,7 +10,7 @@ Target: the two readings of one joint probability table, and why p(x) is the thi
 standing between them. This is the groundwork for the Product-of-Experts identity
 p(x | c1, c2) = p(x | c1) p(x | c2) / p(x).
 
-Source thread: /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/drips/poe-two-concept-factorization/dispatch.md
+Source thread: /home-mscluster/mmolefe/Playground/PhD/concept-composition/drips/poe-two-concept-factorization/dispatch.md
 Read it first. It holds the exact notation and the worked numbers below, verbatim.
 
 WHAT THE READER HAS BEEN TAUGHT (drip --math, rung 1 of 5 pieces, plus its 3 children):

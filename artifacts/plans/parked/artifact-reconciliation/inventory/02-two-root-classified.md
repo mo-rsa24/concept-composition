@@ -1,6 +1,6 @@
 # Two-Root Classified Inventory (lora / cross_seed / cross_pair)
 
-**Roots swept**: `/datasets/mmolefe` and `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min` (repo)
+**Roots swept**: `/datasets/mmolefe` and `/home-mscluster/mmolefe/Playground/PhD/concept-composition` (repo)
 **Generated**: 2026-07-21
 **Scope**: artifacts owned by the three experiments `lora`, `cross_seed_lora_pooling`, `cross_pair_lora_pooling`, plus the caches they read. Everything else in `/datasets/mmolefe` is a different project or an older experiment family (listed under "Out of scope").
 

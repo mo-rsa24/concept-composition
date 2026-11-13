@@ -45,7 +45,7 @@ REFERENCES = [("mono", ["--column", "mono"]), ("poe", ["--column", "poe"])]
 PAIRS = ["a cat|a dog", "an elephant|a penguin", "a tiger|a dog", "a chess board|an hourglass"]
 SEEDS = ["9", "10"]
 
-REPO = "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min"
+REPO = "/home-mscluster/mmolefe/Playground/PhD/concept-composition"
 PY = "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python"
 OUT = "/datasets/mmolefe/poe_repair_min/outputs/fidelity_harness"
 

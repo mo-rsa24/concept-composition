@@ -13,7 +13,7 @@
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache

@@ -2,7 +2,7 @@
 # Wait for held-out caches, validate training with a 1-epoch dry-run, then launch the
 # full 100k-step pooled-LoRA training with W&B. Run in background on node 110.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache
 TRAIN=1-lora-correction/scripts/animals_compose_transfer/train_phase1.sh

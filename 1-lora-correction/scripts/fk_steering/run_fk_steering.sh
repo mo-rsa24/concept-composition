@@ -4,7 +4,7 @@
 #         GPU=<index> pins the device (default 0). Blackwell nodes (110-112) take co3_bw.
 set -euo pipefail
 MODE="${1:-full}"; shift || true
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/fk_steering
 GPU="${GPU:-0}"
 case "$(hostname -s)" in

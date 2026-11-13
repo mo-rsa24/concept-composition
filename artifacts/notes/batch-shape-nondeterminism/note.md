@@ -85,7 +85,7 @@ exact and meaningful.
 ## Reproduce
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 PYTHONPATH=. /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
   artifacts/notes/batch-shape-nondeterminism/measure.py
 ```

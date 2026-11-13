@@ -3,7 +3,7 @@
 #   ssh <node> 'GPU=<i> CODE_COMMIT=<sha> nohup bash <launchers>/review_count_ours_nfe.sh > <log> 2>&1 < /dev/null & disown'
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
-export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 CKPT=/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/checkpoints/lora_step_030000.pt

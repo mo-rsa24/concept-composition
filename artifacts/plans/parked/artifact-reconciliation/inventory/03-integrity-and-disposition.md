@@ -1,7 +1,7 @@
 # Integrity Check and Disposition (lora / cross_seed / cross_pair + training_cache)
 
 **Generated**: 2026-07-21
-**Roots**: `R:` repo (`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`) · `D:` datasets (`/datasets/mmolefe/poe_repair_min/outputs`)
+**Roots**: `R:` repo (`/home-mscluster/mmolefe/Playground/PhD/concept-composition`) · `D:` datasets (`/datasets/mmolefe/poe_repair_min/outputs`)
 **Method**: read-only. Checkpoints load-tested with `torch.load(weights_only=True)` (CPU); caches checked by shard-count vs the per-cell contract plus a spot-open of 12 random cells; run dirs checked for internal JSON consistency. Nothing was written, moved, or deleted.
 **Re-run**: `plans/standing/artifact-reconciliation/inventory/scripts/03_integrity.py` (checkpoints), `plans/standing/artifact-reconciliation/inventory/scripts/03b_cache_check.py` (caches).
 **Chains from**: `01-artifact-inventory.md` (W&B status) and `02-two-root-classified.md` (two-root scope).

@@ -7,7 +7,7 @@ so a restart resumes. One adapter attached at a time; attaching a new rank re-at
 same UNet, so the loop is rank-outermost.
 """
 import sys, time, json
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from types import SimpleNamespace
 import torch

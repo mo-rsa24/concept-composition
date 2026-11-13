@@ -1,7 +1,7 @@
 """Early look at a SuperDiff-trained adapter from an intermediate checkpoint: one pair, one rank,
 seeds 9-12 x lambda_value {0.25,0.5,0.75,1}, 200 steps, kappa 0.5. Not a plan deliverable."""
 import sys, time, json, argparse
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from types import SimpleNamespace
 import torch

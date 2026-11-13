@@ -212,7 +212,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 ◀ **Needs:** a node chosen per the launch order above.
 
 - [x] **1.1 Run the smoke mode** (cat × dog seed 9, 10 steps, 512², search at steps 2 to 5, one round of 2).
-  - Command: `sbatch --nodelist=mscluster53 1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch smoke`, or over SSH `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/smoke.log 2>&1 &'`
+  - Command: `sbatch --nodelist=mscluster53 1-lora-correction/scripts/noise_trajectory_search/noise_trajectory_search.sbatch smoke`, or over SSH `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/smoke.log 2>&1 &'`
   - Done when: the run directory holds five PNGs for seed 9, `search_eta1/run.json` with four searched steps, and the sheet, strip and figures draw without error.
 
 ▶ **Next: [task 2.1](#2--render-score-and-draw-the-full-run)**.

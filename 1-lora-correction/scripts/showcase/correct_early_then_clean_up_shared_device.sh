@@ -2,7 +2,7 @@
 # Shared-device launch for correct_early_then_clean_up.py (plan 14, 01-showcase-the-trained-lora),
 # per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup; every path absolute):
-#   ssh <node> 'GPU=<idx> STAGE=<detach|schedule|score|tail|renoise|sweep|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_<stage>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> STAGE=<detach|schedule|score|tail|renoise|sweep|strips|all> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_<stage>.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -12,7 +12,7 @@ case "$(hostname -s)" in
   mscluster110|mscluster111|mscluster112) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
   *) PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python ;;
 esac
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/correct_early_then_clean_up
 cd "$REPO"
 mkdir -p "$OUT"

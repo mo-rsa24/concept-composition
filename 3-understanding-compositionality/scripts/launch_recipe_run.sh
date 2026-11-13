@@ -2,7 +2,7 @@
 # One recipe run on a shared card, started with nohup over SSH. The base is v58-05's exact
 # argument list (recovered from its W&B metadata), and each run changes one thing against it.
 #
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/scripts/launch_recipe_run.sh <run> > <log> 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/3-understanding-compositionality/scripts/launch_recipe_run.sh <run> > <log> 2>&1 &'
 #
 #   R0   v58-05 again with torch seed 7 instead of 42: is a good step a property of the recipe or of one run
 #   R1   --out-of-span-only 1: train only on the part re-weighting the two experts cannot supply
@@ -13,7 +13,7 @@
 # Every path is absolute and the script cd's into the repo, so the SSH line needs no working directory.
 set -euo pipefail
 RUN=${1:?run name: R0 R1 R2a R2b}; GPU=${GPU:?set GPU=<cuda index>}
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort5
 POOL=$REPO/artifacts/_shared/cross_pair_pool_configs

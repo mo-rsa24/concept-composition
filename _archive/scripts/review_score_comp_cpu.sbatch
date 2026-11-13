@@ -12,6 +12,6 @@ set -euo pipefail
 S=/datasets/mmolefe/poe_repair_min/outputs/paper_review/scores
 cd $S
 hostname; nproc
-export CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=6 PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=6 PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python bin/review_score_comp.py --in $ROWS --out ${OUT:-comp.csv}
 echo "== done $(date -Is)"

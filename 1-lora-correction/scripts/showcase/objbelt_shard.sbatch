@@ -8,7 +8,7 @@
 # One shard of the object x object conveyor on one bigbatch RTX 3090.
 #   SHARD=3/4 sbatch -w mscluster42 1-lora-correction/scripts/showcase/objbelt_shard.sbatch
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 echo "=== object belt shard ${SHARD:?set SHARD} on $(hostname), job $SLURM_JOB_ID, $(date -Is)"
 nvidia-smi --query-gpu=name,memory.used --format=csv,noheader
 cd "$REPO"

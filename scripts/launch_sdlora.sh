@@ -11,7 +11,7 @@
 # script cd's into the repo itself, so the SSH launch line needs no working directory.
 set -euo pipefail
 RANK=${1:?rank}; GPU=${2:?cuda index}
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 # co3 (torch 2.5.1, up to sm_90) for the RTX 8000 / A6000 nodes; on the Blackwell nodes
 # (mscluster110-112, sm_120) pass PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python,
 # the env the phase-1 rank-8 run used there. co3 produces no CUDA kernels on that card.

@@ -17,7 +17,7 @@ from pathlib import Path
 
 import torch
 
-REPO = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+REPO = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 DAT = Path("/datasets/mmolefe/poe_repair_min/outputs")
 
 # (label, path, expected_note)  — headline ckpt per kept run + all suspects

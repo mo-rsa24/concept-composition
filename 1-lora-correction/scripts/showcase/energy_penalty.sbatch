@@ -26,7 +26,7 @@
 set -uo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 SHOWCASE=/datasets/mmolefe/poe_repair_min/outputs/showcase
 SCOPE="$REPO/artifacts/results/does-the-fix-reach-unseen-pairs"
 RESUME="$SHOWCASE/phase1_r32_100k/checkpoints/lora_step_030050.pt"
@@ -143,7 +143,7 @@ echo "[$(date -u '+%F %T')] frames: per-step running estimates at lambda 1.0 -> 
 $PY - "$CKPT" "$FRAMES_DIR" <<'EOF'
 import sys
 from pathlib import Path
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase")
 import where_each_condition_lands_trajectories as W
 W.CHECKPOINT = Path(sys.argv[1])
 raise SystemExit(W.main(["--out-root", sys.argv[2], "--conditions", "lora_1.0"]))

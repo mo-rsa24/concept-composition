@@ -166,7 +166,7 @@ before this plan can train.
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 export CUDA_VISIBLE_DEVICES=1
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/outputs/training_cache
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 ```
 
 ### Task A — pool YAMLs + leak guards

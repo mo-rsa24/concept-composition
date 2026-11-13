@@ -7,7 +7,7 @@
 # seeds 1 and 2 for each, build the sheet, append its full path to the manifest. A batch that
 # proposes nothing ends the belt, which is how it stops on its own when the candidates run out.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32
 G=$REPO/artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from
 # Six belts append here at once. One file per shard keeps two appends from interleaving on NFS;

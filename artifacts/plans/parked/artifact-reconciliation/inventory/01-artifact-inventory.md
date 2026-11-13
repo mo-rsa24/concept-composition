@@ -1,6 +1,6 @@
 # Artifact Inventory: concept-composition
 
-**Repo root**: /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+**Repo root**: /home-mscluster/mmolefe/Playground/PhD/concept-composition
 **Generated**: 2026-07-21
 **outputs/ total**: 22 GB, 13,214 files (5,636 png, 4,427 json, 2,608 pt, 438 npy, 15 .wandb)
 **Re-run**: `python inventory/scripts/01_inventory.py`

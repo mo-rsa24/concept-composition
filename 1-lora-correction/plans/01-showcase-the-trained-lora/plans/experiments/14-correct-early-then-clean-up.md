@@ -220,7 +220,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 ◀ **Needs: [task 1.1](#1--read-when-the-softness-enters-no-gpu)** done, and a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) with `pgrep -af 'sweep|train|corrector'` checked on the node first.
 
 - [ ] **2.1 Run the detachment proof on the claimed device.**
-  - Command: `ssh <node> 'GPU=<idx> STAGE=detach nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_detach.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> STAGE=detach nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/correct_early_detach.log 2>&1 &'`
   - Done when: `detach_check.json` reports `pass: true` (mean absolute pixel difference between the plain render before attaching and the plain render after a windowed run at or under `DETACH_MAX_MEAN_ABS_DIFF`). If it fails, nothing after this task runs; fix the sampler's exit first.
 
 ▶ **Next: [task 3.1](#3--render-and-score-the-schedule-grid)**.

@@ -14,7 +14,7 @@
 # checkout's package and renderers without that checkout being synced, as wave 1 did.
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python}"
 CKPT=$(awk '/^checkpoint:/ {print $2}' "$REPO/artifacts/_shared/cross_pair_pool_configs/adapter_of_record.yaml")

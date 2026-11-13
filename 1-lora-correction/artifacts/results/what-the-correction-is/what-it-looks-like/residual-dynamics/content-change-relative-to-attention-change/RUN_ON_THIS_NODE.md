@@ -9,7 +9,7 @@ Written 2026-08-05.
 ## The one command
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 bash 1-lora-correction/scripts/mechanism_study/run_sweep_on_this_node.sh
 ```
 

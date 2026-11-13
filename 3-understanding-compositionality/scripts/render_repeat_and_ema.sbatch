@@ -24,7 +24,7 @@
 # Tiles land at <pair>/seed<NN>/ours_<run>_s<step>_<tag>_w50.png in the ablation grid, and the
 # job ends by printing the largest pixel difference for every rawA/rawB and rawA/ema pair.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/ablation_grid
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 COHORT=/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3

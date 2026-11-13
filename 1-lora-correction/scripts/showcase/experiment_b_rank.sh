@@ -15,7 +15,7 @@
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 
 RANK="${1:?usage: experiment_b_rank.sh <rank: 16|32> <cuda_device_index>}"

@@ -10,14 +10,14 @@
 #
 # Shared-device path (environment/hpc/execution-protocol.md): runs over SSH on a pinned device
 # of an allocated biggpu node, invisible to squeue. Example:
-#   ssh mscluster109 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh 0.1 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_d_wd0.1.log 2>&1 &'
+#   ssh mscluster109 'nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh 0.1 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_d_wd0.1.log 2>&1 &'
 set -euo pipefail
 
 WD="${1:?usage: experiment_d_weight_decay.sh <weight_decay e.g. 0.1> <cuda_device_index> [python]}"
 DEVICE="${2:?usage: experiment_d_weight_decay.sh <weight_decay e.g. 0.1> <cuda_device_index> [python]}"
 # co3 on the A6000 / RTX 8000 nodes (106, 108, 109); co3_bw on the Blackwell nodes (110 to 112).
 PY="${3:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 export CUDA_VISIBLE_DEVICES="$DEVICE"
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache

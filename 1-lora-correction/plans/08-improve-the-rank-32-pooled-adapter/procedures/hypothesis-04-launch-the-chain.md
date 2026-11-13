@@ -66,7 +66,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 - [ ] 🖥️ **The switches exist and the dry run passed.**
 
   ```bash
-  cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+  cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
   grep -n "exclude-cells\|train-step-range\|orth-weight" poe_repair/experiments/cross_pair_lora_pooling/train_pooled.py
   ```
 
@@ -147,9 +147,9 @@ So every node can read it, and so it sits beside the outputs it produces.
 The source is the file [task 2.2](../../../artifacts/plans/parked/08-improve-the-rank-32-pooled-adapter/plans/hypothesis/04-the-parent-and-the-four-children.md#2--build-the-five-configurations-and-the-launcher) writes into the repository. If it is not there, that task is not done and this procedure cannot start.
 
 ```bash
-ls -l /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh
+ls -l /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh
 mkdir -p /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/logs
-cp /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh \
+cp /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/improve_r32_launch_chain.sh \
    /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/launch_chain.sh
 grep -c "^" /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/launch_chain.sh
 ```

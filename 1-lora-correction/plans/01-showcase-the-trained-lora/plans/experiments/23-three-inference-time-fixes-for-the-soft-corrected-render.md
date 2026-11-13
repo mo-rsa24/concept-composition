@@ -202,7 +202,7 @@ Serves objective 3 (the softness question measured rather than argued). Checkabl
 ◀ **Needs:** a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'crisp_fix|correct_early'` checked on the node first.
 
 - [x] **1.1 Launch the full chain** (identity, render, score, strips) on the claimed device.
-  - Command: `ssh <node> 'GPU=<idx> STAGE=all nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_all.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> STAGE=all nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/crisp_fix_strip_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/crisp_fix_all.log 2>&1 &'`
   - Done when: the log ends in `DONE stage=all`, `identity_check.json` reads `pass_cross_device: true`, `results.json` carries a verdict per fix, and the W&B run's Media tab shows `strips/seed_<n>` for 8 seeds. Record node, device, PID and the W&B run id in the review file's Runs table.
   - Launched 2026-09-06 03:26 on mscluster108 device 1 over SSH, bash PID 321031.
 - [x] **1.2 Render the same-loop full window, then re-score and re-strip against it** (`STAGE=baseline`, same launch shape, log `crisp_fix_baseline.log`). Queued behind task 1.1 by a waiter on the node. Done when `results.json` reads `reference_full_window: full_1.2_sameloop`, `fp16_floor_grey_levels` carries 8 seeds, and the strips' third tile is the same-loop full window.

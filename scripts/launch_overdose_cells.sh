@@ -15,7 +15,7 @@
 # the script cd's into the repo itself.
 set -euo pipefail
 GPU=${1:?cuda index}
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 # co3 for the RTX 8000 / A6000 nodes. co3_bw is the Blackwell env, but on
 # mscluster111 (driver 595.71.05) it reports cuda available = False and torch
 # silently runs on CPU: one cell took 39 minutes there on 2026-09-10. Check the

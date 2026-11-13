@@ -9,12 +9,12 @@
 # Runs DIRECTLY on a biggpu node over SSH (shared-node path in docs/ENVIRONMENT.md),
 # never via sbatch. All paths on the launch line must be ABSOLUTE (SSH starts in $HOME;
 # see environment/known-failures.md poe-launch-001):
-#   ssh <node> 'GPU=<free device> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh > /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/step-09-smoke-<node>.log 2>&1 &'
+#   ssh <node> 'GPU=<free device> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh > /home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/step-09-smoke-<node>.log 2>&1 &'
 set -uo pipefail
 
 GPU="${GPU:?set GPU=<free device index>; verify with nvidia-smi that it is free first}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/live_curves_smoke_run
 cd "$REPO"
 

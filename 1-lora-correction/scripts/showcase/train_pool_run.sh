@@ -4,7 +4,7 @@
 #   GPU=<idx> RUN=<name> CELLS=<json> [STEPRANGE="0 25"] [PY=<python>] [EXTRA="..."] \
 #     bash train_pool_run.sh
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 # Where the run tree lands. Default keeps the rank-32 showcase runs where they already are;
 # override it so a different rank or a different comparison does not mix into that tree.
 OUTROOT="${OUTROOT:-/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32}"

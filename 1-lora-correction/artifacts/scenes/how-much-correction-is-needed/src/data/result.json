@@ -9,43 +9,43 @@
    },
    "review": {
     "path": "plans/03-does-the-correction-cause-composition/review/hypothesis-02-more-correction-more-composition.md",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/plans/03-does-the-correction-cause-composition/review/hypothesis-02-more-correction-more-composition.md",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/plans/03-does-the-correction-cause-composition/review/hypothesis-02-more-correction-more-composition.md",
     "mtime": "2026-08-10T19:14:11+00:00",
     "bytes": 13276
    },
    "plan": {
     "path": "plans/03-does-the-correction-cause-composition/plans/hypothesis-02-more-correction-more-composition.md",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/plans/03-does-the-correction-cause-composition/plans/hypothesis-02-more-correction-more-composition.md",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/plans/03-does-the-correction-cause-composition/plans/hypothesis-02-more-correction-more-composition.md",
     "mtime": "2026-08-10T18:37:11+00:00",
     "bytes": 12484
    },
    "procedure": {
     "path": "plans/03-does-the-correction-cause-composition/procedures/hypothesis-02-recheck-the-headline-numbers.md",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/plans/03-does-the-correction-cause-composition/procedures/hypothesis-02-recheck-the-headline-numbers.md",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/plans/03-does-the-correction-cause-composition/procedures/hypothesis-02-recheck-the-headline-numbers.md",
     "mtime": "2026-08-10T18:10:59+00:00",
     "bytes": 12626
    },
    "scorer": {
     "path": "poe_repair/experiments/compose_scorer_validation/detection_scorer.py",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/poe_repair/experiments/compose_scorer_validation/detection_scorer.py",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/poe_repair/experiments/compose_scorer_validation/detection_scorer.py",
     "mtime": "2026-08-10T17:53:27+00:00",
     "bytes": 6824
    },
    "plotter": {
     "path": "scripts/plot_dose_curves.py",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/plot_dose_curves.py",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/scripts/plot_dose_curves.py",
     "mtime": "2026-08-10T16:18:28+00:00",
     "bytes": 10665
    },
    "canaries": {
     "path": "tests/test_interaction_term_canaries.py",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/tests/test_interaction_term_canaries.py",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/tests/test_interaction_term_canaries.py",
     "mtime": "2026-08-05T07:40:09+00:00",
     "bytes": 10659
    },
    "sweepScript": {
     "path": "scripts/mechanism_study/run_dose_sweep.sh",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/mechanism_study/run_dose_sweep.sh",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/scripts/mechanism_study/run_dose_sweep.sh",
     "mtime": "2026-08-05T21:56:33+00:00",
     "bytes": 3359
    },
@@ -57,7 +57,7 @@
    },
    "figureScript": {
     "path": "scripts/make_f2.py",
-    "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/make_f2.py",
+    "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/scripts/make_f2.py",
     "mtime": "2026-08-10T19:08:53+00:00",
     "bytes": 10736
    }
@@ -77,7 +77,7 @@
   "publicLinks": {
    "full": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/outputs/interaction_term/dose/pairs",
    "figures": "/datasets/mmolefe/poe_repair_min/outputs/interaction_term/dose",
-   "paperfigs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures"
+   "paperfigs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures"
   }
  },
  "verdict": {
@@ -6724,21 +6724,21 @@
  "figures": {
   "f2": {
    "path": "paper/iclr/figures/compose-rate-as-correction-rises.png",
-   "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/compose-rate-as-correction-rises.png",
+   "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/compose-rate-as-correction-rises.png",
    "mtime": "2026-08-10T19:11:41+00:00",
    "bytes": 1747766,
    "publicPath": "/paperfigs/compose-rate-as-correction-rises.png"
   },
   "f2b": {
    "path": "paper/iclr/figures/compose-rate-as-correction-rises-for-a-dissimilar-pair.png",
-   "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/compose-rate-as-correction-rises-for-a-dissimilar-pair.png",
+   "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/compose-rate-as-correction-rises-for-a-dissimilar-pair.png",
    "mtime": "2026-08-10T19:09:19+00:00",
    "bytes": 2045978,
    "publicPath": "/paperfigs/compose-rate-as-correction-rises-for-a-dissimilar-pair.png"
   },
   "f2Halfwidth": {
    "path": "paper/iclr/figures/compose-rate-as-correction-rises-with-a-random-control.png",
-   "abs": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/compose-rate-as-correction-rises-with-a-random-control.png",
+   "abs": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/compose-rate-as-correction-rises-with-a-random-control.png",
    "mtime": "2026-08-10T19:11:46+00:00",
    "bytes": 1538670,
    "publicPath": "/paperfigs/compose-rate-as-correction-rises-with-a-random-control.png"

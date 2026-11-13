@@ -3,7 +3,7 @@
 # in one thing: the KL-style anchor to the starting adapter. Both have the ImageReward fidelity term
 # actually on, which refl-04-fidelity never did (BLIP_Pretrain has no forward()).
 #
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/launch_reward_kl.sh <run> > <log> 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/scripts/launch_reward_kl.sh <run> > <log> 2>&1 &'
 #
 #   K0   --kl-weight 0: refl-04-fidelity's arguments with the fidelity term working (the control)
 #   K1   --kl-weight 10: the same, charged for drifting from the starting adapter (0.01 relative
@@ -33,7 +33,7 @@
 # On the Blackwell nodes (110, 112) pass PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python.
 set -euo pipefail
 RUN=${1:?run name: K0 K1 K2 K3 K4}; GPU=${GPU:?set GPU=<cuda index>}
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}
 OUT=/datasets/mmolefe/poe_repair_min/outputs/reward_finetune
 START=/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-05-self-contrast/checkpoints/lora_step_015000.pt

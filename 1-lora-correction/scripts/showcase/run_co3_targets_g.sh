@@ -8,7 +8,7 @@
 # adapter does not; here it is used only to produce a better teacher.
 set -uo pipefail
 
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 CO3=$REPO/composition/debottam_co3
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT="${OUT:-/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/co3_targets}"
@@ -39,7 +39,7 @@ for e in "${ENTRIES[@]}"; do
   # the barred-subject guard, same one the cache builder uses
   "$PY" - "$CA" "$CB" "$PJ" <<'PYG' || { echo "!!! refused: $SLUG"; FAIL=$((FAIL+1)); continue; }
 import sys
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase")
 from disallowed_subjects import check
 for t in sys.argv[1:]:
     check(t)

@@ -24,7 +24,7 @@
 # plurality and connective that plane is the wrong one, and at 1.0 the trainer short-circuits
 # the projection entirely, so the arms stay comparable.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 ARM="${ARM:?set ARM}"; GPU="${GPU:?set GPU}"
 MU="${MU:-0.1}"
 

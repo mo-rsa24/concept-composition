@@ -13,4 +13,4 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_%j.log
 export GPU=0
 export STAGE="${STAGE:-smoke_then_all}"
-exec bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh
+exec bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh

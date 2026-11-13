@@ -6,7 +6,7 @@
 #   ssh <node> 'GPU=<i> CELLS=<cells file> nohup bash <launchers>/review_baselines_co3_tail.sh > <log> 2>&1 < /dev/null & disown'
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
-export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 : "${GPU:?set GPU}" "${CELLS:?set CELLS}" "${CODE_COMMIT:=unknown}"

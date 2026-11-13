@@ -2,10 +2,10 @@
 # Scope 01, plan 16: noise trajectory search on the corrected sampler, shared-device launch per
 # environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup; every path absolute):
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh {smoke|full} [extra args] > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/<name>.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_trajectory_search/run_noise_trajectory_search.sh {smoke|full} [extra args] > /datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search/logs/<name>.log 2>&1 &'
 set -euo pipefail
 MODE="${1:-full}"; shift || true
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/noise_trajectory_search
 GPU="${GPU:?set GPU=<free device index>}"
 case "$(hostname -s)" in

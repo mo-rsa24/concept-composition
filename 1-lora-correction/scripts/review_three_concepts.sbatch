@@ -12,7 +12,7 @@
 #
 #   sbatch 1-lora-correction/scripts/review_three_concepts.sbatch      (from the cluster checkout)
 set -uo pipefail
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 

@@ -6,7 +6,7 @@ be rendered or judged first.
 ---
 
 Train the rank-32 pooled adapter's parent and three children on the newly curated pool, in
-`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`. Read
+`/home-mscluster/mmolefe/Playground/PhD/concept-composition`. Read
 `1-lora-correction/plans/08-improve-the-rank-32-pooled-adapter/run-names.md` first for what each run varies.
 
 **The pool.** `artifacts/_shared/cross_pair_pool_configs/cells_v57.json`, 29 pairs and 43 cells,

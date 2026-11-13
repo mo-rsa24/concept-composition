@@ -17,7 +17,7 @@ set -euxo pipefail
 source /home-mscluster/mmolefe/miniforge3/etc/profile.d/conda.sh
 ROOT=/datasets/mmolefe/envs
 REPOS=/datasets/mmolefe/repos
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 ENVS="${ENVS:-sd15-aae syngen}"
 export CUDA_VISIBLE_DEVICES="${GPU:-0}"
 echo "=== install $ENVS  node $(hostname -s)  device $CUDA_VISIBLE_DEVICES  pid $$  $(date -Is)"

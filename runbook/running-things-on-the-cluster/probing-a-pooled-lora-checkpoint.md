@@ -125,7 +125,7 @@ device. This is the script that produced `figure_r32_090050` on mscluster109 dev
 #!/bin/bash
 set -uo pipefail
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python   # co3 on 106/108/109 works too
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 export CUDA_VISIBLE_DEVICES=1                                    # change this
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache
 USED=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i 1)
@@ -206,7 +206,7 @@ and per step bucket.
 ```bash
 #!/bin/bash
 set -u
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/fit_cosine_r8_030000
 GPU=${GPU:-1}
@@ -273,7 +273,7 @@ for the rank 8 lineage and the template for the others:
 | the device index | `0` | the first argument to the script |
 
 ```bash
-ssh mscluster110 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_a_resume.sh 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_a_resume.log 2>&1 &'
+ssh mscluster110 'nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/experiment_a_resume.sh 0 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_a_resume.log 2>&1 &'
 ```
 
 ✅ **The header says which node and device, the guards pass, and the adapter attaches.** Real
@@ -341,7 +341,7 @@ the script runs one training per device in the background.
 | the two `run_rank` lines | `run_rank 0 16 16 &` and `run_rank 1 32 32 &` | device index, rank, alpha |
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 sbatch 1-lora-correction/scripts/showcase/experiment_b_rank.sbatch
 squeue -u mmolefe
 ```

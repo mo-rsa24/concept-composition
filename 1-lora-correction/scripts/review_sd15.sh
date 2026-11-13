@@ -13,7 +13,7 @@
 # Every path is absolute and the script cd's into REPO itself, so the launch line needs no working directory.
 # SHARE_OWN=1 lets a second process of this user's share a card already holding this user's work (never anyone else's).
 set -uo pipefail
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 GPU="${GPU:?set GPU to the device index}"
 STAGE="${STAGE:?set STAGE to prep, smoke, check or run}"
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review/sd15

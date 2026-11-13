@@ -11,7 +11,7 @@
 #
 # mscluster109 device 1, beside V0a on device 0, same device model as the V1 it is read against.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 export GPU="${GPU:-0}"
 # co3, not co3_bw: mscluster109 is an RTX A6000. co3_bw is for the Blackwell cards on
 # mscluster110 to 112 only, and a co3 CUDA op there produces no output rather than an error.

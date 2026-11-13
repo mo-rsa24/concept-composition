@@ -16,7 +16,7 @@
 # numbers do not compare across devices to V1 and V3 on mscluster109. V6 changes the target
 # anyway, so a comparison against them was never going to be clean on one axis.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 export GPU="${GPU:-0}"
 export PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
 export RUN="${RUN:-v6_render_teacher_r16_s0_25}"

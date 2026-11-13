@@ -1,7 +1,7 @@
 {
   "figure": "F9",
   "checkpoint_step": 100000,
-  "adapter_run": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k",
+  "adapter_run": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k",
   "sampler": {
     "scheduler": "ddim",
     "num_inference_steps": 50,
@@ -19,7 +19,7 @@
       "split": "heldout",
       "joint": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_9/mono.png",
       "poe": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_cat__x__a_dog/seed_9/poe.png",
-      "adapter": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_cat__x__a_dog__seed09.png"
+      "adapter": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_cat__x__a_dog__seed09.png"
     },
     {
       "pair": "an_eagle__x__a_hawk",
@@ -27,7 +27,7 @@
       "split": "heldout",
       "joint": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/an_eagle__x__a_hawk/seed_9/mono.png",
       "poe": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/an_eagle__x__a_hawk/seed_9/poe.png",
-      "adapter": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__an_eagle__x__a_hawk__seed09.png"
+      "adapter": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__an_eagle__x__a_hawk__seed09.png"
     },
     {
       "pair": "a_frog__x__a_toad",
@@ -35,7 +35,7 @@
       "split": "heldout",
       "joint": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_frog__x__a_toad/seed_9/mono.png",
       "poe": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_frog__x__a_toad/seed_9/poe.png",
-      "adapter": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_frog__x__a_toad__seed09.png"
+      "adapter": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_frog__x__a_toad__seed09.png"
     },
     {
       "pair": "a_goose__x__a_swan",
@@ -43,7 +43,7 @@
       "split": "heldout",
       "joint": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_goose__x__a_swan/seed_9/mono.png",
       "poe": "/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache/heldout/a_goose__x__a_swan/seed_9/poe.png",
-      "adapter": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_goose__x__a_swan__seed09.png"
+      "adapter": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k/samples/per_epoch/epoch_2000_step_100000/out_out__a_goose__x__a_swan__seed09.png"
     }
   ]
 }

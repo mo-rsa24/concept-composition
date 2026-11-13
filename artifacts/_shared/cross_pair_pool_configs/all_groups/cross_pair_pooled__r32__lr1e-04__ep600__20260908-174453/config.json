@@ -80,7 +80,7 @@
   "device": "cuda",
   "dtype": "float16",
   "run_id": "cross_pair_pooled__r32__lr1e-04__ep600__20260908-174453",
-  "run_dir": "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/_shared/cross_pair_pool_configs/all_groups/cross_pair_pooled__r32__lr1e-04__ep600__20260908-174453",
+  "run_dir": "/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/_shared/cross_pair_pool_configs/all_groups/cross_pair_pooled__r32__lr1e-04__ep600__20260908-174453",
   "dry_run": false,
   "skip_scoring": true,
   "resume_from": null,

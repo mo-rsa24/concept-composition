@@ -16,7 +16,7 @@
 #   sbatch --export=ALL,RUN_MODELS=sd35 1-lora-correction/scripts/same_rule_four_models.sbatch   # one column only
 #   sbatch --export=ALL,CHECK_LOAD=1 1-lora-correction/scripts/same_rule_four_models.sbatch    # load all four, render nothing
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUTROOT=/datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 SCRIPT="$REPO/scripts/same_rule_four_models.py"

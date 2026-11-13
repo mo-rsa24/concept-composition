@@ -547,7 +547,7 @@ with the user's yes.
 are under `/datasets/mmolefe/poe_repair_min/outputs/rsync-backup-iclr-56173-20261110/` and the
 `.gitignore` leftover in the cluster checkout's `stash@{0}`
 
-**Affects steps:** any step that rsyncs into `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`
+**Affects steps:** any step that rsyncs into `/home-mscluster/mmolefe/Playground/PhD/concept-composition`
 
 **Category:** 🟠 blocks the launch path
 

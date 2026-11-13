@@ -4,8 +4,8 @@
 #SBATCH --nodelist=mscluster76
 #SBATCH --time=72:00:00
 #SBATCH --ntasks=1
-#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/lambda_window_grid-%j.out
-#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/lambda_window_grid-%j.err
+#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/lambda_window_grid-%j.out
+#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/lambda_window_grid-%j.err
 # Plan 07 (01-showcase-the-trained-lora) task group 1: render the 5-cell x 5-lambda grid,
 # measure compose/drift/sharpness per render, build the descriptive strip.
 #
@@ -16,7 +16,7 @@ set -euo pipefail
 STAGE="${1:?usage: sbatch lambda_window_grid.sbatch <sweep|measure|strip>}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/experiment_c
 cd "$REPO"
 mkdir -p "$OUT" logs

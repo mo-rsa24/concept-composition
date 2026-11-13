@@ -42,7 +42,7 @@ CONTROL_PAIR = "a_butterfly__x__a_flower_meadow"
 # the existing rank-32 lambda 1.2 render and the plain-PoE render the identity check reads against
 R32_RENDERS = Path("/datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_030050/renders/full")
 # the landing finding's DINOv2 features of the 48 cat x dog renders, rows: 6 conditions x seeds 9..16
-LANDING_FEATS = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy")
+LANDING_FEATS = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space-dino-feats.npy")
 LANDING_SEEDS = (9, 10, 11, 12, 13, 14, 15, 16)
 
 
@@ -97,7 +97,7 @@ def mean_abs_diff(a: Path, b: Path) -> float:
 def bothness(run_dir: Path, thumb_paths: dict[str, dict[int, str]]) -> dict:
     """Project each tile's DINOv2 CLS onto the landing finding's cloud axes (x: cat -> dog centroid,
     y: solo midpoint -> joint centroid, orthogonalised). Axes come from the saved 48-render features."""
-    sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+    sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
     from scripts.build_lora_inspector_mds_semantic import DinoEmbedder  # noqa: E402
     feats = np.load(LANDING_FEATS)
     idx = lambda cond, s: {"solo_a": 0, "solo_b": 1, "joint": 2}[cond] * 8 + LANDING_SEEDS.index(s)  # noqa: E731

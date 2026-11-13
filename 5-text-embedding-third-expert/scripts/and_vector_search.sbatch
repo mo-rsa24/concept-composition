@@ -16,7 +16,7 @@
 #   COLLECT=1 sbatch 5-text-embedding-third-expert/scripts/and_vector_search.sbatch        once the array is done
 #
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=${OUT:-/datasets/mmolefe/poe_repair_min/outputs/and_vector_search}
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 S=/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/_scripts

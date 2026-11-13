@@ -16,7 +16,7 @@
 set -euo pipefail
 
 NODE="${CLUSTER_NODE:-mscluster84}"
-RDIR="${CLUSTER_DIR:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+RDIR="${CLUSTER_DIR:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 cd "$ROOT"
 

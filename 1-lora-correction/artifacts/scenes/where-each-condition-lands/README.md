@@ -16,7 +16,7 @@ thumbnail at that step; pick one seed to see all six side by side while you scru
 Build once (Node is on the cluster, nothing on the laptop):
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/scenes/where-each-condition-lands
 npm install && npm run build      # writes dist/, about 26 MB with the thumbnails
 ```
 

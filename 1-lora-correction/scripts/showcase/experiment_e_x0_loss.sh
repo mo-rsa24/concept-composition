@@ -16,7 +16,7 @@
 #
 # Shared-device path (environment/hpc/execution-protocol.md): over SSH on a pinned free device of
 # a biggpu node, invisible to squeue. Example (every path absolute):
-#   ssh mscluster106 'nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/experiment_e_x0_loss.sh 1 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_x0loss.log 2>&1 &'
+#   ssh mscluster106 'nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/experiment_e_x0_loss.sh 1 > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/experiment_e_x0loss.log 2>&1 &'
 set -euo pipefail
 
 DEVICE="${1:?usage: experiment_e_x0_loss.sh <cuda_device_index> [python]}"
@@ -26,7 +26,7 @@ case "$(hostname -s)" in
 esac
 PY="${2:-$DEFAULT_PY}"
 STAGE="${STAGE:-all}"
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 export CUDA_VISIBLE_DEVICES="$DEVICE"
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache

@@ -12,7 +12,7 @@
 #
 #   sbatch --export=ALL,PAIRS="a tiger|a parrot;a goat|a cat",SEEDS="9 10 11 12",WINDOWS="10 20 50",CKPT=<pt>,TAG=run9 figure_windows.sbatch
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUTROOT=/datasets/mmolefe/poe_repair_min/outputs/figure_candidates
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 SCRIPT="$OUTROOT/figure_candidates.py"

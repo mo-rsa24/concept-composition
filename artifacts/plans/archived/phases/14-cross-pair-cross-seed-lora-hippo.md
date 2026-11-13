@@ -196,7 +196,7 @@ pairs at seeds `{1..8}` exists or is in flight under
 ### 1. Push code from mscluster106 to git remote
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 git status                                  # confirm clean / commit local changes
 git push origin main                        # or the feature branch
 ```

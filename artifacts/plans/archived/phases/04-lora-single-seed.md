@@ -82,7 +82,7 @@ the run commands.
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 export CUDA_VISIBLE_DEVICES=1
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 ```
 
 ### Inference / inspection only (existing checkpoint)

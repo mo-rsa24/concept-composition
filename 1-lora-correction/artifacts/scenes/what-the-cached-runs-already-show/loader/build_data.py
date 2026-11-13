@@ -26,7 +26,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SCENE = HERE.parent
 SCOPE = SCENE.parent
-REPO = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+REPO = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 
 REVIEW = SCOPE / "review/hypothesis-04-what-the-cached-runs-already-show.md"
 PLAN = SCOPE / "plans/hypothesis-04-what-the-cached-runs-already-show.md"

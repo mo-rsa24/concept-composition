@@ -132,7 +132,7 @@ No measurement of any of these exists yet; the smoke test supplies one per metho
 ```bash
 scripts/cluster.sh sh "for m in joint poe aae syngen dnb; do
   for s in animals animals_objects objects; do
-    n=\$(grep \"|\$s\$\" /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/review_benchmark_pairs.txt | wc -l)
+    n=\$(grep \"|\$s\$\" /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/review_benchmark_pairs.txt | wc -l)
     printf '%s %s: expect %d\n' \$m \$s \$((n*4))
   done
   printf '%s: %s tiles, %s sidecars (expect 1104 each)\n' \$m \
@@ -249,16 +249,16 @@ These need Plan 1's `syngen` environment and clone (steps 0 and 1 of Plan 1). If
 scripts/cluster.sh sync
 
 # 1. The spaCy parse into syngen_indices_sdxl.json (CPU, minutes)
-scripts/cluster.sh sh "/datasets/mmolefe/envs/syngen/bin/python /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/review_syngen_indices.py"
+scripts/cluster.sh sh "/datasets/mmolefe/envs/syngen/bin/python /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/review_syngen_indices.py"
 
 # 2. The smoke test on mscluster108 card 0 (same card model as the r1_joint column, for the identity check)
 scripts/cluster.sh sh "ssh mscluster108 nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv"
-scripts/cluster.sh sh "timeout 30 ssh mscluster108 'GPU=0 STAGE=smoke PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_smoke.log 2>&1 < /dev/null & disown'"
+scripts/cluster.sh sh "timeout 30 ssh mscluster108 'GPU=0 STAGE=smoke PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_smoke.log 2>&1 < /dev/null & disown'"
 
 # 3. After the smoke passes and you say yes: production on a free Blackwell card, two shards if two cards are free
 scripts/cluster.sh sh "ssh mscluster112 nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv"
-scripts/cluster.sh sh "timeout 30 ssh mscluster112 'GPU=0 STAGE=run SHARD=0/2 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_0of2.log 2>&1 < /dev/null & disown'"
-scripts/cluster.sh sh "timeout 30 ssh mscluster111 'GPU=0 STAGE=run SHARD=1/2 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_1of2.log 2>&1 < /dev/null & disown'"
+scripts/cluster.sh sh "timeout 30 ssh mscluster112 'GPU=0 STAGE=run SHARD=0/2 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_0of2.log 2>&1 < /dev/null & disown'"
+scripts/cluster.sh sh "timeout 30 ssh mscluster111 'GPU=0 STAGE=run SHARD=1/2 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/review_syngen_sdxl.sh > /datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/syngen_sdxl_1of2.log 2>&1 < /dev/null & disown'"
 
 # 4. The finished check: 1,104 tiles and sidecars, counted on the node that wrote them
 scripts/cluster.sh sh "ssh mscluster112 'ls /datasets/mmolefe/poe_repair_min/outputs/paper_review/syngen-sdxl_default/r1/*/seed*/syngen-sdxl.png | wc -l; ls /datasets/mmolefe/poe_repair_min/outputs/paper_review/syngen-sdxl_default/r1/*/seed*/syngen-sdxl.json | wc -l'"

@@ -4,8 +4,8 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=1
-#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/stoch_sweep-%j.out
-#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/stoch_sweep-%j.err
+#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/stoch_sweep-%j.out
+#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/stoch_sweep-%j.err
 # Plan 19 (01-showcase-the-trained-lora): the stochastic sampler sweep. Stage is $1:
 # "render" (144 renders, resumable), "score", or "all" (render then score in one job).
 # bigbatch nodes carry an RTX 3090 (24 GB); the excluded nodes have a dead or unreachable GPU
@@ -16,7 +16,7 @@ set -euo pipefail
 STAGE="${1:?usage: sbatch stochastic_sampler_sweep.sbatch <render|score|all>}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/stochastic_sampler_sweep
 cd "$REPO"
 mkdir -p "$OUT" logs

@@ -9,7 +9,7 @@
 # removed. Refuses to overwrite an existing destination.
 set -euo pipefail
 
-REPO="/home-mscluster/mmolefe/Playground/PhD/poe_repair_min"
+REPO="/home-mscluster/mmolefe/Playground/PhD/concept-composition"
 DAT="/datasets/mmolefe/poe_repair_min"
 APPLY="${APPLY:-0}"
 

@@ -38,7 +38,7 @@ Writes, under --out (default 3-understanding-compositionality/artifacts/results/
 Run it on a biggpu node's free device, per environment/hpc/execution-protocol.md:
     ssh mscluster106 'CUDA_VISIBLE_DEVICES=1 \
       /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
-      /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/3-understanding-compositionality/scripts/layout_from_joint_render.py'
+      /home-mscluster/mmolefe/Playground/PhD/concept-composition/3-understanding-compositionality/scripts/layout_from_joint_render.py'
 """
 from __future__ import annotations
 

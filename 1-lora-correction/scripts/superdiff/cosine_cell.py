@@ -1,7 +1,7 @@
 """One cell with the adapter AND r_t^SD formed, so the sidecar carries cosine(delta_hat, r_t^SD)
 per step. cat x dog seed 9, rank 8 (latest checkpoint), lambda_value=1, kappa 0.5, 200 steps."""
 import sys, json
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from types import SimpleNamespace
 import torch

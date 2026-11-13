@@ -18,7 +18,7 @@
 # A tile that exists is skipped, so a relaunch resumes.
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python}"
 CKPT=/datasets/mmolefe/poe_repair_min/outputs/showcase/cohort3/v58-03-self/checkpoints/lora_step_030000.pt

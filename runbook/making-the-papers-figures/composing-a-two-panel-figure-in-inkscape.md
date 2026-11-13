@@ -11,7 +11,7 @@ Worked example throughout: the two correction-window grids in
 **The figure is built by a script, not by hand.**
 
 ```bash
-export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
     scripts/when_the_correction_arrives.py
 ```
@@ -96,7 +96,7 @@ Both grids are drawn by scripts, not by hand.
 **Panel (a) is the window extending from the start.**
 
 ```bash
-export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 OUT=paper/iclr/figures/when-the-correction-arrives/poe
 
@@ -166,7 +166,7 @@ decide to skip Inkscape.
 Inkscape is not installed on the cluster. You do this part locally.
 
 ```bash
-scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/when-the-correction-arrives/poe/panel-*.pdf .
+scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/when-the-correction-arrives/poe/panel-*.pdf .
 ```
 
 ---

@@ -14,7 +14,7 @@
 #   scripts/cluster.sh run "sbatch 1-lora-correction/scripts/check_corrector_identity.sbatch"
 #   sbatch --export=ALL,REPO=<a worktree> <that worktree>/scripts/check_corrector_identity.sbatch
 set -uo pipefail
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 
 echo "=== node $(hostname)  job ${SLURM_JOB_ID:-none}  start $(date -Is)"

@@ -12,7 +12,7 @@ export default defineConfig({
         '.',
         '/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/outputs/interaction_term/dose',
         '/datasets/mmolefe/poe_repair_min/outputs/interaction_term/dose',
-        '/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures',
+        '/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures',
       ],
     },
   },

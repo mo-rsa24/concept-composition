@@ -8,7 +8,7 @@
 # Writes OUT/<pair>/algo-co3-hybrid_/<joint prompt>/seed-<n>/*.png, 9 pictures in all.
 set -uo pipefail
 
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 CO3=$REPO/composition/debottam_co3
 # co3 (with xformers) on the bigbatch RTX 3090s, where every earlier CO3 render ran; co3_bw has no
 # xformers, and CO3 switches it on, so the Blackwell fails at model load (2026-11-11).

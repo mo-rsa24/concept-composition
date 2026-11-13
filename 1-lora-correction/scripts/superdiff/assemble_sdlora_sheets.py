@@ -13,7 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 SD = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff")
 BASE = SD / "lambda_sweep" / "pairs"
 XFER = SD / "transfer_sdlora" / "grid" / "pairs"
-OUT = Path(os.environ.get("OUT", "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/how-much-is-added/across-composition-rules"))
+OUT = Path(os.environ.get("OUT", "/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/how-much-is-added/across-composition-rules"))
 OUT.mkdir(parents=True, exist_ok=True)
 PAIRS = [("a_cat__x__a_dog", "cat_dog"), ("a_butterfly__x__a_flower_meadow", "butterfly_meadow")]
 RANKS = [8, 16, 32]; SEEDS = [9, 10, 11, 12]; LVS = [0.0, 0.25, 0.5, 0.75, 1.0]

@@ -15,7 +15,7 @@ layout (PoE | per-epoch grid | Mono).
 
 | Artefact | Path |
 |---|---|
-| Repo | `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min` |
+| Repo | `/home-mscluster/mmolefe/Playground/PhD/concept-composition` |
 | Cache root | `/datasets/mmolefe/poe_repair_min/outputs/training_cache` |
 | Run dir (read-only) | `/datasets/mmolefe/poe_repair_min/outputs/cross_seed_lora_pooling/task_b_learning_curve/k04__ep2000_resumed` |
 | Final checkpoint | `<run>/checkpoints/lora_step_100000.pt` (ep 2000) |
@@ -42,7 +42,7 @@ Paste once per shell session before any step. All later steps assume
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 export CUDA_VISIBLE_DEVICES=1
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/outputs/training_cache
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 RUN=/datasets/mmolefe/poe_repair_min/outputs/cross_seed_lora_pooling/task_b_learning_curve/k04__ep2000_resumed
 CKPT=$RUN/checkpoints/lora_step_100000.pt
 ```

@@ -280,7 +280,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
   - **Done when:** the package imports, the pick rule prefers a count-2 candidate over a sharper
     count-1 one, and `verdict` returns support, null, breaks and inconclusive on hand-made rates.
 - [x] **1.3** Run the smoke mode on a free device: cat × dog seed 9, N 2, σ 0.3, 10 steps, 512².
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_smoke.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_smoke.log 2>&1 &'`
   - **Done when:** the run dir holds `mono_eta0.png`, `poe_pivot.png`, `detach_check.json` with a
     difference near zero, `adapter_pivot_lambda1.2.png`, `sigma_0.3/` with two finals and
     `run.json`, a one-row sheet with its sidecar, `summary.json` and `verdict.json`, and the log
@@ -297,7 +297,7 @@ A corrected render that is two clean animals at full sharpness, picked rather th
 - [x] **2.1** Launch the full mode with `nohup`, one pair per free device: cat × dog on one,
       butterfly × meadow on the other, seeds 9 to 16, σ 0.1 and 0.3, N 8, 50 steps, 1024², W&B
       online.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_search/run_noise_search.sh adapter-full --pairs <pair> > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/adapter_full_<pair>.log 2>&1 &'`
   - **Done when:** both W&B run ids, run dirs, nodes, devices and PIDs are in the review file's
     Runs table.
   - Launched 2026-09-06 02:42 (cat × dog, mscluster107 device 1, PID 57966, W&B `kqj26oiz`) and

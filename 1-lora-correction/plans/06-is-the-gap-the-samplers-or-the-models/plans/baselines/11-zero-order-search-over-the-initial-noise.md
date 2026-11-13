@@ -356,7 +356,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
     support, null and inconclusive on hand-made rates.
 - [x] **2.2** Run the smoke mode on a free device: cat × dog seed 9 only, N 2, σ 0.3, 10 steps,
       512², x0-hat captured at step 2, detector on, W&B off.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/smoke.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_search/run_noise_search.sh smoke > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/smoke.log 2>&1 &'`
   - **Done when:** the run dir holds `mono_eta0.png`, `poe_pivot.png`, its step-2 x0-hat, a
     `sigma_0.3/` folder with two finals, two x0-hats and `run.json`, a one-row sheet with its
     sidecar, `summary.json` and `verdict.json`, and the log shows the device name and `cuda`
@@ -373,7 +373,7 @@ nudge of the noise away, the sampler's share is large and reachable without any 
 
 - [x] **3.1** Launch the full mode with `nohup` on a free device: both pairs, seeds 9 to 16, σ 0.1
       and 0.3, N 8, 50 steps, 1024², W&B online.
-  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`
+  - Command: `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`
   - 💡 `/run-experiment` ✅ for the launch and the harvest.
   - **Done when:** the W&B run id, the run dir, the node, the device and the PID are in the review
     file's Runs table.

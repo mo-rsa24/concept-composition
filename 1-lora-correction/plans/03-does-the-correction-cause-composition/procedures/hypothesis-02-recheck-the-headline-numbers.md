@@ -161,7 +161,7 @@ Navigation: ⬅️ [1. Confirm what the scorer is reading](#1-confirm-what-the-s
 Do not pick a threshold from a number alone. Draw the boxes and look at them.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min    # the paths below are repo-relative
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition    # the paths below are repo-relative
 $PY 1-lora-correction/scripts/dose_strip.py --pair an_elephant__x__a_penguin --seed 10 --annotate-boxes --device cpu
 ```
 

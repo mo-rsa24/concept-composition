@@ -269,9 +269,9 @@ The last line is the identity check. Setting the new switch to cover the whole r
 
     ```bash
     /home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python -m poe_repair.experiments.cross_pair_lora_pooling.train_pooled \
-      --pair-pool      /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/_shared/cross_pair_pool_configs/pair_pool_14.yaml \
-      --pair-prompts   /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/_shared/cross_pair_pool_configs/pair_prompts_14.yaml \
-      --seed-pool-path /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/_shared/cross_pair_pool_configs/seed_pool.yaml \
+      --pair-pool      /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/_shared/cross_pair_pool_configs/pair_pool_14.yaml \
+      --pair-prompts   /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/_shared/cross_pair_pool_configs/pair_prompts_14.yaml \
+      --seed-pool-path /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/_shared/cross_pair_pool_configs/seed_pool.yaml \
       --exclude-cells  /datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32/exclude_cells.json \
       --train-step-range 0 24 --orth-weight 3.0 \
       --lora-rank 32 --lora-alpha 32 --weight-decay 1e-2 --ema-decay 0.999 --lr 1e-4 \

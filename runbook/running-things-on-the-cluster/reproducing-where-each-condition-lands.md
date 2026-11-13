@@ -32,7 +32,7 @@ Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-rend
 
 - [ ] 🖥️ **The repo is on the branch that has the scripts**
   ```bash
-  ls /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_*
+  ls /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_*
   ```
   ✅ **Five files**: `_render.py`, `_trajectories.py`, `_plot.py`, `_frames_embed.py`, `_shared_device.sh` (plus `_dynamics.py`, which draws the both-ness-over-steps figure).
   ❌ **Fewer**: you are on an older branch; the scripts landed on `overhaul/tree-2026-08-10` on 2026-09-05.
@@ -67,7 +67,7 @@ per-step decoded estimates, or only the three single-prompt references as final 
 Launch over SSH, absolute paths only, then check it is alive and on the GPU:
 
 ```bash
-ssh mscluster109 'GPU=1 STAGE=frames nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log 2>&1 &'
+ssh mscluster109 'GPU=1 STAGE=frames nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log 2>&1 &'
 sleep 90
 ssh mscluster109 'pgrep -af where_each_condition | grep -v pgrep; nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader'
 tail -4 /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log
@@ -76,7 +76,7 @@ tail -4 /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condit
 ✅ **Two processes, the device shows memory and utilisation, and runs land at about 16 seconds
 each (36 for the corrected ones).** Real output, 2026-09-05, mscluster109:
 ```
-1846708 bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scr
+1846708 bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/scr
 1846722 /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python scripts
 1, 15712 MiB, 100 %
 [solo_b] seed=9 14 frames (16.0s)
@@ -145,14 +145,14 @@ exist under `outputs/showcase/figure_r32_030050/renders/full/`, and you want the
 plots, the contact sheet and the sidecar.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py
 ```
 
 ✅ **The both-ness means print and three files land.** Real output, 2026-09-05:
 ```
 both-ness by condition (mean over seeds): {'solo_a': -0.0, 'solo_b': 0.0, 'joint': 0.523, 'poe': 0.205, 'lora_1.0': 0.411, 'lora_1.2': 0.42}
-wrote /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.png/.json
+wrote /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/where-does-each-condition-land/cat-x-dog-in-dino-space.png/.json
 ```
 Beside them: `cat-x-dog-in-dino-space-cloud-axes.png` and `cat-x-dog-in-dino-space-dino-feats.npy`.
 About two minutes, most of it DINOv2 on the CPU.
@@ -175,7 +175,7 @@ Recipe 1's `frames` stage has finished and you want the page's `data.json` and t
 the frames' embeddings beside the finding's other numbers.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 XFORMERS_DISABLED=1 CUDA_VISIBLE_DEVICES="" /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_frames_embed.py
 ```
 
@@ -210,13 +210,13 @@ The vendored UI is already in the repo. Refresh it only when upstream has someth
 
 ```bash
 cd /tmp && git clone -q --depth 1 https://github.com/helblazer811/Diffusion-Explorer.git
-cp -r Diffusion-Explorer/diffusion-explorer/packages/ui/src /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands/vendor/ui
+cp -r Diffusion-Explorer/diffusion-explorer/packages/ui/src /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/scenes/where-each-condition-lands/vendor/ui
 ```
 
 Build:
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/scenes/where-each-condition-lands
 npm install
 npx vite build
 ```
@@ -284,7 +284,7 @@ You want the page on your own machine, for a talk or a supervisor meeting off th
 On the laptop:
 
 ```bash
-rsync -av mmolefe@mscluster85.ms.wits.ac.za:/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/scenes/where-each-condition-lands/dist/ ~/where-each-condition-lands/
+rsync -av mmolefe@mscluster85.ms.wits.ac.za:/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/scenes/where-each-condition-lands/dist/ ~/where-each-condition-lands/
 cd ~/where-each-condition-lands && python3 -m http.server 8800
 ```
 

@@ -117,7 +117,7 @@ two devices finish in about 70 minutes.
 
 ```bash
 SD=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 ssh mscluster109 "CUDA_VISIBLE_DEVICES=0 nohup $PY $REPO/scripts/build_superdiff_cache.py --shard 0 --nshards 2 > $SD/cache_shard0.log 2>&1 < /dev/null &"
 ssh mscluster109 "CUDA_VISIBLE_DEVICES=1 nohup $PY $REPO/scripts/build_superdiff_cache.py --shard 1 --nshards 2 > $SD/cache_shard1.log 2>&1 < /dev/null &"
@@ -141,7 +141,7 @@ Navigation: ⬅️ [1. Build the SuperDiff trajectory cache](#1-build-the-superd
 first; the script re-checks the device itself and refuses one that is busy.
 
 ```bash
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 SD=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff
 ssh mscluster109 "nohup bash $REPO/scripts/launch_sdlora.sh 8 0 > $SD/sdlora_r8_100k.log 2>&1 < /dev/null & echo pid \$!"
 # on a Blackwell node (110 to 112) the python must be co3_bw:
@@ -243,7 +243,7 @@ at κ 0.5. 140 renders at 107 to 136 s each, about 5 hours on one A6000.
 
 ```bash
 SD=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 ssh mscluster85 "CUDA_VISIBLE_DEVICES=0 nohup $PY $REPO/scripts/superdiff/run_lambda_sweep_200.py > $SD/lambda_sweep.log 2>&1 < /dev/null &"
 # when the log ends: sheets into the paper's figure folder, with their .json sidecars

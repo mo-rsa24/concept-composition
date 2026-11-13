@@ -43,7 +43,7 @@ What is already known
 - Step 0 imports the cosine schedule and the device guard from rebuild/ and the samplers from
   anneal_samplers.py, so walk02.py runs without walk01.py (step file 02, opening).
 - Train or sample on a card with under 1 GB in use, else on the CPU (toy/rebuild/device.py; the GPU
-  guard in ~/Playground/PhD/poe_repair_min/environment/hpc/execution-protocol.md).
+  guard in ~/Playground/PhD/concept-composition/environment/hpc/execution-protocol.md).
 - anneal_samplers.py divides the MALA proposal's log-density by 4·ss and accepts each sample on its
   own (REBUILD_WALK.md, brick "MALA and CHA fix").
 - tests/test_anneal_samplers.py holds 6 tests and all pass (REBUILD_WALK.md, brick "MALA and CHA

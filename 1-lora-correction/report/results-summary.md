@@ -10,7 +10,7 @@
 
 ```bash
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts
 DATA=/datasets/mmolefe/poe_repair_min/artifacts
 # W&B: project prime_lab/poe-repair-cross-seed (rungs 1-2), prime_lab/poe-repair-cross-pair (rungs 4-5)
 ```

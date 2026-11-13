@@ -9,7 +9,7 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/invert_x/%x-%j.out
 # Before submission: mkdir -p /datasets/mmolefe/poe_repair_min/outputs/invert_x
 set -euo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/invert_x
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 mkdir -p "$OUT"

@@ -56,7 +56,7 @@ What is already known
 - Pixel space has no exact density, so success is scored in the drawing parameters (REBUILD_WALK.md,
   brick "The text-conditioned testbed").
 - Train on a card with under 1 GB in use, else wait (the GPU guard in
-  ~/Playground/PhD/poe_repair_min/environment/hpc/execution-protocol.md).
+  ~/Playground/PhD/concept-composition/environment/hpc/execution-protocol.md).
 - The three stages and what each changes against the one before are as the layer 11 page states
   them; step 1's walk picks the causes each stage tests and its plan sets the bars (the layer 11
   page, "Three builds, one variable each").

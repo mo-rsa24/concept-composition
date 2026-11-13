@@ -16,7 +16,7 @@ Bring it back when lost or untrustworthy artifacts become a real problem again. 
 
 ## Mission
 
-Keep every saved file this project produces (LoRA checkpoints, training and eval caches, saved results and figures) easy to find, trustworthy, and organised one consistent way, across the two storage roots: the repo (`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`) and `/datasets/mmolefe/poe_repair_min/outputs`. Any file we keep should be findable by experiment/rung/pair/seed, should load, and should carry a clear keep / re-run / discard label.
+Keep every saved file this project produces (LoRA checkpoints, training and eval caches, saved results and figures) easy to find, trustworthy, and organised one consistent way, across the two storage roots: the repo (`/home-mscluster/mmolefe/Playground/PhD/concept-composition`) and `/datasets/mmolefe/poe_repair_min/outputs`. Any file we keep should be findable by experiment/rung/pair/seed, should load, and should carry a clear keep / re-run / discard label.
 
 ## Objectives
 

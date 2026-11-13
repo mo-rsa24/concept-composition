@@ -15,7 +15,7 @@
 # CKPT=1 is required on these 24 GB cards; gradient checkpointing recomputes activations and
 # leaves the gradients identical, so it costs wall clock and nothing else.
 set -uo pipefail
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min || exit 7
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition || exit 7
 echo "=== ${RUN:?set RUN} on $(hostname), job $SLURM_JOB_ID, $(date -Is)"
 GPU=0 CKPT=1 \
 POOLGEN=v57 WD=1e-2 BATCH=1 EPOCHS=600 SAMPLEEVERY=25 \

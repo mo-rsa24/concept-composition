@@ -16,7 +16,7 @@
 # at once without two nodes rendering the same cell. The excluded nodes have dead GPUs; a job
 # landing there dies on the render guard in one second.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 echo "=== belt shard ${SHARD:-all} on $(hostname), job $SLURM_JOB_ID, $(date -Is)"
 nvidia-smi --query-gpu=name,memory.total,memory.used --format=csv,noheader
 cd "$REPO"

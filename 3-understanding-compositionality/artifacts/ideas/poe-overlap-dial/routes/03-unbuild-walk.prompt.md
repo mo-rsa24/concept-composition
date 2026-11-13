@@ -1,6 +1,6 @@
 /unbuild --walk ~/PhD/reduce-reuse-recycle/notebooks/simple_distributions.ipynb
 
-Rebuild the JAX/Haiku reference notebook in PyTorch, layer by layer, then extend it past the notebook into the composition testbed this project's idea walk settled on. Python, NumPy and PyTorch only, no JAX. Run Python with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python. GPU work follows the GPU guard in /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/environment/hpc/execution-protocol.md (use a card with under 1 GB in use, else CPU).
+Rebuild the JAX/Haiku reference notebook in PyTorch, layer by layer, then extend it past the notebook into the composition testbed this project's idea walk settled on. Python, NumPy and PyTorch only, no JAX. Run Python with /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python. GPU work follows the GPU guard in /home-mscluster/mmolefe/Playground/PhD/concept-composition/environment/hpc/execution-protocol.md (use a card with under 1 GB in use, else CPU).
 
 Context (cold start). Read first, in this order:
 1. 3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/IDEA_MAP.md: nine claims with marks; the Runs table holds every result so far.

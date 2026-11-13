@@ -36,7 +36,7 @@ $PY -c "import torch,sys; sys.exit(0 if torch.cuda.is_available() else 1)" || {
   exit 3
 }
 
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 mkdir -p results/mechanism_study
 

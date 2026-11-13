@@ -28,7 +28,7 @@ A scene exists on the cluster and you want it viewable in a browser without copy
 | session name | `scenes` | your choice; `scenes` is what the rest of this theme assumes |
 
 ```bash
-tmux new-session -d -s scenes 'cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/scenes && python3 -m http.server 8800 --bind 127.0.0.1'
+tmux new-session -d -s scenes 'cd /home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/scenes && python3 -m http.server 8800 --bind 127.0.0.1'
 tmux ls
 curl -sI http://localhost:8800/noise-shell-and-basins/index.html | head -3
 ```

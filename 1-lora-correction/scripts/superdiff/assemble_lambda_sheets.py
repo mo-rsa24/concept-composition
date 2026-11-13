@@ -10,7 +10,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 SWEEP = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/lambda_sweep")
-OUT = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/how-much-is-added/across-composition-rules")
+OUT = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/how-much-is-added/across-composition-rules")
 OUT.mkdir(parents=True, exist_ok=True)
 
 STEPS = 200

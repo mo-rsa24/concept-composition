@@ -8,7 +8,7 @@ GPU="${GPU:?set GPU=<free device index>}"
 STAGE="${STAGE:?set STAGE=<identity|probe|score>}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/dog_x_dog_probe
 cd "$REPO"
 mkdir -p "$OUT"

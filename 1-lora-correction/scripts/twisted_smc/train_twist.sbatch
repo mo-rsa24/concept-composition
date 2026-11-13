@@ -4,8 +4,8 @@
 #SBATCH --time=24:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/twist_smc-%j.out
-#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/twist_smc-%j.err
+#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/twist_smc-%j.out
+#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/twist_smc-%j.err
 # Scope 06, baseline 09: train the twist head contrastively on the training cache and log
 # Mono | PoE | twisted-SMC strips to W&B every --render-every steps.
 #
@@ -14,7 +14,7 @@
 set -euo pipefail
 
 MODE="${1:-full}"; shift || true
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/twisted_smc
 case "$(hostname -s)" in
   mscluster110|mscluster111|mscluster112) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;

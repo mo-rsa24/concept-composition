@@ -16,7 +16,7 @@ set -uo pipefail
 ROOT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 BIN="${BIN:-$ROOT/claims/bin}"
 BENCH="${BENCH:-$ROOT/launchers/bench13/scripts}"
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 CO3_REPO="${CO3_REPO:-$ROOT/code_2ac55e56}"
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python}"
 : "${GPU:?set GPU to the device index}"

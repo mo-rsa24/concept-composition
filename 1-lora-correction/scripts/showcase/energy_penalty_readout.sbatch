@@ -14,7 +14,7 @@
 # arm missing skips it and says so, so a dead arm does not block the others' readout.
 set -uo pipefail
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 SHOWCASE=/datasets/mmolefe/poe_repair_min/outputs/showcase
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache
 export PYTHONPATH="$REPO:${PYTHONPATH:-}"

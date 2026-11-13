@@ -15,4 +15,4 @@
 #   sbatch --job-name=refl-kl-K1 --export=ALL,RUN=K1 scripts/reward_kl.sbatch
 set -euo pipefail
 RUN=${RUN:?set RUN=K0 or K1}
-GPU=0 exec bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/scripts/launch_reward_kl.sh "$RUN"
+GPU=0 exec bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/scripts/launch_reward_kl.sh "$RUN"

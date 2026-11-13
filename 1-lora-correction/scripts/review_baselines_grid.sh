@@ -10,7 +10,7 @@
 set -uo pipefail
 # sbatch runs a copy of this file from the Slurm spool, so the scripts it calls are named by absolute path.
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
-export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 GPU="${GPU:-0}"

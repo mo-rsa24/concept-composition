@@ -4,8 +4,8 @@
 #SBATCH --nodelist=mscluster72
 #SBATCH --time=72:00:00
 #SBATCH --ntasks=1
-#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/lora_dose_sweep-%j.out
-#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/lora_dose_sweep-%j.err
+#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/lora_dose_sweep-%j.out
+#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/lora_dose_sweep-%j.err
 # Plan 03 (01-showcase-the-trained-lora) tasks 1.1-1.5: capture per-seed LoRA deltas, print
 # and record the manifest, render the sweep, score it, and compute the softness read.
 #
@@ -15,7 +15,7 @@ set -euo pipefail
 STAGE="${1:?usage: sbatch lora_dose_sweep.sbatch <capture|manifest|sweep|score|softness>}"
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/lora_dose
 cd "$REPO"
 mkdir -p "$OUT" logs

@@ -14,7 +14,7 @@ from diffusers.models.upsampling import Upsample2D
 
 TRACE = sys.argv[1]
 OUT = sys.argv[2]
-REPO = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+REPO = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 
 def snippet(obj, max_lines=80):
     try:

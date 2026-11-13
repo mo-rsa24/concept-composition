@@ -5,7 +5,7 @@
 Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`.
 
 ```text
-/drip-execute-plan --request in ~/Playground/PhD/poe_repair_min: read the cached ε_joint, ε_A, ε_B
+/drip-execute-plan --request in ~/Playground/PhD/concept-composition: read the cached ε_joint, ε_A, ε_B
 and ε_∅ for the 25 pairs as the layer 8 quantity, with the layer 9 correction as the reference
 behaviour, sampled with tuned MALA; bar: the correction's effect on compose rate on held-out pairs,
 reported beside the interaction term per pair
@@ -20,7 +20,7 @@ into my own script. I have passed quiz 12.2.
 Objectives
 1. Cut this into 4 to 6 pieces, and build, teach and test one piece per round.
 2. I type every block myself into ~/Playground/PhD/simple-distributions-walk/walk12.py and run it
-   with the python the node table in ~/Playground/PhD/poe_repair_min/environment/hpc/nodes.md names.
+   with the python the node table in ~/Playground/PhD/concept-composition/environment/hpc/nodes.md names.
 3. Read the cached ε branches for the 25 pairs as layer 8's ε-space term.
 4. State how "tuned MALA" runs on the SDXL branches, or name the sampler used instead.
 5. Print one row per held-out pair: compose rate without and with the correction, and the
@@ -30,11 +30,11 @@ Objectives
 
 What to read
 - Step 5's refined transfer plan,
-  ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
+  ~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
   the compose-rate unit, the held-out pair set and the threshold.
 - The layer 12 --math drip folder under artifacts/drips/ (step 7): my notation.
 - walk08.py's ε-space term, and walk09.py with toy/rebuild/phase9_correction.py: layers 8 and 9.
-- ~/Playground/PhD/poe_repair_min/runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md:
+- ~/Playground/PhD/concept-composition/runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md:
   how a checkpoint is rendered.
 - concept-composition's report does-interaction-strength-predict-which-pairs-blend.md and its figure
   explainer: the cache and the bound.

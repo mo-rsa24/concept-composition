@@ -10,7 +10,7 @@
 # this run can be read against; the phase1_* runs used all 50 and a different pool.
 # Weight decay 0 matches phase1_r32_100k, the run whose samples actually compose.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 export GPU="${GPU:-0}"
 export RUN="${RUN:-v1_freeze_null_r16_s0_25}"
 export CELLS=$REPO/artifacts/_shared/cross_pair_pool_configs/cells_v57.json

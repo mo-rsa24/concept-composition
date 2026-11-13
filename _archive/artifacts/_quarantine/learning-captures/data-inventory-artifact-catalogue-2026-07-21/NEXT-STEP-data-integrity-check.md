@@ -15,7 +15,7 @@ inventories are `inventory/01-artifact-inventory.md`,
 `inventory/scripts/01_inventory.py`.
 
 Two roots hold the kept artifacts: the repo
-(`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`) and
+(`/home-mscluster/mmolefe/Playground/PhD/concept-composition`) and
 `/datasets/mmolefe/poe_repair_min/outputs`. Scope the check to the three
 experiments `lora`, `cross_seed_lora_pooling`, `cross_pair_lora_pooling` plus the
 shared `training_cache`.

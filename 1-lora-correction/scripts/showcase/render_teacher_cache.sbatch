@@ -10,7 +10,7 @@
 # V6 tasks 1.1 and 1.2: encode the picked mono renders of cells_v57 once.
 # mscluster58 probed healthy on 2026-09-17 and is on the 2026-09-12 datasets=OK list.
 set -uo pipefail
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python \
   1-lora-correction/scripts/showcase/build_render_teacher_cache.py \
   --cells artifacts/_shared/cross_pair_pool_configs/cells_v57.json

@@ -207,7 +207,7 @@ Serves objective 3 (the softness question measured rather than argued) and goal 
 ◀ **Needs:** a free device claimed per [the launch recipe](../../../../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device), with `pgrep -af 'sweep|train|corrector|tangent'` checked on the node first.
 
 - [x] **1.1 Run the smoke stage first, on the device the long stages will use.**
-  - On a shared biggpu device: `ssh <node> 'GPU=<idx> STAGE=smoke bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_smoke.log 2>&1'`, then task 2.1 with `STAGE=all`.
+  - On a shared biggpu device: `ssh <node> 'GPU=<idx> STAGE=smoke bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/tangent_projection_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/tangent_projection_smoke.log 2>&1'`, then task 2.1 with `STAGE=all`.
   - When every biggpu device is busy: `sbatch --exclude=<the faulted nodes in environment/hpc/nodes.md> 1-lora-correction/scripts/showcase/tangent_projection.sbatch`, which runs `STAGE=smoke_then_all` on a fresh `bigbatch` card, the smoke first and the long stages only if it ends clean; task 2.1 is then the same job.
   - One seed, three cached steps, one three-step render under the output root's `smoke/`. Done when: the log shows the smoke's two stages ending without a traceback and `smoke/cache_read.json` has three rows whose `sanity_cos_live_frozen_vs_cached_poe` is above 0.99 (the live frozen prediction agrees with the cache).
 

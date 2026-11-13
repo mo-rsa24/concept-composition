@@ -233,7 +233,7 @@ Navigation: ⬅️ [Previous](#purpose-and-goal) | 📋 [TOC](#table-of-contents
   cloud-axes view, the PCA view, the contact sheet, the sidecar and the card are filed).
 
     ```bash
-    ssh mscluster110 'cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min && \
+    ssh mscluster110 'cd /home-mscluster/mmolefe/Playground/PhD/concept-composition && \
       /home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python 1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py'
     ```
 

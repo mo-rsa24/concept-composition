@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 SD = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff")
 BASE = SD / "lambda_sweep" / "pairs"      # lambda=0 column: superdiff_200steps_kappa0.50
 XFER = SD / "transfer" / "grid" / "pairs"  # superdiff_200steps_kappa0.50_lorar{rank}_lv{lv}
-OUT = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr/figures/how-much-is-added/across-composition-rules")
+OUT = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/how-much-is-added/across-composition-rules")
 OUT.mkdir(parents=True, exist_ok=True)
 
 PAIRS = [("a_cat__x__a_dog", "cat_dog"), ("a_butterfly__x__a_flower_meadow", "butterfly_meadow")]

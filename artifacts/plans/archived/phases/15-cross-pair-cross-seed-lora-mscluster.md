@@ -328,7 +328,7 @@ closely. Differences:
 **B3.** Launch command for mscluster106 (RTX 8000):
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 export CUDA_VISIBLE_DEVICES=0
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 

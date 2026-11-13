@@ -37,7 +37,7 @@ STATE = HERE / "run_queue_state.json"
 STATUS = HERE / "run_queue_status.md"
 EVENTS = HERE / "run_queue_events.log"
 
-RDIR = "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min"
+RDIR = "/home-mscluster/mmolefe/Playground/PhD/concept-composition"
 NODES = ["mscluster112", "mscluster110", "mscluster109", "mscluster106", "mscluster107"]
 BLACKWELL = {"mscluster110", "mscluster111", "mscluster112"}
 PY = {True: "/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python",

@@ -27,7 +27,7 @@ from pathlib import Path
 
 SCENE = Path(__file__).resolve().parent.parent
 SCOPE = SCENE.parent
-REPO = Path("/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+REPO = Path("/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 
 sys.path.insert(0, str(REPO))
 from poe_repair import paths  # noqa: E402

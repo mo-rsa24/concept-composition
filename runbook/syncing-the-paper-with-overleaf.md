@@ -76,7 +76,7 @@ You wrote in the Overleaf editor and want that text in the repo, where the figur
 map live.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 git -C paper/overleaf-iclr pull
 ```
 

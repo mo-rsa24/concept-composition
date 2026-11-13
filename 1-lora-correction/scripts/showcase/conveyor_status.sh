@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Fully qualified paths for every sheet the conveyor has finished, and what is still cooking.
-G=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from
+G=/home-mscluster/mmolefe/Playground/PhD/concept-composition/artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from
 L=/datasets/mmolefe/poe_repair_min/outputs/showcase/improve_r32
 echo "=== SHEETS READY TO JUDGE          $(date '+%H:%M')"
 if [ -s "$G/conveyor-sheets.txt" ]; then

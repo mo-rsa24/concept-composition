@@ -4,7 +4,7 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
 
 ## Access paths
 
-- **Repo and code:** `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`.
+- **Repo and code:** `/home-mscluster/mmolefe/Playground/PhD/concept-composition`.
 - **Large artifacts** (checkpoints, caches, and what a run across many settings writes out):
   `/datasets/mmolefe/poe_repair_min/`.
   These are separate filesystems with different quotas; there is no automatic mirroring between

@@ -17,7 +17,7 @@
 # sweep uses, so a tile that already exists is skipped. The grids are built afterwards on the
 # laptop by scripts/seed_method_grid.py.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/ablation_grid
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 O=/datasets/mmolefe/poe_repair_min/outputs

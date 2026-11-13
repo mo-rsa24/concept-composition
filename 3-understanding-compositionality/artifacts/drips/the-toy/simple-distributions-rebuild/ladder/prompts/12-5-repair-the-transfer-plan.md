@@ -2,11 +2,11 @@
 
 ⬅️ [Layer 12, step 5](../12-the-correction-at-scale.md#5-you-then-the-transfer-plan-repaired-before-it-runs)
 
-Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`. The walk edits a plan in the other checkout, `~/Playground/PhD/poe_repair_min`, so every path inside the prompt is written from that checkout's root.
+Paste into a session opened in `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-dog-and-rain`. The walk edits a plan in the other checkout, `~/Playground/PhD/concept-composition`, so every path inside the prompt is written from that checkout's root.
 
 ```text
 /drip-refine-plan
-~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
+~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
 settle whether compose rate is binary per pair or a fraction over evaluation seeds (the plan and its
 master plan disagree); which 15 pairs it means, since pair_pool.yaml lists 11 trained and 6 held
 out, 17 in all; what its x-axis becomes, since leave-one-pair-out holds out exactly 1 of 15 in every
@@ -18,7 +18,7 @@ Layer 12 of the composition ladder (3-understanding-compositionality/artifacts/d
 correction's effect on compose rate on held-out animal pairs in concept-composition. The transfer plan in
 concept-composition's scope 04 says how that is read, but four of its terms are undefined or contradict
 the files they rest on. This walk repairs them before any run, so step 9's build measures something.
-The work happens in the repo ~/Playground/PhD/poe_repair_min.
+The work happens in the repo ~/Playground/PhD/concept-composition.
 
 Objectives
 1. Walk the four questions in the skill line, one per piece.
@@ -27,14 +27,14 @@ Objectives
 4. Add a CHANGELOG.md entry in concept-composition if the direction text changes.
 
 What to read
-- ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
+- ~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md:
   the plan being repaired.
-- ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md: its
+- ~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md: its
   scope's master plan.
-- ~/Playground/PhD/poe_repair_min/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml:
+- ~/Playground/PhD/concept-composition/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pair_pool.yaml:
   the pair pool the plan means.
-- ~/Playground/PhD/poe_repair_min/context/world/compose-rate.md: what a compose rate is.
-- ~/Playground/PhD/poe_repair_min/environment/known-failures.md, entry poe-data-001: the seed split.
+- ~/Playground/PhD/concept-composition/context/world/compose-rate.md: what a compose rate is.
+- ~/Playground/PhD/concept-composition/environment/known-failures.md, entry poe-data-001: the seed split.
 
 What is already known
 - Code paths (rebuild/, anneal_samplers.py, tests/, notebooks/) are under toy/ in the
@@ -83,7 +83,7 @@ Rules
 What to hand back
 - The plan file with the four answers written into its Goals, Description and "What has to pass
   here".
-- The walk's REFINE_WALK.md under ~/Playground/PhD/poe_repair_min/artifacts/ideas/<slug>/.
+- The walk's REFINE_WALK.md under ~/Playground/PhD/concept-composition/artifacts/ideas/<slug>/.
 - A CHANGELOG.md entry in concept-composition, if the direction text changes.
 - The edited plan, whose compose-rate unit and pair set step 9's build reads.
 - The proof: grep -n -i "compose.rate\|pair_pool\|x axis\|out of 15" on the plan prints the four new
@@ -98,5 +98,5 @@ from 15 one-pair-out runs; what is still open; at most one question for me.
 I judge, from the plan: done when each of the four questions has a written answer in it and the curve it names can be drawn from 15 one-pair-out runs.
 ```
 
-added: the seven sections, from the field-labelled version · every relative path written from ~/Playground/PhD/poe_repair_min, since the walk edits that checkout while the session opens in this repo (from the old Task line, "in repo ~/Playground/PhD/poe_repair_min")
+added: the seven sections, from the field-labelled version · every relative path written from ~/Playground/PhD/concept-composition, since the walk edits that checkout while the session opens in this repo (from the old Task line, "in repo ~/Playground/PhD/concept-composition")
 dropped: nothing

@@ -4,8 +4,8 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster74,mscluster83
 #SBATCH --time=72:00:00
 #SBATCH --ntasks=1
-#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/r32_wd_ema-%j.out
-#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/logs/r32_wd_ema-%j.err
+#SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/r32_wd_ema-%j.out
+#SBATCH --error=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/r32_wd_ema-%j.err
 # Plan 20 (01-showcase-the-trained-lora): experiment D again with an EMA of the LoRA weights.
 # Every flag is experiment D's launch (1-lora-correction/scripts/showcase/experiment_d_weight_decay.sh: rank 32,
 # weight decay 0.1, the kill criterion off) plus --ema-decay, so the raw weights replicate D's
@@ -17,7 +17,7 @@
 set -euo pipefail
 
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 cd "$REPO"
 mkdir -p logs
 export POE_REPAIR_TRAINING_CACHE=/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache

@@ -338,7 +338,7 @@ for both.
 
     ```bash
     OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
-    ssh <node> 'STAGE=sheet GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/sheet.log 2>&1 &'
+    ssh <node> 'STAGE=sheet GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/sheet.log 2>&1 &'
     ```
 
   - Both pairs, seeds 9 to 16, at the flat-part `k` and the picked `c`. Plain PoE is the composer
@@ -349,7 +349,7 @@ for both.
 - [x] **3.2** The tail condition: the rank-32 λ 1.2 run with the corrector on steps 35 to 49 only.
 
     ```bash
-    ssh <node> 'STAGE=tail GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/tail.log 2>&1 &'
+    ssh <node> 'STAGE=tail GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/tail.log 2>&1 &'
     ```
 
   - `k ∈ {0, 5, 20}`, both pairs, seeds 9 to 16: 48 renders, each scored for compose and for
@@ -398,7 +398,7 @@ stay with it.
 
     ```bash
     OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
-    ssh <node> 'STAGE=clean GPU=<idx> EXTRA="--c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/clean_tail.log 2>&1 &'
+    ssh <node> 'STAGE=clean GPU=<idx> EXTRA="--c 3" nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > '"$OUT"'/logs/clean_tail.log 2>&1 &'
     ```
 
   - The cutoffs bracket where the corrected run commits (median step 15, range up to 35 in

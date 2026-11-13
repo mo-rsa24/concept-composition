@@ -181,7 +181,7 @@ Navigation: ⬅️ [Previous](#what-this-cannot-tell-you) | 📋 [TOC](#table-of
 | The eye reads (seed 16's three candidates, seed 12's pivot pair, the control sheet) | the review file's `Written before the run, answered after` and `Asked after the result`, recorded as the tiles were opened | stated |
 | The random-search row | `figure_r32_030050/results.json` and `cat-x-dog-in-dino-space.json`, read 2026-09-05 | verified |
 | The run | tasks **Run the smoke mode** and **Launch the full mode** in [the design](../../plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/11-zero-order-search-over-the-initial-noise.md); verdict in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-models/review/11-zero-order-search-over-the-initial-noise.md); W&B `prime_lab/poe-repair-animals-compose/runs/3yxrkwgx` | verified |
-| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run --bothness-only --run-id <run> --device cpu` on the session node | verified |
+| Regenerate with | `ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/noise_search/run_noise_search.sh full > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/noise_search/logs/full.log 2>&1 &'`, then `XFORMERS_DISABLED=1 <co3 python> -m poe_repair.experiments.noise_search.run --bothness-only --run-id <run> --device cpu` on the session node | verified |
 
 ## Depends on
 

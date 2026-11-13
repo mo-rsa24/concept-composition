@@ -72,7 +72,7 @@ What is already known
   /home-mscluster/mmolefe/.local/bin/tectonic, and the first build on a node needs network
   (environment/paper.md). The laptop has no tectonic (which tectonic, checked 2026-11-10).
 - So every build runs on mscluster. First copy the folder there:
-  rsync -az paper/iclr-56173/ mscluster84:/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/paper/iclr-56173/
+  rsync -az paper/iclr-56173/ mscluster84:/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr-56173/
 - Then build there:
   scripts/cluster.sh sh "cd paper/iclr-56173 && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex"
 

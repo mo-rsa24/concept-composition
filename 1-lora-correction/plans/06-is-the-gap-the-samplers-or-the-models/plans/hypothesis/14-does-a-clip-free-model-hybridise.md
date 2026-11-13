@@ -258,7 +258,7 @@ owning finding beside them, and says what the comparison does and does not settl
     3 does not run.
   - ✅ Largest absolute difference 0 grey levels, 0.0 of pixels differing, and the two PNGs are
     byte-identical (md5 `d9c08c28048b8da98124be0246099b07`). Ran 2026-11-04 on mscluster84, an RTX
-    3090, from `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min-clip-free` at commit
+    3090, from `/home-mscluster/mmolefe/Playground/PhD/concept-composition-clip-free` at commit
     `2506ea21`; text encoder `T5EncoderModel` at 4.8B parameters, scheduler
     `DPMSolverMultistepScheduler`. Images and record in
     `/datasets/mmolefe/poe_repair_min/outputs/clip_free_hybridise/`.

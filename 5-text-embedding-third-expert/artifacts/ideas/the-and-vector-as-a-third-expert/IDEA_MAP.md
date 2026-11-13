@@ -228,7 +228,7 @@ The joint prompt fails on some seeds, and a LoRA trained to match it learns thos
 The project has already solved this, by eye, at scale: every candidate pair's joint render was
 judged seed by seed, and only the good cells enter training. The verdicts are
 `artifacts/results/which-joint-prompt-targets-can-the-adapter-learn-from/verdicts.json` on the
-cluster checkout (`/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/`; `artifacts/results/` is
+cluster checkout (`/home-mscluster/mmolefe/Playground/PhD/concept-composition/`; `artifacts/results/` is
 gitignored, so the laptop has no copy), turned into cell lists by
 `1-lora-correction/scripts/showcase/build_pool_from_verdicts.py`. The newest list,
 `artifacts/_shared/cross_pair_pool_configs/cells_v58.json`, holds 182 cells over 48 pairs and is

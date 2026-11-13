@@ -115,7 +115,7 @@ Navigation: ⬅️ [What you need to understand first](#what-you-need-to-underst
 Before labelling anything, spend one minute trying to break the blinding. If a tile is identifiable, everything after this is wasted.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 python3 1-lora-correction/scripts/showcase/blind_label.py --show --set <the set name you were given>
 ```
 

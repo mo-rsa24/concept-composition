@@ -226,7 +226,7 @@ for.
 - `co3` python at its absolute path, `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`.
   Never a bare `python`.
 - **Every command below runs from the repo root**,
-  `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min`, because the paths under
+  `/home-mscluster/mmolefe/Playground/PhD/concept-composition`, because the paths under
   `paper/iclr/figures/` and `scripts/` are relative to it. A relative path run from anywhere else
   resolves against `$HOME` and fails silently, which is catalogued here as `poe-launch-001` in
   [environment/known-failures.md](../../../../../environment/known-failures.md).
@@ -272,7 +272,7 @@ plan is read against are known to be current.
 - [ ] **1.1** Read the per-step correction size as the run approaches zero noise.
 
     ```bash
-    cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+    cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
     CA=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses
     $PY -c "import json;d=json.load(open('paper/iclr/figures/correction-size-over-the-denoising-run.json'));print(json.dumps(d,indent=2)[:4000])"
@@ -363,7 +363,7 @@ which builds the corrector this bound caps the value of.
 > that does not, and its answer is what says how much that time is worth.
 
 ```bash
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 CA=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses
 RES=/datasets/mmolefe/poe_repair_min/outputs/veracity/pairs

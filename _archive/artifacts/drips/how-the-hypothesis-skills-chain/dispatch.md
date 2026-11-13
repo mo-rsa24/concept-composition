@@ -1,4 +1,4 @@
-scope: /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/MASTER_PLAN.md
+scope: /home-mscluster/mmolefe/Playground/PhD/concept-composition/MASTER_PLAN.md
 source: the chat answer on how frame-hypothesis, hypothesis-to-scope, and init-master-plan relate (built from ~/.claude/skills/WORKFLOWS.md workflow 20 and the three SKILL.md headers)
 why: know which of the three planning skills to reach for, and in what order, before scoping the next experiment
 

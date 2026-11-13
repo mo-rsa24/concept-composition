@@ -12,7 +12,7 @@
 # PY is co3 on the RTX 8000 and A6000 nodes (106 to 109) and co3_bw on the Blackwell nodes (110 to 112), whose cards co3
 # has no kernels for. Every path is absolute; the script cd's into REPO itself.
 set -uo pipefail
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 GPU="${GPU:?set GPU to the device index}"
 STAGE="${STAGE:?set STAGE to smoke or run}"
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"

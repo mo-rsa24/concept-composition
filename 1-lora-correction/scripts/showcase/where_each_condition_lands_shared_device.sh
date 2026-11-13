@@ -1,7 +1,7 @@
 #!/bin/bash
 # Shared-device launch for where_each_condition_lands_render.py, per environment/hpc/execution-protocol.md.
 # Usage (from the session node, over SSH with nohup):
-#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_render.log 2>&1 &'
+#   ssh <node> 'GPU=<idx> nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_render.log 2>&1 &'
 set -euo pipefail
 
 GPU="${GPU:?set GPU=<free device index>}"
@@ -12,7 +12,7 @@ case "$(hostname -s)" in
   mscluster110|mscluster111|mscluster112) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
   *) PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python ;;
 esac
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/showcase/where_each_condition_lands
 cd "$REPO"
 mkdir -p "$OUT"

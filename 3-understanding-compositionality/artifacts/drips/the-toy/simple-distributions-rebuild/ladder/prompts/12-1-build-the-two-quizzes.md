@@ -56,7 +56,7 @@ What is already known
   case (rank 8, 210 modules) (the journey plan 08-lora-update.md, Description and Goal).
 - concept-composition's correction is a rank-8 cross-attention LoRA trained on the cached guided residual
   r_t = ε̃_J − ε̃_PoE (Mission, in
-  ~/Playground/PhD/poe_repair_min/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
+  ~/Playground/PhD/concept-composition/1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/MASTER_PLAN.md).
 - That residual is w·(ε_J − ε_A − ε_B + ε_∅) at guidance w = 7.5, written in the cache as
   gs*(eps_j − eps_a − eps_b + eps_uncond), and its bracket is layer 8's ε-space interaction term
   ε_joint − ε_A − ε_B + ε_∅ (the definition field of
@@ -67,7 +67,7 @@ What is already known
 - A compose rate is the fraction of a pair's seeds where grounding-dino-tiny finds at least two
   distinct "animal" instances (NMS IoU under 0.5, confidence at least 0.30); it counts animals and
   does not identify them, so the 94% headline at full correction is an upper bound, with the true
-  rate around 87% to 94% (~/Playground/PhD/poe_repair_min/context/world/compose-rate.md).
+  rate around 87% to 94% (~/Playground/PhD/concept-composition/context/world/compose-rate.md).
 
 Rules
 - Change nothing in concept-composition, the journey plans or rebuild/.

@@ -3,7 +3,7 @@
 #   sbatch --partition=bigbatch ... or ssh <node> 'GPU=<i> CELLS=<file> CODE_COMMIT=<sha> nohup bash <launchers>/review_langevin_cells.sh > <log> 2>&1 < /dev/null & disown'
 set -uo pipefail
 HERE=/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers
-export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+export POE_REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"   # co3_bw on a Blackwell card
 : "${GPU:=0}" "${CELLS:?set CELLS}" "${CODE_COMMIT:=unknown}"

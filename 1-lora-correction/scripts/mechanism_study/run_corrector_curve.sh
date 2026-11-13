@@ -12,7 +12,7 @@
 #   STAGE=clean   GPU=1 bash ...                                # plan 27: adapter early, frozen tail, corrector on the frozen score
 #
 # Launch from the session node with every path absolute:
-#   ssh mscluster108 'STAGE=grid GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/poe_repair_min/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/grid.log 2>&1 &'
+#   ssh mscluster108 'STAGE=grid GPU=1 nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh > /datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/grid.log 2>&1 &'
 set -euo pipefail
 
 STAGE="${STAGE:-grid}"
@@ -23,7 +23,7 @@ case "$(hostname -s)" in
   mscluster110|mscluster111|mscluster112) PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python ;;
   *) PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python ;;
 esac
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector
 cd "$REPO"
 mkdir -p "$OUT"

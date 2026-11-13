@@ -17,7 +17,7 @@
 # come from the cluster checkout.
 set -uo pipefail
 HERE="${HERE:-/datasets/mmolefe/poe_repair_min/outputs/paper_review/launchers/bench13/scripts}"
-REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/poe_repair_min}"
+REPO="${REPO:-/home-mscluster/mmolefe/Playground/PhD/concept-composition}"
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python}"
 OUT=/datasets/mmolefe/poe_repair_min/outputs/paper_review
 SHARD="${SHARD:-0/1}"

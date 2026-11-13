@@ -6,7 +6,7 @@ set -u
 TAG="${1:?tag, e.g. v4}"
 DEVICE="${2:-1}"
 STEPS="${3:-2000}"
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min-inclusive-captions || exit 1
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition-inclusive-captions || exit 1
 bash 4-inclusive-captions/scripts/inclusive_captions_run.sh A "$DEVICE" "$STEPS" "$TAG"
 echo "run A finished, starting run B" >&2
 bash 4-inclusive-captions/scripts/inclusive_captions_run.sh B "$DEVICE" "$STEPS" "$TAG"

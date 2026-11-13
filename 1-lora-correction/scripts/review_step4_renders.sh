@@ -13,7 +13,7 @@
 # result exists on any evaluation pair. Every render starts from the shared seed latent. A tile that
 # exists is skipped, so a relaunch resumes.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/review_step4
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python
 CK=/datasets/mmolefe/poe_repair_min/outputs/showcase

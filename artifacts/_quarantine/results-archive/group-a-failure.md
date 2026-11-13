@@ -498,7 +498,7 @@ All three fit on one 49 GB device with batch size 4. Headroom lets us raise `tra
 ```bash
 # On mscluster106
 ssh mscluster106
-cd /home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 source /home-mscluster/mmolefe/miniforge3/etc/profile.d/conda.sh && conda activate co3
 
 # Slot 1 — foreground in tmux pane 1

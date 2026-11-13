@@ -13,7 +13,7 @@ was learned there, so do not rediscover it.
   If it does not exist, clone it and `git checkout -b walk 81177d9`. That commit is the one every
   fact below refers to.
 - Fact folders: the cluster checkout of concept-composition,
-  `/home-mscluster/mmolefe/Playground/PhD/poe_repair_min/environment/` and `runbook/`. Read
+  `/home-mscluster/mmolefe/Playground/PhD/concept-composition/environment/` and `runbook/`. Read
   `environment/overview.md`, `environment/hpc/nodes.md` and `environment/storage.md` first. If
   `environment/reduce-reuse-recycle-code.md` and `runbook/setting-up-the-reduce-reuse-recycle-code.md`
   exist there, they are the laptop's findings: extend them with a section for mscluster112,

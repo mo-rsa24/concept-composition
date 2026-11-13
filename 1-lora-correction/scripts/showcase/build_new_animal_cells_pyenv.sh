@@ -7,7 +7,7 @@
 # Guards first, then the loop. Idempotent: the builder skips a cell already complete.
 set -uo pipefail
 
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUTROOT=/datasets/mmolefe/poe_repair_min
 PY="${PY:-/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python}"
 SEEDS="${SEEDS:-1 2 3 4 5 6 7 8}"

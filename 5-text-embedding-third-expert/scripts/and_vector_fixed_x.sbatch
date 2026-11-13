@@ -9,7 +9,7 @@
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/outputs/fixed_x/%x-%j.out
 # mkdir -p /datasets/mmolefe/poe_repair_min/outputs/fixed_x before sbatch.
 set -euo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/fixed_x
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 export POE_REPO="$REPO" PYTHONPATH="$REPO:$REPO/scripts" PYTHONUNBUFFERED=1

@@ -10,7 +10,7 @@
 set -uo pipefail
 GPU=${GPU:?set GPU to the device index}
 MODE=${MODE:?calibrate or render}
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet
 HERE=$(cd "$(dirname "$0")" && pwd)
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python

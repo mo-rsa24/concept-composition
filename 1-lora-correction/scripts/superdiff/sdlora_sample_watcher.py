@@ -14,7 +14,7 @@ and the training run's step counter is already ahead of any checkpoint's step.
 Polls every 5 minutes; exits once every rank has its final checkpoint rendered.
 """
 import sys, time, json, os
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from types import SimpleNamespace
 import torch, wandb

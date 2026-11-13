@@ -17,7 +17,7 @@
 # Each tile lands at <pair>/seed<NN>/ours_<run>_s<step>_w50.png, so a tile always names the
 # checkpoint that drew it. Tiles that exist are skipped, so a re-run costs nothing.
 set -uo pipefail
-REPO=/home-mscluster/mmolefe/Playground/PhD/poe_repair_min
+REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 OUT=/datasets/mmolefe/poe_repair_min/outputs/ablation_grid
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 : "${RUN_DIR:?set RUN_DIR}"

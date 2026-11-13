@@ -8,7 +8,7 @@ any is missing. Every cell is cached, so a restart resumes. One process per laun
 --ranks to split across devices.
 """
 import sys, time, json, argparse
-sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/poe_repair_min")
+sys.path.insert(0, "/home-mscluster/mmolefe/Playground/PhD/concept-composition")
 from pathlib import Path
 from types import SimpleNamespace
 import torch
