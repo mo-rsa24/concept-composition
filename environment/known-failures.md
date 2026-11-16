@@ -103,7 +103,7 @@ are scored. Rescore any `compose_rate.json` written before 2026-11-13 before cit
 `1-lora-correction/scripts/animals_compose_transfer/score_compose_rate.sbatch` as the pattern, and
 keep the old file beside the new one.
 
-**First discovered:** step 10 of the running order, 2026-11-13
+**First discovered:** step 10 of the [running order](../MASTER_PLAN.md#the-paper-what-has-to-land), 2026-11-13
 
 **Affects steps:** any step quoting a compose rate from a pooled run's saved samples (steps 10 to 14)
 
@@ -186,7 +186,7 @@ when constructing `_Embedders`; never rely on its CPU default on a GPU job. `.cl
 same class tolerates CPU fine (CLIP's attention path doesn't route through xformers the same
 way), which makes this easy to miss until `.dino()` is called.
 
-**First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lambda_window_grid.py`, plan 07 of
+**First discovered:** concept-composition, `scripts/shared/lambda_window_grid.py`, plan 07 of
 `01-showcase-the-trained-lora` (slurm job 48608)
 
 **Affects steps:** any step calling `_Embedders()` on a GPU node
@@ -289,7 +289,7 @@ provable from the numbers alone.
 **First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lora_dose_sweep.py`, plan 03 of
 `01-showcase-the-trained-lora` (slurm job 48596 → corrected in job 48619)
 
-**Also seen:** plan 07's own [λ-window grid](../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md) (`1-lora-correction/scripts/showcase/lambda_window_grid.py`, jobs
+**Also seen:** plan 07's own [λ-window grid](../1-lora-correction/plans/01-showcase-the-trained-lora/plans/experiments/07-experiment-c-lambda-window.md) (`scripts/shared/lambda_window_grid.py`, jobs
 48607-48611) hit the same root cause in a different guise: the plan's pre-registered λ=0
 identity check compared a `run_lora_residual_inject_masked`-style render against `poe.png`
 (rendered with full guided PoE at all 50 steps), and the off-window unguided-only branch gave a
@@ -332,7 +332,7 @@ problem, check whether the failing function has the decorator that every sibling
 same module already carries — a missing decorator produces an OOM trace that looks identical to
 a real capacity problem.
 
-**First discovered:** concept-composition, `1-lora-correction/scripts/showcase/lambda_window_grid.py`
+**First discovered:** concept-composition, `scripts/shared/lambda_window_grid.py`
 (`run_lora_residual_inject_windowed_poe`), plan 07 of `01-showcase-the-trained-lora` (slurm job
 48610)
 

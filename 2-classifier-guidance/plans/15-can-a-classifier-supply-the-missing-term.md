@@ -432,3 +432,7 @@ from the scope root.
 ## Next step
 
 Task 1.1: the labelling rule, as constants in the source.
+
+## Cross-references
+
+- The mention of **plan 15**, for its product sampler that still rescales the push, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).

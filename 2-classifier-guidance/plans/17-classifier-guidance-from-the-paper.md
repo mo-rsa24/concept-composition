@@ -254,3 +254,7 @@ closing pass files the sheets per `ARTIFACT_TREE_FORMAT.md`.
 ## Next step
 
 Task 1.1: the two ends.
+
+## Cross-references
+
+- The mention of **plan 17**, for its guided sampler in the paper's unrescaled form, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).

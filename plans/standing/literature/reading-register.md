@@ -105,3 +105,7 @@ reason. None is cited, so none has a row above.
 > A basin is the set of starting points that all end up at the same kind of outcome. Two basins
 > means composition and chimera are separate destinations a run falls into, rather than two ends of
 > one sliding scale.
+
+## Cross-references
+
+- The mention of **the reading register**, which does not yet hold the discriminator-guidance paper, in [the route for classifier-guided PoE](../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).

@@ -5,12 +5,14 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
-| R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | todo | plans 17 and 18 are in this repo's `plans/` | 4, 5 |
-| A1 | exact toy: the discriminator's guidance matches the true correction and composes | todo | | 4, 6 |
-| A2 | toy caption model: the same guidance composes learned experts | open | | |
-| A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | | |
-| A2c | animal photos at 64×64, pasted pairs, dial kept: the same | open | | |
-| A3 | SDXL cat × dog, same seeds for training and testing: the push can compose at all | open | | |
+| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | todo | | 4 |
+| R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | todo | plans 17 and 18 are in this repo's `plans/` | 5 |
+| A1 | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | todo | | 7 |
+| A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
+| A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |
+| A2r | our cat and dog photos, released 256 px unconditional model frozen, classifiers trained on our photos: the pair-aware push beats the separate-label push | todo | | 8 |
+| A2c | our cat and dog photos, a 64 px model we train with a null label, with and without the both-animal photos: the same | todo | | 8 |
+| A3 | SDXL cat × dog, same seeds for training and testing: plan 15's pair-aware head composes where the species-only pushes do not | todo | | 9, 10 |
 | A4 | cat × dog on held-out seeds 9 to 16, beside best-of-N at equal compute | open | | |
 | B1 | at A4's setting, adding a presence head helps or is dropped | open | | |
 | B2 | at A4's setting, adding an instance-count head helps or is dropped | open | | |
@@ -22,7 +24,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | C1 | the best configuration trained over the v58 pool, held-out seeds, beside the rank-32 LoRA | open | | |
 | C2 | the best configuration on held-out pairs, beside the rank-32 LoRA | open | | |
 | P1 | the paper's comparison table and sheet, and its paragraph | open | | |
-| X1 | you can explain the result without notes | todo | A1's part delivered by step 7; later rungs by their own retrospectives | 7 |
+| X1 | you can explain the result without notes | todo | each stage's retrospective, walked in step 11 | 11 |
 
 ## Expected outcome per row
 
@@ -31,11 +33,13 @@ route's step 2, which frames the hypothesis; until then the line says "number fr
 
 | Row | You should see | Number |
 |---|---|---|
+| G0 | at scale 0 the same picture as unguided on 4 of 4 seeds; at scale 10 the released classifier calls at least 14 of 16 samples corgi, tabby or golden retriever | 4 of 4 identical, 14 of 16 per class |
 | R0 | a render at push strength 0 through the repaired sampler that matches the plain product byte for byte | identical checksums |
-| A1 | at pair weight 0.01, guided draws mostly land as two separate shapes where unguided reverse diffusion gives 0 of 300; the push points the same way as the true correction in the early steps; overlaid shapes do not rise | crisp pairs of 300 and the cosine floor, from step 2 |
+| A1 | at pair weight 0.01, the pair-aware push lands draws as two separate shapes where unguided reverse diffusion gives 0 of 300, and the separate-label push stays near 0; the push points the same way as the true correction in the early steps; overlaid shapes do not rise | pair-aware at least 150 of 300 crisp pairs; separate-label at most 15 of 300 |
 | A2 | in the trained caption model, at the low dial settings where plain PoE draws few pairs, guided draws are mostly separate pairs, and each single caption still draws its own shape | from step 2 |
 | A2b | two separate digits on the canvas where plain PoE draws one overlaid digit, at the low dial settings, with each digit still readable | from step 2 |
-| A2c | two separate animals at 64 px where plain PoE draws one fused animal, at the low dial settings; the minimal-pair read shows the classifier scores two animals and not the paste seam | from step 2 |
+| A2r | on seeds 1 to 16 at 256 px, the pair-aware push gives two separate animals on more seeds than the two separate-label pushes alone | at least 4 more of 16 in one arm |
+| A2c | on seeds 1 to 16 at 64 px, the same, in the model trained without both-animal photos and in the one trained with them | at least 4 more of 16 in one arm |
 | A3 | on cat × dog, on the seeds it trained on, some seeds show two separate animals with the push where the plain product shows none, and the pictures are not wrecked; a yes says only that the push can compose at all | from step 2 |
 | A4 | on held-out seeds 9 to 16, more seeds show two animals with the push than with best-of-N at the same compute, with picture damage no worse than the plain product's | from step 2 |
 | B1 | adding the presence head raises A4's count or keeps it with cleaner pictures; pushed alone, it makes both species appear | from step 2 |
@@ -54,6 +58,12 @@ route's step 2, which frames the hypothesis; until then the line says "number fr
 
 Ticked with a link and a `verified`, `stated` or `inferred` mark as each is delivered.
 
+**G0**
+
+- [ ] 💻 code ran: the released 256 px model and classifier sampled at scale 0, 1 and 10
+- [ ] 🖼️ screenshot: the corgi, tabby and golden retriever sheets
+- [ ] ✅ check passed: scale 0 identical on 4 of 4; at least 14 of 16 per class at scale 10
+
 **R0**
 
 - [x] 📁 folder created: plans 15, 17 and 18 and the classifier code in this repo · [the README](../../README.md) `verified`
@@ -70,10 +80,16 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 - [ ] 🖼️ screenshot: caption-model draws, plain product against guided, per dial setting
 - [ ] ✅ check passed: crisp pairs of 300 against the rung's bar
 
-**A2b, A2c**
+**A2b**
 
 - [ ] 🖼️ screenshot: plain product against guided, per dial setting, with the joint model
 - [ ] ✅ check passed: separate pairs of 300 against the rung's bar, and D1 to D4 read
+
+**A2r, A2c**
+
+- [ ] 💻 code ran: both 64 px trainings, and classifiers trained on our photos for both arms
+- [ ] 🖼️ screenshot: one sheet per arm, plain product, separate-label push, pair-aware push
+- [ ] ✅ check passed: the arm's count against its bar, called from full-resolution tiles
 
 **A3, A4, B1 to B7, C1, C2**
 

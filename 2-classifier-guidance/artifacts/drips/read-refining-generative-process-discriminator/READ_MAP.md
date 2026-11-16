@@ -15,6 +15,7 @@ of the quoted text.
 | Rules | read only: no code, no plan edits; this map is the one file the walk writes |
 | Bar | the closing section names the discriminator's inputs, loss, noise levels and the sampler formula, each with its page, and the route gets one row per settled fact |
 | Time box | one sitting for sections 1 to 3, one for 4 to 7 and the appendix rows A1 needs |
+| Paper text | the arXiv source `camera-ready.tex` and the PDF, fetched 2026-11-16 into the session scratchpad; not kept, refetch from arXiv 2211.17091 |
 | Journey | none: classifier guidance and density ratio have no journey (gap); density ratio is on the shelf in the little book of generative AI foundations, p162 |
 
 ## Spine
@@ -46,10 +47,10 @@ toward the data. It needs no retraining of the diffusion model.
 
 | # | Section | Paragraph | State | Note |
 |---|---|---|---|---|
-| 1 | Abstract | whole | not reached | |
-| 2 | 1 | the field | not reached | |
-| 3 | 1 | reuse of pretrained models | not reached | |
-| 4 | 1 | the approach, and contributions | not reached | |
+| 1 | Abstract | whole | tested | sentence 6: holds with a condition. 1D, one noise level, data N(1,1), model draws N(0,1.5²); mean abs score error on x in [-3,3]: model alone 1.134, plus optimal correction 0.0000, plus a trained quadratic logistic discriminator (2,000 real, 2,000 fake) 0.080. When the score used is not the score of the model's own draws (score of N(0.3,1), draws N(0,1.5²)): 0.700 alone, 0.862 corrected, so the correction made it worse. Script in the session scratchpad, test6/test6.py, not kept |
+| 2 | 1 | the field | walked lean | Figure 2 (p2, the ImageNet samples; the round misnamed it Figure 1) shown on the reader's ask; reader asked the PoE caveats of test 6 and how the idea meets SDXL's text pathway, answered in the round |
+| 3 | 1 | reuse of pretrained models | walked lean | reader asked what the fixed sampler is called, whether it needs MCMC or joint prompts, and asked to carry the caveats forward with mitigations and knobs (section below) |
+| 4 | 1 | the approach, and contributions | tested ← current | Figure 1 (p1) shown. Sentence 7 (stable, fast, cheap): holds with conditions. Figure 3 (p4) plots FID, not loss: 2.03 unguided, 2.05 at epoch 0, about 1.85 after 1 epoch, best 1.77 at epoch 10, 1.77 to 1.82 to epoch 60. Table 6 (p7), CIFAR-10: 200M score evaluations (480 hr) to train, 1M discriminator evaluations (10 min); the budget leaves out the pretrained ADM classifier the discriminator is built on. 1D two-mode toy (real sd 0.3, fake sd 0.8, 4,096 each, MLP 2-64-64-1): BCE within 0.0008 nats of the best by epoch 400, but correction error over true correction size 0.30, 0.21, 0.40 at t = 0.1, 0.3, 0.5 and 2.96, 18.77 at t = 0.7, 0.9. Script test7/test7.py in the session scratchpad, not kept |
 | 5 | 2 | KL bound on latent variable models | not reached | |
 | 6 | 2 | DDPM's forward and generative chains | not reached | |
 | 7 | 2 | the forward SDE, Eq. 1 | not reached | |
@@ -102,6 +103,33 @@ log-likelihood equals its ELBO, which in practice means the model's score is the
 forward-noised samples. Summed expert scores are not. The guided sampler then lands on the data
 only as far as the score plus the learnt correction matches the true noised joint score, and on the
 toy that can be computed exactly.
+
+**A fourth fake set makes the correction exact for PoE.** The summed noised scores are the score
+of the renormalised product of the noised experts, p_cat^t · p_dog^t / p_null^t, at each noise level. A
+fake set drawn from that product at each t (not the sampler's finished pictures) makes the best
+discriminator's log-odds gradient equal ∇ log p_joint^t minus the summed score, which is the
+interaction term with no leftover. It also never goes stale, since it does not depend on the guided
+sampler. On the toy that product is a Gaussian mixture with a closed form, so it can be drawn exactly;
+on SDXL it needs MCMC at each noise level. Inferred in the walk, 2026-11-16, from test 6 on the
+abstract; untested.
+
+## Caveats for PoE, carried forward
+
+Raised in the walk on 2026-11-16 (abstract test 6, and the reader's questions at introduction
+paragraphs 1 and 2). Each is inferred unless a source is named; none is tested. Steps 7 and 9 of the
+route read this section before the discriminator is designed.
+
+| # | Caveat | Mitigation to try | Knob that measures it |
+|---|---|---|---|
+| C1 | The summed score plus the learnt correction reaches the joint only as far as the summed score is the score of the fake set; the paper's fake set (finished draws noised forward, p15) leaves a leftover | draw the fake set at each noise level from the product of the noised experts, which makes the correction exactly the interaction term; exact on the toy, MCMC per noise level on SDXL | fake-set kind (finished-noised, trajectory, per-noise-level product); on the toy, cosine of learnt against true correction per step |
+| C2 | Building the per-noise-level product set on SDXL needs MCMC at every noise level, the Langevin cost the project already met | build it only over the early steps where the pair is decided; reuse the Langevin settings already learnt (c = 3, k = 20); or train on finished-noised fakes and measure the leftover on the toy first | number of noise levels given an MCMC fake set; MCMC steps per level |
+| C3 | The discriminator learns every difference between real and fake, so a photo-vs-render or joint-vs-product style gap is learnt and pushed along with the pairing (a reviewer's comment asks the same of the LoRA) | real set from the same SDXL at the same settings; identical random style augmentation (colour, blur, compression) on both sets so style stops predicting the label; fused-but-realistic hard negatives in the fake set; many pair kinds (animal-animal, animal-object, object-object) so only "two separate things" separates the sets across all pairs | style-only control (two sets that differ only in style; the push must not change the count); count against style change under the push; held-out pairs |
+| C4 | A real set of joint-prompt renders inherits the joint prompt's failures (wrong on 4 of 8 held-out seeds) | real set curated by eye, as the v58 LoRA targets were, or real photographs of pairs (150 in the inclusive-captions pool) with C3's augmentation | real-set kind (raw joint renders, curated joint renders, photographs) |
+| C5 | Real and fake look most alike at high noise, where PoE loses the pair, so the classifier has the least signal where it is needed most | more training latents at high noise (importance sampling over t, as the paper does); a time input the classifier can use | training latents per noise level; on the toy, correction error by step against the exact best discriminator (Table 1, p4) |
+| C6 | The gradient may add a pattern only the classifier responds to instead of changing content (recalled, a known failure of plain classifier gradients) | noise-aware training; push only over high-noise steps; average the gradient over small perturbations | judge the push with an independent measure (detector count with CLIP crop names, eye calls) beside the classifier's own score; the gap between them |
+| C7 | Section 3.4's reading of w (w = 1 lands on the data) assumes no leftover | sweep w | w, with t_mid |
+| C9 | A converged loss does not certify the correction: on a 1D two-mode toy the loss came within 0.0008 nats of the best while the gradient at high noise stayed 2 to 19 times the true correction's size (chunk 4's test) | judge the classifier by its correction error per step on the toy before trusting it on SDXL; regularise the input gradient, or fit the log-ratio's gradient directly | correction error by step against loss by step, on the toy |
+| C8 | Binding: an attention-based binding loss (recalled: Attend-and-Excite and its kin act on cross-attention maps) does not fit a classifier that sees only latents | an auxiliary head that predicts the count or each object's label, so its features must encode separation; or a separate binding term in the sampler, tested beside the push | auxiliary head on or off |
 
 ## Slips in the printed paper
 
@@ -183,9 +211,16 @@ Each is added to the route only on the reader's word.
 
 | Chunk | What happened | Rule it points at |
 |---|---|---|
+| 3 | the reader had to ask for the caveats raised in a round to be carried forward | caveats and limits raised in a round's answer are written to the map in the same round, with a mitigation and a measuring knob each |
+| 2 | the round named the ImageNet samples Figure 1 from the source's figure order; the PDF numbers it Figure 2 | number figures from the compiled PDF, as SKILL.md already says for lemmas |
 
 ## Timings
 
 | Round | Start | End | Reader typed |
 |---|---|---|---|
 | setup and spine | 2026-11-12 | | the invocation |
+| 1 abstract | 2026-11-16 20:17 | 2026-11-16 20:30 | the resume invocation |
+| 1 test 6, example; 2 intro paragraph 1 | 2026-11-16 20:30 | 2026-11-16 20:46 | test 6. example. next |
+| 2 Figure 2, caveats, SDXL why; 3 intro paragraph 2 | 2026-11-16 20:46 | 2026-11-16 21:05 | four questions and next |
+| 3 naming, MCMC, caveats, knobs, why, simplify; 4 intro paragraph 3 | 2026-11-16 21:05 | 2026-11-16 21:30 | six asks |
+| 4 test 7, example | 2026-11-16 21:30 | | test 7, example |

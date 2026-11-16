@@ -268,3 +268,7 @@ and the strong head's feature hook.
 ## Next step
 
 Task 1.1: what the frozen head believes.
+
+## Cross-references
+
+- The mention of **plan 18**, as the run that showed the push steers SDXL only unrescaled, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
