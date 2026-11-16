@@ -29,12 +29,15 @@
 ## Repairs
 
 - The cluster clone's first attempt left an empty folder ("File exists" from git on the network filesystem); the retry into the empty folder worked.
+- Parallel downloads were reset by the server near 800 MB, and the server answers a range request with 200, so `curl -C -` cannot resume. Downloads now run one at a time from zero, up to 8 attempts each, checked against the server's Content-Length.
 
 ## Out of the session
 
 | id | kind | serves | state |
 |---|---|---|---|
-| weight downloads | 4 `nohup curl` on mscluster84 | T1 to T4, step 8 | running |
+| weight downloads | `fetch.sh` (nohup) on mscluster84, log `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion/fetch.log` | T1 to T4, step 8 | both classifiers done; 256 px model then 64 px model, sequential, from 20:17 UTC |
+| T1 submit | laptop loop: waits for the 256 px model, then `cluster.sh run "sbatch --nodelist=mscluster108 ... identity"` | T1 | waiting |
+| the loop | `/loop` self-paced: settle each target, go next, closing pass | T1 to T4 | running, approved by you 2026-11-16 |
 
 ## Closing pass owed
 
