@@ -2,7 +2,7 @@
 
 **Plan walked:** [route step 4](../../../plans/route-classifier-guided-poe-from-toy-to-animals.md#4--reproduce-classifier-guidance-on-the-released-weights), mode `--reproduce`, branch `exec/classifier-guidance-ladder` (cut from `6f767cd1`).
 
-**On step:** T1, scale 0 against plain sampling.
+**On step:** T2, the corgi figure (job 89235).
 
 ## Stop point
 
@@ -24,11 +24,13 @@
 
 ## Ticks
 
-(none yet)
+- T1 reproduced 2026-11-16: sha256 equal on 4 of 4 seeds, plain-vs-plain control equal; job 89232; sheet `artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png`.
 
 ## Repairs
 
 - The cluster clone's first attempt left an empty folder ("File exists" from git on the network filesystem); the retry into the empty folder worked.
+- `--gres=gpu:1` is rejected by this cluster's sbatch; the job script carries no gres line.
+- A folder a job creates on mscluster108 can read as missing from mscluster84 for a minute (network filesystem cache); a retried `cluster.sh pull` finds it.
 - Parallel downloads were reset by the server near 800 MB, and the server answers a range request with 200, so `curl -C -` cannot resume. Downloads now run one at a time from zero, up to 8 attempts each, checked against the server's Content-Length.
 
 ## Out of the session
@@ -36,7 +38,7 @@
 | id | kind | serves | state |
 |---|---|---|---|
 | weight downloads | `fetch.sh` (nohup) on mscluster84, log `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion/fetch.log` | T1 to T4, step 8 | both classifiers done; 256 px model then 64 px model, sequential, from 20:17 UTC |
-| T1 submit | laptop loop: waits for the 256 px model, then `cluster.sh run "sbatch --nodelist=mscluster108 ... identity"` | T1 | waiting |
+| job 89235 | `sbatch --nodelist=mscluster108 ... guide "263" "1.0 10.0"` | T2 | running |
 | the loop | `/loop` self-paced: settle each target, go next, closing pass | T1 to T4 | running, approved by you 2026-11-16 |
 
 ## Closing pass owed

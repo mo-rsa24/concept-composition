@@ -525,7 +525,7 @@ tabby and golden retriever, with scale 1 calling fewer.
   clones at `/home/molef/PhD/replications/guided-diffusion` and
   `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion`. The wrapper never
   imports `dist_util`, so co3 needs neither mpi4py nor blobfile.
-- [ ] **T1** scale 0 identical to plain sampling
+- [x] **T1** scale 0 identical to plain sampling · ✓ verified 2026-11-16: reproduced, sha256 of the uint8 render equal on 4 of 4 seeds, and plain sampling run twice on seed 0 equal (job 89232, mscluster108, Quadro RTX 8000, 22 s per plain render, 37 s at scale 0) · [the identity sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png), [the checksums](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_checksums.csv)
 - [ ] **T2** corgi sheet called
 - [ ] **T3** tabby sheet called
 - [ ] **T4** golden retriever sheet called
