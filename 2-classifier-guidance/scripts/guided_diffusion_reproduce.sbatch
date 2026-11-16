@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=gd_reproduce
 #SBATCH --partition=biggpu
-#SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=4
 #SBATCH --time=06:00:00
 #SBATCH --output=/home-mscluster/mmolefe/Playground/PhD/concept-composition/logs/gd_reproduce_%j.log
