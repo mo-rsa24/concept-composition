@@ -2,7 +2,7 @@
 
 **Plan walked:** [route step 4](../../../plans/route-classifier-guided-poe-from-toy-to-animals.md#4--reproduce-classifier-guidance-on-the-released-weights), mode `--reproduce`, branch `exec/classifier-guidance-ladder` (cut from `6f767cd1`).
 
-**On step:** T3 and T4, tabby and golden retriever (job 89245).
+**On step:** T3 and T4, tabby and golden retriever (nohup on mscluster107 card 1).
 
 ## Stop point
 
@@ -21,6 +21,7 @@
 | d cluster clone | `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion` | own path | default you accepted | folder exists beside the cluster checkout |
 | e stop point | the bar above, 2 sittings | own | default you accepted | route's 270-minute budget |
 | launch | `sbatch --nodelist=mscluster108` | `nohup` on a free card | Claude | no job held, so the one-job slot is free and Slurm sees the run |
+| relaunch T3, T4 | `nohup` on mscluster107 card 1 | wait for mscluster108 | Claude | another user took all of mscluster108; 106 and 109 down, 110 to 112 Blackwell |
 
 ## Ticks
 
@@ -39,7 +40,7 @@
 | id | kind | serves | state |
 |---|---|---|---|
 | weight downloads | `fetch.sh` (nohup) on mscluster84, log `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion/fetch.log` | T1 to T4, step 8 | both classifiers done; 256 px model then 64 px model, sequential, from 20:17 UTC |
-| job 89245 | `sbatch --nodelist=mscluster108 ... guide "281 207" "1.0 10.0"` | T3, T4 | running |
+| T3 and T4 run | `ssh mscluster107` then `CUDA_VISIBLE_DEVICES=1 nohup bash .../guided_diffusion_reproduce.sbatch guide "281 207" "1.0 10.0"`, log `logs/gd_reproduce_t3t4_mscluster107.log` | T3, T4 | running from 21:54 UTC; job 89245 cancelled after 30 min pending |
 | the loop | `/loop` self-paced: settle each target, go next, closing pass | T1 to T4 | running, approved by you 2026-11-16 |
 
 ## Closing pass owed
