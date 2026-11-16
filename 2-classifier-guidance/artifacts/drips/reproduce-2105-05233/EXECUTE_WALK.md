@@ -2,7 +2,7 @@
 
 **Plan walked:** [route step 4](../../../plans/route-classifier-guided-poe-from-toy-to-animals.md#4--reproduce-classifier-guidance-on-the-released-weights), mode `--reproduce`, branch `exec/classifier-guidance-ladder` (cut from `6f767cd1`).
 
-**On step:** T2, the corgi figure (job 89235).
+**On step:** T3 and T4, tabby and golden retriever (job 89245).
 
 ## Stop point
 
@@ -25,6 +25,7 @@
 ## Ticks
 
 - T1 reproduced 2026-11-16: sha256 equal on 4 of 4 seeds, plain-vs-plain control equal; job 89232; sheet `artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png`.
+- T2 reproduced 2026-11-16: 16 of 16 called Pembroke at scale 10, 2 of 16 at scale 1; by eye 13 of 16 clear corgis at scale 10; job 89235; sheet `sheet-pembroke-welsh-corgi-scale-1-and-10.png`. Seed 0's push: applied push norm 0.18 at the first step and 0.32 at step 50 against a mean norm of about 429, falling to 0 at the last step; at scale 10 the raw gradient falls from 0.52 (step 50) to 0.11 (step 200) as the classifier is satisfied, at scale 1 it rises from 0.54 to 1.85.
 
 ## Repairs
 
@@ -38,7 +39,7 @@
 | id | kind | serves | state |
 |---|---|---|---|
 | weight downloads | `fetch.sh` (nohup) on mscluster84, log `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion/fetch.log` | T1 to T4, step 8 | both classifiers done; 256 px model then 64 px model, sequential, from 20:17 UTC |
-| job 89235 | `sbatch --nodelist=mscluster108 ... guide "263" "1.0 10.0"` | T2 | running |
+| job 89245 | `sbatch --nodelist=mscluster108 ... guide "281 207" "1.0 10.0"` | T3, T4 | running |
 | the loop | `/loop` self-paced: settle each target, go next, closing pass | T1 to T4 | running, approved by you 2026-11-16 |
 
 ## Closing pass owed

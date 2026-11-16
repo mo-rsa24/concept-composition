@@ -526,7 +526,7 @@ tabby and golden retriever, with scale 1 calling fewer.
   `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion`. The wrapper never
   imports `dist_util`, so co3 needs neither mpi4py nor blobfile.
 - [x] **T1** scale 0 identical to plain sampling · ✓ verified 2026-11-16: reproduced, sha256 of the uint8 render equal on 4 of 4 seeds, and plain sampling run twice on seed 0 equal (job 89232, mscluster108, Quadro RTX 8000, 22 s per plain render, 37 s at scale 0) · [the identity sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png), [the checksums](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_checksums.csv)
-- [ ] **T2** corgi sheet called
+- [x] **T2** corgi sheet called · ✓ verified 2026-11-16: reproduced, the released classifier calls 16 of 16 Pembroke at scale 10 (mean p 0.854) and 2 of 16 at scale 1 (mean p 0.067); by eye 13 of 16 clear corgis at scale 10, seeds 2, 6 and 11 corgi-coloured with a fox or dingo face (job 89235) · [the corgi sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_263.csv)
 - [ ] **T3** tabby sheet called
 - [ ] **T4** golden retriever sheet called
 - [ ] **Gate:** instruction 13 called.
