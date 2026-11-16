@@ -5,7 +5,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
-| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | todo | | 4 |
+| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1 | 4 |
 | R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | todo | plans 17 and 18 are in this repo's `plans/` | 5 |
 | A1 | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | todo | | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
@@ -60,9 +60,9 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 
 **G0**
 
-- [ ] 💻 code ran: the released 256 px model and classifier sampled at scale 0, 1 and 10
-- [ ] 🖼️ screenshot: the corgi, tabby and golden retriever sheets
-- [ ] ✅ check passed: scale 0 identical on 4 of 4; at least 14 of 16 per class at scale 10
+- [x] 💻 code ran: the released 256 px model and classifier sampled at scale 0, 1 and 10 · [the wrapper](../../scripts/guided_diffusion_reproduce.py), Slurm jobs 89232 and 89235, nohup run on mscluster107, upstream commit `22e0df8` `verified`
+- [x] 🖼️ screenshot: the corgi, tabby and golden retriever sheets · <a href="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png"><img src="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png" width="200" alt="corgi sheet"></a> <a href="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png"><img src="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png" width="200" alt="tabby sheet"></a> <a href="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png"><img src="../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png" width="200" alt="golden retriever sheet"></a> `verified`
+- [x] ✅ check passed: scale 0 identical on 4 of 4; at least 14 of 16 per class at scale 10 · [the identity checksums](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_checksums.csv), [the per-sample calls](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/classifier_calls.csv): 16, 15, 15 of 16 `verified`
 
 **R0**
 
