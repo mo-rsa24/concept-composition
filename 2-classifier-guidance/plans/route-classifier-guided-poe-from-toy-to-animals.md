@@ -505,6 +505,30 @@ tabby and golden retriever, with scale 1 calling fewer.
 - `added:` the cat and dog classes, the 64 px downloads for step 8, the branch, the cluster facts
   (from `environment/`) · `dropped:` FID and the paper's tables (why: 50,000 samples per number,
   which buys nothing the sheets do not show for this route)
+- **Targets and bars,** level 1 (the released weights) throughout, set before any run. Arxiv
+  2105.05233 at upstream commit `22e0df8`; 250 respaced steps of ancestral sampling, one sample
+  per seed so seed i starts from the same noise at every scale. Calls are the released 256 px
+  classifier's top-1 at t = 0 on the saved render.
+
+  | Target | Bar: reproduced | Not reproduced | Inconclusive |
+  |---|---|---|---|
+  | T1 scale 0 against plain sampling, seeds 0 to 3 | sha256 of the uint8 render equal on 4 of 4 | any seed differs while the control matches | plain sampling run twice on seed 0 differs (the GPU, not the push) |
+  | T2 [Figure 3](https://arxiv.org/pdf/2105.05233#page=8), Pembroke Welsh corgi (class 263) | at scale 10 at least 14 of 16 called 263, and fewer at scale 1 | 13 or fewer at scale 10, or scale 1 calls as many | the eye count in instruction 13 disagrees with the classifier by 4 or more of 16 |
+  | T3 tabby cat (281) | as T2 | as T2 | as T2 |
+  | T4 golden retriever (207) | as T2 | as T2 | as T2 |
+
+  Not chosen: Figures 1, 2 and 4 to 27 and Tables 1 to 16 (FID, IS, precision and recall from
+  50,000 samples, architecture ablations, galleries, LSUN). Launch: the wrapper
+  `2-classifier-guidance/scripts/guided_diffusion_reproduce.py` through
+  `2-classifier-guidance/scripts/guided_diffusion_reproduce.sbatch identity` or
+  `... guide "<classes>" "1.0 10.0"`, weights at `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion`,
+  clones at `/home/molef/PhD/replications/guided-diffusion` and
+  `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion`. The wrapper never
+  imports `dist_util`, so co3 needs neither mpi4py nor blobfile.
+- [ ] **T1** scale 0 identical to plain sampling
+- [ ] **T2** corgi sheet called
+- [ ] **T3** tabby sheet called
+- [ ] **T4** golden retriever sheet called
 - [ ] **Gate:** instruction 13 called.
 - **Leaves:** the card, the checkpoint paths, and the clone, which steps 7 and 8 port from.
 
