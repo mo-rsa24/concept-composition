@@ -129,7 +129,7 @@ def guided_eps(eps, grad, a_t, scale):
     a_t    alpha-bar at this step
     scale  the guidance scale s
     """
-    raise NotImplementedError("type the guided step here")
+    return eps - scale * np.sqrt(1 - a_t) * grad
 
 
 def reverse(score, logp=None, mala=False, push=None, scale=0.0, rng=None, n=None):

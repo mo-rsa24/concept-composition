@@ -157,11 +157,17 @@ For you to follow manually. Do these yourself.
 
 ◀ Needs: [1. Build the five pieces](#1-build-the-five-pieces)
 
-- [ ] **2.1** Type `guided_eps` in `toy_sampler_hybrids.py`, then from the toy's notes folder run
+- [x] **2.1** Type `guided_eps` in `toy_sampler_hybrids.py`, then from the toy's notes folder run
   `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py port`.
-  You should see 0 of 300 draws differing at scale 0, a largest difference under 1e-6 between the
-  scale-1 push and the true-score sampler, and 300 crisp pairs at scale 1. `NotImplementedError`
-  means the step is not typed yet; 0 crisp at scale 1 means the sign of the push is flipped.
+  You should see scale 0 differing from unguided by no more than float rounding (under 1e-6, the
+  same label on all 300 draws), a largest difference under 1e-6 between the scale-1 push and the
+  true-score sampler, and 300 crisp pairs at scale 1. Bit-for-bit identity depends on numpy's
+  memory layout in the process: a zero push and the true correction at scale 0 are bitwise identical
+  when run on their own. `NotImplementedError`
+  means the step is not typed yet; 0 crisp at scale 1 means the sign of the push is flipped. ✓ verified 2026-11-17, typed and run by Claude at the reader's word ("you do it"): scale 0 differs
+  on 1 of 300 draws by 6.2e-8, labels unchanged on 300 of 300; scale 1 against the true-score sampler
+  6.7e-16; crisp pairs of 300: unguided 0, scale 0 0, scale 0.5 112, scale 1 300, true score 300 ·
+  `port.json`
 - [ ] **2.2** The separate-label piece's test, written when piece 2 is built.
 - [ ] **2.3** The discriminator's test, written when piece 3 is built.
 - [ ] **2.4** The bar, read from the counts.

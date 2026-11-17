@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 1, the push hook: built, waiting on the reader's test 2.1
+**On:** piece 2, the separate-label classifier: not started
 
 ## Stop point
 
@@ -32,11 +32,15 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | where the separate-label bar is read | every scale 1, 2, 5, 10; scale 1 only | every scale | reader, defaults | strictest reading |
 | the overlay half | as written, tightened | as written, against this walk's own scale-0 run | reader, defaults | the reader's bar |
 | improvements | true correction as a third push; closed-form separate-label beside the trained one | both kept | reader, defaults | |
+| who types the guided step in piece 1 | reader, Claude | Claude | reader | "you do it, and show me the result" |
+| scale-0 identity judged at | bit for bit, float rounding | float rounding, labels unchanged | Claude, reader may veto | one draw differed by 6.2e-8 in the port run; plain unguided run three times, a zero push and the true correction at scale 0 were all bitwise identical in a fresh process, so the gap is numpy's summation order |
 
 ## Ticks
 
 | Step | Evidence |
 |---|---|
+| 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
+| 2.1 | Claude typed `eps - scale * np.sqrt(1 - a_t) * grad` and ran the test: scale 0 1 of 300 draws off by 6.2e-8, labels 300 of 300 unchanged; scale 1 vs true score 6.7e-16; crisp 0, 0, 112, 300, 300 |
 
 ## Answer keys (held until the reader's done)
 
@@ -50,6 +54,8 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 |---|---|---|---|
 
 ## How to approach this next time
+
+- Port guidance by converting score to noise once (ε = −σ_t · score), then check the push at scale 0 and the perfect push at scale 1 before training anything.
 
 ## Closing pass owed
 
