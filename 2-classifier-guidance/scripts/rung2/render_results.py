@@ -62,6 +62,8 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3, 4, 9, 10, 11, 12])
     ap.add_argument("--strengths", type=float, nargs="+", default=[10, 30, 100])
     ap.add_argument("--head", type=Path, default=HEAD)
+    ap.add_argument("--readout", action="store_true",
+                    help="--head is a train_readout_pair.py checkpoint; SDXL is read with the joint prompt when it was trained so")
     ap.add_argument("--push-cap", type=float, default=PUSH_CAP_FRACTION)
     ap.add_argument("--out-name", default="results", help="folder under rung2/ for this sheet")
     ap.add_argument("--reuse-baselines", default="",
@@ -84,11 +86,19 @@ def main() -> int:
                   guidance_scale=ctx.guidance_scale, num_inference_steps=ctx.num_inference_steps,
                   height=1024, width=1024, device=ctx.device, dtype=ctx.dtype)
 
-    disc = PairDiscriminator(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
     state = torch.load(args.head, map_location="cpu")
-    disc.head.load_state_dict(state["head"])
-    disc.head.float().eval()
-    print(f"loaded {args.head} (trained on seeds {state['split']['train_seeds']})", flush=True)
+    if args.readout:
+        from train_readout_pair import PairHead, ReadoutPairClassifier
+        seq_r, pool_r = enc("a cat and a dog") if state.get("pair_prompt") else (seq_e, pool_e)
+        head = PairHead()
+        head.load_state_dict(state["head"])
+        disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
+        print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
+    else:
+        disc = PairDiscriminator(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
+        disc.head.load_state_dict(state["head"])
+        disc.head.float().eval()
+        print(f"loaded {args.head} (trained on seeds {state['split']['train_seeds']})", flush=True)
     ctx.scheduler.set_timesteps(ctx.num_inference_steps)
     t_last = ctx.scheduler.timesteps[-1].reshape(1).to(ctx.device)
 

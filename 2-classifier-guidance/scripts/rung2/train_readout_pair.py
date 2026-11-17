@@ -77,6 +77,20 @@ class PairHead(nn.Module):
         return self.out(pooled[:, 0])[:, 0]
 
 
+class ReadoutPairClassifier(nn.Module):
+    """The trained head on SDXL's readout features, as the push code calls it: logits, and their sum."""
+
+    def __init__(self, unet, seq, pool, head):
+        super().__init__()
+        self.reader, self.head = Readout(unet, seq, pool), head
+
+    def forward(self, x_t, timestep):
+        return self.head(self.reader(x_t.to(self.reader.seq_e.dtype), timestep))
+
+    def log_prob_both(self, x_t, timestep):
+        return self.forward(x_t, timestep).sum()
+
+
 def joint_prompt(pair: str) -> str:
     """'a_cat__x__a_dog' -> 'a cat and a dog', the pair's joint prompt."""
     a, b = pair.split("__x__")
