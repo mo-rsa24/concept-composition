@@ -53,8 +53,8 @@ SEEDS = (1, 3, 9, 10)
 SHOWN_STEPS = (0, 3, 6, 10, 15, 20, 30, 49)
 RUNS = (("plain", None, None), ("guided s10", 10.0, None), ("guided s30", 30.0, None),
         ("random s10", 10.0, "random"))
-CALLS = Path(__file__).resolve().parents[2] / \
-    "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/calls.csv"
+# The reader's calls, copied beside the latents because the results folder is not in git.
+CALLS = RUNG2 / "training_set/calls.csv"
 
 
 def kind_of(row):
@@ -76,6 +76,7 @@ def kind_of(row):
 
 
 def main() -> int:
+    only_kinds = "--only-kinds" in sys.argv
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
     print(f"{socket.gethostname()}: {torch.cuda.get_device_name(0)}", flush=True)
@@ -122,7 +123,7 @@ def main() -> int:
     record = {"seeds": SEEDS, "shown_steps": SHOWN_STEPS, "runs": {}}
 
     # Part A
-    for seed in SEEDS:
+    for seed in (() if only_kinds else SEEDS):
         strip = {}
         for name, strength, mode in RUNS:
             init, sigma = init_latents_for_cell(single.cell_for(seed), ctx)
@@ -192,8 +193,10 @@ def main() -> int:
         plt.close(fig)
         (OUT / "diagnostics.json").write_text(json.dumps(record, indent=1))
 
+    if only_kinds:
+        record = json.loads((OUT / "diagnostics.json").read_text())
     colours = {"plain": "#555555", "guided s10": "#2b6cb0", "guided s30": "#1a365d", "random s10": "#c05621"}
-    for key, fname, ylabel in (("logit_per_step", "logit-through-time.png", "discriminator logit"),
+    for key, fname, ylabel in () if only_kinds else (("logit_per_step", "logit-through-time.png", "discriminator logit"),
                                ("push_over_eps_per_step", "push-through-time.png", "push size over prediction size")):
         fig, axes = plt.subplots(1, len(SEEDS), figsize=(4.2 * len(SEEDS), 3.4), sharey=True)
         for ax, seed in zip(axes, SEEDS):
