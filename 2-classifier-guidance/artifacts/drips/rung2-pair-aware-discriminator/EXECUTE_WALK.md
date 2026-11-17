@@ -6,9 +6,10 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 3: the held-out check passed, 13 of 20 sampler steps at balanced accuracy 0.75 or more on
-seeds 7 and 8 (steps 7 to 19; steps 0 to 6 read 0.59 to 0.73). The final run on all eight seeds is
-training on `mscluster107` GPU 0. Plot: `results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png`.
+Round 4, the result renders: running on `mscluster107` GPU 0 since 2026-11-17 12:03 UTC (PID 754977,
+log `rung2/logs/results.log`), with the final discriminator (`final-all-seeds/head_step_001500.pt`,
+fit 20 of 20 on its own tiles). Canary passed: strength 0 with the discriminator attached is
+identical to plain product on seed 1. The held-out check run passed 13 of 20 (steps 7 to 19).
 
 ## The stop point
 
@@ -53,7 +54,8 @@ Seed 1, one tile per column.
 |---|---|---|---|
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
-| PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | running |
+| PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | done 11:58 UTC |
+| PID 754977 | run, `mscluster107` GPU 0, `render_results.py`, log `rung2/logs/results.log` | 1.4, the result sheet | running |
 | PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
