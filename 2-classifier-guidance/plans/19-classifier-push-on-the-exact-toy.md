@@ -154,9 +154,13 @@ For Claude to execute. Ask Claude to do these.
 - [x] **1.4** Its push at w = 0.5, 1 and 2, and the bar's pass or miss line.
   `toy_classifier_push.py pair-guide`, every step, uncapped, the logit clipped at ±11.5 as Kim et al.
   ✓ verified 2026-11-17: runs end to end in 26 s in a throwaway folder and writes the bar line
-- [ ] **1.5** The diagnosis: cosine per step against the true correction and against the sampler's own
+- [x] **1.5** The diagnosis: cosine per step against the true correction and against the sampler's own
   ratio, the minimal-pair gap against a shuffled-label floor, the cap sweep; the figures, card,
-  finding in `report/`, route rows and the board's A1 row.
+  finding in `report/`, route rows and the board's A1 row. ✓ verified 2026-11-17: `diagnose` writes
+  `diagnosis.json` and two figures (cosine with the sampler's own ratio 0.85 to 0.96 from step 190 to
+  90, with the true correction at most 0.21; gap up to 27.9 log-odds against within 0.003 of 0 for
+  shuffled labels; the push gives 172 at caps 0.1, 0.3 and 1); the card, [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md),
+  three route rows and the board redrawn at step 7
 
 ## Instructions
 
@@ -206,7 +210,9 @@ For you to follow manually. Do these yourself.
   sampler's own ratio near 0.85 to 0.96 from step 190 to step 90 while its cosine with the true
   correction stays under 0.25, both dropping to 0 by step 80; and the discriminator's gap rising to
   about 28 log-odds while the shuffled-label line stays at 0. A shuffled-label gap away from 0 means
-  the gap is not about the pair.
+  the gap is not about the pair. 🕒 the reader closed the walk with a bare "done" and gave no account
+  of the two charts; the run's numbers match every line above (verified by Claude), the reader's own
+  look is not recorded
 
 ## Outputs
 
