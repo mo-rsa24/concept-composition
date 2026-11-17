@@ -6,13 +6,13 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Plan 22's two discriminators both failed the held-out check (7 unseen pairs plus cat x dog seeds 7
-and 8; 20 positives, 23 negatives): head only 0 of 20 sampler steps at 0.75 or more (0.53 to 0.63),
-head with adapters 0 of 20 (0.55 to 0.69). Their final runs fit their own training tiles (adapters:
-16 of 20). With v2, every checker whose negatives include hybrids and wrong pairs fails on unseen
-pictures, at 17 and at 81 positives. No rung 2 sheet is rendered with them. `/datasets` still down
-at 17:40 UTC; the cap-0.3 watcher expired. Waiting on the reader's choice of next step.
-Plot: `discriminator/held-out-accuracy-all-checkers.png`.
+Rung 2 is written up (draft reading 7; the discriminator unsound). Two follow-up measurements, no
+push: (1) frozen CLIP ViT-L/14 and DINOv2 ViT-B/14 linear probes on the 443 called clean pictures
+fail the 0.75 bar on the held-out pairs (CLIP 0.710, DINOv2 0.613 and 0.638;
+`results/.../discriminator/probe.json`); (2) cross-attention, cat x dog seeds 1 to 8: the top 10% of
+"cat" and "dog" attention overlap at a median 0.53 to 0.81 in the product against 0.22 to 0.44 in the
+joint prompt over steps 2 to 40, already apart by step 2; joint pictures that composed and those that
+did not overlap alike (`results/.../attention/`). Plan 23 (Kim et al. at scale) is written and waits.
 
 ## The stop point
 
