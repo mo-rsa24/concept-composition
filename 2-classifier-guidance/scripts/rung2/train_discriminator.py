@@ -71,6 +71,10 @@ def main() -> int:
     ap.add_argument("--steps", type=int, default=1500)
     ap.add_argument("--eval-every", type=int, default=250)
     ap.add_argument("--tiles", type=Path, default=TRAINING_SET)
+    ap.add_argument("--held-out", action="store_true",
+                    help="check on the tiles the list marks check=true and train on the rest")
+    ap.add_argument("--adapters", action="store_true",
+                    help="also train LoRA adapters on a separate copy of SDXL's down and middle blocks")
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card; co3 on a Blackwell runs on the CPU in silence")
@@ -82,11 +86,16 @@ def main() -> int:
     tiles = json.loads(args.tiles.read_text())["tiles"]
     if any(t["seed"] >= 9 for t in tiles):
         raise SystemExit("guard: a tile from seeds 9 to 16 is in the training set")
-    train = [t for t in tiles if t["seed"] not in args.check_seeds]
-    check = [t for t in tiles if t["seed"] in args.check_seeds] or train
+    if args.held_out:
+        train = [t for t in tiles if not t["check"]]
+        check = [t for t in tiles if t["check"]]
+    else:
+        train = [t for t in tiles if t["seed"] not in args.check_seeds]
+        check = [t for t in tiles if t["seed"] in args.check_seeds] or train
 
     def load(ts):
-        z = torch.cat([torch.load(LATENTS / f"{t['latent']}.pt").float() for t in ts])
+        z = torch.cat([torch.load(paths.MOUNT_ROOT / t["latent"] if "/" in t["latent"]
+                               else LATENTS / f"{t['latent']}.pt").float() for t in ts])
         return z, torch.tensor([float(t["label"]) for t in ts])
 
     z_train, y_train = load(train)
@@ -94,7 +103,7 @@ def main() -> int:
     split = {"tiles_file": str(args.tiles), "train_seeds": sorted({t["seed"] for t in train}), "check_seeds": args.check_seeds,
              "train_positives": int(y_train.sum()), "train_negatives": int((1 - y_train).sum()),
              "check_positives": int(y_check.sum()), "check_negatives": int((1 - y_check).sum()),
-             "check_is_held_out": bool(args.check_seeds)}
+             "check_is_held_out": bool(args.check_seeds) or args.held_out, "adapters": args.adapters}
     (out / "split.json").write_text(json.dumps(split, indent=2))
     print(json.dumps(split), flush=True)
 
@@ -103,10 +112,26 @@ def main() -> int:
         ctx.models[name].requires_grad_(False)
         ctx.models[name].eval()
     seq_e, pool_e = encode_prompt_sdxl("", models=ctx.models, device=ctx.device, dtype=ctx.dtype)
-    model = PairDiscriminator(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
+    lora_params = []
+    if args.adapters:
+        from diffusers import UNet2DConditionModel
+        from poe_repair.config import RunConfig
+        from poe_repair.experiments.presence_head.dog_classifier import attach_trunk_adapters
+        clf_unet = UNet2DConditionModel.from_pretrained(
+            RunConfig().model_id, subfolder="unet", torch_dtype=ctx.dtype, use_safetensors=True).to(ctx.device)
+        clf_unet.enable_gradient_checkpointing()
+        clf_unet, lora_params = attach_trunk_adapters(clf_unet)
+        model = PairDiscriminator(clf_unet, seq_e, pool_e).to(ctx.device)
+    else:
+        clf_unet = None
+        model = PairDiscriminator(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
     model.head.float()
-    print(f"trainable: {head_parameter_count(model):,} head weights; the UNet is frozen", flush=True)
-    opt = torch.optim.AdamW(model.head.parameters(), lr=3e-4, weight_decay=1e-2)
+    print(f"trainable: {head_parameter_count(model):,} head weights, "
+          f"{sum(p.numel() for p in lora_params):,} adapter weights", flush=True)
+    groups = [{"params": model.head.parameters(), "lr": 3e-4}]
+    if lora_params:
+        groups.append({"params": lora_params, "lr": 1e-4})
+    opt = torch.optim.AdamW(groups, weight_decay=1e-2)
     ctx.scheduler.set_timesteps(ctx.num_inference_steps)
     timesteps = ctx.scheduler.timesteps.clone().cpu()
     pos = [i for i in range(len(train)) if y_train[i] == 1]
@@ -124,8 +149,10 @@ def main() -> int:
             mean = sum(r["balanced_accuracy"] for r in acc) / len(acc)
             print(f"step {step:5d}  early-step balanced accuracy {mean:.3f}  ({time.time() - started:.0f} s)",
                   flush=True)
-            torch.save({"head": model.head.state_dict(), "step": step, "split": split},
-                       out / f"head_step_{step:06d}.pt")
+            ckpt = {"head": model.head.state_dict(), "step": step, "split": split}
+            if clf_unet is not None:
+                ckpt["lora"] = {n: p.detach().cpu() for n, p in clf_unet.named_parameters() if "lora_" in n}
+            torch.save(ckpt, out / f"head_step_{step:06d}.pt")
             model.head.train()
         if step == args.steps:
             break
@@ -134,8 +161,11 @@ def main() -> int:
         y = y_train[idx].to(ctx.device)
         t = timesteps[torch.randint(0, len(timesteps), (len(idx),))].to(ctx.device)
         noisy = ctx.scheduler.add_noise(z0, torch.randn_like(z0), t)
-        with torch.no_grad():
+        if args.adapters:
             feat = model.features(noisy.to(ctx.dtype), t)
+        else:
+            with torch.no_grad():
+                feat = model.features(noisy.to(ctx.dtype), t)
         loss = F.binary_cross_entropy_with_logits(model.head_logit(feat.float()), y)
         opt.zero_grad(set_to_none=True)
         loss.backward()
