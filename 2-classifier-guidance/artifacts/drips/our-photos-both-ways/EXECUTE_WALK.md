@@ -6,16 +6,12 @@ share this working tree).
 
 ## Where the walk is
 
-The released-model arm's product now uses the released classifier's cat and dog classes (the
-reader's `a`). Pieces 1 and 2 are done; both 64 px trainings run at about 0.7 s per step and land around 17:30
-UTC. Piece 3 runs as one chain on `mscluster108` since 07:42 UTC (separate-label classifier, 512
-product draws on both cards, pair-aware classifier), landing around 11:05 UTC. A waiter on `mscluster108` then draws
-the released model's sheet on GPU 0 (about 40 minutes). The 64 px separate-label classifier trains on
-`mscluster107` GPU 1 since 08:11 UTC. Piece 5 waits on `mscluster111` and `112`: when each
-training prints DONE (about 16:20 UTC), its own Blackwell draws 512 plain-product draws, trains that
-model's pair-aware classifier and draws its sheet. Open question for the reader: the 64 px sheets
-carry the separate-label push at scales 1 and 10, and the bar is read against the higher of the
-two, as on the toy, unless the reader names one scale.
+Pieces 1 and 2 are done. The released-model arm's product uses the released classifier's cat and dog
+classes (the reader's `a`). One chain on `mscluster108` since 10:19 UTC draws 512 product draws on
+both cards, trains the pair-aware classifier and draws the 256 px sheet, landing about 14:05 UTC.
+Both 64 px trainings land about 16:20 UTC; then waiters on `mscluster111` and `112` draw, train each
+model's pair-aware classifier and draw its sheet. The bar on the 64 px sheets is read against the
+stronger separate-label scale, with each scale's comparison reported beside it.
 
 ## The stop point
 
