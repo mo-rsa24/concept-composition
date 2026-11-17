@@ -10,7 +10,11 @@ Pieces 1 and 2 are done; both 64 px trainings run at about 0.7 s per step and la
 UTC. Piece 3 runs as one chain on `mscluster108` since 07:42 UTC (separate-label classifier, 512
 product draws on both cards, pair-aware classifier), landing around 11:05 UTC. A waiter on `mscluster108` then draws
 the released model's sheet on GPU 0 (about 40 minutes). The 64 px separate-label classifier trains on
-`mscluster107` GPU 1 since 08:11 UTC. Next tick: the 64 px product sampler and piece 5's chain.
+`mscluster107` GPU 1 since 08:11 UTC. Piece 5 waits on `mscluster111` and `112`: when each
+training prints DONE (about 16:20 UTC), its own Blackwell draws 512 plain-product draws, trains that
+model's pair-aware classifier and draws its sheet. Open question for the reader: the 64 px sheets
+carry the separate-label push at scales 1 and 10, and the bar is read against the higher of the
+two, as on the toy, unless the reader names one scale.
 
 ## The stop point
 
@@ -57,6 +61,9 @@ Seed 1, and one image per label, picked in piece 1.
 - 1.4 smoke of `sheet_256.py` on `mscluster108` GPU 1: 6 tiles at 25 steps in 26 s; at respaced
   step 12 the pair-aware push is 0.76 against the product's own step of 93.8. The first smoke run
   exposed an empty held-out pile in `train-pair`'s scoring, now skipped.
+- 1.5 smoke of `sheet_64.py` on the all-images model's step-5,000 checkpoint, `mscluster108` GPU 1:
+  8 draws in 6 s, 20-iteration 64 px classifiers, 10 tiles at 25 steps in 14 s; rows share their
+  draw across columns, and the separate-label push at scale 10 already turns seed 1 into a cat.
 
 ## Out of the session
 
@@ -66,6 +73,8 @@ Seed 1, and one image per label, picked in piece 1.
 | chain PID 219860 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3, the 256 px classifiers and the product's draws | running since 07:42 UTC |
 | waiter PID 222024 | `piece4_256.sh` on `mscluster108`, log `classifier_guidance_photos/logs/piece4_256.log` | 1.4, draws the 256 px sheet when piece 3 prints `PIECE3 DONE` | waiting since 08:10 UTC |
 | PID 710963 | `classifiers.py train-separate --size 64` on `mscluster107` GPU 1, log `classifier_guidance_photos/logs/separate_64.log` | 1.5, the 64 px separate-label classifier | running since 08:11 UTC |
+| waiter PID 285185 | `piece5_64.sh` ARM `no_both` on `mscluster111`, log `classifier_guidance_photos/logs/piece5_64_no_both.log` | 1.5, draws, pair-aware classifier and sheet for the model without both-animal images | waiting since 08:41 UTC |
+| waiter PID 525583 | `piece5_64.sh` ARM `all` on `mscluster112`, log `classifier_guidance_photos/logs/piece5_64_all.log` | 1.5, the same for the model on all images | waiting since 08:41 UTC |
 | W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | running since 07:35 UTC |
 
 ## Closing pass owed
