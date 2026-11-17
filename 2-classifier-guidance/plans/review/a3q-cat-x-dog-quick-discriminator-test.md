@@ -1,6 +1,6 @@
 # 🧪 Review: does a small pair-aware discriminator's push make SDXL's cat × dog product draw two animals on seeds it never saw?
 
-**Nothing has run yet.** This file judges rung 2 of the scale-up ladder, run as step 10 of
+**Nothing has run yet.** This file judges rung 2 of the [scale-up ladder](../../report/classifier-guided-poe/board.md#the-scale-up-ladder), run as step 10 of
 [the route from the toy to the animals](../route-classifier-guided-poe-from-toy-to-animals.md);
 its page is [A3q](../../report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md).
 The readings below were written on 2026-11-17, before any SDXL render for this rung, and step 10
@@ -58,7 +58,7 @@ only, with every image noised the same way.
 The discriminator's log-odds gradient, added to the product's prediction at every step as
 strength × sqrt(1 − ᾱ_t) × gradient, unrescaled. The guided column renders at three strengths,
 **s = 10, 30 and 100**, fixed here. The toy composed at 1 and 2, but its units do not carry to
-SDXL. Plan 18's dog classifier, pushed the same unrescaled way on SDXL, first changed the cat × dog
+SDXL. [Plan 18](../18-a-dog-classifier-trained-the-papers-way.md)'s dog classifier, pushed the same unrescaled way on SDXL, first changed the cat × dog
 product's picture at 30 (the fused animal became one cat) and broke it at 300; from the plain
 prompt it drew clean dogs at 30 and 100. No strength is changed after any seed 9 to 12 render.
 

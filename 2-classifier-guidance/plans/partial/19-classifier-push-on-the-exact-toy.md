@@ -66,7 +66,7 @@ diagnosis.
 
 **What the discriminator can learn**
 
-Its fake set is the sampler's finished draws noised forward, so its best log-odds gradient is
+Its fake set is the sampler's finished draws noised forward, so its best log-odds gradient<sub>[1](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/03-the-discriminator-and-the-density-ratio.md#32-its-log-odds-slope-is-a-difference-of-scores "Classifier guidance by hand, chapter 3, section 3.2: the best discriminator's log-odds slope is the difference of the two piles' scores"), [2](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/05-the-best-discriminator.md "Classifier guidance by hand, plan 05: the best discriminator on two 1-D Gaussians, and its log-odds slope")</sub> is
 ∇ log q_joint,t − ∇ log q_sampler,t. That differs from the true correction, which is ∇ log of the
 true noised product minus the summed scores, so the push is read against both.
 
@@ -117,7 +117,7 @@ uncapped:
 
 - the pair-aware push<sub>[1](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> at weight w = 1 draws at least 150 of 300 crisp pairs, with overlaid draws no
   higher than this plan's own unguided run on the same seed (300 of 300);
-- the separate-label push draws at most 15 of 300 crisp pairs at every scale in 1, 2, 5 and 10.
+- the separate-label push<sub>[1](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/02-the-product-as-two-classifiers.md#23-pushing-harder-with-the-same-two-classifiers "Classifier guidance by hand, chapter 2, section 2.3: more of the same two separate-label pushes on the product base, where the fused animal's share rises and the pair's falls"), [2](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md "Classifier guidance by hand, plan 04: the separate-label push built and measured on the four-picture toy at strengths 0, 1, 3 and 10")</sub> draws at most 15 of 300 crisp pairs at every scale in 1, 2, 5 and 10.
 
 w = 0.5 and 2 are reported beside the bar and do not decide it.
 

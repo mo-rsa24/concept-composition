@@ -142,3 +142,7 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 ## Dropped
 
 None.
+
+## Cross-references
+
+- The mention of **the scale-up ladder** in [the rung 2 review file, a small pair-aware discriminator on cat × dog](../../plans/review/a3q-cat-x-dog-quick-discriminator-test.md).

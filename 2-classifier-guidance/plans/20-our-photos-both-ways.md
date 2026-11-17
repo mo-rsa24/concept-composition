@@ -40,8 +40,8 @@ Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of
 
 **What this is about**
 
-Step 7 showed on the exact toy that a pair-aware push turns the product's stacked draws into
-side-by-side ones, while a separate-label push does not. This plan runs the same two pushes with
+Step 7 showed on the exact toy that a pair-aware push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> turns the product's stacked draws into
+side-by-side ones, while a separate-label push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/02-the-product-as-two-classifiers.md#23-pushing-harder-with-the-same-two-classifiers "Classifier guidance by hand, chapter 2, section 2.3: more of the same two separate-label pushes on the product base, where the fused animal's share rises and the pair's falls"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md "Classifier guidance by hand, plan 04: the separate-label push built and measured on the four-picture toy at strengths 0, 1, 3 and 10")</sub> does not. This plan runs the same two pushes with
 guided-diffusion's own code on our cat, dog and cat-with-dog images, two ways.
 
 **The released model**
@@ -195,6 +195,9 @@ For Claude to execute. Ask Claude to do these.
   112); 22 of the 38 COCO both crops keep under 90% of the animals' box area, and by eye at sheet
   scale 36 of 38 show both animals · `photo-set-counts.json`, `example-one-per-label.png`,
   `coco-both-crops.png`
+
+  <a href="../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png"><img src="../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png" width="200" alt="Four images across, 256 px above and the same image at 64 px below: a COCO tabby cat sitting, a COCO collie's head, a COCO brindle dog and black cat on a striped armchair, and an SD3.5 render of a ginger cat lying beside a brown dog"></a>
+  <a href="../artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png"><img src="../artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png" width="200" alt="All 38 COCO both-animal crops in a grid, each titled with the share of the animals' box area it keeps, from 0.57 to 1.00; most show a cat and a dog together, and a few are photo collages or show one animal only in part"></a>
 - [x] **1.2** Label dropout in the 64 px launcher, a 300-step timing run, then the two trainings
   (without both-animal images, and with all) on free cards in the order of
   [Considerations](#considerations). `train_64.py` through `launch_gpu.sh`, 50,000 steps at batch
@@ -228,6 +231,8 @@ For you to follow manually. Do these yourself.
   word ("you do it"): 200 cat, 200 dog, 150 both, 550 names identical at both sizes; each 256 px
   image shrunk to 64 px differs from its 64 px file by a median 0.13 and at most 0.20 grey levels
   (of 255), against 53.96 for the same image shifted 8 px · `photo-set-counts.json`
+
+  <a href="../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png"><img src="../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png" width="200" alt="One image per label at 256 px above and 64 px below: a cat, a dog, and two both-animal images, one a COCO photo and one an SD3.5 render; each 64 px copy is the same picture, blockier"></a>
 - [ ] **2.2** Tail both training logs. You should see the loss falling and a checkpoint written.
 - [ ] **2.3** Read each 256 px classifier's held-out accuracy per noise step.
 - [ ] **2.4** Call the released model's tiles at full resolution, per [instruction 14 of the
