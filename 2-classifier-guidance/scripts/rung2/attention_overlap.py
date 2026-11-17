@@ -5,9 +5,12 @@ For cat x dog on seeds 1 to 8, two drawings from the same starting noise:
     joint    "a cat and a dog": one branch, the "cat" and "dog" tokens read from it
     product  "a cat" x "a dog": the "cat" token from the cat branch, the "dog" token from the dog branch
 At every step the cross-attention probabilities of every cross-attention layer working at 32 x 32
-are averaged over heads and layers, giving one 32 x 32 map per token. Their overlap is the
-histogram intersection of the two maps, each normalised to sum 1: 1 means the two words look at the
-same places, 0 means they look at different ones. Nothing is pushed; this only measures.
+are averaged over heads and layers. As Attend-and-Excite does, the start-of-text token is dropped
+and each spatial position is renormalised over the prompt's own word tokens, so a word's map shows
+where it wins against the other words rather than the start token's background. Two overlaps are
+kept per step: the histogram intersection of the two maps (each normalised to sum 1; 1 means the
+same places) and the overlap of each map's top 10% of positions (intersection over union). Every
+step's two maps are saved, so other measures can be read afterwards. Nothing is pushed.
 
 Writes, under MOUNT_ROOT/outputs/classifier_guidance_ladder/rung2/attention/:
     overlap.json, overlap-through-time.png, maps-seedNN.png, tiles/seedNN__<joint|product>.png
@@ -65,6 +68,7 @@ class StoreCrossAttention:
         probs = attn.get_attention_scores(query, key, attention_mask)
         if seq == 32 * 32:
             self.store.current.append(probs.view(batch, attn.heads, seq, -1).mean(1).float().cpu())
+        # (the maps are renormalised over word tokens after averaging; see words_only)
         out = attn.batch_to_head_dim(torch.bmm(probs, value))
         return attn.to_out[1](attn.to_out[0](out))
 
@@ -76,9 +80,21 @@ def token_index(tokenizer, prompt: str, word: str) -> int:
     return ids.index(target[0])
 
 
+def words_only(m: torch.Tensor, n_words: int) -> torch.Tensor:
+    """(positions, tokens) -> the same over tokens 1..n_words, renormalised per position."""
+    w = m[:, 1:1 + n_words]
+    return w / w.sum(-1, keepdim=True)
+
+
 def overlap(a: torch.Tensor, b: torch.Tensor) -> float:
     a, b = a / a.sum(), b / b.sum()
     return float(torch.minimum(a, b).sum())
+
+
+def top_iou(a: torch.Tensor, b: torch.Tensor, frac: float = 0.10) -> float:
+    k = max(1, int(frac * a.numel()))
+    ia, ib = set(torch.topk(a, k).indices.tolist()), set(torch.topk(b, k).indices.tolist())
+    return len(ia & ib) / len(ia | ib)
 
 
 def main() -> int:
@@ -95,6 +111,9 @@ def main() -> int:
     tok = ctx.models["tokenizer"]
     i_cat_a, i_dog_b = token_index(tok, "a cat", "cat"), token_index(tok, "a dog", "dog")
     i_cat_j, i_dog_j = token_index(tok, "a cat and a dog", "cat"), token_index(tok, "a cat and a dog", "dog")
+    n_a = len(tok("a cat").input_ids) - 2
+    n_b = len(tok("a dog").input_ids) - 2
+    n_joint = len(tok("a cat and a dog").input_ids) - 2
     common = dict(models=ctx.models, scheduler=ctx.scheduler, seq_e=seq_e, pool_e=pool_e,
                   guidance_scale=ctx.guidance_scale, num_inference_steps=ctx.num_inference_steps,
                   height=1024, width=1024, device=ctx.device, dtype=ctx.dtype)
@@ -120,19 +139,25 @@ def main() -> int:
                 unet.set_attn_processor(dict(originals))
             store.finish()
             write_decoded_image(o.image, OUT / "tiles" / f"seed{seed:02d}__{mode}.png")
-            curve, shown = [], {}
+            curve, curve_top, shown, saved = [], [], {}, []
             for s, m in enumerate(store.steps):                # m: (batch, 1024, tokens)
                 if mode == "joint":
-                    cat, dog = m[0, :, i_cat_j], m[0, :, i_dog_j]
+                    w = words_only(m[0], n_joint)
+                    cat, dog = w[:, i_cat_j - 1], w[:, i_dog_j - 1]
                 else:
-                    cat, dog = m[0, :, i_cat_a], m[1, :, i_dog_b]
+                    cat = words_only(m[0], n_a)[:, i_cat_a - 1]
+                    dog = words_only(m[1], n_b)[:, i_dog_b - 1]
                 curve.append(overlap(cat, dog))
+                curve_top.append(top_iou(cat, dog))
+                saved.append(torch.stack([cat, dog]).view(2, 32, 32))
                 if s in SHOWN_STEPS:
                     shown[s] = (cat.view(32, 32).numpy(), dog.view(32, 32).numpy())
             record["overlap"][f"seed {seed}, {mode}"] = curve
+            record.setdefault("top10_iou", {})[f"seed {seed}, {mode}"] = curve_top
+            torch.save(torch.stack(saved), OUT / f"maps-seed{seed:02d}-{mode}.pt")
             maps_shown[(seed, mode)] = shown
-            print(f"seed {seed} {mode}: {len(curve)} steps, overlap step 2 {curve[2]:.2f}, step 10 {curve[10]:.2f}, "
-                  f"step 40 {curve[40]:.2f}", flush=True)
+            print(f"seed {seed} {mode}: overlap step 2/10/40 {curve[2]:.2f} {curve[10]:.2f} {curve[40]:.2f}; "
+                  f"top-10% IoU {curve_top[2]:.2f} {curve_top[10]:.2f} {curve_top[40]:.2f}", flush=True)
         (OUT / "overlap.json").write_text(json.dumps(record, indent=1))
 
     fig, ax = plt.subplots(figsize=(8, 4))

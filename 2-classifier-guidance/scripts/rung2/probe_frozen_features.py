@@ -3,7 +3,7 @@
 
 The best case for a CLIP- or DINOv2-based discriminator: clean finished pictures, no noise. Every
 called picture of ``training_set_v3.json`` (plan 22: 81 positives, 362 negatives) is embedded at
-224 px by frozen CLIP ViT-L/14 and frozen DINOv2-with-registers base; a class-balanced logistic
+224 px by frozen CLIP ViT-L/14 and frozen DINOv2 ViT-B/14 with registers (torch hub, cached); a class-balanced logistic
 regression is fitted on the training tiles and scored on the held-out tiles (7 whole pairs plus
 cat x dog seeds 7 and 8), the same split plan 22's discriminators failed on. A second estimate
 leaves out one training pair at a time.
@@ -42,18 +42,25 @@ def picture_path(t) -> Path:
 
 @torch.no_grad()
 def embed(tiles, device):
-    from transformers import AutoImageProcessor, AutoModel, CLIPModel, CLIPProcessor
+    from transformers import CLIPModel, CLIPProcessor
     clip = CLIPModel.from_pretrained("openai/clip-vit-large-patch14").to(device).eval()
     clip_p = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
-    dino = AutoModel.from_pretrained("facebook/dinov2-with-registers-base").to(device).eval()
-    dino_p = AutoImageProcessor.from_pretrained("facebook/dinov2-with-registers-base")
+    hub = Path(torch.hub.get_dir()) / "facebookresearch_dinov2_main"
+    dino = torch.hub.load(str(hub), "dinov2_vitb14_reg", source="local").to(device).eval()
+    mean = torch.tensor([0.485, 0.456, 0.406], device=device).view(1, 3, 1, 1)
+    std = torch.tensor([0.229, 0.224, 0.225], device=device).view(1, 3, 1, 1)
+
+    def dino_in(ims):
+        x = torch.stack([torch.from_numpy(np.asarray(im.resize((224, 224), Image.BICUBIC), dtype=np.float32) / 255.0)
+                         .permute(2, 0, 1) for im in ims]).to(device)
+        return (x - mean) / std
     feats = defaultdict(list)
     for i in range(0, len(tiles), 16):
         ims = [Image.open(picture_path(t)).convert("RGB") for t in tiles[i:i + 16]]
         c = clip.get_image_features(**clip_p(images=ims, return_tensors="pt").to(device))
         feats["clip"].append(torch.nn.functional.normalize(c, dim=-1).cpu())
-        h = dino(**dino_p(images=ims, return_tensors="pt").to(device)).last_hidden_state
-        cls, patches = h[:, 0], h[:, 5:]                       # 4 register tokens after CLS
+        f = dino.forward_features(dino_in(ims))
+        cls, patches = f["x_norm_clstoken"], f["x_norm_patchtokens"]
         feats["dino_cls"].append(torch.nn.functional.normalize(cls, dim=-1).cpu())
         feats["dino_cls_and_patch_mean"].append(torch.cat(
             [torch.nn.functional.normalize(cls, dim=-1), torch.nn.functional.normalize(patches.mean(1), dim=-1)], -1).cpu())
