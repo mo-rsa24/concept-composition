@@ -36,7 +36,12 @@ OUT = RUNG2 / "detector"
 HERE = Path(__file__).resolve().parent
 
 
+QUERY_MODE = "nouns"
+
+
 def nouns(pair: str) -> str:
+    if QUERY_MODE == "animal":
+        return "animal"
     strip = lambda s: s.split("_", 1)[1].replace("_", " ")
     a, b = pair.split("__x__")
     return f"{strip(a)} . {strip(b)}"
@@ -102,7 +107,13 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--validate", action="store_true")
     ap.add_argument("--drawings", action="store_true")
+    ap.add_argument("--query", choices=("nouns", "animal"), default="nouns",
+                    help="nouns: the pair's two nouns; animal: the validated scorer's generic query")
     args = ap.parse_args()
+    global QUERY_MODE, OUT
+    QUERY_MODE = args.query
+    if args.query != "nouns":
+        OUT = OUT / f"query-{args.query}"
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
     OUT.mkdir(parents=True, exist_ok=True)
