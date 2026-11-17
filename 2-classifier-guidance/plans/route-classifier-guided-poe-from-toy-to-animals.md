@@ -48,7 +48,7 @@ animals from the [fused animal](../../context/world/chimera.md#what-a-chimera-is
 every stage below SDXL the pair-aware classifier is set against a separate-label one that the maths
 says cannot help.
 
-**Outcome (the whole chain):** classifier guidance working on the authors' released weights, then
+**Outcome (the whole chain):** [classifier guidance](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/01-the-guided-noise-prediction.md) working on the authors' released weights, then
 a figure set per rung of the scale-up ladder: the exact toy with both classifiers, a small
 discriminator on cat × dog judged on held-out seeds, the three pair kinds, and rung 4's more seeds,
 v58 pool and unseen pairs beside the rank-32 LoRA. Our photos run beside the ladder as the
@@ -94,7 +94,7 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | GroundingDINO counts animals but cannot name them; CLIP on the detector's padded crop names them, 64 of 64 at median margin 0.990, untested on overlapping boxes | found | plan 15 quick context, `3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py` | 8, 10 |
 | Exact toy at pair weight 0.01: [exact product](../../3-understanding-compositionality/artifacts/notes/how-the-poe-toy-experiment-works/how-the-experiment-works.md#2-the-exact-product) 300 of 300 crisp pairs, reverse diffusion 0 of 300 | found | the [toy card](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md) | 7 |
 | On the toy the product itself composes and the sampler fails, so a discriminator learns log q_joint minus log q_sampler, which differs from the true noised product; the toy reports cosine against both | designed | the toy card, "[Where the samplers lose the pair](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md#where-the-samplers-lose-the-pair)" | 7 |
-| Exact toy, pair weight 0.01, seed 7: a pair-aware discriminator's push gives 172 of 300 crisp pairs at w = 1 and 300 at w = 2, against 0 unguided; a separate-label push gives at most 10 over scales 1 to 10; the closed-form best separate-label classifier reaches 34 at scale 10 | found | [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md), plan 19 | 8, 9, 10 |
+| Exact toy, pair weight 0.01, seed 7: a pair-aware discriminator's push gives 172 of 300 crisp pairs at w = 1 and 300 at w = 2, against 0 unguided; a separate-label push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/02-the-product-as-two-classifiers.md#23-pushing-harder-with-the-same-two-classifiers "Classifier guidance by hand, chapter 2, section 2.3: more of the same two separate-label pushes on the product base, where the fused animal's share rises and the pair's falls"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md "Classifier guidance by hand, plan 04: the separate-label push built and measured on the four-picture toy at strengths 0, 1, 3 and 10")</sub> gives at most 10 over scales 1 to 10; the closed-form best separate-label classifier reaches 34 at scale 10 | found | [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md), plan 19 | 8, 9, 10 |
 | On the toy the pair-aware push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> points along the sampler's own ratio (cosine 0.85 to 0.96, steps 190 to 90), not along the true correction (at most 0.21), and stays under a tenth of the summed score's size, so a cap of 0.1 never binds; the true correction capped at 0.1 composes 4 of 300 | found | plan 19's `diagnosis.json` | 9, 10 |
 | On the toy, inclusive captions with no push need a pair weight between 0.3 and 0.5 to match the push at 0.01 (115 and 246 crisp of 300) | found | plan 19's `inclusive-captions-comparison.json` | 8 |
 | The authors' code is github.com/openai/guided-diffusion; its README lists a class-conditional 64 px model and classifier and an unconditional 256 px model with a 256 px classifier | stated | the guided-diffusion README, checked at step 4's open | 4, 8 |
@@ -1426,9 +1426,11 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ### 16. 👁️ Call each rung's sheets at full resolution, in steps 10, 10c and 10e
 
-- [ ] **Do:** the same four-level call as instruction 14 on every training-set tile and every
-  result tile: fused, two things in frame, two clear, destroyed. On rung 4b and 4c, call the one
-  fixed seed per pair for guided and plain product, beside the automatic count.
+- [ ] **Do:** call every training-set tile and every result tile three ways, as
+  [the rung 2 review file](review/a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses)
+  defines them: the animals (one single, one fused, two separate), the picture (intact or
+  damaged), and the species (a cat and a dog, two of one kind, unclear). On rung 4b and 4c, call
+  the one fixed seed per pair for guided and plain product, beside the automatic count.
 - **Done when:** the calls are in each rung's CSV.
 
 ### 17. 🖥️ Launch from the laptop if a session has no cluster access
