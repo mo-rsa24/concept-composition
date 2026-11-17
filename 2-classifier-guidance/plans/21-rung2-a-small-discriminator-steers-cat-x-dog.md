@@ -229,8 +229,10 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [1. Build the five pieces](#1--build-the-five-pieces)**
 
-- [ ] **2.1** Read the timing block in [Considerations](#considerations) and say yes or change it.
+- [x] **2.1** Read the timing block in [Considerations](#considerations) and say yes or change it.
   You should see seconds per plain and per guided render on one named card, and an N.
+  ✓ confirmed by hand 2026-11-17: "yes", taking the product of "a cat" and "a dog", the wording
+  step 5's strength-0 check used.
 - [ ] **2.2** Call every training-set tile at full resolution, the three calls of
   [instruction 16 of the route](route-classifier-guided-poe-from-toy-to-animals.md#16--call-each-rungs-sheets-at-full-resolution-in-steps-10-10c-and-10e).
 - [ ] **2.3** Read the discriminator's balanced accuracy per sampler step against task 1.3's rule.

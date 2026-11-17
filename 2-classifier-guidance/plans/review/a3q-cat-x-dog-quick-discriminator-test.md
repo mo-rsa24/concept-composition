@@ -42,8 +42,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 
 **The product (plain product)**
 
-SDXL's empty-prompt noise prediction plus the guidance scale times the sum, over "a photo of a
-cat" and "a photo of a dog", of each prompt's difference from the empty prediction. On cat × dog
+SDXL's empty-prompt noise prediction plus the guidance scale times the sum, over "a cat" and
+"a dog", of each prompt's difference from the empty prediction. On cat × dog
 it draws one fused animal. Best-of-16 composed 0 of 128 particles on this pair.
 
 **The pair-aware discriminator**
