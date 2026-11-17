@@ -214,13 +214,17 @@ For Claude to execute. Ask Claude to do these.
   wordings.
   ✓ verified 2026-11-17: 48 renders on `mscluster107` GPU 0, 127 to 130 s per seed; final latents
   saved beside each tile · `rung2/training_set/`, `training-set/training-set-sheet.png`
-- [ ] **1.3** The discriminator: SDXL's UNet frozen and read on the empty prompt up to its middle
+- [x] **1.3** The discriminator: SDXL's UNet frozen and read on the empty prompt up to its middle
   block, with plan 18's attention-pool head trained alone on the 41 tiles of
   `scripts/rung2/training_set.json`, noised the same way; its push is the log-odds gradient. First
   a check run holding out seeds 7 and 8 (trained on seeds 1 to 6: 10 positives, 18 negatives;
   checked on 7 positives, 6 negatives): balanced accuracy at least 0.75 on at least 10 of the first
   20 sampler steps, 4 noise draws per tile. Then the final head on all eight seeds.
   `scripts/rung2/train_discriminator.py`, `scripts/rung2/discriminator.py`.
+  ✓ verified 2026-11-17: held-out check passed, 13 of 20 sampler steps (steps 7 to 19 at 0.80 to
+  1.00; steps 0 to 6 at 0.59 to 0.73); final head on all eight seeds, fit 20 of 20 ·
+  `rung2/discriminator/check-holdout-7-8/gate.json`, `rung2/discriminator/final-all-seeds/head_step_001500.pt`,
+  `discriminator/held-out-accuracy-per-step.png`
 - [ ] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
   untouched; the best-of-N pick; strength 0 against plain product on seed 1; then seeds 1 to 4 and
   9 to 12 with plain product, best-of-N, guided at 10, 30 and 100, and the random push at the same
