@@ -1325,6 +1325,96 @@ file.
 - [ ] **Gate:** each sub-rung's reading printed in order.
 - **Leaves:** three cards and retrospectives, which step 11 walks.
 
+### 10f. 📄 Read Readout Guidance, lean
+
+You ~90 min (estimate) · AI ~20 min · Opus, high · moves: the count head's design
+
+**Objective:** the reader knows how Readout Guidance builds, trains and pushes with its heads, and
+what that means for a count head on the product.
+**Outcome:** a lean read map for arXiv 2312.02150 with its caveats for PoE carried forward.
+**Serves:** the board's row A3q (the discriminator the next rung needs).
+**Sees:** none · **Ticket:** none · **Source page:** none
+
+```text
+/drip-read --lean 2312.02150
+
+Background
+Readout Guidance (Luo, Darrell, Wang, Goldman, Holynski, CVPR 2024; code google-research/readout_guidance)
+trains small heads on a frozen diffusion model's decoder features and guides with them. Rung 2 of
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md needs a discriminator
+that reads "two separate things" on pictures it never trained on; every one tried so far failed its
+held-out check (0.53 to 0.71 balanced accuracy against a 0.75 bar). A count head in this paper's
+style is built in 2-classifier-guidance/scripts/rung2/train_count_head.py.
+
+What to bring out
+- Which layers and timesteps the heads read, and why.
+- How many examples a head needs, and how its labels are made.
+- The guidance rule: what is compared to what, at which steps, at what strength.
+- Where it fails, in the paper's own words.
+- Caveats for PoE: a head reading the product's features at the early steps, where a fused body forms.
+
+Hand back
+The read map's caveats table, and one line per caveat on whether train_count_head.py meets it.
+```
+
+- `added:` the held-out numbers and the count-head script path · `dropped:` nothing
+- [ ] **Gate:** the read map's closing section written.
+- **Leaves:** the read map, which steps 10g and 10h read.
+
+### 10g. 🪜 Zoom ladder on Readout Guidance
+
+You ~60 min (estimate) · AI ~40 min in the background · Opus, high · moves: understanding
+
+**Objective:** Readout Guidance seen from the full SDXL system down to a small network worked by hand.
+**Outcome:** the four rungs of the zoom ladder for the paper.
+**Serves:** the reader's understanding before step 10h.
+**Sees:** step 10f's read map · **Ticket:** none · **Source page:** arXiv 2312.02150
+
+```text
+/zoom-ladder Readout Guidance (arXiv 2312.02150): small readout heads on frozen SDXL decoder
+features, trained on a few hundred examples, used to guide sampling. Level 2's miniature: a head
+that predicts a count map (one blob per body) from two decoder layers, and the push that asks for
+two blobs instead of one. Read step 10f's read map first.
+```
+
+- `added:` the count-map miniature · `dropped:` nothing
+- [ ] **Gate:** the ladder's four rungs exist.
+- **Leaves:** the ladder pages, which step 10h links.
+
+### 10h. 🔁 Reproduce one Readout Guidance result on the released code
+
+You ~120 min (estimate) · AI ~30 min plus GPU · Sonnet, medium · moves: the count head's footing
+
+**Objective:** one of the paper's readouts runs on our cluster with the released code and matches
+the paper, before our count head is pushed with.
+**Outcome:** one target's value beside the paper's, with a verdict.
+**Serves:** the board's row A3q.
+**Sees:** step 10f's read map · **Ticket:** none · **Source page:** arXiv 2312.02150
+
+```text
+/drip-execute-plan --reproduce 2312.02150
+
+Background
+Readout Guidance's released code is google-research/readout_guidance (Apache-2.0). Our count head
+(2-classifier-guidance/scripts/rung2/train_count_head.py) follows its recipe; reproducing one of
+the paper's own readouts first separates a setup failure from a failure of the idea.
+
+Rules
+- One target first: the cheapest that runs on released weights (a depth or pose readout on SDXL if
+  released). Stop before each launch with the exact command.
+- Outputs under /datasets/mmolefe/poe_repair_min/outputs/readout_guidance/, or
+  /home-mscluster/mmolefe/poe_repair_min_scratch while /datasets is down.
+- Environment: co3_bw on mscluster111 and 112; read environment/hpc/nodes.md first.
+
+Hand back
+The target's value beside the paper's, the verdict, and the card under
+2-classifier-guidance/artifacts/results/.
+```
+
+- `added:` the scratch-folder fallback · `dropped:` nothing
+- [ ] **Gate:** one target's verdict printed.
+- **Leaves:** a working Readout Guidance setup, which the count head's push reuses.
+
 ### 11. 🔁 Walk the ladder's retrospectives, attack the claim, re-route to the paper
 
 You ~60 min (estimate) · AI ~10 min · Opus, high · moves: your explanation, and the paper's table
