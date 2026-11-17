@@ -72,6 +72,12 @@ Seed 1, and one image per label, picked in piece 1.
 - The bar on the 64 px sheets is read against the stronger separate-label scale, and each scale's
   comparison is reported beside it (the reader: "cant do both?").
 
+- The released-model product is not about cats and dogs. The first 16 of its 512 draws (scale 10,
+  `preview-product-256-draws.png`): by eye at grid scale about 5 hold a furry animal-like shape and
+  none a clear cat or dog. Seeds 1 to 4 at scales 10, 30, 100 (`push-scale-check-256.png`,
+  `mscluster107` GPU 1): scale 10 gives a dog and a bird among 4; 30 and 100 break into texture and
+  give none. Our separate-label classifier's gradient does not carry cat and dog; asked the reader.
+
 ## Out of the session
 
 | Id | Kind | What it serves | State |
