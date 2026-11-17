@@ -31,17 +31,19 @@ seeds 5 to 8 are used by the pair wordings.
 
 ## Where the loop is
 
-Pass 0: 64 tiles called, 17 positives (condition 1 holds). Five negatives are damaged
-(condition 2 fails): seed 1 lone cat (a drawn face), seed 5 lone cat, lone dog and product
-(engraving style), seed 6 lone cat (a cut-out portrait).
+Pass 1: 5 replacement negatives called. Seed 1 lone cat, seed 5 lone dog and seed 5 product are
+now intact photos. Seed 5 lone cat (a drawn pattern of cats) and seed 6 lone cat (a painted
+portrait) are still damaged, so condition 2 still fails on those two. 17 positives.
 
 ## Next batch
 
 ```
-cd /home-mscluster/mmolefe/Playground/PhD/concept-composition && PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python && S=2-classifier-guidance/scripts/rung2/render_training_set.py && $PY $S --seeds 1 5 6 --extra-draws 1 --draw-start 3 --extra-columns lone_cat --tag neg-a && $PY $S --seeds 5 --extra-draws 1 --draw-start 4 --extra-columns lone_dog product --tag neg-b
+cd /home-mscluster/mmolefe/Playground/PhD/concept-composition && /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 2-classifier-guidance/scripts/rung2/render_training_set.py --seeds 5 6 --extra-draws 2 --draw-start 5 --extra-columns lone_cat --tag neg-c
 ```
 
-Log: `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/negatives.log`.
+Log: `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/negatives-c.log`.
+To see whether it still runs, use `pgrep -f "[r]ender_training_set.py"`: the bracket stops the
+pattern matching the remote shell that runs `pgrep` itself.
 
 ## The problem-seed list
 
