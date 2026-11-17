@@ -6,9 +6,8 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 2, the training set: 48 renders landed (1.2 ticked); the reader accepted the 9 draft
-positives ("agree", `training-set/calls.csv`). Under 10, so 16 extra draws from fresh noise under
-seeds 5 to 8 are next; 2.2 stays open until those are called.
+Round 2 closed: the training set is clean (17 positives, 24 intact negatives, `training-set/calls.csv`;
+the loop that cleaned it is in `dataset-loop.md`). Round 3, the discriminator, is next.
 
 ## The stop point
 
@@ -32,6 +31,7 @@ Seed 1, one tile per column.
 | positives | one cat and one dog, apart and intact | any two separate animals | reader took the default | |
 | tile calls | the review file's three calls; route instruction 16 rewritten to match | instruction 16's four levels | reader took the default | |
 | fewer than 10 positives | 16 extra draws, fresh noise under seeds 5 to 8 (generator 10,000 + 100 × seed + draw), the two pair wordings | re-render the same seeds (identical pictures); CO3 renders | reader ("agree") | a seed's cached noise repeats its picture; CO3 positives would teach CO3's look |
+| calls on the extra tiles | Claude calls, reader can veto after | reader calls every tile | reader (asked for a /loop) | keeps the loop unattended |
 | time box | 3 sittings, about 4.5 hours | own | reader took the default | |
 
 ## Ticks this walk
@@ -51,7 +51,7 @@ Seed 1, one tile per column.
 |---|---|---|---|
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
-| PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | running |
+| PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
 

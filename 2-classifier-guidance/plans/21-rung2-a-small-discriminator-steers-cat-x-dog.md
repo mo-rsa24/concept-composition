@@ -235,8 +235,11 @@ For you to follow manually. Do these yourself.
   You should see seconds per plain and per guided render on one named card, and an N.
   ✓ confirmed by hand 2026-11-17: "yes", taking the product of "a cat" and "a dog", the wording
   step 5's strength-0 check used.
-- [ ] **2.2** Call every training-set tile at full resolution, the three calls of
+- [x] **2.2** Call every training-set tile at full resolution, the three calls of
   [instruction 16 of the route](route-classifier-guided-poe-from-toy-to-animals.md#16--call-each-rungs-sheets-at-full-resolution-in-steps-10-10c-and-10e).
+  ✓ confirmed 2026-11-17: the reader accepted Claude's calls on the 48 tiles ("agree"), then
+  delegated the calls on 25 further fresh-noise tiles with veto after; 73 tiles, 17 positives,
+  24 intact negatives · `training-set/calls.csv`, `training-set/problem-seeds.csv`
 - [ ] **2.3** Read the discriminator's balanced accuracy per sampler step against task 1.3's rule.
 - [ ] **2.4** Call every result tile at full resolution, the same way.
 - [ ] **2.5** Read the printed reading and its counts against

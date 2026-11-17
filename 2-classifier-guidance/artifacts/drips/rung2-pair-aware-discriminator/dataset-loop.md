@@ -31,19 +31,10 @@ seeds 5 to 8 are used by the pair wordings.
 
 ## Where the loop is
 
-Pass 1: 5 replacement negatives called. Seed 1 lone cat, seed 5 lone dog and seed 5 product are
-now intact photos. Seed 5 lone cat (a drawn pattern of cats) and seed 6 lone cat (a painted
-portrait) are still damaged, so condition 2 still fails on those two. 17 positives.
-
-## Next batch
-
-```
-cd /home-mscluster/mmolefe/Playground/PhD/concept-composition && /home-mscluster/mmolefe/miniforge3/envs/co3/bin/python 2-classifier-guidance/scripts/rung2/render_training_set.py --seeds 5 6 --extra-draws 2 --draw-start 5 --extra-columns lone_cat --tag neg-c
-```
-
-Log: `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/negatives-c.log`.
-To see whether it still runs, use `pgrep -f "[r]ender_training_set.py"`: the bracket stops the
-pattern matching the remote shell that runs `pgrep` itself.
+Clean after pass 2, and the loop is stopped. 73 tiles called: 17 positives and 24 intact
+negatives (8 lone cats, 8 lone dogs, 8 plain products, one of each per seed 1 to 8), no tile from
+seeds 9 to 16. Damaged tiles stay on disk and are left out of training. Round 3 trains on the
+rows of `calls.csv` whose role is positive, and whose role is negative with an intact picture.
 
 ## The problem-seed list
 
