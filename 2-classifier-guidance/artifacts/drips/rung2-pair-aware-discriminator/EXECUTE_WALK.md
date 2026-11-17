@@ -6,14 +6,11 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 5: draft calls give reading 7 (too weak to read: the cap fired on 100% of steps at s = 100).
-The diagnostics landed (`results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/`): tiles
-from the pair prompts that the discriminator never trained on score positive whatever they show
-(hybrids, two of one kind, one animal), so it separates pair-prompt renders from single-prompt and
-product renders rather than reading "a cat and a dog apart"; its attention pool sits on one fixed
-patch in every picture; guided runs pass logit +10 by step 3, while the predicted picture is still
-a blob. Waiting on the reader's calls and on the choice between the cap-0.3 rerun and retraining
-with the pair-prompt failures as negatives.
+`/datasets` returned Input/output error from about 13:10 UTC on the login node and on `mscluster107`.
+The v2 path runs from `/home-mscluster/mmolefe/poe_repair_min_scratch` (set by `POE_REPAIR_MOUNT`):
+the 73 training latents are re-rendering on both cards, to be checked byte for byte against the
+laptop's PNGs, then the v2 chain (held-out check, final head, tile kinds, the sheet). The cap-0.3
+rerun needs the v1 head, which lives on `/datasets` only, and launches when it reads again.
 
 ## The stop point
 
@@ -39,6 +36,7 @@ Seed 1, one tile per column.
 | tile calls | the review file's three calls; route instruction 16 rewritten to match | instruction 16's four levels | reader took the default | |
 | fewer than 10 positives | 16 extra draws, fresh noise under seeds 5 to 8 (generator 10,000 + 100 × seed + draw), the two pair wordings | re-render the same seeds (identical pictures); CO3 renders | reader ("agree") | a seed's cached noise repeats its picture; CO3 positives would teach CO3's look |
 | calls on the extra tiles | Claude calls, reader can veto after | reader calls every tile | reader (asked for a /loop) | keeps the loop unattended |
+| outputs while `/datasets` is down | v2 path in `/home-mscluster/mmolefe/poe_repair_min_scratch`, about 1 GB, moved to `/datasets` once it is back | wait for `/datasets` | reader ("go") | the outage length is unknown; the v2 retrain is the more informative follow-up |
 | time box | 3 sittings, about 4.5 hours | own | reader took the default | |
 
 ## Ticks this walk
