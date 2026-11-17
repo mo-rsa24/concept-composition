@@ -5,7 +5,7 @@ pair-aware discriminator is trained on 10 to 15 renders of a cat and a dog apart
 eye, from seeds 1 to 8 (the joint prompt plus "a cat on the left and a dog on the right" and "a cat
 and a dog sitting apart"). Its negatives are the product's own renders from the same seeds and
 renders of a lone cat and a lone dog, all noised the same way. Lone animals are negatives because
-plan 18's push turned the fused animal into one cat on 3 of 4 seeds. Its push is judged on held-out seeds 9 to 12 against plain product
+[plan 18](../../plans/18-a-dog-classifier-trained-the-papers-way.md)'s push turned the fused animal into one cat on 3 of 4 seeds. Its push is judged on held-out seeds 9 to 12 against plain product
 and best-of-N at equal compute, with the bar written before the run.
 
 ## Outcomes

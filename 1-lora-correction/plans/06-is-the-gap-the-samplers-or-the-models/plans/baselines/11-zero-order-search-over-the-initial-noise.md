@@ -570,3 +570,7 @@ and the runner exits if `torch.cuda.is_available()` is `False`.
 **Fix:** the runner catches it and names the `--bothness-only` rerun on the session node.
 
 </details>
+
+## Cross-references
+
+- The mention of **zero-order search over the initial noise**, one of scope 06's four nulls, in [plan 15, can a classifier supply the missing term](../../../../../2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md#why-this-plan-exists).

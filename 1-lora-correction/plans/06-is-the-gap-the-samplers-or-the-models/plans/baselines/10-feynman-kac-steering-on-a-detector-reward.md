@@ -546,3 +546,7 @@ Auto-updated after runs via `/ingest-error-pattern` and `/sync-plan-tree`.
 Do not edit manually.
 
 </details>
+
+## Cross-references
+
+- The mention of **Feynman-Kac steering on the detector reward**, one of scope 06's four nulls, in [plan 15, can a classifier supply the missing term](../../../../../2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md#why-this-plan-exists) (relevance match).

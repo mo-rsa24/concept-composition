@@ -55,7 +55,7 @@ only, with every image noised the same way.
 
 **The push, and its strength s**
 
-The discriminator's log-odds gradient, added to the product's prediction at every step as
+The discriminator's [log-odds gradient](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/03-the-discriminator-and-the-density-ratio.md#32-its-log-odds-slope-is-a-difference-of-scores), added to the product's prediction at every step as
 strength × sqrt(1 − ᾱ_t) × gradient, unrescaled. The guided column renders at three strengths,
 **s = 10, 30 and 100**, fixed here. The toy composed at 1 and 2, but its units do not carry to
 SDXL. [Plan 18](../18-a-dog-classifier-trained-the-papers-way.md)'s dog classifier, pushed the same unrescaled way on SDXL, first changed the cat × dog

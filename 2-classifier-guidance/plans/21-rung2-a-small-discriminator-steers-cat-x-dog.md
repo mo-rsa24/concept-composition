@@ -228,6 +228,9 @@ For Claude to execute. Ask Claude to do these.
   1.00; steps 0 to 6 at 0.59 to 0.73); final head on all eight seeds, fit 20 of 20 ·
   `rung2/discriminator/check-holdout-7-8/gate.json`, `rung2/discriminator/final-all-seeds/head_step_001500.pt`,
   `discriminator/held-out-accuracy-per-step.png`
+
+  <a href="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png"><img src="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png" width="200" alt="Balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, for held-out seeds 7 and 8 (7 positives, 6 negatives, 4 noise draws each): steps 0 to 6 sit at 0.59 to 0.73 in a shaded band under a dashed line at 0.75, steps 7 to 19 at 0.80 to 1.00, and a dotted line at 0.5 is labelled coin flip"></a>
+
 - [x] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
   untouched; the best-of-N pick; strength 0 against plain product on seed 1; then seeds 1 to 4 and
   9 to 12 with plain product, best-of-N, guided at 10, 30 and 100, and the random push at the same
@@ -236,6 +239,9 @@ For Claude to execute. Ask Claude to do these.
   over the guided push's 1.0000 at every step of all 24 random renders; the cap fired on 2 to 42%
   of steps at s = 10, 80 to 98% at 30, 100% at 100; 64 tiles on `mscluster107` GPU 0 ·
   `rung2/results/result.json`, `result-sheet/result-sheet.png`
+
+  <a href="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png"><img src="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png" width="140" alt="Seeds 1 to 4 (training) and 9 to 12 (held out) down the rows by eight columns across: plain product, best of 2 picked by the discriminator, guided at s = 10, 30 and 100, and a random push of the same size at s = 10, 30 and 100. The plain product shows one fused cat-dog animal per seed; the guided columns change the picture, to a black-and-white dog on seed 1, two drawn animals side by side on seed 4, line drawings on seed 11 with a car at s = 100, and patchy cut-out textures at s = 30 and 100; the random-push columns stay close to the plain product"></a>
+
 - [ ] **1.5** The calls as a CSV, the reading printed with its counts, the card, A3q's lines
   ticked, the route rows, the board redrawn with `--step 10`.
 

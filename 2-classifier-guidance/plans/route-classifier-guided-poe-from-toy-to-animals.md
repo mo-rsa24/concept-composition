@@ -125,7 +125,7 @@ Navigation: ⬅️ [Previous](#what-we-know-so-far) | 📋 [TOC](#table-of-conte
 |---|---|---|---|---|---|---|
 | 1 classifier guidance on the released weights | own | nothing typed; the guided mean read line by line in their `gaussian_diffusion.py` | `ε − σ_t ∇ log p(y \| x_t)` on one step's vectors, and the missing term from Bayes | the corgi push at scale 1 and 10, one step's numbers | the submerge journey's derivation problems | three questions after stage 1 |
 | 2 the exact toy | build | the toy's guided step and the discriminator's loss and log-odds gradient, typed by you | the best discriminator q1/(q1+q2) on two 1-D Gaussians, and its log-odds slope | one draw's push against the true correction at one step | the separate-label push shown to equal a heavier product, by hand | a full page after stage 2 |
-| 3 our photos, both ways | own | nothing typed; the label-dropout change read as a diff | where the null expert comes from in each arm | the product's prediction for one 64 px image, with and without the push | none | three questions after stage 3 |
+| 3 [our photos, both ways](20-our-photos-both-ways.md) | own | nothing typed; the label-dropout change read as a diff | where the null expert comes from in each arm | the product's prediction for one 64 px image, with and without the push | none | three questions after stage 3 |
 | 4 SDXL, rungs 2 to 4 | gloss | nothing typed | the ladder with each rung's count | rung 2's guided sheet against plain product and best-of-N on one seed | none | the retrospective's predictions |
 | **Outcome** | | **four figure sets with cards, findings and pass or miss lines** | | | | **you explain why a separate-label classifier cannot fix the product, without notes** |
 
@@ -1405,6 +1405,9 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
   request, tile by tile at 256 px, accepted by you: 0 and 9 of 16 corgi, 0 and 11 tabby, 3 and 10 golden
   retriever at scales 1 and 10, against the classifier's 2 and 16, 2 and 15, 5 and 15; all 22
   disagreements are classifier yes, eye no ([the disagreement sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png))
+
+  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png" width="200" alt="The 22 tiles where the released classifier said yes and the eye said no, in a grid of six across, each titled with its class, scale and seed: 9 corgi tiles (mostly beagle-like, fox-like and collie-like dogs), 6 tabby tiles (blurred or dog-like animals, and a dark cat at scale 10 seed 0) and 7 golden retriever tiles (long-haired dogs, a smeared yellow dog)"></a>
+
 - **You should see:** at scale 10 almost every tile is a corgi, a tabby or a golden retriever; at
   scale 1 fewer; at scale 0 the same picture as unguided.
 - **Done when:** your counts sit beside the released classifier's in the CSV.

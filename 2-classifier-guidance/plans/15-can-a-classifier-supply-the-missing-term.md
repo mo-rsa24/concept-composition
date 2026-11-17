@@ -117,12 +117,12 @@ the move is visible as the head trains.
 **Every repair tried so far either adds another expert or searches the noise.**
 
 Scope 06 holds four nulls: a Langevin corrector on the product score, Feynman-Kac steering on the
-detector reward, zero-order search over the initial noise, and a noise-trajectory search. All of
+detector reward<sub>[1](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/10-feynman-kac-steering-on-a-detector-reward.md "plan: Feynman-Kac steering on a detector reward, scope 06 baseline 10"), [2](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-steering-on-the-scorer-find-a-composing-proposal.md "finding: steering the plain product's particles on the compose scorer, a null on 8 held-out seeds")</sub>, zero-order search over the initial noise<sub>[1](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/baselines/11-zero-order-search-over-the-initial-noise.md "plan: zero-order search over the initial noise, scope 06 baseline 11"), [2](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-searching-over-the-initial-noise-compose.md#2-zero-order-search-one-counted-success-in-128-and-it-has-two-heads "finding, part 2: zero-order search, one counted success in 128")</sub>, and a noise-trajectory search. All of
 them reweight or re-draw inside the space the two experts already agree on. A classifier gradient
 is not another expert, so it can put mass where both experts say there is none, which is the one
 thing none of the four could do.
 
-**The labelling rule is where the meaning of "both" actually lives.**
+**The [labelling rule](../artifacts/results/can-a-classifier-supply-the-missing-term/README.md#the-labelling-rule) is where the meaning of "both" actually lives.**
 
 No caption carries it. The product fuses because nothing in the objective says a cat and a dog
 must be two separate things. Defining a hybrid as neither animal present puts that requirement
@@ -273,11 +273,11 @@ hybrids before anything trains on them.
   - ✅ verified 2026-11-04 on mscluster108: all three renders share checksum `c291b259`, largest
     absolute pixel difference 0 of 255, zero pixels differing.
 
-▶ **Next: [instruction 6](#6--run-the-canary-yourself)**.
+▶ **Next: [instruction 6](#6--read-the-canarys-verdict)**.
 
 ### 3. 🚀 Train the head and probe it while it trains
 
-◀ **Needs: [instruction 6](#6--run-the-canary-yourself)** done, so the composer is known to leave
+◀ **Needs: [instruction 6](#6--read-the-canarys-verdict)** done, so the composer is known to leave
 plain product alone before a trained head is pushed through it.
 
 - [x] ✅ **3.1** Write the trainer: two sigmoid outputs on the twist head's FiLM conv body, SDXL
@@ -397,6 +397,7 @@ clear animals, one hybrid, or one single animal.
 | `weight-sweep-sheet.png` | eight held-out cat-by-dog seeds down the rows; across, four classifier weights then three reference columns (plain product, each expert damped to a constant 3.0, the joint prompt). One tile is one 1,024 px render, all from one loop on one device. Calls are made on the full-resolution tiles, not on this sheet. |
 | `accuracy-by-step.png` | balanced accuracy on a 0-to-1 scale on y, the sampling step from 0 to 49 on x, one curve per label (a cat instance is present, a dog instance is present), held-out images. Numbers from the probe rows logged to W&B, written to the sidecar beside the figure. Not a gate: logged while training, drawn at the end. |
 | the probe sheet | two held-out seeds down, two classifier weights across, one image per 250 training steps, in W&B. Two seeds is a picture, never a rate. |
+| [our guided sampler code walk](https://claude.ai/artifact/WwzF3fXBFFb6arZySDA8qv) | `poe_repair/methods/_classifier_guided.py` beside an 11-box diagram coloured by role, each block of lines with the equation it computes and the authors' matching line; the journey's miniature run through the file's own push lines (w = 1 lands on ε_true with the cap off; the default cap of 0.1 fires); push over \|ε_PoE\| per render from the 2026-11-05 product run against the 0.1 cap. Files and card in `2-classifier-guidance/artifacts/results/what-each-line-of-our-guided-sampler-computes/` |
 
 ## Error Matrix
 

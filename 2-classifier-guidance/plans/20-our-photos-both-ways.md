@@ -211,6 +211,9 @@ For Claude to execute. Ask Claude to do these.
   A separate-label classifier trained on our images (`separate_256.pt`, held-out accuracy 0.93 and
   0.95 at step 0) does not steer the released model to cats or dogs at scales 10, 30 or 100
   (`push-scale-check-256.png`), so the product uses the released classifier's classes.
+
+  <a href="../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png"><img src="../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png" width="200" alt="Four draws across (draw 0 to 3) by scale 10, 30 and 100 down the rows: fruit and vegetables, a dog's head, a man in a striped shirt and a bird at scale 10, turning into red and yellow food-like blobs, a jewelled texture, a blurred person and a dark animal against yellow at 30 and 100; no tile shows a cat"></a>
+
 - [ ] **1.4** The released model's sheet on seeds 1 to 16: the product, then the product plus the
   pair-aware push at weights 1 and 2; the minimal-pair gap per step beside it.
 - [ ] **1.5** When the 64 px runs land: the 64 px separate-label classifier, one pair-aware
@@ -292,3 +295,7 @@ Navigation: ⬅️ [Previous](#orchestration) | 📋 [TOC](#table-of-contents) |
 Navigation: ⬅️ [Previous](#references) | 📋 [TOC](#table-of-contents)
 
 The route's step 11 reads this plan's card and finding.
+
+## Cross-references
+
+- The mention of **our photos, both ways**, stage 3 of the learning table, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-you-will-achieve).

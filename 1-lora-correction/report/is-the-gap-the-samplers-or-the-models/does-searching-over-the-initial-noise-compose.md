@@ -209,3 +209,7 @@ Navigation: ⬅️ [Previous](#depends-on) | 📋 [TOC](#table-of-contents)
       round; the compose-rate context notes why the per-concept query was set aside.
 - [ ] Reading this against the in-span share from scope 05's rung 2, once it lands: a search
       over noises reaches only what plain PoE renders from some noise.
+
+## Cross-references
+
+- The mention of **zero-order search over the initial noise**, one of scope 06's four nulls, in [plan 15, can a classifier supply the missing term](../../../2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md#why-this-plan-exists).

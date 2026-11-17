@@ -133,3 +133,7 @@ Navigation: ⬅️ [Depends on](#depends-on) | 📋 [TOC](#table-of-contents)
       an empty span at K 16.
 - [ ] A scorer that can read the butterfly × meadow pair, so the composing control means
       composition there.
+
+## Cross-references
+
+- The mention of **Feynman-Kac steering on the detector reward**, one of scope 06's four nulls, in [plan 15, can a classifier supply the missing term](../../../2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md#why-this-plan-exists) (relevance match).
