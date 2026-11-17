@@ -81,6 +81,11 @@ Seed 1, and one image per label, picked in piece 1.
   waiter were stopped by PID at 10:17 UTC; the new chain draws, trains the pair-aware classifier and
   draws the sheet in one go.
 
+- The 64 px separate-label classifier has the same blind spot (no picture with neither animal), and
+  it matters less there: the 64 px models trained only on cats and dogs, so their draws rarely hold
+  neither, and in the smoke sheet its push at scale 10 visibly turned seed 1 into a cat. The card
+  says so beside the 64 px separate-label columns.
+
 ## Out of the session
 
 | Id | Kind | What it serves | State |
