@@ -59,9 +59,9 @@ Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) |
 
 **The card**
 
-`mscluster107` GPU 0 under `co3` (Quadro RTX 8000), with `mscluster108` GPU 1 as the fallback.
-On 2026-11-17 at 08:45 UTC plan 20 held `mscluster111` and `112` (its 64 px trainings, then its
-piece 5 waiters) and `mscluster107` GPU 1. Every column renders on the one card the timing ran on.
+One Quadro RTX 8000 under `co3`. Every column renders on the one card the timing ran on. Which
+node and GPU each run used is in
+[the review file's Runs table](review/a3q-cat-x-dog-quick-discriminator-test.md#runs).
 
 **The discriminator's body**
 
@@ -71,7 +71,7 @@ attention-pool head (about 9.3 million weights) is the only trained part and giv
 discriminator memorise its 17 positives. The check holds out seeds 7 and 8, so it measures reading
 new pictures rather than fitting the training ones.
 
-**The compute, measured on `mscluster107` GPU 0**
+**The compute, measured on that card**
 
 A plain product render takes 27.5 s and a guided one 42.2 s (medians of 4, 50 steps, 1024 px),
 so a guided render costs 1.53 plain ones and peaks at 15.7 GB. The rung needs about 2.1

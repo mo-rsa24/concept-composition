@@ -132,6 +132,9 @@ States are from plan 21's ticks, its commits and its walk map
 | The v2 discriminator: pair-prompt failures added as negatives, the same held-out check | builds the push | 2026-11-17 on `mscluster107`, wired at commit `80f99312`, run from `/home-mscluster/mmolefe/poe_repair_min_scratch` while `/datasets` was down | not recorded | the scratch folder; plot `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-v1-against-v2.png` | stopped after its held-out check failed: 0 of 20 sampler steps at 0.75 or more on seeds 7 and 8, 0.53 to 0.63 at every step (commit `a51d6200`); no push rendered |
 | The cap-0.3 rerun: seeds 1 to 4 and 9 to 12 at s = 100 with the cap at 0.3 | Tests the claim | not yet: needs the first head, which is on `/datasets` only, and `/datasets` has returned Input/output error since about 13:10 UTC | 16 guided renders | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/` | ⚠️ not started |
 
+When the card was chosen, at 08:45 UTC on 2026-11-17, plan 20 held `mscluster111` and `112` (its
+64 px trainings, then its piece 5 waiters) and `mscluster107` GPU 1.
+
 ## The question written before the run
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
