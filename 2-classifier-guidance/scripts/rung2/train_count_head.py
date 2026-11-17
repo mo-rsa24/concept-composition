@@ -58,11 +58,14 @@ class Readout(nn.Module):
         for name, mod in (("mid", unet.mid_block), ("up0", unet.up_blocks[0]), ("up1", unet.up_blocks[1])):
             mod.register_forward_hook(lambda m, i, o, n=name: self.feats.__setitem__(n, o if torch.is_tensor(o) else o[0]))
 
-    def forward(self, x_t, t):
+    def forward(self, x_t, t, seq=None, pool=None):
+        """seq, pool: per-picture prompt embeddings (B, 77, 2048) and (B, 1280); the stored prompt when None."""
         b = x_t.shape[0]
-        cond = {"text_embeds": self.pool_e.expand(b, -1),
+        seq = self.seq_e.expand(b, -1, -1) if seq is None else seq
+        pool = self.pool_e.expand(b, -1) if pool is None else pool
+        cond = {"text_embeds": pool,
                 "time_ids": add_time_ids(height=1024, width=1024, batch_size=b, device=x_t.device, dtype=x_t.dtype)}
-        self.unet(x_t, t, encoder_hidden_states=self.seq_e.expand(b, -1, -1), added_cond_kwargs=cond)
+        self.unet(x_t, t, encoder_hidden_states=seq, added_cond_kwargs=cond)
         return [self.feats[k] for k in ("mid", "up0", "up1")]
 
 

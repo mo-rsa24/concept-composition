@@ -16,6 +16,14 @@ no source's size or look can separate the sides.
 --labels drawings.jsonl (plan 23 alone). Real = joint drawings the API called a faithful pair, fake =
 product drawings, examples are the drawings' own saved trajectory states.
 
+v4c switches (each off by default, so earlier runs reproduce):
+    --pair-prompt   SDXL is read with each picture's own joint prompt ("a cat and a dog"), so the head
+                    knows which two things were asked for and two cats can be wrong for cat x dog.
+    --aug           each tile is drawn from three latents (plain, two changed copies from
+                    augment_encode.py), so colour, blur, compression and layout cannot be memorised.
+    --early-frac F  a share F of noise levels is drawn from the 20 noisiest sampler steps.
+    --accum K       K batches of 8 per update (32 at K = 4).
+
 The check, written before training, is plan 22's and plan 23's: on the held-out hand-called tiles
 (7 whole pairs plus cat x dog seeds 7 and 8), each noised to the first 20 sampler steps 4 times,
 balanced accuracy at least 0.75 on at least 10 of the 20 steps, good pairs against every negative.
@@ -69,6 +77,12 @@ class PairHead(nn.Module):
         return self.out(pooled[:, 0])[:, 0]
 
 
+def joint_prompt(pair: str) -> str:
+    """'a_cat__x__a_dog' -> 'a cat and a dog', the pair's joint prompt."""
+    a, b = pair.split("__x__")
+    return f"{a.replace('_', ' ')} and {b.replace('_', ' ')}"
+
+
 def load_latent(t: dict) -> torch.Tensor:
     """A tile's finished latent as (1, 4, 128, 128) fp16."""
     path = paths.MOUNT_ROOT / t["latent"] if "/" in t["latent"] else RUNG2 / "training_set/latents" / f"{t['latent']}.pt"
@@ -87,9 +101,11 @@ def manifest_sampler(args, sampler_t):
         raise SystemExit("guard: a held-out pair is in the training tiles")
     by = {0: collections.defaultdict(list), 1: collections.defaultdict(list)}
     missing = collections.Counter()
+    aug = RUNG2 / "dataset-v4/aug"
     for t in tiles:
         try:
-            t["z"] = load_latent(t)
+            t["zs"] = ([torch.load(aug / f"{t['id']}__a{k}.pt").to(torch.float16) for k in range(3)] if args.aug
+                       else [load_latent(t)])
         except (FileNotFoundError, RuntimeError, EOFError):
             missing[t["source"]] += 1
             continue
@@ -101,9 +117,11 @@ def manifest_sampler(args, sampler_t):
     def batch(scheduler, device, dtype):
         picks = [random.choice(by[1][random.choice(list(by[1]))]) for _ in range(4)] + \
                 [random.choice(by[0][random.choice(list(by[0]))]) for _ in range(4)]
-        z0 = torch.cat([p["z"] for p in picks]).to(device, torch.float32)
-        t = sampler_t[torch.randint(len(sampler_t), (len(picks),))].to(device)
-        return scheduler.add_noise(z0, torch.randn_like(z0), t).to(dtype), t
+        z0 = torch.cat([random.choice(p["zs"]) for p in picks]).to(device, torch.float32)
+        idx = [random.randrange(EARLY) if random.random() < args.early_frac else random.randrange(len(sampler_t))
+               for _ in picks]
+        t = sampler_t[torch.tensor(idx)].to(device)
+        return scheduler.add_noise(z0, torch.randn_like(z0), t).to(dtype), t, [p["pair"] for p in picks]
 
     return batch, split
 
@@ -123,7 +141,7 @@ def states_sampler(args):
         names = random.choices(real, k=4) + random.choices(fake, k=4)
         ks = [random.randrange(len(kept)) for _ in names]
         x = torch.stack([torch.load(RUNG2 / "kim/states" / f"{s}.pt")[k] for s, k in zip(names, ks)]).to(device, dtype)
-        return x, torch.tensor([max(kept[k], 1) for k in ks], device=device)
+        return x, torch.tensor([max(kept[k], 1) for k in ks], device=device), [s.split("__seed")[0] for s in names]
 
     return batch, split
 
@@ -135,6 +153,10 @@ def main() -> int:
     ap.add_argument("--labels", type=Path, help="the API labels JSONL for plan 23's drawings")
     ap.add_argument("--eval", type=Path, default=HERE / "training_set_v3.json",
                     help="evaluation tile list (its 'check' tiles); the verdict is always on v3's check tiles")
+    ap.add_argument("--pair-prompt", action="store_true")
+    ap.add_argument("--aug", action="store_true")
+    ap.add_argument("--early-frac", type=float, default=0.0)
+    ap.add_argument("--accum", type=int, default=1)
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
     args = ap.parse_args()
@@ -157,6 +179,15 @@ def main() -> int:
 
     seq_e, pool_e = encode_prompt_sdxl("", models=ctx.models, device=ctx.device, dtype=ctx.dtype)
     reader = Readout(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
+    prompts = {}
+
+    def read(x, t, pairs):
+        if not args.pair_prompt:
+            return reader(x, t)
+        for p in pairs:
+            if p not in prompts:
+                prompts[p] = encode_prompt_sdxl(joint_prompt(p), models=ctx.models, device=ctx.device, dtype=ctx.dtype)
+        return reader(x, t, torch.cat([prompts[p][0] for p in pairs]), torch.cat([prompts[p][1] for p in pairs]))
     head = PairHead().to(ctx.device)
     opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=1e-2)
 
@@ -177,7 +208,8 @@ def main() -> int:
                     z0 = z_check[i:i + 8].to(ctx.device)
                     t = t_val.repeat(z0.shape[0]).to(ctx.device)
                     noisy = ctx.scheduler.add_noise(z0, torch.randn(z0.shape, generator=gen).to(ctx.device), t)
-                    for j, v in enumerate(head(reader(noisy.to(ctx.dtype), t)).cpu().tolist()):
+                    pairs = [tt["pair"] for tt in tiles[i:i + 8]]
+                    for j, v in enumerate(head(read(noisy.to(ctx.dtype), t, pairs)).cpu().tolist()):
                         logits[i + j].append(v)
             yes = [sum(l) / len(l) > 0 for l in logits]
 
@@ -204,7 +236,8 @@ def main() -> int:
             print(f"step {step:5d}  held-out balanced accuracy {mean:.3f} (v3 check tiles), {whole:.3f} (whole "
                   f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject)  "
                   f"({time.time() - started:.0f} s)", flush=True)
-            torch.save({"head": head.state_dict(), "step": step, "split": split}, out / f"head_step_{step:06d}.pt")
+            torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt},
+                       out / f"head_step_{step:06d}.pt")
             head.train()
             if step == args.steps:
                 passing = [r["sampler_step"] for r in rows_c if r["balanced_accuracy"] >= BAR]
@@ -214,13 +247,14 @@ def main() -> int:
                 (out / "check.json").write_text(json.dumps(verdict, indent=1))
                 print(f"READOUT CHECK {'PASSED' if verdict['passed'] else 'FAILED'}: {len(passing)} of {EARLY}", flush=True)
                 break
-        x, t = batch(ctx.scheduler, ctx.device, ctx.dtype)
-        y = torch.tensor([1.0] * 4 + [0.0] * 4, device=ctx.device)
-        with torch.no_grad():
-            feats = reader(x, t)
-        loss = F.binary_cross_entropy_with_logits(head(feats), y)
         opt.zero_grad(set_to_none=True)
-        loss.backward()
+        y = torch.tensor([1.0] * 4 + [0.0] * 4, device=ctx.device)
+        for _ in range(args.accum):
+            x, t, pairs = batch(ctx.scheduler, ctx.device, ctx.dtype)
+            with torch.no_grad():
+                feats = read(x, t, pairs)
+            loss = F.binary_cross_entropy_with_logits(head(feats), y)
+            (loss / args.accum).backward()
         opt.step()
         if step % 100 == 0:
             print(f"step {step:5d}  loss {loss.item():.4f}  ({time.time() - started:.0f} s)", flush=True)
