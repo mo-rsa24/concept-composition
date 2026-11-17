@@ -12,6 +12,12 @@ that drew it:
 | judge renders (present-revision-to-supervisor) | API "faithful pair" (api-labels/judge.jsonl) | every other API verdict |
 | inclusive-captions photos (COCO, SD 3.5) | "both" photos the API passes on the square crop | "both" rejects, every cat-only and dog-only photo |
 | v3 hand calls (training tiles only) | hand positive | hand negative |
+| Attend-and-Excite benchmark tiles (paper review, 30 pairs, 5 methods) | strict API "faithful pair" | every other strict verdict |
+
+With --strict-labels, every clean pair is checked again under a stricter rule that also calls
+borrowed body shape, build, size or proportions a hybrid (a tiger with a dog's long legs and upright
+stature), and a clean pair that fails it moves to the fake side. Evaluation tiles keep their
+pre-registered labels and carry the strict verdict beside them as strict_label.
 
 Left out: every pair whose second item is a setting rather than a second body (SCENES below: a
 mailbox in a snowfield is one thing in a place, which would teach "an object in a scene" as the good
@@ -62,7 +68,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--stage", type=Path, required=True, help="local folder the square pictures are written to")
     ap.add_argument("--crop-labels", type=Path, required=True, help="API labels of the cropped 'both' photos")
+    ap.add_argument("--strict-labels", type=Path, help="api_label.py --strict verdicts on every clean pair and the "
+                    "Attend-and-Excite tiles; a clean pair that fails them becomes a fake")
+    ap.add_argument("--strict-index", type=Path, help="staged number -> tile id map for --strict-labels")
     args = ap.parse_args()
+    strict, ae = {}, []
+    if args.strict_labels:
+        index = json.loads(args.strict_index.read_text())
+        for r in jsonl(args.strict_labels):
+            if "verdict" not in r:
+                continue
+            v = index[str(r["seed"])]
+            if v["set"] == "ae":
+                ae.append(v | {"verdict": r["verdict"]})
+            else:
+                strict[v["id"]] = r["verdict"]
     v3 = json.loads((HERE / "training_set_v3.json").read_text())
     held = set(v3["held_out_pairs"])
     tiles, evals = [], []
@@ -129,7 +149,23 @@ def main() -> int:
         if not t["check"] and not is_scene(t["pair"]):
             tiles.append(t | {"source": "v3"})
 
+    for v in ae:
+        real = v["verdict"] == "faithful pair"
+        add(id=v["id"], picture=stage(REPO / v["path"], v["id"]), latent=f"{V4}/latents/{v['id']}.pt", pair=v["pair"],
+            seed=v["seed"], method=v["method"], label=int(real), kind="positive" if real else v["verdict"], source="ae")
+
+    demoted = collections.Counter()
+    for t in tiles:
+        if t["label"] == 1 and strict.get(t["id"], "faithful pair") != "faithful pair":
+            t.update(label=0, kind=f"{strict[t['id']]} (stature rule)")
+            demoted[t["source"]] += 1
+    if strict:
+        print("clean pairs the stature rule moved to the fake side:", dict(demoted))
+
     evals += [t | {"source": "v3"} for t in v3["tiles"] if t["check"]]
+    for t in evals:
+        t["strict_label"] = int(strict.get(t["id"], "faithful pair" if t["label"] else "no") == "faithful pair") \
+            if t["label"] == 1 else 0
     import hashlib
     def md5(t):
         if "picture" in t and (args.stage / Path(t["picture"]).name).exists():

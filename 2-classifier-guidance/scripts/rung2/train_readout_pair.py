@@ -163,6 +163,7 @@ def main() -> int:
     tiles = [t for t in json.loads(args.eval.read_text())["tiles"] if t["check"]]
     z_check = torch.cat([load_latent(t).float() for t in tiles])
     kind = [t["kind"] if t["label"] == 0 else "positive" for t in tiles]
+    strict_pos = [t.get("strict_label", t["label"]) == 1 for t in tiles]
     is_v3 = [not t["id"].startswith("judge-")
              for t in tiles]
 
@@ -187,7 +188,9 @@ def main() -> int:
                 return (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
             res.append({"sampler_step": int(s), "balanced_accuracy": bal(set(kind) - {"positive"}),
                         "singles_and_hybrids_balanced_accuracy": bal({"single", "hybrid"}),
-                        "whole_evaluation_set_balanced_accuracy": bal(set(kind) - {"positive"}, only_v3=False)})
+                        "whole_evaluation_set_balanced_accuracy": bal(set(kind) - {"positive"}, only_v3=False),
+                        "stature_rule_balanced_accuracy": (sum(p for p, sp in zip(yes, strict_pos) if sp) / max(1, sum(strict_pos))
+                            + sum(not p for p, k in zip(yes, kind) if k != "positive") / max(1, sum(k != "positive" for k in kind))) / 2})
         return res
 
     started = time.time()
@@ -197,8 +200,10 @@ def main() -> int:
             rows_c = check(range(EARLY) if step == args.steps else range(0, EARLY, 4))
             mean = sum(r["balanced_accuracy"] for r in rows_c) / len(rows_c)
             whole = sum(r["whole_evaluation_set_balanced_accuracy"] for r in rows_c) / len(rows_c)
+            strict_m = sum(r["stature_rule_balanced_accuracy"] for r in rows_c) / len(rows_c)
             print(f"step {step:5d}  held-out balanced accuracy {mean:.3f} (v3 check tiles), {whole:.3f} (whole "
-                  f"evaluation set)  ({time.time() - started:.0f} s)", flush=True)
+                  f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject)  "
+                  f"({time.time() - started:.0f} s)", flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split}, out / f"head_step_{step:06d}.pt")
             head.train()
             if step == args.steps:

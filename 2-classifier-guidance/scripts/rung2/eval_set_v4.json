@@ -20,7 +20,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j22211",
@@ -32,7 +33,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j34608",
@@ -44,7 +46,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j15009",
@@ -56,7 +59,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j18835",
@@ -68,7 +72,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j37519",
@@ -80,7 +85,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j34735",
@@ -92,7 +98,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j36600",
@@ -104,7 +111,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j46812",
@@ -116,7 +124,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j52577",
@@ -128,7 +137,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j38572",
@@ -140,7 +150,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j53366",
@@ -152,7 +163,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j66457",
@@ -164,7 +176,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j46478",
@@ -176,7 +189,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j75062",
@@ -188,7 +202,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j53427",
@@ -200,7 +215,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j32412",
@@ -212,7 +228,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j71706",
@@ -224,7 +241,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j77670",
@@ -236,7 +254,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j79497",
@@ -248,7 +267,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j91977",
@@ -260,7 +280,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j96281",
@@ -272,7 +293,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j92256",
@@ -284,7 +306,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j79292",
@@ -296,7 +319,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j96211",
@@ -308,7 +332,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j96179",
@@ -320,7 +345,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j98436",
@@ -332,7 +358,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j57748",
@@ -344,7 +371,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j84010",
@@ -356,7 +384,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j96403",
@@ -368,7 +397,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j99753",
@@ -380,7 +410,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "judge-j98082",
@@ -392,7 +423,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "judge",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "fd2fb4774ff5a49cac29a9987f8719f7",
@@ -404,7 +436,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "a819a4853a7d02dc2803797453d8aded",
@@ -416,7 +449,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "42879264f3b5374ef2b1babad11f15f0",
@@ -428,7 +462,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "6b9b3b665db7f8cb54252d4a0803b19d",
@@ -440,7 +475,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "aa0632b5bcc7ec59808c5609b9958b17",
@@ -452,7 +488,8 @@
 "label": 0,
 "kind": "damaged",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "7499da4ffca80b8450e0b1ed709ccc64",
@@ -464,7 +501,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "46a3a1af3564aafce69d116b49375d3b",
@@ -476,7 +514,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "a89c235ac6dabfd21a315e21a8d69730",
@@ -488,7 +527,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "dba4f588c17d9ab6047de50d12460c8f",
@@ -500,7 +540,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "edecf84111f3d80bd9b798ec9e89040b",
@@ -512,7 +553,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "6fad96f1c7aea74b4f2c9bea1e507c8c",
@@ -524,7 +566,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "1d6c6d4cc4a661802151fec278df4302",
@@ -536,7 +579,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "c7646d2a6d1b525bd4147e30e20aefc3",
@@ -548,7 +592,8 @@
 "label": 0,
 "kind": "wrong pair",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "96ae90947bcd106df1398970a8f9de62",
@@ -560,7 +605,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "ca2205c011171b77af8e1d26e5a52d16",
@@ -572,7 +618,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "6e31dac85a8a91a78f9804e4b076bc61",
@@ -584,7 +631,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "6659b57be1a74588a5af53b46bd9841c",
@@ -596,7 +644,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "e7dfa0f48036f829a57fbf9d10eb21b7",
@@ -608,7 +657,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "fb88ed355945d14746fea5c234aa2b36",
@@ -620,7 +670,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "ed6b71415b49ccb99b0d1446c5eca4af",
@@ -632,7 +683,8 @@
 "label": 0,
 "kind": "hybrid",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "e3bec38e524b762a489d1dd9cb6ffe2a",
@@ -644,7 +696,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "ec94862481d2aef3ec63bcc0595849a1",
@@ -656,7 +709,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "3179c1021db20f52aeb5e64a5e3a431a",
@@ -668,7 +722,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07__joint",
@@ -679,7 +734,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07__left_right",
@@ -690,7 +746,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "seed07__lone_cat",
@@ -701,7 +758,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07__lone_dog",
@@ -712,7 +770,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07__product",
@@ -723,7 +782,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__lone_cat",
@@ -734,7 +794,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__lone_dog",
@@ -745,7 +806,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__product",
@@ -756,7 +818,8 @@
 "label": 0,
 "kind": "rung 2 negative",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07-d1__apart",
@@ -767,7 +830,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08-d1__apart",
@@ -778,7 +842,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "seed08-d1__left_right",
@@ -789,7 +854,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "seed08-d2__apart",
@@ -800,7 +866,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08-d2__left_right",
@@ -811,7 +878,8 @@
 "label": 1,
 "kind": "positive",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 1
 },
 {
 "id": "seed07__apart",
@@ -822,7 +890,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__joint",
@@ -833,7 +902,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__left_right",
@@ -844,7 +914,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed08__apart",
@@ -855,7 +926,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07-d1__left_right",
@@ -866,7 +938,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07-d2__apart",
@@ -877,7 +950,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 },
 {
 "id": "seed07-d2__left_right",
@@ -888,7 +962,8 @@
 "label": 0,
 "kind": "pair-prompt failure",
 "source": "v3",
-"check": true
+"check": true,
+"strict_label": 0
 }
 ]
 }

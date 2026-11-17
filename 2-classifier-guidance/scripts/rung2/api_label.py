@@ -51,14 +51,20 @@ def names(pair: str) -> tuple[str, str]:
     return a.replace("_", " "), b.replace("_", " ")
 
 
+STRICT = False
+
+
 def prompt(a: str, b: str) -> str:
+    stature = (f" or one's body shape, build, size or proportions on the other (for example {a} with the long "
+               f"legs, stature or size of {b}); each body must look like a normal one of its kind"
+               if STRICT else "")
     return (f"This picture was generated for the two things \"{a}\" and \"{b}\". Look at it closely and answer:\n"
             f"- bodies: how many separate main animals or objects are shown (count each distinct body once; "
             f"background crowds or tiny distant figures do not count).\n"
             f"- a_present: is there a body that is clearly and only {a}?\n"
             f"- b_present: is there a body that is clearly and only {b}?\n"
             f"- hybrid: does any body mix features of both (for example {a}'s head on {b}'s body, or one's "
-            f"markings, ears, snout, tail or legs on the other)?\n"
+            f"markings, ears, snout, tail or legs on the other{stature})?\n"
             f"- photo_intact: is it a photograph-like picture with no melted, torn, duplicated or broken parts "
             f"(a drawing, painting, cartoon or split-frame collage is not intact)?\n"
             f"- verdict: \"faithful pair\" only if bodies is 2, a_present and b_present are true, hybrid is "
@@ -157,7 +163,11 @@ def main() -> int:
     ap.add_argument("--folder", type=Path)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--concurrency", type=int, default=12)
+    ap.add_argument("--strict", action="store_true",
+                    help="also call borrowed body shape, build, size or proportions a hybrid (a lion with a horse's stature)")
     args = ap.parse_args()
+    global STRICT
+    STRICT = args.strict
     if args.validate:
         items = validate_items()
     else:
