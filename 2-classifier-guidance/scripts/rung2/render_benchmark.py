@@ -9,7 +9,10 @@ Each saves its picture and its final latent, and each pair gets one sheet (seeds
 The starting noise comes from the seed number, as every rung 2 render does; the benchmark's own
 cached noise is on /datasets and is not the same, so these are new pictures to be called afresh.
 
---part K --of N renders every N-th pair starting at K, so two cards can split the list.
+--part K --of N renders every N-th pair starting at K, so two cards can split the list. --queue
+instead lets any number of workers share the whole list: a worker skips a pair whose sheet exists,
+claims the next one by creating claims/<pair> (an atomic mkdir, so two workers never take the same
+pair), and renders it.
 
 Writes, under MOUNT_ROOT/outputs/classifier_guidance_ladder/rung2/benchmark/:
     tiles/<pair>__seedNN__<joint|product>.png, latents/..., sheets/<pair>.png, manifest-partK.json
@@ -18,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import socket
 import sys
 import time
@@ -50,7 +54,9 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, nargs="+", default=list(range(1, 9)))
     ap.add_argument("--part", type=int, default=0)
     ap.add_argument("--of", type=int, default=1)
+    ap.add_argument("--queue", action="store_true")
     args = ap.parse_args()
+    worker = f"{socket.gethostname().split('.')[0]}-gpu{os.environ.get('CUDA_VISIBLE_DEVICES', '0')}"
     if any(s in HELD_OUT_SEEDS for s in args.seeds):
         raise SystemExit("guard: seeds 9 to 16 are held out and never enter training")
     if not torch.cuda.is_available():
@@ -59,11 +65,11 @@ def main() -> int:
     prompts = yaml.safe_load(open(CONFIGS / "pair_prompts_v58.yaml"))
     if "a_cat__x__a_dog" in pairs:
         raise SystemExit("guard: cat x dog is the held-out evaluation pair")
-    mine = pairs[args.part::args.of]
+    mine = pairs if args.queue else pairs[args.part::args.of]
     print(f"{socket.gethostname()}: {torch.cuda.get_device_name(0)}, {len(mine)} of {len(pairs)} pairs, "
           f"seeds {args.seeds}", flush=True)
     single.disk_guard(OUT)
-    for d in ("tiles", "latents", "sheets"):
+    for d in ("tiles", "latents", "sheets", "claims"):
         (OUT / d).mkdir(parents=True, exist_ok=True)
     ctx = make_ctx(output_root=OUT / "raw")
     enc = lambda p: encode_prompt_sdxl(p, models=ctx.models, device=ctx.device, dtype=ctx.dtype)
@@ -73,6 +79,14 @@ def main() -> int:
                   height=1024, width=1024, device=ctx.device, dtype=ctx.dtype)
     manifest = []
     for pair in mine:
+        if args.queue:
+            if (OUT / "sheets" / f"{pair}.png").exists():
+                continue
+            try:
+                os.mkdir(OUT / "claims" / pair)
+            except FileExistsError:
+                continue
+            (OUT / "claims" / pair / "worker").write_text(worker)
         p = prompts[pair]
         seq_j, pool_j = enc(p["joint_prompt"])
         seq_a, pool_a = enc(p["prompt_a"])
@@ -106,8 +120,9 @@ def main() -> int:
         fig.tight_layout(rect=[0, 0, 1, 0.95])
         fig.savefig(OUT / "sheets" / f"{pair}.png", dpi=90)
         plt.close(fig)
-        (OUT / f"manifest-part{args.part}.json").write_text(json.dumps(manifest, indent=1))
-        print(f"{pair}: {2 * len(args.seeds)} renders in {time.perf_counter() - t0:.0f} s", flush=True)
+        name = f"manifest-{worker}.json" if args.queue else f"manifest-part{args.part}.json"
+        (OUT / name).write_text(json.dumps(manifest, indent=1))
+        print(f"{worker} {pair}: {2 * len(args.seeds)} renders in {time.perf_counter() - t0:.0f} s", flush=True)
     print("BENCHMARK DONE", flush=True)
     return 0
 
