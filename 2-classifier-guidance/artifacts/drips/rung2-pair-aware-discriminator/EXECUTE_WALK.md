@@ -6,10 +6,14 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 5: the result sheet landed (1.4 ticked). Claude's draft calls on the 64 tiles
-(`result-sheet/calls-draft.csv`) give 0 of 4 composed on seeds 9 to 12 at every strength and 1 of 4
-on seeds 1 to 4 (seed 4, a drawing); with the cap firing on 100% of steps at s = 100 the draft
-reading is 7, too weak to read. Waiting on the reader's calls (2.4). Diagnostics running on GPU 1.
+Round 5: draft calls give reading 7 (too weak to read: the cap fired on 100% of steps at s = 100).
+The diagnostics landed (`results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/`): tiles
+from the pair prompts that the discriminator never trained on score positive whatever they show
+(hybrids, two of one kind, one animal), so it separates pair-prompt renders from single-prompt and
+product renders rather than reading "a cat and a dog apart"; its attention pool sits on one fixed
+patch in every picture; guided runs pass logit +10 by step 3, while the predicted picture is still
+a blob. Waiting on the reader's calls and on the choice between the cap-0.3 rerun and retraining
+with the pair-prompt failures as negatives.
 
 ## The stop point
 
@@ -56,7 +60,7 @@ Seed 1, one tile per column.
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
 | PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | done 11:58 UTC |
 | PID 754977 | run, `mscluster107` GPU 0, `render_results.py`, log `rung2/logs/results.log` | 1.4, the result sheet | done 12:41 UTC |
-| PID 768102 | run, `mscluster107` GPU 1, `diagnose.py`, log `rung2/logs/diagnostics.log` | the diagnostics the reader asked for | running |
+| PID 768102 | run, `mscluster107` GPU 1, `diagnose.py` (part B rerun with `--only-kinds`) | the diagnostics the reader asked for | done 13:05 UTC |
 | PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
