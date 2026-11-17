@@ -429,6 +429,187 @@ def pair_guide():
                  "verdict": "pass" if ok else "miss"}}, indent=1))
 
 
+# ---------------------------------------------------------------------------------------------------
+# Piece 5: the diagnosis
+#   1. along the guided run at w = 1, the push's cosine with two targets, every 10 steps:
+#      the true correction (true noised-product score minus summed scores), and
+#      the sampler's own ratio (true noised-product score minus the score of the sampler's finished
+#      draws noised forward, an exact Gaussian mixture over the 3,500 draws in discriminator-data.npz)
+#   2. the minimal-pair gap: the log-odds on a side-by-side picture minus on a stacked one at the same
+#      positions' average, same noise, every 10 steps, against a discriminator trained on shuffled labels
+#   3. the cap sweep: the push capped at kappa times the size of the product's own step
+# ---------------------------------------------------------------------------------------------------
+DIAG_STEPS = list(range(200, 0, -10))
+KAPPAS = [0.1, 0.3, 1.0]
+
+
+def sampler_ratio_score(x, k, fake_t):
+    """Score of the sampler's finished draws noised to step k: a Gaussian mixture, one component per draw."""
+    a = t.abar[k]
+    X = torch.tensor(x, dtype=torch.float64, device=DEV)
+    M = np.sqrt(a) * fake_t                                        # the components' means
+    d2 = (X ** 2).sum(1, keepdim=True) - 2 * X @ M.T + (M ** 2).sum(1)[None]
+    r = torch.softmax(-d2 / (2 * (1 - a)), 1)
+    return (-(X - r @ M) / (1 - a)).cpu().numpy()
+
+
+def cosine(u, v):
+    return (u * v).sum(1) / (np.linalg.norm(u, axis=1) * np.linalg.norm(v, axis=1) + 1e-300)
+
+
+def train_shuffled():
+    """The same recipe with real and fake labels shuffled: the floor a gap has to clear."""
+    real, fake = disc_data()
+    both = np.concatenate([real[:N_TRAIN], fake[:N_TRAIN]])
+    perm = np.random.default_rng(3).permutation(len(both))
+    R = torch.tensor(both[perm[:N_TRAIN]], dtype=torch.float32, device=DEV)
+    Fk = torch.tensor(both[perm[N_TRAIN:]], dtype=torch.float32, device=DEV)
+    torch.manual_seed(1)
+    gen = torch.Generator(device=DEV).manual_seed(1)
+    net = Net(1).to(DEV)
+    opt = torch.optim.Adam(net.parameters(), lr=1e-3)
+    for _ in range(4000):
+        ir = torch.randint(N_TRAIN, (512,), device=DEV, generator=gen)
+        jf = torch.randint(N_TRAIN, (512,), device=DEV, generator=gen)
+        kr = torch.randint(1, t.T + 1, (512,), device=DEV, generator=gen)
+        kf = torch.randint(1, t.T + 1, (512,), device=DEV, generator=gen)
+        loss = disc_loss(net(noise_to(R[ir], kr, gen), kr)[:, 0], net(noise_to(Fk[jf], kf, gen), kf)[:, 0],
+                         LAMBDA[kr], LAMBDA[kf])
+        opt.zero_grad(); loss.backward(); opt.step()
+    net.eval()
+    return net
+
+
+def capped(push, kappa):
+    """Cap the push at kappa times the size of the summed score, draw by draw (w = 1)."""
+    def p(x, k):
+        g = push(x, k)
+        lim = kappa * np.linalg.norm(summed(x, k), axis=1)
+        f = np.minimum(1.0, lim / np.maximum(np.linalg.norm(g, axis=1), 1e-300))
+        return g * f[:, None]
+    return p
+
+
+def diagnose():
+    real, fake = disc_data()
+    fake_t = torch.tensor(fake, dtype=torch.float64, device=DEV)
+    push = pair_push()
+
+    # 1. cosines along the guided run at w = 1, recorded in a hook that does not change the run
+    rec = {}
+
+    def watched(x, k):
+        g = push(x, k)
+        if k in DIAG_STEPS:
+            tc = true_correction(x, k)
+            sr = TRUE.score(x, k) - sampler_ratio_score(x, k, fake_t)
+            rec[k] = {"true correction": cosine(g, tc), "sampler's own ratio": cosine(g, sr),
+                      "push size / summed score size": np.linalg.norm(g, axis=1) / np.linalg.norm(summed(x, k), axis=1),
+                      "true correction size / summed score size": np.linalg.norm(tc, axis=1) / np.linalg.norm(summed(x, k), axis=1)}
+        return g
+    x_w1 = sample(watched, 1.0)
+    cos_rows = {k: {n: [float(np.percentile(v, q)) for q in (25, 50, 75)] for n, v in rec[k].items()} for k in DIAG_STEPS}
+    print("median over 300 draws, along the guided run at w = 1")
+    print("step   cos with true correction   cos with sampler's own ratio   push / summed   true corr / summed")
+    for k in DIAG_STEPS[::2]:
+        r = cos_rows[k]
+        tc, sr = r["true correction"][1], r["sampler's own ratio"][1]
+        ps, ts = r["push size / summed score size"][1], r["true correction size / summed score size"][1]
+        print(f"{k:4d}   {tc:6.3f}                     {sr:6.3f}                         {ps:6.3f}          {ts:6.3f}")
+
+    # 2. the minimal-pair gap, with the shuffled-label floor and the separate-label classifier beside it
+    shuffled = train_shuffled()
+    sep = Net(2).to(DEV)
+    sep.load_state_dict(torch.load(OUT / "separate-label-classifier.pt", map_location=DEV, weights_only=True)); sep.eval()
+    pair_net = Net(1).to(DEV)
+    pair_net.load_state_dict(torch.load(OUT / "pair-aware-discriminator.pt", map_location=DEV, weights_only=True)); pair_net.eval()
+    side = torch.tensor(t.PAIR, dtype=torch.float32, device=DEV)
+    stacked = torch.tensor(np.mean([(t.CIRCLES[p] + t.SQUARES[p]) / 2 for p in t.XPOS], 0), dtype=torch.float32, device=DEV)
+    stacked_one = torch.tensor((t.CIRCLES["centre"] + t.SQUARES["centre"]) / 2, dtype=torch.float32, device=DEV)
+    gen = torch.Generator(device=DEV).manual_seed(5)
+    gap = {}
+    with torch.no_grad():
+        for k in DIAG_STEPS:
+            kk = torch.full((256,), k, device=DEV)
+            e = torch.randn(256, t.D, device=DEV, generator=gen)
+            a = ABAR[k]
+            xs, xo = a.sqrt() * side + (1 - a).sqrt() * e, a.sqrt() * stacked_one + (1 - a).sqrt() * e
+            gap[k] = {"pair-aware discriminator": float((pair_net(xs, kk) - pair_net(xo, kk)).mean()),
+                      "shuffled labels": float((shuffled(xs, kk) - shuffled(xo, kk)).mean()),
+                      "separate-label classifier": float((F.logsigmoid(sep(xs, kk)).sum(1) - F.logsigmoid(sep(xo, kk)).sum(1)).mean())}
+    print("minimal-pair gap: log-odds on the side-by-side pair minus on the circle stacked on the square (centre), "
+          "mean over 256 shared noise draws")
+    print("step   pair-aware   shuffled labels   separate-label")
+    for k in DIAG_STEPS[::2]:
+        g = gap[k]
+        print(f"{k:4d}   {g['pair-aware discriminator']:9.2f}   {g['shuffled labels']:14.2f}   {g['separate-label classifier']:13.2f}")
+
+    # 3. the cap sweep, the pair-aware push and the true correction
+    caps = {}
+    for kappa in KAPPAS:
+        caps[f"pair-aware push, w 1, cap {kappa:g}"] = counts(sample(capped(push, kappa), 1.0))
+        caps[f"true correction, cap {kappa:g}"] = counts(sample(capped(true_correction, kappa), 1.0))
+    print("cap sweep, crisp pairs of 300 (overlaid)")
+    for n, c in caps.items():
+        print(f"  {n:34s} {c['two objects, crisp']:3d}  ({c['hybrid: overlaid']})")
+
+    # 4. the clip: share of draws whose logit is past +-11.5 (push set to 0), split by how the draw ends
+    logits = {}
+    def logged(x, k):
+        with torch.no_grad():
+            logits[k] = pair_net(torch.tensor(x, dtype=torch.float32, device=DEV),
+                                 torch.full((len(x),), k, device=DEV))[:, 0].cpu().numpy()
+        return push(x, k)
+    ends_crisp = np.array(t.label(sample(logged, 1.0))) == "two objects, crisp"
+    clip = {k: {"ends crisp: clipped high": float(np.mean(logits[k][ends_crisp] >= LOGIT_CLIP)),
+                "ends not crisp: clipped low": float(np.mean(logits[k][~ends_crisp] <= -LOGIT_CLIP))}
+            for k in DIAG_STEPS}
+    print("the clip, share of draws whose push is set to 0")
+    for k in DIAG_STEPS[::2]:
+        print(f"{k:4d}   ends crisp {clip[k]['ends crisp: clipped high']:.2f}   ends not crisp {clip[k]['ends not crisp: clipped low']:.2f}")
+
+    json.dump({"what": "piece 5 diagnosis on the exact toy at pair weight 0.01, seed 7, 300 draws",
+               "clip_share_by_final_label": clip,
+               "cosines_along_guided_run_w1_percentiles_25_50_75": cos_rows,
+               "guided_run_w1_counts": counts(x_w1),
+               "minimal_pair_gap": gap, "cap_sweep": caps,
+               "notes": {"sampler's own ratio": "true noised-product score minus the score of the 3,500 finished sampler "
+                                               "draws noised forward, an exact mixture over those draws; at small steps "
+                                               "the mixture is one spike per draw, so read the late steps loosely",
+                         "stacked picture": "the circle and the square averaged pixel by pixel at the centre position"}},
+              open(OUT / "diagnosis.json", "w"), indent=1)
+    figures_for_diagnosis(cos_rows, gap)
+    print("wrote", OUT / "diagnosis.json")
+
+
+def figures_for_diagnosis(cos_rows, gap):
+    ks = DIAG_STEPS
+    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    for name, col in [("sampler's own ratio", "#c86a0a"), ("true correction", "#1f5fd0")]:
+        q = np.array([cos_rows[k][name] for k in ks])
+        ax.fill_between(ks, q[:, 0], q[:, 2], color=col, alpha=0.18, lw=0)
+        ax.plot(ks, q[:, 1], color=col, lw=2)
+        ax.text(ks[2], q[2, 1] + 0.04, f"against the {name}", color=col, fontsize=9)
+    ax.set_xlim(200, 0); ax.set_ylim(-0.1, 1.0)
+    ax.set_xlabel("reverse step (200 is pure noise, 0 the finished picture)")
+    ax.set_ylabel("cosine of the push with the target")
+    ax.set_title("The discriminator's push along the guided run at w = 1: median of 300 draws, band 25th to 75th", fontsize=9)
+    fig.tight_layout(); fig.savefig(OUT / "push-cosine-per-step.png", dpi=150); plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(7.5, 3.6))
+    for name, col in [("pair-aware discriminator", "#c86a0a"), ("separate-label classifier", "#7a4fb0"),
+                      ("shuffled labels", "#888888")]:
+        v = [gap[k][name] for k in ks]
+        ax.plot(ks, v, color=col, lw=2)
+        ax.text(ks[3], v[3] + (-1.6 if name == "shuffled labels" else 0.6), name, color=col, fontsize=9)
+    ax.axhline(0, color="#bbbbbb", lw=1)
+    ax.set_xlim(200, 0)
+    ax.set_xlabel("noise step (200 is pure noise)")
+    ax.set_ylabel("log-odds: side by side minus stacked")
+    ax.set_title("Minimal-pair gap: how much more each network prefers the pair to the stacked picture, same noise", fontsize=9)
+    fig.tight_layout(); fig.savefig(OUT / "minimal-pair-gap-per-step.png", dpi=150); plt.close(fig)
+
+
 if __name__ == "__main__":
     {"port": port, "separate-train": separate_train, "separate-guide": separate_guide,
-     "disc-train": disc_train, "pair-guide": pair_guide}[sys.argv[1]]()
+     "disc-train": disc_train, "pair-guide": pair_guide, "diagnose": diagnose}[sys.argv[1]]()

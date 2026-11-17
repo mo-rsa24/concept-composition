@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 5, the diagnosis: not started. Bar: PASS on both halves
+**On:** piece 5, the diagnosis: run, waiting on test 2.5; then the closing pass. Bar: PASS on both halves
 
 ## Stop point
 
@@ -63,6 +63,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 
 | Id | Kind | Serves | State |
 |---|---|---|---|
+| stage-figure | background agent | the reader's `a`: the discriminator as a stage figure with real draws | landed: `the-side-by-side-discriminator.png`, seven stages, README entry written |
 | derivation-to-journey | background agent | the reader's ask: the two code lines derived, into the classifier-guidance journey's chapter 3 | running |
 
 ## How to approach this next time

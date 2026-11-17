@@ -200,7 +200,13 @@ For you to follow manually. Do these yourself.
   pass or miss. `FileNotFoundError` on `pair-aware-discriminator.pt` means `disc-train` has not run. ✓ verified 2026-11-17, run by Claude at the reader's word ("you do it"): crisp pairs of 300,
   unguided 0, w = 0.5 16, w = 1 172, w = 2 300; overlaid at w = 1 128 against unguided's 300 · bar line
   `pass` · `pair-aware-guide.json`
-- [ ] **2.5** The diagnosis figures, read by eye.
+- [ ] **2.5** Run `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py diagnose`
+  from the toy's notes folder (about 2.5 minutes), then open `push-cosine-per-step.png` and
+  `minimal-pair-gap-per-step.png` in the card's folder. You should see the push's cosine with the
+  sampler's own ratio near 0.85 to 0.96 from step 190 to step 90 while its cosine with the true
+  correction stays under 0.25, both dropping to 0 by step 80; and the discriminator's gap rising to
+  about 28 log-odds while the shuffled-label line stays at 0. A shuffled-label gap away from 0 means
+  the gap is not about the pair.
 
 ## Outputs
 
@@ -212,6 +218,9 @@ checkpoints, counts and figures from pieces 2 to 5; the card `README.md`; a find
 
 | Figure | What it shows |
 |---|---|
+| `the-side-by-side-discriminator.png` | the discriminator as seven stages: the two piles with one real draw each, the noising, the network and its loss, d with held-out accuracy per step, the push, where it enters the sampler, and the crisp counts it gives |
+| `push-cosine-per-step.png` | the push's cosine (y, −0.1 to 1) with the sampler's own ratio and with the true correction, against the reverse step (x, 200 to 0), median of 300 draws along the guided run at w = 1 with the 25th to 75th band · `diagnosis.json` |
+| `minimal-pair-gap-per-step.png` | log-odds on the side-by-side pair minus on the stacked picture (y) against the noise step (x, 200 to 0), for the discriminator, the separate-label classifier and a discriminator trained on shuffled labels, 256 shared noise draws per step · `diagnosis.json` |
 | `draw-0-unguided-and-pushed.png` | draw 0 of seed 7 at its final step: unguided, the true correction at scale 0, and at scale 1, each titled with its label |
 
 ## Error Matrix
