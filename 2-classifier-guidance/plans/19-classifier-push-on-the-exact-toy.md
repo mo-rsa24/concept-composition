@@ -194,10 +194,12 @@ For you to follow manually. Do these yourself.
   check 3.3e-4; held-out pairs called real and sampler draws called fake, 1.000 and 1.000 at steps 10,
   50 and 100, 0.956 and 0.980 at 150, 0.646 and 0.662 at 190 · `pair-aware-train.json`,
   `pair-aware-discriminator.pt`
-- [ ] **2.4** From the toy's notes folder run
+- [x] **2.4** From the toy's notes folder run
   `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py pair-guide` (about 30 s).
   You should see four count lines (unguided, then w = 0.5, 1 and 2) and a bar line for w = 1 with
-  pass or miss. `FileNotFoundError` on `pair-aware-discriminator.pt` means `disc-train` has not run.
+  pass or miss. `FileNotFoundError` on `pair-aware-discriminator.pt` means `disc-train` has not run. ✓ verified 2026-11-17, run by Claude at the reader's word ("you do it"): crisp pairs of 300,
+  unguided 0, w = 0.5 16, w = 1 172, w = 2 300; overlaid at w = 1 128 against unguided's 300 · bar line
+  `pass` · `pair-aware-guide.json`
 - [ ] **2.5** The diagnosis figures, read by eye.
 
 ## Outputs

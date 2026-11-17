@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 4, guiding with the pair-aware push: built, waiting on test 2.4
+**On:** piece 5, the diagnosis: not started. Bar: PASS on both halves
 
 ## Stop point
 
@@ -43,6 +43,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | fix | scale-0 check made bit for bit in the same loop: 200 of 200 steps |
 | 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
 | 1.2 | separate-label classifier trained, accuracy within 0.012 of the closed-form best at every checked step |
+| 2.4 | Claude ran at the reader's word: w = 0.5 16, w = 1 172, w = 2 300 crisp of 300; overlaid 128 at w = 1; bar line pass, matching the key |
 | 1.4 | pair-guide built, runs in 26 s; draw 0 at step 150: push against true correction cosine 0.148, median over 300 draws 0.169 |
 | 2.3 | Claude typed the loss and the log-odds gradient at the reader's word and ran the test: matched the key on every row, gradient check 3.3e-4 |
 | 1.3 | data built (3,500 crisp against 3,470 overlaid and 30 faint); trainer and gradient check run with patched functions |
@@ -62,6 +63,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 
 | Id | Kind | Serves | State |
 |---|---|---|---|
+| derivation-to-journey | background agent | the reader's ask: the two code lines derived, into the classifier-guidance journey's chapter 3 | running |
 
 ## How to approach this next time
 
