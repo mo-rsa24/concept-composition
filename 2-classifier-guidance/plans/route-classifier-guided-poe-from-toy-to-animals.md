@@ -106,7 +106,10 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | The released guided-diffusion weights sit at `/datasets/mmolefe/poe_repair_min/weights/guided-diffusion/` (`256x256_diffusion_uncond.pt`, `256x256_classifier.pt`, `64x64_diffusion.pt`, `64x64_classifier.pt`, sizes matching the server); the clones at `/home/molef/PhD/replications/guided-diffusion` and `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion`, upstream commit `22e0df8` | found | [the reproduce card](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md), 2026-11-17 | 7, 8 |
 | Sampling the released model needs neither mpi4py nor blobfile: a wrapper that imports `script_util` and loads weights with `torch.load` runs `classifier_sample.py`'s own `cond_fn` in co3 | found | `2-classifier-guidance/scripts/guided_diffusion_reproduce.py` | 7, 8 |
 | On the released weights, 250 respaced steps of ancestral sampling: scale 0 is byte-identical to plain sampling on 4 of 4 seeds; at scale 10 the released classifier calls 16, 15 and 15 of 16 samples corgi, tabby and golden retriever, against 2, 2 and 5 at scale 1; a render takes 22 s plain and 37 s guided on a Quadro RTX 8000 | found | [the reproduce card](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md), jobs 89232 and 89235 | 7, 8 |
+| By a strict eye at 256 px, scale 10 gives 9, 11 and 10 of 16 clear corgi, tabby and golden retriever, against the classifier's 16, 15 and 15; all 22 disagreements over 96 tiles are the classifier calling a fox face, a beagle, a Labrador or garbled fur the asked-for class | found, eye read `inferred` | `your_call` in [the per-tile calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/classifier_calls.csv), instruction 13 | 8 |
 | The push at scale 10 moves the step's mean by under 0.1% of its norm, largest in the first fifth of the run; the classifier's raw gradient falls once the class is reached and keeps rising at scale 1 | found | `push_per_step_c263_s10_seed0.json` in [the reproduce card](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md) | 5, 7 |
+| mscluster111 and mscluster112 (RTX PRO 6000 Blackwell) both work under `co3_bw`: torch 2.11.0+cu128 sees the card, a 1000 × 1000 matmul sums to 1e9, and `/datasets` is visible over SSH; mscluster110 held another user's 67.8 GB job; mscluster107 card 1 was free; mscluster109 did not answer SSH. The environment notes still list 111 and 112 as faulted | found | live probe 2026-11-17 over `scripts/cluster.sh sh` | the rung compute plans |
+| On a Blackwell a plain product render takes 5.7 to 5.9 s and a joint render 5.0 to 5.2 s, against 51.5 s per product render on a Quadro RTX 8000, about 9 times faster; no guided SDXL render has been timed on any card | found | `1-lora-correction/report/paper-review/prze-10-compute.md`, plan 15's render cost | the rung compute plans |
 
 ## What you will achieve
 
@@ -174,6 +177,17 @@ reported as composing for the wrong reason.
 **A missed bar stops the climb.** The stage's walk opens its diagnosis ladder (diagnose, fix,
 recheck, half the stage's box, at most two levels) and the next stage is not started until it
 closes.
+
+
+**The scale-up ladder for fixing the product.** Each rung is the proof of concept for the next and
+changes one thing: rung 1 the exact toy (A1); rung 2 SDXL cat × dog judged on held-out seeds 9 to 12
+with a small discriminator (A3q); rung 3 the pair kind, animal and animal, animal and object, object
+and object (K1 to K3); rung 4 more seeds (A4), more pairs (C1), unseen pairs (C2). The rungs, their
+rows and the condition for going on are in [the board's ladder](../report/classifier-guided-poe/board.md#the-scale-up-ladder).
+The photos (A2r, A2c) and the head ablations (B1 to B7) run beside it and gate nothing. Every
+rung's compute plan is written before launch, on the quickest card that can run it.
+
+`pending: the rung step rounds of the 2026-11-17 reopening (each rung's planning skill, compute step and bar)`
 
 ## The two lanes
 
@@ -546,7 +560,7 @@ tabby and golden retriever, with scale 1 calling fewer.
 
   <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png" width="200" alt="Sixteen renders at classifier scale 1 on the left, a mix of dogs, animals and objects, beside sixteen at scale 10 on the right, golden retriever faces and bodies framed green except a Labrador-like dog at seed 4"></a>
 
-- [ ] **Gate:** instruction 13 called.
+- [x] **Gate:** instruction 13 called · ✓ 2026-11-17, by Claude at your request, veto open: see instruction 13
 - **Leaves:** the card, the checkpoint paths, and the clone, which steps 7 and 8 port from.
 
 ### 5. 🔧 Repair the SDXL product sampler's push and rerun the canary
@@ -1058,9 +1072,12 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ### 13. 👁️ Call the released-weights sheets, in step 4
 
-- [ ] **Do:** open each sheet in
+- [x] **Do:** open each sheet in
   `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/`
-  and say, per tile, whether it shows the asked-for animal.
+  and say, per tile, whether it shows the asked-for animal · ✓ called 2026-11-17 by Claude at your
+  request, tile by tile at 256 px, veto open: 0 and 9 of 16 corgi, 0 and 11 tabby, 3 and 10 golden
+  retriever at scales 1 and 10, against the classifier's 2 and 16, 2 and 15, 5 and 15; all 22
+  disagreements are classifier yes, eye no ([the disagreement sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png))
 - **You should see:** at scale 10 almost every tile is a corgi, a tabby or a golden retriever; at
   scale 1 fewer; at scale 0 the same picture as unguided.
 - **Done when:** your counts sit beside the released classifier's in the CSV.
