@@ -43,7 +43,7 @@ Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of
 SDXL's product of "a photo of a cat" and "a photo of a dog" draws one fused animal: best-of-16
 composed 0 of 128 particles. A small discriminator is trained to tell "a cat and a dog apart" from
 the product's own renders and from a lone cat or a lone dog, on about a dozen renders checked by
-eye from seeds 1 to 8. Its log-odds gradient is then added to the product at every step, and the
+eye from seeds 1 to 8. Its [log-odds gradient](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/03-the-discriminator-and-the-density-ratio.md#32-its-log-odds-slope-is-a-difference-of-scores) is then added to the product at every step, and the
 renders are judged on seeds 9 to 12, which no training render came from.
 
 **What it is compared against**
@@ -121,7 +121,7 @@ direction is what does it.
 
 Navigation: ⬅️ [Previous](#the-claim-under-test) | 📋 [TOC](#table-of-contents) | [Next](#what-happens) ➡️
 
-The exact toy showed the pair-aware push repairs the product's sampler where the target composes.
+The exact toy showed the pair-aware push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> repairs the product's sampler where the target composes.
 This is the cheapest real test on SDXL: one pair, eight seeds, a few checked renders. A pass
 starts rung 3; any other reading names the one change worth trying before more compute is spent.
 
@@ -214,6 +214,9 @@ For Claude to execute. Ask Claude to do these.
   wordings.
   ✓ verified 2026-11-17: 48 renders on `mscluster107` GPU 0, 127 to 130 s per seed; final latents
   saved beside each tile · `rung2/training_set/`, `training-set/training-set-sheet.png`
+
+  <a href="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/training-set-sheet.png"><img src="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/training-set-sheet.png" width="140" alt="Seeds 1 to 8 down the rows by six prompts across ('a cat and a dog', 'a cat on the left and a dog on the right', 'a cat and a dog sitting apart', 'a cat', 'a dog', and the plain product of the two): the three pair prompts mostly show a cat and a dog together, some as two dogs or two cats or line drawings, the lone prompts one animal each, and the product column one fused cat-dog animal per seed"></a>
+
 - [x] **1.3** The discriminator: SDXL's UNet frozen and read on the empty prompt up to its middle
   block, with plan 18's attention-pool head trained alone on the 41 tiles of
   `scripts/rung2/training_set.json`, noised the same way; its push is the log-odds gradient. First
@@ -225,10 +228,14 @@ For Claude to execute. Ask Claude to do these.
   1.00; steps 0 to 6 at 0.59 to 0.73); final head on all eight seeds, fit 20 of 20 ·
   `rung2/discriminator/check-holdout-7-8/gate.json`, `rung2/discriminator/final-all-seeds/head_step_001500.pt`,
   `discriminator/held-out-accuracy-per-step.png`
-- [ ] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
+- [x] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
   untouched; the best-of-N pick; strength 0 against plain product on seed 1; then seeds 1 to 4 and
   9 to 12 with plain product, best-of-N, guided at 10, 30 and 100, and the random push at the same
   three, on one card; one sheet.
+  ✓ verified 2026-11-17: strength 0 identical to plain product on seed 1; the random push's norm
+  over the guided push's 1.0000 at every step of all 24 random renders; the cap fired on 2 to 42%
+  of steps at s = 10, 80 to 98% at 30, 100% at 100; 64 tiles on `mscluster107` GPU 0 ·
+  `rung2/results/result.json`, `result-sheet/result-sheet.png`
 - [ ] **1.5** The calls as a CSV, the reading printed with its counts, the card, A3q's lines
   ticked, the route rows, the board redrawn with `--step 10`.
 

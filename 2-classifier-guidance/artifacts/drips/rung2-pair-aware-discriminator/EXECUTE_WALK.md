@@ -6,10 +6,10 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 4, the result renders: running on `mscluster107` GPU 0 since 2026-11-17 12:03 UTC (PID 754977,
-log `rung2/logs/results.log`), with the final discriminator (`final-all-seeds/head_step_001500.pt`,
-fit 20 of 20 on its own tiles). Canary passed: strength 0 with the discriminator attached is
-identical to plain product on seed 1. The held-out check run passed 13 of 20 (steps 7 to 19).
+Round 5: the result sheet landed (1.4 ticked). Claude's draft calls on the 64 tiles
+(`result-sheet/calls-draft.csv`) give 0 of 4 composed on seeds 9 to 12 at every strength and 1 of 4
+on seeds 1 to 4 (seed 4, a drawing); with the cap firing on 100% of steps at s = 100 the draft
+reading is 7, too weak to read. Waiting on the reader's calls (2.4). Diagnostics running on GPU 1.
 
 ## The stop point
 
@@ -55,7 +55,8 @@ Seed 1, one tile per column.
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
 | PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | done 11:58 UTC |
-| PID 754977 | run, `mscluster107` GPU 0, `render_results.py`, log `rung2/logs/results.log` | 1.4, the result sheet | running |
+| PID 754977 | run, `mscluster107` GPU 0, `render_results.py`, log `rung2/logs/results.log` | 1.4, the result sheet | done 12:41 UTC |
+| PID 768102 | run, `mscluster107` GPU 1, `diagnose.py`, log `rung2/logs/diagnostics.log` | the diagnostics the reader asked for | running |
 | PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
