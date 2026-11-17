@@ -6,16 +6,13 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Plan 22 builds its training set from about 1,000 local 1024 px pair pictures (the benchmark's and
-the evaluations' own renders; no cat x dog on seeds 9 to 16). 543 were called twice, by two
-independent passes of helper agents (91% agreement on role); Claude settled the 37 disagreements in
-the 87 two-things pairs at full size. Final, two-things pairs only: 64 positives across 38 pairs
-(11 cat x dog), 315 negatives (105 hybrid, 36 single, 85 wrong pair, 89 damaged), 23 left out.
-`results/does-a-small-discriminator-steer-cat-x-dog/dataset-v3/calls-final.csv`. Next: encode on
-the cluster and train both discriminators. `/datasets` still down; the cap-0.3 rerun waits for it.
-Training started 16:40 UTC: v3 head-only (held-out check and final) on `mscluster107`'s two cards,
-v3 head with adapters (held-out check and final) on `mscluster111` and `112`. Held out: 7 whole
-pairs plus cat x dog seeds 7 and 8 (20 positives, 23 negatives).
+Plan 22's two discriminators both failed the held-out check (7 unseen pairs plus cat x dog seeds 7
+and 8; 20 positives, 23 negatives): head only 0 of 20 sampler steps at 0.75 or more (0.53 to 0.63),
+head with adapters 0 of 20 (0.55 to 0.69). Their final runs fit their own training tiles (adapters:
+16 of 20). With v2, every checker whose negatives include hybrids and wrong pairs fails on unseen
+pictures, at 17 and at 81 positives. No rung 2 sheet is rendered with them. `/datasets` still down
+at 17:40 UTC; the cap-0.3 watcher expired. Waiting on the reader's choice of next step.
+Plot: `discriminator/held-out-accuracy-all-checkers.png`.
 
 ## The stop point
 
