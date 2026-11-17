@@ -231,6 +231,7 @@ dog.
 |---|---|
 | the two-ends sheet | four held-out seeds down; across, the empty prompt alone and "a dog" at ordinary guidance 7.5. One tile is one 1,024 px render. |
 | the dog sheet | four seeds down; across, the empty prompt, the push toward "dog" at strengths 1, 3, 10, 30, and "a dog". The per-step gradient size and applied push go to the sidecar json beside it. |
+| [the classifier guidance code walk](https://claude.ai/artifact/SjQVHwtg1EUgBxrBgJsB5h) | Dhariwal and Nichol's two sampling files beside an 8-box diagram, each block of lines with the equation it computes; the line toy run through their own 250-step sampler, 4,096 particles at scale 0, 1 and 10, with the exact density beside each; files and card in `2-classifier-guidance/artifacts/results/what-each-line-of-classifier-guidance-computes/` |
 
 ## Error Matrix
 
