@@ -6,7 +6,8 @@ share this working tree).
 
 ## Where the walk is
 
-Piece 1, the image set, is next.
+Pieces 1 and 2 are done; both 64 px trainings run until about 20:30 UTC. Piece 3, the 256 px
+classifiers, is next, on `mscluster108` (two free RTX 8000s at 09:30 SAST).
 
 ## The stop point
 
@@ -41,10 +42,17 @@ Seed 1, and one image per label, picked in piece 1.
 
 ## Ticks
 
+- 1.1 the image set: 200, 200, 150 (COCO 100, 100, 38; SD3.5 100, 100, 112). By eye at sheet
+  scale, `both_015` and `both_027` show only the dog, and `both_000` and `both_017` are collages;
+  the reader's call whether to strike them. Test 2.1 open for the reader.
+- 1.2 the trainings: timing 300 steps in 278 s on a Blackwell; 50,000 steps, about 12.9 h each.
+
 ## Out of the session
 
 | Id | Kind | What it serves | State |
 |---|---|---|---|
+| W&B `wubhxhse` | run, `mscluster111` GPU 0, PID 283386, log `classifier_guidance_photos/logs/train_64_no_both.log` | 1.2, the 64 px model without both-animal images | running since 07:35 UTC |
+| W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | running since 07:35 UTC |
 
 ## Closing pass owed
 

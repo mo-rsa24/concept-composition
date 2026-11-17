@@ -188,11 +188,20 @@ For Claude to execute. Ask Claude to do these.
 
 ▶ **Next: [2. Test each piece](#2-test-each-piece)**
 
-- [ ] **1.1** The image set: center-cropped and resized to 256 and 64 px under
+- [x] **1.1** The image set: square crops resized to 256 and 64 px under
   `classifier_guidance_photos/images/{256,64}/`, filenames carrying the label, and a `counts.json`.
-- [ ] **1.2** Label dropout in the 64 px launcher, a 300-step timing run, then the two trainings
+  `build_photo_set.py`; a COCO photo's square slides along its long edge to cover the animals'
+  boxes. ✓ verified 2026-11-17: 200 cat (100 COCO, 100 SD3.5), 200 dog (100, 100), 150 both (38,
+  112); 22 of the 38 COCO both crops keep under 90% of the animals' box area, and by eye at sheet
+  scale 36 of 38 show both animals · `photo-set-counts.json`, `example-one-per-label.png`,
+  `coco-both-crops.png`
+- [x] **1.2** Label dropout in the 64 px launcher, a 300-step timing run, then the two trainings
   (without both-animal images, and with all) on free cards in the order of
-  [Considerations](#considerations).
+  [Considerations](#considerations). `train_64.py` through `launch_gpu.sh`, 50,000 steps at batch
+  64, a checkpoint every 5,000. ✓ verified 2026-11-17: timing run 300 steps in 278 s on
+  `mscluster111` (295.1 M parameters, loss 1.02 to 0.062); without both-animal images on
+  `mscluster111` GPU 0, W&B `wubhxhse`, 400 images; all images on `mscluster112` GPU 0, W&B
+  `pnwlwh0f`, 550 images; both launched 07:35 UTC at 30.6 GB and 100% utilisation
 - [ ] **1.3** The 256 px classifiers: the separate-label one; 500 product draws at 100 respaced
   steps; the pair-aware one on both-animal images against those draws and the single-animal images,
   noised forward.
