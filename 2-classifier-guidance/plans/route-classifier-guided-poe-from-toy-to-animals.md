@@ -586,7 +586,8 @@ What is already known
 - Plan 17's form passed byte identity on four seeds on 2026-11-04.
 - A fp32 against fp16 combine differs by about 3 grey levels over 50 steps, so the identity check
   compares against a reference made in the same loop and precision.
-- biggpu allows one job per user; the canary runs with nohup on a free card.
+- biggpu allows one job per user; the canary runs as an sbatch job on an idle biggpu node
+  (presence_head_canary.sbatch), and with nohup on a free card only when no node is idle.
 
 When something is missing
 - If kappa has no value from the paper, use 0.1 and say so; step 9's criterion sets the final one.
@@ -607,8 +608,9 @@ The diff, then the canary's two checksums. A closing report with pass or miss.
 Controls: the cap piece, example (one step's push before and after the cap), debug; the canary
 piece, prove
 Side routes: the cap piece, /picture-speak --consequence the cap switched off on one step
-Debug kit: the canary piece, presence_head_canary.py (launch entry "canary strength 0", reads the
-latent cache, writes /datasets/mmolefe/poe_repair_min/outputs/presence_head/canary)
+Debug kit: the canary piece, presence_head_canary.py (launch entry "canary strength 0"; seed 9 has
+no cached latent on the cluster, so its noise comes from manual_seed(9), as in plan 17; writes
+/datasets/mmolefe/poe_repair_min/outputs/presence_head/canary)
 
 Judged by the canary: done when the strength-0 checksum equals plain product's.
 ```

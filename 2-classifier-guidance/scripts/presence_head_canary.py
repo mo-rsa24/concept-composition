@@ -7,9 +7,9 @@ float32-against-float16 difference of the same combine already costs about three
 50 steps here, so "close enough" is not a pass.
 
 Renders the same cell three ways and compares the bytes:
-    plain          the existing poe composer
-    weight 0       the new composer with no head at all
-    weight 0, head the new composer carrying an untrained head, which is what the sweep passes
+    plain              the existing poe composer
+    strength 0         the classifier-guided composer with no head at all
+    strength 0, head   the same composer carrying an untrained head, which is what a sweep passes
 
 Writes, under MOUNT_ROOT/outputs/presence_head/canary/:
     canary.json   the three checksums, the largest absolute pixel difference, and the verdict
@@ -34,6 +34,7 @@ from poe_repair.composers import poe as poe_composer  # noqa: E402
 from poe_repair.composers import poe_classifier_guided  # noqa: E402
 from poe_repair.config import RunConfig  # noqa: E402
 from poe_repair.experiments.presence_head.head import PresenceHead  # noqa: E402
+from poe_repair.methods._classifier_guided import PUSH_CAP_FRACTION  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
 from poe_repair.runtime import PairSeedCell  # noqa: E402
 
@@ -76,38 +77,40 @@ def main() -> int:
     print("rendering plain product...", flush=True)
     plain = poe_composer.run(cell, ctx, exp_name="presence_head/canary", overwrite=True)
 
-    print("rendering the new composer at weight 0, no head...", flush=True)
+    print("rendering the classifier-guided composer at strength 0, no head...", flush=True)
     zero_no_head = poe_classifier_guided.run(
-        cell, ctx, head=None, weight=0.0,
+        cell, ctx, head=None, strength=0.0,
         exp_name="presence_head/canary_zero_no_head", overwrite=True)
 
-    print("rendering the new composer at weight 0 carrying an untrained head...", flush=True)
+    print("rendering the classifier-guided composer at strength 0 carrying an untrained head...",
+          flush=True)
     head = PresenceHead().to(ctx.device).eval()
     zero_with_head = poe_classifier_guided.run(
-        cell, ctx, head=head, weight=0.0,
+        cell, ctx, head=head, strength=0.0,
         exp_name="presence_head/canary_zero_with_head", overwrite=True)
 
     checks = {
-        "weight 0, no head": largest_pixel_difference(plain, zero_no_head),
-        "weight 0, untrained head": largest_pixel_difference(plain, zero_with_head),
+        "strength 0, no head": largest_pixel_difference(plain, zero_no_head),
+        "strength 0, untrained head": largest_pixel_difference(plain, zero_with_head),
     }
     identical = all(c["max_abs_diff_0_255"] == 0 for c in checks.values())
     result = {
         "what_this_measures": "whether the classifier-guided composer reproduces plain "
-                              "product-of-experts exactly when the classifier weight is zero",
+                              "product-of-experts exactly when the classifier strength is zero",
         "pair": PAIR_SLUG, "seed": args.seed,
         "prompts": [PROMPT_A, PROMPT_B],
         "guidance_scale": ctx.guidance_scale,
         "num_inference_steps": ctx.num_inference_steps,
+        "push_cap_fraction": PUSH_CAP_FRACTION,
         "checksums": {"plain": digest(plain),
-                      "weight 0, no head": digest(zero_no_head),
-                      "weight 0, untrained head": digest(zero_with_head)},
+                      "strength 0, no head": digest(zero_no_head),
+                      "strength 0, untrained head": digest(zero_with_head)},
         "pixel_checks": checks,
         "identical": identical,
-        "verdict": ("the composer leaves the baseline byte-identical at weight 0, so every later "
+        "verdict": ("the composer leaves the baseline byte-identical at strength 0, so every later "
                     "column is read against an unmoved reference"
                     if identical else
-                    "the composer changed the baseline at weight 0; the sweep must not run until "
+                    "the composer changed the baseline at strength 0; the sweep must not run until "
                     "this is fixed, because every column would measure the plumbing"),
         "paths": {"plain": str(plain), "zero_no_head": str(zero_no_head),
                   "zero_with_head": str(zero_with_head)},
