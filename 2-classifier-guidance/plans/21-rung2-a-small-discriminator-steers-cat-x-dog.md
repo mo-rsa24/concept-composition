@@ -64,9 +64,11 @@ piece 5 waiters) and `mscluster107` GPU 1. Every column renders on the one card 
 
 **The discriminator's body**
 
-Plan 18's trunk: SDXL's down and middle blocks on their own UNet copy, trained through LoRA
-adapters, with a fresh attention-pool head giving one logit. Pretrained features are the better
-bet with 10 to 15 positives; a network trained from scratch on so few would memorise them.
+SDXL's own down and middle blocks, frozen, read the noisy latent on the empty prompt; plan 18's
+attention-pool head (about 9.3 million weights) is the only trained part and gives one logit. With
+41 training tiles, training plan 18's 11 million adapter weights on the trunk as well would let the
+discriminator memorise its 17 positives. The check holds out seeds 7 and 8, so it measures reading
+new pictures rather than fitting the training ones.
 
 **The compute, measured on `mscluster107` GPU 0**
 
@@ -212,10 +214,13 @@ For Claude to execute. Ask Claude to do these.
   wordings.
   ✓ verified 2026-11-17: 48 renders on `mscluster107` GPU 0, 127 to 130 s per seed; final latents
   saved beside each tile · `rung2/training_set/`, `training-set/training-set-sheet.png`
-- [ ] **1.3** The discriminator: plan 18's trunk with a fresh one-logit head, trained on the
-  checked positives against the product's renders and the lone animals, all noised the same way.
-  Before it pushes anything, balanced accuracy on fresh noise draws of the training images of at
-  least 0.75 on at least 10 of the first 20 sampler steps, plan 18's rule.
+- [ ] **1.3** The discriminator: SDXL's UNet frozen and read on the empty prompt up to its middle
+  block, with plan 18's attention-pool head trained alone on the 41 tiles of
+  `scripts/rung2/training_set.json`, noised the same way; its push is the log-odds gradient. First
+  a check run holding out seeds 7 and 8 (trained on seeds 1 to 6: 10 positives, 18 negatives;
+  checked on 7 positives, 6 negatives): balanced accuracy at least 0.75 on at least 10 of the first
+  20 sampler steps, 4 noise draws per tile. Then the final head on all eight seeds.
+  `scripts/rung2/train_discriminator.py`, `scripts/rung2/discriminator.py`.
 - [ ] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
   untouched; the best-of-N pick; strength 0 against plain product on seed 1; then seeds 1 to 4 and
   9 to 12 with plain product, best-of-N, guided at 10, 30 and 100, and the random push at the same
