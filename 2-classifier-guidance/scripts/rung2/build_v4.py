@@ -3,17 +3,19 @@
 
 v1 learned which prompt made a picture instead of what it showed. v4 guards against that by taking
 both sides from each source, so the source cannot separate them and only the content can. Every
-picture is labelled by what it shows (the Claude API's verdict, or the judge's), never by the method
+picture is labelled by what it shows (the Claude API's verdict, one rule for every source), never by the method
 that drew it:
 
 | Source | Real (a clean pair) | Fake |
 |---|---|---|
 | plan 23 drawings (kim) | API "faithful pair" | every other API verdict |
-| judge renders (present-revision-to-supervisor) | "two", photo | "hybrid", "one", "count error", "broken", or "two" drawn as an illustration |
+| judge renders (present-revision-to-supervisor) | API "faithful pair" (api-labels/judge.jsonl) | every other API verdict |
 | inclusive-captions photos (COCO, SD 3.5) | "both" photos the API passes on the square crop | "both" rejects, every cat-only and dog-only photo |
 | v3 hand calls (training tiles only) | hand positive | hand negative |
 
-Left out: the judge's "intrusion" (both drawn plus an extra thing, neither side), every picture of a
+Left out: every pair whose second item is a setting rather than a second body (SCENES below: a
+mailbox in a snowfield is one thing in a place, which would teach "an object in a scene" as the good
+case), every picture of a
 v3 held-out pair, v3's check tiles, and cat x dog seeds 9 to 16.
 
 Non-square photos are centre-cropped to a square here, the crop the encoder would make, and the API
@@ -39,6 +41,17 @@ JUDGE = REPO / "artifacts/drips/present-revision-to-supervisor/judge"
 PHOTOS = REPO / "4-inclusive-captions/data/training-set"
 V4 = "outputs/classifier_guidance_ladder/rung2/dataset-v4"
 KIM = "outputs/classifier_guidance_ladder/rung2/kim/states"
+SCENES = {"brick_wall", "cactus_garden", "desert_dune", "desert_landscape", "flower_meadow", "forest_clearing",
+          "glacier", "grassy_field", "harbor", "iceberg", "lagoon", "ocean_wave", "ocean_with_stormy_waves",
+          "pond", "sand_dune", "snowfield", "snowstorm", "snowy_mountain", "tropical_beach", "waterfall"}
+
+
+# Dropped by the by-eye spot check: a pillow drawn inside the pan like bread, called a clean pair.
+DROP = {"judge-" + x for x in ("j59746", "j81739")}
+
+
+def is_scene(pair: str) -> bool:
+    return pair.split("__x__")[1].split("_", 1)[1] in SCENES
 
 
 def jsonl(p: Path):
@@ -52,10 +65,10 @@ def main() -> int:
     args = ap.parse_args()
     v3 = json.loads((HERE / "training_set_v3.json").read_text())
     held = set(v3["held_out_pairs"])
-    tiles = []
+    tiles, evals = [], []
 
     def add(**t):
-        if t["pair"] in held or (t["pair"] == "a_cat__x__a_dog" and 9 <= t["seed"] <= 16):
+        if t["id"] in DROP or t["pair"] in held or is_scene(t["pair"]) or (t["pair"] == "a_cat__x__a_dog" and 9 <= t["seed"] <= 16):
             return
         tiles.append(t | {"check": False})
 
@@ -78,18 +91,23 @@ def main() -> int:
             method=r["method"], label=int(real), kind="positive" if real else r["verdict"], source="kim")
 
     key = {r["id"]: r for r in csv.DictReader(open(JUDGE / "key.csv"))}
-    fake_judge = {"hybrid", "one", "count error", "broken"}
-    for r in csv.DictReader(open(JUDGE / "judge_labels.csv")):
-        k, lab = key.get(r["id"]), r["label"]
-        if k is None or lab == "intrusion" or not lab:
+    for r in jsonl(RES / "api-labels/judge.jsonl"):
+        if "verdict" not in r:
             continue
-        real = lab == "two" and r["style_loss"] == "no"
-        if not real and lab not in fake_judge and lab != "two":
+        jid = "j" + r["id"].split("__seed")[1].split("__")[0]
+        k, real = key[jid], r["verdict"] == "faithful pair"
+        tid = f"judge-{jid}"
+        if k["pair"] in held and not is_scene(k["pair"]):
+            evals.append({"id": tid, "picture": stage(JUDGE / "images" / f"{jid}.jpg", tid),
+                          "latent": f"{V4}/latents/{tid}.pt", "pair": k["pair"], "seed": int(k["seed"]),
+                          "method": k["setting"], "label": int(real), "kind": "positive" if real else r["verdict"],
+                          "source": "judge", "check": True})
             continue
-        tid = f"judge-{r['id']}"
-        add(id=tid, picture=stage(JUDGE / "images" / f"{r['id']}.jpg", tid), latent=f"{V4}/latents/{tid}.pt",
+        if is_scene(k["pair"]):
+            continue
+        add(id=tid, picture=stage(JUDGE / "images" / f"{jid}.jpg", tid), latent=f"{V4}/latents/{tid}.pt",
             pair=k["pair"], seed=int(k["seed"]), method=k["setting"], label=int(real),
-            kind="positive" if real else ("illustration" if lab == "two" else lab), source="judge")
+            kind="positive" if real else r["verdict"], source="judge")
 
     crop = {r["id"]: r for r in jsonl(args.crop_labels) if "verdict" in r}
     for f in sorted((PHOTOS / "both").glob("*")):
@@ -108,9 +126,23 @@ def main() -> int:
                 method=f.name.split("_")[1], label=0, kind="single", source="photos")
 
     for t in v3["tiles"]:
-        if not t["check"]:
+        if not t["check"] and not is_scene(t["pair"]):
             tiles.append(t | {"source": "v3"})
 
+    evals += [t | {"source": "v3"} for t in v3["tiles"] if t["check"]]
+    import hashlib
+    def md5(t):
+        if "picture" in t and (args.stage / Path(t["picture"]).name).exists():
+            return hashlib.md5((args.stage / Path(t["picture"]).name).read_bytes()).hexdigest()
+        return t["id"] if t.get("source") == "v3" else t["latent"]
+    shared = {md5(t) for t in tiles} & {md5(t) for t in evals}
+    if shared or {t["pair"] for t in tiles} & held:
+        raise SystemExit(f"guard: evaluation and training overlap ({len(shared)} pictures)")
+    (HERE / "eval_set_v4.json").write_text(json.dumps({"rule": "v3 hand-called check tiles plus the judge's "
+        "API-labelled pictures of the 7 held-out pairs; md5-disjoint from training_set_v4.json",
+        "held_out_pairs": sorted(held), "tiles": evals}, indent=0))
+    ce = collections.Counter((t["source"], t["label"], t["pair"] == "a_cat__x__a_dog") for t in evals)
+    print("evaluation:", {f"{s}/{'real' if l else 'fake'}/{'catdog' if c else 'heldout'}": n for (s, l, c), n in sorted(ce.items())})
     out = {"rule": __doc__.split("\n\n")[1], "held_out_pairs": sorted(held), "tiles": tiles}
     (HERE / "training_set_v4.json").write_text(json.dumps(out, indent=0))
     c = collections.Counter((t["source"], t["label"]) for t in tiles)

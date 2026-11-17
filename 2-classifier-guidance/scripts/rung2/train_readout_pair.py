@@ -133,6 +133,8 @@ def main() -> int:
     ap.add_argument("--run", default="readout-pair-v1")
     ap.add_argument("--manifest", type=Path, help="a tile list such as training_set_v4.json")
     ap.add_argument("--labels", type=Path, help="the API labels JSONL for plan 23's drawings")
+    ap.add_argument("--eval", type=Path, default=HERE / "training_set_v3.json",
+                    help="evaluation tile list (its 'check' tiles); the verdict is always on v3's check tiles")
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
     args = ap.parse_args()
@@ -158,9 +160,11 @@ def main() -> int:
     head = PairHead().to(ctx.device)
     opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=1e-2)
 
-    tiles = [t for t in json.loads((HERE / "training_set_v3.json").read_text())["tiles"] if t["check"]]
+    tiles = [t for t in json.loads(args.eval.read_text())["tiles"] if t["check"]]
     z_check = torch.cat([load_latent(t).float() for t in tiles])
     kind = [t["kind"] if t["label"] == 0 else "positive" for t in tiles]
+    is_v3 = [not t["id"].startswith("judge-")
+             for t in tiles]
 
     @torch.no_grad()
     def check(steps):
@@ -176,12 +180,14 @@ def main() -> int:
                         logits[i + j].append(v)
             yes = [sum(l) / len(l) > 0 for l in logits]
 
-            def bal(neg_kinds):
-                pos = [p for p, k in zip(yes, kind) if k == "positive"]
-                neg = [not p for p, k in zip(yes, kind) if k in neg_kinds]
+            def bal(neg_kinds, only_v3=True):
+                use = [v or not only_v3 for v in is_v3]
+                pos = [p for p, k, u in zip(yes, kind, use) if k == "positive" and u]
+                neg = [not p for p, k, u in zip(yes, kind, use) if k in neg_kinds and u]
                 return (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
             res.append({"sampler_step": int(s), "balanced_accuracy": bal(set(kind) - {"positive"}),
-                        "singles_and_hybrids_balanced_accuracy": bal({"single", "hybrid"})})
+                        "singles_and_hybrids_balanced_accuracy": bal({"single", "hybrid"}),
+                        "whole_evaluation_set_balanced_accuracy": bal(set(kind) - {"positive"}, only_v3=False)})
         return res
 
     started = time.time()
@@ -190,7 +196,9 @@ def main() -> int:
             head.eval()
             rows_c = check(range(EARLY) if step == args.steps else range(0, EARLY, 4))
             mean = sum(r["balanced_accuracy"] for r in rows_c) / len(rows_c)
-            print(f"step {step:5d}  held-out balanced accuracy {mean:.3f}  ({time.time() - started:.0f} s)", flush=True)
+            whole = sum(r["whole_evaluation_set_balanced_accuracy"] for r in rows_c) / len(rows_c)
+            print(f"step {step:5d}  held-out balanced accuracy {mean:.3f} (v3 check tiles), {whole:.3f} (whole "
+                  f"evaluation set)  ({time.time() - started:.0f} s)", flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split}, out / f"head_step_{step:06d}.pt")
             head.train()
             if step == args.steps:
