@@ -156,11 +156,13 @@ def main() -> int:
                 cells.append({"step": i, "picture": picture(x0), "attention": att[0].numpy(),
                               "push": None if pm is None else pm.numpy(), "logit": float(lg[0])})
             strip[name] = cells
-            extras = o.extras
+            extras = o.extras or {}
+            applied = extras.get("applied_norm_per_step", [0.0] * ctx.num_inference_steps)
+            eps_n = extras.get("eps_norm_per_step", [1.0] * ctx.num_inference_steps)
             record["runs"][f"seed {seed}, {name}"] = {
                 "logit_per_step": logits,
-                "push_over_eps_per_step": [a / e for a, e in zip(extras["applied_norm_per_step"], extras["eps_norm_per_step"])],
-                "capped_per_step": extras["capped_per_step"]}
+                "push_over_eps_per_step": [a / e for a, e in zip(applied, eps_n)],
+                "capped_per_step": extras.get("capped_per_step", [False] * ctx.num_inference_steps)}
             print(f"seed {seed}, {name}: logit step 0 {logits[0]:.2f}, step 10 {logits[10]:.2f}, "
                   f"step 49 {logits[-1]:.2f}", flush=True)
 
