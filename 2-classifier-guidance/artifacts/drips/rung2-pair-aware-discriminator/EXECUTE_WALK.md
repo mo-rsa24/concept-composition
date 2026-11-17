@@ -6,11 +6,12 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Plan 22 (the benchmark's 48 pairs as training data) is under way: 768 renders (joint and product,
-seeds 1 to 8) on both `mscluster107` cards into the scratch folder since 2026-11-17 15:30 UTC,
-about 2.6 h. Then Claude calls the joint pictures and screens the products, and both
-discriminators (head only; head with adapters) train with the held-out check by pair. `/datasets`
-still down at 15:20 UTC; the cap-0.3 rerun waits for it.
+Waiting for `/datasets` (down since about 13:10 UTC on 2026-11-17). The reader stopped plan 22's
+re-renders at 15:44 UTC as a duplication of the benchmark's own pictures: 16 of 48 pairs had
+finished in `/home-mscluster/mmolefe/poe_repair_min_scratch/.../rung2/benchmark/`, kept, not used.
+When `/datasets` reads again: plan 22 builds its training set from the benchmark's original
+pictures, cached drawing states and `verdicts.json`; the queued cap-0.3 rerun launches on its own
+(watcher checks every 3 minutes until about 17:25 UTC).
 
 ## The stop point
 
@@ -37,6 +38,7 @@ Seed 1, one tile per column.
 | fewer than 10 positives | 16 extra draws, fresh noise under seeds 5 to 8 (generator 10,000 + 100 × seed + draw), the two pair wordings | re-render the same seeds (identical pictures); CO3 renders | reader ("agree") | a seed's cached noise repeats its picture; CO3 positives would teach CO3's look |
 | calls on the extra tiles | Claude calls, reader can veto after | reader calls every tile | reader (asked for a /loop) | keeps the loop unattended |
 | outputs while `/datasets` is down | v2 path in `/home-mscluster/mmolefe/poe_repair_min_scratch`, about 1 GB, moved to `/datasets` once it is back | wait for `/datasets` | reader ("go") | the outage length is unknown; the v2 retrain is the more informative follow-up |
+| plan 22's data | wait for `/datasets` and use the benchmark's original pictures and verdicts | re-render the 48 pairs from seed-number noise and call them afresh | reader ("stop and wait") | re-rendering duplicates pictures already judged |
 | time box | 3 sittings, about 4.5 hours | own | reader took the default | |
 
 ## Ticks this walk
