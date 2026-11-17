@@ -204,10 +204,12 @@ For Claude to execute. Ask Claude to do these.
   ✓ verified 2026-11-17: Quadro RTX 8000, torch 2.5.1; plain 27.2 to 27.7 s, guided 42.1 to
   42.3 s, ratio 1.53, N = 2; the cap fired on 2 to 6% of steps at strength 30 ·
   `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/compute/timing.json`
-- [ ] **1.2** The training set: on seeds 1 to 8, the joint prompt, "a cat on the left and a dog on
+- [x] **1.2** The training set: on seeds 1 to 8, the joint prompt, "a cat on the left and a dog on
   the right", "a cat and a dog sitting apart", a lone cat, a lone dog, and the plain product; one
   sheet. If fewer than 10 positives pass the reader's calls, more seed 5 to 8 renders with the two
   wordings.
+  ✓ verified 2026-11-17: 48 renders on `mscluster107` GPU 0, 127 to 130 s per seed; final latents
+  saved beside each tile · `rung2/training_set/`, `training-set/training-set-sheet.png`
 - [ ] **1.3** The discriminator: plan 18's trunk with a fresh one-logit head, trained on the
   checked positives against the product's renders and the lone animals, all noised the same way.
   Before it pushes anything, balanced accuracy on fresh noise draws of the training images of at

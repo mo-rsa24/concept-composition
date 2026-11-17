@@ -6,9 +6,8 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 1, the timing, is measured and ticked (1.1): plain 27.5 s, guided 42.2 s, N = 2, about
-2.1 GPU-hours for the rung. Waiting on the reader's yes (2.1) and the prompt wording before
-round 2.
+Round 2, the training set: 48 renders landed (1.2 ticked). Claude's draft calls are in
+`training-set/calls-draft.csv` (9 draft positives); waiting on the reader's calls (2.2).
 
 ## The stop point
 
@@ -35,11 +34,13 @@ Seed 1, one tile per column.
 
 ## Ticks this walk
 
+- 1.2 the training set · ✓ verified 2026-11-17: 48 renders, latents saved · `rung2/training_set/`
 - 1.1 the timing · ✓ verified 2026-11-17: Quadro RTX 8000 on `mscluster107` GPU 0; plain 27.2 to 27.7 s, guided 42.1 to 42.3 s, N = 2 · `rung2/compute/timing.json`
 
 ## Repairs and changes
 
 - added: plan 21 written from the open (you approved, step 0)
+- the product's wording set to "a cat" × "a dog" in the review file (you approved, step 1)
 - route instruction 16 rewritten to the review file's three calls (you approved, step 0)
 
 ## Out of the session
@@ -47,6 +48,7 @@ Seed 1, one tile per column.
 | Id | Kind | Serves | State |
 |---|---|---|---|
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
+| PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
 
 ## Closing pass owed
 
