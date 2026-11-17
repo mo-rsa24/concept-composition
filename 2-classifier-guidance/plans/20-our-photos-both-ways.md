@@ -33,6 +33,7 @@ scale-up ladder and gates nothing.
 - [Orchestration](#orchestration)
 - [References](#references)
 - [Next step](#next-step)
+- [Engagement Instructions](#engagement-instructions)
 
 ## Quick context
 
@@ -144,6 +145,9 @@ push, with pictures no more damaged than the plain product's. Judged by the read
 full-resolution tiles, each called single animal, hybrid, two bodies, or two clear animals. The
 pair-aware push is read at weights 1 and 2.
 
+The bar is copied into [the review file](review/20-our-photos-both-ways.md), which holds the runs
+and, later, the verdict.
+
 **Time box:** 4 sittings, about 4.5 hours of the reader's time, plus the training wall clock.
 
 ## Environment Facts This Plan Depends On
@@ -178,15 +182,13 @@ For Claude to execute. Ask Claude to do these.
 
 ◀ **Needs: [2. Test each piece](#2-test-each-piece)** walked, since this plan was written by the walk and is checked at its close.
 
-- [ ] **0.1** `/verify-plan` on this file, then `/xref-pillar` on it, at the walk's close.
+- [ ] **0.1** `/verify-plan 2-classifier-guidance/plans/20-our-photos-both-ways.md`, then `/xref-pillar 2-classifier-guidance/plans/20-our-photos-both-ways.md`, at the walk's close.
 
-▶ **Next: [the next step](#next-step)**
+▶ **Next: [the close out](#close-out--record-what-this-plan-taught)**
 
 ### 1. 🔧 Build the six pieces
 
 ◀ **Needs: nothing first.** This group starts the walk; [group 0](#0--check-this-plan-before-working-from-it) runs at its close.
-
-▶ **Next: [2. Test each piece](#2-test-each-piece)**
 
 - [x] **1.1** The image set: square crops resized to 256 and 64 px under
   `classifier_guidance_photos/images/{256,64}/`, filenames carrying the label, and a `counts.json`.
@@ -201,10 +203,10 @@ For Claude to execute. Ask Claude to do these.
 - [x] **1.2** Label dropout in the 64 px launcher, a 300-step timing run, then the two trainings
   (without both-animal images, and with all) on free cards in the order of
   [Considerations](#considerations). `train_64.py` through `launch_gpu.sh`, 50,000 steps at batch
-  64, a checkpoint every 5,000. ✓ verified 2026-11-17: timing run 300 steps in 278 s on
-  `mscluster111` (295.1 M parameters, loss 1.02 to 0.062); without both-animal images on
-  `mscluster111` GPU 0, W&B `wubhxhse`, 400 images; all images on `mscluster112` GPU 0, W&B
-  `pnwlwh0f`, 550 images; both launched 07:35 UTC at 30.6 GB and 100% utilisation
+  64, a checkpoint every 5,000. ✓ verified 2026-11-17: the 300-step timing run took 278 s (295.1 M
+  parameters, loss 1.02 to 0.062); the model without both-animal images trains on 400 images and
+  the other on all 550. Run ids, cards and launch times are in
+  [the review file's Runs table](review/20-our-photos-both-ways.md#runs)
 - [ ] **1.3** The 256 px pair-aware classifier: 512 product draws at 250 respaced steps, the
   released model pushed at scale 10 by the released classifier's cat and dog classes; the pair-aware
   classifier on both-animal images against those draws and the single-animal images, noised forward.
@@ -221,6 +223,22 @@ For Claude to execute. Ask Claude to do these.
   the pair-aware push at weights 1 and 2; the nearest training image for each two-animal tile.
 - [ ] **1.6** The calls as a CSV, the card, the finding in `report/`, the board redrawn with
   `--step 8`, and the route rows.
+
+▶ **Next: [2. Test each piece](#2-test-each-piece)**
+
+### Close out. 🔄 Record what this plan taught
+
+◀ **Needs: [group 0](#0--check-this-plan-before-working-from-it)** done at the walk's close, and
+every group above attempted, including any that went red.
+
+- [ ] **Capture the failures this plan hit**, while they are still fresh.
+  - Paste: `/ingest-error-pattern --from-run-log 2-classifier-guidance/plans/20-our-photos-both-ways.md`
+  - Done when: each failure has an entry in `environment/known-failures.md`, or there were none.
+- [ ] **Bring the tree current** with what ran.
+  - Paste: `/sync-plan-tree 2-classifier-guidance/plans/20-our-photos-both-ways.md — <one line on what the sheets showed>`
+  - Done when: this plan's ticks, the route's rows and the board's rows A2r and A2c match what ran.
+
+▶ **Next: [the next step](#next-step).**
 
 ## Instructions
 
@@ -260,15 +278,48 @@ checkpoints; one sheet per model; the per-tile calls as a CSV; the card; a findi
 
 Navigation: ⬅️ [Previous](#outputs) | 📋 [TOC](#table-of-contents) | [Next](#error-matrix) ➡️
 
-| Figure | What it shows |
-|---|---|
-| `sheet-released-256.png` | seeds 1 to 16 (rows) by the product, plus the pair-aware push at weight 1, at weight 2 (columns), at 256 px |
-| `sheet-64-no-both.png` | the same at 64 px for the model trained without both-animal images, with the separate-label column |
-| `sheet-64-all.png` | the same for the model trained on all images |
+#### Pending: to be generated from prompts
+
+Nothing pending. The scope's [illustrated map](diagram-prompts.md) holds four prompts, all
+rendered; its process capstone (`diagrams/classifier-guided-poe-04-four-stages-two-classifiers.png`)
+draws this plan's two arms as stage 3.
+
+#### Generated during plan execution
+
+All in `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/`.
+
+| Item | Lane | Description | Generated by | Status | Details |
+|---|---|---|---|---|---|
+| [`example-one-per-label.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png) | — | one image per label at both sizes | task 1.1, `build_photo_set.py` | ✅ on disk, worked by task 1.1 and instruction 2.1 | four images across (a cat, a dog, a COCO both-animal photo, an SD3.5 both-animal render), 256 px above and the same image at 64 px below |
+| [`coco-both-crops.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png) | — | every COCO both-animal crop | task 1.1, `build_photo_set.py` | ✅ on disk, worked by task 1.1 | all 38 COCO both-animal crops in a grid, each titled with the share of the animals' box area it keeps, 0.57 to 1.00 |
+| [`push-scale-check-256.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png) | — | whether our separate-label classifier steers the released model | task 1.3 | ✅ on disk, worked by task 1.3 | draws 0 to 3 across by push scale 10, 30 and 100 down, from the released 256 px model pushed by `separate_256.pt`; no tile shows a cat |
+| `sheet-released-256.png` | — | the released-model arm's sheet | task 1.4 | ⏳ not on disk | seeds 1 to 16 (rows) by the product, plus the pair-aware push at weight 1, at weight 2 (columns), at 256 px |
+| `sheet-64-no-both.png` | — | the 64 px model trained without both-animal images | task 1.5 | ⏳ not on disk | the same at 64 px, with the separate-label column |
+| `sheet-64-all.png` | — | the 64 px model trained on all images | task 1.5 | ⏳ not on disk | the same for the model trained on all images |
+
+#### Organization workflow
+
+1. Tasks 1.4 and 1.5 save each sheet into the results folder above.
+2. Each gets a card entry in that folder's `README.md`, per `ARTIFACT_TREE_FORMAT.md`.
+3. The Status column names the file once it is on disk.
+4. The finding in `report/` and [the review file](review/20-our-photos-both-ways.md) link the
+   sheets.
 
 ## Error Matrix
 
 Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) | [Next](#orchestration) ➡️
+
+#### From global catalog
+
+No entry in `~/.claude/GLOBAL_ERROR_CATALOG.md` matches this plan's failures.
+
+#### From project catalog
+
+No entry in `environment/known-failures.md` matches this plan's failures.
+
+#### Named for this plan, not yet catalogued
+
+The close out's `/ingest-error-pattern` moves any of these that fires into the project catalog.
 
 | Symptom | Cause | Fix |
 |---|---|---|
@@ -281,6 +332,14 @@ Navigation: ⬅️ [Previous](#error-matrix) | 📋 [TOC](#table-of-contents) | 
 
 The walk map is `2-classifier-guidance/artifacts/drips/our-photos-both-ways/EXECUTE_WALK.md`.
 
+| Step | Command | Triggered by | Outcome |
+|---|---|---|---|
+| Walk the plan | `/drip-execute-plan 2-classifier-guidance/plans/20-our-photos-both-ways.md` | the recommended prompt | the open tasks run in order, one per round |
+| Check the plan | `/verify-plan 2-classifier-guidance/plans/20-our-photos-both-ways.md` | task 0.1, at the walk's close | conformance and thin instructions reported |
+| Cross-reference the plan | `/xref-pillar 2-classifier-guidance/plans/20-our-photos-both-ways.md` | task 0.1, at the walk's close | terms already explained elsewhere linked |
+| Capture failures | `/ingest-error-pattern --from-run-log 2-classifier-guidance/plans/20-our-photos-both-ways.md` | the close out | failures entered in `environment/known-failures.md` |
+| Bring the tree current | `/sync-plan-tree 2-classifier-guidance/plans/20-our-photos-both-ways.md` | the close out | ticks, the route's rows and the board match what ran |
+
 ## References
 
 Navigation: ⬅️ [Previous](#orchestration) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
@@ -292,9 +351,45 @@ Navigation: ⬅️ [Previous](#orchestration) | 📋 [TOC](#table-of-contents) |
 
 ## Next step
 
-Navigation: ⬅️ [Previous](#references) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#references) | 📋 [TOC](#table-of-contents) | [Next](#engagement-instructions) ➡️
 
 The route's step 11 reads this plan's card and finding.
+
+## Engagement Instructions
+
+Navigation: ⬅️ [Previous](#next-step) | 📋 [TOC](#table-of-contents)
+
+How to check the finished plan, from the laptop checkout's root. The first check can be run now.
+
+**The image set** (task 1.1):
+
+```bash
+cat 2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/photo-set-counts.json
+```
+
+Expected: `"per_label"` reads cat 200, dog 200, both 150, and `"total"` reads 550.
+
+**The five classifiers** (tasks 1.3 and 1.5):
+
+```bash
+scripts/cluster.sh sh "ls /datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_photos/classifiers/"
+```
+
+Expected: five checkpoints, `separate_256.pt` and `separate_64.pt` among them, and one pair-aware
+classifier for each of the three models.
+
+**The sheets and the calls** (tasks 1.4 to 1.6):
+
+```bash
+R=2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos
+ls $R/sheet-released-256.png $R/sheet-64-no-both.png $R/sheet-64-all.png $R/*.csv
+```
+
+Expected: three sheets and the per-tile calls CSV.
+
+**The verdict is recorded.** Open [the review file](review/20-our-photos-both-ways.md#the-question-written-before-the-run).
+Expected: the question ticked, with each arm's count out of 16 for the pair-aware and the
+separate-label push side by side.
 
 ## Cross-references
 

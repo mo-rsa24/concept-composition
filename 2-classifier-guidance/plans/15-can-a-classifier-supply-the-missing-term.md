@@ -3,15 +3,17 @@
 ## Recommended prompt
 
 ```text
-/drip-execute-plan 1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/15-can-a-classifier-supply-the-missing-term.md
+/drip-execute-plan 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md
 ```
 
 ## Position in the plan tree
 
-[Root](../../MASTER_PLAN.md) › [is the gap the samplers or the models](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/MASTER_PLAN.md) ›
-this plan. Step 78 in the root running order, after
-[hypothesis 14](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/plans/hypothesis/14-does-a-clip-free-model-hybridise.md), which asks whether CLIP is why the
-product fuses. This plan asks whether a classifier can push it apart again.
+[Root](../../MASTER_PLAN.md) › [the classifier-guided PoE route](route-classifier-guided-poe-from-toy-to-animals.md) ›
+this plan. The route re-routes it after rung 2 closes: [step 11](route-classifier-guided-poe-from-toy-to-animals.md#11--walk-the-ladders-retrospectives-attack-the-claim-re-route-to-the-paper)
+walks the ladder's retrospectives and prints the re-route for the paper's table, the head
+ablations and this plan. Its head answers "a cat is present" and "a dog is present" separately and
+is trained never to call a fused animal both, which makes it the pair-aware classifier at the
+route's fourth stage, beside the species-only pushes of plans 17 and 18.
 
 ## Table of contents
 
@@ -33,8 +35,11 @@ product fuses. This plan asks whether a classifier can push it apart again.
 - [Orchestration](#orchestration)
 - [References](#references)
 - [Next step](#next-step)
+- [Engagement Instructions](#engagement-instructions)
 
 ## Quick context
+
+Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
 
 **What this is about**
 
@@ -68,6 +73,8 @@ plain product, the damped product and the joint prompt as three reference column
 same loop, every tile called by eye at full resolution.
 
 ## Considerations
+
+Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) | [Next](#the-claim-under-test) ➡️
 
 **The classifier's own accuracy is not the gate, by decision.**
 
@@ -108,11 +115,15 @@ could work. The closing report says so.
 
 ## The claim under test
 
+Navigation: ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#why-this-plan-exists) ➡️
+
 A two-output presence head on noisy latents, whose labels define a hybrid as neither animal
 present, supplies a gradient that moves plain product sampling toward two separate animals, and
 the move is visible as the head trains.
 
 ## Why this plan exists
+
+Navigation: ⬅️ [Previous](#the-claim-under-test) | 📋 [TOC](#table-of-contents) | [Next](#what-happens) ➡️
 
 **Every repair tried so far either adds another expert or searches the noise.**
 
@@ -130,6 +141,8 @@ into a loss for the first time, which is why the rule sits in the source as a na
 rather than in prose.
 
 ## What happens
+
+Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#description) ➡️
 
 ```
 91 both-animal photos      ──> both labels 1
@@ -153,6 +166,8 @@ this repo's product renders ──> hybrid ──> both 0     ──┘         
 
 ## Description
 
+Navigation: ⬅️ [Previous](#what-happens) | 📋 [TOC](#table-of-contents) | [Next](#purpose) ➡️
+
 Piece 1 writes the labelling rule as named constants, mines hybrid negatives from existing
 product renders, labels every image, and builds a sheet to look at. Piece 2 writes the composer
 and its sampler, with a zero-weight canary that must be byte-identical to plain product. Piece 3
@@ -162,16 +177,22 @@ checkpoint with its three reference columns, calls every tile by eye, and writes
 
 ## Purpose
 
+Navigation: ⬅️ [Previous](#description) | 📋 [TOC](#table-of-contents) | [Next](#goal) ➡️
+
 Decide whether a presence classifier's gradient makes plain product composition draw two animals,
 and see whether that emerges as the classifier learns.
 
 ## Goal
+
+Navigation: ⬅️ [Previous](#purpose) | 📋 [TOC](#table-of-contents) | [Next](#environment-facts-this-plan-depends-on) ➡️
 
 The weight-sweep sheet, `calls.json` with one record per tile, and a card stating the best
 weight's count out of eight beside plain product's 0 of 8, the damped product's count and the
 joint prompt's 8 of 8.
 
 ## Environment Facts This Plan Depends On
+
+Navigation: ⬅️ [Previous](#goal) | 📋 [TOC](#table-of-contents) | [Next](#success-and-failure-outcomes) ➡️
 
 **The `co3` absolute python path.** `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`. A
 bare `python` in a job script is a catalogued failure here.
@@ -198,6 +219,8 @@ sweep is about 50 minutes and one probe of four tiles is about 3.5 minutes.
 
 ## Success and failure outcomes
 
+Navigation: ⬅️ [Previous](#environment-facts-this-plan-depends-on) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
+
 Proposed, for you to tick or rewrite in [the review file](review/15-can-a-classifier-supply-the-missing-term.md)
 before the head trains.
 
@@ -218,9 +241,28 @@ its own line, not a null and not a support.
 
 ## Tasks
 
+Navigation: ⬅️ [Previous](#success-and-failure-outcomes) | 📋 [TOC](#table-of-contents) | [Next](#instructions) ➡️
+
 For Claude to execute. Ask Claude to do these.
 
+### 0. 🧭 Check this plan before working from it
+
+◀ **Needs: nothing first.** Run it before the first open task.
+
+- [ ] **0.1** Check this plan conforms to its template and its instructions are concrete.
+  - Paste: `/verify-plan 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md`
+  - Done when: the report comes back clean, or its proposals have been applied.
+- [ ] **0.2** Cross-reference this plan's terms against `context/`, `environment/`, `runbook/`,
+  `report/` and the classifier-guidance learning journey, in case a term is already explained
+  elsewhere.
+  - Paste: `/xref-pillar 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md`
+  - Done when: the scan finds no candidates, or its proposed links have been applied.
+
+▶ **Next: [task 3.2](#3--train-the-head-and-probe-it-while-it-trains)**, the first open task.
+
 ### 1. 🔬 The labelled set, and the rule in the source
+
+◀ **Needs: nothing first.** This group starts the plan's own work.
 
 - [x] ✅ **1.1** Write the labelling rule as named constants and the labeller that applies them:
       both labels 1 needs two separate animal boxes, each carrying one species on its own, and a
@@ -311,7 +353,23 @@ weight band are chosen from what you saw.
 
 ▶ **Next: [instruction 8](#8--call-every-tile-by-eye)**, the calls, which are yours.
 
+### Close out. 🔄 Record what this plan taught
+
+◀ **Needs: [instruction 8](#8--call-every-tile-by-eye)** done, and every group above attempted,
+including any that went red.
+
+- [ ] **Capture the failures this plan hit**, while they are still fresh.
+  - Paste: `/ingest-error-pattern --from-run-log 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md`
+  - Done when: each failure has an entry in `environment/known-failures.md`, or there were none.
+- [ ] **Bring the tree current** with what ran.
+  - Paste: `/sync-plan-tree 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md — <one line on what the sweep showed>`
+  - Done when: this plan's ticks, the route's rows and the Error Matrix below match what ran.
+
+▶ **Next: [the next step](#next-step).**
+
 ## Instructions
+
+Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](#outputs) ➡️
 
 For you to follow manually. Do these yourself.
 
@@ -352,7 +410,8 @@ baseline, and every later comparison would be against a moved reference.
 7.2 **Click Media** and step through the probe sheets in training-step order.
 
 7.3 **Write down the first step at which you see two animals**, if you ever do, and at which
-weight.
+weight, in [the review file's question on whether composition emerges as the head
+trains](review/15-can-a-classifier-supply-the-missing-term.md#written-before-the-run-answered-after).
 
 7.4 **Check the pictures are not being destroyed** as the count rises. A smeared frame with two
 animal shapes in it is the outcome this plan warned about, not a success.
@@ -373,10 +432,12 @@ clear animals, one hybrid, or one single animal.
 
 ✅ What you want: the best weight's count out of eight, beside all three reference columns.
 
-▶ **Next: the closing pass.** The figure is filed with its card entry, the finding goes to
-`report/`, and `sync-plan-tree` reconciles the scope.
+▶ **Next: [the close out](#close-out--record-what-this-plan-taught)**, once the figure is filed
+with its card entry and the finding is written to `report/`.
 
 ## Outputs
+
+Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | [Next](#figure-catalog) ➡️
 
 | What | Where |
 |---|---|
@@ -387,19 +448,54 @@ clear animals, one hybrid, or one single animal.
 | the trainer | `2-classifier-guidance/scripts/train_presence_head.py` |
 | the checkpoints and probe sheets | `/datasets/mmolefe/poe_repair_min/outputs/presence_head/` |
 | the probe time series | W&B, `prime_lab/poe-repair-animals-compose` |
+| the first training step and classifier weight at which a probe sheet shows two animals, or "never" (instruction 7.3) | [the review file](review/15-can-a-classifier-supply-the-missing-term.md#written-before-the-run-answered-after), under the question on whether composition emerges as the head trains |
 | the sweep sheet, the calls, the accuracy figure and the card | `2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/` |
 | the verdict | [the review file](review/15-can-a-classifier-supply-the-missing-term.md) |
 
 ## Figure Catalog
 
-| Figure | What is on each axis, and where the numbers come from |
-|---|---|
-| `weight-sweep-sheet.png` | eight held-out cat-by-dog seeds down the rows; across, four classifier weights then three reference columns (plain product, each expert damped to a constant 3.0, the joint prompt). One tile is one 1,024 px render, all from one loop on one device. Calls are made on the full-resolution tiles, not on this sheet. |
-| `accuracy-by-step.png` | balanced accuracy on a 0-to-1 scale on y, the sampling step from 0 to 49 on x, one curve per label (a cat instance is present, a dog instance is present), held-out images. Numbers from the probe rows logged to W&B, written to the sidecar beside the figure. Not a gate: logged while training, drawn at the end. |
-| the probe sheet | two held-out seeds down, two classifier weights across, one image per 250 training steps, in W&B. Two seeds is a picture, never a rate. |
-| [our guided sampler code walk](https://claude.ai/artifact/WwzF3fXBFFb6arZySDA8qv) | `poe_repair/methods/_classifier_guided.py` beside an 11-box diagram coloured by role, each block of lines with the equation it computes and the authors' matching line; the journey's miniature run through the file's own push lines (w = 1 lands on ε_true with the cap off; the default cap of 0.1 fires); push over \|ε_PoE\| per render from the 2026-11-05 product run against the 0.1 cap. Files and card in `2-classifier-guidance/artifacts/results/what-each-line-of-our-guided-sampler-computes/` |
+Navigation: ⬅️ [Previous](#outputs) | 📋 [TOC](#table-of-contents) | [Next](#error-matrix) ➡️
+
+#### Pending: to be generated from prompts
+
+Nothing pending. The scope's [illustrated map](diagram-prompts.md) holds four prompts, all
+rendered; its process capstone (`diagrams/classifier-guided-poe-04-four-stages-two-classifiers.png`)
+draws this plan's presence head as the pair-aware classifier at stage 4.
+
+#### Generated during plan execution
+
+| Item | Lane | Description | Generated by | Status | Details |
+|---|---|---|---|---|---|
+| `weight-sweep-sheet.png` | — | the sweep, every tile in one picture | task 4.2 | ⏳ not drawn yet | eight held-out cat-by-dog seeds down the rows; across, four classifier weights then three reference columns (plain product, each expert damped to a constant 3.0, the joint prompt). One tile is one 1,024 px render, all from one loop on one device. Calls are made on the full-resolution tiles, not on this sheet. |
+| `accuracy-by-step.png` | — | how well the head reads each label at each noise level | task 4.3 | ⏳ not drawn yet | balanced accuracy on a 0-to-1 scale on y, the sampling step from 0 to 49 on x, one curve per label (a cat instance is present, a dog instance is present), held-out images. Numbers from the probe rows logged to W&B, written to the sidecar beside the figure. Not a gate: logged while training, drawn at the end. |
+| the probe sheet | — | the head's effect on renders as it trains | task 3.2, logged to W&B | ⏳ not drawn yet: the probe is not written | two held-out seeds down, two classifier weights across, one image per 250 training steps, in W&B. Two seeds is a picture, never a rate. |
+| [our guided sampler code walk](https://claude.ai/artifact/WwzF3fXBFFb6arZySDA8qv) | subject | what each line of the sampler computes | its card, below | ✅ published | `poe_repair/methods/_classifier_guided.py` beside an 11-box diagram coloured by role, each block of lines with the equation it computes and the authors' matching line; the journey's miniature run through the file's own push lines (w = 1 lands on ε_true with the cap off; the default cap of 0.1 fires); push over \|ε_PoE\| per render from the 2026-11-05 product run against the 0.1 cap. Files and card in `2-classifier-guidance/artifacts/results/what-each-line-of-our-guided-sampler-computes/` |
+
+#### Organization workflow
+
+1. Tasks 4.2 and 4.3 save the sheet and the accuracy figure, with its sidecar, into
+   `2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/`.
+2. Each gets a card entry in that folder's `README.md`, per `ARTIFACT_TREE_FORMAT.md`.
+3. The Status column above names the file once it is on disk.
+4. The finding in `report/` and the review file link the sheet.
 
 ## Error Matrix
+
+Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) | [Next](#orchestration) ➡️
+
+#### From global catalog
+
+No entry in `~/.claude/GLOBAL_ERROR_CATALOG.md` matches this plan's failures.
+
+#### From project catalog
+
+| Symptom | What it means | What to do | Entry |
+|---|---|---|---|
+| the run completed but wrote nothing | the disk guard checked the wrong filesystem | the guard must read `/datasets`, where the output goes | [poe-disk-001](../../environment/known-failures.md#entry-id-poe-disk-001) |
+
+#### Named for this plan, not yet catalogued
+
+The close out's `/ingest-error-pattern` moves any of these that fires into the project catalog.
 
 | Symptom | What it means | What to do |
 |---|---|---|
@@ -407,11 +503,12 @@ clear animals, one hybrid, or one single animal.
 | the zero-weight render differs from plain product | the composer changed the baseline | the canary is the gate; fix it before any weight is swept |
 | the compose count rises and the pictures look smeared | the gradient is destroying the sample, the way the damped product does | this is its own outcome; no norm statistic may overrule the eye |
 | every probe sheet looks identical | the gradient is being normalised to nothing, or the head's outputs are saturated | print the gradient's norm before and after normalisation, and the two sigmoid values |
-| the run completed but wrote nothing | the disk guard checked the wrong filesystem | the guard must read `/datasets`, where the output goes |
 | `squeue` shows nothing while the run is alive | `biggpu` allows one job per user, so the run is outside Slurm | harvest with `pgrep -af 'presence_head\|train'` on the session node |
 | the labeller calls two-animal frames hybrid | the species classifier has never been tested on overlapping boxes | report the count it could not call; instruction 5 exists to catch this |
 
 ## Orchestration
+
+Navigation: ⬅️ [Previous](#error-matrix) | 📋 [TOC](#table-of-contents) | [Next](#references) ➡️
 
 Walked with `/drip-execute-plan`. The head reuses
 [the twist head's](../../poe_repair/experiments/twisted_smc/twist.py) FiLM body and the data
@@ -420,7 +517,17 @@ photo-to-latent loop, rather than re-implementing either. The closing pass files
 `ARTIFACT_TREE_FORMAT.md`, writes the finding per `REPORT_FORMAT.md`, and runs `sync-plan-tree`
 from the scope root.
 
+| Step | Command | Triggered by | Outcome |
+|---|---|---|---|
+| Check the plan | `/verify-plan 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` | task 0.1 | conformance and thin instructions reported |
+| Cross-reference the plan | `/xref-pillar 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` | task 0.2 | terms already explained elsewhere linked |
+| Walk the plan | `/drip-execute-plan 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` | the recommended prompt | the open tasks run in order, one per round |
+| Capture failures | `/ingest-error-pattern --from-run-log 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` | the close out | failures entered in `environment/known-failures.md` |
+| Bring the tree current | `/sync-plan-tree 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md` | the close out | ticks, the route's rows and the Error Matrix match what ran |
+
 ## References
+
+Navigation: ⬅️ [Previous](#orchestration) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
 - [the species instrument and its bars](../../3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py)
 - [how the compose scorer was validated](../../poe_repair/experiments/compose_scorer_validation/validate_detection.py)
@@ -432,7 +539,41 @@ from the scope root.
 
 ## Next step
 
-Task 1.1: the labelling rule, as constants in the source.
+Navigation: ⬅️ [Previous](#references) | 📋 [TOC](#table-of-contents) | [Next](#engagement-instructions) ➡️
+
+Task 3.2, the probe every 250 training steps, once [the route's step 11](route-classifier-guided-poe-from-toy-to-animals.md#11--walk-the-ladders-retrospectives-attack-the-claim-re-route-to-the-paper)
+re-routes this plan. Tasks 1.1 to 3.1 are done.
+
+## Engagement Instructions
+
+Navigation: ⬅️ [Previous](#next-step) | 📋 [TOC](#table-of-contents)
+
+How to check the finished plan, from the laptop checkout's root. The first check can be run now;
+the other two need task 4 and instruction 8 to have landed.
+
+**The canary still holds** (task 2.3):
+
+```bash
+scripts/cluster.sh sh "cat /datasets/mmolefe/poe_repair_min/outputs/presence_head/canary/canary.json"
+```
+
+Expected: one checksum, `c291b259`, across all three renders, and a largest absolute pixel
+difference of 0.
+
+**The sweep landed and every tile was called** (tasks 4.1 to 4.3, instruction 8):
+
+```bash
+R=2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term
+ls $R/weight-sweep-sheet.png $R/accuracy-by-step.png
+python3 -c "import json; print(len(json.load(open('$R/calls.json'))))"
+```
+
+Expected: both figures listed, and 56 calls: 8 held-out seeds by 7 columns (four classifier
+weights, plain product, the damped product, the joint prompt).
+
+**The verdict is recorded.** Open [the review file](review/15-can-a-classifier-supply-the-missing-term.md#the-question-written-before-the-run).
+Expected: the question's box ticked against one of the four outcome lines, with the best weight's
+count out of 8 beside the damped product's count on the same seeds.
 
 ## Cross-references
 

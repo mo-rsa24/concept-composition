@@ -7,14 +7,15 @@ there; what the runs cost, what came back and what it licenses are here.
 ## Recommended prompt (when the run lands)
 
 ```
-/analyze-run @plans/06-is-the-gap-the-samplers-or-the-models/review/15-can-a-classifier-supply-the-missing-term.md — <the best weight's count out of eight, and the damped product's>
+/analyze-run @2-classifier-guidance/plans/review/15-can-a-classifier-supply-the-missing-term.md — <the best weight's count out of eight, and the damped product's>
 ```
 
 ## Position in the plan tree
 
-**Step 78 of 78.** Pairs with
-[hypothesis-15](../15-can-a-classifier-supply-the-missing-term.md). The one order
-is the `## Running order` table in the [repo root MASTER_PLAN.md](../../../MASTER_PLAN.md).
+Pairs with [hypothesis-15](../15-can-a-classifier-supply-the-missing-term.md), which sits under
+[the classifier-guided PoE route](../route-classifier-guided-poe-from-toy-to-animals.md). The route
+re-routes it after rung 2 closes, at
+[step 11](../route-classifier-guided-poe-from-toy-to-animals.md#11--walk-the-ladders-retrospectives-attack-the-claim-re-route-to-the-paper).
 
 ## Table of contents
 
@@ -76,8 +77,9 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| The labelled set and its latent cache | setup | not yet | one VAE pass over the chosen photos and the mined hybrids | `/datasets/mmolefe/poe_repair_min/outputs/presence_head/labelled_set/` | ⚠️ not started |
-| The zero-weight canary, the toy seed through the new composer | gates the claim | not yet | 1 render | the checksum against plain product's render of the same seed | ⚠️ not started |
+| The labelled set | setup | 2026-11-04, ticked at commit `3605d9d9`; log `/datasets/mmolefe/poe_repair_min/outputs/presence_head/logs/label_set.log` | 298.8 s, the labelling run's elapsed time in that log | `/datasets/mmolefe/poe_repair_min/outputs/presence_head/labelled_set/` | done: 1,028 pictures (200 cat-only, 200 dog-only and 91 both-animal photographs, 93 holding a real pair, 264 holding no animal, 50 fused animals), per the design's task 1.3 |
+| The latent cache over the labelled set | setup | not yet: the trainer builds it on its first run, and the trainer has not launched | one VAE pass over the 1,028 pictures | beside the labelled set | ⚠️ not started |
+| The zero-weight canary, the toy seed through the new composer | gates the claim | 2026-11-04 on `mscluster108`, commit `31affcc4` | 3 renders: plain product, weight 0 with no head, weight 0 with an untrained head | `/datasets/mmolefe/poe_repair_min/outputs/presence_head/canary/canary.json` | done: all three renders share checksum `c291b259`, largest absolute pixel difference 0 (the design's task 2.3); the design's instruction 6, the reader's reading of it, is not ticked |
 | The head, trained with a probe every 250 steps | Tests the claim | not yet | about 2 GPU-hours on one Quadro RTX 8000; roughly 30 probes at 4 renders each | checkpoints and probe sheets under `/datasets/mmolefe/poe_repair_min/outputs/presence_head/`, time series in W&B `prime_lab/poe-repair-animals-compose` | ⚠️ not started |
 | The weight sweep with its three reference columns | Tests the claim | not yet | 56 renders at 1024², 50 steps each, about 50 minutes, one loop one device | `2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/` | ⚠️ not started |
 
@@ -182,8 +184,9 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
-Read the four outcome lines above and either tick the box on the question or rewrite the bars. Then
-[task 1.1](../15-can-a-classifier-supply-the-missing-term.md#1--the-labelled-set-and-the-rule-in-the-source).
+Read the four outcome lines above and either tick the box on the question or rewrite the bars,
+before the head trains at
+[task 3.2](../15-can-a-classifier-supply-the-missing-term.md#3--train-the-head-and-probe-it-while-it-trains).
 
 ## Cross-references
 

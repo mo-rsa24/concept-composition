@@ -1,6 +1,7 @@
 # 🧪 Review: does a small pair-aware discriminator's push make SDXL's cat × dog product draw two animals on seeds it never saw?
 
-**Nothing has run yet.** This file judges rung 2 of the [scale-up ladder](../../report/classifier-guided-poe/board.md#the-scale-up-ladder), run as step 10 of
+**The runs have landed and no reading has been printed.** The result sheet is rendered and
+Claude's draft calls exist; the reader's calls on its tiles have not been made. This file judges rung 2 of the [scale-up ladder](../../report/classifier-guided-poe/board.md#the-scale-up-ladder), run as step 10 of
 [the route from the toy to the animals](../route-classifier-guided-poe-from-toy-to-animals.md);
 its page is [A3q](../../report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md).
 The readings below were written on 2026-11-17, before any SDXL render for this rung, and step 10
@@ -118,9 +119,18 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Run | Kind | Launched at | Cost | Output | State |
 |---|---|---|---|---|---|
-| Compute piece: 4 guided and 4 plain renders timed on the chosen card | setup | not yet | minutes | the GPU-hours, card, fallback and N, written into route step 10 | ⚠️ not started |
-| The discriminator, trained on the checked renders from seeds 1 to 8 | builds the push | not yet | written by the compute piece | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/` | ⚠️ not started |
-| The sheet: seeds 1 to 4 and 9 to 12; plain product, best-of-N, guided and the random push at s = 10, 30, 100 | Tests the claim | not yet | about 0.3 GPU-hours on a Blackwell (inferred until timed) | the same folder, and the card under `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/` | ⚠️ not started |
+States are from plan 21's ticks, its commits and its walk map
+(`2-classifier-guidance/artifacts/drips/rung2-pair-aware-discriminator/EXECUTE_WALK.md`).
+
+| Run | Kind | Launched at | Cost | Output | State |
+|---|---|---|---|---|---|
+| Compute piece: 4 guided and 4 plain renders timed on the chosen card | setup | 2026-11-17 on `mscluster107` GPU 0, PID 713135; recorded at commit `2b678510` | 8 renders, done 09:27 UTC | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/compute/timing.json` | done: plain 27.5 s and guided 42.2 s (medians of 4) on a Quadro RTX 8000, N = 2, about 2.1 GPU-hours for the rung |
+| The training set: seeds 1 to 8, six prompts, then 16 extra fresh-noise draws on seeds 5 to 8 | setup | 2026-11-17 on `mscluster107` GPU 0, PIDs 715633 and 727709; commit `87b2f361` | 48 renders at 127 to 130 s per seed, then 16 more | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/training_set/`; calls in `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/calls.csv` | done: 73 tiles called, 17 positives and 24 intact negatives, none from seeds 9 to 16 (commit `f23e767f`) |
+| The discriminator: the held-out check on seeds 7 and 8, then the final head on all eight seeds | builds the push | 2026-11-17 on `mscluster107` GPU 0, PID 739713; commits `97cdc5f9` and `1088c57f` | about 1,500 steps, done 11:58 UTC | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/discriminator/check-holdout-7-8/gate.json`, `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/discriminator/final-all-seeds/head_step_001500.pt` | done: the check passed on 13 of 20 sampler steps; the final head fits 20 of 20 |
+| The sheet: seeds 1 to 4 and 9 to 12; plain product, best-of-N, guided and the random push at s = 10, 30, 100 | Tests the claim | 2026-11-17 on `mscluster107` GPU 0, PID 754977; launched at commit `1088c57f`, landed at `a9ef4ff5` | 64 tiles, done 12:41 UTC; medians per seed 39.6 s guided and 56.0 s for best-of-2 (`result.json`) | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/results/`; sheet and draft calls in `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/` | done: strength 0 identical to plain product on seed 1; random push norm over guided push 1.0000 at every step; the cap fired on 2 to 42% of steps at s = 10, 80 to 98% at 30, 100% at 100. Claude's draft calls only (`calls-draft.csv`); ⚠️ the reader's calls not made |
+| Diagnostics: logit, attention and push through time, every tile kind scored per step | explores | 2026-11-17 on `mscluster107` GPU 1, PID 768102; script written at commit `33fbf630` | done 12:50 UTC | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/` | done (commit `49403ae7`) |
+| The v2 discriminator: pair-prompt failures added as negatives, the same held-out check | builds the push | 2026-11-17 on `mscluster107`, wired at commit `80f99312`, run from `/home-mscluster/mmolefe/poe_repair_min_scratch` while `/datasets` was down | not recorded | the scratch folder; plot `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-v1-against-v2.png` | stopped after its held-out check failed: 0 of 20 sampler steps at 0.75 or more on seeds 7 and 8, 0.53 to 0.63 at every step (commit `a51d6200`); no push rendered |
+| The cap-0.3 rerun: seeds 1 to 4 and 9 to 12 at s = 100 with the cap at 0.3 | Tests the claim | not yet: needs the first head, which is on `/datasets` only, and `/datasets` has returned Input/output error since about 13:10 UTC | 16 guided renders | `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/` | ⚠️ not started |
 
 ## The question written before the run
 
@@ -234,12 +244,12 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| N for best-of-N | step 10's compute piece timing guided and plain renders on one card | the best-of-N column |
 | A3q's outcome line trains on "the product's renders from seeds 1 to 4"; route step 10 trains on seeds 1 to 8. Seeds 1 to 4 are training seeds either way, so the bar holds under both | the training-set sheet in step 10, piece 1 | nothing in this bar |
 
 ## Next step
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Route step 10's compute piece, started with the `/drip-execute-plan --request` prompt in
-[the route](../route-classifier-guided-poe-from-toy-to-animals.md).
+The reader's calls on the result sheet's 64 tiles, per
+[instruction 2.4 of plan 21](../21-rung2-a-small-discriminator-steers-cat-x-dog.md#2-test-each-piece);
+then task 1.5 prints the reading with its counts.
