@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 2, the separate-label classifier: built, waiting on test 2.2
+**On:** piece 2 closed; waiting on the reader: which classifier the separate-label bar is read on
 
 ## Stop point
 
@@ -42,6 +42,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | fix | scale-0 check made bit for bit in the same loop: 200 of 200 steps |
 | 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
 | 1.2 | separate-label classifier trained, accuracy within 0.012 of the closed-form best at every checked step |
+| 2.2 | Claude ran at the reader's word: trained 0, 0, 2, 10; best possible 0, 1, 13, 34; bar line pass (highest 10) |
 | 2.1 | Claude typed `eps - scale * np.sqrt(1 - a_t) * grad` and ran the test: scale 0 1 of 300 draws off by 6.2e-8, labels 300 of 300 unchanged; scale 1 vs true score 6.7e-16; crisp 0, 0, 112, 300, 300 |
 
 ## Answer keys (held until the reader's done)
@@ -49,7 +50,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | Piece | What was predicted | Key | Where |
 |---|---|---|---|
 | 1 | crisp pairs of 300 with the true correction at scale 0.5 | 112 (overlaid 188), shown: no prediction given | scratchpad `key-port/port.json` |
-| 2 | crisp pairs of 300 with the trained separate-label push at scale 10 | 10; best possible at scale 10: 34 | scratchpad `key-separate/separate-label-guide.json` |
+| 2 | crisp pairs of 300 with the trained separate-label push at scale 10 | 10, shown: no prediction given, the reader's run matched the key on all nine rows; best possible at scale 10: 34 | scratchpad `key-separate/separate-label-guide.json` |
 
 ## Out in runs, threads and handoffs
 
@@ -58,6 +59,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 
 ## How to approach this next time
 
+- A separate-label classifier trained on data that holds the pair with both labels favours the pair when sharpened; check the best possible classifier beside the trained one before reading a pass.
 - Port guidance by converting score to noise once (ε = −σ_t · score), then check the push at scale 0 and the perfect push at scale 1 before training anything.
 
 ## Closing pass owed

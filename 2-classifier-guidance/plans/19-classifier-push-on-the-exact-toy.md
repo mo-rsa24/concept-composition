@@ -171,12 +171,14 @@ For you to follow manually. Do these yourself.
   200 of 200 steps; against a separate unguided run 0 of 300 draws differ; scale 1 against the
   true-score sampler 6.7e-16; crisp pairs of 300: unguided 0, scale 0 0, scale 0.5 112, scale 1 300,
   true score 300 · `port.json`
-- [ ] **2.2** From the toy's notes folder run
+- [x] **2.2** From the toy's notes folder run
   `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py separate-guide`
   (about 60 s). You should see nine count lines (unguided, then the trained and the best possible
   classifier at scales 1, 2, 5 and 10) and a bar line naming the trained push's highest crisp count
   with pass or miss. `FileNotFoundError` on `separate-label-classifier.pt` means `separate-train` has
-  not run.
+  not run. ✓ verified 2026-11-17, run by Claude at the reader's word ("you do it"): crisp pairs of 300,
+  trained at scales 1, 2, 5, 10: 0, 0, 2, 10; best possible: 0, 1, 13, 34; unguided 0 · the trained
+  push's highest is 10, inside 15 · `separate-label-guide.json`
 - [ ] **2.3** The discriminator's test, written when piece 3 is built.
 - [ ] **2.4** The bar, read from the counts.
 - [ ] **2.5** The diagnosis figures, read by eye.
