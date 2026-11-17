@@ -13,6 +13,13 @@ fail the 0.75 bar on the held-out pairs (CLIP 0.710, DINOv2 0.613 and 0.638;
 "cat" and "dog" attention overlap at a median 0.53 to 0.81 in the product against 0.22 to 0.44 in the
 joint prompt over steps 2 to 40, already apart by step 2; joint pictures that composed and those that
 did not overlap alike (`results/.../attention/`). Plan 23 (Kim et al. at scale) is written and waits.
+The detector's plurality labels were checked against the 443 hand-called pictures before use: with
+the pair's nouns it counts 80 of 105 hybrids as two bodies (balanced 0.632), with "animal" 71 of 105
+(0.584); it counts bodies, so two bodies with swapped features read as plural. Queued on
+`mscluster111` once plan 23's 1,920 drawings finish (about 20:10 UTC): detector boxes on every
+drawing, then a Readout-Guidance-style count head (`scripts/rung2/train_count_head.py`), checked on
+good pairs against singles and hybrids. Route steps 10f to 10h added for Readout Guidance (arXiv
+2312.02150).
 
 ## The stop point
 
