@@ -6,8 +6,9 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 2, the training set: 48 renders landed (1.2 ticked). Claude's draft calls are in
-`training-set/calls-draft.csv` (9 draft positives); waiting on the reader's calls (2.2).
+Round 2, the training set: 48 renders landed (1.2 ticked); the reader accepted the 9 draft
+positives ("agree", `training-set/calls.csv`). Under 10, so 16 extra draws from fresh noise under
+seeds 5 to 8 are next; 2.2 stays open until those are called.
 
 ## The stop point
 
@@ -30,6 +31,7 @@ Seed 1, one tile per column.
 | best-of-N pick | log-odds on the final latent at the last timestep | log-odds summed over steps | reader took the default | |
 | positives | one cat and one dog, apart and intact | any two separate animals | reader took the default | |
 | tile calls | the review file's three calls; route instruction 16 rewritten to match | instruction 16's four levels | reader took the default | |
+| fewer than 10 positives | 16 extra draws, fresh noise under seeds 5 to 8 (generator 10,000 + 100 × seed + draw), the two pair wordings | re-render the same seeds (identical pictures); CO3 renders | reader ("agree") | a seed's cached noise repeats its picture; CO3 positives would teach CO3's look |
 | time box | 3 sittings, about 4.5 hours | own | reader took the default | |
 
 ## Ticks this walk
