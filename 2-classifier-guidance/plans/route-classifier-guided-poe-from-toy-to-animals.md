@@ -1129,3 +1129,8 @@ Navigation: ⬅️ [Previous](#quizzes-and-feedback) | 📋 [TOC](#table-of-cont
 different chain, `calendar` to put the sittings on Google Calendar, or `todoist` to file the runbook
 as ordered subtasks. The background is in
 [the references file](route-classifier-guided-poe-from-toy-to-animals-references.md).
+
+## Cross-references
+
+- The mention of **the route's Quick context, as the source of the dropped-term claim** in [the plan "The dropped term, on four rows"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/07-the-dropped-term-table.md#description).
+- The mention of **the route**, whose stage 2 cites the account, in [the plan "The account you could defend"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/09-the-account-you-could-defend.md#where-this-connects).

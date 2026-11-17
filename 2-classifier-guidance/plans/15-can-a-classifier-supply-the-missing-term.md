@@ -436,3 +436,4 @@ Task 1.1: the labelling rule, as constants in the source.
 ## Cross-references
 
 - The mention of **plan 15**, for its product sampler that still rescales the push, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
+- The mention of **a pair-aware push**, the toy version of this plan's head, in [the plan "The pair-aware push built"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md#where-this-connects).

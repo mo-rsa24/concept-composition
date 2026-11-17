@@ -272,3 +272,6 @@ Task 1.1: what the frozen head believes.
 ## Cross-references
 
 - The mention of **plan 18**, as the run that showed the push steers SDXL only unrescaled, in [the route for classifier-guided PoE](route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).
+- The mention of **a one-species classifier pushed on SDXL cat × dog** in [the plan "The separate-label push built"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md#description).
+- The mention of **a one-species classifier pushed on SDXL cat × dog** in [the master plan of the classifier-guidance journey](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/MASTER_PLAN.md#the-question-this-exists-to-settle).
+- The mention of **the one-species push and its 0 of 16 tiles**, measured on the toy, in [the plan "The separate-label push built"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md#where-this-connects).
