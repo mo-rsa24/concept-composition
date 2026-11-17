@@ -7,8 +7,10 @@ polling until plan 23's drawing workers have finished and every drawing is out.
 """
 from __future__ import annotations
 
+import argparse
 import sys
 import time
+import zlib
 from pathlib import Path
 
 import torch
@@ -23,6 +25,11 @@ KIM = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2/kim"
 
 
 def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--part", type=int, default=0)
+    ap.add_argument("--of", type=int, default=1)
+    args = ap.parse_args()
+    mine = lambda stem: zlib.crc32(stem.encode()) % args.of == args.part
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
     out = KIM / "finals"
@@ -30,7 +37,8 @@ def main() -> int:
     ctx = make_ctx(output_root=KIM / "raw")
     done_total = 0
     while True:
-        todo = [f for f in sorted((KIM / "states").glob("*.pt")) if not (out / f"{f.stem}.jpg").exists()]
+        todo = [f for f in sorted((KIM / "states").glob("*.pt"))
+                if mine(f.stem) and not (out / f"{f.stem}.jpg").exists()]
         for f in todo:
             try:
                 z = torch.load(f)[-1:].to(ctx.device, ctx.dtype)
