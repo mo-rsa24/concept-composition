@@ -136,8 +136,18 @@ States are from plan 21's ticks, its commits and its walk map
 
 Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#written-before-the-run-answered-after) ➡️
 
-- [ ] ⚠️ **Does the push draw two separate, intact animals on held-out seeds 9 to 12 more often
+- [x] ✅ **Does the push draw two separate, intact animals on held-out seeds 9 to 12 more often
       than plain product and than best-of-N picked by the same discriminator?**
+
+      **Draft reading 7, too weak to read, with the measuring tool found unsound.** On Claude's draft
+      calls of the 64 tiles (not yet confirmed by the reader), composed is 0 of 4 on seeds 9 to 12 in
+      every column at every strength, and 1 of 4 on seeds 1 to 4 (seed 4, a drawing, so damaged) at
+      each guided strength. Readings 1 to 5 need 2 of 4 somewhere, so none holds. At s = 100 the
+      picture moved on 8 of 8 seeds, but the cap fired on 100% of steps on every seed, so the null's
+      second check fails and the reading is 7. Separately, the discriminator that pushed did not read
+      the concept: see [Could the answer be an artefact](#could-the-answer-be-an-artefact). Calls:
+      `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/calls-draft.csv`;
+      sheet: `result-sheet/result-sheet.png`.
 
       Counts are out of 4 seeds per seed set, per strength. The readings are checked in this
       order, and the first that holds is the verdict.
@@ -189,45 +199,81 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
 
-- [ ] ⚠️ **Did the cap fire, and on which steps, at each strength?** On the toy the push stayed
+- [x] ✅ **Did the cap fire, and on which steps, at each strength?** On the toy the push stayed
       under a tenth of the summed score's size, so the prediction is that it never fires at
       s = 10 or 30. Report the fraction of steps it fired, per seed and strength, either way.
 
-- [ ] ⚠️ **When at least one of the N best-of-N renders composed, did the discriminator pick
+      It fired on 2 to 42% of steps at s = 10, 80 to 98% at s = 30 and 100% at s = 100, on every
+      seed, so s = 30 and s = 100 pushed with nearly the same size. The prediction that it never fires
+      at 10 or 30 was wrong. `result-sheet/result.json`.
+
+- [x] ✅ **When at least one of the N best-of-N renders composed, did the discriminator pick
       one of them?** Counted over seeds 9 to 12. A discriminator that passes over composed
       renders it was handed is not reading what it was trained to read, and that weakens every
       reading above.
 
-- [ ] ⚠️ **Does the push turn the fused animal into one lone animal?** Plan 18's push turned it
+      No best-of-2 draw composed on any of the 8 seeds, so the question has no case to read.
+
+- [x] ✅ **Does the push turn the fused animal into one lone animal?** Plan 18's push turned it
       into one cat on 3 of 4 seeds, which is why lone animals are negatives here. Count guided
       tiles called one single animal against plain product's, per strength.
 
-- [ ] ⚠️ **Which species do the composed tiles show?** A cat and a dog, two of one kind, or
+      Rarely. Tiles called one single animal: plain product 1 of 8, guided 1, 3 and 1 of 8 at
+      s = 10, 30 and 100. The push mostly kept one fused animal (6, 4 and 6 of 8) and damaged more
+      pictures (4, 5 and 6 of 8 against 2 of 8 plain).
+
+- [x] ✅ **Which species do the composed tiles show?** A cat and a dog, two of one kind, or
       unclear, from the third column. Reported beside the verdict, never as it.
+
+      The one composed tile per strength is seed 4's drawing of two animals; species unclear.
 
 ## Asked after the result
 
 Navigation: ⬅️ [Written before the run](#written-before-the-run-answered-after) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️
 
-Nothing yet.
+- [x] ✅ **What does the discriminator read?** Not "a cat and a dog apart". Scored on every training
+      tile kind, it rates pair-prompt renders positive whatever they show (hybrids, two of one kind,
+      one animal) and single-prompt and product renders negative; its attention pool sits on one
+      fixed patch in every picture; guided runs pass logit +10 by step 3, while the predicted
+      picture is still a blur. `diagnostics/kinds-through-time.png`,
+      `diagnostics/filmstrip-seed01.png`, `diagnostics/logit-through-time.png`.
+
+- [x] ✅ **Can a discriminator of this design read the concept at all?** Not at the sizes tried.
+      With hybrids and wrong pairs among the negatives, held-out balanced accuracy stays at 0.53 to
+      0.69 at every one of the first 20 steps: v2 (17 positives) and plan 22's v3 (81 positives
+      over 38 pairs), with the head alone and with LoRA adapters on SDXL's trunk, all 0 of 20 against
+      the 0.75 bar. `discriminator/held-out-accuracy-all-checkers.png`.
 
 ## Could the answer be an artefact
 
 Navigation: ⬅️ [Asked after the result](#asked-after-the-result) | 📋 [TOC](#table-of-contents) | [Next](#what-the-write-up-owes) ➡️
 
-- [ ] ⚠️ **Was the comparison fair?** Every column of the sheet renders on one card in one loop,
+- [x] ✅ **Was the comparison fair?** Every column of the sheet renders on one card in one loop,
       plain product and guided from the same starting noise per seed, the random push included. Print the random push's norm over the real
       push's at every step; 1 on every step is the only pass. Best-of-N's N comes from
       timing on that card, and the realised GPU time of both columns is printed beside the
       sheet.
 
-- [ ] ⚠️ **Was the measuring tool sound?** The calls are by eye at full resolution, because the
+      Yes for the columns: one card (`mscluster107` GPU 0), one loop, the random push's norm over the
+      guided push's 1.0000 at every step of all 24 random renders, strength 0 identical to plain on
+      seed 1, and realised GPU time per seed 56 s for best-of-2 against 40 s for one guided render.
+
+- [x] ✅ **Was the measuring tool sound?** The calls are by eye at full resolution, because the
       instance-count detector cannot tell a cat from a dog and two hybrids read as a clear pair
       at sheet scale. Claude's calls are drafts until the reader checks each tile.
 
-- [ ] ⚠️ **Did the run respect the environment?** The training set holds no seed 9 to 16 render
+      The eye calls are Claude's drafts and still need the reader's check. The discriminator itself was
+      not sound: it passed its first held-out check only because that check held no pair-prompt
+      failures (see Asked after the result), so this sheet cannot test whether a pair-aware push
+      steers the product.
+
+- [x] ✅ **Did the run respect the environment?** The training set holds no seed 9 to 16 render
       (print the seed list it read), strength 0 matched plain product byte for byte at step 5's
       canary, and the outputs landed under `/datasets`.
+
+      Yes: no training tile from seeds 9 to 16 (the trainer refuses them), the canary matched, and the
+      sheet's outputs landed under `/datasets`. `/datasets` then went down from about 13:10 UTC, so
+      later runs wrote to `/home-mscluster/mmolefe/poe_repair_min_scratch` by the reader's choice.
 
 ## What the write-up owes
 
@@ -250,6 +296,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-The reader's calls on the result sheet's 64 tiles, per
-[instruction 2.4 of plan 21](../21-rung2-a-small-discriminator-steers-cat-x-dog.md#2-test-each-piece);
-then task 1.5 prints the reading with its counts.
+Plan the stronger discriminator: Kim et al.'s discriminator guidance scaled up (thousands of
+joint-prompt renders as real against the product's own samples as fake, no hand labels), with the
+held-out check of plan 22 before any push; beside it, a discriminator on frozen CLIP or DINOv2
+features. The prescribed cap-0.3 rerun waits for `/datasets`.

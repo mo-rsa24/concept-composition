@@ -14,6 +14,7 @@
 | 2026-11-17 | 5 | 13 | 5 | 0 | 2 | 0 | [board](board-2026-11-17-step-5.png) |
 | 2026-11-17 | 0 | 11 | 11 | 0 | 2 | 0 | [board](board-2026-11-17-step-0.png) |
 | 2026-11-17 | 7 | 11 | 10 | 0 | 3 | 0 | [board](board-2026-11-17-step-7.png) |
+| 2026-11-17 | 10 | 11 | 9 | 0 | 3 | 1 | [board](board-2026-11-17-step-10.png) |
 
 ## Row changes
 
@@ -31,3 +32,4 @@
 | 2026-11-17 | A4, C1, C2 | open to todo | route steps 10d and 10e plan and run rung 4's three sub-rungs |
 | 2026-11-17 | P1 | step 11 named | the paper's table is re-routed from step 11 once rung 4 closes |
 | 2026-11-17 | A1 | todo to done; row page added | route step 7 ran plan 19: both halves of the bar passed; the page records that the push repairs the sampler on a toy whose product composes |
+| 2026-11-17 | A3q | todo to issue; three outcome lines ticked | the result sheet landed on draft reading 7, and every discriminator trained with hybrids and wrong pairs among its negatives failed its held-out check (17 and 81 positives, with and without adapters); the check line waits on the reader's calls and the next rung waits on a discriminator that reads the concept |

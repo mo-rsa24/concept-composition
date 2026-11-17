@@ -12,9 +12,32 @@ and best-of-N at equal compute, with the bar written before the run.
 
 - [x] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys · `verified` · [plan 21's compute block](../../plans/21-rung2-a-small-discriminator-steers-cat-x-dog.md#considerations): about 2.1 GPU-hours on `mscluster107` GPU 0, fallback `mscluster108` GPU 1, N = 2, cat × dog on seeds 1 to 4 and 9 to 12, 2026-11-17
 - [x] 📝 bar written before the run: the seven readings below, each with its count out of 4 seeds · `verified` · [the rung 2 review file](../../plans/review/a3q-cat-x-dog-quick-discriminator-test.md), 2026-11-17
-- [ ] 💻 code ran: the discriminator trained on the checked renders and the product's renders from seeds 1 to 4
-- [ ] 🖼️ screenshot: one sheet, seeds 1 to 4 and 9 to 12 side by side, columns plain product, best-of-N at equal compute and guided
-- [ ] ✅ check passed: every tile called by eye at full resolution, and the reading below that the calls land on, printed as the rung's pass or miss line
+- [x] 💻 code ran: the discriminator trained on the checked renders and the product's renders from seeds 1 to 4 · `verified` · trained on 17 checked positives and 24 negatives from seeds 1 to 8 ([plan 21](../../plans/21-rung2-a-small-discriminator-steers-cat-x-dog.md), task 1.3); held-out check 13 of 20 sampler steps, 2026-11-17
+- [x] 🖼️ screenshot: one sheet, seeds 1 to 4 and 9 to 12 side by side, columns plain product, best-of-N at equal compute and guided · `verified` · [the result sheet](../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png), with the size-matched random push at 10, 30 and 100, 2026-11-17
+- [ ] ✅ check passed: every tile called by eye at full resolution, and the reading below that the calls land on, printed as the rung's pass or miss line · `stated` · Claude's draft calls land on reading 7, too weak to read; the reader has not yet confirmed the 64 calls
+
+## The result
+
+**Draft reading 7, too weak to read: no tile on seeds 9 to 12 shows two separate animals, and the
+size cap clipped the push on every step at s = 100.** Composed is 0 of 4 on the held-out seeds in
+every column, against 1 of 4 on the training seeds (seed 4, a drawing). The guided push changes every
+picture while the same-sized random push leaves them as plain, so the discriminator's direction acts,
+but toward fused animals and broken pictures.
+
+<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png" width="200" alt="Eight seeds by eight columns: plain product, best of 2, guided at 10, 30, 100 and a same-sized random push at each; guided tiles show fused animals, torn faces and drawings, random tiles look like plain"></a>
+
+**The discriminator did not read the concept.** It scored pair-prompt renders positive whatever
+they showed, hybrids and two dogs included, and looked at one fixed patch of every picture. Every
+discriminator trained with hybrids and wrong pairs among its negatives failed its held-out check:
+17 positives, then 81 positives over 38 benchmark pairs, with and without adapters on SDXL's trunk,
+all 0 of 20 sampler steps at the 0.75 bar.
+
+<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/kinds-through-time.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/kinds-through-time.png" width="200" alt="Discriminator logit against sampler step per kind of training tile: positives, hybrids and wrong pairs from the pair prompts all score above zero; lone animals and plain products below"></a>
+<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png" width="200" alt="Held-out balanced accuracy against sampler step for four discriminators: v1 rises above 0.75 after step 7 on a check without hard negatives; v2, v3 head and v3 with adapters stay near 0.6 at every step"></a>
+
+The next rung needs a discriminator that reads "two separate things" on pictures it never trained
+on, before any push is judged. The record is [the rung 2 review file](../../plans/review/a3q-cat-x-dog-quick-discriminator-test.md)
+and [plan 22](../../plans/22-rung2-a-discriminator-trained-on-the-benchmark-pairs.md).
 
 ## What it confirms, and what it doesn't
 

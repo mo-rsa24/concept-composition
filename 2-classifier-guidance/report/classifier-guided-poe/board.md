@@ -12,7 +12,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |
 | A2r | our cat and dog photos, released 256 px unconditional model frozen, classifiers trained on our photos: the pair-aware push beats the separate-label push | todo | | 8 |
 | A2c | our cat and dog photos, a 64 px model we train with a null label, with and without the both-animal photos: the same | todo | | 8 |
-| [A3q](a3q-cat-x-dog-quick-discriminator-test.md) | SDXL cat × dog, judged on held-out seeds 9 to 12: a pair-aware discriminator trained on 10 to 15 renders checked by eye from seeds 1 to 4, with the product's own renders from those seeds as negatives, composes where plain product and best-of-N at equal compute do not | todo | rung 2 | 9, 10 |
+| [A3q](a3q-cat-x-dog-quick-discriminator-test.md) | SDXL cat × dog, judged on held-out seeds 9 to 12: a pair-aware discriminator trained on 10 to 15 renders checked by eye from seeds 1 to 4, with the product's own renders from those seeds as negatives, composes where plain product and best-of-N at equal compute do not | issue | rung 2: draft reading 7 (too weak to read); the discriminator failed its held-out check with hard negatives, so the next rung needs a stronger one | 9, 10 |
 | A3 | SDXL cat × dog, same seeds for training and testing: plan 15's pair-aware head composes where the species-only pushes do not | open | off the ladder: rung 2 is A3q; re-routed from step 11 with the head ablations | 11 |
 | K1 | animal and animal: rung 2's recipe on 3 pairs from the guard-clean Attend-and-Excite set (cat and dog excluded), seeds 9 to 12, composes where plain product does not | todo | rung 3: a cat and a bear, a bird and a bear, a bird and a turtle | 10b, 10c |
 | K2 | animal and object: the same, on 3 of the 90 "and" prompts with the colour words stripped | todo | rung 3: a cat and a backpack, a monkey and a suitcase, a lion and a clock | 10b, 10c |
@@ -39,7 +39,7 @@ buys) is written and ticked on its row before it launches.
 | Rung | What changes from the rung before | Rows | Goes on when |
 |---|---|---|---|
 | 1 | the exact toy, where the true correction is known | A1 | A1's bar: pair-aware at least 150 of 300 crisp pairs at some s, separate-label at most 15 at every s |
-| 2 | SDXL, cat × dog only, 4 held-out seeds | A3q | the first of A3q's four readings: two animals on held-out seeds, pictures intact |
+| 2 | SDXL, cat × dog only, 4 held-out seeds | A3q | the first of A3q's seven readings: two animals on held-out seeds, pictures intact |
 | 3 | the pair kind: animal and animal, animal and object, object and object | K1, K2, K3 | at least one kind passes; a kind that misses keeps its row and its diagnosis |
 | 4a | more seeds: cat × dog on all 8 held-out seeds, 9 to 16 | A4 | A4's bar |
 | 4b | more pairs: the v58 pool, 182 cells over 48 pairs, held-out seeds | C1 | C1's bar |
@@ -63,7 +63,7 @@ route's step 2, which frames the hypothesis; until then the line says "number fr
 | A2r | on seeds 1 to 16 at 256 px, the pair-aware push gives two separate animals on more seeds than the two separate-label pushes alone | at least 4 more of 16 in one arm |
 | A2c | on seeds 1 to 16 at 64 px, the same, in the model trained without both-animal photos and in the one trained with them | at least 4 more of 16 in one arm |
 | A3 | off the ladder; on cat × dog, on the seeds it trained on, some seeds show two separate animals with the push where the plain product shows none, and the pictures are not wrecked; a yes says only that the push can compose at all | from step 2 |
-| A3q | on held-out seeds 9 to 12, more seeds show two separate animals at full resolution with the push than with plain product or with best-of-N at the same compute, and the pictures are not wrecked | guided at least 2 of 4 on seeds 9 to 12, more than best-of-N; the other three readings on A3q's page |
+| A3q | on held-out seeds 9 to 12, more seeds show two separate animals at full resolution with the push than with plain product or with best-of-N at the same compute, and the pictures are not wrecked | guided at least 2 of 4 on seeds 9 to 12, more than best-of-N; the other six readings on A3q's page |
 | K1 | on 12 held-out tiles (3 pairs × seeds 9 to 12), more tiles with two separate animals with the push than with plain product or best-of-N, pictures not wrecked | at least 4 more of 12 than plain product; "nothing to fix" when plain is already at least 9 of 12 |
 | K2 | the same on 3 animal and object pairs, two separate things in frame | the same counts |
 | K3 | the same on 3 object pairs | the same counts |
