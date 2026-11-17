@@ -129,6 +129,12 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#writ
       sheets the bar is read against the stronger separate-label scale, with each scale's
       comparison reported beside it.
 
+      Ruled on 2026-11-17, after launch and before any tile was called: a tile called **two
+      bodies** counts toward "two separate animals", because the project counts co-occurrence as
+      two separate creatures in the frame, not a clean nameable cat beside a dog. The strict count,
+      **two clear animals** only, is reported beside it in every row of the verdict, so the bar can
+      be read both ways.
+
 ## Written before the run, answered after
 
 Navigation: ⬅️ [The question written before the run](#the-question-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#asked-after-the-result) ➡️
@@ -175,7 +181,6 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| Whether a tile called **two bodies** counts toward the bar's "two separate animals"; the bar names four calls and does not say | the reader's ruling, written beside the bar before instruction 2.4 | the counts in the verdict |
 | Whether the both-animal images `both_015` and `both_027` (dog only, by eye) and the collages `both_000` and `both_017` stay in the set | the reader's call, offered in the walk map | the pair-aware classifiers' positives |
 
 ## Next step
