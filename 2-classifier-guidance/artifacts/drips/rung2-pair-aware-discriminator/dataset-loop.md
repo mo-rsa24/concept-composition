@@ -11,6 +11,10 @@ does the next step, and rewrites "Where the loop is" and "Next batch".
    1 to 8. A damaged negative is replaced by a fresh-noise draw of the same column under the same
    seed, never deleted.
 3. No tile from seeds 9 to 16 anywhere.
+4. No tile where one concept repeats across the scene (a pattern or wallpaper of many cats, many
+   dogs, or many fused animals). A lone-animal tile holds exactly one animal, a product tile one
+   fused animal, a positive exactly one cat and one dog. Such a tile is called "many copies" and
+   left out, whatever its style.
 
 The loop stops when all three hold, then hands the dataset to the reader before round 3.
 

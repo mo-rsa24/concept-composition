@@ -96,7 +96,9 @@ each draw's final latent at the last sampler timestep picks one.
 
 Positives are only tiles the reader calls one cat and one dog, apart and intact. Joint-prompt
 renders that fail are in neither class. Negatives are the product's renders from seeds 1 to 8 and
-renders of a lone cat and a lone dog. No render from seeds 9 to 16 enters training.
+renders of a lone cat and a lone dog. Every tile that enters training is an intact photo holding
+exactly the animals its role names, so a scene where one concept repeats (a pattern of many cats)
+is left out. No render from seeds 9 to 16 enters training.
 
 **The calls**
 
