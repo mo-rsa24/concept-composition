@@ -6,7 +6,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
 | G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1 | 4 |
-| R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | todo | plans 17 and 18 are in this repo's `plans/` | 5 |
+| R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
 | A1 | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | todo | | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
 | A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |
@@ -67,7 +67,8 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 **R0**
 
 - [x] 📁 folder created: plans 15, 17 and 18 and the classifier code in this repo · [the README](../../README.md) `verified`
-- [ ] ✅ check passed: strength 0 byte-identical to the plain product with the repaired sampler
+- [x] 💻 code ran: `run_poe_classifier_guided` pushes strength times sqrt(1 - alpha_bar_t) times the gradient, capped at `PUSH_CAP_FRACTION` 0.1 of the product prediction's norm, logging the raw gradient, the push before and after the cap, and whether it fired · commit `445cef9f`, the canary on commit `d1b8b61f` `verified`
+- [x] ✅ check passed: strength 0 byte-identical to the plain product with the repaired sampler · md5 `c291b259647d30a450e87b234423fe99` for plain, strength 0 and strength 0 with an untrained head, 0 pixels differing, job 89341 on mscluster108 · `/datasets/mmolefe/poe_repair_min/outputs/presence_head/canary/canary.json` `verified`
 
 **A1**
 
