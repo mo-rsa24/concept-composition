@@ -79,8 +79,15 @@ def run_poe_classifier_guided(
     guidance_window: tuple[int, int] | None = None,
     strength: float = 0.0,
     push_cap: float | None = PUSH_CAP_FRACTION,
+    random_push_norms: list[float] | None = None,
+    random_generator: torch.Generator | None = None,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
+
+    With ``random_push_norms`` the classifier is not called: at step ``i`` the push is a fresh
+    random direction from ``random_generator``, scaled to norm ``random_push_norms[i]``. Fed the
+    applied norms a guided run logged, this is the size-matched random control; only the push's
+    direction differs from the guided run.
 
     The push is Dhariwal and Nichol's Algorithm 2 with nothing rescaled:
     eps_PoE - strength * sqrt(1 - alpha_bar_t) * grad log p(y | x_t), shortened to at most
@@ -132,8 +139,17 @@ def run_poe_classifier_guided(
 
         in_window = guidance_window is None or (
             guidance_window[0] <= step_index < guidance_window[1])
+        if random_push_norms is not None:
+            direction = torch.randn(eps_p.shape, generator=random_generator).to(
+                device=device, dtype=torch.float32)
+            push = direction * (float(random_push_norms[step_index]) / direction.norm())
+            eps_p = (eps_p.float() - push).to(dtype)
+            grad_norm_per_step.append(0.0)
+            push_before_cap_per_step.append(float(push.norm()))
+            applied_per_step.append(float(push.norm()))
+            capped_per_step.append(False)
         # The canary lives here: at strength 0 nothing below runs and eps_p is untouched.
-        if head is not None and strength != 0.0 and in_window:
+        elif head is not None and strength != 0.0 and in_window:
             with torch.enable_grad():
                 z = latents.detach().float().requires_grad_(True)
                 t_batch = timestep.reshape(1).to(device=device).expand(z.shape[0])
@@ -184,6 +200,7 @@ def run_poe_classifier_guided(
             "applied_norm_per_step": applied_per_step,
             "capped_per_step": capped_per_step,
             "eps_norm_per_step": eps_norm_per_step,
+            "random_push": random_push_norms is not None,
         },
     )
 
