@@ -272,7 +272,7 @@ classifier inputs.
 ```
 
 - `added:` the existing page's URL (from the registry) · `dropped:` nothing
-- [ ] **Gate:** the push box is on the page.
+- [x] **Gate:** the push box is on the page · ✓ verified 2026-11-17: [the classifier guidance diagram](https://claude.ai/artifact/FBbwapTjp1dbEmzpLspRBT) carries it, the "found" row in What we know so far
 - **Leaves:** the page URL, which steps 4, 7, 8 and 10 extend through their `draw` control.
 
 ### 2. 📚 Start the classifier-guidance journey
@@ -334,7 +334,7 @@ first plan opens on the derivation of the guided prediction.
 
 - `added:` objectives 2 and 4, the separate-against-pair-aware contrast (from the route's Quick
   context) · `dropped:` nothing
-- [ ] **Gate:** the diagram set approved.
+- [x] **Gate:** the diagram set approved · ✓ verified 2026-11-17: `~/goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/GATE.md` records the ten pictures approved on 2026-11-16
 - **Leaves:** the journey path, which step 7's learning path names.
 
 ### 3. 📄 Finish the Kim et al. read, lean
@@ -406,7 +406,7 @@ line, shelf page p162
 
 - `added:` the resume position (from the read map) · `dropped:` the arXiv id check (why: the read
   map already confirmed the paper)
-- [ ] **Gate:** the read map's closing section exists before step 7.
+- [x] **Gate:** the read map's closing section exists before step 7 · ✓ verified 2026-11-17: "What A1 takes from this" in `2-classifier-guidance/artifacts/drips/read-refining-generative-process-discriminator/READ_MAP.md`
 - **Leaves:** the read map, which steps 7 and 9 read.
 
 ### 4. 🔁 Reproduce classifier guidance on the released weights
