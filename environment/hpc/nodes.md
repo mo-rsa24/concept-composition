@@ -54,20 +54,28 @@ A6000 nodes (106, 108, 109) and on the session node; `co3_bw` on 110 to 112. Lau
 the python path as `PY=` for this reason (`scripts/launch_sdlora.sh`,
 `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`).
 
-**`mscluster111`'s card is not usable from torch (2026-09-05).** `nvidia-smi` lists it with 2 MiB used
-and `utilization.gpu=[N/A]`, and `torch.cuda.is_available()` under `co3_bw` returns `False`, so a
-sampler launched there runs on the CPU at about 40 times the GPU time with no error in its log.
-Consequence: treat the node as faulted until an administrator resets it; the shared-device launch
-script refuses a device whose utilisation reads `[N/A]` or whose CUDA probe fails, per
-[poe-launch-002](../known-failures.md#entry-id-poe-launch-002). `mscluster110` and `mscluster112` were fine the same day.
+**`mscluster111`'s card works under `co3_bw`, and has faulted before (verified 2026-11-17).**
+Over SSH it read 2 MiB used, 0% utilisation and 25 °C; `torch.cuda.is_available()` under `co3_bw`
+returned `True` (torch 2.11.0+cu128), a 1000×1000 ones matmul on the card summed to 1e9, and
+`/datasets` was visible. The fault it shows when it fails: `nvidia-smi` lists the card with 2 MiB
+used and `utilization.gpu=[N/A]`, `torch.cuda.is_available()` returns `False`, and a sampler runs on
+the CPU at about 40 times the GPU time with no error in its log (seen 2026-09-05). Run the CUDA probe
+below before any GPU work here; the shared-device launch script refuses a device whose utilisation
+reads `[N/A]` or whose CUDA probe fails, per
+[poe-launch-002](../known-failures.md#entry-id-poe-launch-002).
 
-**`mscluster112`'s card does not answer at all (verified 2026-10-13).** `nvidia-smi` prints
-`Unable to determine the device handle for GPU0: 0000:01:00.0: Unknown Error` and then
-`No devices were found`, and `torch.cuda.get_device_name(0)` under `co3_bw` raises
-`RuntimeError: CUDA unknown error`. This is the same fault form as the `bigbatch` nodes above, and
-it shows up even with the node allocated and a VS Code remote session open on it, so holding the
-node says nothing about its card. Run `nvidia-smi -L` before any GPU work here; a faulted card
-needs an administrator reset or a reboot (node uptime that day: 54 days).
+**`mscluster112`'s card works under `co3_bw`, and has faulted before (verified 2026-11-17).** The
+same probe passed: 2 MiB used, 0%, 26 °C, `torch.cuda.is_available()` `True`, the matmul summing to
+1e9, `/datasets` visible. The fault it shows when it fails is the one the `bigbatch` nodes above
+show: `nvidia-smi` prints `Unable to determine the device handle for GPU0: 0000:01:00.0: Unknown
+Error` and then `No devices were found`, and `torch.cuda.get_device_name(0)` under `co3_bw` raises
+`RuntimeError: CUDA unknown error` (seen 2026-10-13, node uptime 54 days). It shows up even with the
+node allocated and a VS Code remote session open on it, so holding the node says nothing about its
+card. A faulted card needs an administrator reset or a reboot.
+
+The probe for either card, from the laptop:
+`scripts/cluster.sh sh 'ssh <node> "/home-mscluster/mmolefe/miniforge3/envs/co3_bw/bin/python -c \"import torch; print(torch.cuda.is_available()); x=torch.ones(1000,1000,device=\\\"cuda\\\"); print((x@x).sum().item())\""'`.
+It prints `True` and `1000000000.0` on a working card.
 
 **`mscluster88` works under `co3_bw` (verified 2026-10-13).** RTX 3090, 24 GB, driver 595.71.05;
 `torch.cuda.is_available()` is True and a 1000×1000 ones matmul on the card sums to 1e9. From

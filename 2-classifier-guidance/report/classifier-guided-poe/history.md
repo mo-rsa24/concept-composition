@@ -12,6 +12,8 @@
 | 2026-11-17 | 4 | 13 | 6 | 0 | 1 | 0 | [board](board-2026-11-17-step-4.png) |
 | 2026-11-17 | 5 | 13 | 5 | 0 | 2 | 0 | [board](board-2026-11-17-step-5.png) |
 | 2026-11-17 | 5 | 13 | 5 | 0 | 2 | 0 | [board](board-2026-11-17-step-5.png) |
+| 2026-11-17 | 0 | 11 | 11 | 0 | 2 | 0 | [board](board-2026-11-17-step-0.png) |
+| 2026-11-17 | 7 | 11 | 10 | 0 | 3 | 0 | [board](board-2026-11-17-step-7.png) |
 
 ## Row changes
 
@@ -24,3 +26,8 @@
 | 2026-11-17 | K1, K2, K3 | added, open | rung 3 of the scale-up ladder: one row per pair kind, 3 pairs each from the guard-clean Attend-and-Excite prompts, colour words stripped |
 | 2026-11-17 | A1, A3q, K1 to K3, A4, C1, C2 | compute-plan outcome line added | every rung's compute plan is written and ticked before it launches |
 | 2026-11-17 | G0 | stays done on its classifier-counted bar; the eye counts 9, 11 and 10 of 16 at scale 10 added beside it | you kept both bars: the classifier's for G0, the eye's as the reference step 8 compares against |
+| 2026-11-17 | A3q | open to todo; positives from seeds 1 to 8, lone animals as negatives; counts added to its four readings | route steps 9 and 10 now frame and run rung 2 |
+| 2026-11-17 | K1, K2, K3 | open to todo; pairs named; bar counted | route steps 10b and 10c plan and run rung 3 |
+| 2026-11-17 | A4, C1, C2 | open to todo | route steps 10d and 10e plan and run rung 4's three sub-rungs |
+| 2026-11-17 | P1 | step 11 named | the paper's table is re-routed from step 11 once rung 4 closes |
+| 2026-11-17 | A1 | todo to done; row page added | route step 7 ran plan 19: both halves of the bar passed; the page records that the push repairs the sampler on a toy whose product composes |

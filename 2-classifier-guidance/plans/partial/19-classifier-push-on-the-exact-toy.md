@@ -115,7 +115,7 @@ Navigation: ⬅️ [Previous](#purpose) | 📋 [TOC](#table-of-contents) | [Next
 **The bar, written before any classifier is trained.** At pair weight 0.01, seed 7, 300 draws,
 uncapped:
 
-- the pair-aware push at weight w = 1 draws at least 150 of 300 crisp pairs, with overlaid draws no
+- the pair-aware push<sub>[1](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> at weight w = 1 draws at least 150 of 300 crisp pairs, with overlaid draws no
   higher than this plan's own unguided run on the same seed (300 of 300);
 - the separate-label push draws at most 15 of 300 crisp pairs at every scale in 1, 2, 5 and 10.
 
@@ -243,6 +243,10 @@ For you to follow manually. Do these yourself.
   the gap is not about the pair. 🕒 the reader closed the walk with a bare "done" and gave no account
   of the two charts; the run's numbers match every line above (verified by Claude), the reader's own
   look is not recorded
+
+  <a href="../../../3-understanding-compositionality/artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/push-cosine-per-step.png"><img src="../../../3-understanding-compositionality/artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/push-cosine-per-step.png" width="640" alt="Cosine of the discriminator's push with its target (y, -0.1 to 1) against the reverse step (x, 200 to 0) at w = 1, median of 300 draws with a 25th to 75th band: the orange line against the sampler's own ratio sits near 0.85 to 0.96 from step 190 to step 90, the blue line against the true correction peaks near 0.21 at step 150, and both fall to 0 by step 80"></a>
+
+  <a href="../../../3-understanding-compositionality/artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/minimal-pair-gap-per-step.png"><img src="../../../3-understanding-compositionality/artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/minimal-pair-gap-per-step.png" width="640" alt="Log-odds on the side-by-side pair minus on the stacked picture (y) against the noise step (x, 200 to 0): the pair-aware discriminator's line rises to about 28, the separate-label classifier's levels near 4, and the shuffled-labels line stays at 0"></a>
 
 ▶ **Next: [0. Check this plan before working from it](#0--check-this-plan-before-working-from-it)**, at the walk's close.
 

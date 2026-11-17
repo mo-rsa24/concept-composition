@@ -5,7 +5,7 @@ per round, with `/drip-skill-route --research`. Opened 2026-11-12.
 
 ## Position
 
-Closed: all rounds settled, route emitted.
+Reopened 2026-11-17 with `--from` at round 2 to add the scale-up ladder. Closed again 2026-11-17: all rounds settled, route and board written.
 
 ## Round 1: the sentence and the disk
 
@@ -68,3 +68,25 @@ rung at which the climb stopped and its diagnosis. Inferred.
 | 6 | steps 3 to 7 | hypothesis-to-scope, populate-plans for R0 and A1, walk R0, walk A1, walk A1's retrospective | | user, `settle all` | |
 | 7 | time and schedule | about 8 h to A1's close, 13 h budget at 2× on steps 1 and 6, 10 sittings at three 90-minute sittings a week (assumed) | | user, `settle all` | |
 | 8 | check and emit | route and references written; board drawn | | user, `settle all` | |
+
+## Reopened 2026-11-17: the scale-up ladder
+
+**The ask.** An explicit ladder for fixing the product with a guidance push, each rung a proof of
+concept for the next and changing one thing, each with a compute plan written before launch.
+
+| Round | What | Chosen | Options there were | Who chose | Why |
+|---|---|---|---|---|---|
+| 1 | GPU budget and deadline | no hard cap, no date; each rung records what it spent; schedule stays in sittings | about 60, 100 or 150 GPU-hours; 2, 4 or 8 weeks | user | |
+| 1 | the photo stage (A2r, A2c) | beside the ladder, gating nothing | rung 1b gating rung 2; dropped | user | recommended option taken |
+| 1 | rung 3's prompts | colour words stripped so only the pair kind changes | as the benchmark wrote them, marked mixed; both | user | every object prompt carries a colour and no animal pair does |
+| 2 | rung 2 | A3q: a pair-aware discriminator on 10 to 15 renders checked by eye from seeds 1 to 4, the product's renders from those seeds as negatives, judged on seeds 9 to 12 against plain product and best-of-N at equal compute; plan 15's head (A3) off the ladder | plan 15's head on training seeds 1 to 8 | user | "the fastest real test" |
+| 2 | rung 2's bar | four readings on A3q's page; only "two animals on held-out seeds, pictures intact" lets rung 3 start; the sheet carries seeds 1 to 4 beside 9 to 12 | | user | the screenshot of the reading table |
+| 2 | rung 3 and 4 rows | K1, K2, K3 (3 pairs per kind, seeds 9 to 12); 4a A4, 4b C1, 4c C2 | | user, `settle` | |
+| 2 | compute | every rung row gains "compute plan written before launch"; quickest card wanted, Blackwell first if it can run the sampler | | user | "use GPU that would get results quickest" |
+| 2 | card order | mscluster111 or 112 (Blackwell, `co3_bw`) first, the other Blackwell second, mscluster107 card 1 (RTX 8000, `co3`) third; every column of one rung's sheet on one card; rung 2's first piece checks the sampler runs under `co3_bw` | 107 card 1 first, keeping comparability with the RTX 8000 numbers on file | user, `settle` | both Blackwells passed a CUDA probe on 2026-11-17; about 9 times faster per product render |
+| 3 | rung 1 (step 7) and the chain | chain `7 → 9 → 10 → rung 3 plan → rung 3 → rung 4 plan → 4a, 4b, 4c → 11`; every rung opens on a compute piece that stops for a yes; step 7 gains the compute piece, an axes block (classifier varies, pair weight, draws, schedule and s grid held), and a bar where separate-label stays at most 15 of 300 at every s | the axes planner for rung 1 too; the compute piece as its own route step | user, `settle` | |
+| 4 | rung 2 (steps 9 and 10) | positives: 10 to 15 checked renders of cat and dog apart from seeds 1 to 8 (joint prompt plus two separating wordings); negatives: the product's renders and lone cat and lone dog; axis: how the discriminator is used (none, best-of-N it picks, guided at 3 strengths); four readings with counts out of 4; step 9 reframed for A3q, step 10 is A3q's walk; plan 15 re-routed after it | positives from seeds 1 to 4 including lone animals | user, `settle` | the joint prompt composes on at most 2 seeds below 9, and plan 18's push turned the fused animal into one cat |
+| 5 | rung 3 (steps 10b, 10c) | an axes planner writes rung 3's plan, then a walk runs it; pairs drawn by rule (guard-clean "and" prompts, colours stripped, cat and dog excluded, 3 per kind with random.Random(0)); one discriminator per pair by rung 2's recipe; bar per kind: at least 4 more of 12 held-out tiles than plain product, more than best-of-N | one pooled discriminator; one kind per sitting; a hand-picked set | user, `settle` | |
+| 6 | rung 4 (steps 10d, 10e) | three sub-rungs in order: 4a rung 2's discriminator on seeds 9 to 16, seeds 13 to 16 read apart; 4b one discriminator over the v58 pool's admitted targets, also scored on cat × dog beside 4a's to separate pooling from more pairs; 4c the same on the 53 held-out pairs, the 23 sharing no concept apart; automatic two-things count on every tile and by eye on one fixed seed per pair; bar within 10 points of the rank-32 LoRA and above best-of-N | per-pair discriminators on the v58 pool (too few admitted targets per pair) | Claude, under "settle until we are finished" | the user handed the remaining rounds over; veto stands |
+| 7 | step 11 and the schedule | step 11 walks every rung's retrospective and re-routes to P1, B1 to B7 and plan 15; 22 two-hour sittings, about 18 h to finish and 32 h budget at 2×, about 15 GPU-hours on a Blackwell | | Claude, under the same | |
+| 8 | check and emit | every row moved by a step except A2 and A2b (not on this route by an earlier decision); every walk step has a Filing line; every new step has its eight prompt sections; no pending line; the catalog is stale for hld-diagram and prompt-storyboard only, which steps 1 and 6 use and this reopening did not change | | Claude, under the same | |

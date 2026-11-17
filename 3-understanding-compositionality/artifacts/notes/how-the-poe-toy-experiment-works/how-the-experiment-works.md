@@ -209,3 +209,4 @@ Two rows map onto the paper's Figure A3, which shows two distributions with no o
 ## Cross-references
 
 - The mention of **the exact product** in [plan 19, a classifier's push on the exact toy](../../../../2-classifier-guidance/plans/partial/19-classifier-push-on-the-exact-toy.md#quick-context).
+- The mention of **the exact product** in [the route for classifier-guided PoE, from the released weights to SDXL cat × dog](../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).

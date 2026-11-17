@@ -2,11 +2,12 @@
 <!-- template: exempt. Reason: a skill-route runbook built to route-file-template, not a plan -->
 
 > [!NOTE]
-> **You will hold:** one figure set per stage (released weights, exact toy, our photos, SDXL),
-> each with its card and its pass or miss line, ending on SDXL cat × dog with a pair-aware
-> classifier beside plain product, the joint prompt and the species-only control · **Time:** ~20 h
-> to finish to the SDXL stage, ~38 h budget · **Stop point:** each stage's bar printed pass or
-> miss, inside 19 two-hour sittings · **Outcome board:**
+> **You will hold:** one figure set per rung of the scale-up ladder (exact toy, cat × dog on
+> held-out seeds, three pair kinds, then more seeds, the v58 pool and unseen pairs beside the
+> rank-32 LoRA), each with its card and its pass or miss line, plus the photo check beside it ·
+> **Time:** ~18 h to finish the ladder from step 7, ~32 h budget at 2×, about 15 GPU-hours on a
+> Blackwell · **Stop point:** each rung's bar printed pass or miss, inside 22 two-hour sittings ·
+> **Outcome board:**
 > [the classifier-guided PoE board](../report/classifier-guided-poe/board.md) · **Background:**
 > [the references file](route-classifier-guided-poe-from-toy-to-animals-references.md)
 
@@ -47,11 +48,12 @@ animals from the [fused animal](../../context/world/chimera.md#what-a-chimera-is
 every stage below SDXL the pair-aware classifier is set against a separate-label one that the maths
 says cannot help.
 
-**Outcome (the whole chain):** four figure sets with cards and findings: classifier guidance working
-on the authors' released weights, the exact toy with both classifiers, our own photos with the
-released model and with a model we train, and SDXL cat × dog on training seeds. Later stages (held-out
-seeds, the head ablations, the v58 pool against the LoRA, the paper's table) are re-routed from the
-SDXL stage's retrospective.
+**Outcome (the whole chain):** classifier guidance working on the authors' released weights, then
+a figure set per rung of the scale-up ladder: the exact toy with both classifiers, a small
+discriminator on cat × dog judged on held-out seeds, the three pair kinds, and rung 4's more seeds,
+v58 pool and unseen pairs beside the rank-32 LoRA. Our photos run beside the ladder as the
+controlled-data check. The paper's table, the head ablations and plan 15 are re-routed from step
+11.
 
 **Outcome board:** [the classifier-guided PoE board](../report/classifier-guided-poe/board.md), one
 row per stage plus the sampler repair, the paper's table and your explanation, per
@@ -90,8 +92,11 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | The recommended prompts inside plans 15, 17 and 18 point at `1-lora-correction/plans/06-...` paths that no longer exist | found | `ls` on 2026-11-16 | 10 |
 | Plain-product best-of-16 on cat × dog composed 0 of 128 particles; with the adapter at strength 0.5, best of 16 is 8 of 8 | found | `report/00-INDEX.md` lines 155 and 156 | 10, later |
 | GroundingDINO counts animals but cannot name them; CLIP on the detector's padded crop names them, 64 of 64 at median margin 0.990, untested on overlapping boxes | found | plan 15 quick context, `3-understanding-compositionality/scripts/census/crop_classifier_cat_vs_dog.py` | 8, 10 |
-| Exact toy at pair weight 0.01: exact product 300 of 300 crisp pairs, reverse diffusion 0 of 300 | found | the [toy card](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md) | 7 |
+| Exact toy at pair weight 0.01: [exact product](../../3-understanding-compositionality/artifacts/notes/how-the-poe-toy-experiment-works/how-the-experiment-works.md#2-the-exact-product) 300 of 300 crisp pairs, reverse diffusion 0 of 300 | found | the [toy card](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md) | 7 |
 | On the toy the product itself composes and the sampler fails, so a discriminator learns log q_joint minus log q_sampler, which differs from the true noised product; the toy reports cosine against both | designed | the toy card, "[Where the samplers lose the pair](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md#where-the-samplers-lose-the-pair)" | 7 |
+| Exact toy, pair weight 0.01, seed 7: a pair-aware discriminator's push gives 172 of 300 crisp pairs at w = 1 and 300 at w = 2, against 0 unguided; a separate-label push gives at most 10 over scales 1 to 10; the closed-form best separate-label classifier reaches 34 at scale 10 | found | [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md), plan 19 | 8, 9, 10 |
+| On the toy the pair-aware push<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> points along the sampler's own ratio (cosine 0.85 to 0.96, steps 190 to 90), not along the true correction (at most 0.21), and stays under a tenth of the summed score's size, so a cap of 0.1 never binds; the true correction capped at 0.1 composes 4 of 300 | found | plan 19's `diagnosis.json` | 9, 10 |
+| On the toy, inclusive captions with no push need a pair weight between 0.3 and 0.5 to match the push at 0.01 (115 and 246 crisp of 300) | found | plan 19's `inclusive-captions-comparison.json` | 8 |
 | The authors' code is github.com/openai/guided-diffusion; its README lists a class-conditional 64 px model and classifier and an unconditional 256 px model with a 256 px classifier | stated | the guided-diffusion README, checked at step 4's open | 4, 8 |
 | The released 64 px model has no unconditional mode, so a product with a null expert needs the 256 px unconditional model, or a model we train with a null label | designed | follows from the row above | 8 |
 | The [Reduce, Reuse, Recycle copy](../../environment/reduce-reuse-recycle-code.md#the-clevr-script) of the guided-diffusion U-Net lacks the upstream line `h = x.type(self.dtype)`; use the upstream repository | found | `environment/reduce-reuse-recycle-code.md` line 47 | 4, 8 |
@@ -108,8 +113,9 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | On the released weights, 250 respaced steps of ancestral sampling: scale 0 is byte-identical to plain sampling on 4 of 4 seeds; at scale 10 the released classifier calls 16, 15 and 15 of 16 samples corgi, tabby and golden retriever, against 2, 2 and 5 at scale 1; a render takes 22 s plain and 37 s guided on a Quadro RTX 8000 | found | [the reproduce card](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md), jobs 89232 and 89235 | 7, 8 |
 | By a strict eye at 256 px, scale 10 gives 9, 11 and 10 of 16 clear corgi, tabby and golden retriever, against the classifier's 16, 15 and 15; all 22 disagreements over 96 tiles are the classifier calling a fox face, a beagle, a Labrador or garbled fur the asked-for class | found, eye read `inferred` | `your_call` in [the per-tile calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/classifier_calls.csv), instruction 13 | 8 |
 | The push at scale 10 moves the step's mean by under 0.1% of its norm, largest in the first fifth of the run; the classifier's raw gradient falls once the class is reached and keeps rising at scale 1 | found | `push_per_step_c263_s10_seed0.json` in [the reproduce card](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md) | 5, 7 |
-| mscluster111 and mscluster112 (RTX PRO 6000 Blackwell) both work under `co3_bw`: torch 2.11.0+cu128 sees the card, a 1000 × 1000 matmul sums to 1e9, and `/datasets` is visible over SSH; mscluster110 held another user's 67.8 GB job; mscluster107 card 1 was free; mscluster109 did not answer SSH. The environment notes still list 111 and 112 as faulted | found | live probe 2026-11-17 over `scripts/cluster.sh sh` | the rung compute plans |
+| mscluster111 and mscluster112 (RTX PRO 6000 Blackwell) both work under `co3_bw`: torch 2.11.0+cu128 sees the card, a 1000 × 1000 matmul sums to 1e9, and `/datasets` is visible over SSH; mscluster110 held another user's 67.8 GB job; mscluster107 card 1 was free; mscluster109 did not answer SSH | found | live probe 2026-11-17 over `scripts/cluster.sh sh`, recorded in `environment/hpc/nodes.md` | the rung compute plans |
 | On a Blackwell a plain product render takes 5.7 to 5.9 s and a joint render 5.0 to 5.2 s, against 51.5 s per product render on a Quadro RTX 8000, about 9 times faster; no guided SDXL render has been timed on any card | found | `1-lora-correction/report/paper-review/prze-10-compute.md`, plan 15's render cost | the rung compute plans |
+| Rung 2's bar, written before any render, counts out of 4 seeds at strengths 10, 30 and 100: support is two separate intact animals on at least 2 of 4 held-out seeds (9 to 12) at some strength, more than best-of-N, with a random push matched in size step by step composing at most 1 of 4; the disturbance reading is that random push at 2 of 4 or more; the picker reading is the same count with best-of-N equal or higher; inconclusive is at least 2 of 4 composed on seeds 9 to 12 with at most 1 intact; memorised is at most 1 of 4 on seeds 9 to 12 at every strength and at least 2 of 4 on seeds 1 to 4; null is at most 1 of 4 on both sets at every strength, called only when strength 100 visibly moved the picture on at least 2 of 8 seeds and the cap fired on fewer than half the steps, else the run is too weak to read | designed | [the rung 2 review file](review/a3q-cat-x-dog-quick-discriminator-test.md), 2026-11-17 | 10 |
 
 ## What you will achieve
 
@@ -120,7 +126,7 @@ Navigation: ⬅️ [Previous](#what-we-know-so-far) | 📋 [TOC](#table-of-conte
 | 1 classifier guidance on the released weights | own | nothing typed; the guided mean read line by line in their `gaussian_diffusion.py` | `ε − σ_t ∇ log p(y \| x_t)` on one step's vectors, and the missing term from Bayes | the corgi push at scale 1 and 10, one step's numbers | the submerge journey's derivation problems | three questions after stage 1 |
 | 2 the exact toy | build | the toy's guided step and the discriminator's loss and log-odds gradient, typed by you | the best discriminator q1/(q1+q2) on two 1-D Gaussians, and its log-odds slope | one draw's push against the true correction at one step | the separate-label push shown to equal a heavier product, by hand | a full page after stage 2 |
 | 3 our photos, both ways | own | nothing typed; the label-dropout change read as a diff | where the null expert comes from in each arm | the product's prediction for one 64 px image, with and without the push | none | three questions after stage 3 |
-| 4 SDXL cat × dog | gloss | nothing typed | the stage ladder with each stage's count | plan 15's best weight against plain product | none | the retrospective's predictions |
+| 4 SDXL, rungs 2 to 4 | gloss | nothing typed | the ladder with each rung's count | rung 2's guided sheet against plain product and best-of-N on one seed | none | the retrospective's predictions |
 | **Outcome** | | **four figure sets with cards, findings and pass or miss lines** | | | | **you explain why a separate-label classifier cannot fix the product, without notes** |
 
 ## The route at a glance
@@ -130,16 +136,18 @@ Navigation: ⬅️ [Previous](#what-you-will-achieve) | 📋 [TOC](#table-of-con
 ▶ **Recommended:** `1 hld-diagram ‖ 2 submerge (background) → 3 drip-read --lean ‖ background: 4's
 downloads → 4 drip-execute-plan --reproduce ‖ background: 6 prompt-storyboard → render-diagrams →
 5 drip-execute-plan --request (sampler repair) ‖ background: the canary → 7 drip-execute-plan
---request (toy) ‖ background: quiz-prep-pulse, quiz-cadence → 8 drip-execute-plan --request (photos,
-both arms) ‖ background: the 64 px training → 9 frame-hypothesis → 10 drip-execute-plan (plan 15) →
-11 drip-retro, pressure-test → re-route` (laid on the research spine: read, reproduce, rebuild
+--request (toy) ‖ background: quiz-prep-pulse, quiz-cadence → 9 frame-hypothesis (rung 2's readings) →
+10 drip-execute-plan --request (rung 2) → 10b experiment-planner (rung 3) → 10c drip-execute-plan →
+10d experiment-planner (rung 4) → 10e drip-execute-plan → 11 drip-retro, pressure-test → re-route`,
+with `8 drip-execute-plan --request (photos, both arms) ‖ background: the 64 px training` beside the
+ladder from sitting 5 (laid on the research spine: read, reproduce, rebuild
 small, state the test, test it scale by scale, explain; proposed for the photo stage, where no
 curated flow trains a model of our own)
 
 <details><summary>Alternatives</summary>
 
-`3 drip-read --lean → 7 toy → 9 frame-hypothesis → 10 plan 15`: better when the SDXL answer is
-needed within two weeks and the released-weights and photo stages can be argued from the toy alone.
+`7 toy → 9 → 10 rung 2 → 10d → 10e`, skipping rung 3: better when the paper needs the v58 pool and
+held-out pairs first and the pair kinds can wait for the re-route.
 
 `drip-idea --hypothesis → hypothesis-to-scope → populate-plans → drip-execute-plan`: better when a
 supervisor needs the full scope written before any run.
@@ -158,8 +166,10 @@ once, which the step to a pretrained text-to-image model cannot avoid.
 
 **Every stage below SDXL runs two classifiers.** A separate-label classifier (cat present, dog
 present), which the maths says only re-weights the product, and a pair-aware one (two separate
-animals against the product's own draws), which is the claim. Stage 4 uses plan 15's pair-aware head,
-with plan 17 and 18's species-only pushes as the control.
+animals against the product's own draws), which is the claim. On SDXL the pair-aware classifier is a
+small discriminator trained on checked renders of the two things apart, with lone-subject renders
+and the product's own renders as negatives; plan 18's species-only push is the earlier result it
+answers.
 
 **Stage 3 runs both arms, because they answer different questions.** The released 256 px
 unconditional model with classifiers trained on our photos asks whether the push works on a model
@@ -187,7 +197,18 @@ rows and the condition for going on are in [the board's ladder](../report/classi
 The photos (A2r, A2c) and the head ablations (B1 to B7) run beside it and gate nothing. Every
 rung's compute plan is written before launch, on the quickest card that can run it.
 
-`pending: the rung step rounds of the 2026-11-17 reopening (each rung's planning skill, compute step and bar)`
+**The chain over the ladder.** `7 rung 1 toy → 9 rung 2's bar → 10 rung 2 (A3q) → rung 3 plan →
+rung 3 → rung 4 plan → 4a, 4b, 4c → 11 retrospective`, with step 8's photos beside it. Rungs 1 and 2
+are one comparison each, so a request walk writes its own plan; rung 2's bar is written in one pass
+before anything renders; rungs 3 and 4 have many cells, so an axes planner (`experiment-planner`)
+writes the axes and the run table before the walk.
+
+**Every rung opens with the same compute piece.** The walk reads `environment/hpc/throughput.md`
+and `environment/hpc/nodes.md`, probes the cards live, times a small batch on the chosen card, and
+writes GPU-hours, wall clock, card and fallback card, and the seeds and pairs that buys into the
+rung's plan. It ticks the row's compute line on the board and stops for a yes before launching.
+Card order: mscluster111 or 112 (Blackwell, `co3_bw`), the other Blackwell, then mscluster107
+card 1 (RTX 8000, `co3`); every column of one rung's sheet renders on one card.
 
 ## The two lanes
 
@@ -202,30 +223,33 @@ on the same draws.
 | 1 | the guided-diffusion setup, the corgi and cat and dog sheets, the sampler repair | the submerge journey on classifier guidance, the Kim et al. read | `quiz-prep-pulse` then `quiz-cadence` on the journey's plans | every needed-now question right and 80% of the rest (estimate) | the guided mean on paper, from Bayes | the released classifier's call on one sample at scale 1 and 10 |
 | 2 | exact draws, both classifiers, the guided sweep, the per-step cosine | the best discriminator and its log-odds, by hand | `quiz-prep-pulse` then `quiz-cadence` on the stage 2 plan | the same | the toy discriminator's loss and its log-odds gradient | the same 300 toy draws at pair weight 0.01 |
 | 3 | the photo set, both arms, both classifiers, the sheets | why the null expert matters | three questions | the same | none | none |
-| 4 | plan 15's head and sweep on the repaired sampler, the control columns | the stage ladder, predicted before each reveal | the retrospective's predictions | none | none | none |
+| 4 | rungs 2 to 4: each rung's compute piece, discriminators, renders and sheets | the ladder, predicted before each reveal; each tile called by eye | the retrospective's predictions | none | none | none |
 
 ## Schedule
 
 Navigation: ⬅️ [Previous](#the-two-lanes) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
 
-Two-hour sittings, numbered, no dates yet. Only stage 1 is scheduled in detail; the rest is an
-estimate re-cut at each stage's close.
+Two-hour sittings, numbered, no dates and no GPU cap; each rung records what it spent. Steps 1 to 5
+are done. Each rung is re-cut at the close of the one before it.
 
 | Block | Run | You, while it runs | Checkpoint at the end of the block |
 |---|---|---|---|
-| sitting 1 | step 1, step 2's open, step 3 begins ‖ background: step 4's clone and checkpoint downloads, step 2's journey build | the read | the design drawn, the journey's diagram set approved, the read's spine and first section |
-| sitting 2 | step 3 to its close ‖ background: step 6's storyboard and renders | the read | the read map's "What the first stage takes from this" written; instruction 12 drawn |
-| sitting 3 | step 4, targets 1 and 2 | the journey's first plan while samples render | strength 0 identical; the corgi sheet called (instruction 13) |
-| sitting 4 | step 4, target 3; step 5 ‖ background: the canary | the journey's second plan | the cat and dog sheet called; the SDXL sampler capped and the canary identical |
-| sitting 5 | stage 1 quiz, then step 7 opens | none | quiz passed at the bar; step 7's bars confirmed |
-| sittings 6 to 9 | step 7 (estimate) | none | the toy's pieces built and tested, about one per sitting; the bar printed |
-| sittings 10 to 14 | step 8 (estimate) ‖ background: the 64 px training, about 12 to 24 hours (estimate) | the stage 2 quiz while the model trains | both arms' sheets called (instruction 14) |
-| sitting 15 | step 9 | none | the SDXL criterion written and ticked (instruction 15) |
-| sittings 16 to 18 | step 10 (estimate) | none | plan 15's sweep called at full resolution (instruction 16) |
-| sitting 19 | step 11 | none | the retrospectives walked; the re-route printed |
+| sitting 1 | step 7 opens: the compute piece, the axes block, the port ‖ background: step 6's storyboard and renders | none | scale 0 identical to unguided, draw by draw |
+| sittings 2 to 4 | step 7's pieces | the stage 1 quiz while a sweep runs | rung 1's bar printed |
+| sitting 5 | step 9, then step 10's compute piece and training-set sheet ‖ background: step 8's two 64 px trainings start | none | the seven readings counted; the positives called |
+| sittings 6 and 7 | step 10, about 0.3 GPU-hours on a Blackwell | the stage 2 quiz | rung 2's reading printed |
+| sitting 8 | step 10b | none | rung 3's axes, run table and compute block |
+| sittings 9 to 12 | step 10c, about 2.7 GPU-hours over two Blackwells | none | each kind's reading printed |
+| sitting 13 | step 10d | none | rung 4's three plans and bars |
+| sittings 14 to 17 | step 10e: 4a in sitting 14, 4b in 15 and 16, 4c in 17; about 12 GPU-hours | none | each sub-rung's reading printed |
+| sitting 18 | step 11 and the pressure test | none | the re-route printed |
+| sittings P1 to P4 | step 8, any time after sitting 5, once the 64 px runs land | none | both photo arms called (instruction 14) |
 
-Step 7 is the step most likely to overrun. If sitting 8 ends with fewer than three pieces tested,
-sitting 9 opens with `faster`, which costs the build tier on the remaining pieces.
+**Totals.** About 18 hours of your time to finish the ladder from step 7 and about 32 hours budgeted
+at 2×, in 18 sittings, plus 4 for the photos: 22 in all. About 15 GPU-hours on a Blackwell for the
+ladder, most of it in rung 4, plus the photo stage's 64 px trainings (12 to 24 hours each,
+estimate). A rung that misses opens its diagnosis ladder at half its box and moves every later
+sitting.
 
 ## Tasks
 
@@ -717,6 +741,12 @@ authors' classifier-guidance code to that toy and tests two classifiers. The rou
 2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md.
 
 Objectives
+0. Compute piece: time one discriminator epoch and one 300-draw guided sweep on the
+   laptop CPU; write minutes, the machine, the fallback (mscluster112, co3_bw) and the
+   draws it buys into the plan; tick the exact-toy row's compute line; stop for my yes.
+0b. Write the axes block before any run: classifier (none, separate-label,
+   pair-aware) varies; pair weight 0.01, 300 draws, noise schedule and the s grid are
+   held. Print the draw count each classifier actually ran.
 1. Port the push from guided-diffusion's condition_score into the toy's sampler, and check that
    scale 0 reproduces the unguided draws exactly.
 2. Train a separate-label classifier, circle present and square present, on noised toy pictures.
@@ -744,6 +774,7 @@ When something is missing
 - If the toy code lacks a per-step draw hook, add one and say where.
 
 Rules
+- One axis per comparison: at each s only the classifier differs.
 - I type the guided step, the discriminator's loss and its log-odds gradient myself.
 - Stop at each piece's test and show its number.
 - Filing: on, because this is the build being learned by hand.
@@ -771,14 +802,14 @@ product of experts,
 /home/molef/goal-setting/learning/deep-learning/generative-models/03-sampling-from-a-graph/plans/17-poe-rule-from-the-fork.md
 
 Judged by the counts, with you confirming the bars at the open: done when the pair-aware push
-draws at least 150 of 300 crisp pairs with overlays no higher than unguided, and the separate-label
-push draws at most 15 of 300.
+draws at least 150 of 300 crisp pairs at some s with overlays no higher than unguided, and the
+separate-label push draws at most 15 of 300 at every s on the grid.
 ```
 
 - `added:` the separate-label classifier as the control (from the corrected claim) · `dropped:` the
   linear-discriminant picture of the head's features (why: on a toy with known densities the cosine
   says more)
-- [ ] **Gate:** the bar printed; a miss opens the diagnosis ladder and stops the climb.
+- [x] **Gate:** the bar printed; a miss opens the diagnosis ladder and stops the climb. ✓ verified 2026-11-17: pass on both halves, pair-aware 172 of 300 crisp at w = 1, separate-label at most 10 · [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md)
 - **Leaves:** the toy card and a retrospective, which steps 8, 9 and 11 read.
 
 ### 8. 🧪 Our photos, both ways: the released model, and a model we train
@@ -812,7 +843,7 @@ Objectives
    all photos, each with the label dropped to null 10% of the time.
 3. For the released model, train with classifier_train.py a separate-label classifier (cat
    present, dog present) and a pair-aware one (both-animal photos against the product's own
-   draws).
+   finished draws, noised forward).
 4. Sample the released model on seeds 1 to 16: plain product of the two separate-label pushes,
    then with the pair-aware push added.
 5. When the 64 px runs land, sample each on seeds 1 to 16: plain product, with the separate-label
@@ -823,7 +854,10 @@ What to read
 - The pool card, which says how many photos hold each animal:
   4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md
 - The step 4 card and the clone at /home/molef/PhD/replications/guided-diffusion.
-- The step 7 card and its retrospective.
+- The toy's finding: 2-classifier-guidance/report/classifier-guided-poe/a1-exact-toy-classifier-push.md,
+  and its code: 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_classifier_push.py.
+- The toy walk's retrospective:
+  2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-classifier-push-on-the-exact-toy-retro.md.
 - environment/hpc/nodes.md and environment/hpc/throughput.md, before estimating the training time.
 
 What is already known
@@ -838,6 +872,13 @@ What is already known
 - Composition calls overcall on downscaled sheets, so clear pairs are called from full-resolution
   tiles, and a hybrid is its own category.
 - biggpu allows one job per user, so the two trainings run with nohup, or one goes to bigbatch.
+- On the exact toy the pair-aware push gave 172 of 300 crisp pairs at weight 1 and 300 at weight
+  2, and the separate-label push at most 10, so sample the pair-aware push at weights 1 and 2 (A1's page).
+- On the toy the separate-label push still made a few pairs, because the both picture carried
+  both labels; the same can happen here with the 150 both photos (A1's page).
+- On the toy the discriminator's fake pile was the sampler's finished draws noised forward to a
+  random step, with the loss weighted per step, and its push stayed under a tenth of the
+  product's own step (the toy's code and A1's page).
 
 When something is missing
 - If the manifest counts differ from 550, use the manifest and say so.
@@ -877,163 +918,449 @@ pictures no more damaged than plain product's.
 ```
 
 - `added:` the two training sets with and without the both photos, the null label (from the
-  maths: a product needs a null expert) · `dropped:` pasted pairs (why: real both-animal photos
-  exist in the pool)
+  maths: a product needs a null expert); the toy's three facts and its finding, code and
+  retrospective as sources (from step 7) · `dropped:` pasted pairs (why: real both-animal photos
+  exist in the pool); the step 7 card, replaced by A1's page
 - [ ] **Gate:** instruction 14 called.
-- **Leaves:** the card, the finding and the retrospective, which step 9 reads.
+- **Leaves:** the card, the finding and the retrospective, which step 11 reads.
 
-### 9. ⚖️ State the SDXL test before it runs
+### 9. ⚖️ State rung 2's seven readings before anything renders
 
-You ~45 min (estimate) · AI ~10 min · Opus, high · moves: stage 4's bar
+You ~30 min (estimate) · AI ~10 min · Opus, high · moves: rung 2's bar
 
-**Objective:** the SDXL stage's support, null and inconclusive lines, with numbers, in a review file.
-**Outcome:** `2-classifier-guidance/plans/review/15-can-a-classifier-supply-the-missing-term.md`
-with its bar ticked.
-**Serves:** needed by step 10 for its bar.
-**Sees:** none · **Ticket:** none · **Source page:** none
+**Objective:** A3q's seven readings with their counts out of 4 seeds, in a review file, before any
+SDXL render.
+**Outcome:** `2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md` with its
+bar ticked.
+**Serves:** step 10's bar, and the board's rung 2 row.
+**Sees:** [A3q's page](../report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md) ·
+**Ticket:** none · **Source page:** none
 
 ```text
-/frame-hypothesis a pair-aware classifier's gradient, added to SDXL's cat and dog product at each
-step, draws two separate animals on more seeds than plain product, and a species-only classifier
-does not
+/frame-hypothesis a small pair-aware discriminator, trained on 10 to 15 checked SDXL renders of
+a cat and a dog apart, steers the cat × dog product to two separate animals on held-out seeds 9
+to 12 more often than plain product and than best-of-N picked by the same discriminator
 
 Background
-Steps 4, 7 and 8 of the route
-2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md tested the claim on
-the released weights, the exact toy and our photos. This writes the SDXL test before any SDXL run,
-for plan 15 at 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md.
+Rung 2 of the scale-up ladder in
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md. Its four
+readings are on A3q's page; this pass writes their counts before step 10 renders anything.
+Rung 1, the exact toy, passed on 2026-11-17.
 
 Objectives
-1. State what supports the claim, what is a null and what is inconclusive, as counts out of 8.
-2. Name the control columns: plain product, the joint prompt, and the species-only pushes from
-   plans 17 and 18.
-3. Write the review file for plan 15.
+1. Write support, memorised, inconclusive and null as counts out of 4 seeds, by eye at full
+   resolution, starting from the proposed counts below.
+2. Name the columns: plain product, best-of-N at equal compute picked by the discriminator,
+   guided at 3 strengths; seeds 1 to 4 beside 9 to 12.
+3. Write the review file and tick its bar line.
 
 What to read
-- The cards and retrospectives from steps 7 and 8.
-- Plan 15's stop point and plans 17 and 18's results.
+- 2-classifier-guidance/report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md.
+- 2-classifier-guidance/report/classifier-guided-poe/a1-exact-toy-classifier-push.md, the toy's finding.
+- 2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-classifier-push-on-the-exact-toy-retro.md.
 
 What is already known
-- Plain product composes 0 of 8 on cat × dog; the joint prompt 8 of 8 (plan 15's stop point).
-- The species-only dog push gave two animals in 0 of 16 tiles (plan 18).
-- Results from steps 7 and 8, as their route rows record them.
+- Proposed counts: support is guided at least 2 of 4 on seeds 9 to 12 at some s, more than
+  best-of-N, damage no worse than plain product; memorised is at least 2 of 4 on seeds 1 to 4
+  and at most 1 of 4 on 9 to 12; inconclusive is at least 2 of 4 composed with at least half
+  of them damaged; null is at most 1 of 4 on both seed sets at every s.
+- Plain product best-of-16 composed 0 of 128 particles on cat × dog.
+- Seed 10's joint-prompt render draws three dogs, so no joint column is read on seed 10.
+- On the exact toy the pair-aware push gave 172 of 300 crisp pairs at weight 1 and 300 at
+  weight 2, so the 3 strengths should reach past 1 (A1's page).
+- On the toy the push stayed under a tenth of the summed score's size, so the SDXL sampler's
+  cap of 0.1 should not bind; log whether it fires (A1's page).
+- On the toy the product's own target composed and the push repaired the sampler; on SDXL
+  the gap may also be the model's, so a null here does not contradict the toy (A1's page).
 
 When something is missing
-- If step 8 missed on both arms, ask the reader whether SDXL still runs; the fallback is to stop
-  the climb and walk step 11.
+- If a count cannot be fixed without seeing renders, write the reading without it and ask;
+  nothing renders until all four have numbers.
 
 Rules
 - Write no code.
 
 What to hand back
-- The review file path and one route row with the bar.
+- The review file path and one route row with the four counts.
 
 What you will see
-The criterion one part per round. Done when the review file holds the three lines with numbers.
+The criterion one part per round. Done when the review file holds the seven readings with
+numbers.
 ```
 
-- [ ] **Gate:** instruction 15 ticked.
+- [x] **Gate:** the review file's bar ticked. · ✓ 2026-11-17: [the rung 2 review file](review/a3q-cat-x-dog-quick-discriminator-test.md), seven readings with counts
 - **Leaves:** the review file, which step 10 reads.
 
-### 10. 🧪 SDXL cat × dog on training seeds: plan 15 on the repaired sampler
+### 10. 🧪 Rung 2: a small discriminator steers cat × dog on held-out seeds
 
-You ~225 min to finish, ~450 min budget at 2× (estimate) · AI ~4 h on the cluster (estimate) ·
-Sonnet, medium · moves: stage 4
+You ~135 min to finish, ~270 min budget at 2× (4 pieces and the compute piece at 30 min,
+estimate) · AI ~30 min, about 0.3 GPU-hours on a Blackwell (inferred until the compute piece
+times it) · Sonnet, medium · moves: rung 2
 
-**Objective:** plan 15's bar from its review file, printed pass or miss.
-**Outcome:** plan 15's sweep sheet with control columns, card and finding.
-**Serves:** the board's SDXL training-seeds row.
+**Objective:** one of A3q's seven readings printed with its counts.
+**Outcome:** the sheet (seeds 1 to 4 beside 9 to 12; plain product, best-of-N, guided and a
+size-matched random push at 3 strengths), the per-tile calls, the card and the finding.
+**Serves:** the board's rung 2 row, A3q.
 **Sees:** the step 1 design · **Ticket:** none · **Source page:** none
 
 ```text
-/drip-execute-plan 2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md
+/drip-execute-plan --request "Rung 2: a small pair-aware discriminator steers SDXL's cat × dog
+product on held-out seeds"
 
 Background
-Plan 15 trains a two-output presence head on SDXL's frozen middle block, with labels that refuse to
-call a fused animal "both", and sweeps its push on cat × dog. Its walk map
-2-classifier-guidance/artifacts/drips/can-a-classifier-supply-the-missing-term/EXECUTE_WALK.md
-still reads "in flight"; the labelling run finished on 2026-11-04. The route is
-2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md.
+Rung 2 of the scale-up ladder in
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md. The fastest
+real test on SDXL: a small discriminator trained on a few checked renders, its push judged on
+seeds it never saw, beside plain product and best-of-N picked by the same discriminator.
 
 Objectives
-1. Bring the walk map up to date: tasks 1.2 and 1.3 finished on 2026-11-04.
-2. Run tasks 3.2 and 3.3 on the repaired sampler from step 5.
-3. Run the sweep, tasks 4.1 to 4.3, with two control columns: plan 17's species head pushing cat
-   and dog, and plan 18's classifier recipe for cat, dog and both.
-4. Read the bar from the step 9 review file.
+0. Compute piece: probe mscluster112, then 111, then mscluster107 card 1; assert torch sees
+   the card under co3_bw; time 4 guided and 4 plain renders; write GPU-hours, wall clock,
+   card, fallback and N for best-of-N into the plan; tick A3q's compute line; stop for my yes.
+1. Build the training set: 10 to 15 renders of cat and dog apart from seeds 1 to 8 (joint
+   prompt plus "a cat on the left and a dog on the right" and "a cat and a dog sitting
+   apart"), lone cat and lone dog, and the product's renders from seeds 1 to 8. Show me the
+   sheet; I call each tile.
+2. Train the discriminator on noisy latents: cat and dog apart against the product's renders
+   and the lone animals, all noised the same way.
+3. Render seeds 1 to 4 and 9 to 12: plain product, best-of-N, guided at s = 10, 30 and 100,
+   and a random push scaled to the guided push's norm at every step, at the same 3 strengths.
+4. One sheet, seeds 1 to 4 beside 9 to 12; I call every tile at full resolution.
 
 What to read
-- Plan 15, its walk map and its review file.
-- Plans 17 and 18, tasks 4.1.
-- The step 5 commit and the cards from steps 7 and 8.
+- A3q's page: report/classifier-guided-poe/a3q-cat-x-dog-quick-discriminator-test.md.
+- The step 9 review file, for the seven readings' counts.
+- The step 5 commit (the capped, unrescaled push) and the step 7 card.
 
 What is already known
-- The sampler pushes unrescaled and capped (from step 5).
-- The recommended prompts inside plans 15, 17 and 18 point at removed paths; use the paths here.
-- GroundingDINO counts animals; CLIP on the padded crop names them.
-- Composition is called from full-resolution tiles, with a hybrid as its own category.
-- biggpu allows one job per user; the bigbatch cap is 6 jobs; outputs go under /datasets.
+- Plain product best-of-16 composed 0 of 128 particles on cat × dog.
+- The joint prompt shows one of each animal on 6 of 17 cached seeds (9, 11, 12, 16 and two
+  below 9); seed 10's joint render draws three dogs.
+- Plan 18's push turned the fused animal into one cat on 3 of 4 seeds, which is why lone
+  animals are negatives here.
+- mscluster111 and 112 passed a CUDA probe under co3_bw on 2026-11-17.
+- Every column of the sheet renders on one card.
 
 When something is missing
-- If the cluster worktree poe_repair_min-classifier-guided is on the old branch, make a new
-  worktree on exec/classifier-guidance-ladder and launch with CLUSTER_DIR set to it.
+- Fewer than 10 checked positives: add renders from seeds 5 to 8 with the two wordings before
+  training; never seeds 9 to 16.
+- The guided sampler fails under co3_bw: move to mscluster107 card 1 under co3, all columns.
+
+Rules
+- One axis: only how the discriminator is used changes between columns.
+- Stop before each launch with the exact command.
+- Outputs under /datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/.
+- Filing: on, so each sheet is filed.
+
+What to hand back
+- The sheet, per-tile calls as CSV, the card under
+  2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/, the
+  reading it landed on, route rows, A3q's lines ticked, board redrawn with --step 10.
+
+What you will see
+The compute block and my yes, the training-set sheet, then the result sheet called tile by
+tile. Done when one of the seven readings is printed with its counts.
+
+Controls: the compute piece, plumb; the training-set piece, prove (each tile at full
+resolution); the result sheet, prove; the close, test
+Side routes: the result sheet, /picture-speak --consequence the push switched off at each s
+
+Judged by you from full-resolution tiles against the step 9 review file.
+```
+
+- [ ] **Gate:** every tile called; the reading printed.
+- **Leaves:** the card and the retrospective, which the rung 3 planning step reads. Plan 15
+  (`2-classifier-guidance/plans/15-can-a-classifier-supply-the-missing-term.md`) is re-routed
+  from here.
+
+### 10b. 📐 Plan rung 3: axes, run table and compute for three pair kinds
+
+You ~60 min (estimate) · AI ~15 min · Opus, high · moves: rung 3's plan
+
+**Objective:** a plan file for rung 3 whose axes, run table, compute block and per-kind bar are
+written before any render.
+**Outcome:** the plan file and its review file under `2-classifier-guidance/plans/`.
+**Serves:** the board's rung 3 rows, K1, K2, K3 (their compute lines).
+**Sees:** none · **Ticket:** none · **Source page:** none
+
+```text
+/experiment-planner rung 3 of the scale-up ladder: rung 2's discriminator recipe on three pair
+kinds
+
+Background
+Rung 2 (route step 10) tested a small pair-aware discriminator's push on cat × dog. Rung 3
+changes only the pair kind. The route is
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md; the rows are
+K1, K2, K3 on 2-classifier-guidance/report/classifier-guided-poe/board.md.
+
+Objectives
+1. Write the axes before any experiment: pair kind varies; 3 pairs per kind replicate;
+   rung 2's recipe, columns, strengths, seeds, steps and cap are held.
+2. Write the run table: one row per pair × column × seed × strength, with the card each
+   pair runs on.
+3. Write the compute block from rung 2's measured rates: GPU-hours, wall clock, cards
+   (mscluster111 and 112 under co3_bw, mscluster107 card 1 as fallback), the cells it buys.
+4. Write the per-kind bar and the rule for going on.
+
+What to read
+- Rung 2's card and retrospective, and its measured rates.
+- environment/hpc/throughput.md and environment/hpc/nodes.md.
+- data/prompt-sets/attend-and-excite/a.e_prompts.json and
+  artifacts/_shared/cross_pair_pool_configs/pair_ledger.md.
+
+What is already known
+- Pairs, drawn from the guard-clean "and" prompts with colour words stripped, cat and dog
+  excluded, 3 per kind with random.Random(0): K1 a cat and a bear, a bird and a bear, a bird
+  and a turtle (of 44); K2 a cat and a backpack, a monkey and a suitcase, a lion and a clock
+  (of 90); K3 a suitcase and a balloon, a bow and a bowl, a bowl and a bench (of 66).
+- Colour words are stripped so only the kind changes; every object prompt in the set
+  carries a colour and no animal prompt does.
+- Bar per kind, 12 held-out tiles (3 pairs × seeds 9 to 12): passes when guided shows two
+  separate things in frame on at least 4 more of 12 than plain product, more than best-of-N,
+  damage no worse; "nothing to fix" when plain product is already at least 9 of 12; null
+  when guided is within 1 of plain product at every strength.
+- Every column of one pair renders on one card.
+
+When something is missing
+- If a pair yields fewer than 10 checked positives from seeds 1 to 8, draw the next pair by
+  the same rule; never use seeds 9 to 16.
+
+Rules
+- No run starts from this step; it writes the plan only.
+
+What to hand back
+- The plan file, its review file, and K1 to K3's compute lines ticked on the board.
+
+What you will see
+The axes, then the run table, then the compute block, one per round.
+```
+
+- [ ] **Gate:** the review file's bar ticked.
+- **Leaves:** the rung 3 plan, which step 10c walks.
+
+### 10c. 🧪 Rung 3: the push on three pair kinds
+
+You ~225 min to finish, ~450 min budget at 2× (5 pieces at 45 min, estimate) · AI ~1.5 h wall
+clock, about 2.7 GPU-hours over two Blackwells (inferred from rung 2) · Sonnet, medium · moves:
+rung 3
+
+**Objective:** each kind's bar printed pass, nothing to fix, or null.
+**Outcome:** one sheet per kind, per-tile calls, the card and the finding.
+**Serves:** K1, K2, K3.
+**Sees:** the step 1 design · **Ticket:** none · **Source page:** none
+
+```text
+/drip-execute-plan <the rung 3 plan file step 10b wrote>
+
+Background
+Rung 3 of the scale-up ladder in
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md: rung 2's recipe,
+unchanged, on 3 animal pairs, 3 animal and object pairs and 3 object pairs.
+
+Objectives
+1. Run the plan's compute piece and stop for my yes.
+2. Per pair: build and show the training-set sheet; I call each tile.
+3. Train each pair's discriminator; render its columns on one card.
+4. One sheet per kind, seeds 1 to 4 beside 9 to 12; I call every tile at full resolution.
+
+What to read
+- The rung 3 plan and its review file; rung 2's card.
+
+What is already known
+- The pairs, the bar and the cards are in the plan.
+- Two things in frame counts, fused and destroyed are called apart, and a hybrid is its own
+  category.
+
+When something is missing
+- A card fails its probe: the next card in the plan's order, all of that pair's columns.
 
 Rules
 - Stop before each launch with the exact command.
 - Filing: on.
 
 What to hand back
-- The sweep sheet, card and finding, the bar's pass or miss line, route rows, and the board's
-  SDXL row ticked with --step 10.
+- The sheets, per-tile calls as CSV, the card under
+  2-classifier-guidance/artifacts/results/does-the-push-work-on-each-pair-kind/, the finding,
+  route rows, K1 to K3 ticked, board redrawn with --step 10c.
 
 What you will see
-One task per round. A closing report with the best weight's count out of 8 beside plain product,
-the controls and the joint prompt.
+One pair per round, then one kind's sheet per round. Done when each kind's reading is printed.
 
-Controls: each launch, plumb and debug; the sweep, prove (the tiles at full resolution); the close,
-test
-Side routes: the sweep, /picture-speak --consequence the push switched off at each weight
-
-Judged by you from full-resolution tiles against the step 9 review file.
+Judged by you from full-resolution tiles against the plan's review file.
 ```
 
-- [ ] **Gate:** instruction 16 called.
-- **Leaves:** plan 15's retrospective, which step 11 walks.
+- [ ] **Gate:** every kind's reading printed; rung 4 starts when at least one kind passes.
+- **Leaves:** the card and retrospective, which step 10d reads.
 
-### 11. 🔁 Walk the retrospectives, attack the claim, re-route
+### 10d. 📐 Plan rung 4: more seeds, more pairs, unseen pairs
 
-You ~45 min (estimate) · AI ~10 min · Opus, high · moves: your explanation
+You ~60 min (estimate) · AI ~15 min · Opus, high · moves: rung 4's plan
 
-**Objective:** each stage's result predicted before it is shown, the main claim attacked, and the
-re-route for the later stages printed.
-**Outcome:** the walked retrospectives and the re-route command.
-**Serves:** the board's explanation row and the route's later stages.
+**Objective:** a plan for three sub-rungs, each changing one thing, with axes, run table, compute
+block and bar written before any render.
+**Outcome:** the plan file and its review file under `2-classifier-guidance/plans/`.
+**Serves:** A4, C1, C2 (their compute lines).
 **Sees:** none · **Ticket:** none · **Source page:** none
 
 ```text
-/drip-retro <the retrospective file plan 15's close printed>
+/experiment-planner rung 4 of the scale-up ladder: the push scaled to more seeds, the v58 pool
+and unseen pairs
 
 Background
-The route 2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md has
-reached SDXL on training seeds. This walk asks for my prediction before each result, across the
-four stages, then prints the re-route for held-out seeds, the head ablations and the v58 pool.
+Rungs 1 to 3 of 2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md
+tested the push on the toy, on cat × dog, and on three pair kinds. Rung 4 scales it in three
+sub-rungs, each changing one thing. Rows A4, C1, C2 on
+2-classifier-guidance/report/classifier-guided-poe/board.md.
 
 Objectives
-1. Walk each chunk, my prediction first.
+1. 4a, more seeds: rung 2's cat × dog discriminator, unchanged, on seeds 9 to 16; s fixed at
+   rung 2's best; seeds 13 to 16 are read apart because s was chosen on 9 to 12.
+2. 4b, more pairs: one discriminator trained over the v58 pool (182 cells over 48 pairs),
+   its positives the pool's joint-prompt targets already admitted by eye; held-out seeds 9
+   to 16; columns plain product, best-of-N, guided, joint prompt and the rank-32 LoRA. It
+   is also scored on cat × dog seeds 9 to 16 beside 4a's discriminator, which separates the
+   effect of pooling from the effect of more pairs.
+3. 4c, unseen pairs: 4b's discriminator, unchanged, on the 53 held-out pairs at seeds 9 to
+   16, the 23 pairs sharing no concept with training reported apart.
+4. Per sub-rung: the axes, the run table, the compute block (GPU-hours, wall clock, cards
+   mscluster111 and 112 under co3_bw, mscluster107 card 1 as fallback, cells it buys) and
+   the bar.
+5. The scoring: an automatic two-things count (GroundingDINO count, CLIP on the padded
+   crop naming each) on every tile, and by eye on one fixed seed per pair for guided and
+   plain product, which measures how far the automatic count can be trusted.
+
+What to read
+- The cards and retrospectives of rungs 2 and 3, with their measured rates.
+- 1-lora-correction/report/paper-review/held-out-set.md, for the held-out pairs.
+- 1-lora-correction/report/paper-review/prze-10-compute.md, for the Blackwell rates and
+  which renders already exist.
+- environment/hpc/throughput.md and environment/hpc/nodes.md.
+
+What is already known
+- Blackwell rates: plain product 5.7 to 5.9 s, joint 5.0 to 5.2 s, the adapter render 12.1
+  to 14.3 s; a guided render's time comes from rung 2.
+- Proposed compute: 4a about 0.15 GPU-hours; 4b about 6 (384 cells × about 45 s for five
+  columns, plus training); 4c about 5.5 (424 cells); about 3 hours of wall clock each on
+  two Blackwells.
+- The cat × dog joint prompt is wrong on seeds 10, 13, 14 and 15, so its joint column is not
+  read there.
+- The 182 v58 training targets are joint-prompt renders admitted by eye over several rounds;
+  not every seed was checked, so 4b's positives get one more look on a sheet.
+- GroundingDINO counts things but cannot name them; CLIP on the padded crop names them,
+  untested on overlapping boxes.
+- Every column of one pair renders on one card; renders made earlier on another card or
+  sampler are not reused.
+
+When something is missing
+- If rung 3 passed in fewer than three kinds, 4b and 4c report the missing kinds apart and
+  their bar is read on the passing kinds only.
+
+Rules
+- No run starts from this step; it writes the plan only.
+
+What to hand back
+- The plan file, its review file, A4, C1 and C2's compute lines ticked on the board.
+
+What you will see
+One sub-rung per round: its axes, run table, compute block and bar.
+```
+
+- [ ] **Gate:** the review file's three bars ticked.
+- **Leaves:** the rung 4 plan, which step 10e walks.
+
+### 10e. 🧪 Rung 4: more seeds, the v58 pool, unseen pairs
+
+You ~270 min to finish, ~540 min budget at 2× (6 pieces at 45 min, estimate) · AI about 12
+GPU-hours over two Blackwells, about 7 hours of wall clock (inferred) · Sonnet, medium · moves:
+rung 4
+
+**Objective:** each sub-rung's bar printed pass or miss, in order, a miss stopping the climb.
+**Outcome:** the sheets, the per-pair counts, the cards and the findings, ready for the paper's
+table.
+**Serves:** A4, C1, C2, and the paper's table row P1 through step 11.
+**Sees:** the step 1 design · **Ticket:** none · **Source page:** none
+
+```text
+/drip-execute-plan <the rung 4 plan file step 10d wrote>
+
+Background
+Rung 4 of the scale-up ladder in
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md: 4a more seeds,
+4b the v58 pool, 4c the held-out pairs, in that order.
+
+Objectives
+1. 4a: compute piece, my yes, the run, the sheet called at full resolution, the bar.
+2. 4b: compute piece, my yes, train the pooled discriminator, the run, the automatic count
+   and my calls on the fixed seed per pair, the bar.
+3. 4c: compute piece, my yes, the run, the same reads, the bar, the 23 no-shared-concept
+   pairs apart.
+
+What to read
+- The rung 4 plan and its review file; the rung 2 and 3 cards.
+
+What is already known
+- The cards, the bars and the scoring are in the plan.
+- biggpu allows one Slurm job per user; a second run goes on the other Blackwell with nohup;
+  outputs go under /datasets only.
+
+When something is missing
+- A sub-rung misses: its diagnosis ladder opens and the next sub-rung waits.
+
+Rules
+- Stop before each launch with the exact command.
+- Filing: on.
+
+What to hand back
+- Per sub-rung: the sheet, per-tile calls and automatic counts as CSV, the card under
+  2-classifier-guidance/artifacts/results/does-the-push-scale/, the finding, route rows, the
+  row ticked, board redrawn with --step 10e.
+
+What you will see
+One sub-rung per two or three rounds. Done when the three readings are printed.
+
+Judged by you from full-resolution tiles and the automatic count, against the plan's review
+file.
+```
+
+- [ ] **Gate:** each sub-rung's reading printed in order.
+- **Leaves:** three cards and retrospectives, which step 11 walks.
+
+### 11. 🔁 Walk the ladder's retrospectives, attack the claim, re-route to the paper
+
+You ~60 min (estimate) · AI ~10 min · Opus, high · moves: your explanation, and the paper's table
+
+**Objective:** each rung's result predicted before it is shown, the main claim attacked, and the
+re-route to the paper's table and the head ablations printed.
+**Outcome:** the walked retrospectives and the re-route command.
+**Serves:** X1, and P1 and B1 to B7 through the re-route.
+**Sees:** none · **Ticket:** none · **Source page:** none
+
+```text
+/drip-retro <the retrospective file rung 4's close printed>
+
+Background
+The scale-up ladder in
+2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md has closed at
+rung 4, or stopped at an earlier rung. This walk asks for my prediction before each result, rung
+by rung, then prints the re-route for the paper's table (P1), the head ablations (B1 to B7) and
+plan 15.
+
+Objectives
+1. Walk each rung's chunk, my prediction first.
 2. Add one route row per fact settled.
 3. Print the re-route command.
 
 What to read
-- The retrospectives and cards from steps 4, 7, 8 and 10.
+- The retrospectives and cards of steps 7, 8, 10, 10c and 10e.
 
 What is already known
-- Each stage's pass or miss line, from its route row.
+- Each rung's reading, from its route row.
 
 When something is missing
-- If a stage's diagnosis ladder is still open, walk that first.
+- If a rung's diagnosis ladder is still open, walk that first.
 
 Rules
-- The outcome board: the explanation row ticked.
+- The outcome board: X1 ticked.
 
 What to hand back
 - The walked retrospective, the route rows and the re-route command.
@@ -1045,12 +1372,12 @@ One chunk per round, prediction first. Done when the re-route command is printed
 Then:
 
 ```text
-/pressure-test the claim that a pair-aware classifier's push fixes the product of experts where a
-species-only push cannot, from the cards in 2-classifier-guidance/artifacts/results/
+/pressure-test the claim that a small pair-aware discriminator's push fixes the product of
+experts on held-out seeds and pairs, from the cards in 2-classifier-guidance/artifacts/results/
 ```
 
 - [ ] **Gate:** none; the re-route is the next step.
-- **Leaves:** `/skill-route re-route` from this file at the held-out-seeds stage.
+- **Leaves:** `/skill-route re-route` from this file at the paper's table.
 
 ## Instructions
 
@@ -1090,17 +1417,19 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
   ladder if the claim holds.
 - **Done when:** every tile in both arms is called in the CSV.
 
-### 15. ⚖️ Tick the SDXL bar in its review file, in step 9
+### 15. ⚖️ Tick rung 2's seven readings in their review file, in step 9
 
-- [ ] **Do:** open `2-classifier-guidance/plans/review/15-can-a-classifier-supply-the-missing-term.md`,
-  read the support, null and inconclusive lines, tick them or rewrite them.
-- **Done when:** the bar is ticked before step 10 runs anything.
+- [ ] **Do:** open `2-classifier-guidance/plans/review/a3q-cat-x-dog-quick-discriminator-test.md`,
+  read the seven readings and their counts out of 4 seeds, tick them or rewrite them. Do the same
+  for the rung 3 and rung 4 review files when steps 10b and 10d write them.
+- **Done when:** each bar is ticked before its rung renders anything.
 
-### 16. 👁️ Call plan 15's sweep at full resolution, in step 10
+### 16. 👁️ Call each rung's sheets at full resolution, in steps 10, 10c and 10e
 
-- [ ] **Do:** the same four-level call as instruction 14, on every tile of the sweep and the
-  control columns.
-- **Done when:** the calls are in the sweep's CSV.
+- [ ] **Do:** the same four-level call as instruction 14 on every training-set tile and every
+  result tile: fused, two things in frame, two clear, destroyed. On rung 4b and 4c, call the one
+  fixed seed per pair for guided and plain product, beside the automatic count.
+- **Done when:** the calls are in each rung's CSV.
 
 ### 17. 🖥️ Launch from the laptop if a session has no cluster access
 
@@ -1119,7 +1448,7 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | 
 | 1 | `/quiz-prep-pulse` on the step 2 journey's first two plans | page by `quiz-cadence`, three questions | the stage 2 quiz | its node in the coverage file, learned in 30 min, then retaken |
 | 2 | `/quiz-prep-pulse` on the stage 2 plan the step 7 walk wrote | page by `quiz-cadence`, a full page | the stage 3 quiz | the same |
 | 3 | none | `/quiz-me` on the step 8 card, three questions | step 11 | the same |
-| 4 | none | the step 11 retrospective's predictions | the re-route | the same |
+| rungs 2 to 4 | none | the step 11 retrospective's predictions | the re-route | the same |
 
 ## Next step
 

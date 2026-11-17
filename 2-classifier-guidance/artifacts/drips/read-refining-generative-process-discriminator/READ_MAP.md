@@ -52,11 +52,11 @@ toward the data. It needs no retraining of the diffusion model.
 | 3 | 1 | reuse of pretrained models | walked lean | reader asked what the fixed sampler is called, whether it needs MCMC or joint prompts, and asked to carry the caveats forward with mitigations and knobs (section below) |
 | 4 | 1 | the approach, and contributions | tested | Figure 1 (p1) shown. Sentence 5 (term matches the data score at the optimal discriminator): same claim as abstract sentence 6, same verdict; Theorem 1's printed condition is that log p_θ equals its ELBO and s_θ(x, T) = ∇ log π (p3). Sentence 7 (stable, fast, cheap): holds with conditions. Figure 3 (p4) plots FID, not loss: 2.03 unguided, 2.05 at epoch 0, about 1.85 after 1 epoch, best 1.77 at epoch 10, 1.77 to 1.82 to epoch 60. Table 6 (p7), CIFAR-10: 200M score evaluations (480 hr) to train, 1M discriminator evaluations (10 min); the budget leaves out the pretrained ADM classifier the discriminator is built on. 1D two-mode toy (real sd 0.3, fake sd 0.8, 4,096 each, MLP 2-64-64-1): BCE within 0.0008 nats of the best by epoch 400, but correction error over true correction size 0.30, 0.21, 0.40 at t = 0.1, 0.3, 0.5 and 2.96, 18.77 at t = 0.7, 0.9. Script test7/test7.py in the session scratchpad, not kept |
 | 5 | 2 | KL bound on latent variable models | tested | sentence 1 (end KL at most chain KL): holds. 1D, two noising steps (x0 ~ N(1, 0.5²), b = 0.5), KL in nats, end then chain: exact reversal 0.0000, 0.0000; exact reverse steps from N(0,1) 0.0117, 0.1351; a wrong model 0.5438, 0.7023; right finished pictures with a wrong chain 0.0000, 0.8050, which is the loose-bound case Theorem 1's condition rules out. Script test-s2p1/chain_kl.py in the session scratchpad, not kept |
-| 6 | 2 | DDPM's forward and generative chains | walked lean ← current | |
-| 7 | 2 | the forward SDE, Eq. 1 | not reached | |
-| 8 | 2 | the reverse SDE, Eq. 2, and the generative SDE | not reached | |
-| 9 | 2 | the score loss | not reached | |
-| 10 | 2 | other ways to sharpen the score | not reached | |
+| 6 | 2 | DDPM's forward and generative chains | tested | sentence 2 (a Markov model makes the chain gap tractable): holds. Same two-step chain, gaps in nats: wrong model start 0.1351 + step 0.1853 + step 0.3820 = 0.7023, equal to the whole-film gap; exact backward steps from N(0,1): 0.1351 + 0 + 0 = 0.1351. Script test-s2p1/split.py, not kept. Reader asked for KL said plainly; rounds call it the gap |
+| 7 | 2 | the forward SDE, Eq. 1 | tested | sentence 1 (Eq. 1 is DDPM in continuous time): holds. One pixel from 1, 200,000 Euler paths, 1,000 steps, VP drift with beta 0.1 to 20: mean 0.9476, 0.6328, 0.2834, 0.0045 against sqrt(abar) 0.9467, 0.6296, 0.2812, 0.0066 at t = 0.1, 0.3, 0.5, 1.0; variance 0.1031, 0.6050, 0.9242, 1.0044 against 1 - abar 0.1037, 0.6037, 0.9209, 1.0000. Script test-s2p3/one_pixel.py, not kept. A /prompt-storyboard prompt for the two films and the gap split was emitted on the reader's ask |
+| 8 | 2 | the reverse SDE, Eq. 2, and the generative SDE | walked lean | simplified on the reader's ask |
+| 9 | 2 | the score loss | walked lean | |
+| 10 | 2 | other ways to sharpen the score | walked lean ← current | |
 | 11 | 2 | Algorithm 1 | not reached | |
 | 12 | 3.1 | the generative process, Eq. 3, and Theorem 1 | not reached | |
 | 13 | 3.2 | the loss, Eq. 4 | not reached | |
@@ -207,12 +207,14 @@ Each is added to the route only on the reader's word.
 
 | Round | To | What | Answer |
 |---|---|---|---|
+| 7 | /prompt-storyboard | prompts for three pictures (the two films with their spreads, the gap split step by step, right pictures through the wrong film), saved to this walk's diagram-prompts.md for /render-diagrams | emitted, not run |
 
 ## Friction
 
 | Chunk | What happened | Rule it points at |
 |---|---|---|
 | 3 | the reader had to ask for the caveats raised in a round to be carried forward | caveats and limits raised in a round's answer are written to the map in the same round, with a mitigation and a measuring knob each |
+| 6 | the reader asked for test 2 and the example to be simplified because the KL parts confused | name a KL as "the gap" with one plain definition before any table of KL numbers |
 | 2 | the round named the ImageNet samples Figure 1 from the source's figure order; the PDF numbers it Figure 2 | number figures from the compiled PDF, as SKILL.md already says for lemmas |
 
 ## Timings
@@ -226,4 +228,8 @@ Each is added to the route only on the reader's word.
 | 3 naming, MCMC, caveats, knobs, why, simplify; 4 intro paragraph 3 | 2026-11-16 21:05 | 2026-11-16 21:30 | six asks |
 | 4 test 7, example | 2026-11-16 21:30 | 2026-11-16 21:50 | test 7, example |
 | 4 test 5, why; LoRA and oracle comparison; 5 section 2 paragraph 1 | 2026-11-16 21:50 | 2026-11-16 22:10 | test 5, why, next, a question |
-| 5 example, why, test 1; 6 section 2 paragraph 2 | 2026-11-16 22:10 | | example, why, test 1, next |
+| 5 example, why, test 1; 6 section 2 paragraph 2 | 2026-11-16 22:10 | 2026-11-17 06:19 | example, why, test 1, next |
+| 6 test 2 and example simplified, simplify; 7 section 2 paragraph 3 | 2026-11-17 06:19 | 2026-11-17 06:39 | simplify test 2 and example, simplify, next |
+| 7 storyboard, test 1, example; 8 section 2 paragraph 4 | 2026-11-17 06:39 | 2026-11-17 08:16 | a storyboard ask, test 1, example, next |
+| 8 simplify; 9 section 2 paragraph 5 | 2026-11-17 08:16 | 2026-11-17 08:33 | simplify, next |
+| 10 section 2 paragraph 6 | 2026-11-17 08:33 | | next |
