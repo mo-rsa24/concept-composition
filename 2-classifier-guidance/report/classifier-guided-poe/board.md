@@ -5,14 +5,18 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
-| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1 | 4 |
+| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1; by eye, tile by tile, 9, 11 and 10 at scale 10 (route instruction 13) | 4 |
 | R0 | the product sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
 | A1 | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | todo | | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
 | A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |
 | A2r | our cat and dog photos, released 256 px unconditional model frozen, classifiers trained on our photos: the pair-aware push beats the separate-label push | todo | | 8 |
 | A2c | our cat and dog photos, a 64 px model we train with a null label, with and without the both-animal photos: the same | todo | | 8 |
-| A3 | SDXL cat × dog, same seeds for training and testing: plan 15's pair-aware head composes where the species-only pushes do not | todo | | 9, 10 |
+| [A3q](a3q-cat-x-dog-quick-discriminator-test.md) | SDXL cat × dog, judged on held-out seeds 9 to 12: a pair-aware discriminator trained on 10 to 15 renders checked by eye from seeds 1 to 4, with the product's own renders from those seeds as negatives, composes where plain product and best-of-N at equal compute do not | open | rung 2; its step is settled in a later round of this walk | |
+| A3 | SDXL cat × dog, same seeds for training and testing: plan 15's pair-aware head composes where the species-only pushes do not | open | off the ladder: rung 2 is A3q; re-routed after rung 2 | |
+| K1 | animal and animal: rung 2's recipe on 3 pairs from the guard-clean Attend-and-Excite set (cat and dog excluded), seeds 9 to 12, composes where plain product does not | open | rung 3 | |
+| K2 | animal and object: the same, on 3 of the 90 "and" prompts with the colour words stripped | open | rung 3 | |
+| K3 | object and object: the same, on 3 of the 66 prompts with the colour words stripped | open | rung 3 | |
 | A4 | cat × dog on held-out seeds 9 to 16, beside best-of-N at equal compute | open | | |
 | B1 | at A4's setting, adding a presence head helps or is dropped | open | | |
 | B2 | at A4's setting, adding an instance-count head helps or is dropped | open | | |
@@ -25,6 +29,24 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | C2 | the best configuration on held-out pairs, beside the rank-32 LoRA | open | | |
 | P1 | the paper's comparison table and sheet, and its paragraph | open | | |
 | X1 | you can explain the result without notes | todo | each stage's retrospective, walked in step 11 | 11 |
+
+## The scale-up ladder
+
+Each rung is the proof of concept for the next and changes one thing. Every rung's compute plan
+(GPU-hours and wall clock from measured rates, node and card with a fallback, the seeds and pairs it
+buys) is written and ticked on its row before it launches.
+
+| Rung | What changes from the rung before | Rows | Goes on when |
+|---|---|---|---|
+| 1 | the exact toy, where the true correction is known | A1 | A1's bar: pair-aware at least 150 of 300 crisp pairs, separate-label at most 15 |
+| 2 | SDXL, cat × dog only, 4 held-out seeds | A3q | the first of A3q's four readings: two animals on held-out seeds, pictures intact |
+| 3 | the pair kind: animal and animal, animal and object, object and object | K1, K2, K3 | at least one kind passes; a kind that misses keeps its row and its diagnosis |
+| 4a | more seeds: cat × dog on all 8 held-out seeds, 9 to 16 | A4 | A4's bar |
+| 4b | more pairs: the v58 pool, 182 cells over 48 pairs, held-out seeds | C1 | C1's bar |
+| 4c | unseen pairs: the 53 held-out pairs, the 23 sharing no concept with training reported apart | C2 | C2's bar |
+
+Beside the ladder, gating nothing: our photos (A2r, A2c) as the controlled-data check, and the head
+ablations (B1 to B7) at A4's setting.
 
 ## Expected outcome per row
 
@@ -40,7 +62,11 @@ route's step 2, which frames the hypothesis; until then the line says "number fr
 | A2b | two separate digits on the canvas where plain PoE draws one overlaid digit, at the low dial settings, with each digit still readable | from step 2 |
 | A2r | on seeds 1 to 16 at 256 px, the pair-aware push gives two separate animals on more seeds than the two separate-label pushes alone | at least 4 more of 16 in one arm |
 | A2c | on seeds 1 to 16 at 64 px, the same, in the model trained without both-animal photos and in the one trained with them | at least 4 more of 16 in one arm |
-| A3 | on cat × dog, on the seeds it trained on, some seeds show two separate animals with the push where the plain product shows none, and the pictures are not wrecked; a yes says only that the push can compose at all | from step 2 |
+| A3 | off the ladder; on cat × dog, on the seeds it trained on, some seeds show two separate animals with the push where the plain product shows none, and the pictures are not wrecked; a yes says only that the push can compose at all | from step 2 |
+| A3q | on held-out seeds 9 to 12, more seeds show two separate animals at full resolution with the push than with plain product or with best-of-N at the same compute, and the pictures are not wrecked | from rung 2's framing step |
+| K1 | the same read on 3 animal pairs × 4 seeds, 12 tiles | from rung 3's framing step |
+| K2 | the same on 3 animal and object pairs, 12 tiles, two separate things in frame | from rung 3's framing step |
+| K3 | the same on 3 object pairs, 12 tiles | from rung 3's framing step |
 | A4 | on held-out seeds 9 to 16, more seeds show two animals with the push than with best-of-N at the same compute, with picture damage no worse than the plain product's | from step 2 |
 | B1 | adding the presence head raises A4's count or keeps it with cleaner pictures; pushed alone, it makes both species appear | from step 2 |
 | B2 | adding the instance-count head does the same; pushed alone, it makes a second body appear | from step 2 |
@@ -72,6 +98,7 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 
 **A1**
 
+- [ ] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys
 - [ ] 💻 code ran: discriminator trained on exact pair draws against exact product draws
 - [ ] 🖼️ screenshot: cosine and norm ratio with the true correction, per reverse-diffusion step
 - [ ] ✅ check passed: crisp pairs of 300, guided against unguided, against the rung's bar
@@ -92,7 +119,11 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 - [ ] 🖼️ screenshot: one sheet per arm, plain product, separate-label push, pair-aware push
 - [ ] ✅ check passed: the arm's count against its bar, called from full-resolution tiles
 
-**A3, A4, B1 to B7, C1, C2**
+**A3q, K1, K2, K3, A4, C1, C2**
+
+- [ ] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys
+
+**A3, A4, B1 to B7, C1, C2, A3q, K1, K2, K3**
 
 - [ ] 🖼️ screenshot: the sheet with plain product, best-of-N at equal compute, guided product, joint
       prompt (and the rank-32 LoRA on C1 and C2)

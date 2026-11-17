@@ -560,7 +560,7 @@ tabby and golden retriever, with scale 1 calling fewer.
 
   <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png" width="200" alt="Sixteen renders at classifier scale 1 on the left, a mix of dogs, animals and objects, beside sixteen at scale 10 on the right, golden retriever faces and bodies framed green except a Labrador-like dog at seed 4"></a>
 
-- [x] **Gate:** instruction 13 called · ✓ 2026-11-17, by Claude at your request, veto open: see instruction 13
+- [x] **Gate:** instruction 13 called · ✓ 2026-11-17, called by Claude at your request and accepted by you: see instruction 13
 - **Leaves:** the card, the checkpoint paths, and the clone, which steps 7 and 8 port from.
 
 ### 5. 🔧 Repair the SDXL product sampler's push and rerun the canary
@@ -1075,7 +1075,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 - [x] **Do:** open each sheet in
   `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/`
   and say, per tile, whether it shows the asked-for animal · ✓ called 2026-11-17 by Claude at your
-  request, tile by tile at 256 px, veto open: 0 and 9 of 16 corgi, 0 and 11 tabby, 3 and 10 golden
+  request, tile by tile at 256 px, accepted by you: 0 and 9 of 16 corgi, 0 and 11 tabby, 3 and 10 golden
   retriever at scales 1 and 10, against the classifier's 2 and 16, 2 and 15, 5 and 15; all 22
   disagreements are classifier yes, eye no ([the disagreement sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png))
 - **You should see:** at scale 10 almost every tile is a corgi, a tabby or a golden retriever; at
