@@ -6,12 +6,13 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Waiting for `/datasets` (down since about 13:10 UTC on 2026-11-17). The reader stopped plan 22's
-re-renders at 15:44 UTC as a duplication of the benchmark's own pictures: 16 of 48 pairs had
-finished in `/home-mscluster/mmolefe/poe_repair_min_scratch/.../rung2/benchmark/`, kept, not used.
-When `/datasets` reads again: plan 22 builds its training set from the benchmark's original
-pictures, cached drawing states and `verdicts.json`; the queued cap-0.3 rerun launches on its own
-(watcher checks every 3 minutes until about 17:25 UTC).
+Plan 22 builds its training set from about 1,000 local 1024 px pair pictures (the benchmark's and
+the evaluations' own renders; no cat x dog on seeds 9 to 16). 543 were called twice, by two
+independent passes of helper agents (91% agreement on role); Claude settled the 37 disagreements in
+the 87 two-things pairs at full size. Final, two-things pairs only: 64 positives across 38 pairs
+(11 cat x dog), 315 negatives (105 hybrid, 36 single, 85 wrong pair, 89 damaged), 23 left out.
+`results/does-a-small-discriminator-steer-cat-x-dog/dataset-v3/calls-final.csv`. Next: encode on
+the cluster and train both discriminators. `/datasets` still down; the cap-0.3 rerun waits for it.
 
 ## The stop point
 
