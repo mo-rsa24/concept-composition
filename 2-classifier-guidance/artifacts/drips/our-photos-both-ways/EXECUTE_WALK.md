@@ -6,8 +6,10 @@ share this working tree).
 
 ## Where the walk is
 
-Pieces 1 and 2 are done; both 64 px trainings run until about 20:30 UTC. Piece 3, the 256 px
-classifiers, is next, on `mscluster108` (two free RTX 8000s at 09:30 SAST).
+Pieces 1 and 2 are done; both 64 px trainings run at about 0.7 s per step and land around 17:30
+UTC. Piece 3 runs as one chain on `mscluster108` since 07:42 UTC (separate-label classifier, 512
+product draws on both cards, pair-aware classifier), landing around 11:05 UTC. Next tick: the sheet
+sampler for piece 4.
 
 ## The stop point
 
@@ -46,12 +48,15 @@ Seed 1, and one image per label, picked in piece 1.
   scale, `both_015` and `both_027` show only the dog, and `both_000` and `both_017` are collages;
   the reader's call whether to strike them. Test 2.1 open for the reader.
 - 1.2 the trainings: timing 300 steps in 278 s on a Blackwell; 50,000 steps, about 12.9 h each.
+- 1.3 smoke on `mscluster108`: 20 iterations and 2 draws at 25 steps ran end to end; the full
+  separate-label run trains at 1.36 s per iteration at batch 32 (37 GB).
 
 ## Out of the session
 
 | Id | Kind | What it serves | State |
 |---|---|---|---|
 | W&B `wubhxhse` | run, `mscluster111` GPU 0, PID 283386, log `classifier_guidance_photos/logs/train_64_no_both.log` | 1.2, the 64 px model without both-animal images | running since 07:35 UTC |
+| chain PID 219860 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3, the 256 px classifiers and the product's draws | running since 07:42 UTC |
 | W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | running since 07:35 UTC |
 
 ## Closing pass owed
