@@ -1,0 +1,428 @@
+{
+ "source": "two-things pairs of plan 22's calls-final.csv less its 7 held-out pairs",
+ "held_out_pairs": [
+  "a_bison__x__a_horse",
+  "a_donkey__x__a_duck",
+  "a_guitar__x__a_traffic_cone",
+  "a_horse__x__a_pig",
+  "a_llama__x__an_alpaca",
+  "a_rhino__x__a_zebra",
+  "a_windmill__x__a_tractor"
+ ],
+ "seeds": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  17,
+  18,
+  19,
+  20
+ ],
+ "pairs": {
+  "a_baboon__x__a_gazelle": {
+   "prompt_a": "a baboon",
+   "prompt_b": "a gazelle",
+   "joint_prompt": "a baboon and a gazelle"
+  },
+  "a_badger__x__a_magpie": {
+   "prompt_a": "a badger",
+   "prompt_b": "a magpie",
+   "joint_prompt": "a badger and a magpie"
+  },
+  "a_bear__x__a_salmon": {
+   "prompt_a": "a bear",
+   "prompt_b": "a salmon",
+   "joint_prompt": "a bear and a salmon"
+  },
+  "a_bicycle__x__a_birdhouse": {
+   "prompt_a": "a bicycle",
+   "prompt_b": "a birdhouse",
+   "joint_prompt": "a bicycle and a birdhouse"
+  },
+  "a_bicycle__x__a_brick_wall": {
+   "prompt_a": "a bicycle",
+   "prompt_b": "a brick wall",
+   "joint_prompt": "a bicycle and a brick wall"
+  },
+  "a_bison__x__a_weasel": {
+   "prompt_a": "a bison",
+   "prompt_b": "a weasel",
+   "joint_prompt": "a bison and a weasel"
+  },
+  "a_boar__x__a_pheasant": {
+   "prompt_a": "a boar",
+   "prompt_b": "a pheasant",
+   "joint_prompt": "a boar and a pheasant"
+  },
+  "a_bobcat__x__a_quail": {
+   "prompt_a": "a bobcat",
+   "prompt_b": "a quail",
+   "joint_prompt": "a bobcat and a quail"
+  },
+  "a_bull__x__a_rooster": {
+   "prompt_a": "a bull",
+   "prompt_b": "a rooster",
+   "joint_prompt": "a bull and a rooster"
+  },
+  "a_camel__x__a_llama": {
+   "prompt_a": "a camel",
+   "prompt_b": "a llama",
+   "joint_prompt": "a camel and a llama"
+  },
+  "a_camel__x__a_pelican": {
+   "prompt_a": "a camel",
+   "prompt_b": "a pelican",
+   "joint_prompt": "a camel and a pelican"
+  },
+  "a_cat__x__a_dog": {
+   "prompt_a": "a cat",
+   "prompt_b": "a dog",
+   "joint_prompt": "a cat and a dog"
+  },
+  "a_cat__x__a_fox": {
+   "prompt_a": "a cat",
+   "prompt_b": "a fox",
+   "joint_prompt": "a cat and a fox"
+  },
+  "a_cheetah__x__a_cougar": {
+   "prompt_a": "a cheetah",
+   "prompt_b": "a cougar",
+   "joint_prompt": "a cheetah and a cougar"
+  },
+  "a_cheetah__x__a_warthog": {
+   "prompt_a": "a cheetah",
+   "prompt_b": "a warthog",
+   "joint_prompt": "a cheetah and a warthog"
+  },
+  "a_chess_board__x__an_hourglass": {
+   "prompt_a": "a chess board",
+   "prompt_b": "an hourglass",
+   "joint_prompt": "a chess board and an hourglass"
+  },
+  "a_cow__x__a_chicken": {
+   "prompt_a": "a cow",
+   "prompt_b": "a chicken",
+   "joint_prompt": "a cow and a chicken"
+  },
+  "a_cow__x__a_horse": {
+   "prompt_a": "a cow",
+   "prompt_b": "a horse",
+   "joint_prompt": "a cow and a horse"
+  },
+  "a_cow__x__a_milk_churn": {
+   "prompt_a": "a cow",
+   "prompt_b": "a milk churn",
+   "joint_prompt": "a cow and a milk churn"
+  },
+  "a_coyote__x__a_roadrunner": {
+   "prompt_a": "a coyote",
+   "prompt_b": "a roadrunner",
+   "joint_prompt": "a coyote and a roadrunner"
+  },
+  "a_crow__x__a_raven": {
+   "prompt_a": "a crow",
+   "prompt_b": "a raven",
+   "joint_prompt": "a crow and a raven"
+  },
+  "a_deer__x__a_woodpecker": {
+   "prompt_a": "a deer",
+   "prompt_b": "a woodpecker",
+   "joint_prompt": "a deer and a woodpecker"
+  },
+  "a_donkey__x__a_zebra": {
+   "prompt_a": "a donkey",
+   "prompt_b": "a zebra",
+   "joint_prompt": "a donkey and a zebra"
+  },
+  "a_duck__x__a_goose": {
+   "prompt_a": "a duck",
+   "prompt_b": "a goose",
+   "joint_prompt": "a duck and a goose"
+  },
+  "a_gazelle__x__a_vulture": {
+   "prompt_a": "a gazelle",
+   "prompt_b": "a vulture",
+   "joint_prompt": "a gazelle and a vulture"
+  },
+  "a_giraffe__x__a_hippo": {
+   "prompt_a": "a giraffe",
+   "prompt_b": "a hippo",
+   "joint_prompt": "a giraffe and a hippo"
+  },
+  "a_giraffe__x__a_tortoise": {
+   "prompt_a": "a giraffe",
+   "prompt_b": "a tortoise",
+   "joint_prompt": "a giraffe and a tortoise"
+  },
+  "a_giraffe__x__a_zebra": {
+   "prompt_a": "a giraffe",
+   "prompt_b": "a zebra",
+   "joint_prompt": "a giraffe and a zebra"
+  },
+  "a_goat__x__a_sheep": {
+   "prompt_a": "a goat",
+   "prompt_b": "a sheep",
+   "joint_prompt": "a goat and a sheep"
+  },
+  "a_goose__x__a_fox": {
+   "prompt_a": "a goose",
+   "prompt_b": "a fox",
+   "joint_prompt": "a goose and a fox"
+  },
+  "a_gorilla__x__a_chimpanzee": {
+   "prompt_a": "a gorilla",
+   "prompt_b": "a chimpanzee",
+   "joint_prompt": "a gorilla and a chimpanzee"
+  },
+  "a_hamster__x__a_carrot": {
+   "prompt_a": "a hamster",
+   "prompt_b": "a carrot",
+   "joint_prompt": "a hamster and a carrot"
+  },
+  "a_hawk__x__a_falcon": {
+   "prompt_a": "a hawk",
+   "prompt_b": "a falcon",
+   "joint_prompt": "a hawk and a falcon"
+  },
+  "a_hedgehog__x__a_robin": {
+   "prompt_a": "a hedgehog",
+   "prompt_b": "a robin",
+   "joint_prompt": "a hedgehog and a robin"
+  },
+  "a_hippopotamus__x__a_swallow": {
+   "prompt_a": "a hippopotamus",
+   "prompt_b": "a swallow",
+   "joint_prompt": "a hippopotamus and a swallow"
+  },
+  "a_horse__x__a_cow": {
+   "prompt_a": "a horse",
+   "prompt_b": "a cow",
+   "joint_prompt": "a horse and a cow"
+  },
+  "a_horse__x__a_goat": {
+   "prompt_a": "a horse",
+   "prompt_b": "a goat",
+   "joint_prompt": "a horse and a goat"
+  },
+  "a_horse__x__a_water_trough": {
+   "prompt_a": "a horse",
+   "prompt_b": "a water trough",
+   "joint_prompt": "a horse and a water trough"
+  },
+  "a_horse__x__a_zebra": {
+   "prompt_a": "a horse",
+   "prompt_b": "a zebra",
+   "joint_prompt": "a horse and a zebra"
+  },
+  "a_jaguar__x__a_caiman": {
+   "prompt_a": "a jaguar",
+   "prompt_b": "a caiman",
+   "joint_prompt": "a jaguar and a caiman"
+  },
+  "a_leopard__x__a_cheetah": {
+   "prompt_a": "a leopard",
+   "prompt_b": "a cheetah",
+   "joint_prompt": "a leopard and a cheetah"
+  },
+  "a_lighthouse__x__a_sailboat": {
+   "prompt_a": "a lighthouse",
+   "prompt_b": "a sailboat",
+   "joint_prompt": "a lighthouse and a sailboat"
+  },
+  "a_lion__x__a_horse": {
+   "prompt_a": "a lion",
+   "prompt_b": "a horse",
+   "joint_prompt": "a lion and a horse"
+  },
+  "a_lion__x__a_hyena": {
+   "prompt_a": "a lion",
+   "prompt_b": "a hyena",
+   "joint_prompt": "a lion and a hyena"
+  },
+  "a_lion__x__a_meerkat": {
+   "prompt_a": "a lion",
+   "prompt_b": "a meerkat",
+   "joint_prompt": "a lion and a meerkat"
+  },
+  "a_lion__x__a_tiger": {
+   "prompt_a": "a lion",
+   "prompt_b": "a tiger",
+   "joint_prompt": "a lion and a tiger"
+  },
+  "a_mailbox__x__a_pumpkin": {
+   "prompt_a": "a mailbox",
+   "prompt_b": "a pumpkin",
+   "joint_prompt": "a mailbox and a pumpkin"
+  },
+  "a_microscope__x__a_test_tube": {
+   "prompt_a": "a microscope",
+   "prompt_b": "a test tube",
+   "joint_prompt": "a microscope and a test tube"
+  },
+  "a_monkey__x__a_parrot": {
+   "prompt_a": "a monkey",
+   "prompt_b": "a parrot",
+   "joint_prompt": "a monkey and a parrot"
+  },
+  "a_moose__x__a_chipmunk": {
+   "prompt_a": "a moose",
+   "prompt_b": "a chipmunk",
+   "joint_prompt": "a moose and a chipmunk"
+  },
+  "a_picnic_basket__x__a_watermelon": {
+   "prompt_a": "a picnic basket",
+   "prompt_b": "a watermelon",
+   "joint_prompt": "a picnic basket and a watermelon"
+  },
+  "a_puma__x__a_condor": {
+   "prompt_a": "a puma",
+   "prompt_b": "a condor",
+   "joint_prompt": "a puma and a condor"
+  },
+  "a_rabbit__x__a_hare": {
+   "prompt_a": "a rabbit",
+   "prompt_b": "a hare",
+   "joint_prompt": "a rabbit and a hare"
+  },
+  "a_raven__x__a_crow": {
+   "prompt_a": "a raven",
+   "prompt_b": "a crow",
+   "joint_prompt": "a raven and a crow"
+  },
+  "a_reindeer__x__a_sled": {
+   "prompt_a": "a reindeer",
+   "prompt_b": "a sled",
+   "joint_prompt": "a reindeer and a sled"
+  },
+  "a_saxophone__x__a_music_stand": {
+   "prompt_a": "a saxophone",
+   "prompt_b": "a music stand",
+   "joint_prompt": "a saxophone and a music stand"
+  },
+  "a_seal__x__a_gull": {
+   "prompt_a": "a seal",
+   "prompt_b": "a gull",
+   "joint_prompt": "a seal and a gull"
+  },
+  "a_sheep__x__a_crow": {
+   "prompt_a": "a sheep",
+   "prompt_b": "a crow",
+   "joint_prompt": "a sheep and a crow"
+  },
+  "a_snail__x__a_lantern": {
+   "prompt_a": "a snail",
+   "prompt_b": "a lantern",
+   "joint_prompt": "a snail and a lantern"
+  },
+  "a_soccer_ball__x__a_park_bench": {
+   "prompt_a": "a soccer ball",
+   "prompt_b": "a park bench",
+   "joint_prompt": "a soccer ball and a park bench"
+  },
+  "a_squirrel__x__a_chipmunk": {
+   "prompt_a": "a squirrel",
+   "prompt_b": "a chipmunk",
+   "joint_prompt": "a squirrel and a chipmunk"
+  },
+  "a_suitcase__x__a_globe": {
+   "prompt_a": "a suitcase",
+   "prompt_b": "a globe",
+   "joint_prompt": "a suitcase and a globe"
+  },
+  "a_swan__x__a_heron": {
+   "prompt_a": "a swan",
+   "prompt_b": "a heron",
+   "joint_prompt": "a swan and a heron"
+  },
+  "a_teddy_bear__x__a_birthday_cake": {
+   "prompt_a": "a teddy bear",
+   "prompt_b": "a birthday cake",
+   "joint_prompt": "a teddy bear and a birthday cake"
+  },
+  "a_telescope__x__a_beach_ball": {
+   "prompt_a": "a telescope",
+   "prompt_b": "a beach ball",
+   "joint_prompt": "a telescope and a beach ball"
+  },
+  "a_tiger__x__a_dog": {
+   "prompt_a": "a tiger",
+   "prompt_b": "a dog",
+   "joint_prompt": "a tiger and a dog"
+  },
+  "a_tiger__x__a_parrot": {
+   "prompt_a": "a tiger",
+   "prompt_b": "a parrot",
+   "joint_prompt": "a tiger and a parrot"
+  },
+  "a_tortoise__x__a_turtle": {
+   "prompt_a": "a tortoise",
+   "prompt_b": "a turtle",
+   "joint_prompt": "a tortoise and a turtle"
+  },
+  "a_turkey__x__a_peacock": {
+   "prompt_a": "a turkey",
+   "prompt_b": "a peacock",
+   "joint_prompt": "a turkey and a peacock"
+  },
+  "a_walrus__x__a_polar_bear": {
+   "prompt_a": "a walrus",
+   "prompt_b": "a polar bear",
+   "joint_prompt": "a walrus and a polar bear"
+  },
+  "a_wolf__x__a_coyote": {
+   "prompt_a": "a wolf",
+   "prompt_b": "a coyote",
+   "joint_prompt": "a wolf and a coyote"
+  },
+  "a_wolf__x__a_raven": {
+   "prompt_a": "a wolf",
+   "prompt_b": "a raven",
+   "joint_prompt": "a wolf and a raven"
+  },
+  "a_zebra__x__a_flamingo": {
+   "prompt_a": "a zebra",
+   "prompt_b": "a flamingo",
+   "joint_prompt": "a zebra and a flamingo"
+  },
+  "a_zebra__x__a_horse": {
+   "prompt_a": "a zebra",
+   "prompt_b": "a horse",
+   "joint_prompt": "a zebra and a horse"
+  },
+  "a_zebra__x__a_stork": {
+   "prompt_a": "a zebra",
+   "prompt_b": "a stork",
+   "joint_prompt": "a zebra and a stork"
+  },
+  "an_alpaca__x__a_wheelbarrow": {
+   "prompt_a": "an alpaca",
+   "prompt_b": "a wheelbarrow",
+   "joint_prompt": "an alpaca and a wheelbarrow"
+  },
+  "an_eagle__x__a_fox": {
+   "prompt_a": "an eagle",
+   "prompt_b": "a fox",
+   "joint_prompt": "an eagle and a fox"
+  },
+  "an_elk__x__a_beaver": {
+   "prompt_a": "an elk",
+   "prompt_b": "a beaver",
+   "joint_prompt": "an elk and a beaver"
+  },
+  "an_ibex__x__a_marmot": {
+   "prompt_a": "an ibex",
+   "prompt_b": "a marmot",
+   "joint_prompt": "an ibex and a marmot"
+  },
+  "an_ox__x__a_plough": {
+   "prompt_a": "an ox",
+   "prompt_b": "a plough",
+   "joint_prompt": "an ox and a plough"
+  }
+ }
+}
