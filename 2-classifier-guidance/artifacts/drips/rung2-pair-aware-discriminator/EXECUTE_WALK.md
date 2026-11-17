@@ -6,12 +6,11 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-The v2 discriminator (pair-prompt failures added as negatives) failed its held-out check: 0 of 20
-sampler steps at balanced accuracy 0.75 or more on seeds 7 and 8, 0.53 to 0.63 at every step. The
-chain was stopped before its render step, as the plan's check requires; the final-v2 training
-(PID 782860) finishes on its own. Re-rendered latents matched the originals on 73 of 73 pictures.
-Plot: `discriminator/held-out-accuracy-v1-against-v2.png`. The cap-0.3 rerun still waits for
-`/datasets`. Waiting on the reader's call on what this means for the rung.
+Plan 22 (the benchmark's 48 pairs as training data) is under way: 768 renders (joint and product,
+seeds 1 to 8) on both `mscluster107` cards into the scratch folder since 2026-11-17 15:30 UTC,
+about 2.6 h. Then Claude calls the joint pictures and screens the products, and both
+discriminators (head only; head with adapters) train with the held-out check by pair. `/datasets`
+still down at 15:20 UTC; the cap-0.3 rerun waits for it.
 
 ## The stop point
 
