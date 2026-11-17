@@ -6,8 +6,9 @@ walk, which runs in another session).
 
 ## Where the walk is
 
-Round 2 closed: the training set is clean (17 positives, 24 intact negatives, `training-set/calls.csv`;
-the loop that cleaned it is in `dataset-loop.md`). Round 3, the discriminator, is next.
+Round 3: the held-out check passed, 13 of 20 sampler steps at balanced accuracy 0.75 or more on
+seeds 7 and 8 (steps 7 to 19; steps 0 to 6 read 0.59 to 0.73). The final run on all eight seeds is
+training on `mscluster107` GPU 0. Plot: `results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png`.
 
 ## The stop point
 
@@ -26,7 +27,8 @@ Seed 1, one tile per column.
 | Decision | Chosen | Options | Who | Why |
 |---|---|---|---|---|
 | card | `mscluster107` GPU 0, `co3`; fallback `mscluster108` GPU 1 | share `mscluster111` with plan 20; wait for the Blackwells | reader took the default | plan 20 holds 111, 112 and 107 GPU 1 |
-| discriminator body | plan 18's trunk, fresh one-logit head | small network from scratch | reader took the default | 10 to 15 positives |
+| discriminator body | SDXL trunk frozen, attention-pool head only, log-odds push | plan 18's adapters plus head; small network from scratch | reader ("both") | 41 tiles would let 11 M adapter weights memorise the positives |
+| discriminator check | held out on seeds 7 and 8, then a final run on all eight | fresh noise over the training tiles | reader ("both") | the old check measured fit, not reading new pictures |
 | best-of-N pick | log-odds on the final latent at the last timestep | log-odds summed over steps | reader took the default | |
 | positives | one cat and one dog, apart and intact | any two separate animals | reader took the default | |
 | tile calls | the review file's three calls; route instruction 16 rewritten to match | instruction 16's four levels | reader took the default | |
@@ -51,6 +53,7 @@ Seed 1, one tile per column.
 |---|---|---|---|
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
+| PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | running |
 | PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
