@@ -51,6 +51,7 @@ Seed 1, one tile per column.
 |---|---|---|---|
 | PID 713135 | run, `mscluster107` GPU 0, `scripts/rung2/time_renders.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/time_renders.log` | 1.1, the timing | done 09:27 UTC, folded into plan 21 |
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
+| PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | running |
 
 ## Closing pass owed
 
