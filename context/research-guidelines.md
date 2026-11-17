@@ -62,6 +62,16 @@ made twice in this repo.
   because the two maps are not on the same footing and the adapter dims attention by 25%
   overall. The argument for the scale-free measure is in
   [1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md](../1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md).
+- **A guiding classifier trained with no "neither" pile said "cat" to a fridge.** Plan 20's
+  cat-present and dog-present classifier was fine-tuned on 550 images that all held a cat, a dog or
+  both. It scored 0.93 and 0.95 on held-out photos, and on 184 of the unconditional model's own
+  draws (fridges, desserts, limes) it said cat on 184 and dog on 182, against 3 and 24 for the
+  released ImageNet classifier. At 97% sure its log-probability gradient is near zero, so its push
+  steered nothing, and raising the scale to 30 and 100 only broke the pictures into texture. Held-out
+  accuracy on the training kind of image says nothing about guidance: a guiding classifier's
+  negatives must include what the sampler actually draws, pictures with neither subject among them,
+  and it is checked by asking it about a picture with neither subject before it guides anything.
+  The evidence is in [the plan 20 card's folder](../2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/).
 
 ## The deadline
 
