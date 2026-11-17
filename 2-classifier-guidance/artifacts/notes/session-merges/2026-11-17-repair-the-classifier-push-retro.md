@@ -47,12 +47,14 @@ The walk replaced the product sampler's rescaled classifier push with Dhariwal a
 | the route's uncommitted thumbnails | committed on their own, `980c5ff4` | wait for that session | you, by defaults | step 4's closing pass was already committed |
 | the launch | sbatch on idle mscluster108 | nohup on a shared card | you, by `fix` | the launch recipe puts an idle node first |
 | predictions | none asked | a prediction before each test | you | you asked not to predict |
+| board row R0 | wording narrowed to the product sampler | cap plan 17's sampler too | me, veto open | plan 17's uncapped run is a finished reproduction of the paper |
+| the three scripts on `weight` | moved onto `strength`, values required | leave them raising · borrow plan 17's strengths | you asked; values left to the caller by me | no strength on the paper's scale equals the old weights |
 
 ## Dead ends and not done
 
-- The weight sweep (`presence_head_weight_sweep.py`) and both head-training probes (`train_presence_head.py`, `train_strong_presence_head.py`) still pass `weight` and will raise until they move onto `strength`.
+- The weight sweep and both head-training probes now pass `strength`, and the values are required arguments (`--strengths`, `--probe-strengths`, `--probe-strength`) with no default, because the old weights have no equivalent on the paper's scale. Plan 15's text still speaks of four weights and its bar says "at some weight"; route steps 9 and 10 choose the strengths and restate the bar.
 - `classifier_guidance_on_the_product.py` now runs with the cap on by default; its earlier renders were uncapped.
-- Plan 17's `run_cfg_classifier_guided` has no cap, which is kept as the paper's reproduction; board row R0's wording says every sampler.
+- Plan 17's `run_cfg_classifier_guided` has no cap, kept as the paper's reproduction; board row R0 names the product sampler only.
 - No delivery log row: this project keeps no `report/delivery-log.md`.
 - The cap fired on no step of this run, since strength 0 never calls the classifier; whether 0.1 binds on cat × dog is for step 9.
 

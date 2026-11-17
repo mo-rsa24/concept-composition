@@ -66,7 +66,6 @@ GATE_FRACTION = 0.25
 SPLIT_SEED = 0
 
 PROBE_SEEDS = (9, 10)
-PROBE_WEIGHT = 1.0
 WANDB_PROJECT = "poe-repair-animals-compose"
 
 
@@ -108,7 +107,7 @@ def evaluate(model, latents, targets, idx, timesteps, steps, ctx, gen) -> list[d
     return out
 
 
-def probe(model, ctx, out_dir, step, window, wandb_run) -> None:
+def probe(model, ctx, out_dir, step, window, wandb_run, strength) -> None:
     from poe_repair.composers import poe_classifier_guided
     cfg = RunConfig()
     tiles = []
@@ -116,7 +115,7 @@ def probe(model, ctx, out_dir, step, window, wandb_run) -> None:
         cell = PairSeedCell(pair_dir=cfg.paths.pilot_dir / f"seed_{seed}" / "a_cat__x__a_dog",
                             pair_slug="a_cat__x__a_dog", prompt_a="a cat", prompt_b="a dog",
                             seed=seed, regime="collision", height=1024, width=1024, grid_assets={})
-        path = poe_classifier_guided.run(cell, ctx, head=model, weight=PROBE_WEIGHT,
+        path = poe_classifier_guided.run(cell, ctx, head=model, strength=strength,
                                          guidance_window=window, train_step=step,
                                          exp_name=f"probe/step_{step:06d}", overwrite=True)
         tiles.append((seed, path))
@@ -126,7 +125,7 @@ def probe(model, ctx, out_dir, step, window, wandb_run) -> None:
             ax.imshow(im.convert("RGB").resize((360, 360)))
         ax.set_title(f"seed {seed}", fontsize=11)
         ax.axis("off")
-    fig.suptitle(f"product pushed by the strong helper (strength {PROBE_WEIGHT}), "
+    fig.suptitle(f"product pushed by the strong helper (strength {strength}), "
                  f"after {step} training steps", fontsize=12)
     fig.tight_layout()
     sheet = out_dir / "probe" / f"sheet_step_{step:06d}.png"
@@ -148,7 +147,14 @@ def main() -> int:
     ap.add_argument("--max-rows", type=int, default=0, help="for a smoke run only")
     ap.add_argument("--no-probe", action="store_true")
     ap.add_argument("--no-wandb", action="store_true")
+    # Classifier strengths on Dhariwal and Nichol's scale. The values the older rescaled push used
+    # (fractions of the prediction's norm) have no equivalent on this scale, and plan 17 picked
+    # its strengths only after measuring the head's gradient, so each run names its own.
+    ap.add_argument("--probe-strength", type=float, default=None,
+                    help="classifier strength for the probe sheet; required unless --no-probe")
     args = ap.parse_args()
+    if not args.no_probe and args.probe_strength is None:
+        ap.error("--probe-strength is required unless --no-probe")
 
     out_dir = paths.MOUNT_ROOT / FAMILY / args.run
     disk_guard(out_dir)
@@ -231,7 +237,7 @@ def main() -> int:
         if (not args.no_probe and step > 0 and step % args.probe_every == 0) or \
                 (not args.no_probe and step == args.steps):
             model.head.eval()
-            probe(model, ctx, out_dir, step, window, wandb_run)
+            probe(model, ctx, out_dir, step, window, wandb_run, args.probe_strength)
             model.head.train()
         if step == args.steps:
             break

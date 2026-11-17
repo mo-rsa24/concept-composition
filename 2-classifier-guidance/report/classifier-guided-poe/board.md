@@ -6,7 +6,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
 | G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1 | 4 |
-| R0 | every sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
+| R0 | the product sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
 | A1 | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | todo | | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
 | A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |

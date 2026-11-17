@@ -11,7 +11,7 @@ because one box is never both animals. That is where the meaning of "both" enter
 nothing in a caption carries it.
 
 The probe is why this script renders at all. Every PROBE_EVERY steps it draws held-out cat x dog
-seeds through the classifier-guided composer at two weights and logs the sheet to W&B, so
+seeds through the classifier-guided composer at the strengths given and logs the sheet to W&B, so
 composition can be watched appearing rather than read once at the end. Four renders is a picture,
 never a rate.
 
@@ -63,7 +63,6 @@ SPLIT_SEED = 0
 
 PROBE_EVERY = 250
 PROBE_SEEDS = (9, 10)
-PROBE_WEIGHTS = (0.5, 2.0)
 PROBE_PAIR = "a_cat__x__a_dog"
 PROBE_PROMPTS = ("a cat", "a dog")
 
@@ -155,7 +154,14 @@ def main() -> int:
     ap.add_argument("--probe-every", type=int, default=PROBE_EVERY)
     ap.add_argument("--no-probe", action="store_true", help="train without rendering, for a smoke run")
     ap.add_argument("--no-wandb", action="store_true")
+    # Classifier strengths on Dhariwal and Nichol's scale. The values the older rescaled push used
+    # (fractions of the prediction's norm) have no equivalent on this scale, and plan 17 picked
+    # its strengths only after measuring the head's gradient, so each run names its own.
+    ap.add_argument("--probe-strengths", type=float, nargs="+", default=None,
+                    help="classifier strengths for the probe sheet; required unless --no-probe")
     args = ap.parse_args()
+    if not args.no_probe and args.probe_strengths is None:
+        ap.error("--probe-strengths is required unless --no-probe")
 
     out_dir = paths.MOUNT_ROOT / FAMILY / args.run
     disk_guard(out_dir)
@@ -229,7 +235,7 @@ def main() -> int:
                 wandb_run.log({f"eval/balanced_accuracy/{k}": v
                                for k, v in acc["mean_balanced_accuracy"].items()}, step=step)
             if not args.no_probe and step > 0:
-                probe(head, ctx, out_dir, step, wandb_run)
+                probe(head, ctx, out_dir, step, wandb_run, args.probe_strengths)
             head.train()
         if step == args.steps:
             break
@@ -278,7 +284,7 @@ def evaluate(head, latents, targets, held_idx, sampler_timesteps, ctx) -> dict:
             "n_held_out": len(held_idx)}
 
 
-def probe(head, ctx, out_dir: Path, step: int, wandb_run) -> None:
+def probe(head, ctx, out_dir: Path, step: int, wandb_run, strengths) -> None:
     """Render held-out seeds through the guided composer so composition can be watched arriving."""
     from poe_repair.composers import poe_classifier_guided
     cfg = RunConfig()
@@ -288,27 +294,27 @@ def probe(head, ctx, out_dir: Path, step: int, wandb_run) -> None:
             pair_dir=cfg.paths.pilot_dir / f"seed_{seed}" / PROBE_PAIR,
             pair_slug=PROBE_PAIR, prompt_a=PROBE_PROMPTS[0], prompt_b=PROBE_PROMPTS[1],
             seed=seed, regime="collision", height=1024, width=1024, grid_assets={})
-        for weight in PROBE_WEIGHTS:
+        for strength in strengths:
             try:
-                tiles[(seed, weight)] = poe_classifier_guided.run(
-                    cell, ctx, head=head, weight=weight, train_step=step,
+                tiles[(seed, strength)] = poe_classifier_guided.run(
+                    cell, ctx, head=head, strength=strength, train_step=step,
                     exp_name=f"probe/step_{step:06d}", overwrite=True)
             except Exception as exc:
-                print(f"  probe seed {seed} weight {weight} failed: "
+                print(f"  probe seed {seed} strength {strength} failed: "
                       f"{type(exc).__name__}: {exc}", flush=True)
     if not tiles:
         return
-    fig, axes = plt.subplots(len(PROBE_SEEDS), len(PROBE_WEIGHTS),
-                             figsize=(len(PROBE_WEIGHTS) * 3.2, len(PROBE_SEEDS) * 3.5))
-    axes = axes.reshape(len(PROBE_SEEDS), len(PROBE_WEIGHTS))
+    fig, axes = plt.subplots(len(PROBE_SEEDS), len(strengths),
+                             figsize=(len(strengths) * 3.2, len(PROBE_SEEDS) * 3.5))
+    axes = axes.reshape(len(PROBE_SEEDS), len(strengths))
     for r, seed in enumerate(PROBE_SEEDS):
-        for c, weight in enumerate(PROBE_WEIGHTS):
+        for c, strength in enumerate(strengths):
             ax = axes[r][c]
-            path = tiles.get((seed, weight))
+            path = tiles.get((seed, strength))
             if path is not None:
                 with Image.open(path) as im:
                     ax.imshow(im.convert("RGB").resize((320, 320)))
-            ax.set_title(f"seed {seed}, push {weight}", fontsize=9)
+            ax.set_title(f"seed {seed}, strength {strength}", fontsize=9)
             ax.axis("off")
     fig.suptitle(f"the product with the presence head pushing it, after {step} training steps",
                  fontsize=12)

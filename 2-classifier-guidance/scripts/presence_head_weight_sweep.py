@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""The registered test: eight held-out seeds across four classifier weights, with three references.
+"""The registered test: eight held-out seeds across the classifier strengths given, with three references.
 
 Every column renders inside one loop on one device, including the three references, because a
 float32-against-float16 difference of the same combine costs about three grey levels over 50
@@ -12,7 +12,7 @@ The columns:
                         animals in frame on 8 of 8 cells and ruins the picture doing it, so this
                         is what a new method has to beat, not plain product.
     joint prompt        "a cat and a dog" through the model the ordinary way, 8 of 8. The ceiling.
-    four weights        the presence head's gradient at each strength
+    one per strength    the presence head's push at each strength passed with --strengths
 
 Calls are made by eye on the full-resolution tiles, never on the sheet: two renders already read
 as a clear cat and a clear dog at sheet scale and as fused animals at full size. No statistic over
@@ -55,7 +55,6 @@ from poe_repair.runtime import PairSeedCell  # noqa: E402
 PAIR_SLUG = "a_cat__x__a_dog"
 PROMPT_A, PROMPT_B = "a cat", "a dog"
 HELD_OUT_SEEDS = tuple(range(9, 17))
-WEIGHTS = (0.25, 0.5, 1.0, 2.0)
 DAMPED_GUIDANCE = 3.0
 FAMILY = "outputs/presence_head/sweep"
 MIN_FREE_DISK_PERCENT = 10
@@ -75,6 +74,11 @@ def main() -> int:
     ap.add_argument("--checkpoint", default=None,
                     help="head checkpoint; default is the last of presence-head-01")
     ap.add_argument("--run", default="presence-head-01")
+    # Classifier strengths on Dhariwal and Nichol's scale. The values the older rescaled push used
+    # (fractions of the prediction's norm) have no equivalent on this scale, and plan 17 picked
+    # its strengths only after measuring the head's gradient, so each run names its own.
+    ap.add_argument("--strengths", type=float, nargs="+", required=True,
+                    help="classifier strengths, one column each")
     args = ap.parse_args()
 
     out_dir = paths.MOUNT_ROOT / FAMILY
@@ -100,7 +104,7 @@ def main() -> int:
     print(f"head loaded from training step {train_step}", flush=True)
 
     columns = (["plain product", "damped product", "joint prompt"]
-               + [f"push {w}" for w in WEIGHTS])
+               + [f"push {s}" for s in args.strengths])
     rows, started = [], time.time()
 
     for seed in HELD_OUT_SEEDS:
@@ -120,10 +124,10 @@ def main() -> int:
                 elif column == "joint prompt":
                     src = mono_composer.run(cell, ctx, exp_name="sweep/joint", overwrite=True)
                 else:
-                    weight = float(column.split()[1])
+                    strength = float(column.split()[1])
                     src, out = poe_classifier_guided.run(
-                        cell, ctx, head=head, weight=weight, train_step=train_step,
-                        exp_name=f"sweep/push_{weight}", overwrite=True, return_outputs=True)
+                        cell, ctx, head=head, strength=strength, train_step=train_step,
+                        exp_name=f"sweep/push_{strength}", overwrite=True, return_outputs=True)
                     extras = {"mean_grad_norm": round(
                         sum(out.extras["grad_norm_per_step"])
                         / max(1, len(out.extras["grad_norm_per_step"])), 6)}
@@ -164,11 +168,11 @@ def main() -> int:
     plt.close(fig)
 
     manifest = {
-        "what_this_is": "eight held-out cat x dog seeds at four classifier weights, with plain "
+        "what_this_is": "eight held-out cat x dog seeds at each classifier strength, with plain "
                         "product, the damped product and the joint prompt rendered in the same "
                         "loop as references",
         "pair": PAIR_SLUG, "prompts": [PROMPT_A, PROMPT_B],
-        "seeds": list(HELD_OUT_SEEDS), "weights": list(WEIGHTS),
+        "seeds": list(HELD_OUT_SEEDS), "strengths": list(args.strengths),
         "damped_guidance": DAMPED_GUIDANCE,
         "guidance_scale": ctx.guidance_scale, "num_inference_steps": ctx.num_inference_steps,
         "head_checkpoint": str(ckpt_path), "head_train_step": train_step,
