@@ -6,7 +6,8 @@ share this working tree).
 
 ## Where the walk is
 
-Pieces 1 and 2 are done; both 64 px trainings run at about 0.7 s per step and land around 17:30
+The released-model arm's product now uses the released classifier's cat and dog classes (the
+reader's `a`). Pieces 1 and 2 are done; both 64 px trainings run at about 0.7 s per step and land around 17:30
 UTC. Piece 3 runs as one chain on `mscluster108` since 07:42 UTC (separate-label classifier, 512
 product draws on both cards, pair-aware classifier), landing around 11:05 UTC. A waiter on `mscluster108` then draws
 the released model's sheet on GPU 0 (about 40 minutes). The 64 px separate-label classifier trains on
@@ -45,6 +46,7 @@ Seed 1, and one image per label, picked in piece 1.
 | classifier start | fine-tuned from the released classifier | from scratch | you, by defaults | 550 images |
 | where GPU work runs | free cards on 110 to 112 (`co3_bw`), then 106, 107, 108 (`co3`), then `bigbatch` | one job on 108 | you | "try blackwell, 106, 107, 108 on unused devices first before trying bigbatch" |
 | pacing | a self-paced `/loop` | walk round by round | you | "next in a /loop" |
+| the released-model arm's product | the released classifier's cat and dog classes at scale 10 | retrain our classifier · keep it and report the arm untestable | you (`a`) | our classifier's push draws food and objects; the released classifier's draws 4 of 4 animals, 2 of them hybrids |
 | how the 64 px product is formed | cat + dog − null at weight 1, variance from the null call | a guidance weight of 3 · variance from the cat call | you (`options a`) | the plain product the bar names |
 | who runs test 2.1 | Claude | the reader | you ("you do it") | |
 | launch path | scripts copied to `/datasets`, shared-device SSH launch | `cluster.sh run` | Claude | `cluster.sh run` refuses while other sessions hold uncommitted tracked edits |
@@ -77,15 +79,18 @@ Seed 1, and one image per label, picked in piece 1.
   none a clear cat or dog. Seeds 1 to 4 at scales 10, 30, 100 (`push-scale-check-256.png`,
   `mscluster107` GPU 1): scale 10 gives a dog and a bird among 4; 30 and 100 break into texture and
   give none. Our separate-label classifier's gradient does not carry cat and dog; asked the reader.
+- The reader chose the released classifier's classes. Seeds 1 to 4 at scale 10
+  (`imagenet-product-check-256.png`): 4 of 4 animals, draws 2 and 4 cat-dog hybrids and 1 and 3
+  one dog-like animal, by eye at grid scale. The old chain (PID 219860), its draws and the piece 4
+  waiter were stopped by PID at 10:17 UTC; the new chain draws, trains the pair-aware classifier and
+  draws the sheet in one go.
 
 ## Out of the session
 
 | Id | Kind | What it serves | State |
 |---|---|---|---|
 | W&B `wubhxhse` | run, `mscluster111` GPU 0, PID 283386, log `classifier_guidance_photos/logs/train_64_no_both.log` | 1.2, the 64 px model without both-animal images | running since 07:35 UTC |
-| chain PID 219860 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3, the 256 px classifiers and the product's draws | running since 07:42 UTC |
-| waiter PID 222024 | `piece4_256.sh` on `mscluster108`, log `classifier_guidance_photos/logs/piece4_256.log` | 1.4, draws the 256 px sheet when piece 3 prints `PIECE3 DONE` | waiting since 08:10 UTC |
-| PID 710963 | `classifiers.py train-separate --size 64` on `mscluster107` GPU 1, log `classifier_guidance_photos/logs/separate_64.log` | 1.5, the 64 px separate-label classifier | running since 08:11 UTC |
+| chain PID 228025 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3 and 1.4, released-classifier product draws, pair-aware classifier, the 256 px sheet | running since 10:19 UTC, sheet about 14:05 UTC |
 | waiter PID 285185 | `piece5_64.sh` ARM `no_both` on `mscluster111`, log `classifier_guidance_photos/logs/piece5_64_no_both.log` | 1.5, draws, pair-aware classifier and sheet for the model without both-animal images | waiting since 08:41 UTC |
 | waiter PID 525583 | `piece5_64.sh` ARM `all` on `mscluster112`, log `classifier_guidance_photos/logs/piece5_64_all.log` | 1.5, the same for the model on all images | waiting since 08:41 UTC |
 | W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | running since 07:35 UTC |

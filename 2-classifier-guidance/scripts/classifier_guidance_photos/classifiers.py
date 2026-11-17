@@ -6,7 +6,9 @@ Subcommands
                   images (0, 1), both-animal images (1, 1). Noised to a uniform step 0..999, as
                   classifier_train.py.
   draw            the product's own finished draws: the released 256 px unconditional model pushed
-                  by both separate-label outputs, cond_fn = scale * grad(log sig(cat) + log sig(dog)),
+                  by a cat and a dog log-probability, cond_fn = scale * grad(log p(cat) + log p(dog)),
+                  from the released classifier's 5 cat and 118 dog classes (--push imagenet, the
+                  default), or from separate_256.pt's two sigmoid outputs (--push ours),
                   guided-diffusion's p_sample_loop at the README's 250 respaced steps. Seeds from
                   --seed0 upward, never 1 to 16 (the sheet seeds).
   train-pair      fine-tune the released classifier with a one-output layer: both-animal images
@@ -54,6 +56,24 @@ def released_classifier(size, n_out):
     old = clf.out[2].c_proj
     clf.out[2].c_proj = nn.Conv1d(old.in_channels, n_out, 1)  # the new output layer
     return clf, cd
+
+
+IMAGENET_CAT = list(range(281, 286))  # tabby, tiger cat, Persian, Siamese, Egyptian cat
+IMAGENET_DOG = list(range(151, 269))  # the 118 dog breeds
+
+
+def imagenet_classifier():
+    """The released 256 px classifier, unchanged, with its 1,000 ImageNet outputs."""
+    cd = classifier_defaults(); cd.update(image_size=256, classifier_depth=CLF_DEPTH[256])
+    clf = create_classifier(**cd)
+    clf.load_state_dict(th.load(f"{W}/256x256_classifier.pt", map_location="cpu", weights_only=True))
+    return clf
+
+
+def imagenet_cat_dog_logp(clf, x, t):
+    """log p(some cat class) and log p(some dog class) under the released classifier, shape (B, 2)."""
+    lp = F.log_softmax(clf(x, t).float(), dim=-1)
+    return th.stack([th.logsumexp(lp[:, IMAGENET_CAT], -1), th.logsumexp(lp[:, IMAGENET_DOG], -1)], dim=1)
 
 
 def load_set(size, labels):
@@ -115,14 +135,18 @@ def draw(a):
     model, diff = create_model_and_diffusion(**args_to_dict(argparse.Namespace(**md), md.keys()))
     model.load_state_dict(th.load(f"{W}/256x256_diffusion_uncond.pt", map_location="cpu", weights_only=True))
     model.cuda().convert_to_fp16(); model.eval()
-    clf, _ = released_classifier(256, 2)
-    clf.load_state_dict(th.load(a.separate, map_location="cpu", weights_only=True)); clf.cuda().eval()
+    if a.push == "imagenet":
+        clf = imagenet_classifier().cuda().eval()
+        logp = lambda x, t: imagenet_cat_dog_logp(clf, x, t)  # noqa: E731
+    else:
+        clf, _ = released_classifier(256, 2)
+        clf.load_state_dict(th.load(a.separate, map_location="cpu", weights_only=True)); clf.cuda().eval()
+        logp = lambda x, t: F.logsigmoid(clf(x, t))  # noqa: E731
 
     def cond_fn(x, t, y=None):
         with th.enable_grad():
             xi = x.detach().requires_grad_(True)
-            lg = clf(xi, t)
-            g = th.autograd.grad(F.logsigmoid(lg).sum(), xi)[0]
+            g = th.autograd.grad(logp(xi, t).sum(), xi)[0]
         return g * a.scale
 
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
@@ -194,7 +218,9 @@ def main():
         if name == "train-pair":
             q.add_argument("--fakes", nargs="+", required=True)
     q = sub.add_parser("draw")
-    q.add_argument("--separate", required=True); q.add_argument("--out", required=True)
+    q.add_argument("--push", choices=["imagenet", "ours"], default="imagenet",
+                   help="imagenet: the released classifier's cat classes and dog classes; ours: separate_256.pt")
+    q.add_argument("--separate", default=""); q.add_argument("--out", required=True)
     q.add_argument("--scale", type=float, default=10.0); q.add_argument("--steps", default="250")
     q.add_argument("--n", type=int, default=256); q.add_argument("--batch", type=int, default=8)
     q.add_argument("--seed0", type=int, default=1000)

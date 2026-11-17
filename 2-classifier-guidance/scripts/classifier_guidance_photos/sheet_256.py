@@ -1,7 +1,8 @@
 """Plan 20, piece 4: the released 256 px unconditional model on seeds 1 to 16, three columns.
 
-  product        cond_fn = scale * grad(log sig(cat) + log sig(dog)), the separate-label classifier's
-                 two pushes together (the product, since the model itself is unconditional)
+  product        cond_fn = scale * grad(log p(cat) + log p(dog)), the released classifier's 5 cat
+                 classes and 118 dog classes, two separate-label pushes together (the product, since
+                 the model itself is unconditional)
   + pair w=1     the product plus w * grad(clamp(logit, -11.5, 11.5)) from the pair-aware classifier,
   + pair w=2     the log-odds clipped as Kim et al., so past the clip its push is 0
 
@@ -27,7 +28,7 @@ import torch.nn.functional as F
 from PIL import Image, ImageDraw
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from classifiers import UNCOND_256, W, released_classifier  # noqa: E402
+from classifiers import UNCOND_256, W, imagenet_cat_dog_logp, imagenet_classifier, released_classifier  # noqa: E402
 from guided_diffusion.script_util import args_to_dict, create_model_and_diffusion, model_and_diffusion_defaults  # noqa: E402
 
 CLIP = 11.5
@@ -36,7 +37,7 @@ COLUMNS = [("product", 0.0), ("pair_w1", 1.0), ("pair_w2", 2.0)]
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--separate", required=True); p.add_argument("--pair", required=True)
+    p.add_argument("--pair", required=True)
     p.add_argument("--out", required=True, help="tiles, sheet, CSV and logs go here")
     p.add_argument("--scale", type=float, default=10.0); p.add_argument("--steps", default="250")
     p.add_argument("--seeds", type=int, nargs="+", default=list(range(1, 17)))
@@ -48,7 +49,7 @@ def main():
     model, diff = create_model_and_diffusion(**args_to_dict(argparse.Namespace(**md), md.keys()))
     model.load_state_dict(th.load(f"{W}/256x256_diffusion_uncond.pt", map_location="cpu", weights_only=True))
     model.cuda().convert_to_fp16(); model.eval()
-    sep, _ = released_classifier(256, 2); sep.load_state_dict(th.load(a.separate, map_location="cpu", weights_only=True)); sep.cuda().eval()
+    sep = imagenet_classifier().cuda().eval()
     pair, _ = released_classifier(256, 1); pair.load_state_dict(th.load(a.pair, map_location="cpu", weights_only=True)); pair.cuda().eval()
 
     st = {"w": 0.0, "log": None}
@@ -56,7 +57,7 @@ def main():
     def cond_fn(x, t, y=None):
         with th.enable_grad():
             xi = x.detach().requires_grad_(True)
-            g_sep = th.autograd.grad(F.logsigmoid(sep(xi, t)).sum(), xi)[0] * a.scale
+            g_sep = th.autograd.grad(imagenet_cat_dog_logp(sep, xi, t).sum(), xi)[0] * a.scale
             g_pair = th.zeros_like(g_sep)
             if st["w"]:
                 xj = x.detach().requires_grad_(True)
@@ -92,7 +93,7 @@ def main():
             Image.fromarray(u8).save(f"{a.out}/tiles/{name}")
             with th.no_grad():
                 tz = th.zeros(1, dtype=th.long, device="cuda")
-                pc, pd = th.sigmoid(sep(x, tz))[0].tolist(); lo = float(pair(x, tz)[0, 0])
+                pc, pd = imagenet_cat_dog_logp(sep, x, tz).exp()[0].tolist(); lo = float(pair(x, tz)[0, 0])
             rows.append({"seed": s, "column": col, "tile": name, "sep_p_cat": round(pc, 3), "sep_p_dog": round(pd, 3),
                          "pair_logit": round(lo, 2), "call": ""})
             if st["log"] is not None:

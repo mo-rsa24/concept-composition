@@ -46,10 +46,10 @@ guided-diffusion's own code on our cat, dog and cat-with-dog images, two ways.
 
 **The released model**
 
-The authors' 256 px unconditional model stays frozen. A separate-label classifier (cat present,
-dog present) is trained on our images, and its two pushes together form the product. A pair-aware
-classifier is trained on both-animal images against the product's own finished draws, and its push
-is added on top.
+The authors' 256 px unconditional model stays frozen. Their released classifier's cat classes
+(281 to 285) and dog classes (151 to 268) give two separate-label pushes, which together form the
+product. A pair-aware classifier is trained on our both-animal images against the product's own
+finished draws, and its push is added on top.
 
 **The model we train**
 
@@ -205,9 +205,12 @@ For Claude to execute. Ask Claude to do these.
   `mscluster111` (295.1 M parameters, loss 1.02 to 0.062); without both-animal images on
   `mscluster111` GPU 0, W&B `wubhxhse`, 400 images; all images on `mscluster112` GPU 0, W&B
   `pnwlwh0f`, 550 images; both launched 07:35 UTC at 30.6 GB and 100% utilisation
-- [ ] **1.3** The 256 px classifiers: the separate-label one; 500 product draws at 100 respaced
-  steps; the pair-aware one on both-animal images against those draws and the single-animal images,
-  noised forward.
+- [ ] **1.3** The 256 px pair-aware classifier: 512 product draws at 250 respaced steps, the
+  released model pushed at scale 10 by the released classifier's cat and dog classes; the pair-aware
+  classifier on both-animal images against those draws and the single-animal images, noised forward.
+  A separate-label classifier trained on our images (`separate_256.pt`, held-out accuracy 0.93 and
+  0.95 at step 0) does not steer the released model to cats or dogs at scales 10, 30 or 100
+  (`push-scale-check-256.png`), so the product uses the released classifier's classes.
 - [ ] **1.4** The released model's sheet on seeds 1 to 16: the product, then the product plus the
   pair-aware push at weights 1 and 2; the minimal-pair gap per step beside it.
 - [ ] **1.5** When the 64 px runs land: the 64 px separate-label classifier, one pair-aware
