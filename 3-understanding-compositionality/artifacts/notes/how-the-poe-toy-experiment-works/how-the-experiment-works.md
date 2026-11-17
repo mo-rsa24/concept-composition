@@ -205,3 +205,7 @@ Nothing below is measured. It is a reading of [the table](../../results/the-exac
 - **Ring times bar (Du et al.'s Figure 1):** the exact product is two modes, at the top and bottom of the ring where the bar crosses it. Reverse diffusion draws the whole oval of the ring, with the top and bottom heaviest, as in their figure. UHA draws two clean modes, like their HMC. In the trained group the learned ring has unequal mode heights, so the exact product of the trained experts is lopsided, with the top mode larger than the bottom. That is network error, and it is the only row where it shows by eye.
 
 Two rows map onto the paper's Figure A3, which shows two distributions with no overlap. Its top row is the same-coordinates row and its bottom row is the disjoint-supports row. The paper states only that the approach "fails to generate the product of two distribution when they are disjoint with respect to each other".
+
+## Cross-references
+
+- The mention of **the exact product** in [plan 19, a classifier's push on the exact toy](../../../../2-classifier-guidance/plans/partial/19-classifier-push-on-the-exact-toy.md#quick-context).

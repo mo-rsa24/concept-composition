@@ -1,6 +1,6 @@
 # Retrospective: a classifier's push on the exact toy (route step 7)
 
-The walk ported guided-diffusion's push into the exact circle-and-square toy and tested two classifiers on it: one trained on "circle present" and "square present", and one trained to tell exact side-by-side draws from the summed-score sampler's own stacked draws. At pair weight 0.01, seed 7, 300 draws, the second gives 172 crisp pairs at push weight 1 and 300 at weight 2, against 0 unguided. The first gives at most 10. Both halves of the bar pass. The plan was [plan 19](../../../plans/19-classifier-push-on-the-exact-toy.md), and the record is the commits and [A1's page](../../../report/classifier-guided-poe/a1-exact-toy-classifier-push.md).
+The walk ported guided-diffusion's push into the exact circle-and-square toy and tested two classifiers on it: one trained on "circle present" and "square present", and one trained to tell exact side-by-side draws from the summed-score sampler's own stacked draws. At pair weight 0.01, seed 7, 300 draws, the second gives 172 crisp pairs at push weight 1 and 300 at weight 2, against 0 unguided. The first gives at most 10. Both halves of the bar pass. The plan was [plan 19](../../../plans/partial/19-classifier-push-on-the-exact-toy.md), and the record is the commits and [A1's page](../../../report/classifier-guided-poe/a1-exact-toy-classifier-push.md).
 
 ## Piece 1: the push hook
 

@@ -1,6 +1,6 @@
 # A1: the exact toy, a pair-aware push against a separate-label push
 
-Rung 1 of [the scale-up ladder](board.md#the-scale-up-ladder), run as [plan 19](../../plans/19-classifier-push-on-the-exact-toy.md). On the exact circle-and-square toy at pair weight 0.01, the exact product draws 300 of 300 side-by-side pairs and the sampler that adds the two experts' scores stacks all 300. A small classifier's gradient is added to that sampler at every step, with the experts frozen.
+Rung 1 of [the scale-up ladder](board.md#the-scale-up-ladder), run as [plan 19](../../plans/partial/19-classifier-push-on-the-exact-toy.md). On the exact circle-and-square toy at pair weight 0.01, the exact product draws 300 of 300 side-by-side pairs and the sampler that adds the two experts' scores stacks all 300. A small classifier's gradient is added to that sampler at every step, with the experts frozen.
 
 ## Outcomes
 

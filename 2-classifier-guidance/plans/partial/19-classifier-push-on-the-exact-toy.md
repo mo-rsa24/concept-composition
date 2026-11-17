@@ -3,14 +3,14 @@
 ## Recommended prompt
 
 ```text
-/drip-execute-plan 2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md
+/drip-execute-plan 2-classifier-guidance/plans/partial/19-classifier-push-on-the-exact-toy.md
 ```
 
 ## Position in the plan tree
 
-[Root](../../MASTER_PLAN.md) › [the classifier-guided PoE route](route-classifier-guided-poe-from-toy-to-animals.md) ›
+[Root](../../../MASTER_PLAN.md) › [the classifier-guided PoE route](../route-classifier-guided-poe-from-toy-to-animals.md) ›
 this plan, which is the route's step 7 and the board's row A1 in
-[the classifier-guided PoE board](../report/classifier-guided-poe/board.md). It follows step 5, whose
+[the classifier-guided PoE board](../../report/classifier-guided-poe/board.md). It follows step 5, whose
 SDXL sampler pushes unrescaled and capped, and it gates step 8: a miss here opens the diagnosis
 ladder and stops the climb.
 
@@ -37,10 +37,12 @@ ladder and stops the climb.
 
 ## Quick context
 
+Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of-contents) | [Next](#considerations) ➡️
+
 **What this is about**
 
 The exact toy multiplies a circle expert and a square expert, each a mixture of Gaussians over
-16 × 32 pictures. At pair weight 0.01 the exact product draws a circle and a square side by side
+16 × 32 pictures. At pair weight 0.01 the [exact product](../../../3-understanding-compositionality/artifacts/notes/how-the-poe-toy-experiment-works/how-the-experiment-works.md#2-the-exact-product) draws a circle and a square side by side
 300 times of 300, and reverse diffusion on the summed noised scores draws them overlaid 300 times of
 300 (seed 7). This plan adds a classifier's gradient to that sampler at every step and asks which
 classifier fixes it.
@@ -52,6 +54,8 @@ discriminator answers "is this an exact pair draw or one of the sampler's own dr
 way Kim et al. 2023 train theirs.
 
 ## Considerations
+
+Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) | [Next](#the-claim-under-test) ➡️
 
 **The cap**
 
@@ -68,11 +72,15 @@ true noised product minus the summed scores, so the push is read against both.
 
 ## The claim under test
 
+Navigation: ⬅️ [Previous](#considerations) | 📋 [TOC](#table-of-contents) | [Next](#why-this-plan-exists) ➡️
+
 A separate-label classifier's push only re-weights the product, because the summed scores already
 are ∇ log p(x | circle) + ∇ log p(x | square). A pair-aware discriminator's push carries the term
 the product drops.
 
 ## Why this plan exists
+
+Navigation: ⬅️ [Previous](#the-claim-under-test) | 📋 [TOC](#table-of-contents) | [Next](#what-happens) ➡️
 
 The route climbs from the toy to SDXL cat × dog. The toy is the one stage where the true correction
 is known in closed form, so a pass here says the method can work and a miss says it cannot, before
@@ -80,10 +88,14 @@ any GPU-hour is spent on photos.
 
 ## What happens
 
+Navigation: ⬅️ [Previous](#why-this-plan-exists) | 📋 [TOC](#table-of-contents) | [Next](#description) ➡️
+
 Five pieces, one per round, each ending on a test run by hand: the push hook, the separate-label
 classifier and its push, the pair-aware discriminator, its push and the bar, then the diagnosis.
 
 ## Description
+
+Navigation: ⬅️ [Previous](#what-happens) | 📋 [TOC](#table-of-contents) | [Next](#purpose) ➡️
 
 Code in `3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/`:
 the hook in `toy_sampler_hybrids.py` (`guided_eps` and `reverse(push=, scale=, rng=, n=)`), and
@@ -92,9 +104,13 @@ everything else in `toy_classifier_push.py`, one subcommand per piece. Outputs i
 
 ## Purpose
 
+Navigation: ⬅️ [Previous](#description) | 📋 [TOC](#table-of-contents) | [Next](#goal) ➡️
+
 Settle the board's row A1 and give step 8 a working recipe or a diagnosed miss.
 
 ## Goal
+
+Navigation: ⬅️ [Previous](#purpose) | 📋 [TOC](#table-of-contents) | [Next](#environment-facts-this-plan-depends-on) ➡️
 
 **The bar, written before any classifier is trained.** At pair weight 0.01, seed 7, 300 draws,
 uncapped:
@@ -109,12 +125,16 @@ w = 0.5 and 2 are reported beside the bar and do not decide it.
 
 ## Environment Facts This Plan Depends On
 
+Navigation: ⬅️ [Previous](#goal) | 📋 [TOC](#table-of-contents) | [Next](#success-and-failure-outcomes) ➡️
+
 - torch 2.5.1 with CUDA on the laptop's RTX 4070 is in
   `/home/molef/micromamba/envs/sdxl-local/bin/python`; the base miniconda Python has no torch.
 - `artifacts/results/` is gitignored, so figures and counts stay on the laptop; scripts and this plan
   are committed.
 
 ## Success and failure outcomes
+
+Navigation: ⬅️ [Previous](#environment-facts-this-plan-depends-on) | 📋 [TOC](#table-of-contents) | [Next](#tasks) ➡️
 
 | Outcome | What it means | What follows |
 |---|---|---|
@@ -124,15 +144,23 @@ w = 0.5 and 2 are reported beside the bar and do not decide it.
 
 ## Tasks
 
+Navigation: ⬅️ [Previous](#success-and-failure-outcomes) | 📋 [TOC](#table-of-contents) | [Next](#instructions) ➡️
+
 For Claude to execute. Ask Claude to do these.
 
 ### 0. 🧭 Check this plan before working from it
 
-- [ ] **0.1** `/verify-plan` on this file, then `/xref-pillar` on it, at the walk's close.
+◀ **Needs: [2. Test each piece](#2-test-each-piece)** walked, since this plan was written by the walk and is checked at its close.
+
+- [x] **0.1** `/verify-plan` on this file, then `/xref-pillar` on it, at the walk's close. ✓ verified 2026-11-17: verify-plan applied structural fixes only (handoff pointers, breadcrumbs; all 80 links resolve) and listed template gaps as findings; xref-pillar wrote one cross-reference both ways (the exact product, to the toy experiment note)
+
+▶ **Next: [the next step](#next-step)**, the route's step 8.
 
 ### 1. 🔧 Build the five pieces
 
-▶ Next: [2. Test each piece](#2-test-each-piece)
+◀ **Needs: nothing first.** This group starts the walk; [group 0](#0--check-this-plan-before-working-from-it) runs at its close.
+
+▶ **Next: [2. Test each piece](#2-test-each-piece)**
 
 - [x] **1.1** The push hook: `reverse()` takes `push`, `scale`, `rng` and `n` and enters the push
   through `guided_eps`; `toy_classifier_push.py port` runs unguided, scale 0, the true correction at
@@ -159,16 +187,18 @@ For Claude to execute. Ask Claude to do these.
   finding in `report/`, route rows and the board's A1 row. ✓ verified 2026-11-17: `diagnose` writes
   `diagnosis.json` and two figures (cosine with the sampler's own ratio 0.85 to 0.96 from step 190 to
   90, with the true correction at most 0.21; gap up to 27.9 log-odds against within 0.003 of 0 for
-  shuffled labels; the push gives 172 at caps 0.1, 0.3 and 1); the card, [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md),
+  shuffled labels; the push gives 172 at caps 0.1, 0.3 and 1); the card, [A1's page](../../report/classifier-guided-poe/a1-exact-toy-classifier-push.md),
   three route rows and the board redrawn at step 7
 
 ## Instructions
+
+Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](#outputs) ➡️
 
 For you to follow manually. Do these yourself.
 
 ### 2. Test each piece
 
-◀ Needs: [1. Build the five pieces](#1-build-the-five-pieces)
+◀ **Needs: [1. Build the five pieces](#1--build-the-five-pieces)**
 
 - [x] **2.1** Type `guided_eps` in `toy_sampler_hybrids.py`, then from the toy's notes folder run
   `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py port`.
@@ -214,13 +244,19 @@ For you to follow manually. Do these yourself.
   of the two charts; the run's numbers match every line above (verified by Claude), the reader's own
   look is not recorded
 
+▶ **Next: [0. Check this plan before working from it](#0--check-this-plan-before-working-from-it)**, at the walk's close.
+
 ## Outputs
+
+Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | [Next](#figure-catalog) ➡️
 
 `port.json`, `port-samples.npz` and `draw-0-unguided-and-pushed.png` from piece 1; the classifier
 checkpoints, counts and figures from pieces 2 to 5; the card `README.md`; a finding under
 `2-classifier-guidance/report/`.
 
 ## Figure Catalog
+
+Navigation: ⬅️ [Previous](#outputs) | 📋 [TOC](#table-of-contents) | [Next](#error-matrix) ➡️
 
 | Figure | What it shows |
 |---|---|
@@ -231,6 +267,8 @@ checkpoints, counts and figures from pieces 2 to 5; the card `README.md`; a find
 
 ## Error Matrix
 
+Navigation: ⬅️ [Previous](#figure-catalog) | 📋 [TOC](#table-of-contents) | [Next](#orchestration) ➡️
+
 | Symptom | Cause | Fix |
 |---|---|---|
 | `NotImplementedError: type the guided step here` | `guided_eps` not typed | type it |
@@ -238,15 +276,21 @@ checkpoints, counts and figures from pieces 2 to 5; the card `README.md`; a find
 
 ## Orchestration
 
+Navigation: ⬅️ [Previous](#error-matrix) | 📋 [TOC](#table-of-contents) | [Next](#references) ➡️
+
 The walk map is `2-classifier-guidance/artifacts/drips/classifier-push-on-the-exact-toy/EXECUTE_WALK.md`.
 
 ## References
 
-- [the route, step 7](route-classifier-guided-poe-from-toy-to-animals.md#7--port-the-push-to-the-exact-toy-separate-label-against-pair-aware)
-- [the Kim et al. read map's closing section](../artifacts/drips/read-refining-generative-process-discriminator/READ_MAP.md#what-a1-takes-from-this)
-- [the step 4 card, where the push enters their sampler](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md#where-the-push-enters-their-sampler)
-- [the toy's co-occurrence card](../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md)
+Navigation: ⬅️ [Previous](#orchestration) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
+
+- [the route, step 7](../route-classifier-guided-poe-from-toy-to-animals.md#7--port-the-push-to-the-exact-toy-separate-label-against-pair-aware)
+- [the Kim et al. read map's closing section](../../artifacts/drips/read-refining-generative-process-discriminator/READ_MAP.md#what-a1-takes-from-this)
+- [the step 4 card, where the push enters their sampler](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md#where-the-push-enters-their-sampler)
+- [the toy's co-occurrence card](../../../3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md)
 
 ## Next step
+
+Navigation: ⬅️ [Previous](#references) | 📋 [TOC](#table-of-contents)
 
 The route's step 8, our photos, once the bar passes.

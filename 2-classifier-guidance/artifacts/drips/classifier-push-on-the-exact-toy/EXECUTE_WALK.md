@@ -1,8 +1,8 @@
 # Walk map: a classifier's push on the exact toy
 
-**Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
+**Plan:** `2-classifier-guidance/plans/partial/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 5, the diagnosis: run, waiting on test 2.5; then the closing pass. Bar: PASS on both halves
+**On:** closed. Next on the route: step 9, rung 2's four readings, in a new session.
 
 ## Stop point
 
@@ -74,4 +74,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 
 ## Closing pass owed
 
-All of it.
+- Done: the card, A1's page, the board redrawn at step 7, the retrospective, 0.1 (verify-plan and xref-pillar), the plan filed to `plans/partial/` (2.5 is its one 🕒 line).
+- Written but not committed, beside another session's uncommitted edits: the board's A1 row, `history.md`'s row change, and the route's three new rows and step 7 gate tick.
+- Not committed in the learning repo: chapter 3's new section, its figure and plan 06 task 1.6.
+- Not dispatched: pillar-cadence and xref-cadence, because another session holds this repo's cadence queue.
