@@ -263,5 +263,120 @@ def separate_guide():
                  "highest": worst, "verdict": "pass" if worst <= 15 else "miss"}}, indent=1))
 
 
+# ---------------------------------------------------------------------------------------------------
+# Piece 3: the pair-aware discriminator, Kim et al. 2023's recipe
+# Real: exact product draws (side by side). Fake: the summed-score sampler's finished draws (stacked).
+# Both noised forward to a step drawn uniformly from 1 to T, the loss weighted per step by
+# lambda = beta_k / (1 - abar_k), Kim's g^2 / sigma^2, normalised to mean 1 over the 200 steps.
+# ---------------------------------------------------------------------------------------------------
+N_TRAIN, N_HELD = 3000, 500
+_k = np.arange(1, t.T + 1)
+_lam = (1 - t.abar[_k] / t.abar[_k - 1]) / (1 - t.abar[_k])
+LAMBDA = torch.tensor(np.concatenate([[0.0], _lam / _lam.mean()]), dtype=torch.float32, device=DEV)
+
+
+def exact_draws(n, seed):
+    """n draws from the exact product at step 0: a mixture over every pairing, variance sigma0^2 / 2."""
+    rng = np.random.default_rng(seed)
+    w = np.exp(TRUE.logw - TRUE.logw.max()); w /= w.sum()
+    idx = rng.choice(len(TRUE.mu), size=n, p=w)
+    return TRUE.mu[idx] + np.sqrt(TRUE.v0) * rng.standard_normal((n, t.D))
+
+
+def disc_data():
+    """3,500 exact draws and 3,500 sampler draws, 3,000 of each to train on and 500 held out.
+
+    Seeds 101 and 201 to 205, never seed 7, which every count in this walk is judged on.
+    """
+    f = OUT / "discriminator-data.npz"
+    if not f.exists():
+        OUT.mkdir(parents=True, exist_ok=True)
+        real = exact_draws(N_TRAIN + N_HELD, 101)
+        fake = np.concatenate([t.reverse(summed, rng=np.random.default_rng(201 + i), n=700) for i in range(5)])
+        np.savez_compressed(f, real=real, fake=fake,
+                            real_counts=json.dumps(counts(real)), fake_counts=json.dumps(counts(fake)))
+    d = np.load(f)
+    return d["real"], d["fake"]
+
+
+def noise_to(x0, k, gen):
+    a = ABAR[k][:, None]
+    return a.sqrt() * x0 + (1 - a).sqrt() * torch.randn(x0.shape, device=DEV, generator=gen)
+
+
+def disc_loss(logit_real, logit_fake, weight_real, weight_fake):
+    """Binary cross-entropy with real labelled 1 and fake labelled 0, each term weighted by lambda at its step.
+
+    logit_real, logit_fake    the network's output, log(d / (1 - d)), on a batch of each, shape (B,)
+    weight_real, weight_fake  lambda at each example's step, shape (B,)
+    returns one number: the mean over both halves of the batch
+    """
+    raise NotImplementedError("type the discriminator's loss here")
+
+
+def log_odds_grad(net, x, k):
+    """The push: the gradient of log(d / (1 - d)) with respect to x_t, where d = sigmoid(net(x, k)).
+
+    x  torch tensor (B, D) of noised pictures; k  torch tensor (B,) of steps
+    returns a torch tensor (B, D)
+    """
+    raise NotImplementedError("type the log-odds gradient here")
+
+
+def disc_train():
+    real, fake = disc_data()
+    R = torch.tensor(real[:N_TRAIN], dtype=torch.float32, device=DEV)
+    Fk = torch.tensor(fake[:N_TRAIN], dtype=torch.float32, device=DEV)
+    torch.manual_seed(1)
+    gen = torch.Generator(device=DEV).manual_seed(1)
+    net = Net(1).to(DEV)
+    opt = torch.optim.Adam(net.parameters(), lr=1e-3)
+    B = 512
+    for it in range(4000):
+        ir = torch.randint(N_TRAIN, (B,), device=DEV, generator=gen)
+        jf = torch.randint(N_TRAIN, (B,), device=DEV, generator=gen)
+        kr = torch.randint(1, t.T + 1, (B,), device=DEV, generator=gen)
+        kf = torch.randint(1, t.T + 1, (B,), device=DEV, generator=gen)
+        loss = disc_loss(net(noise_to(R[ir], kr, gen), kr)[:, 0], net(noise_to(Fk[jf], kf, gen), kf)[:, 0],
+                         LAMBDA[kr], LAMBDA[kf])
+        opt.zero_grad(); loss.backward(); opt.step()
+        if it % 1000 == 0 or it == 3999:
+            print(f"iteration {it:4d}  loss {loss.item():.4f}", flush=True)
+    torch.save(net.state_dict(), OUT / "pair-aware-discriminator.pt")
+
+    Rh = torch.tensor(real[N_TRAIN:], dtype=torch.float32, device=DEV)
+    Fh = torch.tensor(fake[N_TRAIN:], dtype=torch.float32, device=DEV)
+    table = {}
+    with torch.no_grad():
+        for s in CHECK_STEPS:
+            k = torch.full((N_HELD,), s, device=DEV)
+            lr_, lf = net(noise_to(Rh, k, gen), k)[:, 0], net(noise_to(Fh, k, gen), k)[:, 0]
+            table[s] = {"real called real": float((lr_ > 0).float().mean()),
+                        "fake called fake": float((lf < 0).float().mean())}
+    # the typed log-odds gradient against a central finite difference, on 4 held-out pairs at step 100
+    k = torch.full((4,), 100, device=DEV)
+    x = noise_to(Rh[:4], k, gen)
+    v = torch.randn(x.shape, device=DEV, generator=gen); v /= v.norm(dim=1, keepdim=True)
+    g = log_odds_grad(net, x, k)
+    h = 1e-2
+    with torch.no_grad():
+        fd = (net(x + h * v, k)[:, 0] - net(x - h * v, k)[:, 0]) / (2 * h)
+    rel = float(((g * v).sum(1) - fd).abs().max() / fd.abs().max())
+    print(f"log-odds gradient against a finite difference, 4 pairs at step 100: largest relative error {rel:.1e}")
+    table["gradient_check_relative_error"] = rel
+
+    print("held-out accuracy, 500 exact pairs and 500 sampler draws never trained on")
+    print("step   pairs called real   sampler draws called fake")
+    for s in CHECK_STEPS:
+        r = table[s]
+        print(f"{s:4d}   {r['real called real']:.3f}              {r['fake called fake']:.3f}")
+    (OUT / "pair-aware-train.json").write_text(json.dumps(
+        {"what": "a one-output MLP trained with lambda-weighted binary cross-entropy: 3,000 exact product draws "
+                 "(real) against 3,000 finished draws of the summed-score sampler (fake), each noised to a step "
+                 "uniform 1 to 200, 4,000 iterations of 512 + 512; accuracy on 500 + 500 held out per step",
+         "pair_weight": PAIR_WEIGHT, "accuracy": table}, indent=1))
+
+
 if __name__ == "__main__":
-    {"port": port, "separate-train": separate_train, "separate-guide": separate_guide}[sys.argv[1]]()
+    {"port": port, "separate-train": separate_train, "separate-guide": separate_guide,
+     "disc-train": disc_train}[sys.argv[1]]()

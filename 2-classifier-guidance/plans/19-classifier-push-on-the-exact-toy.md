@@ -145,8 +145,12 @@ For Claude to execute. Ask Claude to do these.
   `toy_classifier_push.py separate-train`, then `separate-guide`. ✓ verified 2026-11-17: 4,000
   iterations in 12 s on the RTX 4070; accuracy within 0.012 of the closed-form best at steps 10, 50,
   100, 150, 190 and 200 · `separate-label-train.json`, `separate-label-classifier.pt`
-- [ ] **1.3** The pair-aware discriminator: 3,000 exact pair draws against 3,000 summed-score draws,
+- [x] **1.3** The pair-aware discriminator: 3,000 exact pair draws against 3,000 summed-score draws,
   noised forward to a random step, binary cross-entropy weighted as Kim et al. Eq. 4.
+  `toy_classifier_push.py disc-train`, with `disc_loss` and `log_odds_grad` left for the reader.
+  ✓ verified 2026-11-17: `discriminator-data.npz` holds 3,500 exact draws (3,500 crisp) and 3,500
+  sampler draws (3,470 overlaid, 30 faint), seeds 101 and 201 to 205; with both functions patched in a
+  throwaway process the trainer separates the held-out draws and the gradient check passes
 - [ ] **1.4** Its push at w = 0.5, 1 and 2, and the bar's pass or miss line.
 - [ ] **1.5** The diagnosis: cosine per step against the true correction and against the sampler's own
   ratio, the minimal-pair gap against a shuffled-label floor, the cap sweep; the figures, card,
@@ -179,7 +183,12 @@ For you to follow manually. Do these yourself.
   not run. ✓ verified 2026-11-17, run by Claude at the reader's word ("you do it"): crisp pairs of 300,
   trained at scales 1, 2, 5, 10: 0, 0, 2, 10; best possible: 0, 1, 13, 34; unguided 0 · the trained
   push's highest is 10, inside 15 · `separate-label-guide.json`
-- [ ] **2.3** The discriminator's test, written when piece 3 is built.
+- [ ] **2.3** Type `disc_loss` and `log_odds_grad` in `toy_classifier_push.py`, then from the toy's
+  notes folder run `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py disc-train`
+  (about 20 s). You should see the loss fall from about 0.69, a gradient check with a largest relative
+  error under 1e-2, and held-out accuracy near 1.000 on both kinds at steps 10 to 100, falling toward
+  chance by step 200. `NotImplementedError` names the function not yet typed; accuracy below 0.5 on
+  both kinds means the labels are flipped; a relative error near 2 means the gradient's sign is flipped.
 - [ ] **2.4** The bar, read from the counts.
 - [ ] **2.5** The diagnosis figures, read by eye.
 

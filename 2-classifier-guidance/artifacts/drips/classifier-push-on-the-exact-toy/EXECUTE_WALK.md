@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 2 closed; waiting on the reader: which classifier the separate-label bar is read on
+**On:** piece 3, the pair-aware discriminator: built, waiting on test 2.3
 
 ## Stop point
 
@@ -32,6 +32,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | where the separate-label bar is read | every scale 1, 2, 5, 10; scale 1 only | every scale | reader, defaults | strictest reading |
 | the overlay half | as written, tightened | as written, against this walk's own scale-0 run | reader, defaults | the reader's bar |
 | improvements | true correction as a third push; closed-form separate-label beside the trained one | both kept | reader, defaults | |
+| which classifier the separate-label bar is read on | the trained one; the trained and the best possible | the trained one, the best possible's 34 at scale 10 reported beside it in the finding | reader (`a`) | the trained classifier is the one the route uses at every later stage |
 | who types the guided step in piece 1 | reader, Claude | Claude | reader | "you do it, and show me the result" |
 | scale-0 identity judged at | bit for bit, float rounding | bit for bit, inside the same loop (separate runs reported) | reader (`fix`) | one draw differed by 6.2e-8 in the port run; plain unguided run three times, a zero push and the true correction at scale 0 were all bitwise identical in a fresh process, so the gap is numpy's summation order |
 
@@ -42,6 +43,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | fix | scale-0 check made bit for bit in the same loop: 200 of 200 steps |
 | 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
 | 1.2 | separate-label classifier trained, accuracy within 0.012 of the closed-form best at every checked step |
+| 1.3 | data built (3,500 crisp against 3,470 overlaid and 30 faint); trainer and gradient check run with patched functions |
 | 2.2 | Claude ran at the reader's word: trained 0, 0, 2, 10; best possible 0, 1, 13, 34; bar line pass (highest 10) |
 | 2.1 | Claude typed `eps - scale * np.sqrt(1 - a_t) * grad` and ran the test: scale 0 1 of 300 draws off by 6.2e-8, labels 300 of 300 unchanged; scale 1 vs true score 6.7e-16; crisp 0, 0, 112, 300, 300 |
 
@@ -50,6 +52,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | Piece | What was predicted | Key | Where |
 |---|---|---|---|
 | 1 | crisp pairs of 300 with the true correction at scale 0.5 | 112 (overlaid 188), shown: no prediction given | scratchpad `key-port/port.json` |
+| 3 | held-out accuracy at step 150, pairs called real and sampler draws called fake | 0.956 and 0.980; gradient check 3.3e-4 | scratchpad `key-disc/pair-aware-train.json` |
 | 2 | crisp pairs of 300 with the trained separate-label push at scale 10 | 10, shown: no prediction given, the reader's run matched the key on all nine rows; best possible at scale 10: 34 | scratchpad `key-separate/separate-label-guide.json` |
 
 ## Out in runs, threads and handoffs
