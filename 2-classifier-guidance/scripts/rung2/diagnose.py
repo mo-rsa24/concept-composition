@@ -69,18 +69,24 @@ def kind_of(row):
     if row["picture"] == "damaged":
         return "damaged or drawn"
     if row["animals"] == "one fused":
-        return "hybrid, never trained on"
+        return "hybrid from a pair prompt"
     if row["animals"] == "one single":
-        return "one animal, never trained on"
-    return "two or three, wrong mix, never trained on"
+        return "one animal from a pair prompt"
+    return "two or three, wrong mix, from a pair prompt"
 
 
 def main() -> int:
+    global OUT, FINAL_HEAD, CHECK_HEAD
     only_kinds = "--only-kinds" in sys.argv
+    if "--v2" in sys.argv:
+        OUT = RUNG2 / "diagnostics-v2"
+        FINAL_HEAD = RUNG2 / "discriminator/final-v2/head_step_001500.pt"
+        CHECK_HEAD = RUNG2 / "discriminator/check-v2-holdout-7-8/head_step_001500.pt"
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
     print(f"{socket.gethostname()}: {torch.cuda.get_device_name(0)}", flush=True)
     single.disk_guard(OUT)
+    OUT.mkdir(parents=True, exist_ok=True)
     ctx = make_ctx(output_root=OUT / "raw")
     enc = lambda p: encode_prompt_sdxl(p, models=ctx.models, device=ctx.device, dtype=ctx.dtype)
     seq_e, pool_e = enc("")
@@ -194,7 +200,8 @@ def main() -> int:
         (OUT / "diagnostics.json").write_text(json.dumps(record, indent=1))
 
     if only_kinds:
-        record = json.loads((OUT / "diagnostics.json").read_text())
+        prev = OUT / "diagnostics.json"
+        record = json.loads(prev.read_text()) if prev.exists() else {"runs": {}}
     colours = {"plain": "#555555", "guided s10": "#2b6cb0", "guided s30": "#1a365d", "random s10": "#c05621"}
     for key, fname, ylabel in () if only_kinds else (("logit_per_step", "logit-through-time.png", "discriminator logit"),
                                ("push_over_eps_per_step", "push-through-time.png", "push size over prediction size")):

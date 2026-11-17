@@ -1,0 +1,413 @@
+{
+ "source": "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/calls.csv, 2026-11-17",
+ "rule": "positives, and negatives with an intact picture; plus every pair-prompt tile that is not a positive, as a negative",
+ "tiles": [
+  {
+   "latent": "seed01__lone_dog",
+   "seed": 1,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed01__product",
+   "seed": 1,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed02__joint",
+   "seed": 2,
+   "label": 1,
+   "column": "joint"
+  },
+  {
+   "latent": "seed02__left_right",
+   "seed": 2,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed02__apart",
+   "seed": 2,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed02__lone_cat",
+   "seed": 2,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed02__lone_dog",
+   "seed": 2,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed02__product",
+   "seed": 2,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed03__joint",
+   "seed": 3,
+   "label": 1,
+   "column": "joint"
+  },
+  {
+   "latent": "seed03__apart",
+   "seed": 3,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed03__lone_cat",
+   "seed": 3,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed03__lone_dog",
+   "seed": 3,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed03__product",
+   "seed": 3,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed04__lone_cat",
+   "seed": 4,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed04__lone_dog",
+   "seed": 4,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed04__product",
+   "seed": 4,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed05__left_right",
+   "seed": 5,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed06__apart",
+   "seed": 6,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed06__lone_dog",
+   "seed": 6,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed06__product",
+   "seed": 6,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed07__joint",
+   "seed": 7,
+   "label": 1,
+   "column": "joint"
+  },
+  {
+   "latent": "seed07__left_right",
+   "seed": 7,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed07__lone_cat",
+   "seed": 7,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed07__lone_dog",
+   "seed": 7,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed07__product",
+   "seed": 7,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed08__lone_cat",
+   "seed": 8,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed08__lone_dog",
+   "seed": 8,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed08__product",
+   "seed": 8,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed05-d1__left_right",
+   "seed": 5,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed06-d1__apart",
+   "seed": 6,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed06-d2__left_right",
+   "seed": 6,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed07-d1__apart",
+   "seed": 7,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed08-d1__apart",
+   "seed": 8,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed08-d1__left_right",
+   "seed": 8,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed08-d2__apart",
+   "seed": 8,
+   "label": 1,
+   "column": "apart"
+  },
+  {
+   "latent": "seed08-d2__left_right",
+   "seed": 8,
+   "label": 1,
+   "column": "left_right"
+  },
+  {
+   "latent": "seed01-d3__lone_cat",
+   "seed": 1,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed05-d4__lone_dog",
+   "seed": 5,
+   "label": 0,
+   "column": "lone_dog"
+  },
+  {
+   "latent": "seed05-d4__product",
+   "seed": 5,
+   "label": 0,
+   "column": "product"
+  },
+  {
+   "latent": "seed05-d6__lone_cat",
+   "seed": 5,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed06-d6__lone_cat",
+   "seed": 6,
+   "label": 0,
+   "column": "lone_cat"
+  },
+  {
+   "latent": "seed01__joint",
+   "seed": 1,
+   "label": 0,
+   "column": "joint",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed01__left_right",
+   "seed": 1,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed01__apart",
+   "seed": 1,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed03__left_right",
+   "seed": 3,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed04__joint",
+   "seed": 4,
+   "label": 0,
+   "column": "joint",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed04__left_right",
+   "seed": 4,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed04__apart",
+   "seed": 4,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed05__joint",
+   "seed": 5,
+   "label": 0,
+   "column": "joint",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed05__apart",
+   "seed": 5,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed06__joint",
+   "seed": 6,
+   "label": 0,
+   "column": "joint",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed06__left_right",
+   "seed": 6,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed07__apart",
+   "seed": 7,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed08__joint",
+   "seed": 8,
+   "label": 0,
+   "column": "joint",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed08__left_right",
+   "seed": 8,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed08__apart",
+   "seed": 8,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed05-d1__apart",
+   "seed": 5,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed05-d2__apart",
+   "seed": 5,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed05-d2__left_right",
+   "seed": 5,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed06-d1__left_right",
+   "seed": 6,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed06-d2__apart",
+   "seed": 6,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed07-d1__left_right",
+   "seed": 7,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed07-d2__apart",
+   "seed": 7,
+   "label": 0,
+   "column": "apart",
+   "kind": "pair-prompt failure"
+  },
+  {
+   "latent": "seed07-d2__left_right",
+   "seed": 7,
+   "label": 0,
+   "column": "left_right",
+   "kind": "pair-prompt failure"
+  }
+ ]
+}

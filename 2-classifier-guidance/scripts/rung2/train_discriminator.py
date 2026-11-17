@@ -70,6 +70,7 @@ def main() -> int:
     ap.add_argument("--check-seeds", type=int, nargs="*", default=[])
     ap.add_argument("--steps", type=int, default=1500)
     ap.add_argument("--eval-every", type=int, default=250)
+    ap.add_argument("--tiles", type=Path, default=TRAINING_SET)
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card; co3 on a Blackwell runs on the CPU in silence")
@@ -78,7 +79,7 @@ def main() -> int:
     single.disk_guard(out)
     out.mkdir(parents=True, exist_ok=True)
 
-    tiles = json.loads(TRAINING_SET.read_text())["tiles"]
+    tiles = json.loads(args.tiles.read_text())["tiles"]
     if any(t["seed"] >= 9 for t in tiles):
         raise SystemExit("guard: a tile from seeds 9 to 16 is in the training set")
     train = [t for t in tiles if t["seed"] not in args.check_seeds]
@@ -90,7 +91,7 @@ def main() -> int:
 
     z_train, y_train = load(train)
     z_check, y_check = load(check)
-    split = {"train_seeds": sorted({t["seed"] for t in train}), "check_seeds": args.check_seeds,
+    split = {"tiles_file": str(args.tiles), "train_seeds": sorted({t["seed"] for t in train}), "check_seeds": args.check_seeds,
              "train_positives": int(y_train.sum()), "train_negatives": int((1 - y_train).sum()),
              "check_positives": int(y_check.sum()), "check_negatives": int((1 - y_check).sum()),
              "check_is_held_out": bool(args.check_seeds)}

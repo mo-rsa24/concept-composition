@@ -41,14 +41,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from poe_repair import paths  # noqa: E402
 from poe_repair.composers._helpers import init_latents_for_cell  # noqa: E402
-from poe_repair.methods._classifier_guided import run_poe_classifier_guided  # noqa: E402
+from poe_repair.methods._classifier_guided import PUSH_CAP_FRACTION, run_poe_classifier_guided  # noqa: E402
 from poe_repair.methods._sampling import run_cfg_poe, write_decoded_image  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
 from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
 import classifier_guidance_from_the_paper as single  # noqa: E402
 from discriminator import PairDiscriminator  # noqa: E402
 
-OUT = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2/results"
+RUNG2 = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2"
+OUT = RUNG2 / "results"
 HEAD = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2/discriminator/final-all-seeds/head_step_001500.pt"
 
 
@@ -61,7 +62,13 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3, 4, 9, 10, 11, 12])
     ap.add_argument("--strengths", type=float, nargs="+", default=[10, 30, 100])
     ap.add_argument("--head", type=Path, default=HEAD)
+    ap.add_argument("--push-cap", type=float, default=PUSH_CAP_FRACTION)
+    ap.add_argument("--out-name", default="results", help="folder under rung2/ for this sheet")
+    ap.add_argument("--reuse-baselines", default="",
+                    help="folder under rung2/ whose plain and best-of-2 tiles this sheet reuses (same head only)")
     args = ap.parse_args()
+    global OUT
+    OUT = RUNG2 / args.out_name
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card; co3 on a Blackwell runs on the CPU in silence")
     print(f"{socket.gethostname()}: {torch.cuda.get_device_name(0)}, seeds {args.seeds}", flush=True)
@@ -100,7 +107,12 @@ def main() -> int:
         return o, time.perf_counter() - t0
 
     tile = lambda seed, col: OUT / "tiles" / f"seed{seed:02d}__{col}.png"
-    record = {"host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
+    base = RUNG2 / args.reuse_baselines if args.reuse_baselines else None
+    base_record = json.loads((base / "result.json").read_text()) if base else None
+    if base_record and base_record["head"] != str(args.head):
+        raise SystemExit("guard: reused baselines were picked by a different discriminator")
+    record = {"push_cap": args.push_cap, "reused_baselines": str(base) if base else None,
+              "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
               "seeds": args.seeds, "strengths": args.strengths, "best_of_n": 2, "canary": {}, "seeds_detail": {}}
 
     first = args.seeds[0]
@@ -119,21 +131,30 @@ def main() -> int:
 
     for seed in args.seeds:
         d = {"seconds": {}}
-        init, sigma = own_noise(seed)
-        plain, d["seconds"]["plain"] = timed(lambda: run_cfg_poe(init_latents=init, euler_init_noise_sigma=sigma, **common))
-        write_decoded_image(plain.image, tile(seed, "plain"))
-        g = torch.Generator(device="cpu").manual_seed(20_000 + seed)
-        noise2 = torch.randn(1, 4, 128, 128, generator=g).to(device=ctx.device, dtype=ctx.dtype)
-        draw2, d["seconds"]["draw2"] = timed(lambda: run_cfg_poe(init_latents=noise2, euler_init_noise_sigma=1.0, **common))
-        write_decoded_image(draw2.image, tile(seed, "draw2"))
-        scores = {"own_noise": score(plain.latents), "draw2": score(draw2.latents)}
-        pick = max(scores, key=scores.get)
-        Image.open(tile(seed, "plain" if pick == "own_noise" else "draw2")).save(tile(seed, "best_of_2"))
-        d["best_of_2"] = {"logits": scores, "picked": pick}
+        if base:
+            for col in ("plain", "draw2", "best_of_2"):
+                Image.open(base / "tiles" / f"seed{seed:02d}__{col}.png").save(tile(seed, col))
+            old_d = base_record["seeds_detail"][str(seed)]
+            d["best_of_2"] = old_d["best_of_2"]
+            d["seconds"].update({k: old_d["seconds"][k] for k in ("plain", "draw2")})
+            pick, scores = d["best_of_2"]["picked"], d["best_of_2"]["logits"]
+        else:
+            init, sigma = own_noise(seed)
+            plain, d["seconds"]["plain"] = timed(lambda: run_cfg_poe(init_latents=init, euler_init_noise_sigma=sigma, **common))
+            write_decoded_image(plain.image, tile(seed, "plain"))
+            g = torch.Generator(device="cpu").manual_seed(20_000 + seed)
+            noise2 = torch.randn(1, 4, 128, 128, generator=g).to(device=ctx.device, dtype=ctx.dtype)
+            draw2, d["seconds"]["draw2"] = timed(lambda: run_cfg_poe(init_latents=noise2, euler_init_noise_sigma=1.0, **common))
+            write_decoded_image(draw2.image, tile(seed, "draw2"))
+            scores = {"own_noise": score(plain.latents), "draw2": score(draw2.latents)}
+            pick = max(scores, key=scores.get)
+            Image.open(tile(seed, "plain" if pick == "own_noise" else "draw2")).save(tile(seed, "best_of_2"))
+            d["best_of_2"] = {"logits": scores, "picked": pick}
         for s_ in args.strengths:
             init, sigma = own_noise(seed)
             guided, d["seconds"][f"s{s_:g}"] = timed(lambda: run_poe_classifier_guided(
-                init_latents=init, euler_init_noise_sigma=sigma, head=disc, strength=s_, **common))
+                init_latents=init, euler_init_noise_sigma=sigma, head=disc, strength=s_,
+                push_cap=args.push_cap, **common))
             write_decoded_image(guided.image, tile(seed, f"s{s_:g}"))
             norms = guided.extras["applied_norm_per_step"]
             init, sigma = own_noise(seed)
@@ -181,7 +202,8 @@ def main() -> int:
                 ax.text(-0.06, 0.5, f"seed {seed}\n{part}", transform=ax.transAxes, rotation=90,
                         va="center", ha="right", fontsize=9)
             ax.set_xticks([]); ax.set_yticks([])
-    fig.suptitle("Rung 2: the cat x dog product, seeds 1 to 4 (training) and 9 to 12 (held out)", fontsize=12)
+    fig.suptitle(f"Rung 2 ({args.out_name}, cap {args.push_cap:g}): the cat x dog product, seeds 1 to 4 "
+                 f"(training) and 9 to 12 (held out)", fontsize=12)
     fig.tight_layout(rect=[0.02, 0, 1, 0.96])
     fig.savefig(OUT / "result-sheet.png", dpi=100)
     plt.close(fig)
