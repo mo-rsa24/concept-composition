@@ -84,7 +84,7 @@ def main() -> int:
     out.mkdir(parents=True, exist_ok=True)
 
     tiles = json.loads(args.tiles.read_text())["tiles"]
-    if any(t["seed"] >= 9 for t in tiles):
+    if any(9 <= t["seed"] <= 16 for t in tiles):
         raise SystemExit("guard: a tile from seeds 9 to 16 is in the training set")
     if args.held_out:
         train = [t for t in tiles if not t["check"]]
