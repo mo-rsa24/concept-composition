@@ -140,8 +140,11 @@ For Claude to execute. Ask Claude to do these.
   condition_score step patched in a throwaway process, scale 0 differs from unguided on 0 of 300
   draws and scale 1 matches the true-score sampler to 7.3e-8; left untyped, the run stops on
   `NotImplementedError`
-- [ ] **1.2** The separate-label classifier, trained on noised draws from the seven pictures at the
+- [x] **1.2** The separate-label classifier, trained on noised draws from the seven pictures at the
   experts' weights, with the closed-form best classifier beside it; its push at scales 1, 2, 5 and 10.
+  `toy_classifier_push.py separate-train`, then `separate-guide`. ✓ verified 2026-11-17: 4,000
+  iterations in 12 s on the RTX 4070; accuracy within 0.012 of the closed-form best at steps 10, 50,
+  100, 150, 190 and 200 · `separate-label-train.json`, `separate-label-classifier.pt`
 - [ ] **1.3** The pair-aware discriminator: 3,000 exact pair draws against 3,000 summed-score draws,
   noised forward to a random step, binary cross-entropy weighted as Kim et al. Eq. 4.
 - [ ] **1.4** Its push at w = 0.5, 1 and 2, and the bar's pass or miss line.
@@ -159,16 +162,21 @@ For you to follow manually. Do these yourself.
 
 - [x] **2.1** Type `guided_eps` in `toy_sampler_hybrids.py`, then from the toy's notes folder run
   `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py port`.
-  You should see scale 0 differing from unguided by no more than float rounding (under 1e-6, the
-  same label on all 300 draws), a largest difference under 1e-6 between the scale-1 push and the
-  true-score sampler, and 300 crisp pairs at scale 1. Bit-for-bit identity depends on numpy's
-  memory layout in the process: a zero push and the true correction at scale 0 are bitwise identical
-  when run on their own. `NotImplementedError`
-  means the step is not typed yet; 0 crisp at scale 1 means the sign of the push is flipped. ✓ verified 2026-11-17, typed and run by Claude at the reader's word ("you do it"): scale 0 differs
-  on 1 of 300 draws by 6.2e-8, labels unchanged on 300 of 300; scale 1 against the true-score sampler
-  6.7e-16; crisp pairs of 300: unguided 0, scale 0 0, scale 0.5 112, scale 1 300, true score 300 ·
-  `port.json`
-- [ ] **2.2** The separate-label piece's test, written when piece 2 is built.
+  You should see the guided noise at scale 0 equal to the product's bit for bit on 200 of 200 steps
+  in the same loop, a largest difference under 1e-6 between the scale-1 push and the true-score
+  sampler, and 300 crisp pairs at scale 1. Scale 0 against a separately run unguided sampler is
+  reported too; numpy's summation order can move its last bit between processes. `NotImplementedError`
+  means the step is not typed yet; 0 crisp at scale 1 means the sign of the push is flipped.
+  ✓ verified 2026-11-17, typed and run by Claude at the reader's word ("you do it"): bit for bit on
+  200 of 200 steps; against a separate unguided run 0 of 300 draws differ; scale 1 against the
+  true-score sampler 6.7e-16; crisp pairs of 300: unguided 0, scale 0 0, scale 0.5 112, scale 1 300,
+  true score 300 · `port.json`
+- [ ] **2.2** From the toy's notes folder run
+  `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py separate-guide`
+  (about 60 s). You should see nine count lines (unguided, then the trained and the best possible
+  classifier at scales 1, 2, 5 and 10) and a bar line naming the trained push's highest crisp count
+  with pass or miss. `FileNotFoundError` on `separate-label-classifier.pt` means `separate-train` has
+  not run.
 - [ ] **2.3** The discriminator's test, written when piece 3 is built.
 - [ ] **2.4** The bar, read from the counts.
 - [ ] **2.5** The diagnosis figures, read by eye.
