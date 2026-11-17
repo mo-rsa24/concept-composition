@@ -92,12 +92,12 @@ def drawings(device) -> int:
                 img = decode_latents(ctx.models, final)
             path = Path(td) / "pic.png"
             write_decoded_image(img.cpu(), path)
-            n, _ = count_instances(path, query=nouns(pair), device=device)
-            labels[stem] = n
+            n, keep = count_instances(path, query=nouns(pair), device=device)
+            labels[stem] = {"count": n, "boxes": [[float(v) for v in d["box"]] for d in keep], "size": 1024}
             if i % 100 == 0:
                 print(f"{i} of {len(files)} counted", flush=True)
     (OUT / "labels.json").write_text(json.dumps(labels, indent=0))
-    c = Counter(("joint" if k.endswith("joint") else "product", v >= 2) for k, v in labels.items())
+    c = Counter(("joint" if k.endswith("joint") else "product", v["count"] >= 2) for k, v in labels.items())
     print({f"{m}, {'plural' if p else 'single or hybrid'}": n for (m, p), n in sorted(c.items())}, flush=True)
     print("LABELS DONE", flush=True)
     return 0
