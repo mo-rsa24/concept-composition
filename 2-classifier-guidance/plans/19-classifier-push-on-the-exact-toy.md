@@ -151,7 +151,9 @@ For Claude to execute. Ask Claude to do these.
   ✓ verified 2026-11-17: `discriminator-data.npz` holds 3,500 exact draws (3,500 crisp) and 3,500
   sampler draws (3,470 overlaid, 30 faint), seeds 101 and 201 to 205; with both functions patched in a
   throwaway process the trainer separates the held-out draws and the gradient check passes
-- [ ] **1.4** Its push at w = 0.5, 1 and 2, and the bar's pass or miss line.
+- [x] **1.4** Its push at w = 0.5, 1 and 2, and the bar's pass or miss line.
+  `toy_classifier_push.py pair-guide`, every step, uncapped, the logit clipped at ±11.5 as Kim et al.
+  ✓ verified 2026-11-17: runs end to end in 26 s in a throwaway folder and writes the bar line
 - [ ] **1.5** The diagnosis: cosine per step against the true correction and against the sampler's own
   ratio, the minimal-pair gap against a shuffled-label floor, the cap sweep; the figures, card,
   finding in `report/`, route rows and the board's A1 row.
@@ -192,7 +194,10 @@ For you to follow manually. Do these yourself.
   check 3.3e-4; held-out pairs called real and sampler draws called fake, 1.000 and 1.000 at steps 10,
   50 and 100, 0.956 and 0.980 at 150, 0.646 and 0.662 at 190 · `pair-aware-train.json`,
   `pair-aware-discriminator.pt`
-- [ ] **2.4** The bar, read from the counts.
+- [ ] **2.4** From the toy's notes folder run
+  `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py pair-guide` (about 30 s).
+  You should see four count lines (unguided, then w = 0.5, 1 and 2) and a bar line for w = 1 with
+  pass or miss. `FileNotFoundError` on `pair-aware-discriminator.pt` means `disc-train` has not run.
 - [ ] **2.5** The diagnosis figures, read by eye.
 
 ## Outputs

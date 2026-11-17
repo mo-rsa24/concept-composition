@@ -379,6 +379,56 @@ def disc_train():
          "pair_weight": PAIR_WEIGHT, "accuracy": table}, indent=1))
 
 
+# ---------------------------------------------------------------------------------------------------
+# Piece 4: guide the sampler with the pair-aware push, and the bar
+# ---------------------------------------------------------------------------------------------------
+WEIGHTS = [0.5, 1.0, 2.0]          # the bar is read at w = 1, fixed before the run
+LOGIT_CLIP = float(np.log((1 - 1e-5) / 1e-5))   # Kim et al. clip d to [1e-5, 1 - 1e-5]; past it the push is 0
+
+
+def pair_push():
+    net = Net(1).to(DEV)
+    net.load_state_dict(torch.load(OUT / "pair-aware-discriminator.pt", map_location=DEV, weights_only=True))
+    net.eval()
+
+    def push(x, k):
+        xt = torch.tensor(x, dtype=torch.float32, device=DEV)
+        kk = torch.full((len(x),), k, device=DEV, dtype=torch.long)
+        g = log_odds_grad(net, xt, kk)
+        with torch.no_grad():
+            inside = (net(xt, kk)[:, 0].abs() < LOGIT_CLIP).float()[:, None]
+        return (g * inside).double().cpu().numpy()
+    return push
+
+
+def pair_guide():
+    plain = sample()
+    rows = {"unguided": counts(plain)}
+    push = pair_push()
+    keep = {"unguided": plain}
+    for w in WEIGHTS:
+        x = sample(push, w)
+        rows[f"pair-aware, w {w:g}"] = counts(x)
+        keep[f"w{w:g}"] = x
+    for name, c in rows.items():
+        print(f"{name:20s} crisp {c['two objects, crisp']:3d}  overlaid {c['hybrid: overlaid']:3d}  "
+              f"faint {c['two faint objects']:3d}  single {c['one circle'] + c['one square']:3d}", flush=True)
+    c1 = rows["pair-aware, w 1"]
+    ok = c1["two objects, crisp"] >= 150 and c1["hybrid: overlaid"] <= rows["unguided"]["hybrid: overlaid"]
+    print(f"bar, pair-aware at w = 1: crisp {c1['two objects, crisp']} (at least 150), overlaid "
+          f"{c1['hybrid: overlaid']} (no more than unguided's {rows['unguided']['hybrid: overlaid']}) -> "
+          f"{'pass' if ok else 'miss'}")
+    np.savez_compressed(OUT / "pair-aware-guide-samples.npz", **keep)
+    (OUT / "pair-aware-guide.json").write_text(json.dumps(
+        {"what": "reverse diffusion on the summed scores with the pair-aware discriminator's log-odds gradient "
+                 "as the push, at weights 0.5, 1 and 2, every step, uncapped, the logit clipped at +-11.5 as Kim "
+                 "et al.; seed 7, 300 draws",
+         "pair_weight": PAIR_WEIGHT, "seed": SEED, "counts": rows,
+         "bar": {"rule": "at w = 1, at least 150 of 300 crisp pairs and overlaid no more than unguided",
+                 "crisp": c1["two objects, crisp"], "overlaid": c1["hybrid: overlaid"],
+                 "verdict": "pass" if ok else "miss"}}, indent=1))
+
+
 if __name__ == "__main__":
     {"port": port, "separate-train": separate_train, "separate-guide": separate_guide,
-     "disc-train": disc_train}[sys.argv[1]]()
+     "disc-train": disc_train, "pair-guide": pair_guide}[sys.argv[1]]()

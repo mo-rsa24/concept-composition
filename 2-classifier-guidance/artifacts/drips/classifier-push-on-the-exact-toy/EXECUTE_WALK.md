@@ -2,7 +2,7 @@
 
 **Plan:** `2-classifier-guidance/plans/19-classifier-push-on-the-exact-toy.md` (route step 7, board row A1)
 **Mode:** `--request` · **Branch:** `exec/classifier-guidance-ladder`
-**On:** piece 4, guiding with the pair-aware push: not started
+**On:** piece 4, guiding with the pair-aware push: built, waiting on test 2.4
 
 ## Stop point
 
@@ -43,6 +43,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | fix | scale-0 check made bit for bit in the same loop: 200 of 200 steps |
 | 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
 | 1.2 | separate-label classifier trained, accuracy within 0.012 of the closed-form best at every checked step |
+| 1.4 | pair-guide built, runs in 26 s; draw 0 at step 150: push against true correction cosine 0.148, median over 300 draws 0.169 |
 | 2.3 | Claude typed the loss and the log-odds gradient at the reader's word and ran the test: matched the key on every row, gradient check 3.3e-4 |
 | 1.3 | data built (3,500 crisp against 3,470 overlaid and 30 faint); trainer and gradient check run with patched functions |
 | 2.2 | Claude ran at the reader's word: trained 0, 0, 2, 10; best possible 0, 1, 13, 34; bar line pass (highest 10) |
@@ -53,6 +54,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | Piece | What was predicted | Key | Where |
 |---|---|---|---|
 | 1 | crisp pairs of 300 with the true correction at scale 0.5 | 112 (overlaid 188), shown: no prediction given | scratchpad `key-port/port.json` |
+| 4 | crisp pairs of 300 with the pair-aware push at w = 1 | 172 (overlaid 128); w = 0.5: 16; w = 2: 300 | scratchpad `key-pair/pair-aware-guide.json` |
 | 3 | held-out accuracy at step 150, pairs called real and sampler draws called fake | 0.956 and 0.980; gradient check 3.3e-4 | scratchpad `key-disc/pair-aware-train.json` |
 | 2 | crisp pairs of 300 with the trained separate-label push at scale 10 | 10, shown: no prediction given, the reader's run matched the key on all nine rows; best possible at scale 10: 34 | scratchpad `key-separate/separate-label-guide.json` |
 
