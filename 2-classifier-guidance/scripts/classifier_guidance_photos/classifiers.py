@@ -166,6 +166,9 @@ def train_pair(a):
             row = {}
             for name, xs in (("both photos called real", real[rho]), ("product draws called fake", fake[fho[kind[fho] == "draw"]]),
                              ("single-animal photos called fake", fake[fho[kind[fho] == "single"]])):
+                if len(xs) == 0:
+                    row[name] = None
+                    continue
                 t = th.full((len(xs),), s, device="cuda"); lg = clf(diff.q_sample(xs.cuda(), t), t)[:, 0]
                 row[name] = float(((lg > 0) if "real" in name else (lg <= 0)).float().mean())
             acc[s] = row
