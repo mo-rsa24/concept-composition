@@ -10,7 +10,7 @@ and best-of-N at equal compute, with the bar written before the run.
 
 ## Outcomes
 
-- [ ] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys
+- [x] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys · `verified` · [plan 21's compute block](../../plans/21-rung2-a-small-discriminator-steers-cat-x-dog.md#considerations): about 2.1 GPU-hours on `mscluster107` GPU 0, fallback `mscluster108` GPU 1, N = 2, cat × dog on seeds 1 to 4 and 9 to 12, 2026-11-17
 - [x] 📝 bar written before the run: the seven readings below, each with its count out of 4 seeds · `verified` · [the rung 2 review file](../../plans/review/a3q-cat-x-dog-quick-discriminator-test.md), 2026-11-17
 - [ ] 💻 code ran: the discriminator trained on the checked renders and the product's renders from seeds 1 to 4
 - [ ] 🖼️ screenshot: one sheet, seeds 1 to 4 and 9 to 12 side by side, columns plain product, best-of-N at equal compute and guided

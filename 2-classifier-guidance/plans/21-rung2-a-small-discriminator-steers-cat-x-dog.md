@@ -68,10 +68,29 @@ Plan 18's trunk: SDXL's down and middle blocks on their own UNet copy, trained t
 adapters, with a fresh attention-pool head giving one logit. Pretrained features are the better
 bet with 10 to 15 positives; a network trained from scratch on so few would memorise them.
 
+**The compute, measured on `mscluster107` GPU 0**
+
+A plain product render takes 27.5 s and a guided one 42.2 s (medians of 4, 50 steps, 1024 px),
+so a guided render costs 1.53 plain ones and peaks at 15.7 GB. The rung needs about 2.1
+GPU-hours on that card, run back to back, so about 2.2 hours of wall clock plus the reader's calls
+between pieces:
+
+| Piece | Renders or steps | GPU time |
+|---|---|---|
+| training set, seeds 1 to 8 | 48 renders at ≤ 27.5 s | 22 min |
+| the discriminator | about 1,500 steps | about 65 min (inferred from plan 18's `dog-01`, 750 steps per 32 min with its probes) |
+| result sheet, seeds 1 to 4 and 9 to 12 | 42 plain-cost renders (plain, best-of-N's second draw, the random push at 3 strengths, the strength-0 check) and 24 guided | 36 min |
+
+Fallback: `mscluster108` GPU 1, also a Quadro RTX 8000 under `co3`, re-timed there before any
+column renders, since every column of the sheet renders on one card.
+
 **Best-of-N's pick**
 
-The discriminator's log-odds on each draw's final latent at the last sampler timestep. N is set
-by task 1.1's timing so N plain renders cost one guided render's GPU time.
+N = 2: the guided render's time over the plain render's, 1.53, rounded. Best-of-N therefore gets
+about 30% more GPU time than one guided render (55 s against 42 s), which favours the picker and
+makes the support reading harder to reach. The two draws are the seed's own starting noise, which
+is the plain product's tile, and one more draw from fresh noise. The discriminator's log-odds on
+each draw's final latent at the last sampler timestep picks one.
 
 **The training set**
 
@@ -178,10 +197,13 @@ For Claude to execute. Ask Claude to do these.
 
 ▶ **Next: [2. Test each piece](#2-test-each-piece)**
 
-- [ ] **1.1** The timing: on `mscluster107` GPU 0 under `co3`, assert torch sees the card, render 4
+- [x] **1.1** The timing: on `mscluster107` GPU 0 under `co3`, assert torch sees the card, render 4
   plain and 4 guided products (seeds 1 to 4, strength 30, plan 18's `dog-01` step 3,000 classifier
   as a stand-in head with the same trunk), time each, and write GPU-hours, wall clock, card,
   fallback and N into [Considerations](#considerations). `scripts/rung2/time_renders.py`.
+  ✓ verified 2026-11-17: Quadro RTX 8000, torch 2.5.1; plain 27.2 to 27.7 s, guided 42.1 to
+  42.3 s, ratio 1.53, N = 2; the cap fired on 2 to 6% of steps at strength 30 ·
+  `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/compute/timing.json`
 - [ ] **1.2** The training set: on seeds 1 to 8, the joint prompt, "a cat on the left and a dog on
   the right", "a cat and a dog sitting apart", a lone cat, a lone dog, and the plain product; one
   sheet. If fewer than 10 positives pass the reader's calls, more seed 5 to 8 renders with the two
