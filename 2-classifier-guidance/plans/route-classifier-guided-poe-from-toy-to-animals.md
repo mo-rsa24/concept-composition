@@ -614,6 +614,8 @@ Judged by the canary: done when the strength-0 checksum equals plain product's.
 ```
 
 - `added:` the precision note (from project memory) · `dropped:` nothing
+- [x] **T1** the product sampler pushes unrescaled, capped at `PUSH_CAP_FRACTION` 0.1 of the product prediction's norm, logging the raw gradient, the push before and after the cap, and whether it fired, every step · ✓ verified 2026-11-17: commit `445cef9f`; on the mscluster login node a push 0.871 the size of ε_PoE comes out at 0.100 with direction cosine 1.000000, a push of 0.051 passes untouched, and a nonzero `weight` raises
+- [ ] **T2** the canary at strength 0 against plain product, cat × dog seed 9
 - [ ] **Gate:** the checksums identical.
 - **Leaves:** the repaired sampler, which step 10 uses.
 
