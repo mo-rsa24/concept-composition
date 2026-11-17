@@ -183,12 +183,15 @@ For you to follow manually. Do these yourself.
   not run. ✓ verified 2026-11-17, run by Claude at the reader's word ("you do it"): crisp pairs of 300,
   trained at scales 1, 2, 5, 10: 0, 0, 2, 10; best possible: 0, 1, 13, 34; unguided 0 · the trained
   push's highest is 10, inside 15 · `separate-label-guide.json`
-- [ ] **2.3** Type `disc_loss` and `log_odds_grad` in `toy_classifier_push.py`, then from the toy's
+- [x] **2.3** Type `disc_loss` and `log_odds_grad` in `toy_classifier_push.py`, then from the toy's
   notes folder run `/home/molef/micromamba/envs/sdxl-local/bin/python -I toy_classifier_push.py disc-train`
   (about 20 s). You should see the loss fall from about 0.69, a gradient check with a largest relative
   error under 1e-2, and held-out accuracy near 1.000 on both kinds at steps 10 to 100, falling toward
   chance by step 200. `NotImplementedError` names the function not yet typed; accuracy below 0.5 on
-  both kinds means the labels are flipped; a relative error near 2 means the gradient's sign is flipped.
+  both kinds means the labels are flipped; a relative error near 2 means the gradient's sign is flipped. ✓ verified 2026-11-17, typed and run by Claude at the reader's word ("you do it"): gradient
+  check 3.3e-4; held-out pairs called real and sampler draws called fake, 1.000 and 1.000 at steps 10,
+  50 and 100, 0.956 and 0.980 at 150, 0.646 and 0.662 at 190 · `pair-aware-train.json`,
+  `pair-aware-discriminator.pt`
 - [ ] **2.4** The bar, read from the counts.
 - [ ] **2.5** The diagnosis figures, read by eye.
 

@@ -311,7 +311,7 @@ def disc_loss(logit_real, logit_fake, weight_real, weight_fake):
     weight_real, weight_fake  lambda at each example's step, shape (B,)
     returns one number: the mean over both halves of the batch
     """
-    raise NotImplementedError("type the discriminator's loss here")
+    return 0.5 * ((weight_real * F.softplus(-logit_real)).mean() + (weight_fake * F.softplus(logit_fake)).mean())
 
 
 def log_odds_grad(net, x, k):
@@ -320,7 +320,9 @@ def log_odds_grad(net, x, k):
     x  torch tensor (B, D) of noised pictures; k  torch tensor (B,) of steps
     returns a torch tensor (B, D)
     """
-    raise NotImplementedError("type the log-odds gradient here")
+    x = x.detach().requires_grad_(True)
+    g, = torch.autograd.grad(net(x, k)[:, 0].sum(), x)
+    return g
 
 
 def disc_train():
