@@ -60,7 +60,7 @@ Seed 1, one tile per column.
 | PID 715633 | run, `mscluster107` GPU 0, `scripts/rung2/render_training_set.py`, log `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/logs/training_set.log` | 1.2, the training set | done 09:51 UTC |
 | PID 739713 | run, `mscluster107` GPU 0, `train_discriminator.py` check run then final run, log `rung2/logs/discriminator.log` | 1.3, the discriminator | done 11:58 UTC |
 | PID 754977 | run, `mscluster107` GPU 0, `render_results.py`, log `rung2/logs/results.log` | 1.4, the result sheet | done 12:41 UTC |
-| PID 768102 | run, `mscluster107` GPU 1, `diagnose.py` (part B rerun with `--only-kinds`) | the diagnostics the reader asked for | done 13:05 UTC |
+| PID 768102 | run, `mscluster107` GPU 1, `diagnose.py` (part B rerun with `--only-kinds`) | the diagnostics the reader asked for | done 12:50 UTC |
 | PID 727709 | run, `mscluster107` GPU 0, `render_training_set.py --seeds 5 6 7 8 --extra-draws 2`, log `rung2/logs/extra_draws.log` | 1.2, the 16 extra draws | done, called |
 
 ## Closing pass owed
