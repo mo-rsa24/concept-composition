@@ -64,6 +64,13 @@ Seed 1, and one image per label, picked in piece 1.
 - 1.5 smoke of `sheet_64.py` on the all-images model's step-5,000 checkpoint, `mscluster108` GPU 1:
   8 draws in 6 s, 20-iteration 64 px classifiers, 10 tiles at 25 steps in 14 s; rows share their
   draw across columns, and the separate-label push at scale 10 already turns seed 1 into a cat.
+- The two separate-label classifiers, held-out accuracy (cat present, dog present) at steps 0, 250,
+  500, 900: 256 px (0.93, 0.95), (0.89, 0.93), (0.85, 0.78), (0.60, 0.51); 64 px (0.73, 0.84),
+  (0.75, 0.80), (0.71, 0.76), (0.47, 0.58) · `classifiers/separate_{256,64}.pt.json`.
+- The 256 px product draws run at about 27 s per draw per card, so the chain lands near 11:55 UTC
+  and the 256 px sheet near 12:35 UTC.
+- The bar on the 64 px sheets is read against the stronger separate-label scale, and each scale's
+  comparison is reported beside it (the reader: "cant do both?").
 
 ## Out of the session
 
