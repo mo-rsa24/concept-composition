@@ -3,7 +3,7 @@
 #SBATCH --partition=bigbatch
 #SBATCH --cpus-per-task=4
 #SBATCH --time=03:00:00
-#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster68,mscluster74,mscluster76,mscluster83
+#SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster65,mscluster68,mscluster74,mscluster75,mscluster76,mscluster83
 #SBATCH --output=/home-mscluster/mmolefe/poe_repair_min_scratch/outputs/classifier_guidance_ladder/rung2/logs/benchmark-slurm-%j.log
 # One queue worker for plan 22's benchmark renders: claims pairs from the shared list until none
 # are left. Writes to the scratch folder because /datasets is down (plan 22, Considerations).
