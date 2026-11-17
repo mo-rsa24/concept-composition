@@ -121,15 +121,35 @@ def exact_samples(kind, A, B):
     return means[idx] + np.sqrt(var) * RNG.standard_normal((N, D))
 
 
-def reverse(score, logp=None, mala=False):
-    x = RNG.standard_normal((N, D))
+def guided_eps(eps, grad, a_t, scale):
+    """guided-diffusion's condition_score: the predicted noise moved against a classifier's gradient.
+
+    eps    the product's predicted noise at this step, N x D
+    grad   the classifier's gradient of log c with respect to x_t, N x D (score units)
+    a_t    alpha-bar at this step
+    scale  the guidance scale s
+    """
+    raise NotImplementedError("type the guided step here")
+
+
+def reverse(score, logp=None, mala=False, push=None, scale=0.0, rng=None, n=None):
+    """Ancestral reverse diffusion on `score`.
+
+    push   optional per-step hook push(x, k) -> N x D gradient, entered through guided_eps
+    rng    a numpy Generator; the module's RNG when left out (the MALA steps always use the module's)
+    n      number of draws; N when left out
+    """
+    rng = RNG if rng is None else rng
+    x = rng.standard_normal((N if n is None else n, D))
     for k in range(T, 0, -1):
         a_t, a_prev = abar[k], abar[k - 1]
         alpha = a_t / a_prev; beta = 1 - alpha
         eps = -np.sqrt(1 - a_t) * score(x, k)
+        if push is not None:
+            eps = guided_eps(eps, push(x, k), a_t, scale)
         mean = (x - beta / np.sqrt(1 - a_t) * eps) / np.sqrt(alpha)
         sig = np.sqrt(beta * (1 - a_prev) / (1 - a_t)) if k > 1 else 0.0
-        x = mean + sig * RNG.standard_normal(x.shape)
+        x = mean + sig * rng.standard_normal(x.shape)
         if mala:
             j = k - 1
             step = MALA_STEP * (abar[j] * SIGMA0 ** 2 + 1 - abar[j])
