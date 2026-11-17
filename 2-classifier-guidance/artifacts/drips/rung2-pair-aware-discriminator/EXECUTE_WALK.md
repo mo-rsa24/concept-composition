@@ -13,6 +13,9 @@ the 87 two-things pairs at full size. Final, two-things pairs only: 64 positives
 (11 cat x dog), 315 negatives (105 hybrid, 36 single, 85 wrong pair, 89 damaged), 23 left out.
 `results/does-a-small-discriminator-steer-cat-x-dog/dataset-v3/calls-final.csv`. Next: encode on
 the cluster and train both discriminators. `/datasets` still down; the cap-0.3 rerun waits for it.
+Training started 16:40 UTC: v3 head-only (held-out check and final) on `mscluster107`'s two cards,
+v3 head with adapters (held-out check and final) on `mscluster111` and `112`. Held out: 7 whole
+pairs plus cat x dog seeds 7 and 8 (20 positives, 23 negatives).
 
 ## The stop point
 
