@@ -1,12 +1,13 @@
 """Classifier-guided PoE composer.
 
 Wraps ``run_poe_classifier_guided``: plain product-of-experts sampling with the presence head's
-gradient added at every step, normalised against the product prediction's own norm.
+push added at every step, in Dhariwal and Nichol's unrescaled form and capped at a fraction of the
+product prediction's own norm.
 
 Method name format::
 
-    poe_classifier_w<NNNN>              # NNNN = round(weight * 1000)
-    poe_classifier_w<NNNN>_s<NNNNNN>    # with the head's training step, when probing mid-run
+    poe_classifier_st<NNNNN>              # NNNNN = round(strength * 100)
+    poe_classifier_st<NNNNN>_s<NNNNNN>    # with the head's training step, when probing mid-run
 """
 from __future__ import annotations
 
@@ -17,7 +18,7 @@ from poe_repair.composers._helpers import (
     encode_pair,
     init_latents_for_cell,
 )
-from poe_repair.methods._classifier_guided import run_poe_classifier_guided
+from poe_repair.methods._classifier_guided import PUSH_CAP_FRACTION, run_poe_classifier_guided
 from poe_repair.methods._sampling import write_decoded_image
 from poe_repair.run import MethodCtx
 from poe_repair.runtime import PairSeedCell, write_json
@@ -25,8 +26,8 @@ from poe_repair.runtime import PairSeedCell, write_json
 METHOD_NAME = "poe_classifier"
 
 
-def method_name_for(*, weight: float, train_step: int | None = None) -> str:
-    name = f"{METHOD_NAME}_w{int(round(float(weight) * 1000)):04d}"
+def method_name_for(*, strength: float, train_step: int | None = None) -> str:
+    name = f"{METHOD_NAME}_st{int(round(float(strength) * 100)):05d}"
     if train_step is not None:
         name += f"_s{int(train_step):06d}"
     return name
@@ -38,14 +39,19 @@ def run(
     *,
     head=None,
     weight: float = 0.0,
+    strength: float = 0.0,
+    push_cap: float | None = PUSH_CAP_FRACTION,
     guidance_window: tuple[int, int] | None = None,
     train_step: int | None = None,
     exp_name: str = "presence_head/sweep",
     overwrite: bool = False,
     return_outputs: bool = False,
 ):
-    """Render one cell at one classifier weight; return the image path."""
-    method_name = method_name_for(weight=weight, train_step=train_step)
+    """Render one cell at one classifier strength; return the image path.
+
+    ``weight`` is accepted only so the sampler can refuse a nonzero value from an old caller.
+    """
+    method_name = method_name_for(strength=strength, train_step=train_step)
     out_dir = cell_output_dir(ctx, exp_name, method_name, cell)
     image_path = out_dir / f"{method_name}.png"
     if image_path.exists() and not overwrite and not return_outputs:
@@ -63,7 +69,8 @@ def run(
         height=cell.height, width=cell.width,
         euler_init_noise_sigma=euler_sigma,
         device=ctx.device, dtype=ctx.dtype,
-        head=head, weight=float(weight), guidance_window=guidance_window,
+        head=head, weight=float(weight), strength=float(strength), push_cap=push_cap,
+        guidance_window=guidance_window,
     )
     write_decoded_image(out.image, image_path)
     write_json(

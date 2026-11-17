@@ -12,12 +12,13 @@ Per step:
   1. One three-branch frozen UNet forward over (A, B, empty) gives the product prediction, exactly
      as ``run_cfg_poe`` computes it.
   2. The head reads the current latent and its timestep and gives log p(cat) + log p(dog).
-  3. That gradient with respect to the latent is rescaled to a fixed fraction of the product
-     prediction's own norm and subtracted, which is classifier guidance in noise-prediction form.
+  3. The push is strength * sqrt(1 - alpha_bar_t) * grad, Dhariwal and Nichol's Algorithm 2 with
+     nothing rescaled, scaled down if needed so its norm is at most ``PUSH_CAP_FRACTION`` of the
+     product prediction's norm, then subtracted.
   4. The ordinary DDIM step follows.
 
-At ``weight == 0`` the head is never called and nothing touches the prediction, so the rollout is
-byte-identical to ``run_cfg_poe``. That canary is the gate: a composer that moves the baseline
+At ``strength == 0`` the head is never called and nothing touches the prediction, so the rollout
+is byte-identical to ``run_cfg_poe``. That canary is the gate: a composer that moves the baseline
 makes every column of the comparison meaningless.
 
 The normalisation is per step and the renders are judged by eye. A norm guard on an earlier
@@ -38,9 +39,26 @@ from poe_repair.runtime import (
     tweedie_mean,
 )
 
-# Below this the gradient is treated as absent rather than rescaled, so a flat head cannot be
-# blown up into a full-size step by the normalisation.
-MIN_GRAD_NORM = 1e-8
+# The push may be at most this fraction of the product prediction's norm, per step. Dhariwal and
+# Nichol (arXiv 2105.05233) cap nothing, so this value is ours: route step 9's criterion sets the
+# final one. On plan 17's dog sheet a cap of 0.1 never fires at strengths 10 and 30 and fires on
+# some step of every render at 100 and 300.
+PUSH_CAP_FRACTION = 0.1
+
+
+def capped_push(push: torch.Tensor, eps: torch.Tensor, cap: float | None):
+    """Scale ``push`` down so its norm is at most ``cap`` times the norm of ``eps``.
+
+    Scaling keeps the direction; only the length changes. Returns the push to apply, the norm
+    before the cap, and whether the cap fired. ``cap=None`` switches the cap off.
+    """
+    raw_norm = push.norm()
+    if cap is None:
+        return push, float(raw_norm), False
+    limit = float(cap) * eps.float().norm()
+    if raw_norm > limit:
+        return push * (limit / raw_norm), float(raw_norm), True
+    return push, float(raw_norm), False
 
 
 def run_poe_classifier_guided(
@@ -59,15 +77,21 @@ def run_poe_classifier_guided(
     head=None,
     weight: float = 0.0,
     guidance_window: tuple[int, int] | None = None,
-    strength: float | None = None,
+    strength: float = 0.0,
+    push_cap: float | None = PUSH_CAP_FRACTION,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
 
-    With ``strength`` set, the push is Dhariwal and Nichol's Algorithm 2 with nothing rescaled:
-    eps_PoE - strength * sqrt(1 - alpha_bar_t) * grad log p(y | x_t). Without it, the older
-    ``weight`` form rescales the gradient to the prediction's norm, which over-pushes by about
-    four orders of magnitude and is kept only so earlier renders can be reproduced.
+    The push is Dhariwal and Nichol's Algorithm 2 with nothing rescaled:
+    eps_PoE - strength * sqrt(1 - alpha_bar_t) * grad log p(y | x_t), shortened to at most
+    ``push_cap`` times the norm of eps_PoE. ``weight`` named the older form, which rescaled the
+    gradient to the prediction's norm and over-pushed by about four orders of magnitude; it is
+    removed, and a nonzero value raises so an old caller cannot run it silently.
     """
+    if weight != 0.0:
+        raise ValueError(
+            "the rescaled 'weight' push was removed because it over-pushed by about 44,000 times; "
+            "pass 'strength' (Dhariwal and Nichol's scale) instead")
     scheduler.set_timesteps(num_inference_steps)
     latents = (init_latents / euler_init_noise_sigma).to(device=device, dtype=dtype)
     tracker = LatentTrajectoryCollector(
@@ -88,10 +112,10 @@ def run_poe_classifier_guided(
         head.eval()
 
     grad_norm_per_step: list[float] = []
+    push_before_cap_per_step: list[float] = []
     applied_per_step: list[float] = []
+    capped_per_step: list[bool] = []
     eps_norm_per_step: list[float] = []
-    if strength is not None:
-        weight = float(strength)
 
     for step_index, timestep in enumerate(scheduler.timesteps):
         with torch.no_grad():
@@ -108,31 +132,27 @@ def run_poe_classifier_guided(
 
         in_window = guidance_window is None or (
             guidance_window[0] <= step_index < guidance_window[1])
-        # The canary lives here: at weight 0 nothing below runs and eps_p is untouched.
-        if head is not None and weight != 0.0 and in_window:
+        # The canary lives here: at strength 0 nothing below runs and eps_p is untouched.
+        if head is not None and strength != 0.0 and in_window:
             with torch.enable_grad():
                 z = latents.detach().float().requires_grad_(True)
                 t_batch = timestep.reshape(1).to(device=device).expand(z.shape[0])
                 log_p = head.log_prob_both(z, t_batch)
                 grad = torch.autograd.grad(log_p, z)[0]
-            grad_norm = float(grad.norm().item())
-            grad_norm_per_step.append(grad_norm)
-            if strength is not None:
-                alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
-                step = float(strength) * torch.sqrt(1.0 - alpha_bar) * grad
-                eps_p = (eps_p.float() - step).to(dtype)
-                applied_per_step.append(float(step.norm().item()))
-            elif grad_norm > MIN_GRAD_NORM:
-                # The weight is a step size in units of the product prediction's own norm, so it
-                # means the same thing at every noise level without a schedule.
-                step = (grad / grad_norm) * eps_p.float().norm() * float(weight)
-                eps_p = (eps_p.float() - step).to(dtype)
-                applied_per_step.append(float(step.norm().item()))
-            else:
-                applied_per_step.append(0.0)
+            alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
+            sigma_t = torch.sqrt(1.0 - alpha_bar)
+            push, push_before_cap, capped = capped_push(
+                float(strength) * sigma_t * grad, eps_p, push_cap)
+            eps_p = (eps_p.float() - push).to(dtype)
+            grad_norm_per_step.append(float(grad.norm()))
+            push_before_cap_per_step.append(push_before_cap)
+            applied_per_step.append(float(push.norm()))
+            capped_per_step.append(capped)
         else:
             grad_norm_per_step.append(0.0)
+            push_before_cap_per_step.append(0.0)
             applied_per_step.append(0.0)
+            capped_per_step.append(False)
 
         with torch.no_grad():
             alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(
@@ -156,11 +176,13 @@ def run_poe_classifier_guided(
     return SamplerOutputs(
         latents=latents, image=image, tracker=tracker,
         extras={
-            "classifier_weight": float(weight),
+            "strength": float(strength),
+            "push_cap_fraction": None if push_cap is None else float(push_cap),
             "guidance_window": list(guidance_window) if guidance_window else None,
             "grad_norm_per_step": grad_norm_per_step,
+            "push_before_cap_norm_per_step": push_before_cap_per_step,
             "applied_norm_per_step": applied_per_step,
-            "strength": None if strength is None else float(strength),
+            "capped_per_step": capped_per_step,
             "eps_norm_per_step": eps_norm_per_step,
         },
     )
