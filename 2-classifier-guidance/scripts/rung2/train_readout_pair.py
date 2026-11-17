@@ -1,15 +1,20 @@
 #!/usr/bin/env python
-"""Plan 23's discriminator, Readout-Guidance style: a clean joint-prompt pair against the product's drawing.
-
-Kim et al.'s set-up with the read map's caveat C4 met: the real set is joint-prompt drawings the
-Claude API called a faithful pair (exactly one of each named thing, no hybrid, an intact photo),
-and the fake set is the product's drawings from the same pairs and noise. Joint drawings the API
-rejected are left out. Examples are the drawings' own saved states (every 5th step and the final
-latent), so the head learns at the noise levels where it will push.
+"""A Readout-Guidance-style checker: is this half-drawn picture a clean pair of two different things?
 
 The head follows Readout Guidance (Luo et al., CVPR 2024): it reads SDXL's frozen middle block and
-first two upsampling blocks (``train_count_head.Readout``), projects each to 128 channels at 32 x 32,
-sums them, and gives one logit after two convolutions and an attention pool.
+first two upsampling blocks on the empty prompt (``train_count_head.Readout``), projects each to 128
+channels at 32 x 32, sums them, and gives one logit after two convolutions and an attention pool. Its
+gradient is the push once it passes the check.
+
+Two ways to feed it:
+
+--manifest training_set_v4.json (the main one). Every tile's finished latent is noised to a random
+sampler step, the same way the check noises its tiles. Each batch takes 4 real and 4 fake; each side
+first picks a source uniformly among the sources that have examples on that side, then a tile, so
+no source's size or look can separate the sides.
+
+--labels drawings.jsonl (plan 23 alone). Real = joint drawings the API called a faithful pair, fake =
+product drawings, examples are the drawings' own saved trajectory states.
 
 The check, written before training, is plan 22's and plan 23's: on the held-out hand-called tiles
 (7 whole pairs plus cat x dog seeds 7 and 8), each noised to the first 20 sampler steps 4 times,
@@ -22,6 +27,7 @@ Writes, under MOUNT_ROOT/outputs/classifier_guidance_ladder/rung2/readout_pair/<
 from __future__ import annotations
 
 import argparse
+import collections
 import json
 import random
 import sys
@@ -63,44 +69,97 @@ class PairHead(nn.Module):
         return self.out(pooled[:, 0])[:, 0]
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--run", default="readout-pair-v1")
-    ap.add_argument("--labels", type=Path, required=True, help="the API labels JSONL for plan 23's drawings")
-    ap.add_argument("--steps", type=int, default=2000)
-    ap.add_argument("--eval-every", type=int, default=500)
-    args = ap.parse_args()
-    if not torch.cuda.is_available():
-        raise SystemExit("guard: torch sees no CUDA card")
-    out = RUNG2 / "readout_pair" / args.run
-    out.mkdir(parents=True, exist_ok=True)
+def load_latent(t: dict) -> torch.Tensor:
+    """A tile's finished latent as (1, 4, 128, 128) fp16."""
+    path = paths.MOUNT_ROOT / t["latent"] if "/" in t["latent"] else RUNG2 / "training_set/latents" / f"{t['latent']}.pt"
+    z = torch.load(path)
+    if "state_index" in t:
+        z = z[-1:] if t["state_index"] == -1 else z[t["state_index"]:t["state_index"] + 1]
+    return z.to(torch.float16)
+
+
+def manifest_sampler(args, sampler_t):
+    data = json.loads(args.manifest.read_text())
+    tiles = [t for t in data["tiles"] if not t.get("check")]
+    if any(t["pair"] == "a_cat__x__a_dog" and 9 <= t.get("seed", -1) <= 16 for t in tiles):
+        raise SystemExit("guard: cat x dog seeds 9 to 16 are the result sheet's and may not be trained on")
+    if any(t["pair"] in set(data["held_out_pairs"]) for t in tiles):
+        raise SystemExit("guard: a held-out pair is in the training tiles")
+    by = {0: collections.defaultdict(list), 1: collections.defaultdict(list)}
+    missing = collections.Counter()
+    for t in tiles:
+        try:
+            t["z"] = load_latent(t)
+        except (FileNotFoundError, RuntimeError, EOFError):
+            missing[t["source"]] += 1
+            continue
+        by[t["label"]][t["source"]].append(t)
+    split = {f"{'real' if s else 'fake'}_{src}": len(v) for s in (1, 0) for src, v in sorted(by[s].items())}
+    split["missing_latents"] = dict(missing)
+    split["pairs_with_a_real_example"] = len({t["pair"] for v in by[1].values() for t in v})
+
+    def batch(scheduler, device, dtype):
+        picks = [random.choice(by[1][random.choice(list(by[1]))]) for _ in range(4)] + \
+                [random.choice(by[0][random.choice(list(by[0]))]) for _ in range(4)]
+        z0 = torch.cat([p["z"] for p in picks]).to(device, torch.float32)
+        t = sampler_t[torch.randint(len(sampler_t), (len(picks),))].to(device)
+        return scheduler.add_noise(z0, torch.randn_like(z0), t).to(dtype), t
+
+    return batch, split
+
+
+def states_sampler(args):
     rows = [json.loads(l) for l in args.labels.read_text().splitlines() if l.strip()]
     real = [r["id"] for r in rows if r.get("method") == "joint" and r.get("verdict") == "faithful pair"]
     fake = [r["id"] for r in rows if r.get("method") == "product" and "verdict" in r]
     real = [s for s in real if (RUNG2 / "kim/states" / f"{s}.pt").exists()]
     fake = [s for s in fake if (RUNG2 / "kim/states" / f"{s}.pt").exists()]
+    kept = json.loads((RUNG2 / "kim/timesteps.json").read_text())["timesteps"]
     split = {"real_clean_joint": len(real), "fake_product": len(fake),
              "joint_rejected_by_api": sum(1 for r in rows if r.get("method") == "joint" and r.get("verdict") != "faithful pair"),
              "pairs_with_a_clean_joint": len({s.split("__seed")[0] for s in real})}
-    (out / "split.json").write_text(json.dumps(split, indent=1))
-    print(json.dumps(split), flush=True)
 
-    kept = json.loads((RUNG2 / "kim/timesteps.json").read_text())["timesteps"]
+    def batch(scheduler, device, dtype):
+        names = random.choices(real, k=4) + random.choices(fake, k=4)
+        ks = [random.randrange(len(kept)) for _ in names]
+        x = torch.stack([torch.load(RUNG2 / "kim/states" / f"{s}.pt")[k] for s, k in zip(names, ks)]).to(device, dtype)
+        return x, torch.tensor([max(kept[k], 1) for k in ks], device=device)
+
+    return batch, split
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--run", default="readout-pair-v1")
+    ap.add_argument("--manifest", type=Path, help="a tile list such as training_set_v4.json")
+    ap.add_argument("--labels", type=Path, help="the API labels JSONL for plan 23's drawings")
+    ap.add_argument("--steps", type=int, default=3000)
+    ap.add_argument("--eval-every", type=int, default=500)
+    args = ap.parse_args()
+    if not (args.manifest or args.labels):
+        raise SystemExit("give --manifest or --labels")
+    if not torch.cuda.is_available():
+        raise SystemExit("guard: torch sees no CUDA card")
+    out = RUNG2 / "readout_pair" / args.run
+    out.mkdir(parents=True, exist_ok=True)
+
     ctx = make_ctx(output_root=out / "raw")
     for n in ("vae", "unet", "text_encoder", "text_encoder_2"):
         ctx.models[n].requires_grad_(False)
         ctx.models[n].eval()
+    ctx.scheduler.set_timesteps(ctx.num_inference_steps)
+    sampler_t = ctx.scheduler.timesteps.clone().cpu()
+    batch, split = manifest_sampler(args, sampler_t) if args.manifest else states_sampler(args)
+    (out / "split.json").write_text(json.dumps(split, indent=1))
+    print(json.dumps(split), flush=True)
+
     seq_e, pool_e = encode_prompt_sdxl("", models=ctx.models, device=ctx.device, dtype=ctx.dtype)
     reader = Readout(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
     head = PairHead().to(ctx.device)
     opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=1e-2)
-    ctx.scheduler.set_timesteps(ctx.num_inference_steps)
-    sampler_t = ctx.scheduler.timesteps.clone().cpu()
 
     tiles = [t for t in json.loads((HERE / "training_set_v3.json").read_text())["tiles"] if t["check"]]
-    z_check = torch.cat([torch.load(paths.MOUNT_ROOT / t["latent"] if "/" in t["latent"] else
-                                    RUNG2 / "training_set/latents" / f"{t['latent']}.pt").float() for t in tiles])
-    y_check = [t["label"] for t in tiles]
+    z_check = torch.cat([load_latent(t).float() for t in tiles])
     kind = [t["kind"] if t["label"] == 0 else "positive" for t in tiles]
 
     @torch.no_grad()
@@ -142,10 +201,7 @@ def main() -> int:
                 (out / "check.json").write_text(json.dumps(verdict, indent=1))
                 print(f"READOUT CHECK {'PASSED' if verdict['passed'] else 'FAILED'}: {len(passing)} of {EARLY}", flush=True)
                 break
-        names = random.choices(real, k=4) + random.choices(fake, k=4)
-        ks = [random.randrange(len(kept)) for _ in names]
-        x = torch.stack([torch.load(RUNG2 / "kim/states" / f"{s}.pt")[k] for s, k in zip(names, ks)]).to(ctx.device, ctx.dtype)
-        t = torch.tensor([max(kept[k], 1) for k in ks], device=ctx.device)
+        x, t = batch(ctx.scheduler, ctx.device, ctx.dtype)
         y = torch.tensor([1.0] * 4 + [0.0] * 4, device=ctx.device)
         with torch.no_grad():
             feats = reader(x, t)

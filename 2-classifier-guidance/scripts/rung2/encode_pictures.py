@@ -27,7 +27,12 @@ TILES = Path(__file__).resolve().parent / "training_set_v3.json"
 def main() -> int:
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
-    tiles = [t for t in json.loads(TILES.read_text())["tiles"] if t["source"] == "local"]
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--manifest", type=Path, default=TILES, help="tile list; every tile with a 'picture' is encoded")
+    args = ap.parse_args()
+    tiles = [t for t in json.loads(args.manifest.read_text())["tiles"]
+             if t.get("source") == "local" or (args.manifest != TILES and "picture" in t)]
     ctx = make_ctx(output_root=paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2/dataset-v3/raw")
     vae = ctx.models["vae"]
     scaling = float(vae.config.scaling_factor)

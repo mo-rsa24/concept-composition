@@ -163,7 +163,7 @@ def main() -> int:
     else:
         items = []
         for p in sorted(args.folder.glob("*")):
-            m = re.match(r"(.+?)__seed(\d+)__(joint|product)$", p.stem)
+            m = re.match(r"(.+?)__seed(\d+)__(joint|product|photo)$", p.stem)
             if m and p.suffix.lower() in (".jpg", ".jpeg", ".png"):
                 items.append({"id": p.stem, "pair": m.group(1), "seed": int(m.group(2)), "method": m.group(3), "path": p})
     asyncio.run(run(items, args.out, args.concurrency))
