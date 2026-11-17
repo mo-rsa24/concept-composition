@@ -610,6 +610,52 @@ def figures_for_diagnosis(cos_rows, gap):
     fig.tight_layout(); fig.savefig(OUT / "minimal-pair-gap-per-step.png", dpi=150); plt.close(fig)
 
 
+# ---------------------------------------------------------------------------------------------------
+# Beside the bar, not deciding it
+#   inclusive: the inclusive-captions route on the toy. A picture holding both shapes is also captioned
+#              with each single name, which on this toy is the pair's weight inside each expert. The
+#              same sampler on the same seed-7 noises, no push, at rising pair weights.
+#   no-clip:   the pair-aware push at w = 1 and 2 with Kim et al.'s clip removed
+# ---------------------------------------------------------------------------------------------------
+INCLUSIVE_WEIGHTS = [0.01, 0.03, 0.1, 0.2, 0.3, 0.5]
+
+
+def inclusive():
+    rows = {}
+    for pw in INCLUSIVE_WEIGHTS:
+        _, A2, B2 = t.hand_weighted(pw)
+        x = t.reverse(lambda x, k: A2.score(x, k) + B2.score(x, k), rng=np.random.default_rng(SEED))
+        rows[f"{pw:g}"] = counts(x)
+        c = rows[f"{pw:g}"]
+        print(f"pair weight {pw:<5g} no push   crisp {c['two objects, crisp']:3d}  overlaid {c['hybrid: overlaid']:3d}", flush=True)
+    (OUT / "inclusive-captions-comparison.json").write_text(json.dumps(
+        {"what": "the summed-score sampler with no push at rising pair weights (the share of each expert's mass "
+                 "on the side-by-side picture, the toy's version of captioning a both-shapes picture with each "
+                 "single name), seed 7, 300 draws; compare with the pair-aware push at pair weight 0.01 in "
+                 "pair-aware-guide.json",
+         "seed": SEED, "counts_by_pair_weight": rows}, indent=1))
+
+
+def no_clip():
+    net = Net(1).to(DEV)
+    net.load_state_dict(torch.load(OUT / "pair-aware-discriminator.pt", map_location=DEV, weights_only=True))
+    net.eval()
+
+    def push(x, k):
+        xt = torch.tensor(x, dtype=torch.float32, device=DEV)
+        return log_odds_grad(net, xt, torch.full((len(x),), k, device=DEV, dtype=torch.long)).double().cpu().numpy()
+    rows = {}
+    for w in [1.0, 2.0]:
+        rows[f"w {w:g}, no clip"] = counts(sample(push, w))
+        c = rows[f"w {w:g}, no clip"]
+        print(f"pair-aware, w {w:g}, no clip   crisp {c['two objects, crisp']:3d}  overlaid {c['hybrid: overlaid']:3d}  "
+              f"faint {c['two faint objects']:3d}  single {c['one circle'] + c['one square']:3d}", flush=True)
+    (OUT / "pair-aware-no-clip.json").write_text(json.dumps(
+        {"what": "the pair-aware push with the logit clip removed, seed 7, 300 draws, pair weight 0.01; beside the "
+                 "bar, which is read with the clip in pair-aware-guide.json", "seed": SEED, "counts": rows}, indent=1))
+
+
 if __name__ == "__main__":
     {"port": port, "separate-train": separate_train, "separate-guide": separate_guide,
-     "disc-train": disc_train, "pair-guide": pair_guide, "diagnose": diagnose}[sys.argv[1]]()
+     "disc-train": disc_train, "pair-guide": pair_guide, "diagnose": diagnose,
+     "inclusive": inclusive, "no-clip": no_clip}[sys.argv[1]]()

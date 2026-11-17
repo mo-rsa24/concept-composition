@@ -43,6 +43,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | fix | scale-0 check made bit for bit in the same loop: 200 of 200 steps |
 | 1.1 | hook checked with a patched line in a throwaway process, commit `50a1b48b` |
 | 1.2 | separate-label classifier trained, accuracy within 0.012 of the closed-form best at every checked step |
+| beside the bar | no clip (reader's `improve`): w = 1 172, w = 2 300, identical to the clipped run, so the clip does not cause the 128 failures; they are settled before step 90 while the push is on · inclusive captions on seed 7, no push: pair weight 0.01 0, 0.03 1, 0.1 18, 0.2 53, 0.3 115, 0.5 246 crisp of 300 · `pair-aware-no-clip.json`, `inclusive-captions-comparison.json` |
 | 2.4 | Claude ran at the reader's word: w = 0.5 16, w = 1 172, w = 2 300 crisp of 300; overlaid 128 at w = 1; bar line pass, matching the key |
 | 1.4 | pair-guide built, runs in 26 s; draw 0 at step 150: push against true correction cosine 0.148, median over 300 draws 0.169 |
 | 2.3 | Claude typed the loss and the log-odds gradient at the reader's word and ran the test: matched the key on every row, gradient check 3.3e-4 |
@@ -64,7 +65,7 @@ Draw 0 of seed 7, followed at step 150 and to its final label. For the discrimin
 | Id | Kind | Serves | State |
 |---|---|---|---|
 | stage-figure | background agent | the reader's `a`: the discriminator as a stage figure with real draws | landed: `the-side-by-side-discriminator.png`, seven stages, README entry written |
-| derivation-to-journey | background agent | the reader's ask: the two code lines derived, into the classifier-guidance journey's chapter 3 | running |
+| derivation-to-journey | background agent | the reader's ask: the two code lines derived, into the classifier-guidance journey's chapter 3 | landed: section "The two lines of code that train it and take its push" at the end of 3.3, figure 03-two-penalties.png, plan 06 task 1.6; not committed (learning repo has other sessions' edits) |
 
 ## How to approach this next time
 
