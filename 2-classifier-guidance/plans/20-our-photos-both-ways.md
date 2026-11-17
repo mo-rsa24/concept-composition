@@ -223,8 +223,11 @@ For you to follow manually. Do these yourself.
 
 ◀ **Needs: [1. Build the six pieces](#1--build-the-six-pieces)**
 
-- [ ] **2.1** Open `counts.json` and one image per label at both sizes. You should see 200, 200 and
-  150, and the same picture at 256 and 64 px.
+- [x] **2.1** Open `counts.json` and one image per label at both sizes. You should see 200, 200 and
+  150, and the same picture at 256 and 64 px. ✓ verified 2026-11-17, run by Claude at the reader's
+  word ("you do it"): 200 cat, 200 dog, 150 both, 550 names identical at both sizes; each 256 px
+  image shrunk to 64 px differs from its 64 px file by a median 0.13 and at most 0.20 grey levels
+  (of 255), against 53.96 for the same image shifted 8 px · `photo-set-counts.json`
 - [ ] **2.2** Tail both training logs. You should see the loss falling and a checkpoint written.
 - [ ] **2.3** Read each 256 px classifier's held-out accuracy per noise step.
 - [ ] **2.4** Call the released model's tiles at full resolution, per [instruction 14 of the

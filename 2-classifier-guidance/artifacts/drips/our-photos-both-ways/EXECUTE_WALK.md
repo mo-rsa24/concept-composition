@@ -41,13 +41,16 @@ Seed 1, and one image per label, picked in piece 1.
 | classifier start | fine-tuned from the released classifier | from scratch | you, by defaults | 550 images |
 | where GPU work runs | free cards on 110 to 112 (`co3_bw`), then 106, 107, 108 (`co3`), then `bigbatch` | one job on 108 | you | "try blackwell, 106, 107, 108 on unused devices first before trying bigbatch" |
 | pacing | a self-paced `/loop` | walk round by round | you | "next in a /loop" |
+| how the 64 px product is formed | cat + dog − null at weight 1, variance from the null call | a guidance weight of 3 · variance from the cat call | you (`options a`) | the plain product the bar names |
+| who runs test 2.1 | Claude | the reader | you ("you do it") | |
 | launch path | scripts copied to `/datasets`, shared-device SSH launch | `cluster.sh run` | Claude | `cluster.sh run` refuses while other sessions hold uncommitted tracked edits |
 
 ## Ticks
 
 - 1.1 the image set: 200, 200, 150 (COCO 100, 100, 38; SD3.5 100, 100, 112). By eye at sheet
   scale, `both_015` and `both_027` show only the dog, and `both_000` and `both_017` are collages;
-  the reader's call whether to strike them. Test 2.1 open for the reader.
+  the reader's call whether to strike them. Test 2.1 passed, run by Claude at the reader's word:
+  every 64 px file within 0.20 grey levels of its 256 px crop shrunk, against 53.96 for an 8 px shift.
 - 1.2 the trainings: timing 300 steps in 278 s on a Blackwell; 50,000 steps, about 12.9 h each.
 - 1.3 smoke on `mscluster108`: 20 iterations and 2 draws at 25 steps ran end to end; the full
   separate-label run trains at 1.36 s per iteration at batch 32 (37 GB).
