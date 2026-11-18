@@ -89,6 +89,7 @@ def main():
     ap.add_argument("--judge", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--pair-head", default="pair-full")
+    ap.add_argument("--separate-head", default="separate")
     ap.add_argument("--cap", type=float, default=0.1)
     ap.add_argument("--pairs", default="all", help="'all' or '78' (the cap sweep reads 7 & 8 only)")
     ap.add_argument("--only-s", type=float, default=None, help="pair-aware push at this s only (cap sweep)")
@@ -96,7 +97,7 @@ def main():
     dev = "cuda"
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
     hp = load_head(args.checkers / args.pair_head / "head.pt", dev)
-    hs = load_head(args.checkers / "separate" / "head.pt", dev)
+    hs = load_head(args.checkers / args.separate_head / "head.pt", dev)
     jn = load_judge(args.judge, dev)
     args.out.mkdir(parents=True, exist_ok=True)
     pairs = PAIRS if args.pairs == "all" else [(7, 8)]
@@ -158,7 +159,7 @@ def main():
         w.writerow(["column", "pair", "seed", "judge_call"])
         w.writerows(rows)
     (args.out / "cap.json").write_text(json.dumps(cap_log, indent=1))
-    (args.out / "counts.json").write_text(json.dumps({"cost": cost, "cap": args.cap, "pair_head": args.pair_head,
+    (args.out / "counts.json").write_text(json.dumps({"cost": cost, "cap": args.cap, "pair_head": args.pair_head, "separate_head": args.separate_head,
                                                       "counts": counts}, indent=1))
     if args.only_s is None:
         for a, b in pairs:
