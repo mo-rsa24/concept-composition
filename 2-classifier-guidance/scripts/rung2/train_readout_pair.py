@@ -59,22 +59,24 @@ BAR, MIN_STEPS, EARLY = 0.75, 10, 20
 
 
 class PairHead(nn.Module):
-    def __init__(self, channels=(1280, 1280, 640), width=128):
+    def __init__(self, channels=(1280, 1280, 640), width=128, n_out=1):
         super().__init__()
+        self.n_out = n_out
         self.proj = nn.ModuleList([nn.Sequential(nn.Conv2d(c, width, 1), nn.GroupNorm(16, width), nn.SiLU())
                                    for c in channels])
         self.mix = nn.Sequential(nn.Conv2d(width, width, 3, stride=2, padding=1), nn.SiLU(),
                                  nn.Conv2d(width, width, 3, stride=2, padding=1), nn.SiLU())   # 32 -> 8
         self.pos = nn.Parameter(torch.randn(1, 65, width) / width ** 0.5)
         self.attn = nn.MultiheadAttention(width, 8, batch_first=True)
-        self.out = nn.Linear(width, 1)
+        self.out = nn.Linear(width, n_out)
 
     def forward(self, feats):
         h = sum(p(F.adaptive_avg_pool2d(f.float(), GRID)) for p, f in zip(self.proj, feats))
         tok = self.mix(h).flatten(2).transpose(1, 2)
         x = torch.cat([tok.mean(1, keepdim=True), tok], 1) + self.pos
         pooled, _ = self.attn(x[:, :1], x, x)
-        return self.out(pooled[:, 0])[:, 0]
+        o = self.out(pooled[:, 0])
+        return o[:, 0] if self.n_out == 1 else o          # (B,) or (B, 3): clean pair, a cat present, a dog present
 
 
 class ReadoutPairClassifier(nn.Module):
@@ -85,7 +87,8 @@ class ReadoutPairClassifier(nn.Module):
         self.reader, self.head = Readout(unet, seq, pool), head
 
     def forward(self, x_t, timestep):
-        return self.head(self.reader(x_t.to(self.reader.seq_e.dtype), timestep))
+        o = self.head(self.reader(x_t.to(self.reader.seq_e.dtype), timestep))
+        return o if o.ndim == 1 else o.sum(-1)              # identity push: clean pair + cat present + dog present
 
     def log_prob_both(self, x_t, timestep):
         return self.forward(x_t, timestep).sum()
@@ -145,7 +148,8 @@ def manifest_sampler(args, sampler_t):
         idx = [random.randrange(EARLY) if random.random() < args.early_frac else random.randrange(len(sampler_t))
                for _ in picks]
         t = sampler_t[torch.tensor(idx)].to(device)
-        return scheduler.add_noise(z0, torch.randn_like(z0), t).to(dtype), t, [p["pair"] for p in picks]
+        return (scheduler.add_noise(z0, torch.randn_like(z0), t).to(dtype), t, [p["pair"] for p in picks],
+                [p["id"] for p in picks])
 
     return batch, split
 
@@ -165,7 +169,7 @@ def states_sampler(args):
         names = random.choices(real, k=4) + random.choices(fake, k=4)
         ks = [random.randrange(len(kept)) for _ in names]
         x = torch.stack([torch.load(RUNG2 / "kim/states" / f"{s}.pt")[k] for s, k in zip(names, ks)]).to(device, dtype)
-        return x, torch.tensor([max(kept[k], 1) for k in ks], device=device), [s.split("__seed")[0] for s in names]
+        return x, torch.tensor([max(kept[k], 1) for k in ks], device=device), [s.split("__seed")[0] for s in names], None
 
     return batch, split
 
@@ -183,6 +187,9 @@ def main() -> int:
     ap.add_argument("--accum", type=int, default=1)
     ap.add_argument("--score", type=Path, default=None,
                     help="a saved head: no training, only score it on --eval over the first 20 steps (writes score-<eval>.json)")
+    ap.add_argument("--presence", type=Path, default=None,
+                    help="presence_catdog.json: adds two outputs, a cat present and a dog present, trained beside "
+                         "clean pair; the push then follows the sum of all three (the identity push)")
     ap.add_argument("--hard-frac", type=float, default=0.0,
                     help="share of each batch's rejects drawn from wrong-pair pictures (two cats, two dogs), "
                          "the mistake the push keeps making; the rest are drawn as before")
@@ -219,7 +226,8 @@ def main() -> int:
             if p not in prompts:
                 prompts[p] = encode_prompt_sdxl(joint_prompt(p), models=ctx.models, device=ctx.device, dtype=ctx.dtype)
         return reader(x, t, torch.cat([prompts[p][0] for p in pairs]), torch.cat([prompts[p][1] for p in pairs]))
-    head = PairHead().to(ctx.device)
+    presence = json.loads(args.presence.read_text()) if args.presence else None
+    head = PairHead(n_out=3 if presence else 1).to(ctx.device)
     opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=1e-2)
 
     tiles = [t for t in json.loads(args.eval.read_text())["tiles"] if t["check"]]
@@ -233,15 +241,20 @@ def main() -> int:
     def check(steps):
         res, gen = [], torch.Generator().manual_seed(7)
         for s in steps:
-            t_val, logits = sampler_t[s], [[] for _ in tiles]
+            t_val, logits, extra = sampler_t[s], [[] for _ in tiles], [[] for _ in tiles]
             for _ in range(4):
                 for i in range(0, len(tiles), 8):
                     z0 = z_check[i:i + 8].to(ctx.device)
                     t = t_val.repeat(z0.shape[0]).to(ctx.device)
                     noisy = ctx.scheduler.add_noise(z0, torch.randn(z0.shape, generator=gen).to(ctx.device), t)
                     pairs = [tt["pair"] for tt in tiles[i:i + 8]]
-                    for j, v in enumerate(head(read(noisy.to(ctx.dtype), t, pairs)).cpu().tolist()):
-                        logits[i + j].append(v)
+                    o = head(read(noisy.to(ctx.dtype), t, pairs)).float().cpu()
+                    for j in range(o.shape[0]):
+                        if o.ndim == 1:
+                            logits[i + j].append(float(o[j]))
+                        else:
+                            logits[i + j].append(float(o[j, 0]))
+                            extra[i + j].append(o[j, 1:].tolist())
             yes = [sum(l) / len(l) > 0 for l in logits]
 
             def bal(neg_kinds, only_v3=True, only=None):
@@ -249,7 +262,22 @@ def main() -> int:
                 pos = [p for p, k, u in zip(yes, kind, use) if k == "positive" and u]
                 neg = [not p for p, k, u in zip(yes, kind, use) if k in neg_kinds and u]
                 return (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
-            res.append({"sampler_step": int(s), "balanced_accuracy": bal(set(kind) - {"positive"}),
+            row = {}
+            if presence and extra[0]:
+                cat = [sum(e[0] for e in ex) / len(ex) > 0 for ex in extra]
+                dog = [sum(e[1] for e in ex) / len(ex) > 0 for ex in extra]
+                truth = [presence.get(tt["id"], [-1, -1]) for tt in tiles]
+
+                def bal_presence(pred, k):
+                    pos = [p for p, tr in zip(pred, truth) if tr[k] == 1]
+                    neg = [not p for p, tr in zip(pred, truth) if tr[k] == 0]
+                    return (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
+                kinds = [i for i, k in enumerate(kind) if "wrong pair" in k]
+                row = {"cat_present_balanced_accuracy": bal_presence(cat, 0),
+                       "dog_present_balanced_accuracy": bal_presence(dog, 1),
+                       "wrong_pairs_missing_an_animal": (sum(1 for i in kinds if not (cat[i] and dog[i])) / len(kinds))
+                       if kinds else float("nan")}
+            res.append(row | {"sampler_step": int(s), "balanced_accuracy": bal(set(kind) - {"positive"}),
                         "singles_and_hybrids_balanced_accuracy": bal({"single", "hybrid"}),
                         "whole_evaluation_set_balanced_accuracy": bal(set(kind) - {"positive"}, only_v3=False),
                         "drawn_held_out_balanced_accuracy": bal(set(kind) - {"positive"}, only="more_heldout"),
@@ -280,11 +308,17 @@ def main() -> int:
             strict_m = sum(r["stature_rule_balanced_accuracy"] for r in rows_c) / len(rows_c)
             drawn = [r["drawn_held_out_balanced_accuracy"] for r in rows_c if r["drawn_held_out_balanced_accuracy"] == r["drawn_held_out_balanced_accuracy"]]
             drawn_m = sum(drawn) / len(drawn) if drawn else float("nan")
+            if presence:
+                pm = lambda k: sum(r[k] for r in rows_c) / len(rows_c)
+                print(f"step {step:5d}  presence outputs: cat present {pm('cat_present_balanced_accuracy'):.3f}, "
+                      f"dog present {pm('dog_present_balanced_accuracy'):.3f}; held-out wrong pairs read as missing an "
+                      f"animal {pm('wrong_pairs_missing_an_animal'):.3f}", flush=True)
             print(f"step {step:5d}  held-out balanced accuracy {mean:.3f} (v3 check tiles), {whole:.3f} (whole "
                   f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject), {drawn_m:.3f} "
                   f"(420 drawn held-out pictures)  "
                   f"({time.time() - started:.0f} s)", flush=True)
-            torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt},
+            torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt,
+                        "heads": head.n_out},
                        out / f"head_step_{step:06d}.pt")
             head.train()
             if step == args.steps:
@@ -298,10 +332,18 @@ def main() -> int:
         opt.zero_grad(set_to_none=True)
         y = torch.tensor([1.0] * 4 + [0.0] * 4, device=ctx.device)
         for _ in range(args.accum):
-            x, t, pairs = batch(ctx.scheduler, ctx.device, ctx.dtype)
+            x, t, pairs, ids = batch(ctx.scheduler, ctx.device, ctx.dtype)
             with torch.no_grad():
                 feats = read(x, t, pairs)
-            loss = F.binary_cross_entropy_with_logits(head(feats), y)
+            o = head(feats)
+            if o.ndim == 1:
+                loss = F.binary_cross_entropy_with_logits(o, y)
+            else:
+                pres = torch.tensor([presence.get(i, [-1, -1]) for i in ids], dtype=torch.float32, device=ctx.device)
+                mask = (pres >= 0).float()
+                loss = F.binary_cross_entropy_with_logits(o[:, 0], y) + \
+                    (F.binary_cross_entropy_with_logits(o[:, 1:], pres.clamp(min=0), reduction="none") * mask).sum() \
+                    / mask.sum().clamp(min=1) * 2
             (loss / args.accum).backward()
         opt.step()
         if step % 100 == 0:

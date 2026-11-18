@@ -100,7 +100,7 @@ def main() -> int:
     elif args.readout:
         from train_readout_pair import PairHead, ReadoutPairClassifier
         seq_r, pool_r = enc("a cat and a dog") if state.get("pair_prompt") else (seq_e, pool_e)
-        head = PairHead()
+        head = PairHead(n_out=state.get("heads", 1))
         head.load_state_dict(state["head"])
         disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
         print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
