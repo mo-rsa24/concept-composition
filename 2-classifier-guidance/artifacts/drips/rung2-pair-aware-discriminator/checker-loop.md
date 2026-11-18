@@ -17,7 +17,7 @@ One change per iteration, kept only if it helps. A keep or drop call needs a dif
 | lever 5 probe | CLIP linear checker (0.877 on finished pictures) read on SDXL's product estimate of the finished picture | probe/estimate.json | 0.540 averaged over steps 0 to 19 (0.495 at steps 0 and 2, 0.657 at step 20, 0.873 at step 49) | none | dropped as a push checker: early estimates are too blurry to judge |
 | 4 | iteration 3's data, trained 2,000 steps instead of 750 (its curve still rose: 0.699, 0.711, 0.741) | readout-catdog-more3-long | **0.755** on the 220-picture evaluation (0.763 stature-rule); **the original bar passed: 0.751 on the v3 tiles, 11 of 20 steps** | two or more bodies on about 7 of 8 seeds; seed 10 at s = 30 a small fluffy dog beside a large cream cat, the second near-clean cat and dog; more of the two-body tiles are a cat with a dog than in iteration 5; seed 16 two dogs; plain PoE 0 of 8, random push 0 of 8 (draft, full-size tiles) | kept: the best checker and push so far; the base for the identity push |
 | 5 | iteration 3 exactly, with half of each batch's rejects drawn from the 233 wrong-pair pictures (two cats, two dogs) | readout-catdog-more3-hard | **0.756** on the 220-picture evaluation (0.763 stature-rule; 0.718 and 7 of 20 steps on the v3 tiles); the first final at or above 0.75 | two or more bodies on 3 of 8 seeds (11, 14, 16), none clean: seeds 11 and 14 two cats, seed 16 two dogs; plain PoE 0 of 8, random push 0 of 8 (draft, full-size tiles) | kept as the loop's result: meets both parts of good; +0.015 over iteration 3, inside ±0.05 |
-| 6 | identity push: iteration 4 plus two outputs, a cat present and a dog present, trained on the API's per-picture answers; the push follows the sum of all three | readout-catdog-identity | **0.721** on the 220-picture evaluation (0.668 and 4 of 20 steps on the v3 tiles, so the original bar fails); cat present 0.695, dog present 0.728; held-out wrong pairs read as missing an animal 0.407 | push sheet drawing | pending the push sheet: 0.034 below iteration 4 |
+| 6 | identity push: iteration 4 plus two outputs, a cat present and a dog present, trained on the API's per-picture answers; the push follows the sum of all three | readout-catdog-identity | **0.721** on the 220-picture evaluation (0.668 and 4 of 20 steps on the v3 tiles, so the original bar fails); cat present 0.695, dog present 0.728; held-out wrong pairs read as missing an animal 0.407 | two or more bodies on 5 of 8 seeds at s = 100 (9, 11, 12, 14, 16); near-clean cat and dog at seed 9 s = 30 (a cat with a dog behind it) and seed 16 s = 100 (a kitten against a large dog); seeds 11 and 12 a cat beside a kitten or a cat-dog; seed 13 one dog, seed 10 one cat with a dog's muzzle; the push also turns the drawn seeds (11, 14, 15) into photographs; plain PoE 0 of 8, random push 0 of 8 (draft, tile-size calls) | kept as a push, not as a reader: 0.034 below iteration 4 on the evaluation, but two near-clean pairs against iteration 4's one |
 
 ## Outcome
 
@@ -55,3 +55,15 @@ A push never sees the finished picture: at each step the checker reads SDXL's de
 | Readout checker, iteration 4 (noisy latents) | 0.63 | 0.74 | 0.78 | 0.79 | | | | | |
 
 Before step 10 the decoded guess holds no second animal, and no checker trained on it rises above 0.54; the readout checker, which reads SDXL's features, is the better reader there.
+
+## Pushing with the fine-tuned CLIP checker
+
+`scripts/rung2/clip_push.py` turns a fine-tuned CLIP checker into a push: at each step it decodes the sampler's guess at the finished picture, scores it, and takes the gradient back to the noisy latent with the product's noise prediction held fixed (`render_results.py --clip`). Same cap (0.1 of the product prediction), same held-out seeds 9 to 16, strengths 10, 30 and 100. The overview is `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/push-sheets-compared.png`.
+
+| Sheet | Checker | Push on | Two or more bodies, of 8 | What the pictures show (draft, tile-size calls) |
+| --- | --- | --- | --- | --- |
+| clip-push-sheet-from0 | CLIP ViT-L/14, finished pictures (0.900) | steps 0 to 49 | 1 (seed 16 at s = 30) | the same picture as plain PoE on 7 of 8 seeds, with eyes, mouths and fur redrawn |
+| clip-push-sheet-from10 | the same | steps 10 to 49 | 0 | the same picture as plain PoE on every seed; seed 12 scored +0.46 by CLIP with no change a person would see |
+| clip-push-sheet-halfdrawn | CLIP trained on half-drawn guesses | steps 10 to 49 | 0 | the same picture as plain PoE on every seed; seed 16 scored +0.10 the same way |
+
+The CLIP push raised its own checker's score on every seed (by 1 to 13.5 logits over the size-matched random push) without moving where the animals are. A gradient through the decoded guess, at the same push size, changes texture; the readout checker's gradient, read off SDXL's own features, changes the layout.
