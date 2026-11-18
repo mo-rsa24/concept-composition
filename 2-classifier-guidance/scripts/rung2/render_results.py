@@ -65,6 +65,9 @@ def main() -> int:
     ap.add_argument("--readout", action="store_true",
                     help="--head is a train_readout_pair.py checkpoint; SDXL is read with the joint prompt when it was trained so")
     ap.add_argument("--push-cap", type=float, default=PUSH_CAP_FRACTION)
+    ap.add_argument("--window", type=int, nargs=2, default=None, metavar=("FIRST", "STOP"),
+                    help="push only on sampler steps FIRST <= step < STOP; the random push follows, since it copies "
+                         "the guided push's size step by step")
     ap.add_argument("--out-name", default="results", help="folder under rung2/ for this sheet")
     ap.add_argument("--reuse-baselines", default="",
                     help="folder under rung2/ whose plain and best-of-2 tiles this sheet reuses (same head only)")
@@ -121,7 +124,7 @@ def main() -> int:
     base_record = json.loads((base / "result.json").read_text()) if base else None
     if base_record and base_record["head"] != str(args.head):
         raise SystemExit("guard: reused baselines were picked by a different discriminator")
-    record = {"push_cap": args.push_cap, "reused_baselines": str(base) if base else None,
+    record = {"push_cap": args.push_cap, "window": args.window, "reused_baselines": str(base) if base else None,
               "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
               "seeds": args.seeds, "strengths": args.strengths, "best_of_n": 2, "canary": {}, "seeds_detail": {}}
 
@@ -164,7 +167,7 @@ def main() -> int:
             init, sigma = own_noise(seed)
             guided, d["seconds"][f"s{s_:g}"] = timed(lambda: run_poe_classifier_guided(
                 init_latents=init, euler_init_noise_sigma=sigma, head=disc, strength=s_,
-                push_cap=args.push_cap, **common))
+                push_cap=args.push_cap, guidance_window=tuple(args.window) if args.window else None, **common))
             write_decoded_image(guided.image, tile(seed, f"s{s_:g}"))
             norms = guided.extras["applied_norm_per_step"]
             init, sigma = own_noise(seed)
@@ -212,8 +215,9 @@ def main() -> int:
                 ax.text(-0.06, 0.5, f"seed {seed}\n{part}", transform=ax.transAxes, rotation=90,
                         va="center", ha="right", fontsize=9)
             ax.set_xticks([]); ax.set_yticks([])
-    fig.suptitle(f"Rung 2 ({args.out_name}, cap {args.push_cap:g}): the cat x dog product, seeds 1 to 4 "
-                 f"(training) and 9 to 12 (held out)", fontsize=12)
+    fig.suptitle(f"Rung 2 ({args.out_name}, cap {args.push_cap:g}"
+                 f"{f', push on steps {args.window[0]} to {args.window[1] - 1}' if args.window else ''}): the cat x dog product, seeds "
+                 f"{', '.join(str(x) for x in args.seeds)} (9 to 16 held out)", fontsize=12)
     fig.tight_layout(rect=[0.02, 0, 1, 0.96])
     fig.savefig(OUT / "result-sheet.png", dpi=100)
     plt.close(fig)
