@@ -166,7 +166,7 @@ def adapter_rows(args, ctx, common, disc, score, own_noise, timed, tile, record)
         record["seeds_detail"][seed] = d
         (OUT / "result.json").write_text(json.dumps(record, indent=2))
 
-    fig, axes = plt.subplots(len(rows), len(args.seeds), figsize=(len(args.seeds) * 2.6, len(rows) * 2.7))
+    fig, axes = plt.subplots(len(rows), len(args.seeds), figsize=(len(args.seeds) * 2.6, len(rows) * 2.7), squeeze=False)
     for r, (label, key) in enumerate(rows):
         for c, seed in enumerate(args.seeds):
             ax = axes[r][c]
@@ -353,7 +353,7 @@ def main() -> int:
     cols = [("plain product", "plain"), ("best of 2,\npicked by the\ndiscriminator", "best_of_2")] + \
            [(f"guided\ns = {s_:g}", f"s{s_:g}") for s_ in args.strengths] + \
            [(f"random push,\nsame size, s = {s_:g}", f"r{s_:g}") for s_ in args.strengths]
-    fig, axes = plt.subplots(len(args.seeds), len(cols), figsize=(len(cols) * 2.6, len(args.seeds) * 2.7))
+    fig, axes = plt.subplots(len(args.seeds), len(cols), figsize=(len(cols) * 2.6, len(args.seeds) * 2.7), squeeze=False)
     for r, seed in enumerate(args.seeds):
         for c, (label, key) in enumerate(cols):
             ax = axes[r][c]
