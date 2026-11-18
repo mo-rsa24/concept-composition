@@ -154,6 +154,49 @@ def manifest_sampler(args, sampler_t):
     return batch, split
 
 
+TRAJ_CHECK_STEPS = (0, 2, 4, 6, 8, 10, 15, 20)
+
+
+def load_trajectories(labels_path: Path) -> dict:
+    """Plan 25's saved runs with a confident label, states held in memory: train {label: [stem]}, held_out [(stem, mode, label)]."""
+    labels = json.loads(labels_path.read_text())
+    root = labels_path.parent
+    times = json.loads((root / "timesteps.json").read_text())
+    keep = {s: r for s, r in labels.items() if r["label"] is not None}
+    if any(r["seed"] <= 1250 for r in keep.values()):
+        raise SystemExit("guard: a trajectory seed overlaps the held-out sheet or the cat x dog lists")
+    train = {0: [], 1: []}
+    held = []
+    for s, r in sorted(keep.items()):
+        (train[r["label"]].append(s) if r["split"] == "train" else held.append((s, r["mode"], r["label"])))
+    states = {s: torch.load(root / "states" / f"{s}.pt") for s in keep}
+    print(f"trajectories: {len(train[1])} clean and {len(train[0])} reject training runs, {len(held)} held-out runs",
+          flush=True)
+    return {"train": train, "held_out": held, "states": states,
+            "kept_steps": times["kept_steps"], "timesteps": times["timesteps"]}
+
+
+def mix_trajectories(batch, traj, args):
+    """Replace each slot, with probability --traj-frac, by a saved state of a run with that slot's label."""
+    early_idx = [k for k, s in enumerate(traj["kept_steps"]) if s < EARLY]
+    any_idx = list(range(len(traj["kept_steps"]) - 1))   # the final latent is not a sampler state
+
+    def mixed(scheduler, device, dtype):
+        x, t, pairs, ids = batch(scheduler, device, dtype)
+        x, t, pairs, ids = x.clone(), t.clone(), list(pairs), list(ids)
+        for i in range(x.shape[0]):
+            if random.random() >= args.traj_frac:
+                continue
+            label = 1 if i < 4 else 0
+            stem = random.choice(traj["train"][label])
+            k = random.choice(early_idx if random.random() < args.early_frac else any_idx)
+            x[i] = traj["states"][stem][k].to(device, dtype)
+            t[i] = traj["timesteps"][k]
+            pairs[i], ids[i] = "a_cat__x__a_dog", f"traj-{stem}"
+        return x, t, pairs, ids
+    return mixed
+
+
 def states_sampler(args):
     rows = [json.loads(l) for l in args.labels.read_text().splitlines() if l.strip()]
     real = [r["id"] for r in rows if r.get("method") == "joint" and r.get("verdict") == "faithful pair"]
@@ -195,6 +238,12 @@ def main() -> int:
                          "the mistake the push keeps making; the rest are drawn as before")
     ap.add_argument("--frac", type=float, default=1.0,
                     help="train on this share of the manifest's tiles, kept in proportion by source and label (learning curve)")
+    ap.add_argument("--traj-labels", type=Path, default=None,
+                    help="plan 25's trajectories/labels.json: adds the reading check on held-out joint runs' saved states "
+                         "(clean against reject per sampler step) and, with --traj-frac, trains on the training runs' states")
+    ap.add_argument("--traj-frac", type=float, default=0.0,
+                    help="share of each batch's slots filled with a saved state of a run whose finished picture has that "
+                         "slot's label; the state goes in as saved, at its own step, with no noise added")
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
     args = ap.parse_args()
@@ -212,6 +261,14 @@ def main() -> int:
     ctx.scheduler.set_timesteps(ctx.num_inference_steps)
     sampler_t = ctx.scheduler.timesteps.clone().cpu()
     batch, split = manifest_sampler(args, sampler_t) if args.manifest else states_sampler(args)
+    traj = load_trajectories(args.traj_labels) if args.traj_labels else None
+    if traj and args.traj_frac > 0:
+        batch = mix_trajectories(batch, traj, args)
+        split["trajectory_runs_for_training"] = {"clean": len(traj["train"][1]), "reject": len(traj["train"][0])}
+    if traj:
+        split["trajectory_runs_held_out"] = {m: {"clean": sum(1 for r in traj["held_out"] if r[1] == m and r[2] == 1),
+                                                 "reject": sum(1 for r in traj["held_out"] if r[1] == m and r[2] == 0)}
+                                             for m in ("joint", "product")}
     (out / "split.json").write_text(json.dumps(split, indent=1))
     print(json.dumps(split), flush=True)
 
@@ -285,9 +342,41 @@ def main() -> int:
                             + sum(not p for p, k in zip(yes, kind) if k != "positive") / max(1, sum(k != "positive" for k in kind))) / 2})
         return res
 
+    @torch.no_grad()
+    def traj_check():
+        """Balanced accuracy, clean against reject, on held-out joint runs' saved states per sampler step."""
+        res = {}
+        for k, step_ in enumerate(traj["kept_steps"]):
+            if step_ not in TRAJ_CHECK_STEPS:
+                continue
+            runs = [(stem, label) for stem, mode, label in traj["held_out"] if mode == "joint"]
+            yes, lab = [], []
+            for i in range(0, len(runs), 8):
+                chunk = runs[i:i + 8]
+                x = torch.stack([traj["states"][stem][k] for stem, _ in chunk]).to(ctx.device, ctx.dtype)
+                t = torch.full((len(chunk),), traj["timesteps"][k], device=ctx.device)
+                o = head(read(x, t, ["a_cat__x__a_dog"] * len(chunk))).float()
+                o = o if o.ndim == 1 else o[:, 0]
+                yes += [float(v) > 0 for v in o]
+                lab += [label for _, label in chunk]
+            pos = [y for y, l in zip(yes, lab) if l == 1]
+            neg = [not y for y, l in zip(yes, lab) if l == 0]
+            res[step_] = (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
+        early = [v for s_, v in res.items() if s_ <= 10]
+        return {"per_step": res, "mean_steps_0_to_10": sum(early) / len(early)}
+
+    def show_traj(tc):
+        return ("trajectory check, held-out joint runs: " + "  ".join(f"{s_}:{v:.3f}" for s_, v in tc["per_step"].items())
+                + f"  mean steps 0 to 10 {tc['mean_steps_0_to_10']:.3f}")
+
     if args.score:
         head.load_state_dict(torch.load(args.score, map_location="cpu")["head"])
         head.eval()
+        if traj:
+            tc = traj_check()
+            (out / "score-trajectories.json").write_text(json.dumps({"head": str(args.score), **tc}, indent=1))
+            print("SCORE " + show_traj(tc), flush=True)
+            return 0
         rows_s = check(range(EARLY))
         mean = lambda k: sum(r[k] for r in rows_s) / len(rows_s)
         res = {"head": str(args.score), "eval": str(args.eval), "per_step": rows_s,
@@ -317,6 +406,9 @@ def main() -> int:
                   f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject), {drawn_m:.3f} "
                   f"(420 drawn held-out pictures)  "
                   f"({time.time() - started:.0f} s)", flush=True)
+            if traj:
+                tc = traj_check()
+                print(f"step {step:5d}  " + show_traj(tc), flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt,
                         "heads": head.n_out},
                        out / f"head_step_{step:06d}.pt")
@@ -325,7 +417,8 @@ def main() -> int:
                 passing = [r["sampler_step"] for r in rows_c if r["balanced_accuracy"] >= BAR]
                 verdict = {"rule": f"good pairs against every negative, balanced accuracy >= {BAR} on >= {MIN_STEPS} "
                                    f"of the first {EARLY} steps", "per_step": rows_c,
-                           "passing_steps": passing, "passed": len(passing) >= MIN_STEPS}
+                           "passing_steps": passing, "passed": len(passing) >= MIN_STEPS,
+                           "trajectory_check": traj_check() if traj else None}
                 (out / "check.json").write_text(json.dumps(verdict, indent=1))
                 print(f"READOUT CHECK {'PASSED' if verdict['passed'] else 'FAILED'}: {len(passing)} of {EARLY}", flush=True)
                 break
