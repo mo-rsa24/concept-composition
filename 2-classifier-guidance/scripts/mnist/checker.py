@@ -199,6 +199,10 @@ def pasted(cv, rng, n, pairs, kind):
             y2 = min(max(y0 + dy, 0), H - D)
             c[y2:y2 + D, x0 + dx:x0 + dx + D] = np.maximum(c[y2:y2 + D, x0 + dx:x0 + dx + D], cv.digit(b))
             present[len(xs), [a, b]] = 1
+        elif kind == "twin":
+            same = a if rng.random() < 0.5 else b
+            c = cv.two(same, same)
+            present[len(xs), same] = 1
         elif kind == "single":
             alone = a if rng.random() < 0.5 else b
             c = cv.one(alone)
@@ -239,9 +243,10 @@ def build_set(args, rng):
     neg_d = seen & (d["call"] != "two clear, right digits")
     n = 8000
     two = pasted(cv, rng, n, train_pairs, "two")
-    w = args.wrong_weight
-    share = {"fused": 1, "single": 1, "wrong": w}
-    negs = [pasted(cv, rng, int(n * share[k] / (2 + w)), train_pairs, k) for k in ("fused", "single", "wrong")]
+    w, tw = args.wrong_weight, args.twin_weight
+    share = {"fused": 1, "single": 1, "wrong": w, "twin": tw}
+    kinds = ("fused", "single", "wrong") + (("twin",) if tw > 0 else ())
+    negs = [pasted(cv, rng, int(n * share[k] / (2 + w + tw)), train_pairs, k) for k in kinds]
     nodigits = lambda m: np.zeros((m, 10), np.float32)
     sets = {
         "pos_drawn": (d["x"][pos_d], d["pair"][pos_d], nodigits(pos_d.sum())),
@@ -397,6 +402,7 @@ def main():
     ap.add_argument("--wrong-ask", action="store_true", help="each positive also asked for a wrong pair, as a negative")
     ap.add_argument("--wrong-weight", type=float, default=1.0, help="wrong-pair share of pasted negatives, against 1 each")
     ap.add_argument("--film", action="store_true", help="the asked pair modulates the head's convolutions")
+    ap.add_argument("--twin-weight", type=float, default=0.0, help="share of 'the same digit twice' among pasted negatives (loop 5)")
     ap.add_argument("--expert-feats", action="store_true", help="read the features asked with each asked digit (round 8)")
     args = ap.parse_args()
     draws(args) if args.cmd == "draws" else train(args)
