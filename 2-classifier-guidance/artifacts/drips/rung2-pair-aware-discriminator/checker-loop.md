@@ -199,3 +199,15 @@ One change per round, each judged on cat × dog evaluation seeds 6001 to 6128 (n
 | typewriter × cactus | 6 / 0 | 7 / 0 | 16 / 1 | 14 separate, 6 clean |
 
 On objects the scorer counts loose cacti as extra bodies, so "two bodies" is high for plain PoE and the random push (6 and 7) and does not separate them from the recipe as cleanly as the eye calls; its faithful pair calls a typewriter with cacti growing on it a hybrid. For lion × meerkat it matches the eye on two bodies (10) and finds no faithful pair, stricter than the eye's 3.
+
+## What counts as a clean training picture (from the benchmark pool on)
+
+New checker data comes from the 276-prompt Attend-and-Excite benchmark renders (`collect_benchmark_pool.py`: the joint prompt, the adapter, CO3 and ToMe at seeds 9 to 12; 4,400 pictures across 275 pairs; plain PoE left out as almost all hybrids) and from plan 30's 78-pair joint runs. Every picture is labelled by the strict Claude API labeller (`label_pool.py`, 768 px, about 1,640 input tokens per picture):
+
+| Verdict | Training label |
+| --- | --- |
+| faithful pair (two bodies, a clear A and a clear B, no borrowed feature or body shape, an intact photograph) | clean |
+| hybrid, single, wrong pair | reject |
+| damaged (a drawing, collage or broken picture) | left out, so style cannot carry the label |
+
+Left out of training by rule: the test pairs lion × meerkat and typewriter × cactus, and cat × dog at seeds 9 to 16. Each source is spot-checked by eye (16 clean, 16 rejects) before training uses it.
