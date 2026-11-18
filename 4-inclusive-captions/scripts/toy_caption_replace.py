@@ -22,7 +22,7 @@ it, because one adding-design model at 50% fell to 223 against the usual 240 lin
     CUDA_VISIBLE_DEVICES= /home/molef/micromamba/envs/sdxl-local/bin/python scripts/toy_caption_replace.py
 
 The full sweep at the adding design's shares (written to its own files, judged by nothing above):
-    python scripts/toy_caption_replace.py --counts 1,5,20,49,182,462,750,1000 --tag -sweep \
+    python scripts/toy_caption_replace.py --counts 1,5,20,49,182,462,750,1000 --tag=-sweep \
         --save-weights 1000:20261022
 """
 import argparse, json, sys, time

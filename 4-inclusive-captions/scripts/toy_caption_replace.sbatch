@@ -28,6 +28,6 @@ nvidia-smi --query-gpu=name,memory.used,utilization.gpu --format=csv || { echo "
 
 export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-8}
 cd "$REPO" || exit 7
-"$PY" 4-inclusive-captions/scripts/toy_caption_replace.py --counts "$COUNTS" --tag -sweep --save-weights 1000:20261022 \
+"$PY" 4-inclusive-captions/scripts/toy_caption_replace.py --counts "$COUNTS" --tag=-sweep --save-weights 1000:20261022 \
   || { echo "ABORT: sweep failed" >&2; exit 9; }
 echo "=== done $(date -Is)"
