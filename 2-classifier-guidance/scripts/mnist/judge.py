@@ -88,10 +88,15 @@ def train(args):
     x, y = crop_set(images, labels, 30000, rng)
     net = judge_net().to(dev)
     opt = torch.optim.Adam(net.parameters(), 1e-3)
-    for epoch in range(4):
+    for epoch in range(8 if args.augment == "strong" else 6 if args.augment else 4):
         net.train()
         for idx in torch.randperm(len(x)).split(256):
-            loss = nn.functional.cross_entropy(net(x[idx].to(dev)), y[idx].to(dev))
+            xb = x[idx].to(dev)
+            if args.augment == "strong":
+                xb = thicken(shape(xb), strong=True)
+            elif args.augment:
+                xb = thicken(xb)
+            loss = nn.functional.cross_entropy(net(xb), y[idx].to(dev))
             opt.zero_grad(), loss.backward(), opt.step()
     net.eval()
     # held out: MNIST's test digits, and overlays built only from test digits
@@ -109,6 +114,37 @@ def train(args):
            "test_single_digits_called_two_on_one_spot": round(false_two, 4)}
     (args.weights.parent / "judge_test.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res))
+
+
+def thicken(x, strong=False):
+    """Stroke thickening (once or twice) or blur, at random, on single digits and overlays alike, so
+    ink thickness is no cue for "two digits on one spot"; the canvas model draws thick strokes.
+    strong: also three times thicker, and thinner."""
+    r = torch.rand(x.shape[0], device=x.device)[:, None, None, None]
+    once = nn.functional.max_pool2d(x, 3, 1, 1)
+    twice = nn.functional.max_pool2d(once, 3, 1, 1)
+    blur = nn.functional.avg_pool2d(once, 3, 1, 1)
+    if strong:
+        thrice = nn.functional.max_pool2d(twice, 3, 1, 1)
+        thin = -nn.functional.max_pool2d(-x, 3, 1, 1)
+        return torch.where(r < 0.25, once, torch.where(r < 0.45, twice, torch.where(r < 0.55, thrice,
+               torch.where(r < 0.65, blur, torch.where(r < 0.75, thin, x)))))
+    return torch.where(r < 0.3, once, torch.where(r < 0.45, twice, torch.where(r < 0.6, blur, x)))
+
+
+def shape(x):
+    """Random rotation up to 15 degrees, shear up to 0.3 and scale 0.85 to 1.15, per crop."""
+    b = x.shape[0]
+    a = (torch.rand(b, device=x.device) - 0.5) * (2 * 15 * 3.14159 / 180)
+    sh = (torch.rand(b, device=x.device) - 0.5) * 0.6
+    sc = 0.85 + torch.rand(b, device=x.device) * 0.3
+    th = torch.zeros(b, 2, 3, device=x.device)
+    th[:, 0, 0] = torch.cos(a) / sc
+    th[:, 0, 1] = (-torch.sin(a) + sh) / sc
+    th[:, 1, 0] = torch.sin(a) / sc
+    th[:, 1, 1] = torch.cos(a) / sc
+    g = nn.functional.affine_grid(th, x.shape, align_corners=False)
+    return nn.functional.grid_sample(x, g, align_corners=False)
 
 
 def load(weights, dev):
@@ -226,6 +262,8 @@ def main():
     ap.add_argument("--mnist", type=Path, required=True)
     ap.add_argument("--weights", type=Path, required=True)
     ap.add_argument("--out", type=Path)
+    ap.add_argument("--augment", nargs="?", const="basic", default=None,
+                    help="thicken or blur crops at random while training; 'strong' adds shape changes")
     args = ap.parse_args()
     train(args) if args.cmd == "train" else sheet(args)
 
