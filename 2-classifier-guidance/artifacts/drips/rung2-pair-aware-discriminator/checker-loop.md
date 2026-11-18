@@ -181,3 +181,12 @@ Two bodies agree on 91% of seeds; the three disagreements are a flat cutout coun
 ## The readout checker trained on PoE's own states (plan 25), final
 
 `readout-catdog-traj`, iteration 4's settings plus half of each batch from the 1,972 labelled training runs' saved states: mean over sampler steps 0 to 10 on 195 held-out joint runs 0.730 at step 2,000, against 0.677 for iteration 4 (0.59 against 0.51 at step 0, 0.73 against 0.64 at step 4). In between Q1's marks: +0.053 over iteration 4, under 0.75. The older check on finished pictures with noise added falls to 1 of 20 steps. Its push sheets follow.
+
+## The improvement loop (from 2026-11-18, 17:50 UTC)
+
+One change per round, each judged on cat × dog evaluation seeds 6001 to 6128 (never used for training or tuning) with plain PoE and the size-matched random push beside it, scored by `score_sheet.py` (two bodies, faithful pair) and spot-checked by eye. A change is kept when faithful pair rises by at least 4 of 128 and two bodies does not fall. The baseline is the recipe with iteration 6's checker (`result-sheet-catdog-big`).
+
+| Round | One change | Run | Two bodies of 128 | Faithful pair of 128 | Kept |
+| --- | --- | --- | --- | --- | --- |
+| baseline | the recipe, iteration 6's checker | result-sheet-catdog-big | pending | pending | baseline |
+| 1 | plan 25's checker (`readout-catdog-traj`, trained on PoE's own states) in place of iteration 6's | result-sheet-catdog-big-traj | pending | pending | pending |
