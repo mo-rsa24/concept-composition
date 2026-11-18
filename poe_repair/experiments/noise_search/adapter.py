@@ -55,18 +55,24 @@ N_CANDIDATES = 8
 ETA = 0.0
 
 
-def attach_and_load_lora(unet: torch.nn.Module) -> dict:
-    """Attach the rank-32 adapter and load the step-30050 weights (the probe helper's recipe)."""
+def attach_and_load_lora(unet: torch.nn.Module, checkpoint: Path | None = CHECKPOINT) -> dict:
+    """Attach the rank-32 adapter and load the step-30050 weights (the probe helper's recipe).
+
+    ``checkpoint`` None attaches the adapter untrained (its output matrices are zero, so it adds
+    nothing) and loads no weights."""
     from poe_repair.experiments.one_pair_one_seed import trainer as lora_trainer
     from poe_repair.experiments.one_pair_one_seed.config import LoRAConfig
 
     cfg = LoRAConfig(rank=LORA_RANK, alpha=LORA_ALPHA, dropout=0.0, target_modules=LORA_TARGET_MODULES,
                      init="gaussian", adapter_name=LORA_ADAPTER_NAME)
     info = lora_trainer.attach_lora(unet, SimpleNamespace(lora=cfg))
-    ckpt = torch.load(str(CHECKPOINT), map_location="cpu", weights_only=False)
+    if checkpoint is None:
+        info["n_loaded"], info["checkpoint_step"] = 0, -1
+        return info
+    ckpt = torch.load(str(checkpoint), map_location="cpu", weights_only=False)
     state = ckpt.get("lora_state")
     if state is None:
-        raise KeyError(f"{CHECKPOINT} has no 'lora_state' key (found: {list(ckpt.keys())})")
+        raise KeyError(f"{checkpoint} has no 'lora_state' key (found: {list(ckpt.keys())})")
     lora_trainer.load_lora_state(unet, state)
     info["n_loaded"] = len(state)
     info["checkpoint_step"] = int(ckpt.get("step", -1))

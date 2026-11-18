@@ -16,6 +16,20 @@ discriminator is used changes between columns:
 Before any push is read, strength 0 with the discriminator attached must match the plain product
 byte for byte on the first seed, or the run stops.
 
+With --adapter the sheet is the rank-32 adapter instead, one row per condition and one column per
+seed. The base prediction is eps_off + lambda * (eps_on - eps_off), PoE with the adapter off and on:
+
+    a<L>            the adapter alone at lambda L, for each --adapter-alone-lambdas
+    a<L>s10, ...    the adapter at --adapter-lambda plus the checker's push at that strength
+    a<L>r10, ...    the adapter at --adapter-lambda plus the size-matched random push
+
+The checker reads SDXL with the adapter switched off, the features it was trained on. Two more
+checks run on the first seed before any row: adapter lambda 0 with push 0 must match the plain
+product byte for byte, and push 0 at each lambda must match ``noise_search.adapter``'s
+adapter-alone sampler byte for byte. --identity-only stops after them. --adapter takes a
+checkpoint path, or ``untrained`` (attached, adds nothing) or ``random`` (fixed random output
+matrices, a stand-in that moves the picture so the second check is not trivially true).
+
 Writes, under MOUNT_ROOT/outputs/classifier_guidance_ladder/rung2/results/:
     tiles/seedNN__<column>.png, tiles/seedNN__draw2.png, result-sheet.png, result.json
 """
@@ -30,6 +44,7 @@ import time
 from pathlib import Path
 
 import matplotlib
+import numpy as np
 import torch
 
 matplotlib.use("Agg")
@@ -44,7 +59,7 @@ from poe_repair.composers._helpers import init_latents_for_cell  # noqa: E402
 from poe_repair.methods._classifier_guided import PUSH_CAP_FRACTION, run_poe_classifier_guided  # noqa: E402
 from poe_repair.methods._sampling import run_cfg_poe, write_decoded_image  # noqa: E402
 from poe_repair.run import make_ctx  # noqa: E402
-from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
+from poe_repair.runtime import decode_latents, encode_prompt_sdxl  # noqa: E402
 import classifier_guidance_from_the_paper as single  # noqa: E402
 from discriminator import PairDiscriminator  # noqa: E402
 
@@ -55,6 +70,120 @@ HEAD = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2/discriminato
 
 def md5(path: Path) -> str:
     return hashlib.md5(path.read_bytes()).hexdigest()
+
+
+def max_pixel_diff(p: Path, q: Path) -> int:
+    """Largest difference on the 0-255 scale over every pixel and channel of two tiles."""
+    a = np.asarray(Image.open(p).convert("RGB"), dtype=np.int16)
+    b = np.asarray(Image.open(q).convert("RGB"), dtype=np.int16)
+    return int(np.abs(a - b).max())
+
+
+def adapter_rows(args, ctx, common, disc, score, own_noise, timed, tile, record) -> int:
+    """The --adapter sheet: identity checks on the first seed, then one row per condition."""
+    from poe_repair.experiments.noise_search import adapter as ad
+
+    unet = ctx.models["unet"]
+    ckpt = None if args.adapter in ("untrained", "random") else Path(args.adapter)
+    info = ad.attach_and_load_lora(unet, ckpt)
+    if args.adapter == "random":
+        g = torch.Generator().manual_seed(0)
+        for name, p in unet.named_parameters():
+            if "lora_B" in name:
+                p.data.copy_((torch.randn(p.shape, generator=g) * 0.01).to(p.dtype))
+    ad.adapter_disable(unet)
+    record.update({"adapter": args.adapter, "adapter_loaded_tensors": info["n_loaded"],
+                   "adapter_checkpoint_step": info["checkpoint_step"], "adapter_lambda": args.adapter_lambda,
+                   "adapter_alone_lambdas": args.adapter_alone_lambdas, "adapter_identity": {}})
+    print(f"adapter {args.adapter}: {info['n_loaded']} tensors loaded, step {info['checkpoint_step']}", flush=True)
+
+    def adapter_run(seed, lam, **kw):
+        init, sigma = own_noise(seed)
+        return run_poe_classifier_guided(init_latents=init, euler_init_noise_sigma=sigma, head=disc,
+                                         adapter_lambda=lam, push_cap=args.push_cap,
+                                         guidance_window=tuple(args.window) if args.window else None, **kw, **common)
+
+    # Identity 1: the adapter at lambda 0 with no push is the plain product.
+    first = args.seeds[0]
+    write_decoded_image(adapter_run(first, 0.0, strength=0.0).image, tile(first, "a0s0"))
+    ident = record["adapter_identity"]
+    ident["lambda0_push0_vs_plain"] = {"identical": md5(tile(first, "a0s0")) == md5(tile(first, "plain")),
+                                       "max_pixel_diff": max_pixel_diff(tile(first, "a0s0"), tile(first, "plain"))}
+    print(f"identity seed {first}: adapter lambda 0, push 0 vs plain product: {ident['lambda0_push0_vs_plain']}", flush=True)
+
+    # Identity 2: push 0 at each lambda is noise_search.adapter's adapter-alone sampler.
+    s = {k: common[k] for k in ("models", "scheduler", "seq_a", "pool_a", "seq_b", "pool_b", "seq_e", "pool_e",
+                                "guidance_scale", "num_inference_steps", "height", "width", "device", "dtype")}
+    for lam in sorted(set(args.adapter_alone_lambdas) | {args.adapter_lambda}):
+        init, sigma = own_noise(first)
+        with torch.no_grad():
+            ref = ad.run_adapter_candidates(init_latents=init / sigma, lambda_value=lam, unet_chunk=1, **s)
+            write_decoded_image(decode_latents(ctx.models, ref).cpu(), tile(first, f"a{lam:g}_ref"))
+        ad.adapter_disable(unet)
+        write_decoded_image(adapter_run(first, lam, strength=0.0).image, tile(first, f"a{lam:g}s0"))
+        new, old = tile(first, f"a{lam:g}s0"), tile(first, f"a{lam:g}_ref")
+        ident[f"lambda{lam:g}_push0_vs_adapter_alone"] = {
+            "identical": md5(new) == md5(old), "max_pixel_diff": max_pixel_diff(new, old),
+            "max_pixel_diff_from_plain": max_pixel_diff(new, tile(first, "plain"))}
+        print(f"identity seed {first}: adapter lambda {lam:g}, push 0 vs adapter-alone sampler: "
+              f"{ident[f'lambda{lam:g}_push0_vs_adapter_alone']}", flush=True)
+    (OUT / "result.json").write_text(json.dumps(record, indent=2))
+    if not all(v["identical"] for v in ident.values()):
+        raise SystemExit("an identity check failed; stopping before any row is drawn")
+    if args.identity_only:
+        print("IDENTITY DONE", OUT / "result.json", flush=True)
+        return 0
+
+    L = args.adapter_lambda
+    rows = [(f"adapter alone\nλ = {lam:g}", f"a{lam:g}") for lam in args.adapter_alone_lambdas] + \
+           [(f"adapter λ = {L:g}\n+ checker push\ns = {s_:g}", f"a{L:g}s{s_:g}") for s_ in args.strengths] + \
+           [(f"adapter λ = {L:g}\n+ random push,\nsame size, s = {s_:g}", f"a{L:g}r{s_:g}") for s_ in args.strengths]
+    for seed in args.seeds:
+        d = {"seconds": {}}
+        for lam in args.adapter_alone_lambdas:
+            out, d["seconds"][f"a{lam:g}"] = timed(lambda: adapter_run(seed, lam, strength=0.0))
+            write_decoded_image(out.image, tile(seed, f"a{lam:g}"))
+            d[f"a{lam:g}"] = {"final_logit": score(out.latents)}
+        for s_ in args.strengths:
+            key = f"a{L:g}s{s_:g}"
+            guided, d["seconds"][key] = timed(lambda: adapter_run(seed, L, strength=s_))
+            write_decoded_image(guided.image, tile(seed, key))
+            norms, capped = guided.extras["applied_norm_per_step"], guided.extras["capped_per_step"]
+            rg = torch.Generator(device="cpu").manual_seed(30_000 + 100 * seed + int(s_))
+            rkey = f"a{L:g}r{s_:g}"
+            rand, d["seconds"][rkey] = timed(lambda: adapter_run(seed, L, random_push_norms=norms, random_generator=rg))
+            write_decoded_image(rand.image, tile(seed, rkey))
+            ratio = [r / n if n > 0 else 1.0 for r, n in zip(rand.extras["applied_norm_per_step"], norms)]
+            d[key] = {"applied_norm_per_step": norms, "capped_per_step": capped,
+                      "cap_fired_fraction": sum(capped) / len(capped),
+                      "push_over_eps_per_step": [a / e for a, e in zip(norms, guided.extras["eps_norm_per_step"])],
+                      "final_logit": score(guided.latents)}
+            d[rkey] = {"random_over_guided_norm_min": min(ratio), "random_over_guided_norm_max": max(ratio),
+                       "final_logit": score(rand.latents)}
+            print(f"seed {seed}, adapter {L:g}, s {s_:g}: cap fired on {100 * sum(capped) / len(capped):.0f}% of steps; "
+                  f"random/guided norm {min(ratio):.4f} to {max(ratio):.4f}; logit guided "
+                  f"{d[key]['final_logit']:.2f}, random {d[rkey]['final_logit']:.2f}", flush=True)
+        record["seeds_detail"][seed] = d
+        (OUT / "result.json").write_text(json.dumps(record, indent=2))
+
+    fig, axes = plt.subplots(len(rows), len(args.seeds), figsize=(len(args.seeds) * 2.6, len(rows) * 2.7))
+    for r, (label, key) in enumerate(rows):
+        for c, seed in enumerate(args.seeds):
+            ax = axes[r][c]
+            with Image.open(tile(seed, key)) as im:
+                ax.imshow(im.convert("RGB").resize((320, 320)))
+            if r == 0:
+                ax.set_title(f"seed {seed}", fontsize=10)
+            if c == 0:
+                ax.text(-0.06, 0.5, label, transform=ax.transAxes, va="center", ha="right", fontsize=9)
+            ax.set_xticks([]); ax.set_yticks([])
+    fig.suptitle(f"Rung 2 ({args.out_name}): the cat x dog product with the rank-32 adapter ({args.adapter}), "
+                 f"push cap {args.push_cap:g}, seeds {args.seeds[0]} to {args.seeds[-1]}", fontsize=12)
+    fig.tight_layout(rect=[0.08, 0, 1, 0.96])
+    fig.savefig(OUT / "result-sheet.png", dpi=100)
+    plt.close(fig)
+    print("RESULTS DONE", OUT / "result-sheet.png", flush=True)
+    return 0
 
 
 def main() -> int:
@@ -73,6 +202,11 @@ def main() -> int:
     ap.add_argument("--out-name", default="results", help="folder under rung2/ for this sheet")
     ap.add_argument("--reuse-baselines", default="",
                     help="folder under rung2/ whose plain and best-of-2 tiles this sheet reuses (same head only)")
+    ap.add_argument("--adapter", default=None,
+                    help="draw on top of the rank-32 adapter: a checkpoint path, 'untrained' or 'random'")
+    ap.add_argument("--adapter-lambda", type=float, default=1.0, help="adapter strength under the push rows")
+    ap.add_argument("--adapter-alone-lambdas", type=float, nargs="+", default=[0.5, 1.0])
+    ap.add_argument("--identity-only", action="store_true", help="with --adapter: stop after the identity checks")
     args = ap.parse_args()
     global OUT
     OUT = RUNG2 / args.out_name
@@ -148,6 +282,8 @@ def main() -> int:
     print(f"canary seed {first}: strength 0 identical to plain product: {same}", flush=True)
     if not same:
         raise SystemExit("strength 0 moved the product; stopping before any push is read")
+    if args.adapter:
+        return adapter_rows(args, ctx, common, disc, score, own_noise, timed, tile, record)
 
     for seed in args.seeds:
         d = {"seconds": {}}

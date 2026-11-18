@@ -81,8 +81,17 @@ def run_poe_classifier_guided(
     push_cap: float | None = PUSH_CAP_FRACTION,
     random_push_norms: list[float] | None = None,
     random_generator: torch.Generator | None = None,
+    adapter_lambda: float | None = None,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
+
+    With ``adapter_lambda`` set, the UNet must carry the rank-32 adapter
+    (``noise_search.adapter.attach_and_load_lora``) and the base prediction becomes
+    eps_off + adapter_lambda * (eps_on - eps_off), the PoE prediction with the adapter switched off
+    and on, as ``noise_search.adapter.run_adapter_candidates`` computes it. The adapter is switched
+    off again before the push, so a checker that reads the UNet's features reads the frozen SDXL it
+    was trained on, and it is left off when the function returns. At ``adapter_lambda`` 0 both
+    predictions are still computed and the adapter's is discarded. ``None`` is the old path.
 
     With ``random_push_norms`` the classifier is not called: at step ``i`` the push is a fresh
     random direction from ``random_generator``, scaled to norm ``random_push_norms[i]``. Fed the
@@ -124,17 +133,31 @@ def run_poe_classifier_guided(
     capped_per_step: list[bool] = []
     eps_norm_per_step: list[float] = []
 
+    if adapter_lambda is not None:
+        from poe_repair.experiments.noise_search.adapter import adapter_disable, adapter_enable
+
+    def product_eps(timestep) -> torch.Tensor:
+        latent_input = scheduler.scale_model_input(latents.repeat(3, 1, 1, 1), timestep)
+        noise = unet(
+            latent_input, timestep, encoder_hidden_states=pe,
+            added_cond_kwargs=cond, timestep_cond=None,
+        ).sample
+        eps_a_raw, eps_b_raw, eps_uncond = noise.chunk(3)
+        eps_a = guided_eps(eps_a_raw, eps_uncond, guidance_scale)
+        eps_b = guided_eps(eps_b_raw, eps_uncond, guidance_scale)
+        return poe_eps(eps_a, eps_b, eps_uncond)
+
     for step_index, timestep in enumerate(scheduler.timesteps):
         with torch.no_grad():
-            latent_input = scheduler.scale_model_input(latents.repeat(3, 1, 1, 1), timestep)
-            noise = unet(
-                latent_input, timestep, encoder_hidden_states=pe,
-                added_cond_kwargs=cond, timestep_cond=None,
-            ).sample
-            eps_a_raw, eps_b_raw, eps_uncond = noise.chunk(3)
-            eps_a = guided_eps(eps_a_raw, eps_uncond, guidance_scale)
-            eps_b = guided_eps(eps_b_raw, eps_uncond, guidance_scale)
-            eps_p = poe_eps(eps_a, eps_b, eps_uncond)
+            if adapter_lambda is None:
+                eps_p = product_eps(timestep)
+            else:
+                adapter_disable(unet)
+                eps_off = product_eps(timestep)
+                adapter_enable(unet)
+                eps_on = product_eps(timestep)
+                adapter_disable(unet)
+                eps_p = eps_off + float(adapter_lambda) * (eps_on - eps_off)
         eps_norm_per_step.append(float(eps_p.float().norm()))
 
         in_window = guidance_window is None or (
@@ -201,6 +224,7 @@ def run_poe_classifier_guided(
             "capped_per_step": capped_per_step,
             "eps_norm_per_step": eps_norm_per_step,
             "random_push": random_push_norms is not None,
+            "adapter_lambda": None if adapter_lambda is None else float(adapter_lambda),
         },
     )
 
