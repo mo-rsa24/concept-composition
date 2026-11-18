@@ -85,7 +85,7 @@ For Claude to execute.
 - [x] **1.1 Draw the runs.** `scripts/rung2/render_trajectories.py` on mscluster111 and 112, seeds 2001 to 3200,
   through `rung2/trajectories.sh`. Done when both logs print `TRAJECTORIES DONE`, the claims without `done` are
   rerun, and `trajectories/states/` holds 2,400 files.
-- [ ] **1.2 Label them.** `scripts/rung2/label_trajectories.py`. Prints the count per split, mode and label;
+- [x] **1.2 Label them.** `scripts/rung2/label_trajectories.py`. Prints the count per split, mode and label;
   writes `trajectories/labels.json` and `trajectories/spot-check.png`. Stop and show the spot-check sheet.
 - [ ] **1.3 Score iteration 4 on the held-out runs.** `train_readout_pair.py --manifest training_set_catdog_more23.json
   --aug --pair-prompt --traj-labels <labels.json> --score readout-catdog-more3-long/head_step_002000.pt`; the
