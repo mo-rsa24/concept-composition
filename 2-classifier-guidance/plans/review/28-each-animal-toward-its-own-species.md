@@ -33,11 +33,20 @@ On held-out seeds 9 to 16, strengths 30 and 100, called by eye from full-size ti
 Read from the log's "late start" lines. Fewer than 6 of 16 pictures with two boxes makes Q1 inconclusive, because the
 late push never acts on most of them.
 
+**Q3. Does pushing only confidently named boxes keep the fixes and drop the wrong-species turns?**
+
+The same run with a box pushed only when zero-shot CLIP gives its assigned species at least 0.8 at step 16, written
+after Q1's answer and before this run:
+
+- Support: no picture where a cat turns into a dog or a dog into a cat, and clean or near-clean on at least 5 of 8 seeds.
+- Null: wrong-species turns remain, or fewer clean or near-clean seeds than the first run's 4.
+
 ## Runs
 
 | Run | What | Status |
 | --- | --- | --- |
 | result-sheet-catdog-boxes | `render_results.py --readout --head <iteration 6> --box-species --split 16 --push-cap 0.3 --cap-late 0.1 --cap-late-from 16` | done |
+| result-sheet-catdog-boxes-confident | the same plus `--box-confidence 0.8` | drawing |
 
 ## Answers
 
