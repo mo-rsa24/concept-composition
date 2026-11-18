@@ -112,6 +112,9 @@ def main() -> int:
     ap.add_argument("--batch", type=int, default=32)
     ap.add_argument("--lr", type=float, default=1e-5, help="backbone learning rate; the head uses 100 times this")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--crop-min", type=float, default=0.6,
+                    help="smallest random crop as a share of the picture; 1.0 turns cropping off, so a crop can never cut one animal out of a clean pair")
+    ap.add_argument("--tag", default="", help="suffix for the output names, to keep variants apart")
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
@@ -137,7 +140,7 @@ def main() -> int:
 
     spec = SPECS[args.model]
     norm = T.Normalize(spec["mean"], spec["std"])
-    tf_train = T.Compose([T.RandomResizedCrop(spec["res"], scale=(0.6, 1.0), ratio=(0.85, 1.15)),
+    tf_train = T.Compose([(T.RandomResizedCrop(spec["res"], scale=(args.crop_min, 1.0), ratio=(0.85, 1.15)) if args.crop_min < 1 else T.Resize((spec["res"], spec["res"]))),
                           T.RandomHorizontalFlip(), T.ColorJitter(0.2, 0.2, 0.2, 0.02), T.ToTensor(), norm])
     tf_eval = T.Compose([T.Resize((spec["res"], spec["res"])), T.ToTensor(), norm])
     y_tr = [t["label"] for t in train]
@@ -156,7 +159,8 @@ def main() -> int:
     warm = len(dl_tr)
     base = [g["lr"] for g in opt.param_groups]
     pos_weight = torch.tensor((len(y_tr) - sum(y_tr)) / max(1, sum(y_tr)), device=device)
-    out_dir = pff.OUT.parent / "finetune" / args.model
+    name = args.model + (f"-{args.tag}" if args.tag else "")
+    out_dir = pff.OUT.parent / "finetune" / name
     out_dir.mkdir(parents=True, exist_ok=True)
     curve, best, step, t0 = [], None, 0, time.time()
     for epoch in range(1, args.epochs + 1):
@@ -192,14 +196,14 @@ def main() -> int:
         right = bool(p) == bool(t["label"])
         per_kind[t["kind"]][0] += int(right)
         per_kind[t["kind"]][1] += 1
-    report = {"model": args.model, "resolution": spec["res"], "train": len(train), "validation": len(val),
+    report = {"model": args.model, "tag": args.tag, "crop_min": args.crop_min, "resolution": spec["res"], "train": len(train), "validation": len(val),
               "held_out": len(evals), "curve": curve, "chosen_epoch": best["epoch"],
               "held_out_balanced_accuracy": balanced(pred, y_te),
               "clean_called_clean": float(pred[y_te == 1].mean()), "rejects_called_reject": float((~pred[y_te == 0]).mean()),
               "per_kind_right": {k: {"right": r, "of": n} for k, (r, n) in sorted(per_kind.items())},
               "logits": {t["id"]: float(v) for t, v in zip(evals, lg)},
               "references": {"clip_linear_finished": 0.877, "readout_iteration_4_steps_0_to_19": 0.755}}
-    (pff.OUT / f"finetune_{args.model}.json").write_text(json.dumps(report, indent=2))
+    (pff.OUT / f"finetune_{name}.json").write_text(json.dumps(report, indent=2))
     print(f"chosen epoch {best['epoch']} (validation {best['validation']:.3f}): held out "
           f"{report['held_out_balanced_accuracy']:.3f} (clean called clean {report['clean_called_clean']:.2f}, "
           f"rejects called reject {report['rejects_called_reject']:.2f})", flush=True)
