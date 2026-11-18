@@ -109,6 +109,12 @@ def load_latent(t: dict) -> torch.Tensor:
 def manifest_sampler(args, sampler_t):
     data = json.loads(args.manifest.read_text())
     tiles = [t for t in data["tiles"] if not t.get("check")]
+    if args.frac < 1.0:
+        groups = collections.defaultdict(list)
+        for t in tiles:
+            groups[(t["source"], t["label"])].append(t)
+        rng = random.Random(0)
+        tiles = [t for g in groups.values() for t in rng.sample(g, max(1, round(args.frac * len(g))))]
     if any(t["pair"] == "a_cat__x__a_dog" and 9 <= t.get("seed", -1) <= 16 for t in tiles):
         raise SystemExit("guard: cat x dog seeds 9 to 16 are the result sheet's and may not be trained on")
     if any(t["pair"] in set(data["held_out_pairs"]) for t in tiles):
@@ -171,6 +177,8 @@ def main() -> int:
     ap.add_argument("--aug", action="store_true")
     ap.add_argument("--early-frac", type=float, default=0.0)
     ap.add_argument("--accum", type=int, default=1)
+    ap.add_argument("--frac", type=float, default=1.0,
+                    help="train on this share of the manifest's tiles, kept in proportion by source and label (learning curve)")
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
     args = ap.parse_args()

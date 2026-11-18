@@ -78,3 +78,6 @@ paper/overleaf-iclr/
 
 # each project's data folder (large; canonical copies under /datasets/mmolefe)
 /[0-9]-*/data/
+
+# COCO 2017 annotations and the cat/dog photos pulled from it (rung 2 checker data)
+data/coco-2017/
