@@ -26,3 +26,18 @@ What carried it was data of the right kind: 350 clean SDXL joint drawings took t
 
 What is still wrong: no push has made a clean cat and dog beyond one near miss (iteration 2, seed 11 at strength 100). The push mostly makes two animals of the same kind: two cats or two dogs on most of its two-body tiles, even after the checker saw half its rejects as wrong pairs. The next idea is a push that knows which animal is which, for example a cat-and-dog term that rewards one body read as a cat and the other as a dog, rather than more of the same checker.
 | 6 | identity push: iteration 4 plus two outputs, a cat present and a dog present, trained on the API's per-picture answers; the push follows the sum of all three | readout-catdog-identity | training | pending | pending |
+
+## Finished-picture fine-tunes
+
+Every weight of a pretrained network trained on the 1,603 finished training pictures (`scripts/rung2/finetune_checker.py`), the epoch chosen on a 10% split of training, read on the 220 held-out pictures. This measures how well the clean-pair label can be learned at all, before any noise; it is not yet a push checker. Logits per picture are in `probe/finetune_<run>.json`; the misses are drawn in `probe/finetune-misses/`.
+
+| Run | Held-out (220) | Wrong pairs | Hybrids | Damaged | Clean kept |
+| --- | --- | --- | --- | --- | --- |
+| CLIP ViT-L/14 linear layer only, frozen (reference) | 0.877 | | | | |
+| DINOv2 ViT-B/14, random crops | 0.847 | 35/46 | 19/29 | 13/22 | 107/109 |
+| DINOv2 ViT-B/14, no crops | 0.846 | 37/46 | 21/29 | 13/22 | 103/109 |
+| CLIP ViT-L/14, random crops, seed 0 | **0.900** | 46/46 | 25/29 | 15/22 | 98/109 |
+| CLIP ViT-L/14, random crops, seed 1 | 0.865 | 36/46 | 23/29 | 11/22 | 108/109 |
+| CLIP ViT-L/14, no crops | 0.896 | 42/46 | 24/29 | 11/22 | 107/109 |
+
+Two CLIP seeds differ by 0.035, as large as any change tried, because the 160-picture validation split sometimes picks epoch 1. Most "wrong pair" rejects are a cat and a dog with a third animal, usually a kitten. The damaged rejects are the hardest kind for every run.
