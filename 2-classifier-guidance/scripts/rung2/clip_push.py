@@ -55,3 +55,30 @@ class ClipEstimateChecker(nn.Module):
     def log_prob_both(self, x_t, timestep, eps=None, alpha_bar=None):
         # one output: log p(clean pair); two (the species checker): log p(a clear cat) + log p(a clear dog)
         return F.logsigmoid(self.forward(x_t, timestep, eps, alpha_bar)).sum()
+
+
+class TwoStageHead(nn.Module):
+    """Plan 26's combined push: one checker on the early sampler steps, another on the rest.
+
+    ``early`` (the readout checker, which reads SDXL's own features and moves the layout) answers on sampler
+    steps before ``split``; ``late`` (the species checker, a ClipEstimateChecker with a clear-cat and a
+    clear-dog output) answers from ``split`` on. The step is found from the timestep's place in the sampler's
+    schedule. Called without eps (best-of-2's final pick), the late checker scores the finished latent.
+    """
+    reads_estimate = True
+
+    def __init__(self, early, late, sampler_timesteps, split: int = 10):
+        super().__init__()
+        self.early, self.late, self.split = early, late, split
+        self.order = [int(t) for t in sampler_timesteps]
+
+    def step_of(self, timestep) -> int:
+        return self.order.index(int(timestep.reshape(-1)[0]))
+
+    def forward(self, x_t, timestep, eps=None, alpha_bar=None):
+        return self.late(x_t, timestep, eps, alpha_bar)
+
+    def log_prob_both(self, x_t, timestep, eps=None, alpha_bar=None):
+        if self.step_of(timestep) < self.split:
+            return self.early.log_prob_both(x_t, timestep)
+        return self.late.log_prob_both(x_t, timestep, eps=eps, alpha_bar=alpha_bar)

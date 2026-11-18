@@ -207,6 +207,10 @@ def main() -> int:
     ap.add_argument("--adapter-lambda", type=float, default=1.0, help="adapter strength under the push rows")
     ap.add_argument("--adapter-alone-lambdas", type=float, nargs="+", default=[0.5, 1.0])
     ap.add_argument("--identity-only", action="store_true", help="with --adapter: stop after the identity checks")
+    ap.add_argument("--species", type=Path, default=None,
+                    help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
+                         "--split, this species checker (finetune_species.py best.pt) from --split on")
+    ap.add_argument("--split", type=int, default=10)
     ap.add_argument("--clip", type=Path, default=None,
                     help="push with a fine-tuned CLIP checker (finetune_checker.py or finetune_estimates.py best.pt) "
                          "reading the decoded estimate of the finished picture; --head is ignored")
@@ -246,6 +250,13 @@ def main() -> int:
         head.load_state_dict(state["head"])
         disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
         print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
+        if args.species:
+            from clip_push import ClipEstimateChecker, TwoStageHead
+            ctx.scheduler.set_timesteps(ctx.num_inference_steps)
+            disc = TwoStageHead(disc, ClipEstimateChecker(args.species, ctx.models["vae"], ctx.device),
+                                ctx.scheduler.timesteps, split=args.split)
+            print(f"combined push: readout on steps 0 to {args.split - 1}, species checker {args.species} from step "
+                  f"{args.split}", flush=True)
     else:
         disc = PairDiscriminator(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
         disc.head.load_state_dict(state["head"])
@@ -256,7 +267,10 @@ def main() -> int:
 
     @torch.no_grad()
     def score(latents):
-        return float(disc(latents.float().to(ctx.device), t_last)[0])
+        o = disc(latents.float().to(ctx.device), t_last)
+        if o.ndim == 2:  # the species checker: log p(a clear cat) + log p(a clear dog)
+            o = torch.nn.functional.logsigmoid(o.float()).sum(-1)
+        return float(o[0])
 
     def own_noise(seed):
         return init_latents_for_cell(single.cell_for(seed), ctx)
