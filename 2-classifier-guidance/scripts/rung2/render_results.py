@@ -228,6 +228,9 @@ def main() -> int:
                     help="with --clip: Universal Guidance's backward guidance, this many Adam steps on the estimate of the "
                          "finished latent per pushed step (the strength is then unused; the cap still applies)")
     ap.add_argument("--backward-lr", type=float, default=0.05)
+    ap.add_argument("--eta", type=float, default=0.0,
+                    help="DDIM eta for the pushed and random-push rows (plain, best-of-2 and the canary stay at 0); the "
+                         "sampler noise is fixed per seed and shared by the guided and random rows")
     ap.add_argument("--cap-late", type=float, default=None,
                     help="a second cap on the push from sampler step --cap-late-from on; --push-cap holds before it")
     ap.add_argument("--cap-late-from", type=int, default=10)
@@ -332,7 +335,7 @@ def main() -> int:
     base_record = json.loads((base / "result.json").read_text()) if base else None
     if base_record and base_record["head"] != str(args.head):
         raise SystemExit("guard: reused baselines were picked by a different discriminator")
-    record = {"backward_steps": args.backward_steps, "backward_lr": args.backward_lr, "prompts": args.prompts, "push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
+    record = {"eta": args.eta, "backward_steps": args.backward_steps, "backward_lr": args.backward_lr, "prompts": args.prompts, "push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
               "window": args.window, "recurrence": args.recurrence,
               "recurrence_window": args.recurrence_window, "reused_baselines": str(base) if base else None,
               "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
@@ -382,6 +385,7 @@ def main() -> int:
                 push_cap=args.push_cap, guidance_window=tuple(args.window) if args.window else None,
                 push_cap_late=args.cap_late, push_cap_late_from=args.cap_late_from,
                 backward_steps=args.backward_steps, backward_lr=args.backward_lr,
+                eta=args.eta, eta_generator=torch.Generator(device="cpu").manual_seed(60_000 + seed),
                 **recur(seed, s_, 1), **common))
             write_decoded_image(guided.image, tile(seed, f"s{s_:g}"))
             norms = guided.extras["applied_norm_per_step"]
@@ -389,7 +393,8 @@ def main() -> int:
             rg = torch.Generator(device="cpu").manual_seed(30_000 + 100 * seed + int(s_))
             rand, d["seconds"][f"r{s_:g}"] = timed(lambda: run_poe_classifier_guided(
                 init_latents=init, euler_init_noise_sigma=sigma, random_push_norms=norms,
-                random_generator=rg, **recur(seed, s_, 2), **common))
+                random_generator=rg, eta=args.eta, eta_generator=torch.Generator(device="cpu").manual_seed(60_000 + seed),
+                **recur(seed, s_, 2), **common))
             write_decoded_image(rand.image, tile(seed, f"r{s_:g}"))
             ratio = [r / n if n > 0 else 1.0 for r, n in zip(rand.extras["applied_norm_per_step"], norms)]
             capped = guided.extras["capped_per_step"]

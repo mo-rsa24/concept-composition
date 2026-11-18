@@ -88,6 +88,8 @@ def run_poe_classifier_guided(
     recurrence_window: tuple[int, int] | None = None,
     recurrence_generator: torch.Generator | None = None,
     backward_steps: int = 0,
+    eta: float = 0.0,
+    eta_generator: torch.Generator | None = None,
     backward_lr: float = 0.05,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
@@ -247,7 +249,14 @@ def run_poe_classifier_guided(
                     float(step_index) / float(num_inference_steps),
                     int(timestep.item()),
                 )
-                latents = ddim_prev_from_x0_eps(
+                if eta > 0:
+                    # a partly random sampler (DDIM, Song et al. eq. 12), its noise fixed per seed by eta_generator,
+                    # so each seed is still one trajectory; the MNIST step 7b loop found eta 1.0 lifted the push
+                    from poe_repair.experiments.twisted_smc.sampler import ddim_step_eta
+                    latents, _ = ddim_step_eta(scheduler=scheduler, timestep=timestep, step_index=step_index,
+                                               x_t=latents, x0=x0, eps=eps_p, eta=float(eta), generator=eta_generator)
+                else:
+                    latents = ddim_prev_from_x0_eps(
                     scheduler=scheduler, timestep=timestep, step_index=step_index,
                     x0=x0, eps=eps_p,
                 )
@@ -272,6 +281,7 @@ def run_poe_classifier_guided(
             "adapter_lambda": None if adapter_lambda is None else float(adapter_lambda),
             "recurrence": int(recurrence),
             "backward_steps": int(backward_steps),
+            "eta": float(eta),
             "backward_lr": float(backward_lr),
             "push_cap_late": None if push_cap_late is None else float(push_cap_late),
             "push_cap_late_from": int(push_cap_late_from),
