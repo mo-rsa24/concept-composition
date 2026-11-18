@@ -62,6 +62,8 @@ def main() -> int:
     ap.add_argument("--seeds", type=int, nargs="+", default=[1, 2, 3, 4, 9, 10, 11, 12])
     ap.add_argument("--strengths", type=float, nargs="+", default=[10, 30, 100])
     ap.add_argument("--head", type=Path, default=HEAD)
+    ap.add_argument("--attention", action="store_true",
+                    help="the layout push of attention_push.py instead of a trained head; --head is ignored")
     ap.add_argument("--readout", action="store_true",
                     help="--head is a train_readout_pair.py checkpoint; SDXL is read with the joint prompt when it was trained so")
     ap.add_argument("--push-cap", type=float, default=PUSH_CAP_FRACTION)
@@ -89,8 +91,13 @@ def main() -> int:
                   guidance_scale=ctx.guidance_scale, num_inference_steps=ctx.num_inference_steps,
                   height=1024, width=1024, device=ctx.device, dtype=ctx.dtype)
 
-    state = torch.load(args.head, map_location="cpu")
-    if args.readout:
+    state = {} if args.attention else torch.load(args.head, map_location="cpu")
+    if args.attention:
+        from attention_push import AttentionSeparation
+        disc = AttentionSeparation(ctx.models["unet"], ctx.models["tokenizer"], seq_a, pool_a, seq_b, pool_b)
+        args.head = Path("attention-separation")
+        print("layout push: minus the correlation of the cat expert's 'cat' map and the dog expert's 'dog' map", flush=True)
+    elif args.readout:
         from train_readout_pair import PairHead, ReadoutPairClassifier
         seq_r, pool_r = enc("a cat and a dog") if state.get("pair_prompt") else (seq_e, pool_e)
         head = PairHead()
