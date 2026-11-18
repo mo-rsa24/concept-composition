@@ -32,14 +32,19 @@ On seeds 3301 to 3332 (never used for training, evaluation or tuning):
 
 ## Answers
 
-**Q1: support** (draft calls by eye at half size, `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-general/views/`).
+**Q1: support.** Calls by eye from full-size tiles (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-general/views/full/`).
 
 | | Plain PoE | Random push, same size | The recipe |
 | --- | --- | --- | --- |
 | Separate | 1 of 32 | 1 of 32 | 28 of 32 |
-| Clean or near-clean | 0 of 32 | 0 of 32 | 17 of 32 (11 clean) |
+| Clean or near-clean | 0 of 32 | 0 of 32 | 14 of 32 (9 clean) |
 
-Clean: 3304, 3305, 3306, 3307, 3311, 3314, 3320, 3322, 3323, 3329, 3332. Near-clean: 3302, 3308, 3321, 3324, 3328, 3330.
-Separate but two of a kind: two cats on 3313 and 3327, two dogs on 3317 and 3331 (3301 nearly). Not separate: 3309 and
-3326 (the second animal a flat cutout or shape), 3316 (one animal in a painted style), 3325 (one cat). The one plain and
-random separation (3313) is a seed where plain PoE already drew two animals.
+| Outcome | Seeds |
+| --- | --- |
+| Clean | 3306, 3307, 3311, 3314, 3320, 3322, 3323, 3329, 3332 |
+| Near-clean (one small flaw) | 3304 (a blue patch on the dog), 3305 (a flat dog ear), 3308 (a fox-faced pup), 3321 (a dog-muzzled cat), 3330 (a stray red object) |
+| Two bodies, a face borrowed or a head hidden | 3301, 3302, 3303, 3310, 3312, 3315, 3317, 3318, 3319, 3324, 3328 |
+| Two of a kind | 3313 and 3327 two cats, 3331 two dogs |
+| Not separate | 3309 and 3326 (the second animal a flat cutout or shape), 3316 (one painted cat), 3325 (one cat beside a rock) |
+
+The one plain and random separation (3313) is a seed where plain PoE already drew two animals.
