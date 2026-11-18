@@ -177,3 +177,7 @@ A checker trained only on cats and dogs separates two things on new pairs. It ca
 | pushed, clean (eye: clean or near-clean; scorer: faithful pair) | 14 | 5 | 23 of 32 |
 
 Two bodies agree on 91% of seeds; the three disagreements are a flat cutout counted as a body (3309, 3326) and a cat's head on a dog's body counted as one (3319). The scorer's "faithful pair" is stricter than the eye and never more lenient: all 5 are among the eye's 14, and each of the 9 it rejects names a borrowed feature (cat whiskers on the dog, a dog with a cat-like face, a kitten with a puppy's muzzle). It stands in for eye calls on large sheets as a count of two bodies and a conservative count of clean pairs; plain PoE and the random push give 0 faithful pairs of 32.
+
+## The readout checker trained on PoE's own states (plan 25), final
+
+`readout-catdog-traj`, iteration 4's settings plus half of each batch from the 1,972 labelled training runs' saved states: mean over sampler steps 0 to 10 on 195 held-out joint runs 0.730 at step 2,000, against 0.677 for iteration 4 (0.59 against 0.51 at step 0, 0.73 against 0.64 at step 4). In between Q1's marks: +0.053 over iteration 4, under 0.75. The older check on finished pictures with noise added falls to 1 of 20 steps. Its push sheets follow.
