@@ -244,6 +244,9 @@ def main() -> int:
     ap.add_argument("--traj-frac", type=float, default=0.0,
                     help="share of each batch's slots filled with a saved state of a run whose finished picture has that "
                          "slot's label; the state goes in as saved, at its own step, with no noise added")
+    ap.add_argument("--trunk-lora", type=int, default=0,
+                    help="rank of LoRA adapters on a separate copy of SDXL's down and middle blocks (attention q, k, v, out), "
+                         "trained with the head so the features the checker reads can adapt; 0 keeps SDXL frozen")
     ap.add_argument("--steps", type=int, default=3000)
     ap.add_argument("--eval-every", type=int, default=500)
     args = ap.parse_args()
@@ -273,7 +276,17 @@ def main() -> int:
     print(json.dumps(split), flush=True)
 
     seq_e, pool_e = encode_prompt_sdxl("", models=ctx.models, device=ctx.device, dtype=ctx.dtype)
-    reader = Readout(ctx.models["unet"], seq_e, pool_e).to(ctx.device)
+    lora_params, clf_unet = [], None
+    if args.trunk_lora:
+        from diffusers import UNet2DConditionModel
+        from poe_repair.config import RunConfig
+        from poe_repair.experiments.presence_head.dog_classifier import attach_trunk_adapters
+        clf_unet = UNet2DConditionModel.from_pretrained(
+            RunConfig().model_id, subfolder="unet", torch_dtype=ctx.dtype, use_safetensors=True).to(ctx.device)
+        clf_unet.enable_gradient_checkpointing()
+        clf_unet, lora_params = attach_trunk_adapters(clf_unet, rank=args.trunk_lora, alpha=args.trunk_lora)
+        print(f"trunk LoRA rank {args.trunk_lora}: {sum(p.numel() for p in lora_params):,} adapter weights", flush=True)
+    reader = Readout(clf_unet if clf_unet is not None else ctx.models["unet"], seq_e, pool_e).to(ctx.device)
     prompts = {}
 
     def read(x, t, pairs):
@@ -285,7 +298,10 @@ def main() -> int:
         return reader(x, t, torch.cat([prompts[p][0] for p in pairs]), torch.cat([prompts[p][1] for p in pairs]))
     presence = json.loads(args.presence.read_text()) if args.presence else None
     head = PairHead(n_out=3 if presence else 1).to(ctx.device)
-    opt = torch.optim.AdamW(head.parameters(), lr=3e-4, weight_decay=1e-2)
+    groups = [{"params": head.parameters(), "lr": 3e-4}]
+    if lora_params:
+        groups.append({"params": lora_params, "lr": 1e-4})
+    opt = torch.optim.AdamW(groups, weight_decay=1e-2)
 
     tiles = [t for t in json.loads(args.eval.read_text())["tiles"] if t["check"]]
     z_check = torch.cat([load_latent(t).float() for t in tiles])
@@ -410,7 +426,8 @@ def main() -> int:
                 tc = traj_check()
                 print(f"step {step:5d}  " + show_traj(tc), flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt,
-                        "heads": head.n_out},
+                        "heads": head.n_out, "trunk_lora": args.trunk_lora,
+                        "lora": {n: q.detach().cpu() for n, q in clf_unet.named_parameters() if "lora_" in n} if clf_unet is not None else None},
                        out / f"head_step_{step:06d}.pt")
             head.train()
             if step == args.steps:
@@ -426,7 +443,7 @@ def main() -> int:
         y = torch.tensor([1.0] * 4 + [0.0] * 4, device=ctx.device)
         for _ in range(args.accum):
             x, t, pairs, ids = batch(ctx.scheduler, ctx.device, ctx.dtype)
-            with torch.no_grad():
+            with (torch.enable_grad() if lora_params else torch.no_grad()):
                 feats = read(x, t, pairs)
             o = head(feats)
             if o.ndim == 1:

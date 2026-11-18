@@ -264,7 +264,19 @@ def main() -> int:
         seq_r, pool_r = enc(f"{args.prompts[0]} and {args.prompts[1]}") if state.get("pair_prompt") else (seq_e, pool_e)
         head = PairHead(n_out=state.get("heads", 1))
         head.load_state_dict(state["head"])
-        disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
+        reader_unet = ctx.models["unet"]
+        if state.get("trunk_lora"):
+            from diffusers import UNet2DConditionModel
+            from poe_repair.config import RunConfig
+            from poe_repair.experiments.presence_head.dog_classifier import attach_trunk_adapters
+            reader_unet = UNet2DConditionModel.from_pretrained(
+                RunConfig().model_id, subfolder="unet", torch_dtype=ctx.dtype, use_safetensors=True).to(ctx.device)
+            reader_unet, _ = attach_trunk_adapters(reader_unet, rank=state["trunk_lora"], alpha=state["trunk_lora"])
+            missing = reader_unet.load_state_dict(state["lora"], strict=False)
+            assert not missing.unexpected_keys, missing.unexpected_keys[:3]
+            reader_unet.requires_grad_(False)
+            print(f"checker reads a separate SDXL copy with its trunk LoRA (rank {state['trunk_lora']})", flush=True)
+        disc = ReadoutPairClassifier(reader_unet, seq_r, pool_r, head.float().eval()).to(ctx.device)
         print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
         if args.box_species:
             from clip_push import BoxSpeciesHead, TwoStageHead
