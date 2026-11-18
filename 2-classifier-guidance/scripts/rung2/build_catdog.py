@@ -16,6 +16,7 @@ A training list is the base plus the sources named with --sources, so each loop 
                  passes it under the strict and real-only rules; other candidates, two-or-more of one
                  animal, and single animals are rejects
     more2        joint drawings on seeds 251 to 600 (render_more.py, more_catdog2.json), strict rule
+    more3        joint drawings on seeds 751 to 1,250 (render_more.py, more_catdog3.json), strict rule
     openimages   Open Images V7 photos (openimages_catdog.py), the same rules as coco
     laion        Re-LAION-2B photos whose caption names a cat and a dog (laion_catdog.py): clean when the API
                  passes them; rejects only where the API saw at least one real cat or dog, so pet products
@@ -39,6 +40,7 @@ ROOT = HERE.parents[2]
 RESULTS = ROOT / "2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog"
 RUNG2 = "outputs/classifier_guidance_ladder/rung2"
 MORE2 = f"{RUNG2}/more/more_catdog2"
+MORE3 = f"{RUNG2}/more/more_catdog3"
 
 
 def jsonl(name):
@@ -70,14 +72,14 @@ def photo_source(name, folder, labels, stage_index=None):
     return out
 
 
-def drawings(rows, seeds):
+def drawings(rows, seeds, name="more2", folder=MORE2):
     out = []
     for r in rows:
         if "verdict" not in r or r["seed"] not in seeds:
             continue
         real = r["verdict"] == "faithful pair"
-        out.append(tile(f"more2-{r['id']}", None, "more2", real, r["verdict"], seed=r["seed"],
-                        latent=f"{MORE2}/final/{r['id']}.pt") | {"finals": f"{MORE2}/finals/{r['id']}.jpg"})
+        out.append(tile(f"{name}-{r['id']}", None, name, real, r["verdict"], seed=r["seed"],
+                        latent=f"{folder}/final/{r['id']}.pt") | {"finals": f"{folder}/finals/{r['id']}.jpg"})
     for t in out:
         del t["picture"]
     return out
@@ -85,7 +87,7 @@ def drawings(rows, seeds):
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--sources", nargs="*", default=[], choices=["coco", "more2", "openimages", "laion"])
+    ap.add_argument("--sources", nargs="*", default=[], choices=["coco", "more2", "more3", "openimages", "laion"])
     ap.add_argument("--tag", required=True)
     args = ap.parse_args()
     train_v4 = json.loads((HERE / "training_set_v4.json").read_text())
@@ -98,6 +100,8 @@ def main() -> int:
         train += photo_source("coco", "coco-2017", "coco_clean_real.jsonl")
     if "more2" in args.sources:
         train += drawings(more2, TRAIN_SEEDS)
+    if "more3" in args.sources:
+        train += drawings(jsonl("more_catdog3.jsonl"), range(751, 1251), "more3", MORE3)
     if "openimages" in args.sources:
         train += photo_source("openimages", "open-images-v7", "openimages_clean.jsonl", stage_index=True)
     if "laion" in args.sources:
