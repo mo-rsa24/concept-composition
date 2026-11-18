@@ -176,9 +176,14 @@ def run_poe_classifier_guided(
             with torch.enable_grad():
                 z = latents.detach().float().requires_grad_(True)
                 t_batch = timestep.reshape(1).to(device=device).expand(z.shape[0])
-                log_p = head.log_prob_both(z, t_batch)
+                alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
+                if getattr(head, "reads_estimate", False):
+                    # a picture checker: it decodes the estimate of the finished picture from x_t and
+                    # this step's product prediction, held fixed (rung2/clip_push.py)
+                    log_p = head.log_prob_both(z, t_batch, eps=eps_p.detach().float(), alpha_bar=alpha_bar)
+                else:
+                    log_p = head.log_prob_both(z, t_batch)
                 grad = torch.autograd.grad(log_p, z)[0]
-            alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
             sigma_t = torch.sqrt(1.0 - alpha_bar)
             push, push_before_cap, capped = capped_push(
                 float(strength) * sigma_t * grad, eps_p, push_cap)

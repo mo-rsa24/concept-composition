@@ -207,6 +207,9 @@ def main() -> int:
     ap.add_argument("--adapter-lambda", type=float, default=1.0, help="adapter strength under the push rows")
     ap.add_argument("--adapter-alone-lambdas", type=float, nargs="+", default=[0.5, 1.0])
     ap.add_argument("--identity-only", action="store_true", help="with --adapter: stop after the identity checks")
+    ap.add_argument("--clip", type=Path, default=None,
+                    help="push with a fine-tuned CLIP checker (finetune_checker.py or finetune_estimates.py best.pt) "
+                         "reading the decoded estimate of the finished picture; --head is ignored")
     args = ap.parse_args()
     global OUT
     OUT = RUNG2 / args.out_name
@@ -225,8 +228,13 @@ def main() -> int:
                   guidance_scale=ctx.guidance_scale, num_inference_steps=ctx.num_inference_steps,
                   height=1024, width=1024, device=ctx.device, dtype=ctx.dtype)
 
-    state = {} if args.attention else torch.load(args.head, map_location="cpu")
-    if args.attention:
+    state = {} if (args.attention or args.clip) else torch.load(args.head, map_location="cpu")
+    if args.clip:
+        from clip_push import ClipEstimateChecker
+        disc = ClipEstimateChecker(args.clip, ctx.models["vae"], ctx.device)
+        args.head = args.clip
+        print(f"CLIP push: {args.clip} (epoch {disc.epoch}) reads the decoded estimate of the finished picture", flush=True)
+    elif args.attention:
         from attention_push import AttentionSeparation
         disc = AttentionSeparation(ctx.models["unet"], ctx.models["tokenizer"], seq_a, pool_a, seq_b, pool_b)
         args.head = Path("attention-separation")
