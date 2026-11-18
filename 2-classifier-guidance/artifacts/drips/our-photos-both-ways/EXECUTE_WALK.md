@@ -6,12 +6,15 @@ share this working tree).
 
 ## Where the walk is
 
-Pieces 1 and 2 are done. The released-model arm's product uses the released classifier's cat and dog
-classes (the reader's `a`). One chain on `mscluster108` since 10:19 UTC draws 512 product draws on
-both cards, trains the pair-aware classifier and draws the 256 px sheet, landing about 14:05 UTC.
-Both 64 px trainings land about 16:20 UTC; then waiters on `mscluster111` and `112` draw, train each
-model's pair-aware classifier and draw its sheet. The bar on the 64 px sheets is read against the
-stronger separate-label scale, with each scale's comparison reported beside it.
+Stopped by a storage outage. `/datasets` returns "Input/output error" on `mscluster84`, `108` and
+`111` (2026-11-18 04:02 UTC, `ls` and `df` both fail), and every output of this walk lives there. W&B
+marks both 64 px trainings failed with their last heartbeat at 2026-11-17 13:15 UTC: `wubhxhse` (no
+both-animal images) at step 32,600, `pnwlwh0f` (all images) at step 27,600; their last scheduled
+checkpoints are steps 30,000 and 25,000. No process of this walk runs on 108, 111 or 112. The 256 px
+chain's draws were due to finish near 12:15 UTC and its pair-aware training near 13:25 UTC, so the
+256 px sheet most likely never ran. To resume once `/datasets` reads again: check which checkpoints
+and draws survived, restart each training with `--resume` from its last checkpoint and
+`--steps 50000`, and rerun the pair-aware classifier and the sheet on the 512 draws already made.
 
 ## The stop point
 
@@ -90,11 +93,11 @@ Seed 1, and one image per label, picked in piece 1.
 
 | Id | Kind | What it serves | State |
 |---|---|---|---|
-| W&B `wubhxhse` | run, `mscluster111` GPU 0, PID 283386, log `classifier_guidance_photos/logs/train_64_no_both.log` | 1.2, the 64 px model without both-animal images | running since 07:35 UTC |
-| chain PID 228025 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3 and 1.4, released-classifier product draws, pair-aware classifier, the 256 px sheet | running since 10:19 UTC, sheet about 14:05 UTC |
-| waiter PID 285185 | `piece5_64.sh` ARM `no_both` on `mscluster111`, log `classifier_guidance_photos/logs/piece5_64_no_both.log` | 1.5, draws, pair-aware classifier and sheet for the model without both-animal images | waiting since 08:41 UTC |
-| waiter PID 525583 | `piece5_64.sh` ARM `all` on `mscluster112`, log `classifier_guidance_photos/logs/piece5_64_all.log` | 1.5, the same for the model on all images | waiting since 08:41 UTC |
-| W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | running since 07:35 UTC |
+| W&B `wubhxhse` | run, `mscluster111` GPU 0, PID 283386, log `classifier_guidance_photos/logs/train_64_no_both.log` | 1.2, the 64 px model without both-animal images | failed 2026-11-17 13:15 UTC, storage outage |
+| chain PID 228025 | `piece3_256.sh` on `mscluster108` GPUs 0 and 1, log `classifier_guidance_photos/logs/piece3_256.log` | 1.3 and 1.4, released-classifier product draws, pair-aware classifier, the 256 px sheet | no process left on 2026-11-18; outcome unreadable while `/datasets` is down |
+| waiter PID 285185 | `piece5_64.sh` ARM `no_both` on `mscluster111`, log `classifier_guidance_photos/logs/piece5_64_no_both.log` | 1.5, draws, pair-aware classifier and sheet for the model without both-animal images | no process left on 2026-11-18 |
+| waiter PID 525583 | `piece5_64.sh` ARM `all` on `mscluster112`, log `classifier_guidance_photos/logs/piece5_64_all.log` | 1.5, the same for the model on all images | no process left on 2026-11-18 |
+| W&B `pnwlwh0f` | run, `mscluster112` GPU 0, PID 522361, log `classifier_guidance_photos/logs/train_64_all.log` | 1.2, the 64 px model on all images | failed 2026-11-17 13:15 UTC, storage outage |
 
 ## Closing pass owed
 
