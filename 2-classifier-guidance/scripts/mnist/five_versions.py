@@ -178,7 +178,8 @@ def main():
 
 def draw(out, a, b, canv, counts, n_match):
     def best_s(kind):
-        return max((s for s in S[1:]), key=lambda s: counts[f"{kind} s={s:g}|{a}&{b}"][RIGHT])
+        have = [s for s in S[1:] if f"{kind} s={s:g}|{a}&{b}" in counts]
+        return max(have, key=lambda s: counts[f"{kind} s={s:g}|{a}&{b}"][RIGHT])
     sp = best_s("pair")
     cols = [("plain product", "plain"), (f"pair-aware, s = {sp:g} (its best)", f"pair s={sp:g}"),
             (f"separate-label, s = {best_s('separate'):g} (its best)", f"separate s={best_s('separate'):g}"),
