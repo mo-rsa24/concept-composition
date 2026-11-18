@@ -140,3 +140,16 @@ The recipe unchanged (iteration 6's readout push at strength 30, capped at 0.3, 
 ## Corrector steps on the early recipe
 
 The early recipe (cap 0.3, steps 0 to 15) with each of steps 0 to 15 taken 3 times, re-noising between repeats (`result-sheet-catdog-cap0.3-early-corrector`), beside the recipe without them: `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/corrector-compare.png`. Draft calls at tile size: two separate animals on about the same seeds, clean or near-clean on about 3 of 8 (10 and 11 at strength 30, 16), against 4 without corrector steps. The corrector adds damage: flat cutouts and shapes as the second animal (seed 9 a stone statue, seed 10 at strength 100 flat colour planes), stronger oversaturation at strength 100, and one animal on seed 13 at 100. The random push with the same corrector steps stays one animal and turns 4 of 8 seeds into line drawings, the same drift to illustration the Langevin corrector grid found. More push per noise level does not add clean pairs.
+
+## The early push at cap 0.2 on the 32 new seeds
+
+The recipe with the cap at 0.2 instead of 0.3 (`result-sheet-catdog-general-cap0.2`), each seed beside its cap-0.3 picture: `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-general-cap0.2/views/`. Calls by eye at 640 px.
+
+| | Cap 0.3 | Cap 0.2 |
+| --- | --- | --- |
+| Separate cat and dog | 28 of 32 | 22 of 32 |
+| Clean or near-clean | 14 of 32 (9 clean) | 10 of 32 (5 clean: 3307, 3315, 3319, 3320, 3325) |
+| Two of a kind | 3 | 4 (3312, 3317, 3327, 3331) |
+| Not separate | 4 | 10, including an object as the second animal on 4 (a chrome cat on 3311, a black cat statue on 3313, a cloth cat house on 3326, a paper cone on 3330) |
+
+The smaller cap does not remove the cutouts; it trades separations for single animals and objects. Cap 0.3 stays. The two caps give clean pairs on partly different seeds (cap 0.2 adds 3315, 3316, 3319, 3324, 3325), so the push's size changes which seeds succeed, not only how many.
