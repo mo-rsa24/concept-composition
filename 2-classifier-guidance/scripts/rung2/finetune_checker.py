@@ -8,7 +8,7 @@ reaches about 0.95, the labels are learnable and the noise of the early steps is
 if it stays near 0.88, the labels themselves are the limit.
 
 Models (both cached on the cluster): DINOv2 ViT-B/14 with registers at 448 x 448 (torch hub, local), and the
-CLIP ViT-L/14 vision tower at 224 x 224. The head reads the class token (and, for DINOv2, the mean patch token).
+CLIP ViT-L/14 vision tower at 224 x 224; clip-bigg is the LAION CLIP ViT-bigG/14 vision tower at 224 x 224. The head reads the class token (and, for DINOv2, the mean patch token).
 
 Data: training_set_catdog_more23.json (1,603 pictures, 576 clean); 10% of it, stratified by label, is held
 back to choose the epoch. eval_set_catdog_v2.json's 220 pictures (109 clean, 111 rejects) are scored every
@@ -44,6 +44,7 @@ import probe_frozen_features as pff  # noqa: E402
 SPECS = {
     "dinov2": {"res": 448, "mean": (0.485, 0.456, 0.406), "std": (0.229, 0.224, 0.225)},
     "clip": {"res": 224, "mean": (0.48145466, 0.4578275, 0.40821073), "std": (0.26862954, 0.26130258, 0.27577711)},
+    "clip-bigg": {"res": 224, "mean": (0.48145466, 0.4578275, 0.40821073), "std": (0.26862954, 0.26130258, 0.27577711)},
 }
 
 
@@ -57,7 +58,10 @@ class Checker(nn.Module):
             width = 2 * self.net.embed_dim
         else:
             from transformers import CLIPVisionModel
-            self.net = CLIPVisionModel.from_pretrained("openai/clip-vit-large-patch14")
+            hf = {"clip": "openai/clip-vit-large-patch14", "clip-bigg": "laion/CLIP-ViT-bigG-14-laion2B-39B-b160k"}[name]
+            self.net = CLIPVisionModel.from_pretrained(hf)
+            if name == "clip-bigg":  # 1.8 billion weights: recompute activations instead of storing them
+                self.net.gradient_checkpointing_enable()
             width = self.net.config.hidden_size
         self.head = nn.Sequential(nn.LayerNorm(width), nn.Dropout(0.1), nn.Linear(width, 1))
 
