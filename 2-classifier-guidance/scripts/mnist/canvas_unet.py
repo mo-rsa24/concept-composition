@@ -183,12 +183,14 @@ def start_noise(seeds, device):
                         for s in seeds]).to(device)
 
 
-def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda"):
-    """DDIM eta 0. push_fn(x, t, eps) -> push of eps's shape, added to eps after the cap.
+def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda", eta=0.0):
+    """DDIM; eta 0 is deterministic, eta > 0 adds fresh noise each step from a fixed per-seed stream.
+    push_fn(x, t, eps) -> push of eps's shape, added to eps after the cap.
 
     Returns the finished canvases in [-1, 1] and, per step, the fraction of samples where the cap fired.
     """
     x = start_noise(seeds, device)
+    gens = [torch.Generator().manual_seed(1_000_003 + int(s)) for s in seeds] if eta > 0 else None
     ts = ddim_timesteps(steps).to(device)
     abar = ABAR.to(device)
     fired_log = []
@@ -202,7 +204,12 @@ def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device=
         a = abar[t]
         a_prev = abar[ts[i + 1]] if i + 1 < len(ts) else torch.tensor(1.0, device=device)
         x0 = (x - (1 - a).sqrt() * eps) / a.sqrt()
-        x = a_prev.sqrt() * x0 + (1 - a_prev).sqrt() * eps
+        if eta > 0 and i + 1 < len(ts):
+            sig = eta * ((1 - a_prev) / (1 - a)).sqrt() * (1 - a / a_prev).sqrt()
+            z = torch.stack([torch.randn(x.shape[1:], generator=gg) for gg in gens]).to(device)
+            x = a_prev.sqrt() * x0 + (1 - a_prev - sig ** 2).clamp_min(0).sqrt() * eps + sig * z
+        else:
+            x = a_prev.sqrt() * x0 + (1 - a_prev).sqrt() * eps
     return x, fired_log
 
 

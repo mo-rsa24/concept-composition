@@ -48,7 +48,7 @@ RIGHT = "two clear, right digits"
 def load_head(path, dev):
     ck = torch.load(path, map_location=dev, weights_only=False)
     pair_aware = ck["kind"] == "pair"
-    h = Head(1 if pair_aware else 10, pair_aware, film=ck.get("film", False)).to(dev).eval()
+    h = Head(1 if pair_aware else 10, pair_aware, film=ck.get("film", False), expert=ck.get("expert", False)).to(dev).eval()
     h.load_state_dict(ck["head"])
     for p in h.parameters():
         p.requires_grad_(False)

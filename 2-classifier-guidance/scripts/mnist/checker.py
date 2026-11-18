@@ -74,12 +74,13 @@ def time_features(t):
 
 
 class Head(nn.Module):
-    def __init__(self, out, pair_aware, film=False):
+    def __init__(self, out, pair_aware, film=False, expert=False):
         super().__init__()
-        self.pair_aware, self.use_film = pair_aware, film
+        self.pair_aware, self.use_film, self.expert = pair_aware, film, expert
+        c = 256 if expert else 128          # expert: features asked with each digit, side by side
         self.film = nn.Linear(64, 2 * 128) if film else None
-        self.down = nn.Conv2d(128, 128, 3, stride=2, padding=1)
-        self.body = nn.Sequential(nn.Conv2d(256, 128, 3, padding=1), nn.SiLU(),
+        self.down = nn.Conv2d(c, c, 3, stride=2, padding=1)
+        self.body = nn.Sequential(nn.Conv2d(2 * c, 128, 3, padding=1), nn.SiLU(),
                                   nn.Conv2d(128, 128, 3, padding=1), nn.SiLU())
         self.pair = nn.Embedding(10, 64) if pair_aware else None
         self.mlp = nn.Sequential(nn.Linear(256 + 16 + (64 if pair_aware else 0), 256), nn.SiLU(),
@@ -105,6 +106,16 @@ def features(unet, x, t):
     return unet(x, t, torch.full((x.shape[0],), NULL, device=x.device), features=True)[1]
 
 
+def features_pair(unet, x, t, pair):
+    """The decoder features asked with digit a and with digit b, concatenated per level."""
+    f = unet(torch.cat([x, x]), torch.cat([t, t]), torch.cat([pair[:, 0], pair[:, 1]]), features=True)[1]
+    return [torch.cat(level.chunk(2), 1) for level in f]
+
+
+def head_feats(unet, head, x, t, pair):
+    return features_pair(unet, x, t, pair) if getattr(head, "expert", False) else features(unet, x, t)
+
+
 # ---------------------------------------------------------------- the pushes
 
 def pair_push(unet, head, a, b, s):
@@ -114,7 +125,7 @@ def pair_push(unet, head, a, b, s):
         with torch.enable_grad():
             xx = x.detach().requires_grad_(True)
             pair = torch.tensor([[a, b]], device=x.device).expand(x.shape[0], 2)
-            logit = head(features(unet, xx, t), t, pair)[:, 0]
+            logit = head(head_feats(unet, head, xx, t, pair), t, pair)[:, 0]
             g, = torch.autograd.grad(logit.sum(), xx)
         inside = (logit.detach().abs() < LOGIT_CLIP).float()[:, None, None, None]
         return -s * (1 - ABAR.to(x.device)[t]).sqrt()[:, None, None, None] * g * inside
@@ -138,7 +149,7 @@ def score_clean(unet, head, x, a, b):
     """The pair-aware checker's log-odds on finished canvases, at the last sampler step (best-of-N)."""
     t = torch.full((x.shape[0],), int(STEPS[-1]), device=x.device)
     pair = torch.tensor([[a, b]], device=x.device).expand(x.shape[0], 2)
-    return head(features(unet, x, t), t, pair)[:, 0]
+    return head(head_feats(unet, head, x, t, pair), t, pair)[:, 0]
 
 
 # ---------------------------------------------------------------- the draws
@@ -278,7 +289,7 @@ def train(args):
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
     kept, d = build_set(args, rng)
     pair_aware = args.kind == "pair"
-    head = Head(1 if pair_aware else 10, pair_aware, film=args.film).to(dev)
+    head = Head(1 if pair_aware else 10, pair_aware, film=args.film, expert=args.expert_feats and pair_aware).to(dev)
     opt = torch.optim.Adam(head.parameters(), 1e-3)
     flips = {k: rng.random(len(v[0])) < args.flip for k, v in kept.items()}
     sizes = {k: len(v[0]) for k, v in kept.items()}
@@ -317,7 +328,7 @@ def train(args):
         a = ABAR.to(dev)[t][:, None, None, None]
         xt = a.sqrt() * x0 + (1 - a).sqrt() * torch.randn(x0.shape, generator=gen).to(dev)
         with torch.no_grad():
-            feats = features(unet, xt, t)
+            feats = head_feats(unet, head, xt, t, pair) if pair_aware else features(unet, xt, t)
         w = LAMBDA.to(dev)[k.to(dev)]
         if pair_aware:
             logit = head(feats, t, pair)[:, 0]
@@ -333,7 +344,7 @@ def train(args):
             print(json.dumps({"step": step, "loss": round(loss.item(), 4)}), flush=True)
 
     args.out.mkdir(parents=True, exist_ok=True)
-    torch.save({"head": head.state_dict(), "kind": args.kind, "film": args.film,
+    torch.save({"head": head.state_dict(), "kind": args.kind, "film": args.film, "expert": head.expert,
                 "args": {k: str(v) for k, v in vars(args).items()}},
                args.out / "head.pt")
     res = {"kind": args.kind, "data_frac": args.data_frac, "flip": args.flip, "pool_sizes": sizes}
@@ -355,7 +366,8 @@ def held_accuracy(args, unet, head, d):
         t = torch.full((len(y),), int(STEPS[k]), device=dev)
         a = ABAR.to(dev)[t][:, None, None, None]
         xt = a.sqrt() * x0 + (1 - a).sqrt() * torch.randn(x0.shape, generator=gen).to(dev)
-        logit = torch.cat([head(features(unet, xt[i:i + 512], t[i:i + 512]), t[i:i + 512], pair[i:i + 512])[:, 0]
+        logit = torch.cat([head(head_feats(unet, head, xt[i:i + 512], t[i:i + 512], pair[i:i + 512]), t[i:i + 512],
+                                pair[i:i + 512])[:, 0]
                            for i in range(0, len(y), 512)]).cpu().numpy()
         pred = logit > 0
         tpr = float(pred[y == 1].mean())
@@ -385,6 +397,7 @@ def main():
     ap.add_argument("--wrong-ask", action="store_true", help="each positive also asked for a wrong pair, as a negative")
     ap.add_argument("--wrong-weight", type=float, default=1.0, help="wrong-pair share of pasted negatives, against 1 each")
     ap.add_argument("--film", action="store_true", help="the asked pair modulates the head's convolutions")
+    ap.add_argument("--expert-feats", action="store_true", help="read the features asked with each asked digit (round 8)")
     args = ap.parse_args()
     draws(args) if args.cmd == "draws" else train(args)
 

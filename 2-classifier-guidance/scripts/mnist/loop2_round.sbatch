@@ -21,7 +21,7 @@ USED=$(df --output=pcent "$ROOT" | tail -1 | tr -dc 0-9)
 nvidia-smi -L | grep -q GPU || { echo "GPU guard: no device visible"; exit 4; }
 M=2-classifier-guidance/scripts/mnist
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) commit=$(git rev-parse --short HEAD) round=$NAME flags=$*"
-"$PY" $M/checker.py train --kind pair --models "$ROOT/models" --draws "$ROOT/checkers/draws-v3.npz" --mnist "$ROOT/mnist-raw" \
+"$PY" $M/checker.py train --kind pair --models "$ROOT/models" --draws "${DRAWS:-$ROOT/checkers/draws-v3.npz}" --mnist "$ROOT/mnist-raw" \
     --out "$ROOT/checkers/loop2-$NAME" --exclude-pairs "$DEV" "$@"
 "$PY" $M/five_versions.py --models "$ROOT/models" --checkers "$ROOT/checkers" --judge "$ROOT/judge/judge.pt" \
     --out "$ROOT/five-versions/loop2-$NAME" --pairs "$DEV" --pair-only --s-list 3,10 --pair-head "loop2-$NAME"
