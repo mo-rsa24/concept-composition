@@ -211,6 +211,10 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--recurrence", type=int, default=1,
+                    help="Universal Guidance's self-recurrence: take each step in --recurrence-window this many times, "
+                         "adding back the noise between the two levels before each repeat (guided and random rows alike)")
+    ap.add_argument("--recurrence-window", type=int, nargs=2, default=None, metavar=("FIRST", "STOP"))
     ap.add_argument("--clip", type=Path, default=None,
                     help="push with a fine-tuned CLIP checker (finetune_checker.py or finetune_estimates.py best.pt) "
                          "reading the decoded estimate of the finished picture; --head is ignored")
@@ -272,6 +276,12 @@ def main() -> int:
             o = torch.nn.functional.logsigmoid(o.float()).sum(-1)
         return float(o[0])
 
+    def recur(seed, s_, row):
+        if args.recurrence <= 1:
+            return {}
+        return {"recurrence": args.recurrence, "recurrence_window": tuple(args.recurrence_window),
+                "recurrence_generator": torch.Generator(device="cpu").manual_seed(50_000 + 1_000 * row + 10 * seed + int(s_))}
+
     def own_noise(seed):
         return init_latents_for_cell(single.cell_for(seed), ctx)
 
@@ -287,7 +297,8 @@ def main() -> int:
     base_record = json.loads((base / "result.json").read_text()) if base else None
     if base_record and base_record["head"] != str(args.head):
         raise SystemExit("guard: reused baselines were picked by a different discriminator")
-    record = {"push_cap": args.push_cap, "window": args.window, "reused_baselines": str(base) if base else None,
+    record = {"push_cap": args.push_cap, "window": args.window, "recurrence": args.recurrence,
+              "recurrence_window": args.recurrence_window, "reused_baselines": str(base) if base else None,
               "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
               "seeds": args.seeds, "strengths": args.strengths, "best_of_n": 2, "canary": {}, "seeds_detail": {}}
 
@@ -332,14 +343,15 @@ def main() -> int:
             init, sigma = own_noise(seed)
             guided, d["seconds"][f"s{s_:g}"] = timed(lambda: run_poe_classifier_guided(
                 init_latents=init, euler_init_noise_sigma=sigma, head=disc, strength=s_,
-                push_cap=args.push_cap, guidance_window=tuple(args.window) if args.window else None, **common))
+                push_cap=args.push_cap, guidance_window=tuple(args.window) if args.window else None,
+                **recur(seed, s_, 1), **common))
             write_decoded_image(guided.image, tile(seed, f"s{s_:g}"))
             norms = guided.extras["applied_norm_per_step"]
             init, sigma = own_noise(seed)
             rg = torch.Generator(device="cpu").manual_seed(30_000 + 100 * seed + int(s_))
             rand, d["seconds"][f"r{s_:g}"] = timed(lambda: run_poe_classifier_guided(
                 init_latents=init, euler_init_noise_sigma=sigma, random_push_norms=norms,
-                random_generator=rg, **common))
+                random_generator=rg, **recur(seed, s_, 2), **common))
             write_decoded_image(rand.image, tile(seed, f"r{s_:g}"))
             ratio = [r / n if n > 0 else 1.0 for r, n in zip(rand.extras["applied_norm_per_step"], norms)]
             capped = guided.extras["capped_per_step"]

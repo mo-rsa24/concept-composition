@@ -82,6 +82,9 @@ def run_poe_classifier_guided(
     random_push_norms: list[float] | None = None,
     random_generator: torch.Generator | None = None,
     adapter_lambda: float | None = None,
+    recurrence: int = 1,
+    recurrence_window: tuple[int, int] | None = None,
+    recurrence_generator: torch.Generator | None = None,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
 
@@ -127,6 +130,7 @@ def run_poe_classifier_guided(
         head_was_training = head.training
         head.eval()
 
+    push_i = 0  # the random push's running index: a repeated step takes a new norm each time
     grad_norm_per_step: list[float] = []
     push_before_cap_per_step: list[float] = []
     applied_per_step: list[float] = []
@@ -148,69 +152,85 @@ def run_poe_classifier_guided(
         return poe_eps(eps_a, eps_b, eps_uncond)
 
     for step_index, timestep in enumerate(scheduler.timesteps):
-        with torch.no_grad():
-            if adapter_lambda is None:
-                eps_p = product_eps(timestep)
-            else:
-                adapter_disable(unet)
-                eps_off = product_eps(timestep)
-                adapter_enable(unet)
-                eps_on = product_eps(timestep)
-                adapter_disable(unet)
-                eps_p = eps_off + float(adapter_lambda) * (eps_on - eps_off)
-        eps_norm_per_step.append(float(eps_p.float().norm()))
-
-        in_window = guidance_window is None or (
-            guidance_window[0] <= step_index < guidance_window[1])
-        if random_push_norms is not None:
-            direction = torch.randn(eps_p.shape, generator=random_generator).to(
-                device=device, dtype=torch.float32)
-            push = direction * (float(random_push_norms[step_index]) / direction.norm())
-            eps_p = (eps_p.float() - push).to(dtype)
-            grad_norm_per_step.append(0.0)
-            push_before_cap_per_step.append(float(push.norm()))
-            applied_per_step.append(float(push.norm()))
-            capped_per_step.append(False)
-        # The canary lives here: at strength 0 nothing below runs and eps_p is untouched.
-        elif head is not None and strength != 0.0 and in_window:
-            with torch.enable_grad():
-                z = latents.detach().float().requires_grad_(True)
-                t_batch = timestep.reshape(1).to(device=device).expand(z.shape[0])
-                alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
-                if getattr(head, "reads_estimate", False):
-                    # a picture checker: it decodes the estimate of the finished picture from x_t and
-                    # this step's product prediction, held fixed (rung2/clip_push.py)
-                    log_p = head.log_prob_both(z, t_batch, eps=eps_p.detach().float(), alpha_bar=alpha_bar)
+        reps = recurrence if (recurrence > 1 and recurrence_window is not None
+                              and recurrence_window[0] <= step_index < recurrence_window[1]) else 1
+        for rep in range(reps):
+            if rep > 0:
+                # Universal Guidance's self-recurrence (Bansal et al., Algorithm 1): the guided step
+                # from x_t to x_prev is undone by adding back the noise between the two levels,
+                # z_t = sqrt(a_t / a_prev) x_prev + sqrt(1 - a_t / a_prev) noise, and the step is taken again
+                with torch.no_grad():
+                    a_t = scheduler.alphas_cumprod[int(timestep.item())].to(device=device, dtype=torch.float32)
+                    nxt = scheduler.timesteps[step_index + 1] if step_index + 1 < len(scheduler.timesteps) else None
+                    a_prev = (scheduler.alphas_cumprod[int(nxt.item())] if nxt is not None
+                              else torch.as_tensor(scheduler.final_alpha_cumprod)).to(device=device, dtype=torch.float32)
+                    ratio = a_t / a_prev
+                    n = torch.randn(latents.shape, generator=recurrence_generator).to(device=device, dtype=torch.float32)
+                    latents = (ratio.sqrt() * latents.float() + (1 - ratio).sqrt() * n).to(dtype)
+            with torch.no_grad():
+                if adapter_lambda is None:
+                    eps_p = product_eps(timestep)
                 else:
-                    log_p = head.log_prob_both(z, t_batch)
-                grad = torch.autograd.grad(log_p, z)[0]
-            sigma_t = torch.sqrt(1.0 - alpha_bar)
-            push, push_before_cap, capped = capped_push(
-                float(strength) * sigma_t * grad, eps_p, push_cap)
-            eps_p = (eps_p.float() - push).to(dtype)
-            grad_norm_per_step.append(float(grad.norm()))
-            push_before_cap_per_step.append(push_before_cap)
-            applied_per_step.append(float(push.norm()))
-            capped_per_step.append(capped)
-        else:
-            grad_norm_per_step.append(0.0)
-            push_before_cap_per_step.append(0.0)
-            applied_per_step.append(0.0)
-            capped_per_step.append(False)
+                    adapter_disable(unet)
+                    eps_off = product_eps(timestep)
+                    adapter_enable(unet)
+                    eps_on = product_eps(timestep)
+                    adapter_disable(unet)
+                    eps_p = eps_off + float(adapter_lambda) * (eps_on - eps_off)
+            eps_norm_per_step.append(float(eps_p.float().norm()))
 
-        with torch.no_grad():
-            alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(
-                device=device, dtype=dtype)
-            x0 = tweedie_mean(latents, alpha_bar_t, eps_p)
-            tracker.store_step(
-                step_index, latents, eps_p,
-                float(step_index) / float(num_inference_steps),
-                int(timestep.item()),
-            )
-            latents = ddim_prev_from_x0_eps(
-                scheduler=scheduler, timestep=timestep, step_index=step_index,
-                x0=x0, eps=eps_p,
-            )
+            in_window = guidance_window is None or (
+                guidance_window[0] <= step_index < guidance_window[1])
+            if random_push_norms is not None:
+                direction = torch.randn(eps_p.shape, generator=random_generator).to(
+                    device=device, dtype=torch.float32)
+                push = direction * (float(random_push_norms[push_i]) / direction.norm())
+                eps_p = (eps_p.float() - push).to(dtype)
+                grad_norm_per_step.append(0.0)
+                push_before_cap_per_step.append(float(push.norm()))
+                applied_per_step.append(float(push.norm()))
+                capped_per_step.append(False)
+                push_i += 1
+            # The canary lives here: at strength 0 nothing below runs and eps_p is untouched.
+            elif head is not None and strength != 0.0 and in_window:
+                with torch.enable_grad():
+                    z = latents.detach().float().requires_grad_(True)
+                    t_batch = timestep.reshape(1).to(device=device).expand(z.shape[0])
+                    alpha_bar = scheduler.alphas_cumprod[int(timestep.item())].to(device=device).float()
+                    if getattr(head, "reads_estimate", False):
+                        # a picture checker: it decodes the estimate of the finished picture from x_t and
+                        # this step's product prediction, held fixed (rung2/clip_push.py)
+                        log_p = head.log_prob_both(z, t_batch, eps=eps_p.detach().float(), alpha_bar=alpha_bar)
+                    else:
+                        log_p = head.log_prob_both(z, t_batch)
+                    grad = torch.autograd.grad(log_p, z)[0]
+                sigma_t = torch.sqrt(1.0 - alpha_bar)
+                push, push_before_cap, capped = capped_push(
+                    float(strength) * sigma_t * grad, eps_p, push_cap)
+                eps_p = (eps_p.float() - push).to(dtype)
+                grad_norm_per_step.append(float(grad.norm()))
+                push_before_cap_per_step.append(push_before_cap)
+                applied_per_step.append(float(push.norm()))
+                capped_per_step.append(capped)
+            else:
+                grad_norm_per_step.append(0.0)
+                push_before_cap_per_step.append(0.0)
+                applied_per_step.append(0.0)
+                capped_per_step.append(False)
+
+            with torch.no_grad():
+                alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(
+                    device=device, dtype=dtype)
+                x0 = tweedie_mean(latents, alpha_bar_t, eps_p)
+                tracker.store_step(
+                    step_index, latents, eps_p,
+                    float(step_index) / float(num_inference_steps),
+                    int(timestep.item()),
+                )
+                latents = ddim_prev_from_x0_eps(
+                    scheduler=scheduler, timestep=timestep, step_index=step_index,
+                    x0=x0, eps=eps_p,
+                )
 
     tracker.store_final(latents)
     with torch.no_grad():
@@ -230,6 +250,8 @@ def run_poe_classifier_guided(
             "eps_norm_per_step": eps_norm_per_step,
             "random_push": random_push_norms is not None,
             "adapter_lambda": None if adapter_lambda is None else float(adapter_lambda),
+            "recurrence": int(recurrence),
+            "recurrence_window": list(recurrence_window) if recurrence_window else None,
         },
     )
 
