@@ -78,3 +78,15 @@ The CLIP push raised its own checker's score on every seed (by 1 to 13.5 logits 
 | identity push, best of 4 | 3 (seeds 10 +10.2, 16 +6.3, 11 +2.4) | 2 near-clean cat and dog: seed 10 a dog with an extra pair of pointed cat ears beside a tabby kitten; seed 16 a dog with one stray white ear beside a clean grey cat. Seed 11 is two dogs, a false clean call |
 
 Picking among four pushed tries doubles the near-clean count of one pushed try per seed and finds none among plain tries. CLIP still calls two dogs clean, a mistake its evaluation set (where "wrong pair" was mostly a third animal) did not test.
+
+## A larger cap
+
+The identity push (iteration 6) with the cap on each step's push raised from 0.1 to 0.3 of the product prediction's norm, strengths 30 and 100, seeds 9 to 16, plain PoE and best-of-2 reused from the cap-0.1 sheet. Overview: `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/cap-0.1-vs-0.3.png`.
+
+| Cap | What the pictures show (draft, tile-size calls; two checked at full size) |
+| --- | --- |
+| 0.1 | two bodies on 5 of 8 seeds at strength 100, mostly two cats, a cat and a kitten, or a hybrid pair |
+| 0.3 | a separate cat and a separate dog on most seeds at both strengths (seeds 10, 11, 12, 13, 14, 15, 16); the pictures are damaged: flattened, oversaturated colour, blocky banding, a painted blue patch on seed 10 |
+| 0.3, random push of the same size | plain PoE's fused animal on every seed |
+
+At full size, seed 11 at strength 100 is a ginger cat beside a St Bernard: a clean cat and dog from one trajectory, overexposed and hazy. Seed 13 at strength 30 is a tabby cat beside a black-and-white dog whose head is hidden, with the cat's face garbled. The push was too small at 0.1: three times the room turns two cats into a cat and a dog, and costs picture quality.
