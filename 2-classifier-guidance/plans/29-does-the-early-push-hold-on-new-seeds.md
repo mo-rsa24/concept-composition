@@ -23,6 +23,6 @@ unchanged on 32 seeds never used for anything, beside plain PoE, best of 2 and t
 
 ## Tasks
 
-- [ ] **1.1 Draw.** `rung2/general.sh` on mscluster112: seeds 3301 to 3332, strength 30, cap 0.3, push on steps 0 to 15.
-- [ ] **1.2 Call.** Every full-size tile, plain, pushed and random, called separate or not, clean or near-clean or not;
+- [x] **1.1 Draw.** `rung2/general.sh` on mscluster112: seeds 3301 to 3332, strength 30, cap 0.3, push on steps 0 to 15.
+- [x] **1.2 Call.** Every full-size tile, plain, pushed and random, called separate or not, clean or near-clean or not;
   counts into the review file's Q1.
