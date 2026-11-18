@@ -177,6 +177,8 @@ def main() -> int:
     ap.add_argument("--aug", action="store_true")
     ap.add_argument("--early-frac", type=float, default=0.0)
     ap.add_argument("--accum", type=int, default=1)
+    ap.add_argument("--score", type=Path, default=None,
+                    help="a saved head: no training, only score it on --eval over the first 20 steps (writes score-<eval>.json)")
     ap.add_argument("--frac", type=float, default=1.0,
                     help="train on this share of the manifest's tiles, kept in proportion by source and label (learning curve)")
     ap.add_argument("--steps", type=int, default=3000)
@@ -247,6 +249,19 @@ def main() -> int:
                         "stature_rule_balanced_accuracy": (sum(p for p, sp in zip(yes, strict_pos) if sp) / max(1, sum(strict_pos))
                             + sum(not p for p, k in zip(yes, kind) if k != "positive") / max(1, sum(k != "positive" for k in kind))) / 2})
         return res
+
+    if args.score:
+        head.load_state_dict(torch.load(args.score, map_location="cpu")["head"])
+        head.eval()
+        rows_s = check(range(EARLY))
+        mean = lambda k: sum(r[k] for r in rows_s) / len(rows_s)
+        res = {"head": str(args.score), "eval": str(args.eval), "per_step": rows_s,
+               "whole_evaluation_set_mean": mean("whole_evaluation_set_balanced_accuracy"),
+               "v3_tiles_mean": mean("balanced_accuracy")}
+        (out / f"score-{args.eval.stem}.json").write_text(json.dumps(res, indent=1))
+        print(f"SCORE {args.score.parent.name}/{args.score.name} on {args.eval.name}: whole evaluation set "
+              f"{res['whole_evaluation_set_mean']:.3f}", flush=True)
+        return 0
 
     started = time.time()
     for step in range(args.steps + 1):

@@ -83,3 +83,5 @@ paper/overleaf-iclr/
 data/coco-2017/
 # Open Images V7 boxes and the cat/dog photos pulled from it (rung 2 checker data)
 data/open-images-v7/
+# Re-LAION-2B cat/dog candidates and images (rung 2 checker data)
+data/relaion-catdog/
