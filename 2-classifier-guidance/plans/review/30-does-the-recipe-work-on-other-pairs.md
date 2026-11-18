@@ -24,12 +24,23 @@ On seeds 3301 to 3316 for lion × meerkat and for typewriter × cactus, against 
 - Read per pair; a support on one pair and a null on the other is a finding in itself (an animal pair against an
   object pair).
 
+**Q2. Step 1: does a checker trained across many pairs separate the test pairs?**
+
+Written before the step 1 runs were drawn. A readout checker trained on joint-prompt runs of 78 pairs (plan 23's pairs
+less cat × dog and lion × meerkat, 40 runs each, labelled by the Claude API) plus the cat × dog data, pushing with the
+same recipe, on lion × meerkat and typewriter × cactus, seeds 3301 to 3316:
+
+- Support: on a pair, a separate pair of things on at least 10 of 16 and more seeds with the right two kinds than step 0's
+  checker gave (lion × meerkat: 6 of 16).
+- Null: no more seeds with the right two kinds than step 0's checker.
+
 ## Runs
 
 | Run | What | Status |
 | --- | --- | --- |
 | result-sheet-lion-meerkat | `render_results.py --readout --head <iteration 6> --prompts "a lion" "a meerkat" --seeds 3301 to 3316 --strengths 30 --push-cap 0.3 --window 0 16` | done |
 | result-sheet-typewriter-cactus | the same with `--prompts "a typewriter" "a cactus"` | queued |
+| pair-runs | `render_pair_runs.py`, 78 pairs × 40 joint runs, seeds 5001 to 5040 | drawing |
 
 ## Answers
 
