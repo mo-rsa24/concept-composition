@@ -42,6 +42,7 @@ def main():
         ap.add_argument(a, type=Path, required=True)
     ap.add_argument("--head", required=True)
     ap.add_argument("--head2", default=None, help="second checker, for ens: settings")
+    ap.add_argument("--seed0", type=int, default=0, help="first of 64 seeds (loop 5's final read uses 64)")
     ap.add_argument("--pairs", default=None, help='pairs to render, e.g. "0-3_1-9" or "0,3 1,9" (default: the three tuning pairs)')
     ap.add_argument("settings", nargs="+")
     a = ap.parse_args()
@@ -53,6 +54,7 @@ def main():
     head2 = load_head(a.checkers / a.head2 / "head.pt", dev) if a.head2 else None
     a.out.mkdir(parents=True, exist_ok=True)
     counts, canv = {}, {}
+    seeds = list(range(a.seed0, a.seed0 + 64))
     pairs = [tuple(int(d) for d in q.replace("-", ",").split(",")) for q in a.pairs.replace("_", " ").split()] \
         if a.pairs else PAIRS
     assert all(len(q) == 2 for q in pairs), pairs
@@ -76,7 +78,7 @@ def main():
             else:
                 e, s = val.split("@")
                 fn, eta = pair_push(unet, head, *p, float(s)), float(e)
-            x = to_uint8(sample(unet, SEEDS, list(p), push_fn=fn, cap=0.1, device=dev, eta=eta)[0])
+            x = to_uint8(sample(unet, seeds, list(p), push_fn=fn, cap=0.1, device=dev, eta=eta)[0])
             key = f"{st}|{p[0]}{p[1]}"
             canv[key] = x
             counts[key] = int(sum(call(r, p, 1.01, 0.9) for r in read_all(j3, x)))
