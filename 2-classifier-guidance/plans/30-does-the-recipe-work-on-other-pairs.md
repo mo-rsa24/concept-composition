@@ -34,8 +34,8 @@ checker worked only after about 500 clean examples of one pair.
 ## Tasks
 
 - [x] **0.1 Code.** `render_results.py --prompts A B`, the checker reading with "A and B".
-- [ ] **0.2 Draw.** `rung2/pairs-step0.sh`: lion × meerkat, then typewriter × cactus, seeds 3301 to 3316.
-- [ ] **0.3 Call.** Every full-size tile, pushed, plain and random, into the review file's Q1.
+- [x] **0.2 Draw.** `rung2/pairs-step0.sh`: lion × meerkat, then typewriter × cactus, seeds 3301 to 3316.
+- [x] **0.3 Call.** Every full-size tile, pushed, plain and random, into the review file's Q1.
 - [ ] **1.1 Draw.** `rung2/pair-runs.sh` on both cards: `render_pair_runs.py`, 78 pairs × 40 joint-prompt runs (seeds 5001 to
   5040), states and pictures under `pair-runs/`; after it, list claims without `done` and rerun them.
 - [ ] **1.2 Measure the labelling cost.** Label 50 pictures with `api_label.py --strict --real-only` on the laptop, report the

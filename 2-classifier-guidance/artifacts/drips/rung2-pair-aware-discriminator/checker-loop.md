@@ -153,3 +153,14 @@ The recipe with the cap at 0.2 instead of 0.3 (`result-sheet-catdog-general-cap0
 | Not separate | 4 | 10, including an object as the second animal on 4 (a chrome cat on 3311, a black cat statue on 3313, a cloth cat house on 3326, a paper cone on 3330) |
 
 The smaller cap does not remove the cutouts; it trades separations for single animals and objects. Cap 0.3 stays. The two caps give clean pairs on partly different seeds (cap 0.2 adds 3315, 3316, 3319, 3324, 3325), so the push's size changes which seeds succeed, not only how many.
+
+## The cat × dog checker on two other pairs (plan 30, step 0)
+
+The recipe unchanged, with the checker reading each picture with the pair's own joint prompt, on seeds 3301 to 3316. Calls by eye from full-size tiles.
+
+| Pair | Plain PoE separate | Random push separate | Recipe: separate, right two kinds | Recipe: clean |
+| --- | --- | --- | --- | --- |
+| lion × meerkat | 1 of 16 | 1 of 16 | 6 of 16 (10 with two animals, 4 of them two meerkats) | 3 of 16 |
+| typewriter × cactus | 1 of 16 | 1 of 16 | 14 of 16 | 6 of 16 |
+
+A checker trained only on cats and dogs separates two things on new pairs. It cannot tell which body should be the lion, so the animal pair loses seeds to two meerkats; the object pair has no such confusion. Plan 30 step 1 trains a checker across 78 pairs to test whether that confusion goes away.
