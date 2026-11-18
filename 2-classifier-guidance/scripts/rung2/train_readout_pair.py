@@ -209,8 +209,8 @@ def main() -> int:
     z_check = torch.cat([load_latent(t).float() for t in tiles])
     kind = [t["kind"] if t["label"] == 0 else "positive" for t in tiles]
     strict_pos = [t.get("strict_label", t["label"]) == 1 for t in tiles]
-    is_v3 = [not t["id"].startswith("judge-")
-             for t in tiles]
+    source = [t.get("source", "v3") for t in tiles]
+    is_v3 = [src == "v3" for src in source]
 
     @torch.no_grad()
     def check(steps):
@@ -227,14 +227,15 @@ def main() -> int:
                         logits[i + j].append(v)
             yes = [sum(l) / len(l) > 0 for l in logits]
 
-            def bal(neg_kinds, only_v3=True):
-                use = [v or not only_v3 for v in is_v3]
+            def bal(neg_kinds, only_v3=True, only=None):
+                use = [(v or not only_v3) if only is None else (src == only) for v, src in zip(is_v3, source)]
                 pos = [p for p, k, u in zip(yes, kind, use) if k == "positive" and u]
                 neg = [not p for p, k, u in zip(yes, kind, use) if k in neg_kinds and u]
                 return (sum(pos) / len(pos) + sum(neg) / len(neg)) / 2 if pos and neg else float("nan")
             res.append({"sampler_step": int(s), "balanced_accuracy": bal(set(kind) - {"positive"}),
                         "singles_and_hybrids_balanced_accuracy": bal({"single", "hybrid"}),
                         "whole_evaluation_set_balanced_accuracy": bal(set(kind) - {"positive"}, only_v3=False),
+                        "drawn_held_out_balanced_accuracy": bal(set(kind) - {"positive"}, only="more_heldout"),
                         "stature_rule_balanced_accuracy": (sum(p for p, sp in zip(yes, strict_pos) if sp) / max(1, sum(strict_pos))
                             + sum(not p for p, k in zip(yes, kind) if k != "positive") / max(1, sum(k != "positive" for k in kind))) / 2})
         return res
@@ -247,8 +248,11 @@ def main() -> int:
             mean = sum(r["balanced_accuracy"] for r in rows_c) / len(rows_c)
             whole = sum(r["whole_evaluation_set_balanced_accuracy"] for r in rows_c) / len(rows_c)
             strict_m = sum(r["stature_rule_balanced_accuracy"] for r in rows_c) / len(rows_c)
+            drawn = [r["drawn_held_out_balanced_accuracy"] for r in rows_c if r["drawn_held_out_balanced_accuracy"] == r["drawn_held_out_balanced_accuracy"]]
+            drawn_m = sum(drawn) / len(drawn) if drawn else float("nan")
             print(f"step {step:5d}  held-out balanced accuracy {mean:.3f} (v3 check tiles), {whole:.3f} (whole "
-                  f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject)  "
+                  f"evaluation set), {strict_m:.3f} (stature-rule clean pairs against every reject), {drawn_m:.3f} "
+                  f"(420 drawn held-out pictures)  "
                   f"({time.time() - started:.0f} s)", flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt},
                        out / f"head_step_{step:06d}.pt")

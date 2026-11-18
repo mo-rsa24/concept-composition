@@ -149,7 +149,15 @@ def main() -> int:
         if not t["check"] and not is_scene(t["pair"]):
             tiles.append(t | {"source": "v3"})
 
+    ae_verdicts = collections.defaultdict(set)
     for v in ae:
+        ae_verdicts[v["id"]].add(v["verdict"] == "faithful pair")
+    seen_ae = set()
+    for v in ae:
+        # The same file name sits in two paper-review folders: keep one, drop it if its two labels disagree.
+        if v["id"] in seen_ae or len(ae_verdicts[v["id"]]) > 1:
+            continue
+        seen_ae.add(v["id"])
         real = v["verdict"] == "faithful pair"
         add(id=v["id"], picture=stage(REPO / v["path"], v["id"]), latent=f"{V4}/latents/{v['id']}.pt", pair=v["pair"],
             seed=v["seed"], method=v["method"], label=int(real), kind="positive" if real else v["verdict"], source="ae")
@@ -161,6 +169,22 @@ def main() -> int:
             demoted[t["source"]] += 1
     if strict:
         print("clean pairs the stature rule moved to the fake side:", dict(demoted))
+
+    # More joint-prompt drawings (render_more.py), labelled under the stricter rule: cat x dog for
+    # training, the 7 held-out pairs for evaluation. Latents are the sampler's own finished latents.
+    MORE = "outputs/classifier_guidance_ladder/rung2/more"
+    for name, use in (("more_catdog", "training"), ("more_heldout", "evaluation")):
+        for r in jsonl(RES / f"api-labels/{name}.jsonl"):
+            if "verdict" not in r:
+                continue
+            real = r["verdict"] == "faithful pair"
+            t = dict(id=f"{name}-{r['id']}", latent=f"{MORE}/{name}/final/{r['id']}.pt", pair=r["pair"], seed=r["seed"],
+                     method="joint", label=int(real), kind="positive" if real else r["verdict"], source=name,
+                     finals=f"{MORE}/{name}/finals/{r['id']}.jpg")
+            if use == "training":
+                add(**t)
+            else:
+                evals.append(t | {"check": True, "strict_label": int(real)})
 
     evals += [t | {"source": "v3"} for t in v3["tiles"] if t["check"]]
     for t in evals:
@@ -178,6 +202,7 @@ def main() -> int:
         "API-labelled pictures of the 7 held-out pairs; md5-disjoint from training_set_v4.json",
         "held_out_pairs": sorted(held), "tiles": evals}, indent=0))
     ce = collections.Counter((t["source"], t["label"], t["pair"] == "a_cat__x__a_dog") for t in evals)
+    print("evaluation clean / reject by source:", dict(collections.Counter((t["source"], t["label"]) for t in evals)))
     print("evaluation:", {f"{s}/{'real' if l else 'fake'}/{'catdog' if c else 'heldout'}": n for (s, l, c), n in sorted(ce.items())})
     out = {"rule": __doc__.split("\n\n")[1], "held_out_pairs": sorted(held), "tiles": tiles}
     (HERE / "training_set_v4.json").write_text(json.dumps(out, indent=0))

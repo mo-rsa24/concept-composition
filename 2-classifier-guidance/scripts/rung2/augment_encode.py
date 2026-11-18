@@ -44,6 +44,8 @@ def picture_path(t: dict) -> Path:
         return RUNG2 / "kim/finals" / f"{t['id'][4:]}.jpg"
     if "picture" in t:
         return paths.MOUNT_ROOT / t["picture"]
+    if "finals" in t:
+        return paths.MOUNT_ROOT / t["finals"]
     return RUNG2 / "training_set/tiles" / f"{t['id']}.png"
 
 
