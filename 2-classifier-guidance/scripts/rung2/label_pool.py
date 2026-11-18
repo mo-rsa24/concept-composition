@@ -4,8 +4,8 @@
 Runs on the laptop (api_label.py's client; the key is never printed). Each picture of <pool>/index.json is labelled with
 api_label's prompt in strict mode (a borrowed body shape, build or size also counts as a hybrid). The training rule:
     clean (label 1)      verdict "faithful pair": exactly two bodies, a clear A and a clear B, no mixing, photo intact
-    reject (label 0)     verdict "hybrid", "single" or "wrong pair"
-    left out             verdict "damaged" (drawings, collages, broken pictures: style must not carry the label), errors
+    reject (label 0)     verdict "hybrid", "single" or "wrong pair", photo intact
+    left out             verdict "damaged", or any picture not an intact photograph (style must not carry the label), errors
 Writes <pool>/labels.jsonl (one line per picture; a stopped run resumes) and <pool>/labelled.json, the rule applied,
 and prints the counts per method and the tokens per picture.
 """
@@ -37,7 +37,8 @@ def main() -> int:
     rows = [json.loads(l) for l in out.read_text().splitlines() if l.strip()]
     rule = {"faithful pair": 1, "hybrid": 0, "single": 0, "wrong pair": 0}
     labelled = {r["id"]: {"pair": r["pair"], "method": r["method"], "seed": r["seed"], "verdict": r["verdict"],
-                          "label": rule[r["verdict"]]} for r in rows if r.get("verdict") in rule}
+                          "label": rule[r["verdict"]]} for r in rows
+                if r.get("verdict") in rule and r.get("photo_intact")}   # a drawing never becomes a reject either
     (args.pool / "labelled.json").write_text(json.dumps(labelled))
     ok = [r for r in rows if "verdict" in r]
     tin = [r["input_tokens"] for r in ok if "input_tokens" in r]
