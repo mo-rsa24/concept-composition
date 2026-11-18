@@ -39,5 +39,7 @@ Every weight of a pretrained network trained on the 1,603 finished training pict
 | CLIP ViT-L/14, random crops, seed 0 | **0.900** | 46/46 | 25/29 | 15/22 | 98/109 |
 | CLIP ViT-L/14, random crops, seed 1 | 0.865 | 36/46 | 23/29 | 11/22 | 108/109 |
 | CLIP ViT-L/14, no crops | 0.896 | 42/46 | 24/29 | 11/22 | 107/109 |
+| CLIP ViT-bigG/14, random crops, seed 0 | 0.873 | 44/46 | 22/29 | 13/22 | 100/109 |
+| CLIP ViT-bigG/14, random crops, seed 1 | **0.909** | 46/46 | 24/29 | 16/22 | 100/109 |
 
 Two CLIP seeds differ by 0.035, as large as any change tried, because the 160-picture validation split sometimes picks epoch 1. Most "wrong pair" rejects are a cat and a dog with a third animal, usually a kitten. The damaged rejects are the hardest kind for every run.
