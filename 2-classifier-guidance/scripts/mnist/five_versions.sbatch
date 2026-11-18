@@ -20,4 +20,7 @@ nvidia-smi -L | grep -q GPU || { echo "GPU guard: no device visible"; exit 4; }
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) commit=$(git rev-parse --short HEAD) name=$NAME args=$*"
 "$PY" 2-classifier-guidance/scripts/mnist/five_versions.py --models "$ROOT/models" --checkers "$ROOT/checkers" \
     --judge "$ROOT/judge/judge.pt" --out "$ROOT/five-versions/$NAME" "$@"
+if [ -n "${COUNT3:-}" ]; then
+  "$PY" 2-classifier-guidance/scripts/mnist/count_v3.py --judge "$ROOT/judge-v3/judge.pt" canvases "$ROOT/five-versions/$NAME"
+fi
 echo "[$(date -u +%H:%M:%S)] done"

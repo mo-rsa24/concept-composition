@@ -95,6 +95,7 @@ def main():
     ap.add_argument("--only-s", type=float, default=None, help="pair-aware push at this s only (cap sweep)")
     ap.add_argument("--pair-only", action="store_true", help="plain and the pair-aware push only (sweep 1)")
     ap.add_argument("--s-list", default=None, help="push strengths besides 0, e.g. 3,10 (loop 2)")
+    ap.add_argument("--eta", type=float, default=0.0, help="DDIM eta for every column (loop 4)")
     args = ap.parse_args()
     dev = "cuda"
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
@@ -109,11 +110,11 @@ def main():
         s_list = [0.0] + [float(v) for v in args.s_list.split(",")]
 
     # cost: one plain and one guided batch of 64 on 7 & 8, to match best-of-N's N
-    sample(unet, SEEDS[:8], [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), device=dev)   # warm-up
+    sample(unet, SEEDS[:8], [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), device=dev, eta=args.eta)   # warm-up
     torch.cuda.synchronize(); t0 = time.perf_counter()
-    sample(unet, SEEDS, [7, 8], device=dev)
+    sample(unet, SEEDS, [7, 8], device=dev, eta=args.eta)
     torch.cuda.synchronize(); t1 = time.perf_counter()
-    sample(unet, SEEDS, [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), cap=args.cap, device=dev)
+    sample(unet, SEEDS, [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), cap=args.cap, device=dev, eta=args.eta)
     torch.cuda.synchronize(); t2 = time.perf_counter()
     n_match = max(1, math.ceil((t2 - t1) / (t1 - t0)))   # rounded up, in best-of-N's favour, as rung 2
     cost = {"plain_s_per_64": round(t1 - t0, 2), "guided_s_per_64": round(t2 - t1, 2), "N_matched": n_match}
@@ -134,10 +135,10 @@ def main():
         return x8
 
     for a, b in pairs:
-        plain = record("plain", a, b, sample(unet, SEEDS, [a, b], device=dev)[0])
+        plain = record("plain", a, b, sample(unet, SEEDS, [a, b], device=dev, eta=args.eta)[0])
         for s in s_list:
             rec = Recorder(pair_push(unet, hp, a, b, s), args.cap)
-            xg = record(f"pair s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=rec, cap=None, device=dev)[0])
+            xg = record(f"pair s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=rec, cap=None, device=dev, eta=args.eta)[0])
             cap_log[f"pair s={s:g}|{a}&{b}"] = {"fired_share_per_step": [round(f, 3) for f in rec.fired],
                                                "steps_fired_on_half_or_more": int(sum(f >= 0.5 for f in rec.fired))}
             if s == 0:
@@ -145,20 +146,20 @@ def main():
             if args.pair_only:
                 continue
             sep = Recorder(separate_push(unet, hs, a, b, s), args.cap)
-            xs = record(f"separate s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=sep, cap=None, device=dev)[0])
+            xs = record(f"separate s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=sep, cap=None, device=dev, eta=args.eta)[0])
             if s == 0:
                 assert (xs == plain).all(), "s = 0 is not byte-identical to plain product"
                 print("s = 0: both guided columns byte-identical to plain product", flush=True)
                 continue
             record(f"random s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=random_push(rec.norms, SEEDS, dev),
-                                                   cap=args.cap, device=dev)[0])
+                                                   cap=args.cap, device=dev, eta=args.eta)[0])
         if args.only_s is not None or args.pair_only:
             continue
         for n in sorted({n_match, 16}):
             best = []
             for s in SEEDS:
                 seeds = [s] + [100_000 + 100 * s + j for j in range(1, n)]
-                x = sample(unet, seeds, [a, b], device=dev)[0]
+                x = sample(unet, seeds, [a, b], device=dev, eta=args.eta)[0]
                 best.append(x[int(score_clean(unet, hp, x, a, b).argmax())])
             record(f"best-of-{n}", a, b, torch.stack(best))
 
@@ -168,7 +169,7 @@ def main():
         w.writerow(["column", "pair", "seed", "judge_call"])
         w.writerows(rows)
     (args.out / "cap.json").write_text(json.dumps(cap_log, indent=1))
-    (args.out / "counts.json").write_text(json.dumps({"cost": cost, "cap": args.cap, "pair_head": args.pair_head, "separate_head": args.separate_head,
+    (args.out / "counts.json").write_text(json.dumps({"cost": cost, "cap": args.cap, "eta": args.eta, "pair_head": args.pair_head, "separate_head": args.separate_head,
                                                       "counts": counts}, indent=1))
     if args.only_s is None and not args.pair_only:
         for a, b in pairs:
