@@ -42,8 +42,8 @@ hybrid < two bodies or heads < two clear (a clean cat and a clean dog):
 | --- | --- | --- |
 | trajectories | 1,200 seeds × 2 runs on mscluster111 and 112 | done: 2,400 runs, all 48 blocks |
 | labels | `label_trajectories.py`, counts per split and mode | done: training joint 508 clean, 464 reject, 28 left out; training PoE 0 clean, 1,000 reject; held-out joint 105 clean, 90 reject, 5 left out; held-out PoE 0 clean, 200 reject. Spot check: 16 of 16 clean calls right, at most 1 doubtful reject in 16 (seed 2749) |
-| baseline reading | iteration 4 scored on the held-out runs | not started |
-| readout-catdog-traj | iteration 4's settings plus `--traj-frac 0.5` | not started |
+| baseline reading | iteration 4 scored on the held-out runs | done: held-out joint runs (105 clean, 90 reject) at steps 0, 2, 4, 6, 8, 10: 0.510, 0.548, 0.644, 0.747, 0.794, 0.817, mean 0.677; steps 15 and 20 read 0.843 and 0.848. Q1 support needs 0.75 or more over steps 0 to 10 |
+| readout-catdog-traj | iteration 4's settings plus `--traj-frac 0.5` | training |
 | push sheet | `render_results.py --readout`, seeds 9 to 16 | not started |
 
 ## Cross-references
