@@ -30,8 +30,8 @@ Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of
 **Why this plan exists**
 
 Every push so far follows a checker's gradient. With room for a larger push (cap 0.3) the identity push gives a
-separate cat and dog on most held-out seeds, but damages the pictures. A species push ("cat present" plus "dog
-present", plan 26) pulls two bodies back into one face, because a hybrid scores high on both. Logical Guidance
+separate cat and dog on most held-out seeds, but damages the pictures. A species push through the decoded picture ("cat
+present" plus "dog present", plan 26) redraws faces and leaves PoE's fused animal in place. Logical Guidance
 (Alesiani et al., arXiv 2602.05549) gives the score of NOT a condition as −p/(1 − p) times that condition's
 conditional-minus-unconditional score, and its gradient-free guidance takes the direction from the diffusion
 model's own prompts and only the weight from a classifier. Its AND rule is plain addition, exact only when the
