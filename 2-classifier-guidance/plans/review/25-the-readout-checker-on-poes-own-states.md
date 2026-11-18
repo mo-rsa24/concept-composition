@@ -36,6 +36,14 @@ hybrid < two bodies or heads < two clear (a clean cat and a clean dog):
 - Style check, read beside the count: a seed that turns from a drawing into a photograph is noted on its call;
   a support that rests only on such seeds is called inconclusive.
 
+**Q3. Do 1,000 more joint-prompt runs change the reading?**
+
+Written before the extra runs were drawn. The same training (`readout-catdog-traj`'s settings) with 1,000 more joint-prompt
+runs (seeds 3401 to 4400, labelled the same way) added, read with the same check on the same held-out joint runs:
+
+- Support for scaling further: the mean over steps 0 to 10 rises by 0.02 or more over `readout-catdog-traj` at step 2,000.
+- Null: within 0.02; more runs of this kind are not what the reading lacks.
+
 ## Runs
 
 | Run | What | Status |
@@ -44,7 +52,8 @@ hybrid < two bodies or heads < two clear (a clean cat and a clean dog):
 | labels | `label_trajectories.py`, counts per split and mode | done: training joint 508 clean, 464 reject, 28 left out; training PoE 0 clean, 1,000 reject; held-out joint 105 clean, 90 reject, 5 left out; held-out PoE 0 clean, 200 reject. Spot check: 16 of 16 clean calls right, at most 1 doubtful reject in 16 (seed 2749) |
 | baseline reading | iteration 4 scored on the held-out runs | done: held-out joint runs (105 clean, 90 reject) at steps 0, 2, 4, 6, 8, 10: 0.510, 0.548, 0.644, 0.747, 0.794, 0.817, mean 0.677; steps 15 and 20 read 0.843 and 0.848. Q1 support needs 0.75 or more over steps 0 to 10 |
 | readout-catdog-traj | iteration 4's settings plus `--traj-frac 0.5` | training |
-| push sheet | `render_results.py --readout`, seeds 9 to 16 | not started |
+| push sheet | `render_results.py --readout`, seeds 9 to 16 | queued after training |
+| plus 1,000 | 1,000 joint runs, seeds 3401 to 4400, then `readout-catdog-traj-plus1000` | drawing |
 
 ## Cross-references
 

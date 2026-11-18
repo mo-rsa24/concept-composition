@@ -5,7 +5,7 @@ Every run render_trajectories.py saved has a finished picture. The CLIP ViT-L/14
 finished pictures (finetune/clip/best.pt, 0.900 held-out balanced accuracy, 46 of 46 wrong pairs caught)
 gives each a logit; every saved state of that run inherits the verdict. Only confident verdicts are kept,
 to cut the checker's roughly 10% error: clean when the logit is above +MARGIN, reject when below -MARGIN,
-left out in between. Seeds up to 3000 are for training, 3001 and above are held out for the reading check.
+left out in between. Seeds 3001 to 3200 are held out for the reading check; every other seed is for training.
 
 A spot-check sheet of 16 runs called clean and 16 called reject (training seeds, drawn at random with a fixed
 seed) is written for the eye check every new labelled source gets.
@@ -37,7 +37,7 @@ RUNG2 = paths.MOUNT_ROOT / "outputs/classifier_guidance_ladder/rung2"
 OUT = RUNG2 / "trajectories"
 CHECKER = RUNG2 / "finetune/clip/best.pt"
 MARGIN = 2.0
-HELD_OUT_FROM = 3001
+HELD_OUT = range(3001, 3201)   # the reading check's runs; every other seed trains
 
 
 def main() -> int:
@@ -60,7 +60,7 @@ def main() -> int:
                 lg = model(x).float().cpu().tolist()
             for p, v in zip(chunk, lg):
                 seed, mode = int(p.stem.split("__")[0][4:]), p.stem.split("__")[1]
-                labels[p.stem] = {"seed": seed, "mode": mode, "split": "held_out" if seed >= HELD_OUT_FROM else "train",
+                labels[p.stem] = {"seed": seed, "mode": mode, "split": "held_out" if seed in HELD_OUT else "train",
                                   "logit": v, "label": 1 if v > MARGIN else 0 if v < -MARGIN else None}
     (OUT / "labels.json").write_text(json.dumps(labels, indent=0))
     count = collections.Counter((r["split"], r["mode"], r["label"]) for r in labels.values())

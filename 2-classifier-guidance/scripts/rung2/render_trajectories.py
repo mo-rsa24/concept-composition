@@ -50,6 +50,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--first", type=int, default=2001)
     ap.add_argument("--last", type=int, default=3200)
+    ap.add_argument("--modes", nargs="+", default=["product", "joint"], choices=["product", "joint"],
+                    help="which runs to draw per seed; plain PoE never ended clean on 1,200 seeds, so more clean examples "
+                         "come only from joint runs")
     args = ap.parse_args()
     seeds = list(range(args.first, args.last + 1))
     if any(s <= 1250 for s in seeds):
@@ -82,7 +85,7 @@ def main() -> int:
         (OUT / "claims" / name / "worker").write_text(worker)
         t0 = time.perf_counter()
         for seed in block:
-            for mode in ("product", "joint"):
+            for mode in args.modes:
                 stem = f"seed{seed:04d}__{mode}"
                 if (OUT / "states" / f"{stem}.pt").exists():
                     continue
@@ -101,7 +104,7 @@ def main() -> int:
                     (OUT / "timesteps.json").write_text(json.dumps(
                         {"kept_steps": KEEP + [50], "timesteps": [int(tr.timesteps[k]) for k in KEEP] + [0]}))
         (OUT / "claims" / name / "done").write_text(worker)
-        print(f"{worker} {name}: {2 * len(block)} runs in {time.perf_counter() - t0:.0f} s", flush=True)
+        print(f"{worker} {name}: {len(args.modes) * len(block)} runs in {time.perf_counter() - t0:.0f} s", flush=True)
     print("TRAJECTORIES DONE", flush=True)
     return 0
 
