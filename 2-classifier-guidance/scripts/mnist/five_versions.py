@@ -7,7 +7,7 @@ On the share-0.01 U-Net, for 7 & 8 and the five held-out pairs, each canvas call
 4. a random push: per sample and step, a fixed random direction scaled to the size the pair-aware
    push had after the cap at that step and s
 5. best-of-N: N plain-product draws per seed, the pair-aware checker picking the one it scores
-   highest on the finished canvas; N is matched to a guided draw's measured cost, and N = 16 is
+   highest on the finished canvas; N is a guided draw's measured cost in plain draws, rounded up, and N = 16 is
    reported beside it. Extra draws use seeds 100,000 up, never a checker's training seeds.
 At s = 0 both guided columns must match plain product byte for byte; the script stops if not.
 The cap is 0.1 of the product prediction's norm per sample (`--cap` for the cap sweep). Each
@@ -22,6 +22,7 @@ Usage:
 import argparse
 import csv
 import json
+import math
 import sys
 import time
 from pathlib import Path
@@ -102,12 +103,13 @@ def main():
     s_list = S if args.only_s is None else [args.only_s]
 
     # cost: one plain and one guided batch of 64 on 7 & 8, to match best-of-N's N
+    sample(unet, SEEDS[:8], [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), device=dev)   # warm-up
     torch.cuda.synchronize(); t0 = time.perf_counter()
     sample(unet, SEEDS, [7, 8], device=dev)
     torch.cuda.synchronize(); t1 = time.perf_counter()
     sample(unet, SEEDS, [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), cap=args.cap, device=dev)
     torch.cuda.synchronize(); t2 = time.perf_counter()
-    n_match = max(1, round((t2 - t1) / (t1 - t0)))
+    n_match = max(1, math.ceil((t2 - t1) / (t1 - t0)))   # rounded up, in best-of-N's favour, as rung 2
     cost = {"plain_s_per_64": round(t1 - t0, 2), "guided_s_per_64": round(t2 - t1, 2), "N_matched": n_match}
     print(json.dumps(cost), flush=True)
 
