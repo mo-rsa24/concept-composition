@@ -46,7 +46,7 @@ after Q1's answer and before this run:
 | Run | What | Status |
 | --- | --- | --- |
 | result-sheet-catdog-boxes | `render_results.py --readout --head <iteration 6> --box-species --split 16 --push-cap 0.3 --cap-late 0.1 --cap-late-from 16` | done |
-| result-sheet-catdog-boxes-confident | the same plus `--box-confidence 0.8` | drawing |
+| result-sheet-catdog-boxes-confident | the same plus `--box-confidence 0.8` | done |
 
 ## Answers
 
@@ -56,3 +56,8 @@ at 100, where the boxes were named from a still-blurry guess at step 16. It adds
 strength 100. Draft calls at full size (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-boxes/compare/`).
 
 **Q2: support.** Two or more animals at step 16 on 16 of 16 pictures (three on 2).
+
+**Q3: null.** Clean or near-clean on 4 of 8 seeds (9, 11, 12, 16) at full size, the same count, and one wrong-species
+turn remains (seed 14 at strength 100, the cat becomes a dog). Both boxes were confident on about a third of the
+pictures; on most others the dog box read as a cat at step 16, so the rule skipped the two-cat pictures that needed a push
+toward dog (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan28-confident-compare.png`).
