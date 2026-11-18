@@ -39,7 +39,7 @@ def main():
     for a in ("--models", "--checkers", "--judge3", "--out"):
         ap.add_argument(a, type=Path, required=True)
     ap.add_argument("--head", required=True)
-    ap.add_argument("--pairs", default=None, help='pairs to render, e.g. "0,3 1,9" (default: the three tuning pairs)')
+    ap.add_argument("--pairs", default=None, help='pairs to render, e.g. "0-3_1-9" or "0,3 1,9" (default: the three tuning pairs)')
     ap.add_argument("settings", nargs="+")
     a = ap.parse_args()
     dev = "cuda"
@@ -48,7 +48,9 @@ def main():
     j3 = load(a.judge3, dev)
     a.out.mkdir(parents=True, exist_ok=True)
     counts, canv = {}, {}
-    pairs = [tuple(int(d) for d in q.split(",")) for q in a.pairs.split()] if a.pairs else PAIRS
+    pairs = [tuple(int(d) for d in q.replace("-", ",").split(",")) for q in a.pairs.replace("_", " ").split()] \
+        if a.pairs else PAIRS
+    assert all(len(q) == 2 for q in pairs), pairs
     for st in a.settings:
         kind, val = st.split(":")
         for p in pairs:
