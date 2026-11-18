@@ -1,0 +1,7 @@
+# Rung 2 figures
+
+**[Rung 2's three networks](three-networks-in-rung-2.png)** ([SVG](three-networks-in-rung-2.svg))
+
+The zoom ladder's network view for rung 2 on SDXL's cat × dog product, drawn in the register of the route walk's `three-networks-in-step-7b.png` and with the same colour key. Row 1 is the generator being fixed: one sampler step, the frozen SDXL U-Net run with "a cat", "a dog" and the empty prompt, the three predictions combined as ε_cat + ε_dog − ε_null, and the finished plain product on held-out seed 9 (one fused face). Row 2 is the checker: the noisy picture, the step and "a cat and a dog" read through the frozen U-Net at three taps by a small head of 780,417 weights, one log-odds number (held-out accuracy 0.737 on 220 pictures, iteration 2), and its gradient as the push, with held-out seed 10 pushed into two bodies. Row 3 is the judge: the Claude API's fixed questions and its answers for one SDXL drawing, which label every picture and never push.
+
+Drawn by `make_three_networks_in_rung_2.py` on 2026-11-18 from the real pictures in `inputs/` (chosen by their API labels, listed in `inputs/picks.json`); the pixel noise on rows 1 and 2's input is illustrative, since the sampler works on a 4 × 128 × 128 latent. The script imports the route walk's `make_judge_network_view.py` for its canvas, colour key and crossing check, so it needs torch: `CUDA_VISIBLE_DEVICES= uv run --no-project --with torch --with matplotlib --with numpy --with pillow python make_three_networks_in_rung_2.py`.

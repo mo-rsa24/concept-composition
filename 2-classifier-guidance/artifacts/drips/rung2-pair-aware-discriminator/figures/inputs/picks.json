@@ -1,0 +1,42 @@
+{
+ "clean_sdxl": {
+  "id": "a_cat__x__a_dog__seed401__joint",
+  "verdict": "faithful pair",
+  "note": "Fluffy beige dog sits beside a tabby-and-white cat on floor.",
+  "bodies": 2,
+  "a_present": true,
+  "b_present": true,
+  "hybrid": false,
+  "photo_intact": true
+ },
+ "two_cats": {
+  "id": "a_cat__x__a_dog__seed575__joint",
+  "verdict": "wrong pair",
+  "note": "Two cats, a tabby and an orange-white, sitting together; no dog.",
+  "bodies": 2,
+  "a_present": true,
+  "b_present": false,
+  "hybrid": false,
+  "photo_intact": true
+ },
+ "drawing": {
+  "id": "a_cat__x__a_dog__seed443__joint",
+  "verdict": "damaged",
+  "note": "Flat illustration of a beagle-like dog behind a black cat; not a photo.",
+  "bodies": 2,
+  "a_present": true,
+  "b_present": true,
+  "hybrid": false,
+  "photo_intact": false
+ },
+ "judge_hybrid": {
+  "id": "a_cat__x__a_dog__seed586__joint",
+  "verdict": "hybrid",
+  "note": "Fluffy orange cat beside a dog-bodied animal with a cat-like face and whiskers.",
+  "bodies": 2,
+  "a_present": true,
+  "b_present": false,
+  "hybrid": true,
+  "photo_intact": true
+ }
+}
