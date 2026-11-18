@@ -5,7 +5,7 @@ The questions and pass marks for [plan 26](../26-two-pushes-bodies-early-species
 
 ## Words this file uses
 
-**Bodies push.** The readout checker of iteration 6 (`readout-catdog-identity`, step 2,000), which reads
+**Bodies push.** The [readout checker](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md) of iteration 6 (`readout-catdog-identity`, step 2,000), which reads
 SDXL's own features; its push moves where the animals are.
 
 **Species checker.** The CLIP ViT-L/14 checker fine-tuned on finished cat × dog pictures, with its last layer
@@ -19,15 +19,15 @@ half-drawn guesses (`finetune_species.py`). Its push follows log p(cat) + log p(
 
 **Q1. Can a checker read "which animals are there" from the half-drawn guess by step 15?**
 
-- Support: both outputs reach 0.80 balanced accuracy at step 15 on the 220 held-out pictures' guesses.
+- Support: both outputs reach 0.80 [balanced accuracy](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged) at step 15 on the 220 held-out pictures' guesses.
 - Null: either output below 0.70 at step 15 (iteration 6's readout presence outputs read 0.695 and 0.728).
 - In between: inconclusive; the push sheets still run.
 
 **Q2. Does adding a species push from step 10 turn two bodies into a cat and a dog?**
 
 Four rows on held-out seeds 9 to 16 at strengths 10, 30 and 100: bodies push alone (steps 0 to 9), species
-push alone (steps 10 to 49), both (bodies on 0 to 9, species on 10 to 49), and each row's size-matched random
-push.
+push alone (steps 10 to 49), both (bodies on 0 to 9, species on 10 to 49), and each row's [size-matched random
+push](a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses).
 
 - Support: "two clear" on at least 2 more seeds with both than with the bodies push alone, at some strength,
   while that strength's random push adds none.
@@ -55,3 +55,7 @@ the 0.70 null line and the 0.80 support line.
 seeds 10, 11, 12, 15 and 16 at strengths 30 and 100, fewer separate animals than the identity push over all steps: a
 hybrid scores high on both presence outputs. The draft calls are from tile-size sheets
 (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan26-both-vs-identity.png`).
+
+## Cross-references
+
+- The mention of **a species checker** in [plan 26, two pushes, bodies early and species late, goal](../26-two-pushes-bodies-early-species-late.md#goal).

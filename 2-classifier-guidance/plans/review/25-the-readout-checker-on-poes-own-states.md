@@ -9,7 +9,7 @@ The questions and their pass marks for [plan 25](../25-the-readout-checker-on-po
 joint prompt "a cat and a dog", with its states at sampler steps 0 to 20 and every fifth step after saved.
 
 **Label.** How a run finished, called by the CLIP ViT-L/14 checker fine-tuned on finished pictures (0.900
-held-out balanced accuracy): clean above a logit of +2, reject below −2, left out in between. Every saved state
+held-out [balanced accuracy](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged)): clean above a logit of +2, reject below −2, left out in between. Every saved state
 of the run carries it.
 
 **Reading check.** Balanced accuracy, clean against reject, on the saved states of the held-out joint runs
@@ -30,7 +30,7 @@ of the run carries it.
 On held-out seeds 9 to 16 at strengths 10, 30 and 100, called from full-size tiles on the ladder single <
 hybrid < two bodies or heads < two clear (a clean cat and a clean dog):
 
-- Support: "two clear" on at least 2 more seeds than plain PoE and than the size-matched random push, at some
+- Support: "two clear" on at least 2 more seeds than plain PoE and than the [size-matched random push](a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses), at some
   strength, and at least as many as the identity push (iteration 6) at that strength.
 - Null: no more "two clear" seeds than iteration 6.
 - Style check, read beside the count: a seed that turns from a drawing into a photograph is noted on its call;
@@ -45,3 +45,7 @@ hybrid < two bodies or heads < two clear (a clean cat and a clean dog):
 | baseline reading | iteration 4 scored on the held-out runs | not started |
 | readout-catdog-traj | iteration 4's settings plus `--traj-frac 0.5` | not started |
 | push sheet | `render_results.py --readout`, seeds 9 to 16 | not started |
+
+## Cross-references
+
+- The mention of **the reading check** in [plan 25, the readout checker on PoE's own early states, quick context](../25-the-readout-checker-on-poes-own-states.md#quick-context).

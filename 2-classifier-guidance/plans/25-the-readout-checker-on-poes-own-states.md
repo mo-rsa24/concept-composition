@@ -47,7 +47,7 @@ rung 2 discriminator cannot carry the label.
 **Considerations**
 
 The clean examples come almost all from joint runs, because plain PoE ends clean on almost no seeds. Joint runs
-that finish fused are rejects too, and the reading check uses joint runs only, so the prompt alone cannot pass
+that finish fused are rejects too, and the [reading check](review/25-the-readout-checker-on-poes-own-states.md#words-this-file-uses) uses joint runs only, so the prompt alone cannot pass
 it. The rank-32 adapter's runs would add clean endings from the PoE side, but its weights are on `/datasets`,
 which is down. The identity push also turned drawn seeds into photographs; the review file reads style beside
 the count.
@@ -57,7 +57,7 @@ the count.
 Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) | [Next](#environment-facts-this-plan-depends-on) ➡️
 
 A readout checker that reads the held-out joint runs' states at steps 0 to 10 at 0.75 or more, and a push sheet
-on seeds 9 to 16 judged against plain PoE, the random push and the identity push. The questions and pass marks
+on seeds 9 to 16 judged against plain PoE, the [random push](review/a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses) and the identity push. The questions and pass marks
 are Q1 and Q2 in [the review file](review/25-the-readout-checker-on-poes-own-states.md).
 
 ## Environment Facts This Plan Depends On

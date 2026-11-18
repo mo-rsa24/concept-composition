@@ -303,3 +303,9 @@ Plan the stronger discriminator: Kim et al.'s discriminator guidance scaled up (
 joint-prompt renders as real against the product's own samples as fake, no hand labels), with the
 held-out check of plan 22 before any push; beside it, a discriminator on frozen CLIP or DINOv2
 features. The prescribed cap-0.3 rerun waits for `/datasets`.
+
+## Cross-references
+
+- The mention of **the random push** in [plan 25, the readout checker on PoE's own early states, goal](../25-the-readout-checker-on-poes-own-states.md#goal).
+- The mention of **the size-matched random push** in [the review of plan 25, the readout checker on PoE's own early states, questions](25-the-readout-checker-on-poes-own-states.md#questions).
+- The mention of **each row's size-matched random push** in [the review of plan 26, two pushes, bodies early and species late, questions](26-two-pushes-bodies-early-species-late.md#questions).

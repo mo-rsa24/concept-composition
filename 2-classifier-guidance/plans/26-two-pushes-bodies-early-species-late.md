@@ -28,7 +28,7 @@ Navigation: ⬅️ [Previous](#position-in-the-plan-tree) | 📋 [TOC](#table-of
 
 **Why this plan exists**
 
-The readout checker's push turns PoE's one fused animal into two bodies on most held-out seeds, but rarely
+The [readout checker](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md)'s push turns PoE's one [fused animal](../../context/world/chimera.md#what-a-chimera-is) into two bodies on most held-out seeds, but rarely
 into a clean cat and dog: the usual result is two cats, a cat and a kitten, or a hybrid beside a cat. How many
 bodies is settled in the first 10 steps; which animal each body becomes is settled later (on lion × meerkat the
 species still changed between steps 25 and 50). The checker answers only "clean pair?", so its push makes two
@@ -45,7 +45,7 @@ change a cat-into-dog needs. The readout checker keeps the first 10 steps.
 
 Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) | [Next](#environment-facts-this-plan-depends-on) ➡️
 
-A species checker reading both animals at 0.80 by step 15, and a four-row push sheet on seeds 9 to 16 that says
+A [species checker](review/26-two-pushes-bodies-early-species-late.md#words-this-file-uses) reading both animals at 0.80 by step 15, and a four-row push sheet on seeds 9 to 16 that says
 whether bodies-then-species gives more clean cat-and-dog pictures than the bodies push alone. Questions Q1 and
 Q2 in [the review file](review/26-two-pushes-bodies-early-species-late.md).
 
@@ -71,7 +71,7 @@ For Claude to execute.
 - [x] **1.1 Code.** `finetune_species.py`, `clip_push.TwoStageHead`, `render_results.py --species --split`;
   checkpoints with one output load unchanged.
 - [x] **1.2 Train the species checker.** `rung2/species.sh` on mscluster112. The log prints each output's
-  balanced accuracy per step before training and after each epoch, and the Q1 verdict at step 15.
+  [balanced accuracy](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged) per step before training and after each epoch, and the Q1 verdict at step 15.
 - [ ] **1.3 Draw the bodies row.** `render_results.py --readout --head readout_pair/readout-catdog-identity/head_step_002000.pt
   --window 0 10 --seeds 9 10 11 12 13 14 15 16 --out-name result-sheet-catdog-bodies`.
 - [x] **1.4 Draw the species row.** `render_results.py --clip finetune/species-clip/best.pt --window 10 50 ...
