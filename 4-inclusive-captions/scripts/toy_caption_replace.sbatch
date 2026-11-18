@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=toy-replace
 #SBATCH --partition=bigbatch
-#SBATCH --gres=gpu:1
 #SBATCH --time=0-06:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
