@@ -99,8 +99,11 @@ class BoxSpeciesHead(nn.Module):
     """
     reads_estimate = True
 
-    def __init__(self, vae, device, scratch: Path):
+    def __init__(self, vae, device, scratch: Path, confidence: float | None = None):
         super().__init__()
+        # confidence: push a box only when zero-shot CLIP gives its assigned species at least this probability at the
+        # late start; None pushes both named boxes whatever CLIP's certainty (plan 28's first run)
+        self.confidence, self.active = confidence, [True, True]
         from transformers import CLIPModel, CLIPProcessor
         self.clip = CLIPModel.from_pretrained("openai/clip-vit-large-patch14").to(device).float().eval().requires_grad_(False)
         proc = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
@@ -151,8 +154,13 @@ class BoxSpeciesHead(nn.Module):
         size = img.shape[-1]
         boxes = [self._square([float(v) for v in d["box"]], size) for d in found]
         with torch.no_grad():
-            p_cat = [float(self._probs(img[:, :, b:d, a:c])[0]) for a, b, c, d in boxes]
-        return [boxes[0], boxes[1]] if p_cat[0] >= p_cat[1] else [boxes[1], boxes[0]]   # [cat box, dog box]
+            p_cat = [float(self._probs(img[:, :, b:d, a:c])[0].exp()) for a, b, c, d in boxes]
+        order = [0, 1] if p_cat[0] >= p_cat[1] else [1, 0]   # [cat box, dog box]
+        cat_p, dog_p = p_cat[order[0]], 1.0 - p_cat[order[1]]
+        self.active = [True, True] if self.confidence is None else [cat_p >= self.confidence, dog_p >= self.confidence]
+        print(f"  naming: cat box p(cat) {cat_p:.2f}, dog box p(dog) {dog_p:.2f}; pushing cat box {self.active[0]}, "
+              f"dog box {self.active[1]}", flush=True)
+        return [boxes[order[0]], boxes[order[1]]]
 
     def forward(self, x_t, timestep, eps=None, alpha_bar=None):
         img = decode_latents_with_grad(self.vae32, self._x0(x_t, eps, alpha_bar))
@@ -162,7 +170,12 @@ class BoxSpeciesHead(nn.Module):
         if not self.boxes:
             return (img * 0).sum().reshape(1)
         (a0, b0, c0, d0), (a1, b1, c1, d1) = self.boxes
-        return (self._probs(img[:, :, b0:d0, a0:c0])[0] + self._probs(img[:, :, b1:d1, a1:c1])[1]).reshape(1)
+        total = (img * 0).sum()
+        if self.active[0]:
+            total = total + self._probs(img[:, :, b0:d0, a0:c0])[0]
+        if self.active[1]:
+            total = total + self._probs(img[:, :, b1:d1, a1:c1])[1]
+        return total.reshape(1)
 
     def log_prob_both(self, x_t, timestep, eps=None, alpha_bar=None):
         return self.forward(x_t, timestep, eps, alpha_bar).sum()

@@ -211,6 +211,9 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--box-confidence", type=float, default=None,
+                    help="with --box-species: push a box only when zero-shot CLIP gives its assigned species at least "
+                         "this probability at the late start")
     ap.add_argument("--box-species", action="store_true",
                     help="with --readout: plan 28; the readout checker pushes before --split, then each detected animal is "
                          "pushed toward its own species by zero-shot CLIP on its box of the decoded guess")
@@ -263,7 +266,7 @@ def main() -> int:
         if args.box_species:
             from clip_push import BoxSpeciesHead, TwoStageHead
             ctx.scheduler.set_timesteps(ctx.num_inference_steps)
-            boxes = BoxSpeciesHead(ctx.models["vae"], ctx.device, OUT / "late-start")
+            boxes = BoxSpeciesHead(ctx.models["vae"], ctx.device, OUT / "late-start", confidence=args.box_confidence)
             disc = TwoStageHead(disc, boxes, ctx.scheduler.timesteps, split=args.split)
             print(f"plan 28 push: readout on steps 0 to {args.split - 1}, each animal toward its own species from step "
                   f"{args.split}", flush=True)
