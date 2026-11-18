@@ -211,6 +211,9 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--box-species", action="store_true",
+                    help="with --readout: plan 28; the readout checker pushes before --split, then each detected animal is "
+                         "pushed toward its own species by zero-shot CLIP on its box of the decoded guess")
     ap.add_argument("--recurrence", type=int, default=1,
                     help="Universal Guidance's self-recurrence: take each step in --recurrence-window this many times, "
                          "adding back the noise between the two levels before each repeat (guided and random rows alike)")
@@ -257,7 +260,14 @@ def main() -> int:
         head.load_state_dict(state["head"])
         disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
         print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
-        if args.species:
+        if args.box_species:
+            from clip_push import BoxSpeciesHead, TwoStageHead
+            ctx.scheduler.set_timesteps(ctx.num_inference_steps)
+            boxes = BoxSpeciesHead(ctx.models["vae"], ctx.device, OUT / "late-start")
+            disc = TwoStageHead(disc, boxes, ctx.scheduler.timesteps, split=args.split)
+            print(f"plan 28 push: readout on steps 0 to {args.split - 1}, each animal toward its own species from step "
+                  f"{args.split}", flush=True)
+        elif args.species:
             from clip_push import ClipEstimateChecker, TwoStageHead
             ctx.scheduler.set_timesteps(ctx.num_inference_steps)
             disc = TwoStageHead(disc, ClipEstimateChecker(args.species, ctx.models["vae"], ctx.device),
