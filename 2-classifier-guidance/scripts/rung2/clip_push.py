@@ -33,7 +33,7 @@ class ClipEstimateChecker(nn.Module):
     def __init__(self, ckpt: Path, vae, device):
         super().__init__()
         state = torch.load(ckpt, map_location="cpu")
-        self.net = Checker(state["model"])
+        self.net = Checker(state["model"], n_out=state.get("n_out", 1))
         self.net.load_state_dict(state["state"])
         self.net = self.net.float().eval().to(device).requires_grad_(False)
         spec = SPECS[state["model"]]
@@ -53,4 +53,5 @@ class ClipEstimateChecker(nn.Module):
         return logit.float()
 
     def log_prob_both(self, x_t, timestep, eps=None, alpha_bar=None):
+        # one output: log p(clean pair); two (the species checker): log p(a clear cat) + log p(a clear dog)
         return F.logsigmoid(self.forward(x_t, timestep, eps, alpha_bar)).sum()

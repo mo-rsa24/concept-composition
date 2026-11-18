@@ -49,9 +49,9 @@ SPECS = {
 
 
 class Checker(nn.Module):
-    def __init__(self, name: str):
+    def __init__(self, name: str, n_out: int = 1):
         super().__init__()
-        self.name = name
+        self.name, self.n_out = name, n_out
         if name == "dinov2":
             hub = Path(torch.hub.get_dir()) / "facebookresearch_dinov2_main"
             self.net = torch.hub.load(str(hub), "dinov2_vitb14_reg", source="local")
@@ -63,7 +63,7 @@ class Checker(nn.Module):
             if name == "clip-bigg":  # 1.8 billion weights: recompute activations instead of storing them
                 self.net.gradient_checkpointing_enable()
             width = self.net.config.hidden_size
-        self.head = nn.Sequential(nn.LayerNorm(width), nn.Dropout(0.1), nn.Linear(width, 1))
+        self.head = nn.Sequential(nn.LayerNorm(width), nn.Dropout(0.1), nn.Linear(width, n_out))
 
     def forward(self, x):
         if self.name == "dinov2":
@@ -71,7 +71,8 @@ class Checker(nn.Module):
             z = torch.cat([f["x_norm_clstoken"], f["x_norm_patchtokens"].mean(1)], -1)
         else:
             z = self.net(pixel_values=x).pooler_output
-        return self.head(z.float()).squeeze(-1)
+        o = self.head(z.float())
+        return o.squeeze(-1) if self.n_out == 1 else o   # (B,) clean pair, or (B, n_out)
 
 
 class Pictures(torch.utils.data.Dataset):
