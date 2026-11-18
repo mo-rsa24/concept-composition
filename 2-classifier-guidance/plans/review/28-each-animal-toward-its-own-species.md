@@ -37,4 +37,13 @@ late push never acts on most of them.
 
 | Run | What | Status |
 | --- | --- | --- |
-| result-sheet-catdog-boxes | `render_results.py --readout --head <iteration 6> --box-species --split 16 --push-cap 0.3 --cap-late 0.1 --cap-late-from 16` | queued |
+| result-sheet-catdog-boxes | `render_results.py --readout --head <iteration 6> --box-species --split 16 --push-cap 0.3 --cap-late 0.1 --cap-late-from 16` | done |
+
+## Answers
+
+**Q1: null.** Clean or near-clean on 4 of 8 seeds (9, 11, 12, 16), the same count as the early push alone (9, 11, 15,
+16). The per-animal push changes species: right on seeds 9, 11 and 12 at strength 30, wrong on seed 15 at 30 and seed 13
+at 100, where the boxes were named from a still-blurry guess at step 16. It adds artifacts on seed 10 and on seed 16 at
+strength 100. Draft calls at full size (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-boxes/compare/`).
+
+**Q2: support.** Two or more animals at step 16 on 16 of 16 pictures (three on 2).

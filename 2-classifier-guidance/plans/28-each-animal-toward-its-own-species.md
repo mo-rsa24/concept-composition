@@ -66,9 +66,9 @@ For Claude to execute.
 
 - [x] **1.1 Code.** `clip_push.BoxSpeciesHead` (detector at the late start, zero-shot CLIP naming, per-box push),
   `TwoStageHead` resets it per picture, `render_results.py --box-species`.
-- [ ] **1.2 Draw.** `rung2/boxes.sh` on a free card; the log prints, per picture, how many animals the detector found
+- [x] **1.2 Draw.** `rung2/boxes.sh` on a free card; the log prints, per picture, how many animals the detector found
   at step 16.
-- [ ] **1.3 Compare.** Full-size images per seed beside the early push alone, sent with draft calls.
+- [x] **1.3 Compare.** Full-size images per seed beside the early push alone, sent with draft calls.
 
 ▶ Next: [2. Call the sheet](#2--call-the-sheet)
 
