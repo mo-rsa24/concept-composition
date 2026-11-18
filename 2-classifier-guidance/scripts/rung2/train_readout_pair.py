@@ -134,9 +134,13 @@ def manifest_sampler(args, sampler_t):
     split["missing_latents"] = dict(missing)
     split["pairs_with_a_real_example"] = len({t["pair"] for v in by[1].values() for t in v})
 
+    wrong = [t for v in by[0].values() for t in v if "wrong pair" in t.get("kind", "")]
+    split["wrong_pair_rejects"] = len(wrong)
+
     def batch(scheduler, device, dtype):
         picks = [random.choice(by[1][random.choice(list(by[1]))]) for _ in range(4)] + \
-                [random.choice(by[0][random.choice(list(by[0]))]) for _ in range(4)]
+                [random.choice(wrong) if wrong and random.random() < args.hard_frac
+                 else random.choice(by[0][random.choice(list(by[0]))]) for _ in range(4)]
         z0 = torch.cat([random.choice(p["zs"]) for p in picks]).to(device, torch.float32)
         idx = [random.randrange(EARLY) if random.random() < args.early_frac else random.randrange(len(sampler_t))
                for _ in picks]
@@ -179,6 +183,9 @@ def main() -> int:
     ap.add_argument("--accum", type=int, default=1)
     ap.add_argument("--score", type=Path, default=None,
                     help="a saved head: no training, only score it on --eval over the first 20 steps (writes score-<eval>.json)")
+    ap.add_argument("--hard-frac", type=float, default=0.0,
+                    help="share of each batch's rejects drawn from wrong-pair pictures (two cats, two dogs), "
+                         "the mistake the push keeps making; the rest are drawn as before")
     ap.add_argument("--frac", type=float, default=1.0,
                     help="train on this share of the manifest's tiles, kept in proportion by source and label (learning curve)")
     ap.add_argument("--steps", type=int, default=3000)
