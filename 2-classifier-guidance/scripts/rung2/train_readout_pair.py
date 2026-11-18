@@ -233,6 +233,9 @@ def main() -> int:
     ap.add_argument("--presence", type=Path, default=None,
                     help="presence_catdog.json: adds two outputs, a cat present and a dog present, trained beside "
                          "clean pair; the push then follows the sum of all three (the identity push)")
+    ap.add_argument("--presence-only", action="store_true",
+                    help="with --presence: a presence-only checker (MNIST's separate-label control): two outputs, a cat "
+                         "present and a dog present, and no clean-pair output; its push is their sum")
     ap.add_argument("--hard-frac", type=float, default=0.0,
                     help="share of each batch's rejects drawn from wrong-pair pictures (two cats, two dogs), "
                          "the mistake the push keeps making; the rest are drawn as before")
@@ -297,7 +300,10 @@ def main() -> int:
                 prompts[p] = encode_prompt_sdxl(joint_prompt(p), models=ctx.models, device=ctx.device, dtype=ctx.dtype)
         return reader(x, t, torch.cat([prompts[p][0] for p in pairs]), torch.cat([prompts[p][1] for p in pairs]))
     presence = json.loads(args.presence.read_text()) if args.presence else None
-    head = PairHead(n_out=3 if presence else 1).to(ctx.device)
+    if args.presence_only and not presence:
+        raise SystemExit("--presence-only needs --presence")
+    head = PairHead(n_out=2 if args.presence_only else 3 if presence else 1).to(ctx.device)
+    first = 0 if args.presence_only else 1          # where the presence outputs start
     groups = [{"params": head.parameters(), "lr": 3e-4}]
     if lora_params:
         groups.append({"params": lora_params, "lr": 1e-4})
@@ -326,8 +332,8 @@ def main() -> int:
                         if o.ndim == 1:
                             logits[i + j].append(float(o[j]))
                         else:
-                            logits[i + j].append(float(o[j, 0]))
-                            extra[i + j].append(o[j, 1:].tolist())
+                            logits[i + j].append(float(o[j].sum()) if args.presence_only else float(o[j, 0]))
+                            extra[i + j].append(o[j, first:].tolist())
             yes = [sum(l) / len(l) > 0 for l in logits]
 
             def bal(neg_kinds, only_v3=True, only=None):
@@ -426,7 +432,7 @@ def main() -> int:
                 tc = traj_check()
                 print(f"step {step:5d}  " + show_traj(tc), flush=True)
             torch.save({"head": head.state_dict(), "step": step, "split": split, "pair_prompt": args.pair_prompt,
-                        "heads": head.n_out, "trunk_lora": args.trunk_lora,
+                        "heads": head.n_out, "trunk_lora": args.trunk_lora, "presence_only": args.presence_only,
                         "lora": {n: q.detach().cpu() for n, q in clf_unet.named_parameters() if "lora_" in n} if clf_unet is not None else None},
                        out / f"head_step_{step:06d}.pt")
             head.train()
@@ -451,7 +457,9 @@ def main() -> int:
             else:
                 pres = torch.tensor([presence.get(i, [-1, -1]) for i in ids], dtype=torch.float32, device=ctx.device)
                 mask = (pres >= 0).float()
-                loss = F.binary_cross_entropy_with_logits(o[:, 0], y) + \
+                pres_loss = (F.binary_cross_entropy_with_logits(o[:, first:], pres.clamp(min=0), reduction="none")
+                             * mask).sum() / mask.sum().clamp(min=1)
+                loss = pres_loss * 2 if args.presence_only else F.binary_cross_entropy_with_logits(o[:, 0], y) + \
                     (F.binary_cross_entropy_with_logits(o[:, 1:], pres.clamp(min=0), reduction="none") * mask).sum() \
                     / mask.sum().clamp(min=1) * 2
             (loss / args.accum).backward()

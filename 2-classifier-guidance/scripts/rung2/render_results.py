@@ -211,6 +211,11 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--presence-head", type=Path, default=None,
+                    help="with --readout: a presence-only readout checker (train_readout_pair.py --presence-only) whose "
+                         "push (cat present + dog present) is added to --head's at --presence-weight times its strength; "
+                         "both read the same SDXL features")
+    ap.add_argument("--presence-weight", type=float, default=1.0)
     ap.add_argument("--prompts", nargs=2, default=["a cat", "a dog"], metavar=("A", "B"),
                     help="the two prompts of the product; a readout checker trained with the joint prompt reads with "
                          "'A and B'; the starting noise per seed is shared across pairs")
@@ -283,6 +288,28 @@ def main() -> int:
             assert not missing.unexpected_keys, missing.unexpected_keys[:3]
             reader_unet.requires_grad_(False)
             print(f"checker reads a separate SDXL copy with its trunk LoRA (rank {state['trunk_lora']})", flush=True)
+        if args.presence_head:
+            p_state = torch.load(args.presence_head, map_location="cpu")
+            assert p_state.get("presence_only") and not p_state.get("trunk_lora") and not state.get("trunk_lora"), \
+                "the presence push shares the frozen SDXL reader"
+            assert bool(p_state.get("pair_prompt")) == bool(state.get("pair_prompt")), "both checkers must read one prompt"
+            p_head = PairHead(n_out=2)
+            p_head.load_state_dict(p_state["head"])
+
+            class SummedHeads(torch.nn.Module):
+                """The pair-aware head's push plus the presence-only head's, on one read of SDXL."""
+
+                def __init__(self, a, b, w):
+                    super().__init__()
+                    self.a, self.b, self.w = a, b, w
+
+                def forward(self, feats):
+                    oa = self.a(feats)
+                    return (oa if oa.ndim == 1 else oa.sum(-1)) + self.w * self.b(feats).sum(-1)
+            head = SummedHeads(head.float().eval(), p_head.float().eval(), args.presence_weight)
+            args.head = Path(f"{args.head}+presence:{args.presence_head}@{args.presence_weight:g}")
+            print(f"presence push added: {args.presence_head} (step {p_state['step']}) at weight {args.presence_weight:g}",
+                  flush=True)
         disc = ReadoutPairClassifier(reader_unet, seq_r, pool_r, head.float().eval()).to(ctx.device)
         print(f"loaded readout checker {args.head} (step {state['step']}, joint prompt {bool(state.get('pair_prompt'))})", flush=True)
         if args.box_species:
