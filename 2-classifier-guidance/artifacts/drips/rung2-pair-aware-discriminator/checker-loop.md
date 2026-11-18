@@ -90,3 +90,9 @@ The identity push (iteration 6) with the cap on each step's push raised from 0.1
 | 0.3, random push of the same size | plain PoE's fused animal on every seed |
 
 At full size, seed 11 at strength 100 is a ginger cat beside a St Bernard: a clean cat and dog from one trajectory, overexposed and hazy. Seed 13 at strength 30 is a tabby cat beside a black-and-white dog whose head is hidden, with the cat's face garbled. The push was too small at 0.1: three times the room turns two cats into a cat and a dog, and costs picture quality.
+
+## Two pushes: bodies early, species late (plan 26)
+
+The species checker (CLIP ViT-L/14 fine-tuned with two outputs, a clear cat present and a clear dog present, on finished pictures and half-drawn guesses) reads, at step 15 on the 220 held-out pictures' guesses, cat 0.711 and dog 0.847: Q1 inconclusive (both had to reach 0.80; null below 0.70). The combined push (iteration 6's readout checker on steps 0 to 9, the species checker from step 10, cap 0.1) is in `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan26-both-vs-identity.png`.
+
+At strengths 30 and 100 the combined push gives one cat-dog face on most seeds (10, 11, 12, 15, 16), fewer separate animals than the identity push alone: a hybrid scores high on both "cat present" and "dog present", so raising both rewards one fused animal. At strength 10 a few seeds keep two animals (13 a cat beside a dog, 16 a cat lying on a dog). Asking for both species with two independent outputs cannot penalise their fusion; the NOT-hybrid term of plan 27 is the attempt at that.
