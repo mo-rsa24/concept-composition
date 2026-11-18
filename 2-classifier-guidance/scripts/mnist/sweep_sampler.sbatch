@@ -16,5 +16,5 @@ cd "$REPO"
 nvidia-smi -L | grep -q GPU || { echo "GPU guard: no device visible"; exit 4; }
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) commit=$(git rev-parse --short HEAD) head=$HEAD settings=$*"
 "$PY" 2-classifier-guidance/scripts/mnist/sweep_sampler.py --models "$ROOT/models" --checkers "$ROOT/checkers" \
-    --judge3 "$ROOT/judge-v3/judge.pt" --head "$HEAD" --out "$ROOT/five-versions/$NAME" "$@"
+    --judge3 "$ROOT/judge-v3/judge.pt" --head "$HEAD" ${PAIRS:+--pairs "$PAIRS"} --out "$ROOT/five-versions/$NAME" "$@"
 echo "[$(date -u +%H:%M:%S)] done"

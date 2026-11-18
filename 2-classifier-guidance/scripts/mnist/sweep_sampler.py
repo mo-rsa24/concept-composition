@@ -39,6 +39,7 @@ def main():
     for a in ("--models", "--checkers", "--judge3", "--out"):
         ap.add_argument(a, type=Path, required=True)
     ap.add_argument("--head", required=True)
+    ap.add_argument("--pairs", default=None, help='pairs to render, e.g. "0,3 1,9" (default: the three tuning pairs)')
     ap.add_argument("settings", nargs="+")
     a = ap.parse_args()
     dev = "cuda"
@@ -47,9 +48,10 @@ def main():
     j3 = load(a.judge3, dev)
     a.out.mkdir(parents=True, exist_ok=True)
     counts, canv = {}, {}
+    pairs = [tuple(int(d) for d in q.split(",")) for q in a.pairs.split()] if a.pairs else PAIRS
     for st in a.settings:
         kind, val = st.split(":")
-        for p in PAIRS:
+        for p in pairs:
             if kind == "const":
                 fn, eta = pair_push(unet, head, *p, float(val)), 0.0
             elif kind == "sched":
@@ -62,9 +64,9 @@ def main():
             key = f"{st}|{p[0]}{p[1]}"
             canv[key] = x
             counts[key] = int(sum(call(r, p, 1.01, 0.9) for r in read_all(j3, x)))
-        total = sum(counts[f"{st}|{p[0]}{p[1]}"] for p in PAIRS)
-        counts[f"{st}|total of 192"] = total
-        print(st, [counts[f"{st}|{p[0]}{p[1]}"] for p in PAIRS], "total", total, flush=True)
+        total = sum(counts[f"{st}|{p[0]}{p[1]}"] for p in pairs)
+        counts[f"{st}|total of {64 * len(pairs)}"] = total
+        print(st, [counts[f"{st}|{p[0]}{p[1]}"] for p in pairs], "total", total, flush=True)
     np.savez_compressed(a.out / "canvases.npz", **canv)
     (a.out / "counts_v3.json").write_text(json.dumps({"head": a.head, "counts": counts}, indent=1))
 
