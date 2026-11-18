@@ -190,3 +190,12 @@ One change per round, each judged on cat × dog evaluation seeds 6001 to 6128 (n
 | --- | --- | --- | --- | --- | --- |
 | baseline | the recipe, iteration 6's checker | result-sheet-catdog-big | pending | pending | baseline |
 | 1 | plan 25's checker (`readout-catdog-traj`, trained on PoE's own states) in place of iteration 6's | result-sheet-catdog-big-traj | pending | pending | pending |
+
+**Rescoring plan 30's step 0 with the scorer** (48 pictures each, about 2,180 input and 84 output tokens per picture):
+
+| Pair | Plain PoE: two bodies / faithful | Random push | Recipe | Eye (recipe) |
+| --- | --- | --- | --- | --- |
+| lion × meerkat | 3 / 0 | 0 / 0 | 10 / 0 | 10 two animals, 6 lion and meerkat, 3 clean or near-clean |
+| typewriter × cactus | 6 / 0 | 7 / 0 | 16 / 1 | 14 separate, 6 clean |
+
+On objects the scorer counts loose cacti as extra bodies, so "two bodies" is high for plain PoE and the random push (6 and 7) and does not separate them from the recipe as cleanly as the eye calls; its faithful pair calls a typewriter with cacti growing on it a hybrid. For lion × meerkat it matches the eye on two bodies (10) and finds no faithful pair, stricter than the eye's 3.
