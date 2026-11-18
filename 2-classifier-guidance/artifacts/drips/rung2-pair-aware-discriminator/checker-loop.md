@@ -43,3 +43,15 @@ Every weight of a pretrained network trained on the 1,603 finished training pict
 | CLIP ViT-bigG/14, random crops, seed 1 | **0.909** | 46/46 | 24/29 | 16/22 | 100/109 |
 
 Two CLIP seeds differ by 0.035, as large as any change tried, because the 160-picture validation split sometimes picks epoch 1. Most "wrong pair" rejects are a cat and a dog with a third animal, usually a kitten. The damaged rejects are the hardest kind for every run.
+
+## Reading half-drawn pictures
+
+A push never sees the finished picture: at each step the checker reads SDXL's decoded guess at it. `scripts/rung2/make_estimates.py` drew 4,966 such guesses (training pictures at two steps between 10 and 30, the 220 held-out pictures at steps 0 to 40), and `scripts/rung2/finetune_estimates.py` scored the CLIP ViT-L/14 checker (seed 0, 0.900 on finished pictures) on them, then trained it on them for 8 epochs (epoch 4 kept on the validation split). Balanced accuracy on the 220 held-out pictures; 0.50 is a coin flip. Per-step numbers are in `probe/finetune_estimates_clip.json`; the strip of one held-out pair's guesses is `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/half-drawn-guesses/what-the-checker-sees-by-step.png`.
+
+| Sampler step | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 40 | finished |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CLIP, finished pictures only | 0.50 | 0.50 | 0.51 | 0.58 | 0.62 | 0.74 | 0.81 | 0.89 | 0.90 |
+| CLIP, then trained on guesses | 0.51 | 0.54 | 0.72 | 0.82 | 0.84 | 0.89 | 0.87 | 0.91 | 0.90 |
+| Readout checker, iteration 4 (noisy latents) | 0.63 | 0.74 | 0.78 | 0.79 | | | | | |
+
+Before step 10 the decoded guess holds no second animal, and no checker trained on it rises above 0.54; the readout checker, which reads SDXL's features, is the better reader there.
