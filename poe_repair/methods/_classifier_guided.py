@@ -87,6 +87,8 @@ def run_poe_classifier_guided(
     push_cap_late_from: int = 10,
     recurrence_window: tuple[int, int] | None = None,
     recurrence_generator: torch.Generator | None = None,
+    backward_steps: int = 0,
+    backward_lr: float = 0.05,
 ) -> SamplerOutputs:
     """``run_cfg_poe`` plus a classifier push at each step.
 
@@ -207,8 +209,23 @@ def run_poe_classifier_guided(
                         log_p = head.log_prob_both(z, t_batch)
                     grad = torch.autograd.grad(log_p, z)[0]
                 sigma_t = torch.sqrt(1.0 - alpha_bar)
+                if backward_steps > 0 and getattr(head, "reads_estimate", False):
+                    # Universal Guidance's backward guidance (Bansal et al., eq. 7 to 9): several Adam steps on a change
+                    # delta to the estimate of the finished latent, scored as a finished picture, then carried into
+                    # the noise prediction: x0 + delta needs eps - sqrt(alpha_bar / (1 - alpha_bar)) * delta
+                    with torch.enable_grad():
+                        x0_hat = ((latents.float() - sigma_t * eps_p.float()) / alpha_bar.sqrt()).detach()
+                        delta = torch.zeros_like(x0_hat, requires_grad=True)
+                        bopt = torch.optim.Adam([delta], lr=float(backward_lr))
+                        for _ in range(int(backward_steps)):
+                            bopt.zero_grad(set_to_none=True)
+                            (-head.log_prob_both(x0_hat + delta, t_batch)).backward()
+                            bopt.step()
+                    raw = (alpha_bar.sqrt() / sigma_t) * delta.detach()
+                else:
+                    raw = float(strength) * sigma_t * grad
                 push, push_before_cap, capped = capped_push(
-                    float(strength) * sigma_t * grad, eps_p,
+                    raw, eps_p,
                     push_cap_late if (push_cap_late is not None and step_index >= push_cap_late_from) else push_cap)
                 eps_p = (eps_p.float() - push).to(dtype)
                 grad_norm_per_step.append(float(grad.norm()))
@@ -254,6 +271,8 @@ def run_poe_classifier_guided(
             "random_push": random_push_norms is not None,
             "adapter_lambda": None if adapter_lambda is None else float(adapter_lambda),
             "recurrence": int(recurrence),
+            "backward_steps": int(backward_steps),
+            "backward_lr": float(backward_lr),
             "push_cap_late": None if push_cap_late is None else float(push_cap_late),
             "push_cap_late_from": int(push_cap_late_from),
             "recurrence_window": list(recurrence_window) if recurrence_window else None,

@@ -224,6 +224,10 @@ def main() -> int:
                     help="Universal Guidance's self-recurrence: take each step in --recurrence-window this many times, "
                          "adding back the noise between the two levels before each repeat (guided and random rows alike)")
     ap.add_argument("--recurrence-window", type=int, nargs=2, default=None, metavar=("FIRST", "STOP"))
+    ap.add_argument("--backward-steps", type=int, default=0,
+                    help="with --clip: Universal Guidance's backward guidance, this many Adam steps on the estimate of the "
+                         "finished latent per pushed step (the strength is then unused; the cap still applies)")
+    ap.add_argument("--backward-lr", type=float, default=0.05)
     ap.add_argument("--cap-late", type=float, default=None,
                     help="a second cap on the push from sampler step --cap-late-from on; --push-cap holds before it")
     ap.add_argument("--cap-late-from", type=int, default=10)
@@ -328,7 +332,7 @@ def main() -> int:
     base_record = json.loads((base / "result.json").read_text()) if base else None
     if base_record and base_record["head"] != str(args.head):
         raise SystemExit("guard: reused baselines were picked by a different discriminator")
-    record = {"prompts": args.prompts, "push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
+    record = {"backward_steps": args.backward_steps, "backward_lr": args.backward_lr, "prompts": args.prompts, "push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
               "window": args.window, "recurrence": args.recurrence,
               "recurrence_window": args.recurrence_window, "reused_baselines": str(base) if base else None,
               "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
@@ -377,6 +381,7 @@ def main() -> int:
                 init_latents=init, euler_init_noise_sigma=sigma, head=disc, strength=s_,
                 push_cap=args.push_cap, guidance_window=tuple(args.window) if args.window else None,
                 push_cap_late=args.cap_late, push_cap_late_from=args.cap_late_from,
+                backward_steps=args.backward_steps, backward_lr=args.backward_lr,
                 **recur(seed, s_, 1), **common))
             write_decoded_image(guided.image, tile(seed, f"s{s_:g}"))
             norms = guided.extras["applied_norm_per_step"]
