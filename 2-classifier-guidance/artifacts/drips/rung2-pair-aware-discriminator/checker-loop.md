@@ -67,3 +67,14 @@ Before step 10 the decoded guess holds no second animal, and no checker trained 
 | clip-push-sheet-halfdrawn | CLIP trained on half-drawn guesses | steps 10 to 49 | 0 | the same picture as plain PoE on every seed; seed 16 scored +0.10 the same way |
 
 The CLIP push raised its own checker's score on every seed (by 1 to 13.5 logits over the size-matched random push) without moving where the animals are. A gradient through the decoded guess, at the same push size, changes texture; the readout checker's gradient, read off SDXL's own features, changes the layout.
+
+## Push, then pick
+
+`scripts/rung2/push_then_pick.py`: four starting noises per held-out seed (9 to 16), each drawn as plain PoE and with the identity push (iteration 6, strength 100, cap 0.1); the CLIP checker fine-tuned on finished pictures (0.900) picks the best of four in each set. Sheet and tiles in `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/push-then-pick/`.
+
+| Set | Picks CLIP calls clean, of 8 | By eye (draft, full-size tiles) |
+| --- | --- | --- |
+| plain PoE, best of 4 | 0 (best logit −10.9 to −12.0) | one fused animal on every seed |
+| identity push, best of 4 | 3 (seeds 10 +10.2, 16 +6.3, 11 +2.4) | 2 near-clean cat and dog: seed 10 a dog with an extra pair of pointed cat ears beside a tabby kitten; seed 16 a dog with one stray white ear beside a clean grey cat. Seed 11 is two dogs, a false clean call |
+
+Picking among four pushed tries doubles the near-clean count of one pushed try per seed and finds none among plain tries. CLIP still calls two dogs clean, a mistake its evaluation set (where "wrong pair" was mostly a third animal) did not test.
