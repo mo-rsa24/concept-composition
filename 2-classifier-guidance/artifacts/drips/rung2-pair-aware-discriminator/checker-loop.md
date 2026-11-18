@@ -208,6 +208,8 @@ New checker data comes from the 276-prompt Attend-and-Excite benchmark renders (
 | --- | --- |
 | faithful pair (two bodies, a clear A and a clear B, no borrowed feature or body shape, an intact photograph) | clean |
 | hybrid, single, wrong pair | reject |
-| damaged (a drawing, collage or broken picture) | left out, so style cannot carry the label |
+| damaged, or any verdict on a picture the labeller marks not an intact photograph | left out, so style cannot carry the label |
 
 Left out of training by rule: the test pairs lion × meerkat and typewriter × cactus, and cat × dog at seeds 9 to 16. Each source is spot-checked by eye (16 clean, 16 rejects) before training uses it.
+
+**The benchmark pool, labelled.** 4,400 pictures, about 7.24 million input tokens (1,646 per picture). The first rule left drawings in the rejects: the labeller calls a picture "damaged" only when no other verdict applies first, so a cartoon of two lions came out "wrong pair" while nearly every clean picture was a photograph (spot-check sheets `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/benchmark-pool/spot/`). Every picture not marked an intact photograph is now left out whatever its verdict. Kept: 611 clean and 645 rejects over 200 pairs (joint 178 / 165, adapter 30 / 161, CO3 157 / 185, ToMe 246 / 134); the clean calls in the spot-checks are right on all four methods.
