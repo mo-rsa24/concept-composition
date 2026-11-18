@@ -83,6 +83,8 @@ def run_poe_classifier_guided(
     random_generator: torch.Generator | None = None,
     adapter_lambda: float | None = None,
     recurrence: int = 1,
+    push_cap_late: float | None = None,
+    push_cap_late_from: int = 10,
     recurrence_window: tuple[int, int] | None = None,
     recurrence_generator: torch.Generator | None = None,
 ) -> SamplerOutputs:
@@ -206,7 +208,8 @@ def run_poe_classifier_guided(
                     grad = torch.autograd.grad(log_p, z)[0]
                 sigma_t = torch.sqrt(1.0 - alpha_bar)
                 push, push_before_cap, capped = capped_push(
-                    float(strength) * sigma_t * grad, eps_p, push_cap)
+                    float(strength) * sigma_t * grad, eps_p,
+                    push_cap_late if (push_cap_late is not None and step_index >= push_cap_late_from) else push_cap)
                 eps_p = (eps_p.float() - push).to(dtype)
                 grad_norm_per_step.append(float(grad.norm()))
                 push_before_cap_per_step.append(push_before_cap)
@@ -251,6 +254,8 @@ def run_poe_classifier_guided(
             "random_push": random_push_norms is not None,
             "adapter_lambda": None if adapter_lambda is None else float(adapter_lambda),
             "recurrence": int(recurrence),
+            "push_cap_late": None if push_cap_late is None else float(push_cap_late),
+            "push_cap_late_from": int(push_cap_late_from),
             "recurrence_window": list(recurrence_window) if recurrence_window else None,
         },
     )
