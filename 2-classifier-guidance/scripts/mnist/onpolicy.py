@@ -28,6 +28,7 @@ def main():
     ap.add_argument("--head", required=True)
     ap.add_argument("--s", type=float, required=True)
     ap.add_argument("--seed0", type=int, default=2000)
+    ap.add_argument("--per-pair", type=int, default=12, help="pushed pictures per training pair")
     a = ap.parse_args()
     assert a.seed0 >= 1000
     dev = "cuda"
@@ -37,7 +38,7 @@ def main():
     d = dict(np.load(a.draws))
     xs, ps, calls = [], [], []
     for p in [q for q in SEEN if q not in TUNING]:
-        seeds = list(range(a.seed0, a.seed0 + 12))
+        seeds = list(range(a.seed0, a.seed0 + a.per_pair))
         x = to_uint8(sample(unet, seeds, list(p), push_fn=pair_push(unet, head, *p, a.s), cap=0.1, device=dev)[0])
         for r, c in zip(read_all(j3, x), x):
             xs.append(c); ps.append(p)

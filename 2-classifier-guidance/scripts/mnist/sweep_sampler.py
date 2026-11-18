@@ -6,6 +6,8 @@ Settings, written before any render:
   const:<s>                     strength s at every step (the reference)
   sched:<early>,<late>,<K>      strength early for the first K of 50 steps, then late
   eta:<eta>@<s>                 DDIM with eta, strength s at every step
+  sep:<eta>@<s>+<s2>            eta, the push at s plus the separate-label push at s2 (round 6)
+  ens:<eta>@<s>                 eta, the push averaged over --head and --head2, each at s (round 7)
 The cap stays 0.1 of the product prediction's norm, per sample.
 
 Usage: python sweep_sampler.py --models <dir> --checkers <dir> --judge3 <pt> --head <name> --out <dir> <setting> ...
@@ -15,7 +17,7 @@ from pathlib import Path
 import numpy as np, torch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from canvas_unet import sample, to_uint8
-from checker import GUIDED_SHARE, load_unet, pair_push
+from checker import GUIDED_SHARE, load_unet, pair_push, separate_push
 from five_versions import load_head
 from judge import load
 from judge_tune import read_all, call
@@ -39,6 +41,7 @@ def main():
     for a in ("--models", "--checkers", "--judge3", "--out"):
         ap.add_argument(a, type=Path, required=True)
     ap.add_argument("--head", required=True)
+    ap.add_argument("--head2", default=None, help="second checker, for ens: settings")
     ap.add_argument("--pairs", default=None, help='pairs to render, e.g. "0-3_1-9" or "0,3 1,9" (default: the three tuning pairs)')
     ap.add_argument("settings", nargs="+")
     a = ap.parse_args()
@@ -46,6 +49,8 @@ def main():
     unet = load_unet(a.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
     head = load_head(a.checkers / a.head / "head.pt", dev)
     j3 = load(a.judge3, dev)
+    sep_head = load_head(a.checkers / "separate" / "head.pt", dev)
+    head2 = load_head(a.checkers / a.head2 / "head.pt", dev) if a.head2 else None
     a.out.mkdir(parents=True, exist_ok=True)
     counts, canv = {}, {}
     pairs = [tuple(int(d) for d in q.replace("-", ",").split(",")) for q in a.pairs.replace("_", " ").split()] \
@@ -59,6 +64,15 @@ def main():
             elif kind == "sched":
                 e, l, k = val.split(",")
                 fn, eta = scheduled(pair_push(unet, head, *p, 1.0), float(e), float(l), int(k)), 0.0
+            elif kind == "sep":
+                e, rest = val.split("@")
+                s1, s2 = rest.split("+")
+                f1, f2 = pair_push(unet, head, *p, float(s1)), separate_push(unet, sep_head, *p, float(s2))
+                fn, eta = (lambda f1, f2: lambda x, t, eps: f1(x, t, eps) + f2(x, t, eps))(f1, f2), float(e)
+            elif kind == "ens":
+                e, s = val.split("@")
+                f1, f2 = pair_push(unet, head, *p, float(s)), pair_push(unet, head2, *p, float(s))
+                fn, eta = (lambda f1, f2: lambda x, t, eps: 0.5 * (f1(x, t, eps) + f2(x, t, eps)))(f1, f2), float(e)
             else:
                 e, s = val.split("@")
                 fn, eta = pair_push(unet, head, *p, float(s)), float(e)
