@@ -39,7 +39,7 @@ push](a3q-cat-x-dog-quick-discriminator-test.md#words-this-file-uses).
 | Run | What | Status |
 | --- | --- | --- |
 | species-clip | `finetune_species.py` on mscluster112, epoch 6 kept | done: at step 15 cat 0.711, dog 0.847 |
-| result-sheet-catdog-bodies | `--readout --head <iteration 6> --window 0 10` | drawing |
+| result-sheet-catdog-bodies | `--readout --head <iteration 6> --window 0 10` | done: almost the same pictures as the combined push |
 | result-sheet-catdog-species | `--clip <species> --window 10 50` | done: every seed stays plain PoE's fused animal, faces redrawn |
 | result-sheet-catdog-both | `--readout --head <iteration 6> --species <species> --split 10` | done: one cat-dog face on most seeds at strengths 30 and 100 |
 
@@ -51,10 +51,7 @@ random-push condition is read from the same sheet.
 **Q1: inconclusive.** At step 15 "dog present" reads 0.847 and "cat present" 0.711: dog clears 0.80, cat sits between
 the 0.70 null line and the 0.80 support line.
 
-**Q2: pending the bodies-alone row; leaning null.** The combined push pulls two bodies back into one cat-dog face on
-seeds 10, 11, 12, 15 and 16 at strengths 30 and 100, fewer separate animals than the identity push over all steps: a
-hybrid scores high on both presence outputs. The draft calls are from tile-size sheets
-(`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan26-both-vs-identity.png`).
+**Q2: null.** Both pushes together draw almost the same pictures as the bodies push alone at every strength, so the species push adds no clean cat-and-dog seed. Both rows give one cat-dog face on most seeds at strengths 30 and 100: the readout push stops at step 9 and PoE pulls the two bodies back together, where the same push over all 50 steps keeps them apart on 5 of 8 seeds. Draft calls from tile-size sheets (`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan26-bodies-vs-both.png`).
 
 ## Cross-references
 

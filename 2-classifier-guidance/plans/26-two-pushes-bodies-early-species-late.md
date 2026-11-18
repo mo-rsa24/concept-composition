@@ -72,13 +72,13 @@ For Claude to execute.
   checkpoints with one output load unchanged.
 - [x] **1.2 Train the species checker.** `rung2/species.sh` on mscluster112. The log prints each output's
   [balanced accuracy](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged) per step before training and after each epoch, and the Q1 verdict at step 15.
-- [ ] **1.3 Draw the bodies row.** `render_results.py --readout --head readout_pair/readout-catdog-identity/head_step_002000.pt
+- [x] **1.3 Draw the bodies row.** `render_results.py --readout --head readout_pair/readout-catdog-identity/head_step_002000.pt
   --window 0 10 --seeds 9 10 11 12 13 14 15 16 --out-name result-sheet-catdog-bodies`.
 - [x] **1.4 Draw the species row.** `render_results.py --clip finetune/species-clip/best.pt --window 10 50 ...
   --out-name result-sheet-catdog-species`.
 - [x] **1.5 Draw the combined row.** `render_results.py --readout --head <iteration 6> --species finetune/species-clip/best.pt
   --split 10 ... --out-name result-sheet-catdog-both`.
-- [ ] **1.6 Compare.** One overview, seeds by rows, the four rows' tiles side by side, sent with draft calls from
+- [x] **1.6 Compare.** One overview, seeds by rows, the four rows' tiles side by side, sent with draft calls from
   full-size tiles.
 
 ▶ Next: [2. Call the sheets](#2--call-the-sheets)
