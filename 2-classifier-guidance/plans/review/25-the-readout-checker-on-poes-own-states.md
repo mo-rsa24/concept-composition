@@ -53,7 +53,7 @@ runs (seeds 3401 to 4400, labelled the same way) added, read with the same check
 | baseline reading | iteration 4 scored on the held-out runs | done: held-out joint runs (105 clean, 90 reject) at steps 0, 2, 4, 6, 8, 10: 0.510, 0.548, 0.644, 0.747, 0.794, 0.817, mean 0.677; steps 15 and 20 read 0.843 and 0.848. Q1 support needs 0.75 or more over steps 0 to 10 |
 | readout-catdog-traj | iteration 4's settings plus `--traj-frac 0.5` | done: mean over steps 0 to 10 0.730 at step 2,000 (0.671, 0.740, 0.725 at steps 500, 1,000, 1,500); the older noised-picture check 1 of 20 steps at 0.75 |
 | push sheet | `render_results.py --readout`, seeds 9 to 16 | queued after training |
-| plus 1,000 | 1,000 joint runs, seeds 3401 to 4400, then `readout-catdog-traj-plus1000` | drawing |
+| plus 1,000 | 1,000 joint runs, seeds 3401 to 4400, then `readout-catdog-traj-plus1000` | done: mean over steps 0 to 10 0.724 at step 2,000 (0.728, 0.735, 0.698 at steps 500, 1,000, 1,500) |
 
 ## Cross-references
 
@@ -65,3 +65,6 @@ runs (seeds 3401 to 4400, labelled the same way) added, read with the same check
 to 10, mean 0.730, against 0.677 for iteration 4. It clears the 0.05 margin (+0.053) and misses the 0.75 bar. Training on
 PoE's own states traded reading those states for reading finished pictures with noise added: the older check passes 1 of
 20 steps.
+
+**Q3: null.** With 1,000 more joint-prompt runs the reading at step 2,000 is 0.724 against 0.730 without them; the mark
+was +0.02. The extra runs speed early learning (0.728 against 0.671 at step 500) and do not raise where it settles.
