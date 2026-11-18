@@ -74,9 +74,10 @@ def time_features(t):
 
 
 class Head(nn.Module):
-    def __init__(self, out, pair_aware):
+    def __init__(self, out, pair_aware, film=False):
         super().__init__()
-        self.pair_aware = pair_aware
+        self.pair_aware, self.use_film = pair_aware, film
+        self.film = nn.Linear(64, 2 * 128) if film else None
         self.down = nn.Conv2d(128, 128, 3, stride=2, padding=1)
         self.body = nn.Sequential(nn.Conv2d(256, 128, 3, padding=1), nn.SiLU(),
                                   nn.Conv2d(128, 128, 3, padding=1), nn.SiLU())
@@ -85,10 +86,18 @@ class Head(nn.Module):
                                  nn.Linear(256, out))
 
     def forward(self, feats, t, pair=None):
-        h = self.body(torch.cat([feats[0], self.down(feats[1])], 1))
+        h = torch.cat([feats[0], self.down(feats[1])], 1)
+        pe = self.pair(pair[:, 0]) + self.pair(pair[:, 1]) if self.pair_aware else None
+        if self.use_film:
+            g, b = self.film(pe).chunk(2, 1)
+            h = self.body[1](self.body[0](h))
+            h = h * (1 + g[:, :, None, None]) + b[:, :, None, None]
+            h = self.body[3](self.body[2](h))
+        else:
+            h = self.body(h)
         z = [h.mean((2, 3)), h.amax((2, 3)), time_features(t)]
         if self.pair_aware:
-            z.append(self.pair(pair[:, 0]) + self.pair(pair[:, 1]))
+            z.append(pe)
         return self.mlp(torch.cat(z, 1))
 
 
@@ -212,12 +221,16 @@ def build_set(args, rng):
     images, labels = load_mnist(args.mnist)
     cv = Canvases(images, labels, rng)
     d = np.load(args.draws)
-    seen = ~d["held"]
+    excl = set(args.exclude_pairs)
+    seen = ~d["held"] & np.array([tuple(p) not in excl for p in d["pair"]])
+    train_pairs = [p for p in SEEN if p not in excl]
     pos_d = seen & (d["call"] == "two clear, right digits")
     neg_d = seen & (d["call"] != "two clear, right digits")
     n = 8000
-    two = pasted(cv, rng, n, SEEN, "two")
-    negs = [pasted(cv, rng, n // 3, SEEN, k) for k in ("fused", "single", "wrong")]
+    two = pasted(cv, rng, n, train_pairs, "two")
+    w = args.wrong_weight
+    share = {"fused": 1, "single": 1, "wrong": w}
+    negs = [pasted(cv, rng, int(n * share[k] / (2 + w)), train_pairs, k) for k in ("fused", "single", "wrong")]
     nodigits = lambda m: np.zeros((m, 10), np.float32)
     sets = {
         "pos_drawn": (d["x"][pos_d], d["pair"][pos_d], nodigits(pos_d.sum())),
@@ -265,7 +278,7 @@ def train(args):
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
     kept, d = build_set(args, rng)
     pair_aware = args.kind == "pair"
-    head = Head(1 if pair_aware else 10, pair_aware).to(dev)
+    head = Head(1 if pair_aware else 10, pair_aware, film=args.film).to(dev)
     opt = torch.optim.Adam(head.parameters(), 1e-3)
     flips = {k: rng.random(len(v[0])) < args.flip for k, v in kept.items()}
     sizes = {k: len(v[0]) for k, v in kept.items()}
@@ -287,6 +300,15 @@ def train(args):
                     x, p, fl, pres = take(name, m)
                     y = np.full(m, 1.0 if label == "pos" else 0.0)
                     parts.append((x, p, np.where(fl, 1 - y, y), pres))
+        if args.wrong_ask and pair_aware:
+            px = np.concatenate([q[0] for q in parts if q[2].mean() > 0.5])
+            pp = np.concatenate([q[1] for q in parts if q[2].mean() > 0.5]).copy()
+            for i in range(len(pp)):
+                other = int(rng.integers(10))
+                while other in (pp[i][0], pp[i][1]):
+                    other = int(rng.integers(10))
+                pp[i] = (pp[i][0], other) if rng.random() < 0.5 else (other, pp[i][1])
+            parts.append((px, pp, np.zeros(len(px)), np.zeros((len(px), 10), np.float32)))
         x0 = guard(to_x(np.concatenate([q[0] for q in parts]), dev), gen)
         pair = torch.from_numpy(np.concatenate([q[1] for q in parts])).to(dev).long()
         y = torch.from_numpy(np.concatenate([q[2] for q in parts])).to(dev).float()
@@ -311,7 +333,8 @@ def train(args):
             print(json.dumps({"step": step, "loss": round(loss.item(), 4)}), flush=True)
 
     args.out.mkdir(parents=True, exist_ok=True)
-    torch.save({"head": head.state_dict(), "kind": args.kind, "args": {k: str(v) for k, v in vars(args).items()}},
+    torch.save({"head": head.state_dict(), "kind": args.kind, "film": args.film,
+                "args": {k: str(v) for k, v in vars(args).items()}},
                args.out / "head.pt")
     res = {"kind": args.kind, "data_frac": args.data_frac, "flip": args.flip, "pool_sizes": sizes}
     if pair_aware:
@@ -357,6 +380,11 @@ def main():
     ap.add_argument("--steps", type=int, default=4000)
     ap.add_argument("--batch", type=int, default=256)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--exclude-pairs", type=lambda v: [tuple(int(d) for d in p.split(",")) for p in v.split()],
+                    default=[], help='pairs left out of checker training, e.g. "0,6 1,2 6,9" (loop 2)')
+    ap.add_argument("--wrong-ask", action="store_true", help="each positive also asked for a wrong pair, as a negative")
+    ap.add_argument("--wrong-weight", type=float, default=1.0, help="wrong-pair share of pasted negatives, against 1 each")
+    ap.add_argument("--film", action="store_true", help="the asked pair modulates the head's convolutions")
     args = ap.parse_args()
     draws(args) if args.cmd == "draws" else train(args)
 

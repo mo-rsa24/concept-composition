@@ -48,7 +48,7 @@ RIGHT = "two clear, right digits"
 def load_head(path, dev):
     ck = torch.load(path, map_location=dev, weights_only=False)
     pair_aware = ck["kind"] == "pair"
-    h = Head(1 if pair_aware else 10, pair_aware).to(dev).eval()
+    h = Head(1 if pair_aware else 10, pair_aware, film=ck.get("film", False)).to(dev).eval()
     h.load_state_dict(ck["head"])
     for p in h.parameters():
         p.requires_grad_(False)
@@ -94,6 +94,7 @@ def main():
     ap.add_argument("--pairs", default="all", help="'all' or '78' (the cap sweep reads 7 & 8 only)")
     ap.add_argument("--only-s", type=float, default=None, help="pair-aware push at this s only (cap sweep)")
     ap.add_argument("--pair-only", action="store_true", help="plain and the pair-aware push only (sweep 1)")
+    ap.add_argument("--s-list", default=None, help="push strengths besides 0, e.g. 3,10 (loop 2)")
     args = ap.parse_args()
     dev = "cuda"
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
@@ -101,8 +102,11 @@ def main():
     hs = load_head(args.checkers / args.separate_head / "head.pt", dev)
     jn = load_judge(args.judge, dev)
     args.out.mkdir(parents=True, exist_ok=True)
-    pairs = PAIRS if args.pairs == "all" else [(7, 8)]
+    pairs = PAIRS if args.pairs == "all" else [(7, 8)] if args.pairs == "78" else \
+        [tuple(int(d) for d in p.split(",")) for p in args.pairs.split()]
     s_list = S if args.only_s is None else [args.only_s]
+    if args.s_list:
+        s_list = [0.0] + [float(v) for v in args.s_list.split(",")]
 
     # cost: one plain and one guided batch of 64 on 7 & 8, to match best-of-N's N
     sample(unet, SEEDS[:8], [7, 8], push_fn=pair_push(unet, hp, 7, 8, 3.0), device=dev)   # warm-up
