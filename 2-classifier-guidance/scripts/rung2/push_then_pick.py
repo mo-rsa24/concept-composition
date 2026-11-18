@@ -25,7 +25,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parents[2]))
-sys.path.insert(0, str(HERE.parents[1]))
+sys.path.insert(0, str(HERE.parent))  # scripts/, for classifier_guidance_from_the_paper
 sys.path.insert(0, str(HERE))
 from poe_repair import paths  # noqa: E402
 from poe_repair.methods._classifier_guided import run_poe_classifier_guided  # noqa: E402
