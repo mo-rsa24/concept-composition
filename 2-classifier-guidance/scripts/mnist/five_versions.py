@@ -93,6 +93,7 @@ def main():
     ap.add_argument("--cap", type=float, default=0.1)
     ap.add_argument("--pairs", default="all", help="'all' or '78' (the cap sweep reads 7 & 8 only)")
     ap.add_argument("--only-s", type=float, default=None, help="pair-aware push at this s only (cap sweep)")
+    ap.add_argument("--pair-only", action="store_true", help="plain and the pair-aware push only (sweep 1)")
     args = ap.parse_args()
     dev = "cuda"
     unet = load_unet(args.models / f"share-{GUIDED_SHARE}" / "unet.pt", dev)
@@ -135,15 +136,19 @@ def main():
             xg = record(f"pair s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=rec, cap=None, device=dev)[0])
             cap_log[f"pair s={s:g}|{a}&{b}"] = {"fired_share_per_step": [round(f, 3) for f in rec.fired],
                                                "steps_fired_on_half_or_more": int(sum(f >= 0.5 for f in rec.fired))}
+            if s == 0:
+                assert (xg == plain).all(), "s = 0 is not byte-identical to plain product"
+            if args.pair_only:
+                continue
             sep = Recorder(separate_push(unet, hs, a, b, s), args.cap)
             xs = record(f"separate s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=sep, cap=None, device=dev)[0])
             if s == 0:
-                assert (xg == plain).all() and (xs == plain).all(), "s = 0 is not byte-identical to plain product"
+                assert (xs == plain).all(), "s = 0 is not byte-identical to plain product"
                 print("s = 0: both guided columns byte-identical to plain product", flush=True)
                 continue
             record(f"random s={s:g}", a, b, sample(unet, SEEDS, [a, b], push_fn=random_push(rec.norms, SEEDS, dev),
                                                    cap=args.cap, device=dev)[0])
-        if args.only_s is not None:
+        if args.only_s is not None or args.pair_only:
             continue
         for n in sorted({n_match, 16}):
             best = []
@@ -161,7 +166,7 @@ def main():
     (args.out / "cap.json").write_text(json.dumps(cap_log, indent=1))
     (args.out / "counts.json").write_text(json.dumps({"cost": cost, "cap": args.cap, "pair_head": args.pair_head, "separate_head": args.separate_head,
                                                       "counts": counts}, indent=1))
-    if args.only_s is None:
+    if args.only_s is None and not args.pair_only:
         for a, b in pairs:
             draw(args.out, a, b, canv, counts, n_match)
 
