@@ -52,6 +52,7 @@ def names(pair: str) -> tuple[str, str]:
 
 
 STRICT = False
+REAL_ONLY = False
 
 
 def prompt(a: str, b: str) -> str:
@@ -67,7 +68,9 @@ def prompt(a: str, b: str) -> str:
             f"markings, ears, snout, tail or legs on the other{stature})?\n"
             f"- photo_intact: is it a photograph-like picture with no melted, torn, duplicated or broken parts "
             f"(a drawing, painting, cartoon or split-frame collage is not intact)?\n"
-            f"- verdict: \"faithful pair\" only if bodies is 2, a_present and b_present are true, hybrid is "
+            + (f"- real: both {a} and {b} must be real animals present in the scene; one shown on a screen, "
+               f"poster, painting, print, vehicle livery, toy or statue does not count as present.\n" if REAL_ONLY else "")
+            + f"- verdict: \"faithful pair\" only if bodies is 2, a_present and b_present are true, hybrid is "
             f"false and photo_intact is true. Otherwise the first that applies: \"hybrid\" if any body mixes "
             f"both; \"single\" if there is only one body; \"wrong pair\" if there are two or more bodies but "
             f"not exactly one {a} and one {b}; \"damaged\" otherwise.\n"
@@ -163,11 +166,13 @@ def main() -> int:
     ap.add_argument("--folder", type=Path)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--concurrency", type=int, default=12)
+    ap.add_argument("--real-only", action="store_true",
+                    help="an animal on a screen, poster, painting, vehicle, toy or statue is not present (photo sources)")
     ap.add_argument("--strict", action="store_true",
                     help="also call borrowed body shape, build, size or proportions a hybrid (a lion with a horse's stature)")
     args = ap.parse_args()
-    global STRICT
-    STRICT = args.strict
+    global STRICT, REAL_ONLY
+    STRICT, REAL_ONLY = args.strict, args.real_only
     if args.validate:
         items = validate_items()
     else:

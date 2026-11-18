@@ -9,6 +9,11 @@ eval_set_v4.json and holds out the newest joint drawings by seed:
     evaluation   v3's hand-called cat x dog check tiles (seeds 7 and 8) plus the joint drawings on seeds
                  201 to 250 (render_more.py, labelled under the stricter rule)
 
+COCO 2017 photos join training only, as source "coco" on both sides (coco_catdog.py picks them by
+COCO's instance counts): a candidate with exactly one cat and one dog is clean when the Claude API passes it
+under the strict and real-only rules (an animal on a screen, poster or van is not present); every other
+candidate, every photo of two or more cats or two or more dogs, and every photo of one animal is a reject.
+
 Seeds 9 to 16 stay out of both: they are the push test's.
 Writes training_set_catdog.json and eval_set_catdog.json beside this script.
 """
@@ -21,6 +26,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PAIR = "a_cat__x__a_dog"
 HOLD = range(201, 251)
+ROOT = HERE.parents[2]
+RESULTS = ROOT / "2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog"
+COCO_MOUNT = "outputs/classifier_guidance_ladder/rung2/coco-catdog"
 
 
 def main() -> int:
@@ -29,6 +37,19 @@ def main() -> int:
     cd = [t for t in train_v4["tiles"] if t["pair"] == PAIR]
     held = [t for t in cd if t["source"] == "more_catdog" and t["seed"] in HOLD]
     train = [t for t in cd if t not in held]
+    coco = ROOT / "data/coco-2017/catdog"
+    verdict = {r["id"].split("__seed")[1].split("__")[0]: r.get("verdict") for r in
+               map(json.loads, (RESULTS / "api-labels/coco_clean_real.jsonl").read_text().splitlines()) if r}
+    for kind in ("clean", "wrong_pair", "single"):
+        for f in sorted((coco / kind).glob("*.jpg")):
+            real = kind == "clean" and verdict.get(f.stem) == "faithful pair"
+            if kind == "clean" and f.stem not in verdict:
+                continue
+            tid = f"coco-{f.stem}"
+            train.append({"id": tid, "picture": f"{COCO_MOUNT}/{kind}/{f.name}", "latent": f"{COCO_MOUNT}/latents/{tid}.pt",
+                          "pair": PAIR, "seed": -1, "method": "coco", "label": int(real),
+                          "kind": "positive" if real else (verdict[f.stem] if kind == "clean" else kind.replace("_", " ")),
+                          "source": "coco", "check": False})
     evals = [t for t in eval_v4["tiles"] if t["pair"] == PAIR] + \
             [t | {"check": True, "strict_label": t["label"]} for t in held]
     if any(9 <= t.get("seed", -1) <= 16 for t in train + evals):
