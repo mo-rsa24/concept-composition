@@ -94,6 +94,7 @@ async def label_one(client, sem, path: Path, pair: str):
     text = next(bl.text for bl in resp.content if bl.type == "text")
     out = json.loads(text)
     out["model"] = resp.model
+    out["input_tokens"], out["output_tokens"] = resp.usage.input_tokens, resp.usage.output_tokens
     return out
 
 

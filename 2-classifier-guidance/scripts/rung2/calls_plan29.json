@@ -1,0 +1,6 @@
+{"_note": "Claude's calls by eye from full-size tiles of plan 29 (seeds 3301 to 3332, the early cap-0.3 readout push at strength 30; plain PoE; the size-matched random push). Pushed: clean, near (one small flaw), borrowed (two bodies, a face borrowed or a head hidden), two_of_a_kind, not_separate. Plain and random: one fused animal on every seed but 3313 (two animals).",
+ "s30": {"3301":"borrowed","3302":"borrowed","3303":"borrowed","3304":"near","3305":"near","3306":"clean","3307":"clean","3308":"near",
+         "3309":"not_separate","3310":"borrowed","3311":"clean","3312":"borrowed","3313":"two_of_a_kind","3314":"clean","3315":"borrowed","3316":"not_separate",
+         "3317":"borrowed","3318":"borrowed","3319":"borrowed","3320":"clean","3321":"near","3322":"clean","3323":"clean","3324":"borrowed",
+         "3325":"not_separate","3326":"not_separate","3327":"two_of_a_kind","3328":"borrowed","3329":"clean","3330":"near","3331":"two_of_a_kind","3332":"clean"},
+ "plain_separate": ["3313"], "r30_separate": ["3313"]}

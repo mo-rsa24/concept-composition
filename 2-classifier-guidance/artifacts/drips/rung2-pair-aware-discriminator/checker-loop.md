@@ -164,3 +164,16 @@ The recipe unchanged, with the checker reading each picture with the pair's own 
 | typewriter × cactus | 1 of 16 | 1 of 16 | 14 of 16 | 6 of 16 |
 
 A checker trained only on cats and dogs separates two things on new pairs. It cannot tell which body should be the lion, so the animal pair loses seeds to two meerkats; the object pair has no such confusion. Plan 30 step 1 trains a checker across 78 pairs to test whether that confusion goes away.
+
+## An automatic scorer for push sheets
+
+`scripts/rung2/score_sheet.py` labels each tile of a push sheet with the Claude API labeller (`api_label.py`, default rules, effort low; about 2,170 input and 99 output tokens per picture) and counts, per column, tiles with two or more bodies and "faithful pair" verdicts. Checked against Claude's eye calls from full-size tiles on plan 29's 96 pictures (`calls_plan29.json`; labels in `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/scorer-check/plan29.jsonl`):
+
+| | Eye | Scorer | Agree |
+| --- | --- | --- | --- |
+| pushed, two bodies | 28 of 32 | 29 of 32 | 29 of 32 seeds |
+| plain, two bodies | 1 | 1 | 30 of 32 |
+| random push, two bodies | 1 | 2 | 31 of 32 |
+| pushed, clean (eye: clean or near-clean; scorer: faithful pair) | 14 | 5 | 23 of 32 |
+
+Two bodies agree on 91% of seeds; the three disagreements are a flat cutout counted as a body (3309, 3326) and a cat's head on a dog's body counted as one (3319). The scorer's "faithful pair" is stricter than the eye and never more lenient: all 5 are among the eye's 14, and each of the 9 it rejects names a borrowed feature (cat whiskers on the dog, a dog with a cat-like face, a kitten with a puppy's muzzle). It stands in for eye calls on large sheets as a count of two bodies and a conservative count of clean pairs; plain PoE and the random push give 0 faithful pairs of 32.
