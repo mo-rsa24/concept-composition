@@ -67,6 +67,15 @@ per-setting output landed on the wrong mount with the guard reporting healthy th
 configured to land" and "where the guard checks"; whether every script's guard now reads the
 same resolved root as its output root has not been re-audited this sitting.
 
+## When `/datasets` is down
+
+**From about 13:10 UTC on 2026-11-17, `/datasets` returned `Input/output error` on every node tried,
+and it still did at 05:40 UTC on 2026-11-18** (`ls /datasets/mmolefe` and `df -h /datasets` both
+fail; verified over `scripts/cluster.sh sh`). While it is down, the user's standing exception is
+`/home-mscluster/mmolefe/poe_repair_min_scratch/`, with the disk guard pointed at `/home-mscluster`
+(57% used on 2026-11-18). Outputs written there move to `/datasets` once it reads again. Probe it
+before a launch: `ls /datasets/mmolefe` must list folders.
+
 ## Version control
 
 Neither filesystem is under version control and neither is snapshotted. Every `✓ verified (...)`
