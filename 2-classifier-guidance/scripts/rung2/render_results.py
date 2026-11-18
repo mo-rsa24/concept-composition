@@ -211,6 +211,9 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--prompts", nargs=2, default=["a cat", "a dog"], metavar=("A", "B"),
+                    help="the two prompts of the product; a readout checker trained with the joint prompt reads with "
+                         "'A and B'; the starting noise per seed is shared across pairs")
     ap.add_argument("--box-confidence", type=float, default=None,
                     help="with --box-species: push a box only when zero-shot CLIP gives its assigned species at least "
                          "this probability at the late start")
@@ -238,8 +241,8 @@ def main() -> int:
     ctx = make_ctx(output_root=OUT / "raw")
     enc = lambda p: encode_prompt_sdxl(p, models=ctx.models, device=ctx.device, dtype=ctx.dtype)
     seq_e, pool_e = enc("")
-    seq_a, pool_a = enc("a cat")
-    seq_b, pool_b = enc("a dog")
+    seq_a, pool_a = enc(args.prompts[0])
+    seq_b, pool_b = enc(args.prompts[1])
     common = dict(models=ctx.models, scheduler=ctx.scheduler, seq_a=seq_a, pool_a=pool_a,
                   seq_b=seq_b, pool_b=pool_b, seq_e=seq_e, pool_e=pool_e,
                   guidance_scale=ctx.guidance_scale, num_inference_steps=ctx.num_inference_steps,
@@ -258,7 +261,7 @@ def main() -> int:
         print("layout push: minus the correlation of the cat expert's 'cat' map and the dog expert's 'dog' map", flush=True)
     elif args.readout:
         from train_readout_pair import PairHead, ReadoutPairClassifier
-        seq_r, pool_r = enc("a cat and a dog") if state.get("pair_prompt") else (seq_e, pool_e)
+        seq_r, pool_r = enc(f"{args.prompts[0]} and {args.prompts[1]}") if state.get("pair_prompt") else (seq_e, pool_e)
         head = PairHead(n_out=state.get("heads", 1))
         head.load_state_dict(state["head"])
         disc = ReadoutPairClassifier(ctx.models["unet"], seq_r, pool_r, head.float().eval()).to(ctx.device)
@@ -313,7 +316,7 @@ def main() -> int:
     base_record = json.loads((base / "result.json").read_text()) if base else None
     if base_record and base_record["head"] != str(args.head):
         raise SystemExit("guard: reused baselines were picked by a different discriminator")
-    record = {"push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
+    record = {"prompts": args.prompts, "push_cap": args.push_cap, "cap_late": args.cap_late, "cap_late_from": args.cap_late_from,
               "window": args.window, "recurrence": args.recurrence,
               "recurrence_window": args.recurrence_window, "reused_baselines": str(base) if base else None,
               "host": socket.gethostname(), "card": torch.cuda.get_device_name(0), "head": str(args.head),
@@ -411,7 +414,7 @@ def main() -> int:
                         va="center", ha="right", fontsize=9)
             ax.set_xticks([]); ax.set_yticks([])
     fig.suptitle(f"Rung 2 ({args.out_name}, cap {args.push_cap:g}"
-                 f"{f', push on steps {args.window[0]} to {args.window[1] - 1}' if args.window else ''}): the cat x dog product, seeds "
+                 f"{f', push on steps {args.window[0]} to {args.window[1] - 1}' if args.window else ''}): the {args.prompts[0]} x {args.prompts[1]} product, seeds "
                  f"{', '.join(str(x) for x in args.seeds)} (9 to 16 held out)", fontsize=12)
     fig.tight_layout(rect=[0.02, 0, 1, 0.96])
     fig.savefig(OUT / "result-sheet.png", dpi=100)
