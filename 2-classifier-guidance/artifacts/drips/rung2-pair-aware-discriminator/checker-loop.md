@@ -106,3 +106,11 @@ The identity push at cap 0.3 on steps 0 to 15 only, plain PoE on steps 16 to 49 
 A separate cat and dog holds on the same seeds as the push over all 50 steps (9, 10, 11, 12, 13, 14, 16 at one strength or both), and the colours are closer to a normal photograph on most of them; seed 15 at strength 100 is still posterised. At full size, seed 11 at strength 100 is a fluffy ginger cat beside a beagle in natural colour, a near-clean pair whose cat face has a little fox in it; seed 13 at strength 100 is a brown cat beside a brown-and-white puppy, normal colour, with the cat's face garbled and cat whiskers on the puppy. The random push of the same size over the same steps stays plain PoE.
 
 The layout is settled by step 15 when the push is strong enough: cap 0.3 to step 15 keeps two animals where cap 0.1 to step 9 (plan 26's bodies push) let PoE pull them back together. Most of the colour damage comes from pushing on the late steps. What remains is face detail: borrowed features (a cat's whiskers on a dog, a garbled cat face).
+
+## Self-recurrence, and NOT-hybrid guidance (plan 27)
+
+Overview: `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan27-and-recurrence.png`.
+
+**Self-recurrence** (Universal Guidance's per-step repeat): the identity push at cap 0.1 with each of steps 0 to 15 taken 3 times. Two animals on about 4 to 5 of 8 seeds in natural colour (seed 9 at strength 100 a kitten beside a black-and-white dog, seed 11 a ginger kitten beside a black-and-white cat-dog), about what the identity push gives without repeats, and short of cap 0.3 on steps 0 to 15.
+
+**NOT-hybrid guidance** (plan 27): PoE minus SDXL's own direction for "a hybrid animal, half cat and half dog". The λ 0 loop matches plain PoE pixel for pixel on all 8 seeds. The checker's weight sat at its clamp (k about 19) on every seed, so the checker-weighted runs equal the size-matched fixed control. No setting gives a separate cat and dog; the term moves the style instead, to ornate line drawings and round frames, and at λ 0.1 to a full-frame pattern with no animal. SDXL's "hybrid animal" direction is a style direction, not the direction of fusion.

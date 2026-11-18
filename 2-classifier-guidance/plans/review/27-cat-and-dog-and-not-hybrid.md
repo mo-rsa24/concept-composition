@@ -41,4 +41,13 @@ nothing on the sheet is read.
 | Run | What | Status |
 | --- | --- | --- |
 | not-hybrid, first launch | λ 0.1, 0.3, 1.0; stopped after seed 9 with no picture read: the λ 0 loop differed from plain PoE (mean 2.27, max 210) because it batched four prompts, and k sat at 19 | stopped |
-| not-hybrid | PoE's three prompts as one batch and the hybrid prompt apart; λ 0.01, 0.03, 0.1; controls k 1 and k 19 | drawing |
+| not-hybrid | PoE's three prompts as one batch and the hybrid prompt apart; λ 0.01, 0.03, 0.1; controls k 1 and k 19 | done: λ 0 identical to plain PoE on all 8 seeds; k about 19 on every seed |
+
+## Answers
+
+**Q1: null.** No λ gives a separate cat and dog on any held-out seed. The term changes the style to ornate line drawings
+and round frames, and at λ 0.1 to a full-frame pattern with no animal
+(`artifacts/results/does-a-small-discriminator-steer-cat-x-dog/plan27-and-recurrence.png`, draft calls from tile size).
+
+**Q2: null.** The checker's probability sat at its 0.95 clamp on PoE's trajectory, so its weight equalled the
+size-matched fixed control (k 19) and the two columns draw the same pictures.

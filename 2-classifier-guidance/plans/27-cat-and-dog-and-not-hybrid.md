@@ -71,8 +71,8 @@ For Claude to execute.
 
 - [x] **1.1 Code.** `scripts/rung2/not_hybrid.py`: a four-prompt PoE loop with the NOT-hybrid term, the λ 0 check
   against plain PoE, six columns per seed, `record.json` with the weight per step and how often the guard fired.
-- [ ] **1.2 Draw.** `rung2/not-hybrid.sh` on a free card. The log prints, per seed, the λ 0 check and the mean weight.
-- [ ] **1.3 Compare.** One overview beside plain PoE and the identity push at cap 0.3, sent with draft calls from
+- [x] **1.2 Draw.** `rung2/not-hybrid.sh` on a free card. The log prints, per seed, the λ 0 check and the mean weight.
+- [x] **1.3 Compare.** One overview beside plain PoE and the identity push at cap 0.3, sent with draft calls from
   full-size tiles.
 
 ▶ Next: [2. Call the sheet](#2--call-the-sheet)
