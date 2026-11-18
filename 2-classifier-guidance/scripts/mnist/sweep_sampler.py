@@ -8,16 +8,20 @@ Settings, written before any render:
   eta:<eta>@<s>                 DDIM with eta, strength s at every step
   sep:<eta>@<s>+<s2>            eta, the push at s plus the separate-label push at s2 (round 6)
   ens:<eta>@<s>                 eta, the push averaged over --head and --head2, each at s (round 7)
+  sepm:<eta>@<s>+<s2>           as sep, the separate-label push weighted toward the digit read as absent (loop 6)
+  sepe:<eta>@<s>+<s2>/<K>*<m>   as sep, both pushes multiplied by m over the first K steps (loop 6)
 The cap stays 0.1 of the product prediction's norm, per sample.
 
 Usage: python sweep_sampler.py --models <dir> --checkers <dir> --judge3 <pt> --head <name> --out <dir> <setting> ...
 """
 import argparse, json, sys
+import torch.nn.functional as F
 from pathlib import Path
 import numpy as np, torch
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from canvas_unet import sample, to_uint8
-from checker import GUIDED_SHARE, load_unet, pair_push, separate_push
+from checker import GUIDED_SHARE, features, load_unet, pair_push, separate_push
+from canvas_unet import ABAR
 from five_versions import load_head
 from judge import load
 from judge_tune import read_all, call
@@ -33,6 +37,28 @@ def scheduled(fn, early, late, k):
         s = early if step["i"] < k else late
         step["i"] += 1
         return s * fn(x, t, eps) if s else torch.zeros_like(eps)
+    return push
+
+
+def separate_missing_push(unet, head, a, b, s):
+    """The separate-label push with each digit's term weighted by 2 * (1 - p(present)), held fixed."""
+    def push(x, t, eps):
+        with torch.enable_grad():
+            xx = x.detach().requires_grad_(True)
+            z = head(features(unet, xx, t), t)
+            w = (2 * (1 - torch.sigmoid(z[:, [a, b]]))).detach()
+            g, = torch.autograd.grad((w[:, 0] * F.logsigmoid(z[:, a]) + w[:, 1] * F.logsigmoid(z[:, b])).sum(), xx)
+        return -s * (1 - ABAR.to(x.device)[t]).sqrt()[:, None, None, None] * g
+    return push
+
+
+def early(fn, k, m):
+    step = {"i": 0}
+
+    def push(x, t, eps):
+        f = m if step["i"] < k else 1.0
+        step["i"] += 1
+        return f * fn(x, t, eps)
     return push
 
 
@@ -71,6 +97,18 @@ def main():
                 s1, s2 = rest.split("+")
                 f1, f2 = pair_push(unet, head, *p, float(s1)), separate_push(unet, sep_head, *p, float(s2))
                 fn, eta = (lambda f1, f2: lambda x, t, eps: f1(x, t, eps) + f2(x, t, eps))(f1, f2), float(e)
+            elif kind in ("sepm", "sepe"):
+                e, rest = val.split("@")
+                k = mult = None
+                if kind == "sepe":
+                    rest, km = rest.split("/")
+                    k, mult = int(km.split("*")[0]), float(km.split("*")[1])
+                s1, s2 = rest.split("+")
+                f1 = pair_push(unet, head, *p, float(s1))
+                f2 = separate_missing_push(unet, sep_head, *p, float(s2)) if kind == "sepm" \
+                    else separate_push(unet, sep_head, *p, float(s2))
+                both = (lambda f1, f2: lambda x, t, eps: f1(x, t, eps) + f2(x, t, eps))(f1, f2)
+                fn, eta = (early(both, k, mult) if kind == "sepe" else both), float(e)
             elif kind == "ens":
                 e, s = val.split("@")
                 f1, f2 = pair_push(unet, head, *p, float(s)), pair_push(unet, head2, *p, float(s))
@@ -81,7 +119,11 @@ def main():
             x = to_uint8(sample(unet, seeds, list(p), push_fn=fn, cap=0.1, device=dev, eta=eta)[0])
             key = f"{st}|{p[0]}{p[1]}"
             canv[key] = x
-            counts[key] = int(sum(call(r, p, 1.01, 0.9) for r in read_all(j3, x)))
+            reads = read_all(j3, x)
+            counts[key] = int(sum(call(r, p, 1.01, 0.9) for r in reads))
+            counts[f"{key}|one digit"] = int(sum(len(r) == 1 for r in reads))
+            counts[f"{key}|same digit twice"] = int(sum(len(r) == 2 and int(r[0][:10].argmax()) == int(r[1][:10].argmax())
+                                                        for r in reads))
         total = sum(counts[f"{st}|{p[0]}{p[1]}"] for p in pairs)
         counts[f"{st}|total of {64 * len(pairs)}"] = total
         print(st, [counts[f"{st}|{p[0]}{p[1]}"] for p in pairs], "total", total, flush=True)
