@@ -88,8 +88,10 @@ The identity push (iteration 6) with the cap on each step's push raised from 0.1
 | 0.1 | two bodies on 5 of 8 seeds at strength 100, mostly two cats, a cat and a kitten, or a hybrid pair |
 | 0.3 | a separate cat and a separate dog on most seeds at both strengths (seeds 10, 11, 12, 13, 14, 15, 16); the pictures are damaged: flattened, oversaturated colour, blocky banding, a painted blue patch on seed 10 |
 | 0.3, random push of the same size | plain PoE's fused animal on every seed |
+| 0.5 | at strength 30 a separate cat and dog on about the same seeds as cap 0.3, with more colour damage; at strength 100 the pictures break down (seed 14 blocky colour patches, seed 13 a yellow blob, seed 12 black-and-white shapes). Overview: `artifacts/results/does-a-small-discriminator-steer-cat-x-dog/cap-0.3-vs-0.5.png` |
+| 0.5, random push of the same size | plain PoE's fused animal on every seed |
 
-At full size, seed 11 at strength 100 is a ginger cat beside a St Bernard: a clean cat and dog from one trajectory, overexposed and hazy. Seed 13 at strength 30 is a tabby cat beside a black-and-white dog whose head is hidden, with the cat's face garbled. The push was too small at 0.1: three times the room turns two cats into a cat and a dog, and costs picture quality.
+At full size, seed 11 at strength 100 is a ginger cat beside a St Bernard: a clean cat and dog from one trajectory, overexposed and hazy. Seed 13 at strength 30 is a tabby cat beside a black-and-white dog whose head is hidden, with the cat's face garbled. The push was too small at 0.1: three times the room turns two cats into a cat and a dog, and costs picture quality; five times the room at strength 100 destroys the picture. Cap 0.3 is the best trade-off of the three.
 
 ## Two pushes: bodies early, species late (plan 26)
 
