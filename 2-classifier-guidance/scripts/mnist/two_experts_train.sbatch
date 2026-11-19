@@ -8,6 +8,9 @@
 # Plan 32: the four digit experts on one biggpu node, two processes per card (mscluster107: 2x Quadro RTX 8000).
 # Usage: sbatch scripts/mnist/two_experts_train.sbatch time              200 steps: fp32, fp16, two fp16 sharing card 0
 #        sbatch scripts/mnist/two_experts_train.sbatch train [flags]     the four experts, e.g. train --amp16
+#        SPECS="0-4 left e04-left 0;5-9 right e59-right 0" bash <this file> train --amp16
+#            a chosen set of experts ("digits side tag card", ';' between), also outside Slurm (mscluster85)
+# Timing on mscluster107 (job 90405): 210 ms/step fp32, 148 fp16, 316 each for two fp16 sharing a card.
 set -euo pipefail
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
@@ -20,7 +23,7 @@ cd "$REPO"
 mkdir -p "$OUT" "$ROOT/logs"
 USED=$(df --output=pcent "$OUT" | tail -1 | tr -dc 0-9)
 [ -n "$USED" ] && [ "$USED" -lt 90 ] || { echo "disk guard: $OUT at ${USED:-unknown}%"; exit 3; }
-[ "$(nvidia-smi -L | grep -c GPU)" -ge 2 ] || { echo "GPU guard: need two devices"; nvidia-smi -L; exit 4; }
+nvidia-smi -L | grep -q GPU || { echo "GPU guard: no device visible"; exit 4; }
 echo "[$(date -u +%H:%M:%S)] node=$(hostname) gpus=$(nvidia-smi --query-gpu=name --format=csv,noheader | paste -sd,) disk=${USED}% commit=$(git rev-parse --short HEAD) mode=$MODE args=$*"
 T="$PY 2-classifier-guidance/scripts/mnist/canvas_unet.py train --mnist $ROOT/mnist-raw --share 0 --out $OUT"
 
@@ -34,9 +37,10 @@ if [ "$MODE" = time ]; then
 else
     FLAGS="$*"
     pids=()
-    for spec in "0-4 either e04-either 0" "5-9 either e59-either 0" "0-4 left e04-left 1" "5-9 right e59-right 1"; do
+    IFS=';' read -ra LIST <<< "${SPECS:-0-4 either e04-either 0;5-9 either e59-either 0;0-4 left e04-left 1;5-9 right e59-right 1}"
+    for spec in "${LIST[@]}"; do
         set -- $spec
-        CUDA_VISIBLE_DEVICES=$4 $T --digits "$1" --side "$2" --tag "$3" $FLAGS > "$ROOT/logs/two-experts-$3-$SLURM_JOB_ID.log" 2>&1 &
+        CUDA_VISIBLE_DEVICES=$4 $T --digits "$1" --side "$2" --tag "$3" $FLAGS > "$ROOT/logs/two-experts-$3-${SLURM_JOB_ID:-$(hostname -s)}.log" 2>&1 &
         pids+=($!)
         echo "  started $3 on card $4 (pid $!)"
     done
