@@ -287,3 +287,36 @@ Two MNIST readings match SDXL's: two checkers at the same accuracy composed 47 a
 **Dropped: the multi-pair checker trained for 4,000 steps (`readout-multipair-long`, `result-sheet-catdog-big-multipair-long`).** At cap 0.3 on seeds 6001 to 6128: scorer two bodies 117 of 128, faithful pair 13, damaged 23; the random push 0 and 0. The same checker at 2,000 steps gave 116, 29 and 10, so twice the training halves the clean pairs and doubles the damaged pictures; its noised-picture check fell too (6 of 20 steps against 9). Longer training overfits; 2,000 steps stays. API tokens: 2,168 in per tile, 256 tiles.
 
 **Dropped by its lion × meerkat half: presence outputs across every pair (`result-sheet-lion-meerkat-multipair-presence`).** Scorer two bodies 11 of 16, faithful pair 0 (cap 0.4 without the change: 15 and 0). By eye most pictures break into posters, collages and cartoon blocks, with a camera, sunglasses and a bird drawn in as stray objects. The cat × dog half is still drawing and is recorded when it lands. API tokens: 2,168 in per tile, 32 tiles.
+
+**Dropped: presence outputs across every pair, cat × dog half (`result-sheet-catdog-big-multipair-presence`, seeds 6001 to 6128).** Scorer two bodies 119 of 128, faithful pair 24, damaged 20, wrong pair 21; the random push 1 and 0. Against the kept recipe's 121, 35 and 11 the clean pairs fall by 11 and the damaged pictures nearly double; with its lion × meerkat half (0 faithful, pictures broken into posters) the round fails both marks. The 4,000-step checker's lion × meerkat sheet (`result-sheet-lion-meerkat-multipair-long`): two bodies 11 of 16, faithful pair 0. API tokens: 2,168 in per tile, 256 + 32 tiles.
+
+## Loop closed on 2026-11-19
+
+Stopped by decision after the last two rounds landed, with neither written stop condition met: lion × meerkat stayed at 0 faithful pairs of 16 under every checker and cap tried, and the rounds left in the lever list do not touch the reason it fails.
+
+**Where cat × dog ended.** The kept recipe is the multi-pair checker (`readout_pair/readout-multipair/head_step_002000.pt`, iteration 6's training on cat × dog plus the strictly labelled benchmark pool, 243 pairs) pushing PoE at strength 30, cap 0.4, steps 0 to 15, then plain PoE. On the 128 new seeds 6001 to 6128 it gives faithful pair 35 and two bodies 121 by the scorer, against 25 and 114 for iteration 6 at cap 0.3 where the loop started, 0 and 1 for plain PoE and the random push. A re-render of 128 seeds moves the count by about 2.
+
+**Every round, its run and its number** (scorer counts; cat × dog on 6001 to 6128 unless noted):
+
+| Change | Run | Result | Kept |
+| --- | --- | --- | --- |
+| Iteration 6 baseline, cap 0.3 | `result-sheet-catdog-big` | 114 two bodies, 25 faithful | baseline |
+| Same, re-rendered unchanged | `result-sheet-catdog-big-rerun` | 116, 25 (15 seeds faithful in both) | noise measure |
+| Plan 25's checker (PoE's own states) | `result-sheet-catdog-big-traj` | 101, 14 | dropped |
+| Trunk LoRA rank 16 | `readout-multipair-lora16` | still at chance at step 500 | dropped |
+| DDIM eta 1.0 (3301 to 3332) | `result-sheet-catdog-eta1` | 28, 2 of 32; flat drawings | dropped |
+| Presence outputs removed, iteration 4 (3301 to 3332) | `result-sheet-catdog-general-iter4` | 26, 3 of 32 against 29, 5 | presence kept |
+| Recipe re-rendered (3301 to 3332) | `result-sheet-catdog-general-rerun` | 30, 7 of 32 against 29, 5 | noise measure |
+| Separate presence push beside iteration 6 (3301 to 3332) | `result-sheet-catdog-presence-added` | 27, 4 of 32, 9 damaged | dropped |
+| Window steps 0 to 24 | `result-sheet-catdog-big-window25` | 122, 24 | dropped |
+| Multi-pair checker | `result-sheet-catdog-big-multipair` | 116, 29 | kept |
+| Multi-pair checker plus the 78-pair runs | `result-sheet-catdog-big-multipair2` | 115, 23 | dropped |
+| Multi-pair checker, 4,000 steps | `result-sheet-catdog-big-multipair-long` | 117, 13, 23 damaged | dropped |
+| Multi-pair checker, cap 0.4 | `result-sheet-catdog-big-multipair-cap0.4` | 121, 35, 11 damaged | kept |
+| Presence outputs across every pair, cap 0.4 | `result-sheet-catdog-big-multipair-presence` | 119, 24, 20 damaged | dropped |
+
+Lion × meerkat (3301 to 3316): faithful pair 0 of 16 for the multi-pair checker at cap 0.3 (12 two bodies) and 0.4 (15), the second multi-pair checker (11), the 4,000-step checker (11), and presence across pairs (11, pictures broken). By eye a lion beside a meerkat on 1 to 4 seeds per sheet, two meerkats on most.
+
+**Why lion × meerkat does not move.** The push makes two bodies and leaves which animal each becomes to PoE, where the meerkat expert wins on most seeds. Every lever tried acts on "two separate things": more pairs in the checker's data, a larger cap, a longer window. The two that act on species (a separate presence push, presence outputs across pairs) cost the photograph before they name the animal.
+
+**Next idea.** Give each body its species at the step the layout settles rather than through a summed score: once the push has made two bodies (about step 10), find the two regions and condition each on its own prompt (the lion expert's prediction inside one region, the meerkat expert's inside the other) for the rest of the run. This moves the species decision from PoE's sum to a per-region choice, which no checker push has done. Open housekeeping: copy the scratch rung 2 outputs to `/datasets`; plan 31's two scripts (`clip_push.py`, `render_results.py`) are edited on both checkouts and uncommitted until the user says done.
