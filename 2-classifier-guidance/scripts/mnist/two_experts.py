@@ -222,13 +222,14 @@ def main():
     ap.add_argument("--n", type=int, default=12)
     ap.add_argument("--s", type=float, default=10.0)
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
-    ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
+    ap.add_argument("--eval-seed0", type=int, default=0); ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
     ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard"])
     ap.add_argument("--union", type=Path)
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
     dev = "cuda"
+    EVAL_SEEDS[:] = range(args.eval_seed0, args.eval_seed0 + 64)       # plan 33: the final read uses seeds 64 to 127
     net = load_judge(args.judge, dev)
 
     if args.mode == "alone":
