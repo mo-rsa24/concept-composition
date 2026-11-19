@@ -32,8 +32,8 @@ def load_mnist(folder: Path):
 
 
 class Canvases:
-    def __init__(self, images, labels, rng, clutter=None):
-        self.images, self.rng, self.clutter = images, rng, clutter
+    def __init__(self, images, labels, rng, clutter=None, mode="fashion", own_digits=None):
+        self.images, self.rng, self.clutter, self.mode, self.own_digits = images, rng, clutter, mode, own_digits
         self.by_digit = {d: np.flatnonzero(labels == d) for d in range(10)}
 
     def digit(self, d):
@@ -46,12 +46,35 @@ class Canvases:
         return c
 
     def item(self):
-        """One clutter object (a Fashion-MNIST item), plan 33's shared background."""
-        return self.clutter[self.rng.integers(len(self.clutter))]
+        """One clutter object, plan 33's shared background: a Fashion-MNIST item, or a 10 to 16 pixel fragment of a stroke
+        cut out of a digit of the expert's own range, pasted into an empty 28 x 28 tile at a random place."""
+        if self.mode == "fashion":
+            return self.clutter[self.rng.integers(len(self.clutter))]
+        d = int(self.own_digits[self.rng.integers(len(self.own_digits))])
+        img = self.digit(d)
+        for _ in range(20):
+            h, w = self.rng.integers(10, 17), self.rng.integers(10, 17)
+            y0, x0 = self.rng.integers(0, D - h + 1), self.rng.integers(0, D - w + 1)
+            piece = img[y0:y0 + h, x0:x0 + w]
+            if (piece > 128).sum() >= 25:
+                break
+        tile = np.zeros((D, D), np.uint8)
+        ty, tx = self.rng.integers(0, D - h + 1), self.rng.integers(0, D - w + 1)
+        tile[ty:ty + h, tx:tx + w] = piece
+        return tile
+
+    def speckle(self, c):
+        """Random bright specks over the whole canvas, density 0.5 to 2%, the same for every expert (plan 33, E2 speckle)."""
+        dens = self.rng.uniform(0.005, 0.02)
+        m = self.rng.random(c.shape) < dens
+        c = c.copy(); c[m] = self.rng.integers(180, 256, int(m.sum()))
+        return c
 
     def one_half_clutter(self, d, side, p_clutter=0.5):
         """A digit in one half, and with chance p_clutter one clutter object in the opposite half (plan 33, E2)."""
         c = self.one_half(d, side)
+        if self.mode == "speckle":
+            return self.speckle(c)
         if self.rng.random() < p_clutter:
             y, x = self.rng.integers(0, H - D + 1), 32 * (1 - side) + self.rng.integers(0, 5)
             c[y:y + D, x:x + D] = self.item()
@@ -60,6 +83,8 @@ class Canvases:
     def clutter_only(self):
         """Clutter with no digit: one or two objects in random halves; the no-digit canvas of the clutter experts."""
         c = np.zeros((H, W), np.uint8)
+        if self.mode == "speckle":
+            return self.speckle(c)
         for side in ([0, 1] if self.rng.random() < 0.5 else [int(self.rng.integers(2))]):
             y, x = self.rng.integers(0, H - D + 1), 32 * side + self.rng.integers(0, 5)
             c[y:y + D, x:x + D] = self.item()

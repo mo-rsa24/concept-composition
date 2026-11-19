@@ -238,9 +238,9 @@ def train(args):
     images, labels = load_mnist(args.mnist)
     rng = np.random.default_rng(args.seed)
     clutter = None
-    if args.clutter_dir is not None:
+    if args.clutter_mode == "fashion":
         clutter = np.fromfile(args.clutter_dir / "train-images-idx3-ubyte", np.uint8, offset=16).reshape(-1, 28, 28)
-    cv = Canvases(images, labels, rng, clutter)
+    cv = Canvases(images, labels, rng, clutter, args.clutter_mode, digits)
     torch.manual_seed(args.seed)
     model = CanvasUNet(args.ch).to(dev)
     ema = CanvasUNet(args.ch).to(dev).eval()
@@ -263,7 +263,7 @@ def train(args):
     log, two_total = [], 0
     for step in range(1, total + warm + 1):
         t0 = time.perf_counter()
-        x, y, two = training_batch(cv, args.share, args.batch, rng, digits, side, args.clutter_dir is not None)
+        x, y, two = training_batch(cv, args.share, args.batch, rng, digits, side, args.clutter_mode != "none")
         x, y = x.to(dev, non_blocking=True), y.to(dev)
         two_total += two
         t1 = time.perf_counter()
@@ -330,7 +330,8 @@ def main():
     tr.add_argument("--side", default="anywhere", choices=["anywhere", "either", "left", "right"],
                     help="where a single digit sits: anywhere, or a half (plan 32)")
     tr.add_argument("--tag", default="", help="output folder name instead of share-<share>")
-    tr.add_argument("--clutter-dir", type=Path, default=None, help="Fashion-MNIST raw folder: train with clutter objects (plan 33, E2)")
+    tr.add_argument("--clutter-dir", type=Path, default=None, help="Fashion-MNIST raw folder (clutter mode fashion)")
+    tr.add_argument("--clutter-mode", default="none", choices=["none", "fashion", "fragments", "speckle"], help="plan 33, E2: what the clutter is")
     args = ap.parse_args()
     if args.cmd == "train":
         train(args)
