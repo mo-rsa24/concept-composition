@@ -127,7 +127,8 @@ data source the experts share; that is the point of E2 and is stated, not hidden
 
 Navigation: 📋 [TOC](#table-of-contents)
 
-Nothing yet.
+- **E0 and E1 on plan 32's either-side experts (2026-11-19), five tuning pairs, seeds 0 to 63, no training.** Clean pairs of 320: region composition with whole-canvas inputs **4**; region composition with each expert seeing only its half-canvas crop **124 (39%)**; union base **0**. The zero-push cell equals no push byte for byte. Against the bars: E1 is a null, as predicted, so the union base does not give the product mass; E0 with whole-canvas inputs is a null; E0 with crops is above the null (32) and below the promising line (160), so it is neither supported nor sent on by the bar as written. The crop result is the first non-zero composition of two experts that never met, with no training: each expert denoises only its own half.
+- **Next, before it runs.** The two pixel pushes already trained in plan 32 (both pushes and the one-half ink push) are tried once on the crop composition, default settings (strength 10, cap 0.1, eta 1.0). This is E4's first look and tests whether the 124 can be lifted. The clutter trainings (E2) are on hold until the reader decides what the clutter objects should be (a second dataset, Fashion-MNIST, versus objects built only from MNIST or drawn shapes): no clutter expert has trained.
 
 ## Still open
 
