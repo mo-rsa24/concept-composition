@@ -138,6 +138,11 @@ def reads(net, canvas, dev):
             for ys, xs in parts]
 
 
+def call_one_tolerant(rd, digit):
+    """Clutter-tolerant own-digit call (plan 33): exactly one blob read at least 0.9 as the asked digit, other blobs allowed."""
+    return sum(1 for _, p in rd if int((p[:10] / p[:10].sum()).argmax()) == digit and (p[:10] / p[:10].sum()).max() >= 0.9) == 1
+
+
 def call_two(rd, pair):
     if len(rd) == 0 or len(rd) > 2:
         return "damaged"
@@ -212,15 +217,19 @@ def main():
         lo, hi = (int(v) for v in args.digits.split("-"))
         out = args.out / "alone" / args.name
         out.mkdir(parents=True, exist_ok=True)
-        counts, canv = {}, {}
+        counts, canv, tol = {}, {}, {}
         for d in range(lo, hi + 1):
             x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=one_eps(A, d), device=dev, eta=1.0)[0])
-            ok = [bool(call_one(reads(net, c, dev), d)) for c in x]
+            rd = [reads(net, c, dev) for c in x]
+            ok = [bool(call_one(r, d)) for r in rd]
+            tol[str(d)] = int(sum(call_one_tolerant(r, d) for r in rd))
             counts[str(d)] = int(sum(ok)); canv[str(d)] = x
             sheet(x, ok, f"{args.name} alone, asked {d}: {sum(ok)} of 64 one clear {d}", out / f"alone-{d}.png")
             print(args.name, d, counts[str(d)], flush=True)
         np.savez_compressed(out / "canvases.npz", **canv)
         (out / "counts.json").write_text(json.dumps(counts, indent=1))
+        (out / "counts_tolerant.json").write_text(json.dumps(tol, indent=1))
+        print(args.name, "tolerant", json.dumps(tol), flush=True)
         return
 
     A, B = load_unet(args.a, dev), load_unet(args.b, dev)
