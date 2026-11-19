@@ -86,6 +86,33 @@ def draw(net, labels, steps, abar, dev):
     return ((x.clamp(-1, 1) + 1) * 127.5).round().to(torch.uint8)[:, 0].cpu().numpy()
 
 
+def save_with_retries(out, arrays, tries=20, wait=15):
+    """Save to the node's own disk first, then copy into place, retrying. On the cluster, /datasets
+    briefly vanished for some nodes at the moment of writing (jobs 90452, 90456: mkdir; 90470: the
+    file itself), each time losing a whole drawing. If it stays unreachable, the file goes to
+    SAMPLES_FALLBACK (default /home-mscluster/mmolefe/poe_repair_min_scratch/mnist-share) instead."""
+    import os, shutil, tempfile
+    local = Path(tempfile.mkdtemp(prefix="mnist-sample-")) / out.name
+    np.savez_compressed(local, **arrays)
+    for i in range(tries):
+        try:
+            try:
+                out.parent.mkdir(parents=True, exist_ok=True)
+            except FileExistsError:
+                pass
+            shutil.copyfile(local, out.with_suffix(".tmp.npz"))
+            os.replace(out.with_suffix(".tmp.npz"), out)
+            return out
+        except OSError as e:
+            print(f"save try {i + 1} of {tries} failed: {e}", flush=True)
+            time.sleep(wait)
+    fb = Path(os.environ.get("SAMPLES_FALLBACK", "/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-share")) / out.parent.name
+    fb.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(local, fb / out.name)
+    print(f"SAVED TO FALLBACK {fb / out.name}", flush=True)
+    return fb / out.name
+
+
 def sample_checkpoint(path, out_dir=OUT, rows=None, dev="cuda"):
     out = out_dir / path.name.replace(".pt", ".npz")
     if out.exists():
@@ -101,11 +128,7 @@ def sample_checkpoint(path, out_dir=OUT, rows=None, dev="cuda"):
         t1 = time.time()
         arrays[name] = draw(net, labels, steps, abar, dev)
         print(f"  {path.stem} · {name}: {len(arrays[name])} pictures in {time.time() - t1:.0f}s", flush=True)
-    try:                       # on the cluster's /datasets a folder that exists can briefly fail the
-        out_dir.mkdir(parents=True, exist_ok=True)       # is-a-directory check (jobs 90452, 90456)
-    except FileExistsError:
-        pass
-    np.savez_compressed(out, **arrays)
+    save_with_retries(out, arrays)
     shown = out.resolve().relative_to(REPO) if out.resolve().is_relative_to(REPO) else out.resolve()
     print(f"wrote {shown} · {len(ROWS)} rows x {N_SEEDS} pictures · {time.time() - t0:.0f}s",
           flush=True)
