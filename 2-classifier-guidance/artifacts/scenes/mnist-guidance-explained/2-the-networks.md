@@ -86,7 +86,10 @@ Toys are in [the toys](toys/triad_toys.py), toys K to O. Their numbers are the t
 
 🔤 **The name:** to *attend* is to give some things more of your notice than others. A query asks a question, each key says what its place holds, and the answer is the values mixed in proportion to how well each key matches the question. This U-Net has one attention block at the bottom, 4 heads over 128 places (the 8 × 16 grid), 66,304 weights.
 
-🧸 **Toy:** one query [1, 0] reads three keys [1, 0], [0, 1] and [1, 0]. The match scores are 1, 0, 1; the weights are 0.4223, 0.1554, 0.4223; the three values 10, 20 and 50 mix to 28.446. A plain average of the values would be 26.667, ignoring which key matched. 🔨 **Build:** toy M.
+🧸 **Toy:** one query [1, 0] reads three keys [1, 0], [0, 1] and [1, 0]. The match scores are 1, 0, 1; the weights are 0.4223, 0.1554, 0.4223; the three values 10, 20 and 50 mix to 28.446. A plain average of the values would be 26.667, ignoring which key matched. 🔨 **Build:** toy M. 🎞️ **Moving picture:** [toy-m-attention.gif](toys/toy-m-attention.gif): the query turns and the three weights trade places, the answer sliding between the keys' values.
+
+<a href="toys/toy-m-attention.gif"><img src="toys/toy-m-attention.gif" width="420" alt="A query arrow turns beside three key arrows while three bars show each place's weight and an answer line moves above a dotted plain average"></a>
+
 
 **Embedding**
 

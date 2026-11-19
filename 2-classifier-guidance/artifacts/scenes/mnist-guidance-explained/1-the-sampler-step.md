@@ -44,6 +44,10 @@ Each toy below is ordinary and small enough to do on paper; [the toys](toys/tria
 
 🔨 **Build:** `toys/triad_toys.py`, toy P.
 
+🎞️ **Moving picture:** [toy-p-a-ddim-step.gif](toys/toy-p-a-ddim-step.gif): x_t, then the noise taken off, then the clean guess, then the next canvas, with the same step run again beneath it with the noise sign flipped.
+
+<a href="toys/toy-p-a-ddim-step.gif"><img src="toys/toy-p-a-ddim-step.gif" width="420" alt="Two number lines: the correct step lands its clean guess at 1.772 and the flipped-sign step throws it out to 5.014"></a>
+
 💥 **Broken run (misuse):** flip the sign of the predicted noise and the clean guess jumps from 1.772 to 5.014, far outside a canvas whose pixels run from −1 to 1. A wrong sign looks like a plausible number, and only the range exposes it. Toy numbers.
 
 ## One step, drawn as networks

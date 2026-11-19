@@ -158,6 +158,58 @@ def pic_j():
     save(fig, upd, hold(n, 8), "toy-j-a-running-average.gif")
 
 
+
+def pic_m():
+    K = np.array([[1, 0], [0, 1], [1, 0.0]]); V = np.array([10.0, 20.0, 50.0])
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(9, 3.6), gridspec_kw={"width_ratios": [1, 1.3]})
+    th = np.r_[np.linspace(0, 90, 30), np.linspace(90, 0, 30)]
+
+    def upd(i):
+        t = np.radians(th[i]); q = np.array([np.cos(t), np.sin(t)]); sc = K @ q; w = np.exp(sc) / np.exp(sc).sum()
+        a1.cla(); a1.set_xlim(-0.2, 1.4); a1.set_ylim(-0.2, 1.4); a1.set_aspect("equal"); a1.axis("off")
+        for j, (k, c) in enumerate(zip(K, (GREEN, GREEN, GREEN))):
+            a1.annotate("", xy=k * 1.0 + np.array([0, 0.02 * j]), xytext=(0, 0), arrowprops=dict(arrowstyle="-|>", color=GREEN, lw=1.5, alpha=0.5))
+        a1.text(1.05, -0.12, "keys 1 and 3", color=GREEN, size=9); a1.text(-0.15, 1.05, "key 2", color=GREEN, size=9)
+        a1.annotate("", xy=q * 1.2, xytext=(0, 0), arrowprops=dict(arrowstyle="-|>", color=ORANGE, lw=3))
+        a1.text(0.5, 1.3, "the query turns", color=ORANGE, ha="center", size=10)
+        a2.cla(); a2.set_ylim(0, 60); a2.set_xlim(-0.6, 3.6)
+        a2.bar([0, 1, 2], V, 0.45, color="#d6efe0", edgecolor=GREEN, label="values 10, 20, 50")
+        a2.bar([0, 1, 2], V * w, 0.45, color=GREEN, label="the share mixed in")
+        for j in range(3):
+            a2.text(j, V[j] + 2, f"weight {w[j]:.2f}", ha="center", size=9)
+        a2.axhline(float(w @ V), color=ORANGE, lw=2); a2.axhline(V.mean(), color=GREY, lw=1.2, ls=":")
+        a2.text(3.5, float(w @ V) + 1.5, f"answer {float(w @ V):.2f}", color=ORANGE, ha="right", size=10)
+        a2.text(3.5, V.mean() - 4, f"plain average {V.mean():.2f}", color=GREY, ha="right", size=9)
+        a2.set_xticks([0, 1, 2]); a2.set_xticklabels(["place 1", "place 2", "place 3"]); a2.legend(frameon=False, fontsize=8, loc="upper left")
+    save(fig, upd, list(range(len(th))), "toy-m-attention.gif", 10)
+
+
+def pic_p():
+    T = 1000; abar = np.cumprod(1 - np.linspace(1e-4, 0.02, T)); steps = np.round(np.linspace(T - 1, 0, 50)).astype(int)
+    a, ap = abar[steps[25]], abar[steps[26]]; xt, e = 1.0, 0.5
+    rows = []
+    for sign, name, col in ((1, "predicted noise as given", GREEN), (-1, "noise sign flipped", RED)):
+        pn = np.sqrt(1 - a) * e * sign; x0 = (xt - pn) / np.sqrt(a); xn = np.sqrt(ap) * x0 + np.sqrt(1 - ap) * e * sign
+        rows.append((name, col, pn, x0, xn))
+    fig, axs = plt.subplots(2, 1, figsize=(8, 3.8), sharex=True)
+
+    def upd(i):
+        for ax, (name, col, pn, x0, xn) in zip(axs, rows):
+            ax.cla(); ax.set_xlim(-1.5, 5.6); ax.set_ylim(-1.1, 1.6); ax.axis("off")
+            ax.axvspan(-1, 1, ymin=0.15, ymax=0.55, color="#eceff2"); ax.text(0, -0.85, "grey band: a canvas pixel runs from -1 to 1", ha="center", size=8, color=GREY)
+            ax.plot([-1.5, 5.6], [0, 0], color=GREY, lw=0.8)
+            ax.text(-1.45, 1.35, name, color=col, size=10, weight="bold")
+            ax.plot([xt], [0], "o", color=BLUE, ms=10); ax.text(xt - 0.1, 0.3, f"x_t = {xt:.1f}", color=BLUE, ha="center", size=9)
+            if i >= 1:
+                ax.annotate("", xy=(xt - pn, 0), xytext=(xt, 0), arrowprops=dict(arrowstyle="-|>", color=ORANGE, lw=2))
+                ax.text(xt - pn / 2, -0.32, f"minus {pn:+.3f} of noise", color=ORANGE, ha="center", size=8)
+            if i >= 2:
+                ax.plot([x0], [0], "s", color=col, ms=11); ax.text(x0, 0.62, f"clean guess {x0:.3f}", color=col, ha="center", size=9)
+            if i >= 3:
+                ax.plot([xn], [0], "D", color=INK, ms=9); ax.text(xn + 0.1, 1.0, f"next canvas {xn:.3f}", color=INK, ha="center", size=9)
+    save(fig, upd, [0, 0, 1, 1, 2, 2, 3, 3, 3, 3, 3, 3], "toy-p-a-ddim-step.gif", 2)
+
+
 if __name__ == "__main__":
-    for f in (pic_c, pic_d, pic_e, pic_f, pic_g, pic_h, pic_i, pic_j):
+    for f in (pic_m, pic_p):
         f(); print("drew", f.__name__)
