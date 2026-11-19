@@ -237,6 +237,7 @@ def train(args):
     dev = "cuda"
     images, labels = load_mnist(args.mnist)
     rng = np.random.default_rng(args.seed)
+    digits = None if args.digits == "all" else list(range(int(args.digits[0]), int(args.digits[-1]) + 1))
     clutter = None
     if args.clutter_mode == "fashion":
         clutter = np.fromfile(args.clutter_dir / "train-images-idx3-ubyte", np.uint8, offset=16).reshape(-1, 28, 28)
@@ -247,7 +248,6 @@ def train(args):
     ema.load_state_dict(model.state_dict())
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     n_params = sum(p.numel() for p in model.parameters())
-    digits = None if args.digits == "all" else list(range(int(args.digits[0]), int(args.digits[-1]) + 1))
     side = None if args.side == "anywhere" else args.side
     assert digits is None or args.share == 0, "an expert trained on a digit range sees no two-digit canvases"
     torch.backends.cudnn.benchmark = True
