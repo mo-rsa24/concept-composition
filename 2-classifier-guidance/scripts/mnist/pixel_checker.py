@@ -14,7 +14,7 @@ and blur on every example. The five evaluation pairs never enter a checker's tra
 
 Usage: python pixel_checker.py train --kind pair|separate|ink --mnist <raw dir> --out <dir> [--draws <npz> ...]
 """
-import argparse, json, sys, time
+import argparse, json, os, sys, time
 from pathlib import Path
 import numpy as np, torch
 import torch.nn as nn
@@ -26,6 +26,8 @@ from checker import STEPS, LAMBDA, STEP_P, LOGIT_CLIP, time_features, guard  # n
 
 EVAL_PAIRS = [(1, 9), (3, 6), (4, 7), (2, 8), (0, 5)]
 TRAIN_PAIRS = [(a, b) for a in range(10) for b in range(a + 1, 10) if (a, b) not in EVAL_PAIRS]
+if os.environ.get("PC_NOCROSS"):          # plan 33: no cross-range pair (a 0-4 digit with a 5-9 digit) in a checker's pasted data
+    TRAIN_PAIRS = [(a, b) for a, b in TRAIN_PAIRS if not (a <= 4 < b)]
 
 
 class PixelHead(nn.Module):

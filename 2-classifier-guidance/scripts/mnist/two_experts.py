@@ -92,9 +92,9 @@ def union_eps(A, B, U, a, b):
 
 
 
-def build_eps(args, A, B, a, b, U):
+def build_eps(args, A, B, a, b, U, seeds=None):
     if args.compose in ("region", "crop"):
-        sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in EVAL_SEEDS]
+        sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in (EVAL_SEEDS if seeds is None else seeds)]
         return region_eps(A, B, a, b, sides, args.compose == "crop")
     if args.base == "union":
         return union_eps(A, B, U, a, b)
@@ -156,6 +156,15 @@ def call_one(rd, digit):
         return False
     q = rd[0][1][:10] / rd[0][1][:10].sum()
     return int(q.argmax()) == digit and q.max() >= 0.9
+
+
+def call_tolerant(rd, pair):
+    """Clutter-tolerant (plan 33, E2): one blob read at least 0.9 as the asked digit a and one as b, in different halves, other blobs allowed."""
+    a, b = pair
+    def hits(d):
+        return [x >= 32 for x, p in rd if (p[:10] / p[:10].sum())[d] >= 0.9 and int((p[:10] / p[:10].sum()).argmax()) == d]
+    ha, hb = hits(a), hits(b)
+    return len(ha) == 1 and len(hb) == 1 and ha[0] != hb[0]
 
 
 def sheet(canv, calls, title, path):
@@ -224,12 +233,10 @@ def main():
     if args.mode == "draws":
         rng = np.random.default_rng(args.seed0)
         xs, ps, oks = [], [], []
-        for a, b in pc.TRAIN_PAIRS:
-            if not (a <= 4 < b):
-                continue                                  # one digit from each expert
+        for a, b in parse_pairs(args.pairs):
             seeds = list(range(args.seed0, args.seed0 + args.n))
             assert min(seeds) >= 1000, "draws come from seed 1,000 up"
-            x = to_uint8(sample(None, seeds, [], eps_fn=build_eps(args, A, B, a, b, U), push_fn=make_push(args.push, a, b, heads, args.s),
+            x = to_uint8(sample(None, seeds, [], eps_fn=build_eps(args, A, B, a, b, U, seeds), push_fn=make_push(args.push, a, b, heads, args.s),
                                 device=dev, eta=1.0)[0])
             ok = [call_two(reads(net, c, dev), (a, b)) == CALLS[0] for c in x]
             xs.append(x); ps += [(a, b)] * len(x); oks += ok
@@ -246,17 +253,20 @@ def main():
     for a, b in parse_pairs(args.pairs):
         x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=build_eps(args, A, B, a, b, U),
                             push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta)[0])
-        calls = [call_two(reads(net, c, dev), (a, b)) for c in x]
+        rds = [reads(net, c, dev) for c in x]
+        calls = [call_two(r, (a, b)) for r in rds]
         tally = {k: calls.count(k) for k in CALLS}
+        tally["tolerant"] = int(sum(call_tolerant(r, (a, b)) for r in rds))
         counts[f"{a}-{b}"] = tally; canv[f"{a}-{b}"] = x
         sheet(x, calls, f"{args.name}, asked {a} and {b}: {tally[CALLS[0]]} of 64 two clear, right, apart "
               f"(green); same half {tally['same half']} (orange), one blob {tally['one blob']} (red)", out / f"sheet-{a}-{b}.png")
         print(args.name, a, b, json.dumps(tally), flush=True)
     total = sum(v[CALLS[0]] for v in counts.values())
+    tol_total = sum(v["tolerant"] for v in counts.values())
     np.savez_compressed(out / "canvases.npz", **canv)
     (out / "counts.json").write_text(json.dumps({"cell": args.name, "push": args.push, "s": args.s, "base": args.base, "tau": args.tau,
-                                                  "total_of_320": total, "per_pair": counts}, indent=1))
-    print(json.dumps({"cell": args.name, "total_of_320": total}), flush=True)
+                                                  "total_of_320": total, "tolerant_total_of_320": tol_total, "per_pair": counts}, indent=1))
+    print(json.dumps({"cell": args.name, "total_of_320": total, "tolerant_total_of_320": tol_total}), flush=True)
 
 
 if __name__ == "__main__":
