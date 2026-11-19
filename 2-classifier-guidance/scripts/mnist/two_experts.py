@@ -98,6 +98,39 @@ def masked_eps(A, B, a, b, hard):
     return f
 
 
+LAYOUT_LOG = []      # E0d: per call, the layout (True: A takes the left half) of every canvas, read back for the stability figure
+
+
+def inferred_eps(A, B, a, b, occlude):
+    """E0d (plan 33): whole canvas, no crop, no coin flip. The layout is inferred at every call from the experts' own label-added
+    differences (digit label minus no-digit label, whole-canvas input), summed over each half: A left + B right against A right + B left,
+    so the two experts can never share a half. Each expert supplies the prediction on its half.
+    occlude False (E0d-a): the experts' whole-canvas predictions as they are.
+    occlude True (E0d-b): each expert's input has the other half replaced by the blank canvas noised to the current level."""
+    def f(x, t):
+        dev = x.device
+        ya = torch.full((x.shape[0],), a, device=dev); yb = torch.full((x.shape[0],), b, device=dev)
+        n = torch.full((x.shape[0],), 10, device=dev)
+        eA, eB = A(x, t, ya), B(x, t, yb)
+        dA, dB = (eA - A(x, t, n)).abs(), (eB - B(x, t, n)).abs()
+        sa = (dA[..., :32].mean((1, 2, 3)) + dB[..., 32:].mean((1, 2, 3)))     # A left, B right
+        sb = (dA[..., 32:].mean((1, 2, 3)) + dB[..., :32].mean((1, 2, 3)))     # A right, B left
+        left = (sa >= sb)[:, None, None, None]
+        LAYOUT_LOG.append(left[:, 0, 0, 0].cpu())
+        if occlude:
+            ab = ABAR.to(dev)[t][:, None, None, None]
+            g = torch.Generator(device=dev).manual_seed(12345 + int(t[0]))
+            blank = -ab.sqrt() + (1 - ab).sqrt() * torch.randn(x.shape, generator=g, device=dev)
+            mL = torch.zeros_like(x); mL[..., :32] = 1                           # 1 on the left half
+            ownA = torch.where(left, mL, 1 - mL); ownB = 1 - ownA              # where each expert owns the canvas
+            eA = A(ownA * x + (1 - ownA) * blank, t, ya)
+            eB = B(ownB * x + (1 - ownB) * blank, t, yb)
+        m = torch.zeros_like(x); m[..., :32] = 1
+        pick_a = torch.where(left, m, 1 - m)
+        return pick_a * eA + (1 - pick_a) * eB
+    return f
+
+
 def union_eps(A, B, U, a, b):
     """E1: the two experts over a base trained on the union of both ranges (the step 7b share-0 model's no-digit prediction)."""
     def f(x, t):
@@ -112,6 +145,8 @@ def build_eps(args, A, B, a, b, U, seeds=None):
     if args.compose in ("region", "crop"):
         sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in (EVAL_SEEDS if seeds is None else seeds)]
         return region_eps(A, B, a, b, sides, args.compose == "crop")
+    if args.compose in ("inferred", "inferred-occ"):
+        return inferred_eps(A, B, a, b, args.compose == "inferred-occ")
     if args.compose in ("masked", "masked-hard"):
         return masked_eps(A, B, a, b, args.compose == "masked-hard")
     if args.base == "union":
@@ -224,7 +259,7 @@ def main():
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
     ap.add_argument("--eval-seed0", type=int, default=0); ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
-    ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard"])
+    ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard", "inferred", "inferred-occ"])
     ap.add_argument("--union", type=Path)
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
@@ -283,6 +318,13 @@ def main():
         x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=build_eps(args, A, B, a, b, U),
                             push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta,
                             langevin=(args.lang_k, args.lang_c))[0])
+        if LAYOUT_LOG:
+            L = torch.stack(LAYOUT_LOG)                       # calls x canvases
+            tail_ = L[len(L) // 5:]                           # after the first fifth of the calls
+            stable = float((tail_ == tail_[-1]).all(0).float().mean())
+            print(args.name, a, b, "layout: left-share at the last call", round(float(L[-1].float().mean()), 2),
+                  "| canvases whose layout never changes after the first fifth of the run", round(stable, 2), flush=True)
+            LAYOUT_LOG.clear()
         rds = [reads(net, c, dev) for c in x]
         calls = [call_two(r, (a, b)) for r in rds]
         tally = {k: calls.count(k) for k in CALLS}
