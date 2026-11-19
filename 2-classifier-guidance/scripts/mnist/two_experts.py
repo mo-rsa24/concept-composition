@@ -82,6 +82,22 @@ def region_eps(A, B, a, b, sides, crop):
     return f
 
 
+def masked_eps(A, B, a, b, hard):
+    """E0b (plan 33): both experts see the whole canvas; each one's label-added difference is applied only where it acts.
+    eps = mean of the two no-digit predictions + m_a (eps_a - eps_a_null) + m_b (eps_b - eps_b_null); masks from the differences' own size."""
+    def f(x, t):
+        dev = x.device
+        ya = torch.full((x.shape[0],), a, device=dev); yb = torch.full((x.shape[0],), b, device=dev)
+        n = torch.full((x.shape[0],), 10, device=dev)
+        eA, eAn, eB, eBn = A(x, t, ya), A(x, t, n), B(x, t, yb), B(x, t, n)
+        dA, dB = eA - eAn, eB - eBn
+        blur = lambda d: torch.nn.functional.avg_pool2d(d.abs(), 5, 1, 2)
+        sa, sb = blur(dA), blur(dB)
+        ma = (sa > sb).float() if hard else sa / (sa + sb + 1e-8)
+        return 0.5 * (eAn + eBn) + ma * dA + (1 - ma) * dB
+    return f
+
+
 def union_eps(A, B, U, a, b):
     """E1: the two experts over a base trained on the union of both ranges (the step 7b share-0 model's no-digit prediction)."""
     def f(x, t):
@@ -96,6 +112,8 @@ def build_eps(args, A, B, a, b, U, seeds=None):
     if args.compose in ("region", "crop"):
         sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in (EVAL_SEEDS if seeds is None else seeds)]
         return region_eps(A, B, a, b, sides, args.compose == "crop")
+    if args.compose in ("masked", "masked-hard"):
+        return masked_eps(A, B, a, b, args.compose == "masked-hard")
     if args.base == "union":
         return union_eps(A, B, U, a, b)
     return two_eps(A, B, a, b, args.base, args.tau)
@@ -206,7 +224,7 @@ def main():
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
     ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
-    ap.add_argument("--compose", default="product", choices=["product", "region", "crop"])
+    ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard"])
     ap.add_argument("--union", type=Path)
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
