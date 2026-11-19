@@ -320,3 +320,14 @@ Lion × meerkat (3301 to 3316): faithful pair 0 of 16 for the multi-pair checker
 **Why lion × meerkat does not move.** The push makes two bodies and leaves which animal each becomes to PoE, where the meerkat expert wins on most seeds. Every lever tried acts on "two separate things": more pairs in the checker's data, a larger cap, a longer window. The two that act on species (a separate presence push, presence outputs across pairs) cost the photograph before they name the animal.
 
 **Next idea.** Give each body its species at the step the layout settles rather than through a summed score: once the push has made two bodies (about step 10), find the two regions and condition each on its own prompt (the lion expert's prediction inside one region, the meerkat expert's inside the other) for the rest of the run. This moves the species decision from PoE's sum to a per-region choice, which no checker push has done. Open housekeeping: copy the scratch rung 2 outputs to `/datasets`; plan 31's two scripts (`clip_push.py`, `render_results.py`) are edited on both checkouts and uncommitted until the user says done.
+
+**Reference: the joint prompt and CO3 on the same 128 seeds (6001 to 6128).** One picture per seed per method; the joint prompt starts from each seed's own noise (`render_joint_sheet.py`), CO3 (Dutta et al., arXiv 2509.25940, needs the joint prompt at inference) draws its own noise from the seed number. Calls by eye at 330 to 420 px for every method, the same bias on each side.
+
+| Method | Scorer: faithful pair | Eye: clean or near-clean photograph |
+| --- | --- | --- |
+| Plain PoE | 0 | 0 |
+| The kept recipe (multi-pair checker, cap 0.4) | 35 | 54 (32 clean) |
+| The joint prompt "a cat and a dog" | 57 | 69 (64 clean); 14 more are drawn cat-and-dog pictures |
+| CO3 | 89 | 101 (97 clean) |
+
+CO3's misses are two cats or three animals (24) and three silhouette or hybrid pictures; nearly every picture is a cat and a dog side by side on a plain studio backdrop, so its pairs are cleaner and less varied than the other two columns. Eye calls per seed: `joint-catdog-eval/eye-calls.csv`, `co3-catdog-eval/eye-calls.csv`, `result-sheet-catdog-big-multipair-cap0.4/eye-calls.csv`. API tokens: 2,168 in per tile, 256 tiles.
