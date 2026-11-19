@@ -131,8 +131,10 @@ class CanvasUNet(nn.Module):
 
 # ---------------------------------------------------------------- the data
 
-def training_batch(cv, share, n, rng):
-    """n (canvas, label) examples; a two-digit canvas gives one example per digit it holds."""
+def training_batch(cv, share, n, rng, digits=None, side=None):
+    """n (canvas, label) examples; a two-digit canvas gives one example per digit it holds.
+    digits: draw single digits only from this list (plan 32's experts). side: None places a digit anywhere;
+    'either', 'left' or 'right' places it in a half, as Canvases.one_half does."""
     xs, ys, two = [], [], 0
     while len(xs) < n:
         if rng.random() < share:
@@ -142,8 +144,11 @@ def training_batch(cv, share, n, rng):
             ys += [a, b]
             two += 1
         else:
-            d = int(rng.integers(10))
-            xs.append(cv.one(d))
+            d = int(rng.integers(10)) if digits is None else int(digits[rng.integers(len(digits))])
+            if side is None:
+                xs.append(cv.one(d))
+            else:
+                xs.append(cv.one_half(d, int(rng.integers(2)) if side == "either" else int(side == "right")))
             ys.append(d)
     x = torch.from_numpy(np.stack(xs[:n])).float().div_(127.5).sub_(1).unsqueeze(1)
     y = torch.tensor(ys[:n])
@@ -232,7 +237,12 @@ def train(args):
     ema.load_state_dict(model.state_dict())
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     n_params = sum(p.numel() for p in model.parameters())
-    out = args.out / f"share-{args.share}"
+    digits = None if args.digits == "all" else list(range(int(args.digits[0]), int(args.digits[-1]) + 1))
+    side = None if args.side == "anywhere" else args.side
+    assert digits is None or args.share == 0, "an expert trained on a digit range sees no two-digit canvases"
+    torch.backends.cudnn.benchmark = True
+    scaler = torch.amp.GradScaler("cuda", enabled=args.amp16)
+    out = args.out / (args.tag or f"share-{args.share}")
     out.mkdir(parents=True, exist_ok=True)
     print(f"share {args.share}: {n_params:,} weights, ch {args.ch}, batch {args.batch}, held out {HELD_OUT}",
           flush=True)
@@ -243,19 +253,21 @@ def train(args):
     log, two_total = [], 0
     for step in range(1, total + warm + 1):
         t0 = time.perf_counter()
-        x, y, two = training_batch(cv, args.share, args.batch, rng)
+        x, y, two = training_batch(cv, args.share, args.batch, rng, digits, side)
         x, y = x.to(dev, non_blocking=True), y.to(dev)
         two_total += two
         t1 = time.perf_counter()
         t = torch.randint(0, T, (x.shape[0],), device=dev)
         noise = torch.randn_like(x)
         a = ABAR.to(dev)[t][:, None, None, None]
-        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=args.amp):
+        with torch.autocast("cuda", dtype=torch.float16 if args.amp16 else torch.bfloat16,
+                            enabled=args.amp or args.amp16):
             pred = model(a.sqrt() * x + (1 - a).sqrt() * noise, t, y)
         loss = F.mse_loss(pred.float(), noise)
         opt.zero_grad(set_to_none=True)
-        loss.backward()
-        opt.step()
+        scaler.scale(loss).backward()
+        scaler.step(opt)
+        scaler.update()
         with torch.no_grad():
             for pe, pm in zip(ema.parameters(), model.parameters()):
                 pe.lerp_(pm, 1 - args.ema)
@@ -265,7 +277,8 @@ def train(args):
             t_data += t1 - t0
             t_step += t2 - t1
         if not args.time and (step % 500 == 0 or step == total):
-            log.append({"step": step, "loss": loss.item(), "two_digit_canvases": two_total})
+            log.append({"step": step, "loss": loss.item(), "two_digit_canvases": two_total,
+                        "labels_seen": sorted(set(y[y != NULL].tolist()))})
             print(json.dumps(log[-1]), flush=True)
         if not args.time and (step % args.save_every == 0 or step == total):
             torch.save({"ema": ema.state_dict(), "step": step, "args": vars(args) | {"mnist": str(args.mnist),
@@ -273,14 +286,14 @@ def train(args):
 
     if args.time:
         per = (t_data + t_step) / args.time
-        res = {"share": args.share, "device": torch.cuda.get_device_name(), "ch": args.ch, "batch": args.batch,
-               "amp": args.amp,
+        res = {"share": args.share, "tag": args.tag, "device": torch.cuda.get_device_name(), "ch": args.ch,
+               "batch": args.batch, "amp": args.amp, "amp16": args.amp16,
                "weights": n_params, "timed_steps": args.time, "ms_per_step": round(1000 * per, 1),
                "ms_data": round(1000 * t_data / args.time, 1), "ms_gpu": round(1000 * t_step / args.time, 1),
                "peak_gb": round(torch.cuda.max_memory_allocated() / 1e9, 2),
                "projected_min_for": args.steps, "projected_min": round(per * args.steps / 60, 1)}
         print(json.dumps(res), flush=True)
-        tag = torch.cuda.get_device_name().replace(" ", "_") + ("-amp" if args.amp else "")
+        tag = torch.cuda.get_device_name().replace(" ", "_") + ("-amp" if args.amp else "") + ("-fp16" if args.amp16 else "")
         (out / f"timing-{tag}.json").write_text(json.dumps(res, indent=1))
         return
     (out / "train_log.json").write_text(json.dumps(log, indent=1))
@@ -302,6 +315,11 @@ def main():
     tr.add_argument("--save-every", type=int, default=5000)
     tr.add_argument("--time", type=int, default=0, help="time this many steps after 20 warm-up steps, then stop")
     tr.add_argument("--amp", action="store_true", help="forward pass in bfloat16 autocast; weights and loss stay fp32")
+    tr.add_argument("--amp16", action="store_true", help="forward pass in float16 autocast with a grad scaler (Turing cards)")
+    tr.add_argument("--digits", default="all", help="'all', or a range like 0-4 for one expert (plan 32)")
+    tr.add_argument("--side", default="anywhere", choices=["anywhere", "either", "left", "right"],
+                    help="where a single digit sits: anywhere, or a half (plan 32)")
+    tr.add_argument("--tag", default="", help="output folder name instead of share-<share>")
     args = ap.parse_args()
     if args.cmd == "train":
         train(args)

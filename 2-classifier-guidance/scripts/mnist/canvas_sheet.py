@@ -45,6 +45,13 @@ class Canvases:
         c[y:y + D, x:x + D] = self.digit(d)
         return c
 
+    def one_half(self, d, side):
+        """One digit in the left (side 0) or right (side 1) half, at the place two() puts each of its digits."""
+        c = np.zeros((H, W), np.uint8)
+        y, x = self.rng.integers(0, H - D + 1), 32 * side + self.rng.integers(0, 5)
+        c[y:y + D, x:x + D] = self.digit(d)
+        return c
+
     def two(self, a, b):
         if self.rng.random() < 0.5:
             a, b = b, a
