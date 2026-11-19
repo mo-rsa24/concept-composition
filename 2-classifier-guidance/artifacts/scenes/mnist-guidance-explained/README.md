@@ -18,4 +18,4 @@ The scripts and numbers files that draw these figures stay beside the evidence t
 
 ## The toys behind the "Words on this page" sections
 
-Each page's names are taken apart on small ordinary toys (soup tasters, a four-pixel strip, a shopkeeper's price cap). [`toys/triad_toys.py`](toys/triad_toys.py) computes every hand answer, asserts it, and writes `toys/toy_numbers.json` and the two moving pictures; a change to a toy fails the file. Where a name is already taught by [journey 13](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/00-index.md) the page links to its chapter instead.
+Each page's names are taken apart on small ordinary toys (soup tasters, a four-pixel strip, a shopkeeper's price cap). [`toys/triad_toys.py`](toys/triad_toys.py) computes every hand answer, asserts it, and writes `toys/toy_numbers.json` and the two moving pictures; a change to a toy fails the file. Where a name is already taught by [journey 13](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/00-index.md) the page links to its chapter instead.
