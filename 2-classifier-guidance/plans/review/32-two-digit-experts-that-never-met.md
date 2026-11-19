@@ -178,6 +178,14 @@ Counts are two clear, right digits on different halves, out of 320 (5 pairs × 6
 
 - [ ] **Fixed-side with both pushes.** No more than 16 below fixed-side plain product.
 
+- [ ] **Tuned read.** Where the default settings (s = 10, cap 0.1, eta 1.0) leave a guided cell below
+      its bar, the loop may tune, as step 7b did. It chooses on the two tuning pairs 2 & 8 and
+      0 & 5 at seeds 0 to 63, by the judge's count, one knob per round, at most 8 rounds: s in
+      3, 10, 30; the cap in 0.1, 0.3; eta in 0.5, 1.0. The chosen setting is then read once, on
+      the three other pairs (1 & 9, 3 & 6, 4 & 7) at fresh seeds 64 to 127, counted by eye, never
+      read before. Its bars are the same shares of 192: 134 supports (the 224 of 320 above), 38 above
+      the random push, 19 for a null, 10 for the random push and the side effect check.
+
 ## Controls
 
 Navigation: ⬅️ [The bars](#the-bars-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️
