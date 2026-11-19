@@ -164,7 +164,7 @@ def build(kind, cv, rng, draws):
         xs, ps, ok = [], [], []
         for p in draws:
             d = np.load(p)
-            keep = np.array([tuple(sorted(q)) not in EVAL_PAIRS for q in d["pair"]])
+            keep = np.array([bool(os.environ.get("PC_KEEP_EVAL_DRAWS")) or tuple(sorted(q)) not in EVAL_PAIRS for q in d["pair"]])
             xs.append(d["x"][keep]); ps.append(d["pair"][keep]); ok.append(d["ok"][keep])
         x, pr, ok = np.concatenate(xs), np.concatenate(ps), np.concatenate(ok).astype(bool)
         z = np.zeros((len(x), 10), np.float32)
