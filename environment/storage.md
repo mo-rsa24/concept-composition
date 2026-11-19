@@ -20,6 +20,11 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
   with the `co3` python's `huggingface_hub` on 2026-11-04. Counted from its `Male` and
   `Blond_Hair` columns: train 162,770 faces, 1,387 of them blond men (0.852%); valid 19,867 with
   182; test 19,962 with 180.
+- **MNIST** (the four uncompressed raw files the MNIST stages read): `/datasets/mmolefe/raw/mnist/`,
+  copied from the laptop's `/home/molef/PhD/replications/original-superdiff/data/MNIST/raw/` on
+  2026-11-19 with matching sha256 on all four. `canvases.py` reads it when `MNIST_RAW` points there;
+  the laptop's path is its default. The MNIST share run writes to
+  `/datasets/mmolefe/poe_repair_min/outputs/mnist-share/` (checkpoints, samples, logs).
 
 - **How `/datasets/mmolefe` is laid out** (since 2026-11-13): raw datasets in `raw/`, other
   projects' outputs in `projects/<project>/`, archived work in `_archive/`, each moved folder with
