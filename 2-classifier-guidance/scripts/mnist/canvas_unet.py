@@ -246,6 +246,9 @@ def train(args):
     model = CanvasUNet(args.ch).to(dev)
     ema = CanvasUNet(args.ch).to(dev).eval()
     ema.load_state_dict(model.state_dict())
+    if args.init is not None:                                  # plan 33, E2c: continue from saved weights
+        w0 = torch.load(args.init, map_location=dev, weights_only=False)["ema"]
+        model.load_state_dict(w0); ema.load_state_dict(w0)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     n_params = sum(p.numel() for p in model.parameters())
     side = None if args.side == "anywhere" else args.side
@@ -331,6 +334,7 @@ def main():
                     help="where a single digit sits: anywhere, or a half (plan 32)")
     tr.add_argument("--tag", default="", help="output folder name instead of share-<share>")
     tr.add_argument("--clutter-dir", type=Path, default=None, help="Fashion-MNIST raw folder (clutter mode fashion)")
+    tr.add_argument("--init", type=Path, default=None, help="start from this checkpoint's averaged weights (plan 33, E2c)")
     tr.add_argument("--clutter-mode", default="none", choices=["none", "fashion", "fragments", "speckle"], help="plan 33, E2: what the clutter is")
     args = ap.parse_args()
     if args.cmd == "train":
