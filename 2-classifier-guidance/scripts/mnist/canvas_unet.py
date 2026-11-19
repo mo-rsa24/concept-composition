@@ -131,7 +131,7 @@ class CanvasUNet(nn.Module):
 
 # ---------------------------------------------------------------- the data
 
-def training_batch(cv, share, n, rng, digits=None, side=None):
+def training_batch(cv, share, n, rng, digits=None, side=None, clutter=False):
     """n (canvas, label) examples; a two-digit canvas gives one example per digit it holds.
     digits: draw single digits only from this list (plan 32's experts). side: None places a digit anywhere;
     'either', 'left' or 'right' places it in a half, as Canvases.one_half does."""
@@ -145,14 +145,20 @@ def training_batch(cv, share, n, rng, digits=None, side=None):
             two += 1
         else:
             d = int(rng.integers(10)) if digits is None else int(digits[rng.integers(len(digits))])
-            if side is None:
+            if clutter and rng.random() < 0.1:               # the no-digit canvas of a clutter expert: clutter only
+                xs.append(cv.clutter_only()); ys.append(NULL)
+                continue
+            if clutter:
+                xs.append(cv.one_half_clutter(d, int(rng.integers(2)) if side == "either" else int(side == "right")))
+            elif side is None:
                 xs.append(cv.one(d))
             else:
                 xs.append(cv.one_half(d, int(rng.integers(2)) if side == "either" else int(side == "right")))
             ys.append(d)
     x = torch.from_numpy(np.stack(xs[:n])).float().div_(127.5).sub_(1).unsqueeze(1)
     y = torch.tensor(ys[:n])
-    y[torch.from_numpy(rng.random(n) < 0.1)] = NULL
+    if not clutter:
+        y[torch.from_numpy(rng.random(n) < 0.1)] = NULL
     return x, y, two
 
 
@@ -231,7 +237,10 @@ def train(args):
     dev = "cuda"
     images, labels = load_mnist(args.mnist)
     rng = np.random.default_rng(args.seed)
-    cv = Canvases(images, labels, rng)
+    clutter = None
+    if args.clutter_dir is not None:
+        clutter = np.fromfile(args.clutter_dir / "train-images-idx3-ubyte", np.uint8, offset=16).reshape(-1, 28, 28)
+    cv = Canvases(images, labels, rng, clutter)
     torch.manual_seed(args.seed)
     model = CanvasUNet(args.ch).to(dev)
     ema = CanvasUNet(args.ch).to(dev).eval()
@@ -254,7 +263,7 @@ def train(args):
     log, two_total = [], 0
     for step in range(1, total + warm + 1):
         t0 = time.perf_counter()
-        x, y, two = training_batch(cv, args.share, args.batch, rng, digits, side)
+        x, y, two = training_batch(cv, args.share, args.batch, rng, digits, side, args.clutter_dir is not None)
         x, y = x.to(dev, non_blocking=True), y.to(dev)
         two_total += two
         t1 = time.perf_counter()
@@ -321,6 +330,7 @@ def main():
     tr.add_argument("--side", default="anywhere", choices=["anywhere", "either", "left", "right"],
                     help="where a single digit sits: anywhere, or a half (plan 32)")
     tr.add_argument("--tag", default="", help="output folder name instead of share-<share>")
+    tr.add_argument("--clutter-dir", type=Path, default=None, help="Fashion-MNIST raw folder: train with clutter objects (plan 33, E2)")
     args = ap.parse_args()
     if args.cmd == "train":
         train(args)

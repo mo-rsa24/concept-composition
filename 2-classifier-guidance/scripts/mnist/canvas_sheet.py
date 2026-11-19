@@ -32,8 +32,8 @@ def load_mnist(folder: Path):
 
 
 class Canvases:
-    def __init__(self, images, labels, rng):
-        self.images, self.rng = images, rng
+    def __init__(self, images, labels, rng, clutter=None):
+        self.images, self.rng, self.clutter = images, rng, clutter
         self.by_digit = {d: np.flatnonzero(labels == d) for d in range(10)}
 
     def digit(self, d):
@@ -43,6 +43,26 @@ class Canvases:
         c = np.zeros((H, W), np.uint8)
         y, x = self.rng.integers(0, H - D + 1), self.rng.integers(0, W - D + 1)
         c[y:y + D, x:x + D] = self.digit(d)
+        return c
+
+    def item(self):
+        """One clutter object (a Fashion-MNIST item), plan 33's shared background."""
+        return self.clutter[self.rng.integers(len(self.clutter))]
+
+    def one_half_clutter(self, d, side, p_clutter=0.5):
+        """A digit in one half, and with chance p_clutter one clutter object in the opposite half (plan 33, E2)."""
+        c = self.one_half(d, side)
+        if self.rng.random() < p_clutter:
+            y, x = self.rng.integers(0, H - D + 1), 32 * (1 - side) + self.rng.integers(0, 5)
+            c[y:y + D, x:x + D] = self.item()
+        return c
+
+    def clutter_only(self):
+        """Clutter with no digit: one or two objects in random halves; the no-digit canvas of the clutter experts."""
+        c = np.zeros((H, W), np.uint8)
+        for side in ([0, 1] if self.rng.random() < 0.5 else [int(self.rng.integers(2))]):
+            y, x = self.rng.integers(0, H - D + 1), 32 * side + self.rng.integers(0, 5)
+            c[y:y + D, x:x + D] = self.item()
         return c
 
     def one_half(self, d, side):
