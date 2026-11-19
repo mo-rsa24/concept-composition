@@ -98,15 +98,18 @@ def masked_eps(A, B, a, b, hard):
     return f
 
 
+AGREE = []
 LAYOUT_LOG = []      # E0d: per call, the layout (True: A takes the left half) of every canvas, read back for the stability figure
 
 
-def inferred_eps(A, B, a, b, occlude):
+def inferred_eps(A, B, a, b, occlude, lock_t=None):
     """E0d (plan 33): whole canvas, no crop, no coin flip. The layout is inferred at every call from the experts' own label-added
     differences (digit label minus no-digit label, whole-canvas input), summed over each half: A left + B right against A right + B left,
     so the two experts can never share a half. Each expert supplies the prediction on its half.
     occlude False (E0d-a): the experts' whole-canvas predictions as they are.
     occlude True (E0d-b): each expert's input has the other half replaced by the blank canvas noised to the current level."""
+    state = {}
+    AGREE.append(state)
     def f(x, t):
         dev = x.device
         ya = torch.full((x.shape[0],), a, device=dev); yb = torch.full((x.shape[0],), b, device=dev)
@@ -115,7 +118,19 @@ def inferred_eps(A, B, a, b, occlude):
         dA, dB = (eA - A(x, t, n)).abs(), (eB - B(x, t, n)).abs()
         sa = (dA[..., :32].mean((1, 2, 3)) + dB[..., 32:].mean((1, 2, 3)))     # A left, B right
         sb = (dA[..., 32:].mean((1, 2, 3)) + dB[..., :32].mean((1, 2, 3)))     # A right, B left
-        left = (sa >= sb)[:, None, None, None]
+        if lock_t is not None:                              # E0e: accumulate while t >= lock_t, then hold
+            st = state
+            if "d" not in st or int(t[0]) > st["t"]:
+                st.clear(); st["d"] = torch.zeros_like(sa); st["t"] = int(t[0])
+            st["t"] = int(t[0])
+            if int(t[0]) >= lock_t:
+                st["d"] = st["d"] + (sa - sb)
+            st["last"] = (sa >= sb)
+            left = (st["d"] >= 0)[:, None, None, None]
+            if int(t[0]) == int(state.get("tmin", 10 ** 9)) or True:
+                state["agree"] = float((left[:, 0, 0, 0] == st["last"]).float().mean())
+        else:
+            left = (sa >= sb)[:, None, None, None]
         LAYOUT_LOG.append(left[:, 0, 0, 0].cpu())
         if occlude:
             ab = ABAR.to(dev)[t][:, None, None, None]
@@ -145,8 +160,8 @@ def build_eps(args, A, B, a, b, U, seeds=None):
     if args.compose in ("region", "crop"):
         sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in (EVAL_SEEDS if seeds is None else seeds)]
         return region_eps(A, B, a, b, sides, args.compose == "crop")
-    if args.compose in ("inferred", "inferred-occ"):
-        return inferred_eps(A, B, a, b, args.compose == "inferred-occ")
+    if args.compose in ("inferred", "inferred-occ", "inferred-lock"):
+        return inferred_eps(A, B, a, b, args.compose != "inferred", args.lock_t if args.compose == "inferred-lock" else None)
     if args.compose in ("masked", "masked-hard"):
         return masked_eps(A, B, a, b, args.compose == "masked-hard")
     if args.base == "union":
@@ -259,8 +274,8 @@ def main():
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
     ap.add_argument("--eval-seed0", type=int, default=0); ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
-    ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard", "inferred", "inferred-occ"])
-    ap.add_argument("--union", type=Path)
+    ap.add_argument("--compose", default="product", choices=["product", "region", "crop", "masked", "masked-hard", "inferred", "inferred-occ", "inferred-lock"])
+    ap.add_argument("--union", type=Path); ap.add_argument("--lock-t", type=int, default=800)
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
     dev = "cuda"
