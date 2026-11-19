@@ -101,7 +101,10 @@ def sample_checkpoint(path, out_dir=OUT, rows=None, dev="cuda"):
         t1 = time.time()
         arrays[name] = draw(net, labels, steps, abar, dev)
         print(f"  {path.stem} · {name}: {len(arrays[name])} pictures in {time.time() - t1:.0f}s", flush=True)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    try:                       # on the cluster's /datasets a folder that exists can briefly fail the
+        out_dir.mkdir(parents=True, exist_ok=True)       # is-a-directory check (jobs 90452, 90456)
+    except FileExistsError:
+        pass
     np.savez_compressed(out, **arrays)
     shown = out.resolve().relative_to(REPO) if out.resolve().is_relative_to(REPO) else out.resolve()
     print(f"wrote {shown} · {len(ROWS)} rows x {N_SEEDS} pictures · {time.time() - t0:.0f}s",
