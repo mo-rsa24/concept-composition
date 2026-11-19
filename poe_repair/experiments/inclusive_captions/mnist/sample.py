@@ -113,7 +113,11 @@ def main():
     ap.add_argument("--ckpt", type=Path)
     ap.add_argument("--out", type=Path, default=OUT)
     ap.add_argument("--rows", nargs="+", help='only these rows, e.g. --rows "7 alone" "7 x 8 plain"')
+    ap.add_argument("--guide", type=float, default=GUIDE,
+                    help="guidance strength g in eps_blank + g * sum(eps_label - eps_blank); 1 is the exact Bayes product")
     a = ap.parse_args()
+    globals()["GUIDE"] = a.guide
+    print(f"guidance {GUIDE:g}", flush=True)
     paths = [a.ckpt] if a.ckpt else sorted(CKPTS.glob("dial-*-seed-*.pt"))
     for p in paths:
         sample_checkpoint(p, a.out, a.rows)

@@ -15,6 +15,8 @@ REPO=${SLURM_SUBMIT_DIR:?submit from the repo root}
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 SHARE=${SHARE:?set SHARE, e.g. 0.1}
 SEED=${SEED:?set SEED, 1 to 3}
+GUIDE=${GUIDE:-3}
+SAMPLES=samples; [ "$GUIDE" = 3 ] || SAMPLES=samples-g$GUIDE
 OUT=/datasets/mmolefe/poe_repair_min/outputs/mnist-share
 export MNIST_RAW=/datasets/mmolefe/raw/mnist
 M=poe_repair/experiments/inclusive_captions/mnist
@@ -24,7 +26,7 @@ echo "=== node $(hostname -s)  job ${SLURM_JOB_ID:-}  $(date -Is)  share $SHARE 
 for f in train-images-idx3-ubyte train-labels-idx1-ubyte; do
   [ -s "$MNIST_RAW/$f" ] || { echo "ABORT: $MNIST_RAW/$f missing" >&2; exit 6; }
 done
-mkdir -p "$OUT/checkpoints" "$OUT/samples" "$OUT/logs"
+mkdir -p "$OUT/checkpoints" "$OUT/$SAMPLES" "$OUT/logs"
 used=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
 [ -n "$used" ] && [ "$used" -lt 90 ] || { echo "ABORT: $OUT filesystem at ${used:-unknown}%" >&2; exit 3; }
 nvidia-smi --query-gpu=name,memory.used,utilization.gpu --format=csv || { echo "ABORT: nvidia-smi failed" >&2; exit 4; }
@@ -37,7 +39,7 @@ t0=$(date +%s)
 "$PY" -I $M/train.py --share "$SHARE" --seed "$SEED" --steps 6000 --width 48 --out "$OUT/checkpoints" \
   || { echo "ABORT: training failed" >&2; exit 9; }
 t1=$(date +%s)
-"$PY" -I $M/sample.py --ckpt "$OUT/checkpoints/share-${SHARE}-seed-${SEED}.pt" --out "$OUT/samples" \
+"$PY" -I $M/sample.py --ckpt "$OUT/checkpoints/share-${SHARE}-seed-${SEED}.pt" --out "$OUT/$SAMPLES" --guide "$GUIDE" \
   || { echo "ABORT: drawing failed" >&2; exit 10; }
 t2=$(date +%s)
 echo "=== done $(date -Is)  training $((t1 - t0)) s  drawing $((t2 - t1)) s"
