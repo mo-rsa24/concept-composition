@@ -186,6 +186,14 @@ Counts are two clear, right digits on different halves, out of 320 (5 pairs × 6
       read before. Its bars are the same shares of 192: 134 supports (the 224 of 320 above), 38 above
       the random push, 19 for a null, 10 for the random push and the side effect check.
 
+## Readings and corrections
+
+Navigation: ⬅️ [The bars](#the-bars-written-before-the-run) | 📋 [TOC](#table-of-contents)
+
+- **Experts alone, side-mixed pair (2026-11-19).** The 0–4 expert draws one clear, right digit on 62, 63, 63, 58 and 59 of 64 for digits 0 to 4: the bar holds. The 5–9 expert gives 62, 62, 58, 55 and 62 for digits 5 to 9: it holds except on 8, at 55 against 58. Looked at by eye, the tiles for 8 are mostly clear 8s; the judge's misses are thin or open 8s read under 0.9 sure, and the judge counts about 5% below a careful eye. The written bar is the judge's count, so it is recorded as missed.
+- **Correction, written before it runs.** The 5–9 expert is retrained once with the same recipe and a different seed (seed 1) on the idle card, since the fixed-side experts need 70 more minutes anyway. The retrained expert replaces the original only if it passes the bar on every digit. If it also misses, by 3 or fewer and on 8 alone, the original is kept and every cell reports the 8 shortfall beside its counts. Nothing else is changed, and no cell that used the original expert is read until this is settled.
+- **A cosmetic fault in the sheets.** The expert-alone sheets framed every tile red because the count returns a numpy boolean; the counts were right and the frames are fixed in the script.
+
 ## Controls
 
 Navigation: ⬅️ [The bars](#the-bars-written-before-the-run) | 📋 [TOC](#table-of-contents) | [Next](#could-the-answer-be-an-artefact) ➡️

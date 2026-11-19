@@ -162,7 +162,7 @@ def main():
         counts, canv = {}, {}
         for d in range(lo, hi + 1):
             x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=one_eps(A, d), device=dev, eta=1.0)[0])
-            ok = [call_one(reads(net, c, dev), d) for c in x]
+            ok = [bool(call_one(reads(net, c, dev), d)) for c in x]
             counts[str(d)] = int(sum(ok)); canv[str(d)] = x
             sheet(x, ok, f"{args.name} alone, asked {d}: {sum(ok)} of 64 one clear {d}", out / f"alone-{d}.png")
             print(args.name, d, counts[str(d)], flush=True)
