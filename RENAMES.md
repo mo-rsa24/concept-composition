@@ -47,9 +47,9 @@ when the folder moved; this sitting repointed all of them.
 | Old | New |
 |---|---|
 | `recap/` | `artifacts/_quarantine/recap/` |
-| `paper/iclr/figures/F1b-two-regimes-seed42.{png,pdf}` | `artifacts/_quarantine/paper-figure-duplicates/` (dropped: named by nothing) |
-| `paper/iclr/figures/F2-correction-strength.png` | `artifacts/_quarantine/paper-figure-duplicates/` (dropped: byte-identical to `compose-rate-as-correction-rises.png`) |
-| `evidence/f5b-trajectory-divergence/how-far-the-corrected-run-separates-from-the-uncorrected-one.png` | dropped (byte-identical to the `paper/iclr/figures/` original, which survives) |
+| `writing/iclr/figures/F1b-two-regimes-seed42.{png,pdf}` | `artifacts/_quarantine/paper-figure-duplicates/` (dropped: named by nothing) |
+| `writing/iclr/figures/F2-correction-strength.png` | `artifacts/_quarantine/paper-figure-duplicates/` (dropped: byte-identical to `compose-rate-as-correction-rises.png`) |
+| `evidence/f5b-trajectory-divergence/how-far-the-corrected-run-separates-from-the-uncorrected-one.png` | dropped (byte-identical to the `writing/iclr/figures/` original, which survives) |
 | `plans/closing-the-compositional-gap/plans/does-the-correction-cause-composition/scene/{src,public,loader,package.json,...}` | `artifacts/scenes/how-much-correction-is-needed/` |
 | `dl-scene/app/{src,public,...}` | `artifacts/scenes/sdxl-vae-architecture-map/app/` |
 | `results/*.log` | `logs/` |
@@ -72,7 +72,7 @@ finds them.
 | `docs/normalization_preregistration.md` | `report/normalization_preregistration.md` |
 | `docs/reading-register.md` | `plans/standing/literature/reading-register.md` |
 | `docs/results-archive/` | `artifacts/_quarantine/results-archive/` |
-| `docs/figures/what-each-figure-argues.md` | `paper/iclr/what-each-figure-argues.md` |
+| `docs/figures/what-each-figure-argues.md` | `writing/iclr/what-each-figure-argues.md` |
 | `docs/figures/scene-logsnr/` | `artifacts/scenes/logsnr-explainer/` |
 | `docs/evidence/INDEX.md` | `report/paper-evidence-index.md` |
 | `docs/evidence/F2-dose-response/scorer-count-caveat.md` | `artifacts/results/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md` |
@@ -291,7 +291,7 @@ the target through the move if it moved, then re-expresses the path relative to 
 directory. Fixed in the same pass: eight `context/world/` links written root-relative from three
 different depths (added by an earlier prose-sweep session, never resolving), three references to a
 plan file whose content had been renamed but whose filename had not yet caught up, and six inbound
-references from `paper/iclr/` and two `artifacts/` READMEs that predate this rename and were wrong at
+references from `writing/iclr/` and two `artifacts/` READMEs that predate this rename and were wrong at
 any depth until now.
 
 Verified after: zero dangling links anywhere in the repo point at an old filename, the root running
@@ -381,3 +381,7 @@ project folder (`1-lora-correction/`, `3-understanding-compositionality/`, `4-in
 `plans/regroup-into-project-folders.md`. The full old-to-new list, one line per item, is
 `scripts/regroup/moves.tsv`. Eleven helper scripts that several projects import now live in
 `scripts/shared/`. Undo the whole regroup with `git reset --hard pre-regroup-move`.
+
+## 2026-11-19: step 7b's explainer figures gathered into one folder
+
+The zoom-ladder style figures moved out of `2-classifier-guidance/artifacts/results/how-good-must-the-checker-be-on-mnist/{network-view,results-figures,architecture,gradient-flow,grids}/` and `2-classifier-guidance/artifacts/scenes/classifier-guidance-on-poe/derivation/` into `2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/`, one subfolder per question: `1-the-sampler-step/` (nv7b-1, r1, r4), `2-the-networks/` (a1 to a3, nv7b-2 to 5, r2, r3), `3-the-gradient/` (g1 to g3), `4-the-derivation/` (d1 to d7), `5-qualitative-grids/` (the three grids). The derivation walkthrough is now `4-the-derivation.md` there. The scripts and numbers files that draw the figures did not move.

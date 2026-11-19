@@ -1,0 +1,268 @@
+<title>Cat × Dog Guidance Ladder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single column that zooms in three times, each level a labelled diagram with two lines of text under it. */
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --fg: #1b2230; --muted: #5d6676; --line: #c9cfd9;
+  --gen: #2f5fb3; --gen-soft: #e3ebf8;
+  --chk: #b8640f; --chk-soft: #fbeedd;
+  --frozen: #7a8496; --frozen-soft: #eceff3;
+  --good: #2e7d4f; --bad: #b3372f;
+  --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12161d; --panel: #1a2029; --fg: #e6e9ef; --muted: #9aa3b2; --line: #39424f;
+  --gen: #7fa6ec; --gen-soft: #1d2a40; --chk: #f0a85a; --chk-soft: #3a2a17;
+  --frozen: #8f99aa; --frozen-soft: #242b35; --good: #6cc391; --bad: #ec8178; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12161d; --panel: #1a2029; --fg: #e6e9ef; --muted: #9aa3b2; --line: #39424f;
+  --gen: #7fa6ec; --gen-soft: #1d2a40; --chk: #f0a85a; --chk-soft: #3a2a17;
+  --frozen: #8f99aa; --frozen-soft: #242b35; --good: #6cc391; --bad: #ec8178; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 48px; }
+main { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: 1.9rem; font-weight: 600; }
+h2 { font-size: 1.25rem; font-weight: 600; display: flex; gap: 10px; align-items: baseline; }
+.zoom { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+p { margin: 0; max-width: 68ch; }
+.lead { color: var(--muted); }
+section { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.diagram { overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 760px; height: auto; }
+svg text { font-family: var(--body); fill: var(--fg); }
+svg .mono { font-family: var(--mono); font-size: 11px; fill: var(--muted); }
+svg .lbl { font-size: 13px; font-weight: 600; }
+svg .small { font-size: 11.5px; fill: var(--muted); }
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card.pick { border-color: var(--chk); background: var(--chk-soft); }
+.card h3 { margin: 0; font-family: var(--display); font-size: 1rem; }
+.tag { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.pick .tag { color: var(--chk); font-weight: 500; }
+code { font-family: var(--mono); font-size: 0.85em; }
+details { border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); }
+summary { cursor: pointer; font-weight: 500; color: var(--fg); }
+summary:focus-visible { outline: 2px solid var(--chk); outline-offset: 2px; }
+details ul { margin: 8px 0 0; padding-left: 18px; max-width: 72ch; }
+.status { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-variant-numeric: tabular-nums; }
+.stat { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; }
+.stat b { font-family: var(--display); font-size: 1.15rem; display: block; }
+.stat span { color: var(--muted); font-size: 0.85rem; }
+</style>
+
+<main>
+  <header style="display:flex;flex-direction:column;gap:8px">
+    <span class="zoom">rung 2 · classifier guidance on the cat × dog product</span>
+    <h1>Cat × Dog Guidance Ladder</h1>
+    <p class="lead">PoE draws one fused cat-dog. A small checker scores each half-drawn picture, and its gradient nudges PoE's step toward a clean cat and dog. Three zoom levels: the whole drawing step, the checker inside, and what the push does.</p>
+  </header>
+
+  <section aria-labelledby="why">
+    <h2 id="why"><span class="zoom">first</span>Why a classifier, not Kim et al.'s discriminator</h2>
+    <div class="compare">
+      <div class="card">
+        <span class="tag">discriminator guidance</span>
+        <h3>Learns: real pictures against this sampler's own pictures</h3>
+        <p>Its correction is exact only if the score it corrects belongs to the pictures the sampler draws. PoE's summed score does not, so the correction can overshoot.</p>
+        <p class="tag">1D test in the read map: error 0.700 alone, 0.862 corrected</p>
+      </div>
+      <div class="card pick">
+        <span class="tag">classifier guidance · chosen</span>
+        <h3>Learns: is this becoming a clean cat and dog?</h3>
+        <p>It needs no promise about PoE's maths, only good labels. The push moves toward pictures that score higher on that one question. This is what worked on the circle-and-square toy.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="z1">
+    <h2 id="z1"><span class="zoom">zoom 1</span>One drawing step, 50 times over</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 980 330" role="img" aria-label="One PoE sampling step with the checker's push">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+          <marker id="arc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--chk)"/></marker>
+        </defs>
+        <!-- input latent -->
+        <rect x="10" y="125" width="110" height="80" rx="8" fill="var(--gen-soft)" stroke="var(--gen)"/>
+        <text x="65" y="158" text-anchor="middle" class="lbl">noisy picture</text>
+        <text x="65" y="176" text-anchor="middle" class="mono">x_t · 4×128×128</text>
+        <text x="65" y="192" text-anchor="middle" class="mono">step t of 50</text>
+        <!-- three UNet calls -->
+        <g>
+          <rect x="170" y="30" width="170" height="62" rx="8" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="255" y="56" text-anchor="middle" class="lbl">SDXL U-Net</text><text x="255" y="76" text-anchor="middle" class="mono">prompt "a cat"</text>
+          <rect x="170" y="134" width="170" height="62" rx="8" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="255" y="160" text-anchor="middle" class="lbl">SDXL U-Net</text><text x="255" y="180" text-anchor="middle" class="mono">prompt "a dog"</text>
+          <rect x="170" y="238" width="170" height="62" rx="8" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="255" y="264" text-anchor="middle" class="lbl">SDXL U-Net</text><text x="255" y="284" text-anchor="middle" class="mono">empty prompt</text>
+        </g>
+        <path d="M120,150 L168,61" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <path d="M120,165 L168,165" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <path d="M120,180 L168,269" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <!-- eps outputs -->
+        <text x="352" y="58" class="mono">ε_cat</text><text x="352" y="162" class="mono">ε_dog</text><text x="352" y="266" class="mono">ε_null</text>
+        <path d="M392,61 L448,150" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <path d="M392,165 L448,165" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <path d="M392,269 L448,180" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <!-- PoE combine -->
+        <rect x="450" y="120" width="160" height="90" rx="8" fill="var(--gen-soft)" stroke="var(--gen)"/>
+        <text x="530" y="145" text-anchor="middle" class="lbl">PoE: add the two</text>
+        <text x="530" y="165" text-anchor="middle" class="mono">ε = ε_cat + ε_dog − ε_null</text>
+        <text x="530" y="183" text-anchor="middle" class="mono">(each after CFG 7.5)</text>
+        <text x="530" y="200" text-anchor="middle" class="small">both claim the same body</text>
+        <!-- push -->
+        <rect x="450" y="10" width="160" height="62" rx="8" fill="var(--chk-soft)" stroke="var(--chk)"/>
+        <text x="530" y="35" text-anchor="middle" class="lbl" style="fill:var(--chk)">push from the checker</text>
+        <text x="530" y="55" text-anchor="middle" class="mono">see zoom 2 and 3</text>
+        <path d="M530,72 L530,118" stroke="var(--chk)" stroke-width="2" fill="none" marker-end="url(#arc)"/>
+        <text x="538" y="100" class="mono" style="fill:var(--chk)">ε − push</text>
+        <!-- DDIM step -->
+        <path d="M610,165 L668,165" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <rect x="670" y="125" width="130" height="80" rx="8" fill="var(--gen-soft)" stroke="var(--gen)"/>
+        <text x="735" y="158" text-anchor="middle" class="lbl">DDIM step</text>
+        <text x="735" y="178" text-anchor="middle" class="mono">x_t → x_(t−1)</text>
+        <!-- loop back -->
+        <path d="M735,125 C735,95 700,100 660,100" stroke="var(--muted)" stroke-dasharray="4 4" fill="none"/>
+        <text x="650" y="96" text-anchor="end" class="small">repeat for all 50 steps</text>
+        <!-- decode -->
+        <path d="M800,165 L848,165" stroke="var(--muted)" fill="none" marker-end="url(#ar)"/>
+        <rect x="850" y="125" width="120" height="80" rx="8" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="910" y="155" text-anchor="middle" class="lbl">VAE decode</text>
+        <text x="910" y="175" text-anchor="middle" class="mono">1024×1024 px</text>
+        <text x="910" y="192" text-anchor="middle" class="small">the picture</text>
+      </svg>
+    </div>
+    <p>The three U-Nets are the same frozen SDXL, run with three prompts. Adding the cat and dog predictions makes both experts pull toward one shared body, which is where the fused cat-dog comes from. The push is the only new part.</p>
+  </section>
+
+  <section aria-labelledby="z2">
+    <h2 id="z2"><span class="zoom">zoom 2</span>Inside the checker</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 980 300" role="img" aria-label="The checker: frozen SDXL features read by a small trained head that outputs one number">
+        <defs>
+          <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        </defs>
+        <!-- inputs -->
+        <rect x="10" y="40" width="130" height="62" rx="8" fill="var(--gen-soft)" stroke="var(--gen)"/>
+        <text x="75" y="66" text-anchor="middle" class="lbl">noisy picture</text><text x="75" y="86" text-anchor="middle" class="mono">x_t · 4×128×128</text>
+        <rect x="10" y="118" width="130" height="50" rx="8" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="75" y="140" text-anchor="middle" class="lbl">noise level</text><text x="75" y="157" text-anchor="middle" class="mono">timestep t</text>
+        <rect x="10" y="184" width="130" height="62" rx="8" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="75" y="208" text-anchor="middle" class="lbl">the pair asked for</text><text x="75" y="228" text-anchor="middle" class="mono">"a cat and a dog"</text>
+        <path d="M140,71 L188,130" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M140,143 L188,143" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M140,215 L188,156" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <!-- frozen unet -->
+        <rect x="190" y="60" width="150" height="166" rx="8" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+        <text x="265" y="120" text-anchor="middle" class="lbl">SDXL U-Net</text>
+        <text x="265" y="140" text-anchor="middle" class="small">frozen</text>
+        <text x="265" y="158" text-anchor="middle" class="small">not trained</text>
+        <!-- feature maps -->
+        <g>
+          <rect x="390" y="40" width="150" height="46" rx="6" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="465" y="60" text-anchor="middle" class="lbl">middle block</text><text x="465" y="77" text-anchor="middle" class="mono">1280 × 32×32</text>
+          <rect x="390" y="120" width="150" height="46" rx="6" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="465" y="140" text-anchor="middle" class="lbl">up block 0</text><text x="465" y="157" text-anchor="middle" class="mono">1280 × 64×64</text>
+          <rect x="390" y="200" width="150" height="46" rx="6" fill="var(--frozen-soft)" stroke="var(--frozen)"/>
+          <text x="465" y="220" text-anchor="middle" class="lbl">up block 1</text><text x="465" y="237" text-anchor="middle" class="mono">640 × 128×128</text>
+        </g>
+        <path d="M340,110 L388,63" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M340,143 L388,143" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M340,176 L388,223" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <text x="465" y="32" text-anchor="middle" class="small">what SDXL "sees" at three scales</text>
+        <!-- trained head -->
+        <rect x="590" y="30" width="260" height="226" rx="10" fill="var(--chk-soft)" stroke="var(--chk)" stroke-width="1.5"/>
+        <text x="720" y="54" text-anchor="middle" class="lbl" style="fill:var(--chk)">trained head · about 0.78 M weights</text>
+        <path d="M540,63 L598,90" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M540,143 L598,100" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <path d="M540,223 L598,110" stroke="var(--muted)" fill="none" marker-end="url(#ar2)"/>
+        <text x="606" y="84" class="small">each shrunk to 32×32,</text>
+        <text x="606" y="99" class="small">1×1 conv to 128 channels,</text>
+        <text x="606" y="114" class="small">GroupNorm, SiLU, then added</text>
+        <text x="606" y="146" class="small">two 3×3 convs, stride 2:</text>
+        <text x="606" y="161" class="mono">128 × 32×32 → 128 × 8×8</text>
+        <text x="606" y="190" class="small">attention pool over the 64</text>
+        <text x="606" y="205" class="small">positions (8 heads), then</text>
+        <text x="606" y="220" class="small">one linear layer</text>
+        <!-- output -->
+        <path d="M850,143 L888,143" stroke="var(--chk)" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
+        <rect x="890" y="100" width="82" height="86" rx="8" fill="var(--panel)" stroke="var(--chk)"/>
+        <text x="931" y="128" text-anchor="middle" class="lbl">one</text>
+        <text x="931" y="145" text-anchor="middle" class="lbl">number</text>
+        <text x="931" y="166" text-anchor="middle" class="mono">+ clean pair</text>
+        <text x="931" y="180" text-anchor="middle" class="mono">− reject</text>
+      </svg>
+    </div>
+    <p>Only the amber part learns. SDXL already knows what cats and dogs look like at every noise level, so the head only has to learn which pattern of those features means "two separate animals, the right two".</p>
+  </section>
+
+  <section aria-labelledby="z3">
+    <h2 id="z3"><span class="zoom">zoom 3</span>How it learns to penalise hybrids, and what the push does</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 980 280" role="img" aria-label="Labelled training pictures on the left, the push as a gradient arrow on the right">
+        <defs>
+          <marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--chk)"/></marker>
+          <marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--muted)"/></marker>
+        </defs>
+        <!-- left: labels -->
+        <text x="20" y="28" class="lbl">Training: about 1,100 labelled cat × dog pictures</text>
+        <rect x="20" y="44" width="200" height="46" rx="6" fill="none" stroke="var(--good)" stroke-width="1.5"/>
+        <text x="32" y="64" class="lbl" style="fill:var(--good)">label 1 · clean pair</text>
+        <text x="32" y="81" class="small">one normal cat, one normal dog, apart</text>
+        <g>
+          <rect x="240" y="44" width="200" height="46" rx="6" fill="none" stroke="var(--bad)" stroke-width="1.5"/>
+          <text x="252" y="64" class="lbl" style="fill:var(--bad)">label 0 · hybrid</text>
+          <text x="252" y="81" class="small">one body mixing both, PoE's usual output</text>
+          <rect x="240" y="98" width="200" height="40" rx="6" fill="none" stroke="var(--bad)"/>
+          <text x="252" y="123" class="small">label 0 · two cats, or two dogs</text>
+          <rect x="240" y="146" width="200" height="40" rx="6" fill="none" stroke="var(--bad)"/>
+          <text x="252" y="171" class="small">label 0 · one animal alone</text>
+          <rect x="240" y="194" width="200" height="40" rx="6" fill="none" stroke="var(--bad)"/>
+          <text x="252" y="219" class="small">label 0 · drawing, collage, damage</text>
+        </g>
+        <text x="20" y="120" class="small">every picture is noised to a random</text>
+        <text x="20" y="136" class="small">step and scored; the head is corrected</text>
+        <text x="20" y="152" class="small">when it scores a hybrid high or a</text>
+        <text x="20" y="168" class="small">clean pair low</text>
+        <!-- right: the push picture -->
+        <text x="500" y="28" class="lbl">During drawing: the push</text>
+        <ellipse cx="840" cy="120" rx="110" ry="70" fill="var(--chk-soft)" stroke="var(--good)" stroke-dasharray="5 4"/>
+        <text x="840" y="110" text-anchor="middle" class="lbl" style="fill:var(--good)">scores high</text>
+        <text x="840" y="128" text-anchor="middle" class="small">looks like a clean pair</text>
+        <text x="840" y="144" text-anchor="middle" class="small">at this step</text>
+        <circle cx="560" cy="180" r="9" fill="var(--bad)"/>
+        <text x="560" y="210" text-anchor="middle" class="small">PoE's half-drawn hybrid</text>
+        <path d="M570,174 L728,128" stroke="var(--chk)" stroke-width="2.5" fill="none" marker-end="url(#ar3)"/>
+        <text x="610" y="142" class="mono" style="fill:var(--chk)">gradient of the score</text>
+        <path d="M570,186 L640,240" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="4 4" fill="none" marker-end="url(#ar4)"/>
+        <text x="650" y="252" class="small">random push, same size (the control)</text>
+        <text x="500" y="268" class="mono">push = strength × √(1 − ᾱ_t) × gradient, capped at 0.1 × |ε|</text>
+      </svg>
+    </div>
+    <p>The checker is never told a rule. Seeing hybrids labelled 0 is enough: hybrid-looking states get low scores, so the gradient at a hybrid points away from it, toward what clean pairs look like at that step. The random push of the same size shows the change comes from that direction and not from shaking the drawing.</p>
+  </section>
+
+  <section aria-labelledby="now">
+    <h2 id="now"><span class="zoom">now</span>Where the checker stands</h2>
+    <div class="status">
+      <div class="stat"><b>0.729</b><span>held-out accuracy, iteration 2 at step 500 (bar 0.75; 220 pictures, ±0.05)</span></div>
+      <div class="stat"><b>0.639</b><span>the same for iteration 0, before the 350 new drawings</span></div>
+      <div class="stat"><b>3 of 8</b><span>held-out seeds pushed to two bodies; plain PoE and random push 0 of 8; no clean pair yet</span></div>
+    </div>
+    <details>
+      <summary>Where these numbers come from, and what they cannot show</summary>
+      <ul>
+        <li>Sampler: 50 DDIM steps, classifier-free guidance 7.5 on each expert, PoE as ε_cat + ε_dog − ε_null (<code>poe_repair/_sdxl/metrics.py</code>); push cap 0.1 (<code>poe_repair/methods/_classifier_guided.py</code>).</li>
+        <li>Checker: <code>scripts/rung2/train_readout_pair.py</code>, <code>PairHead</code> reading <code>train_count_head.Readout</code>; the weight count is summed from its layer shapes.</li>
+        <li>Accuracy is balanced accuracy, clean pair against reject, averaged over the first 20 sampler steps, on <code>eval_set_catdog_v2.json</code> (109 clean, 111 rejects, never trained on). Mid-run readings use 5 of the 20 steps, so they are not strictly comparable to final ones.</li>
+        <li>Push calls are draft calls from full-size tiles on held-out seeds 9 to 16; the user's own calls are the ones that count.</li>
+        <li>The discriminator figures are the read map's 1D test (mean absolute score error), not an SDXL measurement.</li>
+        <li>CLIP features on finished pictures reach 0.771 on the same question, which suggests a ceiling for whole-picture checkers near there; looking at each animal separately is the planned route past it.</li>
+      </ul>
+    </details>
+  </section>
+</main>

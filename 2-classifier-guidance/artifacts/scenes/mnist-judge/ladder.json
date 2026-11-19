@@ -1,0 +1,59 @@
+{
+ "subject": "the step 7b judge: a 10-way MNIST digit classifier (judge_net) with a blob-finding rule before it and the ladder rule after it",
+ "kind": "architecture",
+ "landing": "standalone figures in the route walk's figures folder; no journey",
+ "pace": "unattended, level 0.5 only",
+ "notation": null,
+ "code_checkout": "/home/molef/PhD/concept-composition/2-classifier-guidance/scripts/mnist/judge_sheet.py (uncommitted at the time of drawing)",
+ "style": {
+  "0.5": "journey 13's recorded choice, used as the default: cheat-sheet devices (thin outlines, a representative fan of arrows, the top output glowing, boxed formulas, white space) in this colour key; CNN part as volumes, fully connected head as circles"
+ },
+ "colour_key": {
+  "inputs": "#1f5fd0",
+  "hidden units": "#1d7a3e",
+  "network outputs": "#c0262d",
+  "backward signals and the push": "#c86a0a",
+  "off, fixed or broken (here: the hand-written rules)": "#6b7a88"
+ },
+ "colour_concordance": [
+  {
+   "rung": "0.5",
+   "palette": "the colour key above, used as is; grey dashed boxes are the rules, which are not learnt"
+  }
+ ],
+ "numbers": "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge_network_view_numbers.json",
+ "rungs": {
+  "0_system": {
+   "state": "missing"
+  },
+  "0.5_network_view": {
+   "state": "built",
+   "files": [
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge-network-view.png",
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge-network-view.svg",
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/make_judge_network_view.py",
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.png",
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.svg",
+    "/home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/make_three_networks_in_step_7b.py"
+   ],
+   "family_checklist": "cnn: volumes, kernel window and its cell, pooling halving, flatten, fully connected head, real sizes and size arithmetic all shown; fc: inputs, layers, one-of-10 output shown; backward arrows not drawn because the judge only scores and never pushes",
+   "weights": "prototype in the session scratchpad, judge-prototype.pt (throwaway); the figure must be redrawn from whatever weights replace it",
+   "three_networks_figure": "the whole-step view above the judge figure: three rows (pair-aware checker, separate-label control, judge), each in, network as one box, out, used for; rows 1 and 2 untrained, so their outputs are empty boxes and their heads are illustrative; noisy canvas at alpha_bar 0.5 with torch seed 0; push drawn in the colour key's push orange"
+  },
+  "1_illustrations": {
+   "state": "missing"
+  },
+  "2_miniature": {
+   "state": "missing"
+  },
+  "3_code": {
+   "state": "missing"
+  },
+  "companion": {
+   "state": "missing"
+  },
+  "close": {
+   "state": "missing"
+  }
+ }
+}
