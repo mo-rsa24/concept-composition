@@ -148,6 +148,7 @@ def main():
     ap.add_argument("--draws-out", type=Path); ap.add_argument("--seed0", type=int, default=1000)
     ap.add_argument("--n", type=int, default=12)
     ap.add_argument("--s", type=float, default=10.0)
+    ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull"])
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
@@ -200,7 +201,7 @@ def main():
     counts, canv = {}, {}
     for a, b in parse_pairs(args.pairs):
         x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=two_eps(A, B, a, b, args.base, args.tau),
-                            push_fn=make_push(args.push, a, b, heads, args.s), device=dev, eta=1.0)[0])
+                            push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta)[0])
         calls = [call_two(reads(net, c, dev), (a, b)) for c in x]
         tally = {k: calls.count(k) for k in CALLS}
         counts[f"{a}-{b}"] = tally; canv[f"{a}-{b}"] = x
