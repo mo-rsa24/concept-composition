@@ -1,0 +1,134 @@
+# 🧪 Review: can two separately trained digit experts be made to compose at inference, on either side, on 90 of 100 pairs
+
+**Nothing has run.** This file judges [plan 33](../33-experts-that-compose-at-inference.md), the follow-on to
+[plan 32](32-two-digit-experts-that-never-met.md). The bars below were written on 2026-11-19, before any experiment of this plan ran.
+
+- [x] 📝 bars written before the run, in [The bars](#the-bars-written-before-the-run)
+
+## Recommended prompt (when the run lands)
+
+```
+/analyze-run @plans/review/33-experts-that-compose-at-inference.md — <the tuning-pair counts per experiment and the final read's sheets>
+```
+
+## Table of contents
+
+- [Why this is asked](#why-this-is-asked)
+- [What the papers say](#what-the-papers-say)
+- [Words this file uses](#words-this-file-uses)
+- [Experiments](#experiments)
+- [The bars, written before the run](#the-bars-written-before-the-run)
+- [Controls](#controls)
+- [Could the answer be an artefact](#could-the-answer-be-an-artefact)
+- [Readings and corrections](#readings-and-corrections)
+- [Still open](#still-open)
+
+## Why this is asked
+
+Plan 32 found that a 0–4 expert and a 5–9 expert, each drawing its digit on either side, do not compose: both pushes gave 4
+of 320 and the canvases were saturated blobs. Each expert says "exactly one digit of my kind is on the canvas", so a canvas
+with one digit from each has zero density under both and the product has nothing to sample. A push or a sampler only
+reweights or explores what the target contains. The question now is what the experts, or the sampling, must be so that the
+product has that mass, and how far it can be taken: two experts that never met composing on 90 of 100 clean pairs, each digit
+on either side, on every pair, none of which any expert has seen (an expert never sees the other's digits, so all 25 pairs of a
+0–4 digit with a 5–9 digit are unseen).
+
+## What the papers say
+
+Read for this plan, each claim as the source states it:
+
+- **Bradley, Nakkiran, Berthelot, Thornton, Susskind 2025** (arXiv 2502.04549): linear score combination composes exactly when
+  the experts' conditionals factorise over a shared background (the factorised-conditionals condition). The project's reading
+  register holds it. Its clutter section says objects in clutter make experts approximately factorised.
+- **Bradley 2025b, "Local Mechanisms of Compositional Generalization in Conditional Diffusion"** (arXiv 2509.16447, read from
+  its html, sections 3, 4 and appendices E.3 and E.4): a conditional model composes over conditions exactly when its score is a
+  *local conditional score*, each pixel's score depending on a sparse set of pixels and of conditions (Lemma 1). The paper
+  enforces this with an architecture, not a loss: the image is processed as a grid of cells (8 pixels of 128), each denoised from
+  an overlapping patch of 5 × 5 cells (40 pixels) conditioned only on the conditions inside it, with the patch's absolute
+  position appended; only the centre cell is kept. Trained on one object per image, the local model reaches 5 objects against 1
+  for the standard model (table 1; 1 to 3 objects: 9 against 2). With the patch as large as the image (k = 8) the failure
+  returns. SDXL is only partly local, spatially and not in its conditions, which the paper calls suggestive. It composes within
+  one model; it does not compose separately trained models.
+- **Liu et al. 2022** (arXiv 2206.01714) and **Du et al. 2023** (arXiv 2302.11552): conjunction by summing scores; Du et al.
+  show reverse diffusion on the summed scores does not sample the product, and that Langevin or HMC correction steps and
+  energy-based parameterisation fix some of it. Plan 33 reads these for the sampler experiment and has not re-read their
+  experiments for this plan.
+
+## Words this file uses
+
+**Support.** The set of canvases a model gives non-zero density. The product of two experts has support only where both do.
+
+**Either side.** The digit may sit in the left half or the right half (x from 0 to 4 or 32 to 36), at random height, as in
+plan 32's `Canvases.one_half`.
+
+**A clean pair.** The third judge's call "two clear, right, apart": exactly two blobs, one in each half, whose top digits over
+0 to 9 are the asked pair, each at least 0.9 sure. The headline count on the final read is by eye, because the judge counts about
+5% below a careful eye and fails on thick digits.
+
+**The tuning pairs and the final pairs.** All 25 pairs of a 0–4 digit with a 5–9 digit are unseen. Five tune: 1 & 9, 2 & 8,
+3 & 6, 4 & 7, 0 & 5, seeds 0 to 63. The other 20 are read once, at seeds 64 to 127, after one setting is chosen.
+
+## Experiments
+
+Each runs on the plan 32 setup (32 × 64 canvases, the same judge, DDIM in 50 steps).
+
+| # | Experiment | Training | What it tests |
+|---|---|---|---|
+| E0 | **Region composition at inference.** The 0–4 and 5–9 either-side experts from plan 32, unchanged. Each seed gets a random side assignment; each expert denoises its half (full canvas in, or its half-canvas crop in) and the halves are joined: ε = mask·ε_A + (1 − mask)·ε_B | none | whether changing the target to "A's half and B's half" gives the product the mass it lacks |
+| E1 | **Union base.** ε_A(a) + ε_B(b) − ε_union, the union being the step 7b share-0 model's no-digit prediction (trained on every digit, one per canvas) | none | the support argument: a union base does not give the product mass |
+| E2 | **Experts trained with clutter.** The 0–4 expert and the 5–9 expert each see their digit plus 0 to 2 random non-digit objects (Fashion-MNIST items) at random places, labelled by the digit only; product over each expert's own no-digit prediction | two trainings, 40,000 steps | Bradley 2025's route: clutter as the shared background |
+| E2b | **Local experts.** Patch-based experts after Bradley 2025b: each cell denoised from an overlapping patch conditioned on the digit and its side if the digit lies in the patch, centre cell kept, one expert per digit range, trained apart on one digit per canvas | two trainings | that locality, not clutter, is what lets separately trained experts compose |
+| E3 | **Samplers.** Langevin or HMC correction steps (Du et al.), and the project's twisted SMC, on the best of E0, E2, E2b | none | whether sampling the product better closes a gap that remains |
+| E4 | **The pushes.** The two pixel checkers retrained on the best product's own renders | minutes | reweighting once the product has mass |
+| E5 | **A shared latent space.** A VAE over 0 to 9, experts on its latent, trained apart | VAE and two trainings | whether a shared decoder alone helps (predicted: it does not) |
+
+The design of E2b's patch size, side conditioning and per-cell assembly is finalised in task 1.4 of the plan, from Bradley 2025b's
+appendix E.3 as read above, and written here before E2b trains.
+
+## The bars, written before the run
+
+Counts are clean pairs out of 320 (five tuning pairs, 64 seeds each) unless a line says otherwise.
+
+- [ ] **The headline.** On the final read, one chosen setting, the other 20 pairs, seeds 64 to 127, counted by eye: **at least 90%
+      (1,152 of 1,280) clean pairs, and at least 70% (45 of 64) on every pair.** Anything below is not the goal; it is reported
+      with its count.
+- [ ] **E1, the union base.** Within 32 of plain product (null). If it gives 160 or more, the support argument is wrong and the
+      plan stops to say so.
+- [ ] **E0, region composition.** Supports at 288 (90%); promising at 160 (50%) or more, which sends it to E3 and E4; null under 32.
+- [ ] **E2, clutter experts.** The same three lines. Each expert must pass 58 of 64 on its own digit first, by the judge, or it is
+      retrained once.
+- [ ] **E2b, local experts.** The same three lines, same own-digit check. The k = 8 control (patch as large as the canvas) must not
+      support: if the control composes as well as the local model, locality is not what did it.
+- [ ] **E3 and E4.** Each is read as a gain over the experiment it sits on: supports if it adds at least 64 of 320.
+- [ ] **E5.** Reported against E0; predicted null.
+- [ ] **No harm.** Whatever is chosen, on the fixed-side experts of plan 32 it must not lose more than 16 of 320 against that setting's
+      plain count.
+
+**What would surprise.** E1 giving any real count. E0 reaching the headline with no training. The k = 8 control composing.
+
+## Controls
+
+| Control | What it does | What comes back |
+|---|---|---|
+| each expert alone | samples one expert asked for its own digit | that the experts draw clear digits; floor for "clear" |
+| plain product, no push, same base | the starting point of every experiment | the gain of each addition |
+| the zero push or zero correction | a sampler with its extra term at zero | byte-identical canvases to plain product, or the sampler has a bug |
+| the k = 8 control for E2b | a patch as large as the canvas | whether locality is the cause |
+| the fixed-side experts of plan 32 | the case that partly composes | that nothing chosen makes it worse |
+
+## Could the answer be an artefact
+
+**Pair choice.** All 25 pairs are one 0–4 digit with one 5–9 digit; letters or other classes would be a different test. **The judge.**
+Its strictness changes counts by about 5%, so the headline is by eye. **Tuning on the five pairs.** Settings are chosen on them and
+read once on the other 20, fresh seeds. **Clutter and Fashion-MNIST.** The distractor objects are not digits, but they are a second
+data source the experts share; that is the point of E2 and is stated, not hidden.
+
+## Readings and corrections
+
+Navigation: 📋 [TOC](#table-of-contents)
+
+Nothing yet.
+
+## Still open
+
+Letters and photos in place of digits, and the SDXL version, where the shared background is a photograph.
