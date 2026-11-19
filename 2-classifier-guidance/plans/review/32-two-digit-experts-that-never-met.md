@@ -72,14 +72,20 @@ The same, with the 0–4 digit always on the left and the 5–9 digit always on 
 Bradley et al.'s exact case (factorized conditionals over a shared background), the control that
 should compose with no help.
 
-**The blank base**
+**The base**
 
-The blank canvas, value −1 everywhere after scaling. Its noise prediction needs no network:
-ε_blank(x_t) = (x_t + √ᾱ_t) / √(1 − ᾱ_t).
+The product divides by a base, and a blank canvas taken as an exact point mass is not usable: its
+noise prediction (x + √ᾱ_t) / √(1 − ᾱ_t) diverges as the noise falls, 489 against about 1 for a
+network at the last step, and the composed canvases blow out to white. Three bases are defined:
+the blank canvas given a spread τ (noise prediction √(1 − ᾱ_t)(x + √ᾱ_t) / (ᾱ_t τ² + 1 − ᾱ_t), at
+τ = 0.3 and 1.0), and the mean of the two experts' own no-digit predictions. The fixed-side
+control picks the base: the one that passes its bar there, or the highest count if several do,
+is used for every cell, and the others are reported beside it. Nothing about the side-mixed cells
+is read to choose.
 
 **The product**
 
-ε_blank + (ε_A(a) − ε_blank) + (ε_B(b) − ε_blank), with digit a asked of the 0–4 expert and digit
+ε_A(a) + ε_B(b) − ε_base, with digit a asked of the 0–4 expert and digit
 b of the 5–9 expert; DDIM in 50 steps with eta 1.0, each seed with its own fixed noise.
 
 **The pushes**
@@ -153,7 +159,7 @@ Counts are two clear, right digits on different halves, out of 320 (5 pairs × 6
       draws one clear, right digit on at least 58 of 64 per digit by the judge. If not, the
       experts are retrained before anything else is read.
 
-- [ ] **Fixed-side control: plain product composes.** At least 256 of 320. Below that, the
+- [ ] **Fixed-side control: plain product composes.** At least 256 of 320 with at least one base. Below that, the
       blank base or the sampler is broken; stop and look before reading any other cell.
 
 - [ ] **Side-mixed: how much co-occurrence the plain product gives.** Descriptive, no pass or

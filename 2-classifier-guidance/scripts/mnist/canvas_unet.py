@@ -188,9 +188,10 @@ def start_noise(seeds, device):
                         for s in seeds]).to(device)
 
 
-def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda", eta=0.0):
+def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda", eta=0.0, eps_fn=None):
     """DDIM; eta 0 is deterministic, eta > 0 adds fresh noise each step from a fixed per-seed stream.
     push_fn(x, t, eps) -> push of eps's shape, added to eps after the cap.
+    eps_fn(x, t) -> the noise prediction to use instead of one model's product (plan 32's two experts).
 
     Returns the finished canvases in [-1, 1] and, per step, the fraction of samples where the cap fired.
     """
@@ -201,7 +202,7 @@ def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device=
     fired_log = []
     for i, t in enumerate(ts):
         tt = t.repeat(x.shape[0])
-        eps = product_eps(model, x, tt, labels, g)
+        eps = eps_fn(x, tt) if eps_fn is not None else product_eps(model, x, tt, labels, g)
         if push_fn is not None:
             push, fired = per_sample_cap(push_fn(x, tt, eps), eps, cap)
             eps = eps + push
