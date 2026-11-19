@@ -60,6 +60,47 @@ def two_eps(A, B, a, b, base="floor", tau=0.3):
     return f
 
 
+def region_eps(A, B, a, b, sides, crop):
+    """Region composition (plan 33, E0): each seed has a side; expert A owns one half and B the other, and the halves are joined.
+    crop False: each expert sees the whole canvas and only its half of the prediction is kept.
+    crop True: each expert sees only its half of the canvas (a 32 x 32 crop)."""
+    sides_t = torch.tensor(sides)
+    def f(x, t):
+        dev = x.device
+        left = (sides_t == 0).to(dev)[:, None, None, None]           # True: A takes the left half
+        ya = torch.full((x.shape[0],), a, device=dev); yb = torch.full((x.shape[0],), b, device=dev)
+        if crop:
+            xl, xr = x[..., :32], x[..., 32:]
+            eA_l, eA_r = A(xl, t, ya), A(xr, t, ya)
+            eB_l, eB_r = B(xl, t, yb), B(xr, t, yb)
+            e_left = torch.where(left, eA_l, eB_l); e_right = torch.where(left, eB_r, eA_r)
+            return torch.cat([e_left, e_right], dim=-1)
+        eA, eB = A(x, t, ya), B(x, t, yb)
+        m = torch.zeros_like(x); m[..., :32] = 1
+        pick_a = torch.where(left, m, 1 - m)                          # 1 where A's prediction is used
+        return pick_a * eA + (1 - pick_a) * eB
+    return f
+
+
+def union_eps(A, B, U, a, b):
+    """E1: the two experts over a base trained on the union of both ranges (the step 7b share-0 model's no-digit prediction)."""
+    def f(x, t):
+        ya = torch.full((x.shape[0],), a, device=x.device); yb = torch.full((x.shape[0],), b, device=x.device)
+        n = torch.full((x.shape[0],), 10, device=x.device)
+        return A(x, t, ya) + B(x, t, yb) - U(x, t, n)
+    return f
+
+
+
+def build_eps(args, A, B, a, b, U):
+    if args.compose in ("region", "crop"):
+        sides = [int(np.random.default_rng(1000 + s).integers(2)) for s in EVAL_SEEDS]
+        return region_eps(A, B, a, b, sides, args.compose == "crop")
+    if args.base == "union":
+        return union_eps(A, B, U, a, b)
+    return two_eps(A, B, a, b, args.base, args.tau)
+
+
 def one_eps(A, d):
     return lambda x, t: A(x, t, torch.full((x.shape[0],), d, device=x.device))
 
@@ -149,7 +190,9 @@ def main():
     ap.add_argument("--n", type=int, default=12)
     ap.add_argument("--s", type=float, default=10.0)
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
-    ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull"])
+    ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
+    ap.add_argument("--compose", default="product", choices=["product", "region", "crop"])
+    ap.add_argument("--union", type=Path)
     ap.add_argument("--tau", type=float, default=0.3)
     args = ap.parse_args()
     dev = "cuda"
@@ -172,6 +215,7 @@ def main():
         return
 
     A, B = load_unet(args.a, dev), load_unet(args.b, dev)
+    U = load_unet(args.union, dev) if args.union else None
     heads = {}
     if args.pair_head: heads["pair"] = pc.load_head(args.pair_head, dev)
     if args.sep_head: heads["sep"] = pc.load_head(args.sep_head, dev)
@@ -185,7 +229,7 @@ def main():
                 continue                                  # one digit from each expert
             seeds = list(range(args.seed0, args.seed0 + args.n))
             assert min(seeds) >= 1000, "draws come from seed 1,000 up"
-            x = to_uint8(sample(None, seeds, [], eps_fn=two_eps(A, B, a, b, args.base, args.tau), push_fn=make_push(args.push, a, b, heads, args.s),
+            x = to_uint8(sample(None, seeds, [], eps_fn=build_eps(args, A, B, a, b, U), push_fn=make_push(args.push, a, b, heads, args.s),
                                 device=dev, eta=1.0)[0])
             ok = [call_two(reads(net, c, dev), (a, b)) == CALLS[0] for c in x]
             xs.append(x); ps += [(a, b)] * len(x); oks += ok
@@ -200,7 +244,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     counts, canv = {}, {}
     for a, b in parse_pairs(args.pairs):
-        x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=two_eps(A, B, a, b, args.base, args.tau),
+        x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=build_eps(args, A, B, a, b, U),
                             push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta)[0])
         calls = [call_two(reads(net, c, dev), (a, b)) for c in x]
         tally = {k: calls.count(k) for k in CALLS}
