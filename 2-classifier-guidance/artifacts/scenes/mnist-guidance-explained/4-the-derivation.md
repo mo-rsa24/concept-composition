@@ -27,6 +27,38 @@ the pair-aware checker answers "are these two clear digits, the asked pair?".
 
 ---
 
+## Words in the derivation, taken apart
+
+Most of this page's names are taught, with a toy, a broken run and a build, in [journey 13](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/00-index.md): the score as a noise prediction ([1.1](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/01-the-guided-noise-prediction.md#11-the-line-toy-and-the-score-as-a-noise-prediction)), Bayes on the noised posterior ([1.2](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/01-the-guided-noise-prediction.md#12-bayes-on-the-noised-posterior)), the guided prediction ([1.3](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/01-the-guided-noise-prediction.md#13-from-score-to-noise-the-guided-prediction)), the strength s ([1.4](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/01-the-guided-noise-prediction.md#14-the-strength-s-on-the-unconditional-base-and-the-two-slips)), the product as two classifiers ([chapter 2](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/02-the-product-as-two-classifiers.md)) and the dropped term ([chapter 4](../../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md)). Three words below are not there; their toys are in [the toys](toys/triad_toys.py).
+
+**Logit, sigmoid, and why not softmax**
+
+🔤 **The name:** a *logit* is a raw score that can be any real number; *sigmoid* is the S-shaped curve σ(z) = 1/(1 + e^(−z)) that turns one score into a chance between 0 and 1; *softmax* divides each of several scores' exponentials by their total, so the answers share one chance. *Sigmoid* means S-shaped.
+
+🧸 **Toy:** a taster scores the soup's saltiness z. z = −2 gives 0.119, z = 0 gives 0.5, z = 2 gives 0.881, z = 3 gives 0.953. Add 1 to the score and the chance rises less each time (0.881 to 0.953). 🔨 **Build:** `toys/triad_toys.py`, toy A.
+
+💥 **Broken run (misuse):** two tasters each score z = 3 that "their dish is on the table" and both dishes are. Sigmoid each: 0.953 and 0.953 (sum 1.905), correct. Softmax over the two: 0.5 and 0.5, which says "one of them", wrong for a canvas with two digits. Measured: on the fused 4 and 7 canvas the ten sigmoid answers sum to 1.58, where a softmax's sum would be 1.
+
+🎞️ **Moving picture:** [toy-a-sigmoid-and-softmax.gif](toys/toy-a-sigmoid-and-softmax.gif): a score slides along the S while the two bars show sigmoid answers rising together and softmax answers stuck sharing one.
+
+<a href="toys/toy-a-sigmoid-and-softmax.gif"><img src="toys/toy-a-sigmoid-and-softmax.gif" width="420" alt="A score slides along the sigmoid curve; two bars show both sigmoid answers rising together while the softmax pair stays at one half each"></a>
+
+**Log-odds, and why the push uses it**
+
+🔤 **The name:** *odds* are the chance of yes over the chance of no, d ÷ (1 − d); *log-odds* is the log of that. With d = σ(l) the log-odds equals l, the logit itself.
+
+🧸 **Toy:** a bulb is lit with chance d. At d = 0.5 the log-odds is 0, d = 0.9 gives 2.197, d = 0.99 gives 4.595. Nudge the logit up a little: log d grows by (1 − d) per unit, 0.5, then 0.1, then 0.01; the log-odds grows by 1 every time. 🔨 **Build:** toy B checks each slope by a finite nudge.
+
+💥 **Broken run (without):** push on log d and the push fades to a hundredth by the time the checker is 99% sure, so a nearly-right canvas is barely nudged. Push on the log-odds and it stays at full strength. The code switches it off past a logit of 11.5.
+
+🎞️ **Moving picture:** [toy-b-why-the-log-odds-keeps-pushing.gif](toys/toy-b-why-the-log-odds-keeps-pushing.gif): the logit slides, the two slopes are read off on the curve.
+
+<a href="toys/toy-b-why-the-log-odds-keeps-pushing.gif"><img src="toys/toy-b-why-the-log-odds-keeps-pushing.gif" width="420" alt="The logit slides along; log d flattens while the log-odds stays a straight line, with both slopes printed"></a>
+
+**The size of the push, "capped"**
+
+The cap has its toy, broken run and build on [the sampler step page](1-the-sampler-step.md#words-on-this-page-taken-apart).
+
 ## Step 1: why every guidance term carries $\sqrt{1-\bar\alpha_t}$
 
 <a href="4-the-derivation/d1-why-the-square-root.png"><img src="4-the-derivation/d1-why-the-square-root.png" width="200" alt="A one-pixel Gaussian with the score arrow pointing back to its mean, the real schedule of the square-root factor over 50 steps, and six lines from the noising equation to the noise prediction as a rescaled score"></a>

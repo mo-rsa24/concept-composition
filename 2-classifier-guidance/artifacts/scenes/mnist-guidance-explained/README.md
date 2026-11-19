@@ -15,3 +15,7 @@ Everything here explains step 7b ([plan 24](../../../plans/24-mnist-digits-on-a-
 ## Where the figures are made
 
 The scripts and numbers files that draw these figures stay beside the evidence they read: `network-view/`, `results-figures/`, `architecture/`, `gradient-flow/` and `grids/` in the step 7b results folder, and `derivation/` in [the older scene folder](../classifier-guidance-on-poe/README.md). Re-running one writes its figure back beside its script; the copies here are the ones the pages use.
+
+## The toys behind the "Words on this page" sections
+
+Each page's names are taken apart on small ordinary toys (soup tasters, a four-pixel strip, a shopkeeper's price cap). [`toys/triad_toys.py`](toys/triad_toys.py) computes every hand answer, asserts it, and writes `toys/toy_numbers.json` and the two moving pictures; a change to a toy fails the file. Where a name is already taught by [journey 13](../../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/00-index.md) the page links to its chapter instead.

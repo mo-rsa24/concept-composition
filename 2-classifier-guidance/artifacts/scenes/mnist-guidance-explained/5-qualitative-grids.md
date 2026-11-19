@@ -4,6 +4,24 @@
 
 Real canvases in every cell, the same seeds 0, 1 and 2 top to bottom so one starting noise can be followed across a row, with the third judge's count of two clear, right digits out of 64 under each cell. The judge counts about 5% below a careful eye. Drawn by `grids/make_grids.py` in [the step 7b results](../../results/how-good-must-the-checker-be-on-mnist/README.md) from jobs 90111, 90154, 90155 and 90156.
 
+## Words on this page, taken apart
+
+**Strength, and best of N**
+
+🔤 **The name:** *strength* is the weight s on a push: how many times its own size it is added. *Best of N* draws N canvases from the plain product and keeps the one a checker likes most: the checker only chooses, it never changes a canvas.
+
+🧸 **Toy:** four draws, each right with chance 0.1 and a perfect chooser: at least one is right with chance 1 − 0.9⁴ = 0.344; sixteen draws, 0.815. A checker that cannot see what is wrong picks no better than chance. 
+
+💥 **Broken run (misuse):** best of 16, at 16 times the cost, gave 13 clear pairs of 320; both pushes at the cost of one draw gave 280. Choosing among canvases that never contain the answer cannot find it.
+
+**The fresh noise, against strength**
+
+💥 **Broken run (without):** the third grid is the measured case: with no fresh noise, two pushes at strength 10 give 41 of 64 on 4 and 7 and at strength 30 give 26; with it, 59 and 55. The toy and its definition are on [the sampler step page](1-the-sampler-step.md#words-on-this-page-taken-apart).
+
+**Held-out pair**
+
+🔤 **The name:** *held out* is kept back; *pair* is two digits. A held-out pair, say 4 and 7, is a pair never seen together on any training canvas, though each digit was seen alone and with other partners; it is the test of composing, not of remembering.
+
 ## Every version against every held-out pair
 
 <a href="5-qualitative-grids/grid-versions-by-pair.png"><img src="5-qualitative-grids/grid-versions-by-pair.png" width="480" alt="Five held-out pairs down, six versions across, three canvases per cell"></a>

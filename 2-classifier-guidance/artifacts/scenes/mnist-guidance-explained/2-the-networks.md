@@ -4,6 +4,50 @@
 
 Every number comes from `architecture/arch_numbers.json`, read off the code, the checkpoints and the training log by `architecture/make_arch_numbers.py` (in [the step 7b results](../../results/how-good-must-the-checker-be-on-mnist/README.md)). The pictures are a real noisy canvas, the U-Net's real noise prediction for it, and four pasted MNIST test canvases noised to t = 489, asked 4 and 7.
 
+## Words on this page, taken apart
+
+Toys are in [the toys](toys/triad_toys.py); every hand answer is computed and asserted there.
+
+**A skip**
+
+💥 **Broken run (without):** squeeze a strip of four pixels [0, 4, 4, 0] down to two by averaging pairs, then spread each back to two: you get [2, 2, 2, 2], and the strip has lost its edges, an error of 8 pixel-units. With the original copied across beside it, the error is 0.
+
+🔤 **The name:** a *skip* jumps over the middle of the network. In the U, the left arm's map at each size is copied straight across to the right arm at the same size and joined on as extra channels, which is why a right-arm bar is part light (the copy) and part dark (what it just computed).
+
+🧸 **Toy:** the four-pixel strip above. 🔨 **Build:** `toys/triad_toys.py`, toy E, gives 8 and 0. 🎞️ **Moving picture:** 🖼️ Diagram wanted: the strip squeezed and spread, with the copy sliding across.
+
+**Scale and shift by the pair (the pair-aware checker's second layer)**
+
+🔤 **The name:** *scale* multiplies and *shift* adds. The asked pair makes two numbers, g and b, and the layer's output h becomes h × (1 + g) + b, so the pair can turn parts of the picture up, down or off before anything else is read.
+
+🧸 **Toy:** h = [2, −1]. Pair A gives g = 0.5, b = 1: the output is [4, −0.5]. Pair B gives g = −1, b = 0: the output is [0, 0], switched off. With no pair at all it stays [2, −1]. 🔨 **Build:** toy F.
+
+💥 **Broken run (without):** give the pair only at the input and the checker reads held-out pairs on 84 of 320 seeds; give it to every layer and retrain on its own pushed pictures with the sampler's fresh noise, and it reads 217 of 320 (three changes at once, step 7b's loop 2, so the gain is not credited to the pair alone). 🎞️ **Moving picture:** 🖼️ Diagram wanted: g and b sliders on the toy.
+
+**Mean and max (the pooling)**
+
+🔤 **The name:** *pool* is a shared pot; *mean* puts everyone's share in and divides, *max* keeps the biggest. The checker pools each 128-channel map over its 128 places to two numbers per channel: 128 means and 128 maxes, 256 in all.
+
+🧸 **Toy:** a 2 × 3 map with one bright cell worth 6 and zeros elsewhere. The mean is 1 and the max is 6. A single bright stroke is washed out by the mean and stands out in the max. 🔨 **Build:** toy G.
+
+**The two taps, and a frozen network the gradient still passes through**
+
+🔤 **The name:** a *tap* is a place a pipe is opened to draw from. Tap A is the decoder's output at 8 × 16 and tap B at 16 × 32; *frozen* means the U-Net's weights are not trained. A frozen layer is still in the path, so the push's gradient goes straight through it to the canvas.
+
+🧸 **Toy:** a frozen layer f(x) = 2x and a head 3 f(x) + 1. At x = 1 the answer is 7 and its slope is 3 × 2 = 6, checked by nudging x by 0.001 (slope 6.000). Cut the frozen layer off, as if it were not in the path, and the slope is 0: the checker would answer but never push. 🔨 **Build:** toy H.
+
+💥 **Broken run (misuse):** treating "frozen" as "no gradient" would give a push of zero at every step. The gradient figures on [page 3](3-the-gradient.md) are the measured case: it enters the frozen U-Net at the taps (0.480 and 0.784) and arrives at the canvas as 3.21.
+
+**EMA (the weights are averaged)**
+
+🔤 **The name:** *exponential moving average*: each new value moves the average by a small fixed share. With decay 0.9 and a target of 1, starting at 0, three steps give 1 − 0.9³ = 0.271. The U-Net uses 0.999, which moves 0.1% a step, so it follows training slowly and smooths its jitter. 🧸 **Toy and build:** toy J.
+
+**Retraining on its own pushes (on-policy)**
+
+💥 **Broken run (without):** a checker taught only on pasted pictures never sees the failures its own push makes. Retrained on 444 of its own pushed pictures per pass, the judge labelled 214 then 293 of them clean, and the tuning pairs read 81, 77 and 120 of 192 over the three checkers (step 7b's loop 2).
+
+🔤 **The name:** *on-policy*: learning from what you yourself do, rather than from a fixed pile someone else made.
+
 ## The canvas U-Net: 6,141,185 weights
 
 <a href="2-the-networks/a1-the-canvas-unet.png"><img src="2-the-networks/a1-the-canvas-unet.png" width="480" alt="The canvas U-Net as bars from 32 x 64 down to 8 x 16 and back, skips, the two maps the checkers read, the size and the training recipe"></a>
