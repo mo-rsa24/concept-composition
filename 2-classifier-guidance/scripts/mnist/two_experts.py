@@ -204,6 +204,7 @@ def main():
     ap.add_argument("--n", type=int, default=12)
     ap.add_argument("--s", type=float, default=10.0)
     ap.add_argument("--cap", type=float, default=0.1); ap.add_argument("--eta", type=float, default=1.0)
+    ap.add_argument("--lang-k", type=int, default=0); ap.add_argument("--lang-c", type=float, default=0.0)
     ap.add_argument("--base", default="floor", choices=["blank", "floor", "avgnull", "union"])
     ap.add_argument("--compose", default="product", choices=["product", "region", "crop"])
     ap.add_argument("--union", type=Path)
@@ -261,7 +262,8 @@ def main():
     counts, canv = {}, {}
     for a, b in parse_pairs(args.pairs):
         x = to_uint8(sample(None, EVAL_SEEDS, [], eps_fn=build_eps(args, A, B, a, b, U),
-                            push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta)[0])
+                            push_fn=make_push(args.push, a, b, heads, args.s), cap=args.cap, device=dev, eta=args.eta,
+                            langevin=(args.lang_k, args.lang_c))[0])
         rds = [reads(net, c, dev) for c in x]
         calls = [call_two(r, (a, b)) for r in rds]
         tally = {k: calls.count(k) for k in CALLS}

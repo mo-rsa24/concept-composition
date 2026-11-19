@@ -194,10 +194,12 @@ def start_noise(seeds, device):
                         for s in seeds]).to(device)
 
 
-def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda", eta=0.0, eps_fn=None):
+def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device="cuda", eta=0.0, eps_fn=None, langevin=None):
     """DDIM; eta 0 is deterministic, eta > 0 adds fresh noise each step from a fixed per-seed stream.
     push_fn(x, t, eps) -> push of eps's shape, added to eps after the cap.
     eps_fn(x, t) -> the noise prediction to use instead of one model's product (plan 32's two experts).
+    langevin=(k, c): before each step, k Langevin corrector steps at the current noise level, step size c * beta_t, score = -eps / sigma_t,
+    eps including the pushes (plan 33, E3; the same rule as poe_repair/methods/_corrector_drivers.py).
 
     Returns the finished canvases in [-1, 1] and, per step, the fraction of samples where the cap fired.
     """
@@ -208,10 +210,23 @@ def sample(model, seeds, labels, g=1.0, steps=50, push_fn=None, cap=0.1, device=
     fired_log = []
     for i, t in enumerate(ts):
         tt = t.repeat(x.shape[0])
-        eps = eps_fn(x, tt) if eps_fn is not None else product_eps(model, x, tt, labels, g)
-        if push_fn is not None:
-            push, fired = per_sample_cap(push_fn(x, tt, eps), eps, cap)
-            eps = eps + push
+
+        def full_eps(xx):
+            e = eps_fn(xx, tt) if eps_fn is not None else product_eps(model, xx, tt, labels, g)
+            fr = None
+            if push_fn is not None:
+                push, fr = per_sample_cap(push_fn(xx, tt, e), e, cap)
+                e = e + push
+            return e, fr
+        if langevin is not None and langevin[0] > 0 and langevin[1] > 0 and i + 1 < len(ts):
+            beta_t = float(BETAS[int(t)]); delta = float(langevin[1]) * beta_t
+            sigma_t = (1 - abar[t]).sqrt()
+            for _ in range(int(langevin[0])):
+                e, _ = full_eps(x)
+                z = torch.stack([torch.randn(x.shape[1:], generator=gg) for gg in (gens or [torch.Generator().manual_seed(7)] * x.shape[0])]).to(device)
+                x = x + delta * (-e / sigma_t) + (2 * delta) ** 0.5 * z
+        eps, fired = full_eps(x)
+        if fired is not None:
             fired_log.append(fired.float().mean().item())
         a = abar[t]
         a_prev = abar[ts[i + 1]] if i + 1 < len(ts) else torch.tensor(1.0, device=device)
