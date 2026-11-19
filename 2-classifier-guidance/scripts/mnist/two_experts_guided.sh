@@ -21,5 +21,5 @@ draws pair-r0 draws1;  train pair-r1 $OUT/draws/draws1.npz
 draws pair-r1 draws2;  train pair-r2 $OUT/draws/draws1.npz $OUT/draws/draws2.npz
 H="--pair-head $CK/pair-r2/head.pt --sep-head $CK/separate/head.pt --ink-head $CK/ink/head.pt"
 cell() { $PY $D/two_experts.py cells $EX $H --push $1 --name side-$1-guided-$B --out $OUT; }
-cell zero; cell random; cell both; cell ink
+cell none; cell zero; cell random; cell both; cell ink
 echo "[$(date -u +%H:%M:%S)] done"
