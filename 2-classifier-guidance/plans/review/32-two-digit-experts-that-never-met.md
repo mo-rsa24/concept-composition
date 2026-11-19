@@ -78,7 +78,7 @@ The product divides by a base, and a blank canvas taken as an exact point mass i
 noise prediction (x + √ᾱ_t) / √(1 − ᾱ_t) diverges as the noise falls, 489 against about 1 for a
 network at the last step, and the composed canvases blow out to white. Three bases are defined:
 the blank canvas given a spread τ (noise prediction √(1 − ᾱ_t)(x + √ᾱ_t) / (ᾱ_t τ² + 1 − ᾱ_t), at
-τ = 0.3 and 1.0), and the mean of the two experts' own no-digit predictions. The fixed-side
+τ = 0.3 and 1.0, and later 0.1 and 0.03, with τ = 0 the point mass), and the mean of the two experts' own no-digit predictions. The fixed-side
 control picks the base: the one that passes its bar there, or the highest count if several do,
 is used for every cell, and the others are reported beside it. Nothing about the side-mixed cells
 is read to choose.
@@ -192,6 +192,9 @@ Navigation: ⬅️ [The bars](#the-bars-written-before-the-run) | 📋 [TOC](#ta
 
 - **Experts alone, side-mixed pair (2026-11-19).** The 0–4 expert draws one clear, right digit on 62, 63, 63, 58 and 59 of 64 for digits 0 to 4: the bar holds. The 5–9 expert gives 62, 62, 58, 55 and 62 for digits 5 to 9: it holds except on 8, at 55 against 58. Looked at by eye, the tiles for 8 are mostly clear 8s; the judge's misses are thin or open 8s read under 0.9 sure, and the judge counts about 5% below a careful eye. The written bar is the judge's count, so it is recorded as missed.
 - **Correction, written before it runs.** The 5–9 expert is retrained once with the same recipe and a different seed (seed 1) on the idle card, since the fixed-side experts need 70 more minutes anyway. The retrained expert replaces the original only if it passes the bar on every digit. If it also misses, by 3 or fewer and on 8 alone, the original is kept and every cell reports the 8 shortfall beside its counts. Nothing else is changed, and no cell that used the original expert is read until this is settled.
+- **Fixed-side experts alone (2026-11-19).** The 0–4 left expert draws one clear, right digit on 63, 64, 63, 62 and 63 of 64 (bar 58 holds). The 5–9 right expert gives 59, 63, 57, 60 and 62: it misses on digit 7 by one. The shortfall is the same kind as the side-mixed 8 (thin sevens read under 0.9 sure by the judge). It is recorded as a miss and not retrained now, because the fixed-side experts are the control for the base, not the claim: if the control passes its bar, the shortfall is reported beside every count that used them.
+- **Fixed-side control, first reading: the three bases fail.** Average-of-no-digit base: 1 of 320. Blank with spread 0.3: 32, 9 and 14 of 64 on the first three pairs. The bar is 256 of 320, so the control fails and nothing from the side-mixed cells is read.
+- **Correction, written before it runs.** For the fixed-side experts each draws exactly blank outside its own half, so the blank canvas as a point mass is the shared background in Bradley et al.'s factorised case, and the second expert's prediction over the first expert's half should cancel against it. The point-mass base was set aside on a stand-in (one shared U-Net, not two experts), where it diverges at low noise; that was not a test of the real pair. The control is therefore rerun with three more bases: the blank point mass, and the blank with spread 0.1 and 0.03. The base that passes the bar on the fixed-side control, highest count if several, is used for the side-mixed cells. The side-mixed cells are still not read to choose.
 - **A cosmetic fault in the sheets.** The expert-alone sheets framed every tile red because the count returns a numpy boolean; the counts were right and the frames are fixed in the script.
 
 ## Controls
