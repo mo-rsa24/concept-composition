@@ -137,5 +137,84 @@
  "J": {
   "decay_0.9_after_3": 0.271,
   "decay_0.999_after_3": 0.003
+ },
+ "K": {
+  "groups": [
+   [
+    1,
+    3
+   ],
+   [
+    10,
+    30
+   ]
+  ],
+  "after": [
+   [
+    -1.0,
+    1.0
+   ],
+   [
+    -1.0,
+    1.0
+   ]
+  ],
+  "range_before": 29.0,
+  "range_after": 2.0
+ },
+ "L": {
+  "layer_slope": 0.1,
+  "three_layers_without_skip": 0.001,
+  "three_layers_with_skip": 1.331
+ },
+ "M": {
+  "scores": [
+   1.0,
+   0.0,
+   1.0
+  ],
+  "weights": [
+   0.4223,
+   0.1554,
+   0.4223
+  ],
+  "output": 28.446,
+  "plain_average_of_values": 26.667
+ },
+ "N": {
+  "table": {
+   "1": [
+    1,
+    0
+   ],
+   "4": [
+    0,
+    1
+   ],
+   "7": [
+    1,
+    1
+   ],
+   "10": [
+    0,
+    0
+   ]
+  },
+  "if_the_number_itself_were_the_input": {
+   "digit_7_is_times_digit_1": 7
+  }
+ },
+ "O": {
+  "adam_first_step_g2": 0.1,
+  "adam_first_step_g200": 0.1,
+  "plain_step_g2": 0.2,
+  "plain_step_g200": 20.0
+ },
+ "P": {
+  "x_t": 1.0,
+  "predicted_noise": 0.5,
+  "clean_guess": 1.772,
+  "next_x_eta0": 1.048,
+  "clean_guess_if_noise_sign_flipped": 5.014
  }
 }

@@ -18,6 +18,10 @@ Each toy below is ordinary and small enough to do on paper; [the toys](toys/tria
 
 🔨 **Build:** `toys/triad_toys.py`, toy C, gives [0.1, 0.05] and asserts it.
 
+🎞️ **Moving picture:** [toy-c-the-cap.gif](toys/toy-c-the-cap.gif): a push grows from 0.02 to 0.6 beside the product's size 1.0 and is stopped at the lid of 0.1.
+<a href="toys/toy-c-the-cap.gif"><img src="toys/toy-c-the-cap.gif" width="360" alt="A push arrow grows beside the product's arrow and stops at a lid at 0.1"></a>
+
+
 **The fresh noise in a step (eta)**
 
 🔤 **The name:** *eta* is the Greek letter used as the dial. *DDIM* is the step rule: use the predicted noise to guess the clean canvas, then step toward it. Eta set to 0 makes every step deterministic, the same start always makes the same canvas. Eta at 1 adds fresh noise of the size the schedule would have added anyway.
@@ -28,7 +32,19 @@ Each toy below is ordinary and small enough to do on paper; [the toys](toys/tria
 
 💥 **Broken run (without):** the full broken run, with counts, is on [page 5](5-qualitative-grids.md): with no fresh noise two pushes at strength 10 give 41 clear pairs of 64 on 4 and 7, and at strength 30 only 26, strokes smeared into blobs; with fresh noise, 59 and 55.
 
-🎞️ **Moving picture:** 🖼️ Diagram wanted: the toy's one pixel taking 50 steps at eta 0 and at eta 1 from the same start, two paths on one axis; not drawn yet.
+🎞️ **Moving picture:** [toy-d-the-random-step.gif](toys/toy-d-the-random-step.gif): one pixel taking 50 steps toward a single target value of 0.8 from six starts, smooth at eta 0 and jittery at eta 1; the toy uses the real schedule.
+<a href="toys/toy-d-the-random-step.gif"><img src="toys/toy-d-the-random-step.gif" width="360" alt="Six one-pixel paths over 50 steps, smooth at eta 0 and jittery at eta 1"></a>
+
+
+**The DDIM step: guess the clean canvas, then step**
+
+🔤 **The name:** *DDIM* is denoising diffusion implicit model, a step rule. From the noisy canvas x_t and the predicted noise it first guesses the clean canvas, x̂₀ = (x_t − √(1−ᾱ_t) · predicted noise) / √ᾱ_t, then builds the next, less noisy canvas from that guess and the same predicted noise.
+
+🧸 **Toy:** t = 489, x_t = 1.0, predicted noise 0.5, where ᾱ = 0.0869. The clean guess is (1 − 0.9556 × 0.5) / 0.2948 = 1.772. The next canvas at t = 469, eta 0, is 1.048.
+
+🔨 **Build:** `toys/triad_toys.py`, toy P.
+
+💥 **Broken run (misuse):** flip the sign of the predicted noise and the clean guess jumps from 1.772 to 5.014, far outside a canvas whose pixels run from −1 to 1. A wrong sign looks like a plausible number, and only the range exposes it. Toy numbers.
 
 ## One step, drawn as networks
 

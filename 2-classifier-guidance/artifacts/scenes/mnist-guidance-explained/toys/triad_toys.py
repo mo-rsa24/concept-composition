@@ -4,7 +4,8 @@ Every toy is ordinary (soup, light bulbs, a four-pixel strip), small enough to d
 the ones the page quotes. The build is this file: it must reproduce each hand answer, and it writes
 toy_numbers.json and two moving pictures.
 
-Toys: A sigmoid and softmax   B why the log-odds keeps pushing   C the cap   D the random sampler step
+Toys: A sigmoid and softmax   K GroupNorm   L a residual block   M attention   N an embedding   O Adam   P a DDIM step
+      (the first ten, A to J, follow)  A sigmoid and softmax   B why the log-odds keeps pushing   C the cap   D the random sampler step
       E a skip   F scale-and-shift   G mean and max   H a frozen layer the gradient still passes   I the size of a
       gradient   J a running average
 Usage: python triad_toys.py
@@ -103,6 +104,47 @@ for _ in range(3):
     w2 = 0.999 * w2 + 0.001 * 1
 out["J"] = {"decay_0.9_after_3": round(w, 4), "decay_0.999_after_3": round(w2, 4)}
 assert close(w, 1 - 0.9 ** 3, 1e-9)
+
+
+# K. GroupNorm: split the values into groups, shift and scale each group to mean 0, spread 1. Two groups: [1, 3] and [10, 30].
+gn = lambda v: (np.array(v, float) - np.mean(v)) / np.std(v)
+out["K"] = {"groups": [[1, 3], [10, 30]], "after": [gn([1, 3]).tolist(), gn([10, 30]).tolist()],
+            "range_before": 29.0, "range_after": 2.0}
+assert gn([1, 3]).tolist() == [-1.0, 1.0] and gn([10, 30]).tolist() == [-1.0, 1.0]
+
+# L. A residual block returns x + f(x). Each layer's own slope is 0.1; three layers in a row.
+slope_plain, slope_res = 0.1 ** 3, (1 + 0.1) ** 3
+out["L"] = {"layer_slope": 0.1, "three_layers_without_skip": round(slope_plain, 4), "three_layers_with_skip": round(slope_res, 4)}
+assert close(slope_plain, 0.001, 1e-9) and close(slope_res, 1.331, 1e-9)
+
+# M. Attention: one query reads three keys, takes a weighted mix of three values.
+q = np.array([1.0, 0.0]); K = np.array([[1, 0], [0, 1], [1, 0.0]]); V = np.array([10.0, 20.0, 50.0])
+sc = K @ q; wts = np.exp(sc) / np.exp(sc).sum()
+out["M"] = {"scores": sc.tolist(), "weights": wts.round(4).tolist(), "output": round(float(wts @ V), 3),
+            "plain_average_of_values": round(float(V.mean()), 3)}
+assert close(wts.sum(), 1.0) and close(wts @ V, 28.45, 1e-2)
+
+# N. An embedding is a lookup table: a digit picks a row. Row for digit 1 is [1,0], digit 4 is [0,1], digit 7 is [1,1], none is [0,0].
+table = {1: [1, 0], 4: [0, 1], 7: [1, 1], 10: [0, 0]}
+out["N"] = {"table": {str(k): v for k, v in table.items()}, "if_the_number_itself_were_the_input": {"digit_7_is_times_digit_1": 7}}
+assert table[7] == [1, 1]
+
+# O. Adam: the step is lr * m_hat / sqrt(v_hat), so a gradient 100 times bigger gives the same step. One weight, lr 0.1, first step.
+def adam_step(g, lr=0.1, b1=0.9, b2=0.999):
+    m, v = (1 - b1) * g, (1 - b2) * g * g
+    return lr * (m / (1 - b1)) / np.sqrt(v / (1 - b2))
+out["O"] = {"adam_first_step_g2": round(float(adam_step(2.0)), 4), "adam_first_step_g200": round(float(adam_step(200.0)), 4),
+            "plain_step_g2": 0.2, "plain_step_g200": 20.0}
+assert close(adam_step(2.0), 0.1) and close(adam_step(200.0), 0.1)
+
+# P. DDIM: guess the clean canvas from x_t and the predicted noise, then step. t = 489 to 469, x_t = 1.0, predicted noise 0.5.
+a_, ap_ = abar[steps[25]], abar[steps[26]]
+x0g = (1.0 - np.sqrt(1 - a_) * 0.5) / np.sqrt(a_)
+xn = np.sqrt(ap_) * x0g + np.sqrt(1 - ap_) * 0.5
+x0_wrong = (1.0 + np.sqrt(1 - a_) * 0.5) / np.sqrt(a_)
+out["P"] = {"x_t": 1.0, "predicted_noise": 0.5, "clean_guess": round(float(x0g), 3), "next_x_eta0": round(float(xn), 3),
+            "clean_guess_if_noise_sign_flipped": round(float(x0_wrong), 3)}
+assert close(x0g, 1.771, 1e-2) and close(x0_wrong, 5.011, 1e-2)
 
 (HERE / "toy_numbers.json").write_text(json.dumps(out, indent=1))
 print("all hand answers reproduced:", ", ".join(out))

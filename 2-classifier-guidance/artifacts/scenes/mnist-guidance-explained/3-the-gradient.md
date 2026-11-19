@@ -10,7 +10,9 @@ Measured by `gradient-flow/make_grad_numbers.py` in [the step 7b results](../../
 
 🔤 **The name:** a *gradient* is the slope, in every direction at once: for each pixel, how much the checker's answer rises if that pixel brightens a little. Its *size* is the L2 norm: square every entry, add, take the square root.
 
-🧸 **Toy:** a canvas of two pixels whose gradient is [3, 4]: the first pixel's brightening raises the answer 3 per unit, the second 4. Size = √(9 + 16) = 5. 🔨 **Build:** `toys/triad_toys.py`, toy I, gives 5.
+🧸 **Toy:** a canvas of two pixels whose gradient is [3, 4]: the first pixel's brightening raises the answer 3 per unit, the second 4. Size = √(9 + 16) = 5. 🔨 **Build:** `toys/triad_toys.py`, toy I, gives 5. 🎞️ **Moving picture:** [toy-i-the-size-of-a-gradient.gif](toys/toy-i-the-size-of-a-gradient.gif).
+<a href="toys/toy-i-the-size-of-a-gradient.gif"><img src="toys/toy-i-the-size-of-a-gradient.gif" width="360" alt="A right triangle builds from a side of 3 and a side of 4 to a hypotenuse of 5"></a>
+
 
 💥 **Broken run (without):** the push needs this arrow. A checker that only gave an answer, with the frozen network cut off from the canvas, would have size 0 at the canvas; the toy for it is on [the networks page](2-the-networks.md#words-on-this-page-taken-apart) (toy H, slope 6 with the path and 0 without).
 
@@ -18,7 +20,7 @@ Measured by `gradient-flow/make_grad_numbers.py` in [the step 7b results](../../
 
 🔤 **The name:** *back-propagation* is the chain rule read backwards: the slope of the whole chain is the product of each link's slope. In the toy, 3 × 2 = 6. In the figure each bar is one link, and its colour is the slope that reaches it.
 
-🎞️ **Moving picture:** 🖼️ Diagram wanted: the toy's two links with the slope arriving from the answer end, 1 then 3 then 6.
+🎞️ **Moving picture:** the toy's slope through the frozen layer, 3 × 2 = 6, is [toy-h-through-a-frozen-layer.gif](toys/toy-h-through-a-frozen-layer.gif) on [the networks page](2-the-networks.md#words-on-this-page-taken-apart).
 
 ## The pair-aware checker, on a fused 4 and 7 at t = 489 (step 25 of 50)
 

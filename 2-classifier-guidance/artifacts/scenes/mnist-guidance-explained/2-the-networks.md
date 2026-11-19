@@ -14,7 +14,9 @@ Toys are in [the toys](toys/triad_toys.py); every hand answer is computed and as
 
 🔤 **The name:** a *skip* jumps over the middle of the network. In the U, the left arm's map at each size is copied straight across to the right arm at the same size and joined on as extra channels, which is why a right-arm bar is part light (the copy) and part dark (what it just computed).
 
-🧸 **Toy:** the four-pixel strip above. 🔨 **Build:** `toys/triad_toys.py`, toy E, gives 8 and 0. 🎞️ **Moving picture:** 🖼️ Diagram wanted: the strip squeezed and spread, with the copy sliding across.
+🧸 **Toy:** the four-pixel strip above. 🔨 **Build:** `toys/triad_toys.py`, toy E, gives 8 and 0. 🎞️ **Moving picture:** [toy-e-a-skip.gif](toys/toy-e-a-skip.gif): the strip, squeezed, spread back with its edges lost (error 8), then the copy joined on (error 0).
+<a href="toys/toy-e-a-skip.gif"><img src="toys/toy-e-a-skip.gif" width="360" alt="The strip squeezed and spread back with edges lost, then restored by the copied strip"></a>
+
 
 **Scale and shift by the pair (the pair-aware checker's second layer)**
 
@@ -22,31 +24,83 @@ Toys are in [the toys](toys/triad_toys.py); every hand answer is computed and as
 
 🧸 **Toy:** h = [2, −1]. Pair A gives g = 0.5, b = 1: the output is [4, −0.5]. Pair B gives g = −1, b = 0: the output is [0, 0], switched off. With no pair at all it stays [2, −1]. 🔨 **Build:** toy F.
 
-💥 **Broken run (without):** give the pair only at the input and the checker reads held-out pairs on 84 of 320 seeds; give it to every layer and retrain on its own pushed pictures with the sampler's fresh noise, and it reads 217 of 320 (three changes at once, step 7b's loop 2, so the gain is not credited to the pair alone). 🎞️ **Moving picture:** 🖼️ Diagram wanted: g and b sliders on the toy.
+💥 **Broken run (without):** give the pair only at the input and the checker reads held-out pairs on 84 of 320 seeds; give it to every layer and retrain on its own pushed pictures with the sampler's fresh noise, and it reads 217 of 320 (three changes at once, step 7b's loop 2, so the gain is not credited to the pair alone). 🎞️ **Moving picture:** [toy-f-scale-and-shift.gif](toys/toy-f-scale-and-shift.gif): g and b move through pair A's values and pair B's, and the two channels follow.
+<a href="toys/toy-f-scale-and-shift.gif"><img src="toys/toy-f-scale-and-shift.gif" width="360" alt="Two channel bars scaled and shifted as g and b change, ending switched off at g minus 1 and b 0"></a>
+
 
 **Mean and max (the pooling)**
 
 🔤 **The name:** *pool* is a shared pot; *mean* puts everyone's share in and divides, *max* keeps the biggest. The checker pools each 128-channel map over its 128 places to two numbers per channel: 128 means and 128 maxes, 256 in all.
 
-🧸 **Toy:** a 2 × 3 map with one bright cell worth 6 and zeros elsewhere. The mean is 1 and the max is 6. A single bright stroke is washed out by the mean and stands out in the max. 🔨 **Build:** toy G.
+🧸 **Toy:** a 2 × 3 map with one bright cell worth 6 and zeros elsewhere. The mean is 1 and the max is 6. A single bright stroke is washed out by the mean and stands out in the max. 🔨 **Build:** toy G. 🎞️ **Moving picture:** [toy-g-mean-and-max.gif](toys/toy-g-mean-and-max.gif).
+<a href="toys/toy-g-mean-and-max.gif"><img src="toys/toy-g-mean-and-max.gif" width="360" alt="One cell brightens from 0 to 6 while the mean rises to 1 and the max rises to 6"></a>
+
 
 **The two taps, and a frozen network the gradient still passes through**
 
 🔤 **The name:** a *tap* is a place a pipe is opened to draw from. Tap A is the decoder's output at 8 × 16 and tap B at 16 × 32; *frozen* means the U-Net's weights are not trained. A frozen layer is still in the path, so the push's gradient goes straight through it to the canvas.
 
-🧸 **Toy:** a frozen layer f(x) = 2x and a head 3 f(x) + 1. At x = 1 the answer is 7 and its slope is 3 × 2 = 6, checked by nudging x by 0.001 (slope 6.000). Cut the frozen layer off, as if it were not in the path, and the slope is 0: the checker would answer but never push. 🔨 **Build:** toy H.
+🧸 **Toy:** a frozen layer f(x) = 2x and a head 3 f(x) + 1. At x = 1 the answer is 7 and its slope is 3 × 2 = 6, checked by nudging x by 0.001 (slope 6.000). Cut the frozen layer off, as if it were not in the path, and the slope is 0: the checker would answer but never push. 🔨 **Build:** toy H. 🎞️ **Moving picture:** [toy-h-through-a-frozen-layer.gif](toys/toy-h-through-a-frozen-layer.gif): x slides along the answer line while the slope through the frozen layer stays 6 and the cut-off slope stays 0.
+<a href="toys/toy-h-through-a-frozen-layer.gif"><img src="toys/toy-h-through-a-frozen-layer.gif" width="360" alt="A point slides along the answer line with slope 6, against a flat dotted line for the cut-off case"></a>
+
 
 💥 **Broken run (misuse):** treating "frozen" as "no gradient" would give a push of zero at every step. The gradient figures on [page 3](3-the-gradient.md) are the measured case: it enters the frozen U-Net at the taps (0.480 and 0.784) and arrives at the canvas as 3.21.
 
 **EMA (the weights are averaged)**
 
-🔤 **The name:** *exponential moving average*: each new value moves the average by a small fixed share. With decay 0.9 and a target of 1, starting at 0, three steps give 1 − 0.9³ = 0.271. The U-Net uses 0.999, which moves 0.1% a step, so it follows training slowly and smooths its jitter. 🧸 **Toy and build:** toy J.
+🔤 **The name:** *exponential moving average*: each new value moves the average by a small fixed share. With decay 0.9 and a target of 1, starting at 0, three steps give 1 − 0.9³ = 0.271. The U-Net uses 0.999, which moves 0.1% a step, so it follows training slowly and smooths its jitter. 🧸 **Toy and build:** toy J. 🎞️ **Moving picture:** [toy-j-a-running-average.gif](toys/toy-j-a-running-average.gif).
+<a href="toys/toy-j-a-running-average.gif"><img src="toys/toy-j-a-running-average.gif" width="360" alt="Two running averages chasing a target of 1, decay 0.9 fast and decay 0.999 slow"></a>
+
 
 **Retraining on its own pushes (on-policy)**
 
 💥 **Broken run (without):** a checker taught only on pasted pictures never sees the failures its own push makes. Retrained on 444 of its own pushed pictures per pass, the judge labelled 214 then 293 of them clean, and the tuning pairs read 81, 77 and 120 of 192 over the three checkers (step 7b's loop 2).
 
 🔤 **The name:** *on-policy*: learning from what you yourself do, rather than from a fixed pile someone else made.
+
+## More words from inside the U-Net
+
+Toys are in [the toys](toys/triad_toys.py), toys K to O. Their numbers are the toy's own: none of these broken runs was measured on the 6-million-weight network, which was not trained without them, and each line says so.
+
+**U-Net**
+
+🔤 **The name:** the *U* is the shape the maps trace: down the left arm to a smaller grid, across the bottom, up the right arm; *net* is network. The two arms are why a copy can be carried across at each level (see the skip above). Nothing about its name says it was first built to cut cells out of microscope images; it was.
+
+**ResBlock**
+
+🔤 **The name:** *residual* is what is left over. The block does not replace its input x with f(x); it returns x + f(x), so the layers only learn the leftover change. In this U-Net a ResBlock is GroupNorm, SiLU, a 3 × 3 convolution, the step-and-label vector added in, then again, then the input added back.
+
+🧸 **Toy:** each layer's own slope is 0.1. Three layers in a row without the add-back have slope 0.1 × 0.1 × 0.1 = 0.001, so what is learned downstream can barely be heard upstream. With the add-back each layer's slope is 1 + 0.1, and the three give 1.331. 🔨 **Build:** `toys/triad_toys.py`, toy L.
+
+💥 **Broken run (without):** 0.001 against 1.331 on the toy. The network was not trained without it, so this is the toy's number, not a measured one.
+
+**GroupNorm**
+
+🔤 **The name:** *norm* is a standard size; *group* says which values are compared: the 64 or 128 channels are cut into 32 groups and each group is shifted to average 0 and scaled to spread 1, at each place's own values.
+
+🧸 **Toy:** two groups, [1, 3] and [10, 30]. The first has mean 2 and spread 1 and becomes [−1, 1]. The second has mean 20 and spread 10 and becomes [−1, 1]. The range of the four numbers goes from 29 to 2. 🔨 **Build:** toy K.
+
+💥 **Broken run (without):** with no normalising, the second group's numbers are ten times the first's, and the next layer sees almost only the second. Toy numbers, not a measured run.
+
+**Attention**
+
+🔤 **The name:** to *attend* is to give some things more of your notice than others. A query asks a question, each key says what its place holds, and the answer is the values mixed in proportion to how well each key matches the question. This U-Net has one attention block at the bottom, 4 heads over 128 places (the 8 × 16 grid), 66,304 weights.
+
+🧸 **Toy:** one query [1, 0] reads three keys [1, 0], [0, 1] and [1, 0]. The match scores are 1, 0, 1; the weights are 0.4223, 0.1554, 0.4223; the three values 10, 20 and 50 mix to 28.446. A plain average of the values would be 26.667, ignoring which key matched. 🔨 **Build:** toy M.
+
+**Embedding**
+
+🔤 **The name:** to *embed* is to set something inside something else; the digit becomes a vector placed in the network's own number space. It is a lookup table: a digit picks one row. This U-Net's table has 11 rows of 256 numbers (2,816 weights): digits 0 to 9 and a row for "no digit".
+
+🧸 **Toy:** a table with digit 1 = [1, 0], digit 4 = [0, 1], digit 7 = [1, 1], none = [0, 0]. Feeding the digit's own number instead would force 7 to be exactly seven times 1; a lookup lets each digit have its own row. 🔨 **Build:** toy N.
+
+**Adam**
+
+🔤 **The name:** *Adam* is short for adaptive moment estimation: each weight's step is its own running average of the slope (the first moment) divided by the size of its slope's own recent variation (the second moment). A weight whose slope is 100 times larger takes the same step.
+
+🧸 **Toy:** one weight, learning rate 0.1, first step. Slope 2 gives a step of 0.1 and slope 200 also gives 0.1; plain stepping would move 0.2 and 20. 🔨 **Build:** toy O. This U-Net trained with Adam at 0.0002 (checkers at 0.001), measured to a loss of 0.0077.
+
+💥 **Broken run (misuse):** plain stepping at a rate tuned for slope 2 jumps 20 when the slope is 200 (toy).
 
 ## The canvas U-Net: 6,141,185 weights
 
