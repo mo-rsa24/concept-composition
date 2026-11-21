@@ -57,7 +57,7 @@ left in a queue that renumbers itself. A plan's own file carries this same numbe
 | 32 | 01-showcase-the-trained-lora/02-the-dog-x-dog-null-probe | the null-input control with its baseline identity preflight | ⚠️ |  |
 | 33 | 01-showcase-the-trained-lora/03-the-lora-dose-sweep | the causal dose curve for the shipped LoRA, wrong-seed and shuffled control rows | ✅ | 32 |
 | 34 | 01-showcase-the-trained-lora/04-the-transfer-matrix-figure | group-pooled LoRAs on audited concept-disjoint pairs | ⚠️ |  |
-| 35 | 01-showcase-the-trained-lora/05-assemble-the-showcase-figures | the figure set into paper/iclr/figures under the ledger's standard | ⚠️ | 32, 33, 34 |
+| 35 | 01-showcase-the-trained-lora/05-assemble-the-showcase-figures | the figure set into writing/iclr/figures under the ledger's standard | ⚠️ | 32, 33, 34 |
 | 36 | 01-showcase-the-trained-lora/06-extend-the-tracking-set | the four adopted curves wired into instrument-02's live logging, smoke-proven | ⚠️ | 31 |
 | 37 | 01-showcase-the-trained-lora/07-experiment-c-lambda-window | lambda-times-window sweep on existing checkpoints; builds the shared injection harness | ⚠️ grid run + measured, verdict open | 36 (ran ahead of it — see sync note) |
 | 38 | 01-showcase-the-trained-lora/08-experiment-a-resume-to-200k | length axis: rank 8 resumed from 100k to 200k, sbatch on biggpu | ⚠️ | 36 |
@@ -162,7 +162,7 @@ order the scopes for a reader arriving cold; they are not the step order, which 
 | `04-does-the-fix-reach-unseen-pairs/` | live | the transfer claim: one pooled LoRA composes pairs it never trained on. Depends on `compose-scorer`'s `scorer_validated.json` |
 | `05-when-does-the-outcome-lock-in/` | live, nothing started | the commitment probe: at which step the final image is decided, which is what explains the gap between the injection window and the divergence step. Adopted the basin-oracle walk's decision ledger |
 | `06-is-the-gap-the-samplers-or-the-models/` | live, nothing started | the one threat to the paper's framing: how much of the correction a Langevin corrector removes, and how much no corrector touches. Then three composition rules on one dose axis |
-| `07-writing-the-paper/` | live | the ICLR manuscript in `paper/iclr/`. No GPU, no queue. Runs nothing and consumes everything the six scopes above produce |
+| `07-writing-the-paper/` | live | the ICLR manuscript in `writing/iclr/`. No GPU, no queue. Runs nothing and consumes everything the six scopes above produce |
 | `08-improve-the-rank-32-pooled-adapter/` | live, nothing started | the better checkpoint: the rank-32 pooled adapter trained again with five changes on at once and four children that each undo one, judged by eye against checkpoint 30050 under two samplers. Last because it replaces the checkpoint scope 01's figures are measured from, and only if it wins |
 | `standing/literature/` | standing | the reading register: what the field already knows, and the source behind every idea-trying run |
 | `standing/retrofit-poe-repair-min.md` | standing | the one-name-per-thing sweep across the repo, executed by `/retrofit-repo`; sits beside the tree because it touches every scope |
@@ -194,7 +194,7 @@ word. The rule attached to each kind is what that plan answers to.
 
 ### Figures first, then the writing
 
-The figure register, [the eight slots and the claim each will make](paper/iclr/figures.md), is the
+The figure register, [the eight slots and the claim each will make](writing/iclr/figures.md), is the
 scoreboard, and a reserved slot is not idle: it carries the claim its caption will make, written
 before the experiment runs. Work in these scopes means resolving slots.
 

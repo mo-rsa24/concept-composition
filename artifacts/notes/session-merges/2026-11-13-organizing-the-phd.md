@@ -41,7 +41,7 @@ review in `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/review/`.
 | `replications/published-methods-on-our-pairs` | the route for the fourteen papers is running in its own session | that session |
 | concept-composition, step 11 | the fifteen pooled runs need anchor pictures for 17 of 19 pairs first | a cluster session |
 | concept-composition, step 10 | read the two direction measures for cat × dog and frog × toad | any session |
-| `paper/iclr/DRAFT_MAP.md` | "the last scored checkpoint" should name step 60000 | you |
+| `writing/iclr/DRAFT_MAP.md` | "the last scored checkpoint" should name step 60000 | you |
 | Proposal stages 3, 3 v1, 3 v2 | may miss files the same way stage 4 did; compare with the cluster's `baselineSepVAE/proposal` and build each | any session |
 | the timing page | parts 2 and 3 of the walkthrough, at `1-lora-correction/artifacts/scenes/when-the-correction-must-arrive/index.html` | you |
 | `MASTER_PLAN.md`, `environment/known-failures.md` | uncommitted edits from sessions 96716791 and b3cb8672 | those sessions |

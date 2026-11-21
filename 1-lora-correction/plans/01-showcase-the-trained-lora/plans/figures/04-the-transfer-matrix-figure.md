@@ -276,7 +276,7 @@ Serves [Objective 4 and DoD 3 of the scope master plan](../../MASTER_PLAN.md).
 
 1. Render pending map pieces via [the illustrated map](../../diagram-prompts.md) when the scope's diagrams get drained by `/render-diagrams`.
 2. Execute the plan; run-produced figures land under the outputs folder named in Quick context.
-3. Plan 05 imports what graduates to the paper into `paper/iclr/figures/` with sidecars and runs the standard check.
+3. Plan 05 imports what graduates to the paper into `writing/iclr/figures/` with sidecars and runs the standard check.
 
 
 ## Orchestration: keeping catalogs and plan files in sync
@@ -287,7 +287,7 @@ When this plan runs and produces output, three things stay in sync: the error ca
 
 1. **Ingest errors:** the close-out task runs `/ingest-error-pattern --from-run-log`; it deduplicates against `~/.claude/GLOBAL_ERROR_CATALOG.md` and [environment/known-failures.md](../../../../../environment/known-failures.md) and triggers `/sync-plan-tree --update-error-matrices`.
 2. **Error Matrix regeneration:** `/sync-plan-tree` rewrites the Error Matrix below from the catalogs; never edit it by hand.
-3. **Figure filing:** outputs land under `/datasets/mmolefe/poe_repair_min/outputs/showcase_the_trained_lora/transfer_matrix/`, and each figure that graduates to the paper is copied into `paper/iclr/figures/` with its sidecar by plan 05, which owns the standard check.
+3. **Figure filing:** outputs land under `/datasets/mmolefe/poe_repair_min/outputs/showcase_the_trained_lora/transfer_matrix/`, and each figure that graduates to the paper is copied into `writing/iclr/figures/` with its sidecar by plan 05, which owns the standard check.
 
 | Command | Triggered by | Outcome |
 |---|---|---|

@@ -39,7 +39,7 @@ from poe_repair.experiments.interaction_term.cache import load_cell  # noqa: E40
 from scripts.rt_reuse_figure import FRAME_DIR, x0_estimate  # noqa: E402
 
 SHOW_STEPS = (10, 20, 30, 40)
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 BLUE, ORANGE, INK = "#1f77b4", "#ff7f0e", "#333333"
 
 D1_PAIR, D1_SEED = "an_eagle__x__a_hawk", 9

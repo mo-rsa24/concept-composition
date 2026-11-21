@@ -108,7 +108,7 @@ computation layer 1 must decide.
    https://claude.ai/code/artifact/c3901878-d91a-42d6-9cde-76f5f89f72a3
    Source + sidecar: 1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/ (prototype html
    + manifold_data.json). Renders are final images; per-step decoded frames not built yet.
-   Static figure built as F11, paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf
+   Static figure built as F11, writing/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf
    (scripts/plot_shared_plane_trajectories.py). Definition note: 7.3 here is the mean distance
    of a seed's ends to their centroid; the matched pairwise statistic is 11.2 (seed 9: 11.7).
    Route emitted (2026-08-29): /design-figure on promoting the prototype into the paper's
@@ -344,7 +344,7 @@ lives as an exploratory thread under artifacts/ideas/. No video route, because i
   cache holds ~58 pairs and up to 17 seeds while training used 11 pairs x 8 seeds, so more data
   (or rank) is the regime-correct move if the oracle is crisp and the adapter is not.
   Its (a) verdict is overridden by the user's reconciliation above (all three run); the evidence stays because it re-scopes the claims: F8b is built
-  (paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.json,
+  (writing/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.json,
   adapter at 60k per pair 0.875-1.0 against oracle-at-lambda-1 0.75-1.0), so on the scored
   metric the adapter already sits at or above the oracle ceiling and training longer has
   nothing left to buy there. The joint-failure-repair artifact (cat x dog seed 1, step 100000)

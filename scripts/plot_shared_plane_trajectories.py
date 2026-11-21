@@ -4,7 +4,7 @@
 
 Reads 1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/manifold_data.json
 (coordinates, variance shares, embedded 256px renders). Writes
-paper/iclr/figures/held-out-trajectories-in-one-shared-plane.{pdf,png,json}.
+writing/iclr/figures/held-out-trajectories-in-one-shared-plane.{pdf,png,json}.
 
 Every number drawn on the figure is recomputed here from the coordinates; the
 asserts fail the build if they drift from the sidecar's recorded values.
@@ -23,7 +23,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "1-lora-correction/artifacts/drips/experiments/showcase-the-trained-adapter/manifold/manifold_data.json"
-OUT = ROOT / "paper/iclr/figures"
+OUT = ROOT / "writing/iclr/figures"
 NAME = "held-out-trajectories-in-one-shared-plane"
 
 d = json.loads(SRC.read_text())

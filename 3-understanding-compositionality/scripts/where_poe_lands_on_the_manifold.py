@@ -40,7 +40,7 @@ from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from mpl_toolkits.mplot3d import proj3d
 import numpy as np
 
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "where-the-product-lands-on-the-manifold"
 
 # One cell, four conditions, one starting latent. Written by

@@ -37,7 +37,7 @@ import numpy as np
 ROOT = paths.resolve(paths.SAME_TOTAL_CORRECTION_DIFFERENT_WINDOW)
 SCORES = ROOT / "matched_scores.json"
 WINDOW_CURVES = paths.resolve(paths.WINDOW) / "window_curves.json"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "compose-rate-as-the-window-moves-at-matched-total"
 
 PAIR = "a_cat__x__a_dog"

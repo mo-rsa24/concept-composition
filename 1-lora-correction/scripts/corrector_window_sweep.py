@@ -106,7 +106,7 @@ WINDOW_JSON = OUT / "window_curves_mcmc.json"
 SHEET_JSON = OUT / "sheet_scores.json"
 TAIL_JSON = OUT / "tail_fidelity.json"
 CLEAN_JSON = OUT / "clean_tail.json"
-FIG_DIR = REPO / "paper/iclr/figures/when-the-correction-arrives/mcmc"
+FIG_DIR = REPO / "writing/iclr/figures/when-the-correction-arrives/mcmc"
 STRIP_NAME = "samples-as-a-ten-step-corrector-window-slides"
 RESULTS_DIR = REPO / "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models"
 WANDB_PROJECT = "prime_lab/poe-repair-animals-compose"
@@ -622,7 +622,7 @@ def strip_figure() -> Path:
         "drawn_from": str(WINDOW_JSON), "pair": FAILING_PAIR, "seeds": list(STRIP_SEEDS),
         "columns": [lab for lab, _ in cols], "k": d["k"], "c": d["c"],
         "green_frame_rule": GREEN_FRAME_RULE,
-        "matched_to": "paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png: same pair, same seeds, same nine windows, same border rule; one extra column with the corrector on all 50 steps",
+        "matched_to": "writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png: same pair, same seeds, same nine windows, same border rule; one extra column with the corrector on all 50 steps",
         "per_column_composed_of_4": {k_: v["composed_of_4"] for k_, v in d["per_column"].items()},
         "cells": [{k_: c[k_] for k_ in ("seed", "column", "window", "png", "n_instances", "composed")} for c in d["cells"]],
         "caption_owes": ["the corrector runs at one k, which is a compute budget rather than a property of the problem",

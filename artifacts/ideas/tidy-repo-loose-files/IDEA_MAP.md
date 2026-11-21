@@ -9,7 +9,7 @@ this repo is where the drift it describes is visible.
 |---|---|---|
 | 1. tidy-repo does not know what the repo is meant to look like | wrong as stated, settled | Step 1 reads the conventions live every run; the repair is one new check, a top-level census feeding the existing triage |
 | 2. the staple set is context/, environment/, runbook/, plans/, report/ | wrong as stated, settled | schema assembled at run time (global four + data/ + repo CLAUDE.md override); tooling folders exempt; this repo's CLAUDE.md now declares context/ and report/ |
-| 3. files land loose with spurious names, often enough to matter | holds | this repo's root today: temp/, tmp/, output/, docs/, a root ideas/ beside artifacts/ideas/, paper/iclr/meeting-transcript.txt |
+| 3. files land loose with spurious names, often enough to matter | holds | this repo's root today: temp/, tmp/, output/, docs/, a root ideas/ beside artifacts/ideas/, writing/iclr/meeting-transcript.txt |
 | 4. opening and inspecting a loose file determines where it belongs | holds with a boundary, settled | tested on this repo's 8 real loose entries: 6 decided with quotable evidence, 2 became one-time policy questions; never-guess survives as propose-with-evidence |
 | 5. tidy-repo is the right owner of the move | holds, settled | no sibling claims stray-file sweeps; boundary recorded: tidy-repo moves files into pulse-owned folders and stops, content stays the pulse's job |
 | 6. the skill runs from a roster of repos, not one repo at a time | holds, settled | a declared REPOS.md in ~/.claude, one report and one approval pass per repo; discovery-by-scanning rejected |
@@ -99,7 +99,7 @@ roster acts as the checklist for per-repo runs.
 ### 3. ✅ Files land loose with spurious names, often enough to matter
 
 Mark: holds. This repo's root today: `temp/`, `tmp/`, `output/`, `docs/`, `logs/`, a root
-`ideas/` sitting beside the correct `artifacts/ideas/`, and `paper/iclr/meeting-transcript.txt`.
+`ideas/` sitting beside the correct `artifacts/ideas/`, and `writing/iclr/meeting-transcript.txt`.
 No search was needed, one `ls` was.
 
 ### 4. ✅ Opening and inspecting a loose file determines where it belongs

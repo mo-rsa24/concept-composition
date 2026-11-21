@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """Compose-rate-as-correction-rises-with-detector-boxes: F2's qualitative grid, with the detector's own boxes drawn on.
 
-F2 (paper/iclr/figures/compose-rate-as-correction-rises.png) puts a number in the corner of
+F2 (writing/iclr/figures/compose-rate-as-correction-rises.png) puts a number in the corner of
 every panel: 1 or 2, filled if composed. This figure answers where that
 number comes from. Every box GroundingDINO detected and the scorer kept
 (confidence >= 0.30, spans at least 25% of the image's longer side, survives
@@ -36,7 +36,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Rectangle
 
 PAIRS_ROOT = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "pairs"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "compose-rate-as-correction-rises-with-detector-boxes"
 SCORER_CONTRACT = paths.resolve(paths.COMPOSE_SCORER_VALIDATION) / "scorer_validated.json"
 

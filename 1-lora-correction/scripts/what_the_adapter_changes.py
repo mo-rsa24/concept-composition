@@ -40,7 +40,7 @@ import numpy as np
 from poe_repair import paths
 
 VERDICT = paths.resolve(paths.CONTENT_CHANGE_RELATIVE_TO_ATTENTION_CHANGE) / "verdict.json"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "content-change-relative-to-attention-change-under-lora"
 
 RUNNING = "a_cat__x__a_dog"

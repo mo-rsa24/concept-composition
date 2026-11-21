@@ -10,7 +10,7 @@ figure standard (what is shown, caption simplicity, axes, framing, how a reader 
 The rank-8 cross-attention LoRA (trained on cached r_t = eps_J - eps_PoE, Mono-free at
 inference, W&B run prime_lab/poe-repair-cross-seed/pueuo7bl) restores two-instance
 composition on held-out pairs but the samples are soft and washed out
-(paper/iclr/figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs.png).
+(writing/iclr/figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs.png).
 The user wants: (a) a decision on whether to train longer, (b) the dog x dog probe (C1 = C2 =
 "a dog": does PoE+LoRA paint two dogs, meaning the LoRA carries a two-instance prior, or one
 dog, meaning it carries an interaction-specific correction), (c) generalization

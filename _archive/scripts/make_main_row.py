@@ -26,7 +26,7 @@ seeds that were looked at.
 
     python scripts/make_main_row.py
 
-Writes paper/iclr/figures/drafts/main-row-seed{09,10,11,12}.{png,pdf} and one
+Writes writing/iclr/figures/drafts/main-row-seed{09,10,11,12}.{png,pdf} and one
 stacked contact sheet of all four for choosing between them.
 """
 
@@ -50,7 +50,7 @@ LORA_ROOT = (
     paths.resolve(paths.HELD_OUT_SEEDS_INDEX)
     / "task_b_learning_curve/k04__ep2000_resumed/samples/per_epoch"
 )
-OUT_DIR = Path("paper/iclr/figures/drafts")
+OUT_DIR = Path("writing/iclr/figures/drafts")
 
 PAPER = "#ffffff"
 INK = "#2b2b2b"

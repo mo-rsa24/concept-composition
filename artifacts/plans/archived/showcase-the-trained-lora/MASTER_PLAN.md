@@ -51,7 +51,7 @@ source of truth for pre-registrations, caption entitlements and gates.
    oracle sweep's 0.387-vs-0.023 for comparison.
 4. The transfer matrix at group-pooled, concept-disjoint tier, with the held-out grid as its
    qualitative rung.
-5. The showcase figure set in `paper/iclr/figures/`, each with its sidecar, none violating the
+5. The showcase figure set in `writing/iclr/figures/`, each with its sidecar, none violating the
    ledger's standard.
 6. Experiments A, B and C judged against their pre-set null bars, with the tracking set frozen
    before any launch.

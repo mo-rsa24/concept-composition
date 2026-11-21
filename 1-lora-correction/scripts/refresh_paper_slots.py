@@ -28,7 +28,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
 SHEET = REPO / "1-lora-correction/report/paper-review/layout-sheet.md"
-PAPER = REPO / "paper/iclr-56173"
+PAPER = REPO / "writing/restoring-plurality-in-compositional-diffusion_overleaf"
 TEX_NAME = "iclr2027_conference.tex"
 REGISTER_NAME = "figures.md"
 # Built outside the cluster checkout: copying the paper into the checkout leaves untracked copies

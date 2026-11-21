@@ -45,7 +45,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 **The step-by-step difference between the Mono prediction and the PoE prediction, made explicit as
 the signal linear score composition omits.** ✅
 
-Quoted from the paper's abstract (`paper/iclr/iclr2027_conference.tex`): "the interaction term:
+Quoted from the paper's abstract (`writing/iclr/iclr2027_conference.tex`): "the interaction term:
 the per-step residual between the model's joint-prompt prediction and its product-of-experts
 prediction, which makes explicit the signal omitted by linear score composition." ✅
 
@@ -124,7 +124,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 | What | How it was established | When |
 |---|---|---|
-| The interaction term's definition | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
+| The interaction term's definition | Read in `writing/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | Its measured per-step and final values for one run | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/summary.json` | 2026-08-24 |
 | The window-vs-commitment-step finding | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 | 2026-08-24 |
 | The word "oracle" in older plan files, and what it names here | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |

@@ -6,13 +6,13 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex` lines 315 to 501 (section 5, Results, Limitations) |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex` lines 315 to 501 (section 5, Results, Limitations) |
 | Kind | manuscript section |
 | Grain | paragraph |
 | Cadence | sweep |
 | Current chunk | ¶16, "All runs use 50 DDIM steps" (appendix; walk otherwise paused at ¶21) |
 | Marks | 13 ok, 7 work, 4 move, 1 fuse, 3 cut or cut?, 0 changed |
-| Compiled | 2026-09-25: section 5, Results, Limitations, `app:loss-weight`, the macro block and four bib entries are in `paper/overleaf-iclr/iclr2027_conference.tex`. Builds with `pdflatex`, 16 pages, no errors, no undefined references or citations. |
+| Compiled | 2026-09-25: section 5, Results, Limitations, `app:loss-weight`, the macro block and four bib entries are in `writing/overleaf-iclr/iclr2027_conference.tex`. Builds with `pdflatex`, 16 pages, no errors, no undefined references or citations. |
 | Owner | this session |
 
 ## Table of contents
@@ -568,7 +568,7 @@ $w(\epsilon_J - \epsilon_a - \epsilon_b + \epsilon_\emptyset)$, which is `delta_
 **Still open.** `eq:poe-composition` defines a hatted symbol from raw predictions, the one place the
 convention does not hold. The figure carries a mockup banner and per-tile checkpoint tags until one
 run covers all four rows, and three CO3 cells and an object-and-object row are missing.
-`app:where-the-correction-acts` has no finding in `report/` behind it. `paper/overleaf-iclr/` is
+`app:where-the-correction-acts` has no finding in `report/` behind it. `writing/overleaf-iclr/` is
 untracked, so there is no undo. `environment/paper.md` says `pdflatex` is absent on this machine
 and it is present at `/usr/bin/pdflatex`.
 
@@ -626,7 +626,7 @@ Chunk 5 says the adapter sits on every cross-attention layer; the reported run (
 the cluster at `/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/`,
 gives `lora.rank 8`, `lora.alpha 8`, `target_modules ["attn2.to_q", "attn2.to_k", "attn2.to_v"]`,
 `optim AdamW lr 1e-4 grad_clip 1.0`, `sampler ddim 50 steps guidance 7.5 at 1024x1024 fp16`.
-`paper/iclr/figures.md:40` names the same run as the source of the held-out sample figure, so the
+`writing/iclr/figures.md:40` names the same run as the source of the held-out sample figure, so the
 section and its figure are the same adapter.
 
 Every number in chunk 4 and chunk 5 therefore checks out, and `alpha = rank` means the figure's
@@ -669,10 +669,10 @@ paper reports is the user's call, and nothing in the section is rewritten until 
 
 Navigation: ⬅️ [The run](#the-run-the-section-must-describe) | 📋 [TOC](#table-of-contents) | [Next](#routes-and-threads) ➡️
 
-**The paper still holds the 2026-09-17 render.** `paper/iclr/figures/` and
-`paper/overleaf-iclr/figures/` both hold md5 `ce095d9db716dcdc2dd2c52e2da0bf43` for
+**The paper still holds the 2026-09-17 render.** `writing/iclr/figures/` and
+`writing/overleaf-iclr/figures/` both hold md5 `ce095d9db716dcdc2dd2c52e2da0bf43` for
 `training-the-compositional-adapter.png`. The two folders are identical; the 2026-09-21 mtime on
-`paper/iclr/` is a copy, not a new render.
+`writing/iclr/` is a copy, not a new render.
 
 **A newer candidate exists outside the repo** and has been seen only as a screenshot. Against the
 render in the paper it fixes two things and breaks one.
@@ -715,7 +715,7 @@ SDXL and say nothing about why an adapter would do it:
 
 `Our other experiments point to causes for three of them. The grey render comes from an adapter trained far past its best checkpoint, by which point its weights have kept growing and its renders have drifted away from the joint-prompt target. The third animal and the horse match a separate test in which both prompts name the same animal: the plain product draws one animal and the adapter draws two. The adapter has therefore learned to produce two subjects, and neither its training loss nor a count of subjects checks which two. Subjects taking on each other's features is a documented failure of multi-subject generation on SDXL \citep{dahary2024bounded}.`
 
-Bib entry to add to `paper/overleaf-iclr/iclr2027_conference.bib`:
+Bib entry to add to `writing/overleaf-iclr/iclr2027_conference.bib`:
 
 ```bibtex
 @article{dahary2024bounded,
@@ -742,7 +742,7 @@ number. Invented people left out: the target drawing a person is filed at one se
 
 **2026-09-25, Figure 6 at full width.** Written to `iclr2027_conference.tex:418`, previous file kept as `iclr2027_conference.tex.bak-fig6`. `pdflatex` twice: no errors, no undefined references, 14 pages. Figure 5 on page 8, Figure 6 and the Conclusion on page 9, references begin at the foot of page 9.
 
-**2026-09-25, Figure 5 edits A to C.** Written to `paper/overleaf-iclr/iclr2027_conference.tex`, with the previous file kept as `iclr2027_conference.tex.bak-fig5` beside it because the folder is untracked. Applied to the file as it stood after a parallel session's appendix edits, each target matched exactly once. `pdflatex` twice: no errors, no undefined references, 14 pages (the appendix edits, not this change, took it from 15). Figure 5 on page 8, Conclusion on page 9, the 27-line wrap closes on the caption with no overlap and no gap.
+**2026-09-25, Figure 5 edits A to C.** Written to `writing/overleaf-iclr/iclr2027_conference.tex`, with the previous file kept as `iclr2027_conference.tex.bak-fig5` beside it because the folder is untracked. Applied to the file as it stood after a parallel session's appendix edits, each target matched exactly once. `pdflatex` twice: no errors, no undefined references, 14 pages (the appendix edits, not this change, took it from 15). Figure 5 on page 8, Conclusion on page 9, the 27-line wrap closes on the caption with no overlap and no gap.
 
 ## Next step
 

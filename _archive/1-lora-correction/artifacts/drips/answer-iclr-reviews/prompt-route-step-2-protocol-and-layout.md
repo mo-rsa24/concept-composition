@@ -15,10 +15,10 @@ plans/route-answer-the-iclr-reviews.md. Step 1 found that the paper's source is 
 export, not either local copy, and that Figure 5 mixes three adapters.
 
 Objectives
-1. Unpack _ICLR2027__LoRA_Plurality.zip into paper/iclr-56173/ and confirm it compiles unchanged.
+1. Unpack _ICLR2027__LoRA_Plurality.zip into writing/restoring-plurality-in-compositional-diffusion_overleaf/ and confirm it compiles unchanged.
 2. Write 1-lora-correction/report/paper-review/protocol.md with the rules every result must obey.
 3. Write 1-lora-correction/report/paper-review/layout-sheet.md with one row per new figure and table.
-4. Add a row per slot to paper/iclr-56173/figures.md and a placeholder at final size in its tex.
+4. Add a row per slot to writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md and a placeholder at final size in its tex.
 5. Write 1-lora-correction/scripts/refresh_paper_slots.py, which rebuilds a slot from its result file and compiles.
 
 What to read
@@ -28,16 +28,16 @@ What to read
   prze-11 beside it: the outcome lines this step and later steps must meet.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far", read whole.
 - environment/paper.md: how the paper builds here.
-- paper/iclr-56173/iclr2027_conference.tex lines 30 to 90 after unpacking: the placeholder colours
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/iclr2027_conference.tex lines 30 to 90 after unpacking: the placeholder colours
   and the \figurepanel macro already in the source.
-- paper/iclr-56173/figures.md: the figure register that ships with the export.
-- 56173_Restoring_plurality_in_c.pdf and paper/iclr-56173/Reviews.pdf at the repo root: the paper and the reviews.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md: the figure register that ships with the export.
+- 56173_Restoring_plurality_in_c.pdf and writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf at the repo root: the paper and the reviews.
 
 What is already known
 - The submitted source is the Overleaf export _ICLR2027__LoRA_Plurality.zip at the repo root. Its
   14 section titles equal the PDF's, and every sentence checked against the PDF was found in it
   (ground-check.md, section 3).
-- paper/iclr/ is an older draft from 2026-09-21. paper/overleaf-iclr/ is an Overleaf clone last
+- writing/iclr/ is an older draft from 2026-09-21. writing/overleaf-iclr/ is an Overleaf clone last
   pulled before submission, with uncommitted edits. Edit neither (ground-check.md).
 - The adapter of record is v58-03-self at step 50,000, W&B run qtk5gi37: 48 training pairs,
   1,000 epochs, trained on step indices 0 to 9 of 50 DDIM steps (prze-3a-pair-lists.md).
@@ -72,9 +72,9 @@ What is already known
   /home-mscluster/mmolefe/.local/bin/tectonic, and the first build on a node needs network
   (environment/paper.md). The laptop has no tectonic (which tectonic, checked 2026-11-10).
 - So every build runs on mscluster. First copy the folder there:
-  rsync -az paper/iclr-56173/ mscluster84:/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr-56173/
+  rsync -az writing/restoring-plurality-in-compositional-diffusion_overleaf/ mscluster84:/home-mscluster/mmolefe/Playground/PhD/concept-composition/writing/restoring-plurality-in-compositional-diffusion_overleaf/
 - Then build there:
-  scripts/cluster.sh sh "cd paper/iclr-56173 && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex"
+  scripts/cluster.sh sh "cd writing/restoring-plurality-in-compositional-diffusion_overleaf && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex"
 
 When something is missing
 - If the rsync or the build on mscluster fails, show the error and ask the user before trying
@@ -88,20 +88,20 @@ Rules
 - Run no GPU job on the cluster. The only cluster actions are the rsync and the Tectonic build.
 - Change no result file.
 - Edit no body text of the paper. Touch only slots, placeholders and the figure register.
-- Write the paper source only under paper/iclr-56173/. Do not touch paper/iclr/ or
-  paper/overleaf-iclr/.
+- Write the paper source only under writing/restoring-plurality-in-compositional-diffusion_overleaf/. Do not touch writing/iclr/ or
+  writing/overleaf-iclr/.
 - Push nothing to Overleaf. The user uploads the revised source when the paper is revised.
 - Show protocol.md and wait for a yes before the layout sheet.
 - Commit nothing until the user says so.
 
 What to hand back
 - 1-lora-correction/report/paper-review/protocol.md and 1-lora-correction/report/paper-review/layout-sheet.md.
-- New rows in paper/iclr-56173/figures.md, status reserved, each with its claim, layout and result
+- New rows in writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md, status reserved, each with its claim, layout and result
   file.
 - 1-lora-correction/scripts/refresh_paper_slots.py and the compile log showing the paper builds with every slot as
   a placeholder.
 - New rows in "What we know so far" in plans/route-answer-the-iclr-reviews.md, and a diff for any
-  later step whose prompt names paper/iclr/ as the source, applied after the user's yes.
+  later step whose prompt names writing/iclr/ as the source, applied after the user's yes.
 - Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
   python3 ~/.claude/skills/skill-route/scripts/board.py 1-lora-correction/report/paper-review/board.md --step 2
   redraws the board with the PRZE-8 and PRZE-9 lines ticked.

@@ -43,7 +43,7 @@ experiment set and the tests; this scope executes them.
         └───────┬──────┘            │ it compose?       │
                 ▼                   └────────┬─────────┘
         ┌─────────────────────────────────────────────┐
-        │ THE FIGURE WALL  (paper/iclr/figures/)      │
+        │ THE FIGURE WALL  (writing/iclr/figures/)      │
         │ amount · window overlay · transfer matrix · │
         │ counted joint-prompt · rank ablation        │
         └─────────────────────────────────────────────┘
@@ -111,7 +111,7 @@ question answered by measurement rather than by re-training folklore.
 
 ## Definition of Done
 1. The nine Goals above, each with its artifact or review-file verdict.
-2. Every showcase figure in `paper/iclr/figures/` carries a sidecar naming space, metric and
+2. Every showcase figure in `writing/iclr/figures/` carries a sidecar naming space, metric and
    mode per the ledger; wording rules obeyed (no "outperforms SDXL").
 3. ⚠️ W&B panels captured during runs via the wandb and Playwright MCPs and filed into the places
    `runbook/looking-at-what-a-run-produced/reading-a-training-run.md` keeps for screenshots, with healthy-shape captions

@@ -45,7 +45,7 @@ PAIRS_ROOT = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "pairs"
 # hundred KB and LaTeX has to reach it, so the "large artifacts to /datasets" rule
 # does not apply here. Names carry the register slot, so a file found on its own says
 # which slot it fills.
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = {"grid5": "compose-rate-as-correction-rises", "shared0": "compose-rate-as-correction-rises-with-a-random-control"}
 
 ROWS = ("oracle", "wrong_pair", "wrong_seed", "wrong_step")

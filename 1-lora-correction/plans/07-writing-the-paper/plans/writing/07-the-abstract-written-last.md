@@ -26,7 +26,7 @@ An abstract in the `.tex` that states the claim, the evidence, and the honest
 limit, inside the ICLR word budget.
 
 ## Environment Facts This Plan Depends On
-- The abstract goes in `paper/iclr/iclr2027_conference.tex`, in the existing
+- The abstract goes in `writing/iclr/iclr2027_conference.tex`, in the existing
   `\begin{abstract}` block (currently stock ICLR filler text). Build with
   Ctrl+Shift+P → Build with recipe → `tectonic`. See `environment/paper.md`,
   "Paper: where the LaTeX lives and how it is built".
@@ -67,6 +67,6 @@ limit, inside the ICLR word budget.
 
 ## Engagement Instructions
 ```bash
-cd paper/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
+cd writing/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
 grep -A5 "begin{abstract}" iclr2027_conference.tex   # expect real prose, not the stock text
 ```

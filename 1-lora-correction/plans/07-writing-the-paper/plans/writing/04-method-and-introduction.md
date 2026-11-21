@@ -28,7 +28,7 @@ of the paper's non-results prose. Serves DoD 6.
 Both sections present in the `.tex` as real prose, building to a PDF.
 
 ## Environment Facts This Plan Depends On
-- All prose goes in `paper/iclr/iclr2027_conference.tex`. The `.sty`, `.bst`,
+- All prose goes in `writing/iclr/iclr2027_conference.tex`. The `.sty`, `.bst`,
   and `natbib`/`fancyhdr` files are the ICLR distribution and are not edited.
   Check `math_commands.tex` before defining a macro; it likely exists already.
   See `environment/paper.md`, "Paper: where the LaTeX lives and how it is built".
@@ -58,7 +58,7 @@ Both sections present in the `.tex` as real prose, building to a PDF.
 ## Next
 
 1. `/draft-section method`: drafted from the design plans piece by piece, compiled into the tex
-   with the diff shown each time. The map lives in `paper/iclr/DRAFT_MAP.md` and survives
+   with the diff shown each time. The map lives in `writing/iclr/DRAFT_MAP.md` and survives
    session breaks.
 2. `/draft-section intro`, claim by claim against SPINE.md; its `cite` control pulls from the
    reading register and cues /paper-scout where the register is empty.
@@ -81,6 +81,6 @@ Both sections present in the `.tex` as real prose, building to a PDF.
 
 ## Engagement Instructions
 ```bash
-cd paper/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
+cd writing/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
 grep -c "section{Method\|section{Introduction" iclr2027_conference.tex   # expect 2
 ```

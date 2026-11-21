@@ -40,7 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair.experiments.interaction_term import window_grid as wg  # noqa: E402
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "samples-as-the-correction-runs-longer"
 
 PAIR = "a_cat__x__a_dog"

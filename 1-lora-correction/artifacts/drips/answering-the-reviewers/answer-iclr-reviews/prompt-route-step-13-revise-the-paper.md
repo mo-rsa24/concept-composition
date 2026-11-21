@@ -15,11 +15,11 @@ Background
 Submission 56173 got three reviews at ICLR 2027. Reviewer PrzE asked for scores on standard
 benchmarks, more baselines, the pair lists and more than two concepts. The earlier steps made the
 protocol, the held-out set, the scores, the corrector figure, the SD 1.5 set and the three-concept
-test. This step puts them in the paper. paper/iclr-56173/ is the working copy and the user uploads it to Overleaf.
-The repo is /home/molef/PhD/concept-composition and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
+test. This step puts them in the paper. writing/restoring-plurality-in-compositional-diffusion_overleaf/ is the working copy and the user uploads it to Overleaf.
+The repo is /home/molef/PhD/concept-composition and the manuscript map is writing/restoring-plurality-in-compositional-diffusion_overleaf/DRAFT_MAP.md.
 
 Objectives
-1. Confirm the page limit and the working copy (paper/iclr-56173/) from the call, the template and
+1. Confirm the page limit and the working copy (writing/restoring-plurality-in-compositional-diffusion_overleaf/) from the call, the template and
    the step 1 comparison.
 2. Apply the mechanical fixes and appendix tables as one diff, and show it for one yes.
 3. Draft the evaluation section, one sentence at a time with the user steering: one compact table
@@ -29,11 +29,11 @@ Objectives
    reviewer point.
 
 What to read
-- paper/iclr-56173/DRAFT_MAP.md and the working copy's tex: where each section stands.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/DRAFT_MAP.md and the working copy's tex: where each section stands.
 - 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
-- paper/iclr-56173/Reviews.pdf: the exact wording of every point being answered.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: the exact wording of every point being answered.
 - The manuscript voice and number rules in the memory notes, and environment/paper.md for the build.
 - 56173_Restoring_plurality_in_c.pdf: the submitted text, Sections 3 to 5 and Appendices A and B.
 
@@ -94,7 +94,7 @@ What is already known
 - Draft to supervisors Thursday 12 or Friday 13 November; OpenReview closes Wednesday 18.
 
 When something is missing
-- If paper/iclr-56173/ is missing or older than the Overleaf project, ask the user for a fresh
+- If writing/restoring-plurality-in-compositional-diffusion_overleaf/ is missing or older than the Overleaf project, ask the user for a fresh
   export zip from Overleaf and unpack it there.
 - If a result is missing for a slot, leave the placeholder and list the slot.
 - If the paper exceeds the page limit, move the least central material to the appendix and show the
@@ -108,7 +108,7 @@ Rules
 
 What to hand back
 - The revised tex in the working copy, committed locally, with the compiled PDF.
-- paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md: one line per edit, grouped by reviewer point.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md: one line per edit, grouped by reviewer point.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
 - Proof: the compile log shows no errors and the page count; the refresh script's check prints PASS;
   the board redraws with --step 13 ticking the PRZE-5 lines this step owns.

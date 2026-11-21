@@ -129,7 +129,7 @@ def _figure(by_direction: dict, out_dir: Path) -> None:
     scripts/shared/later_start_grid.py), the same role F4a plays for the fixed-width
     sweep. This curve is this experiment's F4b-equivalent: it backs the
     grids' caption with a number, but it is not itself shipped to
-    paper/iclr/figures, so it is written beside growing_window_curves.json
+    writing/iclr/figures, so it is written beside growing_window_curves.json
     instead.
     """
     import matplotlib

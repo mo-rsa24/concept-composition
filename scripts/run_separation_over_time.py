@@ -44,7 +44,7 @@ CROSS_FRAMES = (
     paths.resolve(paths.SAMPLES_AS_THE_WINDOW_MOVES_ONE_STEP_AT_A_TIME)
     / "pairs/a_cat__x__a_dog/seed_9"
 )
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "how-far-the-corrected-run-separates-from-the-uncorrected-one"
 
 NAMED = ("a_cat__x__a_dog", "an_elephant__x__a_penguin")

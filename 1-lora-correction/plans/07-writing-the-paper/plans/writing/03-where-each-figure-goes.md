@@ -26,7 +26,7 @@ scopes. Without it, the figure work is prioritised by whatever finishes first
 rather than by what the paper needs. Serves DoD 5.
 
 ## Goal
-The register `paper/iclr/figures.md` already holds the eight reserved places with claims and
+The register `writing/iclr/figures.md` already holds the eight reserved places with claims and
 owners. This plan's product is the LAYOUT on top of it: a section per reserved place, main text
 against appendix within the page limit, and the owed rows ordered into the run order the result
 scopes follow.
@@ -76,6 +76,6 @@ scopes follow.
 
 ## Engagement Instructions
 ```bash
-cat paper/iclr/FIGURES.md      # expect one row per slot: claim, section, owner, have-it/owed
-grep -c "owed" paper/iclr/FIGURES.md    # expect a nonzero count, each with a named run
+cat writing/iclr/FIGURES.md      # expect one row per slot: claim, section, owner, have-it/owed
+grep -c "owed" writing/iclr/FIGURES.md    # expect a nonzero count, each with a named run
 ```

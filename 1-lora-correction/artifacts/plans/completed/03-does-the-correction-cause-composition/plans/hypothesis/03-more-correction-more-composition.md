@@ -316,7 +316,7 @@ A design task either happened or it did not. Whether the experiment worked is a 
 |-----------|--------|----------|---------------|
 | Curves (quantitative) | ✓ Ready | `outputs/interaction_term/dose/dose_curves.{json,png}` | Compose rate vs λ, three lines (real, random, wrong pair) |
 | Grid (qualitative) | ✓ Ready | `1-lora-correction/scripts/dose_strip.py` output, copied to figure location | 3×5 grid of real generated pictures, one row per injection type, one column per λ, same pair and seed |
-| Combined figure | ⏳ Awaiting F2 layout decision | F2's reserved place, `paper/iclr/figures/` | Curves above or beside grid, caption finalized once scoring cutoff is set |
+| Combined figure | ⏳ Awaiting F2 layout decision | F2's reserved place, `writing/iclr/figures/` | Curves above or beside grid, caption finalized once scoring cutoff is set |
 
 **Supporting artifacts:**
 - W&B run: `prime_lab/poe-repair-animals-compose` project, a log of all 480 generated pictures with triptychs (Mono, PoE, corrected)

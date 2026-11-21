@@ -19,7 +19,7 @@ dropped rather than redrawn empty.
 | poe-composition-diffusion | 1 document | `context/world/poe-composition.md`, on the words that describe combining two single-concept predictions |
 | diffusion-speciation-dynamics | 1 document | scope 05's master plan, on where trajectories visibly diverge |
 | trajectory-manifold-by-hand | 1 document | scope 01's figure-assembly plan, on the shared plane |
-| poe-derivation-foundations | 1 document | `paper/iclr/DRAFT_MAP.md`, a paper-scout selection record, not the standing literature scope |
+| poe-derivation-foundations | 1 document | `writing/iclr/DRAFT_MAP.md`, a paper-scout selection record, not the standing literature scope |
 
 19 links in total, and every one resolves to a file on disk. The four single-link journeys are
 grouped into one cluster in the subject lane below, per the format's cap on pieces per lane;
@@ -134,7 +134,7 @@ Exclusions: no step-by-step content of any journey, no red, no logos, no shelf.
 Faithfulness note: 5 threads into the left ladder, 5 into the middle, 4 into the right, and 5 into
 the grouped cluster (1, 1, 1, and 2 for poe-derivation-foundations): 19 threads total, matching the
 coverage table exactly. Nothing is bundled to make a round number; poe-derivation-foundations
-genuinely carries two links from one document, `paper/iclr/DRAFT_MAP.md`, a paper-scout selection
+genuinely carries two links from one document, `writing/iclr/DRAFT_MAP.md`, a paper-scout selection
 record rather than the standing literature scope.
 
 ### Subject capstone: The whole weave

@@ -89,7 +89,7 @@ Forty renders, each decoded and scored.
 
 **Associated materials.** [The review questions](../../review/04-does-the-corrector-compose-in-the-same-window.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md), and the figure this one is
-matched against, `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`.
+matched against, `writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`.
 
 ## Considerations
 
@@ -208,7 +208,7 @@ attribution is not.
    `FIDELITY_MAX_COMPOSE_LOSS_SEEDS`.
 
 Figure to
-`paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`,
+`writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`,
 with its `.json` sidecar. The `mcmc/` subfolder is where every corrector figure in this scope
 files, because the folder's own `README.md` splits the timing question by which composition rule
 supplied the term.
@@ -240,7 +240,7 @@ be compared at the same moments of the run.
   `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/`, with a disk guard on
   `/datasets`, the filesystem actually written to, per
   [environment/storage.md](../../../../../environment/storage.md). Only the finished figure and its
-  sidecar go into the repo, under `paper/iclr/figures/`.
+  sidecar go into the repo, under `writing/iclr/figures/`.
 - biggpu allows one job per user, so this runs under `nohup` outside Slurm and `squeue` is
   blind to it. Harvest by `pgrep` on the session node, per
   [environment/hpc/execution-protocol.md](../../../../../environment/hpc/execution-protocol.md).
@@ -278,8 +278,8 @@ be compared at the same moments of the run.
       green border encodes.
 
     ```bash
-    ls -l paper/iclr/figures/when-the-correction-arrives/poe/
-    sed -n '1,60p' paper/iclr/figures/when-the-correction-arrives/README.md
+    ls -l writing/iclr/figures/when-the-correction-arrives/poe/
+    sed -n '1,60p' writing/iclr/figures/when-the-correction-arrives/README.md
     ```
 
   - **Done when:** the four layout facts are quoted in this plan's review file, so a mismatch later
@@ -305,7 +305,7 @@ and record that it was run against a flat curve.
     border where the detector scored composed. Column labels name the window in plain words on the
     axis ("steps 0 to 10") rather than in a legend.
   - Figure to
-    `paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`,
+    `writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`,
     with its `.json` sidecar recording every render, the seeds, `k`, `c` and the border rule.
   - Add the entry to that folder's `README.md` naming the algorithm and what produced it.
   - **Done when:** the PNG, the sidecar and the README entry all exist.
@@ -313,8 +313,8 @@ and record that it was run against a flat curve.
       where the folder's own README says it should.
 
     ```bash
-    ls paper/iclr/figures/when-the-correction-arrives/poe/ \
-       paper/iclr/figures/when-the-correction-arrives/mcmc/
+    ls writing/iclr/figures/when-the-correction-arrives/poe/ \
+       writing/iclr/figures/when-the-correction-arrives/mcmc/
     ```
 
   - The injected-correction figures live in `poe/` and the corrector's in `mcmc/`, because the
@@ -448,8 +448,8 @@ them.
 ◀ **Needs: [task 1.2](#1--generate-the-ten-window-columns)**, the new figure.
 
 - [x] **2.1** Open both figures next to each other.
-  - `paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`
-  - `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`
+  - `writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`
+  - `writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`
   - Expected result: two grids with identical rows and columns, differing only in what was switched
     on inside the window.
   - ❌ If the layouts differ in any of the four facts recorded at task 0.3, the comparison is not
@@ -507,7 +507,7 @@ pgrep -af 'corrector|window'          # squeue is blind to this
 $PY -c "import json;d=json.load(open('$OUT/window_curves_mcmc.json'));print(len(d['cells']),'cells')"
 # expect 4 seeds x 10 columns = 40 cells
 
-ls -l paper/iclr/figures/when-the-correction-arrives/mcmc/
+ls -l writing/iclr/figures/when-the-correction-arrives/mcmc/
 ```
 
 **Pass criteria**
@@ -557,7 +557,7 @@ which disagrees with the eye on this pair often enough that the eye count is quo
 ### Organization workflow
 
 1. Generate the ten columns, which writes the scored grid under `/datasets`.
-2. Draw the figure into `paper/iclr/figures/when-the-correction-arrives/mcmc/` with its sidecar.
+2. Draw the figure into `writing/iclr/figures/when-the-correction-arrives/mcmc/` with its sidecar.
 3. Add the entry to that folder's `README.md`.
 
 ## Orchestration: keeping catalogs and plan files in sync
@@ -585,7 +585,7 @@ which disagrees with the eye on this pair often enough that the eye count is quo
 |---|---|
 | [1-lora-correction/scripts/interaction_term_window.py](../../../../scripts/interaction_term_window.py) | the injected-correction window run this plan mirrors, with its nine positions, its seeds, and its scored-grid format |
 | `poe_repair/composers/poe_langevin.py` | the composer from [step 25](../tools/02-the-corrector-and-the-step-size-it-runs-at.md), whose `corrector_window` argument is what this plan slides |
-| `paper/iclr/figures/when-the-correction-arrives/README.md` | the folder's own rule for which subfolder a figure lands in, and the exact green-border rule quoted into captions |
+| `writing/iclr/figures/when-the-correction-arrives/README.md` | the folder's own rule for which subfolder a figure lands in, and the exact green-border rule quoted into captions |
 
 ## Next step
 

@@ -6,13 +6,13 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex` lines 127 to 163, `\section{Introduction}` up to `\section{Background and Related Work}` |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex` lines 127 to 163, `\section{Introduction}` up to `\section{Background and Related Work}` |
 | Kind | manuscript section |
 | Grain | paragraph |
 | Cadence | sweep |
 | Current chunk | walk complete and compiled; the sentence introducing the contributions rewritten 2026-09-25 |
 | Marks | 3 ok, 7 changed, 3 cut, 0 still to settle |
-| Compiled | 2026-09-22, the whole introduction, into `paper/overleaf-iclr/` only |
+| Compiled | 2026-09-22, the whole introduction, into `writing/overleaf-iclr/` only |
 | Owner | this session |
 
 ## Table of contents
@@ -35,7 +35,7 @@ Navigation: ⬅️ [Position](#position-in-the-walk) | 📋 [TOC](#table-of-cont
 **What is being proofread**
 
 The introduction of the ICLR 2027 submission, in the copy that came down from Overleaf on
-2026-09-21. The same text now sits in `paper/iclr/iclr2027_conference.tex`, so a compile has two
+2026-09-21. The same text now sits in `writing/iclr/iclr2027_conference.tex`, so a compile has two
 possible targets and the walk has to name one.
 
 **Why this pass is happening**
@@ -119,7 +119,7 @@ now: `Measuring $r_t$ requires the joint prompt, which is available during train
 
 Navigation: ⬅️ [Accepted](#accepted-not-yet-written) | 📋 [TOC](#table-of-contents) | [Next](#figures) ➡️
 
-Released after the compile. The pre-walk text is commit `e793c5e` in `paper/overleaf-iclr/`.
+Released after the compile. The pre-walk text is commit `e793c5e` in `writing/overleaf-iclr/`.
 
 ## Figures
 
@@ -127,7 +127,7 @@ Navigation: ⬅️ [Originals held](#originals-held) | 📋 [TOC](#table-of-cont
 
 | Figure | Image file | Opened | What to change | Slot decided |
 |---|---|---|---|---|
-| 1 | `paper/overleaf-iclr/figures/where-the-product-lands-on-the-manifold-seed12-surface.png` | yes | nothing; kept as drawn. The caption no longer says the surface is drawn rather than measured, which is the author's decision | top of page 1, unchanged |
+| 1 | `writing/overleaf-iclr/figures/where-the-product-lands-on-the-manifold-seed12-surface.png` | yes | nothing; kept as drawn. The caption no longer says the surface is drawn rather than measured, which is the author's decision | top of page 1, unchanged |
 
 ## Open questions on the text
 
@@ -148,7 +148,7 @@ Navigation: ⬅️ [Figures](#figures) | 📋 [TOC](#table-of-contents) | [Next]
 - [ ] ⚠️ **Does the motivation sentence live in the opening or in chunk 12?** (blocks chunks 2 and 12)
       Both would cite `du2024compositional` for the same point.
 - [ ] ⚠️ **Which file does `compile` write to?** (blocks the compile, not the walk) The clone at
-      `paper/overleaf-iclr/` is what pushes to Overleaf; `paper/iclr/` is what this repo tracks.
+      `writing/overleaf-iclr/` is what pushes to Overleaf; `writing/iclr/` is what this repo tracks.
       They hold identical text right now.
 - [ ] ⚠️ **Is the gap named in chunk 8 meant to be the gap to the true joint model, or the gap
       between the two predictions one network makes?** (blocks chunk 8) Line 271 of the same file
@@ -167,7 +167,7 @@ Navigation: ⬅️ [Routes and threads](#routes-and-threads) | 📋 [TOC](#table
 
 | When | Chunks written | Build | Notes |
 |---|---|---|---|
-| 2026-09-22 | 2 to 13 and the Figure 1 caption, one hunk at lines 129 to 165 of `paper/overleaf-iclr/iclr2027_conference.tex` | passed, pdflatex and bibtex on the laptop, no errors, no undefined references or citations | 12 pages before, 11 after, both built the same way; the conclusion moves from page 11 to 10. `paper/iclr/` not written. Not committed in the clone, not pushed to Overleaf |
+| 2026-09-22 | 2 to 13 and the Figure 1 caption, one hunk at lines 129 to 165 of `writing/overleaf-iclr/iclr2027_conference.tex` | passed, pdflatex and bibtex on the laptop, no errors, no undefined references or citations | 12 pages before, 11 after, both built the same way; the conclusion moves from page 11 to 10. `writing/iclr/` not written. Not committed in the clone, not pushed to Overleaf |
 | 2026-09-25 | the score identity at line 158, displayed and unnumbered | passed, pdflatex twice, no errors, no undefined references | 14 pages before and after; page 2 checked by eye, even spacing. Pre-edit file kept in the session scratchpad as `iclr2027_conference.tex.bak-eq`, not in the clone. Not committed |
 | 2026-09-25 | contribution bullet 3 at line 174 | passed, pdflatex twice, no errors, no undefined references | 14 pages, the bullet still three lines on page 2. Pre-edit file in the session scratchpad as `iclr2027_conference.tex.bak-bullet3`. Not committed |
 | 2026-09-25 | the sentence introducing the contributions at line 170 | passed, pdflatex twice, no errors, no undefined references | 14 pages. Pre-edit file in the session scratchpad as `iclr2027_conference.tex.bak-leadin`. Not committed |
@@ -177,6 +177,6 @@ Navigation: ⬅️ [Routes and threads](#routes-and-threads) | 📋 [TOC](#table
 Navigation: ⬅️ [Compile log](#compile-log) | 📋 [TOC](#table-of-contents)
 
 The introduction is compiled into the Overleaf clone and builds. Owed: commit and push it to
-Overleaf from the cluster (the laptop has no Overleaf token), decide whether `paper/iclr/` gets the
+Overleaf from the cluster (the laptop has no Overleaf token), decide whether `writing/iclr/` gets the
 same text, and settle the open questions above (the failed object's four names, the double \"we
 show that\", the split Bradley and CO3 keys).

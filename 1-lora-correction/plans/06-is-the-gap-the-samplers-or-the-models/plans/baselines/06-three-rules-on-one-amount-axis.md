@@ -100,7 +100,7 @@ four rows by five columns, `λ ∈ {0, 0.25, 0.5, 0.75, 1}` at seed 9. Thirty-si
 
 **Associated materials.** [The review questions](../../review/06-three-rules-on-one-amount-axis.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md), and
-[F5, the existing one-dial figure](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png)
+[F5, the existing one-dial figure](../../../../../writing/iclr/figures/F5-one-dial-three-instruments.png)
 whose `λ=0.75` this grid reuses.
 
 ## Considerations
@@ -123,7 +123,7 @@ and the difference is settled before the captions are written rather than after.
 
 **These figures are about how much is added, so they do not go in the timing folder.**
 
-They file under `paper/iclr/figures/how-much-is-added/across-composition-rules/`. The folder
+They file under `writing/iclr/figures/how-much-is-added/across-composition-rules/`. The folder
 `when-the-correction-arrives/` asks a question about timing, and one of these grids filed there
 would be answering the wrong question by its own path.
 
@@ -226,13 +226,13 @@ something beyond combining scores.
    `r_t^M = eps_J - eps_M`. Four rows: plain product-of-experts with `r_t`, SuperDiff with
    `r_t^SD`, the corrector at `k=1` with `r_t^(1)`, and the corrector at `k=5` with `r_t^(5)`.
 2. **Grid one.** Columns are seeds 9 to 12, `λ` fixed at 0.75, the value
-   [F5](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at. Render the
+   [F5](../../../../../writing/iclr/figures/F5-one-dial-three-instruments.png) already reads at. Render the
    same grid at `λ=0` in the same pass, which gives the methods-alone figure for free.
 
-   <a href="../../../../paper/iclr/figures/F5-one-dial-three-instruments.png"><img src="../../../../paper/iclr/figures/F5-one-dial-three-instruments.png" width="200" alt="Three panels against λ from 0 to 1 for the pair's own r_t, another pair's r_t and a random vector of the same size: position in image space from PoE to Mono, the share called two animals, and agreement with the step"></a>
+   <a href="../../../../writing/iclr/figures/F5-one-dial-three-instruments.png"><img src="../../../../writing/iclr/figures/F5-one-dial-three-instruments.png" width="200" alt="Three panels against λ from 0 to 1 for the pair's own r_t, another pair's r_t and a random vector of the same size: position in image space from PoE to Mono, the share called two animals, and agreement with the step"></a>
 3. **Grid two.** Columns are `λ ∈ {0, 0.25, 0.5, 0.75, 1}`, seed fixed at 9.
 
-Both figures land in `paper/iclr/figures/how-much-is-added/across-composition-rules/`, each with a
+Both figures land in `writing/iclr/figures/how-much-is-added/across-composition-rules/`, each with a
 `.json` sidecar and a `README.md` entry naming which rule produced which row.
 
 ## Purpose and goal
@@ -337,7 +337,7 @@ because it changes what every picture is.
       the picture itself rather than in a legend or a caption.
   - **Done when:** the two corrector rows' `λ=1` pictures carry the label in the rendered figure.
 - [ ] **2.4** Draw both figures into
-      `paper/iclr/figures/how-much-is-added/across-composition-rules/`, not into the timing folder.
+      `writing/iclr/figures/how-much-is-added/across-composition-rules/`, not into the timing folder.
   - `rules-at-one-dose.png` from grid one, `rules-as-the-dose-rises.png` from grid two.
   - Each carries a `.json` sidecar recording rows, seeds, `λ` values, the `k` and `c` of the
     corrector rows, the delivered absolute amount per row, and the border rule.
@@ -411,7 +411,7 @@ $PY -c "import json;d=json.load(open('$DR/grid_one/cells.json'));print(len(d['ce
 $PY -c "import json;d=json.load(open('$DR/grid_two/cells.json'));print(len(d['cells']),'cells')"
 # expect 4 rows x 5 lambda = 20
 
-ls -l paper/iclr/figures/how-much-is-added/across-composition-rules/
+ls -l writing/iclr/figures/how-much-is-added/across-composition-rules/
 ```
 
 **Pass criteria**
@@ -464,7 +464,7 @@ off the joint trajectory.
 ### Organization workflow
 
 1. Render both grids under `/datasets`.
-2. Draw both figures into `paper/iclr/figures/how-much-is-added/across-composition-rules/`, each
+2. Draw both figures into `writing/iclr/figures/how-much-is-added/across-composition-rules/`, each
    with its `.json` sidecar.
 3. Add a `README.md` entry per figure naming which rule produced which row.
 
@@ -496,7 +496,7 @@ off the joint trajectory.
 | [poe_repair/composers/poe.py](../../../../../poe_repair/composers/poe.py) | the plain product-of-experts row, and the interface all four rows share |
 | `poe_repair/composers/poe_langevin.py` | the two corrector rows, at `k=1` and `k=5` |
 | `poe_repair/composers/superdiff.py` | the SuperDiff row and its per-step prediction, from [step 28](05-what-changes-when-superdiff-leaves-its-own-defaults.md) |
-| [paper/iclr/figures/F5-one-dial-three-instruments.png](../../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) | the existing one-dial figure, whose `λ=0.75` grid one reuses so the two are comparable |
+| [writing/iclr/figures/F5-one-dial-three-instruments.png](../../../../../writing/iclr/figures/F5-one-dial-three-instruments.png) | the existing one-dial figure, whose `λ=0.75` grid one reuses so the two are comparable |
 
 ## Next step
 

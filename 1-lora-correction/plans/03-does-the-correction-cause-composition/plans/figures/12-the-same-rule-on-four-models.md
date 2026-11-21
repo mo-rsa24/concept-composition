@@ -8,7 +8,7 @@ several models, where the current one shows two pairs on SDXL only.
 ## Recommended prompt (after this plan completes)
 
 ```
-/drip-proofread resume 1-lora-correction/artifacts/drips/proofreading-the-paper/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
+/drip-proofread resume 1-lora-correction/artifacts/drips/proofreading-the-paper/proofread-section-3/PROOF_MAP.md at chunk 11, with the new Figure 2 at writing/overleaf-iclr/figures/same-rule-on-four-models.pdf
 ```
 
 ## Recommended skill
@@ -87,7 +87,7 @@ cat × dog      [img] [img]     ...
   PoE on the right.
 - **Data:** the PNGs under `/datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models/`, one
   `meta.json` per image carrying [model id](../../../../../context/data/02-dictionary.md#model_id), sampler, steps, guidance, resolution, seed and prompts.
-- **Output:** `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf`, full text width.
+- **Output:** `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf`, full text width.
 
 ## What we expect before rendering
 
@@ -224,7 +224,7 @@ column's setting here.
   - Done when: `scripts/cluster.sh jobs` no longer lists the job and the log ends in `=== done`.
 - [x] **2.2** Pull the renders and draw the grid.
   - Command: `scripts/cluster.sh pull outputs/same_rule_four_models`, then copy
-    `outputs/same_rule_four_models/seed-42.pdf` to `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf`.
+    `outputs/same_rule_four_models/seed-42.pdf` to `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf`.
     The job draws the sheet on the cluster.
   - Done when: the job log's `[sheet]` line says `missing 0 of 24`.
 - [x] **2.3** Read every seed-42 cell against the table in
@@ -250,7 +250,7 @@ column's setting here.
 
 ◀ **Needs: [task 2.3](#2--render-and-draw)**.
 
-- [ ] **3.1** Open `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf` in VS Code's PDF
+- [ ] **3.1** Open `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf` in VS Code's PDF
       viewer and zoom to 200%.
   - Read the row labels on the left and the model names across the top without looking anywhere
     else. If either needs the caption to make sense, note which one.
@@ -265,7 +265,7 @@ column's setting here.
 OUT=/datasets/mmolefe/poe_repair_min/outputs/same_rule_four_models
 scripts/cluster.sh sh "find $OUT -name '*.png' | wc -l"        # 24
 scripts/cluster.sh sh "cat $OUT/sd35/a_cat__x__a_dog/seed_42/poe.json"   # steps 40, guidance 4.5, rule velocities
-ls -la paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
+ls -la writing/overleaf-iclr/figures/same-rule-on-four-models.pdf
 ```
 
 **Pass criteria**
@@ -289,7 +289,7 @@ ls -la paper/overleaf-iclr/figures/same-rule-on-four-models.pdf
 
 | Figure | File | What it shows | Status |
 |---|---|---|---|
-| Figure 2, main text | `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf` | three pairs by four models, joint and PoE per cell, seed 42 | drawn 2026-09-22 (jobs 58176, 58190) |
+| Figure 2, main text | `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf` | three pairs by four models, joint and PoE per cell, seed 42 | drawn 2026-09-22 (jobs 58176, 58190) |
 
 ## Code references
 

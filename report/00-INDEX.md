@@ -264,7 +264,7 @@ rewritten before the paper may use their result.
       `decision-timeline.md` is a narrative of decisions in order, which the format files under
       the plan tree's history (`CHANGELOG.md` or `artifacts/notes/`), and
       `paper-evidence-index.md` is the manuscript's figure register, which belongs beside
-      `paper/iclr/figures.md`. Both carry inbound links from plans, context and the archive, so
+      `writing/iclr/figures.md`. Both carry inbound links from plans, context and the archive, so
       the move is a `tidy-repo` pass with a `RENAMES.md` row each, not a quiet relocation.
 - [ ] The dose-response result (root step 4), the transfer result (root step 10) and the
       three-sides result (root step 7) have review verdicts and figures under

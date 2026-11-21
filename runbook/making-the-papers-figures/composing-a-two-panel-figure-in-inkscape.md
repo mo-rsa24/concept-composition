@@ -4,7 +4,7 @@ For putting two grid panels side by side under one caption, and exporting a PDF 
 cleanly in the ICLR template. Written for someone who has never opened Inkscape.
 
 Worked example throughout: the two correction-window grids in
-[the paper's figure folder](../../paper/iclr/figures/when-the-correction-arrives/poe/).
+[the paper's figure folder](../../writing/iclr/figures/when-the-correction-arrives/poe/).
 
 ## Read this before you start
 
@@ -16,7 +16,7 @@ export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
     scripts/when_the_correction_arrives.py
 ```
 
-That writes `paper/iclr/figures/when-the-correction-arrives/when-the-correction-arrives.pdf`,
+That writes `writing/iclr/figures/when-the-correction-arrives/when-the-correction-arrives.pdf`,
 5.50 x 2.80 inches. The paper includes it as a `[t]` float.
 
 **What is on the figure, and what the caption carries instead.**
@@ -98,7 +98,7 @@ Both grids are drawn by scripts, not by hand.
 ```bash
 export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
 PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
-OUT=paper/iclr/figures/when-the-correction-arrives/poe
+OUT=writing/iclr/figures/when-the-correction-arrives/poe
 
 $PY 1-lora-correction/scripts/longer_correction_grid.py \
     --bare --panel-width 2.60 --dpi 600 \
@@ -166,7 +166,7 @@ decide to skip Inkscape.
 Inkscape is not installed on the cluster. You do this part locally.
 
 ```bash
-scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition/paper/iclr/figures/when-the-correction-arrives/poe/panel-*.pdf .
+scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition/writing/iclr/figures/when-the-correction-arrives/poe/panel-*.pdf .
 ```
 
 ---

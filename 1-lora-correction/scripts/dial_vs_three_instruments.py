@@ -43,7 +43,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 CACHE = paths.resolve(paths.CACHE_ANALYSES)
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "F5-one-dial-three-instruments"
 
 # The same colours F2 gives these three injected vectors, so a reader who has

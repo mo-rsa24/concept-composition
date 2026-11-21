@@ -84,7 +84,7 @@ Before starting those fifteen trainings, we need to know *while a run is trainin
 - **Procedures:** (if any; add link here)
 - **Assets/outputs:** Saved to `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/live_curves_smoke_run/` (large artifacts live on `/datasets`, never under the repo)
   - **Figure organization:** Use [figure-coverage-prompt.md](../../../../../plans/diagrams/figure-coverage-prompt.md) to scan the repo, rename all related figures to the step-09 naming convention, and consolidate them into `outputs/interaction_term/live_curves_smoke_run/figures/`. This prompt will generate a FIGURE_CATALOG.md that maps each figure to axes, meaning, and original location.
-  - **Locations scanned:** `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `paper/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders
+  - **Locations scanned:** `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`, `outputs/interaction_term/`, `writing/iclr/figures/`, ``artifacts/notes/` items (formerly `/show-me`), results/ folders
 
 For the full picture, see the [repo MASTER_PLAN.md](../../../../../MASTER_PLAN.md) and [hypothesis-01](../../../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/07-what-the-fix-changes-inside-the-model.md).
 

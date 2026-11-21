@@ -46,7 +46,7 @@ Navigation: ⬅️ [The output, concretely](#the-output-concretely) | 📋 [TOC]
 
 The images, compose rates, and trajectory figures feed a set of named figures tracked in
 `MASTER_PLAN.md`'s paper table (steps 13 and 14) and written up into the ICLR 2027 submission at
-`paper/iclr/`. A figure's own reasoning lives beside the plan that owns it, never copied into this
+`writing/iclr/`. A figure's own reasoning lives beside the plan that owns it, never copied into this
 folder (see [Cross-linking](../00-INDEX.md) in the format this folder follows).
 
 **The plan tree's verdicts.** ✅

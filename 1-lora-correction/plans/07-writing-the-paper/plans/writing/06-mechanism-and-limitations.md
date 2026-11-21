@@ -28,7 +28,7 @@ The mechanism section (or its negative paragraph) and the three caveats present
 in the `.tex`, with both pressure-test verdicts reflected in the wording.
 
 ## Environment Facts This Plan Depends On
-- The section and caveats go in `paper/iclr/iclr2027_conference.tex`; build with
+- The section and caveats go in `writing/iclr/iclr2027_conference.tex`; build with
   Ctrl+Shift+P → Build with recipe → `tectonic`. See `environment/paper.md`,
   "Paper: where the LaTeX lives and how it is built".
 - Blocked on `does-the-correction-cause-composition/plans/hypothesis-01-what-the-fix-changes-inside-the-model.md`. Its verdict
@@ -86,7 +86,7 @@ in the `.tex`, with both pressure-test verdicts reflected in the wording.
 ## Engagement Instructions
 ```bash
 ls docs/pressure_tests/                              # expect two dated verdicts
-grep -c "mechanism" paper/iclr/iclr2027_conference.tex   # expect the section present
+grep -c "mechanism" writing/iclr/iclr2027_conference.tex   # expect the section present
 ```
 Manual check, by eye: read the mechanism section next to plan 02's verdict note.
 Does the section claim more than the verdict supports? That comparison is the

@@ -4,17 +4,17 @@ The paper exists in three places and they do not update each other. This file is
 edits between them by hand: pulling what you typed in the Overleaf editor down into the repo,
 sending a repo-side edit back up, and rebuilding the upload zip when the git route is not the
 one you want. It does not cover writing the paper (that is `/drip-write` and
-[the draft map](../paper/iclr/DRAFT_MAP.md)) or building the PDF locally, which needs the
+[the draft map](../writing/iclr/DRAFT_MAP.md)) or building the PDF locally, which needs the
 Tectonic facts in [the paper environment file](../environment/paper.md), since no system LaTeX
 exists on this cluster.
 
 ## Words this file uses
 
-- **The repo copy**: `paper/iclr/`, the folder this repository tracks and commits. Everything
+- **The repo copy**: `writing/iclr/`, the folder this repository tracks and commits. Everything
   else in the project links into it: figures, the draft map, the spine.
-- **The Overleaf clone**: `paper/overleaf-iclr/`, a second, separate git repository whose
+- **The Overleaf clone**: `writing/overleaf-iclr/`, a second, separate git repository whose
   `origin` is Overleaf itself. The outer repository does not track it.
-- **The bundle**: `paper/iclr-overleaf-slim.zip`, a snapshot of the repo copy made for uploading
+- **The bundle**: `writing/iclr-overleaf-slim.zip`, a snapshot of the repo copy made for uploading
   into a fresh Overleaf project. The route that predates the clone.
 
 ## Table of contents
@@ -37,17 +37,17 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 
 - [ ] 🖥️ **The Overleaf clone is there and points at the right project.**
   ```bash
-  git -C paper/overleaf-iclr remote -v
+  git -C writing/overleaf-iclr remote -v
   ```
   ✅ **`origin  https://git@git.overleaf.com/6a86dc92ca15fe47d75b86f6`** for fetch and push. That
   hash is the Overleaf project id, the same one in the editor's URL.
   ❌ **`not a git repository`**: the clone is gone. Recreate it with
-  `git clone https://git@git.overleaf.com/6a86dc92ca15fe47d75b86f6 paper/overleaf-iclr`, which
+  `git clone https://git@git.overleaf.com/6a86dc92ca15fe47d75b86f6 writing/overleaf-iclr`, which
   asks for the Overleaf git token as the password.
 
 - [ ] 🖥️ **Your Overleaf token is stored, so no pull prompts for a password.**
   ```bash
-  git -C paper/overleaf-iclr config --get credential.helper && grep -c overleaf ~/.git-credentials
+  git -C writing/overleaf-iclr config --get credential.helper && grep -c overleaf ~/.git-credentials
   ```
   ✅ **`store`** then **`1`**. The token sits in `~/.git-credentials`, mode 600.
   ❌ **`0`**: the next pull will prompt. The password is an Overleaf git token from Account
@@ -59,9 +59,9 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 | Place | What is in it | Who writes it | Watch out |
 |---|---|---|---|
-| `paper/iclr/` | the tracked copy: tex, bib, every figure, the writing notes | this repo, and you through Claude | a pull into the clone does not reach it; §1 copies across |
-| `paper/overleaf-iclr/` | tex, bib, the style files, only the figures the tex includes | Overleaf, when you type in the editor | its working tree is dirty in a deleting direction; see §3 |
-| `paper/iclr-overleaf-slim.zip` | a snapshot for uploading a new project | `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` | stale the moment either side moves |
+| `writing/iclr/` | the tracked copy: tex, bib, every figure, the writing notes | this repo, and you through Claude | a pull into the clone does not reach it; §1 copies across |
+| `writing/overleaf-iclr/` | tex, bib, the style files, only the figures the tex includes | Overleaf, when you type in the editor | its working tree is dirty in a deleting direction; see §3 |
+| `writing/iclr-overleaf-slim.zip` | a snapshot for uploading a new project | `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` | stale the moment either side moves |
 
 The clone holds a subset on purpose: it has no `DRAFT_MAP.md`, no `SPINE.md`, no reference PDFs,
 and only the figures the manuscript actually includes.
@@ -77,7 +77,7 @@ map live.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
-git -C paper/overleaf-iclr pull
+git -C writing/overleaf-iclr pull
 ```
 
 ✅ **A fast-forward naming the files Overleaf changed:**
@@ -100,21 +100,21 @@ Then copy what came down into the repo copy, file by file, only for the files th
 touched:
 
 ```bash
-cp paper/overleaf-iclr/iclr2027_conference.tex paper/iclr/iclr2027_conference.tex
-git status --short paper/iclr/
+cp writing/overleaf-iclr/iclr2027_conference.tex writing/iclr/iclr2027_conference.tex
+git status --short writing/iclr/
 ```
 
-✅ **` M paper/iclr/iclr2027_conference.tex`**, ready for you to read the diff (§2) and commit.
+✅ **` M writing/iclr/iclr2027_conference.tex`**, ready for you to read the diff (§2) and commit.
 
 **Check the repo copy was clean before you overwrote it.** Run `git status --short
-paper/iclr/iclr2027_conference.tex` first: an empty answer means nobody edited it here since the
+writing/iclr/iclr2027_conference.tex` first: an empty answer means nobody edited it here since the
 last commit, so the copy loses nothing. If it comes back ` M`, both sides moved and you have a
 real merge on your hands, so diff them and resolve by hand instead of copying.
 
 **Variations**
 
-- Just look, do not merge: `git -C paper/overleaf-iclr fetch && git -C paper/overleaf-iclr log --oneline HEAD..origin/main`
-- Refuse anything but a clean fast-forward: `git -C paper/overleaf-iclr merge --ff-only origin/main` after that fetch
+- Just look, do not merge: `git -C writing/overleaf-iclr fetch && git -C writing/overleaf-iclr log --oneline HEAD..origin/main`
+- Refuse anything but a clean fast-forward: `git -C writing/overleaf-iclr merge --ff-only origin/main` after that fetch
 
 ## 2. Read what came down before you commit it   `ran 2026-09-21`
 
@@ -126,8 +126,8 @@ The pull landed and you want to know what you actually changed in the editor, be
 commit message never says.
 
 ```bash
-git -C paper/overleaf-iclr show --stat HEAD
-git -C paper/overleaf-iclr show HEAD -- iclr2027_conference.tex
+git -C writing/overleaf-iclr show --stat HEAD
+git -C writing/overleaf-iclr show HEAD -- iclr2027_conference.tex
 ```
 
 ✅ **The diff, one hunk per place you typed.** Overleaf commits whole editor sessions, so expect
@@ -137,7 +137,7 @@ lines and two paragraph moves.
 
 **Variations**
 
-- How far apart the two copies are right now: `diff -u paper/iclr/iclr2027_conference.tex paper/overleaf-iclr/iclr2027_conference.tex`
+- How far apart the two copies are right now: `diff -u writing/iclr/iclr2027_conference.tex writing/overleaf-iclr/iclr2027_conference.tex`
 - Which hunks differ, without the prose: append `| grep '^@@'` to that
 
 ## 3. ⚠️ Send a repo-side edit back up to Overleaf   `unverified`
@@ -156,17 +156,17 @@ all of them from the project.
 Read the damage before you write anything:
 
 ```bash
-git -C paper/overleaf-iclr status --short
+git -C writing/overleaf-iclr status --short
 ```
 
 Then stage only the paths you mean to send, never `-A` and never `.`:
 
 ```bash
-cp paper/iclr/iclr2027_conference.tex paper/overleaf-iclr/iclr2027_conference.tex
-cp paper/iclr/figures/<the figure the tex includes> paper/overleaf-iclr/figures/<same path>
-git -C paper/overleaf-iclr add iclr2027_conference.tex figures/<same path>
-git -C paper/overleaf-iclr commit -m "<what changed, in the repo's voice>"
-git -C paper/overleaf-iclr push
+cp writing/iclr/iclr2027_conference.tex writing/overleaf-iclr/iclr2027_conference.tex
+cp writing/iclr/figures/<the figure the tex includes> writing/overleaf-iclr/figures/<same path>
+git -C writing/overleaf-iclr add iclr2027_conference.tex figures/<same path>
+git -C writing/overleaf-iclr commit -m "<what changed, in the repo's voice>"
+git -C writing/overleaf-iclr push
 ```
 
 ✅ **The push reports `main -> main`**, and refreshing the Overleaf editor shows the new text.
@@ -175,7 +175,7 @@ git -C paper/overleaf-iclr push
 pull. Run §1 first, then push. Never force-push; that erases the editor's history.
 
 **Every figure the tex names has to exist in the clone**, or Overleaf fails the compile with a
-missing-file error that appears nowhere locally. `grep includegraphics paper/overleaf-iclr/iclr2027_conference.tex`
+missing-file error that appears nowhere locally. `grep includegraphics writing/overleaf-iclr/iclr2027_conference.tex`
 lists what it needs.
 
 ## 4. Rebuild the upload zip instead   `unverified`
@@ -191,13 +191,13 @@ project is cheaper than reconciling it.
 1-lora-correction/scripts/make_overleaf_bundle.sh --slim
 ```
 
-✅ **`paper/iclr-overleaf-slim.zip`, and a printed list of the figures it kept.** The slim flag
+✅ **`writing/iclr-overleaf-slim.zip`, and a printed list of the figures it kept.** The slim flag
 reads the `\includegraphics` calls out of the tex and packs only those figures, because the full
 bundle carries every working draft under `figures/` and has grown past what Overleaf accepts on
 upload.
 
 The project settings the bundle expects (main file, compiler, the commented-out bibliography
-lines) are in [the Overleaf handoff note](../paper/iclr/OVERLEAF.md).
+lines) are in [the Overleaf handoff note](../writing/iclr/OVERLEAF.md).
 
 ## If something looks wrong
 
@@ -208,7 +208,7 @@ Generate a git token in Overleaf's Account Settings, then pull again and paste i
 password with `git` as the username; the `store` helper keeps it.
 
 **The pull is not a fast-forward.** Something was committed in the clone as well as in the
-editor. `git -C paper/overleaf-iclr log --oneline origin/main..HEAD` shows what is local; decide
+editor. `git -C writing/overleaf-iclr log --oneline origin/main..HEAD` shows what is local; decide
 per commit rather than merging blind.
 
 **The repo copy and the clone disagree on a file you did not touch.** They are separate
@@ -225,7 +225,7 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 
 | What | How it was established | When |
 |---|---|---|
-| The clone's remote and project id | `git -C paper/overleaf-iclr remote -v` | 2026-09-21 |
+| The clone's remote and project id | `git -C writing/overleaf-iclr remote -v` | 2026-09-21 |
 | §1 and §2, with their real output | Pulled commit `e793c5e` down and copied the tex into the repo copy | 2026-09-21 |
 | The deleting-direction warning in §3 | `git status --short` in the clone: 18 deletions and 9 untracked files | 2026-09-21 |
 | Overleaf names every editor session `Update on Overleaf.` | The clone's own log | 2026-09-21 |

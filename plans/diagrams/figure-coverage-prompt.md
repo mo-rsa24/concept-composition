@@ -13,7 +13,7 @@ Scan the entire repository for all image files (PNG, JPG, etc.) that are relevan
 Search recursively in:
 - `artifacts/results/ (per-question) and 1-lora-correction/report/paper-evidence-index.md`
 - `outputs/interaction_term/`
-- `paper/iclr/figures/`
+- `writing/iclr/figures/`
 - Any ``artifacts/notes/` items (formerly `/show-me`) or results directories
 - Any previously generated figures from earlier runs of this plan
 

@@ -80,7 +80,7 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    switches off.
 
 6. **Make it the main document.**
-   [dest] **Menu** (top left) → **Settings** → **Main document** → `paper/iclr-revision/iclr2027_conference_revision.tex`.
+   [dest] **Menu** (top left) → **Settings** → **Main document** → `writing/restoring-plurality-in-compositional-diffusion/iclr2027_conference_revision.tex`.
    Leave **Compiler** as it is for now. This setting is shared with the original, so the project shows
    the revision until it is set back in step 10.
 
@@ -103,7 +103,7 @@ limit for one upload, and Overleaf does not unpack a zip into an existing projec
    - **No running header**: tell Claude.
 
 9. **Compare with the local build.**
-   [src] `/home/molef/PhD/concept-composition/paper/iclr-56173/build/iclr2027_conference.pdf`
+   [src] `/home/molef/PhD/concept-composition/writing/restoring-plurality-in-compositional-diffusion_overleaf/build/iclr2027_conference.pdf`
    Open it beside the Overleaf PDF; pages 1, 9, 10 and 15 should look the same.
 
 10. **Leave the project as the supervisor expects.**

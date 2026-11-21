@@ -46,7 +46,7 @@ LORA = (
     paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS)
     / "pooled_lora/phase1_r8_100k/compose_rate.json"
 )
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "compose-rate-by-pair-for-lora-against-the-joint-prompt-correction"
 STEP = "60000"
 

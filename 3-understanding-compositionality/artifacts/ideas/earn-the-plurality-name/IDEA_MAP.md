@@ -7,7 +7,7 @@
 | **1 (current)** | **needs a check** | **the PoE combination rule in code: whether same-prompt-twice PoE reduces to the single expert, which collapses the three candidate forms into one** |
 | 2. the validated scorer judges a two-dogs scene under the same rule | needs a check | the rule counts instances of the query "animal", class-agnostic, so two dogs are two instances; no one-class positive appears in `scorer_validated.json`, so a small hand-labelled two-dogs set is the check |
 | 3. the bar is written before any run | open | this walk writes it, after claim 1 pins the form |
-| 4. a fail demotes the name with a small tex edit, not a rewrite | holds | the anchor clause is verbatim at `paper/iclr/iclr2027_conference.tex:103`; plurality appears at ~10 sites (abstract, two contributions, three section titles), all renames, no evidence moves |
+| 4. a fail demotes the name with a small tex edit, not a rewrite | holds | the anchor clause is verbatim at `writing/iclr/iclr2027_conference.tex:103`; plurality appears at ~10 sites (abstract, two contributions, three section titles), all renames, no evidence moves |
 | 5. the oracle probe runs today from existing infrastructure | needs a check | `build_eval_cache.py` takes `--prompt-a/--prompt-b/--joint-prompt` freely; the check is `slugify("a dog","a dog")` not colliding and the inject script accepting the degenerate pair |
 
 Load-bearing: claim 1. Without one faithful operational form, no run can earn or demote the name.
@@ -32,7 +32,7 @@ Navigation: ⬅️ [Position](#position-in-the-idea) | 📋 [TOC](#table-of-cont
 
 **What the idea is**
 
-Richard Klein's earn-the-name condition (dog times plurality gives two dogs, or the name narrows back to interaction term) is runnable in this framework, and its outcome decides whether the enacted rename in `paper/iclr/` stands.
+Richard Klein's earn-the-name condition (dog times plurality gives two dogs, or the name narrows back to interaction term) is runnable in this framework, and its outcome decides whether the enacted rename in `writing/iclr/` stands.
 
 **Where the walk is**
 
@@ -66,7 +66,7 @@ Mark: open. Compose rate over how many seeds earns the name, what demotes it, an
 
 ### 4. ✅ A fail demotes the name with a small tex edit, not a rewrite
 
-Mark: holds. `paper/iclr/iclr2027_conference.tex:103` already carries the fallback verbatim: the gap "is an interaction term, the quantity a product of independent experts drops. In our setting it is narrowed to plurality". Plurality appears at roughly ten sites (the abstract at line 81, contributions at 119-120, section titles at 127, 216, 219). Demotion is a bounded rename sweep plus re-weighting that anchor clause; no figure, number, or evidence block moves.
+Mark: holds. `writing/iclr/iclr2027_conference.tex:103` already carries the fallback verbatim: the gap "is an interaction term, the quantity a product of independent experts drops. In our setting it is narrowed to plurality". Plurality appears at roughly ten sites (the abstract at line 81, contributions at 119-120, section titles at 127, 216, 219). Demotion is a bounded rename sweep plus re-weighting that anchor clause; no figure, number, or evidence block moves.
 
 ### 5. 🔍 The oracle probe runs today from existing infrastructure
 
@@ -120,7 +120,7 @@ Navigation: ⬅️ [Runs](#runs) | 📋 [TOC](#table-of-contents) | [Next](#next
 | Source | What it gives the idea | Confidence |
 |---|---|---|
 | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | the validated rule verbatim, including the class-agnostic "animal" query and the all-two-class validation set | read this session |
-| `paper/iclr/iclr2027_conference.tex` lines 81, 103, 119-120, 127, 196, 216, 219 | every site the plurality name touches, and the interaction-term anchor clause verbatim | read this session |
+| `writing/iclr/iclr2027_conference.tex` lines 81, 103, 119-120, 127, 196, 216, 219 | every site the plurality name touches, and the interaction-term anchor clause verbatim | read this session |
 | `1-lora-correction/scripts/build_eval_cache.py` | prompts enter as free CLI arguments, so the degenerate pair is parameterizable | read this session |
 | meeting transcript 2026-08-20, 30:25-32:18 | Richard's condition and fallback wording, quoted verbatim in the walk's brief | supplied by the user |
 | `artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md` claims 3 and 4 | the enacted rename this walk's verdict feeds; both claims rest on the name | read this session |

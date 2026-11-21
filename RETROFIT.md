@@ -13,7 +13,7 @@ sitting; stage 6b (the paired journey link) does not apply, since no `--paired` 
 
 Shape: `artifacts/<kind>/<grouping>/` per `~/.claude/ARTIFACT_TREE_FORMAT.md` v2, unchanged from
 2026-08-23. Git: clean at sitting start except two unrelated pre-existing uncommitted files
-(`.claude/settings.json`, `paper/iclr/DRAFT_MAP.md`), left untouched throughout. Mount: verified
+(`.claude/settings.json`, `writing/iclr/DRAFT_MAP.md`), left untouched throughout. Mount: verified
 reachable (`df -h /datasets`, 348T free); **not written to this sitting** by design (see Still
 open). Paired: none.
 
@@ -350,7 +350,7 @@ questions:
 
 ```
 sitting  cluster                                  images  unit
-1        paper/iclr/figures + drafts                  39  per image, 20 have .json sidecars
+1        writing/iclr/figures + drafts                  39  per image, 20 have .json sidecars
 2        evidence/f2-lambda1-audit                    32  one set, one cell shown
 3        docs/evidence, 7 subfolders                  22  mixed
 4        evidence/h05, f5b, show-me, drips,           13  per image

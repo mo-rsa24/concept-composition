@@ -34,7 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from poe_repair import paths
 
 SRC = paths.resolve(paths.WINDOW) / "window_curves.json"
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "how-many-seeds-composed-as-the-window-moves"
 
 

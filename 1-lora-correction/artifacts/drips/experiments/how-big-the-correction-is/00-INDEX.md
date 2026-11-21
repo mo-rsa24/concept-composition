@@ -8,7 +8,7 @@ why:        to explain the two-stage normalization behind `correction-size-over-
 depends on: none, a normalization procedure derives from its own definition and no run can falsify it
 ```
 
-Captured from `/drip --math` on the F3 explanation (`paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.png`, built by `1-lora-correction/scripts/correction_size_vs_run_position.py`), ongoing.
+Captured from `/drip --math` on the F3 explanation (`writing/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.png`, built by `1-lora-correction/scripts/correction_size_vs_run_position.py`), ongoing.
 
 Each rung carries its chain status: taught (in chat by /drip), filed (captured here), scene built (by /math-scene). No mark means not taught yet.
 

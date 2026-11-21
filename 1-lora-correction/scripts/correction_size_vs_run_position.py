@@ -7,7 +7,7 @@ frames, no named pairs: the reader looks at the band, the caption draws the
 conclusion.
 
 Three choices in here are not cosmetic, and the reasons are in
-paper/iclr/what-each-figure-argues.md:
+writing/iclr/what-each-figure-argues.md:
 
 - **The axis is the step, not log-SNR.** Only DDIM is used, so the sampler-
   independent axis buys a reader the paper does not have. Every cell runs the
@@ -49,7 +49,7 @@ POOL = paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS) / "pair_pool.yaml"
 # relative to anything else, and the window is written on the figure. The
 # unsmoothed curves stay in cache_analyses/step_collapse.json.
 SMOOTH = 5
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "correction-size-over-the-denoising-run-across-17-pairs"
 
 

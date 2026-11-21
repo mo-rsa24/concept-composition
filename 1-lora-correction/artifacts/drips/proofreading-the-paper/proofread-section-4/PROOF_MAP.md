@@ -6,7 +6,7 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex` lines 257-299, `\section{Restoring the Plurality Term Restores Composition}` (`sec:analysis`) |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex` lines 257-299, `\section{Restoring the Plurality Term Restores Composition}` (`sec:analysis`) |
 | Kind | manuscript |
 | Grain | paragraph |
 | Cadence | sweep |

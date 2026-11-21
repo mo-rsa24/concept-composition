@@ -82,7 +82,7 @@ The supervisors' hybrid "a cat and dog" × "a dog on the left" varies three axes
 
 | Source | What it gives the idea | Confidence |
 |---|---|---|
-| paper/iclr/iclr2027_conference.tex lines 96 to 214 | the epsilon-space rule, r_t, the λ-correction | read this session |
+| writing/iclr/iclr2027_conference.tex lines 96 to 214 | the epsilon-space rule, r_t, the λ-correction | read this session |
 | context/world/compose-rate.md | the validated scorer: ≥2 animal instances, class-blind; the 87 to 94% bound; class-specific queries considered and dropped | read this session |
 | poe_repair/methods/_sampling.py lines 133 to 186 | run_cfg_poe: arbitrary prompt embeddings, exactly two experts hard-coded via noise.chunk(3) | read this session |
 | artifacts/ideas/merge-supervisor-structure/IDEA_MAP.md | the parent walk; the comparison parked as its held claim 2 | read this session |

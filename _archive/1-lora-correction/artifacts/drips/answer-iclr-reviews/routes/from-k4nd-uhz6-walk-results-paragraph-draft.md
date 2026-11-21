@@ -1,7 +1,7 @@
 # For route step 13: a draft results paragraph for Tables 1 and 2
 
 From the walk answering Reviewers k4nd and UHz6 (2026-11-11). A draft, not in the tex. It reads only
-the rows that exist on 2026-11-11 (joint prompt, PoE, ours) in `paper/iclr-56173/slots/R1.tex` and
+the rows that exist on 2026-11-11 (joint prompt, PoE, ours) in `writing/restoring-plurality-in-compositional-diffusion_overleaf/slots/R1.tex` and
 `R3.tex`. Every sentence that needs CO3 or PoE + Langevin is a TODO, and so is the verdict against
 the bar, which comes from the paired-differences script, not from these means. It carries no
 numbers in the prose; the tables hold them.

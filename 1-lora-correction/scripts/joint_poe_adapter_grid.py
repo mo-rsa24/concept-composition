@@ -24,7 +24,7 @@ REPO = Path(__file__).resolve().parents[2]
 CACHE = Path("/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache")
 RUN = REPO / "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/phase1_r8_100k"
 STEP_DIR = RUN / "samples/per_epoch/epoch_2000_step_100000"
-OUT = REPO / "paper/iclr/figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs"
+OUT = REPO / "writing/iclr/figures/joint-prompt-poe-and-adapter-samples-for-four-held-out-pairs"
 
 HELD = [("a_cat__x__a_dog", 9), ("an_eagle__x__a_hawk", 9),
         ("a_frog__x__a_toad", 9), ("a_goose__x__a_swan", 9)]

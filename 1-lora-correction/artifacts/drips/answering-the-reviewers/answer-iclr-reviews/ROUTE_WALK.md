@@ -8,7 +8,7 @@ The map of the drip-skill-route walk. Each round records the decision, who chose
 - **Objective:** scores for the adapter against PoE, CO3 and more corrected samplers on the same held-out pairs and seeds, the pair list, and a three-concept result.
 - **Outcome:** a revised paper in a shared Overleaf, a second Overleaf for the replies, comment text ready to post.
 - **Chosen by you:** all four of PrzE's points get new numbers.
-- **Found on disk:** the manuscript at `paper/iclr/`, scorers for CLIP and ImageReward in `composition/focus/eval_metrics.py`, the Langevin corrector, Feynman-Kac and SMC code under `scripts/`, the pool files under `artifacts/_shared/cross_pair_pool_configs/`, a figure register at `paper/iclr/figures.md`.
+- **Found on disk:** the manuscript at `writing/iclr/`, scorers for CLIP and ImageReward in `composition/focus/eval_metrics.py`, the Langevin corrector, Feynman-Kac and SMC code under `scripts/`, the pool files under `artifacts/_shared/cross_pair_pool_configs/`, a figure register at `writing/iclr/figures.md`.
 - **Problems found:** the pair list and the paper's checkpoint are unproven; four held-out pairs cannot carry a rate; the adapter has no slot for a third concept; the local source differs from the submitted PDF.
 
 ## Round 2: the outcomes (settled 2026-11-10)

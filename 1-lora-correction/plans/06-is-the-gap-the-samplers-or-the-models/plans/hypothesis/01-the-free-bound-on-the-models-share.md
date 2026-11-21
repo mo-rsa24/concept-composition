@@ -11,7 +11,7 @@ sitting on disk, since whatever is left there is a lower bound on the model's sh
 
 ## Recommended skill
 
-▶ `/analyze-run the correction size as the run approaches zero noise, from paper/iclr/figures/correction-size-over-the-denoising-run.json` ✅ reads a finished result and writes the verdict against a threshold fixed before the run, which is exactly this plan's shape.
+▶ `/analyze-run the correction size as the run approaches zero noise, from writing/iclr/figures/correction-size-over-the-denoising-run.json` ✅ reads a finished result and writes the verdict against a threshold fixed before the run, which is exactly this plan's shape.
    alt: `/eda-synthesize` if the two JSON files turn out to need reshaping before they can be read together.
 
 ## Position in the plan tree
@@ -79,7 +79,7 @@ marginals. At `t = 0` that product is exactly the product of experts the method 
 sampler's contribution to `r_t` is zero there by construction. The remainder is the model.
 
 **What this reads.** Two files that already exist. `correction-size-over-the-denoising-run.json`
-under `paper/iclr/figures/`, which carries 50 steps over 3 seeds and two pairs. And
+under `writing/iclr/figures/`, which carries 50 steps over 3 seeds and two pairs. And
 `step_collapse.json` beside `snr_collapse.json` under
 `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/`, whose `peak_at_edge`
 field speaks to how concentrated the correction is at high noise.
@@ -188,7 +188,7 @@ sampling and no new code.
 Nothing is built. Three things are read and one thing is written.
 
 1. **The low-noise end of the cached size curve.** From
-   `paper/iclr/figures/correction-size-over-the-denoising-run.json`, 50 steps, 3 seeds, two pairs.
+   `writing/iclr/figures/correction-size-over-the-denoising-run.json`, 50 steps, 3 seeds, two pairs.
    Read the last steps rather than the whole curve.
 2. **The high-noise concentration figure.** From
    `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/step_collapse.json`
@@ -227,7 +227,7 @@ for.
   Never a bare `python`.
 - **Every command below runs from the repo root**,
   `/home-mscluster/mmolefe/Playground/PhD/concept-composition`, because the paths under
-  `paper/iclr/figures/` and `scripts/` are relative to it. A relative path run from anywhere else
+  `writing/iclr/figures/` and `scripts/` are relative to it. A relative path run from anywhere else
   resolves against `$HOME` and fails silently, which is catalogued here as `poe-launch-001` in
   [environment/known-failures.md](../../../../../environment/known-failures.md).
 - The cache lives under `/datasets/mmolefe/poe_repair_min/outputs/`, not under `/home-mscluster`,
@@ -275,7 +275,7 @@ plan is read against are known to be current.
     cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
     PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
     CA=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses
-    $PY -c "import json;d=json.load(open('paper/iclr/figures/correction-size-over-the-denoising-run.json'));print(json.dumps(d,indent=2)[:4000])"
+    $PY -c "import json;d=json.load(open('writing/iclr/figures/correction-size-over-the-denoising-run.json'));print(json.dumps(d,indent=2)[:4000])"
     $PY -c "import json;d=json.load(open('$CA/step_collapse.json'));print(list(d)[:20])"
     $PY -c "import json;d=json.load(open('$CA/snr_collapse.json'));print({k:v for k,v in list(d.items())[:5]})"
     ```
@@ -369,7 +369,7 @@ CA=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses
 RES=/datasets/mmolefe/poe_repair_min/outputs/veracity/pairs
 
 # The three files this plan reads. All must exist before anything is claimed.
-ls -l paper/iclr/figures/correction-size-over-the-denoising-run.json
+ls -l writing/iclr/figures/correction-size-over-the-denoising-run.json
 ls -l "$CA/step_collapse.json" "$CA/snr_collapse.json"
 
 # Where the ratio is formed, which is what task 1.2 unpicks.
@@ -444,7 +444,7 @@ Nothing to organise. The output of this plan is answers in its review file.
 | Path | Why it is read |
 |---|---|
 | [1-lora-correction/scripts/correction_size_over_the_run.py](../../../../scripts/correction_size_over_the_run.py) | where `‖r_t‖/‖eps_PoE‖` is computed today, at line 101, which task 1.2 has to unpick to answer whether the numerator survived |
-| `paper/iclr/figures/correction-size-over-the-denoising-run.json` | the cached curve, 50 steps over 3 seeds and two pairs |
+| `writing/iclr/figures/correction-size-over-the-denoising-run.json` | the cached curve, 50 steps over 3 seeds and two pairs |
 | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/cache_analyses/step_collapse.json` | the step-wise collapse analysis, read beside `snr_collapse.json` for the `peak_at_edge` field |
 | `/datasets/mmolefe/poe_repair_min/outputs/veracity/pairs/<pair>/seed_<n>/teacher_residual_const_lam000/residuals/` | the raw per-step tensors the ratio was formed from, 50 files per seed for both pairs at seeds 4, 42 and 123. `delta` is the unnormalised `r_t` and `eps_poe` is the denominator, so the numerator this plan wants is read here rather than recovered from the JSON |
 

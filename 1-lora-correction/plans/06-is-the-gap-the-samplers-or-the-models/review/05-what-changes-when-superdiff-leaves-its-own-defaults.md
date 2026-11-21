@@ -74,7 +74,7 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 | The eight-cell grid (2 pairs × 2 step counts × 2 `kappa`-clamp settings) | Establishes a baseline | 2026-09-03 | 8 renders | `corrector/superdiff/parity/grid/`, all eight scored (detector + eye) | ✅ done, reversed result (see below) |
 | The per-step prediction hook, verified on one render | Establishes a baseline | 2026-09-03 | 1 render (shared with task 1.2, above) | one norm per step of `eps_M`, written to that render's `.json` sidecar | ✅ 50 values recorded |
 | The κ sweep at 50 steps (task 4 as first written; superseded by the row below) | Supplementary figure | 2026-09-03, killed at 30 of 80 | 30 renders kept | `corrector/superdiff/kappa_sweep/`, cat×dog complete (20), butterfly×meadow 10 of 20 | ⏹ stopped on purpose: 50-step figures dropped from the design |
-| The κ × λ figure set, 200 steps: cat×dog at six κ settings, butterfly×meadow at κ=0.5; each figure seeds 9–12 by λ ∈ {0, 0.25, 0.5, 0.75, 1} | Supplementary figures | 2026-09-03, `nohup` pid 2505673 on mscluster85, log `corrector/superdiff/lambda_sweep.log` | 140 renders, ~5h estimated (107s per λ=0 cell, ~136s per λ>0 cell) | `corrector/superdiff/lambda_sweep/` (140 renders, `sweep_summary.json`), seven sheets under `paper/iclr/figures/how-much-is-added/across-composition-rules/`, each with a sidecar and a README entry | ✅ complete, 4.94 h, mean 127 s per cell |
+| The κ × λ figure set, 200 steps: cat×dog at six κ settings, butterfly×meadow at κ=0.5; each figure seeds 9–12 by λ ∈ {0, 0.25, 0.5, 0.75, 1} | Supplementary figures | 2026-09-03, `nohup` pid 2505673 on mscluster85, log `corrector/superdiff/lambda_sweep.log` | 140 renders, ~5h estimated (107s per λ=0 cell, ~136s per λ>0 cell) | `corrector/superdiff/lambda_sweep/` (140 renders, `sweep_summary.json`), seven sheets under `writing/iclr/figures/how-much-is-added/across-composition-rules/`, each with a sidecar and a README entry | ✅ complete, 4.94 h, mean 127 s per cell |
 
 The finding this review feeds: [does superdiff compose at its own defaults](../../../report/is-the-gap-the-samplers-or-the-models/does-superdiff-compose-at-its-own-defaults.md).
 
@@ -192,7 +192,7 @@ written with the answer already visible.
       two columns are near-identical, so the trajectory has reached the joint prediction by
       0.75. The one-to-two switch sits between λ=0.25 and 0.5 on every seed, the same shape as
       this project's own PoE strength grid
-      (`paper/iclr/figures/how-much-is-added/strength-grid-with-three-controls-and-compose-curve.png`).
+      (`writing/iclr/figures/how-much-is-added/strength-grid-with-three-controls-and-compose-curve.png`).
       **Forcing κ=0.5 (`cat_dog_grid_200_steps_kappa_050`) changes little.** λ=0 and λ=0.25
       are one animal on all four seeds. Seeds 11 and 12 switch to two animals at λ=0.5 as
       before; seeds 9 and 10 switch one column later, at λ=0.75 (seed 9's λ=0.5 tile is two

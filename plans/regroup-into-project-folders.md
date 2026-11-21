@@ -74,7 +74,7 @@ correction to the move.
         answers), `41c11448` (the toy and the caption model), `96716791` (a walk in
         `how-much-co-occurrence-the-product-needs`).
   - [ ] **The main checkout's ICLR review work is committed by its sessions:** `a40d70e8` (14
-        files under `paper/iclr-56173`, `poe_repair/experiments`, `1-lora-correction/report/paper-review`),
+        files under `writing/restoring-plurality-in-compositional-diffusion_overleaf`, `poe_repair/experiments`, `1-lora-correction/report/paper-review`),
         `1a9eecdc` (4), and five sessions with 1 or 2 files each.
   - [ ] **The main checkout's 204 walk files that no recent session names** under
         `artifacts/drips/` are committed or put on the archive list.

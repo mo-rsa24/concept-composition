@@ -41,7 +41,7 @@ import matplotlib.pyplot as plt
 
 ROOT = paths.resolve(paths.SAME_TOTAL_CORRECTION_DIFFERENT_WINDOW)
 MANIFEST = ROOT / "swap_manifest.json"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "samples-as-window-and-strength-both-change"
 
 PAIR = "a_cat__x__a_dog"

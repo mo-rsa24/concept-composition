@@ -4,13 +4,13 @@ Navigation: [the route](route-answer-the-iclr-reviews.md)
 
 ## Found on disk
 
-- The manuscript source and notes: `paper/iclr/` (tex, bibliography, `figures.md` register, `SPINE.md`, `DRAFT_MAP.md`), plus `paper/overleaf-iclr/` and `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` for the upload zip.
+- The manuscript source and notes: `writing/iclr/` (tex, bibliography, `figures.md` register, `SPINE.md`, `DRAFT_MAP.md`), plus `writing/overleaf-iclr/` and `1-lora-correction/scripts/make_overleaf_bundle.sh --slim` for the upload zip.
 - Scorers: `composition/focus/eval_metrics.py` holds CLIP, EVA-CLIP and ImageReward scorers. No code for GenEval or T2I-CompBench.
 - Samplers: `poe_repair/methods/_poe_langevin.py` (Langevin corrector), `1-lora-correction/scripts/corrector_residual_curve.py`, `1-lora-correction/scripts/fk_steering/`, `1-lora-correction/scripts/twisted_smc/`, `composition/reduce_reuse_recycle/` (the authors' code), `composition/debottam_co3/` (CO3).
 - Findings already filed: `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/` (corrector, SuperDiff, steering, noise search runs).
 - Pool files: `artifacts/_shared/cross_pair_pool_configs/`.
 - Audit of the authors' code against their paper: `/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md`.
-- The reviews and the submitted paper: `paper/iclr-56173/Reviews.pdf` and `56173_Restoring_plurality_in_c.pdf` at the repo root.
+- The reviews and the submitted paper: `writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf` and `56173_Restoring_plurality_in_c.pdf` at the repo root.
 
 ## Plan weight
 

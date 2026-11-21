@@ -148,7 +148,7 @@ def main() -> int:
         ax.spines[sp].set_visible(False)
     fig.tight_layout()
 
-    fig_dir = Path("paper/iclr/figures")
+    fig_dir = Path("writing/iclr/figures")
     fig_dir.mkdir(parents=True, exist_ok=True)
     out = fig_dir / "direction-agreement-between-two-seeds.png"
     fig.savefig(out, dpi=300)

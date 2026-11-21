@@ -505,7 +505,7 @@ None. This scope carries no `diagram-prompts.md`, so there is no illustrated map
 ### Organization workflow
 
 The search table stays in the review file. Nothing from this plan is filed under
-`paper/iclr/figures/`.
+`writing/iclr/figures/`.
 
 ## Orchestration: keeping catalogs and plan files in sync
 

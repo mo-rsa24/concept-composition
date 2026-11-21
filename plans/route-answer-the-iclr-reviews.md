@@ -55,7 +55,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | mscluster107 is your interactive job 83423 with two Quadro RTX 8000 of 49,152 MiB each | verified | `nvidia-smi` through `scripts/cluster.sh`, 2026-11-10 | PRZE-10 |
 | mscluster108 (two Quadro RTX 8000, `co3`) and mscluster111 (one RTX PRO 6000 Blackwell, `co3_bw`) are idle and pass a torch matmul on every card; mscluster110 passes too but carries another user's job 83315 until about 2026-11-12 11:30 | verified | `nvidia-smi -L`, a 1000 by 1000 matmul, `sinfo -N` and `squeue -w` through `scripts/cluster.sh sh`, 2026-11-10; [the node table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-nodes-probed-2026-11-10) | PRZE-10 |
 | The adapter takes two concept prompts and the null prompt, so a third concept has no input slot | read | submitted PDF Appendix B.1, equation 13 | PRZE-4 |
-| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `paper/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `paper/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
+| The live Overleaf project, exported as `_ICLR2027__LoRA_Plurality.zip`, is the submitted source and the one to edit; neither local copy is: the clone at `writing/overleaf-iclr/` was last pulled before the PDF was built (2026-09-26 13:41 SAST) and holds uncommitted edits, and `writing/iclr/` is an older draft | verified | headings equal, a two-way sentence match and exact `grep` of every flagged sentence, `pdfinfo`, `git log` and `git status` in the clone, 2026-11-10; [the ground check](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md#3-the-local-tex-against-the-submitted-pdf) | PRZE-5 |
 | The PDF says the adapter sits on cross-attention (page 1, page 7) and trains at every denoising step (page 1); the adapter of record trained on self- and cross-attention, on steps 0 to 9 only | verified | the PDF text against v58-03-self's `config.json`, 2026-11-10 | PRZE-5, PRZE-11 |
 | The CO3 paper (arXiv 2509.25940) scores three prompt sets from Chefer et al. (animals, animals-objects, objects) with [BLIP-VQA](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/03-blip-vqa-asking-a-question-per-phrase.md) and [ImageReward](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/02-imagereward-the-preference-number.md), 50-step DDIM, guidance 5.0, on SD1.5, SDXL and baselines run from their public code; it does not state prompts per set, seeds per prompt, resolution or how the two metrics were computed | read | the paper's HTML version, 2026-11-10, and your screenshots of its Tables 1, 5, 6 and 7 | PRZE-1, step 2 (protocol), step 7 (scores) |
 | CO3's qualitative figures put one prompt per row and one method per column, with SD1.5 methods and SDXL methods grouped | read | the same HTML version, Figures 3, 4 and 6 | PRZE-2, PRZE-9 |
@@ -64,7 +64,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | The export builds with Tectonic on mscluster but not page for page: Tectonic's XeTeX engine ignores the `times` package and sets the body in Latin Modern, so the build runs 14 pages against the submitted 13; the PDF inside the zip is an older 16-page build from 2026-09-25 | verified | Tectonic build and `pdffonts` against the submitted PDF, 2026-11-10; [the step 2 walk map](../1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/EXECUTE_WALK-step-2.md) | PRZE-5, PRZE-9 |
 | Figure 5's elephant and penguin "ours" tile is `ours_v58-05-self-contrast_s015000_rawA_w50.png`, pixel for pixel; the reward fine-tunes `refl-kl-K0` to `K3` (W&B `t4wiwy5p`, `u73uvqyg`, `yj7l40h5`, `ybjd4trt`) start from v58-05 step 15,000 and trained on cat and dog and on elephant and penguin, seeds 1 to 8 | verified | mean absolute pixel difference 0.00 against 6.32 to 14.10 for the fine-tunes; each run's W&B config, 2026-11-10 | PRZE-3a, PRZE-8 |
 | The comparison protocol is agreed: one adapter, picked from 9 fixed candidates on cat and dog and elephant and penguin at one shared seed, which then leave every held-out rate; [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/08-tome-fusing-an-object-with-its-attributes.md) joins the SDXL table, five binding methods the SD 1.5 table, FK steering the CO3-protocol table | agreed | your yes, 2026-11-10; [the protocol](../1-lora-correction/report/paper-review/protocol.md) | PRZE-8, steps 4 to 12 |
-| Thirteen slots (R1 to R13) have a size, a placeholder in `paper/iclr-56173/` and a result file; `1-lora-correction/scripts/refresh_paper_slots.py --check` passes; R1's eight score columns at 8 pt run about 3.4 in wider than the text | verified | Tectonic build, 22 pages, exit 0, 2026-11-10; [the layout sheet](../1-lora-correction/report/paper-review/layout-sheet.md) | PRZE-9, step 9 |
+| Thirteen slots (R1 to R13) have a size, a placeholder in `writing/restoring-plurality-in-compositional-diffusion_overleaf/` and a result file; `1-lora-correction/scripts/refresh_paper_slots.py --check` passes; R1's eight score columns at 8 pt run about 3.4 in wider than the text | verified | Tectonic build, 22 pages, exit 0, 2026-11-10; [the layout sheet](../1-lora-correction/report/paper-review/layout-sheet.md) | PRZE-9, step 9 |
 | Wave 1 is rendering on three cards with none of the three trainings stopped: jobs 1 to 3 on mscluster112 (pid 36785), R1 joint on mscluster108 card 0 (pid 59533), R1 PoE on mscluster108 card 1 (pid 59822), and R1 ours queued on mscluster112 behind jobs 1 to 3 (waiting loop pid 37731); outputs under `/datasets/mmolefe/poe_repair_min/outputs/paper_review/` | running | each launch log in `/datasets/mmolefe/poe_repair_min/outputs/paper_review/logs/`, 2026-11-11; [the jobs table](../1-lora-correction/report/paper-review/prze-10-compute.md#the-jobs) | PRZE-10, PRZE-1, PRZE-11 |
 | One SDXL image in one long process takes about 6.7 s for ours on the RTX PRO 6000 Blackwell, 17 s for the joint prompt and 22 s for PoE on an RTX 8000, at about 8.2 to 8.9 GB of card memory; a CO3 image takes about 50 s on an RTX 8000 | measured | tile timestamps of the first wave 1 tiles and of `paper_review/co3_selection/`, `nvidia-smi`, 2026-11-11 | PRZE-10, steps 6 and 7 |
 | The R1 joint prompt is drawn as written: 240 prompts join their concepts with "and", 36 with "with"; the first sidecar reads "a horse with a glasses" | verified | `1-lora-correction/scripts/review_benchmark_pairs.txt` and `r1_joint/a_horse__x__a_glasses/seed09/mono.json`, 2026-11-11 | PRZE-1 |
@@ -164,7 +164,7 @@ What to read
   all_groups.
 - poe_repair/paths.py lines 137 to 154: where the training cache and caches are kept.
 - 56173_Restoring_plurality_in_c.pdf, Section 4 and Appendix A: the training recipe as stated.
-- paper/iclr/iclr2027_conference.tex: the local source.
+- writing/iclr/iclr2027_conference.tex: the local source.
 
 What is already known
 - mscluster112 is healthy: one RTX PRO 6000 Blackwell, 97,887 MiB, a torch matmul passes (verified
@@ -213,7 +213,7 @@ You judge from the ground-check file.
 You ~60 min (estimate) · AI ~50 min (estimate) · Opus, medium · moves: PRZE-8, PRZE-9
 
 **Objective:** a protocol page you have agreed, a layout sheet with one row per new figure and table, and placeholder slots in the paper that refill from result files, with the paper still compiling.
-**Outcome:** `1-lora-correction/report/paper-review/protocol.md`, `1-lora-correction/report/paper-review/layout-sheet.md`, new rows in `paper/iclr-56173/figures.md`, `1-lora-correction/scripts/refresh_paper_slots.py`.
+**Outcome:** `1-lora-correction/report/paper-review/protocol.md`, `1-lora-correction/report/paper-review/layout-sheet.md`, new rows in `writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md`, `1-lora-correction/scripts/refresh_paper_slots.py`.
 **Serves:** needed by steps 4 to 12 (no evaluation job starts before you agree the protocol).
 **Sees:** none · **Ticket:** none · **Source page:** [the CO3 paper](https://arxiv.org/abs/2509.25940), Table 1 and Figure 3
 
@@ -223,7 +223,7 @@ for the ICLR review response, and set up placeholder slots that refill from resu
 Model: Opus, medium effort (the protocol is design). Box: 60 minutes of your time. Filing: tied.
 Controls: piece 1 example (one worked row of the protocol on a real pair), piece 2 draw (the table
 and grid layouts), piece 3 debug (the refill script's first run).
-Side routes: piece 2 /plan-figures paper/iclr-56173/figures.md (plans the figure set against the
+Side routes: piece 2 /plan-figures writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md (plans the figure set against the
 register); piece 3 none.
 
 Background
@@ -235,16 +235,16 @@ figure fits the ICLR layout cleanly. The repo is /home/molef/PhD/concept-composi
 Objectives
 1. Write 1-lora-correction/report/paper-review/protocol.md with the rules every result must obey.
 2. Write 1-lora-correction/report/paper-review/layout-sheet.md with one row per new figure and table.
-3. Add a row per slot to paper/iclr-56173/figures.md, a placeholder at final size in the paper source, and
+3. Add a row per slot to writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md, a placeholder at final size in the paper source, and
    1-lora-correction/scripts/refresh_paper_slots.py that rebuilds a slot from its result file and compiles the paper.
 
 What to read
 - 1-lora-correction/report/paper-review/board.md and pages prze-1, prze-2, prze-8, prze-9, prze-11: the outcome lines.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far".
-- paper/iclr-56173/figures.md: the figure register, with statuses reserved, fillable, built and broken.
-- paper/iclr-56173/iclr2027_conference.tex lines 25 to 70: the placeholder macros already in the source.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md: the figure register, with statuses reserved, fillable, built and broken.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/iclr2027_conference.tex lines 25 to 70: the placeholder macros already in the source.
 - 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/ground-check.md: step 1's findings, once it exists.
-- 56173_Restoring_plurality_in_c.pdf and paper/iclr-56173/Reviews.pdf: the paper and the three reviews.
+- 56173_Restoring_plurality_in_c.pdf and writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: the paper and the three reviews.
 - environment/paper.md: how the paper builds here, since no system LaTeX exists.
 
 What is already known
@@ -275,7 +275,7 @@ Rules
 
 What to hand back
 - 1-lora-correction/report/paper-review/protocol.md and layout-sheet.md.
-- New rows in paper/iclr-56173/figures.md, status reserved, each with its claim, layout and result file.
+- New rows in writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md, status reserved, each with its claim, layout and result file.
 - 1-lora-correction/scripts/refresh_paper_slots.py, and the compile log showing the paper builds with every slot as
   a placeholder.
 - Proof: python3 1-lora-correction/scripts/refresh_paper_slots.py --check prints PASS and the slot count, and
@@ -330,10 +330,10 @@ Objectives
 4. Mint the journey, register it in ~/goal-setting/learning/JOURNEYS.md, and record the three roots.
 
 What to read
-- paper/iclr-56173/Reviews.pdf: the exact wording of the three reviewers' requests.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: the exact wording of the three reviewers' requests.
 - plans/route-answer-the-iclr-reviews.md: the table "What we know so far", and step 2's protocol.
 - composition/focus/eval_metrics.py: CLIP, EVA-CLIP and ImageReward scorers already written here.
-- paper/iclr-56173/figures.md and 1-lora-correction/report/paper-review/prze-1-scores.md: where each score lands.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md and 1-lora-correction/report/paper-review/prze-1-scores.md: where each score lands.
 - 1-lora-correction/report/paper-review/protocol.md and 1-lora-correction/report/paper-review/layout-sheet.md: the agreed comparison rules
   and the table each word lands in (R1 on SDXL in the main text, R5 on SD 1.5 in the appendix).
 - The CO3 paper, arXiv 2509.25940, Table 1 and Figure 3: how the same words are used in a table.
@@ -1216,9 +1216,9 @@ question. You judge from the gate numbers and the config diff.
 You ~120 min (estimate) · AI ~90 min (estimate) · Opus, medium · moves: PRZE-5 (and fills every slot that has a result)
 
 **Objective:** the working copy compiles under the ICLR template inside the page limit with the mechanical fixes, appendix tables, a compact evaluation section (one table, one figure in the main text), and a limitations paragraph including the closed gates with their numbers.
-**Outcome:** the revised tex, in `paper/iclr-56173/`, which you upload to Overleaf, the compiled PDF, and `paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md`.
+**Outcome:** the revised tex, in `writing/restoring-plurality-in-compositional-diffusion_overleaf/`, which you upload to Overleaf, the compiled PDF, and `writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md`.
 **Serves:** PRZE-5 (the paper revised and shared) and the paper-side lines of PRZE-1 to PRZE-4.
-**Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** `paper/iclr-56173/DRAFT_MAP.md`
+**Sees:** the step 6 pipeline page · **Ticket:** none · **Source page:** `writing/restoring-plurality-in-compositional-diffusion_overleaf/DRAFT_MAP.md`
 
 ```text
 /drip-write the evaluation section and the limitations paragraph of the revision for the ICLR
@@ -1233,11 +1233,11 @@ Background
 Submission 56173 got three reviews at ICLR 2027. Reviewer PrzE asked for scores on standard
 benchmarks, more baselines, the pair lists and more than two concepts. The earlier steps made the
 protocol, the held-out set, the scores, the corrector figure, the SD 1.5 set and the three-concept
-test. This step puts them in the paper. paper/iclr-56173/ is the working copy and the user uploads it to Overleaf.
-The repo is /home/molef/PhD/concept-composition and the manuscript map is paper/iclr-56173/DRAFT_MAP.md.
+test. This step puts them in the paper. writing/restoring-plurality-in-compositional-diffusion_overleaf/ is the working copy and the user uploads it to Overleaf.
+The repo is /home/molef/PhD/concept-composition and the manuscript map is writing/restoring-plurality-in-compositional-diffusion_overleaf/DRAFT_MAP.md.
 
 Objectives
-1. Confirm the page limit and the working copy (paper/iclr-56173/) from the call, the template and
+1. Confirm the page limit and the working copy (writing/restoring-plurality-in-compositional-diffusion_overleaf/) from the call, the template and
    the step 1 comparison.
 2. Apply the mechanical fixes and appendix tables as one diff, and show it for one yes.
 3. Draft the evaluation section, one sentence at a time with the user steering: one compact table
@@ -1247,11 +1247,11 @@ Objectives
    reviewer point.
 
 What to read
-- paper/iclr-56173/DRAFT_MAP.md and the working copy's tex: where each section stands.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/DRAFT_MAP.md and the working copy's tex: where each section stands.
 - 1-lora-correction/report/paper-review/board.md, protocol.md, layout-sheet.md, held-out-set.md and
   three-concept-set.md.
 - The results files and tables from steps 8 to 11, in their slots.
-- paper/iclr-56173/Reviews.pdf: the exact wording of every point being answered.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: the exact wording of every point being answered.
 - The manuscript voice and number rules in the memory notes, and environment/paper.md for the build.
 - 56173_Restoring_plurality_in_c.pdf: the submitted text, Sections 3 to 5 and Appendices A and B.
 
@@ -1274,7 +1274,7 @@ What is already known
 - Draft to supervisors Thursday 12 or Friday 13 November; OpenReview closes Wednesday 18.
 
 When something is missing
-- If paper/iclr-56173/ is missing or older than the Overleaf project, ask the user for a fresh
+- If writing/restoring-plurality-in-compositional-diffusion_overleaf/ is missing or older than the Overleaf project, ask the user for a fresh
   export zip from Overleaf and unpack it there.
 - If a result is missing for a slot, leave the placeholder and list the slot.
 - If the paper exceeds the page limit, move the least central material to the appendix and show the
@@ -1288,7 +1288,7 @@ Rules
 
 What to hand back
 - The revised tex in the working copy, committed locally, with the compiled PDF.
-- paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md: one line per edit, grouped by reviewer point.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md: one line per edit, grouped by reviewer point.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
 - Proof: the compile log shows no errors and the page count; the refresh script's check prints PASS;
   the board redraws with --step 13 ticking the PRZE-5 lines this step owns.
@@ -1302,7 +1302,7 @@ most one question. You judge by opening the compiled PDF.
 
 - `added:` the no-token rule and the user-pushes rule · `added:` the closed-gates sentence · `dropped:` the fixes for reviewers UHz6's and k4nd's other points (why: you asked to focus on PrzE; the shared fixes cost nothing)
 - [ ] **Gate:** you read the page limit and say yes to the mechanical diff before prose starts.
-- **Leaves:** the revised tex, the PDF and `paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md`
+- **Leaves:** the revised tex, the PDF and `writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md`
 - **Learning path:** none needed.
 
 ### 14. ✍️ Draft the replies
@@ -1310,9 +1310,9 @@ most one question. You judge by opening the compiled PDF.
 You ~90 min (estimate) · AI ~45 min (estimate) · Opus, medium · moves: PRZE-6 and the text line of PRZE-7
 
 **Objective:** a reply to Reviewer PrzE, point by point, in a markdown source that builds a LaTeX file for the Overleaf replies project and a plain-text file for OpenReview, with every number matched to the revised paper by a script.
-**Outcome:** `paper/iclr-56173/replies/prze.md`, `paper/iclr-56173/replies/common.md`, the built zip, one plain-text file per comment with its character count, and the number check's output.
+**Outcome:** `writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/prze.md`, `writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/common.md`, the built zip, one plain-text file per comment with its character count, and the number check's output.
 **Serves:** PRZE-6 (replies drafted) and PRZE-7 (the comment text).
-**Sees:** none · **Ticket:** none · **Source page:** `paper/iclr-56173/Reviews.pdf`, Reviewer PrzE
+**Sees:** none · **Ticket:** none · **Source page:** `writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf`, Reviewer PrzE
 
 ```text
 /drip-write the reply to Reviewer PrzE for submission 56173, point by point, after the AI builds the
@@ -1330,7 +1330,7 @@ text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.
-2. Build paper/iclr-56173/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
+2. Build writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
 3. Draft the opening, weakness 1 with question 1, weakness 2, question 2 and the closing, one part
    at
    a time with the user steering.
@@ -1339,8 +1339,8 @@ Objectives
    counts.
 
 What to read
-- paper/iclr-56173/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
-- paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
 - 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
 
@@ -1367,7 +1367,7 @@ Rules
 - Never ask for or store any Overleaf or OpenReview credential.
 
 What to hand back
-- paper/iclr-56173/replies/prze.md and paper/iclr-56173/replies/common.md, the built LaTeX project zip, and one plain-text file per
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/prze.md and writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/common.md, the built LaTeX project zip, and one plain-text file per
   comment with its character count.
 - The number check's output with every number matched.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.
@@ -1498,7 +1498,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 ### B. 🖱️ Download a fresh export of the paper before step 13
 
-- [ ] **Do:** in the browser, open the paper's Overleaf project, click **Menu** (top left), then under **Download** click **Source**. Save the zip, then tell Claude its path so it is unpacked over `paper/iclr-56173/` (the slots, `figures.md` and the `\reviewslot` macro are kept).
+- [ ] **Do:** in the browser, open the paper's Overleaf project, click **Menu** (top left), then under **Download** click **Source**. Save the zip, then tell Claude its path so it is unpacked over `writing/restoring-plurality-in-compositional-diffusion_overleaf/` (the slots, `figures.md` and the `\reviewslot` macro are kept).
 - **You should see:** a zip of about 119 MB holding `iclr2027_conference.tex` and `figures/`.
 - **Done when:** `python3 1-lora-correction/scripts/refresh_paper_slots.py --check` prints PASS after the unpack.
 
@@ -1506,7 +1506,7 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 - [ ] **Do:** in the Overleaf project's file tree, click the **Upload** icon and drop in each file step 13 changed (`iclr2027_conference.tex`, every file under `slots/`, any new file under `figures/`), choosing **Overwrite** when asked. Nothing is pushed with git.
 - **You should see:** **Recompile** produces the revised PDF with the filled slots.
-- **Done when:** the Overleaf PDF matches `paper/iclr-56173/build/iclr2027_conference.pdf` page for page, or differs only by the font change the build fact in "What we know so far" names.
+- **Done when:** the Overleaf PDF matches `writing/restoring-plurality-in-compositional-diffusion_overleaf/build/iclr2027_conference.pdf` page for page, or differs only by the font change the build fact in "What we know so far" names.
 
 ### D. 🖱️ Create the replies project in Overleaf (after step 14)
 

@@ -1,7 +1,7 @@
 # Evidence: what is here and what the paper does with it
 
 One row per item. A folder whose name starts with a figure id (F2, F6, F7, F8) feeds that row of
-the figure register, `paper/iclr/figures.md`. A folder without a prefix is supporting or
+the figure register, `writing/iclr/figures.md`. A folder without a prefix is supporting or
 superseded and is visibly not load-bearing. **Caption owed** means the result is good and its
 caption or writeup has to be rewritten fresh and plain before the paper may use it.
 
@@ -9,7 +9,7 @@ caption or writeup has to be rewritten fresh and plain before the paper may use 
 
 | Item | Figure it feeds | State |
 |---|---|---|
-| `paper/iclr/figures/compose-rate-as-correction-rises.png` | F2, the headline figure: compose rate as more correction is added | result stands (the true correction takes compose rate from 7% to 93%, the controls stay flat); the exact percentages wait on the re-score; **caption owed** |
+| `writing/iclr/figures/compose-rate-as-correction-rises.png` | F2, the headline figure: compose rate as more correction is added | result stands (the true correction takes compose rate from 7% to 93%, the controls stay flat); the exact percentages wait on the re-score; **caption owed** |
 | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/` (`QUERY.md`, `geometry_vs_transfer.png`, `result.json`) | F6, why it is learnable | the held-out projection licenses nothing about transfer. `QUERY.md` is the argument the caption must not exceed |
 | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/what-the-spectrum-measures/` (`QUERY.md`, `result.json`) | F6, why it is learnable | **what the spectrum would give by luck does not control for ‖r_t‖ spread, and against one that does the pooled stack is 1.4x at k=8 rather than 10.7x.** What direction structure survives is within single runs (4.8x at k=8), not across pairs (1.2x). F6's shared-structure argument does not stand and that figure needs a decision |
 | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/` (`measure-fairness.md`, `RUN_ON_THIS_NODE.md`) | F7, the mechanism panel | replicated, median 1.52x over 64 runs. `measure-fairness.md` is why the obvious measure gives the opposite answer, which the appendix needs; **caption owed** |

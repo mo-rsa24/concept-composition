@@ -215,7 +215,7 @@ running the adapter there hurts.
    examples laid against it
 10. The sheet (joint target, plain PoE, 30050, best run, under both samplers, over the 17 cat x dog
     and 8 elephant x penguin seeds) is filed under `artifacts/results/` with its card, and the
-    register slot in `paper/iclr/figures.md` it serves is named
+    register slot in `writing/iclr/figures.md` it serves is named
 11. The scope has a recall gallery: run
     `/recap-plan-tree @plans/08-improve-the-rank-32-pooled-adapter/MASTER_PLAN.md` once every plan
     above is ✅, and record the Artifact URL it publishes

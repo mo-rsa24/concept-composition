@@ -282,7 +282,7 @@ checkpoints on disk.
     verdict could no longer change; record in
     [the review file](../../review/07-does-the-poe-trained-correction-reach-superdiff.md).
 - [ ] **2.2** Draw the six sheets and their sidecars into
-      `paper/iclr/figures/how-much-is-added/across-composition-rules/`, λ=0 column taken from
+      `writing/iclr/figures/how-much-is-added/across-composition-rules/`, λ=0 column taken from
       step 28's `kappa_050` cells, and add a README entry per sheet.
   - **Done when:** six sheets with no red boxes, six sidecars, six README entries.
 
@@ -342,7 +342,7 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 TR=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff/transfer
 
 find "$TR/pairs" -name "*.png" | wc -l          # expect 96
-ls paper/iclr/figures/how-much-is-added/across-composition-rules/*lora_r*.png | wc -l   # expect 6
+ls writing/iclr/figures/how-much-is-added/across-composition-rules/*lora_r*.png | wc -l   # expect 6
 ```
 
 **Pass criteria**

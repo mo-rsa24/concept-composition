@@ -81,7 +81,7 @@ A name that states a claim becomes a lie when the claim dies, and one already ha
 shared-structure argument is recorded as dead in `1-lora-correction/report/paper-evidence-index.md` while four files still
 carry its figure letter. A name that states a private label costs a lookup every time: nothing on disk
 says what `rung2` or `group A` or `idea5a` was. And a name that exists twice sends a reader to
-whichever copy their filesystem happens to hold, which `paper/iclr/figures.md` line 30 already does:
+whichever copy their filesystem happens to hold, which `writing/iclr/figures.md` line 30 already does:
 it names a backing curve that does not exist at the path it gives.
 
 ## Considerations
@@ -269,7 +269,7 @@ disk; only the second name goes.
 | Copy | Original |
 |---|---|
 | `F2-correction-strength.png` | `compose-rate-as-correction-rises.png`, md5 `0aeb4016…` |
-| `evidence/f5b-trajectory-divergence/how-far-the-corrected-run-separates-from-the-uncorrected-one.png` | `paper/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.png`, md5 `026b6a08…` |
+| `evidence/f5b-trajectory-divergence/how-far-the-corrected-run-separates-from-the-uncorrected-one.png` | `writing/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.png`, md5 `026b6a08…` |
 | `evidence/h05-three-sides/` 5 images | the mount's `cache_analyses/`, all five identical |
 | `outputs/interaction_term/dose` | a zero-byte husk of the mount's 6.3G `dose` |
 
@@ -291,7 +291,7 @@ For Claude to execute. Ask Claude to do these, in this order.
       `/datasets/mmolefe/poe_repair_min/outputs/...` strings become that same root, so one script
       runs against either filesystem.
 - [ ] Run the following prompt: `/rename` over the 159 code files that spell output paths, the 24
-      register rows in `paper/iclr/figures.md` that name a builder script, the 12 experiment
+      register rows in `writing/iclr/figures.md` that name a builder script, the 12 experiment
       packages under `poe_repair/experiments/`, and the 24 `make_*.py` builders that carry paper
       figure letters.
 - [x] **Proven green 2026-08-24.** The test suite passes (229 passed, 1 skipped, 1 xfailed) and

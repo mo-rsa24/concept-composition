@@ -6,7 +6,7 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex`, the whole file, only the chunks the full read flagged |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex`, the whole file, only the chunks the full read flagged |
 | Kind | manuscript |
 | Grain | paragraph |
 | Cadence | close |
@@ -134,7 +134,7 @@ None yet.
 
 Navigation: ⬅️ [Routes and threads](#routes-and-threads) | 📋 [TOC](#table-of-contents) | [Next](#next-step) ➡️
 
-**2026-09-25, chunks 7, 8, 9 and 13.** Written to `paper/overleaf-iclr/iclr2027_conference.tex` together with the section 5 walk's ¶13 and Appendix A edits; pre-edit file in the session scratchpad as `iclr2027_conference.tex.bak-fullpass`. Every target matched exactly once. `pdflatex` twice: no errors, no undefined references, 14 pages (13 before; the new Appendix C with the strength grid is the added page). Conclusion on page 9, Appendix A on page 12, Appendix C on page 13.
+**2026-09-25, chunks 7, 8, 9 and 13.** Written to `writing/overleaf-iclr/iclr2027_conference.tex` together with the section 5 walk's ¶13 and Appendix A edits; pre-edit file in the session scratchpad as `iclr2027_conference.tex.bak-fullpass`. Every target matched exactly once. `pdflatex` twice: no errors, no undefined references, 14 pages (13 before; the new Appendix C with the strength grid is the added page). Conclusion on page 9, Appendix A on page 12, Appendix C on page 13.
 
 ## Next step
 

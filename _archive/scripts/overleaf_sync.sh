@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-# Move the manuscript between paper/iclr (source of truth) and a local clone of
+# Move the manuscript between writing/iclr (source of truth) and a local clone of
 # the Overleaf project's git bridge.
 #
-#   scripts/overleaf_sync.sh push            # copy paper/iclr -> clone, show the diff
+#   scripts/overleaf_sync.sh push            # copy writing/iclr -> clone, show the diff
 #   scripts/overleaf_sync.sh push -m "msg"   # ... and commit + push it
-#   scripts/overleaf_sync.sh pull            # git pull in the clone, copy clone -> paper/iclr
+#   scripts/overleaf_sync.sh pull            # git pull in the clone, copy clone -> writing/iclr
 #   scripts/overleaf_sync.sh status          # what differs, in both directions, no writes
 #
-# The clone lives at paper/overleaf-iclr, gitignored by this repo because it
+# The clone lives at writing/overleaf-iclr, gitignored by this repo because it
 # carries the Overleaf project's own history. Override with OVERLEAF_CLONE.
 set -euo pipefail
 
 root="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
-paper_dir="$root/paper/iclr"
-clone="${OVERLEAF_CLONE:-$root/paper/overleaf-iclr}"
+paper_dir="$root/writing/iclr"
+clone="${OVERLEAF_CLONE:-$root/writing/overleaf-iclr}"
 all_figures=0
 prune=0
 message=""
@@ -96,7 +96,7 @@ case "$mode" in
     if [[ -n "$message" ]]; then
       git -C "$clone" add -A
       if git -C "$clone" diff --cached --quiet; then
-        echo "nothing to commit; Overleaf already matches paper/iclr"
+        echo "nothing to commit; Overleaf already matches writing/iclr"
       else
         git -C "$clone" commit -m "$message"
         git -C "$clone" push
@@ -110,18 +110,18 @@ case "$mode" in
     ;;
   pull)
     git -C "$clone" pull --ff-only
-    # Never deletes locally: a file that only exists in paper/iclr is work in
+    # Never deletes locally: a file that only exists in writing/iclr is work in
     # progress that was deliberately kept off Overleaf.
     rsync -a "${includes[@]}" --exclude='.git' "$clone/" "$paper_dir/"
     echo
-    git -C "$root" status --short -- paper/iclr
+    git -C "$root" status --short -- writing/iclr
     ;;
   status)
     git -C "$clone" fetch --quiet || true
     echo "== clone: $clone"
     git -C "$clone" status --short --branch
     echo
-    echo "== files differing between paper/iclr and the clone"
+    echo "== files differing between writing/iclr and the clone"
     stage="$(mktemp -d)"; trap 'rm -rf "$stage"' EXIT
     rsync -a "${includes[@]}" "$paper_dir/" "$stage/"
     figure_filter "$stage" >/dev/null 2>&1

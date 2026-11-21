@@ -525,7 +525,7 @@ before 670 plain-render equivalents are committed.
   - Mark the last five steps as the read zone. Shade steps 0 to 10 as the zone where the two errors
     cannot be separated, labelled on the shading rather than in a legend.
   - Figure to
-    `paper/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`,
+    `writing/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`,
     with its `.json` sidecar recording which pairs, seeds and settings were drawn.
   - Add the entry to that folder's `README.md` naming the algorithm and what produced it.
   - **Done when:** the PNG, the sidecar and the README entry all exist.
@@ -582,7 +582,7 @@ them.
 ◀ **Needs: [tasks 2.2 and 2.3](#2--run-the-grid-and-plot-it)**, the printed branch and the figure.
 
 - [x] **4.1** Open
-      `paper/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`.
+      `writing/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`.
   - Check the `k=100` and `k=200` curves lie on top of each other.
   - ✅ If they do, the chain has equilibrated and the branch the code printed can be believed.
   - ❌ If they do not, the chain has not equilibrated whatever the threshold printed, and the honest
@@ -672,7 +672,7 @@ distributional gap rather than the gap itself.
 ### Organization workflow
 
 1. Run the grid, which writes `residual_curves.json` under `/datasets`.
-2. Draw the figure into `paper/iclr/figures/when-the-correction-arrives/mcmc/` with its `.json`
+2. Draw the figure into `writing/iclr/figures/when-the-correction-arrives/mcmc/` with its `.json`
    sidecar.
 3. Add the entry to that folder's `README.md` naming the algorithm and what produced it, per this
    repo's artifact rule.

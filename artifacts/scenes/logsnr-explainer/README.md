@@ -8,7 +8,7 @@ re-verified this move).
 SDXL's noise schedule, no GPU and no external data.
 
 **why** the interactive companion to F3 in
-[../../../paper/iclr/what-each-figure-argues.md](../../../paper/iclr/what-each-figure-argues.md);
+[../../../writing/iclr/what-each-figure-argues.md](../../../writing/iclr/what-each-figure-argues.md);
 lets a reader check the axis choice (step vs. log-SNR) rather than take it on trust.
 
 **depends on** nothing outside this folder; `npm install` from `package-lock.json` before

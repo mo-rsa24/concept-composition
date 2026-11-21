@@ -22,9 +22,9 @@ settles the two things that get expensive to change later: how figures are
 included (before any figure exists), and what the bib is called. Serves DoD 1-3.
 
 ## Goal
-`tectonic paper/iclr/iclr2027_conference.tex` produces a PDF; the sample title
+`tectonic writing/iclr/iclr2027_conference.tex` produces a PDF; the sample title
 and the Cranberry-Lemon authors are gone; the figure-path rule is written into
-`paper/iclr/README.md`.
+`writing/iclr/README.md`.
 
 ## Environment Facts This Plan Depends On
 See `environment/paper.md`, "Paper: where the LaTeX lives and how it is built",
@@ -47,10 +47,10 @@ for the full picture. What this plan depends on specifically:
       [inferred]
 - [ ] finish the bib: it is past the stub at 67 lines, so what remains is the
       references this paper actually cites  [inferred]
-- [x] write the figure-path rule into `paper/iclr/README.md`: one
+- [x] write the figure-path rule into `writing/iclr/README.md`: one
       `\graphicspath` root plus a naming rule, chosen so a figure that does not
       exist yet can be referenced without breaking the build  [inferred]
-      ✓ verified (`paper/iclr/README.md`: root, names, formats; untracked in git)
+      ✓ verified (`writing/iclr/README.md`: root, names, formats; untracked in git)
 - [ ] add a placeholder-figure macro so an owed figure renders as a visible
       grey box with its slot name, instead of failing the build  [inferred]
 - [ ] set `latex-workshop.latex.recipe.default` to `tectonic` in
@@ -71,7 +71,7 @@ for the full picture. What this plan depends on specifically:
 
 ## Engagement Instructions
 ```bash
-cd paper/iclr
+cd writing/iclr
 /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
 ls -la iclr2027_conference.pdf          # expect a PDF, ~70 KB or larger
 

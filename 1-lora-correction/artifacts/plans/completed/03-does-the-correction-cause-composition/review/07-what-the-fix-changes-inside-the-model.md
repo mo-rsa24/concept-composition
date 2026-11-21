@@ -22,7 +22,7 @@ pair-and-seed runs the fix never trained on.
 |---|---|
 | [design](../plans/hypothesis/07-what-the-fix-changes-inside-the-model.md) | the two maps, why the obvious comparison gives the opposite answer, the threshold in source |
 | **this file** | **the verdict: the ratio is 1.52, it replicated, and one caveat caps the caption** |
-| [the register](../../../../../../paper/iclr/figures.md) | F7's row, whose claim the caption may not exceed |
+| [the register](../../../../../../writing/iclr/figures.md) | F7's row, whose claim the caption may not exceed |
 
 ## Table of contents
 

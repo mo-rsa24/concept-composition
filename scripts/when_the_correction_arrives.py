@@ -45,7 +45,7 @@ from paper_font import use_paper_font
 use_paper_font()
 from poe_repair.experiments.interaction_term import window_grid as wg
 
-FIG_DIR = Path("paper/iclr/figures/when-the-correction-arrives")
+FIG_DIR = Path("writing/iclr/figures/when-the-correction-arrives")
 FIG_NAME = "when-the-correction-arrives"
 
 TEXT_WIDTH = 5.50

@@ -170,8 +170,8 @@ Faithfulness note: the lower fan of fifteen must be visibly dashed and carry no 
 ### Prompt 4a (Subject): The joined prompt is a stored target, never an input
 
 [planned] Zoom into prompt 4's adapter chip, for paragraph 5.2 of
-[the manuscript](../paper/iclr/iclr2027_conference.tex), walked in
-[the draft map](../paper/iclr/DRAFT_MAP.md).
+[the manuscript](../writing/iclr/iclr2027_conference.tex), walked in
+[the draft map](../writing/iclr/DRAFT_MAP.md).
 
 ```
 Style: premium system-design infographic. Clean white or very light gray background. Glossy semi-3D icons with soft drop shadows, one icon per component, sitting on subtle rounded platforms. Flows drawn as vivid color-coded dashed arrow lines, each color meaning exactly one kind of flow, with a small legend inside the image. Related components grouped inside rounded soft-tinted panels with a short title on the panel. A bold title banner across the top. Official product logos only on components that ARE that product; every other component gets a clean generic glyph. Small cartoon figures or vehicles for external actors (users, clients). Clean sans-serif labels under every icon, short and lowercase-friendly. Generous spacing, no clutter, no watermark.
@@ -198,7 +198,7 @@ placement below is read from code, not stated: the adapter targets `attn2.to_q`,
 cross-attention sequence and the pooled embedding enters with the time ids
 (`poe_repair/_sdxl/runtime.py`, `encode_prompt_sdxl`), and one step is one three-branch forward
 on the concept prompts and the null prompt (`poe_repair/methods/_sampling.py`, `run_cfg_poe`).
-The manuscript's own sentence is at `paper/iclr/iclr2027_conference.tex` line 261. 🖼️ rendered 2026-09-03 `diagrams/where-the-adapter-hooks.png` (attempt 2: labels and guide routing corrected by raster edit in the same Codex session; both checks passed).
+The manuscript's own sentence is at `writing/iclr/iclr2027_conference.tex` line 261. 🖼️ rendered 2026-09-03 `diagrams/where-the-adapter-hooks.png` (attempt 2: labels and guide routing corrected by raster edit in the same Codex session; both checks passed).
 Save as: `diagrams/where-the-adapter-hooks.png`
 
 Visual thesis: the adapter touches exactly three projections, the ones where the prompt meets the

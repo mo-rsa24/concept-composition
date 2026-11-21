@@ -304,12 +304,12 @@ Feynman-Kac. A null is a result here and closes the scope honestly rather than f
    compose rate is decided and where this measurement cannot attribute. It is never dropped for
    space and never argued away.
 5. The corrector's window figure exists in
-   `paper/iclr/figures/when-the-correction-arrives/mcmc/` beside the injected-correction version in
+   `writing/iclr/figures/when-the-correction-arrives/mcmc/` beside the injected-correction version in
    `poe/`, and the same-window question is answered either way.
 6. SuperDiff's eight-cell grid (two pairs, 200 against 50 steps, `kappa` clamped against unclamped)
    is recorded, and `eps_M` per step is exposed so `r_t^SD = eps_J - eps_M` can be formed.
 7. Both grids across correction amounts exist in
-   `paper/iclr/figures/how-much-is-added/across-composition-rules/`, each with its `.json` sidecar
+   `writing/iclr/figures/how-much-is-added/across-composition-rules/`, each with its `.json` sidecar
    and a `README.md` entry naming which rule produced it, and the `λ=1` column is classified per
    row.
 8. Feynman-Kac is decided, built or cited, with the reason recorded, including when the answer is
@@ -430,7 +430,7 @@ reshuffle. Each one names the plan that owns it, so `/populate-plans` cannot dro
 | A flat curve whose median displacement is under `MIN_CHAIN_DISPLACEMENT` is a broken measuring tool, not a null | steps 25 and 26 |
 | The rows deliver different absolute amounts at the same `λ`, because `‖r_t^M‖` differs per row. [The timing plan](../../artifacts/plans/completed/03-does-the-correction-cause-composition/plans/hypothesis/05-when-in-the-run-it-matters.md) met this and answered it with a `--mode matched` condition, so either put the delivered total on each row label or run matched | step 29 |
 | The corrector rows will not reproduce the joint render at `λ=1`, because the chain has already left the joint trajectory. Those grid positions are labelled not-an-identity, which makes the `λ=1` column a free classifier of what each rule is | step 29 |
-| The corrector's window figure files to `paper/iclr/figures/when-the-correction-arrives/mcmc/`, the four existing PNGs are already moved into `poe/`, and the grids across correction amounts file to `paper/iclr/figures/how-much-is-added/across-composition-rules/`, because the timing folder's name is a question about timing | steps 27 and 29 |
+| The corrector's window figure files to `writing/iclr/figures/when-the-correction-arrives/mcmc/`, the four existing PNGs are already moved into `poe/`, and the grids across correction amounts file to `writing/iclr/figures/how-much-is-added/across-composition-rules/`, because the timing folder's name is a question about timing | steps 27 and 29 |
 
 ## Environment Context
 

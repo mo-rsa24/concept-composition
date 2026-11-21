@@ -32,7 +32,7 @@ the 95-versus-85 bar. All six sit in the root's background pools.
 1. **`python3 scripts/plan_pulse.py --brief`** (the session-start hook already ran it): what is
    running, the last thing that finished, the single next action, what to launch so it cooks
    while you write, and what to write meanwhile. That is today's answer.
-2. **The figure register, `paper/iclr/figures.md`**: eight slots, each the claim a figure will
+2. **The figure register, `writing/iclr/figures.md`**: eight slots, each the claim a figure will
    make. What is not yet built or fillable there is what the paper still cannot show, and it is
    the whole reason any experiment below runs.
 3. **The `## Running order` table in the repo root [MASTER_PLAN.md](../../MASTER_PLAN.md)**: the
@@ -90,7 +90,7 @@ Results become deferred tasks in the plan tree directly; a striking number propo
 | (candidates parked with their sources) | see each scope's own deferred-tasks section | |
 
 **Figure runs (`figure-*`): generate paper figures from settled results only.** The caption can claim no
-more than the figure slot's sentence. The register (`paper/iclr/figures.md`) is the scoreboard.
+more than the figure slot's sentence. The register (`writing/iclr/figures.md`) is the scoreboard.
 
 | Plan | Slots | Status |
 |---|---|---|

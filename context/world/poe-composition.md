@@ -41,7 +41,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 **At every denoising step, PoE runs the model once per concept and combines the two predictions
 into one, instead of running the model once on a joint prompt.** ✅
 
-Read directly from the paper's own description (`paper/iclr/iclr2027_conference.tex`, abstract):
+Read directly from the paper's own description (`writing/iclr/iclr2027_conference.tex`, abstract):
 composing pretrained diffusion models "at inference time by sampling from a product of experts,
 one expert per concept." The combination is a form of linear score composition: each expert's
 prediction is added (with classifier-free guidance weighting) rather than the model being asked to
@@ -103,7 +103,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 | What | How it was established | When |
 |---|---|---|
-| PoE combines one expert prediction per concept per step | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
+| PoE combines one expert prediction per concept per step | Read in `writing/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | Mono is the joint-prompt cheat, used only as the target | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
 | The two example images | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/{poe,monolithic}.png` | 2026-08-24 |
 | The full-strength shortcut risk and its fix | Read in `context/research-guidelines.md` | 2026-08-24 |

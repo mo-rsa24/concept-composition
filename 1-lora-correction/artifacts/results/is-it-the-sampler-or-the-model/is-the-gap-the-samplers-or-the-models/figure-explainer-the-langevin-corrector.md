@@ -224,7 +224,7 @@ where the window sits on the run. The frame is the detector's verdict.
 |---|---|---|
 | the frame colour | `cells[].compose`, the validated instance count reaching two | [compose rate](../../../../../context/world/compose-rate.md) |
 | the green bar | `cells[].window`, a half-open range of step indices | the plan's own window definition |
-| the layout itself | matched to `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png` on pair, seeds, positions and border rule | the finding's rung 1 |
+| the layout itself | matched to `writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png` on pair, seeds, positions and border rule | the finding's rung 1 |
 
 **What it teaches**
 

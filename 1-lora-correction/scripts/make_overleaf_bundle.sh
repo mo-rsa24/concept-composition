@@ -2,15 +2,15 @@
 set -euo pipefail
 
 root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-paper_dir="$root/paper/iclr"
+paper_dir="$root/writing/iclr"
 slim=0
 if [[ "${1:-}" == "--slim" ]]; then
   slim=1
   shift
 fi
-out="${1:-$root/paper/iclr-overleaf.zip}"
-if [[ "$slim" == "1" && "$out" == "$root/paper/iclr-overleaf.zip" ]]; then
-  out="$root/paper/iclr-overleaf-slim.zip"
+out="${1:-$root/writing/iclr-overleaf.zip}"
+if [[ "$slim" == "1" && "$out" == "$root/writing/iclr-overleaf.zip" ]]; then
+  out="$root/writing/iclr-overleaf-slim.zip"
 fi
 
 if [[ ! -d "$paper_dir" ]]; then

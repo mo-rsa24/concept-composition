@@ -7,13 +7,13 @@ figures carry the transfer argument into the paper.
 
 A figure plan is judged differently from a run. There is no metric to clear here: the question is
 whether each figure reads cold, and whether what it claims sits at or below its row in
-[the figure register](../../../../paper/iclr/figures.md). A figure that
+[the figure register](../../../../writing/iclr/figures.md). A figure that
 overclaims is worse than a missing one, because it survives review until someone checks.
 
 ## Recommended prompt (to judge a built figure)
 
 ```
-/analyze-figure paper/iclr/figures/compose-rate-as-the-lora-trains.png
+/analyze-figure writing/iclr/figures/compose-rate-as-the-lora-trains.png
 ```
 (For a figure that fails its read: `/design-figure` to redesign it, never a caption edit.)
 
@@ -23,7 +23,7 @@ overclaims is worse than a missing one, because it survives review until someone
 |---|---|
 | [design](../plans/figures/06-the-transfer-figures.md) | the six figures, their panels, and what each is for |
 | **this file** | **the verdict: does each figure read cold and stay inside its register row** |
-| [the register](../../../../paper/iclr/figures.md) | the claim ceiling each caption may not exceed |
+| [the register](../../../../writing/iclr/figures.md) | the claim ceiling each caption may not exceed |
 
 ## Table of contents
 
@@ -45,7 +45,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#run-kind) ➡️
 - **Reads cold**: a person who was not in the room opens the PDF, reads only the figure and its
   axis labels, and can say in one sentence what it claims. If they need the caption to say it, the
   figure has not done its job.
-- **Capped by the register**: each figure has a row in `paper/iclr/figures.md` holding one claim
+- **Capped by the register**: each figure has a row in `writing/iclr/figures.md` holding one claim
   sentence. The caption may claim that or less, never more. Where the result supports more, the
   row gets widened first, on evidence.
 - **The caption caps**: the sentences on a register row naming what the figure cannot be read to
@@ -64,8 +64,8 @@ Navigation: ⬅️ [Run kind](#run-kind) | 📋 [TOC](#table-of-contents) | [Nex
 
 | Figure | Kind | Built | Cost | Output | State |
 |---|---|---|---|---|---|
-| F8a one adapter transfers | Figure run | commit 252441b | no GPU, drawn from scored results | `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | built, unjudged |
-| F8b adapter against the joint-prompt correction | Figure run | commit 252441b | no GPU, drawn from scored results | `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | built, unjudged |
+| F8a one adapter transfers | Figure run | commit 252441b | no GPU, drawn from scored results | `writing/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | built, unjudged |
+| F8b adapter against the joint-prompt correction | Figure run | commit 252441b | no GPU, drawn from scored results | `writing/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | built, unjudged |
 | A2 delivery-live | Figure run | | | | not started |
 | A3 transfer | Figure run | | | | blocked on step 11 |
 | A4 delivery against transfer | Figure run | | | | blocked on step 11 |
@@ -184,7 +184,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 | What is unresolved | What would settle it | Who or what is blocked by it |
 |---|---|---|
-| whether F8a and F8b read cold and stay inside their register rows | reading both against `paper/iclr/figures.md` | the transfer paragraphs in the manuscript, which argue from these two |
+| whether F8a and F8b read cold and stay inside their register rows | reading both against `writing/iclr/figures.md` | the transfer paragraphs in the manuscript, which argue from these two |
 | A3 and A4 | step 11 landing | the delivery-against-transfer argument |
 | A5 | step 12 landing | the pool-contrast argument, which is what [baseline-01](../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md) supplies |
 | A2 | nothing external; it has not been started | the delivery-live figure |

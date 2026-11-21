@@ -44,7 +44,7 @@ from scripts.rt_reuse_figure import FRAME_DIR  # noqa: E402
 # Starting the strip at step 10, as an even spread over the run would, shows
 # four frames of the aftermath and none of the moment the paths separate.
 STEPS = (2, 6, 10, 20)
-OUT_DIR = Path("paper/iclr/figures")
+OUT_DIR = Path("writing/iclr/figures")
 FIG_NAME = "samples-per-step-with-the-correction-on-and-off"
 CROSS9_FRAMES = (
     paths.resolve(paths.SAMPLES_AS_THE_WINDOW_MOVES_ONE_STEP_AT_A_TIME)

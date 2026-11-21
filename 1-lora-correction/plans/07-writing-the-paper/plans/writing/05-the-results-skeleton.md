@@ -29,7 +29,7 @@ Experiments and results sections present in the `.tex`, each subsection carrying
 a named placeholder that says which run closes it.
 
 ## Environment Facts This Plan Depends On
-- Sections go in `paper/iclr/iclr2027_conference.tex`; build with
+- Sections go in `writing/iclr/iclr2027_conference.tex`; build with
   Ctrl+Shift+P → Build with recipe → `tectonic`. See `environment/paper.md`,
   "Paper: where the LaTeX lives and how it is built".
 - What exists: the pooled held-out read (out_out 0.96 at step 60k) from
@@ -49,7 +49,7 @@ a named placeholder that says which run closes it.
   an owed figure breaks the build.
 
 ## Tasks
-- [ ] Run `/draft-section results` (the map is `paper/iclr/DRAFT_MAP.md`, created round 1 from
+- [ ] Run `/draft-section results` (the map is `writing/iclr/DRAFT_MAP.md`, created round 1 from
       the register if missing): one piece per reserved place F1 to F8, that place's claim
       sentence as the topic sentence, the placeholder macro from plan 00, every number XX unless
       its review question is answered. This task IS the section structure; compile lands it.
@@ -76,7 +76,7 @@ a named placeholder that says which run closes it.
 
 1. `/draft-section results`: one piece per reserved place, in register order; its `numbers`
    control re-derives every figure from its review file before any compile. Or by hand:
-   one subsection stub per reserved place (F1 to F8 in `paper/iclr/figures.md`), carrying that
+   one subsection stub per reserved place (F1 to F8 in `writing/iclr/figures.md`), carrying that
    place's claim as the topic sentence, the placeholder-figure macro from plan 00, and every
    number as XX.
 2. Build the PDF and read it: the blank spots ARE the remaining run order.
@@ -85,7 +85,7 @@ a named placeholder that says which run closes it.
 
 ## Engagement Instructions
 ```bash
-cd paper/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
+cd writing/iclr && /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
 ls -la iclr2027_conference.pdf     # expect a PDF even with placeholders present
 
 # the two counts should match: every owed figure has a placeholder, and every

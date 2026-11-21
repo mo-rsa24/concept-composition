@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)
 CURVES = WINDOW_ROOT / "window_curves.json"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "samples-as-the-correction-window-moves"
 
 PAIR = "a_cat__x__a_dog"

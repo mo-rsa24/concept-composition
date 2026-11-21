@@ -1,6 +1,6 @@
 # Retrospective: the paper's presentation pass, between route steps 4 and 5
 
-Walk: [the step 4 walk map](EXECUTE_WALK-step-4.md), continued in the same session. Working copy: `paper/iclr-56173/`, built with Tectonic on the cluster. Commits `cb39179d` to `d2e9c333`.
+Walk: [the step 4 walk map](EXECUTE_WALK-step-4.md), continued in the same session. Working copy: `writing/restoring-plurality-in-compositional-diffusion_overleaf/`, built with Tectonic on the cluster. Commits `cb39179d` to `d2e9c333`.
 
 ## What was asked
 

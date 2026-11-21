@@ -4,11 +4,11 @@ Walk: [the walk map](EXECUTE_WALK-step-2.md). Results: [the comparison protocol]
 
 ## 0. Compile the untouched export
 
-**The request.** Unpack `_ICLR2027__LoRA_Plurality.zip` into `paper/iclr-56173/` and confirm it compiles unchanged.
+**The request.** Unpack `_ICLR2027__LoRA_Plurality.zip` into `writing/restoring-plurality-in-compositional-diffusion_overleaf/` and confirm it compiles unchanged.
 
 **The problem.** No LaTeX on the laptop; every build runs with Tectonic on mscluster.
 
-**What was done.** `unzip` into `paper/iclr-56173/` (62 files), `rsync` to the cluster checkout, Tectonic build through `scripts/cluster.sh sh`; `pdfinfo` and `pdffonts` against the submitted PDF. The four W&B runs you linked for elephant and penguin were read and Figure 5's tile was matched against each candidate by mean absolute pixel difference.
+**What was done.** `unzip` into `writing/restoring-plurality-in-compositional-diffusion_overleaf/` (62 files), `rsync` to the cluster checkout, Tectonic build through `scripts/cluster.sh sh`; `pdfinfo` and `pdffonts` against the submitted PDF. The four W&B runs you linked for elephant and penguin were read and Figure 5's tile was matched against each candidate by mean absolute pixel difference.
 
 **Where the results live.** The facts are rows in the route's "What we know so far" and in [the walk map](EXECUTE_WALK-step-2.md#facts-found-on-the-way).
 
@@ -36,7 +36,7 @@ Walk: [the walk map](EXECUTE_WALK-step-2.md). Results: [the comparison protocol]
 
 **The problem.** The main text already ends on page 9, so every main-text slot costs room.
 
-**What was done.** 13 slots, R1 to R13: two in the main text (R1, the SDXL score table; R2, Figure 5 rebuilt in its own wrapped slot) and eleven in the appendix. One macro, `\reviewslot`, wraps the existing `\figurepanel` and picks up a slot file when it exists. 13 reserved rows in `paper/iclr-56173/figures.md`. R1 went through three shapes on your look: full columns, one two-block table, then SDXL in R1 and SD 1.5 in R5 in the appendix, centered, with an "ours (SD 1.5 adapter)" row and a caption sentence on official SD 1.x code.
+**What was done.** 13 slots, R1 to R13: two in the main text (R1, the SDXL score table; R2, Figure 5 rebuilt in its own wrapped slot) and eleven in the appendix. One macro, `\reviewslot`, wraps the existing `\figurepanel` and picks up a slot file when it exists. 13 reserved rows in `writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md`. R1 went through three shapes on your look: full columns, one two-block table, then SDXL in R1 and SD 1.5 in R5 in the appendix, centered, with an "ours (SD 1.5 adapter)" row and a caption sentence on official SD 1.x code.
 
 **Where the results live.** [The layout sheet](../../../../report/paper-review/layout-sheet.md); the register's section "Slots for the review response to submission 56173"; the tex.
 
@@ -52,7 +52,7 @@ Walk: [the walk map](EXECUTE_WALK-step-2.md). Results: [the comparison protocol]
 
 **What was done.** `1-lora-correction/scripts/refresh_paper_slots.py` reads the layout sheet, copies a PNG or PDF, turns a CSV into a centered table, refuses a CSV without protocol rule 9's twelve axis columns, builds on mscluster with `--compile`, and sheets every slot's page with `--gallery`. Tested by refilling R1 and R5 from a test CSV of zeros in a scratch copy of the paper. Four faults found and fixed on the way: a table 247.97 pt too wide (short labels and a `reviewslot <id> shrunk` log line), the table set flush left (centered), a stale remote slot file (the rsync now deletes), and the gallery calling the submitted Figure 5 a placeholder.
 
-**Where the results live.** [The refill script](../../../../scripts/refresh_paper_slots.py); the build log at `paper/iclr-56173/build/iclr2027_conference.log`; [the gallery](../../../../../paper/iclr-56173/build/slot-gallery.png); PRZE-9 lines 1 to 4 ticked on [its page](../../../../report/paper-review/prze-9-slots.md).
+**Where the results live.** [The refill script](../../../../scripts/refresh_paper_slots.py); the build log at `writing/restoring-plurality-in-compositional-diffusion_overleaf/build/iclr2027_conference.log`; [the gallery](../../../../../writing/restoring-plurality-in-compositional-diffusion_overleaf/build/slot-gallery.png); PRZE-9 lines 1 to 4 ticked on [its page](../../../../report/paper-review/prze-9-slots.md).
 
 **Before and after.** Before: no refill path. After: `--check` prints `PASS: 13 slots, 0 with a result file, 13 placeholders`; a refilled R1 fits the text width at 8 pt and moves no float.
 

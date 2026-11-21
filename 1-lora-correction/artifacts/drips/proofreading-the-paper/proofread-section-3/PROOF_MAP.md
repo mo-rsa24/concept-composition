@@ -6,13 +6,13 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex` lines 194 to 266, `\section{Missing Implications: The Plurality Term}` up to `\section{Restoring the Plurality Term Restores Composition}` |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex` lines 194 to 266, `\section{Missing Implications: The Plurality Term}` up to `\section{Restoring the Plurality Term Restores Composition}` |
 | Kind | manuscript section |
 | Grain | paragraph |
 | Cadence | sweep |
 | Current chunk | walk complete and compiled |
 | Marks | 7 ok, 12 changed, 2 cut |
-| Compiled | 2026-09-22, the whole of section 3, into `paper/overleaf-iclr/` only |
+| Compiled | 2026-09-22, the whole of section 3, into `writing/overleaf-iclr/` only |
 | Owner | this session |
 
 ## Table of contents
@@ -34,8 +34,8 @@ Navigation: ⬅️ [Position](#position-in-the-walk) | 📋 [TOC](#table-of-cont
 
 **What is being proofread**
 
-Section 3 of the ICLR 2027 submission, in the Overleaf clone at `paper/overleaf-iclr/`. The repo
-copy at `paper/iclr/` still carries the old introduction and is not touched.
+Section 3 of the ICLR 2027 submission, in the Overleaf clone at `writing/overleaf-iclr/`. The repo
+copy at `writing/iclr/` still carries the old introduction and is not touched.
 
 **Why this pass is happening**
 
@@ -123,8 +123,8 @@ Navigation: ⬅️ [Originals held](#originals-held) | 📋 [TOC](#table-of-cont
 
 | Figure | Image file | Opened | What to change | Slot decided |
 |---|---|---|---|---|
-| 2 | `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf` (was `same-rule-composes-one-pair-and-blends-another.pdf`) | yes, the grid at 90 dpi and each surprising cell at full size | replaced by a new grid: rows butterfly × flower meadow, camel × forest, cat × dog; columns SD 1.4, SD 2.1, SDXL, SD 3.5; each cell joint prompt left, PoE right, seed 42 | not yet walked |
-| 3 | `paper/overleaf-iclr/figures/how-much-is-added/strength-grid-0to1.pdf` | yes, at 400 dpi and column by column | cropped to λ 0 to 1: the columns past 1 are cut, since no other part of the paper uses λ above 1 and the wrong-seed row's second damaged face at λ 1.5 to 2 undercut "no control reaches two animals" | main text, unchanged position |
+| 2 | `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf` (was `same-rule-composes-one-pair-and-blends-another.pdf`) | yes, the grid at 90 dpi and each surprising cell at full size | replaced by a new grid: rows butterfly × flower meadow, camel × forest, cat × dog; columns SD 1.4, SD 2.1, SDXL, SD 3.5; each cell joint prompt left, PoE right, seed 42 | not yet walked |
+| 3 | `writing/overleaf-iclr/figures/how-much-is-added/strength-grid-0to1.pdf` | yes, at 400 dpi and column by column | cropped to λ 0 to 1: the columns past 1 are cut, since no other part of the paper uses λ above 1 and the wrong-seed row's second damaged face at λ 1.5 to 2 undercut "no control reaches two animals" | main text, unchanged position |
 
 ## Open questions on the text
 
@@ -144,7 +144,7 @@ Navigation: ⬅️ [Open questions](#open-questions-on-the-text) | 📋 [TOC](#t
 
 | Chunk | Where it went | What it owes back | Returned |
 |---|---|---|---|
-| 10, 11 | [the four-models figure plan](../../../../plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md) | `paper/overleaf-iclr/figures/same-rule-on-four-models.pdf` (three pairs by four models, joint and PoE per cell, seed 42) and the review file's cell-by-cell read. Drawn 2026-09-22 from jobs 58176 and 58190, 24 of 24 cells; read cell by cell in the review file | yes |
+| 10, 11 | [the four-models figure plan](../../../../plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md) | `writing/overleaf-iclr/figures/same-rule-on-four-models.pdf` (three pairs by four models, joint and PoE per cell, seed 42) and the review file's cell-by-cell read. Drawn 2026-09-22 from jobs 58176 and 58190, 24 of 24 cells; read cell by cell in the review file | yes |
 
 ## Compile log
 
@@ -152,7 +152,7 @@ Navigation: ⬅️ [Routes and threads](#routes-and-threads) | 📋 [TOC](#table
 
 | When | Chunks written | Build | Notes |
 |---|---|---|---|
-| 2026-09-22 | 1 to 4, 7, 9, 11, 12, 14, 16 to 18, 20, and the cuts of 19 and 21, across lines 194 to 266 of `paper/overleaf-iclr/iclr2027_conference.tex` | passed, pdflatex and bibtex on the laptop, no errors, no undefined references or citations, no overfull boxes | 11 pages, conclusion on page 10, matching the baseline. Figure 2 sits at `width=0.85\textwidth`: at full width the manuscript ran to 12 pages. `paper/iclr/` not written, nothing committed in the clone, nothing pushed to Overleaf |
+| 2026-09-22 | 1 to 4, 7, 9, 11, 12, 14, 16 to 18, 20, and the cuts of 19 and 21, across lines 194 to 266 of `writing/overleaf-iclr/iclr2027_conference.tex` | passed, pdflatex and bibtex on the laptop, no errors, no undefined references or citations, no overfull boxes | 11 pages, conclusion on page 10, matching the baseline. Figure 2 sits at `width=0.85\textwidth`: at full width the manuscript ran to 12 pages. `writing/iclr/` not written, nothing committed in the clone, nothing pushed to Overleaf |
 
 ## Next step
 
@@ -161,7 +161,7 @@ Navigation: ⬅️ [Compile log](#compile-log) | 📋 [TOC](#table-of-contents)
 **Where a cold session resumes**
 
 Section 3 is walked end to end and compiled into the Overleaf clone, and it builds. Owed: push the
-clone to Overleaf from the cluster, decide whether `paper/iclr/` takes the same text, and settle the
+clone to Overleaf from the cluster, decide whether `writing/iclr/` takes the same text, and settle the
 open questions below.
 
 

@@ -6,7 +6,7 @@ The walk's persistent state. Read it first on every invocation, write it before 
 
 | Field | Value |
 |---|---|
-| Selection | `paper/overleaf-iclr/iclr2027_conference.tex`, whichever chunk each comment points at |
+| Selection | `writing/overleaf-iclr/iclr2027_conference.tex`, whichever chunk each comment points at |
 | Kind | manuscript |
 | Grain | paragraph, sentence where a comment is about one sentence |
 | Cadence | close, one comment per round |

@@ -103,7 +103,7 @@ driving the correction-timing tab by hand in the inspector.
 **Associated materials**
 
 - Review file, the status source: [../review/hypothesis-03-when-in-the-run-it-matters.md](../../review/05-when-in-the-run-it-matters.md)
-- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../../../../paper/iclr/figures.md), rows F4a to F4h
+- Figure register, which caps every caption: [writing/iclr/figures.md](../../../../../../../writing/iclr/figures.md), rows F4a to F4h
 - Grid definition both runner and scorer read: `poe_repair/experiments/interaction_term/window_grid.py`
 
 **For the full picture**
@@ -380,14 +380,14 @@ them.
 ◀ **Needs: task 2.4** done, so all eight figures exist on disk.
 
 4.1 **Give F4f a register row, or retire the figure**
-   - `paper/iclr/figures/how-many-seeds-composed-as-the-window-moves.{png,pdf,json}` exists and is tracked, and no row in
-     `paper/iclr/figures.md` describes it
+   - `writing/iclr/figures/how-many-seeds-composed-as-the-window-moves.{png,pdf,json}` exists and is tracked, and no row in
+     `writing/iclr/figures.md` describes it
    - A figure with no row has no ceiling on what its caption may claim
    - ✅ a row exists naming its claim sentence, its layout, its evidence and its build command
    - ❌ nothing in the paper needs it: retire the figure rather than leaving it unregistered
 
 4.2 **Flip the F4g and F4h rows from reserved to built**
-   - Both rows read `reserved` in `paper/iclr/figures.md`; both figures exist on disk and are
+   - Both rows read `reserved` in `writing/iclr/figures.md`; both figures exist on disk and are
      tracked
    - Read each PDF cold first (it is the same judgment as 3.2), then flip the status and write the
      caption caps
@@ -481,7 +481,7 @@ register says what may be claimed, and the review file says what was found. F4f 
 |------|---------|--------------|---------|
 | Capture patterns | `/ingest-error-pattern --from-run-log` | Manual, after completion | Errors added to catalogs |
 | Update Error Matrix | `/sync-plan-tree --update-error-matrices` | Automatic, by ingest-error-pattern | This file's Error Matrix regenerated |
-| Reconcile the register | Manual edit of `paper/iclr/figures.md` | Manual, instructions 4.1 and 4.2 | Every F4 row's status matches disk |
+| Reconcile the register | Manual edit of `writing/iclr/figures.md` | Manual, instructions 4.1 and 4.2 | Every F4 row's status matches disk |
 
 ---
 

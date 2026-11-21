@@ -21,13 +21,13 @@ whether the paper leads with the measurement or the fix produces prose that has
 to be rewritten. Serves DoD 4.
 
 ## Goal
-A title in the `.tex`, and `paper/iclr/SPINE.md`: one line per section naming
+A title in the `.tex`, and `writing/iclr/SPINE.md`: one line per section naming
 the single claim it carries, in reading order.
 
 ## Environment Facts This Plan Depends On
-- The title is the `\title{...}` line in `paper/iclr/iclr2027_conference.tex`
+- The title is the `\title{...}` line in `writing/iclr/iclr2027_conference.tex`
   (currently the stock "Formatting Instructions for ICLR 2027"). SPINE.md is a
-  new file in `paper/iclr/`, prose only, not part of the build. See
+  new file in `writing/iclr/`, prose only, not part of the build. See
   `environment/paper.md`, "Paper: where the LaTeX lives and how it is built".
 
 ## Tasks
@@ -52,9 +52,9 @@ the single claim it carries, in reading order.
 
 ## Engagement Instructions
 ```bash
-cat paper/iclr/SPINE.md                  # expect one claim per section, in order
-grep -c "Formatting Instructions" paper/iclr/iclr2027_conference.tex   # expect 0
-grep "\\\\title" paper/iclr/iclr2027_conference.tex   # then read it: is it OUR title?
+cat writing/iclr/SPINE.md                  # expect one claim per section, in order
+grep -c "Formatting Instructions" writing/iclr/iclr2027_conference.tex   # expect 0
+grep "\\\\title" writing/iclr/iclr2027_conference.tex   # then read it: is it OUR title?
 ```
 The count is the real gate: it fails while the stock title is still in place. The
 second line is for your eye, since no command can tell a good title from a bad one.

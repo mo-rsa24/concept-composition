@@ -46,7 +46,7 @@ PLOTTER = REPO / "1-lora-correction/scripts/plot_dose_curves.py"
 SWEEP_SH = REPO / "1-lora-correction/scripts/mechanism_study/run_dose_sweep.sh"
 CANARIES = REPO / "tests/test_interaction_term_canaries.py"
 PAIR_POOL = paths.resolve(paths.DOES_THE_FIX_REACH_UNSEEN_PAIRS) / "pair_pool.yaml"
-PAPER_FIGS = REPO / "paper/iclr/figures"
+PAPER_FIGS = REPO / "writing/iclr/figures"
 MAKE_F2 = REPO / "1-lora-correction/scripts/compose_rate_vs_correction.py"
 
 ROW_DIRS = {"oracle": "", "random": "_random", "wrong_pair": "_wrong_pair"}

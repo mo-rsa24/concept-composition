@@ -68,7 +68,7 @@ The retrospective of the 2026-11-11 `/drip-execute-plan --request` walk over [ro
 
 **What was done.** The layouts in `1-lora-correction/scripts/refresh_paper_slots.py` and both captions were rewritten to match; slots R1 and R3 filled.
 
-**Where the results live.** `paper/iclr-56173/slots/R1.tex`, `R3.tex`; page 9 of the build. Commit `56b968b6`.
+**Where the results live.** `writing/restoring-plurality-in-compositional-diffusion_overleaf/slots/R1.tex`, `R3.tex`; page 9 of the build. Commit `56b968b6`.
 
 **Before and after.** Before: two grey placeholders. After: `--check` PASS (12 slots, 5 filled), 22-page build, no slot too wide.
 

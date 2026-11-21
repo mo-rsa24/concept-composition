@@ -40,7 +40,7 @@ Walk: [the walk map](EXECUTE_WALK.md). Result file: [the ground check](ground-ch
 
 **Where the results live.** Section 3 of [the ground check](ground-check.md); [the sentences that differ from the clone](pdf-vs-overleaf-clone-sentences.tsv); [the PRZE-5 page](../../../../report/paper-review/prze-5-paper-revised.md).
 
-**Before and after.** Before: "section titles differ" with no source settled. After: the export's 14 headings equal the PDF's and every flagged sentence is in it; the clone (last pulled 2026-09-26 08:17 UTC) and `paper/iclr/` (2026-09-21) are both older. The PDF describes the adapter as cross-attention only (pages 1 and 7) and as trained at every denoising step (page 1); the run used self- and cross-attention on steps 0 to 9.
+**Before and after.** Before: "section titles differ" with no source settled. After: the export's 14 headings equal the PDF's and every flagged sentence is in it; the clone (last pulled 2026-09-26 08:17 UTC) and `writing/iclr/` (2026-09-21) are both older. The PDF describes the adapter as cross-attention only (pages 1 and 7) and as trained at every denoising step (page 1); the run used self- and cross-attention on steps 0 to 9.
 
 **Depends on.** Piece 2's adapter config, which exposed the page 1 and 7 misstatements.
 
@@ -56,12 +56,12 @@ Bar: all three objectives answered with evidence, judged from the ground check. 
 | Node plan | 107, 108, 111, 112; 110 busy until 2026-11-12 | your own order | you, `yes` | 110 carries another user's job |
 | Adapter of record | v58-03-self step 50,000, all three Figure 5 runs listed | one run only | you | one recipe for scores, the figure's mix kept visible |
 | PRZE-11 training test | all-50-steps adapter against the paper's steps-0-to-9 adapter | keep as written | you, `all 50` | the paper's adapter already is early-only |
-| Source to edit | the live Overleaf project via the export | the clone, `paper/iclr/` | evidence | headings and sentences match only the export |
+| Source to edit | the live Overleaf project via the export | the clone, `writing/iclr/` | evidence | headings and sentences match only the export |
 
 ## Dead ends and not done
 
 - `environment/hpc/nodes.md` still says mscluster111 cannot run torch; the probe says it can. Not written: this walk could write only under `1-lora-correction/report/paper-review/` and the walk folder.
-- The clone at `paper/overleaf-iclr/` holds uncommitted edits made before the final Overleaf restructure; reconcile before using it.
+- The clone at `writing/overleaf-iclr/` holds uncommitted edits made before the final Overleaf restructure; reconcile before using it.
 - The PDF was not recompiled from the export (no system LaTeX), so no byte or page-count match is claimed.
 - Nothing was committed: the brief did not ask for commits, and parallel sessions edit this branch.
 - `_ICLR2027__LoRA_Plurality.zip` (118 MB) sits untracked at the repository root.

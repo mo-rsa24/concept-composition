@@ -131,7 +131,7 @@ Navigation: ⬅️ [Could the answer be an artefact](#could-the-answer-be-an-art
 
 | What the paper says | What it owes alongside it |
 |---|---|
-| held-out compose rate 0.906 (n=64) at step 60000, level with 0.909 on training pairs, where plain PoE composes near zero | the step; that the scorer counts animals and cannot tell a cat from a dog (cat×dog reads 0.75 by the scorer, 3 of 8 clean by eye); and that `paper/iclr/DRAFT_MAP.md` and F8a still carry the 0.96 that counted the comparison strips |
+| held-out compose rate 0.906 (n=64) at step 60000, level with 0.909 on training pairs, where plain PoE composes near zero | the step; that the scorer counts animals and cannot tell a cat from a dog (cat×dog reads 0.75 by the scorer, 3 of 8 clean by eye); and that `writing/iclr/DRAFT_MAP.md` and F8a still carry the 0.96 that counted the comparison strips |
 | the pooled fix transfers to unseen pairs | that this is one pooled run, not a rate. The rate comes from the fifteen runs, and the sentence must not read as though this run supplied it |
 
 ## Go-ahead for the fifteen runs

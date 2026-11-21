@@ -39,14 +39,14 @@ The PDF was not recompiled from the zip (no system LaTeX here), so a byte-level 
 | Source | What it is | Last change | Matches the PDF? |
 |---|---|---|---|
 | `_ICLR2027__LoRA_Plurality.zip`, `iclr2027_conference.tex` | export of the live Overleaf project | exported 2026-11-10 13:28 | yes, as above |
-| `paper/overleaf-iclr/iclr2027_conference.tex` | a git clone of the Overleaf project (`origin` git.overleaf.com/6a86dc92ca15fe47d75b86f6), with uncommitted local edits to the tex, the PDF and four figures | last commit 2026-09-26 08:17 UTC, working file 2026-09-26 12:09 SAST | no: headings and Section 4 differ |
-| `paper/iclr/iclr2027_conference.tex` | the repository's own draft, with the appendix all commented-out template placeholders | last commit 2026-09-21 (5832a806) | no: 101 of 101 compared sentences differ |
+| `writing/overleaf-iclr/iclr2027_conference.tex` | a git clone of the Overleaf project (`origin` git.overleaf.com/6a86dc92ca15fe47d75b86f6), with uncommitted local edits to the tex, the PDF and four figures | last commit 2026-09-26 08:17 UTC, working file 2026-09-26 12:09 SAST | no: headings and Section 4 differ |
+| `writing/iclr/iclr2027_conference.tex` | the repository's own draft, with the appendix all commented-out template placeholders | last commit 2026-09-21 (5832a806) | no: 101 of 101 compared sentences differ |
 
 The PDF was built about an hour and a half after the clone's working file was last saved, so its final edits were made on Overleaf and never pulled. The clone's uncommitted edits have to be reconciled with the Overleaf version before the clone is used again.
 
 **Headings, PDF page by page, against the clone:**
 
-| PDF page | Submitted PDF | Clone (`paper/overleaf-iclr`) |
+| PDF page | Submitted PDF | Clone (`writing/overleaf-iclr`) |
 |---|---|---|
 | 1 | 1 Introduction | Introduction |
 | 3 | 2 Background and Related Work, 2.1 Latent Diffusion and Classifier-free Guidance, 2.2 Compositional Latent Diffusion | the same |

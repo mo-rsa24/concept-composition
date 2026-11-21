@@ -40,7 +40,7 @@ from paper_font import use_paper_font
 
 use_paper_font()
 
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "where-the-correction-lands"
 WINDOW = paths.resolve(paths.WINDOW)
 PAIR = "a_cat__x__a_dog"

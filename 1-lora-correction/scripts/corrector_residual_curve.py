@@ -26,7 +26,7 @@ Modes, in the order the plans run them:
     --verdict
         applies the three-way threshold to residual_curves.json and prints which branch fired.
     --plot
-        the figure with its .json sidecar under paper/iclr/figures/when-the-correction-arrives/mcmc/.
+        the figure with its .json sidecar under writing/iclr/figures/when-the-correction-arrives/mcmc/.
 
 Every number is float32, upcast from the fp16 the models run in. Output lands under
 /datasets only.
@@ -95,7 +95,7 @@ OUT = Path("/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector"
 SEARCH_JSON = OUT / "step_size_search.json"
 CURVES_JSON = OUT / "residual_curves.json"
 CURVE_CELLS = OUT / "curves"
-FIG_DIR = Path(__file__).resolve().parent.parent.parent / "paper/iclr/figures/when-the-correction-arrives/mcmc"
+FIG_DIR = Path(__file__).resolve().parent.parent.parent / "writing/iclr/figures/when-the-correction-arrives/mcmc"
 FIG_NAME = "how-much-of-the-correction-a-corrector-removes"
 
 # Cost model from the plan: one noise level at corrector count k costs 3k + 5 UNet

@@ -47,7 +47,7 @@ from correction_size_vs_run_position import smooth          # noqa: E402  the sa
 from poe_repair import paths
 
 WINDOW_CURVES = paths.resolve(paths.WINDOW) / "window_curves.json"
-FIG_DIR = Path("paper/iclr/figures")
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "correction-size-per-step-beside-outcome-per-window"
 
 PAIR = "a_cat__x__a_dog"

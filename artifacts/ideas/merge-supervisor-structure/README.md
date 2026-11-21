@@ -18,7 +18,7 @@ per-figure evidence register, and both abstract candidates).
 
 ## Where it came from and what judged it
 
-Referenced from [the meeting checklist](../../../paper/iclr/meeting-checklist.md) as the walk
+Referenced from [the meeting checklist](../../../writing/iclr/meeting-checklist.md) as the walk
 tracking the plurality renames enacted from the 2026-08-20 meeting, and from
 [the size-measure walk](../../../1-lora-correction/artifacts/drips/experiments/how-big-the-correction-is/what-the-size-measure-means-and-what-it-misses.md)
 which explicitly separates its own figure-design work from this walk's section-naming scope. Two

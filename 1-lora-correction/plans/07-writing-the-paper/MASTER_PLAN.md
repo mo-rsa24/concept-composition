@@ -47,7 +47,7 @@ the story order, the figure layout, and every word. It reads figures from
 
 ## Goals
 (Checkpoints. Measurable.)
-1. Build: `tectonic paper/iclr/iclr2027_conference.tex` produces a PDF with no
+1. Build: `tectonic writing/iclr/iclr2027_conference.tex` produces a PDF with no
    unresolved references, run from a clean checkout.
 2. Title and section order: one title committed in the `.tex`, and a written story
    order naming which claim each section carries.
@@ -110,7 +110,7 @@ phase-3 boundary rather than at the deadline.
 ## Plans
 (Phase 1, the rough draft. Later phases get their plan files when phase 1 lands.)
 - ◑ writing-01-make-the-template-build.md: the build works and the figure-path rule is written
-  in `paper/iclr/README.md`; the title is still the stock stub (DoD 1-3)
+  in `writing/iclr/README.md`; the title is still the stock stub (DoD 1-3)
 - ⚠️ writing-02-the-title-and-the-section-spine.md: nothing in 03, 04 or 05 starts until this
   lands (DoD 4)
 - ⚠️ writing-03-where-each-figure-goes.md: the phase-1 deliverable. Its owed column is the run

@@ -100,7 +100,7 @@ here because it grows one row per verification and nobody reads it while plannin
 
 Navigation: ⬅️ [Provenance](#provenance) | 📋 [TOC](#table-of-contents)
 
-The manuscript is `paper/iclr/iclr2027_conference.tex`, built with `tectonic` (the only LaTeX
+The manuscript is `writing/iclr/iclr2027_conference.tex`, built with `tectonic` (the only LaTeX
 engine on this cluster) either from the terminal or through VS Code's LaTeX Workshop extension
 with the recipe manually set to `tectonic`. A `.vscode/settings.json` was added to the repo on
 2026-08-18 defining a custom `tectonic` recipe; whether that makes the plain "Build LaTeX

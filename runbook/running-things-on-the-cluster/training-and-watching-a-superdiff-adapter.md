@@ -248,7 +248,7 @@ PY=/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python
 ssh mscluster85 "CUDA_VISIBLE_DEVICES=0 nohup $PY $REPO/scripts/superdiff/run_lambda_sweep_200.py > $SD/lambda_sweep.log 2>&1 < /dev/null &"
 # when the log ends: sheets into the paper's figure folder, with their .json sidecars
 $PY $REPO/scripts/superdiff/assemble_lambda_sheets.py
-ls $REPO/paper/iclr/figures/how-much-is-added/across-composition-rules/*_grid_200_steps_kappa_*.png
+ls $REPO/writing/iclr/figures/how-much-is-added/across-composition-rules/*_grid_200_steps_kappa_*.png
 ```
 
 ✅ **Seven sheets, `cat_dog_grid_200_steps_kappa_{balanced,000,025,050,075,100}.png` and

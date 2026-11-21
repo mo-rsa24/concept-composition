@@ -94,7 +94,7 @@ Bar: the check prints PASS at all four step sizes, both drivers match at k = 0, 
 
 - Instruction 4 of the plan, your PASS or MISS on the contact sheet, is open.
 - PRZE-2's figure line is open until Figure 5 is assembled (route step 13), and its two paper-text lines belong to step 13.
-- Figure 5's width: 0.48 text width in `paper/iclr-56173/figures.md` against full width in the layout sheet.
+- Figure 5's width: 0.48 text width in `writing/restoring-plurality-in-compositional-diffusion_overleaf/figures.md` against full width in the layout sheet.
 - Four `eval-superdiff` jobs (Slurm 84592, 84593, 84595, 84597) render tiles nothing uses; the cancel was refused by this session's permissions and is yours to run.
 - The worktree `/datasets/mmolefe/poe_repair_min/worktrees/prze2` is kept; remove it with `git worktree remove` from the cluster checkout once the main checkout is reconciled.
 - The main cluster checkout is 71 commits behind with 19 untracked files; `/reconcile-machines`.

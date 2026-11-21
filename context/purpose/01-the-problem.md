@@ -67,7 +67,7 @@ fixes composition.** ✅
 
 The gap is the interaction term: the per-step difference between the prediction the model would
 make if it saw the literal joint prompt (Mono) and the prediction PoE actually makes by combining
-two separate experts. The paper's own framing (`paper/iclr/iclr2027_conference.tex`, abstract):
+two separate experts. The paper's own framing (`writing/iclr/iclr2027_conference.tex`, abstract):
 "[PoE] can fail catastrophically, producing a single blended chimera instead of a scene containing
 both concepts, and we trace this failure to a specific, correctable gap. This gap is the
 interaction term... the signal omitted by linear score composition." What the interaction term is,
@@ -100,7 +100,7 @@ Navigation: ⬅️ [What this project does about it](#what-this-project-does-abo
 |---|---|---|
 | PoE composition fails on 15 of 17 pool pairs at fail-rate 1.00 | Read in `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` | 2026-08-24 |
 | The headline compose rate needs a stated bound, not a bare number | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
-| The interaction term is the gap the fix targets | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
+| The interaction term is the gap the fix targets | Read in `writing/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | The reach question (one pair vs group vs whole taxonomy) is the open question | Read in `MASTER_PLAN.md`, Mission and Objectives | 2026-08-24 |
 
 ## Cross-references

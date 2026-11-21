@@ -107,7 +107,7 @@ from step 11 and the mixed pool from step 12.
 
 **Associated materials**
 
-- Figure register, which caps every caption: [paper/iclr/figures.md](../../../../../paper/iclr/figures.md), rows F8a, F8b, F8
+- Figure register, which caps every caption: [writing/iclr/figures.md](../../../../../writing/iclr/figures.md), rows F8a, F8b, F8
 - The review file for the fifteen runs, which feeds A3 and A4: [transfer as a rate over fifteen pairs](../../review/04-transfer-as-a-rate-over-fifteen-pairs.md)
 - The review file for the pool contrast, which feeds A5: [the size-matched control pool](../../../../artifacts/plans/parked/04-does-the-fix-reach-unseen-pairs/review/05-the-size-matched-control-pool.md)
 - This plan's own record: [the review file for the transfer figures](../../review/06-the-transfer-figures.md)
@@ -140,7 +140,7 @@ halted, not approximated.
 
 - The `co3` absolute python path, because the figure scripts run outside any activated shell. See
   [environment/hpc/nodes.md: Python environments](../../../../../environment/hpc/nodes.md#python-environments).
-- Figure outputs land in `paper/iclr/figures/` inside the repo, which is on `/home-mscluster`. This
+- Figure outputs land in `writing/iclr/figures/` inside the repo, which is on `/home-mscluster`. This
   is the one exception to the `/datasets` rule and it is safe because a figure is kilobytes, not
   gigabytes. The run outputs these figures read stay on `/datasets`.
 - No system LaTeX exists here, so figure text is rendered by matplotlib's own mathtext, never by a
@@ -238,7 +238,7 @@ existed, so neither waited on steps 11 and 12.
 1. **A2, delivery-live.** Fraction-of-distance-reached on the y-axis, training step on the x-axis,
    one faint line per held-out pair, with a horizontal reference line at the ~40% level where the
    curves flatten.
-   Reads the live curves logged by step 9. Saves to `paper/iclr/figures/`.
+   Reads the live curves logged by step 9. Saves to `writing/iclr/figures/`.
 
 2. **A3, transfer.** Compose-rate on the y-axis, fraction of pairs held out on the x-axis. The
    do-no-harm baseline is drawn as a band rather than a line. Real held-out thumbnails are pinned
@@ -300,14 +300,14 @@ evidence set. F1 belongs to the compose-scorer scope, not here.
   pair.
   - Built by `python 1-lora-correction/scripts/adapter_transfers.py`, reads the pooled run's `compose_rate.json` and
     `pair_pool.json`
-  - Outputs `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}`
+  - Outputs `writing/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}`
   - Which commit built it, and whether it has been judged: the
     [review file](../../review/06-the-transfer-figures.md)
 - [x] **1.2** F8b, the shippable adapter against the joint-prompt correction it imitates: one
   horizontal dot row per pair, four markers per row.
   - Built by `python 1-lora-correction/scripts/adapter_vs_oracle_cost.py`, reads `dose_curves.json` and the pooled run's
     `compose_rate.json`, no new runs
-  - Outputs `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}`
+  - Outputs `writing/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}`
   - Which commit built it, and whether it has been judged: the
     [review file](../../review/06-the-transfer-figures.md)
 
@@ -348,7 +348,7 @@ task 5.2 renders at most four images.
     direction, the train-longer question reopens; record the outcome in the
     [review file](../../review/06-the-transfer-figures.md) either way.
   - Discharges F8a's "only checkpoints to 60000 were scored" caption cap and narrows F9's
-    step-mismatch cap; update both rows in `paper/iclr/figures.md` per instruction 3.3.
+    step-mismatch cap; update both rows in `writing/iclr/figures.md` per instruction 3.3.
 - [ ] **5.2** **[needs /design-figure]** The qualitative ceiling panel: adapter-corrected beside
   the same image corrected by the joint-prompt correction at λ=1, on the same four held-out
   pair-and-seed cases as the F9 rows.
@@ -381,23 +381,23 @@ them. A figure is judged by eye, and that judgment is not something a script can
 ◀ **Needs: task 1.1, 1.2, or any of 2.1 to 2.4** done, so there is a PDF to open.
 
 3.1 **Open the PDF and read it cold**
-   - Open `paper/iclr/figures/<figure>.pdf` in a viewer, not the PNG in a chat window
+   - Open `writing/iclr/figures/<figure>.pdf` in a viewer, not the PNG in a chat window
    - Read only the figure and its axis labels, without the caption
    - Expected result: you can say what the figure claims in one sentence, without help
    - ✅ the sentence you say matches the row's sentence in
-     [paper/iclr/figures.md](../../../../../paper/iclr/figures.md); mark verified
+     [writing/iclr/figures.md](../../../../../writing/iclr/figures.md); mark verified
    - ❌ you cannot say it, or you say something the row does not claim; the figure goes back to
      `/design-figure` rather than getting a longer caption
 
 3.2 **Check the caption against its register row**
-   - Open `paper/iclr/figures.md`, find the row for this figure
+   - Open `writing/iclr/figures.md`, find the row for this figure
    - Compare the row's claim sentence against what the figure actually shows
    - ✅ the caption claims at or below the row; mark verified
    - ❌ the figure supports more than the row says; widen the register row first, on evidence, then
      write the caption. Never widen the caption alone
 
 3.3 **Flip the register row's status**
-   - Edit the figure's row in `paper/iclr/figures.md`, status column, `reserved` → `**built**`
+   - Edit the figure's row in `writing/iclr/figures.md`, status column, `reserved` → `**built**`
    - Add the caption caps in the same row: what the figure cannot be read to say
    - Expected result: the row names the output path, the build command, and the sidecar JSON
 
@@ -462,8 +462,8 @@ guessed.
 
 | Item | Lane | What it shows | Built by | Output | Register row |
 |------|------|---------------|----------|--------|--------------|
-| F8a one adapter transfers | — | Compose rate over training steps, trained-on against held-out, with the uncorrected PoE level; second panel unpooled per pair | `python 1-lora-correction/scripts/adapter_transfers.py` | `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | F8a, **built** |
-| F8b adapter against the joint-prompt correction | — | One dot row per pair: no injection, the joint-prompt correction at two strengths, adapter at step 60000 | `python 1-lora-correction/scripts/adapter_vs_oracle_cost.py` | `paper/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | F8b, **built** |
+| F8a one adapter transfers | — | Compose rate over training steps, trained-on against held-out, with the uncorrected PoE level; second panel unpooled per pair | `python 1-lora-correction/scripts/adapter_transfers.py` | `writing/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` | F8a, **built** |
+| F8b adapter against the joint-prompt correction | — | One dot row per pair: no injection, the joint-prompt correction at two strengths, adapter at step 60000 | `python 1-lora-correction/scripts/adapter_vs_oracle_cost.py` | `writing/iclr/figures/compose-rate-by-pair-for-lora-against-the-joint-prompt-correction.{png,pdf,json}` | F8b, **built** |
 
 Numbers for both live in their sidecar `.json` and in the register row, never in this plan.
 
@@ -508,7 +508,7 @@ what stops a caption drifting past its evidence.
 |------|---------|--------------|---------|
 | Capture patterns | `/ingest-error-pattern --from-run-log` | Manual, after completion | Errors added to catalogs |
 | Update Error Matrix | `/sync-plan-tree --update-error-matrices` | Automatic, by ingest-error-pattern | This file's Error Matrix regenerated |
-| Flip the register row | Manual edit of `paper/iclr/figures.md` | Manual, instruction 3.3 | The caption's ceiling matches the figure |
+| Flip the register row | Manual edit of `writing/iclr/figures.md` | Manual, instruction 3.3 | The caption's ceiling matches the figure |
 
 ---
 
@@ -527,7 +527,7 @@ src  = RUN / "compose_rate.json"      # scored pooled run
 pool = RUN / "pair_pool.json"         # which pairs were trained on
 # panel (a): trained-on vs held-out compose rate over steps, no-fix PoE level dotted
 # panel (b): the held-out curves unpooled, one per pair
-fig.savefig(OUT_DIR / f"{FIG_NAME}.{ext}", dpi=300)   # OUT_DIR = paper/iclr/figures
+fig.savefig(OUT_DIR / f"{FIG_NAME}.{ext}", dpi=300)   # OUT_DIR = writing/iclr/figures
 ```
 
 **File:** [1-lora-correction/scripts/adapter_vs_oracle_cost.py](../../../../scripts/adapter_vs_oracle_cost.py)

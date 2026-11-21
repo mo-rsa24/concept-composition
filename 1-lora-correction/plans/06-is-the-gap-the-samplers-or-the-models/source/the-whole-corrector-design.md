@@ -457,7 +457,7 @@ still bounded away from zero at the last denoising step is already a lower limit
 without a single new sample.
 
 - [ ] **1.1** Read the per-step correction size as the run approaches zero noise, from
-      `paper/iclr/figures/correction-size-over-the-denoising-run.json` (50 steps, 3 seeds, two
+      `writing/iclr/figures/correction-size-over-the-denoising-run.json` (50 steps, 3 seeds, two
       pairs) and `cache_analyses/step_collapse.json` beside `snr_collapse.json` across pairs, whose
       `peak_at_edge` field speaks to high-noise concentration.
 - [ ] **1.2** State three things in the review file or the read is not worth having. First, the
@@ -544,7 +544,7 @@ already written in [The claim](#the-claim). No images, no detector, no scorer.
       with the numerator and denominator on a second row so a moving denominator is visible. Mark
       the last five steps as the [read zone](../review/03-what-is-left-once-the-chain-settles.md#words-this-file-uses) and shade steps 0 to 10 as the zone where the two errors
       cannot be separated. Figure to
-      `paper/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`
+      `writing/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`
       with its `.json` sidecar.
 - [ ] **4.5** Apply the three-way threshold from [The claim](#the-claim) in code, print which branch
       fired, and write the verdict into the review file with the numbers it was judged against.
@@ -562,16 +562,16 @@ seeds, same nine positions, corrector in place of injected `r_t`.
       task 4's curve. `a_cat__x__a_dog` seeds 9 to 12 as rows, the same nine ten-step window
       positions as columns, green border on the pictures the detector scored as composed, plus a tenth column with the
       corrector on for all 50 steps. Figure to
-      `paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`.
+      `writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png`.
 
-      <a href="../../../paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png"><img src="../../../paper/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png" width="200" alt="Cat-and-dog renders in four rows, seeds 9 to 12, and ten columns: the Langevin corrector on in one ten-step window from 0–10 to 40–50, then on for all 50 steps, with a green bar under each picture marking where it acts; every frame is red and labelled blended, 1 instance"></a>
+      <a href="../../../writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png"><img src="../../../writing/iclr/figures/when-the-correction-arrives/mcmc/samples-as-a-ten-step-corrector-window-slides.png" width="200" alt="Cat-and-dog renders in four rows, seeds 9 to 12, and ten columns: the Langevin corrector on in one ten-step window from 0–10 to 40–50, then on for all 50 steps, with a green bar under each picture marking where it acts; every frame is red and labelled blended, 1 instance"></a>
 - [ ] **5.2** Put it beside
-      `paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`
+      `writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png`
       and record in the review file whether the corrector's compose rate peaks in the same window
       the [injected correction](../review/04-does-the-corrector-compose-in-the-same-window.md#words-this-file-uses) does. Same window is a strong result: two different mechanisms
       acting at the same moment. A different window is a stronger one and needs its own paragraph.
 
-      <a href="../../../paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png"><img src="../../../paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png" width="200" alt="Cat-and-dog renders in four rows, seeds 9 to 12, and nine columns headed by ten-step ranges from 0–10 to 40–50; most pictures in the 0–10 column show a cat and a dog apart, and the later columns show one merged face"></a>
+      <a href="../../../writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png"><img src="../../../writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png" width="200" alt="Cat-and-dog renders in four rows, seeds 9 to 12, and nine columns headed by ten-step ranges from 0–10 to 40–50; most pictures in the 0–10 column show a cat and a dog apart, and the later columns show one merged face"></a>
 
 **The condition on this task is deliberately soft.** A flat curve in task 4 does not strictly imply no
 change in compose rate, because the corrector could relocate the trajectory without shrinking
@@ -613,11 +613,11 @@ Run group: **baseline**.
       `r_t^M = eps_J - eps_M`. Four rows: product-of-experts with `r_t`, SuperDiff with `r_t^SD`,
       corrector at `k=1` with `r_t^(1)`, corrector at `k=5` with `r_t^(5)`.
 - [ ] **7.2** Grid one: columns are seeds 9 to 12, `λ` fixed at 0.75, the value
-      [F5](../../../../paper/iclr/figures/F5-one-dial-three-instruments.png) already reads at.
+      [F5](../../../../writing/iclr/figures/F5-one-dial-three-instruments.png) already reads at.
       Render the same grid at `λ=0` in the same pass, which gives the methods-alone figure for
       free.
 
-      <a href="../../../paper/iclr/figures/F5-one-dial-three-instruments.png"><img src="../../../paper/iclr/figures/F5-one-dial-three-instruments.png" width="200" alt="Three panels against λ from 0 to 1 for the pair's own r_t, another pair's r_t and a random vector of the same size: position in image space from PoE to Mono, the share called two animals, and agreement with the step"></a>
+      <a href="../../../writing/iclr/figures/F5-one-dial-three-instruments.png"><img src="../../../writing/iclr/figures/F5-one-dial-three-instruments.png" width="200" alt="Three panels against λ from 0 to 1 for the pair's own r_t, another pair's r_t and a random vector of the same size: position in image space from PoE to Mono, the share called two animals, and agreement with the step"></a>
 - [ ] **7.3** Grid two: columns are `λ ∈ {0, 0.25, 0.5, 0.75, 1}`, seed fixed at 9.
 - [ ] **7.4** Handle the two things this grid is known to hit rather than discovering them. The
       rows deliver different absolute amounts at the same `λ`, because `‖r_t^M‖` differs per row.
@@ -627,7 +627,7 @@ Run group: **baseline**.
       already moved off the joint trajectory; label those pictures not-an-identity<sub>[1](../plans/baselines/06-three-rules-on-one-amount-axis.md#words-this-plan-uses "plan: three rules on one amount axis"), [2](../review/06-three-rules-on-one-amount-axis.md#words-this-file-uses "review: four composition rules on the same amount axis")</sub>. A row that fails
       to converge at `λ=1` is doing something beyond combining scores, which makes the `λ=1` column
       a free classifier of what each rule is.
-- [ ] **7.5** Figures to `paper/iclr/figures/how-much-is-added/across-composition-rules/`, not to
+- [ ] **7.5** Figures to `writing/iclr/figures/how-much-is-added/across-composition-rules/`, not to
       the timing folder. These figures answer how much correction is added, and the timing folder's
       name is a question about timing. Add a `README.md` entry per figure saying which rule produced it.
 
@@ -688,7 +688,7 @@ them.
 ◀ **Needs: task 4.4**, the figure, and task 4.5, the printed branch.
 
 - [ ] **10.1** Open
-      `paper/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`.
+      `writing/iclr/figures/when-the-correction-arrives/mcmc/how-much-of-the-correction-a-corrector-removes.png`.
       Check the `k=100` and `k=200` curves lie on top of each other. If they do not, the chain has
       not equilibrated whatever the threshold printed, and the honest answer is inconclusive.
 - [ ] **10.2** Check the second row: did the numerator fall, or did the denominator rise? Say which

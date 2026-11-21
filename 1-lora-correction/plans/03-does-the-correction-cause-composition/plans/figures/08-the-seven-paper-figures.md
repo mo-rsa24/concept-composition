@@ -17,7 +17,7 @@ each making one claim with its control visible in the figure, each drawn from re
 scored runs rather than from a memory of how the result looked.
 
 ## Read this first
-[paper/iclr/what-each-figure-argues.md](../../../../../paper/iclr/what-each-figure-argues.md)
+[writing/iclr/what-each-figure-argues.md](../../../../../writing/iclr/what-each-figure-argues.md)
 says what each figure is for: the question it answers, what would change if the
 answer came out the other way, what is plotted on which axes, what the caption may
 not claim, and a paste-ready prompt for going deeper on the maths behind it. Read
@@ -69,7 +69,7 @@ points at it.
 ## Tasks
 
 - [x] F1, the two readings of "a cat and a dog": design and build.
-      `python 1-lora-correction/scripts/what_the_product_misses.py` → `paper/iclr/figures/what-the-product-misses-explainer.pdf`.
+      `python 1-lora-correction/scripts/what_the_product_misses.py` → `writing/iclr/figures/what-the-product-misses-explainer.pdf`.
       <a href="../../diagrams/the-product-peaks-at-the-chimera.png"><img src="../../diagrams/the-product-peaks-at-the-chimera.png" width="200" alt="Two orange contour clusters labelled a cat and a dog, their overlap shaded blue and marked with a dot as the product; a dashed empty region at lower left labelled cat beside dog with a leader line reading no product mass; corner note, schematic, not measured"></a>
       <br><em>F1's left panel: the cat and dog contour clusters, the shaded overlap marked as the product, and the empty dashed region labelled "cat beside dog".</em>
 - [x] F2, more correction more composition: built as a 4x5 grid above four
@@ -81,7 +81,7 @@ points at it.
       correction against 0.039, 0.047 and 0.027, with that real correction
       taking the [compose rate](../../../../../context/world/compose-rate.md) from 3%
       to 94%.
-      `python 1-lora-correction/scripts/compose_rate_vs_correction.py` → `paper/iclr/figures/compose-rate-as-correction-rises.pdf`.
+      `python 1-lora-correction/scripts/compose_rate_vs_correction.py` → `writing/iclr/figures/compose-rate-as-correction-rises.pdf`.
 
       > AUC here is the area under the compose-rate-against-λ curve, on a
       > 0-to-1 scale. It is one number standing in for a whole curve, so rows
@@ -115,14 +115,14 @@ points at it.
       count, and it writes `step_collapse.json` beside the log-SNR file rather
       than over it.
 - [x] F3 built: `python 1-lora-correction/scripts/correction_size_vs_run_position.py` writes
-      `paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf` and a sidecar `.json`
+      `writing/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf` and a sidecar `.json`
       recording what was drawn. The fan at the noisy end survives the step axis
       and the figure shows it: spread is 30.0% over steps 0 to 24 against 15.6%
       over steps 25 to 49, and 65.1% at step 0 against 13.1% at step 49, so the
       caption may not say the collapse holds uniformly. The divergence is drawn
       as the bands at their widest on the left.
 - [ ] Rewrite the F3 section of
-      [paper/iclr/what-each-figure-argues.md](../../../../../paper/iclr/what-each-figure-argues.md)
+      [writing/iclr/what-each-figure-argues.md](../../../../../writing/iclr/what-each-figure-argues.md)
       to the built minimal layout. It still describes decoded frames along the
       top and two named pairs in colour, neither of which the figure carries
       any more, so the doc and the file disagree until this is done.
@@ -261,7 +261,7 @@ points at it.
       as well, or amend the running-example section to name the exception and
       why (seed 10 composes from λ=0.5 with every control single-animal).
 - [x] F5 designed and built: `python 1-lora-correction/scripts/dial_vs_three_instruments.py` →
-      `paper/iclr/figures/F5-one-dial-three-instruments.pdf`. Three panels
+      `writing/iclr/figures/F5-one-dial-three-instruments.pdf`. Three panels
       from three measurements that already existed, each with the number it had
       to beat written down before its run. Where the picture sits (32 runs,
       0.031 to 0.992 along that run's own PoE-to-Mono axis, controls flat),
@@ -340,11 +340,11 @@ points at it.
       that the scorer's one positive (frog × toad, seed 10) is a detector mistake,
       three boxes drawn on one fused body with a duplicated head and extra limbs.
       The scorer's rule (count ≥ 2) does not change to remove it. F2's caption in
-      `paper/iclr/figures.md` quotes that 3% and needs the same note attached.
+      `writing/iclr/figures.md` quotes that 3% and needs the same note attached.
 - [ ] Run the two illustration prompts (three-regime diagram, method schematic)
       through ChatGPT and drop the images in
       `1-lora-correction/plans/03-does-the-correction-cause-composition/assets/`  [owner: human]
-- [x] Add a row per built figure to `paper/iclr/figures.md`: F1 to F4b and D1
+- [x] Add a row per built figure to `writing/iclr/figures.md`: F1 to F4b and D1
       to D4 all carry rows with claim, file, source and caption caps; F5 to F8
       hold reserved rows.
 - [x] `language-score-as-the-correction-window-moves` given its register row, so it is no longer
@@ -381,7 +381,7 @@ statistic; rates and frequencies belong in the results section beside the tables
    number. For F2 that was the five-picture strip.
 4. `/evidence-ladder` on the approved specs. Builds
    `figures/<name>_case/step<N>_quant.png` and `step<N>_qual.png`.
-5. The register row in `paper/iclr/figures.md`.
+5. The register row in `writing/iclr/figures.md`.
 
 **When time is short.** Skip 1 and 2, use the figure that already exists
 (`dose_curves.png`), run step 3 for its qualitative partner, and do step 5. A
@@ -393,7 +393,7 @@ never makes it into the paper.
 
 ## Engagement Instructions
 ```bash
-ls paper/iclr/figures/            # expect F1-F5b, F7a, F8a, F8b and D1-D4 built + sidecars
+ls writing/iclr/figures/            # expect F1-F5b, F7a, F8a, F8b and D1-D4 built + sidecars
                                   # F6 undecided; F7 bands two and three, F4g, F4h, F8 pending
 # per figure, check three things by eye:
 #   a real picture is present, not only a curve

@@ -8,7 +8,7 @@ model's share is already known to be nonzero before a single corrector step runs
 ## Recommended prompt (when the run lands)
 
 ```
-/analyze-run the correction size as the run approaches zero noise, from paper/iclr/figures/correction-size-over-the-denoising-run.json
+/analyze-run the correction size as the run approaches zero noise, from writing/iclr/figures/correction-size-over-the-denoising-run.json
 ```
 
 ## Position in the plan tree

@@ -12,8 +12,8 @@ Background
 Submission 56173 got three reviews. Reviewer PrzE is handled by the route in
 plans/route-answer-the-iclr-reviews.md. This session takes Reviewer k4nd (rating 1, confidence 3)
 and Reviewer UHz6's questions (rating 2, confidence 4) while the quantitative jobs of route
-steps 5 to 9 run elsewhere. The working copy of the paper is paper/iclr-56173/iclr2027_conference.tex;
-the submitted version is 56173_Restoring_plurality_in_c.pdf. paper/iclr-56173/Reviews.pdf is a scan with no text
+steps 5 to 9 run elsewhere. The working copy of the paper is writing/restoring-plurality-in-compositional-diffusion_overleaf/iclr2027_conference.tex;
+the submitted version is 56173_Restoring_plurality_in_c.pdf. writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf is a scan with no text
 layer: read it as images (k4nd is pages 4 and 5, UHz6 page 3).
 
 How to walk it
@@ -93,7 +93,7 @@ Settled facts (do not re-derive; cite them)
   with the slot name; never estimate a number.
 
 What to read
-- paper/iclr-56173/Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf pages 3 to 5; 56173_Restoring_plurality_in_c.pdf (pdftotext -layout gives line
   numbers); the working copy's tex.
 - 1-lora-correction/report/paper-review/protocol.md, held-out-set.md, layout-sheet.md, board.md.
 - 1-lora-correction/artifacts/drips/answering-the-reviewers/answer-iclr-reviews/prompt-route-step-13-revise-the-paper.md and
@@ -102,11 +102,11 @@ What to read
 - The memory notes on training targets, held-out pairs and manuscript voice.
 
 Outputs
-- The text fixes in paper/iclr-56173/iclr2027_conference.tex, built with
+- The text fixes in writing/restoring-plurality-in-compositional-diffusion_overleaf/iclr2027_conference.tex, built with
   python3 1-lora-correction/scripts/refresh_paper_slots.py --compile (23 or 24 pages, no undefined references).
-- paper/iclr-56173/replies/k4nd.md and paper/iclr-56173/replies/uhz6.md: one section per point, the reviewer's words quoted, the reply
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/k4nd.md and writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/uhz6.md: one section per point, the reviewer's words quoted, the reply
   beneath, each claim citing a section, figure, table or slot.
-- A line per change in paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md, grouped by reviewer point.
+- A line per change in writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md, grouped by reviewer point.
 
 Done when
 Every k4nd weakness and question and every UHz6 question has a reply section; every fixable text
@@ -118,7 +118,7 @@ Rules
 - New sentences go to the user before they go in; purely corrective edits go as one diff.
 - Commit only the files this session changed, by name. Never git commit -a: the working tree holds
   the user's uncommitted trainer edits under poe_repair/experiments/.
-- Push nothing to Overleaf. Edit the paper only under paper/iclr-56173/.
+- Push nothing to Overleaf. Edit the paper only under writing/restoring-plurality-in-compositional-diffusion_overleaf/.
 - Claim nothing the record does not show; no defensive phrasing in replies.
 
 What you will see

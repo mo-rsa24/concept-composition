@@ -2,20 +2,20 @@
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#paper-latex-build)
 
-The manuscript is `paper/iclr/`, owned by the
+The manuscript is `writing/iclr/`, owned by the
 `1-lora-correction/plans/07-writing-the-paper/` scope. Editing and building it
 is a different loop from running experiments: no GPU, no queue, no job.
 
 ## Where to make changes
 
-All prose goes in `paper/iclr/iclr2027_conference.tex`, the single manuscript file. The other
+All prose goes in `writing/iclr/iclr2027_conference.tex`, the single manuscript file. The other
 files in that folder are the ICLR distribution and are not edited: `iclr2027_conference.sty`
 (layout), `.bst` (bibliography style), `natbib.sty`, `fancyhdr.sty`, and `math_commands.tex`
 (macro definitions, worth reading before defining a new macro since it likely already exists).
 References go in `iclr2027_conference.bib`. Figures are referenced, never copied in: they are
 produced by `1-lora-correction/plans/03-does-the-correction-cause-composition/`
 and `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/`, and
-`paper/iclr/README.md` holds the path rule.
+`writing/iclr/README.md` holds the path rule.
 
 ## No system LaTeX exists on this cluster
 
@@ -27,7 +27,7 @@ CI step that assumes a normal TeX install is wrong on this cluster.
 ## Building it, the terminal route (what Claude and any script uses)
 
 ```bash
-cd paper/iclr
+cd writing/iclr
 /home-mscluster/mmolefe/.local/bin/tectonic iclr2027_conference.tex
 ```
 Confirmed present and executable at that path live on 2026-08-24. `tectonic` is a
@@ -37,7 +37,7 @@ are offline and fast.
 
 **Reading the output.** The build writes `iclr2027_conference.pdf` next to the `.tex`. The
 repository-wide `*.pdf` rule in `.gitignore` is commented out, so a PDF is kept out only by a path
-rule: `paper/iclr-56173/**/*.pdf` covers the export. The paper is read by building
+rule: `writing/restoring-plurality-in-compositional-diffusion_overleaf/**/*.pdf` covers the export. The paper is read by building
 it, either through the VS Code PDF viewer or from a laptop over the same SSH tunnel the LoRA
 Inspector is reached through.
 

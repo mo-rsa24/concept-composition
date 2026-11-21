@@ -85,7 +85,7 @@ here.
 
 **Sources.** The paper, its register row at abstract level since 2026-08-12 in
 [the reading register](../../../../../plans/standing/literature/reading-register.md), and its parked mention in
-[the draft map](../../../../../paper/iclr/DRAFT_MAP.md) under section 2.
+[the draft map](../../../../../writing/iclr/DRAFT_MAP.md) under section 2.
 
 **Associated materials.** [The review questions](../../review/07-feynman-kac-correctors.md),
 [the whole corrector design](../../source/the-whole-corrector-design.md).
@@ -357,7 +357,7 @@ None. This scope carries no `diagram-prompts.md`, so there is no illustrated map
 ### Organization workflow
 
 The read lands in the reading register. The decision lands in the review file. Nothing is filed
-under `paper/iclr/figures/`.
+under `writing/iclr/figures/`.
 
 ## Orchestration: keeping catalogs and plan files in sync
 
@@ -366,7 +366,7 @@ under `paper/iclr/figures/`.
 | What changes | Where it has to be reflected |
 |---|---|
 | the full read happens | [the reading register](../../../../../plans/standing/literature/reading-register.md)'s row for 2503.02819 moves from abstract level to full read, as a promotion of the 2026-08-12 row |
-| the decision | [the draft map](../../../../../paper/iclr/DRAFT_MAP.md)'s parked mention under section 2, which currently holds the paper without a verdict |
+| the decision | [the draft map](../../../../../writing/iclr/DRAFT_MAP.md)'s parked mention under section 2, which currently holds the paper without a verdict |
 | the decision is build | a new sub-scope, via `/decompose-plan`, never a task appended here |
 | the plan's status | the scope [MASTER_PLAN.md](../../MASTER_PLAN.md) and the root running order, both by `sync-plan-tree` rather than by hand |
 

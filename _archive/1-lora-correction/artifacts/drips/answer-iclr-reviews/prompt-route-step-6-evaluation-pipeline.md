@@ -54,7 +54,7 @@ What is already known
   check is done by eye), CLIP score, BLIP-VQA, ImageReward, GenEval's and T2I-CompBench's official
   evaluators, and network evaluations per image counted on the U-Net call (protocol rule 6).
 - Outputs: result CSVs carrying protocol rule 9's columns, read by 1-lora-correction/scripts/refresh_paper_slots.py
-  into the slots of paper/iclr-56173/, which is built with Tectonic on the cluster and uploaded to
+  into the slots of writing/restoring-plurality-in-compositional-diffusion_overleaf/, which is built with Tectonic on the cluster and uploaded to
   Overleaf by hand.
 - Machines: the laptop writes code and the paper; mscluster107 is the user's biggpu job 83423 with
   two RTX 8000, ending around midday Thursday 12 November; mscluster112 has one RTX PRO 6000

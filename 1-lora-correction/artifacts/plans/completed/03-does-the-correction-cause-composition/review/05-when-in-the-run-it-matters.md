@@ -19,7 +19,7 @@ the correction does its work.
 | [design](../plans/hypothesis/05-when-in-the-run-it-matters.md) | the sliding window, the grid, the threshold the result has to beat |
 | **this file** | **the verdict: timing decides, and it decides at the very start** |
 | [the independent estimate](../../../../../plans/03-does-the-correction-cause-composition/review/04-what-the-cached-runs-already-show.md) | the fork step, step 16, which disagrees with this and is not a contradiction |
-| [the register](../../../../../../paper/iclr/figures.md) | F4's row, whose layout this result changes |
+| [the register](../../../../../../writing/iclr/figures.md) | F4's row, whose layout this result changes |
 
 ## Table of contents
 
@@ -220,7 +220,7 @@ Navigation: ⬅️ [What the write-up owes](#what-the-write-up-owes) | 📋 [TOC
 
 Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
 
-Rewrite F4's row in [the register](../../../../../../paper/iclr/figures.md) to drop the fork-step
+Rewrite F4's row in [the register](../../../../../../writing/iclr/figures.md) to drop the fork-step
 band, then build F4.
 
 ## Cross-references

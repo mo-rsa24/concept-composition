@@ -7,7 +7,7 @@ here. When you are done, F2's percentages are safe to print and two questions in
 ## Recommended prompt (when you finish)
 
 ```
-/analyze-figure paper/iclr/figures/compose-rate-as-correction-rises.pdf
+/analyze-figure writing/iclr/figures/compose-rate-as-correction-rises.pdf
 ```
 
 ## Position in the plan tree
@@ -39,7 +39,7 @@ here. When you are done, F2's percentages are safe to print and two questions in
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#words-this-file-uses) ➡️
 
 The paper's central claim is that composition fails because one correction term is missing. The
-figure that carries that claim is **F2** in `paper/iclr/figures.md`, and its caption will say:
+figure that carries that claim is **F2** in `writing/iclr/figures.md`, and its caption will say:
 *more of the correction composes more, and two size-matched fakes stay flat.*
 
 The experiment behind F2 has run and the direction survived: turning the correction up from none
@@ -294,7 +294,7 @@ Navigation: ⬅️ [6. The five-picture strip](#6-the-five-picture-strip) | 📋
 |---|---|---|
 | the re-scored curves | `/datasets/mmolefe/poe_repair_min/outputs/interaction_term/dose/dose_curves.json` | *Do the curves hold when only the runs this experiment generated are scored?* and *Do they hold under a threshold chosen by looking at the boxes?*, both in [the review file](../../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/03-more-correction-more-composition.md) |
 | the annotated box diagnostic | `dose_strip_an_elephant__x__a_penguin_seed10_boxes.png` | why `MIN_BOX_FRACTION` is 0.25 rather than a number picked from a table |
-| the five-picture strip | `paper/iclr/figures/compose-rate-as-correction-rises.pdf` | F2 in the figure register, the paper's headline figure |
+| the five-picture strip | `writing/iclr/figures/compose-rate-as-correction-rises.pdf` | F2 in the figure register, the paper's headline figure |
 
 ## Recommended Prompts
 

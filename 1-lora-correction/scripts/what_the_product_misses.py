@@ -34,8 +34,8 @@ import numpy as np
 PAIRS_ROOT = paths.resolve(paths.HOW_MUCH_CORRECTION_IS_NEEDED) / "pairs"
 
 # Beside the manuscript, not on /datasets: a paper figure is a few hundred KB and
-# LaTeX has to reach it. Naming rule in paper/iclr/README.md.
-FIG_DIR = Path("paper/iclr/figures")
+# LaTeX has to reach it. Naming rule in writing/iclr/README.md.
+FIG_DIR = Path("writing/iclr/figures")
 FIG_NAME = "what-the-product-misses-explainer"
 
 # The drawn plane. Nothing here is measured; the ranges exist so the panel's physical

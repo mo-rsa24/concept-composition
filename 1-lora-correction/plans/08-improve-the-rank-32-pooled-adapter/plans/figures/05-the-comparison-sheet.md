@@ -167,7 +167,7 @@
 2. **The sidecar**: a JSON beside each sheet naming every source render's path, the run it came from, its W&B run id, the label it received, and the two secondary reads, so the sheet can be regenerated and audited without opening the labelling tool.
 3. **The correction-size table**: mean correction size per pair over that pair's cells and steps, in the units the repository's fixed size measure uses, with the best run's clean-seed count beside it.
 4. **The card entry** in `artifacts/results/does-a-better-trained-adapter-give-a-clean-cat-and-dog/README.md`: what each file shows, how it was made, and which review file its verdicts come from.
-5. **The register slot**, named: which slot in `paper/iclr/figures.md` this sheet serves, or an explicit statement that it serves none and is scope evidence only.
+5. **The register slot**, named: which slot in `writing/iclr/figures.md` this sheet serves, or an explicit statement that it serves none and is scope evidence only.
 
 ---
 
@@ -250,7 +250,7 @@
 3.3 **Write the card entry** in the results folder's `README.md`: what each file shows, how it was made, which review files the verdicts come from, and the caveat that the labels are one person's blind read.
 
 3.4 **Name the register slot.**
-   - Open `paper/iclr/figures.md` and find the slot this sheet serves.
+   - Open `writing/iclr/figures.md` and find the slot this sheet serves.
    - ✅ A slot exists: record its identifier in the card, and check the sheet claims no more than that slot's sentence allows.
    - ❌ No slot fits: write in the card that this sheet is scope evidence and serves no register slot, rather than inventing one.
 

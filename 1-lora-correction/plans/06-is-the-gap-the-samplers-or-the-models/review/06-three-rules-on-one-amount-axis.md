@@ -96,7 +96,7 @@ Navigation: ⬅️ [The question written before the run](#the-question-written-b
 - [ ] ⚠️ Do the two corrector rows differ from each other? `k=1` and `k=5` are two different
       trajectories, so a difference between them is about how far the chain settled and not about
       how much correction was added.
-- [ ] ⚠️ Did both figures land in `paper/iclr/figures/how-much-is-added/across-composition-rules/`
+- [ ] ⚠️ Did both figures land in `writing/iclr/figures/how-much-is-added/across-composition-rules/`
       rather than in the timing folder? These figures are about how much is added, and the timing
       folder's name is a question about timing.
 

@@ -12,7 +12,7 @@ the scorer that was chosen by looking at real detections. F2's caption may quote
 ## Recommended prompt (to re-read the numbers)
 
 ```
-/analyze-figure paper/iclr/figures/compose-rate-as-correction-rises.pdf
+/analyze-figure writing/iclr/figures/compose-rate-as-correction-rises.pdf
 ```
 (To redo the counting and the thresholds, work through
 [the procedure](../../../../../plans/03-does-the-correction-cause-composition/procedures/hypothesis-02-recheck-the-headline-numbers.md).)
@@ -24,7 +24,7 @@ the scorer that was chosen by looking at real detections. F2's caption may quote
 | [design](../plans/hypothesis/03-more-correction-more-composition.md) | the runs across strengths, the two controls, the threshold |
 | **this file** | **the verdict: 3% to 94% with both controls at or below 6%. F2's caption may quote these** |
 | [procedure](../../../../../plans/03-does-the-correction-cause-composition/procedures/hypothesis-02-recheck-the-headline-numbers.md) | the steps that produced the re-score, and how to redo it |
-| [the register](../../../../../../paper/iclr/figures.md) | F2's row, the paper's headline figure |
+| [the register](../../../../../../writing/iclr/figures.md) | F2's row, the paper's headline figure |
 
 ## Table of contents
 
@@ -240,7 +240,7 @@ The original question asked about two things at once, so it splits.
 
 **And the strip that carries the figure.**
 - [x] ✅ Does the five-image strip read the same over the complete set of runs?
-      **Yes.** F2 is `paper/iclr/figures/compose-rate-as-correction-rises.pdf`: `a_cat__x__a_dog` seed 9, all
+      **Yes.** F2 is `writing/iclr/figures/compose-rate-as-correction-rises.pdf`: `a_cat__x__a_dog` seed 9, all
       three rows across all five strengths, above the curves on a shared λ axis.
       The real-correction row holds one ginger cat-dog
       [chimera](../../../../../../context/world/chimera.md) at λ=0, 0.25 and 0.5, then a tabby cat
@@ -255,7 +255,7 @@ The original question asked about two things at once, so it splits.
       real dog.
 
       **The second figure answers the obvious objection.**
-      `paper/iclr/figures/compose-rate-as-correction-rises-for-a-dissimilar-pair.pdf` is `an_elephant__x__a_penguin` seed 10. An
+      `writing/iclr/figures/compose-rate-as-correction-rises-for-a-dissimilar-pair.pdf` is `an_elephant__x__a_penguin` seed 10. An
       elephant and a penguin share nothing, and PoE still fuses them into one creature at λ=0, so
       the failure cannot be dismissed as "the two animals look alike". Two things in it belong in
       the text rather than smoothed over: at λ=0.5 the failure changes character, dropping the

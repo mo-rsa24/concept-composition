@@ -45,7 +45,7 @@ interactive supplementary.
 step-points. Moved here from the walk session's scratchpad, which does not survive the session.
 
 **What it is for.** The data sidecar behind figure F11,
-`paper/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf`, drawn by
+`writing/iclr/figures/held-out-trajectories-in-one-shared-plane.pdf`, drawn by
 `scripts/plot_shared_plane_trajectories.py`, which recomputes every drawn number from these
 coordinates and asserts against the values recorded here. One definition trap it records: the
 walk's 7.3 is the mean distance of a seed's eight ends to their centroid; the matched pairwise

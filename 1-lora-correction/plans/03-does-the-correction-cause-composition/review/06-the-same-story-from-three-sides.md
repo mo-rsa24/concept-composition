@@ -26,7 +26,7 @@ template rather than anything about binding.
 |---|---|
 | [design](../plans/hypothesis/06-the-same-story-from-three-sides.md) | the five checks, their thresholds, and why each shares no machinery with the run across strengths |
 | **this file** | **the verdict: the two image-side checks agree, the two language-side checks come back null** |
-| [the register](../../../../paper/iclr/figures.md) | F5's row, fed by the manifold slide |
+| [the register](../../../../writing/iclr/figures.md) | F5's row, fed by the manifold slide |
 
 ## Table of contents
 

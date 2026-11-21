@@ -187,7 +187,7 @@ Serves goal 9. Checkable outcomes:
 
 | Figure | Lane | What it shows | Save to |
 |--------|------|---------------|---------|
-| F8a, full run | subject | compose rate (y) over training steps 10k-100k (x), trained-on vs held-out, uncorrected baseline drawn | `paper/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` (extended) |
+| F8a, full run | subject | compose rate (y) over training steps 10k-100k (x), trained-on vs held-out, uncorrected baseline drawn | `writing/iclr/figures/compose-rate-as-the-lora-trains.{png,pdf,json}` (extended) |
 | the best-case panel | subject | the LoRA render beside the cached-true-correction render, same pairs and seeds, qualitative label | drafted here, shipped by plan 05 |
 
 ### Generated during plan execution

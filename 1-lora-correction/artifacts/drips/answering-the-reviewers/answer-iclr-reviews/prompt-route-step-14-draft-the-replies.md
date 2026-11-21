@@ -18,7 +18,7 @@ text file for OpenReview. The repo is /home/molef/PhD/concept-composition.
 
 Objectives
 1. Read the OpenReview forum page for the comment length limit and format, and say what it is.
-2. Build paper/iclr-56173/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
+2. Build writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/prze.md, scripts/build_reply_project.py and scripts/check_reply_numbers.py.
 3. Draft the opening, weakness 1 with question 1, weakness 2, question 2 and the closing, one part
    at
    a time with the user steering.
@@ -27,8 +27,8 @@ Objectives
    counts.
 
 What to read
-- paper/iclr-56173/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
-- paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/Reviews.pdf: Reviewer PrzE's exact words, and the other two reviews for overlapping points.
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md and the revised paper's tables: the facts the reply cites.
 - 1-lora-correction/report/paper-review/board.md, protocol.md and the results tables from steps 8 to 11.
 - The OpenReview forum page for submission 56173 (the user's browser, or a pasted copy).
 
@@ -41,7 +41,7 @@ What is already known
   Langevin, ours.
 - The revision renumbered figures. PrzE's "Figures 3 and 4" are the submission's numbers; cite the
   revised numbers and map each one the reviewer used (take the mapping from
-  paper/iclr-56173/CHANGES_FOR_SUPERVISORS.md, or build it from the submitted PDF
+  writing/restoring-plurality-in-compositional-diffusion_overleaf/CHANGES_FOR_SUPERVISORS.md, or build it from the submitted PDF
   56173_Restoring_plurality_in_c.pdf and the revised build).
 - Appendix C.2 lists the 53 held-out pairs and the two showcase pairs. The table of the 48 training
   pairs (board line PRZE-3a) is not in the working copy as of 2026-11-11; check that step 13 added
@@ -68,7 +68,7 @@ Rules
 - Never ask for or store any Overleaf or OpenReview credential.
 
 What to hand back
-- paper/iclr-56173/replies/prze.md and paper/iclr-56173/replies/common.md, the built LaTeX project zip, and one plain-text file per
+- writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/prze.md and writing/restoring-plurality-in-compositional-diffusion_overleaf/replies/common.md, the built LaTeX project zip, and one plain-text file per
   comment with its character count.
 - The number check's output with every number matched.
 - Rows added to "What we know so far" in plans/route-answer-the-iclr-reviews.md.

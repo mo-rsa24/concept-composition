@@ -1,6 +1,6 @@
 """Rasterise a hand-authored SVG figure to the PNG and PDF the paper uses.
 
-    <co3-python> scripts/render_svg_figure.py paper/iclr/figures/lora-training.svg
+    <co3-python> scripts/render_svg_figure.py writing/iclr/figures/lora-training.svg
 
 Writes <stem>.png (scale 1.6) and <stem>.pdf beside the source.
 """

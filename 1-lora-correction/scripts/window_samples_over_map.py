@@ -32,7 +32,7 @@ from poe_repair import paths
 
 WINDOW_ROOT = paths.resolve(paths.WINDOW)
 SRC = WINDOW_ROOT / "window_curves.json"
-OUT_DIR = Path("paper/iclr/figures/when-the-correction-arrives/poe")
+OUT_DIR = Path("writing/iclr/figures/when-the-correction-arrives/poe")
 FIG_NAME = "samples-over-the-window-map"
 
 STRIP_PAIR = "a_cat__x__a_dog"

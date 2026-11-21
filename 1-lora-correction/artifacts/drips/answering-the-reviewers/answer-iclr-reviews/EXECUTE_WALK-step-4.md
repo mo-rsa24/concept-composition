@@ -35,7 +35,7 @@ Closed 2026-11-10 21:13: bar met, PASS; frozen set at `089abd6e`. Retrospective:
 
 ## Facts found on the way
 
-- `.gitignore` line 43 has `*.pdf` commented out, so PDFs are tracked unless a path rule excludes them; the export block added for `paper/iclr-56173/` excludes its PDFs. `environment/paper.md` says PDFs are gitignored at line 31, which is no longer true.
+- `.gitignore` line 43 has `*.pdf` commented out, so PDFs are tracked unless a path rule excludes them; the export block added for `writing/restoring-plurality-in-compositional-diffusion_overleaf/` excludes its PDFs. `environment/paper.md` says PDFs are gitignored at line 31, which is no longer true.
 - The Attend-and-Excite prompt file is not in the repository; the README links it as a GitHub attachment.
 - The animals set includes "a cat and a dog" (a showcase pair) and "a dog and a horse" (one of our competing candidates).
 

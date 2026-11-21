@@ -139,7 +139,7 @@ no new sampling.
 
 The measure: curve_for in 1-lora-correction/scripts/snr_collapse.py (||r_t|| / ||eps_PoE|| per step; median
 scaling optional here). Cache root: /datasets/mmolefe/poe_repair_min/outputs/training_cache.
-Population sidecar: paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.json.
+Population sidecar: writing/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.json.
 
 Figure A (qual-quant pair): a_cat__x__a_dog's own ratio curve, x = denoising step 0-49,
 with decoded x-hat-0 thumbnails from the cached PoE trajectory at steps 2, 12, 25, 45 placed

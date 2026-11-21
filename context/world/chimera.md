@@ -54,7 +54,7 @@ targets.** ✅
 
 The paper's abstract states the causal claim directly: PoE "can fail catastrophically, producing a
 single blended chimera instead of a scene containing both concepts, and we trace this failure to a
-specific, correctable gap" (`paper/iclr/iclr2027_conference.tex`). Whether a given render is a
+specific, correctable gap" (`writing/iclr/iclr2027_conference.tex`). Whether a given render is a
 chimera or a real composition is exactly what the scorer in
 [compose-rate.md](compose-rate.md) is built to call.
 
@@ -86,7 +86,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 |---|---|---|
 | The definition of a chimera | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
 | The chimera example image | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/poe.png` | 2026-08-24 |
-| The causal claim linking chimera to the interaction term | Read in `paper/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
+| The causal claim linking chimera to the interaction term | Read in `writing/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | The "two of the same animal" scorer miss | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
 
 ## Cross-references
