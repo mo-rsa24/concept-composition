@@ -1,5 +1,195 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-21",
+   "sha256": "723b71907bff9dd0a36272e690144a19fc99641043f9bdd522a1f0435a8f2531",
+   "state": "drained"
+  },
+  "artifacts/drips/can-a-positional-and-vector-restore-composition/EXECUTE_WALK.md": {
+   "at": "2026-11-21",
+   "sha256": "6facec3b2bc42b2bc7166f1968e5a862e115e34882c87716fdffceee408f398f",
+   "state": "drained"
+  },
+  "artifacts/drips/does-one-prompt-already-say-one-animal/EXECUTE_WALK.md": {
+   "at": "2026-11-21",
+   "sha256": "7373652e980110d41a6bd758dde7f3f3e725e70ffa7ce4f6b1bf278d7085ae02",
+   "state": "drained"
+  },
+  "artifacts/drips/separation-steering/EXECUTE_WALK.md": {
+   "at": "2026-11-21",
+   "sha256": "a1549c38b1051370857cc109a15ea0eff84f73099d5d0d9cfec4ece5e78d59bf",
+   "state": "drained"
+  },
+  "artifacts/drips/today-the-third-concept/EXECUTE_WALK.md": {
+   "at": "2026-11-21",
+   "sha256": "b1709ae0bb2b264a0f2e72cf9a36a961270ce34f41f2d49abcc0a686b7fe7a9a",
+   "state": "drained"
+  },
+  "artifacts/ideas/README.md": {
+   "at": "2026-11-21",
+   "sha256": "e746dd21537b683ad459aad30ef83e6bdd10256f3a2d112c728e458ebebed7a2",
+   "state": "drained"
+  },
+  "artifacts/ideas/text-embedding-of-the-residual/IDEA_MAP.md": {
+   "at": "2026-11-21",
+   "sha256": "1a8e7abd8b46f6882e5b0e0ba85a3502e916f2d8daa1ea453707c4bbf9262042",
+   "state": "drained"
+  },
+  "artifacts/ideas/text-embedding-of-the-residual/README.md": {
+   "at": "2026-11-21",
+   "sha256": "9c170bd0ffc39a2f4818d40cd7182b8e2a58893b583e0354f26c92ffe45ca78e",
+   "state": "drained"
+  },
+  "artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md": {
+   "at": "2026-11-21",
+   "sha256": "118a94360b8c81607188e95c3fd86ed59e515b8e5d4c7f9eacea4dd1744acd34",
+   "state": "drained"
+  },
+  "artifacts/results/README.md": {
+   "at": "2026-11-21",
+   "sha256": "ee525c1fedb7cee65f761e8682270cf1a207505add8346e49306efa8b60be28c",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/README.md": {
+   "at": "2026-11-21",
+   "sha256": "929e2b6e37d7e1d12e2db5b0bd73e3c271f500c46ea2344774d30b1dbed16076",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md": {
+   "at": "2026-11-21",
+   "sha256": "258d142b605a5a26c0e880b8fd0edbb133aff5bf0f8b0ac2d2db973b5b04a716",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png": {
+   "at": "2026-11-21",
+   "sha256": "cd0ff6f1dad4693634bed82ad1a0fed8d228a8b58bff3ab40594c998c5d7e741",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/dog-and-cat-norms.png": {
+   "at": "2026-11-21",
+   "sha256": "1f924db9c046cc61daac27996cf5fd79371339470b68009aeab95024a5244909",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png": {
+   "at": "2026-11-21",
+   "sha256": "88194550cdea6ed57f1a4727da8d555b0e527360e12ff238c2a26fb1c3612866",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/poe-x-and-all-seeds.png": {
+   "at": "2026-11-21",
+   "sha256": "765853c450a78f3c08c1b57cfe7fd8e09224c6638648152531d7bc355ed6f268",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/positional-sheet.png": {
+   "at": "2026-11-21",
+   "sha256": "65c67fbd647a9c02a59baf21be2f9d7a9c0009561f3862b4d568a09eb1fb4c75",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-1-arithmetic-vector-x.png": {
+   "at": "2026-11-21",
+   "sha256": "cebcaf7fee412f92cb0f57192889ecd62269a793d8f2ff9f568f5d84e8729577",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-3-real-phrases.png": {
+   "at": "2026-11-21",
+   "sha256": "3e41ac3c152e9d0cc59531f77303d88d918d2ab92c0c8ef2b44a0f8ec0e6e60f",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-4-x-at-rising-weight.png": {
+   "at": "2026-11-21",
+   "sha256": "d0d59e4a913f1383491f11f55a884a94fcb8978ebb16d2a7ca9487ab5c15e035",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-sheet-1-before-x-pos.png": {
+   "at": "2026-11-21",
+   "sha256": "bca30b3a5e7ebcf42cc805ffff7d079a17323d290870d7b00280b42eae094428",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png": {
+   "at": "2026-11-21",
+   "sha256": "1f924db9c046cc61daac27996cf5fd79371339470b68009aeab95024a5244909",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/README.md": {
+   "at": "2026-11-21",
+   "sha256": "c98b757c8caec55b08b9fce2b46e30810f5f65c4b8661d1a390cf1d7a417098b",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png": {
+   "at": "2026-11-21",
+   "sha256": "116b6b9985f875c2662958d429adcc5ef211bfae84086d3f010d88c687ede590",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-phrases-sheet.png": {
+   "at": "2026-11-21",
+   "sha256": "b809cad67945e3ed1649ed334900d43551ea73dd5c65579d8ff6769fed6180f3",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-sheet.png": {
+   "at": "2026-11-21",
+   "sha256": "2c03483b879ae82d4662f3e677593bf259ccc4349143b1e2a5d1789157bb147f",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-weight-sweep-sheet.png": {
+   "at": "2026-11-21",
+   "sha256": "14b776a13cf06fedaf6be78796c2084b58637e8f24cca3d5d134e86501e41ebf",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/joint-seeds-to-pass.png": {
+   "at": "2026-11-21",
+   "sha256": "d5ee68798cfaeea0dc34d3b3be350820999748a39a37e4c6135f727ce98f4472",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-over-time.png": {
+   "at": "2026-11-21",
+   "sha256": "59c37d1ec7a7c5bb34cfafc7fe045a90ae1c5cde3d43988da13f98a424203869",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-over-time.png": {
+   "at": "2026-11-21",
+   "sha256": "67791f92ee50328422812c9b57aed769b97896fafedde706f38fcf09e8fff616",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-over-time.png": {
+   "at": "2026-11-21",
+   "sha256": "9490764c1eb2ad6d3cd05289007bd68356b420d4c810cc637f88cd701a9180be",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-run6a-iter02000.png": {
+   "at": "2026-11-21",
+   "sha256": "25d2a9efab50ee18f906988aa325156fb8cb3a10e277661b8fe90d2da51733e3",
+   "state": "owed"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-run6b-iter02000.png": {
+   "at": "2026-11-21",
+   "sha256": "9ad8447aacc3859b823709527f5b1842c463de7e16f6cbd86f38b86d4ec6e5bd",
+   "state": "owed"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-run6c2-iter02000.png": {
+   "at": "2026-11-21",
+   "sha256": "07685d3c564ba9aa2dc6b47cca77eff1db9d392b453f19709cf402809c4d3b14",
+   "state": "owed"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter00000.png": {
+   "at": "2026-11-21",
+   "sha256": "52919a1151d4b8553b752f51dc03b4103ea0362f7647519228745799a38f006b",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter08000.png": {
+   "at": "2026-11-21",
+   "sha256": "7d7e533309713974b4beb0bffc07505890a37fc342fdfceb265affce587d91ee",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/separation-steering-sheet.png": {
+   "at": "2026-11-21",
+   "sha256": "397707f905b56984b4932af4c83832c20b499735601eb7ed698bee52da40dcc3",
+   "state": "drained"
+  },
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/token-alignment-matrix.png": {
+   "at": "2026-11-21",
+   "sha256": "dff20e145d7e54e5e7a90b8266825be79c417ad9514ff5a5ec056427e2cb9ca5",
+   "state": "drained"
+  },
   "artifacts/results/what-the-text-already-says/README.md": {
    "at": "2026-11-21",
    "sha256": "91dabeab148164ead992493ca24740fb32bbe33a65f01cbe93a2ce297b8af5f0",
@@ -16,5 +206,26 @@
    "state": "owed"
   }
  },
- "held": []
+ "held": [
+  "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-iter00300.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-iter01000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-iter02000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-iter04000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_lion__x__a_meerkat-iter08000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-iter00300.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-iter01000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-iter02000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-iter04000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-a_typewriter__x__a_cactus-iter08000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-iter00300.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-iter01000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-iter02000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-iter04000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-an_elephant__x__a_penguin-iter08000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter00300.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter01000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter02000.png",
+  "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/learned-and-token-sheet-iter04000.png"
+ ]
 }

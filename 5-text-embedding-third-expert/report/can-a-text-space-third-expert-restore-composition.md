@@ -14,6 +14,7 @@ pass mark, written before the first tile rendered, was 4 of 7.
 - [2. Co-occurrence comes back; identity does not](#2-co-occurrence-comes-back-identity-does-not)
 - [3. The product is worse than the third expert alone](#3-the-product-is-worse-than-the-third-expert-alone)
 - [What this cannot say](#what-this-cannot-say)
+- [Where the sources disagree](#where-the-sources-disagree)
 - [Provenance](#provenance)
 - [Still open](#still-open)
 - [Cross-references](#cross-references)
@@ -112,6 +113,15 @@ two animals on seven of eight, and no column after the first with one whole cat 
 At 300 px a tile that picture shows the trajectory only; every identity call was made from the
 full-resolution tiles.
 
+The three sheets behind the earlier columns have seeds 1 to 8 down the rows, with every column from
+the same starting noise. The tests behind them are on
+[the page about what the "and" vector is made of](what-the-and-vector-is-made-of.md).
+
+| x_fix beside the references | Written phrases | x_fix at rising weight |
+|---|---|---|
+| <a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-sheet-1-before-x-pos.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-sheet-1-before-x-pos.png" width="200" alt="Six columns by eight seeds: dog alone, cat alone, the joint prompt, plain PoE, x_fix alone and PoE with x_fix."></a> | <a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-3-real-phrases.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-3-real-phrases.png" width="200" alt="Fourteen columns by eight seeds: the references, seven phrases, x_fix at two lower weights and x_pos as the third expert."></a> | <a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-4-x-at-rising-weight.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-4-x-at-rising-weight.png" width="200" alt="Ten columns by eight seeds: the references, PoE with x_fix at five weights from 0.1 to 1, and PoE with x_pos."></a> |
+| x_fix alone draws wallpaper or texture on all 8 seeds `verified` (seen on the sheet). | The last column is x_pos, beside the seven phrases and two lower weights of x_fix `verified`. | Weights run 0.1, 0.25, 0.5, 0.75 and 1, with x_pos in the last column `verified`. |
+
 ## 3. The product is worse than the third expert alone
 
 Navigation: ⬅️ [Previous](#2-co-occurrence-comes-back-identity-does-not) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-say) ➡️
@@ -131,12 +141,17 @@ appears in the by-eye calls: x_pos alone gives a clear pair on 2 of 7 seeds, and
 cat experts are added. Per-seed comparisons:
 [per-seed/](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed).
 
+| x_pos alone and in the product | The target, plain PoE and the product on every seed |
+|---|---|
+| <a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/positional-sheet.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/positional-sheet.png" width="200" alt="Eight columns by eight seeds: dog alone, cat alone, the joint prompt, plain PoE, then x_fix and x_pos each alone and in the product."></a> | <a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png" width="200" alt="Eight rows of three whole tiles: the joint prompt, plain PoE and PoE with x_pos, for seeds 1 to 8."></a> |
+| Rows are seeds 1 to 8. The two right-hand columns are x_pos alone and PoE(dog, cat, x_pos) `verified` (seen on the sheet). Their distances from the joint prompt's image are the 23.43 and 39.16 above. | The product column is called two animals with at least one hybrid on 7 of 8 tiles, which is 6 of the 7 judgeable seeds, and one animal on seed 5 `stated` ([the tile calls](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json)). |
+
 This agrees with the sampler check already on file, where the exact target placed in the third slot
 at every step renders the joint image to within 2.23. The third slot is not the limitation.
 
 ## What this cannot say
 
-Navigation: ⬅️ [Previous](#3-the-product-is-worse-than-the-third-expert-alone) | 📋 [TOC](#table-of-contents) | [Next](#provenance) ➡️
+Navigation: ⬅️ [Previous](#3-the-product-is-worse-than-the-third-expert-alone) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
 **One pair and seven judgeable seeds.** A count of 2 or 3 would have been inconclusive. The zeros are
 firm only because they are far from the mark.
@@ -151,9 +166,24 @@ dog.
 
 **Nothing about a correction inside the denoiser.** This is an inference-only result.
 
+## Where the sources disagree
+
+Navigation: ⬅️ [Previous](#what-this-cannot-say) | 📋 [TOC](#table-of-contents) | [Next](#provenance) ➡️
+
+**Six recorded facts conflict, and each is shown here unresolved.**
+
+| What | One source | The other source |
+|---|---|---|
+| whether any third expert drew a clear pair | this page's opening says none did on any seed, and [the idea map](../artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md) records 0 clear pairs for x_fix | this page's table, [the positional card](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md) and [the supervisor deck](../../artifacts/decks/supervisor-meeting/README.md) count 1 for x_fix, on seed 3; the idea map also calls that tile two animals with at least one hybrid |
+| tiles with two animals for the best phrase, of 8 | the positional card and the deck give 5 | the idea map lists 6 for "a dog next to a cat": seeds 1, 3, 4, 6, 7 and 8, of which 5 are judgeable |
+| how many third experts were tried | this page's opening and the idea map say eight | [the learned-token plan](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md) says nine had failed before x_pos, and [the walk's retrospective](../../artifacts/notes/session-merges/2026-11-04-the-positional-and-vector-retro.md) calls x_pos the seventh |
+| plain PoE's distance from the joint prompt's image, 0 to 255 | 47.05 on this page, averaged over seeds 1 to 8 | 34.69 in the deck's sampler check, the source of the 2.23 quoted above; the deck does not name its seeds |
+| the staging copy of the first supervisor sheet | the positional card says it is byte-identical to its installed copy | by MD5 checksum on 2026-11-21, [the staging copy](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-1-arithmetic-vector-x.png) differs; the installed sheet matches `supervisor-sheet-1-before-x-pos.png` |
+| whether the x_pos render finished | [the walk](../artifacts/drips/can-a-positional-and-vector-restore-composition/EXECUTE_WALK.md) says it is running, with its closing pass owed | the card, the tile calls and this page hold the finished render |
+
 ## Provenance
 
-Navigation: ⬅️ [Previous](#what-this-cannot-say) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
+Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
 
 Renders on mscluster108 outside Slurm, 2026-11-04, from `5-text-embedding-third-expert/scripts/and_vector_sheet.py`; earlier
 columns from runs 2 to 7 of the idea map on mscluster106 and mscluster109, 2026-10-27 and 2026-10-28.
@@ -162,6 +192,11 @@ both text encoders only. Tiles under
 `/datasets/mmolefe/poe_repair_min/outputs/concept_pair_sheet/and_vector/dog__x__cat/`. Calls in
 [calls.json](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json). Walked in
 [today-the-positional-and-vector.md](../../artifacts/plans/completed/today-the-positional-and-vector.md).
+
+The eight tiles in [the per-seed folder](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed)
+are held out of the artifact drain, because
+[the all-seeds sheet](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png)
+holds the same three columns for all 8 seeds.
 
 ## Still open
 
@@ -179,8 +214,16 @@ against plain PoE's 47.05. A condition enters the guided sum as w·(ε_x − ε_
 faithfully as a difference sits near the empty prompt and contributes nothing. See
 [the card](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md).
 
+<a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/poe-x-and-all-seeds.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/poe-x-and-all-seeds.png" width="200" alt="Eight tiles of PoE with x_and, seeds 1 to 8, each showing one fused cat-dog animal."></a>
+
+PoE(dog, cat, x_and) on seeds 1 to 8 draws one fused animal in every tile, with seeds 4 and 5 as flat
+graphics `verified` (seen on the picture; matches the card).
+
 **The pooled channel alone**, which scored 75% top-1 on the premise test and has never been rendered
 as a condition on its own.
+
+**The x_fix tile on seed 3.** Whether it is a clear pair or two animals with a hybrid is the owner's
+call from the full-resolution tile. The count stays under the pass mark of 4 either way.
 
 ## Cross-references
 
@@ -188,3 +231,5 @@ Navigation: ⬅️ [Previous](#still-open) | 📋 [TOC](#table-of-contents)
 
 - The mention of **a text-space third expert**, and of why one cannot reach inside the two experts' forward passes, in [the plan that puts the LoRA on the text encoders instead](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md#why-this-exists), which is the follow-on this result leaves open.
 - The mention of **the text-space finding**, placed in the text-embedding project, in [the project table for regrouping the core repo](../../plans/split-into-idea-repos.md).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

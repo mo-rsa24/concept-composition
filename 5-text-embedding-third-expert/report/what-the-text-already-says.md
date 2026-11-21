@@ -151,6 +151,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 | direction check | [axis check file](../artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/axis-heldout-check.json), read 2026-11-21 | `verified` |
 | how the first picture was made | [the prompt position script](../scripts/one_animal_axis.py), run 2026-11-04 per [the plan](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-does-one-prompt-already-say-one-animal.md) | `stated` |
 | how the second picture was made | [the word similarity script](../../scripts/text_orthogonality_probe.py), committed with the picture on 2026-08-18 | `stated` |
+| the working record of the first experiment | [the walk on whether one prompt already says one animal](../artifacts/drips/does-one-prompt-already-say-one-animal/EXECUTE_WALK.md), read 2026-11-21 | `stated` |
 
 ## Still open
 
