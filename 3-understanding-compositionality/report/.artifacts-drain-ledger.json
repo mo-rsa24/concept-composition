@@ -1,0 +1,402 @@
+{
+ "files": {
+  "artifacts/results/the-exact-toy/README.md": {
+   "at": "2026-11-21",
+   "sha256": "0f2517d59f2d93d1dddfb18883c2d8fe500dd8176a421146dc5441cd052feab0",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/README.md": {
+   "at": "2026-11-21",
+   "sha256": "82f7d8784721fc0ba5433421de20c6f07a3ab2aa29038807ee0b1b5116cf977c",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/draw-0-push-against-true-correction-step-150.png": {
+   "at": "2026-11-21",
+   "sha256": "b8c3d3db50b5201d8538309fd12314e73eb20194f40c311eae0e34326e6971d2",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/draw-0-unguided-and-pushed.png": {
+   "at": "2026-11-21",
+   "sha256": "2ed981e5709ab1fd1a9862569b6e83dbb574e70dff341da78e1090e8f9dc135c",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/minimal-pair-gap-per-step.png": {
+   "at": "2026-11-21",
+   "sha256": "b81c3cd2b99540ca38e38006147ca2041296f2fc07668e2168df99f55b21b36a",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/push-cosine-per-step.png": {
+   "at": "2026-11-21",
+   "sha256": "c9c22a83bc7809394ff09a2d21e8ffbba4fe790cb9aef1bf26be86506fc9588a",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator.png": {
+   "at": "2026-11-21",
+   "sha256": "c6d801c4141a0ccf57b9e871e33769a635a572a2929cac94c030e751ba7bd25d",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator__2026-11-17-2.png": {
+   "at": "2026-11-21",
+   "sha256": "c6d801c4141a0ccf57b9e871e33769a635a572a2929cac94c030e751ba7bd25d",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator__2026-11-17.png": {
+   "at": "2026-11-21",
+   "sha256": "63b8e7c9618cb5fcb0c6dd9e9899d7be3c4459152432b2e3c3c178bb84ce70b2",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/what-the-pair-aware-discriminator-says.png": {
+   "at": "2026-11-21",
+   "sha256": "6d94315dde7388d79a4aefe8abac1a8c685631f3b1c4dd8b32a0b978c2461639",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/what-the-separate-label-classifier-says.png": {
+   "at": "2026-11-21",
+   "sha256": "0bbc1d9b5810160622db5714805ca177deafcc28462f4bf039bf7dbaa52878a1",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/README.md": {
+   "at": "2026-11-21",
+   "sha256": "66aab6e837cc308be6ba88b5a9578f2201602a454f1233e7e349cfae7f99c304",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/can-it-make-a-third-arrangement.png": {
+   "at": "2026-11-21",
+   "sha256": "f6134dd24a3a081311aad2ea74ffb94119426b68a7580c7ad74d63a0e3f37404",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/can-one-expert-learn-its-own-pictures.png": {
+   "at": "2026-11-21",
+   "sha256": "3bcc7567278835f99ba5a7ce644bc7ff5340dc6085eda11b8e7150065dd6c2d7",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/can-the-product-draw-a-layout-nobody-trained-on.png": {
+   "at": "2026-11-21",
+   "sha256": "5e09a4063170ea786bd7d17b83e4ab06698ed9636b465e7d3a4d66a43b663bcb",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/caption-model-across-guidance.png": {
+   "at": "2026-11-21",
+   "sha256": "753724ab2758dc8c44dd76b4960870651367d25405a772ebd5f7ba4f6d9f4dd0",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/competing-captions.png": {
+   "at": "2026-11-21",
+   "sha256": "3fbe9a173d5f91f2595dfc7d121e27d7302b9a38fffac8ea443e9e55dca136e0",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/draws-across-weights.png": {
+   "at": "2026-11-21",
+   "sha256": "5d8d1b21f817db661f8d8b96f32e435b112431ece5ec594dba014b1b81b3ba3e",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/four-samplers-across-the-overlap-dial.png": {
+   "at": "2026-11-21",
+   "sha256": "94e959f4517f58444a1615affa11ca8c1040ae7254e4daf15494d7b20cb78c59",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/how-far-the-dial-has-to-go.png": {
+   "at": "2026-11-21",
+   "sha256": "9b9d9099a2217c379752c7e5ad57c88090cc7dc25213bd3d14a502416c81a4c7",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/01-the-problem-on-sdxl.png": {
+   "at": "2026-11-21",
+   "sha256": "864c6e7c1bda9453c3459fd13e064be8bcfa21d709e69f979a7e5f1ae600e717",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/02-formula-experts-what-poe-wants.png": {
+   "at": "2026-11-21",
+   "sha256": "9ede09e724306ea3c83b4f8f7194d66eea3b433d44567f75cef59548bee5aaf7",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/03-formula-experts-that-like-the-other-shape.png": {
+   "at": "2026-11-21",
+   "sha256": "a0e59091a7632b623bf1a91b16504e664c48651f0949fd4e4e4fa0f16f710589",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/04-where-the-sampler-loses-the-pair.png": {
+   "at": "2026-11-21",
+   "sha256": "483c41e69ea9159fcb43958326ffb045d508fc0acf3a5f2629280dd952c144b6",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05-the-training-pictures.png": {
+   "at": "2026-11-21",
+   "sha256": "4970f06461d9aa0cebbc7f5d468d0129d1e8c5a42f767499dca5c6ea60e930f8",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05b-the-training-set-with-and-without-relabelling.png": {
+   "at": "2026-11-21",
+   "sha256": "50d5e5a1e1ae603eb8dccf547926251b9b88434eae37152fcaba0726b7a55ad4",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05c-what-each-caption-holds.png": {
+   "at": "2026-11-21",
+   "sha256": "32b406dd19fbcee16e7da066062462f68b5498d8168e1340a34a6d3921382195",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05d-the-caption-table.png": {
+   "at": "2026-11-21",
+   "sha256": "8b5825eaa90d94ef0bfd59d9d7601b3908d655c1e63913bd14e109c16e84e901",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05e-why-the-hybrid-is-purple.png": {
+   "at": "2026-11-21",
+   "sha256": "6280eb1930c5136ea51a99cf5dc5df2b65447109693cf0edadb1f47fd6c29f95",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/06-what-poe-draws-in-the-caption-model.png": {
+   "at": "2026-11-21",
+   "sha256": "08ba54abcb831d0200b7bcd0185987e09eaeb7a577360287bde4fcf10c232434",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/07-every-caption-side-by-side.png": {
+   "at": "2026-11-21",
+   "sha256": "6f3af71b9f1af5869efd320c69a6887b394d7c0477e326375e751bed9963c758",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/07-every-caption-side-by-side_b.png": {
+   "at": "2026-11-21",
+   "sha256": "562026912d91d118ce08b246d4c3544ccc2909a7f964a5512bf6593a4b37bb9d",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/08-the-corrector.png": {
+   "at": "2026-11-21",
+   "sha256": "f6a0a06701031355f6328c4b0d0b38856cda4e72d4c14e5c9aea01fd6b9728fb",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/09-composing-with-no-both-shapes-pictures.png": {
+   "at": "2026-11-21",
+   "sha256": "9c8497be9bf03b6693898036b247c874d7aa43a4b387416a924297343ad2b2cf",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/10-sdxl-inclusive-captions-pilot.png": {
+   "at": "2026-11-21",
+   "sha256": "0c9ef95fda6d180d226df3a58e46f8ffc8ad71bb8bc9f33c2739c9417ff7986a",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/README.md": {
+   "at": "2026-11-21",
+   "sha256": "3198e780ebe5864ac2b0d0576f8c8469693025eb1f2c80f3988545aa6a9da736",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/summed-scores-against-the-true-noised-product.png": {
+   "at": "2026-11-21",
+   "sha256": "347cbefb9cc04b9d36ec8ba0bd9e4a51b32068a87a6503f525240a8e1ed2a224",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/the-chain-of-results.png": {
+   "at": "2026-11-21",
+   "sha256": "56a08242d0f91feaa12f4c7f4ddeadfc518a817b4bf7015b25e0a92617f93180",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/the-leak-dial.png": {
+   "at": "2026-11-21",
+   "sha256": "cd06095effc6038fb5d2987d6ad5c520cbd083acf6e915d43f54ba2088a2cd25",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/weight-sweep.png": {
+   "at": "2026-11-21",
+   "sha256": "2ba78a73b3ebbcba2b123d8e552c4c1a66fe77639b03e82ec7a17884933f077f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/what-changes-as-overlap-rises.png": {
+   "at": "2026-11-21",
+   "sha256": "c2185a83d17f06722d353070c2298f9c150c7f376e8a611c0bd700bab9865ea7",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/what-the-caption-model-draws.png": {
+   "at": "2026-11-21",
+   "sha256": "1f1f989996f4b681746fd60afa33cb2c61a085cea7908ec7c09f089bc8cf02c3",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/README.md": {
+   "at": "2026-11-21",
+   "sha256": "8959126552d82c04b2eaf35ef45cb1034bf50ad180f575543748c34155c9604f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/each-beta-read-off-the-curve.png": {
+   "at": "2026-11-21",
+   "sha256": "378632062b66a3732ec53ae4d295b4785989ddf74a341e14b27b5823d1b13d9f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/four-derivation-steps.png": {
+   "at": "2026-11-21",
+   "sha256": "4f38a073fee42b2d7e82856936bd6364dd681773d01692faeff69eced8c36c8e",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/from-the-draw-to-the-density-and-the-score.png": {
+   "at": "2026-11-21",
+   "sha256": "4e805e2b2d30f26dfc33fe1fb64f6c37b99ceda26d319314756cde78c123197c",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/one-boundary-term-by-term.png": {
+   "at": "2026-11-21",
+   "sha256": "7064d3658fb623ce7c069ad004bd029041846e64429e86b4da2baca4704fa74f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/one-cosine-boundary-by-hand.png": {
+   "at": "2026-11-21",
+   "sha256": "b1cf12860aa025d5fe6b95d80ca9d8f4d4f42b41256686a85f3b947e14d84ecd",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/the-consequence-page-at-t50.png": {
+   "at": "2026-11-21",
+   "sha256": "3477aac5f7fae48b3eb2e10880c75ed4e88a0999ff0c3721a332e0c67f12b24e",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/the-dog-at-five-steps.png": {
+   "at": "2026-11-21",
+   "sha256": "c1714af9f3c5b6f0490ee789e201bff9585d4fef6da665cf837dbd47a42fcb29",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/the-one-shot-draw-and-its-density.png": {
+   "at": "2026-11-21",
+   "sha256": "641e7eeb37dd174fd2842c0452f034620ed541bd1d431bab35e89a815dc25d65",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/the-point-on-the-quarter-circle.png": {
+   "at": "2026-11-21",
+   "sha256": "b6523f905be028b0152ccff6571543dc0e5a788892c7eb466569fc7047a65651",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/the-schedule-name-taken-apart.png": {
+   "at": "2026-11-21",
+   "sha256": "f13054529360927208a992161627bd5392eba3478acc56a5f2caecc54853eb66",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/two-steps-the-variances-add.png": {
+   "at": "2026-11-21",
+   "sha256": "85c0ca6542c789a9e287f16249998818d8231a20973897ab4187f3aef5d9e04f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/what-each-piece-protects.png": {
+   "at": "2026-11-21",
+   "sha256": "1dca5fe52d97b711e9ac846352becc997826a01d2ac7a920b241e330e150192f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/where-each-post-position-comes-from.png": {
+   "at": "2026-11-21",
+   "sha256": "37596907cd3d83678998c98210bcfeff6cf1d01d593c45bf381ac953bbfac368",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/why-the-noise-carries-a-square-root.png": {
+   "at": "2026-11-21",
+   "sha256": "b4e271923b55ad11962fb42b054321220a1bf7ce92d4458e63b3dac58e587fe0",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/how-the-forward-process-dissolves-an-image/why-the-offset-and-the-normaliser.png": {
+   "at": "2026-11-21",
+   "sha256": "b180a24f16c8bbb0d9879d3d32783124272b52250b5399dd722220f38613d2ca",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/README.md": {
+   "at": "2026-11-21",
+   "sha256": "b4b4c65e5b62f13ee3871ec0f1f5a16bb170e8de0d7621c653f26353c95f3633",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/clean-share-sweep.png": {
+   "at": "2026-11-21",
+   "sha256": "8a32194aacf84c7203dcfe4deba95eff8efb40cc71a43f015140f8c8d6b174c7",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/img/data.png": {
+   "at": "2026-11-21",
+   "sha256": "0eea4417f31d89b6232486c404665ad19500876bbb8391aaca57e07a8893e683",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/img/exact-product.png": {
+   "at": "2026-11-21",
+   "sha256": "96f07edaa6c5a4be2142cd650b40ac97b7af274561c7f480a545209ebe53e5f8",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/img/expert-levels.png": {
+   "at": "2026-11-21",
+   "sha256": "8a85a686da9e5f58b61750cd9796026814d66a57215b770bf6dfdb11483563d1",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/img/perfect-draws.png": {
+   "at": "2026-11-21",
+   "sha256": "c563fd894ba4ee05f29b8607a1da96774d5405e5b5d143f3713f0512c2067f01",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/img/samplers-table.png": {
+   "at": "2026-11-21",
+   "sha256": "56dd54a7c7ceebf97d77cc3ba84feabbee78aee4659d5235980cb3e305d11bc2",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/preview.png": {
+   "at": "2026-11-21",
+   "sha256": "1b30aa0ba9829719173f2cf9c982ea7586ff606d64fb7d6b6ef1828d7a2ee95c",
+   "state": "owed"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/product-of-experts-toy-experiment-high-level-design-explainer.html": {
+   "at": "2026-11-21",
+   "sha256": "a1521251b7f3ebba3015b3180ca9725a4eac4812bf0d6604ada08eff5aa3f398",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/product-of-experts-toy-experiment-high-level-design-explainer.svg": {
+   "at": "2026-11-21",
+   "sha256": "c437b0d0d7eb4bd22d373c2a99d8fd57aeb5775d992a2dac749365d576ff70ca",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/hld/scene.html": {
+   "at": "2026-11-21",
+   "sha256": "ec973b8889f4edb0207364ef4643b29be84777fc7dbea4aac4eaee55749bb9f8",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-backgrounds.png": {
+   "at": "2026-11-21",
+   "sha256": "b93e745e0c2298337d39d50df4e15d73be4ae0f18e3cb4646c55e351c2758204",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained-six-rows.png": {
+   "at": "2026-11-21",
+   "sha256": "3dd9e463fea172fce7deb7cd3ede67f4e024b56ad244bbf883a776a444b7634f",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained.png": {
+   "at": "2026-11-21",
+   "sha256": "86756f100d333f46cfe36e25a8294502642466449be52b2d7997721470fabfb1",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-ideal-and-trained_ring.png": {
+   "at": "2026-11-21",
+   "sha256": "c05552ac68e1249fc3544758ec8c0a10ae2e7e2f7d84e9e5f7515436b9005e49",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table-with-samplers.png": {
+   "at": "2026-11-21",
+   "sha256": "56dd54a7c7ceebf97d77cc3ba84feabbee78aee4659d5235980cb3e305d11bc2",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/interaction-table.png": {
+   "at": "2026-11-21",
+   "sha256": "d6799b68441d5f6d4a4cbab40ce663572436f28d2295b057e7b118c16e10fd3a",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/log-overlap.png": {
+   "at": "2026-11-21",
+   "sha256": "0c12a9ef72e72d34b1c1836b923bdbab7c477de21d8ba2951685f9a1bbe6aba4",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/sampler-run.png": {
+   "at": "2026-11-21",
+   "sha256": "0c389881c46102b0d5af0dd312cd3dd486716da17026678b5da86fcd8077dc53",
+   "state": "drained"
+  },
+  "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/ten-samples.png": {
+   "at": "2026-11-21",
+   "sha256": "272426846e1a282fb6aad9c43533b0cc53c3d2810df83e5ff748fde4690206bd",
+   "state": "drained"
+  }
+ },
+ "held": [
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-fake-row-3000.png",
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-unguided-draw-0.png",
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w05-draw-0.png",
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w1-draw-0.png",
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w2-draw-0.png",
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-real-row-3000.png"
+ ]
+}
