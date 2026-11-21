@@ -1,5 +1,10 @@
 {
  "files": {
+  "artifacts/results/README.md": {
+   "at": "2026-11-22",
+   "sha256": "42eea5e5405302fed2a8424db0160f3aa19cbb96b480a150c9ba842500de069a",
+   "state": "drained"
+  },
   "artifacts/results/a-thing-in-the-rain/README.md": {
    "at": "2026-11-22",
    "sha256": "7a400daf2e94c3b83e1cd0fb1ad3b09b9fe63f89e2253549770f00a974a8e31d",
@@ -523,6 +528,11 @@
   "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/ten-samples.png": {
    "at": "2026-11-21",
    "sha256": "272426846e1a282fb6aad9c43533b0cc53c3d2810df83e5ff748fde4690206bd",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/README.md": {
+   "at": "2026-11-22",
+   "sha256": "6d80852bab250ed07ecfbc95f364fa1e07e4fadf2642adaa6c8b26ea9fc6c77b",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/README.md": {
