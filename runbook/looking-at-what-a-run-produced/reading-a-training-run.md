@@ -102,3 +102,4 @@ let the W&B MCP pull the panel data and render the figure locally.
 ## Cross-references
 
 - The mention of **fraction-of-distance-reached**, stopping at 20% where earlier runs reached 40%, in [the failure catalog entry poe-lora-001](../../environment/known-failures.md#entry-id-poe-lora-001).
+- The mention of **comparison strips**, the three-panel files the trainer saves beside each render that the compose-rate count scored as renders, in [the failure catalog entry poe-score-003](../../environment/known-failures.md#entry-id-poe-score-003).

@@ -384,4 +384,14 @@ project folder (`1-lora-correction/`, `3-understanding-compositionality/`, `4-in
 
 ## 2026-11-19: step 7b's explainer figures gathered into one folder
 
-The zoom-ladder style figures moved out of `2-classifier-guidance/artifacts/results/how-good-must-the-checker-be-on-mnist/{network-view,results-figures,architecture,gradient-flow,grids}/` and `2-classifier-guidance/artifacts/scenes/classifier-guidance-on-poe/derivation/` into `2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/`, one subfolder per question: `1-the-sampler-step/` (nv7b-1, r1, r4), `2-the-networks/` (a1 to a3, nv7b-2 to 5, r2, r3), `3-the-gradient/` (g1 to g3), `4-the-derivation/` (d1 to d7), `5-qualitative-grids/` (the three grids). The derivation walkthrough is now `4-the-derivation.md` there. The scripts and numbers files that draw the figures did not move.
+The zoom-ladder style figures moved out of `2-classifier-guidance/artifacts/results/24-mnist-one-model/{network-view,results-figures,architecture,gradient-flow,grids}/` and `2-classifier-guidance/artifacts/scenes/classifier-guidance-on-poe/derivation/` into `2-classifier-guidance/artifacts/scenes/mnist-guidance-explained/`, one subfolder per question: `1-the-sampler-step/` (nv7b-1, r1, r4), `2-the-networks/` (a1 to a3, nv7b-2 to 5, r2, r3), `3-the-gradient/` (g1 to g3), `4-the-derivation/` (d1 to d7), `5-qualitative-grids/` (the three grids). The derivation walkthrough is now `4-the-derivation.md` there. The scripts and numbers files that draw the figures did not move.
+
+## 2026-11-19: step 7b and plan 32 named by plan number
+
+Step 7b (plan 24) is `24-mnist-one-model` and its follow-on plan 32 is `32-mnist-two-experts`, the same in every place a name appears.
+`2-classifier-guidance/artifacts/results/how-good-must-the-checker-be-on-mnist/` is now `.../results/24-mnist-one-model/`;
+`2-classifier-guidance/report/classifier-guided-poe/a2b-mnist-digits-on-a-canvas.md` is now `.../24-mnist-one-model.md` (the board row keeps its id A2b);
+the 7b local data under `2-classifier-guidance/data/mnist-canvas/` (arch, checkers, eye-labels.npz, five-versions, judge, judge-loop, judge-v2, judge-v3, plain-product, smoke, timing) moved into `.../data/mnist-canvas/24-mnist-one-model/`;
+plan 32's local data (two-experts, 32-check, judge-v3) moved from the repository root's `data/mnist-canvas/` into `2-classifier-guidance/data/mnist-canvas/32-mnist-two-experts/`.
+New for plan 32: `artifacts/results/32-mnist-two-experts/`, `report/classifier-guided-poe/32-mnist-two-experts.md` and board row A2d.
+References in plans, scripts, cards and the 4-inclusive-captions script that reads this folder were rewritten and grepped. Unchanged on purpose: the review file `plans/review/a2b-mnist-digits-on-a-canvas.md`, the walk folder `artifacts/drips/a2b-mnist-digits-on-a-canvas/`, plan 24's own filename, and the cluster scratch folder, which job scripts hard-code.

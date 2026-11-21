@@ -83,7 +83,7 @@ images; not yet written)
 ---
 
 #### Entry ID: poe-score-003
-**Name:** Compose rate counts the trainer's comparison strips as renders
+**Name:** Compose rate counts the trainer's [comparison strips](../runbook/looking-at-what-a-run-produced/reading-a-training-run.md#2-the-tracking-set-saved-at-every-10k-step-checkpoint) as renders
 
 **Symptom:** a pooled run's compose rate from step 20000 on carries n twice the number of
 pair-and-seed renders (176 and 128 where 88 and 64 were rendered), and changes sharply when the
@@ -587,7 +587,7 @@ origin/<branch> (diverged or dirty)", and `git merge --ff-only` in the cluster c
 "untracked working tree files would be overwritten by merge". Each further attempt writes some of
 the incoming files before aborting, so the checkout drifts into a half-merged state.
 
-**Root cause:** `rsync` copied a folder (`paper/iclr-56173/`) straight into the cluster checkout
+**Root cause:** `rsync` copied a folder (`writing/restoring-plurality-in-compositional-diffusion_overleaf/`) straight into the cluster checkout
 before that folder was committed. Once the laptop committed it, the cluster held untracked copies
 of the same paths, and git refuses to overwrite untracked files during a fast-forward.
 
