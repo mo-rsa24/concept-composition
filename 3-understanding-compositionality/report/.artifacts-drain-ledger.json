@@ -1,5 +1,140 @@
 {
  "files": {
+  "artifacts/results/a-thing-in-the-rain/README.md": {
+   "at": "2026-11-22",
+   "sha256": "7a400daf2e94c3b83e1cd0fb1ad3b09b9fe63f89e2253549770f00a974a8e31d",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f0c5c49996918014588aab3d32629174cc65d54745ceb4cf62fd1f6e5015857f",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png": {
+   "at": "2026-11-22",
+   "sha256": "4a32b1315dd10b367b68881d32a2eee7ac2312db95a6f32dceb15334b302bcc3",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/asked-directly.png": {
+   "at": "2026-11-22",
+   "sha256": "4ccb54f188704e742d77d378477deeeb85b0656d41ce862709a2030f65b3bb7e",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/caption-counts.md": {
+   "at": "2026-11-22",
+   "sha256": "440cb8c703e14bb28499a1ccb3e80016a436da5b0f69e729af13af07fca66836",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/pilot-clip-called-wet.jpg": {
+   "at": "2026-11-22",
+   "sha256": "3c84166d8e60fd2d2a795eedba2008af35cc2ac2452d8fd6e8a39fb08ad46e8c",
+   "state": "skipped"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/pilot-ten-walk-pictures.jpg": {
+   "at": "2026-11-22",
+   "sha256": "8e5e22e171c4c818ab4271afb838ceb26690396923afa2d8639ab69d26932fa0",
+   "state": "skipped"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed01/mono.png": {
+   "at": "2026-11-22",
+   "sha256": "6b31432030b44e6b4c2c86e3a186e85fefdeadb93158ee04a0961c4c4d536d77",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed09/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "65671196639ec0061b0e71e31cb37ec80e296409338067156a80092f2ae7aa01",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed10/superdiff_200.png": {
+   "at": "2026-11-22",
+   "sha256": "434f0150df10f4f1003ff157ea560be7d5e5ea86caebf71f8e8ea889ab3a9481",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel_in_the_rain/seed02.png": {
+   "at": "2026-11-22",
+   "sha256": "3e08d1e780bf56103443e563d4f33e384fd858c28e2c41dc9c08a26dab888982",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_camel/seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "a2db90b71ee9399599c6aaeec6ee8524b7921754ae7b37f3b41150516be07ec9",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/rain/seed10.png": {
+   "at": "2026-11-22",
+   "sha256": "486da57f3a6303c4cec89552122d91749fda5770c6ab1521bfa368cbf86c1e4f",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/README.md": {
+   "at": "2026-11-22",
+   "sha256": "42e55eb2572e41c09482ae75ad5763f5e6864520e4bb3db333fc9017b53aa6f6",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain-seed10-batch4-pushes-in-the-plane.png": {
+   "at": "2026-11-22",
+   "sha256": "6ab70d0d2e47815d1e7725908cd67d64f0eda58dac42c0916536d50f422d332b",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain-seed10-batch4-pushes-over-the-run.png": {
+   "at": "2026-11-22",
+   "sha256": "489636ca258319caadcf9de173682ed830048e763d0be17483f7db1eb24f4749",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain-seed10-pushes-in-the-plane.png": {
+   "at": "2026-11-22",
+   "sha256": "41072fda1e4f78c2cd72a255a1bd2da6eb7dec825e3c71d54134db1bece53664",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain-seed10-pushes-over-the-run.png": {
+   "at": "2026-11-22",
+   "sha256": "ac877e11a74afb7565c493cae521ae68e6cee2c5b80f94f41fd8e74763b1fa72",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-a-dog-in-the-rain-come-out-wet/a-dog-and-rain.png": {
+   "at": "2026-11-22",
+   "sha256": "fb6c41098ac6a781a391168375502703a47f11c12b3651b4c4e8067055019995",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel-sheet.jpg": {
+   "at": "2026-11-22",
+   "sha256": "ebcde3904da08a4e920453062f8ed422a50d2aae93d55907fffba33a039c56e5",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/PoE_a_camel_x_wet.png": {
+   "at": "2026-11-22",
+   "sha256": "2a7f2f1162689c550b3be2496c373fa4b32e0fdb6a36e49a22b7bd0d31198804",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/PoE_a_camel_x_rain_x_wet.png": {
+   "at": "2026-11-22",
+   "sha256": "c1936c21b720af4ac4fa9ec9b69298bf9e0e7381c1437602417973eacdb91394",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/joint_a_camel_and_rain.png": {
+   "at": "2026-11-22",
+   "sha256": "85a13f6060b01bb568993e8071dc3e0be0f2fd7bb2c676a6ae0baa90991f5660",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog-sheet.jpg": {
+   "at": "2026-11-22",
+   "sha256": "1a91916858cf40ad47535b579f10b380f4a159c50ed6e43483afbd5e89cf271f",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/PoE_a_dog_x_wet.png": {
+   "at": "2026-11-22",
+   "sha256": "a56e108362c73ec2907a88fa81675063b3a4b81d0ebd15d31dd910aa8955a5ae",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/PoE_a_dog_x_rain.png": {
+   "at": "2026-11-22",
+   "sha256": "b4bd0d688150e0a639cca9cc3c5c58cbf3c8a16ea24574d18a9807f513dc2514",
+   "state": "drained"
+  },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/PoE_a_dog_x_wet_x_wet.png": {
+   "at": "2026-11-22",
+   "sha256": "b360680bc43e250843ebcfb6aaa20621a7418e8e0387bf64bf44ffd24a0437c9",
+   "state": "drained"
+  },
   "artifacts/results/the-exact-toy/README.md": {
    "at": "2026-11-21",
    "sha256": "0f2517d59f2d93d1dddfb18883c2d8fe500dd8176a421146dc5441cd052feab0",
@@ -392,6 +527,167 @@
   }
  },
  "held": [
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed01/poe.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed01/superdiff_200.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed02/mono.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed02/poe.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed02/superdiff_200.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed04/mono.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed04/poe.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed04/superdiff_200.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed09/mono.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed09/superdiff_200.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed10/mono.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed10/poe.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel/seed02.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel/seed09.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel/seed10.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel_in_the_rain/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel_in_the_rain/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel_in_the_rain/seed09.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_camel_in_the_rain/seed10.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_dog_in_the_rain/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_dog_in_the_rain/seed02.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_dog_in_the_rain/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_dog_in_the_rain/seed09.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_dog_in_the_rain/seed10.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_camel/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_camel/seed02.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_camel/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_camel/seed10.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_dog/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_dog/seed02.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_dog/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_dog/seed09.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/a_wet_dog/seed10.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/rain/seed01.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/rain/seed02.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/rain/seed04.png",
+  "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/single/rain/seed09.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed01/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed02/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed03/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed04/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed05/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed06/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed07/joint_a_camel_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/PoE_a_camel_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/PoE_a_camel_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/PoE_a_camel_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/PoE_a_camel_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/a_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/a_camel_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel/seed08/a_wet_camel.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed01/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed02/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed03/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed04/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed05/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed06/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed07/joint_a_dog_and_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/PoE_a_dog_x_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/PoE_a_dog_x_rain_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/PoE_a_dog_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/PoE_a_dog_x_wet_x_wet.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/a_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/a_dog_in_the_rain.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/a_wet_dog.png",
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/dog/seed08/joint_a_dog_and_rain.png",
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-fake-row-3000.png",
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-unguided-draw-0.png",
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w05-draw-0.png",
