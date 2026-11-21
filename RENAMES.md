@@ -395,3 +395,11 @@ the 7b local data under `2-classifier-guidance/data/mnist-canvas/` (arch, checke
 plan 32's local data (two-experts, 32-check, judge-v3) moved from the repository root's `data/mnist-canvas/` into `2-classifier-guidance/data/mnist-canvas/32-mnist-two-experts/`.
 New for plan 32: `artifacts/results/32-mnist-two-experts/`, `report/classifier-guided-poe/32-mnist-two-experts.md` and board row A2d.
 References in plans, scripts, cards and the 4-inclusive-captions script that reads this folder were rewritten and grepped. Unchanged on purpose: the review file `plans/review/a2b-mnist-digits-on-a-canvas.md`, the walk folder `artifacts/drips/a2b-mnist-digits-on-a-canvas/`, plan 24's own filename, and the cluster scratch folder, which job scripts hard-code.
+
+## Sitting 2026-11-21 (saving the uncommitted work)
+
+| Old | New |
+|---|---|
+| `ORGANOGRAM.md` | `artifacts/notes/the-phd-layout/organogram-copy-2026-11-13.md` |
+
+The file is an older copy. The current organogram is `/home/molef/PhD/ORGANOGRAM.md`.
