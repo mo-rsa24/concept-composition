@@ -403,3 +403,20 @@ References in plans, scripts, cards and the 4-inclusive-captions script that rea
 | `ORGANOGRAM.md` | `artifacts/notes/the-phd-layout/organogram-copy-2026-11-13.md` |
 
 The file is an older copy. The current organogram is `/home/molef/PhD/ORGANOGRAM.md`.
+
+## 2026-11-21: rename targets that moved again
+
+These earlier rows name a target that has since moved. Results folders are git-ignored, so the locations below are in the cluster checkout at `/home-mscluster/mmolefe/Playground/PhD/concept-composition`. Rows 351 to 353 rename trainer flags and name no file.
+
+| Rows | Target the row names | Where it is now |
+|---|---|---|
+| 13 | `one-pair-one-seed` | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/can-lora-learn-a-residual-that-corrects-poe/one-pair-one-seed` |
+| 15 | `correction-outside-the-unet` | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/correction-outside-the-unet` |
+| 16 | `residual-between-mono-and-poe` | `1-lora-correction/artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/residual-between-mono-and-poe` |
+| 17 | `cfg-window-without-lora` | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-without-lora` |
+| 18 | `cfg-window-with-lora` | `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/cfg-window-with-lora` |
+| 20 | `compose-scorer-validation` | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation` |
+| 111 | `todoist-staging` | `artifacts/_quarantine/todoist-staging` |
+| 240 | `dist` | `1-lora-correction/artifacts/scenes/how-much-correction-is-needed/dist` |
+| 19 | `poe-baseline-samples` | not found in the laptop or cluster checkouts or at the two expected `/datasets` paths |
+| 331 to 344 | the 14 renamed adapter-fix figures | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-the-adapters-render-settle-as-training-proceeds/` |
