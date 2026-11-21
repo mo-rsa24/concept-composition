@@ -616,3 +616,7 @@ cat-captioned training draws hold a dog in the inclusive-caption run, against 0%
 
 **The toy has two shapes, three positions and one picture size.** It does not say how many
 both-animal photos SDXL would need, or how much probability SDXL's "a cat" gives to dogs.
+
+## Cross-references
+
+- The mention of **caption model** in [the MNIST stage plan's quick context](../../../../../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md#quick-context).

@@ -354,3 +354,7 @@ The column "Where they separate" decides the kind: pixels give co-occurrence, fe
 | cat, dog (joint prompt) | pixels | co-occurrence | two objects, two regions |
 | a dog, oil paint | features | composition over features | content and style on the same pixels |
 | square, triangle under PoE | neither | intersection | one shape scored by both experts |
+
+## Cross-references
+
+- The mention of **Bayes composition** in [the classifier-guided PoE route's known facts](../../../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).
