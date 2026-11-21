@@ -99,6 +99,14 @@ Navigation: ⬅️ [Previous](#2-the-hand-off-to-the-frozen-model-is-the-lever-t
 *The same layout on the pair that already composes. What to notice: every tile keeps its butterfly
 and its meadow, so no condition here breaks what was already working.*
 
+<a href="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png" width="140" alt="Butterfly and meadow, eight seeds by five columns: the joint prompt, plain PoE, the adapter alone, and the adapter plus 5 and 20 corrector steps"></a>
+
+*The corrector on the adapter's own score, for the same pair. Rows are seeds 9 to 16, and the columns
+are the joint prompt, plain PoE, the adapter alone, then the adapter plus 5 and 20 corrector steps
+over steps 35 to 49. On seed 13 the adapter columns show the butterfly as a speck a few pixels wide,
+and the detector still reports it at confidence 0.65 with no corrector steps `verified` (the sheet
+and its sidecar).*
+
 **The number.** Butterfly × meadow, both concepts detected above confidence 0.30: 8 of 8 in every
 one of the six clean-tail conditions and in all three tail conditions, against 8 of 8 for the
 adapter alone. Its distance to the joint render moves 0.518 (adapter alone) to 0.440 at the best

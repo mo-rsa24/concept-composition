@@ -45,7 +45,11 @@ folded dog ears; two (seeds 2 and 3) are one clean cat with no canine feature at
 made by eye from the full-resolution 1024² tile, because the repo's instance-count scorer counts
 animals without naming them and reads a hybrid and two cats identically.
 
-<a href="../../artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png"><img src="../../artifacts/results/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png" width="200" alt="Eight seeds down, four columns across: cat alone, dog alone, the product, the joint prompt"></a>
+<a href="../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png" width="200" alt="PixArt-alpha sheet of seeds 1 to 8 in rows, with columns for cat alone, dog alone, the product and the joint prompt"></a>
+
+*Rows are seeds 1 to 8, and the columns are "a cat" alone, "a dog" alone, the product and the joint
+prompt. The product column holds one animal in every row `verified` (counted on the sheet). The card
+calls six of those hybrids and two single cats `stated`.*
 
 Per-tile categories with one sentence each are in
 [the calls](../../artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/calls.json).

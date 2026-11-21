@@ -47,7 +47,10 @@ separate animals 8 of 8, matching
 [the corrector finding](does-a-corrector-alone-produce-two-animals.md)'s numbers, which came from a
 different script. Without this the matched run would be measuring the code rather than the settings.
 
-<a href="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png"><img src="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png" width="200" alt="Seeds 9 to 16 down, four columns across, at DDIM 50 steps and guidance 7.5"></a>
+<a href="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png" width="200" alt="SDXL control sheet of seeds 9 to 16 in rows, with columns for cat alone, dog alone, the product and the joint prompt"></a>
+
+*The control at DDIM, 50 steps and guidance 7.5. Rows are seeds 9 to 16, and the columns are "a cat"
+alone, "a dog" alone, the product and the joint prompt `verified` (read on the sheet).*
 
 ## 2. At PixArt's settings the product still fuses
 
@@ -57,10 +60,13 @@ Zero of eight. Seven tiles are one animal carrying both sets of features, cat ea
 a canine muzzle. The eighth, seed 16, holds two bodies, and neither reads clearly as a cat or
 clearly as a dog, so it is counted as neither category rather than rounded into the hybrid count.
 
-<a href="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png"><img src="../../artifacts/results/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png" width="200" alt="The same eight seeds at DPM-Solver++ order 2, 20 steps and guidance 4.5"></a>
+| The matched run | Seed 16's product at full size |
+|---|---|
+| <a href="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png" width="200" alt="SDXL matched sheet of seeds 9 to 16 in rows, with columns for cat alone, dog alone, the product and the joint prompt"></a><br>DPM-Solver++ order 2, 20 steps, guidance 4.5. Same rows and columns as the control `verified`. | <a href="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/poe.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/poe.png" width="200" alt="A small white animal with pointed ears lying across a larger tan animal whose head shows at the bottom"></a><br>A small white animal lies on a larger tan one `verified`. This file is the matched sheet's seed 16 product tile: resized to 300 by 300, its greyscale pixels have a Pearson correlation of 0.9993 with that tile, the best over small position offsets. |
 
 Per-tile sentences for both runs are in
 [the calls](../../artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/calls.json).
+The other three seed 16 tiles (`a.png`, `b.png`, `joint.png`) are held out of the artifact drain because they repeat that row of the matched sheet.
 
 The same comparison with PixArt-alpha itself as a third setup, four seeds each, is [one summary grid](../../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/summary-grid.png): one sentence draws two animals in every setup, and the sum of two prompts fuses them in every setup.
 

@@ -45,6 +45,8 @@ runs [rank 8](https://wandb.ai/prime_lab/poe-repair-animals-compose/runs/sdlora_
 [rank 32](https://wandb.ai/prime_lab/poe-repair-animals-compose/runs/sdlora_r32_samples)
 against the checkpoint step.
 
+The four per-checkpoint timelines for rank 8 and 16 on butterfly × meadow and rank 32 on both pairs are held out of the artifact drain, because the separation figure below summarises them.
+
 ![Seeds of four that separate, per checkpoint, per rank](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png)
 *y is the count of seeds 9 to 12 that separate, x is the checkpoint in thousands of steps, one
 line per rank, left cat × dog and right butterfly × meadow. What to notice: the bigger rank
@@ -71,6 +73,11 @@ rank 16 0.0025 at 62,000, rank 32 0.0017 at 36,000. Rank 8 is lowest in every pa
 ![Rank 16 at step 30k across λ, rows seeds 9 to 12](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step30k-lambda-sweep.png)
 *Same layout as the no-adapter sheet in the first finding. What to notice: the λ 0.5 column has
 two clean animals on seeds 10 and 12 while the λ 1 column is a smear on every seed.*
+
+<a href="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step10k-lambda-sweep.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step10k-lambda-sweep.png" width="200" alt="Rank 16 at step 10k: seeds 9 to 12 in rows and correction strength 0 to 1 in columns"></a>
+
+*The same adapter at step 10k. Rows are seeds 9 to 12 and columns are λ 0, 0.25, 0.5, 0.75 and 1. The
+λ 0 column is one animal on every seed `verified` (read on the sheet).*
 
 **The number.** Seeds of four with two bodies at λ 0.5, rank 16: 2 at step 30k, and 3 at step
 10k on the same sweep (`cat-dog-rank16-step10k-lambda-sweep.png`); at λ 1 the counts are 4

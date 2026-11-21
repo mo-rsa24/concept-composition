@@ -72,6 +72,13 @@ Navigation: ⬅️ [Previous](#1-no-window-composes-and-the-injected-corrections
 and the second and third are one animal in every row, differing from each other in style rather
 than in count.*
 
+<a href="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-eight-seed-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-eight-seed-sheet.png" width="140" alt="Butterfly and meadow, eight seeds by three columns: the joint prompt, plain product-of-experts and the corrector, every frame green"></a>
+
+*The control pair, butterfly and flower meadow, in the same rows and columns. Each tile prints the
+detector's confidence for the butterfly (b) and the flowers (f), and a green frame means both were
+detected. All 24 frames are green `verified` (counted on the sheet; its sidecar records 8 of 8 per
+column).*
+
 **The number.** Compose rate over the eight held-out seeds of cat × dog, validated instance count:
 joint prompt 8 of 8 (1.00), plain product-of-experts 0 of 8 (0.00), the corrector at 20 steps per
 level 0 of 8 (0.00). The control pair butterfly × meadow, read as both concepts detected above

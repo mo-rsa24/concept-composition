@@ -1,0 +1,273 @@
+{
+ "files": {
+  "artifacts/results/is-it-the-sampler-or-the-model/README.md": {
+   "at": "2026-11-22",
+   "sha256": "1a5b07270f904e53369532fd0273df2b01e6d3cb045d5b6ef85f22b1e9312ef1",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3c7ae69d3c7f5a6726cc3b905abd753be56f6194b219f55f20303bfbe70102b5",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise/pixart-cat-dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "009f9ec19e02c52d15c5b28118b80f6040fc10bb34a7b325cb1a800f1bb3851c",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md": {
+   "at": "2026-11-22",
+   "sha256": "fc56ed17ae4e25ca490ce03090816e3d60e291ff934d5da3c9069942514e34fc",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "c5d26447a3a7e694c4ef6e2ffa3116cc4a174f93df73383ecd6342106445a7ce",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "744b81acfe2ff94902bc0f7dea97ab0644c85c915fc6ef8f67040a58f5bb2138",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "cd8d84c5fcec2a8a835962ba5a5389bbc655637bb5cd9e5cdd963f80ed1d69ad",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/README.md": {
+   "at": "2026-11-22",
+   "sha256": "0f4c726bb66c540db34bc4c8c59100b2fe1f5e7ca7f5184d2215d8934321e804",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step10k-lambda-sweep.png": {
+   "at": "2026-11-22",
+   "sha256": "f1a47d238423f958e0a52e2d60b1be5f3c1dcfbccd97a0a87619c8b86edaf921",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/cat-dog-rank16-step30k-lambda-sweep.png": {
+   "at": "2026-11-22",
+   "sha256": "b28dddf6b80ba0ce7d2893e748e1c7edc157c5c5f2d742a75e4a87f17e603c04",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-pool43-all50-40k-a-cat-x-a-dog.png": {
+   "at": "2026-11-22",
+   "sha256": "15d4512357ef7fa31e97e7b5f787abdfc2b030d705c5f869681df23bc1fd3f70",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-pool43-all50-40k-an-elephant-x-a-penguin.png": {
+   "at": "2026-11-22",
+   "sha256": "cbea8ae7a8d888162dd0af82c79ffab04957b2cd743e7e2d94f08168c574d16d",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-pool43-all50-60k-a-cat-x-a-dog.png": {
+   "at": "2026-11-22",
+   "sha256": "86561b83e4076e639cb0ed24dd923a35236255290365b2471fbf130377153803",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-pool43-all50-60k-an-elephant-x-a-penguin.png": {
+   "at": "2026-11-22",
+   "sha256": "a24c374185189e50d3c1e025146774fb1db4cd338f96a27da630b81b3a77714e",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-v1-freeze-null-r16-s0-25-30k-a-cat-x-a-dog.png": {
+   "at": "2026-11-22",
+   "sha256": "12f392da58dbb9a85e982317e93c2336690e4f76545b65aa90858083718bf17b",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-v1-freeze-null-r16-s0-25-30k-an-elephant-x-a-penguin.png": {
+   "at": "2026-11-22",
+   "sha256": "d7a288b095b59810227e52a5145de3332f58f6f6afb1adbb938588be9a9ee705",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-across-k-c3.png": {
+   "at": "2026-11-22",
+   "sha256": "b1cabc0a6f01d5cc49efd784e643b3a584c40d449fca418a6c25ad68333a9cf0",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-butterfly-meadow-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "e7bf1f97bed5e86293c83e71eebad663ec69cb3c6a0adc9e8b38b718aee1bbe9",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-k-c0p3.png": {
+   "at": "2026-11-22",
+   "sha256": "959b4ab18b39431099206ed353933233f309d6b7cd51d7aa59a4413ed7abd015",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-across-step-sizes.png": {
+   "at": "2026-11-22",
+   "sha256": "07088785bed59519ef28afa279839a89525647e9d4f0a3fa79f2870494af2b37",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-cat-dog-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "67eda130979b1ce00b8a5737fcc28973fef198a3057a2c018bfda7ef70b2c6d8",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "a669b9679080fd34b1606fa52ec3d23dd69010c08670629f5d5cf045cc7caabf",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "130d7d8c418f130d0e208f4fde2fe25a64924142869c9dc832e3b091605c64f7",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "e4cb6301807f930116f53ac4a7791b306dba3638731049b8aad41d5b8df23653",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "943257ab914d03509ec0e5b37bdab2ff2e070202e1811b685c2424fc3958bd6d",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c3.png": {
+   "at": "2026-11-22",
+   "sha256": "eb2d956ccbc4e2d141b3577084dfbfcd3b22494b9739ec6caebf0f9785dfd56e",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-residual-curves-c30.png": {
+   "at": "2026-11-22",
+   "sha256": "357f280affd2b84eda1f5d32c56e10d616f1591c2f780c87ba35358abecf435f",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-window-slides-cat-dog.png": {
+   "at": "2026-11-22",
+   "sha256": "080e2c686c1a21c539eb385be12dd04917460bdfe6df8ac24463e558b7bd186f",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer-the-langevin-corrector.md": {
+   "at": "2026-11-22",
+   "sha256": "ef6d12a3171a5b8e540356b99aa956cf30da965a0db582152fbc580b186dbd1f",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/figure-explainer.md": {
+   "at": "2026-11-22",
+   "sha256": "074b35d55af91302cecb99e14aed640755223959a74fea1a95733a2423ed8506",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-butterfly-meadow-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "bc5c345d91cbd954dbef7e3966646144c966552ca665bd7a609070625fc24652",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-cat-dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "e3f89c9726cab9b85475e391fbd416ff87b63ae298c567ec049feaad7decd7f6",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "096e2f49a8c3ef667037de2ed43ed10ab9ebea1aa75ea91c1f1cd7d3b8b8046b",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "529a903fd105d926c94e975dc5260d2646c8d7d4c13c424cf5d296a440ea7ee8",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "14e689c1241e128b9ea55682c31709d70f4b0244dd5a95f97e1e5c17fed82ab4",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-butterfly-meadow-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "fdf4856c25514351561a81da824dc4a06c3b06b4e270b5d673294d8c21db6f73",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-adapter-cat-dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "28dc55742f0d4ab5e816382768156ab0af4de41644eabc261b80783f1b6d9ff0",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-butterfly-meadow-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "456601ec50ce50f6eef7e5eab74ccbc5b8708b0bf43ac3d33b166794b8688339",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/noise-search-cat-dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "30a54e8ab7d60aebb4ab5b0c118c961055c3a8123f5be03ec7988f81f9ae59b8",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-in-superdiff-cosine-profile.png": {
+   "at": "2026-11-22",
+   "sha256": "93a13fe4e6fd39ccac8753f0dd61023d07504892925fcac0535a3c6f74f486e2",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-butterfly-meadow-lambda-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "2b2577362dd587ce73b382766277d5f427ae469fa9c6fd3135651658a40ab9fa",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-rank8-in-superdiff-cat-dog-lambda-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "4341a0b16c063d94660a6fcd4babdeffb6231b4dd395af3e79b57a0bee467368",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-butterfly-meadow-kappa-050-lambda-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "c34a85bfe5a5b7f8ba2a594f702e4be1ad2aa4edb4da8abb39bf7159ace3bbaa",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-cat-dog-kappa-050-lambda-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "d46f66d325bbcebf02b8febe8deb43e0e7c02bca8ee32182aaf5aa78476c0b2b",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-baseline-eight-cells.png": {
+   "at": "2026-11-22",
+   "sha256": "a9fad1229b165944060438f1ba158dfb3bbd9d77858ca85d88e14ad3c2ec6fec",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-loss-curves.png": {
+   "at": "2026-11-22",
+   "sha256": "6823d90358ddaa0a3e0d7e6d26b05f73c0a9f57c54980407b9fd24b74cd87faf",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-cat-dog-checkpoint-timeline.png": {
+   "at": "2026-11-22",
+   "sha256": "fa7febfd19cf22f6c8ebde0f49121d0157755af141f6144bf02fd9ac06047777",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-cat-dog-checkpoint-timeline.png": {
+   "at": "2026-11-22",
+   "sha256": "446c5817ab24b9950888e20bec242019957e4cba127e9917f5cbf44aeedb39ac",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png": {
+   "at": "2026-11-22",
+   "sha256": "a4dfebd38a200d9d64a2f5edddffed40247e99f60e14ba91d60578810ff25524",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twist-training-curves.png": {
+   "at": "2026-11-22",
+   "sha256": "c36ff58d56e895c146ef79157be1a1add408fa2eda0e99d1a2f661318ae55bb7",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-cat-x-dog-step-060000-strip.png": {
+   "at": "2026-11-22",
+   "sha256": "f01abca32355edcb4fdff8bd84a99af9d8c77bde3ee3b36c3b57ebe47a15b4ce",
+   "state": "drained"
+  },
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/twisted-smc-checkpoint-timeline.png": {
+   "at": "2026-11-22",
+   "sha256": "7056d08905093e5592df701e0b7a8fbc45a648d804621d2cb3d365bd90820a54",
+   "state": "drained"
+  }
+ },
+ "held": [
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/a.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/b.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/joint.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-butterfly-meadow-checkpoint-timeline.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-butterfly-meadow-checkpoint-timeline.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-cat-dog-checkpoint-timeline.png",
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-butterfly-meadow-checkpoint-timeline.png"
+ ]
+}
