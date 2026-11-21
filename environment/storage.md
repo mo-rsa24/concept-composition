@@ -1,8 +1,75 @@
-# Storage: where things live, sizes, and the disk guard
+# 🗄️ Environment: where data and outputs live on the cluster
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
 
+## Table of contents
+
+- [The storage map](#the-storage-map)
+- [Access paths](#access-paths)
+- [Size, retention, and the quota gap](#size-retention-and-the-quota-gap)
+- [The disk guard rule, and the failure that motivates it](#the-disk-guard-rule-and-the-failure-that-motivates-it)
+- [When `/datasets` is down](#when-datasets-is-down)
+- [Version control](#version-control)
+- [Cross-references](#cross-references)
+
+## The storage map
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#access-paths) ➡️
+
+**Bulk output belongs under `/datasets/mmolefe`, and code and Python environments belong under
+`/home-mscluster/mmolefe`.** The two tables below list every top-level folder this project's code
+names on each mount, so you can see what a move or a cleanup would break.
+
+> [!WARNING]
+> **Unverified.** `mscluster84` did not answer SSH on 2026-11-21, so no folder here was listed or
+> sized live. The folders come from this page's records, `poe_repair/paths.py` and a search of the
+> code. To finish the map, run
+> `scripts/cluster.sh sh 'df -h /datasets /home-mscluster; ls -la /datasets/mmolefe /home-mscluster/mmolefe'`
+> and compare the listing with both tables.
+
+```mermaid
+flowchart LR
+  R["Laptop checkout<br/>code is written here"] -->|"scripts/cluster.sh"| C["/home-mscluster/mmolefe<br/>cluster checkout, Python environments"]
+  C -->|"jobs write bulk output"| D["/datasets/mmolefe/poe_repair_min<br/>checkpoints, caches, sweeps"]
+  C -->|"only while /datasets is down"| S["/home-mscluster/mmolefe/poe_repair_min_scratch"]
+  S -.->|"moved once /datasets reads again"| D
+```
+
+*Solid arrows are the normal path. The dashed arrow is a manual move.*
+
+**On `/datasets/mmolefe`**
+
+| Folder | What it holds | Times named in code |
+|---|---|---|
+| `poe_repair_min/` | this project's bulk and `MOUNT_ROOT` in `poe_repair/paths.py`: mainly `outputs/` (377 mentions) and `artifacts/` (53) | 444 |
+| `repos/` | outside code: `geneval`, `geneval_models`, `T2I-CompBench`, `mmdetection`, `Divide-and-Bind`, `Linguistic-Binding-in-Diffusion-Models` | 17 |
+| `envs/` | Python environments: `t2icomp`, `syngen`, `sd15-aae` | 10 |
+| `relaion2b-en/` | `parquet/`, `wetness/` and `logs/`, read by the caption-wetness and inclusive-captions census scripts | 9 |
+| `coco2017/` | `train2017/` and `annotations_trainval2017/` | 4 |
+| `offload/` | `logs/`, named by `1-lora-correction/scripts/storage/offload_home.sbatch` | 3 |
+| `.cache/` | `huggingface/` | 2 |
+| `raw/` | raw datasets, including `mnist/` and `celeba/` | 1 |
+| `projects/` | other projects' outputs, plus a link to `poe_repair_min/` | 0 |
+| `_archive/` | archived work | 0 |
+
+**On `/home-mscluster/mmolefe`**
+
+| Folder | What it holds | Times named in code |
+|---|---|---|
+| `Playground/PhD/` | the cluster checkout of this repository | 212 |
+| `miniforge3/` | conda and its environments, including `co3` | 186 |
+| `poe_repair_min_scratch/` | the fallback while `/datasets` is down: `mnist-canvas/`, `mnist-share/`, `outputs/` | 43 |
+| `.cache/` | `huggingface/` | 3 |
+| `.local/` | `bin/` | 1 |
+| `.claude/` | `plans/` | 1 |
+
+"Times named in code" counts each occurrence of the path in `.py`, `.sh`, `.sbatch`, `.yaml` and
+`.yml` files under `poe_repair/`, `scripts/`, `composition/` and each project's `scripts/` folder,
+searched on 2026-11-21. A count of 0 means only that no script spells the path.
+
 ## Access paths
+
+Navigation: ⬅️ [The storage map](#the-storage-map) | 📋 [TOC](#table-of-contents) | [Next](#size-retention-and-the-quota-gap) ➡️
 
 - **Repo and code:** `/home-mscluster/mmolefe/Playground/PhD/concept-composition`.
 - **Large artifacts** (checkpoints, caches, and what a run across many settings writes out):
@@ -38,6 +105,8 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
 
 ## Size, retention, and the quota gap
 
+Navigation: ⬅️ [Access paths](#access-paths) | 📋 [TOC](#table-of-contents) | [Next](#the-disk-guard-rule-and-the-failure-that-motivates-it) ➡️
+
 Both filesystems are NFS mounts. Verified live via `df -h /datasets /home-mscluster` on
 2026-08-24:
 
@@ -58,6 +127,8 @@ the `df` check every job script runs before writing.
 
 ## The disk guard rule, and the failure that motivates it
 
+Navigation: ⬅️ [Size](#size-retention-and-the-quota-gap) | 📋 [TOC](#table-of-contents) | [Next](#when-datasets-is-down) ➡️
+
 **`/home-mscluster` hit 100% once and silently killed checkpointing mid-run.** Checkpoints go to
 `/datasets/...` only, and every job script keeps a `df` guard that aborts before writing if the
 target filesystem is too full (see `hpc/execution-protocol.md` step 4).
@@ -74,6 +145,8 @@ same resolved root as its output root has not been re-audited this sitting.
 
 ## When `/datasets` is down
 
+Navigation: ⬅️ [The disk guard](#the-disk-guard-rule-and-the-failure-that-motivates-it) | 📋 [TOC](#table-of-contents) | [Next](#version-control) ➡️
+
 **From about 13:10 UTC on 2026-11-17, `/datasets` returned `Input/output error` on every node tried,
 and it still did at 05:40 UTC on 2026-11-18** (`ls /datasets/mmolefe` and `df -h /datasets` both
 fail; verified over `scripts/cluster.sh sh`). While it is down, the user's standing exception is
@@ -83,6 +156,8 @@ before a launch: `ls /datasets/mmolefe` must list folders.
 
 ## Version control
 
+Navigation: ⬅️ [When `/datasets` is down](#when-datasets-is-down) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
 Neither filesystem is under version control and neither is snapshotted. Every `✓ verified (...)`
 evidence tag in the plan tree points at a path on one of them, so an artifact deleted or moved
 silently breaks the claim it backs. `artifacts/plans/parked/artifact-reconciliation/plans/05-resweep-on-new-runs.md`
@@ -90,5 +165,9 @@ exists to catch this, and is a standing recurring plan rather than a finished on
 
 ## Cross-references
 
+Navigation: ⬅️ [Version control](#version-control) | 📋 [TOC](#table-of-contents)
+
 - The mention of **disk guard** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md), task 5.1.
 - The mention of **disk guard** in [the PRZE-10 compute plan](../1-lora-correction/report/paper-review/prze-10-compute.md), fourth outcome.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

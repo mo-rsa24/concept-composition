@@ -49,14 +49,14 @@ addresses, not an order to follow: start at whichever one answers your question.
 - [Words this file uses](#words-this-file-uses)
 - [Before any of these](#before-any-of-these)
 - [The reference block](#the-reference-block)
-- [1. Build the SuperDiff trajectory cache](#1-build-the-superdiff-trajectory-cache)
-- [2. Launch one training](#2-launch-one-training)
-- [3. Render a strip from every checkpoint while it trains](#3-render-a-strip-from-every-checkpoint-while-it-trains)
-- [4. Assemble the timelines](#4-assemble-the-timelines)
-- [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint)
-- [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets)
-- [7. Inject a PoE-trained adapter into SuperDiff and measure its direction](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction)
-- [8. Stop a run cleanly](#8-stop-a-run-cleanly)
+- [1. Build the SuperDiff trajectory cache](#1-build-the-superdiff-trajectory-cache---ran-2026-09-03)
+- [2. Launch one training](#2-launch-one-training---ran-2026-09-03)
+- [3. Render a strip from every checkpoint while it trains](#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03)
+- [4. Assemble the timelines](#4-assemble-the-timelines---ran-2026-09-05)
+- [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint---ran-2026-09-03)
+- [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03)
+- [7. Inject a PoE-trained adapter into SuperDiff and measure its direction](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03)
+- [8. Stop a run cleanly](#8-stop-a-run-cleanly---ran-2026-09-04)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
 
@@ -96,7 +96,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 
 ## The reference block
 
-Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-build-the-superdiff-trajectory-cache) ➡️
+Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-build-the-superdiff-trajectory-cache---ran-2026-09-03) ➡️
 
 | What is listed | What it is | Watch out |
 |---|---|---|
@@ -109,7 +109,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 ## 1. Build the SuperDiff trajectory cache   `ran 2026-09-03`
 
-Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-launch-one-training) ➡️
+Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-launch-one-training---ran-2026-09-03) ➡️
 
 Renders the pooled-adapter pool (11 training pairs × 8 seeds, from `phase1_r8_450k`'s pool files)
 through SuperDiff at κ 0.5 and saves every step. About 77 s per cell on an A6000; two shards on
@@ -135,7 +135,7 @@ Relaunch the same shard, every finished cell is skipped.
 
 ## 2. Launch one training   `ran 2026-09-03`
 
-Navigation: ⬅️ [1. Build the SuperDiff trajectory cache](#1-build-the-superdiff-trajectory-cache) | 📋 [TOC](#table-of-contents) | [Next](#3-render-a-strip-from-every-checkpoint-while-it-trains) ➡️
+Navigation: ⬅️ [1. Build the SuperDiff trajectory cache](#1-build-the-superdiff-trajectory-cache---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) ➡️
 
 ⚠️ Starts a 24 to 34 hour process on a shared node. Do the checks under Before any of these
 first; the script re-checks the device itself and refuses one that is busy.
@@ -172,7 +172,7 @@ ssh mscluster106 "RESUME_FROM=$SD/sdlora_r32_100k/checkpoints/lora_step_005000.p
 
 ## 3. Render a strip from every checkpoint while it trains   `ran 2026-09-03`
 
-Navigation: ⬅️ [2. Launch one training](#2-launch-one-training) | 📋 [TOC](#table-of-contents) | [Next](#4-assemble-the-timelines) ➡️
+Navigation: ⬅️ [2. Launch one training](#2-launch-one-training---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-assemble-the-timelines---ran-2026-09-05) ➡️
 
 Runs on its own device, needs no change to the trainings, and exits once every rank's final
 checkpoint is rendered. Each checkpoint at a multiple of 10k steps costs 4 renders per pair
@@ -197,7 +197,7 @@ catch-up instant.
 
 ## 4. Assemble the timelines   `ran 2026-09-05`
 
-Navigation: ⬅️ [3. Render a strip from every checkpoint while it trains](#3-render-a-strip-from-every-checkpoint-while-it-trains) | 📋 [TOC](#table-of-contents) | [Next](#5-sweep-λ-on-one-checkpoint) ➡️
+Navigation: ⬅️ [3. Render a strip from every checkpoint while it trains](#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#5-sweep-λ-on-one-checkpoint---ran-2026-09-03) ➡️
 
 One sheet per rank and pair from the watcher's tiles: rows mono target, SuperDiff alone, then
 each checkpoint; columns seeds 9 to 12. Run it on the node that rendered the tiles, since the
@@ -215,7 +215,7 @@ sheet is a tile the watcher has not rendered yet.
 
 ## 5. Sweep λ on one checkpoint   `ran 2026-09-03`
 
-Navigation: ⬅️ [4. Assemble the timelines](#4-assemble-the-timelines) | 📋 [TOC](#table-of-contents) | [Next](#6-render-superdiffs-own-kappa-by-lambda-sheets) ➡️
+Navigation: ⬅️ [4. Assemble the timelines](#4-assemble-the-timelines---ran-2026-09-05) | 📋 [TOC](#table-of-contents) | [Next](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) ➡️
 
 Sixteen renders (seeds 9 to 12 × λ 0.25, 0.5, 0.75, 1) of one checkpoint on cat × dog, then a
 sheet with plan 05's λ 0 column on the left. About 12 minutes on the Blackwell.
@@ -235,7 +235,7 @@ old cached tiles.
 
 ## 6. Render SuperDiff's own kappa by lambda sheets   `ran 2026-09-03`
 
-Navigation: ⬅️ [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint) | 📋 [TOC](#table-of-contents) | [Next](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction) ➡️
+Navigation: ⬅️ [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) ➡️
 
 SuperDiff alone at 200 steps, seeds 9 to 12, λ 0 to 1 of its own residual added back, one sheet
 per κ setting: cat × dog at κ 0, 0.25, 0.5, 0.75, 1 and its own unclamped κ, butterfly × meadow
@@ -259,7 +259,7 @@ names the tile, and the sweep resumes on relaunch.
 
 ## 7. Inject a PoE-trained adapter into SuperDiff and measure its direction   `ran 2026-09-03`
 
-Navigation: ⬅️ [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets) | 📋 [TOC](#table-of-contents) | [Next](#8-stop-a-run-cleanly) ➡️
+Navigation: ⬅️ [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#8-stop-a-run-cleanly---ran-2026-09-04) ➡️
 
 Three steps: prove the attached adapter is inert at λ 0 and active at λ 1, render the 96-cell
 set (rank 8, 16, 32 × two pairs × seeds 9 to 12 × λ 0.25 to 1), then measure on one cell the
@@ -288,7 +288,7 @@ UNet; the script refuses rather than render the baseline under a new name.
 
 ## 8. Stop a run cleanly   `ran 2026-09-04`
 
-Navigation: ⬅️ [7. Inject a PoE-trained adapter into SuperDiff and measure its direction](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
+Navigation: ⬅️ [7. Inject a PoE-trained adapter into SuperDiff and measure its direction](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
 Kill by pid, never by pattern. The pid is in the log header (`pid=...`) or from `pgrep` with the
 bracket trick, which stops the pattern from matching the shell you are typing it into.
@@ -307,7 +307,7 @@ remote shell's own command line, which contained the pattern, and killed it. Use
 
 ## If something looks wrong
 
-Navigation: ⬅️ [8. Stop a run cleanly](#8-stop-a-run-cleanly) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
+Navigation: ⬅️ [8. Stop a run cleanly](#8-stop-a-run-cleanly---ran-2026-09-04) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 - **A file another node just wrote is not there.** The session node's NFS view of `/datasets`
   lags the writing node by minutes. Count or assemble on the node that wrote, over `ssh`.

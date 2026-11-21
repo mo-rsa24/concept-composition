@@ -24,10 +24,10 @@ to follow.
 
 - [Before any of these](#before-any-of-these)
 - [Where the paper lives](#where-the-paper-lives)
-- [1. Pull your Overleaf edits into the repo](#1-pull-your-overleaf-edits-into-the-repo)
-- [2. Read what came down before you commit it](#2-read-what-came-down-before-you-commit-it)
-- [3. ⚠️ Send a repo-side edit back up to Overleaf](#3-️-send-a-repo-side-edit-back-up-to-overleaf)
-- [4. Rebuild the upload zip instead](#4-rebuild-the-upload-zip-instead)
+- [1. Pull your Overleaf edits into the repo](#1-pull-your-overleaf-edits-into-the-repo---ran-2026-09-21)
+- [2. Read what came down before you commit it](#2-read-what-came-down-before-you-commit-it---ran-2026-09-21)
+- [3. ⚠️ Send a repo-side edit back up to Overleaf](#3-send-a-repo-side-edit-back-up-to-overleaf)
+- [4. Rebuild the upload zip instead](#4-rebuild-the-upload-zip-instead---unverified)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
 
@@ -55,7 +55,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 
 ## Where the paper lives
 
-Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-pull-your-overleaf-edits-into-the-repo) ➡️
+Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-pull-your-overleaf-edits-into-the-repo---ran-2026-09-21) ➡️
 
 | Place | What is in it | Who writes it | Watch out |
 |---|---|---|---|
@@ -68,7 +68,7 @@ and only the figures the manuscript actually includes.
 
 ## 1. Pull your Overleaf edits into the repo   `ran 2026-09-21`
 
-Navigation: ⬅️ [Where the paper lives](#where-the-paper-lives) | 📋 [TOC](#table-of-contents) | [Next](#2-read-what-came-down-before-you-commit-it) ➡️
+Navigation: ⬅️ [Where the paper lives](#where-the-paper-lives) | 📋 [TOC](#table-of-contents) | [Next](#2-read-what-came-down-before-you-commit-it---ran-2026-09-21) ➡️
 
 **When you need this**
 
@@ -118,7 +118,7 @@ real merge on your hands, so diff them and resolve by hand instead of copying.
 
 ## 2. Read what came down before you commit it   `ran 2026-09-21`
 
-Navigation: ⬅️ [1. Pull your Overleaf edits into the repo](#1-pull-your-overleaf-edits-into-the-repo) | 📋 [TOC](#table-of-contents) | [Next](#3-️-send-a-repo-side-edit-back-up-to-overleaf) ➡️
+Navigation: ⬅️ [1. Pull your Overleaf edits into the repo](#1-pull-your-overleaf-edits-into-the-repo---ran-2026-09-21) | 📋 [TOC](#table-of-contents) | [Next](#3-send-a-repo-side-edit-back-up-to-overleaf) ➡️
 
 **When you need this**
 
@@ -140,9 +140,11 @@ lines and two paragraph moves.
 - How far apart the two copies are right now: `diff -u writing/iclr/iclr2027_conference.tex writing/overleaf-iclr/iclr2027_conference.tex`
 - Which hunks differ, without the prose: append `| grep '^@@'` to that
 
+<a id="3-send-a-repo-side-edit-back-up-to-overleaf"></a>
+
 ## 3. ⚠️ Send a repo-side edit back up to Overleaf   `unverified`
 
-Navigation: ⬅️ [2. Read what came down before you commit it](#2-read-what-came-down-before-you-commit-it) | 📋 [TOC](#table-of-contents) | [Next](#4-rebuild-the-upload-zip-instead) ➡️
+Navigation: ⬅️ [2. Read what came down before you commit it](#2-read-what-came-down-before-you-commit-it---ran-2026-09-21) | 📋 [TOC](#table-of-contents) | [Next](#4-rebuild-the-upload-zip-instead---unverified) ➡️
 
 **When you need this**
 
@@ -180,7 +182,7 @@ lists what it needs.
 
 ## 4. Rebuild the upload zip instead   `unverified`
 
-Navigation: ⬅️ [3. ⚠️ Send a repo-side edit back up to Overleaf](#3-️-send-a-repo-side-edit-back-up-to-overleaf) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
+Navigation: ⬅️ [3. ⚠️ Send a repo-side edit back up to Overleaf](#3-send-a-repo-side-edit-back-up-to-overleaf) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
 **When you need this**
 
@@ -201,7 +203,7 @@ lines) are in [the Overleaf handoff note](../writing/iclr/OVERLEAF.md).
 
 ## If something looks wrong
 
-Navigation: ⬅️ [4. Rebuild the upload zip instead](#4-rebuild-the-upload-zip-instead) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
+Navigation: ⬅️ [4. Rebuild the upload zip instead](#4-rebuild-the-upload-zip-instead---unverified) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 **A pull asks for a username and password.** The stored token has expired or was never written.
 Generate a git token in Overleaf's Account Settings, then pull again and paste it as the

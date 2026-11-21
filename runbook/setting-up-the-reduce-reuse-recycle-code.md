@@ -12,18 +12,18 @@ The recipes are numbered so the index can point at them. Follow 1 to 3 for the n
 for CLEVR.
 
 - [Before any of these](#before-any-of-these)
-- [1. Clone at the commit the walk uses](#1-clone-at-the-commit-the-walk-uses)
-- [2. Build the 2D notebook's environment](#2-build-the-2d-notebooks-environment)
-- [3. Make the notebook run on current jax](#3-make-the-notebook-run-on-current-jax)
-- [4. Get the CLEVR checkpoint](#4-get-the-clevr-checkpoint)
-- [5. Give the CLEVR script a CUDA torch](#5-give-the-clevr-script-a-cuda-torch)
-- [6. Run the notebook on the GPU instead](#6-run-the-notebook-on-the-gpu-instead)
-- [7. Build the 2D notebook's environment on the cluster](#7-build-the-2d-notebooks-environment-on-the-cluster)
+- [1. Clone at the commit the walk uses](#1-clone-at-the-commit-the-walk-uses---ran-2026-10-13)
+- [2. Build the 2D notebook's environment](#2-build-the-2d-notebooks-environment---ran-2026-10-13)
+- [3. Make the notebook run on current jax](#3-make-the-notebook-run-on-current-jax---ran-2026-10-13)
+- [4. Get the CLEVR checkpoint](#4-get-the-clevr-checkpoint---ran-2026-10-13)
+- [5. Give the CLEVR script a CUDA torch](#5-give-the-clevr-script-a-cuda-torch---ran-2026-10-13)
+- [6. Run the notebook on the GPU instead](#6-run-the-notebook-on-the-gpu-instead---unverified)
+- [7. Build the 2D notebook's environment on the cluster](#7-build-the-2d-notebooks-environment-on-the-cluster---ran-2026-10-13)
 - [Where this came from](#where-this-came-from)
 
 ## Before any of these
 
-Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-clone-at-the-commit-the-walk-uses) ➡️
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-clone-at-the-commit-the-walk-uses---ran-2026-10-13) ➡️
 
 - [ ] 🖥️ **uv is installed**
   ```bash
@@ -34,7 +34,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-clone-at-the-commit-the-w
 
 ## 1. Clone at the commit the walk uses   `ran 2026-10-13`
 
-Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-build-the-2d-notebooks-environment) ➡️
+Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-build-the-2d-notebooks-environment---ran-2026-10-13) ➡️
 
 ```bash
 cd ~/PhD
@@ -47,7 +47,7 @@ git checkout -b walk 81177d9
 
 ## 2. Build the 2D notebook's environment   `ran 2026-10-13`
 
-Navigation: ⬅️ [1. Clone](#1-clone-at-the-commit-the-walk-uses) | 📋 [TOC](#table-of-contents) | [Next](#3-make-the-notebook-run-on-current-jax) ➡️
+Navigation: ⬅️ [1. Clone](#1-clone-at-the-commit-the-walk-uses---ran-2026-10-13) | 📋 [TOC](#table-of-contents) | [Next](#3-make-the-notebook-run-on-current-jax---ran-2026-10-13) ➡️
 
 ```bash
 cd ~/PhD/replications/reduce-reuse-recycle
@@ -64,7 +64,7 @@ The download is about 200 MB; on a slow line it takes most of an hour.
 
 ## 3. Make the notebook run on current jax   `ran 2026-10-13`
 
-Navigation: ⬅️ [2. The 2D environment](#2-build-the-2d-notebooks-environment) | 📋 [TOC](#table-of-contents) | [Next](#4-get-the-clevr-checkpoint) ➡️
+Navigation: ⬅️ [2. The 2D environment](#2-build-the-2d-notebooks-environment---ran-2026-10-13) | 📋 [TOC](#table-of-contents) | [Next](#4-get-the-clevr-checkpoint---ran-2026-10-13) ➡️
 
 ```bash
 python3 ~/PhD/concept-composition/scripts/fix_reduce_reuse_recycle_notebook.py \
@@ -85,7 +85,7 @@ run, or the compatibility cell was not run in this kernel.
 
 ## 4. Get the CLEVR checkpoint   `ran 2026-10-13`
 
-Navigation: ⬅️ [3. Notebook fixes](#3-make-the-notebook-run-on-current-jax) | 📋 [TOC](#table-of-contents) | [Next](#5-give-the-clevr-script-a-cuda-torch) ➡️
+Navigation: ⬅️ [3. Notebook fixes](#3-make-the-notebook-run-on-current-jax---ran-2026-10-13) | 📋 [TOC](#table-of-contents) | [Next](#5-give-the-clevr-script-a-cuda-torch---ran-2026-10-13) ➡️
 
 Google Drive answers a file this size with a virus-scan page, so the download has to pass that
 page's confirmation.
@@ -105,7 +105,7 @@ browser instead and save the file into the clone.
 
 ## 5. Give the CLEVR script a CUDA torch   `ran 2026-10-13`
 
-Navigation: ⬅️ [4. The checkpoint](#4-get-the-clevr-checkpoint) | 📋 [TOC](#table-of-contents) | [Next](#6-run-the-notebook-on-the-gpu-instead) ➡️
+Navigation: ⬅️ [4. The checkpoint](#4-get-the-clevr-checkpoint---ran-2026-10-13) | 📋 [TOC](#table-of-contents) | [Next](#6-run-the-notebook-on-the-gpu-instead---unverified) ➡️
 
 This borrows the CUDA torch already installed for `my-eye-my-brain`, read-only, and adds only
 matplotlib inside the clone.
@@ -127,7 +127,7 @@ Build a CUDA torch in the clone instead (about 2.5 GB):
 
 ## 6. Run the notebook on the GPU instead   `unverified`
 
-Navigation: ⬅️ [5. CLEVR torch](#5-give-the-clevr-script-a-cuda-torch) | 📋 [TOC](#table-of-contents) | [Next](#7-build-the-2d-notebooks-environment-on-the-cluster) ➡️
+Navigation: ⬅️ [5. CLEVR torch](#5-give-the-clevr-script-a-cuda-torch---ran-2026-10-13) | 📋 [TOC](#table-of-contents) | [Next](#7-build-the-2d-notebooks-environment-on-the-cluster---ran-2026-10-13) ➡️
 
 ```bash
 cd ~/PhD/replications/reduce-reuse-recycle
@@ -140,7 +140,7 @@ the notebook's kernel and rerun from the top.
 
 ## 7. Build the 2D notebook's environment on the cluster   `ran 2026-10-13`
 
-Navigation: ⬅️ [6. GPU notebook](#6-run-the-notebook-on-the-gpu-instead) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
+Navigation: ⬅️ [6. GPU notebook](#6-run-the-notebook-on-the-gpu-instead---unverified) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 On a GPU node (the walk used `mscluster88`), with the clone from recipe 1 at
 `~/PhD/replications/reduce-reuse-recycle`. Check the card first, because `bigbatch` cards fault between checks:
@@ -171,7 +171,7 @@ interpreter path** and paste `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle/.
 
 ## Where this came from
 
-Navigation: ⬅️ [7. Cluster environment](#7-build-the-2d-notebooks-environment-on-the-cluster) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [7. Cluster environment](#7-build-the-2d-notebooks-environment-on-the-cluster---ran-2026-10-13) | 📋 [TOC](#table-of-contents)
 
 **The drip-repo walk of 2026-10-13**, whose working file is
 `/home/molef/PhD/replications/reduce-reuse-recycle/artifacts/drips/reduce-reuse-recycle/REPO_WALK.md`. Every recipe marked `ran` was run that day

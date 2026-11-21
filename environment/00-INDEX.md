@@ -1,32 +1,40 @@
 # 🗺️ Environment: concept-composition
 
-What is true about the system this work runs on. Migrated 2026-08-24 from the single
-`docs/ENVIRONMENT.md` file (the old shape) into this folder, as part of stage 2 of the
-`/retrofit-repo` pass ledgered in `RETROFIT.md`.
+What is true about the system this work runs on.
 
-Read [overview.md](overview.md) first, always. Then the row below matching what you are about
+Read [the overview](overview.md) first, always. Then the row below matching what you are about
 to touch.
 
+## Table of contents
+
+- [Before I...](#before-i)
+- [The systems](#the-systems)
+- [Still open](#still-open)
+
 ## Before I...
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-systems) ➡️
 
 | The moment | Read this | Because |
 |---|---|---|
 | submit a job, or write an `sbatch` header | [hpc/nodes.md](hpc/nodes.md) | partitions differ in GPU model and time limit, and `sinfo` cannot tell you which node has a GPU: asking for the wrong one queues silently |
-| estimate how long a training run will take, before launching it | [hpc/throughput.md](hpc/throughput.md) | real measured step time, checkpoint-save time, and eval-pass time, by GPU model and rank — a guess here has cost real GPU-hours before |
+| estimate how long a training run will take, before launching it | [hpc/throughput.md](hpc/throughput.md) | real measured step time, checkpoint-save time, and eval-pass time, by GPU model and rank, because a guess here has cost real GPU-hours before |
 | decide whether to submit or SSH into a shared device | [hpc/execution-protocol.md](hpc/execution-protocol.md) | "run an experiment" is a six-step decision here, not one action, and the shared-device path has mandatory safety rules |
 | launch anything over SSH onto a node this session is not on | [hpc/execution-protocol.md](hpc/execution-protocol.md) | a relative path in the launch line resolves against `$HOME`, not the repo, and the failure is silent (`poe-launch-001`) |
 | read or write project data, or add a disk guard to a job script | [storage.md](storage.md) | two filesystems, different quotas, no automatic mirroring, and a guard that checks the wrong mount has already caused a real loss (`poe-disk-001`) |
 | run the authors' Reduce, Reuse, Recycle code (the 2D notebook or `inf_sample.py`) | [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the notebook fails on current jax until one argument is renamed, the CLEVR script borrows another venv's CUDA torch, and the released U-Net cannot run a forward pass as shipped |
 | build or edit the paper | [paper.md](paper.md) | no system LaTeX exists here; the extension's default recipe fails outright, and a recent config change to fix that is unverified |
-| hit an error that looks like it has happened before | [known-failures.md](known-failures.md) | eight catalogued patterns with symptom, root cause, and solution, so a failure is not re-diagnosed from scratch |
+| hit an error that looks like it has happened before | [known-failures.md](known-failures.md) | 18 catalogued patterns with symptom, root cause, and solution, so a failure is not re-diagnosed from scratch |
 | want to know how sure a fact in this folder actually is | [provenance.md](provenance.md) | every fact is marked verified, stated, or inferred, and several were re-checked live on 2026-08-24 |
 
 ## The systems
 
+Navigation: ⬅️ [Before I...](#before-i) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
+
 | Folder | What you operate there | Leaves |
 |---|---|---|
 | [hpc/](hpc) | the cluster: partitions, nodes, GPUs, the launch protocol, measured throughput | 3 |
-| [storage.md](storage.md) | the two filesystems, sizes, and the disk-guard rule | 1 (flat, no second leaf yet) |
+| [storage.md](storage.md) | the map of every folder on the two filesystems, their sizes, and the disk-guard rule | 1 (flat, no second leaf yet) |
 | [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the authors' code for Du et al. 2023, cloned at `~/PhD/replications/reduce-reuse-recycle` | 1 (flat, no second leaf yet) |
 | [paper.md](paper.md) | the LaTeX build for `writing/iclr/` | 1 (flat, no second leaf yet) |
 
@@ -35,30 +43,22 @@ catalog is [known-failures.md](known-failures.md).
 
 ## Still open
 
+Navigation: ⬅️ [The systems](#the-systems) | 📋 [TOC](#table-of-contents)
+
+- **The [storage map](storage.md#the-storage-map) is unverified.** `mscluster84` did not answer SSH
+  on 2026-11-21, so its folders come from this folder's records and the code. The map's warning
+  holds the command that finishes it.
 - **Whether `.vscode/settings.json` (added 2026-08-18, commit `2c4d0b6`) makes VS Code's plain
-  "Build LaTeX project" work without manually picking the `tectonic` recipe.** Deliberately
-  untested this sitting, because testing means running a build, which writes a PDF outside this
-  folder's scope. See [paper.md](paper.md).
-- **Whether every job script's disk guard now reads the same resolved root as its output path,**
-  after the `paths.resolve()` commits. Not re-audited this sitting. See `poe-disk-001` in
-  [known-failures.md](known-failures.md).
-- **The wider discovery-route wiring.** The project `CLAUDE.md` and the root `MASTER_PLAN.md`
-  now point at `environment/overview.md` and `environment/00-INDEX.md`. Roughly two dozen other
-  files still name `docs/ENVIRONMENT.md`: about ten sub-scope `MASTER_PLAN.md` files under
-  `plans/` (each with its own `## Environment Context` pointer) and about a dozen plan and review
-  files that link into specific anchors of the old file. Repointing all of them is out of scope
-  for this sitting; see the audit output for the full list. This is flagged for whichever stage
-  of the retrofit pass handles repo-wide path rewrites (the plan's stage table names stage 4,
-  `tidy-repo`, as "the bulk of it, both filesystems," which is the pass already doing repo-wide
-  renames).
-- **No `reference`-type memory entry names the `environment/` folder.** The closest existing
-  entry, `hpc-and-execution-conventions` (`type: project`), duplicates several facts inline and
-  points at the old `docs/ENVIRONMENT.md` path. Per `ENVIRONMENT_CONTEXT_FORMAT.md`'s discovery
-  routes, a `reference`-type entry naming this folder's path and purpose is the route that
-  survives working outside the repo; writing memory entries is the orchestrating session's job,
-  not this skill's, so this is reported rather than created.
-- **Five of the six `overview.md` sections' internal cross-references were narrowed to "two or
-  three facts plus a link"** per the format's own rule, rather than keeping every sentence of
-  the original `docs/ENVIRONMENT.md` inline. This is a real content move, not a pure copy: check
-  a leaf's wording against `docs/ENVIRONMENT.md` (still present, unmodified, for this comparison)
-  if a fact seems to be missing rather than moved.
+  "Build LaTeX project" work without manually picking the `tectonic` recipe.** Testing it means
+  running a build. See [the paper build page](paper.md).
+- **Whether every job script's disk guard reads the same resolved root as its output path,**
+  after the `paths.resolve()` commits. See `poe-disk-001` in the
+  [failure catalog](known-failures.md).
+- **One script still names the retired `docs/ENVIRONMENT.md`:** a comment at line 9 of
+  `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`. That file's last
+  version is in git history at commit `94069341`.
+- **No `reference`-type memory entry names the `environment/` folder.** The closest entry,
+  `hpc-and-execution-conventions` (`type: project`), repeats several facts and points at the
+  retired `docs/ENVIRONMENT.md`.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

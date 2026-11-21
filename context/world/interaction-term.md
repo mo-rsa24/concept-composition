@@ -91,8 +91,8 @@ Navigation: ⬅️ [Why the project cares](#why-the-project-cares) | 📋 [TOC](
 
 | Column | Stands for | Example | Entry |
 |---|---|---|---|
-| `d_T_poe_vs_mono` | the interaction term's final-step size for one run | `0.246` (example, `a_cat__x__a_dog` seed 42) | [Dictionary § d_T / d_t](../data/02-dictionary.md#d_t-d_t) |
-| `d_t_poe_vs_mono` | the same quantity at every one of the 50 steps | array of 50 floats, `0.0` to `0.246` (example) | [Dictionary § d_T / d_t](../data/02-dictionary.md#d_t-d_t) |
+| `d_T_poe_vs_mono` | the interaction term's final-step size for one run | `0.246` (example, `a_cat__x__a_dog` seed 42) | [Dictionary § d_T / d_t](../data/02-dictionary.md#d_t--d_t) |
+| `d_t_poe_vs_mono` | the same quantity at every one of the 50 steps | array of 50 floats, `0.0` to `0.246` (example) | [Dictionary § d_T / d_t](../data/02-dictionary.md#d_t--d_t) |
 | `lambda` | how much of the term is injected at inference | `1.0` (example, full strength) | [Dictionary § lambda](../data/02-dictionary.md#lambda) |
 | `step` | which of the 50 denoising steps a value belongs to | `10` (example) | [Dictionary § step](../data/02-dictionary.md#step) |
 

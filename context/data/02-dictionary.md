@@ -7,17 +7,17 @@ Every example is a real value read directly from a file in this repository, labe
 
 - [`pair_slug`](#pair_slug)
 - [`seed`](#seed)
-- [`group` / `group_label`](#group-group_label)
+- [`group` / `group_label`](#group--group_label)
 - [`arm`](#arm)
 - [`lambda`](#lambda)
 - [`step`](#step)
 - [`model_id`](#model_id)
-- [`d_T` / `d_t`](#d_t-d_t)
+- [`d_T` / `d_t`](#d_t--d_t)
 - [`n_instances`](#n_instances)
-- [`label` / `truth`](#label-truth)
-- [`fail_rate` / `compose_rate`](#fail_rate-compose_rate)
-- [`which_animal` / `both_ness` / `off_plane_norm`](#which_animal-both_ness-off_plane_norm)
-- [`commit_step` / `fork_step`](#commit_step-fork_step)
+- [`label` / `truth`](#label--truth)
+- [`fail_rate` / `compose_rate`](#fail_rate--compose_rate)
+- [`which_animal` / `both_ness` / `off_plane_norm`](#which_animal--both_ness--off_plane_norm)
+- [`commit_step` / `fork_step`](#commit_step--fork_step)
 
 ### `pair_slug`
 
@@ -43,7 +43,7 @@ that writes "a cat and a dog" and one that writes `a_cat__x__a_dog` mean the sam
 
 ### `seed`
 
-Navigation: ⬅️ [`pair_slug`](#pair_slug) | 📋 [TOC](#table-of-contents) | [Next](#group-group_label) ➡️
+Navigation: ⬅️ [`pair_slug`](#pair_slug) | 📋 [TOC](#table-of-contents) | [Next](#group--group_label) ➡️
 
 **What it means in the world** ✅
 
@@ -94,7 +94,7 @@ experiment scope 🔍
 
 ### `arm`
 
-Navigation: ⬅️ [`group` / `group_label`](#group-group_label) | 📋 [TOC](#table-of-contents) | [Next](#lambda) ➡️
+Navigation: ⬅️ [`group` / `group_label`](#group--group_label) | 📋 [TOC](#table-of-contents) | [Next](#lambda) ➡️
 
 **What it means in the world** ✍️
 
@@ -163,7 +163,7 @@ axes table: "step | 0 to 49 | the schedule is 50 steps everywhere in the cache"
 
 ### `model_id`
 
-Navigation: ⬅️ [`step`](#step) | 📋 [TOC](#table-of-contents) | [Next](#d_t-d_t) ➡️
+Navigation: ⬅️ [`step`](#step) | 📋 [TOC](#table-of-contents) | [Next](#d_t--d_t) ➡️
 
 **What it means in the world** ✅
 
@@ -202,7 +202,7 @@ the same starting noise), not of a single image alone
 
 ### `n_instances`
 
-Navigation: ⬅️ [`d_T` / `d_t`](#d_t-d_t) | 📋 [TOC](#table-of-contents) | [Next](#label-truth) ➡️
+Navigation: ⬅️ [`d_T` / `d_t`](#d_t--d_t) | 📋 [TOC](#table-of-contents) | [Next](#label--truth) ➡️
 
 **What it means in the world** ✅
 
@@ -223,7 +223,7 @@ chimera/dropped-concept case, `3` appears at least once (`wolfhusky_sample_seed_
 
 ### `label` / `truth`
 
-Navigation: ⬅️ [`n_instances`](#n_instances) | 📋 [TOC](#table-of-contents) | [Next](#fail_rate-compose_rate) ➡️
+Navigation: ⬅️ [`n_instances`](#n_instances) | 📋 [TOC](#table-of-contents) | [Next](#fail_rate--compose_rate) ➡️
 
 **What it means in the world** ✅
 
@@ -244,7 +244,7 @@ a person, when the validation set was built
 
 ### `fail_rate` / `compose_rate`
 
-Navigation: ⬅️ [`label` / `truth`](#label-truth) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [`label` / `truth`](#label--truth) | 📋 [TOC](#table-of-contents)
 
 **What it means in the world** ✅
 

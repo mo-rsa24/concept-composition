@@ -23,7 +23,7 @@ A run such as `data/pilot/seed_42/a_cat__x__a_dog/` holds `poe.png` (plain PoE),
 (Mono, the joint-prompt cheat), `solo_a.png` and `solo_b.png` (each concept alone, the two
 "experts"), `trajectory_manifold.png` (a 2-D projection of the denoising path), and
 `summary.json` (the per-step and final size of the interaction term, `d_t_poe_vs_mono` and
-`d_T_poe_vs_mono`; see [data/02-dictionary.md § d_T](../data/02-dictionary.md#d_t-d_t)). Read
+`d_T_poe_vs_mono`; see [data/02-dictionary.md § d_T](../data/02-dictionary.md#d_t--d_t)). Read
 this session directly. ✅
 
 **One compose/blend label and a compose rate, per pair, from the scorer.** ✅

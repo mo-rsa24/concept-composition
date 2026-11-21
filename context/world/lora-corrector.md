@@ -88,7 +88,7 @@ Navigation: ⬅️ [Why the project cares](#why-the-project-cares) | 📋 [TOC](
 |---|---|---|---|
 | `arm` | one of the values this column takes is the LoRA-corrected render | `lora_residual_inject` (example, a method name in `poe_repair/methods/_sampling.py`) | [Dictionary § arm](../data/02-dictionary.md#arm) |
 | `pair_slug` | which pair a given LoRA checkpoint was trained on or evaluated against | `a_cat__x__a_dog` (example) | [Dictionary § pair_slug](../data/02-dictionary.md#pair_slug) |
-| `group` | the pooling unit a LoRA checkpoint was trained over, when pooled by group | `group6_coherent_collision` (example) | [Dictionary § group](../data/02-dictionary.md#group-group_label) |
+| `group` | the pooling unit a LoRA checkpoint was trained over, when pooled by group | `group6_coherent_collision` (example) | [Dictionary § group](../data/02-dictionary.md#group--group_label) |
 
 ## What people get wrong
 

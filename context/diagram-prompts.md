@@ -277,7 +277,7 @@ the real curve is a figure, not this diagram), no watermark.
 
 Faithfulness note: `d_T = 0.246` is copied verbatim from
 `data/pilot/seed_42/a_cat__x__a_dog/summary.json`, read directly this session
-([data/02-dictionary.md § d_T / d_t](data/02-dictionary.md#d_t-d_t)); using a different number
+([data/02-dictionary.md § d_T / d_t](data/02-dictionary.md#d_t--d_t)); using a different number
 without checking that file first is the mistake this note exists to catch.
 
 ### Prompt 3 (Process): Scorer verdict to compose rate

@@ -46,10 +46,10 @@ addresses, not an order to follow: start at whichever one answers your question.
 - [Words this file uses](#words-this-file-uses)
 - [Before any of these](#before-any-of-these)
 - [The reference block](#the-reference-block)
-- [1. Render the 8-seed held-out grid for one checkpoint](#1-render-the-8-seed-held-out-grid-for-one-checkpoint)
-- [2. Measure how well a checkpoint fits the cached correction](#2-measure-how-well-a-checkpoint-fits-the-cached-correction)
-- [3. Resume a pooled training from a checkpoint on a free device](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device)
-- [4. Train two ranks on one idle node with one Slurm job](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job)
+- [1. Render the 8-seed held-out grid for one checkpoint](#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03)
+- [2. Measure how well a checkpoint fits the cached correction](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03)
+- [3. Resume a pooled training from a checkpoint on a free device](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01)
+- [4. Train two ranks on one idle node with one Slurm job](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
 
@@ -86,7 +86,7 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
 
 ## The reference block
 
-Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-render-the-8-seed-held-out-grid-for-one-checkpoint) ➡️
+Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) ➡️
 
 | Where the checkpoints are | Steps saved | Watch out |
 |---|---|---|
@@ -101,7 +101,7 @@ Blackwell nodes (110 to 112), per [the cluster nodes](../../environment/hpc/node
 
 ## 1. Render the 8-seed held-out grid for one checkpoint   `ran 2026-09-03`
 
-Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-measure-how-well-a-checkpoint-fits-the-cached-correction) ➡️
+Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) ➡️
 
 **When you need this**
 
@@ -186,7 +186,7 @@ which answers a different question. The probe uses the first.
 
 ## 2. Measure how well a checkpoint fits the cached correction   `ran 2026-09-03`
 
-Navigation: ⬅️ [1. Render the 8-seed held-out grid](#1-render-the-8-seed-held-out-grid-for-one-checkpoint) | 📋 [TOC](#table-of-contents) | [Next](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device) ➡️
+Navigation: ⬅️ [1. Render the 8-seed held-out grid](#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) ➡️
 
 **When you need this**
 
@@ -251,7 +251,7 @@ continues without it; the pair's `n` in the table shows how many rows it got.
 
 ## 3. Resume a pooled training from a checkpoint on a free device   `ran 2026-09-01`
 
-Navigation: ⬅️ [2. Measure how well a checkpoint fits](#2-measure-how-well-a-checkpoint-fits-the-cached-correction) | 📋 [TOC](#table-of-contents) | [Next](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job) ➡️
+Navigation: ⬅️ [2. Measure how well a checkpoint fits](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) ➡️
 
 **When you need this**
 
@@ -325,7 +325,7 @@ epochs run since the resume, not since step 0.
 
 ## 4. Train two ranks on one idle node with one Slurm job   `ran 2026-09-01`
 
-Navigation: ⬅️ [3. Resume a pooled training](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
+Navigation: ⬅️ [3. Resume a pooled training](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
 **When you need this**
 
@@ -370,7 +370,7 @@ Take the shared-device path in [launch on a shared device](launching-and-harvest
 
 ## If something looks wrong
 
-Navigation: ⬅️ [4. Train two ranks](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
+Navigation: ⬅️ [4. Train two ranks](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 **A count or a listing on the session node is short.** The session node's NFS view of `/datasets`
 lags the launch node by minutes. Count and tail over SSH on the node that wrote the files.

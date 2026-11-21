@@ -6,18 +6,11 @@ Patterns specific to this project: codebase structure, model sizes, dataset char
 cluster constraints observed in practice. Per `~/.claude/ERROR_MATRIX_SYSTEM.md`, this file is
 the project layer of the error matrix (the global, environment-independent layer is
 `~/.claude/GLOBAL_ERROR_CATALOG.md`). An entry's symptom and root cause are the environment
-fact; where the solution is a procedure someone drives by hand, it belongs in a `runbook/`
-recipe once that folder exists (it does not yet, this sitting).
+fact; where the solution is a procedure someone drives by hand, it belongs in a
+[runbook recipe](../runbook/00-INDEX.md).
 
-**Migrated from `environment/known-failures.md` this sitting**, with every `Environment
-reference` repointed from `docs/ENVIRONMENT.md` to this folder. Nothing in the six migrated
-entries was reworded beyond that repointing; `poe-disk-001` is new, added this sitting from a
-failure already documented in the project's own `CLAUDE.md` but not previously catalogued here.
-
-**Last updated:** 2026-09-24
-**Total entries:** 12
-**Seed entries from:** step-09 (three-live-curves-while-training), plus one added during this
-folder's migration
+**Last updated:** 2026-11-21
+**Total entries:** 18
 
 ---
 
@@ -364,9 +357,10 @@ prior toward a photographed scene with a person in it is the first thing to chec
 
 **Solution:** None yet. Until there is one, a figure using a broader-pool adapter is read by eye
 before it is used, because no scorer in this repository reports an extra person. Recorded 2026-09-20
-from [the fourteen-adapter sheet](../1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/README.md) at
+from the fourteen-adapter sheet at
 `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/`, which renders one seed through every adapter this
-project has trained.
+project has trained. That folder is not in the laptop checkout, so look for the sheet in the
+cluster checkout.
 
 **Environment reference:** none; this is a model behaviour rather than a system fact.
 
