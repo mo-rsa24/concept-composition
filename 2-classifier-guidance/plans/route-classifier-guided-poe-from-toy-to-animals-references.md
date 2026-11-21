@@ -46,8 +46,10 @@ medium for the runs (1, 4, 5, 6, 8, 10). Sittings of two hours, no dates yet.
   strong, fading schedule; gradient agreement; per-head early stopping), re-routed at step 11.
 - The best configuration over the v58 pool and on held-out pairs, beside the rank-32 LoRA.
 - The paper's comparison table and its paragraph.
-- MNIST digits two to a canvas, and the toy's trained caption model: dropped from this climb,
-  because the photo stage covers the step from the toy to real images.
+- MNIST digits two to a canvas: on the route as step 7b, beside rung 2, because labels there are
+  exact and free while every SDXL training picture costs a render and a label call.
+- The toy's trained caption model: dropped from this climb, because the photo stage covers the
+  step from the toy to real images.
 - A product of two ImageNet classes on the released class-conditional model, which would need an
   unconditional prediction it does not have.
 - FID and the paper's tables for step 4, at 50,000 samples per number.

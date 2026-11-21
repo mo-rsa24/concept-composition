@@ -9,7 +9,8 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 | R0 | the product sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
 | [A1](a1-exact-toy-classifier-push.md) | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | done | at pair weight 0.01, seed 7: the pair-aware push gives 172 of 300 crisp at w = 1 and 300 at w = 2 against 0 unguided; the separate-label push at most 10; on the toy the product's target composes and the push repairs the sampler | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
-| A2b | MNIST digits on a canvas, both-share dial kept: guidance composes where plain PoE does not | open | not on the current route | |
+| [A2b](24-mnist-one-model.md) | MNIST digits on a 32 × 64 canvas, two-digit share at 0, 0.01 and 0.1, five pairs held out: the pair-aware push gives two clear, right digits where plain product fuses, on seen and held-out pairs, and shows what checker accuracy rung 2 needs | done | beside rung 2, gating nothing | 7b |
+| [A2d](32-mnist-two-experts.md) | MNIST, a 0–4 expert and a 5–9 expert trained apart, composed over a shared base: the step 7b pushes still give two clear, right digits | done | [the card](../../artifacts/results/32-mnist-two-experts/README.md): no. Experts that draw on either side give 4 of 320 with both pushes (bar 224), because the product is destroyed; fixed-side experts compose on 139 of 320 and both pushes lift them to 168 | 7b follow-on |
 | A2r | our cat and dog photos, released 256 px unconditional model frozen, classifiers trained on our photos: the pair-aware push beats the separate-label push | todo | | 8 |
 | A2c | our cat and dog photos, a 64 px model we train with a null label, with and without the both-animal photos: the same | todo | | 8 |
 | [A3q](a3q-cat-x-dog-quick-discriminator-test.md) | SDXL cat × dog, judged on held-out seeds 9 to 12: a pair-aware discriminator trained on 10 to 15 renders checked by eye from seeds 1 to 4, with the product's own renders from those seeds as negatives, composes where plain product and best-of-N at equal compute do not | issue | rung 2: draft reading 7 (too weak to read); the discriminator failed its held-out check with hard negatives, so the next rung needs a stronger one | 9, 10 |
@@ -59,7 +60,7 @@ route's step 2, which frames the hypothesis; until then the line says "number fr
 | R0 | a render at push strength 0 through the repaired sampler that matches the plain product byte for byte | identical checksums |
 | A1 | at pair weight 0.01, the pair-aware push lands draws as two separate shapes where unguided reverse diffusion gives 0 of 300, and the separate-label push stays near 0; the push points the same way as the true correction in the early steps; overlaid shapes do not rise | pair-aware at least 150 of 300 crisp pairs at some s; separate-label at most 15 of 300 at every s |
 | A2 | in the trained caption model, at the low dial settings where plain PoE draws few pairs, guided draws are mostly separate pairs, and each single caption still draws its own shape | from step 2 |
-| A2b | two separate digits on the canvas where plain PoE draws one overlaid digit, at the low dial settings, with each digit still readable | from step 2 |
+| A2b | on 7 & 8 at the share where plain product fuses, the pair-aware push gives two clear, right digits on more of 64 seeds than plain product, the separate-label push, a size-matched random push or best-of-N; the same on the five held-out pairs; the compose count rises with checker accuracy | plain at most 8 of 64; pair-aware at least 32 of 64 at some s; random and separate-label within 6 of plain; best-of-N at least 8 below; held-out pairs at least 160 of 320 |
 | A2r | on seeds 1 to 16 at 256 px, the pair-aware push gives two separate animals on more seeds than the two separate-label pushes alone | at least 4 more of 16 in one arm |
 | A2c | on seeds 1 to 16 at 64 px, the same, in the model trained without both-animal photos and in the one trained with them | at least 4 more of 16 in one arm |
 | A3 | off the ladder; on cat × dog, on the seeds it trained on, some seeds show two separate animals with the push where the plain product shows none, and the pictures are not wrecked; a yes says only that the push can compose at all | from step 2 |
@@ -110,8 +111,13 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 
 **A2b**
 
-- [ ] 🖼️ screenshot: plain product against guided, per dial setting, with the joint model
-- [ ] ✅ check passed: separate pairs of 300 against the rung's bar, and D1 to D4 read
+- [ ] 📝 the bar copied into a review file in `plans/review/` before any model trains
+- [ ] 📝 training time measured on the laptop's RTX 4070 before the three models launch
+- [ ] 🖼️ screenshot: plain product and the support check, as a sheet, per share
+- [ ] ✅ check passed: the judge agrees with the user's eye calls on at least 58 of 64 tiles
+- [ ] 🖼️ screenshot: the five-version sheet on 7 & 8 and on the five held-out pairs
+- [ ] 📈 figure: compose count against checker accuracy, with 0.655 and 0.771 marked, and the cap sweep
+- [ ] ✅ check passed: the reading printed as pass or miss against the bar
 
 **A2r, A2c**
 

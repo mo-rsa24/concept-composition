@@ -14,12 +14,12 @@ purpose, and the compose count against checker accuracy says whether rung 2's ca
 ## Outcomes
 
 - [x] 📝 the bar copied into a review file in `plans/review/` before any model trains: [the review file](../../plans/review/a2b-mnist-digits-on-a-canvas.md), 2026-11-18 `verified`
-- [ ] 📝 training time measured on the laptop's RTX 4070 before the three models launch
-- [ ] 🖼️ screenshot: plain product and the support check, as a sheet, per share
-- [ ] ✅ check passed: the judge agrees with the user's eye calls on at least 58 of 64 tiles
-- [ ] 🖼️ screenshot: the five-version sheet on 7 & 8 and on the five held-out pairs
-- [ ] 📈 figure: compose count against checker accuracy, with 0.655 and 0.771 marked, and the cap sweep
-- [ ] ✅ check passed: the reading printed as pass or miss against the bar
+- [x] 📝 training time measured before the three models launch: 486 ms per step on the laptop, 157 on a `bigbatch` RTX 3090, so 105 min per share at 40,000 steps (`timing-*.json` beside each model) `verified`
+- [x] 🖼️ screenshot: plain product and the support check, as a sheet, per share: [share 0.01](../../artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.01.png), [share 0.1](../../artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.1.png); fuses at every share `verified`
+- [x] ✅ check passed: the judge agrees with the eye calls on 58 of 64 tiles (the bar is 58), [the gate sheet](../../artifacts/results/24-mnist-one-model/judge-gate/judge-against-eye-calls.png); the calls are Claude's, blind, under the user's veto `verified`
+- [x] 🖼️ screenshot: the five-version sheet on 7 & 8 and on the five held-out pairs: [7 & 8](../../artifacts/results/24-mnist-one-model/five-versions/sheet-78.png); counted by eye after the judge failed on drawn digits `verified`
+- [x] 📈 figure: compose count against checker accuracy, with 0.655 and 0.771 marked, and the cap sweep: [the figure](../../artifacts/results/24-mnist-one-model/compose-against-checker-accuracy.png); every checker sits below 0.6, so neither mark is reached `verified`
+- [x] ✅ check passed: the reading printed as pass or miss against the bar: works on seen pairs only, two departures named, in [the review file](../../plans/review/a2b-mnist-digits-on-a-canvas.md) `verified`
 
 ## The bar
 
@@ -31,4 +31,24 @@ already gives at least 32 of 64 for 7 & 8 has nothing to fix and leaves the bar.
 
 ## The result
 
-Not run.
+**Works on seen pairs only.** On 7 & 8, a checker that knows the asked pair turns plain product's
+fused digit (1 of 64 seeds with a clear 7 beside a clear 8) into two separate digits on 47 of 64 at
+strength 10; a random push of the same size gives 1, and best-of-2 at the same cost gives 1. On the
+five pairs never seen together the push still makes two digits, but often the wrong second one: 84
+of 320. Counted by eye, since the judge misreads the model's thick digits.
+
+<a href="../../artifacts/results/24-mnist-one-model/five-versions/sheet-78.png"><img src="../../artifacts/results/24-mnist-one-model/five-versions/sheet-78.png" width="400" alt="Five rows of 16 canvases asked for 7 and 8: plain product fused, the pair-aware push with a separate 8 and 7, the separate-label push, the random push and best-of-2 mostly fused"></a>
+<a href="../../artifacts/results/24-mnist-one-model/compose-against-checker-accuracy.png"><img src="../../artifacts/results/24-mnist-one-model/compose-against-checker-accuracy.png" width="400" alt="Six checkers between 0.51 and 0.59 accuracy against their push's count of 64, all left of the 0.655 and 0.771 marks; raising the cap from 0.1 to 1.0 moves 47 to 49"></a>
+
+Two departures from the bar: the separate-label push composes some (15 of 64), and the 0.1 cap
+clips most steps at s = 30 though raising it changes nothing at s = 10. No digit checker passed 0.59
+held-out accuracy, so the 0.771 rule cannot pick step 10's move; two checkers at the same accuracy
+composed 47 and 27, so accuracy alone does not decide it.
+
+**A follow-on run reached the new pairs.** A checker that also sees the asked pair at every layer,
+retrained twice on its own push's pictures, with a partly random sampler, gives two clear, right
+digits on 217 of 320 seeds over the five pairs never seen together (3 & 4 and 3 & 6 at 62 of 64; 0 & 3
+at 25), against 0 for the same sampler without the push. Adding the separate-label push to it lifts this
+to 285 of 320 (89%) on fresh seeds, where the pair-aware push alone gives 215.
+
+<a href="../../artifacts/results/24-mnist-one-model/loop2/heldout-final.png"><img src="../../artifacts/results/24-mnist-one-model/loop2/heldout-final.png" width="400" alt="Five held-out pairs, each without the push (one digit) and with the final checker's push (two separate digits)"></a>

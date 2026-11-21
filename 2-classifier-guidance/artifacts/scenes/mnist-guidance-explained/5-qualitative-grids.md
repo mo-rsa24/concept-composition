@@ -2,7 +2,7 @@
 
 **The question.** What does each version of the sampler draw, on each pair, and how do the strengths and the randomness change it?
 
-Real canvases in every cell, the same seeds 0, 1 and 2 top to bottom so one starting noise can be followed across a row, with the third judge's count of two clear, right digits out of 64 under each cell. The judge counts about 5% below a careful eye. Drawn by `grids/make_grids.py` in [the step 7b results](../../results/how-good-must-the-checker-be-on-mnist/README.md) from jobs 90111, 90154, 90155 and 90156.
+Real canvases in every cell, the same seeds 0, 1 and 2 top to bottom so one starting noise can be followed across a row, with the third judge's count of two clear, right digits out of 64 under each cell. The judge counts about 5% below a careful eye. Drawn by `grids/make_grids.py` in [the step 7b results](../../results/24-mnist-one-model/README.md) from jobs 90111, 90154, 90155 and 90156.
 
 ## Words on this page, taken apart
 

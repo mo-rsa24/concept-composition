@@ -224,7 +224,7 @@ Left out of training by rule: the test pairs lion × meerkat and typewriter × c
 
 ## What the MNIST session (step 7b) carries over
 
-`report/classifier-guided-poe/a2b-mnist-digits-on-a-canvas.md` and its review file. On a digit model where the plain product fuses, a pair-aware readout push composes the seen pair (47 of 64 against 1 for plain, random and best-of-2) and, after three changes, the five pairs never seen together. The changes that carried most, each untried on SDXL in the form it took there:
+`report/classifier-guided-poe/24-mnist-one-model.md` and its review file. On a digit model where the plain product fuses, a pair-aware readout push composes the seen pair (47 of 64 against 1 for plain, random and best-of-2) and, after three changes, the five pairs never seen together. The changes that carried most, each untried on SDXL in the form it took there:
 
 | MNIST change | Effect on MNIST | Its SDXL form |
 | --- | --- | --- |

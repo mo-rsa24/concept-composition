@@ -60,7 +60,7 @@ def main():
     ap.add_argument("--try", dest="n", type=int, required=True)
     ap.add_argument("--ensemble", action="store_true", help="average all given networks as one judge")
     a = ap.parse_args()
-    L = np.load("data/mnist-canvas/eye-labels.npz")
+    L = np.load("data/mnist-canvas/24-mnist-one-model/eye-labels.npz")
     best = None
     judges = [("+".join(str(w) for w in a.weights), Ensemble([load(w, "cuda") for w in a.weights]))] if a.ensemble \
         else [(w, load(w, "cuda")) for w in a.weights]
@@ -79,8 +79,8 @@ def main():
            "tune_max_count_diff": -negmx, "test_mean_agreement_of_64": round(tm, 2), "test_max_count_diff": tmx,
            "test_per_sheet": dict(zip(L["test_name"].tolist(), zip(agree, diff))),
            "passes": bool(tm >= 58 and tmx <= 4)}
-    Path("data/mnist-canvas/judge-loop").mkdir(parents=True, exist_ok=True)
-    Path(f"data/mnist-canvas/judge-loop/try{a.n}.json").write_text(json.dumps(res, indent=1))
+    Path("data/mnist-canvas/24-mnist-one-model/judge-loop").mkdir(parents=True, exist_ok=True)
+    Path(f"data/mnist-canvas/24-mnist-one-model/judge-loop/try{a.n}.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))
 
 

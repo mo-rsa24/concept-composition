@@ -1,0 +1,23 @@
+{
+  "subject": "the product of experts and the interaction term it drops",
+  "kind": "concept",
+  "landing": "standalone pages under artifacts/scenes/product-of-experts-interaction-term/",
+  "live_purpose": "the idea map plurality-comes-from-the-target (claims 6 and 7) and plan 33",
+  "style": {"register": "clean cheat-sheet register, thin outlines, glow on the part in question", "source": "journey 13 colour key reused as the default; the style gate was not re-run in --auto"},
+  "colour_key": {"inputs": "#1f5fd0", "experts_and_hidden": "#1d6b3a", "outputs": "#c0262d", "interaction_term_and_pushes": "#c8680a", "fixed_or_off": "#6b7a88"},
+  "notation_file": "NOTATION.md",
+  "numbers_script": "scripts/make_poe_interaction_numbers.py",
+  "numbers_json": "data/poe_interaction_numbers.json",
+  "code_checkout": {"path": "/home/molef/PhD/concept-composition/2-classifier-guidance", "commit": "58d343c0", "note": "level 3 reads this project's own code in place; the uncommitted lines of two_experts.py were read as they stand"},
+  "rungs": {
+    "0": {"state": "built", "files": ["00-the-system.md", "figures/level0-one-sampler-step-of-a-product-of-experts.png"]},
+    "0.5": {"state": "built", "files": ["01-the-network-view.md", "figures/level05-the-product-score-the-joint-score-and-the-term.png", "figures/level05-the-interaction-term-against-the-sampler-step.png"], "note": "no trained network in the toy; exact score fields stand in"},
+    "1": {"state": "skipped", "why": "needs Codex-drawn illustrations and render-diagrams, not run unattended; real-run figures copied to figures/real-run/ stand in"},
+    "2": {"state": "built", "files": ["02-the-miniature.md", "figures/level2-what-each-composition-draws.png", "figures/level2-where-the-term-has-to-act.png", "scripts/poe_toy.py"]},
+    "3": {"state": "built", "files": ["03-the-code.md"]},
+    "beside": {"state": "built", "files": ["04-where-each-equation-is-taught.md"], "note": "pointers only; the plans were linked by title, not re-read"},
+    "close": {"state": "built", "files": ["README.md"]}
+  },
+  "route_file": {"state": "not written", "why": "the landing root's plans/ folder is outside the folder this run may write to"},
+  "colour_concordance": {"real-run figures": "the digit figures use blue for the 0 to 4 expert and green for the 5 to 9 expert, orange for the layout; these pages use green for any expert, so the two palettes are not identical"}
+}

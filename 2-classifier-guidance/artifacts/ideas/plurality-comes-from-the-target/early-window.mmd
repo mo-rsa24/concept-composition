@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef open fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  S["sampler step 1<br/>t = 1000, pure noise"]:::plain
+  subgraph W["EARLY WINDOW (hypothesis, claim 6)"]
+    direction TB
+    A["Learned correction r_t<br/>acts steps 0 to 10<br/>shared part 19.6% at steps 0 to 2"]:::plain
+    B["Classifier push<br/>works on steps 0 to 15<br/>(early-readout recipe)"]:::plain
+    C["E0e layout vote and commit<br/>first fifth, t at or above 800<br/>(about steps 1 to 10 of 50)"]:::plain
+  end
+  X{"commit point<br/>speciation time<br/>unmeasured here"}:::open
+  L["later steps<br/>draw detail only,<br/>cannot change who is where"]:::plain
+  E["step 50<br/>clean canvas"]:::plain
+  S --> W
+  W --> X
+  X -. "tests 3 and 4 would<br/>place this point" .-> L
+  L --> E
+  style W fill:#f7f7f7,stroke:#222222,stroke-width:2px

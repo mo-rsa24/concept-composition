@@ -86,6 +86,30 @@ class TwoStageHead(nn.Module):
         return self.late.log_prob_both(x_t, timestep, eps=eps, alpha_bar=alpha_bar)
 
 
+class SummedEstimateHead(nn.Module):
+    """Plan 31's summed push: the readout checker's push plus ``weight`` times the species checker's, on every step.
+
+    ``early`` reads SDXL's own features; ``late`` (a ClipEstimateChecker) reads the decoded guess, so the noise
+    prediction and alpha-bar are passed to it only. At weight 0 the species checker is never called, so the push is
+    the readout checker's alone, bit for bit. Called as a function (best-of-2's final pick), it answers with the
+    readout checker, as the recipe's sheet does.
+    """
+    reads_estimate = True
+
+    def __init__(self, early, late, weight: float):
+        super().__init__()
+        self.early, self.late, self.weight = early, late, weight
+
+    def forward(self, x_t, timestep, eps=None, alpha_bar=None):
+        return self.early(x_t, timestep)
+
+    def log_prob_both(self, x_t, timestep, eps=None, alpha_bar=None):
+        log_p = self.early.log_prob_both(x_t, timestep)
+        if self.weight == 0:
+            return log_p
+        return log_p + self.weight * self.late.log_prob_both(x_t, timestep, eps=eps, alpha_bar=alpha_bar)
+
+
 class BoxSpeciesHead(nn.Module):
     """Plan 28's late push: each animal pushed toward its own species, through the decoded guess.
 

@@ -56,11 +56,11 @@ toward the data. It needs no retraining of the diffusion model.
 | 7 | 2 | the forward SDE, Eq. 1 | tested | sentence 1 (Eq. 1 is DDPM in continuous time): holds. One pixel from 1, 200,000 Euler paths, 1,000 steps, VP drift with beta 0.1 to 20: mean 0.9476, 0.6328, 0.2834, 0.0045 against sqrt(abar) 0.9467, 0.6296, 0.2812, 0.0066 at t = 0.1, 0.3, 0.5, 1.0; variance 0.1031, 0.6050, 0.9242, 1.0044 against 1 - abar 0.1037, 0.6037, 0.9209, 1.0000. Script test-s2p3/one_pixel.py, not kept. A /prompt-storyboard prompt for the two films and the gap split was emitted on the reader's ask |
 | 8 | 2 | the reverse SDE, Eq. 2, and the generative SDE | walked lean | simplified on the reader's ask |
 | 9 | 2 | the score loss | walked lean | |
-| 10 | 2 | other ways to sharpen the score | walked lean ← current | |
-| 11 | 2 | Algorithm 1 | not reached | |
+| 10 | 2 | other ways to sharpen the score | walked lean | simplified; reader asked whether /zoom-ladder fits here: no, at chunk 14 |
+| 11 | 2 | Algorithm 1 | walked lean ← current | image opened from the PDF, p3 |
 | 12 | 3.1 | the generative process, Eq. 3, and Theorem 1 | not reached | |
 | 13 | 3.2 | the loss, Eq. 4 | not reached | |
-| 14 | 3.2 | the correction from the best discriminator, and Eq. 5 | not reached | the derivation round: prediction asked first; `prove` and `/picture-speak --derive` offered |
+| 14 | 3.2 | the correction from the best discriminator, and Eq. 5 | not reached | the derivation round: prediction asked first; `prove` and `/picture-speak --derive` offered; offer the /zoom-ladder invocation here (reader asked 2026-11-17) |
 | 15 | 3.3 | Theorem 2 | not reached | |
 | 16 | 3.3 | the gain and Table 1 | not reached | |
 | 17 | 3.3 | the extra degree of freedom | not reached | |
@@ -137,6 +137,8 @@ route read this section before the discriminator is designed.
 | Where | What | Evidence |
 |---|---|---|
 | Table 8 (p22), DiT column | the maximum discriminator clip is printed 10⁻⁵ in both the training and sampling rows; every other column prints 1 − 10⁻⁵ | a maximum of 10⁻⁵ would pin the discriminator near zero |
+| Algorithm 1 line 3 (p3) | "while converged do" | the loop must run while not converged |
+| Algorithm 1 line 7 (p3) | the signal factor is printed e^(−∫β), the noise factor √(1 − e^(−∫β)) | for the VP SDE of section 2 the signal factor is e^(−½∫β); as printed, signal² + noise² falls below 1 for unit-variance data. Inferred from the text; the released code is not checked |
 | Appendix D.1 (p23), the Heun step | the second stage's weight is printed t_{t,2nd} in the text and w_{t,1nd} in the last line | the line before defines it as w_{t,2nd} |
 
 ## What A1 takes from this
@@ -232,4 +234,6 @@ Each is added to the route only on the reader's word.
 | 6 test 2 and example simplified, simplify; 7 section 2 paragraph 3 | 2026-11-17 06:19 | 2026-11-17 06:39 | simplify test 2 and example, simplify, next |
 | 7 storyboard, test 1, example; 8 section 2 paragraph 4 | 2026-11-17 06:39 | 2026-11-17 08:16 | a storyboard ask, test 1, example, next |
 | 8 simplify; 9 section 2 paragraph 5 | 2026-11-17 08:16 | 2026-11-17 08:33 | simplify, next |
-| 10 section 2 paragraph 6 | 2026-11-17 08:33 | | next |
+| 10 section 2 paragraph 6 | 2026-11-17 08:33 | 2026-11-17 21:16 | next |
+| 10 simplify, zoom-ladder question | 2026-11-17 21:16 | | simplify, a question |
+| 11 Algorithm 1 | 2026-11-17 21:27 | | next |

@@ -2,7 +2,7 @@
 
 **The question.** In one step of the step 7b sampler, what is asked of which network, and what does each push do to the answer?
 
-Seeds, canvases and counts come from [the step 7b results](../../results/how-good-must-the-checker-be-on-mnist/README.md). The figures were drawn by `network-view/make_network_view_figures.py` and `results-figures/make_results_figures.py` in that folder; the numbers sit in `network-view/network_view_numbers.json`.
+Seeds, canvases and counts come from [the step 7b results](../../results/24-mnist-one-model/README.md). The figures were drawn by `network-view/make_network_view_figures.py` and `results-figures/make_results_figures.py` in that folder; the numbers sit in `network-view/network_view_numbers.json`.
 
 ## Words on this page, taken apart
 

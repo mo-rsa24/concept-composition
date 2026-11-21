@@ -1,0 +1,123 @@
+{
+ "canvas": "mnist-judge-ladder.png top row, fifth canvas (7 beside 8), Canvases seed 1",
+ "asked": [
+  7,
+  8
+ ],
+ "call": "two clear, right digits",
+ "confident_at": 0.9,
+ "blobs": [
+  {
+   "side": "left",
+   "box_x": [
+    9,
+    23
+   ],
+   "box_y": [
+    10,
+    29
+   ],
+   "pixels": 140,
+   "top_digit": 7,
+   "top_probability": 0.9998,
+   "probabilities": [
+    0.0,
+    0.0,
+    0.0,
+    0.0001,
+    0.0,
+    0.0,
+    0.0,
+    0.9998,
+    0.0,
+    0.0
+   ]
+  },
+  {
+   "side": "right",
+   "box_x": [
+    41,
+    58
+   ],
+   "box_y": [
+    7,
+    26
+   ],
+   "pixels": 140,
+   "top_digit": 8,
+   "top_probability": 0.9728,
+   "probabilities": [
+    0.0,
+    0.0,
+    0.0218,
+    0.0001,
+    0.0,
+    0.0001,
+    0.0,
+    0.001,
+    0.9728,
+    0.0041
+   ]
+  }
+ ],
+ "layer_output_shapes": [
+  "(1, 28, 28)",
+  "('Conv2d', (32, 28, 28))",
+  "('ReLU', (32, 28, 28))",
+  "('MaxPool2d', (32, 14, 14))",
+  "('Conv2d', (64, 14, 14))",
+  "('ReLU', (64, 14, 14))",
+  "('MaxPool2d', (64, 7, 7))",
+  "('Flatten', (3136,))",
+  "('Linear', (128,))",
+  "('ReLU', (128,))",
+  "('Linear', (10,))"
+ ],
+ "weights_per_layer": [
+  [
+   "Conv2d",
+   320
+  ],
+  [
+   "ReLU",
+   0
+  ],
+  [
+   "MaxPool2d",
+   0
+  ],
+  [
+   "Conv2d",
+   18496
+  ],
+  [
+   "ReLU",
+   0
+  ],
+  [
+   "MaxPool2d",
+   0
+  ],
+  [
+   "Flatten",
+   0
+  ],
+  [
+   "Linear",
+   401536
+  ],
+  [
+   "ReLU",
+   0
+  ],
+  [
+   "Linear",
+   1290
+  ]
+ ],
+ "total_weights": 421642,
+ "test_accuracy": 0.9821,
+ "n_train": 60000,
+ "n_test": 10000,
+ "weights_file": "/tmp/claude-1000/-home-molef-PhD-concept-composition-2-classifier-guidance/d40b9299-0d32-4c1f-a983-428221d67138/scratchpad/judge-prototype.pt"
+}

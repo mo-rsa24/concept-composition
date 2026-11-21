@@ -211,6 +211,9 @@ def main() -> int:
                     help="with --readout: plan 26's combined push; the readout checker (--head) pushes on steps before "
                          "--split, this species checker (finetune_species.py best.pt) from --split on")
     ap.add_argument("--split", type=int, default=10)
+    ap.add_argument("--species-weight", type=float, default=None,
+                    help="with --species: plan 31; add the species checker's push to the readout checker's on the same "
+                         "steps instead of switching at --split; the species strength is this weight times --strengths")
     ap.add_argument("--presence-head", type=Path, default=None,
                     help="with --readout: a presence-only readout checker (train_readout_pair.py --presence-only) whose "
                          "push (cat present + dog present) is added to --head's at --presence-weight times its strength; "
@@ -319,6 +322,13 @@ def main() -> int:
             disc = TwoStageHead(disc, boxes, ctx.scheduler.timesteps, split=args.split)
             print(f"plan 28 push: readout on steps 0 to {args.split - 1}, each animal toward its own species from step "
                   f"{args.split}", flush=True)
+        elif args.species and args.species_weight is not None:
+            from clip_push import ClipEstimateChecker, SummedEstimateHead
+            late = ClipEstimateChecker(args.species, ctx.models["vae"], ctx.device) if args.species_weight else None
+            disc = SummedEstimateHead(disc, late, args.species_weight)
+            args.head = Path(f"{args.head}+species:{args.species}@{args.species_weight:g}")
+            print(f"summed push: readout checker plus {args.species_weight:g} x species checker {args.species} on the "
+                  f"same steps", flush=True)
         elif args.species:
             from clip_push import ClipEstimateChecker, TwoStageHead
             ctx.scheduler.set_timesteps(ctx.num_inference_steps)

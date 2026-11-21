@@ -2,15 +2,15 @@
 
 Each sheet is 64 drawn canvases asked for one pair, with the seeds Claude called "two clear, right
 digits" by eye, blind to the judge. The split is fixed in the A2b review file: 12 sheets to tune
-on, 13 held back. Writes data/mnist-canvas/eye-labels.npz.
+on, 13 held back. Writes data/mnist-canvas/24-mnist-one-model/eye-labels.npz.
 """
 import json
 from pathlib import Path
 import numpy as np
 
-B = Path("data/mnist-canvas")
+B = Path("data/mnist-canvas/24-mnist-one-model")
 F = B / "five-versions"
-eye = json.load(open("artifacts/results/how-good-must-the-checker-be-on-mnist/five-versions/eye_counts.json"))["calls"]
+eye = json.load(open("artifacts/results/24-mnist-one-model/five-versions/eye_counts.json"))["calls"]
 
 def five(key):           # a sheet from the cap-0.1 five-version run, with its eye list
     col, pair = key.split("|")

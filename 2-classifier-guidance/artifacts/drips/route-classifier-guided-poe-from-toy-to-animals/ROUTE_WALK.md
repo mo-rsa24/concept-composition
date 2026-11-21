@@ -5,7 +5,7 @@ per round, with `/drip-skill-route --research`. Opened 2026-11-12.
 
 ## Position
 
-Reopened 2026-11-17 with `--from` at round 2 to add the scale-up ladder. Closed again 2026-11-17: all rounds settled, route and board written.
+Reopened 2026-11-17 with `--from` at round 2 to add the scale-up ladder. Closed again 2026-11-17: all rounds settled, route and board written. Reopened 2026-11-18 with `--from` to add the MNIST stage (step 7b): Closed again 2026-11-18: all eleven rounds settled, step 7b written. Queued after the close: the picture control in the drip controls (the user's `make it`).
 
 ## Round 1: the sentence and the disk
 
@@ -90,3 +90,41 @@ concept for the next and changing one thing, each with a compute plan written be
 | 6 | rung 4 (steps 10d, 10e) | three sub-rungs in order: 4a rung 2's discriminator on seeds 9 to 16, seeds 13 to 16 read apart; 4b one discriminator over the v58 pool's admitted targets, also scored on cat × dog beside 4a's to separate pooling from more pairs; 4c the same on the 53 held-out pairs, the 23 sharing no concept apart; automatic two-things count on every tile and by eye on one fixed seed per pair; bar within 10 points of the rank-32 LoRA and above best-of-N | per-pair discriminators on the v58 pool (too few admitted targets per pair) | Claude, under "settle until we are finished" | the user handed the remaining rounds over; veto stands |
 | 7 | step 11 and the schedule | step 11 walks every rung's retrospective and re-routes to P1, B1 to B7 and plan 15; 22 two-hour sittings, about 18 h to finish and 32 h budget at 2×, about 15 GPU-hours on a Blackwell | | Claude, under the same | |
 | 8 | check and emit | every row moved by a step except A2 and A2b (not on this route by an earlier decision); every walk step has a Filing line; every new step has its eight prompt sections; no pending line; the catalog is stale for hld-diagram and prompt-storyboard only, which steps 1 and 6 use and this reopening did not change | | Claude, under the same | |
+
+## Reopened 2026-11-18: the MNIST stage
+
+**The ask.** Add an MNIST stage (board row A2b) so the checker recipe is settled where labels are
+exact and free. Rung 2's checker stalled below 0.75 held-out balanced accuracy on SDXL cat × dog
+(`artifacts/drips/rung2-pair-aware-discriminator/checker-loop.md`).
+
+| Round | What | Chosen | Options there were | Who chose | Why |
+|---|---|---|---|---|---|
+| 1 | where the MNIST stage sits | step 7b, a lane beside rung 2 (step 10), gating nothing; its compose count against checker accuracy decides step 10's next move (more cat × dog data, or a per-animal checker) | in front of rung 2, pausing the checker loop; a third arm of step 8's photo stage | user, `settle` | the checker loop keeps its running work; MNIST is the first rung with learned experts and exact labels |
+| 2 | the canvas and the two-digit share | 32 × 64 canvases of real MNIST digits; shares 0, 0.01, 0.1; 5 pairs held out by `random.Random(0)` (0 & 3, 1 & 9, 3 & 4, 3 & 6, 4 & 7), the other 40 on two-digit canvases; 7 & 8 seen; a support check (does expert 7 alone ever draw a held-out partner) added to round 4 | any of 45 pairs; only 7 & 8; all but 7 & 8; 9 held out; an empty-canvas background model | user, `settle` | the user asked for unseen pairs: the classifier should learn plurality, and Bradley et al. 2025 section 3.2 says the plain product is zero wherever either expert is, so clutter (the share) is what gives unseen pairs weight |
+| 3 | the model, and how a two-digit canvas is labelled | one class-conditional U-Net per share, null label on 10% of canvases, DDIM 50 steps, laptop RTX 4070; a two-digit canvas enters training once per digit it holds | both digits as one label (a joint-prompt reference, addable later as one model); a latent model; ancestral sampling | user, `settle` | keeps each expert the cluttered conditional the share was designed to make |
+| 4 | the first measurement, before any checker | plain product on 7 & 8 and the 5 held-out pairs, 64 seeds × 3 models; the support check (experts 7 and 4 alone, 1,000 seeds at share 0.1); the ladder with a strict headline (two clear, right digits); a single-digit judge gated at 58 of 64 against eye calls; a share at 32 of 64 or more for 7 & 8 leaves the bar | loose headline (two digits of any identity); other judges (canvas classifier, detector, eye only) | user, `settle` | the prototype judge ([judge sheet](figures/mnist-judge-ladder.png)) called 7 of 10 pasted canvases as built: a fused 7 and 8 can read as a confident 8, so the gate and a fused test are needed |
+| 5 | the checker's recipe, against the toy's | a small head on the frozen U-Net's decoder features; the fourteen-row table in section 7b; plain product's result decides whether the checker is built (stops at 32 of 64 or more for 7 & 8 at every share) | its own small noise-aware CNN on pixels; both as a checker axis | user, `settle` | the accuracy-against-compose curve has to carry over to SDXL's checker; the user asked what happens if MNIST simply composes, since it has no text encoder or cross-attention |
+| 6 | the comparisons on the same seeds | seeds 0 to 63 for evaluation, checker data from seed 1,000 up; plain product, pair-aware push, separate-label push, size-matched random push, best-of-N at matched compute with N = 16 beside it; byte-identical at s = 0 | matched N only; N = 16 only; the judge's own push as a ceiling | user, `settle` | the user asked for a simpler re-explanation first; the zoom ladder's [judge network view](figures/judge-network-view.png) landed the same round |
+| 7 | the two sweeps for rung 2 | weaker checkers by less data (1%, 5%, 25%, 100%) and by flipped labels (10%, 20%), one knob at a time; compose count against held-out accuracy with 0.655 and 0.771 marked; crossing below 0.771 keeps step 10 fetching data, above it switches step 10 to a per-animal checker; cap at 0.1, 0.3, 1.0 | less data only; flipped labels only | user, `settle` | SDXL suffers from both: 167 clean cat × dog pairs and 79% label agreement. The user also checked that the push comes from a whole-canvas checker, not the blob judge; section 7b now names the three networks |
+| 8 | the bar, and FashionMNIST | plain at most 8 of 64; pair-aware at least 32 of 64 at some s; random and separate-label within 6 of plain; best-of-N at least 8 below; held-out pairs at least 160 of 320; four readings; FashionMNIST after MNIST passes | three quarters, 48 of 64 | user, `settle` | the toy's bar was half (150 of 300); the [three-network picture](figures/three-networks-in-step-7b.png) landed this round |
+| 9 | how much planning, and board row A2b | no plan tree; the walk writes its own short plan, and its first piece copies the bar into `plans/review/`; row A2b set to todo on step 7b, its page `report/classifier-guided-poe/24-mnist-one-model.md` with seven outcomes, its expected-outcome line filled; board redrawn (`board-2026-11-18-step-0.png`) | a plan file written by the axes planner first | user, `settle` | section 7b already holds the design and the bar. The user asked for a control that turns any reply or screenshot into a zoom-ladder picture, kept per round and consolidated at the walk's close: a change to the drip navigation contract, offered as its own step |
+| 10 | time on both clocks | three two-hour sittings (M1 to M3) before rung 2's next sitting; about 6 h of the user's time, 3 to 4 h on the laptop's RTX 4070 (a guess until M1 times it); stop if M3 ends without the five-version sheet | alternating with rung 2 | user, `settle` | step 10's next move waits on the accuracy sweep. The user also said `make it`: the picture control is queued for after this walk closes |
+| 11 | step 7b's prompt, the checks, and the edits to step 10 and the references | the prompt written into section 7b; step 10 gains the 0.771 rule under "When something is missing"; the references file puts MNIST on the route; four rows added to "What we know so far"; board redrawn | | Claude, under the user's "settle at your discretion" | every check passed except the catalog's staleness for drip's shared controls, which step 7b's walk reads live |
+
+**Round 2, asked along the way.** The user asked to see the shares and whether an unseen pair is
+possible at all. Filed: [the canvas sheet](figures/mnist-canvas-shares.png), real MNIST digits on
+32 × 64 canvases, built by `2-classifier-guidance/scripts/mnist/canvas_sheet.py` from
+`/home/molef/PhD/replications/original-superdiff/data/MNIST/raw` with seed 0 (0, 1 and 3
+two-digit canvases in 30 draws at shares 0, 0.01 and 0.1). The rule `random.Random(0)` holds out
+0 & 3, 1 & 9, 3 & 4, 3 & 6 and 4 & 7; 7 & 8 stays seen. The answer rests on Bradley et al. 2025
+section 3.2 (the Bayes composition is zero wherever either conditional is) and section 5.3 (clutter
+makes conditionals approximately factorized, which explains Liu et al. 2022's more-than-five objects).
+
+## Pictures
+
+| File | Round | What it answers |
+|---|---|---|
+| [mnist-canvas-shares.png](figures/mnist-canvas-shares.png) | 2 | what the two-digit share means, and what the 7 and 4 labels see in training |
+| [mnist-judge-ladder.png](figures/mnist-judge-ladder.png) | 4 | the four calls on the ladder, and the prototype judge calling 7 of 10 pasted canvases as built |
+| [judge-network-view.png](figures/judge-network-view.png) | 5 | the judge as one small network between two hand-written rules |
+| [three-networks-in-step-7b.png](figures/three-networks-in-step-7b.png) | 7 | the checker that pushes, the control that cannot fix blending, and the judge that only scores |
