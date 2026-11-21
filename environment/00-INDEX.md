@@ -45,9 +45,9 @@ catalog is [known-failures.md](known-failures.md).
 
 Navigation: ⬅️ [The systems](#the-systems) | 📋 [TOC](#table-of-contents)
 
-- **The [storage map](storage.md#the-storage-map) is unverified.** `mscluster84` did not answer SSH
-  on 2026-11-21, so its folders come from this folder's records and the code. The map's warning
-  holds the command that finishes it.
+- **Some folders in the [storage map](storage.md#the-storage-map) have no size yet.** They took
+  longer than the 60-second cap on 2026-11-21, including `poe_repair_min/outputs/`, so each
+  total on that page is a lower bound.
 - **Whether `.vscode/settings.json` (added 2026-08-18, commit `2c4d0b6`) makes VS Code's plain
   "Build LaTeX project" work without manually picking the `tectonic` recipe.** Testing it means
   running a build. See [the paper build page](paper.md).

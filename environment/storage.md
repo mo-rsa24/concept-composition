@@ -20,12 +20,11 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#access-paths) ➡️
 `/home-mscluster/mmolefe`.** The two tables below list every top-level folder this project's code
 names on each mount, so you can see what a move or a cleanup would break.
 
-> [!WARNING]
-> **Unverified.** `mscluster84` did not answer SSH on 2026-11-21, so no folder here was listed or
-> sized live. The folders come from this page's records, `poe_repair/paths.py` and a search of the
-> code. To finish the map, run
-> `scripts/cluster.sh sh 'df -h /datasets /home-mscluster; ls -la /datasets/mmolefe /home-mscluster/mmolefe'`
-> and compare the listing with both tables.
+> [!NOTE]
+> Read live through `mscluster84` on 2026-11-21. Listings come from `ls`, and sizes from `du -sk`
+> capped at 60 seconds per folder at the lowest CPU priority. "Not measured" means the folder hit
+> that cap. `du` does not follow links, so a very small size can be a folder of links. 1 GB here
+> is 1,024³ bytes.
 
 ```mermaid
 flowchart LR
@@ -37,31 +36,33 @@ flowchart LR
 
 *Solid arrows are the normal path. The dashed arrow is a manual move.*
 
-**On `/datasets/mmolefe`**
+**On `/datasets/mmolefe`: 9 real folders**
 
-| Folder | What it holds | Times named in code |
-|---|---|---|
-| `poe_repair_min/` | this project's bulk and `MOUNT_ROOT` in `poe_repair/paths.py`: mainly `outputs/` (377 mentions) and `artifacts/` (53) | 444 |
-| `repos/` | outside code: `geneval`, `geneval_models`, `T2I-CompBench`, `mmdetection`, `Divide-and-Bind`, `Linguistic-Binding-in-Diffusion-Models` | 17 |
-| `envs/` | Python environments: `t2icomp`, `syngen`, `sd15-aae` | 10 |
-| `relaion2b-en/` | `parquet/`, `wetness/` and `logs/`, read by the caption-wetness and inclusive-captions census scripts | 9 |
-| `coco2017/` | `train2017/` and `annotations_trainval2017/` | 4 |
-| `offload/` | `logs/`, named by `1-lora-correction/scripts/storage/offload_home.sbatch` | 3 |
-| `.cache/` | `huggingface/` | 2 |
-| `raw/` | raw datasets, including `mnist/` and `celeba/` | 1 |
-| `projects/` | other projects' outputs, plus a link to `poe_repair_min/` | 0 |
-| `_archive/` | archived work | 0 |
+| Folder | What it holds | Size | Times named in code |
+|---|---|---|---|
+| `poe_repair_min/` | this project's bulk and `MOUNT_ROOT` in `poe_repair/paths.py`: mainly `outputs/` (377 mentions) and `artifacts/` (53) | at least 114.1 GB (`outputs/` and `artifacts/` not measured) | 444 |
+| `raw/` | 14 raw dataset folders and one 141.5 GB zip, including `mnist/`, `celeba/`, `coco2017/` and `relaion2b-en/` | at least 764.1 GB (`coco2017/` not measured) | 14 (1 direct, 9 through the `relaion2b-en` link, 4 through the `coco2017` link) |
+| `repos/` | outside code: `geneval`, `geneval_models`, `T2I-CompBench`, `mmdetection`, `Divide-and-Bind`, `Linguistic-Binding-in-Diffusion-Models` | 1.0 GB | 17 |
+| `envs/` | Python environments, including `t2icomp`, `syngen`, `sd15-aae` | not measured | 10 |
+| `offload/` | `logs/`, named by `1-lora-correction/scripts/storage/offload_home.sbatch` | 24 KB | 3 |
+| `.cache/` | `huggingface/` | 12.9 GB | 2 |
+| `projects/` | 5 projects' outputs, including a link to `poe_repair_min/` | at least 103.6 GB (`Paper3/` not measured) | 0 |
+| `_archive/` | 6 archived folders | at least 23.2 GB (`backup/` and `eccv2026/` not measured) | 0 |
+| `conda-pkgs/` | conda's package cache | 1.1 GB | 0 |
 
-**On `/home-mscluster/mmolefe`**
+The other top-level names are 29 links into `raw/`, `projects/` and `_archive/`, so
+`/datasets/mmolefe/celeba` and similar old paths still resolve.
 
-| Folder | What it holds | Times named in code |
-|---|---|---|
-| `Playground/PhD/` | the cluster checkout of this repository | 212 |
-| `miniforge3/` | conda and its environments, including `co3` | 186 |
-| `poe_repair_min_scratch/` | the fallback while `/datasets` is down: `mnist-canvas/`, `mnist-share/`, `outputs/` | 43 |
-| `.cache/` | `huggingface/` | 3 |
-| `.local/` | `bin/` | 1 |
-| `.claude/` | `plans/` | 1 |
+**On `/home-mscluster/mmolefe`: the folders this project uses, out of 57**
+
+| Folder | What it holds | Size | Times named in code |
+|---|---|---|---|
+| `Playground/PhD/` | the cluster checkout of this repository | not measured | 212 |
+| `miniforge3/` | conda and its environments, including `co3` | not measured | 186 |
+| `poe_repair_min_scratch/` | the fallback while `/datasets` is down: `mnist-canvas/`, `mnist-share/`, `outputs/` | 70.2 GB | 43 |
+| `.cache/` | `huggingface/` | not measured | 3 |
+| `.local/` | `bin/` | not measured | 1 |
+| `.claude/` | `plans/` | not measured | 1 |
 
 "Times named in code" counts each occurrence of the path in `.py`, `.sh`, `.sbatch`, `.yaml` and
 `.yml` files under `poe_repair/`, `scripts/`, `composition/` and each project's `scripts/` folder,
@@ -107,19 +108,21 @@ Navigation: ⬅️ [The storage map](#the-storage-map) | 📋 [TOC](#table-of-co
 
 Navigation: ⬅️ [Access paths](#access-paths) | 📋 [TOC](#table-of-contents) | [Next](#the-disk-guard-rule-and-the-failure-that-motivates-it) ➡️
 
-Both filesystems are NFS mounts. Verified live via `df -h /datasets /home-mscluster` on
-2026-08-24:
+Both filesystems are NFS mounts shared with other users. Verified live via
+`df -h /datasets /home-mscluster` on 2026-11-21:
 
 | Mount | Size | Used | Free | What belongs there |
 |---|---|---|---|---|
-| `/datasets` | 377T | 30T (8%) | 348T | Every checkpoint, every cache, and every file a run across many settings writes. |
-| `/home-mscluster` | 73T | 29T (39%) | 45T | The repo, the conda envs, small results and logs. |
+| `/datasets` | 377T | 200T (54%) | 177T | Every checkpoint, every cache, and every file a run across many settings writes. |
+| `/home-mscluster` | 73T | 42T (58%) | 32T | The repo, the conda envs, small results and logs. |
 
-(A prior check on 2026-08-09 read `/datasets` at 201T size / 24T used / 12% and `/home-mscluster`
-at 73T / 26T / 35%; both mounts have grown or filled further since. `/datasets`'s reported total
-size moved from 201T to 377T between those two checks, which is a real change in what the mount
-reports, not a measurement error; treat the size column as something to re-check rather than a
-fixed ceiling.)
+Usage moves quickly, so re-check it before a large run:
+
+| Read on | `/datasets` size, used, free | `/home-mscluster` size, used, free |
+|---|---|---|
+| 2026-08-09 | 201T, 24T (12%), not recorded | 73T, 26T (35%), not recorded |
+| 2026-08-24 | 377T, 30T (8%), 348T | 73T, 29T (39%), 45T |
+| 2026-11-21 | 377T, 200T (54%), 177T | 73T, 42T (58%), 32T |
 
 **There is no per-user `quota` command on these nodes** (confirmed absent from PATH live,
 2026-08-24), so a user's own share of either mount is not queryable. The only guard available is
