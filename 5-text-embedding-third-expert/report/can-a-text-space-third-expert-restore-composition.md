@@ -101,13 +101,13 @@ a real prompt's. Per-slot norms for all four sequences in both encoders. Positio
 1190; the green bars sit exactly on the grey ones at every padding slot, which is x_pos matching the
 joint prompt there by construction:
 
-<a href="../artifacts/results/the-positional-and-vector/token-norms-x-pos.png"><img src="../artifacts/results/the-positional-and-vector/token-norms-x-pos.png" width="320" alt="per-position norm, four sequences, both encoder slices"></a>
+<a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png" width="320" alt="per-position norm, four sequences, both encoder slices"></a>
 
 The whole series in one picture, three seeds down and eight columns across from the same noise.
 Read left to right: a grey tile, then wallpaper or one hybrid, then two animals on some seeds, then
 two animals on seven of eight, and no column after the first with one whole cat beside one whole dog:
 
-<a href="../artifacts/results/the-positional-and-vector/how-the-third-expert-changed.png"><img src="../artifacts/results/the-positional-and-vector/how-the-third-expert-changed.png" width="320" alt="every third expert tried, three seeds down, eight columns across"></a>
+<a href="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png"><img src="../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png" width="320" alt="every third expert tried, three seeds down, eight columns across"></a>
 
 At 300 px a tile that picture shows the trajectory only; every identity call was made from the
 full-resolution tiles.
