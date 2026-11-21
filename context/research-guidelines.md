@@ -16,7 +16,15 @@ the specific mistakes this project has already made. Read it with the root
 [MASTER_PLAN.md](../MASTER_PLAN.md), whose four lists say what is happening now, what is
 happening in the background, and what to do next.
 
+## Table of contents
+
+- [Where the general rules land in this repo](#where-the-general-rules-land-in-this-repo)
+- [The mistakes this project has already made](#the-mistakes-this-project-has-already-made)
+- [The deadline](#the-deadline)
+
 ## Where the general rules land in this repo
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-mistakes-this-project-has-already-made) ➡️
 
 | The rule | Here, concretely |
 |---|---|
@@ -30,6 +38,8 @@ happening in the background, and what to do next.
 | Keep the handoff on disk | [ENVIRONMENT.md](../environment/overview.md) is why the cluster has never had to be re-explained |
 
 ## The mistakes this project has already made
+
+Navigation: ⬅️ [Previous](#where-the-general-rules-land-in-this-repo) | 📋 [TOC](#table-of-contents) | [Next](#the-deadline) ➡️
 
 Each of these is why a general rule exists. They are recorded here so the same one does not get
 made twice in this repo.
@@ -74,6 +84,8 @@ made twice in this repo.
   The evidence is in [the plan 20 card's folder](../2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/).
 
 ## The deadline
+
+Navigation: ⬅️ [Previous](#the-mistakes-this-project-has-already-made) | 📋 [TOC](#table-of-contents)
 
 Put the submission date at the top of the paper list and count backwards from it once a week. The
 tree gives an order and cannot tell you whether the remainder fits.

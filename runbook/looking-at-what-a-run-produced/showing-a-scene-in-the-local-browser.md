@@ -1,4 +1,6 @@
-# Showing a scene in the local browser
+<a id="showing-a-scene-in-the-local-browser"></a>
+
+# 🧭 Runbook: showing a scene in the local browser
 
 Navigation: 📋 [Index](../00-INDEX.md)
 

@@ -1,4 +1,4 @@
-# Paper: where the LaTeX lives and how it is built
+# 🗺️ Environment: where the paper's LaTeX lives and how it builds
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#paper-latex-build)
 
@@ -6,7 +6,16 @@ The manuscript is `writing/iclr/`, owned by the
 `1-lora-correction/plans/07-writing-the-paper/` scope. Editing and building it
 is a different loop from running experiments: no GPU, no queue, no job.
 
+## Table of contents
+
+- [Where to make changes](#where-to-make-changes)
+- [No system LaTeX exists on this cluster](#no-system-latex-exists-on-this-cluster)
+- [Building it, the terminal route (what Claude and any script uses)](#building-it-the-terminal-route-what-claude-and-any-script-uses)
+- [Building it, the VS Code route](#building-it-the-vs-code-route)
+
 ## Where to make changes
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#no-system-latex-exists-on-this-cluster) ➡️
 
 All prose goes in `writing/iclr/iclr2027_conference.tex`, the single manuscript file. The other
 files in that folder are the ICLR distribution and are not edited: `iclr2027_conference.sty`
@@ -19,12 +28,16 @@ and `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/`, and
 
 ## No system LaTeX exists on this cluster
 
+Navigation: ⬅️ [Previous](#where-to-make-changes) | 📋 [TOC](#table-of-contents) | [Next](#building-it-the-terminal-route-what-claude-and-any-script-uses) ➡️
+
 Confirmed live on 2026-08-24: `pdflatex`, `xelatex`, `latexmk`, and `bibtex` are all absent from
 PATH (`which` returns nothing for each). Every LaTeX recipe except `tectonic` fails here,
 including the extension's own default recipe (`latexmk`, see below). Any instruction, script, or
 CI step that assumes a normal TeX install is wrong on this cluster.
 
 ## Building it, the terminal route (what Claude and any script uses)
+
+Navigation: ⬅️ [Previous](#no-system-latex-exists-on-this-cluster) | 📋 [TOC](#table-of-contents) | [Next](#building-it-the-vs-code-route) ➡️
 
 ```bash
 cd writing/iclr
@@ -46,6 +59,8 @@ and `TeX rerun seems needed, but stopping at 6 passes`. Both are normal here. Ju
 whether the PDF was written, not by whether the output was silent.
 
 ## Building it, the VS Code route
+
+Navigation: ⬅️ [Previous](#building-it-the-terminal-route-what-claude-and-any-script-uses) | 📋 [TOC](#table-of-contents)
 
 LaTeX Workshop (`james-yu.latex-workshop`, version `10.15.2`, installed server-side, confirmed
 present live via `ls ~/.vscode-server/extensions/` on 2026-08-24) is the extension.

@@ -1,4 +1,4 @@
-# Launching and harvesting a run
+# 🧭 Runbook: launching and harvesting a run on the cluster
 
 Navigation: 📋 [Index](../00-INDEX.md)
 
@@ -11,7 +11,16 @@ the disk-guard and `co3`-path checks a job must pass before it starts are in the
 [launch protocol](../../environment/hpc/execution-protocol.md). This theme holds only the commands;
 that file holds the why.
 
+## Table of contents
+
+- [1. Decide where a run goes](#1-decide-where-a-run-goes)
+- [2. Launch on a shared device](#2-launch-on-a-shared-device)
+- [3. Harvest what is running](#3-harvest-what-is-running)
+- [Cross-references](#cross-references)
+
 ## 1. Decide where a run goes
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-launch-on-a-shared-device) ➡️
 
 `unverified`, transcribed 2026-08-24 from `environment/hpc/execution-protocol.md`, not run this
 sitting
@@ -31,6 +40,8 @@ query shows one row per GPU, a free device reads roughly 0MiB used and 0% utilis
 `sbatch`, per the same execution-protocol file.
 
 ## 2. Launch on a shared device
+
+Navigation: ⬅️ [Previous](#1-decide-where-a-run-goes) | 📋 [TOC](#table-of-contents) | [Next](#3-harvest-what-is-running) ➡️
 
 `unverified`, transcribed 2026-08-24, not run this sitting
 
@@ -58,6 +69,8 @@ the tail, for the guard that aborted it before the run started.
 
 ## 3. Harvest what is running
 
+Navigation: ⬅️ [Previous](#2-launch-on-a-shared-device) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
 `unverified`, transcribed 2026-08-24, not run this sitting
 
 Two execution modes, and Slurm only sees one of them:
@@ -78,6 +91,8 @@ still going on another node.
 No ❌ branch beyond an unreachable node, which is an SSH/network problem, not a harvest problem.
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#3-harvest-what-is-running) | 📋 [TOC](#table-of-contents)
 
 - The mention of **SSH launch**, whose relative paths resolve in `$HOME` and kill the run before `nohup` starts, in [the failure catalog entry poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001).
 - The mention of **one-job-per-user rule**, kept by starting long jobs with `nohup` and checking them with `pgrep`, in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), third outcome.

@@ -1,4 +1,4 @@
-# 🧭 Setting up the Reduce, Reuse, Recycle code on the laptop
+# 🧭 Runbook: setting up the Reduce, Reuse, Recycle code on the laptop
 
 How to get the authors' code for Du et al. 2023 (arXiv 2302.11552) from an empty folder to running:
 the 2D notebook on the CPU (or the GPU), and the CLEVR sampling script on the GPU. What is true

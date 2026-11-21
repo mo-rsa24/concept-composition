@@ -91,6 +91,8 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 ## Cross-references
 
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
 - The mention of **a hybrid** in [the figure plan "the same rule on four models"](../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md) (relevance match).
 - The mention of **the same hybrid** in [the review of "the same rule on four models"](../../1-lora-correction/plans/03-does-the-correction-cause-composition/review/12-the-same-rule-on-four-models.md) (relevance match).
 - The mention of **the fused animal** a species classifier turned into a cat in [the route for classifier-guided PoE](../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far) (relevance match).

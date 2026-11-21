@@ -1,4 +1,4 @@
-# Checking the plan tree
+# 🧭 Runbook: checking the plan tree's state
 
 Navigation: 📋 [Index](00-INDEX.md)
 

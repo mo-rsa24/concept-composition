@@ -1,10 +1,22 @@
-# Re-lettering an image whose text is baked in
+# 🧭 Runbook: re-lettering an image whose text is baked in
 
 For a figure made outside this repo (an image generator, a screenshot) whose labels are part of the pixels, so they print too small and in the wrong face. The fix is to keep the artwork and set every label again as real type at its printed size. Figures 1, 7 and 8 of the ICLR 56173 paper (`final_figures/molefe_fig1.png`, `final_figures/molefe_fig2.png`, `training-the-compositional-adapter.jpg`) need this; the lettering audit measured their text at about 1 to 4 pt against the 7 pt floor.
 
 The rule every figure meets is on [the layout sheet](../../1-lora-correction/report/paper-review/layout-sheet.md#before-a-slot-is-called-finished): 8 pt labels, 9 pt titles, a Times-matching serif, drawn at the final width. The two-panel recipe beside this one, [composing a two-panel figure](composing-a-two-panel-figure-in-inkscape.md), covers placing and exporting in more depth.
 
+## Table of contents
+
+- [Fill in](#fill-in)
+- [1. Set the page to the printed width](#1-set-the-page-to-the-printed-width)
+- [2. Bring in the artwork without its text](#2-bring-in-the-artwork-without-its-text)
+- [3. Fit the page to the artwork](#3-fit-the-page-to-the-artwork)
+- [4. Set every label as real type](#4-set-every-label-as-real-type)
+- [5. Export the PDF](#5-export-the-pdf)
+- [6. Check it](#6-check-it)
+
 ## Fill in
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-set-the-page-to-the-printed-width) ➡️
 
 | What | Figure 1 | Figure 7 | Figure 8 |
 |---|---|---|---|
@@ -15,6 +27,8 @@ The rule every figure meets is on [the layout sheet](../../1-lora-correction/rep
 
 ## 1. Set the page to the printed width
 
+Navigation: ⬅️ [Previous](#fill-in) | 📋 [TOC](#table-of-contents) | [Next](#2-bring-in-the-artwork-without-its-text) ➡️
+
 1. Open Inkscape. **File → Document Properties** (Ctrl+Shift+D).
 2. Display units and page size units: **in**. Width: the printed width from the table. Leave height for step 3.
 3. Close the dialog.
@@ -22,6 +36,8 @@ The rule every figure meets is on [the layout sheet](../../1-lora-correction/rep
 You want: the white page rectangle at that width; the ruler along the top reads up to it.
 
 ## 2. Bring in the artwork without its text
+
+Navigation: ⬅️ [Previous](#1-set-the-page-to-the-printed-width) | 📋 [TOC](#table-of-contents) | [Next](#3-fit-the-page-to-the-artwork) ➡️
 
 1. **File → Import** (Ctrl+I), pick the image, choose **Embed**, image rendering **Default**.
 2. With the image selected, type its width in the toolbar's **W** box as the printed width, with the lock on so height follows.
@@ -32,9 +48,13 @@ What failure looks like: the image is under 300 pixels per inch of printed width
 
 ## 3. Fit the page to the artwork
 
+Navigation: ⬅️ [Previous](#2-bring-in-the-artwork-without-its-text) | 📋 [TOC](#table-of-contents) | [Next](#4-set-every-label-as-real-type) ➡️
+
 **Edit → Resize Page to Selection** (Ctrl+Shift+R) with the image selected.
 
 ## 4. Set every label as real type
+
+Navigation: ⬅️ [Previous](#3-fit-the-page-to-the-artwork) | 📋 [TOC](#table-of-contents) | [Next](#5-export-the-pdf) ➡️
 
 1. **Text tool** (T). In the toolbar, font **TeX Gyre Termes** (or Times New Roman), unit **pt**.
 2. Labels at **8 pt**, panel titles at **9 pt**, panel letters (a), (b) at **9 pt bold**. Never smaller than 7 pt.
@@ -45,11 +65,15 @@ You want: labels the same height as the paper's caption text when the page is vi
 
 ## 5. Export the PDF
 
+Navigation: ⬅️ [Previous](#4-set-every-label-as-real-type) | 📋 [TOC](#table-of-contents) | [Next](#6-check-it) ➡️
+
 1. **File → Save As** (Ctrl+Shift+S), type **PDF**.
 2. In the PDF options: text output **Embed fonts** (not "Convert text to paths"), rasterize filter effects at **300 dpi**, use document's page size.
 3. Save beside the old file with the same name and `.pdf`, for example `final_figures/molefe_fig1.pdf`.
 
 ## 6. Check it
+
+Navigation: ⬅️ [Previous](#5-export-the-pdf) | 📋 [TOC](#table-of-contents)
 
 Tell Claude the file is there. It switches the `\includegraphics` in `writing/restoring-plurality-in-compositional-diffusion_overleaf/iclr2027_conference.tex` to the PDF and runs:
 

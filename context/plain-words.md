@@ -8,7 +8,15 @@ re-run with a different word by changing one row.
 The rule that generated it: name what happened, not the category it falls into. If a reader would
 have to ask what a word means, the line was wrong, not the reader.
 
+## Table of contents
+
+- [Replaced everywhere, including file and folder names](#replaced-everywhere-including-file-and-folder-names)
+- [Kept, because the field genuinely calls it that](#kept-because-the-field-genuinely-calls-it-that)
+- [Not changed, and why](#not-changed-and-why)
+
 ## Replaced everywhere, including file and folder names
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#kept-because-the-field-genuinely-calls-it-that) ➡️
 
 | Was | Now | What it actually is |
 |---|---|---|
@@ -49,6 +57,8 @@ have to ask what a word means, the line was wrong, not the reader.
 
 ## Kept, because the field genuinely calls it that
 
+Navigation: ⬅️ [Previous](#replaced-everywhere-including-file-and-folder-names) | 📋 [TOC](#table-of-contents) | [Next](#not-changed-and-why) ➡️
+
 These are not private labels, and removing them would cost more than it saves: a reader needs them
 to follow a paper. Each gets one plain gloss at its first use in a file, never a rename.
 
@@ -62,6 +72,8 @@ came back null, meaning the numbers with the correction looked the same as the n
 to count as having done nothing.
 
 ## Not changed, and why
+
+Navigation: ⬅️ [Previous](#kept-because-the-field-genuinely-calls-it-that) | 📋 [TOC](#table-of-contents)
 
 Code identifiers keep their names. `ax.spines` and `.bar()` are matplotlib's API, so renaming them
 breaks plotting, and the internal names in `poe_repair/` are a separate refactor with test

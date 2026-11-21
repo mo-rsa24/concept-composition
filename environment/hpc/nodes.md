@@ -1,4 +1,4 @@
-# HPC: partitions, nodes and GPUs
+# 🗺️ Environment: cluster partitions, nodes and GPUs
 
 Navigation: 📋 [Index](../00-INDEX.md) | [Overview](../overview.md#compute--runtime)
 
@@ -11,7 +11,16 @@ never runs on the login node. So the real execution split this project cares abo
 RAM, 28 cores). Verified live via `nvidia-smi` on 2026-08-04, and its partition re-verified
 live via `sinfo -N -o "%N %P %t"` on 2026-08-24 (state: `alloc`).
 
+## Table of contents
+
+- [Partitions](#partitions)
+- [Python environments](#python-environments)
+- [VS Code extensions on the compute nodes](#vs-code-extensions-on-the-compute-nodes)
+- [Cross-references](#cross-references)
+
 ## Partitions
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#python-environments) ➡️
 
 Verified live via `sinfo -o "%P %a %l %D"` on 2026-08-24 (columns: partition, availability,
 time limit, node count).
@@ -35,6 +44,8 @@ Check node STATE (`sinfo -N -o "%N %P %t"`), not just partition-level availabili
 assuming a submission will start promptly.
 
 ## Python environments
+
+Navigation: ⬅️ [Previous](#partitions) | 📋 [TOC](#table-of-contents) | [Next](#vs-code-extensions-on-the-compute-nodes) ➡️
 
 `/home-mscluster/mmolefe/miniforge3/envs/` (mamba/miniforge). Verified live via `ls` on
 2026-08-24: `co3`, `co3_bw`, `compvis_ldm`, `cxr`, `jax`, `jax115`, `ldm`, `mamba`, `rosalia`,
@@ -88,6 +99,8 @@ this node PyPI downloaded at 13.5 MB/s (30 MB of the `nvidia-cublas-cu12` wheel 
 
 ## VS Code extensions on the compute nodes
 
+Navigation: ⬅️ [Previous](#python-environments) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
 **The compute nodes cannot reach the VS Code extension marketplace.** From `mscluster88`, every
 extension download returns an 875-byte Microsoft page reading "The request is blocked." Both
 `code-server --install-extension` and the Extensions panel's install fail with `Extract: End of
@@ -103,5 +116,7 @@ pack members on the laptop and copies them over. `ms-python.python` 2026.8.0 and
 `ms-toolsai.jupyter` 2025.9.1 installed this way. (verified 2026-10-13)
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#vs-code-extensions-on-the-compute-nodes) | 📋 [TOC](#table-of-contents)
 
 - The cross-device spread named in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md): one uncorrected cell reads 0.153, 0.169 and 0.180 on the RTX 3090, the RTX PRO 6000 Blackwell and the Quadro RTX 8000, so a comparison across corrector counts stays on one device.

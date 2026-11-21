@@ -1,12 +1,18 @@
-# Runbook: concept-composition
+# 🧭 Runbook: concept-composition
 
 How to do the recurring things here by hand: checking the plan tree's state, launching or
-harvesting a run on the cluster, and moving manuscript edits between this repo and Overleaf. Built 2026-08-24 during stage 5 of the retrofit pass, from
-`CLAUDE.md`'s own conventions section and `environment/hpc/`, not from a full excavation
-dialogue (this sitting has no interactive user to walk one with). More themes get added the
-next time something recurring happens by hand and isn't here yet.
+harvesting a run on the cluster, reading what a run produced, making the paper's figures, and
+moving manuscript edits between this repo and Overleaf.
+
+## Table of contents
+
+- [Lookup](#lookup)
+- [Themes](#themes)
+- [Still open](#still-open)
 
 ## Lookup
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#themes) ➡️
 
 | I want to... | Go to |
 |---|---|
@@ -29,10 +35,6 @@ next time something recurring happens by hand and isn't here yet.
 | Get the authors' Reduce, Reuse, Recycle code running from an empty folder (clone, 2D environment, notebook fixes) | [setting-up-the-reduce-reuse-recycle-code.md §1](setting-up-the-reduce-reuse-recycle-code.md#1-clone-at-the-commit-the-walk-uses---ran-2026-10-13) |
 | Download the Reduce, Reuse, Recycle CLEVR checkpoint past Google Drive's virus-scan page | [setting-up-the-reduce-reuse-recycle-code.md §4](setting-up-the-reduce-reuse-recycle-code.md#4-get-the-clevr-checkpoint---ran-2026-10-13) |
 | Build the Reduce, Reuse, Recycle 2D notebook's CUDA jax environment on a cluster GPU node | [setting-up-the-reduce-reuse-recycle-code.md §7](setting-up-the-reduce-reuse-recycle-code.md#7-build-the-2d-notebooks-environment-on-the-cluster---ran-2026-10-13) |
-| Render the 8 held-out cat x dog seeds from one pooled-LoRA checkpoint, with the scorer's verdict on every tile | [probing-a-pooled-lora-checkpoint.md §1](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) |
-| Measure how well a checkpoint fits the cached correction, per pair and step bucket, with no sampling | [probing-a-pooled-lora-checkpoint.md §2](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) |
-| Resume a pooled (PoE) training from a checkpoint on whichever device is free | [probing-a-pooled-lora-checkpoint.md §3](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) |
-| Train two ranks at once on an idle node with one Slurm job | [probing-a-pooled-lora-checkpoint.md §4](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) |
 | Render the 8 held-out cat x dog seeds from one pooled-LoRA checkpoint, with the scorer's verdict on every tile | [probing-a-pooled-lora-checkpoint.md §1](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) |
 | Measure how well a checkpoint fits the cached correction, per pair and step bucket, with no sampling | [probing-a-pooled-lora-checkpoint.md §2](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) |
 | Resume a pooled (PoE) training from a checkpoint on whichever device is free | [probing-a-pooled-lora-checkpoint.md §3](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) |
@@ -63,6 +65,8 @@ next time something recurring happens by hand and isn't here yet.
 
 ## Themes
 
+Navigation: ⬅️ [Previous](#lookup) | 📋 [TOC](#table-of-contents) | [Next](#still-open) ➡️
+
 Grouped by the kind of work. The group is a listing convenience; every row above still points
 straight at the recipe that answers it.
 
@@ -72,10 +76,9 @@ straight at the recipe that answers it.
 |---|---|---|
 | [launching-and-harvesting-a-run.md](running-things-on-the-cluster/launching-and-harvesting-a-run.md) | A `biggpu` node over SSH: pick a device, launch with `nohup`, find what is running | 3 |
 | [reproducing-where-each-condition-lands.md](running-things-on-the-cluster/reproducing-where-each-condition-lands.md) | The landing figures and their animated page, from renders to `dist/` | 5 (4 `ran`, 1 `unverified`) |
-| [running-the-langevin-corrector.md](running-things-on-the-cluster/running-the-langevin-corrector.md) | A `biggpu` device or the session node: the corrector's leak checks, its step-size search, the corrector-count grid, the window sweep, the eight-seed sheets and the two adapter tails | 6 (all `ran`) |
+| [running-the-langevin-corrector.md](running-things-on-the-cluster/running-the-langevin-corrector.md) | The Langevin corrector of scope 06, on a `biggpu` device or the session node: the two leak checks, the step-size search, the corrector-count grid and its verdict, the sliding window, the eight-seed sheets and the two adapter tails, the figures and the W&B log | 6 (all `ran`) |
 | [probing-a-pooled-lora-checkpoint.md](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md) | A `biggpu` device or one Slurm job: render a pooled checkpoint's held-out grid, read its fit on the cache, resume or launch a pooled training | 4 (all `ran`) |
 | [training-and-watching-a-superdiff-adapter.md](running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md) | SuperDiff on the cluster: its cache, an adapter trained on its residual, strips from every checkpoint, λ sweeps, its own κ × λ sheets, a PoE adapter injected into it | 8 (all `ran`) |
-| [running-the-langevin-corrector.md](running-things-on-the-cluster/running-the-langevin-corrector.md) | The Langevin corrector of scope 06: the two leak checks, the step-size search, the corrector-count grid and its verdict, the sliding window, the eight-seed sheets and the adapter tails, the figures and the W&B log | 6 (all `ran`) |
 
 **Looking at what a run produced**
 
@@ -89,6 +92,7 @@ straight at the recipe that answers it.
 | File | One place, one purpose | Recipes |
 |---|---|---|
 | [composing-a-two-panel-figure-in-inkscape.md](making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md) | A laptop with Inkscape: draw panels at final size, compose them under one caption, export a PDF the ICLR template places at 1:1 | 10 (1 `ran`, 9 `unverified`) |
+| [relettering-an-image-with-baked-in-text.md](making-the-papers-figures/relettering-an-image-with-baked-in-text.md) | A laptop with Inkscape: replace labels baked into an image with real type at its printed size | 6 (all `unverified`) |
 
 **Flat, no group yet**
 
@@ -96,14 +100,19 @@ straight at the recipe that answers it.
 |---|---|---|
 | [checking-the-plan-tree.md](checking-the-plan-tree.md) | The repo on the session node: the plan-tree state check | 1 |
 | [syncing-the-paper-with-overleaf.md](syncing-the-paper-with-overleaf.md) | The repo and the Overleaf clone beside it: moving manuscript edits between the two, and the zip route | 4 (2 `ran`, 2 `unverified`) |
+| [setting-up-the-reduce-reuse-recycle-code.md](setting-up-the-reduce-reuse-recycle-code.md) | The laptop and a cluster GPU node: clone the authors' code, build its environments, fetch the CLEVR checkpoint | 7 (6 `ran`, 1 `unverified`) |
 
 ## Still open
 
-No diagram prompts yet: neither theme crosses more than one system in a way that needs a
-picture over a command. Only `reading-a-training-run.md` reserves places for screenshots, and
-they are all still empty: they want captured W&B panels, which needs either a W&B or Playwright
-MCP connected (a human step in claude.ai connector settings) or the local wandb-API figures in
-that file's section 3. Both
-recipes in `launching-and-harvesting-a-run.md` are `unverified`, transcribed from
-`environment/hpc/execution-protocol.md` rather than run live this sitting; the next real
-launch or harvest should upgrade them via `--capture`.
+Navigation: ⬅️ [Previous](#themes) | 📋 [TOC](#table-of-contents)
+
+- **No diagram prompts exist for this folder.**
+- **The screenshot places in `reading-a-training-run.md` are empty.** They want captured W&B
+  panels, or the local wandb-API figures in that file's section 3.
+- **The three recipes in `launching-and-harvesting-a-run.md` are `unverified`.** They were
+  transcribed on 2026-08-24 from `environment/hpc/execution-protocol.md`, and the next real launch or harvest
+  should upgrade them via `--capture`.
+- **The Inkscape page and this index disagree on freshness marks.** The Themes table counts
+  1 `ran` and 9 `unverified`, while the page carries no mark on any of its 10 recipes.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -1,4 +1,4 @@
-# Composing a two-panel figure in Inkscape
+# 🧭 Runbook: composing a two-panel figure in Inkscape
 
 For putting two grid panels side by side under one caption, and exporting a PDF that renders
 cleanly in the ICLR template. Written for someone who has never opened Inkscape.
@@ -6,7 +6,24 @@ cleanly in the ICLR template. Written for someone who has never opened Inkscape.
 Worked example throughout: the two correction-window grids in
 [the paper's figure folder](../../writing/iclr/figures/when-the-correction-arrives/poe/).
 
+## Table of contents
+
+- [Read this before you start](#read-this-before-you-start)
+- [1. Make the panels](#1-make-the-panels)
+- [2. Get the files onto your laptop](#2-get-the-files-onto-your-laptop)
+- [3. Set the page size first, before anything else](#3-set-the-page-size-first-before-anything-else)
+- [4. Bring the two panels in](#4-bring-the-two-panels-in)
+- [5. Place them by typing numbers, not by dragging](#5-place-them-by-typing-numbers-not-by-dragging)
+- [6. Add the labels that both panels share](#6-add-the-labels-that-both-panels-share)
+- [7. Tidy up before exporting](#7-tidy-up-before-exporting)
+- [8. Export the PDF](#8-export-the-pdf)
+- [9. Put it in the paper](#9-put-it-in-the-paper)
+- [10. The LaTeX-only route, if you skip Inkscape](#10-the-latex-only-route-if-you-skip-inkscape)
+- [Things that will confuse you at first](#things-that-will-confuse-you-at-first)
+
 ## Read this before you start
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-make-the-panels) ➡️
 
 **The figure is built by a script, not by hand.**
 
@@ -91,6 +108,8 @@ annotate something on top of a finished one.
 
 ## 1. Make the panels
 
+Navigation: ⬅️ [Previous](#read-this-before-you-start) | 📋 [TOC](#table-of-contents) | [Next](#2-get-the-files-onto-your-laptop) ➡️
+
 Both grids are drawn by scripts, not by hand.
 
 **Panel (a) is the window extending from the start.**
@@ -163,6 +182,8 @@ decide to skip Inkscape.
 
 ## 2. Get the files onto your laptop
 
+Navigation: ⬅️ [Previous](#1-make-the-panels) | 📋 [TOC](#table-of-contents) | [Next](#3-set-the-page-size-first-before-anything-else) ➡️
+
 Inkscape is not installed on the cluster. You do this part locally.
 
 ```bash
@@ -172,6 +193,8 @@ scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition
 ---
 
 ## 3. Set the page size first, before anything else
+
+Navigation: ⬅️ [Previous](#2-get-the-files-onto-your-laptop) | 📋 [TOC](#table-of-contents) | [Next](#4-bring-the-two-panels-in) ➡️
 
 Open Inkscape. You get a blank white page.
 
@@ -194,6 +217,8 @@ If you build on a wrongly-sized page and fix it later, everything you placed has
 ---
 
 ## 4. Bring the two panels in
+
+Navigation: ⬅️ [Previous](#3-set-the-page-size-first-before-anything-else) | 📋 [TOC](#table-of-contents) | [Next](#5-place-them-by-typing-numbers-not-by-dragging) ➡️
 
 **Import the first panel.**
 
@@ -238,6 +263,8 @@ The SVG declares `width="187.2pt"`, and 187.2/72 is 2.60. Check the W and H boxe
 it explicitly anyway.
 
 ## 5. Place them by typing numbers, not by dragging
+
+Navigation: ⬅️ [Previous](#4-bring-the-two-panels-in) | 📋 [TOC](#table-of-contents) | [Next](#6-add-the-labels-that-both-panels-share) ➡️
 
 Dragging with a mouse will never give you two panels that line up. Type the coordinates.
 
@@ -285,6 +312,8 @@ The 0.55 at the top leaves room for the shared title you are about to add.
 Press `%` to switch snapping off.
 
 ## 6. Add the labels that both panels share
+
+Navigation: ⬅️ [Previous](#5-place-them-by-typing-numbers-not-by-dragging) | 📋 [TOC](#table-of-contents) | [Next](#7-tidy-up-before-exporting) ➡️
 
 There are four pieces of text to add. Two are the shared axis titles, two are the panel letters.
 
@@ -363,6 +392,8 @@ The same sum for panel (b) is 2.90 + 0.38 = 3.28.
 
 ## 7. Tidy up before exporting
 
+Navigation: ⬅️ [Previous](#6-add-the-labels-that-both-panels-share) | 📋 [TOC](#table-of-contents) | [Next](#8-export-the-pdf) ➡️
+
 **Select everything.**
 
 `Ctrl+A`.
@@ -383,6 +414,8 @@ title in and repeat.
 ---
 
 ## 8. Export the PDF
+
+Navigation: ⬅️ [Previous](#7-tidy-up-before-exporting) | 📋 [TOC](#table-of-contents) | [Next](#9-put-it-in-the-paper) ➡️
 
 **Save as a PDF.**
 
@@ -411,6 +444,8 @@ the output. Never throw the SVG away.
 ---
 
 ## 9. Put it in the paper
+
+Navigation: ⬅️ [Previous](#8-export-the-pdf) | 📋 [TOC](#table-of-contents) | [Next](#10-the-latex-only-route-if-you-skip-inkscape) ➡️
 
 **Include it at full width with no scaling factor.**
 
@@ -442,6 +477,8 @@ section 1.
 
 ## 10. The LaTeX-only route, if you skip Inkscape
 
+Navigation: ⬅️ [Previous](#9-put-it-in-the-paper) | 📋 [TOC](#table-of-contents) | [Next](#things-that-will-confuse-you-at-first) ➡️
+
 The panels are already clean and already the right size, so LaTeX can do this unaided.
 
 ```latex
@@ -471,6 +508,8 @@ The figure rebuilds itself whenever the scripts rerun. Nothing has to be redone 
 ---
 
 ## Things that will confuse you at first
+
+Navigation: ⬅️ [Previous](#10-the-latex-only-route-if-you-skip-inkscape) | 📋 [TOC](#table-of-contents)
 
 **Y counts downward.**
 

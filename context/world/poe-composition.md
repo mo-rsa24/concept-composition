@@ -1,7 +1,7 @@
 # 🌍 PoE composition (and Mono, the target it is compared against)
 
 Product-of-Experts (PoE) composition is the method under study: a way to make SDXL draw two
-named concepts at once by [combining two separate single-concept predictions](/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/07-poe-factorisation-and-normaliser.md) at every denoising
+named concepts at once by [combining two separate single-concept predictions](../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/07-poe-factorisation-and-normaliser.md) at every denoising
 step, instead of retraining the model or hand-writing a joint prompt. It is the thing that fails
 (see [chimera.md](chimera.md)) and the thing the project's fix (see
 [lora-corrector.md](lora-corrector.md)) is trying to repair. Sibling file
@@ -109,6 +109,8 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The full-strength shortcut risk and its fix | Read in `context/research-guidelines.md` | 2026-08-24 |
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
 - The mention of **a product of experts** (composing SDXL as an additive combination of two expert predictions) in [the scene map for the Gaussian score's base case](../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md) (relevance match).
 - The mention of **product-of-experts** in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).

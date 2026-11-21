@@ -1,4 +1,4 @@
-# 🧭 Probing a pooled LoRA checkpoint, and training one
+# 🧭 Runbook: probing a pooled LoRA checkpoint, and training one
 
 A `biggpu` node over SSH, or one Slurm job on an idle node: render the held-out cat x dog grid
 for one checkpoint, measure how well a checkpoint fits the cached correction, resume a pooled

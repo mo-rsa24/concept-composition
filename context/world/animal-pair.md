@@ -125,6 +125,8 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 
 ## Cross-references
 
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
 - The mention of **the pair that composes by default** (a butterfly and a flower meadow, used as the control a corrector must not break) in [does a corrector alone produce two animals](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md) (relevance match).
 - The mention of **animal pairs** (the 11 look-alike pairs behind `00`'s five runs, read as history rather than as a comparison) in [designing the correction loss](../../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) (exact match).
 - The mention of **animal pairs** (the 11 look-alike pairs of the original 88-run training pool, whose adapters never draw a person into the picture) in [the known failure "a pooled adapter draws a person into a picture of two animals"](../../environment/known-failures.md#entry-id-poe-lora-005) (exact match).

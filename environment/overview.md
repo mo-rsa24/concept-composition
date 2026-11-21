@@ -1,4 +1,4 @@
-# concept-composition: Environment and Architecture
+# 🗺️ Environment: the system this project runs on
 
 HPC cluster, Slurm-scheduled, two separate filesystems with no automatic mirroring between
 them, and a paper build that needs one specific LaTeX engine because nothing else is installed.
@@ -111,5 +111,7 @@ Full build commands, the extension's recipe list, and the git-blame on `.vscode/
 are in [paper.md](paper.md).
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#paper-latex-build) | 📋 [TOC](#table-of-contents)
 
 - The mention of **execution model** in [the HPC nodes fact, under Python environments](hpc/nodes.md#python-environments), where every job script must name the `co3` python by its absolute path because nothing activates an environment implicitly.

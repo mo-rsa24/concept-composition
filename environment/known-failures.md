@@ -1,4 +1,4 @@
-# Project Error Catalog: concept-composition
+# 🗺️ Environment: the failures this project has hit, with causes and fixes
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md)
 
@@ -14,7 +14,22 @@ fact; where the solution is a procedure someone drives by hand, it belongs in a
 
 ---
 
+## Table of contents
+
+- [Error patterns (organized by subsystem)](#error-patterns-organized-by-subsystem)
+  - [Scoring and evaluation](#scoring-and-evaluation)
+  - [Memory and batch sizes](#memory-and-batch-sizes)
+  - [LoRA and correction dynamics](#lora-and-correction-dynamics)
+  - [Launching runs](#launching-runs)
+  - [Disk and output paths](#disk-and-output-paths)
+  - [Rendering figures](#rendering-figures)
+  - [Training data and splits](#training-data-and-splits)
+  - [Syncing the cluster checkout and launching on a node](#syncing-the-cluster-checkout-and-launching-on-a-node)
+- [Cross-references](#cross-references)
+
 ## Error patterns (organized by subsystem)
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 ### Scoring and evaluation
 
@@ -628,6 +643,8 @@ launched, the chained mscluster112 launch did not)
 ---
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#error-patterns-organized-by-subsystem) | 📋 [TOC](#table-of-contents)
 
 - The instrument finding in [the corrector's step-size review](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md): a Langevin step size can pass both numeric divergence guards while its renders are texture noise, because the latent norm cannot rise until the Euler step stops contracting. The picture is rung 3 of [the finding](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
 - The mention of **the adapter left attached after a windowed run** (why the two adapter stages run in their own process) in [can a corrector or a clean tail sharpen the adapter's renders](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) and [running the Langevin corrector](../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).

@@ -1,4 +1,4 @@
-# 🧭 Training and watching a SuperDiff adapter
+# 🧭 Runbook: training and watching a SuperDiff adapter
 
 Navigation: 📋 [Index](../00-INDEX.md)
 

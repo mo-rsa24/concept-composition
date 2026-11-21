@@ -1,4 +1,6 @@
-# Running the Langevin corrector
+<a id="running-the-langevin-corrector"></a>
+
+# 🧭 Runbook: running the Langevin corrector
 
 Navigation: 📋 [Index](../00-INDEX.md)
 
@@ -29,6 +31,19 @@ reverse step from wherever that lands. The step size is `c` times the scheduler'
 level. With `k = 0` it is plain product-of-experts, byte for byte. Everything else here is a
 measurement or a render taken on the path it produces.
 
+## Table of contents
+
+- [Before any of these](#before-any-of-these)
+- [1. Prove the corrector is off when it is switched off](#1-prove-the-corrector-is-off-when-it-is-switched-off)
+- [2. Fix the step size before reading any curve](#2-fix-the-step-size-before-reading-any-curve)
+- [3. Run the corrector-count grid and print its verdict](#3-run-the-corrector-count-grid-and-print-its-verdict)
+- [4. Slide a corrector window across the run](#4-slide-a-corrector-window-across-the-run)
+- [5. Render the eight-seed sheets, the adapter tail and the clean tail](#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail)
+- [6. Draw the figures and log the set to W&B](#6-draw-the-figures-and-log-the-set-to-wb)
+- [If something looks wrong](#if-something-looks-wrong)
+- [Where this came from](#where-this-came-from)
+- [Cross-references](#cross-references)
+
 ## Before any of these
 
 Navigation: 📋 [TOC](#running-the-langevin-corrector) | [Next](#1-prove-the-corrector-is-off-when-it-is-switched-off) ➡️
@@ -58,6 +73,8 @@ Navigation: 📋 [TOC](#running-the-langevin-corrector) | [Next](#1-prove-the-co
 
 ## 1. Prove the corrector is off when it is switched off
 
+Navigation: ⬅️ [Previous](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-fix-the-step-size-before-reading-any-curve) ➡️
+
 `ran 2026-09-05` (in-session on mscluster85 device 0, about 25 seconds per render)
 
 Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#running-the-langevin-corrector) | [Next](#2-fix-the-step-size-before-reading-any-curve) ➡️
@@ -82,6 +99,8 @@ nothing measured on its path may be believed. Two checks exist because the first
 corrector that ignores its own window: at zero steps there is nothing to ignore.
 
 ## 2. Fix the step size before reading any curve
+
+Navigation: ⬅️ [Previous](#1-prove-the-corrector-is-off-when-it-is-switched-off) | 📋 [TOC](#table-of-contents) | [Next](#3-run-the-corrector-count-grid-and-print-its-verdict) ➡️
 
 `ran 2026-09-05` (mscluster108 device 1, about 9 to 19 minutes per value)
 
@@ -120,6 +139,8 @@ the largest whose composing-pair curve does not rise in recipe 3.
 rather than a bug.
 
 ## 3. Run the corrector-count grid and print its verdict
+
+Navigation: ⬅️ [Previous](#2-fix-the-step-size-before-reading-any-curve) | 📋 [TOC](#table-of-contents) | [Next](#4-slide-a-corrector-window-across-the-run) ➡️
 
 `ran 2026-09-05 and 06` (mscluster110 device 0 for one step size, mscluster108 and mscluster85 for the others)
 
@@ -166,6 +187,8 @@ hour on the Blackwell card and four on the others.
 
 ## 4. Slide a corrector window across the run
 
+Navigation: ⬅️ [Previous](#3-run-the-corrector-count-grid-and-print-its-verdict) | 📋 [TOC](#table-of-contents) | [Next](#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail) ➡️
+
 `ran 2026-09-05 and 06` (mscluster108 device 1, about 1.6 hours)
 
 Navigation: ⬅️ [3. Run the grid](#3-run-the-corrector-count-grid-and-print-its-verdict) | 📋 [TOC](#running-the-langevin-corrector) | [Next](#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail) ➡️
@@ -186,6 +209,8 @@ scored cells.
 Each window render is about 2 minutes on that card and the all-50 column about 7.6.
 
 ## 5. Render the eight-seed sheets, the adapter tail and the clean tail
+
+Navigation: ⬅️ [Previous](#4-slide-a-corrector-window-across-the-run) | 📋 [TOC](#table-of-contents) | [Next](#6-draw-the-figures-and-log-the-set-to-wb) ➡️
 
 `ran 2026-09-06` (sheets on mscluster108 device 1, both tails on mscluster85 device 0)
 
@@ -219,6 +244,8 @@ A tail render is 42 seconds at 0 corrector steps, 105 at 5 and 293 at 20 on the 
 tail's 96 renders take about 2.4 hours there.
 
 ## 6. Draw the figures and log the set to W&B
+
+Navigation: ⬅️ [Previous](#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
 `ran 2026-09-06` (session node, CPU for the drawing, about 4 minutes)
 
@@ -275,5 +302,7 @@ branch is judged against sit in `1-lora-correction/scripts/corrector_residual_cu
 `1-lora-correction/scripts/corrector_window_sweep.py`.
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
 - The mention of **a Langevin corrector** run at every noise level in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#what-this-asks-in-one-line).

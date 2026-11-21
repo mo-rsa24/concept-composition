@@ -11,7 +11,17 @@ draft, `MASTER_PLAN.md`, `1-lora-correction/report/experiments-log.md`, the evid
 pipeline's own output files) were sufficient to ground every claim this pass made, per the
 tier-1, read-only checks described in `~/.claude/skills/context-pulse/SKILL.md`.
 
+## Table of contents
+
+- [1. Leveraging Low-Rank Adaptation for Multi-Concept Customization in Training-Free Diffusion Models](#1-leveraging-low-rank-adaptation-for-multi-concept-customization-in-training-free-diffusion-models)
+- [2. Diffusion Explorer: Interactive Exploration of Diffusion Models](#2-diffusion-explorer-interactive-exploration-of-diffusion-models)
+- [3. Diffusion Transformers with Representation Autoencoders](#3-diffusion-transformers-with-representation-autoencoders)
+- [4. Eigenfaces-style analysis on embedding models, an X post](#4-eigenfaces-style-analysis-on-embedding-models-an-x-post)
+- [5. CDM: Contrastive Distribution Matching for discrete diffusion, and the two X posts that led to it](#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it)
+
 ## 1. Leveraging Low-Rank Adaptation for Multi-Concept Customization in Training-Free Diffusion Models
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-diffusion-explorer-interactive-exploration-of-diffusion-models) ➡️
 
 **What it is** a paper found by this project's literature scout, kept in the standing literature
 folder. Full author list and venue not established by this pass.
@@ -29,6 +39,8 @@ installed in this environment, so this pass could not open it past the filename.
 **Read on** 2026-08-24 (title only)
 
 ## 2. Diffusion Explorer: Interactive Exploration of Diffusion Models
+
+Navigation: ⬅️ [Previous](#1-leveraging-low-rank-adaptation-for-multi-concept-customization-in-training-free-diffusion-models) | 📋 [TOC](#table-of-contents) | [Next](#3-diffusion-transformers-with-representation-autoencoders) ➡️
 
 **What it is** Alec Helbling and Duen Horng Chau, arXiv 2507.01178. An educational browser tool
 that trains small 2D diffusion and flow-matching models in TensorFlow.js and animates their
@@ -67,6 +79,8 @@ API mirror)
 
 ## 3. Diffusion Transformers with Representation Autoencoders
 
+Navigation: ⬅️ [Previous](#2-diffusion-explorer-interactive-exploration-of-diffusion-models) | 📋 [TOC](#table-of-contents) | [Next](#4-eigenfaces-style-analysis-on-embedding-models-an-x-post) ➡️
+
 **What it is** Boyang Zheng, Nanye Ma, Shengbang Tong and Saining Xie, arXiv 2510.11690. Trains
 ViT decoders that reconstruct pixels from frozen DINOv2, SigLIP2 and MAE features, so a point in
 an encoder's space can be turned back into a picture.
@@ -86,6 +100,8 @@ see whether the decoder keeps it.
 
 ## 4. Eigenfaces-style analysis on embedding models, an X post
 
+Navigation: ⬅️ [Previous](#3-diffusion-transformers-with-representation-autoencoders) | 📋 [TOC](#table-of-contents) | [Next](#5-cdm-contrastive-distribution-matching-for-discrete-diffusion-and-the-two-x-posts-that-led-to-it) ➡️
+
 **What it is** a post by Arnas Uselis (@a_uselis) showing walks along the top principal
 components of pixel space, DINOv2-B and SigLIP2, each decoded through a representation
 autoencoder, so the reader sees what each encoder's leading directions mean. Quotes a post by
@@ -104,6 +120,8 @@ SDXL latents.
 **Read on** 2026-09-05 (post text via an API mirror; the attached video was not viewable)
 
 ## 5. CDM: Contrastive Distribution Matching for discrete diffusion, and the two X posts that led to it
+
+Navigation: ⬅️ [Previous](#4-eigenfaces-style-analysis-on-embedding-models-an-x-post) | 📋 [TOC](#table-of-contents)
 
 **What it is** Jaihoon Kim, Minhyuk Sung and co-authors, arXiv 2605.23346, project page
 <https://cdm-smc.github.io/>. Reward-guided sampling for discrete diffusion by twisted

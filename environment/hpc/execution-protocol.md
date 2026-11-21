@@ -1,4 +1,4 @@
-# HPC: how a run actually gets launched
+# 🗺️ Environment: how a run gets launched on the cluster
 
 Navigation: ⬅️ [Nodes](nodes.md) | 📋 [Index](../00-INDEX.md) | [Overview](../overview.md#execution-model)
 

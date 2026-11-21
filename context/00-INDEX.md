@@ -4,8 +4,8 @@ What this project is about in the real world: why PoE composition on SDXL fails,
 an animal pair, the interaction term, and a compose rate are, where the pipeline's data comes
 from, and what every field in a `summary.json` or a scorer output means. What the system *is*
 (the cluster, the two filesystems, the LaTeX build) lives in
-[environment/00-INDEX.md](../environment/00-INDEX.md); how to drive it lives in the runbook, not
-yet built as of this pass. This folder is only the meaning.
+the [environment index](../environment/00-INDEX.md); how to drive it lives in the
+[runbook index](../runbook/00-INDEX.md). This folder is only the meaning.
 
 If what you need is not in here, **stop and ask**. Do not infer a meaning from a column or symbol
 name and do not proceed on a plausible assumption; a wrong guess about what `d_T` or `arm` means
@@ -49,8 +49,7 @@ Navigation: ⬅️ [I want to know...](#i-want-to-know) | 📋 [TOC](#table-of-c
 
 Picture prompts are in [diagram-prompts.md](diagram-prompts.md) (8 prompts, 0 rendered); rendered
 images sit in `diagrams/`. Existing pipeline images already copied in sit in `images/world/`.
-External documents this folder draws on are listed in [sources.md](sources.md) (one entry, not
-yet read past its title).
+External documents this folder draws on are listed in [the sources register](sources.md) (5 entries).
 
 ## Still open
 
@@ -76,11 +75,9 @@ The things this pass could not settle by reading. Each names who or what would s
       pair the paper opens on) has a recorded fail-rate anywhere.** It does not appear in
       `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`. Would settle it: find or run its scorer
       result. See [world/animal-pair.md § What an animal pair is](world/animal-pair.md#what-an-animal-pair-is).
-- [ ] **The one external paper registered in `sources.md` has not been read past its title**,
-      because `pdftoppm` is not installed in this session's environment. Would settle it: install
-      `poppler-utils` or open the PDF another way, then log it in
-      `plans/standing/literature/plans/01-reading-register.md` (itself still an empty task as of
-      this build).
+- [ ] **Entry 1 in `sources.md`, the low-rank adaptation paper, has not been read past its
+      title.** Would settle it: open the PDF, then log it in
+      `plans/standing/literature/plans/01-reading-register.md`.
 - [ ] **The interaction term's causal role is only backed, inside this repository, by this
       project's own paper draft.** The maintainer's working memory (not filed in the repo) refers
       to a seven-paper external literature reconciliation on this exact question, but

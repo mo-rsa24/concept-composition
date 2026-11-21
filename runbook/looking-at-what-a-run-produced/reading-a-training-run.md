@@ -1,4 +1,4 @@
-# Reading an adapter training run
+# 🧭 Runbook: reading an adapter training run
 
 What gets recorded while a pooled adapter trains, where each number lands, and how to read
 it. The recorded things come in two kinds: **per-step curves** (logged to W&B on every
@@ -11,7 +11,16 @@ W&B project: [prime_lab/poe-repair-animals-compose](https://wandb.ai/prime_lab/p
 Run folders: `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/pooled_lora/<run_id>/`
 (config, checkpoints, samples, history).
 
+## Table of contents
+
+- [1. The per-step curves, and what each one means](#1-the-per-step-curves-and-what-each-one-means)
+- [2. The tracking set, saved at every 10k-step checkpoint](#2-the-tracking-set-saved-at-every-10k-step-checkpoint)
+- [3. Filling in the screenshots](#3-filling-in-the-screenshots)
+- [Cross-references](#cross-references)
+
 ## 1. The per-step curves, and what each one means
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-the-tracking-set-saved-at-every-10k-step-checkpoint) ➡️
 
 Status: unverified (transcribed from `phase1_r8_100k`'s logged history; upgrade via
 `--capture` on the next live run).
@@ -24,6 +33,8 @@ Status: unverified (transcribed from `phase1_r8_100k`'s logged history; upgrade 
 | `train/grad_norm`, `train/lr` | Training health | Spikes in `grad_norm` with no loss change usually mean one bad training example rather than a broken run. |
 
 ## 2. The tracking set, saved at every 10k-step checkpoint
+
+Navigation: ⬅️ [Previous](#1-the-per-step-curves-and-what-each-one-means) | 📋 [TOC](#table-of-contents) | [Next](#3-filling-in-the-screenshots) ➡️
 
 Status: unverified until the extra recording is wired in; items marked *new* are adopted but
 not yet wired.
@@ -47,6 +58,8 @@ not yet wired.
 > shared directions rather than pointing every which way.
 
 ## 3. Filling in the screenshots
+
+Navigation: ⬅️ [Previous](#2-the-tracking-set-saved-at-every-10k-step-checkpoint) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 No screenshots yet: each table row above wants one captured W&B panel with a caption
 saying what the healthy shape looks like.
@@ -100,6 +113,8 @@ let the W&B MCP pull the panel data and render the figure locally.
   Save the output beside the run's other evidence and caption it from the tables above.
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#3-filling-in-the-screenshots) | 📋 [TOC](#table-of-contents)
 
 - The mention of **fraction-of-distance-reached**, stopping at 20% where earlier runs reached 40%, in [the failure catalog entry poe-lora-001](../../environment/known-failures.md#entry-id-poe-lora-001).
 - The mention of **comparison strips**, the three-panel files the trainer saves beside each render that the compose-rate count scored as renders, in [the failure catalog entry poe-score-003](../../environment/known-failures.md#entry-id-poe-score-003).

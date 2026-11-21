@@ -1,4 +1,4 @@
-# 🧭 Syncing the paper with Overleaf
+# 🧭 Runbook: syncing the paper with Overleaf
 
 The paper exists in three places and they do not update each other. This file is how you move
 edits between them by hand: pulling what you typed in the Overleaf editor down into the repo,
@@ -9,6 +9,8 @@ Tectonic facts in [the paper environment file](../environment/paper.md), since n
 exists on this cluster.
 
 ## Words this file uses
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#before-any-of-these) ➡️
 
 - **The repo copy**: `writing/iclr/`, the folder this repository tracks and commits. Everything
   else in the project links into it: figures, the draft map, the spine.
@@ -234,5 +236,7 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 | §3's push and §4's bundle | Transcribed, not run this sitting: §3 from the clone's remote, §4 from the handoff note | 2026-09-21 |
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
 - The mention of **Overleaf clone**, one of the two older local copies that must not be edited, in [the PRZE-5 page on revising the paper](../1-lora-correction/report/paper-review/prze-5-paper-revised.md), first outcome.

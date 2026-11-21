@@ -1,4 +1,4 @@
-# 🗺️ The Reduce, Reuse, Recycle reference code
+# 🗺️ Environment: the Reduce, Reuse, Recycle reference code
 
 Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md)
 
@@ -9,7 +9,16 @@ PyTorch script for the CLEVR results. Where the code differs from the paper is n
 fact; that audit is
 [the code-against-paper audit](/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/drips/read-reduce-reuse-recycle/routes/code-vs-paper.md).
 
+## Table of contents
+
+- [The 2D notebook](#the-2d-notebook)
+- [The CLEVR script](#the-clevr-script)
+- [On the cluster (mscluster88)](#on-the-cluster-mscluster88)
+- [Cross-references](#cross-references)
+
 ## The 2D notebook
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-clevr-script) ➡️
 
 **`notebooks/simple_distributions.ipynb` runs on jax 0.11.2 only after one rename.** The trainer
 cell (the one starting `# Simple diffusion model training`) calls
@@ -29,6 +38,8 @@ models are small enough for CPU. (verified 2026-10-13)
 install` cell is also unneeded with the venv. (verified 2026-10-13)
 
 ## The CLEVR script
+
+Navigation: ⬅️ [Previous](#the-2d-notebook) | 📋 [TOC](#table-of-contents) | [Next](#on-the-cluster-mscluster88) ➡️
 
 **`inf_sample.py` needs a GPU, with no fallback.** It calls `model1.to("cuda")` unconditionally, so
 it cannot run on a CPU-only machine. (verified 2026-10-13, by reading)
@@ -54,6 +65,8 @@ needs the page's `confirm` and `uuid` values. (verified 2026-10-13)
 
 ## On the cluster (mscluster88)
 
+Navigation: ⬅️ [Previous](#the-clevr-script) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
 **The cluster clone is `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle`**, branch `walk` at
 `81177d9`, with the same notebook fixes as the laptop. The walk runs on `mscluster88` (`bigbatch`,
 RTX 3090, 24 GB) because `mscluster112`'s card is faulted; see the
@@ -70,6 +83,8 @@ wheels never land under `/home-mscluster`. `jax.devices()` prints `[CudaDevice(i
 with a CPU-only jaxlib and no haiku. (verified 2026-10-13)
 
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#on-the-cluster-mscluster88) | 📋 [TOC](#table-of-contents)
 
 - The mention of **2.3 GB CUDA install**, timed from the PyPI download rate measured on `mscluster88`, in [the HPC nodes fact, under Python environments](hpc/nodes.md#python-environments).
 - The mention of **the Reduce, Reuse, Recycle copy** of the guided-diffusion U-Net, missing the upstream line `h = x.type(self.dtype)`, in [the route for classifier-guided PoE](../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).

@@ -1,4 +1,4 @@
-# HPC: how long a pooled-LoRA training run actually takes
+# 🗺️ Environment: how long a pooled-LoRA training run takes
 
 Navigation: ⬅️ [Nodes](nodes.md) | 📋 [Index](../00-INDEX.md) | [Execution protocol](execution-protocol.md)
 
@@ -17,6 +17,8 @@ step count) — never a bare estimate with no source.
 - [What this does not tell you](#what-this-does-not-tell-you)
 
 ## Methodology
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#raw-measurements) ➡️
 
 Three smoke runs, 2026-09-01, on `biggpu`'s shared-device path (no idle node was available;
 `squeue -u mmolefe` was empty and `sinfo -p biggpu` showed 6 nodes `alloc`, 1 `down`). All three
@@ -58,6 +60,8 @@ single-axis-clean), so the answer was never load-bearing for the decision actual
 
 ## Raw measurements
 
+Navigation: ⬅️ [Previous](#methodology) | 📋 [TOC](#table-of-contents) | [Next](#projected-durations-for-experiments-a-and-b) ➡️
+
 | Metric | Value | Unit | Source | Status |
 |---|---|---|---|---|
 | Rank 8 step time, steady state | 0.706 | s/step | `mscluster109`, RTX A6000, `timing_smoke_r8`, epochs 5-20 of 200 | measured, 2026-09-01 |
@@ -81,6 +85,8 @@ gap reads as device co-tenancy noise, not a real rank effect. The trainable LoRA
 small fraction of the frozen SDXL UNet's compute at any of 8/16/32.
 
 ## Projected durations for experiments A and B
+
+Navigation: ⬅️ [Previous](#raw-measurements) | 📋 [TOC](#table-of-contents) | [Next](#what-this-does-not-tell-you) ➡️
 
 Every row here is measured rate x the real run's step count, plus the real checkpoint/eval-pass
 cost at production cadence (checkpoint every 5k steps = 20 saves per 100k, eval pass every 10k
@@ -118,6 +124,8 @@ criterion recurring, since `initial_commit_loss` isn't checkpointed and only eve
 exactly optimizer step 200, which a resumed run never revisits.
 
 ## What this does not tell you
+
+Navigation: ⬅️ [Previous](#projected-durations-for-experiments-a-and-b) | 📋 [TOC](#table-of-contents)
 
 - **Whether a larger batch size would speed anything up is genuinely unknown**, not "tested and
   found not to help" as an earlier version of this file claimed. That comparison's script had a

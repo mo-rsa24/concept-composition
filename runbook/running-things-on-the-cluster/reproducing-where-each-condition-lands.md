@@ -1,4 +1,6 @@
-# Reproducing where each condition lands
+<a id="reproducing-where-each-condition-lands"></a>
+
+# 🧭 Runbook: reproducing where each condition lands
 
 Navigation: 📋 [Index](../00-INDEX.md)
 
@@ -26,6 +28,17 @@ the other way round: the tool's UI source (`packages/ui/src`) is vendored into
 drive a page fed by our own precomputed frames. The comparison itself (joint versus A versus B
 versus PoE versus PoE plus correction) is a set of Python samplings on the cluster, recipes 1 to 3.
 
+## Table of contents
+
+- [Before any of these](#before-any-of-these)
+- [1. Render the references and the per-step frames on a shared device](#1-render-the-references-and-the-per-step-frames-on-a-shared-device)
+- [2. Make the endpoint figures and their sidecar](#2-make-the-endpoint-figures-and-their-sidecar)
+- [3. Embed the frames and export the page's data](#3-embed-the-frames-and-export-the-pages-data)
+- [4. Build the page from Diffusion Explorer's UI and open it](#4-build-the-page-from-diffusion-explorers-ui-and-open-it)
+- [5. Open the built page on a laptop with no cluster tunnel](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel)
+- [If something looks wrong](#if-something-looks-wrong)
+- [Where this came from](#where-this-came-from)
+
 ## Before any of these
 
 Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) ➡️
@@ -46,6 +59,8 @@ Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-rend
   ❌ **`No such file`**: the checkpoint or the cache moved; the finding's "Where this came from" table names what they are.
 
 ## 1. Render the references and the per-step frames on a shared device
+
+Navigation: ⬅️ [Previous](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-make-the-endpoint-figures-and-their-sidecar) ➡️
 
 `ran 2026-09-05` (references on mscluster110 device 0, frames on mscluster109 device 1)
 
@@ -134,6 +149,8 @@ finished image), decodes it, and saves it at 256 px. The final image is saved as
 
 ## 2. Make the endpoint figures and their sidecar
 
+Navigation: ⬅️ [Previous](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) | 📋 [TOC](#table-of-contents) | [Next](#3-embed-the-frames-and-export-the-pages-data) ➡️
+
 `ran 2026-09-05` on mscluster85, CPU
 
 Navigation: ⬅️ [1. Render the references and the per-step frames](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#3-embed-the-frames-and-export-the-pages-data) ➡️
@@ -164,6 +181,8 @@ DINOv2 hub code routes attention through xformers, which has no CPU kernel.
 that seed.
 
 ## 3. Embed the frames and export the page's data
+
+Navigation: ⬅️ [Previous](#2-make-the-endpoint-figures-and-their-sidecar) | 📋 [TOC](#table-of-contents) | [Next](#4-build-the-page-from-diffusion-explorers-ui-and-open-it) ➡️
 
 `ran 2026-09-05` on mscluster85, CPU
 
@@ -196,6 +215,8 @@ the references carry the adapter; see the last ❌ branch of recipe 1.
 which skips finished runs.
 
 ## 4. Build the page from Diffusion Explorer's UI and open it
+
+Navigation: ⬅️ [Previous](#3-embed-the-frames-and-export-the-pages-data) | 📋 [TOC](#table-of-contents) | [Next](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel) ➡️
 
 `ran 2026-09-05` on mscluster85
 
@@ -272,6 +293,8 @@ resolved.
 </details>
 
 ## 5. Open the built page on a laptop with no cluster tunnel
+
+Navigation: ⬅️ [Previous](#4-build-the-page-from-diffusion-explorers-ui-and-open-it) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
 `unverified`, written 2026-09-05 from the build's `base: './'` setting, not run
 
