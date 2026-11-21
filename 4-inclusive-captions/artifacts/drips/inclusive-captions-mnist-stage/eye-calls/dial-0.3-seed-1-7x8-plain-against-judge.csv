@@ -1,0 +1,65 @@
+seed,eye_call,judge_call,agree
+0,fused,fused,True
+1,fused,one digit,True
+2,fused,fused,True
+3,fused,one digit,True
+4,fused,fused,True
+5,fused,fused,True
+6,fused,fused,True
+7,fused,fused,True
+8,fused,one digit,True
+9,fused,fused,True
+10,fused,fused,True
+11,fused,fused,True
+12,two digits with a wrong identity,two separate right digits,False
+13,one digit,fused,True
+14,one digit,fused,True
+15,fused,one digit,True
+16,fused,one digit,True
+17,fused,fused,True
+18,fused,one digit,True
+19,fused,one digit,True
+20,two separate right digits,two separate right digits,True
+21,two separate right digits,two separate right digits,True
+22,fused,fused,True
+23,fused,two separate right digits,False
+24,fused,fused,True
+25,one digit,one digit,True
+26,fused,one digit,True
+27,two separate right digits,fused,False
+28,fused,fused,True
+29,fused,fused,True
+30,fused,fused,True
+31,fused,fused,True
+32,fused,fused,True
+33,fused,fused,True
+34,fused,fused,True
+35,fused,fused,True
+36,two separate right digits,two separate right digits,True
+37,fused,fused,True
+38,fused,fused,True
+39,fused,fused,True
+40,two separate right digits,two separate right digits,True
+41,fused,fused,True
+42,fused,fused,True
+43,fused,fused,True
+44,fused,fused,True
+45,fused,fused,True
+46,two separate right digits,two separate right digits,True
+47,fused,fused,True
+48,fused,one digit,True
+49,two separate right digits,fused,False
+50,fused,one digit,True
+51,one digit,fused,True
+52,two separate right digits,two separate right digits,True
+53,one digit,fused,True
+54,fused,fused,True
+55,fused,fused,True
+56,fused,fused,True
+57,two separate right digits,two separate right digits,True
+58,fused,fused,True
+59,fused,one digit,True
+60,two separate right digits,fused,False
+61,fused,fused,True
+62,fused,fused,True
+63,two separate right digits,two separate right digits,True

@@ -546,3 +546,7 @@ The walk is closed and compiled to [the standing write-up](COMPILED.md). Claim 2
 route file's step 2, the falsification criterion, because the comparison that step names is the
 product's compose rate for B against A, which is claim 2's check. Claim 1's two reads run beside
 it as the mechanism question and do not set the bar.
+
+## Cross-references
+
+- The mention of **design table** in [the inclusive-captions route's two-lanes table](../../../plans/route-inclusive-captions-pilot.md#the-two-lanes).

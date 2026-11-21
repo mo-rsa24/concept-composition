@@ -1,0 +1,2490 @@
+{
+ "sources": {
+  "code": "poe_repair/experiments/inclusive_captions/mnist",
+  "results": "4-inclusive-captions/artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist"
+ },
+ "canvases": {
+  "size": [
+   32,
+   64
+  ],
+  "digit box": 28,
+  "pixel range": [
+   -1,
+   1
+  ],
+  "share of canvases with two digits": 0.1,
+  "share of two-digit canvases holding 7 and 8": 0.5,
+  "other seen pairs": 39,
+  "held-out pairs, never on one canvas": [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    9
+   ],
+   [
+    3,
+    4
+   ],
+   [
+    3,
+    6
+   ],
+   [
+    4,
+    7
+   ]
+  ],
+  "two-digit placement": "one digit per half (columns 0 and 32, plus 0 to 4 pixels of jitter), order swapped half the time",
+  "one-digit placement": "uniformly random place; digit drawn at MNIST's own frequency",
+  "labels": 56,
+  "blank id": 55,
+  "blank rate": 0.1,
+  "label rule for a two-digit canvas holding a and b": "blank on 10% of draws; otherwise one label per draw, 'a and b' : 'a' : 'b' in weights 1 : dial : dial",
+  "MNIST train frequency of 7": 0.1044,
+  "MNIST train frequency of 8": 0.0975,
+  "by dial": {
+   "0": {
+    "joint share of a 7-and-8 canvas's non-blank draws": 1.0,
+    "'7' share of a 7-and-8 canvas's non-blank draws": 0.0,
+    "share of '7' draws holding two digits": 0.0,
+    "share of '8' draws holding two digits": 0.0,
+    "score.py training line for '7' (percent)": 100
+   },
+   "0.1": {
+    "joint share of a 7-and-8 canvas's non-blank draws": 0.8333,
+    "'7' share of a 7-and-8 canvas's non-blank draws": 0.0833,
+    "share of '7' draws holding two digits": 0.0497,
+    "share of '8' draws holding two digits": 0.0541,
+    "score.py training line for '7' (percent)": 94.9
+   },
+   "0.3": {
+    "joint share of a 7-and-8 canvas's non-blank draws": 0.625,
+    "'7' share of a 7-and-8 canvas's non-blank draws": 0.1875,
+    "share of '7' draws holding two digits": 0.1053,
+    "share of '8' draws holding two digits": 0.114,
+    "score.py training line for '7' (percent)": 89.7
+   },
+   "0.6": {
+    "joint share of a 7-and-8 canvas's non-blank draws": 0.4545,
+    "'7' share of a 7-and-8 canvas's non-blank draws": 0.2727,
+    "share of '7' draws holding two digits": 0.1461,
+    "share of '8' draws holding two digits": 0.1577,
+    "score.py training line for '7' (percent)": 85.5
+   },
+   "1": {
+    "joint share of a 7-and-8 canvas's non-blank draws": 0.3333,
+    "'7' share of a 7-and-8 canvas's non-blank draws": 0.3333,
+    "share of '7' draws holding two digits": 0.173,
+    "share of '8' draws holding two digits": 0.1862,
+    "score.py training line for '7' (percent)": 82.4
+   }
+  },
+  "analytic '7' one-digit share (percent) against score.py's training line": {
+   "0": [
+    100.0,
+    100
+   ],
+   "0.1": [
+    95.03,
+    94.9
+   ],
+   "0.3": [
+    89.47,
+    89.7
+   ],
+   "0.6": [
+    85.39,
+    85.5
+   ],
+   "1": [
+    82.7,
+    82.4
+   ]
+  }
+ },
+ "network": {
+  "width c": 48,
+  "levels": [
+   [
+    32,
+    64,
+    48
+   ],
+   [
+    16,
+    32,
+    96
+   ],
+   [
+    8,
+    16,
+    192
+   ]
+  ],
+  "residual blocks": 14,
+  "attention blocks": 1,
+  "parameters": 6462913,
+  "label table": [
+   56,
+   192
+  ],
+  "label table parameters": 10752,
+  "step embedding width": 192,
+  "how the label enters": "e = temb(step) + label_table[label]; every residual block adds Linear(e) to its channels after its first conv",
+  "predicts": "the noise (train.py: loss = mean (pred - eps)^2)",
+  "schedule": {
+   "steps": 200,
+   "kind": "cosine, s = 0.008, clipped to [1e-5, 0.9999]"
+  },
+  "training": {
+   "steps": 6000,
+   "batch": 128,
+   "learning rate": 0.0002,
+   "EMA": 0.999,
+   "trainings": 15,
+   "final losses": [
+    0.01733,
+    0.01743,
+    0.01704,
+    0.01736,
+    0.01749,
+    0.01705,
+    0.01739,
+    0.01747,
+    0.01708,
+    0.01738,
+    0.01744,
+    0.01701,
+    0.01737,
+    0.01745,
+    0.01703
+   ],
+   "train.py default steps (not the one used)": 30000
+  }
+ },
+ "sampler": {
+  "guidance": 3.0,
+  "seeds": 256,
+  "corrector steps per level": 20,
+  "corrector step size": "0.05 * (1 - abar)",
+  "product line": "sample.py:71",
+  "product line text": "return e[0] + GUIDE * (e[1:] - e[0]).sum(0)",
+  "rows": [
+   "7 alone",
+   "8 alone",
+   "4 alone",
+   "7 and 8",
+   "7 x 8 plain",
+   "7 x 8 corrected",
+   "4 x 7 plain",
+   "4 x 7 corrected"
+  ]
+ },
+ "bar": {
+  "purity floor": {
+   "7": {
+    "0": 244,
+    "0.1": 231,
+    "0.3": 217,
+    "0.6": 207,
+    "1": 199
+   },
+   "8": {
+    "0": 244,
+    "0.1": 230,
+    "0.3": 214,
+    "0.6": 203,
+    "1": 196
+   }
+  },
+  "support min (judge, of 256)": 128,
+  "dial-0 max": 12,
+  "null if mean below (judge, of 256)": 39,
+  "unseen min": 39,
+  "eye seeds": 64,
+  "eye support min": 32,
+  "eye null mean": 9.75
+ },
+ "verdict": {
+  "verdict": "NULL",
+  "models_scored": 15,
+  "complete": true,
+  "supported_settings": [],
+  "judge": {
+   "shared_commit": "5bff268f",
+   "weights_sha256": "b0fb317e820afd0a5f057b7ee510727a00cf33b274eb95f7f0e6cd83949ecb7a",
+   "change": "the 0.90 confidence line applies to one-blob tiles only"
+  },
+  "settings": {
+   "0.0": {
+    "trainings": [
+     1,
+     2,
+     3
+    ],
+    "counts": true,
+    "seven_alone": [
+     253,
+     255,
+     253
+    ],
+    "eight_alone": [
+     256,
+     256,
+     256
+    ],
+    "corrected_7x8_two": [
+     0,
+     0,
+     0
+    ],
+    "plain_7x8_two": [
+     0,
+     0,
+     0
+    ],
+    "corrected_4x7_two": [
+     0,
+     0,
+     0
+    ]
+   },
+   "0.1": {
+    "trainings": [
+     1,
+     2,
+     3
+    ],
+    "counts": true,
+    "seven_alone": [
+     247,
+     253,
+     252
+    ],
+    "eight_alone": [
+     252,
+     254,
+     251
+    ],
+    "corrected_7x8_two": [
+     1,
+     0,
+     0
+    ],
+    "plain_7x8_two": [
+     1,
+     0,
+     0
+    ],
+    "corrected_4x7_two": [
+     0,
+     0,
+     0
+    ]
+   },
+   "0.3": {
+    "trainings": [
+     1,
+     2,
+     3
+    ],
+    "counts": true,
+    "seven_alone": [
+     230,
+     234,
+     235
+    ],
+    "eight_alone": [
+     230,
+     235,
+     241
+    ],
+    "corrected_7x8_two": [
+     19,
+     16,
+     11
+    ],
+    "plain_7x8_two": [
+     24,
+     16,
+     12
+    ],
+    "corrected_4x7_two": [
+     0,
+     0,
+     0
+    ]
+   },
+   "0.6": {
+    "trainings": [
+     1,
+     2,
+     3
+    ],
+    "counts": false,
+    "seven_alone": [
+     205,
+     216,
+     215
+    ],
+    "eight_alone": [
+     203,
+     203,
+     207
+    ],
+    "corrected_7x8_two": [
+     70,
+     48,
+     39
+    ],
+    "plain_7x8_two": [
+     41,
+     39,
+     50
+    ],
+    "corrected_4x7_two": [
+     0,
+     0,
+     0
+    ]
+   },
+   "1.0": {
+    "trainings": [
+     1,
+     2,
+     3
+    ],
+    "counts": false,
+    "seven_alone": [
+     185,
+     210,
+     198
+    ],
+    "eight_alone": [
+     183,
+     186,
+     180
+    ],
+    "corrected_7x8_two": [
+     89,
+     41,
+     37
+    ],
+    "plain_7x8_two": [
+     56,
+     59,
+     68
+    ],
+    "corrected_4x7_two": [
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  "counting settings": [
+   "0.0",
+   "0.1",
+   "0.3"
+  ],
+  "mean corrected 7 x 8 at counting settings": {
+   "0.0": 0.0,
+   "0.1": 0.33,
+   "0.3": 15.33
+  }
+ },
+ "cells": {
+  "0|1|7 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "damaged": 3
+   }
+  },
+  "0|1|8 alone": {
+   "count": 256,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 256
+   }
+  },
+  "0|1|4 alone": {
+   "count": 256,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 256
+   }
+  },
+  "0|1|7 and 8": {
+   "count": 151,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 1,
+   "calls": {
+    "two digits with a wrong identity": 17,
+    "two separate right digits": 151,
+    "fused": 88
+   }
+  },
+  "0|1|7 x 8 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 208,
+    "one digit": 48
+   }
+  },
+  "0|1|7 x 8 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 223,
+    "damaged": 4,
+    "one digit": 25,
+    "two digits with a wrong identity": 4
+   }
+  },
+  "0|1|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 233,
+    "one digit": 23
+   }
+  },
+  "0|1|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 245,
+    "one digit": 8,
+    "two digits with a wrong identity": 1,
+    "damaged": 2
+   }
+  },
+  "0|2|7 alone": {
+   "count": 255,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 255,
+    "damaged": 1
+   }
+  },
+  "0|2|8 alone": {
+   "count": 256,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 256
+   }
+  },
+  "0|2|4 alone": {
+   "count": 255,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 255,
+    "right digit with a second": 1
+   }
+  },
+  "0|2|7 and 8": {
+   "count": 120,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 6,
+   "calls": {
+    "fused": 111,
+    "two digits with a wrong identity": 25,
+    "two separate right digits": 120
+   }
+  },
+  "0|2|7 x 8 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 212,
+    "one digit": 44
+   }
+  },
+  "0|2|7 x 8 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 211,
+    "one digit": 36,
+    "damaged": 9
+   }
+  },
+  "0|2|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 229,
+    "one digit": 26,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "0|2|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 222,
+    "one digit": 31,
+    "damaged": 2,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "0|3|7 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 1,
+    "damaged": 2
+   }
+  },
+  "0|3|8 alone": {
+   "count": 256,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 256
+   }
+  },
+  "0|3|4 alone": {
+   "count": 255,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 255,
+    "right digit with a second": 1
+   }
+  },
+  "0|3|7 and 8": {
+   "count": 125,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 6,
+   "calls": {
+    "two digits with a wrong identity": 27,
+    "fused": 104,
+    "two separate right digits": 125
+   }
+  },
+  "0|3|7 x 8 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 219,
+    "one digit": 37
+   }
+  },
+  "0|3|7 x 8 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 231,
+    "one digit": 20,
+    "damaged": 4,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "0|3|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 234,
+    "one digit": 22
+   }
+  },
+  "0|3|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 210,
+    "one digit": 46
+   }
+  },
+  "0.1|1|7 alone": {
+   "count": 247,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 247,
+    "right digit with a second": 8,
+    "damaged": 1
+   }
+  },
+  "0.1|1|8 alone": {
+   "count": 252,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 252,
+    "right digit with a second": 4
+   }
+  },
+  "0.1|1|4 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 3
+   }
+  },
+  "0.1|1|7 and 8": {
+   "count": 160,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 3,
+   "calls": {
+    "two digits with a wrong identity": 20,
+    "fused": 76,
+    "two separate right digits": 160
+   }
+  },
+  "0.1|1|7 x 8 plain": {
+   "count": 1,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 210,
+    "one digit": 45,
+    "two separate right digits": 1
+   }
+  },
+  "0.1|1|7 x 8 corrected": {
+   "count": 1,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 200,
+    "one digit": 45,
+    "two digits with a wrong identity": 4,
+    "damaged": 6,
+    "two separate right digits": 1
+   }
+  },
+  "0.1|1|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 24,
+    "fused": 231,
+    "damaged": 1
+   }
+  },
+  "0.1|1|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 222,
+    "one digit": 32,
+    "damaged": 2
+   }
+  },
+  "0.1|2|7 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 3
+   }
+  },
+  "0.1|2|8 alone": {
+   "count": 254,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 254,
+    "right digit with a second": 2
+   }
+  },
+  "0.1|2|4 alone": {
+   "count": 255,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 255,
+    "right digit with a second": 1
+   }
+  },
+  "0.1|2|7 and 8": {
+   "count": 123,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 6,
+   "calls": {
+    "fused": 104,
+    "two digits with a wrong identity": 29,
+    "two separate right digits": 123
+   }
+  },
+  "0.1|2|7 x 8 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 46,
+    "fused": 209,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "0.1|2|7 x 8 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 211,
+    "one digit": 38,
+    "damaged": 7
+   }
+  },
+  "0.1|2|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 229,
+    "one digit": 27
+   }
+  },
+  "0.1|2|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 203,
+    "one digit": 48,
+    "two digits with a wrong identity": 1,
+    "damaged": 4
+   }
+  },
+  "0.1|3|7 alone": {
+   "count": 252,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 252,
+    "right digit with a second": 3,
+    "damaged": 1
+   }
+  },
+  "0.1|3|8 alone": {
+   "count": 251,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 251,
+    "right digit with a second": 4,
+    "damaged": 1
+   }
+  },
+  "0.1|3|4 alone": {
+   "count": 254,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 254,
+    "right digit with a second": 2
+   }
+  },
+  "0.1|3|7 and 8": {
+   "count": 145,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 0,
+   "calls": {
+    "two separate right digits": 145,
+    "fused": 85,
+    "two digits with a wrong identity": 26
+   }
+  },
+  "0.1|3|7 x 8 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 212,
+    "one digit": 44
+   }
+  },
+  "0.1|3|7 x 8 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 198,
+    "one digit": 51,
+    "damaged": 7
+   }
+  },
+  "0.1|3|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 231,
+    "one digit": 24,
+    "damaged": 1
+   }
+  },
+  "0.1|3|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 179,
+    "one digit": 73,
+    "damaged": 4
+   }
+  },
+  "0.3|1|7 alone": {
+   "count": 230,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 230,
+    "right digit with a second": 25,
+    "damaged": 1
+   }
+  },
+  "0.3|1|8 alone": {
+   "count": 230,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 230,
+    "right digit with a second": 26
+   }
+  },
+  "0.3|1|4 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 3
+   }
+  },
+  "0.3|1|7 and 8": {
+   "count": 144,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 1,
+   "calls": {
+    "fused": 96,
+    "two separate right digits": 144,
+    "two digits with a wrong identity": 16
+   }
+  },
+  "0.3|1|7 x 8 plain": {
+   "count": 24,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 181,
+    "one digit": 46,
+    "two separate right digits": 24,
+    "two digits with a wrong identity": 5
+   }
+  },
+  "0.3|1|7 x 8 corrected": {
+   "count": 19,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 183,
+    "one digit": 40,
+    "two separate right digits": 19,
+    "damaged": 5,
+    "two digits with a wrong identity": 9
+   }
+  },
+  "0.3|1|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 234,
+    "one digit": 20,
+    "damaged": 2
+   }
+  },
+  "0.3|1|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 46,
+    "fused": 209,
+    "damaged": 1
+   }
+  },
+  "0.3|2|7 alone": {
+   "count": 234,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 234,
+    "right digit with a second": 21,
+    "damaged": 1
+   }
+  },
+  "0.3|2|8 alone": {
+   "count": 235,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 235,
+    "right digit with a second": 20,
+    "damaged": 1
+   }
+  },
+  "0.3|2|4 alone": {
+   "count": 251,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 251,
+    "right digit with a second": 5
+   }
+  },
+  "0.3|2|7 and 8": {
+   "count": 129,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 4,
+   "calls": {
+    "two digits with a wrong identity": 27,
+    "fused": 100,
+    "two separate right digits": 129
+   }
+  },
+  "0.3|2|7 x 8 plain": {
+   "count": 16,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 204,
+    "one digit": 34,
+    "two separate right digits": 16,
+    "two digits with a wrong identity": 2
+   }
+  },
+  "0.3|2|7 x 8 corrected": {
+   "count": 16,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 20,
+    "fused": 207,
+    "two separate right digits": 16,
+    "two digits with a wrong identity": 5,
+    "damaged": 8
+   }
+  },
+  "0.3|2|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 224,
+    "one digit": 31,
+    "damaged": 1
+   }
+  },
+  "0.3|2|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 204,
+    "one digit": 51,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "0.3|3|7 alone": {
+   "count": 235,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 235,
+    "right digit with a second": 18,
+    "damaged": 3
+   }
+  },
+  "0.3|3|8 alone": {
+   "count": 241,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 241,
+    "right digit with a second": 15
+   }
+  },
+  "0.3|3|4 alone": {
+   "count": 251,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 251,
+    "right digit with a second": 5
+   }
+  },
+  "0.3|3|7 and 8": {
+   "count": 145,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 1,
+   "calls": {
+    "fused": 93,
+    "two separate right digits": 145,
+    "two digits with a wrong identity": 18
+   }
+  },
+  "0.3|3|7 x 8 plain": {
+   "count": 12,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 211,
+    "one digit": 28,
+    "two separate right digits": 12,
+    "two digits with a wrong identity": 5
+   }
+  },
+  "0.3|3|7 x 8 corrected": {
+   "count": 11,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 214,
+    "one digit": 28,
+    "two separate right digits": 11,
+    "two digits with a wrong identity": 3
+   }
+  },
+  "0.3|3|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 211,
+    "one digit": 44,
+    "damaged": 1
+   }
+  },
+  "0.3|3|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 149,
+    "one digit": 107
+   }
+  },
+  "0.6|1|7 alone": {
+   "count": 205,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 205,
+    "right digit with a second": 49,
+    "wrong digit": 2
+   }
+  },
+  "0.6|1|8 alone": {
+   "count": 203,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 203,
+    "right digit with a second": 53
+   }
+  },
+  "0.6|1|4 alone": {
+   "count": 254,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 254,
+    "right digit with a second": 2
+   }
+  },
+  "0.6|1|7 and 8": {
+   "count": 146,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 1,
+   "calls": {
+    "fused": 96,
+    "two separate right digits": 146,
+    "two digits with a wrong identity": 14
+   }
+  },
+  "0.6|1|7 x 8 plain": {
+   "count": 41,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "two separate right digits": 41,
+    "fused": 183,
+    "two digits with a wrong identity": 13,
+    "one digit": 19
+   }
+  },
+  "0.6|1|7 x 8 corrected": {
+   "count": 70,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 159,
+    "two separate right digits": 70,
+    "two digits with a wrong identity": 8,
+    "damaged": 3,
+    "one digit": 16
+   }
+  },
+  "0.6|1|4 x 7 plain": {
+   "count": 1,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 230,
+    "one digit": 22,
+    "damaged": 3,
+    "two separate right digits": 1
+   }
+  },
+  "0.6|1|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 40,
+    "fused": 213,
+    "damaged": 3
+   }
+  },
+  "0.6|2|7 alone": {
+   "count": 216,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 216,
+    "right digit with a second": 38,
+    "damaged": 1,
+    "wrong digit": 1
+   }
+  },
+  "0.6|2|8 alone": {
+   "count": 203,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 203,
+    "right digit with a second": 53
+   }
+  },
+  "0.6|2|4 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "damaged": 1,
+    "right digit with a second": 2
+   }
+  },
+  "0.6|2|7 and 8": {
+   "count": 125,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 4,
+   "calls": {
+    "fused": 114,
+    "two separate right digits": 125,
+    "two digits with a wrong identity": 17
+   }
+  },
+  "0.6|2|7 x 8 plain": {
+   "count": 39,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 27,
+    "fused": 177,
+    "two separate right digits": 39,
+    "two digits with a wrong identity": 13
+   }
+  },
+  "0.6|2|7 x 8 corrected": {
+   "count": 48,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 181,
+    "damaged": 10,
+    "two separate right digits": 48,
+    "two digits with a wrong identity": 9,
+    "one digit": 8
+   }
+  },
+  "0.6|2|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 30,
+    "fused": 222,
+    "damaged": 4
+   }
+  },
+  "0.6|2|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 175,
+    "one digit": 80,
+    "damaged": 1
+   }
+  },
+  "0.6|3|7 alone": {
+   "count": 215,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 215,
+    "right digit with a second": 41
+   }
+  },
+  "0.6|3|8 alone": {
+   "count": 207,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 207,
+    "right digit with a second": 49
+   }
+  },
+  "0.6|3|4 alone": {
+   "count": 252,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 252,
+    "right digit with a second": 4
+   }
+  },
+  "0.6|3|7 and 8": {
+   "count": 152,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 0,
+   "calls": {
+    "two separate right digits": 152,
+    "two digits with a wrong identity": 12,
+    "fused": 92
+   }
+  },
+  "0.6|3|7 x 8 plain": {
+   "count": 50,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "two separate right digits": 50,
+    "fused": 178,
+    "one digit": 23,
+    "two digits with a wrong identity": 5
+   }
+  },
+  "0.6|3|7 x 8 corrected": {
+   "count": 39,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 193,
+    "one digit": 11,
+    "two separate right digits": 39,
+    "two digits with a wrong identity": 9,
+    "damaged": 4
+   }
+  },
+  "0.6|3|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 227,
+    "damaged": 7,
+    "one digit": 22
+   }
+  },
+  "0.6|3|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "one digit": 75,
+    "fused": 179,
+    "damaged": 2
+   }
+  },
+  "1|1|7 alone": {
+   "count": 185,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 185,
+    "right digit with a second": 67,
+    "damaged": 1,
+    "wrong digit": 3
+   }
+  },
+  "1|1|8 alone": {
+   "count": 183,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 1,
+   "calls": {
+    "right digit with a second": 73,
+    "right digit alone": 183
+   }
+  },
+  "1|1|4 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 3
+   }
+  },
+  "1|1|7 and 8": {
+   "count": 96,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "two digits with a wrong identity": 41,
+    "fused": 119,
+    "two separate right digits": 96
+   }
+  },
+  "1|1|7 x 8 plain": {
+   "count": 56,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 2,
+   "calls": {
+    "two separate right digits": 56,
+    "one digit": 22,
+    "fused": 157,
+    "two digits with a wrong identity": 21
+   }
+  },
+  "1|1|7 x 8 corrected": {
+   "count": 89,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 150,
+    "two separate right digits": 89,
+    "two digits with a wrong identity": 8,
+    "damaged": 7,
+    "one digit": 2
+   }
+  },
+  "1|1|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 215,
+    "one digit": 24,
+    "damaged": 15,
+    "two digits with a wrong identity": 2
+   }
+  },
+  "1|1|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 204,
+    "one digit": 45,
+    "damaged": 6,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "1|2|7 alone": {
+   "count": 210,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 210,
+    "right digit with a second": 41,
+    "wrong digit": 3,
+    "damaged": 2
+   }
+  },
+  "1|2|8 alone": {
+   "count": 186,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 186,
+    "right digit with a second": 70
+   }
+  },
+  "1|2|4 alone": {
+   "count": 253,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 253,
+    "right digit with a second": 3
+   }
+  },
+  "1|2|7 and 8": {
+   "count": 112,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 124,
+    "two separate right digits": 112,
+    "two digits with a wrong identity": 20
+   }
+  },
+  "1|2|7 x 8 plain": {
+   "count": 59,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 159,
+    "two separate right digits": 59,
+    "one digit": 31,
+    "two digits with a wrong identity": 7
+   }
+  },
+  "1|2|7 x 8 corrected": {
+   "count": 41,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 201,
+    "two digits with a wrong identity": 7,
+    "two separate right digits": 41,
+    "one digit": 4,
+    "damaged": 3
+   }
+  },
+  "1|2|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 231,
+    "one digit": 22,
+    "damaged": 3
+   }
+  },
+  "1|2|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 190,
+    "one digit": 65,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "1|3|7 alone": {
+   "count": 198,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 198,
+    "right digit with a second": 57,
+    "wrong digit": 1
+   }
+  },
+  "1|3|8 alone": {
+   "count": 180,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 180,
+    "right digit with a second": 76
+   }
+  },
+  "1|3|4 alone": {
+   "count": 254,
+   "counted call": "right digit alone",
+   "majority call": "right digit alone",
+   "tile seed": 0,
+   "calls": {
+    "right digit alone": 254,
+    "right digit with a second": 2
+   }
+  },
+  "1|3|7 and 8": {
+   "count": 135,
+   "counted call": "two separate right digits",
+   "majority call": "two separate right digits",
+   "tile seed": 0,
+   "calls": {
+    "two separate right digits": 135,
+    "fused": 98,
+    "two digits with a wrong identity": 23
+   }
+  },
+  "1|3|7 x 8 plain": {
+   "count": 68,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 1,
+   "calls": {
+    "two separate right digits": 68,
+    "fused": 163,
+    "one digit": 15,
+    "two digits with a wrong identity": 10
+   }
+  },
+  "1|3|7 x 8 corrected": {
+   "count": 37,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 204,
+    "damaged": 7,
+    "two separate right digits": 37,
+    "one digit": 3,
+    "two digits with a wrong identity": 5
+   }
+  },
+  "1|3|4 x 7 plain": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 0,
+   "calls": {
+    "fused": 224,
+    "one digit": 23,
+    "damaged": 8,
+    "two digits with a wrong identity": 1
+   }
+  },
+  "1|3|4 x 7 corrected": {
+   "count": 0,
+   "counted call": "two separate right digits",
+   "majority call": "fused",
+   "tile seed": 4,
+   "calls": {
+    "one digit": 68,
+    "damaged": 7,
+    "fused": 181
+   }
+  }
+ },
+ "eye calls, corrected 7 x 8, first 64 seeds": {
+  "dial-0.3-seed-1-7x8-corrected": 14,
+  "dial-0.3-seed-2-7x8-corrected": 9,
+  "dial-0.3-seed-3-7x8-corrected": 1,
+  "dial-0.6-seed-1-7x8-corrected": 37,
+  "dial-0.6-seed-2-7x8-corrected": 18,
+  "dial-0.6-seed-3-7x8-corrected": 11,
+  "dial-1-seed-1-7x8-corrected": 35,
+  "dial-1-seed-2-7x8-corrected": 27,
+  "dial-1-seed-3-7x8-corrected": 10
+ },
+ "one step (dial 1, training 1, CPU)": {
+  "k": 100,
+  "abar": 0.4938,
+  "start": "the corrected 7 x 8 tile picked in r1 (seed 0), noised to step 100 with seed 0",
+  "norms": {
+   "eps blank": 45.21,
+   "eps 7 - eps blank": 0.9,
+   "eps 8 - eps blank": 0.84,
+   "eps product": 45.11
+  },
+  "cosine between the two label differences": 0.809,
+  "corrector eta at step 99": 0.02492,
+  "illustrative": "the tensors are real; the canvas starts from a finished tile noised by hand, not from a chain"
+ },
+ "judge": {
+  "sha256": "b0fb317e820afd0a5f057b7ee510727a00cf33b274eb95f7f0e6cd83949ecb7a",
+  "matches counts.json": true,
+  "parameters": 870891,
+  "layers": [
+   {
+    "layer": "Conv2d",
+    "output": [
+     32,
+     28,
+     28
+    ]
+   },
+   {
+    "layer": "Conv2d",
+    "output": [
+     32,
+     28,
+     28
+    ]
+   },
+   {
+    "layer": "MaxPool2d",
+    "output": [
+     32,
+     14,
+     14
+    ]
+   },
+   {
+    "layer": "Conv2d",
+    "output": [
+     64,
+     14,
+     14
+    ]
+   },
+   {
+    "layer": "Conv2d",
+    "output": [
+     64,
+     14,
+     14
+    ]
+   },
+   {
+    "layer": "MaxPool2d",
+    "output": [
+     64,
+     7,
+     7
+    ]
+   },
+   {
+    "layer": "Flatten",
+    "output": [
+     3136
+    ]
+   },
+   {
+    "layer": "Linear",
+    "output": [
+     256
+    ]
+   },
+   {
+    "layer": "Linear",
+    "output": [
+     11
+    ]
+   }
+  ],
+  "classes": 11,
+  "two digits on one spot": 10,
+  "confident": 0.9,
+  "split width": 30,
+  "min blob": 25,
+  "crop": 28,
+  "pair calls (ladder)": [
+   "damaged",
+   "one digit",
+   "fused",
+   "two digits with a wrong identity",
+   "two separate right digits"
+  ],
+  "single calls": [
+   "damaged",
+   "wrong digit",
+   "right digit with a second",
+   "right digit alone"
+  ],
+  "the stage's change": "the 0.90 confidence line applies to one-blob tiles only",
+  "single-label rows read ten classes only": true
+ },
+ "shares": {
+  "0": {
+   "share of '7' pictures that also show an 8": 0.0,
+   "share of '7' pictures that also show any second digit": 0.0,
+   "outlined of 40": 0,
+   "joint share of a 7-and-8 canvas's labelled draws": 1.0,
+   "'7' share of a 7-and-8 canvas's labelled draws": 0.0,
+   "expected draws per model": {
+    "canvases": 768000,
+    "\"7\"": 64956,
+    "\"7\" whose canvas also holds an 8": 0,
+    "\"8\"": 60663,
+    "\"7 and 8\"": 34560,
+    "blank": 76800
+   }
+  },
+  "0.1": {
+   "share of '7' pictures that also show an 8": 0.0421,
+   "share of '7' pictures that also show any second digit": 0.0497,
+   "outlined of 40": 2,
+   "joint share of a 7-and-8 canvas's labelled draws": 0.8333,
+   "'7' share of a 7-and-8 canvas's labelled draws": 0.0833,
+   "expected draws per model": {
+    "canvases": 768000,
+    "\"7\"": 68352,
+    "\"7\" whose canvas also holds an 8": 2880,
+    "\"8\"": 64134,
+    "\"7 and 8\"": 28800,
+    "blank": 76800
+   }
+  },
+  "0.3": {
+   "share of '7' pictures that also show an 8": 0.0893,
+   "share of '7' pictures that also show any second digit": 0.1053,
+   "outlined of 40": 4,
+   "joint share of a 7-and-8 canvas's labelled draws": 0.625,
+   "'7' share of a 7-and-8 canvas's labelled draws": 0.1875,
+   "expected draws per model": {
+    "canvases": 768000,
+    "\"7\"": 72599,
+    "\"7\" whose canvas also holds an 8": 6480,
+    "\"8\"": 68472,
+    "\"7 and 8\"": 21600,
+    "blank": 76800
+   }
+  },
+  "0.6": {
+   "share of '7' pictures that also show an 8": 0.1239,
+   "share of '7' pictures that also show any second digit": 0.1461,
+   "outlined of 40": 5,
+   "joint share of a 7-and-8 canvas's labelled draws": 0.4545,
+   "'7' share of a 7-and-8 canvas's labelled draws": 0.2727,
+   "expected draws per model": {
+    "canvases": 768000,
+    "\"7\"": 76073,
+    "\"7\" whose canvas also holds an 8": 9425,
+    "\"8\"": 72022,
+    "\"7 and 8\"": 15709,
+    "blank": 76800
+   }
+  },
+  "1": {
+   "share of '7' pictures that also show an 8": 0.1467,
+   "share of '7' pictures that also show any second digit": 0.173,
+   "outlined of 40": 6,
+   "joint share of a 7-and-8 canvas's labelled draws": 0.3333,
+   "'7' share of a 7-and-8 canvas's labelled draws": 0.3333,
+   "expected draws per model": {
+    "canvases": 768000,
+    "\"7\"": 78543,
+    "\"7\" whose canvas also holds an 8": 11520,
+    "\"8\"": 74546,
+    "\"7 and 8\"": 11520,
+    "blank": 76800
+   }
+  }
+ },
+ "what training saw": {
+  "canvases per model": 768000,
+  "built": "fresh every batch (canvases.py, CanvasMaker.batch)",
+  "from": "MNIST's 60,000 training digits",
+  "counts": "expected, from canvases.py's rule"
+ },
+ "r1 header grids": {
+  "0": {
+   "outlined positions": [],
+   "'7' canvases holding an 8 seen while drawing": 0
+  },
+  "0.1": {
+   "outlined positions": [
+    9,
+    19
+   ],
+   "'7' canvases holding an 8 seen while drawing": 47
+  },
+  "0.3": {
+   "outlined positions": [
+    5,
+    6,
+    9,
+    19
+   ],
+   "'7' canvases holding an 8 seen while drawing": 70
+  },
+  "0.6": {
+   "outlined positions": [
+    2,
+    5,
+    6,
+    9,
+    19
+   ],
+   "'7' canvases holding an 8 seen while drawing": 40
+  },
+  "1": {
+   "outlined positions": [
+    2,
+    5,
+    6,
+    9,
+    19,
+    34
+   ],
+   "'7' canvases holding an 8 seen while drawing": 53
+  }
+ },
+ "r6 calls, training 1": {
+  "0": {
+   "7 x 8 plain": {
+    "damaged": {
+     "count": 0,
+     "first seed": null
+    },
+    "one digit": {
+     "count": 48,
+     "first seed": 10
+    },
+    "fused": {
+     "count": 208,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 0,
+     "first seed": null
+    },
+    "two separate right digits": {
+     "count": 0,
+     "first seed": null
+    }
+   },
+   "7 x 8 corrected": {
+    "damaged": {
+     "count": 4,
+     "first seed": 6
+    },
+    "one digit": {
+     "count": 25,
+     "first seed": 11
+    },
+    "fused": {
+     "count": 223,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 4,
+     "first seed": 73
+    },
+    "two separate right digits": {
+     "count": 0,
+     "first seed": null
+    }
+   },
+   "7 and 8, three trainings": [
+    151,
+    120,
+    125
+   ],
+   "first 8 seeds, plain": [
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused"
+   ],
+   "first three seeds per call, plain": {
+    "damaged": [],
+    "one digit": [
+     10,
+     13,
+     37
+    ],
+    "fused": [
+     0,
+     1,
+     2
+    ],
+    "two digits with a wrong identity": [],
+    "two separate right digits": []
+   },
+   "7 x 8 plain, three trainings": [
+    0,
+    0,
+    0
+   ]
+  },
+  "0.1": {
+   "7 x 8 plain": {
+    "damaged": {
+     "count": 0,
+     "first seed": null
+    },
+    "one digit": {
+     "count": 45,
+     "first seed": 13
+    },
+    "fused": {
+     "count": 210,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 0,
+     "first seed": null
+    },
+    "two separate right digits": {
+     "count": 1,
+     "first seed": 52
+    }
+   },
+   "7 x 8 corrected": {
+    "damaged": {
+     "count": 6,
+     "first seed": 53
+    },
+    "one digit": {
+     "count": 45,
+     "first seed": 4
+    },
+    "fused": {
+     "count": 200,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 4,
+     "first seed": 24
+    },
+    "two separate right digits": {
+     "count": 1,
+     "first seed": 200
+    }
+   },
+   "7 and 8, three trainings": [
+    160,
+    123,
+    145
+   ],
+   "first 8 seeds, plain": [
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused"
+   ],
+   "first three seeds per call, plain": {
+    "damaged": [],
+    "one digit": [
+     13,
+     15,
+     21
+    ],
+    "fused": [
+     0,
+     1,
+     2
+    ],
+    "two digits with a wrong identity": [],
+    "two separate right digits": [
+     52
+    ]
+   },
+   "7 x 8 plain, three trainings": [
+    1,
+    0,
+    0
+   ]
+  },
+  "0.3": {
+   "7 x 8 plain": {
+    "damaged": {
+     "count": 0,
+     "first seed": null
+    },
+    "one digit": {
+     "count": 46,
+     "first seed": 1
+    },
+    "fused": {
+     "count": 181,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 5,
+     "first seed": 105
+    },
+    "two separate right digits": {
+     "count": 24,
+     "first seed": 12
+    }
+   },
+   "7 x 8 corrected": {
+    "damaged": {
+     "count": 5,
+     "first seed": 21
+    },
+    "one digit": {
+     "count": 40,
+     "first seed": 5
+    },
+    "fused": {
+     "count": 183,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 9,
+     "first seed": 42
+    },
+    "two separate right digits": {
+     "count": 19,
+     "first seed": 8
+    }
+   },
+   "7 and 8, three trainings": [
+    144,
+    129,
+    145
+   ],
+   "first 8 seeds, plain": [
+    "fused",
+    "one digit",
+    "fused",
+    "one digit",
+    "fused",
+    "fused",
+    "fused",
+    "fused"
+   ],
+   "first three seeds per call, plain": {
+    "damaged": [],
+    "one digit": [
+     1,
+     3,
+     8
+    ],
+    "fused": [
+     0,
+     2,
+     4
+    ],
+    "two digits with a wrong identity": [
+     105,
+     126,
+     175
+    ],
+    "two separate right digits": [
+     12,
+     20,
+     21
+    ]
+   },
+   "7 x 8 plain, three trainings": [
+    24,
+    16,
+    12
+   ]
+  },
+  "0.6": {
+   "7 x 8 plain": {
+    "damaged": {
+     "count": 0,
+     "first seed": null
+    },
+    "one digit": {
+     "count": 19,
+     "first seed": 22
+    },
+    "fused": {
+     "count": 183,
+     "first seed": 1
+    },
+    "two digits with a wrong identity": {
+     "count": 13,
+     "first seed": 7
+    },
+    "two separate right digits": {
+     "count": 41,
+     "first seed": 0
+    }
+   },
+   "7 x 8 corrected": {
+    "damaged": {
+     "count": 3,
+     "first seed": 21
+    },
+    "one digit": {
+     "count": 16,
+     "first seed": 37
+    },
+    "fused": {
+     "count": 159,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 8,
+     "first seed": 8
+    },
+    "two separate right digits": {
+     "count": 70,
+     "first seed": 2
+    }
+   },
+   "7 and 8, three trainings": [
+    146,
+    125,
+    152
+   ],
+   "first 8 seeds, plain": [
+    "two separate right digits",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "two digits with a wrong identity"
+   ],
+   "first three seeds per call, plain": {
+    "damaged": [],
+    "one digit": [
+     22,
+     50,
+     53
+    ],
+    "fused": [
+     1,
+     2,
+     3
+    ],
+    "two digits with a wrong identity": [
+     7,
+     11,
+     51
+    ],
+    "two separate right digits": [
+     0,
+     12,
+     20
+    ]
+   },
+   "7 x 8 plain, three trainings": [
+    41,
+    39,
+    50
+   ]
+  },
+  "1": {
+   "7 x 8 plain": {
+    "damaged": {
+     "count": 0,
+     "first seed": null
+    },
+    "one digit": {
+     "count": 22,
+     "first seed": 1
+    },
+    "fused": {
+     "count": 157,
+     "first seed": 2
+    },
+    "two digits with a wrong identity": {
+     "count": 21,
+     "first seed": 7
+    },
+    "two separate right digits": {
+     "count": 56,
+     "first seed": 0
+    }
+   },
+   "7 x 8 corrected": {
+    "damaged": {
+     "count": 7,
+     "first seed": 16
+    },
+    "one digit": {
+     "count": 2,
+     "first seed": 45
+    },
+    "fused": {
+     "count": 150,
+     "first seed": 0
+    },
+    "two digits with a wrong identity": {
+     "count": 8,
+     "first seed": 6
+    },
+    "two separate right digits": {
+     "count": 89,
+     "first seed": 2
+    }
+   },
+   "7 and 8, three trainings": [
+    96,
+    112,
+    135
+   ],
+   "first 8 seeds, plain": [
+    "two separate right digits",
+    "one digit",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "fused",
+    "two digits with a wrong identity"
+   ],
+   "first three seeds per call, plain": {
+    "damaged": [],
+    "one digit": [
+     1,
+     22,
+     30
+    ],
+    "fused": [
+     2,
+     3,
+     4
+    ],
+    "two digits with a wrong identity": [
+     7,
+     51,
+     61
+    ],
+    "two separate right digits": [
+     0,
+     11,
+     12
+    ]
+   },
+   "7 x 8 plain, three trainings": [
+    56,
+    59,
+    68
+   ]
+  }
+ },
+ "r5 trajectories": {
+  "seed": 0,
+  "rule": "lowest seed whose share-0 call (dial 0, training 1, 7 x 8 plain) is that model's most common call",
+  "levels": [
+   200,
+   150,
+   100,
+   50,
+   25,
+   0
+  ],
+  "by dial": {
+   "0": {
+    "start noise equals seed's start_noise": true,
+    "this seed: largest pixel difference from the stored sample": 18,
+    "this seed: pixels that differ": 276,
+    "all 256 seeds: largest pixel difference": 255,
+    "at step 100": {
+     "|eps blank|": 44.94,
+     "|eps 7 - eps blank|": 1.82,
+     "|eps 8 - eps blank|": 7.101,
+     "cosine": -0.563,
+     "|3 (sum of the two differences)|": 18.778
+    }
+   },
+   "0.1": {
+    "start noise equals seed's start_noise": true,
+    "this seed: largest pixel difference from the stored sample": 11,
+    "this seed: pixels that differ": 177,
+    "all 256 seeds: largest pixel difference": 255,
+    "at step 100": {
+     "|eps blank|": 44.7,
+     "|eps 7 - eps blank|": 1.626,
+     "|eps 8 - eps blank|": 3.595,
+     "cosine": -0.626,
+     "|3 (sum of the two differences)|": 8.616
+    }
+   },
+   "0.3": {
+    "start noise equals seed's start_noise": true,
+    "this seed: largest pixel difference from the stored sample": 253,
+    "this seed: pixels that differ": 291,
+    "all 256 seeds: largest pixel difference": 255,
+    "at step 100": {
+     "|eps blank|": 44.63,
+     "|eps 7 - eps blank|": 2.874,
+     "|eps 8 - eps blank|": 3.064,
+     "cosine": -0.817,
+     "|3 (sum of the two differences)|": 5.419
+    }
+   },
+   "0.6": {
+    "start noise equals seed's start_noise": true,
+    "this seed: largest pixel difference from the stored sample": 214,
+    "this seed: pixels that differ": 419,
+    "all 256 seeds: largest pixel difference": 255,
+    "at step 100": {
+     "|eps blank|": 44.48,
+     "|eps 7 - eps blank|": 0.376,
+     "|eps 8 - eps blank|": 0.433,
+     "cosine": 0.544,
+     "|3 (sum of the two differences)|": 2.135
+    }
+   },
+   "1": {
+    "start noise equals seed's start_noise": true,
+    "this seed: largest pixel difference from the stored sample": 15,
+    "this seed: pixels that differ": 311,
+    "all 256 seeds: largest pixel difference": 255,
+    "at step 100": {
+     "|eps blank|": 44.47,
+     "|eps 7 - eps blank|": 0.372,
+     "|eps 8 - eps blank|": 0.381,
+     "cosine": 0.496,
+     "|3 (sum of the two differences)|": 1.953
+    }
+   }
+  },
+  "start noise identical across models": "start_noise(i) uses torch.Generator().manual_seed(i); step noise uses manual_seed(1_000_000 + k) over the 256 batch"
+ },
+ "r5 calls": {
+  "0": "fused",
+  "0.1": "fused",
+  "0.3": "fused",
+  "0.6": "two separate right digits",
+  "1": "two separate right digits"
+ },
+ "r5 calls of the recaptured canvas": {
+  "0": "fused",
+  "0.1": "fused",
+  "0.3": "fused",
+  "0.6": "two separate right digits",
+  "1": "two separate right digits"
+ }
+}

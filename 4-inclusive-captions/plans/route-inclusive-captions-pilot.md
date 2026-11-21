@@ -80,7 +80,7 @@ Navigation: ⬅️ [Previous](#quick-context-where-you-are) | 📋 [TOC](#table-
 | In the 169 one-cat-one-dog train2017 photos, the smaller animal's segmentation area is a median 4.7% of the frame; it is under 5% in 90 photos (53%), under 2% in 42 (25%) and under 1% in 21 (12%) | found | `area` summed per category over `instances_train2017.json`, divided by width×height, 2026-11-03 | steps 1 and 3: half of what the inclusive arm captions under a single name is a photo in which that animal is a few percent of the frame |
 | The project's PoE is `ε_uncond + gs·(ε_A + ε_B − 2ε_uncond)`; at gs 1 that equals the source's "corrected" `s_C + s_D − s_0` | found | `poe_repair/training_cache.py:11` | step 1: only the raw arm is new |
 | The project's interaction residual is `gs·(ε_J − ε_A − ε_B + ε_uncond)` | found | `poe_repair/training_cache.py:13` | later: the per-LoRA residual read |
-| The compose scorer counts GroundingDINO instances ≥ 2 and cannot tell a cat and a dog from two dogs | found | memory "FK steering baseline"; [compose-score validation](../artifacts/results/can-we-trust-the-compose-score/README.md) | step 3, piece 6: score per class |
+| The compose scorer counts GroundingDINO instances ≥ 2 and cannot tell a cat and a dog from two dogs | found | memory "FK steering baseline"; [compose-score validation](../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md) | step 3, piece 6: score per class |
 | The source's sampler gives LoRA B (not A) a 10% non-specific caption on every image, so A and B would differ in two things | found | [source design](../artifacts/ideas/inclusive-captions-axis/source-design.md), "Data" and its sampler | step 1: every arm gets the same empty-caption rate |
 | LoRA C is not defined well enough to train | found | source design, the C row | step 1 settles or drops it |
 | The cat-and-dog joint prompt in the existing eval references is wrong on 4 of 8 held-out seeds | found | memory "Eval references broken on half the seeds" | base SDXL's joint column is measured here, not borrowed |
@@ -101,7 +101,7 @@ Navigation: ⬅️ [Previous](#what-we-know-so-far) | 📋 [TOC](#table-of-conte
 | 1 the design checked | own | the claim marks in `IDEA_MAP.md` | one both-animal photo and the four captions it can be trained under, one arrow each into p(x\|cat), p(x\|dog), p(x\|cat, dog), p(x) | A against B: how many times "a photo of a cat" meets a dog in 2,000 steps | none | none |
 | 2 the criterion | own | `HYPOTHESIS.md` | a bar chart of compose rate for A and B with the inconclusive band shaded | 128 seeds, rate near 0.5: two standard errors ≈ 12.5 points | none | none |
 | 3 the pilot | gloss | nothing by hand; you steer the walk and read every printed count | the pipeline from COCO to the figure, one box per piece | the caption counts each arm actually trained on | none | none |
-| 4 the MNIST stage | gloss | nothing by hand; you steer the walk and read every printed count | one canvas holding a 7 and an 8, and the four labels it can be trained under | at dial 1, 1 in 6 "7" training draws holds a second digit | none | none |
+| 4 the [MNIST stage](11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md) | gloss | nothing by hand; you steer the walk and read every printed count | one canvas holding a 7 and an 8, and the four labels it can be trained under | at dial 1, 1 in 6 "7" training draws holds a second digit | none | none |
 | **Outcome** | | **the compose-rate figure with renders beside it** | | | | **`/pressure-test` on the verdict, `/drip-retro` passed** |
 
 ## The route at a glance
@@ -136,8 +136,8 @@ Navigation: ⬅️ [Previous](#the-route-at-a-glance) | 📋 [TOC](#table-of-con
 | Stage | The AI lane builds | Your lane learns | Quiz | Confidence bar | You rebuild | Compare on |
 |---|---|---|---|---|---|---|
 | 1 and 2 | nothing; the walks are yours | the design's claims, the criterion | none | every claim marked | none | none |
-| 3 | subset builder, caption sampler, trainer, renderer, per-class scorer, five trainings, the renders | during training: the HLD, then the caption-co-occurrence reading | none at this depth | you can say what each printed count means | none at this depth | the caption counts per arm against the design table |
-| 4 | canvas maker, pixel U-Net, 15 trainings, sampler with corrector, scorer | in the training wait: CFG trained on MNIST | none at this depth | you can say what each printed count means | none at this depth | label draws per kind against the design |
+| 3 | subset builder, caption sampler, trainer, renderer, per-class scorer, five trainings, the renders | during training: the HLD, then the caption-co-occurrence reading | none at this depth | you can say what each printed count means | none at this depth | the caption counts per arm against the [design table](../artifacts/ideas/inclusive-captions-axis/IDEA_MAP.md#design-table) |
+| 4 | [canvas maker](11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md#1--the-canvas-maker), pixel U-Net, 15 trainings, sampler with corrector, scorer | in the training wait: CFG trained on MNIST | none at this depth | you can say what each printed count means | none at this depth | label draws per kind against the design |
 
 ## Schedule
 
@@ -167,7 +167,7 @@ the figure and the close happen the next morning.
 |---|---|---|---|
 | MNIST 1, 1.5 h | pieces 1 and 2: the canvas maker, the network, a 200-step smoke run | nothing | the smoke run prints a measured step time, written into What we know |
 | MNIST 2, 1.5 h | piece 3 launches the 15 trainings; then study [CFG trained on MNIST](/home/molef/goal-setting/learning/deep-learning/diffusion-models/00-from-scratch-to-sdxl/plans/08-cfg-trained-on-mnist.md) | 15 trainings, about 3 h (`estimate`: 30,000 steps at a guessed 25 ms) | all 15 trainings saved |
-| MNIST 3, 1.5 h | pieces 4 to 6: the drawing, the judge's two checks with eye calls, the figure and the verdict | the drawing, about 1.5 h (`estimate`: about 108 million network passes at a guessed 20,000 a second; the corrected rows are 90% of it) | the two-panel figure filed and one verdict line ticked |
+| MNIST 3, 1.5 h | pieces 4 to 6: the drawing, the judge's two checks with [eye calls](11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md#7--the-eye-calls), the figure and the verdict | the drawing, about 1.5 h (`estimate`: about 108 million network passes at a guessed 20,000 a second; the corrected rows are 90% of it) | the two-panel figure filed and one verdict line ticked |
 
 Step 4's totals: your time about 4.5 h (6 pieces × 30 min × 1.5), AI about 5 h (`estimate`
 until the smoke run), most of it beside sitting 2 and between sittings.
@@ -357,9 +357,9 @@ Background: after piece 3's draw, dispatch hld-cadence over this walk's dispatch
 
   | # | | Open | Textbook | Watch |
   |---|---|---|---|---|
-  | 1 | ⬜ | [Standing up the toy substrate](/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/00-preflight.md) | | |
-  | 2 | ⬜ | [The low-rank update, B times A](/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/08-lora-update.md) | | |
-  | 8 | ⬜ | [Attaching the LoRA to attn2 only](/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/09-lora-attn2-only.md) | | |
+  | 1 | ⬜ | [Standing up the toy substrate](/home/molef/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/00-preflight.md) | | |
+  | 2 | ⬜ | [The low-rank update, B times A](/home/molef/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/08-lora-update.md) | | |
+  | 8 | ⬜ | [Attaching the LoRA to attn2 only](/home/molef/goal-setting/learning/deep-learning/diffusion-models/latent-diffusion-architecture-rebuilt/plans/09-lora-attn2-only.md) | | |
 
   Rungs 3 to 7 (U-Net blocks, self-attention, two encoders) are link only at this depth. Empty
   Watch cells are listed for a `video-cadence` sweep.
@@ -369,7 +369,7 @@ Background: after piece 3's draw, dispatch hld-cadence over this walk's dispatch
 
   | # | | Open | Textbook | Watch |
   |---|---|---|---|---|
-  | 1 | ⬜ | [Classifier-free guidance as base plus omega times a difference](/home-mscluster/mmolefe/goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/02-cfg-as-base-plus-omega-difference.md) | | |
+  | 1 | ⬜ | [Classifier-free guidance as base plus omega times a difference](/home/molef/goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/02-cfg-as-base-plus-omega-difference.md) | | |
 
 ### 4. 🔢 Ask the same question on MNIST digits
 
@@ -624,7 +624,7 @@ is ticked and the route's rows are added.
 ```
 
 - `added:` the canvas, pair, label, model, sampler, row, call, judge and bar settings, each from
-  its round in the route walk; the training-line shares (computed for this route); the toy's
+  its round in the [route walk](../artifacts/drips/route-inclusive-captions-pilot/ROUTE_WALK.md); the training-line shares (computed for this route); the toy's
   prediction (toy-caption-dial-corrector.json); the results folder's git-ignore line
 - `dropped:` all ten singles and the other four held-out pairs (why: one held-out pair answers the
   unseen-pair question; the four run only if 4 x 7 moves); a flat 90% purity bar (why: a perfect

@@ -1,0 +1,65 @@
+seed,eye_call,judge_call,agree
+0,right digit alone,right digit alone,True
+1,right digit alone,right digit alone,True
+2,right digit alone,right digit alone,True
+3,right digit with a second,right digit with a second,True
+4,right digit alone,right digit alone,True
+5,right digit alone,right digit alone,True
+6,right digit alone,right digit alone,True
+7,right digit alone,right digit alone,True
+8,right digit alone,right digit alone,True
+9,right digit alone,right digit alone,True
+10,right digit alone,right digit alone,True
+11,right digit alone,right digit alone,True
+12,right digit with a second,right digit with a second,True
+13,right digit alone,right digit alone,True
+14,right digit with a second,right digit with a second,True
+15,right digit alone,right digit alone,True
+16,right digit alone,right digit alone,True
+17,right digit alone,right digit alone,True
+18,right digit alone,right digit alone,True
+19,right digit alone,right digit alone,True
+20,right digit alone,right digit alone,True
+21,right digit alone,right digit alone,True
+22,right digit alone,right digit alone,True
+23,right digit with a second,right digit with a second,True
+24,right digit with a second,right digit with a second,True
+25,right digit alone,right digit alone,True
+26,right digit alone,right digit alone,True
+27,right digit alone,right digit alone,True
+28,right digit alone,right digit alone,True
+29,right digit alone,right digit alone,True
+30,right digit alone,right digit alone,True
+31,right digit alone,right digit alone,True
+32,right digit alone,right digit alone,True
+33,right digit alone,right digit with a second,False
+34,right digit alone,right digit alone,True
+35,right digit with a second,right digit with a second,True
+36,right digit with a second,right digit with a second,True
+37,right digit with a second,right digit with a second,True
+38,right digit alone,right digit alone,True
+39,right digit alone,right digit alone,True
+40,right digit with a second,right digit with a second,True
+41,right digit alone,right digit alone,True
+42,right digit alone,right digit alone,True
+43,right digit alone,right digit alone,True
+44,right digit alone,right digit alone,True
+45,right digit alone,right digit alone,True
+46,right digit with a second,right digit with a second,True
+47,right digit alone,right digit alone,True
+48,right digit alone,right digit alone,True
+49,right digit with a second,right digit with a second,True
+50,right digit alone,right digit alone,True
+51,right digit alone,right digit alone,True
+52,right digit with a second,right digit with a second,True
+53,right digit alone,right digit alone,True
+54,right digit alone,right digit alone,True
+55,right digit alone,right digit alone,True
+56,right digit alone,right digit alone,True
+57,right digit alone,right digit alone,True
+58,right digit alone,right digit alone,True
+59,right digit alone,right digit alone,True
+60,right digit with a second,right digit with a second,True
+61,right digit alone,right digit alone,True
+62,right digit alone,right digit alone,True
+63,right digit with a second,right digit with a second,True

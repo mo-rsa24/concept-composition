@@ -1,0 +1,970 @@
+{
+ "title": "The toy caption model: high-level design",
+ "page_title": "Toy Caption Model",
+ "subtitle": "Shares with SDXL: a VAE latent, caption conditioning, training with an empty caption, and guidance. It is not a U-Net and has no text encoder.",
+ "lede": "Read it top to bottom. Pictures with caption ids train a VAE that squeezes each picture into 128 numbers; a fully connected denoiser learns to guess the clean 128 numbers from a noisy copy and a caption id; and sampling calls that one denoiser three times per step and adds the answers up as the product of the two single captions. Every picture on the diagram is real: drawn by the experiment's code, sampled by its saved runs, or recorded from one retrained model, as each card says.",
+ "version_line": "Version 2, 2026-11-18: 23 boxes, 21 arrows, 16 picture cards and 5 pictures in place of tensor grids. Grown from version 1 of 2026-11-05 in subproject 3.",
+ "look": "deep-learning",
+ "box_w": 260,
+ "box_h": 104,
+ "col_w": 370,
+ "row_h": 150,
+ "static": true,
+ "crumb": "The toy caption model",
+ "lanes": [
+  {
+   "label": "1  TRAINING PICTURES AND CAPTIONS",
+   "members": [
+    "circles",
+    "squares",
+    "both",
+    "relabel",
+    "trainset"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "2  VAE: PICTURE TO 128 NUMBERS AND BACK, 45,707 PARAMETERS, NO CAPTIONS",
+   "members": [
+    "pic",
+    "enc",
+    "latent",
+    "dec",
+    "recon"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "3  DENOISER: FULLY CONNECTED, 2,493,824 PARAMETERS, GUESSES THE CLEAN LATENT",
+   "members": [
+    "noise",
+    "capid",
+    "lookup",
+    "mlp",
+    "est",
+    "loss"
+   ],
+   "pad": 36
+  },
+  {
+   "label": "4  SAMPLING WITH THE PRODUCT: THE TRAINED DENOISER, 3 CALLS PER STEP, 300 SAMPLES PER MODEL",
+   "members": [
+    "start",
+    "calls",
+    "combine",
+    "step",
+    "corr",
+    "dec2",
+    "scorer"
+   ],
+   "pad": 36
+  }
+ ],
+ "groups": [
+  {
+   "label": "REPEATED 200 TIMES, LEVEL 200 DOWN TO 1",
+   "members": [
+    "calls",
+    "combine",
+    "step"
+   ]
+  }
+ ],
+ "nodes": [
+  {
+   "id": "both",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 both shapes",
+   "sub": "caption id 2: \"a red circle and\na blue square\"; circle left and\nsquare right, or the mirror",
+   "col": 0,
+   "row": 0.85
+  },
+  {
+   "id": "relabel",
+   "kind": "op",
+   "label": "Relabel k pictures",
+   "sub": "copy k both-shapes pictures\nonce under id 0, once under id 1\n(k from 0 to 2,000)",
+   "col": 1,
+   "row": 0.85,
+   "h": 165
+  },
+  {
+   "id": "circles",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 red circles",
+   "sub": "caption id 0: \"a red circle\"\nat x = 6, 16 or 26",
+   "col": 1,
+   "row": 1.7
+  },
+  {
+   "id": "squares",
+   "kind": "files",
+   "eyebrow": "pictures",
+   "label": "2,000 blue squares",
+   "sub": "caption id 1: \"a blue square\"\nat x = 6, 16 or 26",
+   "col": 1,
+   "row": 2.55
+  },
+  {
+   "id": "trainset",
+   "kind": "store",
+   "eyebrow": "training set",
+   "label": "6,000 + 2k pictures",
+   "sub": "each 16 x 32 x 3, with a caption id,\nplus pixel noise of sd 0.1",
+   "col": 2,
+   "row": 1.7
+  },
+  {
+   "id": "pic",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Picture: 16 x 32 x 3 = 1,536 numbers\nshown: one training copy",
+   "cells": "8x4",
+   "col": 0,
+   "row": 3.95,
+   "picture": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-in.png"
+  },
+  {
+   "id": "enc",
+   "kind": "encoder",
+   "label": "VAE encoder",
+   "sub": "convolutions, down to 4 x 4 x 8",
+   "col": 1,
+   "row": 3.95
+  },
+  {
+   "id": "latent",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Latent z0: 128 numbers (4 x 4 x 8)\nshown: retrained model",
+   "cells": "8x4",
+   "col": 2,
+   "row": 3.95,
+   "picture": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-latent.png"
+  },
+  {
+   "id": "dec",
+   "kind": "decoder",
+   "label": "VAE decoder",
+   "sub": "4 x 4 x 8 back to 16 x 32 x 3",
+   "col": 3,
+   "row": 3.95
+  },
+  {
+   "id": "recon",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Picture again: 16 x 32 x 3\nshown: retrained model",
+   "cells": "8x4",
+   "col": 4,
+   "row": 3.95,
+   "picture": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-out.png"
+  },
+  {
+   "id": "noise",
+   "kind": "op",
+   "label": "Add noise at level t",
+   "sub": "z_t: t from 1 to 200, cosine schedule;\nt also goes in as 64 sines, cosines",
+   "col": 2,
+   "row": 6.25,
+   "h": 135
+  },
+  {
+   "id": "capid",
+   "kind": "block",
+   "eyebrow": "caption id",
+   "label": "One of 0, 1, 2, 3",
+   "sub": "id 3 is the empty caption,\nused on 10% of training draws",
+   "col": 2,
+   "row": 7.15
+  },
+  {
+   "id": "lookup",
+   "kind": "block",
+   "eyebrow": "lookup table",
+   "label": "Caption vector",
+   "sub": "a learned 4 x 64 table, one row per id;\nno text encoder reads any words",
+   "col": 3,
+   "row": 7.15
+  },
+  {
+   "id": "mlp",
+   "kind": "block",
+   "eyebrow": "fully connected",
+   "label": "Denoiser",
+   "sub": "256 numbers in, 128 out;\n3 hidden layers of 1,024;\n2,493,824 parameters",
+   "col": 3,
+   "row": 6.25
+  },
+  {
+   "id": "est",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Guess z0_hat: 128 numbers\nshown: guess at t = 100, retrained",
+   "cells": "8x4",
+   "col": 4,
+   "row": 6.25,
+   "picture": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-latent-k100-both.png"
+  },
+  {
+   "id": "loss",
+   "kind": "loss",
+   "label": "Squared error",
+   "sub": "z0_hat against the clean z0;\n8,000 steps, batch 256",
+   "col": 5,
+   "row": 6.25
+  },
+  {
+   "id": "start",
+   "kind": "tensor",
+   "label": "",
+   "sub": "Random start: 128 numbers\nshown: one standard normal draw",
+   "cells": "8x4",
+   "col": 0,
+   "row": 9.5,
+   "picture": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/start-latent.png"
+  },
+  {
+   "id": "calls",
+   "kind": "op",
+   "label": "3 denoiser calls",
+   "sub": "empty, id 0 and id 1;\neach guess becomes an e",
+   "col": 1,
+   "row": 9.5,
+   "h": 135
+  },
+  {
+   "id": "combine",
+   "kind": "op",
+   "eyebrow": "the product",
+   "label": "e = e_empty + 3 [ ... ]",
+   "sub": "(e_circle − e_empty)\n+ (e_square − e_empty)",
+   "col": 2,
+   "row": 9.5,
+   "h": 135
+  },
+  {
+   "id": "step",
+   "kind": "op",
+   "label": "One reverse step",
+   "sub": "ancestral (DDPM),\nlevel t to level t − 1",
+   "col": 3,
+   "row": 9.5,
+   "h": 135
+  },
+  {
+   "id": "corr",
+   "kind": "op",
+   "eyebrow": "optional",
+   "label": "Langevin corrector",
+   "sub": "5 or 20 moves at each level,\neta = 0.05 (1 − abar_t)",
+   "col": 3,
+   "row": 10.8,
+   "h": 135
+  },
+  {
+   "id": "dec2",
+   "kind": "decoder",
+   "label": "VAE decoder",
+   "sub": "the same decoder, frozen",
+   "col": 4,
+   "row": 9.5
+  },
+  {
+   "id": "scorer",
+   "kind": "service",
+   "eyebrow": "colour scorer",
+   "label": "Count the shapes",
+   "sub": "300 samples per model,\neach called one of\n5 categories",
+   "col": 5,
+   "row": 9.5
+  }
+ ],
+ "edges": [
+  {
+   "from": "both",
+   "to": "relabel",
+   "style": "sync",
+   "label": "k of them"
+  },
+  {
+   "from": "relabel",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "circles",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "squares",
+   "to": "trainset",
+   "style": "sync"
+  },
+  {
+   "from": "trainset",
+   "to": "pic",
+   "style": "sync",
+   "sides": "bt",
+   "bend": 0.88,
+   "label": "each picture"
+  },
+  {
+   "from": "pic",
+   "to": "enc",
+   "style": "sync"
+  },
+  {
+   "from": "enc",
+   "to": "latent",
+   "style": "sync",
+   "label": "squeeze"
+  },
+  {
+   "from": "latent",
+   "to": "dec",
+   "style": "sync"
+  },
+  {
+   "from": "dec",
+   "to": "recon",
+   "style": "sync",
+   "label": "expand"
+  },
+  {
+   "from": "latent",
+   "to": "noise",
+   "style": "sync",
+   "sides": "bt",
+   "label": "clean z0"
+  },
+  {
+   "from": "noise",
+   "to": "mlp",
+   "style": "sync",
+   "label": "noisy z_t"
+  },
+  {
+   "from": "capid",
+   "to": "lookup",
+   "style": "sync"
+  },
+  {
+   "from": "lookup",
+   "to": "mlp",
+   "style": "sync",
+   "sides": "tb",
+   "label": "64 numbers"
+  },
+  {
+   "from": "mlp",
+   "to": "est",
+   "style": "sync"
+  },
+  {
+   "from": "est",
+   "to": "loss",
+   "style": "sync"
+  },
+  {
+   "from": "start",
+   "to": "calls",
+   "style": "sync"
+  },
+  {
+   "from": "calls",
+   "to": "combine",
+   "style": "sync",
+   "label": "3 noise\nestimates e"
+  },
+  {
+   "from": "combine",
+   "to": "step",
+   "style": "sync"
+  },
+  {
+   "from": "step",
+   "to": "corr",
+   "style": "optional",
+   "both": true,
+   "sides": "bt",
+   "label": "if switched on"
+  },
+  {
+   "from": "step",
+   "to": "dec2",
+   "style": "sync",
+   "label": "after the\nlast step"
+  },
+  {
+   "from": "dec2",
+   "to": "scorer",
+   "style": "sync",
+   "label": "picture"
+  }
+ ],
+ "details": [
+  {
+   "heading": "Where each box comes from",
+   "lines": [
+    "All code paths are under <code>3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/</code>, at commit <code>db1325d7</code>; every number is read from <code>toy_relabelling_numbers.json</code> beside this page, written by <code>make_toy_relabelling_numbers.py</code>.",
+    "<strong>The three piles of pictures</strong>: <code>toy_sampler_hybrids.py</code> <code>draw</code>, <code>CIRCLES</code>, <code>SQUARES</code> (16 x 32 x 3 pixels, a circle of 44 pixels or a square of 36); <code>toy_caption_dial_ldm.py</code> <code>PAIRS</code> (the 2 both-shapes layouts). 2,000 per caption.",
+    "<strong>Relabel k pictures</strong>: <code>corpus_k</code> in <code>toy_caption_threshold.py</code>. Exactly k of the 2,000 both-shapes pictures are added again under id 0 and again under id 1, so the set grows from 6,000 to 6,000 + 2k pictures. Counts run: 0, 1, 5, 20, 50, 200, 600, 1,200, 2,000; three trainings each.",
+    "<strong>VAE</strong>: <code>class VAE</code> in <code>toy_caption_dial_ldm.py</code>, 45,707 parameters, latent 4 x 4 x 8 = 128 numbers. Trained 4,000 steps, batch 256, learning rate 0.001, KL weight 0.0001; restarted up to 5 times until reconstruction error is at most 0.012.",
+    "<strong>Add noise at level t</strong> and <strong>Squared error</strong>: <code>train_denoiser</code>. z_t = sqrt(abar_t) z0 + sqrt(1 − abar_t) noise, cosine schedule with offset 0.008 over 200 levels. The loss compares the output with the clean latent, so the denoiser guesses z0, never the noise. 8,000 steps, batch 256, learning rate 0.0002.",
+    "<strong>Caption id</strong>: ids 0 'a red circle', 1 'a blue square', 2 'a red circle and a blue square', 3 'empty'. During training the id is replaced by 3, the empty caption, on 10% of draws (<code>train_denoiser</code>), which is what makes guidance possible.",
+    "<strong>Caption vector</strong>: <code>nn.Embedding</code>, a learned 4 x 64 table. No text is read anywhere in the model.",
+    "<strong>Denoiser</strong>: <code>class Denoiser</code>, fully connected, 3 hidden layers of 1,024 with SiLU. Input: 128 noisy latent numbers, 64 time features and the 64-number caption row, 256 in all; 128 out. 2,493,824 parameters, caption table included.",
+    "<strong>3 denoiser calls and the product</strong>: <code>draw</code>. Each call's guess z0_hat becomes a noise estimate, e = (z_t - sqrt(abar_t) * z0_hat) / sqrt(1 - abar_t); the product is e = e_empty + g * [(e_circle - e_empty) + (e_square - e_empty)] with g = 3; then one ancestral step.",
+    "<strong>Langevin corrector</strong>: <code>toy_caption_corrector.py</code>. After each step: z <- z + eta * s + sqrt(2 eta) * noise,  s = -e / sqrt(1 - abar_j),  eta = 0.05 * (1 - abar_j). 5 moves per level is the main setting, 20 the stronger one.",
+    "<strong>Count the shapes</strong>: <code>toy_blob_scorer.py</code> <code>read</code>. Each pixel goes to the nearest of white, red, blue and purple, or to none when further than 0.35. Categories: red and blue apart; red only; blue only; purple or overlaid; nothing readable. \"red and blue apart\" means at least 12 red and 12 blue pixels, centres at least 6 pixels apart in x, and fewer than 12 purple pixels. A count such as 0 of 300 is how many of a model's 300 product samples fall in that category."
+   ]
+  },
+  {
+   "heading": "How to read the lines and colours",
+   "lines": [
+    "Solid arrows carry data the next part waits on. The dotted two-headed arrow is the Langevin corrector, which runs only when switched on. The denoiser in lane 4 is the one trained in lane 3, called three times per step.",
+    "Outline colours follow the ladder's key: blue for inputs, green for the hidden parts, red for what a network puts out, orange for the method's own parts (the product and the corrector), grey for a frozen part. Colour never fills a shape, because the toy's own pictures are red circles and blue squares.",
+    "Grey squares in a latent picture are its numbers, black for low and white for high, laid out as its 4 channels of 4 x 8."
+   ]
+  },
+  {
+   "heading": "What is not drawn",
+   "lines": [
+    "The one-caption sampler (e = e_empty + 3 (e_caption − e_empty)) is the same loop with two calls; it is described here, not drawn.",
+    "The older relabelling by a random share (<code>corpus</code>, the share from 0 to 1) appears only in the corrector pictures, which come from those models; the counts experiment uses exact counts k.",
+    "The template-library scorer in <code>toy_sampler_hybrids.py</code> is not what the counts use, so only the colour scorer is drawn.",
+    "The VAE's KL term and log-variance clamp sit inside the VAE boxes and are not drawn as parts."
+   ]
+  }
+ ],
+ "cards": [
+  {
+   "box": "both",
+   "at": [
+    0,
+    0.12
+   ],
+   "title": "the 2 layouts",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-circle-left.png",
+     "label": [
+      "circle left"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-square-left.png",
+     "label": [
+      "square left"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "relabel",
+   "at": [
+    2,
+    0.85
+   ],
+   "title": "one drawn picture under three ids",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-source.png",
+     "label": [
+      "id 2"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-circle.png",
+     "label": [
+      "id 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-square.png",
+     "label": [
+      "id 1"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "circles",
+   "at": [
+    0,
+    1.7
+   ],
+   "title": "the 3 positions",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-left.png",
+     "label": [
+      "x = 6"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-centre.png",
+     "label": [
+      "x = 16"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-right.png",
+     "label": [
+      "x = 26"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "squares",
+   "at": [
+    0,
+    2.55
+   ],
+   "title": "the 3 positions",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-left.png",
+     "label": [
+      "x = 6"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-centre.png",
+     "label": [
+      "x = 16"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-right.png",
+     "label": [
+      "x = 26"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "trainset",
+   "at": [
+    3.05,
+    1.7
+   ],
+   "title": "copies with pixel noise, sd 0.1",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-circle.png",
+     "label": [
+      "id 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-square.png",
+     "label": [
+      "id 1"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-both.png",
+     "label": [
+      "id 2"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "noise",
+   "at": [
+    0.55,
+    6.25
+   ],
+   "title": "z_t at five levels, decoded to be seen",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k000.png",
+     "label": [
+      "t = 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k050.png",
+     "label": [
+      "t = 50"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k100.png",
+     "label": [
+      "t = 100"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k150.png",
+     "label": [
+      "t = 150"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k200.png",
+     "label": [
+      "t = 200"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "capid",
+   "at": [
+    0.75,
+    7.15
+   ],
+   "title": "what each id names",
+   "source": "drawn by the code",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-centre.png",
+     "label": [
+      "id 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-centre.png",
+     "label": [
+      "id 1"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-square-left.png",
+     "label": [
+      "id 2"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "lookup",
+   "at": [
+    4.45,
+    7.15
+   ],
+   "title": "the trained table",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/caption-table.png",
+     "label": [
+      "rows: id 0, 1, 2, 3, top to bottom"
+     ]
+    }
+   ],
+   "wide": true
+  },
+  {
+   "box": "mlp",
+   "at": [
+    3,
+    5.4
+   ],
+   "title": "its guess at t = 100 under each id",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-circle.png",
+     "label": [
+      "id 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-square.png",
+     "label": [
+      "id 1"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-both.png",
+     "label": [
+      "id 2"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-empty.png",
+     "label": [
+      "id 3 (empty)"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "loss",
+   "at": [
+    5,
+    5.4
+   ],
+   "title": "what the loss compares, t = 100",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-latent-k100-both.png",
+     "label": [
+      "guess z0_hat"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-latent-target.png",
+     "label": [
+      "target z0"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "calls",
+   "at": [
+    1,
+    10.3
+   ],
+   "title": "the three guesses at t = 100, one run",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-empty.png",
+     "label": [
+      "empty"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-circle.png",
+     "label": [
+      "id 0"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-square.png",
+     "label": [
+      "id 1"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "combine",
+   "at": [
+    2,
+    10.3
+   ],
+   "title": "what the product's e implies",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-combined-k100.png",
+     "label": [
+      "from e"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "step",
+   "at": [
+    2.5,
+    8.6
+   ],
+   "title": "the product's guess along one run",
+   "source": "retrained",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k200.png",
+     "label": [
+      "t = 200"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k150.png",
+     "label": [
+      "t = 150"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k100.png",
+     "label": [
+      "t = 100"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k050.png",
+     "label": [
+      "t = 50"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k001.png",
+     "label": [
+      "t = 1"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "corr",
+   "at": [
+    4.6,
+    10.8
+   ],
+   "title": "saved samples of the share models",
+   "source": "saved runs",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-0.png",
+     "label": [
+      "share 0, plain",
+      "purple or overlaid"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-0.png",
+     "label": [
+      "share 0, 20 moves",
+      "purple or overlaid"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-0.png",
+     "label": [
+      "share 1, plain",
+      "red and blue apart"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "label": [
+      "share 1, 20 moves",
+      "red and blue apart"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "dec2",
+   "at": [
+    3.95,
+    8.6
+   ],
+   "title": "finished samples of saved runs",
+   "source": "saved runs",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-0.png",
+     "label": [
+      "0 relabelled",
+      "seed 20261023",
+      "purple or overlaid"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-0.png",
+     "label": [
+      "0 relabelled",
+      "seed 20261022",
+      "nothing readable"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "label": [
+      "share 1, 20 moves",
+      "red and blue apart"
+     ]
+    }
+   ],
+   "wide": false
+  },
+  {
+   "box": "scorer",
+   "at": [
+    5.35,
+    8.6
+   ],
+   "title": "a saved sample and the colour the scorer gives each pixel",
+   "source": "saved runs",
+   "tiles": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "label": [
+      "share 1, 20 moves",
+      "red and blue apart"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/scorer-map-share1-poe-corrector20-0.png",
+     "label": [
+      "each pixel's colour"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-0.png",
+     "label": [
+      "0 relabelled",
+      "seed 20261023",
+      "purple or overlaid"
+     ]
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/scorer-map-product-k0-s20261023-0.png",
+     "label": [
+      "each pixel's colour"
+     ]
+    }
+   ],
+   "wide": false
+  }
+ ],
+ "source_key": "Picture tags: drawn by the code = the experiment's own draw() and corpus_k; saved runs = samples saved by the experiment's own runs; retrained = one model retrained here with the same code (0 relabelled, seed 20261022, VAE error 0.01006), not one of the reported trainings.",
+ "roles": {
+  "both": "inputs",
+  "relabel": "inputs",
+  "circles": "inputs",
+  "squares": "inputs",
+  "trainset": "inputs",
+  "pic": "inputs",
+  "enc": "plain",
+  "latent": "hidden",
+  "dec": "plain",
+  "recon": "outputs",
+  "noise": "hidden",
+  "capid": "inputs",
+  "lookup": "hidden",
+  "mlp": "hidden",
+  "est": "outputs",
+  "loss": "plain",
+  "start": "inputs",
+  "calls": "outputs",
+  "combine": "method",
+  "step": "plain",
+  "corr": "method",
+  "dec2": "off",
+  "scorer": "plain"
+ }
+}

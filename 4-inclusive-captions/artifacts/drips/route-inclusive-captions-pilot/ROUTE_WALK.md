@@ -114,3 +114,7 @@ eye calls.
 | where its code lives | answered in round 9: `poe_repair/experiments/inclusive_captions/mnist/`, data in `data/mnist/` ignored by git | none needed |
 | whether the canvas maker and the judge are shared with the classifier-guidance route's MNIST row | answered in round 7: the judge is shared, imported at a pinned commit; the canvas matches that route's | none needed |
 | how many draws per measurement | answered in round 5: 256 seeds per row | none needed |
+
+## Cross-references
+
+- The mention of **route walk** in [step 4 of the inclusive-captions route](../../../plans/route-inclusive-captions-pilot.md#4--ask-the-same-question-on-mnist-digits).

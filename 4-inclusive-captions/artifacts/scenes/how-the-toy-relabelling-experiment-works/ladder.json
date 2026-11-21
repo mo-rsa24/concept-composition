@@ -1,0 +1,47 @@
+{
+ "subject": "the toy relabelling experiment: both-shapes pictures also captioned with each single caption, and whether the product of the two single captions then draws both shapes",
+ "kind": "our own experiment (code in subproject 3, no paper)",
+ "purpose": "the learner will be questioned on it: data setup, the network, training, how it relates to Du et al. 2023, the sampling procedure, and what '0 of 300' and '300 of 300' count",
+ "numbers": {
+  "script": "make_toy_relabelling_numbers.py",
+  "json": "toy_relabelling_numbers.json",
+  "rule": "every value on every rung is read from the JSON; a later rung extends the script and every value already in the JSON must come out unchanged"
+ },
+ "code": {
+  "checkout": "/home/molef/PhD/concept-composition",
+  "commit": "db1325d7",
+  "files": [
+   "3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_caption_dial_ldm.py",
+   "3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_caption_threshold.py",
+   "3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_caption_corrector.py",
+   "3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_blob_scorer.py",
+   "3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/toy_sampler_hybrids.py"
+  ]
+ },
+ "style": {
+  "all levels": "journey 13's choice, confirmed 2026-11-18: cheat-sheet devices (thin outlines, glow on the part in focus and fade elsewhere, step strips, boxed formulas in real TeX, white space) in this ladder's colour key",
+  "references": "/home/molef/goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/artifacts/figures/network-view/reference/"
+ },
+ "colour_key": {
+  "inputs": "#1f5fd0",
+  "hidden units": "#1d7a3e",
+  "network outputs": "#c0262d",
+  "the method's own part: the product of the two captions and the corrector's push": "#c86a0a",
+  "off, fixed or empty (the empty caption, a frozen VAE)": "#6b7a88",
+  "note": "the toy's pictures are themselves red circles and blue squares; diagram colours go on outlines and arrows only and never fill a shape, so a red stroke is never mistaken for the circle"
+ },
+ "notation": "plain notation on every rung (z_t the noisy latent at step t, z0_hat the denoiser's guess of the clean latent, e the noise estimate, g the guidance strength, eta the corrector step); Du et al.'s symbols appear only on the Du et al. rung and the closing page, mapped",
+ "rungs": {
+  "0 architecture with examples": {"state": "built", "made by": "hld-diagram, pictures by hld-pictures", "built on": "2026-11-18", "url": "https://claude.ai/artifact/Jp5BkFGCGoQV7d25oa7vha", "files": ["the-toy-caption-model-high-level-design-explainer.svg", "the-toy-caption-model-high-level-design-explainer-light.png", "the-toy-caption-model-high-level-design-explainer.json", "the-toy-caption-model-pictures/", "make_rung0_pictures.py", "make_rung0_spec.py", "draw_rung0.py", "README.md"], "pictures": "real pictures on 21 of 23 boxes (the VAE encoder and decoder have none); per-step pictures from one model retrained at 0 relabelled, seed 20261022, VAE error 0.01006", "grows": "version 1 in 3-understanding-compositionality/artifacts/scenes/how-the-caption-model-works/, https://claude.ai/artifact/4AJAhtvrZyut1uvvbKb2nq, left unchanged"},
+  "main design": "replacing (each single caption keeps 2,000 pictures; k lone shapes swapped for both-shapes pictures); GPU sweep in job 90137 on mscluster88, toy-caption-replace-sweep.json; reference model replacing 1,000 seed 20261022, weights in 4-inclusive-captions/data/toy-relabelling-ladder/; the adding design's figures are kept under network-views/adding-design/ as the check",
+  "explained page": "the-toy-relabelling-experiment-explained.md",
+  "0.5 network views": {"state": "built", "built on": "2026-11-18", "files": ["network-views/ (13 figures, SVG and PNG, and README.md)", "draw_network_views.py", "train_reference_models.py"], "templates": "style_samples.py families cnn, latent-space, fc, embedding, cross-attention, noising, reverse, schedule, sampler-step, guidance, poe; figures 1, 2, 3, 6, 11, 12 go past the templates", "reference models": "retrained on CPU at 0 and 2,000 relabelled, seed 20261022; weights in 4-inclusive-captions/data/toy-relabelling-ladder/ (git-ignored); their counts differ from the 27 reported trainings", "not drawn": "backward arrows on the fully connected network, cosine between table rows, cross-attention weight numbers, where a fused sample sits on the product's overlap"},
+  "Du et al. side by side": {"state": "built", "built on": "2026-11-18", "files": ["network-views/15-du-et-al-side-by-side.png", "the-toy-relabelling-experiment-explained.md section 11"], "their code": "/home/molef/PhD/replications/reduce-reuse-recycle at 8391bdc (quoted files unchanged from upstream 81177d9)", "also built beside it": ["network-views/16-every-caption-side-by-side-replacing.png", "network-views/17-from-the-toy-to-sdxl.png", "network-views/18-the-lookup-is-one-hot-times-a-matrix.png"], "sources": ["environment/reduce-reuse-recycle-code.md", "/home/molef/goal-setting/learning/papers/Papers.md (Reduce, Reuse, Recycle)", "/home/molef/goal-setting/learning/deep-learning/diffusion-models/02-sampler-correctors-for-composition/"]},
+  "3 code walk": {"state": "skipped", "why": "not chosen by the learner on 2026-11-18"},
+  "2 miniature": {"state": "missing"},
+  "1 data pictures": {"state": "built elsewhere, linked", "files": ["3-understanding-compositionality/artifacts/results/the-exact-toy/how-much-co-occurrence-the-product-needs/plain-figures/05b-the-training-set-with-and-without-relabelling.png", "05c-what-each-caption-holds.png", "05d-the-caption-table.png", "05e-why-the-hybrid-is-purple.png"]},
+  "close: questions page": {"state": "missing"}
+ },
+ "pace": "one rung at a time",
+ "landing": "4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/, linked from 4-inclusive-captions/report/ once written"
+}

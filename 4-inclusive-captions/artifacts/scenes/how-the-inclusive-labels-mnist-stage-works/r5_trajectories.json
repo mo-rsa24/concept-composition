@@ -1,0 +1,80 @@
+{
+ "seed": 0,
+ "rule": "lowest seed whose share-0 call (dial 0, training 1, 7 x 8 plain) is that model's most common call",
+ "levels": [
+  200,
+  150,
+  100,
+  50,
+  25,
+  0
+ ],
+ "by dial": {
+  "0": {
+   "start noise equals seed's start_noise": true,
+   "this seed: largest pixel difference from the stored sample": 18,
+   "this seed: pixels that differ": 276,
+   "all 256 seeds: largest pixel difference": 255,
+   "at step 100": {
+    "|eps blank|": 44.94,
+    "|eps 7 - eps blank|": 1.82,
+    "|eps 8 - eps blank|": 7.101,
+    "cosine": -0.563,
+    "|3 (sum of the two differences)|": 18.778
+   }
+  },
+  "0.1": {
+   "start noise equals seed's start_noise": true,
+   "this seed: largest pixel difference from the stored sample": 11,
+   "this seed: pixels that differ": 177,
+   "all 256 seeds: largest pixel difference": 255,
+   "at step 100": {
+    "|eps blank|": 44.7,
+    "|eps 7 - eps blank|": 1.626,
+    "|eps 8 - eps blank|": 3.595,
+    "cosine": -0.626,
+    "|3 (sum of the two differences)|": 8.616
+   }
+  },
+  "0.3": {
+   "start noise equals seed's start_noise": true,
+   "this seed: largest pixel difference from the stored sample": 253,
+   "this seed: pixels that differ": 291,
+   "all 256 seeds: largest pixel difference": 255,
+   "at step 100": {
+    "|eps blank|": 44.63,
+    "|eps 7 - eps blank|": 2.874,
+    "|eps 8 - eps blank|": 3.064,
+    "cosine": -0.817,
+    "|3 (sum of the two differences)|": 5.419
+   }
+  },
+  "0.6": {
+   "start noise equals seed's start_noise": true,
+   "this seed: largest pixel difference from the stored sample": 214,
+   "this seed: pixels that differ": 419,
+   "all 256 seeds: largest pixel difference": 255,
+   "at step 100": {
+    "|eps blank|": 44.48,
+    "|eps 7 - eps blank|": 0.376,
+    "|eps 8 - eps blank|": 0.433,
+    "cosine": 0.544,
+    "|3 (sum of the two differences)|": 2.135
+   }
+  },
+  "1": {
+   "start noise equals seed's start_noise": true,
+   "this seed: largest pixel difference from the stored sample": 15,
+   "this seed: pixels that differ": 311,
+   "all 256 seeds: largest pixel difference": 255,
+   "at step 100": {
+    "|eps blank|": 44.47,
+    "|eps 7 - eps blank|": 0.372,
+    "|eps 8 - eps blank|": 0.381,
+    "cosine": 0.496,
+    "|3 (sum of the two differences)|": 1.953
+   }
+  }
+ },
+ "start noise identical across models": "start_noise(i) uses torch.Generator().manual_seed(i); step noise uses manual_seed(1_000_000 + k) over the 256 batch"
+}

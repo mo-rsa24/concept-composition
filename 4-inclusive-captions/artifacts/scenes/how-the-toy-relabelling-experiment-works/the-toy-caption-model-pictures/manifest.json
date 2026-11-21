@@ -1,0 +1,803 @@
+{
+ "clean-circle-left": "training picture under id 0 'a red circle', circle centred at x = 6",
+ "clean-square-left": "training picture under id 1 'a blue square', square centred at x = 6",
+ "clean-circle-centre": "training picture under id 0 'a red circle', circle centred at x = 16",
+ "clean-square-centre": "training picture under id 1 'a blue square', square centred at x = 16",
+ "clean-circle-right": "training picture under id 0 'a red circle', circle centred at x = 26",
+ "clean-square-right": "training picture under id 1 'a blue square', square centred at x = 26",
+ "clean-both-circle-left": "both-shapes layout 1: circle left, square right (id 2)",
+ "clean-both-square-left": "both-shapes layout 2: square left, circle right (id 2)",
+ "noisy-train-circle": "training copy number 0 of corpus_k(20, seed 0), caption id 0, pixel noise sd 0.1",
+ "noisy-train-square": "training copy number 2000 of corpus_k(20, seed 0), caption id 1, pixel noise sd 0.1",
+ "noisy-train-both": "training copy number 4000 of corpus_k(20, seed 0), caption id 2, pixel noise sd 0.1",
+ "noisy-train-relabelled-as-circle": "training copy number 6000 of corpus_k(20, seed 0), caption id 0, pixel noise sd 0.1",
+ "noisy-train-relabelled-as-square": "training copy number 6020 of corpus_k(20, seed 0), caption id 1, pixel noise sd 0.1",
+ "_ids": {
+  "circle": 0,
+  "square": 1,
+  "both": 2,
+  "relabelled-as-circle": 0,
+  "relabelled-as-square": 1
+ },
+ "noisy-train-relabelled-source": "training copy number 5249 of corpus_k(20, seed 0), caption id 2: the same drawn picture as copies 6000 (id 0) and 6020 (id 1), with its own pixel noise",
+ "_relabel_same_picture": {
+  "id 2 copy": 5249,
+  "id 0 copy": 6000,
+  "id 1 copy": 6020,
+  "same layout": true
+ },
+ "product-k0-s20261023-0": "saved sample 0 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-1": "saved sample 1 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-2": "saved sample 2 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-3": "saved sample 3 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "product-k0-s20261023-4": "saved sample 4 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-5": "saved sample 5 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-6": "saved sample 6 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261023-7": "saved sample 7 of '0_20261023_product' in toy-caption-threshold-samples.npz; scorer: red only",
+ "_product-k0-s20261023": {
+  "key": "0_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "blue only",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "red only"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 3,
+    "purple px": 33,
+    "red x": null,
+    "blue x": 7.833333333333333
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 38,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 34,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 26,
+    "purple px": 10,
+    "red x": null,
+    "blue x": 25.96153846153846
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 37,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 38,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 31,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 43,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 25.988372093023255,
+    "blue x": null
+   }
+  ]
+ },
+ "product-k0-s20261022-0": "saved sample 0 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-1": "saved sample 1 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-2": "saved sample 2 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "product-k0-s20261022-3": "saved sample 3 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-4": "saved sample 4 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-5": "saved sample 5 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-6": "saved sample 6 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "product-k0-s20261022-7": "saved sample 7 of '0_20261022_product' in toy-caption-threshold-samples.npz; scorer: nothing readable",
+ "_product-k0-s20261022": {
+  "key": "0_20261022_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "nothing readable",
+   "nothing readable",
+   "purple or overlaid",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 6,
+    "purple px": 30,
+    "red x": null,
+    "blue x": 25.666666666666668
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 2,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   }
+  ]
+ },
+ "circle-k0-s20261023-0": "saved sample 0 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-1": "saved sample 1 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-2": "saved sample 2 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-3": "saved sample 3 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-4": "saved sample 4 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-5": "saved sample 5 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-6": "saved sample 6 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "circle-k0-s20261023-7": "saved sample 7 of '0_20261023_circle' in toy-caption-threshold-samples.npz; scorer: red only",
+ "_circle-k0-s20261023": {
+  "key": "0_20261023_circle",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "red only",
+   "red only",
+   "red only",
+   "red only",
+   "red only",
+   "red only",
+   "red only",
+   "red only"
+  ],
+  "info": [
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 16.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 26.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 16.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 26.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 16.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 16.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 16.0,
+    "blue x": null
+   },
+   {
+    "red px": 44,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": null
+   }
+  ]
+ },
+ "square-k0-s20261023-0": "saved sample 0 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-1": "saved sample 1 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-2": "saved sample 2 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-3": "saved sample 3 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-4": "saved sample 4 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-5": "saved sample 5 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-6": "saved sample 6 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "square-k0-s20261023-7": "saved sample 7 of '0_20261023_square' in toy-caption-threshold-samples.npz; scorer: blue only",
+ "_square-k0-s20261023": {
+  "key": "0_20261023_square",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "blue only",
+   "blue only",
+   "blue only",
+   "blue only",
+   "blue only",
+   "blue only",
+   "blue only",
+   "blue only"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 26.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 16.0
+   },
+   {
+    "red px": 0,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": null,
+    "blue x": 26.0
+   }
+  ]
+ },
+ "share1-poe-0": "saved sample 0 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-1": "saved sample 1 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-2": "saved sample 2 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-3": "saved sample 3 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-4": "saved sample 4 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-5": "saved sample 5 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-6": "saved sample 6 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-7": "saved sample 7 of '1_poe' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "_share1-poe": {
+  "key": "1_poe",
+  "file": "toy-caption-dial-corrector-samples.npz",
+  "categories": [
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart"
+  ],
+  "info": [
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 26.0,
+    "blue x": 6.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 26.0,
+    "blue x": 6.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   }
+  ]
+ },
+ "share1-poe-corrector20-0": "saved sample 0 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-1": "saved sample 1 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-2": "saved sample 2 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-3": "saved sample 3 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-4": "saved sample 4 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-5": "saved sample 5 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-6": "saved sample 6 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "share1-poe-corrector20-7": "saved sample 7 of '1_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: red and blue apart",
+ "_share1-poe-corrector20": {
+  "key": "1_poe_corrector20",
+  "file": "toy-caption-dial-corrector-samples.npz",
+  "categories": [
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart",
+   "red and blue apart"
+  ],
+  "info": [
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   },
+   {
+    "red px": 44,
+    "blue px": 36,
+    "purple px": 0,
+    "red x": 6.0,
+    "blue x": 26.0
+   }
+  ]
+ },
+ "share0-poe-corrector20-0": "saved sample 0 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-1": "saved sample 1 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-2": "saved sample 2 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-3": "saved sample 3 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-4": "saved sample 4 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-5": "saved sample 5 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-6": "saved sample 6 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-corrector20-7": "saved sample 7 of '0_poe_corrector20' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "_share0-poe-corrector20": {
+  "key": "0_poe_corrector20",
+  "file": "toy-caption-dial-corrector-samples.npz",
+  "categories": [
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid",
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   },
+   {
+    "red px": 0,
+    "blue px": 11,
+    "purple px": 25,
+    "red x": null,
+    "blue x": 27.40909090909091
+   }
+  ]
+ },
+ "share0-poe-0": "saved sample 0 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-1": "saved sample 1 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "share0-poe-2": "saved sample 2 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "share0-poe-3": "saved sample 3 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "share0-poe-4": "saved sample 4 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "share0-poe-5": "saved sample 5 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: purple or overlaid",
+ "share0-poe-6": "saved sample 6 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "share0-poe-7": "saved sample 7 of '0_poe' in toy-caption-dial-corrector-samples.npz; scorer: nothing readable",
+ "_share0-poe": {
+  "key": "0_poe",
+  "file": "toy-caption-dial-corrector-samples.npz",
+  "categories": [
+   "purple or overlaid",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "purple or overlaid",
+   "nothing readable",
+   "nothing readable"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 17,
+    "purple px": 19,
+    "red x": null,
+    "blue x": 26.970588235294116
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 5,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 0,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 3,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 4,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 6,
+    "purple px": 30,
+    "red x": null,
+    "blue x": 28.166666666666668
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 1,
+    "red x": null,
+    "blue x": null
+   },
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 3,
+    "red x": null,
+    "blue x": null
+   }
+  ]
+ },
+ "product-k1-s20261023-0": "saved sample 0 of '1_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "_product-k1-s20261023": {
+  "key": "1_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 28,
+    "red x": null,
+    "blue x": null
+   }
+  ]
+ },
+ "product-k5-s20261023-0": "saved sample 0 of '5_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "_product-k5-s20261023": {
+  "key": "5_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 2,
+    "purple px": 31,
+    "red x": null,
+    "blue x": 6.5
+   }
+  ]
+ },
+ "product-k20-s20261023-0": "saved sample 0 of '20_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "_product-k20-s20261023": {
+  "key": "20_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 0,
+    "blue px": 0,
+    "purple px": 35,
+    "red x": null,
+    "blue x": null
+   }
+  ]
+ },
+ "product-k50-s20261023-0": "saved sample 0 of '50_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "_product-k50-s20261023": {
+  "key": "50_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 18,
+    "blue px": 1,
+    "purple px": 22,
+    "red x": 25.88888888888889,
+    "blue x": 4.5
+   }
+  ]
+ },
+ "product-k200-s20261023-0": "saved sample 0 of '200_20261023_product' in toy-caption-threshold-samples.npz; scorer: purple or overlaid",
+ "_product-k200-s20261023": {
+  "key": "200_20261023_product",
+  "file": "toy-caption-threshold-samples.npz",
+  "categories": [
+   "purple or overlaid"
+  ],
+  "info": [
+   {
+    "red px": 31,
+    "blue px": 26,
+    "purple px": 21,
+    "red x": 26.241935483870968,
+    "blue x": 5.884615384615385
+   }
+  ]
+ },
+ "scorer-map-share1-poe-corrector20-0": "pixel colours the scorer assigns to share1-poe-corrector20-0: white, red, blue, purple, grey for none within 0.35",
+ "scorer-map-product-k0-s20261023-0": "pixel colours the scorer assigns to product-k0-s20261023-0: white, red, blue, purple, grey for none within 0.35",
+ "scorer-map-product-k0-s20261022-0": "pixel colours the scorer assigns to product-k0-s20261022-0: white, red, blue, purple, grey for none within 0.35",
+ "_retrain": {
+  "relabelled": 0,
+  "seed": 20261022,
+  "vae mse": 0.01006,
+  "vae tries": 1,
+  "device": "cuda",
+  "final categories of the 8 starts": [
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable",
+   "nothing readable"
+  ]
+ },
+ "vae-in": "the training copy fed to the VAE (retrained model)",
+ "vae-latent": "its latent: 128 numbers as 4 channels of 4 x 8 in a 2 x 2 block, grey scale (retrained model)",
+ "vae-out": "the VAE decoder's reconstruction of that latent (retrained model)",
+ "noised-k000": "the clean latent noised to level 0, decoded so it can be seen (retrained model)",
+ "noised-k050": "the clean latent noised to level 50, decoded so it can be seen (retrained model)",
+ "noised-k100": "the clean latent noised to level 100, decoded so it can be seen (retrained model)",
+ "noised-latent-k100": "the noisy latent at level 100 as 4 channels of 4 x 8 in a 2 x 2 block (retrained model)",
+ "guess-k100-empty": "denoiser's clean-latent guess at level 100 given caption id 3, decoded (retrained model)",
+ "guess-k100-circle": "denoiser's clean-latent guess at level 100 given caption id 0, decoded (retrained model)",
+ "guess-k100-square": "denoiser's clean-latent guess at level 100 given caption id 1, decoded (retrained model)",
+ "guess-k100-both": "denoiser's clean-latent guess at level 100 given caption id 2, decoded (retrained model)",
+ "guess-latent-k100-both": "that guess as 4 channels of 4 x 8 in a 2 x 2 block (retrained model)",
+ "clean-latent-target": "the clean latent the loss compares the guess with (retrained model)",
+ "time-features-k100": "the 64 time features of level 100: 32 sines then 32 cosines",
+ "noised-k150": "the clean latent noised to level 150, decoded so it can be seen (retrained model)",
+ "noised-k200": "the clean latent noised to level 200, decoded so it can be seen (retrained model)",
+ "caption-table": "the trained 4 x 64 caption table: row 0 'a red circle', 1 'a blue square', 2 both, 3 empty",
+ "start-latent": "a random start: 128 numbers drawn from a standard normal, as 4 channels of 4 x 8 in a 2 x 2 block",
+ "start-decoded": "that random start passed through the decoder",
+ "poe-call-k100-empty": "PoE run start 0, level 100: the empty call's clean-latent guess, decoded (retrained model)",
+ "poe-call-k100-circle": "PoE run start 0, level 100: the circle call's clean-latent guess, decoded (retrained model)",
+ "poe-call-k100-square": "PoE run start 0, level 100: the square call's clean-latent guess, decoded (retrained model)",
+ "poe-combined-k100": "PoE run start 0, level 100: the clean latent implied by the combined estimate e, decoded (retrained model)",
+ "poe-run-k200": "PoE run start 0: the combined clean-latent guess at level 200, decoded (retrained model)",
+ "poe-run-k150": "PoE run start 0: the combined clean-latent guess at level 150, decoded (retrained model)",
+ "poe-run-k100": "PoE run start 0: the combined clean-latent guess at level 100, decoded (retrained model)",
+ "poe-run-k050": "PoE run start 0: the combined clean-latent guess at level 50, decoded (retrained model)",
+ "poe-run-k001": "PoE run start 0: the combined clean-latent guess at level 1, decoded (retrained model)",
+ "poe-run-final": "PoE run start 0 after the last step, decoded (retrained model); scorer: nothing readable"
+}

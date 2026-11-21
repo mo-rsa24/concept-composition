@@ -42,7 +42,7 @@ canvas from plan 02's dial-0 mix. The five held-out pairs never share a canvas.
 
 **The shares:** s = 0, 10, 20, 40 and 80%, three trainings each. At s = 0 this is plan 02's dial-0
 distribution, so its three models are reused; 12 new models train. Everything else is plan 02's:
-768,000 canvases per model built fresh (6,000 steps of 128), the width-48 U-Net, guidance 3, the
+768,000 canvases per model built fresh (6,000 steps of 128), the [width-48 U-Net](../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/README.md#r2-the-u-net-and-its-label), guidance 3, the
 corrector, 256 seeds, the eight rows, the judge pinned by its sha256.
 
 The question this answers: once each single label has seen the two digits together on s% of its
@@ -63,7 +63,7 @@ Navigation: ⬅️ [Previous](#quick-context) | 📋 [TOC](#table-of-contents) |
 - Checkpoints go to `/datasets/mmolefe/poe_repair_min/outputs/mnist-share/checkpoints/`, never `/home-mscluster`
   ([storage](../../../../environment/storage.md)); samples to the same folder's `samples/`, and come back to
   the laptop with `scripts/cluster.sh pull`-style rsync for scoring.
-- Scoring runs on the laptop, where the pinned judge lives (`data/mnist/judge`).
+- Scoring runs on the laptop, where the [pinned judge](../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/README.md#r4-the-judge) lives (`data/mnist/judge`).
 - Measured on the laptop's 4070 in plan 02: 12.4 to 15.5 min of training and 1,974 to 2,319 s of drawing per
   model. The 3090's times are measured on the first job.
 
@@ -82,7 +82,7 @@ before any share model trains. All counts are of 256 seeds, read by the pinned j
 | inconclusive | anything else |
 
 The judge's reading holds at a share only if, on one 64-tile sheet of training 1's corrected 7 × 8
-product, it agrees with blind eye calls on at least 58 of 64. Where it does not, that share is read by eye
+product, it agrees with blind [eye calls](02-the-mnist-stage.md#7--the-eye-calls) on at least 58 of 64. Where it does not, that share is read by eye
 on the first 64 seeds of each training, with the same thresholds scaled to 64: 32 to support, a mean of
 9.75 for null.
 
@@ -149,6 +149,8 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 ### 5. ✅ Tick one verdict line
 
 ◀ **Needs: [task 4](#4--scores-and-verdict)** done.
+
+<a href="../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/s1-one-row-per-share.png"><img src="../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/s1-one-row-per-share.png" width="200" alt="five rows, one per share at 0, 10, 20, 40 and 80%: the expected training draws, four tiles of 7 alone and six tiles of the plain 7 x 8 product with the judge's marks, and the product's count of 256"></a> <a href="../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/s2-the-product-against-what-each-label-draws-alone.png"><img src="../../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/s2-the-product-against-what-each-label-draws-alone.png" width="200" alt="count of 256 seeds against the share of 7 training pictures that also show an 8: 7 alone with a second digit in blue, the plain 7 x 8 product in red, the corrected product in orange, one dot per training, and the trained share times 256 as a dashed grey line"></a>
 
 - [ ] **Do:** open the results figure and `score_share.py`'s printout side by side, overrule any eye call
   you disagree with, and tick supported, null or inconclusive in the table above.

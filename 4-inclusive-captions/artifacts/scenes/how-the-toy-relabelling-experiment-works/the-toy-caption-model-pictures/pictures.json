@@ -1,0 +1,1075 @@
+{
+ "boxes": {
+  "circles": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-left.png",
+     "caption": "A training picture under caption id 0, 'a red circle', with the circle centred at x = 6, drawn by the experiment's draw().",
+     "alt": "Red circle on a white picture, left position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows what one of the 2,000 circle pictures looks like."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-centre.png",
+     "caption": "The same circle centred at x = 16, under caption id 0, drawn by the experiment's draw().",
+     "alt": "Red circle on a white picture, centre position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the second of the three positions."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-right.png",
+     "caption": "The same circle centred at x = 26, under caption id 0, drawn by the experiment's draw().",
+     "alt": "Red circle on a white picture, right position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the third position, so all three are seen."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-circle.png",
+     "caption": "Training copy 0 of the k = 20 set under caption id 0, a circle at x = 26 with pixel noise of sd 0.1, built by the experiment's corpus_k from its drawn pictures.",
+     "alt": "Red circle at the right on a speckled white picture.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows a circle as the model actually trains on it, noise included."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 3
+   }
+  },
+  "squares": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-left.png",
+     "caption": "A training picture under caption id 1, 'a blue square', with the square centred at x = 6, drawn by the experiment's draw().",
+     "alt": "Blue square on a white picture, left position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows what one of the 2,000 square pictures looks like."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-centre.png",
+     "caption": "The same square centred at x = 16, under caption id 1, drawn by the experiment's draw().",
+     "alt": "Blue square on a white picture, centre position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the second of the three positions."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-right.png",
+     "caption": "The same square centred at x = 26, under caption id 1, drawn by the experiment's draw().",
+     "alt": "Blue square on a white picture, right position.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the third position."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-square.png",
+     "caption": "Training copy 2000 of the k = 20 set under caption id 1, a square at x = 26 with pixel noise of sd 0.1, built by the experiment's corpus_k from its drawn pictures.",
+     "alt": "Blue square at the right on a speckled white picture.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows a square as the model actually trains on it."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 3
+   }
+  },
+  "both": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-circle-left.png",
+     "caption": "Both-shapes layout 1 under caption id 2, the red circle on the left and the blue square on the right, drawn by the experiment's draw().",
+     "alt": "Red circle left, blue square right, on white.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the first of the two both-shapes layouts."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-square-left.png",
+     "caption": "Both-shapes layout 2 under caption id 2 is the mirror, the blue square on the left and the red circle on the right, drawn by the experiment's draw().",
+     "alt": "Blue square left, red circle right, on white.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the mirror layout, so the reader sees there are exactly two."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-both.png",
+     "caption": "Training copy 4000 of the k = 20 set under caption id 2 is layout 1 with pixel noise of sd 0.1, built by the experiment's corpus_k.",
+     "alt": "Speckled picture with a red circle left and a blue square right.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows a both-shapes picture as the model trains on it."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 2
+   }
+  },
+  "relabel": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-source.png",
+     "caption": "Copy 5249 of the k = 20 training set: a both-shapes picture under caption id 2, its usual caption, built by the experiment's corpus_k.",
+     "alt": "Copy 5249 of the k = 20 training set: a both-shapes picture under caption id 2, its usual caption, built by the experiment's corpus_k.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-circle.png",
+     "caption": "Copy 6000: the same drawn picture added again under caption id 0, 'a red circle', with its own pixel noise.",
+     "alt": "Copy 6000: the same drawn picture added again under caption id 0, 'a red circle', with its own pixel noise.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-square.png",
+     "caption": "Copy 6020: the same drawn picture added a third time under caption id 1, 'a blue square', with its own pixel noise.",
+     "alt": "Copy 6020: the same drawn picture added a third time under caption id 1, 'a blue square', with its own pixel noise.",
+     "from": 0,
+     "kind": "abstract"
+    }
+   ],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k1-s20261023-0.png",
+     "caption": "Saved product sample 0 of the reported training with 1 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "alt": "Saved product sample 0 of the reported training with 1 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k5-s20261023-0.png",
+     "caption": "Saved product sample 0 of the reported training with 5 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "alt": "Saved product sample 0 of the reported training with 5 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k20-s20261023-0.png",
+     "caption": "Saved product sample 0 of the reported training with 20 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "alt": "Saved product sample 0 of the reported training with 20 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k50-s20261023-0.png",
+     "caption": "Saved product sample 0 of the reported training with 50 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "alt": "Saved product sample 0 of the reported training with 50 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k200-s20261023-0.png",
+     "caption": "Saved product sample 0 of the reported training with 200 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "alt": "Saved product sample 0 of the reported training with 200 relabelled, seed 20261023; scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    }
+   ],
+   "face": {
+    "side": "example",
+    "count": 3
+   }
+  },
+  "trainset": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-circle.png",
+     "caption": "Copy 0 of the k = 20 training set carries caption id 0, a circle at x = 26 with pixel noise of sd 0.1, built by the experiment's corpus_k.",
+     "alt": "Speckled picture with a red circle at the right.",
+     "from": 0,
+     "kind": "table",
+     "why": "One row of the set from the circle pile."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-square.png",
+     "caption": "Copy 2000 carries caption id 1, a square at x = 26 with pixel noise of sd 0.1, built by the experiment's corpus_k.",
+     "alt": "Speckled picture with a blue square at the right.",
+     "from": 0,
+     "kind": "table",
+     "why": "One row from the square pile."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-both.png",
+     "caption": "Copy 4000 carries caption id 2, circle left and square right, built by the experiment's corpus_k.",
+     "alt": "Speckled picture with a red circle left and blue square right.",
+     "from": 0,
+     "kind": "table",
+     "why": "One row from the both-shapes pile."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-circle.png",
+     "caption": "Copy 6000 is a relabelled both-shapes picture carrying caption id 0, one of the 2k extra copies at k = 20, built by the experiment's corpus_k.",
+     "alt": "Speckled picture, blue square left, red circle right.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows where the 2k extra copies sit in the set."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noisy-train-relabelled-as-square.png",
+     "caption": "Copy 6020 is the same relabelled picture carrying caption id 1, built by the experiment's corpus_k.",
+     "alt": "Speckled picture, blue square left, red circle right.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the second of each relabelled pair."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 3
+   }
+  },
+  "pic": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-in.png",
+     "caption": "The training picture fed to the VAE from the retrained model (0 relabelled, seed 20261022) is a both-shapes copy under caption id 2, with its pixel noise.",
+     "alt": "Speckled picture with a red circle left and a blue square right.",
+     "from": 0,
+     "kind": "layer",
+     "why": "The real 16 x 32 x 3 input that the latent and reconstruction beside it come from."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "enc": {
+   "input": [],
+   "example": [],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 0
+   }
+  },
+  "latent": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-latent.png",
+     "caption": "That picture's latent z0 from the retrained model (0 relabelled, seed 20261022) is 128 numbers shown as 4 channels of 4 x 8 in grey, black low and white high.",
+     "alt": "Four small grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "layer",
+     "why": "Shows the 128 numbers the picture is squeezed into."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "dec": {
+   "input": [],
+   "example": [],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 0
+   }
+  },
+  "recon": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/vae-out.png",
+     "caption": "The VAE decoder from the retrained model (0 relabelled, seed 20261022) turns that latent back into the circle on the left and the square on the right, without the pixel noise.",
+     "alt": "Clean red circle left and blue square right on white.",
+     "from": 0,
+     "kind": "layer",
+     "why": "Shows the latent keeps the shapes and their places."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "noise": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k000.png",
+     "caption": "At level 0 the latent from the retrained model (0 relabelled, seed 20261022) is still clean, and decoded it shows both shapes sharply.",
+     "alt": "Clean red circle left and blue square right.",
+     "from": 0,
+     "kind": "math",
+     "why": "The starting point of the noise ramp."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k050.png",
+     "caption": "At level 50 the noisy latent from the retrained model (0 relabelled, seed 20261022), decoded so it can be seen, still shows the circle and the square, slightly blurred.",
+     "alt": "Red circle and blue square, a little blurred, with faint speckles.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows little is lost early in the schedule."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k100.png",
+     "caption": "At level 100 the decoded noisy latent from the retrained model (0 relabelled, seed 20261022) shows both shapes smeared, the square turning purple.",
+     "alt": "Smeared red blob left, purple-blue blob right.",
+     "from": 0,
+     "kind": "math",
+     "why": "The level whose noisy latent the denoiser pictures below use."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k150.png",
+     "caption": "At level 150 the decoded noisy latent from the retrained model (0 relabelled, seed 20261022) holds only faint red and blue smudges.",
+     "alt": "Faint coloured smudges on white.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows the shapes nearly gone."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-k200.png",
+     "caption": "At level 200 the decoded noisy latent from the retrained model (0 relabelled, seed 20261022) shows no shape at all.",
+     "alt": "Pale yellow and orange noise with a dark border.",
+     "from": 0,
+     "kind": "math",
+     "why": "The last level, where sampling starts."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-latent-k100.png",
+     "caption": "The noisy latent z_t at level 100 from the retrained model (0 relabelled, seed 20261022) is what the denoiser actually receives, 4 channels of 4 x 8 in grey.",
+     "alt": "Four grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows z_t as numbers, before any decoding."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/time-features-k100.png",
+     "caption": "Level 100 also goes in as 64 time features, 32 sines then 32 cosines, black low and white high, computed by the retrained model's denoiser.",
+     "alt": "A thin strip of 64 grey cells.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows how the denoiser is told the level."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 5
+   }
+  },
+  "capid": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-circle-centre.png",
+     "caption": "Caption id 0, 'a red circle', names pictures like this one, drawn by the experiment's draw().",
+     "alt": "Red circle in the centre of a white picture.",
+     "from": 0,
+     "kind": "table",
+     "why": "Ties id 0 to its picture."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-square-centre.png",
+     "caption": "Caption id 1, 'a blue square', names pictures like this one, drawn by the experiment's draw().",
+     "alt": "Blue square in the centre of a white picture.",
+     "from": 0,
+     "kind": "table",
+     "why": "Ties id 1 to its picture."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-both-square-left.png",
+     "caption": "Caption id 2, 'a red circle and a blue square', names both-shapes pictures like this one, drawn by the experiment's draw().",
+     "alt": "Blue square left, red circle right, on white.",
+     "from": 0,
+     "kind": "table",
+     "why": "Ties id 2 to its picture."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-empty.png",
+     "caption": "Caption id 3, the empty caption, has no picture of its own, and given the level 100 noisy latent the denoiser from the retrained model (0 relabelled, seed 20261022) still guesses both shapes (decoded).",
+     "alt": "Red circle left and blue square right.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows what the empty caption does when it replaces the real one."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 3
+   }
+  },
+  "lookup": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/caption-table.png",
+     "caption": "The learned 4 x 64 caption table from the retrained model (0 relabelled, seed 20261022), row 0 'a red circle' at the top, then 'a blue square', both, and empty, black low and white high.",
+     "alt": "Four rows of 64 grey cells.",
+     "from": 0,
+     "kind": "table",
+     "why": "Shows the caption vector is one learned row per id and nothing reads words."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "mlp": {
+   "input": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/noised-latent-k100.png",
+     "caption": "The 128 noisy-latent numbers at level 100 from the retrained model (0 relabelled, seed 20261022) are the first part of the denoiser's 256 inputs.",
+     "alt": "Four grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "model",
+     "why": "The latent part of the input."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/time-features-k100.png",
+     "caption": "The 64 time features for level 100, 32 sines then 32 cosines, are the second part, computed by the retrained model's denoiser.",
+     "alt": "A thin strip of 64 grey cells.",
+     "from": 0,
+     "kind": "model",
+     "why": "The level part of the input."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/caption-table.png",
+     "caption": "The third part is one 64-number row of this caption table from the retrained model (0 relabelled, seed 20261022), picked by the caption id.",
+     "alt": "Four rows of 64 grey cells.",
+     "from": 0,
+     "kind": "model",
+     "why": "The caption part of the input."
+    }
+   ],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-circle.png",
+     "caption": "Given the level 100 noisy latent and caption id 0, the denoiser from the retrained model (0 relabelled, seed 20261022) guesses a clear red circle on the left and only a faint square on the right (decoded).",
+     "alt": "Red circle left, pale blue square right.",
+     "from": 0,
+     "kind": "model",
+     "why": "Shows the caption pulling the guess toward a circle."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-square.png",
+     "caption": "With caption id 1 the denoiser from the retrained model (0 relabelled, seed 20261022) guesses a blue square on the right and turns the left circle into a purple square (decoded).",
+     "alt": "Purple square left, blue square right.",
+     "from": 0,
+     "kind": "model",
+     "why": "Shows the square caption reshaping the other shape."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-both.png",
+     "caption": "With caption id 2 the denoiser from the retrained model (0 relabelled, seed 20261022) guesses both shapes cleanly (decoded).",
+     "alt": "Red circle left, blue square right.",
+     "from": 0,
+     "kind": "model",
+     "why": "Shows the guess matching the training picture."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-empty.png",
+     "caption": "With caption id 3, the empty caption, the denoiser from the retrained model (0 relabelled, seed 20261022) still guesses both shapes, since the level 100 latent still holds them (decoded).",
+     "alt": "Red circle left, blue square right.",
+     "from": 0,
+     "kind": "model",
+     "why": "Shows the guess the product subtracts against."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 4
+   }
+  },
+  "est": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-latent-k100-both.png",
+     "caption": "The denoiser's guess z0_hat at level 100 with caption id 2 from the retrained model (0 relabelled, seed 20261022) is 128 numbers, shown as 4 channels of 4 x 8 in grey.",
+     "alt": "Four grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "layer",
+     "why": "Shows the output is a clean latent, not a noise estimate."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-k100-both.png",
+     "caption": "The same guess decoded shows the red circle on the left and the blue square on the right (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Red circle left, blue square right.",
+     "from": 0,
+     "kind": "layer",
+     "why": "Shows what those numbers mean as a picture."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "loss": {
+   "input": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/guess-latent-k100-both.png",
+     "caption": "The guess z0_hat at level 100 with caption id 2 from the retrained model (0 relabelled, seed 20261022).",
+     "alt": "Four grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "math",
+     "why": "One side of the squared error."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/clean-latent-target.png",
+     "caption": "The clean latent z0 the squared error compares that guess with from the retrained model (0 relabelled, seed 20261022), and the two grids look almost the same.",
+     "alt": "Four grey grids in a 2 x 2 block.",
+     "from": 0,
+     "kind": "math",
+     "why": "The other side, so the reader sees the target is the clean latent."
+    }
+   ],
+   "example": [],
+   "output": [],
+   "face": {
+    "side": "input",
+    "count": 2
+   }
+  },
+  "start": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/start-latent.png",
+     "caption": "Start 0 of the retrained model's product run is 128 numbers drawn from a standard normal, shown as 4 channels of 4 x 8 in grey.",
+     "alt": "Four grey grids of random cells in a 2 x 2 block.",
+     "from": 0,
+     "kind": "layer",
+     "why": "The real random start sampling begins from."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/start-decoded.png",
+     "caption": "That random start passed through the retrained model's decoder shows no shape.",
+     "alt": "Pale noise with a darker border.",
+     "from": 0,
+     "kind": "layer",
+     "why": "Shows the start holds no picture yet."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 1
+   }
+  },
+  "calls": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-empty.png",
+     "caption": "At level 100 of start 0, the empty call's clean-latent guess from the retrained model (0 relabelled, seed 20261022) decodes to a purple blob in the centre.",
+     "alt": "Purple blob in the centre of a white picture.",
+     "from": 0,
+     "kind": "function",
+     "why": "The first of the three answers at one step."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-circle.png",
+     "caption": "At the same step the circle call's guess decodes to a red circle in the centre (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Red circle in the centre.",
+     "from": 0,
+     "kind": "function",
+     "why": "The second answer."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-square.png",
+     "caption": "At the same step the square call's guess decodes to a blue square in the same place (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Blue square in the centre.",
+     "from": 0,
+     "kind": "function",
+     "why": "The third answer, in the same spot as the circle."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-0.png",
+     "caption": "With only the empty and circle calls, the reported training at 0 relabelled with seed 20261023 draws a clean circle (saved sample 0, scorer: red only).",
+     "alt": "Red circle in the centre.",
+     "from": 0,
+     "kind": "function",
+     "why": "Shows each single caption works on its own."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-0.png",
+     "caption": "With only the empty and square calls, the same reported training draws a clean square (saved sample 0, scorer: blue only).",
+     "alt": "Blue square in the centre.",
+     "from": 0,
+     "kind": "function",
+     "why": "Shows the square caption works on its own too."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 3
+   }
+  },
+  "combine": {
+   "input": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-empty.png",
+     "caption": "The empty call's guess at level 100 of start 0, decoded (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Purple blob in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "The e_empty term."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-circle.png",
+     "caption": "The circle call's guess at the same step, decoded (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Red circle in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "The e_circle term."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-call-k100-square.png",
+     "caption": "The square call's guess at the same step, decoded (the retrained model (0 relabelled, seed 20261022)).",
+     "alt": "Blue square in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "The e_square term."
+    }
+   ],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-combined-k100.png",
+     "caption": "Adding the three estimates as the product does gives a clean latent that decodes to one purple square in the centre, circle and square on top of each other (the retrained model (0 relabelled, seed 20261022), level 100, start 0).",
+     "alt": "Purple square in the centre with faint smudges.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows the product overlaying the two shapes in one place."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 1
+   }
+  },
+  "step": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k200.png",
+     "caption": "At level 200 the combined guess of start 0 from the retrained model (0 relabelled, seed 20261022) already decodes to a purple square in the centre.",
+     "alt": "Purple square in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows the overlay is decided at the first step."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k150.png",
+     "caption": "At level 150 the combined guess from the retrained model (0 relabelled, seed 20261022) is still one purple square in the centre.",
+     "alt": "Purple square in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows it stays put."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k100.png",
+     "caption": "At level 100 the combined guess from the retrained model (0 relabelled, seed 20261022) is the same purple square.",
+     "alt": "Purple square in the centre.",
+     "from": 0,
+     "kind": "math",
+     "why": "The step whose three calls are shown on the calls box."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k050.png",
+     "caption": "At level 50 the combined guess from the retrained model (0 relabelled, seed 20261022) adds faint blobs left and right of the purple centre.",
+     "alt": "Purple square in the centre with faint blobs either side.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows the picture starting to spread."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-k001.png",
+     "caption": "At level 1 the combined guess from the retrained model (0 relabelled, seed 20261022) has faded to three faint blue-purple blobs.",
+     "alt": "Three faint blue-purple blobs.",
+     "from": 0,
+     "kind": "math",
+     "why": "Shows where 200 steps end up."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 5
+   }
+  },
+  "corr": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-0.png",
+     "caption": "Plain product, share 0 model (no both-shapes picture relabelled): saved sample 0, scorer: purple or overlaid.",
+     "alt": "Plain product, share 0 model (no both-shapes picture relabelled): saved sample 0, scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-0.png",
+     "caption": "Product with 20 corrector moves per level, the same share 0 model: saved sample 0, scorer: purple or overlaid.",
+     "alt": "Product with 20 corrector moves per level, the same share 0 model: saved sample 0, scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-0.png",
+     "caption": "Plain product, share 1 model (every both-shapes picture also relabelled): saved sample 0, scorer: red and blue apart.",
+     "alt": "Plain product, share 1 model (every both-shapes picture also relabelled): saved sample 0, scorer: red and blue apart.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "caption": "Product with 20 corrector moves per level, the same share 1 model: saved sample 0, scorer: red and blue apart.",
+     "alt": "Product with 20 corrector moves per level, the same share 1 model: saved sample 0, scorer: red and blue apart.",
+     "from": 0,
+     "kind": "abstract"
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 4
+   }
+  },
+  "dec2": {
+   "input": [],
+   "example": [],
+   "output": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-0.png",
+     "caption": "Finished product picture, reported training with 0 relabelled, seed 20261023: saved sample 0, scorer: purple or overlaid.",
+     "alt": "Finished product picture, reported training with 0 relabelled, seed 20261023: saved sample 0, scorer: purple or overlaid.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-0.png",
+     "caption": "Finished product picture, reported training with 0 relabelled, seed 20261022: saved sample 0, scorer: nothing readable.",
+     "alt": "Finished product picture, reported training with 0 relabelled, seed 20261022: saved sample 0, scorer: nothing readable.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "caption": "Finished product picture with 20 corrector moves per level, share 1 model: saved sample 0, scorer: red and blue apart.",
+     "alt": "Finished product picture with 20 corrector moves per level, share 1 model: saved sample 0, scorer: red and blue apart.",
+     "from": 0,
+     "kind": "abstract"
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/poe-run-final.png",
+     "caption": "After the last step the frozen decoder turns start 0's latent into three faint blobs from the retrained model (0 relabelled, seed 20261022), and the scorer calls all 8 starts of that run nothing readable.",
+     "alt": "Three faint blue-purple blobs.",
+     "from": 0,
+     "kind": "model",
+     "why": "The finished picture the sampler hands to the scorer."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-2.png",
+     "caption": "A finished product picture from the share 1 model shows the circle and square apart (saved sample 2, scorer: red and blue apart).",
+     "alt": "Red circle left, blue square right.",
+     "from": 0,
+     "kind": "model",
+     "why": "The outcome the experiment is looking for."
+    }
+   ],
+   "face": {
+    "side": "output",
+    "count": 3
+   }
+  },
+  "scorer": {
+   "input": [],
+   "example": [
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-0.png",
+     "caption": "A saved sample of the share 1 model with 20 corrector moves, which the scorer calls red and blue apart.",
+     "alt": "Red circle left, blue square right.",
+     "from": 0,
+     "kind": "function",
+     "why": "The simplest call, one shape of each colour."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/scorer-map-share1-poe-corrector20-0.png",
+     "caption": "The scorer's colour for each pixel of that sample gives 44 red and 36 blue pixels and no purple ones.",
+     "alt": "Red circle and blue square in flat colours on white.",
+     "from": 0,
+     "kind": "function",
+     "why": "Shows what the scorer counts to reach red and blue apart."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-0.png",
+     "caption": "A saved sample of the reported training at 0 relabelled with seed 20261023, which the scorer calls purple or overlaid.",
+     "alt": "Purple blob on the left.",
+     "from": 0,
+     "kind": "function",
+     "why": "A hybrid as the scorer receives it."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/scorer-map-product-k0-s20261023-0.png",
+     "caption": "The scorer's colour for each pixel of that sample is purple for 33 pixels, with 3 blue in one corner and grey edges.",
+     "alt": "Flat purple blob with a small blue corner and grey edges.",
+     "from": 0,
+     "kind": "function",
+     "why": "Shows why a hybrid is called purple or overlaid."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-0.png",
+     "caption": "A saved sample of the reported training at 0 relabelled with seed 20261022, which the scorer calls nothing readable.",
+     "alt": "Three faint bluish blobs.",
+     "from": 0,
+     "kind": "function",
+     "why": "A faint sample as the scorer receives it."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/scorer-map-product-k0-s20261022-0.png",
+     "caption": "The scorer's map of that sample is grey where the faint blobs are, because no palette colour lies within 0.35.",
+     "alt": "Grey blocks on white with one purple pixel.",
+     "from": 0,
+     "kind": "function",
+     "why": "Shows why a faint sample is called nothing readable."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-7.png",
+     "caption": "A saved product sample from the same seed 20261023 training that holds only a red circle, which the scorer calls red only.",
+     "alt": "Red circle at the right with a faint blob at the left.",
+     "from": 0,
+     "kind": "function",
+     "why": "Covers the red only category."
+    },
+    {
+     "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-3.png",
+     "caption": "A saved product sample from the same training that holds only a blue square, which the scorer calls blue only.",
+     "alt": "Blue square at the right with faint blobs.",
+     "from": 0,
+     "kind": "function",
+     "why": "Covers the blue only category, so all five categories are seen."
+    }
+   ],
+   "output": [],
+   "face": {
+    "side": "example",
+    "count": 4
+   }
+  }
+ },
+ "gaps": [
+  {
+   "box": "enc",
+   "need": "nothing beyond the tensors on either side",
+   "how": "none",
+   "detail": "The picture box on its left and the latent box on its right already show this encoder's real input and output for the same training copy; a drawing of convolutions would add no fact the sub line does not give."
+  },
+  {
+   "box": "dec",
+   "need": "nothing beyond the tensors on either side",
+   "how": "none",
+   "detail": "The latent box on its left and the reconstruction box on its right already show this decoder's real input and output."
+  }
+ ],
+ "left_out": [
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-1.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-2.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-3.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-4.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-5.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-6.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share0-poe-corrector20-7.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-1.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-2.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-3.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-4.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-5.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-6.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-corrector20-7.png",
+   "reason": "duplicate: all 8 saved samples of this key are the same picture to within 2 of 255 grey levels, so sample 0 stands for them"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-3.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-4.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-5.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-6.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/share1-poe-7.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-2.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-4.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-5.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261023-6.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-1.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-2.png",
+   "reason": "duplicate: the only purple or overlaid sample of the seed 20261022 key, and the seed 20261023 hybrids already show that call"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-4.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-5.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-6.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/product-k0-s20261022-7.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-1.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-2.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-3.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-4.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-5.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-6.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/circle-k0-s20261023-7.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-1.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-2.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-3.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-4.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-5.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-6.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  },
+  {
+   "image": "/home/molef/PhD/concept-composition/4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/the-toy-caption-model-pictures/square-k0-s20261023-7.png",
+   "reason": "duplicate: repeats a sample already placed from the same key with the same scorer call or layout"
+  }
+ ],
+ "drawn_after": [
+  "share0-poe-* (key 0_poe) and product-k{1,5,20,50,200}-s20261023-0 drawn from the gap list; relabel strip uses copy 5249, the same drawn picture as copies 6000 and 6020 (found by replaying corpus_k's generator)"
+ ]
+}
