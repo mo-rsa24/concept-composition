@@ -159,3 +159,38 @@ Each session's transcript and folder sit in `~/.claude/projects-archive/<project
 | Session | Restore command |
 |---|---|
 | `b9fb3e38` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b9fb3e38-fa68-4624-9700-0ecccd09316f.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b9fb3e38-fa68-4624-9700-0ecccd09316f ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `a9f3f351` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition-writing-restoring-plurality-in-compositional-diffusion-overleaf/a9f3f351-67c1-4a66-9c78-e81826ab870f.jsonl ~/.claude/projects/-home-molef-PhD-concept-composition-writing-restoring-plurality-in-compositional-diffusion-overleaf/` |
+| `3146bf79` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition-2-classifier-guidance/3146bf79-bbec-4406-8985-a823f12d83e2.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition-2-classifier-guidance/3146bf79-bbec-4406-8985-a823f12d83e2 ~/.claude/projects/-home-molef-PhD-concept-composition-2-classifier-guidance/` |
+| `ba678e5d` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition-2-classifier-guidance/ba678e5d-0791-43ca-b4ee-f4797a56c05d.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition-2-classifier-guidance/ba678e5d-0791-43ca-b4ee-f4797a56c05d ~/.claude/projects/-home-molef-PhD-concept-composition-2-classifier-guidance/` |
+| `e96b9dd9` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition-2-classifier-guidance/e96b9dd9-e513-4795-9225-64227a31e4e3.jsonl ~/.claude/projects/-home-molef-PhD-concept-composition-2-classifier-guidance/` |
+| `158ae1de` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition-4-inclusive-captions/158ae1de-0e5a-4ba5-86f5-b7c4d51656d1.jsonl ~/.claude/projects/-home-molef-PhD-concept-composition-4-inclusive-captions/` |
+| `bd0aa838` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/bd0aa838-e193-449a-861b-29f4835d687b.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/bd0aa838-e193-449a-861b-29f4835d687b ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `0ae9cc8b` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/0ae9cc8b-731d-4b59-8fa0-2ef29473555d.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/0ae9cc8b-731d-4b59-8fa0-2ef29473555d ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `8320ea28` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/8320ea28-ddef-44dd-9ea3-7654cdbda478.jsonl ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `0ad1441b` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/0ad1441b-b195-4748-bd0e-a823ec3c42f1.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/0ad1441b-b195-4748-bd0e-a823ec3c42f1 ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `dc7b177c` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/dc7b177c-3b06-4156-9166-6816daf5975d.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/dc7b177c-3b06-4156-9166-6816daf5975d ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `2875e4f6` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/2875e4f6-e898-4dac-9218-a1bca392c4b2.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/2875e4f6-e898-4dac-9218-a1bca392c4b2 ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `6b087717` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/6b087717-e28b-429a-8fd5-bce42d797703.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/6b087717-e28b-429a-8fd5-bce42d797703 ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `52d6ec28` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/52d6ec28-c283-409b-b5af-2a525efa78f1.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/52d6ec28-c283-409b-b5af-2a525efa78f1 ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `1cd40a85` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/1cd40a85-fd38-40e0-9f87-98b0201d9922.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/1cd40a85-fd38-40e0-9f87-98b0201d9922 ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `cc6dbbca` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/cc6dbbca-cf19-4a84-a625-4435ac58df1a.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/cc6dbbca-cf19-4a84-a625-4435ac58df1a ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `6b92d9c1` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/6b92d9c1-7c4e-4656-8d02-739fd6e1882c.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/6b92d9c1-7c4e-4656-8d02-739fd6e1882c ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+| `b7116f56` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b7116f56-82bc-4968-8c88-752e1672b5ec.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b7116f56-82bc-4968-8c88-752e1672b5ec ~/.claude/projects/-home-molef-PhD-concept-composition/` |
+
+## Safe sessions left in place
+
+These 11 had the `safe` verdict above and stay in the session picker, because a later check found one of the reasons below.
+
+| Session | Title | Why it stays |
+|---|---|---|
+| `f1fcac6c` | Scale-up ladder for PoE guidance route | A file it wrote now has uncommitted changes |
+| `2431f9b0` | ICLR revised paper materials | A file it wrote now has uncommitted changes |
+| `96716791` | Drip-skill-route for toy animal experiments | A file it wrote now has uncommitted changes |
+| `b3cb8672` | Cluster PhD folder organogram regrouping | A file it wrote now has uncommitted changes |
+| `a40d70e8` | ICLR 2027 review response figures | A plan or note names this session: `plans/regroup-into-project-folders.md` |
+| `6dac739e` | PoE ill-posedness in compositional diffusion | A plan or note names this session: `plans/split-into-idea-repos.md` |
+| `17925940` | ICLR eleven evaluation tools and rival methods | A plan or note names this session: `plans/regroup-into-project-folders.md` |
+| `553b6a70` | Hybrid vs photo CLIP cat-dog similarity | A plan or note names this session: `plans/split-into-idea-repos.md` |
+| `cb5e6071` | 2211.17091 discriminator guidance | A plan or note names this session: `plans/split-into-idea-repos.md` |
+| `e97868d1` | Language-space composition claims for PoE repair | A cadence queue claim file names this session |
+| `2a37400a` | PDF to editable DOCX conversion | A cadence queue claim file names this session |
