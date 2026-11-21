@@ -855,6 +855,281 @@
    "sha256": "2a3fccc998497c9c67a81621700612faae37eedfefab9a9bae72fa18821dfcd6",
    "state": "drained"
   },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/README.md": {
+   "at": "2026-11-22",
+   "sha256": "aa64361d624ca1698aa8f53eb444b73330d5bc84de7dae8d0d03308a5f6cee6f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/README.md": {
+   "at": "2026-11-22",
+   "sha256": "eecc6f8bd2f3ea78b9a891feb7ba0f0924b7341c23e3b7a64660a06933de9a0b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed02.png": {
+   "at": "2026-11-22",
+   "sha256": "b01957835163fe5a96d315fba6386c139d58a23ab3410cb3abeb5856695017a0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed03.png": {
+   "at": "2026-11-22",
+   "sha256": "4ca54696f9b9c71339ea6f357bfdcd36d317f7b6fd15141cdb77e682418641b7",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed07.png": {
+   "at": "2026-11-22",
+   "sha256": "9a64ee617aa193e79333cd309da73337873a0d66e1b57bc4583db8d0c410cdbb",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed08.png": {
+   "at": "2026-11-22",
+   "sha256": "3273f8c0ca6ea2a16b61bcbf8cc3c4f309950a7560130265179dd4a1b76226a2",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed13.png": {
+   "at": "2026-11-22",
+   "sha256": "adfa8eb6d506b159bc4e01dc56fc8cda59b9c76bc2ccedb637ed9dc38d22b0bb",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-01.md": {
+   "at": "2026-11-22",
+   "sha256": "8acf607807ef69cd5bbf22294fe08b71e6c08f39f5f2a15569c0c3fa066e490f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-02.md": {
+   "at": "2026-11-22",
+   "sha256": "f8a5e604863338ea91f0e1f64ccb62b4bf18435d3e2059babd4a627d3b46846b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-03.md": {
+   "at": "2026-11-22",
+   "sha256": "1428f8aa30783c2303f28c3f9009c1a977e0d08da7018962b578af8e18065be6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-captions-with-wet-words.md": {
+   "at": "2026-11-22",
+   "sha256": "858d85bfa6a025a4bb301fe0f0604d08d430e9ca92c8f124bc2346ab6ccb438d",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-01.md": {
+   "at": "2026-11-22",
+   "sha256": "653a0e952f974af263c8d8ba0ed0db17b5d2337cf6d4c33b013e562fe38cd1e0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-02.md": {
+   "at": "2026-11-22",
+   "sha256": "7de77f4a3c404edf2f5dbed33b0fd92399b1f4cb69fe96ee46335721604066bb",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-03.md": {
+   "at": "2026-11-22",
+   "sha256": "6d18c02b28b51d08bc8bcd8516abc13527bddb75e44c9932fc6d342053685f22",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-04.md": {
+   "at": "2026-11-22",
+   "sha256": "3776f53658d88d66bf1acfcaa058c1cc6607ca5dc0acccbd46b5197649d535a2",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-05.md": {
+   "at": "2026-11-22",
+   "sha256": "cf1ea102bcb4814f9373414fb7ec5a8c6b99ca9dcd643bda538e53294aa6983e",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-01.md": {
+   "at": "2026-11-22",
+   "sha256": "86a2879e181e3679df9a2ed027636e2cd8fac9bed066c1d539f2e414a2e02d9d",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-02.md": {
+   "at": "2026-11-22",
+   "sha256": "74dfaa5f934a5eec54c5d6b63124630d83283f979051e2566add5be9bbee69ee",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-03.md": {
+   "at": "2026-11-22",
+   "sha256": "df1aee57d126d1b09654116568df027fd450bedf69d56de42082f42b41890709",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-01.md": {
+   "at": "2026-11-22",
+   "sha256": "0a606adc2f824a6e3589c026e337beb88f208803a1ecfd1b9f0ceb2dda3abf06",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-02.md": {
+   "at": "2026-11-22",
+   "sha256": "4acf146e06b31d44bb28bb0bbd2f6bc331878cd2db5d2c261af21dd9bd77a750",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-03.md": {
+   "at": "2026-11-22",
+   "sha256": "b8bff2c23d2e0a8c46c7e72bb412507ef5ebef77a2decd1da4dc228908ca8126",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3062c20c5651975f31f596e70d009a578a16237de6ab53fdb9aa2195cf3e8881",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/camel-weather/page-01.md": {
+   "at": "2026-11-22",
+   "sha256": "6aee58412db7dc9ad93067f178e343255fc2e2d15e428b0e07e2816ac06b7294",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/camel-wet/page-01.md": {
+   "at": "2026-11-22",
+   "sha256": "7bd98d62379debc0e79cc317f183e631a9c0f116f182646070a79567f140c4f7",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-01.md": {
+   "at": "2026-11-22",
+   "sha256": "229e4c179108656c0a082d8c578faba2b653859f3ae98956bc731d3fce593b56",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-02.md": {
+   "at": "2026-11-22",
+   "sha256": "2237d665f1fd909cd6df0e63b4df779bb54adb87c3d64037a788c2acf4f0bf0a",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-03.md": {
+   "at": "2026-11-22",
+   "sha256": "248273a091c25fa975e3e3ce274fd000a73806000fbf91e6f63985b071566e11",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-04.md": {
+   "at": "2026-11-22",
+   "sha256": "8346c3c7581b5cf895187cb5a43a0135fa5770a695db893962b1a9be5c8760c2",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-05.md": {
+   "at": "2026-11-22",
+   "sha256": "4290d76edbf2920a27ff647b3557b13c24c5c165ba7c03483ade34a37c08ee89",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-06.md": {
+   "at": "2026-11-22",
+   "sha256": "4865e20fada02f9ca9b21a4b6323016340bee17c756b98cff469e5e2a4078c63",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-07.md": {
+   "at": "2026-11-22",
+   "sha256": "28f3fac1a04b7ead33b0e3832fdcfbb206649bee2622fea767bd7049334d4d90",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-08.md": {
+   "at": "2026-11-22",
+   "sha256": "2f584d54b9041e670d19f78f13c625c99d99f64e8235773ed327b75a4628dcfd",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-09.md": {
+   "at": "2026-11-22",
+   "sha256": "32d335925d37c8df083946057684648341c0922df9096e59089b82557c98cac9",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-10.md": {
+   "at": "2026-11-22",
+   "sha256": "e9bfb01071dc274c0830b51c7d2e7ccb1769b65588260757bddcaf5dc611c12f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-11.md": {
+   "at": "2026-11-22",
+   "sha256": "a374a30cd0d2305c41700ec33d2555c01e82d2960475ca37c98e3a844dd93f94",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-12.md": {
+   "at": "2026-11-22",
+   "sha256": "afe603a011f7389d1ca8a3ab553014aab95c40e7b4be0cf6870d8f177e735513",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-13.md": {
+   "at": "2026-11-22",
+   "sha256": "9700d239d009aa705989fbe4d7cd01941a114d16dc86c7cccbf4a3e5331192fd",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/page-14.md": {
+   "at": "2026-11-22",
+   "sha256": "2232e3935c9b2b66b461b446f7d49c48808003c640a7dc9c188a57ed75b410cc",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-01.md": {
+   "at": "2026-11-22",
+   "sha256": "95533a7a8372f1140446a728206f78e84989dce991e7dc074f0e82628cf71a34",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-02.md": {
+   "at": "2026-11-22",
+   "sha256": "2396f308f63237d0971e1fc83e07b2ae734e64f629d5fa82013a5595303e245d",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-03.md": {
+   "at": "2026-11-22",
+   "sha256": "0fa3f454bda2701a12937a8d9146cf748467c7158434e13493983b94333f5fb6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-04.md": {
+   "at": "2026-11-22",
+   "sha256": "1f9441eb3af3fa5443c40841ff8274952d2b7aa6bd6f39afeacf3c59878c287c",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-05.md": {
+   "at": "2026-11-22",
+   "sha256": "c9daeb32dd98d581de8d030318b806b7516fed14f4ccbe1aca1bd9a304c4aa60",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-06.md": {
+   "at": "2026-11-22",
+   "sha256": "7f762f92132bfd214c92a9ce5131351fc0f94279e25e75eb28227b3d90ecd960",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-07.md": {
+   "at": "2026-11-22",
+   "sha256": "764a8bfca415db4b480b642aef09602ec72a86cca5aadc86e403ebc822d19e42",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-08.md": {
+   "at": "2026-11-22",
+   "sha256": "9f1d51c447af513fce4dcd5abe21eb39f88f83f1a1f8bd0dab0bc55917d567a7",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-09.md": {
+   "at": "2026-11-22",
+   "sha256": "7e2a3c6fb7c99771f7bfe7b368010a715e7b4db3ee59afa65c8bf2366635c045",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-10.md": {
+   "at": "2026-11-22",
+   "sha256": "786d4fc712d9237513f29832b811e4e07651cd93e40a6ebca1a8b2337355632c",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-11.md": {
+   "at": "2026-11-22",
+   "sha256": "7a37346bd76fdb08b15c3d264cce72246f9521fdd8a69347bdde70107379d421",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-12.md": {
+   "at": "2026-11-22",
+   "sha256": "35fe60b8726aa40adcdae33423588ec690628c8c8f011c0df7a3989a5eda1c91",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-13.md": {
+   "at": "2026-11-22",
+   "sha256": "42d894f1ced23ae1cf33f1da70a377e9388e6a73e0710a0b5d3f4fa90fe72469",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-14.md": {
+   "at": "2026-11-22",
+   "sha256": "f1ef0f955695a335e5e444fd24696fd9375463e4adad7e1f75d0a71f7f5a3134",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-15.md": {
+   "at": "2026-11-22",
+   "sha256": "3ffa71669cebe7b87ccae89789cbef6049da7b70c1bded042e1023d86c95f67b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/page-16.md": {
+   "at": "2026-11-22",
+   "sha256": "96b16322a662b5ce59c0018360fd988760a3dd3782b308085f2c031996e74478",
+   "state": "drained"
+  },
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/README.md": {
    "at": "2026-11-22",
    "sha256": "18bc86ead31dd0a0be33b9c3f3f4a79fa0e375bdb4c9b55eab1f5cc8bfc2282f",
@@ -1213,6 +1488,59 @@
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed07.png",
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed08.png",
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/where-the-product-lands-on-the-manifold-seed12-surface.svg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/cat-dog-caption-fit.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/cat-dog-similarity-plane.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed01.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed04.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed05.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed06.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed09.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed10.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed11.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed12.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed14.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed15.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed16.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed17.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed18.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed19.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed20.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed21.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed22.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed23.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed24.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed25.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed26.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed27.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed28.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed29.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed30.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed31.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed32.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/photo-thumbs",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/three-sets-side-by-side.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-01.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-02.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-03.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-01.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-02.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-03.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-04.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-wet-words/sheets/sheet-05.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-01.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-02.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-any/sheets/sheet-03.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-01.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-02.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/dog-wet-words/sheets/sheet-03.jpg",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/camel-weather/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/camel-wet/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-weather/images",
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/wet-and-weather/dog-wet/images",
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_plain/read/boxes_seed_9.png",
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_plain/read/maps_seed_9.png",
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/tigerdog_s42_lora/read/boxes_seed_42.png",
