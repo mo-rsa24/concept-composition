@@ -524,6 +524,431 @@
    "at": "2026-11-21",
    "sha256": "272426846e1a282fb6aad9c43533b0cc53c3d2810df83e5ff748fde4690206bd",
    "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/README.md": {
+   "at": "2026-11-22",
+   "sha256": "6eba9f07c3856118665fe9a2745009dfb64a22ecd377a7054b16d4b76877bd29",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/MANIFEST.md": {
+   "at": "2026-11-22",
+   "sha256": "896e8b797b4d5016d48bd1a7579dcf8b1c3279aebe7d4732313220eb44f13ab1",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/README.md": {
+   "at": "2026-11-22",
+   "sha256": "1f6b0a80798f3a9912bb0bfe8b8b8150837de24604c7ed9739247b9170a9d37f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/attribute-binding-t2icompbench-fig8-blue-horse-brown-vase-composable-sd2.png": {
+   "at": "2026-11-22",
+   "sha256": "a49a4dbe425b613fe2e8920495cb5e74d5049d625f349847ffe7832d9804f4e0",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/attribute-binding-t2icompbench-fig8-blue-horse-brown-vase-joint-sd2.png": {
+   "at": "2026-11-22",
+   "sha256": "fd546282076d1d2eb2897dfb9c784245f7ac77408e8e2626f8e48425cfc52fb6",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/blend-superdiff-fig1-flamingo-candy-cane-joint.png": {
+   "at": "2026-11-22",
+   "sha256": "b9a8f66d23b6cc08e8838a6b0c06db6214e326f3dc7cff376f85af5e8fe391a6",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/blend-superdiff-fig1-flamingo-candy-cane-score-average.png": {
+   "at": "2026-11-22",
+   "sha256": "5c6fafbe95df9d397ce08caccf8e8aac013c8f4cc85cd7f9ddb57d1baa196c7c",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/blend-superdiff-fig1-flamingo-candy-cane-superdiff-and.png": {
+   "at": "2026-11-22",
+   "sha256": "051f9f86a48a29a00ce8160e9a149d7035db1dd4cd47eb68aa14f5038d683451",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/colour-binding-bradley2025a-fig5-yellow-with-each-colour.png": {
+   "at": "2026-11-22",
+   "sha256": "4aa85e56b470d68fa3a89a0962043f4ca9642f2332e3fde971103c63c05cf9d7",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/contention-co3-fig8-dog-and-bear-composable.png": {
+   "at": "2026-11-22",
+   "sha256": "e5e837b13c71652d3ae2fb8e1aa19d8f5295407a6a3ecb99a117977578c647e6",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/contention-co3-fig8-dog-and-bear-joint-pixart.png": {
+   "at": "2026-11-22",
+   "sha256": "cbcdef83b83c5aa12cbe8fe327129b944d036f347a2ab732690d2fd28ad865bd",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/counting-bradley2025a-fig16-left-composed-k1-to-10.png": {
+   "at": "2026-11-22",
+   "sha256": "266d9f8517161be3cce39a1c7aa16ba8bdde97f073199178e3b4bcd7e46f6172",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/counting-bradley2025b-fig7-exp1-joint-k0-to-10.png": {
+   "at": "2026-11-22",
+   "sha256": "8c7a814936f36586ac253eb97dd03d1e94616fde1d36c7f307fc5cee51adb159",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/implicit-liu-fig6a-a-boat-and-a-desert.png": {
+   "at": "2026-11-22",
+   "sha256": "a9faf96b3cb254b48b7dd2f3af5171564d84732378061b194a9f81f967310235",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/implicit-liu-fig6a-a-boat.png": {
+   "at": "2026-11-22",
+   "sha256": "081fa2344aa3b8c115f3bd8823c6fb70680521e8dafad026465ff6137aee0cf7",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/structural-bradley2025a-fig2-projective-composition-clevr.png": {
+   "at": "2026-11-22",
+   "sha256": "98123c0020af186044941c07e029ef8618a255a099cd19d307874ffc32700ecc",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/structural-bradley2025a-fig5-yellow-with-each-colour-full.png": {
+   "at": "2026-11-22",
+   "sha256": "019d6e9e65e62aba984a0f8967e310523eff8762041b3e25b9d5d13a3ba12d25",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/structural-bradley2025a-fig7-dog-horse-against-dog-red-hat.png": {
+   "at": "2026-11-22",
+   "sha256": "621b4887b1fe945f20be4d6accd38cd9e78e6dda8561040e75b1006392f8eed0",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/structural-t2icompbench-fig1-attribute-colour-and-shape.png": {
+   "at": "2026-11-22",
+   "sha256": "71e3ef71c9c86ff36a83ac3af8e44a5dc3df1ad33f0a203bdcf5b242bdd4eb7c",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/structural-t2icompbench-fig1-numeracy-swans-suitcases.png": {
+   "at": "2026-11-22",
+   "sha256": "c7c2cea34abc981b04ce7745f6291bc3a7908a4ccc28a2a0a5f17837751e7df6",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/five-interactions.md": {
+   "at": "2026-11-22",
+   "sha256": "046c242fd82d6e1729ef63262ff9918b235221a8c8b596020b5d07c3d9d663e6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/associative-out-of-context.png": {
+   "at": "2026-11-22",
+   "sha256": "24d175b3b5a318bd435faf19ce130ce7ed46a8e859e8d4f92d978b3b1a105b9c",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/causal.png": {
+   "at": "2026-11-22",
+   "sha256": "e98b44cb3781348772372b7c62a964a6817c44116358dc54f383da4a703f7103",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/joint-only-atlas.png": {
+   "at": "2026-11-22",
+   "sha256": "925476dcc5fe0f565b676f70e2c572714a47972c4b6bc37de8bd52bf4802f571",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/structural-objects.png": {
+   "at": "2026-11-22",
+   "sha256": "50f92baf834b2c357c520670c0dabc8781c3088c7099a391e2f2f4f4cd26a49d",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/when-fusion-is-the-target.png": {
+   "at": "2026-11-22",
+   "sha256": "67c567997a3f28657dff6e99e80223446062a71002e6ec27a2ff3550a27bd909",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/joint-against-poe-by-kind.png": {
+   "at": "2026-11-22",
+   "sha256": "6e12f873a2969e210395e4564154ffc82d7476e5dad17ba0519340de5d5c772b",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pair-selection/brief.md": {
+   "at": "2026-11-22",
+   "sha256": "90e5617c87184c8c374d4eb733d6f9598b9c5105ef73c2155754b04fb86b36f8",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pair-selection/review.md": {
+   "at": "2026-11-22",
+   "sha256": "01582d1f396d9e2b802f12ac482517d9480077ccaf40f8cc5ecedadbfc4d391b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pair-selection/round2-prompt.md": {
+   "at": "2026-11-22",
+   "sha256": "ae482be1edcc013500380a2e7aab10a11950d6505dc194103047d3a1b7163196",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pair-selection/round3-full.md": {
+   "at": "2026-11-22",
+   "sha256": "8af29b164877f985ac0199128fe3a394e1cfd40c82942cd7847d570816b73b0f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pair-selection/round3-prompt.md": {
+   "at": "2026-11-22",
+   "sha256": "b27be5b8ec89c5b38a649db7174ebf987394111abd4016a6530a9b6eef0e4792",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs-by-seed-sd35-intended-prompt.png": {
+   "at": "2026-11-22",
+   "sha256": "fa32dce2654078b1471e850aa933d2c9d154dd4e04b55186a8a5986a8ed84fa0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs-by-seed-sd35.png": {
+   "at": "2026-11-22",
+   "sha256": "1265eefb0bedb77145f0b13d70ca2eec8e3a376950951c20d523ed05c4924a77",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs-by-seed.png": {
+   "at": "2026-11-22",
+   "sha256": "9f21f76edc59ca07e97d34507f37b2613628af88ad52a6c7ccfa05664ec45a71",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/attribute-blue-horse-brown-vase.png": {
+   "at": "2026-11-22",
+   "sha256": "bf5e3d5c74d186f68b4b761c1a5f85c8e7dd6565cfaf5a8ad4423e63a5347f75",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/blend-flamingo.png": {
+   "at": "2026-11-22",
+   "sha256": "f290f1aebc2d5b6eecdf5bc900ef357d3234393f720a69bbf9b9f94928cc598e",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/boat-desert.png": {
+   "at": "2026-11-22",
+   "sha256": "43c661c0889de52b13d54c5f2d27a1c1ea3bfc6f7c8ee2a57bb74d1378e92f82",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/cardiomegaly-effusion.png": {
+   "at": "2026-11-22",
+   "sha256": "a2feabd967a499e0c85d6538e291087e142a23bd050290ffbb95064a1d439d81",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/cat-and-dog.png": {
+   "at": "2026-11-22",
+   "sha256": "5bfd93ba4c15c035a5e3bdd31afa3a3b7bd79483028263efa5c59b764d6931b0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/comorbidity-copd-granuloma.png": {
+   "at": "2026-11-22",
+   "sha256": "376138e0bf28906b2728109c9ab83531be439ac1fb2fbbe1547d2a6cf31fe47e",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/contention-dog-and-bear.png": {
+   "at": "2026-11-22",
+   "sha256": "c43d3e169ea8121bb1134b984550d6be25c1583eda9328f1c235fbf67c8a3293",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/dog-horse-red-hat.png": {
+   "at": "2026-11-22",
+   "sha256": "261f5a576958671f73211180f97ef5848b67854887be0554e17541a54c48f205",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/interaction.png": {
+   "at": "2026-11-22",
+   "sha256": "120e8713f955a017634312af9f3f0516f0bb27bb09e49546aa5f772bf1e598c4",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/pneumothorax-before-after-drain.png": {
+   "at": "2026-11-22",
+   "sha256": "f72f463148573d556db460783812aad5f492da7048322f4215bdf8d59bd0c2b9",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/pneumothorax-copd.png": {
+   "at": "2026-11-22",
+   "sha256": "9c9bb292a49a07255f6b6683db621cb4ac8858e5bf66c671c7dcd9de2bd4af2a",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/pneumothorax-drain.png": {
+   "at": "2026-11-22",
+   "sha256": "c731ce9421c03ef89afd6be6909938f73275645762534dfd56cdc8af7bf21a9b",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/relation-clevr.png": {
+   "at": "2026-11-22",
+   "sha256": "643380d12887cca4213f08865e90eb8abc8f66de73f79e90702287c8d6d40948",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/silicotuberculosis.png": {
+   "at": "2026-11-22",
+   "sha256": "fd5be065ecaa7910d26b4cecdbe1f626325c3084da5926d84d87f81983d472b5",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/swans-suitcases.png": {
+   "at": "2026-11-22",
+   "sha256": "223019726cefa1e1986bebd0f4fbf50c66e3e5a5411b24e87232990104cda4d9",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/yellow-with-each-colour.png": {
+   "at": "2026-11-22",
+   "sha256": "69325aa06f240f17cc162f3e52d6932f8d28ed47f9124afdc667dc7ff2b82416",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/real-radiographs-by-kind.png": {
+   "at": "2026-11-22",
+   "sha256": "d7d4efeec7cbb20dbc1b21c0a1e91ad9a99082617b8daf93b0a8b9c61f120c5c",
+   "state": "skipped"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/scouting/clevr-rows.md": {
+   "at": "2026-11-22",
+   "sha256": "1cc696bb80b4fecd40146b56d7f979204595c01c07849a4afce17c3a1075daa0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/scouting/text-to-image-rows.md": {
+   "at": "2026-11-22",
+   "sha256": "80fed44161221a3489a2408ca1925ad1c22526a33a1cb0e4d3e5a1d899587c6b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-and-dog-poe-seeds0to3.png": {
+   "at": "2026-11-22",
+   "sha256": "5c54e40387c3d951db20922eb7c9fac7fd2b5453a5ee9190b901b20f343e847b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/negation-poe-seeds0to3.png": {
+   "at": "2026-11-22",
+   "sha256": "1ed3f08900d15f776636fb1707c61636316e979d452abd101368efb4b309b6b1",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/spatial-poe-seeds0to3.png": {
+   "at": "2026-11-22",
+   "sha256": "02476b49ae41c16256eac668115a9ada3608f70dcbdd1833626de08b16347f88",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet-seeds-4-to-7.jpg": {
+   "at": "2026-11-22",
+   "sha256": "07b1d316bab1bd3cf25d0705853ae748133aaf239c52269327a9a06893b6b617",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet.jpg": {
+   "at": "2026-11-22",
+   "sha256": "c0d77668df45cef24b4a727ed586f9bb4ce948fb275ea00aaa51037998bc003b",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed01/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "6a77b1a1187ee02b831e3d815266cdeeb312265883d35f89872583960e45ef70",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed06/mono.png": {
+   "at": "2026-11-22",
+   "sha256": "8d3db8db5a9ba85477522ce94396bf342827182c43cb3cc7ca4b2b4c4edd96f0",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed02/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "173c70139b2670156048cd4df2a824b77c42336798bb0c50b85fe1af7d3491a8",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/README.md": {
+   "at": "2026-11-22",
+   "sha256": "7d525bfa7dc1a6d12291377dd2de829569f1d8bbf1b101a2e40429e632d2a4c8",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/summary-grid.png": {
+   "at": "2026-11-22",
+   "sha256": "da834d0ec47f0ee6b999eb801f3b15b2a65ad88c1afe6310daaac03d7e1850e4",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/README.md": {
+   "at": "2026-11-22",
+   "sha256": "70c03e6f6732061f31c0d8603c9b952eafed4a358a7f3f747dddff594b14b9d6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/where-the-product-lands-on-the-manifold-seed12-surface.png": {
+   "at": "2026-11-22",
+   "sha256": "2a3fccc998497c9c67a81621700612faae37eedfefab9a9bae72fa18821dfcd6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/README.md": {
+   "at": "2026-11-22",
+   "sha256": "18bc86ead31dd0a0be33b9c3f3f4a79fa0e375bdb4c9b55eab1f5cc8bfc2282f",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_lora/read/boxes_seed_9.png": {
+   "at": "2026-11-22",
+   "sha256": "a486afc61df54d35246eeca196762bd2a80891440e7a711b27e935110d02a7ad",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_lora/read/maps_seed_9.png": {
+   "at": "2026-11-22",
+   "sha256": "27d11f34697fe02b0ae5421d8ee3371311d2c473e608309efca9735a849820a3",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/tigerdog_s42_plain/read/boxes_seed_42.png": {
+   "at": "2026-11-22",
+   "sha256": "ca449945f06a459ab0e24b4f285e58b4c47616daa198d1fdfdf8f76ea70d94a3",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_10000.png": {
+   "at": "2026-11-22",
+   "sha256": "980e05d6e34766772a06a21542f9aee5415e6f12cc0af54b7de31b967f3ef84a",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_30000.png": {
+   "at": "2026-11-22",
+   "sha256": "707a640ac65d1e1dfccbf0e3dbb0e245125bc87494fc37a3e65e028104afe05a",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_20000.png": {
+   "at": "2026-11-22",
+   "sha256": "0adf8a0b00b8f618c7402565525dc4819de6a52b96d25595f2a45e477b6bd4e1",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_10000.png": {
+   "at": "2026-11-22",
+   "sha256": "e322c1e0376ed914f55b07869c1187158c7f13cabb4f0aeaf231a285ca2b6ffd",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_20000.png": {
+   "at": "2026-11-22",
+   "sha256": "28db16a69428a77693144279ce999335ef6bc7daf904778895c763ee036891be",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_10000.png": {
+   "at": "2026-11-22",
+   "sha256": "6a92a8c6e60aba478783e86cf78a1f92119aeff9ba1d0f96c7d6a2ef3621a610",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e26e268c79e8ae34c10d976a9c32f40db33a7cc5936104277029c7ca627297e3",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/contact_sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "a191871f0b05884ad0f147c48fce13e58b224447afe6e662368079b0005a004c",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/does-the-cat-prompt-already-draw-dogs/crop_classifier_sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "4bf04955f2e6b99d37cd204bdc51b8155f595a5b9a797cffb71fd2625614fac6",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/candidate-crops.png": {
+   "at": "2026-11-22",
+   "sha256": "5b4385d87b0d701e8401c720966946825818c65b18d41cccc30587e88dd656ed",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/detected-layouts.png": {
+   "at": "2026-11-22",
+   "sha256": "99b92ea2788d667a393d929e0f4deef02838a3a135dd5998ee56d752c4db0a43",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/identity/identity_plain_poe_half_guidance.png": {
+   "at": "2026-11-22",
+   "sha256": "dec4c5ad46f6982ee414af797edd9346a6d4125d3a0d2f5189f580d9bb3d141a",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/identity/identity_regional_flat_masks.png": {
+   "at": "2026-11-22",
+   "sha256": "274323255fc29c6b59119906a1c8c287a8925cd65fed068421abaa6c7ae1cdb2",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/mask-overlays.png": {
+   "at": "2026-11-22",
+   "sha256": "60edc6f0ef85ef532d3f7b730f82176ac63af19c2e770623fe5063d27f106d02",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/is-the-layout-the-missing-piece/overlap-readings.png": {
+   "at": "2026-11-22",
+   "sha256": "88490d13af2ab92322eecb91bb4d29fc40a7028dfc3c7cf374f44344a691918b",
+   "state": "drained"
   }
  },
  "held": [
@@ -693,6 +1118,157 @@
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w05-draw-0.png",
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w1-draw-0.png",
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-guided-w2-draw-0.png",
-  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-real-row-3000.png"
+  "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/the-side-by-side-discriminator-real-row-3000.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/relational-action.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/relational-spatial.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/structural-binding.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/temporal.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/medical-examples",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/burning-log.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/butterfly-meadow.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/camel-forest.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/camel-shadow.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/cat-behind-tree.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/cat-chasing-dog.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/dolphin.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/pairs/style-content.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/radiograph-highlights",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/burning-log-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/burning-log-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/butterfly-meadow-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/butterfly-meadow-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/camel-forest-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/camel-forest-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/camel-shadow-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/camel-shadow-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-and-dog-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-behind-tree-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-behind-tree-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-chasing-dog-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/cat-chasing-dog-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/dolphin-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/dolphin-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/interaction-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/interaction-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/negation-a-only-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/relation-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/relation-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/spatial-a-only-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/style-content-joint-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/tiles/style-content-poe-seeds0to3.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed02/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed03/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed04/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed05/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed06/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cat__x__dog/seed07/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed01/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed01/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed02/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed02/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed03/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed03/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed04/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed04/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed05/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed05/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed06/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed07/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed07/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/cats__x__dogs/seed08/mono.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed01/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed02/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed03/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed04/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed05/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed06/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__multiple_animals/seed07/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed01/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed02/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed03/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed04/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed05/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed06/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog__x__cat__x__single/seed07/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed01/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed03/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed04/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed05/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed06/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/dog_and_cat__x__multiple_animals/seed07/poe.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed01.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed02.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed03.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed04.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed05.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed06.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed07.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/cats/seed08.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed01.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed02.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed03.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed04.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed05.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed06.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed07.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/tiles/single/dogs/seed08.png",
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/where-the-product-lands-on-the-manifold-seed12-surface.svg",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_plain/read/boxes_seed_9.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_plain/read/maps_seed_9.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/tigerdog_s42_lora/read/boxes_seed_42.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/tigerdog_s42_lora/read/maps_seed_42.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/tigerdog_s42_plain/read/maps_seed_42.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-03-self_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-03-self_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-03-self_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-03-self_40000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-03-self_50000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-03-self_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-03-self_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-03-self_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-03-self_40000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-03-self_50000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s42_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_fox_s42_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_10000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_37500.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_20000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_30000.png",
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_37500.png"
  ]
 }
