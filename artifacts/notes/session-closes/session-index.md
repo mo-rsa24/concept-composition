@@ -151,3 +151,11 @@ At most five paths per session, chosen in the order uncommitted, missing, moved 
 | `fc439ed4` | `uncommitted` | `2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md` |
 | `4ab26246` | `uncommitted` | `2-classifier-guidance/plans/24-mnist-digits-on-a-canvas.md`<br/>`~/.claude/projects/-home-molef-PhD-concept-composition/memory/discriminator-guidance-set-aside.md` |
 | `5743058a` | `uncommitted` | `~/PhD/medical-imaging/compositional_diffusion/artifacts/results/what-the-papers-report/what-the-papers-near-factored-cfg-leave-open/README.md`<br/>`~/PhD/medical-imaging/compositional_diffusion/artifacts/results/what-the-papers-report/what-the-papers-near-factored-cfg-leave-open/open-problems-near-factored-cfg.md`<br/>`~/PhD/medical-imaging/compositional_diffusion/artifacts/results/what-the-papers-report/which-finding-pairs-the-papers-back/README.md`<br/>`~/PhD/medical-imaging/compositional_diffusion/artifacts/drips/an-open-chest-xray-problem-for-iclr/ROUTE_WALK.md` |
+
+## Archived sessions
+
+Each session's transcript and folder sit in `~/.claude/projects-archive/<project folder>/`. The command beside it puts both back, and the session then appears in the picker again.
+
+| Session | Restore command |
+|---|---|
+| `b9fb3e38` | `mv -n ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b9fb3e38-fa68-4624-9700-0ecccd09316f.jsonl ~/.claude/projects-archive/-home-molef-PhD-concept-composition/b9fb3e38-fa68-4624-9700-0ecccd09316f ~/.claude/projects/-home-molef-PhD-concept-composition/` |
