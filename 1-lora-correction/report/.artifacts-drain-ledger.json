@@ -259,6 +259,246 @@
    "at": "2026-11-22",
    "sha256": "7056d08905093e5592df701e0b7a8fbc45a648d804621d2cb3d365bd90820a54",
    "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/README.md": {
+   "at": "2026-11-22",
+   "sha256": "a969151632b3583f045bda23e73957bf683a5736866d51b34d00079407f67534",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e8d7f2337b41a50218e6b1a988d8e52fb9360f14f2b4ac0e5129a6374c7a5deb",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f0745b699c2455157a828b31934b20504c8e1cfaa14a1c9f3426e9a0584b1f7d",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/caption_readback.png": {
+   "at": "2026-11-22",
+   "sha256": "31ff4c441fbebb238e6978d76e043982c43c904c1a34e1df53fce3adcf816fbf",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/language_probe_l1_additivity.png": {
+   "at": "2026-11-22",
+   "sha256": "ce8d9ea1cf2992af48f61b0020f355323e67ecd20ed17cc6417077ed904c520f",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/language_probe_l3_binding.png": {
+   "at": "2026-11-22",
+   "sha256": "6b1cfedef94b7e3a0e985cc7dbd500e1d48a3368823e1929b9383226bb275736",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/manifold_slide_clip.png": {
+   "at": "2026-11-22",
+   "sha256": "eab75b71cbb019e2408f968848aa5b46ff80a79eef1ec69fa5f0bf4691966217",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/does-the-interaction-term-cause-composition/five-checks-from-three-sides/quality_control_cache.png": {
+   "at": "2026-11-22",
+   "sha256": "3379737d35a3deb609113078b0c8695b7da34fde8e261ed41b6f97c1962dc27f",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/F5b-gradual-commitment.png": {
+   "at": "2026-11-22",
+   "sha256": "6c2249b5ba97f41b5524c7908448730a435e731553c94b0cfd799f588011b603",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/README.md": {
+   "at": "2026-11-22",
+   "sha256": "ae93abdce893e106fd9100db972f8faf852d9c028cade2036c4a2dccc9668bc2",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/divergence_eyeball.png": {
+   "at": "2026-11-22",
+   "sha256": "0e876d32980af4c93be78a471d75e4db86cbd277c2d6c6973705f8d81fb6a9fe",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/dose_divergence_eyeball.png": {
+   "at": "2026-11-22",
+   "sha256": "7b13a6f52a444f3385729df929c1baf72982b3bd814e17a76eacd3ec06010456",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/does-it-cause-composition/how-much-correction-is-needed/plausibility_climb.png": {
+   "at": "2026-11-22",
+   "sha256": "5b2253953779d892dcbe029377c720bdf0e5587b448028f5fc47181825eb65d6",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d38f4562437eacfca98e839c0f23a10968bbe5c21b721b9ea428527111a6dd3a",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/RUN_ON_THIS_NODE.md": {
+   "at": "2026-11-22",
+   "sha256": "489d473abc3153117cf9c63d098375c1c3f0c07e20a9472438c5aced2a7dc584",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_frog__x__a_toad__seed_9__toad.png": {
+   "at": "2026-11-22",
+   "sha256": "7337a652f31272b4558a0cfbeeb96d554387373fbc0c171e09592e21a498f319",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_leopard__x__a_jaguar__seed_9__jaguar.png": {
+   "at": "2026-11-22",
+   "sha256": "b74ae68e408e11f8d479b99a197d1bc27b14148bd83f061f9d4dcaf6c0ae5f81",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/residual__a_frog__x__a_toad__seed_9__toad.png": {
+   "at": "2026-11-22",
+   "sha256": "2577887e3001aff32f528b98bb9c34cafffc63d524631b3ec11561aaccf5ca7f",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/measure-fairness.md": {
+   "at": "2026-11-22",
+   "sha256": "3a7290904bf15a23533bfe99c90ca61ba6c8859e65b537418126d195bfeef4cf",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/smoke_eagle_hawk.png": {
+   "at": "2026-11-22",
+   "sha256": "7f8b6532c77f17646e2318fc23599c94bb38760d7583dd5dfd1e08d55060e9c0",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/where-the-correction-lives-in-the-frame/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5b73ad15cc84b5262c82f5bf68a7e773541653c220863dd690916e45af41dc0d",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/where-the-correction-lives-in-the-frame/cat-x-dog-rt-spatial-map.png": {
+   "at": "2026-11-22",
+   "sha256": "22c97448413d3d9d43c5564a3794d91ab96160c7e0421ea870f9518fcbfe0935",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/where-the-correction-lives-in-the-frame/is-the-face-just-where-the-subject-sits.png": {
+   "at": "2026-11-22",
+   "sha256": "71177852abd73d8d0e6f93cfebc42ddd85518af21a4f0797a1c7248c3e8f958e",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/QUERY.md": {
+   "at": "2026-11-22",
+   "sha256": "a8928153696bce130e53d476955372a76ec4f33a17ad5265073f53c288c26e0c",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/does-the-subspace-test-predict-transfer/geometry_vs_transfer.png": {
+   "at": "2026-11-22",
+   "sha256": "8173839c869d3c0ed8bcd099904624eadc3a4de34f808e0d162248743c631ac1",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/what-it-looks-like/which-way-the-correction-points/what-the-spectrum-measures/QUERY.md": {
+   "at": "2026-11-22",
+   "sha256": "8e462f55f925d109a67ee78d6044dc3da81aae7cb3eed3f9db166e65e5e912dd",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/README.md": {
+   "at": "2026-11-22",
+   "sha256": "90becc22752adf0da99fa601e0d49781074340a00c5c998e18ed7fe316b755bf",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/README.md": {
+   "at": "2026-11-22",
+   "sha256": "8dd146605d4afe34699cb7356fba7642faa8b7b56730bea5723021edb378db63",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/cow-horse-seeds-9-12-first-look.png": {
+   "at": "2026-11-22",
+   "sha256": "69ffc592ebd33cd9af9ec90805da656eda7ecbd1e4bf10e5b000861ab9a90be7",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/early-steps-seed10-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "951b4c3242004a424746204a3dc132e37be3969004f8e38eca37da188b42c9c7",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/early_steps_grid.png": {
+   "at": "2026-11-22",
+   "sha256": "582a0141e9874b0734cfa6c556a0a027819c59817e33673f01af98882dc9253a",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/failure_calls_sample.png": {
+   "at": "2026-11-22",
+   "sha256": "8e84098b3b3733f3a5d7f930847a8239a9d4eba02a2610ff5ebe74e6906d7b7e",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/failure_counts.png": {
+   "at": "2026-11-22",
+   "sha256": "4619b7dcff61e425689f3da057d546b5c3101bdc52f49cbf019e4facad1d58f8",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/figure10_preview_1x3.png": {
+   "at": "2026-11-22",
+   "sha256": "099ffb4879f3c7b6597f02cdb6c9bd3484847767bf92a318e2bd56fbdbe1ce5a",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/figure10_preview_2x2.png": {
+   "at": "2026-11-22",
+   "sha256": "283efe5e7c8a7f9c43dee2ab18f14aa627f8fcd4455b4ef01005e43e8294018e",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_a_failure_types.png": {
+   "at": "2026-11-22",
+   "sha256": "d37d578e04ed5e607c9ef7db0ddf417016177f14fcb7059c5db6c94de81ee75a",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_b_blip.png": {
+   "at": "2026-11-22",
+   "sha256": "e37bcdda1d7dbd41297e29b238ccf0d4d140f0be528ea5ccdf7b53a454a33a75",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_c_two_animals.png": {
+   "at": "2026-11-22",
+   "sha256": "e04bfd0ed97c8874fc8de824f43c0f7dc773cb8510144c0c8708d9e62506e917",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_d_imagereward.png": {
+   "at": "2026-11-22",
+   "sha256": "a5c6d29779c115d092a4e0d87f583943b242fdd22f4802fbec9326fa04fb76f6",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_legend.png": {
+   "at": "2026-11-22",
+   "sha256": "a61f5c5f8725a5978770d1b420229e01561864608e0e274300f1a4dd08060773",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/window_blip.png": {
+   "at": "2026-11-22",
+   "sha256": "a992bbd155742f96b78d414d2ee97f1f4bfc53df4abf00ee2c1e453aa0e6de76",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/window_scores.png": {
+   "at": "2026-11-22",
+   "sha256": "90024007b9ae84103a246b10ab4acd814575317decd9a8ff8b2da8f8e5d4e18d",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/QUERY.md": {
+   "at": "2026-11-22",
+   "sha256": "87f52620f4f3ed876ebd264063333f2faf757fba6746d7223bc6f8c285cc6963",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/commitment-step-frames.png": {
+   "at": "2026-11-22",
+   "sha256": "df7bbce9ec44901695632783c1071fcf4410034549fbf4c4184731aa244e3135",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/commitment-step-per-pair.png": {
+   "at": "2026-11-22",
+   "sha256": "5e5bdbb052d7f5a2698e8e7752e287b93d2af8e40e24b665b851b7b33f2ebe81",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/midrun_separation_example.png": {
+   "at": "2026-11-22",
+   "sha256": "d4e41fc82de6d1ee887910d574735b315ca8828e9b80b05320b0b451b9e77940",
+   "state": "owed"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/window-vs-commitment/QUERY.md": {
+   "at": "2026-11-22",
+   "sha256": "29795b0c00b4308d6c01f040f93d389f5a845fe096a87ed088d273679db25ce8",
+   "state": "drained"
+  },
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/window-vs-commitment/window-vs-commitment.png": {
+   "at": "2026-11-22",
+   "sha256": "6fed8e7396fbe9ffc9695eb7afa22d80a454659a9721863e006996e913bfdb74",
+   "state": "drained"
   }
  },
  "held": [
@@ -268,6 +508,75 @@
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-butterfly-meadow-checkpoint-timeline.png",
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-butterfly-meadow-checkpoint-timeline.png",
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-cat-dog-checkpoint-timeline.png",
-  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-butterfly-meadow-checkpoint-timeline.png"
+  "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-butterfly-meadow-checkpoint-timeline.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__cat.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__dog.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_frog__x__a_toad__seed_9__frog.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_leopard__x__a_jaguar__seed_9__leopard.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/residual__a_cat__x__a_dog__seed_10__cat.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/residual__a_cat__x__a_dog__seed_10__dog.png",
+  "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/residual__a_frog__x__a_toad__seed_9__frog.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s09__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s09__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s10__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_baboon__x__a_gazelle__s10__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s09__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s09__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s10__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_bookcase__x__a_glacier__s10__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s09__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s09__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s10__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/a_cow__x__a_horse__s10__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_bookcase__x__a_glacier__s11__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_briefcase__x__a_ceramic_bowl__s10__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_camel__x__a_desert_landscape__s10__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s13__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_cow__x__a_horse__s14__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_drum_set__x__a_snowman__s13__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_giraffe__x__a_lion__s13__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_mug__x__a_wine_glass__s13__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_seal__x__a_walrus__s11__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_suitcase__x__a_desk_fan__s11__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w10.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/a_tent__x__a_snowy_mountain__s16__w25.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_cat__x__a_dog_seed2_commit.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_cat__x__a_dog_seed2_final.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_cat__x__a_dog_seed2_start.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_commit.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_final.png",
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_start.png"
  ]
 }
