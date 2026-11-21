@@ -1,0 +1,97 @@
+{
+ "files": {
+  "artifacts/results/README.md": {
+   "at": "2026-11-22",
+   "sha256": "81b3b0388e97ab2bd64067b7015facfb0eb37466160916df26165c80758d6e7b",
+   "state": "drained"
+  },
+  "artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png": {
+   "at": "2026-11-22",
+   "sha256": "95eb922bbb29d08227f153891afba78e268dc980b80db2493ff0dd04e589456a",
+   "state": "drained"
+  },
+  "artifacts/results/does-any-caption-say-a-cat-and-a-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e12860b4aa160b82e2845a09e4627f62f754fdbfb6f58fc66f393cd74bcb9492",
+   "state": "drained"
+  },
+  "artifacts/results/does-any-caption-say-a-cat-and-a-dog/caption-check.md": {
+   "at": "2026-11-22",
+   "sha256": "8a5afbfe5f445ec68a2689e0d2d30d55082bd8b47fa5f87e5372660f8dd337ad",
+   "state": "drained"
+  },
+  "artifacts/results/does-captioning-both-animal-photos-under-each-name-help-poe-compose/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f5102df1979ddb6ea4a709d7eb5543056c6929b521ae52d698c473d2bcba8a02",
+   "state": "drained"
+  },
+  "artifacts/results/does-captioning-both-animal-photos-under-each-name-help-poe-compose/poe-cat-x-dog-plain-run-a-run-b-six-seeds.png": {
+   "at": "2026-11-22",
+   "sha256": "0c9ef95fda6d180d226df3a58e46f8ffc8ad71bb8bc9f33c2739c9417ff7986a",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/README.md": {
+   "at": "2026-11-22",
+   "sha256": "267d72a0e6ba4d3eb4598852eeef97eec6860014059e8f187df3c1a2d50b39b2",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/every-caption-with-and-without-the-corrector.png": {
+   "at": "2026-11-22",
+   "sha256": "562026912d91d118ce08b246d4c3544ccc2909a7f964a5512bf6593a4b37bb9d",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/the-caption-model-across-guidance.png": {
+   "at": "2026-11-22",
+   "sha256": "753724ab2758dc8c44dd76b4960870651367d25405a772ebd5f7ba4f6d9f4dd0",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/the-corrector-with-and-without-relabelling.png": {
+   "at": "2026-11-22",
+   "sha256": "f6a0a06701031355f6328c4b0d0b38856cda4e72d4c14e5c9aea01fd6b9728fb",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/the-training-set-with-and-without-relabelling.png": {
+   "at": "2026-11-22",
+   "sha256": "50d5e5a1e1ae603eb8dccf547926251b9b88434eae37152fcaba0726b7a55ad4",
+   "state": "drained"
+  },
+  "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/what-poe-draws-at-each-relabelled-count.png": {
+   "at": "2026-11-22",
+   "sha256": "08ba54abcb831d0200b7bcd0185987e09eaeb7a577360287bde4fcf10c232434",
+   "state": "drained"
+  },
+  "artifacts/results/does-the-share-of-two-digit-pictures-help-the-product-compose-on-mnist/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d66be34ce88a66501041bb28427ed91c403e480eb7249871cc63f652cc2551a7",
+   "state": "drained"
+  },
+  "artifacts/results/does-the-share-of-two-digit-pictures-help-the-product-compose-on-mnist/guidance-1-first-six-models.png": {
+   "at": "2026-11-22",
+   "sha256": "30fabc6d92eecba5fecc1019a8cba094d327dc12e15011c8cf6a7654ce973982",
+   "state": "drained"
+  },
+  "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md": {
+   "at": "2026-11-22",
+   "sha256": "ea251cef3c71b6b1c3bcb102444235f50a5fc5c8c112aa8fe7cc6e18d8cd90fa",
+   "state": "drained"
+  },
+  "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png": {
+   "at": "2026-11-22",
+   "sha256": "77f9bada349fb7c15b426fa01cdcbd65cbe93a3cef2af3be2da3743daf6a0db4",
+   "state": "drained"
+  },
+  "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_01.png": {
+   "at": "2026-11-22",
+   "sha256": "a75d9edeed7c6e2d5f44be480ae8b9492671340e1f8717d6fb7631d94bcb78dc",
+   "state": "drained"
+  },
+  "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_02.png": {
+   "at": "2026-11-22",
+   "sha256": "51bb4b1b4ef040ce7c8228e60bff4b3f5c60105d5cf5a5bfa994ce9b7f44882f",
+   "state": "drained"
+  }
+ },
+ "held": [
+  "artifacts/results/does-any-caption-say-a-cat-and-a-dog/images"
+ ]
+}
