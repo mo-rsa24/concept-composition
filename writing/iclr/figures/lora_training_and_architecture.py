@@ -2,7 +2,7 @@
 
 Run from anywhere with:
 
-    python paper/iclr/figures/lora_training_and_architecture.py
+    python writing/iclr/figures/lora_training_and_architecture.py
 
 The output is written to ``lora-training-and-architecture.png`` beside this script, at 1800 x 900.
 """

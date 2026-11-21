@@ -22,7 +22,7 @@
  "k": 20,
  "c": 3.0,
  "green_frame_rule": "compose == 1, i.e. the validated instance count (GroundingDINO 'animal', conf >= 0.30, NMS iou < 0.5) >= 2",
- "matched_to": "paper/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png: same pair, same seeds, same nine windows, same border rule; one extra column with the corrector on all 50 steps",
+ "matched_to": "writing/iclr/figures/when-the-correction-arrives/poe/samples-as-a-ten-step-window-slides.png: same pair, same seeds, same nine windows, same border rule; one extra column with the corrector on all 50 steps",
  "per_column_composed_of_4": {
   "0-10": 0,
   "5-15": 0,

@@ -97,7 +97,7 @@ equal height on purpose, because the figure makes no claim about relative mass.
 provenance instead, since the figure face carries no chip.
 
 **Built.** `python 3-understanding-compositionality/scripts/where_poe_lands_on_the_manifold.py --layout print --seeds 12`
-→ `paper/iclr/figures/where-the-product-lands-on-the-manifold-seed12-print.pdf`.
+→ `writing/iclr/figures/where-the-product-lands-on-the-manifold-seed12-print.pdf`.
 The four renders come from one cell in
 `outputs/showcase/where_each_condition_lands/pairs/a_cat__x__a_dog`: seed 12, one
 starting latent, 50 steps, guidance 7.5, `adapter_attached_before_references: false`
@@ -163,7 +163,7 @@ for the fakes, so roughly a tenfold gap. 32 cells behind every point.
 real row and never greyed out. Greying them tells the reader which row is meant to
 lose before they have looked, which is the opposite of what a control is for.
 
-**Built.** `python 1-lora-correction/scripts/compose_rate_vs_correction.py` → `paper/iclr/figures/compose-rate-as-correction-rises.pdf`.
+**Built.** `python 1-lora-correction/scripts/compose_rate_vs_correction.py` → `writing/iclr/figures/compose-rate-as-correction-rises.pdf`.
 Cell is cat × dog seed 9. `compose-rate-as-correction-rises-for-a-dissimilar-pair.pdf` is elephant × penguin, held in
 reserve for the "they only fuse because they look alike" objection.
 
@@ -269,7 +269,7 @@ shows the pairs disagreeing there, with the bands at their widest on the left. A
 tidier drawing was available and would have been a false claim made with a picture
 instead of a sentence.
 
-**Built.** `python 1-lora-correction/scripts/correction_size_vs_run_position.py` → `paper/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf`.
+**Built.** `python 1-lora-correction/scripts/correction_size_vs_run_position.py` → `writing/iclr/figures/correction-size-over-the-denoising-run-across-17-pairs.pdf`.
 It writes a sidecar `.json` recording which pairs were drawn, which seeds, the
 selection rule and the frame cell, so a caption can be checked later without rerunning
 anything. The measure comes from `curve_for` in `1-lora-correction/scripts/snr_collapse.py` rather than
@@ -472,7 +472,7 @@ and bars live in `cache_analyses/trajectory_divergence/` with copies in
 `1-lora-correction/artifacts/results/what-the-correction-is/does-it-cause-composition/how-far-the-corrected-run-separates-from-the-uncorrected-one/`.
 
 **Built.** `python scripts/run_separation_over_time.py` →
-`paper/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.pdf`, sidecar `.json` beside it.
+`writing/iclr/figures/how-far-the-corrected-run-separates-from-the-uncorrected-one.pdf`, sidecar `.json` beside it.
 Curves from `1-lora-correction/scripts/trajectory_divergence.py` (50-step cells) and
 `1-lora-correction/scripts/dose_trajectory_divergence.py` (20-step cells, recovery validation,
 correlation), both with their bars as constants in the source.

@@ -45,7 +45,7 @@ results/
 # Misc transient
 .DS_Store
 *.tmp
-paper/*-overleaf*.zip
+writing/*-overleaf*.zip
 
 # Built scene apps: dist bundles and dependencies are regenerable from the source
 # beside them (npm install && npm run build). The source is tracked; these are not.
@@ -59,22 +59,22 @@ artifacts/scenes/*/app/node_modules/
 temp/
 
 # The Overleaf project's git bridge, cloned as its own repository. It is a
-# transfer point between paper/iclr and Overleaf, not a second workspace, and
+# transfer point between writing/iclr and Overleaf, not a second workspace, and
 # it carries a history the project repo must not nest inside its own.
-# paper/overleaf-iclr/
+# writing/overleaf-iclr/
 
 # The ICLR 56173 Overleaf export: source tracked, figures, builds and PDFs kept out (Overleaf holds them)
-paper/iclr-56173/figures/
-paper/iclr-56173/final_figures/
-paper/iclr-56173/ablation/
-paper/iclr-56173/superdiff stuff/
-paper/iclr-56173/build/
-paper/iclr-56173/**/*.pdf
+writing/restoring-plurality-in-compositional-diffusion_overleaf/figures/
+writing/restoring-plurality-in-compositional-diffusion_overleaf/final_figures/
+writing/restoring-plurality-in-compositional-diffusion_overleaf/ablation/
+writing/restoring-plurality-in-compositional-diffusion_overleaf/superdiff stuff/
+writing/restoring-plurality-in-compositional-diffusion_overleaf/build/
+writing/restoring-plurality-in-compositional-diffusion_overleaf/**/*.pdf
 
 # browser-tool screenshots, archived 2026-11-13
 .playwright-mcp/
 # the Overleaf project, its own git repo (remote: https://git.overleaf.com/6a86dc92ca15fe47d75b86f6)
-paper/overleaf-iclr/
+writing/overleaf-iclr/
 
 # each project's data folder (large; canonical copies under /datasets/mmolefe)
 /[0-9]-*/data/
@@ -85,3 +85,9 @@ data/coco-2017/
 data/open-images-v7/
 # Re-LAION-2B cat/dog candidates and images (rung 2 checker data)
 data/relaion-catdog/
+# MNIST canvases, checkpoints and samples for the inclusive-captions MNIST stage (route step 4)
+data/mnist/
+
+# The progress board's lock files
+artifacts/notes/progress/.*.lock
+artifacts/notes/progress/board.tmp
