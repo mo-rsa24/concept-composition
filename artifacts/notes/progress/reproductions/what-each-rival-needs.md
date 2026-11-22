@@ -13,7 +13,7 @@ have not been run.
 | RTD | 2 | `rectify-then-diffuse` `241eb37` | official, with prompt manifests for Complex (1,000) and RareBench (120) | plain SDXL | nothing known |
 | CO3 | 2 | `co3` `35ea972` | official sampler; its README lists benchmark evaluation as coming soon | plain SDXL | our own batch loop over the prompts |
 | ToMe | 5 | `tome` `f256a49` | official demo only | plain SDXL | our own batch loop; its Color row is not comparable |
-| CoMat | 3 | `comat` `595cf4a` | training code; README's "release the checkpoints" box is unticked | `CaraJ/CoMat_sdxl_ft_unet` on Hugging Face holds an SDXL LoRA and a 100-step fine-tuned U-Net, and no SD1.5 weights were found | the Shape and Texture rows are on hold by the owner's session, so nothing runs for them until the owner answers again |
+| CoMat | 3 | `comat` `595cf4a` | training code; README's "release the checkpoints" box is unticked | `CaraJ/CoMat_sdxl_ft_unet` on Hugging Face holds an SDXL LoRA and a 100-step fine-tuned U-Net, and no SD1.5 weights were found | confirm the Hugging Face weights are the CoMat model before anything runs; if they cannot be confirmed, file a question and run nothing for its Shape and Texture rows |
 | Attend-and-Excite | 3 | `attend-and-excite` `163efdf` | official | SD1.4 | its Shape and Texture rows are not comparable |
 | Liu | 6 | `composable-diffusion` `77af82b` | official | SD pipelines for T2I-CompBench; the CoInD rows use CoInD's own checkpoints | its CMNIST, Shape and Texture rows are not comparable |
 | FKC | 1 | `fkc-diffusion` `aa6f5ed` | no SDXL GenEval script in the authors' repository; the hub holds an uncommitted port | plain SDXL | commit the port by named paths, check it against the plain product |
@@ -37,7 +37,7 @@ printed number used.
 ## Prompts the subject guard keeps out
 
 `scripts/shared/disallowed_subjects.py` applies to every render and score here, and no pair-ledger row covers this work.
-By the owner's answer to board question 14, every row on a benchmark with prompts kept out is `not comparable`, with our score on the allowed prompts recorded.
+By the owner's answer to board question 14, rivals and our method are scored on the same allowed prompts, each row is judged on them, and every number carries its prompt count. The prompts needing a decision stay out.
 
 | Benchmark | Prompts | Blocked permanently | Need a ledger decision | Allowed |
 |---|---|---|---|---|

@@ -29,9 +29,10 @@ costs about 13 GPU-hours and plain SDXL about 13 GPU-hours.
 imports it. On these two benchmarks it keeps out 12 Complex prompts (6 blocked permanently, 6 needing a decision in the pair
 ledger) and 7 Concat prompts (1 blocked, 6 needing a decision). No ledger row covers this reproduction.
 
-A published score averages all its prompts, so a score on fewer prompts cannot test it. While any published prompt is kept
-out, the row's verdict is `not comparable`, and our score on the allowed prompts is recorded beside the published number.
-The owner chose this rule in board question 14.
+A published score averages all its prompts, so a score on fewer prompts is a weaker test of it. By the owner's answer to board
+question 14, RTD, the other rivals and our method are all scored on the same allowed prompts, each row is judged on them, and
+every number carries its count, such as "scored on 988 of 1,000 prompts". The prompts needing a decision stay out, and the
+pair ledger does not change.
 
 ## The numbers to reproduce
 
@@ -68,9 +69,8 @@ ImageReward is scored per picture, so the standard error comes from a bootstrap:
 times, keeping each prompt's 3 pictures together. The paper prints no standard error, so the published one is taken as
 equal to ours.
 
-When every published prompt was rendered, RTD counts as `reproduced` on a row when
-|ours − published| ≤ 1.96 × √(SE_ours² + SE_published²), and otherwise as `not reproduced`, with both numbers recorded.
-When the guard kept any published prompt out, the row is `not comparable`. The constants and this rule sit in
+On the allowed prompts, RTD counts as `reproduced` on a row when |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²), and
+otherwise as `not reproduced`, with both numbers and the prompt count recorded. The constants and this rule sit in
 `scripts/reproductions/verdict.py` in the replications hub.
 
 Plain SDXL takes the same test against its printed scores. If plain SDXL fails while the prompts and scorer are correct,

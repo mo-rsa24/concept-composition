@@ -3,30 +3,116 @@
   "before": {
     "label": "What each paper scored",
     "boxes": [
-      {"id": "a", "title": "T2I Complex", "sub": "1,000 prompts", "col": 0, "row": 0},
-      {"id": "b", "title": "RareBench Concat", "sub": "40 prompts", "col": 1, "row": 0},
-      {"id": "c", "title": "T2I Color", "sub": "300 prompts", "col": 0, "row": 1},
-      {"id": "d", "title": "T2I Shape", "sub": "300 prompts", "col": 1, "row": 1},
-      {"id": "e", "title": "T2I Texture", "sub": "300 prompts", "col": 0, "row": 2},
-      {"id": "f", "title": "GenEval", "sub": "553 released; FKC's row says 1,000", "col": 1, "row": 2}
+      {
+        "id": "a",
+        "title": "T2I Complex",
+        "sub": "1,000 prompts",
+        "col": 0,
+        "row": 0
+      },
+      {
+        "id": "b",
+        "title": "RareBench Concat",
+        "sub": "40 prompts",
+        "col": 1,
+        "row": 0
+      },
+      {
+        "id": "c",
+        "title": "T2I Color",
+        "sub": "300 prompts",
+        "col": 0,
+        "row": 1
+      },
+      {
+        "id": "d",
+        "title": "T2I Shape",
+        "sub": "300 prompts",
+        "col": 1,
+        "row": 1
+      },
+      {
+        "id": "e",
+        "title": "T2I Texture",
+        "sub": "300 prompts",
+        "col": 0,
+        "row": 2
+      },
+      {
+        "id": "f",
+        "title": "GenEval",
+        "sub": "553 released; FKC's row says 1,000",
+        "col": 1,
+        "row": 2
+      }
     ],
     "arrows": [],
     "problems": [
-      {"box": "a", "note": "12 kept out"},
-      {"box": "b", "note": "7 kept out"},
-      {"box": "c", "note": "12 kept out"},
-      {"box": "d", "note": "7 kept out"}
+      {
+        "box": "a",
+        "note": "12 kept out"
+      },
+      {
+        "box": "b",
+        "note": "7 kept out"
+      },
+      {
+        "box": "c",
+        "note": "12 kept out"
+      },
+      {
+        "box": "d",
+        "note": "7 kept out"
+      }
     ]
   },
   "after": {
     "label": "What we render",
     "boxes": [
-      {"id": "a2", "title": "T2I Complex", "sub": "988 prompts. 3 rows not comparable", "col": 0, "row": 0},
-      {"id": "b2", "title": "RareBench Concat", "sub": "33 prompts. 3 rows not comparable", "col": 1, "row": 0},
-      {"id": "c2", "title": "T2I Color", "sub": "288 prompts. 4 rows not comparable", "col": 0, "row": 1},
-      {"id": "d2", "title": "T2I Shape", "sub": "293 prompts. 4 rows not comparable", "col": 1, "row": 1},
-      {"id": "e2", "title": "T2I Texture", "sub": "all 300 prompts", "col": 0, "row": 2, "status": "changed"},
-      {"id": "f2", "title": "GenEval", "sub": "all 553 released prompts", "col": 1, "row": 2, "status": "changed"}
+      {
+        "id": "a2",
+        "title": "T2I Complex",
+        "sub": "988 prompts, judged on these",
+        "col": 0,
+        "row": 0
+      },
+      {
+        "id": "b2",
+        "title": "RareBench Concat",
+        "sub": "33 prompts, judged on these",
+        "col": 1,
+        "row": 0
+      },
+      {
+        "id": "c2",
+        "title": "T2I Color",
+        "sub": "288 prompts, judged on these",
+        "col": 0,
+        "row": 1
+      },
+      {
+        "id": "d2",
+        "title": "T2I Shape",
+        "sub": "293 prompts, judged on these",
+        "col": 1,
+        "row": 1
+      },
+      {
+        "id": "e2",
+        "title": "T2I Texture",
+        "sub": "all 300 prompts",
+        "col": 0,
+        "row": 2,
+        "status": "changed"
+      },
+      {
+        "id": "f2",
+        "title": "GenEval",
+        "sub": "all 553 released prompts",
+        "col": 1,
+        "row": 2,
+        "status": "changed"
+      }
     ],
     "arrows": []
   }

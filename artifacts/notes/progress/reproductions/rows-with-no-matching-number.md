@@ -23,16 +23,16 @@ ToMe's Color row has five more rows beside the one listed: `ToMe-T1-055` is Imag
 `ToMe-T3-034` and `ToMe-T4-052` repeat 0.7656, while `ToMe-T3-010` prints 0.7612. The last four Attend-and-Excite and
 Liu rows are also printed in CoMat Table 1 and RPG Table 1 with the same values under those tables' protocols.
 
-## Two rows where the rule finds a number on a different base model
+## Two rows where the owner chose the SDXL number
 
 The matching fields do not include the base model. On Shape and Texture the targets are ToMe on SDXL, and the one CoMat
-row that matches is CoMat on SD1.5. ToMe prints CoMat on SDXL too, with a longer protocol string, because that value is
-copied from CoMat's paper: ToMe's Appendix C.2 says CoMat's SDXL version is not open-sourced.
+row the rule finds is CoMat on SD1.5. ToMe prints CoMat on SDXL too, with a longer protocol string, because that value is
+copied from CoMat's paper. The owner chose the SDXL rows, and the SD1.5 rows stay in the note as published only.
 
-| Benchmark | Row the rule picks | Value | Base model | The SDXL row it passes over | Value |
+| Benchmark | SD1.5 row, published only | Value | Base model | SDXL row to reproduce | Value |
 |---|---|---|---|---|---|
 | T2I-CompBench Shape | `ToMe-T1-035` | 0.4975 | SD1.5 | `ToMe-T1-051` | 0.5262 |
 | T2I-CompBench Texture | `ToMe-T1-034` | 0.6190 | SD1.5 | `ToMe-T1-050` | 0.6591 |
 
-The owner's session has put both CoMat rows on hold, because `CaraJ/CoMat_sdxl_ft_unet` holds SDXL weights that the answer to
-question 13 assumed were unreleased. Nothing runs for them, including SD1.5 training, until the owner answers again.
+The reproduction uses the released weights in `CaraJ/CoMat_sdxl_ft_unet`, after checking they are the CoMat model. If that
+cannot be confirmed, a question goes to the owner and nothing runs for these two rows.

@@ -24,12 +24,13 @@ PROGRESS = HERE.parent
 COLUMNS = ["rival", "number_id", "dataset", "metric", "protocol", "samples", "published", "ours", "interval_low",
            "interval_high", "verdict", "commit", "run_id", "render_folder", "note"]
 VERDICTS = {"reproduced", "not reproduced", "not comparable", "blocked"}
-# Published prompts the subject guard keeps out of every render. The owner's answer to board question 14 makes each
-# row on these benchmarks `not comparable`, with our score on the allowed prompts recorded beside the published one.
+# Published prompts the subject guard keeps out of every render. By the owner's answer to board question 14, rivals and
+# ours are scored on the same allowed prompts, each row is judged on them, and every number carries its prompt count.
 GUARD_KEPT_OUT = {"T2I-CompBench Complex": (12, 1000), "RareBench Concat": (7, 40), "T2I-CompBench Color": (12, 300),
                   "T2I-CompBench Shape": (7, 300)}
+# Rows whose published number the owner chose in board question 13, keyed by rival and the target's number_id.
+OWNER_NUMBERS = {("CoMat", "ToMe-T1-054"): "ToMe-T1-051", ("CoMat", "ToMe-T1-053"): "ToMe-T1-050"}
 NO_NUMBER_COMMIT = "c3462133-b235ea8"  # the commits that built the rows question 13 settled
-GUARD_COMMIT = "e39a31ca-0739e7e"  # the commits that applied the subject guard
 
 
 def load():
@@ -70,6 +71,8 @@ def build():
             hit = [source]
         else:
             hit = matches(numbers, source, rival)
+        if (rival, target["number_id"]) in OWNER_NUMBERS:
+            hit = [by_id[OWNER_NUMBERS[(rival, target["number_id"])]]]
         row = dict.fromkeys(COLUMNS, "")
         row["rival"] = rival
         base = hit[0] if len(hit) == 1 else source
@@ -86,11 +89,8 @@ def build():
                 row[key] = extra[key]
         if row["dataset"] in GUARD_KEPT_OUT:
             kept_out, total = GUARD_KEPT_OUT[row["dataset"]]
-            guard_note = f"the subject guard keeps {kept_out} of {total} published prompts out"
-            row["verdict"] = "not comparable"
+            guard_note = f"scored on {total - kept_out} of {total} prompts"
             row["note"] = "; ".join(part for part in (row["note"], guard_note) if part)
-            row["run_id"] = row["run_id"] or "question 14"
-            row["commit"] = row["commit"] or GUARD_COMMIT
         row["_target"] = target["number_id"]
         table.append(row)
     return table

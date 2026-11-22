@@ -1,10 +1,10 @@
 [
   {
     "target_id": "ToMe-T1-054",
-    "note": "on hold by the owner's session: run nothing for this row, including SD1.5 training, until the owner answers again; CoMat on SDXL is ToMe-T1-051 = 0.5262, published only and not reproduced"
+    "note": "reproduces CoMat on SDXL with the released weights in CaraJ/CoMat_sdxl_ft_unet, once those are confirmed as the CoMat model; CoMat on SD1.5 is ToMe-T1-035 = 0.4975, published only"
   },
   {
     "target_id": "ToMe-T1-053",
-    "note": "on hold by the owner's session: run nothing for this row, including SD1.5 training, until the owner answers again; CoMat on SDXL is ToMe-T1-050 = 0.6591, published only and not reproduced"
+    "note": "reproduces CoMat on SDXL with the released weights in CaraJ/CoMat_sdxl_ft_unet, once those are confirmed as the CoMat model; CoMat on SD1.5 is ToMe-T1-034 = 0.6190, published only"
   }
 ]
