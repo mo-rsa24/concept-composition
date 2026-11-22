@@ -1,0 +1,472 @@
+[
+ {
+  "arxiv_id": "2302.11552",
+  "title": "Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC",
+  "claude": {
+   "title": "Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC",
+   "arxiv_id": "2302.11552",
+   "year": 2023,
+   "venue": "ICML 2023",
+   "serves": "both",
+   "relation": "direct rival",
+   "idea": "Blames failed composition on the reverse sampler and replaces it with annealed MCMC samplers, including Metropolis-corrected ones on an energy parameterization.",
+   "needs_joint_data": "no",
+   "models": "Score-based and energy-based diffusion models; Imagen 64x64 base model for image tapestries",
+   "datasets": "2D distributions, CLEVR cube positions, ImageNet 128x128 classifier guidance, composed text prompts",
+   "headline_result": "CLEVR with 5 cube positions: 72.7% of samples place every object correctly with the energy model and HMC, against 57.4% for reverse sampling of the score model",
+   "where": "Table 2",
+   "evidence_quote": "We conclude that the sampler (not the model) is responsible for this failure and propose new samplers, inspired by MCMC, which enable successful compositional generation.",
+   "url": "https://arxiv.org/pdf/2302.11552",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Reduce, Reuse, Recycle: Compositional Generation with Energy-Based Diffusion Models and MCMC",
+   "arxiv_id": "2302.11552",
+   "year": 2023,
+   "venue": "ICML 2023",
+   "serves": "both",
+   "relation": "direct rival",
+   "idea": "Replaces naive reverse sampling of composed scores with annealed MCMC, with energy parameterization enabling Metropolis-corrected samplers.",
+   "needs_joint_data": "no",
+   "models": "Score-parameterized and energy-parameterized diffusion models; ULA, U-HMC, MALA and HMC; self-composed text-to-image models. Setup: combines individual condition scores; CLEVR training still contains multi-object images and is not the strict disjoint single-concept setup.",
+   "datasets": "Synthetic densities; CLEVR; ImageNet; composed text prompts and image tapestries.",
+   "headline_result": "Five-position CLEVR accuracy 72.7 for energy-parameterized HMC versus 57.4 for score-parameterized reverse sampling.",
+   "where": "Table 2.",
+   "evidence_quote": "We conclude that the sampler (not the model) is responsible for this failure and propose new samplers, inspired by MCMC, which enable successful compositional generation.",
+   "url": "https://arxiv.org/html/2302.11552",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2412.17762",
+  "title": "The Superposition of Diffusion Models Using the Itô Density Estimator",
+  "claude": {
+   "title": "The Superposition of Diffusion Models Using the Itô Density Estimator",
+   "arxiv_id": "2412.17762",
+   "year": 2024,
+   "venue": "ICLR 2025 (spotlight)",
+   "serves": "both",
+   "relation": "direct rival",
+   "idea": "Combines pretrained diffusion models during sampling with weights from a new Itô density estimator, giving OR and AND style superpositions.",
+   "needs_joint_data": "no",
+   "models": "Stable Diffusion v1-4; CIFAR-10 models; Proteus and FrameDiff; molecule models",
+   "datasets": "CIFAR-10 split into two disjoint partitions, 20 Stable Diffusion concept pairs, proteins, molecules",
+   "headline_result": "Stable Diffusion concept pairs, 20 images for each of 20 pairs: minimum TIFA 39.92 for SuperDiff AND, against 32.48 for averaged scores and 27.58 for joint prompting",
+   "where": "Table 2",
+   "evidence_quote": "We demonstrate that SuperDiff is scalable to large pre-trained diffusion models as superposition is performed solely through composition during inference, and also enjoys painless implementation as it combines different pre-trained vector fields through an automated re-weighting scheme.",
+   "url": "https://arxiv.org/pdf/2412.17762",
+   "code_url": "https://github.com/necludov/super-diffusion",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "The Superposition of Diffusion Models Using the Itô Density Estimator",
+   "arxiv_id": "2412.17762",
+   "year": 2024,
+   "venue": "ICLR 2025",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "SuperDiff dynamically reweights pretrained vector fields using estimated densities to implement OR and equal-likelihood AND composition, with image AND experiments targeting concept blending.",
+   "needs_joint_data": "no",
+   "models": "Separate diffusion models; Stable Diffusion v1-4; FrameDiff and Proteus; LDMol. Setup: composes pretrained models or separate prompts without retraining; joint prompts are comparison baselines.",
+   "datasets": "CIFAR-10; concept-pair image interpolation prompts; protein and multi-property molecule generation.",
+   "headline_result": "Image concept interpolation minimum TIFA 39.92 versus 32.48 for score averaging and 27.58 for joint prompting; this measures blending, not separate-object success.",
+   "where": "Table 2, Section 4.2.",
+   "evidence_quote": "In this paper, we cast the problem of combining multiple pre-trained diffusion models at the generation stage under a novel proposed framework termed superposition.",
+   "url": "https://arxiv.org/html/2412.17762v2",
+   "code_url": "https://github.com/necludov/super-diffusion",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2302.08113",
+  "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+  "claude": {
+   "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+   "arxiv_id": "2302.08113",
+   "year": 2023,
+   "venue": "ICML 2023",
+   "serves": "both",
+   "relation": "tool",
+   "idea": "Runs one diffusion process per region or crop and reconciles them at every step through a shared optimization, using masks or boxes.",
+   "needs_joint_data": "no",
+   "models": "Stable Diffusion",
+   "datasets": "Panorama prompts, COCO region-based generation",
+   "headline_result": "COCO region-based generation: IoU 0.26 +/- 0.12, against 0.17 for Blended Latent Diffusion and 0.16 for Stable Inpainting, with 0.43 for real COCO images",
+   "where": "Table 2",
+   "evidence_quote": "At the center of our approach is a new generation process, based on an optimization task that binds together multiple diffusion generation processes with a shared set of parameters or constraints.",
+   "url": "https://arxiv.org/pdf/2302.08113",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "MultiDiffusion: Fusing Diffusion Paths for Controlled Image Generation",
+   "arxiv_id": "2302.08113",
+   "year": 2023,
+   "venue": "ICML 2023",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "Solves a shared least-squares denoising problem over regions or crops so regional prompts and masks produce a coherent image.",
+   "needs_joint_data": "yes",
+   "models": "One pretrained Stable Diffusion v2 model reused across crops or regions. Setup: reported region benchmark uses a full-image caption for the background and regional prompts plus masks; the general regional formulation can use separate prompts.",
+   "datasets": "COCO validation subset for regional generation; text-to-panorama prompts.",
+   "headline_result": "COCO regional-generation IoU 0.26 ± 0.12 versus 0.18 ± 0.10 without bootstrapping.",
+   "where": "Table 2, Section 5.2.",
+   "evidence_quote": "In turn, the MultiDiffusion takes a global denoising sampling step reconciling all these different steps via least squares optimal solution.",
+   "url": "https://arxiv.org/html/2302.08113",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2509.16447",
+  "title": "Local Mechanisms of Compositional Generalization in Conditional Diffusion",
+  "claude": {
+   "title": "Local Mechanisms of Compositional Generalization in Conditional Diffusion",
+   "arxiv_id": "2509.16447",
+   "year": 2025,
+   "venue": "ICML 2026 (spotlight)",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Proves that conditional projective composition is equivalent to scores that depend sparsely on pixels and conditioners, and tests this on CLEVR and SDXL.",
+   "needs_joint_data": "not stated",
+   "models": "Conditional diffusion models on CLEVR; SDXL",
+   "datasets": "Location-conditioned and color-conditioned CLEVR",
+   "headline_result": "Training on 1-3 objects, the largest object count reached (Kmax) rises from 2 to 9 when local conditional scores are enforced on Experiment 2",
+   "where": "Table 1",
+   "evidence_quote": "In this paper, we prove an exact equivalence between a specific compositional structure (\"conditional projective composition\") (Bradley et al., 2025) and scores with sparse dependencies on both pixels and conditioners (\"local conditional scores\").",
+   "url": "https://arxiv.org/pdf/2509.16447",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Local Mechanisms of Compositional Generalization in Conditional Diffusion",
+   "arxiv_id": "2509.16447",
+   "year": 2025,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Connects conditional projective composition to local conditional scores and tests whether enforcing locality restores object-count generalization.",
+   "needs_joint_data": "no",
+   "models": "Location- and color-conditioned CLEVR diffusion models; SDXL; Matryoshka Diffusion Model. Setup: explicitly tests object counts beyond training; the local intervention changes the architecture and requires training.",
+   "datasets": "CLEVR; semantic-category prompts for SDXL; Flickr-trained Matryoshka model analysis.",
+   "headline_result": "The local model trained on one object generalizes to five locations.",
+   "where": "Section 4, causal intervention; Figure 8 and Table 1.",
+   "evidence_quote": "Furthermore, we show that a causal intervention explicitly enforcing local conditional scores enables length generalization in a previously failing model.",
+   "url": "https://arxiv.org/html/2509.16447v3",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2503.01145",
+  "title": "CoInD: Enabling Logical Compositions in Diffusion Models",
+  "claude": {
+   "title": "CoInD: Enabling Logical Compositions in Diffusion Models",
+   "arxiv_id": "2503.01145",
+   "year": 2025,
+   "venue": "ICLR 2025",
+   "serves": "problem 1",
+   "relation": "partial rival",
+   "idea": "Trains a conditional diffusion model with a penalty that enforces conditional independence between attribute marginals, so logical compositions hold on unseen attribute pairs.",
+   "needs_joint_data": "no",
+   "models": "Conditional diffusion models; Stable Diffusion fine-tuning in an appendix",
+   "datasets": "Colored MNIST, Shapes3D, CelebA",
+   "headline_result": "CelebA held-out smiling male, joint sampling: conformity score 8.63 and FID 43.97, against 2.51 and 61.21 for Composed GLIDE (the text says more than 4x, the table ratio is 3.4x)",
+   "where": "Table 2",
+   "evidence_quote": "It explicitly enforces statistical independence between the conditional marginal distributions by minimizing Fisher's divergence between the joint and marginal distributions.",
+   "url": "https://arxiv.org/pdf/2503.01145",
+   "code_url": "https://github.com/sachit3022/compositional-generation",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "CoInD: Enabling Logical Compositions in Diffusion Models",
+   "arxiv_id": "2503.01145",
+   "year": 2025,
+   "venue": "ICLR 2025",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "Adds a training objective enforcing independence of conditional marginals so logical conjunction and negation work better on held-out attribute combinations.",
+   "needs_joint_data": "no",
+   "models": "Conditional diffusion models with Fisher-divergence regularization; GLIDE comparison; Stable Diffusion fine-tuning extension. Setup: evaluates held-out target combinations, but requires training with attribute labels and an independence objective rather than merely combining frozen experts.",
+   "datasets": "Colored MNIST; Shapes3D; CelebA held-out smiling-male combination.",
+   "headline_result": "CelebA conjunction FID 43.76 for CoInD versus 95.41 for Composed GLIDE.",
+   "where": "Table 2.",
+   "evidence_quote": "It explicitly enforces statistical independence between the conditional marginal distributions by minimizing Fisher’s divergence between the joint and marginal distributions.",
+   "url": "https://arxiv.org/html/2503.01145",
+   "code_url": "https://github.com/sachit3022/compositional-generation/",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2505.13740",
+  "title": "Improving Compositional Generation with Diffusion Models Using Lift Scores",
+  "claude": {
+   "title": "Improving Compositional Generation with Diffusion Models Using Lift Scores",
+   "arxiv_id": "2505.13740",
+   "year": 2025,
+   "venue": "ICML 2025",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "Scores each generated sample with a lift score for every single condition and rejects samples that fail the composed condition.",
+   "needs_joint_data": "yes",
+   "models": "Stable Diffusion 1.4, 2.1 and XL; separately trained 2D diffusion models",
+   "datasets": "2D synthetic data, CLEVR positions, Attend-and-Excite benchmark",
+   "headline_result": "SDXL on Attend-and-Excite animal prompts: ImageReward 1.216 with CompLift at T=200, against 1.025 without it",
+   "where": "Table 3",
+   "evidence_quote": "By leveraging the lift scores, we evaluate whether generated samples align with each single condition and then compose the results to determine whether the composed prompt is satisfied.",
+   "url": "https://arxiv.org/pdf/2505.13740",
+   "code_url": "http://rainorangelemon.github.io/complift",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2502.12786",
+  "title": "Composition and Control with Distilled Energy Diffusion Models and Sequential Monte Carlo",
+  "claude": {
+   "title": "Composition and Control with Distilled Energy Diffusion Models and Sequential Monte Carlo",
+   "arxiv_id": "2502.12786",
+   "year": 2025,
+   "venue": "AISTATS 2025",
+   "serves": "problem 1",
+   "relation": "partial rival",
+   "idea": "Distills pretrained diffusion models into energy functions and uses their potentials in sequential Monte Carlo to compose separately trained models.",
+   "needs_joint_data": "no",
+   "models": "Energy-parameterized diffusion models distilled from EDM teachers",
+   "datasets": "CIFAR-10, CelebA-64, AFHQv2-64, FFHQ-64",
+   "headline_result": "not stated for composition: the CelebA male AND glasses result in Section 5.3 and Figure 7 is qualitative",
+   "where": "Section 5.3, Figure 7",
+   "evidence_quote": "The Feynman Kac model formalism enables composition and low temperature sampling through sequential Monte Carlo.",
+   "url": "https://arxiv.org/pdf/2502.12786",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2605.07078",
+  "title": "Test-Time Compositional Generalization in Diffusion Models via Concept Discovery",
+  "claude": {
+   "title": "Test-Time Compositional Generalization in Diffusion Models via Concept Discovery",
+   "arxiv_id": "2605.07078",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "problem 1",
+   "relation": "partial rival",
+   "idea": "Recovers density modes from one out-of-distribution query image, combines them into an analytic product-of-experts teacher, and can train a low-rank adapter on its samples.",
+   "needs_joint_data": "yes",
+   "models": "Pretrained conditional diffusion model with a new class embedding and low-rank adapter",
+   "datasets": "ColorMNIST (40 held-out compositions), CelebA (23 held-out compositions)",
+   "headline_result": "ColorMNIST faithfulness F1: 75.3% +/- 3.1 for the product of experts and 87.6% +/- 2.1 with the adapter, against 0.0% for the query-only baseline",
+   "where": "Table 1",
+   "evidence_quote": "These results suggest that the time-indexed score geometry of the diffusion model contains reusable density-mode concepts that support test-time compositional generation without a predefined concept library.",
+   "url": "https://arxiv.org/pdf/2605.07078",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Test-Time Compositional Generalization in Diffusion Models via Concept Discovery",
+   "arxiv_id": "2605.07078",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "Discovers density-mode prototypes from a pretrained score field and combines them into a Gaussian product teacher, optionally distilled into a LoRA, to reproduce an unseen composition specified by an example.",
+   "needs_joint_data": "yes",
+   "models": "Pretrained conditional UNet; analytic Gaussian product-of-experts teacher; learned class embedding and LoRA. Setup: requires a single out-of-distribution query image showing the desired composition.",
+   "datasets": "ColorMNIST and CelebA with held-out attribute combinations.",
+   "headline_result": "CelebA generalization FID 140.3 for the analytic PoE; LoRA generalization F1 24.7% versus query-only 20.2%.",
+   "where": "Table 2; Section 4 results.",
+   "evidence_quote": "On held-out composition benchmarks built from ColorMNIST and CelebA, both the analytic PoE sampler and the low-rank adapted model outperform query-only and nearest trained-class baselines.",
+   "url": "https://arxiv.org/html/2605.07078",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2605.23275",
+  "title": "Diffusion Domain Expansion: Learning to Coordinate Pre-trained Diffusion Models",
+  "claude": {
+   "title": "Diffusion Domain Expansion: Learning to Coordinate Pre-trained Diffusion Models",
+   "arxiv_id": "2605.23275",
+   "year": 2026,
+   "venue": "ICML 2024 Workshop on Structured Probabilistic Inference and Generative Modeling",
+   "serves": "problem 1",
+   "relation": "partial rival",
+   "idea": "Trains a small coordinator network on the denoised outputs of a frozen pretrained model so it can generate larger objects or handle more conditions.",
+   "needs_joint_data": "yes",
+   "models": "Pretrained UNet diffusion models with a ViT coordinator",
+   "datasets": "Slakh2100 music, CLEVR, satellite images",
+   "headline_result": "CLEVR with 5 conditions using the Heun sampler: accuracy 44.5% for DDE, against 36.3% for MultiDiffusion and 33.6% for Reduce Reuse Recycle",
+   "where": "Table 2",
+   "evidence_quote": "Our method employs a compact trainable network designed to coordinate the denoised outputs of pre-trained diffusion models.",
+   "url": "https://arxiv.org/pdf/2605.23275",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Diffusion Domain Expansion: Learning to Coordinate Pre-trained Diffusion Models",
+   "arxiv_id": "2605.23275",
+   "year": 2026,
+   "venue": "ICML 2024 SPIGM Workshop (as stated in arXiv comments; arXiv submission is 2026)",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "Trains a coordinator over pretrained denoiser outputs to generalize to larger domains or more conditioning inputs than the coordinator saw during training.",
+   "needs_joint_data": "yes",
+   "models": "Pretrained UNet diffusion models with a ViT coordinator. Setup: coordinator training uses larger objects or multiple conditioning inputs, so it does not meet the no-joint-data requirement.",
+   "datasets": "Slakh2100; CLEVR; Google Maps satellite-image dataset.",
+   "headline_result": "CLEVR accuracy with five conditioning locations is 44.5 for DDE with Heun versus 33.6 for RRR with Heun.",
+   "where": "Figure 3 (tabular results), Section 4.2.",
+   "evidence_quote": "Our method employs a compact trainable network designed to coordinate the denoised outputs of pre-trained diffusion models.",
+   "url": "https://arxiv.org/html/2605.23275",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2505.20935",
+  "title": "ISAC: Training-Free Instance-to-Semantic Attention Control for Multi-Instance Generation",
+  "claude": {
+   "title": "ISAC: Training-Free Instance-to-Semantic Attention Control for Multi-Instance Generation",
+   "arxiv_id": "2505.20935",
+   "year": 2025,
+   "venue": "ECCV 2026",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Stabilizes instance layouts in self-attention during early denoising, then binds cross-attention semantics inside those instances without fine-tuning.",
+   "needs_joint_data": "yes",
+   "models": "SD 1.5, SD 3.5-M and other diffusion backbones",
+   "datasets": "T2I-CompBench, HRS-Bench, IntraCompBench",
+   "headline_result": "IntraCompBench multi-class subset, 2-item column: 98% for SD 3.5-M with ISAC against 62% for SD 3.5-M alone",
+   "where": "Table 2",
+   "evidence_quote": "By contrast, self-attention exposes class-agnostic instance layouts during early denoising.",
+   "url": "https://arxiv.org/pdf/2505.20935",
+   "code_url": "https://shjo-april.github.io/ISAC",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2505.21488",
+  "title": "Be Decisive: Noise-Induced Layouts for Multi-Subject Generation",
+  "claude": {
+   "title": "Be Decisive: Noise-Induced Layouts for Multi-Subject Generation",
+   "arxiv_id": "2505.21488",
+   "year": 2025,
+   "venue": "SIGGRAPH 2025",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Predicts a soft subject layout from the initial noise with a small network and refines it through denoising to keep subjects separate.",
+   "needs_joint_data": "yes",
+   "models": "SDXL",
+   "datasets": "T2I-CompBench, 25-prompt user study",
+   "headline_result": "T2I-CompBench multi-class: 0.723 for this method, against 0.676 for SDXL and 0.898 for LMD+, which needs training",
+   "where": "Appendix Table 2",
+   "evidence_quote": "In this work, we introduce a new approach that predicts a spatial layout aligned with the prompt, derived from the initial noise, and refines it throughout the denoising process.",
+   "url": "https://arxiv.org/pdf/2505.21488",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2212.05032",
+  "title": "Training-Free Structured Diffusion Guidance for Compositional Text-to-Image Synthesis",
+  "claude": null,
+  "astra": {
+   "title": "Training-Free Structured Diffusion Guidance for Compositional Text-to-Image Synthesis",
+   "arxiv_id": "2212.05032",
+   "year": 2022,
+   "venue": "ICLR 2023",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Uses linguistic structure to construct cross-attention features for separate noun phrases, improving attribute binding and concept conjunction.",
+   "needs_joint_data": "yes",
+   "models": "Stable Diffusion with structured cross-attention. Setup: parses a joint prompt into constituent phrases; no extra training samples are needed.",
+   "datasets": "ABC-6K; CC-500; MS COCO captions.",
+   "headline_result": "On ABC-6K, human text-image alignment preference is 42.2% wins versus 35.6% losses against Stable Diffusion, after filtering the most similar pairs.",
+   "where": "Table 1; Section 4.2.",
+   "evidence_quote": "Therefore, by manipulating the cross-attention representations based on linguistic insights, we can better preserve the compositional semantics in the generated image.",
+   "url": "https://arxiv.org/html/2212.05032",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": null,
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2605.00273",
+  "title": "When Do Diffusion Models learn to Generate Multiple Objects?",
+  "claude": null,
+  "astra": {
+   "title": "When Do Diffusion Models learn to Generate Multiple Objects?",
+   "arxiv_id": "2605.00273",
+   "year": 2026,
+   "venue": "ICML 2026",
+   "serves": "both",
+   "relation": "benchmark",
+   "idea": "Uses the controlled mosaic generator to isolate scene complexity, concept imbalance and held-out combinations as causes of multi-object generation failure.",
+   "needs_joint_data": "no",
+   "models": "Latent U-Net diffusion and DiT flow-matching models with a frozen Stable Diffusion VAE. Setup: the compositional-generalization experiments explicitly withhold target factor pairs, alongside experiments on observed concepts.",
+   "datasets": "mosaic synthetic attribution, spatial-relation and counting tasks.",
+   "headline_result": "Attribution and spatial relations exceed 90% accuracy in the base concept-generalization setting, including highly skewed data, while counting has a low-data failure regime.",
+   "where": "Section 5.1; Figure 9.",
+   "evidence_quote": "Moreover, compositional generalization collapses as more concept combinations are held out during training.",
+   "url": "https://arxiv.org/html/2605.00273v2",
+   "code_url": "https://github.com/eugene6923/MOSAIC.git",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": null,
+   "astra": "exact"
+  }
+ }
+]

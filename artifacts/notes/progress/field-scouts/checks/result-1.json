@@ -1,0 +1,292 @@
+[
+  {
+    "arxiv_id": "2502.04549",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v3, 25 Sep 2025)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "not found",
+      "note": "The scout gave no number, so there was nothing to check. The paper does print one: Table 1, page 17. Its serves value of both overstates the paper: page 3 separates its subject (multiple separate models) from a single text-to-image model given an unusual prompt. The ICML 2025 venue is not printed on the first page."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "not found",
+      "note": "The scout gave no number, so there was nothing to check. The paper prints Table 1 on page 17. Its serves value of both overstates the paper for the reason on page 3. The ICML 2025 venue is not printed on the first page."
+    },
+    "needs_joint_data": "no",
+    "joint_evidence": "Pages 2 and 3: separate models each trained on images of a single object at one location, composed at inference. One variant (Figure 3, setting C) trains on images holding 1 to 5 objects, but the method does not require them.",
+    "serves": "problem 1",
+    "relation": "theory",
+    "best_idea": "Defines a composition as a distribution that matches each source model on that model's own projected features, and proves that a linear combination of scores reaches it when the sources have factorized conditionals.",
+    "best_headline": "CLEVR, composing N = 4 single-object location models, 100 hand-counted samples: 98 of 100 images had all 4 objects in the correct locations with an empty background, against 0 of 100 with the unconditional background (77 had no correct object, 23 had one).",
+    "best_where": "Page 17, Table 1 (Appendix B.3)",
+    "read_scope": "Abstract, pages 1 to 5 setup and definition, CLEVR passages, page 9 passage on text-to-image, Table 1 on page 17 read from the page image"
+  },
+  {
+    "arxiv_id": "2606.23920",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 22 Jun 2026)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 2(b), K = 256: analytic 1.4670, N = 10000 2.6706. The claim that correction cannot fix the error is the paper's stated conjecture (page 1)."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1(d) on page 10 prints all four values. Its serves value of both overstates the paper: a text-to-image model (FLUX.1-schnell) only generated the room dataset (page 31) and is never composed."
+    },
+    "needs_joint_data": "no",
+    "joint_evidence": "Page 1: the task is generating combinations outside the trained conditions, and page 9 also tests experts each trained on one condition. The room experiment does include couch-plus-object images by design: weight 0.49 per condition in the in-distribution setting and a small base weight (beta = 0.05/3) in the out-of-distribution setting (page 11).",
+    "serves": "problem 1",
+    "relation": "theory",
+    "best_idea": "Separates sampler approximation error from score estimation error and shows that when the composed target lies outside the training support, score error dominates and Feynman-Kac correction makes it worse.",
+    "best_headline": "Non-factorized out-of-distribution Gaussian, model trained on N = 10000 samples: sliced Wasserstein-2 distance to the target rises from 0.8518 with K = 1 particle to 2.8322 with K = 256, while with analytic scores it falls from 0.6375 to 0.0820.",
+    "best_where": "Page 10, Table 1(d), Section 5.1",
+    "read_scope": "Abstract, introduction pages 1 and 2, setup page 5, experiments pages 9 to 12, Tables 1 and 2 read from page images, expert passage pages 9 and 27, Appendix F.3 pages 31 and 32"
+  },
+  {
+    "arxiv_id": "2509.25940",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v2, 13 Mar 2026)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1, Animal-Animal column: CO3 0.7441 and 1.2342, Attend-and-Excite 0.6980 and 0.8244. The ICLR 2026 venue is not printed in the PDF."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "The quote is split on page 5 by the Figure 2 caption, and every part is there in order. Table 1: SDXL 0.6950. Table 2, T2I-CompBench Complex ImageReward: CO3 0.4406, SDXL 0.3083. The ICLR 2026 venue is not printed in the PDF."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Page 4, Algorithm 1 and Eq. 12: the corrector uses the joint prompt C and each single-concept prompt. No extra training (page 1).",
+    "serves": "problem 2",
+    "relation": "direct rival",
+    "best_idea": "During early sampling, CO3 boosts the joint prompt's prediction and subtracts the single-concept predictions in Tweedie-denoised space, so the sample moves away from modes dominated by one concept.",
+    "best_headline": "Attend-and-Excite Animal-Animal prompts, BLIP-VQA: 0.7441 for CO3 against 0.6950 for SDXL and 0.6980 for Attend-and-Excite.",
+    "best_where": "Page 7, Table 1",
+    "read_scope": "Abstract, introduction, method pages 4 and 5, Tables 1 and 2 on page 7 read from the page image"
+  },
+  {
+    "arxiv_id": "2410.05591",
+    "title_ok": true,
+    "venue_seen": "Published as a conference paper at ICLR 2025",
+    "claude": null,
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1 on page 8 prints 0.8311 and 0.5950. Appendix A on page 15 states the exclusion of images lacking all foreground objects. Its serves value of both overstates the paper: the early sampling stage needs a prompt naming all objects (page 4), which problem 1 forbids."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Page 4: the first sampling stage uses the base model with a multi-object prompt such as 'a cat and a dog playing with a ball'. The concept models are fine-tuned individually.",
+    "serves": "problem 2",
+    "relation": "partial rival",
+    "best_idea": "Samples early steps from the base model with a prompt naming all objects, extracts a region mask per object, then blends the individually fine-tuned concept models region by region in Tweedie-denoised space.",
+    "best_headline": "Multi-concept image generation over ten concept combinations: CLIP image similarity 0.8311 and DINO image similarity 0.5950 for TweedieMix, against 0.8095 and 0.5352 for Concept Weaver, with images lacking a foreground object excluded from scoring.",
+    "best_where": "Page 8, Table 1; exclusion on page 15, Appendix A",
+    "read_scope": "Abstract, introduction, method page 4, evaluation settings and Table 1 on page 8 read from the page image, Appendix A on page 15"
+  },
+  {
+    "arxiv_id": "2610.40383",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 29 Oct 2026)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "not found",
+      "note": "The scout's 'not stated' is accurate: MNIST is assessed qualitatively (page 12) and the Gaussian errors appear only as a plot (Figure 2, page 10). Its direct rival label is too strong: there is no number to compare on, and no sample shows two objects. The two MNIST models also share digit 1 (training digits {1,6} and {1,7}, page 12), so their data is not disjoint."
+    },
+    "astra": null,
+    "needs_joint_data": "no",
+    "joint_evidence": "Pages 11 and 12: two models are trained separately on digit sets {1,6} and {1,7} and combined at sampling with no joint images or prompt. The sets overlap on digit 1.",
+    "serves": "problem 1",
+    "relation": "partial rival",
+    "best_idea": "Generalizes Feynman-Kac correctors with weighted particles so that samples follow an arbitrary function of several pretrained diffusion models' densities, with optional reward steering.",
+    "best_headline": "No comparable number is printed: MNIST results are assessed qualitatively, and Gaussian KL and L2 error against particle count appear only as a plot.",
+    "best_where": "Page 12 (qualitative statement); page 10, Figure 2",
+    "read_scope": "Abstract, introduction, Algorithm 1 on page 8, Gaussian experiment pages 9 and 10, MNIST experiment pages 11 to 14"
+  },
+  {
+    "arxiv_id": "2602.05549",
+    "title_ok": true,
+    "venue_seen": "Preprint. March 24, 2026.",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 2, CMNIST: OR-ME 98.0 against 77.0, AND 80.4 for both. Its serves value of both is not supported: page 8 says the work composes attributes using a single conditional model, and no experiment targets two separate objects. Its needs_joint_data of 'not stated' can be answered as partly."
+    },
+    "astra": null,
+    "needs_joint_data": "partly",
+    "joint_evidence": "Page 8: scores come from a single conditional model trained over attributes. Pages 4 and 5 add a noise-aware classifier or score-based estimate. Colour and digit sit on the same CMNIST image, and a search of the paper finds no held-out combination. No joint prompt is needed.",
+    "serves": "neither",
+    "relation": "theory",
+    "best_idea": "Derives exact guidance for Boolean formulas over attributes by weighting atomic conditional scores with time-dependent posterior probabilities, when the formula's circuit combines conditionally independent or mutually exclusive parts.",
+    "best_headline": "CMNIST conformity score on mutually exclusive OR: 98.0% for LogDiff against 77.0% for constant guidance; on AND both score 80.4%.",
+    "best_where": "Page 5, Table 2",
+    "read_scope": "Abstract, introduction, guidance passages pages 2 to 5, Table 2 on page 5 read from the page image, related work on page 8, Appendix D pages 19 to 21, Appendix E on page 23"
+  },
+  {
+    "arxiv_id": "2307.14012",
+    "title_ok": true,
+    "venue_seen": "Published in Entropy (2026), 28(3):351. DOI: 10.3390/e28030351",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 3, Score rows: HMC-3C 13.3, Reverse 31.8. Its serves value of both overstates the paper: the experiments are a 2D product of two densities and classifier guidance, with no text-to-image model and no two-object image."
+    },
+    "astra": null,
+    "needs_joint_data": "no",
+    "joint_evidence": "Page 10: a 2D Gaussian mixture and a uniform density are composed by multiplication. Page 12: an unconditional diffusion model plus a time-dependent classifier on CIFAR-100 and ImageNet.",
+    "serves": "problem 1",
+    "relation": "tool",
+    "best_idea": "Adds a Metropolis-Hastings-like acceptance step to score-based diffusion by estimating energy differences through line integrals of the score, so MCMC correction works without an energy model.",
+    "best_headline": "CIFAR-100 classifier-full guidance, 50k samples, score model: FID 13.3 with HMC-3C against 31.8 with the reverse process.",
+    "best_where": "Page 13, Table 3",
+    "read_scope": "Abstract, introduction, experiment passages pages 9 to 13, Table 3 on page 13 read from the page image"
+  },
+  {
+    "arxiv_id": "2611.00804",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 31 Oct 2026)",
+    "claude": null,
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1, N = 6: objDetect 35.8 +/- 5.3, attnScore 25.2 +/- 4.7, SDXL 19.2 +/- 3.3. Table 1 covers N = 4, 5 and 6 only. Faster R-CNN is on page 10, YOLOv11-L on page 9, and the co-occurring COCO object sets on page 8."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Pages 5 and 8: the prompt lists all target objects, and the first stage generates a subset of N - 1 objects jointly. No model training.",
+    "serves": "problem 2",
+    "relation": "direct rival",
+    "best_idea": "Generates all but one of the requested objects first, then inpaints the remaining object into free space with layout guidance, choosing which object to hold back from attention maps or a detector.",
+    "best_headline": "MS COCO object sets, N = 6, success rate over 5 seeds: 35.8 +/- 5.3% for condComp (objDetect) against 19.2 +/- 3.3% for SDXL and 0.0% for Compositional Generation.",
+    "best_where": "Page 9, Table 1",
+    "read_scope": "Abstract, problem setup and method pages 4 to 8, evaluation setup and Table 1 on pages 8 and 9 read from the page image, variants on page 10"
+  },
+  {
+    "arxiv_id": "2411.07132",
+    "title_ok": true,
+    "venue_seen": "38th Conference on Neural Information Processing Systems (NeurIPS 2024)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1, BLIP-VQA Color: ToMe 0.7656, SDXL 0.6369. ToMe is second on this column: CoMat on SDXL prints 0.7774."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1, GPT-4o column: ToMe 0.9549, SDXL 0.4907, on the authors' own 50-prompt benchmark (page 7). Its direct rival label is too strong: the method targets binding an object to its attributes and sub-objects."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Page 7: a single prompt naming both objects is parsed with SpaCy, for example 'a [objectA] with a [itemA] and a [objectB] with a [itemB]'. No model training.",
+    "serves": "problem 2",
+    "relation": "partial rival",
+    "best_idea": "Merges each object's attribute and sub-object tokens into one composite token so they share a cross-attention map, then refines that token in early steps with an entropy loss and a semantic binding loss.",
+    "best_headline": "GPT-4o object binding benchmark, 50 two-object prompts: 0.9549 for ToMe against 0.4907 for SDXL.",
+    "best_where": "Page 8, Table 1; benchmark defined on page 7",
+    "read_scope": "Abstract, introduction pages 1 to 3, benchmark and implementation on page 7, Table 1 on page 8 read from the page image"
+  },
+  {
+    "arxiv_id": "2310.11513",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 17 Oct 2023)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Page 2 and Section 4 on page 6 print 83%, 88%, 6,000 annotations and 1,200 images. The NeurIPS 2023 venue is not printed in the PDF."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Section 4, Analysis, page 6, with Figure 3. The NeurIPS 2023 venue is not printed in the PDF."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Page 2 and Table 1 on page 5: test prompts name both objects, for example 'a photo of a purple backpack and a white umbrella'. This is the evaluation prompt only: the benchmark gives no joint training data.",
+    "serves": "both",
+    "relation": "benchmark",
+    "best_idea": "Scores generated images with an object detector and a colour classifier on separate tasks for presence, two-object co-occurrence, count, position, colour and attribute binding.",
+    "best_headline": "GenEval agrees with human annotators on 83% of images, against 88% pairwise agreement between annotators and 80% for CLIPScore, over 6,000 annotations on 1,200 images.",
+    "best_where": "Page 6, Section 4, Analysis",
+    "read_scope": "Abstract, introduction page 2, tasks and evaluation framework page 5, human study page 6"
+  },
+  {
+    "arxiv_id": "2512.16853",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 18 Dec 2025)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "partly",
+      "note": "Both numbers are printed for Gemini 2.5 Flash Image, but in different columns of Table 1. The 17.7 deviation is Without Rewriting, where the human score is 93.1. The 96.7 human score is With Rewriting, where the deviation is 14.6. The two must not be read as one pair."
+    },
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1 and Section 3.3. The 17.7 is the Without Rewriting column (reported 75.4, human 93.1). With Rewriting the deviation is 14.6."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Pages 4 and 5: benchmark prompts name up to 3 objects from a template. This is the evaluation prompt only: no generator training on these targets.",
+    "serves": "both",
+    "relation": "benchmark",
+    "best_idea": "Audits GenEval against a human study, shows its automatic judge has drifted, and introduces a harder 800-prompt benchmark scored by Soft-TIFA from per-primitive questions.",
+    "best_headline": "Gemini 2.5 Flash Image on GenEval without rewriting: reported score 75.4, human score 93.1, net deviation 17.7.",
+    "best_where": "Page 3, Table 1; discussion in Section 3.3, page 5",
+    "read_scope": "Abstract, introduction pages 1 and 2, Table 1 on page 3 read from the page image, sections 3.1 to 4.1 on pages 4 and 5"
+  },
+  {
+    "arxiv_id": "2403.16990",
+    "title_ok": true,
+    "venue_seen": "not stated (arXiv v1, 25 Mar 2024)",
+    "claude": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1: F1 (counting) 0.82 against 0.73, accuracy (spatial) 0.36 against 0.19. The ECCV 2024 venue is not printed in the PDF."
+    },
+    "astra": null,
+    "needs_joint_data": "yes",
+    "joint_evidence": "Page 5: generation is conditioned on a prompt holding all subjects plus their bounding boxes. No model training (page 1).",
+    "serves": "problem 2",
+    "relation": "partial rival",
+    "best_idea": "Bounds the cross-attention and self-attention of each subject during sampling so features do not leak between subjects, guided by a given bounding-box layout.",
+    "best_headline": "DrawBench: counting F1 0.82 and spatial accuracy 0.36 for Bounded Attention, against 0.73 and 0.19 for Stable Diffusion.",
+    "best_where": "Page 9, Table 1",
+    "read_scope": "Abstract, introduction, leakage and method passages pages 3 to 5, quantitative results and Table 1 on page 9 read from the page image"
+  },
+  {
+    "arxiv_id": "2306.08877",
+    "title_ok": true,
+    "venue_seen": "37th Conference on Neural Information Processing Systems (NeurIPS 2023)",
+    "claude": null,
+    "astra": {
+      "quote": "found",
+      "idea": "fair",
+      "headline": "right",
+      "note": "Table 1, ABC-6K, concept separation: SynGen 28.00, A&E 11.17. The values are shares of three-rater majority votes normalized to sum to 100, and 50.17 had no majority winner. Its direct rival label is too strong: the method targets attribute binding, and a vote share among four compared models is not a rate another method could be scored on."
+    },
+    "needs_joint_data": "yes",
+    "joint_evidence": "Pages 1 and 3: the method parses one prompt holding all entities and modifiers with spaCy, then applies its attention loss during inference. No retraining.",
+    "serves": "problem 2",
+    "relation": "partial rival",
+    "best_idea": "Parses the prompt into entities and their modifiers, then optimizes the latent during sampling so each entity's attention map overlaps its modifiers and stays apart from other entities.",
+    "best_headline": "ABC-6K human evaluation, concept separation as share of majority votes: 28.00 for SynGen against 11.17 for Attend-and-Excite, with 50.17 having no majority winner.",
+    "best_where": "Page 7, Table 1",
+    "read_scope": "Abstract, introduction, method passages pages 2 and 3, datasets and human evaluation pages 5 and 6, Table 1 on page 7 read from the page image"
+  }
+]

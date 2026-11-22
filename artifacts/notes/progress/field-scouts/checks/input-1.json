@@ -1,0 +1,455 @@
+[
+ {
+  "arxiv_id": "2502.04549",
+  "title": "Mechanisms of Projective Composition of Diffusion Models",
+  "claude": {
+   "title": "Mechanisms of Projective Composition of Diffusion Models",
+   "arxiv_id": "2502.04549",
+   "year": 2025,
+   "venue": "ICML 2025",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Defines projective composition and proves when a linear combination of scores achieves it, using a factorized-conditionals independence condition.",
+   "needs_joint_data": "no",
+   "models": "Conditional diffusion models on CLEVR; SDXL fine-tuned on one dog for an illustration",
+   "datasets": "CLEVR",
+   "headline_result": "not stated",
+   "where": "not stated",
+   "evidence_quote": "Then, we investigate: (1) when linear score combinations provably achieve projective composition, (2) whether reverse-diffusion sampling can generate the desired composition, and (3) the conditions under which composition fails.",
+   "url": "https://arxiv.org/pdf/2502.04549",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Mechanisms of Projective Composition of Diffusion Models",
+   "arxiv_id": "2502.04549",
+   "year": 2025,
+   "venue": "ICML 2025",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Defines composition by preserved projected marginals and proves score composition and reverse diffusion valid under factorized conditionals, while general feature-space composition need not be sampleable by reverse diffusion.",
+   "needs_joint_data": "no",
+   "models": "Conditional diffusion scores with a background score; CLEVR diffusion models. Setup: the theory permits sources that are not conditionals of a shared joint distribution; the successful construction requires compatible factors and a background distribution.",
+   "datasets": "CLEVR object-location and object-color composition experiments.",
+   "headline_result": "not stated",
+   "where": "not stated",
+   "evidence_quote": "We begin by precisely defining one possible desired result of composition, which we call projective composition.",
+   "url": "https://arxiv.org/html/2502.04549v3",
+   "code_url": "not stated",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2606.23920",
+  "title": "Catastrophic Compositional Generation: Why Vanilla Diffusion Models Fail to Extrapolate",
+  "claude": {
+   "title": "Catastrophic Compositional Generation: Why Vanilla Diffusion Models Fail to Extrapolate",
+   "arxiv_id": "2606.23920",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "problem 1",
+   "relation": "theory",
+   "idea": "Argues that when the composed target lies outside the training distributions, score estimation error dominates and inference-time correction such as Feynman-Kac cannot fix it.",
+   "needs_joint_data": "no",
+   "models": "Conditional diffusion models and separately trained diffusion models",
+   "datasets": "2D Gaussians, Gaussian mixtures, semi-synthetic room images",
+   "headline_result": "Out-of-distribution Gaussian mixture with 256 particles: sliced Wasserstein-2 distance to the target 1.4670 with analytic scores, against 2.6706 with scores learned from 10,000 samples",
+   "where": "Table 2(b)",
+   "evidence_quote": "In particular, while recent methods such as Feynman-Kac correction reduce inference-time approximation error, our results show that score estimation error has a more catastrophic effect on performance when the target distribution is out-of-distribution with respect to the sources, highlighting the need for a different approach to this task.",
+   "url": "https://arxiv.org/pdf/2606.23920",
+   "code_url": "https://github.com/DSoiffer/compositional-diffusion",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Catastrophic Compositional Generation: Why Vanilla Diffusion Models Fail to Extrapolate",
+   "arxiv_id": "2606.23920",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Separates sampler approximation error from out-of-distribution score error and shows that Feynman-Kac correction can amplify the latter, including for separately trained experts.",
+   "needs_joint_data": "no",
+   "models": "Conditional denoising diffusion models and separately trained single-condition experts; analytic-score controls; FKC. Setup: explicitly tests target combinations absent from source training support, alongside in-distribution controls.",
+   "datasets": "Synthetic Gaussians and Gaussian mixtures; semi-synthetic rooms containing couches, paintings, or coffee tables.",
+   "headline_result": "In the non-factorized OOD Gaussian setting with N=10000, SW2 worsens from 0.8518 at K=1 to 2.8322 at K=256; analytic-score SW2 improves from 0.6375 to 0.0820.",
+   "where": "Table 1(d), Section 5.1.",
+   "evidence_quote": "Moreover, in these cases, we find that FKC reinforces these errors, further degenerating sample quality.",
+   "url": "https://arxiv.org/html/2606.23920v1",
+   "code_url": "https://github.com/DSoiffer/compositional-diffusion",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2509.25940",
+  "title": "Steer Away From Mode Collisions: Improving Composition In Diffusion Models",
+  "claude": {
+   "title": "Steer Away From Mode Collisions: Improving Composition In Diffusion Models",
+   "arxiv_id": "2509.25940",
+   "year": 2025,
+   "venue": "ICLR 2026",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Adds a corrector during sampling that steers away from regions where the joint prompt behaves like one of its single concepts, and keeps the guidance weights in a stable range.",
+   "needs_joint_data": "yes",
+   "models": "SDXL, with SD 1.5 among the baselines",
+   "datasets": "Attend-and-Excite prompts, T2I-CompBench, RareBench",
+   "headline_result": "Attend-and-Excite animal-animal prompts: BLIP-VQA 0.7441 and ImageReward 1.2342 for CO3, against 0.6980 and 0.8244 for Attend-and-Excite",
+   "where": "Table 1",
+   "evidence_quote": "Instead of re-training, we introduce a corrective sampling strategy that steers away from regions where the joint prompt behavior overlaps too strongly with any single concept in the prompt.",
+   "url": "https://arxiv.org/pdf/2509.25940",
+   "code_url": "https://github.com/debottam-dutta7/co3",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Steer Away From Mode Collisions: Improving Composition In Diffusion Models",
+   "arxiv_id": "2509.25940",
+   "year": 2025,
+   "venue": "ICLR 2026",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "CO3 contrasts the joint-prompt prediction against individual-concept predictions using adaptive Tweedie-mean resampling and correction to reduce missing or colliding concepts.",
+   "needs_joint_data": "yes",
+   "models": "SDXL with DDIM; the same denoiser evaluates joint, individual and unconditional prompts. Setup: explicitly needs a joint prompt and its constituent concept prompts, although no additional training images are needed.",
+   "datasets": "Attend-and-Excite prompt categories; T2I-CompBench Complex; RareBench Concat, Relations and Complex.",
+   "headline_result": "Animal-Animal BLIP-VQA 0.7441 versus SDXL 0.6950; T2I-CompBench Complex ImageReward 0.4406 versus 0.3083.",
+   "where": "Tables 1 and 2, Section 4.2.",
+   "evidence_quote": "This encourages the sampler to move away from the nearest mode, preventing collapse toward one dominant concept.",
+   "url": "https://arxiv.org/html/2509.25940v2",
+   "code_url": "https://github.com/debottam-dutta7/co3",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "cover 0.54"
+  }
+ },
+ {
+  "arxiv_id": "2410.05591",
+  "title": "TweedieMix: Improving Multi-Concept Fusion for Diffusion-based Image/Video Generation",
+  "claude": null,
+  "astra": {
+   "title": "TweedieMix: Improving Multi-Concept Fusion for Diffusion-based Image/Video Generation",
+   "arxiv_id": "2410.05591",
+   "year": 2024,
+   "venue": "ICLR 2025",
+   "serves": "both",
+   "relation": "partial rival",
+   "idea": "First encourages multiple objects with joint-prompt resampling, then mixes separately customized concepts in Tweedie-denoised space.",
+   "needs_joint_data": "yes",
+   "models": "Customized text-to-image diffusion models, primarily SDXL; image-to-video extensions including Stable Video Diffusion. Setup: requires a prompt containing multiple objects; concept customization is separate and shares a pretrained backbone.",
+   "datasets": "Custom Concept 101 combinations; personalized image and video examples.",
+   "headline_result": "Multi-concept CLIP image similarity 0.8311 and DINO image similarity 0.5950; the evaluation excludes images missing foreground objects.",
+   "where": "Table 1; Appendix A evaluation details.",
+   "evidence_quote": "During the initial steps, we apply a multiple object-aware sampling technique to ensure the inclusion of the desired target objects.",
+   "url": "https://arxiv.org/html/2410.05591v2",
+   "code_url": "https://github.com/KwonGihyun/TweedieMix",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": null,
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2610.40383",
+  "title": "Composing and Steering Diffusion Models with Generalized Feynman-Kac Correctors",
+  "claude": {
+   "title": "Composing and Steering Diffusion Models with Generalized Feynman-Kac Correctors",
+   "arxiv_id": "2610.40383",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "problem 1",
+   "relation": "direct rival",
+   "idea": "Extends Feynman-Kac correctors to sample from an arbitrary target function of several pretrained diffusion models, with optional reward steering.",
+   "needs_joint_data": "no",
+   "models": "Diffusion models trained on subsets of MNIST digit classes; analytic Gaussian models",
+   "datasets": "Bivariate Gaussians, MNIST",
+   "headline_result": "not stated",
+   "where": "not stated",
+   "evidence_quote": "In this work, we introduce the generalized Feynman-Kac correctors (GFKC), a principled framework for sampling from an arbitrary target function of several pretrained diffusion models.",
+   "url": "https://arxiv.org/pdf/2610.40383",
+   "code_url": "https://github.com/WaelMattar/GFKC",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2602.05549",
+  "title": "Logical Guidance for the Exact Composition of Diffusion Models",
+  "claude": {
+   "title": "Logical Guidance for the Exact Composition of Diffusion Models",
+   "arxiv_id": "2602.05549",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "theory",
+   "idea": "Gives a sufficient condition for computing exact guidance for Boolean formulas from atomic scores and posterior probabilities.",
+   "needs_joint_data": "not stated",
+   "models": "Conditional diffusion models for images and protein structures",
+   "datasets": "CMNIST, Shapes3D, CelebA, protein structure tasks",
+   "headline_result": "CMNIST conformity score: 98.0% against 77.0% for constant guidance on mutually exclusive OR, and 80.4% for both on AND",
+   "where": "Table 2",
+   "evidence_quote": "Specifically, if a formula admits a circuit representation in which conjunctions combine conditionally independent subformulas and disjunctions combine subformulas that are either conditionally independent or mutually exclusive, exact logical guidance is achievable.",
+   "url": "https://arxiv.org/pdf/2602.05549",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2307.14012",
+  "title": "MCMC-Correction of Score-Based Diffusion Models for Model Composition",
+  "claude": {
+   "title": "MCMC-Correction of Score-Based Diffusion Models for Model Composition",
+   "arxiv_id": "2307.14012",
+   "year": 2023,
+   "venue": "Entropy 28(3):351 (2026)",
+   "serves": "both",
+   "relation": "tool",
+   "idea": "Adds a Metropolis-Hastings-like acceptance rule based on line integrals of the score, so MCMC correction works on ordinary score models.",
+   "needs_joint_data": "no",
+   "models": "Score-parameterized and energy-parameterized diffusion models",
+   "datasets": "2D composition, CIFAR-100 classifier guidance",
+   "headline_result": "CIFAR-100 classifier-full guidance, 50k samples, score model: FID 13.3 with HMC-3C against 31.8 with reverse sampling",
+   "where": "Table 3",
+   "evidence_quote": "In this work, we address this limitation by retaining score parameterization and introducing a novel MH-like acceptance rule based on line integration of the score function.",
+   "url": "https://arxiv.org/pdf/2307.14012",
+   "code_url": "https://github.com/FraunhoferChalmersCentre/mcmc_corr_score_diffusion",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2611.00804",
+  "title": "Training-free Conditional Object Composition for Multi-object Image Generation with Diffusion Models",
+  "claude": null,
+  "astra": {
+   "title": "Training-free Conditional Object Composition for Multi-object Image Generation with Diffusion Models",
+   "arxiv_id": "2611.00804",
+   "year": 2026,
+   "venue": "preprint",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Generates a subset of requested objects first, then inserts the remaining object with inpainting and layout guidance, selecting the decomposition using attention or a detector.",
+   "needs_joint_data": "yes",
+   "models": "SDXL; attention-based selection or Faster R-CNN selection; YOLOv11-L evaluation. Setup: uses a multi-object prompt, and evaluation object sets are taken from real COCO images in which the objects co-occur.",
+   "datasets": "MS COCO object co-occurrence prompt sets.",
+   "headline_result": "For six objects, success rate is 35.8 ± 5.3% with detector selection and 25.2 ± 4.7% with attention selection, versus SDXL 19.2 ± 3.3%.",
+   "where": "Table 1, Section 4.",
+   "evidence_quote": "To enable effective composition, we adopt an inpainting-based formulation with layout guidance to preserve existing regions and encourage spatially coherent placement.",
+   "url": "https://arxiv.org/html/2611.00804",
+   "code_url": "https://github.com/ShampooWang/condComp_imageGen/tree/main",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": null,
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2411.07132",
+  "title": "Token Merging for Training-Free Semantic Binding in Text-to-Image Synthesis",
+  "claude": {
+   "title": "Token Merging for Training-Free Semantic Binding in Text-to-Image Synthesis",
+   "arxiv_id": "2411.07132",
+   "year": 2024,
+   "venue": "NeurIPS 2024",
+   "serves": "problem 2",
+   "relation": "partial rival",
+   "idea": "Merges an object's related tokens into one composite token so they share a cross-attention map, then refines it with entropy and binding losses.",
+   "needs_joint_data": "yes",
+   "models": "SDXL",
+   "datasets": "T2I-CompBench, a GPT-4o object binding benchmark",
+   "headline_result": "T2I-CompBench color binding, BLIP-VQA: 0.7656 for ToMe on SDXL against 0.6369 for SDXL",
+   "where": "Table 1",
+   "evidence_quote": "We introduce a novel method called Token Merging (ToMe), which enhances semantic binding by aggregating relevant tokens into a single composite token.",
+   "url": "https://arxiv.org/pdf/2411.07132",
+   "code_url": "https://github.com/hutaihang/ToMe",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "Token Merging for Training-Free Semantic Binding in Text-to-Image Synthesis",
+   "arxiv_id": "2411.07132",
+   "year": 2024,
+   "venue": "NeurIPS 2024",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "Merges each object's related tokens into a composite token and refines token embeddings to improve attribute and sub-object binding.",
+   "needs_joint_data": "yes",
+   "models": "SDXL; SpaCy parsing; composite-token optimization and end-token substitution. Setup: syntactically parses a joint prompt; no additional model training is required.",
+   "datasets": "T2I-CompBench attribute-binding subsets; proposed GPT-4o object-binding benchmark.",
+   "headline_result": "GPT-4o object-binding score 0.9549 versus SDXL 0.4907.",
+   "where": "Table 1.",
+   "evidence_quote": "We introduce a novel method called Token Merging (ToMe), which enhances semantic binding by aggregating relevant tokens into a single composite token.",
+   "url": "https://arxiv.org/html/2411.07132",
+   "code_url": "https://github.com/hutaihang/ToMe",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2310.11513",
+  "title": "GenEval: An Object-Focused Framework for Evaluating Text-to-Image Alignment",
+  "claude": {
+   "title": "GenEval: An Object-Focused Framework for Evaluating Text-to-Image Alignment",
+   "arxiv_id": "2310.11513",
+   "year": 2023,
+   "venue": "NeurIPS 2023",
+   "serves": "both",
+   "relation": "benchmark",
+   "idea": "Scores generated images with an object detector and color classifier on tasks that include two-object co-occurrence.",
+   "needs_joint_data": "yes",
+   "models": "Stable Diffusion v2.1, SDXL, IF-XL and other open text-to-image models",
+   "datasets": "553 template prompts, 99 of them two-object",
+   "headline_result": "83% agreement with human annotators, against 88% agreement between annotators, on 6,000 annotations over 1,200 images",
+   "where": "Section 1 and human study",
+   "evidence_quote": "In this paper, we introduce GenEval, an object-focused framework to evaluate compositional image properties such as object co-occurrence, position, count, and color.",
+   "url": "https://arxiv.org/pdf/2310.11513",
+   "code_url": "https://github.com/djghosh13/geneval",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "GenEval: An Object-Focused Framework for Evaluating Text-to-Image Alignment",
+   "arxiv_id": "2310.11513",
+   "year": 2023,
+   "venue": "NeurIPS 2023",
+   "serves": "both",
+   "relation": "benchmark",
+   "idea": "Uses object detection, segmentation and color classification to check object presence, count, position and attribute binding separately.",
+   "needs_joint_data": "yes",
+   "models": "Mask2Former and CLIP evaluator; Stable Diffusion variants, SDXL, DeepFloyd IF and minDALL-E. Setup: evaluation uses compositional target prompts, but does not supply joint training data to the generator.",
+   "datasets": "GenEval templated prompts based on COCO object categories; human-agreement study.",
+   "headline_result": "GenEval agrees with human annotators on 83% of images, compared with 88% interannotator agreement.",
+   "where": "Section 4, Analysis; Figure 3.",
+   "evidence_quote": "In this paper, we introduce GenEval, an object-focused framework to evaluate compositional image properties such as object co-occurrence, position, count, and color.",
+   "url": "https://arxiv.org/html/2310.11513",
+   "code_url": "https://github.com/djghosh13/geneval",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2512.16853",
+  "title": "GenEval 2: Addressing Benchmark Drift in Text-to-Image Evaluation",
+  "claude": {
+   "title": "GenEval 2: Addressing Benchmark Drift in Text-to-Image Evaluation",
+   "arxiv_id": "2512.16853",
+   "year": 2025,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "benchmark",
+   "idea": "Shows that GenEval's automatic judge has drifted from human judgment and introduces a harder benchmark with the Soft-TIFA scoring method.",
+   "needs_joint_data": "yes",
+   "models": "8 text-to-image models in the human study, including Gemini 2.5 Flash Image; Qwen3-VL as the VQA judge",
+   "datasets": "GenEval (553 prompts), GenEval 2 (800 prompts)",
+   "headline_result": "GenEval's reported score differs from human judgment by up to 17.7% on current models, and Gemini 2.5 Flash Image scores 96.7% under human evaluation",
+   "where": "Abstract, Section 1 and Table 1",
+   "evidence_quote": "To help fill this benchmarking gap, we introduce a new benchmark, GenEval 2, with improved coverage of primitive visual concepts and higher degrees of compositionality, which we show is more challenging for current models.",
+   "url": "https://arxiv.org/pdf/2512.16853",
+   "code_url": "https://github.com/facebookresearch/GenEval2",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": {
+   "title": "GenEval 2: Addressing Benchmark Drift in Text-to-Image Evaluation",
+   "arxiv_id": "2512.16853",
+   "year": 2025,
+   "venue": "preprint",
+   "serves": "both",
+   "relation": "benchmark",
+   "idea": "Audits drift in GenEval and introduces more compositional prompts with Soft-TIFA scoring of individual visual requirements.",
+   "needs_joint_data": "yes",
+   "models": "Soft-TIFA with an open-source VQA model; Stable Diffusion variants, FLUX.1-dev, Bagel, Qwen-Image and Gemini image generation. Setup: evaluation specifies multi-object targets through prompts; no generator training on these targets is required.",
+   "datasets": "GenEval audit; GenEval 2; human annotations of prompt and atom correctness.",
+   "headline_result": "GenEval underestimates Gemini 2.5 Flash Image's human score by 17.7 percentage points.",
+   "where": "Table 1; human-alignment analysis in Section 3.",
+   "evidence_quote": "We also introduce Soft-TIFA, an evaluation method tailored to GenEval 2’s templated and compositional structure.",
+   "url": "https://arxiv.org/html/2512.16853",
+   "code_url": "https://github.com/facebookresearch/GenEval2",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": "exact",
+   "astra": "exact"
+  }
+ },
+ {
+  "arxiv_id": "2403.16990",
+  "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation",
+  "claude": {
+   "title": "Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation",
+   "arxiv_id": "2403.16990",
+   "year": 2024,
+   "venue": "ECCV 2024",
+   "serves": "problem 2",
+   "relation": "partial rival",
+   "idea": "Bounds attention between subjects during sampling so that their features do not leak into one another, using a given layout.",
+   "needs_joint_data": "yes",
+   "models": "Stable Diffusion, SDXL",
+   "datasets": "DrawBench, user study",
+   "headline_result": "DrawBench: F1 0.82 and accuracy 0.36, against 0.73 and 0.19 for Stable Diffusion",
+   "where": "Table 1",
+   "evidence_quote": "Bounded Attention prevents detrimental leakage among subjects and enables guiding the generation to promote each subject's individuality, even with complex multi-subject conditioning.",
+   "url": "https://arxiv.org/pdf/2403.16990",
+   "code_url": "not stated",
+   "read": "abstract, results tables and targeted passages"
+  },
+  "astra": null,
+  "script_check": {
+   "claude": "exact",
+   "astra": null
+  }
+ },
+ {
+  "arxiv_id": "2306.08877",
+  "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+  "claude": null,
+  "astra": {
+   "title": "Linguistic Binding in Diffusion Models: Enhancing Attribute Correspondence through Attention Map Alignment",
+   "arxiv_id": "2306.08877",
+   "year": 2023,
+   "venue": "NeurIPS 2023",
+   "serves": "problem 2",
+   "relation": "direct rival",
+   "idea": "SynGen parses entity-modifier relationships and optimizes cross-attention to bind related tokens while separating unrelated concepts.",
+   "needs_joint_data": "yes",
+   "models": "Stable Diffusion with inference-time attention loss; comparisons with Attend-and-Excite and Structured Diffusion. Setup: requires a joint prompt whose syntax supplies bindings; no model retraining is needed.",
+   "datasets": "ABC-6K; Attend-and-Excite attribute prompts; DVMP challenge set.",
+   "headline_result": "On ABC-6K, SynGen receives 28.00% of majority votes for concept separation versus 11.17% for Attend-and-Excite.",
+   "where": "Table 1.",
+   "evidence_quote": "Specifically, we encourage large overlap between attention maps of entities and their modifiers, and small overlap with other entities and modifier words.",
+   "url": "https://arxiv.org/html/2306.08877",
+   "code_url": "https://github.com/RoyiRa/Syntax-Guided-Generation",
+   "read": "full text"
+  },
+  "script_check": {
+   "claude": null,
+   "astra": "exact"
+  }
+ }
+]
