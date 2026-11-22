@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    A["PDF page<br/>19 papers, 132 tables listed"]
+    B["First read<br/>page image to one CSV row per number<br/>K2, six readers running"]
+    C{"Checker<br/>every table covered?<br/>bare number, real page?"}
+    D["numbers.csv<br/>every number, with page and table"]
+    E["limits.md<br/>best result per dataset and metric<br/>K4"]
+    F["Blind second read<br/>Codex reads the same cell<br/>without seeing the first answer"]
+    G{"Both reads<br/>agree?"}
+    H["Open the page<br/>and settle it"]
+    I["Scoreboard target<br/>best rival moved one step<br/>FID 25 becomes 24, 80% becomes 81%<br/>K5"]
+    J["Your yes<br/>targets become final"]
+
+    A --> B --> C
+    C -- "miss: fix the read" --> B
+    C -- "PASS" --> D --> E --> F --> G
+    G -- "no" --> H --> G
+    G -- "yes" --> I --> J
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef now fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+    class A,C,D,E,F,G,H,I,J plain
+    class B now
