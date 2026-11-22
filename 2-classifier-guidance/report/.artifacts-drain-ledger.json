@@ -10,104 +10,14 @@
    "sha256": "5cca5d4875a8f2b3dee73fdf6d97301018b9f618305138d69b2a83584519e385",
    "state": "drained"
   },
-  "artifacts/results/24-mnist-one-model/compose-against-checker-accuracy.png": {
-   "at": "2026-11-22",
-   "sha256": "02bc8cd238fa9ef28cab7eaf8da572ac6f131f1d1008cd1ceda8ebc7b900dd14",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/five-versions/sheet-03.png": {
-   "at": "2026-11-22",
-   "sha256": "581a573cc9ead2e54860b90c232a524075ba1ac7c2788306660de5e092a0c72e",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/five-versions/sheet-47.png": {
-   "at": "2026-11-22",
-   "sha256": "5c871228e6981e028dbc83e823daef76b18c285232c0096659c4b453b8a8ba4c",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/five-versions/sheet-78.png": {
-   "at": "2026-11-22",
-   "sha256": "aad9df96286452940aeef22c8f8f20ccbbfba33bcfc74af2dceb376103763f53",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/judge-gate/judge-against-eye-calls.png": {
-   "at": "2026-11-22",
-   "sha256": "525b0d6258d0337752b15b5fb47b13d725bf6e04d225989891ddd941dc89c79e",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/loop2/final-seeds64.png": {
-   "at": "2026-11-22",
-   "sha256": "8f7c4eda77c07e4e2d768adb3690e3f6314c93b25e0a282936b9eb4d6b3543d1",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/loop2/heldout-final.png": {
-   "at": "2026-11-22",
-   "sha256": "6dbdd9cc9ffb287b8d31053def085cb47dbfec9df85ca700ae4efdedd59cfe5f",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-samples-guidance.png": {
-   "at": "2026-11-22",
-   "sha256": "f17eb80203ace3756f11b0246ac29f797fb70d8f83ee66ce4c56e064ec0072f6",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-samples-readout.png": {
-   "at": "2026-11-22",
-   "sha256": "d7e6384dc141e8c76195dba66bfc4b92d7cb9bff353cda7ce75495017f8de853",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-samples-unet.png": {
-   "at": "2026-11-22",
-   "sha256": "368bc69f12e23669dfc832bfbae6a45a90aa80b756aa876f5b91b38df02d79c8",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.01.png": {
-   "at": "2026-11-22",
-   "sha256": "c739b5a261060e07abc30a7d1760a877c8416728771369488090656bf53a11ae",
-   "state": "drained"
-  },
-  "artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.1.png": {
-   "at": "2026-11-22",
-   "sha256": "821ced672691bee83dd806d8b79ade4f21982f5744c0e95b40d427af1777d6ee",
-   "state": "drained"
-  },
   "artifacts/results/32-mnist-two-experts/README.md": {
    "at": "2026-11-22",
    "sha256": "0cecbba74457893d380109b84078978b902540d6bf0fcdbced5c7a9e2ebaf1f2",
    "state": "drained"
   },
-  "artifacts/results/32-mnist-two-experts/sheets/e59-either-alone-8.png": {
-   "at": "2026-11-22",
-   "sha256": "16c3bf439fa27ba16ff1f8195b59b06fd1742d9845eec60d1f6cf763640d6e54",
-   "state": "drained"
-  },
-  "artifacts/results/32-mnist-two-experts/sheets/fixed-both-floor0.5-3-6.png": {
-   "at": "2026-11-22",
-   "sha256": "aeb696a90c95a0092305d5ab0a862152ba5e612b3321870adf5cd4bf15d5bf10",
-   "state": "drained"
-  },
-  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor0.5-1-9.png": {
-   "at": "2026-11-22",
-   "sha256": "42e0f6dc846e514bbed8ec34dee739d55245810510ce126abb7f9b045560a160",
-   "state": "drained"
-  },
-  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor0.5-3-6.png": {
-   "at": "2026-11-22",
-   "sha256": "a869d06a585a68a662090acc56b17a82d1b2141678c28736ae7c45f213b66f79",
-   "state": "drained"
-  },
-  "artifacts/results/32-mnist-two-experts/sheets/side-both-guided-e59-either-4-7.png": {
-   "at": "2026-11-22",
-   "sha256": "3f3ae6a1cee929c9eb1265be0f97e975c367abc173457a6a46792093be428fea",
-   "state": "drained"
-  },
-  "artifacts/results/32-mnist-two-experts/sheets/side-none-guided-e59-either-4-7.png": {
-   "at": "2026-11-22",
-   "sha256": "ee4889ef4fcb344a4c381fa588082c32f44a2ff199ae59fbe9917a290865dd09",
-   "state": "drained"
-  },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
-   "sha256": "1a214dd99bcabd001ff39d25d03fe4efbb34798e4a8a157bc4179654824ac9b7",
+   "sha256": "8b3af2fcd0803978a23cb9773ca1223a7ede84c7ac3e84c1e135aaaff99890fc",
    "state": "drained"
   },
   "artifacts/results/can-a-classifier-supply-the-missing-term/README.md": {
@@ -173,6 +83,96 @@
   "artifacts/results/can-a-classifier-supply-the-missing-term/species-test-calibration-sweep.png": {
    "at": "2026-11-22",
    "sha256": "b83274006ae7d4fb9a4480c6917667db9f9b7a88860ffc54516aae483a8d0f7f",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png": {
+   "at": "2026-11-22",
+   "sha256": "02bc8cd238fa9ef28cab7eaf8da572ac6f131f1d1008cd1ceda8ebc7b900dd14",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-03.png": {
+   "at": "2026-11-22",
+   "sha256": "581a573cc9ead2e54860b90c232a524075ba1ac7c2788306660de5e092a0c72e",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-47.png": {
+   "at": "2026-11-22",
+   "sha256": "5c871228e6981e028dbc83e823daef76b18c285232c0096659c4b453b8a8ba4c",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-78.png": {
+   "at": "2026-11-22",
+   "sha256": "aad9df96286452940aeef22c8f8f20ccbbfba33bcfc74af2dceb376103763f53",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/judge-gate/judge-against-eye-calls.png": {
+   "at": "2026-11-22",
+   "sha256": "525b0d6258d0337752b15b5fb47b13d725bf6e04d225989891ddd941dc89c79e",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/final-seeds64.png": {
+   "at": "2026-11-22",
+   "sha256": "8f7c4eda77c07e4e2d768adb3690e3f6314c93b25e0a282936b9eb4d6b3543d1",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/heldout-final.png": {
+   "at": "2026-11-22",
+   "sha256": "6dbdd9cc9ffb287b8d31053def085cb47dbfec9df85ca700ae4efdedd59cfe5f",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-guidance/style-samples-guidance.png": {
+   "at": "2026-11-22",
+   "sha256": "f17eb80203ace3756f11b0246ac29f797fb70d8f83ee66ce4c56e064ec0072f6",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-readout/style-samples-readout.png": {
+   "at": "2026-11-22",
+   "sha256": "d7e6384dc141e8c76195dba66bfc4b92d7cb9bff353cda7ce75495017f8de853",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-unet/style-samples-unet.png": {
+   "at": "2026-11-22",
+   "sha256": "368bc69f12e23669dfc832bfbae6a45a90aa80b756aa876f5b91b38df02d79c8",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/plain-product/plain-product-share-0.01.png": {
+   "at": "2026-11-22",
+   "sha256": "c739b5a261060e07abc30a7d1760a877c8416728771369488090656bf53a11ae",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/plain-product/plain-product-share-0.1.png": {
+   "at": "2026-11-22",
+   "sha256": "821ced672691bee83dd806d8b79ade4f21982f5744c0e95b40d427af1777d6ee",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/e59-either-alone-8.png": {
+   "at": "2026-11-22",
+   "sha256": "16c3bf439fa27ba16ff1f8195b59b06fd1742d9845eec60d1f6cf763640d6e54",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-both-floor0.5-3-6.png": {
+   "at": "2026-11-22",
+   "sha256": "aeb696a90c95a0092305d5ab0a862152ba5e612b3321870adf5cd4bf15d5bf10",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-none-floor0.5-1-9.png": {
+   "at": "2026-11-22",
+   "sha256": "42e0f6dc846e514bbed8ec34dee739d55245810510ce126abb7f9b045560a160",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-none-floor0.5-3-6.png": {
+   "at": "2026-11-22",
+   "sha256": "a869d06a585a68a662090acc56b17a82d1b2141678c28736ae7c45f213b66f79",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-both-guided-e59-either-4-7.png": {
+   "at": "2026-11-22",
+   "sha256": "3f3ae6a1cee929c9eb1265be0f97e975c367abc173457a6a46792093be428fea",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png": {
+   "at": "2026-11-22",
+   "sha256": "ee4889ef4fcb344a4c381fa588082c32f44a2ff199ae59fbe9917a290865dd09",
    "state": "drained"
   },
   "artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png": {

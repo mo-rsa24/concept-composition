@@ -10,11 +10,16 @@ results change; it never touches a question folder's own card.
 
     python3 scripts/regroup/results_index.py
 """
-import glob, os, re
+import glob, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(ROOT, "scripts", "shared"))
+from disallowed_subjects import is_allowed
+
 MARK = "<!-- index: written by scripts/regroup/results_index.py; edit the cards, not this file -->"
 IMG = (".png", ".jpg", ".jpeg", ".svg", ".gif")
+HELD_LIST = os.path.join(ROOT, "artifacts/notes/progress/held-pictures.md")
+HELD = set(re.findall(r"^\| `([^`]+)` \|", open(HELD_LIST).read(), re.M))
 
 
 GROUPS = {l.strip() for l in open(os.path.join(ROOT, "scripts/regroup/result-groups.txt")) if l.strip()}
@@ -41,9 +46,15 @@ def card(d):
     return title, first
 
 
+def showable(f):
+    """A picture on the held list, or whose path names a guarded subject, never reaches an index."""
+    rel = os.path.relpath(f, ROOT)
+    return rel not in HELD and is_allowed(rel)
+
+
 def thumb(d):
     for pat in ("*", "*/*", "*/*/*"):
-        imgs = sorted(f for f in glob.glob(os.path.join(d, pat)) if f.lower().endswith(IMG))
+        imgs = sorted(f for f in glob.glob(os.path.join(d, pat)) if f.lower().endswith(IMG) and showable(f))
         if imgs:
             return imgs[0]
     return None

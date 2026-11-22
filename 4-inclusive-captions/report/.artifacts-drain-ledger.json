@@ -17,7 +17,7 @@
   },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
-   "sha256": "81b3b0388e97ab2bd64067b7015facfb0eb37466160916df26165c80758d6e7b",
+   "sha256": "7f54768bb615452905af6785ea6133f6087f1fbe5b4f60e16b491c91c9d0aaf7",
    "state": "drained"
   },
   "artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png": {

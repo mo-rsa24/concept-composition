@@ -27,7 +27,7 @@
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/README.md": {
    "at": "2026-11-22",
-   "sha256": "846061e334f7f689bf5c5fc35fdf89eaf118a6cdd9707a24ae1071cba74f3e1c",
+   "sha256": "ae47ae1a37bd003d267de9b3fb95ca35b21ee4444d8b99088df7896ac5af4566",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/README.md": {
@@ -52,7 +52,7 @@
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/README.md": {
    "at": "2026-11-22",
-   "sha256": "2845138d6c4115ec7263892dd6703fed8e4ca77da5bb99f1b055b0f2684230ed",
+   "sha256": "b5810441e946f88d92535dd17d465526bb10af1f1d1581e76c9261d859d8c5e0",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/README.md": {
@@ -237,7 +237,7 @@
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/README.md": {
    "at": "2026-11-22",
-   "sha256": "b5eb8e3ee3b4e95f6a34c74745810dcc685ef68e153eb96000075a79100be71f",
+   "sha256": "0468b11b390bfed5ef11db4391d34db47306554090c419ff18ad46d0a47a0965",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/QUERY.md": {
@@ -612,7 +612,7 @@
   },
   "artifacts/results/measuring-composition/the-scorers/README.md": {
    "at": "2026-11-22",
-   "sha256": "e357ffc8e1ea9e06be77964e7c009f33931e5aa2bfa6a06aa3c925f733c82156",
+   "sha256": "110980a87f776e6e88f89276563145441871f1366f25fb70940adbba0c56562c",
    "state": "drained"
   },
   "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md": {
@@ -687,7 +687,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/README.md": {
    "at": "2026-11-22",
-   "sha256": "5fe31fb7a56a6092f656c5f9d55ab375932d3ce473faefc681d36518262a100e",
+   "sha256": "135ec7b04dc1c8c1b881bdd833c5d40393f65ac3c77339fd4884dd3df4e8209d",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/README.md": {
@@ -937,7 +937,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/README.md": {
    "at": "2026-11-22",
-   "sha256": "c8472f22d9e3854e6e0afbe6cadd6aa543f0232c8f7dbc98dcc1de6162c4125d",
+   "sha256": "98754e0158df27870278d532204a92d283a7f17dcafab7243c824cca2efb13c4",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/README.md": {
