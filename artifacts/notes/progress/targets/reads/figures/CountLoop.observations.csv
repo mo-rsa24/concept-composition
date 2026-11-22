@@ -1,0 +1,60 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,1,Authors' count prompts,CountLoop,"5 red, 7 white, 7 green and 5 yellow balls in a flat white bowl",succeeds,two clear things,"A hand count gives 5 red, 7 white, 7 green and 5 yellow separate balls in a shallow bowl."
+1,1,Authors' count prompts,FLUX,"5 red, 7 white, 7 green and 5 yellow balls in a flat white bowl",fails,fused hybrid,"Eight or so balls appear and white patches are fused onto the red, green and yellow balls."
+1,1,Authors' count prompts,LMD,"5 red, 7 white, 7 green and 5 yellow balls in a flat white bowl",fails,two clear things,"Eight separate balls appear, about two per colour, and one of the whites is silver."
+1,1,Authors' count prompts,CountGen,"5 red, 7 white, 7 green and 5 yellow balls in a flat white bowl",fails,two clear things,"Seven small separate balls appear in a deep bowl, two white, two green, two red and one yellow."
+1,1,Authors' count prompts,CountLoop,140 oranges and 31 birds in Harry Potter theme,mixed,two clear things,"Oranges and crows are separate before gothic gates, and the tile is too dense to confirm the printed 140 and 31 by eye."
+1,1,Authors' count prompts,FLUX,140 oranges and 31 birds in Harry Potter theme,fails,two clear things,Oranges flood a library floor with a printed count of 550 and the birds are tiny.
+1,1,Authors' count prompts,LMD,140 oranges and 31 birds in Harry Potter theme,fails,two clear things,"Oranges hang on a branch with a printed 168, and only about five birds appear."
+1,1,Authors' count prompts,CountGen,140 oranges and 31 birds in Harry Potter theme,fails,two clear things,"Oranges and crows sit in rows on a plain white background, with printed counts of 44 and 12 and no theme."
+1,1,Authors' count prompts,CountLoop,apples with detection boxes,mixed,not applicable,"Apples are clear in a bowl, but several green boxes straddle two apples or sit partly on the wall."
+1,1,Authors' count prompts,CountLoop,birds with detection boxes,mixed,not applicable,Many clear birds fill a sunset sky and boxes mark only about 15 of them.
+1,1,Authors' count prompts,CountLoop,zebras with detection boxes,mixed,not applicable,"Many small zebras stand on grass and the boxes overlap, so most do not frame a single zebra."
+1,1,Authors' count prompts,CountLoop,peacocks added to a street scene,succeeds,two clear things,"Eight or so peacocks walk across a road in front of cars and people, with their tails overlapping."
+2,3,Authors' count prompts,Unnamed method in Fig 2,3 cats and 14 birds,mixed,two clear things,"Three cats and 14 birds are present, but the birds fly in two straight rows of seven and the cats sit evenly spaced."
+2,3,Authors' count prompts,Unnamed method in Fig 2,79 eggs,fails,not applicable,The eggs have crusted grey and burnt tips and pack into a mass too broken to count.
+5,8,Authors' count prompts,CountLoop,"carrots in a basket, first layout",mixed,not applicable,Fifteen carrots lie in a rigid three-by-five grid on a basket; the prompt is not printed.
+5,8,Authors' count prompts,CountLoop,"carrots in a basket, second layout",mixed,not applicable,"Fifteen carrots stand in two rows of nine and six, and the lower row is cut off by the frame."
+5,8,Authors' count prompts,CountLoop,"carrots in a basket, third layout",succeeds,not applicable,"Carrots lie naturally in the basket, and overlaps stop an exact count of about 15."
+6,9,Authors' count prompts,CountLoop,17 vases on a windowsill,mixed,not applicable,"Many clear vases stand on a sill, and the tile is too dense to confirm the printed 17 by eye."
+6,9,Authors' count prompts,LMD,17 vases on a windowsill,fails,not applicable,"Two vases stand by a door with jugs on a shelf above, for a printed 13."
+6,9,Authors' count prompts,SLD,17 vases on a windowsill,fails,not applicable,"Five vases are present, with a printed count of 5."
+6,9,Authors' count prompts,Count. Guidance,17 vases on a windowsill,fails,not applicable,"About nine vases and flowers appear in a painterly style, with a printed 9."
+6,9,Authors' count prompts,CountGen,17 vases on a windowsill,fails,not applicable,"Six vases stand on a sill, with a printed 6."
+6,9,Authors' count prompts,CountLoop,104 hot air balloons in the sky,mixed,not applicable,"Many balloons fill the sky, and the tile is too dense to confirm the printed 104 by eye."
+6,9,Authors' count prompts,LMD,104 hot air balloons in the sky,fails,not applicable,"Balloons are broken up by a window grid and white blobs, with a printed 225."
+6,9,Authors' count prompts,SLD,104 hot air balloons in the sky,fails,not applicable,"Balloons crowd a flat blue sky, with a printed 55."
+6,9,Authors' count prompts,Count. Guidance,104 hot air balloons in the sky,fails,not applicable,"Balloons drift above a river, with a printed 57."
+6,9,Authors' count prompts,CountGen,104 hot air balloons in the sky,fails,not applicable,"Balloons drift above a landscape, with a printed 54."
+6,9,Authors' count prompts,CountLoop,49 oranges in a bowl,mixed,not applicable,"The bowl holds yellow citrus fruit rather than orange fruit, with a printed 49."
+6,9,Authors' count prompts,LMD,49 oranges in a bowl,fails,not applicable,"Oranges stack in rigid shelf-like rows with no bowl, with a printed 57."
+6,9,Authors' count prompts,SLD,49 oranges in a bowl,mixed,not applicable,"Small oranges sit in a white bowl, with a printed 57 for a target of 49."
+6,9,Authors' count prompts,Count. Guidance,49 oranges in a bowl,fails,not applicable,"Tiny orange beads fill a dish, with a printed 55."
+6,9,Authors' count prompts,CountGen,49 oranges in a bowl,fails,not applicable,"A few oranges sit in a bowl and others lie on the counter, with a printed 22."
+6,9,Authors' count prompts,CountLoop,3 cats and 10 dogs in a room facing the camera,succeeds,two clear things,"Three cats and ten dogs can be picked out in a tight crowd, with one dark head at the back hard to place."
+6,9,Authors' count prompts,LMD,3 cats and 10 dogs in a room facing the camera,fails,one thing,"A framed grid of 13 black and white cats appears and no dog is visible, despite the printed dog count of 1."
+6,9,Authors' count prompts,SLD,3 cats and 10 dogs in a room facing the camera,fails,one thing,"Large cats fill the room and two framed pictures, and no dog is visible."
+6,9,Authors' count prompts,Count. Guidance,3 cats and 10 dogs in a room facing the camera,fails,two clear things,Seven cats and one small dog are present where three cats and ten dogs were asked for.
+6,9,Authors' count prompts,CountGen,3 cats and 10 dogs in a room facing the camera,fails,one thing,"About 19 cats fill the room, and the one animal labelled a dog cannot be told from a cat."
+6,9,Authors' count prompts,CountLoop,18 suitcases with a white background,mixed,not applicable,"A stack of mostly pink suitcases stands on white, and overlaps stop a hand count of the printed 18."
+6,9,Authors' count prompts,LMD,18 suitcases with a white background,fails,not applicable,"A row of suitcases sits above a curved lawn and road with no white background, for a printed 11."
+6,9,Authors' count prompts,SLD,18 suitcases with a white background,fails,not applicable,"Suitcases crowd a grey floor, with a printed 33."
+6,9,Authors' count prompts,Count. Guidance,18 suitcases with a white background,fails,not applicable,"The tile is broken noise with no suitcase, and the printed count is 0."
+6,9,Authors' count prompts,CountGen,18 suitcases with a white background,fails,not applicable,"Five suitcases stand on white, with a printed 5."
+6,9,Authors' count prompts,CountLoop,127 wrist watches on a black surface,mixed,not applicable,"Rows of watches recede across a dark surface, and the tile is too dense to confirm the printed 127 by eye."
+6,9,Authors' count prompts,LMD,127 wrist watches on a black surface,fails,not applicable,"Ten watches sit above a large blank notebook, with a printed 10."
+6,9,Authors' count prompts,SLD,127 wrist watches on a black surface,fails,not applicable,"Warped watch faces scatter over black, with a printed 145."
+6,9,Authors' count prompts,Count. Guidance,127 wrist watches on a black surface,fails,not applicable,"About 17 watches lie in rows, with a printed 17."
+6,9,Authors' count prompts,CountGen,127 wrist watches on a black surface,fails,not applicable,"About 31 watches and straps fill the frame, with a printed 31."
+6,9,Authors' count prompts,CountLoop,77 donuts in a shop named Fury Donuts,mixed,not applicable,"The sign reads Fury Donuts over a shop case, and the donuts are too small to confirm the printed 77 by eye."
+6,9,Authors' count prompts,LMD,77 donuts in a shop named Fury Donuts,fails,not applicable,A man sits under one row of ten donuts with no shop name.
+6,9,Authors' count prompts,SLD,77 donuts in a shop named Fury Donuts,fails,not applicable,About 31 donuts fill shelves with no shop name.
+6,9,Authors' count prompts,Count. Guidance,77 donuts in a shop named Fury Donuts,fails,not applicable,Donuts crowd distorted shelves with a printed 47 and no shop name.
+6,9,Authors' count prompts,CountGen,77 donuts in a shop named Fury Donuts,fails,not applicable,Donuts sit on shelves with a printed 40 and no shop name.
+6,9,Authors' count prompts,CountLoop,79 eggs on a counter,mixed,not applicable,"Separate eggs cover a surface, and the tile is too dense to confirm the printed 79 by eye."
+6,9,Authors' count prompts,LMD,79 eggs on a counter,fails,not applicable,Twenty-five eggs sit in a rigid five-by-five tray.
+6,9,Authors' count prompts,SLD,79 eggs on a counter,fails,not applicable,About 17 eggs sit in a carton and the number 79 is written on a card behind them.
+6,9,Authors' count prompts,Count. Guidance,79 eggs on a counter,fails,not applicable,Two cartons and one loose egg hold a printed 24.
+6,9,Authors' count prompts,CountGen,79 eggs on a counter,fails,not applicable,"About 20 eggs sit in one carton, with a printed 20."
+9,14,Authors' count prompts,CountLoop,"12 ginger and 10 black cats, 11 golden and 2 black labradors",succeeds,two clear things,"A hand count gives 12, 10, 11 and 2, and every animal of a breed repeats nearly the same frontal face and pose."
+9,14,Authors' count prompts,CountLoop,a crowd of 170 people in a farmers' market,mixed,not applicable,"Near figures are clear, and the far crowd dissolves into haze, so the 170 cannot be counted."

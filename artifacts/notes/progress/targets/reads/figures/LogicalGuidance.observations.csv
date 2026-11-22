@@ -1,0 +1,53 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+2,5,Colored MNIST,Constant,4 or 1,mixed,not applicable,"Some tiles are readable 4s, but several are broken strokes or a solid blue blob that is neither digit."
+2,5,Colored MNIST,LogicalGuidance,4 or 1,succeeds,not applicable,"All nine tiles are readable, six 1s and three 4s, in varied colours."
+2,5,Colored MNIST,Constant,1 or pink,mixed,not applicable,"Seven of nine tiles are both pink and a 1, one more is a broken pink 1, and one is a broken blue shape, so the either-or collapses toward both."
+2,5,Colored MNIST,LogicalGuidance,1 or pink,succeeds,not applicable,"The nine tiles mix pink non-1s, non-pink 1s and pink 1s."
+2,5,Shapes3D,Constant,(orange wall or sphere) and (red or yellow object),fails,not applicable,"All nine tiles show an orange sphere on an orange wall, so no object is red or yellow."
+2,5,Shapes3D,LogicalGuidance,(orange wall or sphere) and (red or yellow object),succeeds,not applicable,"Nine tiles show red or yellow objects, each a sphere or on an orange wall, with one cylinder leaning yellow-green."
+4,7,ImageNet,Baseline (no repulsive guidance),ferret and golden lion tamarin,mixed,not applicable,The ferret has a thin red line across its neck and the tamarin looks clean.
+4,7,ImageNet,LogicalGuidance,ferret and golden lion tamarin,succeeds,not applicable,The red line is gone from the ferret and the tamarin is visibly unchanged.
+6,25,Molecules: GRM5 and RRM1,LogicalGuidance,binds both proteins,succeeds,not applicable,"The one ligand shown has hydrogen bonds and hydrophobic contacts drawn on both proteins, and the text says it was the best-scoring one."
+6,25,Molecules: GRM5 and RRM1,LogicalGuidance,binds GRM5 and avoids RRM1,succeeds,not applicable,"The one ligand shown has contacts drawn on GRM5 and the RRM1 panel prints no interaction, and the text says it was picked for the widest score gap."
+7,27,Colored MNIST,LogicalGuidance,"1 or pink, weight 1.0",succeeds,not applicable,"All nine tiles are a 1 or pink, with several colours and digit shapes."
+7,27,Colored MNIST,LogicalGuidance,"1 or pink, weight 1.5",succeeds,not applicable,All nine tiles are a 1 or pink and the colours stay varied.
+7,27,Colored MNIST,LogicalGuidance,"1 or pink, weight 2.0",succeeds,not applicable,All nine tiles are a 1 or pink and the same varied set holds.
+7,27,Colored MNIST,LogicalGuidance,"1 or pink, weight 2.5",succeeds,not applicable,"All nine tiles are a 1 or pink, with the top-left 3 turned into a 1."
+7,27,Colored MNIST,Constant,"1 or pink, weight 1.0",mixed,not applicable,"Tiles still vary in colour, but one 4 is a broken red shape and a beige 1 is ragged."
+7,27,Colored MNIST,Constant,"1 or pink, weight 1.5",mixed,not applicable,All nine tiles turn bright pink and several strokes are ragged or broken.
+7,27,Colored MNIST,Constant,"1 or pink, weight 2.0",fails,not applicable,All nine tiles are bright pink and the lower middle digit breaks into separate pieces.
+7,27,Colored MNIST,Constant,"1 or pink, weight 2.5",fails,not applicable,"All nine tiles are bright pink, with two digits reduced to broken fragments."
+8,27,Shapes3D,LogicalGuidance,"red or yellow object, weight 1.0",mixed,not applicable,Eight of nine objects are red or yellow and one sphere is green.
+8,27,Shapes3D,LogicalGuidance,"red or yellow object, weight 1.5",succeeds,not applicable,All nine objects are red or yellow.
+8,27,Shapes3D,LogicalGuidance,"red or yellow object, weight 2.0",succeeds,not applicable,All nine objects are red or yellow.
+8,27,Shapes3D,LogicalGuidance,"red or yellow object, weight 2.5",mixed,not applicable,Eight of nine objects are red or yellow and one cylinder is orange.
+8,27,Shapes3D,Constant,"red or yellow object, weight 1.0",fails,not applicable,"Seven of nine objects are orange, the blend of red and yellow."
+8,27,Shapes3D,Constant,"red or yellow object, weight 1.5",fails,not applicable,Eight of nine objects are orange and one is yellow.
+8,27,Shapes3D,Constant,"red or yellow object, weight 2.0",fails,not applicable,All nine objects are orange.
+8,27,Shapes3D,Constant,"red or yellow object, weight 2.5",fails,not applicable,Eight of nine objects are orange and one sphere is yellow-green.
+9,28,Colored MNIST,LogicalGuidance,"not 1, weight 1.0",fails,not applicable,A clear beige 1 remains in the top-right tile where the query forbids a 1.
+9,28,Colored MNIST,LogicalGuidance,"not 1, weight 1.5",fails,not applicable,The clear beige 1 remains in the top-right tile.
+9,28,Colored MNIST,LogicalGuidance,"not 1, weight 2.0",mixed,not applicable,The forbidden 1 has deformed into a lumpy shape with holes and the other eight digits stay readable.
+9,28,Colored MNIST,LogicalGuidance,"not 1, weight 2.5",mixed,not applicable,The top-right tile is an unreadable lumpy shape and the other eight digits stay readable.
+9,28,Colored MNIST,Constant,"not 1, weight 1.0",succeeds,not applicable,No tile is a 1 and the colours are varied.
+9,28,Colored MNIST,Constant,"not 1, weight 1.5",mixed,not applicable,"No tile is a 1, but most colours have shifted to yellow, beige and cyan."
+9,28,Colored MNIST,Constant,"not 1, weight 2.0",mixed,not applicable,"No tile is a 1, but the nine tiles use only yellow, beige and cyan."
+9,28,Colored MNIST,Constant,"not 1, weight 2.5",mixed,not applicable,"No tile is a 1, but the nine tiles use only yellow, beige and cyan."
+10,28,Colored MNIST,Constant,light blue and 3,mixed,not applicable,"Most of the 100 tiles are light blue 3s, but some are other digits or scrawls and the last tile is a dark 1, and both panels show the same tiles."
+10,28,Colored MNIST,LogicalGuidance,light blue and 3,mixed,not applicable,"Most of the 100 tiles are light blue 3s, but some are other digits or scrawls and the last tile is a dark 1, and both panels show the same tiles."
+11,29,Colored MNIST,Constant,not blue,mixed,not applicable,"No tile is blue, but yellow and green fill most of the 100 tiles."
+11,29,Colored MNIST,LogicalGuidance,not blue,mixed,not applicable,"The colours are spread widely, but one deep blue 5 and about eight lighter blue digits remain."
+12,29,Colored MNIST,Constant,red or beige,mixed,not applicable,"About 19 of 100 tiles are yellow, magenta, pink or orange where only red or beige was asked for."
+12,29,Colored MNIST,LogicalGuidance,red or beige,succeeds,not applicable,Every visible tile is red or beige.
+13,30,Colored MNIST,Constant,2 or blue,mixed,not applicable,"Most tiles are blue, few 2s appear in other colours, and several tiles are pink or dark non-2s."
+13,30,Colored MNIST,LogicalGuidance,2 or blue,succeeds,not applicable,"Non-blue tiles are almost all 2s in many colours and the rest are blue, though a few dark tiles are hard to read."
+14,30,Shapes3D,Constant,light green floor and blue wall,mixed,not applicable,"Most tiles have a green floor and blue wall, but others show a yellow, red or blue floor or a purple or cyan wall, and both panels show the same tiles."
+14,30,Shapes3D,LogicalGuidance,light green floor and blue wall,mixed,not applicable,"Most tiles have a green floor and blue wall, but others show a yellow, red or blue floor or a purple or cyan wall, and both panels show the same tiles."
+15,31,Shapes3D,Constant,not cylinder,mixed,not applicable,"Most objects are spheres, cubes or capsules, but flat-topped cylinders remain, including a yellow one in row 7 and a cyan one in row 8."
+15,31,Shapes3D,LogicalGuidance,not cylinder,mixed,not applicable,"Most objects are spheres, cubes or capsules, but flat-topped cylinders remain, including a yellow one in row 7 and a cyan one in row 8."
+16,31,Shapes3D,Constant,light green floor or pink object,mixed,not applicable,"Most tiles meet the query, but some have neither, and a salmon floor and a salmon object show colours blended off the palette."
+16,31,Shapes3D,LogicalGuidance,light green floor or pink object,mixed,not applicable,"Most tiles meet the query with pink objects or green floors, and a few, such as an orange capsule on a blue floor, meet neither."
+17,32,Shapes3D,Constant,(cube or (red wall or pink wall)) or (scale 5 and dark blue object),mixed,not applicable,"Objects skew to blue and purple across the batch, and some capsules and spheres sit on walls that are neither red nor pink."
+17,32,Shapes3D,LogicalGuidance,(cube or (red wall or pink wall)) or (scale 5 and dark blue object),succeeds,not applicable,"Most tiles show a cube or a red or pink wall, with object colours spread widely."
+18,32,CelebA,Constant,not blond,mixed,not applicable,"No hair is clearly blond, but most faces sit in heavy black hair and shadow, and at least one tile is almost entirely black."
+18,32,CelebA,LogicalGuidance,not blond,succeeds,not applicable,"Faces are well lit with varied dark and brown hair, and only one man has pale ash hair."

@@ -1,0 +1,23 @@
+figure,page,kind,reason
+1,2,qualitative,
+2,4,plot,Accuracy of the score against number of noise trials for three noise-sharing schemes on the 2D task
+3,4,plot,Accept or reject accuracy against the single timestep used
+4,5,qualitative,
+5,5,plot,Average running time per method on the 2D task
+6,5,other,Lift-score heatmaps from two estimators for one black car and white clock image
+7,6,qualitative,
+8,7,qualitative,
+9,8,plot,Accuracy and FID against number of position constraints on CLEVR
+10,9,qualitative,
+11,16,qualitative,
+12,16,qualitative,
+13,16,qualitative,
+14,17,qualitative,
+15,17,qualitative,
+16,17,qualitative,
+17,18,plot,Histograms of the score for true positive and true negative points on nine 2D compositions
+18,21,qualitative,
+19,22,qualitative,
+20,23,qualitative,
+21,25,qualitative,
+22,26,qualitative,

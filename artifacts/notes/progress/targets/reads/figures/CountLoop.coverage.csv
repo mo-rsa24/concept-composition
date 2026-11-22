@@ -1,0 +1,10 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,3,qualitative,
+3,4,diagram,"Pipeline from prompt through planning graph, layout, generation and critic loop"
+4,6,diagram,"How object latents accumulate into one query latent, ending in one 53-orange example"
+5,8,qualitative,
+6,9,qualitative,
+7,11,plot,Counting error and runtime against instance count per method
+8,13,plot,"Counting error by object size at 30, 75, 125 and 200 instances for six methods"
+9,14,qualitative,

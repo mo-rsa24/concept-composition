@@ -1,0 +1,203 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,2,2D synthetic,Liu,product: eight-blob ring times vertical bar,fails,not applicable,The samples form a small closed ring around the centre where only a top and a bottom blob belong.
+1,2,2D synthetic,LiftScores,product: eight-blob ring times vertical bar,succeeds,not applicable,"Only the top and bottom blobs remain, matching the target."
+1,2,2D synthetic,Liu,mixture: two overlapping ellipses,mixed,not applicable,Both ellipses are traced but many stray points fill their interiors.
+1,2,2D synthetic,LiftScores,mixture: two overlapping ellipses,mixed,not applicable,Both ellipses are clean with a small gap at the upper right of the right ellipse.
+1,2,2D synthetic,Liu,negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense with stray points around it where the target is empty.
+1,2,2D synthetic,LiftScores,negation: small rectangle minus larger rectangle,succeeds,not applicable,"No sample is kept, matching the empty target."
+4,5,Attend-and-Excite prompts,LiftScores,a turtle and a blue clock,mixed,fused hybrid,"A turtle is painted on the face of a large blue clock, with a second blue clock below."
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,a turtle and a blue clock,fails,fused hybrid,A turtle sits inside a blue glass dome with a metal loop and no clock face.
+4,5,Attend-and-Excite prompts,LiftScores,a frog with a bow,succeeds,two clear things,A frog wears a large red bow.
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,a frog with a bow,fails,one thing,A frog sits alone with no bow.
+4,5,Attend-and-Excite prompts,LiftScores,an orange backpack and a purple car,succeeds,two clear things,An orange backpack sits on the roof of a purple car.
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,an orange backpack and a purple car,fails,one thing,An orange car stands in a purple hall with no backpack.
+4,5,Attend-and-Excite prompts,LiftScores,an elephant with glasses,succeeds,two clear things,An elephant wears dark-rimmed glasses.
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,an elephant with glasses,fails,one thing,An elephant stands alone with no glasses.
+4,5,Attend-and-Excite prompts,LiftScores,a cat and a horse,succeeds,two clear things,A white cat sits beside a brown horse.
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,a cat and a horse,fails,one thing,A white horse and a seated brown horse appear with no cat.
+4,5,Attend-and-Excite prompts,LiftScores,a black crown and a red car,mixed,two bodies or heads,A black crown sits on a red car whose black bumper is warped into claw shapes.
+4,5,Attend-and-Excite prompts,Rejected by LiftScores,a black crown and a red car,fails,one thing,A red and black car stands by a red building with no crown.
+7,6,Random text prompts,LiftScores,a glass bottle with a message drifting past starfish,mixed,two clear things,"A bottle and starfish are clear, no message is visible, and the message score map is empty at 1 activated pixel."
+7,6,Random text prompts,LiftScores,a steaming teacup besides an open book and a candle,succeeds,two clear things,"Teacup, book and candle are all clear and each score map lights up on its own object."
+7,6,Random text prompts,LiftScores,a wooden ladder reaching into a treehouse under stars,succeeds,two clear things,"Ladder, treehouse and stars are all present, and the ladder map covers only the lower part of the ladder."
+7,6,Random text prompts,LiftScores,an old gramophone on a windowsill with falling autumn leaves,succeeds,two clear things,"Gramophone, windowsill and leaves are all present, and the leaves map lights up only a few small patches."
+8,7,CLEVR Position,Liu,1 shape,succeeds,not applicable,One sphere sits inside the single requested box.
+8,7,CLEVR Position,Liu,3 shapes,fails,two clear things,A cylinder and a sphere fill two boxes and the third box is empty.
+8,7,CLEVR Position,Liu,5 shapes,fails,two clear things,Three objects fill three boxes and two boxes are empty.
+8,7,CLEVR Position,LiftScores,1 shape,succeeds,not applicable,One red cube sits inside the single requested box.
+8,7,CLEVR Position,LiftScores,3 shapes,succeeds,two clear things,All three boxes hold a separate object.
+8,7,CLEVR Position,LiftScores,5 shapes,succeeds,two clear things,All five boxes hold a separate object.
+10,9,Attend-and-Excite prompts,LiftScores,a black car and a white clock (yellow frame),succeeds,two clear things,A black car sits below a small white clock high on a wall.
+10,9,Attend-and-Excite prompts,LiftScores,a black car and a white clock (blue frame),succeeds,two clear things,A large white clock stands beside the front of a black car.
+10,9,Attend-and-Excite prompts,Rejected by LiftScores,a black car and a white clock (red frame),fails,one thing,A black car stands alone by a glass building with no clock.
+10,9,Attend-and-Excite prompts,Rejected by LiftScores,a black car and a white clock (green frame),fails,one thing,A black car stands alone in a hall with no clock.
+11,16,2D synthetic,Liu,product: eight-blob ring times vertical bar,fails,not applicable,The samples form a small closed ring where only a top and a bottom blob belong.
+11,16,2D synthetic,LiftScores,product: eight-blob ring times vertical bar,succeeds,not applicable,"Only the top and bottom blobs remain, matching the target."
+11,16,2D synthetic,Liu,product: two ellipses crossing at two points,fails,not applicable,The samples spread around a band following both ellipses where only two crossing points belong.
+11,16,2D synthetic,LiftScores,product: two ellipses crossing at two points,succeeds,not applicable,Only two small clusters at the crossing points remain.
+11,16,2D synthetic,Liu,product: two disjoint rectangles,fails,not applicable,A dense bar appears between the two rectangles where the target is empty.
+11,16,2D synthetic,LiftScores,product: two disjoint rectangles,succeeds,not applicable,"No sample is kept, matching the empty target."
+12,16,2D synthetic,Liu,mixture: two columns of three blobs,fails,not applicable,The two columns merge into three wide horizontal bands.
+12,16,2D synthetic,LiftScores,mixture: two columns of three blobs,mixed,not applicable,All six blobs are in place but each is visibly smaller than the target blob.
+12,16,2D synthetic,Liu,mixture: two rectangles,mixed,not applicable,Both rectangles appear with a scatter of stray points between them.
+12,16,2D synthetic,LiftScores,mixture: two rectangles,mixed,not applicable,Two separate shapes remain but their corners are rounded off into ovals.
+12,16,2D synthetic,Liu,mixture: two overlapping ellipses,mixed,not applicable,Both ellipses appear thickened with stray points inside them.
+12,16,2D synthetic,LiftScores,mixture: two overlapping ellipses,mixed,not applicable,Both ellipses are clean with small gaps on the right ellipse.
+13,16,2D synthetic,Liu,negation: full area minus central rectangle,fails,not applicable,A dense frame outline appears with stray points filling the hole and the outside.
+13,16,2D synthetic,LiftScores,negation: full area minus central rectangle,mixed,not applicable,The hole is clear but only a thin sparse rounded ring of the thick frame remains.
+13,16,2D synthetic,Liu,negation: wide rectangle minus central column,fails,not applicable,The central column stays densely filled.
+13,16,2D synthetic,LiftScores,negation: wide rectangle minus central column,mixed,not applicable,The central gap is clean but the two side blocks are sparse and lose their outer parts.
+13,16,2D synthetic,Liu,negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense with stray points around it where the target is empty.
+13,16,2D synthetic,LiftScores,negation: small rectangle minus larger rectangle,succeeds,not applicable,"No sample is kept, matching the empty target."
+14,17,2D synthetic,Du (ULA),product: eight-blob ring times vertical bar,mixed,not applicable,Two blobs are in place but stretched sideways.
+14,17,2D synthetic,Du (U-HMC),product: eight-blob ring times vertical bar,mixed,not applicable,Two blobs are in place with a few stray points beside them.
+14,17,2D synthetic,Du (MALA),product: eight-blob ring times vertical bar,mixed,not applicable,Two blobs are in place with a few stray points between them.
+14,17,2D synthetic,Du (HMC),product: eight-blob ring times vertical bar,succeeds,not applicable,Two clean blobs match the target.
+14,17,2D synthetic,Du (ULA),product: two ellipses crossing at two points,fails,not applicable,Large clouds cover the top and bottom of the panel instead of two points.
+14,17,2D synthetic,Du (U-HMC),product: two ellipses crossing at two points,fails,not applicable,A dense cloud sits at the top right and points scatter across the panel.
+14,17,2D synthetic,Du (MALA),product: two ellipses crossing at two points,mixed,not applicable,Two clusters are at the crossings but a trace of the ellipse ring remains.
+14,17,2D synthetic,Du (HMC),product: two ellipses crossing at two points,succeeds,not applicable,"Two clusters sit at the crossings, a little wider than the target."
+14,17,2D synthetic,Du (ULA),product: two disjoint rectangles,fails,not applicable,A dense vertical bar appears where the target is empty.
+14,17,2D synthetic,Du (U-HMC),product: two disjoint rectangles,fails,not applicable,A dense vertical bar appears where the target is empty.
+14,17,2D synthetic,Du (MALA),product: two disjoint rectangles,fails,not applicable,A dense vertical bar appears where the target is empty.
+14,17,2D synthetic,Du (HMC),product: two disjoint rectangles,fails,not applicable,A narrow vertical bar appears where the target is empty.
+15,17,2D synthetic,Du (ULA),mixture: two columns of three blobs,fails,not applicable,Only one column of three wide blobs appears where two columns belong.
+15,17,2D synthetic,Du (U-HMC),mixture: two columns of three blobs,fails,not applicable,Only one column of three blobs appears where two columns belong.
+15,17,2D synthetic,Du (MALA),mixture: two columns of three blobs,fails,not applicable,Only one column of three wide blobs appears where two columns belong.
+15,17,2D synthetic,Du (HMC),mixture: two columns of three blobs,fails,not applicable,Only one column of three blobs appears where two columns belong.
+15,17,2D synthetic,Du (ULA),mixture: two rectangles,succeeds,not applicable,Both rectangles appear with slightly rough edges.
+15,17,2D synthetic,Du (U-HMC),mixture: two rectangles,succeeds,not applicable,Both rectangles appear with slightly rough edges.
+15,17,2D synthetic,Du (MALA),mixture: two rectangles,succeeds,not applicable,Both rectangles appear with slightly rough edges.
+15,17,2D synthetic,Du (HMC),mixture: two rectangles,succeeds,not applicable,Both rectangles appear with feathered edges.
+15,17,2D synthetic,Du (ULA),mixture: two overlapping ellipses,fails,not applicable,A smeared ring with two dense clouds replaces the two thin ellipses.
+15,17,2D synthetic,Du (U-HMC),mixture: two overlapping ellipses,fails,not applicable,Clouds of points cover the panel and no ellipse can be traced.
+15,17,2D synthetic,Du (MALA),mixture: two overlapping ellipses,mixed,not applicable,"Both ellipses are mostly traced, with breaks and clumps at the crossings."
+15,17,2D synthetic,Du (HMC),mixture: two overlapping ellipses,fails,not applicable,Only a few small clusters remain and the ellipses are gone.
+16,17,2D synthetic,Du (ULA),negation: full area minus central rectangle,mixed,not applicable,"A thin outline replaces the thick frame, with sparse points in the hole."
+16,17,2D synthetic,Du (U-HMC),negation: full area minus central rectangle,fails,not applicable,Disconnected blobs sit along the frame's edge.
+16,17,2D synthetic,Du (MALA),negation: full area minus central rectangle,mixed,not applicable,"A thin outline replaces the thick frame, with sparse points in the hole."
+16,17,2D synthetic,Du (HMC),negation: full area minus central rectangle,fails,not applicable,Disconnected blobs sit along the frame's edge.
+16,17,2D synthetic,Du (ULA),negation: wide rectangle minus central column,fails,not applicable,Two thin strips appear and a cloud of points stays in the removed centre.
+16,17,2D synthetic,Du (U-HMC),negation: wide rectangle minus central column,mixed,not applicable,"Two thin strips appear with an almost empty centre, narrower than the target blocks."
+16,17,2D synthetic,Du (MALA),negation: wide rectangle minus central column,fails,not applicable,Two thin strips appear and a cloud of points stays in the removed centre.
+16,17,2D synthetic,Du (HMC),negation: wide rectangle minus central column,mixed,not applicable,"Two thin strips appear with an empty centre, narrower than the target blocks."
+16,17,2D synthetic,Du (ULA),negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense where the target is empty.
+16,17,2D synthetic,Du (U-HMC),negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense where the target is empty.
+16,17,2D synthetic,Du (MALA),negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense where the target is empty.
+16,17,2D synthetic,Du (HMC),negation: small rectangle minus larger rectangle,fails,not applicable,The small rectangle stays dense where the target is empty.
+18,21,CLEVR Position,Liu,1 shape,succeeds,not applicable,A red cube sits in the requested box and both verifiers pass it.
+18,21,CLEVR Position,LiftScores,1 shape,mixed,not applicable,A green cylinder fills the requested box and an unrequested teal cylinder stands touching it.
+18,21,CLEVR Position,Liu,3 shapes,fails,two clear things,A red sphere and a blue cylinder appear and the third requested position is empty.
+18,21,CLEVR Position,LiftScores,3 shapes,succeeds,two clear things,"A green cylinder, a red sphere and a blue sphere fill all three positions, although the pretrained classifier scores the blue sphere 0%."
+18,21,CLEVR Position,Liu,5 shapes,fails,two clear things,Three objects appear and two requested positions are empty.
+18,21,CLEVR Position,LiftScores,5 shapes,succeeds,two clear things,"Five separate objects fill the five positions, although the pretrained classifier passes only the blue sphere."
+19,22,CLEVR Position,Du (MCMC),failed sample 1,fails,fused hybrid,"A blue cube and a purple shape melt together with a bright glare, among warped yellow blocks."
+19,22,CLEVR Position,Du (MCMC),failed sample 2,fails,fused hybrid,"A brown block, a red block and a purple block merge under a white flare."
+19,22,CLEVR Position,Du (MCMC),failed sample 3,mixed,two clear things,"Most shapes are separate, but a white flare bursts from a grey cube and one yellow cube is warped."
+19,22,CLEVR Position,Du (MCMC),failed sample 4,fails,fused hybrid,A blue shape melts into a long blob joined to a purple patch.
+19,22,CLEVR Position,Du (MCMC),failed sample 5,fails,fused hybrid,A blue shape melts into a lumpy blob and a grey object fades into the floor.
+19,22,CLEVR Position,Du (MCMC),failed sample 6,fails,fused hybrid,Purple shapes collapse into one crumpled stack.
+20,23,Attend-and-Excite prompts,LiftScores,a turtle with a bow (yellow frame),succeeds,two clear things,A turtle has an orange bow on its shell.
+20,23,Attend-and-Excite prompts,LiftScores,a turtle with a bow (blue frame),succeeds,two clear things,A green turtle has a pink bow on its shell.
+20,23,Attend-and-Excite prompts,Rejected by LiftScores,a turtle with a bow (red frame),fails,one thing,A turtle walks alone with no bow.
+20,23,Attend-and-Excite prompts,Rejected by LiftScores,a turtle with a bow (green frame),fails,one thing,A repeating pattern of turtles has no bow.
+20,23,Attend-and-Excite prompts,LiftScores,a frog and a mouse (yellow frame),succeeds,two clear things,A large frog sits beside a small mouse.
+20,23,Attend-and-Excite prompts,LiftScores,a frog and a mouse (blue frame),succeeds,two clear things,A frog sits in front of a mouse climbing behind it.
+20,23,Attend-and-Excite prompts,Rejected by LiftScores,a frog and a mouse (red frame),fails,one thing,Two frogs appear with no mouse.
+20,23,Attend-and-Excite prompts,Rejected by LiftScores,a frog and a mouse (green frame),fails,one thing,A large and a small frog appear with no mouse.
+21,25,Attend-and-Excite prompts,LiftScores,a white bow and a white car,mixed,two bodies or heads,A white car trails long white ribbons and no formed bow is visible.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a white bow and a white car,fails,one thing,A white car stands alone with no bow.
+21,25,Attend-and-Excite prompts,LiftScores,a purple chair and a red bow,succeeds,two clear things,A purple armchair has a large red bow on its backrest.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a purple chair and a red bow,fails,one thing,A purple armchair stands alone with only a small unclear scrap on the floor.
+21,25,Attend-and-Excite prompts,LiftScores,a horse and a mouse,succeeds,two clear things,A white horse stands beside a small grey rodent.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a horse and a mouse,fails,one thing,A dark horse stands alone with tiny unclear birds or insects and no recognisable mouse.
+21,25,Attend-and-Excite prompts,LiftScores,a yellow backpack and a gray apple,mixed,two clear things,"A yellow backpack with grey straps sits between a red and a green apple, so neither apple is grey."
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a yellow backpack and a gray apple,fails,one thing,A yellow backpack on a stool has a grey backpack behind it and no apple.
+21,25,Attend-and-Excite prompts,LiftScores,an elephant with a bow,succeeds,two clear things,An elephant wears a small red bow on its head with red tassels at its ears.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,an elephant with a bow,fails,one thing,An elephant is drawn on a decorative panel with no bow.
+21,25,Attend-and-Excite prompts,LiftScores,a cat and an elephant,succeeds,two clear things,A large elephant stands over a small grey cat.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a cat and an elephant,fails,one thing,A large elephant stands beside a baby elephant with no cat.
+21,25,Attend-and-Excite prompts,LiftScores,a turtle and a mouse,mixed,two clear things,A small mouse stands beside two stacked turtles where one was asked for.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a turtle and a mouse,mixed,two bodies or heads,"A turtle has a small floating grey creature with a mouse-like face above it, beside an orange fish-like shape."
+21,25,Attend-and-Excite prompts,LiftScores,a bear and a mouse,succeeds,two clear things,A brown bear sits with a grey mouse at its feet.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a bear and a mouse,succeeds,two clear things,"A black bear faces a clear rodent on the path and a small upright mouse-like figure stands at the right, yet the filter rejected it."
+21,25,Attend-and-Excite prompts,LiftScores,a bird and a horse,mixed,two clear things,A bird flies above two horses where one was asked for.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a bird and a horse,mixed,two clear things,"A small dark bird flies at the top right above two horses, yet the filter rejected it."
+21,25,Attend-and-Excite prompts,LiftScores,an elephant and a rabbit,mixed,two clear things,An elephant stands between two small rabbits where one was asked for.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,an elephant and a rabbit,fails,one thing,An adult and a baby elephant appear with no rabbit.
+21,25,Attend-and-Excite prompts,LiftScores,a green backpack and a purple bench,mixed,two clear things,"A purple backpack sits on a purple bench before a green wall, so the backpack took the bench's colour."
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a green backpack and a purple bench,fails,one thing,A purple and green bench stands by a green window with no backpack.
+21,25,Attend-and-Excite prompts,LiftScores,red glasses and a red suitcase,mixed,two clear things,Red sunglasses rest on two red suitcases where one was asked for.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,red glasses and a red suitcase,fails,one thing,A red suitcase stands alone with no glasses.
+21,25,Attend-and-Excite prompts,LiftScores,a lion with a bow,succeeds,two clear things,A lion wears a red patterned bow at its chest.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a lion with a bow,fails,one thing,A lion's head appears with no bow.
+21,25,Attend-and-Excite prompts,LiftScores,an elephant and a turtle,mixed,two clear things,An elephant stands with a large turtle and a small extra turtle.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,an elephant and a turtle,fails,one thing,An adult and a baby elephant appear with no turtle.
+21,25,Attend-and-Excite prompts,LiftScores,a frog and a rabbit,succeeds,two clear things,A frog sits beside a clear rabbit.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a frog and a rabbit,fails,fused hybrid,A frog has grown rabbit ears beside a white rabbit with frog eyes and feet.
+21,25,Attend-and-Excite prompts,LiftScores,a gray backpack and yellow glasses,fails,one thing,A grey and yellow backpack stands beside yellow headphones with no glasses.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a gray backpack and yellow glasses,fails,one thing,A grey and yellow backpack appears with no glasses.
+21,25,Attend-and-Excite prompts,LiftScores,a cat and a mouse,mixed,two clear things,A white cat holds a large black mouse against its chest and a second grey mouse sits at its feet.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a cat and a mouse,fails,one thing,A cat sits beside a kitten with no mouse.
+21,25,Attend-and-Excite prompts,LiftScores,a gray crown and a white clock,mixed,fused hybrid,"A grey crown is built onto a grey clock tower with a white dial, making one object."
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a gray crown and a white clock,fails,one thing,A grey crown stands alone with no clock.
+21,25,Attend-and-Excite prompts,LiftScores,a red backpack and a yellow bowl,mixed,two clear things,A red backpack with a yellow panel lies beside a second red bag and a yellow bowl.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a red backpack and a yellow bowl,fails,one thing,A person wearing a red backpack stands at a yellow wall with no bowl.
+21,25,Attend-and-Excite prompts,LiftScores,a bird with glasses,succeeds,two clear things,A bird wears dark-rimmed glasses.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a bird with glasses,fails,one thing,A bird perches alone with no glasses.
+21,25,Attend-and-Excite prompts,LiftScores,a lion and an elephant,mixed,two clear things,A lion stands beside an elephant with an extra baby elephant between them.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a lion and an elephant,fails,one thing,An adult and a baby elephant appear with no lion.
+21,25,Attend-and-Excite prompts,LiftScores,an elephant and a pink backpack,mixed,two clear things,A pink backpack leans on an elephant whose whole body has also turned pink.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,an elephant and a pink backpack,fails,one thing,A pink elephant stands alone with no backpack.
+21,25,Attend-and-Excite prompts,LiftScores,a bird and a yellow car,succeeds,two clear things,A bird flies above a yellow car by a yellow building.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a bird and a yellow car,mixed,two clear things,"A small yellow bird sits on the roof of a yellow car whose rear is tangled with a tree, yet the filter rejected it."
+21,25,Attend-and-Excite prompts,LiftScores,a horse and a rabbit,succeeds,two clear things,A brown horse stands with a grey rabbit on the grass.
+21,25,Attend-and-Excite prompts,Rejected by LiftScores,a horse and a rabbit,succeeds,two clear things,"A pale horse and a clear brown rabbit face each other, yet the filter rejected it."
+22,26,Attend-and-Excite prompts,LiftScores,a purple car and a pink apple,mixed,two clear things,"A purple car stands by a pink building with a red apple and a red-yellow apple, so no apple is pink."
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a purple car and a pink apple,fails,one thing,A purple car stands by a pink building with no apple.
+22,26,Attend-and-Excite prompts,LiftScores,white glasses and an orange balloon,mixed,two clear things,"An orange balloon and an extra white balloon float above small orange glasses, so the glasses have the wrong colour."
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,white glasses and an orange balloon,fails,one thing,An orange balloon rises from a white stand with no glasses.
+22,26,Attend-and-Excite prompts,LiftScores,a green balloon and a pink bowl,succeeds,two clear things,A green balloon floats above a pink bowl.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a green balloon and a pink bowl,fails,two clear things,"A pink balloon floats over a green cup, so the colours swap and the bowl became a cup."
+22,26,Attend-and-Excite prompts,LiftScores,a white chair and a gray balloon,fails,two clear things,"A grey chair stands under a white balloon, so the two colours are swapped."
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a white chair and a gray balloon,mixed,two clear things,"A grey balloon floats over a grey chair, so the balloon is right and the chair is the wrong colour."
+22,26,Attend-and-Excite prompts,LiftScores,yellow glasses and a brown bow,fails,two clear things,"Brown-framed glasses lie beside a yellow bow, so the two colours are swapped."
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,yellow glasses and a brown bow,fails,one thing,Yellow glasses lie alone with no bow.
+22,26,Attend-and-Excite prompts,LiftScores,a blue balloon and a blue bow,succeeds,two clear things,A blue balloon carries a dark blue bow on its surface.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a blue balloon and a blue bow,fails,one thing,A blue balloon floats alone with no bow.
+22,26,Attend-and-Excite prompts,LiftScores,a bird and a black backpack,succeeds,two clear things,A black bird stands beside a black backpack.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a bird and a black backpack,fails,one thing,Two black birds appear with no backpack.
+22,26,Attend-and-Excite prompts,LiftScores,a turtle and a gray backpack,succeeds,two clear things,A turtle crawls out from under a grey backpack.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a turtle and a gray backpack,fails,one thing,A turtle stands alone with no backpack.
+22,26,Attend-and-Excite prompts,LiftScores,a white bow and a black clock,succeeds,two clear things,A black clock has a white bow at its top and ribbons below.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a white bow and a black clock,fails,one thing,A white clock with black numerals has a leaf sprig and no bow.
+22,26,Attend-and-Excite prompts,LiftScores,a lion and a mouse,succeeds,two clear things,A lion lies beside a pink-eared mouse.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a lion and a mouse,succeeds,two clear things,"A lion lies beside a small but clear mouse on the floor, yet the filter rejected it."
+22,26,Attend-and-Excite prompts,LiftScores,a dog and a rabbit,mixed,two bodies or heads,A white rabbit sits against a golden dog that has grown long rabbit ears.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a dog and a rabbit,fails,one thing,Three rabbits appear with no dog.
+22,26,Attend-and-Excite prompts,LiftScores,a pink crown and a purple bow,mixed,two clear things,A pink crown tops a purple floral wreath and the only bow is pink.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a pink crown and a purple bow,fails,one thing,A girl with pink hair wears a pink crown with no bow.
+22,26,Attend-and-Excite prompts,LiftScores,a mouse and a red car,succeeds,two clear things,A red car drives on a path with a small brown mouse in front of it.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a mouse and a red car,succeeds,two clear things,"A red car fills the frame and a small brown mouse sits at the left by the wall, yet the filter rejected it."
+22,26,Attend-and-Excite prompts,LiftScores,a white suitcase and a white chair,succeeds,two clear things,A white suitcase stands beside a white chair.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a white suitcase and a white chair,fails,one thing,Two white suitcases stand by a stool with no white chair.
+22,26,Attend-and-Excite prompts,LiftScores,a dog and a frog,mixed,two clear things,A dog walks toward a clear frog and wears a green frog-coloured patch on its back.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a dog and a frog,mixed,two clear things,"A dog has a green frog-like shape at its collar and a separate toy-like frog lies on the grass, yet the filter rejected it."
+22,26,Attend-and-Excite prompts,LiftScores,a frog and a turtle,mixed,two bodies or heads,A frog sits on a turtle whose head has taken on frog-like eyes.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a frog and a turtle,fails,fused hybrid,A turtle shell sits on frog-like legs beside a smaller turtle with frog-like limbs.
+22,26,Attend-and-Excite prompts,LiftScores,a gray crown and a purple apple,mixed,two bodies or heads,A large purple apple sits inside a grey crown worn by an unrequested woman.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a gray crown and a purple apple,fails,one thing,Two purple apples sit in an ornate ring with no crown.
+22,26,Attend-and-Excite prompts,LiftScores,a frog and a pink bench,mixed,two clear things,A pink bench holds one small frog and a second frog sits on the ground.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a frog and a pink bench,fails,one thing,A pink bench stands in weeds with only a small unclear brown shape beneath it.
+22,26,Attend-and-Excite prompts,LiftScores,a yellow suitcase and a yellow car,succeeds,two clear things,A yellow suitcase stands beside a yellow car.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a yellow suitcase and a yellow car,fails,one thing,A yellow car stands alone with no suitcase.
+22,26,Attend-and-Excite prompts,LiftScores,yellow glasses and a gray bowl,mixed,two clear things,"A yellow drinking glass stands in a grey bowl with lemons, so glasses became a drinking glass."
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,yellow glasses and a gray bowl,fails,one thing,A grey bowl holds metal sticks and a lemon with no glasses.
+22,26,Attend-and-Excite prompts,LiftScores,a horse with a bow,succeeds,two clear things,A horse wears a black and white bow on its back.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a horse with a bow,fails,one thing,A horse carries a rider in red cloth with no bow.
+22,26,Attend-and-Excite prompts,LiftScores,a monkey and a mouse,succeeds,two clear things,A monkey sits beside a small mouse.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a monkey and a mouse,fails,one thing,An adult and a baby monkey appear with no mouse.
+22,26,Attend-and-Excite prompts,LiftScores,a black backpack and a pink balloon,mixed,two clear things,A black backpack and a pink balloon appear with an unrequested pair of pink shoes.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a black backpack and a pink balloon,mixed,two clear things,"A person holds a pink balloon and wears a grey backpack, so the backpack is the wrong colour."
+22,26,Attend-and-Excite prompts,LiftScores,a lion and a horse,mixed,two bodies or heads,A lion's head and mane sit on a long-legged tan horse-like body beside a clear white horse.
+22,26,Attend-and-Excite prompts,Rejected by LiftScores,a lion and a horse,fails,fused hybrid,"A large dark horse has a lion-like mane beside a small pale horse, with no separate lion."

@@ -1,0 +1,19 @@
+figure,page,kind,reason
+1,2,diagram,"How logical scores combine for two queries, with small example outputs"
+2,5,qualitative,
+3,6,plot,Conformity score against sample diversity across guidance weights on Colored MNIST
+4,7,qualitative,
+5,7,other,"One ligand per condition in two protein pockets with no score, so binding cannot be judged by eye"
+6,25,qualitative,
+7,27,qualitative,
+8,27,qualitative,
+9,28,qualitative,
+10,28,qualitative,
+11,29,qualitative,
+12,29,qualitative,
+13,30,qualitative,
+14,30,qualitative,
+15,31,qualitative,
+16,31,qualitative,
+17,32,qualitative,
+18,32,qualitative,
