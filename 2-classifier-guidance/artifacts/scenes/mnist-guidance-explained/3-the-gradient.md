@@ -2,7 +2,7 @@
 
 **The question.** A push is the gradient of a checker's answer with respect to the canvas. Which maps does it pass through on the way, how big is it at each, and what does it ask the canvas to do?
 
-Measured by `gradient-flow/make_grad_numbers.py` in [the step 7b results](../../results/24-mnist-one-model/README.md) on the real checkpoints (`gradient-flow/grad_numbers.json`). The canvases are the four pasted MNIST test canvases used on the networks page, noised with one fixed noise, not states from a sampler run. A bar's size is the L2 norm of the gradient over every entry of that map.
+Measured by `gradient-flow/make_grad_numbers.py` in [the step 7b results](../../results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/README.md) on the real checkpoints (`gradient-flow/grad_numbers.json`). The canvases are the four pasted MNIST test canvases used on the networks page, noised with one fixed noise, not states from a sampler run. A bar's size is the L2 norm of the gradient over every entry of that map.
 
 ## Words on this page, taken apart
 

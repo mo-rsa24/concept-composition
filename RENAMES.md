@@ -420,3 +420,12 @@ These earlier rows name a target that has since moved. Results folders are git-i
 | 240 | `dist` | `1-lora-correction/artifacts/scenes/how-much-correction-is-needed/dist` |
 | 19 | `poe-baseline-samples` | not found in the laptop or cluster checkouts or at the two expected `/datasets` paths |
 | 331 to 344 | the 14 renamed adapter-fix figures | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-it-trains/does-the-adapters-render-settle-as-training-proceeds/` |
+
+## 2026-11-22: the MNIST results nested in the order the work was done
+
+| Old | New |
+|---|---|
+| `2-classifier-guidance/artifacts/results/24-mnist-one-model/` | `2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/` |
+| `2-classifier-guidance/artifacts/results/32-mnist-two-experts/` | `2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/` |
+
+The 109 moved files, their old and new paths and their checksums are in the [move manifest](artifacts/notes/session-closes/mnist-results-move-manifest.tsv). Report pages and the `data/mnist-canvas/` folders keep their names.

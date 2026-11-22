@@ -2,7 +2,7 @@
 
 **Start here.** Open [the derivation](4-the-derivation.md) to see why the push has the form it has, [the sampler step](1-the-sampler-step.md) to see one step drawn, and [the grids](5-qualitative-grids.md) to see what it draws.
 
-Everything here explains step 7b ([plan 24](../../../plans/24-mnist-digits-on-a-canvas.md)): one canvas U-Net that has seen every digit, with a pair-aware and a separate-label checker pushing the product of two digit experts. The evidence behind it (judge gate, plain product, five versions, the sweeps) is in [the step 7b results](../../results/24-mnist-one-model/README.md).
+Everything here explains step 7b ([plan 24](../../../plans/24-mnist-digits-on-a-canvas.md)): one canvas U-Net that has seen every digit, with a pair-aware and a separate-label checker pushing the product of two digit experts. The evidence behind it (judge gate, plain product, five versions, the sweeps) is in [the step 7b results](../../results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/README.md).
 
 | Page | The question it answers | First figure |
 |---|---|---|

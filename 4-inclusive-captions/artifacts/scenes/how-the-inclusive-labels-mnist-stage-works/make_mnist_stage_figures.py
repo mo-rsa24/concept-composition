@@ -9,7 +9,7 @@ r3  the product in one sampler step: the same U-Net three times (blank, 7, 8), t
 r4  the judge: the CNN that calls every tile, its rules, and the ladder of calls
 
 Layout and drawing helpers copied from
-2-classifier-guidance/artifacts/results/24-mnist-one-model/results-figures/make_results_figures.py
+2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/results-figures/make_results_figures.py
 and its network-view helper (Fig, crosses, node, column, fan), unchanged except that figures save here.
 Every number from mnist_stage_numbers.json (make_mnist_stage_numbers.py); every picture a real tile from
 data/mnist/samples or a real tensor from mnist_stage_arrays.npz. Each figure refuses to save if a line

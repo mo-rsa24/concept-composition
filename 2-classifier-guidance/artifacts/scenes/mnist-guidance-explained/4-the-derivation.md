@@ -9,7 +9,7 @@ Read it top to bottom: each step uses the one before. The figures are drawn by
 `make_derivation_figures.py` (steps 1 to 6) and `make_logit_figure.py` (step 7), which sit in
 `../classifier-guidance-on-poe/derivation/` beside `logit_numbers.json`. The measured
 numbers come from the step 7b results card, on four pasted MNIST test canvases noised to t = 489,
-asked 4 and 7: [the step 7b results](../../results/24-mnist-one-model/README.md).
+asked 4 and 7: [the step 7b results](../../results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/README.md).
 
 ## Words this uses
 

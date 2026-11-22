@@ -10,7 +10,7 @@ import numpy as np
 
 B = Path("data/mnist-canvas/24-mnist-one-model")
 F = B / "five-versions"
-eye = json.load(open("artifacts/results/24-mnist-one-model/five-versions/eye_counts.json"))["calls"]
+eye = json.load(open("artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/eye_counts.json"))["calls"]
 
 def five(key):           # a sheet from the cap-0.1 five-version run, with its eye list
     col, pair = key.split("|")
