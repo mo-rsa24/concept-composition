@@ -109,4 +109,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Write the card for this folder, which its index row lists as "no card yet".
 - [ ] Decide whether a pass on a mug fused to a goblet should count as holding a mug.
 
+## Cross-references
+
+- The mention of **CLIP score** in [the report on the 276 Attend-and-Excite prompts](../against-other-methods/how-does-the-adapter-score-on-the-attend-and-excite-prompts.md).
+- The mention of **GenEval two-object** in [the report on the GenEval and T2I-CompBench benchmarks](../against-other-methods/how-does-the-adapter-score-on-the-standard-benchmarks.md).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

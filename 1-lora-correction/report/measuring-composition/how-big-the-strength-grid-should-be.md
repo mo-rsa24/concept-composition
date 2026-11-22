@@ -67,7 +67,7 @@ strengths carry no detector count, because the scores were not rerun `stated` (t
 
 Navigation: ⬅️ [Previous](#six-columns-show-the-step-before) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
-**The same folder holds layouts of a second figure: the joint prompt and the plain product on four models.**
+**The same folder holds layouts of a second figure: the [joint prompt and the plain product](what-the-main-study-grids-show.md#the-joint-prompt-and-the-plain-product) on four models.**
 Each model gets two columns and each prompt pair one row. Read at sheet scale, the cat and dog row at seed 42
 holds both animals under the joint prompt on SDXL and SD 3.5, a lone cat on SD 1.4 and two dogs on SD 2.1.
 The plain product draws one animal on all four `verified`.
@@ -143,5 +143,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Say which manuscript copy was submitted, and so which strength grid it carries.
 - [ ] Add the four-model layouts to the grid card, which describes only the strength grid.
 - [ ] Repoint the grid card's link to the proofreading map, whose folder has moved.
+
+## Cross-references
+
+- The mention of **control row** in [the research guidelines](../../../context/research-guidelines.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -93,7 +93,7 @@ Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-o
 **CO3 and the joint prompt read the sentence naming both concepts while drawing, and the adapter
 does not.** PoE is the matched comparison, as on [the benchmark page](how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#what-this-cannot-tell-you).
 
-**No compose rate is quoted here.** This table holds BLIP-VQA only, so the `__cmp` strip fault does
+**No [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) is quoted here.** This table holds BLIP-VQA only, so the `__cmp` strip fault does
 not apply to any number on this page. How often a pooled adapter composes on unseen pairs is on
 [does one pooled adapter compose on pairs it never trained on](../does-the-fix-reach-unseen-pairs/does-one-pooled-adapter-compose-on-pairs-it-never-trained-on.md).
 

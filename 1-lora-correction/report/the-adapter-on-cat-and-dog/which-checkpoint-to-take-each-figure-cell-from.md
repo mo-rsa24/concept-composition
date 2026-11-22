@@ -71,7 +71,7 @@ Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-o
 
 **The sheets show what each checkpoint drew and do not say which one was judged best.** The sheet
 script writes `shortlist_template.json` to be cut down by hand, and no cut-down shortlist was found in
-this repository. No score is attached to any tile, and no compose rate is quoted here. The run names
+this repository. No score is attached to any tile, and no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) is quoted here. The run names
 are not defined in this folder.
 
 ## Concepts this uses

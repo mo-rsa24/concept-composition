@@ -65,7 +65,7 @@ made twice in this repo.
 - **The disk guard checked a filesystem the script was not writing to.** A guard has to look at
   the filesystem the output actually lands on. `/home-mscluster` hit 100% once and silently
   killed checkpointing.
-- **A full-strength shortcut would have made every control row reproduce the real one.** At λ=1
+- **A full-strength shortcut would have made every [control row](../1-lora-correction/report/measuring-composition/how-big-the-strength-grid-should-be.md#a-control-row) reproduce the real one.** At λ=1
   the sampler could skip the arithmetic and use the joined-prompt prediction directly, which
   would have ignored the injected fake entirely and made all three curves look equally good.
   Switching it off during control runs is a decision recorded in the design plan, not a finding.

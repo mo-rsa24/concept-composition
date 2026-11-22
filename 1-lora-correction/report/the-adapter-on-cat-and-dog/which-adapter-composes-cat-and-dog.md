@@ -87,7 +87,7 @@ Navigation: ⬅️ [Previous](#sheets-kept-off-this-page) | 📋 [TOC](#table-of
 Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-of-contents) | [Next](#concepts-this-uses) ➡️
 
 **Three seeds of one pair give no rate, so these sheets cannot rank the adapters.** Every read is by
-eye, and no compose rate is quoted here. Columns differ in more than one setting, so a gap between two
+eye, and no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) is quoted here. Columns differ in more than one setting, so a gap between two
 of them is a mixed comparison, as [the adapter settings page](how-the-adapter-settings-change-cat-and-dog.md#what-this-cannot-tell-you)
 explains for rank and training steps.
 

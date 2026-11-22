@@ -77,7 +77,7 @@ Navigation: ⬅️ [Previous](#what-the-adapter-does-to-a-joint-prompt) | 📋 [
 Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-of-contents) | [Next](#concepts-this-uses) ➡️
 
 **These grids carry no rate.** Each row is one seed read by eye, and neither the tile lists nor the card
-hold a score. So no compose rate from this page can be affected by the comparison-strip fault.
+hold a score. So no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) from this page can be affected by the comparison-strip fault.
 
 **The three-kinds grid cannot show that the adapter carries across kinds of pair**, because its animal and
 object rows have no adapter tile.

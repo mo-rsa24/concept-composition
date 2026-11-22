@@ -133,4 +133,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Call plans 26 and 27 from full-size tiles. Their recorded calls were made at tile size.
 - [ ] Try the walk's next idea, giving each detected body its own prompt after the layout settles. No plan holds it yet.
 
+## Cross-references
+
+- The mention of **faithful pair** in [the finding "can a small checker tell a clean cat and dog from a fused animal"](can-a-checker-read-a-clean-cat-and-dog.md).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

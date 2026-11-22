@@ -183,4 +183,9 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Run the SDXL pilot's planned test of 128 seeds per training.
 - [ ] Write a card entry for `can-one-expert-learn-its-own-pictures.png`, which no card lists.
 
+## Cross-references
+
+- The mention of **separate pair** in [the finding "does relabelling both-shapes pictures help the toy product compose"](../../../4-inclusive-captions/report/do-inclusive-captions-help-the-product-compose/does-relabelling-both-shapes-pictures-help-the-toy-product-compose.md).
+- The mention of **separate pairs** in [the inclusive-captions report index](../../../4-inclusive-captions/report/00-INDEX.md).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -69,9 +69,9 @@ pass rule for it was written down.
 | Part of the picture | What is known | Mark |
 |---|---|---|
 | top row | eight renders, one per pair; the script picks the first seed the instance-count scorer called composed with the correction at full strength | `stated` ([its script](../../scripts/text_orthogonality_probe.py)) |
-| y-axis | area under the pair's curve of compose rate against correction strength, on a 0 to 1 scale, from 4 seeds at each of 5 strengths; all eight recomputed from `outputs/interaction_term/dose/dose_curves.json` and match the picture | `verified` |
+| y-axis | area under the pair's curve of [compose rate](../../context/world/compose-rate.md#what-a-compose-rate-is) against correction strength, on a 0 to 1 scale, from 4 seeds at each of 5 strengths; all eight recomputed from `outputs/interaction_term/dose/dose_curves.json` and match the picture | `verified` |
 | x-axis | unclear. Labelled as the cosine between the two words. Its values run 0.9992 to 0.9997, the range the script's notes give for a first run they say was replaced by a standardised cosine. The script committed with the picture computes the standardised one | owed |
-| rank correlation, +0.17 | rests on the x-axis order, so it is unclear too | owed |
+| [rank correlation](../../1-lora-correction/report/what-the-correction-is/does-the-correction-cause-composition.md#a-rank-correlation), +0.17 | rests on the x-axis order, so it is unclear too | owed |
 
 ## Where the sources disagree
 

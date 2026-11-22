@@ -1,6 +1,6 @@
 # 📒 Report: does the early push carry from cat and dog to other pairs?
 
-**It carried to one object pair and only partly to a second animal pair.** The
+**It carried to one object pair and only partly to a second [animal pair](../../../context/world/animal-pair.md).** The
 [early push](does-an-early-push-separate-the-cat-and-dog.md), with a checker trained only on cats and
 dogs, separated a typewriter and a cactus on 14 of 16 seeds and a lion and a meerkat on 6 of 16. Later
 checkers trained across many pairs never produced a lion and meerkat the automatic scorer accepted.

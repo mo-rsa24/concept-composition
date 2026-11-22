@@ -164,4 +164,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Decide what happens to the identity sheet, which the card and the route still embed. The owner decides.
 - [ ] Draw the bar chart named above, so this result has a picture that is safe to show.
 
+## Cross-references
+
+- The mention of **scale 10 draws the asked-for class** in [row G0 of the classifier-guided PoE outcome board](board.md).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

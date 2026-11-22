@@ -47,7 +47,7 @@ Navigation: ⬅️ [Previous](#the-scores-by-method-and-prompt-set) | 📋 [TOC]
 **The [95% interval](#an-interval-from-resampling-twice) on Ours minus PoE sits above 0 in all
 three sets, which is what [the protocol's rule](../paper-review/protocol.md#the-bar-for-r1-fixed-before-any-evaluation-image-is-scored)
 calls SUPPORTS.** The difference is in BLIP-VQA, paired on the same prompt, seed and starting noise.
-The right-hand columns repeat it on the prompts that share no concept with the 48 training pairs.
+The right-hand columns repeat it on the prompts that share no concept with the [48 training pairs](../paper-review/held-out-set.md#the-48-training-pairs).
 No verdict was recorded for that subset `verified`
 ([the subset file](../../artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/no_overlap_tables.json)).
 
@@ -73,7 +73,7 @@ picture shows is an eye read.
 
 <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/one-cell-bear-with-glasses-seed9.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/one-cell-bear-with-glasses-seed9.png" width="200" alt="Three renders of a bear with glasses: the joint prompt wears glasses, PoE has none, the adapter holds a cub and a misplaced lens"></a>
 
-**A picture can keep a high CLIP score without drawing the glasses properly.** On "a bear with a glasses" at seed 9,
+**A picture can keep a high [CLIP score](../measuring-composition/what-each-scorer-says-about-two-objects.md#clip-score) without drawing the glasses properly.** On "a bear with a glasses" at seed 9,
 the adapter draws a bear holding a cub and a misplaced lens, and its CLIP score is 28.0 against 28.9
 for the joint prompt. BLIP-VQA separates them: 0.3826 for the adapter, 0.9370 for the joint prompt
 and 0.0436 for PoE. The sheet prints BLIP-VQA as queued, and these three values come from the saved

@@ -93,7 +93,7 @@ commitment numbers on a step ruler, is drawn in
 Navigation: ⬅️ [What it looks like](#what-it-looks-like) | 📋 [TOC](#table-of-contents) | [Next](#how-it-shows-up-in-the-data) ➡️
 
 **It is the whole causal claim.** ✅ If adding this term back in (at increasing λ) reliably raises
-the compose rate while a same-sized random vector does not, the project has evidence the term is
+the [compose rate](compose-rate.md#what-a-compose-rate-is) while a same-sized random vector does not, the project has evidence the term is
 what PoE composition is missing, not just a correlate. `MASTER_PLAN.md` step 4 records this
 result as done.
 
@@ -247,5 +247,7 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 - The mention of **the interaction term** in [the plan "The dropped term, on four rows"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/07-the-dropped-term-table.md#description).
 - The mention of **the interaction term** in [the plan "The account you could defend"](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/09-the-account-you-could-defend.md#tasks).
 - The mention of **the interaction term** in [the master plan of the classifier-guidance journey](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/MASTER_PLAN.md#what-other-journeys-own).
+- The mention of **the interaction term** in [where the data comes from](../data/01-where-it-comes-from.md).
+- The mention of **the interaction term** in [what the project produces](../purpose/02-what-we-produce.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

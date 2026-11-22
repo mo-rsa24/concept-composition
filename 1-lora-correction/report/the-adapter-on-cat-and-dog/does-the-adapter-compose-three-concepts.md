@@ -54,7 +54,7 @@ statements are at lines 889 and 1386 of [the paper source](../../../writing/rest
 Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-of-contents) | [Next](#concepts-this-uses) ➡️
 
 **One seed and one triple per kind cannot give a rate.** The instance counts the review step asks
-for are absent, so no compose rate exists for three concepts. The calls in the table are by eye from
+for are absent, so no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) exists for three concepts. The calls in the table are by eye from
 1,024-pixel renders. The adapter was never trained on a triple, so these renders say nothing about
 what a three-concept adapter would do.
 

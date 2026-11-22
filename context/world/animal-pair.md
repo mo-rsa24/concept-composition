@@ -196,5 +196,8 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 - The mention of **animal pairs** (the 11 look-alike pairs of the original 88-run training pool, whose adapters never draw a person into the picture) in [the known failure "a pooled adapter draws a person into a picture of two animals"](../../environment/known-failures.md#entry-id-poe-lora-005) (exact match).
 - The mention of **animal pairs** (the 15 pairs each held out in turn, one LoRA trained without each) in [the plan measuring transfer as a rate over fifteen held-out pairs](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md#quick-context-where-you-are) (exact match).
 - The mention of **seed** (same pair and same seed across every corrector count) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#the-claim).
+- The mention of **animal pair** in [the report on handing the last denoising steps to frozen SDXL](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-handing-the-tail-to-frozen-sdxl-bring-renders-nearer-the-joint-prompt.md).
+- The mention of **animal pair** in [the report on whether the early push carries to other pairs](../../2-classifier-guidance/report/classifier-guided-poe/does-the-early-push-carry-to-other-pairs.md).
+- The mention of **animal pairs** in [the report on render-time fixes for picture quality](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

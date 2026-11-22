@@ -7,7 +7,7 @@ records: "Yes, once about 9% of each single caption's pictures hold both shapes.
 diffusion model trained on pictures of a red circle, a blue square, or both. Relabelling files a
 both-shapes picture under "a red circle" and "a blue square" as well as under the joint caption. With
 none relabelled, the [product of the two captions](../../../context/world/poe-composition.md#what-poe-composition-is)
-draws no separate pair. With the training set held at 6,000 pictures, one training of three reaches 30
+draws no [separate pair](../../../3-understanding-compositionality/report/the-exact-toy/what-poe-needs-from-training-to-draw-two-things-at-once.md). With the training set held at 6,000 pictures, one training of three reaches 30
 of 300 at a 9.1% share, and all three do from 23%.
 
 ## Table of contents

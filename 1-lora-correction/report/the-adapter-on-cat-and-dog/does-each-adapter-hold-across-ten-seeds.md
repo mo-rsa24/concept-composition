@@ -97,6 +97,6 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 
 - [ ] Check the camel and forest tile at full size, and decide whether the summary sheet can be shown.
 - [ ] Open the four grids not looked at here: tiger and dog, cat and teapot, picnic basket and watermelon, camel and forest.
-- [ ] Decide whether these grids should be scored. No compose rate exists for them.
+- [ ] Decide whether these grids should be scored. No [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) exists for them.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

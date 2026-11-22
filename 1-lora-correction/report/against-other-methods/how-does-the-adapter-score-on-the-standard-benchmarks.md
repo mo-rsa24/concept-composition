@@ -62,7 +62,7 @@ Navigation: ⬅️ [Previous](#two-prompts-from-the-benchmarks) | 📋 [TOC](#ta
 | What | One source | The other source | What the code shows |
 |---|---|---|---|
 | which tasks the table holds | [the layout sheet](../paper-review/layout-sheet.md) lists GenEval two objects and counting, and T2I-CompBench spatial and complex | the result file holds GenEval two objects, colour attribute and position, and T2I-CompBench colour, shape and an empty texture column | the [benchmark table script](../../../scripts/review_bench_table.py) (line 25) and the [paper slot's schema](../../scripts/refresh_paper_slots.py) (lines 132 to 133) both use the result file's tasks |
-| runs on counting and spatial prompts | [the pair ledger](../../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) records GenEval two-object, counting and T2I-CompBench spatial as run complete (99, 80 and 300 prompts) | the result file has no counting or spatial column | the two-object count fits: 396 images is 99 prompts at 4 seeds. Where the counting and spatial scores went is not recorded |
+| runs on counting and spatial prompts | [the pair ledger](../../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) records [GenEval two-object](../measuring-composition/what-each-scorer-says-about-two-objects.md#geneval-two-object), counting and T2I-CompBench spatial as run complete (99, 80 and 300 prompts) | the result file has no counting or spatial column | the two-object count fits: 396 images is 99 prompts at 4 seeds. Where the counting and spatial scores went is not recorded |
 
 ## What this cannot tell you
 
@@ -73,7 +73,7 @@ holds one mean per cell, and the 0.0015 between Ours and CO3 on T2I-CompBench sh
 
 **CO3 and the joint prompt read the sentence naming both concepts while drawing, and the adapter
 does not.** PoE is the matched comparison, as on [the benchmark page](how-does-the-adapter-score-on-the-attend-and-excite-prompts.md#what-this-cannot-tell-you).
-This page quotes no compose rate, so the `__cmp` strip fault does not apply to it.
+This page quotes no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is), so the `__cmp` strip fault does not apply to it.
 
 ## Concepts this uses
 

@@ -88,7 +88,7 @@ Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-o
 
 **This ranking is a choice among nine checkpoints on two pairs, so it gives no success rate.** Every
 call is by eye, 16 per candidate. The [protocol](../paper-review/protocol.md) keeps these two pairs out
-of every held-out rate because the adapter was picked on them. No compose rate is quoted here.
+of every held-out rate because the adapter was picked on them. No [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) is quoted here.
 
 ## Concepts this uses
 

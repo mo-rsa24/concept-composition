@@ -193,4 +193,8 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Find out why text anchoring separates a blend from two animals when image-to-image distance does not, the question the review leaves open.
 - [ ] Run more of the mis-aimed control, whose 44% is the weakest number in the five checks.
 
+## Cross-references
+
+- The mention of **rank correlation** in [the report on what the text already says about one animal or two](../../../5-text-embedding-third-expert/report/what-the-text-already-says.md).
+
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

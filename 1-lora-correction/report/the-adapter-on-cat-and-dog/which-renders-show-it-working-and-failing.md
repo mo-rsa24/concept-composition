@@ -104,7 +104,7 @@ Navigation: ⬅️ [Previous](#two-render-time-changes) | 📋 [TOC](#table-of-c
 Navigation: ⬅️ [Previous](#sheets-kept-off-this-page) | 📋 [TOC](#table-of-contents) | [Next](#concepts-this-uses) ➡️
 
 **These sheets were made to find good pictures, so they cannot give a success rate.** Every call is
-by eye on a small number of seeds, and no compose rate is quoted here. The two training snapshot folders
+by eye on a small number of seeds, and no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) is quoted here. The two training snapshot folders
 also hold `__cmp` comparison strips, whose target panel always shows two animals, so a score taken
 over those folders by the compose-rate script before commit `0811f029` would count them.
 

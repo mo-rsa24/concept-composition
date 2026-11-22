@@ -88,7 +88,7 @@ Navigation: ⬅️ [Previous](#where-the-sources-disagree) | 📋 [TOC](#table-o
 
 **These counts say what is available and nothing about whether it is enough.** Whether 150 both-animal
 photos move the product is the [pilot's question](../do-inclusive-captions-help-the-product-compose/does-captioning-both-animal-photos-under-each-name-help-poe-compose.md),
-which has no compose rate yet.
+which has no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) yet.
 
 **The audit has one reader.** Seven tiles were left uncertain, and the card's single-animal sets have no
 recorded audit in this folder.

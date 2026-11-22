@@ -80,7 +80,7 @@ and [the held-out page](how-does-every-sdxl-method-compare-on-the-held-out-pairs
 starting noise, and CO3 draws its own `stated` (the card). The later review runs start CO3 from the
 shared noise ([line 123 of the baseline script](../../scripts/review_baseline_cell.py)).
 
-**This page quotes no compose rate or sharpness number**, so neither known measurement fault applies
+**This page quotes no [compose rate](../../../context/world/compose-rate.md#what-a-compose-rate-is) or sharpness number**, so neither known measurement fault applies
 to it.
 
 ## Where this came from
