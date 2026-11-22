@@ -166,3 +166,16 @@ CoMat,2404.03653,5,9,The impact of different image-to-text models.
 CoMat,2404.03653,6,10,Success rate of prompt attack.
 CoMat,2404.03653,7,20,Statistics of image-to-text models.
 CoMat,2404.03653,8,22,CoMat training hyperparameters for SD1.5 and SDXL.
+RTD,2608.03135,1,6,"Quantitative results on AE-Bench. A-A, A-O, and O-O denote animal–animal, animal–object, and object–object."
+RTD,2608.03135,2,6,Quantitative results on T2I-CompBench and RareBench.
+RTD,2608.03135,3,7,Ablation of RTD components and rectification updates on AE-Bench. Nrect denotes the number of updates.
+RTD,2608.03135,4,7,Cross-solver and cross-step performance on AE-Bench.1
+RTD,2608.03135,5,7,AE-Bench BLIP-VQA across backbones (↑).
+RTD,2608.03135,6,7,Per-image runtime on one H200 GPU. Pilot/Corr.
+RTD,2608.03135,A.1,11,Structural comparison of representative compositional-generation methods. Auxiliary signals denote information
+RTD,2608.03135,C.1,13,Benchmark subsets and concept sources used in the main paper.
+RTD,2608.03135,C.2,14,Public benchmark and evaluation sources.
+RTD,2608.03135,C.3,14,Official model and representative baseline implementation sources.
+RTD,2608.03135,D.1,21,Representative successful generations by RTD.
+RTD,2608.03135,D.2,21,Representative failure cases of RTD.
+RPG,2401.11708,1,9,Evaluation results on T2I-CompBench. RPG consistently demonstrates best performance regarding attribute binding

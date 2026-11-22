@@ -320,3 +320,33 @@ CoMat,2404.03653,11,24,More Comparisons between SDXL and CoMat-SDXL on complex p
 CoMat,2404.03653,12,25,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the
 CoMat,2404.03653,13,26,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the
 CoMat,2404.03653,14,27,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the
+RTD,2608.03135,1,1,"Qualitative comparison on AE-Bench. From top to bottom: SDXL, CO3 and RTD."
+RTD,2608.03135,2,3,"Overview of RTD. RTD extracts pilot concept maps, uses SOD to measure overlap, and applies IGR update. The"
+RTD,2608.03135,3,5,"Qualitative comparison on T2I-CompBench. RTD cation recovers vanilla SDXL, while removing IGR ap"
+RTD,2608.03135,4,6,Concept attention evolution during denoising. Rows compare CO3 and RTD. Colored borders match the highlighted
+RTD,2608.03135,5,7,Sensitivity to (a) relative correction ratio ρ and (b) DDIM sampling. RTD adds only 0.31 s to
+RTD,2608.03135,D.1,15,"AE-Bench, examples 1 to 5. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to right"
+RTD,2608.03135,D.2,16,"AE-Bench, examples 6 to 10. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to righ"
+RTD,2608.03135,D.3,17,"T2I-CompBench, examples 1 to 5. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to"
+RTD,2608.03135,D.4,18,"T2I-CompBench, examples 6 to 10. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to"
+RTD,2608.03135,D.5,19,"RareBench, examples 1 to 5. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to righ"
+RTD,2608.03135,D.6,20,"RareBench, examples 6 to 10. Rows correspond to prompts. Columns show CO3, R2F, ToMe, and RTD from left to rig"
+RTD,2608.03135,E.1,22,"Denoising and attention evolution on AE-Bench. Within each prompt, rows show CO3, R2F, ToMe, and RTD. Columns"
+RTD,2608.03135,E.2,23,"Denoising and attention evolution on T2I-CompBench. Within each prompt, rows show CO3, R2F, ToMe, and RTD. Col"
+RTD,2608.03135,E.3,24,"Denoising and attention evolution on RareBench. Within each prompt, rows show CO3, R2F, ToMe, and RTD. Columns"
+RPG,2401.11708,1,1,Architecture comparison between (a) text-conditional
+RPG,2401.11708,2,2,"Compared to SDXL (Podell et al., 2023) and DALL-E 3 (Betker et al., 2023), our proposed RPG exhibits a superior"
+RPG,2401.11708,3,3,"Our RPG framework can extend text-to-image generation with more conditions (e.g., pose, depth and canny edge) b"
+RPG,2401.11708,4,5,Overview of our RPG framework for text-to-image generation.
+RPG,2401.11708,5,5,An illustrative example for region division.
+RPG,2401.11708,6,6,The demonstration of each sampling step in our Complementary Regional Diffusion.
+RPG,2401.11708,7,7,RPG unifies text-guided image generation and editing in a closed-loop approach.
+RPG,2401.11708,8,8,"Qualitative comparison between our RPG and SOTA text-to-image models (SDXL (Podell et al., 2023) and DALL-E 3 ("
+RPG,2401.11708,9,9,Demonstration of our hierarchical regional diffusion. Diffusion with more hierarchies can produce more satisfyi
+RPG,2401.11708,10,10,"Generalizing RPG to different (multimodal) LLM architectures, including Llama 2 (Touvron et al., 2023b), Vicuna"
+RPG,2401.11708,11,10,"Generalizing RPG to different diffusion backbones, Stable Diffusion v2.1 (Rombach et al., 2022) and recent SOTA"
+RPG,2401.11708,13,11,Multi-round text-guided image editing with our RPG
+RPG,2401.11708,12,11,Qualitative comparison in text-guided image edit-
+RPG,2401.11708,15,12,Ablation study of CoT planning in RPG.
+RPG,2401.11708,14,12,"Ablation study of recaptioning in RPG. Huang et al., 2023"
+RPG,2401.11708,16,13,Ablation study of base prompt in complementary re-

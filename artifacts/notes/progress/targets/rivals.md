@@ -1,6 +1,6 @@
 # Rivals: every paper the two papers are measured against
 
-This table lists the 23 rival papers, which of our two papers each one rivals, and what it evaluates on. Paper 1
+This table lists the 25 rival papers, which of our two papers each one rivals, and what it evaluates on. Paper 1
 composes separately trained models at inference. Paper 2 restores plurality in one conditional model. The
 [two-paper route](../../../../plans/route-two-papers.md) states both claims.
 
@@ -43,8 +43,10 @@ HTML page loaded.
 | CFGRevisited | 2608.16786v1 | [downloaded](pdfs/2608.16786.pdf) | 13 | GenEval, DPG-Bench and selected OneIG families, on SD3.5 Medium and FLUX.2 klein (p2) | `figures read` |
 | CountLoop | 2508.16644v5 | [on the shelf](../../../../../../goal-setting/learning/papers/deep-learning/diffusion-models/compositional-diffusion-models/region-and-binding-failures/countloop-high-instance-image-generation.pdf) | 17 | COCO-Count, T2I-CompBench Count, and the authors' CountLoop-S and CountLoop-M sets (p8, Table 1, p10) | `figures read` |
 | CoMat | 2404.03653v3 | [downloaded](pdfs/2404.03653.pdf) | 27 | T2I-CompBench, six subsets (Table 1, p7). TIFA and DPG-Bench (Table 2, p8). FID on 10,000 images (Table 3, p8) | `figures read` |
+| RTD | 2608.03135v1 | [downloaded](pdfs/2608.03135.pdf) | 28 | Attend-and-Excite prompts on SDXL (Table 1, p6). T2I-CompBench Complex and RareBench Concat, Relations and Complex (Table 2, p6) | `figures read` |
+| RPG | 2401.11708v3 | [downloaded](pdfs/2401.11708.pdf) | 17 | T2I-CompBench, six subsets, on SDXL with GPT-4 as recaptioner and planner (Table 1, p9) | `figures read` |
 
-SuperDiff and LiftScores rival both papers and are counted once each, so the total is 23.
+SuperDiff and LiftScores rival both papers and are counted once each, so the total is 25.
 
 ## For the shelf to take in
 

@@ -26,3 +26,4 @@ Paper 2,T2ICompbench Complex,CO3,"Glass sits on the coaster, not next to it; a f
 Paper 2,T2ICompbench Complex,ToMe,Turns pairs into repeated wallpaper patterns; draws a literal crack with no bat
 Paper 2,RareBench Concat,CO3,"Misses rare traits: hornless lemons, no thorns, octopus with a bear face, spots on the bird"
 Paper 2,RareBench Concat,ToMe,"Drops lion, octopus, owl and bottle; rides a bicycle instead of a unicycle"
+Paper 2,RareBench Concat,RTD,"Subjects separate but shape and action words fail: no ax bed, heart moon, star ship or dancing"

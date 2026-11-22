@@ -1,0 +1,17 @@
+figure,page,kind,reason
+1,1,diagram,Architecture comparison of four text-to-image pipelines
+2,2,qualitative,
+3,3,qualitative,
+4,5,diagram,"Overview of the recaption, plan and generate stages"
+5,5,diagram,Worked example of the region split notation
+6,6,diagram,One sampling step of complementary regional diffusion
+7,7,diagram,Closed-loop editing workflow on one mug example
+8,8,qualitative,
+9,9,qualitative,
+10,10,qualitative,
+11,10,qualitative,
+12,11,qualitative,
+13,11,qualitative,
+14,12,qualitative,
+15,12,qualitative,
+16,13,qualitative,

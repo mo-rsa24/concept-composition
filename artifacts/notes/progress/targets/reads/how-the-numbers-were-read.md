@@ -78,7 +78,7 @@ more and compare it against your rows, digit by digit, and fix anything that dif
 ## The second read
 
 Every number that can set a target is read a second time. That covers all `published` rows and every non-plot row
-printed by CFGRevisited, whose tables compare the guidance methods Paper 2 is measured against: 3,865 cells on 112 pages.
+printed by CFGRevisited, whose tables compare the guidance methods Paper 2 is measured against: 4,078 cells on 116 pages.
 
 `second_read.py` gives gpt-6-astra, through Codex, one page image and a list naming each cell by method, dataset, task,
 metric, model and table. The list never holds the first read's value or interval. A cell it cannot place is read again
@@ -89,9 +89,9 @@ once spaces are removed. Any other cell is opened on its page and ruled in `sett
 
 | Outcome | Cells |
 |---|---|
-| The two reads agree | 3,827 |
-| Opened on the page, first read stands | 38 |
+| The two reads agree | 4,033 |
+| Opened on the page, first read stands | 45 |
 | Still open | 0 |
 
-Codex runs in a read-only sandbox from a folder holding only the page image. The session logs of all 125 Codex jobs
+Codex runs in a read-only sandbox from a folder holding only the page image. The session logs of all 130 Codex jobs
 (`~/.codex/sessions/2026/11/22/`) hold one prompt, one reply and no tool call, so no job opened any other file.
