@@ -1,0 +1,133 @@
+paper,arxiv,table,page,caption_start
+Liu,2206.01714,1,11,Quantitative evaluation of 128 × 128 image generation results on CLEVR.
+Liu,2206.01714,2,12,Quantitative evaluation of 128×128 image generation results on the Relational
+Liu,2206.01714,3,20,Image generation results on FFHQ. The binary classification accuracy (Acc)
+Du,2302.11552,1,6,Quantitative results on 2D composition. Energy based
+Du,2302.11552,2,6,Quantitative performance (accuracy) of composing multi-
+Du,2302.11552,3,7,MCMC Sampling enables better classifier guidance
+Du,2302.11552,A1,17,FID (1k samples) of various energy-parameterizations on unconditional ImageNet generation.
+SuperDiff,2412.17762,1,8,Unconditional image generation performance for CIFAR-10 with models trained on two disjoint
+SuperDiff,2412.17762,2,8,"Quantativate evaluation of SD-generated images. We compare S UPER D IFF (AND), joint prompting, and"
+SuperDiff,2412.17762,3,9,"Evaluation of S UPER D IFF and baseline models, Proteus & FrameDiff, for unconditional protein gen-"
+SuperDiff,2412.17762,4,10,"Multi-property molecule generation results. For a set of two target properties (P1 and P2 ), we report the"
+SuperDiff,2412.17762,A1,30,Image generation performance for CIFAR-10 with conditional models trained on two random
+SuperDiff,2412.17762,A2,33,"Quantativate evaluation of SD-generated images for logical OR. We compare S UPER D IFF (OR), joint"
+FKC,2503.02819,1,5,Conversion rules for different terms of the original Feynman-Kac PDEs (FK-PDEs) and the corresponding weighted
+FKC,2503.02819,2,7,Comparison of EDM2+FKC ( ) with EDM2+CFG ( )
+FKC,2503.02819,3,8,"LJ-13 sampling task with various SDEs, with performance"
+FKC,2503.02819,4,9,"Docking scores of generated ligands for 100 protein target pairs (P1 , P2 ). We generate 32 ligands for 5 molec"
+FKC,2503.02819,A1,36,Mixture of 40 Gaussians. Sampling from an annealed distribution with inverse temperature β = 3. Metrics are cal
+FKC,2503.02819,A2,36,Additional results for LJ-13 at different target temperatures. The model is trained at starting temperature TL
+FKC,2503.02819,A3,38,Comparison of EDM2+FKC ( ) with EDM2+CFG ( ) for image generation using EDM2. With sweep over batchsize K. For
+FKC,2503.02819,A4,39,"Image generation using SDXL with classifier-free guidance (CFG) on the GenEval benchmark (Ghosh et al., 2023)."
+FKC,2503.02819,A5,40,Performance of generated molecules with different SDE settings. We generate 32 molecules for 5 molecule sizes f
+FKC,2503.02819,A6,42,"Multi-property molecule generation results (PoE). For a set of two target properties (P1 and P2 ), we take the"
+FKC,2503.02819,A7,43,Docking scores of generated molecules to P1 =ATP1A1 and P2 =CPT2. We used the Tempered Noise SDE with β = 1.5 a
+FKC,2503.02819,A8,44,"Multi-property molecule generation results. For a set of two target properties (P1 and P2 ), we take the set of"
+Bradley-Projective,2502.04549,1,17,Quantitative analysis of different methods of composition of location-conditioned CLEVR distributions. We
+Bradley-Projective,2502.04549,2,38,
+Bradley-Local,2509.16447,1,3,Upper limits of length generalization in location-conditioned CLEVR. The table lists the
+Bradley-Local,2509.16447,3,26,The conditional locality (y-axis) metric is described in Section F.
+Bradley-Local,2509.16447,2,28,"Kmax counts for Table 1 experiments, evaluated using the automated classifier over 1024"
+Bradley-Local,2509.16447,4,30,Kmax values and count distributions for color-conditioning experiments (Figure 13). Unlike
+CoInD,2503.01145,1,5,Conformity Scores and Jensen-Shannon
+CoInD,2503.01145,2,9,Results on CelebA dataset. C O I N D out-
+CoInD,2503.01145,3,19,"Results on Colored MNIST to directly minimize the upper bound (K1 = 1, K2 = 0.1)"
+CoInD,2503.01145,4,20,Results on Shapes3D with the objective of directly minimizing the upper bound Eq. (10)
+CoInD,2503.01145,5,22,"Hyperparameters for Colored MNIST and Shapes3D used by C O I N D, Composed GLIDE,"
+CoInD,2503.01145,6,27,Results on SDv1.5 fine-tuning. C O I N D outperforms the baseline on all the metrics.
+CoInD,2503.01145,7,32,Overall Performance Metrics for Conditional generation
+MultiDiffusion,2302.08113,1,5,"Panorama generation evaluation. We report FID, CLIP"
+MultiDiffusion,2302.08113,2,7,Region-based generation evaluation of the COCO dataset.
+PiCo,2505.03203,I,5,
+PiCo,2505.03203,II,5,TABLE III
+PiCo,2505.03203,III,5,
+PiCo,2505.03203,IV,7,
+PiCo,2505.03203,V,10,
+PiCo,2505.03203,VI,10,"yellow dog” and “a blue bike.” In the former case, the object is"
+FreeFuse,2510.23515,1,10,"Compared to existing methods, our approach demonstrates a significant advantage in Face Similarity and"
+FreeFuse,2510.23515,2,10,Ablation study results indicating the effectiveness of each component.
+FreeFuse,2510.23515,3,11,Inference latency comparison (seconds) at 1024 × 1024 resolution on a single L20 GPU. FreeFuse
+FreeFuse,2510.23515,4,20,Hyperparameter settings for FreeFuse mask extraction and post-processing.
+FreeFuse,2510.23515,5,24,Quality trends as the number of simultaneously loaded LoRAs increases. Baseline denotes direct
+FreeFuse,2510.23515,6,25,Evaluation on the public LoRAShop dual-subject protocol.
+FreeFuse,2510.23515,7,26,Inference latency comparison (in seconds) at 1024 × 1024 resolution. Comparison Key: While
+DomainExpansion,2605.23275,1,3,FAD values for long music track generation on concatenates the results during inference. Th
+DomainExpansion,2605.23275,2,3,"Accuracy on the 256 generated samples for various and 13 patches of length l accordingly, so th"
+DomainExpansion,2605.23275,3,3,Evaluation results for satellite image generation. 4.2. CLEVR Image Generation
+Sculpting,2309.16115,1,13,Reward distributions of composite GFlowNets. 1.0
+Sculpting,2309.16115,F.1,35,Summary of base GFlowNet and classifier train-
+Sculpting,2309.16115,F.2,35,Summary of base diffusion and classifier training
+Sculpting,2309.16115,F.3,36,Average pairwise similar- Table F.4: Number of Tanimoto-separated modes found above reward thresh-
+Sculpting,2309.16115,F.5,36,Estimated pairwise earthmover’s distances between distributions shown in Table 1.
+Catastrophic,2606.23920,1,10,The relative magnitudes of inference-time approximation error and score
+Catastrophic,2606.23920,2,11,The expected trends also hold for Gaussian mixture models. The table
+Catastrophic,2606.23920,3,28,"The expected trends also hold for individual “expert” models, but overall"
+Catastrophic,2606.23920,4,34,Factorized Conditionals + In-Distribution Composition. P a1 =
+Catastrophic,2606.23920,5,34,Factorized Conditionals + In-Distribution Composition. P a1 =
+Catastrophic,2606.23920,6,34,Non-Factorized Conditionals + In-Distribution Composition. P a1 =
+Catastrophic,2606.23920,7,35,Non-Factorized Conditionals + In-Distribution Composition. P a1 =
+Catastrophic,2606.23920,8,35,Factorized Conditionals + Out-Of-Distribution Composition. P a1 =
+Catastrophic,2606.23920,9,35,Factorized Conditionals + Out-Of-Distribution Composition. P a1 =
+Catastrophic,2606.23920,10,36,Non-Factorized Conditionals + Out-Of-Distribution Composition. P a1 =
+Catastrophic,2606.23920,11,36,Non-Factorized Conditionals + Out-Of-Distribution Composition. P a1 =
+Catastrophic,2606.23920,12,36,"Factorized Conditionals + In-Distribution Composition. Separate models,"
+Catastrophic,2606.23920,13,37,"Factorized Conditionals + In-Distribution Composition. Separate models,"
+Catastrophic,2606.23920,14,37,Non-Factorized Conditionals + In-Distribution Composition. Sep-
+Catastrophic,2606.23920,15,37,Non-Factorized Conditionals + In-Distribution Composition. Sep-
+Catastrophic,2606.23920,16,38,Factorized Conditionals + Out-Of-Distribution Composition. Separate
+Catastrophic,2606.23920,17,38,Factorized Conditionals + Out-Of-Distribution Composition. Separate
+Catastrophic,2606.23920,18,38,Non-Factorized Conditionals + Out-Of-Distribution Composition.
+Catastrophic,2606.23920,19,39,Non-Factorized Conditionals + Out-Of-Distribution Composition.
+Catastrophic,2606.23920,20,39,"GMM, In-Distribution (SW2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,21,39,"GMM, In-Distribution (MMD2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,22,39,"GMM, Out-of-Distribution (SW2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,23,40,"GMM, Out-of-Distribution (MMD2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,24,40,"GMM, In-Distribution Separate models, (SW2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,25,40,"GMM, In-Distribution Separate models, (MMD2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,26,40,"GMM, Out-of-Distribution Separate models, (SW2 mean ± std over 30 runs)"
+Catastrophic,2606.23920,27,41,"GMM, Out-of-Distribution Separate models, (MMD2 mean ± std over 30"
+TestTime,2605.07078,1,8,ColorMNIST: 40 OOD compositions (mean±SE ). Bold: best; underline: 2nd.
+TestTime,2605.07078,2,9,CelebA: 23 OOD compositions (mean±SE ). Bold: best; underline: 2nd.
+TestTime,2605.07078,3,13,Color-MNIST primitive attributes and split.
+TestTime,2605.07078,4,14,CelebA compositional benchmark [46]. A compositional class is a unique combination of 14
+TestTime,2605.07078,5,15,Backbone training hyperparameters. Architectural fields not shown follow the base
+TestTime,2605.07078,6,15,Concept discovery settings (per dataset). Both datasets use K=3 prototypes and the per-
+TestTime,2605.07078,7,16,Distillation settings (per dataset). The trainable parameters are jointly the LoRA adapter on
+TestTime,2605.07078,8,16,"Sampling settings used for both pool generation (training DT for distillation, and the"
+TestTime,2605.07078,9,18,Licenses for existing assets.
+CO3,2509.25940,1,7,Quantitative comparison of different methods on two concept prompts from Chefer et al.
+CO3,2509.25940,2,7,Quantitative results on multi-concept prompts from T2ICompbench and rare-concepts from
+CO3,2509.25940,3,8,Ablations study conducted on the CO3 Qualitative Comparison: Figure 3 compares
+CO3,2509.25940,4,9,Generalization of CO3 on Comparison with Optimization-Free Approaches:
+CO3,2509.25940,5,17,Human Evaluation results on
+CO3,2509.25940,6,18,Performance of CO3 with DPM++ solver and in the low inference steps regime.
+CO3,2509.25940,7,18,Performance of CO3 with DDIM solver in the low inference steps regime.
+CO3,2509.25940,8,18,"Runtime and memory comparison between SDXL, ToMe, and CO3 at different sampling"
+CO3,2509.25940,9,20,"num resampling sweep. Within each group, only num resampling changes; all"
+CO3,2509.25940,10,20,"num ts sweep with all other settings fixed: β = 1.1, num resampling=3,"
+CO3,2509.25940,11,20,"num steps. Within each group, only num steps changes; all other settings are identi-"
+CO3,2509.25940,12,21,"Exponential decay factor β with all other settings fixed: num resampling=3,"
+CO3,2509.25940,13,21,"Exponential decay factor β with all other settings fixed: num resampling=3,"
+ToMe,2411.07132,1,8,Quantitative results for semantic binding assessment on various benchmarking subsets. We
+ToMe,2411.07132,2,9,Ablation Study conducted on the T2I-
+ToMe,2411.07132,3,17,Time Complexity of various methods. The results of our method are highlighted in bold.
+ToMe,2411.07132,4,21,Comparison of BLIP-VQA Scores
+AttendExcite,2301.13826,1,7,Average CLIP text-text similarities between the text prompts and
+AttendExcite,2301.13826,2,8,User study conducted with 65 respondents. We randomly select 10 “A dog and a bear”
+AttendExcite,2301.13826,3,10,"Datasets. We list the animals, objects, and colors used to define"
+AttendExcite,2301.13826,4,14,CLIP-based Text-Text Similarity Comparison with Prompt-to-
+AttendExcite,2301.13826,5,14,CLIP-based Image-Text Similarity Comparison over complex prompts.
+AttendExcite,2301.13826,6,14,Average Maximum Object CLIP-based Image-Text Similarity metric.
+FlipConcept,2502.15203,I,4,
+FlipConcept,2502.15203,II,5,
+FlipConcept,2502.15203,III,6,
+CFGRevisited,2608.16786,1,3,"Headline scores for both models. GE is GenEval; DPG is mean×100; Obj, Txt, and Rsn are the selected OneIG fami"
+CFGRevisited,2608.16786,2,6,"What each method’s original paper measured against CFG, versus our result. “Comp.?” marks whether the paper us"
+CFGRevisited,2608.16786,3,8,"Final hyperparameters per method, SD3.5 Medium (25 steps)."
+CFGRevisited,2608.16786,4,8,"Final hyperparameters per method, FLUX.2 [klein] 4B Base (30 steps)."
+CFGRevisited,2608.16786,5,9,GenEval category scores for both models. Overall is the macro average.
+CFGRevisited,2608.16786,6,10,DPG-Bench L1 scores for both models. DPG is mean×100.
+CFGRevisited,2608.16786,7,10,DPG-Bench L2 attribute scores for both models.
+CFGRevisited,2608.16786,8,11,DPG-Bench L2 non-attribute scores for SD3.5 Medium.
+CFGRevisited,2608.16786,9,11,DPG-Bench L2 non-attribute scores for FLUX.2 [klein] 4B Base.
