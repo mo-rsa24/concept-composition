@@ -122,7 +122,7 @@ def main():
         return
     table = build()
     with open(HERE / "table.csv", "w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=COLUMNS, extrasaction="ignore")
+        writer = csv.DictWriter(handle, fieldnames=COLUMNS, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(table)
     counts = {}
