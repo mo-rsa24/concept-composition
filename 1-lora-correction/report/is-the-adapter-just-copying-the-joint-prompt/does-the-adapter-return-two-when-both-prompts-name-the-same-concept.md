@@ -16,7 +16,7 @@ when two whole animals of the named kind are in the frame. The adapter is `v58-0
 
 ## 1. One concept asked for twice, three methods
 
-![Joint prompt, plain product and the adapter on five cells naming one concept twice](../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.png)
+`the-same-concept-twice.png` is not shown because it failed the subject check
 *Rows are cells, columns are the joint prompt, the plain product and the adapter, each row from
 one starting noise. What to notice: the middle column holds exactly one animal in every row, and
 the right column holds two in four of the five.*

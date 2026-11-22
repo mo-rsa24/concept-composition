@@ -23,7 +23,7 @@ and judged in [its review file](../../plans/06-is-the-gap-the-samplers-or-the-mo
 
 ## 1. It composes at 50 steps and collapses at 200
 
-![Eight cells: two pairs by two step counts by two kappa-clamp settings, seed 9](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-baseline-eight-cells.png)
+`superdiff-baseline-eight-cells.png` is not shown because it failed the subject check
 *Left half is the pipeline's own 200-step default; right half is 50 steps. What to notice: the
 cat × dog row is one cat at 200 steps and a dog-shaped silhouette filled with cat figures at 50;
 the butterfly is a faint blur at 200 and a distinct shape at 50. Clamped and unclamped columns
