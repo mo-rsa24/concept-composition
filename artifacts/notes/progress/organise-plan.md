@@ -21,7 +21,7 @@ cluster holds everything else, and each result's card says exactly where it sits
 
 | Tree | Result pictures now | Pages show now | Result pictures on the laptop after |
 |---|---|---|---|
-| `2-classifier-guidance` | 13,755 | 66 | 108 to 319 |
+| `2-classifier-guidance` | 13,755 | 69 | 108 to 319 |
 | `4-inclusive-captions` | 166 | 11 | 16 to 31, plus the 155 web images until the owner decides |
 
 The range comes from keeping 5 to 20 pictures per result across 18 classifier guidance results and 6
