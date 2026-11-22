@@ -1,0 +1,52 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+3,12,2D grid (GFlowNet),base model,"p1, p2 and p3 panels",succeeds,not applicable,"The base heatmaps show a regular lattice of modes, a lower-right triangle and three circular regions."
+3,12,2D grid (GFlowNet),Sculpting,harmonic mean of p1 and p2,succeeds,not applicable,"Mass sits on the lattice modes inside the lower-right triangle and fades in the upper left."
+3,12,2D grid (GFlowNet),Sculpting,contrasts of p1 with p2,succeeds,not applicable,"The upper-left mode stays dark while modes inside the triangle fade, and the 0.95 contrast nearly removes them."
+3,12,2D grid (GFlowNet),Sculpting,"conditionals on three circles (y=1,2; y=1,2,3; y=2,2; y=2,2,2)",succeeds,not applicable,"Mass fills the overlap of the named circles, and the y=2,2,2 panel pushes it into the crescent of circle 2 outside the others."
+4,12,molecules (GFlowNet),base model,SEH and SA at beta 32 and 96,succeeds,not applicable,"The SA cloud sits high on SA across SEH values and the SEH cloud sits at high SEH with SA near 0.55 to 0.6."
+4,12,molecules (GFlowNet),Sculpting,harmonic mean at beta 32,mixed,not applicable,"The densest contours sit near SEH 0.8 and SA 0.7, but the outer contour stretches left to SEH near 0.1."
+4,12,molecules (GFlowNet),Sculpting,contrasts at beta 32,succeeds,not applicable,"The two contrast clouds stay separated, one at low SEH and high SA and the other at high SEH and low SA."
+4,12,molecules (GFlowNet),Sculpting,harmonic mean at beta 96,succeeds,not applicable,"The contours tighten near SEH 0.95 with SA from about 0.7 to 0.8, away from both base clouds' far ends."
+6,14,colored MNIST (three models),base model,"p1 cyan digits under 4, p2 digits under 2, p3 even digits under 4",mixed,not applicable,"Each base grid shows its digit set, and two tiles in p3 are thick unreadable blobs."
+6,14,colored MNIST (three models),Sculpting,"y=1,1",succeeds,not applicable,"The grid is cyan 3s, with one tile at row 7 column 5 closer to an 8."
+6,14,colored MNIST (three models),Sculpting,"y=2,2",succeeds,not applicable,All 64 tiles are beige 1s.
+6,14,colored MNIST (three models),Sculpting,"y=3,3",succeeds,not applicable,All 64 tiles are beige 2s.
+6,14,colored MNIST (three models),Sculpting,"y=1,2",succeeds,not applicable,All 64 tiles are cyan 1s.
+6,14,colored MNIST (three models),Sculpting,"y=1,3",succeeds,not applicable,All 64 tiles are cyan 2s.
+6,14,colored MNIST (three models),Sculpting,"y=2,3",succeeds,not applicable,"The grid is beige 0s, with one cyan 0 at row 7 column 7."
+6,14,colored MNIST (three models),Sculpting,"y=1,2,3",mixed,not applicable,"All tiles are cyan 0-like rings, but more than 20 of the 64 are open or broken U shapes."
+6,14,colored MNIST (three models),Sculpting,"y=1,2,1",mixed,not applicable,"The grid mixes cyan 1s and about 15 cyan 0s, and the strokes are thick and lumpy."
+6,14,colored MNIST (three models),Sculpting,"y=1,2,2",succeeds,not applicable,All 64 tiles are thin cyan 1s.
+F.1,31,colored MNIST (two models),base model,p1 and p2,succeeds,not applicable,"p1 shows cyan and beige 0s, and p2 shows cyan 0s and 1s."
+F.1,31,colored MNIST (two models),Sculpting,harmonic mean,succeeds,not applicable,The grid is cyan 0s only.
+F.1,31,colored MNIST (two models),Sculpting,contrast p1 with p2,succeeds,not applicable,"The grid is beige 0s, with one tile at row 6 column 8 reading closer to a 6."
+F.1,31,colored MNIST (two models),Sculpting,reverse contrast,succeeds,not applicable,The grid is cyan 1s only.
+F.2,31,MNIST digits 0-5 and 4-9,base model,digits 0-5 and digits 4-9,succeeds,not applicable,Each base grid shows legible digits from its own set.
+F.2,31,MNIST digits 0-5 and 4-9,Sculpting,harmonic mean,mixed,not applicable,"Most tiles are 4s and 5s, but a 9, a 6 and a 1-like stroke also appear."
+F.2,31,MNIST digits 0-5 and 4-9,Sculpting,contrast toward digits 0-5,succeeds,not applicable,"Tiles are legible 0s, 1s, 2s and 3s."
+F.2,31,MNIST digits 0-5 and 4-9,Sculpting,contrast toward digits 4-9,mixed,not applicable,"Tiles are mostly 6 to 9, but at least 6 of 64 are unreadable white blobs and at least 4 are 4s."
+F.3,32,colored MNIST (even odd and multiples of three),base model,even digits and multiples of three,mixed,not applicable,"The base grids show their digit sets, with a few thick blob tiles in the even-digit grid."
+F.3,32,colored MNIST (even odd and multiples of three),Sculpting,harmonic mean of even and multiples of three,mixed,not applicable,"Tiles are purple 0s and 6s, but three tiles are blank and one is a faint broken ring."
+F.3,32,colored MNIST (even odd and multiples of three),Sculpting,contrast toward even,succeeds,not applicable,"Tiles are orange 2s, 4s and 8s."
+F.3,32,colored MNIST (even odd and multiples of three),Sculpting,contrast toward multiples of three,succeeds,not applicable,"Tiles are blue 3s and 9s, a few of them thick."
+F.4,32,colored MNIST (even odd and multiples of three),base model,odd digits and multiples of three,succeeds,not applicable,Each base grid shows legible digits from its own set.
+F.4,32,colored MNIST (even odd and multiples of three),Sculpting,harmonic mean of odd and multiples of three,succeeds,not applicable,Tiles are blue 3s and 9s.
+F.4,32,colored MNIST (even odd and multiples of three),Sculpting,contrast toward odd,mixed,not applicable,"Tiles are beige 1s, 5s and 7s, with one blue 3 at row 7 column 6."
+F.4,32,colored MNIST (even odd and multiples of three),Sculpting,contrast toward multiples of three,mixed,not applicable,"Tiles are purple 0s and 6s, with two blue 3s at rows 2 and 6 of column 3."
+F.5,34,colored MNIST (chained operations),base model,"p1 {0-5}, p2 {0,2,4,6,8}, p3 {0,3,6,9}",succeeds,not applicable,"Each base grid shows its digit set, with a few malformed tiles such as a blob-like 2 in p2."
+F.5,34,colored MNIST (chained operations),Sculpting,"grid row 1, binary harmonic means",mixed,not applicable,"The three panels mostly show their shared digits, with strays such as a 6 and an 8 in p1 with p2 and a blue 1 in p1 with p3."
+F.5,34,colored MNIST (chained operations),Sculpting,"grid row 2, binary contrasts",mixed,not applicable,"Each panel mostly shows the digits of one side, with strays such as a 2 in p1 contrast p2 and a 4 and 0s in p1 reverse contrast p2."
+F.5,34,colored MNIST (chained operations),Sculpting,p1 harmonic mean with (p2 harmonic mean p3),fails,not applicable,"The only digit in all three sets is 0, yet only 30 of 64 tiles are clean 0s and the rest are other digits or faint broken strokes."
+F.5,34,colored MNIST (chained operations),Sculpting,p2 harmonic mean with (p1 harmonic mean p3),mixed,not applicable,"59 of 64 tiles are clean 0s, and the other five are a stray 6, an orange digit or a thin stroke."
+F.5,34,colored MNIST (chained operations),Sculpting,p3 harmonic mean with (p1 harmonic mean p2),mixed,not applicable,"54 of 64 tiles are clean 0s, and the other ten are mostly green 6s with one yellow 3."
+F.5,34,colored MNIST (chained operations),Sculpting,"grid row 4, contrasts of p1 and p2 with composed pairs",mixed,not applicable,"Panels show mixed digit sets, with strays such as a 3 in p1 contrast (p2 reverse contrast p3) and a 0 in p2 contrast (p1 harmonic mean p3)."
+F.5,34,colored MNIST (chained operations),Sculpting,"grid row 5, contrasts of p3 with composed pairs",mixed,not applicable,"The panels show 0, 3, 6 and 9 in varying shares, with a stray 3 in the first panel and a 2-like stroke in the third."
+F.5,34,colored MNIST (chained operations),Sculpting,p1 harmonic mean with (p1 contrast p3),fails,not applicable,"The grid shows almost only 2s and 4s and no 1s or 5s, and it matches the panel labelled p2 harmonic mean with (p1 contrast p3) almost tile for tile."
+F.5,34,colored MNIST (chained operations),Sculpting,p1 harmonic mean with (p2 reverse contrast p3),succeeds,not applicable,"The grid is almost all yellow 3s, with one 0 and one 6-like ring."
+F.5,34,colored MNIST (chained operations),Sculpting,p2 harmonic mean with (p1 contrast p3),succeeds,not applicable,"The grid is 2s and 4s, with a few thick blobby tiles."
+F.5,34,colored MNIST (chained operations),Sculpting,p2 harmonic mean with (p1 reverse contrast p3),mixed,not applicable,"The grid is mostly green 6s, with about 13 white 0s."
+F.5,34,colored MNIST (chained operations),Sculpting,p3 harmonic mean with (p1 contrast p2),mixed,not applicable,"The grid is mostly yellow 3s, with about 8 blue or faint strokes."
+F.5,34,colored MNIST (chained operations),Sculpting,p3 harmonic mean with (p1 reverse contrast p2),mixed,not applicable,"The grid mixes green 6s and about 28 white 0s, with one 8 and one 2."
+F.5,34,colored MNIST (chained operations),Sculpting,p1 harmonic mean with (p2 contrast p3),mixed,not applicable,"The grid is mostly 2s and 4s, with three white 0s."
+F.5,34,colored MNIST (chained operations),Sculpting,p1 reverse contrast with (p2 harmonic mean p3),mixed,not applicable,"The grid shows about 46 white 0s and about 18 green 6s."
+F.5,34,colored MNIST (chained operations),Sculpting,p2 reverse contrast with (p1 harmonic mean p3),succeeds,not applicable,"The grid is almost all yellow 3s, with two white-grey rings."

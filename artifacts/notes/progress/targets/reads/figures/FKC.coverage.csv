@@ -1,0 +1,14 @@
+figure,page,kind,reason
+1,1,qualitative,2D samples from annealed and product targets at three times
+2,7,qualitative,2D samples from a mixture of 40 Gaussians for each sampler
+3,7,qualitative,
+4,8,plot,energy 2-Wasserstein to MCMC against target temperature for four SDEs on LJ-13
+5,8,qualitative,docked molecules with printed docking scores for two proteins
+A1,35,plot,energy histograms of MCMC data against DEM and annealed samples on LJ-13
+A2,35,plot,interatomic distance histograms of MCMC data against DEM and annealed samples on LJ-13
+A3,37,plot,energy 1-Wasserstein and interatomic distance 2-Wasserstein against target temperature
+A4,37,plot,energy histograms by sampler and target temperature against MCMC samples
+A5,39,qualitative,
+A6,41,qualitative,docked molecules at five sizes with printed docking and QED scores
+A7,42,plot,Spearman correlation of FKC weights with final docking score across timesteps
+A8,43,qualitative,2D molecule drawings with printed docking scores for two proteins

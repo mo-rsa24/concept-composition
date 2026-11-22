@@ -1,0 +1,29 @@
+figure,page,kind,reason
+1,2,qualitative,
+2,5,qualitative,2D scatter of generated samples against two training sets
+3,9,plot,"UMAP of protein structures from SuperDiff (OR), FrameDiff and Proteus with cluster insets"
+A1,31,plot,UMAP of protein structures for SuperDiff (AND) and averaging against FrameDiff and Proteus
+A2,31,other,"ten SuperDiff protein cartoons with no score or reference, so correctness and novelty cannot be judged by eye"
+A3,32,qualitative,molecule drawings with printed GSK3beta and QED scores
+A4,32,qualitative,molecule drawings with printed GSK3beta and JNK3 scores
+A5,34,qualitative,
+A6,35,qualitative,
+A7,36,qualitative,
+A8,37,qualitative,
+A9,38,qualitative,
+A10,39,qualitative,
+A11,40,qualitative,
+A12,41,qualitative,
+A13,42,qualitative,
+A14,43,qualitative,
+A15,44,qualitative,
+A16,45,qualitative,
+A17,46,qualitative,
+A18,47,qualitative,
+A19,48,qualitative,
+A20,49,qualitative,
+A21,50,qualitative,
+A22,51,qualitative,
+A23,52,qualitative,
+A24,53,qualitative,
+A25,54,qualitative,

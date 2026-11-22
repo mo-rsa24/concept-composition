@@ -1,0 +1,15 @@
+figure,page,kind,reason
+1,2,diagram,analytic 2D Gaussian densities under the harmonic mean and contrast operators
+2,7,diagram,"analytic 1D Gaussian densities under harmonic mean, contrast, product and negation"
+3,12,plot,learned cell probabilities on a 32 by 32 grid for base and composed GFlowNets
+4,12,plot,SEH against SA reward density contours for base and composed molecule GFlowNets
+5,13,plot,2D t-SNE of pairwise earth mover's distances between base and composed molecule models
+6,14,qualitative,
+F.1,31,qualitative,
+F.2,31,qualitative,
+F.3,32,qualitative,
+F.4,32,qualitative,
+F.5,34,qualitative,
+F.6,35,plot,classifier loss and L1 distance to ground truth over training steps on the 2D grid
+F.7,35,plot,classifier terminal and non-terminal loss over training steps on molecules
+F.8,35,plot,classifier terminal and non-terminal loss over training steps on MNIST

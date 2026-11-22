@@ -1,0 +1,28 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,9,2D Gaussians,conditional diffusion model,"single conditions P^a1, P^a2 and P^0",succeeds,not applicable,"The three learned clouds have the same horizontal, vertical and round shapes as their ground-truth clouds."
+1,9,2D Gaussians,FKC,"composition with analytic scores, K=16",succeeds,not applicable,The samples form a round cloud centred at the origin that looks like the ground-truth composition.
+1,9,2D Gaussians,FKC,"composition with learned scores, K=16",fails,not applicable,"The samples form a tilted band in the upper left instead of a round cloud at the origin, with a printed SW2 of 2.9632 against 0.1746 for analytic scores."
+2,12,rooms: couch and painting,naive denoising (K=1),"panel a, in distribution",mixed,two clear things,"Three of four rooms show a couch and a painting, and the third room has a painting with no couch."
+2,12,rooms: couch and painting,FKC,"panel a, in distribution, K=16",succeeds,two clear things,"All four rooms show a couch and a painting, though the couch in the second room smears at its front edge."
+2,12,rooms: couch and table,naive denoising (K=1),"panel b, in distribution",mixed,one thing,"One room has a clear couch and table, one couch melts into its table, and two rooms have a couch with no table."
+2,12,rooms: couch and table,FKC,"panel b, in distribution, K=16",succeeds,two clear things,All four rooms show a separate couch and coffee table.
+2,12,rooms: couch and painting,naive denoising (K=1),"panel c, out of distribution",mixed,two clear things,"Two of four rooms show both objects, one shows only a painting and one shows only a couch."
+2,12,rooms: couch and painting,FKC,"panel c, out of distribution, K=16",mixed,two clear things,"Three of four rooms show both objects with visibly bent couches, and the third room has a couch with no painting."
+2,12,rooms: couch and table,naive denoising (K=1),"panel d, out of distribution",fails,one thing,"No room shows a separate couch and table: two show a couch, one a table, and one couch has a table leg growing from it."
+2,12,rooms: couch and table,FKC,"panel d, out of distribution, K=16",fails,one thing,"No room shows a separate couch and table: two show only a couch, one only a table, and one a table over a pale warped shape."
+3,28,rooms: couch and painting (separate models),naive denoising (K=1),"panel a, in distribution",fails,one thing,"Three of four rooms show only a couch, and one room shows a couch with a painting."
+3,28,rooms: couch and painting (separate models),FKC,"panel a, in distribution, K=16",fails,one thing,All four rooms show a couch and none shows a painting.
+3,28,rooms: couch and table (separate models),naive denoising (K=1),"panel b, in distribution",mixed,one thing,"Two rooms show only a couch, and two show a couch with a small table pressed against it."
+3,28,rooms: couch and table (separate models),FKC,"panel b, in distribution, K=16",fails,one thing,All four rooms show a couch and none shows a table.
+3,28,rooms: couch and painting (separate models),naive denoising (K=1),"panel c, out of distribution",fails,one thing,All four rooms show a couch and none shows a painting.
+3,28,rooms: couch and painting (separate models),FKC,"panel c, out of distribution, K=16",fails,one thing,"One tile is destroyed into coloured noise over a black band, and the other three show a couch with no painting in warped rooms."
+3,28,rooms: couch and table (separate models),naive denoising (K=1),"panel d, out of distribution",fails,one thing,"All four rooms show a couch and none shows a separate table, and one couch sits on a merged low base."
+3,28,rooms: couch and table (separate models),FKC,"panel d, out of distribution, K=16",fails,one thing,"One tile is destroyed into noise with a black blob, one couch bends into a boat shape, and no room shows a table."
+4,33,rooms: couch and painting,naive denoising (K=1),"panel a, in distribution",mixed,two clear things,"Seven of ten rooms show a couch and a painting, and three show a painting with no real couch."
+4,33,rooms: couch and painting,FKC,"panel a, in distribution, K=16",succeeds,two clear things,"Nine of ten rooms show a couch and a painting, and one room has a couch with no painting."
+4,33,rooms: couch and table,naive denoising (K=1),"panel b, in distribution",mixed,one thing,"Three of ten rooms show a clear couch and table, two melt the table into the couch, and the other five lack one or both."
+4,33,rooms: couch and table,FKC,"panel b, in distribution, K=16",succeeds,two clear things,"All ten rooms show a couch and a table, and in two of them the table presses into the couch front."
+4,33,rooms: couch and painting,naive denoising (K=1),"panel c, out of distribution",mixed,two clear things,"Six of ten rooms show both objects, three show only a painting and one shows only a couch."
+4,33,rooms: couch and painting,FKC,"panel c, out of distribution, K=16",mixed,two clear things,"Six of ten rooms show both objects, four show a couch with no painting, and several couches are bent."
+4,33,rooms: couch and table,naive denoising (K=1),"panel d, out of distribution",fails,one thing,"No room of ten shows a separate couch and table: eight show a couch, some malformed, and two show only a table."
+4,33,rooms: couch and table,FKC,"panel d, out of distribution, K=16",fails,one thing,"No room of ten shows a separate couch and table: nine show a couch, one stacked on itself, and one shows a low fused brown block."

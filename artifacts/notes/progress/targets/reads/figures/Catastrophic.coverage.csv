@@ -1,0 +1,5 @@
+figure,page,kind,reason
+1,9,qualitative,2D scatter of generated samples against the ground-truth Gaussians
+2,12,qualitative,
+3,28,qualitative,
+4,33,qualitative,
