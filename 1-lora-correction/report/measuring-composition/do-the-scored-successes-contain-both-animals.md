@@ -20,10 +20,13 @@ one with two of the same animal, and 17 that the sort could not settle by eye.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#one-image-from-each-pile) ➡️
 
-<a href="../../artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png"><img src="../../artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png" width="200" alt="Thirty-two renders in four rows of eight, one per animal pair and seed, each titled with the pair, the seed and the number of animals the detector counted."></a>
+> [!NOTE]
+> The contact sheet of all 32 images is not shown here because its second row holds a frog and toad pair,
+> which the [pair ledger](../../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) holds back from every sheet. The file stays at
+> `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png`.
 
 **The detector scores 30 of the 32 images as composed, and the hand sort puts them in five piles.** The
-sheet shows every image at full correction strength: 8 animal pairs at seeds 9 to 12, each tile titled
+contact sheet shows every image at full correction strength: 8 animal pairs at seeds 9 to 12, each tile titled
 with its pair, seed and detector count `verified` (counted on the picture; all 32 counts and calls match
 between [the hand-sort file](../../artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/calls.json)
 and `outputs/interaction_term/dose/dose_curves.json`).
@@ -170,7 +173,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 | the third box | [the scorer note](../../artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md), written 2026-08-05 | `stated` |
 | how an image is scored | [the strength-sweep scorer](../../scripts/plot_dose_curves.py) and [the detector rule](../../../poe_repair/experiments/compose_scorer_validation/detection_scorer.py) | `verified` |
 | the 75% band and its open task | [the plan](../../plans/02-can-we-trust-the-compose-rate/MASTER_PLAN.md) and [its review](../../plans/02-can-we-trust-the-compose-rate/review/04-the-three-state-labelled-set.md) | `stated` |
-| 25 tiles held out of the drain | the rest of [the 32 scored images](../../artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals), each shown on the contact sheet above | `stated` |
+| 25 tiles held out of the drain | the rest of the 32 scored images, in this result's folder. Each is a tile of the contact sheet, and the folder includes the held-back pair, so it is not linked here | `stated` |
 
 ## Still open
 
