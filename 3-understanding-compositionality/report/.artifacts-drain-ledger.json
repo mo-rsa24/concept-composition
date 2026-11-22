@@ -1157,7 +1157,7 @@
   },
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/README.md": {
    "at": "2026-11-22",
-   "sha256": "18bc86ead31dd0a0be33b9c3f3f4a79fa0e375bdb4c9b55eab1f5cc8bfc2282f",
+   "sha256": "99371faba658370feb54bfcfb7409f469d0efb17a209ce6a81f9d86375aa91e4",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_lora/read/boxes_seed_9.png": {

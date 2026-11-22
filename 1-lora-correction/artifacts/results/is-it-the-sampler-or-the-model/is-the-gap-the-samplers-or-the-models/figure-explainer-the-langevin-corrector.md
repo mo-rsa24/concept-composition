@@ -286,7 +286,7 @@ Navigation: ⬅️ [Figure 5](#figure-5-the-corrector-against-plain-product-of-e
 
 ![Eight seeds by five columns: the joint prompt, plain PoE, the adapter alone, and the adapter plus 5 and 20 corrector steps on its last fifteen](corrector-on-adapter-tail-cat-dog-eight-seed-sheet.png)
 
-![The same five columns for the control pair](corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png)
+`corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png` is not shown because it failed the subject check
 
 **What you are looking at**
 
@@ -318,9 +318,9 @@ Navigation: ⬅️ [Figure 6](#figure-6-the-corrector-on-the-adapters-own-tail) 
 
 [observed] · Explains: `corrector-clean-tail-cat-dog-eight-seed-sheet.png` and `corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png`, rendered 2026-09-06 on mscluster85 · Read off `corrector/clean_tail.json`
 
-![Eight seeds by nine columns: the joint prompt, plain PoE, the adapter alone, then the adapter switched off after step 19 or 29 with 0, 5 or 20 corrector steps on the frozen score](corrector-clean-tail-cat-dog-eight-seed-sheet.png)
+`corrector-clean-tail-cat-dog-eight-seed-sheet.png` is not shown because it failed the subject check
 
-![The same nine columns for the control pair](corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png)
+`corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png` is not shown because it failed the subject check
 
 **What you are looking at**
 

@@ -41,7 +41,7 @@ the final training list.** No adapter ran: all 185 saved records have an empty c
 
 | Seed 2: in the training list | Seed 11: an evaluation seed | Seed 42: in the training list |
 |---|---|---|
-| `mono.png` is not shown because it failed the subject check | <a href="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed11/mono.png"><img src="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed11/mono.png" width="200" alt="Two badgers on grass with no magpie."></a> | <a href="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed42/mono.png"><img src="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed42/mono.png" width="200" alt="A painted badger in long grass with two magpies on a branch."></a> |
+| `mono.png` is not shown because it failed the subject check | <a href="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed11/mono.png"><img src="../../artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed11/mono.png" width="200" alt="Two badgers on grass with no magpie."></a> | `mono.png` is not shown because it failed the subject check |
 | Badger and magpie, both present `verified` | Two badgers and no magpie `verified` | A badger and two magpies `verified` |
 
 The same prompt can draw both things on one seed and miss one on another, which is why a cell is kept per

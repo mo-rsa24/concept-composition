@@ -47,7 +47,7 @@ before the run.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-sixteen-draws-do-the-composing-the-weights-choose-the-picture) ➡️
 
-![Cat by dog, eight seeds by six conditions, rank-32 correction at half dose](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png)
+`fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png` is not shown because it failed the subject check
 
 **What you are looking at.** One row per held-out seed, 9 to 16. The first three columns are
 single deterministic renders: the joint prompt, the plain product of experts, and the product plus
@@ -108,7 +108,7 @@ Same source files as rung 1. Mark: verified, read 2026-09-07.
 
 Navigation: ⬅️ [Previous](#2-sixteen-draws-do-the-composing-the-weights-choose-the-picture) | 📋 [TOC](#table-of-contents) | [Next](#4-what-the-count-cannot-see) ➡️
 
-![Cat by dog, eight seeds by six conditions, rank-32 correction at full dose](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png)
+`fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png` is not shown because it failed the subject check
 
 **What you are looking at.** The same six columns with the correction at λ 1.2, the dose the
 showcase renders ship at.
@@ -162,7 +162,7 @@ prompt itself scores 1 of 8, because a butterfly over a meadow is one animal. It
 reads 8 of 8 by counting several butterflies. No steered tile lost the butterfly or the meadow, so
 the method did not break the pair, and no compose number from that pair means composition.
 
-<a href="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png" width="200" alt="Butterfly and meadow, eight seeds by six columns at correction strength 1.2, each tile with its animal count and ImageReward score"></a>
+`fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png` is not shown because it failed the subject check
 
 *The control pair at λ 1.2, in the same six columns. Each tile carries its animal count and its
 ImageReward score. The joint prompt counts two or more on 1 of 8 seeds and the steered column on 8

@@ -75,7 +75,7 @@ seed 9), so this is a null and not a stalled instrument. From
 
 Navigation: ⬅️ [Previous](#1-the-corrector-on-the-adapters-own-score-changes-nothing-that-matters) | 📋 [TOC](#table-of-contents) | [Next](#3-the-control-pair-keeps-what-it-already-had) ➡️
 
-![Eight seeds by nine columns: the joint prompt, plain PoE, the adapter alone, then the adapter switched off after step 19 or 29 with 0, 5 or 20 corrector steps on the frozen score](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png)
+`corrector-clean-tail-cat-dog-eight-seed-sheet.png` is not shown because it failed the subject check
 *Rows are the held-out seeds 9 to 16; each tile carries its instance count, its distance to that
 seed's joint-prompt render, and its sharpness. What to notice: the sixth column, the adapter
 switched off after step 29 with no corrector, is the crispest of the adapter columns on seeds 9,
@@ -95,11 +95,11 @@ to 112 and 94, which reads as grain. Composed seeds: 5, 6, 7 and 6, 7, 7 of 8 ag
 
 Navigation: ⬅️ [Previous](#2-the-hand-off-to-the-frozen-model-is-the-lever-that-moves) | 📋 [TOC](#table-of-contents) | [Next](#what-this-cannot-tell-you) ➡️
 
-![Eight seeds by nine columns for butterfly and meadow, every frame green](../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png)
+`corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png` is not shown because it failed the subject check
 *The same layout on the pair that already composes. What to notice: every tile keeps its butterfly
 and its meadow, so no condition here breaks what was already working.*
 
-<a href="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png"><img src="../../artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png" width="140" alt="Butterfly and meadow, eight seeds by five columns: the joint prompt, plain PoE, the adapter alone, and the adapter plus 5 and 20 corrector steps"></a>
+`corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png` is not shown because it failed the subject check
 
 *The corrector on the adapter's own score, for the same pair. Rows are seeds 9 to 16, and the columns
 are the joint prompt, plain PoE, the adapter alone, then the adapter plus 5 and 20 corrector steps

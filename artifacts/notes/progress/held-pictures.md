@@ -1,0 +1,71 @@
+# 🧭 Progress: pictures held back from every page
+
+Every picture that failed the [subject guard](../../../scripts/shared/disallowed_subjects.py) and [pair ledger](../../_shared/cross_pair_pool_configs/pair_ledger.md) check on 2026-11-22, opened at full resolution. Each file stays where it is. A page may name one in plain text, and must not embed or link it.
+
+**Held** means the picture shows or names a subject with no recorded decision allowing this use. **Not cleared** means a tile has a shape nobody could identify at full size.
+
+| Picture | Verdict | Still embedded or linked from |
+|---|---|---|
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/hard_vs_easy_transfer.png` | held | no page |
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/pair-audition.png` | held | no page |
+| `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png` | held | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png` | held | `2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-reproduce-2105-05233-retro.md`, `2-classifier-guidance/report/classifier-guided-poe/board.md` |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png` | held | `2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-reproduce-2105-05233-retro.md` |
+| `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/figures/pilot-clip-called-wet.jpg` | held | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed10.png` | not cleared | `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md` |
+| `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/five_columns.png` | not cleared | `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/README.md`, `1-lora-correction/report/paper-review/board.md`, `1-lora-correction/report/paper-review/prze-2-baselines.md` |
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed02/mono.png` | not cleared | `1-lora-correction/report/does-the-fix-reach-unseen-pairs/how-were-the-adapters-training-pairs-chosen.md` |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-baseline-eight-cells.png` | not cleared | `1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-superdiff-compose-at-its-own-defaults.md` |
+| `1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.png` | not cleared | `1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md` |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-camel-and-a-forest.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-cat-and-a-dog.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed-v2.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-sheet.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/two-ends.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/what-the-helper-believes.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png` | not cleared | `2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-reproduce-2105-05233-retro.md`, `2-classifier-guidance/report/classifier-guided-poe/board.md` |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png` | not cleared | `2-classifier-guidance/artifacts/notes/session-merges/2026-11-17-reproduce-2105-05233-retro.md`, `2-classifier-guidance/report/classifier-guided-poe/board.md` |
+| `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/figures/pilot-ten-walk-pictures.jpg` | not cleared | no page |
+| `artifacts/decks/supervisor-meeting/1-inference-only/0-reference-where-the-joint-prompt-succeeds.png` | not cleared | `3-understanding-compositionality/report/what-sdxl-already-knows/does-the-hybrid-fit-both-captions.md`, `artifacts/decks/supervisor-meeting/README.md` |
+| `writing/restoring-plurality-in-compositional-diffusion_overleaf/final_figures/molefe_fig1.png` | not cleared | no page |
+| `writing/restoring-plurality-in-compositional-diffusion_overleaf/final_figures/molefe_fig2.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed09.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/which-sampling-strategy-helps/sampling-strategies-on-v58.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/four-pairs-four-methods.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_cat__x__a_dog/seed09/ours_crossself_w50.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__ours.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_cat__x__a_dog__seed09.png` | held by the report-page check | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed0_plain.png` | held by the report-page check | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed0_scale0.png` | held by the report-page check | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/best-cases-benchmark.png` | held | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/co3-audition.png` | held | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed09.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/tiles/a_badger__x__a_magpie/seed42/mono.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/clean-tail-k-sweep-v1-freeze-null-r16-s0-25-30k-a-cat-x-a-dog.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-butterfly-meadow-eight-seed-sheet.png` | held | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-clean-tail-cat-dog-eight-seed-sheet.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/corrector-on-adapter-tail-butterfly-meadow-eight-seed-sheet.png` | held | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-butterfly-meadow-lambda-1.2-sheet.png` | held | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-0.5-sheet.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/fk-steering-on-adapter-cat-dog-lambda-1.2-sheet.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/what-the-adapter-costs-on-a-joint-prompt.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-cat-and-a-teapot.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-object/ours.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-seed-09.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/cat-and-dog-nine-candidates.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/failure_calls_sample.png` | not cleared | no page |
+| `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/interaction-grids/when-fusion-is-the-target.png` | not cleared | no page |
+| `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-01/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_10000.png` | not cleared | no page |
+| `3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_cat__x__a_dog_s09_v58-05-self-contrast_10000.png` | not cleared | no page |
+| `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/positional-sheet.png` | held | no page |
+| `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-sheet-1-before-x-pos.png` | held | no page |
+| `5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-sheet.png` | held | no page |
+| `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-text-alone-predict-composition/text_orthogonality_probe.png` | held | no page |
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

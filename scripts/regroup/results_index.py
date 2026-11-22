@@ -20,6 +20,7 @@ MARK = "<!-- index: written by scripts/regroup/results_index.py; edit the cards,
 IMG = (".png", ".jpg", ".jpeg", ".svg", ".gif")
 HELD_LIST = os.path.join(ROOT, "artifacts/notes/progress/held-pictures.md")
 HELD = set(re.findall(r"^\| `([^`]+)` \|", open(HELD_LIST).read(), re.M))
+CLEARED = {l.strip() for l in open(os.path.join(ROOT, "artifacts/notes/progress/cleared-pictures.txt")) if l.strip()}
 
 
 GROUPS = {l.strip() for l in open(os.path.join(ROOT, "scripts/regroup/result-groups.txt")) if l.strip()}
@@ -47,9 +48,9 @@ def card(d):
 
 
 def showable(f):
-    """A picture on the held list, or whose path names a guarded subject, never reaches an index."""
+    """An index shows only a picture opened and cleared at full size, and never one held or guarded."""
     rel = os.path.relpath(f, ROOT)
-    return rel not in HELD and is_allowed(rel)
+    return rel in CLEARED and rel not in HELD and is_allowed(rel)
 
 
 def thumb(d):

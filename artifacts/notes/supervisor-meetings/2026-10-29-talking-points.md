@@ -14,7 +14,7 @@ starting noise:
 | x_fix | x_raw + E("") | 1 (seed 3); wallpaper on 3 seeds |
 | x_aff | x_raw + 2E(""), the version an affine UNet would make exact | 0 |
 
-The sheet: [dog-and-cat-sheet.png](../../../5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-sheet.png).
+The sheet: dog-and-cat-sheet.png.
 The pass mark, written before rendering, was 4 of 7.
 
 **Why it fails, measured before any picture.** CLIP's text encoder is causal, so the start token's

@@ -41,8 +41,8 @@
    "state": "drained"
   },
   "artifacts/ideas/the-and-vector-as-a-third-expert/IDEA_MAP.md": {
-   "at": "2026-11-21",
-   "sha256": "118a94360b8c81607188e95c3fd86ed59e515b8e5d4c7f9eacea4dd1744acd34",
+   "at": "2026-11-22",
+   "sha256": "88384224973fe836cf32b5243d0e0d927dc0675353d0346ef5c6e48ea7237b36",
    "state": "drained"
   },
   "artifacts/results/README.md": {
@@ -56,8 +56,8 @@
    "state": "drained"
   },
   "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md": {
-   "at": "2026-11-21",
-   "sha256": "258d142b605a5a26c0e880b8fd0edbb133aff5bf0f8b0ac2d2db973b5b04a716",
+   "at": "2026-11-22",
+   "sha256": "f358e6eb21ee3bd8fae2a841ca242b63db0194b6cf72e2e9d9c864f42fd0938f",
    "state": "drained"
   },
   "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png": {
@@ -191,8 +191,8 @@
    "state": "drained"
   },
   "artifacts/results/what-the-text-already-says/README.md": {
-   "at": "2026-11-21",
-   "sha256": "91dabeab148164ead992493ca24740fb32bbe33a65f01cbe93a2ce297b8af5f0",
+   "at": "2026-11-22",
+   "sha256": "7ec456bff51ae9579d2026f48f635503c715d9aee46eaad06080fff0a7b26478",
    "state": "drained"
   },
   "artifacts/results/what-the-text-already-says/does-one-prompt-already-say-one-animal/where-the-prompts-land.png": {

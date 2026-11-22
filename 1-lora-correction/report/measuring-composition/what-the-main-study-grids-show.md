@@ -47,7 +47,7 @@ Navigation: ⬅️ [Previous](#published-models-beside-the-plain-product) | 📋
 
 Navigation: ⬅️ [Previous](#three-kinds-of-pair) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
-<a href="../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/what-the-adapter-costs-on-a-joint-prompt.png"><img src="../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/what-the-adapter-costs-on-a-joint-prompt.png" width="200" alt="Four rows by two columns: the joint prompt on the base model and through the adapter from the same noise. The adapter column adds extra animals and objects and changes the layout."></a>
+`what-the-adapter-costs-on-a-joint-prompt.png` is not shown because it failed the subject check
 
 **Running a joint prompt through the adapter changes the picture on all four rows** `verified`. Both columns
 start from one noise, so a difference across a row comes from the adapter `stated` (the
@@ -128,5 +128,10 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - [ ] Render the adapter tiles for cat and dog at seed 42 and for the four empty rows of the three-kinds grid.
 - [ ] Rebuild the published-models grid so it holds the three pairs its script lists.
 - [ ] Decide whether the chess row counts as damage or as a gain.
+
+## Cross-references
+
+- The mention of **the joint prompt and the plain product** in [the report on render-time fixes for picture quality](../is-the-gap-the-samplers-or-the-models/does-any-render-time-fix-recover-picture-quality.md).
+- The mention of **the joint prompt and the plain product** in [the report on how big the strength grid should be](how-big-the-strength-grid-should-be.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

@@ -38,7 +38,7 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 
 ## failure_calls_sample.png
 
-<a href="failure_calls_sample.png"><img src="failure_calls_sample.png" width="200" alt="Forty random tiles with the call printed under each"></a>
+`failure_calls_sample.png` is not shown because it failed the subject check
 
 **What it shows.** 40 calls drawn at random from `failure_calls.csv` (Python `random.Random(20261111).sample`), each tile at 384 px with its call, prompt, seed, setting, id and note printed beneath, for a person to check the calls against the pictures. `seen`
 

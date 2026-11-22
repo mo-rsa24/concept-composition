@@ -50,7 +50,7 @@ Navigation: ⬅️ [Previous](#where-the-idea-came-from) | 📋 [TOC](#table-of-
 
 Eight treatments and two references on four pairs at two held-out seeds each, every cell from the
 same starting noise and the same checkpoint, so the only thing that differs between two tiles in a
-row is the treatment. The references are the joint prompt and the plain product. The treatments are
+row is the treatment. The references are the [joint prompt and the plain product](../measuring-composition/what-the-main-study-grids-show.md#the-joint-prompt-and-the-plain-product). The treatments are
 the adapter as it ships, guidance raised to 10 and to 12, the experts explicitly weighted 3.0 and
 3.0, a repaint pass at strength 0.25 and at 0.40 with the adapter off, the adapter for the first 20
 steps only, and eight nearby starting noises.
@@ -85,7 +85,7 @@ Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-c
 
 Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-contents) | [Next](#2-what-the-edge-measure-says-and-where-it-disagrees-with-the-eye) ➡️
 
-![Tiger and dog, seed 9: the joint prompt and the plain product, then the adapter and seven fixes applied to it, one column each](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed09.png)
+`a_tiger__x__a_dog__seed09.png` is not shown because it failed the subject check
 *The explicit re-weighting, column six, is the only column where both animals stop being animals.*
 📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md#figure-1-tiger-and-dog-seed-9).
 
@@ -106,7 +106,7 @@ not shown: one small figure in it could not be cleared against the subjects the 
 
 | Tiger and dog, seed 10 | Elephant and penguin, seed 9 | Elephant and penguin, seed 10 |
 |---|---|---|
-| <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png" width="200" alt="Tiger and dog at seed 10, one column per fix"></a><br>Guidance 10 adds a third animal and guidance 12 swaps the dog for a tiger | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png" width="200" alt="Elephant and penguin at seed 9, one column per fix"></a><br>The adapter columns draw a large penguin and a small elephant | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png" width="200" alt="Elephant and penguin at seed 10, one column per fix"></a><br>A penguin in front of an elephant at the right sizes, smeared by the re-weighting column |
+| <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png" width="200" alt="Tiger and dog at seed 10, one column per fix"></a><br>Guidance 10 adds a third animal and guidance 12 swaps the dog for a tiger | `an_elephant__x__a_penguin__seed09.png` is not shown because it failed the subject check<br>The adapter columns draw a large penguin and a small elephant | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png" width="200" alt="Elephant and penguin at seed 10, one column per fix"></a><br>A penguin in front of an elephant at the right sizes, smeared by the re-weighting column |
 
 | Chess board and hourglass, seed 9 | Chess board and hourglass, seed 10 |
 |---|---|
@@ -177,7 +177,7 @@ sharpness.
 **One checkpoint, one pool.** Everything is the v58-05-self-contrast checkpoint at step 15,000. A
 different checkpoint could carry a different fidelity cost, and the fixes are applied to this one.
 
-**Eight cells.** Four pairs at two seeds. Two of the four pairs are animal pairs, one is an object
+**Eight cells.** Four pairs at two seeds. Two of the four pairs are [animal pairs](../../../context/world/animal-pair.md), one is an object
 pair, one is a mixed-size animal pair.
 
 ## Where this came from
