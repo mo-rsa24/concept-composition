@@ -164,4 +164,4 @@ These 21 kept pictures passed the subject check but are weak as paper figures. E
   and on two remote branches. Moving them does not remove them from history, so they stay until the
   owner decides.
 - **Clearing the laptop archive.** It stays until the owner approves a deletion pass.
-- **The `lora-correction` offload (8.5 GB).** It follows the same stages after these two trees.
+- **The `lora-correction` results (6.6 GB of artifacts).** Its 3,352 run-output files that nothing names are on the cluster and in the laptop archive. The one-picture-per-run rule has not been applied there.
