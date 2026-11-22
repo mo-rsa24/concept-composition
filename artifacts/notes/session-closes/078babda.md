@@ -187,7 +187,7 @@ A scan of the uncommitted text files for NIH film-identifier and 32-character id
 
 ### Patient data to review
 
-These files predate this session and are all on the medical repository's `origin/main`. Their contents were not copied here. Whether the GitHub repository is public is unknown, because the `gh` check returned a credentials error.
+These files predate this session and are all on the medical repository's `origin/main`. Their contents were not copied here. The GitHub repository was private on 2026-11-22: an anonymous `git ls-remote` was refused with a login request, and the same request to a public repository worked. Its collaborator list was not checked. Before any public release, take these files out of the repository and its git history, or release the code from a clean repository.
 
 | Path in the medical repository | Why it is flagged |
 |---|---|
