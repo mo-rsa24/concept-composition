@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    A["Accepted target<br/>CoInD on Shapes3D, AND<br/>printed 91.10%, target 92.10%"]
+    B["design.md, before any run<br/>settings, seeds, cost in GPU-hours,<br/>and the pass test written down"]
+    C{"Code and weights there,<br/>and under 24 GPU-hours?"}
+    Q["Question on your board<br/>row waits or is marked blocked"]
+    D["Smoke test, one batch<br/>then overfit 16 images"]
+    E["1% of the data<br/>first metric and image sheet"]
+    F{"Controls pass?"}
+    G["Full published protocol<br/>3 independent trainings,<br/>frozen, never tuned again"]
+    H{"Our number within noise<br/>of the printed 91.10%?"}
+    I["reproduced"]
+    J["not reproduced<br/>both numbers kept"]
+    K["table.csv row and render folder<br/>sent to Session 4"]
+    L["Scoreboard<br/>target uses the harder number,<br/>renders feed the blind picture calls"]
+
+    A --> B --> C
+    C -- "no" --> Q
+    C -- "yes" --> D --> E --> F
+    F -- "no: read the log,<br/>retry at most twice" --> Q
+    F -- "yes" --> G --> H
+    H -- "yes" --> I --> K
+    H -- "no" --> J --> K
+    K --> L
+
+    classDef done fill:#b7efc5,stroke:#222222,stroke-width:2px,color:#111111
+    classDef todo fill:#e9ecef,stroke:#222222,stroke-width:2px,color:#111111
+    classDef you fill:#ffd6a5,stroke:#e8590c,stroke-width:3px,color:#111111
+    class A done
+    class B,C,D,E,F,G,H,I,J,K,L todo
+    class Q you
