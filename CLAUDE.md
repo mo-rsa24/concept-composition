@@ -80,10 +80,12 @@ over the whole tree. The session-start hook runs checks 1 and 2; the session-end
 re-probe scorer are the pattern to copy: the threshold sits in the source, so it cannot be adjusted
 after seeing the answer without showing up in a diff.
 
-**Harvest reads three execution modes, not one.** `squeue -u mmolefe` for the queue, and
-`pgrep -af 'sweep|train'` on the session node, because biggpu allows one job per user, so the long
-sweeps are started with `nohup` outside Slurm and Slurm is blind to them. Then the output count
-against what the plan expected, and the tail of the log.
+**Harvest reads three execution modes, not one.** `squeue -u mmolefe` for the queue, because new GPU
+runs launch through `sbatch`, inside the administrator's caps of one `biggpu` job and six `bigbatch`
+jobs per user, and wait when `sbatch` is denied. `pgrep -af 'sweep|train'` on the node finds runs
+started with `nohup` outside Slurm, which Slurm cannot see. A new launch of that kind needs the
+owner's yes through `python3 scripts/progress_board.py ask`. Then the output count against what the
+plan expected, and the tail of the log.
 
 **Check where output landed, not just that it exists.** Large artifacts go to `/datasets` only,
 because `/home-mscluster` hit 100% once and silently killed checkpointing. A script's disk guard
