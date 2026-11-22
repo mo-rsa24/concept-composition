@@ -1,6 +1,6 @@
 # 🗺️ Environment: the system this project runs on
 
-HPC cluster, Slurm-scheduled, two separate filesystems with no automatic mirroring between
+HPC cluster, Slurm-scheduled, [two separate filesystems](../context/data/01-where-it-comes-from.md#the-two-filesystems) with no automatic mirroring between
 them, and a paper build that needs one specific LaTeX engine because nothing else is installed.
 The thing a plan gets wrong most often here is treating "submit a job" as one action: it means
 choosing `biggpu` or `bigbatch` inside the administrator's job caps, waiting when `sbatch` is denied,

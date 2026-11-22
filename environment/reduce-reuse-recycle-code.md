@@ -126,5 +126,6 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 
 - The mention of **2.3 GB CUDA install**, timed from the PyPI download rate measured on `mscluster88`, in [the HPC nodes fact, under Python environments](hpc/nodes.md#python-environments).
 - The mention of **the Reduce, Reuse, Recycle copy** of the guided-diffusion U-Net, missing the upstream line `h = x.type(self.dtype)`, in [the route for classifier-guided PoE](../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).
+- The mention of **2D notebook** in [the runbook index, under Lookup](../runbook/00-INDEX.md#lookup).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

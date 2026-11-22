@@ -31,7 +31,7 @@ one pair-and-seed run, used by this project since the pilot stage. ✅
 **② SDXL runs the 50-step denoising schedule under one or more render methods.** ✅
 
 For a given pair and seed, several render methods can be run: plain PoE, Mono (the literal joint prompt),
-PoE plus the interaction term injected over a window at a chosen strength (λ), or PoE plus the
+PoE plus the [interaction term](../world/interaction-term.md) injected over a window at a chosen strength (λ), or PoE plus the
 trained LoRA's own prediction. `poe_repair/methods/_sampling.py` (per `README.md`'s repo layout)
 holds the functions for each: `run_cfg`, `run_cfg_poe`, `run_teacher_residual`,
 `run_lora_residual_inject`. Model: `stabilityai/stable-diffusion-xl-base-1.0`, verified directly
@@ -184,5 +184,10 @@ The running estimate of the finished image for plain PoE, cat and dog, held-out 
 - The page cites `fail_rate.md` and `scorer_validated.json`. Both exist only in the cluster checkout (checked 2026-11-21), because their `results/` folders are git-ignored. No sample of either is quoted.
 - No recorded run of stage ⑥ (a figure built from labels) is placed here.
 <!-- related:end -->
+
+## Cross-references
+
+- The mention of **two filesystems** in [the environment index, under Before I...](../../environment/00-INDEX.md#before-i).
+- The mention of **two separate filesystems** in [the environment overview](../../environment/overview.md).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

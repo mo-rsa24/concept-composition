@@ -221,5 +221,22 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 - The mention of **compose rate** in [the plan "the inclusive captions pilot"](../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/plans/01-the-inclusive-captions-pilot.md), which reads one rate per training run off 128 shared seeds.
 - The mention of **compose rate** in [the review "does captioning widen the cat condition"](../../4-inclusive-captions/plans/11-do-inclusive-captions-help-poe-compose/review/01-does-captioning-widen-the-cat-condition.md), which restates the rate for its own instrument before either run starts.
 - The mention of **the instance-count scorer**, as the reason no automatic scorer was used, in [the finding "can a text-space third expert restore composition"](../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md#what-this-cannot-say), where the calls are cat against dog and the counter cannot name either.
+- The mention of **compose rate** in [the finding "what the text already says about one animal or two"](../../5-text-embedding-third-expert/report/what-the-text-already-says.md).
+- The mention of **compose rate** in [the recipe "reading an adapter training run"](../../runbook/looking-at-what-a-run-produced/reading-a-training-run.md).
+- The mention of **compose rate** in [the context page on the interaction term](interaction-term.md).
+- The mention of **compose rate** in [the finding "how many photos can the inclusive-captions pilot train on"](../../4-inclusive-captions/report/what-the-training-data-holds/how-many-photos-the-inclusive-captions-pilot-can-train-on.md).
+- The mention of **compose rate** in [the inclusive-captions report index](../../4-inclusive-captions/report/00-INDEX.md).
+- The mention of **compose rate** in [the finding "what the main study's comparison grids show"](../../1-lora-correction/report/measuring-composition/what-the-main-study-grids-show.md).
+- The mention of **compose rate** in [the finding "how every SDXL method compares on the 53 held-out pairs"](../../1-lora-correction/report/against-other-methods/how-does-every-sdxl-method-compare-on-the-held-out-pairs.md).
+- The mention of **compose rate** in [the finding "how the adapter scores on the GenEval and T2I-CompBench benchmarks"](../../1-lora-correction/report/against-other-methods/how-does-the-adapter-score-on-the-standard-benchmarks.md).
+- The mention of **compose rate** in [the finding "does the two-concept adapter compose three concepts"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/does-the-adapter-compose-three-concepts.md).
+- The mention of **compose rate** in [the finding "does each adapter hold across ten seeds"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/does-each-adapter-hold-across-ten-seeds.md).
+- The mention of **compose rate** in [the finding "which renders show the adapter working and failing"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/which-renders-show-it-working-and-failing.md).
+- The mention of **compose rate** in [the finding "which adapter composes the two showcase pairs"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/which-adapter-composes-the-showcase-pairs.md).
+- The mention of **compose rate** in [the finding "which checkpoint to take each figure cell from"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/which-checkpoint-to-take-each-figure-cell-from.md).
+- The mention of **compose rate** in [the finding "which adapter composes a cat and a dog"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/which-adapter-composes-cat-and-dog.md).
+- The mention of **compose rate** in [the finding "what the adapter ablations show"](../../1-lora-correction/report/the-adapter-on-cat-and-dog/what-the-adapter-ablations-show.md).
+- The mention of **compose rate** in [the finding "how four methods compare on the four pairs of the paper's main grid"](../../1-lora-correction/report/against-other-methods/how-do-four-methods-compare-on-four-hand-picked-pairs.md).
+- The mention of **compose fraction**, the first number on the probe's summary line, in [probing a pooled LoRA checkpoint, recipe 1](../../runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

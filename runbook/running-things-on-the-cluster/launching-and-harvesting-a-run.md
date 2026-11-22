@@ -179,5 +179,6 @@ Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC
 
 - The mention of **SSH launch**, whose relative paths resolve in `$HOME` and kill the run before `nohup` starts, in [the failure catalog entry poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001).
 - The mention of **one-job-per-user rule** in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), whose third outcome starts long jobs with `nohup` and checks them with `pgrep`, a route that needs the owner's yes.
+- The mention of **launch on a shared device** in [the environment index, under Before I...](../../environment/00-INDEX.md#before-i).
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

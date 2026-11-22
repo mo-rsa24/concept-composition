@@ -157,7 +157,7 @@ ssh mscluster109 'nohup bash /datasets/mmolefe/poe_repair_min/outputs/showcase/f
 [probe] wrote /datasets/mmolefe/poe_repair_min/outputs/showcase/figure_r32_090050/grid_full_window.png
 [11:32:28] DONE figure render r32_090050.
 ```
-The summary line reads: compose fraction over the 8 seeds, then the stricter cat-and-dog
+The summary line reads: [compose fraction](../../context/world/compose-rate.md#what-a-compose-rate-is) over the 8 seeds, then the stricter cat-and-dog
 fraction, then the mean DINOv2 drift (negative = nearer the joint-prompt image than plain PoE)
 and the largest per-step correction norm. About 25 minutes for 8 seeds x 3 columns on an A6000,
 plus about 5 minutes of scoring. Read the log on the launch node over SSH; the session node's
