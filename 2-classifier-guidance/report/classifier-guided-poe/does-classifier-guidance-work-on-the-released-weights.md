@@ -59,9 +59,10 @@ same classifier steers each render and then grades it, so its count is partly se
 Navigation: ⬅️ [Previous](#scale-10-draws-the-asked-for-class) | 📋 [TOC](#table-of-contents) | [Next](#pictures-kept-off-this-page) ➡️
 
 > [!IMPORTANT]
-> The route's table gives each class a "reproduced" bar and an "inconclusive" condition, and it does
-> not say which wins when both hold. Both hold on all three classes under the tile-by-tile count. The
-> choice is the owner's.
+> The route's table gives each class a "reproduced" bar and an "inconclusive" condition, and both hold
+> on all three classes under the tile-by-tile count. The owner's decision of 2026-11-17 keeps both bars:
+> the classifier's count decides this step (G0), and the eye count is the reference step 8 compares
+> against `stated` (`2-classifier-guidance/report/classifier-guided-poe/history.md`, line 32).
 
 | How the rule is read | What is compared | Corgi | Tabby | Golden retriever | That reading gives |
 |---|---|---|---|---|---|
@@ -101,7 +102,7 @@ Navigation: ⬅️ [Previous](#pictures-kept-off-this-page) | 📋 [TOC](#table-
 | What | One source | The other source | What explains it |
 |---|---|---|---|
 | clear renders by eye at scale 10 | route targets T2 to T4: 13, 12 and 14 of 16 | route instruction 13 and `your_call`: 9, 11 and 10 of 16 | the card says the sheet read counted corgi-coloured and Labrador-like dogs, and the tile-by-tile read says yes only to a clear tile of the asked-for breed `stated` |
-| whether every target passed | the card: all four targets passed | the route's inconclusive condition holds on three under the tile-by-tile count | no source says which column takes priority, as the table above shows |
+| whether every target passed | the card: all four targets passed | the route's inconclusive condition holds on three under the tile-by-tile count | the owner's decision of 2026-11-17 keeps this step on the classifier's bar, with the eye count as the reference for step 8 `stated` |
 
 ## What this cannot tell you
 
@@ -159,7 +160,7 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
-- [ ] Choose which reading of the pass rule applies to T2, T3 and T4. The owner decides.
+- [ ] Confirm whether T2, T3 and T4 stay reproduced on the classifier's bar, as decided on 2026-11-17, or become inconclusive on the eye count. The owner decides.
 - [ ] Decide what happens to the identity sheet, which the card and the route still embed. The owner decides.
 - [ ] Draw the bar chart named above, so this result has a picture that is safe to show.
 
