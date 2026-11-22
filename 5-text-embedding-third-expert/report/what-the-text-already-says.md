@@ -57,7 +57,10 @@ directions. The plan required at least 3 times `verified`
 
 Navigation: ⬅️ [Previous](#where-each-prompt-lands-between-one-and-two) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
-<a href="../artifacts/results/what-the-text-already-says/does-text-alone-predict-composition/text_orthogonality_probe.png"><img src="../artifacts/results/what-the-text-already-says/does-text-alone-predict-composition/text_orthogonality_probe.png" width="200" alt="Eight animal pair renders above a scatter of eight labelled points. Caption owed because the x-axis calculation is unconfirmed."></a>
+> [!NOTE]
+> This picture is not shown here because its top row includes a frog and toad render, a pair the
+> [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) holds back from every sheet. The file stays at
+> `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-text-alone-predict-composition/text_orthogonality_probe.png`.
 
 **This picture is owed a caption, because its x-axis cannot be traced to one calculation.** It has no
 card and no saved numbers beside it. Its own title calls it "a first look, not a verdict", and no
