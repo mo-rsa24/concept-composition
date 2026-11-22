@@ -1,7 +1,7 @@
 # How each rival fails
 
 This page records what each method draws well and where it breaks, as seen in the pictures the papers print. It comes
-from 266 figures in 19 papers, 196 of them generated samples, and 297 rows of per-method findings. The
+from 315 figures in 22 papers, 232 of them generated samples, and 325 rows of per-method findings. The
 scoreboard's `failure` line for each rival is taken from here.
 
 **Authors choose their own figures.** A method's successes are over-represented, and a failure its authors did not print
@@ -20,12 +20,14 @@ those are our numbers and never published ones. Each paper's tile-by-tile calls 
 
 | Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
 |---|---|---|---|---|---|---|
+| 2D synthetic | Liu | It finds both ellipses and both rectangles on mixture, with stray points. | It fails all product and negation targets shown, leaving rings, bars and dense regions where the target is small or empty. | all product rows; all negation rows; mixture of six blobs | Fig 1 p2; Fig 11 p16; Fig 12 p16; Fig 13 p16 | LiftScores |
 | 2D two disjoint datasets | Liu | no success shown in this paper's figures | Averaged vector fields put the samples in the empty gap between the two training sets. | panel b | Fig 2 p5 | SuperDiff |
 | 3D objects | Liu | A chair without legs comes out on a single pedestal. | Four of five two-object prompts give one fused object, such as an avocado-shaped chair; the authors present these as hybrids. | avocado AND chair; boat AND couch; couch AND monitor; toilet AND chair | Fig 7 p19 | Liu |
 | Attend-and-Excite prompts | Liu | No success is shown on these prompts. | It fuses the turtle with the mouse and the crown with the clock, and it loses the bow. | a turtle and a mouse; a elephant with a bow; a gray crown and a white clock | Fig 3 p8 | CO3 |
 | Attend-and-Excite prompts | Liu | One mouse sits in a red car, and frogs and bears are clear when the other subject is dropped. | It fuses the two subjects into one creature or object on most prompts shown. | A cat and a dog; A lion and a rabbit; A horse and a monkey; A purple chair and a red bow; A purple balloon and a white clock; A frog and a pink bench | Fig 5 p5; Fig 20 p20; Fig 21 p21; Fig 22 p22; Fig 23 p23 | AttendExcite |
 | Attend-and-Excite prompts on PixArt-Sigma | Liu | It draws a brown balloon with a pink car. | It fuses subjects into one object on most prompts shown. | a horse and a monkey; a lion and a yellow clock; a dog and a black apple; a dog and a bear; a purple car and a pink apple; a blue crown and a red balloon | Fig 6 p9; Fig 8 p22 | CO3 |
 | CLEVR | Liu | Every tile shown places all requested objects, from 4 up to 8, as separate shapes. | no failure shown in this paper's figures | 4, 5, 6, 7 and 8 object positions | Fig 1 p2; Fig 4 p11; Fig 14 p29 | Liu |
+| CLEVR Position | Liu | It places the single requested object correctly in the 1-shape samples. | It leaves one of three and two of five requested positions empty. | 3 shapes and 5 shapes in Figs 8 and 18 | Fig 8 p7; Fig 18 p21 | LiftScores |
 | CelebA | Liu | Draws three clean unsmiling men at smile weight 0. | At any smile weight of 1 or more the faces break into patches with long hair (printed as Composed GLIDE). | male AND smiling, smile weights 1, 2 and 6 | Fig 7 p10; Fig 11 p26 | CoInD |
 | CelebA with SDv1.5 fine-tuning | Liu | Draws two smiling men for the joint prompt smiling male. | Composed prompts draw women or an unsmiling face (printed as Composed GLIDE). | smiling AND male; smiling NOT female | Fig 13 p27 | CoInD |
 | Colored MNIST | Liu | Draws a clear pink 4 on all three supports, and correct digits on uniform support for three of four prompts. | On non-uniform and partial data it draws avoided digits and colours or broken strokes (printed as Composed GLIDE). | 4 AND Cyan; 4 AND NOT (Pink OR Green); NOT (3 OR 4) AND Pink | Fig 1 p1; Fig 5 p8 | CoInD |
@@ -43,7 +45,12 @@ those are our numbers and never published ones. Each paper's tile-by-tile calls 
 | Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
 |---|---|---|---|---|---|---|
 | 2D densities | Du | Products, mixtures and negations land on the right clusters when the factors overlap. | When the two factors share no region it still places samples in blobs or a bar where the product has no mass. | lower times upper half ring; two vertical bars with no overlap | Fig 1 p2; Fig 2 p5; Fig A1 p17; Fig A2 p18; Fig A3 p18 | Du |
+| 2D synthetic | Du (HMC) | It gives clean clusters on two product targets and the two rectangles on mixture. | It fills empty targets, loses one column of blobs, and reduces the ellipse mixture to a few clusters. | disjoint rectangles; six blobs; ellipse mixture; negation frame; empty negation | Fig 14 p17; Fig 15 p17; Fig 16 p17 | LiftScores |
+| 2D synthetic | Du (MALA) | It recovers the two rectangles and most of both ellipses on mixture. | It fills empty targets, loses one column of blobs and leaves a cloud in the removed centre on negation. | disjoint rectangles; six blobs; negation side blocks; empty negation | Fig 14 p17; Fig 15 p17; Fig 16 p17 | LiftScores |
+| 2D synthetic | Du (U-HMC) | It recovers the two rectangles on mixture. | It scatters points across the ellipse targets, fills empty targets and breaks the negation frame into disconnected blobs. | ellipse product; disjoint rectangles; six blobs; ellipse mixture; negation frame | Fig 14 p17; Fig 15 p17; Fig 16 p17 | LiftScores |
+| 2D synthetic | Du (ULA) | It recovers the two rectangles on mixture and two stretched blobs on the first product. | It fills empty targets with a bar, loses one column of blobs, and smears ellipses into clouds. | ellipse product; disjoint rectangles; six blobs; ellipse mixture; all negation rows | Fig 14 p17; Fig 15 p17; Fig 16 p17 | LiftScores |
 | CLEVR | Du | Three of five requested positions hold a clear separate shape in the one sample shown. | The two upper requested positions stay empty in that sample. | 5 positions (the RRR baseline, one sample) | Fig 2 p5 | DomainExpansion |
+| CLEVR Position | Du (MCMC) | One of the six failed samples shown keeps most shapes separate. | Shapes melt into lumpy blobs with white flares, in a rerun the authors say may need more careful tuning. | six failed samples in Fig 19 | Fig 19 p22 | LiftScores |
 | CLEVR cube positions | Du | All requested boxes hold a separate clear shape at 1, 3 and 5 positions in the one row shown. | no failure shown in this paper's figures | 1, 3 and 5 positions | Fig 3 p6 | Du |
 | ImageNet 128 px | Du | Pizza, daisy, golden retriever and valley are each recognisable in both tiles. | no failure shown in this paper's figures | Pizza; Daisy; Golden Retriever; Valley | Fig 1 p2; Fig 4 p7 | Du |
 | Text prompts | Du | Horse settings, negated forest colour, two-fruit counts and regional tapestries mostly show what was asked. | Composed subjects can warp or merge with the scene: the Taj Mahal turns lumpy, one car dissolves into shrubs and a horse gains a tangled extra muzzle. | Taj Mahal AND Snow falling down; red car AND pink forest; horse AND grass plains; sandy beach NOT coastal water | Fig 1 p2; Fig 6 p8; Fig 7 p8; Fig 8 p8; Fig A4 p20; Fig A5 p21; Fig A6 p22; Fig A7 p23 | Du |
@@ -196,6 +203,25 @@ This paper analyses composition and proposes no sampler of its own. What its fig
 | Fashion-MNIST | TestTime (mode ascent) | Keeps garments recognisable at low noise. | At noise level 500 tiles become faint gray silhouettes. | noise levels 50 to 500 | Fig 4 p13 | TestTime |
 | LSUN Churches | TestTime (mode ascent) | Keeps the outline of the church. | Colours turn flat and saturated and fine detail is lost. | two church images | Fig 2 p4 | TestTime |
 
+### LiftScores
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| 2D synthetic | LiftScores | It keeps only the correct regions on all product targets and returns nothing where the target is empty. | On negation it keeps thin sparse parts of the target, and on mixture it shrinks blobs and rounds rectangles. | negation frame and side blocks; mixture blobs, rectangles and ellipses | Fig 1 p2; Fig 11 p16; Fig 12 p16; Fig 13 p16 | LiftScores |
+| Attend-and-Excite prompts | LiftScores | 31 of the 60 accepted images show exactly what the prompt asked, such as a lion with a mouse or a frog with a bow. | 29 of the 60 accepted images are flawed: 3 fail outright, with colours swapped or an object replaced, and 26 have a wrong colour, an extra object or a fused body. | a white chair and a gray balloon; yellow glasses and a brown bow; a gray backpack and yellow glasses; a lion and a horse; a dog and a rabbit | Fig 4 p5; Fig 10 p9; Fig 20 p23; Fig 21 p25; Fig 22 p26 | LiftScores |
+| CLEVR Position | LiftScores | All shown 3-shape and 5-shape samples place a separate object in every requested box. | One accepted 1-shape sample carries an unrequested teal cylinder touching the requested object. | 1 shape in Fig 18 | Fig 8 p7; Fig 18 p21 | LiftScores |
+| Random text prompts | LiftScores | Score maps light up on the matching object in the four images shown, and the map for a missing message is empty. | The maps cover only part of the ladder and a few patches of the leaves, and the bottle image lacks the requested message. | a glass bottle with a message; a wooden ladder reaching into a treehouse; an old gramophone with autumn leaves | Fig 7 p6 | LiftScores |
+
+### LogicalGuidance
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| CelebA | LogicalGuidance | Not-blond faces are well lit and varied in hair and skin tone. | One man in the batch of 100 has pale ash hair. | not blond | Fig 18 p32 | LogicalGuidance |
+| Colored MNIST | LogicalGuidance | Either-or queries keep both options with readable digits, such as red or beige and 1 or pink. | A forbidden 1 survives not-1 at weights 1.0 and 1.5, then deforms into a lump, and a deep blue 5 survives not-blue. | not 1; not blue; light blue and 3 | Fig 2 p5; Fig 7 p27; Fig 9 p28; Fig 10 p28; Fig 11 p29; Fig 12 p29; Fig 13 p30 | LogicalGuidance |
+| ImageNet | LogicalGuidance | The red line on the ferret disappears and the tamarin is unchanged. | no failure shown in this paper's figures | ferret; golden lion tamarin | Fig 4 p7 | LogicalGuidance |
+| Molecules: GRM5 and RRM1 | LogicalGuidance | The ligands shown have contacts drawn on the intended proteins and none drawn on RRM1 for the avoid query. | no failure shown in this paper's figures | binds both proteins; binds GRM5 and avoids RRM1 | Fig 6 p25 | LogicalGuidance |
+| Shapes3D | LogicalGuidance | The red or yellow query keeps red and yellow objects where the baseline turns them orange. | Off-target objects remain, including a green sphere at weight 1.0, an orange cylinder at 2.5 and cylinders under not-cylinder. | red or yellow object; not cylinder; light green floor and blue wall; light green floor or pink object | Fig 2 p5; Fig 8 p27; Fig 14 p30; Fig 15 p31; Fig 16 p31; Fig 17 p32 | LogicalGuidance |
+
 ### CO3
 
 | Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
@@ -241,6 +267,12 @@ This paper analyses composition and proposes no sampler of its own. What its fig
 ### CFGRevisited
 
 This paper re-evaluates guidance methods and proposes none of its own. Its figures of CFG, CFG++, APG and the rest are under "Other methods".
+
+### CountLoop
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| Authors' count prompts | CountLoop | It keeps categories separate, and hand counts match on the bowl of 24 balls and the 35 cats and labradors. | It draws 49 oranges as yellow citrus, repeats near-identical faces and poses, and its far crowd dissolves into haze; high counts cannot be confirmed by eye. | 49 oranges in a bowl; 12 ginger and 10 black cats with 11 golden and 2 black labradors; a crowd of 170 people | Fig 1 p1; Fig 5 p8; Fig 6 p9; Fig 9 p14 | CountLoop |
 
 ## Other methods, by the paper that printed them
 
@@ -409,6 +441,21 @@ This paper re-evaluates guidance methods and proposes none of its own. Its figur
 | CelebA | Top-3 | Draws smiling faces, some blurred. | Loses hair colour and sometimes gender across the queries. | all four CelebA queries | Fig 3 p8; Fig 5 p17 | TestTime |
 | ColorMNIST | Top-3 | Draws digit-like shapes. | Draws mixed wrong digits and scribbles in the wrong colour. | all four ColorMNIST queries | Fig 3 p8; Fig 5 p17 | TestTime |
 
+### Printed by LiftScores
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| Attend-and-Excite prompts | Rejected by LiftScores | 50 of the 60 rejected images really do miss or fuse a requested thing, so the filter is right to drop them. | 4 rejected images show both requested things clearly and 6 more show both with a flaw, so the filter also discards usable samples. | a bear and a mouse; a horse and a rabbit; a lion and a mouse; a mouse and a red car | Fig 4 p5; Fig 10 p9; Fig 20 p23; Fig 21 p25; Fig 22 p26 | LiftScores |
+
+### Printed by LogicalGuidance
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| ImageNet | Baseline (no repulsive guidance) | The tamarin is clean. | The ferret has a thin red line across its neck. | ferret | Fig 4 p7 | LogicalGuidance |
+| CelebA | Constant | No face in the batch has clearly blond hair. | Most faces sit in heavy black hair and shadow, and at least one tile is almost entirely black. | not blond | Fig 18 p32 | LogicalGuidance |
+| Colored MNIST | Constant | Single and-queries match the method exactly, and not-queries exclude the forbidden digit or colour. | Either-or queries collapse toward both options and strokes break as guidance rises, and colour range narrows on negation. | 4 or 1; 1 or pink; red or beige; 2 or blue; not 1; not blue | Fig 2 p5; Fig 7 p27; Fig 9 p28; Fig 10 p28; Fig 11 p29; Fig 12 p29; Fig 13 p30 | LogicalGuidance |
+| Shapes3D | Constant | Single and-queries match the method exactly. | Red-or-yellow objects blend to orange in 7 to 9 of 9 tiles, and nested queries lose the requested object colours. | red or yellow object; (orange wall or sphere) and (red or yellow object); light green floor or pink object; complex query | Fig 2 p5; Fig 8 p27; Fig 14 p30; Fig 15 p31; Fig 16 p31; Fig 17 p32 | LogicalGuidance |
+
 ### Printed by CO3
 
 | Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
@@ -497,3 +544,14 @@ This paper re-evaluates guidance methods and proposes none of its own. Its figur
 | SD3.5 Medium | TCFG | Clean portrait, valley and rider on a white horse. | The dog wears the tie, so the dog is not to its right. | a dog to the right of a tie | Fig 1 p4 | CFGRevisited |
 | FLUX.2 [klein] 4B Base | no-CFG | The woman in glasses and the valley are recognisable. | The dog becomes a print on patterned strips and the horse and rider dissolve. | a portrait of a woman wearing round glasses in a library; a dog to the right of a tie; a misty mountain valley with a river at sunrise; a woman riding a white horse through red poppies | Fig 1 p4 | CFGRevisited |
 | SD3.5 Medium | no-CFG | The forest river is recognisable. | Hair covers the face, the dog merges with cloth, and no whole white horse appears. | a portrait of a woman wearing round glasses in a library; a dog to the right of a tie; a misty mountain valley with a river at sunrise; a woman riding a white horse through red poppies | Fig 1 p4 | CFGRevisited |
+
+### Printed by CountLoop
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| Authors' count prompts | Count. Guidance | It draws recognisable objects on most prompts. | It returns pure noise for 18 suitcases and gives seven cats and one dog for 3 cats and 10 dogs. | 18 suitcases; 3 cats and 10 dogs; 49 oranges; 79 eggs | Fig 6 p9 | CountLoop |
+| Authors' count prompts | CountGen | It draws clean, recognisable objects in plausible rooms. | It undercounts most targets and draws about 19 cats with no recognisable dog for 3 cats and 10 dogs. | 3 cats and 10 dogs; 18 suitcases; 17 vases; 127 wrist watches; 79 eggs | Fig 1 p1; Fig 6 p9 | CountLoop |
+| Authors' count prompts | FLUX | It draws clear balls and a large mass of oranges. | It fuses white patches onto coloured balls and overshoots oranges to a printed 550 while keeping birds tiny. | 5 red, 7 white, 7 green and 5 yellow balls; 140 oranges and 31 birds | Fig 1 p1 | CountLoop |
+| Authors' count prompts | LMD | It draws separate objects in most tiles. | It breaks scenes into grids, loses the dogs entirely and replaces objects with an unrelated man or notebook. | 3 cats and 10 dogs; 127 wrist watches; 77 donuts; 104 hot air balloons; 79 eggs | Fig 1 p1; Fig 6 p9 | CountLoop |
+| Authors' count prompts | SLD | It draws recognisable objects and comes close on the 49 oranges with a printed 57. | It misses counts, drops the dogs and shop name, and paints the target number 79 onto a card instead of drawing 79 eggs. | 3 cats and 10 dogs; 79 eggs; 77 donuts; 127 wrist watches | Fig 6 p9 | CountLoop |
+| Authors' count prompts | Unnamed method in Fig 2 | It places the right three cats and 14 birds. | It lines the birds and cats up in rigid rows and renders eggs with crusted, burnt tips. | 3 cats and 14 birds; 79 eggs | Fig 2 p3 | CountLoop |

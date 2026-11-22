@@ -1,0 +1,14 @@
+table,page,status,rows,reason
+1,3,no results,0,Lists the Compose rule for each algebra; holds no measured value.
+2,7,read,48,
+3,8,read,90,
+4,19,read,137,
+5,21,read,25,
+6,21,read,25,
+7,22,read,25,
+8,23,read,36,
+9,24,read,54,
+10,27,read,36,
+11,27,read,27,
+12,28,read,27,
+13,28,read,6,

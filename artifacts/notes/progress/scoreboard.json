@@ -1,7 +1,7 @@
 {
   "about": "Targets come from what rival papers report. Each row is filled by Loop 4 from a page it read. The drawing script computes the target as the best rival number, published or reproduced, moved one step past it.",
   "papers_read": {
-    "read": 19,
+    "read": 22,
     "total": 22
   },
   "targets": [],
