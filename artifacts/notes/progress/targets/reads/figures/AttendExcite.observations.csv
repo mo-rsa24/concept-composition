@@ -1,0 +1,206 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,1,Attend-and-Excite prompts,Stable Diffusion,A horse and a dog,fails,one thing,Both pictures show only a horse and no dog.
+1,1,Attend-and-Excite prompts,AttendExcite,A horse and a dog,succeeds,two clear things,Both pictures show a separate dog facing a horse.
+1,1,Free-form prompts shown by the authors,Stable Diffusion,A painting of an elephant with glasses,fails,one thing,Both paintings show an elephant with no glasses.
+1,1,Free-form prompts shown by the authors,AttendExcite,A painting of an elephant with glasses,succeeds,two clear things,"Both paintings show an elephant in large glasses, and in one the lenses hold human-looking eyes."
+1,1,Free-form prompts shown by the authors,Stable Diffusion,A playful kitten chasing a butterfly in a wildflower meadow,fails,one thing,Both pictures show a kitten in flowers and no butterfly.
+1,1,Free-form prompts shown by the authors,AttendExcite,A playful kitten chasing a butterfly in a wildflower meadow,succeeds,two clear things,Both pictures show a kitten with a clear butterfly beside it over a meadow.
+2,2,Attend-and-Excite prompts,Stable Diffusion,A yellow bowl and a blue cat,fails,one thing,One picture has a small blue cat drawn as a pattern inside a bowl and the other shows only bowls.
+2,2,Attend-and-Excite prompts,AttendExcite,A yellow bowl and a blue cat,succeeds,two clear things,Both pictures show a blue cat with a separate yellow bowl.
+2,2,Attend-and-Excite prompts,Stable Diffusion,A yellow bow and a brown bench,mixed,two clear things,A yellow bow sits on a seat that is yellow instead of brown in both pictures.
+2,2,Attend-and-Excite prompts,AttendExcite,A yellow bow and a brown bench,mixed,two clear things,"A yellow bow sits on a dark bench in both pictures, and one bench reads maroon rather than brown."
+4,4,Attend-and-Excite prompts,Stable Diffusion,A cat and a frog,fails,one thing,A cat sits in leaves and there is no frog.
+4,4,Attend-and-Excite prompts,AttendExcite,A cat and a frog,succeeds,two clear things,A cropped cat faces a separate bright green frog.
+5,5,Attend-and-Excite prompts,Stable Diffusion,A cat and a dog,fails,one thing,"Three of four pictures show two cats, and the fourth joins a cat's head to a small white body."
+5,5,Attend-and-Excite prompts,Liu,A cat and a dog,fails,fused hybrid,All four pictures show one animal whose cat-like face and ears blend into a dog-like muzzle or coat.
+5,5,Attend-and-Excite prompts,StructureDiffusion,A cat and a dog,mixed,one thing,"Two pictures show two cats, one shows a single dog-like animal with a cat's ear, and one shows a clear dog beside a clear cat."
+5,5,Attend-and-Excite prompts,AttendExcite,A cat and a dog,succeeds,two clear things,All four pictures show a separate cat and dog.
+5,5,Attend-and-Excite prompts,Stable Diffusion,A turtle and a yellow bowl,fails,one thing,"One picture is only a bowl, one only a turtle, one a turtle painted on a blue plate, and one a bowl carved with a shell pattern."
+5,5,Attend-and-Excite prompts,Liu,A turtle and a yellow bowl,fails,one thing,All four pictures show a turtle with a yellow or golden shell and no bowl.
+5,5,Attend-and-Excite prompts,StructureDiffusion,A turtle and a yellow bowl,mixed,one thing,"One picture has a turtle behind a yellow bowl, while the others show a bowl alone, a turtle alone, or turtles with a green plate."
+5,5,Attend-and-Excite prompts,AttendExcite,A turtle and a yellow bowl,succeeds,two clear things,"All four pictures show a turtle with a separate yellow bowl, including one turtle sitting inside it."
+5,5,Attend-and-Excite prompts,Stable Diffusion,A frog and a pink bench,fails,one thing,"Three pictures show only a pink bench, and the fourth has a tiny frog cut off at the bottom edge."
+5,5,Attend-and-Excite prompts,Liu,A frog and a pink bench,fails,fused hybrid,"One cartoon frog stands behind a bench, while the others melt the bench into frog skin or turn the frog pink with bench-like stripes."
+5,5,Attend-and-Excite prompts,StructureDiffusion,A frog and a pink bench,mixed,one thing,Three pictures show only a pink bench and one shows a gray-green frog sitting on it.
+5,5,Attend-and-Excite prompts,AttendExcite,A frog and a pink bench,succeeds,two clear things,"All four pictures show a green frog on a pink bench, with the bench cropped in three."
+5,5,Attend-and-Excite prompts,Stable Diffusion,A red bench and a yellow clock,fails,one thing,No picture has a yellow clock: benches stand alone or the clock is red and the bench yellow.
+5,5,Attend-and-Excite prompts,Liu,A red bench and a yellow clock,fails,one thing,"One picture is only a clock, one only a bench, one a white clock over a red bench, and one a bench printed on a faint clock face."
+5,5,Attend-and-Excite prompts,StructureDiffusion,A red bench and a yellow clock,mixed,one thing,"One picture has a yellow clock over a sliver of red bench, and the others show a red bench with a red clock or none."
+5,5,Attend-and-Excite prompts,AttendExcite,A red bench and a yellow clock,succeeds,two clear things,"All four pictures show a red bench below a yellow clock, and one clock is a tall yellow door-like panel with hands."
+6,6,Free-form prompts shown by the authors,Stable Diffusion,A grizzly bear catching a salmon in a crystal clear river surrounded by a forest,fails,one thing,"Four bears stand in water, three with no fish and one with only a small red shape at its paw."
+6,6,Free-form prompts shown by the authors,AttendExcite,A grizzly bear catching a salmon in a crystal clear river surrounded by a forest,succeeds,two clear things,All four pictures show a bear with a large clear salmon in a river before tree roots.
+6,6,Free-form prompts shown by the authors,Stable Diffusion,A pod of dolphins leaping out of the water in an ocean with a ship on the background,mixed,one thing,Dolphins leap in all four pictures and only one has a small distant ship.
+6,6,Free-form prompts shown by the authors,AttendExcite,A pod of dolphins leaping out of the water in an ocean with a ship on the background,succeeds,two clear things,"All four pictures show dolphins before a large ship, and one ship carries garbled lettering."
+6,6,Free-form prompts shown by the authors,Stable Diffusion,A Picasso painting in a garden,fails,one thing,All four pictures are full-frame cubist paintings with no garden around them.
+6,6,Free-form prompts shown by the authors,AttendExcite,A Picasso painting in a garden,succeeds,two clear things,"All four pictures show a framed or easel painting standing in a garden, with simpler portraits than the Stable Diffusion row."
+6,6,Free-form prompts shown by the authors,Stable Diffusion,A cat and a dog reading in the library,fails,one thing,All four pictures show cats with books in a library and no dog.
+6,6,Free-form prompts shown by the authors,AttendExcite,A cat and a dog reading in the library,succeeds,two clear things,All four pictures show a separate cat and dog beside open books in a library.
+7,6,StructureDiffusion prompts,StructureDiffusion,A cat is perched upon a stone bench that sits on a wooden patio,mixed,two clear things,Three cats sit on stone slabs but no wooden patio appears.
+7,6,StructureDiffusion prompts,AttendExcite,A cat is perched upon a stone bench that sits on a wooden patio,mixed,two clear things,"Three cats sit on stone blocks over a wooden patio, and the blocks do not read clearly as benches."
+7,6,StructureDiffusion prompts,StructureDiffusion,A red sphere and a blue cube,fails,one thing,Two pictures show only a red sphere and the third is a flat red and blue wall.
+7,6,StructureDiffusion prompts,AttendExcite,A red sphere and a blue cube,succeeds,two clear things,"All three pictures show a red sphere with a separate blue cube, and one cube is cut off at the frame edge."
+7,6,StructureDiffusion prompts,StructureDiffusion,Rice with red sauce with eggs over the top and orange slices on the side,mixed,two clear things,"Rice, sauce and eggs are spread across separate dishes, with eggs not over the rice and sauce in most pictures."
+7,6,StructureDiffusion prompts,AttendExcite,Rice with red sauce with eggs over the top and orange slices on the side,succeeds,two clear things,"All three plates show rice with red sauce, a fried egg on top and orange slices."
+7,6,StructureDiffusion prompts,StructureDiffusion,Two elephants walking by a green wall with tan palm trees painted on it,mixed,two clear things,"Elephants walk through painted palm scenes with no green wall, and one picture has one large and one tiny elephant."
+7,6,StructureDiffusion prompts,AttendExcite,Two elephants walking by a green wall with tan palm trees painted on it,mixed,two clear things,"Two elephants walk by green walls with palms in two pictures, and the third shows a grass field with no wall."
+9,8,Attend-and-Excite prompts,AttendExcite,A dog and a bear,fails,fused hybrid,"One picture shows only a dog, one a dog beside a yellow plush toy, and one a bear head on a pale dog-like body."
+9,8,Free-form prompts shown by the authors,AttendExcite,An elephant with a sombrero,succeeds,two clear things,"All three pictures are drawings of an elephant in a sombrero, and in one the hat brim merges into the elephant's ears."
+10,11,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A rabbit with a crown,fails,one thing,A rabbit sits under only a tiny speck above its ears where the crown should be.
+10,11,Attend-and-Excite prompts,AttendExcite,A rabbit with a crown,succeeds,two clear things,The rabbit wears a flat blue crown that sits between its ears.
+10,11,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A dog and squirrel,fails,one thing,"A disc printed with dark animal silhouettes stands beside a cropped squirrel, and no real dog appears."
+10,11,Attend-and-Excite prompts,AttendExcite,A dog and squirrel,succeeds,two clear things,"A golden dog stands with a separate squirrel pressed against its chest, seen under the heat-map overlay."
+11,12,Attend-and-Excite prompts,AttendExcite without iterative refinement,A frog with a crown,fails,one thing,All three pictures show a frog with no crown.
+11,12,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A frog with a crown,mixed,two clear things,Two cartoon frogs wear crowns and the third frog has a red net-like shape rising from its head.
+11,12,Attend-and-Excite prompts,AttendExcite,A frog with a crown,succeeds,two clear things,All three frogs wear a clear crown.
+11,12,Attend-and-Excite prompts,AttendExcite without iterative refinement,A bird and a green chair,mixed,two bodies or heads,"One bird sits clearly on a green chair, and in the other two only a bird's head pokes out from behind the chair."
+11,12,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A bird and a green chair,mixed,two bodies or heads,"One bird's beak stretches into the chair's frame, while the other two perch on chairs that are small or cropped."
+11,12,Attend-and-Excite prompts,AttendExcite,A bird and a green chair,succeeds,two clear things,All three pictures show a whole bird perched on a green chair.
+11,12,Attend-and-Excite prompts,AttendExcite without iterative refinement,A gray backpack and yellow glasses,mixed,two bodies or heads,"One person has a gray backpack with yellow glasses beside it, one bag merges with a yellow disc, and the third has a yellow bag with no glasses."
+11,12,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A gray backpack and yellow glasses,fails,one thing,"The pictures show gray fabric with a yellow strap, a yellow disc on the ground and cropped sunglasses, with no recognisable backpack."
+11,12,Attend-and-Excite prompts,AttendExcite,A gray backpack and yellow glasses,succeeds,two clear things,"All three show a gray backpack with yellow glasses on or beside it, with the third backpack cropped."
+11,12,Attend-and-Excite prompts,AttendExcite without iterative refinement,A dog and a horse,mixed,fused hybrid,"Two pictures merge a dog's face with a horse's mane or body, and one shows a clear white dog beside a horse."
+11,12,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A dog and a horse,mixed,two clear things,"A puppy lies under a horse and a white dog stands by a horse, while the third dog is pasted across the horse's legs."
+11,12,Attend-and-Excite prompts,AttendExcite,A dog and a horse,succeeds,two clear things,All three pictures show a separate dog and horse.
+11,12,Attend-and-Excite prompts,AttendExcite without iterative refinement,A dog and a squirrel,mixed,fused hybrid,"One creature has a squirrel's head and tail on a dog-patterned body, one shows a dog with a squirrel, and one shows two squirrels and no dog."
+11,12,Attend-and-Excite prompts,AttendExcite without Gaussian smoothing,A dog and a squirrel,mixed,two bodies or heads,"One picture is split into a dog half and a squirrel half, one shows two squirrels, and one shows a squirrel beside a pale dog-like animal."
+11,12,Attend-and-Excite prompts,AttendExcite,A dog and a squirrel,succeeds,two clear things,All three pictures show a dog with a separate squirrel.
+12,12,Attend-and-Excite prompts,AttendExcite modifying all steps,A turtle and a yellow bowl,mixed,two clear things,A turtle and yellow bowl are present in both pictures but the bowl has green smears and a broken rim.
+12,12,Attend-and-Excite prompts,AttendExcite,A turtle and a yellow bowl,succeeds,two clear things,A turtle stands by a clean yellow bowl in one picture and sits in one in the other.
+12,12,Attend-and-Excite prompts,AttendExcite modifying all steps,A cat and a dog,mixed,two bodies or heads,A clear cat sits beside a dog whose face is smeared and loses its features in both pictures.
+12,12,Attend-and-Excite prompts,AttendExcite,A cat and a dog,succeeds,two clear things,A clear cat sits beside a clear dog with a sharp face in both pictures.
+12,12,Attend-and-Excite prompts,AttendExcite modifying all steps,Yellow glasses and a gray bowl,mixed,two clear things,"Yellow glasses rest on a gray bowl, with blotchy texture on the bowl and streaks through the lenses."
+12,12,Attend-and-Excite prompts,AttendExcite,Yellow glasses and a gray bowl,succeeds,two clear things,Clean yellow glasses rest on or in a smooth gray bowl.
+12,12,Attend-and-Excite prompts,AttendExcite modifying all steps,A purple chair and a red bow,mixed,two clear things,"A purple chair and red bow are present, with the chair back crumbling and the bow blotchy."
+12,12,Attend-and-Excite prompts,AttendExcite,A purple chair and a red bow,succeeds,two clear things,A clean purple chair carries a clean red bow in both pictures.
+13,13,Attend-and-Excite prompts,Prompt-to-Prompt,A cat and a dog,fails,two bodies or heads,"All four pictures show distorted animals with melted bodies, and only one has a dog-like shape beside a cat."
+13,13,Attend-and-Excite prompts,AttendExcite,A cat and a dog,succeeds,two clear things,All four pictures show a separate cat and dog.
+13,13,Attend-and-Excite prompts,Prompt-to-Prompt,A turtle and a yellow bowl,mixed,one thing,"Two pictures have a yellow-shelled turtle with no bowl, one has a turtle over a yellow dish, and one has a turtle in a green bowl."
+13,13,Attend-and-Excite prompts,AttendExcite,A turtle and a yellow bowl,succeeds,two clear things,All four pictures show a turtle with a separate yellow bowl.
+13,13,Attend-and-Excite prompts,Prompt-to-Prompt,A frog and a pink bench,mixed,one thing,One picture has a clear frog on a pink bench and the other three show only the bench.
+13,13,Attend-and-Excite prompts,AttendExcite,A frog and a pink bench,succeeds,two clear things,"All four pictures show a green frog on a pink bench, with the bench cropped in three."
+13,13,Attend-and-Excite prompts,Prompt-to-Prompt,A red bench and a yellow clock,fails,one thing,All four pictures show a red bench and no clock.
+13,13,Attend-and-Excite prompts,AttendExcite,A red bench and a yellow clock,succeeds,two clear things,All four pictures show a red bench below a yellow clock.
+15,16,Attend-and-Excite prompts,Stable Diffusion,A parrot and a bear,mixed,fused hybrid,"Of eight pictures, two show a clear bear and parrot, two show only parrots, and four blend bear heads with parrot bodies or plumage."
+15,16,Attend-and-Excite prompts,AttendExcite,A parrot and a bear,succeeds,two clear things,"All eight pictures show a separate bear and parrot, and one carries garbled printed text."
+15,16,Attend-and-Excite prompts,Stable Diffusion,A lion with a crown,fails,one thing,One of eight lions wears a crown and the other seven have none.
+15,16,Attend-and-Excite prompts,AttendExcite,A lion with a crown,succeeds,two clear things,"All eight lions wear a crown, with one cropped at the top of the frame."
+15,16,Attend-and-Excite prompts,Stable Diffusion,A bird and a yellow chair,fails,one thing,"Only one of eight shows a clear chair with a small separate bird, while others show a chair alone, a bird alone, or a chair whose back is a bird."
+15,16,Attend-and-Excite prompts,AttendExcite,A bird and a yellow chair,mixed,two clear things,"All eight show a clear bird, but in four the chair is only a yellow curved strip or fragment that cannot be recognised as a chair."
+15,16,Attend-and-Excite prompts,Stable Diffusion,A rabbit and a blue bowl,mixed,two bodies or heads,"A rabbit is in all eight, but most sit on a plate or in a green or olive dish, and only one has a clear blue bowl in front of it."
+15,16,Attend-and-Excite prompts,AttendExcite,A rabbit and a blue bowl,succeeds,two clear things,All eight show a rabbit with a separate blue or teal bowl.
+15,16,Attend-and-Excite prompts,Stable Diffusion,A red bow and a green bowl,mixed,two bodies or heads,"Bows sit on green rings or plates in most pictures, one has the colors swapped, two have no bowl, and one shows a real green bowl."
+15,16,Attend-and-Excite prompts,AttendExcite,A red bow and a green bowl,succeeds,two clear things,"All eight show a red bow with a green bowl, though one bowl is a flat plate and several bows float above it."
+16,17,Attend-and-Excite prompts,Stable Diffusion,A blue parrot and a golden cat,fails,one thing,"Five of eight show only a parrot, two fuse a cat with a blue parrot's body or wing, and one shows two cats."
+16,17,Attend-and-Excite prompts,AttendExcite,A blue parrot and a golden cat,succeeds,two clear things,"All eight show a blue parrot beside a separate orange cat, with some parrots partly yellow and one cat brown."
+16,17,Attend-and-Excite prompts,Stable Diffusion,A cow and a dog,fails,one thing,"All eight pictures show cows, with pale calf-like animals beside some and no recognisable dog."
+16,17,Attend-and-Excite prompts,AttendExcite,A cow and a dog,succeeds,two clear things,"All eight show a cow with a separate dog, and one adds a child while another adds a cow-faced figure in a tie."
+16,17,Attend-and-Excite prompts,Stable Diffusion,A white horse and a green bird,fails,one thing,"Five of eight show a white horse and no bird, and one of the other three has only a tiny bird."
+16,17,Attend-and-Excite prompts,AttendExcite,A white horse and a green bird,succeeds,two clear things,"All eight show a white horse with a separate green bird, and green leaks into the mane in one."
+16,17,Attend-and-Excite prompts,Stable Diffusion,A turtle and an orange balloon,mixed,two bodies or heads,"Three of eight show a clear turtle with an orange balloon, one shows balloons only, and the rest have malformed turtle-like shapes."
+16,17,Attend-and-Excite prompts,AttendExcite,A turtle and an orange balloon,succeeds,two clear things,"All eight have a turtle and an orange balloon, and one turtle is a black blob with an orange patch."
+16,17,Attend-and-Excite prompts,Stable Diffusion,A brown suitcase and a white bench,fails,one thing,"No picture has a brown suitcase with a white bench: most benches are wood or missing, and the one white bench has a white suitcase."
+16,17,Attend-and-Excite prompts,AttendExcite,A brown suitcase and a white bench,mixed,two clear things,"Five of eight show a brown suitcase with a white bench, and the other three have a black or navy suitcase or a brownish bench."
+17,18,Free-form prompts shown by the authors,Stable Diffusion,A blue dog and a pink cat,fails,one thing,"No picture has a pink cat: blue dogs sit beside a pink dog, a pink blob, a cream dog or a cream puppy."
+17,18,Free-form prompts shown by the authors,AttendExcite,A blue dog and a pink cat,succeeds,two clear things,All four pictures show a blue dog beside a separate pink cat.
+17,18,Free-form prompts shown by the authors,Stable Diffusion,A painting of a cat and a dog in the style of Van Gogh,fails,one thing,All four paintings show only cats and no dog.
+17,18,Free-form prompts shown by the authors,AttendExcite,A painting of a cat and a dog in the style of Van Gogh,mixed,two bodies or heads,"All four show a cat and a dog, but in one their heads share a single jacket and in another a dog sits against a suited cat-headed figure."
+17,18,Free-form prompts shown by the authors,Stable Diffusion,A swan in the kitchen,fails,one thing,Two pictures are kitchens with no swan and two show a swan on a bare surface with no kitchen.
+17,18,Free-form prompts shown by the authors,AttendExcite,A swan in the kitchen,succeeds,two clear things,All four pictures show a swan standing or sitting in a kitchen.
+17,18,Free-form prompts shown by the authors,Stable Diffusion,The cloud gate sculpture in a library,fails,one thing,All four pictures show the sculpture outdoors in a city with no library.
+17,18,Free-form prompts shown by the authors,AttendExcite,The cloud gate sculpture in a library,succeeds,two clear things,All four pictures show the sculpture indoors among bookshelves.
+17,18,Free-form prompts shown by the authors,Stable Diffusion,A green apple and a red apple,fails,one thing,"All four pictures show only green apples, with red appearing in the background."
+17,18,Free-form prompts shown by the authors,AttendExcite,A green apple and a red apple,succeeds,two clear things,All four pictures show a separate green apple and red apple.
+17,18,Free-form prompts shown by the authors,Stable Diffusion,"A bird perched on top of a vintage camera, surrounded by beautiful flowers",fails,one thing,All four pictures show cameras among flowers and no bird.
+17,18,Free-form prompts shown by the authors,AttendExcite,"A bird perched on top of a vintage camera, surrounded by beautiful flowers",mixed,two clear things,"All four show a bird and a camera among flowers, but only one bird stands on the camera and the others are behind or beside it."
+17,18,Free-form prompts shown by the authors,Stable Diffusion,An animation cartoon of a lion with a crown,fails,one thing,Three of four cartoon lions have no crown and the fourth has a small one.
+17,18,Free-form prompts shown by the authors,AttendExcite,An animation cartoon of a lion with a crown,succeeds,two clear things,All four cartoon lions wear a clear crown.
+17,18,Free-form prompts shown by the authors,Stable Diffusion,A blue rabbit and an orange dog,mixed,two bodies or heads,"Two pictures show a blue rabbit with an orange dog, and one of those dogs has a rabbit's long ear, while the other two have no orange dog."
+17,18,Free-form prompts shown by the authors,AttendExcite,A blue rabbit and an orange dog,succeeds,two clear things,"All four show a blue rabbit beside a separate orange dog, and one rabbit looks like a smooth toy."
+18,19,Free-form prompts shown by the authors,Stable Diffusion,A dog walking on the city street,succeeds,not applicable,All four pictures show one dog on a mostly empty city street.
+18,19,Free-form prompts shown by the authors,AttendExcite,A dog walking on the city street,succeeds,not applicable,"All four pictures show a dog walking on a busy city street, with a second small dog behind it in one."
+18,19,Free-form prompts shown by the authors,Stable Diffusion,A green dog standing over a vintage suitcase,fails,one thing,The green goes to the suitcase in all four: two pictures have no dog and two have a brown dog.
+18,19,Free-form prompts shown by the authors,AttendExcite,A green dog standing over a vintage suitcase,succeeds,two clear things,All four show a green dog on or over a separate suitcase.
+18,19,Free-form prompts shown by the authors,Stable Diffusion,An orange cat curled up next to a warm fireplace with a vintage book,mixed,one thing,"An orange cat is in all four, but only one has a clear stack of books and one has no fireplace."
+18,19,Free-form prompts shown by the authors,AttendExcite,An orange cat curled up next to a warm fireplace with a vintage book,succeeds,two clear things,All four show an orange cat with an open book by a fireplace.
+18,19,Free-form prompts shown by the authors,Stable Diffusion,"A nice picture of apples, strawberries, black currants and juice rich in vitamin c",mixed,two clear things,Apples and berries appear in all four and no picture has juice.
+18,19,Free-form prompts shown by the authors,AttendExcite,"A nice picture of apples, strawberries, black currants and juice rich in vitamin c",succeeds,two clear things,"All four show a glass of juice with apples, strawberries and dark berries."
+19,19,StructureDiffusion prompts,StructureDiffusion,A wooden building with a stone bench placed near it,mixed,two clear things,"A building and bench appear in all three, but two benches are wood and one building is stone."
+19,19,StructureDiffusion prompts,AttendExcite,A wooden building with a stone bench placed near it,mixed,two clear things,"Two pictures show a wooden building with a stone bench, and the third bench has a plank-like top on stone legs."
+19,19,StructureDiffusion prompts,StructureDiffusion,A red cat sits on a rug with a black chord,fails,one thing,"No picture has a clear black cord: one cat is orange on a red mat, one is dark brown with an orange strap, and one rug holds a black blob and a tiny red cat."
+19,19,StructureDiffusion prompts,AttendExcite,A red cat sits on a rug with a black chord,succeeds,two clear things,All three show a red-orange cat on a rug with a clear black cord.
+19,19,StructureDiffusion prompts,StructureDiffusion,A green sphere and a red cube,fails,one thing,"All three show a green sphere with no cube, and red appears only as background or spots on the sphere."
+19,19,StructureDiffusion prompts,AttendExcite,A green sphere and a red cube,succeeds,two clear things,"All three show a green sphere with a separate red cube, and one cube is cropped at the bottom."
+19,19,StructureDiffusion prompts,StructureDiffusion,A large pizza on a white plate sitting on a blue table,mixed,two clear things,"Pizza and plate appear in all three, but blue wedges replace slices of one pizza and another sits on a blue-rimmed plate."
+19,19,StructureDiffusion prompts,AttendExcite,A large pizza on a white plate sitting on a blue table,succeeds,two clear things,"All three show pizza with a white plate on a blue table, with the pizza partly off the plate in one."
+20,20,Free-form prompts shown by the authors,Stable Diffusion,A brown dog and a grey mouse,fails,one thing,All four pictures show only mice and no dog.
+20,20,Free-form prompts shown by the authors,Liu,A brown dog and a grey mouse,fails,one thing,All four pictures show a single gray mouse and no dog.
+20,20,Free-form prompts shown by the authors,StructureDiffusion,A brown dog and a grey mouse,fails,one thing,All four pictures show only mice and no dog.
+20,20,Free-form prompts shown by the authors,AttendExcite,A brown dog and a grey mouse,succeeds,two clear things,All four pictures show a brown dog with a separate gray mouse.
+20,20,Attend-and-Excite prompts,Stable Diffusion,A bird and a green car,fails,one thing,"Green cars fill all four, and only one has a white stilt-legged bird beside the car."
+20,20,Attend-and-Excite prompts,Liu,A bird and a green car,fails,fused hybrid,"One picture is only a car, and the others are green bird-shaped objects, with one bird's head growing from a car body."
+20,20,Attend-and-Excite prompts,StructureDiffusion,A bird and a green car,fails,one thing,"All four show green cars and no bird, with an unrequested woman in two."
+20,20,Attend-and-Excite prompts,AttendExcite,A bird and a green car,succeeds,two clear things,All four show a separate bird with a green car.
+20,20,Attend-and-Excite prompts,Stable Diffusion,A mouse with glasses,fails,one thing,Three of four mice have no glasses and only the cartoon mouse wears them.
+20,20,Attend-and-Excite prompts,Liu,A mouse with glasses,mixed,two bodies or heads,"One picture is glasses alone, and in the others the frames lie around or across the mouse without being worn."
+20,20,Attend-and-Excite prompts,StructureDiffusion,A mouse with glasses,mixed,one thing,"Two of four mice have no glasses, one cartoon mouse wears blue ones and a small mouse wears tiny ones."
+20,20,Attend-and-Excite prompts,AttendExcite,A mouse with glasses,succeeds,two clear things,All four mice wear clear glasses.
+20,20,Free-form prompts shown by the authors,Stable Diffusion,A red cake and a bouquet of yellow tulips,fails,one thing,"All four show tulips, most mixed red and yellow, and no cake."
+20,20,Free-form prompts shown by the authors,Liu,A red cake and a bouquet of yellow tulips,fails,one thing,All four show tulips and no cake.
+20,20,Free-form prompts shown by the authors,StructureDiffusion,A red cake and a bouquet of yellow tulips,fails,one thing,"Three pictures show only tulips, and the fourth stands tulips on a round red base that may be a cake."
+20,20,Free-form prompts shown by the authors,AttendExcite,A red cake and a bouquet of yellow tulips,succeeds,two clear things,All four show a red cake with yellow tulips.
+21,21,Attend-and-Excite prompts,Stable Diffusion,A horse and a monkey,fails,one thing,"All four pictures show horses, some with a man, and no monkey."
+21,21,Attend-and-Excite prompts,Liu,A horse and a monkey,fails,fused hybrid,"Monkey faces sit on bodies with long horse-like manes or coats, and no separate horse appears."
+21,21,Attend-and-Excite prompts,StructureDiffusion,A horse and a monkey,fails,one thing,"All four show horses, some with a man or a dark rider, and no clear monkey."
+21,21,Attend-and-Excite prompts,AttendExcite,A horse and a monkey,succeeds,two clear things,All four show a separate horse and monkey.
+21,21,Attend-and-Excite prompts,Stable Diffusion,A bird and a bear,fails,one thing,Three of four show only bears and one has a tiny bird on a branch.
+21,21,Attend-and-Excite prompts,Liu,A bird and a bear,fails,fused hybrid,"Bears grow blue beaks in three pictures, and one has a wing behind its head."
+21,21,Attend-and-Excite prompts,StructureDiffusion,A bird and a bear,fails,one thing,All four show bears or cubs and no bird.
+21,21,Attend-and-Excite prompts,AttendExcite,A bird and a bear,succeeds,two clear things,All four show a clear bird with a separate bear.
+21,21,Attend-and-Excite prompts,Stable Diffusion,A rabbit with a crown,fails,one thing,All four rabbits have no crown.
+21,21,Attend-and-Excite prompts,Liu,A rabbit with a crown,fails,fused hybrid,"Crowns and rabbits melt together, with ears growing from crowns, and one rabbit has no crown."
+21,21,Attend-and-Excite prompts,StructureDiffusion,A rabbit with a crown,fails,one thing,"No rabbit wears a crown, and one sits beside an ornate object."
+21,21,Attend-and-Excite prompts,AttendExcite,A rabbit with a crown,succeeds,two clear things,All four rabbits wear a clear crown.
+21,21,Attend-and-Excite prompts,Stable Diffusion,A purple chair and a red bow,fails,one thing,All four show a magenta or purple chair and no bow.
+21,21,Attend-and-Excite prompts,Liu,A purple chair and a red bow,fails,fused hybrid,All four show one red-magenta object that is part chair and part ribbon bow.
+21,21,Attend-and-Excite prompts,StructureDiffusion,A purple chair and a red bow,fails,one thing,"Chairs have no red bow, and the one clear bow is pink on a pink chair."
+21,21,Attend-and-Excite prompts,AttendExcite,A purple chair and a red bow,succeeds,two clear things,All four show a purple chair with a clear red bow.
+22,22,Attend-and-Excite prompts,Stable Diffusion,A cat and a frog,fails,one thing,Three pictures show only cats and the fourth is an orange striped frog-like animal with a tiny cat.
+22,22,Attend-and-Excite prompts,Liu,A cat and a frog,fails,one thing,All four show a frog and no cat.
+22,22,Attend-and-Excite prompts,StructureDiffusion,A cat and a frog,fails,fused hybrid,"Cats grow webbed frog feet in two pictures, one frog has cat-like stripes, and one cat has a green frog-skin back."
+22,22,Attend-and-Excite prompts,AttendExcite,A cat and a frog,succeeds,two clear things,All four show a separate cat and frog.
+22,22,Attend-and-Excite prompts,Stable Diffusion,A lion with glasses,fails,one thing,All four lions have no glasses.
+22,22,Attend-and-Excite prompts,Liu,A lion with glasses,mixed,two bodies or heads,"Glasses appear in all four but cut into the face, sit crooked, or lie in front of the lion."
+22,22,Attend-and-Excite prompts,StructureDiffusion,A lion with glasses,fails,one thing,One of four lions wears glasses and the other three have none.
+22,22,Attend-and-Excite prompts,AttendExcite,A lion with glasses,succeeds,two clear things,All four lions wear clear glasses.
+22,22,Attend-and-Excite prompts,Stable Diffusion,A mouse and a red car,fails,one thing,"All four show red cars and no real mouse, and one has a small dark car with a tail."
+22,22,Attend-and-Excite prompts,Liu,A mouse and a red car,mixed,fused hybrid,"One mouse sits in a red car, while the others fuse into a red mouse-shaped blob, a car with a snout, or a mouse with car windows."
+22,22,Attend-and-Excite prompts,StructureDiffusion,A mouse and a red car,fails,one thing,All four show red cars and no mouse.
+22,22,Attend-and-Excite prompts,AttendExcite,A mouse and a red car,succeeds,two clear things,All four show a separate mouse with a red car.
+22,22,Attend-and-Excite prompts,Stable Diffusion,A green backpack and a brown suitcase,fails,fused hybrid,"All four show one green backpack, with brown panels on some and suitcase wheels on one, and no separate suitcase."
+22,22,Attend-and-Excite prompts,Liu,A green backpack and a brown suitcase,fails,fused hybrid,All four show one dark green bag that mixes backpack and suitcase parts.
+22,22,Attend-and-Excite prompts,StructureDiffusion,A green backpack and a brown suitcase,fails,fused hybrid,All four show one green backpack with brown panels and no separate suitcase.
+22,22,Attend-and-Excite prompts,AttendExcite,A green backpack and a brown suitcase,succeeds,two clear things,All four show a green backpack with a separate brown suitcase.
+23,23,Attend-and-Excite prompts,Liu,A cat and a dog,fails,fused hybrid,Both pictures show one animal with a dog's muzzle and a cat's ears and markings.
+23,23,Attend-and-Excite prompts,AttendExcite,A cat and a dog,succeeds,two clear things,Both pictures show a separate cat and dog.
+23,23,Attend-and-Excite prompts,Liu,A lion and a rabbit,fails,fused hybrid,Both pictures show one rabbit-faced animal with a lion's mane and coat.
+23,23,Attend-and-Excite prompts,AttendExcite,A lion and a rabbit,succeeds,two clear things,Both pictures show a separate lion and rabbit.
+23,23,Attend-and-Excite prompts,Liu,An orange suitcase and a brown bench,fails,fused hybrid,One picture is an orange suitcase ribbed like bench slats and the other an orange bench on suitcase wheels.
+23,23,Attend-and-Excite prompts,AttendExcite,An orange suitcase and a brown bench,succeeds,two clear things,Both pictures show an orange suitcase with a separate brown bench.
+23,23,Attend-and-Excite prompts,Liu,A purple balloon and a white clock,fails,fused hybrid,Both pictures show one pale purple balloon with clock hands on it.
+23,23,Attend-and-Excite prompts,AttendExcite,A purple balloon and a white clock,succeeds,two clear things,Both pictures show a purple balloon beside a separate white clock.
+23,23,Attend-and-Excite prompts,Liu,A rabbit and a blue bowl,fails,fused hybrid,One rabbit is painted inside a blue bowl and the other's body merges into the side of a bowl.
+23,23,Attend-and-Excite prompts,AttendExcite,A rabbit and a blue bowl,succeeds,two clear things,Both pictures show a rabbit beside a separate blue bowl.
+23,23,Attend-and-Excite prompts,Liu,A frog and a pink bench,fails,fused hybrid,Both pictures show a frog whose pink limbs and body melt into the bench.
+23,23,Attend-and-Excite prompts,AttendExcite,A frog and a pink bench,succeeds,two clear things,Both pictures show a green frog on a separate pink bench.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A horse and a monkey,fails,one thing,The picture shows a horse and no monkey.
+24,24,Attend-and-Excite prompts,AttendExcite,A horse and a monkey,succeeds,two clear things,A horse faces a separate seated chimpanzee.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A dog and a frog,fails,one thing,The picture shows two frogs and no dog.
+24,24,Attend-and-Excite prompts,AttendExcite,A dog and a frog,succeeds,two clear things,A pug sits behind a separate green frog.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A turtle and a yellow bowl,mixed,fused hybrid,"A turtle is drawn on a yellow disc inside a round plate, so turtle and dish read as one painted object."
+24,24,Attend-and-Excite prompts,AttendExcite,A turtle and a yellow bowl,succeeds,two clear things,A turtle rests beside a separate shallow yellow bowl.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A horse with a bow,fails,one thing,The picture shows a horse and no bow.
+24,24,Attend-and-Excite prompts,AttendExcite,A horse with a bow,mixed,two clear things,A large green and yellow bow is present but looks pasted across the horse's chest.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A blue balloon and an orange bench,fails,one thing,An orange bench stands by a wall with a blue stripe and there is no balloon.
+24,24,Attend-and-Excite prompts,AttendExcite,A blue balloon and an orange bench,succeeds,two clear things,A blue balloon floats beside a separate orange bench.
+24,24,Attend-and-Excite prompts,Stable Diffusion,A gray suitcase and a yellow car,fails,one thing,The picture shows two yellow cars and no suitcase.
+24,24,Attend-and-Excite prompts,AttendExcite,A gray suitcase and a yellow car,succeeds,two clear things,A gray suitcase stands in front of a separate yellow car.

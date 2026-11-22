@@ -1,0 +1,106 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,2,Binding prompts shown by the authors (set not stated),SDXL,a dog wearing hat and a cat wearing sunglasses,mixed,two clear things,"One picture puts hat and sunglasses on the dog and nothing on the cat, and the other shows two cat-faced animals both in hats and sunglasses."
+1,2,Binding prompts shown by the authors (set not stated),SD3,a dog wearing hat and a cat wearing sunglasses,mixed,two clear things,Both pictures show a clear dog and cat that each wear a hat and sunglasses.
+1,2,Binding prompts shown by the authors (set not stated),ToMe,a dog wearing hat and a cat wearing sunglasses,succeeds,two clear things,"Both pictures show a dog in a hat beside a cat in sunglasses, with an unrequested scarf on the dog in one."
+1,2,Binding prompts shown by the authors (set not stated),SDXL,a dog with blue bow tie and a cat with red scarf,fails,one thing,"One picture puts both blue and red neckwear on the cat, and the other shows two cats and no dog."
+1,2,Binding prompts shown by the authors (set not stated),PlayGround-v2,a dog with blue bow tie and a cat with red scarf,mixed,two clear things,"A clear dog and cat both wear red bows, with blue appearing only as part of the dog's bow in one picture."
+1,2,Binding prompts shown by the authors (set not stated),ToMe,a dog with blue bow tie and a cat with red scarf,succeeds,two clear things,Both pictures show a dog with a blue bow tie beside a cat with a red scarf.
+2,4,Binding prompts shown by the authors (set not stated),SDXL,a cat wearing sunglasses and a dog wearing a hat,mixed,two clear things,A clear dog and cat appear but hats and sunglasses land on the wrong animals in both pictures.
+2,4,Binding prompts shown by the authors (set not stated),SDXL [dog] token,a cat wearing sunglasses and a dog wearing a hat,mixed,not applicable,"Conditioning on the dog token alone draws one dog in sunglasses, so the other subject's accessory leaks into it."
+2,4,Binding prompts shown by the authors (set not stated),SDXL [EOT] tokens,a cat wearing sunglasses and a dog wearing a hat,mixed,two clear things,The end token alone still draws a dog and a cat with hats and sunglasses spread across both.
+3,5,Token arithmetic examples,SDXL,a photo of a dog,succeeds,not applicable,A single dog fills the picture.
+3,5,Token arithmetic examples,Token addition,dog + hat,succeeds,two clear things,A similar dog now wears a dark hat.
+3,5,Token arithmetic examples,SDXL,a photo of a doctor,succeeds,not applicable,A doctor in a white coat wears glasses and holds a clipboard.
+3,5,Token arithmetic examples,Token addition,doctor - glasses,succeeds,not applicable,The same doctor appears without glasses.
+3,5,Token arithmetic examples,SDXL,a photo of a king,succeeds,not applicable,A long-haired man in gold wears a jewelled crown.
+3,5,Token arithmetic examples,Token addition,king - crown,succeeds,not applicable,The same long-haired man appears without the crown.
+3,5,Token arithmetic examples,SDXL,a photo of a queen,succeeds,not applicable,A woman in a fur collar wears a crown.
+3,5,Token arithmetic examples,Token addition,queen - woman + man,succeeds,not applicable,"A crowned, moustached man in royal robes replaces the woman."
+5,8,Binding prompts shown by the authors (set not stated),ToMe,a squirrel holding camera and a cat wearing hat,succeeds,two clear things,A squirrel holds a camera beside a cat in a red knitted hat.
+5,8,Binding prompts shown by the authors (set not stated),SDXL,a squirrel holding camera and a cat wearing hat,mixed,two bodies or heads,A hatted squirrel holds the camera beside a cat-faced animal with a squirrel-like body and no hat.
+5,8,Binding prompts shown by the authors (set not stated),PlayGround-v2,a squirrel holding camera and a cat wearing hat,mixed,two clear things,"The squirrel holds the camera and also wears the hat, and the cat beside it has none."
+5,8,Binding prompts shown by the authors (set not stated),ELLA 1.5,a squirrel holding camera and a cat wearing hat,mixed,two clear things,"A striped cat wears the hat but also holds the camera, while the squirrel beside it holds nothing."
+5,8,Binding prompts shown by the authors (set not stated),Ranni 1.5,a squirrel holding camera and a cat wearing hat,fails,fused hybrid,"One tan dog-like animal with a blue hat merges with a person's legs and a camera, and neither squirrel nor cat is recognisable."
+5,8,Binding prompts shown by the authors (set not stated),SynGen XL,a squirrel holding camera and a cat wearing hat,fails,one thing,"A single squirrel wears a hat and holds a camera, and there is no cat."
+5,8,Binding prompts shown by the authors (set not stated),ToMe,a girl with a necklace and a boy with glasses,succeeds,two clear things,A boy in glasses faces a girl in necklaces and neither takes the other's accessory.
+5,8,Binding prompts shown by the authors (set not stated),SDXL,a girl with a necklace and a boy with glasses,mixed,two clear things,The boy and the girl both wear glasses and necklaces.
+5,8,Binding prompts shown by the authors (set not stated),PlayGround-v2,a girl with a necklace and a boy with glasses,mixed,two clear things,"The girl has a necklace, and the boy has glasses plus a necklace he was not asked for."
+5,8,Binding prompts shown by the authors (set not stated),ELLA 1.5,a girl with a necklace and a boy with glasses,mixed,two clear things,Both figures wear glasses and both wear necklaces.
+5,8,Binding prompts shown by the authors (set not stated),Ranni 1.5,a girl with a necklace and a boy with glasses,succeeds,two clear things,A boy in dark glasses stands apart from a girl in a red necklace.
+5,8,Binding prompts shown by the authors (set not stated),SynGen XL,a girl with a necklace and a boy with glasses,mixed,two clear things,The boy and the girl both wear glasses and necklaces.
+5,8,Binding prompts shown by the authors (set not stated),ToMe,a cat with sunglasses and a dog wearing a hat,succeeds,two clear things,A gray cat in round glasses sits beside a gray dog in a red cap.
+5,8,Binding prompts shown by the authors (set not stated),SDXL,a cat with sunglasses and a dog wearing a hat,mixed,two clear things,A cat and a dog both wear hats and sunglasses.
+5,8,Binding prompts shown by the authors (set not stated),PlayGround-v2,a cat with sunglasses and a dog wearing a hat,fails,one thing,Two cats both wear hats and sunglasses and there is no dog.
+5,8,Binding prompts shown by the authors (set not stated),ELLA 1.5,a cat with sunglasses and a dog wearing a hat,mixed,two clear things,A cat in glasses sits by a hatted dog that also has dark glasses.
+5,8,Binding prompts shown by the authors (set not stated),Ranni 1.5,a cat with sunglasses and a dog wearing a hat,mixed,two clear things,"A sharp cat in sunglasses fills the frame, and a blurred dog behind it wears orange sunglasses and no hat."
+5,8,Binding prompts shown by the authors (set not stated),SynGen XL,a cat with sunglasses and a dog wearing a hat,mixed,two clear things,The dog wears both the hat and the sunglasses and the cat wears nothing.
+5,8,Binding prompts shown by the authors (set not stated),ToMe,a yellow apple and a red pear,succeeds,two clear things,One red pear and one yellow apple stand apart.
+5,8,Binding prompts shown by the authors (set not stated),SDXL,a yellow apple and a red pear,mixed,two clear things,"A yellow pear with a red base stands by a red pear-shaped apple, so color and fruit are crossed."
+5,8,Binding prompts shown by the authors (set not stated),PlayGround-v2,a yellow apple and a red pear,fails,one thing,A red apple and a green-yellow apple stand together and there is no pear.
+5,8,Binding prompts shown by the authors (set not stated),ELLA 1.5,a yellow apple and a red pear,mixed,two clear things,A yellow apple with a red flush stands by a pear streaked red and yellow.
+5,8,Binding prompts shown by the authors (set not stated),Ranni 1.5,a yellow apple and a red pear,succeeds,two clear things,A red pear stands in front of a yellow apple.
+5,8,Binding prompts shown by the authors (set not stated),SynGen XL,a yellow apple and a red pear,succeeds,two clear things,A cut yellow apple sits beside a red pear with a yellow flank.
+5,8,Binding prompts shown by the authors (set not stated),ToMe,a round bag and a square box,succeeds,two clear things,A round tan bag sits beside a square checked box.
+5,8,Binding prompts shown by the authors (set not stated),SDXL,a round bag and a square box,fails,one thing,Two rectangular tote bags stand together with no round bag and no box.
+5,8,Binding prompts shown by the authors (set not stated),PlayGround-v2,a round bag and a square box,fails,one thing,"A barrel bag, a handbag and a round tin appear and there is no square box."
+5,8,Binding prompts shown by the authors (set not stated),ELLA 1.5,a round bag and a square box,mixed,one thing,"A clear square box sits before a plain round disc with no strap or opening, so the bag is not recognisable."
+5,8,Binding prompts shown by the authors (set not stated),Ranni 1.5,a round bag and a square box,mixed,one thing,A round blue bag with a strap lies beside a flat blue rectangle that is not a box.
+5,8,Binding prompts shown by the authors (set not stated),SynGen XL,a round bag and a square box,succeeds,two clear things,A round burlap bag sits behind a white square parcel.
+6,9,Binding prompts shown by the authors (set not stated),Config A,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",fails,one thing,A white cat in a red cap and sunglasses sits by a second cat and there is no dog.
+6,9,Binding prompts shown by the authors (set not stated),Config B,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",fails,one thing,Two cats both wear caps and glasses and there is no dog.
+6,9,Binding prompts shown by the authors (set not stated),Config C,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",mixed,two bodies or heads,A cat in sunglasses sits by an orange animal with a cat-like face and a green hat.
+6,9,Binding prompts shown by the authors (set not stated),Config D,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",mixed,two clear things,"A cat wears a red cap and sunglasses, and a separate dog wears a green hat."
+6,9,Binding prompts shown by the authors (set not stated),Config E,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",mixed,two bodies or heads,A cat in a red cap and sunglasses sits by an orange cat-faced animal in a hat.
+6,9,Binding prompts shown by the authors (set not stated),Config F,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",succeeds,two clear things,A gray cat in sunglasses sits by a puppy in a yellow hat with an unrequested pink object at its mouth.
+6,9,Binding prompts shown by the authors (set not stated),ToMe,"prompt not printed in Fig 6, pictures read as a cat with sunglasses and a dog with a hat",succeeds,two clear things,A cat in sunglasses sits beside a dog in a straw hat.
+8,9,Token edit examples,Unedited prompt,elephant,succeeds,not applicable,A single elephant fills the picture.
+8,9,Token edit examples,ToMe token edit,[elephant+glasses],succeeds,two clear things,The same elephant now wears round wire glasses across its face.
+8,9,Token edit examples,Unedited prompt,cat and dog,succeeds,two clear things,A cat and a dog sit apart.
+8,9,Token edit examples,ToMe token edit,[cat+glasses] with dog,succeeds,two clear things,The cat now wears sunglasses and the dog does not.
+8,9,Token edit examples,Unedited prompt,girl with earrings,succeeds,not applicable,A woman in profile wears long drop earrings.
+8,9,Token edit examples,ToMe token edit,girl with earrings removed,succeeds,not applicable,"The long earrings are gone, and the background has also changed to dark streaks."
+8,9,Token edit examples,Unedited prompt,man with glasses,succeeds,not applicable,A sketched man wears glasses.
+8,9,Token edit examples,ToMe token edit,man with glasses removed,succeeds,not applicable,The same man appears without glasses.
+8,9,Token edit examples,Unedited prompt,queen with cats,succeeds,two clear things,A crowned woman sits with a gray cat and a black cat.
+8,9,Token edit examples,ToMe token edit,[queen-crown] with cats,mixed,two clear things,"The crown is gone but a tall black headdress has replaced it, and both cats remain."
+8,9,Token edit examples,Unedited prompt,nurse,succeeds,not applicable,A woman in a nurse's cap and uniform smiles.
+8,9,Token edit examples,ToMe token edit,[nurse-woman],succeeds,not applicable,A young man in the same nurse's cap and uniform replaces the woman.
+11,18,Binding prompts shown by the authors (set not stated),Config A,a cat wearing sunglasses and a dog wearing hat,mixed,two clear things,The cat wears both hat and sunglasses and the dog wears sunglasses.
+11,18,Binding prompts shown by the authors (set not stated),Config B,a cat wearing sunglasses and a dog wearing hat,mixed,two clear things,The cat and the dog both wear hats and sunglasses.
+11,18,Binding prompts shown by the authors (set not stated),Config E,a cat wearing sunglasses and a dog wearing hat,mixed,two clear things,"The cat wears the hat and the dog wears the sunglasses, so the accessories are swapped."
+11,18,Binding prompts shown by the authors (set not stated),Config C,a cat wearing sunglasses and a dog wearing hat,succeeds,two clear things,A cat in sunglasses sits apart from a dog in a red hat.
+12,19,Binding prompts shown by the authors (set not stated),SDXL,a boy wearing hat and a dog wearing sunglasses,mixed,two clear things,The boy wears hat and sunglasses and the corgi wears nothing.
+12,19,Binding prompts shown by the authors (set not stated),ToMe without end token substitution,a boy wearing hat and a dog wearing sunglasses,mixed,two clear things,The corgi has sunglasses but the boy also has them under his hat.
+12,19,Binding prompts shown by the authors (set not stated),ToMe,a boy wearing hat and a dog wearing sunglasses,succeeds,two clear things,A boy in a hat stands by a corgi in sunglasses.
+13,19,Binding prompts shown by the authors (set not stated),ToMe with spliced prompts,a cat wearing glasses and a dog with hat,fails,one thing,"All three pictures show one animal with hat or glasses, and the other subject is missing."
+13,19,Binding prompts shown by the authors (set not stated),ToMe,a cat wearing glasses and a dog with hat,mixed,two clear things,"Two of three pictures bind glasses to the cat and hat to the dog, and in the third the dog wears a coral hood."
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A dog with hat and a cat,mixed,two clear things,The dog wears a white hat and the cat also wears a gray one.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A dog with hat and a cat,succeeds,two clear things,A dog in a white hat sits by a bare-headed cat.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A cat with scarf and a dog with tie,fails,one thing,Two cats wear ties and there is no dog.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A cat with scarf and a dog with tie,succeeds,two clear things,A cat in a checked scarf sits by a black dog in a shirt and tie.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A man with hat and a girl with necklace,mixed,two clear things,The man and the woman both wear hats and necklaces.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A man with hat and a girl with necklace,succeeds,two clear things,A man in a hat stands by a woman in necklaces.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A white cat with glasses and a black dog with hat,fails,one thing,A black-and-white cat presses against a white cat in hat and sunglasses and there is no black dog.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A white cat with glasses and a black dog with hat,succeeds,two clear things,A white cat in red glasses sits by a black dog in a black hat.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A cat wearing hat and a dog with sunglasses are sitting on a green bench,fails,one thing,A black cat and an orange cat both wear green sunglasses on the bench and there is no dog.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A cat wearing hat and a dog with sunglasses are sitting on a green bench,succeeds,two clear things,A black cat in a hat sits on the bench with a small dog in sunglasses cut off at its edge.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A boy with glasses and a girl,mixed,two clear things,The boy and the girl both wear glasses.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A boy with glasses and a girl,succeeds,two clear things,Only the boy wears glasses.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A bear with hat and a man with glasses,fails,fused hybrid,"A bear head in hat and white sunglasses sits on a man's suit beside a small suited bear, and no human man appears."
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A bear with hat and a man with glasses,mixed,two clear things,"A bear in a knitted eared hood stands by a man in sunglasses, so the hat became a hood."
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A tiger with glasses and a dog with hat,mixed,two clear things,"The tiger wears a cap, and the dog wears both a hat and the glasses in a tiger-striped jacket."
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A tiger with glasses and a dog with hat,succeeds,two clear things,A tiger in glasses sits by a dog in a blue hat.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A cat with pink hat and a dog with blue sunglasses,mixed,two clear things,The dog takes both the pink hat and the blue sunglasses and the cat wears a blue scarf.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A cat with pink hat and a dog with blue sunglasses,mixed,two clear things,"The dog wears blue sunglasses, and the cat wears a pink hooded top over a dark cap in place of a pink hat."
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A man wearing scarf and a girl wearing earrings standing on the red sandy beach,mixed,two clear things,The woman wears both the red scarf and earrings and the man has no scarf.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A man wearing scarf and a girl wearing earrings standing on the red sandy beach,mixed,two clear things,"The man wears a scarf on a red beach, and no earrings are visible on the woman."
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A boy with hat and a Corgi with sunglasses,mixed,two clear things,The boy wears hat and sunglasses and the corgi also wears sunglasses.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A boy with hat and a Corgi with sunglasses,succeeds,two clear things,A boy in a cap crouches by a corgi in sunglasses.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A fox with sunglasses and a deer with crown,fails,fused hybrid,"Two fox heads share one orange body, both wear crowns and sunglasses, and no deer appears."
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A fox with sunglasses and a deer with crown,succeeds,two clear things,A fox in sunglasses sits beside a deer in a crown.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A squirrel holding guns and a bear with hat,fails,one thing,"Two near-identical rodent-like animals both wear hats and hold rifles, so no distinct bear appears."
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A squirrel holding guns and a bear with hat,mixed,two clear things,A bear in a hat faces a gray animal holding guns that looks more like a mouse or koala than a squirrel.
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A lion with yellow crown and a sheep with white bandanas,mixed,two clear things,A lion in a yellow crown stands by a sheep in a woolly cap with no bandana.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A lion with yellow crown and a sheep with white bandanas,mixed,two clear things,"A crowned lion also wears a yellow scarf, and the second animal has horns and reads as a goat in a white wrap."
+14,20,Binding prompts shown by the authors (set not stated),SDXL,A black chocolate cake and a fruit plater on a blue table,mixed,two clear things,Cake and fruit plates sit on a gray table instead of a blue one.
+14,20,Binding prompts shown by the authors (set not stated),ToMe,A black chocolate cake and a fruit plater on a blue table,succeeds,two clear things,A dark chocolate slice on a plate sits by a fruit plate on a blue table.

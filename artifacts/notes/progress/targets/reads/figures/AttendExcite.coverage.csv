@@ -1,0 +1,25 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,2,qualitative,
+3,3,diagram,Pipeline of the attention update at one denoising step with small example maps
+4,4,qualitative,
+5,5,qualitative,
+6,6,qualitative,
+7,6,qualitative,
+8,7,plot,Average CLIP image-text similarity per method and prompt subset
+9,8,qualitative,
+10,11,qualitative,
+11,12,qualitative,
+12,12,qualitative,
+13,13,qualitative,
+14,14,plot,Average CLIP image-text similarity for Prompt-to-Prompt against Attend-and-Excite
+15,16,qualitative,
+16,17,qualitative,
+17,18,qualitative,
+18,19,qualitative,
+19,19,qualitative,
+20,20,qualitative,
+21,21,qualitative,
+22,22,qualitative,
+23,23,qualitative,
+24,24,qualitative,

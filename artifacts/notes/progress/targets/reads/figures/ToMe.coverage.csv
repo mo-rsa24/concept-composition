@@ -1,0 +1,16 @@
+figure,page,kind,reason
+1,2,qualitative,
+2,4,qualitative,
+3,5,qualitative,
+4,6,diagram,"How tokens are merged and the end token replaced, with the two losses that update them"
+5,8,qualitative,
+6,9,qualitative,
+7,9,other,"Cross-attention heat maps per token for configs A and C and ToMe, with no generated pictures"
+8,9,qualitative,
+9,17,plot,"Detection score for hat and entropy per token, with two detector example pictures"
+10,18,other,GPT-4o scoring rubric with two example pictures whose generating method is not labelled
+11,18,qualitative,
+12,19,qualitative,
+13,19,qualitative,
+14,20,qualitative,
+15,21,plot,Pie charts of a 20-person user study rating binding on four levels per method

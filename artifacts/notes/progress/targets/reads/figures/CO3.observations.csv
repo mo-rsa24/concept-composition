@@ -1,0 +1,200 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+3,8,Attend-and-Excite prompts,Divide-Bind,a turtle and a mouse,mixed,two clear things,"A large cropped mouse and a turtle are both clear, and a small third creature in front blends a mouse head with a shelled body."
+3,8,Attend-and-Excite prompts,AttendExcite,a turtle and a mouse,fails,one thing,The turtle is clear and the dark blurred shape at the top left cannot be recognised as a mouse.
+3,8,Attend-and-Excite prompts,SDXL,a turtle and a mouse,fails,one thing,A turtle carries a green lumpy growth and the small pink long-tailed creature beside it is not recognisably a mouse.
+3,8,Attend-and-Excite prompts,Liu,a turtle and a mouse,fails,fused hybrid,One creature has a turtle shell and a mouse-like face and feet.
+3,8,Attend-and-Excite prompts,SynGen,a turtle and a mouse,mixed,two clear things,A clear turtle carries two clear brown mice on its back where one was asked for.
+3,8,Attend-and-Excite prompts,ToMe,a turtle and a mouse,mixed,two clear things,A clear mouse sits on a clear turtle in a line-drawing style with a second turtle behind.
+3,8,Attend-and-Excite prompts,CO3,a turtle and a mouse,succeeds,two clear things,One dark mouse sits on top of one turtle and both are separate and recognisable.
+3,8,Attend-and-Excite prompts,Divide-Bind,a elephant with a bow,succeeds,two clear things,A close crop of an elephant face has a large pink bow at its base.
+3,8,Attend-and-Excite prompts,AttendExcite,a elephant with a bow,succeeds,two clear things,A close elephant has a red ribbon bow at the end of its trunk.
+3,8,Attend-and-Excite prompts,SDXL,a elephant with a bow,fails,one thing,An elephant stands in a field with only a small red tangle at its tusk that does not read as a bow.
+3,8,Attend-and-Excite prompts,Liu,a elephant with a bow,fails,one thing,An elephant stands in a field with no bow.
+3,8,Attend-and-Excite prompts,SynGen,a elephant with a bow,fails,one thing,An elephant stands on a path with no bow.
+3,8,Attend-and-Excite prompts,ToMe,a elephant with a bow,fails,one thing,A line-drawn elephant stands in trees with no bow.
+3,8,Attend-and-Excite prompts,CO3,a elephant with a bow,succeeds,two clear things,A flat graphic elephant wears a red polka-dot bow on its head.
+3,8,Attend-and-Excite prompts,Divide-Bind,a gray crown and a white clock,succeeds,two clear things,A large gray crown sits on a white clock that is cropped at the bottom of the frame.
+3,8,Attend-and-Excite prompts,AttendExcite,a gray crown and a white clock,mixed,two clear things,"A near-black crown stands in front of a partly hidden white clock, so the crown misses gray."
+3,8,Attend-and-Excite prompts,SDXL,a gray crown and a white clock,fails,fused hybrid,A gray ornate clock has small crowns growing from its case as decoration.
+3,8,Attend-and-Excite prompts,Liu,a gray crown and a white clock,fails,fused hybrid,A pale circular clock face melts into a crown-like rim as one object.
+3,8,Attend-and-Excite prompts,SynGen,a gray crown and a white clock,fails,fused hybrid,An ornate clock has a crown as its top finial and no separate crown.
+3,8,Attend-and-Excite prompts,ToMe,a gray crown and a white clock,mixed,fused hybrid,"A gray ornate clock carries a crown finial, and a separate small white clock stands in front of it."
+3,8,Attend-and-Excite prompts,CO3,a gray crown and a white clock,mixed,two clear things,"A small black crown rests on a white clock, so both objects are clear but the crown misses gray."
+4,8,T2I-CompBench Complex,SDXL,The colorful balloons floated near the shiny silver airplane.,mixed,two clear things,Hot-air balloons fly over a clear airplane that is red and white instead of silver.
+4,8,T2I-CompBench Complex,ToMe,The colorful balloons floated near the shiny silver airplane.,mixed,two bodies or heads,Balloons fill the frame and only broken silver pieces of an airplane show between them.
+4,8,T2I-CompBench Complex,R2F,The colorful balloons floated near the shiny silver airplane.,succeeds,two clear things,A bunch of colored balloons floats above a clear silver-white airplane.
+4,8,T2I-CompBench Complex,CO3,The colorful balloons floated near the shiny silver airplane.,succeeds,two clear things,Colored balloons float above a clear blue-and-silver airplane on a runway.
+4,8,T2I-CompBench Complex,SDXL,The soft fur coat draped over the hard armor and the sharp claws.,mixed,not applicable,A furred wolf-cat in armor fills the frame and no claws show.
+4,8,T2I-CompBench Complex,ToMe,The soft fur coat draped over the hard armor and the sharp claws.,fails,not applicable,A sketched woman in a fur hood has claw-like fingers and no armor.
+4,8,T2I-CompBench Complex,R2F,The soft fur coat draped over the hard armor and the sharp claws.,mixed,not applicable,A cat-like beast wears fur over leather armor and no sharp claws are clear.
+4,8,T2I-CompBench Complex,CO3,The soft fur coat draped over the hard armor and the sharp claws.,succeeds,not applicable,A white cat-headed knight wears a fur-trimmed cape over armor and has clawed feet.
+4,8,RareBench,SDXL,A wooly alligator is guarding a banana shaped bottle,mixed,two clear things,A yellow woolly alligator lies beside an ordinary bottle that has no banana shape.
+4,8,RareBench,ToMe,A wooly alligator is guarding a banana shaped bottle,fails,one thing,A gray knitted animal that reads more like a hippo stands by an ordinary banana with no bottle.
+4,8,RareBench,R2F,A wooly alligator is guarding a banana shaped bottle,mixed,two bodies or heads,"A gray knitted animal has a bottle on its back and a separate banana, so bottle and banana never become one object."
+4,8,RareBench,CO3,A wooly alligator is guarding a banana shaped bottle,succeeds,two clear things,A teal knitted alligator holds a banana with a green bottle neck.
+4,8,RareBench,SDXL,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,fails,one thing,Two gray human-like figures sit at a table under a swimming turtle and there is no owl.
+4,8,RareBench,ToMe,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,fails,one thing,A large sea turtle and a standing man fill a dry library with no owl.
+4,8,RareBench,R2F,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,mixed,two clear things,Two owl-like figures sit among coral while a plain turtle swims overhead without armor.
+4,8,RareBench,CO3,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,succeeds,two clear things,An armored turtle and an owl sit at a desk with a book under water arches.
+5,9,Attend-and-Excite prompts,SDXL,a bird and a lion,fails,one thing,A lion stands over a cub and there is no bird.
+5,9,Attend-and-Excite prompts,SDXL+resampling,a bird and a lion,mixed,two clear things,A clear small bird stands between two lions where one lion was asked for.
+5,9,Attend-and-Excite prompts,SDXL+resampling+Corrector,a bird and a lion,mixed,two clear things,A clear bird stands with two graphic lions where one lion was asked for.
+5,9,Attend-and-Excite prompts,SDXL+resampling+Corrector+weight-mod.,a bird and a lion,succeeds,two clear things,One blue-gray bird and one lion face each other.
+5,9,Attend-and-Excite prompts,SDXL+Corrector,a bird and a lion,mixed,two clear things,Two graphic lions sit below one small white bird.
+5,9,Attend-and-Excite prompts,SDXL+Corrector+weight-mod.,a bird and a lion,mixed,two clear things,Two graphic lions appear with a white bird above and a small blue bird at the left.
+5,9,Attend-and-Excite prompts,SDXL,a monkey with a bow,fails,one thing,A chimpanzee wears a head wrap and there is no bow.
+5,9,Attend-and-Excite prompts,SDXL+resampling,a monkey with a bow,succeeds,two clear things,A chimpanzee in a jacket wears a large yellow bow tie.
+5,9,Attend-and-Excite prompts,SDXL+resampling+Corrector,a monkey with a bow,succeeds,two clear things,A graphic chimpanzee wears a yellow bow tie.
+5,9,Attend-and-Excite prompts,SDXL+resampling+Corrector+weight-mod.,a monkey with a bow,succeeds,two clear things,A cartoon monkey has a red-and-yellow bow on its chest.
+5,9,Attend-and-Excite prompts,SDXL+Corrector,a monkey with a bow,succeeds,two clear things,A black-and-white chimpanzee wears a pink bow tie.
+5,9,Attend-and-Excite prompts,SDXL+Corrector+weight-mod.,a monkey with a bow,succeeds,two clear things,A black-and-white chimpanzee wears a red bow tie.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,PixART,a horse and a monkey,fails,one thing,Two horses face each other and there is no monkey.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,Liu,a horse and a monkey,fails,fused hybrid,One head blends a horse muzzle and bridle with monkey ears and eyes.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,CO3,a horse and a monkey,succeeds,two clear things,"A black horse and a separate seated monkey face each other, with a tiny extra figure at the horse's feet."
+6,9,Attend-and-Excite prompts on PixArt-Sigma,PixART,a bird and a turtle,fails,one thing,Two turtles stand on rocks and there is no bird.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,Liu,a bird and a turtle,fails,one thing,One large turtle fills the frame and there is no bird.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,CO3,a bird and a turtle,succeeds,two clear things,A blue bird stands beside a separate turtle.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,PixART,a lion and a yellow clock,fails,fused hybrid,A lion head covers a round yellow clock so that only the clock's edge and hands stick out.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,Liu,a lion and a yellow clock,fails,fused hybrid,A lion's face is printed inside a yellow clock face as one object.
+6,9,Attend-and-Excite prompts on PixArt-Sigma,CO3,a lion and a yellow clock,succeeds,two clear things,A lion head sits in front of a large yellow clock with Roman numerals and both stay readable.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,a bird and a turtle,succeeds,two clear things,A blue bird and a turtle stand apart on a plain ground.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,a bird and a turtle by the beach,succeeds,two clear things,A red bird and a turtle stand apart on a beach.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,a horse and a monkey,succeeds,two clear things,A black horse faces a seated monkey with a tiny extra animal at its feet.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,"a horse and a monkey, mountain background",succeeds,two clear things,A brown horse and a seated monkey stand apart before mountains.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,a lion and a yellow clock,succeeds,two clear things,A lion head overlaps a yellow clock and both remain recognisable.
+7,19,Attend-and-Excite prompts with backgrounds added,CO3,a lion and a yellow clock inside a living room,mixed,two clear things,"A lion stands on a yellow sofa under a yellow clock, with an unrequested second white clock on the wall."
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a brown balloon and a pink car,mixed,two clear things,A brown balloon and a car are clear but the car is brown and the pink has gone to the background.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a brown balloon and a pink car,succeeds,two clear things,A brown balloon rests on the roof of a pink car and both colors are right.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a brown balloon and a pink car,mixed,two clear things,"A brown balloon floats over a pink car whose panels are also brown, and a pink blur sits at the right edge."
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a dog and a black apple,succeeds,two clear things,A black dog sits beside a separate black apple.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a dog and a black apple,fails,fused hybrid,A black dog's face and a black apple form one glossy object with a stem on top.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a dog and a black apple,mixed,two clear things,A black dog sits beside a clear apple that is red instead of black.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a blue crown and a red balloon,fails,one thing,A red balloon floats on a blue background and there is no crown.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a blue crown and a red balloon,fails,fused hybrid,A red balloon has crown-like points growing from its top.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a blue crown and a red balloon,fails,one thing,A red balloon floats on a blue background with a dark shadow and there is no crown.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a turtle and a yellow car,fails,one thing,A turtle with a yellow shell walks on a road and there is no car.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a turtle and a yellow car,fails,one thing,A turtle with yellow underparts fills the frame and there is no car.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a turtle and a yellow car,fails,one thing,A small turtle stands before a yellow wall and there is no car.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a dog and a bear,fails,one thing,Two bears face each other and there is no dog.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a dog and a bear,fails,fused hybrid,One head has round bear ears and a long dog-like muzzle.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a dog and a bear,fails,one thing,"A brown cub with round ears faces a black bear, so both animals read as bears and no dog shows."
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a elephant with a bow,mixed,two bodies or heads,An elephant holds an archery bow in a malformed hand-like limb at its side.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a elephant with a bow,mixed,fused hybrid,A huge plaid ribbon bow replaces the elephant's ears and covers the top of its head.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a elephant with a bow,mixed,two bodies or heads,A blue elephant has an archery bow passing through its tusks and body.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,PixART,a purple car and a pink apple,fails,one thing,A purple car sits on purple ground and there is no apple.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,Liu,a purple car and a pink apple,fails,fused hybrid,An apple with a stem is merged into the hood of a magenta car.
+8,22,Attend-and-Excite prompts on PixArt-Sigma,CO3,a purple car and a pink apple,fails,one thing,A purple car stands before a magenta wall and there is no apple.
+9,23,Attend-and-Excite prompts,SDXL,a bird and a frog,mixed,two bodies or heads,A blue bird overlaps the belly of a large frog so the two bodies run together.
+9,23,Attend-and-Excite prompts,CO3,a bird and a frog,succeeds,two clear things,A bird on a rock stands beside a separate frog.
+9,23,Attend-and-Excite prompts,SDXL,a horse and a mouse,fails,one thing,A grazing horse is clear and the tiny dark speck in the distance cannot be recognised as a mouse.
+9,23,Attend-and-Excite prompts,CO3,a horse and a mouse,succeeds,two clear things,A horse stands beside a separate black mouse.
+9,23,Attend-and-Excite prompts,SDXL,a dog and a horse,fails,one thing,Distorted horses fill a field and no dog is recognisable.
+9,23,Attend-and-Excite prompts,CO3,a dog and a horse,succeeds,two clear things,A white dog sits beside a brown horse.
+9,23,Attend-and-Excite prompts,SDXL,a dog and a mouse,mixed,two bodies or heads,A mouse head and tail grow from the back of a large dog.
+9,23,Attend-and-Excite prompts,CO3,a dog and a mouse,succeeds,two clear things,A black dog and a small mouse sit apart on a plain floor.
+9,23,Attend-and-Excite prompts,SDXL,a cat and a elephant,fails,one thing,Several elephant-like figures fill a patterned scene and there is no cat.
+9,23,Attend-and-Excite prompts,CO3,a cat and a elephant,succeeds,two clear things,A gray elephant stands beside a small gray cat.
+9,23,Attend-and-Excite prompts,SDXL,a dog and a rabbit,succeeds,two clear things,A dog and a rabbit sit side by side.
+9,23,Attend-and-Excite prompts,CO3,a dog and a rabbit,succeeds,two clear things,A brown dog and a white rabbit sit side by side.
+9,23,Attend-and-Excite prompts,SDXL,a bird and a bear,mixed,two clear things,Small birds fly near two overlapping bears where one bear was asked for.
+9,23,Attend-and-Excite prompts,CO3,a bird and a bear,succeeds,two clear things,A dark bird flies above one seated brown bear.
+9,23,Attend-and-Excite prompts,SDXL,a dog and a black apple,mixed,two clear things,A black-and-white dog lies behind an apple that is red instead of black.
+9,23,Attend-and-Excite prompts,CO3,a dog and a black apple,mixed,two clear things,A black dog sits between a black apple and an unrequested red apple.
+9,23,Attend-and-Excite prompts,SDXL,a lion and a yellow clock,mixed,two clear things,A golden lion sits by a wall clock that is gray instead of yellow.
+9,23,Attend-and-Excite prompts,CO3,a lion and a yellow clock,succeeds,two clear things,"A yellow lion statue sits beside a small yellow alarm clock, so yellow also colors the lion."
+9,23,Attend-and-Excite prompts,SDXL,a turtle and a gray backpack,mixed,fused hybrid,A green turtle's shell is built into a gray backpack.
+9,23,Attend-and-Excite prompts,CO3,a turtle and a gray backpack,succeeds,two clear things,A cartoon turtle stands in front of a separate gray backpack.
+9,23,Attend-and-Excite prompts,SDXL,a cat with a glasses,succeeds,two clear things,A cat wears round glasses.
+9,23,Attend-and-Excite prompts,CO3,a cat with a glasses,succeeds,two clear things,A white cat wears round black glasses.
+9,23,Attend-and-Excite prompts,SDXL,a bear and a gray bench,mixed,two bodies or heads,A bear stands on a gray bench and its body joins a headless seated man.
+9,23,Attend-and-Excite prompts,CO3,a bear and a gray bench,succeeds,two clear things,A brown bear sits on a gray bench.
+9,23,Attend-and-Excite prompts,SDXL,a horse and a green apple,fails,one thing,Green apples fill the frame and there is no horse.
+9,23,Attend-and-Excite prompts,CO3,a horse and a green apple,succeeds,two clear things,A horse cropped at the frame edge stands by two green apples.
+9,23,Attend-and-Excite prompts,SDXL,a mouse and a blue clock,mixed,two clear things,"A mouse in a blue jacket holds a small white clock, so the blue went to the jacket."
+9,23,Attend-and-Excite prompts,CO3,a mouse and a blue clock,succeeds,two clear things,A mouse sits on top of a blue alarm clock.
+9,23,Attend-and-Excite prompts,SDXL,a pink crown and a purple bow,fails,one thing,A girl in a gold-pink crown wears purple tulle and no separate bow shows.
+9,23,Attend-and-Excite prompts,CO3,a pink crown and a purple bow,succeeds,two clear things,A flat pink crown has a purple bow directly under it.
+9,23,Attend-and-Excite prompts,SDXL,a orange chair and a blue clock,mixed,two bodies or heads,An orange chair stands near a small blue clock that has grown orange legs.
+9,23,Attend-and-Excite prompts,CO3,a orange chair and a blue clock,mixed,two clear things,"A chair with a blue frame and orange cushion stands under a blue clock with an orange rim, so the two colors mix across both objects."
+9,23,Attend-and-Excite prompts,SDXL,a blue balloon and a blue bow,mixed,two clear things,Three blue balloons are tied to a blue bow where one balloon was asked for.
+9,23,Attend-and-Excite prompts,CO3,a blue balloon and a blue bow,succeeds,two clear things,One blue balloon is tied to one blue bow.
+9,23,Attend-and-Excite prompts,SDXL,a brown chair and a white bench,mixed,two bodies or heads,A brown low bench carries a small brown chair frame and nothing white appears.
+9,23,Attend-and-Excite prompts,CO3,a brown chair and a white bench,fails,fused hybrid,A brown padded seat is built onto a white bench as one piece of furniture and no separate chair shows.
+9,23,Attend-and-Excite prompts,SDXL,a white glasses and a orange balloon,mixed,two clear things,An orange balloon floats over orange spheres and a clear wine glass that is not white.
+9,23,Attend-and-Excite prompts,CO3,a white glasses and a orange balloon,mixed,two clear things,"A wine glass of white liquid stands beside a sagging orange balloon, so glasses became a drinking glass."
+9,23,Attend-and-Excite prompts,SDXL,a blue crown and a red balloon,fails,two bodies or heads,Red and blue balloons float over a red-and-blue tent-like shape that only loosely suggests a crown.
+9,23,Attend-and-Excite prompts,CO3,a blue crown and a red balloon,mixed,two clear things,A red balloon floats over a small blue crown placed on an unrequested blue bust.
+9,23,Attend-and-Excite prompts,SDXL,a purple chair and a red bow,mixed,two clear things,A purple chair has red legs and a red ribbon lies on a table beside it.
+9,23,Attend-and-Excite prompts,CO3,a purple chair and a red bow,succeeds,two clear things,A purple chair has a red bow tied to its back.
+10,24,T2I-CompBench Complex,SDXL,The square book was next to the green notebook.,mixed,two clear things,An open book lies on a stack before an upright green notebook and neither is clearly square.
+10,24,T2I-CompBench Complex,SynGen,The square book was next to the green notebook.,fails,one thing,One green book lies on another green book beside a mug and no separate square book shows.
+10,24,T2I-CompBench Complex,ToMe,The square book was next to the green notebook.,mixed,two clear things,"Two green books appear, one held by an unrequested hand, and neither is clearly square."
+10,24,T2I-CompBench Complex,CO3,The square book was next to the green notebook.,succeeds,two clear things,A dark green notebook lies near a paler squarer book on a table.
+10,24,T2I-CompBench Complex,SDXL,The black sofa was on the left of the white coffee table.,mixed,two clear things,A dark sofa sits behind a white table rather than to its left.
+10,24,T2I-CompBench Complex,SynGen,The black sofa was on the left of the white coffee table.,mixed,two clear things,A black sofa sits by a coffee table that is black instead of white.
+10,24,T2I-CompBench Complex,ToMe,The black sofa was on the left of the white coffee table.,mixed,two clear things,Black sofas surround a gray glass table that is not white.
+10,24,T2I-CompBench Complex,CO3,The black sofa was on the left of the white coffee table.,succeeds,two clear things,A black sofa sits to the left of and behind a round white table.
+10,24,T2I-CompBench Complex,SDXL,The yellow pencil was next to the blue pen.,mixed,two clear things,Two yellow pencils cross a blue pen-like stick.
+10,24,T2I-CompBench Complex,SynGen,The yellow pencil was next to the blue pen.,fails,one thing,One yellow pencil with a blue-tinted tip lies by blue scribbles and no pen shows.
+10,24,T2I-CompBench Complex,ToMe,The yellow pencil was next to the blue pen.,mixed,two clear things,Many yellow and blue pencils repeat as a wallpaper pattern with no single pair.
+10,24,T2I-CompBench Complex,CO3,The yellow pencil was next to the blue pen.,succeeds,two clear things,A yellow pencil and a blue pen stand side by side.
+10,24,T2I-CompBench Complex,SDXL,The red apple was next to the yellow pear.,mixed,two clear things,A red apple sits among yellow pears and a yellow apple-like fruit under large leaves.
+10,24,T2I-CompBench Complex,SynGen,The red apple was next to the yellow pear.,mixed,two clear things,"A yellow apple stands by a pear whose lower half is red, so the colors have swapped and blended."
+10,24,T2I-CompBench Complex,ToMe,The red apple was next to the yellow pear.,mixed,two clear things,Red apples and yellow pears repeat as a wallpaper pattern with no single pair.
+10,24,T2I-CompBench Complex,CO3,The red apple was next to the yellow pear.,succeeds,two clear things,One red apple and one yellow pear sit apart.
+10,24,T2I-CompBench Complex,SDXL,The square coaster was next to the circular glass.,mixed,two clear things,A glass stands on a square coaster rather than next to it.
+10,24,T2I-CompBench Complex,SynGen,The square coaster was next to the circular glass.,mixed,two clear things,A glass stands on a round coaster that is not square.
+10,24,T2I-CompBench Complex,ToMe,The square coaster was next to the circular glass.,mixed,two clear things,A hand holds a square glass panel near a red wine glass on a ridged glass coaster.
+10,24,T2I-CompBench Complex,CO3,The square coaster was next to the circular glass.,mixed,two clear things,A round glass stands on a small square coaster rather than next to it.
+10,24,T2I-CompBench Complex,SDXL,The colorful balloons floated near the shiny silver airplane.,mixed,two clear things,Hot-air balloons fly over a red-and-white airplane instead of a silver one.
+10,24,T2I-CompBench Complex,SynGen,The colorful balloons floated near the shiny silver airplane.,succeeds,two clear things,A bunch of colored balloons floats above a silver-white airplane.
+10,24,T2I-CompBench Complex,ToMe,The colorful balloons floated near the shiny silver airplane.,mixed,two bodies or heads,Balloons fill the frame and only broken silver airplane pieces show between them.
+10,24,T2I-CompBench Complex,CO3,The colorful balloons floated near the shiny silver airplane.,succeeds,two clear things,Colored balloons float above a clear blue-and-silver airplane.
+10,24,T2I-CompBench Complex,SDXL,The soft fur coat draped over the hard armor and the sharp claws.,mixed,not applicable,A furred wolf-cat in armor fills the frame and no claws show.
+10,24,T2I-CompBench Complex,SynGen,The soft fur coat draped over the hard armor and the sharp claws.,mixed,not applicable,A cat-like beast wears fur over leather armor and no sharp claws are clear.
+10,24,T2I-CompBench Complex,ToMe,The soft fur coat draped over the hard armor and the sharp claws.,fails,not applicable,A sketched woman in a fur hood has claw-like fingers and no armor.
+10,24,T2I-CompBench Complex,CO3,The soft fur coat draped over the hard armor and the sharp claws.,succeeds,not applicable,A white cat-headed knight wears a fur-trimmed cape over armor and has clawed feet.
+10,24,T2I-CompBench Complex,SDXL,The triangular prism was leaning against the wooden sphere and the rusted cube.,fails,two bodies or heads,Rusted faceted shapes and wire frames stand together with no wooden sphere or plain cube.
+10,24,T2I-CompBench Complex,SynGen,The triangular prism was leaning against the wooden sphere and the rusted cube.,fails,two bodies or heads,A rusted triangular frame leans on a faceted rusted lump with no sphere or cube.
+10,24,T2I-CompBench Complex,ToMe,The triangular prism was leaning against the wooden sphere and the rusted cube.,mixed,two clear things,A glass prism stands between two rusted boxes and there is no sphere.
+10,24,T2I-CompBench Complex,CO3,The triangular prism was leaning against the wooden sphere and the rusted cube.,succeeds,two clear things,"A triangular frame stands with a brown sphere and an orange-brown cube, all three separate."
+10,24,T2I-CompBench Complex,SDXL,"The sharp, crisp crack of the bat hitting the ball signaled a home run, a moment of triumph.",fails,one thing,A baseball lies on asphalt with no bat or batter.
+10,24,T2I-CompBench Complex,SynGen,"The sharp, crisp crack of the bat hitting the ball signaled a home run, a moment of triumph.",fails,one thing,Cracked ground and a net shadow fill the frame with no ball or bat.
+10,24,T2I-CompBench Complex,ToMe,"The sharp, crisp crack of the bat hitting the ball signaled a home run, a moment of triumph.",fails,one thing,A baseball sits in a literal crack in the ground with no bat.
+10,24,T2I-CompBench Complex,CO3,"The sharp, crisp crack of the bat hitting the ball signaled a home run, a moment of triumph.",succeeds,two clear things,A batter swings a bat at a ball in front of a stadium crowd.
+10,24,T2I-CompBench Complex,SDXL,The flickering torch lit the dark cave and the dim tunnel.,fails,not applicable,A gray cave tunnel appears with no torch.
+10,24,T2I-CompBench Complex,SynGen,The flickering torch lit the dark cave and the dim tunnel.,mixed,not applicable,A figure stands in a cave with a flame rising from where its head should be.
+10,24,T2I-CompBench Complex,ToMe,The flickering torch lit the dark cave and the dim tunnel.,mixed,not applicable,A torch at the bottom edge gives off a large white plume in a sketched tunnel.
+10,24,T2I-CompBench Complex,CO3,The flickering torch lit the dark cave and the dim tunnel.,mixed,not applicable,A flame burns on the floor of an orange-lit cave with no torch shape.
+11,25,RareBench,SDXL,a hairless yak and a horned lemon,mixed,two clear things,"A furred ox has three plain lemons on its head, so the yak is not hairless and the lemons have no horns."
+11,25,RareBench,ToMe,a hairless yak and a horned lemon,mixed,two clear things,A shaggy yak stands by a plain lemon with no horns.
+11,25,RareBench,R2F,a hairless yak and a horned lemon,mixed,two clear things,A shaggy yak has two plain lemons pressed to its side with leaves.
+11,25,RareBench,CO3,a hairless yak and a horned lemon,mixed,two clear things,A short-haired horned bull with a pale tuft stands between two lemons that have no horns.
+11,25,RareBench,SDXL,a horned pelican and a spotted lion,fails,one thing,Two pelican-like birds stand on a shore and there is no lion.
+11,25,RareBench,ToMe,a horned pelican and a spotted lion,fails,one thing,One bird with a curled horn stands in a round engraving and there is no lion.
+11,25,RareBench,R2F,a horned pelican and a spotted lion,fails,one thing,A pelican and a vulture-like bird stand together and there is no lion.
+11,25,RareBench,CO3,a horned pelican and a spotted lion,mixed,two clear things,"Two large birds flank a small spotted lion-like cat, and one bird has taken the spots while neither has clear horns."
+11,25,RareBench,SDXL,A hairy octopus is hugging a wigged polar bear,mixed,two bodies or heads,A polar bear holds a cub whose lower body becomes octopus tentacles and no wig shows.
+11,25,RareBench,ToMe,A hairy octopus is hugging a wigged polar bear,fails,one thing,Polar bears and a seal stand before a hairy mound with a bear's face and no octopus.
+11,25,RareBench,R2F,A hairy octopus is hugging a wigged polar bear,fails,one thing,Two bears hug and there is no octopus.
+11,25,RareBench,CO3,A hairy octopus is hugging a wigged polar bear,mixed,two bodies or heads,A polar bear hugs a curly-haired bear-faced creature whose lower body is purple tentacles.
+11,25,RareBench,SDXL,A wooly shark is swimming around a banana shaped pumpkin,mixed,two clear things,A smooth shark swims across an ordinary round pumpkin with no wool or banana shape.
+11,25,RareBench,ToMe,A wooly shark is swimming around a banana shaped pumpkin,mixed,two clear things,A woolly shark rests on an ordinary round pumpkin with no banana shape.
+11,25,RareBench,R2F,A wooly shark is swimming around a banana shaped pumpkin,fails,one thing,A pumpkin with a face sits beside a banana with a tail fin and there is no shark.
+11,25,RareBench,CO3,A wooly shark is swimming around a banana shaped pumpkin,mixed,two clear things,A shark swims above an orange banana-shaped gourd and wool on the shark cannot be confirmed at this size.
+11,25,RareBench,SDXL,A wooly alligator is guarding a banana shaped bottle,mixed,two clear things,A yellow woolly alligator lies beside an ordinary bottle with no banana shape.
+11,25,RareBench,ToMe,A wooly alligator is guarding a banana shaped bottle,fails,one thing,A gray knitted hippo-like animal stands by an ordinary banana with no bottle.
+11,25,RareBench,R2F,A wooly alligator is guarding a banana shaped bottle,mixed,two bodies or heads,A gray knitted animal has a bottle on its back and a separate banana beside it.
+11,25,RareBench,CO3,A wooly alligator is guarding a banana shaped bottle,succeeds,two clear things,A teal knitted alligator holds a banana with a green bottle neck.
+11,25,RareBench,SDXL,"A giant spider with red legs knitting a webbed hammock between stars in deep space, while an astronaut pink ant relaxes in it",mixed,two clear things,A red-legged spider hangs over a hammock holding a small astronaut and no pink ant shows.
+11,25,RareBench,ToMe,"A giant spider with red legs knitting a webbed hammock between stars in deep space, while an astronaut pink ant relaxes in it",mixed,two clear things,A red-suited astronaut sits in a hammock beside a pink ant-like insect and the giant spider is absent.
+11,25,RareBench,R2F,"A giant spider with red legs knitting a webbed hammock between stars in deep space, while an astronaut pink ant relaxes in it",mixed,two clear things,A pink spider with pink legs dominates and a small astronaut stands at its side with no ant.
+11,25,RareBench,CO3,"A giant spider with red legs knitting a webbed hammock between stars in deep space, while an astronaut pink ant relaxes in it",mixed,two clear things,A red spider sits in a pink hammock beside a separate astronaut and only a tiny dark ant appears.
+11,25,RareBench,SDXL,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,fails,one thing,Two gray human-like figures sit at a table under a swimming turtle and there is no owl.
+11,25,RareBench,ToMe,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,fails,one thing,A large sea turtle and a standing man fill a dry library with no owl.
+11,25,RareBench,R2F,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,mixed,two clear things,Two owl-like figures sit among coral while a plain turtle swims overhead.
+11,25,RareBench,CO3,A knighted turtle and a wizarding owl debating philosophy in an underwater library made of coral,succeeds,two clear things,An armored turtle and an owl sit at a desk with a book under water arches.
+11,25,RareBench,SDXL,"A thorny kangaroo riding a unicycle on a tightrope stretched across a canyon filled with floating jellyfish emitting soft, glowing lights",mixed,not applicable,"A kangaroo rides a unicycle in a canyon with glowing strands, and no thorns, rope or clear jellyfish show."
+11,25,RareBench,ToMe,"A thorny kangaroo riding a unicycle on a tightrope stretched across a canyon filled with floating jellyfish emitting soft, glowing lights",mixed,not applicable,A rat-like animal rides a bicycle instead of a unicycle under pink jellyfish with no tightrope.
+11,25,RareBench,R2F,"A thorny kangaroo riding a unicycle on a tightrope stretched across a canyon filled with floating jellyfish emitting soft, glowing lights",mixed,not applicable,A kangaroo balances on a small unicycle on a line in a canyon with no jellyfish.
+11,25,RareBench,CO3,"A thorny kangaroo riding a unicycle on a tightrope stretched across a canyon filled with floating jellyfish emitting soft, glowing lights",mixed,not applicable,A kangaroo rides a unicycle on a rope between two jellyfish and shows no thorns.
