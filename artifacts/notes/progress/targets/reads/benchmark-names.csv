@@ -6,3 +6,4 @@ LogicalGuidance Table 2,CMNIST,AND,"CMNIST, AND"
 LogicalGuidance Table 4,CMNIST,AND,"CMNIST, AND"
 LogicalGuidance Table 11,CMNIST,AND,"CMNIST, AND"
 SuperDiff Table 1,CIFAR-10 split into two disjoint partitions A and B,unconditional image generation from two models trained on disjoint data (logical OR),CIFAR-10 disjoint halves
+Bradley-Projective Table 1,CLEVR location-conditioned,Compose N=5 distributions,"CLEVR location-conditioned, 5 objects composed"

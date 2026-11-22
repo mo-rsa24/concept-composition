@@ -51,6 +51,12 @@ def main():
     for row in rows:
         row['dataset'] = names.get((row['source_table'], row['dataset'], row['task']), row['dataset'])
 
+    # A table with no arrow leaves `better` empty; a row that sets a target states it here, with the reason.
+    with (HERE / 'direction-overrides.csv').open(newline='') as handle:
+        directions = {d['id']: d['better'] for d in csv.DictReader(handle)}
+    for row in rows:
+        row['better'] = directions.get(row['id'], row['better'])
+
     repeated = [key for key, count in Counter(row['id'] for row in rows).items() if count > 1]
     if repeated:
         sys.exit(f'{len(repeated)} repeated ids, first: {repeated[:3]}')
