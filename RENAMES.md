@@ -429,3 +429,9 @@ These earlier rows name a target that has since moved. Results folders are git-i
 | `2-classifier-guidance/artifacts/results/32-mnist-two-experts/` | `2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/` |
 
 The 109 moved files, their old and new paths and their checksums are in the [move manifest](artifacts/notes/session-closes/mnist-results-move-manifest.tsv). Report pages and the `data/mnist-canvas/` folders keep their names.
+
+## 2026-11-22: result files moved off the laptop, and the discriminator runs grouped
+
+Each result now keeps its front-facing pictures on the laptop. The other 13,317 files moved out, and the [restore manifest](artifacts/notes/progress/restore-manifest.tsv) lists each one with its old path, its copy in `/home/molef/PhD/_archive/concept-composition-offload-2026-11-22/`, its size, its checksum and its path on `/datasets`. The 71 rows with no `/datasets` path exist only in the laptop archive.
+
+The 72 discriminator run folders under `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/` moved from `<run>/` to `<group>/<run>/`. The [run-to-group list](artifacts/notes/progress/organise-groups.json) names each run's group.
