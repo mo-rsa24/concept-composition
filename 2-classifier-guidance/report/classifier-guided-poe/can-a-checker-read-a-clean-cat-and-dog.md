@@ -23,7 +23,7 @@ coin flip and 1 is perfect.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#readout-checkers-on-cat-and-dog) ➡️
 
-<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png" width="200" alt="Line chart of held-out balanced accuracy against sampler step 0 to 19 for four discriminators. Only the first rises above the 0.75 line, from step 7."></a>
+<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png" width="200" alt="Line chart of held-out balanced accuracy against sampler step 0 to 19 for four discriminators. Only the first rises above the 0.75 line, from step 7."></a>
 
 **Every discriminator with hybrids among its negatives failed the held-out check.** The chart plots
 held-out balanced accuracy (y) against sampler step 0 to 19 of 50 (x), one line per discriminator.
@@ -110,7 +110,7 @@ Navigation: ⬅️ [Previous](#training-on-the-samplers-own-states) | 📋 [TOC]
 | What | One source | The other source | What the code shows |
 |---|---|---|---|
 | the 2,000-step checker's reading at step 0 | 0.63 (checker loop) | 0.510 (plan 25's review) | two different tests. One adds noise to finished latents (`train_readout_pair.py` line 328), the other reads saved sampler states (lines 367 to 388). That this difference causes the gap is `inferred` |
-| what plan 23 trains on | the plan: no labels, joint drawings against product drawings | the script: only joint drawings the API called a faithful pair count as real | `train_readout_pair.py` lines 16 and 17 |
+| what plan 23 trains on | the plan: no labels, joint drawings against product drawings | the script: only joint drawings the API called a [faithful pair](can-a-second-push-name-each-animal.md#four-attempts-and-their-verdicts) count as real | `train_readout_pair.py` lines 16 and 17 |
 | whether plan 22 ran | its task boxes are all unticked | commit `db448f7e` and the rung 2 review record both failed checks | no code bears on this |
 
 ## What this cannot tell you

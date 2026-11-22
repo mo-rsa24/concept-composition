@@ -43,7 +43,7 @@ g = 1, seeds 0 to 63; eye calls in `eye_calls_claude_78_g1.csv`.
 
 ## five-versions
 
-<a href="five-versions/sheet-78.png"><img src="five-versions/sheet-78.png" width="400" alt="Five versions of 7 and 8 on the share-0.01 model"></a>
+`sheet-78.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-78.png`
 
 **What it shows.** On 7 & 8 the pair-aware push gives a clear 8 beside a clear 7 on 47 of 64 seeds
 at s = 10 (28 at s = 3); plain product 1, random push 1, best-of-2 1, best-of-16 16, separate-label

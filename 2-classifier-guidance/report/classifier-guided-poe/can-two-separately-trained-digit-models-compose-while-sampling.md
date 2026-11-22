@@ -199,7 +199,7 @@ The step's other 39 pictures, by folder and file count: `sheets/hard-masks/` (5)
 | Side chosen every step, sides forced apart | 0 | 0 |
 | The same, with the other half hidden | 34 | 56 |
 
-All eight counts are `verified` from [the step 6 count files](../../artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/counts). A side chosen afresh at every step keeps swapping: on 8 canvases of 4 and 7 with both pushes it swaps 14.1 times per canvas on average, from 10 to 19 `verified` (the side-flip explainer on the step 7 page).
+All eight counts are `verified` from the step 6 count files (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/counts`). A side chosen afresh at every step keeps swapping: on 8 canvases of 4 and 7 with both pushes it swaps 14.1 times per canvas on average, from 10 to 19 `verified` (the side-flip explainer on the step 7 page).
 
 ## Step 7: the side is chosen early and held
 
@@ -261,7 +261,7 @@ Each model trained on its own digits with broken stroke fragments of those digit
 | Own halves, no pushes | 124 | 146 | 157 |
 | Own halves, both pushes | 257 | 260 | no run |
 
-The counts are `verified` from [the side road's count files](../../artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/counts). With extra marks allowed the best run reads 123 of 320, under the plan's promising line of 160 `verified`. Both clutter model pairs miss the plan's own-digit check of 58 of 64 on some digits, so these counts carry that shortfall `stated`. One more training picture in this folder shows clothing items beside digits. It is left off this page because it shows product photographs, and no model here trained on it.
+The counts are `verified` from the side road's count files (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/counts`). With extra marks allowed the best run reads 123 of 320, under the plan's promising line of 160 `verified`. Both clutter model pairs miss the plan's own-digit check of 58 of 64 on some digits, so these counts carry that shortfall `stated`. One more training picture in this folder shows clothing items beside digits. It is left off this page because it shows product photographs, and no model here trained on it.
 
 ## Where the sources disagree
 

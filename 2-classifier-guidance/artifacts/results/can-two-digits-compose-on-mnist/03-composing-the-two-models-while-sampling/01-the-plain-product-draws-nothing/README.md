@@ -6,8 +6,8 @@
 
 <table>
 <tr>
-<td><a href="../../02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png"><img src="../../02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png" width="320" alt="64 canvases asked for 4 and 7, nearly all a fat white blob in one half"></a></td>
-<td><a href="sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png"><img src="sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, nearly all holding a single 4 or a single 7"></a></td>
+<td>`side-none-guided-e59-either-4-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png`</td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>Plain product: 0 of 64 clean for 4 and 7, mostly fat white blobs</td>
@@ -76,9 +76,9 @@ Navigation: ⬅️ [Why the product has nothing to draw](#why-the-product-has-no
 
 <table>
 <tr>
-<td><a href="sheets/shared-background-from-a-third-model/digits-4-and-7.png"><img src="sheets/shared-background-from-a-third-model/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7, mostly one fused shape"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/shared-background-from-a-third-model/digits-4-and-7.png`</td>
 <td><a href="sheets/plain-product-with-both-pushes/digits-4-and-7.png"><img src="sheets/plain-product-with-both-pushes/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7 with both pushes, mostly one fused shape"></a></td>
-<td><a href="sheets/plain-product-with-both-pushes-and-extra-steps/digits-4-and-7.png"><img src="sheets/plain-product-with-both-pushes-and-extra-steps/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7 with both pushes and extra steps, mostly one fused shape"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/plain-product-with-both-pushes-and-extra-steps/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>Third model as background: 0 of 64</td>
@@ -118,7 +118,7 @@ Navigation: ⬅️ [Why a new background or a push does not help](#why-a-new-bac
 
 A coin flip per seed gives one model the left half and the other the right. Both models still look at the whole canvas, and only the half each one owns is kept. Whatever a model tries to draw in the other half is thrown away, and the top-right picture shows the result: almost every canvas holds one 4 or one 7.
 
-The likely reason shows in [one step of the cropped run from Step 2](../02-giving-each-model-its-own-half/one-sampling-step-explainer.png). Shown that whole canvas, both models put their digit in the right half, so the left half, which the 0 to 4 model owns on that seed, would be nearly empty. Nobody counted how often this happens across the 320 canvases.
+The likely reason shows in one step of the cropped run from Step 2 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png`). Shown that whole canvas, both models put their digit in the right half, so the left half, which the 0 to 4 model owns on that seed, would be nearly empty. Nobody counted how often this happens across the 320 canvases.
 
 🔤 **The name:** half assignment
 - **Half:** the left or right 32 by 32 part of the canvas.
@@ -127,8 +127,8 @@ The likely reason shows in [one step of the cropped run from Step 2](../02-givin
 
 <table>
 <tr>
-<td><a href="sheets/each-model-sees-the-whole-canvas/digits-1-and-9.png"><img src="sheets/each-model-sees-the-whole-canvas/digits-1-and-9.png" width="320" alt="64 canvases asked for 1 and 9 with each model kept on one half"></a></td>
-<td><a href="sheets/whole-canvas-with-a-zero-strength-push/digits-1-and-9.png"><img src="sheets/whole-canvas-with-a-zero-strength-push/digits-1-and-9.png" width="320" alt="the same 64 canvases, with a push of strength zero"></a></td>
+<td>`digits-1-and-9.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-1-and-9.png`</td>
+<td>`digits-1-and-9.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/whole-canvas-with-a-zero-strength-push/digits-1-and-9.png`</td>
 </tr>
 <tr>
 <td>No push: 2 of 64 clean for 1 and 9</td>
@@ -236,13 +236,13 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [Plain product on 4 and 7](../../02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png) with [its counts](../../02-two-models-trained-apart/counts/cells/side-none-guided-e59-either/counts.json) | blank background with spread 0.5, 0 of 320 | `two_experts.py cells --base floor --tau 0.5 --push none`, in plan 32 | `side-none-guided-e59-either` |
+| Plain product on 4 and 7 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/counts/cells/side-none-guided-e59-either/counts.json`) | blank background with spread 0.5, 0 of 320 | `two_experts.py cells --base floor --tau 0.5 --push none`, in plan 32 | `side-none-guided-e59-either` |
 | [Counts for the average background](../../02-two-models-trained-apart/counts/cells/side-none-avgnull/counts.json) | plain product with the average "no digit" background, 0 of 320, no sheet kept | `two_experts.py cells --base avgnull --tau 0 --push none`, in plan 32 | `side-none-avgnull` |
-| [Each model sees the whole canvas](sheets/each-model-sees-the-whole-canvas/) with [its counts](counts/each-model-sees-the-whole-canvas.json) | 5 sheets, 4 of 320 | `two_experts.py cells --compose region --push none`, on the cluster | `e0-region` |
-| [The same with a zero-strength push](sheets/whole-canvas-with-a-zero-strength-push/) with [its counts](counts/whole-canvas-with-a-zero-strength-push.json) | 5 sheets, 4 of 320, matching the row above | the same command with `--push zero` | `e0-region-zero` |
-| [Background from a third model](sheets/shared-background-from-a-third-model/) with [its counts](counts/shared-background-from-a-third-model.json) | 5 sheets, 0 of 320 | `two_experts.py cells --base union --push none` | `e1-union` |
-| [Plain product with both pushes](sheets/plain-product-with-both-pushes/) with [its counts](counts/plain-product-with-both-pushes.json) | 5 sheets, 1 of 320 | `two_experts.py cells --base avgnull --compose product --push both` | `fullpoe-either-both` |
-| [The same with extra steps](sheets/plain-product-with-both-pushes-and-extra-steps/) with [its counts](counts/plain-product-with-both-pushes-and-extra-steps.json) | 5 sheets, 0 of 320 | the same command with `--lang-k 5 --lang-c 3` | `fullpoe-either-both-lang` |
+| Each model sees the whole canvas (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/counts/each-model-sees-the-whole-canvas.json`) | 5 sheets, 4 of 320 | `two_experts.py cells --compose region --push none`, on the cluster | `e0-region` |
+| The same with a zero-strength push (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/whole-canvas-with-a-zero-strength-push`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/counts/whole-canvas-with-a-zero-strength-push.json`) | 5 sheets, 4 of 320, matching the row above | the same command with `--push zero` | `e0-region-zero` |
+| Background from a third model (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/shared-background-from-a-third-model`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/counts/shared-background-from-a-third-model.json`) | 5 sheets, 0 of 320 | `two_experts.py cells --base union --push none` | `e1-union` |
+| [Plain product with both pushes](sheets/plain-product-with-both-pushes/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/counts/plain-product-with-both-pushes.json`) | 5 sheets, 1 of 320 | `two_experts.py cells --base avgnull --compose product --push both` | `fullpoe-either-both` |
+| The same with extra steps (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/plain-product-with-both-pushes-and-extra-steps`) with [its counts](counts/plain-product-with-both-pushes-and-extra-steps.json) | 5 sheets, 0 of 320 | the same command with `--lang-k 5 --lang-c 3` | `fullpoe-either-both-lang` |
 
 **Where it came from.** The bars were written before these runs in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. The launch scripts are [the half-assignment and third-model script](../../../../../scripts/mnist/two_experts_e0e1.sh) and [the pushes script](../../../../../scripts/mnist/two_experts_fullpoe.sh). The two half-assignment count files list a background with spread 0.3, and that code path never reads it. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The models and raw canvases stay in `data/mnist-canvas/33-mnist-experts-at-inference/` and on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 

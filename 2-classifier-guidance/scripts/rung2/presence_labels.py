@@ -22,7 +22,7 @@ import json
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-A = HERE.parents[1] / "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/api-labels"
+A = Path("/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/by-run") / "api-labels"
 
 
 def rows(name):

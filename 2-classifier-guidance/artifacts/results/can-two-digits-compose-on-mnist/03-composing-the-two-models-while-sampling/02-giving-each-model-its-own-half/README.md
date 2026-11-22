@@ -6,7 +6,7 @@
 
 <table>
 <tr>
-<td><a href="../01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png"><img src="../01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, nearly all holding a single digit"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png`</td>
 <td><a href="sheets/each-model-on-its-own-half/digits-4-and-7.png"><img src="sheets/each-model-on-its-own-half/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, most holding a shape in each half and 28 framed green"></a></td>
 </tr>
 <tr>
@@ -48,7 +48,7 @@ Navigation: ⬅️ [Words](#words-this-page-uses) | 📋 [TOC](#table-of-content
 
 **Each step cuts the noisy canvas in two, gives one half to each model, and joins their two noise predictions.**
 
-<a href="one-sampling-step-explainer.png"><img src="one-sampling-step-explainer.png" width="420" alt="one real sampling step: the noisy canvas, the half each model sees, each model's guess with and without the crop, the pushes, and the run from noise to a finished 4 and 7"></a>
+`one-sampling-step-explainer.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png`
 
 The picture is step 26 of 50 from a real run asked for 4 and 7 on seed 0, where the coin gave the left half to the 0 to 4 model.
 
@@ -90,7 +90,7 @@ Navigation: ⬅️ [How the side gets picked](#how-the-side-gets-picked) | 📋 
 
 **Most of the 196 canvases that miss hold two shapes, and the judge cannot read at least one of them as the asked digit.**
 
-<a href="sheets/each-model-on-its-own-half/digits-2-and-8.png"><img src="sheets/each-model-on-its-own-half/digits-2-and-8.png" width="420" alt="64 canvases asked for 2 and 8, 15 framed green and most others holding a digit beside a thin or broken stroke"></a>
+`digits-2-and-8.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half/digits-2-and-8.png`
 
 The sheet is the weakest pair, 2 and 8, at 15 of 64. Many grey tiles hold one good digit beside a thin or broken stroke. On the 4 and 7 sheet, a stroke like a 1 often stands where the 4 belongs.
 
@@ -181,9 +181,9 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [One sampling step](one-sampling-step-explainer.png) | step 26 of 50, asked for 4 and 7, seed 0, from a run with both pushes | drawn by `make_plan33_step.py` | `one-sampler-step` |
-| [Each model on its own half](sheets/each-model-on-its-own-half/) with [its counts](counts/each-model-on-its-own-half.json) | 5 sheets, 124 of 320 | `two_experts.py cells --compose crop --push none`, on the cluster | `e0-crop` |
-| [The second run](sheets/each-model-on-its-own-half-second-run/) with [its counts](counts/each-model-on-its-own-half-second-run.json) | 5 sheets, 124 of 320, matching the row above | the same setting, run again as the no-push reference in the batch that tests the checker pushes | `crop-nc-none` |
+| One sampling step (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png`) | step 26 of 50, asked for 4 and 7, seed 0, from a run with both pushes | drawn by `make_plan33_step.py` | `one-sampler-step` |
+| [Each model on its own half](sheets/each-model-on-its-own-half/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/counts/each-model-on-its-own-half.json`) | 5 sheets, 124 of 320 | `two_experts.py cells --compose crop --push none`, on the cluster | `e0-crop` |
+| The second run (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/counts/each-model-on-its-own-half-second-run.json`) | 5 sheets, 124 of 320, matching the row above | the same setting, run again as the no-push reference in the batch that tests the checker pushes | `crop-nc-none` |
 
 **Where it came from.** The bars were written before these runs in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. The launch scripts are [the first run's script](../../../../../scripts/mnist/two_experts_e0e1.sh) and [the second run's script](../../../../../scripts/mnist/two_experts_crop_e4.sh), and [the explainer's script](../../../../../scripts/mnist/make_plan33_step.py) draws the picture. Both count files list a background with spread 0.3, and the crop code path never reads it. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The models and raw canvases stay in `data/mnist-canvas/33-mnist-experts-at-inference/` and on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 

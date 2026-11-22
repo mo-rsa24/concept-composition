@@ -61,7 +61,7 @@ and their pushes gave about 7 and 3.
 
 As a judge of finished pictures it is far better than the readout checker. On SDXL's half-drawn guesses it reads
 0.50 up to step 10, and 0.72 at step 10 and 0.82 at step 15 after training on 4,966 guesses
-([what it sees by step](../../results/does-a-small-discriminator-steer-cat-x-dog/half-drawn-guesses/what-the-checker-sees-by-step.png)).
+([what it sees by step](../../results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/half-drawn-guesses.png)).
 Before step 10 the guess holds no second animal, so no picture judge can read it.
 
 As a push it left the layout as plain PoE on 7 or 8 of 8 seeds, in all three versions, while raising its own
@@ -74,7 +74,7 @@ from SDXL's own features and reaches the layout. The fine-tuned network is a goo
 Four tries per seed from four starting noises, each pushed by iteration 6; the fine-tuned CLIP picks the best.
 Two near-clean cat-and-dog pictures of 8 seeds (a dog with extra cat ears beside a kitten; a dog with one stray
 ear beside a clean cat), against 0 when picking among plain PoE tries. CLIP called one two-dog picture clean
-([the three picks](../../results/does-a-small-discriminator-steer-cat-x-dog/push-then-pick/three-picks-called-clean.png)).
+([the three picks](../../results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/push-then-pick.png)).
 
 ## What the evidence says
 

@@ -7,7 +7,7 @@ The work asks one question in three stages. Each stage removes a piece of help t
 <table>
 <tr>
 <td><a href="01-one-model-that-saw-a-few-pairs/loop2/final-seeds64.png"><img src="01-one-model-that-saw-a-few-pairs/loop2/final-seeds64.png" width="240" alt="five held-out digit pairs, with and without the pushes, drawn by one model"></a></td>
-<td><a href="02-two-models-trained-apart/sheets/side-both-guided-e59-either-4-7.png"><img src="02-two-models-trained-apart/sheets/side-both-guided-e59-either-4-7.png" width="240" alt="64 canvases asked for 4 and 7, all single white blobs"></a></td>
+<td>`side-both-guided-e59-either-4-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-both-guided-e59-either-4-7.png`</td>
 <td><a href="03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/with-both-pushes/digits-3-and-8.png"><img src="03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/with-both-pushes/digits-3-and-8.png" width="240" alt="64 canvases asked for 3 and 8, nearly all a clear 3 and 8"></a></td>
 </tr>
 <tr>

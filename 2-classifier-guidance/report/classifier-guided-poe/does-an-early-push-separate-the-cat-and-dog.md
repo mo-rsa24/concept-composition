@@ -42,7 +42,7 @@ bodies with a borrowed face or hidden head, 3 show two of one kind and 4 are not
 
 Navigation: ⬅️ [Previous](#the-result-on-32-new-seeds) | 📋 [TOC](#table-of-contents) | [Next](#how-hard-and-for-how-long) ➡️
 
-<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/top10-overlap-through-time.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/top10-overlap-through-time.png" width="200" alt="Line chart of how much the cat and dog attention maps overlap against sampler step, one line per seed. Product lines sit above most joint prompt lines from the early steps."></a>
+<a href="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png"><img src="../../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png" width="200" alt="Line chart of how much the cat and dog attention maps overlap against sampler step, one line per seed. Product lines sit above most joint prompt lines from the early steps."></a>
 
 **A push through SDXL's own features moved the layout, and pushes through the decoded picture changed
 faces and fur.** The chart plots the overlap of the top 10% of "cat" and "dog" attention (y,

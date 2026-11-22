@@ -6,7 +6,7 @@
 
 <table>
 <tr>
-<td><a href="../02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png"><img src="../02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, many with a faint mark or bare stroke where a digit belongs"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png`</td>
 <td><a href="sheets/both-pushes-retrained-checkers/digits-4-and-7.png"><img src="sheets/both-pushes-retrained-checkers/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, most with a clear 4 and a clear 7"></a></td>
 </tr>
 <tr>
@@ -87,8 +87,8 @@ The first two checkers run together as both pushes. Their two pushes are summed,
 
 <table>
 <tr>
-<td><a href="sheets/both-pushes-first-checkers/digits-4-and-7.png"><img src="sheets/both-pushes-first-checkers/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, most with two clear digits and some with a bare stroke for the 4"></a></td>
-<td><a href="sheets/one-half-ink-push-first-checkers/digits-4-and-7.png"><img src="sheets/one-half-ink-push-first-checkers/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7, most with two marks and several with a bare stroke where the 4 belongs"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-first-checkers/digits-4-and-7.png`</td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/one-half-ink-push-first-checkers/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>Both pushes, first checkers: 41 of 64 for 4 and 7, 241 of 320 overall</td>
@@ -125,7 +125,7 @@ The ink checker kept its original training because it only ever saw single digit
 
 <table>
 <tr>
-<td><a href="sheets/both-pushes-first-checkers/digits-4-and-7.png"><img src="sheets/both-pushes-first-checkers/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7 with the first checkers, 41 clean"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-first-checkers/digits-4-and-7.png`</td>
 <td><a href="sheets/both-pushes-retrained-checkers/digits-4-and-7.png"><img src="sheets/both-pushes-retrained-checkers/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7 with the retrained checkers, 47 clean"></a></td>
 </tr>
 <tr>
@@ -142,8 +142,8 @@ Navigation: ⬅️ [Why the checkers were retrained](#why-the-checkers-were-retr
 
 <table>
 <tr>
-<td><a href="../02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png"><img src="../02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png" width="320" alt="64 canvases asked for 4 and 7 with no push, 28 clean"></a></td>
-<td><a href="sheets/zero-strength-push/digits-4-and-7.png"><img src="sheets/zero-strength-push/digits-4-and-7.png" width="320" alt="the same 64 canvases with a zero push, 28 clean"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half-second-run/digits-4-and-7.png`</td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/zero-strength-push/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>No push: 28 of 64 for 4 and 7</td>
@@ -169,8 +169,8 @@ Navigation: ⬅️ [A push of zero](#a-push-of-zero-changes-nothing) | 📋 [TOC
 <table>
 <tr>
 <td><a href="sheets/both-pushes-retrained-checkers/digits-4-and-7.png"><img src="sheets/both-pushes-retrained-checkers/digits-4-and-7.png" width="240" alt="default settings, most canvases with a clear 4 and 7"></a></td>
-<td><a href="sheets/both-pushes-strength-3/digits-4-and-7.png"><img src="sheets/both-pushes-strength-3/digits-4-and-7.png" width="240" alt="strength 3, most canvases with a clear 4 and 7"></a></td>
-<td><a href="sheets/both-pushes-strength-30/digits-4-and-7.png"><img src="sheets/both-pushes-strength-30/digits-4-and-7.png" width="240" alt="strength 30, most canvases with two digits, some bent or scratched"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-strength-3/digits-4-and-7.png`</td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-strength-30/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>Default: 47 of 64 for 4 and 7</td>
@@ -178,8 +178,8 @@ Navigation: ⬅️ [A push of zero](#a-push-of-zero-changes-nothing) | 📋 [TOC
 <td>Strength 30: 48 of 64, some digits bent or scratched</td>
 </tr>
 <tr>
-<td><a href="sheets/both-pushes-size-limit-0-3/digits-4-and-7.png"><img src="sheets/both-pushes-size-limit-0-3/digits-4-and-7.png" width="240" alt="size limit 0.3, digits with stray marks and smudges beside them"></a></td>
-<td><a href="sheets/both-pushes-sampler-noise-0-5/digits-4-and-7.png"><img src="sheets/both-pushes-sampler-noise-0-5/digits-4-and-7.png" width="240" alt="sampler noise 0.5, several digits with extra strokes or bent out of shape"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-size-limit-0-3/digits-4-and-7.png`</td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-sampler-noise-0-5/digits-4-and-7.png`</td>
 <td></td>
 </tr>
 <tr>
@@ -321,15 +321,15 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [Both pushes, first checkers](sheets/both-pushes-first-checkers/) with [its counts](counts/both-pushes-first-checkers.json) | 241 of 320; most 4 and 7 canvases are clear, with a bare stroke for the 4 in some | `two_experts.py cells --compose crop --push both`, on the cluster, with the checkers from plan 32 | `e0-crop-both` |
-| [One-half ink push, first run](sheets/one-half-ink-push-first-checkers/) with [its counts](counts/one-half-ink-push-first-checkers.json) | 213 of 320; several 4 and 7 canvases hold a bare stroke for the 4 | the same command with `--push ink` | `e0-crop-ink` |
-| [Both pushes, retrained checkers](sheets/both-pushes-retrained-checkers/) with [its counts](counts/both-pushes-retrained-checkers.json) | 257 of 320, the default every later row is compared with | [the retraining script](../../../../../scripts/mnist/two_experts_crop_e4b.sh) with `--push both` | `crop-nc-both` |
-| [One-half ink push, second run](sheets/one-half-ink-push-second-run/) with [its counts](counts/one-half-ink-push-second-run.json) | 213 of 320; canvases identical to the first ink run | the same script with `--push ink`, using the unchanged ink checker | `crop-nc-ink` |
-| [Zero-strength push](sheets/zero-strength-push/) with [its counts](counts/zero-strength-push.json) | 124 of 320; canvases identical to the no-push run in step 2 | the same script with `--push zero` | `crop-nc-zero` |
-| [Strength 3](sheets/both-pushes-strength-3/) with [its counts](counts/both-pushes-strength-3.json) | 251 of 320; looks much like the default | [the settings script](../../../../../scripts/mnist/two_experts_crop_tune.sh) with `--s 3` | `crop-nc-both-s3` |
-| [Strength 30](sheets/both-pushes-strength-30/) with [its counts](counts/both-pushes-strength-30.json) | 247 of 320; some digits bent or scratched | the same script with `--s 30` | `crop-nc-both-s30` |
-| [Size limit 0.3](sheets/both-pushes-size-limit-0-3/) with [its counts](counts/both-pushes-size-limit-0-3.json) | 211 of 320; stray marks and smudges beside the digits | the same script with `--cap 0.3` | `crop-nc-both-cap0.3` |
-| [Sampler noise 0.5](sheets/both-pushes-sampler-noise-0-5/) with [its counts](counts/both-pushes-sampler-noise-0-5.json) | 197 of 320; several digits with extra strokes | the same script with `--eta 0.5` | `crop-nc-both-eta0.5` |
+| Both pushes, first checkers (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-first-checkers`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-first-checkers.json`) | 241 of 320; most 4 and 7 canvases are clear, with a bare stroke for the 4 in some | `two_experts.py cells --compose crop --push both`, on the cluster, with the checkers from plan 32 | `e0-crop-both` |
+| One-half ink push, first run (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/one-half-ink-push-first-checkers`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/one-half-ink-push-first-checkers.json`) | 213 of 320; several 4 and 7 canvases hold a bare stroke for the 4 | the same command with `--push ink` | `e0-crop-ink` |
+| [Both pushes, retrained checkers](sheets/both-pushes-retrained-checkers/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-retrained-checkers.json`) | 257 of 320, the default every later row is compared with | [the retraining script](../../../../../scripts/mnist/two_experts_crop_e4b.sh) with `--push both` | `crop-nc-both` |
+| One-half ink push, second run (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/one-half-ink-push-second-run`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/one-half-ink-push-second-run.json`) | 213 of 320; canvases identical to the first ink run | the same script with `--push ink`, using the unchanged ink checker | `crop-nc-ink` |
+| Zero-strength push (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/zero-strength-push`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/zero-strength-push.json`) | 124 of 320; canvases identical to the no-push run in step 2 | the same script with `--push zero` | `crop-nc-zero` |
+| Strength 3 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-strength-3`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-strength-3.json`) | 251 of 320; looks much like the default | [the settings script](../../../../../scripts/mnist/two_experts_crop_tune.sh) with `--s 3` | `crop-nc-both-s3` |
+| Strength 30 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-strength-30`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-strength-30.json`) | 247 of 320; some digits bent or scratched | the same script with `--s 30` | `crop-nc-both-s30` |
+| Size limit 0.3 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-size-limit-0-3`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-size-limit-0-3.json`) | 211 of 320; stray marks and smudges beside the digits | the same script with `--cap 0.3` | `crop-nc-both-cap0.3` |
+| Sampler noise 0.5 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-sampler-noise-0-5`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/counts/both-pushes-sampler-noise-0-5.json`) | 197 of 320; several digits with extra strokes | the same script with `--eta 0.5` | `crop-nc-both-eta0.5` |
 
 **Where it came from.** The bars were written before these runs in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The two models and the retrained checkers are in `2-classifier-guidance/data/mnist-canvas/33-mnist-experts-at-inference/models/`, and each run's raw canvases are on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 

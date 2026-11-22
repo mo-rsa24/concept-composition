@@ -6,9 +6,9 @@
 
 <table>
 <tr>
-<td><a href="sheets/zero-extra-steps/digits-4-and-7.png"><img src="sheets/zero-extra-steps/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7 with no extra steps, 47 with green frames"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/zero-extra-steps/digits-4-and-7.png`</td>
 <td><a href="sheets/five-extra-steps/digits-4-and-7.png"><img src="sheets/five-extra-steps/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7 with five extra steps, nearly all clear"></a></td>
-<td><a href="sheets/twenty-extra-steps/digits-4-and-7.png"><img src="sheets/twenty-extra-steps/digits-4-and-7.png" width="260" alt="64 canvases asked for 4 and 7 with twenty extra steps, every frame green"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/twenty-extra-steps/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>No extra steps: 47 of 64 clean for 4 and 7</td>
@@ -98,7 +98,7 @@ Navigation: ⬅️ [What one extra step does](#what-one-extra-step-does) | 📋 
 <table>
 <tr>
 <td><a href="../03-adding-the-checker-pushes/sheets/both-pushes-retrained-checkers/digits-4-and-7.png"><img src="../03-adding-the-checker-pushes/sheets/both-pushes-retrained-checkers/digits-4-and-7.png" width="320" alt="the default run on 4 and 7, 47 green frames"></a></td>
-<td><a href="sheets/zero-extra-steps/digits-4-and-7.png"><img src="sheets/zero-extra-steps/digits-4-and-7.png" width="320" alt="the zero-extra-step run on 4 and 7, the same 47 green frames"></a></td>
+<td>`digits-4-and-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/zero-extra-steps/digits-4-and-7.png`</td>
 </tr>
 <tr>
 <td>The default from step 3: 47 of 64</td>
@@ -197,9 +197,9 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [Zero extra steps](sheets/zero-extra-steps/) with [its counts](counts/zero-extra-steps.json) | 1 sheet, 47 of 64 on 4 and 7, with the same judge calls as the default | [the extra-step script](../../../../../scripts/mnist/two_experts_langevin.sh) with `--lang-k 0 --lang-c 0 --pairs 4-7` | `crop-nc-both-k0check` |
-| [Five extra steps](sheets/five-extra-steps/) with [its counts](counts/five-extra-steps.json) | 5 sheets, 298 of 320; on 4 and 7, 61 of 64 show a clear pair | the same script with `LK=5 LC=3` | `crop-nc-both-lang-k5-c3` |
-| [Twenty extra steps](sheets/twenty-extra-steps/) with [its counts](counts/twenty-extra-steps.json) | 5 sheets, 306 of 320; every frame on 4 and 7 is green | the same script with `LK=20 LC=3` | `crop-nc-both-lang-k20-c3` |
+| Zero extra steps (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/zero-extra-steps`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/counts/zero-extra-steps.json`) | 1 sheet, 47 of 64 on 4 and 7, with the same judge calls as the default | [the extra-step script](../../../../../scripts/mnist/two_experts_langevin.sh) with `--lang-k 0 --lang-c 0 --pairs 4-7` | `crop-nc-both-k0check` |
+| [Five extra steps](sheets/five-extra-steps/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/counts/five-extra-steps.json`) | 5 sheets, 298 of 320; on 4 and 7, 61 of 64 show a clear pair | the same script with `LK=5 LC=3` | `crop-nc-both-lang-k5-c3` |
+| Twenty extra steps (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/twenty-extra-steps`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/counts/twenty-extra-steps.json`) | 5 sheets, 306 of 320; every frame on 4 and 7 is green | the same script with `LK=20 LC=3` | `crop-nc-both-lang-k20-c3` |
 
 **Where it came from.** The bars were written before these runs in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The two models and the retrained checkers are in `2-classifier-guidance/data/mnist-canvas/33-mnist-experts-at-inference/models/`, and each run's raw canvases are on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 

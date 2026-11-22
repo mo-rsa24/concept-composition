@@ -46,7 +46,7 @@ Navigation: ⬅️ [Words](#words-this-page-uses) | 📋 [TOC](#table-of-content
 
 **Each model shows where its digit wants to go, and the two sides are assigned together so they can never share a half.**
 
-<a href="where-each-model-wants-its-digit-explainer.png"><img src="where-each-model-wants-its-digit-explainer.png" width="420" alt="noise canvas, each model's response map, and the vote between two layouts"></a>
+`where-each-model-wants-its-digit-explainer.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/where-each-model-wants-its-digit-explainer.png`
 
 The picture is one real step, step 4 of 50, for the digits 4 and 7. Each model predicts the noise twice, once told its digit and once told "nothing". The bright map is how much the digit label changed that prediction, and its average over each half gives four numbers, in thousandths:
 
@@ -73,7 +73,7 @@ Navigation: ⬅️ [How the side gets chosen](#how-the-side-gets-chosen) | 📋 
 
 **A canvas whose side keeps changing receives half-drawn digits in both halves, so the vote is added up over the noisy steps and then frozen.**
 
-<a href="side-flips-or-holds-explainer.png"><img src="side-flips-or-holds-explainer.png" width="420" alt="two grids of eight canvases by sampling step, one flipping colours and one holding"></a>
+`side-flips-or-holds-explainer.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/side-flips-or-holds-explainer.png`
 
 Each row of the picture is one canvas and each column one sampling step. Blue means the 0 to 4 model has the left half, and orange means it has the right. The top grid chooses again at every step, and the bottom grid stops choosing at the white line.
 
@@ -93,7 +93,7 @@ Navigation: ⬅️ [Why holding matters](#why-holding-the-side-matters) | 📋 [
 
 **Each model is shown its own half and a blank half, because a digit it never trained on makes it draw the wrong thing.**
 
-<a href="hide-the-other-half-and-join-explainer.png"><img src="hide-the-other-half-and-join-explainer.png" width="420" alt="each model's clean guess with and without the other half hidden, then the joined result"></a>
+`hide-the-other-half-and-join-explainer.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/hide-the-other-half-and-join-explainer.png`
 
 In the middle row of the picture, the 0 to 4 model looks at the whole canvas and starts a second 4 where the 7 belongs. With the other half replaced by a blank canvas carrying the same amount of noise, it draws one 4 in its own half. Each model's prediction is then kept on its own half only, and the two halves are joined.
 
@@ -188,11 +188,11 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [Where each model wants its digit](where-each-model-wants-its-digit-explainer.png) | one real step of the vote | drawn by `make_plan33_e0e_steps.py` from a run on 4 and 7 | `e0e-1` |
-| [The side flips or holds](side-flips-or-holds-explainer.png) | the side per canvas per step, both methods | same script | `e0e-2` |
-| [Hide the other half and join](hide-the-other-half-and-join-explainer.png) | one model's guess with and without hiding | same script | `e0e-3` |
-| [Side held, no pushes](sheets/side-held-no-pushes/) with [its counts](counts/side-held-no-pushes.json) | 5 sheets, 259 of 320 | `two_experts.py cells --compose inferred-lock --push none`, on the cluster | `e0e-inferred-lock` |
-| [Side held, both pushes](sheets/side-held-with-both-pushes/) with [its counts](counts/side-held-with-both-pushes.json) | 5 sheets, 310 of 320 | the same command with `--push both` | `e0e-inferred-lock-both` |
+| Where each model wants its digit (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/where-each-model-wants-its-digit-explainer.png`) | one real step of the vote | drawn by `make_plan33_e0e_steps.py` from a run on 4 and 7 | `e0e-1` |
+| The side flips or holds (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/side-flips-or-holds-explainer.png`) | the side per canvas per step, both methods | same script | `e0e-2` |
+| Hide the other half and join (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/hide-the-other-half-and-join-explainer.png`) | one model's guess with and without hiding | same script | `e0e-3` |
+| Side held, no pushes (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/sheets/side-held-no-pushes`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/counts/side-held-no-pushes.json`) | 5 sheets, 259 of 320 | `two_experts.py cells --compose inferred-lock --push none`, on the cluster | `e0e-inferred-lock` |
+| [Side held, both pushes](sheets/side-held-with-both-pushes/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/counts/side-held-with-both-pushes.json`) | 5 sheets, 310 of 320 | the same command with `--push both` | `e0e-inferred-lock-both` |
 
 **Where it came from.** The bars were written before these runs in [plan 33's review file](../../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../../plans/33-experts-that-compose-at-inference.md) holds the design. Every file's original location and checksum is in [the file origins list](../file-origins.tsv). The models and raw canvases stay in `data/mnist-canvas/33-mnist-experts-at-inference/` and on the cluster at `/home-mscluster/mmolefe/poe_repair_min_scratch/mnist-canvas/33-experts-at-inference/`.
 

@@ -6,7 +6,7 @@
 
 <table>
 <tr>
-<td><a href="sheets/no-pushes/digits-3-and-8.png"><img src="sheets/no-pushes/digits-3-and-8.png" width="320" alt="64 canvases asked for 3 and 8 without pushes, most clear, with thin or broken digits among the rejected ones"></a></td>
+<td>`digits-3-and-8.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/no-pushes/digits-3-and-8.png`</td>
 <td><a href="sheets/with-both-pushes/digits-3-and-8.png"><img src="sheets/with-both-pushes/digits-3-and-8.png" width="320" alt="64 canvases asked for 3 and 8 with both pushes, nearly all a clear 3 and 8"></a></td>
 </tr>
 <tr>
@@ -115,14 +115,14 @@ Navigation: ⬅️ [Whether it cleared the written bars](#whether-it-cleared-the
 
 The plan counts its headline by eye because the judge can reject digits a person would accept. Its rule is to look at every tile the judge rejected on any pair under 58 of 64. Two pairs qualify, which makes 15 tiles.
 
-<a href="eye-check/eye-calls-with-reasons.png"><img src="eye-check/eye-calls-with-reasons.png" width="420" alt="the 15 rejected canvases framed green, orange or red by call, each with its reason"></a>
+`eye-calls-with-reasons.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/eye-calls-with-reasons.png`
 
 Every tile is shown above with its call and the reason for it, so any call can be overruled.
 
 <table>
 <tr>
-<td><a href="eye-check/rejected-tiles__digits-3-and-8.png"><img src="eye-check/rejected-tiles__digits-3-and-8.png" width="320" alt="the 8 canvases the judge rejected for 3 and 8, each labelled with its seed"></a></td>
-<td><a href="eye-check/rejected-tiles__digits-4-and-9.png"><img src="eye-check/rejected-tiles__digits-4-and-9.png" width="320" alt="the 7 canvases the judge rejected for 4 and 9, each labelled with its seed"></a></td>
+<td>`rejected-tiles__digits-3-and-8.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-3-and-8.png`</td>
+<td>`rejected-tiles__digits-4-and-9.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-4-and-9.png`</td>
 </tr>
 <tr>
 <td>3 and 8: seed 183 is a clear 8 and 3. Seed 144 draws a 2 where the 3 belongs, and seeds 141, 159 and 167 draw a broken stroke where the 8 belongs.</td>
@@ -230,10 +230,10 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [Side held, no pushes](sheets/no-pushes/) with [its counts](counts/no-pushes.json) | 20 sheets, 1,043 of 1,280 | `two_experts.py cells --compose inferred-lock --push none --eval-seed0 128`, from [the final-test launcher](../../../../../scripts/mnist/two_experts_e0e_final.sh), on the cluster | `e0e-final-none` |
-| [Side held, both pushes](sheets/with-both-pushes/) with [its counts](counts/with-both-pushes.json) | 20 sheets, 1,200 of 1,280 | the same command with `--push both` and the two retrained checkers, strength 10, cap 0.1 | `e0e-final-both` |
-| [Rejected tiles for 3 and 8](eye-check/rejected-tiles__digits-3-and-8.png) | the 8 canvases the judge rejected, enlarged, labelled by seed | cut from that run's saved canvases by the judge-rejection check | none |
-| [Rejected tiles for 4 and 9](eye-check/rejected-tiles__digits-4-and-9.png) | the 7 canvases the judge rejected, enlarged, labelled by seed | the same check | none |
+| Side held, no pushes (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/no-pushes`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/counts/no-pushes.json`) | 20 sheets, 1,043 of 1,280 | `two_experts.py cells --compose inferred-lock --push none --eval-seed0 128`, from [the final-test launcher](../../../../../scripts/mnist/two_experts_e0e_final.sh), on the cluster | `e0e-final-none` |
+| [Side held, both pushes](sheets/with-both-pushes/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/counts/with-both-pushes.json`) | 20 sheets, 1,200 of 1,280 | the same command with `--push both` and the two retrained checkers, strength 10, cap 0.1 | `e0e-final-both` |
+| Rejected tiles for 3 and 8 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-3-and-8.png`) | the 8 canvases the judge rejected, enlarged, labelled by seed | cut from that run's saved canvases by the judge-rejection check | none |
+| Rejected tiles for 4 and 9 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-4-and-9.png`) | the 7 canvases the judge rejected, enlarged, labelled by seed | the same check | none |
 | [The calls by eye](eye-check/eye-calls.json) | one call per rejected tile, 15 in all | Claude, at full size with the judge's reason hidden, on 2026-11-22 | none |
 
 **Reading the counts files.** The field `total_of_320` holds this run's total out of 1,280, because the script names that field for the five-pair runs. The field `tolerant` is the count that allows extra marks.

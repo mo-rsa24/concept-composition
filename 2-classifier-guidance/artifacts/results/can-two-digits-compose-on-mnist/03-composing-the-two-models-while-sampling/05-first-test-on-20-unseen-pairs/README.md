@@ -6,7 +6,7 @@
 
 <table>
 <tr>
-<td><a href="sheets/no-pushes/digits-4-and-9.png"><img src="sheets/no-pushes/digits-4-and-9.png" width="320" alt="64 canvases asked for 4 and 9 with no pushes, many with a stub or a wrong digit"></a></td>
+<td>`digits-4-and-9.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/sheets/no-pushes/digits-4-and-9.png`</td>
 <td><a href="sheets/both-pushes-and-five-extra-steps/digits-4-and-9.png"><img src="sheets/both-pushes-and-five-extra-steps/digits-4-and-9.png" width="320" alt="64 canvases asked for 4 and 9 with both pushes and five extra steps, most showing a readable 4 and 9"></a></td>
 </tr>
 <tr>
@@ -95,8 +95,8 @@ Navigation: ⬅️ [What the judge counted](#what-the-judge-counted) | 📋 [TOC
 
 <table>
 <tr>
-<td><a href="eye-check/rejected-tiles-sheet-1.png"><img src="eye-check/rejected-tiles-sheet-1.png" width="320" alt="30 enlarged rejected tiles for 4 and 9 and for 1 and 8"></a></td>
-<td><a href="eye-check/rejected-tiles-sheet-6.png"><img src="eye-check/rejected-tiles-sheet-6.png" width="320" alt="15 enlarged rejected tiles for 4 and 6, 0 and 8, and 2 and 7"></a></td>
+<td>`rejected-tiles-sheet-1.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-1.png`</td>
+<td>`rejected-tiles-sheet-6.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-6.png`</td>
 </tr>
 <tr>
 <td>Sheet 1: tile <code>4-9 #27</code> is a readable 9 and 4, and <code>4-9 #19</code> has a 0 where the 9 should be</td>
@@ -144,7 +144,7 @@ Navigation: ⬅️ [Why the target is undecided](#why-the-90-target-is-neither-m
 
 **Each model is told its half and shown only that half, so this 85% measures how well two separately drawn halves join.**
 
-<a href="../02-giving-each-model-its-own-half/one-sampling-step-explainer.png"><img src="../02-giving-each-model-its-own-half/one-sampling-step-explainer.png" width="420" alt="one real sampling step: each model's guess on the whole canvas and the two half-canvas guesses stitched"></a>
+`one-sampling-step-explainer.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png`
 
 The picture is one real step, step 26 of 50, for the digits 4 and 7. In its second row, both models looking at the whole canvas put their digit on the right. Shown only their own halves, they put a 4 on the left and a 7 on the right, and the two halves join along the orange line.
 
@@ -265,17 +265,17 @@ Navigation: ⬅️ [What this cannot claim](#what-this-cannot-claim) | 📋 [TOC
 
 | Thing | What it shows | How we got it | Also called |
 |---|---|---|---|
-| [No pushes, no extra steps](sheets/no-pushes/) with [its counts](counts/no-pushes.json) | 20 sheets, 454 of 1,280 | `two_experts.py cells --compose crop --push none`, 20 pairs, seeds 64 to 127, on the cluster | `final-crop-none` |
-| [Both pushes, five extra steps](sheets/both-pushes-and-five-extra-steps/) with [its counts](counts/both-pushes-and-five-extra-steps.json) | 20 sheets, 1,088 of 1,280 | the same command with `--push both --lang-k 5 --lang-c 3` | `final-crop-both-lang5c3` |
-| [Rejected tiles, sheet 1](eye-check/rejected-tiles-sheet-1.png) | 30 tiles: 22 of 4 and 9, 8 of 1 and 8 | `make_plan33_eyecheck.py` enlarges every tile the judge rejected on the 12 weakest pairs | `eyecheck-1` |
-| [Rejected tiles, sheet 2](eye-check/rejected-tiles-sheet-2.png) | 30 tiles: 9 of 1 and 8, 17 of 4 and 8, 4 of 1 and 5 | same script | `eyecheck-2` |
-| [Rejected tiles, sheet 3](eye-check/rejected-tiles-sheet-3.png) | 30 tiles: 12 of 1 and 5, 16 of 2 and 5, 2 of 4 and 5 | same script | `eyecheck-3` |
-| [Rejected tiles, sheet 4](eye-check/rejected-tiles-sheet-4.png) | 30 tiles: 13 of 4 and 5, 14 of 3 and 8, 3 of 3 and 5 | same script | `eyecheck-4` |
-| [Rejected tiles, sheet 5](eye-check/rejected-tiles-sheet-5.png) | 30 tiles: 10 of 3 and 5, 12 of 0 and 7, 8 of 4 and 6 | same script | `eyecheck-5` |
-| [Rejected tiles, sheet 6](eye-check/rejected-tiles-sheet-6.png) | 15 tiles: 1 of 4 and 6, 7 of 0 and 8, 7 of 2 and 7 | same script | `eyecheck-6` |
+| No pushes, no extra steps (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/sheets/no-pushes`) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/counts/no-pushes.json`) | 20 sheets, 454 of 1,280 | `two_experts.py cells --compose crop --push none`, 20 pairs, seeds 64 to 127, on the cluster | `final-crop-none` |
+| [Both pushes, five extra steps](sheets/both-pushes-and-five-extra-steps/) with its counts (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/counts/both-pushes-and-five-extra-steps.json`) | 20 sheets, 1,088 of 1,280 | the same command with `--push both --lang-k 5 --lang-c 3` | `final-crop-both-lang5c3` |
+| Rejected tiles, sheet 1 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-1.png`) | 30 tiles: 22 of 4 and 9, 8 of 1 and 8 | `make_plan33_eyecheck.py` enlarges every tile the judge rejected on the 12 weakest pairs | `eyecheck-1` |
+| Rejected tiles, sheet 2 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-2.png`) | 30 tiles: 9 of 1 and 8, 17 of 4 and 8, 4 of 1 and 5 | same script | `eyecheck-2` |
+| Rejected tiles, sheet 3 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-3.png`) | 30 tiles: 12 of 1 and 5, 16 of 2 and 5, 2 of 4 and 5 | same script | `eyecheck-3` |
+| Rejected tiles, sheet 4 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-4.png`) | 30 tiles: 13 of 4 and 5, 14 of 3 and 8, 3 of 3 and 5 | same script | `eyecheck-4` |
+| Rejected tiles, sheet 5 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-5.png`) | 30 tiles: 10 of 3 and 5, 12 of 0 and 7, 8 of 4 and 6 | same script | `eyecheck-5` |
+| Rejected tiles, sheet 6 (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-6.png`) | 15 tiles: 1 of 4 and 6, 7 of 0 and 8, 7 of 2 and 7 | same script | `eyecheck-6` |
 | [The eye calls](eye-check/eye-calls.json) | which tiles were called clearly right (48) and plausible (38); the other 79 of the 165 were called wrong | called by eye at three times size | `eye-calls` |
-| [Which tile is on which sheet](eye-check/which-tile-is-on-which-sheet.json) | the pair and number of all 165 tiles, by sheet | written by `make_plan33_eyecheck.py` | `eyecheck-index` |
-| [One sampling step](../02-giving-each-model-its-own-half/one-sampling-step-explainer.png), kept in step 2's folder | the whole canvas against the crop, step 26 of 50, 4 and 7 | `make_plan33_step.py` | `one-sampler-step` |
+| Which tile is on which sheet (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/which-tile-is-on-which-sheet.json`) | the pair and number of all 165 tiles, by sheet | written by `make_plan33_eyecheck.py` | `eyecheck-index` |
+| One sampling step (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png`), kept in step 2's folder | the whole canvas against the crop, step 26 of 50, 4 and 7 | `make_plan33_step.py` | `one-sampler-step` |
 
 > [!NOTE]
 > Both counts files store their total under the key `total_of_320`, a name left over from the five-pair runs. In this folder that key holds a count out of 1,280. The files also hold a looser count that allows stray marks beside the two digits: 1,098 with the pushes and extra steps, 454 without.

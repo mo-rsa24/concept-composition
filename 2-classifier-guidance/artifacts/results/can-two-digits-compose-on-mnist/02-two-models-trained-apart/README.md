@@ -16,7 +16,7 @@ side): 62, 63, 63, 58, 59. The 5–9 expert: 62, 62, 58, **55**, 62 (digit 8 mis
 55, 56, 62 and was not used. Fixed-side: the 0–4 left expert 63, 64, 63, 62, 63; the 5–9 right expert 59, 63,
 **57**, 60, 62 (digit 7 misses).
 
-<a href="sheets/e59-either-alone-8.png"><img src="sheets/e59-either-alone-8.png" width="400" alt="64 canvases asked for the digit 8 from the 5 to 9 expert, mostly clear 8s on the left or right half"></a>
+`e59-either-alone-8.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/e59-either-alone-8.png`
 
 ## the fixed-side control, and the base
 
@@ -26,7 +26,7 @@ blank canvas given a spread of 0.5: **139 of 320**, against a bar of 256, so the
 the two no-digit predictions 1; spread 0.03, 0.1 and the point mass 0 (canvases saturate to white); 0.3: 60; 0.5:
 139; 0.7: 132; 1.0: 82; 1.5: 9; 2, 3 and 10: 0. `verified`
 
-<a href="sheets/fixed-none-floor0.5-1-9.png"><img src="sheets/fixed-none-floor0.5-1-9.png" width="400" alt="Asked 1 and 9 from the fixed-side experts at the best base: a clear 1 on the left and a clear 9 on the right on 46 of 64 seeds"></a>
+`fixed-none-floor0.5-1-9.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-none-floor0.5-1-9.png`
 
 ## both pushes on the fixed-side experts
 
@@ -35,7 +35,7 @@ Both pushes (strength 10 each, cap 0.1, eta 1.0) lift the control from 139 to **
 not reach 224. `verified`
 
 <a href="sheets/fixed-none-floor0.5-3-6.png"><img src="sheets/fixed-none-floor0.5-3-6.png" width="260" alt="Asked 3 and 6, fixed-side experts, no push: 30 of 64 clear pairs"></a>
-<a href="sheets/fixed-both-floor0.5-3-6.png"><img src="sheets/fixed-both-floor0.5-3-6.png" width="260" alt="Asked 3 and 6, fixed-side experts, both pushes: 46 of 64 clear pairs"></a>
+`fixed-both-floor0.5-3-6.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-both-floor0.5-3-6.png`
 
 ## the side-mixed experts: the pushes do not help
 
@@ -46,8 +46,8 @@ support, within 32 of plain for a null) both pushes are a null. By eye the canva
 blobs in one half, so the product is destroyed before a push acts. One tuning round on 2 & 8 and 0 & 5 (strength 3
 and 30, cap 0.3, eta 0.5) gave 0 everywhere. `verified`
 
-<a href="sheets/side-none-guided-e59-either-4-7.png"><img src="sheets/side-none-guided-e59-either-4-7.png" width="260" alt="Asked 4 and 7, side-mixed experts, no push: single saturated white blobs"></a>
-<a href="sheets/side-both-guided-e59-either-4-7.png"><img src="sheets/side-both-guided-e59-either-4-7.png" width="260" alt="Asked 4 and 7, side-mixed experts, both pushes: the same blobs"></a>
+`side-none-guided-e59-either-4-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png`
+`side-both-guided-e59-either-4-7.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-both-guided-e59-either-4-7.png`
 
 ## what to know
 

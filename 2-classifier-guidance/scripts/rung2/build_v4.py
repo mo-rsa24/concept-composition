@@ -42,7 +42,7 @@ from PIL import Image
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[2]
-RES = REPO / "2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog"
+RES = Path("/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/by-run")
 JUDGE = REPO / "artifacts/drips/present-revision-to-supervisor/judge"
 PHOTOS = REPO / "4-inclusive-captions/data/training-set"
 V4 = "outputs/classifier_guidance_ladder/rung2/dataset-v4"

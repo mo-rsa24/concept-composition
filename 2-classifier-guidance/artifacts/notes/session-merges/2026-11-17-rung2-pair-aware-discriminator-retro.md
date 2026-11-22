@@ -29,7 +29,7 @@ out as drawings or as one cat repeated across the scene.
 tile repeating one concept enters training.
 
 **Results.** 73 tiles, 17 positives, 24 intact negatives; 23 pair-prompt failures listed for a later
-comparison. <a href="../../results/does-a-small-discriminator-steer-cat-x-dog/training-set/strips/kept-positives.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/training-set/strips/kept-positives.png" width="200" alt="the 17 positives"></a>
+comparison. `kept-positives.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/training-set/strips/kept-positives.png`
 
 **Links to.** The data for 1.3.
 
@@ -65,7 +65,7 @@ steps at s = 100; draft reading 7. `result-sheet.png` is not shown because it fa
 **Done.** Filmstrips with attention and push maps, scores through time, every tile kind scored per step.
 
 **Results.** It scored pair-prompt renders positive whatever they showed and looked at one fixed patch.
-<a href="../../results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/kinds-through-time.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/kinds-through-time.png" width="200" alt="tile kinds through time"></a>
+<a href="../../results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/diagnostics.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/diagnostics.png" width="200" alt="tile kinds through time"></a>
 
 **Links to.** The retrains.
 
@@ -81,7 +81,7 @@ regenerated, so its pictures were taken from the laptop's local copies.
 passes and settled at full size; held-out check by whole pair.
 
 **Results.** v2, v3 head only and v3 with adapters: 0 of 20 steps each, held-out accuracy 0.53 to 0.69.
-<a href="../../results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png" width="200" alt="held-out accuracy of all four discriminators"></a>
+<a href="../../results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png" width="200" alt="held-out accuracy of all four discriminators"></a>
 
 **Links to.** The next rung needs a discriminator that reads the concept.
 

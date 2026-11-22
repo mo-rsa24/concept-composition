@@ -12,6 +12,7 @@ Rows naming a guarded subject are written outside the repository, to the archive
 """
 import argparse
 import collections
+import json
 import os
 import re
 import sys
@@ -27,6 +28,7 @@ WEB_IMAGES = "4-inclusive-captions/artifacts/results/does-any-caption-say-a-cat-
 ARCHIVE = "/home/molef/PhD/_archive/concept-composition-offload-2026-11-22"
 CLUSTER = "/datasets/mmolefe/poe_repair_min/artifacts-archive"
 OUT = "artifacts/notes/progress/organise-manifest.tsv"
+GROUPS = "artifacts/notes/progress/organise-groups.json"
 IMG = (".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg")
 SKIP = {".git", "__pycache__", "node_modules", ".venv", "venv", "outputs", "temp", "_archive"}
 TOKEN = re.compile(r"[\w.\-]+/[\w.\-]+\.(?:png|jpe?g|webp|gif|svg|json|jsonl|csv|tsv|npz|log|md)", re.I)
@@ -74,7 +76,17 @@ def names():
     return exact, tails
 
 
-def read_picks(path):
+def regrouped(path, groups):
+    """Where a kept discriminator file sits once its run folder is under its report page's group."""
+    if not path.startswith(DISCRIMINATOR + "/"):
+        return path
+    parts = path[len(DISCRIMINATOR) + 1:].split("/")
+    if len(parts) > 1 and parts[0] in groups:
+        return "/".join([DISCRIMINATOR, groups[parts[0]]] + parts)
+    return path
+
+
+def read_picks(path, groups):
     """result, folder, picked path, why. Returns {picked path: new path on the laptop}."""
     picks = {}
     for line in open(path):
@@ -83,12 +95,10 @@ def read_picks(path):
             continue
         source = parts[2].strip()
         picks[source] = source
-        if source.startswith(DISCRIMINATOR + "/") and parts[0].startswith("discriminator/"):
-            group, run = parts[0].split("/", 1)[1], parts[1]
-            if run != "(loose sheets)":
-                picks[source] = f"{DISCRIMINATOR}/{group}/{run}{os.path.splitext(source)[1]}"
-            else:
-                picks[source] = f"{DISCRIMINATOR}/{group}/{os.path.basename(source)}"
+        if source.startswith(DISCRIMINATOR + "/"):
+            run = source[len(DISCRIMINATOR) + 1:].split("/")[0]
+            if run in groups:
+                picks[source] = f"{DISCRIMINATOR}/{groups[run]}/{run}{os.path.splitext(source)[1]}"
     return picks
 
 
@@ -107,7 +117,8 @@ def main():
     parser.add_argument("--shipped", nargs="+", required=True)
     args = parser.parse_args()
     os.chdir(ROOT)
-    picks, shipped = read_picks(args.picks), read_shipped(args.shipped)
+    groups = json.load(open(GROUPS))
+    picks, shipped = read_picks(args.picks, groups), read_shipped(args.shipped)
     exact, tails = names()
     rows, guarded, tally, problems = [], [], collections.Counter(), []
     sizes = collections.Counter()
@@ -124,11 +135,11 @@ def main():
                 elif path in picks:
                     action, new = "keep, picked picture", picks[path]
                 elif name in ("README.md", "on-the-cluster.tsv", "file-origins.tsv"):
-                    action, new = "keep, card", path
+                    action, new = "keep, card", regrouped(path, groups)
                 elif "paper" in named:
-                    action, new = "keep, the paper names it", path
+                    action, new = "keep, the paper names it", regrouped(path, groups)
                 elif not name.lower().endswith(IMG) and named & {"page", "plan", "code"}:
-                    action, new = "keep, data a page, plan or script names", path
+                    action, new = "keep, data a page, plan or script names", regrouped(path, groups)
                 else:
                     action, new = "move to the cluster and laptop archive", f"{ARCHIVE}/{path}"
                 cluster, digest = "", ""

@@ -27,7 +27,7 @@ import anthropic
 
 REPO = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
-RESULTS = REPO / "2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog"
+RESULTS = Path("/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/by-run")
 MODEL = "claude-opus-5-5"
 VERDICTS = ["faithful pair", "hybrid", "single", "wrong pair", "damaged"]
 SCHEMA = {
