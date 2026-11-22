@@ -29,6 +29,13 @@ CoMat's Table 1, and CoMat does not state its scorer, prompt split or seeds. A g
 number could come from the setup alone. Plain SDXL, ToMe and CoMat are therefore run on our setup, and our win is read
 against those runs.
 
+**Four benchmarks are scored on the prompts the subject guard allows.** [The guard](../../../../scripts/shared/disallowed_subjects.py)
+keeps 12 of 1,000 prompts out of T2I-CompBench Complex, 7 of 40 out of RareBench Concat, 12 of 300 out of Color and 7 of 300
+out of Shape. On these four, the rival and our method run on the same allowed prompts and seeds, and every number prints its
+prompt count, such as "988 of 1,000 prompts". A win needs our score to beat both the rival's rerun on those prompts and the
+printed target. A row with no rerun of that rival on the same prompts claims no win. The rerun stays out of the scoreboard's
+`reproduced` field, because its sample count differs from the published one.
+
 **A disputed number cannot set a target.** `limits.md` marks where a paper contradicts itself about a value. T2I-CompBench
 Color is a disagreement between two papers: ToMe quotes CoMat at 0.7774, and CoMat's own page prints 0.7827. The target uses
 the number on CoMat's own page.
