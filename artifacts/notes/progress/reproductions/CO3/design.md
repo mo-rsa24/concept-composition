@@ -49,8 +49,16 @@ same seeds as RTD and plain SDXL.
 **Starting noise.** CO3 draws its own noise on the CPU. This run passes in the same starting latent the RTD renderer draws for
 that seed, so the methods differ only in what they do from there.
 
-**Concepts.** The paper extracts nouns with Stanza, and RTD's prompt manifests were built the same way, so CO3 reads the concepts
-from those manifests.
+**Concepts.** The paper extracts nouns with Stanza. This run splits each prompt with `get_prompts_and_concepts_coarse`, called the
+way the authors' `sample_rarebench.py` calls it on their `rare_bench` branch (commit `aacbb8f`).
+
+**The authors' benchmark script.** `sample_co3_promptset.sh` on that branch uses the same settings as `run_sample_co3.sh`: CFG++ at
+0.8, 6 corrected steps, 3 resampling steps, 5 corrector rounds, beta 0.9 and `lmda` 0.8. Its code under `composers/` is identical
+to commit `35ea972`, which this run exports.
+
+**A missing file.** Both branches import `composers/utils/gaussian_smoothing.py` without shipping it, and nothing calls it. A stub in
+`scripts/reproductions/co3_common.py` stands in for that import and raises if it is ever called, so no file of the authors' code
+changes.
 
 ## The test, fixed before the first run
 
