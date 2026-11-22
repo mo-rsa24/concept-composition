@@ -122,10 +122,10 @@ is running and what to do next, then carries the one order across every plan in 
 `## The paper: what has to land` and its three background lists. No scope keeps an order of its
 own, and `## One plan, one table` states that rule.
 
-`plans/` holds only work still to do: seven live scopes numbered `01` to `07` in the order a
-reader meets them, plus `standing/`. The numbers are a reading order, not the step order, which
-interleaves across scopes and lives in the root running order. Anything finished, parked or cold
-has left for `artifacts/plans/`.
+The root `plans/` holds work still to do that crosses projects: routes and `standing/`. Each
+project's own `plans/` holds its live scopes. Scope numbers are a reading order, not the step
+order, which interleaves across scopes and lives in the root running order. Anything finished,
+parked or cold has left for `artifacts/plans/`.
 
 ## Folders this repo adds to the top level
 
@@ -134,6 +134,31 @@ repo keeps two more at the root: `context/` for what the project means in the re
 through `context/00-INDEX.md`), and `report/` for pre-registrations, instrument provenance and
 results summaries per `~/.claude/EXPERIMENT_CONVENTIONS.md`. Both are staples here; neither is a
 filing mistake.
+
+**The five project folders.** The repo holds five research questions as top-level folders,
+`1-lora-correction/`, `2-classifier-guidance/`, `3-understanding-compositionality/`,
+`4-inclusive-captions/` and `5-text-embedding-third-expert/`. Each has its own `README.md`,
+`artifacts/`, `report/` and `scripts/`, and the first four have `plans/`. `2-classifier-guidance/`
+and `4-inclusive-captions/` also keep a `data/`, and `3-understanding-compositionality/` keeps
+`toy/`. The root holds what several projects share.
+
+**`writing/`** holds the paper. `writing/iclr/` is the tracked source, with `figures/` as its one
+figure root. `writing/restoring-plurality-in-compositional-diffusion/` and its `_overleaf` sibling
+hold the revision draft and the Overleaf export. `writing/overleaf-iclr/` is a separate git clone
+of the Overleaf project, untracked here, and the [Overleaf recipe](runbook/syncing-the-paper-with-overleaf.md)
+says how they stay in step.
+
+**`_archive/`** holds files nothing in the repo cited, moved out with their old sub-paths kept
+(`_archive/scripts/...` was `scripts/...`). `scripts/regroup/moves.tsv` lists every move, and
+nothing is deleted from it without an item-by-item yes.
+
+**`outputs/`** is the laptop landing place for run results pulled from the cluster with
+`scripts/cluster.sh pull outputs/<family>`. It is git-ignored and stays at the root, because
+`poe_repair/paths.py` resolves `outputs/...` here first and on `/datasets` second.
+
+**`temp/`** is the Codex diagram renderer's git-ignored working space. `temp/codex-drop/` holds
+render attempts and logs, and `temp/codex-stage/<job>/` holds each job's brief and checks. Only
+passing images are copied out to their `diagrams/` path.
 
 ## Six folders under `artifacts/` that are not one of the eight kinds
 
@@ -170,6 +195,7 @@ extends it with:
 |---|---|
 | `RENAMES.md` | the retrofit sweep's old-path-to-new-path table, owned by `retrofit-repo`/`tidy-repo` |
 | `learning-map.md` | the learning weave's illustrated map; renders and process snapshots in `learning-diagrams/`, owned by `learning-pulse` |
+| `MASTER_PLAN.md` | the one running order across every plan in every project, opening with `## Where things stand` |
 
 ## Learning journeys about this repo
 
