@@ -1,5 +1,10 @@
 {
  "files": {
+  "artifacts/results/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5e33791bdad03998652a2003f5bb58928656fa9154cd70a92e4f14d189fc9acc",
+   "state": "drained"
+  },
   "artifacts/results/against-other-methods/README.md": {
    "at": "2026-11-22",
    "sha256": "96c1f48a7d7ad74f6946d569af5301b7580bb733b43ded2e6088f3293b58bd99",
