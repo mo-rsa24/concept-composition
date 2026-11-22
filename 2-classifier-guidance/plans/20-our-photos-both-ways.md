@@ -214,7 +214,7 @@ For Claude to execute. Ask Claude to do these.
   0.95 at step 0) does not steer the released model to cats or dogs at scales 10, 30 or 100
   (`push-scale-check-256.png`), so the product uses the released classifier's classes.
 
-  <a href="../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png"><img src="../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png" width="200" alt="Four draws across (draw 0 to 3) by scale 10, 30 and 100 down the rows: fruit and vegetables, a dog's head, a man in a striped shirt and a bird at scale 10, turning into red and yellow food-like blobs, a jewelled texture, a blurred person and a dark animal against yellow at 30 and 100; no tile shows a cat"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
 - [ ] **1.4** The released model's sheet on seeds 1 to 16: the product, then the product plus the
   pair-aware push at weights 1 and 2; the minimal-pair gap per step beside it.
@@ -292,7 +292,7 @@ All in `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-o
 |---|---|---|---|---|---|
 | [`example-one-per-label.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png) | — | one image per label at both sizes | task 1.1, `build_photo_set.py` | ✅ on disk, worked by task 1.1 and instruction 2.1 | four images across (a cat, a dog, a COCO both-animal photo, an SD3.5 both-animal render), 256 px above and the same image at 64 px below |
 | [`coco-both-crops.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png) | — | every COCO both-animal crop | task 1.1, `build_photo_set.py` | ✅ on disk, worked by task 1.1 | all 38 COCO both-animal crops in a grid, each titled with the share of the animals' box area it keeps, 0.57 to 1.00 |
-| [`push-scale-check-256.png`](../artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png) | — | whether our separate-label classifier steers the released model | task 1.3 | ✅ on disk, worked by task 1.3 | draws 0 to 3 across by push scale 10, 30 and 100 down, from the released 256 px model pushed by `separate_256.pt`; no tile shows a cat |
+| `push-scale-check-256.png` (held back, at `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png`) | — | whether our separate-label classifier steers the released model | task 1.3 | ✅ on disk, worked by task 1.3 | draws 0 to 3 across by push scale 10, 30 and 100 down, from the released 256 px model pushed by `separate_256.pt`; no tile shows a cat |
 | `sheet-released-256.png` | — | the released-model arm's sheet | task 1.4 | ⏳ not on disk | seeds 1 to 16 (rows) by the product, plus the pair-aware push at weight 1, at weight 2 (columns), at 256 px |
 | `sheet-64-no-both.png` | — | the 64 px model trained without both-animal images | task 1.5 | ⏳ not on disk | the same at 64 px, with the separate-label column |
 | `sheet-64-all.png` | — | the 64 px model trained on all images | task 1.5 | ⏳ not on disk | the same for the model trained on all images |

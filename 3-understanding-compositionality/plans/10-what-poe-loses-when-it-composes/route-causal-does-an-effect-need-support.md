@@ -233,7 +233,7 @@ removed, the rest sorted into piles, and a numbered contact sheet per pile.
 **Outcome:** the `piles/` folders, on `/datasets` and pulled locally.
 **Serves:** step 4.
 
-<a href="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/pilot-ten-walk-pictures.jpg"><img src="figures/pilot-ten-walk-pictures.jpg" width="300" alt="The pilot's ten pictures: one real camel, boots, culottes, a coat, a recliner cover, two real dogs, an ornament, a book cover and a baseball player"></a>
+*Picture held back.* `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/figures/pilot-ten-walk-pictures.jpg` has a tile with a shape that could not be identified at full size, so it is named here and not shown.
 
 ```text
 Background
@@ -559,7 +559,7 @@ I judge it when I have typed the camel count myself and seen 784,797.
 
 You ~2.5 h over two sittings · Sonnet, medium · a drip session per pair
 
-<a href="../../artifacts/results/does-a-camel-in-the-rain-come-out-wet/pilot-clip-called-wet.jpg"><img src="figures/pilot-clip-called-wet.jpg" width="300" alt="The seven pictures CLIP called wet in the pilot: camels on a wet street, a camel in grass, a DVD cover, a shoe, a puppy DVD cover, a button and an ink drawing; none shows a wet animal"></a>
+*Picture held back.* `3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/figures/pilot-clip-called-wet.jpg` holds a subject the [subject guard](../../../scripts/shared/disallowed_subjects.py) never allows on a sheet, so it is named here and not shown.
 
 ```text
 Background

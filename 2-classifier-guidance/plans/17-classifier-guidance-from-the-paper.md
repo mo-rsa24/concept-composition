@@ -199,7 +199,7 @@ For you to follow manually. Do these yourself.
 
 5.1 **Open the two-ends sheet** and say what the empty prompt draws on each seed.
 
-   <a href="../artifacts/results/does-classifier-guidance-draw-a-dog/two-ends.png"><img src="../artifacts/results/does-classifier-guidance-draw-a-dog/two-ends.png" width="140" alt="Seeds 9 to 12 down, two columns from the same starting noise: no prompt draws an abstract painting on each seed, and &quot;a dog&quot; under ordinary guidance draws a dog on each seed, a pencil sketch of two dogs on seed 11"></a>
+   *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/two-ends.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
 ✅ What you want: "a dog" is a clean dog on every seed, so it can serve as the look to match.
 
@@ -215,7 +215,7 @@ with no dog on any seed; "a dog" is a dog on all four.
 6.1 **Call each pushed picture** a clean dog, a dog drawn by force with the picture damaged, or no
 dog.
 
-   <a href="../artifacts/results/does-classifier-guidance-draw-a-dog/dog-sheet.png"><img src="../artifacts/results/does-classifier-guidance-draw-a-dog/dog-sheet.png" width="200" alt="Seeds 9 to 12 down; across, no prompt, &quot;a dog&quot; under ordinary guidance, then the classifier push at 1, 3, 10 and 30 percent of the prediction; the four pushed tiles on each row keep the no-prompt scene, moving toward a figure in white on seed 9 and a furnished room on seed 11, with no clear dog in any pushed tile"></a>
+   *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-sheet.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
 ✅ What you want: a clean dog on at least 3 of 4 seeds at some strength.
 

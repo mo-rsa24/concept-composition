@@ -136,7 +136,7 @@ For Claude to execute. Ask Claude to do these.
 
 - [x] ✅ **1.1** Read the frozen head's "dog present" probability on the four no-prompt pictures,
       the four "a dog" pictures and the four most-pushed pictures, at six sampler steps.
-  - Output: [the belief sheet](../artifacts/results/does-classifier-guidance-draw-a-dog/what-the-helper-believes.png),
+  - Output: the belief sheet (held back, at `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/what-the-helper-believes.png`),
     numbers in `/datasets/mmolefe/poe_repair_min/outputs/dog_classifier/what_the_head_believes.json`
   - ✅ verified 2026-11-04: at sampler step 20 the head calls 2 of 4 clear dog photos no dog (0.00)
     and all 4 pushed pictures dog (0.77 to 0.93), none of which holds a dog; the no-prompt paintings
