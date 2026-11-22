@@ -10,7 +10,7 @@
 
 [Root](../../MASTER_PLAN.md) › [the classifier-guided PoE route](route-classifier-guided-poe-from-toy-to-animals.md) ›
 this plan, which is the route's [step 7b](route-classifier-guided-poe-from-toy-to-animals.md#7b--mnist-digits-on-a-canvas-how-good-must-the-checker-be)
-and the board's row [A2b](../report/classifier-guided-poe/a2b-mnist-digits-on-a-canvas.md) in
+and the board's row [A2b](../report/classifier-guided-poe/24-mnist-one-model.md) in
 [the classifier-guided PoE board](../report/classifier-guided-poe/board.md). Its bar is
 [the A2b review file](review/a2b-mnist-digits-on-a-canvas.md).
 
@@ -43,8 +43,8 @@ Step 10's next move (more cat × dog data, or a checker that judges each animal)
 **What it does**
 
 Three class-conditional pixel U-Nets train on 32 × 64 canvases of real MNIST digits, at two-digit
-shares 0, 0.01 and 0.1, with five digit pairs never shown together. The plain product of two digit
-experts is read first. Where it fuses, a pair-aware checker on the frozen U-Net's decoder features
+shares 0, 0.01 and 0.1, with five digit pairs never shown together. The [plain product](review/a2b-mnist-digits-on-a-canvas.md#words-this-file-uses) of two digit
+experts is read first. Where it fuses, a pair-aware checker<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/04-the-dropped-term.md#44-the-pair-aware-push "Classifier guidance by hand, chapter 4, section 4.4: the pair-aware push, a discriminator's log-odds trained on joint-caption draws against the product's own draws, applied with a weight on the product"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/08-the-pair-aware-push-built.md "Classifier guidance by hand, plan 08: the pair-aware push built and measured on the four-picture toy at weights 0, 0.5, 1 and 2")</sub> on the frozen U-Net's decoder features
 pushes the product, beside a separate-label control<sub>[1](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/02-the-product-as-two-classifiers.md#23-pushing-harder-with-the-same-two-classifiers "Classifier guidance by hand, chapter 2, section 2.3: more of the same two separate-label pushes on the product base, where the fused animal's share rises and the pair's falls"), [2](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/plans/04-the-separate-label-push-built.md "Classifier guidance by hand, plan 04: the separate-label push built and measured on the four-picture toy at strengths 0, 1, 3 and 10")</sub>, a random push and best-of-N. Then the checker
 is made weaker by less data and by flipped labels, and the cap is swept. The full design, the
 checker's recipe table and the columns are in route step 7b and are not repeated here.
@@ -177,7 +177,7 @@ Navigation: ⬅️ [Previous](#instructions) | 📋 [TOC](#table-of-contents) | 
 
 Three U-Net checkpoints, the judge, the checkers, the plain-product, judge and five-version sheets,
 the sweep figure with its sidecar, all under the scratch folder; sheets, calls and figures filed
-under `2-classifier-guidance/artifacts/results/how-good-must-the-checker-be-on-mnist/` with its card.
+under `2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/` with its card.
 
 ## Error Matrix
 

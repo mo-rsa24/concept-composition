@@ -14,7 +14,7 @@ from canvas_unet import ABAR  # noqa: E402
 from checker import STEPS, features, head_feats, load_unet  # noqa: E402
 from five_versions import load_head  # noqa: E402
 
-AR = REPO / "data/mnist-canvas/arch"
+AR = REPO / "data/mnist-canvas/24-mnist-one-model/arch"
 MN = Path("/home/molef/PhD/replications/original-superdiff/data/MNIST/raw")
 u = load_unet(AR / "models/share-0.01/unet.pt", "cpu")
 hp = load_head(AR / "checkers/loop2-r9b-film-onpolicy2/head.pt", "cpu")

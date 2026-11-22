@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
 HERE = Path(__file__).resolve().parent
-RES = HERE.parents[2] / "results/how-good-must-the-checker-be-on-mnist"
+RES = HERE.parents[2] / "results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs"
 ARCH = json.load(open(RES / "architecture/arch_numbers.json"))
 GRAD = json.load(open(RES / "gradient-flow/grad_numbers.json"))
 BLUE, GREEN, RED, ORANGE, GREY, INK = "#1f5fd0", "#1d7a3e", "#c0262d", "#c86a0a", "#6b7a88", "#1f2a33"
