@@ -620,6 +620,261 @@
    "sha256": "462a709477d3f6270a853b1aaeba8b3ee86ca98e2c96efc4e8206b839e9a87d0",
    "state": "drained"
   },
+  "artifacts/results/the-adapter-on-cat-and-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "4aadc93a49f80849963cb2bbc2325a85c5cf7e16312a06436c9730c21fa27437",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5fe31fb7a56a6092f656c5f9d55ab375932d3ce473faefc681d36518262a100e",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/README.md": {
+   "at": "2026-11-22",
+   "sha256": "7222476e5c6f8152d91d6c91bbd685151c133243c0e68b028981ab33c24b0c6e",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/five-picked-pairs.png": {
+   "at": "2026-11-22",
+   "sha256": "a13af46532f9ea4a1970e5193b5fb0c6a97be29bbe64dbf8426f5ca53a8cc66c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f847cd5ae78c43bb1f648f59a2292d6a1d8c843915b805257780157a95189c5d",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-seed10-five-columns.png": {
+   "at": "2026-11-22",
+   "sha256": "dcf58e36ab241fb6b32db2e76d05e034d2e8d98bd2750fc277b76ebeef7d4401",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/three_concepts-contact-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "533a3e07c314e6905489ef834ace7fe7b70e2788f63b670cdc82bd9d4b6d68de",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/three_concepts.png": {
+   "at": "2026-11-22",
+   "sha256": "2f6801378563f4597177b3bee952ff386b618e0c2ad286af3b0989dd0f5da8f5",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-animal/ours.png": {
+   "at": "2026-11-22",
+   "sha256": "62ac61ba6723f0786ff44a364e92523ba05a409c06f7a47943624455d0339f03",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-animal/product.png": {
+   "at": "2026-11-22",
+   "sha256": "852b407d5cde779825d278d6315d329fdb639d600a611334164565e97f289c72",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-object/ours.png": {
+   "at": "2026-11-22",
+   "sha256": "244ebb42d5c28bc1f4adcbe3fcfcf72cdbb47d2e76685aaf90be5852b9a98361",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-object/product.png": {
+   "at": "2026-11-22",
+   "sha256": "34472d90311d2e57ef6924754ddf626b42d00f2236eb1f639e0f7fb3d21d5022",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-object-animal/ours.png": {
+   "at": "2026-11-22",
+   "sha256": "3b5df5c5c590bb7d57b30fba180c1eb794a45817896a6b386ef0114e883d3506",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-object-animal/product.png": {
+   "at": "2026-11-22",
+   "sha256": "d6ed61460c744d2145017a7d4aa30e6f5afed69e3ad96ba64b38ec78df3a604f",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/object-object-object/ours.png": {
+   "at": "2026-11-22",
+   "sha256": "4a49cd1a8d25e9a8b795f800a37ca132265b011c571d82803945d57d98e65fa9",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/three_concepts.png": {
+   "at": "2026-11-22",
+   "sha256": "533a3e07c314e6905489ef834ace7fe7b70e2788f63b670cdc82bd9d4b6d68de",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d1203e5a9f9b305bab29f4311e46b0740774d3d9732824bfd06f897478d8c4a8",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "8d1d6c4aa97a976a4bc38641a85e77df240c39778e207716d138ca67529d4961",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r0-c0.png": {
+   "at": "2026-11-22",
+   "sha256": "87aac774a6bdf979f743301edaebbda9da30c7a32bf215885a82c7813f756ec5",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r0-c1.png": {
+   "at": "2026-11-22",
+   "sha256": "0c45323df8daf4e95629002edd9ea110dac12dd2b04e90c268ba2bbc32346264",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r0-c2.png": {
+   "at": "2026-11-22",
+   "sha256": "e3bb6f8a8e513c601a1c9a61787dd5421ff0be22e6a0a9ef59b3ed8b54671725",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r1-c0.png": {
+   "at": "2026-11-22",
+   "sha256": "089b9bb3112420f093c125d372f4624c5e079560402fc581dda5eb902883b27b",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r1-c1.png": {
+   "at": "2026-11-22",
+   "sha256": "b8e248fae02842d76abfb91c8da8d2505f4c0795feb3dc47c4a521aaba1ee49a",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r1-c2.png": {
+   "at": "2026-11-22",
+   "sha256": "5961fcfeaef0ef5dd780526eaa982f6e95ac56b90ed01f62d38a760beaecc3e8",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r0-c1.png": {
+   "at": "2026-11-22",
+   "sha256": "15c1d4e71cff6702522347cc72b6e60cffa63e892cecac86411ea466a34a98d9",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r0-c2.png": {
+   "at": "2026-11-22",
+   "sha256": "0bbe8a42c7cadf136aa6919dc0cfe4baaefb17a7e25e81e6157a941483276222",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r1-c0.png": {
+   "at": "2026-11-22",
+   "sha256": "43718f47398cbd20fe81275a5d931bd4dcb57a3aa8e7cda4b746130c5cee8daf",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r1-c1.png": {
+   "at": "2026-11-22",
+   "sha256": "ecbd5b2fdf885bc9c71318e1676680bfd2841bb6fddb94a661d4eadaf4be3824",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r1-c2.png": {
+   "at": "2026-11-22",
+   "sha256": "c24a5c672b484f395ce979be2daaf17ed727eaaf234ce0c881661280f2d5d29e",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c2.png": {
+   "at": "2026-11-22",
+   "sha256": "96d1bb99ec791d0d01de5a331eb97e581b6be6ef74ea65f74151a911d2578df1",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c0.png": {
+   "at": "2026-11-22",
+   "sha256": "35643d6795b074f969a74cfbd6a7aee9785bf35f492e7c778d5440da1dc794a9",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c1.png": {
+   "at": "2026-11-22",
+   "sha256": "5ce456e32a6243d0144b10ca3343592157707932f7ea2bd05fca360b8f0b0364",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c3.png": {
+   "at": "2026-11-22",
+   "sha256": "3fb2a90c7a0c09b01fd17514204c9b92e3f260fea8fbf14c9ce72b5abd7e1804",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c4.png": {
+   "at": "2026-11-22",
+   "sha256": "785a7fe1519022da8c6215a2c1c0419aa5214c064fec92b122cb340e63ca7729",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c5.png": {
+   "at": "2026-11-22",
+   "sha256": "a633ffa46a64462991279445fa510ef8f3de95a17290175770d8ff1006305e5f",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c6.png": {
+   "at": "2026-11-22",
+   "sha256": "d688721a6a725dffe9bdb910a6f750547b05aa6fd0329e5409b44ffd2a17aedd",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/adapter-switch-off/a_tiger__x__a_parrot.png": {
+   "at": "2026-11-22",
+   "sha256": "fc5ac4f7b76ab64e0ad40dea95207c1f652cf5b3cad6b2447ead8a59547db399",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_goat__x__a_cat.png": {
+   "at": "2026-11-22",
+   "sha256": "0e3d47f9e5cb5a4121369d7f69c4fb93419c5e36bc338a5c6791749f15e0c8ba",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_goat__x__a_cat/seed11/ours_run9c6_w50.png": {
+   "at": "2026-11-22",
+   "sha256": "c5df2c9bcdd8696ae88a4fee9853a5069dc69457bd960ad051d19d57773e1e47",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_tiger__x__a_parrot.png": {
+   "at": "2026-11-22",
+   "sha256": "34897f2b5eaf032455a5e1f38e2913945d273b7702c5647c3abcd7f56bd3c47c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_tiger__x__a_parrot/seed12/ours_run9c6_w50.png": {
+   "at": "2026-11-22",
+   "sha256": "06e594e359e711bf76b197eef8052c615c3e66b047f5c69f33fb413b4c5381b3",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin-seeds-and-checkpoints.png": {
+   "at": "2026-11-22",
+   "sha256": "af3a1f1b262b1eb478d0ac7cafed66549abce8e3ce317f073765e59fe9119904",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/ours_self047500c6_w50.png": {
+   "at": "2026-11-22",
+   "sha256": "3667d007064502cf3215b2a2f084ddf4cf578f5d1bc18215b0cbdcbe9aa7eaa7",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/ours_self042500_w50.png": {
+   "at": "2026-11-22",
+   "sha256": "f287ac016121ad56d01dde7bcb864a33d546e8e3b52da35c674efc08f45df37a",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/contact_sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "860747ab26fda7d86bbd62300d552937cdcd7aea6e4cec7c115c2d30f8e1d70c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__a_cat__x__a_dog__seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "a89bba0e554f560fbea891afa348155c6425d33fb4aa3d593cac3cdd20971377",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/contact_sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "ade8e755536e0a7db5c4db6e580941c21fa43777d5360e325a2fc1377fbbe13d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_lion__x__a_meerkat__seed01.png": {
+   "at": "2026-11-22",
+   "sha256": "a83ba73ab8204fa134d4524356bba49f70d843bd0401d80a9b85888273a8b415",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "0b12ccab1ac43f0175aa8d99d19f7b78f4c54d335b4f03aee43bf9a6b147b84c",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pairs-draft-grid.png": {
+   "at": "2026-11-22",
+   "sha256": "eac7f98a59d7aea65879053b07fd64cee88b0f08d10b6870fcc185f24eb95392",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/spread-and-handover/a_tiger__x__a_parrot.png": {
+   "at": "2026-11-22",
+   "sha256": "67adcd2184be507538879fdf21ce22939c16b683f7da3e3074a656ef5827cd13",
+   "state": "drained"
+  },
   "artifacts/results/what-the-correction-is/README.md": {
    "at": "2026-11-22",
    "sha256": "a969151632b3583f045bda23e73957bf683a5736866d51b34d00079407f67534",
@@ -1498,6 +1753,153 @@
   "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed11_n2.png",
   "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed12_n2.png",
   "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed9_n3.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-camel-and-a-forest.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-cat-and-a-dog.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-cat-and-a-teapot.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-horse-and-a-bicycle.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-picnic-basket-and-a-watermelon.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/a-tiger-and-a-dog.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/an-elephant-and-a-penguin.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-layout-seed10-wave1.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-standin-submitted-cells.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_cat__x__a_dog__mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_cat__x__a_dog__ours.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_cat__x__a_dog__poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_lighthouse__x__an_ocean_with_stormy_waves__mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_lighthouse__x__an_ocean_with_stormy_waves__ours.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_lighthouse__x__an_ocean_with_stormy_waves__poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_tent__x__a_snowy_mountain__mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_tent__x__a_snowy_mountain__ours.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/a_tent__x__a_snowy_mountain__poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/an_elephant__x__a_penguin__mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/an_elephant__x__a_penguin__ours.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/an_elephant__x__a_penguin__poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-animal/joint.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-animal-object/joint.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/animal-object-animal/joint.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/object-object-object/joint.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/tiles/object-object-object/product.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r0-c0.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r0-c3.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/joint-r1-c3.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c0.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c1.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c3.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c4.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c5.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r0c6.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c0.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c1.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c2.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c3.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c4.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c5.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r1c6.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/tiles/r2c2.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/adapter-switch-off/a_goat__x__a_cat.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/adapter-switch-off/a_zebra__x__a_monkey.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_goat__x__a_cat/seed09/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_goat__x__a_cat/seed10/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_goat__x__a_cat/seed12/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_tiger__x__a_parrot/seed09/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_tiger__x__a_parrot/seed10/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_tiger__x__a_parrot/seed11/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_zebra__x__a_monkey.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_zebra__x__a_monkey/seed09/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_zebra__x__a_monkey/seed10/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_zebra__x__a_monkey/seed11/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/contrast-corrector/a_zebra__x__a_monkey/seed12/ours_run9c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed09/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed10/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed11/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed12/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed13/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed14/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/ours_self042500_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed15/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/mono.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/ours_self040000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/ours_self045000_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/ours_self047500c6_w50.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/elephant-and-penguin/seed16/poe.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/in_in__a_lion__x__a_meerkat__seed01.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/in_in__a_lion__x__a_meerkat__seed01__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/in_in__a_typewriter__x__a_cactus__seed01.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/in_in__a_typewriter__x__a_cactus__seed01__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__a_cat__x__a_dog__seed09__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__a_cat__x__a_dog__seed10__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__an_elephant__x__a_penguin__seed09__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/pool43-early25-step-40000/out_out__an_elephant__x__a_penguin__seed10__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-09/00.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-09/09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-11/00.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-11/09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-12/00.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/sheet-tiles-seed-12/09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_lion__x__a_meerkat__seed01__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_lion__x__a_meerkat__seed01__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_typewriter__x__a_cactus__seed01.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_typewriter__x__a_cactus__seed01__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/in_in__a_typewriter__x__a_cactus__seed01__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed09__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed09__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed10__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__a_cat__x__a_dog__seed10__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed09__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed09__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed10__cmp.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/existing/x0-seeds-step-45000/out_out__an_elephant__x__a_penguin__seed10__half.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_bear__x__a_squirrel.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_cat__x__a_dog.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_cow__x__a_chicken.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_dog__x__a_duck.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_fox__x__a_rabbit.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_goat__x__a_cat.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_horse__x__an_owl.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_panda__x__a_flamingo.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_tiger__x__a_parrot.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_zebra__x__a_monkey.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/spread-and-handover/a_goat__x__a_cat.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/spread-and-handover/a_zebra__x__a_monkey.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__cat.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__dog.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_frog__x__a_toad__seed_9__frog.png",
