@@ -144,6 +144,9 @@
       "/home-mscluster/mmolefe/.claude"
     ]
   },
+  "worktree": {
+    "bgIsolation": "none"
+  },
   "hooks": {
     "SessionStart": [
       {

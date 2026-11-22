@@ -1,0 +1,8 @@
+table,page,status,rows,reason
+1,5,read,9,
+2,9,read,12,
+3,19,read,49,
+4,20,read,38,
+5,22,no results,0,Hyperparameters and architecture for the Colored MNIST and Shapes3D models
+6,27,read,14,
+7,32,read,14,

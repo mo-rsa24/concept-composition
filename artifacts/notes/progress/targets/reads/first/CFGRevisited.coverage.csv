@@ -1,0 +1,10 @@
+table,page,status,rows,reason
+1,3,read,110,
+2,6,read,17,
+3,8,no results,0,"Hyperparameter settings per method for SD3.5 Medium, with no measured result."
+4,8,no results,0,"Hyperparameter settings per method for FLUX.2 [klein] 4B Base, with no measured result."
+5,9,read,140,
+6,10,read,120,
+7,10,read,100,
+8,11,read,80,
+9,11,read,80,
