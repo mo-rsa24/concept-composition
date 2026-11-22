@@ -155,9 +155,9 @@ These 21 kept pictures passed the subject check but are weak as paper figures. E
 | Released weights | `guide/c281_s1_seed12.png` | a spotted big cat with odd anatomy where the class is tabby |
 | Released weights | `identity/identity_seed2_plain.png` | one 256-pixel render with odd anatomy |
 | Draw a dog | `dog-01-from-an-animal/tiles/seed11__pushs30.png` | one tile standing in for a sheet |
-| Missing term | `imagenet-product-check-256.png` | the dogs are recognisable but their faces are distorted |
+| Pair-aware push | `imagenet-product-check-256.png` | the dogs are recognisable but their faces are distorted |
 | MNIST stage 01 | `style-samples-readout.png` | a style sample that shows no run outcome |
-| Missing term | `guidance-1-first-six-models.png` | 1440 by 5400 pixels, too tall for a paper page |
+| Captions: share of two-digit pictures | `guidance-1-first-six-models.png` | 1440 by 5400 pixels, too tall for a paper page |
 
 ## Still open
 
