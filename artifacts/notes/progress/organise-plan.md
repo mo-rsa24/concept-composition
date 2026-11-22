@@ -24,11 +24,10 @@ Step O1 on the
 
 | Tree | Result pictures now | Pages show now | Result pictures on the laptop after |
 |---|---|---|---|
-| `2-classifier-guidance` | 13,755 | 69 | about 124 |
-| `4-inclusive-captions` | 166 | 11 | 12, plus the other 154 web images until the owner decides |
+| `2-classifier-guidance` | 13,755 | 69 | 93 |
+| `4-inclusive-captions` | 166 | 11 | 8, plus the 155 web images until the owner decides |
 
-A count of 124 assumes the pictures a page shows from one folder are variants of one figure. If some
-are different figures, each stays, and the classifier guidance count reaches at most 142.
+A run with no picture that passed the subject check keeps none on the laptop, and its card cites the cluster.
 
 ## What stays on the laptop
 
