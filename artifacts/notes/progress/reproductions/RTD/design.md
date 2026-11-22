@@ -19,9 +19,19 @@ its printed scores check our scorer and the comparison protocol requires a rerun
 
 **Buys.** `RTD-T2-051` and `RTD-T2-054` in `table.csv`, the targets on T2I-CompBench Complex and RareBench Concat.
 
-**Cost.** 1,000 Complex prompts and the RareBench Concat prompts (40 expected), 3 seeds each, are 3,120 pictures per
-method. At a budgeted 20 seconds per picture on an RTX 3090, RTD costs about 17 GPU-hours and plain SDXL about 17
-GPU-hours. The smoke rung measures the real time per picture, and a run over 24 GPU-hours goes to the owner first.
+**Cost.** The subject guard allows 988 of the 1,000 Complex prompts and 33 of the 40 RareBench Concat prompts. With 3 seeds
+each, that is 3,063 pictures per method. At 15 seconds per picture, the time measured on an RTX 3090 in the smoke rung, RTD
+costs about 13 GPU-hours and plain SDXL about 13 GPU-hours.
+
+## The prompts the subject guard keeps out
+
+`scripts/shared/disallowed_subjects.py` is a hard rule for every render and score in this project, and each script here
+imports it. On these two benchmarks it keeps out 12 Complex prompts (6 blocked permanently, 6 needing a decision in the pair
+ledger) and 7 Concat prompts (1 blocked, 6 needing a decision). No ledger row covers this reproduction.
+
+A published score averages all its prompts, so a score on fewer prompts cannot test it. While any published prompt is kept
+out, the row's verdict is `not comparable`, and our score on the allowed prompts is recorded beside the published number.
+Board question 14 asks the owner whether that stands.
 
 ## The numbers to reproduce
 
@@ -58,9 +68,10 @@ ImageReward is scored per picture, so the standard error comes from a bootstrap:
 times, keeping each prompt's 3 pictures together. The paper prints no standard error, so the published one is taken as
 equal to ours.
 
-RTD counts as `reproduced` on a row when |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²). Otherwise it is `not
-reproduced`, and both numbers are recorded. The constants sit in `scripts/reproductions/verdict.py` in the replications
-hub.
+When every published prompt was rendered, RTD counts as `reproduced` on a row when
+|ours − published| ≤ 1.96 × √(SE_ours² + SE_published²), and otherwise as `not reproduced`, with both numbers recorded.
+When the guard kept any published prompt out, the row is `not comparable`. The constants and this rule sit in
+`scripts/reproductions/verdict.py` in the replications hub.
 
 Plain SDXL takes the same test against its printed scores. If plain SDXL fails while the prompts and scorer are correct,
 the RTD row is read as a difference in setup and goes through the diagnosis procedure before any verdict is written.
@@ -78,9 +89,10 @@ Each rung saves its config, metrics, image sheet and commit under
 1. **Smoke test.** Prepare the prompts, render 2 Complex prompts on seed 0 with both methods, and score them. It passes when
    every output exists and the time per picture is recorded.
 2. **Overfit.** Does not apply, because nothing trains.
-3. **1% of the data.** Render 10 Complex prompts and 4 Concat prompts on all 3 seeds with both methods. It passes when the
+3. **1% of the data.** Render the first 10 allowed Complex prompts and the first 4 allowed Concat prompts on all 3 seeds with
+   both methods. It passes when the
    image sheet opened at full size shows the prompts' subjects and the scores land in ImageReward's usual range.
 4. **Controls.** With the update size at 0, the RTD path must match plain SDXL's final latent to under 1e-5 (largest
    absolute difference), in one loop on one card. With the update at 0.02, the same comparison must differ by more than
    1e-3, which shows the update does something. Nothing is believed until both pass.
-5. **Full protocol.** All 3,120 pictures per method, split across up to six `bigbatch` jobs.
+5. **Full protocol.** All 3,063 allowed pictures per method, split across up to six `bigbatch` jobs.

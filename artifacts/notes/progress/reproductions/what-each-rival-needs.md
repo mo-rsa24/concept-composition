@@ -26,13 +26,27 @@ have not been run.
 
 | Benchmark | Where the prompts are | Scorer | Status |
 |---|---|---|---|
-| T2I-CompBench Color, Shape, Texture | `t2i-compbench/examples/dataset/{color,shape,texture}_val.txt`, 299, 300 and 299 lines | BLIP-VQA, `BLIPvqa_eval/BLIP_vqa.py` | not yet run |
-| T2I-CompBench Complex | RTD's manifest, 1,000 prompts | ImageReward | not yet run |
-| RareBench Concat | RTD's manifest, inside the 120 RareBench prompts | ImageReward | not yet run |
-| GenEval | `geneval/prompts/evaluation_metadata.jsonl` | Mask2Former through `mmdet` 2.x | not yet run |
+| T2I-CompBench Color, Shape, Texture | `t2i-compbench/examples/dataset/{color,shape,texture}_val.txt`, 300 prompts each | BLIP-VQA, `BLIPvqa_eval/BLIP_vqa.py` | not yet run |
+| T2I-CompBench Complex | RTD's manifest, 1,000 prompts | ImageReward | smoke test passed |
+| RareBench Concat | RTD's manifest, 40 of the 120 RareBench prompts | ImageReward | not yet run |
+| GenEval | `geneval/prompts/evaluation_metadata.jsonl`, 553 prompts of which 99 are two-object | Mask2Former through `mmdet` 2.x | not yet run |
 
-The Color and Texture prompt files hold 299 lines against the 300 prompts ToMe's protocol states. The count is checked
-against each paper's protocol in that rival's `design.md`.
+FKC's row names "GenEval (1000 prompts)", while the released metadata holds 553. FKC's design has to settle which set the
+printed number used.
+
+## Prompts the subject guard keeps out
+
+`scripts/shared/disallowed_subjects.py` applies to every render and score here, and no pair-ledger row covers this work.
+Board question 14 asks the owner how to treat the rows it affects.
+
+| Benchmark | Prompts | Blocked permanently | Need a ledger decision | Allowed |
+|---|---|---|---|---|
+| T2I-CompBench Complex | 1,000 | 6 | 6 | 988 |
+| RareBench Concat | 40 | 1 | 6 | 33 |
+| T2I-CompBench Color | 300 | 2 | 10 | 288 |
+| T2I-CompBench Shape | 300 | 2 | 5 | 293 |
+| T2I-CompBench Texture | 300 | 0 | 0 | 300 |
+| GenEval | 553 | 0 | 0 | 553 |
 
 ## The order the runs take
 
