@@ -1,5 +1,20 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-22",
+   "sha256": "c29423cf729d497ca47b17894ebd3c5a3dc5600c3a5a699bf526e8b2b7c9984d",
+   "state": "drained"
+  },
+  "artifacts/ideas/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e9fab635655ae73a1348fc16a0722706e8adc9f22fb7af612a5a1304fd2dd666",
+   "state": "drained"
+  },
+  "artifacts/notes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "df7805490bd0094cbdc6403ba7158801107b676cc4efd39c669ed5647854c8a1",
+   "state": "drained"
+  },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
    "sha256": "5e33791bdad03998652a2003f5bb58928656fa9154cd70a92e4f14d189fc9acc",
@@ -1419,9 +1434,27 @@
    "at": "2026-11-22",
    "sha256": "6fed8e7396fbe9ffc9695eb7afa22d80a454659a9721863e006996e913bfdb74",
    "state": "drained"
+  },
+  "artifacts/scenes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "c80f7ae9157f2e3aa2d7cf4dfd078700166bfd2dcdcb3a219abd6f40e8d5807f",
+   "state": "drained"
   }
  },
  "held": [
+  "artifacts/drips/answering-the-reviewers",
+  "artifacts/drips/experiments",
+  "artifacts/drips/proofreading-the-paper",
+  "artifacts/ideas/designing-the-correction-loss",
+  "artifacts/ideas/fixing-the-flat-composition",
+  "artifacts/ideas/improving-the-pooled-lora-run",
+  "artifacts/ideas/parallel-sessions-on-poe-dynamics-and-fixes",
+  "artifacts/ideas/the-shortest-path-to-a-clean-composing-render",
+  "artifacts/ideas/what-other-samplers-do-with-the-dropped-factor",
+  "artifacts/notes/from-an-x-post-to-a-twisted-smc-baseline",
+  "artifacts/notes/inference-time-scaling-as-a-search-over-noise",
+  "artifacts/plans/completed",
+  "artifacts/plans/parked",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__co3.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__joint.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__ours.png",
@@ -2420,6 +2453,12 @@
   "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_cat__x__a_dog_seed2_start.png",
   "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_commit.png",
   "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_final.png",
-  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_start.png"
+  "artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/frames/a_dolphin__x__a_porpoise_seed4_start.png",
+  "artifacts/scenes/how-much-correction-is-needed",
+  "artifacts/scenes/iclr-review-response",
+  "artifacts/scenes/noise-shell-and-basins",
+  "artifacts/scenes/what-the-cached-runs-already-show",
+  "artifacts/scenes/when-the-correction-must-arrive",
+  "artifacts/scenes/where-each-condition-lands"
  ]
 }

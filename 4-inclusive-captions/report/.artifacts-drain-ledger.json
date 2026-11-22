@@ -1,5 +1,20 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-22",
+   "sha256": "433c8c8c0eb41661578aa0e3ac8194e64b35b882bd0f44667274081255435a49",
+   "state": "drained"
+  },
+  "artifacts/ideas/README.md": {
+   "at": "2026-11-22",
+   "sha256": "55534885ab0851706d5ef51bb52641cfe3b3569c4b69c3e77e5d1ddd71673ae5",
+   "state": "drained"
+  },
+  "artifacts/ideas/ideas-that-tie-the-ladder-together.md": {
+   "at": "2026-11-22",
+   "sha256": "72150ec9e5be926669d05c2103519c38162913d2e59a59a8c2d7f5a11288d816",
+   "state": "drained"
+  },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
    "sha256": "81b3b0388e97ab2bd64067b7015facfb0eb37466160916df26165c80758d6e7b",
@@ -89,9 +104,22 @@
    "at": "2026-11-22",
    "sha256": "51bb4b1b4ef040ce7c8228e60bff4b3f5c60105d5cf5a5bfa994ce9b7f44882f",
    "state": "drained"
+  },
+  "artifacts/scenes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "0fafc419b915a985a312bf82d4e9b11bc5e6da800d09d01cf76555e97d0d1af3",
+   "state": "drained"
   }
  },
  "held": [
-  "artifacts/results/does-any-caption-say-a-cat-and-a-dog/images"
+  "artifacts/decks/supervisor-meeting",
+  "artifacts/drips/inclusive-captions-mnist-stage",
+  "artifacts/drips/inclusive-captions-pilot",
+  "artifacts/drips/route-inclusive-captions-pilot",
+  "artifacts/ideas/inclusive-captions-axis",
+  "artifacts/results/does-any-caption-say-a-cat-and-a-dog/images",
+  "artifacts/scenes/how-the-inclusive-captions-pilot-works",
+  "artifacts/scenes/how-the-inclusive-labels-mnist-stage-works",
+  "artifacts/scenes/how-the-toy-relabelling-experiment-works"
  ]
 }

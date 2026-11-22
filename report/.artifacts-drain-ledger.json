@@ -1,5 +1,20 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-22",
+   "sha256": "b5e7b89a64a4255210bcd3cc9ac0fccdbba14032b9ac9ea978d0da600179555a",
+   "state": "drained"
+  },
+  "artifacts/ideas/README.md": {
+   "at": "2026-11-22",
+   "sha256": "6cf030792bb3c1c77d3492ea68a72e12fa14342daf2b48f3e1aea9cf187025c1",
+   "state": "drained"
+  },
+  "artifacts/notes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5589d880e6fe888ec5ca455ec59cc4b739b353df39c8849a0069837c23a89c31",
+   "state": "drained"
+  },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
    "sha256": "80c339bee70daddf41a28172aeb1f81e93c7ce52cd93fc10dd79cf1def8bfd9d",
@@ -154,9 +169,36 @@
    "at": "2026-11-22",
    "sha256": "90cc87a3fb58a337553cd8dfbd4555641159826404e17f8f71d04b52bfc16242",
    "state": "drained"
+  },
+  "artifacts/scenes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d97262233e462487664215671dc1e00211cbf2bd6a40ee9b9f1dcbec839ef82b",
+   "state": "drained"
   }
  },
  "held": [
+  "artifacts/_quarantine/learning-captures",
+  "artifacts/_quarantine/paper-figure-duplicates",
+  "artifacts/_quarantine/recap",
+  "artifacts/_quarantine/results-archive",
+  "artifacts/_shared/cross_pair_pool_configs",
+  "artifacts/decks/supervisor-meeting",
+  "artifacts/drips/present-revision-to-supervisor",
+  "artifacts/ideas/beyond-the-product-of-experts",
+  "artifacts/ideas/codex-diagram-render-queue",
+  "artifacts/ideas/direction-gallery",
+  "artifacts/ideas/merge-supervisor-structure",
+  "artifacts/ideas/tidy-repo-loose-files",
+  "artifacts/notes/batch-shape-nondeterminism",
+  "artifacts/notes/progress",
+  "artifacts/notes/session-closes",
+  "artifacts/notes/session-merges",
+  "artifacts/notes/supervisor-meetings",
+  "artifacts/notes/the-mathematics-of-sampling-an-image",
+  "artifacts/notes/the-phd-layout",
+  "artifacts/plans/archived",
+  "artifacts/plans/completed",
+  "artifacts/plans/parked",
   "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-1.png",
   "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-2.png",
   "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-3.png",
@@ -204,7 +246,10 @@
   "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-light.png",
   "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-z-dark.png",
   "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-z-light.png",
-  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__system-dark.png"
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__system-dark.png",
+  "artifacts/scenes/logsnr-explainer",
+  "artifacts/scenes/sdxl-vae-architecture-map",
+  "artifacts/scenes/what-sampling-an-image-means"
  ],
  "pages": {
   "context/data/01-where-it-comes-from.md": {
@@ -241,7 +286,7 @@
   "context/research-guidelines.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "b09b70cb6d8614bfb74db3189285236f73ad7545bf714a52327e88b8b1ad66d4"
+   "page_sha": "b0e18dc4467d6031174dd0160cb07b7cb7f1c915d35745fd0751ee7f0a9b13cc"
   },
   "context/sources.md": {
    "at": "2026-11-22",
@@ -287,7 +332,7 @@
   "environment/hpc/execution-protocol.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "72ba145cfda81ad4df6b905cc4634ab5d2db9b57b54342bf421603a883932ef9"
+   "page_sha": "68b9782963e61f76a025976c72b5c66efb5e96caee0f6e567c547d395ae01d2c"
   },
   "environment/hpc/nodes.md": {
    "at": "2026-11-22",
@@ -297,12 +342,12 @@
   "environment/hpc/throughput.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "2e59e4191024cbd45343e508fed840a47dd879c8bcebbf52a226025ae2d51bbf"
+   "page_sha": "5128d3fd665b4914c98b49839bbb7ac5ce8827f3062667452e3c2fceb20ef3ba"
   },
   "environment/known-failures.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "5012efffa0d176a56624d44370aafd5d043c1630c0fd501842eed980c46da728"
+   "page_sha": "aac5d79e508b6e5744ed073da1fa2636a917362d9bfb2983773f5deab58bf604"
   },
   "environment/overview.md": {
    "at": "2026-11-22",
@@ -312,12 +357,12 @@
   "environment/paper.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "d2fdc012b35dc3259a0cbaf3e6b1eaf8d40b4243dc851de1338f00cd6d7bd9d5"
+   "page_sha": "6676b98b85532b9b00f88ba3216095a768e1dae30f1ba77a1a462f6e5ff26553"
   },
   "environment/provenance.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "e8df81b77c892ec1fd13b083d61c9c3d7e767283d8195edde1280406a4184910",
+   "page_sha": "dc6a0b31424d07db49865186134762e8bb8cd48f8f94eb8cb5a9b6bcf2a816c7",
    "reviewed": true
   },
   "environment/reduce-reuse-recycle-code.md": {
@@ -328,7 +373,7 @@
   "environment/storage.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "4fe6c8404e99fd3ee1a232d0dce718e77cd257149c40cc8206d84d343e5c0cb8"
+   "page_sha": "0b8caec2d73bd3d99771ee00f56f89453e12e6d74b7d235dabda20b85b80b69f"
   },
   "runbook/checking-the-plan-tree.md": {
    "at": "2026-11-22",
@@ -348,12 +393,12 @@
   "runbook/making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "306ca10b95905b06b0adc6cad68b94c74ea1385dfbc490ea945dd73cccdb2029"
+   "page_sha": "9b543caaf7ed5ea3fd7af2cf526b5175dddb4ebc1373ab4039ea66b84ff87269"
   },
   "runbook/making-the-papers-figures/relettering-an-image-with-baked-in-text.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "f4591bc2e721295553538ded6340156db1f45894948d2f7f791442b5ce5fe10a"
+   "page_sha": "4f899faf881ad23c88aa26e7978ef69bcf69b13103acc08d40c55dd48bd8bd68"
   },
   "runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md": {
    "at": "2026-11-22",

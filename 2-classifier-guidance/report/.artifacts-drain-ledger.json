@@ -1,5 +1,10 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-22",
+   "sha256": "48f92d07592b82d181a8662348b5e9aa595a4c157b6dc5a6e1454674d9195302",
+   "state": "drained"
+  },
   "artifacts/results/24-mnist-one-model/README.md": {
    "at": "2026-11-22",
    "sha256": "5cca5d4875a8f2b3dee73fdf6d97301018b9f618305138d69b2a83584519e385",
@@ -457,6 +462,21 @@
   }
  },
  "held": [
+  "artifacts/decks/supervisor-meeting",
+  "artifacts/drips/a2b-mnist-digits-on-a-canvas",
+  "artifacts/drips/bodies-and-species-pushes-on-every-step",
+  "artifacts/drips/can-a-classifier-supply-the-missing-term",
+  "artifacts/drips/classifier-push-on-the-exact-toy",
+  "artifacts/drips/our-photos-both-ways",
+  "artifacts/drips/read-readout-guidance-learning-control",
+  "artifacts/drips/read-refining-generative-process-discriminator",
+  "artifacts/drips/repair-the-classifier-push",
+  "artifacts/drips/reproduce-2105-05233",
+  "artifacts/drips/route-bind-each-body-to-its-concept",
+  "artifacts/drips/route-classifier-guided-poe-from-toy-to-animals",
+  "artifacts/drips/rung2-pair-aware-discriminator",
+  "artifacts/ideas/plurality-comes-from-the-target",
+  "artifacts/notes/session-merges",
   "artifacts/results/24-mnist-one-model/five-versions/sheet-19.png",
   "artifacts/results/24-mnist-one-model/five-versions/sheet-34.png",
   "artifacts/results/24-mnist-one-model/five-versions/sheet-36.png",
@@ -832,6 +852,9 @@
   "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer-dark.png",
   "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer.svg",
   "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer__2026-11-17.svg",
-  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer__2026-11-18.svg"
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer__2026-11-18.svg",
+  "artifacts/scenes/classifier-guidance-on-poe",
+  "artifacts/scenes/mnist-guidance-explained",
+  "artifacts/scenes/product-of-experts-interaction-term"
  ]
 }

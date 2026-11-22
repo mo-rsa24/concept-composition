@@ -1,5 +1,20 @@
 {
  "files": {
+  "artifacts/drips/README.md": {
+   "at": "2026-11-22",
+   "sha256": "64499a9a908241fea6fdfefbdaa7a08188633446d91e2a3f41480b127e20eb05",
+   "state": "drained"
+  },
+  "artifacts/ideas/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d8edf3c073b011852210fcb56b16b76f460dba31fde4687b257c0616c00e3988",
+   "state": "drained"
+  },
+  "artifacts/notes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3ff63e79fd0be3115d69074ab27bbfca266aa34eb4128814713e1a01f9859fc7",
+   "state": "drained"
+  },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
    "sha256": "42eea5e5405302fed2a8424db0160f3aa19cbb96b480a150c9ba842500de069a",
@@ -1234,9 +1249,31 @@
    "at": "2026-11-22",
    "sha256": "88490d13af2ab92322eecb91bb4d29fc40a7028dfc3c7cf374f44344a691918b",
    "state": "drained"
+  },
+  "artifacts/scenes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5dab41e4fa95467dbd42af7bd9ad100a3f48db96284085a005159736ab4f5e6f",
+   "state": "drained"
   }
  },
  "held": [
+  "artifacts/drips/probing-sdxl",
+  "artifacts/drips/read-my-eye-my-brain",
+  "artifacts/drips/the-toy",
+  "artifacts/ideas/disjoint-marginal-support-and-poe-chimeras",
+  "artifacts/ideas/earn-the-plurality-name",
+  "artifacts/ideas/is-poe-ill-posed-for-composition",
+  "artifacts/ideas/one-training-recipe",
+  "artifacts/ideas/poe-chimera-from-the-floor-up",
+  "artifacts/ideas/poe-overlap-dial",
+  "artifacts/ideas/sdxl-shaped-hybrid-testbed",
+  "artifacts/ideas/three-product-comparison",
+  "artifacts/ideas/when-poe-reaches-a-and-b",
+  "artifacts/ideas/which-variable-explains-what-poe-is-missing",
+  "artifacts/notes/coind-conditional-independence-loss",
+  "artifacts/notes/how-the-poe-toy-experiment-works",
+  "artifacts/notes/interaction-term-as-pmi-gradient",
+  "artifacts/notes/what-poe-loses-when-it-composes",
   "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed01/poe.png",
   "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed01/superdiff_200.png",
   "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/tiles/a_camel__x__rain/seed02/mono.png",
@@ -1607,6 +1644,11 @@
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s09_v58-05-self-contrast_37500.png",
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_20000.png",
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_30000.png",
-  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_37500.png"
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/run-02/annotated/a_tiger__x__a_dog_s42_v58-05-self-contrast_37500.png",
+  "artifacts/scenes/how-the-caption-model-works",
+  "artifacts/scenes/parts-world",
+  "artifacts/scenes/three-ways-a-product-reaches-a-and-b",
+  "artifacts/scenes/what-an-expert-learns-cell-by-cell",
+  "artifacts/scenes/when-a-product-reaches-a-and-b"
  ]
 }
