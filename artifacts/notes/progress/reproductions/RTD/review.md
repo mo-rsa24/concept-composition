@@ -14,10 +14,12 @@ Pictures and scores are on the cluster under `/datasets/mmolefe/poe_repair_min/l
 | Smoke test | 92814, 92815, 92817, 92818 | `1c86bf0a-5c50228` | `smoke/` | passed |
 | Zero-update check | 92816, then 92823 with the guard | `1c86bf0a-5c50228`, `e39a31ca-0739e7e` | `controls/` | passed |
 | 1% of the data | 92819, 92821, 92822, 92834 (retry of 92820), scored by 92836 and 92837 | `e39a31ca-0739e7e` | `one-percent/` | passed |
-| Full protocol | 92838 to 92843 | `71c7a091-2d34fee` | `full/` | running |
+| Full protocol, Concat | 92840, 92843 | `71c7a091-2d34fee` | `full/` | running |
+| Full protocol, Complex | 92859 to 92862, continuing the pictures of 92838, 92839, 92841 and 92842 | `045e027f-94b2919`, and `71c7a091-2d34fee` for the pictures already made | `full/` | running |
 
-Job 92820 failed when two jobs created one output folder at the same moment on the shared disk. Its retry, 92834, finished,
-and commit `31c73a8` in the hub makes the renderer tolerate that race.
+Jobs 92820 and 92842 failed when two jobs created one prompt's output folder at the same moment on the shared disk. Jobs
+92838, 92839 and 92841 were stopped because they carried the same risk. Commit `94b2919` in the hub splits jobs by prompt, so
+no two jobs write into one folder. Both commits render with the same pipeline and settings, and finished pictures were kept.
 
 ## Questions
 
