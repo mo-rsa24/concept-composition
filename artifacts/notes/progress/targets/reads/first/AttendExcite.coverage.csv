@@ -1,0 +1,7 @@
+table,page,status,rows,reason
+1,7,read,21,
+2,8,read,12,
+3,10,no results,0,"Lists the animals, objects and colors that define the prompt subsets"
+4,14,read,9,
+5,14,read,5,
+6,14,read,9,
