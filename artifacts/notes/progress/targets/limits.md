@@ -36,7 +36,7 @@ published row of every benchmark, including datasets this page does not discuss,
 | CLEVR (object positions), Coordinate 2 conditionings | Accuracy | 94.5 | Du | DomainExpansion Table 2, p3 |  | Page 4 says the coordinator outperforms the baselines significantly, while Table 2 (p3) prints the RRR baseline at 94.5 and the coordinator at 94.1 at two conditionings. |
 | CLEVR (object positions), Coordinate 3 conditionings | Accuracy | 86.3 | DomainExpansion | DomainExpansion Table 2, p3 |  |  |
 | CLEVR (object positions), Coordinate 4 conditionings | Accuracy | 66.8 | DomainExpansion | DomainExpansion Table 2, p3 |  |  |
-| CLEVR (object positions), Coordinate 5 conditionings | Accuracy | 44.5 | DomainExpansion | DomainExpansion Table 2, p3 |  |  |
+| CLEVR (object positions), 5 conditionings, Coordinate 5 conditionings | Accuracy | 44.5 | DomainExpansion | DomainExpansion Table 2, p3 |  |  |
 | CLEVR Position, 1 position constraints | Accuracy (%) | 100.0 | Liu | LiftScores Table 5, p21 |  |  |
 | CLEVR Position, 2 position constraints | Accuracy (%) | 100.0 | Liu | LiftScores Table 5, p21 |  |  |
 | CLEVR Position, 3 position constraints | Accuracy (%) | 99.9 | LiftScores | LiftScores Table 5, p21 |  |  |
@@ -85,7 +85,7 @@ published row of every benchmark, including datasets this page does not discuss,
 | Colored MNIST Partial support, ¬ Color composition | CS (%) | 64.84 | CoInD | CoInD Table 3, p19 |  | Table 5 (p22) prints 150 DDIM sampling steps for Colored MNIST and the text on p22 says 100 steps. |
 | Colored MNIST Partial support, ¬ Digit composition | CS (%) | 53.12 | CoInD | CoInD Table 3, p19 |  | Table 5 (p22) prints 150 DDIM sampling steps for Colored MNIST and the text on p22 says 100 steps. |
 | Colored MNIST Partial support, Violation of conditional independence between attributes | JSD | 1.11 | CoInD | CoInD Table 3, p19 |  | Table 5 (p22) prints 150 DDIM sampling steps for Colored MNIST and the text on p22 says 100 steps. |
-| CMNIST, AND | Conformity score (%) | 80.4 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
+| CMNIST, AND, AND | Conformity score (%) | 80.4 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
 | CMNIST, NOT | Conformity score (%) | 96.5 | LogicalGuidance | LogicalGuidance Table 2, p5 | Constant 99.5 (LogicalGuidance Table 2) | LoGDiff prints CMNIST NOT as 96.5 in Table 2 (p5) and 97.38 in Table 11 (p26). |
 | CMNIST, OR-ME | Conformity score (%) | 98.0 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
 | CMNIST, OR-CI | Conformity score (%) | 97.2 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
@@ -93,14 +93,14 @@ published row of every benchmark, including datasets this page does not discuss,
 | CMNIST, N=3 | Conformity score (%) | 93.3 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
 | CMNIST, N=4 | Conformity score (%) | 94.2 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
 | CMNIST, N=5 | Conformity score (%) | 94.4 | LogicalGuidance | LogicalGuidance Table 2, p5 |  |  |
-| CMNIST, AND | Conformity score (%) | 83.6 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
+| CMNIST, AND, AND | Conformity score (%) | 83.6 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, NOT | Conformity score (%) | 98.4 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, OR-CI | Conformity score (%) | 98.0 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, N=2 | Conformity score (%) | 94.7 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, N=3 | Conformity score (%) | 94.3 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, N=4 | Conformity score (%) | 95.1 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
 | CMNIST, N=5 | Conformity score (%) | 95.5 | LogicalGuidance | LogicalGuidance Table 4, p7 |  |  |
-| CMNIST, AND | CS (Conformity Score) | 80.39 | LogicalGuidance | LogicalGuidance Table 11, p26 |  |  |
+| CMNIST, AND, AND | CS (Conformity Score) | 80.39 | LogicalGuidance | LogicalGuidance Table 11, p26 |  |  |
 | CMNIST, NOT | CS (Conformity Score) | 99.41 | Liu | LogicalGuidance Table 11, p26 |  | The constant-weight NOT row prints 99.5 in Table 2 (p5) where Table 11 (p26) prints 99.41 for the plain negation rule, and LoGDiff prints 96.5 in Table 2 and 97.38 in Table 11. |
 | CMNIST, OR-ME | CS (Conformity Score) | 98.01 | LogicalGuidance | LogicalGuidance Table 11, p26 |  |  |
 | CMNIST, OR-CI | CS (Conformity Score) | 97.54 | SuperDiff | LogicalGuidance Table 11, p26 |  |  |
@@ -132,8 +132,8 @@ published row of every benchmark, including datasets this page does not discuss,
 | CelebA Orthogonal support, Violation of conditional independence between attributes | JSD | 0.37 | CoInD | CoInD Table 6, p27 |  |  |
 | CelebA Orthogonal support, Joint | CS (%) | 58.57 | CoInD | CoInD Table 6, p27 |  |  |
 | CelebA Orthogonal support, Joint | FID | 58.19 | CoInD | CoInD Table 6, p27 |  |  |
-| CelebA Orthogonal support, ∧ composition | CS (%) | 49.15 | CoInD | CoInD Table 6, p27 |  |  |
-| CelebA Orthogonal support, ∧ composition | FID | 61.16 | CoInD | CoInD Table 6, p27 |  |  |
+| CelebA Orthogonal support, ∧ composition, ∧ composition | CS (%) | 49.15 | CoInD | CoInD Table 6, p27 |  |  |
+| CelebA Orthogonal support, ∧ composition, ∧ composition | FID | 61.16 | CoInD | CoInD Table 6, p27 |  |  |
 | CelebA Orthogonal support, ¬ composition | CS (%) | 18.80 | CoInD | CoInD Table 6, p27 |  | Page 27 states a 2× improvement in ¬ CS over Composed GLIDE, while Table 6 prints 18.80 against 11.02. |
 | CelebA Orthogonal support, ¬ composition | FID | 86.31 | CoInD | CoInD Table 6, p27 |  |  |
 | CelebA, AND | CS (Conformity Score) | 0.63 | LogicalGuidance | LogicalGuidance Table 3, p6 |  |  |
@@ -166,8 +166,8 @@ published row of every benchmark, including datasets this page does not discuss,
 | Shapes3D Uniform support, ¬ composition | R2 | 0.92 | CoInD | CoInD Table 4, p20 |  |  |
 | Shapes3D Uniform support, ¬ composition | CS (%) | 64.06 | CoInD | CoInD Table 4, p20 |  |  |
 | Shapes3D Uniform support, Violation of conditional independence between attributes | JSD | 0.215 | CoInD | CoInD Table 4, p20 |  |  |
-| Shapes3D Partial support, ∧ composition | R2 | 0.97 | CoInD | CoInD Table 4, p20 |  |  |
-| Shapes3D Partial support, ∧ composition | CS (%) | 91.10 | CoInD | CoInD Table 4, p20 |  |  |
+| Shapes3D Partial support, ∧ composition, ∧ composition | R2 | 0.97 | CoInD | CoInD Table 4, p20 |  |  |
+| Shapes3D Partial support, ∧ composition, ∧ composition | CS (%) | 91.10 | CoInD | CoInD Table 4, p20 |  |  |
 | Shapes3D Partial support, ¬ composition | R2 | 0.92 | CoInD | CoInD Table 4, p20 |  |  |
 | Shapes3D Partial support, ¬ composition | CS (%) | 53.90 | CoInD | CoInD Table 4, p20 |  |  |
 | Shapes3D Partial support, Violation of conditional independence between attributes | JSD | 0.287 | CoInD | CoInD Table 4, p20 |  |  |
@@ -196,12 +196,12 @@ published row of every benchmark, including datasets this page does not discuss,
 
 | Benchmark | Metric | Best published | Holder | Where | Printed above it | Disputed |
 |---|---|---|---|---|---|---|
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | FID, ODE inference | 4.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | IS, ODE inference | 9.21 | SuperDiff | SuperDiff Table 1, p8 |  |  |
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | FLD, ODE inference | 5.89 ± 0.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | FID, SDE inference | 4.00 | SuperDiff | SuperDiff Table 1, p8 | model_{A union B} 3.50 (SuperDiff Table 1); model_{A OR B} 3.99 (SuperDiff Table 1) | Page 7 says SuperDiff performs even better than the model trained on the union of both parts, while Table 1 (p8) prints SDE FID 4.00 for SuperDiff and 3.50 for that model. |
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | IS, SDE inference | 9.48 | SuperDiff | SuperDiff Table 1, p8 |  |  |
-| CIFAR-10 split into two disjoint partitions A and B, unconditional image generation from two models trained on disjoint data (logical OR) | FLD, SDE inference | 5.20 ± 0.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | FID, ODE inference | 4.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | IS, ODE inference | 9.21 | SuperDiff | SuperDiff Table 1, p8 |  |  |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | FLD, ODE inference | 5.89 ± 0.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | FID, SDE inference | 4.00 | SuperDiff | SuperDiff Table 1, p8 | model_{A union B} 3.50 (SuperDiff Table 1); model_{A OR B} 3.99 (SuperDiff Table 1) | Page 7 says SuperDiff performs even better than the model trained on the union of both parts, while Table 1 (p8) prints SDE FID 4.00 for SuperDiff and 3.50 for that model. |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | IS, SDE inference | 9.48 | SuperDiff | SuperDiff Table 1, p8 |  |  |
+| CIFAR-10 disjoint halves, unconditional image generation from two models trained on disjoint data (logical OR) | FLD, SDE inference | 5.20 ± 0.11 | SuperDiff | SuperDiff Table 1, p8 |  |  |
 | CIFAR-10 split into two random partitions A and B, class-conditional image generation from two models trained on random partitions (logical OR) | FID, ODE inference | 4.63 | SuperDiff | SuperDiff Table A1, p30 |  |  |
 | CIFAR-10 split into two random partitions A and B, class-conditional image generation from two models trained on random partitions (logical OR) | IS, ODE inference | 9.00 | SuperDiff | SuperDiff Table A1, p30 | model_{A union B} 9.04 (SuperDiff Table A1) |  |
 | CIFAR-10 split into two random partitions A and B, class-conditional image generation from two models trained on random partitions (logical OR) | FLD, ODE inference | 6.81 ± 0.19 | SuperDiff | SuperDiff Table A1, p30 |  |  |
@@ -249,8 +249,11 @@ published row of every benchmark, including datasets this page does not discuss,
 | T2I-Compbench (400 prompts), objective metric, selected noise | CLIP-S | 16.35 | AttendExcite | PiCo Table I, p5 |  | Table I prints this score with no caveat (p5), and Table IV prints the same score under a caption saying these results are not reliable for text-image alignment (p7). |
 | T2I-Compbench (400 prompts), automatic comparison | VQAScore | 0.50 | PiCo | PiCo Table IV, p7 |  | Table IV's caption says its results are not reliable for text-image alignment (p7). |
 | T2I-Compbench (400 prompts), automatic comparison | CLIPScore | 16.35 | AttendExcite | PiCo Table IV, p7 |  | Table IV's caption says its results are not reliable for text-image alignment (p7). |
+| T2I-CompBench Color, attribute binding | T2I-CompBench result | 0.7827 | CoMat | CoMat Table 1, p7 |  | ToMe quotes CoMat on SDXL at 0.7774 (ToMe Table 1, p8), and CoMat's arXiv v3 prints 0.7827 (Table 1, p7). |
+| T2I-CompBench Shape, attribute binding | T2I-CompBench result | 0.5329 | CoMat | CoMat Table 1, p7 |  | ToMe quotes CoMat on SDXL at 0.5262 (ToMe Table 1, p8), and CoMat's arXiv v3 prints 0.5329 (Table 1, p7). |
+| T2I-CompBench Texture, attribute binding | T2I-CompBench result | 0.6468 | CoMat | CoMat Table 1, p7 | PixArt-α 0.6477 (CoMat Table 1) | ToMe quotes CoMat on SDXL at 0.6591 (ToMe Table 1, p8), and CoMat's arXiv v3 prints 0.6468 (Table 1, p7). CoMat's table highlights its own score as best while printing PixArt-α higher. |
 
-**Where it breaks.** BLIP-VQA falls from Color to Shape: SDXL scores 0.6369 on Color and 0.5408 on Shape, and ToMe scores 0.7656 and 0.6051. Seen in ToMe Fig 5 p8 (prompt set not stated). ImageReward falls from Color to Shape: SDXL scores 0.7798 on Color and 0.4029 on Shape, and ToMe scores 1.074 and 0.5916. Seen in ToMe Fig 5 p8 (prompt set not stated). On prompts with three or more concepts, ToMe falls below plain SDXL on ImageReward (0.2891 against 0.3083) and on human evaluation (0.5866 against 0.5983). Seen in CO3 Fig 4 p8; CO3 Fig 10 p24. No baseline passes an exact-count match of 55% and SDXL has a counting MAE of 2.72. CountLoop reaches 70% only with CountGD++, the exact-count scorer, as its critic. Seen in CountLoop Fig 6 p9 (authors' count prompts). Annotators mark both concepts present in 27.5% of Stable Diffusion images and 36.0% of PiCo images under random noise, and in 41.8% of PiCo images with its selected noise. Seen in PiCo Fig 2 p4; PiCo Fig 16 p14.
+**Where it breaks.** BLIP-VQA falls from Color to Shape: SDXL scores 0.6369 on Color and 0.5408 on Shape, and ToMe scores 0.7656 and 0.6051. Seen in ToMe Fig 5 p8 (prompt set not stated). ImageReward falls from Color to Shape: SDXL scores 0.7798 on Color and 0.4029 on Shape, and ToMe scores 1.074 and 0.5916. Seen in ToMe Fig 5 p8 (prompt set not stated). On prompts with three or more concepts, ToMe falls below plain SDXL on ImageReward (0.2891 against 0.3083) and on human evaluation (0.5866 against 0.5983). Seen in CO3 Fig 4 p8; CO3 Fig 10 p24. No baseline passes an exact-count match of 55% and SDXL has a counting MAE of 2.72. CountLoop reaches 70% only with CountGD++, the exact-count scorer, as its critic. Seen in CountLoop Fig 6 p9 (authors' count prompts). Annotators mark both concepts present in 27.5% of Stable Diffusion images and 36.0% of PiCo images under random noise, and in 41.8% of PiCo images with its selected noise. Seen in PiCo Fig 2 p4; PiCo Fig 16 p14. Plain SDXL scores 0.5879 on this subset in CoMat's table and 0.6369 in ToMe's, so the two tables do not share a protocol. Seen in CoMat Fig 6 p9; CoMat Fig 7 p10. Plain SDXL scores 0.4687 on this subset in CoMat's table and 0.5408 in ToMe's, so the two tables do not share a protocol. Seen in CoMat Fig 6 p9; CoMat Fig 7 p10. Plain SDXL scores 0.5299 on this subset in CoMat's table and 0.5637 in ToMe's, so the two tables do not share a protocol. Seen in CoMat Fig 6 p9; CoMat Fig 7 p10.
 
 **What matching it costs.** All experiments ran on an NVIDIA-A40 GPU. (ToMe p16) All experiments ran on a single NVIDIA A6000 GPU (48GB). (CO3 p6) CountLoop is training-free. (CountLoop p1) Noise selection takes 2.03 s per prompt at the default T_s = 5. (PiCo p5)
 

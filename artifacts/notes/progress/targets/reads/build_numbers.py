@@ -44,6 +44,13 @@ def main():
                 sys.exit(f'{path.name}: columns differ from the required list')
             rows.extend(reader)
 
+    # A task inside one table can be its own benchmark, such as 5 objects against 1, and the scoreboard check
+    # compares dataset, metric and protocol only. Values are never touched.
+    with (HERE / 'benchmark-names.csv').open(newline='') as handle:
+        names = {(n['source_table'], n['dataset'], n['task']): n['new_dataset'] for n in csv.DictReader(handle)}
+    for row in rows:
+        row['dataset'] = names.get((row['source_table'], row['dataset'], row['task']), row['dataset'])
+
     repeated = [key for key, count in Counter(row['id'] for row in rows).items() if count > 1]
     if repeated:
         sys.exit(f'{len(repeated)} repeated ids, first: {repeated[:3]}')

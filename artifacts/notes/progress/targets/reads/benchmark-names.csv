@@ -1,0 +1,8 @@
+source_table,dataset,task,new_dataset
+DomainExpansion Table 2,CLEVR (object positions),Coordinate 5 conditionings,"CLEVR (object positions), 5 conditionings"
+CoInD Table 4,Shapes3D Partial support,∧ composition,"Shapes3D Partial support, ∧ composition"
+CoInD Table 6,CelebA Orthogonal support,∧ composition,"CelebA Orthogonal support, ∧ composition"
+LogicalGuidance Table 2,CMNIST,AND,"CMNIST, AND"
+LogicalGuidance Table 4,CMNIST,AND,"CMNIST, AND"
+LogicalGuidance Table 11,CMNIST,AND,"CMNIST, AND"
+SuperDiff Table 1,CIFAR-10 split into two disjoint partitions A and B,unconditional image generation from two models trained on disjoint data (logical OR),CIFAR-10 disjoint halves

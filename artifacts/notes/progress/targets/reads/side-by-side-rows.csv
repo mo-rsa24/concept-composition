@@ -1,0 +1,28 @@
+paper,dataset,rival,failure
+Paper 1,"CLEVR (object positions), 5 conditionings",DomainExpansion,At 5 positions only 2 of 9 samples fill every marked spot (33 of 45 filled); one fills just 1 of 5
+Paper 1,"CLEVR (object positions), 5 conditionings",Du,One sample at 5 positions leaves 2 of the 5 marked spots empty
+Paper 1,"CLEVR (object positions), 5 conditionings",MultiDiffusion,No CLEVR picture printed. On region prompts it needs a mask per object and still adds a rider
+Paper 1,"Shapes3D Partial support, ∧ composition",CoInD,"Own failure panel: wrong wall colour, sphere for a cylinder, object dissolved into noise"
+Paper 1,"Shapes3D Partial support, ∧ composition",Liu,"Wrong shape or size, with colour noise across the scene on partial support"
+Paper 1,"CMNIST, AND",Liu,"Draws avoided digits and colours, or broken strokes instead of a 4, on skewed training data"
+Paper 1,"CMNIST, AND",LogicalGuidance,"Keeps a clear forbidden 1 at weights 1.0 and 1.5, then warps it into a lump; a deep blue 5 survives not-blue"
+Paper 1,"CMNIST, AND",SuperDiff,No Colored MNIST picture printed. On Stable Diffusion pairs it fuses one object on 17 of 20 first-seed rows
+Paper 1,"CelebA Orthogonal support, ∧ composition",CoInD,"Own failure panel: a shout instead of a smile, and a faint smile on a warped face"
+Paper 1,"CelebA Orthogonal support, ∧ composition",Liu,"Composed prompts draw women, including for smiling NOT female"
+Paper 1,CIFAR-10 disjoint halves,SuperDiff,No CIFAR-10 failure printed. On Stable Diffusion pairs it fuses one object on 17 of 20 first-seed rows
+Paper 2,T2I-CompBench Color,AttendExcite,"Loses the cactus, miscolours apple and vase, and tangles the squirrel with a bird shape."
+Paper 2,T2I-CompBench Color,CoMat,Draws two wallets for one; robot penguin and glass violin only partly converted; travellers and hotel room dropped
+Paper 2,T2I-CompBench Color,Liu,"Drops or fuses subjects: bird and flower become one bird, the dog vanishes, 6 of 16 train-and-river samples have no train"
+Paper 2,T2I-CompBench Color,ToMe,"Keeps subjects apart but turns hats into hoods, a sheep into a goat, and loses the earrings"
+Paper 2,T2I-CompBench Shape,AttendExcite,"Loses the cactus, miscolours apple and vase, and tangles the squirrel with a bird shape."
+Paper 2,T2I-CompBench Shape,CoMat,Draws two wallets for one; robot penguin and glass violin only partly converted; travellers and hotel room dropped
+Paper 2,T2I-CompBench Shape,Liu,"Drops or fuses subjects: bird and flower become one bird, the dog vanishes, 6 of 16 train-and-river samples have no train"
+Paper 2,T2I-CompBench Shape,ToMe,"Keeps subjects apart but turns hats into hoods, a sheep into a goat, and loses the earrings"
+Paper 2,T2I-CompBench Texture,AttendExcite,"Loses the cactus, miscolours apple and vase, and tangles the squirrel with a bird shape."
+Paper 2,T2I-CompBench Texture,CoMat,Draws two wallets for one; robot penguin and glass violin only partly converted; travellers and hotel room dropped
+Paper 2,T2I-CompBench Texture,Liu,"Drops or fuses subjects: bird and flower become one bird, the dog vanishes, 6 of 16 train-and-river samples have no train"
+Paper 2,T2I-CompBench Texture,ToMe,"Keeps subjects apart but turns hats into hoods, a sheep into a goat, and loses the earrings"
+Paper 2,T2ICompbench Complex,CO3,"Glass sits on the coaster, not next to it; a floor flame replaces the torch"
+Paper 2,T2ICompbench Complex,ToMe,Turns pairs into repeated wallpaper patterns; draws a literal crack with no bat
+Paper 2,RareBench Concat,CO3,"Misses rare traits: hornless lemons, no thorns, octopus with a bear face, spots on the bird"
+Paper 2,RareBench Concat,ToMe,"Drops lion, octopus, owl and bottle; rides a bicycle instead of a unicycle"
