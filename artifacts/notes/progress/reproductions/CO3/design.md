@@ -26,16 +26,20 @@ The paper states its settings in section 4.1 and appendix A.4. The script its RE
 
 | Setting | Paper | Released script |
 |---|---|---|
-| Guidance | DDIM, λ = 5.0 | CFG++, 0.8 |
-| Steps corrected | 10 (the first 20%) | 6 |
-| Weight modulation β | 0.8 | 0.9 |
+| Guidance | DDIM, λ = 5.0 in section 4.1; λ = 0.8 and 0.9 in the ablation Tables 9 to 13 of appendix A.8 | CFG++, 0.8 |
+| Steps corrected | 10 (the first 20%) in section 4.1; 6 and 7 in Tables 12 and 13 | 6 |
+| Weight modulation β | 0.8 in section 4.1; values from 0.3 to 1.1 in appendix A.8 | 0.9 |
 | Resampling steps | 3 | 3 |
 | Corrector iterations per step | 5 | 10 on the first 2 steps, hard-coded in `Co3.py`, then 5 |
-| Corrector guidance `lmda` | λ̃ = λ, so 5.0 | 0.8 |
+| Corrector guidance `lmda` | λ̃ = λ, so 5.0 in section 4.1 | 0.8 |
 
 The code does not settle this. Its corrector re-noises with the unconditional prediction whatever the sampler is, which is the
 CFG++ form, and `attn_utils.py` documents `lmda` as between 0 and 1. Running the paper's λ = 5.0 through that corrector puts it
 outside the range the code documents.
+
+The paper's own ablations therefore run near the released script's settings, while section 4.1 states different ones. The
+[CO3 Corrector Round page](https://claude.ai/artifact/9hHS8hf9vtTWHikPVcm52x) shows where the corrector's code differs from
+Algorithm 3, including a rescale by largest entries where the paper prints a ratio of norms.
 
 By the owner's answer to board question 16, this run uses the released script exactly as shipped and is judged against the
 paper's Table 2. Each row's note states both sets of settings, because a miss could come from the settings rather than from CO3.
