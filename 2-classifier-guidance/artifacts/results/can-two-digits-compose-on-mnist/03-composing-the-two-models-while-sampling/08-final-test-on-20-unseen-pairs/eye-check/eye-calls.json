@@ -26,5 +26,26 @@
   "clear": "two clear, right digits",
   "plausible": "readable as the asked digits but malformed",
   "wrong": "a digit is missing, wrong, or a second copy"
+ },
+ "reasons": {
+  "3-8": {
+   "141": "right shape is a curved stroke with a branch, no 8",
+   "144": "right shape reads as a 2, so no 3",
+   "153": "an 8 with an extra fork on top",
+   "159": "right side is broken strokes, no 8",
+   "162": "an 8 with an open bottom, could read as a 9",
+   "167": "right shape is a slanted scribble, no 8",
+   "179": "both readable, the 3 is filled and the 8 has an extra stroke",
+   "183": "a clear 8 and a clear 3"
+  },
+  "4-9": {
+   "132": "a 9 with an open loop and a blocky Y-shaped 4",
+   "145": "left shape is forked strokes and a U, no clear 4",
+   "149": "a 4 and a 9 whose loop is almost filled in",
+   "170": "right shape is a Y, no 9",
+   "176": "a 9 with a gap in its loop and a clear 4",
+   "177": "a thick 4 with its loop almost filled, and a clear 9",
+   "179": "right shape reads as a second thick 4, no 9"
+  }
  }
 }

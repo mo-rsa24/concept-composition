@@ -115,6 +115,10 @@ Navigation: ⬅️ [Whether it cleared the written bars](#whether-it-cleared-the
 
 The plan counts its headline by eye because the judge can reject digits a person would accept. Its rule is to look at every tile the judge rejected on any pair under 58 of 64. Two pairs qualify, which makes 15 tiles.
 
+<a href="eye-check/eye-calls-with-reasons.png"><img src="eye-check/eye-calls-with-reasons.png" width="420" alt="the 15 rejected canvases framed green, orange or red by call, each with its reason"></a>
+
+Every tile is shown above with its call and the reason for it, so any call can be overruled.
+
 <table>
 <tr>
 <td><a href="eye-check/rejected-tiles__digits-3-and-8.png"><img src="eye-check/rejected-tiles__digits-3-and-8.png" width="320" alt="the 8 canvases the judge rejected for 3 and 8, each labelled with its seed"></a></td>
