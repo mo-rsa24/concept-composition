@@ -21,22 +21,13 @@ Each of the 11 sittings reads one idea across two to four sources, against the j
 Each sitting is budgeted at 90 minutes, the allowance [the progress board](../board.json) gives its five reading blocks, so the 11 come to 16.5 hours. No sitting has been timed yet, and walking a paired plan takes extra time. Most paired plans are not walked yet. A sitting still runs without them, because combine gives a plain reading of each passage, and the "Before" plan is the one to walk when a passage does not land. The ideas no journey teaches are [listed at the end](#ideas-no-journey-plan-teaches).
 
 <details>
-<summary>How the five route sittings became eleven, and what to check</summary>
+<summary>What to check in this plan</summary>
 
-| Sitting in [the route](../../../../plans/route-two-papers.md) | Sittings here |
-|---|---|
-| 1. When a product is valid | 1, 2 and 6 |
-| 2. Composing by regions | 7 and 8 |
-| 3. Samplers and correctors | 3 |
-| 4. When a sample commits | 11 |
-| 5. Amplifying a product | 5 and 9 |
-| Added to place the remaining rivals | 4 and 10 |
+**The source cap.** Combine allows four sources and the home plan counts as one, so a sitting holds at most three papers.
 
-**The source cap.** Combine allows four sources and the home plan counts as one, so a sitting holds at most three papers. That is why the route's four-paper sittings split.
+**CO3 sits in sitting 5.** Reading Rectify Then Diffuse's target rows means checking which of its CO3 rows were copied from CO3's paper, so the two are read together.
 
-**CO3 moved.** The route lists CO3 under amplifying a product. It sits in sitting 5 here because reading Rectify Then Diffuse's target rows means checking which of its CO3 rows were copied from CO3's paper.
-
-**"Wang et al." is read as the test-time paper.** The route does not say which Wang. The [ICLR bibliography](../../../../writing/iclr/iclr2027_conference.bib) holds one Wang entry, `wang2026testtime`, so this is an inference to confirm.
+**"Wang et al." is read as the test-time paper.** The [ICLR bibliography](../../../../writing/iclr/iclr2027_conference.bib) holds one Wang entry, `wang2026testtime`, so this is an inference to confirm.
 
 **Sitting 11 needs a decision.** No PDF of Biroli, Achilli or Albrychiewicz is on this machine. [Journey 05's source list](../../../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/sources/SOURCES.md) holds Biroli and Achilli as video lectures and gives Achilli's arXiv id, 2602.04404. Albrychiewicz appears only in the route and on the board. Until PDFs arrive, the sitting reads four journey plans.
 
