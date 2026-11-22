@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'flowchart': {'wrappingWidth': 620}, 'themeVariables': {'fontFamily': 'monospace', 'fontSize': '15px', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef low fill:#d3f9d8,stroke:#222222,stroke-width:2px,color:#111111
+  classDef risk fill:#ffe8cc,stroke:#222222,stroke-width:2px,color:#111111
+  classDef out fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#495057
+
+  A["<b>Prune list</b><br/>6,594 files, 2.79 GB<br/>no page, card, plan, paper,<br/>script or data file names them"]:::plain
+
+  L["<b>Low risk: 3,764 files, 2.06 GB</b><br/>LoRA correction: 3,371 files, 2,041.8 MB<br/>understanding compositionality: 323 files, 6.2 MB<br/>text embedding: 14 files, 6.3 MB<br/>classifier guidance: 4 files, 3.4 MB<br/>repository root: 14 files, 3.0 MB<br/>inclusive captions: 38 files, 0.5 MB"]:::low
+
+  C["<b>Check first: 2,830 files, 728 MB</b><br/>repository root: 1,940 files, 676.8 MB<br/>inclusive captions: 195 files, 25.5 MB<br/>LoRA correction: 648 files, 20.0 MB<br/>classifier guidance: 26 files, 3.6 MB<br/>understanding compositionality: 21 files, 2.1 MB<br/>a scene, deck or walk may load these by a built name"]:::risk
+
+  X[("Cluster and laptop archive<br/>checksum matched before each move")]:::out
+  S["<b>Stay in the repo</b><br/>say hold, and both groups stay"]:::plain
+
+  A --> L
+  A --> C
+  L -->|"move low risk (recommended)<br/>or move all"| X
+  C -.->|"move all only:<br/>can break pages"| X
+  C -->|"move low risk"| S
