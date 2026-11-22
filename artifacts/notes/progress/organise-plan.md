@@ -1,7 +1,8 @@
 # 🧭 Progress: organising the classifier guidance and inclusive captions artifacts
 
-The laptop keeps the front-facing pictures of each result, the ones good enough to go in a paper. The
-cluster holds everything else, and each result's card says exactly where it sits. Step O1 on the
+The laptop keeps one front-facing picture from each run or variant folder, the one good enough to go
+in a paper. The cluster holds everything else, and each result's card says exactly where it sits.
+Step O1 on the
 [progress board](board.json) tracks this work. Counts were measured on 2026-11-22.
 
 <a href="organise-before-after.png"><img src="organise-before-after.png" width="520" alt="One real run folder of 260 files becomes one picture and one card row on the laptop, with all 260 files on the cluster"></a>
@@ -22,16 +23,18 @@ cluster holds everything else, and each result's card says exactly where it sits
 
 | Tree | Result pictures now | Pages show now | Result pictures on the laptop after |
 |---|---|---|---|
-| `2-classifier-guidance` | 13,755 | 69 | 108 to 319 |
-| `4-inclusive-captions` | 166 | 11 | 16 to 31, plus the 155 web images until the owner decides |
+| `2-classifier-guidance` | 13,755 | 69 | about 124 |
+| `4-inclusive-captions` | 166 | 11 | 12, plus the other 154 web images until the owner decides |
 
-The range comes from keeping 5 to 20 pictures per result across 18 classifier guidance results and 6
-inclusive captions results. A result with fewer pictures keeps all of them.
+A count of 124 assumes the pictures a page shows from one folder are variants of one figure. If some
+are different figures, each stays, and the classifier guidance count reaches at most 142.
 
 ## What stays on the laptop
 
-1. Every picture a report page, pillar page, plan or the paper shows.
-2. The best sheets of each result, up to 20 pictures in all, chosen by opening them.
+1. One picture from each run or variant folder, chosen by opening the candidates. Seeds, checkpoints,
+   rounds and settings of one figure count as one. A result keeps 20 pictures at most.
+2. Every picture the paper prints. A page showing several variants from one folder keeps the chosen
+   one and cites the others on the cluster.
 3. The data files a page cites.
 4. One card per result.
 5. Scenes, decks and walks, because each needs its own files to open.
@@ -80,7 +83,7 @@ the generated results index.
   does-any-caption-say-a-cat-and-a-dog/
 ```
 
-Each result folder on the laptop then holds its card, its 5 to 20 pictures and `on-the-cluster.tsv`.
+Each result folder on the laptop then holds its card, one picture per run and `on-the-cluster.tsv`.
 
 ## How a result cites the cluster
 
@@ -105,8 +108,9 @@ Each stage ends in a check, and a failed check stops the next one.
    equal files on disk.
 2. **Copy each result to `/datasets`.** The check: every checksum on the cluster matches.
 3. **Pick the front-facing pictures.** One agent per result opens the candidate sheets at full size,
-   checks each against the subject guard and pair ledger, and picks 5 to 20. The check: every result
-   is inside the limit, and no held or guarded picture is picked.
+   checks each against the subject guard and pair ledger, and picks one per run or variant folder.
+   The check: no folder keeps two variants, no result passes 20, and no held or guarded picture is
+   picked.
 4. **Regroup and write the cards.** Put the picks in place, write each card and `on-the-cluster.tsv`,
    repoint the five `rung2` scripts and the page links. The check: no new broken link, and every
    script compiles.

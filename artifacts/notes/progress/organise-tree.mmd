@@ -3,19 +3,19 @@ flowchart LR
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
   classDef out fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#495057
 
-  R["classifier guidance results<br/><b>13,755 pictures now</b><br/><b>108 to 319 after</b>"]:::plain
+  R["classifier guidance results<br/><b>13,755 pictures now</b><br/><b>about 124 after</b><br/>one from each run or variant folder"]:::plain
 
   subgraph NEXT["On the laptop: pictures now → pictures kept"]
     direction TB
-    A["<b>How guidance is computed: 55 → 15 to 52</b><br/>classifier guidance, line by line: 21 → 5 to 20<br/>our guided sampler, line by line: 12 → 5 to 12<br/>readout guidance, line by line: 22 → 5 to 20"]:::plain
-    B["<b>First tests of guidance: 260 → 21 to 60</b><br/>can a classifier supply the missing term: 50 → 6 to 20<br/>does guidance draw a dog: 101 → 8 to 20<br/>does it work on the released weights: 109 → 7 to 20"]:::plain
+    A["<b>How guidance is computed: 55 → 7</b><br/>classifier guidance, line by line: 21 → 2<br/>our guided sampler, line by line: 12 → 2<br/>readout guidance, line by line: 22 → 3"]:::plain
+    B["<b>First tests of guidance: 260 → 21</b><br/>can a classifier supply the missing term: 50 → 6<br/>does guidance draw a dog: 101 → 8<br/>does it work on the released weights: 109 → 7"]:::plain
     C["<b>Pair-aware push on our photos: 6 → 6</b>"]:::plain
-    D["<b>Small discriminator on cat and dog: 13,107 → 43 to 151</b><br/>01 first quick test: 187 → 8 to 20<br/>02 can a checker read a clean pair: 691 → 5 to 20<br/>03 does an early push separate them: 646 → 5 to 20<br/>04 can a second push name each animal: 395 → 5 to 20<br/>05 does it carry to other pairs: 319 → 5 to 20<br/>06 how close to the joint prompt: 3,334 → 5 to 20<br/>pools of training pictures: 7,524 → 5 to 20<br/>comparison sheets: 11 → 5 to 11"]:::plain
-    E["<b>Two digits on MNIST: 327 → 23 to 50</b><br/>01 one model that saw a few pairs: 35 → 12 to 20<br/>02 two models trained apart: 10 → 6 to 10<br/>03 composing them while sampling: 282 → 5 to 20"]:::plain
+    D["<b>Small discriminator on cat and dog: 13,107 → 73</b><br/>01 first quick test: 187 → 4<br/>02 can a checker read a clean pair: 691 → 14<br/>03 does an early push separate them: 646 → 17<br/>04 can a second push name each animal: 395 → 11<br/>05 does it carry to other pairs: 319 → 7<br/>06 how close to the joint prompt: 3,334 → 15<br/>pools of training pictures: 7,524 → 2<br/>comparison sheets: 11 → 3"]:::plain
+    E["<b>Two digits on MNIST: 327 → 17</b><br/>01 one model that saw a few pairs: 35 → 6<br/>02 two models trained apart: 10 → 1<br/>03 composing them while sampling: 282 → 10"]:::plain
   end
 
   X[("/datasets<br/>every run, cited on its card<br/>except the 720 guarded files")]:::out
-  Y[("Laptop archive, outside the repo<br/>13,436 to 13,647 pictures<br/>until you clear it")]:::out
+  Y[("Laptop archive, outside the repo<br/>about 13,631 pictures<br/>until you clear it")]:::out
 
   R --> A
   R --> B
