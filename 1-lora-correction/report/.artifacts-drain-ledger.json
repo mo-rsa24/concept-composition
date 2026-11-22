@@ -1455,6 +1455,8 @@
   "artifacts/notes/inference-time-scaling-as-a-search-over-noise",
   "artifacts/plans/completed",
   "artifacts/plans/parked",
+  "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed09.png",
+  "artifacts/results/against-other-methods/samplers-and-correctors/which-sampling-strategy-helps/sampling-strategies-on-v58.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__co3.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__joint.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/a_baboon__x__a_gazelle__s09__ours.png",
