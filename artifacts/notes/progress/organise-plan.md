@@ -6,6 +6,7 @@ cluster holds everything else, and each result's card says exactly where it sits
 
 <a href="organise-before-after.png"><img src="organise-before-after.png" width="520" alt="One real run folder of 260 files becomes one picture and one card row on the laptop, with all 260 files on the cluster"></a>
 <a href="organise-plan.png"><img src="organise-plan.png" width="520" alt="The 72 flat discriminator folders become six numbered folders, one per report page, plus a pool folder"></a>
+<a href="organise-tree.png"><img src="organise-tree.png" width="520" alt="The finished classifier guidance tree, with pictures now and pictures kept for each result"></a>
 
 ## Table of contents
 
@@ -64,6 +65,7 @@ the generated results index.
     05-does-it-carry-to-other-pairs/             8 runs
     06-how-close-it-comes-to-the-joint-prompt/  15 runs
     pools-of-training-pictures/                  2 pools
+    comparison-sheets/                          11 sheets
   can-two-digits-compose-on-mnist/              three numbered stages
   what-each-line-of-classifier-guidance-computes/
   what-each-line-of-readout-guidance-computes/
