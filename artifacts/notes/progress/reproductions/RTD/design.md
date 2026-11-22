@@ -40,8 +40,8 @@ pair ledger does not change.
 |---|---|---|---|---|
 | `RTD-T2-051` | RTD | T2I-CompBench Complex | 0.4661 | RTD Table 2, p6 |
 | `RTD-T2-054` | RTD | RareBench Concat | 0.4464 | RTD Table 2, p6 |
-| scorer check | plain SDXL | T2I-CompBench Complex | 0.3083 | RTD Table 2, p6, copied from CO3's paper by its footnote |
-| scorer check | plain SDXL | RareBench Concat | 0.1018 | RTD Table 2, p6, copied from CO3's paper by its footnote |
+| scorer check | plain SDXL | T2I-CompBench Complex | 0.3083 | RTD Table 2, p6, equal to CO3's Table 2 |
+| scorer check | plain SDXL | RareBench Concat | 0.1018 | RTD Table 2, p6, equal to CO3's Table 2 |
 
 ## The protocol
 

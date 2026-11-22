@@ -11,13 +11,13 @@ steps of SDXL by moving away from what each single concept would draw on its own
 
 **Varied axis.** None. CO3 runs on the prompts and seeds of the RTD and plain SDXL renders, from the same starting noise.
 
-**Buys.** `RTD-T2-041` (0.4406, Complex) and `RTD-T2-044` (0.1610, Concat) in `table.csv`. RTD's footnote says these two values
-are copied from CO3's own Table 2, where the same numbers are printed.
+**Buys.** `RTD-T2-041` (0.4406, Complex) and `RTD-T2-044` (0.1610, Concat) in `table.csv`. Both values equal CO3's own
+Table 2, as do 19 of the 20 baseline ImageReward cells in RTD's Table 2, so RTD probably did not rerun CO3.
 
 **Cost.** One seed per prompt on the 988 Complex and 33 Concat prompts the subject guard allows is 1,021 pictures. CO3 adds 40
 to 60 corrector iterations of 4 to 5 U-Net rows each to SDXL's 100 rows, so a picture takes about 40 to 50 seconds at the 14
-seconds per 100 rows measured on an RTX 3090. That is about 11 to 15 GPU-hours. Three seeds per prompt would be about 33 to 45
-GPU-hours and is not planned. The smoke rung measures the real time.
+seconds per 100 rows measured on an RTX 3090. That is about 11 to 15 GPU-hours. Three seeds per prompt, the count the row's protocol text
+states, would be about 33 to 45 GPU-hours, and board question 18 asks the owner about it. The smoke rung measures the real time.
 
 ## The paper and the released code disagree
 
@@ -42,8 +42,9 @@ picture is rendered, so the choice is made before any CO3 score exists.
 
 ## Settings the paper and code leave open
 
-**Seeds.** Neither names the evaluation seeds. The released script renders one seed, 1688. This run uses one seed per prompt,
-seed 0, because the side-by-side comparison needs the same prompt and seed across methods.
+**Seeds.** CO3's paper and code name no evaluation seeds, and the released script renders one seed, 1688. The row's protocol text,
+from RTD's paper, states three seeds per prompt. Unless the owner approves three on question 18, this run uses seed 0, the seed the
+side-by-side comparison shares with RTD and plain SDXL, and labels each number with its seed count.
 
 **Starting noise.** CO3 draws its own noise on the CPU. This run passes in the same starting latent the RTD renderer draws for
 that seed, so the methods differ only in what they do from there.
