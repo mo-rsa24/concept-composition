@@ -89,7 +89,7 @@ Navigation: ⬅️ [Previous](#what-was-tried-in-order) | 📋 [TOC](#table-of-c
 *The explicit re-weighting, column six, is the only column where both animals stop being animals.*
 📊 Drawn in [Figure 1 of the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md#figure-1-tiger-and-dog-seed-9).
 
-The same kind of comparison on cat and dog, with three adapters in rows (v58 plain, contrast and self-attention) and seven columns (joint prompt, plain product, adapter alone, clean tail from step 20, Langevin on the tail, the CO3 corrector, best of 8): seed 9 (not linked, because one tile could not be cleared against the subjects the pair ledger keeps off sheets; the file is `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed09.png`) and [seed 10](../../artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed10.png). The CO3 column is the only one that turns the pair into drawings.
+The same kind of comparison on cat and dog, with three adapters in rows (v58 plain, contrast and self-attention) and seven columns (joint prompt, plain product, adapter alone, clean tail from step 20, Langevin on the tail, the CO3 corrector, best of 8): seed 9 (not linked, because one tile could not be cleared against the subjects the pair ledger keeps off sheets; the file is `1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed09.png`) and seed 10 (`seven-strategies-cat-and-dog-seed10.png`, not linked because it failed the subject check). The CO3 column is the only one that turns the pair into drawings.
 
 **What the eye reads across all eight cells.** The two repaint passes and the 20-step handover draw
 the adapter's picture again, with the same layout and the same subjects. The explicit re-weighting
@@ -98,6 +98,19 @@ which neither prompt names. Raising the guidance scale changes the scene rather 
 cat and dog at seed 10 gains a toy giraffe at both 10 and 12, tiger and dog at seed 10 gains a third
 animal at 10 and replaces the dog with a second tiger at 12, and chess board and hourglass at seed 9
 rebuilds the hourglass on a different stand.
+
+**Five more of the eight sheets, each one cell with the same columns.** Each caption is what the
+sheet shows `verified` (seen on the picture; matches [the figure explainer](../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md)).
+The cat and dog sheet at seed 9 is `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_cat__x__a_dog__seed09.png`,
+not shown: one small figure in it could not be cleared against the subjects the pair ledger keeps off sheets.
+
+| Tiger and dog, seed 10 | Elephant and penguin, seed 9 | Elephant and penguin, seed 10 |
+|---|---|---|
+| <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png" width="200" alt="Tiger and dog at seed 10, one column per fix"></a><br>Guidance 10 adds a third animal and guidance 12 swaps the dog for a tiger | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png" width="200" alt="Elephant and penguin at seed 9, one column per fix"></a><br>The adapter columns draw a large penguin and a small elephant | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png" width="200" alt="Elephant and penguin at seed 10, one column per fix"></a><br>A penguin in front of an elephant at the right sizes, smeared by the re-weighting column |
+
+| Chess board and hourglass, seed 9 | Chess board and hourglass, seed 10 |
+|---|---|
+| <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed09.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed09.png" width="200" alt="Chess board and hourglass at seed 9, one column per fix"></a><br>The re-weighting column puts a carved wolf where the chess pieces were | <a href="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed10.png"><img src="../../artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed10.png" width="200" alt="Chess board and hourglass at seed 10, one column per fix"></a><br>The plain product already draws both here, so the fixes have nothing to repair |
 
 ## 2. What the edge measure says, and where it disagrees with the eye
 

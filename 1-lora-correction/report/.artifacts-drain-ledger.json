@@ -32,7 +32,7 @@
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/README.md": {
    "at": "2026-11-22",
-   "sha256": "2c64eed97d72006b7435c057ca42060d46c864f3856c7e55bea80eb98762e2eb",
+   "sha256": "b6bbae4734e1fe7fb46b1acb39e2e88cb4621a239c604e595c7c633b3005cdb3",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed10.png": {
@@ -42,7 +42,7 @@
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/README.md": {
    "at": "2026-11-22",
-   "sha256": "f45e0ae40f1d0f4195d31ed23b7a1e347e9d210f4efd5286082fa2b44b7220ee",
+   "sha256": "61492e94de29c1f784b31566e2c2a8c1e444f3cf1039a48f9f1e56684cad6b0f",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/does-a-langevin-corrector-fix-the-product/five_columns.png": {
@@ -63,6 +63,26 @@
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/methods_side_by_side.png": {
    "at": "2026-11-22",
    "sha256": "636ed005b882ecc0ff16b7050a704e5741e1b54aa8b10588f326a7744c1180bb",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "dd920100531746ae02bf2854726adffab9b2cc547090e5b0b4c391c6390cb849",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_lighthouse__x__a_stormy_sea/seed09/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "92803476e234f1a1da78730b3b5ce8572565508711ba552c96229f8df267caa8",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/an_elephant__x__a_penguin/seed10/poe.png": {
+   "at": "2026-11-22",
+   "sha256": "a55a1a21f3c12eafcee13bea491c18c611c8a682cc2a6220eabe1443d8dcd1e9",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_tent__x__a_snowy_mountain/algo-co3-hybrid_/a_tent_and_a_snowy_mountain/seed-10/a_tent_and_a_snowy_mountain.png": {
+   "at": "2026-11-22",
+   "sha256": "e7c684d020e6fc31f9c09e0677f9c664621fba6f80f726338a56db1e76aa3d1a",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/README.md": {
@@ -98,11 +118,6 @@
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__co3.png": {
    "at": "2026-11-22",
    "sha256": "0e126099ac89d56c397b936b44d7cd1249c8e57ebbeee416a64b16b1302cd176",
-   "state": "drained"
-  },
-  "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__ours.png": {
-   "at": "2026-11-22",
-   "sha256": "d36a6b34b5cddde250da0a0c830f2e6d211428aed1a1b59072dcbbc80b29e041",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__poe.png": {
@@ -160,14 +175,39 @@
    "sha256": "110f2588e64d5ea15c2828e7b67bc1fa0a0ea094f5f311c862212ee3046eee55",
    "state": "drained"
   },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "bb0ac4a7e9ff0518af4a452eec967634003ac5930fc8cd66161901cebb4d5e5b",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_chess_board__x__an_hourglass__seed10.png": {
+   "at": "2026-11-22",
+   "sha256": "3c1c8deb2f50f6f8bd333f318bd98bb7ccbcd7b869ac75194fa87197628b9c44",
+   "state": "drained"
+  },
   "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed09.png": {
    "at": "2026-11-22",
    "sha256": "058c72f3f1caff137f581ac10c138dcd8f92612075acbc77953ab4e8269eb18f",
    "state": "drained"
   },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_tiger__x__a_dog__seed10.png": {
+   "at": "2026-11-22",
+   "sha256": "044658ab9126e4a3928a63df2e61bbaae17dcd037826a86b77ef060182a761ca",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "0a5977e2cfb331f60fd47e6c45d7a37d03bb7d05cee40325fd813e8cdc1c6184",
+   "state": "drained"
+  },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/an_elephant__x__a_penguin__seed10.png": {
+   "at": "2026-11-22",
+   "sha256": "b170eaed2e2bdcd63af43f01fa64047b8350c378600c33e24792199216a335e4",
+   "state": "drained"
+  },
   "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/figure-explainer.md": {
    "at": "2026-11-22",
-   "sha256": "ba3aacdb2ce1d443dbff741d537879f2b6cd7aeb71aa8de2960aba625ed4dee0",
+   "sha256": "46504d5bdd528d99c6d9b542e013d1cfe70261b7d4c97e30386201f9b337bb45",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/README.md": {
@@ -212,7 +252,7 @@
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/README.md": {
    "at": "2026-11-22",
-   "sha256": "1ef221325d3b0c59838f45a86b9c3f9e6ab64571d87b228c677fe0d6e882fcb4",
+   "sha256": "cce1a14ef8a8dcd36264001f4d043f5396f55cf2afbe2ac11c6a98b09bbc47f8",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/pair-audition.png": {
@@ -1511,6 +1551,24 @@
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-rule5/a_tent__x__a_snowy_mountain__s16__langevin.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/four-pairs-four-methods.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_cat__x__a_dog/seed09/mono.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_cat__x__a_dog/seed09/ours_crossself_w50.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_cat__x__a_dog/seed09/poe.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_lighthouse__x__a_stormy_sea/seed09/mono.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_lighthouse__x__a_stormy_sea/seed09/ours_v58self_w50.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_tent__x__a_snowy_mountain/seed09/mono.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_tent__x__a_snowy_mountain/seed09/ours_v58self_w50.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_tent__x__a_snowy_mountain/seed09/poe.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/an_elephant__x__a_penguin/seed10/mono.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/an_elephant__x__a_penguin/seed10/ours_v58-05-self-contrast_s015000_rawA_w50.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_cat__x__a_dog/algo-co3-hybrid_/a_cat_and_a_dog/seed-10/a_cat_and_a_dog.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_cat__x__a_dog/algo-co3-hybrid_/a_cat_and_a_dog/seed-9/a_cat_and_a_dog.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_lighthouse__x__a_stormy_sea/algo-co3-hybrid_/a_lighthouse_and_a_stormy_sea/seed-10/a_lighthouse_and_a_stormy_sea.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_lighthouse__x__a_stormy_sea/algo-co3-hybrid_/a_lighthouse_and_a_stormy_sea/seed-9/a_lighthouse_and_a_stormy_sea.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/a_tent__x__a_snowy_mountain/algo-co3-hybrid_/a_tent_and_a_snowy_mountain/seed-9/a_tent_and_a_snowy_mountain.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/an_elephant__x__a_penguin/algo-co3-hybrid_/an_elephant_and_a_penguin/seed-10/an_elephant_and_a_penguin.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/co3/an_elephant__x__a_penguin/algo-co3-hybrid_/an_elephant_and_a_penguin/seed-9/an_elephant_and_a_penguin.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/best-cases-benchmark.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/grid-tiles/a_bear__x__a_glasses_joint.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/grid-tiles/a_bear__x__a_glasses_ours.png",
@@ -1713,6 +1771,7 @@
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_horse__x__a_frog__s10__poe.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__joint.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__langevin.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_yellow_bow__x__a_pink_bowl__s10__ours.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_colorattr__540__s11__joint.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__co3.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-table2/geneval_position__406__s11__joint.png",
@@ -1756,6 +1815,7 @@
   "artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/tiles/a_wolf_and_a_raven/seed-9/a_wolf_and_a_raven.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/tiles/a_zebra_and_a_horse/seed-2/a_zebra_and_a_horse.png",
   "artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/tiles/a_zebra_and_a_horse/seed-9/a_zebra_and_a_horse.png",
+  "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_cat__x__a_dog__seed09.png",
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/tiles/a_baboon__x__a_gazelle__seed_1.png",
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/tiles/a_baboon__x__a_gazelle__seed_2.png",
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/tiles/a_baboon__x__a_gazelle__seed_3.png",

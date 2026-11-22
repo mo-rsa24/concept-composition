@@ -66,7 +66,7 @@ Identity, meaning each animal being one whole species, never moves.
 | best phrase naming both animals | 5 | 0 | 0 |
 | x_pos | 7 | 0 | 0 |
 
-**Reference:** [where the joint prompt succeeds](1-inference-only/0-reference-where-the-joint-prompt-succeeds.png)
+**Reference:** where the joint prompt succeeds (`0-reference-where-the-joint-prompt-succeeds.png`, not linked because it failed the subject check)
 (7 of 8 seeds), so the pass marks use only those seeds.
 
 **The written-up version of this section**, with the pass mark, the premise test and the per-seed

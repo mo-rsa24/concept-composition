@@ -307,7 +307,7 @@
   },
   "artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md": {
    "at": "2026-11-22",
-   "sha256": "6491439480d6a11923128027b05cbff1fd70b1c5aa18fa47491ba0b288c163ab",
+   "sha256": "c980a22edca2ede99fed6ed2186e703a3802599985bc31bd2ee849784e425efa",
    "state": "drained"
   },
   "artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png": {
