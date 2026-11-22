@@ -1,0 +1,9 @@
+table,page,status,rows,reason
+1,7,read,72,
+2,8,read,16,
+3,8,read,6,
+4,9,read,18,
+5,9,read,24,
+6,10,read,4,
+7,20,read,6,
+8,22,no results,0,Training hyperparameters; its training time and hardware rows are recorded in the notes file

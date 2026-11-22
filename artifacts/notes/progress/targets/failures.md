@@ -1,7 +1,7 @@
 # How each rival fails
 
 This page records what each method draws well and where it breaks, as seen in the pictures the papers print. It comes
-from 315 figures in 22 papers, 232 of them generated samples, and 325 rows of per-method findings. The
+from 329 figures in 23 papers, 242 of them generated samples, and 335 rows of per-method findings. The
 scoreboard's `failure` line for each rival is taken from here.
 
 **Authors choose their own figures.** A method's successes are over-represented, and a failure its authors did not print
@@ -273,6 +273,15 @@ This paper re-evaluates guidance methods and proposes none of its own. Its figur
 | Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
 |---|---|---|---|---|---|---|
 | Authors' count prompts | CountLoop | It keeps categories separate, and hand counts match on the bowl of 24 balls and the 35 cats and labradors. | It draws 49 oranges as yellow citrus, repeats near-identical faces and poses, and its far crowd dissolves into haze; high counts cannot be confirmed by eye. | 49 oranges in a bowl; 12 ginger and 10 black cats with 11 golden and 2 black labradors; a crowd of 170 people | Fig 1 p1; Fig 5 p8; Fig 6 p9; Fig 9 p14 | CountLoop |
+
+### CoMat
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| Long complex prompts shown by the authors (set not stated) | CoMat | It keeps most listed objects and attributes of all six long prompts. | It adds unrequested objects, such as a trophy beside the medal and white roses behind the rose. | red bell pepper and medal; rose on lace napkin | Fig 11 p24 | CoMat |
+| Prompts shown by the authors (set not stated) | CoMat | It usually draws both named objects with the right colours and relation, including unusual materials such as ice, gold and books. | It adds extra objects, leaves requested materials partial and drops minor scene elements such as travellers or the hotel room. | A dog on the right of a wallet; A robot penguin; A violin of transparent glass; A mystical deer guiding lost travellers; A slice of pizza; The conical mountain and the crescent beach | Fig 3 p4; Fig 6 p9; Fig 13 p26; Fig 14 p27 | CoMat |
+| Prompts shown by the authors (set not stated) | CoMat (concept activation only) | It adds a green curtain and a conical mountain with a curved beach. | It turns the attribute word into a new object and still misses the second object. | a brown squirrel and a black nut; a cubic block and a cylindrical container of markers | Fig 6 p9 | CoMat |
+| Prompts shown by the authors (set not stated) | CoMat (w/o FP&ML) | It keeps the asked colours on the envelope, the stamp and the swan. | It multiplies objects and adds stray parts. | A blue envelop and a white stamp; A black swan and a white lake | Fig 7 p10 | CoMat |
 
 ## Other methods, by the paper that printed them
 
@@ -555,3 +564,14 @@ This paper re-evaluates guidance methods and proposes none of its own. Its figur
 | Authors' count prompts | LMD | It draws separate objects in most tiles. | It breaks scenes into grids, loses the dogs entirely and replaces objects with an unrelated man or notebook. | 3 cats and 10 dogs; 127 wrist watches; 77 donuts; 104 hot air balloons; 79 eggs | Fig 1 p1; Fig 6 p9 | CountLoop |
 | Authors' count prompts | SLD | It draws recognisable objects and comes close on the 49 oranges with a printed 57. | It misses counts, drops the dogs and shop name, and paints the target number 79 onto a card instead of drawing 79 eggs. | 3 cats and 10 dogs; 79 eggs; 77 donuts; 127 wrist watches | Fig 6 p9 | CountLoop |
 | Authors' count prompts | Unnamed method in Fig 2 | It places the right three cats and 14 birds. | It lines the birds and cats up in rigid rows and renders eggs with crusted, burnt tips. | 3 cats and 14 birds; 79 eggs | Fig 2 p3 | CountLoop |
+
+### Printed by CoMat
+
+| Dataset | Method as shown | Succeeds | Fails | On which | Where | Printed by |
+|---|---|---|---|---|---|---|
+| Prompts shown by the authors (set not stated) | PixArt-Alpha | It gives a translucent violin and a partly gold waterfall. | It draws no teapot and no robot parts on the penguin. | Fig 3 prompts: teapot waterfall; glass violin; robot penguin; liquid gold waterfall | Fig 3 p4 | CoMat |
+| Prompts shown by the authors (set not stated) | Playground v2 | It draws a red teapot and a correct mirrored hall. | It keeps the violin opaque, the penguin natural and the waterfall mostly white, and runs the water into the teapot. | Fig 3 prompts: teapot waterfall; glass violin; robot penguin; liquid gold waterfall | Fig 3 p4 | CoMat |
+| RPG planning examples shown by the authors | RPG with CoMat-SDXL | It draws the green mat and the tall white candle in the planned layout. | It draws two purple vases where one was asked. | The smooth purple vase sat next to the tall white candlestick | Fig 9 p18 | CoMat |
+| RPG planning examples shown by the authors | RPG with SDXL | It follows the planned layout and draws the brown dog and purple vases. | It gets the mat colour wrong and leaves out the white candlestick. | The brown dog was lying on the green mat; The smooth purple vase sat next to the tall white candlestick | Fig 9 p18 | CoMat |
+| Long complex prompts shown by the authors (set not stated) | SDXL | It draws the main objects of long prompts in a coherent scene. | It drops or replaces listed details, such as books, the medal, the toothbrush, the floral pattern and the scooter colour. | cozy room; red bell pepper and medal; dimly lit room; balloon and scooter; handbag and avocado; rose on lace napkin | Fig 11 p24 | CoMat |
+| Prompts shown by the authors (set not stated) | SDXL | It draws the main subject and many scene details cleanly. | It drops the second object, swaps colours between objects, fuses objects and ignores unusual materials and spatial relations. | A circular clock and a triangular bookshelf; A black jacket and a brown hat; A blue backpack and a red train; A bird on the top of a person; a brown squirrel and a black nut | Fig 1 p1; Fig 2 p2; Fig 3 p4; Fig 6 p9; Fig 12 p25; Fig 13 p26; Fig 14 p27 | CoMat |

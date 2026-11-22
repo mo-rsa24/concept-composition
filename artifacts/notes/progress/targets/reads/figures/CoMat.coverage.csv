@@ -1,0 +1,15 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,2,qualitative,Samples beside a token activation bar chart and two attention maps
+3,4,qualitative,
+4,5,diagram,"Training pipeline with concept activation, fidelity preservation and attribute concentration"
+5,7,diagram,How attribute concentration matches token attention maps to object masks
+6,9,qualitative,
+7,10,qualitative,
+8,18,plot,"User preference bars for image quality and text-image alignment, no printed values"
+9,18,qualitative,Generated samples inside a diagram of the RPG planning pipeline
+10,19,other,Three example images with correct and corrupted captions for the sensitivity test
+11,24,qualitative,
+12,25,qualitative,
+13,26,qualitative,
+14,27,qualitative,
