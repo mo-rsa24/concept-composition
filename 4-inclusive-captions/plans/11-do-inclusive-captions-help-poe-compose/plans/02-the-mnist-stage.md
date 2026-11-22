@@ -165,8 +165,13 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
 
 <a href="../../../artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png"><img src="../../../artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png" width="200" alt="two panels against the dial at 0, 0.1, 0.3, 0.6 and 1: top, the percentage of 256 seeds drawing two separate right digits for the 7 x 8 and 4 x 7 products, plain and corrected, with the toy's counts dotted grey and a support line at 128 of 256; bottom, the percentage of draws in which the labels 7, 8 and 4 alone draw their own digit alone, one dot per training, beside a dashed training line for each"></a>
 
-- [ ] **Do:** open the two-panel figure and the scorer's printout side by side and tick supported, null or
+- [x] **Do:** open the two-panel figure and the scorer's printout side by side and tick supported, null or
   inconclusive in the table above.
+- **Verdict: null.** The dials that count are 0, 0.1 and 0.3, and their corrected 7 × 8 products draw a mean of
+  0, 0.33 and 8.0 separate right pairs of 64 by eye, all under the null line of 9.75. Dial 0.6 (mean 22.0) stays
+  out because one training drew a lone 7 on 205 of 256 against a floor of 207, and dial 1 (mean 24.0) misses its
+  floors too. The floor stays as written because it was set before any model drew. Decided by Claude on the
+  owner's instruction, 2026-11-22.
 - **Done when:** one line is ticked with the deciding counts beside it.
 
 ▶ **Next: what has to pass before this runs:** task 6.

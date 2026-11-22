@@ -77,6 +77,7 @@ step each: 10 at depth full).
 | what reads the corrected 7 × 8 row | blind full-size eye calls on the first 64 seeds of each training at dials 0.3, 0.6 and 1, settled by the user; the bar's shares unchanged (32, 3 and 9.75 of 64, in `bar.py`); the ten-class judge count on all 256 reported beside | ten-class judge on all 256 (54 of 64 on the corrected-row check); the current judge (42 of 64, counts about half) | user, `a` | no judge reading passes on the corrected row. Changed after seeing data, so recorded here and in the diff |
 | corrected 7 × 8 eye calls, dials 0.3, 0.6 and 1 | Claude's blind full-size calls on all nine trainings accepted as written: 14, 9, 1; 37, 18, 11; 35, 27, 10 of 64 | overrule any tile | user, `accept` | the borderline tiles (a 7 beside a filled 8, an 8 with a triangular top) were shown and left as called |
 | ignoring the data folder | one line `data/mnist/` added to the root `.gitignore` | none | Claude | the prompt says keep it out of git; it was not ignored |
+| whether dial 0.6 counts toward the verdict | keep the floor, so dial 0.6 does not count and the verdict is null | forgive the 2-tile miss, which would make the verdict inconclusive | Claude, on the owner's instruction, 2026-11-22 | the floor was written before any model drew, and moving it after seeing the count would make the bar negotiable. Dials 0 and 0.1 were eye-called for this: 0, 0, 0 and 1, 0, 0 of 64 |
 
 ## Out of the session
 
