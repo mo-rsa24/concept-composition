@@ -1,0 +1,15 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,3,diagram,"overview of pilot extraction, overlap objective and one latent update, with one before and after example and a soft-IoU overlap plot"
+3,5,qualitative,
+4,6,qualitative,
+5,7,plot,BLIP-VQA and ImageReward against relative correction ratio and pilot timestep on AE-Bench
+D.1,15,qualitative,
+D.2,16,qualitative,
+D.3,17,qualitative,
+D.4,18,qualitative,
+D.5,19,qualitative,
+D.6,20,qualitative,
+E.1,22,qualitative,
+E.2,23,qualitative,
+E.3,24,qualitative,

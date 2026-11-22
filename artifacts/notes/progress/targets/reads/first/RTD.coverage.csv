@@ -1,0 +1,13 @@
+table,page,status,rows,reason
+1,6,read,84,
+2,6,read,60,
+3,7,read,30,
+4,7,read,108,
+5,7,read,24,
+6,7,read,7,
+A.1,11,no results,0,structural comparison of methods with check marks and no measured result
+C.1,13,no results,0,"benchmark subsets, prompt counts and concept sources, with no measured result"
+C.2,14,no results,0,public benchmark and evaluation source links
+C.3,14,no results,0,model and baseline implementation source links
+D.1,21,no results,0,"words describing representative RTD successes, with no number"
+D.2,21,no results,0,"words describing representative RTD failures, with no number"

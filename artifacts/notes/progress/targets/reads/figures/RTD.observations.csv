@@ -1,0 +1,218 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,1,AE-Bench,SDXL,a dog and a bear,fails,one thing,"A black bear, a small brown bear-like animal and a tiny pink creature appear, with no clear dog."
+1,1,AE-Bench,CO3,a dog and a bear,fails,one thing,"Two brown bears face each other with a tiny dark cub between them, and no dog appears."
+1,1,AE-Bench,RTD,a dog and a bear,succeeds,two clear things,"A white dog sits beside a standing brown bear, and both are recognisable."
+1,1,AE-Bench,SDXL,a dog and an elephant,fails,one thing,"A large elephant stands with two smaller elephants, and no dog appears."
+1,1,AE-Bench,CO3,a dog and an elephant,succeeds,two clear things,A gray elephant touches the muzzle of a separate small black dog with its trunk.
+1,1,AE-Bench,RTD,a dog and an elephant,succeeds,two clear things,A curly-haired dog sits in front of a large elephant as two separate animals.
+1,1,AE-Bench,SDXL,a dog and a lion,mixed,two bodies or heads,A tan dog lies pressed into a large lion so that their bodies overlap.
+1,1,AE-Bench,CO3,a dog and a lion,fails,one thing,"A maned lion lies behind a pale lioness, and no dog appears."
+1,1,AE-Bench,RTD,a dog and a lion,succeeds,two clear things,A small tan dog stands to the left of a large lying lion.
+1,1,AE-Bench,SDXL,a lion and an orange bowl,fails,one thing,"A lion sits behind a plate holding a large orange fruit, and no orange bowl appears."
+1,1,AE-Bench,CO3,a lion and an orange bowl,succeeds,two clear things,A stylised lion sits behind a bright orange bowl holding oranges.
+1,1,AE-Bench,RTD,a lion and an orange bowl,succeeds,two clear things,A lion sits behind an orange-brown bowl of fruit with a whole orange beside it.
+1,1,AE-Bench,SDXL,a purple ballon and a gray bowl,fails,one thing,"A purple-gray bowl on a saucer sits against a purple wall, and no balloon appears."
+1,1,AE-Bench,CO3,a purple ballon and a gray bowl,succeeds,two clear things,A purple balloon floats on a string above a dark gray bowl.
+1,1,AE-Bench,RTD,a purple ballon and a gray bowl,succeeds,two clear things,A purple balloon floats on a string above a gray bowl on a saucer.
+1,1,AE-Bench,SDXL,a pink bow and a black bench,fails,one thing,"A pink upholstered bench with black legs appears, and no bow is drawn."
+1,1,AE-Bench,CO3,a pink bow and a black bench,fails,one thing,"A black bench stands in a pink room, and no bow is drawn."
+1,1,AE-Bench,RTD,a pink bow and a black bench,succeeds,two clear things,A pink bow is tied to the back of a black bench.
+1,1,AE-Bench,SDXL,a red backpack and a brown car,fails,one thing,"A red car is parked on a street, and no backpack appears."
+1,1,AE-Bench,CO3,a red backpack and a brown car,mixed,two clear things,"A person wears a brown backpack beside red cars, so the red and brown are swapped."
+1,1,AE-Bench,RTD,a red backpack and a brown car,succeeds,two clear things,A red backpack rests against the side of a tan-brown car.
+1,1,AE-Bench,SDXL,a red backpack and an orange glasses,fails,one thing,"A red-orange backpack fills the picture, and no glasses appear."
+1,1,AE-Bench,CO3,a red backpack and an orange glasses,fails,one thing,"An orange backpack stands alone, and no glasses appear."
+1,1,AE-Bench,RTD,a red backpack and an orange glasses,mixed,two clear things,"A woman in red sunglasses carries a red backpack with an orange pocket, so the orange meant for the glasses moved to the backpack."
+1,1,AE-Bench,SDXL,a wooly alligator and a horned squid,fails,one thing,"A gray spiny alligator-like reptile fills the picture, and no squid appears."
+1,1,AE-Bench,CO3,a wooly alligator and a horned squid,fails,one thing,"A gray spiny alligator sits on a pink alligator whose tail curls like a tentacle, and no squid appears."
+1,1,AE-Bench,RTD,a wooly alligator and a horned squid,mixed,two bodies or heads,"A teal scaly alligator has a pink tentacled mass at its snout, so the squid has no separate body and the alligator is not wooly."
+2,3,AE-Bench,SDXL,A red backpack and an orange glasses,fails,one thing,"The final picture is a red-orange backpack alone, with no glasses."
+2,3,AE-Bench,RTD,A red backpack and an orange glasses,mixed,two clear things,"A woman in red sunglasses carries a red backpack with an orange pocket, so the glasses do not take the requested orange."
+3,5,T2I-CompBench,CO3,The shiny black shoes sat next to the worn brown boots,fails,one thing,"A pair of black shoes on legs in gray trousers appears, with no brown boots."
+3,5,T2I-CompBench,RTD,The shiny black shoes sat next to the worn brown boots,succeeds,two clear things,Black lace-up shoes sit in front of worn brown boots.
+3,5,T2I-CompBench,CO3,The black keyboard was on top of the white desk,mixed,one thing,The corner of a keyboard lies on a blank white surface that cannot be recognised as a desk.
+3,5,T2I-CompBench,RTD,The black keyboard was on top of the white desk,succeeds,two clear things,A black keyboard lies on a white desk with extra key blocks at its edges.
+3,5,T2I-CompBench,CO3,The rectangular mirror was next to the blue sink,mixed,two clear things,"A rectangular mirror hangs above a beige sink, and the blue lands on the wall tiles."
+3,5,T2I-CompBench,RTD,The rectangular mirror was next to the blue sink,succeeds,two clear things,A rectangular mirror hangs above a bright blue sink.
+3,5,T2I-CompBench,CO3,The fiery sun set behind the towering skyscraper and the lush park,mixed,two clear things,"A fiery sunset glows behind towers, and the park is only a dark band of trees."
+3,5,T2I-CompBench,RTD,The fiery sun set behind the towering skyscraper and the lush park,succeeds,two clear things,An orange sun sets behind towers above a green park with a path.
+3,5,T2I-CompBench,CO3,The crisp green lettuce sat next to the juicy red tomatoes,fails,one thing,"Three tomatoes sit at the edges of a flat green background, with no lettuce."
+3,5,T2I-CompBench,RTD,The crisp green lettuce sat next to the juicy red tomatoes,succeeds,two clear things,Heads of green lettuce sit in a basket beside red tomatoes.
+3,5,T2I-CompBench,CO3,The white shirt was on top of the black pants,fails,one thing,"A white shirt hangs alone with a black band at its hem, and no pants appear."
+3,5,T2I-CompBench,RTD,The white shirt was on top of the black pants,succeeds,two clear things,A woman wears a white shirt over black pants.
+3,5,T2I-CompBench,CO3,The shiny silver necklace sparkled on the soft white silk,mixed,one thing,"A gray toothed ring lies on a white surface, with no clear necklace or silk."
+3,5,T2I-CompBench,RTD,The shiny silver necklace sparkled on the soft white silk,succeeds,two clear things,A silver necklace lies on folded white silk.
+3,5,T2I-CompBench,CO3,The smooth brown leather couch sat next to the plush white pillow,fails,one thing,"A brown leather couch fills the picture, and no white pillow appears."
+3,5,T2I-CompBench,RTD,The smooth brown leather couch sat next to the plush white pillow,succeeds,two clear things,A brown leather couch stands beside a plush white pillow and a white throw.
+4,6,T2I-CompBench,CO3,The white shirt was on top of the black pants,fails,one thing,"The step 49 picture is a hanging shirt with no pants, and both concept maps cover the same shirt shape."
+4,6,T2I-CompBench,RTD,The white shirt was on top of the black pants,succeeds,two clear things,"The step 49 picture is a woman in a white shirt and black pants, and the two maps still overlap on her body."
+4,6,T2I-CompBench,CO3,The smooth brown leather couch sat next to the plush white pillow,fails,one thing,"The step 49 picture is a couch with no pillow, and both concept maps cover the couch."
+4,6,T2I-CompBench,RTD,The smooth brown leather couch sat next to the plush white pillow,succeeds,two clear things,"The step 49 picture shows a couch and a white pillow, and the maps peak in different places."
+D.1,15,AE-Bench,CO3,A lion and a horse.,fails,fused hybrid,"A large creature has a lion head on a horse body, and a smaller copy stands in front of it."
+D.1,15,AE-Bench,R2F,A lion and a horse.,mixed,two bodies or heads,A maned animal with a horse-like body leans against a separate orange horse.
+D.1,15,AE-Bench,ToMe,A lion and a horse.,fails,fused hybrid,"A lion head sits on a horse body, a second horse head grows from its chest, and a tiny foal stands below."
+D.1,15,AE-Bench,RTD,A lion and a horse.,succeeds,two clear things,A lion and a white horse stand apart in a field.
+D.1,15,AE-Bench,CO3,A lion and a blue apple.,succeeds,two clear things,A stylised lion sits behind two blue apples.
+D.1,15,AE-Bench,R2F,A lion and a blue apple.,succeeds,two clear things,A stylised lion holds a blue apple under its chin amid blue paint.
+D.1,15,AE-Bench,ToMe,A lion and a blue apple.,mixed,two clear things,"The lion is drawn in blue and the apple is red, so the blue moved from the apple to the lion."
+D.1,15,AE-Bench,RTD,A lion and a blue apple.,succeeds,two clear things,A lion lies with a small blue apple at its paw.
+D.1,15,AE-Bench,CO3,A frog and a mouse.,fails,fused hybrid,"Two frogs with long mouse-like tails appear, and no mouse."
+D.1,15,AE-Bench,R2F,A frog and a mouse.,succeeds,two clear things,A small yellow mouse rides on the back of a large frog.
+D.1,15,AE-Bench,ToMe,A frog and a mouse.,fails,one thing,"Two frogs are stacked on each other, and no mouse appears."
+D.1,15,AE-Bench,RTD,A frog and a mouse.,succeeds,two clear things,A frog and a small brown mouse face each other.
+D.1,15,AE-Bench,CO3,A monkey and a mouse.,fails,fused hybrid,"An adult and a baby monkey have mouse-like ears and a long pink tail, and no mouse appears."
+D.1,15,AE-Bench,R2F,A monkey and a mouse.,succeeds,two clear things,A monkey crouches and touches a separate black mouse.
+D.1,15,AE-Bench,ToMe,A monkey and a mouse.,succeeds,two clear things,A monkey sits beside a small brown mouse.
+D.1,15,AE-Bench,RTD,A monkey and a mouse.,succeeds,two clear things,A gray monkey sits with a tiny gray mouse at its feet.
+D.1,15,AE-Bench,CO3,A orange glasses and a red apple.,mixed,two bodies or heads,"Two oranges are joined by a glasses bridge beside a red apple, so the glasses are made of fruit."
+D.1,15,AE-Bench,R2F,A orange glasses and a red apple.,mixed,two clear things,"Red-framed glasses hold apples in their lenses above a red apple, so the frames are not orange."
+D.1,15,AE-Bench,ToMe,A orange glasses and a red apple.,mixed,two clear things,"A red apple stands between drinking glasses of orange and red liquid, so glasses is read as tumblers."
+D.1,15,AE-Bench,RTD,A orange glasses and a red apple.,succeeds,two clear things,Orange-framed eyeglasses lie near a red-orange apple on books.
+D.2,16,AE-Bench,CO3,A purple balloon and a red apple.,mixed,two clear things,"The balloon is red and the apple dark on a purple background, so the purple missed the balloon."
+D.2,16,AE-Bench,R2F,A purple balloon and a red apple.,succeeds,two clear things,A purple balloon stands beside two red apples.
+D.2,16,AE-Bench,ToMe,A purple balloon and a red apple.,mixed,two clear things,A purple balloon floats beside a red apple that has its own balloon string.
+D.2,16,AE-Bench,RTD,A purple balloon and a red apple.,succeeds,two clear things,A pale purple balloon on a clear stand rises beside a red apple.
+D.2,16,AE-Bench,CO3,A dog and a orange apple.,mixed,two clear things,A dog sits by a round orange fruit and also wears an orange band around its neck.
+D.2,16,AE-Bench,R2F,A dog and a orange apple.,succeeds,two clear things,A graphic dog holds one orange apple and rests a paw on another.
+D.2,16,AE-Bench,ToMe,A dog and a orange apple.,mixed,two bodies or heads,A small orange apple is stuck against the cheek of a large white dog.
+D.2,16,AE-Bench,RTD,A dog and a orange apple.,mixed,two clear things,A dog sits beside a round orange fruit that reads more like a citrus orange than an apple.
+D.2,16,AE-Bench,CO3,A dog and a blue suitcase.,succeeds,two clear things,"A dog sits on a blue suitcase, with a stray brown shape at its left end."
+D.2,16,AE-Bench,R2F,A dog and a blue suitcase.,succeeds,two clear things,A dog sits behind a blue suitcase.
+D.2,16,AE-Bench,ToMe,A dog and a blue suitcase.,succeeds,two clear things,A dog rests its paws on a blue suitcase.
+D.2,16,AE-Bench,RTD,A dog and a blue suitcase.,succeeds,two clear things,A dog stands beside a blue suitcase.
+D.2,16,AE-Bench,CO3,A green suitcase and a red apple.,succeeds,two clear things,A red apple sits against a green suitcase with red straps.
+D.2,16,AE-Bench,R2F,A green suitcase and a red apple.,succeeds,two clear things,A red apple sits against an open green suitcase with red straps.
+D.2,16,AE-Bench,ToMe,A green suitcase and a red apple.,succeeds,two clear things,Red apples sit inside an open green suitcase.
+D.2,16,AE-Bench,RTD,A green suitcase and a red apple.,succeeds,two clear things,A red-green apple sits on a green suitcase with one red side panel.
+D.2,16,AE-Bench,CO3,A green suitcase and a pink bow.,succeeds,two clear things,A large pink bow is tied around a green suitcase.
+D.2,16,AE-Bench,R2F,A green suitcase and a pink bow.,succeeds,two clear things,"A pink bow is tied on a green suitcase, with many extra bows and a second suitcase around it."
+D.2,16,AE-Bench,ToMe,A green suitcase and a pink bow.,succeeds,two clear things,A pink ribbon bow lies in an open pale green suitcase.
+D.2,16,AE-Bench,RTD,A green suitcase and a pink bow.,succeeds,two clear things,A large pink bow is tied around a green suitcase.
+D.3,17,T2I-CompBench,CO3,The white shirt was on top of the black pants.,fails,one thing,"A white shirt hangs alone with a black band at its hem, and no pants appear."
+D.3,17,T2I-CompBench,R2F,The white shirt was on top of the black pants.,succeeds,two clear things,A graphic woman wears a white shirt and black jeans with blue highlights.
+D.3,17,T2I-CompBench,ToMe,The white shirt was on top of the black pants.,mixed,two bodies or heads,"A cropped man wears a white shirt and dark pants whose legs vanish, and two black shoes lie apart on the pavement."
+D.3,17,T2I-CompBench,RTD,The white shirt was on top of the black pants.,succeeds,two clear things,A woman wears a white shirt over black pants.
+D.3,17,T2I-CompBench,CO3,The crisp green lettuce sat next to the juicy red tomatoes.,fails,one thing,"Tomatoes sit at the edges of a flat green background, with no lettuce."
+D.3,17,T2I-CompBench,R2F,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,A saturated green lettuce sits beside red tomatoes.
+D.3,17,T2I-CompBench,ToMe,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,Rows of green lettuce run beside rows of red tomatoes.
+D.3,17,T2I-CompBench,RTD,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,Green lettuce heads sit in a basket beside red tomatoes.
+D.3,17,T2I-CompBench,CO3,The smooth brown leather couch sat next to the plush white pillow.,fails,one thing,"A brown leather couch fills the picture, and no pillow appears."
+D.3,17,T2I-CompBench,R2F,The smooth brown leather couch sat next to the plush white pillow.,mixed,two bodies or heads,"A brown couch carries white-outlined angular shapes on its back, with no clear plush pillow."
+D.3,17,T2I-CompBench,ToMe,The smooth brown leather couch sat next to the plush white pillow.,succeeds,two clear things,A large white pillow lies on the floor in front of a brown leather couch.
+D.3,17,T2I-CompBench,RTD,The smooth brown leather couch sat next to the plush white pillow.,succeeds,two clear things,A brown leather couch stands beside a white pillow and a white throw.
+D.3,17,T2I-CompBench,CO3,The white towel was on the side of the blue bathtub.,fails,one thing,"A blue tub stands in a bare room, and no towel appears."
+D.3,17,T2I-CompBench,R2F,The white towel was on the side of the blue bathtub.,mixed,two clear things,"A multicoloured patterned tub carries a red and white towel, so neither color is as asked."
+D.3,17,T2I-CompBench,ToMe,The white towel was on the side of the blue bathtub.,mixed,two clear things,"White towels sit by an orange-brown tub in a blue tiled room, so the blue moved to the walls."
+D.3,17,T2I-CompBench,RTD,The white towel was on the side of the blue bathtub.,mixed,two clear things,A white towel hangs over a white tub with only a blue band at its base.
+D.3,17,T2I-CompBench,CO3,The shiny black shoes sat next to the worn brown boots.,fails,one thing,"Black shoes on legs in gray trousers appear, with no brown boots."
+D.3,17,T2I-CompBench,R2F,The shiny black shoes sat next to the worn brown boots.,succeeds,two clear things,A brown boot stands beside a shiny black boot.
+D.3,17,T2I-CompBench,ToMe,The shiny black shoes sat next to the worn brown boots.,fails,one thing,"Three black boots stand on a stone floor, with no brown pair."
+D.3,17,T2I-CompBench,RTD,The shiny black shoes sat next to the worn brown boots.,succeeds,two clear things,Black shoes sit in front of worn brown boots.
+D.4,18,T2I-CompBench,CO3,The round yellow cheese wheel sat next to the rectangular cracker box.,fails,one thing,"A round yellow cheese sits with cheese blocks and slices, and no cracker box appears."
+D.4,18,T2I-CompBench,R2F,The round yellow cheese wheel sat next to the rectangular cracker box.,mixed,two clear things,"A cheese wheel sits by a yellow box labelled with garbled cheese text, so the box is not a cracker box."
+D.4,18,T2I-CompBench,ToMe,The round yellow cheese wheel sat next to the rectangular cracker box.,mixed,two clear things,"A cheese wedge sits by yellow boxes with garbled cheese labels, so the cracker box is not clear."
+D.4,18,T2I-CompBench,RTD,The round yellow cheese wheel sat next to the rectangular cracker box.,mixed,two bodies or heads,"A pale cheese wheel lies among crackers, and only a cropped corner of a labelled box shows."
+D.4,18,T2I-CompBench,CO3,The rectangular mirror was next to the blue sink.,mixed,two clear things,"A rectangular mirror hangs above a beige sink, and the blue lands on the wall tiles."
+D.4,18,T2I-CompBench,R2F,The rectangular mirror was next to the blue sink.,mixed,two clear things,A mirror hangs above a yellow and white sink in a saturated teal room.
+D.4,18,T2I-CompBench,ToMe,The rectangular mirror was next to the blue sink.,mixed,two clear things,"A mirror hangs above a white vanity, and the blue lands on the wall."
+D.4,18,T2I-CompBench,RTD,The rectangular mirror was next to the blue sink.,succeeds,two clear things,A rectangular mirror hangs above a bright blue sink.
+D.4,18,T2I-CompBench,CO3,The soft pillow was on top of the hard rocking chair.,fails,one thing,"A black and white rocking chair has a woven seat, and no pillow appears."
+D.4,18,T2I-CompBench,R2F,The soft pillow was on top of the hard rocking chair.,succeeds,two clear things,A blue and yellow pillow sits on a saturated rocking chair.
+D.4,18,T2I-CompBench,ToMe,The soft pillow was on top of the hard rocking chair.,succeeds,two clear things,Cream pillows sit on a wooden rocking chair.
+D.4,18,T2I-CompBench,RTD,The soft pillow was on top of the hard rocking chair.,succeeds,two clear things,A large quilted white pillow fills the seat of a wooden rocking chair.
+D.4,18,T2I-CompBench,CO3,The shiny silver necklace sparkled on the soft white silk.,mixed,one thing,"A gray toothed ring lies on a white surface, with no clear necklace or silk."
+D.4,18,T2I-CompBench,R2F,The shiny silver necklace sparkled on the soft white silk.,mixed,two clear things,"A necklace with black drops lies on silk streaked with yellow and black, so the silk is not white."
+D.4,18,T2I-CompBench,ToMe,The shiny silver necklace sparkled on the soft white silk.,succeeds,two clear things,A silver filigree necklace lies on white silk.
+D.4,18,T2I-CompBench,RTD,The shiny silver necklace sparkled on the soft white silk.,succeeds,two clear things,A silver necklace lies on folded white silk.
+D.4,18,T2I-CompBench,CO3,The fiery sun set behind the towering skyscraper and the lush park.,mixed,two clear things,"A fiery sun sets behind towers, and the park is only a dark band of trees."
+D.4,18,T2I-CompBench,R2F,The fiery sun set behind the towering skyscraper and the lush park.,mixed,two clear things,A graphic sun and bright halos sit among towers above trees and a path.
+D.4,18,T2I-CompBench,ToMe,The fiery sun set behind the towering skyscraper and the lush park.,succeeds,two clear things,A sun sets between towers above a green park.
+D.4,18,T2I-CompBench,RTD,The fiery sun set behind the towering skyscraper and the lush park.,succeeds,two clear things,An orange sun sets behind towers above a green park with a path.
+D.5,19,RareBench,CO3,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,A green-black bear and a red bear clasp paws inside a glass case on a red bench.
+D.5,19,RareBench,R2F,A red bear and green bear fighting while sitting on a bench made of glass.,fails,one thing,"Two red bears sit at a green table, and no green bear appears."
+D.5,19,RareBench,ToMe,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,A green bear and a red bear sit facing each other on separate glass seats.
+D.5,19,RareBench,RTD,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,"Small red and green bears touch fists while standing, not sitting, on a glass bench."
+D.5,19,RareBench,CO3,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"A striped zebra-like animal stands on a stack of plain stones, so the stripes left the rock and no bulldog is clear."
+D.5,19,RareBench,R2F,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"A zebra-striped bulldog leaps above plain stones, so the stripes moved to the dog and the order is reversed."
+D.5,19,RareBench,ToMe,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"A zebra-striped bulldog stands on a tall plain rock, so the stripes moved to the dog and the order is reversed."
+D.5,19,RareBench,RTD,A zebra striped rock is balancing on top of a dancing bulldog.,mixed,two clear things,A zebra-striped rock rests on the head of a bulldog that sits still and is not dancing.
+D.5,19,RareBench,CO3,A floating cheesecake is being admired by a wrinkled squid.,mixed,two bodies or heads,"A cheesecake on a plate floats over two small jellyfish-like creatures, with no clear wrinkled squid."
+D.5,19,RareBench,R2F,A floating cheesecake is being admired by a wrinkled squid.,mixed,two clear things,"A pink octopus sits on a plated cheesecake, so the cake does not float."
+D.5,19,RareBench,ToMe,A floating cheesecake is being admired by a wrinkled squid.,mixed,two clear things,"An octopus-like creature hangs above a plated cheesecake inside a glass dome, so the cake does not float."
+D.5,19,RareBench,RTD,A floating cheesecake is being admired by a wrinkled squid.,succeeds,two clear things,A cheesecake floats above a wrinkled pink squid-like creature that looks up at it.
+D.5,19,RareBench,CO3,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"A blue elephant stands on a pedestal in front of a globe, with no horn and no balancing."
+D.5,19,RareBench,R2F,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"An elephant stands on a pedestal in front of a globe, with no horn and no balancing."
+D.5,19,RareBench,ToMe,A horned elephant is balancing a wrinkled globe.,mixed,two bodies or heads,"An elephant merges into the front of a large globe on a pedestal, with no horn."
+D.5,19,RareBench,RTD,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"An elephant balances a crumpled globe on its raised trunk, but it has tusks and no horn."
+D.5,19,RareBench,CO3,A dancing vase is sharing space with a banana shaped car.,fails,one thing,"A plain car carries a tall banana on its roof, and no vase appears."
+D.5,19,RareBench,R2F,A dancing vase is sharing space with a banana shaped car.,fails,one thing,"An orange car sits under two bananas, and no vase appears."
+D.5,19,RareBench,ToMe,A dancing vase is sharing space with a banana shaped car.,fails,one thing,"A broken white vase balances a banana, and no car appears."
+D.5,19,RareBench,RTD,A dancing vase is sharing space with a banana shaped car.,mixed,two clear things,"A still white vase stands beside a tiny yellow banana-shaped car, so the car is right and the vase is not dancing."
+D.6,20,RareBench,CO3,A flower patterned otter is playing with a butterfly shaped bowl.,mixed,two clear things,"A plain otter sits in a round floral bowl among flowers and butterflies, so neither shape request is met."
+D.6,20,RareBench,R2F,A flower patterned otter is playing with a butterfly shaped bowl.,mixed,two clear things,"A plain otter sits in a round floral bowl among butterflies, so neither shape request is met."
+D.6,20,RareBench,ToMe,A flower patterned otter is playing with a butterfly shaped bowl.,fails,fused hybrid,The otter body turns into a flower-painted vessel on a plate.
+D.6,20,RareBench,RTD,A flower patterned otter is playing with a butterfly shaped bowl.,mixed,two bodies or heads,"A plain otter passes through a round floral bowl, with its head above and feet below, and the bowl is not butterfly shaped."
+D.6,20,RareBench,CO3,A wrinkled globe is resting beside an ax shaped chocolate.,mixed,two clear things,"A globe sits by chocolate pieces, and none is shaped like an ax."
+D.6,20,RareBench,R2F,A wrinkled globe is resting beside an ax shaped chocolate.,mixed,two clear things,A globe sits by a chocolate bar and a separate wooden ax-like handle.
+D.6,20,RareBench,ToMe,A wrinkled globe is resting beside an ax shaped chocolate.,mixed,two clear things,A globe sits by chocolate blocks and a separate ax.
+D.6,20,RareBench,RTD,A wrinkled globe is resting beside an ax shaped chocolate.,mixed,two clear things,"A globe sits among chocolate pieces with a separate blue tool shape, and no chocolate is shaped like an ax."
+D.6,20,RareBench,CO3,A globe made of glass and a cake made of clouds.,mixed,two clear things,"A glass sphere holds a sponge cake with clouds around it, so the cake is not made of clouds."
+D.6,20,RareBench,R2F,A globe made of glass and a cake made of clouds.,mixed,two clear things,"A world globe with pink clouds holds a tiny stack of pancakes, so it is not glass and the cake is not cloud."
+D.6,20,RareBench,ToMe,A globe made of glass and a cake made of clouds.,mixed,two clear things,A glass sphere holds a castle on a cloud-topped cake.
+D.6,20,RareBench,RTD,A globe made of glass and a cake made of clouds.,mixed,two clear things,A glass sphere holds a sponge cake with cloud-like frosting.
+D.6,20,RareBench,CO3,A spotted lion is lounging on an ax shaped bed.,mixed,two clear things,"A lion with a spotted body lies on a plain blue bench-like bed, with no ax shape."
+D.6,20,RareBench,R2F,A spotted lion is lounging on an ax shaped bed.,mixed,two clear things,A spotted lion lies on a plain bed with a separate blade on the floor.
+D.6,20,RareBench,ToMe,A spotted lion is lounging on an ax shaped bed.,mixed,two clear things,"A lion with a spotted hind body lies on a plush bed, with no ax shape."
+D.6,20,RareBench,RTD,A spotted lion is lounging on an ax shaped bed.,mixed,two clear things,"A lion with a spotted hind body lies on a plain bed with a small separate tool at the corner, so the bed is not ax shaped."
+D.6,20,RareBench,CO3,A heart shaped moon and a star shaped spaceship.,mixed,two clear things,"A heart, a crescent moon, stars and a saucer appear as separate objects, so neither shape is bound."
+D.6,20,RareBench,R2F,A heart shaped moon and a star shaped spaceship.,mixed,two clear things,"A heart outline, moons, a star and a saucer appear separately, so neither shape is bound."
+D.6,20,RareBench,ToMe,A heart shaped moon and a star shaped spaceship.,mixed,two clear things,"A heart outline surrounds a rocket beside small moons, so the moon is not heart shaped."
+D.6,20,RareBench,RTD,A heart shaped moon and a star shaped spaceship.,mixed,two clear things,"A heart outline surrounds a domed station beside a half moon, so the moon is not heart shaped and the ship is not a star."
+E.1,22,AE-Bench,CO3,A lion and a horse.,fails,fused hybrid,"The step 49 picture repeats the lion-headed horse of Fig D.1, and both maps cover the same silhouette from step 5."
+E.1,22,AE-Bench,R2F,A lion and a horse.,mixed,two bodies or heads,"The step 49 picture repeats the lion leaning on a horse, and both maps cover the joined shape."
+E.1,22,AE-Bench,ToMe,A lion and a horse.,fails,fused hybrid,"The step 49 picture repeats the fused lion and horse, and both maps cover the same body."
+E.1,22,AE-Bench,RTD,A lion and a horse.,succeeds,two clear things,"The step 49 picture repeats the separate lion and horse, and the lion map favours the left animal while the horse map lights both."
+E.1,22,AE-Bench,CO3,A lion and a blue apple.,succeeds,two clear things,"The step 49 picture repeats the lion with blue apples, and the apple map keeps small spots at the bottom."
+E.1,22,AE-Bench,R2F,A lion and a blue apple.,succeeds,two clear things,"The step 49 picture repeats the lion with a blue apple, and the apple map holds a spot under the chin."
+E.1,22,AE-Bench,ToMe,A lion and a blue apple.,mixed,two clear things,"The step 49 picture repeats the blue lion with a red apple, and the apple map holds a spot at lower left."
+E.1,22,AE-Bench,RTD,A lion and a blue apple.,succeeds,two clear things,"The step 49 picture repeats the lion with a small blue apple, and the apple map holds a small spot at the bottom."
+E.1,22,AE-Bench,CO3,A frog and a mouse.,fails,fused hybrid,"The step 49 picture repeats two frogs with mouse tails, and both maps stay on the frog shapes."
+E.1,22,AE-Bench,R2F,A frog and a mouse.,succeeds,two clear things,"The step 49 picture repeats the mouse on the frog, and the mouse map brightens at upper right."
+E.1,22,AE-Bench,ToMe,A frog and a mouse.,fails,one thing,"The step 49 picture repeats two stacked frogs, and both maps stay on the frog shape."
+E.1,22,AE-Bench,RTD,A frog and a mouse.,succeeds,two clear things,"The step 49 picture repeats the frog and mouse apart, and the mouse map holds a bright spot at right by step 10."
+E.1,22,AE-Bench,CO3,A purple balloon and a red apple.,mixed,two clear things,"The step 49 picture repeats the red balloon, and the apple map lights both the balloon and the apple early on."
+E.1,22,AE-Bench,R2F,A purple balloon and a red apple.,succeeds,two clear things,"The step 49 picture repeats the purple balloon and red apples, and the apple map peaks at lower right."
+E.1,22,AE-Bench,ToMe,A purple balloon and a red apple.,mixed,two clear things,"The step 49 picture repeats the balloon and the apple with a string, and the two maps sit in different places."
+E.1,22,AE-Bench,RTD,A purple balloon and a red apple.,succeeds,two clear things,"The step 49 picture repeats the balloon and apple, and the apple map holds a spot at lower right from step 5."
+E.2,23,T2I-CompBench,CO3,The white shirt was on top of the black pants.,fails,one thing,"The step 49 picture repeats the shirt with no pants, and both maps cover the same shirt shape."
+E.2,23,T2I-CompBench,R2F,The white shirt was on top of the black pants.,succeeds,two clear things,"The step 49 picture repeats the woman in shirt and jeans, and both maps follow her body."
+E.2,23,T2I-CompBench,ToMe,The white shirt was on top of the black pants.,mixed,two bodies or heads,"The step 49 picture repeats the cropped man, and the pants map splits between his legs and the stray shoes."
+E.2,23,T2I-CompBench,RTD,The white shirt was on top of the black pants.,succeeds,two clear things,"The step 49 picture repeats the woman in shirt and pants, and the two maps still overlap on her body."
+E.2,23,T2I-CompBench,CO3,The crisp green lettuce sat next to the juicy red tomatoes.,fails,one thing,"The step 49 picture repeats tomatoes with no lettuce, and the lettuce map fades from the center to edge spots by step 25."
+E.2,23,T2I-CompBench,R2F,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,"The step 49 picture repeats lettuce and tomatoes, and the tomato map peaks at the sides."
+E.2,23,T2I-CompBench,ToMe,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,"The step 49 picture repeats rows of both, and the two maps follow the same stripes."
+E.2,23,T2I-CompBench,RTD,The crisp green lettuce sat next to the juicy red tomatoes.,succeeds,two clear things,"The step 49 picture repeats lettuce and tomatoes, and the lettuce map sits on the round heads."
+E.2,23,T2I-CompBench,CO3,The smooth brown leather couch sat next to the plush white pillow.,fails,one thing,"The step 49 picture repeats the couch with no pillow, and both maps settle on the couch."
+E.2,23,T2I-CompBench,R2F,The smooth brown leather couch sat next to the plush white pillow.,mixed,two bodies or heads,"The step 49 picture repeats the couch with white outlines, and both maps cover the couch."
+E.2,23,T2I-CompBench,ToMe,The smooth brown leather couch sat next to the plush white pillow.,succeeds,two clear things,"The step 49 picture repeats the couch and floor pillow, and the pillow map moves to the lower area by step 25."
+E.2,23,T2I-CompBench,RTD,The smooth brown leather couch sat next to the plush white pillow.,succeeds,two clear things,"The step 49 picture repeats the couch and pillow, and the two maps peak in different areas."
+E.2,23,T2I-CompBench,CO3,The white towel was on the side of the blue bathtub.,fails,one thing,"The step 49 picture repeats the blue tub with no towel, and both maps sit on the tub."
+E.2,23,T2I-CompBench,R2F,The white towel was on the side of the blue bathtub.,mixed,two clear things,"The step 49 picture repeats the patterned tub, and both maps stay near its center."
+E.2,23,T2I-CompBench,ToMe,The white towel was on the side of the blue bathtub.,mixed,two clear things,"The step 49 picture repeats the orange tub in a blue room, and the towel map is scattered."
+E.2,23,T2I-CompBench,RTD,The white towel was on the side of the blue bathtub.,mixed,two clear things,"The step 49 picture repeats the white tub with a blue base, and the towel map forms a narrow vertical strip."
+E.3,24,RareBench,CO3,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,"The step 49 picture repeats the two bears in a glass case, and both bear maps light both bears."
+E.3,24,RareBench,R2F,A red bear and green bear fighting while sitting on a bench made of glass.,fails,one thing,"The step 49 picture repeats two red bears, and both bear maps light both bodies."
+E.3,24,RareBench,ToMe,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,"The step 49 picture repeats the green and red bears, and both bear maps light both bodies."
+E.3,24,RareBench,RTD,A red bear and green bear fighting while sitting on a bench made of glass.,mixed,two clear things,"The step 49 picture repeats the bears standing on the bench, and both bear maps still light both bears."
+E.3,24,RareBench,CO3,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"The step 49 picture repeats the striped animal on stones, and the rock map sits on the lower stack."
+E.3,24,RareBench,R2F,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"The step 49 picture repeats the striped dog over stones, and the bulldog map sits on the upper animal."
+E.3,24,RareBench,ToMe,A zebra striped rock is balancing on top of a dancing bulldog.,fails,fused hybrid,"The step 49 picture repeats the striped dog on a rock, and the rock map holds the tall lower shape."
+E.3,24,RareBench,RTD,A zebra striped rock is balancing on top of a dancing bulldog.,mixed,two clear things,"The step 49 picture repeats the striped rock on a sitting bulldog, and the rock map rises above the bulldog map by step 25."
+E.3,24,RareBench,CO3,A floating cheesecake is being admired by a wrinkled squid.,mixed,two bodies or heads,"The step 49 picture repeats the cake over jellyfish-like creatures, and both maps cover the same stacked shape."
+E.3,24,RareBench,R2F,A floating cheesecake is being admired by a wrinkled squid.,mixed,two clear things,"The step 49 picture repeats the octopus on the cake, and the squid map traces the tentacles."
+E.3,24,RareBench,ToMe,A floating cheesecake is being admired by a wrinkled squid.,mixed,two clear things,"The step 49 picture repeats the creature above the cake in a dome, and the maps split upper and lower."
+E.3,24,RareBench,RTD,A floating cheesecake is being admired by a wrinkled squid.,succeeds,two clear things,"The step 49 picture repeats the floating cake and squid, and the squid map peaks at lower right."
+E.3,24,RareBench,CO3,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"The step 49 picture repeats the blue elephant before a globe, and the globe map rings the elephant map."
+E.3,24,RareBench,R2F,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"The step 49 picture repeats the elephant before a globe, and the globe map rings the elephant map."
+E.3,24,RareBench,ToMe,A horned elephant is balancing a wrinkled globe.,mixed,two bodies or heads,"The step 49 picture repeats the elephant merged into the globe, and the globe map rings the elephant map."
+E.3,24,RareBench,RTD,A horned elephant is balancing a wrinkled globe.,mixed,two clear things,"The step 49 picture repeats the elephant balancing a globe with no horn, and the globe map sits above the elephant map by step 25."
