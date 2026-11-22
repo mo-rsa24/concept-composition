@@ -1,0 +1,8 @@
+table,page,status,rows,reason
+1,10,read,90,
+2,10,read,65,
+3,11,read,20,
+4,20,no results,0,Hyperparameter settings for mask extraction and post-processing
+5,24,read,30,
+6,25,read,24,
+7,26,read,20,
