@@ -17,7 +17,7 @@ have not been run.
 | Attend-and-Excite | 3 | `attend-and-excite` `163efdf` | official | SD1.4 | its Shape and Texture rows are not comparable |
 | Liu | 6 | `composable-diffusion` `77af82b` | official | SD pipelines for T2I-CompBench; the CoInD rows use CoInD's own checkpoints | its CMNIST, Shape and Texture rows are not comparable |
 | FKC | 1 | `fkc-diffusion` `aa6f5ed` | no SDXL GenEval script in the authors' repository; the hub holds an uncommitted port | plain SDXL | commit the port by named paths, check it against the plain product |
-| CoInD | 2 | `coind` `99056cc` | official, with CS and FID scripts | a spreadsheet linked from its README | fetch the sheet and confirm Shapes3D and CelebA checkpoints exist |
+| CoInD | 2 | `coind` `99056cc` | official, with CS and FID scripts | CelebA on SD1.5: `sd_celeba.zip` (25.3 GB, Google Drive) holds CoInD and Composed GLIDE, and the authors' sheet prints the same 49.15 and 14.19. Shapes3D: the sheet's tab is empty | Shapes3D needs training, at least 3 times per method; CelebA needs its conformity classifier checked |
 | SuperDiff | 2 | `super-diffusion` `e859107` | official CIFAR trainer and evaluator | SD and SDXL only on Hugging Face, and no CIFAR weights found | two CIFAR models trained at least 3 times each; its CMNIST row is not comparable |
 | Bradley-Projective | 1 | `projective-composition` `b57343a` | the authors released none; this is our replication on EDM2 | our `clevr-none-20k-64-xs-8Mi` and `clevr-color-20k-64-xs-8Mi` (46 GB) on `/datasets` | check these match the printed protocol, which is 128 by 128 pixels |
 | LogicalGuidance | 1 | none | no repository named in its PDF | none | look for code, then file a question |
