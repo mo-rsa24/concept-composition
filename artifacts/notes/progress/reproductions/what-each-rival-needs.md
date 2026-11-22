@@ -20,7 +20,7 @@ have not been run.
 | CoInD | 2 | `coind` `99056cc` | official, with CS and FID scripts | CelebA on SD1.5: `sd_celeba.zip` (25.3 GB, Google Drive) holds CoInD and Composed GLIDE, and the authors' sheet prints the same 49.15 and 14.19. Shapes3D: the sheet's tab is empty | Shapes3D needs training, at least 3 times per method; CelebA needs its conformity classifier checked |
 | SuperDiff | 2 | `super-diffusion` `e859107` | official CIFAR trainer and evaluator | SD and SDXL only on Hugging Face, and no CIFAR weights found | two CIFAR models trained at least 3 times each; its CMNIST row is not comparable |
 | Bradley-Projective | 1 | `projective-composition` `b57343a` | the authors released none; this is our replication on EDM2 | our `clevr-none-20k-64-xs-8Mi` and `clevr-color-20k-64-xs-8Mi` (46 GB) on `/datasets` | check these match the printed protocol, which is 128 by 128 pixels |
-| LogicalGuidance | 1 | none | no repository named in its PDF | none | look for code, then file a question |
+| LogicalGuidance | 1 | `logdiff` `94ef35b` | official, linked from its ICML 2026 slides, with training and evaluation scripts for CMNIST | none released | train the CMNIST diffusion model and its classifiers, at least 3 times |
 
 ## Scorers and prompt sets
 
