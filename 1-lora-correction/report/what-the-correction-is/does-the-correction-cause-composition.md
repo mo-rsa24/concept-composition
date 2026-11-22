@@ -12,6 +12,14 @@ The question is whether adding that difference back is what makes two separate a
 | does it matter when the correction arrives? | yes, at the very start | on [the timing page](when-does-the-correction-have-to-act.md) | [the review of the timing grid](../../artifacts/plans/completed/03-does-the-correction-cause-composition/review/05-when-in-the-run-it-matters.md) |
 | do five checks that avoid the compose scorer agree? | two yes, one yes with a caution, two no | [the table below](#five-checks-that-avoid-the-compose-scorer) | [the review of the five checks](../../plans/03-does-the-correction-cause-composition/review/06-the-same-story-from-three-sides.md) |
 
+<a href="../../artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-with-curve.png"><img src="../../artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-with-curve.png" width="200" alt="A four by five grid of cat and dog renders at rising correction strength above a line plot of compose rate against strength. The real correction climbs to about 94 percent and three controls stay under 10 percent."></a>
+
+The grid shows one pair, cat and dog at seed 9, with a column per strength and a row per thing added. On the
+curve beneath it, y is the compose rate, x is the strength, and one point is 32 runs, read from
+`outputs/interaction_term/dose/dose_curves.json` `verified`. Its three controls are wrong pair, wrong seed and
+wrong order, a different set from the two in the table above, and [the strength grid page](../measuring-composition/how-big-the-strength-grid-should-be.md#what-the-curve-under-the-grid-counts)
+gives their counts.
+
 ## Table of contents
 
 - [The correction opposes the product's own prediction](#the-correction-opposes-the-products-own-prediction)

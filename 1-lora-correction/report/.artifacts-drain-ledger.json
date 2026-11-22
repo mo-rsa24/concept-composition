@@ -260,6 +260,151 @@
    "sha256": "7056d08905093e5592df701e0b7a8fbc45a648d804621d2cb3d365bd90820a54",
    "state": "drained"
   },
+  "artifacts/results/measuring-composition/README.md": {
+   "at": "2026-11-22",
+   "sha256": "58b8c54537858aa909d9d0db402edd0c1fec9b6e84f0b6ee9bd86a3caf0ba98c",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/README.md": {
+   "at": "2026-11-22",
+   "sha256": "47ae5e48c0153f6421c9f4b85e80416e1c0d6d3115178e1311b310b8bdd06df6",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md": {
+   "at": "2026-11-22",
+   "sha256": "ba8978c62af9fcc866d24ab4a79863587a983ba079df6c5deefc8c73d1c92376",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-fitted-to-text-width.png": {
+   "at": "2026-11-22",
+   "sha256": "b3c094c13d10ca40897249b6e45103a957ebc15f7c44bab2634fe4fa47b1f16c",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-seed-9.png": {
+   "at": "2026-11-22",
+   "sha256": "939f9a5bdf4386a60d2df2a4e44da14185624ce43428ac9c1a313590726acad7",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-as-it-is-in-the-paper.png": {
+   "at": "2026-11-22",
+   "sha256": "2e1f9ddbf38696048ade9c948e39403c5d6e14cd4bae7dc08530c783dd254529",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-grid-only.png": {
+   "at": "2026-11-22",
+   "sha256": "537e48651a52ba519796e3276bfe9b4495bbec7452e2f1be0ad6834773f7f87c",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-with-curve.png": {
+   "at": "2026-11-22",
+   "sha256": "6acc3ef324fb5563b2d06b0f16ea3347557d9b372fb298137faf8f80a82dac3d",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png": {
+   "at": "2026-11-22",
+   "sha256": "ecb05b66861a4a499db9a60ca6469f6ccba9ab3cde059cb1ddcfb4a818239035",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/README.md": {
+   "at": "2026-11-22",
+   "sha256": "af0362694fcd0967cda8430720fe52d91e6f831e5a4cda94356bb5a0d226ee2e",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/published-models-then-ours.png": {
+   "at": "2026-11-22",
+   "sha256": "f8217ee68b6e7db802f345441d812d2c8d644433a992f551f68da68e37f37485",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-fix-is-not-about-animals.png": {
+   "at": "2026-11-22",
+   "sha256": "1de19755d385b6dc805ba3f7b2895b97011f016d1290d63979d1ba5e05a83ab5",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.png": {
+   "at": "2026-11-22",
+   "sha256": "022a5d01cafc817ce220fdfb6ae2105a972355c9e40036242b73811590bcd02f",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/what-the-adapter-costs-on-a-joint-prompt.png": {
+   "at": "2026-11-22",
+   "sha256": "8696309e60ec47563fbdf68d708f66810e26b0103abf5ccefd06bf0ac4dee40a",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/where-the-joint-prompt-itself-fails.png": {
+   "at": "2026-11-22",
+   "sha256": "6655fe731684a7b30a0d07d10b0251174db78f49c4b1319807e166f87ce3f992",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e357ffc8e1ea9e06be77964e7c009f33931e5aa2bfa6a06aa3c925f733c82156",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md": {
+   "at": "2026-11-22",
+   "sha256": "af89fb918efe65d6f8ba6cdff7f07d439644150bbef53bcd2b60b7e2c3fbb61a",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_cat__x__a_dog_seed9_n2.png": {
+   "at": "2026-11-22",
+   "sha256": "484db39c2af5de9559fe8f3d1346ff71b4e8dc8ccc89da2076e6352696edc478",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_elephant__x__a_penguin_seed11_n2.png": {
+   "at": "2026-11-22",
+   "sha256": "b47ba99604de70c8743fa699703390df2f082319c1342c9e9bb20dccbf50772c",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/cannot-decide/a_seal__x__a_walrus_seed10_n2.png": {
+   "at": "2026-11-22",
+   "sha256": "9c05e1596dabf6b2da87d8d00f8296d233ab6e05b23876846fc8256828874cf0",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "a597d047b1c1ff6ab594c2896f6253b46ae7bda57377e77c324abc0b5f8d776c",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/a_seal__x__a_walrus_seed9_n1.png": {
+   "at": "2026-11-22",
+   "sha256": "03517f5f4e177d62d5d944df0fc346a185611d1dbd113ee6d498c57bf08f1be4",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/an_elephant__x__a_penguin_seed9_n1.png": {
+   "at": "2026-11-22",
+   "sha256": "ffc881c7502845b999a730316919876c5282f0edd6f7062282b1ca60ceaa412b",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed10_n2.png": {
+   "at": "2026-11-22",
+   "sha256": "c37d33c421bf26ca8139b4d25b23e109ff1068c60d0d9c51aff60e808bc43b1a",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/two-of-the-same-animal/a_cat__x__a_dog_seed10_n2.png": {
+   "at": "2026-11-22",
+   "sha256": "7d9f25fa434d5ccdf3736256bb9e64cf6151e8abe6eb9313d3139fca63fda5ab",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/the-scorers-instance-count-is-not-a-count.md": {
+   "at": "2026-11-22",
+   "sha256": "f2ee55815ce42b859e95826aa68973b480b007330694d01c4587c0018fc9c80a",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/four-scorers-on-mug-and-wine-glass.png": {
+   "at": "2026-11-22",
+   "sha256": "09624780b93db7e549a0efe190f8768cb7ab2c27255f5bb5ac7e6e8fb22da769",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/mug-and-wine-glass-seed11-joint.png": {
+   "at": "2026-11-22",
+   "sha256": "bfd97cbe448e7e776bbfb24b6fc0e060988dea18a497eb9feb6a9bec4bfc89f3",
+   "state": "drained"
+  },
+  "artifacts/results/measuring-composition/the-scorers/what-each-scorer-says-about-two-objects/mug-and-wine-glass-seed11-product.png": {
+   "at": "2026-11-22",
+   "sha256": "462a709477d3f6270a853b1aaeba8b3ee86ca98e2c96efc4e8206b839e9a87d0",
+   "state": "drained"
+  },
   "artifacts/results/what-the-correction-is/README.md": {
    "at": "2026-11-22",
    "sha256": "a969151632b3583f045bda23e73957bf683a5736866d51b34d00079407f67534",
@@ -509,6 +654,40 @@
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-butterfly-meadow-checkpoint-timeline.png",
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank32-cat-dog-checkpoint-timeline.png",
   "artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank8-butterfly-meadow-checkpoint-timeline.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-full-width-banded.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-full-width-legend.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-rotated-labels-coloured.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-rotated-labels-neutral.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-no-note.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-fitted-pictures-only.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-full-width-legend.png",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-full-width-legend.svg",
+  "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.svg",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_cat__x__a_dog_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_cat__x__a_dog_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_goose__x__a_swan_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_goose__x__a_swan_seed9_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/a_seal__x__a_walrus_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_eagle__x__a_hawk_seed10_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_eagle__x__a_hawk_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_eagle__x__a_hawk_seed9_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_elephant__x__a_penguin_seed10_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/both-animals-there/an_elephant__x__a_penguin_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/cannot-decide/a_goose__x__a_swan_seed10_n3.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/cannot-decide/a_goose__x__a_swan_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/cannot-decide/a_seal__x__a_walrus_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/cannot-decide/an_eagle__x__a_hawk_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_cow__x__a_buffalo_seed10_n3.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_cow__x__a_buffalo_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_cow__x__a_buffalo_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_cow__x__a_buffalo_seed9_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_frog__x__a_toad_seed10_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_frog__x__a_toad_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_frog__x__a_toad_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_frog__x__a_toad_seed9_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed11_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed12_n2.png",
+  "artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/the-two-animals-look-alike/a_leopard__x__a_jaguar_seed9_n3.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__cat.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__dog.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_frog__x__a_toad__seed_9__frog.png",
