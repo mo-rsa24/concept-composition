@@ -1,0 +1,72 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,1,SDXL examples,Score composition on SDXL,photos of one dog + oil paintings,succeeds,not applicable,a curly-haired dog stands in a painted field under swirling brushwork and still looks like the photographed dog
+2,1,CLEVR location-conditioned,Bradley-Projective (empty background),"1 to 4 composed locations, one sample each",succeeds,two clear things,"each composed image shows the asked number of separate objects at the asked places, up to four"
+3,3,CLEVR location-conditioned,Bradley-Projective (empty background),"1 location, 8 samples",succeeds,not applicable,each tile has one object at the asked place
+3,3,CLEVR location-conditioned,Bradley-Projective (empty background),"2 to 4 locations, 8 samples each",succeeds,two clear things,each tile has the asked number of separate objects with clean edges
+3,3,CLEVR location-conditioned,Bradley-Projective (empty background),"5 and 6 locations, 8 samples each",mixed,two bodies or heads,"the objects are present, but neighbours touch and colours bleed between them"
+3,3,CLEVR location-conditioned,Bradley-Projective (empty background),"7 to 9 locations, 8 samples each",fails,fused hybrid,"objects melt into large blobs of mixed yellow, green, blue and black, and the count cannot be read"
+3,3,CLEVR location-conditioned,Bayes composition,"1 location, 8 samples",succeeds,not applicable,each tile has one object
+3,3,CLEVR location-conditioned,Bayes composition,"2 and 3 locations, 8 samples each",fails,one thing,"most tiles show one object and only a few show two, so asked objects are missing"
+3,3,CLEVR location-conditioned,Bayes composition,"4 to 6 locations, 8 samples each",fails,one thing,most tiles are empty or hold one small object
+3,3,CLEVR location-conditioned,Bayes composition,"7 to 9 locations, 8 samples each",fails,one thing,"most tiles are empty, and the rest hold one or two faint smeared objects"
+3,3,CLEVR location-conditioned,Bradley-Projective (cluttered background),"1 to 5 locations, 8 samples each",succeeds,two clear things,"tiles show separate clean objects, within the 1 to 5 objects the model trained on"
+3,3,CLEVR location-conditioned,Bradley-Projective (cluttered background),"6 to 8 locations, 8 samples each",mixed,two bodies or heads,"most objects are clean and separate, but some tiles have large objects overlapping their neighbours"
+3,3,CLEVR location-conditioned,Bradley-Projective (cluttered background),"9 locations, 8 samples",fails,two bodies or heads,"objects overlap and break up, with bright artefacts in the third and fourth tiles"
+5,5,CLEVR colour-conditioned,Single-condition model,background only (BG),succeeds,not applicable,all four tiles are an empty grey scene
+5,5,CLEVR colour-conditioned,Single-condition model,yellow,succeeds,not applicable,all four tiles show one yellow object
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + blue,succeeds,two clear things,"three of four tiles show a separate yellow and blue object, and the third tile shows only blue"
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + brown,fails,one thing,three of four tiles show one brown object
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + cyan,mixed,two clear things,"three of four tiles show two objects, but they are pale green rather than yellow and cyan"
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + gray,fails,one thing,two of four tiles show one object and all objects take on a muddy olive colour
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + green,fails,one thing,three of four tiles show one green object
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + magenta,mixed,two clear things,"all four tiles show two objects, but the yellow one comes out tan or peach"
+5,5,CLEVR colour-conditioned,Bradley-Projective (empty background),yellow + red,fails,one thing,all four tiles show one orange object
+7,10,SDXL examples,Score composition on SDXL,photo of a dog + photo of a horse,fails,fused hybrid,"one shaggy creature with a horse body and long dog-like fur, with no separate dog and horse"
+7,10,SDXL examples,Score composition on SDXL,"photo of a dog + photo, with red hat",succeeds,two clear things,a white dog wearing a knitted red hat
+9,16,CLEVR unconditional,Unconditional model,"unconditional samples, 8 tiles",succeeds,not applicable,"separate clean objects in each tile, and the circled third tile holds six objects, one above the five seen in training"
+10,18,CLEVR location-conditioned,Single-condition model,"one location, rows p1 to p4, 16 samples each",succeeds,not applicable,each tile has one object at the conditioned place
+10,18,CLEVR location-conditioned,Single-condition model,"background pb, 16 samples",succeeds,not applicable,all tiles are an empty scene
+10,18,CLEVR location-conditioned,Bradley-Projective (empty background),"1 composed location, 16 samples",succeeds,not applicable,all 16 tiles have one object at the asked place
+10,18,CLEVR location-conditioned,Bradley-Projective (empty background),"2 composed locations, 16 samples",succeeds,two clear things,all 16 tiles have two separate objects
+10,18,CLEVR location-conditioned,Bradley-Projective (empty background),"3 composed locations, 16 samples",mixed,two clear things,"15 of 16 tiles have three separate objects, and the first tile is missing one"
+10,18,CLEVR location-conditioned,Bradley-Projective (empty background),"4 composed locations, 16 samples",mixed,two clear things,"all 16 tiles have four separate objects, but many are darkened with blotchy colour"
+11,19,CLEVR colour-conditioned,Single-condition model,"one colour, rows p0 to p7, 8 samples each",succeeds,not applicable,each tile has one or two objects of the asked colour
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + blue, 8 samples",fails,fused hybrid,"objects are purple, a blend of the two colours, and three tiles have two purple objects"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + brown, 8 samples",fails,one thing,each tile has one orange-brown object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + cyan, 8 samples, marked as a success by the authors",mixed,two bodies or heads,"four of eight tiles have two objects, but they are gray and teal and none is clearly red"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + gray, 8 samples",fails,one thing,each tile has one dull red object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + green, 8 samples",fails,fused hybrid,"each tile has olive objects, a blend of the two colours, and most tiles hold one"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + magenta, 8 samples",fails,one thing,each tile has one pink-magenta object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"red + yellow, 8 samples",fails,fused hybrid,"objects are orange, a blend of the two colours, and only one tile has two"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + blue, 16 samples",succeeds,two clear things,15 of 16 tiles show a separate yellow and blue object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + brown, 16 samples",fails,one thing,most tiles have one amber object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + cyan, 16 samples, marked as a success by the authors",mixed,two clear things,"most tiles have two objects, but both are pale green rather than yellow and cyan"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + gray, 16 samples",fails,one thing,"tiles have one or two olive objects, with no clear yellow and gray pair"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + green, 16 samples",fails,one thing,most tiles have one green object
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + magenta, 16 samples",mixed,two clear things,"most tiles have two objects, one pink and one tan rather than yellow"
+11,19,CLEVR colour-conditioned,Bradley-Projective (empty background),"yellow + red, 16 samples",fails,one thing,most tiles have one orange object
+12,23,Synthetic Gaussian mixtures,Bradley-Projective (empty background),"compose indices 0, 2, 4, 6 with only one index lit per condition",succeeds,not applicable,"columns 0, 2, 4 and 6 are bright in all eight rows, forming clean stripes"
+12,23,Synthetic Gaussian mixtures,Bayes composition,"compose indices 0, 2, 4, 6 with only one index lit per condition",fails,not applicable,the stripes sit in the right columns but stay dim teal instead of fully lit
+12,23,Synthetic Gaussian mixtures,Bradley-Projective (empty background),"compose indices 0, 2, 4, 6 on a cluttered background",mixed,not applicable,"the asked columns are largely lit, and single cells are too small on this heatmap to check one by one"
+12,23,Synthetic Gaussian mixtures,Bayes composition,"compose indices 0, 2, 4, 6 on a cluttered background",mixed,not applicable,"the asked columns are largely lit as with the empty background, and single cells are too small to check one by one"
+13,28,Synthetic Gaussian mixtures,Composition sampled with DDIM,"coordinate-aligned case, 8 samples",succeeds,not applicable,rows show the same on-off patterns as the exact composition
+13,28,Synthetic Gaussian mixtures,Composition sampled with Langevin dynamics,"coordinate-aligned case, 8 samples",succeeds,not applicable,rows show the same on-off patterns as the exact composition
+13,28,Synthetic Gaussian mixtures,Composition sampled with DDIM,"orthogonal transform case, 8 samples",succeeds,not applicable,rows show the same kinds of pattern as the exact composition
+13,28,Synthetic Gaussian mixtures,Composition sampled with Langevin dynamics,"orthogonal transform case, 8 samples",succeeds,not applicable,rows show the same kinds of pattern as the exact composition
+13,28,Synthetic Gaussian mixtures,Composition sampled with DDIM,"non-orthogonal transform case, 8 samples",fails,not applicable,rows do not reproduce the mix of patterns in the exact composition
+13,28,Synthetic Gaussian mixtures,Composition sampled with Langevin dynamics,"non-orthogonal transform case, 8 samples",succeeds,not applicable,rows show the same kinds of pattern as the exact composition
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"orthogonal conditions, red + green, 6 samples",mixed,two clear things,"four of six tiles show a red and a green square, and two show a single yellow square"
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"orthogonal conditions, red + blue, 6 samples",succeeds,two clear things,all six tiles show a separate red and blue square
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"orthogonal conditions, green + blue, 6 samples",mixed,two clear things,"five of six tiles show a green and a blue square, and one shows a single cyan square"
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"non-orthogonal conditions, red + yellow, 6 samples",fails,one thing,all six tiles show one yellow square and no red square
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"non-orthogonal conditions, red + blue, 6 samples",mixed,two clear things,"five of six tiles show a red and a blue square, and one shows a single magenta square"
+14,29,Synthetic coloured squares,Bradley-Projective (empty background),"non-orthogonal conditions, yellow + blue, 6 samples",mixed,two clear things,"five of six tiles show a yellow and a blue square, and one shows a single pale yellow square"
+15,30,Synthetic Gaussian mixtures,Composition sampled with DDIM,"very non-orthogonal case, a = 1, 1000 samples",fails,not applicable,two of the four clusters in the 2D view are nearly empty while the other two are heavy
+15,30,Synthetic Gaussian mixtures,Composition sampled with DDIM,"mildly non-orthogonal case, a = 0.3, 1000 samples",mixed,not applicable,"all four clusters are present in the 2D view, and their sizes look close to the exact composition"
+16,38,CLEVR location-conditioned,Bradley-Projective (learned background),"1 to 4 locations, 8 samples each",succeeds,two clear things,each tile has the asked number of separate objects at the red dots
+16,38,CLEVR location-conditioned,Bradley-Projective (learned background),"5 and 6 locations, 8 samples each",mixed,two clear things,"most objects are separate and on their dots, but a few large objects cover their neighbours"
+16,38,CLEVR location-conditioned,Bradley-Projective (learned background),"7 and 8 locations, 8 samples each",mixed,two bodies or heads,objects crowd together and some large ones overlap neighbours and cover dots
+16,38,CLEVR location-conditioned,Bradley-Projective (learned background),"9 and 10 locations, 8 samples each",fails,two bodies or heads,large objects pile through each other and many dots are hidden
+16,38,CLEVR colour-conditioned,Bradley-Projective (learned background),"1 colour, 8 samples",succeeds,not applicable,"each tile has one blue object, with one cut off at the tile edge"
+16,38,CLEVR colour-conditioned,Bradley-Projective (learned background),"2 to 4 colours, 8 samples each",fails,fused hybrid,"tiles hold one or two objects, and several single cubes are painted in patches of two colours"
+16,38,CLEVR colour-conditioned,Bradley-Projective (learned background),"5 to 8 colours, 8 samples each",fails,fused hybrid,"tiles still hold about one to three objects, and many cubes carry patches of two or three colours"

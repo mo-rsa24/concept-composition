@@ -1,0 +1,19 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,3,diagram,causal graphs of independent attributes and of confounded training data
+3,7,diagram,grid of which attribute pairs are seen under orthogonal partial support
+4,8,plot,"table of JSD and conformity scores on Colored MNIST, and a scatter of conformity against JSD"
+5,8,qualitative,
+6,9,qualitative,
+7,10,qualitative,
+8,20,plot,JSD and conformity score against the loss weight on Colored MNIST
+9,21,other,one real Shapes3D image used to explain the attribute labels
+10,24,other,"tables of attributes, their values and classifier accuracy per dataset"
+11,26,qualitative,
+12,26,plot,FID and conformity score against smile weight on CelebA
+13,27,qualitative,
+14,29,plot,"density contours of a 2D Gaussian mixture: truth, training data and two learned models"
+15,31,plot,"Gaussian support grid, a results table, and learned against true colour histogram for digit 4"
+16,32,qualitative,
+17,32,plot,"conformity per digit and colour pair on Colored MNIST partial support, with several unseen pairs near 0"
+18,33,qualitative,

@@ -1,0 +1,18 @@
+figure,page,kind,reason
+1,2,qualitative,
+2,3,plot,locality heatmaps for three models and a scatter of length generalization against conditioner locality
+3,4,diagram,explains conditional projective composition and local conditional scores on one CLEVR scene
+4,8,qualitative,
+5,10,qualitative,
+6,22,diagram,shows how object locations are written into the grid conditioner
+7,22,qualitative,
+8,23,qualitative,
+9,24,qualitative,
+10,25,qualitative,
+11,26,plot,"pixel locality heatmaps and curves over time for class-conditional CIFAR-10, with one generated image"
+12,27,plot,"conditioner gradient, pixel gradient area and energy curves for four CLEVR models"
+13,30,qualitative,
+14,33,qualitative,
+15,34,plot,per-word influence heatmaps for three SDXL images at low and high noise
+16,34,plot,cosine similarity heatmaps for 24 prompts across SDXL blocks
+17,36,qualitative,

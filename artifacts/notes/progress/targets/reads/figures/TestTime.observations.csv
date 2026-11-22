@@ -1,0 +1,52 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+2,4,LSUN Churches,TestTime (mode ascent),"church with statue, noise level 150",mixed,not applicable,"the building outline survives, but the sky and walls turn flat magenta and blue and the statue becomes a dark block"
+2,4,LSUN Churches,TestTime (mode ascent),"church, noise level 200",mixed,not applicable,"the church shape survives, with a purple sky and the stone detail smoothed away"
+2,4,CelebA-HQ,TestTime (mode ascent),"dark-haired woman, noise level 150",mixed,not applicable,"the face and pose survive, with skin smoothed and the image shifted to a yellow-brown tint"
+2,4,CelebA-HQ,TestTime (mode ascent),"red-brown-haired woman, noise level 200",mixed,not applicable,the face and hair survive with fine detail smoothed and colours more saturated
+3,8,ColorMNIST,TestTime (PoE),"digit 0, green, deep red background",succeeds,not applicable,"five green 0s on deep red, all in nearly the same pose as the query"
+3,8,ColorMNIST,TestTime (LoRA),"digit 0, green, deep red background",mixed,not applicable,"five green 0s on deep red, and the second has a faded, broken right side"
+3,8,ColorMNIST,Query-only,"digit 0, green, deep red background",mixed,not applicable,five near-copies of the query with salt and pepper noise across the background
+3,8,ColorMNIST,Top-1,"digit 0, green, deep red background",fails,not applicable,"green digits that read as 9s or scribbles on a purple background, so digit and background are wrong"
+3,8,ColorMNIST,Top-3,"digit 0, green, deep red background",fails,not applicable,"green 9, 5, 7 and scribble shapes on purple, so digit and background are wrong"
+3,8,CelebA,TestTime (PoE),"big lips, blond hair, no beard, oval face, smiling, wavy hair",mixed,not applicable,five near-identical smiling women with wavy hair that is browner than the blond query and an orange cast
+3,8,CelebA,TestTime (LoRA),"big lips, blond hair, no beard, oval face, smiling, wavy hair",mixed,not applicable,"five blurred smiling women with shifting tints, and only the second has clearly blond hair"
+3,8,CelebA,Query-only,"big lips, blond hair, no beard, oval face, smiling, wavy hair",mixed,not applicable,five near-copies of the query covered in grain
+3,8,CelebA,Top-1,"big lips, blond hair, no beard, oval face, smiling, wavy hair",fails,not applicable,"five smiling men with short hair, so the hair and face attributes are lost"
+3,8,CelebA,Top-3,"big lips, blond hair, no beard, oval face, smiling, wavy hair",fails,not applicable,"smiling faces with short or straight brown hair, none blond and wavy"
+5,17,ColorMNIST,TestTime (PoE),"digit 0, pink, navy background",succeeds,not applicable,five pink 0s on navy with slightly wobbly outlines
+5,17,ColorMNIST,TestTime (LoRA),"digit 0, pink, navy background",succeeds,not applicable,five pink 0s on navy
+5,17,ColorMNIST,Query-only,"digit 0, pink, navy background",mixed,not applicable,five near-copies of the query with noise over the navy background
+5,17,ColorMNIST,Top-1,"digit 0, pink, navy background",fails,not applicable,"five yellow digits that read as 7s, so digit and colour are wrong"
+5,17,ColorMNIST,Top-3,"digit 0, pink, navy background",fails,not applicable,"yellow 4, 7, 9 and 0 shapes, with the colour wrong in all five"
+5,17,CelebA,TestTime (PoE),"black hair, male, smiling",succeeds,not applicable,five near-identical smiling men with black hair on a peach background
+5,17,CelebA,TestTime (LoRA),"black hair, male, smiling",mixed,not applicable,"smiling men with tinted, blurred skin, and the second has light brown hair"
+5,17,CelebA,Query-only,"black hair, male, smiling",mixed,not applicable,"five near-copies of the query, keeping its glasses and adding grain"
+5,17,CelebA,Top-1,"black hair, male, smiling",mixed,not applicable,"five different smiling men, most dark-haired, and the first has brown hair"
+5,17,CelebA,Top-3,"black hair, male, smiling",mixed,not applicable,men with mostly brown hair and several blurred faces
+5,17,ColorMNIST,TestTime (PoE),"digit 2, cyan, dark brown background",mixed,not applicable,"five 2s on brown, but two are green rather than cyan"
+5,17,ColorMNIST,TestTime (LoRA),"digit 2, cyan, dark brown background",mixed,not applicable,"five 2s on brown, with the third green and the last a green-teal"
+5,17,ColorMNIST,Query-only,"digit 2, cyan, dark brown background",mixed,not applicable,five cyan 2s on a brown background covered in coloured noise
+5,17,ColorMNIST,Top-1,"digit 2, cyan, dark brown background",fails,not applicable,"five pink 6s on brown, so digit and colour are wrong"
+5,17,ColorMNIST,Top-3,"digit 2, cyan, dark brown background",fails,not applicable,"pink digits and scribbles on brown, with only the first near a 2"
+5,17,CelebA,TestTime (PoE),"big lips, blond hair, no beard, oval face, smiling, wavy hair (second query)",mixed,not applicable,five near-identical blond smiling women with a hand at the mouth and a strong orange cast
+5,17,CelebA,TestTime (LoRA),"big lips, blond hair, no beard, oval face, smiling, wavy hair (second query)",mixed,not applicable,"blond smiling women with shifting tints, and the fourth turns orange-red"
+5,17,CelebA,Query-only,"big lips, blond hair, no beard, oval face, smiling, wavy hair (second query)",mixed,not applicable,five near-copies of the query covered in grain
+5,17,CelebA,Top-1,"big lips, blond hair, no beard, oval face, smiling, wavy hair (second query)",fails,not applicable,"five dark-haired men, so the blond, wavy and big-lips attributes are lost"
+5,17,CelebA,Top-3,"big lips, blond hair, no beard, oval face, smiling, wavy hair (second query)",fails,not applicable,"five men with short brown or gray hair, so the blond and wavy attributes are lost"
+5,17,ColorMNIST,TestTime (PoE),"digit 7, pink, navy background",succeeds,not applicable,"five pink 7s on navy, soft-edged, with the first ragged"
+5,17,ColorMNIST,TestTime (LoRA),"digit 7, pink, navy background",mixed,not applicable,"five pink 7s on navy with ragged strokes, most visibly in the fourth"
+5,17,ColorMNIST,Query-only,"digit 7, pink, navy background",mixed,not applicable,five near-copies of the query with noise over the background
+5,17,ColorMNIST,Top-1,"digit 7, pink, navy background",mixed,not applicable,"yellow 7-like digits on navy, so the digit is mostly right and the colour is wrong"
+5,17,ColorMNIST,Top-3,"digit 7, pink, navy background",fails,not applicable,"olive and yellow 4, 7 and scribble shapes, with the colour wrong in all five"
+5,17,CelebA,TestTime (PoE),"gray hair, male, no beard, smiling",mixed,not applicable,"five near-identical gray-haired men in suits on orange, with only a faint smile"
+5,17,CelebA,TestTime (LoRA),"gray hair, male, no beard, smiling",mixed,not applicable,"gray-haired men in suits with blurred faces and tints that shift, darkest in the fourth"
+5,17,CelebA,Query-only,"gray hair, male, no beard, smiling",mixed,not applicable,five near-copies of the query covered in grain
+5,17,CelebA,Top-1,"gray hair, male, no beard, smiling",fails,not applicable,"five smiling women with dark hair, so gray hair and male are both lost"
+5,17,CelebA,Top-3,"gray hair, male, no beard, smiling",fails,not applicable,"brown-haired faces, mostly women, so gray hair is lost in all five"
+4,13,Fashion-MNIST,TestTime (mode ascent),clothing modes at noise level 50,succeeds,not applicable,garments stay recognisable with fine texture smoothed away
+4,13,Fashion-MNIST,TestTime (mode ascent),clothing modes at noise levels 200 and 300,mixed,not applicable,garment outlines stay and inner detail turns to flat gray
+4,13,Fashion-MNIST,TestTime (mode ascent),clothing modes at noise level 500,mixed,not applicable,"tiles become faint gray silhouettes, and individual items are too faint to name at this size"
+6,18,ColorMNIST,TestTime (PoE),"pink 3 on a black background, held out",mixed,not applicable,"four pink 3s appear, but on dark navy rather than the black of the query"
+6,18,ColorMNIST,TestTime (PoE),"pink 3 on a white background, held out",fails,not applicable,all four samples collapse into coloured salt and pepper noise with only a faint 3-like shape
+6,18,ColorMNIST,TestTime (mode ascent),discovered prototypes for pink 3 on black,mixed,not applicable,"the three prototypes are a pink 3 on brown, a green 3 on navy and a pink broken shape on purple"
+6,18,ColorMNIST,TestTime (mode ascent),discovered prototypes for pink 3 on white,fails,not applicable,"the three prototypes are a pink block, a pink 6 and a cyan 0, all on purple, with no white background"

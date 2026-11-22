@@ -1,0 +1,19 @@
+figure,page,kind,reason
+1,1,qualitative,
+2,1,qualitative,
+3,3,qualitative,
+4,5,diagram,sketch of a projective composition taking one part from each distribution
+5,5,qualitative,
+6,8,diagram,commutative diagram of composing in pixel space and in a feature space
+7,10,qualitative,
+8,11,plot,CLIP image and text cosine similarity heatmaps across eight concepts
+9,16,qualitative,
+10,18,qualitative,
+11,19,qualitative,
+12,23,qualitative,
+13,28,qualitative,
+14,29,qualitative,
+15,30,qualitative,
+16,38,qualitative,
+17,40,plot,score difference against denoising time for compositions of 1 to 12 objects
+18,40,other,"images of predicted scores at noise levels 20, 15 and 10 for several models"

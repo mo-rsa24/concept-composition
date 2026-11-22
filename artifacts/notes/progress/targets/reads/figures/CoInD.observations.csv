@@ -1,0 +1,82 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,1,Colored MNIST,Liu,"4 AND Pink, uniform support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,CoInD,"4 AND Pink, uniform support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,Liu,"4 AND Cyan, uniform support",fails,not applicable,"a cyan stroke shaped like a 7, with no 4"
+1,1,Colored MNIST,CoInD,"4 AND Cyan, uniform support",succeeds,not applicable,a clear cyan 4
+1,1,Colored MNIST,Liu,"4 AND NOT (Pink OR Green), uniform support",succeeds,not applicable,a yellow 4
+1,1,Colored MNIST,CoInD,"4 AND NOT (Pink OR Green), uniform support",succeeds,not applicable,a yellow 4
+1,1,Colored MNIST,Liu,"NOT (3 OR 4) AND Pink, uniform support",succeeds,not applicable,a pink 8
+1,1,Colored MNIST,CoInD,"NOT (3 OR 4) AND Pink, uniform support",succeeds,not applicable,a pink 7
+1,1,Colored MNIST,Liu,"4 AND Pink, non-uniform support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,CoInD,"4 AND Pink, non-uniform support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,Liu,"4 AND Cyan, non-uniform support",fails,not applicable,two separate cyan strokes that do not form a 4
+1,1,Colored MNIST,CoInD,"4 AND Cyan, non-uniform support",succeeds,not applicable,a cyan 4 with a wide open top
+1,1,Colored MNIST,Liu,"4 AND NOT (Pink OR Green), non-uniform support",fails,not applicable,"a lumpy 4 in green, the colour it was told to avoid"
+1,1,Colored MNIST,CoInD,"4 AND NOT (Pink OR Green), non-uniform support",succeeds,not applicable,a yellow 4
+1,1,Colored MNIST,Liu,"NOT (3 OR 4) AND Pink, non-uniform support",fails,not applicable,"a pink 4, the digit it was told to avoid"
+1,1,Colored MNIST,CoInD,"NOT (3 OR 4) AND Pink, non-uniform support",succeeds,not applicable,a pink 8
+1,1,Colored MNIST,Liu,"4 AND Pink, partial support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,CoInD,"4 AND Pink, partial support",succeeds,not applicable,a clear pink 4
+1,1,Colored MNIST,Liu,"4 AND Cyan, partial support",fails,not applicable,a broken teal scribble that is not a digit
+1,1,Colored MNIST,CoInD,"4 AND Cyan, partial support",succeeds,not applicable,a thin 4 in a teal a shade darker than the cyan in the other columns
+1,1,Colored MNIST,Liu,"4 AND NOT (Pink OR Green), partial support",fails,not applicable,"a lumpy shape in pink, the colour it was told to avoid"
+1,1,Colored MNIST,CoInD,"4 AND NOT (Pink OR Green), partial support",succeeds,not applicable,a thick cream 4
+1,1,Colored MNIST,Liu,"NOT (3 OR 4) AND Pink, partial support",fails,not applicable,"a pink shape that reads as a 4, the digit it was told to avoid"
+1,1,Colored MNIST,CoInD,"NOT (3 OR 4) AND Pink, partial support",succeeds,not applicable,a pink 1
+5,8,Colored MNIST,LACE,"digit = 4, non-uniform support",mixed,not applicable,"all four are 4s, but three are green and one is magenta"
+5,8,Colored MNIST,Liu,"digit = 4, non-uniform support",mixed,not applicable,"two green and two magenta 4s, and the last is a heavy blob"
+5,8,Colored MNIST,CoInD,"digit = 4, non-uniform support",succeeds,not applicable,"four clean 4s in yellow, cyan, orange and cream"
+6,9,Shapes3D,CoInD,"uniform AND composition, expected blue capsule",succeeds,not applicable,"a blue capsule on the right wall and floor, slightly rougher than the expected image"
+6,9,Shapes3D,Liu,"uniform AND composition, expected blue capsule",fails,not applicable,a shorter flat-topped cylinder where the expected image has a rounded capsule
+6,9,Shapes3D,LACE,"uniform AND composition, expected blue capsule",mixed,not applicable,a blue capsule with a faint ghost copy above it and a noisy background
+6,9,Shapes3D,CoInD,"partial AND composition, expected orange capsule",succeeds,not applicable,"an orange capsule on the magenta wall and cyan floor, close to the expected image"
+6,9,Shapes3D,Liu,"partial AND composition, expected orange capsule",fails,not applicable,"an oversized orange capsule, with the wall and floor broken up by coloured noise"
+6,9,Shapes3D,LACE,"partial AND composition, expected orange capsule",fails,not applicable,the object turns red and glassy with a ghost outline over a noisy scene
+6,9,Shapes3D,CoInD,"partial NOT composition, expected magenta cube",succeeds,not applicable,"a magenta cube on the green wall and cyan floor, matching the expected image"
+6,9,Shapes3D,Liu,"partial NOT composition, expected magenta cube",mixed,not applicable,"a pinker cube, with a dark red blotch on the wall"
+6,9,Shapes3D,LACE,"partial NOT composition, expected magenta cube",fails,not applicable,a magenta capsule where the expected image has a cube
+7,10,CelebA,CoInD,"male AND smiling, smile weight 0",succeeds,not applicable,"three unsmiling men, one with a patchy background"
+7,10,CelebA,CoInD,"male AND smiling, smile weight 1",succeeds,not applicable,three men with a soft smile
+7,10,CelebA,CoInD,"male AND smiling, smile weight 2",succeeds,not applicable,three men with a wider smile
+7,10,CelebA,CoInD,"male AND smiling, smile weight 6",succeeds,not applicable,"three men grinning with teeth, with skin looking over-sharpened and older"
+7,10,CelebA,Liu,"male AND smiling, smile weight 0",succeeds,not applicable,three unsmiling men
+7,10,CelebA,Liu,"male AND smiling, smile weight 1",fails,not applicable,faces break into patchy skin with long pale hair and warped features
+7,10,CelebA,Liu,"male AND smiling, smile weight 2",fails,not applicable,"faces stay patchy and warped, with long hair on two of three"
+7,10,CelebA,Liu,"male AND smiling, smile weight 6",fails,not applicable,faces melt into patches with long hair and a made-up look
+7,10,CelebA,LACE,"male AND smiling, smile weight 0",succeeds,not applicable,three unsmiling men
+7,10,CelebA,LACE,"male AND smiling, smile weight 1",fails,not applicable,patches run across two faces and the third melts into a mask
+7,10,CelebA,LACE,"male AND smiling, smile weight 2",fails,not applicable,"faces are patchy, with distorted mouths"
+7,10,CelebA,LACE,"male AND smiling, smile weight 6",fails,not applicable,"faces melt, with long hair and a torn-looking mouth in the middle tile"
+11,26,CelebA,CoInD,"male AND smiling, smile weight 0",succeeds,not applicable,"three unsmiling men, one with a patchy background"
+11,26,CelebA,CoInD,"male AND smiling, smile weight 1",succeeds,not applicable,three men with a soft smile
+11,26,CelebA,CoInD,"male AND smiling, smile weight 2",succeeds,not applicable,three men with a wider smile
+11,26,CelebA,CoInD,"male AND smiling, smile weight 6",succeeds,not applicable,"three men grinning with teeth, with skin looking over-sharpened and older"
+11,26,CelebA,Liu,"male AND smiling, smile weight 0",succeeds,not applicable,three unsmiling men
+11,26,CelebA,Liu,"male AND smiling, smile weight 1",fails,not applicable,faces break into patchy skin with long pale hair and warped features
+11,26,CelebA,Liu,"male AND smiling, smile weight 2",fails,not applicable,"faces stay patchy and warped, with long hair on two of three"
+11,26,CelebA,Liu,"male AND smiling, smile weight 6",fails,not applicable,faces melt into patches with long hair and a made-up look
+11,26,CelebA,LACE,"male AND smiling, smile weight 0",succeeds,not applicable,three unsmiling men
+11,26,CelebA,LACE,"male AND smiling, smile weight 1",fails,not applicable,patches run across two faces and the third melts into a mask
+11,26,CelebA,LACE,"male AND smiling, smile weight 2",fails,not applicable,"faces are patchy, with distorted mouths"
+11,26,CelebA,LACE,"male AND smiling, smile weight 6",fails,not applicable,"faces melt, with long hair and a torn-looking mouth in the middle tile"
+13,27,CelebA with SDv1.5 fine-tuning,Liu,smiling male,succeeds,not applicable,two smiling men
+13,27,CelebA with SDv1.5 fine-tuning,CoInD,smiling male,succeeds,not applicable,two smiling men
+13,27,CelebA with SDv1.5 fine-tuning,Liu,smiling AND male,fails,not applicable,an unsmiling person with a smoothed face and a woman with a bindi and lipstick
+13,27,CelebA with SDv1.5 fine-tuning,CoInD,smiling AND male,succeeds,not applicable,two smiling men
+13,27,CelebA with SDv1.5 fine-tuning,Liu,smiling NOT female,fails,not applicable,"two smiling women, the gender it was told to avoid"
+13,27,CelebA with SDv1.5 fine-tuning,CoInD,smiling NOT female,succeeds,not applicable,two smiling men
+14,29,2D Gaussian mixture,Vanilla diffusion objective,"unseen mode at (+1, +1)",fails,not applicable,"a dense spurious blob sits at the centre and no mode appears at (+1, +1)"
+14,29,2D Gaussian mixture,CoInD,"unseen mode at (+1, +1)",succeeds,not applicable,"all four modes appear, including the unseen one at (+1, +1)"
+15,31,Colored MNIST,CoInD,"colour distribution for digit 4, Gaussian support",mixed,not applicable,"the learned curve is highest at colour 7 and zigzags from 3 to 6, while the true curve is a smooth bell peaking at 5"
+16,32,Colored MNIST,CoInD,7 AND Dark Green,fails,not applicable,"a clear 7 in mint green, well off dark green"
+16,32,Colored MNIST,CoInD,Red NOT (1 OR 2),fails,not applicable,a 9 in salmon pink instead of red
+16,32,Colored MNIST,CoInD,9 NOT Cream,fails,not applicable,"a 9 in cream, the colour it was told to avoid"
+16,32,Colored MNIST,CoInD,Yellow NOT (2 OR 3),fails,not applicable,"a yellow 3, the digit it was told to avoid"
+16,32,Colored MNIST,CoInD,4 AND Cream,fails,not applicable,two broken cream strokes that do not form a 4
+16,32,Colored MNIST,CoInD,8 NOT (Cream OR Blue),fails,not applicable,"a speckled cream blob, in the avoided colour and with no readable digit"
+16,32,Shapes3D,CoInD,"single attribute mismatch, real image has an orange wall",fails,not applicable,the capsule is right but the wall is yellow instead of orange
+16,32,Shapes3D,CoInD,"NOT composition, real image has a cylinder",fails,not applicable,a sphere where the real image has a cylinder
+16,32,Shapes3D,CoInD,"unrealistic sample, real image has a blue cylinder",fails,not applicable,the object dissolves into a noisy blue smear
+16,32,CelebA,CoInD,"Male AND Smiling, top sample",fails,not applicable,"a man with a wide open mouth, closer to a shout than a smile"
+16,32,CelebA,CoInD,"Male AND Smiling, bottom sample",mixed,not applicable,a man with a very faint smile and a warped forehead
+18,33,Shapes3D,CoInD,"orientation 28 degrees, between trained 26 and 30",mixed,not applicable,"three near-identical pink cubes, and the small change in angle is too slight to confirm by eye"

@@ -1,0 +1,77 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,2,CLEVR location-conditioned,Experiment 1,1 location,succeeds,not applicable,each of the 4 samples has one object sitting on the red dot
+1,2,CLEVR location-conditioned,Experiment 1,3 locations,succeeds,two clear things,"all 4 samples have three separate objects, one on each dot"
+1,2,CLEVR location-conditioned,Experiment 1,6 locations,succeeds,two clear things,"the 4 samples hold about six separate objects on the dots, with some touching"
+1,2,CLEVR location-conditioned,Experiment 1,9 locations,mixed,two bodies or heads,"objects crowd together and cut into each other, so the nine cannot be counted as separate"
+1,2,CLEVR location-conditioned,Experiment 2,1 location,mixed,not applicable,an object sits on the dot but three of the 4 samples add one or two objects nobody asked for
+1,2,CLEVR location-conditioned,Experiment 2,3 locations,fails,two clear things,two or three objects appear and at least one dot in each sample is left empty
+1,2,CLEVR location-conditioned,Experiment 2,6 locations,fails,two clear things,only two to four objects appear and most of the six dots stay empty
+1,2,CLEVR location-conditioned,Experiment 2,9 locations,fails,two clear things,one to three objects appear and most of the nine dots stay empty
+1,2,CLEVR location-conditioned,Experiment 3,1 location,succeeds,not applicable,each sample has one object on the dot
+1,2,CLEVR location-conditioned,Experiment 3,3 locations,mixed,two clear things,"two or three objects appear, and some sit beside the dots"
+1,2,CLEVR location-conditioned,Experiment 3,6 locations,fails,two clear things,two to four objects appear and most dots stay empty
+1,2,CLEVR location-conditioned,Experiment 3,9 locations,fails,one thing,one or two small objects appear among nine mostly empty dots
+1,2,CLEVR location-conditioned,Bradley-Local (Experiment 2L),1 location,mixed,not applicable,an object sits on the dot but the samples add up to four objects at places nobody asked for
+1,2,CLEVR location-conditioned,Bradley-Local (Experiment 2L),3 locations,mixed,two clear things,the three dots are filled and extra objects appear elsewhere in the scene
+1,2,CLEVR location-conditioned,Bradley-Local (Experiment 2L),6 locations,mixed,two clear things,"the dots are filled, with extra objects making a crowded scene"
+1,2,CLEVR location-conditioned,Bradley-Local (Experiment 2L),9 locations,mixed,two bodies or heads,"most dots are covered but objects pile up and pass through each other, worst in the third sample"
+4,8,text prompts,SDXL,"a beautiful photograph with a horse in the middle, a dog on the left, and a cat on the right (seed 42)",fails,two clear things,"a white horse walks beside a collie that is on the right, and there is no cat"
+5,10,text prompts,SDXL,"A cat eating sushi with chopsticks, oil-painting in the style of Van Gogh",succeeds,two clear things,an orange cat holds chopsticks to its mouth above a plate of sushi rolls in a painted style
+5,10,text prompts,SDXL,"A dog eating a croissant, watercolor-painting in the style of Monet",succeeds,two clear things,a white dog holds a croissant in its mouth in a soft watercolor
+5,10,text prompts,SDXL,"A horse eating sushi with chopsticks, woodblock print in the style of Hokusai",mixed,two clear things,"a horse stands over bowls of food in a woodblock style, with no chopsticks and no clear sushi"
+5,10,text prompts,SDXL,"A horse, dog, and cat.",fails,two clear things,"a horse stands with a small white cat at its feet, and there is no dog"
+5,10,text prompts,SDXL,A cat eating sushi and a croissant.,fails,fused hybrid,a repeating food pattern where small orange cats blend into croissant and sushi shapes
+5,10,text prompts,SDXL,"Oil-painting in the style of Van Gogh, watercolor-painting in the style of Monet, woodblock print in the style of Hokusai",mixed,fused hybrid,"one landscape blends the brushwork, and the three styles cannot be told apart"
+7,22,CLEVR location-conditioned,Experiment 1,"0 to 7 conditioned locations (K, 8 samples per row)",succeeds,two clear things,"rows up to K = 7 show about one object per dot, and the K = 0 row is empty as asked"
+7,22,CLEVR location-conditioned,Experiment 1,8 to 10 conditioned locations,mixed,two bodies or heads,"objects crowd and overlap, so a count of separate objects is not possible at this tile size"
+7,22,CLEVR location-conditioned,Experiment 2,0 conditioned locations,fails,not applicable,objects appear in the row that asked for none
+7,22,CLEVR location-conditioned,Experiment 2,1 to 10 conditioned locations,fails,two clear things,"the object count stays around one to three as dots increase, leaving most dots empty"
+7,22,CLEVR location-conditioned,Experiment 3,1 to 3 conditioned locations,mixed,two clear things,"one to three objects appear, close to the dots but not always on them"
+7,22,CLEVR location-conditioned,Experiment 3,4 to 10 conditioned locations,fails,one thing,the object count stops rising and the K = 9 and 10 rows hold one or two small objects among empty dots
+8,23,CLEVR location-conditioned,Bradley-Local (Experiment 2L),0 to 4 conditioned locations,mixed,two clear things,"conditioned dots are filled but extra objects appear, including in the K = 0 row"
+8,23,CLEVR location-conditioned,Bradley-Local (Experiment 2L),5 to 10 conditioned locations,mixed,two bodies or heads,dots are mostly covered while objects crowd and intersect at high K
+8,23,CLEVR location-conditioned,Standard architecture trained on 1 object,0 to 10 conditioned locations,fails,one thing,"every row draws one object whatever the number of dots, including rows that asked for none or for ten"
+8,23,CLEVR location-conditioned,Bradley-Local (LCS architecture trained on 1 object),0 to 4 conditioned locations,succeeds,two clear things,the K = 0 row is empty and the rows up to 4 place one separate object per dot
+8,23,CLEVR location-conditioned,Bradley-Local (LCS architecture trained on 1 object),5 to 10 conditioned locations,fails,fused hybrid,"objects melt into large merged blobs of mixed colour, and this worsens as K rises"
+9,24,CLEVR location-conditioned,Experiment 1,"denoised prediction, 4 locations",succeeds,two clear things,the predicted image has four separate objects at the four conditioned locations
+9,24,CLEVR location-conditioned,Experiment 2,"denoised prediction, 4 locations",fails,two clear things,"the prediction holds a purple sphere and a green cube, so two of the four locations are empty"
+9,24,CLEVR location-conditioned,Bradley-Local (Experiment 2L),"denoised prediction, 4 locations",mixed,two clear things,the four locations are filled but several extra objects appear in the middle of the scene
+10,25,CLEVR location-conditioned,Standard architecture trained on 1 object,"Trained 1-1, K = 0 to 12",fails,one thing,"each tile holds about one object however many dots are asked for, and many dots stay empty"
+10,25,CLEVR location-conditioned,Experiment 1,"Trained 1-2, K = 0 to 12",mixed,two clear things,"low K rows are filled, and the count seems to level off at high K, where tiles are too small to call"
+10,25,CLEVR location-conditioned,Experiment 1,"Trained 1-3, K = 0 to 12",mixed,two bodies or heads,"rows to about K = 7 look filled, then objects overlap; tiles stay blurred at 400 dpi so exact counts are not called"
+10,25,CLEVR location-conditioned,Experiment 1,"Trained 1-4, K = 0 to 12",mixed,two bodies or heads,scenes fill up and crowd at high K; tiles are too small at 400 dpi to count objects
+10,25,CLEVR location-conditioned,Experiment 1,"Trained 1-5, K = 0 to 12",mixed,two bodies or heads,scenes fill up and crowd at high K; tiles are too small at 400 dpi to count objects
+10,25,CLEVR location-conditioned,Experiment 1,"Trained 1-6, K = 0 to 12",mixed,two bodies or heads,scenes fill up and crowd at high K; tiles are too small at 400 dpi to count objects
+11,26,CIFAR-10,EDM2,class 3,mixed,not applicable,"one soft, blurred white cat face, recognisable but low in detail"
+13,30,CLEVR location-conditioned,Bradley-Local (Experiment 3L),0 locations,succeeds,not applicable,the row is empty as asked
+13,30,CLEVR location-conditioned,Bradley-Local (Experiment 3L),1 to 4 locations,mixed,two clear things,objects appear but several sit beside the dots and some samples add extra objects
+13,30,CLEVR location-conditioned,Bradley-Local (Experiment 3L),5 to 10 locations,mixed,two bodies or heads,object counts keep rising but many objects sit off their dots and crowd each other
+13,30,CLEVR colour-conditioned,Color-conditioning,0 colors,succeeds,not applicable,"the row has no objects, as asked"
+13,30,CLEVR colour-conditioned,Color-conditioning,1 to 4 colors,succeeds,two clear things,the rows show separate objects in the asked colours
+13,30,CLEVR colour-conditioned,Color-conditioning,5 to 7 colors,mixed,two clear things,"most asked colours appear as separate objects, and some objects overlap at the right of the row"
+13,30,CLEVR colour-conditioned,Color-conditioning,8 colors,fails,two clear things,"several samples miss at least one asked colour, for example the first has no visible yellow or purple object"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 1 of 10",fails,two clear things,"a white horse and a collie on the right, with no cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 2 of 10",fails,two clear things,a dark horse with a small black and white animal in front that cannot be named as cat or dog
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 3 of 10",fails,two clear things,"a chestnut horse and a dog on the right, with no cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 4 of 10",fails,one thing,"two horses in a framed split panel, with no dog or cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 5 of 10",fails,two clear things,"a dark horse behind a lying white dog, with no cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 6 of 10",fails,two clear things,"a horse silhouette and a small dog-like animal inside a picture frame, with no clear cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 7 of 10",fails,two clear things,"a four-panel collage of three horse heads and a black cat, with no dog"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 8 of 10",fails,one thing,"one tiny horse on a road, with no dog or cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 9 of 10",fails,one thing,"a horse head behind a grid of bars, with no dog or cat"
+14,33,text prompts,SDXL,"horse middle, dog left, cat right: tile 10 of 10",fails,two clear things,"a long-faced pale dog beside a tabby cat, with no horse"
+14,33,text prompts,SDXL,"horse in the middle, a cat on the left, and a dog on the right (seed 42)",fails,two clear things,"a white horse with a black cat on its right, so the cat is on the wrong side and the dog is missing"
+14,33,text prompts,SDXL,a dog wearing a hat,succeeds,two clear things,a dog lies on a table wearing a dark top hat
+14,33,text prompts,SDXL,a dog eating pizza,succeeds,two clear things,a dog sits behind a whole pizza with a slice near its mouth
+17,36,text prompts,MDM,a cow jumping over a candlestick,mixed,two bodies or heads,"cow and candlestick are both there, but the candlestick passes through or overlaps the cow in at least two of 4 tiles"
+17,36,text prompts,SDXL,a cow jumping over a candlestick,succeeds,two clear things,cows leap above or beside separate candlesticks in all 4 tiles
+17,36,text prompts,MDM,a watercolor painting of a cow jumping over a candlestick,mixed,two bodies or heads,"the first tile runs the candlestick through the body, and the others place a cow leaping beside one"
+17,36,text prompts,SDXL,a watercolor painting of a cow jumping over a candlestick,mixed,two clear things,"cows float over candles in all 4 tiles, and one tile turns the stand into a telescope-like object"
+17,36,text prompts,MDM,a dog eating a croissant,succeeds,two clear things,each of 4 dogs bites or holds an oversized croissant
+17,36,text prompts,SDXL,a dog eating a croissant,succeeds,two clear things,each of 4 dogs has a croissant at its mouth or on a plate in front of it
+17,36,text prompts,MDM,a watercolor painting of a dog eating a croissant,succeeds,two clear things,"four watercolor dogs eat croissants, with hand-like paws gripping the food in two tiles"
+17,36,text prompts,SDXL,a watercolor painting of a dog eating a croissant,mixed,two clear things,"three dogs have croissants at the mouth, and the fourth stands in a repeating pattern of croissants"
+17,36,text prompts,MDM,an oil-painting of an octopus flying through outer space,mixed,two clear things,"squid-like creatures with distorted bodies sit among planets, and one tile is a framed painting"
+17,36,text prompts,SDXL,an oil-painting of an octopus flying through outer space,succeeds,two clear things,a clear octopus floats among planets in all 4 tiles
+17,36,text prompts,MDM,an oil-painting of cat eating sushi with chopsticks,mixed,two clear things,"cats with chopsticks and sushi are present, but the faces and food are distorted in the first tile"
+17,36,text prompts,SDXL,an oil-painting of cat eating sushi with chopsticks,mixed,two clear things,"cats sit at plates of sushi, with chopsticks visible in only two of 4 tiles, and wear robes nobody asked for"
