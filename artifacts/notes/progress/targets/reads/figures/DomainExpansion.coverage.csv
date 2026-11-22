@@ -1,0 +1,11 @@
+figure,page,kind,reason
+1,4,diagram,"architecture: overlapping patches through a pretrained denoiser, then a ViT coordinator, then overlap averaging"
+2,5,qualitative,"CLEVR sample from the RRR baseline beside one from the coordinator"
+3,5,qualitative,"one satellite sample from DomainExpansion beside one from MultiDiffusion"
+B.1,13,qualitative,"CLEVR samples at 2 positions beside classifier heatmaps"
+B.2,14,qualitative,"CLEVR samples from the coordinator at 3 and at 5 positions"
+B.3,14,other,"one real satellite image beside its schematic map, an example of the dataset and not a generated sample"
+B.4,15,plot,"FID against generated sample count at N=96 and N=128, MultiDiffusion against DomainExpansion"
+B.5,17,qualitative,"map, real satellite image and generated image at 96 by 96"
+B.6,17,qualitative,"map, real satellite image and generated image at 128 by 128"
+B.7,17,qualitative,"map, real satellite image and generated image at 256 by 256"
