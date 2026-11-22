@@ -174,6 +174,16 @@
    "at": "2026-11-22",
    "sha256": "d97262233e462487664215671dc1e00211cbf2bd6a40ee9b9f1dcbec839ef82b",
    "state": "drained"
+  },
+  "artifacts/scenes/how-co3-corrects-a-step/README.md": {
+   "at": "2026-11-22",
+   "sha256": "2673aede7830ca204c25e9b5c5941679f974a1550c5838acfb50ac52727c20c4",
+   "state": "owed"
+  },
+  "artifacts/scenes/how-co3-corrects-a-step/index.html": {
+   "at": "2026-11-22",
+   "sha256": "24db27427c8b8226555b3074fe1ac93b164d7dacb743f7447406db7da398a44c",
+   "state": "owed"
   }
  },
  "held": [
