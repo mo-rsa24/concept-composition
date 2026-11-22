@@ -58,10 +58,11 @@ Navigation: ⬅️ [Access paths](#access-paths) | 📋 [TOC](#table-of-contents
 
 Navigation: ⬅️ [Auth](#auth) | 📋 [TOC](#table-of-contents) | [Next](#known-gaps--non-obvious-constraints) ➡️
 
-"Running an experiment" is decided by a fixed order of checks: an already-allocated interactive
-node first, then an idle `biggpu` node, then a shared half-used `biggpu` node reached over SSH
-with a pinned free GPU device (invisible to `squeue`, harvested with `pgrep` instead), then
-`bigbatch` as the fallback. Every job script begins with checks that must pass before any work
+GPU work runs inside an interactive job this user already holds, or launches through `sbatch`
+inside the administrator's caps of one `biggpu` job and six `bigbatch` jobs per user. A denied
+`sbatch` waits. A `nohup` launch over SSH outside the session's own Slurm job needs the owner's
+yes through `python3 scripts/progress_board.py ask`; such a run is invisible to `squeue` and is
+harvested with `pgrep`. Every job script begins with checks that must pass before any work
 starts: the disk guard, the `co3` path check, and a GPU-visibility guard.
 
 The full six-step protocol, the shared-device safety rules, and the SSH absolute-path rule

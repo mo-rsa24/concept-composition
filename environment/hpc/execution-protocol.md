@@ -2,9 +2,10 @@
 
 Navigation: ⬅️ [Nodes](nodes.md) | 📋 [Index](../00-INDEX.md) | [Overview](../overview.md#execution-model)
 
-"Running an experiment" means one of two paths, decided by this protocol, in order. This is
-the section a plan is most likely to silently get wrong, because "submit a job" reads as one
-action and is actually a several-step decision.
+GPU work launches through `sbatch`, inside the administrator's caps of one `biggpu` job and six
+`bigbatch` jobs per user, and waits when `sbatch` is denied. This is the section a plan is most
+likely to silently get wrong, because "submit a job" reads as one action and is actually a
+several-step decision.
 
 ## Table of contents
 
@@ -17,16 +18,19 @@ action and is actually a several-step decision.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
 
-1. **Check for an already-allocated interactive node.** `squeue -u mmolefe`: if an interactive
-   node is already allocated on `biggpu`, run directly there, no `sbatch`.
-2. **Check for an idle node.** Else `sinfo -p biggpu`: if a `biggpu` node is idle, target
-   `biggpu`. Otherwise check the shared-device path (next step) before falling back to
-   `bigbatch`. **`sinfo`'s `idle` is not proof the GPU is free**: work launched over SSH with
-   `nohup` (the shared-device path below) is invisible to Slurm, so a node can read `idle` while
-   a training saturates its GPU (2026-09-03: mscluster112 showed `idle` with a rank-8 LoRA run at
-   94% on it). Always confirm with the per-device `nvidia-smi` read in step 3 before pinning a
-   device, whatever `sinfo` says.
-3. **The shared-device path.** An `alloc` `biggpu` node is often only half used, because Slurm
+1. **Check for an already-allocated interactive node.** `squeue -u mmolefe`: if your own
+   interactive job already holds a `biggpu` node, run inside that job, with no new `sbatch`.
+2. **Submit through `sbatch`.** Else `sinfo -p biggpu`: if a `biggpu` node is idle and your one
+   `biggpu` job slot is free, target `biggpu`. Otherwise submit to `bigbatch`, up to six jobs per
+   user. If `sbatch` is denied, wait and submit again. **`sinfo`'s `idle` is not proof the GPU is
+   free**: work launched over SSH with `nohup` (the shared-device path below) is invisible to
+   Slurm, so a node can read `idle` while a training saturates its GPU (2026-09-03: mscluster112
+   showed `idle` with a rank-8 LoRA run at 94% on it). Always confirm with the per-device
+   `nvidia-smi` read in step 3 before pinning a device, whatever `sinfo` says.
+3. **The shared-device path needs the owner's yes.** A `nohup` launch over SSH, outside this
+   session's own Slurm job, runs only after the owner approves it through
+   `python3 scripts/progress_board.py ask`. The rest of this step applies to an approved run.
+   An `alloc` `biggpu` node is often only half used, because Slurm
    here allocates whole nodes while knowing nothing about GPUs (GRES is `(null)`, see
    `nodes.md`) and most users run on one device. SSH in and read per-device state:
    `ssh <node> nvidia-smi --query-gpu=index,memory.used,utilization.gpu,temperature.gpu --format=csv`.
@@ -38,14 +42,13 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
    allocation, which this project has shared safely (mscluster109 device 0, 2.9 GB, all of
    2026-09-03), the rule being no *active* foreign process rather than no foreign memory.
    `scripts/launch_sdlora.sh`'s guard encodes both. **A device reading `[N/A]` or
-   `[GPU requires reset]` in the utilisation or temperature column is not free either — it is
-   hardware-faulted**, and a memory-only check passes it just as readily as a healthy idle
+   `[GPU requires reset]` in the utilisation or temperature column is hardware-faulted and is
+   not free**, and a memory-only check passes it just as readily as a healthy idle
    device. A launch onto a faulted device hangs producing zero progress with no error
    (`poe-launch-002`); the only recovery is `kill -9` and relaunch elsewhere, since the fault
-   needs an administrator or node reboot to clear. Slurm cannot schedule onto that node (it is
-   already allocated, and `biggpu` allows one job per user anyway), so the run goes there
-   directly instead: SSH in, pin `CUDA_VISIBLE_DEVICES=<free index>`, launch with `nohup`, tee
-   to a log the session node can read.
+   needs an administrator or node reboot to clear. An approved run goes onto a free device
+   directly: SSH in, pin `CUDA_VISIBLE_DEVICES=<free index>`, launch with `nohup`, tee to a log
+   the session node can read.
 
    **Every path on the SSH launch line must be absolute** (the script path and the log
    redirect): a non-interactive SSH command starts in `$HOME`, not the repo, and a `cd <repo>
@@ -76,12 +79,12 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
      shared-device run means running `pgrep -af 'sweep|train'` on the node; `squeue` will never
      show it.
 
-   **The admin node cap trips this path too.** `biggpu` carries an administrator cap on how
-   many nodes a user may hold at once, separate from the one-job rule. When `sbatch` is denied
-   by that cap even though idle nodes exist, do not wait for the queue: take the shared-device
-   path onto an idle node instead. Device 1 has been the free device in practice (provenance
-   below), so prefer it, but still verify with `nvidia-smi` before pinning
-   `CUDA_VISIBLE_DEVICES`; the guard rules below stay mandatory.
+   **A denied `sbatch` means wait.** `biggpu` carries an administrator cap on how many nodes a
+   user may hold at once, separate from the one-job rule. When `sbatch` is denied by that cap
+   even though idle nodes exist, wait and submit again. On an approved shared-device run, device
+   1 has been the free device in practice (provenance below), so prefer it, but still verify
+   with `nvidia-smi` before pinning `CUDA_VISIBLE_DEVICES`; the safety rules above stay
+   mandatory.
 
 4. **Every job script opens with a block of checks that must pass before the work starts:** a `df` disk guard on the checkpoint target
    (abort at 90% full; must check the filesystem the script actually writes to, see
@@ -132,23 +135,24 @@ No picture of this decision exists under `artifacts/`; the flow below is drawn f
 
 ```mermaid
 flowchart TD
-  A["1. squeue: interactive biggpu node allocated?"] -->|"yes"| R["Run directly there, no sbatch"]
-  A -->|"no"| B["2. sinfo -p biggpu: idle node?"]
-  B -->|"idle, but sinfo is not proof"| C["3. nvidia-smi per device over SSH"]
-  B -->|"none idle"| C
-  C -->|"free device"| D["Idle node: target biggpu. Shared node: pin CUDA_VISIBLE_DEVICES, nohup launch, log on shared disk"]
-  C -->|"foreign process, or N/A or reset"| E["bigbatch fallback"]
-  D --> G["4. Guards in the script, 5. poll over SSH"]
-  E --> G
+  A["1. squeue: my interactive biggpu job running?"] -->|"yes"| R["Run inside that job"]
+  A -->|"no"| B["2. sbatch: one biggpu job or up to six bigbatch jobs"]
+  B -->|"accepted"| G["4. Guards in the script, 5. poll over SSH"]
+  B -->|"denied"| W["Wait, then submit again"]
+  W --> B
+  W -.->|"only with the owner's yes"| C["3. nvidia-smi per device over SSH"]
+  C -->|"free device"| D["Pin CUDA_VISIBLE_DEVICES, nohup launch, log on shared disk"]
+  C -->|"foreign process, or N/A or reset"| W
+  D --> G
   classDef guard fill:#fff3cd,stroke:#999
   classDef work fill:#e8e8f5,stroke:#999
   classDef out fill:#dcfce7,stroke:#999
-  class A,B,C,G guard
-  class D,E work
+  class A,C,G guard
+  class B,D,W work
   class R out
 ```
 
-*Key: yellow boxes are checks, purple boxes are where the run goes, green is the quick path.* Read it top to bottom: the checks come first, and a `biggpu` launch happens only after step 3 has seen a free device.
+*Key: yellow boxes are checks, purple boxes are where the run goes, green is the quick path.* Read it top to bottom: `sbatch` is the route, a denied submission waits, and the dashed edge to an SSH launch opens only with the owner's yes.
 
 ### The code behind it
 

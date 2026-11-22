@@ -23,22 +23,23 @@ that file holds the why.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-launch-on-a-shared-device) ➡️
 
-`unverified`, transcribed 2026-08-24 from `environment/hpc/execution-protocol.md`, not run this
+`unverified`, written 2026-11-22 from `environment/hpc/execution-protocol.md`, not run this
 sitting
 
-In order, stop at the first match:
+GPU work goes through `sbatch`, inside the administrator's caps of one `biggpu` job and six
+`bigbatch` jobs per user. In order, stop at the first match:
 
 ```bash
-squeue -u mmolefe              # already-allocated interactive node? run there directly
-sinfo -p biggpu                # idle biggpu node? target it
-ssh <node> nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv   # shared device free?
+squeue -u mmolefe    # your own interactive job on biggpu? run inside it
+sinfo -p biggpu      # idle biggpu node and your one biggpu job slot free? use biggpu, else bigbatch
+scripts/cluster.sh run "sbatch scripts/<job>.sbatch"   # from the laptop; its header names the partition
 ```
 
-✅ Expected: `squeue` lists your own allocations; `sinfo` shows node states; the `nvidia-smi`
-query shows one row per GPU, a free device reads roughly 0MiB used and 0% utilisation.
+✅ Expected: `squeue` lists your own jobs, `sinfo` shows node states, and `sbatch` prints
+`Submitted batch job <id>`.
 
-❌ **No interactive node, no idle node, no free shared device**: fall back to `bigbatch` via
-`sbatch`, per the same execution-protocol file.
+❌ **`sbatch` is denied**: an administrator cap was reached. Wait and submit again. An SSH launch
+instead needs the owner's yes, filed with `python3 scripts/progress_board.py ask`.
 
 ## 2. Launch on a shared device
 
@@ -46,12 +47,15 @@ Navigation: ⬅️ [Previous](#1-decide-where-a-run-goes) | 📋 [TOC](#table-of
 
 `unverified`, transcribed 2026-08-24, not run this sitting
 
-⚠️ Starts a real process on a node another user may be sharing. Read the safety rules in
+⚠️ Needs the owner's yes through `python3 scripts/progress_board.py ask` before it runs, and so do
+the `nohup` commands recorded in other recipes. It starts a real process outside Slurm on a node
+another user may be sharing. Read the safety rules in
 `execution-protocol.md` first (never start on a device carrying a foreign process, re-check the
 device inside the launch script itself, keep VRAM within the free device only, record node/device/PID
-in the log header). Do step 1 above first.
+in the log header). A free device reads roughly 0MiB used and 0% utilisation.
 
 ```bash
+ssh <node> nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv
 ssh <node> 'GPU=<free index> nohup bash /abs/path/to/launch.sh > /abs/path/to/logs/<name>.log 2>&1 &'
 sleep 5; ssh <node> 'pgrep -af "train"; tail -20 /abs/path/to/logs/<name>.log'
 ```
@@ -81,10 +85,9 @@ squeue -u mmolefe                     # normal sbatch jobs
 ssh <node> "pgrep -af 'sweep|train'"  # shared-device runs launched with nohup; invisible to squeue
 ```
 
-**Why both.** `biggpu` allows one job per user, so a long run across many settings on a shared
-half-used node is started with `nohup` outside Slurm rather than via `sbatch`, and Slurm is blind
-to it. A harvest that only checks `squeue` will report "nothing running" while a real run is
-still going on another node.
+**Why both.** New runs go through `sbatch`, and Slurm sees them. A run already started with `nohup`
+outside Slurm, or one the owner approved that way, is invisible to it, so a harvest that only
+checks `squeue` will report "nothing running" while a real run is still going on another node.
 
 ✅ Expected: the output count against what the plan expected, and the tail of the log, per
 `CLAUDE.md`'s "Harvest reads three execution modes, not one."
@@ -98,18 +101,22 @@ No ❌ branch beyond an unreachable node, which is an SSH/network problem, not a
 
 Navigation: ⬅️ [Previous](#3-harvest-what-is-running) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
-A launch on this cluster is three checks, one `nohup` line and a two-mode harvest. The pictures below are a flowchart of that order and the guard block one real launcher runs before it starts anything.
+A launch on this cluster is an `sbatch` submission and a two-mode harvest, with an SSH route that needs the owner's yes. The pictures below are a flowchart of that order and the guard block one real launcher runs before it starts anything.
 
 ### How it fits together
 
 ```mermaid
 flowchart TD
-  A["1. squeue: do I hold an allocation?"]:::guard -->|"no"| B["2. sinfo: is a biggpu node idle?"]:::guard
-  B -->|"no"| C["3. nvidia-smi: is a shared device free?"]:::guard
+  A["1. squeue: do I hold an interactive job?"]:::guard -->|"no"| B["sinfo: is a biggpu node idle and my slot free?"]:::guard
+  B -->|"yes"| F["sbatch on biggpu"]:::load
+  B -->|"no"| H["sbatch on bigbatch"]:::load
+  F -->|"denied: wait, submit again"| B
+  H -->|"denied: wait, submit again"| B
+  B -.->|"only with the owner's yes"| C["2. nvidia-smi: is a shared device free?"]:::guard
   C -->|"free"| D["ssh node, nohup bash launch.sh"]:::work
-  C -->|"none free"| F["sbatch on bigbatch"]:::load
-  D --> E["harvest: squeue and pgrep"]:::judge
-  F --> E
+  F --> E["3. harvest: squeue and pgrep"]:::judge
+  H --> E
+  D --> E
   E --> G["output count and log tail"]:::out
 classDef guard fill:#fff3cd,stroke:#999;
 classDef load fill:#dbeafe,stroke:#999;
@@ -118,7 +125,7 @@ classDef judge fill:#ede1fb,stroke:#999;
 classDef out fill:#dcfce7,stroke:#999;
 ```
 
-*Key: yellow is a check before anything starts, blue a queue, grey a process you started, purple the read of what is running, green what you keep.* Read it top to bottom: the three yellow boxes are section 1, the grey box is section 2, the purple and green boxes are section 3. Section 1 stops at the first match, so a held allocation is used directly and an idle `biggpu` node is targeted. The chart draws the path where both of those answers are no.
+*Key: yellow is a check before anything starts, blue a queue, grey a process you started, purple the read of what is running, green what you keep.* Read it top to bottom: the first two yellow boxes and the blue boxes are section 1, the third yellow box and the grey box are section 2, the purple and green boxes are section 3. Section 1 stops at the first match, so a held interactive job is used directly. The chart draws the path where that answer is no, and the dashed edge opens only with the owner's yes.
 
 ### The code behind it
 

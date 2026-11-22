@@ -377,7 +377,8 @@ the kill criterion fired on a fresh run whose loss started low. The last checkpo
 under the run's `checkpoints/`; resume from it with recipe 3, which the criterion cannot stop.
 
 ❌ **`sbatch` is refused although nodes are idle**: the administrator cap on nodes per user.
-Take the shared-device path in [launch on a shared device](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device).
+Wait and submit again. The SSH route in [launch on a shared device](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device)
+needs the owner's yes first.
 
 ## If something looks wrong
 

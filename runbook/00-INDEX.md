@@ -18,7 +18,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#themes) ➡️
 |---|---|
 | See whether the plan tree has drifted (stale run claims, unharvested output, orphaned files, unjudged reviews) | [checking-the-plan-tree.md §1](checking-the-plan-tree.md#1-run-the-state-check) |
 | Decide whether to submit a job or SSH onto a shared node | [launching-and-harvesting-a-run.md §1](running-things-on-the-cluster/launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) |
-| Launch something on a shared half-used `biggpu` node | [launching-and-harvesting-a-run.md §2](running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) |
+| Launch something on a shared half-used `biggpu` node, once the owner has said yes | [launching-and-harvesting-a-run.md §2](running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) |
 | Find every run in flight, including the ones Slurm can't see | [launching-and-harvesting-a-run.md §3](running-things-on-the-cluster/launching-and-harvesting-a-run.md#3-harvest-what-is-running) |
 | Serve a static scene from `artifacts/scenes/` in a tmux session | [showing-a-scene-in-the-local-browser.md §1](looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md#1-serve-the-scenes-folder-from-a-tmux-session) |
 | See a scene served on the node in my local browser (the SSH forward) | [showing-a-scene-in-the-local-browser.md §2](looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md#2-forward-the-port-and-open-it-on-the-laptop) |
