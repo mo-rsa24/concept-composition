@@ -1,0 +1,9 @@
+[
+  {
+    "target_id": "SuperDiff-T1-031",
+    "verdict": "blocked",
+    "commit": "8cb4ca29-b2f1320",
+    "run_id": "question 22",
+    "note": "no released CIFAR-10 weights; six trainings and three 50,000-image FID runs are estimated at 75 to 110 GPU-hours; 4.11 stays a published number that was not reproduced"
+  }
+]
