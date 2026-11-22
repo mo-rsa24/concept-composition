@@ -71,3 +71,29 @@ Navigation: ⬅️ [How far to trust the ladder](#how-far-to-trust-the-ladder) |
 The bars for every step were written before the runs in [plan 33's review file](../../../../plans/review/33-experts-that-compose-at-inference.md), and [plan 33](../../../../plans/33-experts-that-compose-at-inference.md) holds the design.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 314 files of this result (24.9 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `01-the-plain-product-draws-nothing` | 28 | 1.6 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/` |
+| `02-giving-each-model-its-own-half` | 12 | 0.9 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/` |
+| `03-adding-the-checker-pushes` | 53 | 4.7 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/` |
+| `04-adding-extra-denoising-steps` | 13 | 1.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/` |
+| `05-first-test-on-20-unseen-pairs` | 48 | 4.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/` |
+| `06-letting-the-models-choose-their-side` | 47 | 2.9 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/` |
+| `07-choosing-the-side-early-and-holding-it` | 14 | 1.2 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/` |
+| `08-final-test-on-20-unseen-pairs` | 44 | 4.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/` |
+| `side-road-training-with-clutter` | 55 | 4.4 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/<run>/ <run>/
+```
+
+<!-- cluster:end -->

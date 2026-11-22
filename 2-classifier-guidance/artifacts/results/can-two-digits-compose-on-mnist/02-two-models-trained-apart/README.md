@@ -55,3 +55,22 @@ The 5–9 expert's shortfall on 8 (55 of 64) and the fixed-side 5–9 expert's o
 that used them. Pasted pairs were allowed in the pair-aware checker's training; the one-half ink checker saw only
 single digits and blank halves and did no better. The pixel checkers, judge and settings are the plan's; the
 setting that was never tested is a base the two experts share.
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 39 files of this result (1.4 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `counts` | 30 | 0.0 MB | [counts.json](counts.json) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/counts/` |
+| `sheets` | 9 | 1.4 MB | [fixed-none-floor0.5-3-6.png](sheets/fixed-none-floor0.5-3-6.png) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/<run>/ <run>/
+```
+
+<!-- cluster:end -->
