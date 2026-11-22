@@ -5,7 +5,7 @@ whether it is delivered, and where the proof is. Per `~/.claude/OUTCOME_BOARD_FO
 
 | Row | What must be true | Status | What showed it | Step |
 |---|---|---|---|---|
-| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, scale 10 draws the asked-for class | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1; by eye, tile by tile, 9, 11 and 10 at scale 10 (route instruction 13) | 4 |
+| G0 | classifier guidance works on the authors' released 256 px weights: scale 0 identical, [scale 10 draws the asked-for class](does-classifier-guidance-work-on-the-released-weights.md#scale-10-draws-the-asked-for-class) | done | [the card](../../artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md): scale 0 identical on 4 of 4 seeds; at scale 10 the classifier calls 16, 15 and 15 of 16 for corgi, tabby, golden retriever, against 2, 2 and 5 at scale 1; by eye, tile by tile, 9, 11 and 10 at scale 10 (route instruction 13) | 4 |
 | R0 | the product sampler pushes unrescaled with an upper cap, and the canary still matches | done | the product sampler pushes unrescaled, capped at 0.1 of its prediction (commit `445cef9f`); at strength 0 plain, no head and untrained head share one md5 on cat × dog seed 9 (job 89341). Plan 17's sampler stays uncapped, as the paper's reproduction | 5 |
 | [A1](a1-exact-toy-classifier-push.md) | exact toy: the pair-aware discriminator's push composes and the separate-label push does not | done | at pair weight 0.01, seed 7: the pair-aware push gives 172 of 300 crisp at w = 1 and 300 at w = 2 against 0 unguided; the separate-label push at most 10; on the toy the product's target composes and the push repairs the sampler | 7 |
 | A2 | toy caption model: the same guidance composes learned experts | open | not on the current route | |
@@ -101,7 +101,7 @@ Ticked with a link and a `verified`, `stated` or `inferred` mark as each is deli
 **A1**
 
 - [ ] 📝 compute plan written before launch: GPU-hours and wall clock from measured rates, node, card and fallback card, seeds and pairs it buys
-- [ ] 💻 code ran: discriminator trained on exact pair draws against exact product draws
+- [ ] 💻 code ran: discriminator trained on exact product draws, which are the pairs, against the summed-score sampler's draws
 - [ ] 🖼️ screenshot: cosine and norm ratio with the true correction, per reverse-diffusion step
 - [ ] ✅ check passed: crisp pairs of 300, guided against unguided, against the rung's bar
 
