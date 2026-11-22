@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  T["<b>28 table rows</b><br/>0 have a verdict yet<br/>from a run"]:::plain
+
+  A["<b>Rendering now: 2 rows</b><br/>RTD on Complex: 708 of 2,964 pictures<br/>RTD on Concat: 99 of 99, scoring waits for Complex"]:::doing
+  B["<b>Waiting on your answer: 6 rows</b><br/>CO3 on Complex, Concat: questions 16 and 18<br/>ToMe on Shape, Texture, Complex, Concat: questions 17 and 18"]:::you
+  C["<b>My next work: 10 rows</b><br/>CoMat on Color, Shape, Texture: confirm the released weights<br/>CoInD and Liu on Shapes3D, CelebA: read the checkpoint sheet<br/>Attend-and-Excite and Liu on Color: write the design<br/>FKC on GenEval: commit the port, settle 553 or 1,000 prompts"]:::todo
+  D["<b>May need a costed question: 3 rows</b><br/>Projective Composition on CLEVR: do our checkpoints match 128 pixels?<br/>SuperDiff on CIFAR-10: no weights released, needs retraining<br/>Logical Guidance on CMNIST: no code found yet"]:::risk
+  E["<b>Closed as not comparable: 7 rows</b><br/>Liu, SuperDiff on CMNIST<br/>ToMe on Color<br/>Attend-and-Excite, Liu on Shape and on Texture"]:::closed
+
+  T --> A
+  T --> B
+  T --> C
+  T --> D
+  T --> E
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe3bf,stroke:#c46a00,stroke-width:3px,color:#111111
+  classDef you fill:#eaf1ff,stroke:#4a78c2,stroke-width:3px,color:#111111
+  classDef todo fill:#eeeeee,stroke:#777777,stroke-width:2px,color:#111111
+  classDef risk fill:#fff6cc,stroke:#b59b00,stroke-width:2px,color:#111111
+  classDef closed fill:#ffffff,stroke:#999999,stroke-width:2px,stroke-dasharray:5 4,color:#555555
