@@ -1,0 +1,9 @@
+[
+  {
+    "target_id": "CoMat-T1-013",
+    "verdict": "not comparable",
+    "commit": "f9f9f5dc-b2f1320",
+    "run_id": "question 25",
+    "note": "run by the benchmark's authors on Stable Diffusion 2 base with an unreleased reimplementation; the official model page no longer resolves; 0.6400 stays a published number until question 25 is answered"
+  }
+]
