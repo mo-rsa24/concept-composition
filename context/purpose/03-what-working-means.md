@@ -7,6 +7,7 @@
 - [What a bad result looks like](#what-a-bad-result-looks-like)
 - [What this cannot tell you](#what-this-cannot-tell-you)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## The test
 
@@ -38,9 +39,14 @@ rises, while a control that injects a random vector of the same size stays flat.
 
 **A held-out check landing above a threshold fixed before the run.** ✅
 
-Objective 2's threshold, read in `MASTER_PLAN.md`'s Goals: composing on at least 3 of 4 held-out
-seeds for the representative pair, per group. Objective 3's threshold: composing on at least 2 of 4
-held-out seeds for a held-out sibling pair. Thresholds are fixed in the plan file before the run, per this
+The thresholds read in `MASTER_PLAN.md`'s Goals, one per objective:
+
+| Objective | Held-out set | Threshold |
+|---|---|---|
+| 2 | held-out seeds, representative pair, per group | composing on at least 3 of 4 held-out seeds |
+| 3 | a held-out sibling pair | composing on at least 2 of 4 held-out seeds |
+
+Thresholds are fixed in the plan file before the run, per this
 project's convention that a threshold not visible in a diff can be adjusted after seeing the
 answer.
 
@@ -84,15 +90,14 @@ scope; the seven non-animal pairs from an earlier cross-taxonomy era and the six
 they came from (see [world/animal-pair.md § What people get wrong](../world/animal-pair.md#what-people-get-wrong))
 are not part of the live claim.
 
-**Whether the fix generalises past SDXL, or past this one detector-based scorer.** 🔍
+**Whether the fix generalises past SDXL, or past this one detector-based scorer.** ✍️
 
-Inferred from the project's own background-experiment table in `MASTER_PLAN.md`: a second model
-and sampler, and a check of whether any published metric agrees with human judgement better than
-this one, are both listed as not-yet-started rows, not settled findings.
+`MASTER_PLAN.md`'s background-experiment table lists a second model and sampler, and a check of
+whether any published metric agrees with human judgement better than this one, as not started.
 
 ## Where this came from
 
-Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -101,3 +106,68 @@ Navigation: ⬅️ [What this cannot tell you](#what-this-cannot-tell-you) | �
 | The scorer's true-rate bound at λ=1 | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
 | The two-mode failure classification and its null | Read in `1-lora-correction/report/experiments-log.md`, EXP-05 | 2026-08-24 |
 | The animal-pair scope boundary | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
+This page says what would count as working. The pictures below show what a good result and a limit on it look like, and the code shows how a bar sits in the source, where any later change to it shows in a diff.
+
+### How it fits together
+
+*Picture held back.* `1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png` has a tile with a shape that could not be identified at full size, so it is named here and not shown.
+
+The shape of a good result: cat and dog, seed 9, strength of the correction (λ) across the top (0, 0.5, 0.6, 0.65, 0.75, 1). The top row, the real correction, goes from one fused face at λ=0 to a cat beside a dog at λ=1, and the three control rows (wrong pair, wrong seed, wrong order) stay single fused animals in every column `verified` (opened and read; the card reads it the same way `stated`). The card also says the real correction reaches about 94% compose rate at λ=1 while the three controls stay near zero across the axis `stated` (card, for the version with the curve; the curve is not in this picture).
+
+### The code behind it
+
+A bar lives in the source as a constant, written before the sweep runs. The project's `CLAUDE.md` names these two constants in the mechanism re-probe scorer as the pattern to copy. Excerpt from `1-lora-correction/scripts/mechanism_study/reprobe_table.py` (lines 38 to 42):
+
+```python
+# Pre-registered before the sweep ran, so the bar is not moved to fit the data.
+# Support needs the effect present in most cells AND a clear median, not one
+# strong pair carrying a weak average.
+MIN_MEDIAN_RATIO = 1.2
+MIN_FRACTION_ABOVE_ONE = 0.75
+```
+
+- `MIN_MEDIAN_RATIO` and `MIN_FRACTION_ABOVE_ONE` are the two numbers a result has to clear, and a change to either shows in a diff.
+- This is the mechanism re-probe's bar, not the compose-rate thresholds in the table above; those sit in plan files.
+
+### What comes out
+
+*Picture held back.* `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png` holds a frog and toad row, which the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off every sheet, so it is named here and not shown.
+
+The 32 renders behind the 94% headline, each titled with pair, seed and the detector's count. 30 titles read 2 or more and 2 read `n=1` `verified` (counted on the picture; matches the card). Opened by eye the card sorts them into 12 clearly both, 1 two of the same animal, 5 undecidable, 12 renders of three look-alike pairs (cow and buffalo, frog and toad, leopard and jaguar) and 2 scored as a failure `stated` (card and `calls.json`). The card says both failures were scored correctly `stated`, while the seal and walrus image at seed 9, counted `n=1`, shows two separate animals `verified` (opened and read).
+
+### Further illustrations
+
+**Evidence**
+
+<a href="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/two-of-the-same-animal/a_cat__x__a_dog_seed10_n2.png"><img src="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/two-of-the-same-animal/a_cat__x__a_dog_seed10_n2.png" width="200" alt="Two dogs lying together, no cat"></a>
+<a href="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/an_elephant__x__a_penguin_seed9_n1.png"><img src="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/an_elephant__x__a_penguin_seed9_n1.png" width="200" alt="One elephant drawn in line art, no penguin"></a>
+
+Left, cat and dog seed 10 at full correction: two dogs and no cat, counted as two animals and so scored `compose` `verified` (opened and read; the card calls it the one confirmed error). Right, elephant and penguin seed 9: one elephant and no penguin, titled `n=1` and scored as a failure `verified`. The card describes this image as two elephants and no penguin, merged into one box by the detector `stated` (card); the picture shows one elephant, so the two readings differ and neither is changed.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The audit card | do the successful cells contain both animals, at `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` (not linked, because the folder holds the held-back pair) |
+| The strength grid card | [how big the strength grid should be](../../1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md) |
+| What a compose rate is | [compose rate](../world/compose-rate.md) |
+| What the interaction term is | [interaction term](../world/interaction-term.md) |
+| The problem this test answers | [the problem](01-the-problem.md) |
+| What the project produces | [what we produce](02-what-we-produce.md) |
+
+### Still open
+
+- The page links the audit's `02-two-of-one/` folder; RENAMES.md maps it to `two-of-the-same-animal/`, which is what the pictures above use. The page's own text is left as written.
+- The audit card's review file carries an open task to change the printed band from 87%-94% to 75%-94% after a later labelling pass; the page keeps 87% to 94%. Neither is changed here.
+- No picture shows the two-mode failure split (aiming wrong, delivering too little) or the pre-registered null of the experiments log; none was found.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

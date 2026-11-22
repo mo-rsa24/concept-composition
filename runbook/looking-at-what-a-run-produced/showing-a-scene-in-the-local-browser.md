@@ -12,11 +12,18 @@ serving that folder once on the session node and tunnelling the port from the la
 that are Vite apps (`logsnr-explainer`, `how-much-correction-is-needed`) have their own `npm run
 dev` blocks in their READMEs; this theme is for everything that is just a file.
 
+## Table of contents
+
+- [1. Serve the scenes folder from a tmux session](#1-serve-the-scenes-folder-from-a-tmux-session)
+- [2. Forward the port and open it on the laptop](#2-forward-the-port-and-open-it-on-the-laptop)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+
 ## 1. Serve the scenes folder from a tmux session
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-forward-the-port-and-open-it-on-the-laptop) ➡️
 
 `ran 2026-08-29`
 
-Navigation: 📋 [TOC](#showing-a-scene-in-the-local-browser) | [Next](#2-forward-the-port-and-open-it-on-the-laptop) ➡️
 
 **When you need this**
 
@@ -75,9 +82,10 @@ it, attach shows its request log, kill-session ends it cleanly.
 
 ## 2. Forward the port and open it on the laptop
 
+Navigation: ⬅️ [Previous](#1-serve-the-scenes-folder-from-a-tmux-session) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+
 `adapted 2026-08-29`
 
-Navigation: ⬅️ [1. Serve the scenes folder from a tmux session](#1-serve-the-scenes-folder-from-a-tmux-session) | 📋 [TOC](#showing-a-scene-in-the-local-browser)
 
 **When you need this**
 
@@ -114,7 +122,7 @@ everything else is served through the tunnel.
 ❌ **Browser says connection refused**: the tunnel is up but nothing is listening on the node,
 so the server died or was never started; go to
 [recipe 1](#1-serve-the-scenes-folder-from-a-tmux-session).
-❌ **SSH itself hangs or refuses**: wrong node name; check the current session node in
+❌ SSH itself hangs or refuses: wrong node name; check the current session node in
 [environment/overview.md](../../environment/overview.md).
 
 **Variations**
@@ -134,3 +142,31 @@ is local forwarding (laptop listens, traffic goes to the node); `-R` is what ssh
 The command above is the correct one either way; only the naming differs.
 
 </details>
+
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#2-forward-the-port-and-open-it-on-the-laptop) | 📋 [TOC](#table-of-contents)
+
+The recipe serves the folder and tunnels the port. This block links the scene it uses as its example and names one path to check before you start.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The scene the recipe opens, with its card | [the noise shell and its basins](../../1-lora-correction/artifacts/scenes/noise-shell-and-basins/README.md) |
+| The same scene published as a private artifact | [the noise shell and its basins, published](https://claude.ai/code/artifact/5cc908b7-59b9-4929-ad6b-3309bec51690) |
+| The shared scenes index | [scenes folder index](../../artifacts/scenes/README.md) |
+| The session node named in recipe 2 | [environment overview](../../environment/overview.md) |
+
+### Still open
+
+**A path disagrees with the recipe.** Recipe 1 serves the repo-root `artifacts/scenes` and opens `noise-shell-and-basins/` under it. In the checkout read here that folder is not under the root `artifacts/scenes`; the scene sits at `1-lora-correction/artifacts/scenes/noise-shell-and-basins/` (its card links back to this recipe). The recorded commands and output are left as written `verified` (listing both folders). The cluster checkout was not read.
+
+No screenshot of the scene in a browser is recorded, and no picture of the tunnel step exists.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

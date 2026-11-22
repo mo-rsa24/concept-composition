@@ -15,6 +15,8 @@ disk guard that has to check the filesystem the script actually writes to, not a
 - [Known gaps / non-obvious constraints](#known-gaps--non-obvious-constraints)
 - [Provenance](#provenance)
 - [Paper: LaTeX build](#paper-latex-build)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
 
 ## Compute / runtime
 
@@ -81,6 +83,9 @@ Navigation: ⬅️ [Execution model](#execution-model) | 📋 [TOC](#table-of-co
   you. Check node STATE, not just partition availability (detail: [hpc/nodes.md](hpc/nodes.md)).
 - fp16 end-to-end: cached eps tensors are float16; analyses that stack many of them (the SVD)
   should upcast to float32 before accumulating.
+  - Float16 keeps about three decimal digits, so past 2,048 it can no longer add 1. Toy (numbers
+    invented, computed): adding 1 to a running total 4,096 times gives 2,048 in float16 and 4,096
+    in float32. Stacking many cached tensors for the [SVD](../../../Obsidian/Mathematics/Linear%20Algebra/Singular%20Value%20Decomposition.md#where-to-learn-this) loses small contributions the same way.
 - No system LaTeX at all: `pdflatex`, `xelatex`, `latexmk`, and `bibtex` are absent from PATH
   (reconfirmed live 2026-08-24). Every LaTeX recipe except `tectonic` fails, including the
   extension's default. Detail, and an open question about whether a newly-added
@@ -98,7 +103,7 @@ here because it grows one row per verification and nobody reads it while plannin
 
 ## Paper: LaTeX build
 
-Navigation: ⬅️ [Provenance](#provenance) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Provenance](#provenance) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 The manuscript is `writing/iclr/iclr2027_conference.tex`, built with `tectonic` (the only LaTeX
 engine on this cluster) either from the terminal or through VS Code's LaTeX Workshop extension
@@ -110,8 +115,82 @@ project" command work without manually picking the recipe is unverified (see "St
 Full build commands, the extension's recipe list, and the git-blame on `.vscode/settings.json`
 are in [paper.md](paper.md).
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#paper-latex-build) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+No picture of the cluster itself exists in any `artifacts/` folder, so this block holds a flowchart drawn from this page's own "Execution model" text and the real guard a job script runs before it starts.
+
+### How it fits together
+
+```mermaid
+flowchart TD
+  A["Want to run an experiment"] --> B{"Interactive node already allocated?"}
+  B -->|"yes"| Z["Run there"]
+  B -->|"no"| C{"Idle biggpu node?"}
+  C -->|"yes"| Z
+  C -->|"no"| D{"Shared half-used biggpu node, free GPU pinned over SSH?"}
+  D -->|"yes"| E["Launch over SSH, harvest with pgrep"]
+  D -->|"no"| F["bigbatch as the fallback"]
+  Z --> G["Job script guards: disk, co3 path, GPU visible"]
+  E --> G
+  F --> G
+  G --> H["Work starts"]
+  classDef guard fill:#fff3cd,stroke:#333;
+  classDef judge fill:#ede1fb,stroke:#333;
+  classDef work fill:#e8e8f5,stroke:#333;
+  class B,C,D judge;
+  class G guard;
+  class Z,E,F,H work;
+```
+
+*Purple boxes are the choices, yellow is the set of guards, grey boxes are where the run goes.*
+
+Read it top to bottom: the order of the three choices is the order the page's "Execution model" section gives, and the guards run for every route `stated` (this page; the six-step protocol is in the [execution protocol](hpc/execution-protocol.md)).
+
+### The code behind it
+
+One real job script shows the disk and GPU guards the page names. Excerpt from `scripts/review_bench_co3.sbatch` (lines 26 to 31):
+
+```bash
+[ -d "$OUT" ] || { echo "ABORT: $OUT not visible from this node" >&2; exit 3; }
+USE=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
+[ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $OUT is ${USE:-unknown}% full" >&2; exit 3; }
+read -r USED UTIL < <(nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv,noheader,nounits | head -1 | tr -d ',')
+case "$UTIL" in ''|*[!0-9]*) echo "ABORT: gpu faulted ($UTIL)" >&2; exit 4;; esac
+"$PY" -c "import torch, sys; sys.exit(0 if torch.cuda.is_available() else 6)" || { echo "ABORT: torch sees no CUDA" >&2; exit 6; }
+```
+
+- Lines 26 to 28 are the disk guard: `df` reads the `$OUT` folder the script writes to (on `/datasets`) and aborts at 90% full or when the folder is not visible.
+- Lines 29 and 30 are the GPU guard: a faulted card prints `[N/A]` for utilization, which is not a number, so the script aborts with exit 4.
+- Line 31 asks torch whether it sees CUDA, which catches a job that would silently run on the CPU.
+- The `PY` variable in this script defaults to the `co3` absolute python path the page names. The page says every job script checks that path, and this script has no separate check: a missing interpreter fails at line 31 with the message that torch sees no CUDA.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Partition table, per-node GPU models, environments | [HPC nodes](hpc/nodes.md) |
+| The six-step launch protocol and shared-device rules | [execution protocol](hpc/execution-protocol.md) |
+| Paths, `df` sizes, the disk guard rule | [storage](storage.md) |
+| Failures seen on launches, disks and nodes | [known failures](known-failures.md) |
+| How each fact was established | [provenance](provenance.md) |
+| The LaTeX build | [paper build](paper.md) |
+| Launching and harvesting by hand | [the launch and harvest recipe](../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) |
+
+### Still open
+
+- No screenshot or recorded terminal output of the guards running exists in `artifacts/`; the excerpt is the source only.
+
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#paper-latex-build) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **execution model** in [the HPC nodes fact, under Python environments](hpc/nodes.md#python-environments), where every job script must name the `co3` python by its absolute path because nothing activates an environment implicitly.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

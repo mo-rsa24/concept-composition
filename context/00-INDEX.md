@@ -46,6 +46,8 @@ Navigation: ⬅️ [I want to know...](#i-want-to-know) | 📋 [TOC](#table-of-c
 | [purpose/](purpose) | Why this exists, what it produces, what working looks like | 3 |
 | [world/](world) | The real things behind the data: PoE composition, chimera, the interaction term, the LoRA corrector, the animal pair, compose rate, how a render fails | 7 |
 | [data/](data) | Where the data comes from, and what every field means | 2 |
+| [plain-words.md](plain-words.md) | Which words this project replaced, which it kept, and why | 1 |
+| [research-guidelines.md](research-guidelines.md) | Where the general research rules land in this repo, and the mistakes it has already made | 1 |
 
 Picture prompts are in [diagram-prompts.md](diagram-prompts.md) (8 prompts, 0 rendered); rendered
 images sit in `diagrams/`. Existing pipeline images already copied in sit in `images/world/`.
@@ -57,14 +59,6 @@ Navigation: ⬅️ [The themes](#the-themes) | 📋 [TOC](#table-of-contents) | 
 
 The things this pass could not settle by reading. Each names who or what would settle it.
 
-- [ ] **The interaction term's sign convention is written two ways across the repo's own
-      documents**: `MASTER_PLAN.md`'s glossary writes `r_t = ε̃_J − ε̃_PoE`; a maintainer memory
-      note referenced (but not read) during this build is recorded as using
-      `r_t = ε̃_Mono − ε̃_PoE`. Both are read here as the same Mono-minus-PoE quantity, but this
-      has not been confirmed against the code that computes it. Would settle it: read
-      `poe_repair/composers/teacher_residual.py` or wherever `d_t_poe_vs_mono` is computed, and
-      confirm `ε̃_J` and `ε̃_Mono` name the same prediction. See
-      [world/interaction-term.md § What people get wrong](world/interaction-term.md#what-people-get-wrong).
 - [ ] **The current animal-pair pool's size is not settled.** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`
       lists 17 pairs; `1-lora-correction/report/experiments-log.md` also says 17 "in the current pool"; but
       `plans/standing/retrofit-poe-repair-min.md` (a later document) names "the 20 animal pairs" as the
@@ -94,6 +88,7 @@ Navigation: ⬅️ [Still open](#still-open) | 📋 [TOC](#table-of-contents)
       yet beyond noting a candidate source (`1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`'s
       passing runs). Save as `images/world/05-lora-corrected-vs-poe-vs-mono.png`.
 - [ ] 🖼️ All 8 pieces in [diagram-prompts.md](diagram-prompts.md) are written and unrendered: 4
-      subject-lane pieces plus capstone are missing from this count (3 pieces + capstone = 4
-      subject, 3 pieces + capstone = 4 process). Paste each into ChatGPT, save under `diagrams/`,
+      subject-lane (3 pieces plus a capstone) and 4 process-lane (3 pieces plus a capstone). Paste each into ChatGPT, save under `diagrams/`,
       and check against its faithfulness note before embedding, per that file's own instructions.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

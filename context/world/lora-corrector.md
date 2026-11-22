@@ -11,6 +11,14 @@ prompt during training and is not something a deployed system has access to.
 > one full-sized matrix, so the correction carries far fewer trainable numbers than the layer it
 > attaches to.
 
+Where to learn the two borrowed words: the [LoRA card](../../../../Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this) and the [cross-attention card](../../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Cross-Attention.md#where-to-learn-this). Rank is the width of the two thin matrices. On a toy layer of 100 by 100 weights (invented; this page does not state SDXL's layer sizes):
+
+| What is trained | Shape | Numbers |
+|---|---|---|
+| the full layer | 100 by 100 | 10,000 |
+| rank 8 | 100 by 8, times 8 by 100 | 1,600 (16%) |
+| rank 4 | 100 by 4, times 4 by 100 | 800 (8%) |
+
 ## Table of contents
 
 - [Words this file uses](#words-this-file-uses)
@@ -20,6 +28,8 @@ prompt during training and is not something a deployed system has access to.
 - [How it shows up in the data](#how-it-shows-up-in-the-data)
 - [What people get wrong](#what-people-get-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
 
 ## Words this file uses
 
@@ -105,7 +115,7 @@ was downgraded from something the paper must clear to an optional short check, a
 
 ## Where this came from
 
-Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -114,12 +124,103 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The single-pair-transfer confound and its downgrade | Read in `context/research-guidelines.md` and `1-lora-correction/report/experiments-log.md` | 2026-08-24 |
 | `arm` value `lora_residual_inject` | Read in `README.md`'s repo layout, `poe_repair/methods/_sampling.py` listing | 2026-08-24 |
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+The page's "Picture wanted" asks for one run's PoE render, corrected render and Mono render side by side. The pictures below hold that comparison for six pairs, and the code shows where the correction is added.
+
+### How it fits together
+
+*Picture held back.* `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/hard_vs_easy_transfer.png` holds a frog and toad row, which the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off every sheet, so it is named here and not shown.
+
+One row per pair, three columns: Mono (the joint prompt, the target), PoE and LoRA. In each of the six rows the Mono tile and the LoRA tile show two animals and the PoE tile shows one animal in the foreground `verified` (opened and read by eye). The card says these are the existing triptychs from the pooled rank-8 adapter's first training phase at step 60,000, one seed per pair, no new render `stated` (the folder's query file). The card adds that in the seal and walrus row the second LoRA animal lacks tusks, so the row reads as two seals `stated`; the picture shows no tusks on either LoRA animal `verified`.
+
+| Row | Set | Compose rate the card gives |
+|---|---|---|
+| Frog and toad | held out | 0.9375 |
+| Eagle and hawk | held out | 0.9375 |
+| Seal and walrus | held out | 0.9375 |
+| Leopard and jaguar | held out | 1.0 |
+| Wolf and husky | training pair | none, never held out |
+| Lion and tiger | training pair | none, never held out |
+
+`stated` (the folder's query file).
+
+### The code behind it
+
+The correction is the difference between the product's prediction with the adapter on and with it off. Excerpt from `poe_repair/methods/_sampling.py` (lines 858 to 869):
+
+```python
+            eps_a_l = guided_eps(_eps_a_raw_l, _eps_u_l, guidance_scale)
+            eps_b_l = guided_eps(_eps_b_raw_l, _eps_u_l, guidance_scale)
+            eps_poe_lora = poe_eps(eps_a_l, eps_b_l, _eps_u_l)
+            delta_hat = eps_poe_lora - eps_poe_frozen
+            delta_capped, applied = _maybe_cap_correction(
+                delta_hat, eps_poe_frozen, correction_max_rel_norm,
+            )
+            delta_norm_per_step.append(float(delta_hat.float().norm().item()))
+            cap_scale_per_step.append(float(applied))
+            _lam_t = _lambda_value(lambda_schedule, step_index, num_inference_steps,
+                                   float(lambda_value))
+            eps_t = eps_poe_frozen + _lam_t * delta_capped
+```
+
+- Lines 858 to 860 combine the adapter-on predictions into a second product (`eps_poe_lora`), and `eps_poe_frozen` is the same product with the adapter off, computed earlier at line 831.
+- `delta_hat` is the learned stand-in for the interaction term, and `_maybe_cap_correction` limits its size relative to the product's prediction.
+- The last line is the same shape as the true-term line in [interaction term](interaction-term.md#the-code-behind-it): the product plus λ times a correction, with the learned one in place of the joint minus product.
+
+The joint prompt is not read at inference. Lines 683 to 686 of the same file:
+
+```python
+    The joint prompt ``(seq_j, pool_j)`` is no longer consumed at
+    inference — the LoRA is the only thing carrying the correction. It is
+    kept in the signature for backwards-compat with the probe wiring;
+    pass anything (e.g. the unconditional embedding) without effect.
+```
+
+`verified` (read in the code). This is the Mono-free property the page names.
+
+### Further illustrations
+
+**Evidence**
+
+*Picture held back.* `1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/the-same-concept-twice.png` has a tile with a shape that could not be identified at full size, so it is named here and not shown.
+
+Four rows, each naming one concept twice (dog and dog at seeds 2 and 9, cat and cat at seed 9, tiger and tiger at seed 9), and four columns: the joint prompt, the joint prompt through the adapter, the plain product and the adapter on the product ("Ours"). The plain product column shows one animal in every row, and the adapter column shows two or more animals in every row (three dogs at dog seed 9) `verified` (opened and counted by eye). The card says the plain product returns one animal in all five cells and the adapter two in four of five `stated`.
+
+**The picture and the card differ in two places.** The card lists five cells under three columns. The picture has four rows, with dog seed 1 missing, and a fourth column for the joint prompt through the adapter. Both are given and neither is changed. The picture's footer, "Adapter trained for 1,000 epochs", agrees with the card's `v58-03-self` at step 50,000, because an epoch is 50 steps `stated` (`scripts/shared/main_study_grids.py`, line 25).
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The gap the adapter imitates | [interaction term](interaction-term.md) |
+| The method it corrects | [PoE composition](poe-composition.md) |
+| The failure it repairs | [chimera](chimera.md) |
+| How its failures look | [how a render fails](how-a-render-fails.md) |
+| The same-concept finding | [does the adapter return two when both prompts name the same concept](../../1-lora-correction/report/is-the-adapter-just-copying-the-joint-prompt/does-the-adapter-return-two-when-both-prompts-name-the-same-concept.md) |
+| The six-pair figure's query and method | [hard against easy transfer](../../1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/QUERY.md) |
+| The grids card | [what the main study's grids show](../../1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/README.md) |
+
+### Still open
+
+- The page's own slot, `images/world/05-lora-corrected-vs-poe-vs-mono.png`, is not filled; the six-pair figure above is a candidate and the page itself is unchanged.
+- The page's candidate source, `scorer_validated.json`, exists only in the cluster checkout (checked 2026-11-21).
+- The figure has one seed per pair, so no picture here shows how typical the shown seed is, as the card also says.
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the softness of the corrected render** (what the adapter costs in fidelity, and two attempts to remove it) in [can a corrector or a clean tail sharpen the adapter's renders](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) (relevance match).
 - The mention of **rank-8** (the adapter the paper argues can carry the correction) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#why-this-plan-exists).
 - The mention of **adapter** in [the write-up on what PoE loses when it composes](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#35-the-interaction-term).
 - The mention of **pooled LoRA**, the rank-32 checkpoint the third-expert runs are given the recipe of, in [the plan that fits a learned "and" token](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-learned-and-token.md).
 - The mention of **the trained LoRA**, the correction a classifier's gradient would stand in for, in [the route for classifier-guided PoE](../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are) (relevance match).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

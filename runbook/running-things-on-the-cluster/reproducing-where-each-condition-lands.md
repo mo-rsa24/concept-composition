@@ -38,17 +38,18 @@ versus PoE versus PoE plus correction) is a set of Python samplings on the clust
 - [5. Open the built page on a laptop with no cluster tunnel](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Before any of these
 
-Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) ➡️
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) ➡️
 
 - [ ] 🖥️ **The repo is on the branch that has the scripts**
   ```bash
   ls /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_*
   ```
   ✅ **Five files**: `_render.py`, `_trajectories.py`, `_plot.py`, `_frames_embed.py`, `_shared_device.sh` (plus `_dynamics.py`, which draws the both-ness-over-steps figure).
-  ❌ **Fewer**: you are on an older branch; the scripts landed on `overhaul/tree-2026-08-10` on 2026-09-05.
+  ❌ Fewer: you are on an older branch; the scripts landed on `overhaul/tree-2026-08-10` on 2026-09-05.
 
 - [ ] 🖥️ **The rank-32 checkpoint and the training cache exist**
   ```bash
@@ -62,9 +63,10 @@ Navigation: 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#1-rend
 
 Navigation: ⬅️ [Previous](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-make-the-endpoint-figures-and-their-sidecar) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 `ran 2026-09-05` (references on mscluster110 device 0, frames on mscluster109 device 1)
 
-Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#2-make-the-endpoint-figures-and-their-sidecar) ➡️
 
 **When you need this**
 
@@ -153,7 +155,6 @@ Navigation: ⬅️ [Previous](#1-render-the-references-and-the-per-step-frames-o
 
 `ran 2026-09-05` on mscluster85, CPU
 
-Navigation: ⬅️ [1. Render the references and the per-step frames](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#3-embed-the-frames-and-export-the-pages-data) ➡️
 
 **When you need this**
 
@@ -186,7 +187,6 @@ Navigation: ⬅️ [Previous](#2-make-the-endpoint-figures-and-their-sidecar) | 
 
 `ran 2026-09-05` on mscluster85, CPU
 
-Navigation: ⬅️ [2. Make the endpoint figures](#2-make-the-endpoint-figures-and-their-sidecar) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#4-build-the-page-from-diffusion-explorers-ui-and-open-it) ➡️
 
 **When you need this**
 
@@ -218,9 +218,10 @@ which skips finished runs.
 
 Navigation: ⬅️ [Previous](#3-embed-the-frames-and-export-the-pages-data) | 📋 [TOC](#table-of-contents) | [Next](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel) ➡️
 
+⚠️ Overwrites the vendored UI under `vendor/ui` and rewrites `dist/`, so list both folders with `ls` first and confirm nothing there is unsaved.
+
 `ran 2026-09-05` on mscluster85
 
-Navigation: ⬅️ [3. Embed the frames](#3-embed-the-frames-and-export-the-pages-data) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel) ➡️
 
 **When you need this**
 
@@ -298,7 +299,6 @@ Navigation: ⬅️ [Previous](#4-build-the-page-from-diffusion-explorers-ui-and-
 
 `unverified`, written 2026-09-05 from the build's `base: './'` setting, not run
 
-Navigation: ⬅️ [4. Build the page](#4-build-the-page-from-diffusion-explorers-ui-and-open-it) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#if-something-looks-wrong) ➡️
 
 **When you need this**
 
@@ -321,7 +321,7 @@ server at the folder root works.
 
 ## If something looks wrong
 
-Navigation: ⬅️ [5. Open the built page on a laptop](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel) | 📋 [TOC](#reproducing-where-each-condition-lands) | [Next](#where-this-came-from) ➡️
+Navigation: ⬅️ [5. Open the built page on a laptop](#5-open-the-built-page-on-a-laptop-with-no-cluster-tunnel) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 **The numbers do not match the finding.** The finding's both-ness means are in its rung 1 and
 rung 4 with their files; recipe 2 and recipe 3 print the same fields. A difference above 0.02 on
@@ -335,7 +335,7 @@ the calling command line. Kill by PID from `pgrep -f "[w]here_each"` instead.
 
 ## Where this came from
 
-Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#reproducing-where-each-condition-lands)
+Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 Captured from the session of 2026-09-05 that produced the finding, with every ✅ block pasted from
 that session's real output and every ❌ branch a failure hit that day: the co-tenant OOM on
@@ -345,3 +345,102 @@ and is marked so. The finding that consumes these outputs is
 [where does each condition land](../../1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md); the plan that
 owns the run is
 [where each condition lands](../../1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md).
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
+The finding this recipe chain feeds compares six runs from one starting noise. The pictures below are the 160 px thumbnails recipe 3 makes from one seed's final frames, and the code above them is the function that decodes the running estimate at each saved step.
+
+### How it fits together
+
+```mermaid
+flowchart LR
+  G["device guard"]:::guard --> R1["1. render: 6 conditions x 8 seeds"]:::work
+  R1 --> R2["2. endpoint figures on CPU"]:::judge
+  R1 --> R3["3. embed 672 frames, data.json"]:::judge
+  R3 --> R4["4. vite build: dist/"]:::work
+  R4 --> R5["5. laptop: static server"]:::out
+  R2 --> O["both-ness means and figures"]:::out
+classDef guard fill:#fff3cd,stroke:#999;
+classDef load fill:#dbeafe,stroke:#999;
+classDef work fill:#e8e8f5,stroke:#999;
+classDef judge fill:#ede1fb,stroke:#999;
+classDef out fill:#dcfce7,stroke:#999;
+```
+
+*Key: yellow is the device check, grey is a build or render, purple is a measurement on the CPU, green is what you open.* Only recipe 1 needs a GPU.
+
+### The code behind it
+
+`dump_frames`, with the constants and save helper above it, in `1-lora-correction/scripts/showcase/where_each_condition_lands_trajectories.py` (lines 61 to 91) is what recipe 1's `frames` stage runs for each condition:
+
+```python
+FRAME_STEPS = (0, 2, 5, 8, 10, 15, 20, 25, 30, 35, 40, 45, 49)
+THUMB = 256
+CONDITIONS = ("solo_a", "solo_b", "joint", "poe", "lora_1.0", "lora_1.2")
+
+
+def _save(img01: torch.Tensor, path: Path) -> None:
+    arr = (img01[0].clamp(0, 1).permute(1, 2, 0).float().cpu().numpy() * 255).round().astype("uint8")
+    Image.fromarray(arr).resize((THUMB, THUMB), Image.LANCZOS).save(path)
+
+
+def dump_frames(out: "SamplerOutputs", ctx, cond_dir: Path) -> list[dict]:
+    """Decode x̂0 at FRAME_STEPS from the tracker, plus the final image."""
+    cond_dir.mkdir(parents=True, exist_ok=True)
+    tr = out.tracker
+    frames = []
+    for k in FRAME_STEPS:
+        z = tr.trajectories[k].to(device=ctx.device, dtype=ctx.dtype)
+        eps = tr.velocities[k].to(device=ctx.device, dtype=ctx.dtype)
+        t = int(tr.timesteps[k].item())
+        ab = ctx.scheduler.alphas_cumprod[t].to(device=ctx.device, dtype=ctx.dtype)
+        x0 = tweedie_mean(z, ab, eps)
+        img = decode_latents(ctx.models, x0)
+        p = cond_dir / f"step_{k:03d}.png"
+        _save(img, p)
+        frames.append({"step": k, "timestep": t, "png": str(p)})
+        del z, eps, x0, img
+    p = cond_dir / "step_050.png"
+    _save(out.image, p)
+    frames.append({"step": 50, "timestep": 0, "png": str(p)})
+    torch.cuda.empty_cache()
+    return frames
+```
+
+- Line 61 is the 13 saved steps; with the final image on line 87 to 89 that is the 14 frames per run the recipe counts.
+- Lines 77 to 81 take the sampler's own latent and guided prediction at step `k` and form the Tweedie mean, the model's current guess at the finished image.
+- Line 82 decodes it and line 84 saves it at 256 px (`THUMB`, line 62); the scene's own thumbnails are 160 px.
+
+### What comes out
+
+| <a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/joint/seed_9/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/joint/seed_9/step_050.png" width="200" alt="Joint prompt final image, seed 9"></a> | <a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_9/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_9/step_050.png" width="200" alt="Plain PoE final image, seed 9"></a> | <a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/lora_1.2/seed_9/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/lora_1.2/seed_9/step_050.png" width="200" alt="Corrected PoE at lambda 1.2, seed 9"></a> |
+|---|---|---|
+| joint prompt | plain PoE | PoE plus correction, λ 1.2 |
+
+Seed 9, the final image of three of the six conditions, read from the scene's frame folder `verified` (opened; the six conditions at step 10 and step 50 were also read side by side). The joint prompt gives a cat beside a dog, plain PoE gives one animal with a cat's ears and a dog's face, and the corrected run at λ 1.2 gives a cat beside a dog again. The finding's both-ness means (joint 0.523, plain PoE 0.205, λ 1.2 0.42) are printed by recipe 2 and quoted on the page `stated` (page); the pictures here do not measure them. The other three conditions (cat alone, dog alone, λ 1.0) are in the same folders.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The animated page, its card and how to build it | [where each condition lands, scene card](../../1-lora-correction/artifacts/scenes/where-each-condition-lands/README.md) |
+| The finding these outputs feed | [where does each condition land](../../1-lora-correction/report/when-does-the-outcome-lock-in/where-does-each-condition-land.md) |
+| The plan that owns the run | [where each condition lands, plan](../../1-lora-correction/plans/05-when-does-the-outcome-lock-in/plans/figures/06-where-each-condition-lands.md) |
+| Serving the scene and forwarding the port | [showing a scene in the local browser](../looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md) |
+| Nodes and python builds | [the cluster nodes](../../environment/hpc/nodes.md) |
+| The adapter-left-on failure | [known failures](../../environment/known-failures.md) |
+
+### Still open
+
+- The endpoint figures and the dino-space plots recipe 2 writes, under `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/where-does-each-condition-land/`, are not on this checkout: that folder does not exist, and `RENAMES.md` has no entry for it. The finding links pictures in it too.
+- No published link for the scene is recorded in any card this block read.
+- No screenshot of the built page exists on disk. The finding embeds two from the missing folder, while recipe 4 and the finding's link to its figure explainer say there are three.
+- Recipe 5 is `unverified`; no picture shows it.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

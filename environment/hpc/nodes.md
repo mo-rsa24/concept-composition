@@ -16,6 +16,7 @@ live via `sinfo -N -o "%N %P %t"` on 2026-08-24 (state: `alloc`).
 - [Partitions](#partitions)
 - [Python environments](#python-environments)
 - [VS Code extensions on the compute nodes](#vs-code-extensions-on-the-compute-nodes)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
 ## Partitions
@@ -36,7 +37,8 @@ time limit, node count).
 **`sinfo` never shows GPU GRES on this cluster.** Confirmed again live on 2026-08-24
 (`sinfo -o "%P %N %G"`): every partition reads `(null)` in the GRES column. A job script that
 trusts Slurm to pick a GPU-capable node will not get one; node capability is tribal knowledge,
-recorded in the table above, not queryable.
+recorded in the table above, not queryable. GRES (generic resource) is Slurm's name for a
+countable extra on a node, such as a GPU; `(null)` means the cluster declares none.
 
 **Many nodes show down or drain at any given time.** An idle-looking partition (available in
 the `%a` column) can still queue a job, because individual nodes inside it are unavailable.
@@ -99,24 +101,79 @@ this node PyPI downloaded at 13.5 MB/s (30 MB of the `nvidia-cublas-cu12` wheel 
 
 ## VS Code extensions on the compute nodes
 
-Navigation: ⬅️ [Previous](#python-environments) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: ⬅️ [Previous](#python-environments) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 **The compute nodes cannot reach the VS Code extension marketplace.** From `mscluster88`, every
 extension download returns an 875-byte Microsoft page reading "The request is blocked." Both
 `code-server --install-extension` and the Extensions panel's install fail with `Extract: End of
-central directory record signature not found`. **Install from VSIX** also fails: the main extension
+central directory record signature not found`. Install from VSIX also fails: the main extension
 unpacks, but the members of its extension pack (for `ms-python.python`: Pylance, debugpy, Python
 Environments) are fetched from the node, those downloads are blocked, and the install rolls back.
 The truncated downloads sit in `~/.vscode-server/data/CachedExtensionVSIXs/`. (verified 2026-10-13)
 
 **The fix is to let the laptop download remote extensions.** On the laptop, tick **Remote: Download
 Extensions Locally** (`remote.downloadExtensionsLocally`) in User settings, reload the window, then
-click **Install in SSH: mscluster88** in the Extensions panel. VS Code fetches each extension and its
+click Install in SSH: mscluster88 in the Extensions panel. VS Code fetches each extension and its
 pack members on the laptop and copies them over. `ms-python.python` 2026.8.0 and
 `ms-toolsai.jupyter` 2025.9.1 installed this way. (verified 2026-10-13)
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#vs-code-extensions-on-the-compute-nodes) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+No picture of the cluster exists under `artifacts/`. The block gives the probe that reads per-card state, which `sinfo` cannot, and the faults the page records, one row each.
+
+### The code behind it
+
+`scripts/gpu_probe.sh` (lines 7 to 12, named here, not linked) prints one line per card with utilisation in the last column, so a card reading `[N/A]` shows it there.
+
+```bash
+n=$(hostname -s)
+declare -A IDX
+while IFS=', ' read -r i u m t z; do
+  IDX[$u]=$i
+  echo "GPU $n $i $m $t $z"
+done < <(nvidia-smi --query-gpu=index,uuid,memory.used,memory.total,utilization.gpu --format=csv,noheader,nounits)
+```
+
+- The query asks for index, uuid, memory used, memory total and utilisation. The `bigbatch` probe in the partition table asks for name, memory used and utilisation, so the two share memory used and utilisation.
+- The file's own header says `[N/A]` marks a faulted card, which agrees with the page.
+
+### What comes out
+
+Seven of the faults the page records, in date order, each with the card or node it names (all `stated`, from the table row and sections above):
+
+| Date | Node | What was seen |
+|---|---|---|
+| 2026-09-03 | `mscluster50`, `51` | idle in `sinfo`, device-handle fault, jobs 49277 and 49278 refused by the guard |
+| 2026-09-05 | `mscluster111` | `[GPU requires reset]`, utilisation `[N/A]` under `co3_bw` |
+| 2026-09-10 | six `bigbatch` nodes | device-handle fault; job 52566 refused on `mscluster76` |
+| 2026-09-12 | `mscluster72`, `73` | `/datasets` invisible inside a Slurm job, visible over SSH; 8 jobs died |
+| 2026-09-24 | seven idle `bigbatch` nodes | "No devices were found"; job 59136 died on `mscluster59` |
+| 2026-10-13 | `mscluster112` | `No devices were found`, `CUDA unknown error` |
+| 2026-11-19 | `mscluster71` | card died mid-job (job 90386); jobs 90390 to 90395 refused |
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| How a run is launched across these nodes | [execution protocol](execution-protocol.md) |
+| Timings per card | [training run timings](throughput.md) |
+| The fault entry | [poe-launch-002](../known-failures.md#entry-id-poe-launch-002) |
+| Storage the jobs write to | [storage](../storage.md) |
+
+### Still open
+
+No screenshot or filed `nvidia-smi` capture of a faulted card is under `artifacts/`; the readings live only as text on this page.
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#vs-code-extensions-on-the-compute-nodes) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The cross-device spread named in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md): one uncorrected cell reads 0.153, 0.169 and 0.180 on the RTX 3090, the RTX PRO 6000 Blackwell and the Quadro RTX 8000, so a comparison across corrector counts stays on one device.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

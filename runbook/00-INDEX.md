@@ -39,7 +39,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#themes) ➡️
 | Measure how well a checkpoint fits the cached correction, per pair and step bucket, with no sampling | [probing-a-pooled-lora-checkpoint.md §2](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) |
 | Resume a pooled (PoE) training from a checkpoint on whichever device is free | [probing-a-pooled-lora-checkpoint.md §3](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) |
 | Train two ranks at once on an idle node with one Slurm job | [probing-a-pooled-lora-checkpoint.md §4](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) |
-| Estimate how long a training run will take before launching it | [environment/hpc/throughput.md](../environment/hpc/throughput.md) |
+| Estimate how long a training run will take before launching it | [how long a training run takes](../environment/hpc/throughput.md#projected-durations-for-experiments-a-and-b) |
 | Prove the Langevin corrector is off when it is switched off | [running-the-langevin-corrector.md §1](running-things-on-the-cluster/running-the-langevin-corrector.md#1-prove-the-corrector-is-off-when-it-is-switched-off) |
 | Fix the corrector's step size before reading any curve | [running-the-langevin-corrector.md §2](running-things-on-the-cluster/running-the-langevin-corrector.md#2-fix-the-step-size-before-reading-any-curve) |
 | Run the corrector-count grid and print its three-way verdict | [running-the-langevin-corrector.md §3](running-things-on-the-cluster/running-the-langevin-corrector.md#3-run-the-corrector-count-grid-and-print-its-verdict) |
@@ -84,14 +84,14 @@ straight at the recipe that answers it.
 
 | File | One place, one purpose | Recipes |
 |---|---|---|
-| [reading-a-training-run.md](looking-at-what-a-run-produced/reading-a-training-run.md) | W&B: the curves and the tracking set a training run writes | 3 |
+| [reading-a-training-run.md](looking-at-what-a-run-produced/reading-a-training-run.md) | W&B: the curves and the tracking set a training run writes | 3 reference sections |
 | [showing-a-scene-in-the-local-browser.md](looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md) | A static server on the node and the tunnel from the laptop | 2 |
 
 **Making the paper's figures**
 
 | File | One place, one purpose | Recipes |
 |---|---|---|
-| [composing-a-two-panel-figure-in-inkscape.md](making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md) | A laptop with Inkscape: draw panels at final size, compose them under one caption, export a PDF the ICLR template places at 1:1 | 10 (1 `ran`, 9 `unverified`) |
+| [composing-a-two-panel-figure-in-inkscape.md](making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md) | A laptop with Inkscape: draw panels at final size, compose them under one caption, export a PDF the ICLR template places at 1:1 | 10 (all `unverified`) |
 | [relettering-an-image-with-baked-in-text.md](making-the-papers-figures/relettering-an-image-with-baked-in-text.md) | A laptop with Inkscape: replace labels baked into an image with real type at its printed size | 6 (all `unverified`) |
 
 **Flat, no group yet**
@@ -101,6 +101,13 @@ straight at the recipe that answers it.
 | [checking-the-plan-tree.md](checking-the-plan-tree.md) | The repo on the session node: the plan-tree state check | 1 |
 | [syncing-the-paper-with-overleaf.md](syncing-the-paper-with-overleaf.md) | The repo and the Overleaf clone beside it: moving manuscript edits between the two, and the zip route | 4 (2 `ran`, 2 `unverified`) |
 | [setting-up-the-reduce-reuse-recycle-code.md](setting-up-the-reduce-reuse-recycle-code.md) | The laptop and a cluster GPU node: clone the authors' code, build its environments, fetch the CLEVR checkpoint | 7 (6 `ran`, 1 `unverified`) |
+
+Two declared exceptions apply across this folder. Recorded commands keep placeholders such as
+`<node>` because a recorded command does not change. On `launching-and-harvesting-a-run.md`,
+`checking-the-plan-tree.md`, `showing-a-scene-in-the-local-browser.md`,
+`running-the-langevin-corrector.md`, `reproducing-where-each-condition-lands.md`,
+`composing-a-two-panel-figure-in-inkscape.md` and `relettering-an-image-with-baked-in-text.md`, the
+freshness mark sits on the line under the heading, which keeps every section link stable.
 
 ## Still open
 
@@ -112,7 +119,10 @@ Navigation: ⬅️ [Previous](#themes) | 📋 [TOC](#table-of-contents)
 - **The three recipes in `launching-and-harvesting-a-run.md` are `unverified`.** They were
   transcribed on 2026-08-24 from `environment/hpc/execution-protocol.md`, and the next real launch or harvest
   should upgrade them via `--capture`.
-- **The Inkscape page and this index disagree on freshness marks.** The Themes table counts
-  1 `ran` and 9 `unverified`, while the page carries no mark on any of its 10 recipes.
+- **Which Inkscape recipe has been run is not recorded.** An earlier count named 1 of the 10 as
+  run without saying which, so all 10 carry `unverified` until that is known.
+- **12 figure recipes state no success check.** They are all 10 Inkscape recipes and re-lettering
+  recipes 3 and 5, so nothing on the page says what a correct result looks like. Each gets a
+  success line the first time someone walks it, and until then stays `unverified`.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

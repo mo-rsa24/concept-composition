@@ -24,6 +24,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#before-any-of-these) ➡️
 The recipes are numbered so the index can point at them. The numbers are addresses, not an order
 to follow.
 
+- [Words this file uses](#words-this-file-uses)
 - [Before any of these](#before-any-of-these)
 - [Where the paper lives](#where-the-paper-lives)
 - [1. Pull your Overleaf edits into the repo](#1-pull-your-overleaf-edits-into-the-repo---ran-2026-09-21)
@@ -32,6 +33,8 @@ to follow.
 - [4. Rebuild the upload zip instead](#4-rebuild-the-upload-zip-instead---unverified)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
+- [Cross-references](#cross-references)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Before any of these
 
@@ -96,10 +99,16 @@ Fast-forward
 Overleaf writes every editor session as one commit called `Update on Overleaf.`, so the count of
 commits tells you how many sittings came down, never how many edits.
 
+A fast-forward means the clone had nothing Overleaf lacked, so git only slides the clone's label
+forward along Overleaf's commits and makes no merge commit. Toy with invented numbers: the clone
+sits at commit 3, Overleaf is at commit 5, and the pull moves the clone from 3 to 5 and brings 2 commits.
+
 ✅ **`Already up to date.`** means nothing has been typed in the editor since your last pull.
 
 Then copy what came down into the repo copy, file by file, only for the files the pull actually
 touched:
+
+⚠️ Overwrites the repo copy of the tex, so run `git status --short writing/iclr/` first and confirm it is clean.
 
 ```bash
 cp writing/overleaf-iclr/iclr2027_conference.tex writing/iclr/iclr2027_conference.tex
@@ -186,6 +195,8 @@ lists what it needs.
 
 Navigation: ⬅️ [3. ⚠️ Send a repo-side edit back up to Overleaf](#3-send-a-repo-side-edit-back-up-to-overleaf) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
+⚠️ Overwrites the existing upload zip.
+
 **When you need this**
 
 You are starting a fresh Overleaf project, or the clone has drifted so far that replacing the
@@ -225,7 +236,7 @@ engines. Overleaf's is pdfLaTeX or XeLaTeX per the project setting; here it is T
 
 ## Where this came from
 
-Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -237,6 +248,89 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 - The mention of **Overleaf clone**, one of the two older local copies that must not be edited, in [the PRZE-5 page on revising the paper](../1-lora-correction/report/paper-review/prze-5-paper-revised.md), first outcome.
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#cross-references) | 📋 [TOC](#table-of-contents)
+
+This page has no screenshots or run graphs; what it manages is text and commands. The block adds the script behind recipe 4 and the other route into Overleaf that the project has recorded.
+
+### How it fits together
+
+```mermaid
+flowchart LR
+  R["writing/iclr/ (repo copy)"]:::work
+  C["writing/overleaf-iclr/ (clone)"]:::load
+  O["Overleaf project"]:::out
+  Z["iclr-overleaf-slim.zip"]:::work
+  O -->|"1 pull, then copy across"| C
+  C -->|"copy by hand"| R
+  R -->|"3 copy, add named paths, push"| C
+  C -->|"push"| O
+  R -->|"4 make_overleaf_bundle.sh --slim"| Z
+  Z -->|"upload to a fresh project"| O
+  classDef load fill:#dbeafe,stroke:#333
+  classDef work fill:#e8e8f5,stroke:#333
+  classDef out fill:#dcfce7,stroke:#333
+```
+
+*Key: grey boxes are the tracked repo copy and the git-ignored zip built from it, blue is the separate git clone (also git-ignored), green is Overleaf itself.*
+
+Every arrow is a hand step; nothing updates another place on its own.
+
+### The code behind it
+
+Recipe 4 runs a shell script and describes what `--slim` does. Excerpt from `1-lora-correction/scripts/make_overleaf_bundle.sh` (lines 52 to 67):
+
+```bash
+# --slim keeps only the figure files the manuscript actually includes. Everything
+# else under figures/ is there for sections that have not been written yet, and it
+# is what pushes the full bundle past what Overleaf will accept on upload.
+if [[ "$slim" == "1" ]]; then
+  used="$(grep -oE '\\includegraphics(\[[^]]*\])?\{[^}]+\}' "$paper_dir"/*.tex \
+          | sed -E 's/.*\{([^}]+)\}/\1/' | sort -u)"
+  find "$stage/figures" -type f -print0 | while IFS= read -r -d '' f; do
+    base="${f#$stage/figures/}"
+    if ! grep -qxF "$base" <<< "$used"; then
+      rm -f "$f"
+    fi
+  done
+  find "$stage/figures" -type d -empty -delete
+  echo "slim bundle keeps:" >&2
+  echo "$used" | sed 's/^/  /' >&2
+fi
+```
+
+- `used` is every file name inside an `\includegraphics{...}` call in the `.tex` files; the loop removes every staged figure not in that list, then removes empty folders.
+- The script prints the kept list to standard error, which is the "printed list of the figures it kept" the recipe expects.
+- Lines 37 to 50 (not shown) stage `README.md`, `OVERLEAF.md`, `figures.md`, `SPINE.md` and `DRAFT_MAP.md` into the zip, so the zip holds `SPINE.md` and `DRAFT_MAP.md`, which the sentence under the table above says the clone lacks.
+
+### Further illustrations
+
+**Notes**
+
+A second route is recorded in the project: putting a revision into a supervisor's existing Overleaf project by hand in the browser, with no git. Its step list says the revision is one new `.tex` at the project root plus 26 files in a new `revision/` folder, and that its 71 MB `overleaf-bundle.zip` is above Overleaf's 50 MB limit for one upload, so the files themselves go up, the 26 in one drag `stated` (the step list; not run in this drain). It has no pictures to place; see [the step list](../artifacts/drips/present-revision-to-supervisor/overleaf-steps.md).
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The bundle script | [the Overleaf bundle script](../1-lora-correction/scripts/make_overleaf_bundle.sh) |
+| The Overleaf project settings the bundle expects | [the Overleaf handoff note](../writing/iclr/OVERLEAF.md) |
+| Building the PDF locally | [the paper environment file](../environment/paper.md) |
+| Writing the paper | [the draft map](../writing/iclr/DRAFT_MAP.md) |
+| Uploading a revision to a supervisor's project | [the step list](../artifacts/drips/present-revision-to-supervisor/overleaf-steps.md) |
+
+### Still open
+
+- No screenshot of the Overleaf editor, its git token screen or a pull result is filed.
+- The page's table records recipe 3's push and recipe 4's bundle as transcribed and not run that sitting, and no recorded run of either is filed.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

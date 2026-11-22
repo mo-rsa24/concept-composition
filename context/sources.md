@@ -152,3 +152,5 @@ discrete-diffusion result: continuous latents already get a cheap twist from the
 estimate, as the project page itself says.
 
 **Read on** 2026-09-05 (both posts via an API mirror; the project page and abstract via fetch)
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

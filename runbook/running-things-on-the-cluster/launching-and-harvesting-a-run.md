@@ -16,6 +16,7 @@ that file holds the why.
 - [1. Decide where a run goes](#1-decide-where-a-run-goes)
 - [2. Launch on a shared device](#2-launch-on-a-shared-device)
 - [3. Harvest what is running](#3-harvest-what-is-running)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
 ## 1. Decide where a run goes
@@ -69,7 +70,7 @@ the tail, for the guard that aborted it before the run started.
 
 ## 3. Harvest what is running
 
-Navigation: ⬅️ [Previous](#2-launch-on-a-shared-device) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: ⬅️ [Previous](#2-launch-on-a-shared-device) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 `unverified`, transcribed 2026-08-24, not run this sitting
 
@@ -90,9 +91,84 @@ still going on another node.
 
 No ❌ branch beyond an unreachable node, which is an SSH/network problem, not a harvest problem.
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#3-harvest-what-is-running) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+A launch on this cluster is three checks, one `nohup` line and a two-mode harvest. The pictures below are a flowchart of that order and the guard block one real launcher runs before it starts anything.
+
+### How it fits together
+
+```mermaid
+flowchart TD
+  A["1. squeue: do I hold an allocation?"]:::guard -->|"no"| B["2. sinfo: is a biggpu node idle?"]:::guard
+  B -->|"no"| C["3. nvidia-smi: is a shared device free?"]:::guard
+  C -->|"free"| D["ssh node, nohup bash launch.sh"]:::work
+  C -->|"none free"| F["sbatch on bigbatch"]:::load
+  D --> E["harvest: squeue and pgrep"]:::judge
+  F --> E
+  E --> G["output count and log tail"]:::out
+classDef guard fill:#fff3cd,stroke:#999;
+classDef load fill:#dbeafe,stroke:#999;
+classDef work fill:#e8e8f5,stroke:#999;
+classDef judge fill:#ede1fb,stroke:#999;
+classDef out fill:#dcfce7,stroke:#999;
+```
+
+*Key: yellow is a check before anything starts, blue a queue, grey a process you started, purple the read of what is running, green what you keep.* Read it top to bottom: the three yellow boxes are section 1, the grey box is section 2, the purple and green boxes are section 3. Section 1 stops at the first match, so a held allocation is used directly and an idle `biggpu` node is targeted. The chart draws the path where both of those answers are no.
+
+### The code behind it
+
+The guard block of `1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh` (lines 37 to 45) is what "re-check the device inside the launch script itself" means in section 2:
+
+```bash
+USED_MIB=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i "$GPU" | tr -dc '0-9')
+if [ "${USED_MIB:-9999}" -gt 1024 ]; then
+  echo "guard: device $GPU has ${USED_MIB}MiB in use (>1GiB), refusing to start on a foreign process" >&2
+  exit 4
+fi
+UTIL=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader -i "$GPU")
+case "$UTIL" in *N/A*|*reset*) echo "guard: device $GPU reports utilization '$UTIL' (faulted, poe-launch-002), refusing" >&2; exit 6 ;; esac
+export CUDA_VISIBLE_DEVICES="$GPU"
+"$PY" -c 'import torch, sys; sys.exit(0 if torch.cuda.is_available() else 7)' || { echo "guard: torch.cuda.is_available() is False on device $GPU, refusing (poe-launch-002)" >&2; exit 7; }
+```
+
+- Line 37 reads memory in use in MiB; line 38 refuses above 1024, which is the "foreign process" rule.
+- Lines 42 and 43 refuse a faulted card, whose utilisation reads `[N/A]` or contains `reset`; this is `poe-launch-002`.
+- Line 45 refuses a card that lists in `nvidia-smi` but cannot run torch, the third way a device can look free and not be.
+
+**Two scripts, two thresholds.** `scripts/launch_sdlora.sh` accepts a device with under 100 MiB in use, or under 4096 MiB in use at 0% utilisation, because one device carries an idle 2.9 GB residency from another user (its own comment). `run_corrector_curve.sh` refuses anything above 1024 MiB. The page's section 1 describes a free device as roughly 0 MiB used; the two scripts differ from each other and from that description, and this block changes none of them.
+
+### What comes out
+
+No recorded output of these three commands is on this page, and each section is marked `unverified`. Two recipes that did run on a shared device record what came back: the corrector recipe's [step 5](running-the-langevin-corrector.md#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail) lists its output files and row counts, and the probing recipe's [step 3](probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) quotes a real log.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Launch protocol, with the reasons and the safety rules | [execution protocol](../../environment/hpc/execution-protocol.md) |
+| Which node has which card and which python | [the cluster nodes](../../environment/hpc/nodes.md) |
+| How long a step, a save and an eval take | [throughput](../../environment/hpc/throughput.md) |
+| The relative-path launch failure | [poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001) |
+| A recipe that uses the guards on a seven-stage launcher | [running the Langevin corrector](running-the-langevin-corrector.md) |
+| A recipe that resumes and trains on a free device | [probing a pooled LoRA checkpoint](probing-a-pooled-lora-checkpoint.md) |
+| Reading the log a launch writes | [reading a training run](../looking-at-what-a-run-produced/reading-a-training-run.md) |
+
+### Still open
+
+- No screenshot or pasted output of `squeue`, `sinfo` or the `nvidia-smi` query exists for this page; all three sections are `unverified`.
+- No picture shows a launch. The only path under an `artifacts/` folder with "launch" in its name is a walk folder in `1-lora-correction/artifacts/drips/answering-the-reviewers/`, and it holds two markdown files.
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#3-harvest-what-is-running) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **SSH launch**, whose relative paths resolve in `$HOME` and kill the run before `nohup` starts, in [the failure catalog entry poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001).
 - The mention of **one-job-per-user rule**, kept by starting long jobs with `nohup` and checking them with `pgrep`, in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), third outcome.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

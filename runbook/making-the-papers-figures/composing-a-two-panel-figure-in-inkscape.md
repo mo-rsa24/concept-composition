@@ -20,6 +20,7 @@ Worked example throughout: the two correction-window grids in
 - [9. Put it in the paper](#9-put-it-in-the-paper)
 - [10. The LaTeX-only route, if you skip Inkscape](#10-the-latex-only-route-if-you-skip-inkscape)
 - [Things that will confuse you at first](#things-that-will-confuse-you-at-first)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Read this before you start
 
@@ -110,6 +111,8 @@ annotate something on top of a finished one.
 
 Navigation: ⬅️ [Previous](#read-this-before-you-start) | 📋 [TOC](#table-of-contents) | [Next](#2-get-the-files-onto-your-laptop) ➡️
 
+`unverified`
+
 Both grids are drawn by scripts, not by hand.
 
 **Panel (a) is the window extending from the start.**
@@ -184,6 +187,8 @@ decide to skip Inkscape.
 
 Navigation: ⬅️ [Previous](#1-make-the-panels) | 📋 [TOC](#table-of-contents) | [Next](#3-set-the-page-size-first-before-anything-else) ➡️
 
+`unverified`
+
 Inkscape is not installed on the cluster. You do this part locally.
 
 ```bash
@@ -195,6 +200,8 @@ scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition
 ## 3. Set the page size first, before anything else
 
 Navigation: ⬅️ [Previous](#2-get-the-files-onto-your-laptop) | 📋 [TOC](#table-of-contents) | [Next](#4-bring-the-two-panels-in) ➡️
+
+`unverified`
 
 Open Inkscape. You get a blank white page.
 
@@ -219,6 +226,8 @@ If you build on a wrongly-sized page and fix it later, everything you placed has
 ## 4. Bring the two panels in
 
 Navigation: ⬅️ [Previous](#3-set-the-page-size-first-before-anything-else) | 📋 [TOC](#table-of-contents) | [Next](#5-place-them-by-typing-numbers-not-by-dragging) ➡️
+
+`unverified`
 
 **Import the first panel.**
 
@@ -265,6 +274,8 @@ it explicitly anyway.
 ## 5. Place them by typing numbers, not by dragging
 
 Navigation: ⬅️ [Previous](#4-bring-the-two-panels-in) | 📋 [TOC](#table-of-contents) | [Next](#6-add-the-labels-that-both-panels-share) ➡️
+
+`unverified`
 
 Dragging with a mouse will never give you two panels that line up. Type the coordinates.
 
@@ -314,6 +325,8 @@ Press `%` to switch snapping off.
 ## 6. Add the labels that both panels share
 
 Navigation: ⬅️ [Previous](#5-place-them-by-typing-numbers-not-by-dragging) | 📋 [TOC](#table-of-contents) | [Next](#7-tidy-up-before-exporting) ➡️
+
+`unverified`
 
 There are four pieces of text to add. Two are the shared axis titles, two are the panel letters.
 
@@ -394,6 +407,8 @@ The same sum for panel (b) is 2.90 + 0.38 = 3.28.
 
 Navigation: ⬅️ [Previous](#6-add-the-labels-that-both-panels-share) | 📋 [TOC](#table-of-contents) | [Next](#8-export-the-pdf) ➡️
 
+`unverified`
+
 **Select everything.**
 
 `Ctrl+A`.
@@ -416,6 +431,8 @@ title in and repeat.
 ## 8. Export the PDF
 
 Navigation: ⬅️ [Previous](#7-tidy-up-before-exporting) | 📋 [TOC](#table-of-contents) | [Next](#9-put-it-in-the-paper) ➡️
+
+`unverified`
 
 **Save as a PDF.**
 
@@ -446,6 +463,8 @@ the output. Never throw the SVG away.
 ## 9. Put it in the paper
 
 Navigation: ⬅️ [Previous](#8-export-the-pdf) | 📋 [TOC](#table-of-contents) | [Next](#10-the-latex-only-route-if-you-skip-inkscape) ➡️
+
+`unverified`
 
 **Include it at full width with no scaling factor.**
 
@@ -479,6 +498,8 @@ section 1.
 
 Navigation: ⬅️ [Previous](#9-put-it-in-the-paper) | 📋 [TOC](#table-of-contents) | [Next](#things-that-will-confuse-you-at-first) ➡️
 
+`unverified`
+
 The panels are already clean and already the right size, so LaTeX can do this unaided.
 
 ```latex
@@ -509,7 +530,7 @@ The figure rebuilds itself whenever the scripts rerun. Nothing has to be redone 
 
 ## Things that will confuse you at first
 
-Navigation: ⬅️ [Previous](#10-the-latex-only-route-if-you-skip-inkscape) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#10-the-latex-only-route-if-you-skip-inkscape) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 **Y counts downward.**
 
@@ -542,3 +563,71 @@ failed to load. Nothing about the file or the import settings is wrong.
 Each thumbnail is embedded at its full source resolution, which works out near 1400 dpi. That is
 fine for a submission. If the whole paper gets heavy, downsample the thumbnails in the scripts
 before drawing.
+
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#things-that-will-confuse-you-at-first) | 📋 [TOC](#table-of-contents)
+
+The recipe builds one two-panel figure from two script-made grids. This block shows the result and one panel, and the lines of code that decide the green frames and their width.
+
+### How it fits together
+
+<a href="../../writing/iclr/figures/when-the-correction-arrives/when-the-correction-arrives.png"><img src="../../writing/iclr/figures/when-the-correction-arrives/when-the-correction-arrives.png" width="200" alt="Two five by five grids of cat and dog renders side by side with arrows and a shared legend"></a>
+
+The finished figure the script writes. Panel (a), "correction steps applied early", has rows 10 to 50 and a green staircase that grows downward; panel (b), "correction steps applied late", has an upward arrow and its bottom row labelled `off`; the legend reads "correction on" and "correction off" `verified` (opened and read). The image is 6215 by 3163 pixels, a 1.96 to 1 shape that matches the 5.50 by 2.80 inch page the recipe states `verified` (the ratio only). Every cell of (a) shows a cat beside a dog, and the first two cells of its top row have a smeared, multicoloured dog's face. In (b) the top row shows a cat beside a dog from the second column on, and the four lower rows show one fused animal in every column `verified` (by eye). The folder card says the green frame is the `contains()` rule, not a detector verdict `stated` (the figure folder's card).
+
+### The code behind it
+
+The green frame rule and its width. Excerpt from `scripts/shared/later_start_grid.py` (lines 144 to 147; the same rule runs in `1-lora-correction/scripts/longer_correction_grid.py`), and the definition on lines 93 to 94:
+
+```python
+            corrected = contains(row_win, chunk)
+            for sp in ax.spines.values():
+                sp.set_linewidth(2.2 if corrected else 0.5)
+                sp.set_color(CORRECTED_EDGE if corrected else PLAIN_EDGE)
+```
+
+```python
+def contains(window: tuple[int, int], chunk: tuple[int, int]) -> bool:
+    return chunk[0] >= window[0] and chunk[1] <= window[1]
+```
+
+- `contains` is true when the cell's decode chunk lies wholly inside the row's corrected window, which is why panel (a) draws a staircase.
+- `2.2` is the frame width in points the recipe's last section tells you to change to thin the frames.
+
+### What goes in
+
+<a href="../../writing/iclr/figures/when-the-correction-arrives/poe/panel-a-window-extends-from-the-start.png"><img src="../../writing/iclr/figures/when-the-correction-arrives/poe/panel-a-window-extends-from-the-start.png" width="200" alt="One grid with rows 0-10 to 0-50 and columns 10 to 50"></a>
+
+Panel (a) alone, as step 1 makes it: five rows labelled 0 to 10, 0 to 20, up to 0 to 50, five columns labelled 10 to 50, and its own row and column numbers kept, as the recipe says `verified` (opened). Each row's green frame covers the cells whose decode step is inside that row's window `verified`. The first two columns of the top row are visibly softer than the rest, the recipe's "genuinely is soft that early" point `verified`.
+
+### What comes out
+
+The run prints the size and names the PNG and PDF it wrote. The SVG it saves on line 182 is left out of the `wrote` line. Printed by `1-lora-correction/scripts/longer_correction_grid.py` (lines 184 to 186):
+
+```python
+    print(f"grid       {nrow} rows x {ncol} step-columns, seed {seed}")
+    print(f"size       {fig_w:.2f} x {fig_h:.2f} in")
+    print(f"wrote      {out} and {out.with_suffix('.pdf')}")
+```
+
+- The `size` line is the one the recipe says must read `2.60 x 2.46 in` before you go on. No recorded run output of it is filed.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The figure folder's card, with every figure's slot and rule | [when the correction arrives, figure card](../../writing/iclr/figures/when-the-correction-arrives/README.md) |
+| The companion recipe for artwork with baked-in text | [re-lettering an image](relettering-an-image-with-baked-in-text.md) |
+| The layout sheet with the 8 pt rule | [the layout sheet](../../1-lora-correction/report/paper-review/layout-sheet.md) |
+
+### Still open
+
+No screenshot of Inkscape itself (the Document Properties dialog, Align and Distribute, the PDF export dialog) is filed anywhere, so every click path above is unillustrated. No recorded output of the panel scripts exists.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

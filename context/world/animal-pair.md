@@ -14,6 +14,8 @@ seed by the scorer in [compose-rate.md](compose-rate.md).
 - [How it shows up in the data](#how-it-shows-up-in-the-data)
 - [What people get wrong](#what-people-get-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
 
 ## Words this file uses
 
@@ -55,9 +57,8 @@ spanning both successes and failures. ✅
 **One pair is a deliberate exception: it composes.** ✅
 
 `plans/standing/retrofit-poe-repair-min.md`'s "Words this uses": `a_butterfly__x__a_flower_meadow` "is the
-deliberate exception: it is the control that composes and the paper opens on it." 🔍 (This file has
-not independently verified its fail-rate in `fail_rate.md`, which does not list it; flagged in
-[Still open](../00-INDEX.md#still-open).)
+deliberate exception: it is the control that composes and the paper opens on it." ✍️ Its fail rate is not established, because `fail_rate.md` does not list
+it. See [Still open](../00-INDEX.md#still-open).
 
 ## What it looks like
 
@@ -101,7 +102,7 @@ pairs (1 dissimilar control, 1 reference, 15 train). `plans/standing/retrofit-po
 this uses" instead names "the 20 animal pairs" as the current scope boundary, plus 7 non-animal
 pairs from an earlier era that stay on disk but are out of the live claim. This file cannot tell
 which count is current without checking which pairs, beyond the 17, exist under the pool's
-directory today; listed under [Still open](../00-INDEX.md#still-open). 🔍
+directory today; listed under [Still open](../00-INDEX.md#still-open).
 
 **A pair from the older six-group taxonomy is not automatically part of the current pool.** ✍️
 
@@ -113,7 +114,7 @@ outside the current animal-only scope, per the retrofit plan's animal-pair bound
 
 ## Where this came from
 
-Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -123,12 +124,76 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The six-group taxonomy and its representative pairs | Read in `artifacts/plans/archived/phases/09-lora-taxonomy-single-seed.md` | 2026-08-24 |
 | Pair vs seed, which is the harder test | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+A pair is two animal names, and the pictures below show what plain PoE draws for several of them and how each pair is scored over 8 seeds.
+
+### How it fits together
+
+*Picture held back.* `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/hard_vs_easy_transfer.png` holds a frog and toad row, which the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off every sheet, so it is named here and not shown.
+
+Six pairs, one row each (frog and toad, eagle and hawk, seal and walrus, leopard and jaguar, wolf and husky, lion and tiger), with three columns: the joint prompt (Mono, the target), plain PoE and the LoRA. The Mono tile shows two animals in every row, and the PoE tile shows one animal in the foreground in every row `verified` (opened and read by eye). The card calls the PoE column one blended creature in all six and says each row is one seed per pair, the first cached one, at training step 60,000 `stated` (the folder's query file). The card also notes that in the seal and walrus row the second LoRA animal has no tusks, so a pair can score as two animals while one of them is the wrong species `stated`.
+
+### The code behind it
+
+The fail rate per pair is the share of the 8 seeds where plain PoE is scored `blend`. Excerpt from `poe_repair/experiments/does_the_fix_reach_unseen_pairs/fail_rate.py` (lines 56 to 64):
+
+```python
+        for s in SEEDS:
+            cell = cell_for(p["prompt_a"], p["prompt_b"], s)
+            png = run_method("poe", cell, ctx)  # idempotent; fresh seeded init
+            sc = score_output_instances(Path(png), p["prompt_a"], p["prompt_b"], device=device)
+            is_blend = (sc.label == "blend")
+            n_blend += is_blend
+            per_seed.append({"seed": s, "png": str(png), "n_instances": sc.n_instances,
+                             "label": sc.label})
+        fail_rate = n_blend / len(SEEDS)
+```
+
+- `SEEDS` is `list(range(1, 9))` on line 34 of the same file, so 8 seeds per pair, as the page says.
+- `run_method("poe", ...)` renders plain PoE with no corrector, so the rate describes the uncorrected method.
+- The role of each pair (train, reference, control) is set on lines 49 and 65: three slugs are listed as controls there (`an_elephant__x__a_penguin`, `a_giraffe__x__a_crab`, `an_octopus__x__a_sparrow`), and the pair the page calls the reference is `a_cat__x__a_dog`.
+
+### Further illustrations
+
+**Evidence**
+
+*Picture held back.* `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png` holds a frog and toad row, which the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off every sheet, so it is named here and not shown.
+
+Eight pairs by four seeds (9 to 12), each tile labelled with the detector's count `n` `verified` (read from the labels). These are renders at full correction strength, not plain PoE: the card says they are every cell behind the 94% headline at λ=1 `stated` (the folder's card). Pairs in the sheet: cat and dog, cow and buffalo, frog and toad, goose and swan, leopard and jaguar, seal and walrus, eagle and hawk, elephant and penguin `verified`.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The scorer behind each fail rate | [compose rate](compose-rate.md) |
+| What a failed pair looks like | [chimera](chimera.md) |
+| The plain PoE render of the reference pair | [PoE composition](poe-composition.md#what-it-looks-like) |
+| The hard against easy pairs card | [query and method for the six-pair figure](../../1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/hard-vs-easy-transfer/QUERY.md) |
+| The audit of the 32 corrected cells | do the successful cells contain both animals, at `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` (not linked, because the folder holds the held-back pair) |
+| The pairs results group | [the pairs](../../1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-pairs/README.md) |
+
+### Still open
+
+- The page cites `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`. That file is not at that path now, the folder holds `hard-vs-easy-transfer` and `pooled_lora` only, and `RENAMES.md` has no entry for it. The script above writes `fail_rate.md` beside the pair pool, so the 17-row table cannot be checked from here.
+- The line above in the code names three controls, while the page describes the table as holding one dissimilar control. Both are left as they are.
+- Pictures of the control pair `a_butterfly__x__a_flower_meadow` exist and none is placed in this block. One is `corrector-butterfly-meadow-eight-seed-sheet.png` in `1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/`, with the joint prompt and plain PoE on seeds 9 to 16 `verified`. The published-models grid card says that grid has a row for this pair, and the grid shows the cat and dog row only (see the note in [PoE composition](poe-composition.md)).
+- `pair_list.csv` in the pairs folder has no card, so the meaning of its Joint and Product columns is not stated and it is not quoted here.
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **the pair that composes by default** (a butterfly and a flower meadow, used as the control a corrector must not break) in [does a corrector alone produce two animals](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md) (relevance match).
 - The mention of **animal pairs** (the 11 look-alike pairs behind `00`'s five runs, read as history rather than as a comparison) in [designing the correction loss](../../1-lora-correction/plans/09-designing-the-correction-loss/MASTER_PLAN.md) (exact match).
 - The mention of **animal pairs** (the 11 look-alike pairs of the original 88-run training pool, whose adapters never draw a person into the picture) in [the known failure "a pooled adapter draws a person into a picture of two animals"](../../environment/known-failures.md#entry-id-poe-lora-005) (exact match).
 - The mention of **animal pairs** (the 15 pairs each held out in turn, one LoRA trained without each) in [the plan measuring transfer as a rate over fifteen held-out pairs](../../1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/plans/hypothesis/04-transfer-as-a-rate-over-fifteen-pairs.md#quick-context-where-you-are) (exact match).
 - The mention of **seed** (same pair and same seed across every corrector count) in [the whole corrector design](../../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/source/the-whole-corrector-design.md#the-claim).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

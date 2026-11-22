@@ -1,4 +1,4 @@
-# The words this project uses, and the ones it does not
+# 🌍 Plain words: the terms this project uses and the ones it avoids
 
 Every term below was replaced across the plan tree because it was a private label, a metaphor, or
 a category name: something that told a reader nothing unless they had been in the room. The right
@@ -78,3 +78,5 @@ Navigation: ⬅️ [Previous](#kept-because-the-field-genuinely-calls-it-that) |
 Code identifiers keep their names. `ax.spines` and `.bar()` are matplotlib's API, so renaming them
 breaks plotting, and the internal names in `poe_repair/` are a separate refactor with test
 coverage behind it. A word can therefore appear in a script and not in the prose that describes it.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

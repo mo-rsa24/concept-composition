@@ -7,6 +7,16 @@ step, instead of retraining the model or hand-writing a joint prompt. It is the 
 [lora-corrector.md](lora-corrector.md)) is trying to repair. Sibling file
 [interaction-term.md](interaction-term.md) explains the specific gap between PoE and its target.
 
+**Product, on three candidate pictures.** Each expert scores every candidate, and the scores are multiplied, so a picture needs both experts' approval. Scores invented for the toy (see the [Product of Experts card](../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Product%20Of%20Experts.md#where-to-learn-this)):
+
+| Candidate | Cat expert | Dog expert | Product | Share after rescaling |
+|---|---|---|---|---|
+| a cat alone | 0.5 | 0.1 | 0.05 | 0.19 |
+| a dog alone | 0.1 | 0.5 | 0.05 | 0.19 |
+| both | 0.4 | 0.4 | 0.16 | 0.62 |
+
+Lower the cat expert's score for "both" from 0.4 to 0.1 and the product falls from 0.16 to 0.04, so the share falls from 0.62 to 0.29. The logs of the three products are −3.00, −3.00 and −1.83, the sum of the two experts' logs, which is why the combination below is described as adding predictions.
+
 ![A PoE render of "a cat" and "a dog" composed by Product-of-Experts, seed 42, no correction applied](../images/world/01-poe-chimera-example.png)
 *This is the failure mode by default: PoE has fused the two animals into one creature rather than
 placing a cat and a dog side by side.*
@@ -20,6 +30,8 @@ placing a cat and a dog side by side.*
 - [How it shows up in the data](#how-it-shows-up-in-the-data)
 - [What people get wrong](#what-people-get-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
 
 ## Words this file uses
 
@@ -99,7 +111,7 @@ control runs is a decision recorded in the design plan").
 
 ## Where this came from
 
-Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -108,9 +120,94 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The two example images | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/{poe,monolithic}.png` | 2026-08-24 |
 | The full-strength shortcut risk and its fix | Read in `context/research-guidelines.md` | 2026-08-24 |
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+The page's two pictures are one pair and one seed. The pictures below put the plain product beside the joint prompt on several seeds of two models, SDXL and PixArt, then beside the joint prompt of four published models at one seed, and the code shows the two sums.
+
+### How it fits together
+
+<a href="../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/summary-grid.png"><img src="../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/summary-grid.png" width="200" alt="Three setups, each with a joint prompt column and a summed prompt column"></a>
+
+Three setups side by side, SDXL at its usual settings, SDXL at PixArt's settings and PixArt, each with a column for the joint prompt ("a cat and a dog") and a column for the sum of the two single prompts, which is the product. The sheet shows 4 seeds per setup in two columns, 24 tiles in all. Every summed tile shows one animal and every joint tile shows two animals `verified` (opened and read by eye). The footer says 0 of 8 seeds give two clear animals in the summed column in each setup and that the full sheets are in "the two results folders", so the 4 per setup on this sheet are a subset `verified` (read from the picture's footer text).
+
+### The code behind it
+
+Two methods, one function each. The product sums two guided predictions and takes the empty prompt off once. Excerpts from `poe_repair/_sdxl/metrics.py` (lines 12 to 17) and `poe_repair/methods/_sampling.py` (lines 168 to 171):
+
+```python
+def guided_eps(eps_cond: torch.Tensor, eps_uncond: torch.Tensor, guidance_scale: float) -> torch.Tensor:
+    return eps_uncond + guidance_scale * (eps_cond - eps_uncond)
+
+
+def poe_eps(eps_a: torch.Tensor, eps_b: torch.Tensor, eps_uncond: torch.Tensor) -> torch.Tensor:
+    return eps_a + eps_b - eps_uncond
+```
+
+```python
+        eps_a_raw, eps_b_raw, eps_uncond = noise.chunk(3)
+        eps_a = guided_eps(eps_a_raw, eps_uncond, guidance_scale)
+        eps_b = guided_eps(eps_b_raw, eps_uncond, guidance_scale)
+        eps_p = poe_eps(eps_a, eps_b, eps_uncond)
+```
+
+- The model is run once on a batch of three prompts (concept A, concept B, empty) and the output is split into three.
+- `guided_eps` is the guidance weighting the page mentions: the empty prediction plus `guidance_scale` times the distance from the concept's prediction to it.
+- `poe_eps` adds the two guided predictions and subtracts the empty one once, because each guided prediction already contains it.
+
+A small invented example, not from a run, for one number in the prediction: empty 0.2, concept A 0.5, concept B 0.4, guidance scale 2. Guided A is 0.2 + 2 × (0.5 − 0.2) = 0.8 and guided B is 0.2 + 2 × (0.4 − 0.2) = 0.6, so the product is 0.8 + 0.6 − 0.2 = 1.2.
+
+The joint prompt method is the same single-prompt sampler with one prompt. Excerpt from `poe_repair/run.py` (lines 128 to 137):
+
+```python
+    elif name == "poe":
+        seq_a, pool_a = _encode(cell.prompt_a, ctx)
+        seq_b, pool_b = _encode(cell.prompt_b, ctx)
+        out = run_cfg_poe(
+            seq_a=seq_a, pool_a=pool_a, seq_b=seq_b, pool_b=pool_b, **common,
+        )
+    elif name == "mono":
+        joint = joint_prompt(cell.prompt_a, cell.prompt_b, template=ctx.joint_template)
+        seq_j, pool_j = _encode(joint, ctx)
+        out = run_cfg(seq_cond=seq_j, pool_cond=pool_j, **common)
+```
+
+- `poe` encodes the two prompts separately and calls the product sampler.
+- `mono` builds one prompt from the two with a template and calls the plain single-prompt sampler `run_cfg`, whose noise prediction is `guided_eps` alone (lines 227 and 228 of `_sampling.py`).
+
+### Further illustrations
+
+**Evidence**
+
+<a href="../../1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/published-models-then-ours.png"><img src="../../1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/published-models-then-ours.png" width="200" alt="Cat and dog seed 42 across SD 1.4, SD 2.1, SD 3.5, SDXL and CO3"></a>
+
+Cat and dog at seed 42, the page's own pair and seed. From the left: SD 1.4, SD 2.1, SD 3.5 and SDXL on the joint prompt, then SDXL's plain product, then CO3 (product with its own corrector), then an empty panel for this project's adapter marked "not rendered" `verified` (opened). The SDXL joint tile shows a cat and a dog and the SDXL plain product tile shows one animal `verified`. The CO3 tile shows a tabby and a black animal, both cat-shaped by eye, and no dog `verified`; the card says it starts from its own noise, so it is not a like-for-like tile `stated`.
+
+**The card and the picture differ.** The card lists three rows (cat and dog, butterfly and flower meadow, camel and forest). The picture holds the cat and dog row only. Neither is changed.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The failure this method produces | [chimera](chimera.md) |
+| The gap between the two methods | [interaction term](interaction-term.md) |
+| The fix | [LoRA corrector](lora-corrector.md) |
+| The three-setup sheet's card | [what the fusion is not caused by](../../3-understanding-compositionality/artifacts/results/what-sdxl-already-knows/poe-against-the-joint/what-the-fusion-is-not-caused-by/README.md) |
+| The grids card | [what the main study's grids show](../../1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/README.md) |
+| The linked learning walk on the product's factorisation | [PoE factorisation and normaliser](../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/07-poe-factorisation-and-normaliser.md) |
+
+### Still open
+
+- The page's two pictures are byte-identical to `data/pilot/seed_42/a_cat__x__a_dog/poe.png` and `monolithic.png` `verified` (compared with `cmp`).
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **a product of experts** (composing SDXL as an additive combination of two expert predictions) in [the scene map for the Gaussian score's base case](../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/artifacts/drips/gaussian-score-base-case/SCENE_MAP.md) (relevance match).
 - The mention of **product-of-experts** in [the finding "does a Langevin corrector remove part of the correction"](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
@@ -129,3 +226,5 @@ Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-cont
 - The mention of **product-of-experts** in [the finding "can a text-space third expert restore composition"](../../5-text-embedding-third-expert/report/can-a-text-space-third-expert-restore-composition.md#the-claim-and-where-it-came-from), which adds a third condition to the same two-expert sum.
 - The mention of **plain PoE** as the comparison render in [the plan that puts the LoRA on the text encoders](../../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/today-a-lora-on-the-text-encoders.md), which adapts the two text encoders rather than the denoiser.
 - The mention of **product of experts**, the sampler a classifier's push is added to, in [the route for classifier-guided PoE](../../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#quick-context-where-you-are).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

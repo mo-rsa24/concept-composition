@@ -6,6 +6,17 @@ Navigation: ⬅️ [Nodes](nodes.md) | 📋 [Index](../00-INDEX.md) | [Overview]
 the section a plan is most likely to silently get wrong, because "submit a job" reads as one
 action and is actually a several-step decision.
 
+## Table of contents
+
+- [The six steps](#the-six-steps)
+- [Skill wiring](#skill-wiring)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
+
+## The six steps
+
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
+
 1. **Check for an already-allocated interactive node.** `squeue -u mmolefe`: if an interactive
    node is already allocated on `biggpu`, run directly there, no `sbatch`.
 2. **Check for an idle node.** Else `sinfo -p biggpu`: if a `biggpu` node is idle, target
@@ -96,6 +107,8 @@ action and is actually a several-step decision.
 
 ## Skill wiring
 
+Navigation: ⬅️ [Previous](#the-six-steps) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+
 `/run-experiment` drives GPU tasks. Every experiment logs to W&B, including the qualitative
 Mono vs PoE vs LoRA triptych panels, so `/analyze-run` can go back over runs later. `/drip-execute-plan --auto`
 may run tasks unattended, using each plan's pre-registered falsification rules and
@@ -106,8 +119,81 @@ established live over SSH on 2026-08-19 on `mscluster106`: GPU 1 sat at 1MiB/0% 
 carried another user's 8GB process, and a torch matmul from `co3_bw` on GPU 1 succeeded
 without touching GPU 0.
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#skill-wiring) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+No picture of this decision exists under `artifacts/`; the flow below is drawn from the six steps above, and the code is the guard a launcher runs.
+
+### How it fits together
+
+```mermaid
+flowchart TD
+  A["1. squeue: interactive biggpu node allocated?"] -->|"yes"| R["Run directly there, no sbatch"]
+  A -->|"no"| B["2. sinfo -p biggpu: idle node?"]
+  B -->|"idle, but sinfo is not proof"| C["3. nvidia-smi per device over SSH"]
+  B -->|"none idle"| C
+  C -->|"free device"| D["Idle node: target biggpu. Shared node: pin CUDA_VISIBLE_DEVICES, nohup launch, log on shared disk"]
+  C -->|"foreign process, or N/A or reset"| E["bigbatch fallback"]
+  D --> G["4. Guards in the script, 5. poll over SSH"]
+  E --> G
+  classDef guard fill:#fff3cd,stroke:#999
+  classDef work fill:#e8e8f5,stroke:#999
+  classDef out fill:#dcfce7,stroke:#999
+  class A,B,C,G guard
+  class D,E work
+  class R out
+```
+
+*Key: yellow boxes are checks, purple boxes are where the run goes, green is the quick path.* Read it top to bottom: the checks come first, and a `biggpu` launch happens only after step 3 has seen a free device.
+
+### The code behind it
+
+The guard that step 3 describes sits in `scripts/launch_sdlora.sh` (lines 33 to 40, named here, not linked). It reads memory and utilisation for the pinned device, accepts a card under 100 MiB or a card under 4096 MiB at 0% utilisation, and refuses the rest.
+
+```bash
+mem=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i "$GPU" | head -1)
+util=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits -i "$GPU" | head -1)
+# nvidia-smi's utilisation is a windowed sample and can read 100% for a minute after a
+# process is killed while memory already reads ~0; under 100 MiB nothing can be running, so
+# memory alone decides there.
+if [ "${mem:-0}" -lt 100 ]; then :;
+elif [ "${mem:-0}" -lt 4096 ] && [ "${util:-100}" -eq 0 ]; then :;
+else echo "ERROR: device $GPU has ${mem} MiB in use at ${util}% utilisation, refusing to share"; exit 2; fi
+```
+
+- Under 100 MiB used: free, whatever utilisation says (first branch).
+- Under 4096 MiB and 0% utilisation: another user's idle allocation, shared (second branch).
+- Anything else exits with code 2 (third branch).
+
+The same file's lines 25 to 28 are the step 4 checks: the 90% disk guard, the `co3` python path and the `nvidia-smi` GPU check.
+
+**Two sources to read together.** The page says a `[N/A]` or `[GPU requires reset]` reading marks a faulted device that a memory-only check passes. The excerpt above is memory and utilisation only; in it a card under 100 MiB passes whatever utilisation reads. The probe script `scripts/gpu_probe.sh` (named) prints `[N/A]` for a faulted card, and [the nodes page](nodes.md#python-environments) says the shared-device launch script refuses it. `scripts/launch_sdlora.sh` refuses `[N/A]` only at 100 MiB or more, so a faulted card reading 2 MiB passes it, while other shared-device launchers refuse `N/A` outright, for example `1-lora-correction/scripts/showcase/correct_early_then_clean_up_shared_device.sh` (line 27). The safety rules above name a 1GB limit for the launch-script guard, and this guard allows up to 4096 MiB at 0% utilisation (its comment at lines 29 to 32 gives the reason).
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Nodes, partitions and which card is where | [the HPC nodes fact](nodes.md#partitions) |
+| How long a training run takes on each card | [training run timings](throughput.md) |
+| The silent launch failure and the hardware fault | [poe-launch-002](../known-failures.md#entry-id-poe-launch-002) |
+| Disk guard target and filesystems | [storage](../storage.md) |
+| The recipe that launches and harvests a run | [launching and harvesting a run](../../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) |
+
+### Still open
+
+No recorded `nvidia-smi` listing from the 2026-09-03 or 2026-08-19 sessions is filed as a picture, so the readings in steps 2 and 3 have no screenshot.
+<!-- related:end -->
+
 ## Cross-references
+
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **launching outside Slurm and harvesting by process** in [does a Langevin corrector remove part of the correction](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md) and [does a corrector alone produce two animals](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-corrector-alone-produce-two-animals.md), whose grids ran this way on three nodes.
 - The mention of **a device taken between the check and the launch**, which this protocol's guard refused twice on 2026-09-05, in [running the Langevin corrector](../../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
 - The mention of **the GPU guard**, which aborts a job landing on a hardware-faulted `bigbatch` card in under a second, in [the HPC nodes fact, under Partitions](nodes.md#partitions).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

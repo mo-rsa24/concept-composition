@@ -22,6 +22,8 @@ and at every one of the 50 DDIM steps the state and the four branch predictions 
 alone, the joint prompt, unconditional). The correction the adapter learns is the joint prediction
 minus the product-of-experts prediction at that state.
 
+DDIM is the sampler that walks the noisy picture to a clean one in those 50 fixed steps: [DDIM, where to learn it](../../../../Obsidian/Artificial%20Intelligence/Generative%20Modeling/Diffusion%20Models/DDIM.md#where-to-learn-this).
+
 **A probe renders from a checkpoint**
 
 `lambda_boundary_probe.py` loads one `lora_step_*.pt` into the adapter, takes each held-out seed's
@@ -52,6 +54,7 @@ addresses, not an order to follow: start at whichever one answers your question.
 - [4. Train two ranks on one idle node with one Slurm job](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Words this file uses
 
@@ -102,6 +105,8 @@ Blackwell nodes (110 to 112), per [the cluster nodes](../../environment/hpc/node
 ## 1. Render the 8-seed held-out grid for one checkpoint   `ran 2026-09-03`
 
 Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) ➡️
+
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
 
 **When you need this**
 
@@ -188,6 +193,8 @@ which answers a different question. The probe uses the first.
 
 Navigation: ⬅️ [1. Render the 8-seed held-out grid](#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 **When you need this**
 
 You want the adapter's fit on the states it trained on, and on held-out cells, without any
@@ -252,6 +259,8 @@ continues without it; the pair's `n` in the table shows how many rows it got.
 ## 3. Resume a pooled training from a checkpoint on a free device   `ran 2026-09-01`
 
 Navigation: ⬅️ [2. Measure how well a checkpoint fits](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) ➡️
+
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
 
 **When you need this**
 
@@ -327,6 +336,8 @@ epochs run since the resume, not since step 0.
 
 Navigation: ⬅️ [3. Resume a pooled training](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 **When you need this**
 
 A whole `biggpu` node is idle and you want both of its GPUs for two independent trainings that
@@ -385,7 +396,7 @@ the finding, not resolved.
 
 ## Where this came from
 
-Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -395,3 +406,90 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 | Recipe 4's job and both failures | `logs/experiment_b_rank_slurm_48964.log`, `..._48965.log`, `logs/experiment_b_rank32.log`, `logs/experiment_b_rank16.log` | 2026-09-01 to 09-02 |
 | The faulted-device hang | mscluster111, `poe-launch-002` in [known failures](../../environment/known-failures.md) | 2026-09-02 |
 | Durations | W&B `_runtime` for each run, read with the `wandb` API | 2026-09-05 |
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
+A checkpoint is read three ways on this page: rendered into a grid, scored against the cached correction, and trained further. Below are the line that adds the correction in the sampler the probe uses, and one sheet that shows what rank 8, 16 and 32 checkpoints look like on three of the held-out seeds.
+
+### How it fits together
+
+```mermaid
+flowchart LR
+  C["cache: 50 steps, 4 branch predictions"]:::load --> P["lambda_boundary_probe.py"]:::work
+  K["lora_step_N.pt"]:::load --> P
+  P --> G["grid per window, results.json"]:::out
+  K --> F["fit_cosine_on_cache.py"]:::work --> T["fit_cosine_table.md"]:::out
+  K --> R["resume or train: train_pooled.py"]:::work --> W["new checkpoints and a W&B run"]:::out
+  C --> F
+  C --> R
+  X["free device guard"]:::guard --> P
+  X --> R
+classDef guard fill:#fff3cd,stroke:#999;
+classDef load fill:#dbeafe,stroke:#999;
+classDef work fill:#e8e8f5,stroke:#999;
+classDef judge fill:#ede1fb,stroke:#999;
+classDef out fill:#dcfce7,stroke:#999;
+```
+
+*Key: yellow is the device check, blue is what is read, grey is a script you run, green is what it writes.* The checkpoint feeds recipes 1, 2 and 3, and recipe 4 starts a fresh training with no checkpoint. The cache feeds all four recipes.
+
+### The code behind it
+
+The probe renders with `run_lora_residual_inject_windowed_poe` in `scripts/shared/lambda_window_grid.py`. Lines 224 to 242 are its step loop:
+
+```python
+    for step_index, timestep in enumerate(scheduler.timesteps):
+        _adapter_disable()
+        eps_a_raw_f, eps_b_raw_f, eps_uncond_f = _three_branch_forward(timestep)
+        eps_a_f = guided_eps(eps_a_raw_f, eps_uncond_f, guidance_scale)
+        eps_b_f = guided_eps(eps_b_raw_f, eps_uncond_f, guidance_scale)
+        eps_poe_frozen = poe_eps(eps_a_f, eps_b_f, eps_uncond_f)
+
+        if mask_list[step_index]:
+            _adapter_enable()
+            eps_a_raw_l, eps_b_raw_l, eps_uncond_l = _three_branch_forward(timestep)
+            eps_a_l = guided_eps(eps_a_raw_l, eps_uncond_l, guidance_scale)
+            eps_b_l = guided_eps(eps_b_raw_l, eps_uncond_l, guidance_scale)
+            eps_poe_lora = poe_eps(eps_a_l, eps_b_l, eps_uncond_l)
+            delta_hat = eps_poe_lora - eps_poe_frozen
+            eps_t = eps_poe_frozen + float(lambda_value) * delta_hat
+            delta_norm_per_step.append(float(delta_hat.float().norm().item()))
+        else:
+            eps_t = eps_poe_frozen
+            delta_norm_per_step.append(0.0)
+```
+
+- Lines 225 to 229 disable the adapter and form plain guided PoE, so the frozen prediction is always computed.
+- Lines 231 to 238 do the work: inside the window, the correction is `eps_poe_lora - eps_poe_frozen`, scaled by `lambda_value` (the page's λ) and added to the frozen prediction.
+- Lines 240 to 242 are the window's other side: off-window steps keep plain PoE and record a correction norm of 0. This is why the early window is "plain guided PoE after step 9", as the fold in recipe 1 says.
+- The function calls `_adapter_enable()` again on line 258, after the loop, so it returns with the adapter on. That is the fact behind the corrector recipe's rule to render references in another process.
+
+### What comes out
+
+*Picture held back.* `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed-v2.png` has a tile with a shape that could not be identified at full size, so it is named here and not shown.
+
+The sheet lists the rank 8, rank 16 and rank 32 checkpoints beside no adapter, three held-out seeds (9, 11, 12), under group headings. The picture has nine adapter columns and a no-adapter column `verified`, and its card says 10 adapter columns plus the no-adapter control `stated` (card). Rank 8 at 450k steps is a haze of texture on seeds 9 and 11 and two animals on seed 12 `verified`; this agrees with the reference block's "hazy from about 240k on" `stated` (page). Rank 16 and rank 32 at 30k show a clear cat and dog on seed 9, a large dog with smaller white animals on seed 11, and a white cat beside an animal with a smeared face on seed 12 `verified`. The sheet is separate from recipe 1's grid: `scripts/across_adapters.py` rendered its tiles through `run_lora_langevin_windowed_poe` at `lambda_value=1.0`, and `across_adapters_by_family.py` assembled them `stated` (scripts). The card does not give that strength.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The card for this sheet and the 24-adapter sheets | [which adapter composes cat and dog](../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/README.md) |
+| What the training run logs and how to read it | [reading a training run](../looking-at-what-a-run-produced/reading-a-training-run.md) |
+| Which checkpoint composes best, and whether training longer helps | [which checkpoint composes best](../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md) |
+| Whether longer training keeps improving the held-out fix | [does training longer keep improving the fix](../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md) |
+| Nodes, throughput, known failures | [the cluster nodes](../../environment/hpc/nodes.md), [throughput](../../environment/hpc/throughput.md), [known failures](../../environment/known-failures.md) |
+
+### Still open
+
+- The grids and fit-cosine tables these recipes produced (`grid_full_window.png`, `fit_cosine_table.md`) are not under `artifacts/` on this checkout; the two reports above link grid pictures under a `how-it-trains` folder that does not exist here.
+- Recipe 2's recorded script reads its checkpoint from `$REPO/artifacts/results/does-the-fix-reach-unseen-pairs/pooled_lora/...`, which does not exist on this checkout. The reference block's run folder under `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/` does exist here, and it holds the run's JSON files with no `checkpoints/` folder. This block changes neither.
+- No picture shows recipes 3 or 4 (resume, two ranks on one node); their evidence is the logs quoted in the recipe.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

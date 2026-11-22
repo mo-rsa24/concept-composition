@@ -41,6 +41,11 @@ strip, logged to a companion W&B run per rank.
 
 </details>
 
+🔤 **The name:** rank. A LoRA adapter stores its change to a weight matrix as two thin matrices, and
+the rank is how thin: the width of the strip they share. Toy with invented sizes: a 64 by 64 weight
+holds 4,096 numbers; rank 8 learns 8 × (64 + 64) = 1,024, and rank 32 learns 4,096, as many as the
+whole matrix. Background: [LoRA, where to learn it](../../../../Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this).
+
 ## Table of contents
 
 The recipes are numbered so the index and the findings can point at them. The numbers are
@@ -59,6 +64,7 @@ addresses, not an order to follow: start at whichever one answers your question.
 - [8. Stop a run cleanly](#8-stop-a-run-cleanly---ran-2026-09-04)
 - [If something looks wrong](#if-something-looks-wrong)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Words this file uses
 
@@ -80,13 +86,13 @@ Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#t
   ssh <node> "nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader; pgrep -af 'train_poole[d]|superdif[f]' | cut -c1-80"
   ```
   ✅ **A row reading under 100 MiB, or under 4 GB at 0 %, and no process line of yours**: free. mscluster109 device 0 carries a permanent idle 2.9 GB residency from another user and is safe to share.
-  ❌ **Memory in the tens of GB or utilisation above 0**: someone is on it. Pick another device; the launch script refuses this one anyway.
+  ❌ Memory in the tens of GB or utilisation above 0: someone is on it. Pick another device; the launch script refuses this one anyway.
 - [ ] 🖥️ **`/datasets` has room**
   ```bash
   df -h /datasets | tail -1
   ```
   ✅ **Under 90 % used.** The cache is 11 GB and each training folder grows to about 1.5 GB of checkpoints.
-  ❌ **Over 90 %**: every launch script here exits with `ERROR: /datasets over 90%`; clear the parity or preview renders first.
+  ❌ Over 90 %: every launch script here exits with `ERROR: /datasets over 90%`; clear the parity or preview renders first.
 - [ ] 🖥️ **The right python for the node**
   ```bash
   ssh <node> "/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python -c 'import torch; print(torch.cuda.get_device_name(0)); torch.zeros(1).cuda()'"
@@ -111,6 +117,8 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-launch-one-training---ran-2026-09-03) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 Renders the pooled-adapter pool (11 training pairs × 8 seeds, from `phase1_r8_450k`'s pool files)
 through SuperDiff at κ 0.5 and saves every step. About 77 s per cell on an A6000; two shards on
 two devices finish in about 70 minutes.
@@ -125,6 +133,8 @@ ssh mscluster109 "CUDA_VISIBLE_DEVICES=1 nohup $PY $REPO/scripts/build_superdiff
 find $SD/cache/train -name meta.json | wc -l
 ssh mscluster109 "CUDA_VISIBLE_DEVICES=0 $PY $SD/scripts/check_cache_cell.py"
 ```
+
+Current path: `1-lora-correction/scripts/build_superdiff_cache.py` in both checkouts. The commands above stay as they were recorded.
 
 ✅ **88 `meta.json` files, and the check prints four step norms that match the live render to
 about 1e-5** (5.358 vs 5.359 at step 0, 14.546 vs 14.546 at step 50, and so on). The cache is what
@@ -174,6 +184,8 @@ ssh mscluster106 "RESUME_FROM=$SD/sdlora_r32_100k/checkpoints/lora_step_005000.p
 
 Navigation: ⬅️ [2. Launch one training](#2-launch-one-training---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-assemble-the-timelines---ran-2026-09-05) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 Runs on its own device, needs no change to the trainings, and exits once every rank's final
 checkpoint is rendered. Each checkpoint at a multiple of 10k steps costs 4 renders per pair
 (about 3 minutes per pair on the Blackwell); the mono and SuperDiff-alone columns are plan 05's
@@ -217,6 +229,8 @@ sheet is a tile the watcher has not rendered yet.
 
 Navigation: ⬅️ [4. Assemble the timelines](#4-assemble-the-timelines---ran-2026-09-05) | 📋 [TOC](#table-of-contents) | [Next](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 Sixteen renders (seeds 9 to 12 × λ 0.25, 0.5, 0.75, 1) of one checkpoint on cat × dog, then a
 sheet with plan 05's λ 0 column on the left. About 12 minutes on the Blackwell.
 
@@ -237,6 +251,8 @@ old cached tiles.
 
 Navigation: ⬅️ [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) ➡️
 
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+
 SuperDiff alone at 200 steps, seeds 9 to 12, λ 0 to 1 of its own residual added back, one sheet
 per κ setting: cat × dog at κ 0, 0.25, 0.5, 0.75, 1 and its own unclamped κ, butterfly × meadow
 at κ 0.5. 140 renders at 107 to 136 s each, about 5 hours on one A6000.
@@ -251,6 +267,8 @@ $PY $REPO/scripts/superdiff/assemble_lambda_sheets.py
 ls $REPO/writing/iclr/figures/how-much-is-added/across-composition-rules/*_grid_200_steps_kappa_*.png
 ```
 
+Current path: both scripts are now under `1-lora-correction/scripts/superdiff/` in both checkouts. The commands above stay as they were recorded.
+
 ✅ **Seven sheets, `cat_dog_grid_200_steps_kappa_{balanced,000,025,050,075,100}.png` and
 `butterfly_meadow_grid_200_steps_kappa_050.png`, each with a `.json` naming every tile's source.**
 
@@ -260,6 +278,8 @@ names the tile, and the sweep resumes on relaunch.
 ## 7. Inject a PoE-trained adapter into SuperDiff and measure its direction   `ran 2026-09-03`
 
 Navigation: ⬅️ [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#8-stop-a-run-cleanly---ran-2026-09-04) ➡️
+
+⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
 
 Three steps: prove the attached adapter is inert at λ 0 and active at λ 1, render the 96-cell
 set (rank 8, 16, 32 × two pairs × seeds 9 to 12 × λ 0.25 to 1), then measure on one cell the
@@ -289,6 +309,8 @@ UNet; the script refuses rather than render the baseline under a new name.
 ## 8. Stop a run cleanly   `ran 2026-09-04`
 
 Navigation: ⬅️ [7. Inject a PoE-trained adapter into SuperDiff and measure its direction](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#if-something-looks-wrong) ➡️
+
+⚠️ Kills a training run, so confirm the target before running the stop command.
 
 Kill by pid, never by pattern. The pid is in the log header (`pid=...`) or from `pgrep` with the
 bracket trick, which stops the pattern from matching the shell you are typing it into.
@@ -325,7 +347,7 @@ Navigation: ⬅️ [8. Stop a run cleanly](#8-stop-a-run-cleanly---ran-2026-09-0
 
 ## Where this came from
 
-Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -334,3 +356,96 @@ Navigation: ⬅️ [If something looks wrong](#if-something-looks-wrong) | 📋 
 | `co3` has no CUDA kernels on the Blackwell nodes | The first rank-32 launch failed with `no kernel image is available` on mscluster112 and ran under `co3_bw` | 2026-09-03 |
 | `pkill -f` kills the remote shell | Two ssh commands died with exit 255 before their relaunch line ran | 2026-09-03 |
 | One W&B run per process | The first watcher died with `UsageError: Run (sdlora_r8_samples) is finished` on its second rank | 2026-09-03 |
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
+SuperDiff here is a composer, a cache, a trainer and a watcher. The pictures below show the watcher's output, the training loss and the sweeps, next to the lines that add the residual.
+
+### How it fits together
+
+```mermaid
+flowchart LR
+  G["device and disk guards"]:::guard --> C["1. cache: 88 cells"]:::load
+  C --> T["2. train rank 8, 16, 32"]:::work
+  T --> V["3. watcher: strip per 10k checkpoint"]:::work
+  V --> A["4. timelines"]:::out
+  T --> P["5. lambda sweep of one checkpoint"]:::work
+  S["6. SuperDiff alone, kappa by lambda"]:::work --> A
+  X["7. PoE adapter injected, cosine"]:::judge
+classDef guard fill:#fff3cd,stroke:#999;
+classDef load fill:#dbeafe,stroke:#999;
+classDef work fill:#e8e8f5,stroke:#999;
+classDef judge fill:#ede1fb,stroke:#999;
+classDef out fill:#dcfce7,stroke:#999;
+```
+
+*Key: yellow is a guard, blue the cache, grey a run, purple a measurement, green a sheet.* Recipes 6 and 7 do not depend on 2 to 5.
+
+### The code behind it
+
+`poe_repair/composers/superdiff.py` lines 344 to 359 form SuperDiff's blended prediction and the residual that recipe 6 adds back with `lam`. Recipes 5 and 7 add an attached adapter's correction instead, on line 378:
+
+```python
+            eps_m = noise_pred_uncond + guidance_scale * (
+                (noise_pred_2 - noise_pred_uncond)
+                + kappa[:, None, None, None] * (noise_pred_1 - noise_pred_2)
+            )
+            eps_m_norms.append(eps_m.detach().float().norm().item())
+
+            if form_r_t:
+                # Single CFG branch on the literal joint prompt, this project's own eps_J
+                # (poe_repair/composers/_helpers.py's get_joint_embeds), evaluated at this
+                # step's actual latent so r_t^SD sits on the trajectory this render visits.
+                eps_j = noise_pred_uncond + guidance_scale * (noise_pred_joint - noise_pred_uncond)
+                r_t_sd = eps_j - eps_m
+                r_t_sd_norms.append(r_t_sd.detach().float().norm().item())
+                # The generalised amount axis from step 29, applied to this rule: add back a
+                # fraction lam of the residual. lam=0 is SuperDiff alone, lam=1 is eps_J exactly.
+                eps_used = eps_m + lam * r_t_sd if lam != 0.0 else eps_m
+```
+
+- Lines 344 to 347 are `eps_M`: SuperDiff's blend of the two prompts' predictions with weight `kappa`.
+- Line 354 is `eps_J`, the single joint-prompt prediction; line 355 is the residual `r_t^SD = eps_J - eps_M` that the glossary at the top of the page defines.
+- Line 359 adds back a fraction `lam`: `lam = 0` is SuperDiff alone, `lam = 1` is `eps_J` exactly.
+
+### What comes out
+
+| <a href="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-cat-dog-checkpoint-timeline.png"><img src="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-rank16-cat-dog-checkpoint-timeline.png" width="200" alt="Rank 16 cat and dog adapter, one row per checkpoint, four seeds"></a> | <a href="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-loss-curves.png"><img src="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-loss-curves.png" width="200" alt="Training loss for three ranks, total and three step buckets"></a> | <a href="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png"><img src="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-lora-separation-by-checkpoint.png" width="200" alt="Seeds that separate per checkpoint for three ranks"></a> |
+|---|---|---|
+| rank 16 timeline, cat and dog | loss curves, three ranks | separation by checkpoint |
+
+**Timeline.** Rank 16, cat × dog, seeds 9 to 12; rows are the mono target, SuperDiff alone at κ 0.5 and the adapter at λ 1 at every 10k checkpoint from 10k to 60k `verified`. Two animals show at 10k on all four seeds and the later rows are more smeared, as the card says `verified`. Loss. Total loss and three step buckets (0 to 19, 20 to 99, 100 to 199) for the three ranks, log y, W&B runs `t5b00h56`, `5oz1bsa1`, `ue205g6e` by the figure's title `verified`. The x axis ends near 61,000 optimizer steps, while recipe 2 sets 2000 epochs of 50 steps (100,000); the page's recipe 8 says a run was stopped by hand, and neither the card nor the picture says whether these runs were stopped `stated`. Separation. Seeds of four that show two bodies (cat × dog, left panel) or a clear butterfly (butterfly × meadow, right panel), by checkpoint. On cat × dog, rank 32 goes 4 at 10k then 0 at 20k and 30k; rank 16 is 4 at 10k to 30k, 3 at 40k, 0 from 50k; rank 8 stays at 3 or 4 `verified`. On butterfly × meadow, rank 8 reads 2, 2, 4, 0, 0, 1 from 10k to 60k, rank 16 reads 1 at 10k then 0, and rank 32 reads 0 `verified`. Eye reads recorded in plan 08, not detector scores `stated` (card).
+
+### Further illustrations
+
+**Evidence**
+
+| <a href="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-cat-dog-kappa-050-lambda-sheet.png"><img src="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/superdiff-alone-cat-dog-kappa-050-lambda-sheet.png" width="200" alt="SuperDiff alone at kappa 0.5 with lambda 0 to 1 of its residual added"></a> | <a href="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-in-superdiff-cosine-profile.png"><img src="../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/poe-adapter-in-superdiff-cosine-profile.png" width="200" alt="Cosine and norms of a PoE adapter inside SuperDiff"></a> | picture held back |
+|---|---|---|
+| lambda sheet, SuperDiff alone | cosine and norm profile | SuperDiff baseline, eight cells |
+
+**Lambda sheet.** SuperDiff alone at 200 steps, rows seeds 9 to 12, λ 0 to 1 of its own residual added back: one fused animal at λ 0 on every seed, a cat and a dog by λ 0.5 to 0.75 `verified`; the card says "between λ 0.25 and 0.75" `stated` (card). Cosine profile. Cat × dog seed 9, the rank-8 PoE adapter's correction against SuperDiff's missing residual: medians about 0.1, 0.34, 0.18 and 0.06 across the four step buckets `verified`, matching recipe 7's printed numbers. The card says the two norms are "same size throughout". The sidecar's median norms over the four step buckets are 10.7, 20.2, 27.1 and 47.2 for the adapter and 8.6, 15.6, 17.1 and 15.3 for the residual `stated` (`superdiff-report-figures.json`), and in the right panel the adapter norm climbs away from the residual after about step 130 `verified`. Picture and card differ and this block changes neither. Baseline. The card says SuperDiff at its own settings "composes at 50, one animal or a blurred butterfly at 200" and "the clamp changes nothing". In the picture the 50-step cat × dog tiles are one large stylised cat head, the 50-step meadow tiles are graphic meadows with no clear butterfly, the 200-step meadow tiles show wildflowers with no visible butterfly, and the 200-step cat × dog tiles are one animal each `verified`. The two 200-step meadow tiles look alike, while the two 200-step cat × dog tiles are different animals, one orange and white and one tricolour on a cushion `verified`. The "composes at 50", "blurred butterfly" and "clamp changes nothing" statements are not visible in the picture; card and picture differ on all three.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Card for these pictures | [is the gap the sampler's or the model's](../../1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/README.md) |
+| Findings | [SuperDiff at its own defaults](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-superdiff-compose-at-its-own-defaults.md), [the PoE-trained correction inside SuperDiff](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-the-poe-trained-correction-carry-into-superdiff.md), [an adapter trained on SuperDiff's residual](../../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-an-adapter-trained-on-superdiffs-own-residual-compose.md) |
+| Launch rules for a shared device | [launching and harvesting a run](launching-and-harvesting-a-run.md) |
+| Resume and training recipes for the PoE adapter | [probing a pooled LoRA checkpoint](probing-a-pooled-lora-checkpoint.md) |
+| Nodes and python builds | [the cluster nodes](../../environment/hpc/nodes.md) |
+
+### Still open
+
+- Not placed: the other five timelines, the rank 16 λ-sweep sheets, the butterfly × meadow sheets and the rank-8 PoE-adapter sheets; none was opened in this pass.
+- The page's commands call `$REPO/scripts/build_superdiff_cache.py` and `$REPO/scripts/superdiff/...`; on this checkout the cache script is under `1-lora-correction/scripts/` and the SuperDiff scripts are under `1-lora-correction/scripts/superdiff/`. `scripts/launch_sdlora.sh` is at the repo root as the page says. This block changes none of them.
+- No recorded run of recipe 8 has a picture.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

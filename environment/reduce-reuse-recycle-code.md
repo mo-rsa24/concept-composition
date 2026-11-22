@@ -14,6 +14,7 @@ fact; that audit is
 - [The 2D notebook](#the-2d-notebook)
 - [The CLEVR script](#the-clevr-script)
 - [On the cluster (mscluster88)](#on-the-cluster-mscluster88)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
 ## The 2D notebook
@@ -65,7 +66,7 @@ needs the page's `confirm` and `uuid` values. (verified 2026-10-13)
 
 ## On the cluster (mscluster88)
 
-Navigation: ⬅️ [Previous](#the-clevr-script) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: ⬅️ [Previous](#the-clevr-script) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 **The cluster clone is `/home-mscluster/mmolefe/PhD/reduce-reuse-recycle`**, branch `walk` at
 `81177d9`, with the same notebook fixes as the laptop. The walk runs on `mscluster88` (`bigbatch`,
@@ -82,9 +83,48 @@ wheels never land under `/home-mscluster`. `jax.devices()` prints `[CudaDevice(i
 **No existing mamba env holds a usable jax.** `jax` has none installed; `jax115` has jax 0.4.30
 with a CPU-only jaxlib and no haiku. (verified 2026-10-13)
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#on-the-cluster-mscluster88) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+A comparison table in `artifacts/`, [the toy beside Du et al.](../4-inclusive-captions/artifacts/scenes/how-the-toy-relabelling-experiment-works/network-views/15-du-et-al-side-by-side.png), quotes this code's files and line numbers. The one excerpt below is the line the page says breaks the released U-Net, read from the clone the page names (outside this project, read only).
+
+### The code behind it
+
+Excerpt from `composable_diffusion/unet.py` in the clone `/home/molef/PhD/replications/reduce-reuse-recycle` (lines 1385 to 1387):
+
+```python
+        for module in self.input_blocks:
+            h = module(h, emb)
+            hs.append(h)
+```
+
+- Line 1386 reads `h` before the function has assigned it, which is the `UnboundLocalError` this page lists under the CLEVR script.
+- The upstream line `h = x.type(self.dtype)` does not appear anywhere in this file: a search for `x.type(self.dtype)` returned nothing.
+- This is reading only. The page marks the failure `inferred` and nothing was run.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The recipe for setting this code up | [setting up the reference code](../runbook/setting-up-the-reduce-reuse-recycle-code.md) |
+| Cluster nodes the walk runs on | [HPC nodes](hpc/nodes.md) |
+| The route that uses this code | [route for classifier-guided PoE](../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md) |
+
+### Still open
+
+- No recorded run of `inf_sample.py` exists in `artifacts/`. For the notebook, that comparison table and its card record that a laptop walk ran the definitions, the samplers and the bar expert's training, and did not run the product and mixture sampling cells.
+
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#on-the-cluster-mscluster88) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **2.3 GB CUDA install**, timed from the PyPI download rate measured on `mscluster88`, in [the HPC nodes fact, under Python environments](hpc/nodes.md#python-environments).
 - The mention of **the Reduce, Reuse, Recycle copy** of the guided-diffusion U-Net, missing the upstream line `h = x.type(self.dtype)`, in [the route for classifier-guided PoE](../2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md#what-we-know-so-far).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

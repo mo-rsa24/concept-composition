@@ -1,4 +1,4 @@
-# 🌍 Dictionary
+# 🌍 Dictionary: every field in a summary.json and a scorer output
 
 One entry per field a reader will meet in a `summary.json`, a scorer output, or a fail-rate table.
 Every example is a real value read directly from a file in this repository, labelled as such.
@@ -18,6 +18,8 @@ Every example is a real value read directly from a file in this repository, labe
 - [`fail_rate` / `compose_rate`](#fail_rate--compose_rate)
 - [`which_animal` / `both_ness` / `off_plane_norm`](#which_animal--both_ness--off_plane_norm)
 - [`commit_step` / `fork_step`](#commit_step--fork_step)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
+- [Cross-references](#cross-references)
 
 ### `pair_slug`
 
@@ -88,9 +90,9 @@ in the human-readable label
 **Stands for** a property of a [pair](../world/animal-pair.md#what-an-animal-pair-is), fixed at
 assignment, not derived from any run's outcome
 
-**Watch out** the taxonomy is shelved except for Group 6, which is the one group overlapping the
-live animal-only pool; a pair with a group label is not automatically part of the current
-experiment scope 🔍
+**Watch out** a pair with a group label is not automatically part of the current experiment
+scope. No source read for this page establishes that the taxonomy is shelved except for Group 6,
+or that Group 6 is the one group overlapping the live animal-only pool.
 
 ### `arm`
 
@@ -244,7 +246,7 @@ a person, when the validation set was built
 
 ### `fail_rate` / `compose_rate`
 
-Navigation: ⬅️ [`label` / `truth`](#label--truth) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [`label` / `truth`](#label--truth) | 📋 [TOC](#table-of-contents) | [Next](#which_animal--both_ness--off_plane_norm) ➡️
 
 **What it means in the world** ✅
 
@@ -267,6 +269,8 @@ evaluated, or when reporting a success rather than a failure.
 for the measured bound (87% to 94% true rate behind one 94% headline) ⚠️
 
 ### `which_animal` / `both_ness` / `off_plane_norm`
+
+Navigation: ⬅️ [Previous](#fail_rate--compose_rate) | 📋 [TOC](#table-of-contents) | [Next](#commit_step--fork_step) ➡️
 
 **What it means in the world** ✅
 
@@ -299,6 +303,8 @@ instance count, not this axis, is the validated compose rule ⚠️
 
 ### `commit_step` / `fork_step`
 
+Navigation: ⬅️ [Previous](#which_animal--both_ness--off_plane_norm) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+
 **What it means in the world** ✅
 
 `commit_step` is the denoising step after which a run's running estimate of its finished image
@@ -324,6 +330,96 @@ condition over the eight held-out seeds
 verdicts; a commit between two saved steps is invisible; a run whose `both_ness` never rises
 reads `commit_step = 0` even if its picture changes animal, as seed 15's PoE run does ⚠️
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#commit_step--fork_step) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+The dictionary says what each field means. The pictures and code below show five of them: `n_instances` and `label`, `both_ness`, and `commit_step` with `fork_step`. No run is recorded for the whole page, so it has no input and output headings.
+
+### The code behind it
+
+**`label` and `n_instances`.** Excerpt from `poe_repair/experiments/compose_scorer_validation/detection_scorer.py` (lines 110 to 116):
+
+```python
+    return InstanceScore(
+        label="compose" if n_animal >= 2 else "blend",
+        n_instances=n_animal,
+        n_instances_head=n_head,
+        conf_a=_best_conf(dets, query_a),
+        conf_b=_best_conf(dets, query_b),
+    )
+```
+
+- `label` is `compose` when `n_instances` is 2 or more, and `blend` otherwise.
+
+**`commit_step` and `fork_step`.** The two thresholds, from `1-lora-correction/scripts/showcase/where_each_condition_lands_dynamics.py` (lines 38 to 39):
+
+```python
+COMMIT_TOL = 0.10      # both-ness units; the run has committed once it stays this close to its end
+FORK_MIN_DIST = 0.05   # plane distance between the PoE and corrected run that counts as a fork
+```
+
+The loop that applies them (lines 62 to 72 of the same file):
+
+```python
+            final = y[-1]
+            commit = None
+            for i, st in enumerate(steps):
+                if np.all(np.abs(y[i:] - final) <= COMMIT_TOL):
+                    commit = st
+                    break
+            row[f"commit_step_{c}"] = commit
+            row[f"final_both_ness_{c}"] = round(float(final), 4)
+        dist = np.linalg.norm(tracks["poe"][s] - tracks["lora_1.2"][s], axis=1)
+        fork = next((st for st, dd in zip(steps, dist) if dd > FORK_MIN_DIST), None)
+        row["fork_step_poe_vs_lora_1.2"] = fork
+```
+
+- `commit` is the first saved step from which every later `both_ness` value stays within 0.10 of the final one; if it never leaves that band it is the first step, 0.
+- `fork` is the first saved step at which the plain PoE and the corrected run sit more than 0.05 apart in the plane.
+
+### Further illustrations
+
+**Evidence: `n_instances`**
+
+<a href="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/two-of-the-same-animal/a_cat__x__a_dog_seed10_n2.png"><img src="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/two-of-the-same-animal/a_cat__x__a_dog_seed10_n2.png" width="200" alt="Two dogs lying together, no cat"></a>
+<a href="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/an_elephant__x__a_penguin_seed9_n1.png"><img src="../../1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/scored-as-a-failure/an_elephant__x__a_penguin_seed9_n1.png" width="200" alt="One elephant drawn in line art, no penguin"></a>
+*Picture held back.* `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/contact-sheet.png` holds a frog and toad row, which the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off every sheet, so it is named here and not shown.
+
+The file names carry the count (`..._n2`, `..._n1`). Left, cat and dog seed 10: two dogs, no cat, `n=2`, so `compose`; this is the "two instances is not the two requested animals" case the dictionary warns about `verified` (opened and read; the card calls it the one confirmed error). Middle, elephant and penguin seed 9: one elephant in the picture, `n=1`, so `blend` `verified`; the card describes it as two elephants merged into one box `stated` (card), which the picture does not show. Right, the 32 renders with their counts in the titles: 30 read 2 or more, 2 read 1 `verified` (counted on the picture).
+
+**Evidence: `both_ness`**
+
+<a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_050.png" width="200" alt="One white and orange animal face lying down"></a>
+<a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/lora_1.2/seed_12/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/lora_1.2/seed_12/step_050.png" width="200" alt="A cat and a dog sitting side by side in dry grass"></a>
+
+Seed 12, finished image (step 50). Left, plain PoE: one animal with a patchy white and orange face. Right, PoE plus the correction at λ 1.2: a cat beside a dog `verified` (opened and read). The scene's data file puts their final `both_ness` at 0.1576 and 0.4667 `verified` (read from `public/data.json`, the second value of each track's last point).
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The scene these frames come from | [where each condition lands](../../1-lora-correction/artifacts/scenes/where-each-condition-lands/README.md) |
+| The audit behind the `n_instances` pictures | do the successful cells contain both animals, at `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` (not linked, because the folder holds the held-back pair) |
+| Where a run's files come from | [where the data comes from](01-where-it-comes-from.md) |
+| What the scorer can and cannot tell | [compose rate](../world/compose-rate.md) |
+| What the interaction term is | [interaction term](../world/interaction-term.md) |
+
+### Still open
+
+- The entry for `both_ness` quotes `0.4714` (seed 12, PoE plus 1.2 times the correction) from `cat-x-dog-in-dino-space.json`. That file exists only in the cluster checkout, where the value `0.4714` appears (checked 2026-11-21). The scene's `public/data.json` gives `0.4667` for the same condition and seed at step 50. The entry is left as written.
+- The `d_T` / `d_t` entry says `d_t` is an array of 50 values; the pilot `summary.json` holds 51 (indexes 0 to 50). The entry is left as written.
+- The `fail_rate` entry cites `fail_rate.md`, which exists only in the cluster checkout (checked 2026-11-21). The script `poe_repair/experiments/does_the_fix_reach_unseen_pairs/fail_rate.py` exists here. No table of fail rates is placed here.
+- The `commit-and-fork-steps.json` file the `commit_step` entry cites exists only in the cluster checkout (checked 2026-11-21). No recorded `commit_step` value is quoted.
+<!-- related:end -->
+
 ## Cross-references
 
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
+
 - The mention of **model id** in [the figure plan "the same rule on four models"](../../1-lora-correction/plans/03-does-the-correction-cause-composition/plans/figures/12-the-same-rule-on-four-models.md).
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

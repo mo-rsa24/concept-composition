@@ -6,7 +6,7 @@ Real per-step, per-checkpoint, and per-eval-pass timing for
 `poe_repair.experiments.cross_pair_lora_pooling.train_pooled`, measured before launching
 experiments A and B (`01-showcase-the-trained-lora`, plans 08 and 09), so their wall-clock
 estimates come from real numbers rather than a guess. Every number below is either **measured**
-(a real run, this file says which one and when) or **projected** (measured rate x the real run's
+(a real run, this file says which one and when) or projected (measured rate x the real run's
 step count) — never a bare estimate with no source.
 
 ## Table of contents
@@ -15,6 +15,7 @@ step count) — never a bare estimate with no source.
 - [Raw measurements](#raw-measurements)
 - [Projected durations for experiments A and B](#projected-durations-for-experiments-a-and-b)
 - [What this does not tell you](#what-this-does-not-tell-you)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Methodology
 
@@ -23,15 +24,16 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#raw-measurements) ➡️
 Three smoke runs, 2026-09-01, on `biggpu`'s shared-device path (no idle node was available;
 `squeue -u mmolefe` was empty and `sinfo -p biggpu` showed 6 nodes `alloc`, 1 `down`). All three
 used the reduced tracking scope plan 06 settled on for cost reasons (one in-pair
-`a_wolf__x__a_husky`, one out-pair `a_cat__x__a_dog`, 2 seeds each, 50 DDIM steps) — this is an
-open assumption, not yet confirmed against real A/B launch scripts, which don't exist yet. See
-"What this does not tell you" below.
+`a_wolf__x__a_husky`, one out-pair `a_cat__x__a_dog`, 2 seeds each, 50 DDIM steps). The real A/B
+launch scripts adopt the same scope; see "What this does not tell you" below.
 
 - **Rank 8, 200 epochs (10,000 steps)** — the one run sized to hit the real checkpoint (every
   100 epochs / 5,000 steps) and eval-pass (every 200 epochs / 10,000 steps) cadence, so those
   numbers are real, not extrapolated from a shorter run.
 - **Rank 16 and rank 32, 20 epochs (1,000 steps) each** — short, parallel, comparing per-step
   rate only; too short to reach a checkpoint or eval pass (both fire past epoch 100).
+
+Rank is how wide the two thin matrices of a [LoRA](../../../../Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this) are. Toy (a 100 by 100 layer, invented, computed): a rank-r update trains 2 × 100 × r numbers, so rank 8 trains 1,600, rank 16 trains 3,200 and rank 32 trains 6,400, against 10,000 for retraining the whole layer.
 
 **A hardware fault interrupted the first attempt.** `mscluster111` device 0 (RTX PRO 6000
 Blackwell, confirmed free by the standard memory guard) turned out to be in a fault state
@@ -44,9 +46,9 @@ nodes both reached their first epoch in under a minute. Killed and relaunched on
 now check `utilization.gpu`/`temperature.gpu` for `N/A`/`reset`, not just memory used, so this
 should not repeat silently.
 
-**A second Blackwell, `mscluster110`, was later found healthy and idle** (2026-09-01, evening),
-and experiment A's real launch (below) confirms real Blackwell numbers, superseding the
-"RTX A6000 is the fastest confirmed hardware" line that stood earlier in this file.
+**A second Blackwell, `mscluster110`, was healthy and idle** (2026-09-01, evening), and experiment
+A's real launch (below) gives the Blackwell numbers: 0.236 s/step, against 0.706 s/step on the
+RTX A6000, the fastest of the other cards measured.
 
 **A batch-size comparison was attempted and its result must be discarded.** `timing_smoke.sh`
 accepted a `--train-batch-size` argument on the command line but did not forward it to the
@@ -103,12 +105,16 @@ in directly.
 | **Experiment B rank 32, actually running** (fresh, 100k steps), RTX 8000 | 31.8h (114,400s) | +14s | +34.3min (2,060s) | **~32.4 hours** |
 | Experiment B, both ranks in parallel on separate devices | — | — | — | **~35.1 hours wall-clock** (the slower of the two, run concurrently, not summed) — matches how B was actually launched: one Slurm job (48965), two devices on `mscluster106` |
 
-Checkpoint-save cost is real but small enough to ignore in practice (0.3s x 20 = 6s across a
-100k-step run on Blackwell). The eval-pass addition is now measured on both hardware types, not
-scaled: **~10.7 minutes** on Blackwell, **~34.3 minutes** on RTX 8000, across a full 100k-step
-run — this is the number that justified cutting the tracking set from 152 cells to 4 (plan 06's
-review file: the 152-cell scope projected to ~20 *hours* added, not minutes, at the same
-cadence).
+The two add-ons to the training time, over a full 100k-step run, are small next to training:
+
+| Add-on | Blackwell | RTX 8000 | Meaning |
+|---|---|---|---|
+| Checkpoint saves | 0.3s x 20 = 6s | 14s (table above) | Small enough to ignore in practice. |
+| Eval passes (10 per run) | **~10.7 minutes** | **~34.3 minutes** | Measured on both hardware types, not scaled. |
+
+The eval-pass figure is the number that justified cutting the tracking set from 152 cells to 4
+(plan 06's review file: the 152-cell scope projected to ~20 *hours* added, not minutes, at the
+same cadence).
 
 **Bold rows are the actual real launches**, not smoke tests: experiment A is run `8vl2uzak`
 (W&B), B rank 16 is run `jii2mtb0`, B rank 32 is run `le2tp2ti`, all in
@@ -125,10 +131,9 @@ exactly optimizer step 200, which a resumed run never revisits.
 
 ## What this does not tell you
 
-Navigation: ⬅️ [Previous](#projected-durations-for-experiments-a-and-b) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#projected-durations-for-experiments-a-and-b) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
-- **Whether a larger batch size would speed anything up is genuinely unknown**, not "tested and
-  found not to help" as an earlier version of this file claimed. That comparison's script had a
+- **Whether a larger batch size would speed anything up is unknown.** The comparison's script had a
   bug (the `--train-batch-size` flag was accepted but never forwarded to the trainer), so every
   "batch=4" run in it silently trained at batch=1. The bug is fixed, but no valid batch>1
   measurement has been taken since, and none is currently planned — real A and B both use
@@ -137,9 +142,59 @@ Navigation: ⬅️ [Previous](#projected-durations-for-experiments-a-and-b) | �
 - **The RTX 8000 eval-pass number (206.0s, 51.5s/cell) is one measurement from one pass** on
   rank 16's real run. It's real, not scaled, but hasn't been repeated enough times to know its
   run-to-run spread the way the Blackwell number has (three passes: 64.1s, 44.9s, 45.1s).
-- **The tracking-set scope this was measured under (one in-pair, one out-pair) is now confirmed
-  as what the real A/B launch scripts use** — `experiment_a_resume.sh` and
-  `experiment_b_rank.sbatch` both adopt it. This resolves what was previously an open assumption.
+- **The tracking-set scope this was measured under (one in-pair, one out-pair) is the scope the
+  real A/B launch scripts use** (confirmed): `experiment_a_resume.sh` and
+  `experiment_b_rank.sbatch` both adopt it.
 - **These are training-only projections.** They do not include time for queueing behind another
   user on a shared device, or the harvest/scoring step after each run completes
   (`experiment_a_verdict_inputs.json`, `rank_ablation.json`).
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#what-this-does-not-tell-you) | 📋 [TOC](#table-of-contents)
+
+No picture of these timings exists under `artifacts/`; the numbers are in the tables above and no run graph is filed beside them.
+
+### The code behind it
+
+The tracking scope the page names (one in-pair, one out-pair, 2 seeds each, 50 steps) and the checkpoint and eval cadence are set in `1-lora-correction/scripts/showcase/experiment_a_resume.sh` (lines 66 to 78, named here, not linked).
+
+```bash
+    --cache-root     "$POE_REPAIR_TRAINING_CACHE" \
+    --lora-rank 8 --lora-alpha 8 --lr 1e-4 \
+    --resume-from "$RESUME_FROM" \
+    --total-epochs 4000 --epoch-size 50 \
+    --ckpt-every-epochs 100 --log-every-epochs 20 \
+    --sample-every-epochs 200 \
+    --sample-cells-per-train-pair 2 --sample-cells-per-heldout-pair 2 \
+    --sample-train-pairs a_wolf__x__a_husky \
+    --sample-heldout-pairs a_cat__x__a_dog \
+    --sample-num-inference-steps 50 --sample-thumb 256 \
+    --wandb-mode online --wandb-project poe-repair-animals-compose \
+    --run-id "$RUNID" \
+    --output-root "$OUTROOT"
+```
+
+- `--total-epochs 4000 --epoch-size 50` is 200,000 steps, the 100k to 200k resume the page projects.
+- `--ckpt-every-epochs 100` is every 5,000 steps and `--sample-every-epochs 200` is every 10,000 steps, the cadence behind the projection table.
+- `--sample-train-pairs` and `--sample-heldout-pairs` are the in-pair and out-pair of the tracking scope, and `--sample-num-inference-steps 50` is the 50 DDIM steps.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Which card each rank ran on | [the HPC nodes fact](nodes.md#partitions) |
+| How the run was launched | [execution protocol](execution-protocol.md) |
+| The hardware fault named in the methodology | [poe-launch-002](../known-failures.md#entry-id-poe-launch-002) |
+| What training longer did to the held-out fix | [does training longer keep improving the held-out fix](../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/does-training-longer-keep-improving-the-held-out-fix.md) |
+| Which checkpoint composes best | [which checkpoint composes best](../../3-understanding-compositionality/report/does-training-longer-help-the-pooled-lora/which-checkpoint-composes-best-and-does-more-correction-help.md) |
+
+### Still open
+
+No W&B curve or step-time plot for runs `8vl2uzak`, `jii2mtb0`, `le2tp2ti` or `6xc2l8ix` is filed under `artifacts/`.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

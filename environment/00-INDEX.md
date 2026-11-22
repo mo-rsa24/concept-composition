@@ -38,6 +38,9 @@ Navigation: ⬅️ [Before I...](#before-i) | 📋 [TOC](#table-of-contents) | [
 | [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the authors' code for Du et al. 2023, cloned at `~/PhD/replications/reduce-reuse-recycle` | 1 (flat, no second leaf yet) |
 | [paper.md](paper.md) | the LaTeX build for `writing/iclr/` | 1 (flat, no second leaf yet) |
 
+Pages in this folder keep their command blocks and code excerpts beside the facts they depend on,
+a declared exception to the rule that a leaf holds no commands.
+
 How every fact here was established is in [provenance.md](provenance.md). The project failure
 catalog is [known-failures.md](known-failures.md).
 
@@ -57,8 +60,5 @@ Navigation: ⬅️ [The systems](#the-systems) | 📋 [TOC](#table-of-contents)
 - **One script still names the retired `docs/ENVIRONMENT.md`:** a comment at line 9 of
   `1-lora-correction/scripts/animals_compose_transfer/smoke_live_curves.sh`. That file's last
   version is in git history at commit `94069341`.
-- **No `reference`-type memory entry names the `environment/` folder.** The closest entry,
-  `hpc-and-execution-conventions` (`type: project`), repeats several facts and points at the
-  retired `docs/ENVIRONMENT.md`.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

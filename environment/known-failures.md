@@ -10,7 +10,7 @@ fact; where the solution is a procedure someone drives by hand, it belongs in a
 [runbook recipe](../runbook/00-INDEX.md).
 
 **Last updated:** 2026-11-21
-**Total entries:** 18
+Total entries: 18
 
 ---
 
@@ -25,11 +25,12 @@ fact; where the solution is a procedure someone drives by hand, it belongs in a
   - [Rendering figures](#rendering-figures)
   - [Training data and splits](#training-data-and-splits)
   - [Syncing the cluster checkout and launching on a node](#syncing-the-cluster-checkout-and-launching-on-a-node)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
 ## Error patterns (organized by subsystem)
 
-Navigation: 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 ### Scoring and evaluation
 
@@ -103,8 +104,14 @@ size filter is switched on or off.
 PoE, adapter). `compose_rate.py` used to split names on `__seed` and so scored the strips too. The
 target panel always holds two animals, so a strip scores as a compose whatever the adapter drew;
 with the 25% size filter on, the strip's small animals are dropped and it scores as fused instead.
-Shown on `phase1_r8_100k` step 60000, held-out: 0.961 with strips and no filter, 0.742 with strips
-and the filter, 0.906 from renders alone (jobs 86565, 86587, 86591, 2026-11-13).
+The three ways of scoring one run, `phase1_r8_100k` step 60000, held-out (jobs 86565, 86587,
+86591, 2026-11-13):
+
+| What was scored | Compose rate |
+|---|---|
+| Renders and strips, no size filter | 0.961 |
+| Renders and strips, size filter on | 0.742 |
+| Renders alone | 0.906 |
 
 **Solution:** fixed in `compose_rate.py` (commit 0811f029): only names matching `<pair>__seed<digits>`
 are scored. Rescore any `compose_rate.json` written before 2026-11-13 before citing it, with
@@ -155,7 +162,8 @@ V100 32GB.
 
 **Root cause:** Full eval batch for cat x dog (11 training pairs x 4 seeds = 44 images) plus
 DINOv2 embeddings (40M) plus CLIP embeddings (400M) exceeds V100 memory. A100 does not have
-this issue.
+this issue. CLIP is the image-and-text model that scores each render; see
+[where to learn it](../../../Obsidian/Artificial%20Intelligence/Deep%20Learning/Contrastive%20Image-Text%20Training.md#where-to-learn-this).
 
 **Solution:**
 - Use A100 nodes (`mscluster110`) for evals with the full batch.
@@ -218,7 +226,8 @@ checking both pass `device` explicitly)
 Prior runs stop rising at about 0.4.
 
 **Root cause:** LoRA rank too low (r=4 or r=8) to capture the full correction magnitude. The
-correction saturates the LoRA space before reaching the full PoE-to-Mono distance.
+correction saturates the LoRA space before reaching the full PoE-to-Mono distance. Rank is the
+width of the adapter's two thin matrices; the [LoRA card](../../../Obsidian/Artificial%20Intelligence/Large%20Language%20Models/LoRA.md#where-to-learn-this) counts the trainable numbers it buys.
 
 **Solution:**
 1. Check the LoRA rank used (in config; default is r=16).
@@ -247,6 +256,8 @@ or goes negative (anti-aligned).
 **Root cause:** The LoRA correction is optimizing for a different objective than the pool-mean
 direction. Possible causes: a stale pool-mean cache, a different loss function (L1 vs L2), or
 the correction is legitimately different on this pair.
+
+A direction-cosine is the [cosine](../../../Obsidian/Mathematics/Linear%20Algebra/Cosine%20Similarity.md#where-to-learn-this) of the angle between two correction vectors. Toy (invented, computed): the vectors [1, 1] and [1, 2] give 3/√10 = 0.949, about 18°, while 0.3 is about 73° apart and a negative value is more than 90°.
 
 **Solution:**
 1. Check that the pool-mean cache was built before training started.
@@ -374,8 +385,7 @@ prior toward a photographed scene with a person in it is the first thing to chec
 before it is used, because no scorer in this repository reports an extra person. Recorded 2026-09-20
 from the fourteen-adapter sheet at
 `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/composing-unseen-pairs/`, which renders one seed through every adapter this
-project has trained. That folder is not in the laptop checkout, so look for the sheet in the
-cluster checkout.
+project has trained. That folder exists only in the cluster checkout (checked 2026-11-21).
 
 **Environment reference:** none; this is a model behaviour rather than a system fact.
 
@@ -420,18 +430,17 @@ and step-11's runs across many settings)
 #### Entry ID: poe-launch-002
 **Name:** A device passes the pre-launch guard but is in a hardware fault state — the process hangs producing nothing, no error
 
-**Symptom:** A training process starts, loads models, encodes prompts, and logs "training
-plan: target=N epochs" — then produces zero epoch progress for many minutes, while an
-identical launch on a different node reaches its first epoch in under a minute. No exception,
-no traceback, no OOM: the process just sits there. A second form (`mscluster111`, 2026-09-05): the
-process does not hang but runs on the CPU, because `torch.cuda.is_available()` returns `False` on
-the faulted device while `nvidia-smi` still lists it. A 16-second sampler run then takes about
-15 minutes, files keep appearing, and nothing in the log says why. A third form (`bigbatch`
-nodes `mscluster44`, `mscluster45` and `mscluster65`, 2026-09-06): the node sits `idle` in
-`sinfo`, and the first `nvidia-smi` call in the job prints `Unable to determine the device handle
-for GPU0: 0000:17:00.0: Unknown Error` and exits, so a job that guards on `nvidia-smi` fails in
-one second and a job that does not would run on the CPU. Idle `bigbatch` nodes are idle for a
-reason often enough that a one-second probe job before the real one is worth it.
+**Symptom:** A launch onto a faulted device goes wrong in one of three forms, listed in the
+order they were seen:
+
+| Form | Where and when | What you see | Why it is easy to miss |
+|---|---|---|---|
+| Hang | `mscluster111` device 0 | The process loads models, encodes prompts and logs "training plan: target=N epochs", then shows zero epoch progress for many minutes, while an identical launch on a different node reaches its first epoch in under a minute. | No exception, no traceback, no OOM: the process just sits there. |
+| Runs on the CPU | `mscluster111`, 2026-09-05 | `torch.cuda.is_available()` returns `False` on the faulted device while `nvidia-smi` still lists it. A 16-second sampler run takes about 15 minutes. | Files keep appearing and nothing in the log says why. |
+| Driver error on an idle node | `bigbatch` nodes `mscluster44`, `mscluster45` and `mscluster65`, 2026-09-06 | The node sits `idle` in `sinfo`, and the first `nvidia-smi` call in the job prints the line "Unable to determine the device handle for GPU0: 0000:17:00.0: Unknown Error" and exits. | A job that guards on `nvidia-smi` fails in one second, and a job that does not would run on the CPU. |
+
+Idle `bigbatch` nodes are idle for a reason often enough that a one-second probe job before the
+real one is worth it.
 
 **Root cause:** The device's pre-launch `nvidia-smi --query-gpu=memory.used` guard (the
 `>1024MiB in use` check) only catches a device already busy with another process. It does not
@@ -642,11 +651,66 @@ launched, the chained mscluster112 launch did not)
 
 ---
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#error-patterns-organized-by-subsystem) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+No picture shows any of these failures; the evidence is in the entries. This block adds the real code behind the two failures that come from one line each: the default device and the split search.
+
+### The code behind it
+
+**`poe-mem-002`: the CPU default.** Excerpt from `poe_repair/experiments/compose_scorer_validation/scorer.py` (lines 49 to 52):
+
+```python
+class _Embedders:
+    def __init__(self, device: torch.device | None = None):
+        self.device = device or torch.device("cpu")
+        self._dino = None
+```
+
+- `device or torch.device("cpu")` is the default the entry's root cause names: a caller that passes nothing gets the CPU, and `.dino()` then fails on the xformers kernel.
+
+**`poe-data-001`: the split search.** Excerpt from `poe_repair/training_cache.py` (lines 63 to 67):
+
+```python
+        candidates = [split] if split else ["heldout", "train"]
+        for sp in candidates:
+            root = cache_root / sp / pair_slug / f"seed_{seed}"
+            if (root / "meta.json").exists():
+                return cls(split=sp, pair_slug=pair_slug, seed=seed, root=root)
+```
+
+- With `split=None` the list is `["heldout", "train"]`, so a cell present in both folders is returned from `heldout`.
+- Passing `split="train"` makes the list one item, which is the first fix the entry proposes.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| Environment overview | [overview](overview.md) |
+| Nodes, GPUs and fault forms | [HPC nodes](hpc/nodes.md) |
+| The launch protocol the launch entries follow | [execution protocol](hpc/execution-protocol.md) |
+| Where the disk entries' folders sit | [storage](storage.md) |
+| Launching and harvesting by hand | [the launch and harvest recipe](../runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md) |
+| What a compose rate is | [compose rate](../context/world/compose-rate.md) |
+
+### Still open
+
+- **Disagreement between sources, left as found.** The check script under `poe-data-001` reads `/datasets/mmolefe/poe_repair_min/artifacts/caches/training_cache`, while `DEFAULT_CACHE_ROOT` in `poe_repair/training_cache.py` (lines 38 to 43) defaults to `/datasets/mmolefe/poe_repair_min/outputs/training_cache`. Which one is current has not been checked here.
+- No screenshot or saved log of any entry's symptom exists in `artifacts/`.
+
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Previous](#error-patterns-organized-by-subsystem) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The instrument finding in [the corrector's step-size review](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/02-the-corrector-and-the-step-size-it-runs-at.md): a Langevin step size can pass both numeric divergence guards while its renders are texture noise, because the latent norm cannot rise until the Euler step stops contracting. The picture is rung 3 of [the finding](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/does-a-langevin-corrector-remove-part-of-the-correction.md).
 - The mention of **the adapter left attached after a windowed run** (why the two adapter stages run in their own process) in [can a corrector or a clean tail sharpen the adapter's renders](../1-lora-correction/report/is-the-gap-the-samplers-or-the-models/can-a-corrector-or-a-clean-tail-sharpen-the-adapters-renders.md) and [running the Langevin corrector](../runbook/running-things-on-the-cluster/running-the-langevin-corrector.md).
 - The mention of **hardware-faulted** `bigbatch` cards in [the partition table of the node notes](hpc/nodes.md#partitions).
 - The mention of **faulted cards**, excluded when every biggpu node was probed, in [the PRZE-10 compute plan](../1-lora-correction/report/paper-review/prze-10-compute.md), first outcome.
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

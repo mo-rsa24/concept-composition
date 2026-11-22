@@ -10,6 +10,7 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#access-paths)
 - [The disk guard rule, and the failure that motivates it](#the-disk-guard-rule-and-the-failure-that-motivates-it)
 - [When `/datasets` is down](#when-datasets-is-down)
 - [Version control](#version-control)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
 ## The storage map
@@ -80,7 +81,8 @@ Navigation: ⬅️ [The storage map](#the-storage-map) | 📋 [TOC](#table-of-co
 - **Cached residual trajectories** (the r_t training targets, all four eps branches per step):
   `/datasets/mmolefe/poe_repair_min/outputs/training_cache/` (18 train + 58 heldout pairs, ~12
   seeds, 50 steps each; contents verified by direct filesystem inspection and a loaded residual
-  file on 2026-08-04).
+  file on 2026-08-04). Here r_t is the per-step gap between the joint-prompt prediction and the
+  product-of-experts prediction; see [the interaction term](../context/world/interaction-term.md#what-the-interaction-term-is).
 - **W&B project for the animals program:** `prime_lab/poe-repair-animals-compose`.
 - **CelebA** (aligned faces, identity and all 40 attributes, parquet, 11 GB):
   `/datasets/mmolefe/celeba/flwrlabs-celeba/img_align+identity+attr/`, 19 train, valid and 3 test
@@ -150,25 +152,94 @@ same resolved root as its output root has not been re-audited this sitting.
 
 Navigation: ⬅️ [The disk guard](#the-disk-guard-rule-and-the-failure-that-motivates-it) | 📋 [TOC](#table-of-contents) | [Next](#version-control) ➡️
 
-**From about 13:10 UTC on 2026-11-17, `/datasets` returned `Input/output error` on every node tried,
-and it still did at 05:40 UTC on 2026-11-18** (`ls /datasets/mmolefe` and `df -h /datasets` both
-fail; verified over `scripts/cluster.sh sh`). While it is down, the user's standing exception is
-`/home-mscluster/mmolefe/poe_repair_min_scratch/`, with the disk guard pointed at `/home-mscluster`
-(57% used on 2026-11-18). Outputs written there move to `/datasets` once it reads again. Probe it
-before a launch: `ls /datasets/mmolefe` must list folders.
+`/datasets` returned `Input/output error` on every node tried from about 13:10 UTC on 2026-11-17
+(`ls /datasets/mmolefe` and `df -h /datasets` both failed, verified over `scripts/cluster.sh sh`).
+It was still failing at 05:40 UTC on 2026-11-18 and read normally on 2026-11-21. While it is down,
+the user's standing exception is `/home-mscluster/mmolefe/poe_repair_min_scratch/`, with the disk
+guard pointed at `/home-mscluster` (57% used on 2026-11-18). Outputs written there move to
+`/datasets` once it reads again. Probe it before a launch: `ls /datasets/mmolefe` must list
+folders.
 
 ## Version control
 
-Navigation: ⬅️ [When `/datasets` is down](#when-datasets-is-down) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: ⬅️ [When `/datasets` is down](#when-datasets-is-down) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 Neither filesystem is under version control and neither is snapshotted. Every `✓ verified (...)`
 evidence tag in the plan tree points at a path on one of them, so an artifact deleted or moved
 silently breaks the claim it backs. `artifacts/plans/parked/artifact-reconciliation/plans/05-resweep-on-new-runs.md`
 exists to catch this, and is a standing recurring plan rather than a finished one.
 
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#version-control) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+
+No picture of these filesystems exists in any `artifacts/` folder, and the storage map above is already drawn. This block adds the helper that chooses which filesystem's copy of a path to use, and a guard that reads the folder its job writes to. It leaves the tables and numbers above as they are.
+
+### The code behind it
+
+**Where a path is looked up.** Paths to run families go through one helper, which returns a copy that already exists. The guard excerpt further down reads its own `$OUT` and does not call this helper. Excerpt from `poe_repair/paths.py` (lines 176 to 197):
+
+```python
+def resolve(rel: str | os.PathLike[str], *, prefer: str = "mount") -> Path:
+    """The path to ``rel`` on whichever filesystem holds it.
+
+    ``prefer`` decides only when both hold it, and defaults to the mount because that
+    is where the bulk sits. Where the two copies are different experiments rather than
+    one copied twice, name the run tag in ``rel`` and this becomes unambiguous without
+    anyone having to choose.
+
+    Raises ``FileNotFoundError`` naming both roots tried, because a path that resolves
+    nowhere should say so at the call site rather than fail later as an empty result.
+    """
+    if prefer not in ("mount", "repo"):
+        raise ValueError(f"prefer must be 'mount' or 'repo', not {prefer!r}")
+
+    found = roots_holding(rel)
+    if not found:
+        raise FileNotFoundError(
+            f"{rel} exists under neither {REPO_ROOT} nor {MOUNT_ROOT}"
+        )
+    if len(found) == 1:
+        return found[0] / rel
+    return (MOUNT_ROOT if prefer == "mount" else REPO_ROOT) / rel
+```
+
+- `MOUNT_ROOT` defaults to the `/datasets/mmolefe/poe_repair_min` folder in the first table, and `POE_REPAIR_MOUNT` overrides it. `REPO_ROOT` is the checkout the code runs from, which on the cluster sits on `/home-mscluster`.
+- When both roots hold the path, the default returns the mount's copy, because the mount is where the bulk sits.
+- When neither holds it, the error names both roots, so a path that exists on neither fails at the call.
+
+**The guard that reads the folder the job writes to.** Excerpt from `scripts/review_bench_co3.sbatch` (lines 26 to 28):
+
+```bash
+[ -d "$OUT" ] || { echo "ABORT: $OUT not visible from this node" >&2; exit 3; }
+USE=$(df --output=pcent "$OUT" | tail -1 | tr -dc '0-9')
+[ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $OUT is ${USE:-unknown}% full" >&2; exit 3; }
+```
+
+- `df` is given `$OUT`, the same variable the job writes under, which is the rule in the disk-guard section above and the opposite of the `poe-disk-001` failure.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The disk guard that checked the wrong mount | [known failures, `poe-disk-001`](known-failures.md#entry-id-poe-disk-001) |
+| Where the guard sits in a launch | [execution protocol](hpc/execution-protocol.md) |
+| Nodes and mounts they see | [HPC nodes](hpc/nodes.md) |
+| The environment overview | [overview](overview.md#access-paths) |
+
+### Still open
+
+- **Disagreement between sources, left as found.** This page and `poe_repair/training_cache.py` name the training cache `/datasets/mmolefe/poe_repair_min/outputs/training_cache`, while `poe_repair/paths.py` (`TRAINING_CACHE`, line 153) and the check script in `known-failures.md` under `poe-data-001` name `artifacts/caches/training_cache` under the same root. Which folder holds the cache now has not been checked here.
+- No recorded run of the guard aborting exists in `artifacts/`.
+
+<!-- related:end -->
+
 ## Cross-references
 
-Navigation: ⬅️ [Version control](#version-control) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **disk guard** in [the plan "the cheapest test: does RoentGen-v2 draw two findings"](../3-understanding-compositionality/plans/10-does-roentgen-draw-two-findings/plans/01-the-cheapest-test.md), task 5.1.
 - The mention of **disk guard** in [the PRZE-10 compute plan](../1-lora-correction/report/paper-review/prze-10-compute.md), fourth outcome.

@@ -12,6 +12,7 @@ is a different loop from running experiments: no GPU, no queue, no job.
 - [No system LaTeX exists on this cluster](#no-system-latex-exists-on-this-cluster)
 - [Building it, the terminal route (what Claude and any script uses)](#building-it-the-terminal-route-what-claude-and-any-script-uses)
 - [Building it, the VS Code route](#building-it-the-vs-code-route)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Where to make changes
 
@@ -25,6 +26,13 @@ References go in `iclr2027_conference.bib`. Figures are referenced, never copied
 produced by `1-lora-correction/plans/03-does-the-correction-cause-composition/`
 and `1-lora-correction/plans/04-does-the-fix-reach-unseen-pairs/`, and
 `writing/iclr/README.md` holds the path rule.
+
+**The cluster checkout still holds the old `paper/` folder.** On 2026-11-21 it sat at `ccf76f13`,
+before the move to `writing/`. Its `paper/iclr/figures/` holds 188 files: 132 tracked and 56
+untracked PDFs that no `.gitignore` rule covers. A fast-forward past the move carries the 132 to
+`writing/` and leaves the 56 PDFs in `paper/iclr/figures/`, where the rewritten links no longer
+look. `verified` (`git ls-files` on the cluster checkout and `git check-ignore` against the current
+`.gitignore`, 2026-11-21)
 
 ## No system LaTeX exists on this cluster
 
@@ -60,7 +68,7 @@ whether the PDF was written, not by whether the output was silent.
 
 ## Building it, the VS Code route
 
-Navigation: ⬅️ [Previous](#building-it-the-terminal-route-what-claude-and-any-script-uses) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#building-it-the-terminal-route-what-claude-and-any-script-uses) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 LaTeX Workshop (`james-yu.latex-workshop`, version `10.15.2`, installed server-side, confirmed
 present live via `ls ~/.vscode-server/extensions/` on 2026-08-24) is the extension.
@@ -73,21 +81,76 @@ document. The recipe has to be picked by hand as above. Nine recipes ship by def
 `latexmk` is first, `tectonic` is last (confirmed by reading
 `~/.vscode-server/extensions/james-yu.latex-workshop-10.15.2/package.json` on 2026-08-05).
 
-**This may be partly fixed and needs a re-check, not a rebuild, to confirm.** A tracked
-`.vscode/settings.json` now exists in the repo (added in commit `2c4d0b6`, "Working-tree state
-before the retrofit rename"; confirmed live by reading the file on 2026-08-24) and defines a
-custom `tectonic` recipe and tool pointing at the absolute `tectonic` path above. It does
-**not** set `latex-workshop.latex.recipe.default`, so whether plain "Build LaTeX project" now
-uses `tectonic` automatically, or still tries `latexmk` first and fails, is unverified: this
-sitting deliberately did not run a build (that would write a PDF outside the environment folder's
-scope). This contradicts the earlier-verified claim below that "there is no project or machine
-settings file," and is logged as an open item rather than resolved silently. See "Still open" in
-`00-INDEX.md`.
+**A tracked `.vscode/settings.json` defines a custom `tectonic` recipe and tool.** The file was added
+in commit `2c4d0b6` ("Working-tree state before the retrofit rename") and read live on 2026-08-24.
+It points at the absolute `tectonic` path above and does not set
+`latex-workshop.latex.recipe.default`. Whether plain "Build LaTeX project" uses `tectonic`
+automatically, or still tries `latexmk` first and fails, is untested: running the build would write
+a PDF outside the environment folder's scope. It is listed under "Still open" in `00-INDEX.md`.
 
-Earlier verification (2026-08-05): "Absence of project or machine settings confirmed by `ls`."
-That was true on 2026-08-05 and is no longer true as of the `.vscode/settings.json` addition; the
-2026-08-05 mark is kept here as a dated fact, not deleted, per this file's own currency rule.
+Absence of a project or machine settings file was confirmed by `ls` on 2026-08-05. Since the
+`.vscode/settings.json` addition a project settings file exists.
 
 The VS Code keystroke route above is user-stated (2026-08-05) and consistent with the recipe
 list read from the extension's `package.json`, but the command-palette action itself cannot be
 driven from a shell, so it has never been machine-verified.
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#building-it-the-vs-code-route) | 📋 [TOC](#table-of-contents)
+
+No picture of the paper build exists in any `artifacts/` folder. The one piece of code behind this page is the tracked settings file that adds the `tectonic` recipe, shown whole so the open question above can be read against it.
+
+### The code behind it
+
+Whole file `.vscode/settings.json` (lines 1 to 22):
+
+```json
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "tectonic",
+      "tools": ["tectonic"]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "tectonic",
+      "command": "/home-mscluster/mmolefe/.local/bin/tectonic",
+      "args": [
+        "-X",
+        "compile",
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.synctex.afterBuild.enabled": true
+}
+```
+
+- `recipes` defines one recipe named `tectonic` that runs the tool of the same name.
+- `tools` points that tool at the absolute `tectonic` path and runs `tectonic -X compile` on the open document.
+- No `latex-workshop.latex.recipe.default` key appears, which is the fact behind the unverified question on this page: nothing in the file says plain "Build LaTeX project" should pick `tectonic`.
+- The file's `viewer` and `synctex` lines are about the PDF view and are not part of the build.
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The environment overview of the paper build | [overview, paper build](overview.md#paper-latex-build) |
+| How the `tectonic` and settings facts were established | [provenance](provenance.md) |
+| Syncing the paper with Overleaf | [the Overleaf sync recipe](../runbook/syncing-the-paper-with-overleaf.md) |
+| The manuscript folder's own readme | [writing readme](../writing/iclr/README.md) |
+
+### Still open
+
+- A recorded `tectonic` build of `iclr2027_conference_revision` sits in the git-ignored folder `artifacts/drips/present-revision-to-supervisor/bundle-build-proof/`. No recorded run of the plain "Build LaTeX project" command exists in `artifacts/`, and the page itself says no build was run to check the default recipe.
+
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->

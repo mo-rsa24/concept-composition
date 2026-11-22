@@ -12,6 +12,7 @@ so a reader can place any file they find on disk.
 - [The journey](#the-journey)
 - [The two filesystems](#the-two-filesystems)
 - [Where this came from](#where-this-came-from)
+- [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## The journey
 
@@ -43,7 +44,7 @@ intermediate estimates, the run caches enough to recompute the model's running e
 finished image at any step (the Tweedie-formula estimate `1-lora-correction/report/experiments-log.md`'s EXP-01 uses). This is
 what lets several later measurements (the commitment step, and re-running the injection window
 across many settings) be re-derived from the cache alone, with no further GPU sampling, per
-`1-lora-correction/report/experiments-log.md`'s repeated "cache only" compute notes. 🔍
+`1-lora-correction/report/experiments-log.md`'s repeated "cache only" compute notes. ✍️
 
 > The Tweedie formula turns a noisy latent and the model's noise prediction at that step into the
 > model's best guess of the clean image it is heading toward. It is what makes an intermediate
@@ -83,13 +84,13 @@ artefacts, per this project's own `CLAUDE.md`: "Large artifacts go to `/datasets
 `/home-mscluster` hit 100% once and silently killed checkpointing." `RETROFIT.md`'s census recorded
 several run families split across both, with some folders (e.g. `interaction_term/dose`, 6.3G)
 existing as real data on one filesystem and a zero-byte placeholder on the other, as of
-2026-08-23. 🔍 This context file does not restate the environment's paths, sizes, or disk-guard
+2026-08-23. ✍️ This context file does not restate the environment's paths, sizes, or disk-guard
 rule; the file that owns them is
 [environment/storage.md § Access paths](../../environment/storage.md#access-paths).
 
 ## Where this came from
 
-Navigation: ⬅️ [The two filesystems](#the-two-filesystems) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [The two filesystems](#the-two-filesystems) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
 
 | What | How it was established | When |
 |---|---|---|
@@ -98,3 +99,90 @@ Navigation: ⬅️ [The two filesystems](#the-two-filesystems) | 📋 [TOC](#tab
 | The scorer's compose/blend rule | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json` | 2026-08-24 |
 | The two-filesystem split and its sync gaps | Read in `RETROFIT.md`, section 2 ("Moving") | 2026-08-24 |
 | The "cache only" measurement principle | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 compute notes | 2026-08-24 |
+
+<!-- related:start (drain) -->
+<a id="in-pictures-code-and-further-reading"></a>
+
+## 🖼️ In pictures, code and further reading
+
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
+
+The six stages above end in a picture and a label. The diagram below lays the stages in one line, the code shows the one loop that does stages two and three, and the pictures show what a cached step looks like.
+
+### How it fits together
+
+```mermaid
+flowchart LR
+  A["1. Pair and seed choose the run"]:::load --> B["2. SDXL denoises in 50 steps, one or more render methods"]:::work
+  B --> C["3. Each step's latent is cached"]:::work
+  C --> D["4. Images and summary.json written"]:::out
+  D --> E["5. Detector counts animals, label compose or blend"]:::judge
+  E --> F["6. Figures and review verdicts"]:::out
+  classDef load fill:#dbeafe,stroke:#333
+  classDef work fill:#e8e8f5,stroke:#333
+  classDef judge fill:#ede1fb,stroke:#333
+  classDef out fill:#dcfce7,stroke:#333
+```
+
+Key: blue loads the inputs, grey-purple is the sampling work, violet is the judgement, green is what lands on disk. The stage names are the page's own six; the page's "diagram wanted" slot for a rendered version stays open.
+
+### The code behind it
+
+Stages two and three are one loop. Excerpt from `poe_repair/methods/_sampling.py` (lines 171 to 182), from plain PoE's sampler `run_cfg_poe`:
+
+```python
+        eps_p = poe_eps(eps_a, eps_b, eps_uncond)
+        alpha_bar_t = scheduler.alphas_cumprod[int(timestep.item())].to(device=device, dtype=dtype)
+        x0 = tweedie_mean(latents, alpha_bar_t, eps_p)
+        tracker.store_step(
+            step_index, latents, eps_p,
+            float(step_index) / float(num_inference_steps),
+            int(timestep.item()),
+        )
+        latents = ddim_prev_from_x0_eps(
+            scheduler=scheduler, timestep=timestep, step_index=step_index,
+            x0=x0, eps=eps_p,
+        )
+```
+
+- `x0 = tweedie_mean(...)` is the running estimate of the finished image the page's stage three describes.
+- `tracker.store_step(...)` keeps that step's latent and combined prediction in memory, in the tracker `run_cfg_poe` returns. Saving it to disk is left to the calling script.
+- `ddim_prev_from_x0_eps(...)` takes the next step from that estimate.
+
+### What comes out
+
+<a href="../../data/pilot/seed_42/a_cat__x__a_dog/trajectory_manifold.png"><img src="../../data/pilot/seed_42/a_cat__x__a_dog/trajectory_manifold.png" width="200" alt="Four curves from one start point to four end stars"></a>
+
+One pair and seed (cat and dog, seed 42), four renders, their denoising paths projected to two axes (PC1/MDS1 across, PC2/MDS2 up), all leaving one shared start point `verified` (opened and read). No tracked script names this plot file, so its link to the stage three cache is unconfirmed.
+
+### Further illustrations
+
+**Evidence**
+
+<a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_000.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_000.png" width="200" alt="A grey blur at step 0"></a>
+<a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_010.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_010.png" width="200" alt="A dog-like face with coloured speckle at step 10"></a>
+<a href="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_050.png"><img src="../../1-lora-correction/artifacts/scenes/where-each-condition-lands/public/frames/poe/seed_12/step_050.png" width="200" alt="A finished face of a cat and dog mix at step 50"></a>
+
+The running estimate of the finished image for plain PoE, cat and dog, held-out seed 12, at steps 0, 10 and 50: a grey blur, a dog-like face with coloured speckle, and a finished fused face `verified` (opened and read). The scene's data file describes each frame as the Tweedie mean of that step, decoded, and the scene card says the final image is saved as step 50 `stated` (`public/data.json` and the scene card).
+
+**Scene**
+
+[From 173 cm to a Dog](https://claude.ai/artifact/NYeZh73Sg18F2Ui4ZvNxrV): three connected scenes from the heights of ten people to a sampler turning noise into a dog photo, the idea behind the page's "best guess of the clean image" `stated` (scene card; private to its owner until shared).
+
+### Go deeper
+
+| What | Link |
+|---|---|
+| The scene's card | [what sampling an image means](../../artifacts/scenes/what-sampling-an-image-means/README.md) |
+| The step-by-step scene's card | [where each condition lands](../../1-lora-correction/artifacts/scenes/where-each-condition-lands/README.md) |
+| The storage facts | [environment storage](../../environment/storage.md#access-paths) |
+| The fields in the files | [the dictionary](02-dictionary.md) |
+| What is produced | [what we produce](../purpose/02-what-we-produce.md) |
+
+### Still open
+
+- The page cites `fail_rate.md` and `scorer_validated.json`. Both exist only in the cluster checkout (checked 2026-11-21), because their `results/` folders are git-ignored. No sample of either is quoted.
+- No recorded run of stage ⑥ (a figure built from labels) is placed here.
+<!-- related:end -->
+
+<!-- built-to: PAGE_LOOK_FORMAT v1 -->
