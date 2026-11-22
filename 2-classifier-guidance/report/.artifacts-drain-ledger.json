@@ -105,6 +105,71 @@
    "sha256": "1a214dd99bcabd001ff39d25d03fe4efbb34798e4a8a157bc4179654824ac9b7",
    "state": "drained"
   },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/README.md": {
+   "at": "2026-11-22",
+   "sha256": "0e9c1d297052ab497d20049f41b8231a3863d7a14106f52a6db2e45471582b94",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/clip-pair-vs-smoosh-ranked.png": {
+   "at": "2026-11-22",
+   "sha256": "512e4b84a235778457edf5d40e14d3d5fb97f8b5af442c2c009362edd8416f90",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/hybrid-check-cosine-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "be13975906677831a57c837f6548b74b39daddbd367490e14857d652e6d72771",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-007500.png": {
+   "at": "2026-11-22",
+   "sha256": "7974ea93e9e8a25f61d44c3bf6581d162f82a0ed835b8dd827c4802b7a0d1265",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "dc40a7d05609506d928c4d3fd80ac298f8ca4e49dd4e1961af2c8b393f1badda",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__s0.png": {
+   "at": "2026-11-22",
+   "sha256": "23ada0fff5c2655f00bfd3f02d054d676d0b9555a2d331f9d9558bd92b359612",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__s30.png": {
+   "at": "2026-11-22",
+   "sha256": "e1c5ce42701b1756e3661faa03d1672844829bd941b0c8421198c5c63edfad8c",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__s100.png": {
+   "at": "2026-11-22",
+   "sha256": "b4087d17fc7df87b31d07bb3adc548c8f01ce1973cf92b9731f175414ad68ce7",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__s30.png": {
+   "at": "2026-11-22",
+   "sha256": "3cdd524e1a2cbeca01cded81789c315a650c55ab612015dfd6551b4fc719db9d",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__s30.png": {
+   "at": "2026-11-22",
+   "sha256": "c4904e4a6e3820df0130cdd1cd83f56f5b46a015388f2faff1c7197bd2495c4d",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__s300.png": {
+   "at": "2026-11-22",
+   "sha256": "0e52eb9dd1eb7ef85a5f27ce31f570af8f379d3d1c346dcb40c67ded2930dfd9",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/seed9-seven-ways.png": {
+   "at": "2026-11-22",
+   "sha256": "764611eb8c673b518c10fff5709ac3e006bc9925f914167ee433b351fdd16fd4",
+   "state": "drained"
+  },
+  "artifacts/results/can-a-classifier-supply-the-missing-term/species-test-calibration-sweep.png": {
+   "at": "2026-11-22",
+   "sha256": "b83274006ae7d4fb9a4480c6917667db9f9b7a88860ffc54516aae483a8d0f7f",
+   "state": "drained"
+  },
   "artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png": {
    "at": "2026-11-22",
    "sha256": "1b34602fd53bf0a8e1c65766043bcc3afb3b6e04fd8b1685b07492be58b035ec",
@@ -133,6 +198,161 @@
   "artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png": {
    "at": "2026-11-22",
    "sha256": "d315a6ebcf94b644106993f4232dd4e1ec8c7541d42aa21920aabeecc6d20f61",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/cat-piles/sheet_cat.png": {
+   "at": "2026-11-22",
+   "sha256": "f4bd296e94c3f56663b08e18b46b32f84501b48f0b0e833e55eae3bff1605e3c",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/cat-piles/sheet_no_cat.png": {
+   "at": "2026-11-22",
+   "sha256": "a6f95ca4d822144f10f513884074a9fa88786006ac78ae2d841b714effb291fc",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "4f3044327a5b2630bbc058e2de747e630328515396e52a4455c5cd8e30b8183f",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__no_prompt.png": {
+   "at": "2026-11-22",
+   "sha256": "4b60f18a880cd020919f92c9da6a8dab6147b3b6c76015f454e6cd3eead632dd",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "b056641a415d4d11741e53d3569d751c87283f9e6fc07488c4c1cb13b54a3941",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__pushs10.png": {
+   "at": "2026-11-22",
+   "sha256": "a945c6876be2f0c12aaba4fc5c1cdc57106089ac54685aeeeb9d42c48c14918d",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__pushs100.png": {
+   "at": "2026-11-22",
+   "sha256": "7734b115faf68a5895be343c744f8c1a46c0fa929b8d965245e3a164f10e3b5e",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__pushs300.png": {
+   "at": "2026-11-22",
+   "sha256": "b2a15ba7894277ae2f1c06b3ee3cab01927f83c1a28f0878bd9c3afcacb8d7f9",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "e2fd68d093dd9d4bff96655f546d34dcb90513737caef8a2566a6a4e5700b437",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__pushs10.png": {
+   "at": "2026-11-22",
+   "sha256": "b232a851ba20f986aa0869b343bbef4e0e3133a24cdf3c5a7b2f477136459e16",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__pushs30.png": {
+   "at": "2026-11-22",
+   "sha256": "ed8d6deeca16c7ce3a821c53bd1a8d876cc78275e29abdc2ee4694835077f7c0",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__no_prompt.png": {
+   "at": "2026-11-22",
+   "sha256": "de4054b1464a6ad13c5341e1b9cf06918cdfc55c29c9aeb9372e7d04499c3bff",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-piles-sheet_dog.png": {
+   "at": "2026-11-22",
+   "sha256": "32a495d065633b044f2a92d7adc842c642b7b7431a2f3d436cce58ea447768be",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-piles-sheet_no_dog.png": {
+   "at": "2026-11-22",
+   "sha256": "6de5e45ea60b9b337e4b3a71236041994774466b69c2fd8d94dae74f09fc7ca8",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "e492a6ab92e5478e6836d919d99d26ff8292c3059a2787e43f311bbc6c383c89",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/two-ends.png": {
+   "at": "2026-11-22",
+   "sha256": "ef53fcb6489d69df6cf44bf817aba4e74a220f37551893e3567ce2d3710ffa2a",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/what-the-helper-believes.png": {
+   "at": "2026-11-22",
+   "sha256": "2e6f0ff157f974f9b2976c93600ca165814cee9a9b899858e2401879e497979a",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md": {
+   "at": "2026-11-22",
+   "sha256": "6491439480d6a11923128027b05cbff1fd70b1c5aa18fa47491ba0b288c163ab",
+   "state": "drained"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png": {
+   "at": "2026-11-22",
+   "sha256": "5b8a8a27382c3fe53232d4a1139df4e88448b4151c9a8136ace1779a76a32d3d",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed9.png": {
+   "at": "2026-11-22",
+   "sha256": "17d724e69554fa7e03bab173a3f0f534a96eee116866774ed82c26855a9a8193",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed7.png": {
+   "at": "2026-11-22",
+   "sha256": "c52800734b4f518ae1edb4a703265a8ada15735c1a6d00029290fbe955065627",
+   "state": "drained"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed14.png": {
+   "at": "2026-11-22",
+   "sha256": "57218e40d1cff5b93d25cdc1cdd810b7f12744f23d3bbf7ad9d78f49aa0939cb",
+   "state": "drained"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed4.png": {
+   "at": "2026-11-22",
+   "sha256": "1c13bf36c4ee7d1affc10c693f29baa089f260741a1c69e897a8ef8f2053fb71",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed6.png": {
+   "at": "2026-11-22",
+   "sha256": "1a66f150857034282f1c27024655543f495ccc215fc3edd731b9d33fa8edaebc",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed4.png": {
+   "at": "2026-11-22",
+   "sha256": "b2f5a29e8e47e806083fc2413995770c018459fa976d577298d71caa43fbf185",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed0_plain.png": {
+   "at": "2026-11-22",
+   "sha256": "a6f750a973ada0fbfa719ea894a9f5ed4f1795c39513098cb6e07b509f29e42e",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed0_scale0.png": {
+   "at": "2026-11-22",
+   "sha256": "a6f750a973ada0fbfa719ea894a9f5ed4f1795c39513098cb6e07b509f29e42e",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png": {
+   "at": "2026-11-22",
+   "sha256": "88db6a6ddf8158f47d193261328bf99613930e8f3c8832120324e43030bfec79",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png": {
+   "at": "2026-11-22",
+   "sha256": "8c7e5595fe8fb34c34b0fef7107ca8f17af738acb732d3a6735ed7748085dc96",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png": {
+   "at": "2026-11-22",
+   "sha256": "2454d865928e73d62fc5bfc1721f6c553657792319b0464b62ab0127864bcd62",
+   "state": "skipped"
+  },
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png": {
+   "at": "2026-11-22",
+   "sha256": "c90d833348f102caaabead7d78aff9dc7521919624b447d495f5df1b04e3f62e",
    "state": "skipped"
   },
   "artifacts/results/what-each-line-of-classifier-guidance-computes/README.md": {
@@ -249,6 +469,218 @@
   "artifacts/results/32-mnist-two-experts/sheets/fixed-none-blank-4-7.png",
   "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor1.0-1-9.png",
   "artifacts/results/32-mnist-two-experts/sheets/side-ink-guided-e59-either-4-7.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/clip-guided-crops-and-flips.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/clip-guided-first-look.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/evidence_a_cat__x__a_dog.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/fullres-step7500-push0.5-seed10.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/fullres-step7500-push0.5-seed9.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/inclusive-kept-in-both.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/inclusive-removed-from-both.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/inclusive-sheet_both.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/inclusive-sheet_neither.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-000250.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-004000.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__joint.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__product.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__s10.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__s100.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__s30.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed09__s300.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__joint.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__product.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__s0.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__s10.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__s100.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed10__s300.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__joint.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__product.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__s0.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__s10.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed11__s300.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__joint.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__product.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__s0.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__s10.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/product-pushed-to-dog/tiles/seed12__s100.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/sheet_both_animals_present.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/sheet_neither_present.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/strong-probe-step-000500.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/strong-probe-step-004000.png",
+  "artifacts/results/can-a-classifier-supply-the-missing-term/the-eight-called-smooshed.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed09__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed10__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed11__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/tiles/seed12__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed09__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed10__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed12__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-probes",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed11__s0.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__a_dog.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__no_prompt.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__pushs10.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__pushs100.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__pushs30.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__pushs300.png",
+  "artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed12__s0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed14.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed4.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed6.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed7.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed9.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed14.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed4.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed6.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed7.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s1_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed14.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed4.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed6.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s10_seed9.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed7.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed9.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed14.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed4.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed6.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed7.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s10_seed9.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed1.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed10.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed11.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed12.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed13.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed14.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed15.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed2.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed3.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed5.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed6.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed7.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed8.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed9.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed1_plain.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed1_scale0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed2_plain.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed2_scale0.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed3_plain.png",
+  "artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed3_scale0.png",
   "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer.svg",
   "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer__2026-11-17.svg",
   "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_classifier.png",
