@@ -1,0 +1,29 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'fontSize': '15px', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef out fill:#f1f3f5,stroke:#868e96,stroke-width:2px,color:#495057
+  subgraph NOW["Now: discriminator results, 8.2 GB"]
+    direction TB
+    N1["72 folders in one flat list<br/>67 without a card"]:::plain
+    N2["13,229 files<br/>most are near-identical tiles"]:::plain
+    N1 --- N2
+  end
+  subgraph NEXT["Proposed: one folder per report page"]
+    direction TB
+    A["01 first quick test<br/>4 runs"]:::plain
+    B["02 can a checker read a clean pair<br/>15 runs"]:::plain
+    C["03 does an early push separate them<br/>17 runs"]:::plain
+    D["04 can a second push name each animal<br/>11 runs"]:::plain
+    E["05 does it carry to other pairs<br/>8 runs"]:::plain
+    F["06 how close it comes to the joint prompt<br/>15 runs"]:::plain
+    G["pools of training pictures<br/>2 pools"]:::plain
+    A --> B --> C --> D --> E --> F
+  end
+  subgraph OUT["Leaves the repo after a checksum match"]
+    direction TB
+    X[("/datasets<br/>10,591 run tiles, 7.0 GB")]:::out
+    Y[("Laptop folder outside the repo<br/>the same tiles, 964 surplus copies,<br/>720 guarded-subject files")]:::out
+  end
+  NOW --> NEXT
+  NEXT -.->|"after you approve"| OUT
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
