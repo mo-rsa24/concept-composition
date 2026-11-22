@@ -65,7 +65,8 @@ def block(unit, rows):
         kept = [e for e in sorted(os.listdir(unit)) if os.path.splitext(e)[0] == run and os.path.isfile(f"{unit}/{e}")]
         inside = f"{unit}/{run}"
         if os.path.isdir(inside):
-            kept += [f"{run}/{f}" for f in sorted(os.listdir(inside)) if f.lower().endswith((".png", ".jpg", ".jpeg", ".svg"))]
+            for folder, _, names in sorted(os.walk(inside)):
+                kept += [os.path.relpath(os.path.join(folder, f), unit) for f in sorted(names) if f.lower().endswith((".png", ".jpg", ".jpeg", ".svg"))]
         shown = ", ".join(f"[{os.path.basename(k)}]({k})" for k in kept) or "no picture"
         where = f"`{CLUSTER}/{unit}/{run}/`" if run != "(files at this level)" else f"`{CLUSTER}/{unit}/`"
         lines.append(f"| `{run}` | {count:,} | {size(total)} | {shown} | {where} |")

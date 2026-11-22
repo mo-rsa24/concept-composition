@@ -166,7 +166,6 @@
 2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/with-both-pushes/digits-3-and-8.png
 2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/sheets/fine-tuned-models-whole-canvas-with-both-pushes-and-extra-steps/digits-3-and-6.png
 2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/ways-of-composing-side-by-side.png
-2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png
 2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/imagenet-product-check-256.png
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/diagnostics.png
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png
@@ -229,9 +228,7 @@
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-presence-added.png
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/pools-of-training-pictures/benchmark-pool.jpg
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/pools-of-training-pictures/pair-runs-pool.jpg
-2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/dog-sheet.png
 2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/tiles/seed11__pushs30.png
-2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-piles-sheet_dog.png
 2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed12.png
 2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed2_plain.png
 2-classifier-guidance/artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer-light.png

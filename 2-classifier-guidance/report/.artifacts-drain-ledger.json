@@ -17,12 +17,12 @@
   },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
-   "sha256": "f0e4b79f43ce5d6d10ce16467dfaf14f68b51f4bece829ca9a07c246abd3caef",
+   "sha256": "58d8c777d094c02f04ae9077c0b2b09d29cd302bf3551e1c0d42c792e6a40d9a",
    "state": "drained"
   },
   "artifacts/results/can-a-classifier-supply-the-missing-term/README.md": {
    "at": "2026-11-22",
-   "sha256": "0e9c1d297052ab497d20049f41b8231a3863d7a14106f52a6db2e45471582b94",
+   "sha256": "ee78ad493d7077a808a706e799b49c78818885e9fa9394906c0193cf8640e7c7",
    "state": "drained"
   },
   "artifacts/results/can-a-classifier-supply-the-missing-term/clip-pair-vs-smoosh-ranked.png": {
@@ -87,7 +87,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "cfafca564937a36cd3630c92b636519f7df4cfcc0663321257bae0594acf6579",
+   "sha256": "c8adc985f57b32df558e01905ac32d3bdb46108ccf70149d683c8b88aaca9d09",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png": {
@@ -152,7 +152,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/README.md": {
    "at": "2026-11-22",
-   "sha256": "9ff72241f05d58ad21598c0f0bc8644844af64e45da751efd5f2f4562bbd5729",
+   "sha256": "1b8025a6a55193c21967275dfbf3f4d89dd1038045c2a30cc45da0831b832bf6",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/e59-either-alone-8.png": {
@@ -187,7 +187,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/README.md": {
    "at": "2026-11-22",
-   "sha256": "05d399fdf67b0533fa132053bb71d2defb7ec60f0a9d017d50e19432cbd5401b",
+   "sha256": "d0f5ed6cb5521c7a3571abf7e3ff84863cda950a8eb3783cdc202c02ffb4afd0",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png": {
@@ -207,7 +207,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/README.md": {
    "at": "2026-11-22",
-   "sha256": "0183dbc8e44f0742ad21a2084048861260652dd49e1b3d688ae15179afff24e4",
+   "sha256": "a99fe7ddba43fa672d6eb92bc43ee62aa918c1c22abad64e3e7f2de3fe1d77cc",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png": {
@@ -222,7 +222,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/README.md": {
    "at": "2026-11-22",
-   "sha256": "d8efc011f40bdbcd1d5cdd116353acc3930a39f3fa6f7606109eb5a1740e1855",
+   "sha256": "9dd8bfd501188bc9d8ae8f532615847ed5d0943227b6e2a47f7a67b563d7afda",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-first-checkers/digits-4-and-7.png": {
@@ -242,7 +242,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/README.md": {
    "at": "2026-11-22",
-   "sha256": "9cb9f2c0697be425cb505a72c9afaf59cda91ba8eb5231ed8a968bd02617994e",
+   "sha256": "1018f0f8eff997e9b247c5c1fdcacedccb7831c556fab8f323debbd191a00615",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/five-extra-steps/digits-4-and-7.png": {
@@ -262,7 +262,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "da41fc49b4c91ada07b7ea2817b00c171dff863f0eac392dad35b2333bde7dd3",
+   "sha256": "8c4f4161d43da6328255bcc21727474386f0bdce917dfb6596a82b6fe6770cc7",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-1.png": {
@@ -282,7 +282,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/README.md": {
    "at": "2026-11-22",
-   "sha256": "4a8983a61163cf6d7e05cfd07aa27552aa2f4e525c335b5719e1d4542db62bf3",
+   "sha256": "5b69ae72ec49aff063118c73a18c5bc828d9e3e46cabbbe441667cee2c92685f",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/sheets/side-chosen-every-step-other-half-hidden-with-both-pushes/digits-4-and-7.png": {
@@ -302,7 +302,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/README.md": {
    "at": "2026-11-22",
-   "sha256": "37fc2df07120118e3ec1cce0669e7cce9622ba3169bde98fce9471fbca2a6790",
+   "sha256": "8647cbf38ad6b0e21cefd2d11267ef17ba667ca3ae706f2b8f6e7f7dc5b74318",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/hide-the-other-half-and-join-explainer.png": {
@@ -332,7 +332,7 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "57fef5b45c6c8d931cac67765f215a7a44215ba4c3c913ac4f598ff635ee66cb",
+   "sha256": "c5db37f6862a3d9df04250172d6a07dbe7b7bcf46eadcb1b658354f49d3b6716",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/eye-calls-with-reasons.png": {
@@ -362,12 +362,12 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/README.md": {
    "at": "2026-11-22",
-   "sha256": "4261404e180a6958a013335dd3794551c1c53fd639e2995b5545d6aa9af46f8d",
+   "sha256": "79e804596d25420b448e2ea33d33936b1dd56805a75bcf281b92bc4503a1aeb8",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/README.md": {
    "at": "2026-11-22",
-   "sha256": "c81d7096155426d630f58ac64d1eabfe0e073842b7a1807cb1d867afd2901be3",
+   "sha256": "3e8d6d5d2d240380084b3ad934bc888e796d6a0adadafafca071606a3e194895",
    "state": "drained"
   },
   "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/fragments-and-speckle-explainer.png": {
@@ -392,7 +392,12 @@
   },
   "artifacts/results/can-two-digits-compose-on-mnist/README.md": {
    "at": "2026-11-22",
-   "sha256": "e91666a76e86bff4478ce27274ac8d34440a0c4cda8dd85ecabb1f7c205e349b",
+   "sha256": "d2c45927f814b919c8022c9e112df105351cfbeca4efbe6529fa6fe0dcde498a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3b493bacc6deb1021e7e83ba6293a16f4c5636542a7c98bd40137d0f049e481b",
    "state": "drained"
   },
   "artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png": {
@@ -425,19 +430,354 @@
    "sha256": "d315a6ebcf94b644106993f4232dd4e1ec8c7541d42aa21920aabeecc6d20f61",
    "state": "skipped"
   },
-  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/README.md": {
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/README.md": {
    "at": "2026-11-22",
-   "sha256": "64d0f549e2b3987a614659de8d3199109dd49472ab5cc8c23d70fd2b9da99b1b",
+   "sha256": "6c08bcd12b375142be82dcc178d580ba473aca52f15537e3e9147df80c3e704d",
    "state": "drained"
   },
-  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/top10-overlap-through-time.png": {
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/diagnostics.png": {
+   "at": "2026-11-22",
+   "sha256": "2f994e4e4018d959f4a698f430fa374eb8bb68bfe60875971eba839c9ef41f82",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator.png": {
+   "at": "2026-11-22",
+   "sha256": "15c20ffbae444a9d6be78ba8be7dcaf8dee625feea79800f9efcc100972dfdaf",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/training-set.png": {
+   "at": "2026-11-22",
+   "sha256": "026113aa08a589a0a8af9bdbfb4851388ab30e7a757f7b6961a4320c8e09a3cf",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/README.md": {
+   "at": "2026-11-22",
+   "sha256": "59ba40434d248a88b9dbcec3bb0c9d01a5ecda235fdc64153994a64dd68e9392",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/dataset-v4.jpg": {
+   "at": "2026-11-22",
+   "sha256": "ddd3bc4d6566abbee64ebfc136fca0d0545d5a8bbea0aa605cc5a12a83076624",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/finetune-misses.png": {
+   "at": "2026-11-22",
+   "sha256": "0c041eef6d26bf7b52ddd33b9b5a1301877a9fe5bb753616945ec67553820193",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/half-drawn-guesses.png": {
+   "at": "2026-11-22",
+   "sha256": "cb2ce2b29f0004fca0cdeffec3d2635688d629722697cf2bcbb46707e600436c",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/plan25-labels.png": {
+   "at": "2026-11-22",
+   "sha256": "34281615db8488388e27df66365269179b31e784a7447b97e6b12aa3bb2da87c",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-catdog-identity.png": {
+   "at": "2026-11-22",
+   "sha256": "41b612827cffdaa863125938febc37f6d06424017c6e52139a428a5ce38833e7",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-catdog-more2.png": {
+   "at": "2026-11-22",
+   "sha256": "ad666af2f26843c8af92e06c1267291f58305b13b9d078a9af1e53280f3da76d",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-catdog-more3-long.png": {
+   "at": "2026-11-22",
+   "sha256": "ee969a5e4b7bef39a30f3465c9f3d66458ad6b5fd9dff3d4edc534a6c14ed3a7",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-catdog-more3.png": {
+   "at": "2026-11-22",
+   "sha256": "a6537884d2e5c36f374e508aa92f8801940f5862e683e71c03ef6f29b799634b",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-v4c-early.png": {
+   "at": "2026-11-22",
+   "sha256": "381c5280a1fe24da0308a01c9e320804ce819fae3e8cd833e42c4b214f1ce2f9",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/02-can-a-checker-read-a-clean-pair/result-sheet-v4c.png": {
+   "at": "2026-11-22",
+   "sha256": "b349ae8b38af40e0d71fd9954988ca7873dcc86debc9f1c71c71ac956adb60e6",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5e53f214204337163316a33743feaa65b899675e1d4cbded3e524ff476ce9d23",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/attention.png": {
    "at": "2026-11-22",
    "sha256": "5f00ce601fd91e54c417d3bc9668907e9299c11e8ae4336c301019fdb2fd077a",
    "state": "drained"
   },
-  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png": {
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/clip-push-sheet-from0.png": {
    "at": "2026-11-22",
-   "sha256": "15c20ffbae444a9d6be78ba8be7dcaf8dee625feea79800f9efcc100972dfdaf",
+   "sha256": "66ac329c47ca36a1caed7fa72bc99f646aac66ad0751a6e75c192e7ee8226c0c",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/clip-push-sheet-from10.png": {
+   "at": "2026-11-22",
+   "sha256": "af13f1df2dd5b136479455241730e7021e45e4d0fe0d2f32abfff0185f8ab6f8",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/clip-push-sheet-halfdrawn.png": {
+   "at": "2026-11-22",
+   "sha256": "3c81c8b65bcd705dc3de3644c1625b729610ddb4518f3ad0be8b980e3a43372c",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/push-then-pick.png": {
+   "at": "2026-11-22",
+   "sha256": "a7695ff2e7cdbf46787a9ace192aa3215d36ce3bd009b15f291eceba1688b48a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-backward.png": {
+   "at": "2026-11-22",
+   "sha256": "6796320df15e67e0906268659ceb905d3127c53afbe39f275d0f439028b3177a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-cap0.3-early-corrector.png": {
+   "at": "2026-11-22",
+   "sha256": "b969c87adc048c68455791e476dfe73e8f488aa2a2e9ac74ddf278fad572595f",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-general-cap0.2.png": {
+   "at": "2026-11-22",
+   "sha256": "cbfc6b5a2e1e3b612c3110e7162b2ce7b21f95f5aeb3b5e5e03867bde0ad8143",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-general.png": {
+   "at": "2026-11-22",
+   "sha256": "748e31144f784b68abc967bb9325288f4b35f904b62a324b51051d0b342968aa",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-identity-cap0.3-early.png": {
+   "at": "2026-11-22",
+   "sha256": "074e11941f6b7ccf5a587a585e345673516247f217d18fcaadb7a09fd8dfc12a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-identity-cap0.3-late.png": {
+   "at": "2026-11-22",
+   "sha256": "6282f587c17c3264c8c299c4d9d1be5adca1de87986be16bc3105361720d281a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-identity-cap0.3.png": {
+   "at": "2026-11-22",
+   "sha256": "15f7984e2206d97e425320d07fab9c0a69cd228d27d91fe8de19d80d4e8778b6",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-identity-cap0.5.png": {
+   "at": "2026-11-22",
+   "sha256": "434b68e6bca822a257a8ccd8c59a89458e9fdfa1895f45cd7efeb516c6b0fd9d",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/03-does-an-early-push-separate-them/result-sheet-catdog-identity-recur3.png": {
+   "at": "2026-11-22",
+   "sha256": "78b7542df23e18a1cfc3a404d533883369e528dc8e39cf721e405c5e8e09f9d7",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/README.md": {
+   "at": "2026-11-22",
+   "sha256": "643b7a958498b41b18fc382cb56deee688152268b6b7780d8e0eaae35a295ed4",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/not-hybrid.png": {
+   "at": "2026-11-22",
+   "sha256": "e741b60588a0ed2d56cb8e556492c19995febf5b8772cd5ade4109fd324f1d72",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-bodies.png": {
+   "at": "2026-11-22",
+   "sha256": "3456d08f05bd22159dff2aed191df0cfbbc82cfcd65218f08dd0867c2eb11441",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-both.png": {
+   "at": "2026-11-22",
+   "sha256": "74f87407435605ff2cc56e6500f92c34b1fd1b23474fda899d5bf8203421c025",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-boxes-confident.png": {
+   "at": "2026-11-22",
+   "sha256": "71cf94bc70182fac7e9e8fbc1de3b773e58ebeae7e06da994ad4f0f8aac3f082",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-boxes.png": {
+   "at": "2026-11-22",
+   "sha256": "a9b7a394aeb6159cc97d0b5cd9f1da415984804055222707e6432e5dc22916db",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-every-step-general.png": {
+   "at": "2026-11-22",
+   "sha256": "fb43494840dbf8b30236eca3122429fc98ae6f037986cf0d4c354dd4039c5ace",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-every-step-presence.png": {
+   "at": "2026-11-22",
+   "sha256": "e450265c97482c27c7202b8e90a1b415094b7400018d3536342ede0d7ba43060",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-every-step-species10.png": {
+   "at": "2026-11-22",
+   "sha256": "0cf5412ff3b49e5afb7a5f4c162a8c055e35fc2579025a032a7a9fed6be02740",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-every-step-species30.png": {
+   "at": "2026-11-22",
+   "sha256": "68bec7a98b885cb08cead1ed921a232564b258c27438ae8fe67d413e2dfa9b88",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/04-can-a-second-push-name-each-animal/result-sheet-catdog-species.png": {
+   "at": "2026-11-22",
+   "sha256": "c843c61e2faf911aa0236eb89446450a71afd4157f21965c63d0708f9bb8df0b",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "cd34cde01b237a00c30916e2873298f70706af79ae3ad13602975bd5b13bfe1b",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat-multipair-cap0.4.png": {
+   "at": "2026-11-22",
+   "sha256": "c6adfa1e2d579adaf65765826228d33d9c37ded1f99f1951df7d0c631086ef34",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat-multipair-long.png": {
+   "at": "2026-11-22",
+   "sha256": "312fb9da073e2717165fe1e0bf9ccd7ca4692fc77cad0d8c247a944ff4234c54",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat-multipair-presence.png": {
+   "at": "2026-11-22",
+   "sha256": "1224601ee1c25dac0cae7313d81cab2de43aaa10cec2957752afd6474f7e34d9",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat-multipair.png": {
+   "at": "2026-11-22",
+   "sha256": "ca1388a245fa656f7b9387cb8417b707d098004fa39ab93538fe5e352bf44064",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat-multipair2.png": {
+   "at": "2026-11-22",
+   "sha256": "75f0bb6fac4032e2ef17acf9ea0fb2fac2b54eca6025c49a4c4c6cd8152e0a8f",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-lion-meerkat.png": {
+   "at": "2026-11-22",
+   "sha256": "c9f42d6aa9f223d29657857768e0574cd518ba487021e4dcd60ed9f9416e8cfb",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/05-does-it-carry-to-other-pairs/result-sheet-typewriter-cactus.png": {
+   "at": "2026-11-22",
+   "sha256": "177e0a36f43639eb3d38a7a3e261bbde964fc412fcffc9b83fe39153abedc95c",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/README.md": {
+   "at": "2026-11-22",
+   "sha256": "340bcb156572c4778c9c5fd98d1e6e38b3a45d3f8b6e684ea425c5bf750f12f3",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/co3-catdog-eval.png": {
+   "at": "2026-11-22",
+   "sha256": "b2474fbe6ba4457d7191097edea3e415898f60ce8a6b5af35642e6d6291b000a",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/joint-catdog-eval.png": {
+   "at": "2026-11-22",
+   "sha256": "d116c810ba3065cb1ce928889600269b8a3fc1f70368db2512bf9cde884ec391",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-multipair-cap0.4.png": {
+   "at": "2026-11-22",
+   "sha256": "0d2cf7a1dc299dadb5ef7bcc80c9180d37f917934301bb17d5e5e7d2f944bfbe",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-multipair-long.png": {
+   "at": "2026-11-22",
+   "sha256": "8b86d151563b9e1b6b409224d847d23ba4db752c00a7b9de875fd9afcf36e40f",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-multipair-presence.png": {
+   "at": "2026-11-22",
+   "sha256": "fda8847636200ca37d8ae795d3034d3091ef4722d4251d6bc5c7e86fd491ce97",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-multipair.png": {
+   "at": "2026-11-22",
+   "sha256": "54a40afbc3ac5ea8832fa75be7ab29e3ceca86d711823a1f7a3a99a888452aae",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-multipair2.png": {
+   "at": "2026-11-22",
+   "sha256": "ef9a6994e2ccb93546cf681701e51506a32ceeee0b3f0731d5ec6c0e222ae4c2",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-rerun.png": {
+   "at": "2026-11-22",
+   "sha256": "7672bf895ce126b397eb0492d097605a970343fb68a8f4f52564afe3049f00e5",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-traj.png": {
+   "at": "2026-11-22",
+   "sha256": "0a4ac83d1a687ce49054271488fba09b9ae3d70740e5c4444c40d3e5539c7b03",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big-window25.png": {
+   "at": "2026-11-22",
+   "sha256": "184f2fc6f73445323d9896b5bc469c4d2e534b8b08d79d9a33f0270d8ce974a9",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-big.png": {
+   "at": "2026-11-22",
+   "sha256": "890595b2bf800440335b79949a021c333750f70643dbb120bc5a3c6befa1d134",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-eta1.png": {
+   "at": "2026-11-22",
+   "sha256": "12410f439266f2ee329ba0687d291a6a4c65238c396e8b8e23d7d4a94f993d50",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-general-iter4.png": {
+   "at": "2026-11-22",
+   "sha256": "fd528eeedea8d6d26d2f22e5f1d3363990753ea5076bab0911ac1bbdd38803d4",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-general-rerun.png": {
+   "at": "2026-11-22",
+   "sha256": "ab0f24aea40ac0f9f019c6bba86ad63e80c73c641a11779e7d353d6c48bb148b",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/06-how-close-it-comes-to-the-joint-prompt/result-sheet-catdog-presence-added.png": {
+   "at": "2026-11-22",
+   "sha256": "f7f1aba67eb7374ff9bd28ea128424c11d653904b48fe9d45fb4542644d02ee2",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "75a3899e0b5cd975289e34e8baebb55102714ad5f81e30cad9dbbccc29380266",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/pools-of-training-pictures/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f622ca57ac7af04c382ed3e61d1484082d8af4a67c3aedec78de4162d0287580",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/pools-of-training-pictures/benchmark-pool.jpg": {
+   "at": "2026-11-22",
+   "sha256": "129efae5ad8dcac6b4fc05a51a54df9a5ae03b529ca5b7bcda4b69afa5f15575",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/pools-of-training-pictures/pair-runs-pool.jpg": {
+   "at": "2026-11-22",
+   "sha256": "9d1c448c3f57d7097e03fba0b948f1bd4bef8860acf38ccba743b866c12101d5",
+   "state": "drained"
+  },
+  "artifacts/results/does-classifier-guidance-draw-a-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3bb4d24055b9dd8e1bec0f0bc16f6fec72339ab8da9fc94a25ccdfa5035a9bcd",
    "state": "drained"
   },
   "artifacts/results/does-classifier-guidance-draw-a-dog/cat-piles/sheet_cat.png": {
@@ -527,7 +867,7 @@
   },
   "artifacts/results/does-classifier-guidance-work-on-the-released-weights/README.md": {
    "at": "2026-11-22",
-   "sha256": "c980a22edca2ede99fed6ed2186e703a3802599985bc31bd2ee849784e425efa",
+   "sha256": "dae216e7aeeb18cb5ae61605a3a7151ad76a470cb382970f3c0dd047234fecb4",
    "state": "drained"
   },
   "artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png": {
@@ -597,7 +937,7 @@
   },
   "artifacts/results/what-each-line-of-classifier-guidance-computes/README.md": {
    "at": "2026-11-22",
-   "sha256": "05d77e89c282da9ca62a7e3eb7a4fd05eba52cb23f649566566ff30dc7531f90",
+   "sha256": "f7b7218fa73af6297e363ad7505bf5fbf7e9e036683f3420e4766f0ac6c1815a",
    "state": "drained"
   },
   "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-codewalk.html": {
@@ -627,7 +967,7 @@
   },
   "artifacts/results/what-each-line-of-our-guided-sampler-computes/README.md": {
    "at": "2026-11-22",
-   "sha256": "71a09aac2d8dda15e54f0e67dc90c41b69e7778ceb63bb423bb1076e6ad3f623",
+   "sha256": "1d4fbbe8e532aad45d5981d37d512dfa2b35e4d402f70ebf16996db475896a21",
    "state": "drained"
   },
   "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-codewalk.html": {
@@ -652,7 +992,7 @@
   },
   "artifacts/results/what-each-line-of-readout-guidance-computes/README.md": {
    "at": "2026-11-22",
-   "sha256": "ef8335bdd3a173c8a556762f2ff9852be4487430dbf209af15368eefc2c298a3",
+   "sha256": "ae71598e59957b4c0f0cf3ed074e84e4158a29f7252cb32a425bc5274b32e412",
    "state": "drained"
   },
   "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-codewalk.html": {
@@ -678,6 +1018,11 @@
   "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer-light.png": {
    "at": "2026-11-22",
    "sha256": "2845bff68c4b8bbbede51726c6e714529a508449ebccf18fceac1ac1b30e87f5",
+   "state": "drained"
+  },
+  "artifacts/scenes/mnist-judge/README.md": {
+   "at": "2026-11-22",
+   "sha256": "4994d718922670d8159ea6d317f3cddcc1524e2da87168ce0ec4a9cff8e38a3b",
    "state": "drained"
   }
  },

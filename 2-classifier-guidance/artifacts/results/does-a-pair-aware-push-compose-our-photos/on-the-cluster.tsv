@@ -1,5 +1,6 @@
 file	bytes	sha256	cluster_path
 coco-both-crops.png	2601349	1b34602fd53bf0a8e1c65766043bcc3afb3b6e04fd8b1685b07492be58b035ec	/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png
+example-one-per-label.png	473142	391959ffe2fd45e543572667505ae43a588bd59b982ea297e6855ddf0c042c1a	/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png
 preview-product-256-draws.png	2072165	320be50f8e3140a1cf57b2e4d129373d6f26bd505ef79c69ce23d38f80cf1c7a	/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-draws.png
 preview-product-256-imagenet-draws.png	1524539	2ff090cb2fdc4cf53ad2ce8cd0f72bddb8c9fa0be98e0655e955aa36df4b9c26	/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-imagenet-draws.png
 push-scale-check-256.png	1364182	d315a6ebcf94b644106993f4232dd4e1ec8c7541d42aa21920aabeecc6d20f61	/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png

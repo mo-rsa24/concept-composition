@@ -219,5 +219,8 @@ Every picture that failed the [subject guard](../../../scripts/shared/disallowed
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-more3-hard/tiles/seed14__s30.png` | not cleared | no page |
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-typewriter-cactus/seed3301__s30.png` | not cleared | no page |
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-v4c/tiles/seed02__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png` | held: holds COCO photographs fetched from the web | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-piles-sheet_dog.png` | held: sampled from piles that include COCO photographs fetched from the web | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-a-cat/dog-sheet.png` | held: a faint line drawing behind the cat on seed 9 could not be cleared | no page |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

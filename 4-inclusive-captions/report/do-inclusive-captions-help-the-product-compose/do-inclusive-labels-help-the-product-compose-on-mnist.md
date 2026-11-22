@@ -163,6 +163,5 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
 - [ ] Settle tasks 5.2, 5.3 and 6.1 of plan 02, which the walk reports on and the plan leaves unticked.
-- [ ] Write this folder's card. It has none, so the figure's provenance sits only in the plan and the scorer.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

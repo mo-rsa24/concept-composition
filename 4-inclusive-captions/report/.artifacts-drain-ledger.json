@@ -17,7 +17,12 @@
   },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
-   "sha256": "15d11600bcf60711093156e24327711ccc6b62640146236ef7227fdf230a0c10",
+   "sha256": "a15d148b3396e532a4012702b1e1fede24abed78d633b8ac1f5c2a22dac77e74",
+   "state": "drained"
+  },
+  "artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5ac08fa8300e6762f1ffa4807f3abe855a51100a20931a2148f2bae348572ca7",
    "state": "drained"
   },
   "artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png": {
@@ -47,7 +52,7 @@
   },
   "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/README.md": {
    "at": "2026-11-22",
-   "sha256": "267d72a0e6ba4d3eb4598852eeef97eec6860014059e8f187df3c1a2d50b39b2",
+   "sha256": "fb043bd18e7a0a2bda8825ff4a123f8790cda29a9c89ebbd9e1fca9b7355e996",
    "state": "drained"
   },
   "artifacts/results/does-relabelling-both-shapes-pictures-help-the-toy-product-compose/every-caption-with-and-without-the-corrector.png": {
@@ -77,7 +82,7 @@
   },
   "artifacts/results/does-the-share-of-two-digit-pictures-help-the-product-compose-on-mnist/README.md": {
    "at": "2026-11-22",
-   "sha256": "d66be34ce88a66501041bb28427ed91c403e480eb7249871cc63f652cc2551a7",
+   "sha256": "1e262d516c22a5566237db7b1ade30efe62201c690ea3749e0190bbf3575f3c6",
    "state": "drained"
   },
   "artifacts/results/does-the-share-of-two-digit-pictures-help-the-product-compose-on-mnist/guidance-1-first-six-models.png": {
@@ -87,7 +92,7 @@
   },
   "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md": {
    "at": "2026-11-22",
-   "sha256": "fa95c737beb4714b3c645451ae14f078e341820a1191e56c2d53fc0cd2ec58f3",
+   "sha256": "728c02ec65680417fad97eea364be1e465ee3754884c1b85e02218a3c117c2a2",
    "state": "drained"
   },
   "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png": {
