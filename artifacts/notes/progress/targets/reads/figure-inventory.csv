@@ -306,3 +306,17 @@ CountLoop,2508.16644,6,9,CountLoop achieves significantly improved object count 
 CountLoop,2508.16644,7,11,Left: Counting error (MAE) rises with instance count. Right: Runtime curves echo the same
 CountLoop,2508.16644,8,13,Per-regime MAE at representative instance counts on CountLoop-S. Categories are
 CountLoop,2508.16644,9,14,Failure cases
+CoMat,2404.03653,1,1,Current text-to-image diffusion model still struggles to produce images well-aligned with
+CoMat,2404.03653,2,2,Visualization of token activation and attention map. We compare the tokens’ attention
+CoMat,2404.03653,3,4,We showcase the results of our CoMat-SDXL compared with other state-of-the-art models.
+CoMat,2404.03653,4,5,Overview of CoMat. The text-to-image diffusion model (T2I-Model) first generates an
+CoMat,2404.03653,5,7,"Overview of Attribute Concentration. Given a prompt, we first generate an image and"
+CoMat,2404.03653,6,9,Visualization of the effectiveness of the proposed modules. CA contributes to the existence
+CoMat,2404.03653,7,10,Visualization result of the effectiveness of the Fidelity Preservation module (FP) and Mixed
+CoMat,2404.03653,8,18,User preference study results.
+CoMat,2404.03653,9,18,Pipeline for integrating CoMat-SDXL with planning-based method. CoMat-SDXL correctly
+CoMat,2404.03653,10,19,Examples for the three core sensitivities.
+CoMat,2404.03653,11,24,More Comparisons between SDXL and CoMat-SDXL on complex prompts. All pairs are
+CoMat,2404.03653,12,25,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the
+CoMat,2404.03653,13,26,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the
+CoMat,2404.03653,14,27,More Comparisons between SDXL and CoMat-SDXL. All pairs are generated with the

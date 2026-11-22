@@ -49,6 +49,9 @@ def main():
         sys.exit(f'{len(repeated)} repeated ids, first: {repeated[:3]}')
 
     for row in rows:
+        # A method on the rival list is `published` in any paper's table, including one read before it joined.
+        if row['kind'] == 'baseline' and row['paper'] in papers:
+            row['kind'] = 'published'
         if row['id'] in kept:
             row['second_read'] = kept[row['id']]
 

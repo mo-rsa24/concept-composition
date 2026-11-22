@@ -38,7 +38,7 @@ def main():
             settled = {row['id']: row for row in csv.DictReader(handle)}
 
     second = {}
-    retries = sorted((SECOND / 'retry').glob('*.csv')) if (SECOND / 'retry').exists() else []
+    retries = [p for folder in ('retry', 'extra') for p in sorted((SECOND / folder).glob('*.csv'))]
     for path in sorted(SECOND.glob('*.csv')) + retries:
         with path.open(newline='') as handle:
             for row in csv.DictReader(handle):

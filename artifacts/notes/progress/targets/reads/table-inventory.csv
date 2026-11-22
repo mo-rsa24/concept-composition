@@ -158,3 +158,11 @@ CountLoop,2508.16644,1,10,"Counting and spatial quality across benchmarks. We re
 CountLoop,2508.16644,2,11,"Analysis of CountLoop components, critic choices, and human evaluation. (a) Design-critic"
 CountLoop,2508.16644,3,12,Backbone swap.
 CountLoop,2508.16644,4,13,Component swap on CountLoop-S.
+CoMat,2404.03653,1,7,"T2I-CompBench result. The best score is in blue , with the second-best score in green ."
+CoMat,2404.03653,2,8,TIFA and DPG-Bench results. Table 3: FID-10K result.
+CoMat,2404.03653,3,8,FID-10K result.
+CoMat,2404.03653,4,9,Impact of concept activation and attribute concentration. ‘CA’ and ‘AC’ denote concept
+CoMat,2404.03653,5,9,The impact of different image-to-text models.
+CoMat,2404.03653,6,10,Success rate of prompt attack.
+CoMat,2404.03653,7,20,Statistics of image-to-text models.
+CoMat,2404.03653,8,22,CoMat training hyperparameters for SD1.5 and SDXL.

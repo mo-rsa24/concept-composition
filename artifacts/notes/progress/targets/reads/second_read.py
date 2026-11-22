@@ -102,12 +102,22 @@ def retry_jobs():
     return grouped
 
 
+def missing_jobs():
+    """Every cell that can set a target and has no second read yet, grouped by page."""
+    grouped = defaultdict(list)
+    with NUMBERS.open(newline='') as handle:
+        for row in csv.DictReader(handle):
+            if selected(row) and not row['second_read']:
+                grouped[f"{source_paper(row)}-p{row['source_page']}"].append(row)
+    return grouped
+
+
 def run_job(name, rows, pdfs, timeout, shown=SHOWN, out_dir=OUT):
     target = out_dir / f'{name}.csv'
     if target.exists():
         return name, 'skipped', len(rows)
     paper, page = name.rsplit('-p', 1)
-    folder = WORK / ('retry' if out_dir != OUT else '') / name
+    folder = WORK / (out_dir.name if out_dir != OUT else '') / name
     folder.mkdir(parents=True, exist_ok=True)
     image = folder / 'page.png'
     if not image.exists():
@@ -153,11 +163,13 @@ def main():
     parser.add_argument('--timeout', type=int, default=900)
     parser.add_argument('--retry', action='store_true',
                         help='re-read only the cells the first pass could not place, with their settings')
+    parser.add_argument('--missing', action='store_true',
+                        help='read only the cells with no second read yet, with their settings')
     args = parser.parse_args()
 
-    grouped = retry_jobs() if args.retry else jobs()
-    shown = SHOWN_RETRY if args.retry else SHOWN
-    out_dir = OUT / 'retry' if args.retry else OUT
+    grouped = missing_jobs() if args.missing else retry_jobs() if args.retry else jobs()
+    shown = SHOWN_RETRY if args.retry or args.missing else SHOWN
+    out_dir = OUT / 'extra' if args.missing else OUT / 'retry' if args.retry else OUT
     if args.list:
         for name, rows in sorted(grouped.items()):
             state = 'done' if (out_dir / f'{name}.csv').exists() else 'todo'
