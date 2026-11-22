@@ -1,0 +1,927 @@
+{
+ "outcome": "two papers, each beating its best rival",
+ "detours": [
+  "Detour: idea walk, 7 claims, paused",
+  "Detour: zoom-ladder, about 430k tokens"
+ ],
+ "detours_join": "P2",
+ "steps": [
+  {
+   "id": "P0",
+   "label": "ICLR paper submitted and reviewed",
+   "owner": "you",
+   "proof": "The submission and its replies exist",
+   "needs": [],
+   "state": "done",
+   "objective": "Save what exists",
+   "serves": "Both papers"
+  },
+  {
+   "id": "P1",
+   "label": "Proofs of concept: toy, MNIST, SDXL",
+   "owner": "you",
+   "proof": "Plans 24, 32, 33 and the rung 2 checker are recorded",
+   "needs": [
+    "P0"
+   ],
+   "state": "done",
+   "objective": "Save what exists",
+   "serves": "Both papers"
+  },
+  {
+   "id": "P2",
+   "label": "Agree order and lanes",
+   "owner": "you",
+   "proof": "The user said go on 2026-11-21",
+   "needs": [
+    "P1"
+   ],
+   "state": "done",
+   "objective": "Save what exists",
+   "serves": "Both papers"
+  },
+  {
+   "id": "A1",
+   "label": "A1 Protect writing/: paper has git history",
+   "owner": "you",
+   "proof": "git ls-files writing/iclr lists the paper and paper/ deletions are committed",
+   "needs": [
+    "P2"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T21:07:01+02:00",
+   "note": "commit 473aaab5: 185 files tracked under writing/, 187 paper/ paths accounted for",
+   "objective": "Save what exists",
+   "serves": "Both papers"
+  },
+  {
+   "id": "A2",
+   "label": "A2 Commit batches: git status clean",
+   "owner": "s1",
+   "proof": "git status --short prints nothing outside named live work",
+   "needs": [
+    "A1"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T22:02:05+02:00",
+   "note": "6 commits, 19a7f822 to b7dd7ccc; 23 paths left are the planning session and shared board",
+   "objective": "Save what exists",
+   "serves": "Both papers"
+  },
+  {
+   "id": "B1",
+   "label": "B1 Close 11 sessions: 11 closing notes",
+   "owner": "s1",
+   "proof": "11 notes exist in artifacts/notes/session-closes/",
+   "needs": [
+    "A2"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T22:27:45+02:00",
+   "note": "11 notes in artifacts/notes/session-closes, all written from transcripts",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers"
+  },
+  {
+   "id": "T1",
+   "label": "T1 Index other 73: one line each",
+   "owner": "s1",
+   "proof": "session-index.md has 73 rows with a verdict",
+   "needs": [
+    "B1"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T22:33:23+02:00",
+   "note": "73 rows: 29 safe, 3 git-ignored outputs, 17 moved or removed, 16 uncommitted, 8 missing",
+   "objective": "Absorb and check the record",
+   "serves": "Upkeep"
+  },
+  {
+   "id": "T2",
+   "label": "T2 Archive safe sessions: picker shows live work",
+   "owner": "s1",
+   "proof": "Each archived transcript is restorable and listed in the index",
+   "needs": [
+    "T1"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T23:50:47+02:00",
+   "note": "18 archived with restore commands, 11 safe sessions kept, picker checked: 49 to 37 in the root project",
+   "objective": "Absorb and check the record",
+   "serves": "Upkeep"
+  },
+  {
+   "id": "B2",
+   "label": "B2 Absorb records: drift log matches disk",
+   "owner": "s1",
+   "proof": "/absorb-sessions census has no stale record left open",
+   "needs": [
+    "T2"
+   ],
+   "state": "done",
+   "updated": "2026-11-21T23:55:31+02:00",
+   "note": "bf70ecc8: drift entry written, 22 of 23 stale rename rows mapped, row 19 recorded as not found; disagreements in plans reported, unchanged",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers"
+  },
+  {
+   "id": "R1",
+   "label": "R1 File the MNIST experiments: ordered folders, cards, eye count",
+   "owner": "s1",
+   "proof": "plan 33's results are in an ordered folder with a card and thumbnails, every figure is placed, and the 15 judge-rejected tiles on pairs 3-8 and 4-9 are called by eye",
+   "needs": [
+    "B2"
+   ],
+   "state": "done",
+   "updated": "2026-11-22T06:11:06+02:00",
+   "started": "2026-11-22T05:09:21+02:00",
+   "finished": "2026-11-22T06:11:06+02:00",
+   "note": "2a183212 and 6d47b763: three ordered stages, 11 new pages, every plan 33 figure placed, 15 tiles called by eye (1,201 to 1,208 of 1,280, awaiting the owner)",
+   "objective": "Absorb and check the record",
+   "serves": "Paper 1"
+  },
+  {
+   "id": "R2",
+   "label": "R2 Draw each MNIST network: input, architecture, output",
+   "owner": "later",
+   "proof": "the three MNIST stage pages and steps 2, 3 and 7 each show a picture of the network's input, layers and output, from zoom-ladder or a deep-learning-scene miniature",
+   "needs": [
+    "R1"
+   ],
+   "state": "todo",
+   "updated": "2026-11-22T06:19:10+02:00",
+   "note": "planned by the owner for later; start from stage 1's network-view figures and the mnist-guidance-explained scene, then cover the two models and the checkers",
+   "objective": "Absorb and check the record",
+   "serves": "Paper 1"
+  },
+  {
+   "id": "B3",
+   "label": "B3 Drain all projects: new 0, changed 0",
+   "owner": "s2",
+   "proof": "sweep.py prints new 0 changed 0 for each project",
+   "needs": [
+    "A2",
+    "R1"
+   ],
+   "state": "done",
+   "updated": "2026-11-22T06:45:22+02:00",
+   "note": "sweep prints new 0 changed 0 for all six",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers",
+   "started": "2026-11-22T05:07:21+02:00",
+   "finished": "2026-11-22T06:45:22+02:00"
+  },
+  {
+   "id": "B4",
+   "label": "B4 Void list: false results named",
+   "owner": "s2",
+   "proof": "void-list.md names each false result, its reason and source",
+   "needs": [
+    "B3"
+   ],
+   "state": "done",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers",
+   "started": "2026-11-22T06:45:32+02:00",
+   "finished": "2026-11-22T06:45:32+02:00",
+   "updated": "2026-11-22T06:45:32+02:00",
+   "note": "void-list.md: 21 rows, each with reason, source and who decides"
+  },
+  {
+   "id": "T3",
+   "label": "T3 Prune list: unused files, with reasons",
+   "owner": "s2",
+   "proof": "prune-list.md: every file unreferenced, with size and reason",
+   "needs": [
+    "B4"
+   ],
+   "state": "todo",
+   "objective": "Tidy the project",
+   "serves": "Upkeep"
+  },
+  {
+   "id": "T4",
+   "label": "T4 Approved files moved to _archive/",
+   "owner": "s2",
+   "proof": "Only files the user approved moved, with a restore manifest",
+   "needs": [
+    "T3",
+    "O1"
+   ],
+   "state": "todo",
+   "objective": "Tidy the project",
+   "serves": "Upkeep"
+  },
+  {
+   "id": "O1",
+   "label": "O1 Organise classifier guidance and captions",
+   "owner": "s2",
+   "proof": "artifacts/notes/progress/organise-plan.md is approved; every shipped file has a matching checksum on /datasets; both trees follow the approved layout; every link still resolves",
+   "needs": [
+    "B4"
+   ],
+   "state": "doing",
+   "objective": "Tidy the project",
+   "serves": "Upkeep",
+   "started": "2026-11-22T06:45:41+02:00",
+   "updated": "2026-11-22T06:49:08+02:00",
+   "note": "12,508 discriminator files on /datasets, checksums match; rest copying; three agents picking one picture per folder"
+  },
+  {
+   "id": "B5",
+   "label": "B5 Pillars pass; cluster storage mapped",
+   "owner": "s3",
+   "proof": "Each pillar audit passes and environment holds the storage map",
+   "needs": [
+    "A2"
+   ],
+   "state": "done",
+   "updated": "2026-11-22T05:17:21+02:00",
+   "started": "2026-11-21T22:17:20+02:00",
+   "finished": "2026-11-22T05:17:21+02:00",
+   "note": "context and environment audits PASS; runbook's one remaining failed check fixed and confirmed; owner accepted the declared exceptions; storage map in environment/storage.md",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers"
+  },
+  {
+   "id": "T5",
+   "label": "T5 Tidy repos: only known folders remain",
+   "owner": "s3",
+   "proof": "tidy-repo census reports no unexplained folder",
+   "needs": [
+    "B5"
+   ],
+   "state": "done",
+   "started": "2026-11-22T05:55:38+02:00",
+   "updated": "2026-11-22T06:08:04+02:00",
+   "finished": "2026-11-22T06:08:04+02:00",
+   "note": "census: all 32 root entries accounted for, 0 unexplained; 10 declared in CLAUDE.md, no file moved",
+   "objective": "Tidy the project",
+   "serves": "Upkeep"
+  },
+  {
+   "id": "K1",
+   "label": "K1 List every rival for both papers",
+   "owner": "s4",
+   "proof": "rivals.md lists each rival with its arXiv id, PDF, datasets and read state",
+   "needs": [],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "K2",
+   "label": "K2 Read every number from the papers",
+   "owner": "s4",
+   "proof": "numbers.csv: every row has a page, and every row that sets a target has a second read",
+   "needs": [
+    "K1"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "K3",
+   "label": "K3 Look at every result figure",
+   "owner": "s4",
+   "proof": "failures.md names how each method fails, by page, figure and dataset",
+   "needs": [
+    "K1"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "K4",
+   "label": "K4 Find where each method breaks",
+   "owner": "s4",
+   "proof": "limits.md names the best result, its holder and the breaking condition per dataset and metric",
+   "needs": [
+    "K2",
+    "K3"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "K5",
+   "label": "K5 Set targets on the scoreboard",
+   "owner": "s4",
+   "proof": "Every scoreboard row traces to a page with a second read, and the owner said yes",
+   "needs": [
+    "K4"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "K6",
+   "label": "K6 Keep every target current",
+   "owner": "s4",
+   "proof": "E1 and E2 are done, every scoreboard row matches its latest source, and progress_views.py --check-final prints PASS",
+   "needs": [
+    "K5"
+   ],
+   "state": "todo",
+   "serves": "Both papers",
+   "objective": "Know the field"
+  },
+  {
+   "id": "B6",
+   "label": "B6 One page: what we know",
+   "owner": "s3",
+   "proof": "what-we-know.md: finding, evidence and status per claim",
+   "needs": [
+    "B2",
+    "B4",
+    "T5"
+   ],
+   "state": "todo",
+   "objective": "Absorb and check the record",
+   "serves": "Both papers"
+  },
+  {
+   "id": "C1",
+   "label": "C1 Two scouts: one verified idea table",
+   "owner": "s3",
+   "proof": "Claude and GPT-6 Astra tables merged, each row checked in the paper",
+   "needs": [
+    "B6"
+   ],
+   "state": "todo",
+   "objective": "Know the field",
+   "serves": "Both papers"
+  },
+  {
+   "id": "C3",
+   "label": "C3 Benchmark spec: data, metric, samples",
+   "owner": "s3",
+   "proof": "benchmark-spec.md copies each rival dataset, split, metric and count",
+   "needs": [
+    "C1",
+    "K2"
+   ],
+   "state": "todo",
+   "objective": "Know the field",
+   "serves": "Both papers"
+  },
+  {
+   "id": "C4",
+   "label": "C4 Draft statements survive pressure test",
+   "owner": "s3",
+   "proof": "Two problem statements with their /pressure-test verdicts",
+   "needs": [
+    "C1",
+    "C3",
+    "K5"
+   ],
+   "state": "todo",
+   "objective": "Know the field",
+   "serves": "Both papers"
+  },
+  {
+   "id": "D1",
+   "label": "D1 Paper repo: MNIST table, one command",
+   "owner": "s3",
+   "proof": "One command in the new repo reprints the MNIST table",
+   "needs": [
+    "C4"
+   ],
+   "state": "todo",
+   "objective": "Build and test",
+   "serves": "Paper 1"
+  },
+  {
+   "id": "C2",
+   "label": "C2 Your readings: statements confirmed",
+   "owner": "you",
+   "proof": "Five combined readings done and the statements confirmed",
+   "needs": [
+    "C1"
+   ],
+   "state": "todo",
+   "objective": "Know the field",
+   "serves": "Both papers"
+  },
+  {
+   "id": "D2",
+   "label": "D2 Rivals reproduce one published number",
+   "owner": "later",
+   "proof": "A reproduced-or-not table, one row per rival",
+   "needs": [
+    "D1"
+   ],
+   "state": "todo",
+   "objective": "Build and test",
+   "serves": "Both papers"
+  },
+  {
+   "id": "D3",
+   "label": "D3 Checker architecture chosen",
+   "owner": "later",
+   "proof": "One architecture chosen on small data, with the comparison saved",
+   "needs": [
+    "D1"
+   ],
+   "state": "todo",
+   "objective": "Build and test",
+   "serves": "Paper 2"
+  },
+  {
+   "id": "D4",
+   "label": "D4 Go or no-go per paper",
+   "owner": "you",
+   "proof": "A written go or no-go for each paper against its bar",
+   "needs": [
+    "C2",
+    "D2",
+    "D3",
+    "K5"
+   ],
+   "state": "todo",
+   "objective": "Build and test",
+   "serves": "Both papers"
+  },
+  {
+   "id": "E1",
+   "label": "E1 Paper 1 tables with intervals",
+   "owner": "later",
+   "proof": "Full tables with confidence intervals and image grids",
+   "needs": [
+    "D4"
+   ],
+   "state": "todo",
+   "objective": "Scale with intervals",
+   "serves": "Paper 1"
+  },
+  {
+   "id": "E2",
+   "label": "E2 Paper 2 tables with intervals",
+   "owner": "later",
+   "proof": "Full tables with confidence intervals and image grids",
+   "needs": [
+    "D4"
+   ],
+   "state": "todo",
+   "objective": "Scale with intervals",
+   "serves": "Paper 2"
+  },
+  {
+   "id": "F1",
+   "label": "F1 Paper 1 submitted, code public",
+   "owner": "you",
+   "proof": "Submission receipt and public repository",
+   "needs": [
+    "E1"
+   ],
+   "state": "todo",
+   "objective": "Write and submit",
+   "serves": "Paper 1"
+  },
+  {
+   "id": "F2",
+   "label": "F2 Paper 2 submitted, code public",
+   "owner": "you",
+   "proof": "Submission receipt and public repository",
+   "needs": [
+    "E2"
+   ],
+   "state": "todo",
+   "objective": "Write and submit",
+   "serves": "Paper 2"
+  }
+ ],
+ "blocks": [
+  {
+   "id": "save",
+   "title": "🛟 PhD: Approve Saving The ICLR Paper",
+   "kind": "you",
+   "minutes": 15,
+   "steps": [
+    "A1"
+   ],
+   "needs": [
+    "P2"
+   ],
+   "tentative": false,
+   "event_id": "vsem6odiu1r3sld7894a07h5og",
+   "start": "2026-11-22T06:00:00+02:00",
+   "end": "2026-11-22T06:15:00+02:00",
+   "finished": true,
+   "color": "5",
+   "description": "DONE: your ICLR paper now has git history under writing/ (commit 473aaab5).\n\nWHAT IT DID: moved the paper from paper/ to writing/ in git. All 187 old files were accounted for. writing/overleaf-iclr stayed out because it has its own Overleaf history.\n\nYOU DO: nothing more here.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: save",
+   "synced": "39867d79e761"
+  },
+  {
+   "id": "lane1",
+   "title": "🗂️ PhD: Close And Archive Claude Sessions (Loop)",
+   "kind": "loop",
+   "minutes": 360,
+   "steps": [
+    "A2",
+    "B1",
+    "T1",
+    "T2",
+    "B2"
+   ],
+   "needs": [
+    "A1"
+   ],
+   "tentative": true,
+   "event_id": "b6gjmgoqsp0733ujbd4h5dph1o",
+   "start": "2026-11-21T21:10:00+02:00",
+   "end": "2026-11-21T23:55:40+02:00",
+   "color": "9",
+   "description": "BEFORE: nothing to prepare.\n\n1. PASTE into a new Claude session opened at /home/molef/PhD/concept-composition:\n/loop Follow artifacts/notes/progress/prompts/session-1-records.md to its end. Read artifacts/notes/progress/prompts/shared-rules.md on every tick.\n\n2. IT DOES: commits the changed work in named batches, closes your 11 chosen sessions, indexes the other 73 and archives the ones that are safe.\n\n3. YOU DO: say yes to the commit batches once. After the first archive, check that the session picker still works.\n\nOUTCOME: nothing is unsaved, and every session has a note or an index line.\nDONE WHEN: git status is clean, 11 closing notes exist, 73 sessions are indexed, and the drift log matches the disk.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: lane1",
+   "synced": "a36aae842b7f",
+   "finished": true
+  },
+  {
+   "id": "lane2",
+   "title": "🧹 PhD: Drain And Sort Artifacts (Loop)",
+   "kind": "loop",
+   "minutes": 720,
+   "steps": [
+    "B3",
+    "B4",
+    "T3",
+    "O1"
+   ],
+   "needs": [
+    "A2"
+   ],
+   "tentative": true,
+   "event_id": "iuv6rp5eu38cq2k6hajjvm9vg0",
+   "start": "2026-11-21T22:05:00+02:00",
+   "end": "2026-11-22T13:30:00+02:00",
+   "color": "6",
+   "description": "BEFORE: start it any time. It waits on the board until Session 1 finishes the commits.\n\n1. PASTE into a new Claude session opened at /home/molef/PhD/concept-composition:\n/loop Follow artifacts/notes/progress/prompts/session-2-artifacts.md to its end. Read artifacts/notes/progress/prompts/shared-rules.md on every tick.\n\n2. IT DOES: drains each project's artifacts into report pages, names results that are false, and lists files nothing refers to. It deletes nothing.\n\n3. YOU DO: say yes to the first pilot page.\n\nOUTCOME: every result can be found from a report page.\nDONE WHEN: the sweep prints new 0, changed 0 for every project, and the void and prune lists are written.\n\nADDED STEP O1: organise the classifier guidance and inclusive captions artifact folders, which waits on your approval of artifacts/notes/progress/organise-plan.md.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: lane2",
+   "synced": "40a9b798efbb"
+  },
+  {
+   "id": "lane3",
+   "title": "🏛️ PhD: Refresh Pillars And Tidy Repos (Loop)",
+   "kind": "loop",
+   "minutes": 360,
+   "steps": [
+    "B5",
+    "T5"
+   ],
+   "needs": [
+    "A2"
+   ],
+   "tentative": true,
+   "event_id": "gobr645hl8aar9drnt0dst5rgs",
+   "start": "2026-11-21T22:05:00+02:00",
+   "end": "2026-11-22T06:06:40+02:00",
+   "color": "3",
+   "description": "BEFORE: start it any time. It waits on the board until Session 1 finishes the commits.\n\n1. PASTE into a new Claude session opened at /home/molef/PhD/concept-composition:\n/loop Follow artifacts/notes/progress/prompts/session-3-pillars-and-repo.md to its end. Read artifacts/notes/progress/prompts/shared-rules.md on every tick.\n\n2. IT DOES: brings context, environment and runbook up to their current standards, maps cluster storage and tidies the repository.\n\n3. YOU DO: nothing here.\n\nOUTCOME: the pillars describe the project as it is today.\nDONE WHEN: each pillar passes its audit, the storage map is written, and the root holds only known folders.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: lane3",
+   "synced": "727242c1078e",
+   "finished": true
+  },
+  {
+   "id": "review",
+   "title": "📋 PhD: Review The Void And Prune Lists",
+   "kind": "you",
+   "minutes": 45,
+   "steps": [
+    "T4"
+   ],
+   "needs": [
+    "T3"
+   ],
+   "tentative": false,
+   "color": "4",
+   "description": "BEFORE: Session 2 has written the two lists.\n\n1. OPEN: /home/molef/PhD/concept-composition/artifacts/notes/progress/void-list.md and prune-list.md.\n\n2. DO BY HAND: for each result marked false, agree or disagree. For each file proposed for retirement, keep it or approve the move.\n\n3. TELL SESSION 2 which rows you approve.\n\nOUTCOME: false results are named, and unused files move to _archive/ with a restore list.\nDONE WHEN: only the files you approved have moved. Nothing is deleted.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: review"
+  },
+  {
+   "id": "join",
+   "title": "🧭 PhD: Join Loop From What We Know To Paper Repo",
+   "kind": "loop",
+   "minutes": 600,
+   "steps": [
+    "B6",
+    "C1",
+    "C3",
+    "C4",
+    "D1"
+   ],
+   "needs": [
+    "B2",
+    "B4",
+    "T5"
+   ],
+   "tentative": true,
+   "event_id": "8lod7km4airbn5k5mprtbrrtv0",
+   "start": "2026-11-22T06:50:00+02:00",
+   "end": "2026-11-22T16:50:00+02:00",
+   "color": "2",
+   "description": "BEFORE: nothing. Session 3 starts this by itself once the records, void list and tidy are green. This block moves earlier if they finish early.\n\n1. IT DOES, in order: writes one page of what we know, scouts the field with Claude and GPT-6 Astra separately, writes the benchmark spec, drafts both problem statements and pressure-tests them, then builds the paper repository.\n\n2. YOU DO: read the page of what we know. Say yes to the two problem statements before the repository is built.\n\nOUTCOME: we know what we have, what the field has, and what each paper claims.\nDONE WHEN: one command in the new paper repository reprints the MNIST table.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: join",
+   "synced": "e44957cc5c33"
+  },
+  {
+   "id": "read1",
+   "title": "📖 PhD: Read When A Product Is Valid",
+   "kind": "you",
+   "minutes": 90,
+   "steps": [
+    "C2"
+   ],
+   "needs": [
+    "C1"
+   ],
+   "tentative": false,
+   "color": "1",
+   "description": "BEFORE: the field table from step C1 exists. Have your iPad open.\n\n1. PASTE into a fresh Claude session at /home/molef/PhD/concept-composition:\n/drip-read --combine --lean \"when a product of experts is valid\"\n\n2. READ: Liu, Bradley 2025, Bradley 2025b, CoInD.\n\n3. DO BY HAND: write one sentence on what this idea means for Paper 1 or Paper 2.\n\nOUTCOME: you can say how these papers agree and differ on this idea.\nDONE WHEN: the combined reading is saved and your sentence is written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: read1"
+  },
+  {
+   "id": "read2",
+   "title": "📖 PhD: Read Composing By Regions",
+   "kind": "you",
+   "minutes": 90,
+   "steps": [
+    "C2"
+   ],
+   "needs": [
+    "C1"
+   ],
+   "tentative": false,
+   "color": "1",
+   "description": "BEFORE: the field table from step C1 exists. Have your iPad open.\n\n1. PASTE into a fresh Claude session at /home/molef/PhD/concept-composition:\n/drip-read --combine --lean \"composing diffusion models by regions\"\n\n2. READ: Diffusion Domain Expansion, MultiDiffusion, PiCo, FreeFuse.\n\n3. DO BY HAND: write one sentence on what this idea means for Paper 1 or Paper 2.\n\nOUTCOME: you can say how these papers agree and differ on this idea.\nDONE WHEN: the combined reading is saved and your sentence is written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: read2"
+  },
+  {
+   "id": "read3",
+   "title": "📖 PhD: Read Samplers And Correctors",
+   "kind": "you",
+   "minutes": 90,
+   "steps": [
+    "C2"
+   ],
+   "needs": [
+    "C1"
+   ],
+   "tentative": false,
+   "color": "1",
+   "description": "BEFORE: the field table from step C1 exists. Have your iPad open.\n\n1. PASTE into a fresh Claude session at /home/molef/PhD/concept-composition:\n/drip-read --combine --lean \"samplers and correctors for composition\"\n\n2. READ: Du 2023, Feynman-Kac Correctors, CFG as a predictor-corrector.\n\n3. DO BY HAND: write one sentence on what this idea means for Paper 1 or Paper 2.\n\nOUTCOME: you can say how these papers agree and differ on this idea.\nDONE WHEN: the combined reading is saved and your sentence is written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: read3"
+  },
+  {
+   "id": "read4",
+   "title": "📖 PhD: Read When A Sample Commits",
+   "kind": "you",
+   "minutes": 90,
+   "steps": [
+    "C2"
+   ],
+   "needs": [
+    "C1"
+   ],
+   "tentative": false,
+   "color": "1",
+   "description": "BEFORE: the field table from step C1 exists. Have your iPad open.\n\n1. PASTE into a fresh Claude session at /home/molef/PhD/concept-composition:\n/drip-read --combine --lean \"when a diffusion sample commits\"\n\n2. READ: Biroli, Achilli, Albrychiewicz.\n\n3. DO BY HAND: write one sentence on what this idea means for Paper 1 or Paper 2.\n\nOUTCOME: you can say how these papers agree and differ on this idea.\nDONE WHEN: the combined reading is saved and your sentence is written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: read4"
+  },
+  {
+   "id": "read5",
+   "title": "📖 PhD: Read Amplifying A Product",
+   "kind": "you",
+   "minutes": 90,
+   "steps": [
+    "C2"
+   ],
+   "needs": [
+    "C1"
+   ],
+   "tentative": false,
+   "color": "1",
+   "description": "BEFORE: the field table from step C1 exists. Have your iPad open.\n\n1. PASTE into a fresh Claude session at /home/molef/PhD/concept-composition:\n/drip-read --combine --lean \"amplifying a product of experts\"\n\n2. READ: CO3, Compositional Sculpting, Okawa, Wang et al..\n\n3. DO BY HAND: write one sentence on what this idea means for Paper 1 or Paper 2.\n\nOUTCOME: you can say how these papers agree and differ on this idea.\nDONE WHEN: the combined reading is saved and your sentence is written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: read5"
+  },
+  {
+   "id": "rivals",
+   "title": "🔁 PhD: Reproduce The Rival Methods",
+   "kind": "you",
+   "minutes": 120,
+   "steps": [
+    "D2"
+   ],
+   "needs": [
+    "D1"
+   ],
+   "tentative": false,
+   "color": "8",
+   "description": "BEFORE: the paper repository and benchmark spec exist.\n\n1. OPEN: /home/molef/PhD/concept-composition/artifacts/notes/progress/benchmark-spec.md and pick the next rival.\n\n2. RUN: /drip-repo on its code, then /drip-execute-plan --reproduce on one published number, on bigbatch or biggpu.\n\n3. DO BY HAND: compare our number with the paper's.\n\nOUTCOME: we can trust our runs of each rival.\nDONE WHEN: a table shows reproduced or not, one row per rival.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: rivals"
+  },
+  {
+   "id": "arch",
+   "title": "🧠 PhD: Choose The Checker Architecture",
+   "kind": "you",
+   "minutes": 120,
+   "steps": [
+    "D3"
+   ],
+   "needs": [
+    "D1"
+   ],
+   "tentative": false,
+   "color": "10",
+   "description": "BEFORE: the field table and paper repository exist.\n\n1. OPEN: /home/molef/PhD/concept-composition/artifacts/notes/progress/field-table.md and shortlist checker architectures, including diffusion transformers.\n\n2. RUN: each one on small data, on bigbatch or biggpu.\n\n3. DO BY HAND: compare the image sheets beside the numbers.\n\nOUTCOME: one checker design we can scale.\nDONE WHEN: one architecture is chosen and the comparison is saved.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: arch"
+  },
+  {
+   "id": "gonogo",
+   "title": "🚦 PhD: Decide Go Or No-Go For Each Paper",
+   "kind": "you",
+   "minutes": 60,
+   "steps": [
+    "D4"
+   ],
+   "needs": [
+    "C2",
+    "D2",
+    "D3"
+   ],
+   "tentative": false,
+   "color": "11",
+   "description": "BEFORE: your readings, the rival reproductions and the checker choice are done.\n\n1. OPEN: /home/molef/PhD/concept-composition/artifacts/notes/progress/problem-statements.md.\n\n2. DO BY HAND: for each paper, read its result against its bar. Write go or no-go with one reason.\n\nOUTCOME: only a paper with a real chance goes on to full-scale runs.\nDONE WHEN: both decisions are written.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: gonogo"
+  },
+  {
+   "id": "lane4",
+   "title": "🎯 PhD: Read Rivals And Set Targets (Loop)",
+   "kind": "loop",
+   "minutes": 480,
+   "steps": [
+    "K1",
+    "K2",
+    "K3",
+    "K4",
+    "K5"
+   ],
+   "needs": [],
+   "color": "7",
+   "description": "BEFORE: nothing. It reads papers and files and runs no experiments.\n\n1. IT RUNS as the background session 🎯 PhD Loop 4: Read Rivals And Set Targets, following:\nartifacts/notes/progress/prompts/session-4-rivals-and-targets.md\n\n2. IT DOES: reads every rival paper's tables and figures, finds where each method breaks, and sets 4 to 6 targets per paper from what the rivals actually report.\n\n3. YOU DO: say yes to the targets when the scoreboard is shown.\n\nOUTCOME: a scoreboard whose every target traces to a page in a rival's paper.\nDONE WHEN: steps K1 to K5 are green and you have said yes to the targets.\n\nMAP: /home/molef/PhD/concept-composition/artifacts/notes/progress/map.png\nSCOREBOARD: /home/molef/PhD/concept-composition/artifacts/notes/progress/scoreboard.png\nPLAN: /home/molef/PhD/concept-composition/plans/route-two-papers.md\nprogress-board: lane4",
+   "event_id": "8vrmlh6rpna2v2knlgvu1av398",
+   "start": "2026-11-22T06:40:00+02:00",
+   "end": "2026-11-22T14:40:00+02:00",
+   "synced": "31b15b34f97c"
+  }
+ ],
+ "groups": [
+  {
+   "id": "S0",
+   "title": "SO FAR",
+   "steps": [
+    "P0",
+    "P1",
+    "P2"
+   ]
+  },
+  {
+   "id": "SA",
+   "title": "A. SAVE, WITH YOUR APPROVAL",
+   "steps": [
+    "A1",
+    "A2"
+   ]
+  },
+  {
+   "id": "LOOP",
+   "title": "THE LOOP: THREE SESSIONS AT ONCE",
+   "style": "fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px",
+   "lanes": [
+    {
+     "id": "L1",
+     "title": "Session 1: records",
+     "steps": [
+      "B1",
+      "T1",
+      "T2",
+      "B2",
+      "R1",
+      "R2"
+     ]
+    },
+    {
+     "id": "L2",
+     "title": "Session 2: artifacts",
+     "steps": [
+      "B3",
+      "B4",
+      "T3",
+      "T4",
+      "O1"
+     ]
+    },
+    {
+     "id": "L3",
+     "title": "Session 3: pillars and repo",
+     "steps": [
+      "B5",
+      "T5"
+     ]
+    },
+    {
+     "id": "L4",
+     "title": "Session 4: rivals and targets",
+     "steps": [
+      "K1",
+      "K2",
+      "K3",
+      "K4",
+      "K5",
+      "K6"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "JOIN",
+   "title": "THE LOOP, AFTER THE LANES JOIN",
+   "style": "fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px",
+   "steps": [
+    "B6",
+    "C1",
+    "C3",
+    "C4",
+    "D1"
+   ]
+  },
+  {
+   "id": "CAL",
+   "title": "ON YOUR CALENDAR",
+   "style": "fill:#fff9db,stroke:#f08c00",
+   "steps": [
+    "C2",
+    "D2",
+    "D3",
+    "D4"
+   ],
+   "joiner": "~~~"
+  },
+  {
+   "id": "SE",
+   "title": "E. SCALE ON BIGBATCH AND BIGGPU",
+   "steps": [
+    "E1",
+    "E2"
+   ],
+   "joiner": "~~~"
+  },
+  {
+   "id": "SF",
+   "title": "F. WRITE",
+   "steps": [
+    "F1",
+    "F2"
+   ],
+   "joiner": "~~~"
+  }
+ ],
+ "sessions": {
+  "s1": {
+   "id": "3d5aedc9",
+   "name": "Loop 1"
+  },
+  "s2": {
+   "id": "b9eefeed",
+   "name": "Loop 2"
+  },
+  "s3": {
+   "id": "62aa5f03",
+   "name": "Loop 3"
+  },
+  "s4": {
+   "id": "pending",
+   "name": "Loop 4"
+  }
+ },
+ "objectives": [
+  "Save what exists",
+  "Absorb and check the record",
+  "Tidy the project",
+  "Know the field",
+  "Build and test",
+  "Scale with intervals",
+  "Write and submit"
+ ],
+ "brief": {
+  "outcome": "two papers, each beating its best rival",
+  "bars": "artifacts/notes/progress/scoreboard.json",
+  "may_decide": "Reversible choices with a recommended default, inside artifacts/notes/progress/prompts/shared-rules.md",
+  "must_ask": "Anything deleted or moved outside an approved list; two sources disagreeing on a result; a file that looks like a secret, client data or patient data; a step whose proof cannot be met",
+  "stop_when": "All of a session's steps are done, or every remaining step is waiting on the owner"
+ },
+ "questions": [
+  {
+   "id": 1,
+   "question": "Paper 2's ImageReward bar must be within 0.1 of what?",
+   "holds": "Paper 2's third bar, which cannot be judged",
+   "default": "the method the checker is added to, CO3 or the product",
+   "by": "planning session",
+   "state": "answered",
+   "asked": "2026-11-22T06:28:19+02:00",
+   "answer": "Withdrawn: the owner removed the guessed bars on 2026-11-22, and Loop 4 sets targets from the rivals' papers",
+   "answered": "2026-11-22T06:35:37+02:00"
+  }
+ ]
+}

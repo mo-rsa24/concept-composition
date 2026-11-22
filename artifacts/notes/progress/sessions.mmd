@@ -1,0 +1,72 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 16, 'rankSpacing': 26}}}%%
+flowchart TB
+  classDef done fill:#b2f2bb,color:#111111
+  classDef doing fill:#ffd8a8,color:#111111
+  classDef todo fill:#e9ecef,color:#111111
+  classDef note fill:#ffffff,stroke:#c92a2a,stroke-dasharray:5 5,color:#c92a2a
+  now["Sessions at 07:02 · 14 of 37 steps done"]
+  style now fill:#ffffff,stroke:#ffffff,color:#111111
+  subgraph L0["Loop 1 · idle · all done"]
+    direction LR
+    d0["6 done"]:::done
+  end
+  subgraph L1["Loop 2 · working · 3 left · ETA 60 min to 20.7 h"]
+    direction LR
+    d1["2 done"]:::done --> n_T3["T3: Prune list: unused<br/>files, with reasons"]:::todo --> n_T4["T4: Approved files moved to<br/>_archive/"]:::todo --> n_O1["O1: Organise classifier<br/>guidance and captions"]:::doing
+  end
+  subgraph L2["Loop 3 · next run 07:10 · 5 left · ETA 3.0 h to 49.0 h"]
+    direction LR
+    d2["2 done"]:::done --> n_B6["B6: One page: what we know"]:::todo --> n_C1["C1: Two scouts: one verified<br/>idea table"]:::todo --> n_C3["C3: Benchmark spec: data,<br/>metric, samples<br/>waits on K2"]:::todo --> n_C4["C4: Draft statements survive<br/>pressure test<br/>waits on K5"]:::todo --> n_D1["D1: Paper repo: MNIST table,<br/>one command"]:::todo
+  end
+  subgraph L3["Loop 4 · not running · 6 left · ETA 2.6 h to 42.0 h"]
+    direction LR
+    n_K1["K1: List every rival for<br/>both papers"]:::todo --> n_K2["K2: Read every number from<br/>the papers"]:::todo --> n_K3["K3: Look at every result<br/>figure"]:::todo --> n_K4["K4: Find where each method<br/>breaks"]:::todo --> n_K5["K5: Set targets on the<br/>scoreboard"]:::todo --> n_K6["K6: Keep every target<br/>current"]:::todo
+  end
+  subgraph L4["You · next C2, opens in 51 min or more"]
+    direction LR
+    n_C2["C2: Your readings:<br/>statements confirmed<br/>waits on C1"]:::todo ~~~ n_D4["D4: Go or no-go per paper<br/>waits on D2, D3, K5"]:::todo ~~~ n_F1["F1: Paper 1 submitted, code<br/>public<br/>waits on E1"]:::todo ~~~ n_F2["F2: Paper 2 submitted, code<br/>public<br/>waits on E2"]:::todo
+  end
+  subgraph L5["Later · no session yet · no ETA"]
+    direction LR
+    later["R2, D2, D3, E1, E2"]:::todo
+  end
+  subgraph L6["Working, not on the map"]
+    direction LR
+    off0["7b. 🧪 MNIST digits on a<br/>canvas: how good mu…"]:::todo
+  end
+  subgraph L7["Flags"]
+    direction LR
+    flag0["1 uncommitted file edited by two<br/>sessions, such as<br/>scripts/progress_board.py"]:::note
+  end
+  now ~~~ L0 ~~~ L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7
+  style L0 fill:#e8f0fd,stroke:#2f6fde,stroke-width:3px
+  style d0 stroke:#2f6fde,stroke-width:3px
+  style L1 fill:#fff0f6,stroke:#d6336c,stroke-width:3px
+  style d1 stroke:#d6336c,stroke-width:3px
+  style n_T3 stroke:#d6336c,stroke-width:3px
+  style n_T4 stroke:#d6336c,stroke-width:3px
+  style n_O1 stroke:#d6336c,stroke-width:3px
+  style L2 fill:#e6f8f5,stroke:#12a594,stroke-width:3px
+  style d2 stroke:#12a594,stroke-width:3px
+  style n_B6 stroke:#12a594,stroke-width:3px
+  style n_C1 stroke:#12a594,stroke-width:3px
+  style n_C3 stroke:#12a594,stroke-width:3px
+  style n_C4 stroke:#12a594,stroke-width:3px
+  style n_D1 stroke:#12a594,stroke-width:3px
+  style L3 fill:#f5effb,stroke:#8e4ec6,stroke-width:3px
+  style n_K1 stroke:#8e4ec6,stroke-width:3px
+  style n_K2 stroke:#8e4ec6,stroke-width:3px
+  style n_K3 stroke:#8e4ec6,stroke-width:3px
+  style n_K4 stroke:#8e4ec6,stroke-width:3px
+  style n_K5 stroke:#8e4ec6,stroke-width:3px
+  style n_K6 stroke:#8e4ec6,stroke-width:3px
+  style L4 fill:#fff9db,stroke:#222222,stroke-width:3px
+  style n_C2 stroke:#222222,stroke-width:3px
+  style n_D4 stroke:#222222,stroke-width:3px
+  style n_F1 stroke:#222222,stroke-width:3px
+  style n_F2 stroke:#222222,stroke-width:3px
+  style L5 fill:#f8f9fa,stroke:#868e96,stroke-width:3px
+  style later stroke:#868e96,stroke-width:3px
+  style L6 fill:#ffffff,stroke:#868e96,stroke-width:3px
+  style off0 stroke:#868e96,stroke-width:3px
+  style L7 fill:#ffffff,stroke:#c92a2a,stroke-width:3px

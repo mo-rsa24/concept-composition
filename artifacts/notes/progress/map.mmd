@@ -1,0 +1,66 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 18, 'rankSpacing': 28}}}%%
+flowchart TB
+  classDef done fill:#b2f2bb,stroke:#2b8a3e,color:#111111
+  classDef doing fill:#ffd8a8,stroke:#e8590c,stroke-width:3px,color:#111111
+  classDef todo fill:#e9ecef,stroke:#868e96,color:#111111
+  classDef detour fill:#ffffff,stroke:#868e96,stroke-dasharray:5 5,color:#111111
+  classDef goal fill:#ffffff,stroke:#222222,stroke-width:3px,color:#111111
+  subgraph S0["SO FAR"]
+    direction LR
+    P0["ICLR paper submitted and reviewed"]:::done --> P1["Proofs of concept: toy, MNIST, SDXL"]:::done --> P2["Agree order and lanes"]:::done
+  end
+  subgraph SA["A. SAVE, WITH YOUR APPROVAL"]
+    direction LR
+    A1["A1 Protect writing/: paper has git history"]:::done --> A2["A2 Commit batches: git status clean"]:::done
+  end
+  subgraph LOOP["THE LOOP: THREE SESSIONS AT ONCE"]
+    direction LR
+    subgraph L1["Session 1: records"]
+      direction TB
+      B1["B1 Close 11 sessions: 11 closing notes"]:::done --> T1["T1 Index other 73: one line each"]:::done --> T2["T2 Archive safe sessions: picker shows live work"]:::done --> B2["B2 Absorb records: drift log matches disk"]:::done --> R1["R1 File the MNIST experiments: ordered folders, cards, eye count"]:::done --> R2["R2 Draw each MNIST network: input, architecture, output"]:::todo
+    end
+    subgraph L2["Session 2: artifacts"]
+      direction TB
+      B3["B3 Drain all projects: new 0, changed 0"]:::done --> B4["B4 Void list: false results named"]:::done --> T3["T3 Prune list: unused files, with reasons"]:::todo --> T4["T4 Approved files moved to _archive/"]:::todo --> O1["O1 Organise classifier guidance and captions<br/>YOU ARE HERE"]:::doing
+    end
+    subgraph L3["Session 3: pillars and repo"]
+      direction TB
+      B5["B5 Pillars pass; cluster storage mapped"]:::done --> T5["T5 Tidy repos: only known folders remain"]:::done
+    end
+    subgraph L4["Session 4: rivals and targets"]
+      direction TB
+      K1["K1 List every rival for both papers"]:::todo --> K2["K2 Read every number from the papers"]:::todo --> K3["K3 Look at every result figure"]:::todo --> K4["K4 Find where each method breaks"]:::todo --> K5["K5 Set targets on the scoreboard"]:::todo --> K6["K6 Keep every target current"]:::todo
+    end
+  end
+  subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
+    direction LR
+    B6["B6 One page: what we know"]:::todo --> C1["C1 Two scouts: one verified idea table"]:::todo --> C3["C3 Benchmark spec: data, metric, samples"]:::todo --> C4["C4 Draft statements survive pressure test"]:::todo --> D1["D1 Paper repo: MNIST table, one command"]:::todo
+  end
+  subgraph CAL["ON YOUR CALENDAR"]
+    direction LR
+    C2["C2 Your readings: statements confirmed"]:::todo ~~~ D2["D2 Rivals reproduce one published number"]:::todo ~~~ D3["D3 Checker architecture chosen"]:::todo ~~~ D4["D4 Go or no-go per paper"]:::todo
+  end
+  subgraph SE["E. SCALE ON BIGBATCH AND BIGGPU"]
+    direction LR
+    E1["E1 Paper 1 tables with intervals"]:::todo ~~~ E2["E2 Paper 2 tables with intervals"]:::todo
+  end
+  subgraph SF["F. WRITE"]
+    direction LR
+    F1["F1 Paper 1 submitted, code public"]:::todo ~~~ F2["F2 Paper 2 submitted, code public"]:::todo
+  end
+  GOAL["FINISH: two papers, each beating its best rival"]:::goal
+  X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2
+  X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
+  L1 ~~~ L2 ~~~ L3 ~~~ L4
+  S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
+  style S0 fill:#fafafa,stroke:#adb5bd
+  style SA fill:#fafafa,stroke:#adb5bd
+  style LOOP fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+  style L1 fill:#ffffff,stroke:#a8c7fa
+  style L2 fill:#ffffff,stroke:#a8c7fa
+  style L3 fill:#ffffff,stroke:#a8c7fa
+  style L4 fill:#ffffff,stroke:#a8c7fa
+  style JOIN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+  style CAL fill:#fff9db,stroke:#f08c00
+  style SE fill:#fafafa,stroke:#adb5bd
+  style SF fill:#fafafa,stroke:#adb5bd
