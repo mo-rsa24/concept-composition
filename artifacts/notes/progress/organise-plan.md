@@ -17,6 +17,7 @@ Step O1 on the
 - [How a result cites the cluster](#how-a-result-cites-the-cluster)
 - [The stages](#the-stages)
 - [Who does what](#who-does-what)
+- [Pictures worth replacing](#pictures-worth-replacing)
 - [Still open](#still-open)
 
 ## What changes
@@ -131,6 +132,32 @@ Each stage ends in a check, and a failed check stops the next one.
 
 The rules for any deletion, recorded-number change, fixed-folder change or picture overwrite are in
 the [decision log](decision-log.md). This plan needs none of the four.
+
+## Pictures worth replacing
+
+These 21 kept pictures passed the subject check but are weak as paper figures. Each run's other renders are on the cluster, so a better one can be swapped in by name.
+
+| Result | Run or picture | Why it is weak |
+|---|---|---|
+| 02 checker | `result-sheet-catdog-identity` | the plain render with no push, because no guided tile passed |
+| 02 checker | `result-sheet-catdog-more3` | the front animal is part cat and part dog |
+| 02 checker | `result-sheet-catdog-more3-long` | the two species are hard to tell apart |
+| 02 checker | `result-sheet-catdog-more2` | the cat's face is blotchy and overlaps the dog |
+| 02 checker | `result-sheet-v4c` | a dark strap crosses the cat's muzzle |
+| 02 checker | `result-sheet-v4c-early` | a gold ring sits over the cat's eye |
+| 03 early push | `clip-push-sheet-from0`, `-from10`, `-halfdrawn` | three near-identical faint grey heads |
+| 03 early push | `result-sheet-catdog-identity-cap0.3` | oversaturated colours |
+| 03 early push | `result-sheet-catdog-cap0.3-early-corrector` | oversaturated colours |
+| 03 early push | `push-then-pick` | the first two panel captions overlap |
+| 05 other pairs | `result-sheet-lion-meerkat-multipair-long` | two meerkats and no lion |
+| 06 joint prompt | `result-sheet-catdog-general-rerun` | partly fused faces |
+| 06 joint prompt | `joint-catdog-eval` | a malformed cat nose |
+| Released weights | `guide/c281_s1_seed12.png` | a spotted big cat with odd anatomy where the class is tabby |
+| Released weights | `identity/identity_seed2_plain.png` | one 256-pixel render with odd anatomy |
+| Draw a dog | `dog-01-from-an-animal/tiles/seed11__pushs30.png` | one tile standing in for a sheet |
+| Missing term | `imagenet-product-check-256.png` | the dogs are recognisable but their faces are distorted |
+| MNIST stage 01 | `style-samples-readout.png` | a style sample that shows no run outcome |
+| Missing term | `guidance-1-first-six-models.png` | 1440 by 5400 pixels, too tall for a paper page |
 
 ## Still open
 

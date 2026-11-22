@@ -5,6 +5,18 @@ Rung 2 of the classifier-guided PoE ladder ([A3q's page](../../../report/classif
 [plan 22](../../../plans/22-rung2-a-discriminator-trained-on-the-benchmark-pairs.md)). Everything here
 was made on 2026-11-17.
 
+## Read this in order
+
+| Folder | What it answers |
+|---|---|
+| [The first quick test](01-the-first-quick-test/README.md) | Can a small discriminator, trained on a few checked renders, steer the product on seeds it never saw? |
+| [Can a checker read a clean pair](02-can-a-checker-read-a-clean-pair/README.md) | Can a small checker tell a clean cat and dog from a fused animal while the picture is being drawn? |
+| [Does an early push separate them](03-does-an-early-push-separate-them/README.md) | Does a checker's push on the first sampler steps draw a separate cat and dog? |
+| [Can a second push name each animal](04-can-a-second-push-name-each-animal/README.md) | Can a second push decide which body becomes the cat and which the dog? |
+| [Does it carry to other pairs](05-does-it-carry-to-other-pairs/README.md) | Does the early push, built on cat and dog, also separate other pairs? |
+| [How close it comes to the joint prompt](06-how-close-it-comes-to-the-joint-prompt/README.md) | How close does the kept push come to the joint prompt and CO3 on 128 seeds? |
+| [The pools of training pictures](pools-of-training-pictures/README.md) | Which labelled pictures, beyond cat and dog, did the multi-pair checkers train on? |
+
 ## training-set/
 
 **What it is.** The 73 renders rung 2's first discriminator trained on: seeds 1 to 8 × six prompts,
