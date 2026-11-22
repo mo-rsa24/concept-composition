@@ -10,7 +10,7 @@ This file holds the reasons and the order, and the board holds the status.
 
 **Why it exists**
 
-Three projects (LoRA correction, classifier guidance, inclusive captions) produced proofs of concept on toy
+Three projects ([LoRA correction](../1-lora-correction/README.md), [classifier guidance](../2-classifier-guidance/README.md), [inclusive captions](../4-inclusive-captions/README.md)) produced proofs of concept on toy
 data, MNIST and SDXL. None has been scaled, and most of what they found sits in session transcripts and
 unfiled artifacts. The route saves and absorbs that work, learns the current field, then scales.
 
@@ -51,7 +51,7 @@ holds each sitting's command and its 90-minute calendar block between 2026-11-22
 |---|---|---|
 | 1 | [When a product is valid](../artifacts/notes/progress/targets/reading-plan.md#sitting-1-when-a-product-is-valid) | Projective Composition, CoInD, Composable Diffusion (Liu) |
 | 2 | [Changing each model's weight while sampling](../artifacts/notes/progress/targets/reading-plan.md#sitting-2-changing-each-models-weight-while-sampling) | SuperDiff, Logical Guidance, Lift Scores |
-| 3 | [Samplers and correctors](../artifacts/notes/progress/targets/reading-plan.md#sitting-3-samplers-and-correctors) | Feynman-Kac Correctors, Energy-Based MCMC (Du), CFG as a Predictor-Corrector |
+| 3 | [Samplers and correctors](../artifacts/notes/progress/targets/reading-plan.md#sitting-3-samplers-and-correctors) | [Feynman-Kac Correctors](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/07-feynman-kac-correctors.md#words-this-file-uses), Energy-Based MCMC (Du), CFG as a Predictor-Corrector |
 | 4 | [Binding each word to its object](../artifacts/notes/progress/targets/reading-plan.md#sitting-4-binding-each-word-to-its-object) | ToMe, CoMat, Attend-and-Excite |
 | 5 | [Steering the start and the early steps](../artifacts/notes/progress/targets/reading-plan.md#sitting-5-steering-the-start-and-the-early-steps) | Rectify Then Diffuse, CO3 |
 | 6 | [What breaks outside the training data](../artifacts/notes/progress/targets/reading-plan.md#sitting-6-what-breaks-outside-the-training-data) | Catastrophic Compositional Generation, Local Mechanisms (Bradley) |
