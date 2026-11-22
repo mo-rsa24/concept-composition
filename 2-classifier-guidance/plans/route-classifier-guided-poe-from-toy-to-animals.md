@@ -84,7 +84,7 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | [Plan 17](17-classifier-guidance-from-the-paper.md)'s guided sampler `run_cfg_classifier_guided` uses the paper's form, unrescaled, and at strength 0 matched the empty-prompt render byte for byte on four seeds | found | plan 17 tasks 2.1 and 2.2, 2026-11-04 on mscluster108 | 5 |
 | The product sampler `run_poe_classifier_guided` pushes unrescaled (strength times sqrt(1 - alpha_bar_t) times the gradient), capped at κ times the product prediction's norm; the rescaled `weight` form is removed and a nonzero `weight` raises. At strength 0 it renders cat × dog seed 9 byte-identical to plain product, with and without an untrained head (md5 `c291b259647d30a450e87b234423fe99` on all three, 0 pixels differing) | found | commits `445cef9f` and `d1b8b61f`, job 89341 on mscluster108, `/datasets/mmolefe/poe_repair_min/outputs/presence_head/canary/canary.json` | 10 |
 | κ, the cap on the push, is `PUSH_CAP_FRACTION` 0.1, our value since Dhariwal and Nichol cap nothing; on plan 17's dog sheet 0.1 never fires at strengths 10 and 30 and fires on some step of every render at 100 and 300 | designed | `poe_repair/methods/_classifier_guided.py`, plan 17's `push.json` | 9, 10 |
-| dog-01 failed its accuracy check (balanced accuracy at least 0.75 on 7 of the first 20 steps); a clean dog on 2 of 4 seeds, a dog of some kind on all 4 | found | plan 18, commit `f7981bc0` | 10 |
+| dog-01 failed its accuracy check ([balanced accuracy](../../../../goal-setting/learning/deep-learning/diffusion-models/13-classifier-guidance-by-hand/textbook/06-readout-guidance-on-one-small-network.md#balanced-accuracy-the-hit-rate-on-each-class-averaged) at least 0.75 on 7 of the first 20 steps); a clean dog on 2 of 4 seeds, a dog of some kind on all 4 | found | plan 18, commit `f7981bc0` | 10 |
 | One-species classifier pushed on cat × dog: two animals in 0 of 16 tiles; the fused animal turned into a cat on 3 of 4 seeds | found | plan 18, commit `6be7d0c5` | 10 |
 | A classifier trained on cat and dog separately only re-weights the product; the push that can fix it must come from a classifier trained on the pair | designed | the Bayes step in [Quick context](#quick-context-where-you-are); plan 18's 0 of 16 fits it | 7, 8, 9, 10 |
 | Plan 15's head is two sigmoid outputs trained with a rule that refuses to call a fused animal "both", which makes it pair-aware even though its outputs are per species | found | plan 15's piece 1 close line, its walk map | 10 |
@@ -116,6 +116,18 @@ contradicts is rewritten. Later prompts treat these rows as settled facts.
 | mscluster111 and mscluster112 (RTX PRO 6000 Blackwell) both work under `co3_bw`: torch 2.11.0+cu128 sees the card, a 1000 × 1000 matmul sums to 1e9, and `/datasets` is visible over SSH; mscluster110 held another user's 67.8 GB job; mscluster107 card 1 was free; mscluster109 did not answer SSH | found | live probe 2026-11-17 over `scripts/cluster.sh sh`, recorded in `environment/hpc/nodes.md` | the rung compute plans |
 | On a Blackwell a plain product render takes 5.7 to 5.9 s and a joint render 5.0 to 5.2 s, against 51.5 s per product render on a Quadro RTX 8000, about 9 times faster; no guided SDXL render has been timed on any card | found | `1-lora-correction/report/paper-review/prze-10-compute.md`, plan 15's render cost | the rung compute plans |
 | Rung 2's bar, written before any render, counts out of 4 seeds at strengths 10, 30 and 100: support is two separate intact animals on at least 2 of 4 held-out seeds (9 to 12) at some strength, more than best-of-N, with a random push matched in size step by step composing at most 1 of 4; the disturbance reading is that random push at 2 of 4 or more; the picker reading is the same count with best-of-N equal or higher; inconclusive is at least 2 of 4 composed on seeds 9 to 12 with at most 1 intact; memorised is at most 1 of 4 on seeds 9 to 12 at every strength and at least 2 of 4 on seeds 1 to 4; null is at most 1 of 4 on both sets at every strength, called only when strength 100 visibly moved the picture on at least 2 of 8 seeds and the cap fired on fewer than half the steps, else the run is too weak to read | designed | [the rung 2 review file](review/a3q-cat-x-dog-quick-discriminator-test.md), 2026-11-17 | 10 |
+| The plain product is zero wherever either expert is (the "[Bayes composition](../../3-understanding-compositionality/artifacts/ideas/poe-overlap-dial/composition-terms.md#interaction-yours)" cannot leave the experts' support); clutter, other objects in each expert's training pictures, makes experts approximately factorized, which explains Liu et al. 2022's more-than-five objects | found (read) | Bradley et al. 2025, section 3.2 (page 4) and section 5.3 (page 7) | 7b |
+| Step 7b's held-out pairs, drawn by `random.Random(0)` from the 45 digit pairs: 0 & 3, 1 & 9, 3 & 4, 3 & 6, 4 & 7; 7 & 8 is seen | designed | `2-classifier-guidance/scripts/mnist/canvas_sheet.py`, [the canvas sheet](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-canvas-shares.png) | 7b |
+| A prototype judge (a small CNN on single MNIST digits) reads 98.2% of the 10,000 test digits but calls 7 of 10 pasted canvases as built; a fused 7 and 8 reads as a confident 8 (1.00) | found | `2-classifier-guidance/scripts/mnist/judge_sheet.py`, [the judge sheet](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-judge-ladder.png) | 7b |
+| The laptop runs torch with CUDA from `/home/molef/micromamba/envs/sdxl-local/bin/python` (no scipy) on an RTX 4070 Laptop GPU with 8 GB; MNIST's raw files are at `/home/molef/PhD/replications/original-superdiff/data/MNIST/raw` | found | live check 2026-11-18 | 7b |
+| On MNIST, plain product of two digit experts fuses at every two-digit share (0, 0.01, 0.1): two clear, right digits on 7 & 8 on 0 to 4 of 64 seeds; at share 0.1 it often draws an asked digit beside the wrong partner | found | [A2b's page](../report/classifier-guided-poe/24-mnist-one-model.md), `artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/plain-product/` | 10 |
+| On MNIST 7 & 8 (a pair the checker trained on) the pair-aware push gives two clear, right digits on 47 of 64 seeds at s = 10, against plain product 1, a size-matched random push 1 and best-of-2 at equal cost 1; the separate-label push gives 15 at best; on the five held-out pairs 84 of 320, mostly two digits with one wrong. Reading: works on seen pairs only (eye counts) | found | [the A2b review file](review/a2b-mnist-digits-on-a-canvas.md), `five-versions/eye_counts.json` | 10 |
+| Every MNIST checker sat between 0.51 and 0.59 held-out balanced accuracy (steps 0 to 19), yet the full one steered (47 of 64); two checkers at the same accuracy composed 47 and 27; 20,000 training steps did not raise accuracy over 4,000; the 0.771 rule cannot be applied | found | [the accuracy figure](../artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png) | 10 |
+| A judge trained on clean single MNIST digits misreads the model's thick drawn digits (31 of 64 agreement with blind eye calls on a drawn sheet); retrained judges reach about 57 of 64, against a reference that is itself noisy by a few tiles per sheet | found | `data/mnist-canvas/24-mnist-one-model/judge-loop/`, the A2b review file's loop 1 | 10 |
+| On MNIST the pair-aware push reaches pairs never seen together once three things change: the asked pair feeds every layer of the checker, the checker is retrained twice on its own push's pictures, and the sampler is partly random (DDIM eta 1.0); two clear, right digits on 217 of 320 held-out seeds by eye (200 by the judge), against 0 for the same sampler without the push; randomness alone composes nothing, and a step-scheduled push does no better than a constant one | found | the A2b review file's loop 2, `artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/` | 10 |
+| On MNIST, adding the separate-label push to the pair-aware push (both at s = 10, partly random sampler) gives two clear, right digits on 285 of 320 fresh held-out seeds (89%; 3 & 4 and 3 & 6 at 64 of 64), against 215 for the pair-aware push alone and 1 without a push; a random push of the same size and best-of-N at equal cost give 0 to 1; the pair-aware push makes two things, the separate-label push names them | found | the A2b review file's loops 4 and 5 | 10 |
+| On SDXL cat × dog, adding a species push to the bodies push on every one of the 50 steps does not carry MNIST's gain: the CLIP species checker pulls the two animals back into one cat-dog head (seeds 9 to 16), and the presence-only readout checker gives 15 of 32 clean or near-clean with 29 separate on seeds 3301 to 3332, against the recipe's 14 and 28 (no change); the scorer calls 14 of the 32 damaged (burnt colour, flat paint backgrounds) | found | [plan 31's review file](review/31-bodies-and-species-pushes-on-every-step.md) | 10 |
+| A pushed SDXL render is not reproducible run to run: the same seed and settings gave three different pictures in three runs (mean pixel difference 19 to 22 of 255), while plain PoE is byte-identical; counts hold (the recipe gave 25 faithful pairs of 128 twice) but only 15 of those 25 seeds were faithful both times, so per-seed comparisons between pushed runs carry noise | found | the rung 2 checker loop file, `result-sheet-catdog-big-rerun` | 10 |
 
 ## What you will achieve
 
@@ -137,7 +149,8 @@ Navigation: ⬅️ [Previous](#what-you-will-achieve) | 📋 [TOC](#table-of-con
 downloads → 4 drip-execute-plan --reproduce ‖ background: 6 prompt-storyboard → render-diagrams →
 5 drip-execute-plan --request (sampler repair) ‖ background: the canary → 7 drip-execute-plan
 --request (toy) ‖ background: quiz-prep-pulse, quiz-cadence → 9 frame-hypothesis (rung 2's readings) →
-10 drip-execute-plan --request (rung 2) → 10b experiment-planner (rung 3) → 10c drip-execute-plan →
+10 drip-execute-plan --request (rung 2) ‖ 7b drip-execute-plan --request (MNIST, beside rung 2) →
+10b experiment-planner (rung 3) → 10c drip-execute-plan →
 10d experiment-planner (rung 4) → 10e drip-execute-plan → 11 drip-retro, pressure-test → re-route`,
 with `8 drip-execute-plan --request (photos, both arms) ‖ background: the 64 px training` beside the
 ladder from sitting 5 (laid on the research spine: read, reproduce, rebuild
@@ -194,11 +207,15 @@ changes one thing: rung 1 the exact toy (A1); rung 2 SDXL cat × dog judged on h
 with a small discriminator (A3q); rung 3 the pair kind, animal and animal, animal and object, object
 and object (K1 to K3); rung 4 more seeds (A4), more pairs (C1), unseen pairs (C2). The rungs, their
 rows and the condition for going on are in [the board's ladder](../report/classifier-guided-poe/board.md#the-scale-up-ladder).
-The photos (A2r, A2c) and the head ablations (B1 to B7) run beside it and gate nothing. Every
+The photos (A2r, A2c) and the head ablations (B1 to B7) run beside it and gate nothing. MNIST
+digits on a canvas (A2b, step 7b) run beside rung 2 and gate nothing: labels there are exact and
+free, and the experts and the classifier are both learned networks, so 7b's compose count against
+checker accuracy decides step 10's next move (more cat × dog data, or a per-animal checker). Every
 rung's compute plan is written before launch, on the quickest card that can run it.
 
 **The chain over the ladder.** `7 rung 1 toy → 9 rung 2's bar → 10 rung 2 (A3q) → rung 3 plan →
-rung 3 → rung 4 plan → 4a, 4b, 4c → 11 retrospective`, with step 8's photos beside it. Rungs 1 and 2
+rung 3 → rung 4 plan → 4a, 4b, 4c → 11 retrospective`, with step 8's photos beside it and step 7b's
+MNIST stage beside rung 2. Rungs 1 and 2
 are one comparison each, so a request walk writes its own plan; rung 2's bar is written in one pass
 before anything renders; rungs 3 and 4 have many cells, so an axes planner (`experiment-planner`)
 writes the axes and the run table before the walk.
@@ -244,9 +261,10 @@ are done. Each rung is re-cut at the close of the one before it.
 | sittings 14 to 17 | step 10e: 4a in sitting 14, 4b in 15 and 16, 4c in 17; about 12 GPU-hours | none | each sub-rung's reading printed |
 | sitting 18 | step 11 and the pressure test | none | the re-route printed |
 | sittings P1 to P4 | step 8, any time after sitting 5, once the 64 px runs land | none | both photo arms called (instruction 14) |
+| sittings M1 to M3 | step 7b on the laptop's RTX 4070, before rung 2's next sitting: M1 the bar, the timing, the three model launches and the judge's eye-call gate; M2 the plain-product sheet and the checker; M3 the five-version sheet and the two sweeps; about 3 to 4 hours of computer time (a guess until M1 times it) | the judge's 64 eye calls while the models train | M1 the judge passes 58 of 64; M2 the three-outcome table read; M3 the reading printed |
 
 **Totals.** About 18 hours of your time to finish the ladder from step 7 and about 32 hours budgeted
-at 2×, in 18 sittings, plus 4 for the photos: 22 in all. About 15 GPU-hours on a Blackwell for the
+at 2×, in 18 sittings, plus 4 for the photos and 3 for MNIST (about 6 hours): 25 in all. About 15 GPU-hours on a Blackwell for the
 ladder, most of it in rung 4, plus the photo stage's 64 px trainings (12 to 24 hours each,
 estimate). A rung that misses opens its diagnosis ladder at half its box and moves every later
 sitting.
@@ -568,21 +586,21 @@ tabby and golden retriever, with scale 1 calling fewer.
   clones at `/home/molef/PhD/replications/guided-diffusion` and
   `/home-mscluster/mmolefe/Playground/PhD/replications/guided-diffusion`. The wrapper never
   imports `dist_util`, so co3 needs neither mpi4py nor blobfile.
-- [x] **T1** scale 0 identical to plain sampling · ✓ verified 2026-11-16: reproduced, sha256 of the uint8 render equal on 4 of 4 seeds, and plain sampling run twice on seed 0 equal (job 89232, mscluster108, Quadro RTX 8000, 22 s per plain render, 37 s at scale 0) · [the identity sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png), [the checksums](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_checksums.csv)
+- [x] **T1** scale 0 identical to plain sampling · ✓ verified 2026-11-16: reproduced, sha256 of the uint8 render equal on 4 of 4 seeds, and plain sampling run twice on seed 0 equal (job 89232, mscluster108, Quadro RTX 8000, 22 s per plain render, 37 s at scale 0) · the identity sheet (not linked, because it holds a subject the [pair ledger](../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off sheets), [the checksums](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_checksums.csv)
 
-  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png" width="200" alt="Four renders from plain sampling above four renders at classifier scale 0 for seeds 0 to 3 (a frog, a white bird, gazelles, a baguette in foil), each pair with the same checksum and marked identical"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-identity-scale-0-against-plain.png` shows seeds 0 to 3 from plain sampling above the same seeds at classifier scale 0, each pair with the same checksum. One seed holds a subject the pair ledger keeps off sheets, so the sheet is named here and not shown.
 
-- [x] **T2** corgi sheet called · ✓ verified 2026-11-16: reproduced, the released classifier calls 16 of 16 Pembroke at scale 10 (mean p 0.854) and 2 of 16 at scale 1 (mean p 0.067); by eye 13 of 16 clear corgis at scale 10, seeds 2, 6 and 11 corgi-coloured with a fox or dingo face (job 89235) · [the corgi sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_263.csv)
+- [x] **T2** corgi sheet called · ✓ verified 2026-11-16: reproduced, the released classifier calls 16 of 16 Pembroke at scale 10 (mean p 0.854) and 2 of 16 at scale 1 (mean p 0.067); by eye 13 of 16 clear corgis at scale 10, seeds 2, 6 and 11 corgi-coloured with a fox or dingo face (job 89235) · the corgi sheet (held back, at `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png`), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_263.csv)
 
-  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png" width="200" alt="Sixteen renders at classifier scale 1 on the left, mostly other animals and objects framed red, beside sixteen at scale 10 on the right, all orange and white corgi-like dogs framed green"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-pembroke-welsh-corgi-scale-1-and-10.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
-- [x] **T3** tabby sheet called · ✓ verified 2026-11-17: reproduced, 15 of 16 called tabby at scale 10 (mean p 0.737) and 2 of 16 at scale 1 (mean p 0.066); the one miss, seed 8, is an ornate object the classifier calls pickelhaube; by eye 12 of 16 clear tabbies at scale 10 (nohup run on mscluster107 card 1) · [the tabby sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_281_207.csv)
+- [x] **T3** tabby sheet called · ✓ verified 2026-11-17: reproduced, 15 of 16 called tabby at scale 10 (mean p 0.737) and 2 of 16 at scale 1 (mean p 0.066); the one miss, seed 8, is an ornate object the classifier calls pickelhaube; by eye 12 of 16 clear tabbies at scale 10 (nohup run on mscluster107 card 1) · the tabby sheet (held back, at `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png`), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_281_207.csv)
 
-  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png" width="200" alt="Sixteen renders at classifier scale 1 on the left, mostly other animals and objects framed red, beside sixteen at scale 10 on the right, striped tabby cats framed green except one ornate object at seed 8"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-tabby-cat-scale-1-and-10.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
-- [x] **T4** golden retriever sheet called · ✓ verified 2026-11-17: reproduced, 15 of 16 called golden retriever at scale 10 (mean p 0.907) and 5 of 16 at scale 1 (mean p 0.195); the miss, seed 4, is called Labrador retriever; by eye 14 of 16 clear goldens at scale 10 (same run) · [the golden retriever sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_281_207.csv)
+- [x] **T4** golden retriever sheet called · ✓ verified 2026-11-17: reproduced, 15 of 16 called golden retriever at scale 10 (mean p 0.907) and 5 of 16 at scale 1 (mean p 0.195); the miss, seed 4, is called Labrador retriever; by eye 14 of 16 clear goldens at scale 10 (same run) · the golden retriever sheet (held back, at `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png`), [the calls](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/classifier_calls_281_207.csv)
 
-  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png" width="200" alt="Sixteen renders at classifier scale 1 on the left, a mix of dogs, animals and objects, beside sixteen at scale 10 on the right, golden retriever faces and bodies framed green except a Labrador-like dog at seed 4"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/sheet-golden-retriever-scale-1-and-10.png` is named here and not shown, because it names or shows a subject the subject guard holds back.
 
 - [x] **Gate:** instruction 13 called · ✓ 2026-11-17, called by Claude at your request and accepted by you: see instruction 13
 - **Leaves:** the card, the checkpoint paths, and the clone, which steps 7 and 8 port from.
@@ -812,6 +830,227 @@ separate-label push draws at most 15 of 300 at every s on the grid.
 - [x] **Gate:** the bar printed; a miss opens the diagnosis ladder and stops the climb. ✓ verified 2026-11-17: pass on both halves, pair-aware 172 of 300 crisp at w = 1, separate-label at most 10 · [A1's page](../report/classifier-guided-poe/a1-exact-toy-classifier-push.md)
 - **Leaves:** the toy card and a retrospective, which steps 8, 9 and 11 read.
 
+### 7b. 🧪 MNIST digits on a canvas: how good must the checker be
+
+Runs beside rung 2 (step 10) and gates nothing. Its compose count against checker accuracy decides
+step 10's next move: more cat × dog data, or a per-animal checker. Board row A2b.
+
+**Data.** Real MNIST training digits pasted onto 32 × 64 canvases, built fresh each batch by
+`2-classifier-guidance/scripts/mnist/canvas_sheet.py`. Most canvases hold one digit at a random
+place; a share of them hold two different digits side by side, without overlap, in random order.
+Three models, at shares 0, 0.01 and 0.1. Five pairs, drawn by `random.Random(0)`, never appear
+together on a training canvas: 0 & 3, 1 & 9, 3 & 4, 3 & 6 and 4 & 7. The other 40 pairs fill the
+two-digit canvases; 7 & 8 is seen. Share 0 is the control, because the product of experts is zero
+wherever either expert is (Bradley et al. 2025, section 3.2), so no push can make two digits
+there. [The canvas sheet](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-canvas-shares.png)
+shows 30 canvases at each share and what the 7 and 4 labels see.
+
+<a href="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-canvas-shares.png"><img src="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-canvas-shares.png" width="140" alt="Thirty black MNIST canvases at each of the shares 0, 0.01 and 0.1, with the two-digit canvases framed red (0, 1 and 3 of 30); below, the canvases the 7 and 4 labels see at share 0, at share 0.1 with 4 and 7 held out, and at share 0.1 with the pair seen; last, a pasted 7 beside an 8 next to an illustrated fused 7 and 8"></a>
+
+**Model.** One class-conditional U-Net per share on 32 × 64 one-channel canvases, labels 0 to 9
+plus a null label taken on 10% of canvases, frozen after training. A two-digit canvas enters
+training once per digit it holds, so the expert for 7 means "a canvas with a 7 on it, sometimes
+beside another digit". Sampling is DDIM with 50 steps, as on SDXL. It trains on the laptop's
+RTX 4070; the training time is measured in round 10.
+
+**First measurement, before any checker exists.** Plain product, no push, on 7 & 8 and the five
+held-out pairs, 64 seeds each, on all three models (1,152 canvases). The support check: expert 7
+alone and expert 4 alone at share 0.1, 1,000 seeds each, counting how often a held-out partner
+appears beside the digit. Each tile is called on the ladder one digit < fused < two digits, wrong
+identity < two clear, right digits; the headline count is two clear, right digits. The judge is a
+digit classifier trained on single MNIST digits and run on each separate blob, never on canvases,
+so no guiding checker shares its training. Its counts are used only after it agrees with the
+user's eye calls on at least 58 of one 64-tile sheet. A share where plain product already gives
+two clear, right digits on at least 32 of 64 seeds for 7 & 8 has nothing to fix and leaves the bar.
+[The judge sheet](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-judge-ladder.png),
+made by `2-classifier-guidance/scripts/mnist/judge_sheet.py`, shows a prototype: 98.2% right on
+MNIST's 10,000 test digits, yet 7 of 10 pasted canvases called as built. A fused 7 and 8 can read
+as a confident 8, and a correct digit read below 0.9 is called the wrong identity, so the judge
+needs a fused test beyond its confidence before it can pass the eye-call gate.
+
+<a href="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-judge-ladder.png"><img src="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/mnist-judge-ladder.png" width="200" alt="Fifteen pasted canvases asked for 7 and 8, each blob boxed blue with the digit the prototype judge read and its confidence, framed grey for one digit, red for fused, orange for two digits with the wrong identity and green for two clear, right digits; one fused 7 and 8 reads as an 8 at 1.00"></a>
+
+**What plain product does decides whether the checker is built.** The first measurement is read
+before any checker trains. If plain product fuses at every share, MNIST reproduces SDXL's failure
+and the checker work goes ahead. If it composes at share 0.1 and fuses at 0, the checker work
+runs at share 0.01 and on the held-out pairs. If it gives two clear, right digits on at least 32 of
+64 for 7 & 8 at every share, the checker work stops: the finding goes to board row A2b as "plain
+product composes on MNIST", which points at what SDXL has and MNIST lacks (a text encoder and
+cross-attention, where the cat and dog words were measured attending the same pixels).
+
+**The checker's recipe, against the toy's.** A small head on the frozen MNIST U-Net's decoder
+features, as on SDXL's rung 2, so the accuracy-against-compose curve carries over.
+
+| Element | Toy, rung 1 (A1) | MNIST | Why it differs |
+|---|---|---|---|
+| what it tells apart | exact side-by-side draws against the sampler's own stacked draws | two clear, right digits against the plain product's own draws, plus single and wrong-pair canvases | a learned product can also drop or swap a digit |
+| positives | 3,500 exact draws | half pasted two-digit canvases of the 40 seen pairs, half the share-0.1 model's own two-digit draws | pasted-only invites a pasted-against-drawn shortcut, the twin of SDXL's photo-against-render one (110 of 126 cat × dog positives were photos) |
+| negatives | 3,500 sampler draws | half the plain product's own draws on seen pairs, half pasted fused, single and wrong-pair canvases | the same pasted-and-drawn mix on both sides |
+| inputs | noised point and its step | noised canvas, its step, and the asked pair | SDXL's checkers v1 to v4 lacked the pair, so two cats could not be rejected |
+| pairs | one | trains on the 40 seen pairs, scored on the 5 held out | the plurality question |
+| network | MLP, three layers of 512 | a small head on the frozen U-Net's decoder features | mirrors SDXL's checker |
+| noise steps | every step, loss weighted by Kim's λ(t) | the same weighting, with steps 0 to 9 of 50 drawn twice as often | layout is set early, where SDXL's checker read near chance |
+| shortcut guard | none needed | the same random shift, stroke thickness and blur on both labels | SDXL's v4a scored 0.81 at near-pure noise on its own training pictures |
+| batch, optimiser | 1,024, Adam at 1e-3 | 256, Adam at 1e-3 | SDXL ran at 8 |
+| the push | ε − w·√(1−ᾱ_t)·∇ log(d / (1−d)), w at 0.5, 1, 2, every step | the same form, s at 0, 1, 3, 10, 30, every step | a learned network's scale is unknown |
+| cap | 0.1, never bound | 0.1; 0.3 and 1.0 in the cap sweep | SDXL's cap fired on every early step |
+| separate-label control | "circle present", "square present" | "7 present", "8 present" heads on the same features | the toy's control, kept |
+| diagnostics, never gating | minimal-pair gap per step; cosine with the true correction | minimal-pair gap (pasted pair against pasted fused); accuracy per step on training and held-out pairs | no true correction exists for a learned model |
+| judged by | crisp pairs of 300 | strict count of 64 by the judge | |
+
+**The comparisons, on the same 64 seeds.** Seeds 0 to 63 are for evaluation only; every draw
+the checker trains on comes from seed 1,000 up. Five columns per pair and share: plain product;
+the pair-aware push at s 0, 1, 3, 10 and 30; the separate-label push ("7 present" plus "8
+present") at the same s; a random push scaled to the pair-aware push's size at every step; and
+best-of-N, N plain-product draws with the checker picking one. N is matched to a guided draw's
+measured cost and is what the bar is written against; N = 16 is reported beside it. At s = 0 each
+guided column must match plain product byte for byte. [The judge network
+view](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge-network-view.png)
+draws the judge's layers with real sizes (421,642 weights) and its two hand-written rules.
+
+<a href="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge-network-view.png"><img src="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/judge-network-view.png" width="200" alt="The judge drawn left to right: a canvas with a 7 beside an 8 cut into two 28 by 28 blobs, the right blob passing through two convolution and pooling stages, a 128-unit layer and ten digit probabilities with 8 at 0.973, then the hand-written ladder calling the canvas two clear, right digits"></a>
+
+**Three networks, three jobs.** The checker reads the whole noisy canvas, its step and the asked
+pair and outputs one number, the log-odds that the canvas becomes two clear, right digits; its
+gradient is the push, the MNIST twin of SDXL's cat × dog checker. The separate-label control
+outputs two numbers, "7 present" and "8 present", which a fused 7 and 8 can satisfy together. The
+judge reads finished canvases only, cut into blobs, and never pushes.
+
+**The two sweeps for rung 2.** Sweep 1 makes weaker checkers on purpose, one knob at a time: less
+data (1%, 5%, 25% and 100% of the checker's canvases, clean labels) and wrong labels (10% and 20%
+flipped, all the data; the 0% flip is the 100% run). Each checker's held-out balanced accuracy over
+steps 0 to 19 is plotted against its push's strict count of 64 on 7 & 8 at its best s, with SDXL's
+cat × dog checker (0.655) and the CLIP ceiling on finished pictures (0.771) marked. The rule,
+written before any run: if the count crosses the bar below 0.771, step 10 keeps fetching cat × dog
+data; if it crosses only above 0.771, step 10 switches to a checker that judges each animal
+separately. Sweep 2 runs the best checker at its best s with the cap at 0.1, 0.3 and 1.0 and
+records the share of steps the cap fired. Both sweeps run whatever the bar says, since a flat
+curve is itself the answer.
+
+<a href="../artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png"><img src="../artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png" width="200" alt="Left, six digit checkers as dots, held-out balanced accuracy over steps 0 to 19 (0.51 to 0.59) against 7 and 8 seeds with two clear, right digits out of 64 at s = 10 (all data 47, 25% of data 27, 5% 26, 10% labels flipped 22, 20% flipped 16, 1% 6), with red lines at 0.655 and 0.771, a green bar line at 32 and plain PoE at 1; right, two bars, cap 0.1 at 47 and cap 1.0 at 49"></a>
+
+**The bar, written before anything runs.** On 7 & 8, 64 seeds, on the model where plain product
+fuses: plain product gives two clear, right digits on at most 8 of 64 (so there is something to
+fix); the pair-aware push gives at least 32 of 64 at some s; the random push and the
+separate-label push stay within 6 of plain product; best-of-N at matched compute stays at least 8
+below the pair-aware push. On the five held-out pairs, at least 160 of 320. A count out of 64
+wobbles by about 4 by chance, so smaller gaps are not read. Four readings: works on seen and
+held-out pairs (the checker learned two digits apart); works on seen pairs only (it learned the
+pairs, not plurality); too weak to read (at s = 30 the push changed under half the canvases by eye,
+or the cap fired on more than half the steps); no effect (the pictures changed and no pairs came).
+FashionMNIST runs the same recipe as one later column only after MNIST meets this bar.
+
+**Planning.** No plan tree: the walk writes its own short plan as it goes, as rung 2's did, and its
+first piece copies the bar into a review file in `plans/review/` before any model trains. Board row
+[A2b](../report/classifier-guided-poe/24-mnist-one-model.md) carries the outcomes.
+
+**Time.** About 6 hours of the user's time over sittings M1 to M3, about 12 at 2×, and about 3 to 4
+hours of computer time on the laptop, a guess until M1 times 200 training steps. The three
+sittings come before rung 2's next sitting, because step 10's next move waits on the accuracy sweep.
+The stop point: if M3 ends without the five-version sheet, the walk stops and looks at why.
+
+You ~360 min to finish over sittings M1 to M3, ~720 min budget at 2× (estimate) · AI ~3 to 4 h
+on the laptop's RTX 4070 (a guess until objective 2 times it) · Sonnet, medium · moves: A2b
+
+**Objective:** one of section 7b's four readings printed, and the compose count against checker
+accuracy plotted with 0.655 and 0.771 marked.
+**Outcome:** the review file, the plain-product and five-version sheets, the sweep figure, the card
+and A2b's page ticked.
+**Serves:** board row A2b; step 10's next move.
+**Sees:** [the three networks](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.png) · **Ticket:** none · **Source page:** none
+
+<a href="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.png"><img src="../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.png" width="200" alt="Three rows: the pair-aware checker reading a noisy 32 by 64 canvas, its step and the pair 7 and 8 through the frozen MNIST U-Net and a small head to one log-odds number whose gradient is the push; the separate-label control giving two numbers, is there a 7 and is there an 8; the judge reading a finished canvas blob by blob and only counting"></a>
+
+```text
+/drip-execute-plan --request "Step 7b: on MNIST digits, does a pair-aware checker's push turn
+fused digits into two, and how good must the checker be"
+
+Background
+Step 7b of 2-classifier-guidance/plans/route-classifier-guided-poe-from-toy-to-animals.md.
+Section 7b of that file holds the whole design, the checker's recipe table and the bar.
+Rung 2 on SDXL cat × dog stalled on the checker: its best held-out balanced accuracy was 0.655.
+CLIP on finished pictures reached 0.771, and every training picture cost a render and a label.
+MNIST gives exact labels for free, so checkers can be made weaker on purpose.
+This step runs beside rung 2, gates nothing, and decides step 10's next move.
+
+Objectives
+0. Copy section 7b's bar into plans/review/a2b-mnist-digits-on-a-canvas.md, then stop for my yes.
+1. Write this step's short plan, checking plan numbers right before writing.
+2. Time 200 training steps on the laptop, write each model's projected time, and stop for my yes.
+3. Train the three pixel U-Nets (shares 0, 0.01, 0.1) in the background.
+4. While they train, build the judge with a fused test, and show me 64 pasted tiles to call.
+5. Run plain product and the support check, show one sheet per share, and stop for my call.
+6. Train the checker and the separate-label heads on draws from seed 1,000 up.
+7. Render the five-version sheet on seeds 0 to 63 for 7 & 8 and the five held-out pairs.
+8. Run the two sweeps: weaker checkers by data and by flipped labels, and the cap.
+9. Print the reading against the review file, and propose step 10's move by the 0.771 rule.
+
+What to read
+- Section 7b and the "What we know so far" table of the route file above.
+- report/classifier-guided-poe/24-mnist-one-model.md: the outcomes to tick.
+- report/classifier-guided-poe/a1-exact-toy-classifier-push.md: the toy's result.
+- 3-understanding-compositionality/artifacts/notes/what-poe-loses-when-it-composes/
+  toy_classifier_push.py: the push and the weighted loss to copy.
+- 2-classifier-guidance/scripts/mnist/canvas_sheet.py and judge_sheet.py: canvases and judge.
+- poe_repair/methods/_classifier_guided.py: the push form and the cap on SDXL.
+- The three figures in
+  2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/.
+
+What is already known
+- MNIST's raw files are at /home/molef/PhD/replications/original-superdiff/data/MNIST/raw.
+- Python with torch and CUDA is /home/molef/micromamba/envs/sdxl-local/bin/python; it has no scipy.
+- The card is an RTX 4070 Laptop GPU with 8 GB (nvidia-smi, 2026-11-18).
+- The held-out pairs are 0 & 3, 1 & 9, 3 & 4, 3 & 6 and 4 & 7, from random.Random(0).
+- The prototype judge reads 98.2% of MNIST's test digits but only 7 of 10 pasted canvases.
+- A fused 7 and 8 read as a confident 8 (1.00), so confidence alone cannot call fused.
+- Blob crops must be scaled to 20 pixels and centred by centre of mass, as MNIST digits are.
+- On the toy the pair-aware push gave 172 of 300 crisp pairs, the separate-label push at most 10.
+- The plain product is zero wherever either expert is (Bradley et al. 2025, section 3.2).
+- SDXL's label API agreed with the user's hand calls on 79% of pictures.
+- SDXL's 0.1 cap fired on every early step at strength 100.
+- Every guided column must match plain product byte for byte at s = 0.
+
+When something is missing
+- If 8 GB is too small, halve the batch and say so; fall back to mscluster111 after a probe.
+- If a model's projected time passes 2 hours, stop with the number and propose fewer channels.
+- If the judge misses 58 of 64, show the misses and try one fix; then fall back to eye calls.
+- If plain product composes at every share, stop and record that finding on A2b's page.
+- Ask me where checkpoints live if environment/ does not say; fall back to data/mnist-canvas/.
+
+Rules
+- Seeds 0 to 63 are never trained on.
+- Each sweep run changes one knob.
+- Stop before each launch with the exact command.
+- The judge never trains on canvases and never pushes.
+- Filing: on, so each sheet is filed and each round worth keeping reaches the pillars.
+- Commit nothing until I say done.
+
+What to hand back
+- The review file, the plan file, each sheet, and the accuracy-against-compose figure.
+- A card under 2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/.
+- A2b's page ticked, and the board redrawn with --step 7b.
+- New rows in the route's "What we know so far", and step 10's edit after my yes.
+
+What you will see
+The bar and the timing, each with a stop for my yes.
+The judge's 64 tiles to call, then one plain-product sheet per share with a stop.
+The five-version sheet to call, then the sweep figure with 0.655 and 0.771 marked.
+At the end: what was asked, what was made with paths, the reading, what is open, one question.
+
+Controls: the judge piece, prove; the plain-product sheet, example; the close, test
+Side routes: once the U-Net and checker exist, /zoom-ladder on each, network view only
+
+Judged by you from the sheets against the review file; done when the reading is printed.
+```
+
+- [ ] **Gate:** the judge passes 58 of 64; the reading printed against the review file.
+- **Follow-on:** [plan 32](32-two-digit-experts-that-never-met.md) asks whether the same pushes
+  compose a 0–4 expert and a 5–9 expert trained apart, with a blank-canvas base; its bars are in
+  [its review file](review/32-two-digit-experts-that-never-met.md).
+- **Leaves:** the card and the accuracy-against-compose figure, which step 10 reads for its next
+  move. The walk that built this step is
+  [the route walk](../artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/ROUTE_WALK.md).
+
 ### 8. 🧪 Our photos, both ways: the released model, and a model we train
 
 You ~270 min to finish, ~540 min budget at 2× (6 pieces at 45 min, estimate) · AI ~3 h plus the
@@ -1003,6 +1242,14 @@ size-matched random push at 3 strengths), the per-tile calls, the card and the f
 **Serves:** the board's rung 2 row, A3q.
 **Sees:** the step 1 design · **Ticket:** none · **Source page:** none
 
+**Step 7b's move for this step.** Keep the pair-aware checker; do not switch to one that judges each
+animal separately. On MNIST a pair-aware checker at 0.58 to 0.59 held-out accuracy steered a pair it
+trained on (two clear, right digits on 47, 48 and 57 of 64 seeds over three checker seeds, against
+1 for plain product), while the separate-label push reached 15. Accuracy alone did not predict the
+push: two checkers at the same accuracy gave 47 and 27. So test the cat × dog checker's push on cat
+× dog itself before asking it to carry over to other pairs, where on MNIST it made two things but
+often the wrong second one ([A2b](../report/classifier-guided-poe/24-mnist-one-model.md)).
+
 ```text
 /drip-execute-plan --request "Rung 2: a small pair-aware discriminator steers SDXL's cat × dog
 product on held-out seeds"
@@ -1045,6 +1292,9 @@ When something is missing
 - Fewer than 10 checked positives: add renders from seeds 5 to 8 with the two wordings before
   training; never seeds 9 to 16.
 - The guided sampler fails under co3_bw: move to mscluster107 card 1 under co3, all columns.
+- Once step 7b's sweep has read, follow its rule: a crossing below 0.771 keeps this step
+  fetching cat × dog data, and a crossing above it switches to a checker that judges each animal
+  separately.
 
 Rules
 - One axis: only how the discriminator is used changes between columns.
@@ -1494,9 +1744,9 @@ Navigation: ⬅️ [Previous](#tasks) | 📋 [TOC](#table-of-contents) | [Next](
   and say, per tile, whether it shows the asked-for animal · ✓ called 2026-11-17 by Claude at your
   request, tile by tile at 256 px, accepted by you: 0 and 9 of 16 corgi, 0 and 11 tabby, 3 and 10 golden
   retriever at scales 1 and 10, against the classifier's 2 and 16, 2 and 15, 5 and 15; all 22
-  disagreements are classifier yes, eye no ([the disagreement sheet](../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png))
+  disagreements are classifier yes, eye no (the disagreement sheet (held back, at `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png`))
 
-  <a href="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png"><img src="../artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png" width="200" alt="The 22 tiles where the released classifier said yes and the eye said no, in a grid of six across, each titled with its class, scale and seed: 9 corgi tiles (mostly beagle-like, fox-like and collie-like dogs), 6 tabby tiles (blurred or dog-like animals, and a dark cat at scale 10 seed 0) and 7 golden retriever tiles (long-haired dogs, a smeared yellow dog)"></a>
+  *Picture held back.* `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/eye-against-classifier-disagreements.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
 - **You should see:** at scale 10 almost every tile is a corgi, a tabby or a golden retriever; at
   scale 1 fewer; at scale 0 the same picture as unguided.
