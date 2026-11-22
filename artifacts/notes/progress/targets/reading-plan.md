@@ -1,6 +1,6 @@
 # Reading plan: one idea at a time, beside your journeys
 
-The 11 sittings run across 26 two-hour calendar blocks from 2026-11-23 to 2026-12-01, at 06:00, 11:30 and 16:30. Each sitting has one reading block, and the other 15 blocks hold journey study, application and quizzes.
+The 11 sittings run across 34 two-hour calendar blocks from 2026-11-23 to 2026-12-11, fitted around work, gym, meals and finance. Each sitting has one reading block, and the other 23 blocks hold journey study, application and quizzes. The `week-queue` skill checks which blocks finished and moves the rest, so the calendar holds each block's current time.
 
 Each of the 11 sittings reads one idea across two to four sources, against the journey plan that teaches the same idea. Sittings 1 to 5 hold the eight papers behind the 11 scoreboard targets, so start at [sitting 1](#sitting-1-when-a-product-is-valid) and paste its command.
 
@@ -18,7 +18,7 @@ Each of the 11 sittings reads one idea across two to four sources, against the j
 | [10](#sitting-10-what-an-outside-planner-or-critic-buys) | What an outside planner or critic buys | RPG, CountLoop, Revisiting CFG | [Build one runner and fill the results table](../../../../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/plans/12-one-runner-and-the-results-table.md) (journey 12) | None; reported beside the targets |
 | [11](#sitting-11-when-a-sample-commits) | When a sample commits | Biroli, Achilli, Albrychiewicz (PDFs missing, reads four journey plans) | [The speciation time T_s](../../../../../../goal-setting/learning/deep-learning/diffusion-models/05-poe-composition-diffusion/plans/46-speciation-time-defined.md) (journey 05) | None; sets how early a push must act |
 
-The calendar budgets 52 hours: 22 for the 11 reading blocks and 30 for the 15 blocks of journey study, application and quizzes. No sitting has been timed yet. Most paired plans are not walked yet. A sitting still runs without them, because combine gives a plain reading of each passage, and the "Before" plan is the one to walk when a passage does not land. The ideas no journey teaches are [listed at the end](#ideas-no-journey-plan-teaches).
+The calendar budgets 68 hours: 22 for the 11 reading blocks and 46 for the 23 blocks of journey study, application and quizzes. No sitting has been timed yet. Most paired plans are not walked yet. A sitting still runs without them, because combine gives a plain reading of each passage, and the "Before" plan is the one to walk when a passage does not land. The ideas no journey teaches are [listed at the end](#ideas-no-journey-plan-teaches).
 
 <details>
 <summary>What to check in this plan</summary>
