@@ -24,6 +24,12 @@ PROGRESS = HERE.parent
 COLUMNS = ["rival", "number_id", "dataset", "metric", "protocol", "samples", "published", "ours", "interval_low",
            "interval_high", "verdict", "commit", "run_id", "render_folder", "note"]
 VERDICTS = {"reproduced", "not reproduced", "not comparable", "blocked"}
+# Published prompts the subject guard keeps out of every render. The owner's answer to board question 14 makes each
+# row on these benchmarks `not comparable`, with our score on the allowed prompts recorded beside the published one.
+GUARD_KEPT_OUT = {"T2I-CompBench Complex": (12, 1000), "RareBench Concat": (7, 40), "T2I-CompBench Color": (12, 300),
+                  "T2I-CompBench Shape": (7, 300)}
+NO_NUMBER_COMMIT = "c3462133-b235ea8"  # the commits that built the rows question 13 settled
+GUARD_COMMIT = "e39a31ca-0739e7e"  # the commits that applied the subject guard
 
 
 def load():
@@ -73,10 +79,18 @@ def build():
         else:
             row["verdict"] = "not comparable"
             row["note"] = f"{len(hit)} rows in numbers.csv match this rival under the target's protocol"
+            row.update(run_id="question 13", commit=NO_NUMBER_COMMIT)
         extra = results.get((rival, target["number_id"]), {})
         for key in COLUMNS:
             if key in extra:
                 row[key] = extra[key]
+        if row["dataset"] in GUARD_KEPT_OUT:
+            kept_out, total = GUARD_KEPT_OUT[row["dataset"]]
+            guard_note = f"the subject guard keeps {kept_out} of {total} published prompts out"
+            row["verdict"] = "not comparable"
+            row["note"] = "; ".join(part for part in (row["note"], guard_note) if part)
+            row["run_id"] = row["run_id"] or "question 14"
+            row["commit"] = row["commit"] or GUARD_COMMIT
         row["_target"] = target["number_id"]
         table.append(row)
     return table

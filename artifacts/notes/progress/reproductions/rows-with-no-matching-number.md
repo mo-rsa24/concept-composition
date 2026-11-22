@@ -1,12 +1,12 @@
-# Table rows whose published number needs the owner's choice
+# Table rows whose published number took the owner's choice
 
 Step D2 fills one row of `table.csv` per rival per target. Each row needs the one published number for that rival under
-the target's dataset, metric, protocol and task. Nine rows cannot get that number by the rule alone, so they wait on
-board question 13, and none of the numbers below has been chosen.
+the target's dataset, metric, protocol and task. Nine rows cannot get that number by the rule alone, and board
+question 13 holds the owner's answer.
 
 ## Seven rows with no number under the target's protocol
 
-These count as `not comparable` until answered. The candidates are the rival's rows on the same dataset in
+These stay `not comparable`, and none of their candidate numbers is used. The candidates are the rival's rows on the same dataset in
 `targets/numbers.csv`, and every one of them was printed under a different protocol from the target's.
 
 | Rival | Target benchmark | Target's metric | Candidate row | Candidate's metric | Value | Where it is printed |
@@ -34,4 +34,5 @@ copied from CoMat's paper: ToMe's Appendix C.2 says CoMat's SDXL version is not 
 | T2I-CompBench Shape | `ToMe-T1-035` | 0.4975 | SD1.5 | `ToMe-T1-051` | 0.5262 |
 | T2I-CompBench Texture | `ToMe-T1-034` | 0.6190 | SD1.5 | `ToMe-T1-050` | 0.6591 |
 
-`table.csv` keeps the row the rule picks, with this difference in its `note`, until the owner answers.
+The owner's session has put both CoMat rows on hold, because `CaraJ/CoMat_sdxl_ft_unet` holds SDXL weights that the answer to
+question 13 assumed were unreleased. Nothing runs for them, including SD1.5 training, until the owner answers again.

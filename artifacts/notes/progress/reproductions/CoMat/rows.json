@@ -1,0 +1,10 @@
+[
+  {
+    "target_id": "ToMe-T1-054",
+    "note": "on hold by the owner's session: run nothing for this row, including SD1.5 training, until the owner answers again; CoMat on SDXL is ToMe-T1-051 = 0.5262, published only and not reproduced"
+  },
+  {
+    "target_id": "ToMe-T1-053",
+    "note": "on hold by the owner's session: run nothing for this row, including SD1.5 training, until the owner answers again; CoMat on SDXL is ToMe-T1-050 = 0.6591, published only and not reproduced"
+  }
+]

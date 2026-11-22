@@ -1,0 +1,13 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+  A["Prompts prepared<br/>988 Complex and 33 Concat allowed"]:::done
+  B["Smoke test passed<br/>2 prompts, about 15 s per picture"]:::done
+  C["Zero-update check passed<br/>difference 0.0, bar 1e-5"]:::done
+  D["1% renders: 82 of 84 pictures<br/>retry job 92834 running"]:::doing
+  E["Score the 1% with ImageReward<br/>and open pictures at full size"]:::todo
+  F["Full run: 3,063 pictures per method<br/>about 13 GPU-hours each"]:::todo
+  G["Table: our score beside the published one<br/>both RTD rows stay not comparable"]:::todo
+  A --> B --> C --> D --> E --> F --> G
+  classDef done fill:#dff3e0,stroke:#2f7d3b,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe3bf,stroke:#c46a00,stroke-width:3px,color:#111111
+  classDef todo fill:#eeeeee,stroke:#777777,stroke-width:2px,color:#111111

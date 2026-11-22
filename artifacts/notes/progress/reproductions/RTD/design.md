@@ -31,7 +31,7 @@ ledger) and 7 Concat prompts (1 blocked, 6 needing a decision). No ledger row co
 
 A published score averages all its prompts, so a score on fewer prompts cannot test it. While any published prompt is kept
 out, the row's verdict is `not comparable`, and our score on the allowed prompts is recorded beside the published number.
-Board question 14 asks the owner whether that stands.
+The owner chose this rule in board question 14.
 
 ## The numbers to reproduce
 
