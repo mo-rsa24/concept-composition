@@ -31,7 +31,7 @@ against those runs.
 
 **A disputed number cannot set a target.** `limits.md` marks where a paper contradicts itself about a value. T2I-CompBench
 Color is a disagreement between two papers: ToMe quotes CoMat at 0.7774, and CoMat's own page prints 0.7827. The target uses
-the number on CoMat's own page and stays provisional until board question 6 is answered.
+the number on CoMat's own page.
 
 ## Pictures
 

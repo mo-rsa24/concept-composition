@@ -55,8 +55,8 @@ Sculpting, FlipConcept and CFGRevisited.
 ## Published methods checked and left off
 
 The replications hub runs 12 published methods outside this list. A method joins the list when its own tables score it on a
-dataset that can be a headline. LiftScores, LogicalGuidance and CountLoop met that. CoMat is not in the hub and joined because ToMe's table prints it above ToMe on a candidate benchmark. Board question 3 asks the owner whether
-this is the right cut.
+dataset that can be a headline. LiftScores, LogicalGuidance and CountLoop met that. CoMat is not in the hub and joined
+because ToMe's table prints it above ToMe on a candidate benchmark.
 
 | Method | Why it is off the list |
 |---|---|
