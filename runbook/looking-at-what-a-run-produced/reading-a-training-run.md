@@ -64,6 +64,8 @@ not yet wired.
 
 Navigation: ⬅️ [Previous](#2-the-tracking-set-saved-at-every-10k-step-checkpoint) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
+`unverified`: the commands below are recorded from a cluster session, and no captured output is filed here.
+
 No screenshots yet: each table row above wants one captured W&B panel with a caption
 saying what the healthy shape looks like.
 
@@ -72,7 +74,7 @@ captures its W&B panels and files each one here, beside its table row, with a ca
 what the healthy shape looks like. That needs the two connectors below, which only a human
 can authorize (a non-interactive session cannot run the OAuth or install step).
 
-**Both connectors are registered at user scope on this machine and connect** (check any
+**Both connectors are registered at user scope on the cluster session's machine and connect** (check any
 time with `claude mcp list`; they load at session start, so a session started before the
 registration will not see them). The exact registered commands, should either ever need
 re-creating:
@@ -86,16 +88,16 @@ claude mcp add --scope user wandb -- /home-mscluster/mmolefe/.local/bin/uvx \
 
 # Playwright MCP: drives a browser and takes screenshots. npx lives in the
 # miniforge base, not on PATH; chromium 151 is installed under
-# ~/.cache/ms-playwright and launches on this node.
+# ~/.cache/ms-playwright and launches on the cluster session node.
 claude mcp add --scope user playwright -- /home-mscluster/mmolefe/miniforge3/bin/npx \
     -y @playwright/mcp@latest
 ```
 
 One caveat before relying on Playwright for W&B pages: wandb.ai panels need a logged-in
 browser, and the Playwright MCP uses its own profile, so either log in once in headed mode or
-let the W&B MCP pull the panel data and render the figure locally.
+let the W&B MCP pull the panel data and render the figure in the session.
 
-- **Generate the same figures locally today**, no browser and no new connectors, from the
+- **Generate the same figures on the cluster session node today**, no browser and no new connectors, from the
   run history:
 
   ```bash
@@ -114,6 +116,8 @@ let the W&B MCP pull the panel data and render the figure locally.
   ```
 
   Save the output beside the run's other evidence and caption it from the tables above.
+
+  ✅ Expected: `run_curves.png` shows `train/loss`, `train/delta_target_norm` and `train/delta_hat_norm` against optimizer step on a log axis.
 
 ## Cross-references
 

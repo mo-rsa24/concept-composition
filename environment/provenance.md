@@ -36,7 +36,8 @@ person nor a run this sitting.
 | Disk guard on `run_dose_sweep.sh` checked the wrong mount, 3.4GB landed on `/home-mscluster` | `storage.md`, `known-failures.md` | stated | recorded in the project's own `CLAUDE.md`; not re-run this sitting |
 | Cached residual trajectory contents (18 train + 58 heldout pairs, ~12 seeds, 50 steps) | `storage.md` | verified | direct filesystem inspection and a loaded residual file, 2026-08-04 |
 | W&B API key present in `~/.netrc`; `WANDB_API_KEY` set in-session | `overview.md` | verified | file existence checked (not read) and env var presence checked, live, 2026-08-24 |
-| `pdflatex`, `xelatex`, `latexmk`, `bibtex` absent from PATH | `paper.md`, `overview.md` | verified | `which` for each, live, 2026-08-24 (re-confirms a 2026-08-05 check) |
+| `pdflatex`, `xelatex`, `latexmk`, `bibtex` absent from PATH on the cluster | `paper.md`, `overview.md` | verified | `command -v` for each over SSH, 2026-11-22 (re-confirms checks on 2026-08-05 and 2026-08-24) |
+| The laptop has `pdflatex`, `xelatex` and `bibtex`, and has no `latexmk` or `tectonic` | `overview.md`, `00-INDEX.md` | verified | `command -v` for each on the laptop, 2026-11-22 |
 | `tectonic` present and executable at the stated absolute path | `paper.md` | verified | `ls -la` and `which`, live, 2026-08-24 |
 | `tectonic` builds the stock template successfully | `paper.md` | stated | carried from the 2026-08-05 note; not rebuilt this sitting (a build would write a PDF outside this folder's scope) |
 | LaTeX Workshop extension present, version `10.15.2`, server-side | `paper.md` | verified | `ls ~/.vscode-server/extensions/`, live, 2026-08-24 (re-confirms a 2026-08-05 check) |

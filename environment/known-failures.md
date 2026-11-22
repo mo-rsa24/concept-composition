@@ -406,7 +406,7 @@ Prefixing `cd <repo> &&` is not reliable either: Claude Code's permission layer 
 block `cd` inside compound Bash commands, which produced three identical failures in a row on
 2026-08-19.
 
-**Solution:** Make every path in an SSH launch line absolute: the script, the log redirect, and
+**Solution:** A new SSH launch needs the owner's yes through `python3 scripts/progress_board.py ask`. With it, make every path in the launch line absolute: the script, the log redirect, and
 anything else on the line. The launch script itself does `cd "$REPO"` internally, so the caller
 needs no working directory at all:
 ```bash
@@ -636,7 +636,7 @@ second node's launch) never runs.
 **Root cause:** the backgrounded process keeps the SSH session's standard input open, so SSH waits
 for it to close.
 
-**Solution:** close standard input and detach: `ssh <node> 'nohup bash launch.sh > log 2>&1 < /dev/null & disown'`,
+**Solution:** A new SSH launch needs the owner's yes through `python3 scripts/progress_board.py ask`. With it, close standard input and detach: `ssh <node> 'nohup bash launch.sh > log 2>&1 < /dev/null & disown'`,
 and wrap the call in `timeout`. Check the launch afterwards with `head` of the log and `pgrep` on
 the node, never by waiting on the launching SSH call.
 

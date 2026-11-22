@@ -4,9 +4,9 @@ The paper exists in three places and they do not update each other. This file is
 edits between them by hand: pulling what you typed in the Overleaf editor down into the repo,
 sending a repo-side edit back up, and rebuilding the upload zip when the git route is not the
 one you want. It does not cover writing the paper (that is `/drip-write` and
-[the draft map](../writing/iclr/DRAFT_MAP.md)) or building the PDF locally, which needs the
-Tectonic facts in [the paper environment file](../environment/paper.md), since no system LaTeX
-exists on this cluster.
+[the draft map](../writing/iclr/DRAFT_MAP.md)) or building the PDF, which on the cluster needs the
+Tectonic facts in [the paper environment file](../environment/paper.md), since the cluster has no
+system LaTeX. The laptop has `pdflatex`, `xelatex` and `bibtex`.
 
 ## Words this file uses
 

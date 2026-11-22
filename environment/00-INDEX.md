@@ -23,7 +23,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-systems) ➡️
 | launch anything over SSH onto a node this session is not on | [hpc/execution-protocol.md](hpc/execution-protocol.md) | a relative path in the launch line resolves against `$HOME`, not the repo, and the failure is silent (`poe-launch-001`) |
 | read or write project data, or add a disk guard to a job script | [storage.md](storage.md) | two filesystems, different quotas, no automatic mirroring, and a guard that checks the wrong mount has already caused a real loss (`poe-disk-001`) |
 | run the authors' Reduce, Reuse, Recycle code (the 2D notebook or `inf_sample.py`) | [reduce-reuse-recycle-code.md](reduce-reuse-recycle-code.md) | the notebook fails on current jax until one argument is renamed, the CLEVR script borrows another venv's CUDA torch, and the released U-Net cannot run a forward pass as shipped |
-| build or edit the paper | [paper.md](paper.md) | no system LaTeX exists here; the extension's default recipe fails outright, and a recent config change to fix that is unverified |
+| build or edit the paper | [paper.md](paper.md) | the cluster has no system LaTeX, and the laptop has `pdflatex`, `xelatex` and `bibtex` but no `latexmk` or `tectonic`; on the cluster the extension's default recipe fails outright, and a recent config change to fix that is unverified |
 | hit an error that looks like it has happened before | [known-failures.md](known-failures.md) | 18 catalogued patterns with symptom, root cause, and solution, so a failure is not re-diagnosed from scratch |
 | want to know how sure a fact in this folder actually is | [provenance.md](provenance.md) | every fact is marked verified, stated, or inferred, and several were re-checked live on 2026-08-24 |
 

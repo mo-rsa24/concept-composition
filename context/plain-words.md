@@ -3,7 +3,7 @@
 Every term below was replaced across the plan tree because it was a private label, a metaphor, or
 a category name: something that told a reader nothing unless they had been in the room. The right
 column is what the work is actually called now. This file is the contract, so a sweep can be
-re-run with a different word by changing one row.
+re-run with a different word by changing one row. ✍️
 
 The rule that generated it: name what happened, not the category it falls into. If a reader would
 have to ask what a word means, the line was wrong, not the reader.
@@ -61,7 +61,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#kept-because-the-field-genu
 Navigation: ⬅️ [Previous](#replaced-everywhere-including-file-and-folder-names) | 📋 [TOC](#table-of-contents) | [Next](#not-changed-and-why) ➡️
 
 These are not private labels, and removing them would cost more than it saves: a reader needs them
-to follow a paper. Each gets one plain gloss at its first use in a file, never a rename.
+to follow a paper. Each gets one plain gloss at its first use in a file, never a rename. ✍️
 
 speciation, Langevin, Tweedie, AUC, low-rank, held-out, basin, Mono-free.
 
@@ -70,7 +70,7 @@ finding no effect, and it is a real outcome rather than a failure, so the word s
 use in a file it is given a plain example instead of a definition: the two language-side reads
 came back null, meaning the numbers with the correction looked the same as the numbers without it.
 `null threshold` keeps the word for the same reason: it is the number a control has to stay under
-to count as having done nothing.
+to count as having done nothing. ✍️
 
 ## Not changed, and why
 
@@ -78,7 +78,7 @@ Navigation: ⬅️ [Previous](#kept-because-the-field-genuinely-calls-it-that) |
 
 Code identifiers keep their names. `ax.spines` and `.bar()` are matplotlib's API, so renaming them
 breaks plotting, and the internal names in `poe_repair/` are a separate refactor with test
-coverage behind it. A word can therefore appear in a script and not in the prose that describes it.
+coverage behind it. A word can therefore appear in a script and not in the prose that describes it. ✍️
 
 ## Where this came from
 
@@ -86,6 +86,6 @@ Navigation: ⬅️ [Not changed, and why](#not-changed-and-why) | 📋 [TOC](#ta
 
 | What | How it was established | When |
 |---|---|---|
-| The replaced terms, the kept terms and the rule behind them | Written by the plain-words rewrite, commit `85ac7066` | 2026-08-30 |
+| The replaced terms, the kept terms and the rule behind them, all naming decisions marked ✍️ | Written by the plain-words rewrite, commit `85ac7066` | 2026-08-30 |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

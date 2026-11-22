@@ -18,6 +18,7 @@ Every example is a real value read directly from a file in this repository, labe
 - [`fail_rate` / `compose_rate`](#fail_rate--compose_rate)
 - [`which_animal` / `both_ness` / `off_plane_norm`](#which_animal--both_ness--off_plane_norm)
 - [`commit_step` / `fork_step`](#commit_step--fork_step)
+- [Where this came from](#where-this-came-from)
 - [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 - [Cross-references](#cross-references)
 
@@ -303,7 +304,7 @@ instance count, not this axis, is the validated compose rule ⚠️
 
 ### `commit_step` / `fork_step`
 
-Navigation: ⬅️ [Previous](#which_animal--both_ness--off_plane_norm) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+Navigation: ⬅️ [Previous](#which_animal--both_ness--off_plane_norm) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 **What it means in the world** ✅
 
@@ -330,12 +331,32 @@ condition over the eight held-out seeds
 verdicts; a commit between two saved steps is invisible; a run whose `both_ness` never rises
 reads `commit_step = 0` even if its picture changes animal, as seed 15's PoE run does ⚠️
 
+## Where this came from
+
+Navigation: ⬅️ [`commit_step` / `fork_step`](#commit_step--fork_step) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+
+| Entry | How it was established | When |
+|---|---|---|
+| `pair_slug` | the pair pool definition, `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` for the current 17-row pool, and `plans/standing/retrofit-poe-repair-min.md` for the wider 20-pair boundary (see [world/animal-pair.md § What people get wrong](../world/animal-pair.md#what-people-get-wrong)) | 2026-08-24 |
+| `seed` | set at sampling time; cached per (pair, seed) run | 2026-08-24 |
+| `group` / `group_label` | assigned when a pair is added to the taxonomy; see `artifacts/plans/archived/phases/09-lora-taxonomy-single-seed.md` for the representative pair per group | 2026-08-24 |
+| `arm` | chosen at sampling time by which function in `poe_repair/methods/` is called | 2026-08-24 |
+| `lambda` | set as a sampling parameter, and run across a grid of values in the experiments that test whether adding more of the correction composes more often | 2026-08-24 |
+| `step` | fixed by the sampler's schedule length, verified in `1-lora-correction/report/experiments-log.md`'s axes table: "step / 0 to 49 / the schedule is 50 steps everywhere in the cache" | 2026-08-24 |
+| `model_id` | fixed by the model-loading code (`poe_repair/_sdxl/`); every run in this repo has used the one value seen so far, per this build's reading | 2026-08-24 |
+| `d_T` / `d_t` | computed during sampling by comparing the Mono and PoE noise predictions at each step; written into `summary.json`'s `metrics` block | 2026-08-24 |
+| `n_instances` | `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/compose-scorer-validation/scorer_validated.json`, `validation_labels.*.n_instances` | 2026-08-24 |
+| `label` / `truth` | `label` is computed by the rule in [world/compose-rate.md](../world/compose-rate.md#what-a-compose-rate-is); `truth` is set once, by a person, when the validation set was built | 2026-08-24 |
+| `fail_rate` / `compose_rate` | aggregated per pair from `label` values across seeds | 2026-08-24 |
+| `which_animal` / `both_ness` / `off_plane_norm` | DINOv2 ViT-S/14 class-token embeddings of the finished renders, projected onto two unit vectors built from the three single-prompt clouds' centroids; written by `1-lora-correction/scripts/showcase/where_each_condition_lands_plot.py` and, per step, by `where_each_condition_lands_frames_embed.py` into the scene's `public/data.json` | 2026-09-07 |
+| `commit_step` / `fork_step` | the per-step `both_ness` tracks in the scene's `public/data.json`, read by `1-lora-correction/scripts/showcase/where_each_condition_lands_dynamics.py` with `COMMIT_TOL = 0.10` (first saved step after which `both_ness` stays within 0.10 of its final value) and `FORK_MIN_DIST = 0.05` (first saved step at which the two runs are further apart than 0.05) | 2026-09-07 |
+
 <!-- related:start (drain) -->
 <a id="in-pictures-code-and-further-reading"></a>
 
 ## 🖼️ In pictures, code and further reading
 
-Navigation: ⬅️ [Previous](#commit_step--fork_step) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents) | [Next](#cross-references) ➡️
 
 The dictionary says what each field means. The pictures and code below show five of them: `n_instances` and `label`, `both_ness`, and `commit_step` with `fork_step`. No run is recorded for the whole page, so it has no input and output headings.
 

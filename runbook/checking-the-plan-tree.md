@@ -14,7 +14,8 @@ The four-check report-only pass named in `CLAUDE.md`'s "What the conventions loo
 repo": stale in-flight claims, unharvested output, orphaned plan files, and jargon that won't
 read cold. About 7 seconds over the whole tree. The session-start hook already runs checks 1
 and 2 automatically; run this by hand for checks 3 and 4, or any time after a pass that moved
-plan files.
+plan files. On the laptop this check cannot see Slurm, because `squeue` is missing there, so read its
+`STALE` lines against `scripts/cluster.sh jobs`.
 
 ```bash
 python3 scripts/plan_pulse.py
@@ -53,7 +54,7 @@ JARGON: design plans that will not read cold (4)
 
 | Heading | Usually | What to do |
 |---|---|---|
-| `STALE` | almost always real | fix the plan line |
+| `STALE` | almost always real from a cluster session; on the laptop a live cluster run can read as stale | check `scripts/cluster.sh jobs`, then fix the plan line |
 | `RUNSTATE` | almost always real | fix the plan line |
 | `ORPHAN` | intentional rather than a defect (a standing reference document, a superseded-and-marked section) | check each by name before touching it |
 | `DEBRIS` | intentional rather than a defect (a standing reference document, a superseded-and-marked section) | check each by name before touching it |

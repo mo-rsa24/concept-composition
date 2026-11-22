@@ -18,9 +18,9 @@ several-step decision.
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
 
-1. **Check for an already-allocated interactive node.** `squeue -u mmolefe`: if your own
+1. **Check for an already-allocated interactive node.** `squeue -u mmolefe` (from the laptop, `scripts/cluster.sh sh "squeue -u mmolefe"`): if your own
    interactive job already holds a `biggpu` node, run inside that job, with no new `sbatch`.
-2. **Submit through `sbatch`.** Else `sinfo -p biggpu`: if a `biggpu` node is idle and your one
+2. **Submit through `sbatch`.** Else `sinfo -p biggpu` (from the laptop, `scripts/cluster.sh sh "sinfo -p biggpu"`): if a `biggpu` node is idle and your one
    `biggpu` job slot is free, target `biggpu`. Otherwise submit to `bigbatch`, up to six jobs per
    user. If `sbatch` is denied, wait and submit again. **`sinfo`'s `idle` is not proof the GPU is
    free**: work launched over SSH with `nohup` (the shared-device path below) is invisible to

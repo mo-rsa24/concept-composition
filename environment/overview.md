@@ -88,9 +88,10 @@ Navigation: ⬅️ [Execution model](#execution-model) | 📋 [TOC](#table-of-co
   - Float16 keeps about three decimal digits, so past 2,048 it can no longer add 1. Toy (numbers
     invented, computed): adding 1 to a running total 4,096 times gives 2,048 in float16 and 4,096
     in float32. Stacking many cached tensors for the [SVD](../../../Obsidian/Mathematics/Linear%20Algebra/Singular%20Value%20Decomposition.md#where-to-learn-this) loses small contributions the same way.
-- No system LaTeX at all: `pdflatex`, `xelatex`, `latexmk`, and `bibtex` are absent from PATH
-  (reconfirmed live 2026-08-24). Every LaTeX recipe except `tectonic` fails, including the
-  extension's default. Detail, and an open question about whether a newly-added
+- No system LaTeX on the cluster: `pdflatex`, `xelatex`, `latexmk`, and `bibtex` are absent from
+  PATH (reconfirmed live 2026-11-22). Every LaTeX recipe there except `tectonic` fails, including the
+  extension's default. The laptop has `pdflatex`, `xelatex` and `bibtex`, and has no `latexmk` or
+  `tectonic` (checked 2026-11-22). Detail, and an open question about whether a newly-added
   `.vscode/settings.json` changes this: [paper.md](paper.md).
 - `tectonic`'s first build on a node downloads packages, so it needs network access. A node
   without it fails on the download, not on the document.

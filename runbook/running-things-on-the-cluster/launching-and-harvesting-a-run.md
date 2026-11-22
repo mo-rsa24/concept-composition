@@ -83,7 +83,7 @@ Navigation: ⬅️ [Previous](#2-launch-on-a-shared-device) | 📋 [TOC](#table-
 Two execution modes, and Slurm only sees one of them:
 
 ```bash
-squeue -u mmolefe                     # normal sbatch jobs
+scripts/cluster.sh sh "squeue -u mmolefe"   # normal sbatch jobs
 ssh <node> "pgrep -af 'sweep|train'"  # shared-device runs launched with nohup; invisible to squeue
 ```
 
