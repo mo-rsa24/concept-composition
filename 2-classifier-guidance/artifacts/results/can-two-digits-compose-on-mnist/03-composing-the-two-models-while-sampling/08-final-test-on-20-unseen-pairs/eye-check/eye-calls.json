@@ -1,0 +1,30 @@
+{
+ "what_this_is": "By-eye calls on every tile the judge rejected on the two pairs under 58 of 64, final read, seeds 128 to 191, with both pushes.",
+ "called_by": "Claude, at full resolution, with the judge reason hidden, 2026-11-22; the owner can overrule any call",
+ "calls": {
+  "3-8": {
+   "141": "wrong",
+   "144": "wrong",
+   "153": "plausible",
+   "159": "wrong",
+   "162": "plausible",
+   "167": "wrong",
+   "179": "plausible",
+   "183": "clear"
+  },
+  "4-9": {
+   "132": "plausible",
+   "145": "wrong",
+   "149": "plausible",
+   "170": "wrong",
+   "176": "plausible",
+   "177": "plausible",
+   "179": "wrong"
+  }
+ },
+ "meaning": {
+  "clear": "two clear, right digits",
+  "plausible": "readable as the asked digits but malformed",
+  "wrong": "a digit is missing, wrong, or a second copy"
+ }
+}

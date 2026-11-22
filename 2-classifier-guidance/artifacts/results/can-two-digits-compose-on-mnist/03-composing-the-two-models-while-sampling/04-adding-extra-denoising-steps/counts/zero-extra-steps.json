@@ -1,0 +1,19 @@
+{
+ "cell": "crop-nc-both-k0check",
+ "push": "both",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 47,
+ "tolerant_total_of_320": 47,
+ "per_pair": {
+  "4-7": {
+   "two clear, right, apart": 47,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 16,
+   "damaged": 1,
+   "tolerant": 47
+  }
+ }
+}

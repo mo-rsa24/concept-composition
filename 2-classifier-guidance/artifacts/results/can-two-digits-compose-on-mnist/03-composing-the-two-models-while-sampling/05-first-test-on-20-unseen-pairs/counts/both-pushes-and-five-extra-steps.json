@@ -1,0 +1,171 @@
+{
+ "cell": "final-crop-both-lang5c3",
+ "push": "both",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 1088,
+ "tolerant_total_of_320": 1098,
+ "per_pair": {
+  "0-6": {
+   "two clear, right, apart": 58,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 6,
+   "damaged": 0,
+   "tolerant": 58
+  },
+  "0-7": {
+   "two clear, right, apart": 52,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 11,
+   "damaged": 1,
+   "tolerant": 52
+  },
+  "0-8": {
+   "two clear, right, apart": 57,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 4,
+   "damaged": 2,
+   "tolerant": 57
+  },
+  "0-9": {
+   "two clear, right, apart": 61,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 3,
+   "damaged": 0,
+   "tolerant": 61
+  },
+  "1-5": {
+   "two clear, right, apart": 48,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 9,
+   "damaged": 6,
+   "tolerant": 51
+  },
+  "1-6": {
+   "two clear, right, apart": 62,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 2,
+   "damaged": 0,
+   "tolerant": 62
+  },
+  "1-7": {
+   "two clear, right, apart": 64,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 0,
+   "damaged": 0,
+   "tolerant": 64
+  },
+  "1-8": {
+   "two clear, right, apart": 47,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 17,
+   "damaged": 0,
+   "tolerant": 47
+  },
+  "2-5": {
+   "two clear, right, apart": 48,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 11,
+   "damaged": 5,
+   "tolerant": 49
+  },
+  "2-6": {
+   "two clear, right, apart": 59,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 4,
+   "damaged": 0,
+   "tolerant": 59
+  },
+  "2-7": {
+   "two clear, right, apart": 57,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 7,
+   "damaged": 0,
+   "tolerant": 57
+  },
+  "2-9": {
+   "two clear, right, apart": 59,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 5,
+   "damaged": 0,
+   "tolerant": 59
+  },
+  "3-5": {
+   "two clear, right, apart": 51,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 8,
+   "damaged": 5,
+   "tolerant": 54
+  },
+  "3-7": {
+   "two clear, right, apart": 59,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 5,
+   "damaged": 0,
+   "tolerant": 59
+  },
+  "3-8": {
+   "two clear, right, apart": 50,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 14,
+   "damaged": 0,
+   "tolerant": 50
+  },
+  "3-9": {
+   "two clear, right, apart": 63,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 1,
+   "damaged": 0,
+   "tolerant": 63
+  },
+  "4-5": {
+   "two clear, right, apart": 49,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 11,
+   "damaged": 4,
+   "tolerant": 52
+  },
+  "4-6": {
+   "two clear, right, apart": 55,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 9,
+   "damaged": 0,
+   "tolerant": 55
+  },
+  "4-8": {
+   "two clear, right, apart": 47,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 17,
+   "damaged": 0,
+   "tolerant": 47
+  },
+  "4-9": {
+   "two clear, right, apart": 42,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 19,
+   "damaged": 3,
+   "tolerant": 42
+  }
+ }
+}

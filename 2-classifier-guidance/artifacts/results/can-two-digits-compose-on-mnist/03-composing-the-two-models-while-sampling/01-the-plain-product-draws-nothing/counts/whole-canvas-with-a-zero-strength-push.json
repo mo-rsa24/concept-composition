@@ -1,0 +1,45 @@
+{
+ "cell": "e0-region-zero",
+ "push": "zero",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 4,
+ "per_pair": {
+  "1-9": {
+   "two clear, right, apart": 2,
+   "same half": 0,
+   "one blob": 62,
+   "two, not both clear and right": 0,
+   "damaged": 0
+  },
+  "3-6": {
+   "two clear, right, apart": 0,
+   "same half": 0,
+   "one blob": 64,
+   "two, not both clear and right": 0,
+   "damaged": 0
+  },
+  "4-7": {
+   "two clear, right, apart": 1,
+   "same half": 1,
+   "one blob": 62,
+   "two, not both clear and right": 0,
+   "damaged": 0
+  },
+  "2-8": {
+   "two clear, right, apart": 0,
+   "same half": 0,
+   "one blob": 64,
+   "two, not both clear and right": 0,
+   "damaged": 0
+  },
+  "0-5": {
+   "two clear, right, apart": 1,
+   "same half": 1,
+   "one blob": 62,
+   "two, not both clear and right": 0,
+   "damaged": 0
+  }
+ }
+}

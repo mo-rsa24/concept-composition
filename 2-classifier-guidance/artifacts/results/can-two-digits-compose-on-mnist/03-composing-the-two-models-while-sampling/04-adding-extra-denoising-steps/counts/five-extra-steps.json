@@ -1,0 +1,51 @@
+{
+ "cell": "crop-nc-both-lang-k5-c3",
+ "push": "both",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 298,
+ "tolerant_total_of_320": 299,
+ "per_pair": {
+  "1-9": {
+   "two clear, right, apart": 63,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 1,
+   "damaged": 0,
+   "tolerant": 63
+  },
+  "3-6": {
+   "two clear, right, apart": 59,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 2,
+   "damaged": 2,
+   "tolerant": 60
+  },
+  "4-7": {
+   "two clear, right, apart": 61,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 3,
+   "damaged": 0,
+   "tolerant": 61
+  },
+  "2-8": {
+   "two clear, right, apart": 57,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 7,
+   "damaged": 0,
+   "tolerant": 57
+  },
+  "0-5": {
+   "two clear, right, apart": 58,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 4,
+   "damaged": 2,
+   "tolerant": 58
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "cell": "e0d-inferred-occ",
+ "push": "none",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 34,
+ "tolerant_total_of_320": 35,
+ "per_pair": {
+  "1-9": {
+   "two clear, right, apart": 6,
+   "same half": 0,
+   "one blob": 4,
+   "two, not both clear and right": 51,
+   "damaged": 3,
+   "tolerant": 6
+  },
+  "3-6": {
+   "two clear, right, apart": 4,
+   "same half": 1,
+   "one blob": 3,
+   "two, not both clear and right": 46,
+   "damaged": 10,
+   "tolerant": 4
+  },
+  "4-7": {
+   "two clear, right, apart": 15,
+   "same half": 0,
+   "one blob": 3,
+   "two, not both clear and right": 40,
+   "damaged": 6,
+   "tolerant": 15
+  },
+  "2-8": {
+   "two clear, right, apart": 3,
+   "same half": 0,
+   "one blob": 3,
+   "two, not both clear and right": 54,
+   "damaged": 4,
+   "tolerant": 3
+  },
+  "0-5": {
+   "two clear, right, apart": 6,
+   "same half": 0,
+   "one blob": 5,
+   "two, not both clear and right": 46,
+   "damaged": 7,
+   "tolerant": 7
+  }
+ }
+}

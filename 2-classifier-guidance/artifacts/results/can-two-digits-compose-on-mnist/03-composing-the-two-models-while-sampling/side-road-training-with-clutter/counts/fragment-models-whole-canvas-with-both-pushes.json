@@ -1,0 +1,51 @@
+{
+ "cell": "fullpoe-frag-both",
+ "push": "both",
+ "s": 10.0,
+ "base": "avgnull",
+ "tau": 0.3,
+ "total_of_320": 66,
+ "tolerant_total_of_320": 69,
+ "per_pair": {
+  "1-9": {
+   "two clear, right, apart": 18,
+   "same half": 0,
+   "one blob": 6,
+   "two, not both clear and right": 37,
+   "damaged": 3,
+   "tolerant": 19
+  },
+  "3-6": {
+   "two clear, right, apart": 13,
+   "same half": 0,
+   "one blob": 4,
+   "two, not both clear and right": 42,
+   "damaged": 5,
+   "tolerant": 13
+  },
+  "4-7": {
+   "two clear, right, apart": 20,
+   "same half": 1,
+   "one blob": 1,
+   "two, not both clear and right": 37,
+   "damaged": 5,
+   "tolerant": 21
+  },
+  "2-8": {
+   "two clear, right, apart": 7,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 53,
+   "damaged": 3,
+   "tolerant": 8
+  },
+  "0-5": {
+   "two clear, right, apart": 8,
+   "same half": 0,
+   "one blob": 1,
+   "two, not both clear and right": 51,
+   "damaged": 4,
+   "tolerant": 8
+  }
+ }
+}

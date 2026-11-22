@@ -1,0 +1,51 @@
+{
+ "cell": "e0e-inferred-lock-both",
+ "push": "both",
+ "s": 10.0,
+ "base": "floor",
+ "tau": 0.3,
+ "total_of_320": 310,
+ "tolerant_total_of_320": 310,
+ "per_pair": {
+  "1-9": {
+   "two clear, right, apart": 59,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 4,
+   "damaged": 1,
+   "tolerant": 59
+  },
+  "3-6": {
+   "two clear, right, apart": 64,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 0,
+   "damaged": 0,
+   "tolerant": 64
+  },
+  "4-7": {
+   "two clear, right, apart": 60,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 4,
+   "damaged": 0,
+   "tolerant": 60
+  },
+  "2-8": {
+   "two clear, right, apart": 64,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 0,
+   "damaged": 0,
+   "tolerant": 64
+  },
+  "0-5": {
+   "two clear, right, apart": 63,
+   "same half": 0,
+   "one blob": 0,
+   "two, not both clear and right": 1,
+   "damaged": 0,
+   "tolerant": 63
+  }
+ }
+}
