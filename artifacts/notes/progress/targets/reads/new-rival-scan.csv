@@ -1,0 +1,100 @@
+paper,arxiv,status,benchmark,metric,method,value,better,page,table,beats_current_best,setting_note
+Structured Diffusion Guidance,2212.05032,no headline benchmark,,,,,,,,no,Tables score CC-500 and human preference
+GLIGEN,2301.07093,no headline benchmark,,,,,,,,no,"Tables score layout grounding, including GLIP on LVIS"
+SynGen (Linguistic Binding),2306.08877,no headline benchmark,,,,,,,,no,Tables score its own prompt sets and DVMP; CLEVR only in references
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,B-VQA,GORS + SD v2 (ours),0.6603,higher,12,XIII,no,"SD v2 finetuned; 300 test prompts per category; 10 images per prompt, fixed seed; CoMat's SDXL row prints the same 0.5879, so same scorer"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,B-VQA,Stable v3,0.8132,higher,12,XIII,yes,"plain SD3, no composition method; 300 test prompts per category; 10 images per prompt, fixed seed; CoMat's SDXL row prints the same 0.5879, so same scorer"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape,B-VQA,GORS + SD v2 (ours),0.4785,higher,12,XIII,no,"SD v2 finetuned; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.4687 here against 0.5408 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape,B-VQA,DALLE·3,0.6205,higher,12,XIII,yes,"closed model; 300 test prompts per category; DALL-E 3 gets 3 images per prompt, no seed; SDXL prints 0.4687 here against 0.5408 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,B-VQA,GORS + SD v2 (ours),0.6287,higher,12,XIII,no,"SD v2 finetuned; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.5299 here against 0.5637 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,B-VQA,Stable v3,0.7334,higher,12,XIII,yes,"plain SD3, no composition method; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.5299 here against 0.5637 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,B-VQA,DALLE·3,0.7036,higher,12,XIII,yes,"closed model; 300 test prompts per category; DALL-E 3 gets 3 images per prompt, no seed; SDXL prints 0.5299 here against 0.5637 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,B-VQA,FLUX.1,0.6922,higher,12,XIII,yes,"plain FLUX.1 schnell; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.5299 here against 0.5637 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,3-in-1,GORS + SD v2 (ours),0.3328,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,3-in-1,DALLE·3,0.3773,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,GPT-4V,GORS + SD v2 (ours),0.6850,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,GPT-4V,FLUX.1,0.8727,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,Share-CoT,GORS + SD v2 (ours),0.7737,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,Share-CoT,DALLE·3,0.7927,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,Share-CoT,FLUX.1,0.7927,higher,12,XIII,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,B-VQA,GORS + SD v2 (ours),0.6603,higher,9,VIII,no,"best of the 6 older models; 300 test prompts per category; 10 images per prompt, fixed seed; CoMat's SDXL row prints the same 0.5879, so same scorer"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape,B-VQA,GORS + SD v2 (ours),0.4785,higher,9,VIII,no,"best of the 6 older models; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.4687 here against 0.5408 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,B-VQA,GORS + SD v2 (ours),0.6287,higher,11,IX,no,"best of the 6 older models; 300 test prompts per category; 10 images per prompt, fixed seed; SDXL prints 0.5299 here against 0.5637 in ToMe Table 1, so runs differ"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,3-in-1,GORS + SD v2 (ours),0.3328,higher,11,XI,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,3-in-1,Attn-Exct + SD v2,0.3401,higher,11,XI,no,scoreboard row uses ImageReward; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,GPT-4V,GORS + SD v2 (ours),0.6850,higher,11,XI,no,GPT-4V on one fifth of images; different metric
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,mGPT,GORS (ours),0.6677,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,mGPT,Attn-Exct v2,0.6683,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape,mGPT,GORS (ours),0.6356,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape,mGPT,GORS-unbiased (ours),0.6399,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture,mGPT,GORS (ours),0.6709,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,mGPT,GORS (ours),0.8892,higher,12,XIV,no,MiniGPT-4 score; no scoreboard row uses it
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color seen split,B-VQA,GORS (ours),0.7192,higher,12,XV,no,seen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color unseen split,B-VQA,GORS (ours),0.5426,higher,12,XV,no,unseen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape seen split,B-VQA,GORS (ours),0.5500,higher,12,XV,no,seen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Shape unseen split,B-VQA,GORS (ours),0.3356,higher,12,XV,no,unseen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture seen split,B-VQA,GORS (ours),0.7647,higher,12,XV,no,seen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Texture unseen split,B-VQA,GORS (ours),0.3567,higher,12,XV,no,unseen pairs only; scoreboard row covers no such split
+T2I-CompBench++,2307.06350,read,T2I-CompBench Complex,3-in-1,ours (1400),0.3504,higher,13,XVI,no,"1,400 training prompts; scoreboard row uses ImageReward"
+T2I-CompBench++,2307.06350,read,T2I-CompBench Color,B-VQA,GORS (ours),0.6570,higher,15,XIX,no,"ablation run on Color; CoMat's SDXL row prints the same 0.5879, so same scorer"
+BoxDiff,2307.10816,no headline benchmark,,,,,,,,no,Tables score T2I-Sim and AP for box-constrained generation
+MCMC-Correction,2307.14012,no headline benchmark,,,,,,,,no,Tables score CIFAR-100 and ImageNet guidance; no CIFAR-10 disjoint split
+GenEval,2310.11513,read,GenEval two-object,GenEval score,SD-XL,0.74,higher,8,2,no,tied best; benchmark paper with no method of its own; no scoreboard row uses GenEval
+GenEval,2310.11513,read,GenEval two-object,GenEval score,IF-XL,0.74,higher,8,2,no,tied best; benchmark paper with no method of its own; no scoreboard row uses GenEval
+GenEval,2310.11513,read,GenEval two-object,GenEval score,SD-XL,0.74,higher,13,3,no,tied best; benchmark paper with no method of its own; no scoreboard row uses GenEval
+GenEval,2310.11513,read,GenEval two-object,GenEval score,IF-XL,0.74,higher,13,3,no,tied best; benchmark paper with no method of its own; no scoreboard row uses GenEval
+Bounded Attention,2403.16990,no headline benchmark,,,,,,,,no,Tables score DrawBench and a user study
+CFG is a Predictor-Corrector,2408.09000,no headline benchmark,,,,,,,,no,Theory paper with no results table
+TweedieMix,2410.05591,no headline benchmark,,,,,,,,no,Table scores CLIP alignment and user preference on its own concepts
+Distilled Energy Diffusion + SMC,2502.12786,no headline benchmark,,,,,,,,no,CIFAR-10 and CelebA FID score single models; male AND glasses composition is a figure only
+ISAC,2505.20935,read,T2I-CompBench Color,unnamed T2I-CompBench score,SD3.5-M + ISAC_LO (ours),0.838,higher,11,2,no,"above the target if the scorer is BLIP-VQA; plain SD3.5-M prints 0.796; scorer not named, so no match claimed; its SD1.5 Color 0.356 differs from CoMat's 0.3758"
+ISAC,2505.20935,read,T2I-CompBench Color,unnamed T2I-CompBench score,SD1.5 + ISAC_LO (ours),0.683,higher,11,2,no,"scorer not named, so no match claimed; its SD1.5 Color 0.356 differs from CoMat's 0.3758"
+ISAC,2505.20935,read,T2I-CompBench Texture,unnamed T2I-CompBench score,SD3.5-M + ISAC_LO (ours),0.739,higher,11,2,no,"above the target if the scorer is BLIP-VQA; plain SD3.5-M prints 0.726; scorer not named, so no match claimed; its SD1.5 Color 0.356 differs from CoMat's 0.3758"
+ISAC,2505.20935,read,T2I-CompBench Texture,unnamed T2I-CompBench score,SD1.5 + ISAC_LO (ours),0.631,higher,11,2,no,"scorer not named, so no match claimed; its SD1.5 Color 0.356 differs from CoMat's 0.3758"
+ISAC,2505.20935,read,T2I-CompBench Complex,unnamed T2I-CompBench score,SD3.5-M + ISAC_LO (ours),0.388,higher,11,2,no,scorer not named; scoreboard row uses ImageReward
+ISAC,2505.20935,read,T2I-CompBench Complex,unnamed T2I-CompBench score,SD1.5 + ISAC_LO (ours),0.354,higher,11,2,no,scorer not named; scoreboard row uses ImageReward
+Be Decisive,2505.21488,read,T2I-CompBench Color,BLIP-VQA,Ours,0.704,higher,12,2,no,"SDXL, 50 steps; BLIP-VQA on 200 sampled prompts; best in table"
+Be Decisive,2505.21488,read,T2I-CompBench Texture,BLIP-VQA,Ours,0.686,higher,12,2,no,"SDXL, 50 steps; BLIP-VQA on 200 sampled prompts; best in table"
+Product of Experts for Visual Generation,2506.08894,no headline benchmark,,,,,,,,no,"Tables score object insertion, physics video and MIG-Bench"
+GenEval 2,2512.16853,no headline benchmark,,,,,,,,no,"Prints GenEval overall scores only, with no two-object column"
+When Do Diffusion Models Learn Multiple Objects,2605.00273,no headline benchmark,,,,,,,,no,"Uses GenEval's detector on its own MOSAIC data, shown in plots; no benchmark table"
+Factor-Wise Expert Composition,2607.11758,no headline benchmark,,,,,,,,no,Tables score an ARC-AGI-1 subset
+Generalized Feynman-Kac Correctors,2610.40383,no headline benchmark,,,,,,,,no,No results table
+Conditional Object Composition,2611.00804,no headline benchmark,,,,,,,,no,Tables score success rate on MS COCO
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,BLIP,R2F,84.3,higher,8,3,yes,"SD3.0 base, 50 steps, seed 42; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,BLIP,SD3.0,84.0,higher,8,3,yes,"plain SD3.0; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,BLIP,RPG,83.4,higher,8,3,yes,"quoted from Yang et al. 2024 (RPG), marked with a dagger; 0 to 100 scale; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,BLIP,FLUX,82.5,higher,8,3,yes,"plain FLUX-schnell; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Shape,BLIP,RPG,68.0,higher,8,3,yes,"quoted from Yang et al. 2024 (RPG), marked with a dagger; 0 to 100 scale; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Shape,BLIP,R2F,63.9,higher,8,3,yes,"SD3.0 base, 50 steps, seed 42; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Shape,BLIP,SD3.0,63.3,higher,8,3,yes,"plain SD3.0; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,R2F,81.7,higher,8,3,yes,"SD3.0 base, 50 steps, seed 42; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,RPG,81.3,higher,8,3,yes,"quoted from Yang et al. 2024 (RPG), marked with a dagger; 0 to 100 scale; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,SD3.0,80.1,higher,8,3,yes,"plain SD3.0; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,FLUX,78.1,higher,8,3,yes,"plain FLUX-schnell; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,ELLA,71.3,higher,8,3,yes,"ELLA on SDXL; 0 to 100 scale; BLIP column; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,BLIP,PixArt,70.4,higher,8,3,yes,"quoted from Yang et al. 2024 (RPG), marked with a dagger; 0 to 100 scale; quoted SDXL row equals ToMe's BLIP-VQA row, so same scorer"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Complex,3in1,R2F,47.9,higher,8,3,no,scoreboard row uses ImageReward; different metric
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Complex,3in1,RPG,54.1,higher,8,3,no,quoted from Yang et al. 2024; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,GPT4,R2F,90.5,higher,8,3,no,"GPT-4o rubric, 0 to 100; no scoreboard row uses it"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Shape,GPT4,R2F,77.6,higher,8,3,no,"GPT-4o rubric, 0 to 100; no scoreboard row uses it"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,GPT4,R2F,91.9,higher,8,3,no,"GPT-4o rubric, 0 to 100; no scoreboard row uses it"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Complex,GPT4,R2F,85.3,higher,8,3,no,"GPT-4o rubric, 0 to 100; no scoreboard row uses it"
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Color,GPT4,R2F+,91.5,higher,10,7,no,layout-guided variant; GPT-4o rubric; no scoreboard row uses it
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Shape,GPT4,R2F+,84.1,higher,10,7,no,layout-guided variant; GPT-4o rubric; no scoreboard row uses it
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Texture,GPT4,R2F+,93.0,higher,10,7,no,layout-guided variant; GPT-4o rubric; no scoreboard row uses it
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Complex,GPT4,R2F+,80.7,higher,10,7,no,layout-guided variant; GPT-4o rubric; no scoreboard row uses it
+Rare-to-Frequent,2410.22376,read,T2I-CompBench Complex,GPT4,R2F,85.3,higher,10,7,no,best in table; GPT-4o rubric; no scoreboard row uses it
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F,70.0,higher,7,2,no,best in table; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,Human,R2F,71.3,higher,7,2,no,best in table; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F on SD3.0,70.0,higher,8,4,no,best in table; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F on SDXL,50.6,higher,8,4,no,SDXL backbone; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F on IterComp,41.5,higher,8,4,no,IterComp backbone; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F,70.0,higher,9,6,no,best in table; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench Concat,GPT4,R2F+,74.4,higher,10,7,no,best in table; scoreboard row uses ImageReward
+Rare-to-Frequent,2410.22376,read,RareBench multi-object,ImageReward,R2F,0.626,higher,26,17,no,"printed 0.626±0.029; pools all multi-object prompts, so not the Concat subset"
+Rare-to-Frequent,2410.22376,read,RareBench multi-object,ImageReward,R2F+,0.609,higher,26,17,no,"printed 0.609±0.033; pools all multi-object prompts, so not the Concat subset"
+Counting Guidance,2306.17567,no headline benchmark,,,,,,,,no,Tables score counting error on its own prompts; its two-object set is not GenEval
+Detector Guidance,2306.02236,no headline benchmark,,,,,,,,no,Table scores detector mAP on COCO; no generation benchmark
+Universal Guidance,2302.07121,no headline benchmark,,,,,,,,no,No results table
+Dynamic CFG via Online Feedback,2509.16131,no headline benchmark,,,,,,,,no,Tables score Gecko alignment and FID on MS COCO prompts
