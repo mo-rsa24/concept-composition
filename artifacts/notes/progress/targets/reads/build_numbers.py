@@ -1,4 +1,4 @@
-"""Join the 19 first reads into targets/numbers.csv, in the order rivals.md lists the papers.
+"""Join the first reads into targets/numbers.csv, in the order rivals.md lists the papers.
 
 Copies every cell unchanged, so no value can drift between a first read and the joined table.
 Stops if a paper is missing or an id repeats.
@@ -29,8 +29,8 @@ def previous_second_reads():
 def main():
     papers = [hit.group(1) for line in (HERE.parent / 'rivals.md').read_text().splitlines()
               if (hit := RIVAL_ROW.match(line))]
-    if len(papers) != 19:
-        sys.exit(f'expected 19 papers in rivals.md, found {len(papers)}')
+    if not papers:
+        sys.exit('no papers found in rivals.md')
 
     kept = previous_second_reads()
     rows = []

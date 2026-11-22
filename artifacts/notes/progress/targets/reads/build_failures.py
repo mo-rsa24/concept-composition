@@ -1,4 +1,4 @@
-"""Join the 19 figure reads into targets/failures.md, one section per rival.
+"""Join the figure reads into targets/failures.md, one section per rival.
 
 A row belongs to a rival when its method is the rival's short name or starts with it, so
 `PiCo without the exclusive mask` sits under PiCo. Every other method is listed by the paper that
@@ -23,7 +23,7 @@ NO_OWN_METHOD = {
 HEADER = """# How each rival fails
 
 This page records what each method draws well and where it breaks, as seen in the pictures the papers print. It comes
-from {figures} figures in 19 papers, {qualitative} of them generated samples, and {rows} rows of per-method findings. The
+from {figures} figures in {papers} papers, {qualitative} of them generated samples, and {rows} rows of per-method findings. The
 scoreboard's `failure` line for each rival is taken from here.
 
 **Authors choose their own figures.** A method's successes are over-represented, and a failure its authors did not print
@@ -58,8 +58,8 @@ def rival_of(method, rivals):
 def main():
     rivals = [hit.group(1) for text in (HERE.parent / 'rivals.md').read_text().splitlines()
               if (hit := RIVAL_ROW.match(text))]
-    if len(rivals) != 19:
-        sys.exit(f'expected 19 rivals, found {len(rivals)}')
+    if not rivals:
+        sys.exit('no rivals found in rivals.md')
 
     rows, kinds = [], Counter()
     for paper in rivals:
@@ -82,7 +82,7 @@ def main():
         owner = rival_of(row['method'], rivals)
         (by_rival[owner] if owner else others[row['printed_by']]).append(row)
 
-    parts = [HEADER.format(figures=sum(kinds.values()), qualitative=kinds['qualitative'], rows=len(rows))]
+    parts = [HEADER.format(papers=len(rivals), figures=sum(kinds.values()), qualitative=kinds['qualitative'], rows=len(rows))]
     parts.append('## Rivals\n')
     for name in rivals:
         parts.append(f'### {name}\n')

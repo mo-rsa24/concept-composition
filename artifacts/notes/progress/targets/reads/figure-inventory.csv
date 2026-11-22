@@ -264,3 +264,45 @@ CFGRevisited,2608.16786,2,5,Selected FLUX.2 [klein] 4B Base cases where alternat
 CFGRevisited,2608.16786,3,12,Guidance-scale sweep for the white-horse prompt.
 CFGRevisited,2608.16786,4,12,Guidance-scale sweep for the portrait prompt.
 CFGRevisited,2608.16786,5,13,Guidance-scale sweep for the mountain-valley prompt.
+LiftScores,2505.13740,1,2,"An illustration of product, mixture, and negation compositional models, and the improved sampling performance u"
+LiftScores,2505.13740,2,4,The accuracy of CompLift with different noise sam-
+LiftScores,2505.13740,3,4,Accuracy of acceptance/rejection over a single sam- uniform timestep
+LiftScores,2505.13740,4,5,Accepted and rejected SDXL examples using CompLift criterion. Objects in blue are composed through the given pr
+LiftScores,2505.13740,5,5,Average running time on 2D synthetic dataset. T −0.5
+LiftScores,2505.13740,6,5,Replacing ϵ in the differential loss of Equation (3) by
+LiftScores,2505.13740,7,6,CompLift for text-to-image compositional task. Pixels with negative scores are masked out. From left to right:
+LiftScores,2505.13740,8,7,Examples of samples on CLEVR Position dataset.
+LiftScores,2505.13740,9,8,Quantitative results on CLEVR Position dataset. Table 3. Quantitative result
+LiftScores,2505.13740,10,9,The correlation between the number of activated improving compositional
+LiftScores,2505.13740,17,18,Histograms of the CompLift scores for 2D synthetic distribution compositions. The histograms show the distribut
+LiftScores,2505.13740,18,21,More examples of samples on CLEVR Position dataset. We find that the SAM verifier is more robust and generaliza
+LiftScores,2505.13740,19,22,Example of failed samples on CLEVR Position dataset using MCMC. The generated objects in the synthesized images
+LiftScores,2505.13740,20,23,More examples of correlation between CLIP and CompLift. Prompt to generate left images: a turtle with a bow. Pr
+LiftScores,2505.13740,21,25,More examples of accepted and rejected images using SDXL + CompLift for text-to-image generation.
+LiftScores,2505.13740,22,26,More examples of accepted and rejected images using SDXL + CompLift for text-to-image generation.
+LogicalGuidance,2602.05549,1,2,"Logical Compositional Guidance. Visualization of logical composition using logical scores st (φ, x) for two spe"
+LogicalGuidance,2602.05549,2,5,Failure cases of constant baseline. Constant baseline
+LogicalGuidance,2602.05549,3,6,Conformity-diversity trade-off on CMNIST. Confor-
+LogicalGuidance,2602.05549,4,7,Impact of adaptive repulsive guidance. (Left) Moder- pocket. (Middle) Represe
+LogicalGuidance,2602.05549,5,7,Visualization of ligands in the GRM5-RRM1 dualtarget binding site. (Top) Reference ligand in the aligned bindin
+LogicalGuidance,2602.05549,7,27,Influence of guidance weight w on conditional independent disjunction (query: 1 ∨CI pink). Higher guidance weig
+LogicalGuidance,2602.05549,8,27,Influence of guidance weight w on mutual exclusive disjunction (query: red object ∨ME yellow object). Higher gu
+LogicalGuidance,2602.05549,9,28,Influence of guidance weight w on negation (query: ¬ 1). Higher guidance scales for the negation reduce the div
+LogicalGuidance,2602.05549,10,28,"Batch of results for the AND composition (light blue ∧ 3) on CMNIST. Note that for this single AND operation,"
+LogicalGuidance,2602.05549,11,29,"Batch of results for the NOT composition (¬ blue) on CMNIST. Conformity scores: Constant = 1.0, Ours = 0.99."
+LogicalGuidance,2602.05549,12,29,"Batch of results for the OR-ME composition (red ∨ beige) on CMNIST.Conformity scores: Constant = 0.84,"
+LogicalGuidance,2602.05549,13,30,"Batch of results for the OR-CI composition (2 ∨ blue) on CMNIST. Conformity scores: Constant = 0.78, Ours ="
+LogicalGuidance,2602.05549,14,30,Batch of results for the AND composition (lightgreen floor ∧ blue wall) on Shapes3D. Conformity scores:
+LogicalGuidance,2602.05549,15,31,"Batch of results for the NOT composition (¬ cylinder) on Shapes3D. Conformity scores: Constant = 0.93, Ours ="
+LogicalGuidance,2602.05549,16,31,Batch of results for the OR-CI composition (lightgreen floor lor pink object) on Shapes3D. Conformity scores:
+LogicalGuidance,2602.05549,17,32,Batch of results for a complex composition with N = 4 ((cube ∨CI (red wall ∨ME pink wall)) ∨CI (5 scale ∧
+LogicalGuidance,2602.05549,18,32,"Batch of results for NOT composition (¬ blond) on CelebA. Conformity scores: Constant = 1.0, Ours = 1.0."
+CountLoop,2508.16644,1,1,"Given prompts with explicit per-class counts, CountLoop produces images whose detected counts"
+CountLoop,2508.16644,2,3,Issues in High-instance image generation
+CountLoop,2508.16644,3,4,"Given a text prompt, ⃝ a The Design VLM parses the prompt to construct a planning graph, which"
+CountLoop,2508.16644,4,6,"Cumulative latent composition, along with disentangled query feature extraction, mitigates attribute"
+CountLoop,2508.16644,5,8,Successive layout refinement by Critic VLM. Layouts in the inset.
+CountLoop,2508.16644,6,9,CountLoop achieves significantly improved object count alignment and natural arrangements in
+CountLoop,2508.16644,7,11,Left: Counting error (MAE) rises with instance count. Right: Runtime curves echo the same
+CountLoop,2508.16644,8,13,Per-regime MAE at representative instance counts on CountLoop-S. Categories are
+CountLoop,2508.16644,9,14,Failure cases
