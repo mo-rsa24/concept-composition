@@ -1,13 +1,15 @@
-# 📒 Report: do inclusive labels help the product compose on MNIST? Recorded: "NULL" in the counts file, and the plan's verdict line is unticked
+# 📒 Report: do inclusive labels help the product compose on MNIST? ⚪ null
 
 **The claim**
 
 A small diffusion model learns MNIST digits on 32 × 64 canvases. A setting called the dial says how
-often a two-digit canvas is also trained under each single label (0, 0.1, 0.3, 0.6 or 1). The
+often a two-digit canvas is also trained under each single label (0, 0.1, 0.3, 0.6 or 1). [Plan 02](../../plans/11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md#8--tick-one-verdict-line)
+records the verdict as null. The dials that count are 0, 0.1 and 0.3, and their corrected 7 × 8 products
+draw a mean of 0, 0.33 and 8.0 separate right pairs of 64 by eye, all under the null line of 9.75. Dial 0.6
+(mean 22.0) stays out because one training drew a lone 7 on 205 of 256 against a floor of 207, and the floor
+stays as written because it was set before any model drew. Dial 1 (mean 24.0) misses its floors too. The
 [counts file](../../artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/counts.json)
-records `NULL`, and [plan 02](../../plans/11-do-inclusive-captions-help-poe-compose/plans/02-the-mnist-stage.md#success-and-failure-outcomes)
-has no verdict line ticked. The record does not settle the answer, because it turns on whether dial 0.6
-counts, and "7" alone misses that dial's floor by 2 of 256 seeds in one training.
+records `NULL` from the judge.
 
 ## Table of contents
 
@@ -72,9 +74,7 @@ every training `verified`.
 
 Navigation: ⬅️ [Previous](#1-what-the-product-draws-at-each-dial) | 📋 [TOC](#table-of-contents) | [Next](#where-the-sources-disagree) ➡️
 
-**Two of these four readings give null and two give inconclusive, and the choice is the owner's.** The
-walk's last word on the rule is "null, pending the user's settling of the calls and of the dial-0.6
-floor". The eye calls were then accepted, and no decision on the floor is recorded `verified`.
+**The floor stays as written, so dial 0.6 is excluded, and both readings under that rule give null.** The two rows that admit dial 0.6 show what the other choice would have given.
 
 | Who reads the product | Dial 0.6 | Highest counting mean | Line | That reading would give |
 |---|---|---|---|---|
@@ -91,7 +91,6 @@ Navigation: ⬅️ [Previous](#2-the-answer-under-each-reading-of-the-rule) | �
 
 | What | One source | The other source |
 |---|---|---|
-| whether a verdict exists | the counts file, [plan 03](../../plans/11-do-inclusive-captions-help-poe-compose/plans/03-the-mnist-share-run.md#position-in-the-plan-tree) and the [figures card](../../artifacts/scenes/how-the-inclusive-labels-mnist-stage-works/figures/README.md) say NULL | plan 02's verdict line and its tasks 5.2, 5.3 and 6.1 are unticked, and the walk says the verdict waits on the floor |
 | what reads the verdict | `score.py` computes the recorded NULL from the judge on 256 seeds | `bar.py` says "The verdict reads the corrected 7 x 8 product by eye" on 64 seeds |
 | whether the judge can be trusted at dial 0.6 | plan 02 requires 58 of 64 agreement with the eye on each dial's plain-product sheet | the walk records 50 of 64 at dial 0.6, and 42 of 64 on the corrected row |
 | training length | the [route](../../plans/route-inclusive-captions-pilot.md#4--ask-the-same-question-on-mnist-digits) says 30,000 steps, marked an estimate | plan 02 records 6,000 steps for all 15 models, the owner's choice |
@@ -163,8 +162,6 @@ Navigation: ⬅️ [Previous](#concepts-this-uses) | 📋 [TOC](#table-of-conten
 
 Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
-- [ ] Decide whether dial 0.6 counts. "7" alone reads 205 in training 1 against a floor of 207.
-- [ ] Tick one verdict line in plan 02 once that is decided.
 - [ ] Settle tasks 5.2, 5.3 and 6.1 of plan 02, which the walk reports on and the plan leaves unticked.
 - [ ] Write this folder's card. It has none, so the figure's provenance sits only in the plan and the scorer.
 
