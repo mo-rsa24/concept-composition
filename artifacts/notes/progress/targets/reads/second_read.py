@@ -29,12 +29,16 @@ JOB_ROOT = Path(os.environ.get('CLAUDE_JOB_DIR', '/home/molef/.claude/jobs/f541e
 PDFS = JOB_ROOT / 'rivals.tsv'
 WORK = JOB_ROOT / 'second-read'
 SHOWN = ('id', 'paper', 'dataset', 'task', 'metric', 'model', 'source_table')
+SHOWN_RETRY = SHOWN + ('protocol',)
+DISAGREE = HERE / 'disagreements.csv'
+UNPLACED = 'second reader could not place the cell'
 MODEL = 'gpt-6-astra'
 
 PROMPT = """You are reading one page of a published research paper, attached as an image.
 
 cells.csv below lists numbers printed on this page. Each line names one cell by its method (`paper`),
-dataset, task, metric, model and table. Find each cell on the page and copy its printed number.
+dataset, task, metric, model and table, and by its setting (`protocol`) when that column is present.
+Find each cell on the page and copy its printed number.
 
 Rules:
 - Copy digit for digit. Never round, estimate or compute a value.
@@ -86,19 +90,31 @@ def parse_reply(text, expected):
     return replies
 
 
-def run_job(name, rows, pdfs, timeout):
-    target = OUT / f'{name}.csv'
+def retry_jobs():
+    """The cells the first pass could not place, grouped by page, with their settings shown."""
+    with DISAGREE.open(newline='') as handle:
+        wanted = {row['id'] for row in csv.DictReader(handle) if row['why'] == UNPLACED}
+    grouped = defaultdict(list)
+    with NUMBERS.open(newline='') as handle:
+        for row in csv.DictReader(handle):
+            if row['id'] in wanted:
+                grouped[f"{source_paper(row)}-p{row['source_page']}"].append(row)
+    return grouped
+
+
+def run_job(name, rows, pdfs, timeout, shown=SHOWN, out_dir=OUT):
+    target = out_dir / f'{name}.csv'
     if target.exists():
         return name, 'skipped', len(rows)
     paper, page = name.rsplit('-p', 1)
-    folder = WORK / name
+    folder = WORK / ('retry' if out_dir != OUT else '') / name
     folder.mkdir(parents=True, exist_ok=True)
     image = folder / 'page.png'
     if not image.exists():
         subprocess.run(['pdftoppm', '-r', '250', '-f', page, '-l', page, '-singlefile', '-png',
                         pdfs[paper], str(folder / 'page')], check=True)
     buffer = io.StringIO()
-    writer = csv.DictWriter(buffer, fieldnames=SHOWN, extrasaction='ignore', lineterminator='\n')
+    writer = csv.DictWriter(buffer, fieldnames=shown, extrasaction='ignore', lineterminator='\n')
     writer.writeheader()
     writer.writerows(rows)
     reply = folder / 'reply.txt'
@@ -119,7 +135,7 @@ def run_job(name, rows, pdfs, timeout):
         except (ValueError, csv.Error) as problem:
             error = str(problem)
             continue
-        OUT.mkdir(exist_ok=True)
+        out_dir.mkdir(parents=True, exist_ok=True)
         with target.open('w', newline='') as handle:
             out = csv.DictWriter(handle, fieldnames=['id', 'value', 'interval', 'note'],
                                  lineterminator='\n')
@@ -135,12 +151,16 @@ def main():
     parser.add_argument('--only', nargs='*')
     parser.add_argument('--workers', type=int, default=6)
     parser.add_argument('--timeout', type=int, default=900)
+    parser.add_argument('--retry', action='store_true',
+                        help='re-read only the cells the first pass could not place, with their settings')
     args = parser.parse_args()
 
-    grouped = jobs()
+    grouped = retry_jobs() if args.retry else jobs()
+    shown = SHOWN_RETRY if args.retry else SHOWN
+    out_dir = OUT / 'retry' if args.retry else OUT
     if args.list:
         for name, rows in sorted(grouped.items()):
-            state = 'done' if (OUT / f'{name}.csv').exists() else 'todo'
+            state = 'done' if (out_dir / f'{name}.csv').exists() else 'todo'
             print(f'{name:28s}{len(rows):5d} {state}')
         print(f'{len(grouped)} pages, {sum(len(r) for r in grouped.values())} cells')
         return 0
@@ -153,7 +173,8 @@ def main():
 
     failed = 0
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        futures = [pool.submit(run_job, name, grouped[name], pdfs, args.timeout) for name in names]
+        futures = [pool.submit(run_job, name, grouped[name], pdfs, args.timeout, shown, out_dir)
+                   for name in names]
         for future in as_completed(futures):
             try:
                 name, state, count = future.result()

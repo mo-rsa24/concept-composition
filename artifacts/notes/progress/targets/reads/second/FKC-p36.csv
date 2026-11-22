@@ -1,0 +1,39 @@
+id,value,interval,note
+FKC-TA1-011,1.064,± 0.369,
+FKC-TA1-012,0.010,± 0.004,
+FKC-TA1-013,0.402,± 0.029,
+FKC-TA1-014,7.797,± 3.990,
+FKC-TA1-015,12.451,± 5.417,
+FKC-TA1-016,1.228,± 0.401,
+FKC-TA1-017,0.056,± 0.029,
+FKC-TA1-018,0.572,± 0.055,
+FKC-TA1-019,12.598,± 4.155,
+FKC-TA1-020,17.679,± 4.178,
+FKC-TA1-021,1.098,± 0.418,
+FKC-TA1-022,0.007,± 0.005,
+FKC-TA1-023,0.372,± 0.020,
+FKC-TA1-024,6.256,± 3.960,
+FKC-TA1-025,11.265,± 5.629,
+FKC-TA1-026,0.926,± 0.248,
+FKC-TA1-027,0.027,± 0.011,
+FKC-TA1-028,0.512,± 0.017,
+FKC-TA1-029,9.974,± 1.229,
+FKC-TA1-030,14.045,± 1.308,
+FKC-TA2-004,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-005,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-006,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-010,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-011,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-012,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-019,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-020,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-021,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-025,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-026,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-027,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-034,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-035,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-036,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-040,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-041,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.
+FKC-TA2-042,,,Ambiguous: target temperature unspecified; matching cells at 0.9 / 1.0 / 1.2.

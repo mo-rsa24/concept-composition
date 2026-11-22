@@ -38,7 +38,8 @@ def main():
             settled = {row['id']: row for row in csv.DictReader(handle)}
 
     second = {}
-    for path in sorted(SECOND.glob('*.csv')):
+    retries = sorted((SECOND / 'retry').glob('*.csv')) if (SECOND / 'retry').exists() else []
+    for path in sorted(SECOND.glob('*.csv')) + retries:
         with path.open(newline='') as handle:
             for row in csv.DictReader(handle):
                 if row['id'] not in by_id:
