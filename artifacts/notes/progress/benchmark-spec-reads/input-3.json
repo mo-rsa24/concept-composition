@@ -1,0 +1,1441 @@
+[
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "ImageNet-512",
+  "is_target": false,
+  "rows": 38,
+  "metrics": [
+   "CLIP",
+   "IR (ImageReward)"
+  ],
+  "tasks": [
+   "class-conditional image generation with classifier-free guidance"
+  ],
+  "samples_recorded": [
+   "10,000 images"
+  ],
+  "pages": [
+   "7",
+   "38"
+  ],
+  "tables": [
+   "FKC Table 2",
+   "FKC Table A3"
+  ],
+  "protocols": [
+   "EDM2-XS trained on ImageNet-512 sampled in RGB pixel space with the default classifier-free guidance weight beta = 1.4; CLIP and ImageReward are averaged over 10,000 images; gamma is the churn parameter of the SDE integrator and N the number of sampling steps; the no-resampling baseline is K = 1. This row: gamma = 10, N = 32 steps, batch size K = 1.",
+   "EDM2-XS trained on ImageNet-512 sampled in RGB pixel space with the default classifier-free guidance weight beta = 1.4; CLIP and ImageReward are averaged over 10,000 images; gamma is the churn parameter of the SDE integrator and N the number of sampling steps; the no-resampling baseline is K = 1. This row: gamma = 10, N = 32 steps, batch size K = 32.",
+   "EDM2-XS trained on ImageNet-512 sampled in RGB pixel space with the default classifier-free guidance weight beta = 1.4; CLIP and ImageReward are averaged over 10,000 images; gamma is the churn parameter of the SDE integrator and N the number of sampling steps; the no-resampling baseline is K = 1. This row: gamma = 40, N = 32 steps, batch size K = 1."
+  ],
+  "more_protocols": 15
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "LJ-13 (Lennard-Jones system of 13 particles)",
+  "is_target": false,
+  "rows": 75,
+  "metrics": [
+   "Distance-W2",
+   "Energy-W1",
+   "Energy-W2",
+   "distance-W2"
+  ],
+  "tasks": [
+   "temperature-annealed sampling from a Boltzmann density"
+  ],
+  "samples_recorded": [
+   "1 seed",
+   "3 runs",
+   "3 seeds"
+  ],
+  "pages": [
+   "8",
+   "36"
+  ],
+  "tables": [
+   "FKC Table 3",
+   "FKC Table A2"
+  ],
+  "protocols": [
+   "A Denoising Energy Matching (DEM) model trained at base temperature T_L = 2 and annealed at inference to the target temperature; performance is mean +/- standard deviation over 3 seeds; reference distributions come from a No-U-Turn sampler with 20k warmup steps and 20k samples from 10 chains per temperature; sampling uses 1000 integration steps with dt = 0.001, sigma_min = 0.01, sigma_max = 4.0 and the score clipped to norm 1000 per particle; the DEM rows are a model trained directly at the target temperature. This row: target temperature T_S = 0.8 (beta = 2.5), Target Score SDE.",
+   "A Denoising Energy Matching (DEM) model trained at base temperature T_L = 2 and annealed at inference to the target temperature; performance is mean +/- standard deviation over 3 seeds; reference distributions come from a No-U-Turn sampler with 20k warmup steps and 20k samples from 10 chains per temperature; sampling uses 1000 integration steps with dt = 0.001, sigma_min = 0.01, sigma_max = 4.0 and the score clipped to norm 1000 per particle; the DEM rows are a model trained directly at the target temperature. This row: target temperature T_S = 0.8 (beta = 2.5), Tempered Noise SDE.",
+   "A Denoising Energy Matching (DEM) model trained at base temperature T_L = 2 and annealed at inference to the target temperature; performance is mean +/- standard deviation over 3 seeds; reference distributions come from a No-U-Turn sampler with 20k warmup steps and 20k samples from 10 chains per temperature; sampling uses 1000 integration steps with dt = 0.001, sigma_min = 0.01, sigma_max = 4.0 and the score clipped to norm 1000 per particle; the DEM rows are a model trained directly at the target temperature. This row: target temperature T_S = 0.8 (beta = 2.5), DEM."
+  ],
+  "more_protocols": 12
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "100 protein target pairs (P1, P2)",
+  "is_target": false,
+  "rows": 64,
+  "metrics": [
+   "(P1 * P2) docking score product",
+   "Better than ref. (fraction)",
+   "Div.",
+   "P1 docking score",
+   "P2 docking score",
+   "QED",
+   "SA",
+   "Val. & Uniq.",
+   "max(P1, P2) docking score",
+   "mean docking score of the reference molecules"
+  ],
+  "tasks": [
+   "dual-target structure-based drug design (AND of 2 protein pockets)"
+  ],
+  "samples_recorded": [
+   "100 protein pairs, 32 ligands for each of 5 molecule sizes"
+  ],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "FKC Table 4",
+   "FKC text p9"
+  ],
+  "protocols": [
+   "32 ligands generated for each of 5 molecule sizes {15, 19, 23, 27, 35} for every protein pair using the Target Score SDE; pockets are aligned in 3D and coordinates sampled with an SE(3)-equivariant graph neural network over 1000 integration steps; ligands are docked with AutoDock Vina and values are averaged over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -7.915 +/- 2.841. This row: P1 only, no PoE.",
+   "32 ligands generated for each of 5 molecule sizes {15, 19, 23, 27, 35} for every protein pair using the Target Score SDE; pockets are aligned in 3D and coordinates sampled with an SE(3)-equivariant graph neural network over 1000 integration steps; ligands are docked with AutoDock Vina and values are averaged over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -7.915 +/- 2.841. This row: beta = 0.5, no FKC resampling.",
+   "32 ligands generated for each of 5 molecule sizes {15, 19, 23, 27, 35} for every protein pair using the Target Score SDE; pockets are aligned in 3D and coordinates sampled with an SE(3)-equivariant graph neural network over 1000 integration steps; ligands are docked with AutoDock Vina and values are averaged over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -7.915 +/- 2.841. This row: beta = 0.5, with FKC resampling."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "Mixture of 40 Gaussians",
+  "is_target": false,
+  "rows": 30,
+  "metrics": [
+   "Energy-W2",
+   "MMD",
+   "Total Var",
+   "W1",
+   "W2"
+  ],
+  "tasks": [
+   "sampling from an annealed distribution (inverse temperature beta = 3)"
+  ],
+  "samples_recorded": [
+   "5 runs with 10k samples"
+  ],
+  "pages": [
+   "36"
+  ],
+  "tables": [
+   "FKC Table A1"
+  ],
+  "protocols": [
+   "A mixture of 40 Gaussians where q_t and grad log q_t are computed exactly; sampling from the annealed target with inverse temperature beta = 3; metrics are calculated over 5 runs with 10k samples; no arrow is printed on any column, so the direction comes from the metrics being distances. This row: Target Score SDE, no FKC resampling.",
+   "A mixture of 40 Gaussians where q_t and grad log q_t are computed exactly; sampling from the annealed target with inverse temperature beta = 3; metrics are calculated over 5 runs with 10k samples; no arrow is printed on any column, so the direction comes from the metrics being distances. This row: Tempered Noise SDE, no FKC resampling.",
+   "A mixture of 40 Gaussians where q_t and grad log q_t are computed exactly; sampling from the annealed target with inverse temperature beta = 3; metrics are calculated over 5 runs with 10k samples; no arrow is printed on any column, so the direction comes from the metrics being distances. This row: Target Score SDE, FKC with BDC resampling."
+  ],
+  "more_protocols": 3
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "GenEval (553 prompts)",
+  "is_target": false,
+  "rows": 42,
+  "metrics": [
+   "Color attribution",
+   "Colors",
+   "Counting",
+   "Overall",
+   "Position",
+   "Single object",
+   "Two object"
+  ],
+  "tasks": [
+   "text-to-image generation on GenEval"
+  ],
+  "samples_recorded": [
+   "553 prompts"
+  ],
+  "pages": [
+   "39"
+  ],
+  "tables": [
+   "FKC Table A4"
+  ],
+  "protocols": [
+   "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: taken directly from the GenEval leaderboard.",
+   "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: run by the authors at guidance weight beta = 7.5.",
+   "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: run by the authors at guidance weight beta = 5.5."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "GenEval (1000 prompts)",
+  "is_target": false,
+  "rows": 21,
+  "metrics": [
+   "Color attribution",
+   "Colors",
+   "Counting",
+   "Overall",
+   "Position",
+   "Single object",
+   "Two object"
+  ],
+  "tasks": [
+   "text-to-image generation on GenEval"
+  ],
+  "samples_recorded": [
+   "1000 prompts"
+  ],
+  "pages": [
+   "39"
+  ],
+  "tables": [
+   "FKC Table A4"
+  ],
+  "protocols": [
+   "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: run by the authors at guidance weight beta = 7.5.",
+   "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: run by the authors at guidance weight beta = 5.5."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "One protein target pair (UniProt P23786/P05023)",
+  "is_target": false,
+  "rows": 225,
+  "metrics": [
+   "(P1 * P2) docking score product",
+   "Better than ref. (fraction)",
+   "Div.",
+   "P1 docking score",
+   "P2 docking score",
+   "Qual.",
+   "Val. & Uniq.",
+   "max(P1, P2) docking score",
+   "mean docking score of the reference molecules"
+  ],
+  "tasks": [
+   "dual-target structure-based drug design (AND of 2 protein pockets)"
+  ],
+  "samples_recorded": [
+   "32 molecules for each of 5 molecule sizes"
+  ],
+  "pages": [
+   "40"
+  ],
+  "tables": [
+   "FKC Table A5",
+   "FKC text p40"
+  ],
+  "protocols": [
+   "32 molecules generated for each of 5 molecule sizes for a single protein pair (UniProt IDs P23786/P05023) used as the validation set; values are averages over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -8.255 +/- 1.849; quality is the percentage of molecules that are valid, unique, with QED >= 0.6 and SA <= 4.0; t_max is the time below which resampling happens. This row: beta = 0.5, Target Score SDE, no FKC resampling, no t_max.",
+   "32 molecules generated for each of 5 molecule sizes for a single protein pair (UniProt IDs P23786/P05023) used as the validation set; values are averages over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -8.255 +/- 1.849; quality is the percentage of molecules that are valid, unique, with QED >= 0.6 and SA <= 4.0; t_max is the time below which resampling happens. This row: beta = 1.0, Target Score SDE, no FKC resampling, no t_max.",
+   "32 molecules generated for each of 5 molecule sizes for a single protein pair (UniProt IDs P23786/P05023) used as the validation set; values are averages over all generated molecules in each run; \"Better than ref.\" is the fraction of ligands beating known reference molecules on both targets, whose mean docking score is -8.255 +/- 1.849; quality is the percentage of molecules that are valid, unique, with QED >= 0.6 and SA <= 4.0; t_max is the time below which resampling happens. This row: beta = 1.5, Target Score SDE, no FKC resampling, no t_max."
+  ],
+  "more_protocols": 20
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "LDMol molecules, property pair JNK3 / GSK3b",
+  "is_target": false,
+  "rows": 77,
+  "metrics": [
+   "(P1, P2) top-1, P1",
+   "(P1, P2) top-1, P2",
+   "Div.",
+   "P1 top-10",
+   "P2 top-10",
+   "Qual.",
+   "Val. & Uniq."
+  ],
+  "tasks": [
+   "AND of 2 molecular properties (JNK3 / GSK3b)"
+  ],
+  "samples_recorded": [
+   "top-10 of a batch of 512, averaged over 5 runs"
+  ],
+  "pages": [
+   "42",
+   "44"
+  ],
+  "tables": [
+   "FKC Table A6",
+   "FKC Table A8"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / GSK3b, Target Score SDE, beta = 0.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / GSK3b, Tempered Noise SDE, beta = 1.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / GSK3b, Tempered Noise SDE, beta = 1.5, FKC resampling on."
+  ],
+  "more_protocols": 8
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "LDMol molecules, property pair JNK3 / DRD2",
+  "is_target": false,
+  "rows": 77,
+  "metrics": [
+   "(P1, P2) top-1, P1",
+   "(P1, P2) top-1, P2",
+   "Div.",
+   "P1 top-10",
+   "P2 top-10",
+   "Qual.",
+   "Val. & Uniq."
+  ],
+  "tasks": [
+   "AND of 2 molecular properties (JNK3 / DRD2)"
+  ],
+  "samples_recorded": [
+   "top-10 of a batch of 512, averaged over 5 runs"
+  ],
+  "pages": [
+   "42",
+   "44"
+  ],
+  "tables": [
+   "FKC Table A6",
+   "FKC Table A8"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / DRD2, Target Score SDE, beta = 0.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / DRD2, Tempered Noise SDE, beta = 1.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair JNK3 / DRD2, Tempered Noise SDE, beta = 1.5, FKC resampling on."
+  ],
+  "more_protocols": 8
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "LDMol molecules, property pair GSK3b / DRD2",
+  "is_target": false,
+  "rows": 77,
+  "metrics": [
+   "(P1, P2) top-1, P1",
+   "(P1, P2) top-1, P2",
+   "Div.",
+   "P1 top-10",
+   "P2 top-10",
+   "Qual.",
+   "Val. & Uniq."
+  ],
+  "tasks": [
+   "AND of 2 molecular properties (GSK3b / DRD2)"
+  ],
+  "samples_recorded": [
+   "top-10 of a batch of 512, averaged over 5 runs"
+  ],
+  "pages": [
+   "42",
+   "44"
+  ],
+  "tables": [
+   "FKC Table A6",
+   "FKC Table A8"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair GSK3b / DRD2, Target Score SDE, beta = 0.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair GSK3b / DRD2, Tempered Noise SDE, beta = 1.5, no FKC resampling.",
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt naming one protein the molecule should inhibit; the top-10 set is the highest P1*P2 molecules from a batch of 512, averaged over 5 runs, and the top-1 molecule is the best overall; properties are scored with Therapeutic Data Commons oracles; quality is the set of valid, unique molecules with QED >= 0.6 and SA <= 4.0; FKC weights are divided by a temperature term T = 100, the top 20% clipped, and resampling stops after 70% of the timesteps. This row: property pair GSK3b / DRD2, Tempered Noise SDE, beta = 1.5, FKC resampling on."
+  ],
+  "more_protocols": 8
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "Protein pair ATP1A1 (P1) and CPT2 (P2)",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "(P1, P2) top-1, P1 docking score",
+   "(P1, P2) top-1, P2 docking score",
+   "(P1, P2) top-10, P1 docking score",
+   "(P1, P2) top-10, P2 docking score",
+   "Div.",
+   "docking score against ATP1A1",
+   "docking score against CPT2"
+  ],
+  "tasks": [
+   "AND of 2 protein-binding properties"
+  ],
+  "samples_recorded": [
+   "32 molecules"
+  ],
+  "pages": [
+   "43"
+  ],
+  "tables": [
+   "FKC Table A7",
+   "FKC text p43"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol from text prompts naming ATP1A1 (P1) and CPT2 (P2) and docked with AutoDock Vina against pockets from Zhou et al. (2024); the Tempered Noise SDE with beta = 1.5 and 32 generated molecules. This row: no FKC resampling.",
+   "Molecules generated with LDMol from text prompts naming ATP1A1 (P1) and CPT2 (P2) and docked with AutoDock Vina against pockets from Zhou et al. (2024); the Tempered Noise SDE with beta = 1.5 and 32 generated molecules. This row: FKC resampling on.",
+   "Stated on page 43 as the docking score of known binders, quoted from Zhou et al. (2024), to compare against the molecules of Table A7."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.02819",
+  "rival": "FKC",
+  "dataset": "Protein target pairs shown as examples",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Spearman rank correlation between FKC weight and docking score"
+  ],
+  "tasks": [
+   "dual-target structure-based drug design (AND of 2 protein pockets)"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "40"
+  ],
+  "tables": [
+   "FKC text p40"
+  ],
+  "protocols": [
+   "Stated on page 40 as the average Spearman rank correlation over timesteps for a protein pair where molecules improve with FKC resampling; the per-timestep curves are Figure A7.",
+   "Stated on page 40 as the average Spearman rank correlation over timesteps for a protein pair where FKC resampling does not improve the molecule; the per-timestep curves are Figure A7."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Color",
+  "is_target": true,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Shape",
+  "is_target": false,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Texture",
+  "is_target": false,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Spatial",
+  "is_target": false,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "object relationship"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Non-Spatial",
+  "is_target": false,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "object relationship"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "T2I-CompBench Complex",
+  "is_target": false,
+  "rows": 19,
+  "metrics": [
+   "T2I-CompBench result",
+   "T2I-CompBench result, printed gain over SD1.5",
+   "T2I-CompBench result, printed gain over SDXL"
+  ],
+  "tasks": [
+   "complex compositions"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "9"
+  ],
+  "tables": [
+   "CoMat Table 1",
+   "CoMat Table 4",
+   "CoMat Table 5"
+  ],
+  "protocols": [
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation off and attribute concentration off.",
+   "T2I-CompBench (6,000 compositional prompts over 6 sub-categories) run with its default settings and the latest evaluation code on GitHub; the paper does not name the scorer or state the evaluated split, images per prompt, seeds, sampler, steps, guidance or resolution; this row: concept activation on and attribute concentration off."
+  ],
+  "more_protocols": 5
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "TIFA",
+  "is_target": false,
+  "rows": 8,
+  "metrics": [
+   "TIFA",
+   "TIFA, printed gain over SD1.5",
+   "TIFA, printed gain over SDXL"
+  ],
+  "tasks": [
+   "text-image alignment"
+  ],
+  "samples_recorded": [
+   "4,000 prompts"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "CoMat Table 2"
+  ],
+  "protocols": [
+   "TIFA with 4,000 text prompts and 25,000 questions across 12 categories, scored by a VQA model with pre-generated question-answer pairs at the benchmark default settings; the paper does not name the VQA model or state images per prompt, seeds, sampler, steps, guidance or resolution."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "DPG-Bench",
+  "is_target": false,
+  "rows": 8,
+  "metrics": [
+   "DPG",
+   "DPG, printed gain over SD1.5",
+   "DPG, printed gain over SDXL"
+  ],
+  "tasks": [
+   "dense prompts"
+  ],
+  "samples_recorded": [
+   "1065 prompts"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "CoMat Table 2"
+  ],
+  "protocols": [
+   "DPG-Bench with 1065 dense prompts of average token length 83.91 at the benchmark default settings, with the model accepting only 77 tokens; the paper does not state the scorer, images per prompt, seeds, sampler, steps, guidance or resolution."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "COCO validation set",
+  "is_target": false,
+  "rows": 6,
+  "metrics": [
+   "FID-10K"
+  ],
+  "tasks": [
+   "generation capability (photorealism)"
+  ],
+  "samples_recorded": [
+   "10K"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "CoMat Table 3"
+  ],
+  "protocols": [
+   "FID on 10K data from the COCO validation set, printed for SD1.5 and CoMat-SD1.5 only with no SDXL row; sampler, steps, guidance, seeds and resolution are not stated; this row: base model with no discriminator and no mixed latent.",
+   "FID on 10K data from the COCO validation set, printed for SD1.5 and CoMat-SD1.5 only with no SDXL row; sampler, steps, guidance, seeds and resolution are not stated; this row: no discriminator and no mixed latent.",
+   "FID on 10K data from the COCO validation set, printed for SD1.5 and CoMat-SD1.5 only with no SDXL row; sampler, steps, guidance, seeds and resolution are not stated; this row: UNet discriminator on real-world latent and no mixed latent."
+  ],
+  "more_protocols": 3
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "CoMat",
+  "dataset": "ImageNet-1K classes",
+  "is_target": false,
+  "rows": 4,
+  "metrics": [
+   "Success rate of prompt attack (%)"
+  ],
+  "tasks": [
+   "long prompt",
+   "short prompt"
+  ],
+  "samples_recorded": [
+   "20 samples per class for 1,000 classes"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CoMat Table 6"
+  ],
+  "protocols": [
+   "Automated prompt attack of reference [16] on short prompts, 20 samples per class for 1,000 ImageNet-1K classes, success being the proportion of generated images mistakenly classified by a visual classifier the paper does not name.",
+   "Automated prompt attack of reference [16] on long prompts, 20 samples per class for 1,000 ImageNet-1K classes, success being the proportion of generated images mistakenly classified by a visual classifier the paper does not name."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2404.03653",
+  "rival": "BLIP",
+  "dataset": "Image-to-text sensitivity test set",
+  "is_target": false,
+  "rows": 6,
+  "metrics": [
+   "Parameters (B)",
+   "Parameters (M)",
+   "Sensitivity Score"
+  ],
+  "tasks": [
+   "image-to-text model statistics"
+  ],
+  "samples_recorded": [
+   "200 images"
+  ],
+  "pages": [
+   "20"
+  ],
+  "tables": [
+   "CoMat Table 7"
+  ],
+  "protocols": [
+   "Parameter count of the image-to-text model as printed in the table.",
+   "Mean sensitivity score (Eq. 7) over a test set of 200 images, 100 sampled from the ARO benchmark and 100 generated by SD1.5 and SDXL from T2I-CompBench prompts, with captions corrupted by swapping attributes, swapping subject and object, or changing singular and plural."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian, factorized conditionals, in-distribution (P^a1=N(0,diag(10,1)), P^a2=N(0,diag(1,10)), P^0=N(0,10I), P^w=N(0,I))",
+  "is_target": false,
+  "rows": 120,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "10",
+   "28",
+   "34",
+   "36",
+   "37"
+  ],
+  "tables": [
+   "Catastrophic Table 1",
+   "Catastrophic Table 12",
+   "Catastrophic Table 13",
+   "Catastrophic Table 3",
+   "Catastrophic Table 4",
+   "Catastrophic Table 5"
+  ],
+  "protocols": [
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 102
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian, non-factorized conditionals, in-distribution (P^a1=N(0,diag(10,1)), P^a2=N(0,diag(1,10)), P^0=N(0,20I), P^w=N(0,(20/21)I))",
+  "is_target": false,
+  "rows": 120,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "10",
+   "28",
+   "34",
+   "35",
+   "37"
+  ],
+  "tables": [
+   "Catastrophic Table 1",
+   "Catastrophic Table 14",
+   "Catastrophic Table 15",
+   "Catastrophic Table 3",
+   "Catastrophic Table 6",
+   "Catastrophic Table 7"
+  ],
+  "protocols": [
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 102
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian, factorized conditionals, out-of-distribution (P^a1=N(0,diag(10,1)), P^a2=N(0,diag(1,10)), P^0=N(0,I), P^w=N(0,10I))",
+  "is_target": false,
+  "rows": 120,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "10",
+   "28",
+   "35",
+   "38"
+  ],
+  "tables": [
+   "Catastrophic Table 1",
+   "Catastrophic Table 16",
+   "Catastrophic Table 17",
+   "Catastrophic Table 3",
+   "Catastrophic Table 8",
+   "Catastrophic Table 9"
+  ],
+  "protocols": [
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 102
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian, non-factorized conditionals, out-of-distribution (P^a1=N(0,diag(10,1)), P^a2=N(0,diag(1,10)), P^0=N(0,1.1I), P^w=N(0,(110/21)I))",
+  "is_target": false,
+  "rows": 120,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "10",
+   "28",
+   "36",
+   "38",
+   "39"
+  ],
+  "tables": [
+   "Catastrophic Table 1",
+   "Catastrophic Table 10",
+   "Catastrophic Table 11",
+   "Catastrophic Table 18",
+   "Catastrophic Table 19",
+   "Catastrophic Table 3"
+  ],
+  "protocols": [
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2 with 2000 random projections between 5000 generated and 5000 ground-truth samples, mean over 30 training runs with seeds 1 to 30; VP SDE sampling with 500 integration steps and g_clip 15.0; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 102
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian mixture, in-distribution (six components at {-3,0,3}x{-2.5,2.5}, sigma=0.6)",
+  "is_target": false,
+  "rows": 100,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "11",
+   "39",
+   "40"
+  ],
+  "tables": [
+   "Catastrophic Table 2",
+   "Catastrophic Table 20",
+   "Catastrophic Table 21",
+   "Catastrophic Table 24",
+   "Catastrophic Table 25"
+  ],
+  "protocols": [
+   "SW2, mean over 30 training runs, against ground truth drawn by rejection sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2, mean over 30 training runs, against ground truth drawn by rejection sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2, mean over 30 training runs, against ground truth drawn by rejection sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 87
+ },
+ {
+  "arxiv": "2606.23920",
+  "rival": "FKC",
+  "dataset": "2D Gaussian mixture, out-of-distribution (P^a1 means (-6,1.5),(0,0); P^a2 means (0,-9),(-1.5,6); P^0 all four means; sigma=1)",
+  "is_target": false,
+  "rows": 100,
+  "metrics": [
+   "MMD2",
+   "SW2"
+  ],
+  "tasks": [
+   "Sample the base composition P^w, K=1 particles, N=100 training samples",
+   "Sample the base composition P^w, K=1 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=1 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=1 particles, analytic scores",
+   "Sample the base composition P^w, K=16 particles, N=100 training samples",
+   "Sample the base composition P^w, K=16 particles, N=1000 training samples",
+   "Sample the base composition P^w, K=16 particles, N=10000 training samples",
+   "Sample the base composition P^w, K=16 particles, analytic scores"
+  ],
+  "samples_recorded": [
+   "5000 per run, 30 runs"
+  ],
+  "pages": [
+   "11",
+   "39",
+   "40",
+   "41"
+  ],
+  "tables": [
+   "Catastrophic Table 2",
+   "Catastrophic Table 22",
+   "Catastrophic Table 23",
+   "Catastrophic Table 26",
+   "Catastrophic Table 27"
+  ],
+  "protocols": [
+   "SW2, mean over 30 training runs, against ground truth drawn by importance sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=100 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2, mean over 30 training runs, against ground truth drawn by importance sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=1000 samples with Adam at lr 2e-4 and batch size 512.",
+   "SW2, mean over 30 training runs, against ground truth drawn by importance sampling; g_clip 15.0, with network, noising schedule and optimizer as in the 2D Gaussian setup; K=1 particle, where FKC equals naive denoising; single conditional 4-layer MLP of width 512 trained 20,000 iterations on N=10000 samples with Adam at lr 2e-4 and batch size 512."
+  ],
+  "more_protocols": 87
+ },
+ {
+  "arxiv": "2505.03203",
+  "rival": "PiCo",
+  "dataset": "CC-500 and T2I-Compbench (500 prompts)",
+  "is_target": false,
+  "rows": 66,
+  "metrics": [
+   "Alignment: Loss (%)",
+   "Alignment: Tie (%)",
+   "Alignment: Win (%)",
+   "Quality: Loss (%)",
+   "Quality: Tie (%)",
+   "Quality: Win (%)",
+   "Random: Both (%)",
+   "Random: None (%)",
+   "Selected: Both (%)",
+   "Selected: Both change from Random (percentage points)",
+   "Selected: None (%)",
+   "Selected: None change from Random (percentage points)"
+  ],
+  "tasks": [
+   "PiCo versus Attend-and-Excite, pairwise human vote",
+   "PiCo versus BoxDiff, pairwise human vote",
+   "PiCo versus GORS, pairwise human vote",
+   "PiCo versus Magnet, pairwise human vote",
+   "PiCo versus Stable Diffusion, pairwise human vote",
+   "attribute binding, random noise",
+   "attribute binding, selected noise"
+  ],
+  "samples_recorded": [
+   "500"
+  ],
+  "pages": [
+   "5"
+  ],
+  "tables": [
+   "PiCo Table I",
+   "PiCo Table II"
+  ],
+  "protocols": [
+   "Human annotators label the correct concepts per image on 500 sampled two-object images, drawn from 500 prompts with 10 seeds each; all methods use random initial noise.",
+   "Human annotators label the correct concepts per image on 500 sampled two-object images, drawn from 500 prompts with 10 seeds each; all methods use the noises selected by PiCo.",
+   "Printed change from the Random column to the Selected column of this table, under human annotation."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2505.03203",
+  "rival": "AttendExcite",
+  "dataset": "T2I-Compbench (400 prompts)",
+  "is_target": false,
+  "rows": 42,
+  "metrics": [
+   "CLIP-S",
+   "CLIPScore",
+   "Random: DINO",
+   "Selected: DINO",
+   "Selected: DINO change from Random",
+   "VQAScore"
+  ],
+  "tasks": [
+   "attribute binding, random noise",
+   "attribute binding, selected noise",
+   "automatic comparison",
+   "objective metric, selected noise"
+  ],
+  "samples_recorded": [
+   "4000"
+  ],
+  "pages": [
+   "5",
+   "7"
+  ],
+  "tables": [
+   "PiCo Table I",
+   "PiCo Table IV"
+  ],
+  "protocols": [
+   "DINO-Score on 4,000 images from 400 T2I-Compbench prompts; all methods use random initial noise.",
+   "DINO-Score on 4,000 images from 400 T2I-Compbench prompts; all methods use the noises selected by PiCo.",
+   "Printed change from the Random column to the Selected column of this table, for DINO-Score."
+  ],
+  "more_protocols": 2
+ },
+ {
+  "arxiv": "2505.03203",
+  "rival": "AttendExcite",
+  "dataset": "MS-COCO",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "CLIP-I",
+   "FID"
+  ],
+  "tasks": [
+   "objective metric, selected noise"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5"
+  ],
+  "tables": [
+   "PiCo Table I"
+  ],
+  "protocols": [
+   "Tested on the MS-COCO dataset; all methods use the noises selected by PiCo; this table does not state the image count."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2505.03203",
+  "rival": "PiCo",
+  "dataset": "CC-500 and T2I-Compbench (subset not restated for this table)",
+  "is_target": false,
+  "rows": 64,
+  "metrics": [
+   "Both (%)",
+   "Both/Single (%)",
+   "DINO",
+   "None (%)",
+   "Runtime per prompt (s)",
+   "Single (%)"
+  ],
+  "tasks": [
+   "Mask Control: T_c = 0 (No control)",
+   "Mask Control: T_c = 25",
+   "Mask Control: T_c = 5",
+   "Mask Control: T_c = 50",
+   "Mask Control: gamma = 1",
+   "Mask Control: gamma = 15",
+   "Mask Control: gamma = 50",
+   "Seed Selection: No Seed Selection"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5",
+   "9",
+   "10"
+  ],
+  "tables": [
+   "PiCo Table III",
+   "PiCo Table V",
+   "PiCo Table VI",
+   "PiCo text p9"
+  ],
+  "protocols": [
+   "Ablation of the noise selection inference steps T_s under human annotation, with runtime per prompt; the sample count is not restated for this table.",
+   "Human annotation in the ablation of the noise selection and referring mask control hyperparameters; the sample count is not restated for this table.",
+   "Ablation of the percentile and delta hyperparameters of the noise selection module; the sample count is not restated for this table."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2505.03203",
+  "rival": "PiCo",
+  "dataset": "MS-COCO val (5k image-text pairs)",
+  "is_target": false,
+  "rows": 7,
+  "metrics": [
+   "FID"
+  ],
+  "tasks": [
+   "Mask Control: T_c = 0 (No control)",
+   "Mask Control: T_c = 25",
+   "Mask Control: T_c = 5",
+   "Mask Control: T_c = 50",
+   "Mask Control: gamma = 1",
+   "Mask Control: gamma = 15",
+   "Mask Control: gamma = 50"
+  ],
+  "samples_recorded": [
+   "5000"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "PiCo Table V"
+  ],
+  "protocols": [
+   "FID on 5k image-text pairs from the MS-COCO val set, in the referring mask control ablation."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2206.01714",
+  "rival": "Liu",
+  "dataset": "CLEVR",
+  "is_target": false,
+  "rows": 36,
+  "metrics": [
+   "Acc (%)",
+   "Accuracy advantage over EBM (%)",
+   "Accuracy advantage over the best baseline (%)",
+   "FID",
+   "Validation accuracy (%)"
+  ],
+  "tasks": [
+   "1 Component",
+   "2 Components",
+   "3 Components",
+   "3 objects in specified positions",
+   "Object present at a position"
+  ],
+  "samples_recorded": [
+   "5000"
+  ],
+  "pages": [
+   "3",
+   "11",
+   "12",
+   "20"
+  ],
+  "tables": [
+   "Liu Table 1",
+   "Liu text p11",
+   "Liu text p12",
+   "Liu text p20",
+   "Liu text p3"
+  ],
+  "protocols": [
+   "128x128 CLEVR with object position labels; each method generates 5,000 images per test setting; Acc is the percentage of generated images capturing all concepts, judged by a binary classifier trained on real images (99.05% validation accuracy); FID is Clean-FID on 5,000 generated images.",
+   "Stated in the running text about the CLEVR object-position comparison in Table 1.",
+   "Binary classifier on 30,000 image-label pairs split into 24,000 training and 6,000 validation."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2206.01714",
+  "rival": "Liu",
+  "dataset": "Relational CLEVR",
+  "is_target": false,
+  "rows": 33,
+  "metrics": [
+   "Acc (%)",
+   "FID",
+   "Validation accuracy (%)"
+  ],
+  "tasks": [
+   "1 Component",
+   "2 Components",
+   "3 Components",
+   "Image contains an object relation"
+  ],
+  "samples_recorded": [
+   "5000"
+  ],
+  "pages": [
+   "12",
+   "20"
+  ],
+  "tables": [
+   "Liu Table 2",
+   "Liu text p20"
+  ],
+  "protocols": [
+   "128x128 Relational CLEVR; each method generates 5,000 images per test setting; Acc is the percentage of generated images capturing all concepts, judged by a binary classifier trained on real images (99.80% validation accuracy); FID is Clean-FID on 5,000 generated images.",
+   "Binary classifier on 50,000 images split into 40,000 training and 10,000 validation."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2206.01714",
+  "rival": "Liu",
+  "dataset": "FFHQ",
+  "is_target": false,
+  "rows": 32,
+  "metrics": [
+   "Acc (%)",
+   "FID"
+  ],
+  "tasks": [
+   "1 Component",
+   "2 Components",
+   "3 Components"
+  ],
+  "samples_recorded": [
+   "5000"
+  ],
+  "pages": [
+   "20"
+  ],
+  "tables": [
+   "Liu Table 3"
+  ],
+  "protocols": [
+   "FFHQ attributes smiling, glasses and gender; each method generates 5,000 images per test setting; Acc is the percentage of generated images capturing all concepts, judged by binary classifiers trained on CelebA-HQ (95.01%, 99.20% and 97.49% validation accuracy); FID is Clean-FID on 5,000 generated images; the diffusion model generates at 64x64 and upsamples to 256x256."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2206.01714",
+  "rival": "FFHQ smiling classifier",
+  "dataset": "CelebA-HQ",
+  "is_target": false,
+  "rows": 3,
+  "metrics": [
+   "Validation accuracy (%)"
+  ],
+  "tasks": [
+   "Gender",
+   "Glasses",
+   "Smiling"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "20"
+  ],
+  "tables": [
+   "Liu text p20"
+  ],
+  "protocols": [
+   "Binary classifier on 30,000 CelebA-HQ image-label pairs split into 24,000 training and 6,000 validation."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2309.16115",
+  "rival": "Sculpting",
+  "dataset": "Molecule generation with SEH, SA and QED rewards",
+  "is_target": false,
+  "rows": 248,
+  "metrics": [
+   "Average pairwise Tanimoto similarity",
+   "Batch size",
+   "Batch size (trajectories per base model, all states used)",
+   "Data generation share of classifier training time (%)",
+   "Data generation time, hours part (h)",
+   "Data generation time, minutes part (min)",
+   "Data generation time, seconds part (s)",
+   "Earth mover's distance",
+   "Elapsed real time, hours part (h)",
+   "Elapsed real time, minutes part (min)",
+   "Elapsed real time, seconds part (s)",
+   "Generated molecules above the reward threshold (count)",
+   "Share of samples in reward bin (%)",
+   "Tanimoto-separated modes above the reward threshold (count)",
+   "Total elapsed real time, hours part (h)",
+   "Total elapsed real time, minutes part (min)",
+   "Total elapsed real time, seconds part (s)",
+   "Training steps"
+  ],
+  "tasks": [
+   "(a) y={SEH, SA}: share of samples in bin SEH high, SA high, QED high",
+   "(a) y={SEH, SA}: share of samples in bin SEH high, SA high, QED low",
+   "(a) y={SEH, SA}: share of samples in bin SEH high, SA low, QED high",
+   "(a) y={SEH, SA}: share of samples in bin SEH high, SA low, QED low",
+   "(a) y={SEH, SA}: share of samples in bin SEH low, SA high, QED high",
+   "(a) y={SEH, SA}: share of samples in bin SEH low, SA high, QED low",
+   "(a) y={SEH, SA}: share of samples in bin SEH low, SA low, QED high",
+   "(a) y={SEH, SA}: share of samples in bin SEH low, SA low, QED low"
+  ],
+  "samples_recorded": [
+   "1000",
+   "5000"
+  ],
+  "pages": [
+   "13",
+   "35",
+   "36"
+  ],
+  "tables": [
+   "Sculpting Table 1",
+   "Sculpting Table F.1",
+   "Sculpting Table F.3",
+   "Sculpting Table F.4",
+   "Sculpting Table F.5"
+  ],
+  "protocols": [
+   "GFlowNets trained with SEH, SA and QED rewards at beta = 32; 5000 molecules sampled from each distribution; low and high bins set by thresholds SEH 0.5, SA 0.6, QED 0.25; rewards normalized to [0, 1].",
+   "Molecule generation domain of Section 6.2 and Figure 4 (a-c); all models trained with a single GeForce RTX 2080 Ti GPU.",
+   "For each reward and beta a GFlowNet was trained with reward R(x)^beta and 5000 molecules were generated; the number is the average pairwise Tanimoto similarity of the top 1000 molecules by the target reward."
+  ],
+  "more_protocols": 2
+ },
+ {
+  "arxiv": "2309.16115",
+  "rival": "Sculpting",
+  "dataset": "MNIST image generation with diffusion models",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "Batch size",
+   "Batch size (trajectories per base model)",
+   "Data generation share of classifier training time (%)",
+   "Data generation time, minutes part (min)",
+   "Data generation time, seconds part (s)",
+   "Elapsed real time, minutes part (min)",
+   "Elapsed real time, seconds part (s)",
+   "Time-steps per trajectory",
+   "Total elapsed real time, minutes part (min)",
+   "Total elapsed real time, seconds part (s)",
+   "Training steps"
+  ],
+  "tasks": [
+   "Base diffusion training",
+   "Classifier training"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "35"
+  ],
+  "tables": [
+   "Sculpting Table F.2"
+  ],
+  "protocols": [
+   "MNIST image generation of Section F.1 and Figure F.1; all models trained with a single Tesla V100 GPU."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2309.16115",
+  "rival": "Sculpting",
+  "dataset": "2D grid domain, 32 x 32",
+  "is_target": false,
+  "rows": 7,
+  "metrics": [
+   "L1 distance to the ground-truth composition"
+  ],
+  "tasks": [
+   "Figure 3 bottom row: p(x|y1=1, y2=2)",
+   "Figure 3 bottom row: p(x|y1=1, y2=2, y3=3)",
+   "Figure 3 bottom row: p(x|y1=2, y2=2)",
+   "Figure 3 bottom row: p(x|y1=2, y2=2, y3=2)",
+   "Figure 3 top row: p1 contrast at 0.95 p2",
+   "Figure 3 top row: p1 contrast p2",
+   "Figure 3 top row: p1 harmonic mean p2"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "29"
+  ],
+  "tables": [
+   "Sculpting text p29"
+  ],
+  "protocols": [
+   "L1 distance, summed over grid cells, between the classifier-guided distribution and the ground-truth composition computed from the known base model probabilities; classifier trained for 15000 steps with batch size 64."
+  ],
+  "more_protocols": 0
+ }
+]

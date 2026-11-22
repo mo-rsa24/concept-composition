@@ -1,0 +1,1115 @@
+[
+ {
+  "arxiv": "2608.16786",
+  "rival": "guided methods minus CFG",
+  "dataset": "GenEval",
+  "is_target": false,
+  "rows": 59,
+  "metrics": [
+   "GE",
+   "GE: 95% difference margin",
+   "GenEval Overall",
+   "GenEval Overall difference from CFG"
+  ],
+  "tasks": [
+   "Overall (macro average)",
+   "object composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3",
+   "6",
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 1",
+   "CFGRevisited Table 2",
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "95th percentile of centered method-minus-CFG errors pooled over guided alternatives, from 10,000 paired prompt-bootstrap replicates; it applies to differences from CFG.",
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "guided methods minus CFG",
+  "dataset": "DPG-Bench",
+  "is_target": false,
+  "rows": 42,
+  "metrics": [
+   "DPG (mean x 100)",
+   "DPG (mean x 100): 95% difference margin"
+  ],
+  "tasks": [
+   "dense-prompt faithfulness"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3",
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 1",
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "95th percentile of centered method-minus-CFG errors pooled over guided alternatives, from 10,000 paired prompt-bootstrap replicates; it applies to differences from CFG.",
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "guided methods minus CFG",
+  "dataset": "OneIG-Bench General Object",
+  "is_target": false,
+  "rows": 22,
+  "metrics": [
+   "Obj",
+   "Obj: 95% difference margin"
+  ],
+  "tasks": [
+   "General Object"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "CFGRevisited Table 1"
+  ],
+  "protocols": [
+   "95th percentile of centered method-minus-CFG errors pooled over guided alternatives, from 10,000 paired prompt-bootstrap replicates; it applies to differences from CFG.",
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "guided methods minus CFG",
+  "dataset": "OneIG-Bench Text Rendering",
+  "is_target": false,
+  "rows": 22,
+  "metrics": [
+   "Txt",
+   "Txt: 95% difference margin"
+  ],
+  "tasks": [
+   "Text Rendering"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "CFGRevisited Table 1"
+  ],
+  "protocols": [
+   "95th percentile of centered method-minus-CFG errors pooled over guided alternatives, from 10,000 paired prompt-bootstrap replicates; it applies to differences from CFG.",
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "guided methods minus CFG",
+  "dataset": "OneIG-Bench Knowledge Reasoning",
+  "is_target": false,
+  "rows": 22,
+  "metrics": [
+   "Rsn",
+   "Rsn: 95% difference margin"
+  ],
+  "tasks": [
+   "Knowledge Reasoning"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "CFGRevisited Table 1"
+  ],
+  "protocols": [
+   "95th percentile of centered method-minus-CFG errors pooled over guided alternatives, from 10,000 paired prompt-bootstrap replicates; it applies to differences from CFG.",
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval single",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "single"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval two",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "two"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval count",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "count"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval color",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "color"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval pos",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "pos"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "GenEval attr",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "GenEval category score"
+  ],
+  "tasks": [
+   "attr"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CFGRevisited Table 5"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L1 Attr",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L1 score"
+  ],
+  "tasks": [
+   "Attr"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L1 Entity",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L1 score"
+  ],
+  "tasks": [
+   "Entity"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L1 Other",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L1 score"
+  ],
+  "tasks": [
+   "Other"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L1 Global",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L1 score"
+  ],
+  "tasks": [
+   "Global"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L1 Relation",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L1 score"
+  ],
+  "tasks": [
+   "Relation"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 6"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 attribute color",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 attribute score"
+  ],
+  "tasks": [
+   "color"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 7"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 attribute other",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 attribute score"
+  ],
+  "tasks": [
+   "other"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 7"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 attribute shape",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 attribute score"
+  ],
+  "tasks": [
+   "shape"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 7"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 attribute size",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 attribute score"
+  ],
+  "tasks": [
+   "size"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 7"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 attribute texture",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 attribute score"
+  ],
+  "tasks": [
+   "texture"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CFGRevisited Table 7"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute part",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "part"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute state",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "state"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute whole",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "whole"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute global",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "global"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute count",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "count"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute text",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "text"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute non-sp.",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "non-sp."
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2608.16786",
+  "rival": "no-CFG",
+  "dataset": "DPG-Bench L2 non-attribute spatial",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "DPG-Bench L2 non-attribute score"
+  ],
+  "tasks": [
+   "spatial"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CFGRevisited Table 8",
+   "CFGRevisited Table 9"
+  ],
+  "protocols": [
+   "Full benchmark prompt set, 25 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 3; inference on V100 32GB GPUs.",
+   "Full benchmark prompt set, 30 sampling steps; methods share prompts, seeds, scheduler, resolution and sampling budget; method settings from Table 4; inference on V100 32GB GPUs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "Attend-and-Excite Animal-Animal",
+  "is_target": false,
+  "rows": 17,
+  "metrics": [
+   "Average CLIP text-text similarity",
+   "Average Maximum Object CLIP image-text similarity",
+   "Relative difference from Attend-and-Excite in CLIP text-text similarity (%)",
+   "Relative difference from Attend-and-Excite in Maximum Object Similarity (%)",
+   "Share of responses preferring the method (%)"
+  ],
+  "tasks": [
+   "two subjects: a [animalA] and a [animalB]"
+  ],
+  "samples_recorded": [
+   "20 prompts",
+   "65 respondents, 10 prompts, 4 seeds",
+   "66 prompts, 64 images each"
+  ],
+  "pages": [
+   "7",
+   "8",
+   "14"
+  ],
+  "tables": [
+   "AttendExcite Table 1",
+   "AttendExcite Table 2",
+   "AttendExcite Table 4",
+   "AttendExcite Table 6"
+  ],
+  "protocols": [
+   "Stable Diffusion v1.4 at 50 denoising steps with guidance scale 7.5, Attend-and-Excite updating latents until step 25; 64 images per prompt from 64 seeds shared across methods; black images from the NSFW filter are omitted from the averages; BLIP captions of the images compared with the prompt by CLIP ViT-B/16 cosine similarity, the prompt embedding averaged over 80 templates.",
+   "User study with 65 respondents choosing the set of images that best matches the prompt, on 10 randomly selected prompts per subset with the same 4 randomly selected seeds for all methods, averaged across the prompts in the subset.",
+   "Prompt-to-Prompt attention re-weighting (official implementation) and Attend-and-Excite on Stable Diffusion, on 20 randomly selected prompts per subset; BLIP captions compared with the prompt by CLIP ViT-B/16; images per prompt not stated for this comparison."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "Attend-and-Excite Animal-Object",
+  "is_target": false,
+  "rows": 17,
+  "metrics": [
+   "Average CLIP text-text similarity",
+   "Average Maximum Object CLIP image-text similarity",
+   "Relative difference from Attend-and-Excite in CLIP text-text similarity (%)",
+   "Relative difference from Attend-and-Excite in Maximum Object Similarity (%)",
+   "Share of responses preferring the method (%)"
+  ],
+  "tasks": [
+   "two subjects: a [animal] and a [color][object]"
+  ],
+  "samples_recorded": [
+   "144 prompts, 64 images each",
+   "20 prompts",
+   "65 respondents, 10 prompts, 4 seeds"
+  ],
+  "pages": [
+   "7",
+   "8",
+   "14"
+  ],
+  "tables": [
+   "AttendExcite Table 1",
+   "AttendExcite Table 2",
+   "AttendExcite Table 4",
+   "AttendExcite Table 6"
+  ],
+  "protocols": [
+   "Stable Diffusion v1.4 at 50 denoising steps with guidance scale 7.5, Attend-and-Excite updating latents until step 25; 64 images per prompt from 64 seeds shared across methods; black images from the NSFW filter are omitted from the averages; BLIP captions of the images compared with the prompt by CLIP ViT-B/16 cosine similarity, the prompt embedding averaged over 80 templates.",
+   "User study with 65 respondents choosing the set of images that best matches the prompt, on 10 randomly selected prompts per subset with the same 4 randomly selected seeds for all methods, averaged across the prompts in the subset.",
+   "Prompt-to-Prompt attention re-weighting (official implementation) and Attend-and-Excite on Stable Diffusion, on 20 randomly selected prompts per subset; BLIP captions compared with the prompt by CLIP ViT-B/16; images per prompt not stated for this comparison."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "Attend-and-Excite Object-Object",
+  "is_target": false,
+  "rows": 17,
+  "metrics": [
+   "Average CLIP text-text similarity",
+   "Average Maximum Object CLIP image-text similarity",
+   "Relative difference from Attend-and-Excite in CLIP text-text similarity (%)",
+   "Relative difference from Attend-and-Excite in Maximum Object Similarity (%)",
+   "Share of responses preferring the method (%)"
+  ],
+  "tasks": [
+   "two subjects: a [colorA][objectA] and a [colorB][objectB]"
+  ],
+  "samples_recorded": [
+   "20 prompts",
+   "65 respondents, 10 prompts, 4 seeds",
+   "66 prompts, 64 images each"
+  ],
+  "pages": [
+   "7",
+   "8",
+   "14"
+  ],
+  "tables": [
+   "AttendExcite Table 1",
+   "AttendExcite Table 2",
+   "AttendExcite Table 4",
+   "AttendExcite Table 6"
+  ],
+  "protocols": [
+   "Stable Diffusion v1.4 at 50 denoising steps with guidance scale 7.5, Attend-and-Excite updating latents until step 25; 64 images per prompt from 64 seeds shared across methods; black images from the NSFW filter are omitted from the averages; BLIP captions of the images compared with the prompt by CLIP ViT-B/16 cosine similarity, the prompt embedding averaged over 80 templates.",
+   "User study with 65 respondents choosing the set of images that best matches the prompt, on 10 randomly selected prompts per subset with the same 4 randomly selected seeds for all methods, averaged across the prompts in the subset.",
+   "Prompt-to-Prompt attention re-weighting (official implementation) and Attend-and-Excite on Stable Diffusion, on 20 randomly selected prompts per subset; BLIP captions compared with the prompt by CLIP ViT-B/16; images per prompt not stated for this comparison."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "Complex prompts from StructureDiffusion and Conceptual Captions",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "CLIP Similarity",
+   "Relative difference from Attend-and-Excite in CLIP Similarity (%)"
+  ],
+  "tasks": [
+   "three or more subjects, complex attributes and background subjects"
+  ],
+  "samples_recorded": [
+   "40 prompts, 64 images each"
+  ],
+  "pages": [
+   "14"
+  ],
+  "tables": [
+   "AttendExcite Table 5"
+  ],
+  "protocols": [
+   "Full Prompt Similarity on Stable Diffusion v1.4 over 40 prompts from the StructureDiffusion paper and the Conceptual Captions dataset, 64 images per prompt from the same 64 random seeds for all methods, CLIP ViT-B/16 image-text cosine similarity."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "User study prompts, lowest-performing prompt for Attend-and-Excite",
+  "is_target": false,
+  "rows": 3,
+  "metrics": [
+   "Share of votes on that prompt (%)"
+  ],
+  "tasks": [
+   "choose the best image set"
+  ],
+  "samples_recorded": [
+   "65 respondents"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "AttendExcite text p8"
+  ],
+  "protocols": [
+   "User study with 65 respondents; votes on the single prompt where Attend-and-Excite scored lowest."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2301.13826",
+  "rival": "AttendExcite",
+  "dataset": "Runtime for one image",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "Runtime (seconds per image)"
+  ],
+  "tasks": [
+   "generate one image"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "AttendExcite text p10"
+  ],
+  "protocols": [
+   "Approximate runtime on an A100 GPU: plain Stable Diffusion.",
+   "Approximate runtime on an A100 GPU: iterative refinement not activated.",
+   "Approximate runtime on an A100 GPU: iterative refinement used."
+  ],
+  "more_protocols": 2
+ },
+ {
+  "arxiv": "2605.23275",
+  "rival": "DomainExpansion",
+  "dataset": "Slakh2100",
+  "is_target": false,
+  "rows": 13,
+  "metrics": [
+   "FAD",
+   "Size (M parameters)"
+  ],
+  "tasks": [
+   "Long music track generation",
+   "Track length 10l (120 seconds)",
+   "Track length 4l (48 seconds)"
+  ],
+  "samples_recorded": [
+   "128"
+  ],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "DomainExpansion Table 1"
+  ],
+  "protocols": [
+   "FAD against deterministically cut middle parts of Slakh2100 training tracks of the same length, on 128 generated tracks resampled from 22,050 Hz to 16,000 Hz; Heun sampler, sigma 20 to 1e-4, S_churn 20, Karras schedule rho 7, 150 timesteps; for each method the saved checkpoint with the smallest FAD is reported."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2605.23275",
+  "rival": "Du",
+  "dataset": "CLEVR (object positions)",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "Accuracy"
+  ],
+  "tasks": [
+   "Coordinate 1 conditionings",
+   "Coordinate 2 conditionings",
+   "Coordinate 3 conditionings",
+   "Coordinate 4 conditionings"
+  ],
+  "samples_recorded": [
+   "256"
+  ],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "DomainExpansion Table 2"
+  ],
+  "protocols": [
+   "64x64 CLEVR downsampled from 128x128; 256 random position sets per number of conditionings, coordinates in 0.3 to 0.7 and at least 0.15 apart; an image counts when classifier CLS is at least 0.5 at every position; Euler ODE or Heun sampler, 100 timesteps; guidance weight 20, or 4 for RRR; same seed for all samples of each sampler and method."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2605.23275",
+  "rival": "Du",
+  "dataset": "CLEVR (object positions), 5 conditionings",
+  "is_target": true,
+  "rows": 5,
+  "metrics": [
+   "Accuracy"
+  ],
+  "tasks": [
+   "Coordinate 5 conditionings"
+  ],
+  "samples_recorded": [
+   "256"
+  ],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "DomainExpansion Table 2"
+  ],
+  "protocols": [
+   "64x64 CLEVR downsampled from 128x128; 256 random position sets per number of conditionings, coordinates in 0.3 to 0.7 and at least 0.15 apart; an image counts when classifier CLS is at least 0.5 at every position; Euler ODE or Heun sampler, 100 timesteps; guidance weight 20, or 4 for RRR; same seed for all samples of each sampler and method."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2605.23275",
+  "rival": "MultiDiffusion",
+  "dataset": "Google Maps satellite images",
+  "is_target": false,
+  "rows": 4,
+  "metrics": [
+   "FID"
+  ],
+  "tasks": [
+   "Map-conditioned generation, N = 128",
+   "Map-conditioned generation, N = 96"
+  ],
+  "samples_recorded": [
+   "3072"
+  ],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "DomainExpansion Table 3"
+  ],
+  "protocols": [
+   "FID (CleanFID) between 3,072 generated samples and the whole 7,300-image satellite dataset; patches of 64x64 with stride 32; Heun sampler, sigma 20 to 1e-4, S_churn 20, Karras schedule rho 7, 150 timesteps; N is the image side, with N = 96 the training size and N = 128 out of distribution."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.08113",
+  "rival": "MultiDiffusion",
+  "dataset": "Panoramas from 8 text prompts",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "CLIP-aesthetic",
+   "CLIP-score",
+   "FID"
+  ],
+  "tasks": [
+   "Text-to-panorama, 512x4608"
+  ],
+  "samples_recorded": [
+   "2000"
+  ],
+  "pages": [
+   "5"
+  ],
+  "tables": [
+   "MultiDiffusion Table 1"
+  ],
+  "protocols": [
+   "Stable Diffusion v2; 512x4608 panoramas; FID between random 512x512 crops of N = 2000 generated panoramas and N = 2000 512x512 images from the reference model, repeated for 8 text prompts; table reports the mean and standard deviation of FID and CLIP scores; CLIP-score is text-image cosine similarity and CLIP-aesthetic is a linear estimator on CLIP."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.08113",
+  "rival": "MultiDiffusion",
+  "dataset": "COCO validation subset",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "IoU"
+  ],
+  "tasks": [
+   "Region-based text-to-image generation"
+  ],
+  "samples_recorded": [
+   "1K"
+  ],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "MultiDiffusion Table 2"
+  ],
+  "protocols": [
+   "COCO validation subset of 1K samples with 2 to 4 foreground objects, excluding people and masks under 5% of the image; IoU between an off-the-shelf segmentation model on generated images and the ground-truth segmentation; the COCO dataset row is the IoU on the original images, reported as an upper bound."
+  ],
+  "more_protocols": 0
+ }
+]

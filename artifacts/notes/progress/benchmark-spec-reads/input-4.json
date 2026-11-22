@@ -1,0 +1,1305 @@
+[
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Colored MNIST Uniform support",
+  "is_target": false,
+  "rows": 24,
+  "metrics": [
+   "CS (%)",
+   "JSD"
+  ],
+  "tasks": [
+   "Conditional generation from the joint (panel a)",
+   "Joint sampling",
+   "Marginal sampling",
+   "Violation of conditional independence between attributes",
+   "¬ Color composition",
+   "¬ Digit composition",
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5",
+   "19",
+   "32"
+  ],
+  "tables": [
+   "CoInD Table 1",
+   "CoInD Table 3",
+   "CoInD Table 7"
+  ],
+  "protocols": [
+   "Standard diffusion model trained per support on Colored MNIST with classifier-free guidance; images sampled separately from the joint distribution and from the product of learned marginals; CS from attribute classifiers; JSD between the learned conditional joint and the product of conditional marginals.",
+   "Colored MNIST at 28x3x3; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling, with 150 steps in Table 5 and 100 steps in the p22 text; CS from a ResNet-18 multi-head attribute classifier trained on full support; JSD over the first two attributes; composition tasks evaluated on unseen compositions under diagonal partial support and on less frequent compositions under non-uniform support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11).",
+   "Conditional generation: images sampled from the joint distribution for attribute compositions, with models trained on the named support."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "Vanilla",
+  "dataset": "Colored MNIST Non Uniform support",
+  "is_target": false,
+  "rows": 3,
+  "metrics": [
+   "CS (%)",
+   "JSD"
+  ],
+  "tasks": [
+   "Joint sampling",
+   "Marginal sampling",
+   "Violation of conditional independence between attributes"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5"
+  ],
+  "tables": [
+   "CoInD Table 1"
+  ],
+  "protocols": [
+   "Standard diffusion model trained per support on Colored MNIST with classifier-free guidance; images sampled separately from the joint distribution and from the product of learned marginals; CS from attribute classifiers; JSD between the learned conditional joint and the product of conditional marginals."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Colored MNIST Partial support",
+  "is_target": false,
+  "rows": 18,
+  "metrics": [
+   "CS (%)",
+   "JSD"
+  ],
+  "tasks": [
+   "Joint sampling",
+   "Marginal sampling",
+   "Violation of conditional independence between attributes",
+   "¬ Color composition",
+   "¬ Digit composition",
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5",
+   "19"
+  ],
+  "tables": [
+   "CoInD Table 1",
+   "CoInD Table 3"
+  ],
+  "protocols": [
+   "Standard diffusion model trained per support on Colored MNIST with classifier-free guidance; images sampled separately from the joint distribution and from the product of learned marginals; CS from attribute classifiers; JSD between the learned conditional joint and the product of conditional marginals.",
+   "Colored MNIST at 28x3x3; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling, with 150 steps in Table 5 and 100 steps in the p22 text; CS from a ResNet-18 multi-head attribute classifier trained on full support; JSD over the first two attributes; composition tasks evaluated on unseen compositions under diagonal partial support and on less frequent compositions under non-uniform support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11)."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "Liu",
+  "dataset": "CelebA orthogonal partial support, smiling male held out",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "CS (%)",
+   "FID",
+   "JSD"
+  ],
+  "tasks": [
+   "\"smiling\" ∧ \"male\" composition",
+   "Joint prompt \"smiling male\"",
+   "Violation of conditional independence between attributes"
+  ],
+  "samples_recorded": [
+   "10000"
+  ],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "CoInD Table 2"
+  ],
+  "protocols": [
+   "CelebA at 128x128 encoded with the Stable Diffusion 3 latent encoder, trained on all compositions except male and smiling for 500,000 steps on one A6000 GPU; FID computed on the smiling male subset from 10000 generated samples; CS from attribute classifiers."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Colored MNIST Non-uniform support",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "CS (%)",
+   "JSD",
+   "Shannon entropy H of the color attribute"
+  ],
+  "tasks": [
+   "Conditional generation from the joint (panel a)",
+   "Generate digit = 4",
+   "Violation of conditional independence between attributes",
+   "¬ Color composition",
+   "¬ Digit composition",
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9",
+   "19",
+   "32"
+  ],
+  "tables": [
+   "CoInD Table 3",
+   "CoInD Table 7",
+   "CoInD text p9"
+  ],
+  "protocols": [
+   "Colored MNIST at 28x3x3; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling, with 150 steps in Table 5 and 100 steps in the p22 text; CS from a ResNet-18 multi-head attribute classifier trained on full support; JSD over the first two attributes; composition tasks evaluated on unseen compositions under diagonal partial support and on less frequent compositions under non-uniform support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11).",
+   "Conditional generation: images sampled from the joint distribution for attribute compositions, with models trained on the named support.",
+   "Color entropy of images generated for digit = 4 under non-uniform support, using a near-perfect classifier."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Shapes3D Uniform support",
+  "is_target": false,
+  "rows": 23,
+  "metrics": [
+   "CS (%)",
+   "JSD",
+   "R2"
+  ],
+  "tasks": [
+   "Conditional generation from the joint (panel b)",
+   "Violation of conditional independence between attributes",
+   "¬ composition",
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "20",
+   "32"
+  ],
+  "tables": [
+   "CoInD Table 4",
+   "CoInD Table 7"
+  ],
+  "protocols": [
+   "Shapes3D at 64x3x3 with six attributes; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling with 100 steps; CS from a ResNet-18 multi-head attribute classifier trained on full support; R2 is the variance-weighted pixel comparison with the unique reference image; JSD over the first two attributes; composition tasks evaluated on unseen compositions under orthogonal partial support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11).",
+   "Conditional generation: images sampled from the joint distribution for attribute compositions, with models trained on the named support."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Shapes3D Partial support, ∧ composition",
+  "is_target": true,
+  "rows": 8,
+  "metrics": [
+   "CS (%)",
+   "R2"
+  ],
+  "tasks": [
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "20"
+  ],
+  "tables": [
+   "CoInD Table 4"
+  ],
+  "protocols": [
+   "Shapes3D at 64x3x3 with six attributes; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling with 100 steps; CS from a ResNet-18 multi-head attribute classifier trained on full support; R2 is the variance-weighted pixel comparison with the unique reference image; JSD over the first two attributes; composition tasks evaluated on unseen compositions under orthogonal partial support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11)."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Shapes3D Partial support",
+  "is_target": false,
+  "rows": 11,
+  "metrics": [
+   "CS (%)",
+   "JSD",
+   "R2"
+  ],
+  "tasks": [
+   "Violation of conditional independence between attributes",
+   "¬ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "20"
+  ],
+  "tables": [
+   "CoInD Table 4"
+  ],
+  "protocols": [
+   "Shapes3D at 64x3x3 with six attributes; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling with 100 steps; CS from a ResNet-18 multi-head attribute classifier trained on full support; R2 is the variance-weighted pixel comparison with the unique reference image; JSD over the first two attributes; composition tasks evaluated on unseen compositions under orthogonal partial support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11)."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "CelebA Orthogonal support",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "CS (%)",
+   "CS improvement ratio (x)",
+   "FID",
+   "JSD"
+  ],
+  "tasks": [
+   "Joint",
+   "Violation of conditional independence between attributes",
+   "¬ composition",
+   "¬ composition, CoInD against Composed GLIDE",
+   "∧ composition, CoInD against Composed GLIDE"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "27"
+  ],
+  "tables": [
+   "CoInD Table 6",
+   "CoInD text p27"
+  ],
+  "protocols": [
+   "SDv1.5 fine-tuned on CelebA with labels converted to text, all compositions except male and smiling; joint prompt \"Photo of a smiling male celebrity\"; ∧ of \"Photo of a smiling celebrity\" and \"Photo of a male celebrity\"; ¬ of \"Photo of a smiling celebrity\" and \"Photo of a female celebrity\".",
+   "Improvement in CS stated for SDv1.5 fine-tuning in the Table 6 discussion."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "Liu",
+  "dataset": "CelebA Orthogonal support, ∧ composition",
+  "is_target": true,
+  "rows": 4,
+  "metrics": [
+   "CS (%)",
+   "FID"
+  ],
+  "tasks": [
+   "∧ composition"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "27"
+  ],
+  "tables": [
+   "CoInD Table 6"
+  ],
+  "protocols": [
+   "SDv1.5 fine-tuned on CelebA with labels converted to text, all compositions except male and smiling; joint prompt \"Photo of a smiling male celebrity\"; ∧ of \"Photo of a smiling celebrity\" and \"Photo of a male celebrity\"; ¬ of \"Photo of a smiling celebrity\" and \"Photo of a female celebrity\"."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Colored MNIST Diagonal partial support",
+  "is_target": false,
+  "rows": 3,
+  "metrics": [
+   "CS (%)",
+   "CS improvement ratio (x)"
+  ],
+  "tasks": [
+   "Composition, CoInD against LACE",
+   "Conditional generation from the joint (panel a)"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "30",
+   "32"
+  ],
+  "tables": [
+   "CoInD Table 7",
+   "CoInD text p30"
+  ],
+  "protocols": [
+   "Conditional generation: images sampled from the joint distribution for attribute compositions, with models trained on the named support.",
+   "Improvement in CS stated in App. F.4 without naming the composition task."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2503.01145",
+  "rival": "CoInD",
+  "dataset": "Shapes3D Orthogonal partial support",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "CS (%)",
+   "CS improvement ratio (x)",
+   "R2"
+  ],
+  "tasks": [
+   "Composition, CoInD against LACE",
+   "Conditional generation from the joint (panel b)"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "30",
+   "32"
+  ],
+  "tables": [
+   "CoInD Table 7",
+   "CoInD text p30"
+  ],
+  "protocols": [
+   "Conditional generation: images sampled from the joint distribution for attribute compositions, with models trained on the named support.",
+   "Improvement in CS stated in App. F.4 without naming the composition task."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "COCO-Count",
+  "is_target": false,
+  "rows": 48,
+  "metrics": [
+   "Ex. (%)",
+   "MAE",
+   "Sp."
+  ],
+  "tasks": [
+   "Single Category column group"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CountLoop Table 1"
+  ],
+  "protocols": [
+   "Counting MAE scored by OWLv2 at confidence threshold 0.25 with class-agnostic NMS IoU 0.5, counting a box of at least 3 x 3 whose center is visible; exact-count match scored by CountGD++; spatial quality from the CLIP-FlanT5 encoder of VQAScore; agentic baselines run with native self-correction loops, and MIGC, InstanceDiffusion and 3DIS receive layouts from the LMD layout generator."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "T2I-CompBench Count",
+  "is_target": false,
+  "rows": 48,
+  "metrics": [
+   "Ex. (%)",
+   "MAE",
+   "Sp."
+  ],
+  "tasks": [
+   "Single Category column group"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CountLoop Table 1"
+  ],
+  "protocols": [
+   "Counting MAE scored by OWLv2 at confidence threshold 0.25 with class-agnostic NMS IoU 0.5, counting a box of at least 3 x 3 whose center is visible; exact-count match scored by CountGD++; spatial quality from the CLIP-FlanT5 encoder of VQAScore; agentic baselines run with native self-correction loops, and MIGC, InstanceDiffusion and 3DIS receive layouts from the LMD layout generator."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "CountLoop-S",
+  "is_target": false,
+  "rows": 115,
+  "metrics": [
+   "Additional MAE reduction (%)",
+   "Error ratio (times lower)",
+   "Ex. (%)",
+   "MAE",
+   "MAE (approximate)",
+   "MAE change",
+   "MAE plateau (approximate)",
+   "MAE reduction (%)",
+   "Sp.",
+   "Spatial",
+   "Time saved (%)",
+   "Wall-clock time (s, approximate)",
+   "vs Best (%)"
+  ],
+  "tasks": [
+   "AS alone against the VLM-only critic",
+   "Iterative Refinement added to PG+CA",
+   "Multi Category column group as printed (page 8 calls this set single category), 30 to 200 instances",
+   "N=100",
+   "N=100, against SLD",
+   "N=25",
+   "OVD alone against the VLM-only critic",
+   "backbone swap"
+  ],
+  "samples_recorded": [
+   "200 prompts"
+  ],
+  "pages": [
+   "10",
+   "11",
+   "12",
+   "13"
+  ],
+  "tables": [
+   "CountLoop Table 1",
+   "CountLoop Table 2",
+   "CountLoop Table 3",
+   "CountLoop Table 4",
+   "CountLoop text p10",
+   "CountLoop text p11",
+   "CountLoop text p12"
+  ],
+  "protocols": [
+   "Counting MAE scored by OWLv2 at confidence threshold 0.25 with class-agnostic NMS IoU 0.5, counting a box of at least 3 x 3 whose center is visible; exact-count match scored by CountGD++; spatial quality from the CLIP-FlanT5 encoder of VQAScore; agentic baselines run with native self-correction loops, and MIGC, InstanceDiffusion and 3DIS receive layouts from the LMD layout generator.",
+   "CountLoop on CountLoop-S (200 single-category prompts, 30 to 200 instances), MAE scored by OWLv2 and spatial quality by the CLIP-FlanT5 encoder of VQAScore; design and critic VLMs varied under matched evaluation conditions (Table 2a).",
+   "CountLoop on CountLoop-S (200 single-category prompts, 30 to 200 instances), MAE scored by OWLv2 and spatial quality by the CLIP-FlanT5 encoder of VQAScore; components PG (Planning Graph), CA (Cumulative Attention) and IR (Iterative Refinement) switched on and off, with a random-retry row taking the best of 3 attempts with new seeds (Table 2b)."
+  ],
+  "more_protocols": 9
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "CountLoop-M",
+  "is_target": false,
+  "rows": 48,
+  "metrics": [
+   "Ex. (%)",
+   "MAE",
+   "Sp."
+  ],
+  "tasks": [
+   "Multi Category column group, 30 to 200 instances"
+  ],
+  "samples_recorded": [
+   "200 prompts"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CountLoop Table 1"
+  ],
+  "protocols": [
+   "Counting MAE scored by OWLv2 at confidence threshold 0.25 with class-agnostic NMS IoU 0.5, counting a box of at least 3 x 3 whose center is visible; exact-count match scored by CountGD++; spatial quality from the CLIP-FlanT5 encoder of VQAScore; agentic baselines run with native self-correction loops, and MIGC, InstanceDiffusion and 3DIS receive layouts from the LMD layout generator."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "All four benchmarks (human study)",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "Aesthetics (user score, 0 to 5)",
+   "Alignment (user score, 0 to 5)",
+   "Count (user score, 0 to 5)",
+   "Overall (user score, 0 to 5)"
+  ],
+  "tasks": [
+   "user evaluation"
+  ],
+  "samples_recorded": [
+   "30 participants, 15 sets each"
+  ],
+  "pages": [
+   "11"
+  ],
+  "tables": [
+   "CountLoop Table 2"
+  ],
+  "protocols": [
+   "30 participants (20 designers, 10 AI artists) across all four benchmarks, each rating 15 blinded sets of 5 images (CountLoop, FLUX, LMD, SLD, CountGen) on a 0-to-5 scale (Table 2d)."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "COCO-Count, T2I-CompBench, CountLoop-S and CountLoop-M",
+  "is_target": false,
+  "rows": 1,
+  "metrics": [
+   "Counting error reduction, upper end (%)"
+  ],
+  "tasks": [
+   "overall claim"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "2"
+  ],
+  "tables": [
+   "CountLoop text p2"
+  ],
+  "protocols": [
+   "Stated in the abstract as \"up to\"; page 3 assigns this figure to the standard benchmarks."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "High-instance scenes",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Relative MAE reduction, lower end (%)",
+   "Relative MAE reduction, upper end (%)"
+  ],
+  "tasks": [
+   "relative MAE against the best baselines"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "3"
+  ],
+  "tables": [
+   "CountLoop text p3"
+  ],
+  "protocols": [
+   "Stated as a range in the contributions list on page 3."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "Nano Banana Pro",
+  "dataset": "CountLoop-S, 100-prompt subsample",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "MAE",
+   "Spatial"
+  ],
+  "tasks": [
+   "commercial reference"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "CountLoop text p10"
+  ],
+  "protocols": [
+   "Commercial system evaluated on a subsample of CountLoop-S prompts."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "CountLoop-S, small objects",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "Delta MAE (approximate)",
+   "MAE",
+   "Relative MAE (%)"
+  ],
+  "tasks": [
+   "N=200",
+   "N=200, gap to 3DIS"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "13"
+  ],
+  "tables": [
+   "CountLoop text p13"
+  ],
+  "protocols": [
+   "Stated in the caption of Figure 8 and on page 13; the bars themselves carry no printed values.",
+   "Stated in the caption of Figure 8; the bars themselves carry no printed values.",
+   "Stated in the caption of Figure 8 with an approximately sign."
+  ],
+  "more_protocols": 2
+ },
+ {
+  "arxiv": "2508.16644",
+  "rival": "CountLoop",
+  "dataset": "CountLoop-S, large objects",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "MAE",
+   "Relative MAE (%)"
+  ],
+  "tasks": [
+   "large-object regime"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "13"
+  ],
+  "tables": [
+   "CountLoop text p13"
+  ],
+  "protocols": [
+   "Stated on page 13; the sentence gives no N for this value, and the bars carry no printed values.",
+   "Stated on page 13; the sentence gives no N for this value."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "SuperDiff",
+  "dataset": "CIFAR-10 disjoint halves",
+  "is_target": true,
+  "rows": 36,
+  "metrics": [
+   "FID, ODE inference",
+   "FID, SDE inference",
+   "FLD, ODE inference",
+   "FLD, SDE inference",
+   "IS, ODE inference",
+   "IS, SDE inference"
+  ],
+  "tasks": [
+   "unconditional image generation from two models trained on disjoint data (logical OR)"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "SuperDiff Table 1"
+  ],
+  "protocols": [
+   "Two diffusion models trained on the two disjoint halves of CIFAR-10 (first five labels and last five labels); architecture, hyperparameters and data preprocessing follow Song et al. (2020); ODE inference integrates the Prop. 1 ODE with densities estimated by Prop. 5; the number of generated images is not stated.",
+   "Two diffusion models trained on the two disjoint halves of CIFAR-10 (first five labels and last five labels); architecture, hyperparameters and data preprocessing follow Song et al. (2020); SDE inference is the OR branch of Algorithm 1 with densities estimated by Thm. 1; the number of generated images is not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "SuperDiff",
+  "dataset": "Stable Diffusion concept pairs (20 pairs)",
+  "is_target": false,
+  "rows": 29,
+  "metrics": [
+   "Density evaluation time (seconds per image)",
+   "Max. CLIP",
+   "Max. ImageReward",
+   "Max. TIFA",
+   "Min. CLIP",
+   "Min. ImageReward",
+   "Min. TIFA",
+   "|Delta| CLIP",
+   "|Delta| ImageReward",
+   "|Delta| TIFA"
+  ],
+  "tasks": [
+   "AND of 2 concepts",
+   "OR of 2 concepts"
+  ],
+  "samples_recorded": [
+   "20 images for each of 20 concept pairs"
+  ],
+  "pages": [
+   "8",
+   "33"
+  ],
+  "tables": [
+   "SuperDiff Table 2",
+   "SuperDiff Table A2",
+   "SuperDiff text p8"
+  ],
+  "protocols": [
+   "20 images generated for each of 20 concept pairs with Stable Diffusion v1-4 under classifier-free guidance; each image is scored against each concept prompt separately and the minimum of the two scores is averaged over the pair; inference uses SDEs only; the joint-prompt baseline joins the two concepts with the linking term \"that looks like\" and keeps the better of the two prompt orderings for every metric.",
+   "Logical OR setting on the same 20 concept pairs with Stable Diffusion v1-4; each image is scored against each concept prompt separately and both the maximum score and the absolute difference between the two scores are reported; the OR baseline prompts SD with \"a sunflower or a lemon\" and keeps the better of the two orderings; the upper bound prompts SD with a random choice between the two concepts.",
+   "Footnote 1 on page 8: the cost of evaluating densities per image during Stable Diffusion inference, comparing exact density evaluation with the Ito density estimator in the SDE setting."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "SuperDiff",
+  "dataset": "Proteins generated de novo (Proteus and FrameDiff checkpoints)",
+  "is_target": false,
+  "rows": 48,
+  "metrics": [
+   "< 0.3 scTM (fraction)",
+   "< 0.5 scTM (fraction)",
+   "< 2A scRMSD (fraction designable)",
+   "Frac. beta",
+   "Max. cluster",
+   "Max. scTM",
+   "Pairwise scTM",
+   "scRMSD"
+  ],
+  "tasks": [
+   "unconditional de novo protein generation"
+  ],
+  "samples_recorded": [
+   "50 generated proteins at each of 5 lengths"
+  ],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "SuperDiff Table 3"
+  ],
+  "protocols": [
+   "All results are averages over 50 generated proteins at each of the lengths {100, 150, 200, 250, 300} for 500 timesteps; designability predicts a sequence with ProteinMPNN and refolds it with ESMFold, repeated 8 times keeping the sequence with the lowest scRMSD; temperature T = 1 for every SuperDiff variant; scores for translations and rotations are combined separately from both pre-trained models."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "Liu",
+  "dataset": "LDMol molecules, property pair GSK3b / QED",
+  "is_target": false,
+  "rows": 45,
+  "metrics": [
+   "Div.",
+   "Qual.",
+   "Top-1 P1",
+   "Top-1 P2",
+   "Top-10 (P1*P2)",
+   "Top-10 P1",
+   "Top-10 P2",
+   "Top-10 min(P1,P2)",
+   "V&U"
+  ],
+  "tasks": [
+   "AND of 2 molecular properties (GSK3b and QED)"
+  ],
+  "samples_recorded": [
+   "5 runs of batch-size 512"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "SuperDiff Table 4"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt, one prompt per property; metrics are taken from 5 runs of batch-size 512; properties are scored with Therapeutic Data Commons oracles; diversity is Tanimoto distance on Morgan fingerprints and quality is the fraction of molecules that are valid, unique, have QED >= 0.6 and SA <= 4.0; the joint-prompt baseline builds a prompt for both property orderings and samples 50% of the final molecules from each ordering."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "Liu",
+  "dataset": "LDMol molecules, property pair GSK3b / JNK3",
+  "is_target": false,
+  "rows": 45,
+  "metrics": [
+   "Div.",
+   "Qual.",
+   "Top-1 P1",
+   "Top-1 P2",
+   "Top-10 (P1*P2)",
+   "Top-10 P1",
+   "Top-10 P2",
+   "Top-10 min(P1,P2)",
+   "V&U"
+  ],
+  "tasks": [
+   "AND of 2 molecular properties (GSK3b and JNK3)"
+  ],
+  "samples_recorded": [
+   "5 runs of batch-size 512"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "SuperDiff Table 4"
+  ],
+  "protocols": [
+   "Molecules generated with LDMol, a latent diffusion model conditioned on a text prompt, one prompt per property; metrics are taken from 5 runs of batch-size 512; properties are scored with Therapeutic Data Commons oracles; diversity is Tanimoto distance on Morgan fingerprints and quality is the fraction of molecules that are valid, unique, have QED >= 0.6 and SA <= 4.0; the joint-prompt baseline builds a prompt for both property orderings and samples 50% of the final molecules from each ordering."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2412.17762",
+  "rival": "SuperDiff",
+  "dataset": "CIFAR-10 split into two random partitions A and B",
+  "is_target": false,
+  "rows": 36,
+  "metrics": [
+   "FID, ODE inference",
+   "FID, SDE inference",
+   "FLD, ODE inference",
+   "FLD, SDE inference",
+   "IS, ODE inference",
+   "IS, SDE inference"
+  ],
+  "tasks": [
+   "class-conditional image generation from two models trained on random partitions (logical OR)"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "30"
+  ],
+  "tables": [
+   "SuperDiff Table A1"
+  ],
+  "protocols": [
+   "Two conditional diffusion models trained on two random partitions of CIFAR-10; ODE inference integrates the Prop. 1 ODE with densities estimated by Prop. 5; the number of generated images is not stated.",
+   "Two conditional diffusion models trained on two random partitions of CIFAR-10; SDE inference is the OR branch of Algorithm 1 with densities estimated by Thm. 1; the number of generated images is not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "ToMe",
+  "dataset": "T2I-CompBench Color",
+  "is_target": false,
+  "rows": 51,
+  "metrics": [
+   "BLIP-VQA",
+   "Human-preference (ImageReward)"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [
+   "300 prompts"
+  ],
+  "pages": [
+   "8",
+   "9",
+   "17",
+   "21"
+  ],
+  "tables": [
+   "ToMe Table 1",
+   "ToMe Table 2",
+   "ToMe Table 3",
+   "ToMe Table 4"
+  ],
+  "protocols": [
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated.",
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated; this BLIP-VQA score is taken from the method's own paper because its SDXL version is not open-sourced (Appendix C.2).",
+   "Ablation on SDXL with token merging off, entropy loss off and semantic binding loss off; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset."
+  ],
+  "more_protocols": 11
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "ToMe",
+  "dataset": "T2I-CompBench Texture",
+  "is_target": true,
+  "rows": 51,
+  "metrics": [
+   "BLIP-VQA",
+   "Human-preference (ImageReward)"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [
+   "300 prompts"
+  ],
+  "pages": [
+   "8",
+   "9",
+   "17",
+   "21"
+  ],
+  "tables": [
+   "ToMe Table 1",
+   "ToMe Table 2",
+   "ToMe Table 3",
+   "ToMe Table 4"
+  ],
+  "protocols": [
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated.",
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated; this BLIP-VQA score is taken from the method's own paper because its SDXL version is not open-sourced (Appendix C.2).",
+   "Ablation on SDXL with token merging off, entropy loss off and semantic binding loss off; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset."
+  ],
+  "more_protocols": 11
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "ToMe",
+  "dataset": "T2I-CompBench Shape",
+  "is_target": true,
+  "rows": 51,
+  "metrics": [
+   "BLIP-VQA",
+   "Human-preference (ImageReward)"
+  ],
+  "tasks": [
+   "attribute binding"
+  ],
+  "samples_recorded": [
+   "300 prompts"
+  ],
+  "pages": [
+   "8",
+   "9",
+   "17",
+   "21"
+  ],
+  "tables": [
+   "ToMe Table 1",
+   "ToMe Table 2",
+   "ToMe Table 3",
+   "ToMe Table 4"
+  ],
+  "protocols": [
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated.",
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated; this BLIP-VQA score is taken from the method's own paper because its SDXL version is not open-sourced (Appendix C.2).",
+   "Ablation on SDXL with token merging off, entropy loss off and semantic binding loss off; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset."
+  ],
+  "more_protocols": 11
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "ToMe",
+  "dataset": "GPT-4o Benchmark",
+  "is_target": false,
+  "rows": 7,
+  "metrics": [
+   "GPT-4o"
+  ],
+  "tasks": [
+   "object binding: a [objectA] with a [itemA] and a [objectB] with a [itemB]"
+  ],
+  "samples_recorded": [
+   "50 prompts"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "ToMe Table 1"
+  ],
+  "protocols": [
+   "T2I-CompBench with 300 validation prompts per subset, scored by BLIP-VQA and ImageReward; GPT-4o Benchmark of 50 prompts scored by GPT-4o; ToMe updates the composite token in the first 20% of denoising steps on SDXL; image count, seeds and resolution not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "ToMe",
+  "dataset": "T2I-CompBench all three subsets",
+  "is_target": false,
+  "rows": 9,
+  "metrics": [
+   "Time Cost (s)"
+  ],
+  "tasks": [
+   "inference"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "17"
+  ],
+  "tables": [
+   "ToMe Table 3"
+  ],
+  "protocols": [
+   "20 inference steps; time stated as measured on a single NVIDIA-A40 GPU; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset.",
+   "50 inference steps; time stated as measured on a single NVIDIA-A40 GPU; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset; Appendix C.2 says this method's SDXL BLIP-VQA score is taken from its own paper.",
+   "50 inference steps; time stated as measured on a single NVIDIA-A40 GPU; BLIP-VQA on T2I-CompBench with 300 validation prompts per subset."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2411.07132",
+  "rival": "CLIP text embedding",
+  "dataset": "Token embeddings of queen, king, woman and man",
+  "is_target": false,
+  "rows": 1,
+  "metrics": [
+   "Cosine similarity"
+  ],
+  "tasks": [
+   "semantic additivity"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "5"
+  ],
+  "tables": [
+   "ToMe text p5"
+  ],
+  "protocols": [
+   "PCA of text token representations; the queen-king direction compared with the woman-man direction."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.16447",
+  "rival": "Bradley-Local",
+  "dataset": "CLEVR location-conditioned",
+  "is_target": false,
+  "rows": 243,
+  "metrics": [
+   "Automated classifier count of images with 0 objects (of 1024)",
+   "Automated classifier count of images with 1 objects (of 1024)",
+   "Automated classifier count of images with 10 objects (of 1024)",
+   "Automated classifier count of images with 2 objects (of 1024)",
+   "Automated classifier count of images with 3 objects (of 1024)",
+   "Automated classifier count of images with 4 objects (of 1024)",
+   "Automated classifier count of images with 5 objects (of 1024)",
+   "Automated classifier count of images with 6 objects (of 1024)",
+   "Automated classifier count of images with 7 objects (of 1024)",
+   "Automated classifier count of images with 8 objects (of 1024)",
+   "Automated classifier count of images with 9 objects (of 1024)",
+   "Kmax",
+   "Objects the model can draw, at any location (at least)",
+   "Test accuracy (%)"
+  ],
+  "tasks": [
+   "All labels, trained 1 (Figure 2 color brown)",
+   "All labels, trained 1-2 (Figure 2 color orange)",
+   "All labels, trained 1-3 (Figure 2 color red)",
+   "All labels, trained 1-5 (Figure 2 color blue)",
+   "Count 1-10 objects at specified locations",
+   "Exp.1, trained 1",
+   "Exp.1, trained 1-3",
+   "Exp.1, trained 1-5"
+  ],
+  "samples_recorded": [
+   "1024"
+  ],
+  "pages": [
+   "3",
+   "23",
+   "28",
+   "29"
+  ],
+  "tables": [
+   "Bradley-Local Table 1",
+   "Bradley-Local Table 2",
+   "Bradley-Local Table 3",
+   "Bradley-Local text p23",
+   "Bradley-Local text p29"
+  ],
+  "protocols": [
+   "Location-conditioned 128x128 CLEVR, 500,000 training samples per object count; EDM2 edm2-img64-xs without guidance; Kmax is the largest K such that every 1 <= K <= Kmax succeeds, success being K objects at least 50% of the time and at least K-2 objects at least 90% of the time; judged by a ResNet-18 classifier (99.74% test accuracy) trained to count 1-10 objects, over 1024 samples per configuration.",
+   "Location-conditioned 128x128 CLEVR, 500,000 training samples per object count; EDM2 edm2-img64-xs without guidance; Kmax is the largest K such that every 1 <= K <= Kmax succeeds, success being K objects at least 50% of the time and at least K-2 objects at least 90% of the time; judged by a ResNet-18 classifier (99.74% test accuracy) trained to count 1-10 objects, over 1024 samples per configuration. Counts are at the final training epoch.",
+   "Classifier used to evaluate Kmax over 1024 samples per configuration."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2509.16447",
+  "rival": "Bradley-Local",
+  "dataset": "CLEVR color-conditioned",
+  "is_target": false,
+  "rows": 36,
+  "metrics": [
+   "Kmax",
+   "Manual count of images with 0 correctly colored objects (of 64)",
+   "Manual count of images with 1 correctly colored objects (of 64)",
+   "Manual count of images with 10 correctly colored objects (of 64)",
+   "Manual count of images with 2 correctly colored objects (of 64)",
+   "Manual count of images with 3 correctly colored objects (of 64)",
+   "Manual count of images with 4 correctly colored objects (of 64)",
+   "Manual count of images with 5 correctly colored objects (of 64)",
+   "Manual count of images with 6 correctly colored objects (of 64)",
+   "Manual count of images with 7 correctly colored objects (of 64)",
+   "Manual count of images with 8 correctly colored objects (of 64)",
+   "Manual count of images with 9 correctly colored objects (of 64)"
+  ],
+  "tasks": [
+   "Color, trained 1",
+   "Color, trained 1-3",
+   "Color, trained 1-5"
+  ],
+  "samples_recorded": [
+   "64"
+  ],
+  "pages": [
+   "30"
+  ],
+  "tables": [
+   "Bradley-Local Table 4"
+  ],
+  "protocols": [
+   "Color-conditioned 128x128 CLEVR; EDM2 edm2-img64-xs without guidance; Kmax by manual counting over 64 samples per configuration, success being K objects at least 25% of the time and at least K-2 objects at least 90% of the time, with approximately correct colors and acceptable image quality; counts are at K = Kmax."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.16447",
+  "rival": "Bradley-Local",
+  "dataset": "SDXL feature-space disentanglement",
+  "is_target": false,
+  "rows": 8,
+  "metrics": [
+   "Between-category cosine similarity, high end of stated range",
+   "Between-category cosine similarity, low end of stated range",
+   "Disentanglement ratio",
+   "Disentanglement ratio, high end of stated range",
+   "Disentanglement ratio, low end of stated range",
+   "Within-category cosine similarity, high end of stated range",
+   "Within-category cosine similarity, low end of stated range"
+  ],
+  "tasks": [
+   "Hidden-state activations",
+   "Latent/VAE space",
+   "Pixel space"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "Bradley-Local text p9"
+  ],
+  "protocols": [
+   "SDXL base 1.0; 24 prompts in 4 categories with 10 seeds each, 15 inference steps with the Euler discrete scheduler; post-FFN hidden states of each BasicTransformerBlock at high noise, averaged over seeds with the unconditional baseline subtracted, compared by pairwise cosine similarity."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.16447",
+  "rival": "Bradley-Local",
+  "dataset": "MDM feature-space disentanglement",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Disentanglement ratio, high end of stated range",
+   "Disentanglement ratio, low end of stated range"
+  ],
+  "tasks": [
+   "Hidden-state activations across all blocks"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "Bradley-Local text p9"
+  ],
+  "protocols": [
+   "Matryoshka Diffusion Model on a 50M Flickr subset; 12 single-concept prompts in 6 categories with 10 seeds each; hidden states of the innermost U-net at t = 999 with the unconditional baseline subtracted."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2502.04549",
+  "rival": "Bradley-Projective",
+  "dataset": "CLEVR location-conditioned",
+  "is_target": false,
+  "rows": 63,
+  "metrics": [
+   "Images with 0 objects in correct locations (count of 100)",
+   "Images with 1 objects in correct locations (count of 100)",
+   "Images with 2 objects in correct locations (count of 100)",
+   "Images with 3 objects in correct locations (count of 100)",
+   "Images with 4 objects in correct locations (count of 100)",
+   "Images with 5 objects in correct locations (count of 100)",
+   "Images with 6 objects in correct locations (count of 100)",
+   "Kmax"
+  ],
+  "tasks": [
+   "Compose N=1 distributions",
+   "Compose N=2 distributions",
+   "Compose N=3 distributions",
+   "Compose N=4 distributions",
+   "Compose N=5 distributions",
+   "Compose N=6 distributions",
+   "Trained on 1",
+   "Trained on 1-2"
+  ],
+  "samples_recorded": [
+   "100"
+  ],
+  "pages": [
+   "17",
+   "39"
+  ],
+  "tables": [
+   "Bradley-Projective Table 1",
+   "Bradley-Projective Table 2"
+  ],
+  "protocols": [
+   "Location-conditioned CLEVR at 128x128; 100 samples per composition method, with objects in correct locations counted by hand; EDM2 edm2-img64-xs U-net re-implementation; 65 model calls with a 32-step Heun sampler; no guidance.",
+   "Location-conditioned CLEVR; Kmax is the maximum value such that the model succeeds for every 1 <= K <= Kmax, as defined in Bradley (2025); the learned composition results are from Bradley (2025); the switch background uses the learned background for the first 12 denoising steps and then the unconditional background."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2502.04549",
+  "rival": "Bradley-Local",
+  "dataset": "CLEVR color-conditioned",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Length generalization (number of colors)"
+  ],
+  "tasks": [
+   "Trained on 1-5 objects"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "37",
+   "39"
+  ],
+  "tables": [
+   "Bradley-Projective text p37",
+   "Bradley-Projective text p39"
+  ],
+  "protocols": [
+   "Stated in the text as a result of Bradley (2025) for a color-conditioned model trained on 1-5 objects."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2502.15203",
+  "rival": "FlipConcept",
+  "dataset": "Custom Concept 101 plus images generated by Stable Diffusion (five evaluation sets)",
+  "is_target": false,
+  "rows": 36,
+  "metrics": [
+   "Additional training (s)",
+   "I_CLIP",
+   "I_DINO",
+   "Inference (s)",
+   "T_CLIP",
+   "Total (s)"
+  ],
+  "tasks": [
+   "ablation setting (a) Only mask-guided noise mixing",
+   "ablation setting (b) (a) + Guided appearance attention",
+   "ablation setting (c) (b) + Background dilution",
+   "ablation setting (d) (c) + Mask-guided noise mixing on reference noise (Ours)",
+   "multi-personalized concept generation"
+  ],
+  "samples_recorded": [
+   "50"
+  ],
+  "pages": [
+   "4",
+   "5",
+   "6"
+  ],
+  "tables": [
+   "FlipConcept Table I",
+   "FlipConcept Table II",
+   "FlipConcept Table III"
+  ],
+  "protocols": [
+   "512x512 images, 50 images per method, on two NVIDIA A40 GPUs; T_CLIP is image-prompt cosine similarity, I_CLIP and I_DINO are cosine similarity of region-specific embeddings.",
+   "Time in seconds on two NVIDIA A40 GPUs at 512x512; the paper does not state how many images or concepts each time covers.",
+   "Ablation of FlipConcept components at 512x512 on two NVIDIA A40 GPUs; the image count is not restated for this table."
+  ],
+  "more_protocols": 0
+ }
+]

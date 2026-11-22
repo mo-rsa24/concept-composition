@@ -1,0 +1,1266 @@
+[
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Attend-Excite Animal-Animal",
+  "is_target": false,
+  "rows": 54,
+  "metrics": [
+   "BLIP-VQA",
+   "DINOv2",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts: animal and animal"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "8",
+   "9"
+  ],
+  "tables": [
+   "CO3 Table 1",
+   "CO3 Table 3",
+   "CO3 Table 4"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated.",
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated; Tweediemix is run without its LoRA-finetuned concept-customization stage.",
+   "Ablation on SDXL at 50 DDIM steps, adding CO3 resampling (first three DDIM steps), the CO3 corrector and concept weight modulation; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Attend-Excite Animal-Object",
+  "is_target": false,
+  "rows": 54,
+  "metrics": [
+   "BLIP-VQA",
+   "DINOv2",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts: animal and object"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "8",
+   "9"
+  ],
+  "tables": [
+   "CO3 Table 1",
+   "CO3 Table 3",
+   "CO3 Table 4"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated.",
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated; Tweediemix is run without its LoRA-finetuned concept-customization stage.",
+   "Ablation on SDXL at 50 DDIM steps, adding CO3 resampling (first three DDIM steps), the CO3 corrector and concept weight modulation; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Attend-Excite Object-Object",
+  "is_target": false,
+  "rows": 54,
+  "metrics": [
+   "BLIP-VQA",
+   "DINOv2",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts: colored object and colored object"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7",
+   "8",
+   "9"
+  ],
+  "tables": [
+   "CO3 Table 1",
+   "CO3 Table 3",
+   "CO3 Table 4"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated.",
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8 (T_c=10, T_r=3, P=5 for this table); baselines run from their public code; scored with BLIP-VQA, ImageReward and DINOv2; image count, seeds and resolution not stated; Tweediemix is run without its LoRA-finetuned concept-customization stage.",
+   "Ablation on SDXL at 50 DDIM steps, adding CO3 resampling (first three DDIM steps), the CO3 corrector and concept weight modulation; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 1
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "T2ICompbench Complex",
+  "is_target": true,
+  "rows": 10,
+  "metrics": [
+   "Human Evaluation (HE)",
+   "ImageReward (IR)"
+  ],
+  "tasks": [
+   "three or more concepts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "CO3 Table 2"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8; baselines run from their public code; IR is ImageReward; HE is human evaluation by 11 participants rating 0 to 5, normalized to 0 to 1, following the R2F protocol; image count and seeds not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "RareBench Concat",
+  "is_target": true,
+  "rows": 9,
+  "metrics": [
+   "Human Evaluation (HE)",
+   "ImageReward (IR)"
+  ],
+  "tasks": [
+   "rare or novel concepts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "CO3 Table 2"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8; baselines run from their public code; IR is ImageReward; HE is human evaluation by 11 participants rating 0 to 5, normalized to 0 to 1, following the R2F protocol; image count and seeds not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "RareBench Relations",
+  "is_target": false,
+  "rows": 9,
+  "metrics": [
+   "Human Evaluation (HE)",
+   "ImageReward (IR)"
+  ],
+  "tasks": [
+   "rare or novel concepts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "CO3 Table 2"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8; baselines run from their public code; IR is ImageReward; HE is human evaluation by 11 participants rating 0 to 5, normalized to 0 to 1, following the R2F protocol; image count and seeds not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "RareBench Complex",
+  "is_target": false,
+  "rows": 9,
+  "metrics": [
+   "Human Evaluation (HE)",
+   "ImageReward (IR)"
+  ],
+  "tasks": [
+   "rare or novel concepts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "CO3 Table 2"
+  ],
+  "protocols": [
+   "CO3 on SDXL at 50 DDIM steps with guidance scale 5.0, resampling in the first 3 steps and correction through the first 20% of steps with beta=0.8; baselines run from their public code; IR is ImageReward; HE is human evaluation by 11 participants rating 0 to 5, normalized to 0 to 1, following the R2F protocol; image count and seeds not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Attend-Excite all three categories",
+  "is_target": false,
+  "rows": 6,
+  "metrics": [
+   "Avg"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "CO3 Table 3"
+  ],
+  "protocols": [
+   "Ablation on SDXL at 50 DDIM steps, adding CO3 resampling (first three DDIM steps), the CO3 corrector and concept weight modulation; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "Attend-Excite Animals",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "Human Evaluation"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "17"
+  ],
+  "tables": [
+   "CO3 Table 5"
+  ],
+  "protocols": [
+   "Human evaluation on Attend-Excite prompts by 11 participants rating 0 to 5, normalized to 0 to 1, with methods shown side by side, anonymized and in random order, following the R2F protocol."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "Attend-Excite Animals-Objects",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "Human Evaluation"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "17"
+  ],
+  "tables": [
+   "CO3 Table 5"
+  ],
+  "protocols": [
+   "Human evaluation on Attend-Excite prompts by 11 participants rating 0 to 5, normalized to 0 to 1, with methods shown side by side, anonymized and in random order, following the R2F protocol."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "ToMe",
+  "dataset": "Attend-Excite Objects",
+  "is_target": false,
+  "rows": 5,
+  "metrics": [
+   "Human Evaluation"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "17"
+  ],
+  "tables": [
+   "CO3 Table 5"
+  ],
+  "protocols": [
+   "Human evaluation on Attend-Excite prompts by 11 participants rating 0 to 5, normalized to 0 to 1, with methods shown side by side, anonymized and in random order, following the R2F protocol."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Animals (Attend-Excite category; this table names no benchmark)",
+  "is_target": false,
+  "rows": 100,
+  "metrics": [
+   "BLIP-VQA",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "18",
+   "20",
+   "21"
+  ],
+  "tables": [
+   "CO3 Table 10",
+   "CO3 Table 11",
+   "CO3 Table 12",
+   "CO3 Table 13",
+   "CO3 Table 6",
+   "CO3 Table 7",
+   "CO3 Table 8",
+   "CO3 Table 9"
+  ],
+  "protocols": [
+   "DDIM sampler at 50 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 20 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 10 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 38
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Animals Objects (Attend-Excite category; this table names no benchmark)",
+  "is_target": false,
+  "rows": 100,
+  "metrics": [
+   "BLIP-VQA",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "18",
+   "20",
+   "21"
+  ],
+  "tables": [
+   "CO3 Table 10",
+   "CO3 Table 11",
+   "CO3 Table 12",
+   "CO3 Table 13",
+   "CO3 Table 6",
+   "CO3 Table 7",
+   "CO3 Table 8",
+   "CO3 Table 9"
+  ],
+  "protocols": [
+   "DDIM sampler at 50 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 20 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 10 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 38
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Objects (Attend-Excite category; this table names no benchmark)",
+  "is_target": false,
+  "rows": 100,
+  "metrics": [
+   "BLIP-VQA",
+   "ImageReward"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "18",
+   "20",
+   "21"
+  ],
+  "tables": [
+   "CO3 Table 10",
+   "CO3 Table 11",
+   "CO3 Table 12",
+   "CO3 Table 13",
+   "CO3 Table 6",
+   "CO3 Table 7",
+   "CO3 Table 8",
+   "CO3 Table 9"
+  ],
+  "protocols": [
+   "DDIM sampler at 50 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 20 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 10 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 38
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Animals, Animals Objects and Objects (Attend-Excite category; this table names no benchmark)",
+  "is_target": false,
+  "rows": 16,
+  "metrics": [
+   "Avg"
+  ],
+  "tasks": [
+   "two-concept prompts"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "18"
+  ],
+  "tables": [
+   "CO3 Table 6",
+   "CO3 Table 7",
+   "CO3 Table 8"
+  ],
+  "protocols": [
+   "DDIM sampler at 50 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 20 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated.",
+   "DPM++ sampler at 10 steps on SDXL, with and without CO3; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper; image count and seeds not stated."
+  ],
+  "more_protocols": 4
+ },
+ {
+  "arxiv": "2509.25940",
+  "rival": "CO3",
+  "dataset": "Runtime for one sample",
+  "is_target": false,
+  "rows": 8,
+  "metrics": [
+   "Memory (GB)",
+   "Time (s)"
+  ],
+  "tasks": [
+   "generate one sample"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "18"
+  ],
+  "tables": [
+   "CO3 Table 8"
+  ],
+  "protocols": [
+   "50 sampling steps on an NVIDIA A100 GPU; time and peak memory to generate one sample; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper.",
+   "20 sampling steps on an NVIDIA A100 GPU; time and peak memory to generate one sample; scored with ImageReward and BLIP-VQA; Avg is not defined in the paper."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "Du",
+  "dataset": "2D synthetic",
+  "is_target": false,
+  "rows": 185,
+  "metrics": [
+   "Accuracy (%)",
+   "CD (Chamfer Distance)",
+   "Ratio (acceptance ratio of samples using CompLift)"
+  ],
+  "tasks": [
+   "Mixture",
+   "Mixture, Scenario 1",
+   "Mixture, Scenario 2",
+   "Mixture, Scenario 3",
+   "Negation",
+   "Negation, Scenario 1",
+   "Negation, Scenario 2",
+   "Negation, Scenario 3"
+  ],
+  "samples_recorded": [
+   "8000"
+  ],
+  "pages": [
+   "7",
+   "19"
+  ],
+  "tables": [
+   "LiftScores Table 2",
+   "LiftScores Table 4"
+  ],
+  "protocols": [
+   "2D synthetic compositions following Du et al.: 8000 data points per component distribution, one 3-layer MLP energy diffusion model per distribution, 50 diffusion timesteps for training and inference; every method generates 8000 samples and CompLift accepts or rejects 8000 Composable Diffusion samples using 50 cached trials or 50 or 1000 vanilla trials; accuracy is the percentage of samples satisfying all conditions and CD is Chamfer Distance to the dataset."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "LiftScores",
+  "dataset": "Attend-and-Excite Animals",
+  "is_target": false,
+  "rows": 90,
+  "metrics": [
+   "CLIP",
+   "CLIP gain (%)",
+   "IR (ImageReward)",
+   "IR gain (%)",
+   "TIFA",
+   "minCLIP"
+  ],
+  "tasks": [
+   "2 animals"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8",
+   "23",
+   "24",
+   "27",
+   "28"
+  ],
+  "tables": [
+   "LiftScores Table 10",
+   "LiftScores Table 11",
+   "LiftScores Table 12",
+   "LiftScores Table 3",
+   "LiftScores Table 8",
+   "LiftScores Table 9"
+  ],
+  "protocols": [
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. Attend-and-Excite is the generator here, and SDXL is left out because the original code does not support it.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. The CAS Variant replaces the composed criterion with the single criterion log p(z|c_compose) minus log p(z|empty), estimated by the same ELBO method."
+  ],
+  "more_protocols": 3
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "LiftScores",
+  "dataset": "Attend-and-Excite Object&Animal",
+  "is_target": false,
+  "rows": 90,
+  "metrics": [
+   "CLIP",
+   "CLIP gain (%)",
+   "IR (ImageReward)",
+   "IR gain (%)",
+   "TIFA",
+   "minCLIP"
+  ],
+  "tasks": [
+   "1 animal and 1 object"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8",
+   "23",
+   "24",
+   "27",
+   "28"
+  ],
+  "tables": [
+   "LiftScores Table 10",
+   "LiftScores Table 11",
+   "LiftScores Table 12",
+   "LiftScores Table 3",
+   "LiftScores Table 8",
+   "LiftScores Table 9"
+  ],
+  "protocols": [
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. Attend-and-Excite is the generator here, and SDXL is left out because the original code does not support it.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. The CAS Variant replaces the composed criterion with the single criterion log p(z|c_compose) minus log p(z|empty), estimated by the same ELBO method."
+  ],
+  "more_protocols": 3
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "LiftScores",
+  "dataset": "Attend-and-Excite Objects",
+  "is_target": false,
+  "rows": 90,
+  "metrics": [
+   "CLIP",
+   "CLIP gain (%)",
+   "IR (ImageReward)",
+   "IR gain (%)",
+   "TIFA",
+   "minCLIP"
+  ],
+  "tasks": [
+   "2 objects"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8",
+   "23",
+   "24",
+   "27",
+   "28"
+  ],
+  "tables": [
+   "LiftScores Table 10",
+   "LiftScores Table 11",
+   "LiftScores Table 12",
+   "LiftScores Table 3",
+   "LiftScores Table 8",
+   "LiftScores Table 9"
+  ],
+  "protocols": [
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. Attend-and-Excite is the generator here, and SDXL is left out because the original code does not support it.",
+   "Pretrained Stable Diffusion 1.4, 2.1 and SDXL on the Attend-and-Excite composed prompts (66 animal, 66 object and 144 animal-object combinations); 5 initial samples per prompt, 50 inference timesteps, CFG scale 7.5, tau 250; cached CompLift uses 50 trials, the setup text gives vanilla CompLift 200 trials and the tables also print a T=50 row; where every sample is rejected one image is drawn uniformly; scores are averaged over the samples within each combination class. The CAS Variant replaces the composed criterion with the single criterion log p(z|c_compose) minus log p(z|empty), estimated by the same ELBO method."
+  ],
+  "more_protocols": 3
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "Du",
+  "dataset": "CLEVR Position",
+  "is_target": false,
+  "rows": 75,
+  "metrics": [
+   "Accuracy (%)",
+   "Accuracy (%), pretrained classifier",
+   "FID"
+  ],
+  "tasks": [
+   "1 position constraints",
+   "2 position constraints",
+   "3 position constraints",
+   "4 position constraints",
+   "5 position constraints"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "21",
+   "22"
+  ],
+  "tables": [
+   "LiftScores Table 5",
+   "LiftScores Table 6",
+   "LiftScores Table 7"
+  ],
+  "protocols": [
+   "CLEVR Position with the pretrained diffusion model of Liu et al., all methods tested on 5000 combinations of positions with various numbers of constraints (the paper does not say whether that count is per constraint number), CFG scale 7.5; each composition starts from 10 Composable Diffusion samples and CompLift uses 1 trial at t=928 with importance sampling. Accuracy is the share of samples satisfying all positions under a SAM2 background-mask verifier. The paper states the MCMC results did not reproduce well and should be read with caution.",
+   "CLEVR Position with the pretrained diffusion model of Liu et al., all methods tested on 5000 combinations of positions with various numbers of constraints (the paper does not say whether that count is per constraint number), CFG scale 7.5; each composition starts from 10 Composable Diffusion samples and CompLift uses 1 trial at t=928 with importance sampling. FID compares the generated samples with the training set provided by Liu et al. The paper states the MCMC results did not reproduce well and should be read with caution.",
+   "CLEVR Position with the pretrained diffusion model of Liu et al., all methods tested on 5000 combinations of positions with various numbers of constraints (the paper does not say whether that count is per constraint number), CFG scale 7.5; each composition starts from 10 Composable Diffusion samples and CompLift uses 1 trial at t=928 with importance sampling. Accuracy uses the pretrained classifier of Liu et al. The paper states the MCMC results did not reproduce well and should be read with caution."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "CLIP",
+  "dataset": "Figure 10 samples, prompt \"a black car and a white clock\"",
+  "is_target": false,
+  "rows": 6,
+  "metrics": [
+   "PR AUC",
+   "ROC AUC"
+  ],
+  "tasks": [
+   "detect presence of both objects"
+  ],
+  "samples_recorded": [
+   "100"
+  ],
+  "pages": [
+   "28"
+  ],
+  "tables": [
+   "LiftScores Table 13"
+  ],
+  "protocols": [
+   "Manual labels on 100 samples from Figure 10 for presence of both a black car and a white clock, 62 positive and 38 negative; AUC measures how each metric corresponds to that presence."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2505.13740",
+  "rival": "LiftScores",
+  "dataset": "Attend-and-Excite prompts",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Average gain (%)"
+  ],
+  "tasks": [
+   "average gain over Table 10"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "27"
+  ],
+  "tables": [
+   "LiftScores text p27"
+  ],
+  "protocols": [
+   "Stated in the rebuttal answer on page 27 as an average of the percentage gains of Table 10 against a perfect best-of-n selector."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "FreeFuse",
+  "dataset": "FreeFuse benchmark of 15 LoRAs (10 character, 5 object)",
+  "is_target": false,
+  "rows": 143,
+  "metrics": [
+   "Character Similarity Clip-I",
+   "Character Similarity DINOv2",
+   "Character Similarity DINOv3",
+   "Character Similarity Dreamsim",
+   "Clip-T",
+   "Face Similarity ArcFace",
+   "Face Similarity LVFace",
+   "HPSv2",
+   "HPSv3",
+   "Object Similarity Clip-I",
+   "Object Similarity DINOv2",
+   "Object Similarity DINOv3",
+   "Object Similarity Dreamsim"
+  ],
+  "tasks": [
+   "Multi-subject generation with multiple LoRAs"
+  ],
+  "samples_recorded": [
+   "470"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "FreeFuse Table 1",
+   "FreeFuse Table 2"
+  ],
+  "protocols": [
+   "470 images generated per method across 20 four-LoRA multi-character scenes and character-object prompts, scored against reference images and the prompt.",
+   "Ablation of FreeFuse components on the benchmark of Table 1; the paper does not restate the image count for this table."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "FreeFuse",
+  "dataset": "FreeFuse user study of 40 cases (20 character-character, 20 character-object)",
+  "is_target": false,
+  "rows": 12,
+  "metrics": [
+   "User Study Q1 (mean rank)",
+   "User Study Q2 (mean rank)"
+  ],
+  "tasks": [
+   "Character-object interaction",
+   "Multi-subject interaction"
+  ],
+  "samples_recorded": [
+   "17 participants, 40 cases"
+  ],
+  "pages": [
+   "10"
+  ],
+  "tables": [
+   "FreeFuse Table 1"
+  ],
+  "protocols": [
+   "Blind ranking of anonymized, shuffled outputs by 17 participants aged 18-40, with the score obtained by averaging participant rankings across cases."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "FreeFuse",
+  "dataset": "FreeFuse latency measurement, 2 to 6 subject LoRAs",
+  "is_target": false,
+  "rows": 40,
+  "metrics": [
+   "Inference latency (seconds)",
+   "Speedup vs. LoRAShop (%)",
+   "Speedup vs. LoRAShop (x)"
+  ],
+  "tasks": [
+   "2 LoRAs",
+   "3 LoRAs",
+   "4 LoRAs",
+   "5 LoRAs",
+   "6 LoRAs"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "11",
+   "26"
+  ],
+  "tables": [
+   "FreeFuse Table 3",
+   "FreeFuse Table 7"
+  ],
+  "protocols": [
+   "Total time from initial prompt encoding to final pixel decoding at 1024 x 1024 on a single L20 (48GB), including mask extraction and contention resolution for FreeFuse."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "FreeFuse",
+  "dataset": "FreeFuse LoRA-count ablation, k in {2,3,4,5} subject LoRAs",
+  "is_target": false,
+  "rows": 30,
+  "metrics": [
+   "ArcFace ID",
+   "ArcFace ID delta (FreeFuse minus Baseline)",
+   "HPSv2",
+   "HPSv2 delta (FreeFuse minus Baseline)"
+  ],
+  "tasks": [
+   "2 LoRAs",
+   "3 LoRAs",
+   "4 LoRAs",
+   "5 LoRAs",
+   "Average over 2 to 5 LoRAs"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "24"
+  ],
+  "tables": [
+   "FreeFuse Table 5"
+  ],
+  "protocols": [
+   "Same LoRAs and prompts for both methods, with the baseline using naive simultaneous LoRA activation; the paper does not state the image count."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "FreeFuse",
+  "dataset": "Public LoRAShop dual-subject protocol",
+  "is_target": false,
+  "rows": 24,
+  "metrics": [
+   "Aesthetic v2",
+   "ArcFace ID",
+   "CLIP-T bigG",
+   "HPSv2"
+  ],
+  "tasks": [
+   "Dual-subject generation with two LoRAs"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "25"
+  ],
+  "tables": [
+   "FreeFuse Table 6"
+  ],
+  "protocols": [
+   "LoRAShop dual-subject protocol with its published LoRA weights and prompting setup; the paper does not state the image count."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2510.23515",
+  "rival": "LoRA perturbation on FLUX",
+  "dataset": "All available LoRAs in the LoRAShop test set",
+  "is_target": false,
+  "rows": 2,
+  "metrics": [
+   "Effective LoRA weight perturbation, mid/deep vs early (ratio of ||dW||_F/sqrt(|dW|))",
+   "Inference-time LoRA residual, mid/deep vs early (ratio of ||dx||_F/||x_base||_F)"
+  ],
+  "tasks": [
+   "Inference-time LoRA residual under the activation prompt",
+   "Normalized effective LoRA weight perturbation"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "6"
+  ],
+  "tables": [
+   "FreeFuse text p6"
+  ],
+  "protocols": [
+   "Mid/deep double-stream blocks 10-18 against early blocks 0-3 of FLUX."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.11552",
+  "rival": "Du",
+  "dataset": "2D densities (product)",
+  "is_target": false,
+  "rows": 27,
+  "metrics": [
+   "LL",
+   "RAISE",
+   "Var"
+  ],
+  "tasks": [
+   "Product of 2 models"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "6"
+  ],
+  "tables": [
+   "Du Table 1"
+  ],
+  "protocols": [
+   "2D product of an 8-Gaussian ring (radius 0.5, standard deviation 0.3) and a uniform strip; residual MLP, 100 discrete timesteps, linear beta schedule; 3 HMC steps per timestep with 3 leapfrog steps, 10 MALA steps per timestep; all MCMC experiments use the same number of score function evaluations."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.11552",
+  "rival": "Du",
+  "dataset": "2D densities (mixture)",
+  "is_target": false,
+  "rows": 15,
+  "metrics": [
+   "LL",
+   "Var",
+   "ln(MMD)"
+  ],
+  "tasks": [
+   "Mixture of 2 models"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "6"
+  ],
+  "tables": [
+   "Du Table 1"
+  ],
+  "protocols": [
+   "2D mixture of two sets of 3 Gaussians (standard deviation 0.03) centred at x = -0.25 and x = 0.25; residual MLP, 100 discrete timesteps, linear beta schedule; 3 HMC steps per timestep with 3 leapfrog steps, 10 MALA steps per timestep; all MCMC experiments use the same number of score function evaluations."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.11552",
+  "rival": "Du",
+  "dataset": "CLEVR (cube positions)",
+  "is_target": false,
+  "rows": 40,
+  "metrics": [
+   "Accuracy"
+  ],
+  "tasks": [
+   "Compose 1 cube positions",
+   "Compose 2 cube positions",
+   "Compose 3 cube positions",
+   "Compose 4 cube positions",
+   "Compose 5 cube positions"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "6"
+  ],
+  "tables": [
+   "Du Table 2"
+  ],
+  "protocols": [
+   "64x64 CLEVR, 200,000 images with 1 to 5 cubes; 100 discrete timesteps, linear beta schedule; 40 MALA steps or 13 HMC steps (3 leapfrog steps each) per timestep; the same number of score function evaluations for each number of cubes; accuracy is the fraction of samples with all objects correctly placed, a cube counting when a binary classifier confidence exceeds 0.5."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.11552",
+  "rival": "Du",
+  "dataset": "ImageNet 128x128",
+  "is_target": false,
+  "rows": 24,
+  "metrics": [
+   "Accuracy",
+   "FID",
+   "Inception Score"
+  ],
+  "tasks": [
+   "Classifier-guided generation"
+  ],
+  "samples_recorded": [
+   "50000"
+  ],
+  "pages": [
+   "7"
+  ],
+  "tables": [
+   "Du Table 3"
+  ],
+  "protocols": [
+   "128x128 ImageNet, unconditional diffusion model plus noise-conditioned classifier; 1000 discrete timesteps, cosine beta schedule; 6 MALA steps or 2 HMC steps (3 leapfrog steps each) per timestep; Inception Score and FID on 50,000 generated samples; accuracy counts a sample when an ImageNet classifier gives the specified class a probability above 50%."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2302.11552",
+  "rival": "Du",
+  "dataset": "ImageNet",
+  "is_target": false,
+  "rows": 4,
+  "metrics": [
+   "FID"
+  ],
+  "tasks": [
+   "Unconditional generation"
+  ],
+  "samples_recorded": [
+   "1k"
+  ],
+  "pages": [
+   "17"
+  ],
+  "tables": [
+   "Du Table A1"
+  ],
+  "protocols": [
+   "FID on 1k samples of unconditional ImageNet generation, comparing energy parameterizations with the standard one."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2602.05549",
+  "rival": "LogicalGuidance",
+  "dataset": "CMNIST, AND",
+  "is_target": true,
+  "rows": 9,
+  "metrics": [
+   "CS (Conformity Score)",
+   "Conformity score (%)"
+  ],
+  "tasks": [
+   "AND"
+  ],
+  "samples_recorded": [
+   "10000"
+  ],
+  "pages": [
+   "5",
+   "7",
+   "26"
+  ],
+  "tables": [
+   "LogicalGuidance Table 11",
+   "LogicalGuidance Table 2",
+   "LogicalGuidance Table 4"
+  ],
+  "protocols": [
+   "CMNIST U-Net at 28 x 28 with a ResNet-18 attribute classifier; the conformity score is the percentage of samples satisfying the query, averaged over 10,000 samples from 100 unique queries per task type with 100 samples each; N=2 to 5 are random formulas with N AND/OR operators; DDPM sampling with 50 timesteps as listed in Table 9.",
+   "CMNIST with single-operand expressions, the methods designed for separate models applied to one model conditioned on varying conditions, scored with the Conformity Score; the printed use-eps-empty, probabilities and method-formula columns of Table 11 are kept in the model field."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2602.05549",
+  "rival": "LogicalGuidance",
+  "dataset": "CMNIST",
+  "is_target": false,
+  "rows": 51,
+  "metrics": [
+   "Accuracy (%)",
+   "CS (Conformity Score)",
+   "Conformity score (%)"
+  ],
+  "tasks": [
+   "N=2",
+   "N=3",
+   "N=4",
+   "N=5",
+   "NOT",
+   "OR-CI",
+   "OR-ME",
+   "classify Color"
+  ],
+  "samples_recorded": [
+   "10000"
+  ],
+  "pages": [
+   "5",
+   "7",
+   "23",
+   "26"
+  ],
+  "tables": [
+   "LogicalGuidance Table 10",
+   "LogicalGuidance Table 11",
+   "LogicalGuidance Table 2",
+   "LogicalGuidance Table 4"
+  ],
+  "protocols": [
+   "CMNIST U-Net at 28 x 28 with a ResNet-18 attribute classifier; the conformity score is the percentage of samples satisfying the query, averaged over 10,000 samples from 100 unique queries per task type with 100 samples each; N=2 to 5 are random formulas with N AND/OR operators; DDPM sampling with 50 timesteps as listed in Table 9.",
+   "ResNet-18 classifier used to score Conformity and Joint Entropy; feature-wise accuracy as printed in Table 10.",
+   "CMNIST with single-operand expressions, the methods designed for separate models applied to one model conditioned on varying conditions, scored with the Conformity Score; the printed use-eps-empty, probabilities and method-formula columns of Table 11 are kept in the model field."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2602.05549",
+  "rival": "LogicalGuidance",
+  "dataset": "Shapes3D",
+  "is_target": false,
+  "rows": 46,
+  "metrics": [
+   "Accuracy (%)",
+   "Conformity score (%)"
+  ],
+  "tasks": [
+   "AND",
+   "N=2",
+   "N=3",
+   "N=4",
+   "N=5",
+   "NOT",
+   "OR-CI",
+   "OR-ME"
+  ],
+  "samples_recorded": [
+   "10000"
+  ],
+  "pages": [
+   "5",
+   "7",
+   "23"
+  ],
+  "tables": [
+   "LogicalGuidance Table 10",
+   "LogicalGuidance Table 2",
+   "LogicalGuidance Table 4"
+  ],
+  "protocols": [
+   "Shapes3D U-Net at 64 x 64 with a ResNet-18 attribute classifier; the conformity score is the percentage of samples satisfying the query, averaged over 10,000 samples from 100 unique queries per task type with 100 samples each; N=2 to 5 are random formulas with N AND/OR operators; DDPM sampling with 50 timesteps as listed in Table 9.",
+   "ResNet-18 classifier used to score Conformity and Joint Entropy; feature-wise accuracy as printed in Table 10."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2602.05549",
+  "rival": "LogicalGuidance",
+  "dataset": "CelebA",
+  "is_target": false,
+  "rows": 20,
+  "metrics": [
+   "Accuracy (%)",
+   "CS (Conformity Score)",
+   "FID"
+  ],
+  "tasks": [
+   "AND",
+   "NOT",
+   "OR-CI",
+   "classify Blond",
+   "classify Male"
+  ],
+  "samples_recorded": [
+   "5000"
+  ],
+  "pages": [
+   "6",
+   "23"
+  ],
+  "tables": [
+   "LogicalGuidance Table 10",
+   "LogicalGuidance Table 3"
+  ],
+  "protocols": [
+   "CelebA restricted to the binary attributes Blond and Male, SiT latent model at 16 x 16 with DDIM and 1000 steps as listed in Table 9; CS uses the attribute classifiers of Table 10; FID uses clean-fid on 5,000 samples per task, 100 images for each of 50 queries.",
+   "ResNet-18 classifier used to score Conformity and Joint Entropy; feature-wise accuracy as printed in Table 10."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2602.05549",
+  "rival": "LogicalGuidance",
+  "dataset": "GRM5-RRM1 dual-target ligand design",
+  "is_target": false,
+  "rows": 78,
+  "metrics": [
+   "(A*B)",
+   "A (docking score)",
+   "B (docking score)",
+   "Delta(A,B)",
+   "Div.",
+   "Qual.",
+   "V. & U."
+  ],
+  "tasks": [
+   "A AND B",
+   "A AND B (FKC)",
+   "A AND NOT B",
+   "A AND NOT B (FKC)",
+   "A OR B",
+   "A OR B (FKC)",
+   "A XOR B",
+   "A XOR B (FKC)"
+  ],
+  "samples_recorded": [
+   "32 ligands per experiment, 8 experiments"
+  ],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "LogicalGuidance Table 5",
+   "LogicalGuidance Table 6",
+   "LogicalGuidance Table 7",
+   "LogicalGuidance Table 8"
+  ],
+  "protocols": [
+   "GRM5-RRM1 protein pair (UniProt P41594, P23921) in the experimental setup of Skreta et al. 2025a: pockets aligned in 3D, SO(3)-equivariant graph network, 1000 steps, inverse temperature beta 2.0, 32 ligands of size 23 over 8 experiments, docking by AutoDock Vina; the quality indicator requires QED at least 0.6 and SA at most 4.0."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2605.07078",
+  "rival": "TestTime",
+  "dataset": "ColorMNIST 40 OOD compositions",
+  "is_target": false,
+  "rows": 50,
+  "metrics": [
+   "CLIP (%)",
+   "F1 (%)",
+   "FID",
+   "Precision (%)",
+   "Recall (%)"
+  ],
+  "tasks": [
+   "Generate a held-out composition from one query, scored against 100 other held-out images",
+   "Generate a held-out composition from one query, scored against the 100 query images"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "8"
+  ],
+  "tables": [
+   "TestTime Table 1"
+  ],
+  "protocols": [
+   "Mean and standard error over 40 held-out compositions; the framework runs independently on 100 query images per class; FID, CLIP image-image cosine, and Inception-V3 k-NN precision and recall with k=3; Faithfulness reference is the 100 queries and Generalization reference is 100 other held-out images; DDIM eta 0 with 50 steps; seed 42; 16 saved generations per query per teacher; FID at N=100 is biased upward and is not comparable with N=50,000 FIDs."
+  ],
+  "more_protocols": 0
+ },
+ {
+  "arxiv": "2605.07078",
+  "rival": "TestTime",
+  "dataset": "CelebA 23 OOD compositions",
+  "is_target": false,
+  "rows": 50,
+  "metrics": [
+   "CLIP (%)",
+   "F1 (%)",
+   "FID",
+   "Precision (%)",
+   "Recall (%)"
+  ],
+  "tasks": [
+   "Generate a held-out composition from one query, scored against 100 other held-out images",
+   "Generate a held-out composition from one query, scored against the 100 query images"
+  ],
+  "samples_recorded": [],
+  "pages": [
+   "9"
+  ],
+  "tables": [
+   "TestTime Table 2"
+  ],
+  "protocols": [
+   "Mean and standard error over 23 held-out compositions; the framework runs independently on 100 query images per class; FID, CLIP image-image cosine, and Inception-V3 k-NN precision and recall with k=3; Faithfulness reference is the 100 queries and Generalization reference is 100 other held-out images; DDIM eta 0 with 50 steps; seed 42; 16 saved generations per query per teacher; FID at N=100 is biased upward and is not comparable with N=50,000 FIDs."
+  ],
+  "more_protocols": 0
+ }
+]
