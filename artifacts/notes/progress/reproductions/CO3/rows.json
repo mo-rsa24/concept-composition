@@ -1,0 +1,10 @@
+[
+  {
+    "target_id": "RTD-T2-051",
+    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, so a miss could come from the settings"
+  },
+  {
+    "target_id": "RTD-T2-054",
+    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, so a miss could come from the settings"
+  }
+]

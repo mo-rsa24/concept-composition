@@ -14,10 +14,10 @@ steps of SDXL by moving away from what each single concept would draw on its own
 **Buys.** `RTD-T2-041` (0.4406, Complex) and `RTD-T2-044` (0.1610, Concat) in `table.csv`. Both values equal CO3's own
 Table 2, as do 19 of the 20 baseline ImageReward cells in RTD's Table 2, so RTD probably did not rerun CO3.
 
-**Cost.** One seed per prompt on the 988 Complex and 33 Concat prompts the subject guard allows is 1,021 pictures. CO3 adds 40
-to 60 corrector iterations of 4 to 5 U-Net rows each to SDXL's 100 rows, so a picture takes about 40 to 50 seconds at the 14
-seconds per 100 rows measured on an RTX 3090. That is about 11 to 15 GPU-hours. Three seeds per prompt, the count the row's protocol text
-states, would be about 33 to 45 GPU-hours, and board question 18 asks the owner about it. The smoke rung measures the real time.
+**Cost.** Three seeds per prompt on the 988 Complex and 33 Concat prompts the subject guard allows is 3,063 pictures. CO3 adds 40
+corrector iterations of 4 to 5 U-Net rows each to SDXL's 100 rows, so a picture takes about 40 to 50 seconds at the 14 seconds
+per 100 rows measured on an RTX 3090. The owner approved a budget of about 33 to 45 GPU-hours on board question 18. The smoke
+rung measures the real time, and a run going materially past the budget stops and asks.
 
 ## The paper and the released code disagree
 
@@ -37,14 +37,14 @@ The code does not settle this. Its corrector re-noises with the unconditional pr
 CFG++ form, and `attn_utils.py` documents `lmda` as between 0 and 1. Running the paper's λ = 5.0 through that corrector puts it
 outside the range the code documents.
 
-Board question 16 asks the owner which version counts. Until it is answered, both CO3 rows stay `not comparable`, and no CO3
-picture is rendered, so the choice is made before any CO3 score exists.
+By the owner's answer to board question 16, this run uses the released script exactly as shipped and is judged against the
+paper's Table 2. Each row's note states both sets of settings, because a miss could come from the settings rather than from CO3.
 
 ## Settings the paper and code leave open
 
 **Seeds.** CO3's paper and code name no evaluation seeds, and the released script renders one seed, 1688. The row's protocol text,
-from RTD's paper, states three seeds per prompt. Unless the owner approves three on question 18, this run uses seed 0, the seed the
-side-by-side comparison shares with RTD and plain SDXL, and labels each number with its seed count.
+from RTD's paper, states three seeds per prompt. By the owner's answer to board question 18, this run uses seeds 0, 1 and 2, the
+same seeds as RTD and plain SDXL.
 
 **Starting noise.** CO3 draws its own noise on the CPU. This run passes in the same starting latent the RTD renderer draws for
 that seed, so the methods differ only in what they do from there.
@@ -70,4 +70,4 @@ Each rung saves its config, metrics, image sheet and commit under `/datasets/mmo
 4. **Controls.** With the corrector replaced by the identity, CO3's loop must match its own loop with correction off to under
    1e-5 (largest absolute latent difference), in one process on one card. The real corrector must change the final latent by more
    than 1e-3.
-5. **Full protocol.** All 1,021 allowed pictures.
+5. **Full protocol.** All 3,063 allowed pictures.
