@@ -58,11 +58,13 @@ the 128-seed count is in [the checker loop's closing section](../../../2-classif
 
 <a href="../../../1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/window-vs-commitment/window-vs-commitment.png"><img src="../../../1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/window-vs-commitment/window-vs-commitment.png" width="200" alt="Left: compose rate against the centre of a ten-step injection window, eight pairs, every curve highest at centre 5 and zero from centre 25. Right: the best window centre sits at 5 for every pair while the step where each pair's picture settles runs from 23 to 36"></a>
 
-**Best number.** Adding the correction back, scaled by λ from 0 upward, takes cat × dog's
-[compose rate](../../../context/world/compose-rate.md) from 3% to 94%, while two controls of the
-same size pointing elsewhere stay at or below 6% (area under the rate-against-λ curve on a 0-to-1
-scale: 0.387 for the correction, 0.023 and 0.039 for the controls). Injected only at steps 0 to 10
-it composes 0.656 of 32 runs; at steps 20 to 30 it composes 0.000. A rank-32 adapter trained to
+**Best number.** Adding the correction back, scaled by λ from 0 upward, takes the
+[compose rate](../../../context/world/compose-rate.md), pooled over eight animal pairs, from 3% to
+94%, while two controls of the same size pointing elsewhere stay at or below 6% (area under the
+rate-against-λ curve on a 0-to-1 scale: 0.387 for the correction, 0.023 and 0.039 for the controls).
+Cat × dog alone goes from 0% to 100%, with an area of 0.562. Injected only at steps 0 to 10, the
+correction composes 0.656 of 32 runs over the eight pairs (cat × dog alone: 3 of 4 seeds); at steps
+20 to 30 it composes 0.000. A rank-32 adapter trained to
 predict the correction from the two single prompts composes cat × dog on 7 of 8 held-out seeds
 against 0 for plain product.
 
