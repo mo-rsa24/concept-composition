@@ -46,7 +46,7 @@ Its Shape and Texture rows are `not comparable` by the owner's answer to board q
 **Check first.** Plain SD2 must reproduce the printed 0.5065 on the same 288 prompts. If it fails, the rival does not run and this row stays
 `not comparable`, because the failure would be in the base model copy or the scorer.
 
-**The rule for boosted words, fixed before any run.** Boost the last word of each noun phrase found by the spaCy parser that `tome_common.py` already uses.
+**The rule for boosted words, fixed before any run.** Boost the last word of each noun phrase found by spaCy, the parser in ToMe's `prompt_utils.py`.
 A prompt with fewer than two noun phrases renders through plain SD2, and its count goes in the row's note.
 
 **Sampler.** The official pipeline at `163efdf` with its defaults: 50 steps, guidance 7.5, 25 steps of attention updates, scale factor 20.
