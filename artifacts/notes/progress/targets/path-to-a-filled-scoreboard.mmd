@@ -1,0 +1,37 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    T["10 targets accepted<br/>K1 to K5, Session 4"]
+    C1["C1 Verified idea table<br/>Session 3<br/>held: file tools timing out"]
+    C3["C3 Benchmark spec<br/>Session 3"]
+    C2["C2 Your readings<br/>you"]
+    C4["C4 Statements survive<br/>a pressure test<br/>Session 3"]
+    D1["D1 Paper repo<br/>Session 3"]
+    D2["D2 Reproduce each rival<br/>Session 5"]
+    D3["D3 Choose the checker<br/>Session 5"]
+    D4{"D4 Go or no-go<br/>per paper<br/>you"}
+    E1["E1 Paper 1 tables<br/>5 results"]
+    E2["E2 Paper 2 tables<br/>5 results"]
+    S["K6 Filled scoreboard, Session 4<br/>our results: 0 of 10<br/>reproduced rivals: 0 of 10<br/>blind picture calls: 0 of 27 rows"]
+
+    T --> C3
+    C1 --> C3
+    C1 --> C2
+    C3 --> C4
+    C4 --> D1
+    D1 --> D2
+    D1 --> D3
+    C2 --> D4
+    D2 --> D4
+    D3 --> D4
+    D4 --> E1
+    D4 --> E2
+    D2 -- "rival numbers" --> S
+    E1 -- "our numbers and renders" --> S
+    E2 -- "our numbers and renders" --> S
+
+    classDef done fill:#b7efc5,stroke:#222222,stroke-width:2px,color:#111111
+    classDef now fill:#ffd6a5,stroke:#e8590c,stroke-width:3px,color:#111111
+    classDef todo fill:#e9ecef,stroke:#222222,stroke-width:2px,color:#111111
+    class T done
+    class C1,S now
+    class C2,C3,C4,D1,D2,D3,D4,E1,E2 todo
