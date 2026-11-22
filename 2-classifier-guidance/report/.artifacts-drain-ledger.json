@@ -85,6 +85,11 @@
    "sha256": "b83274006ae7d4fb9a4480c6917667db9f9b7a88860ffc54516aae483a8d0f7f",
    "state": "drained"
   },
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "cfafca564937a36cd3630c92b636519f7df4cfcc0663321257bae0594acf6579",
+   "state": "drained"
+  },
   "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/compose-against-checker-accuracy.png": {
    "at": "2026-11-22",
    "sha256": "02bc8cd238fa9ef28cab7eaf8da572ac6f131f1d1008cd1ceda8ebc7b900dd14",
@@ -145,6 +150,11 @@
    "sha256": "821ced672691bee83dd806d8b79ade4f21982f5744c0e95b40d427af1777d6ee",
    "state": "drained"
   },
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/README.md": {
+   "at": "2026-11-22",
+   "sha256": "9ff72241f05d58ad21598c0f0bc8644844af64e45da751efd5f2f4562bbd5729",
+   "state": "drained"
+  },
   "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/e59-either-alone-8.png": {
    "at": "2026-11-22",
    "sha256": "16c3bf439fa27ba16ff1f8195b59b06fd1742d9845eec60d1f6cf763640d6e54",
@@ -173,6 +183,216 @@
   "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-none-guided-e59-either-4-7.png": {
    "at": "2026-11-22",
    "sha256": "ee4889ef4fcb344a4c381fa588082c32f44a2ff199ae59fbe9917a290865dd09",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/README.md": {
+   "at": "2026-11-22",
+   "sha256": "05d399fdf67b0533fa132053bb71d2defb7ec60f0a9d017d50e19432cbd5401b",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/each-model-sees-the-whole-canvas/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "7ca42d293de836130caceafc4f862c7ec89d26c31c01b9826c3d7dffd33a3d01",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/plain-product-with-both-pushes-and-extra-steps/digits-3-and-6.png": {
+   "at": "2026-11-22",
+   "sha256": "91043780bc3004307a4304f09e02146453f261f07cb75ab1fbb6a2166c06c161",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets/plain-product-with-both-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "15248e8af9e6b2747b6686a109e24c4d11edb2051129f9caf5bdc2a5ce585371",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/README.md": {
+   "at": "2026-11-22",
+   "sha256": "0183dbc8e44f0742ad21a2084048861260652dd49e1b3d688ae15179afff24e4",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/one-sampling-step-explainer.png": {
+   "at": "2026-11-22",
+   "sha256": "d7374cc9e8ceb8eb6464784e5fbda7d179ce23df850c503f1f56546f6d8492a3",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets/each-model-on-its-own-half/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "dd5a890967a3f463ebc564e9af93f09851380ce1ed71ece20f16dd2fcffa8b52",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "d8efc011f40bdbcd1d5cdd116353acc3930a39f3fa6f7606109eb5a1740e1855",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-first-checkers/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "2457ffafde0a79f0c0533e2177018d25904e7b7c82ca9bc45e2613f46ec46a18",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/both-pushes-retrained-checkers/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "170aaaa984dfdb57e70faae0351a6e6efd217deb6dab8b9da268c65910430a78",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets/one-half-ink-push-first-checkers/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "0bce779888adbd6775624a418ecb663d5d64387c0cd814ad196effa353eb6c64",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/README.md": {
+   "at": "2026-11-22",
+   "sha256": "9cb9f2c0697be425cb505a72c9afaf59cda91ba8eb5231ed8a968bd02617994e",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/five-extra-steps/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "15b44f5bff2594b02f99e39493ded89fc0d9e09b2d33b2edaf89fba8a231830d",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/twenty-extra-steps/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "acfe7fd8d4778614c4ee96c67d3df0a5ee2c09f8bb47f5b1f06f6289607290af",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets/zero-extra-steps/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "88077e5605804c8b0ff3b097b840b2b9e3c5ccf3e78d3507d580c4f5c4eca9d1",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "da41fc49b4c91ada07b7ea2817b00c171dff863f0eac392dad35b2333bde7dd3",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-1.png": {
+   "at": "2026-11-22",
+   "sha256": "d6b0f3a05065dae8d32025e61bbf0ccf4f5efd834ac2c8eb02f3120364da4969",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/sheets/both-pushes-and-five-extra-steps/digits-4-and-9.png": {
+   "at": "2026-11-22",
+   "sha256": "c1183c76200b2b3591907fffe0a8fffdc6a522a757e0563aa4385a3c73647f41",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/sheets/no-pushes/digits-4-and-9.png": {
+   "at": "2026-11-22",
+   "sha256": "e9941035b35f62329accd5f04104a760aa8d6f23c57d33d5ecb2a48f32874c4a",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/README.md": {
+   "at": "2026-11-22",
+   "sha256": "4a8983a61163cf6d7e05cfd07aa27552aa2f4e525c335b5719e1d4542db62bf3",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/sheets/side-chosen-every-step-other-half-hidden-with-both-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "69f42a59f2220eee86f51aa7b336dee1af9c498e7d86881305c9c82806856aae",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/sheets/side-chosen-every-step-with-both-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "8557aafbef84b1f7d2782b63077c8f65c4d6712723af0bcb27fd4dc5f070aa8d",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/sheets/soft-masks-with-both-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "6292529f73997dd9894f98c25903368b81bfe46f9d1fe28fce56c62914bed39f",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/README.md": {
+   "at": "2026-11-22",
+   "sha256": "37fc2df07120118e3ec1cce0669e7cce9622ba3169bde98fce9471fbca2a6790",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/hide-the-other-half-and-join-explainer.png": {
+   "at": "2026-11-22",
+   "sha256": "94954e9c0ac8ed3b070f2ec371e3be487781ed600ad572a30304343295422f6e",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/sheets/side-held-no-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "06095b5fcda801eb889cdd467ba26497bedbb2969c3ababfae8ace6e84b89873",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/sheets/side-held-with-both-pushes/digits-4-and-7.png": {
+   "at": "2026-11-22",
+   "sha256": "0a2890552e7f92f04afbaf3344a89ff9864097ec90a1af4b0b06decf1d7d5703",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/side-flips-or-holds-explainer.png": {
+   "at": "2026-11-22",
+   "sha256": "cbe099e3d66795f30a88c731b570ed60c64835c46c840aae052aab63200730c7",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/where-each-model-wants-its-digit-explainer.png": {
+   "at": "2026-11-22",
+   "sha256": "dcc9ea8195614bd49d78df48234415097aff87c5007bbc3ef14a8a8aadd8caba",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "57fef5b45c6c8d931cac67765f215a7a44215ba4c3c913ac4f598ff635ee66cb",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/eye-calls-with-reasons.png": {
+   "at": "2026-11-22",
+   "sha256": "6bccde20d0956af8a26a14ef2b30ecaab6f21be96104380583df2a16c1ee0513",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-3-and-8.png": {
+   "at": "2026-11-22",
+   "sha256": "e2f18088d8d31cda77efdea3cbe445f431397e5fa81a29ff80b2c0794fb2c8c2",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/eye-check/rejected-tiles__digits-4-and-9.png": {
+   "at": "2026-11-22",
+   "sha256": "585df60b6df767f73326e7094fd909b2acf7ab2c07869848e7c7ab974fd9ad55",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/no-pushes/digits-3-and-8.png": {
+   "at": "2026-11-22",
+   "sha256": "dad4e8983d69f2eba4f8964399077278cbb8e910e1b6392c1e20ec7596bcd102",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets/with-both-pushes/digits-3-and-8.png": {
+   "at": "2026-11-22",
+   "sha256": "d457d7c4cefa4051a71d3daca645afcf4c01b73209bb590f795e040a4b392db6",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/README.md": {
+   "at": "2026-11-22",
+   "sha256": "4261404e180a6958a013335dd3794551c1c53fd639e2995b5545d6aa9af46f8d",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/README.md": {
+   "at": "2026-11-22",
+   "sha256": "c81d7096155426d630f58ac64d1eabfe0e073842b7a1807cb1d867afd2901be3",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/fragments-and-speckle-explainer.png": {
+   "at": "2026-11-22",
+   "sha256": "d7268a3f2b9316f0985e445fe39b5df2c2f4e8e57010c71cdbdd599931491ae8",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/sheets/fine-tuned-models-whole-canvas-with-both-pushes-and-extra-steps/digits-3-and-6.png": {
+   "at": "2026-11-22",
+   "sha256": "fbea387e52041e13b5cd0d0811f4e2f5bd1034919c21f69deae89e2418e6001a",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/training-canvases-with-clutter.png": {
+   "at": "2026-11-22",
+   "sha256": "9bef50750216901957ecbe56b2e50c45f98be77b2094260ab69542c848858c41",
+   "state": "skipped"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/ways-of-composing-side-by-side.png": {
+   "at": "2026-11-22",
+   "sha256": "6b446af65214cbdd9b4f208c6350b124451546199168b06d553bbbbdde7933ee",
+   "state": "drained"
+  },
+  "artifacts/results/can-two-digits-compose-on-mnist/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e91666a76e86bff4478ce27274ac8d34440a0c4cda8dd85ecabb1f7c205e349b",
    "state": "drained"
   },
   "artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png": {
@@ -542,6 +762,47 @@
   "artifacts/results/can-a-classifier-supply-the-missing-term/strong-probe-step-000500.png",
   "artifacts/results/can-a-classifier-supply-the-missing-term/strong-probe-step-004000.png",
   "artifacts/results/can-a-classifier-supply-the-missing-term/the-eight-called-smooshed.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-19.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-34.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/five-versions/sheet-36.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/judge-gate/adjudicate-part1.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/judge-gate/adjudicate-part2.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/eta1-s10-06.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/eta1-s10-12.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/eta1-s10-69.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/round3-06.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/round3-12.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/loop2/round3-69.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-guidance/style-guidance-cheat-sheet.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-guidance/style-guidance-flat-schematic.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-guidance/style-guidance-ink.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-guidance/style-guidance-your-slides.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-readout/style-readout-cheat-sheet.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-readout/style-readout-flat-schematic.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-readout/style-readout-ink.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-readout/style-readout-your-slides.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-unet/style-unet-cheat-sheet.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-unet/style-unet-flat-schematic.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-unet/style-unet-ink.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/01-one-model-that-saw-a-few-pairs/network-view/styles-unet/style-unet-your-slides.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-both-floor0.5-1-9.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-none-blank-4-7.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/fixed-none-floor1.0-1-9.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/02-two-models-trained-apart/sheets/side-ink-guided-e59-either-4-7.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/01-the-plain-product-draws-nothing/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/02-giving-each-model-its-own-half/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/03-adding-the-checker-pushes/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/04-adding-extra-denoising-steps/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-2.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-3.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-4.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-5.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/eye-check/rejected-tiles-sheet-6.png",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/05-first-test-on-20-unseen-pairs/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/06-letting-the-models-choose-their-side/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/07-choosing-the-side-early-and-holding-it/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/sheets",
+  "artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/side-road-training-with-clutter/sheets",
   "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/maps-seed01.png",
   "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/maps-seed02.png",
   "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/maps-seed03.png",
