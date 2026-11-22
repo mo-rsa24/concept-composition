@@ -144,7 +144,8 @@ stop working, and what matching the benchmark costs. The targets on the scoreboa
 **How to read a row.** A number is only comparable with another on the same table, subset, metric and protocol, so one
 dataset can carry several rows. `Printed above it` names a method outside the 22 rivals that the same table shows ahead of
 the best rival. `Disputed` means the paper contradicts itself about that number, and a disputed number cannot set a target
-until the page settles it. Every value is copied from `numbers.csv`, which holds its page and both reads.
+until the page settles it. Every value is copied from `numbers.csv`, which holds its page and both reads. The best
+published row of every benchmark, including datasets this page does not discuss, is in `reads/limits-all.csv`.
 """]
     by_paper = defaultdict(lambda: defaultdict(list))
     for _, row in rows:
