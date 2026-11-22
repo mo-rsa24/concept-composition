@@ -206,5 +206,18 @@ Every picture that failed the [subject guard](../../../scripts/shared/disallowed
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-lion-meerkat-multipair/pushed-tiles.png` | not cleared | no page |
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-lion-meerkat-multipair/result-sheet.png` | not cleared | no page |
 | `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-typewriter-cactus/seed3310__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-big-multipair-cap0.4/seed6001__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-big-multipair2/seed6001__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-big-traj/seed6047__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-bodies/seed10__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-bodies/seed12__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-bodies/seed14__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-bodies/seed16__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-species10/seed10__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-every-step-species10/seed12__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-more2/tiles/seed12__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-more3-hard/tiles/seed14__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-typewriter-cactus/seed3301__s30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-v4c/tiles/seed02__s30.png` | not cleared | no page |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->
