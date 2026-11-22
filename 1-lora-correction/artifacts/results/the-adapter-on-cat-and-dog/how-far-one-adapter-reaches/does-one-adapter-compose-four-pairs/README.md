@@ -10,13 +10,13 @@
 
 ## figure5-layout-seed10-wave1.png
 
-<a href="figure5-layout-seed10-wave1.png"><img src="figure5-layout-seed10-wave1.png" width="200" alt="Figure 5 in its earlier seven-column layout with wave 1's tiles and grey placeholders"></a>
+`figure5-layout-seed10-wave1.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-layout-seed10-wave1.png`
 
 **What it shows.** The same four rows in the seven-column layout R2 had in the morning of 2026-11-11, with wave 1's joint, PoE and ours tiles and grey placeholders for the baselines. Superseded by the five-column sheet above once ToMe and SuperDiff left the figure. `seen`
 
 ## figure5-standin-submitted-cells.png
 
-<a href="figure5-standin-submitted-cells.png"><img src="figure5-standin-submitted-cells.png" width="200" alt="The submitted Figure 5 tiles placed in the rebuilt layout as a stand-in"></a>
+`figure5-standin-submitted-cells.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-standin-submitted-cells.png`
 
 **What it shows.** The submitted paper's own Figure 5 tiles (three adapters, seeds 9 and 10 picked per row, CO3 on its own noise) placed in the rebuilt layout, as a stand-in while wave 1 rendered. Not under the protocol. Built from `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/`. `seen`
 
@@ -24,11 +24,12 @@
 
 ## On the cluster
 
-The other 2 files of this result (16.1 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 15 files of this result (35.8 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 2 | 16.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/` |
+| `(files at this level)` | 4 | 18.8 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/` |
+| `tiles` | 11 | 16.9 MB | [a_tent__x__a_snowy_mountain__mono.png](tiles/a_tent__x__a_snowy_mountain__mono.png) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/tiles/` |
 
 Bring one run back to the laptop from this folder:
 

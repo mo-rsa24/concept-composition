@@ -1,3 +1,6 @@
 file	bytes	sha256	cluster_path
 control/sdxl-control-sheet.json	6050	c527461f3a8a248a8ba32c8dc6f46e40d76abdd709dd6551b2b5cbba7dd0248d	/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.json
 sdxl-matched-sheet.json	6058	106284acdde45d9f97f2056db7aa969dafe513a8c3e66114833325b70c0b3dce	/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/sdxl-matched-sheet.json
+seed16/a.png	1775064	3180a6f52eb2b8d36157eaf0daceda424de8dcbd5bce1589eff51e4230830287	/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/a.png
+seed16/b.png	1715825	ba58b44171d45f630b5171e765f15ac01a7f92bd0ee3e03799d2f6953b708c92	/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/b.png
+seed16/joint.png	1481114	5533add6510276a51c10de4da02384b4c28a7fa9725635b7517a763f3613d207	/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/seed16/joint.png

@@ -82,7 +82,7 @@ one folder per checkpoint.
 
 Navigation: ⬅️ [The looks](#the-looks) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-<a href="../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png"><img src="../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png" width="420" alt="Six panels, each a failed render with the telling patch enlarged in the corner"></a>
+`how-a-render-fails-gallery.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png`
 
 Six of the looks above, one panel each, every panel a render already on disk. A red box marks the
 patch, and the same patch is enlarged in the corner of its own panel, so the fused face, the

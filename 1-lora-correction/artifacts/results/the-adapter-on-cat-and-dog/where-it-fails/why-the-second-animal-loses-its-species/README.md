@@ -4,11 +4,12 @@
 
 ## On the cluster
 
-The other 1 files of this result (0.0 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 18 files of this result (0.1 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 1 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/` |
+| `(files at this level)` | 3 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/` |
+| `__pycache__` | 15 | 0.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/__pycache__/` |
 
 Bring one run back to the laptop from this folder:
 

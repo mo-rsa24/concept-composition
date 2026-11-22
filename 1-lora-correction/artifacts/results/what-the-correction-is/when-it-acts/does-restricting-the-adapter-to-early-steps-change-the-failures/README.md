@@ -4,7 +4,7 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 
 ## early-steps-seed10-sheet.png
 
-<a href="early-steps-seed10-sheet.png"><img src="early-steps-seed10-sheet.png" width="200" alt="Six held-out pairs at seed 10: joint, PoE, adapter on steps 0 to 9, 0 to 24 and all 50"></a>
+`early-steps-seed10-sheet.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/early-steps-seed10-sheet.png`
 
 **What it shows.** Two pairs from each held-out group at seed 10. By eye, the 25-step window separated the two things more often than the 10-step window (seal and walrus, cat and horse, bathtub and streetlamp), and on cow and horse every window drew two cows and no horse. One seed; R9's failure counts over 8 seeds decide. `seen`
 
@@ -12,7 +12,7 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 
 ## cow-horse-seeds-9-12-first-look.png
 
-<a href="cow-horse-seeds-9-12-first-look.png"><img src="cow-horse-seeds-9-12-first-look.png" width="200" alt="Cow and horse at seeds 9 to 12: joint, PoE, adapter on steps 0 to 9"></a>
+`cow-horse-seeds-9-12-first-look.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/cow-horse-seeds-9-12-first-look.png`
 
 **What it shows.** The hard pair cow and horse at seeds 9 to 12: PoE draws one animal on every seed, the 10-step adapter draws two on all four, and none of the four shows a clear horse. `seen`
 
@@ -46,7 +46,7 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 
 ## window_scores.pdf (proposed replacement for slot R9) and window_scores.csv
 
-<a href="window_scores.png"><img src="window_scores.png" width="200" alt="Four panels: BLIP-VQA per held-out group, two-animals share, CLIP score and ImageReward for the adapter off, on steps 0 to 10, 0 to 25 and all 50"></a>
+`window_scores.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/window_scores.png`
 
 **What it shows.** The same 424 images per setting (53 held-out pairs, seeds 9 to 16, one starting latent per seed) scored by the scorers of Tables 1 and 3, with the adapter off, on for steps 0 to 10, 0 to 25 and all 50. (a) BLIP-VQA per held-out group with 95% intervals from resampling pairs then seeds; (b) the share of the 160 animal-pair images per setting where GroundingDINO finds two or more animals; (c) CLIP score and (d) ImageReward over all 424. The off and all-50 cells equal Table 3's PoE and ours cells. `ran`
 
@@ -56,11 +56,13 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 
 ## On the cluster
 
-The other 2 files of this result (0.0 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 45 files of this result (14.1 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 2 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/` |
+| `(files at this level)` | 17 | 3.8 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/` |
+| `tiles-r10` | 12 | 4.6 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-r10/` |
+| `tiles-rule5` | 16 | 5.8 MB | [a_camel__x__a_desert_landscape__s10__ours.png](tiles-rule5/a_camel__x__a_desert_landscape__s10__ours.png), [a_camel__x__a_desert_landscape__s10__poe.png](tiles-rule5/a_camel__x__a_desert_landscape__s10__poe.png), [a_camel__x__a_desert_landscape__s10__w10.png](tiles-rule5/a_camel__x__a_desert_landscape__s10__w10.png), [a_camel__x__a_desert_landscape__s10__w25.png](tiles-rule5/a_camel__x__a_desert_landscape__s10__w25.png), [a_cow__x__a_horse__s14__ours.png](tiles-rule5/a_cow__x__a_horse__s14__ours.png), [a_cow__x__a_horse__s14__poe.png](tiles-rule5/a_cow__x__a_horse__s14__poe.png), [a_cow__x__a_horse__s14__w10.png](tiles-rule5/a_cow__x__a_horse__s14__w10.png), [a_cow__x__a_horse__s14__w25.png](tiles-rule5/a_cow__x__a_horse__s14__w25.png), [a_giraffe__x__a_lion__s13__ours.png](tiles-rule5/a_giraffe__x__a_lion__s13__ours.png), [a_giraffe__x__a_lion__s13__poe.png](tiles-rule5/a_giraffe__x__a_lion__s13__poe.png), [a_giraffe__x__a_lion__s13__w10.png](tiles-rule5/a_giraffe__x__a_lion__s13__w10.png), [a_giraffe__x__a_lion__s13__w25.png](tiles-rule5/a_giraffe__x__a_lion__s13__w25.png), [a_mug__x__a_wine_glass__s13__ours.png](tiles-rule5/a_mug__x__a_wine_glass__s13__ours.png), [a_mug__x__a_wine_glass__s13__poe.png](tiles-rule5/a_mug__x__a_wine_glass__s13__poe.png), [a_mug__x__a_wine_glass__s13__w10.png](tiles-rule5/a_mug__x__a_wine_glass__s13__w10.png), [a_mug__x__a_wine_glass__s13__w25.png](tiles-rule5/a_mug__x__a_wine_glass__s13__w25.png), [a_seal__x__a_walrus__s11__ours.png](tiles-rule5/a_seal__x__a_walrus__s11__ours.png), [a_seal__x__a_walrus__s11__poe.png](tiles-rule5/a_seal__x__a_walrus__s11__poe.png), [a_seal__x__a_walrus__s11__w10.png](tiles-rule5/a_seal__x__a_walrus__s11__w10.png), [a_seal__x__a_walrus__s11__w25.png](tiles-rule5/a_seal__x__a_walrus__s11__w25.png), [a_suitcase__x__a_desk_fan__s11__ours.png](tiles-rule5/a_suitcase__x__a_desk_fan__s11__ours.png), [a_suitcase__x__a_desk_fan__s11__poe.png](tiles-rule5/a_suitcase__x__a_desk_fan__s11__poe.png), [a_suitcase__x__a_desk_fan__s11__w10.png](tiles-rule5/a_suitcase__x__a_desk_fan__s11__w10.png), [a_suitcase__x__a_desk_fan__s11__w25.png](tiles-rule5/a_suitcase__x__a_desk_fan__s11__w25.png), [a_tent__x__a_snowy_mountain__s16__ours.png](tiles-rule5/a_tent__x__a_snowy_mountain__s16__ours.png), [a_tent__x__a_snowy_mountain__s16__poe.png](tiles-rule5/a_tent__x__a_snowy_mountain__s16__poe.png), [a_tent__x__a_snowy_mountain__s16__w10.png](tiles-rule5/a_tent__x__a_snowy_mountain__s16__w10.png), [a_tent__x__a_snowy_mountain__s16__w25.png](tiles-rule5/a_tent__x__a_snowy_mountain__s16__w25.png) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/tiles-rule5/` |
 
 Bring one run back to the laptop from this folder:
 

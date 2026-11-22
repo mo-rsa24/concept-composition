@@ -4,7 +4,7 @@ The Langevin corrector beside the joint prompt, PoE and CO3 on Figure 5's four p
 
 ## five_columns.png
 
-<a href="five_columns.png"><img src="five_columns.png" width="200" alt="Contact sheet: four pairs by five samplers at seed 10; PoE plus Langevin keeps one of the two things on three rows"></a>
+`five_columns.png` is not shown because it failed the subject check
 
 **What it shows.** Rows are cat × dog, elephant × penguin, tent × snowy mountain and lighthouse × stormy sea at seed 10; columns are the joint prompt, joint + Langevin, PoE, PoE + Langevin (c = 3, k = 20 over all 50 levels) and CO3 at its published default. On the first three rows PoE fuses the two things, PoE + Langevin keeps one of them (one dog, one elephant, a mountain with no tent), and joint + Langevin and CO3 show both. The lighthouse row shows both things in every column. One seed, called by eye. `seen`
 

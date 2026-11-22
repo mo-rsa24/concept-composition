@@ -88,11 +88,11 @@ repository at `/home-mscluster/mmolefe/Playground/co3`, the rest from `figure_ca
 
 ## On the cluster
 
-The other 2 files of this result (0.0 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 5 files of this result (6.2 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 2 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/` |
+| `(files at this level)` | 5 | 6.2 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/` |
 
 Bring one run back to the laptop from this folder:
 

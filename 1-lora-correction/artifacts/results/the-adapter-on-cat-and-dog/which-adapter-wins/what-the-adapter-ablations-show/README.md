@@ -60,11 +60,11 @@ count.
 
 ## On the cluster
 
-The other 12 files of this result (0.1 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 22 files of this result (37.2 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 12 | 0.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/` |
+| `(files at this level)` | 22 | 37.2 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/` |
 
 Bring one run back to the laptop from this folder:
 

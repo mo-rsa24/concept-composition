@@ -17,7 +17,7 @@ count below is over those.
 
 ## 1. Six cells where the target drops a concept
 
-![The joint prompt, the plain product and the adapter on six cells where the joint prompt is wrong](../../artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/where-the-joint-prompt-itself-fails.png)
+`where-the-joint-prompt-itself-fails.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/where-the-joint-prompt-itself-fails.png`
 *Rows are cells, columns are the joint prompt, the plain product and the adapter, each row from
 one starting noise. What to notice: the first column is missing the hourglass on both chess rows
 and the cat on both fox rows, and on the dog row it draws a person. In the chess row at seed 10

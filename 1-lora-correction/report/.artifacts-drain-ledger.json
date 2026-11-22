@@ -27,12 +27,12 @@
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/README.md": {
    "at": "2026-11-22",
-   "sha256": "14529593870446136bc527d4ce92469be929d0be32e4c124a832b31016baff95",
+   "sha256": "830a0c58591d9834209ca056125d6389fefa6597595ac274bc9f1c658fb8213a",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/README.md": {
    "at": "2026-11-22",
-   "sha256": "b6bbae4734e1fe7fb46b1acb39e2e88cb4621a239c604e595c7c633b3005cdb3",
+   "sha256": "58781fa6009dfb482510544263d0ba5a84b23e9e6bc1ddc662601c129db622c6",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter/seven-strategies-cat-and-dog-seed10.png": {
@@ -52,17 +52,17 @@
   },
   "artifacts/results/against-other-methods/samplers-and-correctors/which-sampling-strategy-helps/README.md": {
    "at": "2026-11-22",
-   "sha256": "0a8b42700f9965ffdfeee5e2bcd67bed20d6cb0e7f2fbacab5bf73ecdbf208d3",
+   "sha256": "a1442478fc7b005de088418798a340b4c30da632738aed9d6291122e43dd00c3",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/README.md": {
    "at": "2026-11-22",
-   "sha256": "759ca702daacb828b600612b517292bf1ca3bdc02d194a96da1d2eb4089edce5",
+   "sha256": "83486ebba44030c7349937c64fe7c640b07def7e4caea80963c1f7650568c3d3",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "5a63034a94845eaa0b7dfa78a2123ed373133043694e35ba7ab7eae6635ea314",
+   "sha256": "54c91c5d81c1f0e1aec9983695ce1bbdbddf35f6a22e5b5d1133a4aa520a79cc",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/methods_side_by_side.png": {
@@ -72,7 +72,7 @@
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "dd920100531746ae02bf2854726adffab9b2cc547090e5b0b4c391c6390cb849",
+   "sha256": "5f83a9cf04b0fb55414dc74968048313a8e8f55b4698b565f672ca04dcf7dacb",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/a_lighthouse__x__a_stormy_sea/seed09/poe.png": {
@@ -92,7 +92,7 @@
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/README.md": {
    "at": "2026-11-22",
-   "sha256": "1de29fbe625042d4881cf300fa34abbaaf35d4e87209bd82e7b98817c2720fb8",
+   "sha256": "54718e17947ce568e45989a9794f3e2a937df4a57653d363eff933ea6eb707b0",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/best-cases-held-out.png": {
@@ -165,6 +165,11 @@
    "sha256": "e042f89117996278ecd1f81a8d3ecd4463546cbb0f2dd2d991889f3b968b6db2",
    "state": "drained"
   },
+  "artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "afc63c7123694d6486c7a64edf751c69807cd63a4e0e7575867ff7bb4af6cca2",
+   "state": "drained"
+  },
   "artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs/co3-lynx-and-crane-seed09.png": {
    "at": "2026-11-22",
    "sha256": "2a0b84e276d0d6e6e2d000ccee51d63dbe6cf71fb6074233070e052bcfc91c70",
@@ -172,7 +177,7 @@
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/README.md": {
    "at": "2026-11-22",
-   "sha256": "10c0320092eff66fbde92c0095cfc55d144c0814415abe1718cd1dfe4367504c",
+   "sha256": "4fef13ac3df6de13f3bab4cecbd35199fe84470467418c976ec02ae979e28f4e",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins/a_cat__x__a_dog__seed10.png": {
@@ -222,12 +227,12 @@
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "70e30e8bbd20aacd199feb67084bbfe1dfb4e2f2dd5cc3346c875c39b7c42581",
+   "sha256": "87782c0944a4cd0fee0334b83a7a061de9313ffe96a8c397b0c08177c0bf5ab4",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/README.md": {
    "at": "2026-11-22",
-   "sha256": "9929045503f26f4fbe0bb8d3e1e19060603e5b47572054192830692627facc82",
+   "sha256": "5de4d09709ce99b1f6c5e5a63e6f1927d49c3e184a0e697022b00ef7a3ab33cc",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen/tiles/a_crow__x__a_raven__seed_1.png": {
@@ -262,7 +267,7 @@
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/README.md": {
    "at": "2026-11-22",
-   "sha256": "cce1a14ef8a8dcd36264001f4d043f5396f55cf2afbe2ac11c6a98b09bbc47f8",
+   "sha256": "5cbd846c75819055ee5820382d80c0ae16c3f942081983d7d87fb9e3f9eb4983",
    "state": "drained"
   },
   "artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly/pair-audition.png": {
@@ -302,7 +307,7 @@
   },
   "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/README.md": {
    "at": "2026-11-22",
-   "sha256": "8f6cb8cf8391f749175da98ceb8035cc1ee932a6e2e9f9fbc8a593291600b8c8",
+   "sha256": "d35dc5da374a02e1b40eb02190536da37b6723ce55579b783d459fa1685c3dee",
    "state": "drained"
   },
   "artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings/control/sdxl-control-sheet.png": {
@@ -557,7 +562,7 @@
   },
   "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/README.md": {
    "at": "2026-11-22",
-   "sha256": "1e0ff4eaa77283556ced2b9d024eeb285a0a89a5bd31893362e3b632c6e2a134",
+   "sha256": "76270d7c26f6415565f9cb1ac8de666f00ddf7cd1e162b9bdccaa103ef62446e",
    "state": "drained"
   },
   "artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/four-models-fitted-to-text-width.png": {
@@ -592,7 +597,7 @@
   },
   "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/README.md": {
    "at": "2026-11-22",
-   "sha256": "7b982d34140905eb94a433225972d11421876ef56fa05ce021c08bd0fdaf6e42",
+   "sha256": "4e65950f716477bf5192c5fa9e354dce986fcca9123e977ed7cb75aa316113f8",
    "state": "drained"
   },
   "artifacts/results/measuring-composition/the-grids/what-the-main-study-grids-show/published-models-then-ours.png": {
@@ -697,12 +702,12 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/README.md": {
    "at": "2026-11-22",
-   "sha256": "465e0247c98f55435e255b0b2f4ceb284f1d7db428372f4b91203f43ea96c82a",
+   "sha256": "d519d17a02363cb57966e95e64a9297c18ad46b093e044b54b964808eb46bf13",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/README.md": {
    "at": "2026-11-22",
-   "sha256": "781dc3f8bda16a265aa90c3924edfa54dad5db2bd91e52b8991e1af7865c3696",
+   "sha256": "4a22e2b92ac61c3bf35c3d61a61978d0d55e490ee92a13a89273d9cce46d3c1a",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-each-adapter-hold-across-ten-seeds/five-picked-pairs.png": {
@@ -712,7 +717,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/README.md": {
    "at": "2026-11-22",
-   "sha256": "ee7bc8e84682d65e7acb19cc73bd940ca5572df787eb51977ad9c64ed1cc268e",
+   "sha256": "c603a1103c7ad7f94fb9d14eaefabf04d864d2244819081e0cf12d256615e598",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/figure5-seed10-five-columns.png": {
@@ -722,7 +727,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/README.md": {
    "at": "2026-11-22",
-   "sha256": "8a1ee3fb61e4414d3b8a7ded0673730f83f5e93b2c7677cf6461d8f23ad0613f",
+   "sha256": "8fa28a10963177aef9b809527913a35d097d6a8bbd444b643e652e927ef0d1ad",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-the-adapter-compose-three-concepts/three_concepts-contact-sheet.png": {
@@ -777,12 +782,12 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/README.md": {
    "at": "2026-11-22",
-   "sha256": "dc5560088ebb834d745abad7729b82e12638e043b6ee6a5f8dd6b7843f4744b1",
+   "sha256": "d57621d4dcbeb3001b3e71529b119bde8c18e24de555dbc0587722496c860d64",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/README.md": {
    "at": "2026-11-22",
-   "sha256": "31f4e8d050999c62cbe9e12ed11ad4c5147189c7822e677ae2e3358efb1302c0",
+   "sha256": "aa1e011fb2fdd21f984075fe92c9a531501bfdfb2a5b7688c0710d5ef76c528f",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/how-the-adapter-settings-change-cat-and-dog/limitations-tiles/fail-r0-c0.png": {
@@ -877,7 +882,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/README.md": {
    "at": "2026-11-22",
-   "sha256": "da29515da455f499a798cf51899cdef880604c946d3ede8d10001f0d8db0aa53",
+   "sha256": "8c81ebe3287cdc29cd66bfdbad6c842dd8b3f134647fb6a20154435937181746",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/adapter-switch-off/a_tiger__x__a_parrot.png": {
@@ -957,17 +962,17 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/why-the-second-animal-loses-its-species/README.md": {
    "at": "2026-11-22",
-   "sha256": "16640fccdb6fdb0e1ae0a0102dbdbd15a96e755dfc037ac95a36bfebae17d709",
+   "sha256": "d4634efa596b894d21aabfffe242cf2932c1eb6b9e9565d92e6f382656d3a110",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/README.md": {
    "at": "2026-11-22",
-   "sha256": "1374a4252b7784ebc3b159482ac7d5c5b8f79b4e58ae1ee1bb98e5b76113cdd4",
+   "sha256": "5dbe1fdb51205ad1b958a025b7899c201076db06ce2fd0bfdb15f66adde118b5",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/README.md": {
    "at": "2026-11-22",
-   "sha256": "66911e1274704c3a6cd92049a68312c8594e6d16dce6f7d14c801c83f57224f5",
+   "sha256": "6b6a5321c5e3feef1c1e09b3451797e40caec788a924652e4860e25792fc3f6a",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed02.png": {
@@ -1012,7 +1017,7 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/README.md": {
    "at": "2026-11-22",
-   "sha256": "da785b8fa796aec45924fae23863d5eec31288317b1695a6549819d2bb3577c1",
+   "sha256": "7b3289ca01e0b6197701cb9c171b3edb67b852401089d3925214a84e77d70b58",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed-v2.png": {
@@ -1097,12 +1102,12 @@
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/BUILDS.md": {
    "at": "2026-11-22",
-   "sha256": "3550c2c653bbb35f87446042f9ee4e7cbce394c6a027033910759e5c790b0a96",
+   "sha256": "4293fe86120b7e27fa6237a89d6f85a7efa19ea9be43e56cf8424989f4a69c9e",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/README.md": {
    "at": "2026-11-22",
-   "sha256": "ad1b899e97e75e42edcc93e93b89d9265f1ffe0295953f021eb46518cb421897",
+   "sha256": "b03e604a94d9dba98342d2122295d75cfb279fcb1064c7f76908f5af72f83f61",
    "state": "drained"
   },
   "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-refl-03-self-contrast-15k_seeds_13_15.png": {
@@ -1397,12 +1402,12 @@
   },
   "artifacts/results/what-the-correction-is/when-it-acts/README.md": {
    "at": "2026-11-22",
-   "sha256": "90becc22752adf0da99fa601e0d49781074340a00c5c998e18ed7fe316b755bf",
+   "sha256": "129d69bb5a554dd8ad6983e0b197c6cabb2933a95ae22e8d795cfc84f6f416fd",
    "state": "drained"
   },
   "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/README.md": {
    "at": "2026-11-22",
-   "sha256": "d670f9925931c4e5f822140b5c9a50483dd6936bc3da760ee3e8cdd05171f242",
+   "sha256": "bd3056da2d581362cec549a0d13f2eadde6ac61db028a221467c5e4679022611",
    "state": "drained"
   },
   "artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/cow-horse-seeds-9-12-first-look.png": {

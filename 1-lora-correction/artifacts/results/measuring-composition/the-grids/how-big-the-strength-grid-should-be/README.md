@@ -69,11 +69,11 @@ for readable tiles plus the rate curve. The decision and the walk that produced 
 
 ## On the cluster
 
-The other 24 files of this result (14.7 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+The other 37 files of this result (33.4 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
 
 | Run | Files | Size | Kept on the laptop | Cluster folder |
 |---|---|---|---|---|
-| `(files at this level)` | 24 | 14.7 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/` |
+| `(files at this level)` | 37 | 33.4 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/` |
 
 Bring one run back to the laptop from this folder:
 

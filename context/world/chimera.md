@@ -144,7 +144,7 @@ PixArt-alpha (no CLIP in it), eight seeds, columns cat alone, dog alone, the sum
 
 **Evidence**
 
-<a href="../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png"><img src="../../1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png" width="200" alt="Six failed renders with the telling patch enlarged"></a>
+`how-a-render-fails-gallery.png` is on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png`
 
 Six panels of failed renders. The top-left panel is labelled "One fused animal", from plain product-of-experts composition with no correction on the cat and dog, seed 9 `verified` (the panel shows a cat's ear above a dog's muzzle, the enlarged patch holds the face only, and the panel's label gives the same setup). The other five panels are other failures, described in [how a render fails](how-a-render-fails.md).
 

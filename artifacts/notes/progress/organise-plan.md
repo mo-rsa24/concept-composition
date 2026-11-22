@@ -26,6 +26,7 @@ Step O1 on the
 |---|---|---|---|
 | `2-classifier-guidance` | 13,755 | 69 | 93 |
 | `4-inclusive-captions` | 166 | 11 | 8, plus the 155 web images until the owner decides |
+| `1-lora-correction` | 3,620 | not counted | 416, of which 148 stay because a script reads them |
 
 A run with no picture that passed the subject check keeps none on the laptop, and its card cites the cluster.
 
@@ -164,4 +165,4 @@ These 21 kept pictures passed the subject check but are weak as paper figures. E
   and on two remote branches. Moving them does not remove them from history, so they stay until the
   owner decides.
 - **Clearing the laptop archive.** It stays until the owner approves a deletion pass.
-- **The `lora-correction` results (6.6 GB of artifacts).** Its 3,352 run-output files that nothing names are on the cluster and in the laptop archive. The one-picture-per-run rule has not been applied there.
+- **LoRA correction folders that scripts read.** Eight results, 278 MB, stay whole because a script reads their files. The showcase result is the largest, with 148 pictures that the adapter-picking script opens.

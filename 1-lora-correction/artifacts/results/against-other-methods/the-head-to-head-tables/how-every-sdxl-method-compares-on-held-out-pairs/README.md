@@ -7,3 +7,23 @@
 **What it shows.** The renders behind R3, picked by protocol rule 5 from `scores/scores_long.csv`: per held-out group, the cell where ours scores highest on BLIP-VQA and the one where it scores lowest (hard: seal and walrus at seed 11, 0.95, and cow and horse at seed 13, 0.01; easy but unseen: drum set and snowman at seed 13, 0.98, and briefcase and ceramic bowl at seed 10, 0.00; not competing: tent and snowy mountain at seed 16, 0.98, and bookcase and glacier at seed 11, 0.01). Rows carry only the pair and seed; the rule and the values sit here. Columns are the joint prompt, PoE, CO3 at its published default, PoE + Langevin and ours (v58-03-self at step 30,000 on all 50 steps). By eye, the highest rows show both things; the lowest rows fail in different ways: two cows for cow and horse, no bowl, no glacier. PoE + Langevin comes from rule 6's subset (the hard group) and `paper_review/langevin_extra/` for the rest. `seen`
 
 **How it was made.** Picks by `1-lora-correction/scripts/review_rule5_picks.py`; tiles from `/datasets/mmolefe/poe_repair_min/outputs/` (joint and PoE from `review_step4/census/`, CO3 from `paper_review/co3_default/r3/`, ours from `paper_review/r3_ours/`), every row from its seed's shared latent, resized to 512 px into `tiles-rule5/` and drawn at 5.5 in by `1-lora-correction/scripts/paper_tile_figure.py` from `methods_side_by_side-spec.json`, 2026-11-11. The PNG is a 110 dpi preview of the PDF.
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 53 files of this result (22.6 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `(files at this level)` | 1 | 4.2 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/` |
+| `tiles-r4` | 23 | 8.4 MB | [a_bookcase__x__a_glacier__s09__ours.png](tiles-r4/a_bookcase__x__a_glacier__s09__ours.png) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-r4/` |
+| `tiles-rule5` | 29 | 10.0 MB | [a_drum_set__x__a_snowman__s13__ours.png](tiles-rule5/a_drum_set__x__a_snowman__s13__ours.png) | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/tiles-rule5/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs/<run>/ <run>/
+```
+
+<!-- cluster:end -->

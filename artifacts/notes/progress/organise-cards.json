@@ -1,7 +1,13 @@
 [
+"1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/do-sampling-strategies-fix-the-adapter",
 "1-lora-correction/artifacts/results/against-other-methods/samplers-and-correctors/which-sampling-strategy-helps",
+"1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-every-sdxl-method-compares-on-held-out-pairs",
+"1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs",
 "1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods",
+"1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/what-co3-does-on-our-pairs",
+"1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/which-fidelity-fix-wins",
 "1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-pairs/how-the-training-pairs-were-chosen",
+"1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/which-new-pairs-compose-cleanly",
 "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-a-clip-free-model-hybridise",
 "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/does-sdxl-compose-at-pixarts-settings",
 "1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models",

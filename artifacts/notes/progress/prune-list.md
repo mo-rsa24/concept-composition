@@ -10,13 +10,13 @@ The search reads every page, card, plan, paper, script and data file for the fil
 
 | Project | Artifact files | Named by nothing | Size |
 |---|---|---|---|
-| 1-lora-correction | 6,097 | 667 | 41.4 MB |
+| 1-lora-correction | 2,282 | 667 | 41.4 MB |
 | 2-classifier-guidance | 362 | 28 | 3.6 MB |
 | 3-understanding-compositionality | 2,932 | 67 | 2.5 MB |
 | 4-inclusive-captions | 655 | 233 | 26.1 MB |
 | 5-text-embedding-third-expert | 73 | 0 | 0.0 MB |
-| repository root | 3,771 | 1,953 | 679.8 MB |
-| **All** | 13,890 | 2,948 | 753.4 MB |
+| repository root | 3,773 | 1,953 | 679.8 MB |
+| **All** | 10,077 | 2,948 | 753.4 MB |
 
 ## Largest folders
 
