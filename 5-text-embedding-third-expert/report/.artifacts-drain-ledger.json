@@ -57,7 +57,7 @@
   },
   "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/README.md": {
    "at": "2026-11-22",
-   "sha256": "f358e6eb21ee3bd8fae2a841ca242b63db0194b6cf72e2e9d9c864f42fd0938f",
+   "sha256": "7c8653f95fb9bb7538ca7b4f8c43c769aad496730c2ec2ccde84ab7030165257",
    "state": "drained"
   },
   "artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png": {
@@ -111,8 +111,8 @@
    "state": "drained"
   },
   "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/README.md": {
-   "at": "2026-11-21",
-   "sha256": "c98b757c8caec55b08b9fce2b46e30810f5f65c4b8661d1a390cf1d7a417098b",
+   "at": "2026-11-22",
+   "sha256": "224127616d2749ea8bdc3fab887caa383411a059e0fb75d525f86684f94cc17c",
    "state": "drained"
   },
   "artifacts/results/the-and-vector/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png": {

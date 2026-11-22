@@ -51,3 +51,21 @@ The renders behind slots R9 and R10, from wave 1's early-steps job (1-lora-corre
 **What it shows.** The same 424 images per setting (53 held-out pairs, seeds 9 to 16, one starting latent per seed) scored by the scorers of Tables 1 and 3, with the adapter off, on for steps 0 to 10, 0 to 25 and all 50. (a) BLIP-VQA per held-out group with 95% intervals from resampling pairs then seeds; (b) the share of the 160 animal-pair images per setting where GroundingDINO finds two or more animals; (c) CLIP score and (d) ImageReward over all 424. The off and all-50 cells equal Table 3's PoE and ours cells. `ran`
 
 **How it was made.** The 848 window renders listed in `rows_windows.csv` (`1-lora-correction/scripts/review_window_rows.py`) were scored on mscluster on 2026-11-12 by the unchanged scorers: BLIP-VQA job 85541 (mscluster82, 9 min 29 s), CLIP score and ImageReward job 85539 (mscluster130, 16 min 26 s), Comp job 85540 (mscluster131, 19 min 5 s; 320 animal rows). Drawn by `python3 1-lora-correction/scripts/review_window_figure.py --scores artifacts/drips/present-revision-to-supervisor/scores --out 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures`. The reading was written in `1-lora-correction/plans/present-revision-to-supervisor.md` task 2.3 before any window score existed.
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 2 files of this result (0.0 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `(files at this level)` | 2 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/<run>/ <run>/
+```
+
+<!-- cluster:end -->

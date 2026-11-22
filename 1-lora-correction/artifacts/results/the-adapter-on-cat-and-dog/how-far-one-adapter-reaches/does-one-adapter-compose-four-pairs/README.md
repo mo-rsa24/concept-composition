@@ -19,3 +19,21 @@
 <a href="figure5-standin-submitted-cells.png"><img src="figure5-standin-submitted-cells.png" width="200" alt="The submitted Figure 5 tiles placed in the rebuilt layout as a stand-in"></a>
 
 **What it shows.** The submitted paper's own Figure 5 tiles (three adapters, seeds 9 and 10 picked per row, CO3 on its own noise) placed in the rebuilt layout, as a stand-in while wave 1 rendered. Not under the protocol. Built from `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-four-methods-compare-on-four-pairs/tiles/`. `seen`
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 2 files of this result (16.1 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `(files at this level)` | 2 | 16.1 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/how-far-one-adapter-reaches/does-one-adapter-compose-four-pairs/<run>/ <run>/
+```
+
+<!-- cluster:end -->

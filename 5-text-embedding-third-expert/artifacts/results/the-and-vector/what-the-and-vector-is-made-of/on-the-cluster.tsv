@@ -1,0 +1,4 @@
+file	bytes	sha256	cluster_path
+dog-and-cat-phrases-sheet.json	18901	5efbd761a0e5640562642a353a743f09ab29970adc5c171de5f3c95853b36390	/datasets/mmolefe/poe_repair_min/artifacts-archive/5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-phrases-sheet.json
+dog-and-cat-sheet.json	16942	6e67b7264dac5ac1e67a4ec6925e185881da503e2cd582abfad43627154f9b70	/datasets/mmolefe/poe_repair_min/artifacts-archive/5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-sheet.json
+dog-and-cat-weight-sweep-sheet.json	13432	925b17e3a8f1e95c763557d72b00fb35594de5539b700f0fd429fe3f0b513592	/datasets/mmolefe/poe_repair_min/artifacts-archive/5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-weight-sweep-sheet.json

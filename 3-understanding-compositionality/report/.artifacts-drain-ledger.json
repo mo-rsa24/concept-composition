@@ -22,12 +22,12 @@
   },
   "artifacts/results/a-thing-in-the-rain/README.md": {
    "at": "2026-11-22",
-   "sha256": "7a400daf2e94c3b83e1cd0fb1ad3b09b9fe63f89e2253549770f00a974a8e31d",
+   "sha256": "fc76818c59954caa768343c676789bdcf64d55f0a568890f7729212ac42f00ef",
    "state": "drained"
   },
   "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/README.md": {
    "at": "2026-11-22",
-   "sha256": "f0c5c49996918014588aab3d32629174cc65d54745ceb4cf62fd1f6e5015857f",
+   "sha256": "d43726f1814721e2eca0d59d4320f42d68bb622f0a421a399ca9bc61dfee83f1",
    "state": "drained"
   },
   "artifacts/results/a-thing-in-the-rain/does-a-camel-in-the-rain-come-out-wet/a-camel-and-rain.png": {
@@ -115,6 +115,11 @@
    "sha256": "fb6c41098ac6a781a391168375502703a47f11c12b3651b4c4e8067055019995",
    "state": "drained"
   },
+  "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/README.md": {
+   "at": "2026-11-22",
+   "sha256": "f6c04c0ee3996be07797c424a89a1c1ba8ca13d74206eff1d3c7b0770536c20d",
+   "state": "drained"
+  },
   "artifacts/results/a-thing-in-the-rain/does-an-effect-need-support/laptop-third-concept/camel-sheet.jpg": {
    "at": "2026-11-22",
    "sha256": "ebcde3904da08a4e920453062f8ed422a50d2aae93d55907fffba33a039c56e5",
@@ -161,8 +166,8 @@
    "state": "drained"
   },
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/README.md": {
-   "at": "2026-11-21",
-   "sha256": "82f7d8784721fc0ba5433421de20c6f07a3ab2aa29038807ee0b1b5116cf977c",
+   "at": "2026-11-22",
+   "sha256": "97673a7f0e76efa20f7736596ace49d210bbaa965bd25572e498cda5fe080671",
    "state": "drained"
   },
   "artifacts/results/the-exact-toy/can-a-classifier-push-fix-the-product/draw-0-push-against-true-correction-step-150.png": {
@@ -446,8 +451,8 @@
    "state": "drained"
   },
   "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/README.md": {
-   "at": "2026-11-21",
-   "sha256": "b4b4c65e5b62f13ee3871ec0f1f5a16bb170e8de0d7621c653f26353c95f3633",
+   "at": "2026-11-22",
+   "sha256": "49424a78128addf513a75f2133aea42e39ad775b2f7cf5fe7a1e150ddae7315e",
    "state": "drained"
   },
   "artifacts/results/the-exact-toy/what-the-product-of-two-experts-draws-and-what-samplers-lose/clean-share-sweep.png": {
@@ -552,7 +557,7 @@
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/README.md": {
    "at": "2026-11-22",
-   "sha256": "6eba9f07c3856118665fe9a2745009dfb64a22ecd377a7054b16d4b76877bd29",
+   "sha256": "8bd07f1471ec30b57da4c8cefc17768582e9c28f5cc19ab11e8066657393d98a",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/MANIFEST.md": {
@@ -562,7 +567,7 @@
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/README.md": {
    "at": "2026-11-22",
-   "sha256": "1f6b0a80798f3a9912bb0bfe8b8b8150837de24604c7ed9739247b9170a9d37f",
+   "sha256": "8b58217b0d4f5012353d7a3c2f7206c9ee16fad732c831b75f069ef817749d73",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-match-the-joint-for-each-kind-of-composition/crops/attribute-binding-t2icompbench-fig8-blue-horse-brown-vase-composable-sd2.png": {
@@ -835,6 +840,11 @@
    "sha256": "02476b49ae41c16256eac668115a9ada3608f70dcbdd1833626de08b16347f88",
    "state": "drained"
   },
+  "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/README.md": {
+   "at": "2026-11-22",
+   "sha256": "99aa8c198bb6285a20722659a4522b2b4d5ff52635e80c441465cf69518896ee",
+   "state": "drained"
+  },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/does-poe-of-cats-and-dogs-match-the-joint/cats-and-dogs-sheet-seeds-4-to-7.jpg": {
    "at": "2026-11-22",
    "sha256": "07b1d316bab1bd3cf25d0705853ae748133aaf239c52269327a9a06893b6b617",
@@ -872,7 +882,7 @@
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/README.md": {
    "at": "2026-11-22",
-   "sha256": "70c03e6f6732061f31c0d8603c9b952eafed4a358a7f3f747dddff594b14b9d6",
+   "sha256": "846d0394ecbfbfd14cfc1b7b02d613efdeeffe05ab264004791070daadde4b0d",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/poe-against-the-joint/where-the-product-lands/where-the-product-lands-on-the-manifold-seed12-surface.png": {
@@ -882,12 +892,12 @@
   },
   "artifacts/results/what-sdxl-already-knows/what-the-captions-say/README.md": {
    "at": "2026-11-22",
-   "sha256": "aa64361d624ca1698aa8f53eb444b73330d5bc84de7dae8d0d03308a5f6cee6f",
+   "sha256": "b8d20d2f78984a5622dd394b6a186b65cb209077480e19b6725d3e84b836b60f",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/README.md": {
    "at": "2026-11-22",
-   "sha256": "eecc6f8bd2f3ea78b9a891feb7ba0f0924b7341c23e3b7a64660a06933de9a0b",
+   "sha256": "024c847bf6710a51e356a9eba2530e34cf493b2226adf70c13d23a9057666fd8",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed02.png": {
@@ -913,6 +923,11 @@
   "artifacts/results/what-sdxl-already-knows/what-the-captions-say/does-the-hybrid-fit-both-captions/joint-tiles/seed13.png": {
    "at": "2026-11-22",
    "sha256": "adfa8eb6d506b159bc4e01dc56fc8cda59b9c76bc2ccedb637ed9dc38d22b0bb",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/README.md": {
+   "at": "2026-11-22",
+   "sha256": "9db0ef69bc3f6bcb0b13632f19abf6c450dc94c43f3090a7567619ba43087699",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/what-the-captions-say/what-the-training-captions-show/camel-any/sheets/sheet-01.md": {
@@ -1157,7 +1172,12 @@
   },
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/README.md": {
    "at": "2026-11-22",
-   "sha256": "99371faba658370feb54bfcfb7409f469d0efb17a209ce6a81f9d86375aa91e4",
+   "sha256": "94239b1048cf7d343cdd12080ff57d95c786246e937ae909995e1eaa64c795a8",
+   "state": "drained"
+  },
+  "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5cedfe19f47a186d8793e8cbc5c201fdb7d2ea39e86084651f21a50f5f776995",
    "state": "drained"
   },
   "artifacts/results/what-sdxl-already-knows/what-the-prompts-draw/can-a-score-see-species/attention-probe/catdog_s9_lora/read/boxes_seed_9.png": {

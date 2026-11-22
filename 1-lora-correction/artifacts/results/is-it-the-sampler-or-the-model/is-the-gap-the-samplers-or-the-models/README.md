@@ -85,3 +85,21 @@ an_elephant × a_penguin anchors on seed 10 but not seed 9, which draws an eleph
 sheet's sidecar carries the three reads behind that call (the detector, `target_quality.json` and
 the eye) per seed. The detector alone passes all four broken cat × dog seeds, calling one of the
 two dogs on seed 10 a cat at confidence 0.35.
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 17 files of this result (0.3 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `(files at this level)` | 17 | 0.3 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/is-it-the-sampler-or-the-model/is-the-gap-the-samplers-or-the-models/<run>/ <run>/
+```
+
+<!-- cluster:end -->

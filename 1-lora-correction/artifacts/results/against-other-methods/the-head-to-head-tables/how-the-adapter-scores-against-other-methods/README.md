@@ -30,3 +30,21 @@ The renders and tables for slots R1 and R12: every SDXL method on the 276 Attend
 **What it shows.** Tables 1 and 3 recomputed on the prompts and pairs that share no concept with the 48 training pairs (81 training concepts). Table 1 keeps 171 of 276 Attend-and-Excite prompts (animals 28, animals with objects 88, objects 55); none of the 276 is a training pair. Table 3 keeps 23 of the 53 held-out pairs (hard 1, easy 10, not competing 12). Each entry carries the prompt or pair count, the image count, the mean scores, and for Table 3 a 95% interval from resampling pairs then seeds; the ours-minus-PoE BLIP-VQA difference per set carries its interval from resampling prompts then seeds. The file prints the full-set values first under `all`, and they equal `main_table.csv` and `held_out_ablation.csv` cell for cell. `ran`
 
 **How it was made.** `python3 1-lora-correction/scripts/review_no_overlap_tables.py --scores artifacts/drips/present-revision-to-supervisor/scores/scores_long.csv --out 1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods`, on 2026-11-12, from a copy of the cluster's `paper_review/scores/scores_long.csv` (6,400 images, written 2026-11-11 17:14). A concept is a noun phrase with its article and colour word removed ("a red car" is car); an image is kept when neither of its two concepts appears in any training pair. 10,000 resampling draws, seed 0, the same interval code as `1-lora-correction/scripts/review_build_tables.py`.
+
+<!-- cluster:start -->
+
+## On the cluster
+
+The other 1 files of this result (0.0 MB) sit at `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/`. [The file list](on-the-cluster.tsv) gives each file's size and sha256 checksum.
+
+| Run | Files | Size | Kept on the laptop | Cluster folder |
+|---|---|---|---|---|
+| `(files at this level)` | 1 | 0.0 MB | no picture | `/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/` |
+
+Bring one run back to the laptop from this folder:
+
+```bash
+rsync -a mscluster84:/datasets/mmolefe/poe_repair_min/artifacts-archive/1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/<run>/ <run>/
+```
+
+<!-- cluster:end -->

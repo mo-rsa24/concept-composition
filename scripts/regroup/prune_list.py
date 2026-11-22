@@ -94,7 +94,7 @@ def main():
             out.write("\t".join(row) + "\n")
     lines = ["# 🧭 Progress: prune list", "",
              "Artifact files that nothing in the repository names, so they can leave the repository once the owner "
-             "approves. Nothing has moved. The [full list](prune-list.tsv) gives each file's path, size, reason, risk "
+             "approves. Every file listed here is still in the repository. The [full list](prune-list.tsv) gives each file's path, size, reason, risk "
              "and proposed move to the laptop archive.", "",
              '<a href="prune-decision.png"><img src="prune-decision.png" width="520" alt="The 6,594 files split into 3,764 low-risk files and 2,830 check-first files, with what each answer moves"></a>', "",
              "The search reads every page, card, plan, paper, script and data file for the file's name. It cannot see a "

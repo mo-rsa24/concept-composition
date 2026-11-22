@@ -142,7 +142,7 @@
   },
   "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/README.md": {
    "at": "2026-11-22",
-   "sha256": "e10206c5a6aaa5527ccc0a135d34139cc164b10a30618319d12fc0ebdde4f88b",
+   "sha256": "9541c9925137f19e71c48fa21ecea755e6ce9c8c0baf8f63910e3b862be3b6c3",
    "state": "drained"
   },
   "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-deep-learning-scene.html": {
@@ -378,7 +378,7 @@
   "runbook/checking-the-plan-tree.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "76c2b16ede3b1020ff4e685e943cc0a2960499b15400d935ae8db2f2b919d383"
+   "page_sha": "af38296af8b6ecdc29c8395baaba62de644d00957028a98cc60c561997443fbd"
   },
   "runbook/looking-at-what-a-run-produced/reading-a-training-run.md": {
    "at": "2026-11-22",
@@ -388,7 +388,7 @@
   "runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "133608f1b42db2cb28e64a8cb271eb5d1db04748cefa29539415fb5c45351f74"
+   "page_sha": "1cb4e5d652557deaaedc4c572a6d085c695a29a6dabff3e7639813d478839483"
   },
   "runbook/making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md": {
    "at": "2026-11-22",
@@ -408,32 +408,32 @@
   "runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "40407284da1540aef1375804b1fcf8f244d1f2f49f9c7703e249055bd1e914c2"
+   "page_sha": "11f5b36c1d6d691e899faa327f3c5a7be9e9a7f11fd4ab0f38124cec17973fcf"
   },
   "runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "a4cbfa3844eaa694767b8deb75717f12a9dda822e072c4868379fccf598806e2"
+   "page_sha": "1918820cd35f1a46c7ea025cb743d460f45bb81d5e06c317a5631bcef01a1710"
   },
   "runbook/running-things-on-the-cluster/running-the-langevin-corrector.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "33a094cca80f3206cfa8c2717df07a1a0dba2dd9ab7b2cbd782428f711bb8717"
+   "page_sha": "46957b75f25dfd92251d275cb75058a5fb19e0e56948ad7944380b8e0bf231f4"
   },
   "runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "f7db1cafb28cec982237aa1e6b623e8151ee3853f2e73ab3b3ae8da2abd175e3"
+   "page_sha": "958261793efa5eca7f4d98b876f6ab9d803fe3607adbf2ce8e77556755b1105e"
   },
   "runbook/setting-up-the-reduce-reuse-recycle-code.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "17ebbb6752cf3f9bd0e6926642688657e8005743203b2367ca92b9e2b5eb9234"
+   "page_sha": "48c0110c7fefcb17e7a341c9e47edb947abc789a4948987bdfc3608d92714fb7"
   },
   "runbook/syncing-the-paper-with-overleaf.md": {
    "at": "2026-11-22",
    "offered": [],
-   "page_sha": "33118569f3c9f6c30a47c3d6330ec1c10f036c7255239e5d60725ce13f728480"
+   "page_sha": "9a7b6dc9723a44a5541228ae9ab45d5af380b9a9f298c6084cdc2d998ea4c609"
   }
  }
 }

@@ -46,6 +46,17 @@ def units():
     return sorted(found, key=len, reverse=True)
 
 
+def question_folder(path, groups):
+    """The first folder under results/ that is a result and not a group of results."""
+    parts = path.split("/")
+    i = parts.index("results") + 1
+    folder = "/".join(parts[:i + 1])
+    while folder in groups and i + 2 < len(parts):
+        i += 1
+        folder = "/".join(parts[:i + 1])
+    return folder
+
+
 def size(n):
     return f"{n / 1e9:.2f} GB" if n >= 1e9 else f"{n / 1e6:.1f} MB"
 
@@ -79,24 +90,28 @@ def main():
     os.chdir(ROOT)
     rows = [r for r in csv.DictReader(open(f"{PROGRESS}/restore-manifest.tsv"), delimiter="\t") if r["cluster_path"]]
     ordered = units()
+    groups = {l.strip() for l in open("scripts/regroup/result-groups.txt") if l.strip()}
     assigned = collections.defaultdict(list)
     unplaced = 0
     for r in rows:
         path = r["cluster_path"][len(CLUSTER) + 1:]
         unit = next((u for u in ordered if path.startswith(u + "/")), None)
+        if unit is None and "/results/" in "/" + path:
+            unit = question_folder(path, groups)
         if unit is None:
             unplaced += 1
         else:
             assigned[unit].append(r)
     written = []
     for unit, members in sorted(assigned.items()):
+        os.makedirs(unit, exist_ok=True)
         with open(f"{unit}/on-the-cluster.tsv", "w") as out:
             out.write("file\tbytes\tsha256\tcluster_path\n")
             for r in sorted(members, key=lambda r: r["cluster_path"]):
                 relative = r["cluster_path"][len(f"{CLUSTER}/{unit}/"):]
                 out.write("\t".join([relative, r["bytes"], r["sha256"], r["cluster_path"]]) + "\n")
         card = f"{unit}/README.md"
-        text = open(card).read() if os.path.exists(card) else f"# {TITLES.get(os.path.basename(unit), os.path.basename(unit))}\n"
+        text = open(card).read() if os.path.exists(card) else f"# {TITLES.get(os.path.basename(unit), os.path.basename(unit).replace('-', ' ').capitalize())}\n"
         section = block(unit, members)
         if START in text:
             text = text[:text.index(START)] + section + text[text.index(END) + len(END):]

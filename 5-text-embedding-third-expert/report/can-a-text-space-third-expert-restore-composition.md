@@ -139,7 +139,7 @@ pixel difference from the joint prompt's own render, 0 to 255, averaged over the
 **Adding the two single-animal experts moves the picture away from the target.** The same ordering
 appears in the by-eye calls: x_pos alone gives a clear pair on 2 of 7 seeds, and 0 once the dog and
 cat experts are added. Per-seed comparisons:
-[per-seed/](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed).
+per-seed/ (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed`).
 
 | x_pos alone and in the product | The target, plain PoE and the product on every seed |
 |---|---|
@@ -193,7 +193,7 @@ both text encoders only. Tiles under
 [calls.json](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/calls.json). Walked in
 [today-the-positional-and-vector.md](../../artifacts/plans/completed/today-the-positional-and-vector.md).
 
-The eight tiles in [the per-seed folder](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed)
+The eight tiles in the per-seed folder (on the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/per-seed`)
 are held out of the artifact drain, because
 [the all-seeds sheet](../artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png)
 holds the same three columns for all 8 seeds.
