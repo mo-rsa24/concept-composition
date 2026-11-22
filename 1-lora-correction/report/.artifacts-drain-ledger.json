@@ -875,6 +875,306 @@
    "sha256": "67adcd2184be507538879fdf21ce22939c16b683f7da3e3074a656ef5827cd13",
    "state": "drained"
   },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/README.md": {
+   "at": "2026-11-22",
+   "sha256": "c8472f22d9e3854e6e0afbe6cadd6aa543f0232c8f7dbc98dcc1de6162c4125d",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/README.md": {
+   "at": "2026-11-22",
+   "sha256": "4926d438a1dcc94ece99de4345e13494b8e1eb84af9925a554d99f99c5674511",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed02.png": {
+   "at": "2026-11-22",
+   "sha256": "fa448e785d08a4977b0fba25ae87a27a2bacde3092373239846ccaed1b21fab9",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "2b5a2198c3e03f8dce01d50ec7784933dc63a23bccaab4ace10808d68308ba0d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed12.png": {
+   "at": "2026-11-22",
+   "sha256": "4947e56603522d2636c0f978f3c04f5b7008c64184597b8ad19465f557a5d1e7",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs.png": {
+   "at": "2026-11-22",
+   "sha256": "eb649218ebc545a6a2fc11f43e9ad827155cb94cbf8aaf087257597708f7ab44",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter-seed09.png": {
+   "at": "2026-11-22",
+   "sha256": "07162ecf537cc4902aafcec6d94e97693d6b82185c5b96b0508a5fcf88dce3b2",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter-seed11.png": {
+   "at": "2026-11-22",
+   "sha256": "7f147e6f2d01fd10859899bf305e463cbb808ebd988634ea1261206430037c80",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter-seed42.png": {
+   "at": "2026-11-22",
+   "sha256": "f461dc5c218ea64ea15f5d99a66be5744fd53f37a9be033d5fae3436a92f198d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter.png": {
+   "at": "2026-11-22",
+   "sha256": "b7f37832cd1c3a08c5c226934075c48fe6f21857fa79ee1016e9245263ce1710",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/README.md": {
+   "at": "2026-11-22",
+   "sha256": "7f54fbba0dd668224fa2fa19c430558e0682c257c30cca3d781fd6d4df1a7d62",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed-v2.png": {
+   "at": "2026-11-22",
+   "sha256": "1721272b607aafc36b4ffee44534d28536660a54885634780ce5608651d078a0",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-by-seed.png": {
+   "at": "2026-11-22",
+   "sha256": "36b1c8ec6d0b8724d948e55efb1caddb4981852e7a10edaf955d6e6b519742c6",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-seed-09.png": {
+   "at": "2026-11-22",
+   "sha256": "c0a7d75223261a89e007e53628d6811776b5fd7fba8e589fd73871e91a6f21f8",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-seed-11.png": {
+   "at": "2026-11-22",
+   "sha256": "6131db7cde5633bd453aee803ce93b4bddfc97f18c0d3708893a159f5e1bf106",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/every-adapter-cat-and-dog-seed-12.png": {
+   "at": "2026-11-22",
+   "sha256": "29dddd0eac18a9e914d430af318c2aaa2eb0c2d1c8eee15cd54339d859ea3541",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-gallery.png": {
+   "at": "2026-11-22",
+   "sha256": "1581be1e44d33825a320bdabf7ef8beb0c869b8dbacfee27325064355813ce60",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/how-a-render-fails-paper.png": {
+   "at": "2026-11-22",
+   "sha256": "f8c5db3b093b145166f06bf3fc01213863337dfdc248a3cf1824d276d4effc70",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-cat-and-dog/x0-seeds-against-x0-contrast-step-45000.png": {
+   "at": "2026-11-22",
+   "sha256": "e1642a63d2ad9a687f7c2694e2ca255b819db72c2280f788243f46e03ab605e5",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/README.md": {
+   "at": "2026-11-22",
+   "sha256": "3c127ac9eaaf49d1811e2feea4a8bc14760b378b24af935b521ba1e03a36aaba",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/cat-and-dog-nine-candidates.png": {
+   "at": "2026-11-22",
+   "sha256": "f4e1b99d8901f820b261328b0428e7e2f129dffbaf611d3cd00ebf4a0206dba7",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/contested-seeds-larger.png": {
+   "at": "2026-11-22",
+   "sha256": "aaab820f9f0bad24f4b61174b3f0e7ade03b61370fc17027d8c990948e8f7952",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/elephant-and-penguin-nine-candidates.png": {
+   "at": "2026-11-22",
+   "sha256": "4ebf0aef63d86e4f7e02565502797cb933f70a4ae7d50344153f1aaa7f4a8beb",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/showcase_calls.png": {
+   "at": "2026-11-22",
+   "sha256": "0a08284d4f3551f6bb758875527d52b752535c76566e2b93e4bfc744cc3e1af7",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed10.png": {
+   "at": "2026-11-22",
+   "sha256": "e96ad3bb7f138732371a762bc110c00cf017e4366dc523097e3dba14e10289d8",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed12.png": {
+   "at": "2026-11-22",
+   "sha256": "7423e58a63339d33030c74ff1a80baeffc942e380f88b5288881d95a016e2a47",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed11.png": {
+   "at": "2026-11-22",
+   "sha256": "511d5d5cf3273da5f33c53d9a6b745f42233df752805812916367e158db1aa95",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/BUILDS.md": {
+   "at": "2026-11-22",
+   "sha256": "3550c2c653bbb35f87446042f9ee4e7cbce394c6a027033910759e5c790b0a96",
+   "state": "drained"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-refl-03-self-contrast-15k_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "3501f23390089bf07c666a8f476e3874d6412c3b7325a1b871b92935beab7aa3",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-refl-03-self-contrast-15k_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "d93b11ac22138a089a40fc269f6759043bf0c3c215fc11ff9478716a390833cc",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-refl-03-self-contrast-15k_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "21c75cfc11206d1b686cbc0bbb7a804e1bc60b7b368bc24cc2a03d517a88533f",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-refl-03-self-contrast-15k_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "1eadf19d9da9eec56f04fe9f70801b7747fe2e3e631d68e208a643b13cae4e93",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-01-plain_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "05fd84f52c60d798f207cf594448ce7007c7dd460b7d6714c4aa9c770eb994c7",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-01-plain_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "9a5d5e0e366e0480325bfe2dcfc6c35f3f4feb1de1b30a58a7c2dfcaf7df5cf0",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-01-plain_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "0bcbb9e91e4ced21fc38da58296f03fdd24325265bb239962ff66b72c4a465b1",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-01-plain_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "72bbde2e67b3a224fbef2b80291a70864d6e6a414073aa08888633056f1ac3a5",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-02-contrast_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "015d8c22d882e4dcbb658772a7ac0bd930c42ea0d171510efefbc6c7cb711551",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-02-contrast_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "be675520c9444e4806da39dfa2603d5aca9ed30672e175b554955f92b08342f8",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-02-contrast_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "fb7f38f19b1606306aae8d0a23c98a56c32252ea24f17c7427cf0723910a02e3",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-02-contrast_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "9a2447341cf49175ee2135190df51ed712c88f5bbef13d24f2096c0a0aa65119",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-03-self_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "07b3ff16b55cfb4a9404244c30df201c5989e8a4180f4cf622df0f7f099f9aec",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-03-self_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "456ee0d76f285f052a14f12d6e3c407b772c2e6112abbb9b2ae74caf55482084",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-03-self_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "00a587c8398a892b3bcd74676a486faaf34d555c1a4821779bc1e30d4bb57767",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-03-self_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "1c88344229f7759f1491588e9649ac6cbaacdf376b0664db70d77a918c9199c5",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-04-freezenull_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "13e106dfa4ee5d1d3bb6e1a6a0244d303b244a0e7c0256529dca2571a74a523c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-04-freezenull_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "76bb2d4f896bb382b1c46c95c227d304aaff2bb707e9f46bdada54e3afca02ac",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-04-freezenull_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "c168466d9d6b3606a4867ac4482ab50134d28a44918999062f3c321c73ddfc72",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-04-freezenull_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "d0785a75c6b56eff1bb08ba6a949add341052c229918ac94e0bfe8388668be51",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-05-self-contrast_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "add0a88f7803e2f902e6e12ae2b1087a3e00779738f375ff4707f8087ad7058c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-05-self-contrast_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "3da866ddc3489c993104a5e239690e1dd0a01ff55b40edd9f7517cdd5c83b18c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-05-self-contrast_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "2ac787393dc968f65808fdebeba42386ec8fa4b5eec95c797b85b64ee7ce70d2",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58-05-self-contrast_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "4ce06f4033a43998dbe224b15b83060666fd460e910eeadcaa424791fe670838",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-01-plain_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "de81705517a860384a250bb07c8c6b8f73d9918affa7832b0b724c24a271247d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-01-plain_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "d5cd6679798d2f21dff65306bdbfe8fc8565d9cdcb824c17f2b4d595736efb33",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-01-plain_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "213cb11c56aecb9bdb77809c40a2c18d67f36bcb3177a68e0c14d1b50fbcf60d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-01-plain_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "9d9ee1fbf5b768da25fdbedb52202743bd0ef05dd1dfa9157cd56696a8f6f38c",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-05-self-contrast_seeds_13_15.png": {
+   "at": "2026-11-22",
+   "sha256": "1379d79da2444138842e13a736fef0de4a99fb063b35f869a840f58da1a254af",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-05-self-contrast_seeds_3_5.png": {
+   "at": "2026-11-22",
+   "sha256": "e30284bafb6277d1cb0a6a0797eb640f764e030a259993b703e4f5eed239ca8d",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-05-self-contrast_seeds_43_45.png": {
+   "at": "2026-11-22",
+   "sha256": "cb7c7ddc2b2facf3900b78bfb2866ed79907a00b4033b7ae556ef7e1924c8911",
+   "state": "skipped"
+  },
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/latest/which-checkpoint-v58f-05-self-contrast_seeds_9_42.png": {
+   "at": "2026-11-22",
+   "sha256": "c796b2ef0684dec3ea1d15e82fbee8438861836484850ecdb74d630e068ac021",
+   "state": "skipped"
+  },
   "artifacts/results/what-the-correction-is/README.md": {
    "at": "2026-11-22",
    "sha256": "a969151632b3583f045bda23e73957bf683a5736866d51b34d00079407f67534",
@@ -1900,6 +2200,153 @@
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/held-out-pair-candidates/a_zebra__x__a_monkey.png",
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/spread-and-handover/a_goat__x__a_cat.png",
   "artifacts/results/the-adapter-on-cat-and-dog/where-it-fails/which-renders-show-it-working-and-failing/spread-and-handover/a_zebra__x__a_monkey.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/how-much-rank-the-correction-needs-seed42.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter-seed02.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/what-the-adapter-ablations-show/which-layers-carry-the-adapter-seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v57-11b-x0-self-decay_s050000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-01-plain_s047500__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-02-contrast_s027500__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s025000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s027500__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s030000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-03-self_s050000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58-05-self-contrast_s015000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__a_cat__x__a_dog__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed09.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed10.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed11.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed12.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed13.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed14.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed15.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-adapter-composes-the-showcase-pairs/tiles/v58f-05-self-contrast_s025000__an_elephant__x__a_penguin__seed16.png",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/history",
+  "artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/tiles",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__cat.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_cat__x__a_dog__seed_10__dog.png",
   "artifacts/results/what-the-correction-is/what-it-looks-like/residual-dynamics/content-change-relative-to-attention-change/follow-along/a_frog__x__a_toad__seed_9__frog.png",
