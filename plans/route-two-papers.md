@@ -45,7 +45,8 @@ closes through [its closing prompt](../artifacts/notes/progress/prompts/closing-
 **C. Learn the field.** The loop scouts the field and writes the benchmark spec, starting from
 [the first pass over the rivals](../artifacts/notes/progress/rival-datasets-first-pass.md). Step C2 is your 11
 reading sittings, in the order of [the reading plan](../artifacts/notes/progress/targets/reading-plan.md), which
-holds each sitting's command and its 90-minute calendar block between 2026-11-22 and 2026-11-27:
+holds each sitting's command. The calendar spreads them over 26 two-hour blocks from 2026-11-23 to 2026-12-01,
+at most three a day at 06:00, 11:30 and 16:30, covering journey study, the drip-read, and application with a quiz:
 
 | Sitting | Idea | Papers |
 |---|---|---|
