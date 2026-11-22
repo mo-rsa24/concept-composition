@@ -33,7 +33,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#the-themes) ➡️
 | What an animal pair is, and why the pool is biased toward failure | [Animal pair § What an animal pair is](world/animal-pair.md#what-an-animal-pair-is) |
 | What a compose rate is, and what the scorer can and cannot tell you | [Compose rate § What a compose rate is](world/compose-rate.md#what-a-compose-rate-is) |
 | How a prompt pair becomes a scored run | [Where it comes from § The journey](data/01-where-it-comes-from.md#the-journey) |
-| What `pair_slug`, `seed`, `lambda`, `d_T`, or `n_instances` mean | [Dictionary](data/02-dictionary.md) |
+| What `pair_slug`, `seed`, `lambda`, `d_T`, or `n_instances` mean | Dictionary: [`pair_slug`](data/02-dictionary.md#pair_slug), [`seed`](data/02-dictionary.md#seed), [`lambda`](data/02-dictionary.md#lambda), [`d_T`](data/02-dictionary.md#d_t--d_t), [`n_instances`](data/02-dictionary.md#n_instances) |
 | Who reads the output, and what they do with it | [What we produce § Who reads it](purpose/02-what-we-produce.md#who-reads-it) |
 | How would we know this project is working | [What working means § The test](purpose/03-what-working-means.md#the-test) |
 

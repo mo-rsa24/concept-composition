@@ -18,8 +18,8 @@ render the joint prompt, each concept alone, plain product-of-experts and the co
 the same seeds, embed the results, draw the two figures, and build the animated page. The renders
 need a GPU on the cluster; everything after them runs on the session node's CPU; the page builds
 with the Node that is already on the cluster. Which card takes which python build is a fact owned
-by [nodes](../../environment/hpc/nodes.md); how to pick a free device is
-[launching a run § 1](launching-and-harvesting-a-run.md#1-decide-where-a-run-goes).
+by [nodes](../../environment/hpc/nodes.md); how to pick a free device, once the owner has said yes, is
+[launching a run § 2](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device).
 
 **What "the port" is, said once.** SDXL is not ported into Diffusion Explorer. That tool's models
 are two-number toys trained in the browser, so nothing of ours runs inside it. What is ported is
@@ -44,6 +44,7 @@ versus PoE versus PoE plus correction) is a set of Python samplings on the clust
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-render-the-references-and-the-per-step-frames-on-a-shared-device) ➡️
 
+- [ ] 🖥️ **The owner has said yes to this SSH launch.** New GPU work goes through `sbatch`. A recipe below that starts a process with `nohup` records how a past run was launched, and running it again needs the owner's yes through `python3 scripts/progress_board.py ask`.
 - [ ] 🖥️ **The repo is on the branch that has the scripts**
   ```bash
   ls /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_*
@@ -63,7 +64,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-render-the-references-and
 
 Navigation: ⬅️ [Previous](#before-any-of-these) | 📋 [TOC](#table-of-contents) | [Next](#2-make-the-endpoint-figures-and-their-sidecar) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 `ran 2026-09-05` (references on mscluster110 device 0, frames on mscluster109 device 1)
 
@@ -77,11 +78,11 @@ per-step decoded estimates, or only the three single-prompt references as final 
 
 | What | Example | Where to get it |
 |---|---|---|
-| node | `mscluster109` | a `biggpu` node with a free device, per [launching a run § 1](launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) |
+| node | `mscluster109` | a `biggpu` node with a free device, per [launching a run § 2](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) |
 | device | `1` | the free index from `nvidia-smi` on that node; the script refuses a device with more than 1 GiB in use or a faulted one |
 | stage | `frames` | `render` writes only the three references' final images; `frames` writes every condition at 14 saved steps |
 
-Launch over SSH, absolute paths only, then check it is alive and on the GPU:
+With the owner's yes, launch over SSH, absolute paths only, then check it is alive and on the GPU:
 
 ```bash
 ssh mscluster109 'GPU=1 STAGE=frames nohup bash /home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/scripts/showcase/where_each_condition_lands_shared_device.sh > /datasets/mmolefe/poe_repair_min/outputs/showcase/logs/where_each_condition_lands_frames.log 2>&1 &'

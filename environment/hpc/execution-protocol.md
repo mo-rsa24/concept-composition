@@ -102,8 +102,8 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#skill-wiring) ➡️
    missing GPU or bad `#SBATCH` directives (fix and resubmit), node failure (resubmit
    elsewhere). Retries are bounded; never silently loop.
 6. **In-session tier.** Cache-only analyses (SVD, SNR curves, language-space tests, scoring cached
-   PNGs) and light GPU inference run directly on the current session node (`mscluster85`, RTX
-   3090 24GB), no queue, while bigger jobs wait. Reference point: `phase1_r8_100k` TRAINING
+   PNGs) and light GPU inference run directly on a cluster session node (`mscluster85` when last
+   checked, RTX 3090 24GB), no queue, while bigger jobs wait. Reference point: `phase1_r8_100k` TRAINING
    peaked at 22.95GB VRAM, so training-scale work goes to `biggpu`; SDXL inference-only runs
    across many settings generally fit the 3090, but check `nvidia-smi` for co-tenants before
    launching.

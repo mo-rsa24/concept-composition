@@ -73,7 +73,7 @@ means no port collision with anyone serving on the same number bound elsewhere.
 
 **The tmux part**
 
-`nohup` suits a long run across many settings because it must survive the session; a scene
+A long run across many settings goes through `sbatch`, so it survives the session; a scene
 server is
 the opposite, something you want to find, watch, and kill by name a week later. `tmux ls` finds
 it, attach shows its request log, kill-session ends it cleanly.

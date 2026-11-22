@@ -112,12 +112,12 @@ Navigation: ⬅️ [Why the project cares](#why-the-project-cares) | 📋 [TOC](
 
 Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-**The window that works is not the window where the run visibly commits.** ⚠️
+**The window that works is not the window where the run visibly commits.** ⚠️ ✅
 
 `1-lora-correction/report/experiments-log.md` EXP-01 and EXP-04 together found something the project itself calls
 counter-intuitive: every studied pair's outcome settles (commitment step) well after the window
-where the correction actually works (steps 0-10 for all 8 tested pairs, while commitment ranges
-from step 18 to 36). The correction stops mattering 8 to 26 steps before the picture "looks
+where the correction actually works (steps 0-10 for all 8 tested pairs, whose settling steps run
+from 23 to 36; across every pair EXP-01 measured, the per-pair medians run from 18 to 36). The correction stops mattering 8 to 26 steps before the picture "looks
 decided" by the running-estimate measure. Either the decision happens earlier than that measure
 can see, or the measure tracks the wrong event; `1-lora-correction/report/experiments-log.md` records this as unresolved and
 not the registered finding.
@@ -138,7 +138,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 |---|---|---|
 | The interaction term's definition | Read in `writing/iclr/iclr2027_conference.tex`, abstract | 2026-08-24 |
 | Its measured per-step and final values for one run | Read directly, `data/pilot/seed_42/a_cat__x__a_dog/summary.json` | 2026-08-24 |
-| The window-vs-commitment-step finding | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 | 2026-08-24 |
+| The window-vs-commitment-step finding | Read in `1-lora-correction/report/experiments-log.md`, EXP-01 and EXP-04 | 2026-11-22 |
 | The word "oracle" in older plan files, and what it names here | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
 
 <!-- related:start (drain) -->

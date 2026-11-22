@@ -76,8 +76,9 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#before-any-of-these) ➡️
 
 Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-reference-block) ➡️
 
+- [ ] 🖥️ **The owner has said yes to this SSH launch.** New GPU work goes through `sbatch`. A recipe below that starts a process with `nohup` records how a past run was launched, and running it again needs the owner's yes through `python3 scripts/progress_board.py ask`.
 - [ ] 🖥️ **A free device on a `biggpu` node**, found and checked the way
-  [decide where a run goes](launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) says.
+  [launch on a shared device](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) says.
   ```bash
   ssh mscluster108 nvidia-smi --query-gpu=index,memory.used,utilization.gpu,temperature.gpu --format=csv
   ```
@@ -106,7 +107,7 @@ Blackwell nodes (110 to 112), per [the cluster nodes](../../environment/hpc/node
 
 Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 **When you need this**
 
@@ -193,7 +194,7 @@ which answers a different question. The probe uses the first.
 
 Navigation: ⬅️ [1. Render the 8-seed held-out grid](#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 **When you need this**
 
@@ -260,7 +261,7 @@ continues without it; the pair's `n` in the table shows how many rows it got.
 
 Navigation: ⬅️ [2. Measure how well a checkpoint fits](#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 **When you need this**
 

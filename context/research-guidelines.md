@@ -21,6 +21,7 @@ happening in the background, and what to do next.
 - [Where the general rules land in this repo](#where-the-general-rules-land-in-this-repo)
 - [The mistakes this project has already made](#the-mistakes-this-project-has-already-made)
 - [The deadline](#the-deadline)
+- [Where this came from](#where-this-came-from)
 - [🖼️ In pictures, code and further reading](#in-pictures-code-and-further-reading)
 
 ## Where the general rules land in this repo
@@ -92,17 +93,26 @@ made twice in this repo.
 
 ## The deadline
 
-Navigation: ⬅️ [Previous](#the-mistakes-this-project-has-already-made) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+Navigation: ⬅️ [Previous](#the-mistakes-this-project-has-already-made) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 Put the submission date at the top of the paper list and count backwards from it once a week. The
 tree gives an order and cannot tell you whether the remainder fits.
+
+## Where this came from
+
+Navigation: ⬅️ [The deadline](#the-deadline) | 📋 [TOC](#table-of-contents) | [Next](#in-pictures-code-and-further-reading) ➡️
+
+| What | How it was established | When |
+|---|---|---|
+| The general practice this page applies | Read in `~/.claude/RESEARCH_PRACTICE.md` | 2026-11-22 |
+| Where each rule lands here, and the mistakes recorded | Written with this page in commit `34681f58` and extended by later commits | 2026-08-10 onward |
 
 <!-- related:start (drain) -->
 <a id="in-pictures-code-and-further-reading"></a>
 
 ## 🖼️ In pictures, code and further reading
 
-Navigation: ⬅️ [Previous](#the-deadline) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#where-this-came-from) | 📋 [TOC](#table-of-contents)
 
 ### How it fits together
 

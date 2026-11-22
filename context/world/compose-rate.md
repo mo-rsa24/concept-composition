@@ -104,7 +104,7 @@ Navigation: ⬅️ [Why the project cares](#why-the-project-cares) | 📋 [TOC](
 
 Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-**The scorer counts animals, it does not identify them.** ⚠️
+**The scorer counts animals, it does not identify them.** ⚠️ ✅
 
 The audit in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` went through the 32 runs behind a 94% headline compose rate at full correction strength, and the table gives what it found beyond the cleanly correct ones.
 
@@ -135,6 +135,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The scorer's true-error bound at λ=1 | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-08-24 |
 | The two example images | Read directly, `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/{01-both-there,02-two-of-one}/` | 2026-08-24 |
 | The scorer-trust standing effort | Read in `MASTER_PLAN.md`, background experiment table | 2026-08-24 |
+| The audit's breakdown of the 32 runs (12 both, 1 two of the same, 5 undecided, 12 look-alike, 2 failures) | Read in `1-lora-correction/artifacts/results/measuring-composition/the-scorers/can-we-trust-the-compose-score/do-the-successful-cells-contain-both-animals/README.md` | 2026-11-22 |
 
 <!-- related:start (drain) -->
 <a id="in-pictures-code-and-further-reading"></a>

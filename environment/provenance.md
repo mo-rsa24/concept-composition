@@ -11,8 +11,10 @@ person nor a run this sitting.
 
 | Fact | Where it lives | Mark | How it was established |
 |---|---|---|---|
-| Session node is `mscluster85`, `bigbatch`, RTX 3090 24GB, 123GB RAM, 28 cores | `hpc/nodes.md` | verified | `nvidia-smi` on 2026-08-04 |
-| Session node's current partition and state (`bigbatch`, `alloc`) | `hpc/nodes.md` | verified | `sinfo -N -o "%N %P %t"`, live, 2026-08-24 |
+| Cluster session node was `mscluster85`, `bigbatch`, RTX 3090 24GB, 123GB RAM, 28 cores | `hpc/nodes.md` | verified | `nvidia-smi` on 2026-08-04 |
+| Cluster session node's partition and state (`bigbatch`, `alloc`) | `hpc/nodes.md` | verified | `sinfo -N -o "%N %P %t"`, live, 2026-08-24 |
+| The laptop checkout has no `squeue`, `sinfo` or `sbatch` and reaches the cluster through `scripts/cluster.sh` | `overview.md`, `hpc/nodes.md` | verified | `which squeue sinfo sbatch` printed nothing on the laptop, 2026-11-22 |
+| GPU work launches through `sbatch` inside caps of one `biggpu` job and six `bigbatch` jobs per user, a denied `sbatch` waits, and a `nohup` launch over SSH outside the session's own Slurm job needs the owner's yes | `hpc/execution-protocol.md`, `overview.md`, `hpc/nodes.md` | stated | the owner's decision, recorded in the shared session rules on 2026-11-22 |
 | Partition table (nodes, time limits) for `biggpu`, `bigbatch`, `batch`, `stampede`, `gpuexpress` | `hpc/nodes.md` | verified | `sinfo -o "%P %a %l %D"`, live, 2026-08-24 (re-confirms a 2026-08-04 check) |
 | `sinfo` GRES column reads `(null)` for every partition | `hpc/nodes.md`, `overview.md` | verified | `sinfo -o "%P %N %G"`, live, 2026-08-24 |
 | `mscluster106`: 2x Quadro RTX 8000, 49GB each | `hpc/nodes.md` | verified | `nvidia-smi` over SSH, 2026-08-19 |

@@ -460,8 +460,8 @@ not launch there even though the memory-used guard alone would pass it. A launch
 also run `python -c 'import torch, sys; sys.exit(0 if torch.cuda.is_available() else 7)'` under
 the pinned `CUDA_VISIBLE_DEVICES` before starting real work, which catches the CPU-fallback form. If a launch is already
 hung with this symptom (progress log lines stop appearing well past the point comparable runs
-on other nodes reach their first checkpoint), `kill -9` the process and relaunch on a different
-device; the faulted GPU itself needs a reset only an administrator or a node reboot can do, no
+on other nodes reach their first checkpoint), `kill -9` the process and resubmit through `sbatch`, or relaunch on a different
+device over SSH with the owner's yes; the faulted GPU itself needs a reset only an administrator or a node reboot can do, no
 user-level recovery exists.
 
 **First discovered:** concept-composition, 01-showcase-the-trained-lora, the experiment A/B timing

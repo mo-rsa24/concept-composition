@@ -2,9 +2,9 @@
 
 HPC cluster, Slurm-scheduled, two separate filesystems with no automatic mirroring between
 them, and a paper build that needs one specific LaTeX engine because nothing else is installed.
-The thing a plan gets wrong most often here is treating "submit a job" as one action: it is a
-several-step decision between an idle node, a shared half-used node reached over SSH, and a
-disk guard that has to check the filesystem the script actually writes to, not an assumed one.
+The thing a plan gets wrong most often here is treating "submit a job" as one action: it means
+choosing `biggpu` or `bigbatch` inside the administrator's job caps, waiting when `sbatch` is denied,
+and writing a disk guard that checks the filesystem the script actually writes to, not an assumed one.
 
 ## Table of contents
 
@@ -22,8 +22,9 @@ disk guard that has to check the filesystem the script actually writes to, not a
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#access-paths) ➡️
 
-The working session (VS Code + Claude) runs ON a compute node, currently `mscluster85`
-(`bigbatch`: RTX 3090 24GB VRAM, 123GB RAM, 28 cores). The login node is never used for work.
+Code is written on the laptop checkout, which has no Slurm commands and reaches the cluster through
+`scripts/cluster.sh`. A session on the cluster (VS Code + Claude) runs ON a compute node, `mscluster85`
+when last checked (`bigbatch`: RTX 3090 24GB VRAM, 123GB RAM, 28 cores). The login node is never used for work.
 Python is the `co3` mamba environment at
 `/home-mscluster/mmolefe/miniforge3/envs/co3/bin/python`; every job script must use this
 absolute path, never a bare `python`.
@@ -129,13 +130,13 @@ No picture of the cluster itself exists in any `artifacts/` folder, so this bloc
 
 ```mermaid
 flowchart TD
-  A["Want to run an experiment"] --> B{"Interactive node already allocated?"}
-  B -->|"yes"| Z["Run there"]
-  B -->|"no"| C{"Idle biggpu node?"}
-  C -->|"yes"| Z
-  C -->|"no"| D{"Shared half-used biggpu node, free GPU pinned over SSH?"}
-  D -->|"yes"| E["Launch over SSH, harvest with pgrep"]
-  D -->|"no"| F["bigbatch as the fallback"]
+  A["Want to run an experiment"] --> B{"My interactive biggpu job running?"}
+  B -->|"yes"| Z["Run inside that job"]
+  B -->|"no"| C{"sbatch: one biggpu job or up to six bigbatch jobs"}
+  C -->|"accepted"| F["Slurm runs the job"]
+  C -->|"denied"| D["Wait, then submit again"]
+  D --> C
+  D -.->|"only with the owner's yes"| E["Launch over SSH on a free device, harvest with pgrep"]
   Z --> G["Job script guards: disk, co3 path, GPU visible"]
   E --> G
   F --> G
@@ -143,14 +144,14 @@ flowchart TD
   classDef guard fill:#fff3cd,stroke:#333;
   classDef judge fill:#ede1fb,stroke:#333;
   classDef work fill:#e8e8f5,stroke:#333;
-  class B,C,D judge;
+  class B,C judge;
   class G guard;
-  class Z,E,F,H work;
+  class Z,D,E,F,H work;
 ```
 
 *Purple boxes are the choices, yellow is the set of guards, grey boxes are where the run goes.*
 
-Read it top to bottom: the order of the three choices is the order the page's "Execution model" section gives, and the guards run for every route `stated` (this page; the six-step protocol is in the [execution protocol](hpc/execution-protocol.md)).
+Read it top to bottom: `sbatch` is the route, a denied submission waits, and the dashed edge to an SSH launch opens only with the owner's yes. The guards run for every route `stated` (this page; the six-step protocol is in the [execution protocol](hpc/execution-protocol.md)).
 
 ### The code behind it
 

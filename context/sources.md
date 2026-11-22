@@ -1,7 +1,8 @@
 # 📚 Sources: concept-composition
 
-Every external document and page this folder draws on. A provenance table cites an entry here by
-number; the entry says what the source is, where it lives, and how far to trust it. Everything
+Every external document and page this folder keeps as background. No provenance table here cites
+them yet, so none of the five backs a claim in this folder. Each entry says what the source is, where
+it lives, and how far to trust it. Everything
 else this folder cites is internal to this repository and is cited directly by its own path in
 each file's "Where this came from" table, which is this format's convention for a repo-internal
 claim.

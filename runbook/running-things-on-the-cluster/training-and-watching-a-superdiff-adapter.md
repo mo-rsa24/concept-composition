@@ -81,6 +81,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#before-any-of-these) ➡️
 
 Navigation: ⬅️ [Words this file uses](#words-this-file-uses) | 📋 [TOC](#table-of-contents) | [Next](#the-reference-block) ➡️
 
+- [ ] 🖥️ **The owner has said yes to this SSH launch.** New GPU work goes through `sbatch`. A recipe below that starts a process with `nohup` records how a past run was launched, and running it again needs the owner's yes through `python3 scripts/progress_board.py ask`.
 - [ ] 🖥️ **The target device is free**
   ```bash
   ssh <node> "nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader; pgrep -af 'train_poole[d]|superdif[f]' | cut -c1-80"
@@ -117,7 +118,7 @@ Navigation: ⬅️ [Before any of these](#before-any-of-these) | 📋 [TOC](#tab
 
 Navigation: ⬅️ [The reference block](#the-reference-block) | 📋 [TOC](#table-of-contents) | [Next](#2-launch-one-training---ran-2026-09-03) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 Renders the pooled-adapter pool (11 training pairs × 8 seeds, from `phase1_r8_450k`'s pool files)
 through SuperDiff at κ 0.5 and saves every step. About 77 s per cell on an A6000; two shards on
@@ -147,7 +148,7 @@ Relaunch the same shard, every finished cell is skipped.
 
 Navigation: ⬅️ [1. Build the SuperDiff trajectory cache](#1-build-the-superdiff-trajectory-cache---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#3-render-a-strip-from-every-checkpoint-while-it-trains---ran-2026-09-03) ➡️
 
-⚠️ Starts a 24 to 34 hour process on a shared node. Do the checks under Before any of these
+⚠️ Starts a 24 to 34 hour process on a shared node outside Slurm, so it needs the owner's yes. Do the checks under Before any of these
 first; the script re-checks the device itself and refuses one that is busy.
 
 ```bash
@@ -184,7 +185,7 @@ ssh mscluster106 "RESUME_FROM=$SD/sdlora_r32_100k/checkpoints/lora_step_005000.p
 
 Navigation: ⬅️ [2. Launch one training](#2-launch-one-training---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#4-assemble-the-timelines---ran-2026-09-05) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 Runs on its own device, needs no change to the trainings, and exits once every rank's final
 checkpoint is rendered. Each checkpoint at a multiple of 10k steps costs 4 renders per pair
@@ -229,7 +230,7 @@ sheet is a tile the watcher has not rendered yet.
 
 Navigation: ⬅️ [4. Assemble the timelines](#4-assemble-the-timelines---ran-2026-09-05) | 📋 [TOC](#table-of-contents) | [Next](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 Sixteen renders (seeds 9 to 12 × λ 0.25, 0.5, 0.75, 1) of one checkpoint on cat × dog, then a
 sheet with plan 05's λ 0 column on the left. About 12 minutes on the Blackwell.
@@ -251,7 +252,7 @@ old cached tiles.
 
 Navigation: ⬅️ [5. Sweep λ on one checkpoint](#5-sweep-λ-on-one-checkpoint---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#7-inject-a-poe-trained-adapter-into-superdiff-and-measure-its-direction---ran-2026-09-03) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 SuperDiff alone at 200 steps, seeds 9 to 12, λ 0 to 1 of its own residual added back, one sheet
 per κ setting: cat × dog at κ 0, 0.25, 0.5, 0.75, 1 and its own unclamped κ, butterfly × meadow
@@ -279,7 +280,7 @@ names the tile, and the sweep resumes on relaunch.
 
 Navigation: ⬅️ [6. Render SuperDiff's own kappa by lambda sheets](#6-render-superdiffs-own-kappa-by-lambda-sheets---ran-2026-09-03) | 📋 [TOC](#table-of-contents) | [Next](#8-stop-a-run-cleanly---ran-2026-09-04) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 Three steps: prove the attached adapter is inert at λ 0 and active at λ 1, render the 96-cell
 set (rank 8, 16, 32 × two pairs × seeds 9 to 12 × λ 0.25 to 1), then measure on one cell the

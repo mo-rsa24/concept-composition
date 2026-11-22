@@ -22,8 +22,8 @@ and [can a corrector or a clean tail sharpen the adapter's renders](../../1-lora
 One launcher drives all of them, `1-lora-correction/scripts/mechanism_study/run_corrector_curve.sh`, picked by a
 `STAGE` variable. It carries its own disk guard, its own device guard and a CUDA probe, so a
 faulted card or a device another user just took is refused rather than run on. Which card takes
-which python build is owned by [nodes](../../environment/hpc/nodes.md); how to pick a free device
-is [launching a run § 1](launching-and-harvesting-a-run.md#1-decide-where-a-run-goes).
+which python build is owned by [nodes](../../environment/hpc/nodes.md); how to pick a free device,
+once the owner has said yes, is [launching a run § 2](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device).
 
 **What the corrector is, said once.** At each of the 50 noise levels it takes `k` small steps
 along the product-of-experts score with a little fresh noise each time, then takes the ordinary
@@ -53,6 +53,7 @@ the kick is the fresh noise in each of the `k` steps. Background: [Langevin dyna
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-prove-the-corrector-is-off-when-it-is-switched-off) ➡️
 
+- [ ] 🖥️ **The owner has said yes to this SSH launch.** New GPU work goes through `sbatch`. A recipe below that starts a process with `nohup` records how a past run was launched, and running it again needs the owner's yes through `python3 scripts/progress_board.py ask`.
 - [ ] 🖥️ **The composer and its two drivers are on this branch**
   ```bash
   ls /home-mscluster/mmolefe/Playground/PhD/concept-composition/poe_repair/methods/_poe_langevin.py \
@@ -106,7 +107,7 @@ corrector that ignores its own window: at zero steps there is nothing to ignore.
 
 Navigation: ⬅️ [Previous](#1-prove-the-corrector-is-off-when-it-is-switched-off) | 📋 [TOC](#table-of-contents) | [Next](#3-run-the-corrector-count-grid-and-print-its-verdict) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 `ran 2026-09-05` (mscluster108 device 1, about 9 to 19 minutes per value)
 
@@ -153,7 +154,7 @@ rather than a bug.
 
 Navigation: ⬅️ [Previous](#2-fix-the-step-size-before-reading-any-curve) | 📋 [TOC](#table-of-contents) | [Next](#4-slide-a-corrector-window-across-the-run) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 `ran 2026-09-05 and 06` (mscluster110 device 0 for one step size, mscluster108 and mscluster85 for the others)
 
@@ -167,7 +168,7 @@ by two pairs by 50 steps, 600 rows, no images and no detector.
 
 | What | Example | Where to get it |
 |---|---|---|
-| node and device | `mscluster110`, `0` | a free device, per [launching a run § 1](launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) |
+| node and device | `mscluster110`, `0` | a free device, per [launching a run § 2](launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) |
 | step size | `--c 3` | recipe 2's pick, checked against its render |
 | pair | `--pairs a_cat__x__a_dog` | one pair per process keeps a whole pair on one device, which the fp16 spread makes necessary |
 
@@ -205,7 +206,7 @@ fills only what is missing.
 
 Navigation: ⬅️ [Previous](#3-run-the-corrector-count-grid-and-print-its-verdict) | 📋 [TOC](#table-of-contents) | [Next](#5-render-the-eight-seed-sheets-the-adapter-tail-and-the-clean-tail) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 `ran 2026-09-05 and 06` (mscluster108 device 1, about 1.6 hours)
 
@@ -229,7 +230,7 @@ Each window render is about 2 minutes on that card and the all-50 column about 7
 
 Navigation: ⬅️ [Previous](#4-slide-a-corrector-window-across-the-run) | 📋 [TOC](#table-of-contents) | [Next](#6-draw-the-figures-and-log-the-set-to-wb) ➡️
 
-⚠️ Starts a GPU job on the cluster, so do [Before any of these](#before-any-of-these) first.
+⚠️ Starts a GPU job outside Slurm, so it needs the owner's yes. Do [Before any of these](#before-any-of-these) first.
 
 `ran 2026-09-06` (sheets on mscluster108 device 1, both tails on mscluster85 device 0)
 

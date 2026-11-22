@@ -4,7 +4,7 @@ For a figure made outside this repo (an image generator, a screenshot) whose lab
 
 The rule every figure meets is on [the layout sheet](../../1-lora-correction/report/paper-review/layout-sheet.md#before-a-slot-is-called-finished): 8 pt labels, 9 pt titles, a Times-matching serif, drawn at the final width. The two-panel recipe beside this one, [composing a two-panel figure](composing-a-two-panel-figure-in-inkscape.md), covers placing and exporting in more depth.
 
-Recipes 1, 2, 4 and 6 give a "You want:" line as their success check. Recipes 3 and 5 state none yet.
+Recipes 1, 2, 4 and 6 give a ✅ line as their success check. Recipes 3 and 5 state none yet.
 
 ## Table of contents
 
@@ -38,7 +38,7 @@ Navigation: ⬅️ [Previous](#fill-in) | 📋 [TOC](#table-of-contents) | [Next
 2. Display units and page size units: **in**. Width: the printed width from the table. Leave height for step 3.
 3. Close the dialog.
 
-You want: the white page rectangle at that width; the ruler along the top reads up to it.
+✅ Expected: the white page rectangle at that width; the ruler along the top reads up to it.
 
 ## 2. Bring in the artwork without its text
 
@@ -50,7 +50,7 @@ Navigation: ⬅️ [Previous](#1-set-the-page-to-the-printed-width) | 📋 [TOC]
 2. With the image selected, type its width in the toolbar's **W** box as the printed width, with the lock on so height follows.
 3. Remove the baked-in words. Easiest: regenerate the image without any text in it. Otherwise, cover each word with a rectangle filled with the background colour (**Rectangle tool**, F4; pick the colour with the Dropper, F7).
 
-You want: the artwork filling the page width, no words left in it.
+✅ Expected: the artwork filling the page width, no words left in it.
 What failure looks like: the image is under 300 pixels per inch of printed width (Figure 1 needs at least 1,635 px across); it will print soft, so regenerate it larger.
 
 ## 3. Fit the page to the artwork
@@ -72,7 +72,7 @@ Navigation: ⬅️ [Previous](#3-fit-the-page-to-the-artwork) | 📋 [TOC](#tabl
 3. Use the names the tables use: joint, PoE, CO3, ours; "cat and dog", not slugs.
 4. Align with **Object → Align and Distribute** (Ctrl+Shift+A), never by eye.
 
-You want: labels the same height as the paper's caption text when the page is viewed at 100% zoom.
+✅ Expected: labels the same height as the paper's caption text when the page is viewed at 100% zoom.
 
 ## 5. Export the PDF
 
@@ -96,7 +96,7 @@ Tell Claude the file is there. It switches the `\includegraphics` in `writing/re
 python3 1-lora-correction/scripts/figure_text_audit.py
 ```
 
-You want: the figure's row reads a measured size of at least 7 pt (8 for labels) and PASS, with no "OCR estimate".
+✅ Expected: the figure's row reads a measured size of at least 7 pt (8 for labels) and PASS, with no "OCR estimate".
 What failure looks like: "no text found" means the text was converted to paths in step 5; save again with Embed fonts.
 
 Provenance: unverified (written 2026-11-11 from the Inkscape 1.x menus and this repo's audit script; not yet walked end to end).

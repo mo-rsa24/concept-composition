@@ -94,7 +94,7 @@ Navigation: ⬅️ [Why the project cares](#why-the-project-cares) | 📋 [TOC](
 
 Navigation: ⬅️ [How it shows up in the data](#how-it-shows-up-in-the-data) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
-**The pair count is not settled across the repo's own documents.** ⚠️
+**The pair count is not settled across the repo's own documents.** ⚠️ ✅
 
 `1-lora-correction/report/experiments-log.md` (its axes table) says "17 in the current pool, plus a new spread set built in
 EXP-02" (EXP-02 status: pending). `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md` lists exactly 17
@@ -123,6 +123,7 @@ Navigation: ⬅️ [What people get wrong](#what-people-get-wrong) | 📋 [TOC](
 | The butterfly control pair and the animal-pair boundary | Read in `plans/standing/retrofit-poe-repair-min.md`, "Words this uses" | 2026-08-24 |
 | The six-group taxonomy and its representative pairs | Read in `artifacts/plans/archived/phases/09-lora-taxonomy-single-seed.md` | 2026-08-24 |
 | Pair vs seed, which is the harder test | Read in `MASTER_PLAN.md`, Glossary | 2026-08-24 |
+| The pair count across documents, 17 or 20 | Read in `1-lora-correction/report/experiments-log.md` (axes table), `plans/standing/retrofit-poe-repair-min.md` (line 59) and the cluster checkout's `fail_rate.md`, which lists 17 pairs and is absent from the laptop | 2026-11-22 |
 
 <!-- related:start (drain) -->
 <a id="in-pictures-code-and-further-reading"></a>

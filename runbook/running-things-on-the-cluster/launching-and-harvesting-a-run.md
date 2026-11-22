@@ -27,12 +27,14 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#2-launch-on-a-shared-device
 sitting
 
 GPU work goes through `sbatch`, inside the administrator's caps of one `biggpu` job and six
-`bigbatch` jobs per user. In order, stop at the first match:
+`bigbatch` jobs per user. In order, stop at the first match.
+
+⚠️ The `sbatch` line starts a real job on the cluster, so check the partition and time limit in its header first.
 
 ```bash
-squeue -u mmolefe    # your own interactive job on biggpu? run inside it
-sinfo -p biggpu      # idle biggpu node and your one biggpu job slot free? use biggpu, else bigbatch
-scripts/cluster.sh run "sbatch scripts/<job>.sbatch"   # from the laptop; its header names the partition
+scripts/cluster.sh sh "squeue -u mmolefe"   # your own interactive job on biggpu? run inside it
+scripts/cluster.sh sh "sinfo -p biggpu"     # idle biggpu node and your one biggpu job slot free? use biggpu, else bigbatch
+scripts/cluster.sh run "sbatch scripts/<job>.sbatch"   # commit first; its header names the partition
 ```
 
 ✅ Expected: `squeue` lists your own jobs, `sinfo` shows node states, and `sbatch` prints
@@ -176,6 +178,6 @@ No recorded output of these three commands is on this page, and each section is 
 Navigation: ⬅️ [Previous](#in-pictures-code-and-further-reading) | 📋 [TOC](#table-of-contents)
 
 - The mention of **SSH launch**, whose relative paths resolve in `$HOME` and kill the run before `nohup` starts, in [the failure catalog entry poe-launch-001](../../environment/known-failures.md#entry-id-poe-launch-001).
-- The mention of **one-job-per-user rule**, kept by starting long jobs with `nohup` and checking them with `pgrep`, in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), third outcome.
+- The mention of **one-job-per-user rule** in [the PRZE-10 compute plan](../../1-lora-correction/report/paper-review/prze-10-compute.md), whose third outcome starts long jobs with `nohup` and checks them with `pgrep`, a route that needs the owner's yes.
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

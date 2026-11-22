@@ -17,7 +17,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#themes) ➡️
 | I want to... | Go to |
 |---|---|
 | See whether the plan tree has drifted (stale run claims, unharvested output, orphaned files, unjudged reviews) | [checking-the-plan-tree.md §1](checking-the-plan-tree.md#1-run-the-state-check) |
-| Decide whether to submit a job or SSH onto a shared node | [launching-and-harvesting-a-run.md §1](running-things-on-the-cluster/launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) |
+| Decide where a run goes: `sbatch`, or an SSH launch the owner has approved | [launching-and-harvesting-a-run.md §1](running-things-on-the-cluster/launching-and-harvesting-a-run.md#1-decide-where-a-run-goes) |
 | Launch something on a shared half-used `biggpu` node, once the owner has said yes | [launching-and-harvesting-a-run.md §2](running-things-on-the-cluster/launching-and-harvesting-a-run.md#2-launch-on-a-shared-device) |
 | Find every run in flight, including the ones Slurm can't see | [launching-and-harvesting-a-run.md §3](running-things-on-the-cluster/launching-and-harvesting-a-run.md#3-harvest-what-is-running) |
 | Serve a static scene from `artifacts/scenes/` in a tmux session | [showing-a-scene-in-the-local-browser.md §1](looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md#1-serve-the-scenes-folder-from-a-tmux-session) |
@@ -37,7 +37,7 @@ Navigation: 📋 [TOC](#table-of-contents) | [Next](#themes) ➡️
 | Build the Reduce, Reuse, Recycle 2D notebook's CUDA jax environment on a cluster GPU node | [setting-up-the-reduce-reuse-recycle-code.md §7](setting-up-the-reduce-reuse-recycle-code.md#7-build-the-2d-notebooks-environment-on-the-cluster---ran-2026-10-13) |
 | Render the 8 held-out cat x dog seeds from one pooled-LoRA checkpoint, with the scorer's verdict on every tile | [probing-a-pooled-lora-checkpoint.md §1](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#1-render-the-8-seed-held-out-grid-for-one-checkpoint---ran-2026-09-03) |
 | Measure how well a checkpoint fits the cached correction, per pair and step bucket, with no sampling | [probing-a-pooled-lora-checkpoint.md §2](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#2-measure-how-well-a-checkpoint-fits-the-cached-correction---ran-2026-09-03) |
-| Resume a pooled (PoE) training from a checkpoint on whichever device is free | [probing-a-pooled-lora-checkpoint.md §3](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) |
+| Resume a pooled (PoE) training from a checkpoint on a free device, once the owner has approved an SSH launch | [probing-a-pooled-lora-checkpoint.md §3](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#3-resume-a-pooled-training-from-a-checkpoint-on-a-free-device---ran-2026-09-01) |
 | Train two ranks at once on an idle node with one Slurm job | [probing-a-pooled-lora-checkpoint.md §4](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md#4-train-two-ranks-on-one-idle-node-with-one-slurm-job---ran-2026-09-01) |
 | Estimate how long a training run will take before launching it | [how long a training run takes](../environment/hpc/throughput.md#projected-durations-for-experiments-a-and-b) |
 | Prove the Langevin corrector is off when it is switched off | [running-the-langevin-corrector.md §1](running-things-on-the-cluster/running-the-langevin-corrector.md#1-prove-the-corrector-is-off-when-it-is-switched-off) |
@@ -74,7 +74,7 @@ straight at the recipe that answers it.
 
 | File | One place, one purpose | Recipes |
 |---|---|---|
-| [launching-and-harvesting-a-run.md](running-things-on-the-cluster/launching-and-harvesting-a-run.md) | A `biggpu` node over SSH: pick a device, launch with `nohup`, find what is running | 3 |
+| [launching-and-harvesting-a-run.md](running-things-on-the-cluster/launching-and-harvesting-a-run.md) | Submit through `sbatch`, launch over SSH only with the owner's yes, and find what is running | 3 |
 | [reproducing-where-each-condition-lands.md](running-things-on-the-cluster/reproducing-where-each-condition-lands.md) | The landing figures and their animated page, from renders to `dist/` | 5 (4 `ran`, 1 `unverified`) |
 | [running-the-langevin-corrector.md](running-things-on-the-cluster/running-the-langevin-corrector.md) | The Langevin corrector of scope 06, on a `biggpu` device or the session node: the two leak checks, the step-size search, the corrector-count grid and its verdict, the sliding window, the eight-seed sheets and the two adapter tails, the figures and the W&B log | 6 (all `ran`) |
 | [probing-a-pooled-lora-checkpoint.md](running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md) | A `biggpu` device or one Slurm job: render a pooled checkpoint's held-out grid, read its fit on the cache, resume or launch a pooled training | 4 (all `ran`) |
@@ -116,8 +116,9 @@ Navigation: ⬅️ [Previous](#themes) | 📋 [TOC](#table-of-contents)
 - **No diagram prompts exist for this folder.**
 - **The screenshot places in `reading-a-training-run.md` are empty.** They want captured W&B
   panels, or the local wandb-API figures in that file's section 3.
-- **The three recipes in `launching-and-harvesting-a-run.md` are `unverified`.** They were
-  transcribed on 2026-08-24 from `environment/hpc/execution-protocol.md`, and the next real launch or harvest
+- **The three recipes in `launching-and-harvesting-a-run.md` are `unverified`.** Section 1 was
+  written on 2026-11-22 and sections 2 and 3 transcribed on 2026-08-24, all from
+  `environment/hpc/execution-protocol.md`, and the next real launch or harvest
   should upgrade them via `--capture`.
 - **Which Inkscape recipe has been run is not recorded.** An earlier count named 1 of the 10 as
   run without saying which, so all 10 carry `unverified` until that is known.

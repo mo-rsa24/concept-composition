@@ -13,6 +13,7 @@ have to ask what a word means, the line was wrong, not the reader.
 - [Replaced everywhere, including file and folder names](#replaced-everywhere-including-file-and-folder-names)
 - [Kept, because the field genuinely calls it that](#kept-because-the-field-genuinely-calls-it-that)
 - [Not changed, and why](#not-changed-and-why)
+- [Where this came from](#where-this-came-from)
 
 ## Replaced everywhere, including file and folder names
 
@@ -73,10 +74,18 @@ to count as having done nothing.
 
 ## Not changed, and why
 
-Navigation: ⬅️ [Previous](#kept-because-the-field-genuinely-calls-it-that) | 📋 [TOC](#table-of-contents)
+Navigation: ⬅️ [Previous](#kept-because-the-field-genuinely-calls-it-that) | 📋 [TOC](#table-of-contents) | [Next](#where-this-came-from) ➡️
 
 Code identifiers keep their names. `ax.spines` and `.bar()` are matplotlib's API, so renaming them
 breaks plotting, and the internal names in `poe_repair/` are a separate refactor with test
 coverage behind it. A word can therefore appear in a script and not in the prose that describes it.
+
+## Where this came from
+
+Navigation: ⬅️ [Not changed, and why](#not-changed-and-why) | 📋 [TOC](#table-of-contents)
+
+| What | How it was established | When |
+|---|---|---|
+| The replaced terms, the kept terms and the rule behind them | Written by the plain-words rewrite, commit `85ac7066` | 2026-08-30 |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->
