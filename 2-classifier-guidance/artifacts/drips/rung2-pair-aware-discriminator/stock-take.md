@@ -65,7 +65,7 @@ As a judge of finished pictures it is far better than the readout checker. On SD
 Before step 10 the guess holds no second animal, so no picture judge can read it.
 
 As a push it left the layout as plain PoE on 7 or 8 of 8 seeds, in all three versions, while raising its own
-score ([all pushes compared](../../results/does-a-small-discriminator-steer-cat-x-dog/push-sheets-compared.png)).
+score (all pushes compared).
 Its gradient passes back through the picture decoder and reaches texture; the readout checker's gradient comes
 from SDXL's own features and reaches the layout. The fine-tuned network is a good judge and a poor steering wheel.
 

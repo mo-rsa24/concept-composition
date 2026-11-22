@@ -171,8 +171,8 @@ joint prompt's render than `x_pos` alone (mean absolute pixel difference, 0 to 2
 
 ## 6. Classifier guidance
 
-<a href="../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-big-multipair-cap0.4/faithful-and-damaged-sample.png"><img src="../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-catdog-big-multipair-cap0.4/faithful-and-damaged-sample.png" width="200" alt="Cat × dog under the kept push: two rows of faithful pairs, one row of misses (a cat beside a sack, two cats, a flat cartoon)"></a>
-<a href="../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-lion-meerkat-multipair-cap0.4/pushed-tiles-with-scores.png"><img src="../../../2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet-lion-meerkat-multipair-cap0.4/pushed-tiles-with-scores.png" width="200" alt="Lion × meerkat under the same push, 16 seeds: two bodies on most, but two meerkats or a lion-meerkat hybrid, never a clean lion beside a meerkat"></a>
+`faithful-and-damaged-sample.png` is not shown because it failed the subject check
+`pushed-tiles-with-scores.png` is not shown because it failed the subject check
 
 **Best number.** On SDXL cat × dog, the kept recipe (a pair-aware checker trained on 243 pairs,
 pushing at strength 30, capped at 0.4 of the product prediction's norm, steps 0 to 15, then plain
