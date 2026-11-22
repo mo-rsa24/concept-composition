@@ -54,7 +54,10 @@ These rates were scored by the strength-sweep script, which never reads a `__cmp
 
 Navigation: ⬅️ [Previous](#what-the-curve-under-the-grid-counts) | 📋 [TOC](#table-of-contents) | [Next](#the-four-model-grid) ➡️
 
-<a href="../../artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png"><img src="../../artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png" width="200" alt="Four rows by six columns at strengths 0, 0.5, 0.6, 0.65, 0.75 and 1. The top row shows a cat and a dog from 0.6 onward. The control rows stay single fused animals."></a>
+> [!NOTE]
+> The six-column grid is not shown here because a full-resolution check could not clear its wrong-seed and
+> wrong-pair rows against the subjects the [pair ledger](../../../artifacts/_shared/cross_pair_pool_configs/pair_ledger.md) keeps off sheets. The file stays at
+> `1-lora-correction/artifacts/results/measuring-composition/the-grids/how-big-the-strength-grid-should-be/strength-grid-six-columns.png`.
 
 **At strengths 0.6 and 0.65 the real-correction row already holds a cat and a dog** `verified`, while the
 wrong-pair, wrong-seed and wrong-order rows stay single fused animals. The eight new tiles at those two
