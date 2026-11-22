@@ -1,0 +1,123 @@
+{
+  "title": "One CO3 render of 50 steps: what the paper states and what the released script runs",
+  "before": {
+    "label": "The paper's settings",
+    "boxes": [
+      {
+        "id": "a",
+        "title": "Steps 1 to 3",
+        "sub": "resample, 5 rounds each",
+        "col": 0,
+        "row": 0
+      },
+      {
+        "id": "b",
+        "title": "Steps 4 to 10",
+        "sub": "correct, 5 rounds each",
+        "col": 1,
+        "row": 0
+      },
+      {
+        "id": "c",
+        "title": "Steps 11 to 50",
+        "sub": "ordinary DDIM step",
+        "col": 2,
+        "row": 0
+      },
+      {
+        "id": "d",
+        "title": "Guidance",
+        "sub": "DDIM at 5.0",
+        "col": 0,
+        "row": 1
+      },
+      {
+        "id": "e",
+        "title": "Corrector",
+        "sub": "guidance 5.0",
+        "col": 1,
+        "row": 1
+      },
+      {
+        "id": "f",
+        "title": "Concept weight",
+        "sub": "beta 0.8",
+        "col": 2,
+        "row": 1
+      }
+    ],
+    "arrows": [
+      [
+        "a",
+        "b"
+      ],
+      [
+        "b",
+        "c"
+      ]
+    ],
+    "problems": [
+      {
+        "box": "e",
+        "note": "code allows 0 to 1"
+      }
+    ]
+  },
+  "after": {
+    "label": "The released script",
+    "boxes": [
+      {
+        "id": "a2",
+        "title": "Steps 1 to 3",
+        "sub": "resample, 10, 10, then 5 rounds",
+        "col": 0,
+        "row": 0
+      },
+      {
+        "id": "b2",
+        "title": "Steps 4 to 6",
+        "sub": "correct, 5 rounds each",
+        "col": 1,
+        "row": 0
+      },
+      {
+        "id": "c2",
+        "title": "Steps 7 to 50",
+        "sub": "ordinary CFG++ step",
+        "col": 2,
+        "row": 0
+      },
+      {
+        "id": "d2",
+        "title": "Guidance",
+        "sub": "CFG++ at 0.8",
+        "col": 0,
+        "row": 1
+      },
+      {
+        "id": "e2",
+        "title": "Corrector",
+        "sub": "guidance 0.8",
+        "col": 1,
+        "row": 1
+      },
+      {
+        "id": "f2",
+        "title": "Concept weight",
+        "sub": "beta 0.9",
+        "col": 2,
+        "row": 1
+      }
+    ],
+    "arrows": [
+      [
+        "a2",
+        "b2"
+      ],
+      [
+        "b2",
+        "c2"
+      ]
+    ]
+  }
+}

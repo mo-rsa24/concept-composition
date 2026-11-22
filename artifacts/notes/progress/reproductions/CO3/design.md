@@ -30,7 +30,7 @@ The paper states its settings in section 4.1 and appendix A.4. The script its RE
 | Steps corrected | 10 (the first 20%) | 6 |
 | Weight modulation β | 0.8 | 0.9 |
 | Resampling steps | 3 | 3 |
-| Corrector iterations per step | 5 | 5 |
+| Corrector iterations per step | 5 | 10 on the first 2 steps, hard-coded in `Co3.py`, then 5 |
 | Corrector guidance `lmda` | λ̃ = λ, so 5.0 | 0.8 |
 
 The code does not settle this. Its corrector re-noises with the unconditional prediction whatever the sampler is, which is the
