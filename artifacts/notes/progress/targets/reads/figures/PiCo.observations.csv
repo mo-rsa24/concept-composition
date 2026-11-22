@@ -1,0 +1,162 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+2,4,T2I-CompBench,Stable Diffusion,A blue apple and a green vase,mixed,two clear things,"One tile has a green apple in a blue bowl with no vase, and the other has a green vase with teal and green apples."
+2,4,T2I-CompBench,AttendExcite,A blue apple and a green vase,fails,two clear things,"An apple and vase are separate, but the apple is green or yellow and the vase is teal or purple."
+2,4,T2I-CompBench,BoxDiff,A blue apple and a green vase,fails,two clear things,"An apple and vase are separate, but no apple is blue: one is orange-yellow and one is green."
+2,4,T2I-CompBench,GORS,A blue apple and a green vase,fails,two clear things,"The colours swap or leak, with green apples beside a teal or blue vase."
+2,4,T2I-CompBench,Magnet,A blue apple and a green vase,mixed,two clear things,"One tile has a green vase and blue-green apple, and the other has a blue vase, green apple and an extra globe."
+2,4,T2I-CompBench,PiCo,A blue apple and a green vase,succeeds,two clear things,Both tiles show a dark blue apple and a separate green vase.
+2,4,T2I-CompBench,Stable Diffusion,a plastic bottle and a leather jacket,mixed,two bodies or heads,"Bottles and a jacket are both there, but the bottles look pasted onto the jacket's front."
+2,4,T2I-CompBench,AttendExcite,a plastic bottle and a leather jacket,mixed,two bodies or heads,"One tile pushes a yellow bottle into a small jacket, and the other has a separate jacket with a bottle that looks like glass."
+2,4,T2I-CompBench,BoxDiff,a plastic bottle and a leather jacket,fails,two bodies or heads,"One tile has a malformed red and green bottle shape, and the other splits into panels with boots, a jacket and a bag."
+2,4,T2I-CompBench,GORS,a plastic bottle and a leather jacket,fails,one thing,Both tiles show only a leather jacket and no bottle.
+2,4,T2I-CompBench,Magnet,a plastic bottle and a leather jacket,fails,one thing,Both tiles show only a leather jacket and no bottle.
+2,4,T2I-CompBench,PiCo,a plastic bottle and a leather jacket,succeeds,two clear things,Both tiles show a leather jacket with a whole plastic bottle lying on its front.
+2,4,T2I-CompBench,Stable Diffusion,a small bagel and a rectangular sandwich,fails,fused hybrid,"Both tiles merge bagel and sandwich into one round filled bread, with no rectangular sandwich."
+2,4,T2I-CompBench,AttendExcite,a small bagel and a rectangular sandwich,mixed,two clear things,"Bagels and a sandwich are separate, but one tile shows three bagels and the other a long baguette."
+2,4,T2I-CompBench,BoxDiff,a small bagel and a rectangular sandwich,mixed,two bodies or heads,"One tile has a bagel and a rolled wrap, and the other has a filled bagel pressed against a bread slice."
+2,4,T2I-CompBench,GORS,a small bagel and a rectangular sandwich,fails,fused hybrid,"One tile is a single round bagel burger, and the other has bagels with a filled bagel and no rectangular sandwich."
+2,4,T2I-CompBench,Magnet,a small bagel and a rectangular sandwich,mixed,fused hybrid,"One tile is a single round bagel burger, and the other has separate bagels and a rectangular sandwich."
+2,4,T2I-CompBench,PiCo,a small bagel and a rectangular sandwich,mixed,two clear things,"A rectangular sandwich is clear in both tiles, with a ring bagel in one and a holeless bun cut by the frame in the other."
+2,4,T2I-CompBench,Stable Diffusion,a tall lighthouse and a short bench,succeeds,two clear things,Both tiles show a lighthouse and a separate bench.
+2,4,T2I-CompBench,AttendExcite,a tall lighthouse and a short bench,succeeds,two clear things,Both grey tiles show a tall lighthouse with a low bench in front.
+2,4,T2I-CompBench,BoxDiff,a tall lighthouse and a short bench,fails,two clear things,"One tile splits into a scene above a blue band, and the other shows a lighthouse beside a table-like post with no bench."
+2,4,T2I-CompBench,GORS,a tall lighthouse and a short bench,mixed,two clear things,"One tile has a lighthouse and a large bench, and the other has only a lighthouse."
+2,4,T2I-CompBench,Magnet,a tall lighthouse and a short bench,succeeds,two clear things,Both tiles show a lighthouse with a small bench nearby.
+2,4,T2I-CompBench,PiCo,a tall lighthouse and a short bench,succeeds,two clear things,"Both tiles show a lighthouse and a separate bench, with the bench chair-like and cut by the frame in one."
+2,4,T2I-CompBench,Stable Diffusion,a squirrel and a bird and a yellow candle,fails,two clear things,Both tiles show a squirrel and a candle and no bird.
+2,4,T2I-CompBench,AttendExcite,a squirrel and a bird and a yellow candle,mixed,two bodies or heads,"One cartoon tile tangles the squirrel with a black and white bird shape, and the other has all three."
+2,4,T2I-CompBench,BoxDiff,a squirrel and a bird and a yellow candle,mixed,two clear things,"One tile has no bird, and the other has a blurred blue bird on the squirrel beside a candle."
+2,4,T2I-CompBench,GORS,a squirrel and a bird and a yellow candle,fails,two clear things,Both tiles show a squirrel and a candle and no bird.
+2,4,T2I-CompBench,Magnet,a squirrel and a bird and a yellow candle,fails,two clear things,Both tiles show a squirrel and a candle and no bird.
+2,4,T2I-CompBench,PiCo,a squirrel and a bird and a yellow candle,succeeds,two clear things,"Both tiles contain a squirrel, a small bird and a yellow candle, with the candle unlit in one."
+3,6,PiCo control-duration ablation,No control,A green apple and a yellow banana,fails,fused hybrid,A green apple sits beside a pear-like green shape that runs into a yellow banana.
+3,6,PiCo control-duration ablation,PiCo with control until step 5,A green apple and a yellow banana,fails,one thing,Two green apples appear and no banana.
+3,6,PiCo control-duration ablation,PiCo with control until step 15,A green apple and a yellow banana,succeeds,two clear things,A green apple and a yellow banana are clear and apart.
+3,6,PiCo control-duration ablation,PiCo with control until step 25,A green apple and a yellow banana,succeeds,two clear things,A green apple and a yellow banana are clear and apart.
+3,6,PiCo control-duration ablation,PiCo with control until step 50,A green apple and a yellow banana,mixed,two clear things,"The apple and banana are apart, but the banana's skin shows dark streaks and a distorted tip."
+3,6,PiCo control-duration ablation,No control,A green bench and a brown dog,fails,two bodies or heads,A dog's body lies along the bench on white legs and a second dog's head enters at the edge.
+3,6,PiCo control-duration ablation,PiCo with control until step 5,A green bench and a brown dog,mixed,two clear things,"A dog stands before a green bench, but its body is mostly white."
+3,6,PiCo control-duration ablation,PiCo with control until step 15,A green bench and a brown dog,mixed,two clear things,A green bench appears with two brown dogs when one was asked for.
+3,6,PiCo control-duration ablation,PiCo with control until step 25,A green bench and a brown dog,succeeds,two clear things,One brown dog sits apart from a green bench.
+3,6,PiCo control-duration ablation,PiCo with control until step 50,A green bench and a brown dog,mixed,two bodies or heads,"The bench is clear, but the dog degrades into a brown shape with a pink streak and no readable face."
+4,6,PiCo mask-strength ablation,No control,A brown bird and a green apple,fails,two clear things,"A dark bird and a green bird perch above an orange apple, so the apple's colour is wrong."
+4,6,PiCo mask-strength ablation,PiCo with mask strength 1,A brown bird and a green apple,fails,two clear things,The apple stays orange and small green birds appear beside the dark bird.
+4,6,PiCo mask-strength ablation,PiCo with mask strength 15,A brown bird and a green apple,succeeds,two clear things,A brown bird on a branch and a green-yellow apple are clear and apart.
+4,6,PiCo mask-strength ablation,PiCo with mask strength 50,A brown bird and a green apple,fails,fused hybrid,The scene collapses into one small yellow-green and white blob with no readable bird or apple.
+4,6,PiCo mask-strength ablation,No control,A blue bear and a brown boat,fails,two bodies or heads,"A brown teddy in a blue shirt and a black bear share a boat, and no bear is blue."
+4,6,PiCo mask-strength ablation,PiCo with mask strength 1,A blue bear and a brown boat,fails,two bodies or heads,"The same brown teddy and black bear remain in the boat, and the black bear loses its face."
+4,6,PiCo mask-strength ablation,PiCo with mask strength 15,A blue bear and a brown boat,succeeds,two clear things,"One blue bear sits in a brown boat, with an extra wooden block at the bow."
+4,6,PiCo mask-strength ablation,PiCo with mask strength 50,A blue bear and a brown boat,fails,fused hybrid,The bear dissolves into a speckled blue and white blob above an empty boat.
+6,8,PiCo noise-score ablation,"PiCo noise selection, both scores",A yellow bowl and a blue cat,succeeds,two clear things,"A blue cat sits in a yellow bowl, with an extra small blue pot."
+6,8,PiCo noise-score ablation,PiCo noise selection without the ITM score,A yellow bowl and a blue cat,mixed,two clear things,A dark blue cat sits in a yellow bowl beside an unrequested yellow jug.
+6,8,PiCo noise-score ablation,PiCo noise selection without the concept score,A yellow bowl and a blue cat,mixed,two clear things,"A yellow plate and blue bowl are present, but the cat is mostly grey-white."
+6,8,PiCo noise-score ablation,Candidate noises not selected,A yellow bowl and a blue cat,mixed,two clear things,"One candidate has a grey cat and teal dish, and another has a blue cat in an orange dish with a small yellow cup."
+6,8,PiCo noise-score ablation,"PiCo noise selection, both scores",A blue cup and a red vase,succeeds,two clear things,A blue jug-shaped cup and a separate red vase are clear.
+6,8,PiCo noise-score ablation,PiCo noise selection without the ITM score,A blue cup and a red vase,mixed,two clear things,A red cup and red vase appear with a blue cylinder cut off by the frame.
+6,8,PiCo noise-score ablation,PiCo noise selection without the concept score,A blue cup and a red vase,fails,two bodies or heads,"A red round form on a stem stands beside a grey-blue jug, with no clear red vase."
+6,8,PiCo noise-score ablation,Candidate noises not selected,A blue cup and a red vase,mixed,two clear things,"One candidate shows a blue cylinder, red vase and extra red bowl, and another cuts the red object off at the frame."
+7,8,PiCo mask-type ablation,PiCo,A blue apple and a green vase,succeeds,two clear things,A blue apple sits in front of a separate green vase with leaves.
+7,8,PiCo mask-type ablation,PiCo without the exclusive mask,A blue apple and a green vase,mixed,two clear things,"The blue apple and green vase are present, with an extra small cup that was not asked for."
+7,8,PiCo mask-type ablation,PiCo without the concept mask,A blue apple and a green vase,fails,one thing,A green apple sits in a blue bowl and there is no vase.
+7,8,PiCo mask-type ablation,No control,A blue apple and a green vase,fails,one thing,A green apple sits in a blue bowl and there is no vase.
+8,8,PiCo conflict-elimination ablation,PiCo,a white dog wearing a yellow sunglasses,succeeds,two clear things,A realistic white dog wears yellow sunglasses.
+8,8,PiCo conflict-elimination ablation,PiCo without conflict elimination,a white dog wearing a yellow sunglasses,mixed,two bodies or heads,"The dog wears oversized sunglasses, but its body turns into a white jacket-like cloth shape."
+9,9,PiCo mask-validation example,PiCo without mask validation,blue cat and brown suitcase (the two concept labels printed),fails,one thing,A blue cat sits with small scraps at its feet and no suitcase.
+9,9,PiCo mask-validation example,PiCo,blue cat and brown suitcase (the two concept labels printed),succeeds,two clear things,"A blue cat sits on a dark suitcase lid at the bottom of the picture, against a wooden wall."
+10,11,PiCo control-stage example,Stable Diffusion,Bagel and sandwich (prompt not printed in the figure),fails,fused hybrid,"A large round bread fuses bagel and sandwich filling, with a second bagel behind it."
+10,11,PiCo control-stage example,PiCo with mask control from t=25,Bagel and sandwich (prompt not printed in the figure),fails,fused hybrid,The same fused round bread remains with small changes to the filling.
+10,11,PiCo control-stage example,PiCo with mask control from t=38,Bagel and sandwich (prompt not printed in the figure),fails,fused hybrid,The bread is still one fused round form with altered crust and sauce.
+10,11,PiCo control-stage example,PiCo,Bagel and sandwich (prompt not printed in the figure),succeeds,two clear things,A rectangular layered sandwich sits apart from a ring bagel.
+11,11,PiCo control-stage example,Stable Diffusion,Pink cat and brown sheep (prompt not printed in the figure),fails,one thing,"Two sheep appear, one with pink ears and one with pink wool, and no cat."
+11,11,PiCo control-stage example,PiCo with mask control from t=25,Pink cat and brown sheep (prompt not printed in the figure),fails,one thing,"Two sheep remain, and the right sheep's face becomes a dark smear."
+11,11,PiCo control-stage example,PiCo with mask control from t=38,Pink cat and brown sheep (prompt not printed in the figure),fails,one thing,Two sheep remain with altered wool and no cat.
+11,11,PiCo control-stage example,PiCo,Pink cat and brown sheep (prompt not printed in the figure),succeeds,two clear things,A pink cat sits beside a separate tan sheep.
+12,12,PiCo CLIPSeg colour-bias examples,Generator not named in the figure,"a fluffy white cat, a sleek black dog, and a gray rabbit",fails,one thing,"Three cats appear, grey, white and black-and-white, with no dog and no rabbit."
+12,12,PiCo CLIPSeg colour-bias examples,Generator not named in the figure,a yellow dog and a black cat,fails,one thing,"A yellow dog lies beside a black dog in a yellow collar, and there is no cat."
+12,12,PiCo CLIPSeg colour-bias examples,Generator not named in the figure,a purple eggplant and a pink rose,fails,one thing,"Pink roses and one purple-pink rose appear, and there is no eggplant."
+12,12,PiCo CLIPSeg colour-bias examples,Generator not named in the figure,a red car and a blue bike,fails,one thing,"A red car and a blue car appear, and there is no bike."
+13,12,"SDXL, two prompts",SDXL,a green apple and a brown bird,mixed,two clear things,"A green apple and a bird are separate, but the bird's feathers are largely green."
+13,12,"SDXL, two prompts",PiCo,a green apple and a brown bird,succeeds,two clear things,"A green apple and a mostly brown bird are separate, with a small teal patch on the wing."
+13,12,"SDXL, two prompts",SDXL,a plastic bottle and a leather jacket,fails,one thing,Only a leather jacket appears.
+13,12,"SDXL, two prompts",PiCo,a plastic bottle and a leather jacket,mixed,two clear things,"A jacket appears with a small bottle at its hem, and the bottle looks metallic and not plastic."
+14,13,PiCo noise-selection examples,"PiCo noise selection, chosen seeds",A brown cat and a gold clock,succeeds,two clear things,"Both chosen seeds show a brown cat beside a gold clock, with the cat pressed against the clock in one."
+14,13,PiCo noise-selection examples,"PiCo noise selection, rejected seeds",A brown cat and a gold clock,mixed,two bodies or heads,"Several rejected seeds are clean, while others place the cat inside the clock face or enlarge the cat's face around a tiny clock."
+14,13,PiCo noise-selection examples,"PiCo noise selection, chosen seeds",A blue cup and a red vase,succeeds,two clear things,Both chosen seeds show a blue cup beside a separate red vessel.
+14,13,PiCo noise-selection examples,"PiCo noise selection, rejected seeds",A blue cup and a red vase,mixed,two clear things,"Most rejected seeds lose the blue cup or swap colours, with red cups, a blue vase or an orange vase."
+14,13,PiCo noise-selection examples,"PiCo noise selection, chosen seeds",A blue apple and a green vase,succeeds,two clear things,Both chosen seeds show a blue apple and a separate green vase.
+14,13,PiCo noise-selection examples,"PiCo noise selection, rejected seeds",A blue apple and a green vase,fails,two clear things,"Rejected seeds mostly show green apples beside blue or teal vases, so the colours are swapped or the apple is missing."
+14,13,PiCo noise-selection examples,"PiCo noise selection, chosen seeds",A red chair and a brown elephant,succeeds,two clear things,Both chosen seeds show a red chair and a separate brown elephant.
+14,13,PiCo noise-selection examples,"PiCo noise selection, rejected seeds",A red chair and a brown elephant,mixed,two clear things,"Several rejected seeds are correct, but others lose the elephant or shrink it to a picture on the wall."
+15,13,PiCo noise-selection step count,PiCo noise selection after 1 step,A green apple and a brown bird,fails,not applicable,All three tiles are coloured noise with no object in them.
+15,13,PiCo noise-selection step count,PiCo noise selection after 5 steps,A green apple and a brown bird,succeeds,two clear things,The full-prompt preview shows a soft yellow-green apple and a small brown bird apart.
+15,13,PiCo noise-selection step count,PiCo noise selection after 20 steps,A green apple and a brown bird,succeeds,two clear things,The full-prompt preview shows a green apple above a brown and orange bird among leaves.
+16,14,T2I-CompBench,Stable Diffusion,A pink cat and a brown sheep,fails,one thing,"Both tiles show only sheep, some with pink wool or ears, and no cat."
+16,14,T2I-CompBench,AttendExcite,A pink cat and a brown sheep,mixed,two bodies or heads,"One tile has a pink blob with cat ears and a white sheep, and the other has a pink llama-like sheep with a small pink cat."
+16,14,T2I-CompBench,BoxDiff,A pink cat and a brown sheep,fails,fused hybrid,"One sheep has a torn lower body, and the other tile puts a cat head on a woolly sheep body."
+16,14,T2I-CompBench,GORS,A pink cat and a brown sheep,fails,fused hybrid,"One tile has a woolly sheep with a cat's face, and the other has two sheep and no cat."
+16,14,T2I-CompBench,Magnet,A pink cat and a brown sheep,fails,fused hybrid,"One cartoon tile has a pink egg shape, and the other has a sheep with a pink cat's face."
+16,14,T2I-CompBench,PiCo,A pink cat and a brown sheep,succeeds,two clear things,Both tiles show a separate pink cat and a brown or tan sheep.
+16,14,T2I-CompBench,Stable Diffusion,a green banana and a blue cake,mixed,two clear things,"Bananas and cake are separate, but the bananas are partly yellow and one cake is teal."
+16,14,T2I-CompBench,AttendExcite,a green banana and a blue cake,mixed,two clear things,"Banana and cake are separate, but one banana is fully yellow and the cake has a teal tier."
+16,14,T2I-CompBench,BoxDiff,a green banana and a blue cake,mixed,two clear things,"One tile has a yellow banana beside a blue block, and the other has green bananas with a small cake piece."
+16,14,T2I-CompBench,GORS,a green banana and a blue cake,mixed,two bodies or heads,"One tile draws a banana across the blue cake, and the other has a separate green banana and blue cake."
+16,14,T2I-CompBench,Magnet,a green banana and a blue cake,mixed,two clear things,"Banana and cake are separate, but the bananas are mostly yellow and one cake is a striped slice."
+16,14,T2I-CompBench,PiCo,a green banana and a blue cake,succeeds,two clear things,Both tiles show a green banana and a separate blue or teal cake.
+16,14,T2I-CompBench,Stable Diffusion,rubber gloves and a metallic spoon,succeeds,two clear things,Both tiles show rubber gloves and separate spoons.
+16,14,T2I-CompBench,AttendExcite,rubber gloves and a metallic spoon,mixed,two bodies or heads,"One tile has a glove and spoon apart, and the other has gloved shapes wrapped around the spoon."
+16,14,T2I-CompBench,BoxDiff,rubber gloves and a metallic spoon,succeeds,two clear things,"Both tiles show a glove and a separate spoon, with the spoon handle tinted green in one."
+16,14,T2I-CompBench,GORS,rubber gloves and a metallic spoon,fails,one thing,Both tiles show gloves and no spoon.
+16,14,T2I-CompBench,Magnet,rubber gloves and a metallic spoon,fails,one thing,"Both tiles show gloves and no spoon, with a frilly pink object in one."
+16,14,T2I-CompBench,PiCo,rubber gloves and a metallic spoon,succeeds,two clear things,Both tiles show rubber gloves and a separate metal spoon.
+16,14,T2I-CompBench,Stable Diffusion,a tall palm tree and a short cactus,succeeds,two clear things,Both tiles show a palm tree and a separate short cactus.
+16,14,T2I-CompBench,AttendExcite,a tall palm tree and a short cactus,fails,one thing,"Both tiles show palm trees, with no cactus that can be picked out."
+16,14,T2I-CompBench,BoxDiff,a tall palm tree and a short cactus,fails,fused hybrid,In both tiles a dark cactus sits on top of a palm trunk in place of its crown.
+16,14,T2I-CompBench,GORS,a tall palm tree and a short cactus,fails,one thing,"Both tiles show palm trees, with no cactus that can be picked out."
+16,14,T2I-CompBench,Magnet,a tall palm tree and a short cactus,mixed,one thing,"One tile has a tiny cactus among the palms, and the other shows palms only."
+16,14,T2I-CompBench,PiCo,a tall palm tree and a short cactus,succeeds,two clear things,Both tiles show a palm tree and a separate short cactus.
+16,14,T2I-CompBench,Stable Diffusion,a plastic toy and a glass bottle,succeeds,two clear things,Both tiles show a glass bottle and separate plastic toys.
+16,14,T2I-CompBench,AttendExcite,a plastic toy and a glass bottle,succeeds,two clear things,Both tiles show a toy and a separate bottle.
+16,14,T2I-CompBench,BoxDiff,a plastic toy and a glass bottle,mixed,two bodies or heads,"One bottle carries a yellow toy face on its body, and the other is wrapped in yellow strips beside a toy."
+16,14,T2I-CompBench,GORS,a plastic toy and a glass bottle,mixed,two clear things,"One tile has a hand holding a toy before a glass bottle, and the other has an opaque orange bottle."
+16,14,T2I-CompBench,Magnet,a plastic toy and a glass bottle,mixed,two clear things,"One tile has a hand holding a toy before a glass bottle, and the other has an opaque orange bottle."
+16,14,T2I-CompBench,PiCo,a plastic toy and a glass bottle,succeeds,two clear things,Both tiles show a toy and a separate glass bottle.
+17,15,GPT-4o complex prompts,Stable Diffusion,A white cake with pink roses on silver plate,succeeds,two clear things,Both tiles show a white cake topped with pink roses on a silver stand.
+17,15,GPT-4o complex prompts,AttendExcite,A white cake with pink roses on silver plate,succeeds,two clear things,"Both tiles show a white cake with large pink roses on a silver plate, one cake with an odd two-tier body."
+17,15,GPT-4o complex prompts,BoxDiff,A white cake with pink roses on silver plate,fails,two bodies or heads,The cake breaks into smeared silver and white pieces and a single rose lies off the cake in both tiles.
+17,15,GPT-4o complex prompts,GORS,A white cake with pink roses on silver plate,succeeds,two clear things,"Both tiles show a white cake with pink roses and a silver plate, with extra roses beside the cake in one."
+17,15,GPT-4o complex prompts,Magnet,A white cake with pink roses on silver plate,mixed,two bodies or heads,"One tile replaces the white cake with a silver tin under the roses, and the other shows a correct white cake on a plate."
+17,15,GPT-4o complex prompts,PiCo,A white cake with pink roses on silver plate,succeeds,two clear things,Both tiles show a white cake topped with pink roses on a silver stand.
+17,15,GPT-4o complex prompts,Stable Diffusion,A black cat sitting on a wooden fence next to an orange pumpkin,mixed,two clear things,"A black cat and orange pumpkins are present in both tiles, but the cat sits on a plank or bench and not on a fence."
+17,15,GPT-4o complex prompts,AttendExcite,A black cat sitting on a wooden fence next to an orange pumpkin,mixed,two clear things,"The cat and pumpkin are separate, but in one tile the cat sits on the pumpkin and not beside it."
+17,15,GPT-4o complex prompts,BoxDiff,A black cat sitting on a wooden fence next to an orange pumpkin,fails,two bodies or heads,The cat's body is warped in one tile and turns into a black wedge beside a large pumpkin in the other.
+17,15,GPT-4o complex prompts,GORS,A black cat sitting on a wooden fence next to an orange pumpkin,mixed,two bodies or heads,"One tile seats the cat on the pumpkin, and the other shows a sprawled cat with a malformed extra body shape behind it."
+17,15,GPT-4o complex prompts,Magnet,A black cat sitting on a wooden fence next to an orange pumpkin,mixed,fused hybrid,"One tile seats the cat on the pumpkin, and in the other the cat's body melts into a flattened pumpkin."
+17,15,GPT-4o complex prompts,PiCo,A black cat sitting on a wooden fence next to an orange pumpkin,succeeds,two clear things,"A black cat and a separate orange pumpkin appear at a wooden fence in both tiles, though the cat is small and dark in one."
+17,15,GPT-4o complex prompts,Stable Diffusion,A fuchsia umbrella shading a white bench next to a gray stone wall,succeeds,two clear things,"Both tiles show a fuchsia umbrella, a white bench and a stone wall as separate objects."
+17,15,GPT-4o complex prompts,AttendExcite,A fuchsia umbrella shading a white bench next to a gray stone wall,mixed,two clear things,"The umbrella, bench and wall are present, but one tile splits the scene around a duplicated bench."
+17,15,GPT-4o complex prompts,BoxDiff,A fuchsia umbrella shading a white bench next to a gray stone wall,mixed,two bodies or heads,"A bench and umbrella are present, but in one tile the umbrella merges with a pink cushion on the bench."
+17,15,GPT-4o complex prompts,GORS,A fuchsia umbrella shading a white bench next to a gray stone wall,mixed,two clear things,"The umbrella, bench and wall are present, but one tile shows two separate benches."
+17,15,GPT-4o complex prompts,Magnet,A fuchsia umbrella shading a white bench next to a gray stone wall,mixed,two bodies or heads,"One tile makes the umbrella white, and the other has a fuchsia umbrella over a bench broken into two pieces."
+17,15,GPT-4o complex prompts,PiCo,A fuchsia umbrella shading a white bench next to a gray stone wall,succeeds,two clear things,"Both tiles show a fuchsia umbrella over a white bench by a stone wall, with the umbrella flattened and low in one."
+17,15,GPT-4o complex prompts,Stable Diffusion,A large brown dog chasing a yellow frisbee through a back yard,mixed,two clear things,"A dog and a disc are present, but the disc is pink-red in one tile and red with a yellow centre in the other."
+17,15,GPT-4o complex prompts,AttendExcite,A large brown dog chasing a yellow frisbee through a back yard,mixed,two clear things,"The dog is present, but the disc is orange-red in one tile and a blue and yellow ring at the edge of the other."
+17,15,GPT-4o complex prompts,BoxDiff,A large brown dog chasing a yellow frisbee through a back yard,mixed,two bodies or heads,"A dog and a yellow frisbee are both present, but the dog's body is warped and patchy in both tiles."
+17,15,GPT-4o complex prompts,GORS,A large brown dog chasing a yellow frisbee through a back yard,mixed,two clear things,"One tile has an orange disc on the ground, and the other balances a yellow disc on the dog's head."
+17,15,GPT-4o complex prompts,Magnet,A large brown dog chasing a yellow frisbee through a back yard,mixed,two bodies or heads,"One tile has a flat orange slab on the ground, and the other puts a yellow ring around the dog's head."
+17,15,GPT-4o complex prompts,PiCo,A large brown dog chasing a yellow frisbee through a back yard,succeeds,two clear things,"A brown dog and a separate yellow frisbee appear in both tiles, with the dog small and cut by the frame in one."
+17,15,GPT-4o complex prompts,Stable Diffusion,a blue candle and a red shoes and a cat,mixed,two bodies or heads,"In one tile the blue candle rises out of the red shoe, and in the other the cat's body runs into the shoe beside an extra red candle."
+17,15,GPT-4o complex prompts,AttendExcite,a blue candle and a red shoes and a cat,fails,two clear things,"One tile has a red candle and shoes with no cat, and the other has a cat and blue candle with no shoes."
+17,15,GPT-4o complex prompts,BoxDiff,a blue candle and a red shoes and a cat,mixed,fused hybrid,"The cat's head grows out of the red shoe in both tiles, and the candle is red and white in one."
+17,15,GPT-4o complex prompts,GORS,a blue candle and a red shoes and a cat,mixed,two bodies or heads,"One tile has a red candle and no cat, and the other seats the cat inside a blue and red shoe beside a blue candle."
+17,15,GPT-4o complex prompts,Magnet,a blue candle and a red shoes and a cat,mixed,two clear things,"One tile has all three with the cat perched on the candle, and the other has a blue candle and red shoes with no cat."
+17,15,GPT-4o complex prompts,PiCo,a blue candle and a red shoes and a cat,mixed,two bodies or heads,"The candle stands inside the red shoe and the cat's face melts in one tile, and the cat's body merges into the shoe in the other."
+18,16,PiCo cross-attention examples,Stable Diffusion,A pink cat and a brown sheep,mixed,two bodies or heads,"A pink cat's body runs into a woolly pink mass behind a small brown sheep, with part of another animal at the right edge."
+18,16,PiCo cross-attention examples,PiCo,A pink cat and a brown sheep,succeeds,two clear things,A pink cat stands beside a separate brown sheep.
+18,16,PiCo cross-attention examples,Stable Diffusion,A yellow cow and a brown dog,mixed,two clear things,"A cow and a dog are separate, but the cow is brown-orange with only a yellow tag."
+18,16,PiCo cross-attention examples,PiCo,A yellow cow and a brown dog,succeeds,two clear things,"A large brown dog and a small yellow cow are separate, with the cow cut by the frame and the dog wearing a yellow collar."
+18,16,PiCo cross-attention examples,Stable Diffusion,A blue backpack and a red car,fails,one thing,A blue backpack and a red backpack appear and there is no car.
+18,16,PiCo cross-attention examples,PiCo,A blue backpack and a red car,succeeds,two clear things,A blue backpack sits beside a separate red car.
+18,16,PiCo cross-attention examples,Stable Diffusion,A purple balloon floating above a red picnic blanket with yellow flowers,mixed,two clear things,"A purple balloon, a pink-red checked blanket and yellow flowers are present, but the balloon rests on the blanket and does not float."
+18,16,PiCo cross-attention examples,PiCo,A purple balloon floating above a red picnic blanket with yellow flowers,succeeds,two clear things,"A purple balloon, a red blanket and yellow flowers are all present and separate."
+18,16,PiCo cross-attention examples,Stable Diffusion,A turquoise chair next to a wooden table with a white vase and pink roses,mixed,two clear things,"The chair, table and roses are present, but the vase holding the roses is pink."
+18,16,PiCo cross-attention examples,PiCo,A turquoise chair next to a wooden table with a white vase and pink roses,succeeds,two clear things,"A pale turquoise chair, wooden table, white vases and pink roses are all present."

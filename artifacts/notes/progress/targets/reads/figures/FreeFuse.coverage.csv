@@ -1,0 +1,18 @@
+figure,page,kind,reason
+1,2,qualitative,generated samples
+2,4,diagram,"two-stage pipeline with masks, router and attention bias"
+3,5,plot,attention locality heatmap and mask precision curves
+4,6,plot,LoRA perturbation size per FLUX block
+5,6,other,"similarity maps over example images, with no method compared on generated pictures"
+6,7,plot,mask precision over denoising step and block
+7,11,qualitative,generated samples
+8,12,qualitative,generated samples
+9,17,other,"SDXL similarity maps by step, block and attention method"
+10,18,plot,SDXL mask precision curves
+11,19,qualitative,generated samples
+12,19,qualitative,generated samples
+13,20,other,one FreeFuse image with its similarity map and masks at each post-processing stage
+14,22,other,reference images and descriptions of the 10 character LoRAs
+15,22,other,reference images and descriptions of the 5 object LoRAs
+16,23,qualitative,generated samples
+17,24,plot,identity and preference scores as the LoRA count grows

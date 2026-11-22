@@ -1,0 +1,141 @@
+figure,page,dataset,method,prompt_or_pair,outcome,ladder,how
+1,4,SD3.5 Medium,no-CFG,a portrait of a woman wearing round glasses in a library,fails,not applicable,Wavy hair falls across most of her face and the glasses are barely visible.
+1,4,SD3.5 Medium,CFG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,CFG++,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,CFG-Zero*,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,APG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,TCFG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,SAG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,OSEG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,PAG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,"A woman in round glasses stands before library shelves, with pale low-contrast skin."
+1,4,SD3.5 Medium,SEG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,SD3.5 Medium,no-CFG,a dog to the right of a tie,fails,two bodies or heads,A smeared dog wears a tie and merges into pale cloth at the left of the frame.
+1,4,SD3.5 Medium,CFG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,CFG++,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,CFG-Zero*,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,APG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,TCFG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,SAG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,OSEG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,PAG,a dog to the right of a tie,mixed,two clear things,"The dog wears the tie on its chest, so the tie is not beside it, and the dog's face turns grey-brown."
+1,4,SD3.5 Medium,SEG,a dog to the right of a tie,mixed,two clear things,"The dog is clear but wears the tie on its chest, so the tie is not beside it."
+1,4,SD3.5 Medium,no-CFG,a misty mountain valley with a river at sunrise,mixed,not applicable,"A forest river runs under mist, but the light is grey and shows no sunrise."
+1,4,SD3.5 Medium,CFG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a misty forested valley under golden sunrise light.
+1,4,SD3.5 Medium,CFG++,a misty mountain valley with a river at sunrise,mixed,not applicable,"A river runs through a misty forest, with pale cloud and no clear sunrise light."
+1,4,SD3.5 Medium,CFG-Zero*,a misty mountain valley with a river at sunrise,mixed,not applicable,"A river runs through a misty forest, with only faint warm light in the sky."
+1,4,SD3.5 Medium,APG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a misty valley with warm light on the far slope.
+1,4,SD3.5 Medium,TCFG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a misty forested valley under golden sunrise light.
+1,4,SD3.5 Medium,SAG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a misty forested valley with a bright sunrise glow on the water.
+1,4,SD3.5 Medium,OSEG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a forested valley under warm sunrise light and thin mist.
+1,4,SD3.5 Medium,PAG,a misty mountain valley with a river at sunrise,mixed,not applicable,"The valley and sunrise glow are there, but the lower river fades into a dark smooth haze."
+1,4,SD3.5 Medium,SEG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river runs through a valley with the sun visible above the ridge.
+1,4,SD3.5 Medium,no-CFG,a woman riding a white horse through red poppies,fails,two bodies or heads,"A long-haired figure rises above a grey malformed animal, and no whole white horse is visible."
+1,4,SD3.5 Medium,CFG,a woman riding a white horse through red poppies,succeeds,two clear things,A long-haired rider in a check shirt rides a white horse away through red poppies.
+1,4,SD3.5 Medium,CFG++,a woman riding a white horse through red poppies,mixed,two clear things,"A rider in a black hat rides a white horse, and the back view does not show whether it is a woman."
+1,4,SD3.5 Medium,CFG-Zero*,a woman riding a white horse through red poppies,mixed,two clear things,"A rider in a black hat rides a white horse, and the back view does not show whether it is a woman."
+1,4,SD3.5 Medium,APG,a woman riding a white horse through red poppies,mixed,two clear things,"A rider in a black hat rides a white horse, and the back view does not show whether it is a woman."
+1,4,SD3.5 Medium,TCFG,a woman riding a white horse through red poppies,succeeds,two clear things,A long-haired rider rides a white horse away through red poppies.
+1,4,SD3.5 Medium,SAG,a woman riding a white horse through red poppies,succeeds,two clear things,A dark-haired woman rides a white horse toward the viewer through red poppies.
+1,4,SD3.5 Medium,OSEG,a woman riding a white horse through red poppies,mixed,two bodies or heads,"The horse faces the viewer while the rider's long hair and back also face the viewer, so she sits the wrong way round."
+1,4,SD3.5 Medium,PAG,a woman riding a white horse through red poppies,succeeds,two clear things,"A woman in a dark jacket rides a white horse toward the viewer, with sparser poppies and a soft face."
+1,4,SD3.5 Medium,SEG,a woman riding a white horse through red poppies,succeeds,two clear things,A long-haired rider in a check shirt rides a white horse along a path through poppies.
+1,4,FLUX.2 [klein] 4B Base,no-CFG,a portrait of a woman wearing round glasses in a library,mixed,not applicable,"A woman in glasses and a scarf stands in a library, but her hair breaks into strands and her skin looks airbrushed."
+1,4,FLUX.2 [klein] 4B Base,CFG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,CFG++,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,CFG-Zero*,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,APG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,TCFG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,SAG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,OSEG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,PAG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,SEG,a portrait of a woman wearing round glasses in a library,succeeds,not applicable,A woman in round glasses and a blue scarf is framed against library shelves.
+1,4,FLUX.2 [klein] 4B Base,no-CFG,a dog to the right of a tie,fails,fused hybrid,Blue and white patterned strips fill the frame and the dog appears only as a small print on one strip.
+1,4,FLUX.2 [klein] 4B Base,CFG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,CFG++,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,CFG-Zero*,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,APG,a dog to the right of a tie,succeeds,two clear things,"A dotted blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,TCFG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,SAG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,OSEG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,PAG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,SEG,a dog to the right of a tie,succeeds,two clear things,"A blue tie on a white shirt is at left and a dog is at right, in what reads as two joined panels."
+1,4,FLUX.2 [klein] 4B Base,no-CFG,a misty mountain valley with a river at sunrise,mixed,not applicable,"A valley and thin river sit under mist, but the light is grey and shows no sunrise."
+1,4,FLUX.2 [klein] 4B Base,CFG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,CFG++,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,CFG-Zero*,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,APG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,TCFG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,SAG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,OSEG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,PAG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,SEG,a misty mountain valley with a river at sunrise,succeeds,not applicable,A river winds through a forested valley under hazy golden light.
+1,4,FLUX.2 [klein] 4B Base,no-CFG,a woman riding a white horse through red poppies,fails,one thing,"Red poppies fill the frame around a torn pale shape, with no readable horse or rider."
+1,4,FLUX.2 [klein] 4B Base,CFG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,CFG++,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,CFG-Zero*,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,APG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,TCFG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,SAG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,OSEG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,PAG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+1,4,FLUX.2 [klein] 4B Base,SEG,a woman riding a white horse through red poppies,succeeds,two clear things,A woman rides a white horse through a dense field of red poppies.
+2,5,FLUX.2 [klein] 4B Base,CFG,cow/stop (short label printed in the figure),succeeds,two clear things,A cow stands beside a separate stop sign reading STOP.
+2,5,FLUX.2 [klein] 4B Base,CFG++,cow/stop (short label printed in the figure),mixed,two clear things,"The cow and sign are separate, but the huge sign is cut by the frame and reads STOH."
+2,5,FLUX.2 [klein] 4B Base,APG,cow/stop (short label printed in the figure),succeeds,two clear things,A cow stands beside a separate stop sign reading STOP.
+2,5,FLUX.2 [klein] 4B Base,SAG,cow/stop (short label printed in the figure),succeeds,two clear things,A cow stands beside a separate stop sign reading STOP.
+2,5,FLUX.2 [klein] 4B Base,OSEG,cow/stop (short label printed in the figure),mixed,two clear things,"The cow and sign are both there, but the large sign covers the side of the cow's head."
+2,5,FLUX.2 [klein] 4B Base,PAG,cow/stop (short label printed in the figure),mixed,two clear things,"The cow and sign are separate, but the sign is misspelled STOOP."
+2,5,FLUX.2 [klein] 4B Base,CFG,4 frisbees (short label printed in the figure),succeeds,two clear things,Four overlapping striped discs are visible.
+2,5,FLUX.2 [klein] 4B Base,CFG++,4 frisbees (short label printed in the figure),succeeds,two clear things,"Four separate discs are visible, with one cut by the right edge."
+2,5,FLUX.2 [klein] 4B Base,APG,4 frisbees (short label printed in the figure),fails,two clear things,Five discs appear when four were asked for.
+2,5,FLUX.2 [klein] 4B Base,SAG,4 frisbees (short label printed in the figure),succeeds,two clear things,Four overlapping striped discs are visible.
+2,5,FLUX.2 [klein] 4B Base,OSEG,4 frisbees (short label printed in the figure),fails,two clear things,"Five discs appear when four were asked for, two with a different flower pattern."
+2,5,FLUX.2 [klein] 4B Base,PAG,4 frisbees (short label printed in the figure),succeeds,two clear things,Four overlapping striped discs are visible.
+2,5,FLUX.2 [klein] 4B Base,CFG,3 giraffes (short label printed in the figure),succeeds,two clear things,"Three giraffes stand together, with the two at right overlapping at the legs."
+2,5,FLUX.2 [klein] 4B Base,CFG++,3 giraffes (short label printed in the figure),succeeds,two clear things,Three separate giraffes stand under an acacia tree.
+2,5,FLUX.2 [klein] 4B Base,APG,3 giraffes (short label printed in the figure),fails,two bodies or heads,"Three bodies appear but only two heads, because the middle giraffe's neck ends behind the left giraffe's neck."
+2,5,FLUX.2 [klein] 4B Base,SAG,3 giraffes (short label printed in the figure),succeeds,two clear things,Three separate giraffes stand in a row.
+2,5,FLUX.2 [klein] 4B Base,OSEG,3 giraffes (short label printed in the figure),succeeds,two clear things,Three separate giraffes stand in a row.
+2,5,FLUX.2 [klein] 4B Base,PAG,3 giraffes (short label printed in the figure),succeeds,two clear things,"Three separate giraffes stand in a row, with the right one close to the frame edge."
+2,5,FLUX.2 [klein] 4B Base,CFG,5 workers (short label printed in the figure),succeeds,two clear things,Five separate people in office clothes stand on a pier at sunset.
+2,5,FLUX.2 [klein] 4B Base,CFG++,5 workers (short label printed in the figure),fails,two clear things,Only three people appear when five were asked for.
+2,5,FLUX.2 [klein] 4B Base,APG,5 workers (short label printed in the figure),succeeds,two clear things,"Five separate people stand on a pier, two making a heart with their arms."
+2,5,FLUX.2 [klein] 4B Base,SAG,5 workers (short label printed in the figure),fails,two clear things,Only four people appear when five were asked for.
+2,5,FLUX.2 [klein] 4B Base,OSEG,5 workers (short label printed in the figure),fails,two clear things,Only four people appear when five were asked for.
+2,5,FLUX.2 [klein] 4B Base,PAG,5 workers (short label printed in the figure),fails,two clear things,Only four people appear when five were asked for.
+2,5,FLUX.2 [klein] 4B Base,CFG,couch/cup (short label printed in the figure),fails,one thing,"Only a couch appears, with a small unclear object on the wall and no cup."
+2,5,FLUX.2 [klein] 4B Base,CFG++,couch/cup (short label printed in the figure),succeeds,two clear things,"A large mug sits on the couch, oversized against the cushions."
+2,5,FLUX.2 [klein] 4B Base,APG,couch/cup (short label printed in the figure),fails,one thing,"Only a couch appears, with a cup-like shape hanging upside down at the top of the frame."
+2,5,FLUX.2 [klein] 4B Base,SAG,couch/cup (short label printed in the figure),succeeds,two clear things,"A large mug sits on the couch, oversized against the cushions."
+2,5,FLUX.2 [klein] 4B Base,OSEG,couch/cup (short label printed in the figure),succeeds,two clear things,"A large mug sits on the couch, oversized against the cushions."
+2,5,FLUX.2 [klein] 4B Base,PAG,couch/cup (short label printed in the figure),succeeds,two clear things,A small mug sits on the couch cushion.
+2,5,FLUX.2 [klein] 4B Base,CFG,frisbee/moto (short label printed in the figure),fails,one thing,Only a motorcycle appears and there is no frisbee.
+2,5,FLUX.2 [klein] 4B Base,CFG++,frisbee/moto (short label printed in the figure),succeeds,two clear things,A motorcycle stands with a separate red frisbee on the ground.
+2,5,FLUX.2 [klein] 4B Base,APG,frisbee/moto (short label printed in the figure),fails,fused hybrid,A teal disc grows on a stalk from the tail of the motorcycle.
+2,5,FLUX.2 [klein] 4B Base,SAG,frisbee/moto (short label printed in the figure),fails,one thing,Only a motorcycle appears and there is no frisbee.
+2,5,FLUX.2 [klein] 4B Base,OSEG,frisbee/moto (short label printed in the figure),succeeds,two clear things,A motorcycle stands with a separate blue and orange disc on the ground.
+2,5,FLUX.2 [klein] 4B Base,PAG,frisbee/moto (short label printed in the figure),fails,one thing,Only a motorcycle appears and there is no frisbee.
+2,5,FLUX.2 [klein] 4B Base,CFG,4 vases (short label printed in the figure),fails,two clear things,"Five glass tumblers appear, so both the count and the object are wrong."
+2,5,FLUX.2 [klein] 4B Base,CFG++,4 vases (short label printed in the figure),fails,two clear things,"Three wide glass cylinders appear, so both the count and the object are wrong."
+2,5,FLUX.2 [klein] 4B Base,APG,4 vases (short label printed in the figure),succeeds,two clear things,Four separate vases stand on a shelf.
+2,5,FLUX.2 [klein] 4B Base,SAG,4 vases (short label printed in the figure),fails,two clear things,"Six glass tumblers appear, so both the count and the object are wrong."
+2,5,FLUX.2 [klein] 4B Base,OSEG,4 vases (short label printed in the figure),fails,two clear things,"Three wide glass cylinders appear, so both the count and the object are wrong."
+2,5,FLUX.2 [klein] 4B Base,PAG,4 vases (short label printed in the figure),mixed,two clear things,"The count of four is right, but the objects are drinking glasses and not vases."
+2,5,FLUX.2 [klein] 4B Base,CFG,3 bats (short label printed in the figure),fails,two clear things,Four bats lie side by side when three were asked for.
+2,5,FLUX.2 [klein] 4B Base,CFG++,3 bats (short label printed in the figure),mixed,two clear things,Three bats fill the frame and part of a fourth shows at the right edge.
+2,5,FLUX.2 [klein] 4B Base,APG,3 bats (short label printed in the figure),succeeds,two clear things,Three separate wooden bats lie on grass.
+2,5,FLUX.2 [klein] 4B Base,SAG,3 bats (short label printed in the figure),succeeds,two clear things,Three separate dark bats lie on grass.
+2,5,FLUX.2 [klein] 4B Base,OSEG,3 bats (short label printed in the figure),fails,two clear things,Only two bats appear when three were asked for.
+2,5,FLUX.2 [klein] 4B Base,PAG,3 bats (short label printed in the figure),succeeds,two clear things,Three separate bats lie on grass.
+3,12,"Guidance-scale sweep, model not named in the figure",CFG,"white-horse prompt at guidance scales 1.5, 5, 12, 18",mixed,two clear things,"A rider and white horse hold from scale 1.5 to 12, and at 18 the colours burn out and the horse turns blue-white."
+3,12,"Guidance-scale sweep, model not named in the figure",APG,"white-horse prompt at guidance scales 1.5, 5, 12, 18",succeeds,two clear things,A rider on a white horse holds at all four scales from 1.5 to 18 with no colour burn.
+3,12,"Guidance-scale sweep, model not named in the figure",SAG,"white-horse prompt at guidance scales 1.5, 5, 12, 18",mixed,two clear things,"A rider and white horse hold from scale 1.5 to 12, and at 18 the sky blows out white and the horse turns blue-white."
+3,12,"Guidance-scale sweep, model not named in the figure",OSEG,"white-horse prompt at guidance scales 1.5, 5, 12, 18",mixed,two clear things,"A rider and white horse hold from scale 1.5 to 12, and at 18 the field burns to flat red and the horse turns blue-white."
+4,12,"Guidance-scale sweep, model not named in the figure",CFG,"portrait prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scale 5 is clean, 1.5 smears the glasses into the hair, 12 burns the scarf to pure blue, and 18 loses the library to black."
+4,12,"Guidance-scale sweep, model not named in the figure",APG,"portrait prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scales 5 to 18 stay clean with the library visible, and 1.5 distorts the nose and glasses."
+4,12,"Guidance-scale sweep, model not named in the figure",SAG,"portrait prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scale 5 is clean, 1.5 smears the glasses, 12 burns the scarf to pure blue, and 18 loses the library to black."
+4,12,"Guidance-scale sweep, model not named in the figure",OSEG,"portrait prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scales 1.5 and 5 are clean, 12 burns the scarf to pure blue, and 18 loses the library to black."
+5,13,"Guidance-scale sweep, model not named in the figure",CFG,"mountain-valley prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scales 1.5 to 12 show the misty valley, and 18 crushes the forest to black under a blown-out sky."
+5,13,"Guidance-scale sweep, model not named in the figure",APG,"mountain-valley prompt at guidance scales 1.5, 5, 12, 18",succeeds,not applicable,"The valley, river and mist hold at all four scales, with warmer sunrise light from 12 upward."
+5,13,"Guidance-scale sweep, model not named in the figure",SAG,"mountain-valley prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scales 1.5 to 12 show the misty valley, and 18 crushes the forest to black under a blown-out sky."
+5,13,"Guidance-scale sweep, model not named in the figure",OSEG,"mountain-valley prompt at guidance scales 1.5, 5, 12, 18",mixed,not applicable,"Scale 1.5 has little mist, 5 and 12 hold, and 18 crushes the forest to black under a blown-out sky."
