@@ -28,7 +28,8 @@ GPU-hours, and Color is 288 pictures, about 7 GPU-hours.
 
 ## What the release leaves open
 
-Nothing runs until the owner answers board question 17, so these choices are made before any ToMe score exists.
+The owner's answers to board questions 17 and 18 settle the run: the `tome` environment, `RunConfig2`, one written merge rule, seed 0
+only, with Shape, Texture and Concat first and then Complex and Color, inside a budget of about 44 GPU-hours.
 
 | Setting | Paper | Released code |
 |---|---|---|
@@ -41,16 +42,32 @@ Nothing runs until the owner answers board question 17, so these choices are mad
 | Sampler | not stated | SDXL's default scheduler, left in place by the pipeline |
 | Images per prompt and seeds | not stated | demo seeds only |
 
-**Proposed if the owner approves.** `RunConfig2`, the config the authors label for attribute binding, unchanged. The merged prompt
-is built by one rule: the nouns SpaCy finds, each with "a" or "an", joined by "and". `prompt_length` is the token count of the
-original prompt, as in the demo.
+**The merge rule.** The merged prompt is each noun chunk's head noun with its article, joined by "and", as `merged_prompt` in the
+hub's `scripts/reproductions/tome_common.py` writes it. `prompt_length` is the token count of the original prompt. Under `RunConfig2`
+the merged prompt is encoded and never used, because the end-of-text replacement waits for step 60 and a render has 50 steps.
 
-**The environment.** ToMe pins torch 2.0.1, diffusers 0.28.0 and transformers 4.30.2. The cluster's `tome` environment holds exactly
-those versions and rendered the review response, but `environment/` does not describe it and the brief names `co3` and `co3_bw`,
-so using it needs the owner's yes.
+**The environment.** ToMe pins torch 2.0.1, diffusers 0.28.0 and transformers 4.30.2. The cluster's `tome` environment holds those
+versions and rendered the review response. The owner approved it for this run on board question 17.
 
-**Seeds.** The Complex and Concat rows state three seeds per prompt. Board question 18 asks whether ToMe runs three seeds or one.
-The default is seed 0, with each number labelled by its seed count.
+**Seeds.** Seed 0 only, by the owner's answer to board question 18, with each number labelled by its seed count.
+
+## What ToMe's parser does with the benchmark prompts
+
+`tome_parse_check.py` ran the authors' `PromptParser` and `filter_text` on all 1,902 allowed prompts, on CPU, with no render. Its output
+is `/datasets/mmolefe/poe_repair_min/loop-5/data/tome-parse.jsonl`.
+
+| Benchmark | Allowed prompts | Parsed | Crash in `filter_text` | Nothing to merge |
+|---|---|---|---|---|
+| Color | 288 | 288 | 0 | 0 |
+| Shape | 293 | 291 | 2 | 0 |
+| Texture | 300 | 300 | 0 | 0 |
+| Complex | 988 | 843 | 145 | 0 |
+| Concat | 33 | 29 | 0 | 4 |
+
+**The crash.** `_split_prompt` drops phrases such as "the right", while the token groups keep their positions, so `filter_text` looks
+up an anchor past the end of its list. **Nothing to merge.** On prompts such as "a cactus made of steel and two sunflowers made of glass",
+spaCy finds no noun with an attribute. The release does not say how a benchmark run should treat either case, so board question 20 asks
+the owner before any ToMe picture is rendered.
 
 ## The test, fixed before the first run
 
