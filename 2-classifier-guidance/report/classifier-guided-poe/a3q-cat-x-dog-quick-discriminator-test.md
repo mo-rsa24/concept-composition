@@ -57,3 +57,17 @@ definitions are in [the rung 2 review file](../../plans/review/a3q-cat-x-dog-qui
 | no change, and the push was too weak | the counts above, but either check at `s` = 100 fails | rerun at `s` = 300, or at `s` = 100 with the cap at 0.3, before calling a null |
 
 Only the first reading lets rung 3 start.
+
+## What later experiments add
+
+**The cap 0.3 rerun that reading 7 names has not run, so the draft reading above stands.** The rerun
+is [plan 21](../../plans/21-rung2-a-small-discriminator-steers-cat-x-dog.md)'s task 1.4.1, still
+unticked `stated`. The later checkers use a different design, and each question has its own page:
+
+| The question | Its page |
+|---|---|
+| Can a checker tell a clean cat and dog from a fused animal? | [the checker readings](can-a-checker-read-a-clean-cat-and-dog.md) |
+| Does a push on the first 16 steps separate the two animals? | [the early push](does-an-early-push-separate-the-cat-and-dog.md) |
+| Can a second push make each body the right animal? | [the second push](can-a-second-push-name-each-animal.md) |
+| Does the early push work on other pairs? | [the other pairs](does-the-early-push-carry-to-other-pairs.md) |
+| How close does the kept push come to the joint prompt and CO3? | [the 128-seed comparison](how-close-the-kept-push-comes-to-the-joint-prompt.md) |
