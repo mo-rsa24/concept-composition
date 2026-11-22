@@ -139,7 +139,7 @@ Navigation: ⬅️ [Previous](#what-happens) | 📋 [TOC](#table-of-contents) | 
 
 Code in `2-classifier-guidance/scripts/rung2/`, run from the cluster checkout. Every large output
 under `/datasets/mmolefe/poe_repair_min/outputs/classifier_guidance_ladder/rung2/`. Card and
-sheets under `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/`.
+sheets under `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/` on the cluster.
 
 ## Purpose
 
@@ -214,7 +214,7 @@ For Claude to execute. Ask Claude to do these.
   ✓ verified 2026-11-17: 48 renders on `mscluster107` GPU 0, 127 to 130 s per seed; final latents
   saved beside each tile · `rung2/training_set/`, `training-set/training-set-sheet.png`
 
-  *Picture held back.* `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/training-set-sheet.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
+  *Picture held back.* `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/training-set/training-set-sheet.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
 - [x] **1.3** The discriminator: SDXL's UNet frozen and read on the empty prompt up to its middle
   block, with plan 18's attention-pool head trained alone on the 41 tiles of
@@ -228,7 +228,7 @@ For Claude to execute. Ask Claude to do these.
   `rung2/discriminator/check-holdout-7-8/gate.json`, `rung2/discriminator/final-all-seeds/head_step_001500.pt`,
   `discriminator/held-out-accuracy-per-step.png`
 
-  <a href="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png"><img src="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png" width="200" alt="Balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, for held-out seeds 7 and 8 (7 positives, 6 negatives, 4 noise draws each): steps 0 to 6 sit at 0.59 to 0.73 in a shaded band under a dashed line at 0.75, steps 7 to 19 at 0.80 to 1.00, and a dotted line at 0.5 is labelled coin flip"></a>
+  On the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator/held-out-accuracy-per-step.png`. Balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, for held-out seeds 7 and 8 (7 positives, 6 negatives, 4 noise draws each): steps 0 to 6 sit at 0.59 to 0.73 in a shaded band under a dashed line at 0.75, steps 7 to 19 at 0.80 to 1.00, and a dotted line at 0.5 is labelled coin flip.
 
 - [x] **1.4** The result renders: a random-push mode in the product sampler that leaves strength 0
   untouched; the best-of-N pick; strength 0 against plain product on seed 1; then seeds 1 to 4 and
@@ -239,7 +239,7 @@ For Claude to execute. Ask Claude to do these.
   of steps at s = 10, 80 to 98% at 30, 100% at 100; 64 tiles on `mscluster107` GPU 0 ·
   `rung2/results/result.json`, `result-sheet/result-sheet.png`
 
-  *Picture held back.* `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
+  *Picture held back.* `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/result-sheet/result-sheet.png` is named here and not shown, because a tile has a shape that could not be identified at full size.
 
   - [ ] **1.4.1** The cap-0.3 rerun: seeds 1 to 4 and 9 to 12 at s = 100 with the push capped at
     0.3 of the product prediction's norm, the rerun [the review file's reading 7](review/a3q-cat-x-dog-quick-discriminator-test.md#the-question-written-before-the-run)
@@ -250,14 +250,14 @@ For Claude to execute. Ask Claude to do these.
   - [x] **1.4.2** The v2 discriminator: task 1.3's head and held-out check, retrained with the
     pair-prompt renders that failed added as negatives (`scripts/rung2/training_set_v2.json`: 64
     tiles, 17 positives, 47 negatives), the reader's choice after the diagnostics under
-    [`diagnostics/`](../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/). Run from `/home-mscluster/mmolefe/poe_repair_min_scratch`
+    `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/diagnostics/` on the cluster. Run from `/home-mscluster/mmolefe/poe_repair_min_scratch`
     while `/datasets` is down.
     ✓ verified 2026-11-17: the held-out check failed, 0 of 20 sampler steps at balanced accuracy
     0.75 or more on seeds 7 and 8 (0.53 to 0.63 at every step), so no push was rendered;
     re-rendered latents matched the originals on 73 of 73 pictures ·
     `discriminator/held-out-accuracy-v1-against-v2.png`
 
-    <a href="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-v1-against-v2.png"><img src="../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-v1-against-v2.png" width="200" alt="Held-out balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, seeds 7 and 8: v1 (negatives were lone animals and plain products) rises from about 0.6 to 0.80 to 1.00 from step 7, passing 13 of 20 steps; v2 (negatives also include hybrids and wrong pairs from the pair prompts) stays between 0.53 and 0.63 at every step, under the dashed bar at 0.75, failing 0 of 20"></a>
+    On the cluster at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator/held-out-accuracy-v1-against-v2.png`. Held-out balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, seeds 7 and 8: v1 (negatives were lone animals and plain products) rises from about 0.6 to 0.80 to 1.00 from step 7, passing 13 of 20 steps; v2 (negatives also include hybrids and wrong pairs from the pair prompts) stays between 0.53 and 0.63 at every step, under the dashed bar at 0.75, failing 0 of 20.
 
 - [ ] **1.5** The calls as a CSV, the reading printed with its counts, the card, A3q's lines
   ticked, the route rows, the board redrawn with `--step 10`.
@@ -323,14 +323,14 @@ rendered; none is drawn for this plan alone.
 
 #### Generated during plan execution
 
-All in `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/`.
+The pictures are on the cluster under `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/`, and the JSON and CSV records are under `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/`.
 
 | Item | Lane | Description | Generated by | Status | Details |
 |---|---|---|---|---|---|
-| `training-set/training-set-sheet.png` (held back, at `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/training-set/training-set-sheet.png`) | — | the training set's renders | task 1.2 | ✅ on disk, worked by task 1.2 and instruction 2.2 | seeds 1 to 8 (rows) by the three pair wordings, lone cat, lone dog and plain product (columns) |
-| [`discriminator/held-out-accuracy-per-step.png`](../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-per-step.png) | — | whether the discriminator reads new pictures | task 1.3 | ✅ on disk, worked by task 1.3; instruction 2.3 reads it | balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, held-out seeds 7 and 8 (7 positives, 6 negatives, 4 noise draws each), with the 0.75 bar dashed |
-| [`discriminator/held-out-accuracy-v1-against-v2.png`](../artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-v1-against-v2.png) | — | the same check for the first discriminator and the v2 retrain | task 1.4.2 | ✅ on disk, worked by task 1.4.2 | the same axes, one line per discriminator |
-| `result-sheet/result-sheet.png` (held back, at `2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png`) | — | the result renders | task 1.4 | ✅ on disk, worked by task 1.4; instruction 2.4 calls its tiles | seeds 1 to 4 beside 9 to 12 (rows) by plain product, best-of-N, guided and random push at 10, 30 and 100 (columns) |
+| `training-set/training-set-sheet.png` (held back, at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/training-set/training-set-sheet.png`) | — | the training set's renders | task 1.2 | ✅ on disk, worked by task 1.2 and instruction 2.2 | seeds 1 to 8 (rows) by the three pair wordings, lone cat, lone dog and plain product (columns) |
+| `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator/held-out-accuracy-per-step.png` | — | whether the discriminator reads new pictures | task 1.3 | ✅ on disk, worked by task 1.3; instruction 2.3 reads it | balanced accuracy on y from 0.5 to 1.0 against sampler step 0 to 19 of 50 on x, held-out seeds 7 and 8 (7 positives, 6 negatives, 4 noise draws each), with the 0.75 bar dashed |
+| `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/discriminator/held-out-accuracy-v1-against-v2.png` | — | the same check for the first discriminator and the v2 retrain | task 1.4.2 | ✅ on disk, worked by task 1.4.2 | the same axes, one line per discriminator |
+| `result-sheet/result-sheet.png` (held back, at `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/result-sheet/result-sheet.png`) | — | the result renders | task 1.4 | ✅ on disk, worked by task 1.4; instruction 2.4 calls its tiles | seeds 1 to 4 beside 9 to 12 (rows) by plain product, best-of-N, guided and random push at 10, 30 and 100 (columns) |
 
 #### Organization workflow
 
@@ -411,7 +411,7 @@ Expected: 13 of 20 sampler steps at balanced accuracy 0.75 or more. This needs `
 **The result renders and their checks** (task 1.4):
 
 ```bash
-python3 -c "import json; d=json.load(open('2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result.json')); print(d['card'], d['seeds'], d['strengths'], d['best_of_n'], d['canary'])"
+python3 -c "import json; d=json.load(open('2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/01-the-first-quick-test/result-sheet/result.json')); print(d['card'], d['seeds'], d['strengths'], d['best_of_n'], d['canary'])"
 ```
 
 Expected: `Quadro RTX 8000 [1, 2, 3, 4, 9, 10, 11, 12] [10, 30, 100] 2 {'seed': 1, 'strength_0_identical_to_plain': True}`.
