@@ -1,8 +1,9 @@
 # Benchmark spec: what each rival ran
 
-This page says what a run has to copy before its number can sit beside a rival's. It lists the 10 benchmarks the
-owner accepted as targets, then all 164 dataset settings across the 23 rival papers, each with its
-split, metrics and sample count. The numbers come from the [rivals' numbers table](targets/numbers.csv), and the
+This page says what a run has to copy before its number can sit beside a rival's. It lists the 11 benchmarks the
+owner accepted as targets, then 166 dataset settings from 24 of the 25 rival papers, each with its
+split, metrics and sample count. Rectify Then Diffuse appears with its two target settings only, and RPG has no section
+because it sets no target. The numbers come from the [rivals' numbers table](targets/numbers.csv), and the
 rules for judging a win are in the [comparison protocol](targets/comparison-protocol.md).
 
 **Split** means which data trained the model and which data was evaluated. **Count** means what stands behind one
@@ -11,16 +12,18 @@ dataset or task, as the numbers table names it.
 
 ## Table of contents
 
-- [The 10 benchmarks to beat](#the-10-benchmarks-to-beat)
+- [The 11 benchmarks to beat](#the-11-benchmarks-to-beat)
 - [What the rivals leave out](#what-the-rivals-leave-out)
 - [Every rival's datasets](#every-rivals-datasets)
 - [How this was checked](#how-this-was-checked)
 
-## The 10 benchmarks to beat
+<a id="the-10-benchmarks-to-beat"></a>
+
+## The 11 benchmarks to beat
 
 | Paper | Benchmark | Metric | Rival's number | Split | Count behind the number | Where |
 |---|---|---|---|---|---|---|
-| Paper 1 | CLEVR (object positions), 5 conditionings | Accuracy, higher is better | DomainExpansion 44.5 | Base model trained on the CLEVR dataset (30,000 images, 128x128 downsampled to 64x64) with one conditioning; coordinator trained with up to 2 conditionings, evaluated with up to 5 conditionings on randomly generated position sets. | 256 random sets of positions per number of conditionings, one generated image per set (256 generated samples per accuracy). | [DomainExpansion Table 2, page 3](https://arxiv.org/pdf/2605.23275#page=3) |
+| Paper 1 | CLEVR location-conditioned, 5 objects composed | Images with 5 objects in correct locations (count of 100), higher is better | Bradley-Projective 98 | Single-object location-conditioned CLEVR models (single-object dataset of 1,550,000 samples), composed at sampling at 5 locations. | 100 generated images, counted by hand. | [Projective Composition Table 1, page 17](https://arxiv.org/pdf/2502.04549#page=17) |
 | Paper 1 | Shapes3D Partial support, ∧ composition | CS (%), higher is better | CoInD 91.1 | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | not stated | [CoInD Table 4, page 20](https://arxiv.org/pdf/2503.01145#page=20) |
 | Paper 1 | CMNIST, AND | Conformity score (%), higher is better | LogicalGuidance 83.6 | Diffusion model trained on CMNIST (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated AND queries (100 unique queries per task type). | 10,000 samples from 100 unique queries per task type with 100 samples each. | [LogicalGuidance Table 4, page 7](https://arxiv.org/pdf/2602.05549#page=7) |
 | Paper 1 | CelebA Orthogonal support, ∧ composition | CS (%), higher is better | CoInD 49.15 | Stable Diffusion v1.5 fine-tuned on data constructed from CelebA with labels converted to text; AND composition prompts 'smiling' and 'male' evaluated against the joint prompt. | Not stated for this fine-tuned SDv1.5 table. The 10,000 samples on page 22 are for FID in the separate CelebA U-Net experiment. | [CoInD Table 6, page 27](https://arxiv.org/pdf/2503.01145#page=27) |
@@ -28,27 +31,29 @@ dataset or task, as the numbers table names it.
 | Paper 2 | T2I-CompBench Color | T2I-CompBench result, higher is better | CoMat 0.7827 | Trained on the T2I-CompBench training set, all of HRS-Bench and 5,000 prompts chosen at random from ABC-6K (about 20,000 prompts); evaluation follows T2I-CompBench default settings, the evaluated split is not stated | Not stated. The paper describes the benchmark as 6,000 prompts over 6 sub-categories and does not say how many were evaluated, how many images per prompt or which seeds. | [CoMat Table 1, page 7](https://arxiv.org/pdf/2404.03653#page=7) |
 | Paper 2 | T2I-CompBench Shape | BLIP-VQA, higher is better | ToMe 0.6051 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
 | Paper 2 | T2I-CompBench Texture | BLIP-VQA, higher is better | ToMe 0.6894 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
-| Paper 2 | T2ICompbench Complex | ImageReward (IR), higher is better | CO3 0.4406 | No training (CO3 on pretrained SDXL). Evaluated on the Complex category of T2I-CompBench (prompts with three or more concepts). | Not stated for ImageReward. The 11 participants rated the separate human-evaluation column. | [CO3 Table 2, page 7](https://arxiv.org/pdf/2509.25940#page=7) |
-| Paper 2 | RareBench Concat | ImageReward (IR), higher is better | CO3 0.161 | No training (CO3 on pretrained SDXL). Evaluated on the Concat category of RareBench (rare or novel concept prompts). | Not stated for ImageReward. The 11 participants rated the separate human-evaluation column. | [CO3 Table 2, page 7](https://arxiv.org/pdf/2509.25940#page=7) |
+| Paper 2 | T2I-CompBench Complex | ImageReward (IR), higher is better | RTD 0.4661 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the 1,000 prompts of the T2I-CompBench complex compositional split. | 1,000 prompts, three fixed seeds per prompt (3,000 images). | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
+| Paper 2 | RareBench Concat | ImageReward (IR), higher is better | RTD 0.4464 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the Concat category of RareBench. | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
+| Paper 2 | GenEval (1000 prompts) | Two object, higher is better | FKC 0.80 | SDXL with classifier-free guidance plus FKC at inference, guidance weight 7.5; no training stated. | 1,000 prompts; images per prompt and seeds not stated. | [FKC Table A4, page 39](https://arxiv.org/pdf/2503.02819#page=39) |
 
 ## What the rivals leave out
 
-**Only 2 of the 10 targets come with a stated image count:** Diffusion Domain Expansion (256) and Logical
-Guidance (10,000). ToMe states 300 prompts on its two benchmarks and leaves out images per prompt and seeds. The other
-6 targets have no count for that number.
+**Only 3 of the 11 targets come with a stated image count:** Projective Composition (100), Logical Guidance
+(10,000) and Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). Its RareBench Concat row
+states three seeds and leaves out how many of the 120 prompts are Concat. ToMe states 300 prompts on its two benchmarks and FKC
+states 1,000, and both leave out images per prompt and seeds. The other 4 targets have no count for that number.
 
 A run on those 8 benchmarks records the count it used, and its row reads "partly matched", as the
 [comparison protocol](targets/comparison-protocol.md#numbers) requires. Step D2 reruns one published number per rival,
 which is where a missing setting can be tested.
 
-**Whether Paper 1's CLEVR target stands is open.** Diffusion Domain Expansion trains one base model on all 30,000 CLEVR
-images, each holding several objects, so it does not work in Paper 1's setting. The
-[field table](field-table.md#what-the-check-changes) sets it beside Projective Composition's hand count. Session 4 keeps the
-scoreboard and takes that choice to the owner.
+**Paper 1's CLEVR target rests on Projective Composition.** Its models saw only single-object images, the closest printed
+setting to Paper 1. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
+model on all 30,000 multi-object CLEVR images. The [reasons for the four judged targets](targets/proposed-target-changes.md)
+give the number behind each.
 
 ## Every rival's datasets
 
-A ★ marks a setting that holds one of the 10 targets. A count can be partial, and its text then names what the paper
+A ★ marks a setting that holds one of the 11 targets. A count can be partial, and its text then names what the paper
 leaves out.
 
 <details>
@@ -81,7 +86,7 @@ leaves out.
 | Dataset | Split | Metrics | Count | Pages |
 |---|---|---|---|---|
 | CLEVR color-conditioned | Result of Bradley (2025) reported here: a color-conditioned CLEVR model trained on 1-5 objects; this paper composes the same model explicitly in Figure 16. | Length generalization (number of colors) | not stated | 37, 39 |
-| CLEVR location-conditioned | Explicit composition of single-object location-conditioned CLEVR models (single-object dataset of 1,550,000 samples, with empty, unconditional or learned background) tested at N = 1 to 6 composed locations; learned-composition Kmax values are taken from Bradley (2025). | Images with 0 objects in correct locations (count of 100), Images with 1 objects in correct locations (count of 100), Images with 2 objects in correct locations (count of 100), Images with 3 objects in correct locations (count of 100), Images with 4 objects in correct locations (count of 100), Images with 5 objects in correct locations (count of 100), Images with 6 objects in correct locations (count of 100), Kmax | 100 samples per composition method, with objects in correct locations counted manually | 17, 39 |
+| CLEVR location-conditioned ★ | Explicit composition of single-object location-conditioned CLEVR models (single-object dataset of 1,550,000 samples, with empty, unconditional or learned background) tested at N = 1 to 6 composed locations; learned-composition Kmax values are taken from Bradley (2025). | Images with 0 objects in correct locations (count of 100), Images with 1 objects in correct locations (count of 100), Images with 2 objects in correct locations (count of 100), Images with 3 objects in correct locations (count of 100), Images with 4 objects in correct locations (count of 100), Images with 5 objects in correct locations (count of 100), Images with 6 objects in correct locations (count of 100), Kmax | 100 samples per composition method, with objects in correct locations counted manually | 17, 39 |
 
 </details>
 <details>
@@ -150,10 +155,10 @@ leaves out.
 | Attend-Excite Objects | No training. Human evaluation on the Attend-Excite prompts of Chefer et al. (2023), category Objects. | Human Evaluation | Human evaluation by 11 participants, ratings 0 to 5 normalized to 0 to 1; number of prompts and images per prompt not stated. | 17 |
 | Objects (Attend-Excite category; this table names no benchmark) | No training (CO3 on pretrained SDXL with and without CO3 components). Evaluated on the Attend-Excite prompts of Chefer et al. (2023), category Objects. | BLIP-VQA, ImageReward | not stated | 18, 20, 21 |
 | RareBench Complex | No training (CO3 on pretrained SDXL). Evaluated on the Complex category of RareBench (rare or novel concept prompts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
-| RareBench Concat ★ | No training (CO3 on pretrained SDXL). Evaluated on the Concat category of RareBench (rare or novel concept prompts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
+| RareBench Concat | No training (CO3 on pretrained SDXL). Evaluated on the Concat category of RareBench (rare or novel concept prompts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
 | RareBench Relations | No training (CO3 on pretrained SDXL). Evaluated on the Relations category of RareBench (rare or novel concept prompts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
 | Runtime for one sample | No training. Runtime and peak memory of SDXL, ToMe and CO3 measured on an NVIDIA A100; which prompts are timed is not stated. | Memory (GB), Time (s) | Time and peak memory to generate one sample; number of repeated runs not stated. | 18 |
-| T2ICompbench Complex ★ | No training (CO3 on pretrained SDXL). Evaluated on the Complex category of T2I-CompBench (prompts with three or more concepts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
+| T2ICompbench Complex | No training (CO3 on pretrained SDXL). Evaluated on the Complex category of T2I-CompBench (prompts with three or more concepts). | Human Evaluation (HE), ImageReward (IR) | Human evaluation by 11 participants; number of prompts, images per prompt and seeds not stated. | 7 |
 
 </details>
 <details>
@@ -216,7 +221,7 @@ leaves out.
 | Dataset | Split | Metrics | Count | Pages |
 |---|---|---|---|---|
 | CLEVR (object positions) | Base model trained on the CLEVR dataset (30,000 images, 128x128 downsampled to 64x64) with one conditioning; coordinator trained with up to 2 conditionings, evaluated with up to 5 conditionings on randomly generated position sets. | Accuracy | 256 random sets of positions per number of conditionings, one generated image per set (256 generated samples per accuracy). | 3 |
-| CLEVR (object positions), 5 conditionings ★ | Base model trained on the CLEVR dataset (30,000 images, 128x128 downsampled to 64x64) with one conditioning; coordinator trained with up to 2 conditionings, evaluated with up to 5 conditionings on randomly generated position sets. | Accuracy | 256 random sets of positions per number of conditionings, one generated image per set (256 generated samples per accuracy). | 3 |
+| CLEVR (object positions), 5 conditionings | Base model trained on the CLEVR dataset (30,000 images, 128x128 downsampled to 64x64) with one conditioning; coordinator trained with up to 2 conditionings, evaluated with up to 5 conditionings on randomly generated position sets. | Accuracy | 256 random sets of positions per number of conditionings, one generated image per set (256 generated samples per accuracy). | 3 |
 | Google Maps satellite images | Dataset of 7,300 map and satellite image pairs collected with the Google Maps API; coordinator trained on N = 96, evaluated at N = 96 and out-of-distribution N = 128. A held-out train/test split of the 7,300 pairs is not stated; FID is against the whole dataset. | FID | 3,072 generated samples compared with the whole 7,300-image satellite dataset. | 3 |
 | Slakh2100 | Base model and coordinators trained on the Slakh2100 training set (1,500 tracks); coordinator trained on 48 s tracks (Ltrain = 5), evaluated on 4l (48 s) and 10l (120 s) tracks (Ltest = 13); FAD is computed against middle parts cut from the training dataset tracks of the same length. | FAD, Size (M parameters) | 128 generated tracks per reported FAD value; the paper notes 128 vs 1,024 tracks changes FAD by a small margin. | 3 |
 
@@ -239,7 +244,7 @@ leaves out.
 | Dataset | Split | Metrics | Count | Pages |
 |---|---|---|---|---|
 | 100 protein target pairs (P1, P2) | Pretrained dual-pocket diffusion model with FKC at inference; evaluated on 100 protein pairs, with 5 molecule sizes sampled from the original training set of Guan et al. (2023) | (P1 * P2) docking score product, Better than ref. (fraction), Div., P1 docking score, P2 docking score, QED, SA, Val. & Uniq., max(P1, P2) docking score, mean docking score of the reference molecules | 100 protein pairs, 32 ligands for each of 5 molecule lengths per pair; values are averages over all generated molecules in each run | 9 |
-| GenEval (1000 prompts) | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on 1000 GenEval prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 1000 prompts; images per prompt and seeds not stated; mean values reported | 39 |
+| GenEval (1000 prompts) ★ | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on 1000 GenEval prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 1000 prompts; images per prompt and seeds not stated; mean values reported | 39 |
 | GenEval (553 prompts) | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on the GenEval original 553 prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 553 prompts; images per prompt and seeds not stated; mean values reported | 39 |
 | ImageNet-512 | EDM2-XS model trained on ImageNet-512 (pretrained, FKC resampling applied at inference); which classes or prompts are evaluated is not stated | CLIP, IR (ImageReward) | CLIP and ImageReward scores averaged over 10,000 images | 7, 38 |
 | LDMol molecules, property pair GSK3b / DRD2 | Pretrained LDMol latent diffusion model (text-conditioned) with FKC at inference; prompted with the text 'This molecule inhibits {protein_name}' for the property pair; no training split stated | (P1, P2) top-1, P1, (P1, P2) top-1, P2, Div., P1 top-10, P2 top-10, Qual., Val. & Uniq. | Top-10 molecules (highest P1*P2) from a batch of 512, averaged over 5 runs; top-1 molecule reported overall | 42, 44 |
@@ -332,6 +337,15 @@ leaves out.
 
 </details>
 <details>
+<summary><b>RTD</b> (<a href="https://arxiv.org/abs/2608.03135">arXiv 2608.03135</a>): its 2 target settings</summary>
+
+| Dataset | Split | Metrics | Count | Pages |
+|---|---|---|---|---|
+| T2I-CompBench Complex ★ | No training (Rectify Then Diffuse on pretrained SDXL); the 1,000 prompts of the complex compositional split. | Human Evaluation (HE), ImageReward (IR), S-IoU5 | 1,000 prompts, three fixed seeds per prompt (3,000 images). Human evaluation by 11 participants. | 4, 6 |
+| RareBench Concat ★ | No training (Rectify Then Diffuse on pretrained SDXL); the Concat category of RareBench. | Human Evaluation (HE), ImageReward (IR) | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. Human evaluation by 11 participants. | 4, 6 |
+
+</details>
+<details>
 <summary><b>Sculpting</b> (<a href="https://arxiv.org/abs/2309.16115">arXiv 2309.16115</a>): 3 settings</summary>
 
 | Dataset | Split | Metrics | Count | Pages |
@@ -382,15 +396,16 @@ leaves out.
 <details>
 <summary>How the split and count of each setting were read and verified</summary>
 
-**Reading.** Four readers took each of the 164 settings to the rival's own PDF, appendices included, and copied
+**Reading.** Four readers took 164 of the settings to the rival's own PDF, appendices included, and copied
 one sentence as evidence for each split and count. Their records, with every quote and page, are in
 [the checked reads](benchmark-spec-reads/checked.json).
 
 **Quotes.** A script found all 290 quotes on the pages cited: 164 for splits and 126 for counts. The other
 38 counts are `not stated`, so they have no quote.
 
-**Target rows.** The count on the four target rows for CO3, CoMat and CoInD's fine-tuned CelebA table describes the printed
-metric on that row, read from the page by hand.
+**Target rows.** The count on the target rows for CoMat, CoInD's fine-tuned CelebA table, Projective Composition and Rectify
+Then Diffuse describes the printed metric on that row, read from the page by hand. Rectify Then Diffuse's two settings were
+read the same way.
 
 **One disagreement inside a paper.** Logical Guidance's appendix E.2 (page 23) gives the conformity score 10,000 samples from
 100 queries per task type, without naming a dataset. Its page 24 gives CelebA FID 5,000 samples per task from 50 queries of
