@@ -137,7 +137,7 @@ It walks up from the output folder to the nearest folder that exists, so the che
 
 The plan 20 training set was 550 images: 200 cat, 200 dog and 150 both `stated` (`photo-set-counts.json` in the plan 20 results folder). One cat, one dog and two both-animal examples, each at 256 px and shrunk to 64 px, are below. Every training image holds a cat, a dog or both, so no picture of neither subject is among them `stated` (the page's account and the three labels in the counts file; the picture shows 4 of the 550). Of the "both" images in this set, 38 come from `coco` and 112 from `sd35` `stated` (`per_label_source` in `photo-set-counts.json`).
 
-<a href="../2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png"><img src="../2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png" width="200" alt="One cat, one dog and two both-animal training photos at 256 px above the same four at 64 px"></a>
+*Picture held back.* `/datasets/mmolefe/poe_repair_min/artifacts-archive/2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png` is named here and not shown, because it holds COCO photographs fetched from the web. It shows one image per label at 256 px above and the same image at 64 px below.
 
 The picture shows four examples: a cat, a dog and two with both animals `verified`.
 
