@@ -52,3 +52,26 @@ at 25), against 0 for the same sampler without the push. Adding the separate-lab
 to 285 of 320 (89%) on fresh seeds, where the pair-aware push alone gives 215.
 
 <a href="../../artifacts/results/24-mnist-one-model/loop2/heldout-final.png"><img src="../../artifacts/results/24-mnist-one-model/loop2/heldout-final.png" width="400" alt="Five held-out pairs, each without the push (one digit) and with the final checker's push (two separate digits)"></a>
+
+## More pictures from these runs
+
+**The fresh-seed sheet shows the 285 of 320 pair by pair, and two held-out sheets show the lowest and
+highest pair from the first run.** The first run's eye counts at strength 3 are 3, 14, 25, 11 and 31
+for 0 & 3, 1 & 9, 3 & 4, 3 & 6 and 4 & 7, which add to 84 of 320 `verified`
+([the eye counts](../../artifacts/results/24-mnist-one-model/five-versions/eye_counts.json)).
+
+| Fresh seeds, both pushes | Lowest held-out pair | Highest held-out pair |
+|---|---|---|
+| <a href="../../artifacts/results/24-mnist-one-model/loop2/final-seeds64.png"><img src="../../artifacts/results/24-mnist-one-model/loop2/final-seeds64.png" width="200" alt="Fifteen rows of ten canvases: five held-out pairs, each with no push, the pair-aware push, and both pushes"></a> | <a href="../../artifacts/results/24-mnist-one-model/five-versions/sheet-03.png"><img src="../../artifacts/results/24-mnist-one-model/five-versions/sheet-03.png" width="200" alt="Five rows of 16 canvases asked for 0 and 3, one row per version"></a> | <a href="../../artifacts/results/24-mnist-one-model/five-versions/sheet-47.png"><img src="../../artifacts/results/24-mnist-one-model/five-versions/sheet-47.png" width="200" alt="Five rows of 16 canvases asked for 4 and 7, one row per version"></a> |
+| Ten of each pair's 64 fresh seeds (64 to 73), one row per setup. With both pushes the blind eye counts are 44, 53, 64, 64 and 60 of 64, which add to 285 `verified` (the picture and `data/mnist-canvas/24-mnist-one-model/five-versions/loop5-final-seeds64/eye_counts_blind.json`) | 0 & 3, the first 16 of 64 seeds in five versions. The sheet prints the judge's counts. At strength 3 the pair-aware push gets 2 of 64 from the judge and 3 by eye `verified` | 4 & 7, the same layout. At strength 3 the pair-aware push gets 16 of 64 from the judge and 31 by eye `verified` |
+
+**Each network diagram was tried in four drawing styles.** The styles are your slides, a clean cheat
+sheet, a flat schematic and textbook ink, and the card names the cheat-sheet style for the finished
+network views `stated` ([the card](../../artifacts/results/24-mnist-one-model/README.md#network-view)).
+
+| The guidance sum | The readout head | The U-Net |
+|---|---|---|
+| <a href="../../artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-samples-guidance.png"><img src="../../artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-samples-guidance.png" width="200" alt="The guidance arrow sum drawn in four styles side by side"></a> | <a href="../../artifacts/results/24-mnist-one-model/network-view/styles-readout/style-samples-readout.png"><img src="../../artifacts/results/24-mnist-one-model/network-view/styles-readout/style-samples-readout.png" width="200" alt="The readout head diagram drawn in four styles side by side"></a> | <a href="../../artifacts/results/24-mnist-one-model/network-view/styles-unet/style-samples-unet.png"><img src="../../artifacts/results/24-mnist-one-model/network-view/styles-unet/style-samples-unet.png" width="200" alt="The U-Net diagram drawn in four styles side by side"></a> |
+| The unconditional prediction plus s times the difference, at s = 3 `verified` | Frozen layers, three taps, the head, its map, and the gradient that moves the latent `verified` | Four levels down and up, with skip connections across the U `verified` |
+
+The other 23 versions, judge checks and style sheets in [this result's folder](../../artifacts/results/24-mnist-one-model) are held out of the artifact drain because the summaries above contain them.

@@ -1,0 +1,299 @@
+{
+ "files": {
+  "artifacts/results/24-mnist-one-model/README.md": {
+   "at": "2026-11-22",
+   "sha256": "5cca5d4875a8f2b3dee73fdf6d97301018b9f618305138d69b2a83584519e385",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/compose-against-checker-accuracy.png": {
+   "at": "2026-11-22",
+   "sha256": "02bc8cd238fa9ef28cab7eaf8da572ac6f131f1d1008cd1ceda8ebc7b900dd14",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-03.png": {
+   "at": "2026-11-22",
+   "sha256": "581a573cc9ead2e54860b90c232a524075ba1ac7c2788306660de5e092a0c72e",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-47.png": {
+   "at": "2026-11-22",
+   "sha256": "5c871228e6981e028dbc83e823daef76b18c285232c0096659c4b453b8a8ba4c",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-78.png": {
+   "at": "2026-11-22",
+   "sha256": "aad9df96286452940aeef22c8f8f20ccbbfba33bcfc74af2dceb376103763f53",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/judge-gate/judge-against-eye-calls.png": {
+   "at": "2026-11-22",
+   "sha256": "525b0d6258d0337752b15b5fb47b13d725bf6e04d225989891ddd941dc89c79e",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/loop2/final-seeds64.png": {
+   "at": "2026-11-22",
+   "sha256": "8f7c4eda77c07e4e2d768adb3690e3f6314c93b25e0a282936b9eb4d6b3543d1",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/loop2/heldout-final.png": {
+   "at": "2026-11-22",
+   "sha256": "6dbdd9cc9ffb287b8d31053def085cb47dbfec9df85ca700ae4efdedd59cfe5f",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-samples-guidance.png": {
+   "at": "2026-11-22",
+   "sha256": "f17eb80203ace3756f11b0246ac29f797fb70d8f83ee66ce4c56e064ec0072f6",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-samples-readout.png": {
+   "at": "2026-11-22",
+   "sha256": "d7e6384dc141e8c76195dba66bfc4b92d7cb9bff353cda7ce75495017f8de853",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-samples-unet.png": {
+   "at": "2026-11-22",
+   "sha256": "368bc69f12e23669dfc832bfbae6a45a90aa80b756aa876f5b91b38df02d79c8",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.01.png": {
+   "at": "2026-11-22",
+   "sha256": "c739b5a261060e07abc30a7d1760a877c8416728771369488090656bf53a11ae",
+   "state": "drained"
+  },
+  "artifacts/results/24-mnist-one-model/plain-product/plain-product-share-0.1.png": {
+   "at": "2026-11-22",
+   "sha256": "821ced672691bee83dd806d8b79ade4f21982f5744c0e95b40d427af1777d6ee",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/README.md": {
+   "at": "2026-11-22",
+   "sha256": "0cecbba74457893d380109b84078978b902540d6bf0fcdbced5c7a9e2ebaf1f2",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/e59-either-alone-8.png": {
+   "at": "2026-11-22",
+   "sha256": "16c3bf439fa27ba16ff1f8195b59b06fd1742d9845eec60d1f6cf763640d6e54",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-both-floor0.5-3-6.png": {
+   "at": "2026-11-22",
+   "sha256": "aeb696a90c95a0092305d5ab0a862152ba5e612b3321870adf5cd4bf15d5bf10",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor0.5-1-9.png": {
+   "at": "2026-11-22",
+   "sha256": "42e0f6dc846e514bbed8ec34dee739d55245810510ce126abb7f9b045560a160",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor0.5-3-6.png": {
+   "at": "2026-11-22",
+   "sha256": "a869d06a585a68a662090acc56b17a82d1b2141678c28736ae7c45f213b66f79",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/side-both-guided-e59-either-4-7.png": {
+   "at": "2026-11-22",
+   "sha256": "3f3ae6a1cee929c9eb1265be0f97e975c367abc173457a6a46792093be428fea",
+   "state": "drained"
+  },
+  "artifacts/results/32-mnist-two-experts/sheets/side-none-guided-e59-either-4-7.png": {
+   "at": "2026-11-22",
+   "sha256": "ee4889ef4fcb344a4c381fa588082c32f44a2ff199ae59fbe9917a290865dd09",
+   "state": "drained"
+  },
+  "artifacts/results/README.md": {
+   "at": "2026-11-22",
+   "sha256": "1a214dd99bcabd001ff39d25d03fe4efbb34798e4a8a157bc4179654824ac9b7",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png": {
+   "at": "2026-11-22",
+   "sha256": "1b34602fd53bf0a8e1c65766043bcc3afb3b6e04fd8b1685b07492be58b035ec",
+   "state": "skipped"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/example-one-per-label.png": {
+   "at": "2026-11-22",
+   "sha256": "391959ffe2fd45e543572667505ae43a588bd59b982ea297e6855ddf0c042c1a",
+   "state": "skipped"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/imagenet-product-check-256.png": {
+   "at": "2026-11-22",
+   "sha256": "2aa74c9ef4b931944f3ef6bccb2910a7058847fd3ffcafa9e46439052d57b16b",
+   "state": "drained"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-draws.png": {
+   "at": "2026-11-22",
+   "sha256": "320be50f8e3140a1cf57b2e4d129373d6f26bd505ef79c69ce23d38f80cf1c7a",
+   "state": "skipped"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-imagenet-draws.png": {
+   "at": "2026-11-22",
+   "sha256": "2ff090cb2fdc4cf53ad2ce8cd0f72bddb8c9fa0be98e0655e955aa36df4b9c26",
+   "state": "skipped"
+  },
+  "artifacts/results/does-a-pair-aware-push-compose-our-photos/push-scale-check-256.png": {
+   "at": "2026-11-22",
+   "sha256": "d315a6ebcf94b644106993f4232dd4e1ec8c7541d42aa21920aabeecc6d20f61",
+   "state": "skipped"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "05d77e89c282da9ca62a7e3eb7a4fd05eba52cb23f649566566ff30dc7531f90",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-codewalk.html": {
+   "at": "2026-11-22",
+   "sha256": "03140a981000a50f1783da34b0219ab9999a6f51fe4ea78bbe3a5e5699646bb1",
+   "state": "skipped"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer-light.png": {
+   "at": "2026-11-22",
+   "sha256": "31400f81be881741c0c8fbc12a9c742add2f6c974b2e081e77e3cb868e3f37f6",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/guided-step-stepper.html": {
+   "at": "2026-11-22",
+   "sha256": "42f26ae359f263cb8f5948387a147e08c81ac6ea8fb30bb04c73ec9199402263",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/run_grad.png": {
+   "at": "2026-11-22",
+   "sha256": "648fe0310f7c066f7d1357a75e8349b28ac52b2b0dfa664ad137d213268c018a",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/three_ways_mean.png": {
+   "at": "2026-11-22",
+   "sha256": "69e4ae30e8f68d5bb3e9542fce7e4c40c4ba1b2afe48001c22cc935c106939a3",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "71a09aac2d8dda15e54f0e67dc90c41b69e7778ceb63bb423bb1076e6ad3f623",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-codewalk.html": {
+   "at": "2026-11-22",
+   "sha256": "55c0e23893d715c278e0d3468c9980fc3301780e5a2874d67936cc55f39155ad",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-high-level-design-explainer-light.png": {
+   "at": "2026-11-22",
+   "sha256": "8c1b26ac384e377ba3a6587e6277c92461f1db29b665f7e42b37504c3255f112",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/eq_push.png": {
+   "at": "2026-11-22",
+   "sha256": "13b1f2f9a0280e5732b2df3fc9b493df8b80d68d557090f843f441d80ab214a6",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/run_push_vs_cap.png": {
+   "at": "2026-11-22",
+   "sha256": "2c1877d0e3af154fdbdb9aedee5803baf18a3afb6720cd87f245676057408102",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/README.md": {
+   "at": "2026-11-22",
+   "sha256": "ef8335bdd3a173c8a556762f2ff9852be4487430dbf209af15368eefc2c298a3",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-codewalk.html": {
+   "at": "2026-11-22",
+   "sha256": "104a99c84728733f5b9b280bbe2c31d96f272d3334d0b5ae5c6264df5ea0a7cb",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-high-level-design-explainer-light.png": {
+   "at": "2026-11-22",
+   "sha256": "8119c10da50c9dcf547582161ce1f7c4ffc8fb11306932cfeec4110ce32bc204",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_readout.png": {
+   "at": "2026-11-22",
+   "sha256": "2cad9db96baae0f3efad9cbc8b1ba0e5e31235d9840a8873a421a0db59d5dccd",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-codewalk.html": {
+   "at": "2026-11-22",
+   "sha256": "1bc26dde0f6150e8c307c26476bc1387923965ae87a94f9a8356ff2eb21889bf",
+   "state": "drained"
+  },
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer-light.png": {
+   "at": "2026-11-22",
+   "sha256": "2845bff68c4b8bbbede51726c6e714529a508449ebccf18fceac1ac1b30e87f5",
+   "state": "drained"
+  }
+ },
+ "held": [
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-19.png",
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-34.png",
+  "artifacts/results/24-mnist-one-model/five-versions/sheet-36.png",
+  "artifacts/results/24-mnist-one-model/judge-gate/adjudicate-part1.png",
+  "artifacts/results/24-mnist-one-model/judge-gate/adjudicate-part2.png",
+  "artifacts/results/24-mnist-one-model/loop2/eta1-s10-06.png",
+  "artifacts/results/24-mnist-one-model/loop2/eta1-s10-12.png",
+  "artifacts/results/24-mnist-one-model/loop2/eta1-s10-69.png",
+  "artifacts/results/24-mnist-one-model/loop2/round3-06.png",
+  "artifacts/results/24-mnist-one-model/loop2/round3-12.png",
+  "artifacts/results/24-mnist-one-model/loop2/round3-69.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-guidance-cheat-sheet.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-guidance-flat-schematic.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-guidance-ink.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-guidance/style-guidance-your-slides.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-readout-cheat-sheet.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-readout-flat-schematic.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-readout-ink.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-readout/style-readout-your-slides.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-unet-cheat-sheet.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-unet-flat-schematic.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-unet-ink.png",
+  "artifacts/results/24-mnist-one-model/network-view/styles-unet/style-unet-your-slides.png",
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-both-floor0.5-1-9.png",
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-blank-4-7.png",
+  "artifacts/results/32-mnist-two-experts/sheets/fixed-none-floor1.0-1-9.png",
+  "artifacts/results/32-mnist-two-experts/sheets/side-ink-guided-e59-either-4-7.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer.svg",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer__2026-11-17.svg",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_classifier.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_condition_mean.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_condition_score.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_ddim.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_denoise.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_loop.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_sample.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/eq_scale.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_0.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_149.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_199.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_249.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_49.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/rig_snap_99.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/run_push.png",
+  "artifacts/results/what-each-line-of-classifier-guidance-computes/pictures/three_ways.gif",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-high-level-design-explainer-dark.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-high-level-design-explainer.svg",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/our-guided-sampler-high-level-design-explainer__2026-11-17.svg",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/eq_cap.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/eq_cfg.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/eq_combine.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/eq_ddim.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/run_grad_push.png",
+  "artifacts/results/what-each-line-of-our-guided-sampler-computes/pictures/run_sigma.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-high-level-design-explainer-dark.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-high-level-design-explainer.svg",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-high-level-design-explainer__2026-11-17.svg",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/our-count-head-high-level-design-explainer__2026-11-18.svg",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_bilinear.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_blob.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_check_noise.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_count_loss.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_count_taps.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_ddim.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_mixing.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_push.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_sparse.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_taps.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/pictures/eq_time.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer-dark.png",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer.svg",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer__2026-11-17.svg",
+  "artifacts/results/what-each-line-of-readout-guidance-computes/readout-guidance-loop-high-level-design-explainer__2026-11-18.svg"
+ ]
+}
