@@ -54,7 +54,7 @@ comparison. <a href="../../results/does-a-small-discriminator-steer-cat-x-dog/tr
 **Done.** 64 tiles on one card; strength 0 identical to plain; random-to-guided norm 1.0000 every step.
 
 **Results.** Draft calls: 0 of 4 composed on seeds 9 to 12 in every column; the cap fired on 100% of
-steps at s = 100; draft reading 7. <a href="../../results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png"><img src="../../results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png" width="200" alt="the result sheet"></a>
+steps at s = 100; draft reading 7. `result-sheet.png` is not shown because it failed the subject check
 
 **Links to.** The diagnostics, which explain it.
 

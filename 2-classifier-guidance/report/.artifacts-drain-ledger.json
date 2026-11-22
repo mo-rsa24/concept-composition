@@ -427,7 +427,7 @@
   },
   "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/README.md": {
    "at": "2026-11-22",
-   "sha256": "cd5f267c3be95f134eb75b1352c8e6daca12cd22204d134b04c87de359f9f641",
+   "sha256": "64d0f549e2b3987a614659de8d3199109dd49472ab5cc8c23d70fd2b9da99b1b",
    "state": "drained"
   },
   "artifacts/results/does-a-small-discriminator-steer-cat-x-dog/attention/top10-overlap-through-time.png": {

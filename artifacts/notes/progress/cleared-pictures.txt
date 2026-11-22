@@ -154,7 +154,6 @@
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/cap-0.1-vs-0.3.png
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/diagnostics/kinds-through-time.png
 2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/discriminator/held-out-accuracy-all-checkers.png
-2-classifier-guidance/artifacts/results/does-a-small-discriminator-steer-cat-x-dog/result-sheet/result-sheet.png
 2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-piles-sheet_dog.png
 2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c207_s10_seed0.png
 2-classifier-guidance/artifacts/results/what-each-line-of-classifier-guidance-computes/classifier-guidance-loop-high-level-design-explainer-light.png
