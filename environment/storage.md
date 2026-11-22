@@ -86,7 +86,7 @@ Navigation: ⬅️ [The storage map](#the-storage-map) | 📋 [TOC](#table-of-co
 - **W&B project for the animals program:** `prime_lab/poe-repair-animals-compose`.
 - **CelebA** (aligned faces, identity and all 40 attributes, parquet, 11 GB):
   `/datasets/mmolefe/celeba/flwrlabs-celeba/img_align+identity+attr/`, 19 train, valid and 3 test
-  shards. Pulled anonymously from Hugging Face `flwrlabs/celeba` on the login node `mscluster84`
+  shards. Pulled anonymously from Hugging Face `flwrlabs/celeba` on `mscluster84`, a `bigbatch` compute node,
   with the `co3` python's `huggingface_hub` on 2026-11-04. Counted from its `Male` and
   `Blond_Hair` columns: train 162,770 faces, 1,387 of them blond men (0.852%); valid 19,867 with
   182; test 19,962 with 180.

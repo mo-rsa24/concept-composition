@@ -57,6 +57,8 @@ External documents this folder draws on are listed in [the sources register](sou
 
 Navigation: ⬅️ [The themes](#the-themes) | 📋 [TOC](#table-of-contents) | [Next](#pictures-still-missing) ➡️
 
+`fail_rate.md` and `scorer_validated.json`, cited on this page, exist only in the cluster checkout (checked 2026-11-22), because their `results/` folders are git-ignored.
+
 The things this pass could not settle by reading. Each names who or what would settle it.
 
 - [ ] **The current animal-pair pool's size is not settled.** `1-lora-correction/artifacts/results/does-it-reach-unseen-pairs/the-transfer/does-the-fix-reach-unseen-pairs/fail_rate.md`

@@ -102,12 +102,13 @@ straight at the recipe that answers it.
 | [syncing-the-paper-with-overleaf.md](syncing-the-paper-with-overleaf.md) | The repo and the Overleaf clone beside it: moving manuscript edits between the two, and the zip route | 4 (2 `ran`, 2 `unverified`) |
 | [setting-up-the-reduce-reuse-recycle-code.md](setting-up-the-reduce-reuse-recycle-code.md) | The laptop and a cluster GPU node: clone the authors' code, build its environments, fetch the CLEVR checkpoint | 7 (6 `ran`, 1 `unverified`) |
 
-Two declared exceptions apply across this folder. Recorded commands keep placeholders such as
+Three declared exceptions apply across this folder. Recorded commands keep placeholders such as
 `<node>` because a recorded command does not change. On `launching-and-harvesting-a-run.md`,
 `checking-the-plan-tree.md`, `showing-a-scene-in-the-local-browser.md`,
 `running-the-langevin-corrector.md`, `reproducing-where-each-condition-lands.md`,
 `composing-a-two-panel-figure-in-inkscape.md` and `relettering-an-image-with-baked-in-text.md`, the
-freshness mark sits on the line under the heading, which keeps every section link stable.
+freshness mark sits on the line under the heading, which keeps every section link stable. Sections 1
+and 2 of `reading-a-training-run.md` are reference tables of logged curves, so they have no ✅ block.
 
 ## Still open
 

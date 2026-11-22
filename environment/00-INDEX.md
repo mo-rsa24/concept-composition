@@ -39,7 +39,8 @@ Navigation: ⬅️ [Before I...](#before-i) | 📋 [TOC](#table-of-contents) | [
 | [paper.md](paper.md) | the LaTeX build for `writing/iclr/` | 1 (flat, no second leaf yet) |
 
 Pages in this folder keep their command blocks and code excerpts beside the facts they depend on,
-a declared exception to the rule that a leaf holds no commands.
+a declared exception to the rule that a leaf holds no commands. The [provenance page](provenance.md)
+declares a fourth mark, `measured`, for numbers recorded from a named run.
 
 How every fact here was established is in [provenance.md](provenance.md). The project failure
 catalog is [known-failures.md](known-failures.md).

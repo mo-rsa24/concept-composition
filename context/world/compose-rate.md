@@ -198,6 +198,7 @@ Elephant and penguin, seed 9, count 1, scored `blend`. The picture shows one ele
 
 ### Still open
 
+- `fail_rate.md` and `scorer_validated.json`, cited on this page, exist only in the cluster checkout (checked 2026-11-22), because their `results/` folders are git-ignored.
 **The printed band differs between sources.** The page and the audit card give the true rate at λ=1 as about 87% to 94%. The card's closing note says a review file carries an open task to correct that band to 75% to 94% once a labelling pass runs. Both are left as written `stated` (the audit card).
 
 - `scorer_validated.json`, which the page reads for the rule string and `"pass": true`, is not at `.../can-we-trust-the-compose-score/compose-scorer-validation/` now and no copy was found under the project. `RENAMES.md` mentions it once, saying scopes 03 and 04 still read it, with the completed compose-scorer plan now under `artifacts/plans/completed/compose-scorer/`. The rule above was read from the code instead, and the claims drawn from the JSON are untouched.

@@ -84,7 +84,7 @@ Two execution modes, and Slurm only sees one of them:
 
 ```bash
 scripts/cluster.sh sh "squeue -u mmolefe"   # normal sbatch jobs
-ssh <node> "pgrep -af 'sweep|train'"  # shared-device runs launched with nohup; invisible to squeue
+scripts/cluster.sh sh "ssh <node> \"pgrep -af 'sweep|train'\""   # runs launched with nohup; invisible to squeue
 ```
 
 **Why both.** New runs go through `sbatch`, and Slurm sees them. A run already started with `nohup`

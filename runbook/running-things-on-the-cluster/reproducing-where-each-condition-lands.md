@@ -305,11 +305,15 @@ Navigation: ⬅️ [Previous](#4-build-the-page-from-diffusion-explorers-ui-and-
 
 You want the page on your own machine, for a talk or a supervisor meeting off the cluster.
 
-On the laptop:
+⚠️ The pull overwrites any local copy of `dist/`, so list what is on the cluster first. The `ls` line was run on
+2026-11-22, and the pull and server lines are `unverified`.
+
+On the laptop, from the repository root:
 
 ```bash
-rsync -av mmolefe@mscluster85.ms.wits.ac.za:/home-mscluster/mmolefe/Playground/PhD/concept-composition/1-lora-correction/artifacts/scenes/where-each-condition-lands/dist/ ~/where-each-condition-lands/
-cd ~/where-each-condition-lands && python3 -m http.server 8800
+scripts/cluster.sh sh "ls 1-lora-correction/artifacts/scenes/where-each-condition-lands/dist"
+scripts/cluster.sh pull 1-lora-correction/artifacts/scenes/where-each-condition-lands/dist
+cd 1-lora-correction/artifacts/scenes/where-each-condition-lands/dist && python3 -m http.server 8800
 ```
 
 Then browse to `http://localhost:8800/`.

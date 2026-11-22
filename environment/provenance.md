@@ -7,7 +7,8 @@ Navigation: 📋 [Index](00-INDEX.md) | [Overview](overview.md#provenance)
 One row per fact, wherever in this folder the fact lives. `verified` means someone ran the check
 live on the date given and saw the result. `stated` means a person said it and nobody checked it.
 `inferred` means it was read out of the repository or a document and confirmed by neither a
-person nor a run this sitting.
+person nor a run this sitting. `measured` means a number recorded from a named run on the date given,
+and that run was not repeated this sitting.
 
 | Fact | Where it lives | Mark | How it was established |
 |---|---|---|---|
@@ -43,7 +44,6 @@ person nor a run this sitting.
 | LaTeX Workshop extension present, version `10.15.2`, server-side | `paper.md` | verified | `ls ~/.vscode-server/extensions/`, live, 2026-08-24 (re-confirms a 2026-08-05 check) |
 | Extension's 9 default recipes, `latexmk` first, `tectonic` last | `paper.md` | inferred | read from `package.json` on 2026-08-05; not re-read this sitting |
 | `.vscode/settings.json` exists, tracked, defines a custom `tectonic` recipe, no `recipe.default` key | `paper.md`, `overview.md` | verified | file read directly, live, 2026-08-24; `git log` shows it added in commit `2c4d0b6` |
-| Whether the new `.vscode/settings.json` makes plain "Build LaTeX project" work without picking a recipe | `paper.md` | **open** | deliberately not tested this sitting; testing means running a build, which writes outside this folder's scope |
 | VS Code keystroke build route (`Ctrl+Shift+P` -> Build with recipe -> tectonic) | `paper.md` | stated | user-stated 2026-08-05; the command palette cannot be driven from a shell, so this has never been machine-verified |
 | The repository-wide `*.pdf` rule is commented out at `.gitignore:43`; only `writing/restoring-plurality-in-compositional-diffusion_overleaf/**/*.pdf` (`.gitignore:72`) keeps PDFs out | `paper.md` | verified | `.gitignore` read and `git check-ignore -v` run on a PDF under that folder and on `foo.pdf` (not ignored), 2026-11-22 |
 | Fraction-of-distance-reached, direction-cosine, and scorer failure patterns (`poe-score-001/002`, `poe-lora-001/002`) | `known-failures.md` | stated | carried verbatim from `environment/known-failures.md`, first discovered at step-09; not re-run this sitting |

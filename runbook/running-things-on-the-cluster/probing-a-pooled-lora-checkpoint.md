@@ -352,6 +352,9 @@ the script runs one training per device in the background.
 | `#SBATCH --nodelist` | `mscluster106` | `sinfo -N -p biggpu -o "%N %t"`, then `nvidia-smi` over SSH to confirm both devices are free |
 | the two `run_rank` lines | `run_rank 0 16 16 &` and `run_rank 1 32 32 &` | device index, rank, alpha |
 
+Recorded from a cluster session. From the laptop, commit first and submit with
+`scripts/cluster.sh run "sbatch 1-lora-correction/scripts/showcase/experiment_b_rank.sbatch"`.
+
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
 sbatch 1-lora-correction/scripts/showcase/experiment_b_rank.sbatch

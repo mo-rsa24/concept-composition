@@ -26,7 +26,7 @@ Worked example throughout: the two correction-window grids in
 
 Navigation: 📋 [TOC](#table-of-contents) | [Next](#1-make-the-panels) ➡️
 
-**The figure is built by a script, not by hand.**
+**The figure is built by a script, not by hand.** These commands are recorded from a cluster session. From the laptop, wrap them in `scripts/cluster.sh sh "..."`.
 
 ```bash
 export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
@@ -115,7 +115,7 @@ Navigation: ⬅️ [Previous](#read-this-before-you-start) | 📋 [TOC](#table-o
 
 Both grids are drawn by scripts, not by hand.
 
-**Panel (a) is the window extending from the start.**
+**Panel (a) is the window extending from the start.** These commands are recorded from a cluster session. From the laptop, wrap them in `scripts/cluster.sh sh "..."`.
 
 ```bash
 export PYTHONPATH=/home-mscluster/mmolefe/Playground/PhD/concept-composition
@@ -189,10 +189,12 @@ Navigation: ⬅️ [Previous](#1-make-the-panels) | 📋 [TOC](#table-of-content
 
 `unverified`
 
-Inkscape is not installed on the cluster. You do this part locally.
+Inkscape is not installed on the cluster. You do this part on the laptop, from the repository root.
+
+⚠️ The pull overwrites local copies of the files in that folder.
 
 ```bash
-scp mmolefe@<cluster>:/home-mscluster/mmolefe/Playground/PhD/concept-composition/writing/iclr/figures/when-the-correction-arrives/poe/panel-*.pdf .
+scripts/cluster.sh pull writing/iclr/figures/when-the-correction-arrives/poe
 ```
 
 ---

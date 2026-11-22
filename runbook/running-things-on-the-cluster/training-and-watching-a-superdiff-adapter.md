@@ -124,6 +124,8 @@ Renders the pooled-adapter pool (11 training pairs × 8 seeds, from `phase1_r8_4
 through SuperDiff at κ 0.5 and saves every step. About 77 s per cell on an A6000; two shards on
 two devices finish in about 70 minutes.
 
+The script this recorded command runs lives at `$REPO/1-lora-correction/scripts/build_superdiff_cache.py`.
+
 ```bash
 SD=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff
 REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
@@ -258,6 +260,8 @@ SuperDiff alone at 200 steps, seeds 9 to 12, λ 0 to 1 of its own residual added
 per κ setting: cat × dog at κ 0, 0.25, 0.5, 0.75, 1 and its own unclamped κ, butterfly × meadow
 at κ 0.5. 140 renders at 107 to 136 s each, about 5 hours on one A6000.
 
+The two scripts this recorded command runs live under `$REPO/1-lora-correction/scripts/superdiff/`.
+
 ```bash
 SD=/datasets/mmolefe/poe_repair_min/outputs/interaction_term/corrector/superdiff
 REPO=/home-mscluster/mmolefe/Playground/PhD/concept-composition
@@ -315,6 +319,7 @@ Navigation: ⬅️ [7. Inject a PoE-trained adapter into SuperDiff and measure i
 
 Kill by pid, never by pattern. The pid is in the log header (`pid=...`) or from `pgrep` with the
 bracket trick, which stops the pattern from matching the shell you are typing it into.
+These commands are recorded from a cluster session. From the laptop, wrap each in `scripts/cluster.sh sh "..."`.
 
 ```bash
 ssh mscluster109 "pgrep -af 'train_poole[d]' | cut -c1-60"

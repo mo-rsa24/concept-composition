@@ -78,7 +78,8 @@ Navigation: ⬅️ [Where the paper lives](#where-the-paper-lives) | 📋 [TOC](
 **When you need this**
 
 You wrote in the Overleaf editor and want that text in the repo, where the figures and the draft
-map live.
+map live. This command is recorded from a cluster session. From the laptop, run
+`scripts/cluster.sh sh "git -C writing/overleaf-iclr pull"`.
 
 ```bash
 cd /home-mscluster/mmolefe/Playground/PhD/concept-composition
