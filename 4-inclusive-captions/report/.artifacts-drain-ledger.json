@@ -17,7 +17,7 @@
   },
   "artifacts/results/README.md": {
    "at": "2026-11-22",
-   "sha256": "7f54768bb615452905af6785ea6133f6087f1fbe5b4f60e16b491c91c9d0aaf7",
+   "sha256": "15d11600bcf60711093156e24327711ccc6b62640146236ef7227fdf230a0c10",
    "state": "drained"
   },
   "artifacts/results/do-inclusive-labels-help-the-product-compose-on-mnist/the-leak-read.png": {
@@ -87,7 +87,7 @@
   },
   "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/README.md": {
    "at": "2026-11-22",
-   "sha256": "ea251cef3c71b6b1c3bcb102444235f50a5fc5c8c112aa8fe7cc6e18d8cd90fa",
+   "sha256": "fa95c737beb4714b3c645451ae14f078e341820a1191e56c2d53fc0cd2ec58f3",
    "state": "drained"
   },
   "artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png": {

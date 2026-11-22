@@ -32,13 +32,13 @@ must rise before anything trains. The audit rejected 33.
 
 Navigation: ⬅️ [Previous](#what-would-have-counted) | 📋 [TOC](#table-of-contents) | [Next](#2-from-the-size-filter-to-the-photos-trained-on) ➡️
 
-<a href="../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png"><img src="../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png" width="200" alt="Contact sheet of 48 COCO photos holding a cat and a dog, each tile labelled with its audit number, the two animals' box sizes and their overlap"></a>
+`both_sheet_00.png` is not shown because it failed the subject check
 
 **The both-animal set is the only one short of its target, by 69 photos.** The sheet is the first 48 of
 the 131, each tile labelled with its audit number, each animal's box as a fraction of the image's longer
 side, and how much the two boxes overlap. No person's face shows on this page. The other two pages are
-linked and left unembedded because they do: [page 2](../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_01.png)
-has people's faces on tiles 48, 73 and 88, and [page 3](../../artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_02.png)
+linked and left unembedded because they do: page 2
+has people's faces on tiles 48, 73 and 88, and page 3
 has a person's face on a television in tile 103 `verified` (each page opened).
 
 Counts of images in COCO train2017, from the counts file `verified`:

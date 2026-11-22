@@ -67,5 +67,31 @@ Every picture that failed the [subject guard](../../../scripts/shared/disallowed
 | `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-sheet-1-before-x-pos.png` | held | no page |
 | `5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/dog-and-cat-sheet.png` | held | no page |
 | `5-text-embedding-third-expert/artifacts/results/what-the-text-already-says/does-text-alone-predict-composition/text_orthogonality_probe.png` | held | no page |
+| `2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-007500.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/seed9-seven-ways.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/coco-both-crops.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-draws.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-a-pair-aware-push-compose-our-photos/preview-product-256-imagenet-draws.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/cat-piles/sheet_cat.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/cat-piles/sheet_no_cat.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-from-an-animal/dog-sheet.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-probes/step_000500.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-probes/step_001000.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-probes/step_001500.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-probes/step_003000.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/dog-sheet.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed09__pushs10.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__no_prompt.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs10.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__pushs30.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-draw-a-dog/dog-01-sheet/tiles/seed10__s0.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c263_s1_seed1.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed5.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/guide/c281_s1_seed6.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed1_plain.png` | not cleared | no page |
+| `2-classifier-guidance/artifacts/results/does-classifier-guidance-work-on-the-released-weights/identity/identity_seed1_scale0.png` | not cleared | no page |
+| `4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_00.png` | not cleared | no page |
+| `4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_01.png` | not cleared | no page |
+| `4-inclusive-captions/artifacts/results/how-many-photos-the-inclusive-captions-pilot-can-train-on/both_sheet_02.png` | not cleared | no page |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

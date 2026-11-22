@@ -60,7 +60,7 @@ Quick context), so they say nothing yet about the classifier.
 
 | One seed, seven ways | The classifier after 7,500 training steps |
 |---|---|
-| <a href="../../artifacts/results/can-a-classifier-supply-the-missing-term/seed9-seven-ways.png"><img src="../../artifacts/results/can-a-classifier-supply-the-missing-term/seed9-seven-ways.png" width="200" alt="Seven renders of seed 9 in a row: a fused animal, a softer fused animal, a cat beside a dog, two pushed single animals, and two broken color patterns"></a> | <a href="../../artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-007500.png"><img src="../../artifacts/results/can-a-classifier-supply-the-missing-term/probe-step-007500.png" width="200" alt="Two by two grid for seeds 9 and 10: push 0.5 shows one animal, damaged on seed 10, and push 2.0 shows broken color patterns"></a> |
+| `seed9-seven-ways.png` is not shown because it failed the subject check | `probe-step-007500.png` is not shown because it failed the subject check |
 | Left to right: plain product, damped product, the joint prompt, then four pushes labelled very gentle to strong. Pushes 1 and 2 show one animal, and pushes 3 and 4 are broken patterns `verified`. The second and fourth pushes look the same as the seed 9 tiles beside it, so these are taken to be the same classifier `inferred` | Rows are seeds 9 and 10, and columns are push 0.5 and 2.0 as fractions of the prediction's length. Push 0.5 leaves one animal on seed 9 and a damaged one on seed 10, and push 2.0 breaks both `verified` |
 
 ## Where the sources disagree
