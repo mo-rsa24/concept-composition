@@ -1,0 +1,394 @@
+{
+ "files": {
+  "artifacts/results/README.md": {
+   "at": "2026-11-22",
+   "sha256": "80c339bee70daddf41a28172aeb1f81e93c7ce52cd93fc10dd79cf1def8bfd9d",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/README.md": {
+   "at": "2026-11-22",
+   "sha256": "13a4b5778479da26fed0ed44163de49d35dad9e4f35c6c4d25f30b3e6a044270",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/README.md": {
+   "at": "2026-11-22",
+   "sha256": "c7f720a8fd363bae4a39b239141d7602e2f2a2fc93aeb64912cb0aea02cb6e9a",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/README.md": {
+   "at": "2026-11-22",
+   "sha256": "700306fc1cd222978a72850ef19153f9a2532b525244fbd29a97a1d9b5982a1b",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-6.png": {
+   "at": "2026-11-22",
+   "sha256": "5e0beb9b54da82b36d882a648905a04544d744c898dbbe1c7fd88f9b563951ae",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/clip-contrastive-training-in-three-steps.png": {
+   "at": "2026-11-22",
+   "sha256": "31eb53d4fe16f37c50aa8d55a41fcdabf8c1e45368a606a3d45226cdedb58c02",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p14-14.png": {
+   "at": "2026-11-22",
+   "sha256": "d99b0aa903d370a23a7a31848c0dddca141b94b94913cc483d083a7e9ea2034a",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p15-15.png": {
+   "at": "2026-11-22",
+   "sha256": "cd08fa7d2c0894ae979369bb57dcbf81c94021a12f88ec510659bf371bc9a404",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p20-20.png": {
+   "at": "2026-11-22",
+   "sha256": "7c614890f1b4fe158e4544a19503fc7ef6cc161d4d70ed0a83b71249834bfbc7",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p21-21.png": {
+   "at": "2026-11-22",
+   "sha256": "8a0d1e0b9361bcc452d89537f1926df13f6cdb4892d2e80bc07e9e16ce772a06",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p22-22.png": {
+   "at": "2026-11-22",
+   "sha256": "f70c960c11edaa7e4c4d8d72e763fc899f8e15ea3740802847c707e666dcf862",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p25-25.png": {
+   "at": "2026-11-22",
+   "sha256": "90d25f53f873d495c23f7c1feeeed625b13540e273829f915ea92aa0f7f8fe0d",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p26-26.png": {
+   "at": "2026-11-22",
+   "sha256": "711b43e02a1bfbf0659247d4363db914f70fe40c14722b7052a45acdea832f2a",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p39-39.png": {
+   "at": "2026-11-22",
+   "sha256": "edf9c45559e1f34a1c84031e5b57362956b20d91185e873929304483c00a1a70",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/kempner/p40-40.png": {
+   "at": "2026-11-22",
+   "sha256": "428df71aae9ebd6cce71526a676b445f64abe02c8b65f2a2952a196a3c9968d9",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/latent-diffusion-figure-with-forward-diffusion-strip.jpeg": {
+   "at": "2026-11-22",
+   "sha256": "067252f434d8df00ff76cd004572de1e9b8f9710bf6f4d519e067f5eadfbe2e7",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/latent-diffusion-figure-with-glyph-legend.png": {
+   "at": "2026-11-22",
+   "sha256": "83d91f24f5099403a8cf1f789bc75db2cfbb5611b6fb46d203143e5dc469b8ea",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/sd-pipeline-vae-and-unet-on-one-sheet.png": {
+   "at": "2026-11-22",
+   "sha256": "4e74b24d73ccab9c96519ec55ef28316b6f54d5fca231674c9780f7a00e0c3d1",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/tokenizer-input.png": {
+   "at": "2026-11-22",
+   "sha256": "4ba849086565eead5defadedf7ecec7d8dc2479824bbf80b2a581c87d55cf947",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/tokenizer-lane.png": {
+   "at": "2026-11-22",
+   "sha256": "2ceae6241a808cc53230fd4a7f7a46f7909479193b3e373b33c52296c693bbc5",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/transformer-architecture.png": {
+   "at": "2026-11-22",
+   "sha256": "5214a79e3074d38f1004b5d8a42b201511ae35ef2a6ebb00edb4f905d1aa3ff1",
+   "state": "skipped"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/unet-crossattn.png": {
+   "at": "2026-11-22",
+   "sha256": "901382245bd6935cbfd8776bb3d8977a686d089e3ca07fe119a9b2db206ab577",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-scene.html": {
+   "at": "2026-11-22",
+   "sha256": "dd40f89932161d890155bb0cf8004692baf6fd826fdaba1cd903f36b1d61251d",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__system-light.png": {
+   "at": "2026-11-22",
+   "sha256": "01e5e3d0be900f370f7d91b77dbe1c137de62405749147bf264f43d3d58cc5b5",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-inside-light.png": {
+   "at": "2026-11-22",
+   "sha256": "5862e5aea9caa02045d1af6e77e21415875fcb49d6f39185b0acfa8b6d28746e",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/README.md": {
+   "at": "2026-11-22",
+   "sha256": "e10206c5a6aaa5527ccc0a135d34139cc164b10a30618319d12fc0ebdde4f88b",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-deep-learning-scene.html": {
+   "at": "2026-11-22",
+   "sha256": "3761b794e086795f511550048259f31ab098172cd7920d8dd6843a36e2de64de",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-scene.html": {
+   "at": "2026-11-22",
+   "sha256": "c117e0d8393fb12b2549ccc2ea0d7f28a9847fb94a0ab3011a14c71f82926a6d",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__system-light.png": {
+   "at": "2026-11-22",
+   "sha256": "7971cae823285b03846eb2212dc4220068dbbd2d3d8daf4343a0024ac9826b92",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/why-the-latent-is-scaled/README.md": {
+   "at": "2026-11-22",
+   "sha256": "ba08c27bafd0180f15cf429e2b13be4bb059a37659aa3ac06bfd1cb68ef64a40",
+   "state": "drained"
+  },
+  "artifacts/results/how-sdxl-works/why-the-latent-is-scaled/why-the-latent-is-scaled.html": {
+   "at": "2026-11-22",
+   "sha256": "90cc87a3fb58a337553cd8dfbd4555641159826404e17f8f71d04b52bfc16242",
+   "state": "drained"
+  }
+ },
+ "held": [
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-1.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-2.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-3.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-4.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/pictures/bpe-5.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-ldm-high-level-design-explainer.svg",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__cond-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__cond-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__cross-attention-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__cross-attention-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__latent-space-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__latent-space-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__pixel-space-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__pixel-space-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__system-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__timestep-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__timestep-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tok-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tok-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-code-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-code-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-inside-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__tsum-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-code-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-code-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-loop-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__unet-loop-light.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__vae-dark.png",
+  "artifacts/results/how-sdxl-works/how-sdxl-turns-a-prompt-into-an-image/sdxl-stills/sdxl-ldm-high-level-design-explainer__vae-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/sdxl-vae-high-level-design-explainer.svg",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__dec-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__dec-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__decoder-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__decoder-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__down-block-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__down-block-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__enc-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__enc-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__encoder-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__encoder-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-z-dark.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__sample-z-light.png",
+  "artifacts/results/how-sdxl-works/how-the-sdxl-vae-is-built/vae-stills/sdxl-vae-high-level-design-explainer__system-dark.png"
+ ],
+ "pages": {
+  "context/data/01-where-it-comes-from.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "84a8709c8f003963a20bc51b2f79837f6d4178a0cd1b5506351c7a779b731da9"
+  },
+  "context/data/02-dictionary.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "84851dffcf73998eec3375677c69603fd2da882bf9e9179c16047cd7c9443038"
+  },
+  "context/plain-words.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "89625954bef5345fd6b0b057550a7cbdf1c024af5384eb2afa203893ee0b48d9",
+   "reviewed": true
+  },
+  "context/purpose/01-the-problem.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "01400ef82f8bc4c5e0297e6fe0249c217cff24b3ac40867e742a945302d50eab"
+  },
+  "context/purpose/02-what-we-produce.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "8386f4ca25eb6c72ffa60eb315c5317ed012d3c0d0a6b4fd41327ff1e71846bf"
+  },
+  "context/purpose/03-what-working-means.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "868c658a5193d57fa4b50c723e2f4b726ab27dbed20f7149f2225bc7584180f5"
+  },
+  "context/research-guidelines.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "b09b70cb6d8614bfb74db3189285236f73ad7545bf714a52327e88b8b1ad66d4"
+  },
+  "context/sources.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "dd3bf0c5c1e7b8a6cea13244985139fd60acde643b55a286d6ad74cb58bdad14",
+   "reviewed": true
+  },
+  "context/world/animal-pair.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "046be32c7c751029930dcd189633aa38678213b6663847078700a1596c3d69e0"
+  },
+  "context/world/chimera.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "1b526c56ff16c9aa3557a7ecf575bec1f0dbf46888d393893ca0bba50acd0b3c"
+  },
+  "context/world/compose-rate.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "1d2b30a68ddf6bd071730d09d7d6990c2eb1d8cd7fcc3afa12842c5635ca28ad"
+  },
+  "context/world/how-a-render-fails.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "d969f785b866a1bb7832e9d153a2c53807c689e51d271009203091c3c339fb2b"
+  },
+  "context/world/interaction-term.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "e785feef002e71edcda80b5e01df41315200c92a222d5bcc6bada8d470d30caa"
+  },
+  "context/world/lora-corrector.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "75a63d43a7b71934cd60dc937da2644eb899d1add83a5a0121092d80f4e101e9"
+  },
+  "context/world/poe-composition.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "880ce3ed207dff4ae38639f976fa6e976d4ae4f293699c286228959c81db0ed3"
+  },
+  "environment/hpc/execution-protocol.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "72ba145cfda81ad4df6b905cc4634ab5d2db9b57b54342bf421603a883932ef9"
+  },
+  "environment/hpc/nodes.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "12f0f4440a8e8728e984a8517f3d55625471a42203df9abbe062a142474da8a2"
+  },
+  "environment/hpc/throughput.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "2e59e4191024cbd45343e508fed840a47dd879c8bcebbf52a226025ae2d51bbf"
+  },
+  "environment/known-failures.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "5012efffa0d176a56624d44370aafd5d043c1630c0fd501842eed980c46da728"
+  },
+  "environment/overview.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "95aac53d61681d314266cd5b50cfe6af08b2592a0cb0f9e91beaaabe2a3c4414"
+  },
+  "environment/paper.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "d2fdc012b35dc3259a0cbaf3e6b1eaf8d40b4243dc851de1338f00cd6d7bd9d5"
+  },
+  "environment/provenance.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "e8df81b77c892ec1fd13b083d61c9c3d7e767283d8195edde1280406a4184910",
+   "reviewed": true
+  },
+  "environment/reduce-reuse-recycle-code.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "5be8086bee316b2489ab39494aa93895ca2fc647ffb65e886e4d1bc9fde3429f"
+  },
+  "environment/storage.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "4fe6c8404e99fd3ee1a232d0dce718e77cd257149c40cc8206d84d343e5c0cb8"
+  },
+  "runbook/checking-the-plan-tree.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "76c2b16ede3b1020ff4e685e943cc0a2960499b15400d935ae8db2f2b919d383"
+  },
+  "runbook/looking-at-what-a-run-produced/reading-a-training-run.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "a14d61fc56a966c37d2d1ed27c9a62aa5932706f4b55b85e95886a6d0a4c05f1"
+  },
+  "runbook/looking-at-what-a-run-produced/showing-a-scene-in-the-local-browser.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "133608f1b42db2cb28e64a8cb271eb5d1db04748cefa29539415fb5c45351f74"
+  },
+  "runbook/making-the-papers-figures/composing-a-two-panel-figure-in-inkscape.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "306ca10b95905b06b0adc6cad68b94c74ea1385dfbc490ea945dd73cccdb2029"
+  },
+  "runbook/making-the-papers-figures/relettering-an-image-with-baked-in-text.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "f4591bc2e721295553538ded6340156db1f45894948d2f7f791442b5ce5fe10a"
+  },
+  "runbook/running-things-on-the-cluster/launching-and-harvesting-a-run.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "a4336256ec40f773ec3e1aed4c5f534e06c5642cd6893653e973d1541b931c6e"
+  },
+  "runbook/running-things-on-the-cluster/probing-a-pooled-lora-checkpoint.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "40407284da1540aef1375804b1fcf8f244d1f2f49f9c7703e249055bd1e914c2"
+  },
+  "runbook/running-things-on-the-cluster/reproducing-where-each-condition-lands.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "a4cbfa3844eaa694767b8deb75717f12a9dda822e072c4868379fccf598806e2"
+  },
+  "runbook/running-things-on-the-cluster/running-the-langevin-corrector.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "33a094cca80f3206cfa8c2717df07a1a0dba2dd9ab7b2cbd782428f711bb8717"
+  },
+  "runbook/running-things-on-the-cluster/training-and-watching-a-superdiff-adapter.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "f7db1cafb28cec982237aa1e6b623e8151ee3853f2e73ab3b3ae8da2abd175e3"
+  },
+  "runbook/setting-up-the-reduce-reuse-recycle-code.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "17ebbb6752cf3f9bd0e6926642688657e8005743203b2367ca92b9e2b5eb9234"
+  },
+  "runbook/syncing-the-paper-with-overleaf.md": {
+   "at": "2026-11-22",
+   "offered": [],
+   "page_sha": "33118569f3c9f6c30a47c3d6330ec1c10f036c7255239e5d60725ce13f728480"
+  }
+ }
+}
