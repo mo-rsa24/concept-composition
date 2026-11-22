@@ -1,0 +1,37 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  C["T2I-CompBench Complex<br/>988 allowed prompts, 3 seeds each"]:::plain
+  R["RareBench Concat<br/>33 allowed prompts, 3 seeds each"]:::plain
+
+  subgraph RTD["Rectify Then Diffuse: 245 of 3,063 pictures"]
+    direction TB
+    J1["Job 92859<br/>prompts 1, 3, 5 ...<br/>83 of 1,482"]:::doing
+    J2["Job 92860<br/>prompts 2, 4, 6 ...<br/>70 of 1,482"]:::doing
+    J3["Job 92840<br/>all Concat<br/>92 of 99"]:::doing
+  end
+
+  subgraph SDXL["Plain SDXL: 279 of 3,063 pictures"]
+    direction TB
+    J4["Job 92861<br/>prompts 1, 3, 5 ...<br/>95 of 1,482"]:::doing
+    J5["Job 92862<br/>prompts 2, 4, 6 ...<br/>89 of 1,482"]:::doing
+    J6["Job 92843<br/>all Concat<br/>95 of 99"]:::doing
+  end
+
+  C --> J1
+  C --> J2
+  C --> J4
+  C --> J5
+  R --> J3
+  R --> J6
+
+  J1 --> O["One folder per method and prompt<br/>no two jobs write to the same one"]:::plain
+  J2 --> O
+  J3 --> O
+  J4 --> O
+  J5 --> O
+  J6 --> O
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe3bf,stroke:#c46a00,stroke-width:2px,color:#111111
+  style RTD fill:#fafafa,stroke:#777777,stroke-width:1px
+  style SDXL fill:#fafafa,stroke:#777777,stroke-width:1px
