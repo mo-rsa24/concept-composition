@@ -1,7 +1,7 @@
 # Review: reproducing CoInD on CelebA
 
-This file holds what the runs in [the CoInD design](design.md) produced. CoInD has no verdict yet. Both classifiers pass the bar the owner set
-on board question 30, within one percentage point of the accuracy CoInD prints, and the 1% rung is next.
+This file holds what the runs in [the CoInD design](design.md) produced. CelebA is context by the owner's answer to board question 35, so this rerun
+stopped after the classifier and the smoke test. No generated face was scored, and 49.15% and 14.19% stay published numbers.
 
 ## Runs
 
@@ -15,8 +15,8 @@ then the replications hub commit.
 | Smoke test, one batch of 5 per checkpoint | 93123 (CoInD), 93130 (baseline), after 93121 and 93122 failed | `d75bad9f-f28dd6c` | `smoke/` | passed |
 | Classifier, 10,000 steps | 93131 | `d75bad9f-f28dd6c` | `classifier/` | passed the printed-accuracy bar, sets the verdict |
 | Classifier, 30,000 steps | 93210 | `f96659e8-3bc1415` | `classifier-30k/` | passed the printed-accuracy bar, printed beside it |
-| 1% of the data | queued | `b9061d77-cff03f8` | `one-percent/` | waiting for a job slot |
-| Full protocol, 2,500 images per method | none | | | waits on the 1% rung |
+| 1% of the data | none | | | not run, because CelebA became context |
+| Full protocol, 2,500 images per method | none | | | not run, because CelebA became context |
 
 Job 93121 failed because the cached SD1.5 holds no safety-checker weights, and the authors' script switches that checker off after
 loading. Job 93122 failed because the authors' pipeline calls an undefined `logger` when the checker is absent. The render now loads
@@ -49,5 +49,5 @@ that misses smiling on about 11% of smiling men can pull that score down, so eve
 Tripling the training moved the worst cell by 0.26 percentage points. Both runs follow `configs/cs_celeba.yaml` apart from the step count: ResNet-18, batch 64, AdamW at 3e-4 with weight decay 1e-3, cosine schedule,
 gradient clip 1.0, mixed precision, 128-pixel images with a random flip.
 
-**Does CoInD reproduce its published conformity score?** Unknown until the renders are scored. The rows are 49.15% (CoInD) and 14.19%
-(Composed GLIDE, the Liu row).
+**Does CoInD reproduce its published conformity score?** Not tested. CelebA is context, so 49.15% (CoInD) and 14.19% (Composed GLIDE, the Liu
+row) stay published numbers.

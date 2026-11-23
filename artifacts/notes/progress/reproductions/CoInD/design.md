@@ -1,5 +1,7 @@
 # Reproducing CoInD and its composed baseline on CelebA
 
+> **Status.** By the owner's answer to board question 35, CelebA is context and sets no target, because Paper 1 gives each model its own region of the picture and this benchmark asks for several attributes on one object. This run does not go ahead, and its printed numbers stay published.
+
 ## What this asks
 
 Do the authors' released SD1.5 weights reproduce the conformity scores in CoInD's Table 6? The conformity score is the percentage of

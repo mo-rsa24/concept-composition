@@ -1,5 +1,7 @@
 # Reproducing CoInD and its baseline on Shapes3D
 
+> **Status.** By the owner's answer to board question 35, Shapes3D is context and sets no target, because Paper 1 gives each model its own region of the picture and this benchmark asks for several attributes on one object. This run does not go ahead, and its printed numbers stay published. Board question 34 skips this rerun.
+
 ## What this asks
 
 Does the authors' code, trained from scratch, give the conformity scores printed for Shapes3D? Each Shapes3D image has six attributes, such as

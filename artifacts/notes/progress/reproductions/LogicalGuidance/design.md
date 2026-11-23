@@ -1,5 +1,7 @@
 # Reproducing Logical Guidance on Colored MNIST
 
+> **Status.** By the owner's answer to board question 35, Colored MNIST is context and sets no target, because Paper 1 gives each model its own region of the picture and this benchmark asks for several attributes on one object. This run does not go ahead, and its printed numbers stay published.
+
 ## What this asks
 
 Does the authors' released code, trained from scratch, give the 83.6% conformity score printed for Logical Guidance with repulsive

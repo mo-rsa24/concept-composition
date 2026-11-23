@@ -17,10 +17,10 @@ have not been run.
 | Attend-and-Excite | 3 | `attend-and-excite` `163efdf` | official | its printed Color run used Stable Diffusion 2 base | all three rows are not comparable, so nothing runs (board questions 13 and 25) |
 | Liu | 6 | `composable-diffusion` `77af82b` | official | its printed Color run used Stable Diffusion 2 base; the CoInD rows use CoInD's own checkpoints | its CMNIST, Color, Shape and Texture rows are not comparable (board questions 13 and 25) |
 | FKC | 1 | `fkc-diffusion` `aa6f5ed` | no SDXL GenEval script in the authors' repository; the hub holds an uncommitted port | plain SDXL | port the authors' EDM2 sampler to SDXL and test it against `FKC-TA4-038`, 0.78 on the 553 released prompts (board question 23) |
-| CoInD | 2 | `coind` `99056cc` | official, with CS and FID scripts | CelebA on SD1.5: `sd_celeba.zip` (25.3 GB, Google Drive) holds CoInD and Composed GLIDE, and the authors' sheet prints the same 49.15 and 14.19. Shapes3D: the sheet's tab is empty | Shapes3D needs 3 trainings per method, about 18 to 36 GPU-hours (board question 30); CelebA renders 2,500 images per method, judged with a classifier within one point of CoInD's printed accuracy |
+| CoInD | 2 | `coind` `99056cc` | official, with CS and FID scripts | CelebA on SD1.5: `sd_celeba.zip` (25.3 GB, Google Drive) holds CoInD and Composed GLIDE, and the authors' sheet prints the same 49.15 and 14.19. Shapes3D: the sheet's tab is empty | context by board question 35: CelebA stopped after its classifier and smoke test, and Shapes3D is skipped |
 | SuperDiff | 1 | `super-diffusion` `e859107` | official CIFAR trainer and evaluator | SD and SDXL only on Hugging Face, and no CIFAR weights found | CIFAR-10 is context with no row (board question 30); its CMNIST row is not comparable |
 | Bradley-Projective | 1 | `projective-composition` `b57343a` | the authors released none; this is our replication on EDM2 | our `clevr-none-20k-64-xs-8Mi` and `clevr-color-20k-64-xs-8Mi` (46 GB) on `/datasets` | its row stays blocked (board question 21), and its rule runs on our own single-object CLEVR models (board question 30); these checkpoints are colour-conditioned at 64 pixels |
-| LogicalGuidance | 1 | `logdiff` `94ef35b` | official, linked from its ICML 2026 slides, with training and evaluation scripts for CMNIST | none released | train the CMNIST diffusion model and its classifiers, at least 3 times |
+| LogicalGuidance | 1 | `logdiff` `94ef35b` | official, linked from its ICML 2026 slides, with training and evaluation scripts for CMNIST | none released | context by board question 35, so nothing runs |
 
 ## Scorers and prompt sets
 
@@ -50,8 +50,10 @@ By the owner's answer to board question 14, rivals and our method are scored on 
 
 ## The order the runs take
 
-1. **RTD** first, because its repository holds the full protocol for two rows and it uses only plain SDXL.
-2. **CO3 and ToMe** on the same prompts and seeds as RTD.
-3. **CoMat, Attend-and-Excite, Liu and FKC** on their T2I-CompBench and GenEval rows.
-4. **CoInD and Liu** on Shapes3D and CelebA, once the checkpoint sheet is read.
-5. **LogicalGuidance**, then the CLEVR comparison on our own models, which has its own design.
+The 7 targets are T2I-CompBench Color, Shape, Texture and Complex, GenEval, and CLEVR for each paper.
+
+1. **CO3 and ToMe** finish their T2I-CompBench renders and are scored.
+2. **CoMat** on Color, Shape and Texture.
+3. **FKC** on GenEval's 553 prompts.
+4. **CLEVR**, under its own design from `targets/clevr-scaling-plan.md`, starting with installing Blender and timing one batch.
+5. **The checkers** retrain on the data the owner set on board question 37, before step D3 compares candidates.
