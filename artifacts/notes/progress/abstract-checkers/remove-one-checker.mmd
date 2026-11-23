@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  subgraph FIVE["Five checkers, counting removed"]
+    direction TB
+    S["Spatial relation"]
+    C["Counting<br/>switched off"]
+    B["Attribute binding"]
+    P["Position and size"]
+    M["Prompt match"]
+  end
+
+  N["Scale each gradient<br/>to a fixed length,<br/>so the other four<br/>can't take its share"]
+  K["Add them and cap<br/>at 0.4 of the<br/>prediction's length"]
+  G["Sampler:<br/>product of A and B<br/>plus the push"]
+  J["Five scorers<br/>that never steer"]
+  Q{"Which scores<br/>fell?"}
+  Y["Control holds<br/>spatial: same<br/>COUNTING: FALLS<br/>binding: same<br/>position: same<br/>match: same"]
+  X["Tangled<br/>counting fell and<br/>another score<br/>fell with it"]
+
+  S --> N
+  C -. "no gradient" .-> N
+  B --> N
+  P --> N
+  M --> N
+  N --> K --> G -->|"pictures"| J --> Q
+  Q -->|"only counting"| Y
+  Q -->|"more than counting"| X
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef off fill:#eeeeee,stroke:#888888,stroke-width:2px,stroke-dasharray:6 4,color:#666666
+  classDef good fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  class S,B,P,M,N,K,G,J,Q,X plain
+  class C off
+  class Y good
+  style FIVE fill:#fafafa,stroke:#888888,stroke-width:1px
