@@ -11,18 +11,20 @@ claude --bg --permission-mode auto --model claude-opus-5-5 --effort high --name 
 The two papers ask whether a small trained classifier, called the checker, can make diffusion models draw two separate objects where the product of experts fuses them. Paper 1
 composes models trained apart, and Paper 2 works inside one pretrained SDXL. The good MNIST and toy results came from settings nobody searched systematically, and the plan
 went from one narrow checker comparison straight to the benchmarks. This loop finds the best method, checker, labels and settings for each paper on tuning data, then freezes one
-recipe per paper before any benchmark run. Your owner code on the board is `s6`, and your steps are M1, M5, D3, M2, D5, M3, M6 and M4. Session 5 owns D2, the rival reruns.
+recipe per paper before any benchmark run. Your owner code on the board is `s6`, and your steps are M1, M7, M5, D3, M2, D5, M3, M6, M8 and M4. Session 5 owns D2, the rival reruns.
 
 ## Objectives
 
 1. Step M1: write `artifacts/notes/progress/method-search/01-beat-the-baseline/design.md`, then test whether each paper's method beats its simple baseline. Paper 1 is compared with sampling each MNIST expert alone and pasting the two results. Paper 2 is compared with CO3 alone, by adding the push to CO3 on SDXL.
-2. Step M5: write `artifacts/notes/progress/method-search/01b-balance-the-checker-data/design.md`, then train the current checker architecture on the current list and on a list that caps cat and dog and samples evenly per pair, compare them on the 12 tuning pairs at seeds 6001 to 6008, and pass the better list to D3.
-3. Step D3: apply the owner's data rule from board question 37, then finish the comparison in `artifacts/notes/progress/reproductions/checker/design.md` and write the verdict to `reproductions/checker/review.md`.
-4. Step M2: write `artifacts/notes/progress/method-search/02-pair-aware-or-separate-labels/design.md`, then compare a pair-aware checker with a checker that has one separate label per subject, on the architecture D3 chose.
-5. Step D5: run the test in `artifacts/notes/progress/reproductions/inclusive-finetune-and-push/design.md` with the checker M2 chose, and write the outcome to `review.md` in that folder.
-6. Step M3: write `artifacts/notes/progress/method-search/03-tune-the-winner/design.md`, then tune push strength, the steps it acts on, its cap and the checker's training-set size for the winning method, on tuning pairs and seeds only.
-7. Step M6: write `artifacts/notes/progress/method-search/03b-small-clevr-test/design.md`, then test each paper's method on CLEVR with 2 and 3 experts at 64 pixels, 5,000 images per model, on tuning positions only, because neither the MNIST halves nor the SDXL-feature checker can run on CLEVR as written.
-8. Step M4: freeze one recipe per paper in `artifacts/notes/progress/method-search/recipe-paper-1.json` and `recipe-paper-2.json`, each naming the code commit, checker checkpoint, settings and the evidence behind them, including the small CLEVR test.
+2. Step M7: write `artifacts/notes/progress/method-search/01c-clevr-paste-first/design.md`, then train the small CLEVR experts M6 needs (2 and 3 experts at 64 pixels, 5,000 images per model, tuning positions only) and score sample-and-paste on them before any tuning, because Paper 1 tied paste on MNIST. M6 reuses these models. If paste reaches 7 objects, bring the owner a replacement test where pasting fails, as board question 54 says.
+3. Step M5: write `artifacts/notes/progress/method-search/01b-balance-the-checker-data/design.md`, then train the current checker architecture on the current list and on a list that caps cat and dog and samples evenly per pair, compare them on the 12 tuning pairs at seeds 6001 to 6008, and pass the better list to D3.
+4. Step D3: apply the owner's data rule from board question 37, then finish the comparison in `artifacts/notes/progress/reproductions/checker/design.md` and write the verdict to `reproductions/checker/review.md`.
+5. Step M2: write `artifacts/notes/progress/method-search/02-pair-aware-or-separate-labels/design.md`, then compare a pair-aware checker with a checker that has one separate label per subject, on the architecture D3 chose.
+6. Step D5: run the test in `artifacts/notes/progress/reproductions/inclusive-finetune-and-push/design.md` with the checker M2 chose, and write the outcome to `review.md` in that folder.
+7. Step M3: write `artifacts/notes/progress/method-search/03-tune-the-winner/design.md`, then tune push strength, the steps it acts on, its cap and the checker's training-set size for the winning method, on tuning pairs and seeds only.
+8. Step M6: write `artifacts/notes/progress/method-search/03b-small-clevr-test/design.md`, then test each paper's method on CLEVR with 2 and 3 experts at 64 pixels, 5,000 images per model, on tuning positions only, because neither the MNIST halves nor the SDXL-feature checker can run on CLEVR as written.
+9. Step M8: write `artifacts/notes/progress/method-search/03c-head-to-head/design.md`, then compare this loop's best Paper 2 checker with Loop 8's count checker on the six unseen object pairs at seeds 6001 to 6008, 48 pictures each, reporting all six pairs and the five without lighthouse and sailboat, with CO3 alone beside both. Reuse V4's pictures where the settings match. A winner needs a lead of at least 3 of 48 and more than 1.96 standard errors. A tie goes to fewer damaged pictures, then to this loop's checker. If Loop 8 stops on a miss before V4, record that and this loop's checker stands.
+10. Step M4: freeze one recipe per paper in `artifacts/notes/progress/method-search/recipe-paper-1.json` and `recipe-paper-2.json`, each naming the code commit, checker checkpoint, settings and the evidence behind them, including the small CLEVR test.
 
 ## What to read
 
@@ -98,4 +100,4 @@ Along the way, each stage's verdict and picture sheet land in chat, and any deci
 with paths, the frozen recipe for each paper with its evidence, what was ruled out, GPU-hours spent against the 79-hour limit, what is still open, and at most one question.
 
 A useful result is a recipe per paper that beats its simple baseline on tuning data, or a clear statement that a paper's method does not. The owner judges it from the recipes and stage
-reviews, and it is done when M1, M5, D3, M2, D5, M3, M6 and M4 are green.
+reviews, and it is done when M1, M7, M5, D3, M2, D5, M3, M6, M8 and M4 are green.

@@ -12,14 +12,15 @@ Paper 2 adds a small trained classifier's gradient to the product of experts so 
 classifier, called the checker, reads features that hold what a subject looks like, so it may not scale past the concepts it saw. The
 owner's idea is a checker that learns a property holding across concepts, such as plurality, binding or position. This loop builds a small,
 repeatable environment with exact labels, tests whether such a checker works on concepts it never trained on, and only then tries it on
-SDXL. Session 7 reads the papers and writes the design. Your owner code on the board is `s8`, and your steps are V1, V2, V3 and V4.
+SDXL. Session 7 reads the papers and writes the design. Your owner code on the board is `s8`, and your steps are V1, V2, V3, V5 and V4.
 
 ## Objectives
 
 1. Step V1: write `artifacts/notes/progress/abstract-checkers/04-environment/design.md`, then build the environment in `2-classifier-guidance/scripts/abstract_checkers/` so that one command rebuilds its data identically.
 2. Step V2: after Session 7's `03-design.md` lands, test whether a checker learns plurality on digits it never trained on, and write `abstract-checkers/05-does-it-learn/design.md` and `review.md`.
 3. Step V3: test whether that checker's gradient makes the plain product compose on unseen digits, and write `abstract-checkers/06-does-it-compose/design.md` and `review.md`.
-4. Step V4: after step D3 lands, test the best abstract checker on SDXL's six unseen object pairs, and write `abstract-checkers/07-sdxl/design.md` and `review.md`.
+4. Step V5: after V3, run the digit rehearsal of the remove-one-checker test in `abstract-checkers/03-design.md`, for about 2 GPU-hours, and write `abstract-checkers/08-remove-one-checker/design.md` and `review.md`. The SDXL version waits for the owner's decision after V4 passes (board question 56).
+5. Step V4: after step D3 lands, test the best abstract checker on SDXL's six unseen object pairs, and write `abstract-checkers/07-sdxl/design.md` and `review.md`. Report it against plain PoE and against CO3 alone. Tell Loop 6 through `requests.md` when V4 lands or the chain stops, because Loop 6's step M8 compares this checker with its own before Paper 2's recipe is frozen.
 
 ## What to read
 
