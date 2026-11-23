@@ -48,6 +48,7 @@ recipe per paper before any benchmark run. Your owner code on the board is `s6`,
 - CLEVR stays at its planned scale, and its models are trained once from scratch on single objects (board question 45). The full CLEVR ladder belongs to steps E1 and E2 after the go or no-go. This loop trains only the small CLEVR models in step M6 (board question 48), budgeted at about 37 CPU node-hours and 9 to 12 GPU-hours.
 - `artifacts/notes/progress/reproductions/CLEVR/design.md` and `targets/clevr-scaling-plan.md` hold the CLEVR protocol. Blender 2.78c and the generator are installed under `/datasets/mmolefe/poe_repair_min/loop-5/third_party/`, and 32-pixel render tiles take 5.46 seconds per single-object image and 4.50 per empty scene on 28 threads. Bradley's 12 printed positions are the evaluation positions, so M6 tunes on other positions and leaves those 12 held out.
 - A CLEVR win at 7 objects needs 7 on both the automatic scorer and a hand count of 100 images (board question 42). Bradley's local patch model is not rebuilt, and its 5 stays a printed number (board question 49).
+- By board question 57, M5 and D3 each add a CO3-plus-checker row beside plain PoE, reusing M1's CO3 pictures, for about 8 more GPU-hours, and the CO3 row decides what goes forward. M1 found CO3 alone makes 11 faithful pairs of 96 and CO3 with the kept push makes 7. CO3 draws two separate bodies in all 96 pictures, so its remaining failures are borrowed parts, wrong species and extra subjects. Update the M5 design, `reproductions/checker/design.md` and `checker_choice/selection.py` to this rule before any candidate trains.
 - T2I-CompBench and GenEval wins are judged on our own pictures against the best finished rerun, with the printed bar reported beside it. The stopped rival reruns do not come back (board question 47).
 - The checker's training list holds 2,805 pictures over 216 pairs and 114 concepts. Cat and dog is 1,603 of them (57%) and about 60% of each batch, because the trainer samples its 10 sources evenly and 6 of them hold only cat and dog. The median pair has 5 pictures, 188 pairs have 10 or fewer, and 33 have no clean example. Keep and drop calls in the checker loop were judged mostly on cat and dog seeds.
 - Paper 1's checker trains on expert samples only. Paper 2 holds out 25% of the Attend-and-Excite pairs by name hash (board question 37, about 6 GPU-hours).
@@ -68,7 +69,7 @@ recipe per paper before any benchmark run. Your owner code on the board is `s6`,
 ## When something is missing
 
 - **A method loses to its simple baseline.** Record the result, file an `ask` naming what it means for that paper with continuing as the default only if a concrete fix exists, and carry on with the other paper.
-- **A run would pass 24 GPU-hours, or this loop's total would pass 79 GPU-hours.** File an `ask` with the cost, what it buys and a cheaper default, and carry on with other work.
+- **A run would pass 24 GPU-hours, or this loop's total would pass 87 GPU-hours.** File an `ask` with the cost, what it buys and a cheaper default, and carry on with other work.
 - **Scoring needs Claude API tokens beyond D3's approved 1.46 million input and 67,000 output.** Count by eye at full size, or file an `ask` with the token cost.
 - **A design choice is not settled by these sources.** Use the setting from the kept recipe, record it, and test it in M3 if it matters.
 - **A job fails.** Read its log and classify it per the execution protocol. Retry at most twice, then record it as blocked.
@@ -97,7 +98,7 @@ recipe per paper before any benchmark run. Your owner code on the board is `s6`,
 ## What you will see
 
 Along the way, each stage's verdict and picture sheet land in chat, and any decision appears on the waiting picture. At the end the session reports what was asked, what was done
-with paths, the frozen recipe for each paper with its evidence, what was ruled out, GPU-hours spent against the 79-hour limit, what is still open, and at most one question.
+with paths, the frozen recipe for each paper with its evidence, what was ruled out, GPU-hours spent against the 87-hour limit, what is still open, and at most one question.
 
 A useful result is a recipe per paper that beats its simple baseline on tuning data, or a clear statement that a paper's method does not. The owner judges it from the recipes and stage
 reviews, and it is done when M1, M7, M5, D3, M2, D5, M3, M6, M8 and M4 are green.
