@@ -52,13 +52,17 @@ The authors release no classifier, so one is trained from their config, `configs
 smiling), AdamW at a learning rate of 3e-4, on CelebA's training split, which holds all four combinations. Its input is 128 by 128, as in
 `evaluate_celeba_gender_smile.py`.
 
-A classifier that misreads the rare group would bias every score, so it must reach at least 90% on both attributes in each of the four
-male-by-smiling groups of CelebA's test split before any generated image is scored. The existing classifier in
-`/datasets/mmolefe/celeba/classifier/` reads male and blond, so it does not apply.
+By the owner's answer to board question 30, a classifier trained from the authors' config counts when its overall accuracy on CelebA's
+test split is within one percentage point of both accuracies CoInD prints, 98.2% for gender and 92.1% for smile (Figure 10, p24). The bar
+is `MAX_ACCURACY_GAP` in the hub's `coind_celeba.py`.
 
-The classifier trained to the authors' 10,000 steps reads smiling on 88.75% of smiling men, under that bar. By the owner's answer to
-board question 28, a second classifier trains for 30,000 steps with everything else unchanged, and the 90% bar stays. The verdict uses
-the 30,000-step classifier if it passes, and the same images are also scored with the 10,000-step classifier and printed beside it.
+| Classifier | Gender | Smile | Largest gap from print | Lowest per-group accuracy | Role |
+|---|---|---|---|---|---|
+| 10,000 steps, the authors' config | 97.93% | 92.96% | 0.86 points | 88.75%, smiling on smiling men | sets the verdict |
+| 30,000 steps | 97.98% | 92.38% | 0.28 points | 89.01%, smiling on smiling men | scores the same images, printed beside it |
+
+Every row prints the per-group accuracy, because the paper reports none per group. The existing classifier in
+`/datasets/mmolefe/celeba/classifier/` reads male and blond, so it does not apply.
 
 ## The test, fixed before the first run
 
@@ -66,7 +70,7 @@ The conformity score is per image. The standard error comes from resampling the 
 prints no standard error, so the published one is taken as equal to ours. A row counts as `reproduced` when
 |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²), and otherwise as `not reproduced`, with both numbers recorded.
 
-A row stays `not comparable` if the 30,000-step classifier misses the 90% bar, or if its score and the 10,000-step classifier's score
+A row stays `not comparable` if the 10,000-step classifier's score and the 30,000-step classifier's score
 differ by more than the row's pass band, 1.96 × √(SE_ours² + SE_published²).
 
 Our classifier is a retraining of the authors' scorer, so a miss could come from the classifier as well as from the weights. The row's
@@ -84,7 +88,7 @@ Each rung saves its config, metrics and commit under `/datasets/mmolefe/poe_repa
 1. **Smoke test.** One batch of 5 images per method, recording the time per image.
 2. **Overfit.** The classifier memorises 16 images, reaching at least 15 of 16 right on both outputs.
 3. **1% of the data.** 100 images per method, looked at on the cluster.
-4. **Controls.** The classifier passes its 90% check. With the same seed, the CoInD and baseline U-Nets produce different images, which
+4. **Controls.** The classifier passes its check against the printed accuracy. With the same seed, the CoInD and baseline U-Nets produce different images, which
    shows the two checkpoints were both loaded.
 5. **Full protocol.** The first 2,500 images per method, scored with both classifiers.
 

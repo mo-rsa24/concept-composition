@@ -13,7 +13,9 @@ composed over an empty background? The count is by hand, on location-conditioned
 
 ## Status
 
-The row is `blocked` by the owner's answer to board question 21, and nothing has run. 98 stays a published number that was not reproduced.
+The row is `blocked` by the owner's answer to board question 21, and nothing has run. 98 stays printed context that was not reproduced. By the
+owner's answer to board question 30, Paper 1's CLEVR comparison runs Projective Composition's rule and ours on our own single-object models,
+which is separate work with its own design.
 
 ## Why it cannot run as published
 

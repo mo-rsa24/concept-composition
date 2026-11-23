@@ -8,8 +8,8 @@ gives their printed Fréchet Inception Distance (FID) of 4.11, where lower is be
 
 ## Status
 
-The row is `blocked` by the owner's answer to board question 22, and nothing has run. The question goes back to the owner once the cheaper
-rivals have landed.
+By the owner's answer to board question 30, CIFAR-10 is context and sets no target, because SuperDiff's disjoint-halves task is the OR setting
+and Paper 1 claims AND. This rival has no CIFAR-10 row in `table.csv`, nothing has run, and no GPU time is spent on it.
 
 ## The row
 
@@ -51,3 +51,7 @@ of 50,000 images add about 5 GPU-hours. The total is about 75 to 110 GPU-hours, 
 
 **A cheaper version does not qualify.** One training per half is about 25 to 35 GPU-hours, but the brief marks a single training `not comparable`, because
 it leaves out the variation between trainings.
+
+## Cross-references
+
+- The mention of **CIFAR-10 disjoint split**, a dataset Paper 1 runs, in [the route to two papers, under The steps](../../../../../plans/route-two-papers.md#the-steps).

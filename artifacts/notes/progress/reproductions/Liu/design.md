@@ -20,3 +20,7 @@ CMNIST, Shape and Texture are `not comparable` by the owner's answer to board qu
 CoMat Table 1 quotes 0.4063, and T2I-CompBench++ Table VIII, p9, prints it as "Composable + SD v2". The benchmark's authors ran it on
 Stable Diffusion 2 base with a rebuild they did not release, so it cannot change an SDXL target. Nothing is downloaded and no GPU time is
 spent on it. The [Attend-and-Excite design](../AttendExcite/design.md) sets out the same facts.
+
+## Cross-references
+
+- The mention of **Composable Diffusion**, a paper of reading sitting 1, in [the route to two papers, under The steps](../../../../../plans/route-two-papers.md#the-steps).

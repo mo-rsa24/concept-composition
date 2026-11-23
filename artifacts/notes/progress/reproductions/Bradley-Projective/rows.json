@@ -4,6 +4,6 @@
     "verdict": "blocked",
     "commit": "4a88e791-b2f1320",
     "run_id": "question 21",
-    "note": "no released code or weights; reproducing needs about 1.6 million rendered images and about 3,000 A100-hours for three trainings; 98 stays a published number that was not reproduced"
+    "note": "no released code or weights; reproducing needs about 1.6 million rendered images and about 3,000 A100-hours for three trainings; 98 stays printed context that was not reproduced; by board question 30 the CLEVR comparison runs this rule and ours on our own models"
   }
 ]
