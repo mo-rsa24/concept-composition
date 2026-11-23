@@ -328,5 +328,7 @@ Every picture that failed the [subject guard](../../../scripts/shared/disallowed
 | `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__poe.png` | held: names a subject on the 2026-11-23 display hold | no page |
 | `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__tome.png` | held: names a subject on the 2026-11-23 display hold | no page |
 | `1-lora-correction/artifacts/results/designing-the-correction-loss/can-real-photographs-train-the-composition/turtle-tortoise-filter-passes.jpg` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/commitment-step-per-pair.png` | held: its labels name a subject on the 2026-11-23 display hold | no page |
+| `5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-3-real-phrases.png` | not cleared: an unidentified spotted domed shape in one tile | no page |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

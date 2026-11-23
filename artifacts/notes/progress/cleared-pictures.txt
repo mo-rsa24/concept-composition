@@ -190,7 +190,6 @@
 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/panel_a_failure_types.png
 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/does-restricting-the-adapter-to-early-steps-change-the-failures/window_scores.png
 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/commitment-step-frames.png
-1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/commitment-step/commitment-step-per-pair.png
 1-lora-correction/artifacts/results/what-the-correction-is/when-it-acts/when-the-correction-must-arrive/window-vs-commitment/window-vs-commitment.png
 2-classifier-guidance/artifacts/drips/route-classifier-guided-poe-from-toy-to-animals/figures/three-networks-in-step-7b.png
 2-classifier-guidance/artifacts/results/can-a-classifier-supply-the-missing-term/clip-pair-vs-smoosh-ranked.png
@@ -403,7 +402,6 @@
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/all-seeds-target-poe-xpos.png
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/how-the-third-expert-changed.png
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/poe-x-and-all-seeds.png
-5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-3-real-phrases.png
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/supervisor-4-x-at-rising-weight.png
 5-text-embedding-third-expert/artifacts/results/the-and-vector/can-a-positional-and-vector-restore-composition/token-norms-x-pos.png
 5-text-embedding-third-expert/artifacts/results/the-and-vector/what-the-and-vector-is-made-of/a-cat-and-a-dog-norms.png
