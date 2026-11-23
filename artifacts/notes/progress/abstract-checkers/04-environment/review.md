@@ -1,14 +1,14 @@
 # Review: the small repeatable environment (step V1)
 
-**Status: open.** The data rebuild passes on the laptop. The zero-push check and the cluster rebuild have not run, because the cluster
-login is down, so step V1's proof is not met yet.
+**Status: passed.** Two rebuilds give the same data hash on the laptop and on the cluster, and a zero push leaves every pixel unchanged
+on all 20 digit pairs at 8 seeds. W&B run `xv6mbklb`.
 
 | Check | Bar | Result | Where it ran |
 |---|---|---|---|
 | Two rebuilds give the same data hash | identical | **identical**, `f70b0fb362e13e255ad332ba14ca93dfb5cf051a5dfd3c86eb30482931d5a5f3` | laptop, NumPy 2.5.5 |
-| The same hash on the cluster | identical | not run | waiting on login |
-| Plain sampler against zero push, largest absolute pixel difference | under 1e-5 | not run | waiting on login |
-| Plain sampler against itself, largest absolute pixel difference | under 1e-5 | not run | waiting on login |
+| The same hash on the cluster, built twice | identical | **identical**, the same hash | job 93686, `mscluster79` |
+| Plain sampler against zero push, largest absolute pixel difference | under 1e-5 | **0.0** | job 93686, RTX 3090, float32 |
+| Plain sampler against itself, largest absolute pixel difference | under 1e-5 | **0.0** | job 93686, RTX 3090, float32 |
 
 ## The data
 
@@ -53,20 +53,21 @@ no help on that comparison, and this rule scores 0.5 on it.
 The numbers are in `digit-blind-reader.json`, and `2-classifier-guidance/scripts/abstract_checkers/blind_reader.py` computes them
 and draws the figure. Its example canvases are the first three of each kind in the build's fixed shuffle.
 
-## What is blocking the step
+## The runs
 
-From 14:49 on 2026-11-23 the laptop cannot run anything on the cluster. The gateway `146.141.21.100` accepts the SSH key and the
-command, and even `true` then never returns. A connection forwarded through the gateway to `mscluster84` times out waiting for the
-SSH banner. Fresh connections that share no socket behave the same, and the last failed attempt from this loop was at 15:25.
+Both jobs ran from the code snapshot of commit `6dc426a2`, at `/datasets/mmolefe/poe_repair_min/loop-8/code/6dc426a2/`, on `mscluster79`
+with an RTX 3090.
 
-The zero-push check cannot move to the laptop. No laptop Python environment has PyTorch, and the laptop holds the `share-0.01` model
-and lacks the `share-0.0` model this step names.
+| Job | Stage | What it covered | Data hash | Largest pixel difference, zero push | Time |
+|---|---|---|---|---|---|
+| 93685 | `ladder` | 1% of the data, digits 5 and 6 at 2 seeds | `9b70760a...`, identical on two rebuilds and to the laptop | 0.0 | 3 min 23 s |
+| 93686 | `full` | all the data, 20 pairs at 8 seeds | `f70b0fb3...`, identical on two rebuilds and to the laptop | 0.0 | 5 min 1 s |
 
-Once login returns, the remaining work is the ladder job, then the full job, both from `v1.sbatch`:
+The data is at `/datasets/mmolefe/poe_repair_min/loop-8/v1/data/`, and the zero-push numbers per pair are in `v1/zero-push.json` beside it.
 
 ```bash
-sbatch --export=ALL,SNAP=/datasets/mmolefe/poe_repair_min/loop-8/code/<repo commit> v1.sbatch ladder
-sbatch --export=ALL,SNAP=/datasets/mmolefe/poe_repair_min/loop-8/code/<repo commit> v1.sbatch full
+sbatch --export=ALL,SNAP=/datasets/mmolefe/poe_repair_min/loop-8/code/6dc426a2 v1.sbatch ladder
+sbatch --export=ALL,SNAP=/datasets/mmolefe/poe_repair_min/loop-8/code/6dc426a2 v1.sbatch full
 ```
 
-GPU-hours spent so far: 0 of 30.
+GPU-hours spent so far: 0.14 of 30.

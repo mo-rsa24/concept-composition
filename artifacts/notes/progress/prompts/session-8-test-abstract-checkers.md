@@ -58,6 +58,7 @@ SDXL. Session 7 reads the papers and writes the design. Your owner code on the b
 
 - **Session 7's design has not landed.** Finish V1, then wait 1,800 seconds per tick, and start no V2 run.
 - **A checker fails to learn plurality on unseen digits.** Record the result, try only the variations named in the design, then file an `ask` saying what it means for the abstract-checker idea.
+- **V3's push fails on the model that never saw two digits.** Run Test 2 in `abstract-checkers/06-does-it-compose/design.md` before stopping (board question 58). A pass there continues to V4, and a miss there stops the chain.
 - **The second level needs a new diffusion model.** A small model on digits and Fashion-MNIST is a toy and is not a main result, but the owner has ruled against training diffusion models for main results. File an `ask` with the cost before training it, and carry on with the digit level.
 - **A run would pass 8 GPU-hours, or this loop's total would pass 30 GPU-hours.** File an `ask` with the cost, what it buys and a cheaper default.
 - **Scoring needs Claude API tokens.** Count by eye at full size, or file an `ask` with the token cost.
