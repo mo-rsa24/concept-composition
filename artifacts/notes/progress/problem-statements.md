@@ -119,7 +119,7 @@ and Be Decisive work through attention or the starting noise. CoMat fine-tunes t
 **What it is measured on**
 
 The six Paper 2 rows in the [benchmark spec](benchmark-spec.md#the-10-benchmarks-to-beat): T2I-CompBench Color, Shape, Texture
-and Complex, GenEval two objects, and CLEVR by the most objects that succeed. RareBench Concat is a reported row. T2I-CompBench needs plain SDXL, ToMe and CoMat rerun on one setup before any win is claimed.
+and Complex, GenEval two objects, and CLEVR by the most objects that succeed. RareBench Concat is a reported row. On T2I-CompBench the two-subject prompts are the headline, with the full prompt set beside them. T2I-CompBench needs plain SDXL, ToMe and CoMat rerun on one setup before any win is claimed.
 
 **The pressure-test verdict: promising but needs rework**
 

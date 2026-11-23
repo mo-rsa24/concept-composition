@@ -22,13 +22,17 @@ the protocol is only partly matched.
 **A text-to-image win is judged on our own pictures.** Our score must beat the best finished rerun on the same prompts and seeds by
 the noise margin below. The printed bar is reported beside it as reached or not.
 
-| Benchmark | Best finished rerun | Printed bar |
-|---|---|---|
-| T2I-CompBench Color | CoMat, 0.7696 on 288 prompts at 10 seeds | 0.7927 |
-| T2I-CompBench Shape | ToMe, 0.5502 on 293 prompts | 0.6151 |
-| T2I-CompBench Texture | ToMe, 0.6503 on 300 prompts | 0.6994 |
-| T2I-CompBench Complex | CO3, 0.3326 on 988 prompts at 3 seeds | 0.4761 |
-| GenEval two objects | plain SDXL, 0.7399 on 396 images | 0.79, and plain SDXL's printed 0.80 |
+| Benchmark | Two-subject prompts, the headline | Best finished rerun on them | Same rerun on all allowed prompts | Printed bar, read on all prompts |
+|---|---|---|---|---|
+| T2I-CompBench Color | 261 of 288 | CoMat, not yet read on this subset | 0.7696, 10 seeds | 0.7927 |
+| T2I-CompBench Shape | 261 of 293 | ToMe, 0.5950 | 0.5502 | 0.6151 |
+| T2I-CompBench Texture | 240 of 300 | ToMe, 0.7553 | 0.6503 | 0.6994 |
+| T2I-CompBench Complex | about 475 to 605 of 988, until one parser is fixed | CO3, not yet read on this subset | 0.3326, 3 seeds | 0.4761 |
+| GenEval two objects | all 99 two-object prompts | plain SDXL, 0.7399 on 396 images | the same | 0.79, and plain SDXL's printed 0.80 |
+
+**Paper 2's headline is the two-subject prompts.** Its checker has outputs for two subjects, so the list of two-subject prompts is
+named before any of our renders are scored, and the full allowed set is reported beside it. Rival scores are re-read on that list
+from their saved pictures. The papers print no two-subject number, so the printed bar is read on the full set.
 
 **Stopped reruns stay as printed numbers.** These are CoMat on Shape and Texture, ToMe on Complex and Color, and FKC. One of them could
 have ranked higher on our pictures, as CO3 did over Rectify Then Diffuse on Complex, and the paper says so. When a reproduction matches
@@ -63,7 +67,7 @@ including 88.8% on smiling men, because the paper reports no per-group accuracy.
 
 **CLEVR is judged by the most objects that succeed, on our own models.** A count K succeeds when K objects appear in at least
 50% of images and at least K-2 appear in at least 90%, on 1,024 images per count from a scorer that never trains a checker. Bradley
-trains on 134 million images and our full length is 8 million, so printed numbers are context. A win needs at least 7 objects on both this scorer and a hand count of 100 images, read with the same rule for K, and more than the one-network control at equal training length, and Paper 1 must also beat a sample-and-paste control. The target is 7
+trains on 134 million images and our full length is 8 million, so printed numbers are context. A win needs at least 7 objects on both this scorer and a hand count of 100 images, read with the same rule for K, and more than the one-network control at equal training length, and Paper 1 must also beat a sample-and-paste control. If paste alone reaches 7 objects, object count cannot separate the two, and step M6 brings the owner a replacement test where pasting fails. The target is 7
 because Bradley's rule already places all 6 objects in 97 of 100 images and first clearly fails at 7. A count also needs clean
 pictures, because that paper's Figure 3 marks 5 and 6 objects as partial where its hand count reads 98 and 97 of 100.
 

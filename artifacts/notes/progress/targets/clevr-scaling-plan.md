@@ -29,7 +29,7 @@ composition. That is why the paste control is required.
 not on the cluster's path, so the first step is to install it and time one batch of renders.
 
 **A small test before the go or no-go.** Step M6 runs each paper's method with 2 and 3 experts at 64 pixels and 5,000 images per
-model, on positions outside Bradley's 12. It tunes the CLEVR recipe before step M4 freezes it, and it supports no claim.
+model, on positions outside Bradley's 12. It tunes the CLEVR recipe before step M4 freezes it, and it supports no claim. It scores sample-and-paste first, because [pasting alone is calculated to reach 7 objects](how-far-sample-and-paste-reaches.png) once each object is right 91% of the time. If paste reaches 7, object count cannot separate Paper 1 from paste, so M6 stops and brings the owner a test where pasting fails, such as objects close enough to overlap or shade each other.
 
 **Stage 1: the expert ladder.** Train the background, the one-network control and experts 1 and 2, then test 2 objects. Add one
 expert per rung and test one more object. Earlier experts are never retrained.
@@ -80,7 +80,7 @@ at equal training length:
 
 - more objects that succeed than the one-network control;
 - at least 7 objects on both the automatic scorer and a hand count of 100 images, read with the same rule for K, because Bradley's rule already places all 6 in 97 of 100 images and first clearly fails at 7;
-- for Paper 1, more objects than the sample-and-paste control.
+- for Paper 1, more objects than the sample-and-paste control, or a win on the replacement test if paste reaches 7.
 
 | Table | Printed context | What we need |
 |---|---|---|
