@@ -21,6 +21,7 @@ import torch
 from matplotlib.colors import hsv_to_rgb, rgb_to_hsv
 from PIL import Image, ImageDraw, ImageFont
 from scipy.ndimage import gaussian_filter
+from scipy.ndimage import label as nd_label
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import LOOP, REPO, check, eval_tiles, load_tile_latent, sha  # noqa: E402
@@ -34,7 +35,6 @@ from poe_repair.runtime import encode_prompt_sdxl  # noqa: E402
 N_PICTURES = 64
 MAP_T = 200
 MAP_DRAWS = 3
-TOP_FRACTION = 0.10
 BOX_LEVEL = 0.5
 LARGE_RATIO = 1.25
 RED_HUE = 0.0
@@ -102,14 +102,33 @@ def word_maps(ctx, z0, seq, pool, cat_i, dog_i, n_words, seed):
     return cat, dog
 
 
-def top_centroid_x(m: np.ndarray) -> float:
-    k = max(1, int(TOP_FRACTION * m.size))
-    idx = np.argsort(m.ravel())[-k:]
-    return float(np.unravel_index(idx, m.shape)[1].mean())
+def stretched(m: np.ndarray) -> np.ndarray:
+    """A word map rescaled so its lowest position is 0 and its highest is 1."""
+    return (m - m.min()) / max(float(m.max() - m.min()), 1e-8)
 
 
-def box(m: np.ndarray) -> list[int]:
-    ys, xs = np.where(m >= BOX_LEVEL * m.max())
+def largest_component(a: np.ndarray) -> np.ndarray:
+    labelled, n = nd_label(a)
+    if n == 0:
+        return a
+    sizes = np.bincount(labelled.ravel())[1:]
+    return labelled == int(np.argmax(sizes)) + 1
+
+
+def regions(cat: np.ndarray, dog: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Foreground is where either stretched map reaches BOX_LEVEL. Each position goes to the higher word,
+    and each word keeps its largest connected piece."""
+    c, d = stretched(cat), stretched(dog)
+    foreground = np.maximum(c, d) >= BOX_LEVEL
+    return largest_component(foreground & (c >= d)), largest_component(foreground & (d > c))
+
+
+def centroid_x(region: np.ndarray) -> float:
+    return float(np.where(region)[1].mean())
+
+
+def box(region: np.ndarray) -> list[int]:
+    ys, xs = np.where(region)
     return [int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1]
 
 
@@ -117,13 +136,10 @@ def area(b: list[int]) -> int:
     return (b[2] - b[0]) * (b[3] - b[1])
 
 
-def soft_masks(cat: np.ndarray, dog: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Each word's region at 1,024 pixels; where both qualify, the word with the larger share keeps it."""
-    c, d = cat / cat.sum(), dog / dog.sum()
-    mc = (cat >= BOX_LEVEL * cat.max()) & (c >= d)
-    md = (dog >= BOX_LEVEL * dog.max()) & (d > c)
+def soft_masks(cat_region: np.ndarray, dog_region: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Each word's region at 1,024 pixels with a soft edge. Everything outside both keeps its colour."""
     up = lambda a: gaussian_filter(np.kron(a.astype(np.float32), np.ones((32, 32), np.float32)), EDGE_PIXELS)
-    mc, md = up(mc), up(md)
+    mc, md = up(cat_region), up(dog_region)
     total = mc + md
     over = total > 1
     mc[over] /= total[over]
@@ -196,14 +212,14 @@ def write_sheets(tiles: list[Image.Image], folder: Path, stem: str) -> int:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--smoke", action="store_true", help="4 pictures only, written to prep-smoke")
+    ap.add_argument("--smoke", action="store_true", help="8 pictures only, written to prep-smoke")
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("guard: torch sees no CUDA card")
     check(PROMPT)
     out = LOOP / ("w2/prep-smoke" if args.smoke else "w2/prep")
     out.mkdir(parents=True, exist_ok=True)
-    n = 4 if args.smoke else N_PICTURES
+    n = 8 if args.smoke else N_PICTURES
     tiles = sorted((t for t in eval_tiles() if t["kind"] == "positive"), key=lambda t: sha(t["id"]))[:n]
     assert len(tiles) == n and all(t["pair"] == "a_cat__x__a_dog" for t in tiles)
 
@@ -214,21 +230,25 @@ def main() -> int:
     cat_i, dog_i, n_words = token_positions(ctx.models["tokenizer"])
     vae = ctx.models["vae"]
 
-    records, ids, latents, label_sheet, colour_sheet = [], [], [], [], []
+    records, ids, latents, label_sheet, colour_sheet, maps = [], [], [], [], [], {}
     t0 = time.time()
     for index, tile in enumerate(tiles):
         z0 = load_tile_latent(tile)
         cat, dog = word_maps(ctx, z0, seq, pool, cat_i, dog_i, n_words, int(sha(tile["id"])[:8], 16))
-        cat_box, dog_box = box(cat), box(dog)
+        cat_region, dog_region = regions(cat, dog)
+        if not cat_region.any() or not dog_region.any():
+            raise SystemExit(f"a word has no region on {tile['id']}")
+        maps[tile["id"]] = np.stack([cat, dog])
+        cat_box, dog_box = box(cat_region), box(dog_region)
         ca, da = area(cat_box), area(dog_box)
         ratio = max(ca, da) / max(min(ca, da), 1)
         larger = None if ratio < LARGE_RATIO else ("cat" if ca > da else "dog")
-        r = {"index": index, "id": tile["id"], "seed": tile["seed"], "cat_left": top_centroid_x(cat) < top_centroid_x(dog),
+        r = {"index": index, "id": tile["id"], "seed": tile["seed"], "cat_left": centroid_x(cat_region) < centroid_x(dog_region),
              "cat_box": cat_box, "dog_box": dog_box, "larger": larger, "area_ratio": ratio}
         records.append(r)
         with torch.no_grad():
             img = decode_latents_to_tensor(vae, z0.to(ctx.device))[0].permute(1, 2, 0).float().cpu().numpy()
-        mc, md = soft_masks(cat, dog)
+        mc, md = soft_masks(cat_region, dog_region)
         red_blue = recolour(img, mc, md, RED_HUE, BLUE_HUE)
         blue_red = recolour(img, mc, md, BLUE_HUE, RED_HUE)
         for name, arr in (("unflipped", img), ("mirror", img[:, ::-1].copy()), ("red_cat_blue_dog", red_blue),
@@ -241,6 +261,7 @@ def main() -> int:
         print(f"[{time.time() - t0:6.0f}s] {index + 1}/{n} {tile['id']} cat_left={r['cat_left']} larger={larger} ratio={ratio:.2f}", flush=True)
 
     torch.save({"ids": ids, "latents": torch.cat(latents)}, out / "derived.pt")
+    np.savez_compressed(out / "word_maps.npz", ids=np.array(list(maps)), maps=np.stack(list(maps.values())))
     (out / "labels.json").write_text(json.dumps({"map_t": MAP_T, "prompt": PROMPT, "records": records}, indent=1))
     a = write_sheets(label_sheet, out / "sheets", "labels")
     b = write_sheets(colour_sheet, out / "sheets", "colours")
