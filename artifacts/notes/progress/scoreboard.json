@@ -7,20 +7,20 @@
   "targets": [
     {
       "paper": "Paper 1",
-      "dataset": "CLEVR location-conditioned, 5 objects composed",
-      "metric": "Images with 5 objects in correct locations (count of 100)",
-      "unit": "%",
+      "dataset": "CLEVR location-conditioned, trained on one object",
+      "metric": "Kmax",
+      "unit": "",
       "better": "higher",
-      "rival": "Bradley-Projective",
-      "published": 98.0,
+      "rival": "Bradley-Local",
+      "published": 5.0,
       "reproduced": null,
       "step": 1,
       "range": [
         0.0,
-        100.0
+        null
       ],
-      "protocol": "Location-conditioned CLEVR at 128x128; 100 samples per composition method, with objects in correct locations counted by hand; EDM2 edm2-img64-xs U-net re-implementation; 65 model calls with a 32-step Heun sampler; no guidance.",
-      "number_id": "Bradley-Projective-T1-008",
+      "protocol": "Location-conditioned 128x128 CLEVR, 500,000 training samples per object count; EDM2 edm2-img64-xs without guidance; Kmax is the largest K such that every 1 <= K <= Kmax succeeds, success being K objects at least 50% of the time and at least K-2 objects at least 90% of the time; judged by a ResNet-18 classifier (99.74% test accuracy) trained to count 1-10 objects, over 1024 samples per configuration.",
+      "number_id": "Bradley-Local-T1-004",
       "reproduced_id": null,
       "ours": null,
       "ours_interval": null,
@@ -219,9 +219,20 @@
   "qualitative": [
     {
       "paper": "Paper 1",
-      "dataset": "CLEVR location-conditioned, 5 objects composed",
+      "dataset": "CLEVR location-conditioned, trained on one object",
       "rival": "Bradley-Projective",
       "failure": "At 7 to 9 objects, composed objects melt into mixed-colour blobs",
+      "pairs": 0,
+      "better": 0,
+      "tied": 0,
+      "worse": 0,
+      "why": ""
+    },
+    {
+      "paper": "Paper 1",
+      "dataset": "CLEVR location-conditioned, trained on one object",
+      "rival": "Bradley-Local",
+      "failure": "From five dots on, objects melt into merged blobs of mixed colour",
       "pairs": 0,
       "better": 0,
       "tied": 0,

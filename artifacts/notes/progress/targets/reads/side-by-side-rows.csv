@@ -1,5 +1,6 @@
 paper,dataset,rival,failure
-Paper 1,"CLEVR location-conditioned, 5 objects composed",Bradley-Projective,"At 7 to 9 objects, composed objects melt into mixed-colour blobs"
+Paper 1,"CLEVR location-conditioned, trained on one object",Bradley-Projective,"At 7 to 9 objects, composed objects melt into mixed-colour blobs"
+Paper 1,"CLEVR location-conditioned, trained on one object",Bradley-Local,"From five dots on, objects melt into merged blobs of mixed colour"
 Paper 1,"Shapes3D Partial support, ∧ composition",CoInD,"Own failure panel: wrong wall colour, sphere for a cylinder, object dissolved into noise"
 Paper 1,"Shapes3D Partial support, ∧ composition",Liu,"Wrong shape or size, with colour noise across the scene on partial support"
 Paper 1,"CMNIST, AND",Liu,"Draws avoided digits and colours, or broken strokes instead of a 4, on skewed training data"

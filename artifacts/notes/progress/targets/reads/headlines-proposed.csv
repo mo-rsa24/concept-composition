@@ -1,5 +1,5 @@
 paper,number_id,unit,step,range_low,range_high,why_this_one
-Paper 1,Bradley-Projective-T1-008,%,1,0,100,"Models that saw only single-object images, composed at sampling, which is the closest printed setting to Paper 1"
+Paper 1,Bradley-Local-T1-004,,1,0,,"The most objects that succeed for models trained on images of one object, which is Paper 1's setting; separately composed models reach 4 and the local patch model reaches 5"
 Paper 1,CoInD-T4-036,%,1,0,100,"Unseen attribute combinations, with CoInD and Liu on one protocol"
 Paper 1,LogicalGuidance-T4-009,%,1,0,100,"The hardest printed Colored MNIST AND score; Liu and SuperDiff are measured on the same task in Table 11"
 Paper 1,CoInD-T6-011,%,1,0,100,"A real-image dataset, measuring whether the composition is right rather than image quality alone"

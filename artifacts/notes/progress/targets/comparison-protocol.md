@@ -51,9 +51,13 @@ target and says the rival was not rerun.
 authors' 10,000 steps, reads 97.9% and 93.0% on CelebA's test split. Every CelebA row also prints the scorer's accuracy per group,
 including 88.8% on smiling men, because the paper reports no per-group accuracy.
 
-**CLEVR is judged on our own models.** Projective Composition released no code or weights, and its setup costs about 3,000
-A100-hours, so its 98 of 100 stays as printed context. Its composition rule and ours run on the same single-object,
-location-conditioned models, over the same positions and seeds.
+**CLEVR is judged by the most objects that succeed, on our own models.** A count K succeeds when K objects appear in at least
+50% of images and at least K-2 appear in at least 90%, on 1,024 images per count scored by a checked position classifier. For
+models trained on one object, Bradley's local patch model reaches 5 and separately composed models reach 4, so the target is 6.
+Projective Composition released no code or weights and its setup costs about 3,000 A100-hours, so its composition rule and ours
+run on the same single-object, location-conditioned models, over the same positions and seeds, from 1 to 10 objects. A count also
+needs clean pictures: that paper's Figure 3 marks 5 and 6 objects as partial where its hand count of correct positions reads 98
+and 97 of 100.
 
 **CIFAR-10 is context and sets no target.** SuperDiff's disjoint-halves task is the OR setting (p7), which samples from either
 model. Paper 1 claims AND, both things in one image.

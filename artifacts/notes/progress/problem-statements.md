@@ -53,8 +53,8 @@ supports.
 
 **What it is measured on**
 
-The four Paper 1 rows in the [benchmark spec](benchmark-spec.md#the-10-benchmarks-to-beat): CLEVR at 5 positions, Shapes3D,
-CMNIST AND and CelebA. SuperDiff's disjoint CIFAR-10 halves are context, because that task samples from either model. The CLEVR target is Projective Composition's 98 of 100 hand-counted images.
+The four Paper 1 rows in the [benchmark spec](benchmark-spec.md#the-10-benchmarks-to-beat): CLEVR by the most objects that succeed, Shapes3D,
+CMNIST AND and CelebA. SuperDiff's disjoint CIFAR-10 halves are context, because that task samples from either model. The CLEVR target is 6 objects, one past the 5 that Bradley's local patch model reaches after training on single objects.
 
 **The pressure-test verdict: promising but needs rework**
 

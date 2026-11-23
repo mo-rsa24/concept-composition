@@ -52,13 +52,13 @@ published row of every benchmark, including datasets this page does not discuss,
 | CLEVR Position, 3 position constraints | Accuracy (%), pretrained classifier | 6.7 | LiftScores | LiftScores Table 7, p22 |  |  |
 | CLEVR Position, 4 position constraints | Accuracy (%), pretrained classifier | 0.7 | LiftScores | LiftScores Table 7, p22 |  |  |
 | CLEVR Position, 5 position constraints | Accuracy (%), pretrained classifier | 0.1 | LiftScores | LiftScores Table 7, p22 |  |  |
-| CLEVR location-conditioned, Trained on 1 | Kmax | 4 | Bradley-Projective | Bradley-Projective Table 2, p39 |  |  |
+| CLEVR location-conditioned, trained on one object, Trained on 1 | Kmax | 4 | Bradley-Projective | Bradley-Projective Table 2, p39 |  |  |
 | CLEVR location-conditioned, Trained on 1-2 | Kmax | 5 | Bradley-Local | Bradley-Projective Table 2, p39 |  |  |
 | CLEVR location-conditioned, Trained on 1-3 | Kmax | 9 | Bradley-Local | Bradley-Projective Table 2, p39 |  | Table 2 (p39) and p37 credit Bradley-Local's learned composition trained on 1-3 objects with Kmax 9, while Bradley-Local prints 7 for that grid-conditioned model and 9 only for its local patch models (Table 1, p3). |
 | CLEVR location-conditioned, Trained on 1-4 | Kmax | 10 | Bradley-Local | Bradley-Projective Table 2, p39 |  | Table 2 (p39) credits Bradley-Local's learned composition trained on 1-4 objects with Kmax 10, and Bradley-Local v3 prints no Kmax for a model trained on 1-4 objects. |
 | CLEVR location-conditioned, Trained on 1-5 | Kmax | 10 | Bradley-Local | Bradley-Projective Table 2, p39 |  |  |
 | CLEVR location-conditioned, Trained on 1-6 | Kmax | 11 | Bradley-Local | Bradley-Projective Table 2, p39 |  | Table 2 (p39) credits Bradley-Local's learned composition trained on 1-6 objects with Kmax 11, and Bradley-Local v3 prints no Kmax for a model trained on 1-6 objects and its count tables stop at 10 objects (Table 2, p28). |
-| CLEVR location-conditioned, Trained on 1 object | Kmax | 5 | Bradley-Local | Bradley-Local Table 1, p3 |  |  |
+| CLEVR location-conditioned, trained on one object, Trained on 1 object | Kmax | 5 | Bradley-Local | Bradley-Local Table 1, p3 |  |  |
 | CLEVR location-conditioned, Trained on 1-3 objects | Kmax | 9 | Bradley-Local | Bradley-Local Table 1, p3 |  | Exp.3L's tied Kmax of 9 fails the 50% rule on p23, with 228 of 1024 images at 9 and 214 at 10 (Table 2, p28), and Exp.2L's 9 meets it only if K objects means at least K, with 351 at exactly 9 and 317 at 10. |
 | CLEVR location-conditioned, Trained on 1-5 objects | Kmax | 10 | Bradley-Local | Bradley-Local Table 1, p3 |  | Exp.3's Kmax of 6 on this training set fails the 50% rule on p23, with 367 of 1024 images at 6 and 45 at 7 (Table 2, p28), and the best value of 10 comes from other experiments. |
 | CLEVR color-conditioned, Color, trained 1 | Kmax | 1 | Bradley-Local | Bradley-Local Table 4, p30 |  |  |

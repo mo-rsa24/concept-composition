@@ -5,17 +5,19 @@ page gives the number each one rests on, the reason, and the scope behind them.
 
 | Paper | Benchmark | Target | Number it rests on |
 |---|---|---|---|
-| 1 | CLEVR, 5 objects | **99%** | Projective Composition, 98 of 100 hand-counted images, Table 1, p17 |
+| 1 | CLEVR, models trained on one object | **6 objects** | Bradley's local patch model, 5 objects, Table 1, p3 |
 | 2 | T2I-CompBench Complex, ImageReward | **0.4761** | Rectify Then Diffuse, 0.4661, Table 2, p6 |
 | 2 | RareBench Concat, ImageReward | **0.4564** | Rectify Then Diffuse, 0.4464, Table 2, p6 |
 | 2 | GenEval two objects, 553 released prompts | **0.79**, and a win must also beat plain SDXL's 0.80 | FKC, 0.78, Table A4, p39 |
 
 ## Why each one
 
-**CLEVR.** Projective Composition composes models that saw only single-object images, the closest printed setting to Paper
-1. Its appendix describes a model conditioned on coordinates (p15), so the composed parts may be one network. Domain
-Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base model on all 30,000 multi-object images
-(its p11). With 100 hand-counted images, one image is the whole margin between the rival and the target.
+**CLEVR.** Paper 1's models each see one concept, so the target is the most objects that succeed for models trained on single
+objects. A count K succeeds when K objects appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local
+patch model reaches 5 on 1,024 images (Local Mechanisms, Table 1, p3), and separately composed models with an empty background reach
+4 (Projective Composition, Table 2, p39). Projective Composition's hand count of 98 of 100 at 5 objects stays as context, because
+its Figure 3 marks 5 objects as only partly successful. Domain Expansion's 44.5 at 5 positions is a different benchmark, because it
+trains one base model on all 30,000 multi-object images (its p11).
 
 **Complex and RareBench Concat.** Rectify Then Diffuse states the same SDXL setup as CO3 and prints higher scores on both.
 Its baseline ImageReward cells match CO3's table on 19 of 20 values, so CO3 was probably not rerun.
