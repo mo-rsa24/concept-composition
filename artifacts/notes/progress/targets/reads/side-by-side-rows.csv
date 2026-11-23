@@ -27,3 +27,5 @@ Paper 2,RareBench Concat,CO3,"Misses rare traits: hornless lemons, no thorns, oc
 Paper 2,RareBench Concat,RTD,"Subjects separate but shape and action words fail: no ax bed, heart moon, star ship or dancing"
 Paper 2,RareBench Concat,ToMe,"Drops lion, octopus, owl and bottle; rides a bicycle instead of a unicycle"
 Paper 2,GenEval (553 prompts),FKC,"Colour leaks remain: a green TV screen, two extra toothbrushes, green handles on a red bag"
+Paper 2,"CLEVR location-conditioned, trained on one object",Bradley-Projective,"At 7 to 9 objects, composed objects melt into mixed-colour blobs"
+Paper 2,"CLEVR location-conditioned, trained on one object",Bradley-Local,"From five dots on, objects melt into merged blobs of mixed colour"

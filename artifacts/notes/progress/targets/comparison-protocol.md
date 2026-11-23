@@ -63,6 +63,13 @@ and 97 of 100.
 **CIFAR-10 is context and sets no target.** SuperDiff's disjoint-halves task is the OR setting (p7), which samples from either
 model. Paper 1 claims AND, both things in one image.
 
+**Both papers compete on CLEVR, under one [scaling plan](clevr-scaling-plan.md).** Paper 1 adds experts trained apart, one per
+rung. Paper 2 runs the same single location network with our checker. The checker may see only single-object images and composites
+pasted from them. A checker that sees real multi-object images is judged against models trained on those images, where the printed
+best is 9 for one to three objects.
+
+**RareBench Concat is a reported row and sets no target.** Its 33 allowed prompts give a rerun pass band of plus or minus 0.443.
+
 **A disputed number cannot set a target.** `limits.md` marks where a paper contradicts itself about a value. T2I-CompBench
 Color is a disagreement between two papers: ToMe quotes CoMat at 0.7774, and CoMat's own page prints 0.7827. The target uses
 the number on CoMat's own page.

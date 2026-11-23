@@ -1,8 +1,8 @@
 # Benchmark spec: what each rival ran
 
-This page says what a run has to copy before its number can sit beside a rival's. It lists the 10 benchmarks the
-owner accepted as targets, then 166 dataset settings from 24 of the 25 rival papers, each with its
-split, metrics and sample count. Rectify Then Diffuse appears with its two target settings only, and RPG has no section
+This page says what a run has to copy before its number can sit beside a rival's. It lists the 10 targets the
+owner accepted, on 9 benchmarks because both papers use CLEVR, then 166 dataset settings from 24 of the 25 rival papers, each with its
+split, metrics and sample count. Rectify Then Diffuse appears with two settings only, and RPG has no section
 because it sets no target. The numbers come from the [rivals' numbers table](targets/numbers.csv), and the
 rules for judging a win are in the [comparison protocol](targets/comparison-protocol.md).
 
@@ -12,12 +12,14 @@ dataset or task, as the numbers table names it.
 
 ## Table of contents
 
-- [The 10 benchmarks to beat](#the-10-benchmarks-to-beat)
+- [The 10 targets to beat](#the-10-benchmarks-to-beat)
 - [What the rivals leave out](#what-the-rivals-leave-out)
 - [Every rival's datasets](#every-rivals-datasets)
 - [How this was checked](#how-this-was-checked)
 
-## The 10 benchmarks to beat
+<a id="the-10-benchmarks-to-beat"></a>
+
+## The 10 targets to beat
 
 | Paper | Benchmark | Metric | Rival's number | Split | Count behind the number | Where |
 |---|---|---|---|---|---|---|
@@ -29,19 +31,20 @@ dataset or task, as the numbers table names it.
 | Paper 2 | T2I-CompBench Shape | BLIP-VQA, higher is better | ToMe 0.6051 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
 | Paper 2 | T2I-CompBench Texture | BLIP-VQA, higher is better | ToMe 0.6894 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
 | Paper 2 | T2I-CompBench Complex | ImageReward (IR), higher is better | RTD 0.4661 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the 1,000 prompts of the T2I-CompBench complex compositional split. | 1,000 prompts, three fixed seeds per prompt (3,000 images). | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
-| Paper 2 | RareBench Concat | ImageReward (IR), higher is better | RTD 0.4464 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the Concat category of RareBench. | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
+| Paper 2 | CLEVR location-conditioned, trained on one object | Kmax, the most objects that succeed, higher is better | Bradley-Local 5 | The same row as Paper 1. Paper 2 uses one location network composed with itself, plus its checker. | 1,024 samples per configuration, judged by a ResNet-18 counting classifier with 99.74% test accuracy. | [Local Mechanisms Table 1, page 3](https://arxiv.org/pdf/2509.16447#page=3) |
 | Paper 2 | GenEval (553 prompts) | Two object, higher is better | FKC 0.78 | SDXL with classifier-free guidance plus FKC at inference, guidance weight 7.5; no training stated. Evaluated on GenEval's released 553 prompts, of which 99 are two-object. | 553 prompts; images per prompt and seeds not stated. | [FKC Table A4, page 39](https://arxiv.org/pdf/2503.02819#page=39) |
 
 ## What the rivals leave out
 
-**Only 3 of the 10 targets come with a stated image count:** Bradley's local patch model (1,024), Logical Guidance
-(10,000) and Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). Its RareBench Concat row
-states three seeds and leaves out how many of the 120 prompts are Concat. ToMe states 300 prompts on its two benchmarks and FKC
+**Only 4 of the 10 targets come with a stated image count:** Bradley's local patch model on CLEVR for both papers (1,024),
+Logical Guidance (10,000) and Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). ToMe states 300 prompts on its two benchmarks and FKC
 states 553, and both leave out images per prompt and seeds. The other 3 targets have no count for that number.
 
-A run on those 7 benchmarks records the count it used, and its row reads "partly matched", as the
+A run on those 6 targets records the count it used, and its row reads "partly matched", as the
 [comparison protocol](targets/comparison-protocol.md#numbers) requires. Step D2 reruns one published number per rival,
 which is where a missing setting can be tested.
+
+**RareBench Concat is a reported row.** Its 33 allowed prompts are too few to separate methods, so it sets no target.
 
 **GenEval's target uses the 553 released prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints 0.78 and
 plain SDXL prints 0.80, so the target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
@@ -341,12 +344,12 @@ leaves out.
 
 </details>
 <details>
-<summary><b>RTD</b> (<a href="https://arxiv.org/abs/2608.03135">arXiv 2608.03135</a>): its 2 target settings</summary>
+<summary><b>RTD</b> (<a href="https://arxiv.org/abs/2608.03135">arXiv 2608.03135</a>): 2 settings, one holding a target</summary>
 
 | Dataset | Split | Metrics | Count | Pages |
 |---|---|---|---|---|
 | T2I-CompBench Complex ★ | No training (Rectify Then Diffuse on pretrained SDXL); the 1,000 prompts of the complex compositional split. | Human Evaluation (HE), ImageReward (IR), S-IoU5 | 1,000 prompts, three fixed seeds per prompt (3,000 images). Human evaluation by 11 participants. | 4, 6 |
-| RareBench Concat ★ | No training (Rectify Then Diffuse on pretrained SDXL); the Concat category of RareBench. | Human Evaluation (HE), ImageReward (IR) | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. Human evaluation by 11 participants. | 4, 6 |
+| RareBench Concat | No training (Rectify Then Diffuse on pretrained SDXL); the Concat category of RareBench. | Human Evaluation (HE), ImageReward (IR) | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. Human evaluation by 11 participants. | 4, 6 |
 
 </details>
 <details>

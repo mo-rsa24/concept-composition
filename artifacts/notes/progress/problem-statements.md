@@ -117,7 +117,7 @@ and Be Decisive work through attention or the starting noise. CoMat fine-tunes t
 **What it is measured on**
 
 The six Paper 2 rows in the [benchmark spec](benchmark-spec.md#the-10-benchmarks-to-beat): T2I-CompBench Color, Shape, Texture
-and Complex, RareBench Concat, and GenEval two objects. T2I-CompBench needs plain SDXL, ToMe and CoMat rerun on one setup before any win is claimed.
+and Complex, GenEval two objects, and CLEVR by the most objects that succeed. RareBench Concat is a reported row. T2I-CompBench needs plain SDXL, ToMe and CoMat rerun on one setup before any win is claimed.
 
 **The pressure-test verdict: promising but needs rework**
 
@@ -126,12 +126,12 @@ labels. The method has no valid result yet. In the closest published test, [Corr
 Resampling](https://arxiv.org/pdf/2312.06038#page=6), a detector and discriminator gradient moves object occurrence (the share
 of named objects found, 0 to 1) from about 0.55 to 0.56 on GPT-Synthetic, read off its Figure 4. Resampling with the same signal
 reaches about 0.74. That test used a clean-image detector at low noise, so the early noise-aware version is still open. Of the
-six benchmark rows, only GenEval's two-object task counts two separate objects. The [full test](problem-statements-pressure/paper-2.md) names the next
+six benchmark rows, GenEval's two-object task and CLEVR count separate objects. The [full test](problem-statements-pressure/paper-2.md) names the next
 checks.
 
 **What our check adds to the verdict**
 
-The Complex and RareBench Concat targets come from [Rectify Then Diffuse's Table 2](https://arxiv.org/pdf/2608.03135#page=6),
+The Complex target and the reported RareBench Concat row come from [Rectify Then Diffuse's Table 2](https://arxiv.org/pdf/2608.03135#page=6),
 which prints ImageReward 0.4661 and 0.4464 against CO3's 0.4406 and 0.1610. The paper's footnote about copied CO3 numbers is
 marked on its Table 4, so it does not cover Table 2. Table 2's baseline ImageReward cells match CO3's own table on 19 of 20
 values, so CO3 was probably not rerun, and the two methods should not be read as compared on one setup.

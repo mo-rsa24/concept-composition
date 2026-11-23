@@ -7,5 +7,5 @@ Paper 2,CoMat-T1-055,,0.01,0,1,"The hardest Color score on SDXL from a method th
 Paper 2,ToMe-T1-054,,0.01,0,1,"The hardest Shape score on SDXL from a method that needs no outside language model"
 Paper 2,ToMe-T1-053,,0.01,0,1,"The hardest Texture score on SDXL from a method that needs no outside language model"
 Paper 2,RTD-T2-051,,0.01,,,"Prompts with three or more concepts, with RTD and CO3 printed on one SDXL setup"
-Paper 2,RTD-T2-054,,0.01,,,"Rare concept pairs, with RTD and CO3 printed on one SDXL setup"
+Paper 2,Bradley-Local-T1-004,,1,0,,"One network composed with itself, which is Paper 2's setting; one location model composed at each position reaches 4 and the local patch model reaches 5"
 Paper 2,FKC-TA4-038,,0.01,0,1,"GenEval's two-object task on its released 553 prompts, the one benchmark here that counts two separate objects; a win must also beat plain SDXL's 0.80 on the same prompts and seeds"
