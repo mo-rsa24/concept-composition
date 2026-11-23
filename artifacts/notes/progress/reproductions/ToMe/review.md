@@ -68,4 +68,6 @@ the paper prints 0.6051 (job 93303, commits `9efe30d1-b988f7a`, W&B `8cowoyea`).
 0.4968 to 0.6022 (W&B `c8c153mf`). Plain SDXL missed its printed Shape score on the same pipeline, so part of this gap may come from the setup. ToMe's gain over plain
 SDXL is 0.0677 in our run and 0.0643 in the paper's printed numbers.
 
-**Does ToMe reproduce its published Texture score?** Unknown until BLIP-VQA scoring finishes.
+**Does ToMe reproduce its published Texture score?** ✅ Yes. ToMe scores 0.6503 on all 300 prompts at seed 0, with a pass band of 0.5970 to 0.7036, and the paper
+prints 0.6894 (job 93317, commits `9efe30d1-b988f7a`, W&B `ljypsxnd`). No Texture prompt needed a parse repair. ToMe's gain over plain SDXL on the same prompts is
+0.1271 in our run and 0.1257 in the paper's printed numbers.

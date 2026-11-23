@@ -16,5 +16,16 @@
     "run_id": "8cowoyea",
     "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/ToMe/full/tome/t2i_shape",
     "note": "seed 0; 293 prompts including 2 with a repaired parse; on the 291 unrepaired prompts ToMe scores 0.5495 (0.4968 to 0.6022, W&B c8c153mf); the plain SDXL check on this benchmark also missed: ours 0.4825 (range 0.4301 to 0.5348) against 0.5408 printed by ToMe and RPG, while CoMat prints 0.4687"
+  },
+  {
+    "target_id": "ToMe-T1-053",
+    "ours": 0.6503,
+    "interval_low": 0.597,
+    "interval_high": 0.7036,
+    "verdict": "reproduced",
+    "commit": "9efe30d1-b988f7a",
+    "run_id": "ljypsxnd",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/ToMe/full/tome/t2i_texture",
+    "note": "seed 0; 300 prompts, none needing a parse repair; gain over plain SDXL on the same prompts is 0.1271 here and 0.1257 in the paper's printed numbers"
   }
 ]
