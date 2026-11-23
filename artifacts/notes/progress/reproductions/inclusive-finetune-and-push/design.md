@@ -4,8 +4,8 @@
 
 Paper 2's appendix carries one paragraph on inclusive captions. The argument behind it is that a short fine-tune on inclusive captions gives the product of experts
 some support for two animals, which the checker's push can then amplify. No run has combined the two. This test renders the two saved cat and dog LoRAs from the
-inclusive-captions pilot, with and without the chosen checker's push, and decides what that paragraph may say. It trains nothing and starts after step D3 has chosen the
-checker.
+inclusive-captions pilot, with and without the chosen checker's push, and decides what that paragraph may say. It trains nothing and starts after steps D3 and M2 have chosen
+the checker.
 
 ## Words this uses
 
@@ -48,7 +48,7 @@ The LoRAs are in `/datasets/mmolefe/poe_repair_min/outputs/inclusive_captions/`.
 |---|---|
 | Subjects | cat and dog, allowed by the subject guard |
 | Seeds | 6001 to 6032, which are tuning seeds |
-| Checker | the one step D3 chooses, unchanged and untuned for this test |
+| Checker | the one steps D3 and M2 choose, unchanged and untuned for this test |
 | Push | D3's settings for that checker: capped at 0.4 of the PoE prediction, on steps 0 to 15 |
 | Sampler | the same sampler and step count as the D3 comparison |
 | Counting | by eye at full size, in a shuffled order under neutral file names |

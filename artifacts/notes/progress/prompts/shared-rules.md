@@ -1,0 +1,91 @@
+# Shared rules for the looping sessions
+
+Every looping session reads this file on every tick. It holds what the sessions have in common.
+
+## The route
+
+The [two-paper route](../../../../plans/route-two-papers.md) says what the work is for. The board at
+`artifacts/notes/progress/board.json` says where it stands. Change the board only through
+`scripts/progress_board.py`.
+
+## One tick
+
+1. Run `python3 scripts/progress_board.py ready --owner <your owner code>` from the repository root.
+2. If a step of yours is already `doing`, continue it. If none is, set the first ready step to `doing`.
+3. Do one piece of work that can be checked.
+4. Check the step's proof, printed by `ready` or `show`. Set it to `done` only when the proof is true.
+5. Run `python3 scripts/progress_board.py blocks --todo`. If it lists a block, start the
+   `calendar-cadence` agent in the background with the path to `scripts/progress_board.py`.
+6. Say in chat what landed, then print `python3 scripts/progress_board.py line` and
+   `python3 -I ~/.claude/skills/session-status/scripts/session_status.py --repo "$PWD" --line`. The second
+   line shows every session's step, steps left, ETA and flags. A flag naming this session is this session's
+   to fix. A flag naming another session goes to `artifacts/notes/progress/requests.md`.
+7. Schedule the next wake. Use 1,200 seconds while work is running. Use 1,800 seconds while waiting on
+   another session. Stop the loop when all your steps are done.
+
+## Who owns what
+
+| Session | Owner code | Writes to |
+|---|---|---|
+| 1. Records | `s1` | git commits, `artifacts/notes/session-closes/`, `DRIFT_LOG.md`, `RENAMES.md`, Claude session transcripts |
+| 2. Artifacts | `s2` | each project's `report/`, the drain ledger, `artifacts/notes/progress/void-list.md`, `prune-list.md` |
+| 3. Pillars and repo | `s3` | `context/`, `environment/`, `runbook/`, `plans/`, `artifacts/notes/progress/what-we-know.md`, the new paper repository |
+| 4. Rivals and targets | `s4` | `artifacts/notes/progress/targets/`, `artifacts/notes/progress/scoreboard.json` |
+| 5. Reproduce the rivals | `s5` | `artifacts/notes/progress/reproductions/`, the replications hub, `/datasets/mmolefe/poe_repair_min/loop-5/` |
+| 6. Find the best method | `s6` | `artifacts/notes/progress/method-search/`, `reproductions/checker/`, `reproductions/inclusive-finetune-and-push/`, `2-classifier-guidance/scripts/checker_choice/`, `2-classifier-guidance/scripts/method_search/`, `/datasets/mmolefe/poe_repair_min/loop-6/` |
+
+A session that needs a change in another session's area writes one line to
+`artifacts/notes/progress/requests.md`, naming the owner. Each session reads that file on every tick.
+
+## Targets
+
+`artifacts/notes/progress/scoreboard.json` holds each paper's 4 to 6 targets, set by Session 4 from what rival papers report. Work toward those targets. Treat a target as final only after the owner has said yes to it, and propose no bar of your own. Step C3 builds from `artifacts/notes/progress/targets/numbers.csv`.
+
+## Rules that never bend
+
+- **Never delete anything.** Move files only after the user approves, and keep a restore manifest. Most
+  artifact files are outside git, so a deletion has no undo.
+- **Never prune by file type.** A file is a candidate only when no finding, card, plan, paper or script
+  names it.
+- **Commit only named paths, never `git add -A`.** Hold the lock:
+  `flock artifacts/notes/progress/.git.lock git commit -m "<message>" -- <paths>`.
+- **Commit messages carry no attribution line.**
+- **Never push, and never publish anything.** Pushing is the user's decision.
+- **Run no experiments in Sessions 1 to 4.** They read the cluster and do not train or render. Sessions 5 and 6 run only what their briefs name, and share the job caps.
+- **On the cluster, use only `bigbatch` and `biggpu`.** Never run `find /`, never run `pkill -f`, and
+  never remove a file there. If `mscluster84` is unreachable, record it and carry on with local work.
+- **Launch GPU work only through `sbatch`, inside the administrator's caps** of one `biggpu` job and six
+  `bigbatch` jobs per user. If `sbatch` is denied, wait. Starting work with `nohup` over SSH, outside your own
+  Slurm job, needs the owner's yes through `progress_board.py ask`.
+- **Keep these paths where they are:** `artifacts/_shared/cross_pair_pool_configs/`,
+  `artifacts/_quarantine/`, `artifacts/caches/`, `artifacts/rung2-survive-noise/`,
+  `artifacts/rung3-group-wise/`, `artifacts/rung4-scale/`. `poe_repair/paths.py` hard-codes them.
+- **Keep `writing/overleaf-iclr/` untouched.** It is the Overleaf bridge, with its own git history.
+- **Re-read a shared file before reporting from it.** Other sessions edit this repository.
+- **Never rewrite a result.** A verdict, a number or a bar stays as recorded. A disagreement between two
+  sources is reported to the user and never resolved alone.
+- **Follow the writing rules in `~/.claude/CLAUDE.md`** in every file and message.
+
+## When to stop and ask the user
+
+Stop that step and ask one question, then carry on with any other ready step, when:
+
+- anything would be deleted or moved outside the approved lists;
+- two sources disagree on what a result was;
+- a file looks like a secret, a client's data or a patient's data;
+- a step's proof cannot be met.
+
+File each of these with `python3 scripts/progress_board.py ask "<question>" --holds <step> --default "<default>" --by <owner code>`, so it appears on the waiting picture. A step this session adds with `add` names `--serves` and `--objective`.
+
+## Telling the user
+
+The user may be away from the computer. Load `PushNotification` with `ToolSearch` and send one short
+notification in each of these moments:
+
+- when this session stops to ask the user anything, naming the session and what it needs;
+- when one of this session's steps turns green and the next step needs the user;
+- when a failure stops this session's work;
+- when all this session's steps are done.
+
+Send one notification per stop, and do not repeat it on later ticks while the same question is waiting.
+Begin it with the session's name, such as `Loop 1:`. Put no client name, patient detail or secret in it.
