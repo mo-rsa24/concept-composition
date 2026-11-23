@@ -1,0 +1,18 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    subgraph NOW["Now: Paper 1's only target is first tested after your decision"]
+        direction LR
+        N1["M1 to M4<br/>tune and freeze on<br/>2 MNIST digits and SDXL pairs"] --> N2{"Your go or no-go<br/>D4"} --> N3["E1 and E2<br/>first CLEVR run<br/>target: 7 objects"]
+    end
+    subgraph NEXT["Proposed: a small CLEVR test before you decide"]
+        direction LR
+        P1["M1 to M3<br/>same tuning"] --> P2["New: small CLEVR test<br/>2 and 3 experts, 64 pixels<br/>tuning positions only"] --> P3["M4<br/>freeze recipes"] --> P4{"Your go or no-go<br/>D4"} --> P5["E1 and E2<br/>full CLEVR ladder"]
+    end
+    NOW ~~~ NEXT
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef added fill:#b7efc5,stroke:#222222,stroke-width:3px,color:#111111
+    class N1,N2,N3,P1,P3,P4,P5 plain
+    class P2 added
+    style NOW fill:#ffffff,stroke:#888888,stroke-width:2px
+    style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
