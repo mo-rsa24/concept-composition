@@ -35,6 +35,12 @@ reproduced (W&B `8cowoyea`). On Texture it scores 0.6503 on all 300 prompts at s
 (W&B `ljypsxnd`). Plain SDXL on GenEval's 99 two-object prompts scores 0.7399 over 396 images, against 0.80 printed, which is
 reproduced (W&B `qcdz35cj`). The printed numbers stay the bars.
 
+**CO3 reruns.** CO3's released script scores 0.3326 on T2I-CompBench Complex over 988 prompts at 3 seeds, against 0.4406 printed, so
+it is not reproduced (W&B `02fl0ia0`). On the same pictures plain SDXL scores 0.2637 and Rectify Then Diffuse 0.2423, so CO3 ranks
+first here, while Rectify Then Diffuse's paper prints itself first. The released script's settings differ from the paper's section
+4.1, whose corrector guidance of 5.0 sits outside the 0 to 1 the released code allows, so the miss could come from the settings. On
+RareBench Concat CO3 scores 0.4374 on 33 prompts at 3 seeds, against 0.1610 printed, which passes on a weak test (W&B `i11r81ox`).
+
 These reruns stay out of the scoreboard's `reproduced` field, because their prompt counts differ from the published ones or the
 published page leaves their image count and seeds unstated.
 
