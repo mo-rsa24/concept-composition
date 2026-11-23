@@ -3,7 +3,6 @@ Paper 1,Bradley-Projective-T1-008,%,1,0,100,"Models that saw only single-object 
 Paper 1,CoInD-T4-036,%,1,0,100,"Unseen attribute combinations, with CoInD and Liu on one protocol"
 Paper 1,LogicalGuidance-T4-009,%,1,0,100,"The hardest printed Colored MNIST AND score; Liu and SuperDiff are measured on the same task in Table 11"
 Paper 1,CoInD-T6-011,%,1,0,100,"A real-image dataset, measuring whether the composition is right rather than image quality alone"
-Paper 1,SuperDiff-T1-031,,1,0,,"Two models trained on disjoint halves of the data, which is Paper 1's exact setting"
 Paper 2,CoMat-T1-055,,0.01,0,1,"The hardest Color score on SDXL from a method that needs no outside language model"
 Paper 2,ToMe-T1-054,,0.01,0,1,"The hardest Shape score on SDXL from a method that needs no outside language model"
 Paper 2,ToMe-T1-053,,0.01,0,1,"The hardest Texture score on SDXL from a method that needs no outside language model"

@@ -1,6 +1,6 @@
 # Why four targets rest on these numbers
 
-Four of the 11 targets on [the scoreboard](../scoreboard.json) needed a judgement about which printed number counts. This
+Four of the 10 targets on [the scoreboard](../scoreboard.json) needed a judgement about which printed number counts. This
 page gives the number each one rests on, the reason, and the scope behind them.
 
 | Paper | Benchmark | Target | Number it rests on |
@@ -40,6 +40,9 @@ on Color and 0.7334 on Texture in T2I-CompBench++ (Table XIII, p12). Those belon
 Color 0.8335, Shape 0.6801 and Texture 0.8129 (Table 1, p9). It needs GPT-4, hand-written examples and planned regions, which
 Paper 2's stated setting of one model, the joint prompt and a checker leaves out. It names no scorer, prompt count or
 images per prompt.
+
+**CIFAR-10 halves are context.** SuperDiff's FID of 4.11 comes from the OR setting (p7), which samples from either model to
+recover the full dataset. Paper 1 claims AND, both things in one image, so this number sets no target.
 
 ## What no target can cover
 

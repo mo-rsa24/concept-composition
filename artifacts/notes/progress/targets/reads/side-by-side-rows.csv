@@ -7,7 +7,6 @@ Paper 1,"CMNIST, AND",LogicalGuidance,"Keeps a clear forbidden 1 at weights 1.0 
 Paper 1,"CMNIST, AND",SuperDiff,No Colored MNIST picture printed. On Stable Diffusion pairs it fuses one object on 17 of 20 first-seed rows
 Paper 1,"CelebA Orthogonal support, ∧ composition",CoInD,"Own failure panel: a shout instead of a smile, and a faint smile on a warped face"
 Paper 1,"CelebA Orthogonal support, ∧ composition",Liu,"Composed prompts draw women, including for smiling NOT female"
-Paper 1,CIFAR-10 disjoint halves,SuperDiff,No CIFAR-10 failure printed. On Stable Diffusion pairs it fuses one object on 17 of 20 first-seed rows
 Paper 2,T2I-CompBench Color,AttendExcite,"Loses the cactus, miscolours apple and vase, and tangles the squirrel with a bird shape."
 Paper 2,T2I-CompBench Color,CoMat,Draws two wallets for one; robot penguin and glass violin only partly converted; travellers and hotel room dropped
 Paper 2,T2I-CompBench Color,Liu,"Drops or fuses subjects: bird and flower become one bird, the dog vanishes, 6 of 16 train-and-river samples have no train"

@@ -90,27 +90,6 @@
       "rival_interval": null
     },
     {
-      "paper": "Paper 1",
-      "dataset": "CIFAR-10 disjoint halves",
-      "metric": "FID, ODE inference",
-      "unit": "",
-      "better": "lower",
-      "rival": "SuperDiff",
-      "published": 4.11,
-      "reproduced": null,
-      "step": 1,
-      "range": [
-        0.0,
-        null
-      ],
-      "protocol": "Two diffusion models trained on the two disjoint halves of CIFAR-10 (first five labels and last five labels); architecture, hyperparameters and data preprocessing follow Song et al. (2020); ODE inference integrates the Prop. 1 ODE with densities estimated by Prop. 5; the number of generated images is not stated.",
-      "number_id": "SuperDiff-T1-031",
-      "reproduced_id": null,
-      "ours": null,
-      "ours_interval": null,
-      "rival_interval": null
-    },
-    {
       "paper": "Paper 2",
       "dataset": "T2I-CompBench Color",
       "metric": "T2I-CompBench result",
@@ -320,17 +299,6 @@
       "dataset": "CelebA Orthogonal support, ∧ composition",
       "rival": "Liu",
       "failure": "Composed prompts draw women, including for smiling NOT female",
-      "pairs": 0,
-      "better": 0,
-      "tied": 0,
-      "worse": 0,
-      "why": ""
-    },
-    {
-      "paper": "Paper 1",
-      "dataset": "CIFAR-10 disjoint halves",
-      "rival": "SuperDiff",
-      "failure": "No CIFAR-10 failure printed. On Stable Diffusion pairs it fuses one object on 17 of 20 first-seed rows",
       "pairs": 0,
       "better": 0,
       "tied": 0,

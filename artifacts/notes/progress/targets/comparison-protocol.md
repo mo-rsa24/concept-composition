@@ -46,6 +46,18 @@ standard errors of 0.0153 on T2I-CompBench Complex and 0.0983 on RareBench Conca
 row computes its own margin from its own differences. A rival marked `blocked` has no rerun, so its row is read against the printed
 target and says the rival was not rerun.
 
+**A classifier is judged against the accuracy its paper prints.** CoInD prints 98.2% for gender and 92.1% for smile on CelebA
+(Figure 10, p24). A scorer trained from the authors' config counts when it is within one percentage point of both. Ours, at the
+authors' 10,000 steps, reads 97.9% and 93.0% on CelebA's test split. Every CelebA row also prints the scorer's accuracy per group,
+including 88.8% on smiling men, because the paper reports no per-group accuracy.
+
+**CLEVR is judged on our own models.** Projective Composition released no code or weights, and its setup costs about 3,000
+A100-hours, so its 98 of 100 stays as printed context. Its composition rule and ours run on the same single-object,
+location-conditioned models, over the same positions and seeds.
+
+**CIFAR-10 is context and sets no target.** SuperDiff's disjoint-halves task is the OR setting (p7), which samples from either
+model. Paper 1 claims AND, both things in one image.
+
 **A disputed number cannot set a target.** `limits.md` marks where a paper contradicts itself about a value. T2I-CompBench
 Color is a disagreement between two papers: ToMe quotes CoMat at 0.7774, and CoMat's own page prints 0.7827. The target uses
 the number on CoMat's own page.
