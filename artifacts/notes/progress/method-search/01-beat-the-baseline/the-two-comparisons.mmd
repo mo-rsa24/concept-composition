@@ -1,0 +1,32 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef compared fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+
+  subgraph P1["Paper 1: 5 digit pairs x 64 seeds = 320 canvases per row"]
+    direction LR
+    E["Two digit models<br/>trained apart<br/>0-4 and 5-9"]
+    R1["Baseline: sample each alone,<br/>paste side by side<br/>expected about 285"]
+    R2["Method, no push"]
+    R3["Method + checker push<br/>checker saw model samples only"]
+    R4["Method + random push<br/>same size"]
+    J{"Digit judge:<br/>clean pairs of 320<br/>Win = push beats paste<br/>by over 1.96 SE"}
+    E --> R1 & R2 & R3 & R4
+    R1 & R2 & R3 & R4 --> J
+  end
+
+  subgraph P2["Paper 2: 12 subject pairs x 8 seeds = 96 pictures per row"]
+    direction LR
+    S["SDXL + joint prompt<br/>a puma and a condor"]
+    C1["Baseline: CO3 alone"]
+    C2["CO3 + checker push<br/>steps 0-15, strength 30, cap 0.4"]
+    C3["CO3 + random push<br/>same size"]
+    K{"Blind count by eye:<br/>faithful pairs of 96<br/>Win = lead of at least 5<br/>and over 1.96 SE"}
+    S --> C1 & C2 & C3
+    C1 & C2 & C3 --> K
+  end
+
+  class E,R2,R4,J,S,C3,K plain
+  class R1,R3,C1,C2 compared
+  style P1 fill:#fafafa,stroke:#222222,stroke-width:1px
+  style P2 fill:#fafafa,stroke:#222222,stroke-width:1px
