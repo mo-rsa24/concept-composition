@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef key fill:#eaf1ff,stroke:#5b8def,stroke-width:3px,color:#111111
+
+  S["Same 32 seeds<br/>cat and dog<br/>nothing retrained"]:::plain
+
+  subgraph A["Run A: both-animal photos<br/>captioned 'a cat and a dog'"]
+    direction TB
+    A0["no push"]:::plain
+    A1["with checker's push"]:::key
+  end
+
+  subgraph B["Run B: both-animal photos<br/>also captioned 'cat' or 'dog'"]
+    direction TB
+    B0["no push"]:::plain
+    B1["with checker's push"]:::key
+  end
+
+  Q{"Clean cat + dog pairs of 32:<br/>B with push minus<br/>A with push"}:::plain
+  R1["5 or more, and B's push helps B:<br/>inclusive fine-tune strengthened the push"]:::plain
+  R2["1 to 4, or B's push adds nothing:<br/>still untested at this scale"]:::plain
+  R3["0 or fewer:<br/>no gain measured"]:::plain
+
+  S --> A
+  S --> B
+  A1 --> Q
+  B1 --> Q
+  Q --> R1
+  Q --> R2
+  Q --> R3
