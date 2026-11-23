@@ -18,12 +18,12 @@ Loop 7 (`s7`) continues from this file in a session started from `/home/molef/Ph
 |---|---|---|---|
 | Harnessing the Spatial-Temporal Attention of Diffusion Models | 2304.03869 | trains a layout predictor for noun pixels and optimises latents with it | SynGen, p. 10 |
 | GLIDE | 2112.10741 | guides with a CLIP retrained on noisy inputs | Universal Guidance, p. 2 |
-| Refining Generative Process with Discriminator Guidance | not looked up | trains a real-against-generated classifier across concepts and adds its gradient | Correcting Diffusion, p. 9 |
-| Mid-U Guidance | not looked up | learns a guidance function on diffusion features for aesthetics | Readout Guidance, p. 2 |
+| Refining Generative Process with Discriminator Guidance | unknown | trains a real-against-generated classifier across concepts and adds its gradient | Correcting Diffusion, p. 9 |
+| Mid-U Guidance | unknown | learns a guidance function on diffusion features for aesthetics | Readout Guidance, p. 2 |
 | CLIP-Count | 2305.07304 | trained text-guided counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| Open-world Text-specified Object Counting (CounTX) | not looked up | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| VLCounter | not looked up | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| Teaching CLIP to Count to Ten | not looked up | trains a counting-aware CLIP | Counting Guidance, p. 9 |
+| Open-world Text-specified Object Counting (CounTX) | unknown | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
+| VLCounter | unknown | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
+| Teaching CLIP to Count to Ten | unknown | trains a counting-aware CLIP | Counting Guidance, p. 9 |
 
 Four more were flagged and left off this list because they are less close to a guided checker: RCC (2205.10203), VA-Count (2407.04948), ImageReward and AFreeCA (2403.04943).
 
