@@ -1,0 +1,26 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+
+  Q["Which reruns can<br/>change what we must beat?"]:::plain
+
+  subgraph KEEP["Keep: the rival with the best printed score on each benchmark"]
+    direction TB
+    C["Color: CoMat prints 0.7827<br/>1,097 of 2,880 pictures made<br/>about 7 GPU-hours left"]:::plain
+    S["Shape: ToMe prints 0.6051<br/>all pictures made, scoring next"]:::plain
+    T["Texture: ToMe prints 0.6894<br/>all pictures made, scoring next"]:::plain
+    X["Complex: RTD prints 0.4661<br/>done: our rerun scored 0.2423"]:::plain
+  end
+
+  subgraph STOP["Could stop: below the best printed score on that benchmark"]
+    direction TB
+    A["CoMat on Shape and Texture<br/>5,930 pictures, about 25 GPU-hours"]:::plain
+    B["ToMe on Complex and Color<br/>1,034 pictures, about 24 GPU-hours"]:::plain
+    F["FKC on GenEval<br/>not started, 22.6 GPU-hours"]:::plain
+  end
+
+  Q --> KEEP
+  Q -.->|your call| STOP
+
+  style KEEP fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+  style STOP fill:#f5f5f5,stroke:#999999,stroke-width:2px,stroke-dasharray: 5 5
