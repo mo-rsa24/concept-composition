@@ -43,7 +43,7 @@ RareBench Concat CO3 scores 0.4374 on 33 prompts at 3 seeds, against 0.1610 prin
 These reruns stay out of the scoreboard's `reproduced` field, because their prompt counts differ from the published ones or the
 published page leaves their image count and seeds unstated.
 
-**GenEval two objects.** This is Paper 2's one text-to-image headline that counts two separate objects, which is what it claims to restore.
+**GenEval two objects.** This is Paper 2's one text-to-image headline that asks for two named objects. Its evaluator checks each class alone, so one fused object can pass.
 FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL
 prints 0.80, so the printed bar is 0.79, and a win must beat our plain SDXL rerun on the same pictures by the noise margin. FKC is not
 rerun, so this row is judged against our plain SDXL rerun and says FKC's 0.78 is printed only.

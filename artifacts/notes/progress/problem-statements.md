@@ -127,8 +127,7 @@ The problem is real on SDXL, and twelve web searches found no paper that trains 
 labels. The method has no valid result yet. In the closest published test, [Correcting Diffusion Generation through
 Resampling](https://arxiv.org/pdf/2312.06038#page=6), a detector and discriminator gradient moves object occurrence (the share
 of named objects found, 0 to 1) from about 0.55 to 0.56 on GPT-Synthetic, read off its Figure 4. Resampling with the same signal
-reaches about 0.74. That test used a clean-image detector at low noise, so the early noise-aware version is still open. Of the
-six benchmark rows, GenEval's two-object task and CLEVR count separate objects. The [full test](problem-statements-pressure/paper-2.md) names the next
+reaches about 0.74. That test used a clean-image detector at low noise, so the early noise-aware version is still open. Of the six benchmark rows, only CLEVR counts objects at separate positions. GenEval's two-object evaluator checks each named class alone, so one fused object can pass. The [full test](problem-statements-pressure/paper-2.md) names the next
 checks.
 
 **What our check adds to the verdict**
