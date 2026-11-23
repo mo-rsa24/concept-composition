@@ -1,10 +1,24 @@
 [
   {
     "target_id": "RTD-T2-051",
-    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper's section 4.1 states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, and its appendix A.8 ablations use guidance 0.8 and 0.9, so a miss could come from the settings"
+    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper's section 4.1 states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, and its appendix A.8 ablations use guidance 0.8 and 0.9, so a miss could come from the settings; 988 prompts at 3 seeds; plain SDXL on the same pictures scores 0.2637 and RTD 0.2423",
+    "ours": 0.3326,
+    "interval_low": 0.2584,
+    "interval_high": 0.4069,
+    "verdict": "not reproduced",
+    "commit": "67b0bafa-b91076f",
+    "run_id": "02fl0ia0",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/CO3/full/co3/t2i_compbench"
   },
   {
     "target_id": "RTD-T2-054",
-    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper's section 4.1 states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, and its appendix A.8 ablations use guidance 0.8 and 0.9, so a miss could come from the settings"
+    "note": "ran the released script (CFG++ at 0.8, 6 corrected steps, beta 0.9); the paper's section 4.1 states DDIM at guidance 5.0, 10 corrected steps, beta 0.8, and its appendix A.8 ablations use guidance 0.8 and 0.9, so a miss could come from the settings; a weak test on 33 prompts at 3 seeds, where ours sits 0.2764 above the printed 0.1610; plain SDXL on the same pictures scores 0.3035 and RTD 0.4166; reported row only",
+    "ours": 0.4374,
+    "interval_low": -0.0678,
+    "interval_high": 0.9425,
+    "verdict": "reproduced",
+    "commit": "67b0bafa-b91076f",
+    "run_id": "i11r81ox",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/CO3/full/co3/rarebench"
   }
 ]
