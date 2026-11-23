@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: CPU work on the renders. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch control
+#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -21,7 +21,8 @@ USE=$(df --output=pcent "$ROOT" | tail -1 | tr -dc '0-9')
 [ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $ROOT is ${USE:-unknown}% full"; exit 3; }
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) snap=$SNAP stage=$STAGE"
 case "$STAGE" in
-  control) "$PY" "$S" control --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
+  control)  "$PY" "$S" control --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
+  diagnose) "$PY" "$S" diagnose --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"

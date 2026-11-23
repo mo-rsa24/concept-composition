@@ -3,12 +3,13 @@
 
 The design is artifacts/notes/progress/method-search/01c-clevr-paste-first/design.md.
 
-  control  on 256 real single-object renders per position, the share of changed pixels that fall inside that position's window
+  control   on 256 real single-object renders per position, the share of changed pixels that fall inside that position's window
+  diagnose  how many changed pixels an empty scene has, and how many outside the window sit on the object's own footprint
 
 A pixel counts as changed when any colour channel differs from the mean empty scene by more than 0.1 on a 0-to-1 scale. The
 share is pooled over the position's 256 renders, and every position must reach 95%.
 
-Usage: python clevr_data.py control --renders <dir> --out <dir>
+Usage: python clevr_data.py control|diagnose --renders <dir> --out <dir>
 """
 import argparse
 import json
@@ -16,6 +17,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageDraw
+from scipy.ndimage import label
 
 SIZE = 64
 WINDOW = 18
@@ -23,6 +25,7 @@ POSITIONS = {"p1": (0.30, 0.30), "p2": (0.60, 0.30), "p3": (0.40, 0.60)}
 CONTROL_IMAGES = 256
 CHANGED_ABOVE = 0.1
 MIN_INSIDE_SHARE = 0.95
+OBJECT_FREQUENCY = 0.02   # a pixel belongs to the object's footprint if it changes in at least this share of renders
 
 
 def to_64(path):
@@ -83,13 +86,50 @@ def control(args):
     raise SystemExit(0 if result["passes"] else 1)
 
 
+def diagnose(args):
+    """Separates the two causes of a failed window control: background that changes with no object, and objects past the window."""
+    args.out.mkdir(parents=True, exist_ok=True)
+    paths = first_images(args.renders, "empty", 2 * CONTROL_IMAGES)
+    empty = np.mean([to_64(p) for p in paths[:CONTROL_IMAGES]], axis=0)
+    floor = np.zeros((SIZE, SIZE))
+    for path in paths[CONTROL_IMAGES:]:
+        floor += np.abs(to_64(path) - empty).max(-1) > CHANGED_ABOVE
+    rows, boxes = {}, {}
+    for name, (x, y) in POSITIONS.items():
+        x0, y0, x1, y1 = window_box(x, y)
+        frequency = np.zeros((SIZE, SIZE))
+        for path in first_images(args.renders, name, CONTROL_IMAGES):
+            frequency += np.abs(to_64(path) - empty).max(-1) > CHANGED_ABOVE
+        parts, _ = label(frequency / CONTROL_IMAGES >= OBJECT_FREQUENCY)
+        centre = parts[int(y * SIZE), int(x * SIZE)]
+        if centre == 0:
+            raise SystemExit(f"{name}: the position's own pixel is not changed in {OBJECT_FREQUENCY:.0%} of renders")
+        ys, xs = np.where(parts == centre)
+        box = (int(xs.min()), int(ys.min()), int(xs.max()) + 1, int(ys.max()) + 1)
+        boxes[name] = box
+        total = frequency.sum()
+        inside = frequency[y0:y1, x0:x1].sum()
+        outside_object = frequency[parts == centre].sum() - frequency[y0:y1, x0:x1][parts[y0:y1, x0:x1] == centre].sum()
+        rows[name] = {"changed_pixels": int(total), "outside_window": int(total - inside),
+                      "outside_window_on_the_object": int(outside_object), "outside_window_elsewhere": int(total - inside - outside_object),
+                      "object_box": list(box), "object_box_size": [box[2] - box[0], box[3] - box[1]],
+                      "share_inside_object_box": round(float(frequency[box[1]:box[3], box[0]:box[2]].sum() / total), 4)}
+    names = list(boxes)
+    overlaps = [[a, b] for i, a in enumerate(names) for b in names[i + 1:]
+                if min(boxes[a][2], boxes[b][2]) > max(boxes[a][0], boxes[b][0]) and min(boxes[a][3], boxes[b][3]) > max(boxes[a][1], boxes[b][1])]
+    result = {"object_frequency": OBJECT_FREQUENCY, "changed_pixels_per_empty_render": round(float(floor.sum() / CONTROL_IMAGES), 2),
+              "positions": rows, "object_boxes_that_overlap": overlaps}
+    (args.out / "window-diagnosis.json").write_text(json.dumps(result, indent=1) + "\n")
+    print(json.dumps(result), flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["control"])
+    ap.add_argument("stage", choices=["control", "diagnose"])
     ap.add_argument("--renders", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
-    control(args)
+    {"control": control, "diagnose": diagnose}[args.stage](args)
 
 
 if __name__ == "__main__":
