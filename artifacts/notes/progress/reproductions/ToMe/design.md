@@ -49,6 +49,11 @@ the merged prompt is encoded and never used, because the end-of-text replacement
 **The environment.** ToMe pins torch 2.0.1, diffusers 0.28.0 and transformers 4.30.2. The cluster's `tome` environment holds those
 versions and rendered the review response. The owner approved it for this run on board question 17.
 
+**Attention backend.** In this environment, torch 2.0.1's default attention backends return slightly different outputs for identical
+inputs, so a ToMe render is not bit-for-bit repeatable, and run-to-run noise sits inside every ToMe score. The math backend repeats
+exactly but runs out of a 24 GB card during ToMe's gradient steps. Renders therefore keep the default backends, as the authors' code does,
+and the zero-update control, which takes no gradient steps, uses the math backend.
+
 **Seeds.** Seed 0 only, by the owner's answer to board question 18, with each number labelled by its seed count.
 
 ## What ToMe's parser does with the benchmark prompts
