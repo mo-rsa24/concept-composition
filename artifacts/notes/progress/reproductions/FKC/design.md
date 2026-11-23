@@ -45,6 +45,14 @@ and a win must also beat plain SDXL's printed 0.80 on the same prompts and seeds
 | Particles | 4, GenEval's images per prompt | the paper states none for SDXL |
 | Scorer | GenEval's Mask2Former evaluation at commit `af4902f` | the benchmark's own |
 
+**The scorer's environment.** `/datasets/mmolefe/poe_repair_min/loop-5/envs/geneval` holds the authors' pins: Python 3.9, torch 1.12.1 for CUDA 11.3,
+mmcv-full 1.7.1, open-clip 2.20.0, and mmdet 2.28.2 run from its checkout at `e9cae2d0`. Three changes were needed to make it load. `fsspec` is unpinned,
+because the authors' file pins a version older than their `huggingface_hub` requires. The executable-stack flag is cleared on torch's libraries,
+because this system refuses to load them otherwise. mmdet runs from `PYTHONPATH`, because its setup script no longer installs in editable mode.
+
+**The detector's weights.** The Mask2Former checkpoint matches the SHA-256 prefix in its file name (`743b7d99`). It is a pickle file, so it was opened with
+`weights_only=True` and re-saved as 649 plain tensors and the 80 class names, and only that clean copy is loaded.
+
 **Cost.** 99 two-object prompts at 4 images is 396 images per method, under 2 GPU-hours with the detector.
 
 **The test.** GenEval's score is per image, so the standard error comes from resampling prompts with replacement 10,000 times. The row counts as

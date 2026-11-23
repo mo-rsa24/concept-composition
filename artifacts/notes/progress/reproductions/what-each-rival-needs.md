@@ -29,7 +29,7 @@ have not been run.
 | T2I-CompBench Color, Shape, Texture | `t2i-compbench/examples/dataset/{color,shape,texture}_val.txt`, 300 prompts each | BLIP-VQA, `BLIPvqa_eval/BLIP_vqa.py`, run unchanged at the benchmark's package versions | canary passed: the 3 scores shipped in `examples/reward/vqa_result.json` reproduce exactly |
 | T2I-CompBench Complex | RTD's manifest, 1,000 prompts | ImageReward | smoke test passed |
 | RareBench Concat | RTD's manifest, 40 of the 120 RareBench prompts | ImageReward | not yet run |
-| GenEval | `geneval/prompts/evaluation_metadata.jsonl`, 553 prompts of which 99 are two-object | Mask2Former through `mmdet` 2.x | not yet run |
+| GenEval | `geneval/prompts/evaluation_metadata.jsonl`, 553 prompts of which 99 are two-object | Mask2Former through `mmdet` 2.28.2, in `loop-5/envs/geneval` at the authors' pins | environment built and weights checked, not yet run |
 
 FKC's printed 1,000-prompt list was never released, so by the owner's answer to board question 23 its row is tested on the released
 553 prompts against `FKC-TA4-038`.
