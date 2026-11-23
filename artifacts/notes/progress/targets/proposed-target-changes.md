@@ -20,6 +20,13 @@ Expansion's 44.5 at 5 positions is a different benchmark, because it trains one 
 **Complex and RareBench Concat.** Rectify Then Diffuse states the same SDXL setup as CO3 and prints higher scores on both.
 Its baseline ImageReward cells match CO3's table on 19 of 20 values, so CO3 was probably not rerun.
 
+**Our reruns sit beside those two printed numbers**, in the [reproduction table](../reproductions/table.csv). On T2I-CompBench
+Complex, Rectify Then Diffuse scores ImageReward 0.2423 on 988 of the 1,000 prompts at 3 seeds, against 0.4661 printed, so it is
+not reproduced (W&B `5i9dt7by`). On the same pictures it sits 0.0214 below plain SDXL, with a standard error of 0.0153. The owner
+kept 0.4661 as the bar, so the target stays 0.4761. On RareBench Concat it scores 0.4166 on 33 of 40 prompts at 3 seeds, against
+0.4464 printed (W&B `tc75fx0i`). That passes, but with 33 prompts the pass band is plus or minus 0.443, so the test says little.
+Both reruns stay out of the scoreboard's `reproduced` field because their prompt counts differ from the published ones.
+
 **GenEval two objects.** This is the one headline that counts two separate objects, which is what Paper 2 claims to restore.
 FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL
 prints 0.80, so the scoreboard target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
