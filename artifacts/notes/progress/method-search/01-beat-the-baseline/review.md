@@ -19,7 +19,9 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m1/`, 
 | 2 | Comparison, pair shard 1 of 2 | 93524 | `99ac88a8-f2bdb6d` | `paper-2/full/` | queued |
 
 **Cluster access on 2026-11-23.** From 14:49 the laptop could not log in: port 22 on the gateway `146.141.21.100` accepts a connection,
-and the SSH login then hangs. Paper 2's last reading, at 14:28, was 191 of 288 pictures with both render jobs running.
+and the SSH login then hangs. A verbose trace at 16:00 stops right after the laptop offers its public key, the point where the server
+reads the user's home directory, so a stalled `/home-mscluster` is the likely cause (inferred). Paper 2's last reading, at 14:28, was 191
+of 288 pictures with both render jobs running.
 
 ## Paper 1 controls
 
