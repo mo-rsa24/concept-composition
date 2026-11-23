@@ -88,8 +88,12 @@ at equal training length:
 ## What it costs
 
 All costs are estimates. Our last CLEVR training at 8 million images took about 13h 50m for two models sharing one card, and a lone
-probe ran at 4.05 seconds per thousand images, so a model costs 7 to 9.4 GPU-hours. The first rung measures the real cost. Rendering
-is unmeasured.
+probe ran at 4.05 seconds per thousand images, so a model costs 7 to 9.4 GPU-hours. The first rung measures the real cost.
+
+Rendering is measured at 5.46 seconds per single-object image and 4.50 per empty scene on one 28-thread CPU node, with 32-pixel render
+tiles. At 20,000 images per model, the size of our earlier CLEVR sets, ten experts plus the background and the control take about 359
+node-hours, or 60 hours on all six `bigbatch` slots. How many images each expert needs is still open, and the owner chooses it before
+the full render starts.
 
 | Stage | Models | GPU-hours at a quarter of that length | GPU-hours at the full length |
 |---|---|---|---|
