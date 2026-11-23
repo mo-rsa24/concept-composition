@@ -71,3 +71,17 @@ SDXL is 0.0677 in our run and 0.0643 in the paper's printed numbers.
 **Does ToMe reproduce its published Texture score?** ✅ Yes. ToMe scores 0.6503 on all 300 prompts at seed 0, with a pass band of 0.5970 to 0.7036, and the paper
 prints 0.6894 (job 93317, commits `9efe30d1-b988f7a`, W&B `ljypsxnd`). No Texture prompt needed a parse repair. ToMe's gain over plain SDXL on the same prompts is
 0.1271 in our run and 0.1257 in the paper's printed numbers.
+
+**How does ToMe score on the prompts each comparison can use?** The fairness audit names three subsets. The two-subject prompts are the ones Paper 2's two-output checker can address, and the third leaves out prompts
+that appear in CoMat's training list (`CoMat/prompts-in-comat-training.json`). These are descriptive numbers from `scripts/reproductions/named_subsets.py` and change no verdict. The gain is ToMe minus plain SDXL on the same pictures, with a
+standard error from 10,000 resamples of prompts.
+
+| Benchmark | Subset | Prompts | ToMe | Plain SDXL | Gain | Standard error |
+|---|---|---|---|---|---|---|
+| Shape | all | 293 | 0.5502 | 0.4825 | 0.0677 | 0.0157 |
+| Shape | two subjects | 261 | 0.5950 | 0.5189 | 0.0761 | 0.0169 |
+| Shape | outside CoMat's training list | 289 | 0.5462 | 0.4781 | 0.0681 | 0.0159 |
+| Texture | all | 300 | 0.6503 | 0.5233 | 0.1271 | 0.0194 |
+| Texture | two subjects | 240 | 0.7553 | 0.6184 | 0.1369 | 0.0231 |
+
+No Texture prompt is in CoMat's training list.
