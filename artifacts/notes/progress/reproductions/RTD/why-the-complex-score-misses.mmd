@@ -1,0 +1,33 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef open fill:#ffffff,stroke:#222222,stroke-width:2px,stroke-dasharray:6 4,color:#111111
+
+    MISS["RTD on T2I-CompBench Complex<br/>ours 0.242, printed 0.466<br/>988 prompts, 3 seeds"]:::plain
+
+    subgraph RULED["Checked, and working"]
+        direction TB
+        A["Plain SDXL check passes<br/>ours 0.264, printed 0.308"]:::plain
+        B["The update ran<br/>0 of 2,964 scores equal plain SDXL"]:::plain
+        C["Update at zero<br/>matches plain SDXL, difference 0.0"]:::plain
+        D["Code and settings<br/>authors' pipeline at 241eb37"]:::plain
+        E["The pictures<br/>8 random prompts render cleanly"]:::plain
+    end
+
+    subgraph OPEN["Still open, nothing run separates them"]
+        direction TB
+        F["Hardware<br/>their H200, our RTX 3090s"]:::open
+        G["ImageReward<br/>package or preprocessing unstated"]:::open
+        H["The printed number itself<br/>0.466 may not come from this code"]:::open
+    end
+
+    Q{"Question 26<br/>Paper 2 must beat<br/>0.466 or 0.242?"}:::plain
+
+    MISS --> RULED
+    RULED --> OPEN
+    F -.->|unknown| Q
+    G -.->|unknown| Q
+    H -.->|unknown| Q
+
+    style RULED fill:#f6f6f6,stroke:#222222,stroke-width:1px
+    style OPEN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
