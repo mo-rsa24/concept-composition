@@ -71,14 +71,18 @@ runs only if bootstrapping also reaches 0 or 1, and its cost goes to the owner b
 
 ## Rung 2: can CO3 find its own regions?
 
-Rung 2 runs only if rung 1 reaches 4 clear pairs of 8. Its code and its zero-binding check are written after that result.
+Rung 2 runs because rung 1 reached 8 clear pairs of 8 with bootstrapping on. It uses no bootstrapping, as approved, so it asks whether regions
+fix identity once CO3 has already drawn two bodies.
 
 **Group.** Runs that try ideas (group 2).
 
 **Varied axis.** Where the masks come from.
 
-**What runs.** Steps 0 to 9 stay CO3's own. At step 10, each subject's word attention map becomes a soft mask through
-`poe_repair/composers/_regional_masks.py`, and from step 10 each subject's prediction acts only inside its mask.
+**What runs.** Steps 0 to 9 stay CO3's own. At step 10, the joint prompt's cross-attention to each subject's word is read once on that step's
+latent, averaged over the 32 by 32 layers and renormalised over the prompt's words. Each map is smoothed with a Gaussian of 0.5 cells,
+thresholded at half its peak, and reduced to the box around its largest connected part. The two boxes become soft masks through
+`poe_repair/composers/_regional_masks.py` with the even overlap reading. From step 10, CO3's joint-prompt prediction is replaced by
+$m_A\epsilon_A + m_B\epsilon_B$, using CO3's two concept prompts. These settings are fixed before any rung 2 picture is rendered.
 
 **Pairs and seeds.** M1's 12 tuning pairs at seeds 6001 to 6008, so 96 pictures per row.
 
@@ -90,6 +94,9 @@ Rung 2 runs only if rung 1 reaches 4 clear pairs of 8. Its code and its zero-bin
 | CO3 with random masks | a control on whether the regions matter |
 
 **Control.** A zero-binding run reproduces CO3's own loop to under 1e-5, on one card and dtype.
+
+**Counting.** All 384 pictures are shuffled under neutral names and called blind at full size under the rubric. Each row reports clear pairs
+and damaged pictures side by side, because rung 1's clear pairs were all damaged. Giraffe and tortoise is counted and stays off every sheet.
 
 **The bar, on faithful pairs of 96.** Standard errors come from 10,000 bootstrap resamples of the 12 pairs.
 
