@@ -4,6 +4,6 @@
     "verdict": "not comparable",
     "commit": "f9f9f5dc-b2f1320",
     "run_id": "question 25",
-    "note": "run by the benchmark's authors on Stable Diffusion 2 base with an unreleased reimplementation; the official model page no longer resolves; 0.4063 stays a published number until question 25 is answered"
+    "note": "source is T2I-CompBench++ Table VIII, p9, BLIP-VQA, run by the benchmark's authors on Stable Diffusion 2 base with an unreleased reimplementation; the official model page no longer resolves; 0.4063 stays a published number until question 25 is answered"
   }
 ]
