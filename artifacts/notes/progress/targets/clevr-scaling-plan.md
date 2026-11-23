@@ -40,16 +40,22 @@ its own half of the image is not allowed, because that is two pictures pasted si
 
 ## The rules, fixed before the first run
 
-1. Each new expert must pass alone, drawing its one object in the right place, so a weak expert is not read as a scaling limit.
+1. Each new expert must draw its one object at its position in at least 90% of 256 samples, read by the scorer, so a weak expert is
+   not read as a scaling limit. It gets one training, and a failure is reported. The 90% is our own mark. Bradley's one-object model
+   places its object in [100 of 100 hand-counted images](https://arxiv.org/pdf/2502.04549#page=17).
 2. Positions are Bradley's [12 printed locations](https://arxiv.org/pdf/2509.16447#page=23), used in his printed order.
 3. Models use his (x, y) location conditioner and the [32-step Heun sampler with 65 model calls](https://arxiv.org/pdf/2502.04549#page=15).
-4. The ladder stops after two failed object counts in a row, or at 10 objects.
-5. At the first failed count, every smaller group of the trained experts is tested, to separate the number of experts from one bad
-   position.
-6. In Stage 1, no model and no checker sees a real image holding two objects. The checker trains only on samples from the models
-   and composites pasted from them. A checker that sees real multi-object images is judged in the Stage 3 table.
-7. The scorer trains on real rendered images of 1 to 12 objects and is never used to train a checker.
-8. The picture-quality bar is a threshold in the scorer's code, written before the first run.
+4. The one-network control should reach about 4 objects, the number Bradley prints for it. If it falls short at our training length,
+   the shortfall is printed beside every comparison with it.
+5. The ladder stops after two failed object counts in a row, or at 10 objects.
+6. At the first failed count, the N groups that each leave one expert out are tested, to separate the number of experts from one bad
+   position. At 10 experts that is 10,240 images, where testing every smaller group would take 1,036,288.
+7. In Stage 1, no model and no checker sees a real image holding two objects. The checker trains only on samples from the models
+   and composites pasted from them at random positions, and the position sets used for evaluation are held out. A checker trained
+   without composites is reported beside it. A checker that sees real multi-object images is judged in the Stage 3 table.
+8. The scorer trains on real rendered images of 1 to 12 objects, reads objects at the requested positions as well as the total, must
+   reach 99% on held-out renders, and is never used to train a checker.
+9. The picture-quality bar is a threshold in the scorer's code, written before the first run.
 
 ## How every method is scored
 
@@ -59,7 +65,7 @@ Every method uses 1,024 images per object count and reports three things.
 least 90%. This is Bradley's rule.
 
 **Images with all N objects in place.** This is the count behind Projective Composition's 98 of 100 at 5 objects and 97 of 100 at
-6. A person also checks 100 images per count by eye, so those numbers sit directly beside ours.
+6. A person also checks 100 images per count at full size under neutral file names, so those numbers sit directly beside ours.
 
 **Picture quality.** A count with the objects in place but a degraded image does not pass.
 
