@@ -44,3 +44,11 @@ These 42 pictures are too few to compare with a published score, so no test was 
 
 The Rectify Then Diffuse paper prints RTD above CO3 on Complex, at 0.4661 against 0.4406. In our runs on the same pictures CO3 scores above RTD, at 0.3326 against 0.2423. Concat's
 band is too wide to separate its printed score from ours, even though ours is 0.2764 higher.
+
+**How do CO3 and RTD score on Complex's two-subject prompts?** The fixed list in `two-subject-prompts.json` holds 463 of the 988 allowed prompts. These are descriptive numbers on saved pictures, with no new render and no change to any verdict. The gain is
+the method minus plain SDXL on the same pictures, with a standard error from 10,000 resamples of prompts.
+
+| Method | Prompts and seeds | Score | Plain SDXL | Gain | Standard error |
+|---|---|---|---|---|---|
+| CO3 | 463 at 3 seeds | 0.4628 | 0.3678 | 0.0950 | 0.0303 |
+| RTD | 463 at 3 seeds | 0.3689 | 0.3678 | 0.0011 | 0.0239 |
