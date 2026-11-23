@@ -2,23 +2,23 @@
 flowchart TD
     subgraph DATA["Data: move up only when the cheaper rung works"]
         direction LR
-        R1["1. Du's cubes<br/>64 pixels, 6.2 GB<br/>no Blender"] --> R2["2. CLEVR, one object<br/>64 pixels<br/>about 15 GPU-hours"] --> R3["3. CLEVR, one object<br/>128 pixels, Bradley's size<br/>cost not known yet"]
+        R1["1. CLEVR, one object<br/>64 pixels<br/>install Blender, time one batch"] --> R2["2. CLEVR, one object<br/>128 pixels, Bradley's size<br/>7 to 9.4 GPU-hours per model"]
     end
-    DATA --> M["Train two models that only ever see one object<br/>location model + empty-background model"]
-    M --> L["Bradley's rule<br/>add the scores"]
-    M -. "after the checker is chosen (D3)" .-> O["Our method<br/>product + checker"]
-    L --> S["Ask for 1, 2, 3 ... 10 objects<br/>1,024 images per count, same positions and seeds"]
+    DATA --> M["Train on single-object images only<br/>background + one location network + one expert per position"]
+    M --> L["Methods without a checker<br/>Bradley's rule, experts, sample and paste"]
+    M -. "after the checker is chosen (D3)" .-> O["Methods with our checker<br/>one network, experts"]
+    L --> S["Ask for 2, 3 ... 10 objects<br/>1,024 images per count, Bradley's 12 positions"]
     O -.-> S
-    S --> C["Score each count K<br/>all K objects in at least 50% of images<br/>at least K-2 in at least 90%<br/>and the picture stays clean"]
-    C --> K{"Most objects<br/>that succeed?"}
-    K -- "5 or fewer" --> F["No win<br/>report where it breaks"]
-    K -- "6 or more at 64 pixels" --> B["Promising<br/>rerun at 128 pixels"]
-    K -- "6 or more at 128 pixels" --> W["Beats the printed 5<br/>9 or 10 would be far past it"]
+    S --> C["Score each count K<br/>K objects in at least 50% of images<br/>at least K-2 in at least 90%<br/>and the picture stays clean"]
+    C --> K{"Most objects that succeed,<br/>at equal training length?"}
+    K -- "under 7, or not above the controls" --> F["No win<br/>report where it breaks"]
+    K -- "7 or more at 64 pixels, above the controls" --> B["Promising<br/>rerun at 128 pixels"]
+    K -- "7 or more at 128 pixels, above the controls" --> W["Win<br/>Bradley's rule places 6 and first clearly fails at 7"]
 
     classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
     classDef win fill:#b7efc5,stroke:#222222,stroke-width:2px,color:#111111
     classDef stop fill:#ffd6a5,stroke:#e8590c,stroke-width:2px,color:#111111
-    class R1,R2,R3,M,L,O,S,C,K,B plain
+    class R1,R2,M,L,O,S,C,K,B plain
     class W win
     class F stop
     style DATA fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
