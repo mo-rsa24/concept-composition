@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef paper fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+
+  subgraph L7["Loop 7: read and design, no GPU"]
+    direction TB
+    U1["Read 18 closest papers"] --> U2["Work out the<br/>score-based maths"] --> U3["Write the design<br/>for each property"]
+  end
+
+  subgraph L8["Loop 8: small environment, then experiments"]
+    direction TB
+    V1["Build a repeatable digit world<br/>with exact labels"] --> V2["Does a checker learn plurality<br/>on digits it never saw?"] --> V3["Does its gradient make<br/>those digits compose?"] --> V4["Does it work on SDXL's<br/>6 unseen object pairs?"]
+  end
+
+  subgraph L6["Loop 6: current checker"]
+    direction TB
+    D3["D3 picks the reader, with a new<br/>animals-to-objects test"] --> M4["M4 freezes Paper 2's recipe"]
+  end
+
+  P["Paper 2: same claim,<br/>real-world scale"]
+  U3 --> V2
+  D3 --> V4
+  V4 -.->|"only if it passes"| P
+  M4 --> P
+
+  class U1,U2,U3,V1,V2,V3,V4,D3,M4 plain
+  class P paper
+  style L7 fill:#fafafa,stroke:#222222,stroke-width:1px
+  style L8 fill:#fafafa,stroke:#222222,stroke-width:1px
+  style L6 fill:#fafafa,stroke:#222222,stroke-width:1px

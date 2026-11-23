@@ -108,8 +108,46 @@ Each rung saves its config, metrics, image sheet and commit under `/datasets/mmo
 4. **Controls.** The zero-push check and the neither-subject check for each candidate.
 5. **Comparison.** The full 2,805 tiles, then the seven rows on the tuning pairs and seeds.
 
+## The unseen-category test
+
+**What it asks.** Does a checker trained only on animals still make faithful pairs of objects? A reader that learned "two separate
+things" should carry over, and a reader that learned the species it saw should not.
+
+**Readers.** Candidates A and C, because SDXL's features carry appearance and the word attention maps carry mostly position.
+
+**Training.** Each reader trains once on the animal and animal pictures in the list step M5 passes to D3, with every picture naming an
+object removed. On the current list that is 1,749 pictures over 38 pairs and 12 animal words, 660 of them clean and 1,603 of them cat
+and dog. Labels, loss and push settings stay as in the main comparison.
+
+**Test pairs.** Six object pairs at seeds 6001 to 6008, so 48 pictures per row: microscope × test tube, chess board × hourglass,
+saxophone × music stand, mailbox × pumpkin, picnic basket × watermelon and lighthouse × sailboat. No training list holds them.
+Bicycle × birdhouse is left out because bicycle appears in a held-out pair.
+
+**Rows.** Plain PoE, A's push, A's size-matched random push, C's push and C's size-matched random push, 240 pictures in all. They are
+counted blind at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md), with no API
+tokens.
+
+**The bar, on faithful pairs of 48.** Standard errors come from 10,000 bootstrap resamples of the six pairs. The lead of 3 is the main
+comparison's tie rule of 5 of 96, scaled to 48 pictures and rounded up.
+
+| Result, per reader | What it takes |
+|---|---|
+| Transfers | its push leads plain PoE by at least 3 and by more than 1.96 standard errors |
+| Does not transfer | its push has no such lead |
+| Inconclusive | its zero-push check fails, or its random push leads plain PoE by at least 3 and by more than 1.96 standard errors |
+
+C carries over better than A when C's push leads A's by at least 3 and by more than 1.96 standard errors. This test reports beside the
+selection rule and does not change it.
+
+**Cost:** about 9 GPU-hours beyond the main comparison: two trainings budgeted at 2.5 GPU-hours each, and 240 pictures at a budgeted 58
+seconds. **Buys:** a direct answer to whether either reader works on a category it never trained on.
+
 ## What this cannot say
 
 One training per candidate leaves out the variation between trainings. Two CLIP seeds in the checker loop differed by 0.035 in
 balanced accuracy. The choice applies to these 12 pairs and this push recipe. A pushed render is not bit-reproducible on the GPU,
 so a per-seed comparison between two pushed runs means little, and only the counts are compared.
+
+## Cross-references
+
+- The mention of **checker architecture**, the choice step D3 makes on small data, in [the route to two papers, under The steps](../../../../../plans/route-two-papers.md#the-steps).

@@ -33,6 +33,8 @@ The [two-paper route](../../../../plans/route-two-papers.md) says what the work 
 | 4. Rivals and targets | `s4` | `artifacts/notes/progress/targets/`, `artifacts/notes/progress/scoreboard.json` |
 | 5. Reproduce the rivals | `s5` | `artifacts/notes/progress/reproductions/`, the replications hub, `/datasets/mmolefe/poe_repair_min/loop-5/` |
 | 6. Find the best method | `s6` | `artifacts/notes/progress/method-search/`, `reproductions/checker/`, `reproductions/inclusive-finetune-and-push/`, `2-classifier-guidance/scripts/checker_choice/`, `2-classifier-guidance/scripts/method_search/`, `/datasets/mmolefe/poe_repair_min/loop-6/` |
+| 7. Read the abstract-checker papers | `s7` | `artifacts/notes/progress/abstract-checkers/01-reading/`, `02-score-view.md`, `03-design.md` |
+| 8. Test abstract checkers | `s8` | `artifacts/notes/progress/abstract-checkers/04-environment/` and later stage folders, `2-classifier-guidance/scripts/abstract_checkers/`, `/datasets/mmolefe/poe_repair_min/loop-8/` |
 
 A session that needs a change in another session's area writes one line to
 `artifacts/notes/progress/requests.md`, naming the owner. Each session reads that file on every tick.
@@ -51,7 +53,7 @@ A session that needs a change in another session's area writes one line to
   `flock artifacts/notes/progress/.git.lock git commit -m "<message>" -- <paths>`.
 - **Commit messages carry no attribution line.**
 - **Never push, and never publish anything.** Pushing is the user's decision.
-- **Run no experiments in Sessions 1 to 4.** They read the cluster and do not train or render. Sessions 5 and 6 run only what their briefs name, and share the job caps.
+- **Run no experiments in Sessions 1 to 4 or Session 7.** They read the cluster and do not train or render. Sessions 5, 6 and 8 run only what their briefs name, and share the job caps.
 - **On the cluster, use only `bigbatch` and `biggpu`.** Never run `find /`, never run `pkill -f`, and
   never remove a file there. If `mscluster84` is unreachable, record it and carry on with local work.
 - **Launch GPU work only through `sbatch`, inside the administrator's caps** of one `biggpu` job and six
