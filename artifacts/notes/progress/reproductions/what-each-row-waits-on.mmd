@@ -1,22 +1,22 @@
 %%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
 flowchart LR
-  T["<b>28 table rows</b><br/>0 have a verdict yet<br/>from a run"]:::plain
+  T["<b>28 table rows</b><br/>2 have a verdict<br/>from a run"]:::plain
 
-  A["<b>Rendering now: 2 rows</b><br/>RTD on Complex: 708 of 2,964 pictures<br/>RTD on Concat: 99 of 99, scoring waits for Complex"]:::doing
-  B["<b>Waiting on your answer: 6 rows</b><br/>CO3 on Complex, Concat: questions 16 and 18<br/>ToMe on Shape, Texture, Complex, Concat: questions 17 and 18"]:::you
-  C["<b>My next work: 10 rows</b><br/>CoMat on Color, Shape, Texture: confirm the released weights<br/>CoInD and Liu on Shapes3D, CelebA: read the checkpoint sheet<br/>Attend-and-Excite and Liu on Color: write the design<br/>FKC on GenEval: commit the port, settle 553 or 1,000 prompts"]:::todo
-  D["<b>May need a costed question: 3 rows</b><br/>Projective Composition on CLEVR: do our checkpoints match 128 pixels?<br/>SuperDiff on CIFAR-10: no weights released, needs retraining<br/>Logical Guidance on CMNIST: no code found yet"]:::risk
-  E["<b>Closed as not comparable: 7 rows</b><br/>Liu, SuperDiff on CMNIST<br/>ToMe on Color<br/>Attend-and-Excite, Liu on Shape and on Texture"]:::closed
+  D["<b>Verdict in: 2 rows</b><br/>RTD on Complex: not reproduced, 0.242 against 0.466<br/>RTD on Concat: reproduced, on a weak test"]:::done
+  A["<b>Rendering now: 6 rows, all 7 GPU slots</b><br/>CO3 on Complex, Concat (4 jobs): 1,820 of 2,964, and 99 of 99<br/>ToMe on Shape, Texture, Complex, Concat (2 jobs): 85 of 1,902<br/>Plain SDXL, the check on ToMe's scorer (1 job): 25 of 593"]:::doing
+  C["<b>My next work: 5 rows</b><br/>CoMat on Color, Shape, Texture: about 34 GPU-hours<br/>FKC on GenEval: port the sampler, under 2 GPU-hours<br/>Logical Guidance on CMNIST: 3 trainings, about 6 GPU-hours"]:::todo
+  B["<b>Needs a costed question: 2 rows</b><br/>CoInD and Liu on Shapes3D:<br/>no weights, at least 3 trainings per method"]:::risk
+  E["<b>Closed: 13 rows</b><br/>11 not comparable: CoInD and Liu on CelebA, Attend-and-Excite x3,<br/>Liu on CMNIST, Color, Shape, Texture, SuperDiff on CMNIST, ToMe on Color<br/>2 blocked: Projective Composition, SuperDiff on CIFAR-10"]:::closed
 
-  T --> A
-  T --> B
-  T --> C
   T --> D
+  T --> A
+  T --> C
+  T --> B
   T --> E
 
   classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef done fill:#dff3df,stroke:#2e7d32,stroke-width:3px,color:#111111
   classDef doing fill:#ffe3bf,stroke:#c46a00,stroke-width:3px,color:#111111
-  classDef you fill:#eaf1ff,stroke:#4a78c2,stroke-width:3px,color:#111111
   classDef todo fill:#eeeeee,stroke:#777777,stroke-width:2px,color:#111111
   classDef risk fill:#fff6cc,stroke:#b59b00,stroke-width:2px,color:#111111
   classDef closed fill:#ffffff,stroke:#999999,stroke-width:2px,stroke-dasharray:5 4,color:#555555
