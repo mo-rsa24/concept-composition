@@ -51,8 +51,8 @@ would change the labels along with the list. Step M2 tests the labels.
 **Training.** 2,000 updates with the kept checker's settings: the joint prompt, the three augmented copies of each picture, half of the
 timesteps drawn from the first 20 sampler steps, and 4 accumulated batches per update.
 
-**Push.** Strength 30, capped at 0.4 of PoE's prediction, on steps 0 to 15, then plain PoE. D3 compares its candidates on plain PoE, so
-this stage does too.
+**Push.** Strength 30 on steps 0 to 15, capped at 0.4 of the base sampler's prediction. Each checker runs on plain PoE and on CO3. By board
+question 57, the CO3 rows decide which list goes forward, because CO3 is the rival Paper 2 has to beat.
 
 ## Pairs, seeds and rows
 
@@ -62,33 +62,41 @@ list holds any of those pairs. The 12 held-out pairs and seeds 7001 to 7008 are 
 | Row | What it does |
 |---|---|
 | 1. Plain PoE | no push, and D3 reuses these 96 pictures |
-| 2. Current list | the push from the checker trained on the current list |
-| 3. Balanced list | the push from the checker trained on the balanced list |
+| 2. Plain PoE, current list | the push from the checker trained on the current list |
+| 3. Plain PoE, balanced list | the push from the checker trained on the balanced list |
+| 4. CO3 alone | step M1's 96 pictures, reused and counted again |
+| 5. CO3, current list | the current-list push added to CO3 |
+| 6. CO3, balanced list | the balanced-list push added to CO3 |
 
-All 288 pictures are shuffled under neutral names and called by eye at full size, with no API tokens. Giraffe and tortoise is counted and
+The three plain-PoE rows are shuffled together, and the three CO3 rows are shuffled together, under neutral names. All 576 pictures are
+called by eye at full size, with no API tokens. Step M1's calls on CO3 alone are not reused, because its six reviewers passed between 0
+and 9 of 48 pictures, and a row must be read by the same reviewers as the rows it is compared with. Giraffe and tortoise is counted and
 stays off every sheet, page and message.
 
-**Control.** A zero push reproduces plain PoE with a largest absolute latent difference under 1e-5, in one process on one card and dtype.
+**Control.** A zero push reproduces plain PoE and CO3's own loop, each with a largest absolute latent difference under 1e-5, in one process
+on one card and dtype.
 
 ## The bar, on faithful pairs of 96
 
 The standard error comes from 10,000 bootstrap resamples of the 12 pairs. Repeating a pushed render has moved its count by about 2 of 96,
-so a lead under 5 is a tie.
+so a lead under 5 is a tie. The CO3 rows decide, and the plain-PoE rows are reported beside them.
 
 | Result | What it takes | Which list goes to D3 |
 |---|---|---|
-| Balanced wins | row 3 leads row 2 by at least 5 and by more than 1.96 standard errors | balanced |
-| Current wins | row 2 leads row 3 by at least 5 and by more than 1.96 standard errors | current |
-| Tie | neither lead holds | balanced, because it depends least on cat and dog, unless it has at least 5 more damaged pictures than current |
-| Inconclusive | the zero-push check fails | none until the check passes |
+| Balanced wins | row 6 leads row 5 by at least 5 and by more than 1.96 standard errors | balanced |
+| Current wins | row 5 leads row 6 by at least 5 and by more than 1.96 standard errors | current |
+| Tie | neither lead holds | balanced, because it depends least on cat and dog, unless row 6 has at least 5 more damaged pictures than row 5 |
+| Inconclusive | a zero-push check fails | none until the check passes |
+
+The review also says whether the chosen list's CO3 row beats CO3 alone, by at least 5 of 96 and more than 1.96 standard errors.
 
 **What would surprise.** A balanced checker that loses clearly would mean the extra cat and dog pictures teach something that carries to
 other subjects, which is the opposite of the concern behind this stage.
 
 ## Cost and what it buys
 
-**Cost:** about 8 GPU-hours of this loop's 79: two trainings budgeted at 2.5 GPU-hours each, and 288 pictures at a budgeted 40 seconds.
-No API tokens. The smoke rung replaces these budgets with measured times.
+**Cost:** about 11 GPU-hours of this loop's 87: two trainings budgeted at 2.5 GPU-hours each, 288 plain-PoE pictures at a budgeted 40
+seconds and 192 CO3 pictures at 59 seconds. No API tokens. The smoke rung replaces these budgets with measured times.
 
 **Buys:** step M5, the training list D3 uses, and a first measured answer to whether the checker's dependence on cat and dog matters.
 
@@ -99,8 +107,8 @@ Each rung saves its config, numbers, sheet and commit under `/datasets/mmolefe/p
 1. **Smoke test.** One batch from each list, one checkpoint saved and reloaded, one pushed render. Records seconds per update and picture.
 2. **Overfit.** Each checker memorises 16 pictures, reaching at least 15 of 16 right.
 3. **1% of the data.** Each list trains on 1% of its pictures, and the logged loss falls.
-4. **Controls.** The zero-push check.
-5. **Comparison.** Both full trainings, the three rows and the blind count.
+4. **Controls.** The zero-push checks on plain PoE and on CO3.
+5. **Comparison.** Both full trainings, the six rows and the blind count.
 
 ## What this cannot say
 

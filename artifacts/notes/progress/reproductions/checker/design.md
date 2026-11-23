@@ -28,13 +28,14 @@ same for all three.
 
 **Buys.** Step D3: one named architecture, with the comparison behind it.
 
-**Cost.** Each candidate trains once for 2,000 updates, budgeted at 2.5 GPU-hours, so 7.5 GPU-hours. Seven rows of 96 pictures
-are rendered (plain PoE, and each candidate's push and its size-matched random push), 672 pictures at a budgeted 40 seconds,
-so 7.5 GPU-hours. The total is about 15 GPU-hours. The smoke rung replaces both budgets with measured times.
+**Cost.** Each candidate trains once for 2,000 updates, budgeted at 2.5 GPU-hours, so 7.5 GPU-hours. Seven plain-PoE rows of 96
+pictures are rendered (plain PoE, and each candidate's push and its size-matched random push), 672 pictures at a budgeted 40
+seconds, so 7.5 GPU-hours. Three CO3 rows add each candidate's push to CO3, 288 pictures at 59 seconds, so 4.7 GPU-hours. CO3 alone
+reuses step M1's 96 pictures. The total is about 20 GPU-hours. The smoke rung replaces these budgets with measured times.
 
-**External cost.** Scoring 672 pictures with the labeller is about 1.46 million input and 67,000 output tokens on the owner's
-Anthropic API key, at the 2,170 input and 99 output tokens per picture recorded in the checker loop. Nothing is scored this
-way until the owner says yes on board question 15.
+**External cost.** Scoring the 672 plain-PoE pictures with the labeller is about 1.46 million input and 67,000 output tokens on the
+owner's Anthropic API key, at the 2,170 input and 99 output tokens per picture recorded in the checker loop. The owner approved this
+on board question 15. The CO3 rows use no API tokens.
 
 ## The three candidates
 
@@ -81,32 +82,45 @@ Strength 30, capped at 0.4 of PoE's prediction, on steps 0 to 15, then plain PoE
 they could favour it. Before the comparison, each candidate's strength is scaled until its push reaches the cap on at least 80%
 of the pushed steps, measured on one tuning pair and seed. This uses the push's size only and looks at no picture or score.
 
+On the CO3 rows the same strength, steps and cap apply, with the cap measured against CO3's guided prediction. The push enters through
+`2-classifier-guidance/scripts/method_search/co3_push.py`, as in step M1.
+
 ## The selection rule, fixed before any candidate trains
 
-The constants and the rule are in `2-classifier-guidance/scripts/checker_choice/selection.py`.
+The constants and the rule are in `2-classifier-guidance/scripts/checker_choice/selection.py`. By board question 57, the CO3 row decides
+what goes forward, because CO3 is the rival Paper 2 has to beat.
 
-A candidate is eligible only if all three hold:
+A candidate is eligible only if all four hold:
 
 1. A zero push reproduces plain PoE, with a largest absolute latent difference under 1e-5 in one loop on one card and dtype.
-2. It rejects at least 80% of 200 neither-subject pictures, meaning a clean-pair logit below 0 averaged over steps 0, 5, 10 and
+2. A zero push reproduces CO3's own loop to the same limit.
+3. It rejects at least 80% of 200 neither-subject pictures, meaning a clean-pair logit below 0 averaged over steps 0, 5, 10 and
    15.
-3. Its size-matched random push makes at most 2 faithful pairs of 96.
+4. Its size-matched random push on plain PoE makes at most 2 faithful pairs of 96.
 
-Among eligible candidates, the most faithful pairs of 96 wins. A lead under 5 counts as a tie, because re-rendering the same
-recipe moved the faithful count by about 2. A tie goes to the fewest damaged pictures, then to the fewest parameters.
+Among eligible candidates, the most faithful pairs of 96 on the CO3 row wins. A lead under 5 counts as a tie, because re-rendering the
+same recipe moved the faithful count by about 2. A tie goes to the fewest damaged pictures on the CO3 row, then to the fewest
+parameters. The plain-PoE counts are reported beside it and choose nothing.
 
-The labeller's calls are checked by eye on 16 random pictures per row at full size, before any count is believed.
+The chosen candidate beats CO3 alone when it leads by at least 5 of 96 and by more than 1.96 standard errors, from 10,000 bootstrap
+resamples of the 12 pairs. If it does not, D3 still names the best reader and reports that no candidate beat CO3 alone.
+
+**How the CO3 rows are counted.** Step M1's 96 CO3 pictures are reused, and their calls are not, because M1's six reviewers passed
+between 0 and 9 of 48 pictures. CO3 alone and the three CO3-plus-checker rows, 384 pictures, are shuffled together under neutral names
+and called at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md).
+
+The labeller's calls on the plain-PoE rows are checked by eye on 16 random pictures per row at full size, before any count is believed.
 
 ## The ladder
 
-Each rung saves its config, metrics, image sheet and commit under `/datasets/mmolefe/poe_repair_min/loop-5/checker/<rung>/`.
+Each rung saves its config, metrics, image sheet and commit under `/datasets/mmolefe/poe_repair_min/loop-6/d3/<rung>/`.
 
 1. **Smoke test.** One batch through each candidate, one checkpoint saved and reloaded, one pushed render. Records seconds per
    update and per picture.
 2. **Overfit.** Each candidate memorises 16 tiles, reaching at least 15 of 16 right.
 3. **1% of the data.** 28 tiles train, and the loss falls.
-4. **Controls.** The zero-push check and the neither-subject check for each candidate.
-5. **Comparison.** The full 2,805 tiles, then the seven rows on the tuning pairs and seeds.
+4. **Controls.** The zero-push checks on plain PoE and on CO3, and the neither-subject check, for each candidate.
+5. **Comparison.** The full training list from step M5, then the seven plain-PoE rows and three CO3 rows on the tuning pairs and seeds.
 
 ## The unseen-category test
 
@@ -138,8 +152,8 @@ comparison's tie rule of 5 of 96, scaled to 48 pictures and rounded up.
 | Does not transfer | its push has no such lead |
 | Inconclusive | its zero-push check fails, or its random push leads plain PoE by at least 3 and by more than 1.96 standard errors |
 
-C carries over better than A when C's push leads A's by at least 3 and by more than 1.96 standard errors. This test reports beside the
-selection rule and does not change it.
+C carries over better than A when C's push leads A's by at least 3 and by more than 1.96 standard errors. This test stays on plain PoE,
+reports beside the selection rule and does not change it. Step M8 reads the same six pairs beside CO3.
 
 **Cost:** about 9 GPU-hours beyond the main comparison: two trainings budgeted at 2.5 GPU-hours each, and 240 pictures at a budgeted 58
 seconds. **Buys:** a direct answer to whether either reader works on a category it never trained on.
