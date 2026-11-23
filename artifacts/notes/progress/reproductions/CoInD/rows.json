@@ -1,0 +1,9 @@
+[
+  {
+    "target_id": "CoInD-T6-011",
+    "verdict": "not comparable",
+    "commit": "d75bad9f-f28dd6c",
+    "run_id": "question 28",
+    "note": "the conformity classifier, trained to the authors' config, reads smiling on 88.75% of smiling men against a 90% bar (W&B zolb4ltw), so no generated image is scored until board question 28 is answered"
+  }
+]
