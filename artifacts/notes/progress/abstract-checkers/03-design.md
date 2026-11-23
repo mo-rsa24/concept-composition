@@ -349,7 +349,7 @@ $m_i$ is subject $i$'s word map and $N$ is the number of subjects. The word head
 | Largest $N$ | The largest $N$ for which that holds at $N$ and at every smaller tested value |
 | Null | It fails at $N = 3$ |
 
-**Limits to expect.** A 32 by 32 map gives nine subjects about 113 cells each, and one SDXL pass with gradients on nine prompts may not fit in memory, so the smoke rung measures both. The CLEVR benchmark's prompts stay out of this test.
+**Limits to expect.** A 32 by 32 map gives nine subjects about 114 cells each, and one SDXL pass with gradients on nine prompts may not fit in memory, so the smoke rung measures both. The CLEVR benchmark's prompts stay out of this test.
 
 **Cost:** about 10 GPU-hours as budgeted, for 480 pictures with more expert passes per step. **Buys:** a measured answer to how far the checkers scale past two subjects.
 
