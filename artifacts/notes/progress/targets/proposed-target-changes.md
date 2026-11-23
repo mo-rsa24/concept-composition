@@ -8,7 +8,7 @@ page gives the number each one rests on, the reason, and the scope behind them.
 | 1 | CLEVR, 5 objects | **99%** | Projective Composition, 98 of 100 hand-counted images, Table 1, p17 |
 | 2 | T2I-CompBench Complex, ImageReward | **0.4761** | Rectify Then Diffuse, 0.4661, Table 2, p6 |
 | 2 | RareBench Concat, ImageReward | **0.4564** | Rectify Then Diffuse, 0.4464, Table 2, p6 |
-| 2 | GenEval two objects, 1,000 prompts | **0.81** | FKC, 0.80, Table A4, p39 |
+| 2 | GenEval two objects, 553 released prompts | **0.79**, and a win must also beat plain SDXL's 0.80 | FKC, 0.78, Table A4, p39 |
 
 ## Why each one
 
@@ -21,7 +21,8 @@ Expansion's 44.5 at 5 positions is a different benchmark, because it trains one 
 Its baseline ImageReward cells match CO3's table on 19 of 20 values, so CO3 was probably not rerun.
 
 **GenEval two objects.** This is the one headline that counts two separate objects, which is what Paper 2 claims to restore.
-FKC prints 0.80 and the same authors' plain SDXL prints 0.79, so the target sits one step above both.
+FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL
+prints 0.80, so the scoreboard target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
 
 ## The scope behind them
 

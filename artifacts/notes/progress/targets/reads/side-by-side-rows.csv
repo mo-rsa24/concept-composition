@@ -26,4 +26,4 @@ Paper 2,T2I-CompBench Complex,ToMe,Turns pairs into repeated wallpaper patterns;
 Paper 2,RareBench Concat,CO3,"Misses rare traits: hornless lemons, no thorns, octopus with a bear face, spots on the bird"
 Paper 2,RareBench Concat,RTD,"Subjects separate but shape and action words fail: no ax bed, heart moon, star ship or dancing"
 Paper 2,RareBench Concat,ToMe,"Drops lion, octopus, owl and bottle; rides a bicycle instead of a unicycle"
-Paper 2,GenEval (1000 prompts),FKC,"Colour leaks remain: a green TV screen, two extra toothbrushes, green handles on a red bag"
+Paper 2,GenEval (553 prompts),FKC,"Colour leaks remain: a green TV screen, two extra toothbrushes, green handles on a red bag"

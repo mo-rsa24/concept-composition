@@ -217,12 +217,12 @@
     },
     {
       "paper": "Paper 2",
-      "dataset": "GenEval (1000 prompts)",
+      "dataset": "GenEval (553 prompts)",
       "metric": "Two object",
       "unit": "",
       "better": "higher",
       "rival": "FKC",
-      "published": 0.8,
+      "published": 0.78,
       "reproduced": null,
       "step": 0.01,
       "range": [
@@ -230,7 +230,7 @@
         1.0
       ],
       "protocol": "Image generation with SDXL and classifier-free guidance scored on the GenEval benchmark; mean values are reported and no arrow is printed on any column, so the direction comes from GenEval scores being accuracies; a starred row is taken directly from the GenEval leaderboard rather than run by the authors. This row: run by the authors at guidance weight beta = 7.5.",
-      "number_id": "FKC-TA4-059",
+      "number_id": "FKC-TA4-038",
       "reproduced_id": null,
       "ours": null,
       "ours_interval": null,
@@ -537,7 +537,7 @@
     },
     {
       "paper": "Paper 2",
-      "dataset": "GenEval (1000 prompts)",
+      "dataset": "GenEval (553 prompts)",
       "rival": "FKC",
       "failure": "Colour leaks remain: a green TV screen, two extra toothbrushes, green handles on a red bag",
       "pairs": 0,
