@@ -44,8 +44,12 @@ where this file lists seed 30.
 255 in mean absolute pixel value, the project's reproduction limit. Each joint render must also match the render its boxes were detected
 on by at most 3 of 255.
 
-**Counting.** All 48 pictures are shuffled under neutral names. Two reviewers each call every picture at full size under the rubric,
-without the key. Where they disagree on `two_clear`, a third blind call at full size decides.
+**Counting.** All 48 pictures are shuffled under neutral names, each shown with the prompt "a cat and a dog". Two reviewers each call every
+picture at full size under the rubric, without the key, and also record how many separate, clear animals it holds. Where they disagree on
+`two_clear` or on whether there are at least two separate, clear animals, a third blind call at full size decides.
+
+The same-prompt row asks for a cat in both regions, so it cannot make a clear cat and dog. Its count in the bar is the pictures with at least
+two separate, clear animals, which is the oracle-layout plan's own call. Every other row counts clear pairs.
 
 **The bar, written on 2026-11-04.**
 
