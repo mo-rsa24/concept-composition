@@ -55,8 +55,12 @@ and draws the figure. Its example canvases are the first three of each kind in t
 
 ## What is blocking the step
 
-From 14:49 on 2026-11-23 the laptop cannot log in to the cluster. Port 22 on the gateway `146.141.21.100` accepts a connection and
-the SSH login then hangs, including on a fresh connection that shares no socket. The last failed attempt from this loop was at 15:02.
+From 14:49 on 2026-11-23 the laptop cannot run anything on the cluster. The gateway `146.141.21.100` accepts the SSH key and the
+command, and even `true` then never returns. A connection forwarded through the gateway to `mscluster84` times out waiting for the
+SSH banner. Fresh connections that share no socket behave the same, and the last failed attempt from this loop was at 15:25.
+
+The zero-push check cannot move to the laptop. No laptop Python environment has PyTorch, and the laptop holds the `share-0.01` model
+and lacks the `share-0.0` model this step names.
 
 Once login returns, the remaining work is the ladder job, then the full job, both from `v1.sbatch`:
 
