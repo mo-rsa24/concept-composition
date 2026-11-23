@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    subgraph NOISY["Reads a noisy input"]
+        direction TB
+        GLIDE["GLIDE<br/>noised CLIP: 64x64 noisy pixels + caption<br/>no held-out concepts"]
+        DG["Discriminator Guidance<br/>noisy x_t through a frozen classifier<br/>no held-out classes"]
+    end
+    subgraph CLEAN["Reads clean images or captions"]
+        direction TB
+        STA["Spatial-Temporal Attention<br/>layout from the caption, CLIP loss on the final image<br/>no held-out nouns"]
+        TCC["Teaching CLIP to Count<br/>clean images and number words<br/>no held-out categories"]
+        COUNTERS["CLIP-Count, CounTX, VLCounter<br/>clean photos + class name<br/>held-out FSC-147 classes, 7 objects or more"]
+    end
+    SAMPLER["Classifier gradient<br/>added during sampling"]
+    ATT["Changes attention weights<br/>no latent gradient printed"]
+    TEXT["Enters as a retrained<br/>Imagen's text encoder"]
+    NONE["Never steers a generator"]
+    MISSING["Still missing from all 7:<br/>a trained checker on word maps from a noisy latent,<br/>tested on held-out concepts, steering a sampler"]
+
+    GLIDE --> SAMPLER
+    DG --> SAMPLER
+    STA --> ATT
+    TCC --> TEXT
+    COUNTERS --> NONE
+    SAMPLER -.-> MISSING
+    ATT -.-> MISSING
+    TEXT -.-> MISSING
+    NONE -.-> MISSING
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef gap fill:#fff1dc,stroke:#c77700,stroke-width:3px,color:#111111
+    class GLIDE,DG,STA,TCC,COUNTERS,SAMPLER,ATT,TEXT,NONE plain
+    class MISSING gap
+    style NOISY fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+    style CLEAN fill:#f6f6f4,stroke:#bbbbbb,stroke-width:2px

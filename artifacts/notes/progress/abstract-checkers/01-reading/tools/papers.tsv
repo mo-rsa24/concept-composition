@@ -16,3 +16,10 @@ correcting-diffusion-through-resampling	2312.06038	Correcting Diffusion Generati
 dynamic-cfg-online-feedback	2509.16131	Dynamic Classifier-Free Guidance
 gradcheck	2406.17399	GradCheck
 latent-classifier-guidance	2304.12536	Latent Classifier Guidance
+spatial-temporal-attention	2304.03869	Harnessing the Spatial-Temporal Attention of Diffusion Models
+glide	2112.10741	GLIDE
+discriminator-guidance	2211.17091	Refining Generative Process with Discriminator Guidance
+clip-count	2305.07304	CLIP-Count
+countx	2306.01851	Open-world Text-specified Object Counting
+vlcounter	2312.16580	VLCounter
+teaching-clip-to-count	2302.12066	Teaching CLIP to Count to Ten

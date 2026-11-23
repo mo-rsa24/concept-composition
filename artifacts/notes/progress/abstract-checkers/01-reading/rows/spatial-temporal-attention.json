@@ -1,0 +1,170 @@
+{
+  "slug": "spatial-temporal-attention",
+  "arxiv": "2304.03869",
+  "title": "Harnessing the Spatial-Temporal Attention of Diffusion Models for High-Fidelity Text-to-Image Synthesis",
+  "property": "object position and spatial relations from a trained text-only layout predictor; prompt match through CLIP",
+  "pages_read": 20,
+  "reads": "Layout predictor reads only the caption through RoBERTa-base and outputs a 5-component Gaussian mixture over each object's centre; the weight loss reads the decoded final image and 224x224 object crops with CLIP ViT-B/32",
+  "reads_page": 4,
+  "trained_on": "Layout predictor fine-tuned 100 epochs at batch 64 on MS-COCO captions with object centres (absolute NLL) and GPT-3 synthetic relation sentences over the 80 COCO categories (relative margin loss); training-set sizes not printed",
+  "trained_page": 11,
+  "gradient_enters": "No latent update is printed: a CLIP loss on the final image optimises per-object, per-step attention blend weights lambda_it (Adam, lr 0.05, gamma 5, projected to [-1, 2]) over 50 PLMS steps; the layout loss is trained offline and applies at no diffusion step",
+  "gradient_page": 5,
+  "unseen": "no: no noun or category is held out from the layout predictor; the uncommon test recombines the COCO categories, and object recall counts only COCO categories",
+  "unseen_page": 14,
+  "headline": "On GPT-synthetic with SD1.4, object recall (% of mentioned COCO objects found by DETR, higher better) is 47.2 against 45.9 for Paint-with-Words; spatial relation precision (% correct, higher better) is 66.7 against 59.3 for Structure Diffusion",
+  "headline_page": 6,
+  "copy_or_avoid": "Copy assigning each subject a region before steering attention into it; avoid decoded-image CLIP as the layout signal and do not cite this for transfer to unseen concepts (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "SD1.4",
+  "why_added": "trains a caption-only layout predictor, then tunes attention blend weights with a CLIP loss; named by SynGen, p. 10",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "The method optimises latents with the layout predictor",
+      "source": "SynGen pp. 10 and 17",
+      "paper_says": "The optimised variables are the attention combination weights lambda_it under a CLIP loss; the layout predictor only supplies object regions, and no latent update is printed",
+      "page": 5
+    }
+  ],
+  "quotes": [
+    {
+      "page": 4,
+      "text": "the layout predictor is a transformer that takes the text description D as the input",
+      "supports": "reads: caption only",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "to predict the center coordinate Ci = [Xi , Yi ] for each object Oi",
+      "supports": "reads: output is a centre coordinate",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "We adopt RoBERTa-base [28] as the base model for layout predictor and use 5 mixtures in GMM",
+      "supports": "reads: RoBERTa-base and 5 mixtures",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "a global CLIP similarity that compares the entire image and the global description",
+      "supports": "reads: global CLIP term",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "original image with a minimum square that encompasses Ri and resizing it to 224×224",
+      "supports": "reads: 224x224 object crops",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "We use the pre-trained ViT-B/32 [34] to calculate CLIP similarities",
+      "supports": "reads: CLIP ViT-B/32",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "We fine-tune the model on GPTsynthetic dataset with relative position objective and MSCOCO dataset with absolute position objective for 100 epochs",
+      "supports": "trained_on: data, objectives and 100 epochs",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "The training batch size is 64",
+      "supports": "trained_on: batch size",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "The GPT-synthetic dataset contains the 80 object categories in MS-COCO",
+      "supports": "trained_on and unseen: 80 COCO categories",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we assume access to an image captioning dataset Dreal with description D as well as the extracted labels of all the objects",
+      "supports": "trained_on: absolute position labels",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we prompt GPT-3 [4] to generate the text description D that mentions all the objects and their relative positions",
+      "supports": "trained_on: relative position data",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "weights, λ = {λit }, are determined by maximizing the consistency between the generated image and the text description",
+      "supports": "gradient_enters: optimised variables are the blend weights",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "Lattend (λ) = −CLIP(I(λ), D) − γ",
+      "supports": "gradient_enters: loss",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "Attention Optimization Optimizer Adam [20] Learning rate 0.05",
+      "supports": "gradient_enters: Adam and learning rate",
+      "read_from_image": false
+    },
+    {
+      "page": 12,
+      "text": "Checkpoint for CLIP loss ViT-B/32 [34] γ 5",
+      "supports": "gradient_enters: gamma 5",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "The weight is projected to [−1, 2] after each gradient descent step to avoid extreme values",
+      "supports": "gradient_enters: projection",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "PLMS sampler [47] to synthesize images with 50 denoising steps",
+      "supports": "gradient_enters: 50 PLMS steps",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we randomly draw the center coordinate Ci from the predicted GMM",
+      "supports": "gradient_enters: predictor supplies the region at inference",
+      "read_from_image": false
+    },
+    {
+      "page": 14,
+      "text": "we remove the constraint that objects need to belong to the same super category",
+      "supports": "unseen: uncommon test changes combinations",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "the total number of objects in the text that also belong to one of the MS-COCO categories",
+      "supports": "unseen and headline: recall counts COCO categories",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "Ours 69.6% – 65.1% 75.0% 47.2% 66.7%",
+      "supports": "headline: 47.2 and 66.7",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "PAINT- WITH -W ORDS 57.3% – 63.8% 47.1% 45.9% 53.5%",
+      "supports": "headline: 45.9",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "S TRUCTURE -D IFFUSION 61.7% – 62.3% 58.3% 43.0% 59.3%",
+      "supports": "headline: 59.3",
+      "read_from_image": false
+    }
+  ]
+}

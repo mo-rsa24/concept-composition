@@ -1,0 +1,199 @@
+{
+  "slug": "discriminator-guidance",
+  "arxiv": "2211.17091",
+  "title": "Refining Generative Process with Discriminator Guidance in Score-based Diffusion Models",
+  "why_added": "trains a real-against-generated classifier on noisy inputs and adds its gradient; cited by Correcting Diffusion, p. 9",
+  "property": "realism (real versus generated), per class on class-conditional runs",
+  "pages_read": 49,
+  "reads": "Noisy x_t and t through a frozen ADM classifier; its last-pooling latent (8x8x512) and t enter a small U-Net encoder that outputs real/fake; class-conditional on conditional CIFAR-10 and ImageNet",
+  "reads_page": 7,
+  "trained_on": "Real training images against the frozen model's final samples re-noised at random t, with binary cross-entropy; ImageNet 256 uses 1,281,167 real and 400,000 (ADM) or 1,281,167 (DiT) generated; CIFAR-10 uses 50k real and 25k or 50k generated",
+  "trained_page": 22,
+  "gradient_enters": "Adds w_DG times grad log(d/(1-d)) to the frozen score on t in [t_mid, T]; w_DG is 1, 2 or adaptive and t_mid is 0.01 or 0.1; no norm cap",
+  "gradient_page": 5,
+  "unseen": "no: every discriminator guides the same classes or dataset it trained on; only the frozen feature extractor is reused across datasets",
+  "unseen_page": 22,
+  "headline": "ImageNet 256 FID (lower is better): 1.83 for DiT-XL/2-G++ against 2.27 for DiT-XL/2-G and 1.68 for validation data, with G++ also setting its own classifier-guidance schedule; the discriminator alone at weight 1 moves ADM-G from 4.59 to 4.18",
+  "headline_page": 7,
+  "copy_or_avoid": "Consider its log-odds gradient and frozen-feature head; do not cite it for transfer across concepts, and do not assume its exactness theorem holds for a PoE score (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "EDM / LSGM / Soft Truncation / ADM / DiT-XL/2 (no text-to-image model)",
+  "extra_papers": [],
+  "disagreements": [],
+  "quotes": [
+    {
+      "page": 7,
+      "text": "We put (xt , t) to the ADM classifier, and we extract the latent zt of xt from the last pooling layer",
+      "supports": "reads: noisy input through frozen classifier",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "we put (zt , t) to the auxiliary U-Net encoder and predict real/fake by its output",
+      "supports": "reads: small encoder and real/fake output",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "We freeze the ADM classifier, and we only fine-tune shallow U-Net encoder as default",
+      "supports": "reads: frozen features",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "We train a class-conditional discriminator for the class-conditional generation",
+      "supports": "reads: class-conditional; disagreement: label is an input",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "Input shape (latent dimension) (B,16,16,180) (B,8,8,512) (B,8,8,512) (B,8,8,512) (B,8,8,512) (B,8,8,512) (B,8,8,384)",
+      "supports": "reads: 8x8x512 latent",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we first draw fake samples from the generative process of Eq. (3) as many as data instances",
+      "supports": "trained_on: generated data",
+      "read_from_image": false
+    },
+    {
+      "page": 16,
+      "text": "could only save the final sample as G, and we optimize the discriminator by diffusing it with arbitrary diffusion time",
+      "supports": "trained_on: final samples re-noised",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "#D 50,000 50,000 50,000 10,000 60,000 1,281,167 1,281,167",
+      "supports": "trained_on: real counts",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "#G 50,000 25,000 50,000 10,000 60,000 400,000 1,281,167",
+      "supports": "trained_on: generated counts",
+      "read_from_image": false
+    },
+    {
+      "page": 26,
+      "text": "we train our discriminator with 400,000 samples",
+      "supports": "trained_on: ADM generated count",
+      "read_from_image": false
+    },
+    {
+      "page": 26,
+      "text": "We draw 1,281,167 number of samples from DiT-XL/2-G to train the discriminator",
+      "supports": "trained_on: DiT generated count",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "we estimate the correction term cθ∞ with a neural discriminator dϕ by",
+      "supports": "gradient_enters: correction from discriminator",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "dxt = f (xt , t) − g 2 (t) (sθ∞ + wtDG cϕ∞ )(xt , t)",
+      "supports": "gradient_enters: weighted update, Eq. (6)",
+      "read_from_image": false
+    },
+    {
+      "page": 21,
+      "text": "on t ∈ [tmid , T ] and the unadjusted PFODE",
+      "supports": "gradient_enters: time window",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "tmid 0.1 0.01 0.01 0.01 0.01 0.1 0.1",
+      "supports": "gradient_enters: t_mid values",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "wtDG 2 2 Adaptive Adaptive Adaptive Adaptive 1",
+      "supports": "gradient_enters: weight values",
+      "read_from_image": false
+    },
+    {
+      "page": 4,
+      "text": "while Theorem 2 does not guarantee that the gain is strictly positive",
+      "supports": "condition: imperfect discriminator",
+      "read_from_image": false
+    },
+    {
+      "page": 29,
+      "text": "the discriminator perfectly classifies real/fake, but the middle area between the real data support and the fake data support remain unoptimized",
+      "supports": "condition: density chasm",
+      "read_from_image": false
+    },
+    {
+      "page": 29,
+      "text": "the actual effect of DG lies in constructing the global shape of the generation",
+      "supports": "condition: where guidance acts",
+      "read_from_image": false
+    },
+    {
+      "page": 26,
+      "text": "the discriminator suffers from the overffiting issue as the number of generated data decreases",
+      "supports": "condition: data size",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "We experiment on CIFAR-10, CelebA/FFHQ 64x64, and ImageNet 256x256",
+      "supports": "unseen: datasets used",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "We use the ImageNet dataset (Russakovsky et al., 2015) to train the 32x32 classifier",
+      "supports": "unseen: frozen extractor reused across datasets",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "we first translate source training images, and then we aggregate these translated images with source images to a fake dataset G",
+      "supports": "unseen: image translation keeps both categories in training",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "DiT-XL/2-G++ Latent 1.83 5.16 281.53 0.78 0.64 0.70",
+      "supports": "headline: 1.83",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "DiT-XL/2-G (Peebles & Xie, 2022) Latent 2.27 4.60 278.24 0.83 0.57 0.68",
+      "supports": "headline: 2.27",
+      "read_from_image": false
+    },
+    {
+      "page": 7,
+      "text": "Validation Data 1.68 3.67 232.21 0.75 0.66 0.70",
+      "supports": "headline: 1.68",
+      "read_from_image": false
+    },
+    {
+      "page": 26,
+      "text": "we choose wtCG = 1.25 for t < t0 with t0 = 200 and wtCG = 3.0 otherwise",
+      "supports": "headline: G++ sets its own classifier-guidance schedule",
+      "read_from_image": false
+    },
+    {
+      "page": 25,
+      "text": "0 0 1.5 1.5 0 ✗ ✗ 4.59 5.25 186.70 0.82 0.52",
+      "supports": "headline: 4.59",
+      "read_from_image": false
+    },
+    {
+      "page": 25,
+      "text": "1 1 1.5 1.5 0 ✗ ✗ 4.18 4.81 199.94 0.82 0.53",
+      "supports": "headline: 4.18",
+      "read_from_image": false
+    }
+  ]
+}

@@ -80,7 +80,7 @@ MAE is mean absolute counting error in objects per image, and RMSE is root mean 
 | RMSE | 13.47 | 10.87 (CounTX) | CARPK | p. 7, Table 3 |
 | MAE, ablation | 24.34 baseline, 9.59 with $\mathcal{L}_{RRC}$, 4.69 with the correction module added | none | FSC-147-S | p. 8, Table 4 |
 
-T2ICount is second on CARPK MAE and third on CARPK RMSE (p. 7, Table 3). Few-shot LOCA, which is given three example boxes, has a lower FSC-147 test MAE of 10.97 (p. 6, Table 1).
+T2ICount is second on CARPK MAE and third on CARPK RMSE in its own Table 3 (p. 7). Two other papers change that reading. CounTX prints its 8.13 for joint training on FSC-147 and CARPK, and 11.64 to 11.72 when trained on FSC-147 alone ([CounTX p. 15](https://arxiv.org/pdf/2306.01851#page=15)). VLCounter, which Table 3 omits, prints CARPK MAE 6.46 ([VLCounter p. 5](https://arxiv.org/pdf/2312.16580#page=5)). Few-shot LOCA, which is given three example boxes, has a lower FSC-147 test MAE of 10.97 (p. 6, Table 1).
 
 The text's FSC-147-S reductions of 85.1% in MAE and 86.9% in RMSE (p. 7) use different comparison methods. From Table 2, the MAE reduction against CounTX computes to 85.0%, and the RMSE reduction matches PseCo, which is outside the three CLIP-based methods that sentence names (inferred).
 

@@ -1,41 +1,22 @@
-# Handoff: where step U1 stands
+# Handoff: where the abstract-checker reading stands
 
-Loop 7 (`s7`) continues from this file in a session started from `/home/molef/PhD/concept-composition`. Its brief is [the session 7 prompt](../../prompts/session-7-read-the-abstract-checker-papers.md). Step U1 stays `doing` on the board until the closer papers below are settled.
+Loop 7 (`s7`) continues from this file in a session started from `/home/molef/PhD/concept-composition`. Its brief is [the session 7 prompt](../../prompts/session-7-read-the-abstract-checker-papers.md). Step U1 is done, and the next step is U2, the score view.
 
 ## What is done
 
-**All 18 listed papers are read from their full PDFs.** Each has a note in this folder and a row in the [reading table](reading-table.md). The row data is in `rows/`, one JSON file per paper.
+**25 papers are read from their full PDFs:** the 18 listed papers and 7 closer papers they cite. Each has a note in this folder and a row in the [reading table](reading-table.md). The row data is in `rows/`, one JSON file per paper.
 
-**All 306 quotes are on their stated PDF pages.** `tools/check_quotes.py` found every one. Eleven values were read from figures or page images, and each is marked `read_from_image` in its row. The check proves a quote is on its page. It does not prove a reader interpreted it correctly, and no second reader has checked the interpretations.
+**All 463 quotes were checked against their stated PDF pages, and none is missing.** Sixteen values were read from figures or page images and are marked `read_from_image`, so they rest on a reader's eye. The check proves a quote is on its page. It does not prove a reader interpreted it correctly, and no second reader has checked the interpretations.
 
-**The sketch of what the papers cover** is [the five-checker picture](what-the-papers-cover.png), drawn from `what-the-papers-cover.mmd`.
+**Mid-U Guidance is not read.** It is a W&B report with no arXiv PDF or HTML page, so no claim uses it.
 
-## What is half done
+**Two pictures summarise the reading:** [the five-checker picture](what-the-papers-cover.png) and [what the closer papers read](what-the-closer-papers-read.png). [GLIDE's CLIP score against human ratings](glide-clip-score-against-people.png) sits in the GLIDE note.
 
-**Closer papers are not read.** The brief allows up to 10 more when a paper trains a classifier for an abstract property or tests one on unseen concepts. The arXiv title lookup returned no ID for the first four and HTTP 429 (rate limited) for the last four, so none of these was downloaded.
+**A zoom ladder is being built by an earlier session.** It teaches the word-map spatial head and lands in `2-classifier-guidance/artifacts/scenes/word-map-checker/`, local only, with nothing published. This session does not start another one, and that folder is outside `s7`'s commit list until the owner says where it belongs.
 
-| Paper | arXiv | Why it qualifies | Named by |
-|---|---|---|---|
-| Harnessing the Spatial-Temporal Attention of Diffusion Models | 2304.03869 | trains a layout predictor for noun pixels and optimises latents with it | SynGen, p. 10 |
-| GLIDE | 2112.10741 | guides with a CLIP retrained on noisy inputs | Universal Guidance, p. 2 |
-| Refining Generative Process with Discriminator Guidance | unknown | trains a real-against-generated classifier across concepts and adds its gradient | Correcting Diffusion, p. 9 |
-| Mid-U Guidance | unknown | learns a guidance function on diffusion features for aesthetics | Readout Guidance, p. 2 |
-| CLIP-Count | 2305.07304 | trained text-guided counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| Open-world Text-specified Object Counting (CounTX) | unknown | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| VLCounter | unknown | trained counter tested on held-out FSC-147 classes | T2ICount, p. 9 |
-| Teaching CLIP to Count to Ten | unknown | trains a counting-aware CLIP | Counting Guidance, p. 9 |
+## The next action
 
-Four more were flagged and left off this list because they are less close to a guided checker: RCC (2205.10203), VA-Count (2407.04948), ImageReward and AFreeCA (2403.04943).
-
-**A zoom ladder is being built by the session that wrote this file.** It teaches the word-map spatial head and lands in `2-classifier-guidance/artifacts/scenes/word-map-checker/`, local only, with nothing published. The replacement session does not start another one. That folder is outside `s7`'s commit list until the owner says where it belongs.
-
-## The next action on U1
-
-1. Fetch the papers into an empty folder: `artifacts/notes/progress/abstract-checkers/01-reading/tools/fetch_papers.sh "$CLAUDE_JOB_DIR/tmp/papers"`.
-2. Look up the missing arXiv IDs with at least 10 seconds between requests, because arXiv rate-limited the first attempt at 3.5 seconds.
-3. Read the closer papers under `tools/reader-brief.md`, adding each to `tools/papers.tsv` and to the groups in `tools/build_table.py`.
-4. Run `python3 -I artifacts/notes/progress/abstract-checkers/01-reading/tools/check_quotes.py artifacts/notes/progress/abstract-checkers/01-reading/rows "$CLAUDE_JOB_DIR/tmp/papers"` and expect 0 not found.
-5. Run `python3 -I artifacts/notes/progress/abstract-checkers/01-reading/tools/build_table.py`, check U1's proof, and set U1 to `done`.
+Write `artifacts/notes/progress/abstract-checkers/02-score-view.md`. It derives the added gradients, when classifier logs may be added, what a classifier on attention maps differentiates through, and one worked example with small numbers. Read the files listed in the session 7 prompt under "What to read" first. To re-check quotes, fetch the PDFs with `tools/fetch_papers.sh "$CLAUDE_JOB_DIR/tmp/papers"`.
 
 ## What the owner has decided for U2 and U3
 
@@ -62,3 +43,8 @@ U3 specifies this experiment, with these parts:
 - InfSplign's hand-written centroid loss lifts SDXL VISOR uncond (percent of images with the correct relation) from 45.10 to 76.91 ([p. 18](https://arxiv.org/pdf/2512.17851#page=18)), so our 0 of 8 attention push does not show that attention losses cannot move SDXL.
 - Attend-and-Excite raises the weakest word's peak, and our correlation push has no such term ([p. 4](https://arxiv.org/pdf/2301.13826#page=4)). The dog token's peak on our 8 failed seeds is an untested explanation (inferred).
 - Correcting Diffusion's best-of-15 selection with no resampling also reaches 0.744 object occurrence ([p. 6](https://arxiv.org/pdf/2312.06038#page=6)), so every comparison carries a best-of-K baseline (inferred).
+- GLIDE's CLIP guidance raised a CLIP score computed by a different CLIP network (ViT-B/16 against the guiding noised ViT-L), while people preferred classifier-free guidance on caption match, 110.9 against 29.3 Elo ([pp. 8, 9, 13](https://arxiv.org/pdf/2112.10741#page=8)). A scorer from the same family as a checker is therefore weak evidence (inferred).
+- Discriminator Guidance's correction is exact only at the optimal discriminator and for a true model score, and its Theorem 2 "does not guarantee that the gain is strictly positive" ([p. 4](https://arxiv.org/pdf/2211.17091#page=4)). The product of experts has no true model score, so U2 cannot borrow this guarantee (inferred).
+- FSC-147 holds no image below 7 objects ([CounTX p. 19](https://arxiv.org/pdf/2306.01851#page=19)), so its held-out counting results say nothing direct about a count of two.
+- Counters given no text beat the text-guided ones on FSC-147: CounTR 14.71 against CLIP-Count 17.78 objects per image ([p. 6](https://arxiv.org/pdf/2305.07304#page=6)). VLCounter moves only from 17.05 to 17.19 when text is removed from its prompts ([p. 5](https://arxiv.org/pdf/2312.16580#page=5)). The count checker needs right-word, wrong-word and no-word tests (inferred).
+- Spatial-Temporal Attention loses spatial precision from 66.7% to 51.7% when its assigned regions are removed ([p. 8](https://arxiv.org/pdf/2304.03869#page=8)), so assigning each subject a region is worth testing as a baseline (inferred).

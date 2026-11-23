@@ -2,13 +2,13 @@
 flowchart LR
     MAPS["Word attention maps<br/>one map per subject word<br/>SDXL, noisy latent"]
 
-    subgraph HEADS["The 5 proposed checkers, and what the 18 papers show for each"]
+    subgraph HEADS["The 5 proposed checkers, and what the 25 papers show for each"]
         direction TB
         SPATIAL["1. Spatial relation: is A left of B?<br/>EXISTS: Learn-to-Steer trained it on word maps<br/>GenEval position 0.60 of 1 on 16 unseen categories<br/>FLUX.1-dev, never run on SDXL"]
         COUNT["2. Counting: one blob per noun?<br/>GAP: no trained head on word maps<br/>Make It Count needed self-attention at t = 500"]
         BIND["3. Binding: red on book, not on vase?<br/>GAP: no trained head<br/>SynGen's loss is hand-written, no held-out test"]
         POS["4. Position and size: where, how big?<br/>GAP: no trained head<br/>Self-Guidance's formulas are hand-written, no score printed"]
-        MATCH["5. Prompt match: does it fit the caption?<br/>GAP: trained, but on U-Net features<br/>Discriminative Probing holds out no concepts"]
+        MATCH["5. Prompt match: does it fit the caption?<br/>GAP: trained, but on U-Net features or noisy pixels<br/>Discriminative Probing and GLIDE hold out no concepts"]
     end
 
     SUM["Sum of 5 gradients, capped<br/>valid only if the labels are<br/>independent given x_t (inferred)"]

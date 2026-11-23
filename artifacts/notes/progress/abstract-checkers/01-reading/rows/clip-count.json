@@ -1,0 +1,51 @@
+{
+  "slug": "clip-count",
+  "arxiv": "2305.07304",
+  "title": "CLIP-Count: Towards Text-Guided Zero-Shot Object Counting",
+  "property": "object count (text-specified zero-shot counting on real images)",
+  "why_added": "trained text-guided counter tested on held-out FSC-147 classes; named by T2ICount, p. 9",
+  "pages_read": 12,
+  "reads": "Clean RGB photos at 224x224 through frozen CLIP ViT-B/16 with 20 visual prompts per layer; the class-name text embedding enters through cross-attention on 14x14 patch features; never reads noisy diffusion inputs",
+  "reads_page": 5,
+  "trained_on": "FSC-147 training classes with class-name prompts and dot-derived density maps; 30 epochs contrastive loss, then 200 epochs MSE; per-split class counts are not printed",
+  "trained_page": 5,
+  "gradient_enters": "no gradient enters a sampler",
+  "gradient_page": 3,
+  "unseen": "yes for FSC-147 validation and test classes, stated not to overlap training (test MAE 17.78); no result by count, nothing near a count of two, and no test with text naming a different class",
+  "unseen_page": 3,
+  "headline": "FSC-147 held-out test classes: MAE 17.78 objects per image against 22.09 for Xu et al.; no-text counters are lower (CounTR 14.71, LOCA 16.22, RCC 17.12); CLIP ViT-B/16, lower is better",
+  "headline_page": 6,
+  "copy_or_avoid": "Copy the class-disjoint split; add right-word, wrong-word and no-word tests because no-text counters beat it, and do not use it as evidence for telling one subject from two (inferred)",
+  "tests_learned_checker_on_unseen": true,
+  "model": "CLIP ViT-B/16 (no diffusion model)",
+  "extra_papers": [
+    {"title": "Teaching CLIP to Count to Ten", "arxiv": "2302.12066", "page": 9, "why": "CLIP-based counting aimed at small counts; named as a recent CLIP counting model on p. 3"},
+    {"title": "Zero-shot Object Counting (Xu et al.)", "arxiv": "2303.02001", "page": 9, "why": "Class-name counter tested on FSC-147 held-out classes"},
+    {"title": "Learning to Count Anything: Reference-less Class-agnostic Counting with Weak Supervision (RCC)", "arxiv": "2205.10203", "page": 9, "why": "No-text counter with lower FSC-147 test MAE than CLIP-Count in Table 1"},
+    {"title": "CounTR: Transformer-based Generalised Visual Counting", "arxiv": "2208.13721", "page": 9, "why": "Strongest no-text counter in Table 1 (test MAE 14.71)"}
+  ],
+  "disagreements": [
+    {"claim": "CLIP-Count demonstrates state-of-the-art accuracy on FSC-147", "source": "CLIP-Count abstract, p. 1", "paper_says": "Its Table 1 prints lower test MAE for three counters given no text and no exemplars: CounTR 14.71, LOCA 16.22, RCC 17.12, against 17.78", "page": 6},
+    {"claim": "CLIP-Count has CARPK MAE 11.70, RMSE 13.94 and FSC-147 validation MAE 18.76", "source": "VLCounter Tables 7 and 8, pp. 11 and 12", "paper_says": "CLIP-Count prints CARPK MAE 11.96, RMSE 16.61 and validation MAE 18.79", "page": 6},
+    {"claim": "CounTR with no exemplars has test MAE 14.12 and RCC has test MAE 21.64", "source": "CounTX Table 1, p. 7", "paper_says": "CLIP-Count prints the same two baselines at test MAE 14.71 and 17.12", "page": 6}
+  ],
+  "quotes": [
+    {"page": 3, "text": "We freeze both encoders in pretrained CLIP and append a small amount of learnable prompts", "supports": "reads: frozen CLIP with learned prompts", "read_from_image": false},
+    {"page": 5, "text": "We use OpenAI pre-trained CLIP with ViTB/16 backbone", "supports": "reads: encoder", "read_from_image": false},
+    {"page": 5, "text": "we use the deep version of VPT, with 20 visual prompts in each layer", "supports": "reads: 20 visual prompts per layer", "read_from_image": false},
+    {"page": 5, "text": "we downsample the training images to 224×224", "supports": "reads: image size", "read_from_image": false},
+    {"page": 5, "text": "the MHCA propagates semantic information embedded in text to visual features", "supports": "reads: how text enters", "read_from_image": false},
+    {"page": 3, "text": "where 𝑝 = 14 denotes the number of image patches per column and row", "supports": "reads: 14x14 patch map", "read_from_image": false},
+    {"page": 5, "text": "The model is trained on the training set of FSC-147.", "supports": "trained_on: data", "read_from_image": false},
+    {"page": 5, "text": "we use the class name as the text prompt", "supports": "trained_on: class-name prompts", "read_from_image": false},
+    {"page": 5, "text": "pre-train the model with contrastive loss only for 30 epochs before further train it with mean square error (MSE) loss for 200 epochs", "supports": "trained_on: stages and length", "read_from_image": false},
+    {"page": 3, "text": "our objective is to estimate a density map", "supports": "gradient_enters: output is a density map for counting, with no sampler", "read_from_image": false},
+    {"page": 3, "text": "the testing and validation sets do not overlap with the training set", "supports": "unseen: class-disjoint split", "read_from_image": false},
+    {"page": 5, "text": "It consists of 6,135 images across 147 object classes, with non-overlapping object classes in each set.", "supports": "unseen: dataset and split", "read_from_image": false},
+    {"page": 6, "text": "Ours MM2023 0 18.79 61.18 17.78 106.62", "supports": "headline: test MAE 17.78", "read_from_image": false},
+    {"page": 6, "text": "Xu et al. [41] CVPR2023 0 26.93 88.63 22.09 115.17", "supports": "headline: Xu et al. test MAE 22.09", "read_from_image": false},
+    {"page": 6, "text": "CounTR [19] BMVC2022 0 18.07 71.84 14.71 106.87", "supports": "headline: CounTR no-text test MAE 14.71", "read_from_image": false},
+    {"page": 6, "text": "LOCA [3] arXiv2022 0 17.43 54.96 16.22 103.96", "supports": "headline: LOCA no-text test MAE 16.22", "read_from_image": false},
+    {"page": 6, "text": "RCC [6] arXiv2022 0 17.49 58.81 17.12 104.53", "supports": "headline: RCC no-text test MAE 17.12", "read_from_image": false}
+  ]
+}
