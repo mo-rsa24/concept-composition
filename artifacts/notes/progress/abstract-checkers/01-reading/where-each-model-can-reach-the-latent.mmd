@@ -1,0 +1,43 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    XT["Noisy latent x_t<br/>steps 0 to 15"]
+
+    subgraph INSIDE["Inside SDXL: the gradient reaches x_t directly, early readability still to measure"]
+        direction TB
+        MAPS["Word maps<br/>WHERE each word landed"]
+        FEATS["U-Net features<br/>WHAT is forming"]
+        GEO["Small heads:<br/>count, order, position, size"]
+        ASK["One yes-or-no head with a question:<br/>right subjects? colour on the right noun?"]
+        MAPS --> GEO
+        FEATS --> ASK
+    end
+
+    subgraph OUTSIDE["Outside SDXL: needs a clean picture"]
+        direction TB
+        DEC["Decoded guess of the picture<br/>blurred on early steps"]
+        VLM["VLM or VQA model"]
+        DEC --> VLM
+    end
+
+    LLM["LLM reads the prompt<br/>writes the target: 2 objects, A left of B<br/>a symbol has no gradient"]
+    DONE["Finished training pictures"]
+    PUSH["Gradient added to the product"]
+
+    XT --> MAPS
+    XT --> FEATS
+    XT -.->|"measured: changes texture, not layout"| DEC
+    GEO --> PUSH
+    ASK --> PUSH
+    LLM -->|"the question and target"| GEO
+    LLM -->|"the question and target"| ASK
+    DONE --> VLM
+    VLM ==>|"labels for training, no gradient"| ASK
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef good fill:#e3f4e1,stroke:#2e7d32,stroke-width:3px,color:#111111
+    classDef weak fill:#fde8e8,stroke:#b3261e,stroke-width:2px,color:#111111
+    class XT,MAPS,FEATS,VLM,LLM,DONE,PUSH plain
+    class GEO,ASK good
+    class DEC weak
+    style INSIDE fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+    style OUTSIDE fill:#fafafa,stroke:#888888,stroke-width:2px

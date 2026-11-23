@@ -1,0 +1,22 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    subgraph NOW["Now: one small checker per question"]
+        direction LR
+        X1["Noisy picture"] --> Q["Two subjects?<br/>Right order?<br/>Right colours?"]
+        Q --> G1["One push per question"]
+    end
+
+    subgraph NEXT["Proposed: one critic asks what the word AND adds"]
+        direction LR
+        X2["Noisy picture"] --> F["One critic scores it against 4 texts:<br/>a cat and a dog, a cat, a dog, empty"]
+        F --> I["and-score =<br/>joint - cat - dog + empty"]
+        I --> R["cat beside dog: +0.467<br/>fused hybrid: -0.114<br/>one cat: -0.112"]
+        R --> G2["One push: raise the and-score"]
+    end
+
+    NOW ~~~ NEXT
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    class X1,Q,G1,X2,F,I,R,G2 plain
+    style NOW fill:#fafafa,stroke:#888888,stroke-width:2px
+    style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px

@@ -1,0 +1,23 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    X["Half-drawn picture x_t"]
+    N["NoisyCLIP<br/>reads noisy pictures"]
+    R["Right sentence:<br/>a red cat and a blue dog"]
+    W["Wrong sentence:<br/>a blue cat and a red dog"]
+    S["Third score =<br/>match to right - match to wrong"]
+    G["Gradient: which way to nudge<br/>the picture to raise that score"]
+    P["cat expert + dog expert - empty<br/>+ the nudge"]
+
+    X --> N
+    R --> N
+    W --> N
+    N --> S
+    S --> G
+    G --> P
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef good fill:#e3f4e1,stroke:#2e7d32,stroke-width:3px,color:#111111
+    classDef bad fill:#fde8e8,stroke:#b3261e,stroke-width:2px,color:#111111
+    class X,N,G,P plain
+    class R,S good
+    class W bad
