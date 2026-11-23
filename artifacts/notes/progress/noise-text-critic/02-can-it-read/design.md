@@ -36,7 +36,7 @@ This step measures whether pretrained NoisyCLIP can tell a right sentence from a
 
 **Varied axis.** The weights of the image encoder: NoisyCLIP (`asiimo/noisyclip`) or frozen CLIP ViT-L/14 (`openai/clip-vit-large-patch14`). Pictures, noise, sentences, input path and thresholding rule are identical.
 
-**Cost:** about 1 GPU-hour on one `bigbatch` card, for the word maps, the recoloured copies and about 110,000 image encoder passes per model. **Buys:** step W2, and the list of steps W3 may push on.
+**Cost:** about 1 GPU-hour on one `bigbatch` card, for the word maps, the recoloured copies and about 40,000 image encoder passes per model. **Buys:** step W2, and the list of steps W3 may push on.
 
 **Environment facts this depends on.** The `co3` python path, the `bigbatch` exclude list, `/datasets` for outputs, and the 200 of 220 latents that live under `/home-mscluster/mmolefe/poe_repair_min_scratch/outputs/` while the other 20 live under `/datasets/mmolefe/poe_repair_min/outputs/`. The code resolves each tile against both roots.
 
@@ -69,9 +69,9 @@ All pictures come from the 220 labelled cat and dog pictures in `2-classifier-gu
 
 **Box rule.** Each word's box is the tight box around the positions above half of that map's maximum. One subject is large when its box area is at least 1.25 times the other's. A picture below that ratio has no clear size difference and leaves the position and size property, and the number left out is reported.
 
-**Mirror images.** Each of the 64 pictures is flipped left to right in pixels and re-encoded with SDXL's VAE. The flip swaps the side label and keeps the sizes, so the relation classes are balanced exactly. A mirror image stays in the same half as its source.
+**Mirror images.** Each of the 64 pictures is decoded with SDXL's VAE, flipped left to right in pixels and re-encoded. The unflipped copy goes through the same decode and encode, so both classes have passed through the VAE once and neither can be told apart by that. The flip swaps the side label and keeps the sizes, so the relation classes are balanced exactly. A mirror image stays in the same half as its source.
 
-**Colour rule.** Each subject's region is the word map above half its maximum, resized to 1,024 pixels with a Gaussian edge of 16 pixels. Inside it, hue is set to red (0 degrees) or blue (220 degrees), saturation is raised to at least 0.75, and brightness is kept. The two copies are re-encoded with SDXL's VAE.
+**Colour rule.** Each subject's region is the word map above half its maximum, resized to 1,024 pixels with a Gaussian edge of 16 pixels. Inside it, hue is set to red (0 degrees) or blue (220 degrees), saturation is raised to at least 0.75, and brightness is raised to at least 0.40 so a black animal still shows its colour. The two copies are re-encoded with SDXL's VAE.
 
 **Label checks, by eye at full size, before any score is computed.** The 64 relation and box labels are drawn on their pictures and checked, and 32 of the recoloured copies are checked. If fewer than 90% of either set are right, this step stops and files an `ask`.
 
