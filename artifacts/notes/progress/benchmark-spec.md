@@ -50,8 +50,8 @@ plain SDXL prints 0.80, so the target is 0.79 and a win must also beat plain SDX
 claims AND, both things in one image, so the 4.11 FID sets no target.
 
 **Paper 1's CLEVR target is the most objects that succeed for models trained on one object.** A count K succeeds when K objects
-appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local patch model reaches 5 and separately
-composed models reach 4, so the target is 6. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
+appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local patch model reaches 5 and one location
+model composed at each position reaches 4, so the target is 6. Both are a single network asked at each position. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
 model on all 30,000 multi-object CLEVR images. The [reasons for the four judged targets](targets/proposed-target-changes.md)
 give the number behind each.
 

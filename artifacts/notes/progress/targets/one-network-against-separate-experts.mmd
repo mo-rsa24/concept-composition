@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    subgraph NOW["Now: Bradley's setup, 2 trained models for any number of objects"]
+        direction LR
+        A["One location model<br/>saw one object, anywhere"] --> A2["Same network asked<br/>at position 1, 2 ... 5"]
+        B["Empty-background<br/>model"] --> A2
+        A2 --> A3["Most objects that<br/>succeed: 4"]
+    end
+    subgraph NEXT["Proposed: 10 experts trained apart, once"]
+        direction LR
+        E1["Expert 1<br/>only sees position 1"] --> C["Pick any 5 of the 10<br/>for 5 objects, any 6 for 6<br/>no retraining"]
+        E2["Expert 2<br/>only sees position 2"] --> C
+        E3["... up to Expert 10<br/>only sees position 10"] --> C
+        F["Same empty-background<br/>model"] --> C
+        C --> D["Test 1 to 10 objects<br/>none of our 25 rivals<br/>prints this"]
+    end
+    NOW -. "same data, positions and seeds:<br/>only the training differs" .-> NEXT
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    class A,A2,A3,B,E1,E2,E3,F,C,D plain
+    style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px

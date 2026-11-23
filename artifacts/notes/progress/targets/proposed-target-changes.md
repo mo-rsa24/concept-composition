@@ -14,8 +14,9 @@ page gives the number each one rests on, the reason, and the scope behind them.
 
 **CLEVR.** Paper 1's models each see one concept, so the target is the most objects that succeed for models trained on single
 objects. A count K succeeds when K objects appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local
-patch model reaches 5 on 1,024 images (Local Mechanisms, Table 1, p3), and separately composed models with an empty background reach
-4 (Projective Composition, Table 2, p39). Projective Composition's hand count of 98 of 100 at 5 objects stays as context, because
+patch model reaches 5 on 1,024 images (Local Mechanisms, Table 1, p3), and one location model composed at each
+position with an empty background reaches 4 (Projective Composition, Table 2, p39). Both are a single network asked at each position, so
+neither tests experts trained apart. Projective Composition's hand count of 98 of 100 at 5 objects stays as context, because
 its Figure 3 marks 5 objects as only partly successful. Domain Expansion's 44.5 at 5 positions is a different benchmark, because it
 trains one base model on all 30,000 multi-object images (its p11).
 
