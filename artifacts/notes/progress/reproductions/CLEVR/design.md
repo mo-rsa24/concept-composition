@@ -20,7 +20,7 @@ threads have work at that tile size. The generator's help text says tile size do
 | `Bradley-Projective-T2-003` | Explicit composition with an empty background | 4 | Projective Composition Table 2, p39 | printed context; its rule runs on our models |
 
 Printed numbers stay context, because Bradley trains on 134,217,728 images per model and our full length is 8 million. No rerun here is labelled
-`reproduced` below Bradley's training length. A win needs at least 7 objects at equal training length, more than the one-network control, and for Paper 1
+`reproduced` below Bradley's training length. A win needs at least 7 objects on both the automatic scorer and a hand count of 100 images (board question 42), at equal training length, more than the one-network control, and for Paper 1
 more than sample-and-paste.
 
 ## The methods
@@ -39,8 +39,8 @@ join after step D3 has chosen one.
 | Sample and paste | the same experts | sample each expert alone once per seed and paste its object onto one background |
 | Local patch model | one patch network | rebuilt from Local Mechanisms p29, after a costed question |
 
-The local patch model has no released code: the paper links none, and a GitHub search by title and by arXiv id returned nothing. Its rebuild waits for board
-question 49.
+The local patch model has no released code: the paper links none, and a GitHub search by title and by arXiv id returned nothing. By the owner's answer to board
+question 49 it is not rebuilt, and its 5 stays a printed number.
 
 ## The protocol
 
@@ -72,6 +72,8 @@ question 49.
 
 ## The ladder of runs
 
+Loop 6 runs a small version of this ladder before the go or no-go (step M6, board question 48): 2 and 3 experts at 64 pixels, 5,000 images per model, on tuning positions.
+
 1. **Install and time.** ~~Install Blender 2.78c and render one batch of 8 single-object images and 8 empty scenes on one node, recording seconds per image.~~
    Done: 5.46 seconds per single-object image with 32-pixel tiles.
 2. **Set the data size.** Write the images per model and the rendering cost here, from the timing.
@@ -84,6 +86,5 @@ question 49.
 
 ## What is still open
 
-- How many images each expert sees, which the timing sets.
+- How many images each expert sees in the full ladder. That count and its CPU node-hours go to the owner through `ask` before the full render.
 - The picture-quality measure and its threshold, which must be committed before any composed image is scored.
-- Whether to rebuild the local patch model, which is board question 49.

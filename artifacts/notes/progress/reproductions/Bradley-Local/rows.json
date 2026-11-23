@@ -4,6 +4,6 @@
     "verdict": "blocked",
     "commit": "1b5c012a-f2bdb6d",
     "run_id": "question 49",
-    "note": "Kmax 5 for the local patch model trained on one object (Local Mechanisms Table 1, p3); no code or weights found in the paper or by a GitHub search on title and arXiv id; 5 stays a printed number unless the owner asks for a rebuild in board question 49"
+    "note": "Kmax 5 for the local patch model trained on one object (Local Mechanisms Table 1, p3); no code or weights found in the paper or by a GitHub search on title and arXiv id; by the owner's answer to board question 49 it is not rebuilt and 5 stays a printed number"
   }
 ]
