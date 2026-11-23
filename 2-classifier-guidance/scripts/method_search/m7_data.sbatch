@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M7: CPU work on the renders. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose>
+#   sbatch --export=ALL,SNAP=<snapshot> m7_data.sbatch <control|diagnose|scorer>
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -23,6 +23,10 @@ echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) snap=
 case "$STAGE" in
   control)  "$PY" "$S" control --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
   diagnose) "$PY" "$S" diagnose --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/controls"; rc=$? ;;
+  scorer)
+    export WANDB__SERVICE_WAIT=300
+    "$PY" "$(dirname "$S")/clevr_scorer.py" overfit --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/scorer"; rc=$?
+    [ "$rc" -eq 0 ] && { "$PY" "$(dirname "$S")/clevr_scorer.py" train --renders "$ROOT/m7/full/renders" --out "$ROOT/m7/full/scorer"; rc=$?; } ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=$rc"
