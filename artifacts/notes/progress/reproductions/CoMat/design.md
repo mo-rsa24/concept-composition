@@ -24,7 +24,7 @@ RTX 3090.
 | Check | What was found |
 |---|---|
 | Who published it | the account's full name is Dongzhi Jiang, CoMat's first author |
-| LoRA rank | 128 on all 752 `down` matrices, the rank in `scripts/sdxl.sh` and in the paper's Table 8 |
+| LoRA rank | 128 on all 560 `down` matrices, the rank in `scripts/sdxl.sh` and in the paper's Table 8 |
 | Was it trained | sampled `up` matrices have no zero entries and a root mean square of about 0.0008; a LoRA's `up` matrix starts at zero |
 | The fine-tuned U-Net | the folder name matches the 100-step fine-tune on 512-pixel images that the paper and README describe |
 | What is missing | the repository has no model card, CoMat's GitHub README does not link it, and its "release the checkpoints" box is unticked |
@@ -42,6 +42,13 @@ same model differ, so they go in each row's note.
 | Color | 0.7827 (`CoMat-T1-055`, the target) | 0.7774 |
 | Shape | 0.5329 (`CoMat-T1-056`) | 0.5262 (`ToMe-T1-051`) |
 | Texture | 0.6468 (`CoMat-T1-057`) | 0.6591 (`ToMe-T1-050`) |
+
+## Loading the weights
+
+The files are at commit `c7a18451` of the Hugging Face repository, in `/datasets/mmolefe/poe_repair_min/loop-5/third_party/`, and both large
+files match their published SHA-256. The LoRA keys carry a doubled `unet.unet.` prefix, which a standard loader can skip without an error. The
+hub's `comat_generate.py` therefore merges all 560 up and down pairs into their layers itself and refuses to run unless all of them land. CoMat's
+validation pipeline is the standard SDXL loop with the watermark off, so the stock pipeline runs with the watermark off.
 
 ## What the release leaves open
 
@@ -71,5 +78,10 @@ Each rung saves its config, metrics, image sheet and commit under `/datasets/mmo
 2. **Overfit.** Does not apply, because nothing trains.
 3. **1% of the data.** Three prompts from each subset, with the sheet opened at full size beside SDXL.
 4. **Controls.** With the LoRA's scale at 0, the loaded pipeline must match the same pipeline without the LoRA to under 1e-5
-   (largest absolute latent difference), in one process on one card.
+   (largest absolute latent difference), in one process on one card. At scale 1 the latent must differ by more than 1e-3, and the merged weights
+   must match the LoRA's own forward rule on every layer to under 1e-4.
 5. **Full protocol.** All allowed prompts at 10 images each.
+
+## Cross-references
+
+- The mention of **CoMat**, a paper of reading sitting 4, in [the route to two papers, under The steps](../../../../../plans/route-two-papers.md#the-steps).
