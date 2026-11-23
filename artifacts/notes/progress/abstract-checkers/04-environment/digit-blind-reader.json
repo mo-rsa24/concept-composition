@@ -1,0 +1,56 @@
+{
+ "train": {
+  "canvases": 20000,
+  "balanced_accuracy": 0.8704,
+  "count_by_kind": {
+   "apart": 10000,
+   "overlaid": 2500,
+   "same_half": 2500,
+   "single": 2500,
+   "wrong": 2500
+  },
+  "correct_by_kind": {
+   "apart": 1.0,
+   "overlaid": 0.9924,
+   "same_half": 0.9844,
+   "single": 0.9868,
+   "wrong": 0.0
+  }
+ },
+ "seen_test": {
+  "canvases": 2000,
+  "balanced_accuracy": 0.871,
+  "count_by_kind": {
+   "apart": 1000,
+   "overlaid": 250,
+   "same_half": 250,
+   "single": 250,
+   "wrong": 250
+  },
+  "correct_by_kind": {
+   "apart": 1.0,
+   "overlaid": 0.996,
+   "same_half": 0.98,
+   "single": 0.992,
+   "wrong": 0.0
+  }
+ },
+ "unseen_test": {
+  "canvases": 2000,
+  "balanced_accuracy": 0.873,
+  "count_by_kind": {
+   "apart": 1000,
+   "overlaid": 250,
+   "same_half": 250,
+   "single": 250,
+   "wrong": 250
+  },
+  "correct_by_kind": {
+   "apart": 1.0,
+   "overlaid": 0.996,
+   "same_half": 0.996,
+   "single": 0.992,
+   "wrong": 0.0
+  }
+ }
+}

@@ -36,6 +36,22 @@ The command, run from the repository root on the laptop:
   --mnist /home/molef/PhD/replications/original-superdiff/data/MNIST/raw --out <output folder> --twice --sheet <png>
 ```
 
+## What a reader that cannot tell digits apart scores
+
+<a href="digit-blind-reader.png"><img src="digit-blind-reader.png" width="600" alt="Five rows of unseen-digit canvases, one per kind, each beside its label, count and the share a layout-only rule labels correctly: 100.0, 99.6, 99.6 and 99.2 percent, and 0.0 percent on the wrong-digit row"></a>
+
+The rule predicts label 1 when two groups of inked columns have an empty column between them. It never looks at the asked pair or
+at which digits are present. On the 2,000 clean unseen canvases its balanced accuracy, the mean of the share of label-1 canvases
+and the share of label-0 canvases it gets right, is 0.873 on a 0-to-1 scale. It scores 0.871 on the seen test split, so its gap
+between seen and unseen digits is 0.002.
+
+Step V2's pass mark is at least 0.75 and within 0.05 of the seen pairs, so this layout rule would clear it on clean canvases. V2
+measures noisy canvases at sampler steps 0 to 15, where this rule has not been measured. Board question 55 asks the owner whether
+V2 should also have to separate `apart` from `wrong`, the one comparison where layout gives no help and this rule scores 0.5.
+
+The numbers are in `digit-blind-reader.json`, and `2-classifier-guidance/scripts/abstract_checkers/blind_reader.py` computes them
+and draws the figure. Its example canvases are the first three of each kind in the build's fixed shuffle.
+
 ## What is blocking the step
 
 From 14:49 on 2026-11-23 the laptop cannot log in to the cluster. Port 22 on the gateway `146.141.21.100` accepts a connection and
