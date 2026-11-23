@@ -1,0 +1,28 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef now fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef settled fill:#fff3cd,stroke:#b58900,stroke-width:2px,color:#111111
+
+  M1["NOW, M1: does the push beat CO3 alone?<br/>blind count of 288 pictures"]
+  M5["M5: balance the checker's data<br/>cap cat and dog, even across pairs"]
+  D3["D3: what should the checker read?<br/>includes the animals-to-objects test"]
+  M2["M2: pair-aware or one label per subject?"]
+  D5["D5: push on the 2 saved inclusive LoRAs<br/>appendix paragraph only"]
+  M3["M3: tune strength, steps, cap, data size"]
+  M6["M6: small CLEVR test<br/>scores paste first"]
+  M4["M4: freeze one recipe per paper"]
+
+  Q50["Your answer: two-subject prompts are<br/>the headline, full set reported beside"]
+  Q54["Your answer: if paste reaches 7 objects,<br/>stop and design a test paste fails"]
+  Q52["Your answer: Paper 1 stays<br/>until the go or no-go"]
+
+  M1 --> M5 --> D3 --> M2 --> M3 --> M6 --> M4
+  M2 --> D5
+  Q50 -.-> M2
+  Q54 -.-> M6
+  Q52 -.-> M4
+
+  class M5,D3,M2,D5,M3,M6,M4 plain
+  class M1 now
+  class Q50,Q54,Q52 settled
