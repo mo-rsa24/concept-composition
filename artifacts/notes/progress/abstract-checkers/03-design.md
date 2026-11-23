@@ -13,7 +13,7 @@ Can small checkers that read only where each word landed teach SDXL to draw two 
 - [Step V2: does a checker learn plurality on unseen digits](#step-v2-does-a-checker-learn-plurality-on-unseen-digits)
 - [Step V3: does its gradient compose unseen digits](#step-v3-does-its-gradient-compose-unseen-digits)
 - [Step V4: does it work on SDXL's unseen objects](#step-v4-does-it-work-on-sdxls-unseen-objects)
-- [Proposed step V5: remove one checker at a time](#proposed-step-v5-remove-one-checker-at-a-time)
+- [Step V5: remove one checker at a time](#step-v5-remove-one-checker-at-a-time)
 - [What this design cannot say](#what-this-design-cannot-say)
 
 ## The design on one page
@@ -51,9 +51,9 @@ Each step starts only when the one before it passes. A miss stops the chain and 
 | V2 | Does a checker on maps learn plurality on unseen digits? | what the checker reads: maps or the raw noisy canvas | on unseen pairs over steps 0 to 15: balanced accuracy at least 0.75, within 0.05 of seen pairs, and at least 0.75 on `apart` against `wrong` | 1 GPU-hour |
 | V3 | Does its gradient compose unseen digits? | the push: none, checker or same-size random | beats the plain product by more than 1.96 standard errors, and the random push does not | 1 GPU-hour |
 | V4 | Does it work on SDXL's six unseen object pairs? | the push: none, checker or same-size random | beats plain PoE by at least 3 of 48 faithful pairs and more than 1.96 standard errors | 6 GPU-hours |
-| V5, proposed | Does each checker control only its own property? | which checker is removed | [the removal bars](#the-bars-for-the-removal-test) | needs the owner's yes |
+| V5 | On digits, does each of three checkers control only its own property? | which checker is removed | [the digit rehearsal's bars](#the-digit-rehearsal) | 2 GPU-hours |
 
-V2 to V4 total about 8 GPU-hours of Loop 8's 30, on top of about 0.2 for V1. These are budgets, and each smoke run replaces them with measured times.
+V2 to V5 total about 10 GPU-hours of Loop 8's 30, on top of about 0.2 for V1. V5 runs after V3, and the SDXL version of the removal test is decided once V4 has passed (board question 56). These are budgets, and each smoke run replaces them with measured times.
 
 ## What every checker shares
 
@@ -201,9 +201,9 @@ The chosen configuration retrains on digits 0 to 4 and reads `unseen_test` **onc
 
 **What would surprise.** A push that separates the two maps at every step and still draws no more faithful pairs. That would mean separated maps do not cause two subjects on SDXL.
 
-## Proposed step V5: remove one checker at a time
+## Step V5: remove one checker at a time
 
-This is the owner's main experiment, and it is **not yet on the board**, because it needs a decision on cost ([what this design cannot say](#what-this-design-cannot-say)). The question is whether composition is controllable: does removing one checker damage only its own property?
+This is the owner's main experiment. The question is whether composition is controllable: does removing one checker damage only its own property? The digit rehearsal below is step V5 on the board, and the five-checker SDXL version after it is decided once V4 has passed.
 
 <a href="01-reading/removal-test.png"><img src="01-reading/removal-test.png" width="900" alt="Switching off one of five checkers and scoring all five properties, with the prediction that each removal lowers only its own property. A second panel shows the shared cap handing a removed checker's share to the others, fixed by giving each checker its own length."></a>
 
@@ -211,9 +211,38 @@ This is the owner's main experiment, and it is **not yet on the board**, because
 
 **Varied axis.** Which checker is off.
 
-**Rehearsal on digits first.** Run the same table on canvases for count, spatial relation, position and prompt match, about 2 GPU-hours. The digit toy has no colours, so binding is tested on SDXL only.
+### The digit rehearsal
 
-### The rows
+**What the canvas can express.** Three of the five properties exist on a 32 by 64 digit canvas. Every digit is 28 pixels, so two separate digits leave 8 pixels of free width and 4 of height, and position and size have no room to vary. The digits are grey and carry no attribute, so binding does not exist here.
+
+| Property | Checker's training label | How a finished canvas is scored by `judge.py` |
+|---|---|---|
+| Count | all canvases: `apart` and `wrong` are 1, and `single`, `overlaid` and `same_half` are 0 | share of canvases with two separate digits, neither fused |
+| Right digits | canvases with two separate digits: `apart` is 1 and `wrong` is 0 | of the canvases that pass count, the share holding both asked digits |
+| Order | `apart` canvases, each read with its true order (1) and the flipped order (0), through a 2-way order input | of the canvases holding both asked digits, the share in the asked order |
+
+The three scores multiply to the share of canvases that are fully right, the same chain the checkers train on. Each column is scored only on canvases that passed the column before it, because an unconditional order score would fall whenever count fell.
+
+**Model.** The model V3 passed on: `share-0.0` if Test 1 passed, and `share-0.01` if only Test 2 did. If V3 passed on neither, V5 does not run.
+
+**Push.** The three checkers' lengths come from the calibration under [how the push is computed](#how-the-push-is-computed), with $K = 3$, on the 10 seen pairs at seeds 0 to 31. Each canvas asks for one order, with the lower digit on the left for even seeds and on the right for odd seeds.
+
+**Rows.** Eleven rows on the 10 unseen pairs at seeds 1000 to 1031, 320 canvases per row: the plain product, all three checkers, each checker removed (3), each removed with a same-length random push in its place (3), and each checker alone (3).
+
+**Cost:** three small trainings and 3,520 canvases, about 2 GPU-hours. **Buys:** step V5, the first measured answer to whether one checker controls one property.
+
+| Result | What it takes |
+|---|---|
+| Support | All three checkers together beat the plain product on the full chain by more than 1.96 standard errors. Each removal lowers its own column by at least 6.25 percentage points and more than 1.96 standard errors, its random-push row falls by the same rule, and no other column moves by both more than 4.2 points and more than 1.96 standard errors |
+| Partial | At least one property meets that rule and at least one does not |
+| Null | No removal lowers its own column by that margin |
+| Inconclusive | Any zero-push check fails, a row is void by the 0.6 total-length rule, or a cell the verdict needs holds fewer than 40 canvases |
+
+The margins of 6.25 and 4.2 points are the SDXL table's 3 and 2 of 48. Standard errors come from 10,000 bootstrap resamples of the 10 pairs.
+
+**What this rehearsal cannot show.** It says nothing about binding, position or size. Its order property is left or right only, because a 32-pixel canvas has no room for one 28-pixel digit above another.
+
+### The rows on SDXL
 
 | Rows | Count | What it answers |
 |---|---:|---|
@@ -225,7 +254,7 @@ This is the owner's main experiment, and it is **not yet on the board**, because
 
 **Strength dial, after the table.** For each checker that passes, set its length to half and double while the others stay fixed, and read whether its property rises with the dial.
 
-### The table to fill
+### The SDXL table to fill
 
 Each cell is the count of pictures out of 48 with that property correct, scored blind by eye, and no checker's output is used to score.
 
@@ -270,4 +299,4 @@ No new diffusion model is trained, no API tokens are spent, and no benchmark pro
 
 **Maps carry little appearance.** A checker on maps alone may separate two blobs and still be unable to say they are the right two subjects. The `apart` against `wrong` bar and prompt match test exactly this.
 
-**The owner has one decision to make.** V5 on SDXL needs about 40 GPU-hours as budgeted: five trainings at 2.5 hours (12.5) and 816 pictures at an assumed 2 minutes each with up to five gradients per step (27.2). The strength dial adds up to 16 more. That exceeds Loop 8's limit of 30. The question is filed on the board. Nothing from V5 runs until the owner answers. The recommendation is the digit rehearsal after V3, and a decision on SDXL once V4 has passed.
+**The SDXL removal test is not approved yet.** It needs about 40 GPU-hours as budgeted: five trainings at 2.5 hours (12.5) and 816 pictures at an assumed 2 minutes each with up to five gradients per step (27.2). The strength dial adds up to 16 more. That exceeds Loop 8's limit of 30, so the owner decides it once V4 has passed.
