@@ -28,8 +28,12 @@ composition. That is why the paste control is required.
 [CLEVR generator](https://github.com/facebookresearch/clevr-dataset-gen). The second is 128 pixels, Bradley's image size. Blender is
 not on the cluster's path, so the first step is to install it and time one batch of renders.
 
-**A small test before the go or no-go.** Step M6 runs each paper's method with 2 and 3 experts at 64 pixels and 5,000 images per
-model, on positions outside Bradley's 12. It tunes the CLEVR recipe before step M4 freezes it, and it supports no claim. It scores sample-and-paste first, because [pasting alone is calculated to reach 7 objects](how-far-sample-and-paste-reaches.png) once each object is right 91% of the time. If paste reaches 7, object count cannot separate Paper 1 from paste, so M6 stops and brings the owner a test where pasting fails, such as objects close enough to overlap or shade each other.
+**A small test before the go or no-go.** Step M7 trains 2 and 3 experts at 64 pixels with 5,000 images per model, on positions
+outside Bradley's 12, and scores sample-and-paste before any tuning. Three experts cannot draw 7 objects, so M7 reads how often each
+expert's object is right and applies Bradley's rule. [Paste is predicted to reach 7 objects](how-far-sample-and-paste-reaches.png) when
+that rate is at least 90.6%, if objects succeed independently. At that rate object count cannot separate Paper 1 from paste, so M7
+stops and brings the owner a test where pasting fails, such as objects close enough to overlap or shade each other. Otherwise step M6
+runs each paper's method on the same models to tune the CLEVR recipe before step M4 freezes it. Neither step supports a claim.
 
 **Stage 1: the expert ladder.** Train the background, the one-network control and experts 1 and 2, then test 2 objects. Add one
 expert per rung and test one more object. Earlier experts are never retrained.
@@ -100,7 +104,7 @@ the full render starts.
 
 | Stage | Models | GPU-hours at a quarter of that length | GPU-hours at the full length |
 |---|---|---|---|
-| Small test before the go or no-go (step M6) | 5 | 9 to 12, plus about 37 CPU node-hours for rendering | not run |
+| Small test before the go or no-go (steps M7 and M6) | 5 | 9 to 12, plus about 37 CPU node-hours for rendering | not run |
 | Ladder, up to 2 experts | 4 | 7 to 9.4 | 28 to 38 |
 | Ladder, up to 6 experts | 8 | 14 to 19 | 56 to 75 |
 | Ladder, up to 10 experts | 12 | 21 to 28 | 84 to 113 |

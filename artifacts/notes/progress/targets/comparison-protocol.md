@@ -53,7 +53,7 @@ prompt count, such as "988 of 1,000 prompts". A win needs our score to beat the 
 `reproduced` field, because its sample count differs from the published one.
 
 **GenEval two objects is scored on its released 553 prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints
-0.78 and plain SDXL prints 0.80 (FKC Table A4, p39), so the printed bar is 0.79, reported beside plain SDXL's printed 0.80. FKC is not rerun, because one image costs 16 plain renders and its printed score is below plain SDXL's. A win must beat our plain SDXL rerun on the same prompts and seeds by the noise margin.
+0.78 and plain SDXL prints 0.80 (FKC Table A4, p39), so the printed bar is 0.79, reported beside plain SDXL's printed 0.80. FKC is not rerun, because one image costs 16 plain renders and its printed score is below plain SDXL's. A win must beat our plain SDXL rerun on the same prompts and seeds by the noise margin. GenEval reports two scores for plain SDXL and our method: the standard score, and a second score that requires the two class boxes to be separate objects, because the evaluator checks each class alone and one fused object can pass. The overlap limit is fixed from plain SDXL's pictures before our method is scored.
 
 **A win must clear the noise of the rerun.** Our score must beat the best finished rerun by more than 1.96 standard errors on matched
 pictures, meaning the same prompt and seed for both methods, with prompts resampled. Rectify Then Diffuse against plain SDXL gives
