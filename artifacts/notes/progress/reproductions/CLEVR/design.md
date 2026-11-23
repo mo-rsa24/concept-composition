@@ -79,7 +79,8 @@ own question.
 4. **Overfit.** The model fits 16 images, and the scorer fits a small set.
 5. **Stage 1 at a quarter of the 8 million image length.** The plan estimates 7 to 9.4 GPU-hours up to 2 experts and 21 to 28 up to 10. A run past 24 GPU-hours
    goes to the owner first.
-6. **Stage 2 and Stage 3**, each with its own table, after Stage 1.
+6. **Stage 2**, with its own table, after Stage 1. No inclusive-label table runs, because the owner rules out retraining a diffusion model on inclusive captions
+   (board question 44).
 
 ## What is still open
 
