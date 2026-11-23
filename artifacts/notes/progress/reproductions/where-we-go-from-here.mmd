@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef done fill:#d9f2d9,stroke:#222222,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe0b3,stroke:#222222,stroke-width:3px,color:#111111
+  classDef todo fill:#eeeeee,stroke:#666666,stroke-width:2px,color:#111111
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+
+  P["The problem<br/>ask for a cat and a dog,<br/>get one fused creature"]:::plain
+  A["Know the field<br/>rivals, benchmarks, targets"]:::done
+  B["YOU ARE HERE<br/>Set the bars to beat<br/>printed scores, checked<br/>against plain SDXL"]:::doing
+  C["Choose the checker<br/>the small network that<br/>pushes toward two objects<br/>3 designs, about 15 GPU-hours"]:::todo
+  D["You decide<br/>go or no-go<br/>for each paper"]:::todo
+
+  subgraph PAPERS["Run our methods, then submit"]
+    direction TB
+    E["Paper 1<br/>two models trained apart<br/>plus the checker"]:::todo
+    F["Paper 2<br/>one model<br/>plus the checker"]:::todo
+  end
+
+  P --> A --> B --> C --> D --> PAPERS
+  style PAPERS fill:#f7f7f7,stroke:#999999,stroke-width:2px
