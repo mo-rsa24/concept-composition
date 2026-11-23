@@ -1,8 +1,8 @@
 # Review: reproducing CoMat
 
 This file holds what the runs in [the CoMat design](design.md) produced. CoMat has no verdict yet. Its control, smoke test and 1% pictures pass. By the owner's answer to board
-question 43, CoMat runs on Color only, because its printed Color score is the best on that benchmark. Jobs 93312, 93313, 93315 and 93316 render the 288 allowed
-Color prompts at 10 seeds. CoMat's Shape and Texture numbers stay as printed context, and 35 unscored Shape pictures stay on the cluster.
+question 43, CoMat runs on Color only, because its printed Color score is the best on that benchmark. Jobs 93312, 93313, 93316 and 93407 render the 288 allowed
+Color prompts at 10 seeds. Job 93407 replaced 93315, whose RTX 3090 on mscluster61 was held at 315 MHz by software thermal slowdown and took 63 seconds per picture against 13 to 16 elsewhere. CoMat's Shape and Texture numbers stay as printed context, and 35 unscored Shape pictures stay on the cluster.
 
 ## Runs
 
