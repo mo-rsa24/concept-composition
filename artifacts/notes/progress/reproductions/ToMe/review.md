@@ -47,4 +47,8 @@ this run-to-run noise. The same failure appeared on three nodes (mscluster54, ms
 in it. It does not show that every attribute landed on the right object: on "a pentagonal stop sign and a spherical traffic light" the two
 objects fuse into one. No score was computed at this rung.
 
+**Does our BLIP-VQA scorer match the benchmark's?** ✅ Yes. Run unchanged at the benchmark's package versions, it returns 0.7110, 0.9217 and
+0.8554 on the three example pictures, the scores the repository ships, with a largest gap of 0.0 against a bar of 0.01 (job 93213,
+commits `fc040954-8207676`, output `renders/blip-canary/result.json`).
+
 **Does ToMe reproduce its published scores?** Unknown until the full runs finish.

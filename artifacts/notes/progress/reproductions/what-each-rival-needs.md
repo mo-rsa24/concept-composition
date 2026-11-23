@@ -26,7 +26,7 @@ have not been run.
 
 | Benchmark | Where the prompts are | Scorer | Status |
 |---|---|---|---|
-| T2I-CompBench Color, Shape, Texture | `t2i-compbench/examples/dataset/{color,shape,texture}_val.txt`, 300 prompts each | BLIP-VQA, `BLIPvqa_eval/BLIP_vqa.py` | not yet run |
+| T2I-CompBench Color, Shape, Texture | `t2i-compbench/examples/dataset/{color,shape,texture}_val.txt`, 300 prompts each | BLIP-VQA, `BLIPvqa_eval/BLIP_vqa.py`, run unchanged at the benchmark's package versions | canary passed: the 3 scores shipped in `examples/reward/vqa_result.json` reproduce exactly |
 | T2I-CompBench Complex | RTD's manifest, 1,000 prompts | ImageReward | smoke test passed |
 | RareBench Concat | RTD's manifest, 40 of the 120 RareBench prompts | ImageReward | not yet run |
 | GenEval | `geneval/prompts/evaluation_metadata.jsonl`, 553 prompts of which 99 are two-object | Mask2Former through `mmdet` 2.x | not yet run |
