@@ -18,10 +18,10 @@ unfiled artifacts. The route saves and absorbs that work, learns the current fie
 
 | | Paper 1: experts that never met | Paper 2: restoring plurality in one model |
 |---|---|---|
-| Problem | Two diffusion models trained apart have a product of experts with no images showing both concepts, and no joint prompt exists | One model has seen both concepts, yet its product fuses them, and even CO3 misses a quarter of two-object prompts |
+| Problem | Two diffusion models trained apart have a product of experts with no images showing both concepts, and no joint prompt exists | One model has seen both concepts, yet its product fuses them, and even [CO3](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#co3-and-its-table) misses a quarter of two-object prompts |
 | Solution | Build a target where each model draws only its own region, then guide it | Train a pair-aware and separate-label checker at scale, and add its push to the product and to CO3 |
 | Targets | 4 to 6 on [the scoreboard](../artifacts/notes/progress/scoreboard.png): each rival's best reported result, moved one step past it, with side-by-side win counts | 4 to 6 on the same scoreboard, set the same way |
-| Evidence now | 1,200 of 1,280 by the judge on 20 unseen MNIST pairs, fixed halves, pixel space | 54 of 128 clean or near-clean on cat × dog; CO3 gets 101 |
+| Evidence now | 1,200 of 1,280 by the [judge](../2-classifier-guidance/artifacts/results/can-two-digits-compose-on-mnist/03-composing-the-two-models-while-sampling/08-final-test-on-20-unseen-pairs/README.md#words-this-page-uses) on 20 unseen MNIST pairs, fixed halves, pixel space | 54 of 128 clean or near-clean on cat × dog; CO3 gets 101 |
 
 Step C4 tests both statements against the literature. Step D4 records a go or no-go for each paper.
 
@@ -45,15 +45,15 @@ closes through [its closing prompt](../artifacts/notes/progress/prompts/closing-
 **C. Learn the field.** The loop scouts the field and writes the benchmark spec, starting from
 [the first pass over the rivals](../artifacts/notes/progress/rival-datasets-first-pass.md). Step C2 is your 11
 reading sittings, in the order of [the reading plan](../artifacts/notes/progress/targets/reading-plan.md), which
-holds each sitting's command. The calendar spreads them over 34 two-hour blocks from 2026-11-23 to 2026-12-11,
-fitted around work, gym, meals and finance. The `week-queue` skill checks which blocks finished and moves the rest:
+holds each sitting's command. Each sitting starts on a Thursday at 03:15, from 2026-11-26 to 2027-02-11, and
+sitting 3 also takes 2026-12-17:
 
 | Sitting | Idea | Papers |
 |---|---|---|
-| 1 | [When a product is valid](../artifacts/notes/progress/targets/reading-plan.md#sitting-1-when-a-product-is-valid) | Projective Composition, CoInD, Composable Diffusion (Liu) |
-| 2 | [Changing each model's weight while sampling](../artifacts/notes/progress/targets/reading-plan.md#sitting-2-changing-each-models-weight-while-sampling) | SuperDiff, Logical Guidance, Lift Scores |
+| 1 | [When a product is valid](../artifacts/notes/progress/targets/reading-plan.md#sitting-1-when-a-product-is-valid) | [Projective Composition](../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#34-projective-composition-when-the-product-composes), [CoInD](../3-understanding-compositionality/artifacts/notes/coind-conditional-independence-loss/README.md), Composable Diffusion (Liu) |
+| 2 | [Changing each model's weight while sampling](../artifacts/notes/progress/targets/reading-plan.md#sitting-2-changing-each-models-weight-while-sampling) | [SuperDiff](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/05-what-changes-when-superdiff-leaves-its-own-defaults.md#words-this-file-uses), Logical Guidance, Lift Scores |
 | 3 | [Samplers and correctors](../artifacts/notes/progress/targets/reading-plan.md#sitting-3-samplers-and-correctors) | [Feynman-Kac Correctors](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/07-feynman-kac-correctors.md#words-this-file-uses), Energy-Based MCMC (Du), CFG as a Predictor-Corrector |
-| 4 | [Binding each word to its object](../artifacts/notes/progress/targets/reading-plan.md#sitting-4-binding-each-word-to-its-object) | ToMe, CoMat, Attend-and-Excite |
+| 4 | [Binding each word to its object](../artifacts/notes/progress/targets/reading-plan.md#sitting-4-binding-each-word-to-its-object) | [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#tome), CoMat, [Attend-and-Excite](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#attend-and-excite) |
 | 5 | [Steering the start and the early steps](../artifacts/notes/progress/targets/reading-plan.md#sitting-5-steering-the-start-and-the-early-steps) | Rectify Then Diffuse, CO3 |
 | 6 | [What breaks outside the training data](../artifacts/notes/progress/targets/reading-plan.md#sitting-6-what-breaks-outside-the-training-data) | Catastrophic Compositional Generation, Local Mechanisms (Bradley) |
 | 7 | [Composing by regions](../artifacts/notes/progress/targets/reading-plan.md#sitting-7-composing-by-regions) | Diffusion Domain Expansion, MultiDiffusion |
@@ -78,7 +78,7 @@ checker architecture on small data. The owner then records the go or no-go.
 | 6. Full | Three seed sets, every rival | Table with intervals, image grids |
 
 Each rung saves its config, metrics, image sheet and commit. Paper 1 runs CLEVR, the CoInD datasets, the
-CIFAR-10 disjoint split and chest X-ray. Paper 2 runs GenEval, T2I-CompBench, RareBench and a held-out set of
+CIFAR-10 disjoint split and chest X-ray. Paper 2 runs [GenEval](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#geneval), [T2I-CompBench](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#t2i-compbench), RareBench and a held-out set of
 Attend-and-Excite prompts.
 
 **F. Write.** Tables with confidence intervals, qualitative comparison grids, and a public code release.
