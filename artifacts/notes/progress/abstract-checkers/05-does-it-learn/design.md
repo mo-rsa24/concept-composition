@@ -32,7 +32,7 @@ Can a small checker that reads only where each asked digit acts on a noisy canva
 
 **Inner-test data.** Training canvases holding digit 4 as the wrong digit are left out, so digit 4 is unseen in the rehearsal.
 
-**Cost:** about 1 GPU-hour of this loop's 30, including the variations. The smoke test replaces this with a measured time.
+**Cost:** about 1.2 GPU-hours of this loop's 30 if the base configuration passes the inner test, and about 4 if all three variations run and the 12,000-update one is chosen. These come from the measured 337 ms per map-reader update on `mscluster83`, which is 22.5 minutes per 4,000 updates and 67 minutes per 12,000, plus an assumed 5 minutes of scoring per configuration.
 
 **Buys:** step V2, and whether reading maps is what lets a checker carry over to digits it never saw.
 
