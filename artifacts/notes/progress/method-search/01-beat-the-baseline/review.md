@@ -18,6 +18,9 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m1/`, 
 | 2 | Comparison, pair shard 0 of 2 | 93523 | `99ac88a8-f2bdb6d` | `paper-2/full/` | running |
 | 2 | Comparison, pair shard 1 of 2 | 93524 | `99ac88a8-f2bdb6d` | `paper-2/full/` | queued |
 
+**Cluster access on 2026-11-23.** From 14:49 the laptop could not log in: port 22 on the gateway `146.141.21.100` accepts a connection,
+and the SSH login then hangs. Paper 2's last reading, at 14:28, was 191 of 288 pictures with both render jobs running.
+
 ## Paper 1 controls
 
 **Do both checkers memorise 16 canvases?** ✅ Yes. The pair checker and the separate checker each got 16 of 16 right, against a bar of 15.
