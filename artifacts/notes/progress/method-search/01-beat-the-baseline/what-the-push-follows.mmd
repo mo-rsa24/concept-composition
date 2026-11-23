@@ -1,0 +1,27 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef good fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px,color:#111111
+  classDef warn fill:#fff3cd,stroke:#b58900,stroke-width:3px,color:#111111
+
+  X["Noisy latent<br/>4 x 128 x 128"]
+  P["Joint prompt<br/>a puma and a condor"]
+  U["Frozen SDXL U-Net<br/>reads 3 feature maps<br/>1280, 1280, 640 channels"]
+  H["One small checker head<br/>pooled to 8 x 8, attention"]
+  C["Output 1: clean pair?<br/>trained on 243 pairs"]
+  A["Output 2: first subject present?<br/>trained on cat and dog only"]
+  B["Output 3: second subject present?<br/>trained on cat and dog only"]
+  S["Sum of the 3 outputs"]
+  G["One push: its gradient<br/>steps 0-15, strength 30<br/>capped at 0.4 of CO3's prediction"]
+  E["CO3's next step"]
+
+  X --> U
+  P --> U
+  U --> H
+  H --> C & A & B
+  C & A & B --> S
+  S --> G --> E
+
+  class X,P,U,H,S,G,E plain
+  class C good
+  class A,B warn

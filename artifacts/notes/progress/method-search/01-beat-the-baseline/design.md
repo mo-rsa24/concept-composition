@@ -108,6 +108,12 @@ Subtracting it from $\epsilon_g$ alone would move the latent much further for th
 prompt. None of the 12 tuning pairs is in its training list. That list holds 54 tiles over 27 pairs naming a subject on the guard's
 decision list, so this checkpoint can answer M1 and cannot be frozen as a recipe. D3 retrains on the cleaned list.
 
+**What the push follows.** The checker is one network with three outputs: clean pair, first subject present and second subject
+present. The push is the gradient of their sum. The two presence outputs trained only on the 1,603 cat and dog pictures, because
+`presence_catdog.json` has no label for the other 1,256 pictures and the loss masks them. On the 12 tuning pairs those two outputs
+never trained on the subjects asked for. This row therefore tests the kept push as it stands, and M2 tests which outputs should
+drive it.
+
 **Scoring.** By eye at full size, because D3's approved API tokens are for D3. All 288 pictures are shuffled under neutral names, and
 each gets one call on the ladder: one thing, a fused hybrid, two bodies or heads, two clear things, with faithful pair and damaged
 marked. The key that names the methods is opened only after every call is saved.
