@@ -22,6 +22,6 @@
     "commit": "8e7cea34-4bfd680",
     "run_id": "dk8g2tpx",
     "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/CoMat/full/comat/t2i_color",
-    "note": "released weights CaraJ/CoMat_sdxl_ft_unet at 1024 pixels, the size CoMat's validation code falls through to, which the paper does not state; 288 prompts at seeds 42 to 51; ToMe quotes CoMat at 0.7774 (ToMe-T1-049)"
+    "note": "released weights CaraJ/CoMat_sdxl_ft_unet at 1024 pixels, the size CoMat's validation code falls through to, which the paper does not state; 288 prompts at seeds 42 to 51; ToMe quotes CoMat at 0.7774 (ToMe-T1-049); plain SDXL through the same sampler at seed 42 scores 0.6172 (band 0.5582 to 0.6761, W&B gk8ylo47) against 0.5879 printed by CoMat and 0.6369 by ToMe; on the 233 two-subject prompts CoMat scores 0.8018"
   }
 ]

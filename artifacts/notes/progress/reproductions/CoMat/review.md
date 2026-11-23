@@ -30,4 +30,16 @@ tile, shows clean images with most colours and materials on the right objects. S
 diamond sign beside a traffic light. No score was computed at this rung.
 
 **Does CoMat reproduce its published Color score?** ✅ Yes. CoMat scores 0.7696 on the 288 allowed prompts at 10 seeds (2,880 pictures), with a pass band of 0.7331 to 0.8060, and the paper prints 0.7827 (scoring job 93588,
-commits `8e7cea34-4bfd680`, W&B `dk8g2tpx`). The plain SDXL check on the same prompts rendered all 288 pictures (job 93584), and its BLIP-VQA scoring is job 93661.
+commits `8e7cea34-4bfd680`, W&B `dk8g2tpx`). 
+
+**Does plain SDXL through CoMat's sampler match the printed plain score?** ✅ Yes. On the 288 allowed Color prompts at seed 42 it scores 0.6172, with a pass band of 0.5582 to 0.6761 (render job 93584, scoring job 93661, commits `8e7cea34-4bfd680`, W&B
+`gk8ylo47`). CoMat prints 0.5879 for plain SDXL and ToMe prints 0.6369, and both sit inside that band.
+
+**How does CoMat score on the prompts each comparison can use?** These are descriptive numbers from `scripts/reproductions/named_subsets.py` and change no verdict. CoMat's score uses its 10 seeds. Plain SDXL has seed 42 only, so the gain is CoMat minus plain SDXL on
+the seed 42 pictures, with a standard error from 10,000 resamples of prompts. CoMat prints a gain of 0.1948 over plain SDXL on all prompts.
+
+| Subset | Prompts | CoMat, 10 seeds | CoMat, seed 42 | Plain SDXL, seed 42 | Gain | Standard error |
+|---|---|---|---|---|---|---|
+| all allowed | 288 | 0.7696 | 0.7816 | 0.6172 | 0.1644 | 0.0183 |
+| two subjects (`two-subject-prompts.json`) | 233 | 0.8018 | 0.8122 | 0.6367 | 0.1755 | 0.0212 |
+| outside CoMat's training list | 256 | 0.7802 | 0.7889 | 0.6128 | 0.1761 | 0.0198 |
