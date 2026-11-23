@@ -1,0 +1,30 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    D["Same CLEVR setup for every method<br/>same positions and seeds, 1 to 10 objects"]
+    subgraph ONE["Nothing sees an image with two real objects: number to beat is 5, target 6"]
+        direction LR
+        B["Control: Bradley's rule<br/>one location network<br/>printed: 4"]
+        P2["Paper 2<br/>same one network<br/>+ our checker"]
+        P1["Paper 1<br/>10 experts trained apart<br/>+ our checker"]
+    end
+    subgraph MANY["Trained on images with 1 to 3 objects: a harder number to beat"]
+        direction LR
+        I["Inclusive labels<br/>name every object<br/>Bradley printed: 7"]
+        L["Bradley's local patch model<br/>printed: 9<br/>target 10"]
+    end
+    S["One scorer for all<br/>most objects that succeed<br/>all N in place, picture quality"]
+    D --> B
+    D --> P2
+    D --> P1
+    D -. "separate table" .-> I
+    D -. "separate table" .-> L
+    B --> S
+    P2 --> S
+    P1 --> S
+    I -.-> S
+    L -.-> S
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    class D,B,P2,P1,I,L,S plain
+    style ONE fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+    style MANY fill:#fff4e6,stroke:#e8a15c,stroke-width:2px
