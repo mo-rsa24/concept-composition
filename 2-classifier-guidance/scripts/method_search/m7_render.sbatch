@@ -35,10 +35,16 @@ USE=$(df --output=pcent "$ROOT" | tail -1 | tr -dc '0-9')
 [ -n "$USE" ] && [ "$USE" -lt 90 ] || { echo "ABORT: $ROOT is ${USE:-unknown}% full"; exit 3; }
 THREADS=$(nproc)
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) threads=$THREADS set=$SET targets='$TARGETS' start=$START count=$COUNT snap=$SNAP"
-mkdir -p "$OUT"
-"$BL" --background --threads "$THREADS" --python "$S" -- --name "$SET" --targets "$TARGETS" --seed-base "$BASE" \
-  --start "$START" --count "$COUNT" --out "$OUT" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error|error:'
+# Jobs starting together can race on this shared disk, so the folder is retried until it is visible.
+for _ in 1 2 3 4 5 6; do mkdir -p "$OUT/$SET" 2>/dev/null; [ -d "$OUT/$SET" ] && break; sleep 5; done
+[ -d "$OUT/$SET" ] || { echo "ABORT: could not create $OUT/$SET"; exit 3; }
+"$BL" --background --python-exit-code 7 --threads "$THREADS" --python "$S" -- --name "$SET" --targets "$TARGETS" --seed-base "$BASE" \
+  --start "$START" --count "$COUNT" --out "$OUT" 2>&1 | grep --line-buffered -E 'M7RENDER|Traceback|Error:|error:'
 rc=${PIPESTATUS[0]}
-MADE=$(ls "$OUT/$SET/scenes" 2>/dev/null | wc -l)
-echo "[$(date -u +%H:%M:%S)] DONE set=$SET exit=$rc scenes_on_disk=$MADE"
-exit "$rc"
+MISSING=0
+for ((i = START; i < START + COUNT; i++)); do
+  [ -f "$OUT/$SET/scenes/$(printf '%s_%06d.json' "$SET" "$i")" ] || MISSING=$((MISSING + 1))
+done
+echo "[$(date -u +%H:%M:%S)] DONE set=$SET exit=$rc asked=$COUNT missing=$MISSING"
+[ "$rc" -eq 0 ] && [ "$MISSING" -eq 0 ] || exit 9
+exit 0
