@@ -1,0 +1,62 @@
+{
+ "images_per_position": 256,
+ "changed_above": 0.1,
+ "min_inside_share": 0.95,
+ "positions": {
+  "p1": {
+   "position": [
+    0.3,
+    0.3
+   ],
+   "window_pixels": [
+    10,
+    10,
+    28,
+    28
+   ],
+   "changed_pixels": 14625,
+   "inside_window": 13805,
+   "inside_share": 0.9439,
+   "median_share_per_image": 1.0,
+   "lowest_share_of_any_image": 0.125,
+   "passes": false
+  },
+  "p2": {
+   "position": [
+    0.6,
+    0.3
+   ],
+   "window_pixels": [
+    29,
+    10,
+    47,
+    28
+   ],
+   "changed_pixels": 16124,
+   "inside_window": 15147,
+   "inside_share": 0.9394,
+   "median_share_per_image": 1.0,
+   "lowest_share_of_any_image": 0.0769,
+   "passes": false
+  },
+  "p3": {
+   "position": [
+    0.4,
+    0.6
+   ],
+   "window_pixels": [
+    17,
+    29,
+    35,
+    47
+   ],
+   "changed_pixels": 37972,
+   "inside_window": 34802,
+   "inside_share": 0.9165,
+   "median_share_per_image": 0.9695,
+   "lowest_share_of_any_image": 0.2944,
+   "passes": false
+  }
+ },
+ "passes": false
+}

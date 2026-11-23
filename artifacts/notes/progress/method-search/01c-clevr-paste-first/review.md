@@ -22,3 +22,20 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m7/`, 
 All 16 placed objects landed within 0.002 of the image of where they were aimed. A picture took 4.9 to 5.3 seconds with objects and 4.5
 without. Large objects at position 3 reach the edge of the 18-pixel paste window, so the window control in the design decides whether the
 window needs fixing before any sample is scored.
+
+## The window control
+
+**Result: it misses its mark of 95% on all three positions.** Over 256 real renders per position, the share of changed pixels inside the 18 by 18
+window is 94.4% at position 1, 93.9% at position 2 and 91.7% at position 3. A pixel counts as changed when a colour channel differs from the mean
+empty scene by more than 0.1 on a 0-to-1 scale. The numbers are in `window-control-written-rule.json`.
+
+<a href="window-control-written-rule.png"><img src="window-control-written-rule.png" width="420" alt="How often each pixel changes, for the three positions, with the 18 by 18 window drawn: position 3's object runs past the top and bottom of its window"></a>
+
+**Why it misses.** Position 3 sits nearer the camera, so its objects reach 24 pixels tall against a window of 18, and 2,301 of its 3,170 outside
+pixels are on the object's own footprint. Positions 1 and 2 have no object pixels outside the window. Their 820 and 977 outside pixels are scattered
+across the frame, about 3 per picture, against 0.39 per picture in an empty scene. The breakdown is in `window-diagnosis.json`, where a pixel is on
+the footprint if it changes in at least 2% of renders and connects to the position.
+
+**What follows.** No sample has been scored, and the design says the window is fixed before one is. The choice of fix is with the owner, because this
+paste is the frozen rival.
+

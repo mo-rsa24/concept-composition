@@ -2135,6 +2135,15 @@
    "by": "s6",
    "state": "open",
    "asked": "2026-11-24T00:13:56+02:00"
+  },
+  {
+   "id": 66,
+   "question": "M7's paste window misses its 95% check, before any sample is scored: 94.4%, 93.9% and 91.7% of changed pixels fall inside it. Position 3's objects are 24 pixels tall against an 18-pixel window. Positions 1 and 2 hold their whole object, and the misses are about 3 scattered pixels per picture away from it. Option A (recommended): make position 3's window 18 by 24, which does not overlap the others, and change the check to ask for 95% of each object's own footprint. This changes a check after seeing it fail, so the review will say so. No GPU cost. Option B: make position 3's window 18 by 24 and keep the check as written. Positions 1 and 2 still miss it, so M7 ends inconclusive with no paste verdict and M6's go or no-go has no answer. Option C: move the three positions further apart and re-render about 17,000 pictures, roughly 24 CPU node-hours.",
+   "holds": "M7",
+   "default": "Keep the written check, so M7 gives no paste verdict until the owner answers. Rendering, the scorer and training continue, because none of them uses the window",
+   "by": "s6",
+   "state": "open",
+   "asked": "2026-11-24T01:20:42+02:00"
   }
  ]
 }

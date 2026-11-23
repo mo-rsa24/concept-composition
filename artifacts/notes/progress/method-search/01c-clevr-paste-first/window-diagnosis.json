@@ -1,0 +1,67 @@
+{
+ "object_frequency": 0.02,
+ "changed_pixels_per_empty_render": 0.39,
+ "positions": {
+  "p1": {
+   "changed_pixels": 14625,
+   "outside_window": 820,
+   "outside_window_on_the_object": 0,
+   "outside_window_elsewhere": 820,
+   "object_box": [
+    13,
+    12,
+    25,
+    28
+   ],
+   "object_box_size": [
+    12,
+    16
+   ],
+   "share_inside_object_box": 0.9432
+  },
+  "p2": {
+   "changed_pixels": 16124,
+   "outside_window": 977,
+   "outside_window_on_the_object": 0,
+   "outside_window_elsewhere": 977,
+   "object_box": [
+    32,
+    12,
+    44,
+    28
+   ],
+   "object_box_size": [
+    12,
+    16
+   ],
+   "share_inside_object_box": 0.9382
+  },
+  "p3": {
+   "changed_pixels": 37972,
+   "outside_window": 3170,
+   "outside_window_on_the_object": 2301,
+   "outside_window_elsewhere": 869,
+   "object_box": [
+    17,
+    27,
+    34,
+    51
+   ],
+   "object_box_size": [
+    17,
+    24
+   ],
+   "share_inside_object_box": 0.9783
+  }
+ },
+ "object_boxes_that_overlap": [
+  [
+   "p1",
+   "p3"
+  ],
+  [
+   "p2",
+   "p3"
+  ]
+ ]
+}
