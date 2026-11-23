@@ -13,16 +13,12 @@ flowchart TD
         L["Bradley's local patch model<br/>printed: 9<br/>target 10"]
     end
     S["One scorer for all<br/>most objects that succeed<br/>all N in place, picture quality"]
-    D --> B
-    D --> P2
-    D --> P1
-    D -. "separate table" .-> I
-    D -. "separate table" .-> L
-    B --> S
-    P2 --> S
-    P1 --> S
-    I -.-> S
-    L -.-> S
+    B ~~~ P2 ~~~ P1
+    I ~~~ L
+    D --> ONE
+    ONE --> S
+    D -. "separate table" .-> MANY
+    MANY -.-> S
 
     classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
     class D,B,P2,P1,I,L,S plain
