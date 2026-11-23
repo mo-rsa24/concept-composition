@@ -24,7 +24,8 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (AND_SENTENCES, FROZEN, LOOP, NOISYCLIP_DIR, REPO, SENTENCES, all_sentences, eval_tiles,  # noqa: E402
-                    image_features, latent_to_clip, latent_to_rgb, load_clip, load_tile_latent, sha, text_features)
+                    image_features, latent_clip_image, latent_clip_text, latent_to_clip, latent_to_rgb, load_clip,
+                    load_latent_clip, load_tile_latent, sha, text_features)
 
 sys.path.insert(0, str(REPO))
 from poe_repair._sdxl.runtime import load_ddim_scheduler  # noqa: E402
@@ -42,7 +43,10 @@ STEPS = list(range(16))
 SANITY_STEPS = [20, 30, 40, 49]
 DRAWS = 4
 BATCH = 64
-MODELS = ("noisyclip", "frozen_clip")
+MODELS = ("noisyclip", "frozen_clip", "latent_clip")
+PIXEL_MODELS = ("noisyclip", "frozen_clip")
+COMPARED = ("noisyclip", "latent_clip")
+BASELINE = "frozen_clip"
 PROPERTIES = ("counting", "prompt_match", "spatial", "position_size", "binding")
 TITLES = {"counting": "Counting", "prompt_match": "Prompt match", "spatial": "Spatial relation",
           "position_size": "Position and size", "binding": "Attribute binding"}
@@ -160,17 +164,19 @@ def analyse(scores_by_model, steps, task, smoke):
                      "mean_steps_0_to_15": float(np.mean(ba_te[:n_main])),
                      "push_steps": [s for s, b in zip(steps[:n_main], ba_tr[:n_main]) if b >= PUSH_GATE]}
         per_seed[m] = per_seed_counts(d[:n_main][:, te], y[te], seeds[te], th[:n_main], read_order)
-    if len(per_seed) == 2:
+    if len(per_seed) == len(MODELS):
         rng = np.random.default_rng(0)
         n = len(read_order)
         weights = rng.multinomial(n, np.full(n, 1 / n), size=N_BOOTSTRAP)
-        a, b = bootstrap_means(per_seed[MODELS[0]], weights), bootstrap_means(per_seed[MODELS[1]], weights)
-        se = float(np.nanstd(a - b, ddof=1))
-        gap = result[MODELS[0]]["mean_steps_0_to_15"] - result[MODELS[1]]["mean_steps_0_to_15"]
-        result["noisyclip_minus_frozen"] = {"gap": gap, "standard_error": se, "beats_frozen": bool(gap > SE_MULTIPLE * se)}
-        for m, boot in zip(MODELS, (a, b)):
-            result[m]["standard_error"] = float(np.nanstd(boot, ddof=1))
+        boot = {m: bootstrap_means(per_seed[m], weights) for m in MODELS}
+        for m in MODELS:
+            result[m]["standard_error"] = float(np.nanstd(boot[m], ddof=1))
             result[m]["reads"] = bool(result[m]["mean_steps_0_to_15"] >= READ_BAR)
+        for m in COMPARED:
+            se = float(np.nanstd(boot[m] - boot[BASELINE], ddof=1))
+            gap = result[m]["mean_steps_0_to_15"] - result[BASELINE]["mean_steps_0_to_15"]
+            result[f"{m}_minus_frozen"] = {"gap": gap, "standard_error": se, "beats_frozen": bool(gap > SE_MULTIPLE * se),
+                                           "comparison": "clean" if m == "noisyclip" else "mixed"}
     return result
 
 
@@ -209,8 +215,9 @@ def compare_checkpoints(a, b) -> dict:
 def draw(result, steps, path):
     n_main = sum(1 for s in steps if s <= 15)
     fig, axes = plt.subplots(1, 5, figsize=(19, 3.9), sharey=True)
-    colour = {"noisyclip": "#1d7a3e", "frozen_clip": "#6b7a88"}
-    label = {"noisyclip": "NoisyCLIP", "frozen_clip": "frozen CLIP"}
+    colour = {"noisyclip": "#1d7a3e", "frozen_clip": "#6b7a88", "latent_clip": "#7a4fc9"}
+    label = {"noisyclip": "NoisyCLIP", "frozen_clip": "frozen CLIP", "latent_clip": "Latent CLIP"}
+    offset = {"noisyclip": 7, "frozen_clip": -13, "latent_clip": 19}
     for ax, p in zip(axes, PROPERTIES):
         ax.axhline(READ_BAR, color="#c0262d", lw=1, ls="--")
         ax.axhline(0.5, color="0.6", lw=1, ls=":")
@@ -220,7 +227,7 @@ def draw(result, steps, path):
                 continue
             ys = r["balanced_accuracy_reading_half"][:n_main]
             ax.plot(steps[:n_main], ys, "o-", ms=3, color=colour[m])
-            ax.annotate(f"{label[m]} {r['mean_steps_0_to_15']:.2f}", (steps[n_main - 1], ys[-1]), xytext=(-2, 7 if m == "noisyclip" else -13),
+            ax.annotate(f"{label[m]} {r['mean_steps_0_to_15']:.2f}", (steps[n_main - 1], ys[-1]), xytext=(-2, offset[m]),
                         textcoords="offset points", ha="right", fontsize=8.5, color=colour[m])
         ax.set_title(TITLES[p], fontsize=11)
         ax.set_xlabel("sampler step (0 = noise)")
@@ -260,16 +267,19 @@ def main() -> int:
     print(f"{len(keys)} latents, {len(sentences)} sentences, steps {steps}, {draws} draws; "
           + ", ".join(f"{p} {len(t)}" for p, t in tasks.items()) + f"; no clear size: {left_out}", flush=True)
 
-    loaded = {m: load_clip("noisyclip" if m == "noisyclip" else "frozen", device) for m in MODELS}
+    loaded = {m: load_clip("noisyclip" if m == "noisyclip" else "frozen", device) for m in PIXEL_MODELS}
+    loaded["latent_clip"] = load_latent_clip(device)
+    print("Latent CLIP loaded in safe mode with a strict key match", flush=True)
     checkpoint = compare_checkpoints(loaded["noisyclip"][0], loaded["frozen_clip"][0])
     print("checkpoint comparison:", json.dumps(checkpoint), flush=True)
-    inputs = {m: input_path_check(loaded[m][0], Z, scheduler, timesteps, device) for m in MODELS}
+    inputs = {m: input_path_check(loaded[m][0], Z, scheduler, timesteps, device) for m in PIXEL_MODELS}
     print("input path:", json.dumps(inputs), flush=True)
 
     cos = {m: np.zeros((len(steps), draws, len(keys), len(sentences)), np.float32) for m in MODELS}
     t0 = time.time()
     with torch.no_grad():
-        text = {m: text_features(loaded[m][0], loaded[m][1], sentences, device) for m in MODELS}
+        text = {m: text_features(loaded[m][0], loaded[m][1], sentences, device) for m in PIXEL_MODELS}
+        text["latent_clip"] = latent_clip_text(*loaded["latent_clip"], sentences, device)
         for a, step in enumerate(steps):
             for dr in range(draws):
                 gen = torch.Generator().manual_seed(1000 * step + dr)
@@ -278,8 +288,10 @@ def main() -> int:
                     z0, n = Z[i:i + BATCH].to(device), noise[i:i + BATCH].to(device)
                     x = scheduler.add_noise(z0, n, timesteps[step].repeat(z0.shape[0]).to(device))
                     pixels = latent_to_clip(x)
-                    for m in MODELS:
+                    for m in PIXEL_MODELS:
                         cos[m][a, dr, i:i + z0.shape[0]] = (image_features(loaded[m][0], pixels) @ text[m].T).float().cpu().numpy()
+                    latent_features = latent_clip_image(loaded["latent_clip"][0], x)
+                    cos["latent_clip"][a, dr, i:i + z0.shape[0]] = (latent_features @ text["latent_clip"].T).float().cpu().numpy()
             print(f"[{time.time() - t0:6.0f}s] step {step} done", flush=True)
     np.savez_compressed(out / "scores.npz", keys=np.array(keys), sentences=np.array(sentences), steps=np.array(steps), **cos)
 
@@ -301,15 +313,16 @@ def main() -> int:
     result["and_score"] = {p: analyse({m: and_score(m) for m in MODELS}, steps, tasks[p], args.smoke) for p in ("counting", "prompt_match")}
     if 49 in steps:
         k = steps.index(49)
-        sane = result["prompt_match"]["noisyclip"]["balanced_accuracy_threshold_half"][k]
-        result["published_behaviour"] = {"prompt_match_step_49_threshold_half": sane, "passes": bool(sane > SANITY_BAR)}
+        sane = {m: result["prompt_match"][m]["balanced_accuracy_threshold_half"][k] for m in COMPARED}
+        result["published_behaviour"] = {"prompt_match_step_49_threshold_half": sane,
+                                         "passes": {m: bool(v > SANITY_BAR) for m, v in sane.items()}}
     (out / "result.json").write_text(json.dumps(result, indent=1))
     draw(result, steps, out / "balanced-accuracy-by-step.png")
 
     for p in PROPERTIES:
         r = result[p]
         line = [f"{m}: {r[m]['mean_steps_0_to_15']:.3f}" for m in MODELS if "mean_steps_0_to_15" in r.get(m, {})]
-        print(p, r["counts_by_half"], *line, r.get("noisyclip_minus_frozen", ""), flush=True)
+        print(p, r["counts_by_half"], *line, r.get("noisyclip_minus_frozen", ""), r.get("latent_clip_minus_frozen", ""), flush=True)
 
     if not args.smoke:
         import wandb
@@ -319,8 +332,9 @@ def main() -> int:
             for m in MODELS:
                 if "mean_steps_0_to_15" in result[p].get(m, {}):
                     run.summary[f"{p}/{m}/mean_ba_steps_0_15"] = result[p][m]["mean_steps_0_to_15"]
-            if "noisyclip_minus_frozen" in result[p]:
-                run.summary[f"{p}/noisyclip_minus_frozen"] = result[p]["noisyclip_minus_frozen"]["gap"]
+            for m in COMPARED:
+                if f"{m}_minus_frozen" in result[p]:
+                    run.summary[f"{p}/{m}_minus_frozen"] = result[p][f"{m}_minus_frozen"]["gap"]
         run.log({"balanced_accuracy_by_step": wandb.Image(str(out / "balanced-accuracy-by-step.png"))})
         print("W&B run", run.id, flush=True)
         result["wandb_run"] = run.id

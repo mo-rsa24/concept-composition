@@ -1,6 +1,6 @@
 # Can a sentence score read the five properties on a half-drawn latent? (step W2)
 
-This step measures whether pretrained NoisyCLIP can tell a right sentence from a wrong one on SDXL latents at steps 0 to 15 of 50, for each of the five abstract properties. Step W3 pushes only on the steps this one shows can be read, so a property that cannot be read here never reaches a render.
+This step measures whether pretrained NoisyCLIP and Latent CLIP can tell a right sentence from a wrong one on SDXL latents at steps 0 to 15 of 50, for each of the five abstract properties. Step W3 pushes only on the steps this one shows can be read, so a property that cannot be read here never reaches a render.
 
 <a href="../01-reading/sentence-score-push.png"><img src="../01-reading/sentence-score-push.png" width="520" alt="A half-drawn SDXL latent passes through a fixed linear map into the NoisyCLIP image encoder. A right and a wrong sentence pass through the frozen CLIP text encoder. The two similarity scores are subtracted."></a>
 
@@ -34,22 +34,24 @@ This step measures whether pretrained NoisyCLIP can tell a right sentence from a
 
 **Group.** Runs that try a new idea (group 2). A result here cannot change a claim in Paper 2.
 
-**Varied axis.** The weights of the image encoder: NoisyCLIP (`asiimo/noisyclip`) or frozen CLIP ViT-L/14 (`openai/clip-vit-large-patch14`). Pictures, noise, sentences, input path and thresholding rule are identical.
+**Varied axis.** The text and image model that reads the latent: NoisyCLIP (`asiimo/noisyclip`), frozen CLIP ViT-L/14 (`openai/clip-vit-large-patch14`) or Latent CLIP ViT-B/4-plus (`wendlerc/latent-clip-b-4-512-plus-34b-80k`). Pictures, noise, sentences and thresholding rule are identical.
 
-**Cost:** about 1 GPU-hour on one `bigbatch` card, for the word maps, the recoloured copies and about 40,000 image encoder passes per model. **Buys:** step W2, and the list of steps W3 may push on.
+**Which comparisons are clean.** NoisyCLIP against frozen CLIP is clean: they share an architecture, a text encoder and an input path, and differ in the image encoder's weights. Latent CLIP against either is **mixed**, because its architecture, text encoder, training data and input path all differ. Its numbers are read on their own, and a gap to another model is never read as the effect of any one of those differences.
+
+**Cost:** about 1.5 GPU-hours on one `bigbatch` card, for the word maps, the recoloured copies and about 40,000 image encoder passes per model. **Buys:** step W2, the list of steps W3 may push on, and the first measurement of whether a CLIP trained only on clean latents can read a noisy one.
 
 **Environment facts this depends on.** The `co3` python path, the `bigbatch` exclude list, `/datasets` for outputs, and the 200 of 220 latents that live under `/home-mscluster/mmolefe/poe_repair_min_scratch/outputs/` while the other 20 live under `/datasets/mmolefe/poe_repair_min/outputs/`. The code resolves each tile against both roots.
 
 | Result, per property | What it takes |
 |---|---|
-| Reads | Mean balanced accuracy over steps 0 to 15, on the reading half, is at least 0.75 |
-| Beats frozen CLIP | That mean is above frozen CLIP's by more than 1.96 standard errors, from 10,000 bootstrap resamples of the reading half's seeds, matched across the two models |
+| Reads | For NoisyCLIP and for Latent CLIP separately, mean balanced accuracy over steps 0 to 15, on the reading half, is at least 0.75 |
+| Beats frozen CLIP | That mean is above frozen CLIP's by more than 1.96 standard errors, from 10,000 bootstrap resamples of the reading half's seeds, matched across the models. For Latent CLIP this is a mixed comparison |
 | Null | The label check passes and the property misses the 0.75 bar |
 | Inconclusive | The property's label check fails, either half holds fewer than 8 pictures of either label, or a check in [the section below](#checks-before-any-score-is-believed) fails |
 
 The bars are constants in `2-classifier-guidance/scripts/noise_text_critic/w2_read.py`.
 
-**What would surprise.** NoisyCLIP passing the bar on left-right order or colour binding at steps 0 to 9. Its paper's right caption ranks first less often than chance before latent 10, and CLIP-style text models are known to be weak on word order.
+**What would surprise.** NoisyCLIP passing the bar on left-right order or colour binding at steps 0 to 9. Its paper's right caption ranks first less often than chance before latent 10, and CLIP-style text models are known to be weak on word order. Latent CLIP reading above chance at steps 0 to 5 would also surprise, because it never trained on a noisy latent.
 
 ## The pictures and their labels
 
@@ -100,6 +102,8 @@ $$
 3. Divide by 255, resize the 128 by 128 result to 224 by 224 with bicubic interpolation, and normalise with CLIP's mean and standard deviation. The checkpoint ships no processor file, so these are the base model's values, and the first check below tests them.
 4. Run the image encoder and projection, normalise, and take the cosine with each normalised sentence embedding.
 
+**Latent CLIP's path replaces steps 2 and 3.** It reads a 4-channel latent directly at 64 by 64 and expects the VAE's unscaled values, so $x_t$ is divided by 0.13025 and average-pooled by 2. Its own text encoder and tokenizer embed the sentences. The model comes from the authors' library at commit `716e61a`, copied under `loop-9/vendor/` so the shared `co3` environment is unchanged. Its weights are a Python pickle with no licence stated, so they load only through `torch.load(..., weights_only=True)` with a strict key match, and the run stops if that fails. The weights are used for this measurement and no picture or number from them enters a paper until the licence is settled.
+
 Each picture is read at steps 0 to 15, with 4 noise draws per step. The same noise is used for both models, and the checker score is averaged over the 4 draws, as the kept checker's evaluation does. Steps 20, 30, 40 and 49 are also read, as a sanity check only.
 
 ## How a property is judged
@@ -109,12 +113,12 @@ Each picture is read at steps 0 to 15, with 4 noise draws per step. The same noi
 3. Apply it to the reading half and record that step's balanced accuracy.
 4. The property's number is the mean over steps 0 to 15.
 
-The steps W3 may push on are those from 0 to 15 whose balanced accuracy on the **threshold half** is at least 0.6.
+The steps W3 may push on are those from 0 to 15 whose balanced accuracy on the **threshold half** is at least 0.6, listed separately for each model.
 
 ## Checks before any score is believed
 
 1. **Input path.** On 16 latents at steps 0 and 15, the embedding from this differentiable path and the embedding from the authors' path (`.byte()`, PIL, base CLIP processor) must have a mean cosine of at least 0.99.
-2. **Published behaviour.** At step 49, NoisyCLIP's prompt match balanced accuracy must be above 0.6 on the threshold half. If it is not, check the linear map, the resize and the latent scale, then run the authors' script on one latent. If it still disagrees, file the `ask` the brief names.
+2. **Published behaviour.** At step 49, NoisyCLIP's and Latent CLIP's prompt match balanced accuracy must each be above 0.6 on the threshold half. If one is not, check the linear map, the resize and the latent scale, then run the authors' script on one latent. If it still disagrees, file the `ask` the brief names.
 3. **Checkpoint.** Every `text_model`, `text_projection` and `visual_projection` tensor in NoisyCLIP is compared with base CLIP, and the count that differ is recorded.
 4. **Subject guard.** Every sentence and sheet passes `scripts/shared/disallowed_subjects.py`.
 
@@ -132,5 +136,7 @@ The steps W3 may push on are those from 0 to 15 whose balanced accuracy on the *
 **Reading is not steering.** A score that separates the classes can still have a gradient that changes texture and leaves layout alone, which is what the decoded-image CLIP checker did.
 
 **The labels on position, size and colour come from word maps and a recolouring rule.** The eye check bounds their error at about 10% and does not remove it, and recoloured pictures are easier or harder than real coloured animals in ways this step does not measure.
+
+**Why Latent CLIP does or does not read.** Its comparison is mixed, and pooling a 128 by 128 latent to 64 by 64 is the authors' notebook workaround, tried by them on 10 clean latents. A poor result may come from the noise, the pooling or the smaller model.
 
 **One animal pair.** Every picture is a cat and a dog, so nothing here shows the score carries to other subjects.

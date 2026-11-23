@@ -24,6 +24,11 @@ ROOTS = (Path("/datasets/mmolefe/poe_repair_min"), Path("/home-mscluster/mmolefe
 EVAL_SET = REPO / "2-classifier-guidance/scripts/rung2/eval_set_catdog_v2.json"
 NOISYCLIP_DIR = LOOP / "models/noisyclip"
 FROZEN = "openai/clip-vit-large-patch14"
+LATENT_CLIP_REPO = "wendlerc/latent-clip-b-4-512-plus-34b-80k"
+LATENT_CLIP_NAME = "Latent-ViT-B-4-512-plus"
+LATENT_CLIP_SRC = LOOP / "vendor/latent_clip-716e61a"
+LATENT_CLIP_WEIGHTS = LOOP / "models/latent-clip-b4-plus/checkpoints/epoch_34.pt"
+SDXL_SCALING = 0.13025
 
 WEIGHTS = ((60.0, -60.0, 25.0, -70.0), (60.0, -5.0, 15.0, -50.0), (60.0, 10.0, -5.0, -35.0))
 BIASES = (150.0, 140.0, 130.0)
@@ -113,3 +118,37 @@ def text_features(model, tokenizer, sentences, device) -> torch.Tensor:
 
 def image_features(model, pixels: torch.Tensor) -> torch.Tensor:
     return F.normalize(model.get_image_features(pixel_values=pixels), dim=-1)
+
+
+def latent_to_latent_clip(x: torch.Tensor) -> torch.Tensor:
+    """Latent CLIP reads the VAE's unscaled latent at 64 by 64, so divide by SDXL's factor and pool by 2."""
+    return F.avg_pool2d(x / SDXL_SCALING, 2)
+
+
+def load_latent_clip(device, dtype=torch.float32):
+    """Build Latent CLIP from the vendored library and load its pickle in safe mode, with a strict key match."""
+    if not (LATENT_CLIP_SRC / "latent_clip/__init__.py").exists():
+        raise SystemExit(f"guard: no vendored library at {LATENT_CLIP_SRC}")
+    if not LATENT_CLIP_WEIGHTS.exists():
+        from huggingface_hub import hf_hub_download
+        hf_hub_download(LATENT_CLIP_REPO, "checkpoints/epoch_34.pt", local_dir=str(LATENT_CLIP_WEIGHTS.parents[1]))
+    sys.path.insert(0, str(LATENT_CLIP_SRC))
+    import latent_clip
+
+    model = latent_clip.create_model(LATENT_CLIP_NAME, pretrained=None, device="cpu")
+    checkpoint = torch.load(LATENT_CLIP_WEIGHTS, map_location="cpu", weights_only=True)
+    state = checkpoint["state_dict"] if "state_dict" in checkpoint else checkpoint
+    state = {(k[7:] if k.startswith("module.") else k): v for k, v in state.items()}
+    model.load_state_dict(state, strict=True)
+    model = model.to(device=device, dtype=dtype).eval()
+    model.requires_grad_(False)
+    return model, latent_clip.get_tokenizer(LATENT_CLIP_NAME)
+
+
+@torch.no_grad()
+def latent_clip_text(model, tokenizer, sentences, device) -> torch.Tensor:
+    return model.encode_text(tokenizer(list(sentences)).to(device), normalize=True)
+
+
+def latent_clip_image(model, x: torch.Tensor) -> torch.Tensor:
+    return model.encode_image(latent_to_latent_clip(x), normalize=True)
