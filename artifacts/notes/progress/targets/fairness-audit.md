@@ -212,7 +212,7 @@ Every call needs both methods rendered on the same prompt and seed. No call has 
 
 1. **Add a sample-and-paste control and an experts-without-checker run.** The design then has four clean cells: one network or experts, each with and without the checker.
 2. **Compare only at equal training length.** Keep printed numbers as context unless a run reaches Bradley's 134 million images.
-3. **Use Bradley's 12 printed positions, in printed order** ([p39][proj39]), and name the location conditioner and the 32-step Heun sampler ([p15][proj15]).
+3. **Use Bradley's 12 printed positions, in printed order** ([Local Mechanisms p23](https://arxiv.org/pdf/2509.16447#page=23)), and name the location conditioner and the 32-step Heun sampler ([p15][proj15]).
 4. **Train the scorer on real rendered images with 1 to 12 objects, and keep it separate from every checker.** Define the picture-quality bar in code.
 5. **Replace Du's cubes as the first rung, and correct the cost table.** Du's data holds 1 to 5 cubes per image, and each model costs 7 to 9.4 GPU-hours, so the plan's 7.5 is the low end.
 

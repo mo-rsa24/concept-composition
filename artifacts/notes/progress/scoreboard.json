@@ -14,76 +14,13 @@
       "rival": "Bradley-Local",
       "published": 5.0,
       "reproduced": null,
-      "step": 1,
+      "step": 2,
       "range": [
         0.0,
         null
       ],
       "protocol": "Location-conditioned 128x128 CLEVR, 500,000 training samples per object count; EDM2 edm2-img64-xs without guidance; Kmax is the largest K such that every 1 <= K <= Kmax succeeds, success being K objects at least 50% of the time and at least K-2 objects at least 90% of the time; judged by a ResNet-18 classifier (99.74% test accuracy) trained to count 1-10 objects, over 1024 samples per configuration.",
       "number_id": "Bradley-Local-T1-004",
-      "reproduced_id": null,
-      "ours": null,
-      "ours_interval": null,
-      "rival_interval": null
-    },
-    {
-      "paper": "Paper 1",
-      "dataset": "Shapes3D Partial support, ∧ composition",
-      "metric": "CS (%)",
-      "unit": "%",
-      "better": "higher",
-      "rival": "CoInD",
-      "published": 91.1,
-      "reproduced": null,
-      "step": 1,
-      "range": [
-        0.0,
-        100.0
-      ],
-      "protocol": "Shapes3D at 64x3x3 with six attributes; U-Net trained with the DDPM linear schedule over 1000 noise steps; DDIM sampling with 100 steps; CS from a ResNet-18 multi-head attribute classifier trained on full support; R2 is the variance-weighted pixel comparison with the unique reference image; JSD over the first two attributes; composition tasks evaluated on unseen compositions under orthogonal partial support. Theoretical CoInD rows minimize the upper bound Eq. (10) with K1 = 1 and K2 = 0.1; the other CoInD rows minimize Eq. (11).",
-      "number_id": "CoInD-T4-036",
-      "reproduced_id": null,
-      "ours": null,
-      "ours_interval": null,
-      "rival_interval": null
-    },
-    {
-      "paper": "Paper 1",
-      "dataset": "CMNIST, AND",
-      "metric": "Conformity score (%)",
-      "unit": "%",
-      "better": "higher",
-      "rival": "LogicalGuidance",
-      "published": 83.6,
-      "reproduced": null,
-      "step": 1,
-      "range": [
-        0.0,
-        100.0
-      ],
-      "protocol": "CMNIST U-Net at 28 x 28 with a ResNet-18 attribute classifier; the conformity score is the percentage of samples satisfying the query, averaged over 10,000 samples from 100 unique queries per task type with 100 samples each; N=2 to 5 are random formulas with N AND/OR operators; DDPM sampling with 50 timesteps as listed in Table 9.",
-      "number_id": "LogicalGuidance-T4-009",
-      "reproduced_id": null,
-      "ours": null,
-      "ours_interval": null,
-      "rival_interval": null
-    },
-    {
-      "paper": "Paper 1",
-      "dataset": "CelebA Orthogonal support, ∧ composition",
-      "metric": "CS (%)",
-      "unit": "%",
-      "better": "higher",
-      "rival": "CoInD",
-      "published": 49.15,
-      "reproduced": null,
-      "step": 1,
-      "range": [
-        0.0,
-        100.0
-      ],
-      "protocol": "SDv1.5 fine-tuned on CelebA with labels converted to text, all compositions except male and smiling; joint prompt \"Photo of a smiling male celebrity\"; ∧ of \"Photo of a smiling celebrity\" and \"Photo of a male celebrity\"; ¬ of \"Photo of a smiling celebrity\" and \"Photo of a female celebrity\".",
-      "number_id": "CoInD-T6-011",
       "reproduced_id": null,
       "ours": null,
       "ours_interval": null,
@@ -182,7 +119,7 @@
       "rival": "Bradley-Local",
       "published": 5.0,
       "reproduced": null,
-      "step": 1,
+      "step": 2,
       "range": [
         0.0,
         null
