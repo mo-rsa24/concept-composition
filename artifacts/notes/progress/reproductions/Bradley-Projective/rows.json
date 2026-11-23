@@ -1,9 +1,6 @@
 [
   {
-    "target_id": "Bradley-Projective-T1-008",
-    "verdict": "blocked",
-    "commit": "4a88e791-b2f1320",
-    "run_id": "question 21",
-    "note": "no released code or weights; reproducing needs about 1.6 million rendered images and about 3,000 A100-hours for three trainings; 98 stays printed context that was not reproduced; by board question 30 the CLEVR comparison runs this rule and ours on our own models"
+    "target_id": "Bradley-Local-T1-004",
+    "note": "Kmax 4 for separately composed models with an empty background (Table 2, p39), the number board question 31 names; the authors released no code or weights, so by board questions 30 and 31 the rule runs on our own single-object CLEVR models, under a design still to be written"
   }
 ]

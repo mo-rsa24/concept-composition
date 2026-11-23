@@ -13,9 +13,10 @@ composed over an empty background? The count is by hand, on location-conditioned
 
 ## Status
 
-The row is `blocked` by the owner's answer to board question 21, and nothing has run. 98 stays printed context that was not reproduced. By the
-owner's answer to board question 30, Paper 1's CLEVR comparison runs Projective Composition's rule and ours on our own single-object models,
-which is separate work with its own design.
+Nothing has run. By the owner's answers to board questions 30 and 31, Paper 1's CLEVR target is the largest object count that succeeds for
+models trained on single objects: the bar is 5 (Bradley's local patch model), the target is 6, and this rival's printed count is 4 (Table 2,
+p39). Its rule and ours run on our own single-object models under a separate design. The 98 of 100 below stays printed context, and the
+reasons below explain why the published run itself cannot be repeated.
 
 ## Why it cannot run as published
 
