@@ -1,0 +1,24 @@
+[
+  {
+    "target_id": "RTD-T2-051",
+    "ours": 0.2423,
+    "interval_low": 0.1751,
+    "interval_high": 0.3095,
+    "verdict": "not reproduced",
+    "commit": "045e027f-94b2919",
+    "run_id": "5i9dt7by",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/full/rtd/t2i_compbench",
+    "note": "3 seeds; plain SDXL on the same prompts and seeds 0.2637 against 0.3083 printed (reproduced, W&B 8802binw); RTD minus plain SDXL on matched pictures is -0.0214 (standard error 0.0153); board question 26 asks which number is the bar"
+  },
+  {
+    "target_id": "RTD-T2-054",
+    "ours": 0.4166,
+    "interval_low": -0.0268,
+    "interval_high": 0.86,
+    "verdict": "reproduced",
+    "commit": "71c7a091-2d34fee",
+    "run_id": "tc75fx0i",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/full/rtd/rarebench",
+    "note": "3 seeds; plain SDXL on the same prompts and seeds 0.3035 against 0.1018 printed (reproduced, W&B 1gh0vhil); 33 prompts give a pass band of plus or minus 0.443, so this test is weak"
+  }
+]
