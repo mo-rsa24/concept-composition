@@ -1,0 +1,38 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    subgraph TEST["The test: switch off one checker, score all five properties (predicted, no run yet)"]
+        direction LR
+        ALL["All 5 checkers on<br/>the reference scores"]
+        R1["Remove count<br/>counting falls, other 4 hold"]
+        R2["Remove binding<br/>binding falls, other 4 hold"]
+        R3["Remove spatial<br/>spatial falls, other 4 hold"]
+        R4["Remove position and size<br/>position and size fall, other 4 hold"]
+        R5["Remove prompt match<br/>prompt match falls, other 4 hold"]
+        Q{"Does each removal<br/>hit only its own<br/>property?"}
+        YES["Yes: composition<br/>is controllable"]
+        NO["No: the checkers overlap,<br/>and the table shows which"]
+        ALL -.-> R1 & R2 & R3 & R4 & R5
+        R1 & R2 & R3 & R4 & R5 -.-> Q
+        Q -.->|yes| YES
+        Q -.->|no| NO
+    end
+
+    subgraph CAP["The catch: the 0.4 cap hands a removed checker's share to the others (5 equal gradients)"]
+        direction LR
+        C1["All 5 on, cap fires<br/>each checker's push = 1.00"]
+        C2["Count off, cap fires<br/>each survivor grows to<br/>1.12 (perpendicular gradients)<br/>to 1.25 (aligned gradients)"]
+        C3["Fix: each checker gets a budget<br/>0.4 / 5 = 0.08 of the product's norm<br/>the cap never fires, survivors stay 1.00"]
+        C1 -->|remove count| C2
+        C2 -->|fix| C3
+    end
+
+    TEST ~~~ CAP
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef bad fill:#fde8e8,stroke:#b3261e,stroke-width:2px,color:#111111
+    classDef good fill:#e3f4e1,stroke:#2e7d32,stroke-width:3px,color:#111111
+    class ALL,R1,R2,R3,R4,R5,Q,NO,C1 plain
+    class C2 bad
+    class YES,C3 good
+    style TEST fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
+    style CAP fill:#fafafa,stroke:#888888,stroke-width:2px
