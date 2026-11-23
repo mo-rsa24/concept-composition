@@ -1,0 +1,63 @@
+{
+  "slug": "projective-composition",
+  "source": "arXiv 2502.04549",
+  "page_url": "https://arxiv.org/pdf/2502.04549",
+  "title": "Mechanisms of Projective Composition of Diffusion Models",
+  "role": "The theory of when adding scores is exact, used to test whether a right-minus-wrong sentence score could qualify",
+  "pages_read": 40,
+  "reads": "Exact scores of noised distributions in theory; CLEVR experiments use an EDM2 U-Net on 128 by 128 images conditioned on one location or colour",
+  "reads_page": 15,
+  "trained_on": "CLEVR: 50,000 empty scenes, 1,550,000 single-object scenes, 2,500,000 scenes with 1 to 5 objects; no text and image critic",
+  "trained_page": 15,
+  "score_enters": "Background score plus the sum of expert-minus-background score differences at every reverse-diffusion step, unit coefficients, no cap (Eq. 6 and Eq. 8)",
+  "score_page": 6,
+  "adding_scores": "Exact when coordinates split into blocks where each expert differs from an independent background only on its own block (Def 5.2, Thm 5.3); feature-space version has no sampling guarantee unless the map is orthogonal; a right-minus-wrong push fails these conditions when the base mixes right and wrong (inferred)",
+  "adding_page": 6,
+  "properties": "Counting and position measured on CLEVR; binding, spatial relation, size and prompt match not tested",
+  "properties_page": 17,
+  "unseen": "no: tests more objects than any single model saw, with no held-out concepts",
+  "unseen_page": 1,
+  "headline": "Largest working object count 4 with an empty background against 1 with an unconditional background, models trained on 1 object, CLEVR, EDM2 U-Net",
+  "headline_page": 39,
+  "copy_or_avoid": "Copy the mean-difference orthogonality check and read the and-score as what the score sum omits; avoid citing Theorem 5.3 or 6.1 for swap-pair pushes (inferred)",
+  "model": "EDM2 U-Net on CLEVR; SDXL for two example figures",
+  "extra_papers": [
+    {
+      "title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models",
+      "arxiv": "2112.10741",
+      "page": 12,
+      "why": "Cited for out-of-distribution text prompts; trains a noised CLIP and steers sampling with it (description from outside this PDF)"
+    }
+  ],
+  "disagreements": [
+    {
+      "claim": "Lemma 5.7 gives a valid KL bound for approximately factorized distributions",
+      "source": "Project memory bradley-lemma-5-7-counterexample records a counterexample with KL 2.88 against a bound of 0.89; not rechecked in this read",
+      "paper_says": "KL between the ideal composition and the composition is at most the sum of the epsilon terms",
+      "page": 7
+    },
+    {
+      "claim": "Table 1 Single-object Bayes rows are histograms over 100 images",
+      "source": "Page image of Table 1: the row for N=2 sums to 109 and lists 32 images with 3 correct objects; the row for N=6 sums to 43",
+      "paper_says": "each column lists the number of images that contained the given number of objects in correct locations",
+      "page": 17
+    }
+  ],
+  "quotes": [
+    {"page": 15, "text": "Images were generated in their original resolution of 320 × 240 and down-sampled to a lower resolution of 128 × 128", "supports": "reads: image size", "read_from_image": false},
+    {"page": 15, "text": "we condition on the 2D location of the object", "supports": "reads: location conditioning", "read_from_image": false},
+    {"page": 15, "text": "A background dataset (0 objects) with 50,000 samples", "supports": "trained_on: empty scenes", "read_from_image": false},
+    {"page": 15, "text": "Single object dataset with 1,550,000 samples", "supports": "trained_on: single-object scenes", "read_from_image": false},
+    {"page": 15, "text": "A dataset having 1 to 5 objects, with 500,000 samples for each object count, for a total of 2,500,000 samples", "supports": "trained_on: multi-object scenes", "read_from_image": false},
+    {"page": 6, "text": "Consider running the reverse-diffusion SDE using the following compositional scores at each time t", "supports": "score_enters", "read_from_image": false},
+    {"page": 6, "text": "which it samples in a characteristic way, while independently sampling all other coordinates from a common background distribution", "supports": "adding_scores: factorized conditionals", "read_from_image": false},
+    {"page": 3, "text": "We prove that when this criteria holds, projective composition can be achieved by linearly combining scores", "supports": "adding_scores: exactness", "read_from_image": false},
+    {"page": 9, "text": "in one important way: it does not provide a sampling algorithm", "supports": "adding_scores: feature-space limit", "read_from_image": false},
+    {"page": 10, "text": "is a necessary (but not sufficient) condition for Factorized Conditionals", "supports": "adding_scores: orthogonality check", "read_from_image": false},
+    {"page": 1, "text": "such images are strictly out-of-distribution for the individual models being composed", "supports": "unseen: held-out object counts", "read_from_image": false},
+    {"page": 39, "text": "Trained on 1 1 2 4 1 3", "supports": "headline: Kmax 4 with empty background and 1 with unconditional background", "read_from_image": false},
+    {"page": 39, "text": "explicit composition with empty background (as in Figure 3 Exp. A) length-generalizes the best, up to 4 objects", "supports": "headline: 4 objects", "read_from_image": false},
+    {"page": 11, "text": "while concepts from the same group may not (such as “dog”+“horse”)", "supports": "same-group concepts may not compose", "read_from_image": false},
+    {"page": 17, "text": "each column lists the number of images that contained the given number of objects in correct locations", "supports": "Table 1 meaning", "read_from_image": false}
+  ]
+}

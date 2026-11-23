@@ -1,0 +1,270 @@
+{
+  "slug": "noisyclip",
+  "source": "arXiv 2512.08505",
+  "page_url": "https://arxiv.org/pdf/2512.08505",
+  "title": "Early Estimation of Language to Latent Alignment in Diffusion Models",
+  "role": "The noise-aware text and image model this loop tests as a sentence-score checker",
+  "pages_read": 31,
+  "reads": "Noisy SDXL latent passed through a fixed 4-to-3 linear map to RGB, then a fine-tuned CLIP ViT-L/14 image encoder; frozen CLIP text encoder; no timestep input",
+  "reads_page": 9,
+  "trained_on": "50,000 SDXL latents from steps 20-29 of 50 with rewritten CC12M captions, InfoNCE with in-batch negatives, image encoder tuned, 10 epochs",
+  "trained_page": 8,
+  "score_enters": "No gradient enters a sampler; the dot-product score ranks seeds mid-generation so weak seeds stop early (Best-of-N)",
+  "score_page": 11,
+  "adding_scores": "not addressed",
+  "adding_page": 5,
+  "properties": "Prompt match by Recall@1; counting, attribute and spatial only as GenAI-Bench image-ranking skills; no binding or relation swap test; position and size not measured separately",
+  "properties_page": 24,
+  "unseen": "no: no concept hold-out; the SDXL-trained model is run zero-shot on SD3.5 and FLUX.1",
+  "unseen_page": 13,
+  "headline": "Recall@1 for the right caption among 5 (0 to 1, higher is better, chance 0.20) over latents 21-30: 0.506 NoisyCLIP against 0.145 frozen CLIP ViT-L/14 on SDXL; at 150 of 300 Best-of-6 steps its VQAScore is 2% below 300-step CLIP",
+  "headline_page": 14,
+  "copy_or_avoid": "Copy the frozen text tower and linear latent map rewritten without the 8-bit step; avoid expecting steps 0-9 to work, since the right caption ranks first below chance there and no swap-word pair or gradient was tested (inferred)",
+  "model": "SDXL (zero-shot tests on SD3.5 and FLUX.1)",
+  "extra_papers": [
+    {
+      "title": "Controlling Latent Diffusion Using Latent CLIP",
+      "arxiv": "2503.08455",
+      "page": 15,
+      "why": "CLIP that reads latents directly, with latent diffusion control in its title; nearest prior work on steering with a latent text-image score"
+    },
+    {
+      "title": "Dynamic Classifier-Free Diffusion Guidance via Online Feedback",
+      "arxiv": "2509.16131",
+      "page": 18,
+      "why": "Uses latent information during reverse diffusion to choose the guidance strength"
+    }
+  ],
+  "disagreements": [
+    {
+      "claim": "Task claim: both projection heads are frozen",
+      "source": "code/noisyclip/src/train_model_classic.py:48-49 sets requires_grad = not ('text' in name), so visual_projection trains under --only_vision",
+      "paper_says": "We exclusively fine-tune the image encoder; projection heads are not mentioned. The released flag leaves visual_projection trainable, but the published checkpoint's visual_projection and text_projection equal base CLIP's exactly (tools/checkpoint-compare.txt)",
+      "page": 6
+    },
+    {
+      "claim": "Training settings are lr 5.7e-5, weight decay 0.1, 10 epochs, batch 128, ViT-L/14",
+      "source": "code/noisyclip/src/train_model_classic.py:286-287,304,306,314 defaults are 5 epochs, batch 64, lr 1e-4, weight decay 0.0, clip-vit-base-patch32; the real run's flags are not released",
+      "paper_says": "learning rate of 5.7e-5, weight decay of 0.1, 10 epochs, batch size of 128",
+      "page": 8
+    },
+    {
+      "claim": "Phi is the inverse of the encoder",
+      "source": "code/noisyclip/src/latent_to_image.py:10-16 uses a fixed linear approximation with hard-coded weights",
+      "paper_says": "a transformation (inverse of E) that converts zt into an RGB-like space",
+      "page": 5
+    },
+    {
+      "claim": "The training window is latents 20-29",
+      "source": "code/noisyclip/src/train_model_classic.py:180-181 loads a ready-made dataset; no released file selects steps or adds noise",
+      "paper_says": "We select a fixed latent interval (20-29) for contrastive training",
+      "page": 6
+    },
+    {
+      "claim": "The released script generates the corrupted captions",
+      "source": "code/noisyclip/src/corrupt_prompts.py:119 calls exit() before generation",
+      "paper_says": "we use the instruction-tuned version of Gemma 3 with 27B parameters",
+      "page": 22
+    },
+    {
+      "claim": "Frozen CLIP on basic prompts reaches 19.8% of the final score",
+      "source": "paper Table 4 values: 0.183 / 0.296 = 61.8%",
+      "paper_says": "CLIP baseline, which only achieves 19.8%",
+      "page": 27
+    },
+    {
+      "claim": "Frozen CLIP stays below 0.1 Recall@1 in the first 25 iterations",
+      "source": "paper Fig. 4, p. 10: about 0.13 at latent 25, read from the figure",
+      "paper_says": "whereas the baseline remains below 0.1",
+      "page": 10
+    },
+    {
+      "claim": "The method remains superior on advanced prompts",
+      "source": "paper Table 3, p. 25: Negate 0.517 NoisyCLIP against 0.522 frozen CLIP and 0.523 candidate mean",
+      "paper_says": "our method remains superior in assessing alignment",
+      "page": 26
+    },
+    {
+      "claim": "Task claim: separation by latent 10 needs qualification",
+      "source": "paper Fig. 4 and Fig. 10: the marked crossing is Recall@1 0.20, chance among 5 captions, and the wrong-count caption leads until about latent 13",
+      "paper_says": "NoisyCLIP discriminates the correct caption from the non-factual ones remarkably early, by latent 10",
+      "page": 10
+    },
+    {
+      "claim": "Task claim: the input has no VAE decode",
+      "source": "true for SDXL at code/noisyclip/src/latent_to_image.py:9-20; false for the SD3.5 and FLUX.1 tests",
+      "paper_says": "requires using the model's VAE for RGB decoding",
+      "page": 9
+    }
+  ],
+  "quotes": [
+    {
+      "page": 14,
+      "text": "NoisyCLIP 0.506 0.709",
+      "supports": "headline: Recall@1 0.506",
+      "read_from_image": false
+    },
+    {
+      "page": 14,
+      "text": "CLIP L14 0.145 0.657",
+      "supports": "headline: frozen CLIP Recall@1 0.145",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "By reducing the computational budget by 50% (to 150 denoising steps), our method incurs a minimal 2% drop in VQAScore",
+      "supports": "headline: 150 steps and 2% drop",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "achieves a VQAScore of 0.85 at a cost of 300",
+      "supports": "headline: 300-step baseline",
+      "read_from_image": false
+    },
+    {
+      "page": 10,
+      "text": "select the correct caption for an image from five candidates (one correct, four nonfactual)",
+      "supports": "headline: five candidates, chance 0.20",
+      "read_from_image": false
+    },
+    {
+      "page": 9,
+      "text": "This transformation is done by decoding latent representations via a linear transformation to RGB",
+      "supports": "reads",
+      "read_from_image": false
+    },
+    {
+      "page": 9,
+      "text": "the highly compressed nature of their latent spaces requires using the model's VAE for RGB decoding",
+      "supports": "reads: DiT tests use the VAE",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "We fine-tune solely the visual encoder of the dual-encoder on a dataset of 50000 latents",
+      "supports": "trained_on",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "We select a fixed latent interval (20–29) for contrastive training",
+      "supports": "trained_on: steps 20-29",
+      "read_from_image": false
+    },
+    {
+      "page": 8,
+      "text": "over 10 epochs with a batch size of 128",
+      "supports": "trained_on: length",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "Using SDXL [37], we generate images from these prompts and extract latent representations for training",
+      "supports": "trained_on: SDXL",
+      "read_from_image": false
+    },
+    {
+      "page": 11,
+      "text": "This enables the early stopping of denoising processes that are estimated to be sub-optimal",
+      "supports": "score_enters",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "we employ the text encoder, τθ , and an image encoder, νθ , to compute the similarity score",
+      "supports": "adding_scores: closest statement; the score is a single text-image dot product and no sum of scores is discussed",
+      "read_from_image": false
+    },
+    {
+      "page": 13,
+      "text": "on two DiT architectures in a zeroshot setting",
+      "supports": "unseen",
+      "read_from_image": false
+    },
+    {
+      "page": 14,
+      "text": "although NoisyCLIP is trained exclusively on data generated by SDXL",
+      "supports": "unseen and the SDXL claim",
+      "read_from_image": false
+    },
+    {
+      "page": 10,
+      "text": "NoisyCLIP discriminates the correct caption from the non-factual ones remarkably early, by latent 10",
+      "supports": "task claim 3",
+      "read_from_image": false
+    },
+    {
+      "page": 10,
+      "text": "CLIP requires an additional 20 denoising iterations to achieve a similar separation",
+      "supports": "task claim 3",
+      "read_from_image": false
+    },
+    {
+      "page": 10,
+      "text": "Fig. 4: NoisyCLIP right-caption Recall@1 crosses the mean wrong-caption curve at about 0.20 near latent 9",
+      "supports": "claim 3 qualification",
+      "read_from_image": true
+    },
+    {
+      "page": 23,
+      "text": "Fig. 10: at latent 0 right 0.03, count 0.40, subject 0.23, background 0.25, colour 0.09; right passes count near latent 13",
+      "supports": "per-corruption results",
+      "read_from_image": true
+    },
+    {
+      "page": 10,
+      "text": "Fig. 5: model trained on 10-19 scores 0.662 at inference 0-10; model trained on 20-29 scores 0.648",
+      "supports": "training window result",
+      "read_from_image": true
+    },
+    {
+      "page": 30,
+      "text": "Fig. 11: for A red bicycle against a blue wall, NoisyCLIP selects a blue bicycle against a red wall",
+      "supports": "attribute swap failure",
+      "read_from_image": true
+    },
+    {
+      "page": 29,
+      "text": "highlighting its susceptibility to misunderstanding or swapping the attributes of different elements",
+      "supports": "attribute binding failure",
+      "read_from_image": false
+    },
+    {
+      "page": 22,
+      "text": "we define four specific dimensions of non-factuality to be corrupted",
+      "supports": "wrong caption construction",
+      "read_from_image": false
+    },
+    {
+      "page": 23,
+      "text": "caption consistently maintains the highest recall among the non-factual options",
+      "supports": "counting result",
+      "read_from_image": false
+    },
+    {
+      "page": 26,
+      "text": "CLIP L14 0.183 (19.8%) 0.186 (67.4%)",
+      "supports": "Table 4 disagreement",
+      "read_from_image": false
+    },
+    {
+      "page": 27,
+      "text": "which only achieves 19.8%",
+      "supports": "Table 4 disagreement",
+      "read_from_image": false
+    },
+    {
+      "page": 5,
+      "text": "is a transformation (inverse of E) that converts zt into an RGB-like space",
+      "supports": "Phi disagreement",
+      "read_from_image": false
+    },
+    {
+      "page": 6,
+      "text": "we exclusively fine-tune the image encoder",
+      "supports": "task claim 1",
+      "read_from_image": false
+    }
+  ]
+}

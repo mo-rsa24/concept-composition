@@ -1,0 +1,56 @@
+{
+  "slug": "memory-experts-world-models",
+  "source": "https://proceedings.iclr.cc/paper_files/paper/2026/file/19eae75beed66321d62272e794a9c2ac-Paper-Conference.pdf",
+  "page_url": "https://proceedings.iclr.cc/paper_files/paper/2026/file/19eae75beed66321d62272e794a9c2ac-Paper-Conference.pdf",
+  "title": "Composition of Memory Experts for Diffusion World Models",
+  "role": "A contrastive product of experts on video models, showing what a negative expert does when it is each model's own baseline",
+  "pages_read": 27,
+  "reads": "Video diffusion experts read noisy frames plus past frames, LoRA-stored history or camera poses; no text",
+  "reads_page": 5,
+  "trained_on": "Pretrained video diffusion models (DiT, 150k steps on Memory Maze); long-term expert fine-tunes LoRA adapters on the current episode at test time",
+  "trained_page": 16,
+  "score_enters": "Sum over experts of alpha times the conditional score plus (1 minus alpha) times that expert's baseline score, at every noise level, alpha 2 to 3 (Eq. 6)",
+  "score_page": 15,
+  "adding_scores": "Under disjoint kernels the contrastive expert keeps kernel shapes and only reweights modes (Prop 1); that assumption does not cover overlapping noised kernels or the product across experts (inferred)",
+  "adding_page": 5,
+  "properties": "none of the five",
+  "properties_page": 6,
+  "unseen": "no: evaluates video prediction and recall with no held-out concepts",
+  "unseen_page": 18,
+  "headline": "LPIPS perceptual distance 0.097 for the composition against 0.113 for full attention on Memory Maze, DiT, lower is better",
+  "headline_page": 7,
+  "copy_or_avoid": "Copy the margin test and the with-and-without-negative ablation; avoid treating unconditional negatives as evidence for wrong-sentence negatives (inferred)",
+  "model": "DiT, UViT and U-Net video diffusion models",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "The long-term expert's negative is the model with no context",
+      "source": "Eq. 4 on p. 6 prints the negative as the unadapted weights with the same context c",
+      "paper_says": "The contrastive expert is then the model without any context",
+      "page": 5
+    },
+    {
+      "claim": "Without contrast, stacking experts fails to outperform the base model",
+      "source": "Table 4 on p. 9: every no-contrast row (0.170 to 0.192) is below the no-contrast base of 0.203, lower is better",
+      "paper_says": "Without contrastive weighting, stacking multiple experts fails to outperform the base model",
+      "page": 9
+    }
+  ],
+  "quotes": [
+    {"page": 4, "text": "has been trained to predict future frames conditioned on the corresponding context", "supports": "reads", "read_from_image": false},
+    {"page": 5, "text": "directly attends to a short-term recent context window", "supports": "reads: short-term expert", "read_from_image": false},
+    {"page": 18, "text": "The model is trained for 150k steps with a batch size of 16", "supports": "trained_on: base model", "read_from_image": false},
+    {"page": 16, "text": "updates are restricted to low-rank adapters (LoRA layers), while the backbone remains frozen", "supports": "trained_on: test-time fine-tuning", "read_from_image": false},
+    {"page": 16, "text": "where the unconditional counterpart of each expert acts as a contrastive baseline", "supports": "score_enters: negative expert", "read_from_image": false},
+    {"page": 15, "text": "sampling proceeds by replacing the single-model score function in the reverse diffusion update", "supports": "score_enters", "read_from_image": false},
+    {"page": 18, "text": "within a narrow, fixed range ∈ [2, 3]for all experts", "supports": "score_enters: alpha 2 to 3", "read_from_image": false},
+    {"page": 5, "text": "Suppose each kernel hk has limited bandwidth and the supports", "supports": "adding_scores: assumption", "read_from_image": false},
+    {"page": 5, "text": "leaves the kernels hk untouched and acts only on the mixture weights", "supports": "adding_scores: reweighting", "read_from_image": false},
+    {"page": 18, "text": "We generate 512 videos for evaluation and exclude the ground truth context frames from metric computations", "supports": "unseen: evaluation is video prediction", "read_from_image": false},
+    {"page": 7, "text": "CoME 0.097 0.892 23.07", "supports": "headline: 0.097", "read_from_image": false},
+    {"page": 7, "text": "Full 0.113 0.859 22.78", "supports": "headline: 0.113", "read_from_image": false},
+    {"page": 9, "text": "All 0.192 0.097", "supports": "contrast ablation", "read_from_image": false},
+    {"page": 5, "text": "The contrastive expert is then the model without any context", "supports": "disagreement: long-term negative", "read_from_image": false},
+    {"page": 9, "text": "Without contrastive weighting, stacking multiple experts fails to outperform the base model", "supports": "disagreement: Table 4 text", "read_from_image": false}
+  ]
+}

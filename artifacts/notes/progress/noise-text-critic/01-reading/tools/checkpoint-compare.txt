@@ -1,0 +1,7 @@
+noisyclip tensors 590 meta {'format': 'pt'}
+base tensors 592 meta {'format': 'pt'}
+visual_projection.weight: shape (768, 1024) dtype F32/F32 max|diff| 0.000e+00 rel_norm 0.000e+00  
+text_projection.weight: shape (768, 768) dtype F32/F32 max|diff| 0.000e+00 rel_norm 0.000e+00  
+logit_scale: shape () dtype F32/F32 max|diff| 1.142e-02 rel_norm 2.480e-03 values (4.59375, 4.605170249938965)
+text_model.encoder.layers.0.self_attn.k_proj.weight: shape (768, 768) dtype F32/F32 max|diff| 0.000e+00 rel_norm 0.000e+00  
+vision_model.encoder.layers.0.self_attn.k_proj.weight: shape (1024, 1024) dtype F32/F32 max|diff| 4.724e-03 rel_norm 6.110e-02  

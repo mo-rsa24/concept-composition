@@ -1,0 +1,46 @@
+{
+  "slug": "noise-diffusion-semantic-faithfulness",
+  "source": "arXiv 2411.16503",
+  "page_url": "https://arxiv.org/pdf/2411.16503",
+  "title": "Noise Diffusion for Enhancing Semantic Faithfulness in Text-to-Image Synthesis",
+  "role": "A vision-language score on the finished image that picks how the starting noise is replaced; its own control shows direct gradient updates barely change structure.",
+  "pages_read": 15,
+  "reads": "The finished decoded image plus a yes-or-no question; the score is the probability of Yes, and no noisy input is read.",
+  "reads_page": 3,
+  "trained_on": "nothing trained",
+  "trained_page": 5,
+  "score_enters": "An approximate gradient at the final latent chooses 1 of 50 random noises, which is mixed into the starting noise with step size 1 minus the square root of the score; best of the rounds is returned.",
+  "score_page": 5,
+  "adding_scores": "not addressed",
+  "adding_page": 3,
+  "properties": "Prompt match is measured by VQA and CLIP scores; attribute binding and spatial relation appear only in example images and through the overall VQA score; counting, position and size are not tested.",
+  "properties_page": 6,
+  "unseen": "no: no held-out concepts are tested.",
+  "unseen_page": 5,
+  "headline": "VQA score (0 to 1, higher better, the optimised quantity) after 50 rounds on SD1.4 is 0.9790 on simple prompts, 0.1073 above InitNo, and 0.9578 on complex prompts, 0.1930 above InitNo.",
+  "headline_page": 6,
+  "copy_or_avoid": "Copy the random-noise control; avoid reading the layout change as gradient steering, because noise replacement plus best-of-N selection can produce it (inferred).",
+  "model": "SD1.4, SD1.5, SD2.0, SD2.1",
+  "extra_papers": [
+    {"title": "Initno: Boosting text-to-image diffusion models via initial noise optimization", "arxiv": "", "page": 9, "why": "Optimises the starting noise from text-to-image attention maps."},
+    {"title": "Attend-and-excite: Attention-based semantic guidance for text-to-image diffusion models", "arxiv": "", "page": 9, "why": "Updates the latent at each denoising step from cross-attention between words and image."}
+  ],
+  "disagreements": [
+    {"claim": "The updated starting noise stays standard Gaussian for any step size.", "source": "this paper, Eq. 10", "paper_says": "The claim assumes Gaussian noise, but Algorithm 1 picks that noise by an argmax that depends on the current latent, so it is not independent of the latent (inferred).", "page": 4},
+    {"claim": "The VLM score's gradient drives the change in the picture.", "source": "the paper's framing on p. 8", "paper_says": "Methods following the gradient directly show limited structural change; the large changes come with noise replacement, including the random controls in Fig. 6.", "page": 7}
+  ],
+  "quotes": [
+    {"page": 3, "text": "The probability of the token “Yes” serves as the VQA score", "supports": "reads: the score", "read_from_image": false},
+    {"page": 3, "text": "zT is denoised to z0 , and z0 is decoded into image I, which is fed to the LVLM to compute the VQA score", "supports": "reads: finished decoded image", "read_from_image": false},
+    {"page": 5, "text": "The number of denoising steps T , max optimization epoch M and candidate noises N are all set as 50", "supports": "score_enters: 50 candidates, trained_on: settings only", "read_from_image": false},
+    {"page": 5, "text": "we utilize the official Stable Diffusion V-1.4 [31] as the base diffusion model", "supports": "trained_on: pretrained model used as supplied", "read_from_image": false},
+    {"page": 4, "text": "we adopt the simple approximation proposed by [24], where ϵθ (zt ) is treated as a constant", "supports": "score_enters: gradient approximation", "read_from_image": false},
+    {"page": 5, "text": "we then sample a set of candidate noises, and select the noise that maximizes", "supports": "score_enters: gradient selects a noise", "read_from_image": false},
+    {"page": 7, "text": "show limited changes to the image structure, with relatively small visual adjustments", "supports": "layout: direct gradient updates", "read_from_image": false},
+    {"page": 3, "text": "Does this figure show ‘{prompt}’? Please answer yes or no", "supports": "adding_scores: no score addition, the score is a single question", "read_from_image": false},
+    {"page": 5, "text": "randomly replacing conjunctions such as “and” or “with” with spatial terms like “on,” “under,” “above,” or “below”", "supports": "unseen: prompts are built from the same objects, nothing held out", "read_from_image": false},
+    {"page": 6, "text": "with the VQA score reaching 0.9790, exceeding the average VQA score of InitNo by 0.1073", "supports": "headline: simple prompts", "read_from_image": false},
+    {"page": 7, "text": "our method achieves a VQA score of 0.9578, again surpassing the average VQA score of InitNo by 0.1930", "supports": "headline: complex prompts", "read_from_image": false},
+    {"page": 4, "text": "zT′ ∼ N (0, I) holds true, regardless of the value of γ", "supports": "disagreement: Gaussian claim", "read_from_image": false}
+  ]
+}

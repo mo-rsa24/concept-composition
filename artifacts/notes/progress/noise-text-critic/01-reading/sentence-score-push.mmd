@@ -1,0 +1,33 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 34, 'rankSpacing': 34}}}%%
+flowchart TB
+  R["right sentence<br/>a cat to the left of a dog"]:::plain
+  X["half-drawn SDXL latent x_t<br/>4 channels, steps 0 to 15 of 50"]:::plain
+  W["wrong sentence<br/>a dog to the left of a cat"]:::plain
+
+  TR["CLIP text encoder<br/>frozen"]:::fixed
+  M["fixed linear map to RGB<br/>no VAE decode"]:::fixed
+  TW["CLIP text encoder<br/>the same frozen one"]:::fixed
+
+  V["NoisyCLIP image encoder<br/>ViT-L/14, tuned on noisy latents"]:::plain
+
+  SR["S right<br/>picture against right sentence"]:::plain
+  SW["S wrong<br/>picture against wrong sentence"]:::plain
+
+  D["the checker: S right minus S wrong"]:::plain
+  G["the push: gradient of the checker with respect to x_t,<br/>times strength λ and noise level σ_t"]:::push
+  B["ε base<br/>product or CO3 noise prediction"]:::plain
+  E["ε hat = ε base minus the push<br/>the next sampler step uses this"]:::plain
+
+  R --> TR --> SR
+  X --> M --> V
+  W --> TW --> SW
+  V --> SR
+  V --> SW
+  SR --> D
+  SW --> D
+  D --> G --> E
+  B --> E
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef fixed fill:#f1f3f5,stroke:#6b7a88,stroke-width:2px,color:#111111
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111

@@ -1,0 +1,52 @@
+{
+  "slug": "local-compositional-generalization",
+  "source": "arXiv 2509.16447",
+  "page_url": "https://arxiv.org/pdf/2509.16447",
+  "title": "Local Mechanisms of Compositional Generalization in Conditional Diffusion",
+  "role": "Theory of when scores compose: disjoint factorization equals local scores, with an orthogonality check and SDXL measurements",
+  "pages_read": 36,
+  "reads": "EDM2 U-Net on noisy 128 px CLEVR with location or colour conditions; SDXL post-FFN transformer block features for 24 prompts",
+  "reads_page": 9,
+  "trained_on": "CLEVR with 1 to K objects, 500,000 images per object count; SDXL and Matryoshka used pretrained",
+  "trained_page": 22,
+  "score_enters": "No external gradient; CLEVR sampling uses raw conditional scores with no guidance, and the local model denoises patches",
+  "score_page": 23,
+  "adding_scores": "Exact if and only if the distribution factorizes over disjoint pixel or feature sets, each read by one condition (Lemma 1); orthogonal score differences are a necessary check (Lemma 2)",
+  "adding_page": 6,
+  "properties": "Counting and position measured on CLEVR; binding, spatial relation, size and prompt match not measured",
+  "properties_page": 3,
+  "unseen": "partly: object count is held out on CLEVR (trained on 1 to 3, tested up to 12), with no new object types or colours",
+  "unseen_page": 26,
+  "headline": "Trained on 1 to 3 CLEVR objects, Kmax (objects drawn reliably) is 7 with all objects labelled against 2 with one label, and enforcing local scores lifts the one-label model to 9; SDXL feature cosine is 0.41 to 0.47 within category and 0.27 to 0.33 between",
+  "headline_page": 3,
+  "copy_or_avoid": "Copy the Lemma 2 cosine check on cat and dog U-Net differences before training; avoid expecting a whole-image sentence score to move position (inferred)",
+  "model": "EDM2 U-Net on CLEVR; SDXL base 1.0; Matryoshka Diffusion Model",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "SDXL shows quantitative evidence of feature-space local conditional scores",
+      "source": "this paper, p. 9, read against its own Lemma 2, p. 7",
+      "paper_says": "Lemma 2 requires exactly zero cosine between different conditions, while the measured between-category cosine is 0.27 to 0.33; the evidence offered is a within over between ratio (inferred)",
+      "page": 9
+    },
+    {
+      "claim": "Approximately compositional distributions become more compositional at higher noise",
+      "source": "this paper, p. 17, combining Lemma 3 and Lemma 4",
+      "paper_says": "Lemma 4 bounds KL from the marginal to a conditional at a fixed y, while Definition 3 uses the reverse argument order and conditions on the other pixels, which are also noised, so Lemma 4 does not directly bound Definition 3's errors (inferred)",
+      "page": 16
+    }
+  ],
+  "quotes": [
+    {"page": 9, "text": "we extract hidden-state activations (post-FFN outputs of each BasicTransformerBlock) from the SDXL U-net for 24 prompts spanning 4 semantic categories", "supports": "reads", "read_from_image": false},
+    {"page": 22, "text": "The image resolution is 128 × 128", "supports": "reads", "read_from_image": false},
+    {"page": 22, "text": "with 1 to K objects, with 500,000 samples for each object count", "supports": "trained_on", "read_from_image": false},
+    {"page": 23, "text": "we use raw conditional diffusion scores, without applying any guidance/CFG", "supports": "score_enters", "read_from_image": false},
+    {"page": 6, "text": "is a pixel-space Conditional Projective Composition (Definition 2) with disjoint sets", "supports": "adding_scores", "read_from_image": false},
+    {"page": 7, "text": "an empirically-testable necessary-but-not-sufficient condition for F-LCS, based on orthogonality between score differences", "supports": "adding_scores", "read_from_image": false},
+    {"page": 1, "text": "trained on 1-3 objects and tested on K > 3 locations actually generate images with K objects", "supports": "unseen", "read_from_image": false},
+    {"page": 26, "text": "We test on up to K = 12 locations", "supports": "unseen", "read_from_image": false},
+    {"page": 3, "text": "1-3 objects 7 2 3 9 9", "supports": "headline: Kmax 7, 2 and 9 for models trained on 1 to 3 objects", "read_from_image": false},
+    {"page": 23, "text": "generating K objects at least 50% of the time", "supports": "headline: meaning of Kmax", "read_from_image": false},
+    {"page": 9, "text": "within-category cosine similarities (0.41–0.47) substantially exceed between-category similarities (0.27–0.33), yielding disentanglement ratios of 1.4–1.6", "supports": "headline: SDXL cosines 0.41 to 0.47 and 0.27 to 0.33", "read_from_image": false}
+  ]
+}
