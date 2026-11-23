@@ -1,0 +1,39 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    MAPS["Word attention maps<br/>one map per subject word<br/>SDXL, noisy latent"]
+
+    subgraph HEADS["The 5 proposed checkers, and what the 18 papers show for each"]
+        direction TB
+        SPATIAL["1. Spatial relation: is A left of B?<br/>EXISTS: Learn-to-Steer trained it on word maps<br/>GenEval position 0.60 of 1 on 16 unseen categories<br/>FLUX.1-dev, never run on SDXL"]
+        COUNT["2. Counting: one blob per noun?<br/>GAP: no trained head on word maps<br/>Make It Count needed self-attention at t = 500"]
+        BIND["3. Binding: red on book, not on vase?<br/>GAP: no trained head<br/>SynGen's loss is hand-written, no held-out test"]
+        POS["4. Position and size: where, how big?<br/>GAP: no trained head<br/>Self-Guidance's formulas are hand-written, no score printed"]
+        MATCH["5. Prompt match: does it fit the caption?<br/>GAP: trained, but on U-Net features<br/>Discriminative Probing holds out no concepts"]
+    end
+
+    SUM["Sum of 5 gradients, capped<br/>valid only if the labels are<br/>independent given x_t (inferred)"]
+    POE["Added to the product of experts<br/>steps 0 to 15 of 50"]
+    RISK["Open: 10 of the 16 pushed steps sit above t = 800 (inferred)<br/>A word-map detector scores mAP@0.5 of 18.0 of 100 at t = 800<br/>and its authors call this range random guesses (Detector Guidance)"]
+
+    MAPS --> SPATIAL
+    MAPS --> COUNT
+    MAPS --> BIND
+    MAPS --> POS
+    MAPS --> MATCH
+    SPATIAL --> SUM
+    COUNT --> SUM
+    BIND --> SUM
+    POS --> SUM
+    MATCH --> SUM
+    SUM --> POE
+    RISK -.->|"can the maps be read this early?"| MAPS
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef exists fill:#e3f4e1,stroke:#2e7d32,stroke-width:3px,color:#111111
+    classDef gap fill:#fff1dc,stroke:#c77700,stroke-width:3px,color:#111111
+    classDef risk fill:#fde8e8,stroke:#b3261e,stroke-width:2px,stroke-dasharray: 5 4,color:#111111
+    class MAPS,SUM,POE plain
+    class SPATIAL exists
+    class COUNT,BIND,POS,MATCH gap
+    class RISK risk
+    style HEADS fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px

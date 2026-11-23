@@ -1,0 +1,44 @@
+{
+  "slug": "make-it-count",
+  "arxiv": "2406.10210",
+  "title": "Make It Count: Text-to-Image Generation with an Accurate Number of Objects",
+  "property": "object count",
+  "pages_read": 17,
+  "reads": "Untrained clustering (DBSCAN) of noisy SDXL self-attention features from layer up-52 at t = 500, inside a foreground mask from the object's cross-attention; no decoded image",
+  "reads_page": 4,
+  "trained_on": "Counter untrained; ReLayout U-Net trained on about 10,000 SDXL image pairs differing by one object, mapping binary instance masks with k objects to k + 1, Dice plus overlap loss",
+  "trained_page": 5,
+  "gradient_enters": "Weighted cross-entropy between cross-attention and the target layout at t in [1000, 500], plus self-attention masking at t in [1000, 900]; no update equation or step size printed",
+  "gradient_page": 13,
+  "unseen": "no; ReLayout's training classes are not listed and no held-out classes are tested",
+  "unseen_page": 9,
+  "headline": "Human-rated count accuracy 54% against 26% for SDXL on CoCoCount; at count 2, 30 of 34 images (88%) against about 62% for SDXL, for one repeated class",
+  "headline_page": 8,
+  "copy_or_avoid": "Copy reading the layout mid-sampling then steering from t = 1000 toward a spatial target; test whether word maps alone can separate instances (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "SDXL",
+  "extra_papers": [
+    {"title": "Teaching CLIP to Count to Ten", "arxiv": "", "page": 11, "why": "Trains a CLIP model for counting, an abstract property across categories"}
+  ],
+  "disagreements": [
+    {"claim": "CountGen-Layout improves human accuracy by 14 points (30 to 44) and CountGen-Image by 12", "source": "this paper, text on p. 8", "paper_says": "Table 2 gives 44 for Random layout with CountGen image and 42 for CountGen layout with Bounded Attention, so the attributions are swapped", "page": 9},
+    {"claim": "The two components together improve accuracy by 21 points", "source": "this paper, text on p. 8", "paper_says": "Human accuracy moves from 30 to 54, a gain of 24 points; 21 points is the YOLOv9 gain from 29 to 50", "page": 9},
+    {"claim": "CountGen is on par with DALL-E 3 for 2 and 3 objects", "source": "this paper, Fig. 8 caption, p. 9", "paper_says": "The plot shows DALL-E 3 at about 94 against 88 at count 2, and about 79 against 62 at count 3", "page": 9},
+    {"claim": "CountGen outperforms all methods under YOLOv9", "source": "this paper, Fig. 10 caption, p. 14", "paper_says": "At count 10 the plot shows SDXL at about 9% and CountGen at about 6%", "page": 14}
+  ],
+  "quotes": [
+    {"page": 3, "text": "at timestep t = 500 to serve as our instance-level features", "supports": "reads: timestep of the instance features", "read_from_image": false},
+    {"page": 4, "text": "We then use these crossattention maps to extract a foreground mask M based on dynamic thresholding", "supports": "reads: cross-attention foreground", "read_from_image": false},
+    {"page": 15, "text": "Initially, up to timestamp t = 500, clear separation is not observed in some objects", "supports": "reads: early steps", "read_from_image": false},
+    {"page": 5, "text": "we generate a set of ~10K pairs of images of Ik and Ik+1", "supports": "trained_on: data", "read_from_image": false},
+    {"page": 13, "text": "We trained the U-Net with a learning-rate of 8e-6, a batch-size of size 32 and the Adam optimizer", "supports": "trained_on: training setup", "read_from_image": false},
+    {"page": 13, "text": "The object layout loss is applied at timesteps t ∈ [1000, 500], in all layers of the U-Net", "supports": "gradient_enters: loss steps", "read_from_image": false},
+    {"page": 13, "text": "the self-attention masking is applied at timesteps t ∈ [1000, 900], in the decoder layers of the U-Net", "supports": "gradient_enters: masking steps", "read_from_image": false},
+    {"page": 9, "text": "we focus on generating scenes with up to 10 instances and a single object per prompt", "supports": "unseen: scope, no held-out test", "read_from_image": false},
+    {"page": 8, "text": "CountGen (ours) 50 54 48", "supports": "headline: 54% human accuracy", "read_from_image": false},
+    {"page": 8, "text": "SDXL 28 26 29 ages that have the cor-", "supports": "headline: 26% SDXL", "read_from_image": false},
+    {"page": 17, "text": "Figure 17 target 2 row: generated 1 is 2 images, generated 2 is 30 images, generated 3 is 2 images", "supports": "headline: 30 of 34 at count 2", "read_from_image": true},
+    {"page": 9, "text": "Figure 8 at 2 objects: accuracy about 88 CountGen, 94 DALL-E 3, 62 SDXL, 53 Counting Guidance", "supports": "headline: 62% SDXL at count 2", "read_from_image": true},
+    {"page": 8, "text": "our first phase CountGen-Layout improves accuracy measured by people by 14% (from 30 to 44)", "supports": "disagreement on the component attribution", "read_from_image": false}
+  ]
+}

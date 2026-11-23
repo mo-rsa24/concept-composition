@@ -1,0 +1,40 @@
+{
+  "slug": "countdiffusion",
+  "arxiv": "2505.04347",
+  "title": "CountDiffusion: Text-to-Image Synthesis with Training-Free Counting-Guidance Diffusion",
+  "property": "object count",
+  "pages_read": 8,
+  "reads": "Pretrained Grounded SAM reads a decoded one-step image at t_mid (after 10 of 40 steps) with the object tags; a hand-written loss then reads masked attention maps",
+  "reads_page": 4,
+  "trained_on": "nothing trained; Grounded SAM is pretrained and the loss is a signed top-P% mean of masked attention",
+  "trained_page": 1,
+  "gradient_enters": "Second pass from the same noise updates z_t on steps T to t_mid using the attention loss inside a mask, keeping the background from the first pass; no gradient through the counter",
+  "gradient_page": 4,
+  "unseen": "no; both self-built datasets use the same 25 categories and no held-out split exists",
+  "unseen_page": 4,
+  "headline": "Count accuracy 59% against 34% for SDXL on CoCoCount (51% for CountGen), scored by the same Grounded SAM that steers; at count 2 the plotted accuracy is about 76% against about 43% for SDXL",
+  "headline_page": 5,
+  "copy_or_avoid": "Copy reading at a mid step then restarting from the same noise; avoid scoring with the model that steers (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "SDXL / PixArt-Sigma",
+  "extra_papers": [],
+  "disagreements": [
+    {"claim": "After about 15 steps (t_mid = 25) the one-step image is informative", "source": "this paper, Fig. 3 caption, p. 4", "paper_says": "The experiments use T = 40 and t_mid = 30, which is after 10 steps", "page": 5},
+    {"claim": "The correction uses universal guidance", "source": "this paper, p. 4", "paper_says": "Eq. 13 prints z_t' as an element-wise product of z_t, the gradient and sigma, while universal guidance is additive; probably a typo (inferred)", "page": 4},
+    {"claim": "Table III analyses the guidance steps used", "source": "this paper, p. 6", "paper_says": "No row has 10 guidance steps out of 40 total, the setting implied by T = 40 and t_mid = 30 (inferred)", "page": 6}
+  ],
+  "quotes": [
+    {"page": 4, "text": "is adopted to segment and recognize each object in the predefined classes in image x0,mid", "supports": "reads: Grounded SAM on the one-step image", "read_from_image": false},
+    {"page": 5, "text": "we used a total diffusion steps T = 40 and intermediate step tmid = 30", "supports": "reads: read point", "read_from_image": false},
+    {"page": 1, "text": "we propose CountDiffusion, a trainingfree framework aiming at generating images with correct object quantity", "supports": "trained_on: nothing trained", "read_from_image": false},
+    {"page": 4, "text": "the loss calculates the average of the top P% largest attention values of the correction region", "supports": "gradient_enters: loss", "read_from_image": false},
+    {"page": 4, "text": "is only applied from the initial step T to the intermediate step tmid in order to guarantee the high fidelity", "supports": "gradient_enters: steps", "read_from_image": false},
+    {"page": 4, "text": "the input Gaussian noise image is the same as the one in the dectection stage", "supports": "gradient_enters: second pass from the same noise", "read_from_image": false},
+    {"page": 4, "text": "Both self-constructed datasets comprise the same 25 randomly selected object categories", "supports": "unseen: no held-out split", "read_from_image": false},
+    {"page": 5, "text": "CountDiffusion (SDXL) 59 0.90 33.1402 1.02 45 1.78 31.3483 0.69 31 1.38 32.7549 0.82", "supports": "headline: 59%", "read_from_image": false},
+    {"page": 5, "text": "SDXL 34 2.33 32.5038 0.89 21 4.16 31.7788 0.62 5 2.10 32.9595 0.71", "supports": "headline: 34%", "read_from_image": false},
+    {"page": 5, "text": "CountGen 51 1.28 32.0375 0.94 35 2.49 31.3481 0.45", "supports": "headline: 51% CountGen", "read_from_image": false},
+    {"page": 5, "text": "We employ Grounded SAM to obtain the object quantities required for computing Acc. and MAE", "supports": "headline: scored by the steering model", "read_from_image": false},
+    {"page": 5, "text": "Fig. 4 at 2 objects: accuracy about 76 CountDiffusion SDXL, 71 CountDiffusion PixArt, 67 CountGen, 50 PixArt, 43 SDXL", "supports": "headline: count 2 values", "read_from_image": true}
+  ]
+}

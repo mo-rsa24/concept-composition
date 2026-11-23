@@ -1,0 +1,18 @@
+learn-to-steer	2509.02295	Learn-to-Steer
+infsplign	2512.17851	InfSplign
+counting-guidance	2306.17567	Counting Guidance
+iterative-object-count-optimization	2408.11721	Iterative Object Count Optimization
+countdiffusion	2505.04347	CountDiffusion
+make-it-count	2406.10210	Make It Count
+t2icount	2502.20625	T2ICount
+syngen-linguistic-binding	2306.08877	Linguistic Binding in Diffusion Models
+attend-and-excite	2301.13826	Attend-and-Excite
+diffusion-self-guidance	2306.00986	Diffusion Self-Guidance
+readout-guidance	2312.02150	Readout Guidance
+discriminative-probing-and-tuning	2403.04321	Discriminative Probing and Tuning
+universal-guidance	2302.07121	Universal Guidance
+detector-guidance	2306.02236	Detector Guidance
+correcting-diffusion-through-resampling	2312.06038	Correcting Diffusion Generation through Resampling
+dynamic-cfg-online-feedback	2509.16131	Dynamic Classifier-Free Guidance
+gradcheck	2406.17399	GradCheck
+latent-classifier-guidance	2304.12536	Latent Classifier Guidance

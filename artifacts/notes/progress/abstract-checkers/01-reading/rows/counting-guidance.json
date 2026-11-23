@@ -1,0 +1,41 @@
+{
+  "slug": "counting-guidance",
+  "arxiv": "2306.17567",
+  "title": "Counting Guidance for High Fidelity Text-to-Image Synthesis",
+  "property": "object count",
+  "pages_read": 17,
+  "reads": "Pretrained class-agnostic RCC reads the decoded clean-image estimate at every step, masked by each word's attention map when the prompt has two object types; it never reads noisy features",
+  "reads_page": 4,
+  "trained_on": "nothing trained; RCC is used pretrained with a hand-written squared relative count loss",
+  "trained_page": 4,
+  "gradient_enters": "epsilon <- epsilon + s_count sqrt(1 - alpha_bar_t) grad_{z_t} L_count on all 50 DDIM steps, s_count = 1 or max(0.01, 0.2N - 1), no cap",
+  "gradient_page": 4,
+  "unseen": "no; 34 prompt classes with no split into classes RCC saw and did not see",
+  "unseen_page": 6,
+  "headline": "Normalised MAE (count error divided by target, lower is better) 0.567 against 0.599 for vanilla Stable Diffusion on 680 prompts; at count 2 the plotted error rises from about 0.47 unguided to about 0.54 at s_count 1.0",
+  "headline_page": 8,
+  "copy_or_avoid": "Avoid a decoded-image counter at early steps and a strong push at count 2, where this paper's error rises with guidance strength (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "SD1.4 / SD2.1",
+  "extra_papers": [
+    {"title": "Learning to Count Anything: Reference-less Class-agnostic Counting with Weak Supervision (RCC)", "arxiv": "2205.10203", "page": 9, "why": "Trained counter intended to work across categories; it is the counter this paper uses"},
+    {"title": "Teaching CLIP to Count to Ten", "arxiv": "", "page": 9, "why": "Trains a counting-aware CLIP model, an abstract property across categories (described on p. 3)"}
+  ],
+  "disagreements": [
+    {"claim": "Counting Guidance optimises the latent using a density map", "source": "iterative-object-count-optimization p. 3", "paper_says": "The counter is RCC, which retrieves the count directly by regression, in contrast to most heatmap-based counters", "page": 1},
+    {"claim": "Counting Guidance requires an additional U-Net in every denoising step", "source": "make-it-count p. 3", "paper_says": "Algorithm 1 calls the denoising network once per step, then the decoder and RCC; no second U-Net appears", "page": 4},
+    {"claim": "Object masks come from self-attention maps", "source": "this paper, Section 4.2.1, p. 5", "paper_says": "Section 4.2.2 builds one map per object word and excludes the sot token as Attend-and-Excite does, which describes cross-attention (inferred)", "page": 5}
+  ],
+  "quotes": [
+    {"page": 4, "text": "is the pre-trained counting network RCC [11] and x̂0 is the predicted clean image at each time step", "supports": "reads: pretrained RCC on the decoded estimate", "read_from_image": false},
+    {"page": 5, "text": "the clean image predicted during the early denoising steps is of too low quality for the counting network", "supports": "reads: early decoded estimates are weak", "read_from_image": false},
+    {"page": 4, "text": "To avoid retraining the counting network on noisy images, we perform counting network guidance following Universal Guidance", "supports": "trained_on: nothing trained", "read_from_image": false},
+    {"page": 4, "text": "We update the predicted noise ϵ using the gradient of the counting network", "supports": "gradient_enters", "read_from_image": false},
+    {"page": 6, "text": "we discovered that scount = max(0.01, 0.2N − 1) resulted in markedly improved performance", "supports": "gradient_enters: scale schedule", "read_from_image": false},
+    {"page": 6, "text": "We create a dataset of 680 prompts using our 34 predefined object classes with counts ranging from 1-20", "supports": "unseen: one class list with no held-out split; headline 680 prompts", "read_from_image": false},
+    {"page": 8, "text": "Method MAE ↓ RMSE ↓ CLIP ↑ Vanilla 0.599 0.746 0.316", "supports": "headline: 0.599 vanilla", "read_from_image": false},
+    {"page": 8, "text": "Ours (linear) 0.567 0.692 0.315", "supports": "headline: 0.567 ours", "read_from_image": false},
+    {"page": 13, "text": "Fig. 7c at N = 2: normalised MAE about 0.47 at scount 0.0, 0.54 at 1.0, 0.56 at 3.0", "supports": "headline: count 2 values", "read_from_image": true},
+    {"page": 11, "text": "for small N , the performance is better when the scount is smaller", "supports": "count 2: small counts prefer weak guidance", "read_from_image": false}
+  ]
+}

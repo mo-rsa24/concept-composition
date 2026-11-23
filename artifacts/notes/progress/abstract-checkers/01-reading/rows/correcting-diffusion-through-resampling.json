@@ -1,0 +1,50 @@
+{
+  "slug": "correcting-diffusion-through-resampling",
+  "arxiv": "2312.06038",
+  "title": "Correcting Diffusion Generation through Resampling",
+  "property": "object presence (pretrained detector) plus real-versus-generated realism (trained discriminator)",
+  "pages_read": 24,
+  "reads": "DETR-ResNet-50 on the one-step clean estimate f(X_t); discriminator on noisy X_t through SD 2.1-base U-Net down and middle blocks",
+  "reads_page": 5,
+  "trained_on": "Detector pretrained; discriminators on 1M LAION Aesthetics real and 1M generated images, noised at uniform t, 2 epochs",
+  "trained_page": 14,
+  "gradient_enters": "Proposed method uses no gradient: particles resampled by phi_t/phi_{t+1} six times at sigma <= 1.09; the D-Guidance baseline adds grad log(p/q) to the score only when sigma(t) < 5",
+  "gradient_page": 14,
+  "unseen": "no: every scored object belongs to the COCO categories the detector knows",
+  "unseen_page": 6,
+  "headline": "Object occurrence (0 to 1, higher better) on GPT-Synthetic, SD 2.1-base: plain SD 0.551, gradient D-Guidance 0.558, PF-Hybrid 0.744 at K=15 images, and detector-only best-of-15 also 0.744",
+  "headline_page": 6,
+  "copy_or_avoid": "Put a best-of-K seed selection baseline in every comparison, because selection alone matches resampling at 0.744; do not cite this as proof gradients fail, since the gradient was off at sigma >= 5 (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "SD2.1-base (SD1.5 in Appendix C.7)",
+  "extra_papers": [
+    {"title": "Refining Generative Process with Discriminator Guidance in Score-Based Diffusion Models", "arxiv": "", "page": 9, "why": "Trains a real-versus-generated classifier across all concepts and adds its gradient to the score; this is the D-Guidance baseline"},
+    {"title": "ImageReward: Learning and Evaluating Human Preferences for Text-to-Image Generation", "arxiv": "", "page": 11, "why": "Trains a human-preference scorer on generated images, a learned overall-match property, used here as a selection criterion"}
+  ],
+  "disagreements": [
+    {"claim": "Resampling with the same signal reaches about 0.74", "source": "project claim on Figure 4", "paper_says": "The 0.74 holds only at K=15 (0.689 at K=5, 0.733 at K=10). Object Select, which keeps the best of 15 finished images by detector score with no resampling, also reaches 0.744, and Table 2 gives best-of-K without resampling 67.16% against 72.96% with it. Most of the gain over plain SD comes from choosing among K images.", "page": 6},
+    {"claim": "The test used a clean-image detector at low noise", "source": "project claim", "paper_says": "The detector reads the one-step clean estimate f(X_t). The gradient runs for sigma(t) < 5, which on the paper's Eq. (24) schedule reaches t about 0.80 on a 0-to-1 scale, where x_t is about 0.196 x_0 + 0.981 noise (inferred arithmetic), so this is high noise. Low noise describes the resampling steps at sigma <= 1.09. The discriminator half of the signal is trained on noisy images.", "page": 14}
+  ],
+  "quotes": [
+    {"page": 5, "text": "can be easily approximated by running the object detector on the predicted clean image from Xt", "supports": "reads: detector on one-step clean estimate", "read_from_image": false},
+    {"page": 6, "text": "we use DETR [6] with ResNet-50 backbone [21]", "supports": "reads: DETR-ResNet-50", "read_from_image": false},
+    {"page": 15, "text": "we initialize the discriminator with the U-Net in Stable Diffusion v2.1-base and only keep its down and middle blocks", "supports": "reads: discriminator features", "read_from_image": false},
+    {"page": 14, "text": "We randomly sample 1M images with aesthetics score higher than 6 as real images", "supports": "trained_on: real images", "read_from_image": false},
+    {"page": 14, "text": "we generate 1M images with 49 NFE using EDM sampler", "supports": "trained_on: generated images", "read_from_image": false},
+    {"page": 15, "text": "we uniformly sample time t ∈ [10−5 , 1]", "supports": "trained_on: uniform time", "read_from_image": false},
+    {"page": 14, "text": "apply guidance when σ(t) < 5 since we found at large noise levels, the object detector barely detects any object", "supports": "gradient_enters: D-Guidance cutoff", "read_from_image": false},
+    {"page": 15, "text": "the resampling is always performed before adding noise, i.e., at time tmin,i , thus resampling is perfromed six times in total", "supports": "gradient_enters: six resampling steps", "read_from_image": false},
+    {"page": 15, "text": "30, {(4, 1, 1.09, 1.92), (4, 2, 0.59, 1.09), (4, 2, 0.30, 0.59), (4, 1, 0.06, 0.30)}", "supports": "gradient_enters: noise levels of resampling", "read_from_image": false},
+    {"page": 6, "text": "It contains 500 captions, where each caption contains 2 to 5 objects in MS-COCO", "supports": "unseen: objects are COCO categories", "read_from_image": false},
+    {"page": 14, "text": "Check if extracted noun phrases match one of the object categories in MS-COCO", "supports": "unseen: caption filtering", "read_from_image": false},
+    {"page": 6, "text": "Figure 4, GPT-Synthetic panel, measured: Plain SD 0.551, D-Guidance 0.558", "supports": "headline: 0.551 and 0.558", "read_from_image": true},
+    {"page": 6, "text": "Figure 4, GPT-Synthetic panel, measured: PF-Hybrid 0.689 at K=5, 0.733 at K=10, 0.744 at K=15", "supports": "headline: 0.744 at K=15", "read_from_image": true},
+    {"page": 6, "text": "Figure 4, GPT-Synthetic panel, measured: Object Select 0.682 at K=5, 0.722 at K=10, 0.744 at K=15", "supports": "headline: best-of-15 also 0.744", "read_from_image": true},
+    {"page": 6, "text": "we select the best image based on each method’s sampling criterion for evaluation", "supports": "disagreement: selection is part of the reported result", "read_from_image": false},
+    {"page": 8, "text": "PF- HYBRID 72.96 83.84 24.03", "supports": "disagreement: PF-Hybrid in Table 2", "read_from_image": false},
+    {"page": 8, "text": "- PF 67.16 80.49 24.18", "supports": "disagreement: best-of-K without resampling", "read_from_image": false},
+    {"page": 16, "text": "D- GUIDANCE [31] 67 ✔ 20 106 ✔ 41", "supports": "cost of the gradient baseline", "read_from_image": false},
+    {"page": 16, "text": "PF- HYBRID 265 ✘ 39 360 ✘ 53", "supports": "cost of PF-Hybrid at K=5", "read_from_image": false},
+    {"page": 20, "text": "our method tends to miss the attributes that are not captured by the object detector", "supports": "copy_or_avoid: failure types", "read_from_image": false}
+  ]
+}

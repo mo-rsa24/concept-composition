@@ -1,0 +1,53 @@
+{
+  "slug": "latent-classifier-guidance",
+  "arxiv": "2304.12536",
+  "title": "Exploring Compositional Visual Generation with Latent Classifier Guidance",
+  "property": "face attributes composed with AND and NOT",
+  "pages_read": 10,
+  "reads": "One global semantic latent vector (StyleGAN2 w_s or Diffusion Autoencoder semantic latent) through a linear classifier, with no text, spatial map or image.",
+  "reads_page": 5,
+  "trained_on": "Latent DDIM on 100,000 w_s vectors; linear classifiers on clean w_s with StyleFlow latent-label pairs; Diffusion Autoencoder models reused pre-trained.",
+  "trained_page": 5,
+  "gradient_enters": "Unconditional latent score plus a weighted sum of classifier log-probability gradients, justified by assuming the conditions are independent; weights are not printed.",
+  "gradient_page": 3,
+  "unseen": "no: a new attribute needs a newly trained classifier, and unseen classes are future work.",
+  "unseen_page": 8,
+  "headline": "For gender + smile + age on StyleGAN2, FID (lower is better) is 22.46 linear and 26.49 diffusion against 22.03 for LACE-ODE; age accuracy is 0.863 against 0.925.",
+  "headline_page": 7,
+  "copy_or_avoid": "Avoid citing it as proof of the summed-log design: the printed proof covers one condition and needs independence given x_t; copy its linear baseline and pairwise correlation check (inferred).",
+  "tests_learned_checker_on_unseen": false,
+  "model": "StyleGAN2 W_s with latent DDIM; Diffusion Autoencoder",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "The summed-log design can rely on this paper's proof for adding several classifiers.",
+      "source": "the design equation in the reader brief",
+      "paper_says": "The printed proof is for a single condition and says the multi-condition case can be easily extended.",
+      "page": 4
+    },
+    {
+      "claim": "Equation 8 yields the analytic solution in Equation 7.",
+      "source": "the paper's own Lemma 3",
+      "paper_says": "Equation 8 as printed solves to a minus sign on the classifier term, while Equation 7 prints a plus sign.",
+      "page": 4
+    }
+  ],
+  "quotes": [
+    {"page": 5, "text": "Ws + is a concatenation of 18 different 512-dimensional ws vectors", "supports": "reads: latent vector dimension", "read_from_image": false},
+    {"page": 5, "text": "using the same linear classifiers trained on clean ws vectors can still produce reasonable results", "supports": "reads and trained_on: clean classifiers", "read_from_image": false},
+    {"page": 4, "text": "with a linear classifier z 7→ wT z + b", "supports": "reads: linear classifier", "read_from_image": false},
+    {"page": 5, "text": "we first train latent DDIM [40] on 100,000 ws vectors", "supports": "trained_on: latent diffusion data", "read_from_image": false},
+    {"page": 5, "text": "train linear classifiers on the Ws space using the latent-label pairs provided by [3]", "supports": "trained_on: classifier labels", "read_from_image": false},
+    {"page": 5, "text": "For Diffusion Autoencoder, we use their pre-trained latent diffusion model and linear classifiers", "supports": "trained_on: reused models", "read_from_image": false},
+    {"page": 3, "text": "assuming the conditions to be independent of each other, we can simply factorize the", "supports": "gradient_enters: independence assumption", "read_from_image": false},
+    {"page": 3, "text": "The factor α serves as a temperature parameter", "supports": "gradient_enters: weights", "read_from_image": false},
+    {"page": 4, "text": "For clarity purposes, we only show the proof with single condition y", "supports": "disagreement: proof covers one condition", "read_from_image": false},
+    {"page": 4, "text": "derivations can be easily extended to multiple y for compositional generation", "supports": "disagreement: multi-condition case asserted", "read_from_image": false},
+    {"page": 5, "text": "although Eq. (5) requires classifiers to be time-dependent", "supports": "trained_on: time dependence not met on StyleGAN2", "read_from_image": false},
+    {"page": 4, "text": "encompassing new attributes simply requires training classifiers on them", "supports": "unseen: new attributes need training", "read_from_image": false},
+    {"page": 8, "text": "the demand for generating unseen classes and unseen subconcept of an existing class", "supports": "unseen: future work", "read_from_image": false},
+    {"page": 7, "text": "LCG-Linear (Ours) 22.46 0.980 0.982 0.863", "supports": "headline: linear FID 22.46 and age 0.863", "read_from_image": false},
+    {"page": 7, "text": "LCG-Diffusion (Ours) 26.49 0.981 0.968 0.863", "supports": "headline: diffusion FID 26.49", "read_from_image": false},
+    {"page": 7, "text": "LACE-ODE [27] 22.03 0.964 0.967 0.925", "supports": "headline: LACE-ODE FID 22.03 and age 0.925", "read_from_image": false}
+  ]
+}

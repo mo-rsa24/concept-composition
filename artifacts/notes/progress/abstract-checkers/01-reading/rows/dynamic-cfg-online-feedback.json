@@ -1,0 +1,62 @@
+{
+  "slug": "dynamic-cfg-online-feedback",
+  "arxiv": "2509.16131",
+  "title": "Dynamic Classifier-Free Diffusion Guidance via Online Feedback",
+  "property": "prompt alignment, visual quality, human preference, text rendering, counting",
+  "pages_read": 19,
+  "reads": "Noisy diffusion latent plus timestep through a latent CLIP ViT-B (256 tokens on LDM); four of five evaluators also read the prompt, visual quality does not.",
+  "reads_page": 4,
+  "trained_on": "Alignment: WebLI noisy latents, contrastive, 90k steps. Others fine-tuned about 10k steps on real/generated COCO, human preferences, OCR scores, or 100K count-recaptioned pairs.",
+  "trained_page": 15,
+  "gradient_enters": "No evaluator gradient in the proposed method: at each step the combined score selects the CFG scale by arg max (LDM scales 1, 3, 7.5, 11, 15).",
+  "gradient_page": 5,
+  "unseen": "no: evaluators are scored on prompt benchmarks with no category withheld from training.",
+  "unseen_page": 6,
+  "headline": "On Imagen 3, alignment + reward won 53.6% (Gecko) and 53.8% (GenAI-Bench) of human comparisons against default; on LDM 2B, Gecko score 47.2 against 43.8 and FID 24.8 against 25.6 for default CFG.",
+  "headline_page": 8,
+  "copy_or_avoid": "Copy the seed-filtering test of early signal; avoid assuming summed gradients help, since CLIP + discriminator gradients scored 45.3 Gecko against 46.1 for CLIP alone (inferred).",
+  "tests_learned_checker_on_unseen": false,
+  "model": "LDM (Stable Diffusion variant, 865M and 2B parameters), Imagen 3",
+  "extra_papers": [],
+  "disagreements": [
+    {
+      "claim": "Combining alignment and reward with adaptive weighting achieves the best results across all prompt sets.",
+      "source": "the paper's own text on p. 8, checked against Table 3",
+      "paper_says": "On GeckoNum, Reward alone is 53.8 and Alignment + Reward is 53.6.",
+      "page": 9
+    },
+    {
+      "claim": "A pixel-space evaluator costs a 400% increase in computation.",
+      "source": "the paper's own text on p. 5, checked against Table 5",
+      "paper_says": "Table 5 gives 493,239 against 115,489 billion FLOPs, a 327% increase or 4.27 times the baseline.",
+      "page": 16
+    },
+    {
+      "claim": "Combining the CLIP and discriminator gradients has no effect.",
+      "source": "the paper's own text on p. 7, checked against Table 2",
+      "paper_says": "Alignment + VQ gradient guidance scores Gecko 45.3 against 43.8 for default, and 46.1 for alignment alone.",
+      "page": 8
+    }
+  ],
+  "quotes": [
+    {"page": 2, "text": "these evaluators operate directly on noisy latents within the diffusion process", "supports": "reads: noisy latents", "read_from_image": false},
+    {"page": 4, "text": "We further condition the vision encoder on timestep", "supports": "reads: timestep conditioning", "read_from_image": false},
+    {"page": 15, "text": "for LDM we convert ViT-B/16 to ViT-B/4 resulting in a 256 token sequence", "supports": "reads: 256 tokens", "read_from_image": false},
+    {"page": 4, "text": "a score corresponding to the likelihood of an image being real independently of", "supports": "reads: visual quality ignores the prompt", "read_from_image": false},
+    {"page": 15, "text": "We fine-tune the model for 90k steps using a batch size of 512", "supports": "trained_on: alignment length", "read_from_image": false},
+    {"page": 15, "text": "continue fine-tuning the whole network for approximately 10k steps on the capability-specific data", "supports": "trained_on: other evaluators", "read_from_image": false},
+    {"page": 15, "text": "100K re-captioned image-text pairs by Gemini 2.5 Pro", "supports": "trained_on: numerical evaluator", "read_from_image": false},
+    {"page": 5, "text": "fine-tune the alignment evaluator on generated images labeled with scores by an OCR model", "supports": "trained_on: text rendering", "read_from_image": false},
+    {"page": 5, "text": "then cheaply test multiple CFG scales by re-combining them", "supports": "gradient_enters: scale selection", "read_from_image": false},
+    {"page": 15, "text": "we are searching over the following set of 5 CFG values: [1, 3, 7.5, 11, 15]", "supports": "gradient_enters: LDM scales", "read_from_image": false},
+    {"page": 6, "text": "For each model family we train separate evaluators tuned on the respective latent spaces", "supports": "unseen: evaluators are retrained per model and no category holdout is described", "read_from_image": false},
+    {"page": 2, "text": "human raters preferred generations from our method over the default Imagen 3 baseline in 53.6% and 53.8% of comparisons", "supports": "headline: 53.6% and 53.8%", "read_from_image": false},
+    {"page": 8, "text": "Alignment + VQ (adaptive) 47.2 24.8", "supports": "headline: Gecko 47.2 and FID 24.8", "read_from_image": false},
+    {"page": 8, "text": "Default CFG (fixed) – 43.8 25.6", "supports": "headline: default Gecko 43.8 and FID 25.6", "read_from_image": false},
+    {"page": 8, "text": "Alignment + VQ 45.3 25.5", "supports": "copy_or_avoid: summed-gradient result", "read_from_image": false},
+    {"page": 8, "text": "Alignment (Nichol et al., 2022) 46.1 25.6", "supports": "copy_or_avoid: CLIP gradient alone", "read_from_image": false},
+    {"page": 9, "text": "Alignment + Reward 53.6 53.8 54.7 53.6", "supports": "disagreement: combined GeckoNum 53.6", "read_from_image": false},
+    {"page": 9, "text": "Reward 52.1 51.4 53.8 53.8", "supports": "disagreement: reward GeckoNum 53.8", "read_from_image": false},
+    {"page": 16, "text": "sampling with pixel-space evaluator 493,239", "supports": "disagreement: pixel FLOPs", "read_from_image": false}
+  ]
+}

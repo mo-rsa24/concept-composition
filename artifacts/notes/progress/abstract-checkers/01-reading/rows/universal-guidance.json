@@ -1,0 +1,44 @@
+{
+  "slug": "universal-guidance",
+  "arxiv": "2302.07121",
+  "title": "Universal Guidance for Diffusion Models",
+  "property": "any differentiable off-the-shelf criterion: CLIP match, segmentation, identity, detection, style",
+  "pages_read": 15,
+  "reads": "Off-the-shelf network reads the one-step clean estimate z0_hat, decoded to an image on Stable Diffusion",
+  "reads_page": 5,
+  "trained_on": "nothing trained; pre-trained guidance networks with hand-written losses, frozen diffusion model",
+  "trained_page": 2,
+  "gradient_enters": "Forward: eps_hat = eps + s(t) grad_zt loss(c, f(z0_hat)); backward: eps_tilde = eps - sqrt(alpha_t/(1-alpha_t)) Delta_z0; each step repeats k times by re-noising z_{t-1} to level t",
+  "gradient_page": 4,
+  "unseen": "no: guidance networks are used as supplied and no category is held out",
+  "unseen_page": 1,
+  "headline": "No quantitative metric or baseline score is reported; qualitative Stable Diffusion results use segmentation at s(t) = 400 sqrt(1-alpha_t), k = 10 and detection at s(t) = 100 sqrt(1-alpha_t), k = 3, both with m = 0",
+  "headline_page": 6,
+  "copy_or_avoid": "Copy self-recurrence as the next test of our decoded-image checker; avoid assuming z0_hat is readable at early steps, which this paper never measures and our 0.50 balanced accuracy contradicts (inferred)",
+  "tests_learned_checker_on_unseen": false,
+  "model": "Stable Diffusion (version not printed) / unconditional ImageNet diffusion",
+  "extra_papers": [
+    {"title": "GLIDE: Towards Photorealistic Image Generation and Editing with Text-Guided Diffusion Models", "arxiv": "2112.10741", "page": 2, "why": "Cited as guiding with a CLIP model retrained from scratch on noisy inputs, a learned prompt-match checker on noisy inputs"}
+  ],
+  "disagreements": [
+    {"claim": "A checker read through the decoded image estimate changed texture and left layout alone", "source": "reader brief, What we already measured", "paper_says": "Decoded-estimate segmentation and detection guidance on Stable Diffusion is shown matching layouts, using k = 10 and k = 3 self-recurrence steps; evidence is qualitative and the checker differs from ours", "page": 6},
+    {"claim": "On decoded early images a CLIP checker reads the pair at chance", "source": "reader brief, What we already measured", "paper_says": "The paper calls the reconstructed clean image still appropriate for informative guidance, as an empirical observation, and reports no per-step accuracy", "page": 3}
+  ],
+  "quotes": [
+    {"page": 5, "text": "we forward the predicted clean latent variable computed by Equation (3) through the image decoder of Stable Diffusion to obtain predicted clean images", "supports": "reads", "read_from_image": false},
+    {"page": 2, "text": "Our proposed sampler evaluates the guidance models only on denoised images, rather than noisy latent states.", "supports": "reads", "read_from_image": false},
+    {"page": 2, "text": "The underlying diffusion model remains fixed and no fine-tuning of any kind is necessary.", "supports": "trained_on", "read_from_image": false},
+    {"page": 4, "text": "where s(t) controls the guidance strength for each sampling step", "supports": "gradient_enters: forward", "read_from_image": false},
+    {"page": 4, "text": "The key idea of backward guidance is to optimize for a clean image that best matches the prompt", "supports": "gradient_enters: backward", "read_from_image": false},
+    {"page": 5, "text": "We repeat the self-recurrence k times before continuing the sampling for step t − 1.", "supports": "gradient_enters: self-recurrence", "read_from_image": false},
+    {"page": 4, "text": "as f is most likely trained on clean images and fails to provide meaningful guidance when the input is noisy.", "supports": "classifiers on noisy inputs", "read_from_image": false},
+    {"page": 2, "text": "domain shift between the noisy images used by the diffusion sampling process and the clean images on which the guidance models are trained", "supports": "classifiers on noisy inputs", "read_from_image": false},
+    {"page": 3, "text": "motivated by an empirical observation that the reconstructed clean image", "supports": "z0_hat usefulness is observed, unmeasured", "read_from_image": false},
+    {"page": 1, "text": "enables diffusion models to be controlled by arbitrary guidance modalities without the need to retrain any use-specific components", "supports": "unseen: no learned checker is held out", "read_from_image": false},
+    {"page": 6, "text": "We set s(t) = 400 · 1 − αt and k = 10.", "supports": "headline: segmentation setting", "read_from_image": false},
+    {"page": 7, "text": "set s(t) = 100 · 1 − αt and k = 3.", "supports": "headline: detection setting", "read_from_image": false},
+    {"page": 5, "text": "applying forward guidance already produce high-quality images that match the given prompt, and hence set m = 0.", "supports": "headline: m = 0 on Stable Diffusion", "read_from_image": false},
+    {"page": 9, "text": "we use the classifier that accepts noisy input", "supports": "noisy classifier retained in combined experiment", "read_from_image": false},
+    {"page": 2, "text": "successfully use a CLIP model as guidance, but only after re-training CLIP from scratch using noisy inputs", "supports": "extra paper: GLIDE", "read_from_image": false}
+  ]
+}

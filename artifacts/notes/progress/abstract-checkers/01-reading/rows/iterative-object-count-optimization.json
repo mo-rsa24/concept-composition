@@ -1,0 +1,46 @@
+{
+  "slug": "iterative-object-count-optimization",
+  "arxiv": "2408.11721",
+  "title": "Detection-Driven Object Count Optimization for Text-to-Image Diffusion Models",
+  "property": "object count",
+  "pages_read": 15,
+  "reads": "Pretrained CLIP-Count density map on the fully generated image and class word, scaled by a pretrained YOLO or DETR count that is excluded from backpropagation; no early noisy steps",
+  "reads_page": 4,
+  "trained_on": "No counter trained; one text token embedding is optimised for about 30 iterations per class and count against pretrained counters",
+  "trained_page": 12,
+  "gradient_enters": "Updates the counting token embedding between whole generations through the final denoising step only; it never enters the noise prediction",
+  "gradient_page": 4,
+  "unseen": "partly; token reused across classes at count 10 (MAE 6.11 in-domain, 6.61 out-of-domain), and one sentence reports MAE 8.2 on classes unseen by CLIP-Count against 7.72, with no class list or sample size",
+  "unseen_page": 7,
+  "headline": "Count accuracy with a margin of one above count 2: 45.61% against 26.9% for SD-Turbo on up to 9 objects; at count 2 the plotted YOLO MAE is about 1.0 object against about 1.8 for SD",
+  "headline_page": 6,
+  "copy_or_avoid": "Avoid gradients through decoded images without a guard against adversarial changes, and score with a counter that did not steer (inferred)",
+  "tests_learned_checker_on_unseen": true,
+  "model": "SD-Turbo in tables; SDXL-Turbo in the appendix",
+  "extra_papers": [
+    {"title": "CLIP-Count: Towards Text-Guided Zero-Shot Object Counting", "arxiv": "2305.07304", "page": 8, "why": "The trained text-guided counter this method relies on, built to count classes named by text"},
+    {"title": "AFreeCA: Annotation-Free Counting for All", "arxiv": "2403.04943", "page": 8, "why": "Uses diffusion models to create supervised counting data through unsupervised sorting and density labels (described on p. 3)"}
+  ],
+  "disagreements": [
+    {"claim": "The method was preferred for naturalness in 79.7% of cases with 18% no difference", "source": "this paper, text on p. 7", "paper_says": "Fig. 9b prints Ours 61.5%, SD 18.2%, The same 20.3%; 79.7 equals Ours plus SD", "page": 7},
+    {"claim": "The learning rate is set to 0.05", "source": "this paper, Appendix A, p. 12", "paper_says": "Appendix E on the same page says a learning rate of 0.01 yielded the best results", "page": 12},
+    {"claim": "Counting-Guidance is Binyamin et al. 2024 and CountGen is Kang et al. 2025", "source": "this paper, Appendix B, p. 12", "paper_says": "The reference list and p. 3 give the opposite: CountGen is Binyamin et al. and Counting Guidance is Kang et al.", "page": 12},
+    {"claim": "The backbone is SD-Turbo", "source": "this paper, Table 1, p. 6", "paper_says": "Appendix A says tokens are trained using SDXL-Turbo and Fig. 15 labels the bars SD-XL-TURBO", "page": 12}
+  ],
+  "quotes": [
+    {"page": 4, "text": "This density map is derived from a pre-trained model [Jiang et al. 2023]", "supports": "reads: pretrained CLIP-Count density map", "read_from_image": false},
+    {"page": 2, "text": "we apply our loss on fully generated images", "supports": "reads: finished images", "read_from_image": false},
+    {"page": 4, "text": "However, this approach requires a model that performs reliably on noisy intermediate representations", "supports": "reads: why noisy steps are avoided", "read_from_image": false},
+    {"page": 12, "text": "Training each token takes about one minute for approximately 30 iterations using SDXLTurbo", "supports": "trained_on", "read_from_image": false},
+    {"page": 4, "text": "we concatenate a newly introduced pseudo-token embedding, denoted by", "supports": "trained_on: optimised token", "read_from_image": false},
+    {"page": 2, "text": "Our method performs backpropagation only at the final denoising step", "supports": "gradient_enters", "read_from_image": false},
+    {"page": 7, "text": "we observe higher error on classes unseen by CLIP-Count (MAE 8.2 vs. 7.72)", "supports": "unseen: counter on unseen classes", "read_from_image": false},
+    {"page": 7, "text": "with in-domain reuse performing slightly better than out-of-domain (6.11 vs. 6.61)", "supports": "unseen: token reuse", "read_from_image": false},
+    {"page": 6, "text": "Ours + Dynamic Scale (DETR) SD-Turbo 5.00 8.65 4.95 9.64 5.37 2.51 4.84 4.48 70.41 45.61%", "supports": "headline: 45.61%", "read_from_image": false},
+    {"page": 6, "text": "SD-Turbo SD-Turbo 7.62 19.10 10.32 17.64 0.00 6.99 11.29 0.00 70.54 26.9%", "supports": "headline: 26.9%", "read_from_image": false},
+    {"page": 5, "text": "allowing a margin of one count for quantities over two", "supports": "headline: accuracy definition", "read_from_image": false},
+    {"page": 14, "text": "Fig. 16 at 2 objects: YOLO mean absolute error about 1.0 for Ours, about 1.8 for SD", "supports": "headline: count 2 values", "read_from_image": true},
+    {"page": 6, "text": "Counting-Guidance SD v1.4 9.60 15.71 10.38 13.90 0.15 8.84 11.52 0.91 69.90 9.47%", "supports": "note: Counting Guidance rescored", "read_from_image": false},
+    {"page": 6, "text": "SD v1.4 SD v1.4 9.72 14.54 10.53 13.62 0.00 9.73 12.68 0.00 70.54 11.15%", "supports": "note: SD 1.4 baseline", "read_from_image": false}
+  ]
+}
