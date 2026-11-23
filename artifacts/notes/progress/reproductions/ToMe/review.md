@@ -1,7 +1,7 @@
 # Review: reproducing ToMe
 
-This file holds what the runs in [the ToMe design](design.md) produced. ToMe has no verdict yet. Its parser repair, smoke test and
-zero-update control pass, and the 1% rung comes next.
+This file holds what the runs in [the ToMe design](design.md) produced. ToMe has no verdict yet. Its parser repair, smoke test,
+zero-update control and 1% pictures pass, and the full renders are in progress on seed 0.
 
 ## Runs
 
@@ -14,9 +14,11 @@ Pictures are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-5/rende
 | Smoke test, 2 prompts | 93146 | `3ceb63cb-bdc0e0a` | `smoke/` | passed: 60.6 and 53.2 seconds per picture |
 | Attention repeatability checks | 93148, 93149, 93155, 93166, 93196, 93199 | from `3ceb63cb-c5c5cf1` to `d37f3100-4e4c6fd` | `controls/` | found the cause |
 | Zero-update control | 93202 | `d37f3100-b36238e` | `controls/zero-final.json` | passed |
+| 1% of the data, 16 prompts on seed 0 | 93204 (Complex), 93207 (Shape and Texture, retry of 93203) | `d37f3100-b36238e`, `9efe30d1-b988f7a` | `one-percent/` | passed: median 57 seconds per picture |
 
 Jobs 93145 and 93167 failed the control because of the repeatability problem below. Jobs 93197, 93198, 93200 and 93201 ran out of memory
-on two attempted fixes. Job 93151 failed on a mistake in the trace script.
+on two attempted fixes. Job 93151 failed on a mistake in the trace script. Job 93203 failed when two jobs created one output folder at
+the same moment on the shared disk, and folder creation now retries.
 
 ## Questions
 
@@ -39,5 +41,10 @@ a bar of 1e-5, on the math attention backend in one process on an RTX 3090 at fl
 
 The math backend runs out of a 24 GB card during ToMe's gradient steps, so renders use the default backends and each ToMe score carries
 this run-to-run noise. The same failure appeared on three nodes (mscluster54, mscluster61 and mscluster87), so it is not one faulty card.
+
+**Do the 1% pictures show their prompts' subjects?** ✅ Yes, as renders. The [sheet of all 16 pictures](tome-one-percent-seed0.png) (3 Shape,
+3 Texture, 10 Complex, seed 0, read at 340 pixels per tile) shows clean images of the named subjects, including the three repaired prompts
+in it. It does not show that every attribute landed on the right object: on "a pentagonal stop sign and a spherical traffic light" the two
+objects fuse into one. No score was computed at this rung.
 
 **Does ToMe reproduce its published scores?** Unknown until the full runs finish.
