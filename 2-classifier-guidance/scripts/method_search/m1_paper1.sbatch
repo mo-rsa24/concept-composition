@@ -6,8 +6,9 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M1, Paper 1. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m1_paper1.sbatch <ladder|full>
-# ladder: smoke test, overfit, 1% of the data and the zero-push check. full: the 35,000-sample pool, both checkers, four rows.
+#   sbatch --export=ALL,SNAP=<snapshot> m1_paper1.sbatch <ladder|loss|full>
+# ladder: smoke test, overfit, 1% of the data and the zero-push check. loss: 1,000 steps on the 1% pool, long enough for the
+# trainer's 500-step loss lines to show the loss falling. full: the 35,000-sample pool, both checkers, four rows.
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -53,6 +54,11 @@ case "$STAGE" in
     train_both "$L/pool-1pct" "$L/checkers-1pct" 400 || exit 12
     "$PY" "$S/paper1_rows.py" --a "$A" --b "$B" --pair-head "$L/checkers-1pct/pair/head.pt" \
       --sep-head "$L/checkers-1pct/separate/head.pt" --judge "$JUDGE" --out "$L/rows-smoke" --pairs 4-7 --seeds 8 || exit 13
+    rc=0 ;;
+  loss)
+    L=$OUT/ladder
+    [ -f "$L/pool-1pct/pool.json" ] || { echo "ABORT: run the ladder stage first"; exit 3; }
+    train_both "$L/pool-1pct" "$L/checkers-1pct-1000" 1000 || exit 12
     rc=0 ;;
   full)
     F=$OUT/full; mkdir -p "$F"
