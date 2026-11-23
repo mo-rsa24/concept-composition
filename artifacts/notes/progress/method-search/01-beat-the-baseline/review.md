@@ -1,7 +1,7 @@
 # Review: does each paper's method beat its simple baseline? (step M1)
 
-This file holds what the runs in [the M1 design](design.md) produced. Paper 1's verdict is **null**: its method did not beat
-sample-and-paste by more than the noise. Paper 2 has no verdict yet.
+This file holds what the runs in [the M1 design](design.md) produced. Both verdicts are **null**. Paper 1's method did not beat
+sample-and-paste by more than the noise, and adding the kept push to CO3 did not beat CO3 alone.
 
 ## Runs
 
@@ -84,4 +84,32 @@ brings the method level with paste. Without the push, the side-choosing method i
 opened, the two agree on 58. The eye called 5 clean that the judge rejected and rejected 1 the judge called clean. The six disagreements
 fall in all four rows.
 
-**Paper 2: does CO3 with the push beat CO3 alone?** Unanswered.
+**Paper 2: does CO3 with the push beat CO3 alone?** ❌ Null. CO3 with the kept push makes 7 faithful pairs of 96 and CO3 alone makes 11.
+A win needed a lead of at least 5 and more than 10.08, which is 1.96 times the standard error of 5.14. The lead is -4. The random push
+makes 12, one more than CO3 alone, so it does not trigger the inconclusive rule. The zero-push check passed.
+
+<a href="paper-2-three-rows-seed-6002.png"><img src="paper-2-three-rows-seed-6002.png" width="800" alt="Three rows of renders at seed 6002 for puma and condor, zebra and flamingo, and seal and gull: CO3 alone, CO3 with the checker push, and CO3 with a random push of the same size"></a>
+
+The sheet shows the first three tuning pairs at seed 6002, each checked at full size. The counts come from the blind calls on all 96
+pictures per row, in [the calls](paper-2-blind-calls.csv), with [the scored result](paper-2-blind-result.json) and
+[the method key](paper-2-blind-key.json) beside them.
+
+| Row, of 96 pictures | Faithful pair | Two clear subjects, style ignored | Two bodies, not both clear | One subject or a fused hybrid | Not an intact photograph |
+|---|---:|---:|---:|---:|---:|
+| CO3 alone | 11 | 32 | 64 | 0 | 73 |
+| CO3 with the checker push | 7 | 30 | 66 | 0 | 80 |
+| CO3 with a random push | 12 | 35 | 61 | 0 | 72 |
+
+These readings came after the run and carry no bar of their own.
+
+- **Drawn style drives most of the damage count.** The prompts do not ask for a photograph, CO3 often draws an illustration, and the
+  rubric counts a drawing as damaged. Reviewers' notes name a drawn style on 53, 41 and 53 of the 96 pictures in the three rows.
+- **The null holds with style ignored.** On two clear subjects, the push is 2 below CO3 alone, against a margin of 11.25.
+- **CO3 already separates the bodies here.** None of the 288 pictures is one subject or a fused hybrid. What remains is borrowed parts,
+  the wrong species or an extra subject.
+- **Few pairs produce any faithful picture.** Eight of the 12 pairs make 0 in all three rows. The other four, as CO3, push and random, are
+  lighthouse and sailboat (6, 3, 6), bobcat and quail (3, 0, 3), seal and gull (2, 1, 3), and eagle and fox (0, 3, 0).
+- **Reviewers differ in strictness.** The six reviewers passed 7, 0, 6, 4, 4 and 9 of their 48 pictures. Each batch mixes all three rows,
+  so this adds noise to the comparison and does not favour a row.
+
+The kept checker's two presence outputs never trained on these subjects, so this result covers the kept push as it stands.

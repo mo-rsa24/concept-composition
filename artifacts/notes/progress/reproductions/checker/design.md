@@ -121,7 +121,9 @@ and dog. Labels, loss and push settings stay as in the main comparison.
 
 **Test pairs.** Six object pairs at seeds 6001 to 6008, so 48 pictures per row: microscope × test tube, chess board × hourglass,
 saxophone × music stand, mailbox × pumpkin, picnic basket × watermelon and lighthouse × sailboat. No training list holds them.
-Bicycle × birdhouse is left out because bicycle appears in a held-out pair.
+Bicycle × birdhouse is left out because bicycle appears in a held-out pair. Lighthouse × sailboat is also one of D3's 12 tuning pairs, so
+every count is reported on all six pairs and on the five without it. A reader that passes on six pairs and misses on five is
+inconclusive.
 
 **Rows.** Plain PoE, A's push, A's size-matched random push, C's push and C's size-matched random push, 240 pictures in all. They are
 counted blind at full size under the [blind count rubric](../../method-search/01-beat-the-baseline/blind-count-rubric.md), with no API

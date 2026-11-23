@@ -1,0 +1,83 @@
+{
+ "pictures_per_row": {
+  "co3": 96,
+  "push": 96,
+  "random": 96
+ },
+ "faithful": {
+  "co3": 11,
+  "push": 7,
+  "random": 12
+ },
+ "faithful_per_pair": {
+  "co3": {
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 3,
+   "a_cheetah__x__a_cougar": 0,
+   "a_crow__x__a_raven": 0,
+   "a_duck__x__a_goose": 0,
+   "a_giraffe__x__a_tortoise": 0,
+   "a_hippopotamus__x__a_swallow": 0,
+   "a_lighthouse__x__a_sailboat": 6,
+   "a_puma__x__a_condor": 0,
+   "a_seal__x__a_gull": 2,
+   "a_zebra__x__a_flamingo": 0,
+   "an_eagle__x__a_fox": 0
+  },
+  "push": {
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 0,
+   "a_cheetah__x__a_cougar": 0,
+   "a_crow__x__a_raven": 0,
+   "a_duck__x__a_goose": 0,
+   "a_giraffe__x__a_tortoise": 0,
+   "a_hippopotamus__x__a_swallow": 0,
+   "a_lighthouse__x__a_sailboat": 3,
+   "a_puma__x__a_condor": 0,
+   "a_seal__x__a_gull": 1,
+   "a_zebra__x__a_flamingo": 0,
+   "an_eagle__x__a_fox": 3
+  },
+  "random": {
+   "a_boar__x__a_pheasant": 0,
+   "a_bobcat__x__a_quail": 3,
+   "a_cheetah__x__a_cougar": 0,
+   "a_crow__x__a_raven": 0,
+   "a_duck__x__a_goose": 0,
+   "a_giraffe__x__a_tortoise": 0,
+   "a_hippopotamus__x__a_swallow": 0,
+   "a_lighthouse__x__a_sailboat": 6,
+   "a_puma__x__a_condor": 0,
+   "a_seal__x__a_gull": 3,
+   "a_zebra__x__a_flamingo": 0,
+   "an_eagle__x__a_fox": 0
+  }
+ },
+ "rungs": {
+  "co3": {
+   "two_clear": 32,
+   "two_bodies": 64
+  },
+  "push": {
+   "two_bodies": 66,
+   "two_clear": 30
+  },
+  "random": {
+   "two_clear": 35,
+   "two_bodies": 61
+  }
+ },
+ "damaged": {
+  "co3": 73,
+  "push": 80,
+  "random": 72
+ },
+ "lead_push_over_co3": -4,
+ "se_push_minus_co3": 5.144928433793699,
+ "lead_random_over_co3": 1,
+ "se_random_minus_co3": 0.9616079809313665,
+ "min_lead": 5,
+ "z": 1.96,
+ "zero_push_max_abs": 0.0,
+ "verdict": "null"
+}

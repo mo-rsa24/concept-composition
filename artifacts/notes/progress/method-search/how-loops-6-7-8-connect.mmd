@@ -1,0 +1,39 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef done fill:#d9f2e3,stroke:#1d7a3e,stroke-width:2px,color:#111111
+  classDef doing fill:#ffe3bf,stroke:#c86a0a,stroke-width:3px,color:#111111
+  classDef todo fill:#eeeeee,stroke:#777777,stroke-width:2px,color:#111111
+  classDef ask fill:#fff3cd,stroke:#b58900,stroke-width:2px,color:#111111
+
+  subgraph L6["Loop 6: improve today's checker"]
+    direction LR
+    M1["DONE, M1: neither method<br/>beat its baseline"]:::done
+    Q57["YOUR CALL: score M5 and D3<br/>on CO3 as well as plain PoE?"]:::ask
+    M5["M5, D3, M2, M3<br/>data, reader, labels, tuning"]:::todo
+    M1 --> Q57 --> M5
+  end
+
+  subgraph L7["Loop 7: read and design"]
+    direction LR
+    U["DONE: 25 papers read, 5 checkers designed.<br/>Only the spatial checker has a trained precedent on unseen concepts"]:::done
+  end
+
+  subgraph L8["Loop 8: test abstract checkers"]
+    direction LR
+    V1["NOW, V1: digit world built<br/>cluster check still to run"]:::doing
+    V2["V2: learns plurality<br/>on unseen digits?"]:::todo
+    V3["V3: its push composes<br/>unseen digits?"]:::todo
+    V4["V4: works on SDXL's<br/>unseen objects?"]:::todo
+    Q56["YOUR CALL: remove one checker<br/>at a time on SDXL, ~40 GPU-hours?"]:::ask
+    V1 --> V2 --> V3 --> V4 -.-> Q56
+  end
+
+  P["Paper 2 at real-world scale"]:::todo
+  U -->|"design"| V2
+  M1 -.->|"CO3 already draws two bodies"| V4
+  M5 --> P
+  Q56 -.-> P
+
+  style L6 fill:#fafafa,stroke:#222222,stroke-width:1px
+  style L7 fill:#fafafa,stroke:#222222,stroke-width:1px
+  style L8 fill:#fafafa,stroke:#222222,stroke-width:1px
