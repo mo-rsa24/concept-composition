@@ -22,8 +22,9 @@ same fine-tune without that loss, and it stands in for Liu's composition on this
 | `CoInD-T6-011` | CoInD, λ = 1.0 | 49.15% | CoInD Table 6, p27, and the authors' results sheet |
 | `CoInD-T6-004` | Composed GLIDE, the Liu row | 14.19% | CoInD Table 6, p27, and the authors' results sheet |
 
-**Cost.** 10,000 images per method is 20,000 images. At a budgeted 2 seconds per image on an RTX 3090 that is about 11 GPU-hours. The
-classifier adds about 1 GPU-hour. The smoke rung measures both.
+**Cost.** 10,000 images per method is 20,000 images. At 6.1 seconds per image, measured on an RTX 3090 in the smoke rung, that is about
+34 GPU-hours, over the 24 GPU-hour limit for one run. The classifier adds about 1 GPU-hour. Board question 27 asks whether to render all
+of them or the first 2,500 per method, about 8.5 GPU-hours. The batches run in order, so the 2,500 are the start of the 10,000.
 
 ## The weights
 

@@ -13,7 +13,7 @@ composed over an empty background? The count is by hand, on location-conditioned
 
 ## Status
 
-The row is `blocked`, and nothing has run. Board question 21 asks the owner whether it stays blocked.
+The row is `blocked` by the owner's answer to board question 21, and nothing has run. 98 stays a published number that was not reproduced.
 
 ## Why it cannot run as published
 

@@ -28,8 +28,8 @@ VERDICTS = {"reproduced", "not reproduced", "not comparable", "blocked"}
 # ours are scored on the same allowed prompts, each row is judged on them, and every number carries its prompt count.
 GUARD_KEPT_OUT = {"T2I-CompBench Complex": (12, 1000), "RareBench Concat": (7, 40), "T2I-CompBench Color": (12, 300),
                   "T2I-CompBench Shape": (7, 300)}
-# Rows whose published number the owner chose in board question 13, keyed by rival and the target's number_id.
-OWNER_NUMBERS = {("CoMat", "ToMe-T1-054"): "ToMe-T1-051", ("CoMat", "ToMe-T1-053"): "ToMe-T1-050"}
+# Rows whose published number the owner chose in board question 19, keyed by rival and the target's number_id.
+OWNER_NUMBERS = {("CoMat", "ToMe-T1-054"): "CoMat-T1-056", ("CoMat", "ToMe-T1-053"): "CoMat-T1-057"}
 NO_NUMBER_COMMIT = "c3462133-b235ea8"  # the commits that built the rows question 13 settled
 
 

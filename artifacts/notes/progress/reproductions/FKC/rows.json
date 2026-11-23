@@ -1,9 +1,10 @@
 [
   {
     "target_id": "FKC-TA4-059",
-    "verdict": "blocked",
-    "commit": "a7a48b7b-b2f1320",
-    "run_id": "question 23",
-    "note": "no released SDXL code, 1,000-prompt list or SDXL particle count; the paper prints plain SDXL at 0.79 on the same prompts; 0.80 stays a published number that was not reproduced"
+    "note": "the owner moved this row to FKC-TA4-038 (0.78 on GenEval's released 553 prompts) in board question 23; it takes that number when Session 4 moves the target"
+  },
+  {
+    "target_id": "FKC-TA4-038",
+    "note": "SDXL + FKC at guidance 7.5 on GenEval's released 553 prompts, two objects; the run tests our port of the authors' EDM2 sampler as much as the method"
   }
 ]

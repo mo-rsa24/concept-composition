@@ -8,15 +8,16 @@ share of images in which a detector finds both named objects.
 
 ## Status
 
-The row is `blocked`, and nothing has run. Board question 23 asks the owner whether to run the closest version or leave it blocked.
+The row is waiting on its run. By the owner's answer to board question 23, FKC is tested on GenEval's released 553 prompts against the 0.78
+printed for that set, using a port of the authors' sampler.
 
 ## The row
 
 | Row | Method | Benchmark | Published | Source |
 |---|---|---|---|---|
-| `FKC-TA4-059` | SDXL + FKC at guidance 7.5 | GenEval, 1,000 prompts, two objects | 0.80 | FKC Table A4, p39 |
+| `FKC-TA4-038` | SDXL + FKC at guidance 7.5 | GenEval, the released 553 prompts, two objects | 0.78 | FKC Table A4, p39 |
 
-## Why it cannot run as printed
+## Why the 1,000-prompt row cannot run
 
 | Needed | What exists |
 |---|---|
@@ -31,10 +32,10 @@ guidance on GenEval, so it does not stand in for the authors' run.
 ## What the printed table says
 
 Table A4 prints plain SDXL ("our run") at 0.79 on the same 1,000 prompts and SDXL + FKC at 0.80. The authors write that they "do not observe any
-significant increase" from FKC on SDXL (appendix F.5). The Paper 2 target of 0.81 on this row therefore sits one step above a number that is about
-equal to plain SDXL.
+significant increase" from FKC on SDXL (appendix F.5). By the owner's answer to board question 24, the Paper 2 target moves to 0.79 on the 553 prompts,
+and a win must also beat plain SDXL's printed 0.80 on the same prompts and seeds.
 
-## The closest version, if the owner approves it
+## The run
 
 | Choice | Value | Reason |
 |---|---|---|

@@ -8,7 +8,8 @@ gives their printed Fréchet Inception Distance (FID) of 4.11, where lower is be
 
 ## Status
 
-The row is `blocked`, and nothing has run. Board question 22 asks the owner whether to spend the GPU time or leave it blocked.
+The row is `blocked` by the owner's answer to board question 22, and nothing has run. The question goes back to the owner once the cheaper
+rivals have landed.
 
 ## The row
 

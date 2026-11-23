@@ -23,7 +23,7 @@ words into one composite token and updates that token during the early sampling 
 
 **Cost.** ToMe took a median of 82 seconds per picture over the 1,106 renders of the review response. One seed on all 1,902
 allowed prompts is about 43 GPU-hours, which is past the 24 GPU-hour limit. Shape, Texture and Concat on one seed are 626
-pictures, about 14 GPU-hours, and are the first run if the owner approves ToMe. Complex on one seed is 988 pictures, about 23
+pictures, about 14 GPU-hours, and run first. Complex on one seed is 988 pictures, about 23
 GPU-hours, and Color is 288 pictures, about 7 GPU-hours.
 
 ## What the release leaves open
@@ -66,8 +66,9 @@ is `/datasets/mmolefe/poe_repair_min/loop-5/data/tome-parse.jsonl`.
 
 **The crash.** `_split_prompt` drops phrases such as "the right", while the token groups keep their positions, so `filter_text` looks
 up an anchor past the end of its list. **Nothing to merge.** On prompts such as "a cactus made of steel and two sunflowers made of glass",
-spaCy finds no noun with an attribute. The release does not say how a benchmark run should treat either case, so board question 20 asks
-the owner before any ToMe picture is rendered.
+spaCy finds no noun with an attribute. By the owner's answer to board question 20, the alignment is repaired by pairing each attribute
+group with the phrase holding its noun, and nothing else in ToMe changes. The 4 prompts with nothing to merge render as plain SDXL. Each
+row prints ToMe's score with and without the repaired prompts and labels both prompt counts. The GPU budget stays at 44 hours.
 
 ## The test, fixed before the first run
 

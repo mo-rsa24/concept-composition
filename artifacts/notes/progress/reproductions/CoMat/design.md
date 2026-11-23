@@ -13,9 +13,9 @@ to SDXL's U-Net, that teaches the model to attend to every concept in a prompt.
 
 **Buys.** Three rows of `table.csv`: CoMat on Color (288 of 300 prompts), Shape (293 of 300) and Texture (300 of 300).
 
-**Cost.** T2I-CompBench's own instructions generate 10 images per prompt, so 881 allowed prompts are 8,810 pictures. At 512 pixels
-that is about 11 GPU-hours, budgeted at 4.5 seconds per picture. At 1024 pixels it is about 34 GPU-hours, at the 14 seconds per
-picture measured for SDXL on an RTX 3090. Nothing renders until the owner answers board question 19.
+**Cost.** T2I-CompBench's own instructions generate 10 images per prompt, so 881 allowed prompts are 8,810 pictures. At 1024 pixels,
+the size the owner chose on board question 19, that is about 34 GPU-hours at the 14 seconds per picture measured for SDXL on an
+RTX 3090.
 
 ## Are the released weights CoMat's?
 
@@ -34,23 +34,20 @@ Table 1, so a miss could come from a different checkpoint.
 
 ## Which published number
 
-Board question 13 chose ToMe's quotes of CoMat on SDXL for Shape and Texture. CoMat's own Table 1 (arXiv v3, p7) prints different
-values. ToMe's citation does not say which CoMat version it read.
+By the owner's answer to board question 19, each row is judged against CoMat's own Table 1 (arXiv v3, p7). ToMe's quotes of the
+same model differ, so they go in each row's note.
 
-| Benchmark | ToMe's quote, chosen on question 13 | CoMat's own Table 1 |
+| Benchmark | CoMat's own Table 1, the number judged | ToMe's quote, in the note |
 |---|---|---|
-| Color | 0.7774 (not used) | 0.7827 (`CoMat-T1-055`, the target) |
-| Shape | 0.5262 (`ToMe-T1-051`) | 0.5329 (`CoMat-T1-056`) |
-| Texture | 0.6591 (`ToMe-T1-050`) | 0.6468 (`CoMat-T1-057`) |
-
-The comparison protocol already uses the number on CoMat's own page for Color. Two sources disagree on what the result was, so the
-owner decides on board question 19 before any CoMat score exists.
+| Color | 0.7827 (`CoMat-T1-055`, the target) | 0.7774 |
+| Shape | 0.5329 (`CoMat-T1-056`) | 0.5262 (`ToMe-T1-051`) |
+| Texture | 0.6468 (`CoMat-T1-057`) | 0.6591 (`ToMe-T1-050`) |
 
 ## What the release leaves open
 
 | Setting | Paper | Released code | Used here |
 |---|---|---|---|
-| Evaluation resolution | not stated; training is at 512 | the validation call leaves the size unset, so SDXL's default of 1024 applies | board question 19 |
+| Evaluation resolution | not stated; training is at 512 | the validation call leaves the size unset, so SDXL's default of 1024 applies | 1024, by the owner's answer to board question 19 |
 | Sampler and steps | DDPM, 50 steps, for training | validation uses `--scheduler` DDPM and `--total_step` 50 | DDPM, 50 steps |
 | Guidance | 7.5 for training | `--cfg_scale` default 7.5 | 7.5 |
 | Images per prompt | follows the benchmark's defaults | T2I-CompBench's `inference_eval.py` makes 10 | 10 |

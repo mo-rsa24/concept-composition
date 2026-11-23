@@ -8,7 +8,7 @@
     "commit": "045e027f-94b2919",
     "run_id": "5i9dt7by",
     "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/RTD/full/rtd/t2i_compbench",
-    "note": "3 seeds; plain SDXL on the same prompts and seeds 0.2637 against 0.3083 printed (reproduced, W&B 8802binw); RTD minus plain SDXL on matched pictures is -0.0214 (standard error 0.0153); board question 26 asks which number is the bar"
+    "note": "3 seeds; plain SDXL on the same prompts and seeds 0.2637 against 0.3083 printed (reproduced, W&B 8802binw); RTD minus plain SDXL on matched pictures is -0.0214 (standard error 0.0153); by the owner's answer to board question 26, the printed 0.4661 stays the bar and this rerun is reported beside it"
   },
   {
     "target_id": "RTD-T2-054",

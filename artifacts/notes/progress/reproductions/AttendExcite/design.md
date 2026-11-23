@@ -8,7 +8,8 @@ each coloured object is present, and the answers' probabilities are multiplied, 
 
 ## Status
 
-The row is `not comparable`, and nothing has run. Board question 25 asks the owner whether to use a community copy of the base model.
+The row is `not comparable` by the owner's answer to board question 25, because it was run on Stable Diffusion 2 and cannot change an SDXL
+target. Nothing is downloaded and no GPU time is spent on it.
 
 ## The row
 
@@ -36,25 +37,3 @@ Its Shape and Texture rows are `not comparable` by the owner's answer to board q
 
 **The boosted words are unstated.** The official `run.py` asks a person to type token indices. Of the 288 Color prompts the subject guard allows, 224 fit
 "a {colour} {noun} and a {colour} {noun}", and 64 need a rule.
-
-## The run, if the owner approves it
-
-**Group.** Reproduction (group 4), then frozen as a baseline (group 5).
-
-**Varied axis.** None. Plain SD2 runs first as the check on the mirror and scorer.
-
-**Check first.** Plain SD2 must reproduce the printed 0.5065 on the same 288 prompts. If it fails, the rival does not run and this row stays
-`not comparable`, because the failure would be in the base model copy or the scorer.
-
-**The rule for boosted words, fixed before any run.** Boost the last word of each noun phrase found by spaCy, the parser in ToMe's `prompt_utils.py`.
-A prompt with fewer than two noun phrases renders through plain SD2, and its count goes in the row's note.
-
-**Sampler.** The official pipeline at `163efdf` with its defaults: 50 steps, guidance 7.5, 25 steps of attention updates, scale factor 20.
-
-**Cost.** 2,880 images each. Plain SD2 is about 1.5 GPU-hours and Attend-and-Excite about 15, both unmeasured until a smoke test.
-
-**Buys.** `CoMat-T1-013`, the Attend-and-Excite number on the Color target.
-
-**The test.** The score is per image, so the standard error comes from resampling prompts with replacement 10,000 times. The row counts as `reproduced`
-when |ours − 0.6400| ≤ 1.96 × √(SE_ours² + SE_ours²), using our standard error for the published one because the paper prints none. The row's note says
-it is scored on 288 of 300 prompts and that it tests a rebuild of an unreleased implementation.

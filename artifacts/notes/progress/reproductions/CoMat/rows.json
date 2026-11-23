@@ -1,10 +1,10 @@
 [
   {
     "target_id": "ToMe-T1-054",
-    "note": "reproduces CoMat on SDXL with the released weights in CaraJ/CoMat_sdxl_ft_unet, once those are confirmed as the CoMat model; CoMat on SD1.5 is ToMe-T1-035 = 0.4975, published only"
+    "note": "CoMat's own Table 1 number, by the owner's answer to board question 19; ToMe quotes it as 0.5262 (ToMe-T1-051); released weights in CaraJ/CoMat_sdxl_ft_unet at 1024 pixels, the size CoMat's validation code falls through to, which the paper does not state; CoMat on SD1.5 is ToMe-T1-035 = 0.4975, published only"
   },
   {
     "target_id": "ToMe-T1-053",
-    "note": "reproduces CoMat on SDXL with the released weights in CaraJ/CoMat_sdxl_ft_unet, once those are confirmed as the CoMat model; CoMat on SD1.5 is ToMe-T1-034 = 0.6190, published only"
+    "note": "CoMat's own Table 1 number, by the owner's answer to board question 19; ToMe quotes it as 0.6591 (ToMe-T1-050); released weights in CaraJ/CoMat_sdxl_ft_unet at 1024 pixels, the size CoMat's validation code falls through to, which the paper does not state; CoMat on SD1.5 is ToMe-T1-034 = 0.6190, published only"
   }
 ]

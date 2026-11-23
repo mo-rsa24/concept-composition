@@ -1,8 +1,8 @@
 # Review: reproducing Rectify Then Diffuse
 
 This file holds what the runs in [the RTD design](design.md) produced. RTD does not reproduce its printed T2I-CompBench
-Complex score on the 988 allowed prompts. It passes on RareBench Concat, where 33 prompts make the test weak. Board question 26
-asks the owner which Complex number Paper 2 has to beat.
+Complex score on the 988 allowed prompts. It passes on RareBench Concat, where 33 prompts make the test weak. By the owner's
+answer to board question 26, the printed 0.466 stays the bar, and this rerun of 0.242 is reported beside it.
 
 ## Runs
 
