@@ -14,6 +14,7 @@ Can small checkers that read only where each word landed teach SDXL to draw two 
 - [Step V3: does its gradient compose unseen digits](#step-v3-does-its-gradient-compose-unseen-digits)
 - [Step V4: does it work on SDXL's unseen objects](#step-v4-does-it-work-on-sdxls-unseen-objects)
 - [Step V5: remove one checker at a time](#step-v5-remove-one-checker-at-a-time)
+- [Two extensions with no step yet](#two-extensions-with-no-step-yet)
 - [What this design cannot say](#what-this-design-cannot-say)
 
 ## The design on one page
@@ -288,6 +289,69 @@ No new diffusion model is trained, no API tokens are spent, and no benchmark pro
 **Relation and boxes.** Taken from the word maps of the finished picture at $t \le 200$, where Detector Guidance's detector reads best (mAP@0.5 of 58.4 of 100 at $t = 200$, [p. 14](https://arxiv.org/pdf/2306.02236#page=14)). Before training, check 64 labels by eye at full size. If fewer than 90% are right, stop and report it.
 
 **Colours.** Recolour each subject's region to one of 8 colours in pixel space, then re-encode with SDXL's VAE. Look at 32 recoloured pictures at full size before training, because a recolouring artefact would be something a checker could learn.
+
+## Two extensions with no step yet
+
+Neither extension runs until the owner approves a board step. Both wait for the results of V3 and of Loop 9's reading test (W2), because those results decide which properties still need them.
+
+<a href="01-reading/three-ways-to-score-n-objects.png"><img src="01-reading/three-ways-to-score-n-objects.png" width="900" alt="A prompt with N subjects feeds three readers of the noisy latent: word-map heads for where things are, a question head on SDXL features for what they are, and a sentence score for the whole picture. Each reader has its own fixed push length, and the pushes are added to the product of N experts."></a>
+
+### The question head: binding and the right identity
+
+**Why it exists.** CO3 already draws two bodies in all 96 tuning pictures, and its failures are borrowed parts, wrong species and extra subjects. Those failures are about what each subject is, and word maps mostly hold where it is. This head is a second route to binding and prompt match, compared with the word-map versions in the table at the top.
+
+**What it reads.** SDXL's frozen middle and first two up-block features at 32 by 32, read under the empty prompt as Readout Guidance does ([p. 4](https://arxiv.org/pdf/2312.02150#page=4)), plus the timestep. A question such as "Does the cat have any features of a dog?" enters through SDXL's frozen CLIP-L text encoder. Two cross-attention layers let the question's tokens read the feature grid, and one linear layer gives a yes-or-no logit.
+
+**What it trains on.** The finished pictures in the animal list step M5 passes to D3. A local vision-language model labels them with four question templates: "Is there a {A}?", "Is there a {B}?", "Does the {A} have any features of a {B}?" and "Is the {A} {colour}?". The teacher reads clean pictures only and no gradient passes through it. It may not be BLIP, BLIP-VQA, ImageReward, CLIP or GenEval's detector, because those grade the benchmarks. Check 64 of its labels by eye at full size, and stop if fewer than 90% are right.
+
+**Guard against word leakage.** Each picture is also asked about a noun from another pair that shares no word with it, so the answer has to come from the picture. Yes and no are balanced within each pair. Neither-subject pictures are in the negatives, because a guiding classifier trained without them called a fridge a cat.
+
+**Unseen-concept test.** Train on animals and test on the six object pairs, labelled by the blind count rubric.
+
+**When it pushes.** Only on steps where its balanced accuracy on held-out animal pairs is at least 0.6. Identity may become readable later than layout (inferred), so this window may start after step 0 and run past step 15.
+
+| Result | What it takes |
+|---|---|
+| Reads | On the object pairs, balanced accuracy over its readable steps is at least 0.75 and within 0.05 of held-out animal pairs, at least 0.75 on right against wrong nouns, and at least 80% of neither-subject pictures are rejected |
+| Steers | CO3 with the head leads CO3 alone by at least 5 of 96 faithful pairs and more than 1.96 standard errors on the 12 tuning pairs, the random push does not, and damaged pictures rise by at most 5 of 96 |
+| Null | It misses either row |
+
+The damage limit exists because training presence labels on every pair cut faithful cat and dog pairs from 35 to 24 of 128 and raised damaged pictures from 11 to 20.
+
+**Cost:** about 8.5 GPU-hours as budgeted: 1.5 for the teacher's labels, 2.5 for one training and 4.5 for three rows of 96 pictures. **Buys:** whether a trained head can fix the failures CO3 still makes.
+
+### Scaling from two objects to nine
+
+**The problem.** The checkers above take exactly two subject maps, so they cannot read a prompt with more subjects.
+
+**The fix.** Two small heads are trained only on two-subject pictures and reused for every word and every pair of words:
+
+$$
+\log C_{\text{layout}} = \frac{1}{N}\sum_{i=1}^{N} \log C_{\text{word}}(m_i) + \frac{2}{N(N-1)}\sum_{i<j} \log C_{\text{pair}}(m_i, m_j)
+$$
+
+$m_i$ is subject $i$'s word map and $N$ is the number of subjects. The word head asks whether this word landed on exactly one blob. The pair head asks whether these two words landed on separate blobs in the asked order. Each sum is averaged and given its own fixed push length, so the push does not grow with $N$.
+
+| Subjects $N$ | Word-head runs | Pair-head runs |
+|---:|---:|---:|
+| 2 | 2 | 1 |
+| 4 | 4 | 6 |
+| 6 | 6 | 15 |
+| 9 | 9 | 36 |
+
+**Why it might carry over.** On location-conditioned CLEVR, models trained on 1 to 3 objects reached between 2 and 7 objects, and 9 once their scores were forced to be local ([Local Mechanisms, p. 3](https://arxiv.org/pdf/2509.16447#page=3)). The same paper finds conditional locality mostly absent in SDXL's pixels and present in its features ([p. 1](https://arxiv.org/pdf/2509.16447#page=1)), so this transfer to SDXL is untested.
+
+**Test.** Train on two-subject pictures only. Then run CO3 alone and CO3 with the heads at $N$ of 3, 4, 6, 8 and 9, on subject words outside the training list, at 48 pictures per cell, and count blind at full size how many named subjects are present as separate bodies.
+
+| Result | What it takes |
+|---|---|
+| Scales to $N$ | At that $N$, pictures with every named subject present lead CO3 alone by at least 3 of 48 and more than 1.96 standard errors |
+| Largest $N$ | The largest $N$ for which that holds at $N$ and at every smaller tested value |
+| Null | It fails at $N = 3$ |
+
+**Limits to expect.** A 32 by 32 map gives nine subjects about 113 cells each, and one SDXL pass with gradients on nine prompts may not fit in memory, so the smoke rung measures both. The CLEVR benchmark's prompts stay out of this test.
+
+**Cost:** about 10 GPU-hours as budgeted, for 480 pictures with more expert passes per step. **Buys:** a measured answer to how far the checkers scale past two subjects.
 
 ## What this design cannot say
 

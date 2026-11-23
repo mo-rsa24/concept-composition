@@ -1,0 +1,39 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    P["Prompt with N subjects<br/>a cat, a dog, a bird ..."]
+    X["Half-drawn picture x_t"]
+
+    subgraph WHERE["WHERE: count, order, position, size (Loop 8)"]
+        direction LR
+        M["N word maps"] --> H["Same word head, N times<br/>Same pair head, every pair<br/>9 subjects: 9 + 36 runs"]
+    end
+
+    subgraph WHAT["WHAT: right identity, right colour (proposed)"]
+        direction LR
+        F["SDXL features"] --> Q["Same question head, per subject<br/>Is this a cat? Is the cat red?"]
+    end
+
+    subgraph WHOLE["WHOLE PICTURE: does it fit the sentence? (Loop 9)"]
+        direction LR
+        N["NoisyCLIP"] --> S["Right sentence<br/>minus wrong sentence"]
+    end
+
+    L["Each reader gets its own<br/>fixed push length"]
+    O["Added to the product<br/>of N experts"]
+
+    P --> M
+    P --> Q
+    P --> S
+    X --> M
+    X --> F
+    X --> N
+    H --> L
+    Q --> L
+    S --> L
+    L --> O
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    class P,X,M,H,F,Q,N,S,L,O plain
+    style WHERE fill:#e3f4e1,stroke:#2e7d32,stroke-width:2px
+    style WHAT fill:#fff1dc,stroke:#c77700,stroke-width:2px,stroke-dasharray: 5 4
+    style WHOLE fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
