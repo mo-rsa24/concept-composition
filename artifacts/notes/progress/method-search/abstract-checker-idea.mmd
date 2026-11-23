@@ -1,0 +1,25 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef warn fill:#fff3cd,stroke:#b58900,stroke-width:3px,color:#111111
+
+  subgraph NOW["Now: the checker sees what the things are"]
+    direction LR
+    N1["SDXL feature maps<br/>hold appearance and layout"]:::warn --> N2["One head:<br/>is this a clean pair?"] --> N3["Risk: it learns cat and dog,<br/>and never learns two"]:::warn
+  end
+
+  subgraph NEXT["Proposed: the checkers see only where each word landed"]
+    direction LR
+    P1["Word attention maps<br/>red, book, yellow, vase"]
+    P2["Counting head:<br/>one separate blob per noun?"]
+    P3["Binding head:<br/>red on book, not on vase?"]
+    P4["Spatial head:<br/>is A left of B?"]
+    P5["Sum of 3 gradients,<br/>capped, added to the<br/>product of experts"]
+    P1 --> P2 & P3 & P4
+    P2 & P3 & P4 --> P5
+  end
+
+  NOW -.->|"open: does it hold on categories never trained on?"| NEXT
+  class N2,P1,P2,P3,P4,P5 plain
+  style NOW fill:#fafafa,stroke:#222222,stroke-width:1px
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
