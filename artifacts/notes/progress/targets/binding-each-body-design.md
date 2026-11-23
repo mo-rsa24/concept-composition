@@ -8,7 +8,7 @@ runs rungs 1 and 2 as step M9, and rung 2 starts only if rung 1 reaches its bar.
 
 ## The change to the sampler
 
-From step 10, each subject's prediction acts only inside its own soft mask:
+Each subject's prediction acts only inside its own soft mask, from step 0 in rung 1 and from step 10 in rung 2:
 
 $$
 \hat\epsilon = \epsilon_u + g\,\big[m_A(\epsilon_A-\epsilon_u) + m_B(\epsilon_B-\epsilon_u)\big]
