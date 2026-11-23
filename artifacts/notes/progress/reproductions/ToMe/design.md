@@ -70,6 +70,11 @@ spaCy finds no noun with an attribute. By the owner's answer to board question 2
 group with the phrase holding its noun, and nothing else in ToMe changes. The 4 prompts with nothing to merge render as plain SDXL. Each
 row prints ToMe's score with and without the repaired prompts and labels both prompt counts. The GPU budget stays at 44 hours.
 
+**The repair, checked on all 1,902 prompts without rendering.** None of the 1,751 prompts that already parsed changed. All 147 that
+crashed now parse (145 Complex, 2 Shape). Their 310 attribute groups each land on a phrase containing their noun. Two groups, one each
+in `t2i_compbench-0746` and `t2i_compbench-0980`, sit in no kept phrase and are left out of the merge. The repaired parse is
+`/datasets/mmolefe/poe_repair_min/loop-5/data/tome-parse-repaired.jsonl`.
+
 ## The test, fixed before the first run
 
 Both metrics are scored per picture. The standard error comes from resampling prompts with replacement 10,000 times. ToMe prints
