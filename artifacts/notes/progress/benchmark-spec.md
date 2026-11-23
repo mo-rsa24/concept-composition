@@ -33,18 +33,21 @@ dataset or task, as the numbers table names it.
 | Paper 2 | T2I-CompBench Texture | BLIP-VQA, higher is better | ToMe 0.6894 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
 | Paper 2 | T2I-CompBench Complex | ImageReward (IR), higher is better | RTD 0.4661 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the 1,000 prompts of the T2I-CompBench complex compositional split. | 1,000 prompts, three fixed seeds per prompt (3,000 images). | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
 | Paper 2 | RareBench Concat | ImageReward (IR), higher is better | RTD 0.4464 | No training (Rectify Then Diffuse on pretrained SDXL). Evaluated on the Concat category of RareBench. | RareBench holds 120 prompts across Concat, Relations and Complex, and the Concat share is not stated. Three fixed seeds per prompt. | [Rectify Then Diffuse Table 2, page 6](https://arxiv.org/pdf/2608.03135#page=6) |
-| Paper 2 | GenEval (1000 prompts) | Two object, higher is better | FKC 0.80 | SDXL with classifier-free guidance plus FKC at inference, guidance weight 7.5; no training stated. | 1,000 prompts; images per prompt and seeds not stated. | [FKC Table A4, page 39](https://arxiv.org/pdf/2503.02819#page=39) |
+| Paper 2 | GenEval (553 prompts) | Two object, higher is better | FKC 0.78 | SDXL with classifier-free guidance plus FKC at inference, guidance weight 7.5; no training stated. Evaluated on GenEval's released 553 prompts, of which 99 are two-object. | 553 prompts; images per prompt and seeds not stated. | [FKC Table A4, page 39](https://arxiv.org/pdf/2503.02819#page=39) |
 
 ## What the rivals leave out
 
 **Only 3 of the 11 targets come with a stated image count:** Projective Composition (100), Logical Guidance
 (10,000) and Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). Its RareBench Concat row
 states three seeds and leaves out how many of the 120 prompts are Concat. ToMe states 300 prompts on its two benchmarks and FKC
-states 1,000, and both leave out images per prompt and seeds. The other 4 targets have no count for that number.
+states 553, and both leave out images per prompt and seeds. The other 4 targets have no count for that number.
 
 A run on those 8 benchmarks records the count it used, and its row reads "partly matched", as the
 [comparison protocol](targets/comparison-protocol.md#numbers) requires. Step D2 reruns one published number per rival,
 which is where a missing setting can be tested.
+
+**GenEval's target uses the 553 released prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints 0.78 and
+plain SDXL prints 0.80, so the target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
 
 **Paper 1's CLEVR target rests on Projective Composition.** Its models saw only single-object images, the closest printed
 setting to Paper 1. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
@@ -244,8 +247,8 @@ leaves out.
 | Dataset | Split | Metrics | Count | Pages |
 |---|---|---|---|---|
 | 100 protein target pairs (P1, P2) | Pretrained dual-pocket diffusion model with FKC at inference; evaluated on 100 protein pairs, with 5 molecule sizes sampled from the original training set of Guan et al. (2023) | (P1 * P2) docking score product, Better than ref. (fraction), Div., P1 docking score, P2 docking score, QED, SA, Val. & Uniq., max(P1, P2) docking score, mean docking score of the reference molecules | 100 protein pairs, 32 ligands for each of 5 molecule lengths per pair; values are averages over all generated molecules in each run | 9 |
-| GenEval (1000 prompts) ★ | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on 1000 GenEval prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 1000 prompts; images per prompt and seeds not stated; mean values reported | 39 |
-| GenEval (553 prompts) | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on the GenEval original 553 prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 553 prompts; images per prompt and seeds not stated; mean values reported | 39 |
+| GenEval (1000 prompts) | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on 1000 GenEval prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 1000 prompts; images per prompt and seeds not stated; mean values reported | 39 |
+| GenEval (553 prompts) ★ | SDXL with classifier-free guidance plus FKC at inference (no training stated); evaluated on the GenEval original 553 prompts | Color attribution, Colors, Counting, Overall, Position, Single object, Two object | 553 prompts; images per prompt and seeds not stated; mean values reported | 39 |
 | ImageNet-512 | EDM2-XS model trained on ImageNet-512 (pretrained, FKC resampling applied at inference); which classes or prompts are evaluated is not stated | CLIP, IR (ImageReward) | CLIP and ImageReward scores averaged over 10,000 images | 7, 38 |
 | LDMol molecules, property pair GSK3b / DRD2 | Pretrained LDMol latent diffusion model (text-conditioned) with FKC at inference; prompted with the text 'This molecule inhibits {protein_name}' for the property pair; no training split stated | (P1, P2) top-1, P1, (P1, P2) top-1, P2, Div., P1 top-10, P2 top-10, Qual., Val. & Uniq. | Top-10 molecules (highest P1*P2) from a batch of 512, averaged over 5 runs; top-1 molecule reported overall | 42, 44 |
 | LDMol molecules, property pair JNK3 / DRD2 | Pretrained LDMol latent diffusion model (text-conditioned) with FKC at inference; prompted with the text 'This molecule inhibits {protein_name}' for the property pair; no training split stated | (P1, P2) top-1, P1, (P1, P2) top-1, P2, Div., P1 top-10, P2 top-10, Qual., Val. & Uniq. | Top-10 molecules (highest P1*P2) from a batch of 512, averaged over 5 runs; top-1 molecule reported overall | 42, 44 |
@@ -415,3 +418,7 @@ read the same way.
 this page.
 
 </details>
+
+## Cross-references
+
+- The mention of **benchmark spec**, the page listing what each rival ran, written in the field-learning step, in [the route to two papers, under The steps](../../../plans/route-two-papers.md#the-steps).
