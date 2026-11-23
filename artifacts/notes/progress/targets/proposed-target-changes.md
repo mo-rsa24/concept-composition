@@ -29,7 +29,14 @@ not reproduced (W&B `5i9dt7by`). On the same pictures it sits 0.0214 below plain
 kept 0.4661 as the bar, so the target stays 0.4761. On RareBench Concat it scores 0.4166 on 33 of 40 prompts at 3 seeds, against
 0.4464 printed (W&B `tc75fx0i`). That passes, but with 33 prompts the pass band is plus or minus 0.443, so the test says little, and
 RareBench Concat is a reported row that sets no target.
-Both reruns stay out of the scoreboard's `reproduced` field because their prompt counts differ from the published ones.
+
+**ToMe and plain SDXL reruns.** On Shape, ToMe scores 0.5502 on 293 of 300 prompts at seed 0, against 0.6051 printed, so it is not
+reproduced (W&B `8cowoyea`). On Texture it scores 0.6503 on all 300 prompts at seed 0, against 0.6894 printed, which is reproduced
+(W&B `ljypsxnd`). Plain SDXL on GenEval's 99 two-object prompts scores 0.7399 over 396 images, against 0.80 printed, which is
+reproduced (W&B `qcdz35cj`). The printed numbers stay the bars.
+
+These reruns stay out of the scoreboard's `reproduced` field, because their prompt counts differ from the published ones or the
+published page leaves their image count and seeds unstated.
 
 **GenEval two objects.** This is Paper 2's one text-to-image headline that counts two separate objects, which is what it claims to restore.
 FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL

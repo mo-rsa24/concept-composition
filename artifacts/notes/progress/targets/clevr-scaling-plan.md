@@ -36,7 +36,8 @@ anywhere in the frame. The 6 models pair into 9 scenes of 2 to 6 objects. Succes
 models see real multi-object images, so this is its own table and does not count toward the one-object target. Giving each model
 its own half of the image is not allowed, because that is two pictures pasted side by side.
 
-**Stage 3: inclusive labels.** A separate table on models trained with 1 to 3 objects, with every object labelled.
+**Inclusive labels do not run here.** Training a diffusion model on inclusive captions is too heavy for the main results, so they get
+one appendix paragraph, written from the existing toy, MNIST and SDXL results.
 
 ## The rules, fixed before the first run
 
@@ -52,7 +53,7 @@ its own half of the image is not allowed, because that is two pictures pasted si
    position. At 10 experts that is 10,240 images, where testing every smaller group would take 1,036,288.
 7. In Stage 1, no model and no checker sees a real image holding two objects. The checker trains only on samples from the models
    and composites pasted from them at random positions, and the position sets used for evaluation are held out. A checker trained
-   without composites is reported beside it. A checker that sees real multi-object images is judged in the Stage 3 table.
+   without composites is reported beside it. A checker that sees real multi-object images does not count toward the 7-object target.
 8. The scorer trains on real rendered images of 1 to 12 objects, reads objects at the requested positions as well as the total, must
    reach 99% on held-out renders, and is never used to train a checker.
 9. The picture-quality bar is a threshold in the scorer's code, written before the first run.
@@ -83,10 +84,6 @@ at equal training length:
 | One object seen, one network | 6 in place in 97 of 100 images, first clear failure at 7 | **7 objects, and more than the control** |
 | Experts trained apart | No rival prints this | **7 objects, and more than the control and the paste** |
 | Two experts holding several objects | No direct rival. Bradley's colour model reaches 4 after training on 1 to 3 objects, on a different task | A new table |
-| Trained on 1 to 3 objects | 7 for labelling every object, 9 for the local patch model | 10 objects |
-
-The two Bradley papers disagree on the 1-to-3 result. Projective Composition credits the learned model with 9, while the Local
-Mechanisms paper prints 7 for that model and 9 only for its local patch models. This page uses the Local Mechanisms numbers.
 
 ## What it costs
 
@@ -100,4 +97,3 @@ is unmeasured.
 | Ladder, up to 6 experts | 8 | 14 to 19 | 56 to 75 |
 | Ladder, up to 10 experts | 12 | 21 to 28 | 84 to 113 |
 | Two experts holding several objects | 6 | 11 to 14 | 42 to 56 |
-| Inclusive labels | 1 per training set | about 2 each | 7 to 9.4 each |

@@ -69,8 +69,7 @@ model. Paper 1 claims AND, both things in one image.
 
 **Both papers compete on CLEVR, under one [scaling plan](clevr-scaling-plan.md).** Paper 1 adds experts trained apart, one per
 rung. Paper 2 runs the same single location network with our checker. The checker may see only single-object images and composites
-pasted from them. A checker that sees real multi-object images is judged against models trained on those images, where the printed
-best is 9 for one to three objects.
+pasted from them. A checker that sees real multi-object images does not count toward this target.
 
 **RareBench Concat is a reported row and sets no target.** Its 33 allowed prompts give a rerun pass band of plus or minus 0.443.
 

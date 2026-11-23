@@ -9,20 +9,20 @@ flowchart TD
         P1["Paper 1<br/>experts trained apart<br/>+ our checker"]
         C["Control: sample and paste<br/>each expert alone"]
     end
-    subgraph MANY["Trained on images with 1 to 3 objects: a harder number to beat"]
+    subgraph TWO["Two experts holding several objects: its own table"]
         direction LR
-        I["Inclusive labels<br/>name every object<br/>Bradley printed: 7"]
-        L["Bradley's local patch model<br/>printed: 9<br/>target 10"]
+        A["Model A<br/>1, 2 or 3 red objects"]
+        R["Model B<br/>1, 2 or 3 blue objects"]
     end
     S["One scorer for all<br/>most objects that succeed<br/>all N in place, picture quality"]
     B ~~~ P2 ~~~ E ~~~ P1 ~~~ C
-    I ~~~ L
+    A ~~~ R
     D --> ONE
     ONE --> S
-    D -. "separate table" .-> MANY
-    MANY -.-> S
+    D -. "separate table" .-> TWO
+    TWO -.-> S
 
     classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
-    class D,B,P2,E,P1,C,I,L,S plain
+    class D,B,P2,E,P1,C,A,R,S plain
     style ONE fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
-    style MANY fill:#fff4e6,stroke:#e8a15c,stroke-width:2px
+    style TWO fill:#fff4e6,stroke:#e8a15c,stroke-width:2px
