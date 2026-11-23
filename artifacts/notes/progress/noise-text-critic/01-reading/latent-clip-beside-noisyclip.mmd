@@ -1,0 +1,31 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}, 'flowchart': {'nodeSpacing': 30, 'rankSpacing': 38}}}%%
+flowchart TB
+  X["half-drawn SDXL latent x_t<br/>4 by 128 by 128, scaled by 0.13025"]:::plain
+
+  subgraph NOW["Now in W2: NoisyCLIP"]
+    direction TB
+    M["fixed linear map to RGB<br/>then resize to 224"]:::fixed --> N["NoisyCLIP ViT-L/14<br/>trained on noisy SDXL latents"]:::plain
+  end
+
+  subgraph NEXT["Proposed extra row: Latent CLIP"]
+    direction TB
+    P["divide by 0.13025<br/>average-pool to 64 by 64"]:::change --> L["Latent CLIP ViT-B/4-plus<br/>trained on clean latents only<br/>no timestep input"]:::change
+  end
+
+  S["right sentence score<br/>minus wrong sentence score"]:::plain
+  G{"W2: does it read<br/>at steps 0 to 15?"}:::plain
+  W["W3: its gradient pushes CO3<br/>only on steps it can read"]:::push
+
+  X --> M
+  X --> P
+  N --> S
+  L -.->|"never tested on a noisy latent"| S
+  S --> G
+  G -->|"at least 0.6 on a step"| W
+
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef fixed fill:#f1f3f5,stroke:#6b7a88,stroke-width:2px,color:#111111
+  classDef change fill:#eaf1ff,stroke:#a8c7fa,stroke-width:2px,color:#111111
+  classDef push fill:#fff1e0,stroke:#c86a0a,stroke-width:3px,color:#111111
+  style NOW fill:#ffffff,stroke:#a0a0a0
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
