@@ -94,5 +94,5 @@ Each rung saves its config, metrics and commit under `/datasets/mmolefe/poe_repa
 
 ## Shapes3D
 
-The authors' results sheet has an empty Shapes3D tab, so those two rows (CoInD 91.10%, Liu 51.56%) have no released weights. They need
-at least 3 independent trainings per method, and they get their own cost and question before anything runs.
+The authors' results sheet has an empty Shapes3D tab, so those two rows (CoInD 91.10%, Liu 51.56%) are retrained under their own
+[Shapes3D design](shapes3d-design.md).
