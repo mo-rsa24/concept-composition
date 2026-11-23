@@ -9,11 +9,25 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m1/`, 
 
 | Paper | Rung | Slurm job | Commits | Output | State |
 |---|---|---|---|---|---|
-| 1 | Smoke, overfit, 1% and zero-push check | 93461 | `f0410a14-f2bdb6d` | `paper-1/ladder/` | queued |
+| 1 | Smoke, overfit, 1% and zero-push check | 93461 | `f0410a14-f2bdb6d` | `paper-1/ladder/` | passed |
+| 1 | 1% of the data, 1,000 steps, so the loss is logged | 93583 | `7df3e0b1-f2bdb6d` | `paper-1/ladder/checkers-1pct-1000/` | passed |
+| 1 | Comparison: 35,000-sample pool, two checkers, four rows | 93598 | `7df3e0b1-f2bdb6d` | `paper-1/full/` | running |
 | 2 | Concept parse and zero-push check | 93468 | `99ac88a8-f2bdb6d` | `paper-2/controls/check.json` | passed |
 | 2 | Smoke and 1%: one pair, one seed, three rows | 93481 | `99ac88a8-f2bdb6d` | `paper-2/smoke/` | passed |
 | 2 | Comparison, pair shard 0 of 2 | 93523 | `99ac88a8-f2bdb6d` | `paper-2/full/` | running |
 | 2 | Comparison, pair shard 1 of 2 | 93524 | `99ac88a8-f2bdb6d` | `paper-2/full/` | queued |
+
+## Paper 1 controls
+
+**Do both checkers memorise 16 canvases?** ✅ Yes. The pair checker and the separate checker each got 16 of 16 right, against a bar of 15.
+
+**Does the loss fall on 1% of the pool?** ✅ Yes. Over 1,000 updates on 300 training samples, the logged loss went from 0.5793 at update
+500 to 0.5035 at update 1,000 for the pair checker, and from 0.3453 to 0.3243 for the separate checker.
+
+**Does a zero push reproduce the method without a push?** ✅ Yes. The largest absolute difference was 0.0, against a bar of 1e-5, in one
+process on an RTX 3090.
+
+**Do all four rows run?** ✅ Yes, on digits 4 and 7 at 8 seeds. The counts from that smoke run are too small to compare.
 
 ## Paper 2 controls
 
