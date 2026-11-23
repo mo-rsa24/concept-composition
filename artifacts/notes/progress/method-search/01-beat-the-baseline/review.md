@@ -1,6 +1,7 @@
 # Review: does each paper's method beat its simple baseline? (step M1)
 
-This file holds what the runs in [the M1 design](design.md) produced. Neither paper has a verdict yet.
+This file holds what the runs in [the M1 design](design.md) produced. Paper 1's verdict is **null**: its method did not beat
+sample-and-paste by more than the noise. Paper 2 has no verdict yet.
 
 ## Runs
 
@@ -11,7 +12,7 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m1/`, 
 |---|---|---|---|---|---|
 | 1 | Smoke, overfit, 1% and zero-push check | 93461 | `f0410a14-f2bdb6d` | `paper-1/ladder/` | passed |
 | 1 | 1% of the data, 1,000 steps, so the loss is logged | 93583 | `7df3e0b1-f2bdb6d` | `paper-1/ladder/checkers-1pct-1000/` | passed |
-| 1 | Comparison: 35,000-sample pool, two checkers, four rows | 93598 | `7df3e0b1-f2bdb6d` | `paper-1/full/` | running |
+| 1 | Comparison: 35,000-sample pool, two checkers, four rows | 93598 | `7df3e0b1-f2bdb6d` | `paper-1/full/rows/` | done, W&B `vekm3sfh` |
 | 2 | Concept parse and zero-push check | 93468 | `99ac88a8-f2bdb6d` | `paper-2/controls/check.json` | passed |
 | 2 | Smoke and 1%: one pair, one seed, three rows | 93481 | `99ac88a8-f2bdb6d` | `paper-2/smoke/` | passed |
 | 2 | Comparison, pair shard 0 of 2 | 93523 | `99ac88a8-f2bdb6d` | `paper-2/full/` | running |
@@ -51,6 +52,32 @@ One pair at one seed, read at full size. It shows the code runs and the three ro
 
 ## Questions
 
-**Paper 1: does the method beat sample-and-paste?** Unanswered.
+**Paper 1: does the method beat sample-and-paste?** ❌ Null. The method with the push draws 295 clean digit pairs of 320 and paste draws
+287. The lead of 8 is under the bar of 13.54, which is 1.96 times its standard error of 6.91. The zero-push check passed.
+
+<a href="paper-1-four-rows-first-two-seeds.png"><img src="paper-1-four-rows-first-two-seeds.png" width="800" alt="Four rows of digit canvases for five digit pairs at seeds 0 and 1: paste, the method with no push, the method with the checker push, and the method with a random push. A green frame marks a canvas the judge calls clean and a red frame one it does not"></a>
+
+| Row | Clean digit pairs of 320 | 1 and 9 | 3 and 6 | 4 and 7 | 2 and 8 | 0 and 5 |
+|---|---:|---:|---:|---:|---:|---:|
+| Sample alone and paste | 287 | 57 | 58 | 55 | 58 | 59 |
+| Method, no push | 259 | 58 | 53 | 49 | 47 | 52 |
+| Method with the checker push | 295 | 59 | 61 | 53 | 60 | 62 |
+| Method with a random push | 258 | 56 | 51 | 49 | 50 | 52 |
+
+These matched leads were read after the run and carry no bar of their own. Each margin is 1.96 standard errors.
+
+| Comparison | Lead, of 320 | Margin |
+|---|---:|---:|
+| Checker push over no push | +36 | 15.61 |
+| Checker push over random push | +37 | 15.47 |
+| Random push over no push | -1 | 8.75 |
+| No push over paste | -28 | 16.57 |
+
+The checker's direction does real work: it lifts the method by 36 pairs where a random push of the same size changes nothing. That lift
+brings the method level with paste. Without the push, the side-choosing method is 28 pairs below paste.
+
+**Does the judge agree with the eye?** On 64 canvases shuffled across the four rows and called by eye at full size before the key was
+opened, the two agree on 58. The eye called 5 clean that the judge rejected and rejected 1 the judge called clean. The six disagreements
+fall in all four rows.
 
 **Paper 2: does CO3 with the push beat CO3 alone?** Unanswered.
