@@ -20,7 +20,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 LIMITS = HERE / 'limits'
 OUT = HERE.parent / 'limits.md'
-PDFS = Path(os.environ.get('CLAUDE_JOB_DIR', '/home/molef/.claude/jobs/f541e553')) / 'tmp' / 'rivals.tsv'
+PDFS = HERE / 'rivals.tsv'
 COLUMNS = ['paper', 'family', 'dataset', 'task', 'metric', 'number_id', 'outside_ids', 'dispute', 'breaks_at',
            'break_ids', 'seen_in', 'cost', 'cost_source']
 NO_NUMBER = 'no rival number'

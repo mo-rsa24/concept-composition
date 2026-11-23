@@ -14,7 +14,7 @@ a reviewer opening the cited page. This page is the instruction for whoever writ
 | `reads/figures/on-our-data.md` | What our own runs show. Never use these as published numbers |
 | `rivals.md` | The 22 rivals and their short names |
 
-All paths are under `artifacts/notes/progress/targets/`. PDFs are listed in `/home/molef/.claude/jobs/f541e553/tmp/rivals.tsv`.
+All paths are under `artifacts/notes/progress/targets/`. PDFs are listed in `reads/rivals.tsv`.
 
 ## Which rows to write
 

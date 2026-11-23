@@ -14,7 +14,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'figure-inventory.csv'
-PDFS = Path(os.environ.get('CLAUDE_JOB_DIR', '/home/molef/.claude/jobs/f541e553')) / 'tmp' / 'rivals.tsv'
+PDFS = HERE / 'rivals.tsv'
 
 LABEL = r'((?:[A-Z]\.?)?\d+(?:\.\d+)?)'
 UPPER = re.compile(r'F\s?IGURE\s+' + LABEL + r'\b\s*[:.]?\s*(.{0,110})')
