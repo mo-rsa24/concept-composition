@@ -12,4 +12,4 @@
 
 ## Cluster access
 
-From 20:25 on 2026-11-23 (laptop time), `ssh mscluster84` refused a new session on the shared connection and then timed out after 200 and 300 seconds. At 21:05 it timed out again after 300 seconds, a direct connection with no shared socket hung for 45 seconds, and the login node `mscluster` hung for 70 seconds even though its port 22 accepts a TCP connection. At 21:44, 21:48, 22:19, 22:23, 22:54 and 22:58 the login node hung again, for 60 to 90 seconds each time. Job 93851's state could not be read during that time.
+From 20:25 on 2026-11-23 (laptop time), `ssh mscluster84` refused a new session on the shared connection and then timed out after 200 and 300 seconds. At 21:05 it timed out again after 300 seconds, a direct connection with no shared socket hung for 45 seconds, and the login node `mscluster` hung for 70 seconds even though its port 22 accepts a TCP connection. At 21:44, 21:48, 22:19, 22:23, 22:54, 22:58, 23:31 and 23:34 the login node hung again, for 60 to 90 seconds each time. Job 93851's state could not be read during that time.
