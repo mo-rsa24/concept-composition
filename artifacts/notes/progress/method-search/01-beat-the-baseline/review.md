@@ -86,7 +86,7 @@ fall in all four rows.
 
 **Paper 2: does CO3 with the push beat CO3 alone?** ❌ Null. CO3 with the kept push makes 7 faithful pairs of 96 and CO3 alone makes 11.
 A win needed a lead of at least 5 and more than 10.08, which is 1.96 times the standard error of 5.14. The lead is -4. The random push
-makes 12, one more than CO3 alone, so it does not trigger the inconclusive rule. The zero-push check passed.
+makes 12, one more than CO3 alone, so it does not trigger the inconclusive rule. The zero-push check passed. W&B run `s7o6404z`.
 
 <a href="paper-2-three-rows-seed-6002.png"><img src="paper-2-three-rows-seed-6002.png" width="800" alt="Three rows of renders at seed 6002 for puma and condor, zebra and flamingo, and seal and gull: CO3 alone, CO3 with the checker push, and CO3 with a random push of the same size"></a>
 
