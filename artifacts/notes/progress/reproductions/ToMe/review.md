@@ -59,7 +59,7 @@ on seed 0 (jobs 93214, 93228 and 93229, commits `5f16f1f6-1abb2a8`). The pass ba
 | Shape | 293 of 300 | 0.4825 | 0.4301 to 0.5348 | 0.5408 | not reproduced | 0.4687 | `92suk4nc` |
 | Texture | 300 of 300 | 0.5233 | 0.4630 to 0.5835 | 0.5637 | reproduced | 0.5299 | `acw7fxeb` |
 
-Two papers print different plain SDXL scores on this benchmark, and both of ours fall inside the pass band around CoMat's numbers. Board question 39 asks
-whether ToMe's Shape row still gets its verdict.
+Two papers print different plain SDXL scores on this benchmark, and both of ours fall inside the pass band around CoMat's numbers. By the owner's answer
+to board question 39, ToMe's Shape row still gets its verdict, with this missed check printed beside it.
 
 **Does ToMe reproduce its published scores?** Unknown until the full runs finish.
