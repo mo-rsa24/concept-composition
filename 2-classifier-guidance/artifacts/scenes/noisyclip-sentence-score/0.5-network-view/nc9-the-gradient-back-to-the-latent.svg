@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 760" width="1760" height="760" role="img" aria-label="A forward row of ten stages from the latent to the score difference, and an orange backward row applying the chain rule, with the two points where the released map blocks the gradient." font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+<rect width="1760" height="760" fill="#ffffff"/>
+<defs><filter id="soft-halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text font-family="DejaVu Sans" x="30.0" y="44.0" font-size="28" fill="#2b3440" font-weight="700" text-anchor="start">The gradient walks back through every step to the latent</text>
+<text font-family="DejaVu Sans" x="34.0" y="124.0" font-size="21" fill="#2b3440" font-weight="700" text-anchor="start">Forward</text>
+<rect x="34.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#ffffff" stroke="#2b3440" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="105.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">the latent</text>
+<text font-family="DejaVu Sans" x="105.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">4 × 128 × 128</text>
+<rect x="208.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#e6e9ec" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="279.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">linear map</text>
+<text font-family="DejaVu Sans" x="279.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">fixed weights</text>
+<line x1="179.4" y1="210.0" x2="196.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="204.6,210.0 196.6,206.8 196.6,213.2" fill="#2b3440"/>
+<rect x="382.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#e6e9ec" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="453.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">clamp</text>
+<text font-family="DejaVu Sans" x="453.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">0 to 255</text>
+<line x1="353.4" y1="210.0" x2="370.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="378.6,210.0 370.6,206.8 370.6,213.2" fill="#2b3440"/>
+<rect x="556.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#e6e9ec" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="627.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">resize</text>
+<text font-family="DejaVu Sans" x="627.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">to 224</text>
+<line x1="527.4" y1="210.0" x2="544.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="552.6,210.0 544.6,206.8 544.6,213.2" fill="#2b3440"/>
+<rect x="730.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#e6e9ec" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="801.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">normalise</text>
+<text font-family="DejaVu Sans" x="801.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">CLIP mean, std</text>
+<line x1="701.4" y1="210.0" x2="718.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="726.6,210.0 718.6,206.8 718.6,213.2" fill="#2b3440"/>
+<rect x="904.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#a8dcb5" stroke="#5fa877" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="975.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">ViT</text>
+<text font-family="DejaVu Sans" x="975.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">weights held</text>
+<line x1="875.4" y1="210.0" x2="892.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="900.6,210.0 892.6,206.8 892.6,213.2" fill="#2b3440"/>
+<rect x="1078.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#d8efde" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="1149.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">projection</text>
+<text font-family="DejaVu Sans" x="1149.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">to 768</text>
+<line x1="1049.4" y1="210.0" x2="1066.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="1074.6,210.0 1066.6,206.8 1066.6,213.2" fill="#2b3440"/>
+<rect x="1252.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#ffffff" stroke="#2b3440" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="1323.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">unit length</text>
+<text font-family="DejaVu Sans" x="1323.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">gives I</text>
+<line x1="1223.4" y1="210.0" x2="1240.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="1248.6,210.0 1240.6,206.8 1240.6,213.2" fill="#2b3440"/>
+<rect x="1426.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#bfe3f5" stroke="#6fb5d6" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="1497.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">two scores</text>
+<text font-family="DejaVu Sans" x="1497.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">S right, S wrong</text>
+<line x1="1397.4" y1="210.0" x2="1414.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="1422.6,210.0 1414.6,206.8 1414.6,213.2" fill="#2b3440"/>
+<rect x="1600.0" y="150.0" width="142.0" height="120.0" rx="10" fill="#e9ebee" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="1671.0" y="202.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">difference</text>
+<text font-family="DejaVu Sans" x="1671.0" y="232.0" font-size="13.5" fill="#5f6b78" font-weight="400" text-anchor="middle">one number</text>
+<line x1="1571.4" y1="210.0" x2="1588.6" y2="210.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="1596.6,210.0 1588.6,206.8 1588.6,213.2" fill="#2b3440"/>
+<text font-family="DejaVu Sans" x="34.0" y="380.0" font-size="21" fill="#c86a0a" font-weight="700" text-anchor="start">Backward: the chain rule, one factor per box</text>
+<circle cx="105.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<circle cx="279.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="267.0" y1="426.0" x2="130.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="117.0,426.0 130.0,431.2 130.0,420.8" fill="#c86a0a"/>
+<circle cx="453.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="441.0" y1="426.0" x2="304.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="291.0,426.0 304.0,431.2 304.0,420.8" fill="#c86a0a"/>
+<circle cx="627.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="615.0" y1="426.0" x2="478.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="465.0,426.0 478.0,431.2 478.0,420.8" fill="#c86a0a"/>
+<circle cx="801.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="789.0" y1="426.0" x2="652.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="639.0,426.0 652.0,431.2 652.0,420.8" fill="#c86a0a"/>
+<circle cx="975.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="963.0" y1="426.0" x2="826.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="813.0,426.0 826.0,431.2 826.0,420.8" fill="#c86a0a"/>
+<circle cx="1149.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="1137.0" y1="426.0" x2="1000.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="987.0,426.0 1000.0,431.2 1000.0,420.8" fill="#c86a0a"/>
+<circle cx="1323.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="1311.0" y1="426.0" x2="1174.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="1161.0,426.0 1174.0,431.2 1174.0,420.8" fill="#c86a0a"/>
+<circle cx="1497.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="1485.0" y1="426.0" x2="1348.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="1335.0,426.0 1348.0,431.2 1348.0,420.8" fill="#c86a0a"/>
+<circle cx="1671.0" cy="426" r="7" fill="#c86a0a" stroke="#ffffff" stroke-width="1.2"/>
+<line x1="1659.0" y1="426.0" x2="1522.0" y2="426.0" stroke="#c86a0a" stroke-width="3.2"/><polygon points="1509.0,426.0 1522.0,431.2 1522.0,420.8" fill="#c86a0a"/>
+<text font-family="DejaVu Sans" x="105.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">g, same shape</text>
+<text font-family="DejaVu Sans" x="105.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">as the latent</text>
+<text font-family="DejaVu Sans" x="279.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">each latent</text>
+<text font-family="DejaVu Sans" x="279.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">channel gets</text>
+<text font-family="DejaVu Sans" x="279.0" y="516.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">its colours back</text>
+<text font-family="DejaVu Sans" x="453.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">0 on any</text>
+<text font-family="DejaVu Sans" x="453.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">clamped colour</text>
+<text font-family="DejaVu Sans" x="627.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">spreads over</text>
+<text font-family="DejaVu Sans" x="627.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">nearby pixels</text>
+<text font-family="DejaVu Sans" x="801.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">÷ CLIP std</text>
+<text font-family="DejaVu Sans" x="975.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">weights held,</text>
+<text font-family="DejaVu Sans" x="975.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">gradient flows</text>
+<text font-family="DejaVu Sans" x="1149.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">frozen,</text>
+<text font-family="DejaVu Sans" x="1149.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">gradient flows</text>
+<text font-family="DejaVu Sans" x="1323.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">cosine</text>
+<text font-family="DejaVu Sans" x="1323.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">similarity</text>
+<text font-family="DejaVu Sans" x="1497.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">one dot product</text>
+<text font-family="DejaVu Sans" x="1497.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">per sentence</text>
+<text font-family="DejaVu Sans" x="1671.0" y="468.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">start: +1 from</text>
+<text font-family="DejaVu Sans" x="1671.0" y="492.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">S right, −1</text>
+<text font-family="DejaVu Sans" x="1671.0" y="516.0" font-size="15.5" fill="#2b3440" font-weight="400" text-anchor="middle">from S wrong</text>
+<rect x="34.0" y="590.0" width="840.0" height="132.0" rx="10" fill="#fff4e8" stroke="#c86a0a" stroke-width="1.5"/>
+<text font-family="DejaVu Sans" x="56.0" y="628.0" font-size="20" fill="#c86a0a" font-weight="700" text-anchor="start">Two breaks in the released map</text>
+<text font-family="DejaVu Sans" x="56.0" y="660.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">.byte() cuts values to 8-bit integers (127.9 becomes 127), so no gradient passes.</text>
+<text font-family="DejaVu Sans" x="56.0" y="690.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">A clamped colour passes zero. The push needs a copy of the map without .byte().</text>
+<rect x="900.0" y="590.0" width="826.0" height="132.0" rx="10" fill="#f6f7f9" stroke="#c9d0d7" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="922.0" y="628.0" font-size="20" fill="#2b3440" font-weight="700" text-anchor="start">What the backward pass leaves alone</text>
+<text font-family="DejaVu Sans" x="922.0" y="660.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">Every weight stays fixed while the push is computed.</text>
+<text font-family="DejaVu Sans" x="922.0" y="690.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="start">Only the gradient at the latent is read.</text>
+</svg>

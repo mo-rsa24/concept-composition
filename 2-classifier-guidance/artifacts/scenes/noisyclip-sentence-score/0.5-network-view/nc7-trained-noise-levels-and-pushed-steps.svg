@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 880" width="1600" height="880" role="img" aria-label="Noise scale and signal scale against sampler step, from SDXL scheduler configuration, with the steps NoisyCLIP trained on and the steps this loop pushes marked." font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+<rect width="1600" height="880" fill="#ffffff"/>
+<defs><filter id="soft-halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text font-family="DejaVu Sans" x="30.0" y="44.0" font-size="26" fill="#2b3440" font-weight="700" text-anchor="start">The model was trained on steps 20 to 29, and this loop works at steps 0 to 15</text>
+<rect x="150.0" y="132.0" width="422.4" height="598.0" rx="0" fill="#f5e4d3" stroke="none" stroke-width="0"/>
+<rect x="713.3" y="132.0" width="253.5" height="598.0" rx="0" fill="#c6e8cf" stroke="none" stroke-width="0"/>
+<text font-family="DejaVu Sans" x="361.2" y="118.0" font-size="20" fill="#c86a0a" font-weight="700" text-anchor="middle">this loop reads, and may push: 0 to 15</text>
+<text font-family="DejaVu Sans" x="840.0" y="118.0" font-size="20" fill="#3b7d50" font-weight="700" text-anchor="middle">NoisyCLIP trained: 20 to 29</text>
+<line x1="150.0" y1="730.0" x2="1530.0" y2="730.0" stroke="#2b3440" stroke-width="1.4"/><line x1="150.0" y1="730.0" x2="150.0" y2="132.0" stroke="#2b3440" stroke-width="1.4"/>
+<line x1="150.0" y1="730.0" x2="150.0" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="150.0" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">0</text>
+<line x1="431.6" y1="730.0" x2="431.6" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="431.6" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">10</text>
+<line x1="572.4" y1="730.0" x2="572.4" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="572.4" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">15</text>
+<line x1="713.3" y1="730.0" x2="713.3" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="713.3" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">20</text>
+<line x1="966.7" y1="730.0" x2="966.7" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="966.7" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">29</text>
+<line x1="1276.5" y1="730.0" x2="1276.5" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="1276.5" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">40</text>
+<line x1="1530.0" y1="730.0" x2="1530.0" y2="737.0" stroke="#2b3440" stroke-width="1.2"/>
+<text font-family="DejaVu Sans" x="1530.0" y="760.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">49</text>
+<line x1="143.0" y1="730.0" x2="150.0" y2="730.0" stroke="#2b3440" stroke-width="1.2"/><line x1="150.0" y1="730.0" x2="1530.0" y2="730.0" stroke="#eceff2" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="137.0" y="736.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="end">0</text>
+<line x1="143.0" y1="587.5" x2="150.0" y2="587.5" stroke="#2b3440" stroke-width="1.2"/><line x1="150.0" y1="587.5" x2="1530.0" y2="587.5" stroke="#eceff2" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="137.0" y="593.5" font-size="17" fill="#2b3440" font-weight="400" text-anchor="end">0.25</text>
+<line x1="143.0" y1="445.0" x2="150.0" y2="445.0" stroke="#2b3440" stroke-width="1.2"/><line x1="150.0" y1="445.0" x2="1530.0" y2="445.0" stroke="#eceff2" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="137.0" y="451.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="end">0.5</text>
+<line x1="143.0" y1="302.5" x2="150.0" y2="302.5" stroke="#2b3440" stroke-width="1.2"/><line x1="150.0" y1="302.5" x2="1530.0" y2="302.5" stroke="#eceff2" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="137.0" y="308.5" font-size="17" fill="#2b3440" font-weight="400" text-anchor="end">0.75</text>
+<line x1="143.0" y1="160.0" x2="150.0" y2="160.0" stroke="#2b3440" stroke-width="1.2"/><line x1="150.0" y1="160.0" x2="1530.0" y2="160.0" stroke="#eceff2" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="137.0" y="166.0" font-size="17" fill="#2b3440" font-weight="400" text-anchor="end">1</text>
+<text font-family="DejaVu Sans" x="840.0" y="802.0" font-size="20" fill="#2b3440" font-weight="400" text-anchor="middle">sampler step of 50 (0 is the noisiest, 49 is almost finished)</text>
+<polyline points="150.0,161.7 178.2,162.1 206.3,162.6 234.5,163.2 262.7,164.0 290.8,164.9 319.0,166.0 347.1,167.3 375.3,168.8 403.5,170.5 431.6,172.5 459.8,174.8 488.0,177.4 516.1,180.5 544.3,183.8 572.4,187.6 600.6,191.9 628.8,196.6 656.9,201.8 685.1,207.5 713.3,213.8 741.4,220.6 769.6,228.1 797.8,236.0 825.9,244.6 854.1,253.9 882.2,263.7 910.4,274.2 938.6,285.3 966.7,297.0 994.9,309.3 1023.1,322.2 1051.2,335.7 1079.4,349.8 1107.6,364.5 1135.7,379.7 1163.9,395.5 1192.0,411.9 1220.2,428.8 1248.4,446.2 1276.5,464.3 1304.7,482.9 1332.9,502.3 1361.0,522.4 1389.2,543.6 1417.3,565.9 1445.5,590.1 1473.7,617.3 1501.8,650.1 1530.0,706.5" fill="none" stroke="#2b3440" stroke-width="3"/>
+<polyline points="150.0,686.7 178.2,681.4 206.3,675.6 234.5,669.3 262.7,662.6 290.8,655.3 319.0,647.5 347.1,639.2 375.3,630.4 403.5,621.0 431.6,611.2 459.8,600.8 488.0,590.0 516.1,578.7 544.3,566.9 572.4,554.7 600.6,542.0 628.8,529.1 656.9,515.7 685.1,502.1 713.3,488.3 741.4,474.2 769.6,459.9 797.8,445.6 825.9,431.1 854.1,416.6 882.2,402.1 910.4,387.7 938.6,373.5 966.7,359.3 994.9,345.4 1023.1,331.7 1051.2,318.3 1079.4,305.3 1107.6,292.6 1135.7,280.3 1163.9,268.5 1192.0,257.0 1220.2,246.1 1248.4,235.6 1276.5,225.7 1304.7,216.3 1332.9,207.5 1361.0,199.2 1389.2,191.4 1417.3,184.1 1445.5,177.4 1473.7,171.3 1501.8,165.6 1530.0,160.5" fill="none" stroke="#6b7a88" stroke-width="3" stroke-dasharray="9 6"/>
+<text font-family="DejaVu Sans" x="1248.4" y="412.2" font-size="21" fill="#2b3440" font-weight="700" text-anchor="start">noise scale σ</text>
+<text font-family="DejaVu Sans" x="1037.1" y="199.9" font-size="21" fill="#6b7a88" font-weight="700" text-anchor="start">signal scale √ᾱ</text>
+<text font-family="DejaVu Sans" x="30.0" y="148.0" font-size="18" fill="#2b3440" font-weight="400" text-anchor="start">scale,</text>
+<text font-family="DejaVu Sans" x="30.0" y="172.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="start">0 to 1</text>
+<text font-family="DejaVu Sans" x="840.0" y="842.0" font-size="17" fill="#5f6b78" font-weight="400" text-anchor="middle">Computed from SDXL&#x27;s scheduler config: 50 steps, scaled-linear betas, leading spacing.</text>
+</svg>

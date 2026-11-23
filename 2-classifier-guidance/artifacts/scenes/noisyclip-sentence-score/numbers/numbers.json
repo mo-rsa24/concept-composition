@@ -1,0 +1,425 @@
+{
+ "clip": {
+  "kind": "config, openai/clip-vit-large-patch14",
+  "image_size": 224,
+  "patch_size": 14,
+  "patches_per_side": 16,
+  "patches": 256,
+  "image_tokens": 257,
+  "vision_width": 1024,
+  "vision_layers": 24,
+  "vision_heads": 16,
+  "vision_mlp": 4096,
+  "text_width": 768,
+  "text_layers": 12,
+  "text_heads": 12,
+  "text_mlp": 3072,
+  "text_tokens": 77,
+  "vocab": 49408,
+  "shared_width": 768
+ },
+ "parameters": {
+  "kind": "counted from the config on the meta device",
+  "vision_model": 303179776,
+  "visual_projection": 786432,
+  "text_model": 123060480,
+  "text_projection": 589824,
+  "logit_scale": 1,
+  "total": 427616513,
+  "tuned_in_published_weights": 303179776,
+  "frozen_in_published_weights": 124436737,
+  "tuned_share_percent": 70.9,
+  "released_only_vision_flag_would_train": 303966208,
+  "note": "vision_model as the tuned group is inferred from the tensors compared: visual_projection, text_projection and the first text layer's key projection are unchanged, the first vision layer changed. Only those were compared."
+ },
+ "checkpoint": {
+  "kind": "compared, tools/checkpoint-compare.txt",
+  "visual_projection_max_abs_diff": 0.0,
+  "text_projection_max_abs_diff": 0.0,
+  "first_text_layer_max_abs_diff": 0.0,
+  "first_vision_layer_relative_change_percent": 6.1,
+  "logit_scale_noisyclip": 4.59375,
+  "logit_scale_base": 4.60517,
+  "score_multiplier_noisyclip": 98.86,
+  "score_multiplier_base": 100.0
+ },
+ "linear_map": {
+  "kind": "code, latent_to_image.py lines 10 to 18; shares computed on independent unit-variance channels",
+  "weights": [
+   [
+    60,
+    -60,
+    25,
+    -70
+   ],
+   [
+    60,
+    -5,
+    15,
+    -50
+   ],
+   [
+    60,
+    10,
+    -5,
+    -35
+   ]
+  ],
+  "biases": [
+   150,
+   140,
+   130
+  ],
+  "per_colour": {
+   "R": {
+    "std": 112.81,
+    "below_0_percent": 9.2,
+    "above_255_percent": 17.6,
+    "clamped_percent": 26.8
+   },
+   "G": {
+    "std": 79.69,
+    "below_0_percent": 3.9,
+    "above_255_percent": 7.4,
+    "clamped_percent": 11.4
+   },
+   "B": {
+    "std": 70.36,
+    "below_0_percent": 3.2,
+    "above_255_percent": 3.8,
+    "clamped_percent": 7.0
+   }
+  },
+  "mean_clamped_percent": 15.1,
+  "pixels_with_any_colour_clamped_percent": 29.5,
+  "pixels_with_all_three_clamped_percent": 4.6,
+  "monte_carlo_pixels": 20000000,
+  "clip_input_per_latent_unit": [
+   [
+    0.876,
+    -0.876,
+    0.365,
+    -1.022
+   ],
+   [
+    0.9,
+    -0.075,
+    0.225,
+    -0.75
+   ],
+   [
+    0.853,
+    0.142,
+    -0.071,
+    -0.498
+   ]
+  ],
+  "clip_input_per_latent_unit_note": "weight / (255 x CLIP std), the gradient factor of one unclamped pixel before the resize"
+ },
+ "preprocess": {
+  "kind": "config, the base model's preprocessor; the released code does not contain this step",
+  "input_side": 128,
+  "resize_to": 224,
+  "crop": 224,
+  "resample_code": 3,
+  "resample": "bicubic",
+  "scale_factor": 1.75,
+  "image_mean": [
+   0.48145466,
+   0.4578275,
+   0.40821073
+  ],
+  "image_std": [
+   0.26862954,
+   0.26130258,
+   0.27577711
+  ]
+ },
+ "schedule": {
+  "kind": "computed from SDXL's scheduler_config.json: scaled_linear betas, leading spacing, offset 1",
+  "sampler_in_released_code": "EulerDiscreteScheduler",
+  "timesteps": [
+   981,
+   961,
+   941,
+   921,
+   901,
+   881,
+   861,
+   841,
+   821,
+   801,
+   781,
+   761,
+   741,
+   721,
+   701,
+   681,
+   661,
+   641,
+   621,
+   601,
+   581,
+   561,
+   541,
+   521,
+   501,
+   481,
+   461,
+   441,
+   421,
+   401,
+   381,
+   361,
+   341,
+   321,
+   301,
+   281,
+   261,
+   241,
+   221,
+   201,
+   181,
+   161,
+   141,
+   121,
+   101,
+   81,
+   61,
+   41,
+   21,
+   1
+  ],
+  "sigma": [
+   0.9971,
+   0.9964,
+   0.9954,
+   0.9943,
+   0.993,
+   0.9914,
+   0.9895,
+   0.9872,
+   0.9846,
+   0.9816,
+   0.978,
+   0.974,
+   0.9694,
+   0.9641,
+   0.9582,
+   0.9515,
+   0.9441,
+   0.9358,
+   0.9267,
+   0.9166,
+   0.9056,
+   0.8936,
+   0.8806,
+   0.8666,
+   0.8515,
+   0.8353,
+   0.818,
+   0.7997,
+   0.7802,
+   0.7597,
+   0.7381,
+   0.7154,
+   0.6917,
+   0.667,
+   0.6412,
+   0.6145,
+   0.5868,
+   0.5581,
+   0.5285,
+   0.4979,
+   0.4662,
+   0.4335,
+   0.3995,
+   0.3642,
+   0.3271,
+   0.2879,
+   0.2454,
+   0.1978,
+   0.1401,
+   0.0413
+  ],
+  "signal": [
+   0.076,
+   0.0853,
+   0.0955,
+   0.1065,
+   0.1183,
+   0.1311,
+   0.1447,
+   0.1593,
+   0.1748,
+   0.1912,
+   0.2085,
+   0.2266,
+   0.2457,
+   0.2655,
+   0.2862,
+   0.3076,
+   0.3298,
+   0.3525,
+   0.3759,
+   0.3998,
+   0.4241,
+   0.4488,
+   0.4738,
+   0.499,
+   0.5244,
+   0.5498,
+   0.5752,
+   0.6005,
+   0.6255,
+   0.6503,
+   0.6747,
+   0.6987,
+   0.7222,
+   0.7451,
+   0.7673,
+   0.7889,
+   0.8097,
+   0.8298,
+   0.8489,
+   0.8673,
+   0.8847,
+   0.9012,
+   0.9167,
+   0.9313,
+   0.945,
+   0.9577,
+   0.9694,
+   0.9802,
+   0.9901,
+   0.9991
+  ],
+  "euler_sigma": [
+   13.12,
+   11.676,
+   10.425,
+   9.338,
+   8.391,
+   7.562,
+   6.836,
+   6.197,
+   5.633,
+   5.134,
+   4.692,
+   4.298,
+   3.946,
+   3.631,
+   3.348,
+   3.093,
+   2.863,
+   2.655,
+   2.465,
+   2.293,
+   2.135,
+   1.991,
+   1.859,
+   1.736,
+   1.624,
+   1.519,
+   1.422,
+   1.332,
+   1.247,
+   1.168,
+   1.094,
+   1.024,
+   0.958,
+   0.895,
+   0.836,
+   0.779,
+   0.725,
+   0.673,
+   0.623,
+   0.574,
+   0.527,
+   0.481,
+   0.436,
+   0.391,
+   0.346,
+   0.301,
+   0.253,
+   0.202,
+   0.141,
+   0.041
+  ],
+  "train_window": [
+   20,
+   29
+  ],
+  "push_window": [
+   0,
+   15
+  ],
+  "step_0": {
+   "t": 981,
+   "sigma": 0.9971,
+   "signal": 0.076
+  },
+  "step_10": {
+   "t": 781,
+   "sigma": 0.978,
+   "signal": 0.2085
+  },
+  "step_15": {
+   "t": 681,
+   "sigma": 0.9515,
+   "signal": 0.3076
+  },
+  "step_20": {
+   "t": 581,
+   "sigma": 0.9056,
+   "signal": 0.4241
+  },
+  "step_29": {
+   "t": 401,
+   "sigma": 0.7597,
+   "signal": 0.6503
+  },
+  "step_49": {
+   "t": 1,
+   "sigma": 0.0413,
+   "signal": 0.9991
+  }
+ },
+ "paper": {
+  "kind": "paper, arXiv 2512.08505v2; the paper's own results on its own data, none of them on this project's pictures",
+  "train_latents": {
+   "value": 50000,
+   "page": 8
+  },
+  "train_window": {
+   "value": "latents 20 to 29 of 50",
+   "page": 6
+  },
+  "learning_rate": {
+   "value": "5.7e-5",
+   "page": 8
+  },
+  "weight_decay": {
+   "value": 0.1,
+   "page": 8
+  },
+  "epochs": {
+   "value": 10,
+   "page": 8
+  },
+  "batch": {
+   "value": 128,
+   "page": 8
+  },
+  "recall_at_1_latents_21_30": {
+   "noisyclip": 0.506,
+   "frozen_clip_l14": 0.145,
+   "page": 14,
+   "scale": "share of images whose right caption ranks first of 5, 0 to 1, chance 0.20"
+  },
+  "separation_mark": {
+   "value": "latent 10, against about 20 iterations later for frozen CLIP",
+   "page": 10
+  }
+ }
+}

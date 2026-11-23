@@ -1,0 +1,166 @@
+{
+  "subject": "NoisyCLIP (arXiv 2512.08505v2) as a proposed sentence-score push on SDXL: a noise-aware CLIP scores a half-drawn latent against a right and a wrong sentence, and the gradient of the difference joins the base noise prediction",
+  "kind": "paper",
+  "landing": "standalone, /home/molef/PhD/concept-composition/2-classifier-guidance/artifacts/scenes/noisyclip-sentence-score/",
+  "pace": "unattended (--auto)",
+  "published": "nothing: local files only",
+  "open_first": "noisyclip-ladder.html",
+  "notation": "NOTATION.md",
+  "numbers": "numbers/numbers.json, from numbers/make_numbers.py",
+  "page_check": "numbers/check_pages.py",
+  "route": "route-zoom-ladder-noisyclip.md",
+  "code_checkout": {
+    "repo": "https://github.com/novasearch/noisyclip",
+    "commit": "016b91356a43e455542fd018bc16ea3b419779d2",
+    "path": "/home/molef/.claude/jobs/bed4762f/tmp/code/noisyclip",
+    "note": "read and never imported or run"
+  },
+  "ours": {
+    "push": "2-classifier-guidance/scripts/method_search/co3_push.py"
+  },
+  "style": {
+    "all levels": "clip-contrastive, approved by the owner with two fixes",
+    "sample": "style-sample-clip-contrastive.png",
+    "reference": "style-reference.md",
+    "generator": "~/.claude/skills/zoom-ladder/scripts/style_samples.py, family contrastive-matrix"
+  },
+  "network_view_depth": "each input's path and how they join; the ViT is opened once as a tower of blocks in nc5",
+  "colour_key": {
+    "text": "#b9a7e8",
+    "image": "#a8dcb5",
+    "matching pairs": "#bfe3f5",
+    "the push": "#c86a0a",
+    "frozen or fixed": "#6b7a88"
+  },
+  "colour_concordance": [
+    {
+      "rung": "the linked CLIP ladder figures (cv1 to cv9b)",
+      "palette": "blue inputs, green hidden units, red outputs, orange for the shared space, the similarity and the loss, grey for masked or fixed. On this ladder orange means only the push."
+    },
+    {
+      "rung": "nc3 colour tiles and row labels",
+      "palette": "red, green and blue there name the three image colour channels, and the green is not the image-encoder key"
+    }
+  ],
+  "reuse": [
+    "CLIP module tree https://claude.ai/artifact/4mePVaMV9NuxENRkJphieQ",
+    "classifier guidance system picture https://claude.ai/artifact/FBbwapTjp1dbEmzpLspRBT",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv1-the-whole-of-clip.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv2-the-captions-path.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv2b-pieces-the-cut-and-the-two-tables.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv3-inside-one-text-block.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv3b-one-query-asks-the-keys.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv5b-four-ways-to-pool.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv6-the-pictures-path.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv7-four-pictures-against-four-captions.png",
+    "/home/molef/goal-setting/learning/deep-learning/generative-models/02-stable-diffusion-and-clip/artifacts/figures/clip/network-view/cv7b-the-two-softmaxes-and-the-loss.png"
+  ],
+  "rungs": {
+    "0_system": {
+      "state": "linked",
+      "urls": [
+        "https://claude.ai/artifact/FBbwapTjp1dbEmzpLspRBT",
+        "https://claude.ai/artifact/4mePVaMV9NuxENRkJphieQ"
+      ],
+      "files": [
+        "0.5-network-view/nc1-one-model-three-uses.png"
+      ],
+      "note": "the two existing system pictures were not edited; nc1 shows the three jobs of one model"
+    },
+    "0_5_network_view": {
+      "state": "built",
+      "files": [
+        "0.5-network-view/README.md",
+        "0.5-network-view/make_network_view.py"
+      ],
+      "new": [
+        "nc1-one-model-three-uses",
+        "nc10-how-the-push-joins-co3",
+        "nc2-the-whole-read-and-push-path",
+        "nc3-four-latent-channels-to-rgb",
+        "nc4-clamping-kills-the-gradient",
+        "nc5-what-is-tuned-and-what-is-frozen",
+        "nc6-training-on-noisy-latents",
+        "nc7-trained-noise-levels-and-pushed-steps",
+        "nc8-right-minus-wrong",
+        "nc9-the-gradient-back-to-the-latent"
+      ],
+      "linked": [
+        "cv1",
+        "cv2",
+        "cv2b",
+        "cv3",
+        "cv3b",
+        "cv5b",
+        "cv6",
+        "cv7",
+        "cv7b"
+      ],
+      "illustrative": "noise thumbnails are synthetic; the circle in nc8 is a two-dimensional sketch"
+    },
+    "1_illustrations": {
+      "state": "built: 6 of 6 accepted against their faithfulness notes after looking at each at full size",
+      "files": [
+        "1-illustrations/README.md",
+        "1-illustrations/diagram-prompts.md",
+        "1-illustrations/ni1-a-cheap-colour-view-of-the-latent.png",
+        "1-illustrations/ni2-one-picture-against-two-sentences.png",
+        "1-illustrations/ni3-training-on-half-drawn-pictures.png",
+        "1-illustrations/ni4-the-push-bends-the-noise-prediction.png",
+        "1-illustrations/ni5-two-places-the-signal-is-cut.png",
+        "1-illustrations/ni6-trained-later-than-we-push.png"
+      ],
+      "drafts": "1-illustrations/drop/, with each Codex session id, log and pre-revision picture",
+      "revision_rounds": {
+        "ni1": 0,
+        "ni2": 0,
+        "ni3": 0,
+        "ni4": 0,
+        "ni5": 1,
+        "ni6": 0
+      },
+      "subjects": "umbrella, armchair and backpack, which appear in no benchmark pool",
+      "note": "drawn by Codex's image tool; every tile is a teaching drawing and none is an SDXL sample"
+    },
+    "2_miniature": {
+      "state": "built",
+      "files": [
+        "2-miniature/README.md",
+        "2-miniature/miniature.py",
+        "2-miniature/miniature_answer_key.json",
+        "2-miniature/make_miniature_figures.py"
+      ],
+      "new": [
+        "mm0-the-whole-miniature",
+        "mm1-from-latent-to-colours",
+        "mm2-forward-to-the-two-scores",
+        "mm3-the-gradient-back-to-the-latent",
+        "mm4-the-push-joins-the-noise-prediction",
+        "mm5-four-ways-the-gradient-dies",
+        "mm6-one-training-step"
+      ],
+      "design": "2 pixels of 4 channels through the released linear map, a hand-set 2 by 6 image layer and two hand-set sentence vectors; a toy that predicts nothing about SDXL"
+    },
+    "3_code": {
+      "state": "built: read and not run",
+      "files": [
+        "3-code/walk-noisyclip.md",
+        "3-code/check_quotes.py"
+      ]
+    },
+    "companion": {
+      "state": "built",
+      "files": [
+        "rebuild-from-fundamentals.md"
+      ],
+      "gaps": "the gradient of a cosine with respect to its input, a soft clamp's trade-off, and bicubic resize as a linear operator"
+    },
+    "close": {
+      "state": "built",
+      "files": [
+        "read-through-a-small-network.md",
+        "noisyclip-ladder.html"
+      ]
+    }
+  }
+}

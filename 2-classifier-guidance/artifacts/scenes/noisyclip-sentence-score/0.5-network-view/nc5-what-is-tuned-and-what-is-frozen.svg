@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1760 985" width="1760" height="985" role="img" aria-label="The published weights change the image encoder blocks. The text encoder, the text projection and the image projection are drawn faded and tagged frozen." font-family="IBM Plex Sans, Helvetica, Arial, sans-serif">
+<rect width="1760" height="985" fill="#ffffff"/>
+<defs><filter id="soft-halo" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text font-family="DejaVu Sans" x="30.0" y="44.0" font-size="28" fill="#2b3440" font-weight="700" text-anchor="start">The image encoder is tuned, and the text encoder and both projections stay frozen</text>
+<rect x="37.0" y="93.0" width="1106.0" height="846.0" rx="9" fill="#fbfcfd" stroke="#c9d0d7" stroke-width="1.3"/>
+<rect x="30.0" y="86.0" width="1120.0" height="860.0" rx="12" fill="none" stroke="#6b7a88" stroke-width="3.2"/>
+<text font-family="DejaVu Sans" x="52.0" y="117.0" font-size="20" fill="#6b7a88" font-weight="700" text-anchor="start">CLIP ViT-L/14: the published NoisyCLIP weights</text>
+<text font-family="DejaVu Sans" x="70.0" y="172.0" font-size="21" fill="#5f6b78" font-weight="700" text-anchor="start">Text lane</text>
+<rect x="78.0" y="206.0" width="170.0" height="80.0" rx="0" fill="#ffffff" stroke="#2b3440" stroke-width="0.9"/>
+<rect x="72.0" y="212.0" width="170.0" height="80.0" rx="0" fill="#ffffff" stroke="#2b3440" stroke-width="0.9"/>
+<rect x="66.0" y="218.0" width="170.0" height="80.0" rx="0" fill="#ffffff" stroke="#2b3440" stroke-width="1.1"/>
+<text font-family="DejaVu Sans" x="151.0" y="264.3" font-size="18" fill="#2b3440" font-weight="400" text-anchor="middle">sentence</text>
+<polygon points="320.0,168.0 630.0,209.8 630.0,316.2 320.0,358.0" fill="#e0d7f5" stroke="#6b7a88" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="475.0" y="271.8" font-size="25" fill="#5f6b78" font-weight="400" text-anchor="middle">Text Encoder</text>
+<rect x="440.5" y="133.0" width="68.9" height="28.0" rx="13" fill="#ffffff" stroke="#6b7a88" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="475.0" y="152.2" font-size="15" fill="#6b7a88" font-weight="400" text-anchor="middle">frozen</text>
+<text font-family="DejaVu Sans" x="475.0" y="384.0" font-size="18" fill="#5f6b78" font-weight="400" text-anchor="middle">123,060,480 numbers</text>
+<rect x="720.0" y="216.0" width="190.0" height="88.0" rx="12" fill="#e0d7f5" stroke="#6b7a88" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="815.0" y="256.0" font-size="18" fill="#5f6b78" font-weight="400" text-anchor="middle">text projection</text>
+<text font-family="DejaVu Sans" x="815.0" y="282.0" font-size="15" fill="#5f6b78" font-weight="400" text-anchor="middle">768 to 768</text>
+<rect x="780.5" y="180.0" width="68.9" height="28.0" rx="13" fill="#ffffff" stroke="#6b7a88" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="815.0" y="199.2" font-size="15" fill="#6b7a88" font-weight="400" text-anchor="middle">frozen</text>
+<text font-family="DejaVu Sans" x="815.0" y="332.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">589,824 numbers</text>
+<rect x="962.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#ebe6f9" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="987.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#e1daf5" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1012.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#d7cdf2" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1037.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#cdc0ef" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1062.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#c3b4eb" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1087.0" y="246.0" width="25.0" height="30.0" rx="0" fill="#b9a7e8" stroke="#2b3440" stroke-width="0.6"/>
+<text font-family="DejaVu Sans" x="1037.0" y="232.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">T, 768 numbers</text>
+<line x1="252.6" y1="260.0" x2="305.4" y2="260.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="315.4,260.0 305.4,256.0 305.4,264.0" fill="#2b3440"/>
+<line x1="634.6" y1="260.0" x2="705.4" y2="260.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="715.4,260.0 705.4,256.0 705.4,264.0" fill="#2b3440"/>
+<line x1="914.6" y1="260.0" x2="947.4" y2="260.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="957.4,260.0 947.4,256.0 947.4,264.0" fill="#2b3440"/>
+<text font-family="DejaVu Sans" x="70.0" y="538.0" font-size="21" fill="#2b3440" font-weight="700" text-anchor="start">Image lane</text>
+<rect x="80.0" y="582.0" width="98.0" height="98.0" rx="0" fill="#eef0f2" stroke="#2b3440" stroke-width="0.9"/>
+<rect x="73.0" y="589.0" width="98.0" height="98.0" rx="0" fill="#eef0f2" stroke="#2b3440" stroke-width="0.9"/>
+<image href="data:image/png;base64,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" x="66" y="596" width="98" height="98" preserveAspectRatio="none"/>
+<rect x="66.0" y="596.0" width="98.0" height="98.0" rx="0" fill="none" stroke="#2b3440" stroke-width="1.1"/>
+<text font-family="DejaVu Sans" x="122.0" y="738.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">noisy latent</text>
+<rect x="202.0" y="602.0" width="92.0" height="92.0" rx="9" fill="#e6e9ec" stroke="#6b7a88" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="248.0" y="642.5" font-size="17" fill="#2b3440" font-weight="400" text-anchor="middle">fixed</text>
+<text font-family="DejaVu Sans" x="248.0" y="665.5" font-size="17" fill="#5f6b78" font-weight="400" text-anchor="middle">map</text>
+<polygon points="320.0,550.0 630.0,594.0 630.0,706.0 320.0,750.0" fill="#a8dcb5" stroke="#5fa877" stroke-width="1.4"/>
+<text font-family="DejaVu Sans" x="475.0" y="659.1" font-size="26" fill="#2b3440" font-weight="400" text-anchor="middle">Image Encoder</text>
+<rect x="442.2" y="515.0" width="65.6" height="28.0" rx="13" fill="#ffffff" stroke="#2b3440" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="475.0" y="534.2" font-size="15" fill="#2b3440" font-weight="400" text-anchor="middle">tuned</text>
+<text font-family="DejaVu Sans" x="475.0" y="778.0" font-size="19" fill="#2b3440" font-weight="700" text-anchor="middle">303,179,776 numbers</text>
+<rect x="720.0" y="606.0" width="190.0" height="88.0" rx="12" fill="#d8efde" stroke="#6b7a88" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="815.0" y="646.0" font-size="18" fill="#5f6b78" font-weight="400" text-anchor="middle">image projection</text>
+<text font-family="DejaVu Sans" x="815.0" y="672.0" font-size="15" fill="#5f6b78" font-weight="400" text-anchor="middle">1024 to 768</text>
+<rect x="780.5" y="570.0" width="68.9" height="28.0" rx="13" fill="#ffffff" stroke="#6b7a88" stroke-width="1.0"/>
+<text font-family="DejaVu Sans" x="815.0" y="589.2" font-size="15" fill="#6b7a88" font-weight="400" text-anchor="middle">frozen</text>
+<text font-family="DejaVu Sans" x="815.0" y="722.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">786,432 numbers</text>
+<rect x="962.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#e7f5ea" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="987.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#daf0e0" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1012.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#ceebd5" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1037.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#c1e6ca" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1062.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#b5e1c0" stroke="#2b3440" stroke-width="0.6"/>
+<rect x="1087.0" y="636.0" width="25.0" height="30.0" rx="0" fill="#a8dcb5" stroke="#2b3440" stroke-width="0.6"/>
+<text font-family="DejaVu Sans" x="1037.0" y="622.0" font-size="16" fill="#2b3440" font-weight="400" text-anchor="middle">I, 768 numbers</text>
+<line x1="182.6" y1="650.0" x2="187.4" y2="650.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="197.4,650.0 187.4,646.0 187.4,654.0" fill="#2b3440"/>
+<line x1="298.6" y1="650.0" x2="305.4" y2="650.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="315.4,650.0 305.4,646.0 305.4,654.0" fill="#2b3440"/>
+<line x1="634.6" y1="650.0" x2="705.4" y2="650.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="715.4,650.0 705.4,646.0 705.4,654.0" fill="#2b3440"/>
+<line x1="914.6" y1="650.0" x2="947.4" y2="650.0" stroke="#2b3440" stroke-width="1.4"/><polygon points="957.4,650.0 947.4,646.0 947.4,654.0" fill="#2b3440"/>
+<text font-family="DejaVu Sans" x="590.0" y="860.0" font-size="21" fill="#2b3440" font-weight="700" text-anchor="middle">The image encoder holds 70.9% of CLIP&#x27;s 427,616,513 numbers</text>
+<text font-family="DejaVu Sans" x="590.0" y="894.0" font-size="18" fill="#5f6b78" font-weight="400" text-anchor="middle">Score scale: exp(4.59375) = 98.86, against 100.00 in base CLIP</text>
+<text font-family="DejaVu Sans" x="1470.0" y="106.0" font-size="22" fill="#2b3440" font-weight="700" text-anchor="middle">Inside the green block</text>
+<rect x="1270.0" y="140.0" width="400.0" height="104.0" rx="9" fill="#c6e8cf" stroke="#5fa877" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1470.0" y="184.0" font-size="19" fill="#2b3440" font-weight="400" text-anchor="middle">patch cut: 14 × 14 pixels</text>
+<text font-family="DejaVu Sans" x="1470.0" y="214.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">256 patches, 1024 numbers each</text>
+<line x1="1470.0" y1="248.6" x2="1470.0" y2="263.4" stroke="#2b3440" stroke-width="1.4"/><polygon points="1470.0,273.4 1474.0,263.4 1466.0,263.4" fill="#2b3440"/>
+<rect x="1270.0" y="278.0" width="400.0" height="104.0" rx="9" fill="#c6e8cf" stroke="#5fa877" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1470.0" y="322.0" font-size="19" fill="#2b3440" font-weight="400" text-anchor="middle">add summary token and positions</text>
+<text font-family="DejaVu Sans" x="1470.0" y="352.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">257 tokens</text>
+<line x1="1470.0" y1="386.6" x2="1470.0" y2="401.4" stroke="#2b3440" stroke-width="1.4"/><polygon points="1470.0,411.4 1474.0,401.4 1466.0,401.4" fill="#2b3440"/>
+<rect x="1270.0" y="416.0" width="400.0" height="104.0" rx="9" fill="#a8dcb5" stroke="#5fa877" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1470.0" y="460.0" font-size="19" fill="#2b3440" font-weight="400" text-anchor="middle">multi-head attention</text>
+<text font-family="DejaVu Sans" x="1470.0" y="490.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">16 heads, then add and norm</text>
+<line x1="1470.0" y1="524.6" x2="1470.0" y2="539.4" stroke="#2b3440" stroke-width="1.4"/><polygon points="1470.0,549.4 1474.0,539.4 1466.0,539.4" fill="#2b3440"/>
+<rect x="1270.0" y="554.0" width="400.0" height="104.0" rx="9" fill="#a8dcb5" stroke="#5fa877" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1470.0" y="598.0" font-size="19" fill="#2b3440" font-weight="400" text-anchor="middle">MLP</text>
+<text font-family="DejaVu Sans" x="1470.0" y="628.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">4096 wide, then add and norm</text>
+<line x1="1470.0" y1="662.6" x2="1470.0" y2="677.4" stroke="#2b3440" stroke-width="1.4"/><polygon points="1470.0,687.4 1474.0,677.4 1466.0,677.4" fill="#2b3440"/>
+<rect x="1270.0" y="692.0" width="400.0" height="104.0" rx="9" fill="#c6e8cf" stroke="#5fa877" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1470.0" y="736.0" font-size="19" fill="#2b3440" font-weight="400" text-anchor="middle">read the summary token</text>
+<text font-family="DejaVu Sans" x="1470.0" y="766.0" font-size="16" fill="#5f6b78" font-weight="400" text-anchor="middle">1024 numbers</text>
+<path d="M1254,416 C1228,416 1228,658 1254,658" fill="none" stroke="#2b3440" stroke-width="1.3"/>
+<text font-family="DejaVu Sans" x="1220.0" y="528.0" font-size="21" fill="#2b3440" font-weight="700" text-anchor="end">× 24</text>
+<text font-family="DejaVu Sans" x="1470.0" y="870.0" font-size="17" fill="#5f6b78" font-weight="400" text-anchor="middle">Against base CLIP, the first vision block differs by</text>
+<text font-family="DejaVu Sans" x="1470.0" y="896.0" font-size="17" fill="#5f6b78" font-weight="400" text-anchor="middle">6.1% of its norm. Both projections and the first text</text>
+<text font-family="DejaVu Sans" x="1470.0" y="922.0" font-size="17" fill="#5f6b78" font-weight="400" text-anchor="middle">block differ by 0. Those are the tensors compared.</text>
+</svg>
