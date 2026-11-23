@@ -1,0 +1,15 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    R1["Rung 1: right regions<br/>cat and dog, 8 seeds<br/>saved boxes<br/><b>about 1 GPU-hour</b>"] --> Q1{"At least 4<br/>clear pairs of 8?"}
+    Q1 -- "no" --> S1["Stop<br/>regions don't fix identity"]
+    Q1 -- "yes" --> R2["Rung 2: CO3 finds its own regions<br/>12 tuning pairs, 8 seeds<br/>with random and swapped controls<br/><b>about 5.3 GPU-hours</b>"]
+    R2 --> Q2{"Beats CO3 alone<br/>by 5 of 96 and<br/>the noise?"}
+    Q2 -- "no" --> S2["Stop<br/>keep the checker route"]
+    Q2 -- "yes" --> R3["Rung 3: per-body checker<br/>only if identity errors remain<br/><b>costed after D3</b>"]
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef stop fill:#ffd6a5,stroke:#e8590c,stroke-width:2px,color:#111111
+    classDef next fill:#eaf1ff,stroke:#2a6fdb,stroke-width:2px,color:#111111
+    class Q1,Q2 plain
+    class R1,R2,R3 next
+    class S1,S2 stop
