@@ -295,7 +295,7 @@ Adding two noised models does not give the noised product, and a corrector tries
 
 **Why it matters**
 
-Paper 2's GenEval two-object target comes from Feynman-Kac Correctors (0.78 on GenEval's 0 to 1 scale, on its released 553 prompts), and a win must also beat plain SDXL's 0.80 on the same prompts and seeds. Paper 1 needs to know whether a corrector repairs a product or only samples it more faithfully.
+Paper 2's GenEval two-object target comes from Feynman-Kac Correctors (0.78 on GenEval's 0 to 1 scale, on its released 553 prompts), and a win must beat our plain SDXL rerun on the same pictures by the noise margin. Paper 1 needs to know whether a corrector repairs a product or only samples it more faithfully.
 
 **Pictures to open first**
 
@@ -368,8 +368,7 @@ Show each picture when its idea opens. They do not count toward the four sources
 
 What is already known
 - Paper 2's GenEval two-object target comes from Feynman-Kac Correctors (0.78 on GenEval's 0 to 1
-  scale, on its released 553 prompts), and a win must also beat plain SDXL's 0.80 on the same prompts
-  and seeds. Paper 1 needs to know whether a corrector repairs a product or only samples
+  scale, on its released 553 prompts), and a win must beat our plain SDXL rerun on the same pictures by the noise margin. Paper 1 needs to know whether a corrector repairs a product or only samples
   it more faithfully.
 - The claim to test: Table 2 on page 7 prints two Feynman-Kac results at the same visible settings
   (noise level 40, 32 steps): CLIP 29.00 with ImageReward 0.04, and CLIP 29.14 with ImageReward

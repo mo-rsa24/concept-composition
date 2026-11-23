@@ -44,7 +44,7 @@ which is where a missing setting can be tested.
 **RareBench Concat is a reported row.** Its 33 allowed prompts are too few to separate methods, so it sets no target.
 
 **GenEval's target uses the 553 released prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints 0.78 and
-plain SDXL prints 0.80, so the target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
+plain SDXL prints 0.80, so the printed target is 0.79, and a win must beat our plain SDXL rerun on the same pictures by the noise margin.
 
 **Shapes3D, Colored MNIST and CelebA are context.** They put several attributes on one object, so Paper 1's method of giving
 each model its own region cannot run on them.

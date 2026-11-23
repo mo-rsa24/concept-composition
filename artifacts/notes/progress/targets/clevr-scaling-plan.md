@@ -15,7 +15,7 @@ Every method runs on models trained for the same length, at the same positions a
 | One network | One location network and one empty-background network | Bradley's rule: add the scores, asking the same network about each position | The rival's rule on our models |
 | One network with checker | The same two networks | That composition plus our checker | Paper 2 |
 | Experts | One expert per position and the same background network | Add the N experts' scores | Shows what training apart does alone |
-| Experts with checker | The same experts | That composition plus our checker, once step D3 has chosen it | Paper 1 |
+| Experts with checker | The same experts | That composition plus our checker, once step M4 has frozen it | Paper 1 |
 | Sample and paste | The same experts | Sample each expert alone, then paste its object onto one background | The control Paper 1 has to beat |
 
 Bradley notes that with an empty background the sampler acts as if each model
@@ -27,6 +27,9 @@ composition. That is why the paste control is required.
 **Data rungs.** The first rung is single-object CLEVR at 64 pixels from the public
 [CLEVR generator](https://github.com/facebookresearch/clevr-dataset-gen). The second is 128 pixels, Bradley's image size. Blender is
 not on the cluster's path, so the first step is to install it and time one batch of renders.
+
+**A small test before the go or no-go.** Step M6 runs each paper's method with 2 and 3 experts at 64 pixels and 5,000 images per
+model, on positions outside Bradley's 12. It tunes the CLEVR recipe before step M4 freezes it, and it supports no claim.
 
 **Stage 1: the expert ladder.** Train the background, the one-network control and experts 1 and 2, then test 2 objects. Add one
 expert per rung and test one more object. Earlier experts are never retrained.
@@ -76,7 +79,7 @@ Printed numbers are context, because Bradley trains on 134 million images and ou
 at equal training length:
 
 - more objects that succeed than the one-network control;
-- at least 7 objects, because Bradley's rule already places all 6 in 97 of 100 images and first clearly fails at 7;
+- at least 7 objects on both the automatic scorer and a hand count of 100 images, read with the same rule for K, because Bradley's rule already places all 6 in 97 of 100 images and first clearly fails at 7;
 - for Paper 1, more objects than the sample-and-paste control.
 
 | Table | Printed context | What we need |
@@ -97,6 +100,7 @@ the full render starts.
 
 | Stage | Models | GPU-hours at a quarter of that length | GPU-hours at the full length |
 |---|---|---|---|
+| Small test before the go or no-go (step M6) | 5 | 9 to 12, plus about 37 CPU node-hours for rendering | not run |
 | Ladder, up to 2 experts | 4 | 7 to 9.4 | 28 to 38 |
 | Ladder, up to 6 experts | 8 | 14 to 19 | 56 to 75 |
 | Ladder, up to 10 experts | 12 | 21 to 28 | 84 to 113 |

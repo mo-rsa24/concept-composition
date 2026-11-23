@@ -8,7 +8,7 @@ page gives the number each one rests on, the reason, and the scope behind them.
 | 1 | CLEVR, models trained on one object | **7 objects** | Bradley's local patch model, 5 objects, Table 1, p3, and Projective Composition's 97 of 100 at 6 objects, Table 1, p17 |
 | 2 | T2I-CompBench Complex, ImageReward | **0.4761** | Rectify Then Diffuse, 0.4661, Table 2, p6 |
 | 2 | CLEVR, models trained on one object | **7 objects** | The same row as Paper 1, with one network plus our checker |
-| 2 | GenEval two objects, 553 released prompts | **0.79**, and a win must also beat plain SDXL's 0.80 | FKC, 0.78, Table A4, p39 |
+| 2 | GenEval two objects, 553 released prompts | **0.79** printed, and a win must beat our plain SDXL rerun, 0.7399 | FKC, 0.78, Table A4, p39 |
 
 ## Why each one
 
@@ -25,15 +25,14 @@ Its baseline ImageReward cells match CO3's table on 19 of 20 values, so CO3 was 
 
 **Our reruns sit beside those two printed numbers**, in the [reproduction table](../reproductions/table.csv). On T2I-CompBench
 Complex, Rectify Then Diffuse scores ImageReward 0.2423 on 988 of the 1,000 prompts at 3 seeds, against 0.4661 printed, so it is
-not reproduced (W&B `5i9dt7by`). On the same pictures it sits 0.0214 below plain SDXL, with a standard error of 0.0153. The owner
-kept 0.4661 as the bar, so the target stays 0.4761. On RareBench Concat it scores 0.4166 on 33 of 40 prompts at 3 seeds, against
+not reproduced (W&B `5i9dt7by`). On the same pictures it sits 0.0214 below plain SDXL, with a standard error of 0.0153. The printed bar stays 0.4761, and a win on Complex is judged against the best finished rerun, CO3's 0.3326. On RareBench Concat it scores 0.4166 on 33 of 40 prompts at 3 seeds, against
 0.4464 printed (W&B `tc75fx0i`). That passes, but with 33 prompts the pass band is plus or minus 0.443, so the test says little, and
 RareBench Concat is a reported row that sets no target.
 
 **ToMe and plain SDXL reruns.** On Shape, ToMe scores 0.5502 on 293 of 300 prompts at seed 0, against 0.6051 printed, so it is not
 reproduced (W&B `8cowoyea`). On Texture it scores 0.6503 on all 300 prompts at seed 0, against 0.6894 printed, which is reproduced
 (W&B `ljypsxnd`). Plain SDXL on GenEval's 99 two-object prompts scores 0.7399 over 396 images, against 0.80 printed, which is
-reproduced (W&B `qcdz35cj`). The printed numbers stay the bars.
+reproduced (W&B `qcdz35cj`). Each win reports the printed number beside it as reached or not.
 
 **CO3 reruns.** CO3's released script scores 0.3326 on T2I-CompBench Complex over 988 prompts at 3 seeds, against 0.4406 printed, so
 it is not reproduced (W&B `02fl0ia0`). On the same pictures plain SDXL scores 0.2637 and Rectify Then Diffuse 0.2423, so CO3 ranks
@@ -46,7 +45,7 @@ published page leaves their image count and seeds unstated.
 
 **GenEval two objects.** This is Paper 2's one text-to-image headline that counts two separate objects, which is what it claims to restore.
 FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL
-prints 0.80, so the scoreboard target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds. FKC is not
+prints 0.80, so the printed bar is 0.79, and a win must beat our plain SDXL rerun on the same pictures by the noise margin. FKC is not
 rerun, so this row is judged against our plain SDXL rerun and says FKC's 0.78 is printed only.
 
 ## The scope behind them

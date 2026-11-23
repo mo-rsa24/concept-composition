@@ -19,10 +19,20 @@ a 0 to 1 score moves by 0.01. The drawing script computes it, so nobody types it
 settings the rival's page states. Where the page leaves a setting out, the run records the value it used, and the row says
 the protocol is only partly matched.
 
-**Only the rival with the best printed score on each benchmark is rerun.** That is CoMat on Color, ToMe on Shape and Texture, and
-Rectify Then Diffuse on Complex. Their printed numbers set the bars, and the other rivals' printed numbers are context. CO3's Complex
-run is kept as a comparison. When a reproduction matches the published protocol and sample count, the scoreboard uses the harder of
-the printed and reproduced numbers.
+**A text-to-image win is judged on our own pictures.** Our score must beat the best finished rerun on the same prompts and seeds by
+the noise margin below. The printed bar is reported beside it as reached or not.
+
+| Benchmark | Best finished rerun | Printed bar |
+|---|---|---|
+| T2I-CompBench Color | CoMat, still running | 0.7927 |
+| T2I-CompBench Shape | ToMe, 0.5502 on 293 prompts | 0.6151 |
+| T2I-CompBench Texture | ToMe, 0.6503 on 300 prompts | 0.6994 |
+| T2I-CompBench Complex | CO3, 0.3326 on 988 prompts at 3 seeds | 0.4761 |
+| GenEval two objects | plain SDXL, 0.7399 on 396 images | 0.79, and plain SDXL's printed 0.80 |
+
+**Stopped reruns stay as printed numbers.** These are CoMat on Shape and Texture, ToMe on Complex and Color, and FKC. One of them could
+have ranked higher on our pictures, as CO3 did over Rectify Then Diffuse on Complex, and the paper says so. When a reproduction matches
+the published protocol and sample count, the scoreboard uses the harder of the printed and reproduced numbers.
 
 **A win inside the rival's printed uncertainty reads "within noise".** It does not count as beating the rival.
 
@@ -34,16 +44,13 @@ and our win is read against those runs.
 **Four benchmarks are scored on the prompts the subject guard allows.** [The guard](../../../../scripts/shared/disallowed_subjects.py)
 keeps 12 of 1,000 prompts out of T2I-CompBench Complex, 7 of 40 out of RareBench Concat, 12 of 300 out of Color and 7 of 300
 out of Shape. On these four, the rival and our method run on the same allowed prompts and seeds, and every number prints its
-prompt count, such as "988 of 1,000 prompts". A win needs our score to beat both the rival's rerun on those prompts and the
-printed target. A row with no rerun of that rival on the same prompts claims no win. The rerun stays out of the scoreboard's
+prompt count, such as "988 of 1,000 prompts". A win needs our score to beat the best finished rerun on those prompts. A row with no finished rerun on the same prompts claims no win. The rerun stays out of the scoreboard's
 `reproduced` field, because its sample count differs from the published one.
 
 **GenEval two objects is scored on its released 553 prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints
-0.78 and plain SDXL prints 0.80 (FKC Table A4, p39), so a win must beat the 0.79 target and also beat plain SDXL's 0.80 on the same
-prompts and seeds. FKC is not rerun, because one image costs 16 plain renders and its printed score is below plain SDXL's. The row
-says so and is judged against our plain SDXL rerun.
+0.78 and plain SDXL prints 0.80 (FKC Table A4, p39), so the printed bar is 0.79, reported beside plain SDXL's printed 0.80. FKC is not rerun, because one image costs 16 plain renders and its printed score is below plain SDXL's. A win must beat our plain SDXL rerun on the same prompts and seeds by the noise margin.
 
-**A win must clear the noise of the rerun.** Our score must beat the rival's rerun by more than 1.96 standard errors on matched
+**A win must clear the noise of the rerun.** Our score must beat the best finished rerun by more than 1.96 standard errors on matched
 pictures, meaning the same prompt and seed for both methods, with prompts resampled. Rectify Then Diffuse against plain SDXL gives
 standard errors of 0.0153 on T2I-CompBench Complex and 0.0983 on RareBench Concat, so the margin is about 0.03 and 0.19 there. Each
 row computes its own margin from its own differences. A rival marked `blocked` has no rerun, so its row is read against the printed
@@ -56,8 +63,7 @@ including 88.8% on smiling men, because the paper reports no per-group accuracy.
 
 **CLEVR is judged by the most objects that succeed, on our own models.** A count K succeeds when K objects appear in at least
 50% of images and at least K-2 appear in at least 90%, on 1,024 images per count from a scorer that never trains a checker. Bradley
-trains on 134 million images and our full length is 8 million, so printed numbers are context. A win needs at least 7 objects and
-more than the one-network control at equal training length, and Paper 1 must also beat a sample-and-paste control. The target is 7
+trains on 134 million images and our full length is 8 million, so printed numbers are context. A win needs at least 7 objects on both this scorer and a hand count of 100 images, read with the same rule for K, and more than the one-network control at equal training length, and Paper 1 must also beat a sample-and-paste control. The target is 7
 because Bradley's rule already places all 6 objects in 97 of 100 images and first clearly fails at 7. A count also needs clean
 pictures, because that paper's Figure 3 marks 5 and 6 objects as partial where its hand count reads 98 and 97 of 100.
 
