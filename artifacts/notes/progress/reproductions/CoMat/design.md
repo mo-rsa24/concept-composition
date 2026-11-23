@@ -43,6 +43,10 @@ same model differ, so they go in each row's note.
 | Shape | 0.5329 (`CoMat-T1-056`) | 0.5262 (`ToMe-T1-051`) |
 | Texture | 0.6468 (`CoMat-T1-057`) | 0.6591 (`ToMe-T1-050`) |
 
+**The plain SDXL check on Color.** Plain SDXL runs through CoMat's sampler on the 288 allowed Color prompts at seed 42, then the same BLIP-VQA scorer. CoMat prints 0.5879 for plain SDXL on
+Color (`CoMat-T1-049`) and ToMe prints 0.6369 (`ToMe-T1-001`), so this shows where our setup sits and lets CoMat's gain over plain be read on matched pictures. Cost: 288 pictures at about 14 seconds, about 1.1
+GPU-hours. Buys: the check on the Color row, the one benchmark where plain SDXL has not run through our scorer.
+
 ## Loading the weights
 
 The files are at commit `c7a18451` of the Hugging Face repository, in `/datasets/mmolefe/poe_repair_min/loop-5/third_party/`, and both large
