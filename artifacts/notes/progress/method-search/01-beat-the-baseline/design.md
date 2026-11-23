@@ -116,7 +116,8 @@ drive it.
 
 **Scoring.** By eye at full size, because D3's approved API tokens are for D3. All 288 pictures are shuffled under neutral names, and
 each gets one call on the ladder: one thing, a fused hybrid, two bodies or heads, two clear things, with faithful pair and damaged
-marked. The key that names the methods is opened only after every call is saved.
+marked, following the [blind count rubric](blind-count-rubric.md). The key that names the methods is opened only after every call is
+saved.
 
 **Held from display.** Giraffe and tortoise is one of the 12 tuning pairs, and the guard holds tortoises back from anything shown.
 Its pictures are counted and stay off every sheet, page and message.
