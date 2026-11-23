@@ -9,7 +9,8 @@ share of images in which a detector finds both named objects.
 ## Status
 
 The row is waiting on its run. By the owner's answer to board question 23, FKC is tested on GenEval's released 553 prompts against the 0.78
-printed for that set, using a port of the authors' sampler.
+printed for that set, using a port of the authors' sampler. By the owner's answer to board question 40, plain SDXL runs first on the 99 two-object prompts at 4 images each, and one batch of 8 FKC
+particles is timed, about 1.6 GPU-hours together. FKC itself does not run until the owner has seen the measured cost.
 
 ## The row
 
@@ -42,8 +43,8 @@ and a win must also beat plain SDXL's printed 0.80 on the same prompts and seeds
 | Published row | `FKC-TA4-038`, SDXL + FKC at guidance 7.5 on the original 553 prompts, two objects, 0.78 | the only printed FKC number whose prompts are public |
 | Plain SDXL check | `FKC-TA4-024`, 0.80, the authors' own run on the same prompts | checks our sampler and scorer |
 | Sampler | a port of the weight and systematic resampling in `applications/images/edm2/generate_images.py` lines 340 to 356, clamped to ±2 as there | the authors' only image implementation |
-| Particles per scored image | 8, or 4 under the default of board question 40 | the paper states none for SDXL; its EDM2 score stops improving near 8 (Table A3, p38), and the authors' `generate_images.sh` uses 8 |
-| Images per prompt | 4, or 1 under the default of board question 40 | GenEval's generator makes 4 |
+| Particles per scored image | 8, timed first | the paper states none for SDXL; its EDM2 score stops improving near 8 (Table A3, p38), and the authors' `generate_images.sh` uses 8 |
+| Images per prompt | 4 | GenEval's generator makes 4 |
 | Steps | 50 | GenEval's generator default; the paper states none for SDXL |
 | Added noise | churn at its cap, γ = √2 − 1, on every step | the authors' script sets churn 40 on 64 steps, which the code caps at this value; any step count up to 96 gives the same γ |
 | Scorer | GenEval's Mask2Former evaluation at commit `af4902f` | the benchmark's own |
@@ -58,7 +59,7 @@ because this system refuses to load them otherwise. mmdet runs from `PYTHONPATH`
 
 **One batch gives one image.** The paper notes that the final images of one FKC batch are "nearly identical visually due to weight degeneracy" (p7), and it scores a single image resampled from each batch. Each scored image here is therefore its own batch of particles.
 
-**Cost.** The 99 two-object prompts at 4 images and 8 particles are about 12 GPU-hours for FKC, plus about 1.5 for plain SDXL on the same prompts, both estimated from 13.5 seconds per plain render. That is past the under-2-hour budget of board question 23, so board question 40 asks the owner to choose. Its default stays inside the budget: 4 particles and 1 image per prompt, about 1.9 GPU-hours, labelled with that count.
+**Cost.** The 99 two-object prompts at 4 images and 8 particles are about 12 GPU-hours for FKC, plus about 1.5 for plain SDXL on the same prompts, both estimated from 13.5 seconds per plain render. That estimate assumes 8 particles cost 8 plain renders, and the timing job replaces it with a measurement before the owner decides.
 
 **The test.** GenEval's score is per image, so the standard error comes from resampling prompts with replacement 10,000 times. The row counts as
 `reproduced` when |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²). Because the sampler is our port, its note says the result tests the port as
