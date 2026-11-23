@@ -1,8 +1,8 @@
 # Binding each body to its subject: design and cost
 
 This page tests whether giving each subject its own region fixes the error CO3 still makes. CO3 drew two separate bodies in all 96
-tuning pictures, and only 11 were faithful, because bodies borrow parts, take the wrong species or gain an extra subject. Nothing here
-has run. It needs the owner's yes, and Session 6 would run it.
+tuning pictures, and only 11 were faithful, because bodies borrow parts, take the wrong species or gain an extra subject. Session 6
+runs rungs 1 and 2 as step M9, and rung 2 starts only if rung 1 reaches its bar.
 
 ![The three rungs and where each one stops](binding-each-body-ladder.png)
 
