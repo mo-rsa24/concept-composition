@@ -19,6 +19,7 @@ import math
 import os
 import random
 import sys
+import tempfile
 import time
 
 sys.dont_write_bytecode = True      # the generator's folder belongs to another session and stays unwritten
@@ -35,6 +36,19 @@ import render_images as generator  # noqa: E402
 OFFSET = 0.02
 MAX_TRIES = 50
 TARGETS = []
+
+
+class ClosingTempfile:
+    """The generator's visibility check never closes its temp file, which ends a run near image 1,000 at the 1,024 open-file limit."""
+
+    @staticmethod
+    def mkstemp(*args, **kwargs):
+        handle, path = tempfile.mkstemp(*args, **kwargs)
+        os.close(handle)
+        return handle, path
+
+
+generator.tempfile = ClosingTempfile
 
 
 def project(camera, x, y, z):
