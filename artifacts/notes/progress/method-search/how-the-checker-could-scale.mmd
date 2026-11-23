@@ -1,0 +1,19 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TB
+  classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+  classDef warn fill:#fff3cd,stroke:#b58900,stroke-width:3px,color:#111111
+
+  subgraph NOW["Now: 2,859 training pictures"]
+    direction LR
+    N1["1,603 cat and dog<br/>1,256 from 242 other pairs"] --> N2["Clean pair? learned on all 243 pairs<br/>Subject present? learned on cat and dog only"]:::warn --> N3["Small checker on<br/>noisy SDXL features"] --> N4["Push while sampling"]
+  end
+
+  subgraph NEXT["Proposed: the VLM labels offline and never enters the sampler"]
+    direction LR
+    P1["LLM lists many pairs<br/>animals, objects, attributes"] --> P2["SDXL renders them"] --> P3["VLM labels each picture:<br/>clean? first subject? second subject?"] --> P4["Small checker asks about<br/>each subject through its text"] --> P5["Push while sampling<br/>no VLM call, untested on new words"]
+  end
+
+  NOW -.->|"open: does more pair variety beat more cat and dog?"| NEXT
+  class N1,N3,N4,P1,P2,P3,P4,P5 plain
+  style NOW fill:#fafafa,stroke:#222222,stroke-width:1px
+  style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
