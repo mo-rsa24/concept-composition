@@ -1,0 +1,35 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  S1["1 🔎 Find the three<br/>papers reading 11 cites<br/>you 5 min  AI 15 min<br/>1 board row: todo"]:::plain
+  S2["2 📄 Read reading 1: When<br/>a product is valid<br/>you 240 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S3["3 📄 Read reading 2:<br/>Changing each model's...<br/>you 240 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S4["4 📄 Read reading 3:<br/>Samplers and correctors<br/>you 240 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S5["5 📄 Read reading 4:<br/>Binding each word to...<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S6["6 📄 Read reading 5:<br/>Steering the start<br/>and...<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S7["7 📝 Take quiz 1 on<br/>readings 1 to 5<br/>you 90 min  AI 30 min<br/>1 board row: todo"]:::plain
+  S8(["8 ✍️ Confirm the two<br/>problem statements<br/>reader's step  you 30 min<br/>1 board row: todo"]):::plain
+  S9["9 📄 Read reading 6: What<br/>breaks outside the...<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S10["10 📄 Read reading 7:<br/>Composing by regions<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S1 -->|"pdfs"| N0
+  S2 -->|"the directing loop reads the..."| S3
+  S3 -->|"the directing loop reads the..."| S4
+  S4 -->|"the directing loop reads the..."| S5
+  S5 -->|"the directing loop reads the..."| S6
+  S6 -->|"the directing loop reads the..."| S7
+  S7 -->|"quiz 1 is taken and its..."| S8
+  S8 --> S9
+  S9 -->|"the directing loop reads the..."| S10
+  N0["continues at step 11"]:::stub
+  style S1 stroke:#7aa6d8,stroke-width:4px
+  style S2 stroke:#7aa6d8,stroke-width:4px
+  style S3 stroke:#7aa6d8,stroke-width:4px
+  style S4 stroke:#7aa6d8,stroke-width:4px
+  style S5 stroke:#7aa6d8,stroke-width:4px
+  style S6 stroke:#7aa6d8,stroke-width:4px
+  style S7 stroke:#7aa6d8,stroke-width:4px
+  style S8 stroke:#7aa6d8,stroke-width:4px
+  style S9 stroke:#7aa6d8,stroke-width:4px
+  style S10 stroke:#7aa6d8,stroke-width:4px
+  classDef plain fill:#ffffff,color:#111111
+  classDef current fill:#eaf1ff,color:#111111
+  classDef stub fill:#ffffff,stroke:#999999,stroke-dasharray:4 3,color:#555555

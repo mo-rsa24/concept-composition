@@ -42,20 +42,20 @@ Step C4 tests both statements against the literature. Step D4 records a go or no
 All three follow [the shared rules](../artifacts/notes/progress/prompts/shared-rules.md). Each chosen session
 closes through [its closing prompt](../artifacts/notes/progress/prompts/closing-prompts.md).
 
-**C. Learn the field.** The loop scouts the field and writes the benchmark spec, starting from
+**C. Learn the field.** The loop scouts the field and writes the [benchmark spec](../artifacts/notes/progress/benchmark-spec.md), starting from
 [the first pass over the rivals](../artifacts/notes/progress/rival-datasets-first-pass.md). Step C2 is your 11
 reading sittings, in the order of [the reading plan](../artifacts/notes/progress/targets/reading-plan.md), which
-holds each sitting's command. Each sitting starts on a Thursday at 03:15, from 2026-11-26 to 2027-02-11, and
-sitting 3 also takes 2026-12-17:
+holds each sitting's command. The sittings run on weekday mornings and evenings, from 2026-11-24 to 2026-12-04, on the dates in
+[the route that finishes the readings](route-finish-the-11-readings.md#schedule):
 
 | Sitting | Idea | Papers |
 |---|---|---|
-| 1 | [When a product is valid](../artifacts/notes/progress/targets/reading-plan.md#sitting-1-when-a-product-is-valid) | [Projective Composition](../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#34-projective-composition-when-the-product-composes), [CoInD](../3-understanding-compositionality/artifacts/notes/coind-conditional-independence-loss/README.md), Composable Diffusion (Liu) |
-| 2 | [Changing each model's weight while sampling](../artifacts/notes/progress/targets/reading-plan.md#sitting-2-changing-each-models-weight-while-sampling) | [SuperDiff](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/05-what-changes-when-superdiff-leaves-its-own-defaults.md#words-this-file-uses), Logical Guidance, Lift Scores |
-| 3 | [Samplers and correctors](../artifacts/notes/progress/targets/reading-plan.md#sitting-3-samplers-and-correctors) | [Feynman-Kac Correctors](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/07-feynman-kac-correctors.md#words-this-file-uses), Energy-Based MCMC (Du), CFG as a Predictor-Corrector |
-| 4 | [Binding each word to its object](../artifacts/notes/progress/targets/reading-plan.md#sitting-4-binding-each-word-to-its-object) | [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#tome), CoMat, [Attend-and-Excite](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#attend-and-excite) |
+| 1 | [When a product is valid](../artifacts/notes/progress/targets/reading-plan.md#sitting-1-when-a-product-is-valid) | [Projective Composition](../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#34-projective-composition-when-the-product-composes), [CoInD](../3-understanding-compositionality/artifacts/notes/coind-conditional-independence-loss/README.md), [Composable Diffusion](../artifacts/notes/progress/reproductions/Liu/design.md#what-this-asks) (Liu) |
+| 2 | [Changing each model's weight while sampling](../artifacts/notes/progress/targets/reading-plan.md#sitting-2-changing-each-models-weight-while-sampling) | [SuperDiff](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/05-what-changes-when-superdiff-leaves-its-own-defaults.md#words-this-file-uses), [Logical Guidance](../2-classifier-guidance/plans/27-cat-and-dog-and-not-hybrid.md#quick-context), Lift Scores |
+| 3 | [Samplers and correctors](../artifacts/notes/progress/targets/reading-plan.md#sitting-3-samplers-and-correctors) | [Feynman-Kac Correctors](../1-lora-correction/plans/06-is-the-gap-the-samplers-or-the-models/review/07-feynman-kac-correctors.md#words-this-file-uses), [Energy-Based MCMC](../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#33-reduce-reuse-recycle-the-sampler-is-one-error) (Du), CFG as a Predictor-Corrector |
+| 4 | [Binding each word to its object](../artifacts/notes/progress/targets/reading-plan.md#sitting-4-binding-each-word-to-its-object) | [ToMe](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#tome), [CoMat](../artifacts/notes/progress/reproductions/CoMat/design.md#what-this-asks), [Attend-and-Excite](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/rival-methods/SOURCES.md#attend-and-excite) |
 | 5 | [Steering the start and the early steps](../artifacts/notes/progress/targets/reading-plan.md#sitting-5-steering-the-start-and-the-early-steps) | Rectify Then Diffuse, CO3 |
-| 6 | [What breaks outside the training data](../artifacts/notes/progress/targets/reading-plan.md#sitting-6-what-breaks-outside-the-training-data) | Catastrophic Compositional Generation, Local Mechanisms (Bradley) |
+| 6 | [What breaks outside the training data](../artifacts/notes/progress/targets/reading-plan.md#sitting-6-what-breaks-outside-the-training-data) | Catastrophic Compositional Generation, [Local Mechanisms](../3-understanding-compositionality/plans/10-what-poe-loses-when-it-composes/what-poe-loses-when-it-composes.md#36-local-conditional-scores) (Bradley) |
 | 7 | [Composing by regions](../artifacts/notes/progress/targets/reading-plan.md#sitting-7-composing-by-regions) | Diffusion Domain Expansion, MultiDiffusion |
 | 8 | [Keeping subjects apart through attention](../artifacts/notes/progress/targets/reading-plan.md#sitting-8-keeping-subjects-apart-through-attention) | FreeFuse, PiCo, FlipConcept |
 | 9 | [Amplifying a product](../artifacts/notes/progress/targets/reading-plan.md#sitting-9-amplifying-a-product) | Compositional Sculpting, Test-Time Composition (Wang), Compositional Abilities (Okawa) |
@@ -63,7 +63,7 @@ sitting 3 also takes 2026-12-17:
 | 11 | [When a sample commits](../artifacts/notes/progress/targets/reading-plan.md#sitting-11-when-a-sample-commits) | Biroli, Achilli, Albrychiewicz |
 
 **D. Build and test.** Session 5 reproduces each rival's published number on its own protocol and chooses the
-checker architecture on small data. The owner then records the go or no-go.
+[checker architecture](../artifacts/notes/progress/reproductions/checker/design.md) on small data. The owner then records the go or no-go.
 
 **E. Scale, one ladder per dataset, on `bigbatch` and `biggpu` only.**
 
@@ -78,7 +78,7 @@ checker architecture on small data. The owner then records the go or no-go.
 | 6. Full | Three seed sets, every rival | Table with intervals, image grids |
 
 Each rung saves its config, metrics, image sheet and commit. Paper 1 runs CLEVR, the CoInD datasets, the
-CIFAR-10 disjoint split and chest X-ray. Paper 2 runs [GenEval](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#geneval), [T2I-CompBench](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#t2i-compbench), RareBench and a held-out set of
+[CIFAR-10 disjoint split](../artifacts/notes/progress/reproductions/SuperDiff/design.md#what-this-asks) and chest X-ray. Paper 2 runs [GenEval](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#geneval), [T2I-CompBench](../../../goal-setting/learning/deep-learning/diffusion-models/12-scoring-and-rival-methods/sources/scoring-and-benchmarks/SOURCES.md#t2i-compbench), RareBench and a held-out set of
 Attend-and-Excite prompts.
 
 **F. Write.** Tables with confidence intervals, qualitative comparison grids, and a public code release.

@@ -1,0 +1,21 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+  P0["continues from step 10"]:::stub
+  S11["11 📄 Read reading 8:<br/>Keeping subjects<br/>apart...<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S12["12 📄 Read reading 9:<br/>Amplifying a product<br/>you 120 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S13["13 📄 Read reading 10:<br/>What an outside...<br/>you 180 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S14["14 📄 Read reading 11:<br/>When a sample commits<br/>you 180 min  AI 5 min<br/>1 board row: todo"]:::plain
+  S15["15 📝 Take quiz 2 on<br/>readings 6 to 11<br/>you 90 min  AI 30 min<br/>1 board row: todo"]:::plain
+  P0 --> S11
+  S11 -->|"the directing loop reads the..."| S12
+  S12 -->|"the directing loop reads the..."| S13
+  S13 -->|"the directing loop reads the..."| S14
+  S14 -->|"the directing loop reads the..."| S15
+  style S11 stroke:#7aa6d8,stroke-width:4px
+  style S12 stroke:#7aa6d8,stroke-width:4px
+  style S13 stroke:#7aa6d8,stroke-width:4px
+  style S14 stroke:#7aa6d8,stroke-width:4px
+  style S15 stroke:#7aa6d8,stroke-width:4px
+  classDef plain fill:#ffffff,color:#111111
+  classDef current fill:#eaf1ff,color:#111111
+  classDef stub fill:#ffffff,stroke:#999999,stroke-dasharray:4 3,color:#555555
