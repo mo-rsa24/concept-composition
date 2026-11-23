@@ -7,7 +7,7 @@ ROWS = HERE / "rows"
 OUT = HERE / "reading-table.md"
 GROUPS = [
     ("The model under test", ["noisyclip"]),
-    ("Other scores on noisy or generated images", ["noise-aware-latent-reward", "noise-diffusion-semantic-faithfulness"]),
+    ("Other scores on noisy or generated images", ["latent-clip", "noise-aware-latent-reward", "noise-diffusion-semantic-faithfulness"]),
     ("Score decompositions", ["cfgcomposer", "memory-experts-world-models"]),
     ("When adding scores or embeddings is valid", ["projective-composition", "local-compositional-generalization", "concept-algebra", "linear-spaces-of-meanings"]),
     ("Training a new encoder", ["clip-goes-3d", "rince"]),
@@ -47,12 +47,14 @@ for group, slugs in GROUPS:
         for d in r.get("disagreements", []):
             disagreements.append(f"| [{cell(r['title'])}]({slug}.md) | {cell(d['claim'])} | {cell(d['source'])} | {cell(d['paper_says'])} | [p. {d['page']}]({r['page_url']}#page={d['page']}) |")
         for e in r.get("extra_papers", []):
+            if e.get("arxiv") == "2503.08455":
+                continue
             closer.append(f"| {cell(e['title'])} | {cell(e.get('arxiv') or 'not printed')} | [{cell(r['title'])}]({slug}.md), p. {e.get('page')} | {cell(e['why'])} |")
 
 n = len(rows)
 HEAD = f"""# Reading table: can a sentence score on a noisy latent act as a checker?
 
-This table holds one row for each of the {n} papers this loop was asked to read, each read from its full PDF with appendices. It answers what a noise-aware text and image score can already do on the five abstract properties, and what step W2 should expect. Each row links to that paper's note.
+This table holds one row for each of {n} papers, the 11 in this loop's brief and Latent CLIP, each read from its full PDF with appendices. It answers what a noise-aware text and image score can already do on the five abstract properties, and what step W2 should expect. Each row links to that paper's note.
 
 <a href="sentence-score-push.png"><img src="sentence-score-push.png" width="620" alt="A half-drawn SDXL latent passes through a fixed linear map into the NoisyCLIP image encoder. A right and a wrong sentence pass through the frozen CLIP text encoder. The two scores are subtracted, and the gradient of that difference is added to the base noise prediction."></a>
 
@@ -69,7 +71,9 @@ This table holds one row for each of the {n} papers this loop was asked to read,
 
 **NoisyCLIP reads worst on the steps this loop pushes.** Recall@1 is the share of images whose right caption ranks first among five captions, so 0.20 is chance. The right caption starts near 0.03 at latent 0 and reaches 0.20 near latent 10 ([Figure 4, p. 10](https://arxiv.org/pdf/2512.08505#page=10)). The caption with the wrong count ranks first more often than the right one until about latent 13 ([Figure 10, p. 23](https://arxiv.org/pdf/2512.08505#page=23)). Both values are read from the plots.
 
-**No listed paper steers a sampler with a sentence-score gradient and measures layout.** The closest noise-aware score, the latent reward model, uses its score only to choose training pairs ([p. 6](https://arxiv.org/pdf/2502.01051#page=6)). Noise Diffusion's own comparison shows direct gradient updates making "limited changes to the image structure" on one prompt ([p. 7](https://arxiv.org/pdf/2411.16503#page=7)).
+**No paper here pushes a noisy latent with a sentence-score gradient during sampling.** The closest noise-aware score, the latent reward model, uses its score only to choose training pairs ([p. 6](https://arxiv.org/pdf/2502.01051#page=6)). Noise Diffusion's own comparison shows direct gradient updates making "limited changes to the image structure" on one prompt ([p. 7](https://arxiv.org/pdf/2411.16503#page=7)).
+
+**Latent CLIP has a usable gradient and has never read a noisy latent.** It reads SDXL-family latents directly, at 64 by 64 for 512-pixel images, and was trained on clean latents with no timestep input ([the note](latent-clip.md#3-does-it-read-noise)). Its gradient has been used only to update the starting noise of one-step SDXL-Turbo from the finished latent. On GenEval (0 to 1, higher is better), its B/4-plus reward moves two-object from 0.66 to 0.82, colour attribution from 0.20 to 0.30 and position from 0.09 to 0.14 ([Table 3, p. 7](https://arxiv.org/pdf/2503.08455#page=7)).
 
 **A word-swap pair may carry no signal in the additive part of the embedding (inferred).** If CLIP's text embedding were a sum of word vectors, "a cat left of a dog" and "a dog left of a cat" would differ by a fixed vector that flips sign with the order. Only the part that does not add up could then separate them. W2 can measure that part from the text alone, following [the Linear Spaces note](linear-spaces-of-meanings.md).
 
@@ -93,7 +97,7 @@ This table holds one row for each of the {n} papers this loop was asked to read,
 TAIL = f"""
 ## Closer papers these cite, not read
 
-These sit outside this loop's list, so no claim here relies on them. *Controlling Latent Diffusion Using Latent CLIP* is the nearest: its title describes a CLIP that reads latents and controls a diffusion model.
+These sit outside the papers read here, so no claim on this page relies on them.
 
 | Paper | arXiv | Named by | Why it is close |
 |---|---|---|---|

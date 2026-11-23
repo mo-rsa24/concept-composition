@@ -1,0 +1,96 @@
+{
+  "slug": "latent-clip",
+  "source": "arXiv 2503.08455",
+  "page_url": "https://arxiv.org/pdf/2503.08455",
+  "title": "Controlling Latent Diffusion Using Latent CLIP",
+  "role": "A released CLIP that reads clean 64 by 64 SDXL-family latents directly; a candidate second sentence scorer beside NoisyCLIP, with no evidence on noisy latents",
+  "pages_read": 21,
+  "reads": "A clean, unscaled 64 by 64 by 4 SDXL-family VAE latent, patched into a ViT-B image tower, with its own CLIP text tower and no timestep input",
+  "reads_page": 3,
+  "trained_on": "2.7B LAION-2B-en and COYO images VAE-encoded at 512 pixels with captions, contrastive loss, 34B samples; clean latents only, no noise levels",
+  "trained_page": 3,
+  "score_enters": "Latent-CLIP similarity is a ReNO reward; its gradient updates the starting noise of 1-step SDXL-Turbo over 50 gradient steps through a finished latent, never an intermediate x_t",
+  "score_page": 4,
+  "adding_scores": "not addressed; the only sum is the weighted reward sum in the ReNO objective, with no validity condition",
+  "adding_page": 3,
+  "properties": "Generated-image benchmarks after ReNO for counting, attribute binding, spatial relation, position and prompt match; size untested; no right-against-wrong test of the score itself",
+  "properties_page": 7,
+  "unseen": "no: zero-shot ImageNet from class names, with no held-out concept test",
+  "unseen_page": 4,
+  "headline": "With a Latent-ViT-B/4-plus reward on 1-step SDXL-Turbo, GenEval mean is 0.62 against 0.54 with no reward and 0.62 for pixel CLIP ViT-g/14 (0 to 1, higher is better); T2I-CompBench spatial stays 0.24 against 0.24; ReNO takes 9.01 s against 11.70 s for same-size pixel CLIP",
+  "headline_page": 7,
+  "copy_or_avoid": "Copy the direct latent input and the divide-by-0.13025 rule; add it to W2 as a separate read-only test with 2 by 2 pooling, and avoid using it as the push until it is shown to read noisy latents at steps 0 to 15 (inferred)",
+  "model": "SDXL-Turbo at 512 pixels, SDXL VAE latent space",
+  "extra_papers": [
+    {
+      "title": "ReNO: Enhancing one-step text-to-image models through reward-based noise optimization",
+      "arxiv": "2406.04312",
+      "page": 9,
+      "why": "Optimises starting noise with text-image reward gradients; the method this paper plugs Latent-CLIP into"
+    },
+    {
+      "title": "CLIP guided diffusion",
+      "arxiv": "",
+      "page": 9,
+      "why": "Early community method that steers diffusion by optimising CLIP similarity"
+    },
+    {
+      "title": "GLIDE: Towards photorealistic image generation and editing with text-guided diffusion models",
+      "arxiv": "",
+      "page": 10,
+      "why": "Trains a CLIP on noised images for guidance, a fact from outside this PDF (inferred); direct precedent for a noise-aware Latent-CLIP"
+    }
+  ],
+  "disagreements": [
+    {
+      "claim": "Object counting rises from 53% to 60% with latent rewards",
+      "source": "paper Table 3, p. 7: the no-reward baseline is 0.45; 0.53 is Latent-ViT-B/8 and 0.60 is Latent-ViT-B/4-plus",
+      "paper_says": "Object counting also rises from 53% to 60%",
+      "page": 5
+    },
+    {
+      "claim": "Latent-CLIP is a drop-in replacement of CLIP",
+      "source": "paper p. 9 limits it at SDXL's other native resolution; library transformer.py:492 and model.py:488 give no working path for a 128 by 128 latent (inferred, not run)",
+      "paper_says": "Latent-CLIP can serve as a drop-in replacement of CLIP",
+      "page": 1
+    },
+    {
+      "claim": "The Inference Step axis in Figs. 7 and 9 is a diffusion step",
+      "source": "paper p. 6 and p. 7 describe one diffusion step optimised over 50 gradient steps, so the axis counts ReNO iterations (inferred)",
+      "paper_says": "each guiding the T2I generation over 50 gradient steps",
+      "page": 6
+    }
+  ],
+  "quotes": [
+    {"page": 7, "text": "Latent-ViT-B/4-plus 0.62 0.99 0.82 0.60 0.90 0.14 0.30", "supports": "headline: GenEval mean 0.62, two-object 0.82, counting 0.60, position 0.14", "read_from_image": false},
+    {"page": 7, "text": "Base (SDXL-Turbo) 0.54 0.99 0.66 0.45 0.85 0.09 0.20", "supports": "headline: no-reward GenEval mean 0.54", "read_from_image": false},
+    {"page": 7, "text": "CLIP-ViT-g /14 L2B 0.62 1.00 0.82 0.60 0.92 0.11 0.27", "supports": "headline: pixel CLIP ViT-g/14 GenEval mean 0.62", "read_from_image": false},
+    {"page": 6, "text": "Base (SDXL-Turbo) 0.62 0.44 0.60 0.24", "supports": "headline: no-reward spatial 0.24", "read_from_image": false},
+    {"page": 6, "text": "Latent-ViT-B/4-plus 0.69 0.54 0.70 0.24 0.32 0.44 5.55 0.18 9.01", "supports": "headline: spatial 0.24 and total time 9.01 s", "read_from_image": false},
+    {"page": 6, "text": "CLIP-ViT-B/16 D1B 0.67 0.53 0.68 0.24 0.32 0.45 5.55 0.23 11.70", "supports": "headline: same-size pixel CLIP time 11.70 s", "read_from_image": false},
+    {"page": 3, "text": "Latent-CLIP can compute the CLIP embeddings of the visual domain directly", "supports": "reads", "read_from_image": false},
+    {"page": 2, "text": "We create 64 × 64 × 4 latent images, which is the default resolution for SDXL-Turbo", "supports": "reads: 64 by 64 by 4 input", "read_from_image": false},
+    {"page": 1, "text": "We train Latent-CLIP on 2.7B pairs of latent images and descriptive texts", "supports": "trained_on", "read_from_image": false},
+    {"page": 3, "text": "by encoding LAION-2B-en and COYO images while applying image augmentations", "supports": "trained_on: VAE-encoded clean images", "read_from_image": false},
+    {"page": 3, "text": "until 34 billion latent images have been sampled (with repetition)", "supports": "trained_on: length", "read_from_image": false},
+    {"page": 3, "text": "Latent-ViT-B/8 was trained on 128 NVIDIA A100 GPUs for 4 days and 9.5 hours", "supports": "option (c) cost, B/8", "read_from_image": false},
+    {"page": 3, "text": "trained using 256 A100 GPUs for 4 days and 1.9 hours", "supports": "option (c) cost, B/4-plus", "read_from_image": false},
+    {"page": 3, "text": "training on VAE-encoded images might be not ideal", "supports": "trained_on: authors' caveat on clean encoded latents", "read_from_image": false},
+    {"page": 4, "text": "ReNO leverages pixel-space CLIP models to compute rewards for optimizing the initial noise vector of the SDXLTurbo 1-step diffusion process using 50 gradient ascent steps", "supports": "score_enters", "read_from_image": false},
+    {"page": 3, "text": "ReNO refines the initial noise ϵ to maximize an ensemble of reward functions", "supports": "score_enters: the variable updated is the starting noise", "read_from_image": false},
+    {"page": 5, "text": "guiding SDXL-Turbo’s 1-step generation process through 50 gradient ascent steps", "supports": "score_enters: one-step model", "read_from_image": false},
+    {"page": 3, "text": "where Ri represents the i-th reward model, λi is its weight", "supports": "adding_scores: the only sum is the weighted reward sum", "read_from_image": false},
+    {"page": 4, "text": "We construct zero-shot classifiers from the CLIP models by embedding the ImageNet class labels", "supports": "unseen: zero-shot test from class names, no held-out concept", "read_from_image": false},
+    {"page": 4, "text": "followed by noising them to a 66% noise level according to SDXL-Turbo’s noise schedule", "supports": "noise appears only while building the generated test set", "read_from_image": false},
+    {"page": 5, "text": "spatial relationships remain challenging with scores around 24–25% for all models", "supports": "spatial relation result", "read_from_image": false},
+    {"page": 5, "text": "Object counting also rises from 53% to 60%", "supports": "counting disagreement", "read_from_image": false},
+    {"page": 6, "text": "as a negative reward model R(z, N ) = 1 − CLIPScore(z, N )", "supports": "what the gradient steers away from", "read_from_image": false},
+    {"page": 6, "text": "each guiding the T2I generation over 50 gradient steps", "supports": "Inference Step axis disagreement", "read_from_image": false},
+    {"page": 8, "text": "Currently, we have developed Latent-CLIP specifically within SDXL’s latent space", "supports": "which latent space", "read_from_image": false},
+    {"page": 8, "text": "adapting existing pixel-space CLIP models via fine-tuning to SDXL’s VAE showed inferior performance", "supports": "option (c) risk", "read_from_image": false},
+    {"page": 9, "text": "this limits the immediate applicability of Latent-CLIP to LDMs operating within the same latent space but employing different native resolutions, such as SDXL", "supports": "128 by 128 incompatibility", "read_from_image": false},
+    {"page": 1, "text": "Latent-CLIP can serve as a drop-in replacement of CLIP", "supports": "drop-in disagreement", "read_from_image": false},
+    {"page": 5, "text": "(1) Latent-ViT-B/4-plus 73.5 93.7 84.6 98.0", "supports": "ImageNet numbers", "read_from_image": false},
+    {"page": 17, "text": "Fig. 6, a photo of a white bottle and a blue sheep: both Latent-CLIP rewards show a blue bottle and a white sheep; ReNO shows a white bottle and a blue sheep", "supports": "attribute binding example", "read_from_image": true}
+  ]
+}
