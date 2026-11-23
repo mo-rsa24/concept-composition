@@ -1,8 +1,8 @@
 # Review: reproducing CoInD on CelebA
 
-This file holds what the runs in [the CoInD design](design.md) produced. CoInD has no verdict. The conformity classifier missed the
-90% bar set before any run, so no generated face has been scored, and both CelebA rows count as `not comparable` until board question
-28 is answered. Board question 27 asks how many images to render once the classifier is settled.
+This file holds what the runs in [the CoInD design](design.md) produced. CoInD has no verdict. The classifier trained to the authors'
+10,000 steps missed the 90% bar set before any run, so no generated face has been scored. By the owner's answers to board questions 27
+and 28, a 30,000-step classifier is training against the same bar, and each method then renders its first 2,500 images.
 
 ## Runs
 
@@ -15,8 +15,9 @@ then the replications hub commit.
 | Classifier overfit | 93120 | `d297871d-b2f1320` | `overfit/overfit.json` | passed |
 | Smoke test, one batch of 5 per checkpoint | 93123 (CoInD), 93130 (baseline), after 93121 and 93122 failed | `d75bad9f-f28dd6c` | `smoke/` | passed |
 | Classifier, 10,000 steps | 93131 | `d75bad9f-f28dd6c` | `classifier/` | **missed its bar** |
-| 1% of the data | none | | | waits on question 28 |
-| Full protocol | none | | | waits on questions 27 and 28 |
+| Classifier, 30,000 steps | see the next update | | `classifier-30k/` | running |
+| 1% of the data | none | | | waits on the 30,000-step classifier |
+| Full protocol, 2,500 images per method | none | | | waits on the 1% rung |
 
 Job 93121 failed because the cached SD1.5 holds no safety-checker weights, and the authors' script switches that checker off after
 loading. Job 93122 failed because the authors' pipeline calls an undefined `logger` when the checker is absent. The render now loads

@@ -23,8 +23,8 @@ same fine-tune without that loss, and it stands in for Liu's composition on this
 | `CoInD-T6-004` | Composed GLIDE, the Liu row | 14.19% | CoInD Table 6, p27, and the authors' results sheet |
 
 **Cost.** 10,000 images per method is 20,000 images. At 6.1 seconds per image, measured on an RTX 3090 in the smoke rung, that is about
-34 GPU-hours, over the 24 GPU-hour limit for one run. The classifier adds about 1 GPU-hour. Board question 27 asks whether to render all
-of them or the first 2,500 per method, about 8.5 GPU-hours. The batches run in order, so the 2,500 are the start of the 10,000.
+34 GPU-hours, over the 24 GPU-hour limit for one run. By the owner's answer to board question 27, each method renders the first 2,500
+images, about 8.5 GPU-hours for both, and each row is labelled with that count. The 30,000-step classifier adds about 0.6 GPU-hours.
 
 ## The weights
 
@@ -44,7 +44,7 @@ training-state files stay sealed, because loading them could run code.
 | Steps | 100 | `test_text_to_image.py` |
 | Size | 512 by 512 | the U-Net's `sample_size` of 64 |
 | Seed | 42 plus the batch number, one generator per batch of 5 | `test_text_to_image.py` sets seed 42 once for all batches; a seed per batch lets separate jobs render separate batches, so individual images differ from any the authors drew |
-| Images | 10,000 per method | the paper's stated CelebA count (p22) and the default of `generate_celeba_male_smile_samples.py`; Table 6 does not state its own |
+| Images | the first 2,500 per method | the owner's answer to board question 27; the paper's stated CelebA count (p22) and the default of `generate_celeba_male_smile_samples.py` are 10,000, and Table 6 does not state its own |
 
 ## The conformity classifier
 
@@ -56,11 +56,18 @@ A classifier that misreads the rare group would bias every score, so it must rea
 male-by-smiling groups of CelebA's test split before any generated image is scored. The existing classifier in
 `/datasets/mmolefe/celeba/classifier/` reads male and blond, so it does not apply.
 
+The classifier trained to the authors' 10,000 steps reads smiling on 88.75% of smiling men, under that bar. By the owner's answer to
+board question 28, a second classifier trains for 30,000 steps with everything else unchanged, and the 90% bar stays. The verdict uses
+the 30,000-step classifier if it passes, and the same images are also scored with the 10,000-step classifier and printed beside it.
+
 ## The test, fixed before the first run
 
-The conformity score is per image. The standard error comes from resampling the 10,000 images with replacement 10,000 times. Table 6
+The conformity score is per image. The standard error comes from resampling the 2,500 images with replacement 10,000 times. Table 6
 prints no standard error, so the published one is taken as equal to ours. A row counts as `reproduced` when
 |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²), and otherwise as `not reproduced`, with both numbers recorded.
+
+A row stays `not comparable` if the 30,000-step classifier misses the 90% bar, or if its score and the 10,000-step classifier's score
+differ by more than the row's pass band, 1.96 × √(SE_ours² + SE_published²).
 
 Our classifier is a retraining of the authors' scorer, so a miss could come from the classifier as well as from the weights. The row's
 note says so.
@@ -79,7 +86,7 @@ Each rung saves its config, metrics and commit under `/datasets/mmolefe/poe_repa
 3. **1% of the data.** 100 images per method, looked at on the cluster.
 4. **Controls.** The classifier passes its 90% check. With the same seed, the CoInD and baseline U-Nets produce different images, which
    shows the two checkpoints were both loaded.
-5. **Full protocol.** All 10,000 images per method.
+5. **Full protocol.** The first 2,500 images per method, scored with both classifiers.
 
 ## Shapes3D
 
