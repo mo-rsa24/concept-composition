@@ -53,15 +53,17 @@ supports.
 
 **What it is measured on**
 
-The four Paper 1 rows in the [benchmark spec](benchmark-spec.md#the-10-benchmarks-to-beat): CLEVR by the most objects that succeed, Shapes3D,
-CMNIST AND and CelebA. SuperDiff's disjoint CIFAR-10 halves are context, because that task samples from either model. The CLEVR target is 6 objects, one past the 5 that Bradley's local patch model reaches after training on single objects.
+The [CLEVR scaling plan](targets/clevr-scaling-plan.md): how many objects survive as experts trained apart are added, against one
+network and a sample-and-paste control at equal training length. The target is 7 objects. Shapes3D, CMNIST AND and CelebA are context,
+because they put several attributes on one object. SuperDiff's disjoint CIFAR-10 halves are context, because that task samples from
+either model.
 
 **The pressure-test verdict: promising but needs rework**
 
 The problem is real, and neither the field table nor four web searches found a paper that solves it. With the checker off,
 fixed regions are two independent samples pasted side by side, so the fixed-halves method makes a claim only where the
 checker beats that paste. The form that matters is the one where the sampler chooses the placement, and it draws 121 of 320
-on a shared canvas. None of the four benchmarks has both disjoint models and several separate objects. The
+on a shared canvas. No printed benchmark has both disjoint models and several separate objects. The
 [full test](problem-statements-pressure/paper-1.md) names the next checks.
 
 **What our records add to the verdict**

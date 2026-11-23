@@ -553,5 +553,9 @@
       "match": "54 of 128",
       "holds": "Paper 2's only evidence for the checker"
     }
+  ],
+  "targets_per_paper": [
+    1,
+    6
   ]
 }

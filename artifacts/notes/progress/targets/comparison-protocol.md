@@ -52,13 +52,14 @@ authors' 10,000 steps, reads 97.9% and 93.0% on CelebA's test split. Every Celeb
 including 88.8% on smiling men, because the paper reports no per-group accuracy.
 
 **CLEVR is judged by the most objects that succeed, on our own models.** A count K succeeds when K objects appear in at least
-50% of images and at least K-2 appear in at least 90%, on 1,024 images per count scored by a checked position classifier. For
-models trained on one object, Bradley's local patch model reaches 5 and one location model composed at each position reaches 4, so the target is 6. Both are a
-single network asked at each position, so neither tests experts trained apart.
-Projective Composition released no code or weights and its setup costs about 3,000 A100-hours, so its composition rule and ours
-run on the same single-object, location-conditioned models, over the same positions and seeds, from 1 to 10 objects. A count also
-needs clean pictures: that paper's Figure 3 marks 5 and 6 objects as partial where its hand count of correct positions reads 98
-and 97 of 100.
+50% of images and at least K-2 appear in at least 90%, on 1,024 images per count from a scorer that never trains a checker. Bradley
+trains on 134 million images and our full length is 8 million, so printed numbers are context. A win needs at least 7 objects and
+more than the one-network control at equal training length, and Paper 1 must also beat a sample-and-paste control. The target is 7
+because Bradley's rule already places all 6 objects in 97 of 100 images and first clearly fails at 7. A count also needs clean
+pictures, because that paper's Figure 3 marks 5 and 6 objects as partial where its hand count reads 98 and 97 of 100.
+
+**Shapes3D, Colored MNIST and CelebA are context and set no target.** They put several attributes on one object, and Paper 1 gives
+each model its own region of the picture.
 
 **CIFAR-10 is context and sets no target.** SuperDiff's disjoint-halves task is the OR setting (p7), which samples from either
 model. Paper 1 claims AND, both things in one image.

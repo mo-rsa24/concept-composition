@@ -1,7 +1,7 @@
 # Benchmark spec: what each rival ran
 
-This page says what a run has to copy before its number can sit beside a rival's. It lists the 10 targets the
-owner accepted, on 9 benchmarks because both papers use CLEVR, then 166 dataset settings from 24 of the 25 rival papers, each with its
+This page says what a run has to copy before its number can sit beside a rival's. It lists the 7 targets the
+owner accepted, on 6 benchmarks because both papers use CLEVR, then 166 dataset settings from 24 of the 25 rival papers, each with its
 split, metrics and sample count. Rectify Then Diffuse appears with two settings only, and RPG has no section
 because it sets no target. The numbers come from the [rivals' numbers table](targets/numbers.csv), and the
 rules for judging a win are in the [comparison protocol](targets/comparison-protocol.md).
@@ -12,21 +12,18 @@ dataset or task, as the numbers table names it.
 
 ## Table of contents
 
-- [The 10 targets to beat](#the-10-benchmarks-to-beat)
+- [The 7 targets to beat](#the-10-benchmarks-to-beat)
 - [What the rivals leave out](#what-the-rivals-leave-out)
 - [Every rival's datasets](#every-rivals-datasets)
 - [How this was checked](#how-this-was-checked)
 
 <a id="the-10-benchmarks-to-beat"></a>
 
-## The 10 targets to beat
+## The 7 targets to beat
 
 | Paper | Benchmark | Metric | Rival's number | Split | Count behind the number | Where |
 |---|---|---|---|---|---|---|
 | Paper 1 | CLEVR location-conditioned, trained on one object | Kmax, the most objects that succeed, higher is better | Bradley-Local 5 | EDM2 xs local patch model trained on images holding one object, location-conditioned at 128x128, 500,000 training samples per object count. | 1,024 samples per configuration, judged by a ResNet-18 counting classifier with 99.74% test accuracy. | [Local Mechanisms Table 1, page 3](https://arxiv.org/pdf/2509.16447#page=3) |
-| Paper 1 | Shapes3D Partial support, ∧ composition | CS (%), higher is better | CoInD 91.1 | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | not stated | [CoInD Table 4, page 20](https://arxiv.org/pdf/2503.01145#page=20) |
-| Paper 1 | CMNIST, AND | Conformity score (%), higher is better | LogicalGuidance 83.6 | Diffusion model trained on CMNIST (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated AND queries (100 unique queries per task type). | 10,000 samples from 100 unique queries per task type with 100 samples each. | [LogicalGuidance Table 4, page 7](https://arxiv.org/pdf/2602.05549#page=7) |
-| Paper 1 | CelebA Orthogonal support, ∧ composition | CS (%), higher is better | CoInD 49.15 | Stable Diffusion v1.5 fine-tuned on data constructed from CelebA with labels converted to text; AND composition prompts 'smiling' and 'male' evaluated against the joint prompt. | Not stated for this fine-tuned SDv1.5 table. The 10,000 samples on page 22 are for FID in the separate CelebA U-Net experiment. | [CoInD Table 6, page 27](https://arxiv.org/pdf/2503.01145#page=27) |
 | Paper 2 | T2I-CompBench Color | T2I-CompBench result, higher is better | CoMat 0.7827 | Trained on the T2I-CompBench training set, all of HRS-Bench and 5,000 prompts chosen at random from ABC-6K (about 20,000 prompts); evaluation follows T2I-CompBench default settings, the evaluated split is not stated | Not stated. The paper describes the benchmark as 6,000 prompts over 6 sub-categories and does not say how many were evaluated, how many images per prompt or which seeds. | [CoMat Table 1, page 7](https://arxiv.org/pdf/2404.03653#page=7) |
 | Paper 2 | T2I-CompBench Shape | BLIP-VQA, higher is better | ToMe 0.6051 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
 | Paper 2 | T2I-CompBench Texture | BLIP-VQA, higher is better | ToMe 0.6894 | Training-free method on SDXL; evaluated on the 300 validation prompts of this T2I-CompBench subset. | 300 validation prompts; images per prompt and seeds not stated | [ToMe Table 1, page 8](https://arxiv.org/pdf/2411.07132#page=8) |
@@ -36,11 +33,11 @@ dataset or task, as the numbers table names it.
 
 ## What the rivals leave out
 
-**Only 4 of the 10 targets come with a stated image count:** Bradley's local patch model on CLEVR for both papers (1,024),
-Logical Guidance (10,000) and Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). ToMe states 300 prompts on its two benchmarks and FKC
-states 553, and both leave out images per prompt and seeds. The other 3 targets have no count for that number.
+**Only 3 of the 7 targets come with a stated image count:** Bradley's local patch model on CLEVR for both papers (1,024) and
+Rectify Then Diffuse on T2I-CompBench Complex (1,000 prompts at three seeds, so 3,000). ToMe states 300 prompts on its two benchmarks and FKC
+states 553, and both leave out images per prompt and seeds. The other target, CoMat on Color, has no count for that number.
 
-A run on those 6 targets records the count it used, and its row reads "partly matched", as the
+A run on those 4 targets records the count it used, and its row reads "partly matched", as the
 [comparison protocol](targets/comparison-protocol.md#numbers) requires. Step D2 reruns one published number per rival,
 which is where a missing setting can be tested.
 
@@ -49,18 +46,22 @@ which is where a missing setting can be tested.
 **GenEval's target uses the 553 released prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints 0.78 and
 plain SDXL prints 0.80, so the target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
 
+**Shapes3D, Colored MNIST and CelebA are context.** They put several attributes on one object, so Paper 1's method of giving
+each model its own region cannot run on them.
+
 **CIFAR-10 disjoint halves are context.** SuperDiff's task there is the OR setting, which samples from either model. Paper 1
 claims AND, both things in one image, so the 4.11 FID sets no target.
 
 **Paper 1's CLEVR target is the most objects that succeed for models trained on one object.** A count K succeeds when K objects
-appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local patch model reaches 5 and one location
-model composed at each position reaches 4, so the target is 6. Both are a single network asked at each position. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
+appear in at least 50% of images and at least K-2 appear in at least 90%. Bradley's local patch model reaches 5, and Projective
+Composition's one location model places all 6 in 97 of 100 images and first clearly fails at 7, so the target is 7. Both are a single
+network asked at each position, and printed numbers are context because they train 16 times longer than our runs. Diffusion Domain Expansion's 44.5 at 5 positions is a different benchmark, because it trains one base
 model on all 30,000 multi-object CLEVR images. The [reasons for the four judged targets](targets/proposed-target-changes.md)
 give the number behind each.
 
 ## Every rival's datasets
 
-A ★ marks a setting that holds one of the 10 targets. A count can be partial, and its text then names what the paper
+A ★ marks a setting that holds one of the 7 targets. A count can be partial, and its text then names what the paper
 leaves out.
 
 <details>
@@ -175,7 +176,7 @@ leaves out.
 |---|---|---|---|---|
 | CelebA orthogonal partial support, smiling male held out | Generative model trained on CelebA with all combinations of smiling and male attributes except smiling=1, male=1 (orthogonal partial support); evaluated on the unseen smiling male compositions through joint sampling and AND composition, with FID computed on the smiling male subset. | CS (%), FID, JSD | 10000 generated samples used to evaluate FID | 9 |
 | CelebA Orthogonal support | Stable Diffusion v1.5 fine-tuned on data constructed from CelebA with labels converted to text; evaluated with the joint prompt 'Photo of a smiling male celebrity' and AND / NOT prompt combinations. The paper does not restate which compositions are held out for this fine-tune beyond the CelebA orthogonal support used elsewhere. | CS (%), CS improvement ratio (x), FID, JSD | not stated | 27 |
-| CelebA Orthogonal support, ∧ composition ★ | Stable Diffusion v1.5 fine-tuned on data constructed from CelebA with labels converted to text; AND composition prompts 'smiling' and 'male' evaluated against the joint prompt. | CS (%), FID | not stated | 27 |
+| CelebA Orthogonal support, ∧ composition | Stable Diffusion v1.5 fine-tuned on data constructed from CelebA with labels converted to text; AND composition prompts 'smiling' and 'male' evaluated against the joint prompt. | CS (%), FID | not stated | 27 |
 | Colored MNIST Diagonal partial support | Diffusion model trained on Colored MNIST with diagonal partial support; AND and NOT evaluations restricted to unseen compositions. | CS (%), CS improvement ratio (x) | not stated | 30, 32 |
 | Colored MNIST Non Uniform support | Diffusion model trained on Colored MNIST with non-uniform support (all compositions observed, a digit with its corresponding colors at probability 0.5); evaluated by sampling from the joint and from the product of marginals, on compositions seen during training with less frequency. | CS (%), JSD | not stated | 5 |
 | Colored MNIST Non-uniform support | Diffusion model trained on Colored MNIST with non-uniform support; evaluated on compositions observed during training with less frequency. | CS (%), JSD, Shannon entropy H of the color attribute | not stated | 9, 19, 32 |
@@ -183,7 +184,7 @@ leaves out.
 | Colored MNIST Uniform support | Diffusion model trained on Colored MNIST with uniform support (each training image pairs a randomly selected digit and color); evaluated by sampling from the joint and from the product of learned marginals. | CS (%), JSD | not stated | 5, 19, 32 |
 | Shapes3D Orthogonal partial support | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | CS (%), CS improvement ratio (x), R2 | not stated | 30, 32 |
 | Shapes3D Partial support | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | CS (%), JSD, R2 | not stated | 20 |
-| Shapes3D Partial support, ∧ composition ★ | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | CS (%), R2 | not stated | 20 |
+| Shapes3D Partial support, ∧ composition | Shapes3D trained on the orthogonal partial support composition split of Schott et al.; AND and NOT evaluations restricted to unseen compositions under orthogonal partial support. | CS (%), R2 | not stated | 20 |
 | Shapes3D Uniform support | Shapes3D trained with full (uniform) support, consisting of all samples of the dataset; evaluated by sampling from the joint and the product of marginals. | CS (%), JSD, R2 | not stated | 20, 32 |
 
 </details>
@@ -317,7 +318,7 @@ leaves out.
 |---|---|---|---|---|
 | CelebA | Model trained on CelebA (Table 9); no train/test split stated. Evaluation restricted to two binary attributes, Blond/Non-blond and Male/Female. | Accuracy (%), CS (Conformity Score), FID | FID: 5,000 samples per task (100 images for each of 50 queries). Conformity score: Appendix E.2 gives 10,000 samples from 100 unique queries per task type. | 6, 23 |
 | CMNIST | Diffusion model trained on CMNIST (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated logical queries (N=2 to 5 operators, NOT, OR-CI, OR-ME, AND), 100 unique queries per task type. | Accuracy (%), CS (Conformity Score), Conformity score (%) | 10,000 samples from 100 unique queries per task type with 100 samples each. | 5, 7, 23, 26 |
-| CMNIST, AND ★ | Diffusion model trained on CMNIST (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated AND queries (100 unique queries per task type). | CS (Conformity Score), Conformity score (%) | 10,000 samples from 100 unique queries per task type with 100 samples each. | 5, 7, 26 |
+| CMNIST, AND | Diffusion model trained on CMNIST (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated AND queries (100 unique queries per task type). | CS (Conformity Score), Conformity score (%) | 10,000 samples from 100 unique queries per task type with 100 samples each. | 5, 7, 26 |
 | GRM5-RRM1 dual-target ligand design | Uses the experimental setup of Skreta et al. 2025a on the GRM5-RRM1 protein pair; no training split stated for this paper. | (A*B), A (docking score), B (docking score), Delta(A,B), Div., Qual., V. & U. | 32 ligands of size 23 generated over 8 experiments. | 8 |
 | Shapes3D | Diffusion model trained on Shapes3D (hyperparameters in Table 9); no train/test split stated. Evaluation uses randomly generated logical queries, 100 unique queries per task type. | Accuracy (%), Conformity score (%) | 10,000 samples from 100 unique queries per task type with 100 samples each. | 5, 7, 23 |
 
