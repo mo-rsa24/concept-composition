@@ -1,6 +1,6 @@
 # Review: does a checker learn plurality on unseen digits (step V2)
 
-**Status: open.** The smoke test, the overfit check and the 1% run are done. The inner test is in job 93702, and the one read of `unseen_test` has not run, so step V2's proof is not met.
+**Status: open.** The smoke test, the overfit check and the 1% run are done. All four configurations missed the inner test. The one read of `unseen_test` has not run, so step V2's proof is not met.
 
 ## The ladder
 
@@ -17,17 +17,17 @@ The 1% run trains on 160 canvases for 1,000 updates, so it checks that the pipel
 
 ## The inner test
 
-Job 93702 on `mscluster83` trains on the pairs among digits 0 to 3 and scores the pairs holding digit 4, read from its log at 20:01 on 2026-11-23. Its full results land in `/datasets/mmolefe/poe_repair_min/loop-8/v2/full/inner.json` when the job ends.
+Job 93702 on `mscluster83` took 2 hours 41 minutes. It trained on the pairs among digits 0 to 3 and scored both those pairs and the pairs holding digit 4, which it never saw. All scores are balanced accuracy over steps 0 to 15, where 0.5 is chance. The full results are in `/datasets/mmolefe/poe_repair_min/loop-8/v2/full/inner.json`.
 
-| Configuration | Balanced accuracy, bar 0.75 | `apart` against `wrong`, bar 0.75 | All bars |
-|---|---|---|---|
-| Base map reader | 0.535 | 0.497 | missed |
-| Log totals added | 0.535 | 0.500 | missed |
-| Signed differences | 0.531 | 0.495 | missed |
-| 12,000 updates | training at 20:01 | not scored | not scored |
+| Configuration | Trained pairs | Pairs holding 4, bar 0.75 | Gap, bar 0.05 | `apart` against `wrong`, trained pairs | `apart` against `wrong`, pairs holding 4, bar 0.75 | All bars |
+|---|---|---|---|---|---|---|
+| Base map reader | 0.542 | 0.535 | 0.006 | 0.499 | 0.497 | missed |
+| Log totals added | 0.542 | 0.535 | 0.007 | 0.499 | 0.500 | missed |
+| Signed differences | 0.544 | 0.531 | 0.013 | 0.502 | 0.495 | missed |
+| 12,000 updates | 0.545 | 0.537 | 0.008 | 0.503 | 0.498 | missed |
 
-## Cluster access
+No configuration separates `apart` from `wrong`, on the pairs it trained on or on the pairs it never saw. The miss is in learning which digits are present, before any question of carrying over to new digits. Balanced accuracy over all canvas kinds rises from 0.50 at step 0 to between 0.60 and 0.61 at step 15 on the pairs holding digit 4.
 
-Commands on `mscluster84` stopped returning between 20:01 and 20:22 on 2026-11-23. At 21:04 a new connection for this loop authenticated in 41 seconds, and a command sent through it then produced no output in 420 seconds. Job 93702's state after 20:01 is unknown.
+The written rule freezes the configuration with the highest smaller value of the two scores on the pairs holding 4, which is **log totals added** at 0.4999. The four values span 0.4946 to 0.4999, so this choice separates configurations that are all at chance.
 
-GPU-hours spent so far: 0.44 of 30 (0.14 on step V1 and 0.30 on this ladder), plus job 93702, which had run for 1.75 hours at 20:01.
+GPU-hours spent so far: 3.12 of 30 (0.14 on step V1, 0.30 on this ladder and 2.68 on the inner test).
