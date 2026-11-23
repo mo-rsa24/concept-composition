@@ -89,7 +89,7 @@ Along the way, each stage's verdict and picture sheet land in chat, and any deci
 | Step | Pass |
 |---|---|
 | V1 | Two rebuilds give the same data hash, and the zero push differs by under 1e-5 |
-| V2 | On unseen digit pairs, balanced accuracy over steps 0 to 15 is at least 0.75 and within 0.05 of the seen pairs |
+| V2 | On unseen digit pairs, balanced accuracy over steps 0 to 15 is at least 0.75 and within 0.05 of the seen pairs, and balanced accuracy on `apart` against `wrong` canvases over the same steps is at least 0.75 (board question 55) |
 | V3 | On unseen digit pairs, the push beats the plain product by more than 1.96 standard errors, and a same-size random push does not |
 | V4 | On the six SDXL object pairs, the abstract checker beats plain PoE by at least 3 of 48 and more than 1.96 standard errors |
 

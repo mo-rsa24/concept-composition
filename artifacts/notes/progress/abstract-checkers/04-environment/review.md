@@ -45,9 +45,10 @@ at which digits are present. On the 2,000 clean unseen canvases its balanced acc
 and the share of label-0 canvases it gets right, is 0.873 on a 0-to-1 scale. It scores 0.871 on the seen test split, so its gap
 between seen and unseen digits is 0.002.
 
-Step V2's pass mark is at least 0.75 and within 0.05 of the seen pairs, so this layout rule would clear it on clean canvases. V2
-measures noisy canvases at sampler steps 0 to 15, where this rule has not been measured. Board question 55 asks the owner whether
-V2 should also have to separate `apart` from `wrong`, the one comparison where layout gives no help and this rule scores 0.5.
+Step V2's overall test, at least 0.75 and within 0.05 of the seen pairs, is one this layout rule would clear on clean canvases. V2
+measures noisy canvases at sampler steps 0 to 15, where this rule has not been measured. V2 therefore also has to reach balanced
+accuracy of at least 0.75 on `apart` against `wrong` canvases of unseen pairs over the same steps (board question 55). Layout gives
+no help on that comparison, and this rule scores 0.5 on it.
 
 The numbers are in `digit-blind-reader.json`, and `2-classifier-guidance/scripts/abstract_checkers/blind_reader.py` computes them
 and draws the figure. Its example canvases are the first three of each kind in the build's fixed shuffle.
