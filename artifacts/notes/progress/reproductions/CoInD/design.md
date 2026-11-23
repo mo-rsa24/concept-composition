@@ -42,7 +42,7 @@ training-state files stay sealed, because loading them could run code.
 | Composition | `ComposableStableDiffusionPipeline`, equal weights of 7.5 and an empty negative prompt | the code's default when `--weights` is not passed |
 | Steps | 100 | `test_text_to_image.py` |
 | Size | 512 by 512 | the U-Net's `sample_size` of 64 |
-| Seed | 42, with batches of 5 | `test_text_to_image.py` |
+| Seed | 42 plus the batch number, one generator per batch of 5 | `test_text_to_image.py` sets seed 42 once for all batches; a seed per batch lets separate jobs render separate batches, so individual images differ from any the authors drew |
 | Images | 10,000 per method | the paper's stated CelebA count (p22) and the default of `generate_celeba_male_smile_samples.py`; Table 6 does not state its own |
 
 ## The conformity classifier
