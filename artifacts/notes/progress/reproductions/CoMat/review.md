@@ -30,4 +30,4 @@ tile, shows clean images with most colours and materials on the right objects. S
 diamond sign beside a traffic light. No score was computed at this rung.
 
 **Does CoMat reproduce its published Color score?** ✅ Yes. CoMat scores 0.7696 on the 288 allowed prompts at 10 seeds (2,880 pictures), with a pass band of 0.7331 to 0.8060, and the paper prints 0.7827 (scoring job 93588,
-commits `8e7cea34-4bfd680`, W&B `dk8g2tpx`). The plain SDXL check on the same prompts is still running.
+commits `8e7cea34-4bfd680`, W&B `dk8g2tpx`). The plain SDXL check on the same prompts (job 93584) was at 202 of 288 pictures at 14:36 on 2026-11-23. From 15:07 the cluster's login node accepted connections and then hung, so its later progress has not been read.
