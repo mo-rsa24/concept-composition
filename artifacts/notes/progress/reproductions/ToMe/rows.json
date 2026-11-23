@@ -5,5 +5,16 @@
     "commit": "866b864c-f2bdb6d",
     "run_id": "question 43",
     "note": "not rerun, by the owner's choice in board question 43: another rival has the best printed score on this benchmark, so this printed number stands as context; 179 of 988 unscored pictures stay on the cluster"
+  },
+  {
+    "target_id": "ToMe-T1-054",
+    "ours": 0.5502,
+    "interval_low": 0.4976,
+    "interval_high": 0.6028,
+    "verdict": "not reproduced",
+    "commit": "9efe30d1-b988f7a",
+    "run_id": "8cowoyea",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/ToMe/full/tome/t2i_shape",
+    "note": "seed 0; 293 prompts including 2 with a repaired parse; on the 291 unrepaired prompts ToMe scores 0.5495 (0.4968 to 0.6022, W&B c8c153mf); the plain SDXL check on this benchmark also missed: ours 0.4825 (range 0.4301 to 0.5348) against 0.5408 printed by ToMe and RPG, while CoMat prints 0.4687"
   }
 ]

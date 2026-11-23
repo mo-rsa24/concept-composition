@@ -8,8 +8,9 @@ of images and at least K-2 appear in at least 90%, and the largest K where every
 
 ## Status
 
-Nothing has been rendered or trained. The first step installs the CLEVR renderer and times one batch, because rendering cost sets how many images each
-model can see. Stage 1 starts only after that cost is written here, and any run past 24 GPU-hours goes to the owner first.
+The renderer is installed and timed, and no training data has been rendered. On a 28-thread i9-10940X with 32-pixel render tiles, one single-object image takes
+5.46 seconds and one empty scene takes 4.50 seconds (job 93314). The generator's default 256-pixel tiles took 51.63 and 46.96 seconds (job 93287), because few
+threads have work at that tile size. The generator's help text says tile size does not change the picture, and that has not been checked here. Any run past 24 GPU-hours goes to the owner first.
 
 ## The rows this serves
 
@@ -71,8 +72,8 @@ own question.
 
 ## The ladder of runs
 
-1. **Install and time.** Install Blender 2.78c and render one batch of 8 single-object images and 8 empty scenes on one node, recording seconds per image.
-   This uses one job and no GPU.
+1. **Install and time.** ~~Install Blender 2.78c and render one batch of 8 single-object images and 8 empty scenes on one node, recording seconds per image.~~
+   Done: 5.46 seconds per single-object image with 32-pixel tiles.
 2. **Set the data size.** Write the images per model and the rendering cost here, from the timing.
 3. **Smoke test.** A short training of one location network and one batch of samples, recording seconds per thousand images.
 4. **Overfit.** The model fits 16 images, and the scorer fits a small set.

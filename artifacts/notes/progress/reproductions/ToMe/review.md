@@ -63,4 +63,9 @@ on seed 0 (jobs 93214, 93228 and 93229, commits `5f16f1f6-1abb2a8`). The pass ba
 Two papers print different plain SDXL scores on this benchmark, and both of ours fall inside the pass band around CoMat's numbers. By the owner's answer
 to board question 39, ToMe's Shape row still gets its verdict, with this missed check printed beside it.
 
-**Does ToMe reproduce its published Shape and Texture scores?** Unknown until BLIP-VQA scoring finishes.
+**Does ToMe reproduce its published Shape score?** ❌ No, by a small margin. ToMe scores 0.5502 on 293 prompts at seed 0, with a pass band of 0.4976 to 0.6028, and
+the paper prints 0.6051 (job 93303, commits `9efe30d1-b988f7a`, W&B `8cowoyea`). On the 291 prompts that needed no parse repair it scores 0.5495, with a band of
+0.4968 to 0.6022 (W&B `c8c153mf`). Plain SDXL missed its printed Shape score on the same pipeline, so part of this gap may come from the setup. ToMe's gain over plain
+SDXL is 0.0677 in our run and 0.0643 in the paper's printed numbers.
+
+**Does ToMe reproduce its published Texture score?** Unknown until BLIP-VQA scoring finishes.

@@ -1,7 +1,7 @@
 # Review: reproducing FKC on GenEval
 
 This file holds what the runs in [the FKC design](design.md) produced. FKC is not rerun, by the owner's answer to board question 41, so its printed 0.78 stays as context. Plain SDXL on the same prompts,
-the number a Paper 2 win must beat, is rendered and being scored.
+the number a Paper 2 win must beat, scores 0.7399 of 396 images correct, against the 0.80 printed (pass band 0.6468 to 0.8330, reproduced).
 
 ## Runs
 
@@ -11,8 +11,8 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-5/render
 | Rung | Slurm jobs | Commits | Output | State |
 |---|---|---|---|---|
 | Timing of one 8-particle batch | 93248 | `ac85826a-47e659d` | `timing/fkc-timing.json` | done |
-| Plain SDXL, 99 two-object prompts at 4 images | 93251 | `ac85826a-47e659d` | `full/sdxl/` | running |
-| GenEval scoring of plain SDXL | queued | `ac85826a-47e659d` | `full/sdxl-scores.jsonl` | waits on the renders |
+| Plain SDXL, 99 two-object prompts at 4 images | 93251 | `ac85826a-47e659d` | `full/sdxl/` | done |
+| GenEval scoring of plain SDXL | 93311 | `ac85826a-47e659d` | `full/sdxl-scores.jsonl`, `full/sdxl-result.json` | done, W&B `qcdz35cj` |
 
 ## Questions
 
