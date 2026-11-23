@@ -52,8 +52,8 @@ refuses pickled objects, so only plain numeric arrays reach it.
 | Training seeds | 1, 2, 3 | declared here; nothing is tuned, so no seed chooses a setting |
 
 **What the release does not settle.** The paper evaluates AND on unseen compositions. The released `evaluate_shapes3d.py` has that query commented
-out for the unseen split, and it keeps 4 images of each batch of 64, about 628 images. Board question 34 asks the owner which evaluation to run.
-Both rows count as `not comparable` until it is answered.
+out for the unseen split, and it keeps 4 images of each batch of 64, about 628 images. The owner's answer to board question 34 skips this rerun, so neither
+evaluation runs.
 
 ## The conformity classifier
 

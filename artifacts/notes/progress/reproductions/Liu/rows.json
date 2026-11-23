@@ -5,16 +5,5 @@
     "commit": "f9f9f5dc-b2f1320",
     "run_id": "question 25",
     "note": "source is T2I-CompBench++ Table VIII, p9, BLIP-VQA, run by the benchmark's authors on Stable Diffusion 2 base with an unreleased reimplementation; the official model page no longer resolves; by the owner's answer to question 25, 0.4063 stays a published number, because a Stable Diffusion 2 run cannot change an SDXL target"
-  },
-  {
-    "target_id": "CoInD-T6-011",
-    "note": "first 2,500 images per method (board question 27); the 10,000-step classifier sets the verdict, at 97.93% gender and 92.96% smile against CoInD's printed 98.2% and 92.1% (board question 30), with 88.75% on smiling men; the 30,000-step classifier is printed beside it"
-  },
-  {
-    "target_id": "CoInD-T4-036",
-    "verdict": "not comparable",
-    "commit": "1a5b2e9d-cff03f8",
-    "run_id": "question 34",
-    "note": "three trainings per method are approved (board question 30); the released evaluation does not match the paper, so the row is not comparable until board question 34 is answered"
   }
 ]
