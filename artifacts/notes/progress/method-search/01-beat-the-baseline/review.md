@@ -15,13 +15,12 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m1/`, 
 | 1 | Comparison: 35,000-sample pool, two checkers, four rows | 93598 | `7df3e0b1-f2bdb6d` | `paper-1/full/rows/` | done, W&B `vekm3sfh` |
 | 2 | Concept parse and zero-push check | 93468 | `99ac88a8-f2bdb6d` | `paper-2/controls/check.json` | passed |
 | 2 | Smoke and 1%: one pair, one seed, three rows | 93481 | `99ac88a8-f2bdb6d` | `paper-2/smoke/` | passed |
-| 2 | Comparison, pair shard 0 of 2 | 93523 | `99ac88a8-f2bdb6d` | `paper-2/full/` | running |
-| 2 | Comparison, pair shard 1 of 2 | 93524 | `99ac88a8-f2bdb6d` | `paper-2/full/` | queued |
+| 2 | Comparison, pair shard 0 of 2 | 93523 | `99ac88a8-f2bdb6d` | `paper-2/full/` | done, 144 pictures |
+| 2 | Comparison, pair shard 1 of 2 | 93524 | `99ac88a8-f2bdb6d` | `paper-2/full/` | done, 144 pictures |
 
-**Cluster access on 2026-11-23.** From 14:49 the laptop could not log in: port 22 on the gateway `146.141.21.100` accepts a connection,
-and the SSH login then hangs. A verbose trace at 16:00 stops right after the laptop offers its public key, the point where the server
-reads the user's home directory, so a stalled `/home-mscluster` is the likely cause (inferred). Paper 2's last reading, at 14:28, was 191
-of 288 pictures with both render jobs running.
+**Cluster access on 2026-11-23.** The laptop could not log in from 14:49 until after 16:00. A verbose trace stopped right after the laptop
+offered its public key, the point where the server reads the user's home directory, so a stalled `/home-mscluster` is the likely cause
+(inferred). Both Paper 2 render jobs finished with exit code 0, with all 288 pictures on disk. The 288 renders used 4.37 GPU-hours.
 
 ## Paper 1 controls
 
