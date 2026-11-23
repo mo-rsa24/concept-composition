@@ -55,9 +55,9 @@ each row has 320 canvases. The 20 unseen pairs are not touched.
 
 - The pool is 3,000 training and 500 held-out samples per digit, 35,000 canvases, drawn from seed 1,000 up. Each 28 by 28 crop
   is labelled by the digit its expert was asked to draw, and it is written in MNIST's file format, so
-  `2-classifier-guidance/scripts/mnist/pixel_checker.py` trains on it unchanged.
-- `PC_NOCROSS=1` keeps every pair of a 0 to 4 digit with a 5 to 9 digit out of the checker's data, so all 25 cross-range pairs
-  stay unseen.
+  `2-classifier-guidance/scripts/mnist/pixel_checker.py` can read it.
+- `2-classifier-guidance/scripts/method_search/train_checker.py` runs that trainer with no pair of a 0 to 4 digit and a 5 to 9
+  digit anywhere in its data, including the wrong-pair negatives, so all 25 cross-range pairs stay unseen.
 - The earlier checkers' retraining rounds on their own pushed renders are left out, because the digit judge that labelled those
   renders trained on real MNIST.
 - The judge only scores. It trains nothing and filters nothing in the pool.
