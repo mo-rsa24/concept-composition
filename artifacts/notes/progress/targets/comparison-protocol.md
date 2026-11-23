@@ -24,7 +24,7 @@ the noise margin below. The printed bar is reported beside it as reached or not.
 
 | Benchmark | Best finished rerun | Printed bar |
 |---|---|---|
-| T2I-CompBench Color | CoMat, still running | 0.7927 |
+| T2I-CompBench Color | CoMat, 0.7696 on 288 prompts at 10 seeds | 0.7927 |
 | T2I-CompBench Shape | ToMe, 0.5502 on 293 prompts | 0.6151 |
 | T2I-CompBench Texture | ToMe, 0.6503 on 300 prompts | 0.6994 |
 | T2I-CompBench Complex | CO3, 0.3326 on 988 prompts at 3 seeds | 0.4761 |

@@ -34,6 +34,9 @@ reproduced (W&B `8cowoyea`). On Texture it scores 0.6503 on all 300 prompts at s
 (W&B `ljypsxnd`). Plain SDXL on GenEval's 99 two-object prompts scores 0.7399 over 396 images, against 0.80 printed, which is
 reproduced (W&B `qcdz35cj`). Each win reports the printed number beside it as reached or not.
 
+**CoMat rerun.** On Color, CoMat scores 0.7696 on 288 of 300 prompts at 10 seeds, against 0.7827 printed, which is reproduced
+(W&B `dk8g2tpx`).
+
 **CO3 reruns.** CO3's released script scores 0.3326 on T2I-CompBench Complex over 988 prompts at 3 seeds, against 0.4406 printed, so
 it is not reproduced (W&B `02fl0ia0`). On the same pictures plain SDXL scores 0.2637 and Rectify Then Diffuse 0.2423, so CO3 ranks
 first here, while Rectify Then Diffuse's paper prints itself first. The released script's settings differ from the paper's section
