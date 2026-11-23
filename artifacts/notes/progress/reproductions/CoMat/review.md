@@ -29,4 +29,5 @@ bar of 1e-5, in one process on a Quadro RTX 8000 at float16.
 tile, shows clean images with most colours and materials on the right objects. Some prompts still drift: "a pentagonal stop sign" renders as a small
 diamond sign beside a traffic light. No score was computed at this rung.
 
-**Does CoMat reproduce its published Color score?** Unknown until the Color renders finish and are scored.
+**Does CoMat reproduce its published Color score?** ✅ Yes. CoMat scores 0.7696 on the 288 allowed prompts at 10 seeds (2,880 pictures), with a pass band of 0.7331 to 0.8060, and the paper prints 0.7827 (scoring job 93588,
+commits `8e7cea34-4bfd680`, W&B `dk8g2tpx`). The plain SDXL check on the same prompts is still running.

@@ -12,5 +12,16 @@
     "verdict": "not comparable",
     "commit": "866b864c-f2bdb6d",
     "run_id": "question 43"
+  },
+  {
+    "target_id": "CoMat-T1-055",
+    "ours": 0.7696,
+    "interval_low": 0.7331,
+    "interval_high": 0.806,
+    "verdict": "reproduced",
+    "commit": "8e7cea34-4bfd680",
+    "run_id": "dk8g2tpx",
+    "render_folder": "/datasets/mmolefe/poe_repair_min/loop-5/renders/CoMat/full/comat/t2i_color",
+    "note": "released weights CaraJ/CoMat_sdxl_ft_unet at 1024 pixels, the size CoMat's validation code falls through to, which the paper does not state; 288 prompts at seeds 42 to 51; ToMe quotes CoMat at 0.7774 (ToMe-T1-049)"
   }
 ]
