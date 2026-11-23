@@ -91,8 +91,8 @@
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/README.md": {
-   "at": "2026-11-22",
-   "sha256": "54718e17947ce568e45989a9794f3e2a937df4a57653d363eff933ea6eb707b0",
+   "at": "2026-11-23",
+   "sha256": "e1aa1bebe1e52aca6f3cc7fa9e62709409b57d5a899ecd2db180f91a48629e64",
    "state": "drained"
   },
   "artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/best-cases-held-out.png": {

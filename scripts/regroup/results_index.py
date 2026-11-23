@@ -14,7 +14,7 @@ import glob, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(ROOT, "scripts", "shared"))
-from disallowed_subjects import is_allowed
+from disallowed_subjects import is_showable
 
 MARK = "<!-- index: written by scripts/regroup/results_index.py; edit the cards, not this file -->"
 IMG = (".png", ".jpg", ".jpeg", ".svg", ".gif")
@@ -50,7 +50,7 @@ def card(d):
 def showable(f):
     """An index shows only a picture opened and cleared at full size, and never one held or guarded."""
     rel = os.path.relpath(f, ROOT)
-    return rel in CLEARED and rel not in HELD and is_allowed(rel)
+    return rel in CLEARED and rel not in HELD and is_showable(rel)
 
 
 def thumb(d):

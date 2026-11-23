@@ -44,6 +44,11 @@ ASK_FIRST = {
 }
 
 
+# Held back from every picture shown on a page, card or index until the owner clears them (pair
+# ledger, 2026-11-23). This list does not stop a render or change a benchmark's prompt set.
+HOLD_FROM_DISPLAY = {"caiman", "caimans", "tortoise", "tortoises", "turtle", "turtles", "snail", "snails"}
+
+
 def words(text: str) -> set[str]:
     return {w for w in re.split(r"[^a-z]+", text.lower()) if w}
 
@@ -82,3 +87,8 @@ def is_allowed(text: str, *, allow_ask_first: bool = False) -> bool:
         return True
     except ValueError:
         return False
+
+
+def is_showable(text: str) -> bool:
+    """True when a picture with this path or caption may appear on a page, card or index."""
+    return is_allowed(text) and not words(text) & HOLD_FROM_DISPLAY

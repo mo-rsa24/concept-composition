@@ -322,5 +322,11 @@ Every picture that failed the [subject guard](../../../scripts/shared/disallowed
 | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/tiles/an_elephant__x__a_penguin/seed10/ours_crossseeds_w50.png` | not cleared | no page |
 | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/tiles/an_elephant__x__a_penguin/seed10/ours_crossself_w50.png` | not cleared | no page |
 | `1-lora-correction/artifacts/results/the-adapter-on-cat-and-dog/which-adapter-wins/which-checkpoint-to-take-each-figure-cell-from/tiles/an_elephant__x__a_penguin/seed10/ours_crossw25_w50.png` | not cleared | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__co3.png` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__joint.png` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__ours.png` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__poe.png` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/against-other-methods/the-head-to-head-tables/how-the-adapter-scores-against-other-methods/tiles-rule5/a_elephant__x__a_turtle__s11__tome.png` | held: names a subject on the 2026-11-23 display hold | no page |
+| `1-lora-correction/artifacts/results/designing-the-correction-loss/can-real-photographs-train-the-composition/turtle-tortoise-filter-passes.jpg` | held: names a subject on the 2026-11-23 display hold | no page |
 
 <!-- built-to: PAGE_LOOK_FORMAT v1 -->

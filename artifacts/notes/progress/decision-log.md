@@ -31,3 +31,4 @@ afterwards with its result.
 
 | Date | Action | Path | Why | Evidence | Way back | Check after |
 |---|---|---|---|---|---|---|
+| 2026-11-23 | Touch a fixed folder: one new row in the pair ledger, with no file moved | `artifacts/_shared/cross_pair_pool_configs/pair_ledger.md` | the owner said "Guard them" for caiman, tortoise, turtle and snail, and the ledger is where a guard decision is recorded | `scripts/shared/disallowed_subjects.py` names the ledger as the record of these decisions | `git revert` of the commit | `poe_repair/paths.py` unchanged, and `is_allowed` still returns true for these prompts |
