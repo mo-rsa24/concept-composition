@@ -51,4 +51,15 @@ objects fuse into one. No score was computed at this rung.
 0.8554 on the three example pictures, the scores the repository ships, with a largest gap of 0.0 against a bar of 0.01 (job 93213,
 commits `fc040954-8207676`, output `renders/blip-canary/result.json`).
 
+**Does plain SDXL reproduce ToMe's printed scores, the check on our scorer?** 🟡 On Texture yes, on Shape no. Plain SDXL ran through ToMe's pipeline
+on seed 0 (jobs 93214, 93228 and 93229, commits `5f16f1f6-1abb2a8`). The pass band is ours ± 1.96 × √2 × the bootstrap standard error.
+
+| Benchmark | Prompts | Ours | Pass band | ToMe and RPG print | Verdict | CoMat prints | W&B run |
+|---|---|---|---|---|---|---|---|
+| Shape | 293 of 300 | 0.4825 | 0.4301 to 0.5348 | 0.5408 | not reproduced | 0.4687 | `92suk4nc` |
+| Texture | 300 of 300 | 0.5233 | 0.4630 to 0.5835 | 0.5637 | reproduced | 0.5299 | `acw7fxeb` |
+
+Two papers print different plain SDXL scores on this benchmark, and both of ours fall inside the pass band around CoMat's numbers. Board question 39 asks
+whether ToMe's Shape row still gets its verdict.
+
 **Does ToMe reproduce its published scores?** Unknown until the full runs finish.
