@@ -8,6 +8,9 @@
   },
   {
     "target_id": "CoInD-T6-011",
-    "note": "first 2,500 images per method by the owner's answer to board question 27; the verdict uses a 30,000-step conformity classifier against a 90% bar, with the authors' 10,000-step classifier (88.75% on smiling men, W&B zolb4ltw) printed beside it, by the owner's answer to board question 28"
+    "note": "the conformity classifier missed its 90% bar on smiling men at 10,000 steps (88.75%, W&B zolb4ltw) and 30,000 steps (89.01%, W&B uo78zzgu), so by the owner's answer to board question 28 the row stays not comparable; no generated image was scored",
+    "verdict": "not comparable",
+    "commit": "f96659e8-3bc1415",
+    "run_id": "uo78zzgu"
   }
 ]
