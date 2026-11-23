@@ -1,0 +1,37 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart TD
+    subgraph DET["The 3 detours: side work that now bears on the route"]
+        direction LR
+        D1["1. Idea walk, paused at claim 1 of 7<br/>two things in a picture come<br/>from the target, and a push<br/>cannot create them<br/><b>bears on: find the best method</b>"]
+        D2["2. Zoom ladder<br/>how a checker pushes SDXL,<br/>from one step down to its network<br/><b>bears on: direction C</b>"]
+        D3["3. Reading route<br/>11 sittings on your calendar<br/><b>bears on: your go or no-go,<br/>after sitting 6</b>"]
+    end
+    subgraph ROUTE["The route: two papers, each beating its best rival. 31 of 52 steps done"]
+        direction LR
+        S1["Saved and<br/>organised<br/>past work"] --> S2["Rivals read,<br/>7 targets set"] --> S3["Rivals rerun<br/>one score left"] --> S4["Find the best method<br/>first test: neither paper<br/>beat its simple baseline"] --> S5{"Your<br/>go or no-go"} --> S6["Full tables,<br/>then write"]
+    end
+    subgraph NEXT["Directions the results point to"]
+        direction LR
+        A["A. The right two<br/>(Paper 2)<br/>CO3 already draws two bodies,<br/>and gets who they are wrong"]
+        B["B. Scenes paste cannot make<br/>(Paper 1)<br/>overlap and shared shadows"]
+        C["C. Checkers for properties<br/>(Paper 2)<br/>count, binding, position,<br/>on objects never trained on"]
+        R["D. Regions on SDXL<br/>(both papers)<br/>composer built,<br/>never run"]
+    end
+    D1 ~~~ D2 ~~~ D3
+    A ~~~ B ~~~ C ~~~ R
+    DET -.-> ROUTE
+    ROUTE --> NEXT
+
+    classDef done fill:#b7efc5,stroke:#222222,stroke-width:2px,color:#111111
+    classDef doing fill:#ffd6a5,stroke:#e8590c,stroke-width:2px,color:#111111
+    classDef todo fill:#e9ecef,stroke:#222222,stroke-width:2px,color:#111111
+    classDef detour fill:#ffffff,stroke:#868e96,stroke-width:2px,stroke-dasharray:5 5,color:#111111
+    classDef idea fill:#ffffff,stroke:#2a6fdb,stroke-width:2px,color:#111111
+    class S1,S2 done
+    class S3,S4 doing
+    class S5,S6 todo
+    class D1,D2,D3 detour
+    class A,B,C,R idea
+    style DET fill:#fafafa,stroke:#adb5bd,stroke-width:2px
+    style ROUTE fill:#ffffff,stroke:#222222,stroke-width:2px
+    style NEXT fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
