@@ -11,6 +11,8 @@ Outputs are on the cluster under `/datasets/mmolefe/poe_repair_min/loop-6/m9/`, 
 | Rung 1 smoke, seed 9 | 93719 | `275c54f4-15d8bdd` | none | stopped by the GPU guard, because another process held the card on mscluster107 |
 | Rung 1 smoke, seed 9 | 93724 | `275c54f4-15d8bdd` | `smoke/` | passed |
 | Rung 1, all 8 seeds | 93794 | `275c54f4-15d8bdd` | `full/` | finished, 23 minutes 50 seconds on one RTX 3090 |
+| Bootstrapping smoke, seed 9 | 93852 | `321f458b-15d8bdd` | `smoke/` | finished, 1 hour 59 minutes for 4 renders during a cluster stall |
+| Bootstrapping, all 8 seeds | 93906 | `100772b7-15d8bdd` | `full/` | running |
 
 ## Rung 1 controls on the smoke seed
 
