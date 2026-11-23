@@ -21,7 +21,7 @@ flowchart LR
         direction LR
         C1["All 5 on, cap fires<br/>each checker's push = 1.00"]
         C2["Count off, cap fires<br/>each survivor grows to<br/>1.12 (perpendicular gradients)<br/>to 1.25 (aligned gradients)"]
-        C3["Fix: each checker gets a budget<br/>0.4 / 5 = 0.08 of the product's norm<br/>the cap never fires, survivors stay 1.00"]
+        C3["Fix: each checker keeps a fixed length,<br/>0.08 to 0.179 of the product's norm,<br/>set from how far the gradients overlap,<br/>so survivors stay 1.00"]
         C1 -->|remove count| C2
         C2 -->|fix| C3
     end

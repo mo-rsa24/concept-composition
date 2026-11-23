@@ -1,0 +1,28 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'monospace', 'primaryColor': '#ffffff', 'primaryBorderColor': '#222222', 'primaryTextColor': '#111111', 'lineColor': '#222222'}}}%%
+flowchart LR
+    MAPS["Word maps of the two subjects<br/>read under each expert's own prompt"]
+    COUNT["1. Count<br/>two separate subjects?<br/>trains on every picture"]
+
+    subgraph GIVEN["Trained only on pictures that hold two separate subjects"]
+        direction TB
+        SPATIAL["2. Spatial relation<br/>right order for the asked relation?"]
+        POS["3. Position and size<br/>each subject in its asked box?<br/>also needs the right order"]
+        BIND["4. Binding<br/>each colour on its own noun?"]
+        MATCH["5. Prompt match<br/>are these the two asked subjects?"]
+        SPATIAL --> POS
+    end
+
+    LEN["Each checker pushes at its own fixed length,<br/>set once from how far the gradients overlap"]
+    POE["Added to the product of experts<br/>on steps 0 to 15 of 50"]
+
+    MAPS --> COUNT
+    COUNT --> GIVEN
+    GIVEN --> LEN
+    COUNT --> LEN
+    LEN --> POE
+
+    classDef plain fill:#ffffff,stroke:#222222,stroke-width:2px,color:#111111
+    classDef first fill:#e3f4e1,stroke:#2e7d32,stroke-width:3px,color:#111111
+    class MAPS,SPATIAL,POS,BIND,MATCH,LEN,POE plain
+    class COUNT first
+    style GIVEN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
