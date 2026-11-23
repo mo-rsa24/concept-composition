@@ -21,7 +21,7 @@ flowchart TB
     end
     subgraph L2["Session 2: artifacts"]
       direction TB
-      B3["B3 Drain all projects: new 0, changed 0"]:::done --> B4["B4 Void list: false results named"]:::done --> T3["T3 Prune list: unused files, with reasons"]:::todo --> T4["T4 Approved files moved to _archive/"]:::todo --> O1["O1 Organise classifier guidance and captions<br/>YOU ARE HERE"]:::doing
+      B3["B3 Drain all projects: new 0, changed 0"]:::done --> B4["B4 Void list: false results named"]:::done --> T3["T3 Prune list: unused files, with reasons"]:::done --> T4["T4 Approved files moved to _archive/"]:::done --> O1["O1 Organise classifier guidance and captions"]:::done --> O2["O2 Organise LoRA correction: one picture per run"]:::done
     end
     subgraph L3["Session 3: pillars and repo"]
       direction TB
@@ -29,16 +29,36 @@ flowchart TB
     end
     subgraph L4["Session 4: rivals and targets"]
       direction TB
-      K1["K1 List every rival for both papers"]:::todo --> K2["K2 Read every number from the papers"]:::todo --> K3["K3 Look at every result figure"]:::todo --> K4["K4 Find where each method breaks"]:::todo --> K5["K5 Set targets on the scoreboard"]:::todo --> K6["K6 Keep every target current"]:::todo
+      K1["K1 List every rival for both papers"]:::done --> K2["K2 Read every number from the papers"]:::done --> K3["K3 Look at every result figure"]:::done --> K4["K4 Find where each method breaks"]:::done --> K5["K5 Set targets on the scoreboard"]:::done --> K6["K6 Keep every target current<br/>YOU ARE HERE"]:::doing
+    end
+    subgraph L5["Session 5: reproduce the rivals"]
+      direction TB
+      D2["D2 Rivals reproduce one published number"]:::done
+    end
+    subgraph L6["Session 6: find the best method"]
+      direction TB
+      M1["M1 Each method beats its simple baseline"]:::done --> M7["M7 CLEVR paste test first<br/>YOU ARE HERE"]:::doing --> M5["M5 Checker data balanced"]:::todo --> D3["D3 Checker architecture chosen"]:::todo --> M2["M2 Checker labels chosen"]:::todo --> D5["D5 Short inclusive fine-tune with the push"]:::todo --> M3["M3 Winning method tuned"]:::todo --> M6["M6 Small CLEVR test"]:::todo --> M8["M8 Loop 6 and Loop 8 checkers compared"]:::todo --> M4["M4 One recipe frozen per paper"]:::todo --> M9["M9 Regions bind each body"]:::todo
+    end
+    subgraph L7["Session 7: read the abstract-checker papers"]
+      direction TB
+      U1["U1 Closest papers read"]:::done --> U2["U2 Score view written"]:::done --> U3["U3 Abstract-checker design written"]:::done
+    end
+    subgraph L8["Session 8: test abstract checkers"]
+      direction TB
+      V1["V1 Small repeatable environment"]:::done --> V2["V2 Checker learns plurality on unseen digits<br/>YOU ARE HERE"]:::doing --> V3["V3 Its gradient composes unseen digits"]:::todo --> V5["V5 Remove-one-checker rehearsal on digits"]:::todo --> V4["V4 Abstract checker on SDXL's unseen objects"]:::todo
+    end
+    subgraph L9["Session 9: turn concepts into scores"]
+      direction TB
+      W1["W1 Noise-aware text papers read"]:::done --> W2["W2 Sentence scores read the five properties<br/>YOU ARE HERE"]:::doing --> W3["W3 Sentence score steers CO3"]:::todo --> W4["W4 Our own noise-aware model on digits"]:::todo --> W5["W5 Verdict: Paper 2, Paper 3 or drop"]:::todo --> W1b["W1b Latent CLIP read"]:::done
     end
   end
   subgraph JOIN["THE LOOP, AFTER THE LANES JOIN"]
     direction LR
-    B6["B6 One page: what we know"]:::todo --> C1["C1 Two scouts: one verified idea table"]:::todo --> C3["C3 Benchmark spec: data, metric, samples"]:::todo --> C4["C4 Draft statements survive pressure test"]:::todo --> D1["D1 Paper repo: MNIST table, one command"]:::todo
+    B6["B6 One page: what we know"]:::done --> C1["C1 Two scouts: one verified idea table"]:::done --> C3["C3 Benchmark spec: data, metric, samples"]:::done --> C4["C4 Draft statements survive pressure test"]:::done --> D1["D1 Paper repo: MNIST table, one command"]:::done
   end
   subgraph CAL["ON YOUR CALENDAR"]
     direction LR
-    C2["C2 Your readings: statements confirmed"]:::todo ~~~ D2["D2 Rivals reproduce one published number"]:::todo ~~~ D3["D3 Checker architecture chosen"]:::todo ~~~ D4["D4 Go or no-go per paper"]:::todo
+    C2["C2 Your readings: statements confirmed"]:::todo ~~~ D4["D4 Go or no-go per paper"]:::todo
   end
   subgraph SE["E. SCALE ON BIGBATCH AND BIGGPU"]
     direction LR
@@ -51,7 +71,8 @@ flowchart TB
   GOAL["FINISH: two papers, each beating its best rival"]:::goal
   X0["Detour: idea walk, 7 claims, paused"]:::detour -.-> P2
   X1["Detour: zoom-ladder, about 430k tokens"]:::detour -.-> P2
-  L1 ~~~ L2 ~~~ L3 ~~~ L4
+  X2["Detour: reading route and pictures, about 1.8M tokens"]:::detour -.-> P2
+  L1 ~~~ L2 ~~~ L3 ~~~ L4 ~~~ L5 ~~~ L6 ~~~ L7 ~~~ L8 ~~~ L9
   S0 --> SA --> LOOP --> JOIN --> CAL --> SE --> SF --> GOAL
   style S0 fill:#fafafa,stroke:#adb5bd
   style SA fill:#fafafa,stroke:#adb5bd
@@ -60,6 +81,11 @@ flowchart TB
   style L2 fill:#ffffff,stroke:#a8c7fa
   style L3 fill:#ffffff,stroke:#a8c7fa
   style L4 fill:#ffffff,stroke:#a8c7fa
+  style L5 fill:#ffffff,stroke:#a8c7fa
+  style L6 fill:#ffffff,stroke:#a8c7fa
+  style L7 fill:#ffffff,stroke:#a8c7fa
+  style L8 fill:#ffffff,stroke:#a8c7fa
+  style L9 fill:#ffffff,stroke:#a8c7fa
   style JOIN fill:#eaf1ff,stroke:#a8c7fa,stroke-width:3px
   style CAL fill:#fff9db,stroke:#f08c00
   style SE fill:#fafafa,stroke:#adb5bd

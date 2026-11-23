@@ -1,0 +1,66 @@
+{
+  "pair": "a_puma__x__a_condor",
+  "seed": 6001,
+  "device": "NVIDIA GeForce RTX 3090",
+  "dtype": "torch.float16",
+  "start_step": 10,
+  "concepts": {
+    "a_puma__x__a_condor": 2,
+    "a_zebra__x__a_flamingo": 2,
+    "a_seal__x__a_gull": 2,
+    "a_hippopotamus__x__a_swallow": 2,
+    "a_giraffe__x__a_tortoise": 2,
+    "a_bobcat__x__a_quail": 2,
+    "a_duck__x__a_goose": 2,
+    "a_crow__x__a_raven": 2,
+    "an_eagle__x__a_fox": 2,
+    "a_lighthouse__x__a_sailboat": 2,
+    "a_boar__x__a_pheasant": 2,
+    "a_cheetah__x__a_cougar": 2
+  },
+  "pairs_without_two_concepts": [],
+  "concept_order_example": {
+    "a_cheetah__x__a_cougar": [
+      "cheetah",
+      "cougar"
+    ]
+  },
+  "plain_repeat_max_abs": 0.0,
+  "zero_binding_max_abs": 0.0,
+  "zero_bar": 1e-05,
+  "own_regions_max_abs": 3.015625,
+  "own_regions_record": {
+    "box_a_read": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "box_b_read": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "box_a_used": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "box_b_used": [
+      0,
+      0,
+      128,
+      128
+    ],
+    "read_boxes_iou": 1.0,
+    "mask_a_share": 0.5,
+    "max_sum_deviation": 0.0
+  },
+  "two_entry_calls_per_step": [
+    1
+  ],
+  "mean_abs_pixel_diff_to_m1_co3_of_255": 2.3833,
+  "zero_passes": true
+}
