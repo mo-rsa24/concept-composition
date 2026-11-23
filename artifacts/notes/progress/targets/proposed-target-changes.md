@@ -33,7 +33,8 @@ Both reruns stay out of the scoreboard's `reproduced` field because their prompt
 
 **GenEval two objects.** This is Paper 2's one text-to-image headline that counts two separate objects, which is what it claims to restore.
 FKC released no list of its 1,000 prompts, so the target uses GenEval's released 553. There FKC prints 0.78 and the same authors' plain SDXL
-prints 0.80, so the scoreboard target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds.
+prints 0.80, so the scoreboard target is 0.79 and a win must also beat plain SDXL's 0.80 on the same prompts and seeds. FKC is not
+rerun, so this row is judged against our plain SDXL rerun and says FKC's 0.78 is printed only.
 
 ## The scope behind them
 

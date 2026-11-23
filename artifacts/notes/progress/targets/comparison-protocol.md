@@ -19,15 +19,17 @@ a 0 to 1 score moves by 0.01. The drawing script computes it, so nobody types it
 settings the rival's page states. Where the page leaves a setting out, the run records the value it used, and the row says
 the protocol is only partly matched.
 
-**The rival is rerun where it can be.** Step D2 reproduces one published number per rival. When a reproduction lands, the
-scoreboard uses the harder of the printed and reproduced numbers.
+**Only the rival with the best printed score on each benchmark is rerun.** That is CoMat on Color, ToMe on Shape and Texture, and
+Rectify Then Diffuse on Complex. Their printed numbers set the bars, and the other rivals' printed numbers are context. CO3's Complex
+run is kept as a comparison. When a reproduction matches the published protocol and sample count, the scoreboard uses the harder of
+the printed and reproduced numbers.
 
 **A win inside the rival's printed uncertainty reads "within noise".** It does not count as beating the rival.
 
 **T2I-CompBench needs a rerun before any win is claimed.** Plain SDXL scores 0.6369 on Color in ToMe's Table 1 and 0.5879 in
 CoMat's Table 1, and CoMat does not state its scorer, prompt split or seeds. A gap of one step between our run and a printed
-number could come from the setup alone. Plain SDXL, ToMe and CoMat are therefore run on our setup, and our win is read
-against those runs.
+number could come from the setup alone. Plain SDXL, CoMat on Color, and ToMe on Shape and Texture are therefore run on our setup,
+and our win is read against those runs.
 
 **Four benchmarks are scored on the prompts the subject guard allows.** [The guard](../../../../scripts/shared/disallowed_subjects.py)
 keeps 12 of 1,000 prompts out of T2I-CompBench Complex, 7 of 40 out of RareBench Concat, 12 of 300 out of Color and 7 of 300
@@ -38,7 +40,8 @@ printed target. A row with no rerun of that rival on the same prompts claims no 
 
 **GenEval two objects is scored on its released 553 prompts.** FKC released no list of its 1,000 prompts. On the 553, FKC prints
 0.78 and plain SDXL prints 0.80 (FKC Table A4, p39), so a win must beat the 0.79 target and also beat plain SDXL's 0.80 on the same
-prompts and seeds.
+prompts and seeds. FKC is not rerun, because one image costs 16 plain renders and its printed score is below plain SDXL's. The row
+says so and is judged against our plain SDXL rerun.
 
 **A win must clear the noise of the rerun.** Our score must beat the rival's rerun by more than 1.96 standard errors on matched
 pictures, meaning the same prompt and seed for both methods, with prompts resampled. Rectify Then Diffuse against plain SDXL gives
