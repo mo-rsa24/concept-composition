@@ -9,7 +9,7 @@ where eps_A and eps_B are the predictions for CO3's two concept prompts on the s
 cell. CO3's guided prediction u + g * (c - u) is then the regional formula in the M9 design.
 
 The masks are read once, at step 10, from the joint prompt's word attention on that step's latent. Each word's 32 by 32 map is
-smoothed, thresholded at half its peak, and reduced to the box around its largest connected part. The two boxes become soft
+smoothed, cut with Otsu's threshold, and reduced to the box around its largest connected part. The two boxes become soft
 masks through poe_repair/composers/_regional_masks.py. The attention read is a separate UNet call whose output is discarded,
 so the sampler's own predictions are computed by the original attention processors.
 """
@@ -23,7 +23,7 @@ from poe_repair.composers._regional_masks import masks_from_boxes
 from poe_repair.composers.poe_regional import random_boxes_like
 
 START_STEP = 10
-THRESHOLD = 0.5          # of the smoothed map's peak
+OTSU_BINS = 256
 SMOOTH_SIGMA = 0.5       # in cells of the 32 by 32 grid, the value Attend-and-Excite uses
 GRID = 32
 LATENT_CELLS_PER_GRID_CELL = 4
@@ -40,13 +40,27 @@ def word_tokens(tokenizer, prompt, word):
     raise ValueError(f"{word!r} is not in {prompt!r}")
 
 
+def otsu_threshold(values):
+    """Otsu's threshold: the cut that maximises the variance between the cells below it and the cells above it."""
+    counts, edges = np.histogram(values, bins=OTSU_BINS)
+    centres = (edges[:-1] + edges[1:]) / 2
+    weight = np.cumsum(counts).astype(np.float64)
+    mass = np.cumsum(counts * centres)
+    total_weight, total_mass = weight[-1], mass[-1]
+    above = total_weight - weight
+    usable = (weight > 0) & (above > 0)
+    if not usable.any():
+        raise ValueError("an attention map is constant")
+    between = np.zeros_like(centres)
+    between[usable] = weight[usable] * above[usable] * (mass[usable] / weight[usable]
+                                                        - (total_mass - mass[usable]) / above[usable]) ** 2
+    return float(edges[int(between.argmax()) + 1])
+
+
 def box_from_map(attention):
-    """(x0, y0, x1, y1) in latent cells, around the largest connected part above half the smoothed peak."""
+    """(x0, y0, x1, y1) in latent cells, around the largest connected part above the smoothed map's Otsu threshold."""
     smooth = gaussian_filter(attention, SMOOTH_SIGMA)
-    peak = smooth.max()
-    if not peak > 0:
-        raise ValueError("an attention map has no positive value")
-    parts, _ = label(smooth >= THRESHOLD * peak)
+    parts, _ = label(smooth > otsu_threshold(smooth))
     sizes = np.bincount(parts.ravel())
     sizes[0] = 0
     ys, xs = np.where(parts == sizes.argmax())
@@ -60,6 +74,10 @@ def box_iou(a, b):
     shared = width * height
     total = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - shared
     return shared / total if total else 0.0
+
+
+class MasksRead(Exception):
+    """Raised after the masks are read, when only the read is wanted and the render can stop."""
 
 
 class BindingUNet(torch.nn.Module):
@@ -88,7 +106,8 @@ class BindingUNet(torch.nn.Module):
 class Binder:
     """One render's regions. mode: own, swapped (each subject in the other's region), random (same sizes, random places), or zero."""
 
-    def __init__(self, model, prompt, word_a, word_b, mode, box_seed=None):
+    def __init__(self, model, prompt, word_a, word_b, mode, box_seed=None, stop_after_read=False):
+        self.stop_after_read, self.maps = stop_after_read, None
         if mode not in MODES:
             raise ValueError(f"unknown mode {mode}")
         seq, pool = model.text_embeds
@@ -126,7 +145,12 @@ class Binder:
         self.m_b = torch.from_numpy(second)[None, None].to(device=x.device, dtype=torch.float32)
         self.record = {"box_a_read": list(read_a), "box_b_read": list(read_b), "box_a_used": list(box_a), "box_b_used": list(box_b),
                        "read_boxes_iou": round(box_iou(read_a, read_b), 4), "mask_a_share": round(float(self.m_a.mean()), 4),
+                       "box_a_share_of_grid": round((read_a[2] - read_a[0]) * (read_a[3] - read_a[1]) / 128 ** 2, 4),
+                       "box_b_share_of_grid": round((read_b[2] - read_b[0]) * (read_b[3] - read_b[1]) / 128 ** 2, 4),
                        "max_sum_deviation": float(masks.max_sum_deviation)}
+        if self.stop_after_read:
+            self.maps = (map_a, map_b)
+            raise MasksRead
 
     def __call__(self, x, timestep, eps, unet):
         self.main_calls[self.step] = self.main_calls.get(self.step, 0) + 1

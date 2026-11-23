@@ -4,9 +4,11 @@
 The design is artifacts/notes/progress/method-search/04-bind-each-body/design.md.
 
   check   the zero-binding check, in one process on one card
+  read    the step-10 boxes on 12 pairs at 2 seeds, with no picture rendered, against the bar on the masks
   render  the three rows for each pair and seed, skipping finished pictures
 
 Usage: python m9_rung2.py check --splits <json> --m1-co3 <dir> --out <dir>
+       python m9_rung2.py read --splits <json> --out <dir>
        python m9_rung2.py render --splits <json> --out <dir> [--shard 0 --num-shards 2] [--pairs-limit 1 --seeds-limit 1]
 """
 import argparse
@@ -25,11 +27,15 @@ sys.path.insert(0, str(HERE.parent / "rung2"))
 from co3_common import load, load_parser, set_prompt, start_noise  # noqa: E402
 from composers.utils_custom import seed_everything  # noqa: E402
 from disallowed_subjects import is_allowed  # noqa: E402
-from co3_bind import START_STEP, Binder, attach  # noqa: E402
+from co3_bind import START_STEP, Binder, MasksRead, attach  # noqa: E402
 from train_readout_pair import joint_prompt  # noqa: E402
 
 ZERO_BINDING_MAX_ABS = 1e-5
 ROWS = ("own", "swapped", "random")
+READ_SEEDS = 2
+MAX_BOX_SHARE = 0.8         # a box over this share of the grid gives its subject no region of its own
+MAX_READ_IOU = 0.8          # two boxes overlapping this much are one region
+MAX_DEGENERATE_SHARE = 0.25 # the most reads that may fail either limit before rung 2 stops at its masks
 
 
 def tuning(splits, pairs_limit=None, seeds_limit=None):
@@ -109,6 +115,51 @@ def check(args):
     raise SystemExit(0 if result["zero_passes"] else 1)
 
 
+def is_degenerate(record):
+    return (record["box_a_share_of_grid"] >= MAX_BOX_SHARE or record["box_b_share_of_grid"] >= MAX_BOX_SHARE
+            or record["read_boxes_iou"] >= MAX_READ_IOU)
+
+
+def read(args):
+    """Read the step-10 boxes on 12 pairs at 2 seeds, with no picture rendered, and apply the bar on the masks."""
+    pairs, seeds = tuning(args.splits, seeds_limit=READ_SEEDS)
+    parser_nlp = load_parser()
+    prompts = {pair: joint_prompt(pair) for pair in pairs}
+    refused = [p for p in prompts.values() if not is_allowed(p)]
+    if refused:
+        raise SystemExit(f"the subject guard refuses: {refused}")
+    model, config = load(prompts[pairs[0]], parser_nlp, args.out / "_config")
+    model.unet.requires_grad_(False)
+    wrapper = attach(model)
+    args.out.mkdir(parents=True, exist_ok=True)
+    rows, maps = [], {}
+    for pair in pairs:
+        set_prompt(model, config, prompts[pair], parser_nlp)
+        word_a, word_b = subject_words(pair)
+        for seed in seeds:
+            binder = Binder(model, prompts[pair], word_a, word_b, "zero", stop_after_read=True)
+            wrapper.binder = binder
+            seed_everything(seed)
+            try:
+                final_latent(model, start_noise(model, seed))
+                raise SystemExit("the render finished without reading the masks")
+            except MasksRead:
+                pass
+            finally:
+                wrapper.binder = None
+            rows.append({"pair": pair, "seed": seed, **binder.record, "degenerate": is_degenerate(binder.record)})
+            maps[f"{pair}|{seed}|a"], maps[f"{pair}|{seed}|b"] = binder.maps
+            print(json.dumps(rows[-1]), flush=True)
+    degenerate = sum(r["degenerate"] for r in rows)
+    result = {"reads": len(rows), "degenerate": degenerate, "max_degenerate_share": MAX_DEGENERATE_SHARE,
+              "max_box_share": MAX_BOX_SHARE, "max_read_iou": MAX_READ_IOU,
+              "passes": degenerate / len(rows) <= MAX_DEGENERATE_SHARE, "rows": rows}
+    (args.out / "reads.json").write_text(json.dumps(result, indent=1) + "\n")
+    np.savez_compressed(args.out / "maps.npz", **maps)
+    print(json.dumps({k: result[k] for k in ("reads", "degenerate", "passes")}), flush=True)
+    raise SystemExit(0 if result["passes"] else 1)
+
+
 def render(args):
     pairs, seeds = tuning(args.splits, args.pairs_limit, args.seeds_limit)
     order = json.loads(args.splits.read_text())["tuning_pairs"]
@@ -152,7 +203,7 @@ def render(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["check", "render"])
+    ap.add_argument("stage", choices=["check", "read", "render"])
     ap.add_argument("--splits", type=Path, required=True)
     ap.add_argument("--m1-co3", type=Path)
     ap.add_argument("--out", type=Path, required=True)
@@ -163,7 +214,7 @@ def main():
     args = ap.parse_args()
     if not torch.cuda.is_available():
         raise SystemExit("torch sees no CUDA card")
-    (check if args.stage == "check" else render)(args)
+    {"check": check, "read": read, "render": render}[args.stage](args)
 
 
 if __name__ == "__main__":

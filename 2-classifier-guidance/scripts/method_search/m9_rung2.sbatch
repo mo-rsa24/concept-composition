@@ -6,7 +6,7 @@
 #SBATCH --exclude=mscluster44,mscluster45,mscluster50,mscluster51,mscluster57,mscluster61,mscluster65,mscluster68,mscluster71,mscluster72,mscluster73,mscluster74,mscluster75,mscluster76,mscluster82,mscluster84
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M9, rung 2. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m9_rung2.sbatch <check|smoke|render> [shard num_shards]
+#   sbatch --export=ALL,SNAP=<snapshot> m9_rung2.sbatch <check|read|smoke|render> [shard num_shards]
 set -uo pipefail
 STAGE=${1:?stage}; SHARD=${2:-0}; NUM=${3:-1}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -40,6 +40,7 @@ export PYTHONPATH="$HUB:$CO3:$REPO/scripts/shared:$REPO"
 mkdir -p "$OUT"
 case "$STAGE" in
   check)  "$PY" "$S/m9_rung2.py" check --splits "$SPLITS" --m1-co3 "$M1" --out "$OUT/controls"; rc=$? ;;
+  read)   "$PY" "$S/m9_rung2.py" read --splits "$SPLITS" --out "$OUT/mask-read"; rc=$? ;;
   smoke)  "$PY" "$S/m9_rung2.py" render --splits "$SPLITS" --out "$OUT/smoke" --pairs-limit 1 --seeds-limit 1; rc=$? ;;
   render) "$PY" "$S/m9_rung2.py" render --splits "$SPLITS" --out "$OUT/full" --shard "$SHARD" --num-shards "$NUM"; rc=$? ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
