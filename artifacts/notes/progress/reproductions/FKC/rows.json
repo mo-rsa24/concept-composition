@@ -5,6 +5,9 @@
   },
   {
     "target_id": "FKC-TA4-038",
-    "note": "SDXL + FKC at guidance 7.5 on GenEval's released 553 prompts, two objects; the run tests our port of the authors' EDM2 sampler as much as the method"
+    "note": "SDXL + FKC at guidance 7.5 on GenEval's released 553 prompts, two objects; the run tests our port of the authors' EDM2 sampler as much as the method; not rerun, by the owner's choice in board question 41: 22.6 GPU-hours measured, and the printed 0.78 sits below plain SDXL's printed 0.80",
+    "verdict": "not comparable",
+    "commit": "866b864c-f2bdb6d",
+    "run_id": "question 41"
   }
 ]

@@ -1,7 +1,8 @@
 # Review: reproducing CoMat
 
-This file holds what the runs in [the CoMat design](design.md) produced. CoMat has no verdict yet. Its control, smoke test and 1% pictures pass, and the
-full run is queued.
+This file holds what the runs in [the CoMat design](design.md) produced. CoMat has no verdict yet. Its control, smoke test and 1% pictures pass. By the owner's answer to board
+question 43, CoMat runs on Color only, because its printed Color score is the best on that benchmark. Jobs 93312, 93313, 93315 and 93316 render the 288 allowed
+Color prompts at 10 seeds. CoMat's Shape and Texture numbers stay as printed context, and 35 unscored Shape pictures stay on the cluster.
 
 ## Runs
 
@@ -28,4 +29,4 @@ bar of 1e-5, in one process on a Quadro RTX 8000 at float16.
 tile, shows clean images with most colours and materials on the right objects. Some prompts still drift: "a pentagonal stop sign" renders as a small
 diamond sign beside a traffic light. No score was computed at this rung.
 
-**Does CoMat reproduce its published scores?** Unknown until the full runs finish.
+**Does CoMat reproduce its published Color score?** Unknown until the Color renders finish and are scored.

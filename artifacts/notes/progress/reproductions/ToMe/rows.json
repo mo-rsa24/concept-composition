@@ -1,0 +1,9 @@
+[
+  {
+    "target_id": "RTD-T2-051",
+    "verdict": "not comparable",
+    "commit": "866b864c-f2bdb6d",
+    "run_id": "question 43",
+    "note": "not rerun, by the owner's choice in board question 43: another rival has the best printed score on this benchmark, so this printed number stands as context; 179 of 988 unscored pictures stay on the cluster"
+  }
+]

@@ -1,7 +1,8 @@
 # Review: reproducing ToMe
 
 This file holds what the runs in [the ToMe design](design.md) produced. ToMe has no verdict yet. Its parser repair, smoke test,
-zero-update control and 1% pictures pass, and the full renders are in progress on seed 0.
+zero-update control and 1% pictures pass. By the owner's answer to board question 43, ToMe is scored on Shape and Texture only, where its printed scores are the
+best on each benchmark. Those renders are complete on seed 0. Its Complex and Color runs stopped, with 179 of 988 Complex and 72 of 288 Color pictures unscored on the cluster.
 
 ## Runs
 
@@ -62,4 +63,4 @@ on seed 0 (jobs 93214, 93228 and 93229, commits `5f16f1f6-1abb2a8`). The pass ba
 Two papers print different plain SDXL scores on this benchmark, and both of ours fall inside the pass band around CoMat's numbers. By the owner's answer
 to board question 39, ToMe's Shape row still gets its verdict, with this missed check printed beside it.
 
-**Does ToMe reproduce its published scores?** Unknown until the full runs finish.
+**Does ToMe reproduce its published Shape and Texture scores?** Unknown until BLIP-VQA scoring finishes.

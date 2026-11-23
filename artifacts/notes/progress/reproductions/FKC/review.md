@@ -1,7 +1,7 @@
 # Review: reproducing FKC on GenEval
 
-This file holds what the runs in [the FKC design](design.md) produced. FKC has no verdict and has not rendered a scored image. By the owner's answer to
-board question 40, plain SDXL runs first and one FKC batch is timed. Board question 41 brings the measured cost back to the owner.
+This file holds what the runs in [the FKC design](design.md) produced. FKC is not rerun, by the owner's answer to board question 41, so its printed 0.78 stays as context. Plain SDXL on the same prompts,
+the number a Paper 2 win must beat, is rendered and being scored.
 
 ## Runs
 
@@ -27,5 +27,5 @@ long. The authors' sampler calls the model twice per step, which doubles the 8 p
 **Do the particles collapse?** Yes, on this one prompt. All 8 particles at the last step descend from one ancestor, as the paper's note on weight
 degeneracy (p7) describes.
 
-**Does FKC reproduce its published score?** Not run. Its printed 0.78 sits below plain SDXL's printed 0.80 on the same prompts, and a Paper 2 win must also
+**Does FKC reproduce its published score?** Not tested, by the owner's choice. Its printed 0.78 sits below plain SDXL's printed 0.80 on the same prompts, and a Paper 2 win must also
 beat plain SDXL, so the rerun cannot raise the bar on this row.
