@@ -59,7 +59,7 @@ because this system refuses to load them otherwise. mmdet runs from `PYTHONPATH`
 
 **One batch gives one image.** The paper notes that the final images of one FKC batch are "nearly identical visually due to weight degeneracy" (p7), and it scores a single image resampled from each batch. Each scored image here is therefore its own batch of particles.
 
-**Cost.** The 99 two-object prompts at 4 images and 8 particles are about 12 GPU-hours for FKC, plus about 1.5 for plain SDXL on the same prompts, both estimated from 13.5 seconds per plain render. That estimate assumes 8 particles cost 8 plain renders, and the timing job replaces it with a measurement before the owner decides.
+**Cost.** The 99 two-object prompts at 4 images and 8 particles were first estimated at about 12 GPU-hours for FKC, plus about 1.5 for plain SDXL on the same prompts. The timing job measured 205.6 seconds per 8-particle batch, 16.1 times a plain render, because the authors' sampler calls the model twice per step. The full FKC run is therefore 22.6 GPU-hours, and board question 41 asks the owner whether to run it.
 
 **The test.** GenEval's score is per image, so the standard error comes from resampling prompts with replacement 10,000 times. The row counts as
 `reproduced` when |ours − published| ≤ 1.96 × √(SE_ours² + SE_published²). Because the sampler is our port, its note says the result tests the port as
