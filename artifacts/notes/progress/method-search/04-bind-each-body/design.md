@@ -59,9 +59,15 @@ two separate, clear animals, which is the oracle-layout plan's own call. Every o
 | Layout content irrelevant | right boxes reach at least 4, and random boxes are within 1 | rung 2 runs, and the review says the regions' place did not matter |
 | Regions without names | right boxes reach at least 4, and swapped or same prompt is within 1 | rung 2 runs, and the review says which prompt a region carries did not matter |
 | Inconclusive | right boxes reach 2 or 3 | the idea stops at this rung |
-| Null | right boxes reach 0 or 1 | the idea stops at this rung |
+| Null | right boxes reach 0 or 1 | held until the two sampler checks below have run, because a null from this composer alone cannot separate "regions are not enough" from "the composer is wrong" |
 
-**Cost:** about 1 GPU-hour for 48 renders and the controls. **Buys:** whether knowing where each body is can fix identity on SDXL at all.
+**The two sampler checks behind a null.** The first turns on bootstrapping, the one part of MultiDiffusion the plain fusion leaves out. For
+the first 15 of 50 steps, the value the plan's overlap figure used, each region is denoised over a constant colour and the latents are
+fused. The right, random, swapped and same-prompt rows rerun on the same 8 seeds, and their 32 pictures are counted blind with the 8 joint
+renders mixed in, under the same bar. The second check reproduces MultiDiffusion's own code (arXiv 2302.08113) on the same eight layouts. It
+runs only if bootstrapping also reaches 0 or 1, and its cost goes to the owner before it starts.
+
+**Cost:** about 1 GPU-hour for 48 renders, the controls and the bootstrapping rerun. **Buys:** whether knowing where each body is can fix identity on SDXL at all.
 
 ## Rung 2: can CO3 find its own regions?
 

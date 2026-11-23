@@ -5,8 +5,9 @@
 #SBATCH --time=03:00:00
 #SBATCH --output=/datasets/mmolefe/poe_repair_min/loop-6/logs/%x-%j.log
 # Step M9, rung 1. Submit with the code snapshot in SNAP:
-#   sbatch --export=ALL,SNAP=<snapshot> m9_rung1.sbatch <smoke|full>
+#   sbatch --export=ALL,SNAP=<snapshot> m9_rung1.sbatch <smoke|full|boot-smoke|boot-full>
 # smoke: both stages on seed 9. full: the reference process, then the regional process, on all 8 seeds.
+# boot-smoke and boot-full: the four region rows with bootstrapping on, on seed 9 or on all 8 seeds.
 set -uo pipefail
 STAGE=${1:?stage}
 ROOT=/datasets/mmolefe/poe_repair_min/loop-6
@@ -32,10 +33,13 @@ export PYTHONPATH="$SNAP/repo:$SNAP/repo/scripts/shared"
   || { echo "ABORT: CUDA probe failed"; exit 6; }
 echo "[$(date -u +%H:%M:%S)] job=${SLURM_JOB_ID:-none} node=$(hostname -s) gpu=$(nvidia-smi --query-gpu=name --format=csv,noheader -i 0) python=$PY snap=$SNAP stage=$STAGE"
 case "$STAGE" in
-  smoke) OUT=$ROOT/m9/smoke; SEEDS="--seeds 9" ;;
-  full)  OUT=$ROOT/m9/full; SEEDS="" ;;
+  smoke)      OUT=$ROOT/m9/smoke; SEEDS="--seeds 9"; PARTS="refs regional" ;;
+  full)       OUT=$ROOT/m9/full;  SEEDS="";          PARTS="refs regional" ;;
+  boot-smoke) OUT=$ROOT/m9/smoke; SEEDS="--seeds 9"; PARTS="bootstrap" ;;
+  boot-full)  OUT=$ROOT/m9/full;  SEEDS="";          PARTS="bootstrap" ;;
   *) echo "ABORT: unknown stage $STAGE"; exit 2 ;;
 esac
-"$PY" "$S" refs --boxes "$BOXES" --out "$OUT" $SEEDS || { echo "[$(date -u +%H:%M:%S)] DONE exit=11"; exit 11; }
-"$PY" "$S" regional --boxes "$BOXES" --out "$OUT" $SEEDS || { echo "[$(date -u +%H:%M:%S)] DONE exit=12"; exit 12; }
+for PART in $PARTS; do
+  "$PY" "$S" "$PART" --boxes "$BOXES" --out "$OUT" $SEEDS || { echo "[$(date -u +%H:%M:%S)] DONE part=$PART exit=11"; exit 11; }
+done
 echo "[$(date -u +%H:%M:%S)] DONE stage=$STAGE exit=0"

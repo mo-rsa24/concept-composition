@@ -33,10 +33,21 @@ BAR = 4
 RUNGS = ("one", "hybrid", "two_bodies", "two_clear")
 
 
+def rows_for(bootstrap):
+    """With bootstrapping, the four region rows plus the joint renders as a check that the reviewers still call clear pairs."""
+    if not bootstrap:
+        return ROWS
+    out = {"joint": ROWS["joint"]}
+    for row, condition in (("right", "oracle"), ("random", "random"), ("swapped", "swapped"), ("same", "same")):
+        method = f"poe_regional_{condition}_even_b{bootstrap:02d}"
+        out[row] = f"{PAIR}/seed_{{seed}}/{method}/{method}.png"
+    return out
+
+
 def prepare(args):
     salt = secrets.token_hex(16)
     items = []
-    for row, template in ROWS.items():
+    for row, template in rows_for(args.bootstrap).items():
         for seed in SEEDS:
             path = args.renders / template.format(seed=seed)
             if not path.exists():
@@ -52,7 +63,7 @@ def prepare(args):
             shutil.copyfile(item["path"], args.blind / f"{item['id']}.png")
             writer.writerow([item["id"], "a cat and a dog"])
     (args.key / "key.json").write_text(json.dumps({i["id"]: {"row": i["row"], "seed": i["seed"]} for i in items}))
-    print(json.dumps({"pictures": len(items), "rows": len(ROWS), "seeds": len(SEEDS)}))
+    print(json.dumps({"pictures": len(items), "rows": len(rows_for(args.bootstrap)), "seeds": len(SEEDS)}))
 
 
 def read_calls(path):
@@ -104,11 +115,12 @@ def score(args):
     if missing or set(first) != set(key):
         raise SystemExit(f"{len(missing)} disagreements have no third call, or the calls do not match the key")
     final = {t: (third[t] if t in third else {"two_clear": first[t]["two_clear"], "two_animals": first[t]["two_animals"]}) for t in key}
+    present = [row for row in ROWS if any(k["row"] == row for k in key.values())]
     rows = {row: {"clear_pairs": sum(final[t]["two_clear"] for t, k in key.items() if k["row"] == row),
                   "two_separate_animals": sum(final[t]["two_animals"] for t, k in key.items() if k["row"] == row),
                   "clear_pair_seeds": sorted(k["seed"] for t, k in key.items() if k["row"] == row and final[t]["two_clear"])}
-            for row in ROWS}
-    count = {row: rows[row]["clear_pairs"] for row in ROWS}
+            for row in present}
+    count = {row: rows[row]["clear_pairs"] for row in present}
     count["same"] = rows["same"]["two_separate_animals"]
     result = {"of": len(SEEDS), "rows": rows, "counts_used_by_the_bar": count, "bar_on_right_boxes": BAR,
               "verdict": verdict(count["right"], count["random"], count["swapped"], count["same"]),
@@ -126,6 +138,7 @@ def main():
     p.add_argument("--renders", type=Path, required=True)
     p.add_argument("--blind", type=Path, required=True)
     p.add_argument("--key", type=Path, required=True)
+    p.add_argument("--bootstrap", type=int, default=0, help="steps of bootstrapping in the region rows, 0 for none")
     d = sub.add_parser("differ")
     d.add_argument("--first", type=Path, required=True)
     d.add_argument("--second", type=Path, required=True)

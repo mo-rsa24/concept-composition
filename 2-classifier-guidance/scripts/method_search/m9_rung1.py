@@ -3,10 +3,11 @@
 
   refs      the joint prompt and the plain product, in a process that never imports the regional composer
   regional  the composer check, then right boxes, random boxes, swapped prompts and the same prompt in both
+  bootstrap the same four rows with bootstrapping on for the first 15 of 50 steps
 
 The design is artifacts/notes/progress/method-search/04-bind-each-body/design.md.
 
-Usage: python m9_rung1.py refs|regional --boxes <boxes.json> --out <dir> [--seeds 9 12]
+Usage: python m9_rung1.py refs|regional|bootstrap --boxes <boxes.json> --out <dir> [--seeds 9 12]
 """
 import argparse
 import json
@@ -33,6 +34,7 @@ READING = "even"
 CONDITIONS = ("oracle", "random", "swapped", "same")
 MAX_PIXEL_DIFF = 3.0   # of 255, the project's reproduction limit
 RANDOM_BOX_SEED = 20261123
+BOOTSTRAP_STEPS = 15   # of 50, the value the oracle-layout plan's overlap figure used
 SOURCE_JOINT = Path("/datasets/mmolefe/poe_repair_min/outputs/is_the_layout_the_missing_piece/joint")
 
 
@@ -125,9 +127,22 @@ def regional(args, boxes, ctx):
             print(f"seed {seed} {condition} {path}", flush=True)
 
 
+def bootstrapped(args, boxes, ctx):
+    """The first sampler check behind a null: the same four rows with MultiDiffusion's bootstrapping on."""
+    from poe_repair.composers import poe_regional
+    for seed in sorted(boxes):
+        cell = cell_for(PROMPT_A, PROMPT_B, seed)
+        for condition in CONDITIONS:
+            path = poe_regional.run(cell, ctx, cat_box=boxes[seed]["cat"], dog_box=boxes[seed]["dog"], condition=condition,
+                                    reading=READING, bootstrap_steps=BOOTSTRAP_STEPS,
+                                    random_seed=RANDOM_BOX_SEED + seed if condition == "random" else None,
+                                    exp_name=EXPERIMENT)
+            print(f"seed {seed} {condition} bootstrap={BOOTSTRAP_STEPS} {path}", flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("stage", choices=["refs", "regional"])
+    ap.add_argument("stage", choices=["refs", "regional", "bootstrap"])
     ap.add_argument("--boxes", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--seeds", type=int, nargs="*")
@@ -143,7 +158,7 @@ def main():
     print(f"{socket.gethostname()} {torch.cuda.get_device_name(0)} stage={args.stage} seeds={sorted(boxes)}", flush=True)
     args.out.mkdir(parents=True, exist_ok=True)
     ctx = make_ctx(output_root=args.out)
-    (refs if args.stage == "refs" else regional)(args, boxes, ctx)
+    {"refs": refs, "regional": regional, "bootstrap": bootstrapped}[args.stage](args, boxes, ctx)
     print("finished", args.stage, flush=True)
 
 

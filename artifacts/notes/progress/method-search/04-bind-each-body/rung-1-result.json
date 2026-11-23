@@ -1,0 +1,56 @@
+{
+ "of": 8,
+ "rows": {
+  "joint": {
+   "clear_pairs": 7,
+   "two_separate_animals": 8,
+   "clear_pair_seeds": [
+    9,
+    12,
+    16,
+    22,
+    25,
+    27,
+    30
+   ]
+  },
+  "plain": {
+   "clear_pairs": 0,
+   "two_separate_animals": 0,
+   "clear_pair_seeds": []
+  },
+  "right": {
+   "clear_pairs": 0,
+   "two_separate_animals": 0,
+   "clear_pair_seeds": []
+  },
+  "random": {
+   "clear_pairs": 0,
+   "two_separate_animals": 0,
+   "clear_pair_seeds": []
+  },
+  "swapped": {
+   "clear_pairs": 0,
+   "two_separate_animals": 0,
+   "clear_pair_seeds": []
+  },
+  "same": {
+   "clear_pairs": 0,
+   "two_separate_animals": 0,
+   "clear_pair_seeds": []
+  }
+ },
+ "counts_used_by_the_bar": {
+  "joint": 7,
+  "plain": 0,
+  "right": 0,
+  "random": 0,
+  "swapped": 0,
+  "same": 0
+ },
+ "bar_on_right_boxes": 4,
+ "verdict": "null",
+ "rung_2_runs": false,
+ "pictures_the_reviewers_differed_on": 1,
+ "reviewers_agree_on_two_clear": 47
+}
